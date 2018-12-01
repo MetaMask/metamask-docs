@@ -26,6 +26,6 @@ jobs:
               rm -rf dist
 
               git add -A
-              git commit -m "Automated deployment: ${CIRCLE_SHA1}" --allow-empty
+              git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
               git push origin $TARGET_BRANCH
             fi
