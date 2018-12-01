@@ -12,6 +12,7 @@ jobs:
     steps:
       - checkout
       - deploy:
+          name: Deploy site
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
               git config --global user.email $GH_EMAIL
