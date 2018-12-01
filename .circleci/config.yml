@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    branches:
+      ignore:
+        - gh-pages
+    docker:
+      - image: circleci/node:11
+    environment:
+      - SOURCE_BRANCH: master
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - checkout
+      - deploy:
+          command: |
+            if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
+              git config --global user.email $GH_EMAIL
+              git config --global user.name $GH_NAME
+              git clone $CIRCLE_REPOSITORY_URL project
+
+              cd project
+              npx uncrate -p=v5.0.3
+              git checkout $TARGET_BRANCH
+              cp -r dist/* .
+              rm -rf dist
+
+              git add -A
+              git commit -m "Automated deployment: ${CIRCLE_SHA1}" --allow-empty
+              git push origin $TARGET_BRANCH
+            fi
