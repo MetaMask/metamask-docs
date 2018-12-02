@@ -86,3 +86,12 @@ ethereum.sendAsync({
 The provider supports listening for some events:
 - `accountsChanged`, returns updated account array.
 - `networkChanged`, returns network ID string.
+
+Example
+```javascript
+ethereum.on('accountsChanged', function (accounts) {
+  // Time to reload your interface with accounts[0]!
+})
+```
+
+Note currently `networkChanged` is not completely useful, because MetaMask currently reloads pages that have made requests to the provider upon network change, but [we plan to change this behavior](https://medium.com/metamask/breaking-change-no-longer-reloading-pages-on-network-change-4a3e1fd2f5e7), so it's safest to prepare your application to gracefully handle network changes.
