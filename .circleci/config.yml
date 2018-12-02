@@ -20,6 +20,7 @@ jobs:
               git clone $CIRCLE_REPOSITORY_URL project
 
               cd project
+              rm -rf .circleci
               npx uncrate -p=v5.0.3
               git checkout $TARGET_BRANCH
               cp -r dist/* .
