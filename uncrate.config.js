@@ -4,5 +4,6 @@ module.exports = {
     logo: 'https://metamask.io/img/metamask.png',
     name: 'MetaMask',
     repo: 'metamask/metamask-extension',
-    root: '/metamask-docs/'
+    root: '/metamask-docs/',
+    theme: true
 };
