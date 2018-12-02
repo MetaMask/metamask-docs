@@ -1,11 +1,88 @@
 # Provider API
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer placerat porttitor convallis. Sed auctor lacinia magna, vitae convallis lacus. Sed vel dignissim nunc, sed vehicula velit. Fusce nec ipsum pretium, blandit nunc non, ullamcorper dolor. Cras cursus bibendum nisi, quis tristique metus mattis quis. Aliquam ut mollis magna. Maecenas ac felis sed sapien ultrices commodo ut sed magna. Cras ut accumsan lectus, et elementum libero. Duis semper interdum lacus, ut dignissim ex varius id. Cras blandit sodales sapien et pretium. Suspendisse et efficitur mi. Nulla pellentesque posuere congue. Curabitur vel mi ornare, sodales arcu et, viverra sem. Sed purus lacus, laoreet ac congue eu, vulputate quis augue. Vestibulum sagittis felis nec risus auctor facilisis.
+MetaMask injects a global API into websites visited by its users at `window.ethereum` (Also available at `window.web3.currentProvider` for legacy reasons). This API allows websites to request user login, load data from blockchains the user has a connection to, and suggest the user sign messages and transactions. You can use this API to detect the user of a web3 browser.
 
-Vivamus tincidunt tincidunt interdum. Maecenas pulvinar velit lectus, in dapibus nunc convallis vestibulum. Phasellus ac nisi iaculis massa gravida laoreet quis eget libero. Nunc felis eros, dictum quis dapibus ac, eleifend rhoncus lacus. Phasellus pulvinar blandit consectetur. Sed nec sem felis. Pellentesque eget diam quis quam placerat pulvinar id at erat. Quisque mollis elit sed bibendum pharetra. Nullam volutpat est id eleifend sagittis. Fusce blandit eros sapien, vel cursus nibh dapibus non. Etiam laoreet ante id egestas consequat. In et lacus nec ligula sollicitudin aliquet. Morbi a aliquam lectus, sit amet volutpat lectus. Proin ac erat vulputate, bibendum mauris et, laoreet libero. Fusce pulvinar, velit id porttitor convallis, nisl ligula gravida arcu, at luctus risus eros laoreet ex.
+```javascript
+if (typeof window.ethereum !== 'undefined'
+|| (typeof window.web3 !== 'undefined')) {
 
-Mauris in mauris sodales, consequat mi eu, convallis eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut elementum justo ligula, ut malesuada nunc varius auctor. Nulla at arcu sem. Phasellus pretium risus vel ligula vehicula auctor. Nunc tortor ipsum, pretium pretium sagittis id, ultricies at velit. Nullam ac justo urna. Mauris ornare accumsan accumsan. Aenean eu hendrerit odio. Fusce vestibulum viverra justo vitae mollis. Etiam imperdiet accumsan mauris at feugiat. Praesent eget varius justo. Ut fringilla finibus augue, id fermentum sem tincidunt vitae. Maecenas commodo eros et elit ornare pulvinar.
+  // Web3 browser user detected. You can now use the provider.
+  const provider = window['ethereum'] || window.web3.currentProvider
+}
+```
 
-Duis consectetur magna eu nulla ultricies, vitae viverra sapien tincidunt. Ut massa elit, dignissim non elementum at, tempor vel felis. Sed nec tempus erat, vitae pharetra ligula. Fusce vel diam ipsum. Aliquam erat volutpat. Phasellus eget cursus nisi, at aliquet ipsum. Suspendisse a sapien velit. In viverra egestas ante pharetra aliquam. Morbi ullamcorper, orci in dapibus ultrices, orci quam blandit risus, eu consequat sem ipsum et ex. Vivamus in finibus dui, at semper ligula. Vestibulum a augue sed felis lobortis imperdiet at commodo ex. Aliquam et mi ac tortor sagittis faucibus et at massa. Cras at faucibus ante. Vivamus lacinia gravida felis sit amet pharetra. Donec sit amet lacinia nisi. Suspendisse potenti.
+The provider API itself is very simple, and wraps [Ethereum JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods) formatted messages, which is why developers usually use a convenience library for interacting with the provider, like [web3](https://www.npmjs.com/package/web3), [truffle](https://truffleframework.com/), [ethjs](https://www.npmjs.com/package/ethjs), [Embark](https://embark.status.im/), or others. From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
 
-Cras justo dui, consequat non metus varius, facilisis porta nunc. Sed et lacinia lacus, vel iaculis lacus. Nunc volutpat dolor vitae aliquam fermentum. Phasellus quis cursus dui, ut congue nibh. Pellentesque vitae efficitur urna. Nunc in mattis nulla. Curabitur non consequat turpis, sit amet egestas sapien. Praesent at semper sapien. Donec egestas odio in erat tempus dapibus. Curabitur eget egestas massa, et venenatis tellus. Ut ut metus dictum, blandit magna et, viverra metus. Curabitur congue lectus non tempus suscipit. Phasellus sollicitudin porta nisl vitae varius. Mauris vulputate nisi erat, at eleifend lacus semper sit amet. Morbi nec odio faucibus, consequat eros eget, gravida ipsum.
+However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
+
+Some simplifications are coming soon to this API, which you can [read more about here](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md).
+
+## Methods
+
+### ethereum.enable()
+
+Requests the user provides an ethereum address to be identified by. Returns a promise of an array of hex-prefixed ethereum address strings.
+
+Example usage (ES6), assuming [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function):
+
+```javascript
+try {
+  const accounts = await ethereum.enable()
+  // You now have an array of accounts!
+  // Currently only ever one:
+  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+
+} catch (error) {
+  // Handle error. Likely the user rejected the login:
+  console.log(reason === "User rejected provider access")
+}
+```
+
+Example usage (ES5):
+
+```javascript
+ethereum.enable()
+.then(function (accounts) {
+  // You now have an array of accounts!
+  // Currently only ever one:
+  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+})
+.catch(function (reason) {
+  // Handle error. Likely the user rejected the login:
+  console.log(reason === "User rejected provider access")
+})
+```
+
+### ethereum.sendAsync(options, callback)
+
+_To be superceded by the promise-returning send() method in [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)._
+
+Sends a message to the web3 browser. Message format maps to the format of [the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
+
+Here's an example of everyone's favorite method, sending a transaction, which is both how Ether is sent, and how smart contract methods are called:
+```javascript
+params: [{
+  "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+  "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+  "gas": "0x76c0", // 30400
+  "gasPrice": "0x9184e72a000", // 10000000000000
+  "value": "0x9184e72a", // 2441406250
+  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}]
+
+ethereum.sendAsync({
+  method: 'eth_sendTransaction',
+  params: params,
+  from: accounts[0], // Provide the user's account to use.
+}, function (err, result) {
+  // A typical node-style, error-first callback.
+  // The result varies by method, per the JSON RPC API.
+  // For example, this method will return a transaction hash on success.
+})
+```
+
+### ethereum.on(eventName, callback)
+
+The provider supports listening for some events:
+- `accountsChanged`, returns updated account array.
+- `networkChanged`, returns network ID string.
