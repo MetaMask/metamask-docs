@@ -1,11 +1,35 @@
 # Getting Started
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent volutpat lacus quis mauris elementum, a tincidunt lorem iaculis. Donec quis imperdiet nulla, vitae vulputate libero. Aenean odio nibh, malesuada non felis vitae, fermentum maximus mauris. Duis mollis ligula id urna dapibus, dignissim faucibus augue lobortis. Cras euismod magna odio, non aliquam neque blandit quis. Aenean ac dui tortor. Phasellus aliquet sed magna vel rutrum. Nunc non urna cursus, commodo velit vel, scelerisque ipsum.
+To develop for MetaMask, you're first going to want to get MetaMask installed on your development machine. [Download here](https://metamask.io/).
 
-Vivamus eget sodales neque, vel tincidunt erat. Nullam porta lobortis tortor molestie suscipit. Pellentesque sapien enim, malesuada ut dignissim ac, semper in magna. Curabitur felis tortor, tempus id eleifend eu, posuere vitae risus. Nam dignissim mi dolor, ut rhoncus ligula ornare et. Nulla interdum, est ut commodo gravida, sem quam feugiat odio, sed hendrerit neque mauris eget leo. Integer mauris lacus, euismod sed metus nec, eleifend tincidunt mi. Nunc semper tincidunt est non facilisis. Donec quis sapien quam. Fusce ullamcorper sed massa a maximus.
+Once you have it running, you should find that new browser tabs have a `window.ethereum` object available in the console. This is the way MetaMask provides for you to interact with it.
 
-In nunc nibh, pulvinar sed nisi vitae, vestibulum molestie erat. Duis lacinia augue ut sem dictum, vel ultrices diam commodo. Nam dictum urna urna, sit amet laoreet dui venenatis quis. Aenean congue ante in nunc tempor convallis. Sed massa neque, accumsan eu tempus scelerisque, lacinia vitae ipsum. Nulla ac bibendum ante, a rutrum ipsum. Etiam fringilla sapien non velit dictum, quis ultrices augue lobortis. Cras eget orci fermentum, fringilla est a, aliquet risus. Duis sed eros metus. Proin diam ante, auctor id sagittis id, scelerisque sed enim. Phasellus quis tellus ut nulla malesuada viverra. Vestibulum rutrum euismod purus ac efficitur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sagittis ut turpis sit amet volutpat. Fusce ac elementum dui, in facilisis ipsum. Mauris eu ipsum feugiat, hendrerit elit eget, vestibulum lacus.
+You can review the full API for that object [here](./API_Reference).
 
-Quisque facilisis, felis et rutrum pretium, velit lacus sodales erat, eu finibus nunc diam non mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum viverra velit sit amet neque faucibus accumsan. Phasellus placerat bibendum accumsan. In diam nunc, sagittis eu lectus sit amet, imperdiet tempus turpis. Aenean aliquet ultricies porttitor. Sed eu nibh non sapien hendrerit tristique sed vitae turpis. Sed vitae ante ullamcorper, feugiat felis consectetur, convallis dolor. Nullam eleifend, nulla non dapibus blandit, lorem sapien tincidunt nibh, nec elementum nibh arcu et nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris a orci et ipsum mollis aliquet. Duis non quam sed leo faucibus iaculis. Suspendisse dapibus erat ac erat bibendum bibendum. Morbi diam eros, rhoncus pellentesque eleifend vel, cursus ac urna.
+## Basic Considerations
 
-Vivamus suscipit enim et augue consequat, sodales egestas diam varius. Morbi blandit arcu elit, ut sagittis ipsum lobortis sed. Ut porttitor eu metus sed tincidunt. Donec imperdiet nisl mauris, et efficitur purus sagittis id. Aliquam vitae sodales magna. In volutpat lorem augue, at fermentum augue feugiat et. Cras quis erat ac sem sagittis ornare non vitae diam. Nulla tincidunt magna sed leo lacinia rutrum. Vestibulum congue nunc id nulla vulputate, vel eleifend ligula eleifend.
+### Web3 Browser Detection
+
+The first thing your app will want to do is verify whether the user is using MetaMask or not, which is simple using a check like `if (typeof window.ethereum !== 'undefined') { /* deal with it */ }`.
+
+### Detecting MetaMask
+
+If you want to differentiate MetaMask from other ethereum-compatible browsers, you can detect MetaMask using `ethereum.isMetaMask`.
+
+### User State
+
+Currently there are a few stateful things you want to consider when interacting with this API:
+
+- What is the current network?
+- What is the current account?
+
+Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too ([see the API reference](./API_Reference)).
+
+## Choosing a Convenience Library
+
+Convenience libraries exist for a variety of reasons.
+
+Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and on.
+
+The provider API itself is very simple, and wraps [Ethereum JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods) formatted messages, which is why developers usually use a convenience library for interacting with the provider, like [web3](https://www.npmjs.com/package/web3), [truffle](https://truffleframework.com/), [ethjs](https://www.npmjs.com/package/ethjs), [Embark](https://embark.status.im/), or others. From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
+

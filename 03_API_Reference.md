@@ -17,6 +17,28 @@ However, for developers of convenience libraries, and for developers who would l
 
 Some simplifications are coming soon to this API, which you can [read more about here](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md).
 
+## Properties
+
+These properties can be used to check the current state of the connected user, which can be important things to verify before sending a transaction:
+
+### ethereum.networkVersion
+
+Returns a numeric string representing the current blockchain's network ID. A few example values:
+
+'1': Ethereum Main Network
+'2': Morden Test network
+'3': Ropsten Test Network
+'4': Rinkeby Test Network
+'42': Kovan Test Network
+
+### ethereum.selectedAddress
+
+Returns a hex-prefixed string representing the current user's selected address, ex: `"0xfdea65c8e26263f6d9a1b5de9555d2931a33b825"`.
+
+### ethereum.isMetaMask
+
+Returns `true` or `false`, representing whether the user has MetaMask installed.
+
 ## Methods
 
 ### ethereum.enable()
@@ -95,3 +117,4 @@ ethereum.on('accountsChanged', function (accounts) {
 ```
 
 Note currently `networkChanged` is not completely useful, because MetaMask currently reloads pages that have made requests to the provider upon network change, but [we plan to change this behavior](https://medium.com/metamask/breaking-change-no-longer-reloading-pages-on-network-change-4a3e1fd2f5e7), so it's safest to prepare your application to gracefully handle network changes.
+
