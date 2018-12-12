@@ -7,7 +7,7 @@ Below the code snippet, we'll include some links to some related valuable resour
 ```javascript
 // Let's imagine you want to receive an ether tip
 const yourAddress = '0x0c54FcCd2e384b4BB6f2E405Bf5Cbc15a017AaFb'
-const value = '0xde0b6b3a7640000', // an ether has 18 decimals, here in hex.
+const value = '0xde0b6b3a7640000' // an ether has 18 decimals, here in hex.
 const desiredNetwork = '1' // '1' is the Ethereum main network ID.
 
 // Detect whether the current browser is ethereum-compatible,
