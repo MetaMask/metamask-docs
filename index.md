@@ -4,7 +4,13 @@
 
 Welcome to MetaMask's Developer Documentation!
 
-This documentation is for developing applications for MetaMask. For information or help using MetaMask, [visit our user support site](https://metamask.zendesk.com/hc/en-us). For documentation on modifying MetaMask itself, you can find [development docs on GitHub](https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md).
+This documentation is for learning to develop applications for MetaMask.
+
+You can find the latest version of MetaMask on [our official website](https://metamask.io/).  For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/hc/en-us).
+
+For up to the minute news, follow our [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
+
+To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
 ## Why MetaMask?
 
@@ -25,4 +31,12 @@ MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockch
 Today, MetaMask is compatible with any blockchain that exposes an [Ethereum Compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://truffleframework.com/ganache).
 
 We're aware that there are constantly more and more private blockchains that people are interested in connecting MetaMask to, and [we are continuously building towards easier and easier integration with these many options](https://medium.com/metamask/metamasks-vision-for-multiple-network-support-4ffbee9ec64d).
+
+## Blockchain Applications
+
+MetaMask makes it easy to write user interfaces to blockchain-based smart contract systems. You can accept payments without knowing how to write smart contracts, but you'll be able to do much more interesting things if you do.
+
+### New Dapp Developers
+
+- We recommend this [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) tutorial series by Karl Floersch.
 
