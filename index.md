@@ -2,7 +2,7 @@
 
 ![MetaMask Logo](https://metamask.io/img/ethereum-metamask-chrome.png)
 
-Welcome to MetaMask's Developer Documentation!
+Welcome to MetaMask's Developer Documentation.
 
 This documentation is for learning to develop applications for MetaMask.
 
