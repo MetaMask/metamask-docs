@@ -1,6 +1,6 @@
 # Initializing Dapps
 
-Once you have your basic dev environment [set up](./01_Getting_Started), you are ready to start interacting with some smart contracts. There are some basic things you'll need regardless of what convenience library you're using, when communicating with a smart contract:
+Once you have your basic dev environment [set up](./Getting_Started), you are ready to start interacting with some smart contracts. There are some basic things you'll need regardless of what convenience library you're using, when communicating with a smart contract:
 
 ## The Contract Network
 
