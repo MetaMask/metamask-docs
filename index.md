@@ -1,11 +1,28 @@
 # MetaMask Documentation
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pellentesque orci et pellentesque mollis. Proin tristique odio at tristique accumsan. Donec pellentesque libero quis risus convallis, et ultricies neque maximus. Nam mattis lacinia sapien. Duis semper imperdiet erat id accumsan. Vivamus venenatis tincidunt porttitor. Maecenas eu tristique dolor. Morbi turpis odio, malesuada rutrum sem id, placerat sagittis ligula. Vivamus in aliquet arcu. Curabitur nec ultricies magna, quis finibus nisl. Nulla tristique magna non imperdiet luctus.
+![MetaMask Logo](https://metamask.io/img/ethereum-metamask-chrome.png)
 
-Ut blandit semper sem eget consectetur. Aenean purus nulla, hendrerit rhoncus mi sollicitudin, vehicula ullamcorper arcu. Curabitur dui velit, eleifend et pharetra sed, aliquam quis ligula. Phasellus eget lectus nec tortor malesuada pulvinar quis malesuada elit. Pellentesque eleifend, lectus in varius blandit, lectus lectus commodo dui, eu rhoncus erat lacus a turpis. Sed vitae pharetra nisi, non eleifend nibh. Sed egestas iaculis lacus, a lacinia magna cursus et. Donec at tortor cursus, placerat nisi porta, ornare risus. Sed non elit sed ipsum placerat convallis. Vestibulum ultricies porttitor libero ac posuere.
+Welcome to MetaMask's Developer Documentation!
 
-Ut sit amet auctor odio, non ullamcorper sapien. Maecenas imperdiet felis aliquam est ultricies aliquam. Nulla facilisi. Suspendisse a ligula convallis, bibendum ex ut, blandit arcu. Aenean tincidunt sem eget aliquam elementum. Praesent vel mi nisi. Morbi tristique mauris non ante lobortis auctor. Etiam volutpat semper ipsum, a fringilla odio molestie quis. Nullam feugiat, leo et pharetra luctus, nibh velit blandit libero, sed tempor massa ipsum suscipit sapien. Suspendisse malesuada vulputate neque. Vestibulum quis venenatis elit, a facilisis tortor. Ut tincidunt sem sed metus aliquet, eget venenatis dolor imperdiet. Fusce tincidunt a dolor quis pharetra. Integer ultricies ornare tempus. Duis mauris mi, condimentum eu nulla eu, condimentum pharetra tellus.
+This documentation is for developing applications for MetaMask. For information or help using MetaMask, [visit our user support site](https://metamask.zendesk.com/hc/en-us). For documentation on modifying MetaMask itself, you can find [development docs on GitHub](https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md).
 
-Etiam posuere eu erat in vestibulum. Pellentesque quis odio sit amet arcu molestie hendrerit. Proin tellus erat, gravida vitae mattis sit amet, pharetra eu orci. Mauris pretium tortor nibh, ut porttitor odio interdum non. Etiam eget commodo massa. In consectetur ac mi quis maximus. Morbi urna mauris, molestie eleifend aliquet vel, volutpat non nibh. Aliquam enim tellus, varius ac luctus sit amet, congue at ligula.
+## Why MetaMask?
 
-Integer tempor sit amet sem sed auctor. Cras imperdiet erat vel enim vehicula, a interdum nisl egestas. Aenean ac lorem quis purus ultrices iaculis. Curabitur accumsan a lacus nec accumsan. Nunc ligula augue, vehicula eget aliquam non, feugiat ut odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas arcu mi, euismod eget lobortis ac, elementum faucibus enim. Integer id convallis ligula. Fusce at feugiat turpis. Nullam porttitor porttitor fringilla. Integer eget libero pulvinar, eleifend ante non, tempor mauris. Aenean sagittis, augue vel luctus tempor, nisi metus fermentum diam, sit amet ornare massa lorem ut justo. Curabitur maximus varius efficitur.
+MetaMask was created out of the needs of creating more secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
+
+- [Read the full docs of our injected provider](./API_Reference)
+
+### Account Management
+
+MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets, while isolating them from the site context. This is a great security improvement over storing the user keys on a single central server, or even in local storage, which can allow for [mass account thefts](https://www.ccn.com/cryptocurrency-exchange-etherdelta-hacked-in-dns-hijacking-scheme/).
+
+This security feature also comes with developer convenience: For developers, you simply interact with the globally available `ethereum` API that identifies the users of web3-compatible browsers (like MetaMask users), and whenever you request a transaction signature (like `eth_sendTransaction`, `eth_signTypedData`, or others), MetaMask will prompt the user in as comprehensible a way as possible, allowing them to be informed, you to have a simple API, and attackers left trying to phish individual users rather than performing mass hacks, although [DNS hacks can still be used for phishing en masse](https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168)).
+
+### Blockchain Connection
+
+MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockchain and several test networks via our friend at [Infura](https://infura.io/). This allows users to get started without synchronizing a full node, while still providing the option to upgrade their security the blockchain provider of their choice over time.
+
+Today, MetaMask is compatible with any blockchain that exposes an [Ethereum Compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://truffleframework.com/ganache).
+
+We're aware that there are constantly more and more private blockchains that people are interested in connecting MetaMask to, and [we are continuously building towards easier and easier integration with these many options](https://medium.com/metamask/metamasks-vision-for-multiple-network-support-4ffbee9ec64d).
+
