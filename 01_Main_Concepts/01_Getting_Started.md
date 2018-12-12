@@ -25,6 +25,26 @@ Currently there are a few stateful things you want to consider when interacting 
 
 Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too ([see the API reference](./API_Reference)).
 
+### Logging In
+
+When you're ready to request the user logs in, you can call this simple method:
+
+```javascript
+ethereum.enable()
+```
+
+This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
+
+Over time, this method is intended to grow to include various additional parameters to help your site request all the setup it needs from the user during setup.
+
+Since it returns a promise, if you're in an `async` function, you may log in like this:
+
+```javascript
+const accounts = await ethereum.enable()
+const account = accounts[0] // We currently only ever provide a single account,
+                            // but the array gives us some room to grow.
+```
+
 ## Choosing a Convenience Library
 
 Convenience libraries exist for a variety of reasons.
