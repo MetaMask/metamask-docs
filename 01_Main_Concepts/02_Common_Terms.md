@@ -272,3 +272,5 @@
 <p id="fixGlossary">
   All feedback, rewrites, clarification, typo-fixing, and requests for additions are more than welcome. ?
 </p>
+
+<p>Thanks to <a href="https://support.mycrypto.com/getting-started/ethereum-glossary.html">MyCrypto</a> for this Glossary's starting point</p>
