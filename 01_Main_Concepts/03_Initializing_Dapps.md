@@ -1,11 +1,28 @@
 # Initializing Dapps
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis, nisl eget condimentum volutpat, nisl justo convallis neque, vehicula ultricies lectus nibh non urna. Donec suscipit ipsum non ex imperdiet ultricies. Quisque vehicula metus eget neque viverra vestibulum. Quisque volutpat nisl eu erat vestibulum, sed auctor elit varius. Nunc faucibus quam urna, in placerat erat dictum sed. Duis interdum ultrices arcu, nec dapibus nibh condimentum a. Pellentesque sit amet auctor libero. Duis sit amet ultricies tellus, a dapibus mauris. Duis fringilla porttitor diam non accumsan. Ut vehicula semper pretium. Mauris condimentum leo ut est blandit, id imperdiet ante congue. Sed at lobortis nulla, vel lobortis orci. Curabitur consequat, sem ac scelerisque posuere, sem orci euismod ante, non suscipit dui libero in libero. Duis urna felis, cursus id arcu at, interdum vulputate elit. Suspendisse vulputate, nisi vel rutrum pharetra, diam leo placerat dui, eget maximus ex elit sed dui.
+Once you have your basic dev environment [set up](./01_Getting_Started), you are ready to start interacting with some smart contracts. There are some basic things you'll need regardless of what convenience library you're using, when communicating with a smart contract:
 
-Donec accumsan nulla turpis, quis porta nibh ornare pulvinar. Nulla fringilla felis ut lacus condimentum malesuada. Suspendisse non ultrices elit. Integer tincidunt ultrices velit quis consequat. Mauris eget aliquet lorem, sit amet scelerisque diam. Pellentesque suscipit, libero vel auctor scelerisque, quam mi mollis augue, in elementum nisi elit vitae orci. Pellentesque convallis, lorem et feugiat vulputate, nisi metus finibus lacus, vel vulputate tortor sem eget orci. Vivamus a mollis purus. Integer blandit lectus in gravida bibendum. Curabitur vitae egestas ligula.
+## The Contract Network
 
-Vestibulum rhoncus ornare turpis, et gravida enim finibus vitae. Praesent mauris diam, egestas vel mi quis, dapibus ullamcorper nibh. Morbi dictum sit amet velit vel sagittis. Vivamus venenatis odio quis ornare tincidunt. Integer mi felis, scelerisque vel urna sed, vestibulum lacinia leo. Proin iaculis massa orci, at rhoncus orci luctus a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas erat dolor, hendrerit a commodo eget, pretium vel eros. Donec in dolor mauris. Mauris eget finibus neque, sit amet mollis arcu. Vestibulum sed lobortis est.
+If you aren't connected to the right network, you aren't going to have any luck sending transactions to your contract, so make sure you have this right!
 
-Nunc neque arcu, condimentum a sagittis ac, consequat vel quam. Phasellus egestas libero nec risus luctus tincidunt. Etiam lobortis mauris in viverra viverra. Aliquam imperdiet, eros nec semper efficitur, ipsum diam sollicitudin urna, vitae mollis nibh lectus fringilla enim. Curabitur sit amet commodo nulla. Nullam ut interdum mauris. Praesent fringilla libero ullamcorper ligula accumsan, pretium rhoncus lorem aliquam. Pellentesque leo eros, rutrum vitae vestibulum vitae, congue sed quam. Curabitur sagittis metus eget magna porttitor gravida. Fusce non sapien dolor. Nulla blandit erat et tortor suscipit maximus.
+Many clever dapps will recognize the user's current network, and actually adapt to it! For example, if you detect a test network, you could deliberately connect to a test-network version of your smart contract, which makes it easy for users to "try out" your system without using real money!
 
-Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse vitae massa ac mauris scelerisque rutrum non eget dui. Duis velit nisi, imperdiet id eleifend at, mollis condimentum nibh. Duis blandit augue vel erat feugiat vehicula. Donec magna justo, gravida eu luctus id, tristique nec lacus. Nam lobortis augue non nibh commodo maximus. Praesent ac aliquam tortor, ac interdum justo. Duis massa mauris, vestibulum vel porttitor a, posuere sed urna.
+## The Contract Address
+
+Every account in Ethereum has an address, whether it's an external key-pair account, or a smart contract. In order for any smart contract library to communicate with your contracts, they'll need to know its exact address.
+
+## The Contract ABI
+
+In Ethereum, [The ABI Specification](https://solidity.readthedocs.io/en/develop/abi-spec.html) is a way to encode the interface of a smart contract in a way that your user interface can make sense of. It is an array of method-describing objects, and when you feed this and the address into a contract-abstraction library like [web3](https://www.npmjs.com/package/web3), [truffle](https://truffleframework.com/), [ethjs](https://www.npmjs.com/package/ethjs), [Embark](https://embark.status.im/), or others, this `ABI` tells those libraries about what methods to provide, and how to compose transactions to call those methods.
+
+## The Contract Bytecode
+
+If your web app is going to publish a new smart contract that is pre-compiled, it may need to include some `bytecode`. In this case, you will not know the contract address in advance, but instead will have to publish, watch for the transaction to be processed, and then extract the final contract's address from the completed transaction.
+
+If publishing a contract from bytecode, you will still want an `ABI` if you want to interact with it! The bytecode does not describe how to interact with the final contract.
+
+## The Contract Source Code
+
+If your website is going to allow users to edit smart contract source code and compile it, like [Remix](http://remix.ethereum.org/), you may import a whole compiler, in which case you're going to derive your bytecode and ABI from that source code, and eventually you will derive the contract's address from the completed transaction publishing that bytecode.
+
