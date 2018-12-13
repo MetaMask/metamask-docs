@@ -10,7 +10,7 @@ There are currently five signing methods in MetaMask, and you might wonder the h
 
 - `eth_sign`
 - `personal_sign`
-- `signTypedData`
+- `signTypedData` (currently identical to `signTypedData_v1`)
 - `signTypedData_v1`
 - `signTypedData_v3`
 
