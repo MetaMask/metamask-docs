@@ -2,7 +2,7 @@
 
 Transactions are a formal action on a blockchain. They are always initiated in MetaMask with a call to the `eth_sendTransaction` method. They can involve a simple sending of ether, may result in sending tokens, creating a new smart contract, or changing state on the blockchain in any number of ways. They are always initiated by a signature from an _external account_, or a simple key pair.
 
-In MetaMask, sending a transaction will generally involve composing an options object somewhat like this:
+In MetaMask, using the `ethereum.sendAsync` method directly, sending a transaction will involve composing an options object like this:
 
 ```javascript
 const transactionParameters = {
