@@ -71,3 +71,4 @@ This field is also used for specifying contract methods and their parameters. Yo
 ### Chain ID [currently ignored]
 
 Chain ID is currently derived by the user's current selected network at `ethereum.networkVersion`. In the future we will probably allow a way to connect to multiple networks at once, at which point this parameter will become important, so it may be useful to be in the habit of including now.
+
