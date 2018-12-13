@@ -20,8 +20,20 @@ if (typeof window.ethereum === 'undefined') {
 
   // In the case the user has MetaMask installed, you can easily
   // ask them to sign in and reveal their accounts:
-  ethereum.enable().then(function (accounts) {
+  ethereum.enable()
 
+  // Remember to handle the case they reject the request:
+  .catch(function (reason) {
+    if (reason === 'User rejected provider access') {
+      // The user didn't want to sign in!
+    } else {
+      // This shouldn't happen, so you might want to log this...
+      alert('There was an issue signing you in.')
+    }
+  })
+
+  // In the case they approve the log-in request, you'll receive their accounts:
+  .then(function (accounts) {
     // You also should verify the user is on the correct network:
     if (ethereum.networkVersion !== desiredNetwork) {
       alert('This application requires the main network, please switch it in your MetaMask UI.')
@@ -41,14 +53,6 @@ if (typeof window.ethereum === 'undefined') {
       alert('Thanks for your successful contribution!')
     })
 
-  // Remember to handle the case they reject the request:
-  }).catch(function (reason) {
-    if (reason === 'User rejected provider access') {
-      // The user didn't want to sign in!
-    } else {
-      // This shouldn't happen, so you might want to log this...
-      alert('There was an issue signing you in.')
-    }
   })
 }
 
