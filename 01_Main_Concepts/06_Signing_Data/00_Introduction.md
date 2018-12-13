@@ -8,11 +8,11 @@ If you'd like to read our JavaScript implementations of these methods, they are 
 
 There are currently five signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods has some lessons in it for the emergent lessons of decentralized standards emergence. Our current five methods are:
 
-- `eth_sign`
-- `personal_sign`
-- `signTypedData` (currently identical to `signTypedData_v1`)
-- `signTypedData_v1`
-- `signTypedData_v3`
+- [`eth_sign`](./Eth_Sign)
+- [`personal_sign`](./Personal_Sign)
+- [`signTypedData`](./Sign_Typed_Data_v1) (currently identical to `signTypedData_v1`)
+- [`signTypedData_v1`](./Sign_Typed_Data_v1)
+- [`signTypedData_v3`](./Sign_Typed_Data_v3)
 
 There are likely to be many more over time. When MetMask first started, the Provider API wasn't designed to be exposed to untrusted websites, and so some considerations weren't taken as seriously as they were later.
 
@@ -26,7 +26,7 @@ However, the text-prefix made those signatures expensive to verify on-chain, and
 
 The strange part of EIP 712, and this decentralized standards ecosystem, is that the proposal changed several times while retaining the same EIP. This means what we initially implemented as `signTypedData` was the earliest proposed version, while other groups implemented later versions under the same method name.
 
-To avoid compatibility issues between clients, we recommend using the hard-versioned method names `signTypedData_v1` and `signTypedData_v2`.
+To avoid compatibility issues between clients, we recommend using the hard-versioned method names `signTypedData_v1` and `signTypedData_v3`. The missing `v2` represents an intermediary design that was implemented by the Cipher browser, so that we have room to implement it if there is ever enough developer demand for it.
 
 In the future, it may help to have method names include a hash of their exact proposal, since in a decentralized ecosystem, there is no absolute source of truth of wha ta given name should map to. Instead, we are forced to invent new patterns of collaboration, where we can drive forward and innovate, while simultaneously avoiding creating a brittle ecosystem by changing our meanings out from under the words.
 
