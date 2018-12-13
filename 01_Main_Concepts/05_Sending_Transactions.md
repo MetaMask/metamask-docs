@@ -62,6 +62,8 @@ Contract creation occurs when there is no `to` value but there is a `data` value
 
 Hex-encoded value of the network's native currency to send. On the Main Ethereum network, this is [ether](https://www.ethereum.org/ether), which is denominated in _wei_, which is `1e-18` ether.
 
+Please note that these numbers often used in Ethereum are far higher precision than native JavaScript numbers, and can cause unpredictable behavior if not anticipated. For this reason, we highly recommend using [BN.js](https://github.com/indutny/bn.js/) when manipulating values intended for the blockchain.
+
 ### Data [semi-optional]
 
 Required for smart contract creation.
