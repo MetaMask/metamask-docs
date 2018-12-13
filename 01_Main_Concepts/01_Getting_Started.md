@@ -12,6 +12,20 @@ You can review the full API for that object [here](./API_Reference).
 
 The first thing your app will want to do is verify whether the user is using MetaMask or not, which is simple using a check like `if (typeof window.ethereum !== 'undefined') { /* deal with it */ }`.
 
+### Running a Test Network
+
+In the top right menu of MetaMask, you can select the network that you are currently connected to. Among several popular defaults, you'll find `Custom RPC` and `Localhost 8545`. These are both useful for connecting to a test blockchain, like [ganache](https://truffleframework.com/ganache), which you can quickly install and start if you have `npm` installed with `npm i -g ganache-cli && ganache-cli`.
+
+Ganache has some great features for starting it up with different states. If you start it with the `-m` flag, you can feed it the same seed phrase you have in your MetaMask, and the test network will give your first 10 accounts 100 test ether each, which makes it easier to start work.
+
+Since your seed phrase is the power to control all your accounts, it is probably worth keeping at least one seed phrase for development, separate from any that you use for storing real value. One easy way to manage multiple seed phrases with MetaMask is with multiple browser profiles, each of which can have its own clean extension installations.
+
+#### Resetting Your Local Nonce Calculation
+
+If you're running a test blockchain, and then restart it, you can accidentally confuse MetaMask, because it calculates the next [nonce](./Sending_Transactions#nonce-%5Bignored%5D) based on both the network state _and_ the known sent transactions.
+
+To clear MetaMask's transaction queue, and effectively reset its nonce calculation, you can use the `Reset Account` button in `Settings` (available in the top-right sandwich menu).
+
 ### Detecting MetaMask
 
 If you want to differentiate MetaMask from other ethereum-compatible browsers, you can detect MetaMask using `ethereum.isMetaMask`.
