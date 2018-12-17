@@ -8,7 +8,7 @@ To add your contract's function names to this registry so it shows in the MetaMa
 
 2. Connect MetaMask
 
-3. Use etherscan's write contract feature to input the string value (without quotes) to the register function
+3. Use etherscan's write contract feature to input the string value (without quotes or spaces) to the register function
 
    for example:
 
