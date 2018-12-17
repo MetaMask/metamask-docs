@@ -13,7 +13,9 @@ Welcome to MetaMask's Developer Documentation. This documentation is for learnin
 
 MetaMask was created out of the needs of creating more secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
-- [Read the full docs of our injected provider](./API_Reference)
+- [Read the full docs of our injected provider](./API_Reference/Ethereum_Provider)
+- [Read the full docs of the JSON RPC API](./API_Reference/JSON_RPC_API)
+- [Read about other supported APIs](./API_Reference/04_Experimental_APIs)
 
 ### Account Management
 
