@@ -1,9 +1,8 @@
+# Registering Your Contract's Method Names
 
-# How to get your function name displayed on the MetaMask Confirm Screen instead of "unknown function"
+MetaMask uses the parity on-chain registry of function signatures to display method names on the confirm screen. For many common method names, like token methods, this allows MetaMask to successfully look up the method names by their [method signature](https://solidity.readthedocs.io/en/v0.4.21/abi-spec.html). However, sometimes you're using a method that is not in that on-chain registry, and MetaMask will simply display `Unknown Function` to the user.
 
-_MetaMask uses the parity on-chain registry of function signatures to display method names on the confirm screen._
-
-To add your contract's function names to this registry, follow the below steps.
+To add your contract's function names to this registry so it shows in the MetaMask interface, follow the below steps.
 
 1. Go to the [mainnet parity signature registration contract on etherscan](https://etherscan.io/address/0x44691b39d1a75dc4e0a0346cbb15e310e6ed1e86#writeContract)
 
