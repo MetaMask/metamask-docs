@@ -4,7 +4,7 @@ MetaMask uses the `ethereum.sendAsync()` API to wrap an RPC API which is based o
 
 This document is a cross-post of [EIP 1474](https://github.com/ethereum/EIPs/pull/1474/), which aims to standardize the declaration of this interface.
 
----
+```
 eip: 1474
 title: Remote procedure call specification
 author: Paul Bouchon <mail@bitpshr.net>
@@ -13,7 +13,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2018-10-02
----
+```
 
 ## Simple Summary
 
