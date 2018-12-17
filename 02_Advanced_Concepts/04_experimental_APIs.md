@@ -1,11 +1,32 @@
 # Experimental APIs
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt odio eu neque bibendum, nec faucibus eros iaculis. Aliquam commodo tempus lectus ac lacinia. Vestibulum hendrerit fringilla arcu, sed condimentum mauris consectetur non. Donec ut risus nunc. Nam vel tincidunt odio. Proin quis odio porttitor eros varius consequat. Donec eget urna ipsum. Cras eu ullamcorper felis. Mauris pharetra condimentum euismod. Morbi eu dui lacus. Nullam quis velit at ligula aliquam suscipit.
+## wallet_watchAsset
 
-In posuere luctus ornare. Mauris fermentum justo ligula, sed commodo lorem mollis ac. Nullam ut purus consequat, fringilla purus nec, iaculis dui. Sed vitae est porttitor, semper erat et, volutpat nulla. Praesent efficitur efficitur orci eget congue. Sed eget ante eu diam dictum mollis vel at dui. Fusce dignissim sit amet ex eget fringilla. In congue accumsan blandit. Phasellus eleifend leo mi, a congue metus ultrices non. Donec sit amet sollicitudin nulla. Nunc tristique dapibus molestie.
+Most all Ethereum wallets display some set of tokens, usually from a centrally curated registry of tokens.
 
-Nullam varius, est in ultricies dapibus, neque orci pretium ipsum, ac semper orci lorem ut sapien. Sed mollis, nulla ac ornare sodales, nisl sem malesuada urna, sit amet eleifend lectus tortor non purus. Etiam molestie lectus ac dui volutpat, a suscipit purus consequat. Nullam vel vehicula neque. Duis tempor aliquam consectetur. Maecenas odio enim, molestie sit amet viverra at, consequat at lacus. Nullam nec risus sed neque aliquam tincidunt quis eget odio. Nunc nulla massa, elementum et tempor quis, mattis a felis. Quisque mollis semper tortor, quis aliquet mi. Aliquam erat volutpat. Phasellus condimentum mi in sem ultrices elementum. Donec id faucibus dui.
+At MetaMask, we believe the future of tokens has the potential to be much bigger than any one party can curate, and we want to enable this explosion of creativity.
 
-Fusce facilisis pretium tempor. Vivamus ornare sem eu nisl auctor ultricies. Phasellus vestibulum efficitur risus, finibus dictum ex egestas eu. Proin auctor lacus quis est blandit, eu commodo eros luctus. Pellentesque lacinia placerat nibh, pharetra pretium tellus lacinia ac. Curabitur vehicula orci id risus tristique, ac luctus ex maximus. Vivamus suscipit tempor consectetur. Nunc commodo pellentesque quam, sed posuere ex ultrices eu. Praesent egestas odio eget imperdiet placerat. Nullam in vestibulum mi.
+In support of this goal, we have implemented support for [EIP 747](https://github.com/estebanmino/EIPs/blob/master/EIPS/eip-747.md), which provides a way for your site to suggest a token that a user might want to track in their wallet.
 
-Aliquam arcu sem, suscipit at dolor non, gravida tristique lorem. Curabitur in pharetra ante. Sed at tempor purus. Curabitur a aliquam mi. Mauris quis tellus rutrum, accumsan eros vel, facilisis sem. Quisque euismod tellus ac semper feugiat. Etiam risus nisl, finibus ac pellentesque nec, congue non quam.
+The code is simple:
+
+```javascript
+ethereum.sendAsync({
+	method: 'metamask_watchAsset',
+	params: {
+		"type":"ERC20", // Initially only supports ERC20, but eventually more!
+		"options":{
+			"address": tokenAddress, // The address that the token is at.
+			"symbol": tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+			"decimals": tokenDecimals, // The number of decimals in the token
+			"image": tokenImage, // A string url of the token logo
+		},
+	},
+	id: Math.round(Math.random() * 100000),
+}, (err, addedBoolean) => {
+
+})
+```
+
+We even created a sample Dapp so developers could suggest their tokens to users with a simple hyperlink, without a line of code. [Visit it here](https://github.com/MetaMask/Add-Token).
+
