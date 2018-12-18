@@ -15,7 +15,7 @@ MetaMask was created out of the needs of creating more secure and usable Ethereu
 
 - [Read the full docs of our injected provider](./API_Reference/Ethereum_Provider)
 - [Read the full docs of the JSON RPC API](./API_Reference/JSON_RPC_API)
-- [Read about other supported APIs](./API_Reference/04_Experimental_APIs)
+- [Read about other supported APIs](./API_Reference/Experimental_APIs)
 
 ### Account Management
 
