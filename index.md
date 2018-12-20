@@ -25,7 +25,7 @@ This security feature also comes with developer convenience: For developers, you
 
 ### Blockchain Connection
 
-MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockchain and several test networks via our friend at [Infura](https://infura.io/). This allows users to get started without synchronizing a full node, while still providing the option to upgrade their security the blockchain provider of their choice over time.
+MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockchain and several test networks via our friends at [Infura](https://infura.io/). This allows users to get started without synchronizing a full node, while still providing the option to upgrade their security the blockchain provider of their choice over time.
 
 Today, MetaMask is compatible with any blockchain that exposes an [Ethereum Compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://truffleframework.com/ganache).
 
