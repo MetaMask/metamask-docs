@@ -3,7 +3,7 @@ module.exports = {
     excludes: ['README', '.git'],
     logo: 'https://metamask.io/img/metamask.png',
     name: 'MetaMask',
-    repo: 'metamask/metamask-extension',
+    repo: 'metamask/metamask-docs',
     root: '/metamask-docs/',
     theme: true
 };

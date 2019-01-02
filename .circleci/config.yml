@@ -21,7 +21,7 @@ jobs:
 
               cd project
               rm -rf .circleci
-              npx uncrate -p=v5.0.3
+              npx uncrate
               git checkout $TARGET_BRANCH
               cp -r dist/* .
               rm -rf dist
