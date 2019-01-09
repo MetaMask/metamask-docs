@@ -8,9 +8,10 @@ You can greatly improve the security and experience of users adding your token t
 
 ## Code-free Example
 
-We have made a simple web app that allows you to enter your token details once (including an icon) and then share a link with others so they can easily see those tokens in their wallet.
+Here are a couple live web applications that let you enter your token details, and then share them with a simple web link:
 
-[Add Token App](https://metamask.github.io/Add-Token/#edit)
+- [Watch Token](https://vittominacori.github.io/watch-token/create.html)
+- [Add Token App](https://metamask.github.io/Add-Token/#edit)
 
 ## Example
 
