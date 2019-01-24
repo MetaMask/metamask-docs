@@ -10,6 +10,7 @@ const transactionParameters = {
   gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
   gasLimit: '0x2710',  // customizable by user during MetaMask confirmation.
   to: '0x0000000000000000000000000000000000000000', // Required except during contract publications.
+  from: web3.eth.accounts[0], // must match user's active address.
   value: '0x00', // Only required to send ether to the recipient from the initiating external account.
   data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
   chainId: 3 // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
