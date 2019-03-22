@@ -110,7 +110,7 @@ The metamask extension has always refreshed when you change your network, this e
 If you wanted to make it not auto-reload on a network change you can do:
 
 ```javascript
-window.ethereum.autoRefreshOnNetworkChange = false;
+ethereum.autoRefreshOnNetworkChange = false;
 ```
 
 This can be toggled on and off anytime in runtime. 
