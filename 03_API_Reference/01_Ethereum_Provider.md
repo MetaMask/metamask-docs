@@ -75,6 +75,36 @@ ethereum.enable()
 })
 ```
 
+### ethereum.send(options)
+
+The primary recommended method to send a message to the web3 browser. Message format maps to the format of [the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
+
+Returns a promise in the form of a JSON-RPC response.
+
+Here's an example of everyone's favorite method, sending a transaction, which is both how Ether is sent, and how smart contract methods are called:
+```javascript
+params: [{
+  "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+  "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+  "gas": "0x76c0", // 30400
+  "gasPrice": "0x9184e72a000", // 10000000000000
+  "value": "0x9184e72a", // 2441406250
+  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}]
+
+ethereum.send({
+  method: 'eth_sendTransaction',
+  params: params,
+  from: accounts[0], // Provide the user's account to use.
+})
+.then(function (result) {
+  // The result varies by method, per the JSON RPC API.
+  // For example, this method will return a transaction hash on success.
+})
+.catch(function (reason) {
+ // Like a typical promise, returns a reason on rejection.
+})
+```
 ### ethereum.sendAsync(options, callback)
 
 _To be superceded by the promise-returning send() method in [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)._
@@ -105,7 +135,7 @@ ethereum.sendAsync({
 
 ### ethereum.autoRefreshOnNetworkChange
 
-The metamask extension has always refreshed when you change your network, this experimental flag allows you to disable this refresh. By default it's set to true so it does not break any dapps who rely on the refresh. 
+The metamask extension has always refreshed when you change your network, this experimental flag allows you to disable this refresh. By default it's set to true so it does not break any dapps who rely on the refresh.
 
 If you wanted to make it not auto-reload on a network change you can do:
 
@@ -113,7 +143,7 @@ If you wanted to make it not auto-reload on a network change you can do:
 ethereum.autoRefreshOnNetworkChange = false;
 ```
 
-This can be toggled on and off anytime in runtime. 
+This can be toggled on and off anytime in runtime.
 
 Note: This is a experimental feature at the current time.
 
@@ -130,5 +160,5 @@ ethereum.on('accountsChanged', function (accounts) {
 })
 ```
 
-Note: `networkChanged` is only useful if you use the experimental `ethereum.autoRefreshOnNetworkChange` to disable the auto-refresh. MetaMask currently reloads pages that have made requests to the provider 
+Note: `networkChanged` is only useful if you use the experimental `ethereum.autoRefreshOnNetworkChange` to disable the auto-refresh. MetaMask currently reloads pages that have made requests to the provider
 upon network change, this behaviour will remain the same if you do not set the property to `false` as the above example explains.
