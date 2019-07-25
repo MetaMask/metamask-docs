@@ -20,7 +20,7 @@ If you'd like to integrate suggesting a token into your own web app, you can fol
 ```javascript
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513'
 const tokenSymbol = 'TUT'
-const decimals = 18
+const tokenDecimals = 18
 const tokenImage = 'http://placekitten.com/200/300'
 
 ethereum.sendAsync({
