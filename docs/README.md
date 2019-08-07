@@ -1,44 +1,47 @@
 ---
 home: true
-heroImage: /hero.png
-heroText: Hero Title
-tagline: Hero subtitle
-actionText: Get Started →
+heroImage: /ethereum-metamask-chrome.png
+actionText: Visit Documentation →
 actionLink: /guide/
-features:
-- title: Simplicity First
-  details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Vue-Powered
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
 
-# Hello VuePress
+<!-- <div style="text-align: center">
+  <Bit/>
+</div> -->
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum veritatis autem beatae. Eligendi obcaecati pariatur facilis non, consequatur reiciendis voluptate deserunt quo omnis. Ab aspernatur repellendus maxime, sapiente aut recusandae.
+<div class="features">
+  <div class="feature">
+    <h2>Account Management</h2>
+    <p>Minimal setup with markdown-centered project structure helps you focus on writing.</p>
+  </div>
+  <div class="feature">
+    <h2>Blockchain Connection</h2>
+    <p>Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.</p>
+  </div>
+  <div class="feature">
+    <h2>Blockchain Applications</h2>
+    <p>VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.</p>
+  </div>
+</div>
 
-Current route is: {{ $route.path }}
+### As Easy as 1, 2, 3
 
-*Italic*, **bold**, and `monospace`
+``` bash
+# install
+yarn global add vuepress
+# OR npm install -g vuepress
 
-```js
-<script>
-  const foo = 'bar';
-  console.log(foo);
-</script>
+# create a markdown file
+echo '# Hello VuePress' > README.md
 
+# start writing
+vuepress dev
+
+# build to static files
+vuepress build
 ```
 
-Itemized lists look like:
-
-  * this one
-  * that one
-  * the other one
-
-> Block quotes are
-> written like so.
->
-> They can span multiple paragraphs,
-> if you like.
+::: warning COMPATIBILITY NOTE
+VuePress requires Node.js >= 8.6.
+:::
