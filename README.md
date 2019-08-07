@@ -1,11 +1,29 @@
-<img src="https://metamask.io/img/metamask.png" width="60" height="auto">
+# vuepress-example
 
-MetaMask project documentation
+## Project setup
+```
+npm install
+```
 
-https://metamask.github.io/metamask-docs/
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-[![CircleCI](https://circleci.com/gh/MetaMask/metamask-docs/tree/master.svg?style=shield)](https://circleci.com/gh/MetaMask/metamask-docs/tree/master)
+### Compiles and minifies for production
+```
+npm run build
+```
 
-## Usage
+### Run your tests
+```
+npm run test
+```
 
-Documentation is auto-deployed when markdown files on the `master` branch change: just create, edit, or delete files as needed and commit the updates.
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
