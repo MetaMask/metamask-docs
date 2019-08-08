@@ -3,7 +3,7 @@ home: true
 heroImage: /ethereum-metamask-chrome.png
 actionText: Visit Documentation →
 actionLink: /guide/
-footer: MIT Licensed | Copyright © 2018-present Evan You
+footer: MIT Licensed | Austin Akers
 ---
 
 <!-- <div style="text-align: center">
@@ -13,35 +13,22 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 <div class="features">
   <div class="feature">
     <h2>Account Management</h2>
-    <p>Minimal setup with markdown-centered project structure helps you focus on writing.</p>
+    <p>MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets, while isolating them from the site context.</p>
   </div>
   <div class="feature">
     <h2>Blockchain Connection</h2>
-    <p>Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.</p>
+    <p>MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockchain and several test networks via our friends at <a href="https://infura.io/" target="_blank">Infura</a></p>
   </div>
   <div class="feature">
     <h2>Blockchain Applications</h2>
-    <p>VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.</p>
+    <p>MetaMask makes it easy to write user interfaces to blockchain-based smart contract systems.</p>
   </div>
 </div>
 
-### As Easy as 1, 2, 3
+### New Dapp Developers
 
-``` bash
-# install
-yarn global add vuepress
-# OR npm install -g vuepress
+#### Current List of Guides
 
-# create a markdown file
-echo '# Hello VuePress' > README.md
+* [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
+* [CryptoZombies](https://cryptozombies.io/)
 
-# start writing
-vuepress dev
-
-# build to static files
-vuepress build
-```
-
-::: warning COMPATIBILITY NOTE
-VuePress requires Node.js >= 8.6.
-:::

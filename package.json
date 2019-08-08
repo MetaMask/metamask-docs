@@ -18,12 +18,12 @@
     "vue",
     "generator"
   ],
-  "author": "Evan You",
+  "author": "Austin Akers",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/vuepress/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/vuejs/vuepress#readme",
+  "homepage": "",
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.3",
     "@vuepress/plugin-google-analytics": "^1.0.3",
