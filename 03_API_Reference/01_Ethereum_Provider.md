@@ -54,7 +54,7 @@ try {
   // Currently only ever one:
   // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
 
-} catch (error) {
+} catch (reason) {
   // Handle error. Likely the user rejected the login:
   console.log(reason === "User rejected provider access")
 }
