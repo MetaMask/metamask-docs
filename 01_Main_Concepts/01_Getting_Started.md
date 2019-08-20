@@ -4,7 +4,7 @@ To develop for MetaMask, you're first going to want to get MetaMask installed on
 
 Once you have it running, you should find that new browser tabs have a `window.ethereum` object available in the console. This is the way MetaMask provides for you to interact with it.
 
-You can review the full API for that object [here](./API_Reference).
+You can review the full API for that object [here](../API_Reference/Ethereum_Provider).
 
 ## Basic Considerations
 
