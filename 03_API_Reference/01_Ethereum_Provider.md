@@ -55,8 +55,8 @@ try {
   // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
 
 } catch (error) {
-  // Handle error. Likely the user rejected the login:
-  console.log(reason === "User rejected provider access")
+  // Handle error. Likely the user rejected the login
+  console.error(error)
 }
 ```
 
@@ -69,9 +69,9 @@ ethereum.enable()
   // Currently only ever one:
   // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
 })
-.catch(function (reason) {
-  // Handle error. Likely the user rejected the login:
-  console.log(reason === "User rejected provider access")
+.catch(function (error) {
+  // Handle error. Likely the user rejected the login
+  console.error(error)
 })
 ```
 
@@ -101,8 +101,8 @@ ethereum.send({
   // The result varies by method, per the JSON RPC API.
   // For example, this method will return a transaction hash on success.
 })
-.catch(function (reason) {
- // Like a typical promise, returns a reason on rejection.
+.catch(function (error) {
+ // Like a typical promise, returns an error on rejection.
 })
 ```
 ### ethereum.sendAsync(options, callback)
