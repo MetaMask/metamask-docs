@@ -135,17 +135,17 @@ ethereum.sendAsync({
 
 ### ethereum.autoRefreshOnNetworkChange
 
-The metamask extension has always refreshed when you change your network, this experimental flag allows you to disable this refresh. By default it's set to true so it does not break any dapps who rely on the refresh.
+When the network is changed, MetaMask will reload any pages that have made requests to the provider. This automatic reload behavior will be removed in a future release of MetaMask, but in the meantime it can be disabled with this flag.
 
-If you wanted to make it not auto-reload on a network change you can do:
+To disable auto-refresh on a network change you can do:
 
 ```javascript
 ethereum.autoRefreshOnNetworkChange = false;
 ```
 
-This can be toggled on and off anytime in runtime.
+This can be toggled on or off at any time.
 
-Note: This is a experimental feature at the current time.
+Note: Setting this flag to `true` results in the default behavior, which is subject to change. If your site relies upon MetaMask reloading it upon network change, you will need to trigger the reload yourself in a `networkChanged` event handler to ensure it continues to work with future releases.
 
 ### ethereum.on(eventName, callback)
 
@@ -160,5 +160,4 @@ ethereum.on('accountsChanged', function (accounts) {
 })
 ```
 
-Note: `networkChanged` is only useful if you use the experimental `ethereum.autoRefreshOnNetworkChange` to disable the auto-refresh. MetaMask currently reloads pages that have made requests to the provider
-upon network change, this behaviour will remain the same if you do not set the property to `false` as the above example explains.
+Note: At the moment, the `networkChanged` event is only useful if you disable auto-refresh on network change by setting [`ethereum.autoRefreshOnNetworkChange`](#ethereum.autorefreshonnetworkchange) to `false`. Otherwise, MetaMask will default to auto-reloading pages upon network change if they have made requests to the provider. This default will be changing in a future release.
