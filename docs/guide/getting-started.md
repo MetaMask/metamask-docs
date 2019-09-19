@@ -35,7 +35,7 @@ To clear MetaMask’s transaction queue, and effectively reset its nonce calcula
 If you want to differentiate MetaMask from other ethereum-compatible browsers, you can detect MetaMask using 
 ``` javascript
 //Open Developer Console in browser, copy and paste below code
-ethereum.isMetaMask. //Evaluates to true
+ethereum.isMetaMask // true
 ```
 
 ### User State
