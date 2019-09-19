@@ -2,7 +2,7 @@
 home: true
 heroImage: /ethereum-metamask-chrome.png
 actionText: Visit Documentation →
-actionLink: /guide/
+actionLink: /guide/getting-started
 footer: MIT Licensed | Austin Akers
 ---
 

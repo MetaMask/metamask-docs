@@ -7,14 +7,14 @@ module.exports = [
     text: 'Config Reference',
     link: '/config/'
   },
-  {
-    text: 'Plugin',
-    link: '/plugin/'
-  },
-  {
-    text: 'Theme',
-    link: '/theme/'
-  },
+  // {
+  //   text: 'Plugin',
+  //   link: '/plugin/'
+  // },
+  // {
+  //   text: 'Theme',
+  //   link: '/theme/'
+  // },
   {
     text: 'Learn More',
     items: [
@@ -64,7 +64,7 @@ module.exports = [
     ]
   },
   {
-    text: '0.x',
+    text: 'v7.0.0',
     link: 'https://vuepress.vuejs.org/'
   },
 ]
