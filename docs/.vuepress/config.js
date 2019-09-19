@@ -106,11 +106,10 @@ function getGuideSidebar (groupA, groupB) {
       children: [
         '',
         'getting-started',
-        'directory-structure',
-        'basic-config',
-        'assets',
-        'markdown',
-        'using-vue',
+        'common-terms',
+        'initializing-dapps',
+        'accessing-accounts',
+        'sending-transactions',
         'i18n',
         'deploy',
       ]
