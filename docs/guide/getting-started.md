@@ -44,3 +44,32 @@ Currently there are a few stateful things you want to consider when interacting 
 * What is the current account?
 
 Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too <a href="/guide/getting-started.html#inside-an-existing-project">see the API reference)</a>.
+
+### Logging In
+When you’re ready to request the user logs in, you can call this simple method:
+``` javascript
+ethereum.enable()
+```
+
+This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
+
+Over time, this method is intended to grow to include various additional parameters to help your site request all the setup it needs from the user during setup.
+
+Since it returns a promise, if you’re in an `async` function, you may log in like this:
+```javascript
+const accounts = await ethereum.enable()
+const account = accounts[0] // We currently only ever provide a single account,
+                            // but the array gives us some room to grow.
+```
+### Choosing a Convenience Library
+Convenience libraries exist for a variety of reasons.
+
+Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and on.
+
+The provider API itself is very simple, and wraps <a href="https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods" target="_blank">Ethereum JSON-RPC</a> formatted messages, which is why developers usually use a convenience library for interacting with the provider, like: 
+* <a href="https://www.npmjs.com/package/web3" target="_blank">web3</a> 
+* <a href="https://www.trufflesuite.com/" target="_blank">truffle</a>
+* <a href="https://www.npmjs.com/package/ethjs" target="_blank">ethjs</a>
+* <a href="https://embark.status.im/" target="_blank">Embark</a>
+
+or others. From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
