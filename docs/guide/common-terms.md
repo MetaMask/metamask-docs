@@ -85,3 +85,57 @@ card enrich gesture connect kick topple fan body blind engine lemon swarm venue 
 * [Example 1](http://i.imgur.com/lHUrIiZ.jpg)
 * [Example 2](http://i.imgur.com/FvyLewS.jpg)
 * *Note: the above addresses are a single character different but have remarkably different icons & colors. Magic!*
+
+
+### Hexadecimal
+Used all over Ethereum for a variety of things, a hexadecimal string is comprised of the numbers `0 1 2 3 4 5 6 7 8 9` and `A B C D E F`
+
+### Seed
+* The input given to derive a private key. This should always be generated in a truly random way, not something you make up with your measly human brain.
+* If you chose the seed, it is known as a `brain wallet`
+
+### Brain Wallet
+* An account generated from a seed or password or passphrase of your choosing.
+* Humans are not capable of generating enough entropy and therefore the wallets derived from these phrases are insecure.
+* Brain wallets can be brute forced by super fast computers.
+* [Brain wallet are insecure.](https://www.reddit.com/r/ethereum/comments/45y8m7/brain_wallets_are_now_generally_shunned_by/)
+* Don't use brain wallets.
+
+### Entropy
+* Also known as "randomness".
+* The more random something is, the more entropy it has, and the more secure it is.
+* Usually defined in "bits of entropy" or the number of years it would take to brute-force a \_\_\_\_ (e.g. private key) derived with that much entropy.
+* Ethereum private keys are 256-bit keys
+* 24-Word mnemonic phrases are also 256 bits of entropy. 2048 words in the dictionary. 11 bits of entropy (the words). `11 * 24 = 264`. The last word is a checksum.
+
+### Derive / Derivation
+* To derive something is to obtain it from an original source.
+* For example, if we were to derive a Keystore from a private key and a password, this means that the Keystore is made from these two sources.
+* The Keystore is a product of the two, thus it is derived from them.
+
+### Encryption
+* Encryption is the act of taking a string of letters/numbers, like your private key, and turning them into another string of letters/numbers through a method of private translation.
+* There are various different encryption methods.
+* Encryption offers protection against those trying to steal your information!
+
+### Encrypted vs Unencrypted Keys 
+* An unencrypted private key is 64 characters long, and it is used to unlock or restore wallets.
+* An encrypted key is also 64 letters long and is a regular private key that has gone through the process of encryption, as defined above.
+* For example, if the world ‘Apple’ was your shortened private key, then it was encrypted three letters down the alphabet, your new shortened encrypted key would be ‘Dssoh’. Since you know the way to encrypt this key, you could derive the original private key from it by reversing the method of encryption.
+* Usually encrypted private keys are kept within the extension or device they are encrypted by, and they remain out of sight from the user. This is meant to add another layer of security to keep a user’s wallet information safe.
+
+### Decentralize / Decentralization
+* The process of transferring authority of a single entity (ex. Government or large corporation) to multiple smaller entities.
+
+### Trustless
+* A distributed trustless consensus which the blockchain is responsible for. Since everyone has a copy of the ledger of all transactions ever executed, there is no need for a third-party. You can verify the transactions yourself, however the Ethereum blockchain and Bitcoin blockchain were created to ensure rules and agreements between all parties are executed when all conditions are met.
+
+### Smart Contracts 
+* A piece of code (or program) that is stored on the blockchain network. Conditions of the contract are predefined by the users, if all conditions are met, certain actions are executed by the contract (program).
+
+### Blockchain 
+* A decentralized publicly owned ledger.
+
+All feedback, rewrites, clarification, typo-fixing, and requests for additions are more than welcome.
+
+Thanks to [MyCrypto](https://support.mycrypto.com/general-knowledge/ethereum-blockchain/a-glossary-of-common-terms-in-the-ethereum-crypto-space) for this Glossary's starting point
