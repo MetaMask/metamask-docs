@@ -1,5 +1,9 @@
 # Initializing Dapps
-Once you have your basic dev environment [set up](/guide/getting-started.html), you are ready to start interacting with some smart contracts. There are some basic things you’ll need regardless of what convenience library you’re using, when communicating with a smart contract:
+::: warning IMPORTANT NOTE
+You must have your basic dev environment [set up](/guide/getting-started.html). Once this is setup you are ready to start interacting with some smart contracts.
+:::
+
+There are some basic things you’ll need regardless of what convenience library you’re using, when communicating with a smart contract:
 
 ### The Contract Network 
 If you aren’t connected to the right network, you aren’t going to have any luck sending transactions to your contract, so make sure you have this right!
