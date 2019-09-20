@@ -44,9 +44,9 @@ module.exports = ctx => ({
         nav: require('./nav/en'),
         sidebar: {
           '/api/': getApiSidebar(),
-          '/guide/': getGuideSidebar('Guide', 'Advanced'),
-          '/plugin/': getPluginSidebar('Plugin', 'Introduction', 'Official Plugins'),
-          '/theme/': getThemeSidebar('Theme', 'Introduction'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference','Advanced'),
+          // '/plugin/': getPluginSidebar('Plugin', 'Introduction', 'Official Plugins'),
+          // '/theme/': getThemeSidebar('Theme', 'Introduction'),
         }
       },
       '/zh/': {
@@ -58,8 +58,8 @@ module.exports = ctx => ({
         sidebar: {
           '/zh/api/': getApiSidebar(),
           '/zh/guide/': getGuideSidebar('指南', '深入'),
-          '/zh/plugin/': getPluginSidebar('插件', '介绍', '官方插件'),
-          '/zh/theme/': getThemeSidebar('主题', '介绍')
+          // '/zh/plugin/': getPluginSidebar('插件', '介绍', '官方插件'),
+          // '/zh/theme/': getThemeSidebar('主题', '介绍')
         }
       }
     }
@@ -98,7 +98,7 @@ function getApiSidebar () {
   ]
 }
 
-function getGuideSidebar (groupA, groupB) {
+function getGuideSidebar (groupA, groupB, groupC) {
   return [
     {
       title: groupA,
@@ -110,12 +110,22 @@ function getGuideSidebar (groupA, groupB) {
         'initializing-dapps',
         'accessing-accounts',
         'sending-transactions',
-        'i18n',
-        'deploy',
+        // 'i18n',
+        // 'deploy',
       ]
     },
     {
       title: groupB,
+      collapsable: false,
+      children: [
+        'ethereum-provider',
+        'json-rpc-api',
+        'experimental-apis',
+        'signing-data',
+      ]
+    },
+    {
+      title: groupC,
       collapsable: false,
       children: [
         'frontmatter',
@@ -132,42 +142,42 @@ const officalPlugins = fs
   .map(filename => 'official/' + filename.slice(0, -3))
   .sort()
 
-function getPluginSidebar (pluginTitle, pluginIntro, officialPluginTitle) {
-  return [
-    {
-      title: pluginTitle,
-      collapsable: false,
-      children: [
-        ['', pluginIntro],
-        'using-a-plugin',
-        'writing-a-plugin',
-        'life-cycle',
-        'option-api',
-        'context-api'
-      ]
-    },
-    {
-      title: officialPluginTitle,
-      collapsable: false,
-      children: officalPlugins,
-    }
-  ]
-}
+// function getPluginSidebar (pluginTitle, pluginIntro, officialPluginTitle) {
+//   return [
+//     {
+//       title: pluginTitle,
+//       collapsable: false,
+//       children: [
+//         ['', pluginIntro],
+//         'using-a-plugin',
+//         'writing-a-plugin',
+//         'life-cycle',
+//         'option-api',
+//         'context-api'
+//       ]
+//     },
+//     {
+//       title: officialPluginTitle,
+//       collapsable: false,
+//       children: officalPlugins,
+//     }
+//   ]
+// }
 
-function getThemeSidebar (groupA, introductionA) {
-  return [
-    {
-      title: groupA,
-      collapsable: false,
-      sidebarDepth: 2,
-      children: [
-        ['', introductionA],
-        'using-a-theme',
-        'writing-a-theme',
-        'option-api',
-        'default-theme-config',
-        'inheritance'
-      ]
-    },
-  ]
-}
+// function getThemeSidebar (groupA, introductionA) {
+//   return [
+//     {
+//       title: groupA,
+//       collapsable: false,
+//       sidebarDepth: 2,
+//       children: [
+//         ['', introductionA],
+//         'using-a-theme',
+//         'writing-a-theme',
+//         'option-api',
+//         'default-theme-config',
+//         'inheritance'
+//       ]
+//     },
+//   ]
+// }
