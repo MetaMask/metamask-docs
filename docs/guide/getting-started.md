@@ -43,7 +43,7 @@ Currently there are a few stateful things you want to consider when interacting 
 * What is the current network?
 * What is the current account?
 
-Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too <a href="/guide/getting-started.html#inside-an-existing-project">see the API reference)</a>.
+Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too <a href="/guide/getting-started.html#inside-an-existing-project">(see the API reference)</a>.
 
 ### Logging In
 When you’re ready to request the user logs in, you can call this simple method:
