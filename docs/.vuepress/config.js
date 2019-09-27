@@ -45,8 +45,6 @@ module.exports = ctx => ({
         sidebar: {
           '/api/': getApiSidebar(),
           '/guide/': getGuideSidebar('Guide', 'API Reference','Advanced'),
-          // '/plugin/': getPluginSidebar('Plugin', 'Introduction', 'Official Plugins'),
-          // '/theme/': getThemeSidebar('Theme', 'Introduction'),
         }
       },
       '/zh/': {
@@ -58,8 +56,6 @@ module.exports = ctx => ({
         sidebar: {
           '/zh/api/': getApiSidebar(),
           '/zh/guide/': getGuideSidebar('指南', '深入'),
-          // '/zh/plugin/': getPluginSidebar('插件', '介绍', '官方插件'),
-          // '/zh/theme/': getThemeSidebar('主题', '介绍')
         }
       }
     }
@@ -110,8 +106,6 @@ function getGuideSidebar (groupA, groupB, groupC) {
         'initializing-dapps',
         'accessing-accounts',
         'sending-transactions',
-        // 'i18n',
-        // 'deploy',
       ]
     },
     {
@@ -141,43 +135,3 @@ const officalPlugins = fs
   .readdirSync(path.resolve(__dirname, '../plugin/official'))
   .map(filename => 'official/' + filename.slice(0, -3))
   .sort()
-
-// function getPluginSidebar (pluginTitle, pluginIntro, officialPluginTitle) {
-//   return [
-//     {
-//       title: pluginTitle,
-//       collapsable: false,
-//       children: [
-//         ['', pluginIntro],
-//         'using-a-plugin',
-//         'writing-a-plugin',
-//         'life-cycle',
-//         'option-api',
-//         'context-api'
-//       ]
-//     },
-//     {
-//       title: officialPluginTitle,
-//       collapsable: false,
-//       children: officalPlugins,
-//     }
-//   ]
-// }
-
-// function getThemeSidebar (groupA, introductionA) {
-//   return [
-//     {
-//       title: groupA,
-//       collapsable: false,
-//       sidebarDepth: 2,
-//       children: [
-//         ['', introductionA],
-//         'using-a-theme',
-//         'writing-a-theme',
-//         'option-api',
-//         'default-theme-config',
-//         'inheritance'
-//       ]
-//     },
-//   ]
-// }
