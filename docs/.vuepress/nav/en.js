@@ -63,8 +63,8 @@ module.exports = [
       }
     ]
   },
-  {
-    text: 'v7.0.0',
-    link: 'https://vuepress.vuejs.org/'
-  },
+  // {
+  //   text: 'v7.2.1',
+  //   link: '/'
+  // },
 ]
