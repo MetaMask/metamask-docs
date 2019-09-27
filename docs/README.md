@@ -6,10 +6,6 @@ actionLink: /guide/getting-started
 footer: MIT Licensed | Austin Akers
 ---
 
-<!-- <div style="text-align: center">
-  <Bit/>
-</div> -->
-
 <div class="features">
   <div class="feature">
     <h2>Account Management</h2>
