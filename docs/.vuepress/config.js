@@ -1,7 +1,8 @@
 const { fs, path } = require('@vuepress/shared-utils')
 
 module.exports = ctx => ({
-  dest: '../../vuepress',
+  dest: 'docs/dist',
+  
   locales: {
     '/': {
       lang: 'en-US',
