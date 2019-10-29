@@ -122,10 +122,9 @@ function getGuideSidebar (groupA, groupB, groupC) {
       title: groupC,
       collapsable: false,
       children: [
-        'frontmatter',
-        'permalinks',
-        'markdown-slot',
-        'global-computed'
+        'registering-function-names',
+        'registering-your-token',
+        'defining-your-icon',
       ]
     }
   ]
