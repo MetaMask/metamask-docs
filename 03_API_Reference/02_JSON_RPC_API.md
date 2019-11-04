@@ -1,10 +1,10 @@
 # The Ethereum RPC API
 
-MetaMask uses the `ethereum.sendAsync()` API to wrap an RPC API which is based on an interface exposed by all Ethereum clients, with some extra methods that are provided by MetaMask, as a key-holding signer. You can look up how to pass these methods to the `window.ethereum` object [here](./Provider_API).
+MetaMask uses the `ethereum.sendAsync()` (and soon, `ethereum.send()`) API to wrap an RPC API which is based on an interface exposed by all Ethereum clients, with some extra methods that are provided by MetaMask, as a key-holding signer. You can look up how to pass these methods to the `window.ethereum` object [here](./Provider_API).
 
 This document is a cross-post of [EIP 1474](https://github.com/ethereum/EIPs/pull/1474/), which aims to standardize the declaration of this interface.
 
-```
+---
 eip: 1474
 title: Remote procedure call specification
 author: Paul Bouchon <mail@bitpshr.net>
@@ -13,7 +13,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2018-10-02
-```
+---
 
 ## Simple Summary
 
@@ -51,6 +51,7 @@ If an Ethereum RPC method encounters an error, the `error` member included on th
 |-32002|Resource unavailable|Requested resource not available|non-standard|
 |-32003|Transaction rejected|Transaction creation failed|non-standard|
 |-32004|Method not supported|Method is not implemented|non-standard|
+|-32005|Limit exceeded|Request exceeds defined limit|non-standard|
 
 Example error response:
 
@@ -88,6 +89,25 @@ Examples `Quantity` values:
 |0x0400|`invalid`|leading zeroes not allowed|
 |ff|`invalid`|values must be prefixed|
 
+##### `Block Identifier`
+
+The RPC methods below take a default block identifier as a parameter.
+- `eth_getBalance`
+- `eth_getStorageAt`
+- `eth_getTransactionCount`
+- `eth_getCode`
+- `eth_call`
+- `eth_getProof`
+
+Since there is no way to clearly distinguish between a `Data` parameter and a `Quantity` parameter, [EIP-1898](eip-1898.md) provides a format to specify a block either using the block hash or block number. The block identifier is a JSON `object` with the following fields:
+
+|Property|Type|Description|
+|-|-|-|
+|`[blockNumber]`|{[`Quantity`](#quantity)}|The block in the canonical chain with this number|
+|OR `[blockHash]`|{[`Data`](#data)}|The block uniquely identified by this hash. The `blockNumber` and `blockHash` properties are mutually exclusive; exactly one of them must be set.|
+|`requireCanonical`|{`boolean`}|(optional) Whether or not to throw an error if the block is not in the canonical chain as described below. Only allowed in conjunction with the `blockHash` tag. Defaults to `false`.|
+
+If the block is not found, the callee SHOULD raise a JSON-RPC error (the recommended error code is `-32001: Resource not found`. If the tag is `blockHash` and `requireCanonical` is `true`, the callee SHOULD additionally raise a JSON-RPC error if the block is not in the canonical chain (the recommended error code is `-32000: Invalid input` and in any case should be different than the error code for the block not found case so that the caller can distinguish the cases). The block-not-found check SHOULD take precedence over the block-is-canonical check, so that if the block is not found the callee raises block-not-found rather than block-not-canonical.
 
 ##### `Data`
 
@@ -113,22 +133,21 @@ New Ethereum RPC methods and changes to existing methods **MUST** be proposed vi
 
 ### Methods
 
-<details open>
-<summary><code><strong>web3_clientVersion</strong></code></summary>
+#### web3_clientVersion
 
-#### Description
+##### Description
 
 Returns the version of the current client
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`string`} - client version
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -147,26 +166,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>web3_sha3</strong></code></summary>
+#### web3_sha3
 
-#### Description
+##### Description
 
 Hashes data using the Keccak-256 algorithm
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|data to hash|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - Keccak-256 hash of the given data
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -185,24 +202,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>net_listening</strong></code></summary>
+#### net_listening
 
-#### Description
+##### Description
 
 Determines if this client is listening for new network connections
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`boolean`} - `true` if listening is active or `false` if listening is not active
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -221,24 +236,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>net_peerCount</strong></code></summary>
+#### net_peerCount
 
-#### Description
+##### Description
 
 Returns the number of peers currently connected to this client
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of connected peers
 
-#### Example
+##### Example
 ```sh
 # Request
 curl -X POST --data '{
@@ -256,20 +269,18 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>net_version</strong></code></summary>
+#### net_version
 
-#### Description
+##### Description
 
 Returns the chain ID associated with the current network
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`string`} - chain ID associated with the current network
 
@@ -282,7 +293,7 @@ Common chain IDs:
 
 **Note:** See EIP-155 for a [complete list](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md#list-of-chain-ids) of possible chain IDs.
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -301,24 +312,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_accounts</strong></code></summary>
+#### eth_accounts
 
-#### Description
+##### Description
 
 Returns a list of addresses owned by this client
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Data[]`](#data)} - array of addresses
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -337,24 +346,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_blockNumber</strong></code></summary>
+#### eth_blockNumber
 
-#### Description
+##### Description
 
 Returns the number of the most recent block seen by this client
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of the latest block
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -373,27 +380,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_call</strong></code></summary>
+#### eth_call
 
-#### Description
+##### Description
 
 Executes a new message call immediately without submitting a transaction to the network
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{`object`}|@property {[`Data`](#data)} `[from]` - transaction sender<br/>@property {[`Data`](#data)} `to` - transaction recipient or `null` if deploying a contract<br/>@property {[`Quantity`](#quantity)} `[gas]` - gas provided for transaction execution<br/>@property {[`Quantity`](#quantity)} `[gasPrice]` - price in wei of each gas used<br/>@property {[`Quantity`](#quantity)} `[value]` - value in wei sent with this transaction<br/>@property {[`Data`](#data)} `[data]` - contract code or a hashed method call with encoded args|
-|2|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
+|2|{[`Quantity`](#quantity)\|`string`\|[`Block Identifier`](#block-identifier)}|block number, or one of `"latest"`, `"earliest"` or `"pending"`, or a block identifier as described in [`Block Identifier`](#block-identifier)|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - return value of executed contract
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -419,24 +424,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_coinbase</strong></code></summary>
+#### eth_coinbase
 
-#### Description
+##### Description
 
 Returns the coinbase address for this client
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - coinbase address
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -455,29 +458,27 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_estimateGas</strong></code></summary>
+#### eth_estimateGas
 
-#### Description
+##### Description
 
 Estimates the gas necessary to complete a transaction without submitting it to the network
 
 **Note:** The resulting gas estimation may be significantly more than the amount of gas actually used by the transaction. This is due to a variety of reasons including EVM mechanics and node performance.
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{`object`}|@property {[`Data`](#data)} `[from]` - transaction sender<br/>@property {[`Data`](#data)} `[to]` - transaction recipient<br/>@property {[`Quantity`](#quantity)} `[gas]` - gas provided for transaction execution<br/>@property {[`Quantity`](#quantity)} `[gasPrice]` - price in wei of each gas used<br/>@property {[`Quantity`](#quantity)} `[value]` - value in wei sent with this transaction<br/>@property {[`Data`](#data)} `[data]` - contract code or a hashed method call with encoded args|
 |2|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - amount of gas required by transaction
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -503,24 +504,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_gasPrice</strong></code></summary>
+#### eth_gasPrice
 
-#### Description
+##### Description
 
 Returns the current price of gas expressed in wei
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - current gas price in wei
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -539,27 +538,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getBalance</strong></code></summary>
+#### eth_getBalance
 
-#### Description
+##### Description
 
 Returns the balance of an address in wei
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|address to query for balance|
-|2|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
+|2|{[`Quantity`](#quantity)\|`string`\|[`Block Identifier`](#block-identifier)}|block number, or one of `"latest"`, `"earliest"` or `"pending"`, or a block identifier as described in [`Block Identifier`](#block-identifier)|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - balance of the provided account in wei
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -578,23 +575,21 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getBlockByHash</strong></code></summary>
+#### eth_getBlockByHash
 
-#### Description
+##### Description
 
 Returns information about a block specified by hash
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a block|
 |2|{`boolean`}|`true` will pull full transaction objects, `false` will pull transaction hashes|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no block is found, otherwise a block object with the following members:
 
@@ -618,7 +613,7 @@ Returns information about a block specified by hash
 - {`Array<Transaction>`} `transactions` - list of transaction objects or hashes
 - {`Array<Transaction>`} `uncles` - list of uncle hashes
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -649,30 +644,28 @@ curl -X POST --data '{
         "stateRoot": "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
         "timestamp": "0x54e34e8e"
         "totalDifficulty":  "0x027f07",
-        "transactions": []
+        "transactions": [] 
         "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
         "uncles": ["0x1606e5...", "0xd5145a9..."]
     }
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getBlockByNumber</strong></code></summary>
+#### eth_getBlockByNumber
 
-#### Description
+##### Description
 
 Returns information about a block specified by number
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 |2|{`boolean`}|`true` will pull full transaction objects, `false` will pull transaction hashes|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no block is found, otherwise a block object with the following members:
 
@@ -696,7 +689,7 @@ Returns information about a block specified by number
 - {`Array<Transaction>`} `transactions` - list of transaction objects or hashes
 - {`Array<Transaction>`} `uncles` - list of uncle hashes
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -727,33 +720,31 @@ curl -X POST --data '{
         "stateRoot": "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
         "timestamp": "0x54e34e8e"
         "totalDifficulty":  "0x027f07",
-        "transactions": []
+        "transactions": [] 
         "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
         "uncles": ["0x1606e5...", "0xd5145a9..."]
     }
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getBlockTransactionCountByHash</strong></code></summary>
+#### eth_getBlockTransactionCountByHash
 
-#### Description
+##### Description
 
 Returns the number of transactions in a block specified by block hash
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a block|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of transactions in the specified block
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -772,26 +763,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getBlockTransactionCountByNumber</strong></code></summary>
+#### eth_getBlockTransactionCountByNumber
 
-#### Description
+##### Description
 
 Returns the number of transactions in a block specified by block number
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of transactions in the specified block
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -810,27 +799,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getCode</strong></code></summary>
+#### eth_getCode
 
-#### Description
+##### Description
 
 Returns the contract code stored at a given address
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|address to query for code|
-|2|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
+|2|{[`Quantity`](#quantity)\|`string`\|[`Block Identifier`](#block-identifier)}|block number, or one of `"latest"`, `"earliest"` or `"pending"`, or a block identifier as described in [`Block Identifier`](#block-identifier)|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - code from the specified address
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -849,22 +836,20 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getFilterChanges</strong></code></summary>
+#### eth_getFilterChanges
 
-#### Description
+##### Description
 
 Returns a list of all logs based on filter ID since the last log retrieval
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)}|ID of the filter|
 
-#### Returns
+##### Returns
 
 {`Array<Log>`} - array of log objects with the following members:
 
@@ -880,7 +865,7 @@ Returns a list of all logs based on filter ID since the last log retrieval
 
 **Note:** The return value of `eth_getFilterChanges` when retrieving logs from `eth_newBlockFilter` and `eth_newPendingTransactionFilter` filters will be an array of hashes, not an array of Log objects.
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -908,22 +893,20 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getFilterLogs</strong></code></summary>
+#### eth_getFilterLogs
 
-#### Description
+##### Description
 
 Returns a list of all logs based on filter ID
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)}|ID of the filter|
 
-#### Returns
+##### Returns
 
 {`Array<Log>`} - array of log objects with the following members:
 
@@ -939,7 +922,7 @@ Returns a list of all logs based on filter ID
 
 **Note:** The return value of `eth_getFilterLogs` when retrieving logs from `eth_newBlockFilter` and `eth_newPendingTransactionFilter` filters will be an array of hashes, not an array of Log objects.
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -967,16 +950,14 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getLogs</strong></code></summary>
+#### eth_getLogs
 
-#### Description
+##### Description
 
 Returns a list of all logs based on a filter object
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
@@ -984,7 +965,7 @@ Returns a list of all logs based on a filter object
 
 **Note:** If `blockhash` is passed, neither `fromBlock` nor `toBlock` are allowed or respected.
 
-#### Returns
+##### Returns
 
 {`Array<Log>`} - array of log objects with the following members:
 
@@ -1000,7 +981,7 @@ Returns a list of all logs based on a filter object
 
 **Note:** The return value of `eth_getLogs` when retrieving logs from `eth_newBlockFilter` and `eth_newPendingTransactionFilter` filters will be an array of hashes, not an array of Log objects.
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1030,28 +1011,26 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getStorageAt</strong></code></summary>
+#### eth_getStorageAt
 
-#### Description
+##### Description
 
 Returns the value from a storage position at an address
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|address of stored data|
 |2|{[`Quantity`](#quantity)}|index into stored data|
-|3|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
+|3|{[`Quantity`](#quantity)\|`string`\|[`Block Identifier`](#block-identifier)}|block number, or one of `"latest"`, `"earliest"` or `"pending"`, or a block identifier as described in [`Block Identifier`](#block-identifier)|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - value stored at the given address and data index
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1070,23 +1049,21 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getTransactionByBlockHashAndIndex</strong></code></summary>
+#### eth_getTransactionByBlockHashAndIndex
 
-#### Description
+##### Description
 
 Returns information about a transaction specified by block hash and transaction index
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a block|
 |2|{[`Quantity`](#quantity)}|index of a transaction in the specified block|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no transaction is found, otherwise a transaction object with the following members:
 
@@ -1105,7 +1082,7 @@ Returns information about a transaction specified by block hash and transaction 
 - {[`Quantity`](#quantity)} `transactionIndex` - index of this transaction in the block or `null` if pending
 - {[`Quantity`](#quantity)} `value` - value in wei sent with this transaction
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1139,23 +1116,21 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getTransactionByBlockNumberAndIndex</strong></code></summary>
+#### eth_getTransactionByBlockNumberAndIndex
 
-#### Description
+##### Description
 
 Returns information about a transaction specified by block number and transaction index
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 |2|{[`Quantity`](#quantity)}|index of a transaction in the specified block|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no transaction is found, otherwise a transaction object with the following members:
 
@@ -1174,7 +1149,7 @@ Returns information about a transaction specified by block number and transactio
 - {[`Quantity`](#quantity)} `transactionIndex` - index of this transaction in the block or `null` if pending
 - {[`Quantity`](#quantity)} `value` - value in wei sent with this transaction
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1208,22 +1183,20 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getTransactionByHash</strong></code></summary>
+#### eth_getTransactionByHash
 
-#### Description
+##### Description
 
 Returns information about a transaction specified by hash
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a transaction|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no transaction is found, otherwise a transaction object with the following members:
 
@@ -1242,7 +1215,7 @@ Returns information about a transaction specified by hash
 - {[`Quantity`](#quantity)} `transactionIndex` - index of this transaction in the block or `null` if pending
 - {[`Quantity`](#quantity)} `value` - value in wei sent with this transaction
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1276,27 +1249,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getTransactionCount</strong></code></summary>
+#### eth_getTransactionCount
 
-#### Description
+##### Description
 
 Returns the number of transactions sent from an address
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|address to query for sent transactions|
-|2|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
+|2|{[`Quantity`](#quantity)\|`string`\|[`Block Identifier`](#block-identifier)}|block number, or one of `"latest"`, `"earliest"` or `"pending"`, or a block identifier as described in [`Block Identifier`](#block-identifier)|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of transactions sent from the specified address
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1315,24 +1286,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getTransactionReceipt</strong></code></summary>
+#### eth_getTransactionReceipt
 
-#### Description
+##### Description
 
 Returns the receipt of a transaction specified by hash
 
 **Note:** Transaction receipts are unavailable for pending transactions.
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a transaction|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no transaction is found, otherwise a transaction receipt object with the following members:
 
@@ -1349,7 +1318,7 @@ Returns the receipt of a transaction specified by hash
 - {[`Quantity`](#quantity)} `transactionIndex` - index of this transaction in the block
 - {`Array<Log>`} `logs` - list of log objects generated by this transaction
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1379,23 +1348,21 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getUncleByBlockHashAndIndex</strong></code></summary>
+#### eth_getUncleByBlockHashAndIndex
 
-#### Description
+##### Description
 
 Returns information about an uncle specified by block hash and uncle index position
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a block|
 |2|{[`Quantity`](#quantity)}|index of uncle|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no block or uncle is found, otherwise an uncle object with the following members:
 
@@ -1418,7 +1385,7 @@ Returns information about an uncle specified by block hash and uncle index posit
 - {[`Quantity`](#quantity)} `totalDifficulty` - total difficulty of the chain until this block
 - {`Array<Transaction>`} `uncles` - list of uncle hashes
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1448,23 +1415,21 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getUncleByBlockNumberAndIndex</strong></code></summary>
+#### eth_getUncleByBlockNumberAndIndex
 
-#### Description
+##### Description
 
 Returns information about an uncle specified by block number and uncle index position
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 |2|{[`Quantity`](#quantity)}|index of uncle|
 
-#### Returns
+##### Returns
 
 {`null|object`} - `null` if no block or uncle is found, otherwise an uncle object with the following members:
 
@@ -1487,7 +1452,7 @@ Returns information about an uncle specified by block number and uncle index pos
 - {[`Quantity`](#quantity)} `totalDifficulty` - total difficulty of the chain until this block
 - {`Array<Transaction>`} `uncles` - list of uncle hashes
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1517,26 +1482,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getUncleCountByBlockHash</strong></code></summary>
+#### eth_getUncleCountByBlockHash
 
-#### Description
+##### Description
 
 Returns the number of uncles in a block specified by block hash
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash of a block|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of uncles in the specified block
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1555,26 +1518,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getUncleCountByBlockNumber</strong></code></summary>
+#### eth_getUncleCountByBlockNumber
 
-#### Description
+##### Description
 
 Returns the number of uncles in a block specified by block number
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)\|`string`}|block number, or one of `"latest"`, `"earliest"` or `"pending"`|
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of uncles in the specified block
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1593,20 +1554,18 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_getWork</strong></code></summary>
+#### eth_getWork
 
-#### Description
+##### Description
 
 Returns a list containing relevant information for proof-of-work
 
-#### Parameters
+##### Parameters
 
 _none_
 
-#### Returns
+##### Returns
 
 {[`Data[]`](#data)} - array with the following items:
 
@@ -1614,7 +1573,7 @@ _none_
 1. {[`Data`](#data)} - seed hash used for the DAG
 1. {[`Data`](#data)} - boundary condition ("target"), 2^256 / difficulty
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1637,24 +1596,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_hashrate</strong></code></summary>
+#### eth_hashrate
 
-#### Description
+##### Description
 
 Returns the number of hashes-per-second this node is mining at
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - number of hashes-per-second
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1673,24 +1630,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_mining</strong></code></summary>
+#### eth_mining
 
-#### Description
+##### Description
 
 Determines if this client is mining new blocks
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`boolean`} - `true` if this client is mining or `false` if it is not mining
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1709,24 +1664,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_newBlockFilter</strong></code></summary>
+#### eth_newBlockFilter
 
-#### Description
+##### Description
 
 Creates a filter to listen for new blocks that can be used with `eth_getFilterChanges`
 
-#### Parameters
+##### Parameters
 
 _none_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - ID of the newly-created filter that can be used with `eth_getFilterChanges`
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1745,16 +1698,14 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_newFilter</strong></code></summary>
+#### eth_newFilter
 
-#### Description
+##### Description
 
 Creates a filter to listen for specific state changes that can then be used with `eth_getFilterChanges`
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
@@ -1767,11 +1718,11 @@ Creates a filter to listen for specific state changes that can then be used with
 - `[A, B]` - "A in first position AND B in second position (and anything after)"
 - `[[A, B], [A, B]]` - "(A OR B) in first position AND (A OR B) in second position (and anything after)"
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - ID of the newly-created filter that can be used with `eth_getFilterChanges`
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1792,24 +1743,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_newPendingTransactionFilter</strong></code></summary>
+#### eth_newPendingTransactionFilter
 
-#### Description
+##### Description
 
 Creates a filter to listen for new pending transactions that can be used with `eth_getFilterChanges`
 
-#### Parameters
+##### Parameters
 
 _none_
 
-#### Returns
+##### Returns
 
 {[`Quantity`](#quantity)} - ID of the newly-created filter that can be used with `eth_getFilterChanges`
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1828,24 +1777,22 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_protocolVersion</strong></code></summary>
+#### eth_protocolVersion
 
-#### Description
+##### Description
 
 Returns the current Ethereum protocol version
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`string`} - current Ethereum protocol version
 
-#### Example
+##### Example
 ```sh
 # Request
 curl -X POST --data '{
@@ -1863,26 +1810,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_sendRawTransaction</strong></code></summary>
+#### eth_sendRawTransaction
 
-#### Description
+##### Description
 
 Sends and already-signed transaction to the network
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|signed transaction data|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - transaction hash, or the zero hash if the transaction is not yet available
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1901,26 +1846,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_sendTransaction</strong></code></summary>
+#### eth_sendTransaction
 
-#### Description
+##### Description
 
 Creates, signs, and sends a new transaction to the network
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{`object`}|@property {[`Data`](#data)} `from` - transaction sender<br/>@property {[`Data`](#data)} `[to]` - transaction recipient<br/>@property {[`Quantity`](#quantity)} `[gas="0x15f90"]` - gas provided for transaction execution<br/>@property {[`Quantity`](#quantity)} `[gasPrice]` - price in wei of each gas used<br/>@property {[`Quantity`](#quantity)} `[value]` - value in wei sent with this transaction<br/>@property {[`Data`](#data)} `[data]` - contract code or a hashed method call with encoded args<br/>@property {[`Quantity`](#quantity)} `[nonce]` - unique number identifying this transaction|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - transaction hash, or the zero hash if the transaction is not yet available
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1946,27 +1889,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_sign</strong></code></summary>
+#### eth_sign
 
-#### Description
+##### Description
 
 Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|address to use for signing|
 |2|{[`Data`](#data)}|data to sign|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - signature hash of the provided data
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -1985,26 +1926,24 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_signTransaction</strong></code></summary>
+#### eth_signTransaction
 
-#### Description
+##### Description
 
 Signs a transaction that can be submitted to the network at a later time using with `eth_sendRawTransaction`
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{`object`}|@property {[`Data`](#data)} `from` - transaction sender<br/>@property {[`Data`](#data)} `[to]` - transaction recipient<br/>@property {[`Quantity`](#quantity)} `[gas="0x15f90"]` - gas provided for transaction execution<br/>@property {[`Quantity`](#quantity)} `[gasPrice]` - price in wei of each gas used<br/>@property {[`Quantity`](#quantity)} `[value]` - value in wei sent with this transaction<br/>@property {[`Data`](#data)} `[data]` - contract code or a hashed method call with encoded args<br/>@property {[`Quantity`](#quantity)} `[nonce]` - unique number identifying this transaction|
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - signature hash of the transaction object
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2030,16 +1969,14 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_signTypedData</strong></code></summary>
+#### eth_signTypedData
 
-#### Description
+##### Description
 
 Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))`
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
@@ -2048,11 +1985,11 @@ Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereu
 
 **Note:** Client developers should refer to EIP-712 for complete semantics around [encoding and signing data](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#specification). Dapp developers should refer to EIP-712 for the expected structure of [RPC method input parameters](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-712.md#parameters).
 
-#### Returns
+##### Returns
 
 {[`Data`](#data)} - signature hash of the provided message
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2122,27 +2059,25 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_submitHashrate</strong></code></summary>
+#### eth_submitHashrate
 
-#### Description
+##### Description
 
 Submit a mining hashrate
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Data`](#data)}|hash rate|
 |2|{[`Data`](#data)}|random ID identifying this node|
 
-#### Returns
+##### Returns
 
 {`boolean`} - `true` if submitting went through successfully, `false` otherwise
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2164,16 +2099,14 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_submitWork</strong></code></summary>
+#### eth_submitWork
 
-#### Description
+##### Description
 
 Submit a proof-of-work solution
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
@@ -2181,11 +2114,11 @@ Submit a proof-of-work solution
 |2|{[`Data`](#data)}|header's pow-hash|
 |3|{[`Data`](#data)}|mix digest|
 
-#### Returns
+##### Returns
 
 {`boolean`} - `true` if the provided solution is valid, `false` otherwise
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2208,21 +2141,18 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
+#### eth_syncing
 
-<details>
-<summary><code><strong>eth_syncing</strong></code></summary>
-
-#### Description
+##### Description
 
 Returns information about the status of this client's network synchronization
 
-#### Parameters
+##### Parameters
 
 _(none)_
 
-#### Returns
+##### Returns
 
 {`boolean|object`} - `false` if this client is not syncing with the network, otherwise an object with the following members:
 
@@ -2230,7 +2160,7 @@ _(none)_
 - {[`Quantity`](#quantity)} `highestBlock` - number of latest block on the network
 - {[`Quantity`](#quantity)} `startingBlock` - block number at which syncing started
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2253,28 +2183,26 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
-<details>
-<summary><code><strong>eth_uninstallFilter</strong></code></summary>
+#### eth_uninstallFilter
 
-#### Description
+##### Description
 
 Destroys a filter based on filter ID
 
 **Note:** This should only be called if a filter and its notifications are no longer needed. This will also be called automatically on a filter if its notifications are not retrieved using `eth_getFilterChanges` for a period of time.
 
-#### Parameters
+##### Parameters
 
 |#|Type|Description|
 |-|-|-|
 |1|{[`Quantity`](#quantity)}|ID of the filter to destroy|
 
-#### Returns
+##### Returns
 
 {`boolean`} - `true` if the filter is found and successfully destroyed or `false` if it is not
 
-#### Example
+##### Example
 
 ```sh
 # Request
@@ -2293,7 +2221,6 @@ curl -X POST --data '{
 }
 ```
 ---
-</details>
 
 ## Rationale
 
