@@ -111,15 +111,54 @@ Examples `Data` values:
 New Ethereum RPC methods and changes to existing methods MUST be proposed via the traditional EIP process. This allows for community consensus around new method implementations and proposed method modifications. RPC method proposals MUST reach “draft” status before being added to this proposal and the official Ethereum RPC specification defined herein.
 
 ## Methods
-| method | Description  | 
+| Method | Description  | 
 |-------|---|---|---|
 | [web3_clientVersion](/guide/json-rpc-api.html#web3-clientversion) | Returns the version of the current client |
 | [web3_sha3](/guide/json-rpc-api.html#web3-sha3) | Hashes data using the Keccak-256 algorithm |
-| net_listening | valid   |
-| 0x41     | true    |
-| 0x004200 | true    |
-| 0xf0f0f  | false   |
-| 004200   | false   |
+| [net_listening](/guide/json-rpc-api.html#net-listening) | Determines if this client is listening for new network connections |
+| [net_peerCount](/guide/json-rpc-api.html#net-peercount) | Returns the number of peers currently connected to this client |
+| [net_version](/guide/json-rpc-api.html#net-version) | Returns the chain ID associated with the current network |
+| [eth_accounts](/guide/json-rpc-api.html#eth-accounts)  | Returns a list of addresses owned by this client |
+| [eth_blockNumber](/guide/json-rpc-api.html#eth-blocknumber)   | Returns the number of the most recent block seen by this client   |
+| [eth_call](/guide/json-rpc-api.html#eth-call)   | Executes a new message call immediately without submitting a transaction to the network |
+| [eth_coinbase](/guide/json-rpc-api.html#eth-coinbase)   | Returns the coinbase address for this client |
+| [eth_estimateGas](/guide/json-rpc-api.html#eth-estimategas)   | Estimates the gas necessary to complete a transaction without submitting it to the network |
+| [eth_gasPrice](/guide/json-rpc-api.html#eth-gasprice)   | Returns the current price of gas expressed in wei |
+| [eth_getBalance](/guide/json-rpc-api.html#eth-getbalance)   | Returns the balance of an address in wei |
+| [eth_getBlockByHash](/guide/json-rpc-api.html#eth-getblockbyhash)   | Returns information about a block specified by hash |
+| [eth_getBlockByNumber](/guide/json-rpc-api.html#eth-getblockbynumber)   | Returns information about a block specified by number   |
+| [eth_getBlockTransactionCountByHash](/guide/json-rpc-api.html#eth-getblocktransactioncountbyhash)   | Returns the number of transactions in a block specified by block hash |
+| [eth_getBlockTransactionCountByNumber](/guide/json-rpc-api.html#eth-getblocktransactioncountbynumber)   | Returns the number of transactions in a block specified by block number |
+| [eth_getCode](/guide/json-rpc-api.html#eth-getcode)   | Returns the contract code stored at a given address |
+| [eth_getFilterChanges](/guide/json-rpc-api.html#eth-getfilterchanges) | Returns a list of all logs based on filter ID since the last log retrieval |
+| [eth_getFilterLogs](/guide/json-rpc-api.html#eth-getfilterlogs)   | Returns a list of all logs based on filter ID |
+| [eth_getLogs](/guide/json-rpc-api.html#eth-getlogs)   | Returns a list of all logs based on a filter object |
+| [eth_getStorageAt](/guide/json-rpc-api.html#eth-getstorageat)   | Returns the value from a storage position at an address |
+| [eth_getTransactionByBlockHashAndIndex](/guide/json-rpc-api.html#eth-gettransactionbyblockhashandindex)   | Returns information about a transaction specified by block hash and transaction index |
+| [eth_getTransactionByBlockNumberAndIndex](/guide/json-rpc-api.html#eth-gettransactionbyblocknumberandindex)   | Returns information about a transaction specified by block number and transaction index |
+| [eth_getTransactionByHash](/guide/json-rpc-api.html#eth-gettransactionbyhash)   | Returns information about a transaction specified by hash |
+| [eth_getTransactionCount](/guide/json-rpc-api.html#eth-gettransactioncount)   | Returns the number of transactions sent from an address |
+| [eth_getTransactionReceipt](/guide/json-rpc-api.html#eth-gettransactionreceipt)   | Returns the receipt of a transaction specified by hash |
+| [eth_getUncleByBlockHashAndIndex](/guide/json-rpc-api.html#eth-getunclebyblockhashandindex)   | Returns information about an uncle specified by block hash and uncle index position |
+| [eth_getUncleByBlockNumberAndIndex](/guide/json-rpc-api.html#eth-getunclebyblocknumberandindex)   | Returns information about an uncle specified by block number and uncle index position |
+| [eth_getUncleCountByBlockHash](/guide/json-rpc-api.html#eth-getunclecountbyblockhash)   | Returns the number of uncles in a block specified by block hash |
+| [eth_getUncleCountByBlockNumber](/guide/json-rpc-api.html#eth-getunclecountbyblocknumber)   | Returns the number of uncles in a block specified by block number |
+| [eth_getWork](/guide/json-rpc-api.html#eth-getwork)   | Returns a list containing relevant information for proof-of-work |
+| [eth_hashrate](/guide/json-rpc-api.html#eth-hashrate)   | Returns the number of hashes-per-second this node is mining at |
+| [eth_mining](/guide/json-rpc-api.html#eth-mining)   | Determines if this client is mining new blocks |
+| [eth_newBlockFilter](/guide/json-rpc-api.html#eth-newblockfilter)   | Creates a filter to listen for new blocks that can be used with `eth_getFilterChanges` |
+| [eth_newFilter](/guide/json-rpc-api.html#eth-newfilter)   | Creates a filter to listen for specific state changes that can then be used with eth_getFilterChanges |
+| [eth_newPendingTransactionFilter](/guide/json-rpc-api.html#eth-newpendingtransactionfilter)   | Creates a filter to listen for new pending transactions that can be used with `eth_getFilterChanges` |
+| [eth_protocolVersion](/guide/json-rpc-api.html#eth-protocolversion)   | Returns the current Ethereum protocol version |
+| [eth_sendRawTransaction](/guide/json-rpc-api.html#eth-sendrawtransaction)   | Sends and already-signed transaction to the network |
+| [eth_sendTransaction](/guide/json-rpc-api.html#eth-sendtransaction)   | Creates, signs, and sends a new transaction to the network |
+| [eth_sign](/guide/json-rpc-api.html#eth-sign)   |Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))` |
+| [eth_signTransaction](/guide/json-rpc-api.html#eth-signtransaction)   | Signs a transaction that can be submitted to the network at a later time using with `eth_sendRawTransaction` |
+| [eth_signTypedData](/guide/json-rpc-api.html#eth-signtypeddata)   | Calculates an Ethereum-specific signature in the form of `keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))` |
+| [eth_submitHashrate](/guide/json-rpc-api.html#eth-submithashrate)   | Submit a mining hashrate |
+| [eth_submitWork](/guide/json-rpc-api.html#eth-submitwork)   | Submit a proof-of-work solution |
+| [eth_syncing](/guide/json-rpc-api.html#eth-syncing)   | Returns information about the status of this client’s network synchronization |
+| [eth_uninstallFilter](/guide/json-rpc-api.html#eth-uninstallfilter)   | Destroys a filter based on filter ID |
 
 ### web3_clientVersion
   <!-- content goes here -->
@@ -157,7 +196,7 @@ New Ethereum RPC methods and changes to existing methods MUST be proposed via th
 ### eth_getBalance
  <!-- content goes here -->
 
-### eth_getBlockByHashl
+### eth_getBlockByHash
  <!-- content goes here -->
 
 ### eth_getBlockByNumber
