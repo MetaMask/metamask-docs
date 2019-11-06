@@ -110,12 +110,151 @@ Examples `Data` values:
 
 New Ethereum RPC methods and changes to existing methods MUST be proposed via the traditional EIP process. This allows for community consensus around new method implementations and proposed method modifications. RPC method proposals MUST reach “draft” status before being added to this proposal and the official Ethereum RPC specification defined herein.
 
-<details>
-  <summary>Click to expand!</summary>
-  
-  ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
-</details>
+## Methods
+| method | Description  | 
+|-------|---|---|---|
+| [web3_clientVersion](/guide/json-rpc-api.html#web3-clientversion) | Returns the version of the current client |
+| [web3_sha3](/guide/json-rpc-api.html#web3-sha3) | Hashes data using the Keccak-256 algorithm |
+| net_listening | valid   |
+| 0x41     | true    |
+| 0x004200 | true    |
+| 0xf0f0f  | false   |
+| 004200   | false   |
+
+### web3_clientVersion
+  <!-- content goes here -->
+
+### web3_sha3
+  <!-- content goes here -->
+
+### net_listening
+  <!-- content goes here -->
+
+### net_peerCount
+ <!-- content goes here -->
+
+### net_version
+ <!-- content goes here -->
+
+### eth_accounts
+ <!-- content goes here -->
+
+### eth_blockNumber
+ <!-- content goes here -->
+
+### eth_call
+ <!-- content goes here -->
+
+### eth_coinbase
+ <!-- content goes here -->
+
+### eth_estimateGas
+ <!-- content goes here -->
+
+### eth_gasPrice
+ <!-- content goes here -->
+
+### eth_getBalance
+ <!-- content goes here -->
+
+### eth_getBlockByHashl
+ <!-- content goes here -->
+
+### eth_getBlockByNumber
+ <!-- content goes here -->
+
+### eth_getBlockTransactionCountByHash
+ <!-- content goes here -->
+
+### eth_getBlockTransactionCountByNumber
+ <!-- content goes here -->
+
+### eth_getCode
+ <!-- content goes here -->
+
+### eth_getFilterChanges
+ <!-- content goes here -->
+
+### eth_getFilterLogs
+ <!-- content goes here -->
+
+### eth_getLogs
+ <!-- content goes here -->
+
+### eth_getStorageAt
+ <!-- content goes here -->
+
+### eth_getTransactionByBlockHashAndIndex
+ <!-- content goes here -->
+
+### eth_getTransactionByBlockNumberAndIndex
+ <!-- content goes here -->
+
+### eth_getTransactionByHash
+ <!-- content goes here -->
+
+### eth_getTransactionCount
+ <!-- content goes here -->
+
+### eth_getTransactionReceipt
+ <!-- content goes here -->
+
+### eth_getUncleByBlockHashAndIndex
+ <!-- content goes here -->
+
+### eth_getUncleByBlockNumberAndIndex
+ <!-- content goes here -->
+
+### eth_getUncleCountByBlockHash
+ <!-- content goes here -->
+
+### eth_getUncleCountByBlockNumber
+ <!-- content goes here -->
+
+### eth_getWork
+ <!-- content goes here -->
+
+### eth_hashrate
+ <!-- content goes here -->
+
+### eth_mining
+ <!-- content goes here -->
+
+### eth_newBlockFilter
+ <!-- content goes here -->
+
+### eth_newFilter
+ <!-- content goes here -->
+
+### eth_newPendingTransactionFilter
+ <!-- content goes here -->
+
+### eth_protocolVersion
+ <!-- content goes here -->
+
+### eth_sendRawTransaction
+ <!-- content goes here -->
+
+### eth_sendTransaction
+ <!-- content goes here -->
+
+### eth_sign
+ <!-- content goes here -->
+
+### eth_signTransaction
+ <!-- content goes here -->
+
+### eth_signTypedData
+ <!-- content goes here -->
+
+### eth_submitHashrate
+ <!-- content goes here -->
+
+### eth_submitWork
+ <!-- content goes here -->
+
+### eth_syncing
+ <!-- content goes here -->
+
+### eth_uninstallFilter
+ <!-- content goes here -->
