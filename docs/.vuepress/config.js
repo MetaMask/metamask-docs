@@ -6,7 +6,7 @@ module.exports = ctx => ({
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'MetaMask Developer Documentation',
+      title: 'MetaMask Docs',
       description: 'Welcome'
     }
     // '/zh/': {
