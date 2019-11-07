@@ -29,20 +29,20 @@ ethereum.sendAsync({
 
 We even created a sample Dapp so developers could suggest their tokens to users with a simple hyperlink, without a line of code. [Visit it here](https://github.com/MetaMask/Add-Token).
 
-### ethereum._metamask
+### `ethereum._metamask`
 
 MetaMask supports the standard Ethereum Provider API as defined in both [EIP-1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md) and [EIP-1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md). In addition to `ethereum.enable()` and its RPC equivalent `ethereum.send('eth_requestAccounts')`, MetaMask also exposes a collection of nonstandard convenience methods on the provider object at `ethereum._metamask`. Using these methods is dangerous since other dapp browsers may or may not implement them; for this reason, these methods are intentionally kept at a MetaMask-specific namespace to avoid confusion with standard provider functionality.
 
 Each method and its intended use is described below.
 
-### ethereum._metamask.isEnabled: () => boolean
+### `ethereum._metamask.isEnabled: () => boolean`
 
 This method returns a `boolean` indicating if the current domain has access to user accounts. This is useful for determining if a user has approved account access for the current session.
 
-### ethereum._metamask.isApproved: () => Promise<boolean>
+### `ethereum._metamask.isApproved: () => Promise<boolean>`
 
 This method returns a `Promise` that resolves to a `Boolean` indicating if the current domain has a cached approval. This is useful for determining if an approval popup will show when `ethereum.enable()` is called, since it indicates if a past approval exists.
 
-### ethereum._metamask.isUnlocked: () => Promise<boolean>
+### `ethereum._metamask.isUnlocked: () => Promise<boolean>`
 
 This method returns a `Promise` that resolves to a `Boolean` indicating if MetaMask is unlocked by the user. This is useful for knowing if MetaMask is unlocked in order to provide meaningful instructions to the user during onboarding. Note that this does not indicate if a user has approved account exposure.
