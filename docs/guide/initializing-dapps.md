@@ -1,5 +1,5 @@
 # Initializing Dapps
-::: warning IMPORTANT NOTE
+::: warning
 You must have your basic dev environment [set up](/guide/getting-started.html). Once this is setup you are ready to start interacting with some smart contracts.
 :::
 
