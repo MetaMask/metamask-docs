@@ -1,6 +1,6 @@
 # Getting Started
 
-::: warning IMPORTANT NOTE
+::: warning
 To develop for MetaMask, you’re first going to want to get MetaMask installed on your development machine. [Download here](https://metamask.io/)
 :::
 

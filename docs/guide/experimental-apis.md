@@ -35,14 +35,22 @@ MetaMask supports the standard Ethereum Provider API as defined in both [EIP-119
 
 Each method and its intended use is described below.
 
+### `ethereum._metamask.isUnlocked: () => Promise<boolean>`
+
+This method returns a `Promise` that resolves to a `Boolean` indicating if MetaMask is unlocked by the user. This is useful for knowing if MetaMask is unlocked in order to provide meaningful instructions to the user during onboarding. Note that this does not indicate if a user has approved account exposure.
+
 ### `ethereum._metamask.isEnabled: () => boolean`
+
+::: danger
+This will be removed on December 16, 2019. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
+:::
 
 This method returns a `boolean` indicating if the current domain has access to user accounts. This is useful for determining if a user has approved account access for the current session.
 
 ### `ethereum._metamask.isApproved: () => Promise<boolean>`
 
+::: danger
+This will be removed on December 16, 2019. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
+:::
+
 This method returns a `Promise` that resolves to a `Boolean` indicating if the current domain has a cached approval. This is useful for determining if an approval popup will show when `ethereum.enable()` is called, since it indicates if a past approval exists.
-
-### `ethereum._metamask.isUnlocked: () => Promise<boolean>`
-
-This method returns a `Promise` that resolves to a `Boolean` indicating if MetaMask is unlocked by the user. This is useful for knowing if MetaMask is unlocked in order to provide meaningful instructions to the user during onboarding. Note that this does not indicate if a user has approved account exposure.
