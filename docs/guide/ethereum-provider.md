@@ -1,7 +1,7 @@
 # Ethereum Provider API
 
 ::: warning
-We are introducing breaking changes to this API on **December 16, 2019**. See [Upcoming Breaking Changes](#upcoming-breaking-changes) for more information.
+We are introducing breaking changes to this API on **January 13, 2020**. See [Upcoming Breaking Changes](#upcoming-breaking-changes) for more information.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
@@ -29,12 +29,12 @@ However, for developers of convenience libraries, and for developers who would l
 
 ## Upcoming Breaking Changes
 
-On **December 16, 2019**, we are introducing breaking changes to this API, which we encourage you to
+On **January 13, 2020**, we are introducing breaking changes to this API, which we encourage you to
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 We only break APIs as a last resort, and unfortunately had to pursue this change.
 
 We will begin supporting the new API during the week of **November 25, 2019**.
-At that point, we will support the old and new API until December 16, after which only the new API will be supported.
+At that point, we will support the old and new API until January 13, 2020, after which only the new API will be supported.
 This update will make the MetaMask inpage provider fully compatible with
 [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
 and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md) as they were written on November 6, 2019.
@@ -45,12 +45,12 @@ You can continue reading to learn about the current API. Otherwise, [click here 
 
 In our usage, if a feature is _deprecated_, we strongly discourage its use, and may remove it in the future.
 Features that will be _removed_ or _replaced_ on a particular date are clearly marked as such.
-We do not anticipate any need for further breaking changes after December 16.
+We do not anticipate any need for further breaking changes after January 13, 2020.
 
 # Current API
 
 ::: danger
-This API will be available until **December 16, 2019**, when some breaking changes will be introduced through [the new API](#new-api).
+This API will be available until **January 13, 2020**, when some breaking changes will be introduced through [the new API](#new-api).
 :::
 
 ## Properties (Current)
@@ -121,7 +121,7 @@ ethereum.enable()
 ### ethereum.send(options, callback)
 
 ::: danger
-This will be replaced with `ethereum.send(method: string, params: Array<any>)` on **December 16, 2019**.
+This will be replaced with `ethereum.send(method: string, params: Array<any>)` on **January 13, 2020**.
 [Click here for more information.](#ethereum-send-method-string-params-array)
 :::
 
@@ -162,7 +162,7 @@ ethereum.sendAsync({
 ### ethereum.autoRefreshOnNetworkChange
 
 ::: danger
-This will be removed on December 16, 2019. At this time, MetaMask will also stop reloading the page on network changes.
+This will be removed on January 13, 2020. At this time, MetaMask will also stop reloading the page on network changes.
 [Click here for more information.](https://medium.com/metamask/no-longer-reloading-pages-on-network-change-fbf041942b44)
 :::
 
@@ -185,7 +185,7 @@ The provider supports listening for some events:
 * `networkChanged`, returns network ID string
 
 ::: tip
-Until December 16, 2019, the `networkChanged` event is only useful if you disable auto-refresh on network
+Until January 13, 2020, the `networkChanged` event is only useful if you disable auto-refresh on network
 change by setting [`ethereum.autoRefreshOnNetworkChange`](#ethereum.autorefreshonnetworkchange) to `false`.
 Otherwise, MetaMask will default to auto-reloading pages upon network change if they have made requests to the provider.
 :::
@@ -201,7 +201,7 @@ ethereum.on('accountsChanged', function (accounts) {
 # New API
 
 This API will become available during the week of **November 25, 2019**.
-It will be the only API supported starting **December 16, 2019.**
+It will be the only API supported starting **January 13, 2020.**
 If you want examples of how to setup your dapp using the new API, you can check out
 [this gist](https://gist.github.com/rekmarks/d318677c8fc89e5f7a2f526e00a0768a).
 
