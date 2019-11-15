@@ -42,7 +42,7 @@ This method returns a `Promise` that resolves to a `Boolean` indicating if MetaM
 ### `ethereum._metamask.isEnabled: () => boolean`
 
 ::: danger
-This will be removed on December 16, 2019. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
+This will be removed on January 13, 2020. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
 :::
 
 This method returns a `boolean` indicating if the current domain has access to user accounts. This is useful for determining if a user has approved account access for the current session.
@@ -50,7 +50,7 @@ This method returns a `boolean` indicating if the current domain has access to u
 ### `ethereum._metamask.isApproved: () => Promise<boolean>`
 
 ::: danger
-This will be removed on December 16, 2019. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
+This will be removed on January 13, 2020. [Click here for more information.](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a)
 :::
 
 This method returns a `Promise` that resolves to a `Boolean` indicating if the current domain has a cached approval. This is useful for determining if an approval popup will show when `ethereum.enable()` is called, since it indicates if a past approval exists.
