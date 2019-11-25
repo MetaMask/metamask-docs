@@ -24,7 +24,7 @@ On **January 13, 2020**, we are introducing breaking changes to this API, which 
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 We only break APIs as a last resort, and unfortunately had to pursue this change.
 
-We will begin supporting the new API during the week of **November 25, 2019**.
+We will begin supporting the new API during the week of **December 2, 2019**.
 At that point, we will support the old and new API until January 13, 2020, after which only the new API will be supported.
 This update will make the MetaMask inpage provider fully compatible with
 [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
