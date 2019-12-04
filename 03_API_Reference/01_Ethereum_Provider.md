@@ -20,12 +20,12 @@ However, for developers of convenience libraries, and for developers who would l
 
 ## Upcoming Breaking Changes
 
-On **January 13, 2020**, we are introducing breaking changes to this API, which we encourage you to
+In **Q1 2020**, we are introducing breaking changes to this API, which we encourage you to
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 We only break APIs as a last resort, and unfortunately had to pursue this change.
 
-We will begin supporting the new API during the week of **December 2, 2019**.
-At that point, we will support the old and new API until January 13, 2020, after which only the new API will be supported.
+We will begin supporting the new API in **Q1, 2020**.
+AWe will support the old and new API for 6 weeks, after which only the new API will be supported.
 This update will make the MetaMask inpage provider fully compatible with
 [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
 and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md) as of November 6, 2019.
@@ -36,11 +36,11 @@ You can continue reading to learn about the current API. Otherwise, [click here 
 
 In our usage, if a feature is _deprecated_, we strongly discourage its use, and may remove it in the future.
 Features that will be _removed_ or _replaced_ on a particular date are clearly marked as such.
-We do not anticipate any need for further breaking changes after January 13, 2020.
+We do not anticipate any need for further breaking changes after Q1 2020.
 
 # Current API
 
-This API will be available until **January 13, 2020**, when it will be replaced by [the new API](#new-api).
+This API will be available until the end of the 6-week deprecation period in **Q1 2020**, when it will be replaced by [the new API](#new-api).
 
 ## Properties
 
