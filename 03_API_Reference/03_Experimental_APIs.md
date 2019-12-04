@@ -38,13 +38,13 @@ Each method and its intended use is described below.
 
 ### `ethereum._metamask.isEnabled: () => boolean` (To Be Removed)
 
-**Note:** This will be removed on January 13, 2020.
+**Note:** This will be removed in **Q1 2020**.
 
 This method returns a `boolean` indicating if the current domain has access to user accounts. This is useful for determining if a user has approved account access for the current session.
 
 ### `ethereum._metamask.isApproved: () => Promise<boolean>` (To Be Removed)
 
-**Note:** This will be removed on January 13, 2020.
+**Note:** This will be removed in **Q1 2020**.
 
 This method returns a `Promise` that resolves to a `Boolean` indicating if the current domain has a cached approval. This is useful for determining if an approval popup will show when `ethereum.enable()` is called, since it indicates if a past approval exists.
 
