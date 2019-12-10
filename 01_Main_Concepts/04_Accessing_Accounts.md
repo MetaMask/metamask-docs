@@ -1,6 +1,9 @@
 # Accessing Accounts
 
-User accounts are used in a variety of contexts in Ethereum, they serve as neat identifiers, but no use as as important as calling _wallet methods_, methods that involve a signature or transaction approval. All of those methods require the sending account as a function parameter:
+User accounts are used in a variety of contexts in Ethereum, they serve as neat identifiers,
+but no use is as important as calling _wallet methods_.
+These methods involve a signature or transaction approval.
+All of those methods require the sending account as a function parameter:
 
 - `eth_sendTransaction`
 - `eth_sign` (insecure and unadvised to use)
@@ -17,4 +20,6 @@ ethereum.on('accountsChanged', function (accounts) {
 })
 ```
 
-If this isn't the account you expected, you should notify the user!
+If the first account in the returned array isn't the account you expected, you should notify the user!
+In the future, the accounts array may contain more than one account.
+However, the first account in the array will continue to be considered as the user's "selected" account.

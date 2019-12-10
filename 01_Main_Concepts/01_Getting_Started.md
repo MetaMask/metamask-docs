@@ -2,9 +2,11 @@
 
 To develop for MetaMask, you're first going to want to get MetaMask installed on your development machine. [Download here](https://metamask.io/).
 
-Once you have it running, you should find that new browser tabs have a `window.ethereum` object available in the console. This is the way MetaMask provides for you to interact with it.
+Once you have it running, you should find that new browser tabs have a `window.ethereum` object available in the console.
+This is the way MetaMask provides for you to interact with it.
 
 You can review the full API for that object [here](../API_Reference/Ethereum_Provider).
+Note that in **Q1 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
 
@@ -37,11 +39,18 @@ Currently there are a few stateful things you want to consider when interacting 
 - What is the current network?
 - What is the current account?
 
-Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`. You can listen for changes using events, too ([see the API reference](./API_Reference)).
+Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`.
+You can listen for changes using events too, see ([the API reference](./API_Reference)).
 
-### Logging In
+### Connecting to MetaMask
 
-When you're ready to request the user logs in, you can call this simple method:
+"Connecting" or "logging in" to MetaMask effectively means "to access the user's Ethereum account(s)".
+
+You should **only** initiate a connection request in response to direct user action, such as clicking a button.
+You should **never** initiate a connection request on page load.
+
+We recommend that you provide a button to allow the user to connect MetaMask to your dapp.
+Clicking this button should call the following method:
 
 ```javascript
 ethereum.enable()
@@ -65,5 +74,9 @@ Convenience libraries exist for a variety of reasons.
 
 Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and on.
 
-The provider API itself is very simple, and wraps [Ethereum JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods) formatted messages, which is why developers usually use a convenience library for interacting with the provider, like [web3](https://www.npmjs.com/package/web3), [truffle](https://truffleframework.com/), [ethjs](https://www.npmjs.com/package/ethjs), [Embark](https://embark.status.im/), or others. From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
-
+The provider API itself is very simple, and wraps
+[Ethereum JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods)
+formatted messages, which is why developers usually use a convenience library for interacting
+with the provider, like [ethers](https://www.npmjs.com/package/ethers), [web3](https://www.npmjs.com/package/web3),
+[truffle](https://truffleframework.com/), [Embark](https://embark.status.im/), or others. From those tools,
+you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
