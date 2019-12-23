@@ -18,19 +18,17 @@ From those tools, you can generally find sufficient documentation to interact wi
 
 However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
 
-## Upcoming Breaking Changes
+## Upcoming PRovider Changes
 
-In **Q1 2020**, we are introducing breaking changes to this API, which we encourage you to
-[read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
-We only break APIs as a last resort, and unfortunately had to pursue this change.
+In early 2020, we will be introducing some changes changes to this API, and beginning to deprecate some old synchronous methods. You can [read more about that transition here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 
-We will begin supporting the new API in **Q1 2020**.
-AWe will support the old and new API for 6 weeks, after which only the new API will be supported.
-This update will make the MetaMask inpage provider fully compatible with
+We will begin supporting the new API in early 2020.
+AWe will support the old and new APIs for at least 6 weeks, after which some of the older methods will be deprecated.
+These changes will make the MetaMask inpage provider fully compatible with
 [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
-and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md) as of November 6, 2019.
+and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md).
 
-You can continue reading to learn about the current API. Otherwise, [click here to learn about the new API](#new-api).
+You can continue reading to learn about the current API. Otherwise, [click here to learn about the upcoming API changes](#new-api).
 
 #### A Note on Language
 
