@@ -18,7 +18,7 @@ From those tools, you can generally find sufficient documentation to interact wi
 
 However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
 
-## Upcoming Provider Changes
+### Upcoming Provider Changes
 
 In early 2020, we will be introducing some changes changes to this API, and beginning to deprecate some old synchronous methods. You can [read more about that transition here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 
@@ -30,15 +30,13 @@ and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md).
 
 You can continue reading to learn about the current API. Otherwise, [click here to learn about the upcoming API changes](#new-api).
 
-#### A Note on Language
+### A Note on Language
 
 In our usage, if a feature is _deprecated_, we strongly discourage its use, and may remove it in the future.
 Features that will be _removed_ or _replaced_ on a particular date are clearly marked as such.
 We do not anticipate any need for further breaking changes after Q1 2020.
 
 # Current API
-
-This API will be available until the end of the 6-week deprecation period in **Q1 2020**, when it will be replaced by [the new API](#new-api).
 
 ## Properties
 
