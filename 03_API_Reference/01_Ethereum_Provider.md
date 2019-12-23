@@ -18,7 +18,7 @@ From those tools, you can generally find sufficient documentation to interact wi
 
 However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
 
-## Upcoming PRovider Changes
+## Upcoming Provider Changes
 
 In early 2020, we will be introducing some changes changes to this API, and beginning to deprecate some old synchronous methods. You can [read more about that transition here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 
