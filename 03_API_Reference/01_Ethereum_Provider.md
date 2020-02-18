@@ -108,7 +108,6 @@ ethereum.enable()
 ### ethereum.send(payload, callback) (To Be Replaced)
 
 _This will be replaced with `ethereum.send(method: string, params: Array<any>)` in **[the new API](#new-api)**._
-_[Click here](https://github.com/MetaMask/metamask-docs/blob/new-provider/03_API_Reference/01_Ethereum_Provider.md#ethereumsendmethod-string-params-array) for more information._
 
 See `ethereum.sendAsync`, directly below.
 
