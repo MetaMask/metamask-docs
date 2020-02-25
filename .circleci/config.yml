@@ -21,6 +21,7 @@ jobs:
 
               cd project
               rm -rf .circleci
+              npm install
               npm run build
               cd docs/dist
 
