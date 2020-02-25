@@ -21,12 +21,11 @@ jobs:
 
               cd project
               rm -rf .circleci
-              npx uncrate
-              git checkout $TARGET_BRANCH
-              cp -r dist/* .
-              rm -rf dist
+              npm run build
+              cd docs/dist
 
+              git checkout $TARGET_BRANCH
               git add -A
               git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
-              git push origin $TARGET_BRANCH
+              git push -f origin $TARGET_BRANCH
             fi
