@@ -29,7 +29,7 @@ module.exports = ctx => ({
   ],
   theme: '@vuepress/vue',
   themeConfig: {
-    repo: 'vuejs/vuepress',
+    repo: 'MetaMask/metamask-docs',
     editLinks: true,
     docsDir: 'packages/docs/dist',
     // #697 Provided by the official algolia team.
