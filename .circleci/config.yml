@@ -23,9 +23,10 @@ jobs:
               rm -rf .circleci
               npm install
               npm run build
-              cd docs/dist
-
               git checkout $TARGET_BRANCH
+              cp -r docs/dist/* .
+              rm -rf docs/dist
+
               git add -A
               git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
               git push -f origin $TARGET_BRANCH
