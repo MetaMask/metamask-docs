@@ -1,6 +1,8 @@
 # Experimental APIs
 
-## wallet_watchAsset
+## `wallet_` RPC methods
+
+### wallet_watchAsset
 
 Most all Ethereum wallets display some set of tokens, usually from a centrally curated registry of tokens.
 
@@ -29,6 +31,10 @@ ethereum.sendAsync({
 ```
 
 We even created a sample Dapp so developers could suggest their tokens to users with a simple hyperlink, without a line of code. [Visit it here](https://github.com/MetaMask/Add-Token).
+
+### wallet_registerOnboarding
+
+This method is in support of a new onboarding process that helps users find their way back to the site that requested MetaMask be installed. This RPC method is used by the [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) library to tell MetaMask which site initiated onboarding. It should be send directly from the site doing the onboarding; there are no parameters. We recommend using our [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) library instead of using this method directly.
 
 ## `ethereum._metamask`
 
