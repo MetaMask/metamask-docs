@@ -57,3 +57,50 @@ This method returns a `Promise` that resolves to a `Boolean` indicating if the c
 ### `ethereum._metamask.isUnlocked: () => Promise<boolean>`
 
 This method returns a `Promise` that resolves to a `Boolean` indicating if MetaMask is unlocked by the user. This is useful for knowing if MetaMask is unlocked in order to provide meaningful instructions to the user during onboarding. Note that this does not indicate if a user has approved account exposure.
+
+## `eth_` RPC methods
+
+### eth_getEncryptionPublicKey
+
+This method uses for getting a public key that based on `nacl` library. With such key you can encrypt a message.
+
+```javascript
+ethereum.sendAsync({
+    jsonrpc: '2.0',
+    method: 'eth_getEncryptionPublicKey',
+    params: [web3.eth.defaultAccount],
+    from: web3.eth.defaultAccount,
+}, function(error, encryptionpublickey) {
+    if (!error) {
+	window.encryptionpublickey = encryptionpublickey.result;
+    } else {
+	console.log(error);
+    }
+})
+```
+
+The example of encryption a message
+
+```javascript
+const decryptedMessage = web3.toHex(JSON.stringify(sigUtil.encrypt(window.encryptionpublickey, {'data': 'Hello world!'}, 'x25519-xsalsa20-poly1305')));
+```
+
+### eth_decrypt
+
+This method allows decrypting a message that was encrypted via using the public key based on `nacl` library.
+
+```javascript
+web3.currentProvider.sendAsync({
+    jsonrpc: '2.0',
+    method: 'eth_decrypt',
+    params: [decryptedMessage, web3.eth.defaultAccount],
+    from: web3.eth.defaultAccount,
+}, function(error, message) {
+    console.log(error, message);
+    if (!error) {
+	console.log(message.result); // Hello world!
+    } else {
+	console.log(error.message);
+    }
+});
+```
