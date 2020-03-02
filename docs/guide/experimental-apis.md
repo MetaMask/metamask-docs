@@ -94,7 +94,7 @@ web3.currentProvider.sendAsync({
     jsonrpc: '2.0',
     method: 'eth_decrypt',
     params: [encryptedMessage, accounts[0]],
-    from: web3.eth.defaultAccount,
+    from: accounts[0],
 }, function(error, message) {
     console.log(error, message);
     if (!error) {
