@@ -87,7 +87,7 @@ const encryptedMessage = web3.toHex(JSON.stringify(sigUtil.encrypt(window.encryp
 
 ### eth_decrypt
 
-This method is used to decrypt a message that was encrypted using the public key based on the `nacl` library.
+This method is used to decrypt a message that was encrypted using the public key based on the `nacl` [library](https://github.com/dchest/tweetnacl-js).
 
 ```javascript
 web3.currentProvider.sendAsync({
