@@ -68,7 +68,7 @@ This method is used for getting a public key that based on the `nacl` [library](
 ethereum.sendAsync({
     jsonrpc: '2.0',
     method: 'eth_getEncryptionPublicKey',
-    params: [web3.eth.defaultAccount],
+    params: [accounts[0]],
     from: web3.eth.defaultAccount,
 }, function(error, encryptionpublickey) {
     if (!error) {
