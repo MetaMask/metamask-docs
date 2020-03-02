@@ -14,19 +14,23 @@ The code is simple:
 
 ```javascript
 ethereum.sendAsync({
-	method: 'metamask_watchAsset',
-	params: {
-		"type":"ERC20", // Initially only supports ERC20, but eventually more!
-		"options":{
-			"address": tokenAddress, // The address that the token is at.
-			"symbol": tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-			"decimals": tokenDecimals, // The number of decimals in the token
-			"image": tokenImage, // A string url of the token logo
-		},
-	},
-	id: Math.round(Math.random() * 100000),
+  method: 'metamask_watchAsset',
+  params: {
+    type: 'ERC20', // Only supports ERC20 for now, but eventually more!
+    options:{
+      address: tokenAddress, // The address that the token is at.
+      symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+      decimals: tokenDecimals, // The number of decimals in the token
+      image: tokenImage, // A string url of the token logo
+    },
+  },
+  id: Math.round(Math.random() * 100000),
 }, (err, addedBoolean) => {
-
+  if (err || !addedBoolean) {
+    // handle error/failure
+  } else {
+    // handle success!
+  }
 })
 ```
 
@@ -62,45 +66,55 @@ This method returns a `Promise` that resolves to a `Boolean` indicating if MetaM
 
 ### eth_getEncryptionPublicKey
 
-This method is used for getting a public key that based on the `nacl` [library](https://github.com/dchest/tweetnacl-js). With such a key, you can encrypt a message.
+This method is used for getting a public key that based on the [`nacl` library](https://github.com/dchest/tweetnacl-js). With such a key, you can encrypt a message.
 
 ```javascript
 ethereum.sendAsync({
-    jsonrpc: '2.0',
-    method: 'eth_getEncryptionPublicKey',
-    params: [accounts[0]],
-    from: accounts[0],
-}, function(error, encryptionpublickey) {
-    if (!error) {
-	window.encryptionpublickey = encryptionpublickey.result;
-    } else {
-	console.log(error);
-    }
+  jsonrpc: '2.0',
+  method: 'eth_getEncryptionPublicKey',
+  params: [accounts[0]],
+  from: accounts[0],
+}, function(error, encryptionPublicKey) {
+  if (!error) {
+    console.log(encryptionPublicKey) // success!
+  } else {
+    console.log(error)
+  }
 })
 ```
 
-An example of how to encrypt a message via [sigUtil](https://github.com/MetaMask/eth-sig-util)
+An example of how to encrypt a message via [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util)
 
 ```javascript
-const encryptedMessage = web3.toHex(JSON.stringify(sigUtil.encrypt(window.encryptionpublickey, {'data': 'Hello world!'}, 'x25519-xsalsa20-poly1305')));
+const sigUtil = require('eth-sig-util')
+
+const encryptedData = sigUtil.encrypt(
+  encryptionPublicKey,
+  {'data': 'Hello world!'},
+  'x25519-xsalsa20-poly1305',
+)
+
+const encryptedMessage = ethers.utils.hexlify(
+  Buffer.from(JSON.stringify(encryptedData))
+)
 ```
 
 ### eth_decrypt
 
-This method is used to decrypt a message that was encrypted using the public key based on the `nacl` [library](https://github.com/dchest/tweetnacl-js).
+This method is used to decrypt a message that was encrypted using the public key based on the [`nacl` library](https://github.com/dchest/tweetnacl-js).
 
 ```javascript
-web3.currentProvider.sendAsync({
-    jsonrpc: '2.0',
-    method: 'eth_decrypt',
-    params: [encryptedMessage, accounts[0]],
-    from: accounts[0],
-}, function(error, message) {
-    console.log(error, message);
-    if (!error) {
-	console.log(message.result); // Hello world!
-    } else {
-	console.log(error.message);
-    }
-});
+ethereum.sendAsync({
+  jsonrpc: '2.0',
+  method: 'eth_decrypt',
+  params: [encryptedMessage, accounts[0]],
+  from: accounts[0],
+}, (error, message) => {
+  console.log(error, message)
+  if (!error) {
+    console.log(message.result) // Hello world!
+  } else {
+    console.log(error.message)
+  }
+})
 ```
