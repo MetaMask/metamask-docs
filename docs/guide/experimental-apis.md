@@ -62,7 +62,7 @@ This method returns a `Promise` that resolves to a `Boolean` indicating if MetaM
 
 ### eth_getEncryptionPublicKey
 
-This method uses for getting a public key that based on `nacl` library. With such key you can encrypt a message.
+This method is used for getting a public key that based on the `nacl` [library](https://github.com/dchest/tweetnacl-js). With such a key, you can encrypt a message.
 
 ```javascript
 ethereum.sendAsync({
@@ -79,21 +79,21 @@ ethereum.sendAsync({
 })
 ```
 
-The example of encryption a message
+An example of how to encrypt a message via [sigUtil](https://github.com/MetaMask/eth-sig-util)
 
 ```javascript
-const decryptedMessage = web3.toHex(JSON.stringify(sigUtil.encrypt(window.encryptionpublickey, {'data': 'Hello world!'}, 'x25519-xsalsa20-poly1305')));
+const encryptedMessage = web3.toHex(JSON.stringify(sigUtil.encrypt(window.encryptionpublickey, {'data': 'Hello world!'}, 'x25519-xsalsa20-poly1305')));
 ```
 
 ### eth_decrypt
 
-This method allows decrypting a message that was encrypted via using the public key based on `nacl` library.
+This method is used to decrypt a message that was encrypted using the public key based on the `nacl` library.
 
 ```javascript
 web3.currentProvider.sendAsync({
     jsonrpc: '2.0',
     method: 'eth_decrypt',
-    params: [decryptedMessage, web3.eth.defaultAccount],
+    params: [encryptedMessage, web3.eth.defaultAccount],
     from: web3.eth.defaultAccount,
 }, function(error, message) {
     console.log(error, message);
