@@ -69,7 +69,7 @@ ethereum.sendAsync({
     jsonrpc: '2.0',
     method: 'eth_getEncryptionPublicKey',
     params: [accounts[0]],
-    from: web3.eth.defaultAccount,
+    from: accounts[0],
 }, function(error, encryptionpublickey) {
     if (!error) {
 	window.encryptionpublickey = encryptionpublickey.result;
