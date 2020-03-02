@@ -93,7 +93,7 @@ This method is used to decrypt a message that was encrypted using the public key
 web3.currentProvider.sendAsync({
     jsonrpc: '2.0',
     method: 'eth_decrypt',
-    params: [encryptedMessage, web3.eth.defaultAccount],
+    params: [encryptedMessage, accounts[0]],
     from: web3.eth.defaultAccount,
 }, function(error, message) {
     console.log(error, message);
