@@ -2,7 +2,6 @@ const { fs, path } = require('@vuepress/shared-utils')
 
 module.exports = ctx => ({
   dest: 'docs/dist',
-  base: '/metamask-docs/',
   
   locales: {
     '/': {
@@ -10,11 +9,6 @@ module.exports = ctx => ({
       title: 'MetaMask Docs',
       description: 'Welcome'
     }
-    // '/zh/': {
-    //   lang: 'zh-CN',
-    //   title: 'MetaMask Developer Documentation',
-    //   description: 'Vue 驱动的静态网站生成器'
-    // }
   },
   head: [
     ['link', { rel: 'icon', href: `/metamask-fox.svg` }],
@@ -32,11 +26,6 @@ module.exports = ctx => ({
     repo: 'MetaMask/metamask-docs',
     editLinks: true,
     docsDir: 'packages/docs/dist',
-    // #697 Provided by the official algolia team.
-    // algolia: ctx.isProd ? ({
-    //   apiKey: '3a539aab83105f01761a137c61004d85',
-    //   indexName: 'vuepress'
-    // }) : null,
     locales: {
       '/': {
         label: 'English',
@@ -48,17 +37,6 @@ module.exports = ctx => ({
           '/guide/': getGuideSidebar('Guide', 'API Reference','Best Practices'),
         }
       }
-      // '/zh/': {
-      //   label: '简体中文',
-      //   selectText: '选择语言',
-      //   editLinkText: '在 GitHub 上编辑此页',
-      //   lastUpdated: '上次更新',
-      //   nav: require('./nav/zh'),
-      //   sidebar: {
-      //     '/zh/api/': getApiSidebar(),
-      //     '/zh/guide/': getGuideSidebar('指南', '深入','深入'),
-      //   }
-      // }
     }
   },
   plugins: [
@@ -84,7 +62,6 @@ module.exports = ctx => ({
   ],
   extraWatchFiles: [
     '.vuepress/nav/en.js',
-    // '.vuepress/nav/zh.js',
   ]
 })
 
@@ -124,7 +101,3 @@ function getGuideSidebar (groupA, groupB, groupC) {
   ]
 }
 
-const officalPlugins = fs
-  .readdirSync(path.resolve(__dirname, '../plugin/official'))
-  .map(filename => 'official/' + filename.slice(0, -3))
-  .sort()
