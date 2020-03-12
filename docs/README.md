@@ -27,3 +27,4 @@ footer: MIT Licensed
 
 * [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
 * [CryptoZombies](https://cryptozombies.io/)
+<demo-1/>

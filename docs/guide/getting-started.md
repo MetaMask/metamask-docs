@@ -57,6 +57,13 @@ Clicking this button should call the following method:
 ethereum.enable()
 ```
 
+<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="PoqQNpw" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Ethereum Enable Example">
+  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/PoqQNpw">
+  Ethereum Enable Example</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
 
 Over time, this method is intended to grow to include various additional parameters to help your site request all the setup it needs from the user during setup.
