@@ -12,6 +12,13 @@ All of those methods require the sending account as a function parameter:
 
 Once you've [connected to a user](./getting-started.html), you can always re-check the current account by checking `ethereum.selectedAddress`.
 
+<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="MWwQzeB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Selected Address Example">
+  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/MWwQzeB">
+  Selected Address Example</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 If you'd like to be notified when the address changes, we have an event you can subscribe to:
 
 ```javascript
