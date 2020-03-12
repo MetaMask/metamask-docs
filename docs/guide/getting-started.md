@@ -76,6 +76,14 @@ const account = accounts[0] // We currently only ever provide a single account,
                             // but the array gives us some room to grow.
 ```
 
+<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="gOpvrGb" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Get Account By Async">
+  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/gOpvrGb">
+  Get Account By Async</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
 ## Choosing a Convenience Library
 
 Convenience libraries exist for a variety of reasons.
