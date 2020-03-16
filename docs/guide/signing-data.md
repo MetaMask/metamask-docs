@@ -16,7 +16,7 @@ There are currently five signing methods in MetaMask, and you might wonder the h
 * `signTypedData` (currently identical to `signTypedData_v1`)
 * `signTypedData_v1`
 * `signTypedData_v3`
-There are likely to be many more over time. When MetMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
+There are likely to be many more over time. When MetaMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
 
 In particular, the method `eth_sign` is an open-ended signing method that allows signing an arbitrary hash, which means it can be used to sign transactions, or any other data, making it a dangerous phishing risk.
 
