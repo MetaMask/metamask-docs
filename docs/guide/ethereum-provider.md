@@ -20,6 +20,8 @@ However, for developers of convenience libraries, and for developers who would l
 
 ## Upcoming Provider Changes
 
+**Note:** These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for details.
+
 In **early 2020**, we are introducing breaking changes to this API, which we encourage you to
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 We only break APIs as a last resort, and unfortunately had to pursue this change.
@@ -199,7 +201,8 @@ _[Click here](https://medium.com/metamask/no-longer-reloading-pages-on-network-c
 
 # New API
 
-This API will become available in **early 2020**.
+This API will become available in **early 2020**. It is _not_ live. Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for details.
+
 It will be the only API supported starting **following a six-week deprecation period.**
 If you want examples of how to setup your dapp using the new API, you can check out
 [this gist](https://gist.github.com/rekmarks/d318677c8fc89e5f7a2f526e00a0768a).
