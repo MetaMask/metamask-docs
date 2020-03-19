@@ -24,7 +24,7 @@ In **early 2020**, we are introducing breaking changes to this API, which we enc
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 We only break APIs as a last resort, and unfortunately had to pursue this change.
 
-We will begin supporting the new API in **Q1 2020**.
+We will begin supporting the new API in **early 2020**.
 We will support the old and new API for 6 weeks, after which only the new API will be supported.
 This update will make the MetaMask inpage provider fully compatible with
 [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
@@ -199,7 +199,7 @@ _[Click here](https://medium.com/metamask/no-longer-reloading-pages-on-network-c
 
 # New API
 
-This API will become available in **Q1 2020**.
+This API will become available in **early 2020**.
 It will be the only API supported starting **following a six-week deprecation period.**
 If you want examples of how to setup your dapp using the new API, you can check out
 [this gist](https://gist.github.com/rekmarks/d318677c8fc89e5f7a2f526e00a0768a).

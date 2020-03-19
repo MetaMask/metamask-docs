@@ -6,7 +6,7 @@ Once you have it running, you should find that new browser tabs have a `window.e
 This is the way MetaMask provides for you to interact with it.
 
 You can review the full API for that object [here](./ethereum-provider.html).
-Note that in **Q1 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
+Note that in **early 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
 
