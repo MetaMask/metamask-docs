@@ -1,5 +1,10 @@
 # Signing Data
 
+Since MetaMask makes cryptographic keys available to each user, websites can use these signatures for a variety of uses. Here are a few guides related to specific use cases:
+
+- [Authenticating websites](https://medium.com/hackernoon/writing-for-blockchain-wallet-signature-request-messages-6ede721160d5)
+- Some examples of signing off-chain messages for an on-chain protocol from our [MetaTransaction Hackathon](https://medium.com/metamask/our-metatransaction-hackathon-winner-a620551ccb9b?source=collection_home---4------2-----------------------)
+
 ## Signing Data with MetaMask
 If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/danfinlay/js-eth-personal-sign-examples).
 
