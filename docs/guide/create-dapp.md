@@ -53,11 +53,14 @@ As you can see here, as soon as the content in the DOM is loaded we are calling 
 
 What we'll cover in part one:
   
-- Connecting to the MetaMask Wallet
+- [Connecting to the MetaMask Wallet](/guide/create-dapp.html#connecting-to-the-metamask-wallet)
 - See our eth_accounts result
 - Display our network number
 - Display our ChainId
 - Display our Accounts
+
+
+## Connecting to the MetaMask Wallet
 
 
 
