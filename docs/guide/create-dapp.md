@@ -26,21 +26,29 @@ Open a terminal and make sure your terminal is inside the base diretory of the s
 ├─ metamask.css
 ├─ package.json
 └─ README.md
-````
+```
 You'll have some more files but that's nothing worry about!
 
 Open your terminal and navigate into the start folder. In this folder run:
-```
+``` bash
 npm install
 ```
 This will install all the neccessary dependencies we'll need for our project. This will have created a node_modules/ folder where all the dependencies are stored.
-## Basic Actions & Status
+
+Next run:
+``` bash
+npm run serve
+```
+
+Navigate to `http://localhost:9011`
+
+## Basic Actions & Status(Part 1)
 
 Now let's navigate into the contract.js file inside you start folder.
 
 Your file should look something like this. Don't worry about line 1-31.
 
-```javascript
+``` javascript
 const forwarderOrigin = 'http://localhost:9010'
 
 const initialize = () => {
@@ -61,7 +69,3 @@ What we'll cover in part one:
 
 
 ## Connecting to the MetaMask Wallet
-
-
-
-
