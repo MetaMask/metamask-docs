@@ -136,7 +136,7 @@ const MetamaskClientCheck = () => {
 //------/Inserted Code------\\
 }
 ```
-
+### MetaMask Not Installed Dapp Flow
 In our code block where MetaMask isn't installed and we ask the user to `'Click here to install MetaMask!'`, we need to make it if our button is clicked we:
 1. Redirect the user to the proper page to install the extension
 2. Disable the button
@@ -169,7 +169,7 @@ Inside this function we want to:
 2. Disable the button
 3. Start the onboarding process
 
-Above your `MetamaskClientCheck` function write this code.
+Above your `MetamaskClientCheck` function write/insert this code.
 ``` javascript
 //We create a new MetaMask onboarding object to use in our app
  const onboarding = new MetamaskOnboarding({ forwarderOrigin })
@@ -183,3 +183,80 @@ Above your `MetamaskClientCheck` function write this code.
   }
 ```
 GREAT! We've now made it to where if our end user doesn't have the MetaMask Extension they can install it. When they refresh the page the ethereum window object will be there and we can get on to connecting their MetaMask wallet to our Dapp!
+
+### MetaMask Installed Dapp Flow
+
+Next we need to revist our `MetamaskClientCheck` function and do similar functionality of what we did in our "MetaMask Not Installed" block to now our "MetaMask Is Installed" block of code.
+``` javascript
+const MetamaskClientCheck = () => {
+    //Now we check to see if Metmask is installed
+    if (!isMetaMaskInstalled()) {
+      //If it isn't installed we ask the user to click to install it
+      onboardButton.innerText = 'Click here to install MetaMask!'
+      //When the button is clicked we call th is function
+      onboardButton.onclick = onClickInstall
+      //The button is now disabled
+      onboardButton.disabled = false
+    }
+    else {
+      //If MetaMask is installed we ask the user to connect to their wallet
+      onboardButton.innerText = 'Connect'
+      //When the button is clicked we call this function to connect the users MetaMask Wallet
+      onboardButton.onclick = onClickConnect
+      //The button is now disabled
+      onboardButton.disabled = false
+    }
+  }
+  MetamaskClientCheck();
+```
+
+Now that we've created a function that will be called whenever we click the button to trigger a connection to our wallet and disabled the button. Let's create/dive into the `onClickConnect` function and build the logic inside of it.
+
+Inside this function we want to:
+1. create an async function that will try to call the ethereum.enable object
+2. catch an error and log it to the console
+
+Under your `onClickInstall` function write/insert this code.
+``` javascript
+const onClickConnect = async () => {
+    try {
+      //Will Start the MetaMask Extension
+      await ethereum.enable()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+```
+Great! Now once you click the button the MetaMask Extension will pop up and connect your wallet.
+
+### Get Ethereum Accounts
+After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it.
+
+``` javascript
+  //Basic Actions Section
+  const onboardButton = document.getElementById('connectButton');
+  const getAccountsButton = document.getElementById('getAccounts')
+  const getAccountsResult = document.getElementById('getAccountsResult')
+```
+Now that we've grabbed our eth_accounts button and our paragraph field to display it in we now have to grab the data.
+
+Under our `MetamaskClientCheck()` function let's write/insert the code below.
+``` javascript
+ //Eth_Accounts-getAccountsButton
+  getAccountsButton.addEventListener('click', () => {
+    //we use eth_accounts because it returns a list of addresses owned by us.
+    ethereum.sendAsync({ method: 'eth_accounts' }, (error, response) => {
+      if (error) {
+        console.error(error)
+        getAccountsResults.innerHTML = `Error: ${error}`
+      } else {
+        //We take the first address in the array of addresses and display it
+        getAccountsResults.innerHTML = response.result[0] || 'Not able to get accounts'
+      }
+    })
+  })
+```
+CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
+
+###
+
