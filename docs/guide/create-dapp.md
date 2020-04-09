@@ -7,9 +7,9 @@ We will be building this [app](https://metamask.github.io/test-dapp/)
 Before you setup make sure you've visited and gone through our [Getting Started Guide](http://localhost:8080/guide/getting-started.html#getting-started)
 
 Make sure you have:
-1. Have the [MetaMask Extendsion](https://metamask.io/download.html) downlaoded.
+1. Have the [MetaMask Extension](https://metamask.io/download.html) downloaded.
 2. Have Node.js [Downloaded and Installed](https://nodejs.org/)
-3. Clone/Download the [project files](https://github.com/BboyAkers/simple-dapp-tutorial) from Github.
+3. Clone/Download the [Project Files](https://github.com/BboyAkers/simple-dapp-tutorial) from Github.
 4. Have your favorite Text Editor or IDE installed. I personally like [Visual Studio Code](https://code.visualstudio.com/)
 
 ### Open Project Folder
@@ -46,7 +46,7 @@ Navigate to `http://localhost:9011`
 
 Now let's navigate into the contract.js file inside you start folder.
 
-Your file should look something like this. Don't worry about line 1-31.
+Your file should look something like this. Don't worry about lines 1-31.
 
 ``` javascript
 const forwarderOrigin = 'http://localhost:9010'
@@ -136,7 +136,7 @@ const MetamaskClientCheck = () => {
 //------/Inserted Code------\\
 }
 ```
-### MetaMask Not Installed Dapp Flow
+### MetaMask "Not Installed" Dapp Flow
 In our code block where MetaMask isn't installed and we ask the user to `'Click here to install MetaMask!'`, we need to make it if our button is clicked we:
 1. Redirect the user to the proper page to install the extension
 2. Disable the button
@@ -184,7 +184,7 @@ Above your `MetamaskClientCheck` function write/insert this code.
 ```
 GREAT! We've now made it to where if our end user doesn't have the MetaMask Extension they can install it. When they refresh the page the ethereum window object will be there and we can get on to connecting their MetaMask wallet to our Dapp!
 
-### MetaMask Installed Dapp Flow
+### MetaMask "Installed" Dapp Flow
 
 Next we need to revist our `MetamaskClientCheck` function and do similar functionality of what we did in our "MetaMask Not Installed" block to now our "MetaMask Is Installed" block of code.
 ``` javascript
