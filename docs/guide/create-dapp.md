@@ -68,7 +68,7 @@ What we'll cover in part one:
 - Display our Accounts
 
 
-## Connecting to the MetaMask Wallet
+### Connecting to the MetaMask Wallet
 
 The first thing we need to do in our Dapp is to connect to our MetaMask Wallet.
 1. We need to create a function to see if the MetaMask Chrome extension is installed
