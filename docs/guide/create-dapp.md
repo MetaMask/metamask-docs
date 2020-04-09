@@ -42,7 +42,7 @@ npm run serve
 
 Navigate to `http://localhost:9011`
 
-## Basic Actions & Status(Part 1)
+## Basic Action(Part 1)
 
 Now let's navigate into the contract.js file inside you start folder.
 
@@ -258,5 +258,4 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
 ```
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
 
-###
 
