@@ -69,3 +69,117 @@ What we'll cover in part one:
 
 
 ## Connecting to the MetaMask Wallet
+
+The first thing we need to do in our Dapp is to connect to our MetaMask Wallet.
+1. We need to create a function to see if the MetaMask Chrome extension is installed
+2. If MetaMask is not installed we:
+   1. Change our `connectButton` to `Click here to install MetaMask`
+   2. When clicking that button it should take us to a page that will allow us to install the extension
+   3. Disable the button
+3. If MetaMask is installed we:
+   1. Change our `connectButton` to `Connect`
+   2. When clicking that button it should allow us to connect to our MetaMask wallet
+   3. disable the button
+
+Let's get to it!!
+
+### MetaMask Extension Check
+
+In our code we need to connect to our button from our index.html
+``` javascript
+const initialize = () => { 
+  //Basic Actions Section
+  const onboardButton = document.getElementById('connectButton')
+
+}
+```
+
+Next we create a check function called `isMetaMaskInstalled` to see if the MetaMask extension is installed
+
+``` javascript
+const initialize = () => { 
+  //Basic Actions Section
+  const onboardButton = document.getElementById('connectButton')
+
+  //Created check function to see if the MetaMask extenstion is installed
+  const isMetaMaskInstalled = () => {
+    //Have to check the ehtereum binding on the window object to see if it's installed 
+    return Boolean(window.ethereum && window.ethereum.isMetaMask)
+  }
+}
+```
+Next we need to create a `MetaMaskClientCheck` function to see if we need to change the button text based on if the MetaMask Extension is installed or not.
+``` javascript
+const initialize = () => { 
+  //Basic Actions Section
+  const onboardButton = document.getElementById('connectButton')
+
+  //Created check function to see if the MetaMask extenstion is installed
+  const isMetaMaskInstalled = () => {
+    //Have to check the ethereum binding on the window object to see if it's installed 
+    return Boolean(window.ethereum && window.ethereum.isMetaMask)
+  }
+
+//------Inserted Code------\\
+const MetamaskClientCheck = () => {
+    //Now we check to see if Metmask is installed
+    if (!isMetaMaskInstalled()) {
+      //If it isn't installed we ask the user to click to install it
+      onboardButton.innerText = 'Click here to install MetaMask!'
+    }
+    else {
+      //If it is installed we change our button text
+      onboardButton.innerText = 'Connect'
+    }
+  }
+  MetamaskClientCheck();
+//------/Inserted Code------\\
+}
+```
+
+In our code block where MetaMask isn't installed and we ask the user to `'Click here to install MetaMask!'`, we need to make it if our button is clicked we:
+1. Redirect the user to the proper page to install the extension
+2. Disable the button
+
+``` javascript
+const MetamaskClientCheck = () => {
+    //Now we check to see if Metmask is installed
+    if (!isMetaMaskInstalled()) {
+      //If it isn't installed we ask the user to click to install it
+      onboardButton.innerText = 'Click here to install MetaMask!'
+      //When the button is clicked we call th is function
+      onboardButton.onclick = onClickInstall
+      //The button is now disabled
+      onboardButton.disabled = false
+    }
+    else {
+      //If it is installed we change our button text
+      onboardButton.innerText = 'Connect'
+    }
+  }
+  MetamaskClientCheck();
+```
+We've created a function that will be called whenever we click the button and disabled it. Let's dive into the `onClickInstall` function and create the logic inside of it.
+
+::: tip
+For this part we will be using the '@metamask/onboarding' library we installed when we did the npm install. To learn more visit [here](https://github.com/MetaMask/metamask-onboarding#metamask-onboarding)
+:::
+Inside this function we want to:
+1. Change the text of the button to `Onboarding in progress`
+2. Disable the button
+3. Start the onboarding process
+
+Above your `MetamaskClientCheck` function write this code.
+``` javascript
+//We create a new MetaMask onboarding object to use in our app
+ const onboarding = new MetamaskOnboarding({ forwarderOrigin })
+
+ //This will start the onboarding proccess
+  const onClickInstall = () => {
+    onboardButton.innerText = 'Onboarding in progress'
+    onboardButton.disabled = true
+    //On this object we have startOnboarding which will start the onboarding process for our end user
+    onboarding.startOnboarding()
+  }
+```
+GREAT! We've now made it to where if our end user doesn't have the MetaMask Extension they can install it. When they refresh the page the ethereum window object will be there and we can get on to connecting their MetaMask wallet to our Dapp!
