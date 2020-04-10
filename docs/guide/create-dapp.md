@@ -52,12 +52,12 @@ Your file should look something like this. Don't worry about lines 1-31.
 const forwarderOrigin = 'http://localhost:9010'
 
 const initialize = () => {
-  //You will start here 
+  //You will start here                                                                                                                                                                                                                                                                                     
 }
 window.addEventListener('DOMContentLoaded', initialize)
 ```
 
-As you can see here, as soon as the content in the DOM is loaded we are calling our initialized function. Now before we start writing any code we need to see what's on our task list for the first part of this app.
+As you can see here, as soon as the content in the DOM is loaded we are calling our initialize function. Now before we start writing any code we need to see what's on our task list for the first part of this app.
 
 What we'll cover in part one:
   
