@@ -4,7 +4,7 @@ We will be building this [app](https://metamask.github.io/test-dapp/)
 :::
 
 ## Project Setup
-Before you setup make sure you've visited and gone through our [Getting Started Guide](http://localhost:8080/guide/getting-started.html#getting-started)
+Before you setup make sure you've visited and gone through our [Getting Started Guide](/guide/getting-started.html#getting-started)
 
 Make sure you have:
 1. Have the [MetaMask Extension](https://metamask.io/download.html) downloaded.
@@ -79,7 +79,7 @@ The first thing we need to do in our Dapp is to connect to our MetaMask Wallet.
 3. If MetaMask is installed we:
    1. Change our `connectButton` to `Connect`
    2. When clicking that button it should allow us to connect to our MetaMask wallet
-   3. disable the button
+   3. Disable the button
 
 Let's get to it!!
 
@@ -103,7 +103,7 @@ const initialize = () => {
 
   //Created check function to see if the MetaMask extenstion is installed
   const isMetaMaskInstalled = () => {
-    //Have to check the ehtereum binding on the window object to see if it's installed 
+    //Have to check the ethereum binding on the window object to see if it's installed 
     return Boolean(window.ethereum && window.ethereum.isMetaMask)
   }
 }
@@ -210,7 +210,7 @@ const MetamaskClientCheck = () => {
   MetamaskClientCheck();
 ```
 
-Now that we've created a function that will be called whenever we click the button to trigger a connection to our wallet and disabled the button. Let's create/dive into the `onClickConnect` function and build the logic inside of it.
+Now we've created a function that will be called whenever we click the button to trigger a connection to our wallet and disable the button. Next, let's dive into the `onClickConnect` function and build the logic inside of it.
 
 Inside this function we want to:
 1. create an async function that will try to call the ethereum.enable object
@@ -257,5 +257,3 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
   })
 ```
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
-
-
