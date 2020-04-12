@@ -257,3 +257,4 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
   })
 ```
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
+
