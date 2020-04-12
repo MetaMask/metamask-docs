@@ -227,7 +227,6 @@ try {
   // You now have an array of accounts!
   // Currently only ever one:
   // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
-
 } catch (error) {
   if (error.code === 4001) { // EIP 1193 userRejectedRequest error
     console.log('Please connect to MetaMask.')

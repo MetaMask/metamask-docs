@@ -1,9 +1,6 @@
 # Accessing Accounts
 
-User accounts are used in a variety of contexts in Ethereum, they serve as neat identifiers,
-but no use is as important as calling _wallet methods_.
-These methods involve a signature or transaction approval.
-All of those methods require the sending account as a function parameter:
+User accounts are used in a variety of contexts in Ethereum, including as identifiers and for signing transactions. In order to request a signature from the user or have the user approve a transaction, one must be able to access the user's accounts. The `wallet methods` below involve a signature or transaction approval and all require the sending account as a function parameter.
 
 - `eth_sendTransaction`
 - `eth_sign` (insecure and unadvised to use)
