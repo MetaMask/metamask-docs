@@ -30,7 +30,7 @@ and input into **[this demo app](https://jennypollack.github.io/function_signatu
 
 ##### Alternate steps using remix.ethereum.org:
 
-Paste the contract code from [bokky's blog post](https://www.bokconsulting.com.au/blog/a-quick-look-at-paritys-signature-registry-contract/) into [remix](remix.ethereum.org)
+Paste the contract code from [bokky's blog post](https://www.bokconsulting.com.au/blog/a-quick-look-at-paritys-signature-registry-contract/) into [remix](https://remix.ethereum.org)
 
 Set the correct compiler version based on the contract.
 
