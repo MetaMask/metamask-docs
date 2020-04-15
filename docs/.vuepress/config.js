@@ -34,7 +34,7 @@ module.exports = ctx => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference','Best Practices'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference','Best Practices', 'Resources'),
         }
       }
     }
@@ -65,7 +65,7 @@ module.exports = ctx => ({
   ]
 })
 
-function getGuideSidebar (groupA, groupB, groupC) {
+function getGuideSidebar (groupA, groupB, groupC, groupD) {
   return [
     {
       title: groupA,
@@ -96,6 +96,13 @@ function getGuideSidebar (groupA, groupB, groupC) {
         'registering-function-names',
         'registering-your-token',
         'defining-your-icon',
+      ]
+    },
+    {
+      title: groupD,
+      collapsable: false,
+      children: [
+        'create-dapp'
       ]
     }
   ]
