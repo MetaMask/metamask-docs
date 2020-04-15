@@ -119,7 +119,7 @@ const initialize = () => {
   const isMetaMaskInstalled = () => {
     //Have to check the ethereum binding on the window object to see if it's installed
     const { ethereum } = window
-    return Boolean(window.ethereum && window.ethereum.isMetaMask)
+    return Boolean(ethereum && ethereum.isMetaMask)
   }
 
 //------Inserted Code------\\
@@ -259,4 +259,3 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
   })
 ```
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
-
