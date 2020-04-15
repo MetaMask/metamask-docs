@@ -1,6 +1,6 @@
 # Onboarding Library
 
-MetaMask now allows sites to register as onboarding the user, so that the user is redirected back to the initiating site after onboarding. This is accomplished through the use of the [metamask-onboarding library](https://github.com/MetaMask/metamask-onboarding) and the [MetaMask forwarder](https://github.com/MetaMask/forwarder).
+MetaMask now allows sites to register as onboarding the user, so that the user is redirected back to the initiating site after onboarding. This is accomplished through the use of the [metamask-onboarding library](https://github.com/MetaMask/metamask-onboarding).
 
 At the end of onboarding, the text of the button will show the origin of the site the user is about to be redirected to. This is intended to help prevent phishing attempts, as it highlights that a redirect is taking place to an untrusted third party.
 
