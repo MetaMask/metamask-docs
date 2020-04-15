@@ -13,11 +13,11 @@ Make sure you have:
 4. Have your favorite Text Editor or IDE installed. I personally like [Visual Studio Code](https://code.visualstudio.com/)
 
 ### Open Project Folder
-Open the poejct folder. Navigate to start->index.html, and look at the comment stating part 1. We will be using/buidling off of this entire section for the first part of the tutorial.
+Open the project folder. Navigate to start->index.html, and look at the comment stating part 1. We will be using/building off of this entire section for the first part of the tutorial.
 
 
 ### Install Dependencies
-Open a terminal and make sure your terminal is inside the base diretory of the start/ folder. Inside the folder the files should look like this:
+Open a terminal and make sure your terminal is inside the base directory of the start/ folder. Inside the folder the files should look like this:
 
 ```
 .
@@ -33,7 +33,7 @@ Open your terminal and navigate into the start folder. In this folder run:
 ``` bash
 npm install
 ```
-This will install all the neccessary dependencies we'll need for our project. This will have created a node_modules/ folder where all the dependencies are stored.
+This will install all the necessary dependencies we'll need for our project. This will have created a node_modules/ folder where all the dependencies are stored.
 
 Next run:
 ``` bash
@@ -101,10 +101,11 @@ const initialize = () => {
   //Basic Actions Section
   const onboardButton = document.getElementById('connectButton')
 
-  //Created check function to see if the MetaMask extenstion is installed
+  //Created check function to see if the MetaMask extension is installed
   const isMetaMaskInstalled = () => {
-    //Have to check the ethereum binding on the window object to see if it's installed 
-    return Boolean(window.ethereum && window.ethereum.isMetaMask)
+    //Have to check the ethereum binding on the window object to see if it's installed
+    const { ethereum } = window
+    return Boolean(ethereum && ethereum.isMetaMask)
   }
 }
 ```
@@ -114,15 +115,16 @@ const initialize = () => {
   //Basic Actions Section
   const onboardButton = document.getElementById('connectButton')
 
-  //Created check function to see if the MetaMask extenstion is installed
+  //Created check function to see if the MetaMask extension is installed
   const isMetaMaskInstalled = () => {
-    //Have to check the ethereum binding on the window object to see if it's installed 
-    return Boolean(window.ethereum && window.ethereum.isMetaMask)
+    //Have to check the ethereum binding on the window object to see if it's installed
+    const { ethereum } = window
+    return Boolean(ethereum && ethereum.isMetaMask)
   }
 
 //------Inserted Code------\\
 const MetamaskClientCheck = () => {
-    //Now we check to see if Metmask is installed
+    //Now we check to see if Metamask is installed
     if (!isMetaMaskInstalled()) {
       //If it isn't installed we ask the user to click to install it
       onboardButton.innerText = 'Click here to install MetaMask!'
@@ -186,7 +188,7 @@ GREAT! We've now made it to where if our end user doesn't have the MetaMask Exte
 
 ### MetaMask "Installed" Dapp Flow
 
-Next we need to revist our `MetamaskClientCheck` function and do similar functionality of what we did in our "MetaMask Not Installed" block to now our "MetaMask Is Installed" block of code.
+Next we need to revisit our `MetamaskClientCheck` function and do similar functionality of what we did in our "MetaMask Not Installed" block to now our "MetaMask Is Installed" block of code.
 ``` javascript
 const MetamaskClientCheck = () => {
     //Now we check to see if Metmask is installed
@@ -257,4 +259,3 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
   })
 ```
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
-
