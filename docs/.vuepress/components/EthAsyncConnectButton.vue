@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <button type="button" class="enableEthereumButton" @click="getAccount()">
+      Enable Ethereum
+    </button>
+    <p>Account: {{ethAccount}}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      ethereum: window.ethereum,
+      ethAccount: ''
+    };
+  },
+  methods: {
+    async getAccount() {
+      const accounts = await ethereum.enable() // We currently only ever provide a single account,
+      const account = accounts[0] // but the array gives us some room to grow.
+       this.ethAccount= account;
+    },
+  },
+};
+</script>
