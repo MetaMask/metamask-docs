@@ -1,5 +1,6 @@
 import EthConnectButton from './components/EthConnectButton';
 import EthAsyncConnectButton from './components/EthAsyncConnectButton';
+import ChangeAccount from './components/ChangeAccount';
 
 export default ({ Vue, isServer }) => {
   if (!isServer) {
@@ -9,4 +10,5 @@ export default ({ Vue, isServer }) => {
   }
  Vue.component('EthConnectButton', EthConnectButton);
  Vue.component('EthAsyncConnectButton', EthAsyncConnectButton);
+ Vue.component('ChangeAccount', ChangeAccount);
 }

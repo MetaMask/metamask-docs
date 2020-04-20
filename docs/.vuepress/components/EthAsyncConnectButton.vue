@@ -18,8 +18,7 @@ export default {
   methods: {
     async getAccount() {
       const accounts = await ethereum.enable() // We currently only ever provide a single account,
-      const account = accounts[0] // but the array gives us some room to grow.
-       this.ethAccount= account;
+      this.ethAccount = accounts[0] // but the array gives us some room to grow.
     },
   },
 };
