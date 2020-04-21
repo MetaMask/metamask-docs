@@ -96,6 +96,7 @@ function getGuideSidebar (groupA, groupB, groupC, groupD) {
         'registering-function-names',
         'registering-your-token',
         'defining-your-icon',
+        'onboarding-library',
       ]
     },
     {
