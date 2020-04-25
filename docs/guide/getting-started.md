@@ -58,6 +58,7 @@ ethereum.enable()
 ```
 
 **Example:**
+
 <EthConnectButton />
 
 

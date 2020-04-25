@@ -2,7 +2,7 @@ const { fs, path } = require('@vuepress/shared-utils')
 
 module.exports = ctx => ({
   dest: 'docs/dist',
-  
+
   locales: {
     '/': {
       lang: 'en-US',
@@ -34,14 +34,13 @@ module.exports = ctx => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference','Best Practices', 'Resources'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Resources'),
         }
       }
     }
   },
   plugins: [
     ['@vuepress/back-to-top', true],
-    ['ethers', true],
     ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: true
@@ -66,7 +65,7 @@ module.exports = ctx => ({
   ]
 })
 
-function getGuideSidebar (groupA, groupB, groupC, groupD) {
+function getGuideSidebar(groupA, groupB, groupC, groupD) {
   return [
     {
       title: groupA,

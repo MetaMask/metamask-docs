@@ -11,7 +11,6 @@
 <script>
 export default {
   mounted() {
-    console.log('heyy')
     const handler = (accounts) => {
       this.checkAddress = accounts[0]
     }
