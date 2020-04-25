@@ -12,8 +12,8 @@ export default ({ Vue, isServer }) => {
     })
   }
 
- Vue.component('EthConnectButton', EthConnectButton);
- Vue.component('EthAsyncConnectButton', EthAsyncConnectButton);
- Vue.component('ChangeAccount', ChangeAccount);
- Vue.component('SendTransaction', SendTransaction);
+  Vue.component('EthConnectButton', EthConnectButton);
+  Vue.component('EthAsyncConnectButton', EthAsyncConnectButton);
+  Vue.component('ChangeAccount', ChangeAccount);
+  Vue.component('SendTransaction', SendTransaction);
 }

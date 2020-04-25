@@ -10,7 +10,6 @@ User accounts are used in a variety of contexts in Ethereum, including as identi
 Once you've [connected to a user](./getting-started.html), you can always re-check the current account by checking `ethereum.selectedAddress`.
 
 **Example:**
-
 <ChangeAccount />
 
 If you'd like to be notified when the address changes, we have an event you can subscribe to:
