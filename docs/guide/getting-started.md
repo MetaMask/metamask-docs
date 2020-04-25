@@ -57,12 +57,24 @@ Clicking this button should call the following method:
 ethereum.enable()
 ```
 
-<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="PoqQNpw" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Ethereum Enable Example">
-  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/PoqQNpw">
-  Ethereum Enable Example</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+**Example:**
+
+<EthConnectButton />
+
+
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+```
+
+
+```javascript
+const ethereumButton = document.querySelector(".enableEthereumButton");
+
+ethereumButton.addEventListener("click", () => {
+  //Will Start the metamask extension
+  ethereum.enable();
+});
+```
 
 This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
 
@@ -71,17 +83,33 @@ Over time, this method is intended to grow to include various additional paramet
 Since it returns a promise, if you're in an `async` function, you may log in like this:
 
 ```javascript
-const accounts = await ethereum.enable()
-const account = accounts[0] // We currently only ever provide a single account,
-                            // but the array gives us some room to grow.
+const accounts = await ethereum.enable() // We currently only ever provide a single account,
+const account = accounts[0] // but the array gives us some room to grow.
 ```
 
-<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="gOpvrGb" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Get Account By Async">
-  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/gOpvrGb">
-  Get Account By Async</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+**Example:**
+
+<EthAsyncConnectButton />
+
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+<h2>Account: <span class="showAccount"></span></h2>
+```
+
+```javascript
+const ethereumButton = document.querySelector(".enableEthereumButton");
+const showAccount = document.querySelector(".showAccount");
+
+ethereumButton.addEventListener("click", () => {
+  getAccount();
+});
+
+async function getAccount() {
+  const accounts = await ethereum.enable();
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}
+```
 
 
 ## Choosing a Convenience Library
