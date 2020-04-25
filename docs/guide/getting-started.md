@@ -58,6 +58,7 @@ ethereum.enable()
 ```
 
 **Example:**
+
 <EthConnectButton />
 
 
@@ -87,6 +88,7 @@ const account = accounts[0] // but the array gives us some room to grow.
 ```
 
 **Example:**
+
 <EthAsyncConnectButton />
 
 ```html

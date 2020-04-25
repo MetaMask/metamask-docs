@@ -22,13 +22,45 @@ ethereum.sendAsync({
   from: ethereum.selectedAddress,
 }, callback)
 ```
+**Example**
 
-<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="BboyAkers" data-slug-hash="NWqLJNm" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Send Eth Example">
-  <span>See the Pen <a href="https://codepen.io/BboyAkers/pen/NWqLJNm">
-  Send Eth Example</a> by Austin Akers (<a href="https://codepen.io/BboyAkers">@BboyAkers</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<SendTransaction />
+
+```html
+<button class="enableEthereumButton btn">Enable Ethereum</button>
+<button class="sendEthButton btn">Send Eth</button>
+```
+
+```javascript
+const ethereumButton = document.querySelector(".enableEthereumButton");
+const sendEthButton = document.querySelector(".sendEthButton");
+
+let accounts = [];
+
+//Sending Ethereum to an address
+sendEthButton.addEventListener("click", () => {
+  web3.eth.sendTransaction(
+    {
+      from: accounts[0],
+      to: "0x2f318C334780961FB129D2a6c30D0763d9a5C970",
+      value: "0x29a2241af62c0000",
+      gas: 21000,
+      gasPrice: 20000000000
+    },
+    result => {
+      console.log(result);
+    }
+  );
+});
+
+ethereumButton.addEventListener("click", () => {
+  getAccount();
+});
+
+async function getAccount() {
+  accounts = await ethereum.enable();
+}
+```
 
 ## Transaction Parameters
 

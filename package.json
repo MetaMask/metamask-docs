@@ -33,5 +33,8 @@
     "vue-toasted": "^1.1.25",
     "vuepress": "^1.0.3",
     "vuepress-plugin-flowchart": "^1.4.2"
+  },
+  "dependencies": {
+    "ethers": "^4.0.47"
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" class="enableEthereumButton" @click="getAccount()">
+    <button type="button" class="btn primaryBtn" @click="getAccount()">
       Enable Ethereum
     </button>
     <p>Account: {{ethAccount}}</p>
