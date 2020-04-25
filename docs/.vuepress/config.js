@@ -41,6 +41,7 @@ module.exports = ctx => ({
   },
   plugins: [
     ['@vuepress/back-to-top', true],
+    ['ethers', true],
     ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: true
@@ -96,6 +97,7 @@ function getGuideSidebar (groupA, groupB, groupC, groupD) {
         'registering-function-names',
         'registering-your-token',
         'defining-your-icon',
+        'onboarding-library',
       ]
     },
     {

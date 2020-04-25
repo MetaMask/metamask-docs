@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <button class="enableEthereumButton" @click="connectToEthereumNetwork()">
+    <button class="btn primaryBtn" @click="connectToEthereumNetwork()">
       Enable Ethereum
     </button>
-  </div>
 </template>
 
 <script>
