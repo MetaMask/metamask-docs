@@ -34,7 +34,7 @@ module.exports = ctx => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Resources'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Mobile', 'Resources'),
         }
       }
     }
@@ -65,10 +65,10 @@ module.exports = ctx => ({
   ]
 })
 
-function getGuideSidebar(groupA, groupB, groupC, groupD) {
+function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
   return [
     {
-      title: groupA,
+      title: guide,
       collapsable: false,
       children: [
         '',
@@ -80,7 +80,7 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupB,
+      title: api,
       collapsable: false,
       children: [
         'ethereum-provider',
@@ -90,7 +90,7 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupC,
+      title: bestPractices,
       collapsable: false,
       children: [
         'registering-function-names',
@@ -100,7 +100,15 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupD,
+      title: mobile,
+      collapsable: false,
+      children: [
+        'dapp-compatibility',
+
+      ]
+    },
+    {
+      title: resources,
       collapsable: false,
       children: [
         'create-dapp'

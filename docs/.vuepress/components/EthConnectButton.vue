@@ -8,12 +8,15 @@
 export default {
   data() {
     return {
-      ethereum: window.ethereum,
+      ethereum: null,
     };
+  },
+  mounted() {
+    this.ethereum = window.ethereum
   },
   methods: {
     connectToEthereumNetwork() {
-      this.ethereum.enable();
+      ethereum.enable();
     },
   },
 };
