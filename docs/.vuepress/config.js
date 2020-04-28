@@ -21,7 +21,7 @@ module.exports = _ctx => ({
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
 
-  theme: '@vuepress/vue',
+  theme: '@vuepress/theme-default',
 
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
