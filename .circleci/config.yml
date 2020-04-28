@@ -3,13 +3,17 @@ version: 2.1
 workflows:
   test-and-deploy:
     jobs:
-      - lint
+      - prep-deps
+      - lint:
+          requires:
+            - prep-deps
       - build:
           filters:
             branches:
               only:
                 - master
           requires:
+            - prep-deps
             - lint
 
 jobs:
@@ -20,12 +24,13 @@ jobs:
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Deploy site
           command: |
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
-            yarn
             yarn build
             git checkout $TARGET_BRANCH
             cp -r docs/dist/* .
@@ -38,8 +43,23 @@ jobs:
       - image: circleci/node:11
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Lint
           command: |
-            yarn
             yarn lint
+
+  prep-deps:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: |
+            yarn --frozen-lockfile --ignore-scripts
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
