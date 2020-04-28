@@ -42,9 +42,9 @@ jobs:
     docker:
       - image: circleci/node:11
     steps:
+      - checkout
       - attach_workspace:
           at: .
-      - checkout
       - run:
           name: Lint
           command: |
@@ -62,4 +62,4 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-          - node_modules
+            - node_modules
