@@ -8,20 +8,25 @@ In MetaMask, using the `ethereum.sendAsync` method directly, sending a transacti
 const transactionParameters = {
   nonce: '0x00', // ignored by MetaMask
   gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
-  gas: '0x2710',  // customizable by user during MetaMask confirmation.
+  gas: '0x2710', // customizable by user during MetaMask confirmation.
   to: '0x0000000000000000000000000000000000000000', // Required except during contract publications.
-  from: web3.eth.accounts[0], // must match user's active address.
+  from: ethereum.selectedAddress, // must match user's active address.
   value: '0x00', // Only required to send ether to the recipient from the initiating external account.
-  data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
-  chainId: 3 // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
-}
+  data:
+    '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
+  chainId: 3, // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+};
 
-ethereum.sendAsync({
-  method: 'eth_sendTransaction',
-  params: [transactionParameters],
-  from: ethereum.selectedAddress,
-}, callback)
+ethereum.sendAsync(
+  {
+    method: 'eth_sendTransaction',
+    params: [transactionParameters],
+    from: ethereum.selectedAddress,
+  },
+  callback
+);
 ```
+
 **Example**
 
 <SendTransaction />
@@ -32,28 +37,34 @@ ethereum.sendAsync({
 ```
 
 ```javascript
-const ethereumButton = document.querySelector(".enableEthereumButton");
-const sendEthButton = document.querySelector(".sendEthButton");
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const sendEthButton = document.querySelector('.sendEthButton');
 
 let accounts = [];
 
 //Sending Ethereum to an address
-sendEthButton.addEventListener("click", () => {
-  web3.eth.sendTransaction(
+sendEthButton.addEventListener('click', () => {
+  ethereum.sendAsync(
     {
-      from: accounts[0],
-      to: "0x2f318C334780961FB129D2a6c30D0763d9a5C970",
-      value: "0x29a2241af62c0000",
-      gas: 21000,
-      gasPrice: 20000000000
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: accounts[0],
+          to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+          value: '0x29a2241af62c0000',
+          gasPrice: '0x09184e72a000',
+          gas: '0x2710',
+        },
+      ],
     },
-    result => {
-      console.log(result);
+    (err, result) => {
+      if (err) console.error(err);
+      else console.log(result);
     }
   );
 });
 
-ethereumButton.addEventListener("click", () => {
+ethereumButton.addEventListener('click', () => {
   getAccount();
 });
 
@@ -82,7 +93,7 @@ Optional parameter - best used on private blockchains.
 
 In Ethereum, the pool of pending transactions offer their gas price as a sort of auction bid to the validators to include this transaction in a block in exchange for a transaction fee. That means high gas prices can mean faster processing, but also more expensive transactions.
 
-MetaMask helps users select a competitive gas price on the Ethereum Main Network and popular test networks. We make requests to an API maintained by our friends at MyCrypto and allow users to choose between "slow," "medium," and "fast" options for their gas price. 
+MetaMask helps users select a competitive gas price on the Ethereum Main Network and popular test networks. We make requests to an API maintained by our friends at MyCrypto and allow users to choose between "slow," "medium," and "fast" options for their gas price.
 
 We cannot know about the gas market on all blockchains because it requires some deep analysis. For this reason, while you can safely ignore this parameter on our main hosted networks, you may want to suggest a gas price in situations where your application knows more about the target network than we do.
 
@@ -113,4 +124,3 @@ This field is also used for specifying contract methods and their parameters. Yo
 ### Chain ID [currently ignored]
 
 Chain ID is currently derived by the user's current selected network at `ethereum.networkVersion`. In the future we will probably allow a way to connect to multiple networks at once, at which point this parameter will become important, so it may be useful to be in the habit of including now.
-

@@ -1,6 +1,7 @@
 # Common Terms
 
 ## Words are Hard
+
 <p id="agoctitecs_p">
   This is a list of terms you might encounter when using the MetaMask interface.
 </p>
@@ -10,6 +11,7 @@
 ---
 
 ### Wallet
+
 <ul>
   <li id="wallet_l1">The interface / client / wrapper / holder that you use to manage your account(s).</li>
 
@@ -17,6 +19,7 @@
 </ul>
 
 ### Account
+
 <ul>
   <li id="account_l1">A public & private keypair that "holds" your funds.</li>
 
@@ -26,6 +29,7 @@
 </ul>
 
 ### Address _("Public Key")_
+
 <ul>
   <li id="address_l1">You use this to send funds <b>to</b> an account.</li>
   <li id="address_l2">Sometimes referred to as the "public key"</li>
@@ -35,6 +39,7 @@
 </ul>
 
 ### Public Key
+
 <ul>
   <li id="pubk_l1">In cryptography, you have a keypair: the public and private key.</li>
   <li id="pubk_l2">You can derive a public key from a private key, but cannot derive a private key from a public key.</li>
@@ -43,6 +48,7 @@
 </ul>
 
 ### Private Key
+
 <ul>
   <li id="privk_1">You use this to send funds <b>from</b> an account.</li>
   <li id="privk_2">The secret half of your Address / public key.</li>
@@ -54,6 +60,7 @@
 </ul>
 
 ### Keystore File
+
 <ul>
   <li id="keystoref_l1">
     Encrypted version of your private key in JSON format (though it does not have a JSON extension)
@@ -81,6 +88,7 @@
 </ul>
 
 ### Mnemonic Phrase / Seed Phrase / Seed Words
+
 <ul>
   <li id="mphrase_l1">
     Another fancy version of your private key, that is actually used to derive multiple private keys.
@@ -105,7 +113,8 @@
   </li>
 </ul>
 
-### Hardware Wallet:
+### Hardware Wallet
+
 <ul>
   <li id="hardwarew_l1">
     Typically, a single-purpose device that "holds" your private key(s), ensuring your private keys are safe.
@@ -124,7 +133,8 @@
   </li>
 </ul>
 
-### Identicon / AddressIdenticon / AddressIcon:
+### Identicon / AddressIdenticon / AddressIcon
+
 <ul>
   <li id="addressIdent_l1">
     The colorful blob of colors that corresponds to your address.
@@ -144,6 +154,7 @@
 </ul>
 
 ### Hexadecimal
+
 <ul>
   <li id="hexadecimal_l">
     Used all over Ethereum for a variety of things, a hexadecimal string is comprised of the numbers <code>0 1 2 3 4 5 6 7 8 9</code> and <code>A B C D E F</code>
@@ -151,6 +162,7 @@
 </ul>
 
 ### Seed
+
 <ul>
   <li id="seed_l1">
     The input given to derive a private key. This should always be generated in a truly random way, not something you make up with your measly human brain.
@@ -161,6 +173,7 @@
 </ul>
 
 ### Brain Wallet
+
 <ul>
   <li id="bw_l1">
     An account generated from a seed or password or passphrase of your choosing.
@@ -179,8 +192,8 @@
   </li>
 </ul>
 
-
 ### Entropy
+
 <ul>
   <li id="entropy_l1">
     Also known as "randomness".
@@ -200,6 +213,7 @@
 </ul>
 
 ### Derive / Derivation
+
 <ul>
   <li id="deriveDeriv_l1">
     To derive something is to obtain it from an original source.
@@ -213,6 +227,7 @@
 </ul>
 
 ### Encryption
+
 <ul>
   <li id="encryption_l1">
     Encryption is the act of taking a string of letters/numbers, like your private key, and turning them into another string of letters/numbers through a method of private translation.
@@ -226,6 +241,7 @@
 </ul>
 
 ### Encrypted vs Unencrypted Keys
+
 <ul>
   <li id="encvunenc_l1">
     An unencrypted private key is 64 characters long, and it is used to unlock or restore wallets.
@@ -242,6 +258,7 @@
 </ul>
 
 ### Decentralize / Decentralization
+
 <ul>
   <li id="decentralize_l">
     The process of transferring authority of a single entity (ex. Government or large corporation) to multiple smaller entities.
@@ -249,6 +266,7 @@
 </ul>
 
 ### Trustless
+
 <ul>
   <li id="trustless_l">
     A distributed trustless consensus which the blockchain is responsible for. Since everyone has a copy of the ledger of all transactions ever executed, there is no need for a third-party. You can verify the transactions yourself, however the Ethereum blockchain and Bitcoin blockchain were created to ensure rules and agreements between all parties are executed when all conditions are met.
@@ -256,6 +274,7 @@
 </ul>
 
 ### Smart Contracts
+
 <ul>
   <li id="sc_l">
     A piece of code (or program) that is stored on the blockchain network. Conditions of the contract are predefined by the users, if all conditions are met, certain actions are executed by the contract (program).
@@ -263,6 +282,7 @@
 </ul>
 
 ### Blockchain
+
 <ul>
   <li id="blockchain_l">
     A decentralized publicly owned ledger.

@@ -6,9 +6,8 @@ You can use this API to detect the user of an Ethereum browser.
 
 ```javascript
 if (typeof window.ethereum !== 'undefined') {
-
   // Ethereum user detected. You can now use the provider.
-  const provider = window['ethereum']
+  const provider = window['ethereum'];
 }
 ```
 
@@ -81,30 +80,30 @@ Using an [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 
 ```javascript
 try {
-  const accounts = await ethereum.enable()
+  const accounts = await ethereum.enable();
   // You now have an array of accounts!
   // Currently only ever one:
   // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-
 } catch (error) {
   // Handle error. Likely the user rejected the login
-  console.error(error)
+  console.error(error);
 }
 ```
 
 #### Example (ES5)
 
 ```javascript
-ethereum.enable()
-.then(function (accounts) {
-  // You now have an array of accounts!
-  // Currently only ever one:
-  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-})
-.catch(function (error) {
-  // Handle error. Likely the user rejected the login
-  console.error(error)
-})
+ethereum
+  .enable()
+  .then(function (accounts) {
+    // You now have an array of accounts!
+    // Currently only ever one:
+    // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+  })
+  .catch(function (error) {
+    // Handle error. Likely the user rejected the login
+    console.error(error);
+  });
 ```
 
 ### ethereum.send(payload, callback) (To Be Replaced)
@@ -135,29 +134,35 @@ Sends a message to the web3 browser. Message format maps to the format of
 Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
 
 ```javascript
-params: [{
-  "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-  "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-  "gas": "0x76c0", // 30400
-  "gasPrice": "0x9184e72a000", // 10000000000000
-  "value": "0x9184e72a", // 2441406250
-  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-}]
+params: [
+  {
+    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+    gas: '0x76c0', // 30400
+    gasPrice: '0x9184e72a000', // 10000000000000
+    value: '0x9184e72a', // 2441406250
+    data:
+      '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+  },
+];
 
-ethereum.sendAsync({
-  method: 'eth_sendTransaction',
-  params: params,
-  from: accounts[0], // Provide the user's account to use.
-}, (err, response) => {
-  if (err) {
-    // Handle the error
-  } else {
-    // This always returns a JSON RPC response object.
-    // The result varies by method, per the JSON RPC API.
-    // For example, this method will return a transaction hash on success.
-    const result = response.result
+ethereum.sendAsync(
+  {
+    method: 'eth_sendTransaction',
+    params: params,
+    from: accounts[0], // Provide the user's account to use.
+  },
+  (err, response) => {
+    if (err) {
+      // Handle the error
+    } else {
+      // This always returns a JSON RPC response object.
+      // The result varies by method, per the JSON RPC API.
+      // For example, this method will return a transaction hash on success.
+      const result = response.result;
+    }
   }
-})
+);
 ```
 
 ### ethereum.autoRefreshOnNetworkChange (To Be Removed)
@@ -190,7 +195,7 @@ The provider supports listening for some events:
 ```javascript
 ethereum.on('accountsChanged', function (accounts) {
   // Time to reload your interface with accounts[0]!
-})
+});
 ```
 
 **Note:** At the moment, the `networkChanged` event is only useful if you disable auto-refresh on network
@@ -223,15 +228,16 @@ Using an [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 
 ```javascript
 try {
-  const accounts = await ethereum.send('eth_requestAccounts')
+  const accounts = await ethereum.send('eth_requestAccounts');
   // You now have an array of accounts!
   // Currently only ever one:
   // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
 } catch (error) {
-  if (error.code === 4001) { // EIP 1193 userRejectedRequest error
-    console.log('Please connect to MetaMask.')
+  if (error.code === 4001) {
+    // EIP 1193 userRejectedRequest error
+    console.log('Please connect to MetaMask.');
   } else {
-    console.error(error)
+    console.error(error);
   }
 }
 ```
@@ -239,19 +245,21 @@ try {
 #### Example (ES5)
 
 ```javascript
-ethereum.send('eth_requestAccounts')
-.then(function (accounts) {
-  // You now have an object that holds an array of accounts!
-  // Currently only ever one:
-  // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
-})
-.catch(function (error) {
-  if (error.code === 4001) { // EIP 1193 userRejectedRequest error
-    console.log('Please connect to MetaMask.')
-  } else {
-    console.error(error)
-  }
-})
+ethereum
+  .send('eth_requestAccounts')
+  .then(function (accounts) {
+    // You now have an object that holds an array of accounts!
+    // Currently only ever one:
+    // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
+  })
+  .catch(function (error) {
+    if (error.code === 4001) {
+      // EIP 1193 userRejectedRequest error
+      console.log('Please connect to MetaMask.');
+    } else {
+      console.error(error);
+    }
+  });
 ```
 
 ### ethereum.send(method, params)
@@ -267,23 +275,27 @@ Returns a `Promise` that resolves to the result of the method. Not all methods r
 Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
 
 ```javascript
-params: [{
-  "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-  "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-  "gas": "0x76c0", // 30400
-  "gasPrice": "0x9184e72a000", // 10000000000000
-  "value": "0x9184e72a", // 2441406250
-  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-}]
+params: [
+  {
+    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+    gas: '0x76c0', // 30400
+    gasPrice: '0x9184e72a000', // 10000000000000
+    value: '0x9184e72a', // 2441406250
+    data:
+      '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+  },
+];
 
-ethereum.send('eth_sendTransaction', params)
-.then(function (result) {
-  // The result varies by method, per the JSON RPC API.
-  // For example, this method will return a transaction hash on success.
-})
-.catch(function (error) {
- // Like a typical promise, returns an error on rejection.
-})
+ethereum
+  .send('eth_sendTransaction', params)
+  .then(function (result) {
+    // The result varies by method, per the JSON RPC API.
+    // For example, this method will return a transaction hash on success.
+  })
+  .catch(function (error) {
+    // Like a typical promise, returns an error on rejection.
+  });
 ```
 
 ### ethereum.on(eventName, callback)
@@ -301,11 +313,11 @@ The following are especially important for managing the state of your dapp:
 ```javascript
 ethereum.on('accountsChanged', function (accounts) {
   // Time to reload your interface with accounts[0]!
-})
+});
 
 ethereum.on('chainChanged', function (chainId) {
   // Time to make sure your any calls are directed to the correct chain!
-})
+});
 ```
 
 #### List of Chain and Network IDs
@@ -340,29 +352,35 @@ Sends a message to the dapp browser. Message format maps to the format of
 Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
 
 ```javascript
-params: [{
-  "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-  "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-  "gas": "0x76c0", // 30400
-  "gasPrice": "0x9184e72a000", // 10000000000000
-  "value": "0x9184e72a", // 2441406250
-  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-}]
+params: [
+  {
+    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+    gas: '0x76c0', // 30400
+    gasPrice: '0x9184e72a000', // 10000000000000
+    value: '0x9184e72a', // 2441406250
+    data:
+      '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+  },
+];
 
-ethereum.sendAsync({
-  method: 'eth_sendTransaction',
-  params: params,
-  from: accounts[0], // Provide the user's account to use.
-}, (err, result) => {
-  if (err) {
-    // Handle the error
-  } else {
-    // This always returns a JSON RPC response object.
-    // The result varies by method, per the JSON RPC API.
-    // For example, this method will return a transaction hash on success.
-    const result = response.result
+ethereum.sendAsync(
+  {
+    method: 'eth_sendTransaction',
+    params: params,
+    from: accounts[0], // Provide the user's account to use.
+  },
+  (err, result) => {
+    if (err) {
+      // Handle the error
+    } else {
+      // This always returns a JSON RPC response object.
+      // The result varies by method, per the JSON RPC API.
+      // For example, this method will return a transaction hash on success.
+      const result = response.result;
+    }
   }
-})
+);
 ```
 
 ## Properties

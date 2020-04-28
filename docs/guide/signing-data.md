@@ -6,6 +6,7 @@ Since MetaMask makes cryptographic keys available to each user, websites can use
 - Some examples of signing off-chain messages for an on-chain protocol from our [MetaTransaction Hackathon](https://medium.com/metamask/our-metatransaction-hackathon-winner-a620551ccb9b?source=collection_home---4------2-----------------------)
 
 ## Signing Data with MetaMask
+
 If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/danfinlay/js-eth-personal-sign-examples).
 
 If you’d like to read our JavaScript implementations of these methods, they are all available in the npm package [eth-sig-util](https://github.com/MetaMask/eth-sig-util).
@@ -16,11 +17,12 @@ Note that MetaMask supports signing transactions with Trezor and Ledger hardware
 
 There are currently five signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods has some lessons in it for the emergent lessons of decentralized standards emergence. Our current five methods are:
 
-* `eth_sign`
-* `personal_sign`
-* `signTypedData` (currently identical to `signTypedData_v1`)
-* `signTypedData_v1`
-* `signTypedData_v3`
+- `eth_sign`
+- `personal_sign`
+- `signTypedData` (currently identical to `signTypedData_v1`)
+- `signTypedData_v1`
+- `signTypedData_v3`
+
 There are likely to be many more over time. When MetaMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
 
 In particular, the method `eth_sign` is an open-ended signing method that allows signing an arbitrary hash, which means it can be used to sign transactions, or any other data, making it a dangerous phishing risk.
@@ -47,9 +49,10 @@ Also known as `signTypedData`, originally premiered October 2017 in [this blog p
 
 The `signTypedData` family has a few major design considerations:
 
-* Cheap to verify on chain
-* Still somewhat human readable
-* Hard to phish signatures
+- Cheap to verify on chain
+- Still somewhat human readable
+- Hard to phish signatures
+
 If on-chain verifiability cost is a high priority for you, you might want to consider it.
 
 ## Sign Typed Data v3

@@ -1,6 +1,4 @@
-const { fs, path } = require('@vuepress/shared-utils')
-
-module.exports = ctx => ({
+module.exports = _ctx => ({
   dest: 'docs/dist',
 
   locales: {
@@ -10,6 +8,7 @@ module.exports = ctx => ({
       description: 'Welcome'
     }
   },
+
   head: [
     ['link', { rel: 'icon', href: `/metamask-fox.svg` }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
@@ -21,9 +20,12 @@ module.exports = ctx => ({
     ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
+
   theme: '@vuepress/vue',
+
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
+    logo: '/metamask-fox.svg',
     editLinks: true,
     docsDir: 'packages/docs/dist',
     locales: {
@@ -39,6 +41,7 @@ module.exports = ctx => ({
       }
     }
   },
+
   plugins: [
     ['@vuepress/back-to-top', true],
     ['@vuepress/pwa', {
@@ -59,7 +62,16 @@ module.exports = ctx => ({
       before: info => `<UpgradePath title="${info}">`,
       after: '</UpgradePath>',
     }],
+    ['vuepress-plugin-redirect', {
+      redirectors: [
+        {
+          base: '/',
+          alternative: '/guide/'
+        },
+      ],
+    }]
   ],
+
   extraWatchFiles: [
     '.vuepress/nav/en.js',
   ]
