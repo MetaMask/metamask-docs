@@ -49,9 +49,6 @@ module.exports = _ctx => ({
       updatePopup: true
     }],
     ['@vuepress/medium-zoom', true],
-    ['@vuepress/google-analytics', {
-      ga: 'UA-128189152-1'
-    }],
     ['container', {
       type: 'vue',
       before: '<pre class="vue-container"><code>',
