@@ -24,6 +24,8 @@ jobs:
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Deploy site
           command: |
@@ -40,6 +42,8 @@ jobs:
     docker:
       - image: circleci/node:11
     steps:
+      - attach_workspace:
+          at: .
       - checkout
       - run:
           name: Lint
