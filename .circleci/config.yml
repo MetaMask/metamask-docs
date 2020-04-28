@@ -8,6 +8,10 @@ workflows:
           requires:
             - prep-deps
       - build:
+          requires:
+            - prep-deps
+            - lint
+      - deploy:
           filters:
             branches:
               only:
@@ -15,41 +19,9 @@ workflows:
           requires:
             - prep-deps
             - lint
+            - build
 
 jobs:
-  build:
-    docker:
-      - image: circleci/node:11
-    environment:
-      - TARGET_BRANCH: gh-pages
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Deploy site
-          command: |
-            git config --global user.email $GH_EMAIL
-            git config --global user.name $GH_NAME
-            yarn build
-            git checkout $TARGET_BRANCH
-            cp -r docs/dist/* .
-            git add -A
-            git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
-            git push -f origin $TARGET_BRANCH
-  
-  lint:
-    docker:
-      - image: circleci/node:11
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Lint
-          command: |
-            yarn lint
-
   prep-deps:
     docker:
       - image: circleci/node:11
@@ -63,3 +35,55 @@ jobs:
           root: .
           paths:
             - node_modules
+
+  lint:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: |
+            yarn lint
+
+  build:
+    docker:
+      - image: circleci/node:11
+    environment:
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build
+          command: |
+            yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - docs/dist/
+
+  deploy:
+    docker:
+      - image: circleci/node:11
+    environment:
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy site
+          command: |
+            git config --global user.email $GH_EMAIL
+            git config --global user.name $GH_NAME
+            git checkout $TARGET_BRANCH
+            rm -rf node_modules 00_Examples README.md package.json uncrate.config.js yarn.lock
+            cp -r docs/dist/* .
+            rm -rf docs
+            git add -A
+            git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
+            git push -f origin $TARGET_BRANCH
