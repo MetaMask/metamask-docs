@@ -4,7 +4,7 @@
 
 All markdown files are compiled into Vue components and processed by webpack, therefore you can and **should prefer** referencing any asset using relative URLs:
 
-``` md
+```md
 ![An image](./image.png)
 ```
 
@@ -12,23 +12,23 @@ This would work the same way as in `*.vue` file templates. The image will be pro
 
 In addition, you can use the `~` prefix to explicitly indicate this is a webpack module request, allowing you to reference files with webpack aliases or from npm dependencies:
 
-``` md
+```md
 ![Image from alias](~@alias/image.png)
 ![Image from dependency](~some-dependency/image.png)
 ```
 
 webpack aliases can be configured via [configureWebpack](../config/README.md#configurewebpack) in `.vuepress/config.js`. Example:
 
-``` js
+```js
 module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@alias': 'path/to/some/dir'
-      }
-    }
-  }
-}
+        '@alias': 'path/to/some/dir',
+      },
+    },
+  },
+};
 ```
 
 ## Public Files
@@ -41,8 +41,8 @@ If your site is deployed to a non-root URL, you will need to set the `base` opti
 
 With a base URL, if you want to reference an image in `.vuepress/public`, you'd have to use URLs like `/bar/image.png`. However, this is brittle if you ever decide to change the `base` later. To help with that, VuePress provides a built-in helper `$withBase` (injected onto Vue's prototype) that generates the correct path:
 
-``` vue
-<img :src="$withBase('/foo.png')" alt="foo">
+```vue
+<img :src="$withBase('/foo.png')" alt="foo" />
 ```
 
 Note you can use the above syntax not only in theme components, but in your markdown files as well.

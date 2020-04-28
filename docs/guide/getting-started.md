@@ -54,7 +54,7 @@ We recommend that you provide a button to allow the user to connect MetaMask to 
 Clicking this button should call the following method:
 
 ```javascript
-ethereum.enable()
+ethereum.enable();
 ```
 
 **Example:**
@@ -83,8 +83,10 @@ Over time, this method is intended to grow to include various additional paramet
 Since it returns a promise, if you're in an `async` function, you may log in like this:
 
 ```javascript
-const accounts = await ethereum.enable() // We currently only ever provide a single account,
-const account = accounts[0] // but the array gives us some room to grow.
+const accounts = await ethereum.enable();
+const account = accounts[0];
+// We currently only ever provide a single account,
+// but the array gives us some room to grow.
 ```
 
 **Example:**
@@ -110,7 +112,6 @@ async function getAccount() {
   showAccount.innerHTML = account;
 }
 ```
-
 
 ## Choosing a Convenience Library
 
