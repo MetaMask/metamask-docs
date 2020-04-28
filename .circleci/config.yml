@@ -1,4 +1,13 @@
-version: 2
+version: 2.1
+
+workflows:
+  deploy:
+    jobs:
+      - lint
+      - build:
+          requires:
+            - lint
+
 jobs:
   build:
     branches:
@@ -10,16 +19,25 @@ jobs:
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
-      - deploy:
+      - run:
           name: Deploy site
           command: |
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
-            npm install
-            npm run build
+            yarn
+            yarn build
             git checkout $TARGET_BRANCH
             cp -r docs/dist/* .
             git add -A
             git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
             git push -f origin $TARGET_BRANCH
-            
+  
+  lint:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run:
+          name: Lint
+          command: |
+            yarn lint
