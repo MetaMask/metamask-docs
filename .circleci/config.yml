@@ -41,4 +41,5 @@ jobs:
       - run:
           name: Lint
           command: |
+            yarn
             yarn lint
