@@ -1,18 +1,19 @@
 version: 2.1
 
 workflows:
-  deploy:
+  test-and-deploy:
     jobs:
       - lint
       - build:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - lint
 
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:11
     environment:
