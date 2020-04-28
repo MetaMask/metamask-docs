@@ -22,6 +22,32 @@ workflows:
             - build
 
 jobs:
+  prep-deps:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: |
+            yarn --frozen-lockfile --ignore-scripts
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+
+  lint:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: |
+            yarn lint
+
   build:
     docker:
       - image: circleci/node:11
@@ -61,29 +87,3 @@ jobs:
             git add -A
             git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
             git push -f origin $TARGET_BRANCH
-
-  lint:
-    docker:
-      - image: circleci/node:11
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Lint
-          command: |
-            yarn lint
-
-  prep-deps:
-    docker:
-      - image: circleci/node:11
-    steps:
-      - checkout
-      - run:
-          name: Install deps
-          command: |
-            yarn --frozen-lockfile --ignore-scripts
-      - persist_to_workspace:
-          root: .
-          paths:
-            - node_modules
