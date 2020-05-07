@@ -1,6 +1,4 @@
-const { fs, path } = require('@vuepress/shared-utils')
-
-module.exports = ctx => ({
+module.exports = _ctx => ({
   dest: 'docs/dist',
 
   locales: {
@@ -10,6 +8,7 @@ module.exports = ctx => ({
       description: 'Welcome'
     }
   },
+
   head: [
     ['link', { rel: 'icon', href: `/metamask-fox.svg` }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
@@ -21,9 +20,12 @@ module.exports = ctx => ({
     ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
-  theme: '@vuepress/vue',
+
+  theme: '@vuepress/theme-default',
+
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
+    logo: '/metamask-fox.svg',
     editLinks: true,
     docsDir: 'packages/docs/dist',
     locales: {
@@ -34,11 +36,12 @@ module.exports = ctx => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Resources'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Mobile', 'Resources'),
         }
       }
     }
   },
+
   plugins: [
     ['@vuepress/back-to-top', true],
     ['@vuepress/pwa', {
@@ -46,9 +49,6 @@ module.exports = ctx => ({
       updatePopup: true
     }],
     ['@vuepress/medium-zoom', true],
-    ['@vuepress/google-analytics', {
-      ga: 'UA-128189152-1'
-    }],
     ['container', {
       type: 'vue',
       before: '<pre class="vue-container"><code>',
@@ -59,16 +59,25 @@ module.exports = ctx => ({
       before: info => `<UpgradePath title="${info}">`,
       after: '</UpgradePath>',
     }],
+    ['vuepress-plugin-redirect', {
+      redirectors: [
+        {
+          base: '/',
+          alternative: '/guide/'
+        },
+      ],
+    }]
   ],
+
   extraWatchFiles: [
     '.vuepress/nav/en.js',
   ]
 })
 
-function getGuideSidebar(groupA, groupB, groupC, groupD) {
+function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
   return [
     {
-      title: groupA,
+      title: guide,
       collapsable: false,
       children: [
         '',
@@ -80,7 +89,7 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupB,
+      title: api,
       collapsable: false,
       children: [
         'ethereum-provider',
@@ -90,7 +99,7 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupC,
+      title: bestPractices,
       collapsable: false,
       children: [
         'registering-function-names',
@@ -100,7 +109,15 @@ function getGuideSidebar(groupA, groupB, groupC, groupD) {
       ]
     },
     {
-      title: groupD,
+      title: mobile,
+      collapsable: false,
+      children: [
+        'dapp-compatibility',
+
+      ]
+    },
+    {
+      title: resources,
       collapsable: false,
       children: [
         'create-dapp'
