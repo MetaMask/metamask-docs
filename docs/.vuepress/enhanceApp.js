@@ -4,6 +4,7 @@ import EthConnectButton from './components/EthConnectButton';
 import EthAsyncConnectButton from './components/EthAsyncConnectButton';
 import ChangeAccount from './components/ChangeAccount';
 import SendTransaction from './components/SendTransaction';
+import gist from './components/gist';
 
 export default ({ Vue, isServer }) => {
   if (!isServer) {
@@ -16,4 +17,5 @@ export default ({ Vue, isServer }) => {
   Vue.component('EthAsyncConnectButton', EthAsyncConnectButton);
   Vue.component('ChangeAccount', ChangeAccount);
   Vue.component('SendTransaction', SendTransaction);
+  Vue.component('gist', gist);
 }
