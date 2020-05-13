@@ -39,7 +39,5 @@
     "vuepress-plugin-flowchart": "^1.4.2",
     "vuepress-plugin-redirect": "^1.2.3"
   },
-  "dependencies": {
-    "vue-embed-gist": "^1.0.2"
-  }
+  "dependencies": {}
 }

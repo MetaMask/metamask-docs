@@ -5,7 +5,36 @@ If it doesn't, please refer to our [best practices](./mobile-best-practices.html
 
 # ethereum.initialized
 
-On mobile, the loading of the window can be slower than you might be used to dealing with on the web. Because of this, we've implemented an event: ethereum#initialized
-<gist/>
+On mobile, the loading of the window can be slower than you might be used to dealing with on the web. Because of this, we've implemented an event: `ethereum#initialized`
+
+[see gist](https://gist.github.com/rekmarks/06999f88fe6ab0cd1d71ac7cd2b2ac93)
+
+New event dispatched on `window`: `ethereum#initialized`
+
+Event name inspired by JSDoc `@event` tag: https://jsdoc.app/tags-event.html
+
+```javascript
+if (window.ethereum) {
+  handleEthereum();
+} else {
+  window.addEventListener('ethereum#initialized', handleEthereum, {
+    once: true,
+  });
+
+  // If the event is not dispatched by the end of the timeout,
+  // the user probably doesn't have MetaMask installed.
+  setTimeout(handleEthereum, 3000); // 3 seconds
+}
+
+function handleEthereum() {
+  const { ethereum } = window;
+  if (ethereum && ethereum.isMetaMask) {
+    console.log('Ethereum successfully detected!');
+    // Do work...
+  } else {
+    console.log('Please install MetaMask!');
+  }
+}
+```
 
 But for the best user experience, we would also like to encourage the practice of only asking for the user's accounts upon a user initiated interaction.
