@@ -1,40 +1,15 @@
 # Mobile Getting Started
 
-If your site works with the MetaMask Extension, then you should be all set!
-If it doesn't, please refer to our [best practices](./mobile-best-practices.html) and if you're still having issues, please open an issue [here](https://github.com/MetaMask/metamask-mobile)
+## Why you and your users should use MetaMask Mobile
 
-# ethereum.initialized
+- Onboard your users in seconds - whether they are already wallet users or completely new users, we guide them to get them started!
+- Bring your dapp to our large and rapidly growing userbase.
+- Your users can discover other use-cases of web3 right in MetaMask dapp browser.
+- Users can sign with their MetaMask wallet, whether they use your dapp on MetaMask browser or prefer using other primary browsers or native mobile app or desktop. [*works with dapps supporting Wallet Connect]
+- Buy crypto easily, with the best rates, and supported in a wide-range of countries.
+- Manage your cryptoassets - watch or trade tokens, collectibles
+- Send payments to your family & friends (gasless\* and in normal transaction - whatever they prefer)
+- Request payment from a friend, an employer, etc.
+- We have lots of more exciting stuff coming up - stay tuned, this is just the beginning :wink:
 
-On mobile, the loading of the window can be slower than you might be used to dealing with on the web. Because of this, we've implemented an event: `ethereum#initialized`
-
-[see gist](https://gist.github.com/rekmarks/06999f88fe6ab0cd1d71ac7cd2b2ac93)
-
-New event dispatched on `window`: `ethereum#initialized`
-
-Event name inspired by JSDoc `@event` tag: https://jsdoc.app/tags-event.html
-
-```javascript
-if (window.ethereum) {
-  handleEthereum();
-} else {
-  window.addEventListener('ethereum#initialized', handleEthereum, {
-    once: true,
-  });
-
-  // If the event is not dispatched by the end of the timeout,
-  // the user probably doesn't have MetaMask installed.
-  setTimeout(handleEthereum, 3000); // 3 seconds
-}
-
-function handleEthereum() {
-  const { ethereum } = window;
-  if (ethereum && ethereum.isMetaMask) {
-    console.log('Ethereum successfully detected!');
-    // Do work...
-  } else {
-    console.log('Please install MetaMask!');
-  }
-}
-```
-
-But for the best user experience, we would also like to encourage the practice of only asking for the user's accounts upon a user initiated interaction.
+Please visit [our homepage](https://metamask.io) to find out more about where to download the mobile app.
