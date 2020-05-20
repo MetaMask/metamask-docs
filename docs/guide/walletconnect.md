@@ -2,7 +2,7 @@
 
 You can use MetaMask mobile as a signer while using applications on another browser, desktop, or mobile application with WalletConnect.
 
-For a dapp developer, they wouldn’t need to do anything other than use our “official” qrcode-modal which already includes MetaMask deep linking
+If your dapp supports Wallet Connect's official qrcode-modal, then your users can already use MetaMask Mobile for scanning the QR code and signing.
 
 How Wallet Connect deeplinking works for the dapp developer using custom qrcode-modal?
 Here is the brief explanation:
