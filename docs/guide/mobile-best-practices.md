@@ -1,7 +1,8 @@
 # Mobile Best Practices
 
 If your site works with the MetaMask Extension, then you should be all set!
-If it doesn't, please refer to our [best practices](./mobile-best-practices.html) and if you're still having issues, please open an issue [here](https://github.com/MetaMask/metamask-mobile)
+If it doesn't, please see below.
+If you're still having issues, feel free to open an issue [here](https://github.com/MetaMask/metamask-mobile)
 
 # ethereum.initialized
 
