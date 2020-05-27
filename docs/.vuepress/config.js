@@ -112,15 +112,18 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       title: mobile,
       collapsable: false,
       children: [
+        'mobile-getting-started',
+        'mobile-best-practices',
         'dapp-compatibility',
-
+        'deeplinking',
+        'walletconnect',
       ]
     },
     {
       title: resources,
       collapsable: false,
       children: [
-        'create-dapp'
+        'create-dapp',
       ]
     }
   ]
