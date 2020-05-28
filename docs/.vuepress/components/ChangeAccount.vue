@@ -11,13 +11,12 @@
 <script>
 export default {
   mounted() {
-    console.log('heyy')
     const handler = (accounts) => {
       this.checkAddress = accounts[0]
     }
-    window.ethereum.on('accountsChanged', handler)
+    ethereum.on('accountsChanged', handler)
     this.$on('hook:beforeDestroy', () => {
-      window.ethereum.off('accountsChanged', handler)
+      ethereum.off('accountsChanged', handler)
     })
   },
   data() {
@@ -28,7 +27,7 @@ export default {
   },
   methods: {
     async getAccount() {
-      const accounts = await window.ethereum.enable();
+      const accounts = await ethereum.enable();
       this.currentAccount = accounts[0];
     },
   },

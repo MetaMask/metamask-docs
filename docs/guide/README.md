@@ -1,18 +1,20 @@
 # Introduction
 
 Welcome to MetaMask’s Developer Documentation. This documentation is for learning to develop applications for MetaMask.
-* You can find the latest version of MetaMask on our [official website](https://metamask.io/).
-* For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/hc/en-us).
-* For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
-* To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
+
+- You can find the latest version of MetaMask on our [official website](https://metamask.io/).
+- For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/hc/en-us).
+- For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
+- To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
 ## Why Metamask
 
 MetaMask was created out of the needs of creating more secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
-* [Read the full docs of our injected provider](/guide/ethereum-provider.html)
-* [Read the full docs of the JSON RPC API](/guide/json-rpc-api.html)
-* [Read about other supported APIs](/guide/experimental-apis.html)
+- [Get started here](/guide/getting-started.html)
+- [Read the full docs of our injected provider](/guide/ethereum-provider.html)
+- [Read the full docs of the JSON RPC API](/guide/json-rpc-api.html)
+- [Read about other supported APIs](/guide/experimental-apis.html)
 
 ## Account Management
 
@@ -33,5 +35,6 @@ We’re aware that there are constantly more and more private blockchains that p
 MetaMask makes it easy to write user interfaces to blockchain-based smart contract systems. You can accept payments without knowing how to write smart contracts, but you’ll be able to do much more interesting things if you do.
 
 ## New Dapp Developers
-* [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
-* [CryptoZombies](https://cryptozombies.io/)
+
+- [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
+- [CryptoZombies](https://cryptozombies.io/)

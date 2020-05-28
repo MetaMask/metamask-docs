@@ -1,25 +1,89 @@
-version: 2
+version: 2.1
+
+workflows:
+  test-and-deploy:
+    jobs:
+      - prep-deps
+      - lint:
+          requires:
+            - prep-deps
+      - build:
+          requires:
+            - prep-deps
+            - lint
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - prep-deps
+            - lint
+            - build
+
 jobs:
+  prep-deps:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: |
+            yarn --frozen-lockfile --ignore-scripts
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+
+  lint:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint
+          command: |
+            yarn lint
+
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:11
     environment:
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
-      - deploy:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build
+          command: |
+            yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - docs/dist/
+
+  deploy:
+    docker:
+      - image: circleci/node:11
+    environment:
+      - TARGET_BRANCH: gh-pages
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
           name: Deploy site
           command: |
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
-            npm install
-            npm run build
             git checkout $TARGET_BRANCH
+            rm -rf node_modules 00_Examples README.md package.json uncrate.config.js yarn.lock
             cp -r docs/dist/* .
+            rm -rf docs
             git add -A
             git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
             git push -f origin $TARGET_BRANCH
-            

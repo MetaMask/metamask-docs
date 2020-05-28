@@ -25,4 +25,3 @@ If publishing a contract from bytecode, you will still want an `ABI` if you want
 ## The Contract Source Code
 
 If your website is going to allow users to edit smart contract source code and compile it, like [Remix](http://remix.ethereum.org/), you may import a whole compiler, in which case you're going to derive your bytecode and ABI from that source code, and eventually you will derive the contract's address from the completed transaction publishing that bytecode.
-

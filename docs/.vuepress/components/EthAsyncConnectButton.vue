@@ -11,9 +11,12 @@
 export default {
   data() {
     return {
-      ethereum: window.ethereum,
+      ethereum: null,
       ethAccount: ''
     };
+  },
+    mounted() {
+    this.ethereum = window.ethereum
   },
   methods: {
     async getAccount() {
