@@ -71,9 +71,6 @@ What we'll cover in part one:
 
 - [Connecting to the MetaMask Wallet](/guide/create-dapp.html#connecting-to-the-metamask-wallet)
 - See our eth_accounts result
-- Display our network number
-- Display our ChainId
-- Display our Accounts
 
 ### Connecting to the MetaMask Wallet
 
@@ -282,3 +279,56 @@ getAccountsButton.addEventListener('click', () => {
 ```
 
 CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
+
+## Status Section (Part 2)
+
+What we'll cover in Part 2 is:
+- Displaying our network number
+- Displaying our ChainId
+- Displaying our Account(s)
+
+We need to create two functions to handle the chainId and handle the network name.
+
+```javascript
+const handleNewChain = (chainId) => {
+    chainIdDiv.innerHTML = chainId
+  }
+
+  const handleNewNetwork = (networkId) => {
+    networkDiv.innerHTML = networkId
+  }
+```
+
+Let's display the Network we're currently on and grab the Chain ID as well. We need to create a method called `getNetworkAndChainId()` that will allow us to check the network we're currently on.
+
+```javascript
+  const getNetworkAndChainId = () => {
+    ethereum.sendAsync({ method: 'eth_chainId' }, (err, response) => {
+      // If we recieve an error we'll print the error in the console
+      if (err) {
+        console.error(err)
+      } else {
+        /*  
+          We go ahead and call this if there are no errors and pass the repsonse's result
+          into the `handleNewChain` function to display it on the page
+        */
+        handleNewChain(response.result)
+      }
+    })
+
+    ethereum.sendAsync({ method: 'net_version' }, (err, response) => {
+      if (err) {
+        console.error(err)
+      } else {
+        /*  
+          We go ahead and call this if there are no errors and pass the repsonse's result
+          into the `handleNewNetwork` function to display it on the page  
+        */
+        handleNewNetwork(response.result)
+      }
+    })
+  }
+```
+
+After this what we need to do is to write an if statement that'll check to see if Mask
+
