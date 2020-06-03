@@ -66,6 +66,9 @@ module.exports = _ctx => ({
           alternative: '/guide/'
         },
       ],
+    }],
+    ['tabs', {
+      useUrlFragment: false
     }]
   ],
 
