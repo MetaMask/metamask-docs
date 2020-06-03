@@ -6,7 +6,6 @@ To develop for MetaMask, install MetaMask on your development machine. [Download
 This guide assumes intermediate knowledge of HTML, CSS, and JavaScript. 
 :::
 
-
 ## Basic Considerations
 
 ### Web3 Browser Detection
@@ -88,11 +87,6 @@ ethereum.enable();
 :::
 
 ::::
-
-
-
-
-
 
 This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
 
