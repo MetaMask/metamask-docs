@@ -31,47 +31,62 @@ ethereum.sendAsync(
 
 <SendTransaction />
 
-```html
-<button class="enableEthereumButton btn">Enable Ethereum</button>
-<button class="sendEthButton btn">Send Eth</button>
-```
 
-```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const sendEthButton = document.querySelector('.sendEthButton');
+:::: tabs :options="{ useUrlFragment: false }"
 
-let accounts = [];
+::: tab HTML
+  ```html
+    <button class="enableEthereumButton btn">Enable Ethereum</button>
+    <button class="sendEthButton btn">Send Eth</button>
+  ```
+:::
 
-//Sending Ethereum to an address
-sendEthButton.addEventListener('click', () => {
-  ethereum.sendAsync(
-    {
-      method: 'eth_sendTransaction',
-      params: [
+
+::: tab JavaScript
+  ```javascript
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const sendEthButton = document.querySelector('.sendEthButton');
+
+    let accounts = [];
+
+    //Sending Ethereum to an address
+    sendEthButton.addEventListener('click', () => {
+      ethereum.sendAsync(
         {
-          from: accounts[0],
-          to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
-          value: '0x29a2241af62c0000',
-          gasPrice: '0x09184e72a000',
-          gas: '0x2710',
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: accounts[0],
+              to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+              value: '0x29a2241af62c0000',
+              gasPrice: '0x09184e72a000',
+              gas: '0x2710',
+            },
+          ],
         },
-      ],
-    },
-    (err, result) => {
-      if (err) console.error(err);
-      else console.log(result);
+        (err, result) => {
+          if (err) console.error(err);
+          else console.log(result);
+        }
+      );
+    });
+
+    ethereumButton.addEventListener('click', () => {
+      getAccount();
+    });
+
+    async function getAccount() {
+      accounts = await ethereum.enable();
     }
-  );
-});
+  ```
+:::
 
-ethereumButton.addEventListener('click', () => {
-  getAccount();
-});
+::::
 
-async function getAccount() {
-  accounts = await ethereum.enable();
-}
-```
+
+
+
+
 
 ## Transaction Parameters
 

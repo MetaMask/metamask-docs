@@ -6,8 +6,6 @@ To develop for MetaMask, install MetaMask on your development machine. [Download
 This guide assumes intermediate knowledge of HTML, CSS, and JavaScript. 
 :::
 
-
-
 ## Basic Considerations
 
 ### Web3 Browser Detection
@@ -68,18 +66,27 @@ ethereum.enable();
 
 <EthConnectButton />
 
-```html
-<button class="enableEthereumButton">Enable Ethereum</button>
-```
+:::: tabs :options="{ useUrlFragment: false }"
 
-```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
+::: tab HTML
+  ```html
+  <button class="enableEthereumButton">Enable Ethereum</button>
+  ```
+:::
 
-ethereumButton.addEventListener('click', () => {
-  //Will Start the metamask extension
-  ethereum.enable();
-});
-```
+
+::: tab JavaScript
+  ```javascript
+  const ethereumButton = document.querySelector('.enableEthereumButton');
+
+  ethereumButton.addEventListener('click', () => {
+    //Will Start the metamask extension
+    ethereum.enable();
+  });
+  ```
+:::
+
+::::
 
 This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
 
@@ -98,25 +105,35 @@ const account = accounts[0];
 
 <EthAsyncConnectButton />
 
-```html
-<button class="enableEthereumButton">Enable Ethereum</button>
-<h2>Account: <span class="showAccount"></span></h2>
-```
 
-```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const showAccount = document.querySelector('.showAccount');
+:::: tabs :options="{ useUrlFragment: false }"
 
-ethereumButton.addEventListener('click', () => {
-  getAccount();
-});
+::: tab HTML
+  ```html
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <h2>Account: <span class="showAccount"></span></h2>
+  ```
+:::
 
-async function getAccount() {
-  const accounts = await ethereum.enable();
-  const account = accounts[0];
-  showAccount.innerHTML = account;
-}
-```
+
+::: tab JavaScript
+  ```javascript
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const showAccount = document.querySelector('.showAccount');
+
+    ethereumButton.addEventListener('click', () => {
+      getAccount();
+    });
+
+    async function getAccount() {
+      const accounts = await ethereum.enable();
+      const account = accounts[0];
+      showAccount.innerHTML = account;
+    }
+  ```
+:::
+
+::::
 
 ## Choosing a Convenience Library
 
