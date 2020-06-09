@@ -3,7 +3,7 @@
 To develop for MetaMask, install MetaMask on your development machine. [Download here](https://metamask.io/).
 
 :::warning A quick note...
-This guide assumes intermediate knowledge of HTML, CSS, and JavaScript. 
+This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 :::
 
 ## Basic Considerations
@@ -11,11 +11,13 @@ This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 ### Web3 Browser Detection
 
 To verify if the browser is running MetaMask, copy and paste the code snippet below in the developer console of your web browser:
+
 ```javascript
-  if (typeof window.ethereum !== 'undefined') { 
-    console.log("MetaMask is installed!"); 
-  }
+if (typeof window.ethereum !== 'undefined') {
+  console.log('MetaMask is installed!');
+}
 ```
+
 You can review the full API for the `windows.ethereum` object [here](./ethereum-provider.html).
 Note that in **early 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
@@ -69,21 +71,24 @@ ethereum.enable();
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab HTML
-  ```html
-  <button class="enableEthereumButton">Enable Ethereum</button>
-  ```
+
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+```
+
 :::
 
-
 ::: tab JavaScript
-  ```javascript
-  const ethereumButton = document.querySelector('.enableEthereumButton');
 
-  ethereumButton.addEventListener('click', () => {
-    //Will Start the metamask extension
-    ethereum.enable();
-  });
-  ```
+```javascript
+const ethereumButton = document.querySelector('.enableEthereumButton');
+
+ethereumButton.addEventListener('click', () => {
+  //Will Start the metamask extension
+  ethereum.enable();
+});
+```
+
 :::
 
 ::::
@@ -105,32 +110,34 @@ const account = accounts[0];
 
 <EthAsyncConnectButton />
 
-
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab HTML
-  ```html
-    <button class="enableEthereumButton">Enable Ethereum</button>
-    <h2>Account: <span class="showAccount"></span></h2>
-  ```
+
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+<h2>Account: <span class="showAccount"></span></h2>
+```
+
 :::
 
-
 ::: tab JavaScript
-  ```javascript
-    const ethereumButton = document.querySelector('.enableEthereumButton');
-    const showAccount = document.querySelector('.showAccount');
 
-    ethereumButton.addEventListener('click', () => {
-      getAccount();
-    });
+```javascript
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const showAccount = document.querySelector('.showAccount');
 
-    async function getAccount() {
-      const accounts = await ethereum.enable();
-      const account = accounts[0];
-      showAccount.innerHTML = account;
-    }
-  ```
+ethereumButton.addEventListener('click', () => {
+  getAccount();
+});
+
+async function getAccount() {
+  const accounts = await ethereum.enable();
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}
+```
+
 :::
 
 ::::
