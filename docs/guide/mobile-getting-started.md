@@ -4,7 +4,7 @@
 
 - Onboard your users in seconds - whether they are already wallet users or completely new users, we guide them to get them started!
 - Bring your dapp to our large and rapidly growing userbase.
-- Your users can discover other use-cases of web3 right in MetaMask dapp browser.
+- Your users can discover other use-cases of web3 right in the MetaMask web3 browser.
 - Users can sign with their MetaMask wallet, whether they use your dapp on MetaMask browser or prefer using other primary browsers or native mobile app or desktop. [*works with dapps supporting Wallet Connect]
 - Buy crypto easily, with the best rates, and supported in a wide-range of countries.
 - Manage your cryptoassets - watch or trade tokens, collectibles
