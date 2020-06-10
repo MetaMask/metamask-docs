@@ -180,7 +180,7 @@ The provider supports listening for some events:
 
 - `accountsChanged`, returns the currently available account(s).
 - `networkChanged`, returns the current network ID as a decimal string.
-- `chainIdChanged`, returns the current chain ID string.
+- `chainIdChanged`, returns the current chain ID as a hexadecimal string.
 
 #### Example
 
