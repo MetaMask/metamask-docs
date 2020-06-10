@@ -160,7 +160,7 @@ ethereum.sendAsync({
 ### ethereum.enable()
 
 ::: warning
-Use the `eth_requestAccounts` RPC method via `ethereum.sendAsync()` instead.
+Use `ethereum.sendAsync({ method: 'eth_requestAccounts' }, callback)` instead.
 :::
 
 Requests that the user provides an ethereum address to be identified by.
