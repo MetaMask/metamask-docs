@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     async getAccount() {
-      const accounts = await ethereum.enable() // We currently only ever provide a single account,
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' }) // We currently only ever provide a single account,
       this.ethAccount = accounts[0] // but the array gives us some room to grow.
     },
   },
