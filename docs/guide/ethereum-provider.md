@@ -157,7 +157,7 @@ ethereum.sendAsync({
 );
 ```
 
-### ethereum.enable()
+### ethereum.enable() (DEPRECATED)
 
 ::: warning
 Use `ethereum.sendAsync({ method: 'eth_requestAccounts' }, callback)` instead.
