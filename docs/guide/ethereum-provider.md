@@ -135,7 +135,7 @@ ethereum.sendAsync(
 
 ### ethereum.sendAsync({ method: 'eth_requestAccounts'}, callback)
 
-Requests that the user provides an ethereum address to be identified by.
+Requests to view the user's Ethereum address.
 
 #### Example
 
@@ -163,7 +163,7 @@ ethereum.sendAsync({
 Use `ethereum.sendAsync({ method: 'eth_requestAccounts' }, callback)` instead.
 :::
 
-Requests that the user provides an ethereum address to be identified by.
+Requests to view the user's Ethereum address.
 Returns a promise of an array of hex-prefixed ethereum address strings.
 
 ### ethereum.send(payload, callback) (DEPRECATED)
