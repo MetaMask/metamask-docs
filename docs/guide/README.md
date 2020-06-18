@@ -9,7 +9,7 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 
 ## Why Metamask
 
-MetaMask was created out of the needs of creating more secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
+MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
 - [Get started here](/guide/getting-started.html)
 - [Read the full docs of our injected provider](/guide/ethereum-provider.html)
