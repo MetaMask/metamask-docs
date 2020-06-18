@@ -134,7 +134,7 @@ const initialize = () => {
 
   //------Inserted Code------\\
   const MetamaskClientCheck = () => {
-    //Now we check to see if Metamask is installed
+    //Now we check to see if MetaMask is installed
     if (!isMetaMaskInstalled()) {
       //If it isn't installed we ask the user to click to install it
       onboardButton.innerText = 'Click here to install MetaMask!';
