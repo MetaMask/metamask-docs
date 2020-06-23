@@ -271,10 +271,10 @@ getAccountsButton.addEventListener('click', () => {
   ethereum.sendAsync({ method: 'eth_accounts' }, (error, response) => {
     if (error) {
       console.error(error);
-      getAccountsResults.innerHTML = `Error: ${error}`;
+      getAccountsResult.innerHTML = `Error: ${error}`;
     } else {
       //We take the first address in the array of addresses and display it
-      getAccountsResults.innerHTML =
+      getAccountsResult.innerHTML =
         response.result[0] || 'Not able to get accounts';
     }
   });
