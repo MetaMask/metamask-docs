@@ -125,7 +125,7 @@ ethereum.sendAsync(
       // Handle the error
     } else {
       // This always returns a JSON RPC response object.
-      // The result varies by method, per the JSON RPC API.
+      // The result varies by method, per the RPC method specification
       // For example, this method will return a transaction hash on success.
       const result = response.result;
     }

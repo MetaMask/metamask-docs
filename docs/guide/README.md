@@ -12,9 +12,9 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 MetaMask was created out of the needs of creating more secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
 - [Get started here](/guide/getting-started.html)
-- [Read the full docs of our injected provider](/guide/ethereum-provider.html)
-- [Read the full docs of the JSON RPC API](/guide/rpc-api.html)
-- [Read about other supported APIs](/guide/experimental-apis.html)
+- [Learn more about our JavaScript Provider API](/guide/ethereum-provider.html)
+- [Learn more about our RPC API](/guide/rpc-api.html)
+- [Learn more about our experimental APIs](/guide/experimental-apis.html)
 
 ## Account Management
 
@@ -26,7 +26,7 @@ This security feature also comes with developer convenience: For developers, you
 
 MetaMask comes pre-loaded with nice and fast connections to the Ethereum blockchain and several test networks via our friends at [Infura](https://infura.io/). This allows users to get started without synchronizing a full node, while still providing the option to upgrade their security the blockchain provider of their choice over time.
 
-Today, MetaMask is compatible with any blockchain that exposes an [Ethereum Compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
+Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
 
 We’re aware that there are constantly more and more private blockchains that people are interested in connecting MetaMask to, and [we are continuously building towards easier and easier integration with these many options](https://medium.com/metamask/metamasks-vision-for-multiple-network-support-4ffbee9ec64d).
 
