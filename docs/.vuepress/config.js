@@ -96,7 +96,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       collapsable: false,
       children: [
         'ethereum-provider',
-        'json-rpc-api',
+        'rpc-api',
         'experimental-apis',
         'signing-data',
       ]
