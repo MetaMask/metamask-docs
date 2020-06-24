@@ -11,7 +11,7 @@ if (typeof window.ethereum !== 'undefined') {
 }
 ```
 
-The provider API itself is very simple, and wraps [Ethereum JSON-RPC](./JSON-RPC-API) formatted messages, which is why developers usually use a convenience library for interacting with the provider,
+The provider API itself is very simple, and wraps [Ethereum JSON-RPC](./rpc-api) formatted messages, which is why developers usually use a convenience library for interacting with the provider,
 like [web3](https://www.npmjs.com/package/web3), [ethers](https://www.npmjs.com/package/ethers), [truffle](https://truffleframework.com/), [Embark](https://embark.status.im/), or others.
 From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
 
@@ -125,7 +125,7 @@ ethereum.sendAsync(
       // Handle the error
     } else {
       // This always returns a JSON RPC response object.
-      // The result varies by method, per the JSON RPC API.
+      // The result varies by method, per the RPC method specification
       // For example, this method will return a transaction hash on success.
       const result = response.result;
     }
