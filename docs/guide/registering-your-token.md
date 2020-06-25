@@ -4,7 +4,7 @@ When a user opens their MetaMask, they are shown a variety of assets, including 
 
 While this is possible using our UI with the `Add Token` button, that process can be cumbersome, and involves the user interacting with contract addresses, and is very error prone.
 
-You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP 747](https://github.com/estebanmino/EIPs/blob/master/EIPS/eip-747.md).
+You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP 747](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md).
 
 ## Code-free Example
 

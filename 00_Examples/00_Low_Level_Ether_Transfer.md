@@ -136,7 +136,7 @@ Now that was all very low level, but should show you how MetaMask works at its s
 Now you can read more about this [ethereum API](./API_Reference), or maybe get acquainted with a convenience library so you don't have to interact with it directly:
 
 - [ethjs](https://www.npmjs.com/package/ethjs)
-- [truffle](https://truffleframework.com/)
-- [Embark](https://embark.status.im/)
+- [truffle](https://www.trufflesuite.com/)
+- [Embark](https://framework.embarklabs.io/)
 - [web3](https://www.npmjs.com/package/web3)
 
