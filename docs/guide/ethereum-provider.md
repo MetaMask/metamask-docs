@@ -12,7 +12,7 @@ if (typeof window.ethereum !== 'undefined') {
 ```
 
 The provider API itself is very simple, and wraps [Ethereum JSON-RPC](./rpc-api) formatted messages, which is why developers usually use a convenience library for interacting with the provider,
-like [web3](https://www.npmjs.com/package/web3), [ethers](https://www.npmjs.com/package/ethers), [truffle](https://truffleframework.com/), [Embark](https://embark.status.im/), or others.
+like [web3](https://www.npmjs.com/package/web3), [ethers](https://www.npmjs.com/package/ethers), [truffle](https://www.trufflesuite.com/), [Embark](https://framework.embarklabs.io/), or others.
 From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
 
 However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
@@ -97,7 +97,7 @@ _To be superseded by the Promise-returning `ethereum.send()` method in_
 _[EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md). (See also **[the new API](#new-api)**.)_
 
 Sends a message to the web3 browser. Message format maps to the format of
-[the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
+[the Ethereum JSON-RPC API](https://eth.wiki/json-rpc/API#json-rpc-methods).
 
 Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
 

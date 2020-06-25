@@ -41,6 +41,6 @@ You can look at the FUNCTIONHASHES section on remix.ethereum.org by loading the 
 
 You can also use the [signature registry](https://rinkeby.etherscan.io/address/0x0c0831fb1ec7442485fb41a033ba188389a990b4) deployed on rinkeby but should note that **MetaMask reads from the mainnet eth-method-registry endpoint, regardless of user's network**
 
-[eth-method-registry](https://github.com/danfinlay/eth-method-registry) is used to lookup methods in MetaMask.
+[eth-method-registry](https://github.com/MetaMask/eth-method-registry) is used to lookup methods in MetaMask.
 
 This [stack exchange](https://ethereum.stackexchange.com/questions/59678/metamask-shows-unknown-function-when-calling-method-send-function) answer is a good **tldr**.

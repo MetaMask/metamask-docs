@@ -3,7 +3,7 @@
 Welcome to MetaMask’s Developer Documentation. This documentation is for learning to develop applications for MetaMask.
 
 - You can find the latest version of MetaMask on our [official website](https://metamask.io/).
-- For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/hc/en-us).
+- For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/).
 - For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
@@ -26,7 +26,7 @@ This security feature also comes with developer convenience: For developers, you
 
 MetaMask comes pre-loaded with fast connections to the Ethereum blockchain and several test networks via our friends at [Infura](https://infura.io/). This allows you to get started without synchronizing a full node, while still providing the option to upgrade your security and use the blockchain provider of your choice.
 
-Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
+Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://eth.wiki/json-rpc/API), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
 
 We’re aware that there are constantly new private blockchains that people are interested in connecting MetaMask to, and [we are building towards easier integration with these many options](https://medium.com/metamask/metamasks-vision-for-multiple-network-support-4ffbee9ec64d).
 
