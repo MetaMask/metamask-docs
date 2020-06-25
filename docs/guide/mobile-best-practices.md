@@ -1,18 +1,23 @@
 # Mobile Best Practices
 
-If your site works with the MetaMask Extension, then you should be all set!
-If it doesn't, please see below.
-If you're still having issues, feel free to open an issue [here](https://github.com/MetaMask/metamask-mobile)
+If this page doesn't answer your question, please feel free to open an issue [in our repository](https://github.com/MetaMask/metamask-mobile).
 
-# ethereum.initialized
+## The Provider (window.ethereum)
 
-On mobile, the loading of the window can be slower than you might be used to dealing with on the web. Because of this, we've implemented an event: `ethereum#initialized`
+The [provider API](./ethereum-provider.html) is the same for both MetaMask mobile and the desktop extension.
+However, the providers become available (i.e., are injected into the page) at different points in the page lifecycle.
 
-[see gist](https://gist.github.com/rekmarks/06999f88fe6ab0cd1d71ac7cd2b2ac93)
+### Provider Availability
 
-New event dispatched on `window`: `ethereum#initialized`
+If you use [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider), there's nothing to worry about; it will reliably detect both the mobile and extension provider.
 
-Event name inspired by JSDoc `@event` tag: https://jsdoc.app/tags-event.html
+If you don't use the `detect-provider` package, you have to detect the mobile provider manually.
+
+The extension provider will always be available by the time your code is executed.
+Because of platform limitations, the mobile provider may not be injected until later in the page lifecycle.
+For this purpose, the MetaMask provider dispatches the event `ethereum#initialized` on `window` when it is fully initialized.
+
+You can reliably detect both the mobile and extension provider with the following snippet.
 
 ```javascript
 if (window.ethereum) {
@@ -31,11 +36,9 @@ function handleEthereum() {
   const { ethereum } = window;
   if (ethereum && ethereum.isMetaMask) {
     console.log('Ethereum successfully detected!');
-    // Do work...
+    // Access the decentralized web!
   } else {
     console.log('Please install MetaMask!');
   }
 }
 ```
-
-But for the best user experience, we would also like to encourage the practice of only asking for the user's accounts upon a user initiated interaction.
