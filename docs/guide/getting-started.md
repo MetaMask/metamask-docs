@@ -19,7 +19,6 @@ if (typeof window.ethereum !== 'undefined') {
 ```
 
 You can review the full API for the `windows.ethereum` object [here](./ethereum-provider.html).
-Note that in **early 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ### Running a Test Network
 
