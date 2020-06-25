@@ -138,7 +138,8 @@ Requests to view the user's Ethereum address.
 #### Example
 
 ```javascript
-ethereum.sendAsync({
+ethereum.sendAsync(
+  {
     method: 'eth_requestAccounts',
   },
   (error, response) => {
@@ -146,10 +147,10 @@ ethereum.sendAsync({
       // Handle error. Likely the user rejected the login
       console.error(error);
     } else {
-      const accounts = response.result
-    // You now have an array of accounts!
-    // Currently only ever one, e.g.:
-    // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+      const accounts = response.result;
+      // You now have an array of accounts!
+      // Currently only ever one, e.g.:
+      // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
     }
   }
 );
