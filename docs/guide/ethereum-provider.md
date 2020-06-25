@@ -21,10 +21,8 @@ However, for developers of convenience libraries, and for developers who would l
 
 ## Upcoming Provider Changes
 
-In **Q3 2020**, we are introducing a new version of this API. The existing API will mostly remain in place, however, in **late Q3/early Q4 2020**, we will break parts of the existing API. We encourage you to
+In **Q4 2020**, we will be making some breaking changes to the provider API. The biggest change is that we will stop injecting `window.web3`. We encourage you to
 [read more about this here](https://github.com/MetaMask/metamask-extension/issues/8077).
-
-Documentation for the new API will be released as soon as it's in production.
 
 ## List of Chain and Network IDs
 
