@@ -188,7 +188,7 @@ Above your `MetamaskClientCheck` function write/insert this code.
 
 ```javascript
 //We create a new MetaMask onboarding object to use in our app
-const onboarding = new MetamaskOnboarding({ forwarderOrigin });
+const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
 
 //This will start the onboarding proccess
 const onClickInstall = () => {
