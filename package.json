@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/MetaMask/metamask-docs/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/MetaMask/metamask-docs",
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.3",
     "@vuepress/plugin-google-analytics": "^1.0.3",
