@@ -81,7 +81,7 @@ jobs:
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
             git checkout $TARGET_BRANCH
-            rm -rf node_modules 00_Examples README.md package.json uncrate.config.js yarn.lock
+            rm -rf node_modules 00_Examples README.md package.json yarn.lock
             cp -r docs/dist/* .
             rm -rf docs
             git add -A

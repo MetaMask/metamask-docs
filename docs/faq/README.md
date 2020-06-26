@@ -1,3 +1,3 @@
 # FAQ
 
-For questions or issues visit our [Github](https://github.com/MetaMask)
+For questions or issues visit our [GitHub](https://github.com/MetaMask)
