@@ -12,7 +12,7 @@ Make sure you have:
 
 1. Have the [MetaMask Extension](https://metamask.io/download.html) downloaded.
 2. Have Node.js [Downloaded and Installed](https://nodejs.org/)
-3. Clone/Download the [Project Files](https://github.com/BboyAkers/simple-dapp-tutorial) from Github.
+3. Clone/Download the [Project Files](https://github.com/BboyAkers/simple-dapp-tutorial) from GitHub.
 4. Have your favorite Text Editor or IDE installed. I personally like [Visual Studio Code](https://code.visualstudio.com/)
 
 ### Open Project Folder
