@@ -24,7 +24,7 @@ workflows:
 jobs:
   prep-deps:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     steps:
       - checkout
       - run:
@@ -38,7 +38,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     steps:
       - checkout
       - attach_workspace:
@@ -50,7 +50,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     environment:
       - TARGET_BRANCH: gh-pages
     steps:
@@ -68,7 +68,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12
     environment:
       - TARGET_BRANCH: gh-pages
     steps:
