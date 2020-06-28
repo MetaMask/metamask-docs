@@ -336,6 +336,8 @@ We expose some experimental, MetaMask-specific methods under the `ethereum._meta
 
 ::: danger DANGER
 This will be removed in **Q3 2020**.
+
+Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
 :::
 
 ```typescript
@@ -348,6 +350,8 @@ This method returns a `Promise` that resolves to a `boolean` indicating if the c
 
 ::: danger DANGER
 This will be removed in **Q3 2020**.
+
+Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
 :::
 
 ```typescript
