@@ -55,7 +55,7 @@ At that time, we will:
   - `ethereum._metamask.isApproved`
 
 These changes _may_ break your website.
-Please read our [migration guide](about:blank) for more details.
+Please read our [migration guide](./provider-migration.html) for more details.
 
 ### `window.web3` Removal
 
@@ -69,7 +69,7 @@ In **Q4 2020** (date TBD), we will:
 - Remove the `ethereum.autoRefreshOnNetworkChange` property
 
 If you rely on the `window.web3` object currently injected by MetaMask, these changes _will_ break your website.
-Please read our [migration guide](about:blank) for more details.
+Please read our [migration guide](./provider-migration.html) for more details.
 
 ## Basic Usage
 
