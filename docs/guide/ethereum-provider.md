@@ -494,11 +494,37 @@ Use [`ethereum.request()`](#ethereum-request-args) instead.
 ethereum.send(
   methodOrPayload: string | JsonRpcRequest,
   paramsOrCallback: Array<unknown> | JsonRpcCallback,
-): Promise<JsonRpcResponse> | unknown;
+): Promise<JsonRpcResponse> | void;
 ```
 
-This method is mostly a Promise-based `sendAsync` with `method` and `params` instead of a payload as arguments.
-However, it behaves in unexpected ways and should be avoided at all costs.
+This method behaves unpredictably and should be avoided at all costs.
+It is essentially an overloaded version of [`ethereum.sendAsync()`](#ethereum-sendasync-deprecated).
+
+`ethereum.send()` can be called in three different ways:
+
+```typescript
+// 1.
+ethereum.send(payload: JsonRpcRequest, callback: JsonRpcCallback): void;
+
+// 2.
+ethereum.send(method: string, params?: Array<unknown>): Promise<JsonRpcResponse>;
+
+// 3.
+ethereum.send(payload: JsonRpcRequest): unknown;
+```
+
+You can think of these signatures as follows:
+
+1. This signature is exactly like `ethereum.sendAsync()`
+
+2. This signature is like an async `ethereum.sendAsync()` with `method` and `params` as arguments, instead of a JSON-RPC payload and callback
+
+3. This signature enables you to call the following RPC methods synchronously:
+
+    - `eth_accounts`
+    - `eth_coinbase`
+    - `eth_uninstallFilter`
+    - `net_version`
 
 ## Deprecated Events
 
