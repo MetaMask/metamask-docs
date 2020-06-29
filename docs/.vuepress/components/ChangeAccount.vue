@@ -1,7 +1,7 @@
 <template>
   <div>
     <button type="button" class="btn primaryBtn" @click="getAccount()">
-      Enable Ethereum
+      Connect to MetaMask
     </button>
     <h3>Current Account: {{ currentAccount }}</h3>
     <h3> Account Changed to:{{checkAddress}}</h3>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async getAccount() {
-      const accounts = await ethereum.enable();
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       this.currentAccount = accounts[0];
     },
   },

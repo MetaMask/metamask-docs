@@ -4,7 +4,7 @@ When a user opens their MetaMask, they are shown a variety of assets, including 
 
 While this is possible using our UI with the `Add Token` button, that process can be cumbersome, and involves the user interacting with contract addresses, and is very error prone.
 
-You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP 747](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md).
+You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP-747](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md).
 
 ## Code-free Example
 
@@ -23,28 +23,31 @@ const tokenSymbol = 'TUT';
 const tokenDecimals = 18;
 const tokenImage = 'http://placekitten.com/200/300';
 
-ethereum.sendAsync(
-  {
-    method: 'wallet_watchAsset',
-    params: {
-      type: 'ERC20',
-      options: {
-        address: tokenAddress,
-        symbol: tokenSymbol,
-        decimals: tokenDecimals,
-        image: tokenImage,
+// wasAdded is a boolean. Like any RPC method, an error may be thrown.
+try {
+  const wasAdded = await ethereum.request({
+    method: 'metamask_watchAsset',
+    params: [
+      {
+        type: 'ERC20', // Initially only supports ERC20, but eventually more!
+        options: {
+          address: tokenAddress, // The address that the token is at.
+          symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+          decimals: tokenDecimals, // The number of decimals in the token
+          image: tokenImage, // A string url of the token logo
+        },
       },
-    },
-    id: Math.round(Math.random() * 100000),
-  },
-  (err, added) => {
-    if (added) {
-      console.log('Thanks for your interest!');
-    } else {
-      console.log('Your loss!');
-    }
-  }
-);
+    ],
+  });
+} catch (error) {
+  console.log(error);
+}
+
+if (added) {
+  console.log('Thanks for your interest!');
+} else {
+  console.log('Your loss!');
+}
 ```
 
 ## Default Token List
