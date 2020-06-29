@@ -118,7 +118,7 @@ Consult [chainid.network](https://chainid.network) for more.
 ### ethereum.isMetaMask
 
 ::: tip
-This property is just a convention, and it may be `true` for non-MetaMask providers.
+This property is not guaranteed to be correct for all providers. Non-MetaMask providers may also set this property to `true`.
 :::
 
 `true` if the user has MetaMask installed, some falsy value otherwise.
