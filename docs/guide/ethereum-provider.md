@@ -84,13 +84,10 @@ For any non-trivial Ethereum web application — a.k.a. web3 site — to work, y
 The snippet at the top of this page is sufficient for detecting the provider.
 You can learn how to accomplish the other two by reviewing the snippet in the [Using the Provider section](#using-the-provider).
 
-Although any Ethereum operation can be performed via the provider API, most developers use a convenience library with higher-level abstractions.
-The most common such libraries are [ethers](https://www.npmjs.com/package/ethers) and [web3.js](https://www.npmjs.com/package/web3).
+The provider API is all you need to create a full-featured web3 application.
 
-Even if you use a convenience library, you will likely still need to detect the provider before initializing the library.
-Other than that, you can generally learn everything you need to know from the documentation of those libraries, without reading this lower-level API.
-
-However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential. Read on for more details.
+That said, many developers use a convenience library, such as [ethers](https://www.npmjs.com/package/ethers) and [web3.js](https://www.npmjs.com/package/web3), instead of using the provider directly.
+If you are in need of higher-level abstractions than those provided by this API, we recommend that you use a convenience library.
 
 ## Chain IDs
 
