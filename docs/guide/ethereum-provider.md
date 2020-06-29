@@ -238,7 +238,9 @@ ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void);
 ```
 
 The MetaMask provider emits this event whenever the return value of the `eth_accounts` RPC method changes.
-`eth_accounts` returns an array that is either empty or contains a single account address that the user decided to expose to the requesting domain (in the case of a website, identified by the _hostname_ of its URL).
+`eth_accounts` returns an array that is either empty or contains a single account address.
+The returned address, if any, is the address of the most recently used account that the caller is permitted to access.
+Callers are identified by their URL _origin_, which means that all sites with the same origin share the same permissions.
 
 This means that `accountsChanged` will be emitted whenever the user's exposed account address changes.
 
