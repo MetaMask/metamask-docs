@@ -260,7 +260,7 @@ ethereum.on('chainChanged', handler: (chainId: string) => void);
 
 The MetaMask provider emits this event when the currently connected chain changes.
 
-All RPC requests are be submitted to the currently connected chain.
+All RPC requests are submitted to the currently connected chain.
 Therefore, it's critical to keep track of the current chain ID by listening for this event.
 
 We _strongly_ recommend reloading the page on chain changes, unless absolutely necessary not to.
