@@ -121,7 +121,7 @@ Consult [chainid.network](https://chainid.network) for more.
 This property is not guaranteed to be correct for all providers. Non-MetaMask providers may also set this property to `true`.
 :::
 
-`true` if the user has MetaMask installed, some falsy value otherwise.
+`true` if the user has MetaMask installed.
 
 ### ethereum.chainId
 
