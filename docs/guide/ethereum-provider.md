@@ -48,7 +48,7 @@ In **Q3 2020** (date TBD), we are introducing some breaking changes to this API,
 At that time, we will:
 
 - Stop emitting `chainIdChanged`, and instead emit `chainChanged`
-- Ensure that all `chainId` values are **not** 0-prefixed
+- Ensure that chain IDs returned by `eth_chainId` are **not** 0-prefixed
   - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
 - Remove the following experimental methods:
   - `ethereum._metamask.isEnabled`
