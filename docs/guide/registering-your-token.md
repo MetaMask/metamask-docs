@@ -25,7 +25,7 @@ const tokenImage = 'http://placekitten.com/200/300';
 
 // wasAdded is a boolean. Like any RPC method, an error may be thrown.
 try {
-  const wasAdded = ethereum.request({
+  const wasAdded = await ethereum.request({
     method: 'metamask_watchAsset',
     params: [
       {

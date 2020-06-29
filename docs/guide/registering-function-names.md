@@ -2,7 +2,7 @@
 
 MetaMask uses the Parity on-chain registry of function signatures to display method names on the confirm screen.
 For many common method names, like token methods, this allows MetaMask to successfully look up the method names by their [method signature](https://solidity.readthedocs.io/en/v0.4.21/abi-spec.html).
-However, sometimes you're using a method that is not in that on-chain registry, and MetaMask will simply display `Unknown Function` to the user.
+However, sometimes you're using a method that is not in that on-chain registry, and MetaMask will simply display `Contract Interaction` to the user.
 
 To add your contract's function names to this registry so it shows in the MetaMask interface, follow the below steps.
 

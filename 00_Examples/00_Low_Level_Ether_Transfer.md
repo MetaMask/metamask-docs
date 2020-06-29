@@ -91,31 +91,32 @@ function pollForCompletion (txHash, callback) {
   // Here we'll poll every 2 seconds.
   const checkInterval = setInterval(function () {
 
-    const notYet = 'response has no error or result'
     ethereum.request({
       method: 'eth_getTransactionByHash',
       params: [ txHash ],
     })
       .then((transaction) => {
 
-        if (calledBack) return
+        if (calledBack || !transaction) {
+          // We've either already seen the mined transaction,
+          // or no transaction was returned, indicating that it
+          // hasn't been mined yet.
+          return
+        }
 
-        // We have successfully verified the mined transaction.
-        // Mind you, we should do this server side, with our own blockchain connection.
-        // Client side we are trusting the user's connection to the blockchain.
+        // The transaction has been mined.
         clearInterval(checkInterval)
         calledBack = true
         callback(null, transaction)
       })
       .catch((error) => {
 
-        if (calledBack) return
-
-        if (err.message.includes(notYet)) {
-          return 'transaction is not yet mined'
+        if (calledBack) {
+          return
         }
 
-        callback(err || response.error)
+        // Some unknown error occurred.
+        callback(error)
       })
     })
   }, 2000)
