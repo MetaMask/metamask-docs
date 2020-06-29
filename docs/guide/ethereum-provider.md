@@ -283,7 +283,8 @@ ethereum.on('message', handler: (message: ProviderMessage) => void);
 The MetaMask provider emits this event when it receives some message that the consumer should be notified of.
 The kind of message is identified by the `type` string.
 
-One prominent example of such messages include updates from RPC subscriptions, such as `eth_subscribe`. For such messages, the message `type` will be `eth_subscription`.
+RPC subscription updates are a common use case for the `message` event.
+For example, if you create a subscription using `eth_subscribe`, each subscription update will be emitted as a `message` event with a `type` of `eth_subscription`.
 
 ## Errors
 
