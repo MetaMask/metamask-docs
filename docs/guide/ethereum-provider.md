@@ -521,10 +521,10 @@ You can think of these signatures as follows:
 
 3. This signature enables you to call the following RPC methods synchronously:
 
-    - `eth_accounts`
-    - `eth_coinbase`
-    - `eth_uninstallFilter`
-    - `net_version`
+   - `eth_accounts`
+   - `eth_coinbase`
+   - `eth_uninstallFilter`
+   - `net_version`
 
 ## Deprecated Events
 
