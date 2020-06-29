@@ -20,8 +20,9 @@ if (provider) {
 ```
 
 ::: warning
-In Q3 and Q4 of 2020, we are making changes to our provider API that will be breaking for some web3 sites.
+In the near future, we are making changes to our provider API that will be breaking for some web3 sites.
 
+You can prepare for these changes today.
 Please read the [Upcoming Breaking Changes section](#upcoming-breaking-changes) for details.
 :::
 
@@ -37,14 +38,13 @@ We recommend that all web3 site developers read the [Basic Usage section](#basic
 ::: tip
 These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
-All consumers of this API will be affected by the `eth_chainId` bug fix (see [next subsection](#window-ethereum-api-changes)).
-
-Otherwise, if you are new to using the provider or use [ethers](https://www.npmjs.com/package/ethers), you do not have to worry about these changes, and can skip ahead [to the next section](#api).
+All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
+Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
 :::
 
 ### `window.ethereum` API Changes
 
-In **Q3 2020** (date TBD), we are introducing some breaking changes to this API, which we encourage you to
+In the near future, we are introducing some breaking changes to this API, which we encourage you to
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 
 At that time, we will:
@@ -65,10 +65,9 @@ Please read our [migration guide](./provider-migration.html) for more details.
 If you do not use the `window.web3` object injected by MetaMask, you will not be affected by these changes.
 :::
 
-In **Q4 2020** (date TBD), we will:
+In the near future, we will:
 
 - Stop injecting `window.web3` into web pages
-- Remove the `ethereum.autoRefreshOnNetworkChange` property
 
 If you rely on the `window.web3` object currently injected by MetaMask, these changes _will_ break your website.
 Please read our [migration guide](./provider-migration.html) for more details.
@@ -133,6 +132,17 @@ The value of this property can change at any time, and should not be exclusively
 A hexadecimal string representing the current chain ID.
 
 ## Methods
+
+### ethereum.isConnected()
+
+```typescript
+ethereum.isConnected(): boolean;
+```
+
+Returns `true` if the provider is connected to the current chain, and `false` otherwise.
+
+If the provider is not connected, the page will have to be reloaded in order for connection to be re-established.
+Please see the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 ### ethereum.request(args)
 
@@ -217,7 +227,7 @@ ethereum.on('connect', handler: (connectInfo: ConnectInfo) => void);
 ```
 
 The MetaMask provider emits this event when it first becomes able to submit RPC requests to a chain.
-In general, you can assume that the MetaMask provider is connected and has emitted this event by the time you are able to reference it.
+We recommend using a `connect` event handler and the [`ethereum.isConnected()` method](#ethereum-isconnected) in order to determine when/if the provider is connected.
 
 ### disconnect
 
@@ -228,7 +238,8 @@ ethereum.on('disconnect', handler: (error: ProviderRpcError) => void);
 The MetaMask provider emits this event if it becomes unable to submit RPC requests to any chain.
 In general, this will only happen due to network connectivity issues or some unforeseen error.
 
-Once `disconnect` has been emitted, MetaMask will not accept any new requests until until `connect` is emitted, which may require reloading the page.
+Once `disconnect` has been emitted, the provider will not accept any new requests until the connection to the chain has been re-restablished, which requires reloading the page.
+You can also use the [`ethereum.isConnected()` method](#ethereum-isconnected) to determine if the provider is disconnected.
 
 ### accountsChanged
 
@@ -338,7 +349,7 @@ We expose some experimental, MetaMask-specific methods under the `ethereum._meta
 ### ethereum.\_metamask.isApproved() (TO BE REMOVED)
 
 ::: danger DANGER
-This will be removed in **Q3 2020**.
+This will be removed in the future.
 
 Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
 :::
@@ -352,7 +363,7 @@ This method returns a `Promise` that resolves to a `boolean` indicating if the c
 ### ethereum.\_metamask.isEnabled() (TO BE REMOVED)
 
 ::: danger DANGER
-This will be removed in **Q3 2020**.
+This will be removed in the future.
 
 Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
 :::
@@ -385,15 +396,14 @@ Because of this, you may find web3 sites that use this API, or other providers t
 
 ## Legacy Properties
 
-### ethereum.autoRefreshOnNetworkChange (TO BE REMOVED)
+### ethereum.autoRefreshOnNetworkChange (DEPRECATED)
 
-::: danger DANGER
-When `window.web3` is removed in **Q4 2020**, this property will also be removed.
-
-If you don't access `window.web3`, the value of this property will not affect the behavior of your application or MetaMask.
+::: warning
+The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
+When `window.web3` [is removed](#window-web3-removal), either the effects of this property will change, or it will be removed.
 
 As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
-We recommend reloading the page on `chainChange` or using [ethers](https://www.npmjs.com/package/ethers), which will do so for you.
+We recommend reloading the page on `chainChange` unless you have good reason not to.
 :::
 
 By default, this property is `true`.
@@ -472,7 +482,7 @@ ethereum.sendAsync(payload: JsonRpcRequest, callback: JsonRpcCallback): void;
 
 This is the ancestor of `ethereum.request`. It only works for JSON-RPC methods, and takes a JSON-RPC request payload object and an error-first callback function as its arguments.
 
-See [the Ethereum JSON-RPC API](https://eips.ethereum.org/EIPS/eip-1474) for details.
+See the [Ethereum JSON-RPC API](https://eips.ethereum.org/EIPS/eip-1474) for details.
 
 ### ethereum.send() (DEPRECATED)
 
