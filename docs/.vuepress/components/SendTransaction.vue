@@ -30,7 +30,7 @@ export default {
       })
         .then((result) => {
           console.log(result);
-        });
+        })
         .catch(console.error);
     },
   },
