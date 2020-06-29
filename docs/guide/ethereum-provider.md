@@ -35,9 +35,11 @@ We recommend that all web3 site developers read the [Basic Usage section](#basic
 ## Upcoming Breaking Changes
 
 ::: tip
-These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for details.
+These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
-If you are new to using the provider, or use [ethers](https://www.npmjs.com/package/ethers), you do not have to worry about these changes, and can skip ahead [to the next section](#api).
+All consumers of this API will be affected by the `eth_chainId` bug fix (see [next subsection](#window-ethereum-api-changes)).
+
+Otherwise, if you are new to using the provider or use [ethers](https://www.npmjs.com/package/ethers), you do not have to worry about these changes, and can skip ahead [to the next section](#api).
 :::
 
 ### `window.ethereum` API Changes
@@ -47,9 +49,9 @@ In **Q3 2020** (date TBD), we are introducing some breaking changes to this API,
 
 At that time, we will:
 
-- Stop emitting `chainIdChanged`, and instead emit `chainChanged`
 - Ensure that chain IDs returned by `eth_chainId` are **not** 0-prefixed
   - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
+- Stop emitting `chainIdChanged`, and instead emit `chainChanged`
 - Remove the following experimental methods:
   - `ethereum._metamask.isEnabled`
   - `ethereum._metamask.isApproved`
@@ -371,8 +373,8 @@ ethereum._metamask.isUnlocked(): Promise<boolean>;
 ```
 
 This method returns a `Promise` that resolves to a `boolean` indicating if MetaMask is unlocked by the user.
-This is useful for knowing if MetaMask is unlocked in order to provide meaningful instructions to the user during onboarding.
-Note that this does not indicate if the user has exposed any accounts.
+MetaMask must be unlocked in order to perform any operation involving user accounts.
+Note that this method does not indicate if the user has exposed any accounts to the caller.
 
 ## Legacy API
 
@@ -380,8 +382,9 @@ Note that this does not indicate if the user has exposed any accounts.
 You should **never** rely on any of these methods, properties, or events in practice.
 :::
 
-Historically, the Ethereum provider API has been a mess.
-Here, we document the remains of this mess in case you see it used in the wild and wonder what's going on.
+This section documents our legacy provider API.
+MetaMask only supported this API before the provider API was standardized via [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) in 2020.
+Because of this, you may find web3 sites that use this API, or other providers that implement it.
 
 ## Legacy Properties
 
