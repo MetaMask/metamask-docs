@@ -147,7 +147,7 @@ ethereum.request(args: RequestArguments): Promise<unknown>;
 ```
 
 Use `request` to submit RPC requests to Ethereum via MetaMask.
-It method a `Promise` that resolves to the result of the RPC method call.
+It returns a `Promise` that resolves to the result of the RPC method call.
 
 The `params` and return value will vary by RPC method.
 In practice, if a method has any `params`, they are almost always of type `Array<any>`.
