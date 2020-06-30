@@ -131,6 +131,29 @@ The value of this property can change at any time, and should not be exclusively
 
 A hexadecimal string representing the current chain ID.
 
+### ethereum.autoRefreshOnNetworkChange
+
+::: warning
+The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
+When `window.web3` [is removed](#window-web3-removal), either the effects of this property will change, or it will be removed.
+
+As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
+We recommend reloading the page on `chainChange` unless you have good reason not to.
+:::
+
+By default, this property is `true`.
+
+If this property is truthy, MetaMask will reload the page in the following cases:
+
+- When the connected chain (network) changes, if `window.web3` has been accessed during the page lifecycle
+- When `window.web3` is accessed, if the connected chain (network) has changed during the page lifecycle
+
+To disable this behavior, set this property to `false` immediately after detecting the provider:
+
+```javascript
+ethereum.autoRefreshOnNetworkChange = false;
+```
+
 ## Methods
 
 ### ethereum.isConnected()
@@ -395,29 +418,6 @@ MetaMask only supported this API before the provider API was standardized via [E
 Because of this, you may find web3 sites that use this API, or other providers that implement it.
 
 ## Legacy Properties
-
-### ethereum.autoRefreshOnNetworkChange (DEPRECATED)
-
-::: warning
-The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
-When `window.web3` [is removed](#window-web3-removal), either the effects of this property will change, or it will be removed.
-
-As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
-We recommend reloading the page on `chainChange` unless you have good reason not to.
-:::
-
-By default, this property is `true`.
-
-If this property is truthy, MetaMask will reload the page in the following cases:
-
-- When the connected chain (network) changes, if `window.web3` has been accessed during the page lifecycle
-- When `window.web3` is accessed, if the connected chain (network) has changed during the page lifecycle
-
-To disable this behavior, set this property to `false` immediately after detecting the provider:
-
-```javascript
-ethereum.autoRefreshOnNetworkChange = false;
-```
 
 ### ethereum.networkVersion (DEPRECATED)
 
