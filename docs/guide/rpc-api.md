@@ -61,9 +61,11 @@ Under the hood, it calls [`wallet_requestPermissions`](#wallet-requestpermission
 Since `eth_accounts` is currently the only permission, this method is all you need for now.
 :::
 
-```typescript
-ethereum.request({ method: 'eth_requestAccounts' }): Promise<string[]>
-```
+#### Returns
+
+`string[]` - An array of a single, hexadecimal Ethereum address string.
+
+#### Description
 
 Requests that the user provides an Ethereum address to be identified by.
 Returns a Promise that resolves to an array of a single Ethereum address string.
@@ -96,16 +98,23 @@ function connect() {
 
 ### wallet_requestPermissions
 
+#### Parameters
+
+- `Array`
+
+  0. `RequestedPermissions` - The requested permissions.
+
 ```typescript
 interface RequestedPermissions {
   [methodName: string]: {}; // an empty object, for future extensibility
 }
-
-ethereum.request({
-  method: 'wallet_requestPermissions',
-  params: [ RequestedPermissions ]
-}): Promise<Web3WalletPermission[]>
 ```
+
+#### Returns
+
+`Web3WalletPermission[]` - An array of the caller's permissions.
+
+#### Description
 
 Requests the given permissions from the user.
 Returns a Promise that resolves to a non-empty array of `Web3WalletPermission` objects, corresponding to the caller's current permissions.
@@ -146,11 +155,11 @@ function requestPermissions() {
 
 ### wallet_getPermissions
 
-```typescript
-ethereum.request({
-  method: 'wallet_requestPermissions',
-}): Promise<Web3WalletPermission[]>;
-```
+#### Returns
+
+`Web3WalletPermission[]` - An array of the caller's permissions.
+
+#### Description
 
 Gets the caller's current permissions.
 Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
@@ -165,9 +174,11 @@ As an API consumer, you are unlikely to have to call this method yourself.
 Please see the [Onboarding Library documentation](/onboarding-library.html) for more information.
 :::
 
-```typescript
-ethereum.request({ method: 'wallet_registerOnboarding' }): Promise<true>;
-```
+#### Returns
+
+`boolean` - `true` if the request was successful, `false` otherwise.
+
+#### Description
 
 Registers the requesting site with MetaMask as the initiator of onboarding.
 Returns a Promise that resolves to `true`, or rejects if there's an error.
@@ -184,22 +195,19 @@ Instead of calling this method directly, you should use the [`@metamask/onboardi
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 :::
 
-```typescript
-interface WatchAssetParams {
-  type: 'ERC20', // In the future, other standards will be supported
-  options: {
-    address: string, // The address of the token contract
-    'symbol': string, // A ticker symbol or shorthand, up to 5 characters
-    decimals: number, // The number of token decimals
-    image: string, // A string url of the token logo
-  },
-}
+#### Parameters
 
-ethereum.request({
-  method: 'wallet_watchAsset',
-  params: [ WatchAssetParams ]
-}): Promise<boolean>
-```
+- `Array`
+
+  0. `WatchAssetParams` - The metadata of the asset to watch.
+
+<<< @/docs/snippets/WatchAssetParams.ts
+
+#### Returns
+
+`boolean` - `true` if the the token was added, `false` otherwise.
+
+#### Description
 
 Requests that the user tracks the token in MetaMask.
 Returns a `boolean` indicating if the token was successfully added.
@@ -208,21 +216,49 @@ Most Ethereum wallets support some set of tokens, usually from a centrally curat
 `wallet_watchAsset` enables web3 application developers to ask their users to track tokens in their wallets, at runtime.
 Once added, the token is indistinguishable from those added via legacy methods, such as a centralized registry.
 
-### eth_getEncryptionPublicKey
+#### Example
 
-```typescript
-// both types are simply hexadecimal strings
-type EthereumAddress: string;
-type EncryptionPublicKey: string;
+```javascript
+const myAssetData = {
+  type: 'ERC20',
+  options: {
+    address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+    symbol: 'FOO',
+    decimals: 18,
+    image: 'https://foo.io/token-image.svg',
+  },
+};
 
 ethereum.request({
-  method: 'eth_getEncryptionPublicKey',
-  params: [ EthereumAddress ]
-}): Promise<EncryptionPublicKey>
+  method: 'wallet_watchAsset',
+  params: [myAssetData],
+});
+  .then((success) => {
+    if (success) {
+      console.log('FOO successfully added to wallet!')
+    } else {
+      throw new Error('Something went wrong.')
+    }
+  })
+  .catch(console.error)
 ```
 
-Requests that the user shares their encryption public key.
-Returns a Promise that resolve to the encryption public key, or rejects if the user denied the request.
+### eth_getEncryptionPublicKey
+
+#### Parameters
+
+- `Array`
+
+  0. `string` - The address of the Ethereum account whose encryption key should be retrieved.
+
+#### Returns
+
+`string` - The public encryption key of the specified Ethereum account.
+
+#### Description
+
+Requests that the user shares their public encryption key.
+Returns a Promise that resolve to the public encryption key, or rejects if the user denied the request.
 
 The public key is computed from entropy associated with the specified user account, using the [`nacl`](https://github.com/dchest/tweetnacl-js) implementation of the `X25519_XSalsa20_Poly1305` algorithm.
 
@@ -273,18 +309,18 @@ const encryptedMessage = ethUtil.bufferToHex(
 
 ### eth_decrypt
 
-```typescript
-// these two types are simply hexadecimal strings
-type EthereumAddress: string;
-type EncryptedMessage: string;
-// the decrypted message is the originally encrypted string
-type DecryptedMessage: string;
+#### Parameters
 
-ethereum.request({
-  method: 'eth_decrypt',
-  params: [ EncryptedMessage, EthereumAddress ]
-}): Promise<DecryptedMessage>
-```
+- `Array`
+
+  0. `string` - An encrypted message.
+  1. `string` - The address of the Ethereum account that can decrypt the message.
+
+#### Returns
+
+`string` - The decrypted message.
+
+#### Description
 
 Requests that MetaMask decrypts the given encrypted message.
 The message must have been encrypted using the public encryption key of the given Ethereum address.
