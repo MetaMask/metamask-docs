@@ -27,9 +27,6 @@ Important methods from this API include:
 
 ## Permissions
 
-These RPC methods are called in order to access the user's accounts.
-In the future, they will also be used to request access to other permissioned MetaMask functionality.
-
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is either _restricted_ or _open_.
 If a method is restricted, an external _domain_ (like a web3 site) must have the corresponding permission in order to call it.
@@ -74,7 +71,6 @@ If the user denies the request, the Promise will reject with a `4001` error.
 
 The request causes a MetaMask popup to appear.
 You should only request the user's accounts in response to user action, such as a button click.
-Otherwise, you will popup-spam the user.
 
 If you can't retrieve the user's account(s), you should encourage the user to initiate an account request.
 
@@ -173,11 +169,14 @@ Please see the [Onboarding Library documentation](/onboarding-library.html) for 
 ethereum.request({ method: 'wallet_registerOnboarding' }): Promise<true>;
 ```
 
-Requests that MetaMask completes its onboarding flow for the user.
+Registers the requesting site with MetaMask as the initiator of onboarding.
 Returns a Promise that resolves to `true`, or rejects if there's an error.
 
 This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
-Instead of calling this method directly, you should use [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) directly.
+You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
+This lets MetaMask redirect the user back to your site after onboarding as completed.
+
+Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
 
 ### wallet_watchAsset
 
