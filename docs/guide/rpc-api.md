@@ -166,7 +166,7 @@ If the caller has no permissions, the array will be empty.
 
 ::: tip
 As an API consumer, you are unlikely to have to call this method yourself.
-Please see [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) for more information.
+Please see the [Onboarding Library documentation](/onboarding-library.html) for more information.
 :::
 
 ```typescript
