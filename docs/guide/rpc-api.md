@@ -176,7 +176,7 @@ ethereum.request({ method: 'wallet_registerOnboarding' }): Promise<true>;
 Requests that MetaMask completes its onboarding flow for the user.
 Returns a Promise that resolves to `true`, or rejects if there's an error.
 
-This method is intended to be called at the end of the MetaMask onboarding flow.
+This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
 The onboarding flow is initiated by our [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) package, which calls `wallet_registerOnboarding` upon redirecting the user back to the original site.
 Instead of calling this method directly, you should use [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) directly.
 
