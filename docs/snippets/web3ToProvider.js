@@ -17,7 +17,7 @@ web3.eth.sendTransaction(
   {
     to: '0x...',
     'from': '0x...',
-    amount: '0x...',
+    value: '0x...',
     // And so on...
   },
   (result) => {
@@ -34,7 +34,7 @@ try {
       {
         to: '0x...',
         'from': '0x...',
-        amount: '0x...',
+        value: '0x...',
         // And so on...
       },
     ],
