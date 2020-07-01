@@ -61,7 +61,7 @@ We recommend that you check for account access in the following ways:
 ## Replacing `window.web3`
 
 For historical reasons, MetaMask injects [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
-This version of `web3` is effectively deprecated, and new features are no longer added by the [web3.js](https://github.com/ethereum/web3.js/) team.
+This version of `web3` is deprecated, and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team.
 
 If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
 Continue reading to learn more about the migration options.
