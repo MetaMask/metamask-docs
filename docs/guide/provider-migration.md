@@ -76,50 +76,7 @@ For many web3 sites, the API provided by `window.ethereum` is more than sufficie
 Much of the `web3` API simply maps to RPC methods, all of which can be requested using [`ethereum.request()`](./ethereum-provider.html#ethereum-request-args).
 For example, here are a couple of actions performed using first `window.web3`, and then their equivalents using `window.ethereum`.
 
-```javascript
-/**
- * Getting Accounts
- */
-
-// window.web3
-const accounts = web3.eth.accounts;
-
-// window.ethereum
-const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-/**
- * Sending a Transaction
- */
-
-// window.web3
-web3.eth.sendTransaction(
-  {
-    to: '0x...',
-    amount: '0x...',
-    // And so on...
-  },
-  (result) => {
-    // Handle the result
-  }
-);
-
-// window.ethereum
-ethereum
-  .request({
-    method: 'eth_sendTransaction',
-    params: [
-      {
-        to: '0x...',
-        amount: '0x...',
-        // And so on...
-      },
-    ],
-  })
-  .then((transactionHash) => {
-    // Handle the result
-  })
-  .catch(console.error);
-```
+<<< @/docs/snippets/web3ToProvider.js
 
 ### Using an Updated Convenience library
 
@@ -127,8 +84,8 @@ If you decide that you need a convenience library, you will have to convert your
 We recommend one of the following options.
 
 - [`ethers`](https://npmjs.com/package/ethers)
-  - [Documentation](https://docs.ethers.io/v5)
-- [`web3@1.x`](https://npmjs.com/package/web3)
+  - [Documentation](https://docs.ethers.io/)
+- [`web3`](https://npmjs.com/package/web3)
   - [Documentation](https://web3js.readthedocs.io)
 
 ### Using `@metamask/legacy-web3`
@@ -139,9 +96,9 @@ It is not future-proof, and it is not guaranteed to work.
 :::
 
 Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
-This package is a drop-in replacement for our `window.web3`, that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
+This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
 
 `@metamask/legacy-web3` should work exactly like our injected `window.web3`, but _we cannot guarantee that it works perfectly_.
 We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
 
-For installation and usage instructions, please see [NPM](https://npmjs.com/package/@metamask/legacy-web3).
+For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).

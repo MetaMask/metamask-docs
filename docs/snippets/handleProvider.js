@@ -34,7 +34,7 @@ ethereum.on('chainChanged', handleChainChanged);
 
 function handleChainChanged(_chainId) {
   // We recommend reloading the page, unless you must do otherwise
-  window.location.reload()
+  window.location.reload();
 }
 
 /***********************************************************/
