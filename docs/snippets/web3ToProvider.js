@@ -28,7 +28,7 @@ web3.eth.sendTransaction(
 
 // window.ethereum
 try {
-  const transactionHash = ethereum.request({
+  const transactionHash = await ethereum.request({
     method: 'eth_sendTransaction',
     params: [
       {
