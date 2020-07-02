@@ -49,15 +49,16 @@ In the near future, we are introducing some breaking changes to this API, which 
 
 At that time, we will:
 
-- Ensure that chain IDs returned by `eth_chainId` are **not** 0-prefixed
+- Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
   - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
+  - Note that this _only_ affects the [default Ethereum chains](#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
 - Stop emitting `chainIdChanged`, and instead emit `chainChanged`
 - Remove the following experimental methods:
   - `ethereum._metamask.isEnabled`
   - `ethereum._metamask.isApproved`
 
 These changes _may_ break your website.
-Please read our [migration guide](./provider-migration.html) for more details.
+Please read our [Migration Guide](./provider-migration.html) for more details.
 
 ### `window.web3` Removal
 
@@ -94,7 +95,7 @@ If you are in need of higher-level abstractions than those provided by this API,
 At the moment, the [`ethereum.chainId`](#ethereum-chainid) property and the [`chainChanged`](#chainchanged) event should be preferred over the `eth_chainId` RPC method.
 Their chain ID values are correctly formatted, per the table below.
 
-`eth_chainId` returns an incorrectly formatted (0-prefixed) chain ID for the chains in the table below, e.g. `0x01` instead of `0x1`.
+`eth_chainId` returns an incorrectly formatted (0-padded) chain ID for the chains in the table below, e.g. `0x01` instead of `0x1`.
 See the [Upcoming Breaking Changes section](#upcoming-breaking-changes) for details on when the `eth_chainId` RPC method will be fixed.
 
 Custom RPC endpoints are not affected; they always return the chain ID specified by the user.
@@ -157,6 +158,13 @@ ethereum.autoRefreshOnNetworkChange = false;
 ## Methods
 
 ### ethereum.isConnected()
+
+::: tip
+Note that this method has nothing to do with the user's accounts.
+
+You may often encounter the word "connected" in reference to whether a web3 site can access the user's accounts.
+In the provider interface, however, "connected" and "disconnected" refer to whether the provider can make RPC requests to the current chain.
+:::
 
 ```typescript
 ethereum.isConnected(): boolean;
