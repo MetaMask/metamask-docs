@@ -1,8 +1,17 @@
 # Ethereum Provider API
 
+::: tip
+We are currently rolling out the version of MetaMask that includes the new provider API.
+Some users will only have access to the legacy API until the rollout is complete.
+
+We expect the rollout to be completed no later than July 10, 2020.
+[Follow us on Twitter](https://twitter.com/metamask_io) for updates.
+:::
+
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
 This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions.
 The presence of the provider object indicates an Ethereum user.
+We recommend using [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) to detect our provider, on any platform or browser.
 
 ```javascript
 // this function detects most providers injected at window.ethereum
