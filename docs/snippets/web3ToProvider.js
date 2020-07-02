@@ -20,7 +20,10 @@ web3.eth.sendTransaction(
     value: '0x...',
     // And so on...
   },
-  (result) => {
+  (error, result) => {
+    if (error) {
+      return console.error(error)
+    }
     // Handle the result
     console.log(result);
   }
