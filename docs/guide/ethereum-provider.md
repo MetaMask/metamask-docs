@@ -4,7 +4,7 @@
 We are currently rolling out the version of MetaMask that includes the new provider API.
 Some users will only have access to the legacy API until the rollout is complete.
 
-We expect the rollout to be completed no later than July 10, 2020.
+We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
 [Follow us on Twitter](https://twitter.com/metamask_io) for updates.
 :::
 

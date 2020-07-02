@@ -4,7 +4,7 @@
 We are currently rolling out the version of MetaMask that supports some of the new RPC methods on this page.
 Some users will not have access to the updated RPC API until the rollout is complete.
 
-We expect the rollout to be completed no later than July 10, 2020.
+We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
 [Follow us on Twitter](https://twitter.com/metamask_io) for updates.
 :::
 
