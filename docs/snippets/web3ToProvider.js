@@ -22,7 +22,7 @@ web3.eth.sendTransaction(
   },
   (error, result) => {
     if (error) {
-      return console.error(error)
+      return console.error(error);
     }
     // Handle the result
     console.log(result);
