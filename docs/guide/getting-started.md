@@ -2,9 +2,15 @@
 
 To develop for MetaMask, install MetaMask on your development machine. [Download here](https://metamask.io/).
 
-:::warning A quick note...
+::: warning A quick note...
 This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 :::
+
+Once MetaMask is installed and running, you should find that new browser tabs have a `window.ethereum` object available in the developer console.
+This is how your website will interact with MetaMask.
+
+You can review the full API for that object [here](./ethereum-provider.html).
+Note that in **over the course of 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
 
@@ -60,7 +66,7 @@ We recommend that you provide a button to allow the user to connect MetaMask to 
 Clicking this button should call the following method:
 
 ```javascript
-ethereum.enable();
+ethereum.request({ method: 'eth_requestAccounts' });
 ```
 
 **Example:**
@@ -84,7 +90,7 @@ const ethereumButton = document.querySelector('.enableEthereumButton');
 
 ethereumButton.addEventListener('click', () => {
   //Will Start the metamask extension
-  ethereum.enable();
+  ethereum.request({ method: 'eth_requestAccounts' });
 });
 ```
 
@@ -99,7 +105,7 @@ Over time, this method is intended to grow to include various additional paramet
 Since it returns a promise, if you're in an `async` function, you may log in like this:
 
 ```javascript
-const accounts = await ethereum.enable();
+const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 const account = accounts[0];
 // We currently only ever provide a single account,
 // but the array gives us some room to grow.
@@ -131,7 +137,7 @@ ethereumButton.addEventListener('click', () => {
 });
 
 async function getAccount() {
-  const accounts = await ethereum.enable();
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
   const account = accounts[0];
   showAccount.innerHTML = account;
 }
@@ -150,6 +156,6 @@ Some of them simplify the creation of specific user interface elements, some ent
 The provider API itself is very simple, and wraps
 [Ethereum JSON-RPC](https://eth.wiki/json-rpc/API#json-rpc-methods)
 formatted messages, which is why developers usually use a convenience library for interacting
-with the provider, like [ethers](https://www.npmjs.com/package/ethers), [web3](https://www.npmjs.com/package/web3),
+with the provider, like [ethers](https://www.npmjs.com/package/ethers), [web3.js](https://www.npmjs.com/package/web3),
 [truffle](https://www.trufflesuite.com/), [Embark](https://framework.embarklabs.io/), or others. From those tools,
 you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
