@@ -13,13 +13,13 @@ MetaMask now provides a [metamask-onboarding library](https://github.com/MetaMas
 // As an ES6 module
 import MetaMaskOnboarding from '@metamask/onboarding';
 // Or as an ES5 module
-const MetamaskOnboarding = require('@metamask/onboarding');
+const MetaMaskOnboarding = require('@metamask/onboarding');
 ```
 
 If you'd prefer you can instead include the prebuilt ES5 bundle that ships with the library:
 
 ```html
-<script type="text/javascript" src="./metamask-onboarding.bundle.js"></script>
+<script src="./metamask-onboarding.bundle.js"></script>
 ```
 
 3. Create a new instance of the Onboarding library
@@ -39,7 +39,7 @@ onboarding.startOnboarding();
 ### Basic Usage
 
 ```javascript
-const onboarding = new MetamaskOnboarding();
+const onboarding = new MetaMaskOnboarding();
 onboarding.startOnboarding();
 ```
 
@@ -126,25 +126,24 @@ Doing this step will give you editor auto-completion for the methods exposed by 
 ### Using Vanilla Javascript + HTML
 
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="en-CA">
   <head>
+    <title>MetaMask Onboarding Example</title>
     <meta charset="UTF-8" />
   </head>
   <body>
     <h1>Sample Dapp</h1>
     <button id="onboard">Loading...</button>
-    <script
-      type="text/javascript"
-      src="./metamask-onboarding.bundle.js"
-    ></script>
-    <script type="text/javascript">
+    <script src="./metamask-onboarding.bundle.js"></script>
+    <script>
       window.addEventListener('DOMContentLoaded', () => {
-        const onboarding = new MetamaskOnboarding();
+        const onboarding = new MetaMaskOnboarding();
         const onboardButton = document.getElementById('onboard');
         let accounts;
 
         const updateButton = () => {
-          if (!MetamaskOnboarding.isMetaMaskInstalled()) {
+          if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
             onboardButton.innerText = 'Click here to install MetaMask!';
             onboardButton.onclick = () => {
               onboardButton.innerText = 'Onboarding in progress';
@@ -166,7 +165,7 @@ Doing this step will give you editor auto-completion for the methods exposed by 
         };
 
         updateButton();
-        if (MetamaskOnboarding.isMetaMaskInstalled()) {
+        if (MetaMaskOnboarding.isMetaMaskInstalled()) {
           window.ethereum.on('accountsChanged', (newAccounts) => {
             accounts = newAccounts;
             updateButton();
