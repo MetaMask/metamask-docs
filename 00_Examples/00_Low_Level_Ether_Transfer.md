@@ -20,7 +20,7 @@ if (typeof window.ethereum === 'undefined') {
 
   // In the case the user has MetaMask installed, you can easily
   // ask them to sign in and reveal their accounts:
-  ethereum.enable()
+  ethereum.request({ method: 'eth_requestAccounts' })
 
   // Remember to handle the case they reject the request:
   .catch(function (reason) {
@@ -60,42 +60,28 @@ function sendEtherFrom (account, callback) {
 
   // We're going to use the lowest-level API here, with simpler example links below
   const method = 'eth_sendTransaction'
-  const parameters = [{
+  const params = [{
     from: account,
     to: yourAddress,
     value: value,
   }]
-  const from = account
-
-  // Now putting it all together into an RPC request:
-  const payload = {
-    method: method,
-    params: parameters,
-    from: from,
-  }
 
   // Methods that require user authorization like this one will prompt a user interaction.
   // Other methods (like reading from the blockchain) may not.
-  ethereum.sendAsync(payload, function (err, response) {
-    const rejected = 'User denied transaction signature.'
-    if (response.error && response.error.message.includes(rejected)) {
-      return alert(`We can't take your money without your permission.`)
-    }
+  ethereum.request({ method, params })
+    .then((txHash) => {
 
-    if (err) {
-      return alert('There was an issue, please try again.')
-    }
-
-    if (response.result) {
-      // If there is a response.result, the call was successful.
-      // In the case of this method, it is a transaction hash.
-      const txHash = response.result
       alert('Thank you for your generosity!')
 
       // You can poll the blockchain to see when this transaction has been mined:
       pollForCompletion(txHash, callback)
-    }
-  })
+    })
+    .catch((error) => {
+      if (error.code === 4001) { // 4001: User rejected request
+        return alert(`We can't take your money without your permission.`)
+      }
+      alert('There was an issue, please try again.')
+    })
 }
 
 function pollForCompletion (txHash, callback) {
@@ -105,27 +91,33 @@ function pollForCompletion (txHash, callback) {
   // Here we'll poll every 2 seconds.
   const checkInterval = setInterval(function () {
 
-    const notYet = 'response has no error or result'
-    ethereum.sendAsync({
+    ethereum.request({
       method: 'eth_getTransactionByHash',
       params: [ txHash ],
-    }, function (err, response) {
-      if (calledBack) return
-      if (err || response.error) {
-        if (err.message.includes(notYet)) {
-          return 'transaction is not yet mined'
+    })
+      .then((transaction) => {
+
+        if (calledBack || !transaction) {
+          // We've either already seen the mined transaction,
+          // or no transaction was returned, indicating that it
+          // hasn't been mined yet.
+          return
         }
 
-        callback(err || response.error)
-      }
+        // The transaction has been mined.
+        clearInterval(checkInterval)
+        calledBack = true
+        callback(null, transaction)
+      })
+      .catch((error) => {
 
-      // We have successfully verified the mined transaction.
-      // Mind you, we should do this server side, with our own blockchain connection.
-      // Client side we are trusting the user's connection to the blockchain.
-      const transaction = response.result
-      clearInterval(checkInterval)
-      calledBack = true
-      callback(null, transaction)
+        if (calledBack) {
+          return
+        }
+
+        // Some unknown error occurred.
+        callback(error)
+      })
     })
   }, 2000)
 }
@@ -135,8 +127,8 @@ Now that was all very low level, but should show you how MetaMask works at its s
 
 Now you can read more about this [ethereum API](./API_Reference), or maybe get acquainted with a convenience library so you don't have to interact with it directly:
 
+- [ethers](https://www.npmjs.com/package/ethers)
+- [web3.js](https://www.npmjs.com/package/web3)
+- [Embark](https://framework.embarklabs.io/)
 - [ethjs](https://www.npmjs.com/package/ethjs)
 - [truffle](https://www.trufflesuite.com/)
-- [Embark](https://framework.embarklabs.io/)
-- [web3](https://www.npmjs.com/package/web3)
-

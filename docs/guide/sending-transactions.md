@@ -2,7 +2,7 @@
 
 Transactions are a formal action on a blockchain. They are always initiated in MetaMask with a call to the `eth_sendTransaction` method. They can involve a simple sending of ether, may result in sending tokens, creating a new smart contract, or changing state on the blockchain in any number of ways. They are always initiated by a signature from an _external account_, or a simple key pair.
 
-In MetaMask, using the `ethereum.sendAsync` method directly, sending a transaction will involve composing an options object like this:
+In MetaMask, using the `ethereum.request` method directly, sending a transaction will involve composing an options object like this:
 
 ```javascript
 const transactionParameters = {
@@ -17,17 +17,15 @@ const transactionParameters = {
   chainId: 3, // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
 };
 
-ethereum.sendAsync(
-  {
-    method: 'eth_sendTransaction',
-    params: [transactionParameters],
-    from: ethereum.selectedAddress,
-  },
-  callback
-);
+// txHash is a hex string
+// As with any RPC call, it may throw an error
+const txHash = await ethereum.request({
+  method: 'eth_sendTransaction',
+  params: [transactionParameters],
+});
 ```
 
-**Example**
+## Example
 
 <SendTransaction />
 
@@ -52,8 +50,8 @@ let accounts = [];
 
 //Sending Ethereum to an address
 sendEthButton.addEventListener('click', () => {
-  ethereum.sendAsync(
-    {
+  ethereum
+    .request({
       method: 'eth_sendTransaction',
       params: [
         {
@@ -64,12 +62,9 @@ sendEthButton.addEventListener('click', () => {
           gas: '0x2710',
         },
       ],
-    },
-    (err, result) => {
-      if (err) console.error(err);
-      else console.log(result);
-    }
-  );
+    })
+    .then((txHash) => console.log(txHash))
+    .catch((error) => console.error);
 });
 
 ethereumButton.addEventListener('click', () => {
@@ -77,7 +72,7 @@ ethereumButton.addEventListener('click', () => {
 });
 
 async function getAccount() {
-  accounts = await ethereum.enable();
+  accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 }
 ```
 

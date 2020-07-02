@@ -12,7 +12,7 @@ Make sure you have:
 
 1. Have the [MetaMask Extension](https://metamask.io/download.html) downloaded.
 2. Have Node.js [Downloaded and Installed](https://nodejs.org/)
-3. Clone/Download the [Project Files](https://github.com/BboyAkers/simple-dapp-tutorial) from Github.
+3. Clone/Download the [Project Files](https://github.com/BboyAkers/simple-dapp-tutorial) from GitHub.
 4. Have your favorite Text Editor or IDE installed. I personally like [Visual Studio Code](https://code.visualstudio.com/)
 
 ### Open Project Folder
@@ -231,8 +231,8 @@ Now we've created a function that will be called whenever we click the button to
 
 Inside this function we want to:
 
-1. create an async function that will try to call the ethereum.enable object
-2. catch an error and log it to the console
+1. Create an async function that will try to call the 'eth_requestAccounts' RPC method
+2. Catch any errors and log them to the console
 
 Under your `onClickInstall` function write/insert this code.
 
@@ -240,7 +240,7 @@ Under your `onClickInstall` function write/insert this code.
 const onClickConnect = async () => {
   try {
     //Will Start the MetaMask Extension
-    await ethereum.enable();
+    await ethereum.request({ method: 'eth_requestAccounts' });
   } catch (error) {
     console.error(error);
   }
@@ -268,16 +268,9 @@ Under our `MetamaskClientCheck()` function let's write/insert the code below.
 //Eth_Accounts-getAccountsButton
 getAccountsButton.addEventListener('click', () => {
   //we use eth_accounts because it returns a list of addresses owned by us.
-  ethereum.sendAsync({ method: 'eth_accounts' }, (error, response) => {
-    if (error) {
-      console.error(error);
-      getAccountsResult.innerHTML = `Error: ${error}`;
-    } else {
-      //We take the first address in the array of addresses and display it
-      getAccountsResult.innerHTML =
-        response.result[0] || 'Not able to get accounts';
-    }
-  });
+  const accounts = await ethereum.request({ method: 'eth_accounts' })
+  //We take the first address in the array of addresses and display it
+  getAccountsResults.innerHTML = response.result[0] || 'Not able to get accounts';
 });
 ```
 

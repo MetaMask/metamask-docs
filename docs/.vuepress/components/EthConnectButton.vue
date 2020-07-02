@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     connectToEthereumNetwork() {
-      ethereum.enable();
+      ethereum.request({ method: 'eth_requestAccounts' });
     },
   },
 };
