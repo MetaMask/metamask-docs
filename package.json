@@ -5,8 +5,8 @@
     "dev": "yarn start",
     "start": "vuepress dev docs",
     "build": "vuepress build docs",
-    "lint": "prettier docs/guide/*.md --single-quote",
-    "lint:fix": "prettier docs/guide/*.md --single-quote --write",
+    "lint": "prettier docs/guide/*.md docs/snippets/*",
+    "lint:fix": "yarn lint --write",
     "view-info": "vuepress view-info docs",
     "show-help": "vuepress --help"
   },

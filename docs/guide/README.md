@@ -14,7 +14,6 @@ MetaMask was created to meet the needs of secure and usable Ethereum-based web s
 - [Get started here](/guide/getting-started.html)
 - [Learn more about our JavaScript Provider API](/guide/ethereum-provider.html)
 - [Learn more about our RPC API](/guide/rpc-api.html)
-- [Learn more about our experimental APIs](/guide/experimental-apis.html)
 
 ## Account Management
 
