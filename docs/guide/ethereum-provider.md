@@ -1,17 +1,24 @@
 # Ethereum Provider API
 
-::: tip
+::: warning Rollout in Progress
 We are currently rolling out the version of MetaMask that includes the new provider API.
 Some users will only have access to the legacy API until the rollout is complete.
 
+The rollout is complete on Firefox.
 We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
 [Follow us on Twitter](https://twitter.com/metamask_io) for updates.
+:::
+
+::: tip Recommended Reading
+We recommend that all web3 site developers read the [Upcoming Breaking Changes](#upcoming-breaking-changes) and [Basic Usage](#basic-usage) sections.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
 This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions.
 The presence of the provider object indicates an Ethereum user.
 We recommend using [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) to detect our provider, on any platform or browser.
+
+The Ethereum JavaScript provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
 
 ```javascript
 // this function detects most providers injected at window.ethereum
@@ -28,24 +35,16 @@ if (provider) {
 }
 ```
 
-::: warning
-In the near future, we are making changes to our provider API that will be breaking for some web3 sites.
-
-You can prepare for these changes today.
-Please read the [Upcoming Breaking Changes section](#upcoming-breaking-changes) for details.
-:::
-
-The provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), and is designed to be minimal.
-We recommend that all web3 site developers read the [Basic Usage section](#basic-usage).
-
 ## Table of Contents
 
 [[toc]]
 
 ## Upcoming Breaking Changes
 
-::: tip
-These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
+::: warning Important Information
+In the near future, we are making changes to our provider API that will be breaking for some web3 sites.
+These changes are _upcoming_, but you can prepare for them today.
+Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
 All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
 Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
