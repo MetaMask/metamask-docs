@@ -106,7 +106,7 @@ function connect() {
 
 ### wallet_requestPermissions
 
-::: tip
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -167,7 +167,7 @@ function requestPermissions() {
 
 ### wallet_getPermissions
 
-::: tip
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -261,7 +261,7 @@ ethereum.request({
 
 ### eth_getEncryptionPublicKey
 
-::: tip
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -329,7 +329,7 @@ const encryptedMessage = ethUtil.bufferToHex(
 
 ### eth_decrypt
 
-::: tip
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
