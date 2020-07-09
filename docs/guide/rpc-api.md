@@ -214,9 +214,7 @@ This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
 #### Parameters
 
-- `Array`
-
-  0. `WatchAssetParams` - The metadata of the asset to watch.
+- `WatchAssetParams` - The metadata of the asset to watch.
 
 <<< @/docs/snippets/WatchAssetParams.ts
 
@@ -236,19 +234,17 @@ Once added, the token is indistinguishable from those added via legacy methods, 
 #### Example
 
 ```javascript
-const myAssetData = {
-  type: 'ERC20',
-  options: {
-    address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-    symbol: 'FOO',
-    decimals: 18,
-    image: 'https://foo.io/token-image.svg',
-  },
-};
-
 ethereum.request({
   method: 'wallet_watchAsset',
-  params: [myAssetData],
+  params: {
+    type: 'ERC20',
+    options: {
+      address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+      symbol: 'FOO',
+      decimals: 18,
+      image: 'https://foo.io/token-image.svg',
+    },
+  },
 });
   .then((success) => {
     if (success) {
