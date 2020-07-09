@@ -23,8 +23,8 @@ const tokenSymbol = 'TUT';
 const tokenDecimals = 18;
 const tokenImage = 'http://placekitten.com/200/300';
 
-// wasAdded is a boolean. Like any RPC method, an error may be thrown.
 try {
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
   const wasAdded = await ethereum.request({
     method: 'metamask_watchAsset',
     params: {
@@ -37,14 +37,14 @@ try {
       },
     },
   });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('Your loss!');
+  }
 } catch (error) {
   console.log(error);
-}
-
-if (added) {
-  console.log('Thanks for your interest!');
-} else {
-  console.log('Your loss!');
 }
 ```
 
