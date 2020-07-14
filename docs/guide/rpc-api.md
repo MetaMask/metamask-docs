@@ -1,14 +1,5 @@
 # RPC API
 
-::: warning Rollout in Progress
-We are currently rolling out the version of MetaMask that supports some of the new RPC methods on this page.
-Some users will not have access to the updated RPC API until the rollout is complete.
-
-The rollout is complete on Firefox.
-We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
-[Follow us on Twitter](https://twitter.com/metamask_io) for updates.
-:::
-
 MetaMask uses the [`ethereum.request(args)` method](./ethereum-provider.html#ethereum-request-args) to wrap an RPC API.
 
 The API is based on an interface exposed by all Ethereum clients, along with a growing number of methods that may or may not be supported by other wallets.
@@ -214,9 +205,7 @@ This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
 #### Parameters
 
-- `Array`
-
-  0. `WatchAssetParams` - The metadata of the asset to watch.
+- `WatchAssetParams` - The metadata of the asset to watch.
 
 <<< @/docs/snippets/WatchAssetParams.ts
 
@@ -236,19 +225,17 @@ Once added, the token is indistinguishable from those added via legacy methods, 
 #### Example
 
 ```javascript
-const myAssetData = {
-  type: 'ERC20',
-  options: {
-    address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-    symbol: 'FOO',
-    decimals: 18,
-    image: 'https://foo.io/token-image.svg',
-  },
-};
-
 ethereum.request({
   method: 'wallet_watchAsset',
-  params: [myAssetData],
+  params: {
+    type: 'ERC20',
+    options: {
+      address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+      symbol: 'FOO',
+      decimals: 18,
+      image: 'https://foo.io/token-image.svg',
+    },
+  },
 });
   .then((success) => {
     if (success) {
