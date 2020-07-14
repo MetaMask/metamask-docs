@@ -1,14 +1,5 @@
 # Ethereum Provider API
 
-::: warning Rollout in Progress
-We are currently rolling out the version of MetaMask that includes the new provider API.
-Some users will only have access to the legacy API until the rollout is complete.
-
-The rollout is complete on Firefox.
-We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
-[Follow us on Twitter](https://twitter.com/metamask_io) for updates.
-:::
-
 ::: tip Recommended Reading
 We recommend that all web3 site developers read the [Upcoming Breaking Changes](#upcoming-breaking-changes) and [Basic Usage](#basic-usage) sections.
 :::

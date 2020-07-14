@@ -1,14 +1,5 @@
 # RPC API
 
-::: warning Rollout in Progress
-We are currently rolling out the version of MetaMask that supports some of the new RPC methods on this page.
-Some users will not have access to the updated RPC API until the rollout is complete.
-
-The rollout is complete on Firefox.
-We are waiting on the Google Chrome review process, which will hopefully have completed by July 10, 2020.
-[Follow us on Twitter](https://twitter.com/metamask_io) for updates.
-:::
-
 MetaMask uses the [`ethereum.request(args)` method](./ethereum-provider.html#ethereum-request-args) to wrap an RPC API.
 
 The API is based on an interface exposed by all Ethereum clients, along with a growing number of methods that may or may not be supported by other wallets.
