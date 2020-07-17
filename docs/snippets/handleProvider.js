@@ -16,7 +16,7 @@ if (provider) {
 function startApp(provider) {
   // If the provider returned by detectEthereumProvider is not the same as
   // window.ethereum, something is overwriting it, perhaps another wallet.
-  if (provider === window.ethereum) {
+  if (provider !== window.ethereum) {
     console.error('Do you have multiple wallets installed?');
   }
   // Access the decentralized web!
