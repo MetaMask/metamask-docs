@@ -533,7 +533,7 @@ You can think of these signatures as follows:
    - `eth_uninstallFilter`
    - `net_version`
 
-## Deprecated Events
+## Legacy Events
 
 ### close (DEPRECATED)
 

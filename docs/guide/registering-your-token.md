@@ -47,9 +47,3 @@ try {
   console.log(error);
 }
 ```
-
-## Default Token List
-
-If you're a major and popular token, you may qualify to be listed in our [eth-contract-metadata](https://github.com/MetaMask/eth-contract-metadata) registry. This is a centralized solution and takes a larger toll on our development team, so we prefer to avoid the politics of picking and choosing tokens that get auto-detected in users' accounts, so please see if the EIP-747 method above can suit your needs before submitting a new token there for inclusion.
-
-If you have a user on your site, asking them to click once to add a token is a small burden on them, and allows you to leverage the trusting relationship you already have with your user instead of our central repository.
