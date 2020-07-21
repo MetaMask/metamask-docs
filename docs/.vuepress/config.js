@@ -116,10 +116,8 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       collapsable: false,
       children: [
         'mobile-getting-started',
+        'site-compatibility-checklist',
         'mobile-best-practices',
-        'dapp-compatibility',
-        'deeplinking',
-        'walletconnect',
       ]
     },
     {
