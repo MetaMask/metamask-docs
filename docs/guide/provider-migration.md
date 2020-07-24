@@ -60,16 +60,17 @@ We recommend that you check for account access in the following ways:
 
 ### Handling the Removal of `ethereum.publicConfigStore`
 
-How to handle this change depends on how you use it.
+How to handle this change depends on if and how you use the `publicConfigStore`.
 We have seen examples of listening for provider state changes the `publicConfigStore` `data` event, and accessing the `publicConfigStore` internal state directly.
 
 We recommend that you search your code and its dependencies for references to `publicConfigStore`.
 If you find any references, you should understand what it's being used for, and migrate to [one of the recommended provider APIs](./ethereum-provider.html#using-the-provider) instead.
+If you don't find any references, you should not be affected by this change.
 
-Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that the latest versions of the following common libraries do not:
+Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that the latest versions of the following common libraries will not be affected by this change:
 
 - `ethers`
-- `web3` (a.k.a. web3.js)
+- `web3` (web3.js)
 
 ## Replacing `window.web3`
 

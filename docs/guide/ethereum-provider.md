@@ -58,7 +58,6 @@ At that time, we will:
 - Remove the `ethereum.publicConfigStore` object
   - This object was, despite its name, never intended for public consumption.
     Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
-  - Some users access this object via `web3.currentProvider.publicConfigStore`.
 
 These changes _may_ break your website.
 Please read our [Migration Guide](./provider-migration.html) for more details.
