@@ -55,6 +55,9 @@ At that time, we will:
 - Remove the following experimental methods:
   - `ethereum._metamask.isEnabled`
   - `ethereum._metamask.isApproved`
+- Remove the `ethereum.publicConfigStore` object
+  - This object was, despite its name, never intended for public consumption.
+    Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
 
 These changes _may_ break your website.
 Please read our [Migration Guide](./provider-migration.html) for more details.
