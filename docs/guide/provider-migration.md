@@ -58,6 +58,20 @@ We recommend that you check for account access in the following ways:
 
    - If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request accounts using the [`eth_requestAccounts` RPC method](./rpc-api.html#eth-requestaccounts).
 
+### Handling the Removal of `ethereum.publicConfigStore`
+
+How to handle this change depends on if and how you use the `publicConfigStore`.
+We have seen examples of listening for provider state changes the `publicConfigStore` `data` event, and accessing the `publicConfigStore` internal state directly.
+
+We recommend that you search your code and its dependencies for references to `publicConfigStore`.
+If you find any references, you should understand what it's being used for, and migrate to [one of the recommended provider APIs](./ethereum-provider.html#using-the-provider) instead.
+If you don't find any references, you should not be affected by this change.
+
+Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that the latest versions of the following common libraries will not be affected by this change:
+
+- `ethers`
+- `web3` (web3.js)
+
 ## Replacing `window.web3`
 
 For historical reasons, MetaMask injects [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
