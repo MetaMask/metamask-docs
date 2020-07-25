@@ -24,7 +24,7 @@ if (typeof window.ethereum !== 'undefined') {
 }
 ```
 
-You can review the full API for the `windows.ethereum` object [here](./ethereum-provider.html).
+You can review the full API for the `window.ethereum` object [here](./ethereum-provider.html).
 
 ### Running a Test Network
 
