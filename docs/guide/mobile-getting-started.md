@@ -1,4 +1,4 @@
-# Mobile Getting Started
+# Introduction
 
 ## Why you and your users should use MetaMask Mobile
 
