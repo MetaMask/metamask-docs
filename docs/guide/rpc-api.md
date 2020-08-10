@@ -353,3 +353,47 @@ ethereum
   )
   .catch((error) => console.log(error.message));
 ```
+
+## Mobile Specific RPC Methods
+
+### wallet_scanQRCode
+
+#### Parameters
+
+- `Array`
+
+  0. `string` - (optional) A regular expression for matching arbitrary QR code strings
+
+#### Returns
+
+`string` - The string corresponding to the scanned QR code.
+
+#### Description
+
+Requests that the user scans a QR code using their device camera.
+Returns a Promise that resolves to a string, matching either:
+
+1. The regex parameter, if provided
+2. An ethereum address, if no regex parameter was provided
+
+If neither condition is met, the Promise will reject with an error.
+
+MetaMask previously introduced this feature per the proposed [EIP-945](https://github.com/ethereum/EIPs/issues/945).
+The functionality was temporarily removed before being reintroduced as this RPC method.
+
+#### Example
+
+```javascript
+ethereum
+  .request({
+    method: 'wallet_scanQRCode',
+    // The regex string must be valid input to the RegExp constructor, if provided
+    params: ['\\D'],
+  })
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
