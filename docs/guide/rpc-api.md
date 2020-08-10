@@ -362,27 +362,24 @@ ethereum
 
 - `Array`
 
-  0. `'REGEX'` - Optional regex for scanning arbitrary (non ETH address) QR code strings.
-
+  0. `string` - (optional) A regular expression for matching arbitrary QR code strings
 
 #### Returns
 
-`string` - A string representing the QR code that was scanned.
+`string` - The string corresponding to the scanned QR code.
 
 #### Description
 
-Allows dApps to request QR code scanning from MetaMask Mobile.
-Metamask previously introduced this feature via [EIP 945](https://github.com/ethereum/EIPs/issues/945), although it was later removed due a modification of the provider architecture. dApp developers may now access the functionality via this RPC method directly.
+Requests that the user scans a QR code using their device camera.
+Returns a Promise that resolves to a string, matching either:
 
-Returns a Promise that resolves to a string corresponding to the scanned QR code.
+1. The regex parameter, if provided
+2. An ethereum address, if no regex parameter was provided
 
-The contents of the QR code must equal one of the following:
-1. An ethereum address
-2. a string that matches the optionally provided regex parameter 
+If neither condition is met, the Promise will reject with an error.
 
-The method will throw an error if one of these two criteria are not met.
-
-The request activates the user's camera, so they may scan the QR code.
+MetaMask previously introduced this feature per the proposed [EIP-945](https://github.com/ethereum/EIPs/issues/945).
+The functionality was temporarily removed before being reintroduced as this RPC method.
 
 #### Example
 
@@ -390,10 +387,13 @@ The request activates the user's camera, so they may scan the QR code.
 ethereum
   .request({
     method: 'wallet_scanQRCode',
-    params: ['\\D'], //Write the regex as a string, don't forget to use the escape character '\' if it uses backslashes
+    // The regex string must be valid input to the RegExp constructor, if provided
+    params: ['\\D'],
   })
   .then((result) => {
-    console.log(result)})
+    console.log(result);
+  })
   .catch((error) => {
-    console.log(error)});
+    console.log(error);
+  });
 ```
