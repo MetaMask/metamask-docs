@@ -7,6 +7,7 @@ This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 :::
 
 
+<GithubContributor />
 
 ## Basic Considerations
 
@@ -18,6 +19,9 @@ To verify if the browser is running MetaMask, copy and paste the code snippet be
     console.log("MetaMask is installed!"); 
   }
 ```
+
+Once MetaMask is running, you should find that new browser tabs have a `window.ethereum` object available in the console. This is the way MetaMask provides for you to interact with it.
+
 You can review the full API for the `windows.ethereum` object [here](./ethereum-provider.html).
 Note that in **early 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
