@@ -1,278 +1,206 @@
 # Ethereum Provider API
 
+::: tip Recommended Reading
+We recommend that all web3 site developers read the [Upcoming Breaking Changes](#upcoming-breaking-changes) and [Basic Usage](#basic-usage) sections.
+:::
+
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
-This API allows websites to request user login, load data from blockchains the user has a connection to, and suggest that the user sign messages and transactions.
-You can use this API to detect the user of an Ethereum browser.
+This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions.
+The presence of the provider object indicates an Ethereum user.
+We recommend using [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) to detect our provider, on any platform or browser.
+
+The Ethereum JavaScript provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
 
 ```javascript
-if (typeof window.ethereum !== 'undefined') {
-  // Ethereum user detected. You can now use the provider.
-  const provider = window['ethereum'];
+// this function detects most providers injected at window.ethereum
+import detectEthereumProvider from '@metamask/detect-provider';
+
+const provider = await detectEthereumProvider();
+
+if (provider) {
+  // From now on, this should always be true:
+  // provider === window.ethereum
+  startApp(provider); // initialize your app
+} else {
+  console.log('Please install MetaMask!');
 }
 ```
 
-The provider API itself is very simple, and wraps [Ethereum JSON-RPC](./JSON-RPC-API) formatted messages, which is why developers usually use a convenience library for interacting with the provider,
-like [web3](https://www.npmjs.com/package/web3), [ethers](https://www.npmjs.com/package/ethers), [truffle](https://truffleframework.com/), [Embark](https://embark.status.im/), or others.
-From those tools, you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.
+## Table of Contents
 
-However, for developers of convenience libraries, and for developers who would like to use features that are not yet supported by their favorite libraries, knowledge of the provider API is essential.
+[[toc]]
 
-## Upcoming Provider Changes
+## Upcoming Breaking Changes
 
-**Note:** These changes are _upcoming._ Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for details.
+::: warning Important Information
+In the near future, we are making changes to our provider API that will be breaking for some web3 sites.
+These changes are _upcoming_, but you can prepare for them today.
+Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
-In **early 2020**, we are introducing breaking changes to this API, which we encourage you to
+All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
+Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
+:::
+
+### `window.ethereum` API Changes
+
+In the near future, we are introducing some breaking changes to this API, which we encourage you to
 [read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
-We only break APIs as a last resort, and unfortunately had to pursue this change.
 
-We will begin supporting the new API in **early 2020**.
-We will support the old and new API for 6 weeks, after which only the new API will be supported.
-This update will make the MetaMask inpage provider fully compatible with
-[EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md)
-and [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md).
+At that time, we will:
 
-You can continue reading to learn about the current API. Otherwise, [click here to learn about the upcoming API changes](#new-api).
+- Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
+  - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
+  - Note that this _only_ affects the [default Ethereum chains](#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
+- Stop emitting `chainIdChanged`, and instead emit `chainChanged`
+- Remove the following experimental methods:
+  - `ethereum._metamask.isEnabled`
+  - `ethereum._metamask.isApproved`
+- Remove the `ethereum.publicConfigStore` object
+  - This object was, despite its name, never intended for public consumption.
+    Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
 
-### A Note on Language
+These changes _may_ break your website.
+Please read our [Migration Guide](./provider-migration.html) for more details.
 
-In our usage, if a feature is _deprecated_, we strongly discourage its use, and may remove it in the future.
-Features that will be _removed_ or _replaced_ on a particular date are clearly marked as such.
-We do not anticipate any further breaking changes after removing the old API as described herein.
+### `window.web3` Removal
 
-# Current API
+::: tip
+If you do not use the `window.web3` object injected by MetaMask, you will not be affected by these changes.
+:::
+
+In the near future, we will:
+
+- Stop injecting `window.web3` into web pages
+
+If you rely on the `window.web3` object currently injected by MetaMask, these changes _will_ break your website.
+Please read our [migration guide](./provider-migration.html) for more details.
+
+## Basic Usage
+
+For any non-trivial Ethereum web application — a.k.a. web3 site — to work, you will have to:
+
+- Detect the Ethereum provider (`window.ethereum`)
+- Detect which Ethereum network the user is connected to
+- Get the user's Ethereum account(s)
+
+The snippet at the top of this page is sufficient for detecting the provider.
+You can learn how to accomplish the other two by reviewing the snippet in the [Using the Provider section](#using-the-provider).
+
+The provider API is all you need to create a full-featured web3 application.
+
+That said, many developers use a convenience library, such as [ethers](https://www.npmjs.com/package/ethers) and [web3.js](https://www.npmjs.com/package/web3), instead of using the provider directly.
+If you are in need of higher-level abstractions than those provided by this API, we recommend that you use a convenience library.
+
+## Chain IDs
+
+::: warning
+At the moment, the [`ethereum.chainId`](#ethereum-chainid) property and the [`chainChanged`](#chainchanged) event should be preferred over the `eth_chainId` RPC method.
+Their chain ID values are correctly formatted, per the table below.
+
+`eth_chainId` returns an incorrectly formatted (0-padded) chain ID for the chains in the table below, e.g. `0x01` instead of `0x1`.
+See the [Upcoming Breaking Changes section](#upcoming-breaking-changes) for details on when the `eth_chainId` RPC method will be fixed.
+
+Custom RPC endpoints are not affected; they always return the chain ID specified by the user.
+:::
+
+These are the IDs of the Ethereum chains that MetaMask supports by default.
+Consult [chainid.network](https://chainid.network) for more.
+
+| Hex  | Decimal | Network                         |
+| ---- | ------- | ------------------------------- |
+| 0x1  | 1       | Ethereum Main Network (MainNet) |
+| 0x3  | 3       | Ropsten Test Network            |
+| 0x4  | 4       | Rinkeby Test Network            |
+| 0x5  | 5       | Goerli Test Network             |
+| 0x2a | 42      | Kovan Test Network              |
 
 ## Properties
 
-These properties can be used to check the current state of the connected user,
-which can be important things to verify before sending a transaction.
-
-### ethereum.networkVersion
-
-Returns a numeric string representing the current blockchain's network ID. A few example values:
-
-```javascript
-'1': Ethereum Main Network
-'2': Morden Test network
-'3': Ropsten Test Network
-'4': Rinkeby Test Network
-'5': Goerli Test Network
-'42': Kovan Test Network
-```
-
-### ethereum.selectedAddress
-
-Returns a hex-prefixed string representing the current user's selected address, ex: `"0xfdea65c8e26263f6d9a1b5de9555d2931a33b825"`.
-
 ### ethereum.isMetaMask
 
-Returns `true` or `false`, representing whether the user has MetaMask installed.
+::: tip
+This property is not guaranteed to be correct for all providers. Non-MetaMask providers may also set this property to `true`.
+:::
 
-## Methods (Current API)
+`true` if the user has MetaMask installed.
 
-### ethereum.enable()
+### ethereum.chainId
 
-Requests the user provides an ethereum address to be identified by.
-Returns a promise of an array of hex-prefixed ethereum address strings.
+::: warning
+The value of this property can change at any time, and should not be exclusively relied upon. See the [`chainChanged`](#chainchanged) event for details.
 
-#### Example (ES6)
+**NOTE:** See the [Chain IDs section](#chain-ids) for important information about the MetaMask provider's chain IDs.
+:::
 
-Using an [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
+A hexadecimal string representing the current chain ID.
 
-```javascript
-try {
-  const accounts = await ethereum.enable();
-  // You now have an array of accounts!
-  // Currently only ever one:
-  // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-} catch (error) {
-  // Handle error. Likely the user rejected the login
-  console.error(error);
-}
-```
+### ethereum.autoRefreshOnNetworkChange
 
-#### Example (ES5)
+::: warning
+The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
+When `window.web3` [is removed](#window-web3-removal), either the effects of this property will change, or it will be removed.
 
-```javascript
-ethereum
-  .enable()
-  .then(function (accounts) {
-    // You now have an array of accounts!
-    // Currently only ever one:
-    // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
-  })
-  .catch(function (error) {
-    // Handle error. Likely the user rejected the login
-    console.error(error);
-  });
-```
+As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
+We recommend reloading the page on `chainChange` unless you have good reason not to.
+:::
 
-### ethereum.send(payload, callback) (To Be Replaced)
+By default, this property is `true`.
 
-_This will be replaced with `ethereum.send(method: string, params: Array<any>)` in **[the new API](#new-api)**._
+If this property is truthy, MetaMask will reload the page in the following cases:
 
-See `ethereum.sendAsync`, directly below.
+- When the connected chain (network) changes, if `window.web3` has been accessed during the page lifecycle
+- When `window.web3` is accessed, if the connected chain (network) has changed during the page lifecycle
 
-### ethereum.sendAsync(payload, callback)
-
-```typescript
-interface JsonRpcResponse {
-  id: string | undefined,
-  jsonrpc: '2.0',
-  method: string,
-  result: any,
-}
-
-ethereum.sendAsync(payload: Object, callback: Function): JsonRpcResponse
-```
-
-_To be superseded by the Promise-returning `ethereum.send()` method in_
-_[EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md). (See also **[the new API](#new-api)**.)_
-
-Sends a message to the web3 browser. Message format maps to the format of
-[the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
-
-Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
-
-```javascript
-params: [
-  {
-    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
-    gas: '0x76c0', // 30400
-    gasPrice: '0x9184e72a000', // 10000000000000
-    value: '0x9184e72a', // 2441406250
-    data:
-      '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
-  },
-];
-
-ethereum.sendAsync(
-  {
-    method: 'eth_sendTransaction',
-    params: params,
-    from: accounts[0], // Provide the user's account to use.
-  },
-  (err, response) => {
-    if (err) {
-      // Handle the error
-    } else {
-      // This always returns a JSON RPC response object.
-      // The result varies by method, per the JSON RPC API.
-      // For example, this method will return a transaction hash on success.
-      const result = response.result;
-    }
-  }
-);
-```
-
-### ethereum.autoRefreshOnNetworkChange (To Be Removed)
-
-_This will be removed **[the new API](#new-api)**. At this time, MetaMask will also stop reloading the page on network changes._
-_[Click here](https://medium.com/metamask/no-longer-reloading-pages-on-network-change-fbf041942b44) for more details._
-
-When the network is changed, MetaMask will reload any pages that have made requests to the provider.
-This automatic reload behavior will be removed in a future release of MetaMask, but in the meantime it can be disabled with this flag.
-
-To disable auto-refresh on a network change you can do:
+To disable this behavior, set this property to `false` immediately after detecting the provider:
 
 ```javascript
 ethereum.autoRefreshOnNetworkChange = false;
 ```
 
-This can be toggled on or off at any time.
+## Methods
 
-**Note:** Setting this flag to `true` results in the default behavior, which is subject to change. If your site relies upon MetaMask reloading it upon network change, you will need to trigger the reload yourself in a `networkChanged` event handler to ensure it continues to work with future releases.
+### ethereum.isConnected()
 
-### ethereum.on(eventName, callback)
+::: tip
+Note that this method has nothing to do with the user's accounts.
 
-The provider supports listening for some events:
-
-- `accountsChanged`, returns updated account array.
-- `networkChanged`, returns network ID string.
-
-#### Example
-
-```javascript
-ethereum.on('accountsChanged', function (accounts) {
-  // Time to reload your interface with accounts[0]!
-});
-```
-
-**Note:** At the moment, the `networkChanged` event is only useful if you disable auto-refresh on network
-change by setting [`ethereum.autoRefreshOnNetworkChange`](#ethereum.autorefreshonnetworkchange) to `false`.
-Otherwise, MetaMask will default to auto-reloading pages upon network change if they have made requests to the provider.
-_MetaMask will stop reloading pages on network change **[the new API](#new-api)**, and this setting will be removed._
-_[Click here](https://medium.com/metamask/no-longer-reloading-pages-on-network-change-fbf041942b44) for more details._
-
-# New API
-
-This API will become available in **early 2020**. It is _not_ live. Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for details.
-
-It will be the only API supported starting **following a six-week deprecation period.**
-If you want examples of how to setup your dapp using the new API, you can check out
-[this gist](https://gist.github.com/rekmarks/d318677c8fc89e5f7a2f526e00a0768a).
-
-## Methods (New API)
-
-### ethereum.send('eth_requestAccounts')
-
-#### ethereum.enable() (Deprecated)
-
-Requests that the user provides an ethereum address to be identified by.
-Returns a promise of an array of hex-prefixed ethereum address strings.
-See [EIP 1102](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md) for more details.
-
-#### Example (ES6)
-
-Using an [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
-
-```javascript
-try {
-  const accounts = await ethereum.send('eth_requestAccounts');
-  // You now have an array of accounts!
-  // Currently only ever one:
-  // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
-} catch (error) {
-  if (error.code === 4001) {
-    // EIP 1193 userRejectedRequest error
-    console.log('Please connect to MetaMask.');
-  } else {
-    console.error(error);
-  }
-}
-```
-
-#### Example (ES5)
-
-```javascript
-ethereum
-  .send('eth_requestAccounts')
-  .then(function (accounts) {
-    // You now have an object that holds an array of accounts!
-    // Currently only ever one:
-    // { id: 1, jsonrpc: "2.0", result: ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']}
-  })
-  .catch(function (error) {
-    if (error.code === 4001) {
-      // EIP 1193 userRejectedRequest error
-      console.log('Please connect to MetaMask.');
-    } else {
-      console.error(error);
-    }
-  });
-```
-
-### ethereum.send(method, params)
+You may often encounter the word "connected" in reference to whether a web3 site can access the user's accounts.
+In the provider interface, however, "connected" and "disconnected" refer to whether the provider can make RPC requests to the current chain.
+:::
 
 ```typescript
-ethereum.send(method: string, params: Array<any>): Promise<any>
+ethereum.isConnected(): boolean;
 ```
 
-The way to send requests to the dapp browser. `method` and `params` should follow [the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
+Returns `true` if the provider is connected to the current chain, and `false` otherwise.
 
-Returns a `Promise` that resolves to the result of the method. Not all methods require `params`, e.g. `ethereum.send('eth_accounts')`.
+If the provider is not connected, the page will have to be reloaded in order for connection to be re-established.
+Please see the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
-Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
+### ethereum.request(args)
+
+```typescript
+interface RequestArguments {
+  method: string;
+  params?: unknown[] | object;
+}
+
+ethereum.request(args: RequestArguments): Promise<unknown>;
+```
+
+Use `request` to submit RPC requests to Ethereum via MetaMask.
+It returns a `Promise` that resolves to the result of the RPC method call.
+
+The `params` and return value will vary by RPC method.
+In practice, if a method has any `params`, they are almost always of type `Array<any>`.
+
+If the request fails for any reason, the Promise will reject with an [Ethereum RPC Error](#errors).
+
+MetaMask supports most standardized Ethereum RPC methods, in addition to a number of methods that may not be
+supported by other wallets.
+See the MetaMask [RPC API documentation](./rpc-api.html) for details.
+
+#### Example
 
 ```javascript
 params: [
@@ -288,126 +216,370 @@ params: [
 ];
 
 ethereum
-  .send('eth_sendTransaction', params)
-  .then(function (result) {
-    // The result varies by method, per the JSON RPC API.
-    // For example, this method will return a transaction hash on success.
-  })
-  .catch(function (error) {
-    // Like a typical promise, returns an error on rejection.
-  });
-```
-
-### ethereum.on(eventName, callback)
-
-The provider supports listening for all events specified in [EIP 1193](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md#events).
-
-The following are especially important for managing the state of your dapp:
-
-- `accountsChanged`, returns an array of the currently available accounts.
-- `chainChanged`, returns the hex-formatted chain ID string of the currently used chain/network.
-- `networkChanged`, _(Discouraged)_ returns decimal-formatted network ID string of the currently used chain/network.
-
-#### Example
-
-```javascript
-ethereum.on('accountsChanged', function (accounts) {
-  // Time to reload your interface with accounts[0]!
-});
-
-ethereum.on('chainChanged', function (chainId) {
-  // Time to make sure your any calls are directed to the correct chain!
-});
-```
-
-#### List of Chain and Network IDs
-
-```javascript
-'1': Ethereum Main Network
-'2': Morden Test network
-'3': Ropsten Test Network
-'4': Rinkeby Test Network
-'5': Goerli Test Network
-'42': Kovan Test Network
-```
-
-### ethereum.sendAsync(payload, callback) (Deprecated)
-
-```typescript
-interface JsonRpcResponse {
-  id: string | undefined,
-  jsonrpc: '2.0',
-  method: string,
-  result: any,
-}
-
-ethereum.sendAsync(payload: Object, callback: Function): JsonRpcResponse
-```
-
-_We strongly discourage the use of this method, which may be removed in the future._
-
-Sends a message to the dapp browser. Message format maps to the format of
-[the Ethereum JSON-RPC API](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods).
-
-Here's an example of everyone's favorite method, `eth_sendTransaction`, which is both how Ether is sent, and how smart contract methods are called:
-
-```javascript
-params: [
-  {
-    from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-    to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
-    gas: '0x76c0', // 30400
-    gasPrice: '0x9184e72a000', // 10000000000000
-    value: '0x9184e72a', // 2441406250
-    data:
-      '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
-  },
-];
-
-ethereum.sendAsync(
-  {
+  .request({
     method: 'eth_sendTransaction',
-    params: params,
-    from: accounts[0], // Provide the user's account to use.
-  },
-  (err, result) => {
-    if (err) {
-      // Handle the error
-    } else {
-      // This always returns a JSON RPC response object.
-      // The result varies by method, per the JSON RPC API.
-      // For example, this method will return a transaction hash on success.
-      const result = response.result;
-    }
-  }
-);
+    params,
+  })
+  .then((result) => {
+    // The result varies by by RPC method.
+    // For example, this method will return a transaction hash hexadecimal string on success.
+  })
+  .catch((error) => {
+    // If the request fails, the Promise will reject with an error.
+  });
 ```
 
-## Properties
+## Events
 
-Useful for knowing whether `window.ethereum` is MetaMask, but not much else.
-
-### ethereum.isMetaMask
-
-`true` if the user has MetaMask installed, `false` otherwise.
-
-### ethereum.networkVersion (Deprecated)
-
-_We strongly discourage the use of this property, which may be removed in the future._
-
-Returns a numeric string representing the current blockchain's network ID. A few example values:
+The MetaMask provider implements the [Node.js `EventEmitter`](https://nodejs.org/api/events.html) API.
+This sections details the events emitted via that API.
+There are innumerable `EventEmitter` guides elsewhere, but you can listen for events like this:
 
 ```javascript
-'1': Ethereum Main Network
-'2': Morden Test network
-'3': Ropsten Test Network
-'4': Rinkeby Test Network
-'5': Goerli Test Network
-'42': Kovan Test Network
+ethereum.on('accountsChanged', (accounts) => {
+  // Handle the new accounts, or lack thereof.
+  // "accounts" will always be an array, but it can be empty.
+});
+
+ethereum.on('chainChanged', (chainId) => {
+  // Handle the new chain.
+  // Correctly handling chain changes can be complicated.
+  // We recommend reloading the page unless you have a very good reason not to.
+  window.location.reload();
+});
 ```
 
-### ethereum.selectedAddress (Deprecated)
+### connect
 
-_We strongly discourage the use of this property, which may be removed in the future._
+```typescript
+interface ConnectInfo {
+  chainId: string;
+}
 
-Returns a hex-prefixed string representing the current user's selected address, ex: `"0xfdea65c8e26263f6d9a1b5de9555d2931a33b825"`.
+ethereum.on('connect', handler: (connectInfo: ConnectInfo) => void);
+```
+
+The MetaMask provider emits this event when it first becomes able to submit RPC requests to a chain.
+We recommend using a `connect` event handler and the [`ethereum.isConnected()` method](#ethereum-isconnected) in order to determine when/if the provider is connected.
+
+### disconnect
+
+```typescript
+ethereum.on('disconnect', handler: (error: ProviderRpcError) => void);
+```
+
+The MetaMask provider emits this event if it becomes unable to submit RPC requests to any chain.
+In general, this will only happen due to network connectivity issues or some unforeseen error.
+
+Once `disconnect` has been emitted, the provider will not accept any new requests until the connection to the chain has been re-restablished, which requires reloading the page.
+You can also use the [`ethereum.isConnected()` method](#ethereum-isconnected) to determine if the provider is disconnected.
+
+### accountsChanged
+
+```typescript
+ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void);
+```
+
+The MetaMask provider emits this event whenever the return value of the `eth_accounts` RPC method changes.
+`eth_accounts` returns an array that is either empty or contains a single account address.
+The returned address, if any, is the address of the most recently used account that the caller is permitted to access.
+Callers are identified by their URL _origin_, which means that all sites with the same origin share the same permissions.
+
+This means that `accountsChanged` will be emitted whenever the user's exposed account address changes.
+
+::: tip
+We plan to allow the `eth_accounts` array to be able to contain multiple addresses in the near future.
+:::
+
+### chainChanged
+
+::: warning
+**NOTE:** See the [Chain IDs section](#chain-ids) for important information about the MetaMask provider's chain IDs.
+:::
+
+```typescript
+ethereum.on('chainChanged', handler: (chainId: string) => void);
+```
+
+The MetaMask provider emits this event when the currently connected chain changes.
+
+All RPC requests are submitted to the currently connected chain.
+Therefore, it's critical to keep track of the current chain ID by listening for this event.
+
+We _strongly_ recommend reloading the page on chain changes, unless absolutely necessary not to.
+
+```javascript
+ethereum.on('chainChanged', (_chainId) => window.location.reload());
+```
+
+### message
+
+```typescript
+interface ProviderMessage {
+  type: string;
+  data: unknown;
+}
+
+ethereum.on('message', handler: (message: ProviderMessage) => void);
+```
+
+The MetaMask provider emits this event when it receives some message that the consumer should be notified of.
+The kind of message is identified by the `type` string.
+
+RPC subscription updates are a common use case for the `message` event.
+For example, if you create a subscription using `eth_subscribe`, each subscription update will be emitted as a `message` event with a `type` of `eth_subscription`.
+
+## Errors
+
+All errors thrown or returned by the MetaMask provider follow this interface:
+
+```typescript
+interface ProviderRpcError extends Error {
+  message: string;
+  code: number;
+  data?: unknown;
+}
+```
+
+The [`ethereum.request(args)` method](#ethereum-request-args) throws errors eagerly.
+You can often use the error `code` property to determine why the request failed.
+Common codes and their meaning include:
+
+- `4001`
+  - The request was rejected by the user
+- `-32602`
+  - The parameters were invalid
+- `-32603`
+  - Internal error
+
+For the complete list of errors, please see [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193#provider-errors) and [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
+
+::: tip
+The [`eth-rpc-errors`](https://npmjs.com/package/eth-rpc-errors) package implements all RPC errors thrown by the MetaMask provider, and can help you identify their meaning.
+:::
+
+## Using the Provider
+
+This snippet explains how to accomplish the three most common requirements for web3 sites:
+
+- Detect the Ethereum provider (`window.ethereum`)
+- Detect which Ethereum network the user is connected to
+- Get the user's Ethereum account(s)
+
+<<< @/docs/snippets/handleProvider.js
+
+## Experimental API
+
+::: warning
+There is no guarantee that the methods and properties defined in this section will remain stable.
+Use it at your own risk.
+:::
+
+We expose some experimental, MetaMask-specific methods under the `ethereum._metamask` property.
+
+## Experimental Methods
+
+### ethereum.\_metamask.isApproved() (TO BE REMOVED)
+
+::: danger DANGER
+This will be removed in the future.
+
+Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
+:::
+
+```typescript
+ethereum._metamask.isApproved(): Promise<boolean>;
+```
+
+This method returns a `Promise` that resolves to a `boolean` indicating if the caller has access to user accounts.
+
+### ethereum.\_metamask.isEnabled() (TO BE REMOVED)
+
+::: danger DANGER
+This will be removed in the future.
+
+Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
+:::
+
+```typescript
+ethereum._metamask.isEnabled(): boolean;
+```
+
+This method returns a `boolean` indicating if the caller has access to user accounts.
+
+### ethereum.\_metamask.isUnlocked()
+
+```typescript
+ethereum._metamask.isUnlocked(): Promise<boolean>;
+```
+
+This method returns a `Promise` that resolves to a `boolean` indicating if MetaMask is unlocked by the user.
+MetaMask must be unlocked in order to perform any operation involving user accounts.
+Note that this method does not indicate if the user has exposed any accounts to the caller.
+
+## Legacy API
+
+::: warning
+You should **never** rely on any of these methods, properties, or events in practice.
+:::
+
+This section documents our legacy provider API.
+MetaMask only supported this API before the provider API was standardized via [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) in 2020.
+Because of this, you may find web3 sites that use this API, or other providers that implement it.
+
+## Legacy Properties
+
+### ethereum.networkVersion (DEPRECATED)
+
+::: warning
+You should always prefer the chain ID over the network ID.
+
+If you must get the network ID, use [`ethereum.request({ method: 'net_version' })`](#ethereum-request-args).
+
+The value of this property can change at any time.
+:::
+
+A decimal string representing the current blockchain's network ID.
+
+### ethereum.selectedAddress (DEPRECATED)
+
+::: warning
+Use [`ethereum.request({ method: 'eth_accounts' })`](#ethereum-request-args) instead.
+
+The value of this property can change at any time.
+:::
+
+Returns a hexadecimal string representing the user's "currently selected" address.
+
+The "currently selected" address is the first item in the array returned by `eth_accounts`.
+
+## Legacy Methods
+
+### ethereum.enable() (DEPRECATED)
+
+::: warning
+Use [`ethereum.request({ method: 'eth_requestAccounts' })`](#ethereum-request-args) instead.
+:::
+
+Alias for `ethereum.request({ method: 'eth_requestAccounts' })`.
+
+### ethereum.sendAsync() (DEPRECATED)
+
+::: warning
+Use [`ethereum.request()`](#ethereum-request-args) instead.
+:::
+
+```typescript
+interface JsonRpcRequest {
+  id: string | undefined;
+  jsonrpc: '2.0';
+  method: string;
+  params?: Array<any>;
+}
+
+interface JsonRpcResponse {
+  id: string | undefined;
+  jsonrpc: '2.0';
+  method: string;
+  result?: unknown;
+  error?: Error;
+}
+
+type JsonRpcCallback = (error: Error, response: JsonRpcResponse) => unknown;
+
+ethereum.sendAsync(payload: JsonRpcRequest, callback: JsonRpcCallback): void;
+```
+
+This is the ancestor of `ethereum.request`. It only works for JSON-RPC methods, and takes a JSON-RPC request payload object and an error-first callback function as its arguments.
+
+See the [Ethereum JSON-RPC API](https://eips.ethereum.org/EIPS/eip-1474) for details.
+
+### ethereum.send() (DEPRECATED)
+
+::: warning
+Use [`ethereum.request()`](#ethereum-request-args) instead.
+:::
+
+```typescript
+ethereum.send(
+  methodOrPayload: string | JsonRpcRequest,
+  paramsOrCallback: Array<unknown> | JsonRpcCallback,
+): Promise<JsonRpcResponse> | void;
+```
+
+This method behaves unpredictably and should be avoided at all costs.
+It is essentially an overloaded version of [`ethereum.sendAsync()`](#ethereum-sendasync-deprecated).
+
+`ethereum.send()` can be called in three different ways:
+
+```typescript
+// 1.
+ethereum.send(payload: JsonRpcRequest, callback: JsonRpcCallback): void;
+
+// 2.
+ethereum.send(method: string, params?: Array<unknown>): Promise<JsonRpcResponse>;
+
+// 3.
+ethereum.send(payload: JsonRpcRequest): unknown;
+```
+
+You can think of these signatures as follows:
+
+1. This signature is exactly like `ethereum.sendAsync()`
+
+2. This signature is like an async `ethereum.sendAsync()` with `method` and `params` as arguments, instead of a JSON-RPC payload and callback
+
+3. This signature enables you to call the following RPC methods synchronously:
+
+   - `eth_accounts`
+   - `eth_coinbase`
+   - `eth_uninstallFilter`
+   - `net_version`
+
+## Legacy Events
+
+### close (DEPRECATED)
+
+::: warning
+Use [`disconnect`](#disconnect) instead.
+:::
+
+```typescript
+ethereum.on('close', handler: (error: Error) => void);
+```
+
+### chainIdChanged (DEPRECATED)
+
+::: warning
+Use [`chainChanged`](#chainchanged) instead.
+:::
+
+Misspelled alias of [`chainChanged`](#chainchanged).
+
+```typescript
+ethereum.on('chainChanged', handler: (chainId: string) => void);
+```
+
+### networkChanged (DEPRECATED)
+
+::: warning
+Use [`chainChanged`](#chainchanged) instead.
+:::
+
+Like [`chainChanged`](#chainchanged), but with the `networkId` instead.
+Network IDs are insecure, and were effectively deprecated in favor of chain IDs by [EIP-155](https://eips.ethereum.org/EIPS/eip-155).
+Avoid using them unless you know what you are doing.
+
+```typescript
+ethereum.on('networkChanged', handler: (networkId: string) => void);
+```
+
+### notification (DEPRECATED)
+
+::: warning
+Use [`message`](#message) instead.
+:::
+
+```typescript
+ethereum.on('notification', handler: (payload: any) => void);
+```

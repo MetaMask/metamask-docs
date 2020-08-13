@@ -66,6 +66,9 @@ module.exports = _ctx => ({
           alternative: '/guide/'
         },
       ],
+    }],
+    ['tabs', {
+      useUrlFragment: false
     }]
   ],
 
@@ -93,8 +96,8 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       collapsable: false,
       children: [
         'ethereum-provider',
-        'json-rpc-api',
-        'experimental-apis',
+        'provider-migration',
+        'rpc-api',
         'signing-data',
       ]
     },
@@ -113,10 +116,8 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       collapsable: false,
       children: [
         'mobile-getting-started',
+        'site-compatibility-checklist',
         'mobile-best-practices',
-        'dapp-compatibility',
-        'deeplinking',
-        'walletconnect',
       ]
     },
     {

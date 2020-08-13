@@ -6,6 +6,8 @@
         }
 
         .float-child-image {
+          width: auto;
+          float: left;
           padding: 15px;
         }
         .float-child-text {
