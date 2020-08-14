@@ -3,7 +3,7 @@
 ::: danger Deadline
 All of these changes are shipping on **November 16, 2020**.
 
-If your web3 site relies on any of these features, it will break when they are removed unless you migrate.
+If your web3 site relies on any of these features, it may break when these changes are made unless you migrate.
 :::
 
 As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), on **November 16, 2020**, we are shipping breaking changes to our provider API and removing our injected `window.web3`.
