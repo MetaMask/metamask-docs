@@ -1,7 +1,12 @@
 # Ethereum Provider API
 
 ::: tip Recommended Reading
-We recommend that all web3 site developers read the [Upcoming Breaking Changes](#upcoming-breaking-changes) and [Basic Usage](#basic-usage) sections.
+We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
+:::
+
+::: warning Upcoming Breaking Changes
+On **November 16, 2020**, we are introducing changes that may break certain web3 sites.
+Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
@@ -33,7 +38,7 @@ if (provider) {
 ## Upcoming Breaking Changes
 
 ::: warning Important Information
-In the near future, we are making changes to our provider API that will be breaking for some web3 sites.
+On **November 16, 2020**, we are making changes to our provider API that will be breaking for some web3 sites.
 These changes are _upcoming_, but you can prepare for them today.
 Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
@@ -42,9 +47,6 @@ Other than that, if you are new to using the provider, you do not have to worry 
 :::
 
 ### `window.ethereum` API Changes
-
-In the near future, we are introducing some breaking changes to this API, which we encourage you to
-[read more about here](https://medium.com/metamask/breaking-changes-to-the-metamask-inpage-provider-b4dde069dd0a).
 
 At that time, we will:
 
@@ -66,6 +68,8 @@ Please read our [Migration Guide](./provider-migration.html) for more details.
 
 ::: tip
 If you do not use the `window.web3` object injected by MetaMask, you will not be affected by these changes.
+
+To understand why we're removing `window.web3`, please see [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/7163).
 :::
 
 In the near future, we will:
