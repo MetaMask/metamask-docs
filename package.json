@@ -27,13 +27,12 @@
   "homepage": "https://github.com/MetaMask/metamask-docs",
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.4",
-    "@vuepress/plugin-google-analytics": "^1.5.4",
     "@vuepress/plugin-medium-zoom": "^1.5.4",
     "@vuepress/plugin-pwa": "^1.5.4",
     "@vuepress/theme-vue": "^1.5.4",
     "prettier": "^2.1.1",
-    "vue-toasted": "^1.1.28",
     "vue-tabs-component": "^1.5.0",
+    "vue-toasted": "^1.1.28",
     "vuepress": "^1.5.4",
     "vuepress-plugin-redirect": "^1.2.4",
     "vuepress-plugin-tabs": "^0.3.0"
