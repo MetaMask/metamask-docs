@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Build
           command: |
-            yarn build
+            ./ci-build.sh
       - persist_to_workspace:
           root: .
           paths:
