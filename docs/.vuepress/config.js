@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 module.exports = _ctx => ({
   dest: 'docs/dist',
 
