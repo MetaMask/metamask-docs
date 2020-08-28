@@ -11,7 +11,6 @@ then
   exit 1
 fi
 
-yarn exec cross-env \
-  ALGOLIA_API_KEY="$ALGOLIA_API_KEY" \
+ALGOLIA_API_KEY="$ALGOLIA_API_KEY" \
   ALGOLIA_INDEX_NAME="$ALGOLIA_INDEX_NAME" \
-  vuepress build docs
+  yarn build

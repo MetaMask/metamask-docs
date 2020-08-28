@@ -1,4 +1,6 @@
-module.exports = _ctx => ({
+module.exports = (_ctx) => ({
+  sourceDir: 'docs',
+
   dest: 'docs/dist',
 
   locales: {
