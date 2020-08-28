@@ -3,8 +3,8 @@
   "description": "MetaMask documentation.",
   "scripts": {
     "dev": "yarn start",
-    "start": "node -r dotenv/config node_modules/.bin/vuepress dev",
-    "build": "node -r dotenv/config node_modules/.bin/vuepress build",
+    "start": "node -r dotenv/config node_modules/.bin/vuepress dev docs",
+    "build": "node -r dotenv/config node_modules/.bin/vuepress build docs",
     "lint": "prettier docs/guide/*.md docs/snippets/*",
     "lint:fix": "yarn lint --write",
     "view-info": "vuepress view-info docs",
