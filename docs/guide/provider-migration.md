@@ -1,6 +1,12 @@
 # Provider Migration Guide
 
-As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), we are going to make breaking changes to our provider API and remove our injected `window.web3`.
+::: danger Deadline
+All of these changes are shipping on **November 16, 2020**.
+
+If your web3 site relies on any of these features, it may break when these changes are made unless you migrate.
+:::
+
+As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), on **November 16, 2020**, we are shipping breaking changes to our provider API and removing our injected `window.web3`.
 This guide describes how to migrate to the new provider API, and how to replace our `window.web3` object.
 
 All replacement APIs are live, and you can migrate at any time.
