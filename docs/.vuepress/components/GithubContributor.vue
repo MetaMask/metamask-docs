@@ -36,18 +36,12 @@ export default {
       metaMaskContributorList: [],
     };
   },
-  methods: {
-    fetchContributorsList(repoName) {
-      fetch(`https://api.github.com/repos/MetaMask/${repoName}/contributors`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          this.metaMaskContributorList = data;
-        });
-    },
-  },
   created() {
-    this.fetchContributorsList(this.repoName);
+    fetch(`https://api.github.com/repos/MetaMask/${this.repoName}/contributors`)
+      .then((response) => response.json())
+      .then((data) => {
+        this.metaMaskContributorList = data;
+      });
   },
 };
 </script>
