@@ -87,9 +87,9 @@ If you're using an Android device, you must use `xip` in your url. Example: `htt
 
 # iOS
 
-1. Open Safari Preferences --> "Advanced" tab --> enable checkbox "Show Develop menu in menu bar"
-2. Open MetaMask Mobile in an iOS simulator or iOS device
-3. In the Safari menu bar --> Develop --> [device name] --> [app name] --> [url - title]
+1. Open Safari Preferences --> "Advanced" tab --> enable checkbox "Show Develop menu in menu bar".
+2. Open MetaMask Mobile in an iOS simulator or iOS device.
+3. In the Safari menu bar --> Develop --> [device name] --> [app name] --> [url - title].
 
 ::: Tip
 When debugging on a physical device, you must enable Web Inspector in your device's settings:
@@ -98,9 +98,9 @@ Settings --> Safari --> Advanced --> Web Inspector
 
 # Android
 
-1. Open MetaMask Mobile in an Android emulator or Android device
-2. Open Google Chrome's DevTools --> Menu (3 dots) --> More tools --> Remote devices
-3. Select your device on the left and click "Inspect" on the browser contents you'd like to inspect
+1. Open MetaMask Mobile in an Android emulator or Android device.
+2. Open Google Chrome's DevTools --> Menu (3 dots) --> More tools --> Remote devices. You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging.
+3. Select your device on the left and click "Inspect" on the browser contents you'd like to inspect.
 
 ::: Tip
 When debugging on a physical device you must enable USB debugging in your device's settings:
