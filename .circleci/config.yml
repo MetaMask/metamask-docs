@@ -12,10 +12,10 @@ workflows:
             - prep-deps
             - lint
       - deploy:
-          # filters:
-          #   branches:
-          #     only:
-          #       - master
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - prep-deps
             - lint
@@ -91,3 +91,4 @@ jobs:
             rm -rf docs
             git add -A
             git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
+            git push -f origin $TARGET_BRANCH
