@@ -1,20 +1,14 @@
 {
-  "name": "VuePress",
-  "short_name": "VuePress",
+  "name": "MetaMask Documentation",
+  "short_name": "MetaMask Docs",
   "icons": [
     {
-      "src": "/icons/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/metamask-fox.svg",
+      "sizes": "72x72 96x96 128x128 256x256 512x512"
     }
   ],
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#fff",
-  "theme_color": "#3eaf7c"
+  "theme_color": "#f6851b"
 }
