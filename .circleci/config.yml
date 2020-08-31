@@ -60,6 +60,11 @@ jobs:
       - run:
           name: Build
           command: |
+            if [[ -z "$ALGOLIA_API_KEY" || -z "$ALGOLIA_INDEX_NAME" ]]
+            then
+              printf 'ERROR: %s\n' 'Algolia API key or index name not set.' >&2
+              exit 1
+            fi
             yarn build
       - persist_to_workspace:
           root: .
@@ -81,7 +86,7 @@ jobs:
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
             git checkout $TARGET_BRANCH
-            rm -rf node_modules 00_Examples README.md package.json yarn.lock
+            find . -not -name docs -not -name LICENSE -delete
             cp -r docs/dist/* .
             rm -rf docs
             git add -A

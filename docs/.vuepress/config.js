@@ -1,4 +1,4 @@
-module.exports = _ctx => ({
+module.exports = (_ctx) => ({
   dest: 'docs/dist',
 
   locales: {
@@ -29,6 +29,10 @@ module.exports = _ctx => ({
     editLinks: true,
     logo: '/metamask-fox.svg',
     smoothScroll: true,
+    algolia: {
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: process.env.ALGOLIA_INDEX_NAME,
+    },
     locales: {
       '/': {
         label: 'English',
