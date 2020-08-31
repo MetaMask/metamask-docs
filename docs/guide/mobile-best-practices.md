@@ -50,7 +50,7 @@ Check out the [WalletConnect mobile linking docs](https://docs.walletconnect.org
 
 ## Deeplinking
 
-::: tip
+::: Tip
 [Click here to create deeplinks for your application.](https://metamask.github.io/metamask-deeplinks/#)
 :::
 
@@ -68,3 +68,45 @@ You can use deeplinks for things like:
 
 - Let your users make gasless and instant transactions with Connext payment channel requests
   - This requires that the user opts in for the InstaPay experimental feature.
+
+## DApp Testing & Debugging
+
+Test & Debug your dApp using MetaMask Mobile on any iOS or Android device with ease.
+
+# Testing
+
+1. Configure your development server to run on your host machine's local IP address `192.168.x.x`, or `0.0.0.0`.
+2. Make sure your testing device is using the same wifi connection as the machine hosting the server.
+3. In the MetaMask Mobile web browser, navigate to your dApp's interface at `http://YOUR_LOCAL_IP:PORT`. 
+
+::: Tip
+If you're using an Android device, you must use `xip` in your url. Example: `http://192.168.x.x.xip.io:8000`
+:::
+
+# Debugging
+
+# iOS
+
+1. Open Safari Preferences --> "Advanced" tab --> enable checkbox "Show Develop menu in menu bar"
+2. Open MetaMask Mobile in an iOS simulator or iOS device
+3. In the Safari menu bar --> Develop --> [device name] --> [app name] --> [url - title]
+
+::: Tip
+When debugging on a physical device, you must enable Web Inspector in your device's settings:
+Settings --> Safari --> Advanced --> Web Inspector
+:::
+
+# Android
+
+1. Open MetaMask Mobile in an Android emulator or Android device
+2. Open Google Chrome's DevTools --> Menu (3 dots) --> More tools --> Remote devices
+3. Select your device on the left and click "Inspect" on the browser contents you'd like to inspect
+
+::: Tip
+When debugging on a physical device you must enable USB debugging in your device's settings:
+Settings --> System --> About Phone --> Developer options --> enable USB debugging
+:::
+
+You can now debug MetaMask Mobile's browser contents just as you would on the web!
+
+
