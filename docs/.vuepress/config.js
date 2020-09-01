@@ -5,7 +5,7 @@ module.exports = (_ctx) => ({
     '/': {
       lang: 'en-US',
       title: 'MetaMask Docs',
-      description: 'Welcome'
+      description: 'Developer documentation for the MetaMask Ethereum wallet'
     }
   },
 
