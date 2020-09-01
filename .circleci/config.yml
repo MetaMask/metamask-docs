@@ -86,7 +86,7 @@ jobs:
             git config --global user.email $GH_EMAIL
             git config --global user.name $GH_NAME
             git checkout $TARGET_BRANCH
-            find . -not -name docs -not -name LICENSE -delete
+            rm -rf `ls -a | grep "[^.|..|.git|.nojekyll|docs|LICENSE|CNAME|index.html]"`
             cp -r docs/dist/* .
             rm -rf docs
             git add -A
