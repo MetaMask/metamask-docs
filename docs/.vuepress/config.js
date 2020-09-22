@@ -49,6 +49,7 @@ module.exports = (_ctx) => ({
 
   plugins: [
     ['@vuepress/back-to-top', true],
+    ['ethers', true],
     ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: true

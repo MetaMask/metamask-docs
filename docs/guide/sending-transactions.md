@@ -37,6 +37,7 @@ const txHash = await ethereum.request({
 <button class="enableEthereumButton btn">Enable Ethereum</button>
 <button class="sendEthButton btn">Send Eth</button>
 ```
+**Example**
 
 :::
 
