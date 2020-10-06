@@ -67,6 +67,118 @@ Hopefully soon we will also have good examples for parsing method input into str
 
 ## Sign Typed Data v4
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab HTML
+
+```html
+<div>
+  <h3>Sign Typed Data V4</h3>
+  <button type="button" id="signTypedDataV4Button">sign typed data v4</button>
+</div>
+```
+
+:::
+
+::: tab JavaScript
+
+```javascript
+signTypedDataV4Button.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  const msgParams = JSON.stringify({
+    domain: {
+      chainId: 1,
+      name: 'Ether Mail',
+      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+      version: '1',
+    },
+    message: {
+      contents: 'Hello, Bob!',
+      from: {
+        name: 'Cow',
+        wallets: [
+          '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+          '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+        ],
+      },
+      to: [
+        {
+          name: 'Bob',
+          wallets: [
+            '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+            '0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57',
+            '0xB0B0b0b0b0b0B000000000000000000000000000',
+          ],
+        },
+      ],
+    },
+    primaryType: 'Mail',
+    types: {
+      EIP712Domain: [
+        { name: 'name', type: 'string' },
+        { name: 'version', type: 'string' },
+        { name: 'chainId', type: 'uint256' },
+        { name: 'verifyingContract', type: 'address' },
+      ],
+      Group: [
+        { name: 'name', type: 'string' },
+        { name: 'members', type: 'Person[]' },
+      ],
+      Mail: [
+        { name: 'from', type: 'Person' },
+        { name: 'to', type: 'Person[]' },
+        { name: 'contents', type: 'string' },
+      ],
+      Person: [
+        { name: 'name', type: 'string' },
+        { name: 'wallets', type: 'address[]' },
+      ],
+    },
+  });
+
+  var from = web3.eth.accounts[0];
+
+  var params = [from, msgParams];
+  var method = 'eth_signTypedData_v4';
+
+  web3.currentProvider.sendAsync(
+    {
+      method,
+      params,
+      from,
+    },
+    function (err, result) {
+      if (err) return console.dir(err);
+      if (result.error) {
+        alert(result.error.message);
+      }
+      if (result.error) return console.error('ERROR', result);
+      console.log('TYPED SIGNED:' + JSON.stringify(result.result));
+
+      const recovered = sigUtil.recoverTypedSignature_v4({
+        data: JSON.parse(msgParams),
+        sig: result.result,
+      });
+
+      if (
+        ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)
+      ) {
+        alert('Successfully recovered signer as ' + from);
+      } else {
+        alert(
+          'Failed to verify signer when comparing ' + result + ' to ' + from
+        );
+      }
+    }
+  );
+});
+```
+
+:::
+
+::::
+
 The method `signTypedData_v4` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), with added support for arrays and with a breaking fix for the way structs are encoded.
 
 This does not mean it is perfect, and does not mean we will not eventually have a `v5`, but we do intend to protect this namespace and keep it compatible going forwards.
