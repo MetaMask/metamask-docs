@@ -60,10 +60,15 @@ jobs:
       - run:
           name: Build
           command: |
-            if [[ -z "$ALGOLIA_API_KEY" || -z "$ALGOLIA_INDEX_NAME" ]]
+            if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
-              printf 'ERROR: %s\n' 'Algolia API key or index name not set.' >&2
-              exit 1
+              if [[ -z "$ALGOLIA_API_KEY" || -z "$ALGOLIA_INDEX_NAME" ]]
+              then
+                printf '%s\n' 'ERROR: Algolia API key or index name not set.' >&2
+                exit 1
+              fi
+            else
+              printf '%s\n' 'Non-main build does not require Algolia API key or index name'
             fi
             yarn build
       - persist_to_workspace:
