@@ -36,7 +36,7 @@ export default {
       metaMaskContributorList: [],
     };
   },
-  created() {
+  mounted() {
     fetch(`https://api.github.com/repos/MetaMask/${this.repoName}/contributors`)
       .then((response) => response.json())
       .then((data) => {
