@@ -6,12 +6,13 @@ const config = require('../docs/.vuepress/config')()
 const command = process.argv[2]
 
 switch (command) {
-
   case 'build':
-    return build(config)
+    build(config)
+    return
 
   case 'dev':
-    return dev(config)
+    dev(config)
+    return
 
   default:
     throw new Error(`Unrecognized command "${command}".`)
