@@ -57,15 +57,23 @@ If on-chain verifiability cost is a high priority for you, you might want to con
 
 ## Sign Typed Data v3
 
-The method `signTypedData_v3` represents a pretty recent version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), which at the time made it the most secure method for signing cheap-to-verify data on-chain that we had yet.
+The method `signTypedData_v3` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), making it the most secure method for signing cheap-to-verify data on-chain that we have yet.
 
-We intend to protect this namespace and keep it compatible going forwards.
+This does not mean it is perfect, and does not mean we will not eventually have a `v4`, but we do intend to protect this namespace and keep it compatible going forwards.
+
+We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
+
+Hopefully soon we will also have good examples for paOh rsing method input into structs for verification on-chain (great contribution opportunity!)
+
+## Sign Typed Data v4
+
+The method `signTypedData_v4` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), with added support for arrays and with a breaking fix for the way structs are encoded.
+
+This does not mean it is perfect, and does not mean we will not eventually have a `v5`, but we do intend to protect this namespace and keep it compatible going forwards.
 
 We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 
 Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
-
-## Sign Typed Data v4
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -87,12 +95,15 @@ signTypedDataV4Button.addEventListener('click', function (event) {
   event.preventDefault();
 
   const msgParams = JSON.stringify({
+    // Domain signature will only be accepted for a specific website/contract
     domain: {
       chainId: 1,
       name: 'Ether Mail',
       verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
       version: '1',
     },
+
+    // Defining the message signing data content.
     message: {
       contents: 'Hello, Bob!',
       from: {
@@ -113,23 +124,28 @@ signTypedDataV4Button.addEventListener('click', function (event) {
         },
       ],
     },
+    // TODO: Clarify the purpose of primaryType and what are the other possible types
     primaryType: 'Mail',
     types: {
+      // TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
       EIP712Domain: [
         { name: 'name', type: 'string' },
         { name: 'version', type: 'string' },
         { name: 'chainId', type: 'uint256' },
         { name: 'verifyingContract', type: 'address' },
       ],
+      // Not an EIP712Domain definition
       Group: [
         { name: 'name', type: 'string' },
         { name: 'members', type: 'Person[]' },
       ],
+      // Refer to PrimaryType
       Mail: [
         { name: 'from', type: 'Person' },
         { name: 'to', type: 'Person[]' },
         { name: 'contents', type: 'string' },
       ],
+      // Not an EIP712Domain definition
       Person: [
         { name: 'name', type: 'string' },
         { name: 'wallets', type: 'address[]' },
@@ -178,11 +194,3 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 :::
 
 ::::
-
-The method `signTypedData_v4` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), with added support for arrays and with a breaking fix for the way structs are encoded.
-
-This does not mean it is perfect, and does not mean we will not eventually have a `v5`, but we do intend to protect this namespace and keep it compatible going forwards.
-
-We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
-
-Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
