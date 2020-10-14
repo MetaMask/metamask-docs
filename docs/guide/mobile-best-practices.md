@@ -85,6 +85,10 @@ If you're using an Android device, you must use `xip` in your url. Example: `htt
 
 # Debugging
 
+::: IMPORTANT
+For security purposes, web browser debugging on both iOS & Android will NOT work if the app was downloaded through the App or Google Play store. You must build the app locally from the official repo [here](https://github.com/MetaMask/metamask-mobile) and run it on a simulator or physical device.
+:::
+
 # iOS
 
 1. Open Safari Preferences --> "Advanced" tab --> enable checkbox "Show Develop menu in menu bar".
