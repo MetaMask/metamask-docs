@@ -75,6 +75,18 @@ We have a [great introductory blog post to this method here](https://medium.com/
 
 Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
 
+### Sign Typed Data Message Parameters
+
+`domain`: The Domain or domain signature is important because it:
+- Will only be accepted for a specific website/contract
+- Have a unique contract that verifies the address.
+- This is a bunch of information that restricts where the signiture is valid
+  // This is the domain of validity. Could be a contract, a url, ect.
+  // What needs to be put in here specifically what the DApp tells you.
+  // Make sures your signiture(s) don't collide with other signitures 
+
+### Example
+
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab HTML
@@ -95,17 +107,25 @@ signTypedDataV4Button.addEventListener('click', function (event) {
   event.preventDefault();
 
   const msgParams = JSON.stringify({
-    // Domain signature will only be accepted for a specific website/contract
     domain: {
+      // Defining the chain aka Rinkby testnet or Ethmain net
       chainId: 1,
+      // Give a user friendly name to the specific think your signing for
       name: 'Ether Mail',
+      // If name isn't enough add verifying contract to make sure
       verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+      // Just let's you know the latest version. Definitely make sure the field name is correct.
       version: '1',
     },
 
     // Defining the message signing data content.
     message: {
+      // Literally anaything you want. Just a JSON Blob that encodes the data you want to send
+      // No required fields
+      // This is DApp Specific
+      // Be as exsplicit as possible when building out the message schema.
       contents: 'Hello, Bob!',
+      attachedMoneyInEth: 4.2
       from: {
         name: 'Cow',
         wallets: [
@@ -124,7 +144,7 @@ signTypedDataV4Button.addEventListener('click', function (event) {
         },
       ],
     },
-    // TODO: Clarify the purpose of primaryType and what are the other possible types
+    // Refers to the keys of the types object.
     primaryType: 'Mail',
     types: {
       // TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
@@ -194,3 +214,5 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 :::
 
 ::::
+
+
