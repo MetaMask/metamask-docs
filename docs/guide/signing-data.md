@@ -57,7 +57,7 @@ If on-chain verifiability cost is a high priority for you, you might want to con
 
 ## Sign Typed Data v3
 
-The method `signTypedData_v3` represents a pretty recent version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), which at the time made it the most secure method for signing cheap-to-verify data on-chain that we had yet.
+The method `signTypedData_v3` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), making it the most secure method for signing cheap-to-verify data on-chain that we have yet.
 
 We intend to protect this namespace and keep it compatible going forwards.
 
