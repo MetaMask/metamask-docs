@@ -80,11 +80,11 @@ Although it is possible that your dependencies use the `publicConfigStore`, we h
 
 ## Replacing `window.web3`
 
-For historical reasons, MetaMask injects [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
-This version of `web3` is deprecated, and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team.
+For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
+This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
 
 If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
-Continue reading to learn more about the migration options.
+Continue reading to learn more about the migration options. Some are as simple as a one-line change.
 
 ::: tip
 Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
