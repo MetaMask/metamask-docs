@@ -8,7 +8,7 @@
 - Users can sign with their MetaMask wallet, whether they use your dapp on MetaMask browser or prefer using other primary browsers or native mobile app or desktop. [*works with dapps supporting Wallet Connect]
 - Buy crypto easily, with the best rates, and supported in a wide-range of countries.
 - Manage your cryptoassets - watch or trade tokens, collectibles
-- Send payments to your family & friends (gasless\* and in normal transaction - whatever they prefer)
+- Send payments to your family and friends (gasless\* and in normal transaction - whatever they prefer)
 - Request payment from a friend, an employer, etc.
 - We have lots of more exciting stuff coming up - stay tuned, this is just the beginning :wink:
 

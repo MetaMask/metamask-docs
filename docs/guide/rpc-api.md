@@ -4,7 +4,7 @@ MetaMask uses the [`ethereum.request(args)` method](./ethereum-provider.html#eth
 
 The API is based on an interface exposed by all Ethereum clients, along with a growing number of methods that may or may not be supported by other wallets.
 
-::: tip
+::: tip Tip
 All RPC method requests can return errors.
 Make sure to handle errors for every call to `ethereum.request(args)`.
 :::
@@ -53,7 +53,7 @@ If you're interested in learning more about the theory behind this _capability_-
 
 ### eth_requestAccounts
 
-::: tip EIP-1102
+::: tip Tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 It is equivalent to the deprecated [`ethereum.enable()`](./ethereum-provider.html#ethereum-enable) provider API method.
 
@@ -98,7 +98,7 @@ function connect() {
 
 ### wallet_requestPermissions
 
-::: tip Platform Availability
+::: tip Tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -159,7 +159,7 @@ function requestPermissions() {
 
 ### wallet_getPermissions
 
-::: tip Platform Availability
+::: tip Tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -177,7 +177,7 @@ If the caller has no permissions, the array will be empty.
 
 ### wallet_registerOnboarding
 
-::: tip
+::: tip Tip
 As an API consumer, you are unlikely to have to call this method yourself.
 Please see the [Onboarding Library documentation](/onboarding-library.html) for more information.
 :::
@@ -199,7 +199,7 @@ Instead of calling this method directly, you should use the [`@metamask/onboardi
 
 ### wallet_watchAsset
 
-::: tip EIP-747
+::: tip Tip EIP-747
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 :::
 
@@ -249,7 +249,7 @@ ethereum.request({
 
 ### eth_getEncryptionPublicKey
 
-::: tip Platform Availability
+::: tip Tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -317,7 +317,7 @@ const encryptedMessage = ethUtil.bufferToHex(
 
 ### eth_decrypt
 
-::: tip Platform Availability
+::: tip Tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
