@@ -86,7 +86,7 @@ This version of `web3` is deprecated, [has known security issues](https://github
 If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
 Continue reading to learn more about the migration options. Some are as simple as a one-line change.
 
-::: tip
+::: tip Tip
 Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
 :::
 

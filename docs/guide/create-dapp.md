@@ -1,6 +1,6 @@
 # Create A Simple Dapp
 
-::: tip
+::: tip Tip
 We will be building this [app](https://metamask.github.io/test-dapp/)
 :::
 
@@ -175,7 +175,7 @@ MetamaskClientCheck();
 
 We've created a function that will be called whenever we click the button and disabled it. Let's dive into the `onClickInstall` function and create the logic inside of it.
 
-::: tip
+::: tip Tip
 For this part we will be using the '@metamask/onboarding' library we installed when we did the npm install. To learn more visit [here](https://github.com/MetaMask/metamask-onboarding#metamask-onboarding)
 :::
 Inside this function we want to:
