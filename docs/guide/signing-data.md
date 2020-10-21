@@ -57,9 +57,9 @@ If on-chain verifiability cost is a high priority for you, you might want to con
 
 ## Sign Typed Data v3
 
-The method `signTypedData_v3` represents a pretty recent version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), which at the time made it the most secure method for signing cheap-to-verify data on-chain that we had yet.
+The method `signTypedData_v3` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), making it the most secure method for signing cheap-to-verify data on-chain that we have yet.
 
-We intend to protect this namespace and keep it compatible going forwards.
+This does not mean it is perfect, and we do already have a `v4` in prototype stage (which supports recursive structs and arrays), but we do intend to protect this namespace and keep it compatible going forwards.
 
 We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 
@@ -74,3 +74,164 @@ This does not mean it is perfect, and does not mean we will not eventually have 
 We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 
 Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
+
+### Sign Typed Data Message Parameters
+
+`domain`: The Domain or domain signature is important because it:
+- Will only be accepted for a specific website/contract
+- Makes sures signatures are valid only where they are intended to be valid 
+- Allows you have a unique contract that verifies the address.
+- This is a bunch of information that restricts where the signiture is valid
+- This is the domain of validity. Could be a contract, a url, ect.
+- What needs to be put in here specifically what the DApp tells you.
+- Make sures your signiture(s) don't collide with other signitures 
+
+`chainId`: The chainId tell you what chain you're on and this is important because:
+- It makes sure signatures signed on Rinkbey are not valid on another chain such as the Ethereum Main Net
+
+`name`: This is primarily for UX(User Experience) purposes.
+- For example, as a user, you're using an Ether Mail app and a dialog comes up for cryptokitties exchange, this would arouse suspicion due to what the name is on the signature.
+
+
+`verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unecessary)
+- If you are unsure of the name this will show the contract responsible for message verification.
+- This field will also take a url.
+
+`version`: This tell you the current version of the domain object.
+
+`message`: Completely open to what you would like the structure of it to be. Every field is optional.
+
+Below is an example of signing typed data with MetaMask. Reference [here](https://github.com/danfinlay/js-eth-personal-sign-examples)
+
+### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab HTML
+
+```html
+<div>
+  <h3>Sign Typed Data V4</h3>
+  <button type="button" id="signTypedDataV4Button">sign typed data v4</button>
+</div>
+```
+
+:::
+
+::: tab JavaScript
+
+```javascript
+signTypedDataV4Button.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  const msgParams = JSON.stringify({
+    domain: {
+      // Defining the chain aka Rinkby testnet or Ethereum Main Net
+      chainId: 1,
+      // Give a user friendly name to the specific contract you are signing for.
+      name: 'Ether Mail',
+      // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
+      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+      // Just let's you know the latest version. Definitely make sure the field name is correct.
+      version: '1',
+    },
+
+    // Defining the message signing data content.
+    message: {
+      /* 
+       - Anaything you want. Just a JSON Blob that encodes the data you want to send
+       - No required fields
+       - This is DApp Specific
+       - Be as exsplicit as possible when building out the message schema.
+      */
+      contents: 'Hello, Bob!',
+      attachedMoneyInEth: 4.2
+      from: {
+        name: 'Cow',
+        wallets: [
+          '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+          '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+        ],
+      },
+      to: [
+        {
+          name: 'Bob',
+          wallets: [
+            '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+            '0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57',
+            '0xB0B0b0b0b0b0B000000000000000000000000000',
+          ],
+        },
+      ],
+    },
+    // Refers to the keys of the *types* object below.
+    primaryType: 'Mail',
+    types: {
+      // TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
+      EIP712Domain: [
+        { name: 'name', type: 'string' },
+        { name: 'version', type: 'string' },
+        { name: 'chainId', type: 'uint256' },
+        { name: 'verifyingContract', type: 'address' },
+      ],
+      // Not an EIP712Domain definition
+      Group: [
+        { name: 'name', type: 'string' },
+        { name: 'members', type: 'Person[]' },
+      ],
+      // Refer to PrimaryType
+      Mail: [
+        { name: 'from', type: 'Person' },
+        { name: 'to', type: 'Person[]' },
+        { name: 'contents', type: 'string' },
+      ],
+      // Not an EIP712Domain definition
+      Person: [
+        { name: 'name', type: 'string' },
+        { name: 'wallets', type: 'address[]' },
+      ],
+    },
+  });
+
+  var from = web3.eth.accounts[0];
+
+  var params = [from, msgParams];
+  var method = 'eth_signTypedData_v4';
+
+  web3.currentProvider.sendAsync(
+    {
+      method,
+      params,
+      from,
+    },
+    function (err, result) {
+      if (err) return console.dir(err);
+      if (result.error) {
+        alert(result.error.message);
+      }
+      if (result.error) return console.error('ERROR', result);
+      console.log('TYPED SIGNED:' + JSON.stringify(result.result));
+
+      const recovered = sigUtil.recoverTypedSignature_v4({
+        data: JSON.parse(msgParams),
+        sig: result.result,
+      });
+
+      if (
+        ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)
+      ) {
+        alert('Successfully recovered signer as ' + from);
+      } else {
+        alert(
+          'Failed to verify signer when comparing ' + result + ' to ' + from
+        );
+      }
+    }
+  );
+});
+```
+
+:::
+
+::::
+

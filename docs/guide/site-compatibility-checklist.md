@@ -1,6 +1,6 @@
 # Site Compatibility Checklist
 
-- Ensure that your site is compatible with the [MetaMask Ethereum provider API](./guide/ethereum-provider.html) and review the [MetaMask mobile best practices](./mobile-best-practices.html)
+- Ensure that your site is compatible with the [MetaMask Ethereum provider API](./ethereum-provider.html) and review the [MetaMask mobile best practices](./mobile-best-practices.html)
 
 - Include MetaMask mobile as a listed wallet in your application, and link to open the MetaMask mobile app (if installed) or to go to the app store (if not yet installed)
   - We recommend adding a `Connect With MetaMask` button and using [deeplinks](https://metamask.github.io/metamask-deeplinks/)
