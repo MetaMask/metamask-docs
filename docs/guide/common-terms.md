@@ -21,7 +21,7 @@
 ### Account
 
 <ul>
-  <li id="account_l1">A public & private keypair that "holds" your funds.</li>
+  <li id="account_l1">A public and private keypair that "holds" your funds.</li>
 
   <li id="account_l2">Your funds are actually stored on the blockchain, not in the wallet or account.</li>
 
@@ -123,7 +123,7 @@
     Typically, they use a 24-word phrase. This phrase you should write down (not on your computer) and store separately from your hardware wallet.
   </li>
   <li id="hardwarew_l3">
-    If you lose your hardware wallet, you can still gain access to your accounts & funds via the word-phrase you wrote down.
+    If you lose your hardware wallet, you can still gain access to your accounts and funds via the word-phrase you wrote down.
   </li>
   <li id="hardwarew_l4">
     Never type the word-phrase on your computer. It defeats the purpose of your hardware wallet.
@@ -149,7 +149,7 @@
     <a href='http://i.imgur.com/FvyLewS.jpg' target='_blank'> Example 2 </a>
   </li>
   <li id="addressIdent_l5">
-    <em>Note: the above addresses are a single character different but have remarkably different icons & colors. Magic!</em>
+    <em>Note: the above addresses are a single character different but have remarkably different icons and colors. Magic!</em>
   </li>
 </ul>
 

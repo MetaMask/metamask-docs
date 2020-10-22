@@ -1,11 +1,12 @@
-module.exports = _ctx => ({
+module.exports = (_ctx) => ({
+  sourceDir: 'docs',
   dest: 'docs/dist',
 
   locales: {
     '/': {
       lang: 'en-US',
       title: 'MetaMask Docs',
-      description: 'Welcome'
+      description: 'Developer documentation for the MetaMask Ethereum wallet'
     }
   },
 
@@ -25,9 +26,14 @@ module.exports = _ctx => ({
 
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
-    logo: '/metamask-fox.svg',
-    editLinks: true,
     docsDir: 'packages/docs/dist',
+    editLinks: true,
+    logo: '/metamask-fox.svg',
+    smoothScroll: true,
+    algolia: {
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: process.env.ALGOLIA_INDEX_NAME,
+    },
     locales: {
       '/': {
         label: 'English',
@@ -109,6 +115,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'registering-your-token',
         'defining-your-icon',
         'onboarding-library',
+        'metamask-extension-provider',
       ]
     },
     {
@@ -125,6 +132,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
       collapsable: false,
       children: [
         'create-dapp',
+        'contributors'
       ]
     }
   ]

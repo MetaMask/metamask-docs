@@ -1,6 +1,12 @@
 # Provider Migration Guide
 
-As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), we are going to make breaking changes to our provider API and remove our injected `window.web3`.
+::: danger Deadline
+All of these changes are shipping on **November 16, 2020**.
+
+If your web3 site relies on any of these features, it may break when these changes are made unless you migrate.
+:::
+
+As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), on **November 16, 2020**, we are shipping breaking changes to our provider API and removing our injected `window.web3`.
 This guide describes how to migrate to the new provider API, and how to replace our `window.web3` object.
 
 All replacement APIs are live, and you can migrate at any time.
@@ -74,13 +80,13 @@ Although it is possible that your dependencies use the `publicConfigStore`, we h
 
 ## Replacing `window.web3`
 
-For historical reasons, MetaMask injects [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
-This version of `web3` is deprecated, and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team.
+For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
+This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
 
 If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
-Continue reading to learn more about the migration options.
+Continue reading to learn more about the migration options. Some are as simple as a one-line change.
 
-::: tip
+::: tip Tip
 Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
 :::
 
