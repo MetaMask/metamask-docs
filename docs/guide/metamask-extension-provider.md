@@ -1,6 +1,6 @@
 # MetaMask Extension Provider
 
-A module for providing a MetaMask [provider](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3currentprovider) to other WebExtensions.
+A module for accessing the user's MetaMask [provider](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3currentprovider) from other WebExtensions.
 
 The account provided by this provider will be the user's MetaMask account.
 
