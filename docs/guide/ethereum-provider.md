@@ -1,6 +1,6 @@
 # Ethereum Provider API
 
-::: tip Recommended Reading
+::: tip Tip Recommended Reading
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 
@@ -66,7 +66,7 @@ Please read our [Migration Guide](./provider-migration.html) for more details.
 
 ### `window.web3` Removal
 
-::: tip
+::: tip Tip
 If you do not use the `window.web3` object injected by MetaMask, you will not be affected by these changes.
 
 To understand why we're removing `window.web3`, please see [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/7163).
@@ -122,7 +122,7 @@ Consult [chainid.network](https://chainid.network) for more.
 
 ### ethereum.isMetaMask
 
-::: tip
+::: tip Tip
 This property is not guaranteed to be correct for all providers. Non-MetaMask providers may also set this property to `true`.
 :::
 
@@ -165,7 +165,7 @@ ethereum.autoRefreshOnNetworkChange = false;
 
 ### ethereum.isConnected()
 
-::: tip
+::: tip Tip
 Note that this method has nothing to do with the user's accounts.
 
 You may often encounter the word "connected" in reference to whether a web3 site can access the user's accounts.
@@ -291,7 +291,7 @@ Callers are identified by their URL _origin_, which means that all sites with th
 
 This means that `accountsChanged` will be emitted whenever the user's exposed account address changes.
 
-::: tip
+::: tip Tip
 We plan to allow the `eth_accounts` array to be able to contain multiple addresses in the near future.
 :::
 
@@ -358,7 +358,7 @@ Common codes and their meaning include:
 
 For the complete list of errors, please see [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193#provider-errors) and [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
 
-::: tip
+::: tip Tip
 The [`eth-rpc-errors`](https://npmjs.com/package/eth-rpc-errors) package implements all RPC errors thrown by the MetaMask provider, and can help you identify their meaning.
 :::
 
