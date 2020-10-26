@@ -115,6 +115,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'registering-your-token',
         'defining-your-icon',
         'onboarding-library',
+        'metamask-extension-provider',
       ]
     },
     {
