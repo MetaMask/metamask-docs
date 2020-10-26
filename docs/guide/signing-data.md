@@ -78,22 +78,26 @@ Hopefully soon we will also have good examples for parsing method input into str
 ### Sign Typed Data Message Parameters
 
 `domain`: The Domain or domain signature is important because it:
-- Will only be accepted for a specific website/contract
-- Makes sures signatures are valid only where they are intended to be valid 
+
+- Will only be accepted for a specific website/contract.
+- Makes sure signatures are valid only where they are intended to be valid.
 - Allows you have a unique contract that verifies the address.
-- This is a bunch of information that restricts where the signiture is valid
+- This is a bunch of information that restricts where the signature is valid.
 - This is the domain of validity. Could be a contract, a url, ect.
 - What needs to be put in here specifically what the DApp tells you.
-- Make sures your signiture(s) don't collide with other signitures 
+- Makes sure your signature(s) don't collide with other signatures.
 
 `chainId`: The chainId tell you what chain you're on and this is important because:
-- It makes sure signatures signed on Rinkbey are not valid on another chain such as the Ethereum Main Net
+
+- It makes sure signatures signed on Rinkeby are not valid on another chain, such as the Ethereum Main Net.
 
 `name`: This is primarily for UX(User Experience) purposes.
+
 - For example, as a user, you're using an Ether Mail app and a dialog comes up for cryptokitties exchange, this would arouse suspicion due to what the name is on the signature.
 
 
-`verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unecessary)
+`verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unnecessary)
+
 - If you are unsure of the name this will show the contract responsible for message verification.
 - This field will also take a url.
 
@@ -126,7 +130,7 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 
   const msgParams = JSON.stringify({
     domain: {
-      // Defining the chain aka Rinkby testnet or Ethereum Main Net
+      // Defining the chain aka Rinkeby testnet or Ethereum Main Net
       chainId: 1,
       // Give a user friendly name to the specific contract you are signing for.
       name: 'Ether Mail',
@@ -138,11 +142,11 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 
     // Defining the message signing data content.
     message: {
-      /* 
-       - Anaything you want. Just a JSON Blob that encodes the data you want to send
+      /*
+       - Anything you want. Just a JSON Blob that encodes the data you want to send
        - No required fields
        - This is DApp Specific
-       - Be as exsplicit as possible when building out the message schema.
+       - Be as explicit as possible when building out the message schema.
       */
       contents: 'Hello, Bob!',
       attachedMoneyInEth: 4.2
@@ -234,4 +238,3 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 :::
 
 ::::
-
