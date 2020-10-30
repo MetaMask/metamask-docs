@@ -149,7 +149,7 @@ signTypedDataV4Button.addEventListener('click', function (event) {
        - Be as explicit as possible when building out the message schema.
       */
       contents: 'Hello, Bob!',
-      attachedMoneyInEth: 4.2
+      attachedMoneyInEth: 4.2,
       from: {
         name: 'Cow',
         wallets: [
