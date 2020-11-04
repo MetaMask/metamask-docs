@@ -6,6 +6,7 @@ We recommend that all web3 site developers read the [Basic Usage](#basic-usage) 
 
 ::: danger Upcoming Breaking Changes
 On **November 16, 2020** (or shortly thereafter), we are introducing changes that may break certain web3 sites.
+All future versions of MetaMask on all platforms will be affected.
 Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
 
 Action is required for Ethereum application developers only.
@@ -42,6 +43,7 @@ if (provider) {
 
 ::: danger Important Information
 On **November 16, 2020** (or shortly thereafter), we are making changes to our provider API that will be breaking for some web3 sites.
+All future versions of MetaMask on all platforms will be affected.
 These changes are _upcoming_, but you can already handle them today.
 Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
