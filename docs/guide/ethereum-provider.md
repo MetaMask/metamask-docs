@@ -4,9 +4,13 @@
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 
-::: warning Upcoming Breaking Changes
-On **November 16, 2020**, we are introducing changes that may break certain web3 sites.
+::: danger Upcoming Breaking Changes
+On **November 16, 2020** (or shortly thereafter), we are introducing changes that may break certain web3 sites.
+All future versions of MetaMask on all platforms will be affected.
 Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
+
+Action is required for Ethereum application developers only.
+MetaMask users do not need to do anything.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
@@ -37,9 +41,10 @@ if (provider) {
 
 ## Upcoming Breaking Changes
 
-::: warning Important Information
-On **November 16, 2020**, we are making changes to our provider API that will be breaking for some web3 sites.
-These changes are _upcoming_, but you can prepare for them today.
+::: danger Important Information
+On **November 16, 2020** (or shortly thereafter), we are making changes to our provider API that will be breaking for some web3 sites.
+All future versions of MetaMask on all platforms will be affected.
+These changes are _upcoming_, but you can already handle them today.
 Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
 
 All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
