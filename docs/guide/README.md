@@ -7,6 +7,14 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 - For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
+::: danger Upcoming Breaking Changes
+On **November 16, 2020** (or shortly thereafter), we are introducing changes that may break certain Ethereum web applications.
+Please read our [Migration Guide](./provider-migration.html) for more details.
+
+Action is required for Ethereum application developers only.
+MetaMask users do not need to do anything.
+:::
+
 ## Why MetaMask
 
 MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.

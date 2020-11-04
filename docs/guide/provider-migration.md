@@ -1,7 +1,12 @@
 # Provider Migration Guide
 
+::: tip Attention MetaMask Users
+This documentation is for Ethereum application developers.
+As a MetaMask user, you don't need to do anything!
+:::
+
 ::: danger Deadline
-All of these changes are shipping on **November 16, 2020**.
+All of these changes are shipping on (or shortly after) **November 16, 2020**.
 
 If your web3 site relies on any of these features, it may break when these changes are made unless you migrate.
 :::

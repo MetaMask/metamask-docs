@@ -95,7 +95,6 @@ Hopefully soon we will also have good examples for parsing method input into str
 
 - For example, as a user, you're using an Ether Mail app and a dialog comes up for cryptokitties exchange, this would arouse suspicion due to what the name is on the signature.
 
-
 `verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unnecessary)
 
 - If you are unsure of the name this will show the contract responsible for message verification.

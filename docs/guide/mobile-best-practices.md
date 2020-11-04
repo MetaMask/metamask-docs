@@ -106,7 +106,7 @@ When debugging on a physical device, you must enable Web Inspector in your devic
 
 1. Open MetaMask Mobile in an Android emulator or Android device
 2. Open Google Chrome's DevTools -> menu (3 dots) -> **More tools** -> **Remote devices**
-You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging
+   You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging
 3. Select your device on the left and click **Inspect** on the browser contents you'd like to inspect.
 
 ::: tip Tip
