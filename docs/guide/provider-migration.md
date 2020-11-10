@@ -24,6 +24,51 @@ You can follow [this GitHub issue](https://github.com/MetaMask/metamask-extensio
 
 [[toc]]
 
+## Replacing `window.web3`
+
+For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
+This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
+
+If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
+Continue reading to learn more about the migration options. Some are as simple as a one-line change.
+
+::: tip Tip
+Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
+:::
+
+### Using `window.ethereum` Directly
+
+For many web3 sites, the API provided by `window.ethereum` is more than sufficient.
+Much of the `web3` API simply maps to RPC methods, all of which can be requested using [`ethereum.request()`](./ethereum-provider.html#ethereum-request-args).
+For example, here are a couple of actions performed using first `window.web3`, and then their equivalents using `window.ethereum`.
+
+<<< @/docs/snippets/web3ToProvider.js
+
+### Using an Updated Convenience library
+
+If you decide that you need a convenience library, you will have to convert your usage of `window.web3` to an updated convenience library.
+We recommend one of the following options.
+
+- [`ethers`](https://npmjs.com/package/ethers)
+  - [Documentation](https://docs.ethers.io/)
+- [`web3`](https://npmjs.com/package/web3)
+  - [Documentation](https://web3js.readthedocs.io)
+
+### Using `@metamask/legacy-web3`
+
+::: warning
+We strongly recommend that you consider one of the other two migration paths before resorting to this one.
+It is not future-proof, and it is not guaranteed to work.
+:::
+
+Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
+This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
+
+`@metamask/legacy-web3` should work exactly like our injected `window.web3`, but _we cannot guarantee that it works perfectly_.
+We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
+
+For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).
+
 ## Migrating to the New Provider API
 
 ### Handling `eth_chainId` Return Values
@@ -84,47 +129,4 @@ Although it is possible that your dependencies use the `publicConfigStore`, we h
 - `ethers`
 - `web3` (web3.js)
 
-## Replacing `window.web3`
 
-For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
-This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
-
-If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
-Continue reading to learn more about the migration options. Some are as simple as a one-line change.
-
-::: tip Tip
-Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
-:::
-
-### Using `window.ethereum` Directly
-
-For many web3 sites, the API provided by `window.ethereum` is more than sufficient.
-Much of the `web3` API simply maps to RPC methods, all of which can be requested using [`ethereum.request()`](./ethereum-provider.html#ethereum-request-args).
-For example, here are a couple of actions performed using first `window.web3`, and then their equivalents using `window.ethereum`.
-
-<<< @/docs/snippets/web3ToProvider.js
-
-### Using an Updated Convenience library
-
-If you decide that you need a convenience library, you will have to convert your usage of `window.web3` to an updated convenience library.
-We recommend one of the following options.
-
-- [`ethers`](https://npmjs.com/package/ethers)
-  - [Documentation](https://docs.ethers.io/)
-- [`web3`](https://npmjs.com/package/web3)
-  - [Documentation](https://web3js.readthedocs.io)
-
-### Using `@metamask/legacy-web3`
-
-::: warning
-We strongly recommend that you consider one of the other two migration paths before resorting to this one.
-It is not future-proof, and it is not guaranteed to work.
-:::
-
-Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
-This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
-
-`@metamask/legacy-web3` should work exactly like our injected `window.web3`, but _we cannot guarantee that it works perfectly_.
-We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
-
-For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).
