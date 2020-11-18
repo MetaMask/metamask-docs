@@ -1,6 +1,7 @@
 # Contributors
 
 ## MetaMask Repositories
+
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab Extension
@@ -28,4 +29,3 @@
 :::
 
 ::::
-
