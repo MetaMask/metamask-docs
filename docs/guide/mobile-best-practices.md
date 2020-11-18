@@ -4,8 +4,8 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ## The Provider (window.ethereum)
 
-::: danger Upcoming Breaking Changes
-MetaMask Mobile is also affected by the **November 16, 2020** breaking changes.
+::: danger Breaking Changes Imminent
+MetaMask Mobile is also affected by the breaking changes to our provider, and the removal of `window.web3`.
 Please read our [Migration Guide](./provider-migration.html) for more details.
 :::
 
