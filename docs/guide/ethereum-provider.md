@@ -6,7 +6,7 @@ We recommend that all web3 site developers read the [Basic Usage](#basic-usage) 
 
 ::: danger Breaking Changes Imminent
 We are in the process of shipping changes that will break certain Ethereum web applications.
-All future major versions of MetaMask on all platforms will be affected.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
 
 Action is required for Ethereum application developers only.

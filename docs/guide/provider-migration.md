@@ -7,7 +7,7 @@ As a MetaMask user, you don't need to do anything!
 
 ::: danger Deadline Imminent
 We are in the process of shipping all of these changes.
-All future major versions of MetaMask on all platforms will be affected.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 
 If your website relies on any of these features, it may break when these changes are made unless you migrate.
 :::

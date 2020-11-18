@@ -9,6 +9,7 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 
 ::: danger Breaking Changes Imminent
 We are in the process of shipping changes that will break certain Ethereum web applications.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 Please read our [Migration Guide](./provider-migration.html) for more details.
 
 Action is required for Ethereum application developers only.
