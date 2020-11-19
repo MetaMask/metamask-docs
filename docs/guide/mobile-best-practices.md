@@ -4,9 +4,13 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ## The Provider (window.ethereum)
 
-::: danger Upcoming Breaking Changes
-MetaMask Mobile is also affected by the **November 16, 2020** breaking changes.
+::: danger Breaking Changes Imminent
+MetaMask Mobile is also affected by the breaking changes to our provider, and the removal of `window.web3`.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 Please read our [Migration Guide](./provider-migration.html) for more details.
+
+Action is required for Ethereum application developers only.
+MetaMask users do not need to do anything.
 :::
 
 The [provider API](./ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
