@@ -4,9 +4,9 @@
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 
-::: danger Upcoming Breaking Changes
-On **November 16, 2020** (or shortly thereafter), we are introducing changes that may break certain web3 sites.
-All future versions of MetaMask on all platforms will be affected.
+::: danger Breaking Changes Imminent
+We are in the process of shipping changes that will break certain Ethereum web applications.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
 
 Action is required for Ethereum application developers only.
@@ -42,10 +42,10 @@ if (provider) {
 ## Upcoming Breaking Changes
 
 ::: danger Important Information
-On **November 16, 2020** (or shortly thereafter), we are making changes to our provider API that will be breaking for some web3 sites.
-All future versions of MetaMask on all platforms will be affected.
-These changes are _upcoming_, but you can already handle them today.
-Follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) for updates.
+We are in the process of shipping changes that will break certain Ethereum web applications.
+All future major versions of MetaMask on all platforms will be affected.
+To ensure that your site won't break, you need to handle these changes today.
+We will make an announcement on  [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
 
 All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
 Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
@@ -53,7 +53,7 @@ Other than that, if you are new to using the provider, you do not have to worry 
 
 ### `window.ethereum` API Changes
 
-At that time, we will:
+We will:
 
 - Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
   - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.

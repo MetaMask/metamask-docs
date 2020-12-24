@@ -5,18 +5,17 @@ This documentation is for Ethereum application developers.
 As a MetaMask user, you don't need to do anything!
 :::
 
-::: danger Deadline
-All of these changes are shipping on (or shortly after) **November 16, 2020**.
-All future versions of MetaMask on all platforms will be affected.
+::: danger Deadline Imminent
+We are in the process of shipping all of these changes.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 
-If your web3 site relies on any of these features, it may break when these changes are made unless you migrate.
+If your website relies on any of these features, it may break when these changes are made unless you migrate.
 :::
 
-As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), on **November 16, 2020**, we are shipping breaking changes to our provider API and removing our injected `window.web3`.
-This guide describes how to migrate to the new provider API, and how to replace our `window.web3` object.
+As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), we are in the process of shipping breaking changes to our provider API and removing our injected `window.web3` object.
+This guide describes how to migrate to the new provider API, and how to replace our `window.web3`.
 
-All replacement APIs are live, and you can migrate at any time.
-If you will be affected by the breaking changes, we recommend that you migrate as soon as possible.
+All replacement APIs are live, and we recommend migrating _immediately_.
 
 You can follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) to be notified of the dates of the breaking changes once we announce them.
 
