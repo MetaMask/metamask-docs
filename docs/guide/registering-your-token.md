@@ -4,7 +4,7 @@ When a user opens their MetaMask, they are shown a variety of assets, including 
 
 While this is possible using our UI with the `Add Token` button, that process can be cumbersome, and involves the user interacting with contract addresses, and is very error prone.
 
-You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP 747](https://github.com/estebanmino/EIPs/blob/master/EIPS/eip-747.md).
+You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP-747](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md).
 
 ## Code-free Example
 
@@ -23,32 +23,27 @@ const tokenSymbol = 'TUT';
 const tokenDecimals = 18;
 const tokenImage = 'http://placekitten.com/200/300';
 
-ethereum.sendAsync(
-  {
+try {
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  const wasAdded = await ethereum.request({
     method: 'wallet_watchAsset',
     params: {
-      type: 'ERC20',
+      type: 'ERC20', // Initially only supports ERC20, but eventually more!
       options: {
-        address: tokenAddress,
-        symbol: tokenSymbol,
-        decimals: tokenDecimals,
-        image: tokenImage,
+        address: tokenAddress, // The address that the token is at.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: tokenDecimals, // The number of decimals in the token
+        image: tokenImage, // A string url of the token logo
       },
     },
-    id: Math.round(Math.random() * 100000),
-  },
-  (err, added) => {
-    if (added) {
-      console.log('Thanks for your interest!');
-    } else {
-      console.log('Your loss!');
-    }
+  });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('Your loss!');
   }
-);
+} catch (error) {
+  console.log(error);
+}
 ```
-
-## Default Token List
-
-If you're a major and popular token, you may qualify to be listed in our [eth-contract-metadata](https://github.com/MetaMask/eth-contract-metadata) registry. This is a centralized solution and takes a larger toll on our development team, so we prefer to avoid the politics of picking and choosing tokens that get auto-detected in users' accounts, so please see if the EIP-747 method above can suit your needs before submitting a new token there for inclusion.
-
-If you have a user on your site, asking them to click once to add a token is a small burden on them, and allows you to leverage the trusting relationship you already have with your user instead of our central repository.

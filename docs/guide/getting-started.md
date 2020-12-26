@@ -2,28 +2,33 @@
 
 To develop for MetaMask, install MetaMask on your development machine. [Download here](https://metamask.io/).
 
-:::warning A quick note...
-This guide assumes intermediate knowledge of HTML, CSS, and JavaScript. 
+::: warning A quick note...
+This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 :::
 
+Once MetaMask is installed and running, you should find that new browser tabs have a `window.ethereum` object available in the developer console.
+This is how your website will interact with MetaMask.
 
+You can review the full API for that object [here](./ethereum-provider.html).
+Note that in **over the course of 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
 
 ### Web3 Browser Detection
 
 To verify if the browser is running MetaMask, copy and paste the code snippet below in the developer console of your web browser:
+
 ```javascript
-  if (typeof window.ethereum !== 'undefined') { 
-    console.log("MetaMask is installed!"); 
-  }
+if (typeof window.ethereum !== 'undefined') {
+  console.log('MetaMask is installed!');
+}
 ```
-You can review the full API for the `windows.ethereum` object [here](./ethereum-provider.html).
-Note that in **early 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
+
+You can review the full API for the `window.ethereum` object [here](./ethereum-provider.html).
 
 ### Running a Test Network
 
-In the top right menu of MetaMask, select the network that you are currently connected to. Among several popular defaults, you'll find `Custom RPC` and `Localhost 8545`. These are both useful for connecting to a test blockchain, like [ganache](https://truffleframework.com/ganache). You can quickly install and start Ganache if you have `npm` installed with `npm i -g ganache-cli && ganache-cli`.
+In the top right menu of MetaMask, select the network that you are currently connected to. Among several popular defaults, you'll find `Custom RPC` and `Localhost 8545`. These are both useful for connecting to a test blockchain, like [ganache](https://www.trufflesuite.com/ganache). You can quickly install and start Ganache if you have `npm` installed with `npm i -g ganache-cli && ganache-cli`.
 
 Ganache has some great features for starting your application with different states. If your application starts with the `-m` flag, you can feed it the same seed phrase you have in your MetaMask, and the test network will give each of your first 10 accounts 100 test ether, which makes it easier to start work.
 
@@ -61,25 +66,37 @@ We recommend that you provide a button to allow the user to connect MetaMask to 
 Clicking this button should call the following method:
 
 ```javascript
-ethereum.enable();
+ethereum.request({ method: 'eth_requestAccounts' });
 ```
 
 **Example:**
 
 <EthConnectButton />
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab HTML
+
 ```html
 <button class="enableEthereumButton">Enable Ethereum</button>
 ```
+
+:::
+
+::: tab JavaScript
 
 ```javascript
 const ethereumButton = document.querySelector('.enableEthereumButton');
 
 ethereumButton.addEventListener('click', () => {
   //Will Start the metamask extension
-  ethereum.enable();
+  ethereum.request({ method: 'eth_requestAccounts' });
 });
 ```
+
+:::
+
+::::
 
 This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
 
@@ -88,7 +105,7 @@ Over time, this method is intended to grow to include various additional paramet
 Since it returns a promise, if you're in an `async` function, you may log in like this:
 
 ```javascript
-const accounts = await ethereum.enable();
+const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 const account = accounts[0];
 // We currently only ever provide a single account,
 // but the array gives us some room to grow.
@@ -98,10 +115,18 @@ const account = accounts[0];
 
 <EthAsyncConnectButton />
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab HTML
+
 ```html
 <button class="enableEthereumButton">Enable Ethereum</button>
 <h2>Account: <span class="showAccount"></span></h2>
 ```
+
+:::
+
+::: tab JavaScript
 
 ```javascript
 const ethereumButton = document.querySelector('.enableEthereumButton');
@@ -112,11 +137,15 @@ ethereumButton.addEventListener('click', () => {
 });
 
 async function getAccount() {
-  const accounts = await ethereum.enable();
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
   const account = accounts[0];
   showAccount.innerHTML = account;
 }
 ```
+
+:::
+
+::::
 
 ## Choosing a Convenience Library
 
@@ -125,8 +154,8 @@ Convenience libraries exist for a variety of reasons.
 Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and on.
 
 The provider API itself is very simple, and wraps
-[Ethereum JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods)
+[Ethereum JSON-RPC](https://eth.wiki/json-rpc/API#json-rpc-methods)
 formatted messages, which is why developers usually use a convenience library for interacting
-with the provider, like [ethers](https://www.npmjs.com/package/ethers), [web3](https://www.npmjs.com/package/web3),
-[truffle](https://truffleframework.com/), [Embark](https://embark.status.im/), or others. From those tools,
+with the provider, like [ethers](https://www.npmjs.com/package/ethers), [web3.js](https://www.npmjs.com/package/web3),
+[truffle](https://www.trufflesuite.com/), [Embark](https://framework.embarklabs.io/), or others. From those tools,
 you can generally find sufficient documentation to interact with the provider, without reading this lower-level API.

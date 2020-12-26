@@ -1,18 +1,32 @@
-# Mobile Best Practices
+# Best Practices
 
-If your site works with the MetaMask Extension, then you should be all set!
-If it doesn't, please see below.
-If you're still having issues, feel free to open an issue [here](https://github.com/MetaMask/metamask-mobile)
+If this page doesn't answer your question, please feel free to open an issue [in our repository](https://github.com/MetaMask/metamask-mobile).
 
-# ethereum.initialized
+## The Provider (window.ethereum)
 
-On mobile, the loading of the window can be slower than you might be used to dealing with on the web. Because of this, we've implemented an event: `ethereum#initialized`
+::: danger Breaking Changes Imminent
+MetaMask Mobile is also affected by the breaking changes to our provider, and the removal of `window.web3`.
+These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
+Please read our [Migration Guide](./provider-migration.html) for more details.
 
-[see gist](https://gist.github.com/rekmarks/06999f88fe6ab0cd1d71ac7cd2b2ac93)
+Action is required for Ethereum application developers only.
+MetaMask users do not need to do anything.
+:::
 
-New event dispatched on `window`: `ethereum#initialized`
+The [provider API](./ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
+However, the providers become available (i.e., are injected into the page) at different points in the page lifecycle.
 
-Event name inspired by JSDoc `@event` tag: https://jsdoc.app/tags-event.html
+### Provider Availability
+
+If you use [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider), there's nothing to worry about; it will reliably detect both the mobile and extension provider.
+
+If you don't use the `detect-provider` package, you have to detect the mobile provider manually.
+
+The extension provider will always be available by the time your code is executed.
+Because of platform limitations, the mobile provider may not be injected until later in the page lifecycle.
+For this purpose, the MetaMask provider dispatches the event `ethereum#initialized` on `window` when it is fully initialized.
+
+You can reliably detect both the mobile and extension provider with the following snippet.
 
 ```javascript
 if (window.ethereum) {
@@ -31,11 +45,83 @@ function handleEthereum() {
   const { ethereum } = window;
   if (ethereum && ethereum.isMetaMask) {
     console.log('Ethereum successfully detected!');
-    // Do work...
+    // Access the decentralized web!
   } else {
     console.log('Please install MetaMask!');
   }
 }
 ```
 
-But for the best user experience, we would also like to encourage the practice of only asking for the user's accounts upon a user initiated interaction.
+## Using WalletConnect
+
+With WalletConnect, you can use MetaMask Mobile as a signer while using applications on another browser, desktop, or mobile application.
+Check out the [WalletConnect mobile linking docs](https://docs.walletconnect.org/mobile-linking) for more info.
+
+## Deeplinking
+
+::: tip Tip
+[Click here to create deeplinks for your application.](https://metamask.github.io/metamask-deeplinks/#)
+:::
+
+Deeplinks enable instant invocation of the user's preferred wallet application with correctly parameterized transactions.
+
+Only the (authenticated) user can confirm the transaction, and the wallet can be a web, mobile or desktop app.
+
+URLs embedded in QR codes, hyperlinks in web pages, emails, or chat messages enable robust, cross-application signaling between otherwise loosely coupled applications.
+
+You can use deeplinks for things like:
+
+- Creating a URL so your users can open your app directly in MetaMask Mobile to interact with your application with their Ethereum account.
+
+- Providing a one-click experience such that users can easily make payments to another account (with pre-filled parameters like recipient address, amount, network, etc.)
+
+- Let your users make gasless and instant transactions with Connext payment channel requests
+  - This requires that the user opts in for the InstaPay experimental feature.
+
+## Website Testing and Debugging
+
+Test and debug your web3 site using MetaMask Mobile on any iOS or Android device with ease.
+
+### Testing
+
+1. Configure your development server to run on your host machine's local IP address `192.168.x.x`, or `0.0.0.0`.
+2. Make sure your testing device is using the same WiFi connection as the machine hosting the server.
+3. In the MetaMask Mobile web browser, navigate to your website at `http://YOUR_LOCAL_IP:PORT`.
+
+::: tip Tip
+If you're using an Android device, you must use `xip` in your url. Example: `http://192.168.x.x.xip.io:8000`
+:::
+
+### Debugging
+
+::: warning Important
+For security purposes, web browser debugging on both iOS and Android will not work if the app was downloaded through the Apple App Store or Google Play Store.
+You must build the app locally from [MetaMask Mobile repository](https://github.com/MetaMask/metamask-mobile) and run it on a simulator or physical device.
+:::
+
+#### iOS
+
+1. Open **Safari Preferences** -> **Advanced** -> enable the **Show Develop menu in menu bar** checkbox
+2. Open MetaMask Mobile in an iOS simulator or iOS device
+3. In the Safari menu bar -> **Develop** -> **[device name]** -> **[app name]** -> **[url - title]**
+
+::: tip Tip
+When debugging on a physical device, you must enable Web Inspector in your device's settings:
+
+**Settings** -> **Safari** -> **Advanced** -> **Web Inspector**
+:::
+
+#### Android
+
+1. Open MetaMask Mobile in an Android emulator or Android device
+2. Open Google Chrome's DevTools -> menu (3 dots) -> **More tools** -> **Remote devices**
+   You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging
+3. Select your device on the left and click **Inspect** on the browser contents you'd like to inspect.
+
+::: tip Tip
+When debugging on a physical device you must enable USB debugging in your device's settings:
+
+**Settings** -> **System** -> **About Phone** -> **Developer options** -> **Enable USB debugging**
+:::
+
+You can now debug MetaMask Mobile's browser contents just as you would on the web!
