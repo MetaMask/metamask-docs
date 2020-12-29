@@ -54,7 +54,7 @@ module.exports = (_ctx) => ({
       serviceWorker: true,
       updatePopup: true
     }],
-    ['@vuepress/medium-zoom', true],
+    ['@vuepress/medium-zoom', false],
     ['container', {
       type: 'vue',
       before: '<pre class="vue-container"><code>',
@@ -83,7 +83,7 @@ module.exports = (_ctx) => ({
   ]
 })
 
-function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
+function getGuideSidebar (guide, api, bestPractices, mobile, resources) {
   return [
     {
       title: guide,

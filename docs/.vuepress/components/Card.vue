@@ -26,5 +26,6 @@ export default {};
   font-weight: normal;
   font-size: 0.75rem;
   line-height: 140%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 </style>
