@@ -73,6 +73,7 @@ If the user denies the request, the Promise will reject with a `4001` error.
 
 The request causes a MetaMask popup to appear.
 You should only request the user's accounts in response to user action, such as a button click.
+You should always disable the button that caused the request to be dispatched, while the request is still pending.
 
 If you can't retrieve the user's account(s), you should encourage the user to initiate an account request.
 

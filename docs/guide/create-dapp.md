@@ -239,7 +239,8 @@ Under your `onClickInstall` function write/insert this code.
 ```javascript
 const onClickConnect = async () => {
   try {
-    //Will Start the MetaMask Extension
+    // Will open the MetaMask UI
+    // You should disable this button while the request is pending!
     await ethereum.request({ method: 'eth_requestAccounts' });
   } catch (error) {
     console.error(error);
