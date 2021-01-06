@@ -64,7 +64,7 @@ It is not future-proof, and it is not guaranteed to work.
 Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
 This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
 
-`@metamask/legacy-web3` should work exactly like our injected `window.web3`, but _we cannot guarantee that it works perfectly_.
+`@metamask/legacy-web3` should work exactly like our injected `window.web3`, including by refreshing the page on chain/network changes, but _we cannot guarantee that it works perfectly_.
 We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
 
 For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).
