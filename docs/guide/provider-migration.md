@@ -52,7 +52,7 @@ For example, here are a couple of actions performed using first `window.web3`, a
 ### Using an Updated Convenience library
 
 If you decide that you need a convenience library, you will have to convert your usage of `window.web3` to an updated convenience library.
-We recommend  [`ethers`](https://npmjs.com/package/ethers) ([documentation](https://docs.ethers.io/)).
+We recommend [`ethers`](https://npmjs.com/package/ethers) ([documentation](https://docs.ethers.io/)).
 
 ### Using `@metamask/legacy-web3`
 

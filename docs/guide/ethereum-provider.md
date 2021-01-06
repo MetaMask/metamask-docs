@@ -45,7 +45,7 @@ if (provider) {
 We are in the process of shipping changes that will break certain Ethereum web applications.
 All future major versions of MetaMask on all platforms will be affected.
 To ensure that your site won't break, you need to handle these changes today.
-We will make an announcement on  [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
+We will make an announcement on [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
 
 All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
 Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
