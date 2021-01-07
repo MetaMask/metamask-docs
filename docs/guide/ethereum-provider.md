@@ -45,7 +45,7 @@ if (provider) {
 We are in the process of shipping changes that will break certain Ethereum web applications.
 All future major versions of MetaMask on all platforms will be affected.
 To ensure that your site won't break, you need to handle these changes today.
-We will make an announcement on  [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
+We will make an announcement on [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
 
 All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
 Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
@@ -65,6 +65,8 @@ We will:
 - Remove the `ethereum.publicConfigStore` object
   - This object was, despite its name, never intended for public consumption.
     Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
+- Remove the [`ethereum.autoRefreshOnNetworkChange`](#ethereum-autorefreshonnetworkchange-to-be-removed) property
+  - Consumers will still be able to set this property on the provider, it just won't do anything.
 
 These changes _may_ break your website.
 Please read our [Migration Guide](./provider-migration.html) for more details.
@@ -143,11 +145,11 @@ The value of this property can change at any time, and should not be exclusively
 
 A hexadecimal string representing the current chain ID.
 
-### ethereum.autoRefreshOnNetworkChange
+### ethereum.autoRefreshOnNetworkChange (TO BE REMOVED)
 
-::: warning
+::: danger DANGER
 The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
-When `window.web3` [is removed](#window-web3-removal), either the effects of this property will change, or it will be removed.
+When `window.web3` [is removed](#window-web3-removal), this property will be removed as well.
 
 As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
 We recommend reloading the page on `chainChange` unless you have good reason not to.
@@ -253,7 +255,7 @@ ethereum.on('accountsChanged', (accounts) => {
 ethereum.on('chainChanged', (chainId) => {
   // Handle the new chain.
   // Correctly handling chain changes can be complicated.
-  // We recommend reloading the page unless you have a very good reason not to.
+  // We recommend reloading the page unless you have good reason not to.
   window.location.reload();
 });
 ```
@@ -315,7 +317,7 @@ The MetaMask provider emits this event when the currently connected chain change
 All RPC requests are submitted to the currently connected chain.
 Therefore, it's critical to keep track of the current chain ID by listening for this event.
 
-We _strongly_ recommend reloading the page on chain changes, unless absolutely necessary not to.
+We _strongly_ recommend reloading the page on chain changes, unless you have good reason not to.
 
 ```javascript
 ethereum.on('chainChanged', (_chainId) => window.location.reload());

@@ -60,6 +60,7 @@ You can listen for changes using events too, see ([the API reference](./ethereum
 "Connecting" or "logging in" to MetaMask effectively means "to access the user's Ethereum account(s)".
 
 You should **only** initiate a connection request in response to direct user action, such as clicking a button.
+You should **always** disable the "connect" button while the connection request is pending.
 You should **never** initiate a connection request on page load.
 
 We recommend that you provide a button to allow the user to connect MetaMask to your dapp.

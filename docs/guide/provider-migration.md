@@ -5,7 +5,7 @@ This documentation is for Ethereum application developers.
 As a MetaMask user, you don't need to do anything!
 :::
 
-::: danger Deadline Imminent
+::: danger Breaking Changes Imminent
 We are in the process of shipping all of these changes.
 These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
 
@@ -25,6 +25,12 @@ You can follow [this GitHub issue](https://github.com/MetaMask/metamask-extensio
 
 ## Replacing `window.web3`
 
+::: warning Pages Will No Longer Reload on Chain Changes
+With the removal of `window.web3`, MetaMask will no longer automatically reload the page on chain/network changes.
+
+Please see [Handling the Removal of `ethereum.autoRefreshOnNetworkChange`](#handling-the-removal-of-ethereum-autorefreshonnetworkchange) for details.
+:::
+
 For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
 This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
 
@@ -32,7 +38,7 @@ If your website relies on our `window.web3` object, your Ethereum-related functi
 Continue reading to learn more about the migration options. Some are as simple as a one-line change.
 
 ::: tip Tip
-Regardless of how you choose to migrate, you will probably want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
+Regardless of how you choose to migrate, you may want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
 :::
 
 ### Using `window.ethereum` Directly
@@ -46,12 +52,7 @@ For example, here are a couple of actions performed using first `window.web3`, a
 ### Using an Updated Convenience library
 
 If you decide that you need a convenience library, you will have to convert your usage of `window.web3` to an updated convenience library.
-We recommend one of the following options.
-
-- [`ethers`](https://npmjs.com/package/ethers)
-  - [Documentation](https://docs.ethers.io/)
-- [`web3`](https://npmjs.com/package/web3)
-  - [Documentation](https://web3js.readthedocs.io)
+We recommend [`ethers`](https://npmjs.com/package/ethers) ([documentation](https://docs.ethers.io/)).
 
 ### Using `@metamask/legacy-web3`
 
@@ -63,7 +64,7 @@ It is not future-proof, and it is not guaranteed to work.
 Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
 This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
 
-`@metamask/legacy-web3` should work exactly like our injected `window.web3`, but _we cannot guarantee that it works perfectly_.
+`@metamask/legacy-web3` should work exactly like our injected `window.web3`, including by refreshing the page on chain/network changes, but _we cannot guarantee that it works perfectly_.
 We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
 
 For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).
@@ -128,4 +129,13 @@ Although it is possible that your dependencies use the `publicConfigStore`, we h
 - `ethers`
 - `web3` (web3.js)
 
+### Handling the Removal of `ethereum.autoRefreshOnNetworkChange`
 
+The `ethereum.autoRefreshOnNetworkChange` is a mutable boolean property used to control whether MetaMask reloaded the page on chain/network changes.
+However, it only causes the page to be reloaded if the a script access a property on `window.web3`.
+Therefore, this property will be removed along with `window.web3`.
+
+Despite this, we still recommend reloading the page on chain changes.
+Some convenience libraries, such as [ethers](https://www.npmjs.com/package/ethers), will continue to reload the page by default.
+If you don't use such a convenience library, you'll have to reload the page manually.
+Please see the [`chainChanged` event](./ethereum-provider.html#chainchanged) for details.

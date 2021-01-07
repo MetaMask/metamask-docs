@@ -79,6 +79,10 @@ function handleAccountsChanged(accounts) {
 // to initiate the attempt.
 document.getElementById('connectButton', connect);
 
+// While you are awaiting the call to eth_requestAccounts, you should disable
+// any buttons the user can click to initiate the request.
+// MetaMask will reject any additional requests while the first is still
+// pending.
 function connect() {
   ethereum
     .request({ method: 'eth_requestAccounts' })
