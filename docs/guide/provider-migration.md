@@ -57,7 +57,7 @@ It is not future-proof, we will not add new features to it.
 :::
 
 Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
-This package is a drop-in replacement for our `window.web3` that you can add to your website even before we ship the `window.web3` on all platforms.
+This package is a drop-in replacement for our `window.web3` that you can add to your website even before remove `window.web3` on all platforms.
 
 `@metamask/legacy-web3` should work exactly like our injected `window.web3`, including by refreshing the page on chain/network changes, but _we cannot guarantee that it works perfectly_.
 We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
@@ -68,8 +68,8 @@ For installation and usage instructions, please see [npm](https://npmjs.com/pack
 
 ### Handling `eth_chainId` Return Values
 
-Due to a long-standing bug, MetaMask's implementation of the `eth_chainId` RPC method returned 0-padded values for the [default Ethereum chains](./ethereum-provider.html#chain-ids) _except_ Kovan.
-For example, instead of `0x1` and `0x2`, we would return `0x01` and `0x02`.
+The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
+MetaMask's implementation of `eth_chainId` used to return 0-padded values for the [default Ethereum chains](./ethereum-provider.html#chain-ids) _except_ Kovan.
 If you expect 0-padded chain ID values from `eth_chainId`, make sure to update your code to expect the correct format instead.
 
 For more details on chain IDs and how to handle them, see the [`chainChanged` event](./ethereum-provider.html#chainchanged).
