@@ -7,9 +7,9 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 - For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
-::: danger Breaking Changes Imminent
-We are in the process of shipping changes that will break certain Ethereum web applications.
-These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
+::: warning Breaking Provider Changes
+We are in the process of shipping changes that will break some Ethereum web applications.
+These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
 Please read our [Migration Guide](./provider-migration.html) for more details.
 
 Action is required for Ethereum application developers only.
