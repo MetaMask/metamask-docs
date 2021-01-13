@@ -4,10 +4,12 @@
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 
-::: danger Breaking Changes Imminent
-We are in the process of shipping changes that will break certain Ethereum web applications.
-These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
-Please see the [Upcoming Breaking Changes](#upcoming-breaking-changes) section for details.
+::: warning Breaking Provider Changes
+We are in the process of shipping changes that will break some Ethereum web applications.
+These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
+Please see the [Breaking Provider Changes](#upcoming-breaking-changes) section for details.
+
+If your website is broken and you're wondering how to fix it, please see the [Migration Guide](./provider-migration.html).
 
 Action is required for Ethereum application developers only.
 MetaMask users do not need to do anything.
@@ -21,7 +23,7 @@ We recommend using [`@metamask/detect-provider`](https://npmjs.com/package/@meta
 The Ethereum JavaScript provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
 
 ```javascript
-// this function detects most providers injected at window.ethereum
+// This function detects most providers injected at window.ethereum
 import detectEthereumProvider from '@metamask/detect-provider';
 
 const provider = await detectEthereumProvider();
@@ -39,21 +41,24 @@ if (provider) {
 
 [[toc]]
 
-## Upcoming Breaking Changes
+## Breaking Changes
 
-::: danger Important Information
-We are in the process of shipping changes that will break certain Ethereum web applications.
-All future major versions of MetaMask on all platforms will be affected.
-To ensure that your site won't break, you need to handle these changes today.
-We will make an announcement on [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) when the changes ship.
+::: tip Tip
+If you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
+:::
 
-All consumers of MetaMask's provider may be affected by the `eth_chainId` bug (see [next subsection](#window-ethereum-api-changes)).
-Other than that, if you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
+::: warning Breaking Changes are Live
+On January 12, 2020, these changes went live for the Firefox extension.
+Chrome, Brave, and Edge will go live in the coming days.
+MetaMask Mobile will receive these changes as soon as possible.
+
+If your website is broken and you're wondering how to fix it, please see the [Migration Guide](./provider-migration.html).
+If you want to learn more about the changes, please read on.
 :::
 
 ### `window.ethereum` API Changes
 
-We will:
+The following changes to the `window.ethereum` API are breaking:
 
 - Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
   - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
@@ -65,30 +70,21 @@ We will:
 - Remove the `ethereum.publicConfigStore` object
   - This object was, despite its name, never intended for public consumption.
     Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
-- Remove the [`ethereum.autoRefreshOnNetworkChange`](#ethereum-autorefreshonnetworkchange-to-be-removed) property
+- Remove the `ethereum.autoRefreshOnNetworkChange` property
   - Consumers will still be able to set this property on the provider, it just won't do anything.
-
-These changes _may_ break your website.
-Please read our [Migration Guide](./provider-migration.html) for more details.
 
 ### `window.web3` Removal
 
 ::: tip Tip
-If you do not use the `window.web3` object injected by MetaMask, you will not be affected by these changes.
-
-To understand why we're removing `window.web3`, please see [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/7163).
+If you do not use the `window.web3` object injected by MetaMask, you can ignore this section.
 :::
 
-In the near future, we will:
-
-- Stop injecting `window.web3` into web pages
-
-If you rely on the `window.web3` object currently injected by MetaMask, these changes _will_ break your website.
-Please read our [migration guide](./provider-migration.html) for more details.
+As part of the breaking changes, we will stop injecting `web3.js` as `window.web3` into web pages.
+MetaMask will continue to inject a shim object as `window.web3`, to issue warnings when websites attempt to access `window.web3`.
 
 ## Basic Usage
 
-For any non-trivial Ethereum web application — a.k.a. web3 site — to work, you will have to:
+For any non-trivial Ethereum web application — a.k.a. dapp, web3 site etc. — to work, you will have to:
 
 - Detect the Ethereum provider (`window.ethereum`)
 - Detect which Ethereum network the user is connected to
@@ -104,22 +100,12 @@ If you are in need of higher-level abstractions than those provided by this API,
 
 ## Chain IDs
 
-::: warning
-At the moment, the [`ethereum.chainId`](#ethereum-chainid) property and the [`chainChanged`](#chainchanged) event should be preferred over the `eth_chainId` RPC method.
-Their chain ID values are correctly formatted, per the table below.
-
-`eth_chainId` returns an incorrectly formatted (0-padded) chain ID for the chains in the table below, e.g. `0x01` instead of `0x1`.
-See the [Upcoming Breaking Changes section](#upcoming-breaking-changes) for details on when the `eth_chainId` RPC method will be fixed.
-
-Custom RPC endpoints are not affected; they always return the chain ID specified by the user.
-:::
-
 These are the IDs of the Ethereum chains that MetaMask supports by default.
 Consult [chainid.network](https://chainid.network) for more.
 
 | Hex  | Decimal | Network                         |
 | ---- | ------- | ------------------------------- |
-| 0x1  | 1       | Ethereum Main Network (MainNet) |
+| 0x1  | 1       | Ethereum Main Network (Mainnet) |
 | 0x3  | 3       | Ropsten Test Network            |
 | 0x4  | 4       | Rinkeby Test Network            |
 | 0x5  | 5       | Goerli Test Network             |
@@ -129,44 +115,11 @@ Consult [chainid.network](https://chainid.network) for more.
 
 ### ethereum.isMetaMask
 
-::: tip Tip
-This property is not guaranteed to be correct for all providers. Non-MetaMask providers may also set this property to `true`.
+::: warning Note
+This property is non-standard. Non-MetaMask providers may also set this property to `true`.
 :::
 
 `true` if the user has MetaMask installed.
-
-### ethereum.chainId
-
-::: warning
-The value of this property can change at any time, and should not be exclusively relied upon. See the [`chainChanged`](#chainchanged) event for details.
-
-**NOTE:** See the [Chain IDs section](#chain-ids) for important information about the MetaMask provider's chain IDs.
-:::
-
-A hexadecimal string representing the current chain ID.
-
-### ethereum.autoRefreshOnNetworkChange (TO BE REMOVED)
-
-::: danger DANGER
-The value of this property will only affect MetaMask's behavior if `window.web3` is accessed during the page lifecycle.
-When `window.web3` [is removed](#window-web3-removal), this property will be removed as well.
-
-As the consumer of this API, it is your responsbility to handle chain changes using the [`chainChanged` event](#chainChanged).
-We recommend reloading the page on `chainChange` unless you have good reason not to.
-:::
-
-By default, this property is `true`.
-
-If this property is truthy, MetaMask will reload the page in the following cases:
-
-- When the connected chain (network) changes, if `window.web3` has been accessed during the page lifecycle
-- When `window.web3` is accessed, if the connected chain (network) has changed during the page lifecycle
-
-To disable this behavior, set this property to `false` immediately after detecting the provider:
-
-```javascript
-ethereum.autoRefreshOnNetworkChange = false;
-```
 
 ## Methods
 
@@ -304,8 +257,8 @@ We plan to allow the `eth_accounts` array to be able to contain multiple address
 
 ### chainChanged
 
-::: warning
-**NOTE:** See the [Chain IDs section](#chain-ids) for important information about the MetaMask provider's chain IDs.
+::: tip Tip
+See the [Chain IDs section](#chain-ids) for MetaMask's default chains and their chain IDs.
 :::
 
 ```typescript
@@ -390,34 +343,6 @@ We expose some experimental, MetaMask-specific methods under the `ethereum._meta
 
 ## Experimental Methods
 
-### ethereum.\_metamask.isApproved() (TO BE REMOVED)
-
-::: danger DANGER
-This will be removed in the future.
-
-Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
-:::
-
-```typescript
-ethereum._metamask.isApproved(): Promise<boolean>;
-```
-
-This method returns a `Promise` that resolves to a `boolean` indicating if the caller has access to user accounts.
-
-### ethereum.\_metamask.isEnabled() (TO BE REMOVED)
-
-::: danger DANGER
-This will be removed in the future.
-
-Please see the [Using the Provider section](#using-the-provider) for the recommended way of keeping track of user accounts.
-:::
-
-```typescript
-ethereum._metamask.isEnabled(): boolean;
-```
-
-This method returns a `boolean` indicating if the caller has access to user accounts.
-
 ### ethereum.\_metamask.isUnlocked()
 
 ```typescript
@@ -439,6 +364,19 @@ MetaMask only supported this API before the provider API was standardized via [E
 Because of this, you may find web3 sites that use this API, or other providers that implement it.
 
 ## Legacy Properties
+
+### ethereum.chainId (DEPRECATED)
+
+::: warning
+This property is non-standard, and therefore deprecated.
+
+If you need to retrieve the current chain ID, use [`ethereum.request({ method: 'eth_chainId' })`](#ethereum-request-args).
+See also the [`chainChanged`](#chainchanged) event for more information about how to handle chain IDs.
+
+The value of this property can change at any time.
+:::
+
+A hexadecimal string representing the current chain ID.
 
 ### ethereum.networkVersion (DEPRECATED)
 

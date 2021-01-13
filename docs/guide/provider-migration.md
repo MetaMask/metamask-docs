@@ -2,22 +2,15 @@
 
 ::: tip Attention MetaMask Users
 This documentation is for Ethereum application developers.
-As a MetaMask user, you don't need to do anything!
+As a MetaMask user, you don't need to do anything.
 :::
 
-::: danger Breaking Changes Imminent
-We are in the process of shipping all of these changes.
-These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
+As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), breaking changes went live for the Firefox extension on January 12, 2020.
+Chrome, Brave, and Edge will go live in the coming days.
+MetaMask Mobile will receive these changes as soon as possible.
 
-If your website relies on any of these features, it may break when these changes are made unless you migrate.
-:::
-
-As noted in the [Ethereum Provider documentation](./ethereum-provider.html#upcoming-breaking-changes), we are in the process of shipping breaking changes to our provider API and removing our injected `window.web3` object.
+The breaking changes include modifications to the `window.ethereum` API and the removal of `window.web3`.
 This guide describes how to migrate to the new provider API, and how to replace our `window.web3`.
-
-All replacement APIs are live, and we recommend migrating _immediately_.
-
-You can follow [this GitHub issue](https://github.com/MetaMask/metamask-extension/issues/8077) to be notified of the dates of the breaking changes once we announce them.
 
 ## Table of Contents
 
@@ -32,10 +25,12 @@ Please see [Handling the Removal of `ethereum.autoRefreshOnNetworkChange`](#hand
 :::
 
 For historical reasons, MetaMask has injected [`web3@0.20.7`](https://github.com/ethereum/web3.js/tree/0.20.7) into all web pages.
-This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team, so the only way we can continue providing a secure experience to our developers is by removing this library.
+This version of `web3` is deprecated, [has known security issues](https://github.com/ethereum/web3.js/issues/3065), and is no longer maintained by the [web3.js](https://github.com/ethereum/web3.js/) team.
+Therefore, we decided to remove this library.
 
-If your website relies on our `window.web3` object, your Ethereum-related functionality will break when we stop injecting `window.web3`.
-Continue reading to learn more about the migration options. Some are as simple as a one-line change.
+If your website relied on our `window.web3` object, you will have to migrate.
+Please continue reading to understand your options.
+Some are as simple as a one-line change.
 
 ::: tip Tip
 Regardless of how you choose to migrate, you may want to read the `web3@0.20.7` documentation, which you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
@@ -58,11 +53,11 @@ We recommend [`ethers`](https://npmjs.com/package/ethers) ([documentation](https
 
 ::: warning
 We strongly recommend that you consider one of the other two migration paths before resorting to this one.
-It is not future-proof, and it is not guaranteed to work.
+It is not future-proof, we will not add new features to it.
 :::
 
 Finally, if you just want your web3 site to continue to work, we created [`@metamask/legacy-web3`](https://npmjs.com/package/@metamask/legacy-web3).
-This package is a drop-in replacement for our `window.web3` that you can add to your web3 site even before MetaMask stops injecting `window.web3`.
+This package is a drop-in replacement for our `window.web3` that you can add to your website even before remove `window.web3` on all platforms.
 
 `@metamask/legacy-web3` should work exactly like our injected `window.web3`, including by refreshing the page on chain/network changes, but _we cannot guarantee that it works perfectly_.
 We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask itself, nor will we fix any bugs in `web3@0.20.7` itself.
@@ -73,10 +68,11 @@ For installation and usage instructions, please see [npm](https://npmjs.com/pack
 
 ### Handling `eth_chainId` Return Values
 
-Due to a long-standing bug, MetaMask's implementation of the `eth_chainId` RPC method has returned 0-padded values for the [default Ethereum chains](./ethereum-provider.html#chain-ids) _except_ Kovan.
-For example, instead of `0x1` and `0x2`, we currently return `0x01` and `0x02`.
+The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
+MetaMask's implementation of `eth_chainId` used to return 0-padded values for the [default Ethereum chains](./ethereum-provider.html#chain-ids) _except_ Kovan.
+If you expect 0-padded chain ID values from `eth_chainId`, make sure to update your code to expect the correct format instead.
 
-For the time being, instead of calling the `eth_chainId` RPC method, you should use the [`ethereum.chainId` property](./ethereum-provider.html#ethereum-chainid) and the [`chainChanged` event](./ethereum-provider.html#chainchanged).
+For more details on chain IDs and how to handle them, see the [`chainChanged` event](./ethereum-provider.html#chainchanged).
 
 ### Handling the Removal of `chainIdChanged`
 
@@ -97,18 +93,16 @@ ethereum.on('chainChanged', (chainId) => {
 
 ### Handling the Removal of `isEnabled()` and `isApproved()`
 
-Before the new provider API shipped, we added
-[`_metamask.isEnabled`](./ethereum-provider.html#ethereum-metamask-isenabled-to-be-removed) and
-[`_metamask.isApproved`](./ethereum-provider.html#ethereum-metamask-isapproved-to-be-removed)
+Before the new provider API shipped, we added the `_metamask.isEnabled` and `_metamask.isApproved` methods
 to enable web3 sites to check if they have [access to the user's accounts](./rpc-api.html#eth-requestaccounts).
-`isEnabled` and `isApproved` are identical, except that `isApproved` is `async`.
-These methods were arguably never that useful, but they are completely redundant since the introduction of MetaMask's [permission system](./rpc-api.html#permissions).
+`isEnabled` and `isApproved` functioned identically, except that `isApproved` was `async`.
+These methods were arguably never that useful, and they became completely redundant with the introduction of MetaMask's [permission system](./rpc-api.html#permissions).
 
 We recommend that you check for account access in the following ways:
 
 1. You can call the [`wallet_getPermissions` RPC method](./rpc-api.html#wallet-getpermissions) and check for the `eth_accounts` permission.
 
-2. You can call the `eth_accounts` RPC method and the [`ethereum._metamask.isUnlocked()` function](./ethereum-provider.html#ethereum-metamask-isunlocked).
+2. You can call the `eth_accounts` RPC method and the [`ethereum._metamask.isUnlocked()` method](./ethereum-provider.html#ethereum-metamask-isunlocked).
 
    - MetaMask has to be unlocked before you can access the user's accounts.
      If the array returned by `eth_accounts` is empty, check if MetaMask is locked using `isUnlocked()`.

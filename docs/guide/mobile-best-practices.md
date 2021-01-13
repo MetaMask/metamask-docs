@@ -4,9 +4,9 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ## The Provider (window.ethereum)
 
-::: danger Breaking Changes Imminent
-MetaMask Mobile is also affected by the breaking changes to our provider, and the removal of `window.web3`.
-These changes may ship at any time, and all future major versions of MetaMask on all platforms will be affected.
+::: danger Breaking Provider Changes
+We are in the process of shipping changes that will break some Ethereum web applications.
+These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
 Please read our [Migration Guide](./provider-migration.html) for more details.
 
 Action is required for Ethereum application developers only.

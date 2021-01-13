@@ -14,7 +14,7 @@ const transactionParameters = {
   value: '0x00', // Only required to send ether to the recipient from the initiating external account.
   data:
     '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
-  chainId: 3, // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+  chainId: '0x3', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
 };
 
 // txHash is a hex string
