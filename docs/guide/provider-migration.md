@@ -64,6 +64,16 @@ We will not fix any future incompatibilities between `web3@0.20.7` and MetaMask 
 
 For installation and usage instructions, please see [npm](https://npmjs.com/package/@metamask/legacy-web3).
 
+### Using the MetaMask Legacy Web3 Extension
+
+We have created the [**MetaMask Legacy Web3 Extension**](https://github.com/MetaMask/legacy-web3-extension) for any users of web sites that still expect `window.web3` to be injected. If you install this extension alongside the regular MetaMask wallet extension, websites that rely on our old window.web3 API should start working again.
+
+As with the regular extension, it’s critical that you only install from the official browser extension stores. Please follow the relevant link below to install the Legacy Web3 extension in your browser:
+
+* [Chrome, Brave](https://chrome.google.com/webstore/detail/metamask-legacy-web3/dgoegggfhkapjphahmgihfgemkgecdgl)
+* [Edge](https://microsoftedge.microsoft.com/addons/detail/metamask-legacy-web3/obkfjbjkiofoponpkmphnpaaadebfloh?hl=en-US)
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/metamask-legacy-web3/) (Will be published soon)
+
 ## Migrating to the New Provider API
 
 ### Handling `eth_chainId` Return Values
