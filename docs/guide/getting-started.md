@@ -9,7 +9,7 @@ This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 Once MetaMask is installed and running, you should find that new browser tabs have a `window.ethereum` object available in the developer console.
 This is how your website will interact with MetaMask.
 
-You can review the full API for that object [here](./ethereum-provider.html).
+You can review the full API for that object [here](./guide/ethereum-provider.html).
 Note that in **over the course of 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
@@ -24,7 +24,7 @@ if (typeof window.ethereum !== 'undefined') {
 }
 ```
 
-You can review the full API for the `window.ethereum` object [here](./ethereum-provider.html).
+You can review the full API for the `window.ethereum` object [here](./guide/ethereum-provider.html).
 
 ### Running a Test Network
 
@@ -36,7 +36,7 @@ Since your seed phrase is the power to control all your accounts, it is probably
 
 #### Resetting Your Local Nonce Calculation
 
-If you're running a test blockchain and restart it, you can accidentally confuse MetaMask because it calculates the next [nonce](./sending-transactions.html#nonce-ignored)
+If you're running a test blockchain and restart it, you can accidentally confuse MetaMask because it calculates the next [nonce](./guide/sending-transactions.html#nonce-ignored)
 based on both the network state _and_ the known sent transactions.
 
 To clear MetaMask's transaction queue, and effectively reset its nonce calculation, you can use the `Reset Account` button in `Settings` (available in the top-right sandwich menu).
@@ -53,7 +53,7 @@ Currently there are a few stateful things to consider when interacting with this
 - What is the current account?
 
 Both of these are available synchronously as `ethereum.networkVersion` and `ethereum.selectedAddress`.
-You can listen for changes using events too, see ([the API reference](./ethereum-provider.html)).
+You can listen for changes using events too, see ([the API reference](./guide/ethereum-provider.html)).
 
 ### Connecting to MetaMask
 

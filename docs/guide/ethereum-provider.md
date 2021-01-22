@@ -4,15 +4,9 @@
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 
-::: warning Breaking Provider Changes
-We are in the process of shipping changes that will break some Ethereum web applications.
-These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
-Please see the [Breaking Provider Changes](#upcoming-breaking-changes) section for details.
-
-If your website is broken and you're wondering how to fix it, please see the [Migration Guide](./provider-migration.html).
-
-Action is required for Ethereum application developers only.
-MetaMask users do not need to do anything.
+::: tip Recent Breaking Provider Changes
+If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
+please see our [Migration Guide](./guide/provider-migration.html) for more details.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
@@ -41,47 +35,6 @@ if (provider) {
 
 [[toc]]
 
-## Breaking Changes
-
-::: tip Tip
-If you are new to using the provider, you do not have to worry about these changes, and can skip ahead [to the next section](#api).
-:::
-
-::: warning Breaking Changes are Live
-On January 12, 2020, these changes went live for the Firefox extension.
-Chrome, Brave, and Edge will go live in the coming days.
-MetaMask Mobile will receive these changes as soon as possible.
-
-If your website is broken and you're wondering how to fix it, please see the [Migration Guide](./provider-migration.html).
-If you want to learn more about the changes, please read on.
-:::
-
-### `window.ethereum` API Changes
-
-The following changes to the `window.ethereum` API are breaking:
-
-- Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
-  - For example, instead of `0x01`, we will always return `0x1`, wherever the chain ID is returned or accessible.
-  - Note that this _only_ affects the [default Ethereum chains](#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
-- Stop emitting `chainIdChanged`, and instead emit `chainChanged`
-- Remove the following experimental methods:
-  - `ethereum._metamask.isEnabled`
-  - `ethereum._metamask.isApproved`
-- Remove the `ethereum.publicConfigStore` object
-  - This object was, despite its name, never intended for public consumption.
-    Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
-- Remove the `ethereum.autoRefreshOnNetworkChange` property
-  - Consumers will still be able to set this property on the provider, it just won't do anything.
-
-### `window.web3` Removal
-
-::: tip Tip
-If you do not use the `window.web3` object injected by MetaMask, you can ignore this section.
-:::
-
-As part of the breaking changes, we will stop injecting `web3.js` as `window.web3` into web pages.
-MetaMask will continue to inject a shim object as `window.web3`, to issue warnings when websites attempt to access `window.web3`.
-
 ## Basic Usage
 
 For any non-trivial Ethereum web application — a.k.a. dapp, web3 site etc. — to work, you will have to:
@@ -95,7 +48,7 @@ You can learn how to accomplish the other two by reviewing the snippet in the [U
 
 The provider API is all you need to create a full-featured web3 application.
 
-That said, many developers use a convenience library, such as [ethers](https://www.npmjs.com/package/ethers) and [web3.js](https://www.npmjs.com/package/web3), instead of using the provider directly.
+That said, many developers use a convenience library, such as [ethers](https://www.npmjs.com/package/ethers), instead of using the provider directly.
 If you are in need of higher-level abstractions than those provided by this API, we recommend that you use a convenience library.
 
 ## Chain IDs
@@ -162,7 +115,7 @@ If the request fails for any reason, the Promise will reject with an [Ethereum R
 
 MetaMask supports most standardized Ethereum RPC methods, in addition to a number of methods that may not be
 supported by other wallets.
-See the MetaMask [RPC API documentation](./rpc-api.html) for details.
+See the MetaMask [RPC API documentation](./guide/rpc-api.html) for details.
 
 #### Example
 
