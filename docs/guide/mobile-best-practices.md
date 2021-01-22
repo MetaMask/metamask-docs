@@ -4,16 +4,12 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ## The Provider (window.ethereum)
 
-::: danger Breaking Provider Changes
-We are in the process of shipping changes that will break some Ethereum web applications.
-These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
-Please read our [Migration Guide](./provider-migration.html) for more details.
-
-Action is required for Ethereum application developers only.
-MetaMask users do not need to do anything.
+::: tip Recent Breaking Provider Changes
+If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
+please see our [Migration Guide](./guide/provider-migration.html) for more details.
 :::
 
-The [provider API](./ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
+The [provider API](./guide/ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
 However, the providers become available (i.e., are injected into the page) at different points in the page lifecycle.
 
 ### Provider Availability

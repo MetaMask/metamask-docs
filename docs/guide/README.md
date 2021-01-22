@@ -7,22 +7,18 @@ Welcome to MetaMask’s Developer Documentation. This documentation is for learn
 - For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/metamask_io) or [Medium](https://medium.com/metamask) pages.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
-::: warning Breaking Provider Changes
-We are in the process of shipping changes that will break some Ethereum web applications.
-These changes have already shipped for the MetaMask browser extension, and may ship for MetaMask Mobile at any time.
-Please read our [Migration Guide](./provider-migration.html) for more details.
-
-Action is required for Ethereum application developers only.
-MetaMask users do not need to do anything.
+::: tip Recent Breaking Provider Changes
+If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
+please see our [Migration Guide](./guide/provider-migration.html) for more details.
 :::
 
 ## Why MetaMask
 
 MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
-- [Get started here](/guide/getting-started.html)
-- [Learn more about our JavaScript Provider API](/guide/ethereum-provider.html)
-- [Learn more about our RPC API](/guide/rpc-api.html)
+- [Get started here](./guide/getting-started.html)
+- [Learn more about our JavaScript Provider API](./guide/ethereum-provider.html)
+- [Learn more about our RPC API](./guide/rpc-api.html)
 
 ## Account Management
 
