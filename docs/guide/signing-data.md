@@ -15,13 +15,14 @@ Note that MetaMask supports signing transactions with Trezor and Ledger hardware
 
 ## A Brief History
 
-There are currently five signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods has some lessons in it for the emergent lessons of decentralized standards emergence. Our current five methods are:
+There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods has some lessons in it for the emergent lessons of decentralized standards emergence. Our current five methods are:
 
 - `eth_sign`
 - `personal_sign`
 - `signTypedData` (currently identical to `signTypedData_v1`)
 - `signTypedData_v1`
 - `signTypedData_v3`
+- `signTypedData_v4`
 
 There are likely to be many more over time. When MetaMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
 
@@ -95,7 +96,6 @@ Hopefully soon we will also have good examples for parsing method input into str
 
 - For example, as a user, you're using an Ether Mail app and a dialog comes up for cryptokitties exchange, this would arouse suspicion due to what the name is on the signature.
 
-
 `verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unnecessary)
 
 - If you are unsure of the name this will show the contract responsible for message verification.
@@ -149,7 +149,7 @@ signTypedDataV4Button.addEventListener('click', function (event) {
        - Be as explicit as possible when building out the message schema.
       */
       contents: 'Hello, Bob!',
-      attachedMoneyInEth: 4.2
+      attachedMoneyInEth: 4.2,
       from: {
         name: 'Cow',
         wallets: [

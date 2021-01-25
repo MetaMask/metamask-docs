@@ -26,9 +26,8 @@ function startApp(provider) {
 /* Handle chain (network) and chainChanged (per EIP-1193) */
 /**********************************************************/
 
-// Normally, we would recommend the 'eth_chainId' RPC method, but it currently
-// returns incorrectly formatted chain ID values.
-let currentChainId = ethereum.chainId;
+const chainId = await ethereum.request({ method: 'eth_chainId' });
+handleChainChanged(chainId);
 
 ethereum.on('chainChanged', handleChainChanged);
 
@@ -79,6 +78,10 @@ function handleAccountsChanged(accounts) {
 // to initiate the attempt.
 document.getElementById('connectButton', connect);
 
+// While you are awaiting the call to eth_requestAccounts, you should disable
+// any buttons the user can click to initiate the request.
+// MetaMask will reject any additional requests while the first is still
+// pending.
 function connect() {
   ethereum
     .request({ method: 'eth_requestAccounts' })

@@ -4,7 +4,12 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ## The Provider (window.ethereum)
 
-The [provider API](./ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
+::: tip Recent Breaking Provider Changes
+If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
+please see our [Migration Guide](./guide/provider-migration.html) for more details.
+:::
+
+The [provider API](./guide/ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
 However, the providers become available (i.e., are injected into the page) at different points in the page lifecycle.
 
 ### Provider Availability
@@ -106,7 +111,7 @@ When debugging on a physical device, you must enable Web Inspector in your devic
 
 1. Open MetaMask Mobile in an Android emulator or Android device
 2. Open Google Chrome's DevTools -> menu (3 dots) -> **More tools** -> **Remote devices**
-You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging
+   You may also navigate to `chrome://inspect` from Chrome to display the list of available devices for debugging
 3. Select your device on the left and click **Inspect** on the browser contents you'd like to inspect.
 
 ::: tip Tip

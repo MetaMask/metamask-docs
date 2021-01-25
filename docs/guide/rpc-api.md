@@ -1,6 +1,6 @@
 # RPC API
 
-MetaMask uses the [`ethereum.request(args)` method](./ethereum-provider.html#ethereum-request-args) to wrap an RPC API.
+MetaMask uses the [`ethereum.request(args)` method](./guide/ethereum-provider.html#ethereum-request-args) to wrap an RPC API.
 
 The API is based on an interface exposed by all Ethereum clients, along with a growing number of methods that may or may not be supported by other wallets.
 
@@ -55,7 +55,7 @@ If you're interested in learning more about the theory behind this _capability_-
 
 ::: tip Tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
-It is equivalent to the deprecated [`ethereum.enable()`](./ethereum-provider.html#ethereum-enable) provider API method.
+It is equivalent to the deprecated [`ethereum.enable()`](./guide/ethereum-provider.html#ethereum-enable) provider API method.
 
 Under the hood, it calls [`wallet_requestPermissions`](#wallet-requestpermissions) for the `eth_accounts` permission.
 Since `eth_accounts` is currently the only permission, this method is all you need for now.
@@ -73,6 +73,7 @@ If the user denies the request, the Promise will reject with a `4001` error.
 
 The request causes a MetaMask popup to appear.
 You should only request the user's accounts in response to user action, such as a button click.
+You should always disable the button that caused the request to be dispatched, while the request is still pending.
 
 If you can't retrieve the user's account(s), you should encourage the user to initiate an account request.
 
@@ -179,7 +180,7 @@ If the caller has no permissions, the array will be empty.
 
 ::: tip Tip
 As an API consumer, you are unlikely to have to call this method yourself.
-Please see the [Onboarding Library documentation](/onboarding-library.html) for more information.
+Please see the [Onboarding Library documentation](./guide/onboarding-library.html) for more information.
 :::
 
 #### Returns
