@@ -1,6 +1,6 @@
 <template>
   <div class="card card-max-width">
-    <div class="card-title">
+    <div class="card-title padding-1">
       <slot name="title"></slot>
     </div>
     <div class="card-content">

@@ -66,5 +66,29 @@ We’re aware that there are constantly new private blockchains that people are 
 
 ## New Dapp Developers
 
+<br>
+
+<a href="/guide/#account-management">
+  <card>
+    <template v-slot:title>
+      <img src="./../.vuepress/images/downlaod_metamask.png">
+    </template>
+    <template v-slot>
+      <h3 class="text-center default-text-color">Download MetaMask</h3>
+    </template>
+  </card>
+</a>
+
+<a href="/guide/#account-management">
+  <card>
+    <template v-slot:title>
+      <img src="./../.vuepress/images/metamask_getting_started.png">
+    </template>
+    <template v-slot>
+      <h3 class="text-center default-text-color">Getting Started</h3>
+    </template>
+  </card>
+</a>
+
 - [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
 - [CryptoZombies](https://cryptozombies.io/)
