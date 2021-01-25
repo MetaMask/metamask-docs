@@ -18,11 +18,7 @@ please see our [Migration Guide](./provider-migration.html) for more details.
       <img src="./../.vuepress/images/account-management.svg">
     </template>
     <template v-slot>
-<<<<<<< HEAD
       <h3 class="text-center default-text-color">Account Management</h3>
-=======
-      <h3 class="text-center">Account Management</h3>
->>>>>>> pushing updated introduction page
     </template>
   </card>
 </a>
@@ -33,18 +29,11 @@ please see our [Migration Guide](./provider-migration.html) for more details.
       <img src="./../.vuepress/images./../images/blockchain-connection.png">
     </template>
     <template v-slot>
-<<<<<<< HEAD
       <h3 class="text-center default-text-color">Blockchain Connection</h3>
     </template>
   </card>
 </a>
 
-=======
-      <h3 class="text-center">Blockchain Connection</h3>
-    </template>
-  </card>
-</a>
->>>>>>> pushing updated introduction page
 ## Why MetaMask
 
 MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
