@@ -68,7 +68,7 @@ We’re aware that there are constantly new private blockchains that people are 
 
 <br>
 
-<a href="/guide/#account-management">
+<a href="https://metamask.io/download.html" target="_blank">
   <card>
     <template v-slot:title>
       <img src="./../.vuepress/images/downlaod_metamask.png">
@@ -79,7 +79,7 @@ We’re aware that there are constantly new private blockchains that people are 
   </card>
 </a>
 
-<a href="/guide/#account-management">
+<router-link to="./getting-started.html">
   <card>
     <template v-slot:title>
       <img src="./../.vuepress/images/metamask_getting_started.png">
@@ -88,7 +88,8 @@ We’re aware that there are constantly new private blockchains that people are 
       <h3 class="text-center default-text-color">Getting Started</h3>
     </template>
   </card>
-</a>
+</router-link>
 
+- [Create a Simple Dapp](./create-dapp.html)
 - [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
 - [CryptoZombies](https://cryptozombies.io/)
