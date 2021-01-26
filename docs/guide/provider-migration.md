@@ -33,7 +33,7 @@ We made the following breaking changes to the `window.ethereum` API:
 
 * Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
   * For example, instead of `0x01`, we always return `0x1`, wherever the chain ID is returned or accessible.
-  * Note that this _only_ affects the [default Ethereum chains](./guide/ethereum-provider.html#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
+  * Note that this _only_ affects the [default Ethereum chains](./ethereum-provider.html#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
 * Stop emitting `chainIdChanged`, and instead emit `chainChanged`
 * Remove the following experimental methods:
   * `ethereum._metamask.isEnabled`
@@ -67,7 +67,7 @@ Regardless of how you choose to migrate, you may want to read the `web3@0.20.7` 
 ### Using `window.ethereum` Directly
 
 For many web3 sites, the API provided by `window.ethereum` is sufficient.
-Much of the `web3` API simply maps to RPC methods, all of which can be requested using [`ethereum.request()`](./guide/ethereum-provider.html#ethereum-request-args).
+Much of the `web3` API simply maps to RPC methods, all of which can be requested using [`ethereum.request()`](./ethereum-provider.html#ethereum-request-args).
 For example, here are a couple of actions performed using first `window.web3`, and then their equivalents using `window.ethereum`.
 
 <<< @/docs/snippets/web3ToProvider.js
@@ -107,10 +107,10 @@ As with the regular extension, it’s critical that you only install from the of
 ### Handling `eth_chainId` Return Values
 
 The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
-MetaMask's implementation of `eth_chainId` used to return 0-padded values for the [default Ethereum chains](./guide/ethereum-provider.html#chain-ids) _except_ Kovan.
+MetaMask's implementation of `eth_chainId` used to return 0-padded values for the [default Ethereum chains](./ethereum-provider.html#chain-ids) _except_ Kovan.
 If you expect 0-padded chain ID values from `eth_chainId`, make sure to update your code to expect the correct format instead.
 
-For more details on chain IDs and how to handle them, see the [`chainChanged` event](./guide/ethereum-provider.html#chainchanged).
+For more details on chain IDs and how to handle them, see the [`chainChanged` event](./ethereum-provider.html#chainchanged).
 
 ### Handling the Removal of `chainIdChanged`
 
@@ -132,20 +132,20 @@ ethereum.on('chainChanged', (chainId) => {
 ### Handling the Removal of `isEnabled()` and `isApproved()`
 
 Before the new provider API shipped, we added the `_metamask.isEnabled` and `_metamask.isApproved` methods
-to enable web3 sites to check if they have [access to the user's accounts](./guide/rpc-api.html#eth-requestaccounts).
+to enable web3 sites to check if they have [access to the user's accounts](./rpc-api.html#eth-requestaccounts).
 `isEnabled` and `isApproved` functioned identically, except that `isApproved` was `async`.
-These methods were arguably never that useful, and they became completely redundant with the introduction of MetaMask's [permission system](./guide/rpc-api.html#permissions).
+These methods were arguably never that useful, and they became completely redundant with the introduction of MetaMask's [permission system](./rpc-api.html#permissions).
 
 We recommend that you check for account access in the following ways:
 
-1. You can call the [`wallet_getPermissions` RPC method](./guide/rpc-api.html#wallet-getpermissions) and check for the `eth_accounts` permission.
+1. You can call the [`wallet_getPermissions` RPC method](./rpc-api.html#wallet-getpermissions) and check for the `eth_accounts` permission.
 
-2. You can call the `eth_accounts` RPC method and the [`ethereum._metamask.isUnlocked()` method](./guide/ethereum-provider.html#ethereum-metamask-isunlocked).
+2. You can call the `eth_accounts` RPC method and the [`ethereum._metamask.isUnlocked()` method](./ethereum-provider.html#ethereum-metamask-isunlocked).
 
    * MetaMask has to be unlocked before you can access the user's accounts.
      If the array returned by `eth_accounts` is empty, check if MetaMask is locked using `isUnlocked()`.
 
-   * If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request accounts using the [`eth_requestAccounts` RPC method](./guide/rpc-api.html#eth-requestaccounts).
+   * If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request accounts using the [`eth_requestAccounts` RPC method](./rpc-api.html#eth-requestaccounts).
 
 ### Handling the Removal of `ethereum.publicConfigStore`
 
@@ -153,7 +153,7 @@ How to handle this change depends on if and how you relied on the `publicConfigS
 We have seen examples of listening for provider state changes the `publicConfigStore` `data` event, and accessing the `publicConfigStore` internal state directly.
 
 We recommend that you search your code and its dependencies for references to `publicConfigStore`.
-If you find any references, you should understand what it's being used for, and migrate to [one of the recommended provider APIs](./guide/ethereum-provider.html#using-the-provider) instead.
+If you find any references, you should understand what it's being used for, and migrate to [one of the recommended provider APIs](./ethereum-provider.html#using-the-provider) instead.
 If you don't find any references, you should not be affected by this change.
 
 Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that the latest versions (as of January 2021) of the following common libraries were not affected by this change:
@@ -170,4 +170,4 @@ Therefore, this property was removed along with `window.web3`.
 Despite this, we still recommend reloading the page on chain changes.
 Some convenience libraries, such as [ethers](https://www.npmjs.com/package/ethers), will continue to reload the page by default.
 If you don't use such a convenience library, you'll have to reload the page manually.
-Please see the [`chainChanged` event](./guide/ethereum-provider.html#chainchanged) for details.
+Please see the [`chainChanged` event](./ethereum-provider.html#chainchanged) for details.
