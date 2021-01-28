@@ -6,7 +6,7 @@ We recommend that all web3 site developers read the [Basic Usage](#basic-usage) 
 
 ::: tip Recent Breaking Provider Changes
 If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
-please see our [Migration Guide](./guide/provider-migration.html) for more details.
+please see our [Migration Guide](./provider-migration.html) for more details.
 :::
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
@@ -115,7 +115,7 @@ If the request fails for any reason, the Promise will reject with an [Ethereum R
 
 MetaMask supports most standardized Ethereum RPC methods, in addition to a number of methods that may not be
 supported by other wallets.
-See the MetaMask [RPC API documentation](./guide/rpc-api.html) for details.
+See the MetaMask [RPC API documentation](./rpc-api.html) for details.
 
 #### Example
 

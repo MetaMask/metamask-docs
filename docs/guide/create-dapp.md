@@ -6,7 +6,7 @@ We will be building this [app](https://metamask.github.io/test-dapp/)
 
 ## Project Setup
 
-Before you set up make sure you've visited and gone through our [Getting Started Guide](./guide/getting-started.html#getting-started)
+Before you set up make sure you've visited and gone through our [Getting Started Guide](./getting-started.html#getting-started)
 
 Make sure you have:
 
@@ -69,7 +69,7 @@ As you can see here, as soon as the content in the DOM is loaded we are calling 
 
 What we'll cover in part one:
 
-- [Connecting to the MetaMask Wallet](./guide/create-dapp.html#connecting-to-the-metamask-wallet)
+- [Connecting to the MetaMask Wallet](./create-dapp.html#connecting-to-the-metamask-wallet)
 - See our eth_accounts result
 - Display our network number
 - Display our ChainId
