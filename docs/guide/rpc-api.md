@@ -136,7 +136,7 @@ document.getElementById('requestPermissionsButton', requestPermissions);
 function requestPermissions() {
   ethereum
     .request({
-      method: 'eth_requestAccounts',
+      method: 'wallet_requestPermissions',
       params: [{ eth_accounts: {} }],
     })
     .then((permissions) => {
