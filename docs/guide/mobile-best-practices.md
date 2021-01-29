@@ -6,10 +6,10 @@ If this page doesn't answer your question, please feel free to open an issue [in
 
 ::: tip Recent Breaking Provider Changes
 If you are an Ethereum application developer and are looking for information about our January 2021 provider API changes,
-please see our [Migration Guide](./guide/provider-migration.html) for more details.
+please see our [Migration Guide](./provider-migration.html) for more details.
 :::
 
-The [provider API](./guide/ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
+The [provider API](./ethereum-provider.html) is the same for both MetaMask Mobile and the desktop extension.
 However, the providers become available (i.e., are injected into the page) at different points in the page lifecycle.
 
 ### Provider Availability
