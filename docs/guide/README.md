@@ -46,8 +46,9 @@ MetaMask was created to meet the needs of secure and usable Ethereum-based web s
 
 <br>
 
-<img src="./../.vuepress/images/account-management.svg" width="400px">
-
+<div class="full-width text-center">
+  <img src="./../.vuepress/images/account-management.svg" width="400px">
+</div>
 MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets, while isolating them from the site context. This is a great security improvement over storing the user keys on a single central server, or even in local storage, which can allow for [mass account thefts](https://www.ccn.com/cryptocurrency-exchange-etherdelta-hacked-in-dns-hijacking-scheme/).
 
 This security feature also comes with developer convenience: For developers, you simply interact with the globally available `ethereum` API that identifies the users of web3-compatible browsers (like MetaMask users), and whenever you request a transaction signature (like `eth_sendTransaction`, `eth_signTypedData`, or others), MetaMask will prompt the user in as comprehensible a way as possible. This keeps users informed, and leaves attackers left trying to phish individual users rather than performing mass hacks (although [DNS hacks can still be used for phishing en masse](https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168)).
@@ -56,8 +57,9 @@ This security feature also comes with developer convenience: For developers, you
 
 <br>
 
-<img src="./../.vuepress/images./../images/blockchain-connection.png" width="400px">
-
+<div class="full-width text-center">
+  <img src="./../.vuepress/images./../images/blockchain-connection.png" width="400px">
+</div>
 MetaMask comes pre-loaded with fast connections to the Ethereum blockchain and several test networks via our friends at [Infura](https://infura.io/). This allows you to get started without synchronizing a full node, while still providing the option to upgrade your security and use the blockchain provider of your choice.
 
 Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://eth.wiki/json-rpc/API), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
