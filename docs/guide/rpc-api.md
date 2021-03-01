@@ -53,7 +53,7 @@ If you're interested in learning more about the theory behind this _capability_-
 
 ### eth_requestAccounts
 
-::: tip Tip EIP-1102
+::: tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 It is equivalent to the deprecated [`ethereum.enable()`](./ethereum-provider.html#ethereum-enable) provider API method.
 
@@ -99,7 +99,7 @@ function connect() {
 
 ### wallet_getPermissions
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -115,13 +115,14 @@ If the caller has no permissions, the array will be empty.
 
 ### wallet_requestPermissions
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
 #### Parameters
 
 - `Array`
+
   0. `RequestedPermissions` - The requested permissions.
 
 ```typescript
@@ -177,7 +178,7 @@ function requestPermissions() {
 
 ### eth_decrypt
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -216,13 +217,14 @@ ethereum
 
 ### eth_getEncryptionPublicKey
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
 #### Parameters
 
 - `Array`
+
   0. `string` - The address of the Ethereum account whose encryption key should be retrieved.
 
 #### Returns
@@ -281,6 +283,58 @@ const encryptedMessage = ethUtil.bufferToHex(
 );
 ```
 
+### wallet_addEthereumChain
+
+::: tip EIP-3085
+This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
+:::
+
+#### Parameters
+
+- `Array`
+
+  0. `AddEthereumChainParameter` - Metadata about the chain that will be added to MetaMask.
+
+For the `rpcUrls` and `blockExplorerUrls` arrays, at least one element is required, and only the first element will be used.
+
+```typescript
+interface AddEthereumChainParameter {
+  chainId: string; // A 0x-prefixed hexadecimal string
+  chainName: string;
+  nativeCurrency: {
+    name: string;
+    symbol: string; // 2-6 characters long
+    decimals: 18;
+  };
+  rpcUrls: string[];
+  blockExplorerUrls?: string[];
+  iconUrls?: string[]; // Currently ignored.
+}
+```
+
+#### Returns
+
+`null` - The method returns `null` if the request was successful, and an error otherwise.
+
+#### Description
+
+Creates a confirmation asking the user to add the specified chain to MetaMask.
+The user may choose to switch to the chain once it has been added.
+
+As with any method that causes a confirmation to appear, `wallet_addEthereumChain`
+should **only** be called as a result of direct user action, such as the click of a button.
+
+MetaMask stringently validates the parameters for this method, and will reject the request
+if any parameter is incorrectly formatted.
+In addition, MetaMask will reject the request under the following circumstances:
+
+- If the RPC endpoint doesn't respond to RPC calls.
+- If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
+- If the chain ID corresponds to any default MetaMask chains.
+
+MetaMask does not yet support chains with native currencies that do not have 18 decimals,
+but may do so in the future.
+
 ### wallet_registerOnboarding
 
 ::: tip Tip
@@ -305,7 +359,7 @@ Instead of calling this method directly, you should use the [`@metamask/onboardi
 
 ### wallet_watchAsset
 
-::: tip Tip EIP-747
+::: tip EIP-747
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 :::
 
@@ -360,6 +414,7 @@ ethereum.request({
 #### Parameters
 
 - `Array`
+
   0. `string` - (optional) A regular expression for matching arbitrary QR code strings
 
 #### Returns
