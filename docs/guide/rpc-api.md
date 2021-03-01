@@ -97,6 +97,22 @@ function connect() {
 }
 ```
 
+### wallet_getPermissions
+
+::: tip Tip Platform Availability
+This RPC method is not yet available in MetaMask Mobile.
+:::
+
+#### Returns
+
+`Web3WalletPermission[]` - An array of the caller's permissions.
+
+#### Description
+
+Gets the caller's current permissions.
+Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
+If the caller has no permissions, the array will be empty.
+
 ### wallet_requestPermissions
 
 ::: tip Tip Platform Availability
@@ -106,7 +122,6 @@ This RPC method is not yet available in MetaMask Mobile.
 #### Parameters
 
 - `Array`
-
   0. `RequestedPermissions` - The requested permissions.
 
 ```typescript
@@ -158,23 +173,113 @@ function requestPermissions() {
 }
 ```
 
-### wallet_getPermissions
+## Other RPC Methods
+
+### eth_decrypt
 
 ::: tip Tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
+#### Parameters
+
+- `Array`
+
+  0. `string` - An encrypted message.
+  1. `string` - The address of the Ethereum account that can decrypt the message.
+
 #### Returns
 
-`Web3WalletPermission[]` - An array of the caller's permissions.
+`string` - The decrypted message.
 
 #### Description
 
-Gets the caller's current permissions.
-Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
-If the caller has no permissions, the array will be empty.
+Requests that MetaMask decrypts the given encrypted message.
+The message must have been encrypted using the public encryption key of the given Ethereum address.
+Returns a Promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
 
-## Other RPC Methods
+See [`eth_getEncryptionPublicKey`](#eth-getencryptionpublickey) for more information.
+
+#### Example
+
+```javascript
+ethereum
+  .request({
+    method: 'eth_decrypt',
+    params: [encryptedMessage, accounts[0]],
+  })
+  .then((decryptedMessage) =>
+    console.log('The decrypted message is:', decryptedMessage)
+  )
+  .catch((error) => console.log(error.message));
+```
+
+### eth_getEncryptionPublicKey
+
+::: tip Tip Platform Availability
+This RPC method is not yet available in MetaMask Mobile.
+:::
+
+#### Parameters
+
+- `Array`
+  0. `string` - The address of the Ethereum account whose encryption key should be retrieved.
+
+#### Returns
+
+`string` - The public encryption key of the specified Ethereum account.
+
+#### Description
+
+Requests that the user shares their public encryption key.
+Returns a Promise that resolve to the public encryption key, or rejects if the user denied the request.
+
+The public key is computed from entropy associated with the specified user account, using the [`nacl`](https://github.com/dchest/tweetnacl-js) implementation of the `X25519_XSalsa20_Poly1305` algorithm.
+
+#### Example
+
+```javascript
+let encryptionPublicKey;
+
+ethereum
+  .request({
+    method: 'eth_getEncryptionPublicKey',
+    params: [accounts[0]], // you must have access to the specified account
+  })
+  .then((result) => {
+    encryptionPublicKey = result;
+  })
+  .catch((error) => {
+    if (error.code === 4001) {
+      // EIP-1193 userRejectedRequest error
+      console.log('We can encrypt anything without the key.');
+    } else {
+      console.error(error);
+    }
+  });
+```
+
+#### Encrypting
+
+The point of the encryption key is of course to encrypt things.
+Here's an example of how to encrypt a message using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util):
+
+```javascript
+const ethUtil = require('ethereumjs-util');
+
+const encryptedMessage = ethUtil.bufferToHex(
+  Buffer.from(
+    JSON.stringify(
+      sigUtil.encrypt(
+        encryptionPublicKey,
+        { data: 'Hello world!' },
+        'x25519-xsalsa20-poly1305'
+      )
+    ),
+    'utf8'
+  )
+);
+```
 
 ### wallet_registerOnboarding
 
@@ -248,113 +353,6 @@ ethereum.request({
   .catch(console.error)
 ```
 
-### eth_getEncryptionPublicKey
-
-::: tip Tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
-:::
-
-#### Parameters
-
-- `Array`
-
-  0. `string` - The address of the Ethereum account whose encryption key should be retrieved.
-
-#### Returns
-
-`string` - The public encryption key of the specified Ethereum account.
-
-#### Description
-
-Requests that the user shares their public encryption key.
-Returns a Promise that resolve to the public encryption key, or rejects if the user denied the request.
-
-The public key is computed from entropy associated with the specified user account, using the [`nacl`](https://github.com/dchest/tweetnacl-js) implementation of the `X25519_XSalsa20_Poly1305` algorithm.
-
-#### Example
-
-```javascript
-let encryptionPublicKey;
-
-ethereum
-  .request({
-    method: 'eth_getEncryptionPublicKey',
-    params: [accounts[0]], // you must have access to the specified account
-  })
-  .then((result) => {
-    encryptionPublicKey = result;
-  })
-  .catch((error) => {
-    if (error.code === 4001) {
-      // EIP-1193 userRejectedRequest error
-      console.log('We can encrypt anything without the key.');
-    } else {
-      console.error(error);
-    }
-  });
-```
-
-#### Encrypting
-
-The point of the encryption key is of course to encrypt things.
-Here's an example of how to encrypt a message using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util):
-
-```javascript
-const ethUtil = require('ethereumjs-util');
-
-const encryptedMessage = ethUtil.bufferToHex(
-  Buffer.from(
-    JSON.stringify(
-      sigUtil.encrypt(
-        encryptionPublicKey,
-        { data: 'Hello world!' },
-        'x25519-xsalsa20-poly1305'
-      )
-    ),
-    'utf8'
-  )
-);
-```
-
-### eth_decrypt
-
-::: tip Tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
-:::
-
-#### Parameters
-
-- `Array`
-
-  0. `string` - An encrypted message.
-  1. `string` - The address of the Ethereum account that can decrypt the message.
-
-#### Returns
-
-`string` - The decrypted message.
-
-#### Description
-
-Requests that MetaMask decrypts the given encrypted message.
-The message must have been encrypted using the public encryption key of the given Ethereum address.
-Returns a Promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
-
-See [`eth_getEncryptionPublicKey`](#eth-getencryptionpublickey) for more information.
-
-#### Example
-
-```javascript
-ethereum
-  .request({
-    method: 'eth_decrypt',
-    params: [encryptedMessage, accounts[0]],
-  })
-  .then((decryptedMessage) =>
-    console.log('The decrypted message is:', decryptedMessage)
-  )
-  .catch((error) => console.log(error.message));
-```
-
 ## Mobile Specific RPC Methods
 
 ### wallet_scanQRCode
@@ -362,7 +360,6 @@ ethereum
 #### Parameters
 
 - `Array`
-
   0. `string` - (optional) A regular expression for matching arbitrary QR code strings
 
 #### Returns
