@@ -53,7 +53,7 @@ If you're interested in learning more about the theory behind this _capability_-
 
 ### eth_requestAccounts
 
-::: tip Tip EIP-1102
+::: tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 It is equivalent to the deprecated [`ethereum.enable()`](./ethereum-provider.html#ethereum-enable) provider API method.
 
@@ -97,9 +97,25 @@ function connect() {
 }
 ```
 
+### wallet_getPermissions
+
+::: tip Platform Availability
+This RPC method is not yet available in MetaMask Mobile.
+:::
+
+#### Returns
+
+`Web3WalletPermission[]` - An array of the caller's permissions.
+
+#### Description
+
+Gets the caller's current permissions.
+Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
+If the caller has no permissions, the array will be empty.
+
 ### wallet_requestPermissions
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -158,99 +174,50 @@ function requestPermissions() {
 }
 ```
 
-### wallet_getPermissions
-
-::: tip Tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
-:::
-
-#### Returns
-
-`Web3WalletPermission[]` - An array of the caller's permissions.
-
-#### Description
-
-Gets the caller's current permissions.
-Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
-If the caller has no permissions, the array will be empty.
-
 ## Other RPC Methods
 
-### wallet_registerOnboarding
+### eth_decrypt
 
-::: tip Tip
-As an API consumer, you are unlikely to have to call this method yourself.
-Please see the [Onboarding Library documentation](./onboarding-library.html) for more information.
-:::
-
-#### Returns
-
-`boolean` - `true` if the request was successful, `false` otherwise.
-
-#### Description
-
-Registers the requesting site with MetaMask as the initiator of onboarding.
-Returns a Promise that resolves to `true`, or rejects if there's an error.
-
-This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
-You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
-This lets MetaMask redirect the user back to your site after onboarding as completed.
-
-Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
-
-### wallet_watchAsset
-
-::: tip Tip EIP-747
-This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
+::: tip Platform Availability
+This RPC method is not yet available in MetaMask Mobile.
 :::
 
 #### Parameters
 
-- `WatchAssetParams` - The metadata of the asset to watch.
+- `Array`
 
-<<< @/docs/snippets/WatchAssetParams.ts
+  0. `string` - An encrypted message.
+  1. `string` - The address of the Ethereum account that can decrypt the message.
 
 #### Returns
 
-`boolean` - `true` if the the token was added, `false` otherwise.
+`string` - The decrypted message.
 
 #### Description
 
-Requests that the user tracks the token in MetaMask.
-Returns a `boolean` indicating if the token was successfully added.
+Requests that MetaMask decrypts the given encrypted message.
+The message must have been encrypted using the public encryption key of the given Ethereum address.
+Returns a Promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
 
-Most Ethereum wallets support some set of tokens, usually from a centrally curated registry of tokens.
-`wallet_watchAsset` enables web3 application developers to ask their users to track tokens in their wallets, at runtime.
-Once added, the token is indistinguishable from those added via legacy methods, such as a centralized registry.
+See [`eth_getEncryptionPublicKey`](#eth-getencryptionpublickey) for more information.
 
 #### Example
 
 ```javascript
-ethereum.request({
-  method: 'wallet_watchAsset',
-  params: {
-    type: 'ERC20',
-    options: {
-      address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-      symbol: 'FOO',
-      decimals: 18,
-      image: 'https://foo.io/token-image.svg',
-    },
-  },
-});
-  .then((success) => {
-    if (success) {
-      console.log('FOO successfully added to wallet!')
-    } else {
-      throw new Error('Something went wrong.')
-    }
+ethereum
+  .request({
+    method: 'eth_decrypt',
+    params: [encryptedMessage, accounts[0]],
   })
-  .catch(console.error)
+  .then((decryptedMessage) =>
+    console.log('The decrypted message is:', decryptedMessage)
+  )
+  .catch((error) => console.log(error.message));
 ```
 
 ### eth_getEncryptionPublicKey
 
-::: tip Tip Platform Availability
+::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -316,43 +283,128 @@ const encryptedMessage = ethUtil.bufferToHex(
 );
 ```
 
-### eth_decrypt
+### wallet_addEthereumChain
 
-::: tip Tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
+::: tip EIP-3085
+This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
 :::
 
 #### Parameters
 
 - `Array`
 
-  0. `string` - An encrypted message.
-  1. `string` - The address of the Ethereum account that can decrypt the message.
+  0. `AddEthereumChainParameter` - Metadata about the chain that will be added to MetaMask.
+
+For the `rpcUrls` and `blockExplorerUrls` arrays, at least one element is required, and only the first element will be used.
+
+```typescript
+interface AddEthereumChainParameter {
+  chainId: string; // A 0x-prefixed hexadecimal string
+  chainName: string;
+  nativeCurrency: {
+    name: string;
+    symbol: string; // 2-6 characters long
+    decimals: 18;
+  };
+  rpcUrls: string[];
+  blockExplorerUrls?: string[];
+  iconUrls?: string[]; // Currently ignored.
+}
+```
 
 #### Returns
 
-`string` - The decrypted message.
+`null` - The method returns `null` if the request was successful, and an error otherwise.
 
 #### Description
 
-Requests that MetaMask decrypts the given encrypted message.
-The message must have been encrypted using the public encryption key of the given Ethereum address.
-Returns a Promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
+Creates a confirmation asking the user to add the specified chain to MetaMask.
+The user may choose to switch to the chain once it has been added.
 
-See [`eth_getEncryptionPublicKey`](#eth-getencryptionpublickey) for more information.
+As with any method that causes a confirmation to appear, `wallet_addEthereumChain`
+should **only** be called as a result of direct user action, such as the click of a button.
+
+MetaMask stringently validates the parameters for this method, and will reject the request
+if any parameter is incorrectly formatted.
+In addition, MetaMask will reject the request under the following circumstances:
+
+- If the RPC endpoint doesn't respond to RPC calls.
+- If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
+- If the chain ID corresponds to any default MetaMask chains.
+
+MetaMask does not yet support chains with native currencies that do not have 18 decimals,
+but may do so in the future.
+
+### wallet_registerOnboarding
+
+::: tip Tip
+As an API consumer, you are unlikely to have to call this method yourself.
+Please see the [Onboarding Library documentation](./onboarding-library.html) for more information.
+:::
+
+#### Returns
+
+`boolean` - `true` if the request was successful, `false` otherwise.
+
+#### Description
+
+Registers the requesting site with MetaMask as the initiator of onboarding.
+Returns a Promise that resolves to `true`, or rejects if there's an error.
+
+This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
+You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
+This lets MetaMask redirect the user back to your site after onboarding as completed.
+
+Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
+
+### wallet_watchAsset
+
+::: tip EIP-747
+This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
+:::
+
+#### Parameters
+
+- `WatchAssetParams` - The metadata of the asset to watch.
+
+<<< @/docs/snippets/WatchAssetParams.ts
+
+#### Returns
+
+`boolean` - `true` if the the token was added, `false` otherwise.
+
+#### Description
+
+Requests that the user tracks the token in MetaMask.
+Returns a `boolean` indicating if the token was successfully added.
+
+Most Ethereum wallets support some set of tokens, usually from a centrally curated registry of tokens.
+`wallet_watchAsset` enables web3 application developers to ask their users to track tokens in their wallets, at runtime.
+Once added, the token is indistinguishable from those added via legacy methods, such as a centralized registry.
 
 #### Example
 
 ```javascript
-ethereum
-  .request({
-    method: 'eth_decrypt',
-    params: [encryptedMessage, accounts[0]],
+ethereum.request({
+  method: 'wallet_watchAsset',
+  params: {
+    type: 'ERC20',
+    options: {
+      address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+      symbol: 'FOO',
+      decimals: 18,
+      image: 'https://foo.io/token-image.svg',
+    },
+  },
+});
+  .then((success) => {
+    if (success) {
+      console.log('FOO successfully added to wallet!')
+    } else {
+      throw new Error('Something went wrong.')
+    }
   })
-  .then((decryptedMessage) =>
-    console.log('The decrypted message is:', decryptedMessage)
-  )
-  .catch((error) => console.log(error.message));
+  .catch(console.error)
 ```
 
 ## Mobile Specific RPC Methods
