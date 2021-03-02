@@ -12,28 +12,6 @@ If you are an Ethereum application developer and are looking for information abo
 please see our [Migration Guide](./provider-migration.html) for more details.
 :::
 
-<a href="/guide/#account-management">
-  <card>
-    <template v-slot:title>
-      <img src="./../.vuepress/images/account-management.svg">
-    </template>
-    <template v-slot>
-      <h3 class="text-center default-text-color">Account Management</h3>
-    </template>
-  </card>
-</a>
-
-<a href="/guide/#blockchain-connection">
-  <card>
-    <template v-slot:title>
-      <img src="./../.vuepress/images./../images/blockchain-connection.png">
-    </template>
-    <template v-slot>
-      <h3 class="text-center default-text-color">Blockchain Connection</h3>
-    </template>
-  </card>
-</a>
-
 ## Why MetaMask
 
 MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
@@ -46,9 +24,6 @@ MetaMask was created to meet the needs of secure and usable Ethereum-based web s
 
 <br>
 
-<div class="full-width text-center">
-  <img src="./../.vuepress/images/account-management.svg" width="400px">
-</div>
 MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets, while isolating them from the site context. This is a great security improvement over storing the user keys on a single central server, or even in local storage, which can allow for [mass account thefts](https://www.ccn.com/cryptocurrency-exchange-etherdelta-hacked-in-dns-hijacking-scheme/).
 
 This security feature also comes with developer convenience: For developers, you simply interact with the globally available `ethereum` API that identifies the users of web3-compatible browsers (like MetaMask users), and whenever you request a transaction signature (like `eth_sendTransaction`, `eth_signTypedData`, or others), MetaMask will prompt the user in as comprehensible a way as possible. This keeps users informed, and leaves attackers left trying to phish individual users rather than performing mass hacks (although [DNS hacks can still be used for phishing en masse](https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168)).
@@ -57,9 +32,6 @@ This security feature also comes with developer convenience: For developers, you
 
 <br>
 
-<div class="full-width text-center">
-  <img src="./../.vuepress/images./../images/blockchain-connection.png" width="400px">
-</div>
 MetaMask comes pre-loaded with fast connections to the Ethereum blockchain and several test networks via our friends at [Infura](https://infura.io/). This allows you to get started without synchronizing a full node, while still providing the option to upgrade your security and use the blockchain provider of your choice.
 
 Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://eth.wiki/json-rpc/API), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
@@ -69,28 +41,6 @@ We’re aware that there are constantly new private blockchains that people are 
 ## New Dapp Developers
 
 <br>
-
-<a href="https://metamask.io/download.html" target="_blank">
-  <card>
-    <template v-slot:title>
-      <img src="./../.vuepress/images/downlaod_metamask.png">
-    </template>
-    <template v-slot>
-      <h3 class="text-center default-text-color">Download MetaMask</h3>
-    </template>
-  </card>
-</a>
-
-<router-link to="./getting-started.html">
-  <card>
-    <template v-slot:title>
-      <img src="./../.vuepress/images/metamask_getting_started.png">
-    </template>
-    <template v-slot>
-      <h3 class="text-center default-text-color">Getting Started</h3>
-    </template>
-  </card>
-</router-link>
 
 - [Create a Simple Dapp](./create-dapp.html)
 - [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
