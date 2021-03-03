@@ -43,6 +43,8 @@ We made the following breaking changes to the `window.ethereum` API:
     Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
 * Remove the `ethereum.autoRefreshOnNetworkChange` property
   * Consumers can still set this property on the provider, it just won't do anything.
+* Deprecate the `web3.currentProvider` method
+  * Use [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) to detect the current provider.
 
 ## Replacing `window.web3`
 
