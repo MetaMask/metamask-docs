@@ -21,8 +21,8 @@ Important methods from this API include:
 
 - [`eth_accounts`](https://eth.wiki/json-rpc/API#eth_accounts)
 - [`eth_call`](https://eth.wiki/json-rpc/API#eth_call)
-- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getBalance)
-- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendTransaction)
+- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getbalance)
+- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction)
 - [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign)
 
 ## Permissions
