@@ -353,7 +353,7 @@ Returns a Promise that resolves to `true`, or rejects if there's an error.
 
 This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
 You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
-This lets MetaMask redirect the user back to your site after onboarding as completed.
+This lets MetaMask redirect the user back to your site after onboarding has completed.
 
 Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
 
