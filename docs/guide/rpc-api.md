@@ -21,8 +21,8 @@ Important methods from this API include:
 
 - [`eth_accounts`](https://eth.wiki/json-rpc/API#eth_accounts)
 - [`eth_call`](https://eth.wiki/json-rpc/API#eth_call)
-- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getBalance)
-- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendTransaction)
+- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getbalance)
+- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction)
 - [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign)
 
 ## Permissions
@@ -254,7 +254,7 @@ ethereum
   .catch((error) => {
     if (error.code === 4001) {
       // EIP-1193 userRejectedRequest error
-      console.log('We can encrypt anything without the key.');
+      console.log("We can't encrypt anything without the key.");
     } else {
       console.error(error);
     }
@@ -353,7 +353,7 @@ Returns a Promise that resolves to `true`, or rejects if there's an error.
 
 This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
 You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
-This lets MetaMask redirect the user back to your site after onboarding as completed.
+This lets MetaMask redirect the user back to your site after onboarding has completed.
 
 Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
 
