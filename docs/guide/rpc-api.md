@@ -9,6 +9,9 @@ All RPC method requests can return errors.
 Make sure to handle errors for every call to `ethereum.request(args)`.
 :::
 
+::: tip Try Ethereum Methods
+Visit our [API Playground](https://metamask.github.io/api-playground/api-documentation/)
+:::
 ## Table of Contents
 
 [[toc]]
