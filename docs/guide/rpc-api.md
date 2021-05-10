@@ -12,6 +12,7 @@ Make sure to handle errors for every call to `ethereum.request(args)`.
 ::: tip Try Ethereum Methods
 Visit our [API Playground](https://metamask.github.io/api-playground/api-documentation/)
 :::
+
 ## Table of Contents
 
 [[toc]]
@@ -329,7 +330,7 @@ should **only** be called as a result of direct user action, such as the click o
 
 MetaMask stringently validates the parameters for this method, and will reject the request
 if any parameter is incorrectly formatted.
-In addition, MetaMask will reject the request under the following circumstances:
+In addition, MetaMask will automatically reject the request under the following circumstances:
 
 - If the RPC endpoint doesn't respond to RPC calls.
 - If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
@@ -337,6 +338,72 @@ In addition, MetaMask will reject the request under the following circumstances:
 
 MetaMask does not yet support chains with native currencies that do not have 18 decimals,
 but may do so in the future.
+
+#### Usage with `wallet_switchEthereumChain`
+
+We recommend using this method with [`wallet_switchEthereumChain`](#wallet-switchethereumchain):
+
+```javascript
+try {
+  await ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{ chainId: '0xf00' }],
+  });
+} catch (switchError) {
+  // This error code indicates that the chain has not been added to MetaMask.
+  if (error.code === 4902) {
+    try {
+      await ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [{ chainId: '0xf00', rpcUrl: 'https://...' /* ... */ }],
+      });
+    } catch (addError) {
+      // handle "add" error
+    }
+  }
+  // handle other "switch" errors
+}
+```
+
+### wallet_switchEthereumChain
+
+::: tip EIP-3326
+This method is specified by [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain).
+:::
+
+#### Parameters
+
+- `Array`
+
+  0. `SwitchEthereumChainParameter` - Metadata about the chain that MetaMask will switch to.
+
+```typescript
+interface AddEthereumChainParameter {
+  chainId: string; // A 0x-prefixed hexadecimal string
+}
+```
+
+#### Returns
+
+`null` - The method returns `null` if the request was successful, and an error otherwise.
+
+If the error code (`error.code`) is `4902`, then the requested chain has not been added by MetaMask, and you have to request to add it via [`wallet_addEthereumChain`](#wallet-addethereumchain).
+
+#### Description
+
+::: tip Tip
+See [above](#usage-with-wallet-switchethereumchain) for how to use this method with `wallet_addEthereumChain`.
+:::
+
+Creates a confirmation asking the user to switch to the chain with the specified `chainId`.
+
+As with any method that causes a confirmation to appear, `wallet_switchEthereumChain`
+should **only** be called as a result of direct user action, such as the click of a button.
+
+MetaMask will automatically reject the request under the following circumstances:
+
+- If the chain ID is malformed
+- If the chain with the specified chain ID has not been added to MetaMask
 
 ### wallet_registerOnboarding
 
