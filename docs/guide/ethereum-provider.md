@@ -1,6 +1,6 @@
 # Ethereum Provider API
 
-::: tip Tip Recommended Reading
+::: tip Recommended Reading
 We recommend that all web3 site developers read the [Basic Usage](#basic-usage) section.
 :::
 

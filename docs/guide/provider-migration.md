@@ -10,8 +10,8 @@ Except for such legacy websites, no action is required for MetaMask users.
 In January of 2021, we made a number of breaking changes to our provider API, and removed our injected `window.web3`.
 These changes are live on all platforms as of version:
 
-* `9.0.2` of the MetaMask browser extension
-* `1.0.9` of MetaMask Mobile
+- `9.0.2` of the MetaMask browser extension
+- `1.0.9` of MetaMask Mobile
 
 This guide describes how to migrate to the new provider API, and how to replace our `window.web3`.
 To understand why we made these changes, please see [this blog post](https://medium.com/metamask/breaking-changes-to-the-metamask-provider-are-here-7b11c9388be9).
@@ -31,20 +31,20 @@ MetaMask still injects a dummy object at `window.web3`, in order to issue warnin
 
 We made the following breaking changes to the `window.ethereum` API:
 
-* Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
-  * For example, instead of `0x01`, we always return `0x1`, wherever the chain ID is returned or accessible.
-  * Note that this _only_ affects the [default Ethereum chains](./ethereum-provider.html#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
-* Stop emitting `chainIdChanged`, and instead emit `chainChanged`
-* Remove the following experimental methods:
-  * `ethereum._metamask.isEnabled`
-  * `ethereum._metamask.isApproved`
-* Remove the `ethereum.publicConfigStore` object
-  * This object was, despite its name, never intended for public consumption.
+- Ensure that chain IDs returned by `eth_chainId` are **not** 0-padded
+  - For example, instead of `0x01`, we always return `0x1`, wherever the chain ID is returned or accessible.
+  - Note that this _only_ affects the [default Ethereum chains](./ethereum-provider.html#chain-ids), _except_ Kovan, whose chain ID is formatted correctly (`0x2a`).
+- Stop emitting `chainIdChanged`, and instead emit `chainChanged`
+- Remove the following experimental methods:
+  - `ethereum._metamask.isEnabled`
+  - `ethereum._metamask.isApproved`
+- Remove the `ethereum.publicConfigStore` object
+  - This object was, despite its name, never intended for public consumption.
     Its removal _may_ affect those who do not use it directly, e.g. if another library you use relies on the object.
-* Remove the `ethereum.autoRefreshOnNetworkChange` property
-  * Consumers can still set this property on the provider, it just won't do anything.
-* Deprecate the `web3.currentProvider` method
-  * Use [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) to detect the current provider.
+- Remove the `ethereum.autoRefreshOnNetworkChange` property
+  - Consumers can still set this property on the provider, it just won't do anything.
+- Deprecate the `web3.currentProvider` method
+  - Use [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) to detect the current provider.
 
 ## Replacing `window.web3`
 
@@ -100,9 +100,9 @@ We created the [**MetaMask Legacy Web3 Extension**](https://github.com/MetaMask/
 
 As with the regular extension, it’s critical that you only install from the official browser extension stores. Please follow the relevant link below to install the Legacy Web3 extension in your browser:
 
-* [Chrome, Brave](https://chrome.google.com/webstore/detail/metamask-legacy-web3/dgoegggfhkapjphahmgihfgemkgecdgl)
-* [Edge](https://microsoftedge.microsoft.com/addons/detail/metamask-legacy-web3/obkfjbjkiofoponpkmphnpaaadebfloh?hl=en-US)
-* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/metamask-legacy-web3/)
+- [Chrome, Brave](https://chrome.google.com/webstore/detail/metamask-legacy-web3/dgoegggfhkapjphahmgihfgemkgecdgl)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/metamask-legacy-web3/obkfjbjkiofoponpkmphnpaaadebfloh?hl=en-US)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/metamask-legacy-web3/)
 
 ## Migrating to the New Provider API
 
@@ -144,10 +144,10 @@ We recommend that you check for account access in the following ways:
 
 2. You can call the `eth_accounts` RPC method and the [`ethereum._metamask.isUnlocked()` method](./ethereum-provider.html#ethereum-metamask-isunlocked).
 
-   * MetaMask has to be unlocked before you can access the user's accounts.
+   - MetaMask has to be unlocked before you can access the user's accounts.
      If the array returned by `eth_accounts` is empty, check if MetaMask is locked using `isUnlocked()`.
 
-   * If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request accounts using the [`eth_requestAccounts` RPC method](./rpc-api.html#eth-requestaccounts).
+   - If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request accounts using the [`eth_requestAccounts` RPC method](./rpc-api.html#eth-requestaccounts).
 
 ### Handling the Removal of `ethereum.publicConfigStore`
 
@@ -160,8 +160,8 @@ If you don't find any references, you should not be affected by this change.
 
 Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that the latest versions (as of January 2021) of the following common libraries were not affected by this change:
 
-* `ethers`
-* `web3` (web3.js)
+- `ethers`
+- `web3` (web3.js)
 
 ### Handling the Removal of `ethereum.autoRefreshOnNetworkChange`
 
