@@ -341,7 +341,7 @@ but may do so in the future.
 
 #### Usage with `wallet_switchEthereumChain`
 
-We recommend using this method with [`wallet_switchEthereumChain`](#wallet-switchethereumchain):
+We recommend using this method with [`wallet_addEthereumChain`](#wallet-addethereumchain):
 
 ```javascript
 try {
