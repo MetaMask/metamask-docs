@@ -388,18 +388,19 @@ Once added, the token is indistinguishable from those added via legacy methods, 
 #### Example
 
 ```javascript
-ethereum.request({
-  method: 'wallet_watchAsset',
-  params: {
-    type: 'ERC20',
-    options: {
-      address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-      symbol: 'FOO',
-      decimals: 18,
-      image: 'https://foo.io/token-image.svg',
+ethereum
+  .request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20',
+      options: {
+        address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+        symbol: 'FOO',
+        decimals: 18,
+        image: 'https://foo.io/token-image.svg',
+      },
     },
-  },
-});
+  })
   .then((success) => {
     if (success) {
       console.log('FOO successfully added to wallet!')
