@@ -378,7 +378,7 @@ This method is specified by [EIP-3326](https://ethereum-magicians.org/t/eip-3326
   0. `SwitchEthereumChainParameter` - Metadata about the chain that MetaMask will switch to.
 
 ```typescript
-interface AddEthereumChainParameter {
+interface SwitchEthereumChainParameter {
   chainId: string; // A 0x-prefixed hexadecimal string
 }
 ```
