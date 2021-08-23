@@ -32,7 +32,7 @@ In the top right menu of MetaMask, select the network that you are currently con
 
 Ganache has some great features for starting your application with different states. If your application starts with the `-m` flag, you can feed it the same seed phrase you have in your MetaMask, and the test network will give each of your first 10 accounts 100 test ether, which makes it easier to start work.
 
-Since your seed phrase is the power to control all your accounts, it is probably worth keeping at least one seed phrase for development, separate from any that you use for storing real value. One easy way to manage multiple seed phrases with MetaMask is with multiple browser profiles, each of which can have its own clean extension installations.
+Since your seed phrase has the power to control all your accounts, it is probably worth keeping at least one seed phrase for development, separate from any that you use for storing real value. One easy way to manage multiple seed phrases with MetaMask is with multiple browser profiles, each of which can have its own clean extension installations.
 
 #### Resetting Your Local Nonce Calculation
 
