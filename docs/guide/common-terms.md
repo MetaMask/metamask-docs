@@ -186,7 +186,7 @@
     Brain wallets can be brute forced by super fast computers.
   </li>
   <li id="bw_l4">
-    <a href='https://www.reddit.com/r/ethereum/comments/45y8m7/brain_wallets_are_now_generally_shunned_by/' target='_blank'> Brain wallet are insecure. </a>
+    <a href='https://www.reddit.com/r/ethereum/comments/45y8m7/brain_wallets_are_now_generally_shunned_by/' target='_blank'> Brain wallets are insecure. </a>
   </li>
   <li id="bw_l5">
     Don't use brain wallets.
