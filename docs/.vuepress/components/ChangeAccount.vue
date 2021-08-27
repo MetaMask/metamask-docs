@@ -3,8 +3,12 @@
     <button type="button" class="btn primaryBtn" @click="getAccount()">
       Connect to MetaMask
     </button>
-    <h3>Current Account: {{ currentAccount }}</h3>
-    <h3> Account Changed to:{{checkAddress}}</h3>
+    <transition name="fade">
+      <div class="feedback green-background" v-if="show_feedback">
+        <strong>Current Account: </strong><span style="font-family: monospace;">{{ currentAccount }}</span><br>
+        <strong>Account Changed to: </strong><span style="font-family: monospace;">{{ checkAddress }}</span>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -16,19 +20,22 @@ export default {
     }
     ethereum.on('accountsChanged', handler)
     this.$on('hook:beforeDestroy', () => {
-      ethereum.off('accountsChanged', handler)
+      ethereum.removeListener('accountsChanged', handler)
     })
   },
   data() {
     return {
       currentAccount: '',
-      checkAddress: null
+      checkAddress: null,
+      show_feedback: false,
     };
   },
   methods: {
     async getAccount() {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       this.currentAccount = accounts[0];
+      // Present feedback
+      this.show_feedback = true;
     },
   },
 };

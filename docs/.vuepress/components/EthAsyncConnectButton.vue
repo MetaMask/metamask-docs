@@ -3,7 +3,11 @@
     <button type="button" class="btn primaryBtn" @click="getAccount()">
       Enable Ethereum
     </button>
-    <p>Account: {{ethAccount}}</p>
+    <transition name="fade">
+      <div class="feedback green-background" v-if="show_feedback">
+        <strong>Account: </strong><span style="font-family: monospace;">{{ethAccount}}</span>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -12,7 +16,8 @@ export default {
   data() {
     return {
       ethereum: null,
-      ethAccount: ''
+      ethAccount: '',
+      show_feedback: false,
     };
   },
     mounted() {
@@ -20,8 +25,12 @@ export default {
   },
   methods: {
     async getAccount() {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' }) // We currently only ever provide a single account,
-      this.ethAccount = accounts[0] // but the array gives us some room to grow.
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+      // We currently only ever provide a single account,
+      // but the array gives us some room to grow.
+      this.ethAccount = accounts[0]
+      // Present feedback
+      this.show_feedback = true;
     },
   },
 };
