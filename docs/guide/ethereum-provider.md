@@ -138,7 +138,7 @@ ethereum
     params,
   })
   .then((result) => {
-    // The result varies by by RPC method.
+    // The result varies by RPC method.
     // For example, this method will return a transaction hash hexadecimal string on success.
   })
   .catch((error) => {
