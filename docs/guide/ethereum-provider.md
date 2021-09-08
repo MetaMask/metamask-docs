@@ -166,6 +166,20 @@ ethereum.on('chainChanged', (chainId) => {
 });
 ```
 
+Also, don't forget to remove listeners once you are done listening to them (for example on component unmount in React):
+```javascript
+function handleAccountsChanged(accounts) {
+  // ...
+}
+
+ethereum.on('accountsChanged', handleAccountsChanged);
+
+// Later
+
+ethereum.removeListener('accountsChanged', handleAccountsChanged);
+```
+The first argument of the `ethereum.removeListener` is the event name and the second argument is the reference to the same function which has passed to `ethereum.on` for the event name mentioned in the first argument.
+
 ### connect
 
 ```typescript
