@@ -1,10 +1,10 @@
 # Introduction
 
-Welcome to MetaMask’s Developer Documentation. This documentation is for learning to develop applications for MetaMask.
+Welcome to MetaMask’s Developer Documentation. MetaMask is the trailblazing tool enabling user interactions and experience on Web3. It is currently available as a browser extension and as a mobile app on both Android and iOS devices. The purpose of this documentation is to illustrate how to build a dapp with MetaMask.
 
 - You can find the latest version of MetaMask on our [official website](https://metamask.io/).
 - For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/).
-- For up to the minute news, follow our [Peepeth](https://peepeth.com/MetaMask/), [Twitter](https://twitter.com/MetaMask) or [Medium](https://medium.com/metamask) pages.
+- For up to the minute news, follow our [Twitter](https://twitter.com/MetaMask) account.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
 ::: tip Recent Breaking Provider Changes
@@ -24,7 +24,7 @@ MetaMask was created to meet the needs of secure and usable Ethereum-based web s
 
 MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets, while isolating them from the site context. This is a great security improvement over storing the user keys on a single central server, or even in local storage, which can allow for [mass account thefts](https://www.ccn.com/cryptocurrency-exchange-etherdelta-hacked-in-dns-hijacking-scheme/).
 
-This security feature also comes with developer convenience: For developers, you simply interact with the globally available `ethereum` API that identifies the users of web3-compatible browsers (like MetaMask users), and whenever you request a transaction signature (like `eth_sendTransaction`, `eth_signTypedData`, or others), MetaMask will prompt the user in as comprehensible a way as possible. This keeps users informed, and leaves attackers left trying to phish individual users rather than performing mass hacks (although [DNS hacks can still be used for phishing en masse](https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168)).
+This security feature also comes with developer convenience: For developers, you simply interact with the globally available `ethereum` API that identifies the users of web3-compatible browsers (like MetaMask users), and whenever you request a transaction signature (like `eth_sendTransaction`, `eth_signTypedData`, or others), MetaMask will prompt the user in as comprehensible a way as possible. This keeps users informed, and leaves attackers only the option of trying to phish individual users, rather than performing mass hacks (although [DNS hacks can still be used for phishing en masse](https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168)).
 
 ## Blockchain Connection
 
@@ -32,9 +32,10 @@ MetaMask comes pre-loaded with fast connections to the Ethereum blockchain and s
 
 Today, MetaMask is compatible with any blockchain that exposes an [Ethereum-compatible JSON RPC API](https://eth.wiki/json-rpc/API), including custom and private blockchains. For development, we recommend running a test blockchain like [Ganache](https://www.trufflesuite.com/ganache).
 
-We’re aware that there are constantly new private blockchains that people are interested in connecting MetaMask to, and [we are building towards easier integration with these many options](https://medium.com/metamask/metamasks-vision-for-multiple-network-support-4ffbee9ec64d).
+We are aware that there are constantly new private blockchains being created. If you are interested in integrating MetaMask with your own custom network, [we have an API that has already enabled a number of networks to do the same.](https://medium.com/metamask/connect-users-to-layer-2-networks-with-the-metamask-custom-networks-api-d0873fac51e5).
 
 ## New Dapp Developers
 
 - [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
 - [CryptoZombies](https://cryptozombies.io/)
+- [Getting Started with Truffle](https://www.trufflesuite.com/docs/truffle/quickstart)

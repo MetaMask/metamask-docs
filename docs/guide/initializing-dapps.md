@@ -14,7 +14,7 @@ Every account in Ethereum has an address, whether it's an external key-pair acco
 
 ## The Contract ABI
 
-In Ethereum, [The ABI Specification](https://solidity.readthedocs.io/en/develop/abi-spec.html) is a way to encode the interface of a smart contract in a way that your user interface can make sense of.
+In Ethereum, [The ABI Specification](https://solidity.readthedocs.io/en/develop/abi-spec.html) is a way to encode the interface of a smart contract in a way that is comprehensible to your user interface.
 It is an array of method-describing objects, and when you feed this and the address into a contract-abstraction library, this `ABI` tells those libraries about what methods to provide, and how to compose transactions to call those methods.
 
 Example libraries include:

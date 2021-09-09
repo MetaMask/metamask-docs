@@ -21,5 +21,4 @@ ethereum.on('accountsChanged', function (accounts) {
 ```
 
 If the first account in the returned array isn't the account you expected, you should notify the user!
-In the future, the accounts array may contain more than one account.
-However, the first account in the array will continue to be considered as the user's "selected" account.
+In the future, the accounts array may contain more than one account, although that functionality isn't yet enabled. In any case, the first account in the array will continue to be considered as the user's "selected" account.

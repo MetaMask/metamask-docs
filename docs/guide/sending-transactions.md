@@ -92,7 +92,7 @@ In Ethereum every transaction has a nonce. This is so that each transaction can 
 
 That means that transactions are always processed in order for a given account, and so incrementing nonces is a very sensitive matter that is easy to mess up, especially when a user is interacting with multiple applications with pending transactions using the same account, potentially across multiple devices.
 
-For these reasons, MetaMask currently does not provide application developers any way to customize the nonce of transactions it suggests, and instead assists the user in managing their transaction queue themselves.
+For these reasons, MetaMask currently does not provide application developers any way to customize the nonce of transactions it suggests. Instead, MetaMask [assists the user in managing their transaction queue themselves](https://metamask.zendesk.com/hc/en-us/articles/360015489251).
 
 ### Gas Price [optional]
 
