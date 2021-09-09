@@ -130,12 +130,12 @@ signTypedDataV4Button.addEventListener('click', function (event) {
 
   const msgParams = JSON.stringify({
     domain: {
-      // Defining the chain aka Rinkeby testnet or Ethereum Main Net
+      // Defining the chain aka Rinkeby testnet or Ethereum Main Net.
       chainId: 1,
       // Give a user friendly name to the specific contract you are signing for.
-      // This is primairly for UX purposes and is needed for the signature.
+      // This Optional parameter is primairly for UX purposes. If this is provided it will be incorperated into the signature.
       name: 'Ether Mail',
-      // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
+      // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity.
       verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
       // Just let's you know the latest version. Definitely make sure the field name is correct.
       version: '1',
