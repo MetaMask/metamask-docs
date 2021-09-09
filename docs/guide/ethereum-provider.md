@@ -138,7 +138,7 @@ ethereum
     params,
   })
   .then((result) => {
-    // The result varies by by RPC method.
+    // The result varies by RPC method.
     // For example, this method will return a transaction hash hexadecimal string on success.
   })
   .catch((error) => {
@@ -165,6 +165,20 @@ ethereum.on('chainChanged', (chainId) => {
   window.location.reload();
 });
 ```
+
+Also, don't forget to remove listeners once you are done listening to them (for example on component unmount in React):
+```javascript
+function handleAccountsChanged(accounts) {
+  // ...
+}
+
+ethereum.on('accountsChanged', handleAccountsChanged);
+
+// Later
+
+ethereum.removeListener('accountsChanged', handleAccountsChanged);
+```
+The first argument of the `ethereum.removeListener` is the event name and the second argument is the reference to the same function which has passed to `ethereum.on` for the event name mentioned in the first argument.
 
 ### connect
 

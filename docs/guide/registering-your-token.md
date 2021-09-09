@@ -10,7 +10,7 @@ You can greatly improve the security and experience of users adding your token t
 
 Here are a couple live web applications that let you enter your token details, and then share them with a simple web link:
 
-- [Watch Token](https://vittominacori.github.io/watch-token/create.html)
+- [Watch Token](https://vittominacori.github.io/watch-token/create/)
 - [Add Token App](https://metamask.github.io/Add-Token/#edit)
 
 ## Example
