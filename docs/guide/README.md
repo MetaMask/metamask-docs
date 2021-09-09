@@ -39,3 +39,6 @@ We are aware that there are constantly new private blockchains being created. If
 - [Learning Solidity](https://karl.tech/learning-solidity-part-1-deploy-a-contract/) by karl Floersch
 - [CryptoZombies](https://cryptozombies.io/)
 - [Getting Started with Truffle](https://www.trufflesuite.com/docs/truffle/quickstart)
+- [Keeping up with Blockchain Development (from ConsenSys Academy)](https://github.com/ConsenSys-Academy/Blockchain-Developer-Bootcamp/blob/main/docs/S00-intro/L6-keeping-up/index.md)
+- Launch into the Web3 space with [ConsenSys Academy's Blockchain Developer Bootcamp](https://consensys.net/academy/bootcamp/)
+- Explore everything ConsenSys at the [ConsenSys Developer Portal](vhttps://consensys.net/developers/)
