@@ -133,7 +133,6 @@ signTypedDataV4Button.addEventListener('click', function (event) {
       // Defining the chain aka Rinkeby testnet or Ethereum Main Net
       chainId: 1,
       // Give a user friendly name to the specific contract you are signing for.
-      // This is primairly for UX purposes and is needed for the signature.
       name: 'Ether Mail',
       // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
       verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
