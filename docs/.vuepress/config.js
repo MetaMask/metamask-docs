@@ -42,7 +42,7 @@ module.exports = (_ctx) => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Mobile', 'Resources'),
+          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Mobile', 'Snaps', 'Resources'),
         }
       }
     }
@@ -83,7 +83,7 @@ module.exports = (_ctx) => ({
   ]
 })
 
-function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
+function getGuideSidebar(guide, api, bestPractices, mobile, snaps, resources) {
   return [
     {
       title: guide,
@@ -125,6 +125,13 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'mobile-getting-started',
         'site-compatibility-checklist',
         'mobile-best-practices',
+      ]
+    },
+    {
+      title: snaps,
+      collapsible: false,
+      children: [
+        'snaps-tutorial',
       ]
     },
     {
