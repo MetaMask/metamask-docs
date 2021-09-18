@@ -15,7 +15,7 @@ Note that MetaMask supports signing transactions with Trezor and Ledger hardware
 
 ## A Brief History
 
-There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods has some lessons in it for the emergent lessons of decentralized standards emergence. Our current five methods are:
+There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods yields some guiding lessons for the emergence of decentralized standards. Our current five methods are:
 
 - `eth_sign`
 - `personal_sign`
