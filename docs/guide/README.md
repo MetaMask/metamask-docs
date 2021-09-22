@@ -16,9 +16,9 @@ please see our [Migration Guide](./provider-migration.html) for more details.
 
 MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it handles account management and connecting the user to the blockchain.
 
-- [Get started here](./getting-started.html)
-- [Learn more about our JavaScript Provider API](./ethereum-provider.html)
-- [Learn more about our RPC API](./rpc-api.html)
+- [Get started here](./getting-started.md)
+- [Learn more about our JavaScript Provider API](./ethereum-provider.md)
+- [Learn more about our RPC API](./rpc-api.md)
 
 ## Account Management
 
