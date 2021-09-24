@@ -4,7 +4,7 @@ Welcome to MetaMask’s Developer Documentation. MetaMask is the trailblazing to
 
 - You can find the latest version of MetaMask on our [official website](https://metamask.io/).
 - For help using MetaMask, visit our [User Support Site](https://metamask.zendesk.com/).
-- For up to the minute news, follow our [Twitter](https://twitter.com/MetaMask) account.
+- For up to the minute news, follow our [Twitter](https://twitter.com/MetaMask) or [Medium](https://medium.com/metamask) pages.
 - To learn how to contribute to the MetaMask project itself, visit our [Internal Docs](https://github.com/MetaMask/metamask-extension/tree/develop/docs).
 
 ::: tip Recent Breaking Provider Changes
