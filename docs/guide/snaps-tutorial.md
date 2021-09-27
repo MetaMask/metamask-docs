@@ -31,7 +31,7 @@ There are a number of simple snaps available for you to learn from and begin to 
 * nodejs `^12.11.0`
 * nvm (recommended)
 * git
-* yarn v1
+* yarn v1 
 * macOS, Linux, or Windows Subsystem Linux
   
 ### Getting Flask running in your local environment
@@ -42,7 +42,7 @@ Flask, as described [here](LINK TO FLASK PAGE REQUIRED HERE), is a distribution 
 * `cd` into the repo, and execute `yarn setup` and then `yarn start`
 * in Chrome, click on the plugins puzzle piece, and then 'Manage Extensions'
 * make sure 'Developer Mode' is enabled on the far right, then click 'Load unpacked' on the far left
-* navigate to your Flask repo, and then `./dist/chrome` and click 'Select Folder'
+* navigate to your Flask repo, and then `./dist/chrome`, and click 'Select Folder'
   
 At this point, you should see Flask added to your browser as an extension. If you currently have another build of MetaMask installed in your browser, it's probably best to disable the extension (but make sure you have your Secret Recovery Phrase backed up!)
 
