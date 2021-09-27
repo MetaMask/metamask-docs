@@ -2,7 +2,7 @@
 
 ## Words are Hard
 
-Every field has its lingo, and every specialization has its acronyms. You can't escape it.
+Every field has its terminology, and every specialization has its acronyms. You can't escape it.
 
 The decentralized web is certainly no exception, and if you're new to Web3, take a gander at MetaMask's [introduction to blockchain article](https://metamask.zendesk.com/hc/en-us/articles/360015489611) in our knowledgebase.
 
