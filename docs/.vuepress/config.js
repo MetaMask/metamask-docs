@@ -128,13 +128,6 @@ function getGuideSidebar(guide, api, bestPractices, mobile, snaps, resources) {
       ]
     },
     {
-      title: snaps,
-      collapsible: false,
-      children: [
-        'snaps-tutorial',
-      ]
-    },
-    {
       title: resources,
       collapsable: false,
       children: [
