@@ -6,7 +6,7 @@ Once you have your basic dev environment [set up](./Getting-Started), you are re
 
 If you aren't connected to the right network, you aren't going to have any luck sending transactions to your contract, so make sure you have this right! Many dapp developers choose to deploy their contract to a testnet first, in order to avoid potentially disastrous fees if something goes wrong during development and testing on mainnet.
 
-No matter which network you deploy your final dapp on, your user will need to be able to access it. As of v3.3.0, MetaMask makes available [wallet_switchEthereumChain](https://docs.metamask.io/guide/rpc-api.html#other-rpc-methods), allowing you to prompt the user to add a chain that you suggest, and switch to it using a confirmation dialogue.
+No matter which network you deploy your final dapp on, your user will need to be able to access it. MetaMask makes available [wallet_switchEthereumChain](https://docs.metamask.io/guide/rpc-api.html#other-rpc-methods), as well as [wallet_addEthereumChain](https://docs.metamask.io/guide/rpc-api.html#wallet-addethereumchain), which allows you to prompt the user to add a chain that you suggest, and switch to it using a confirmation dialogue.
 
 ## The Contract Address
 
