@@ -84,7 +84,7 @@ Hopefully soon we will also have good examples for parsing method input into str
 - Makes sure signatures are valid only where they are intended to be valid.
 - Allows you have a unique contract that verifies the address.
 - This is a bunch of information that restricts where the signature is valid.
-- This is the domain of validity. Could be a contract, a url, ect.
+- This is the domain of validity. Could be a contract, a url, etc.
 - What needs to be put in here specifically what the DApp tells you.
 - Makes sure your signature(s) don't collide with other signatures.
 
