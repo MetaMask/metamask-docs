@@ -63,7 +63,7 @@ You should **only** initiate a connection request in response to direct user act
 You should **always** disable the "connect" button while the connection request is pending.
 You should **never** initiate a connection request on page load.
 
-We recommend that you provide a button to allow the user to connect MetaMask to your dapp.
+We recommend that you provide a button to allow the user to connect MetaMask to your app.
 Clicking this button should call the following method:
 
 ```javascript
