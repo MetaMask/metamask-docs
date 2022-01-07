@@ -83,7 +83,7 @@ module.exports = (_ctx) => ({
   ]
 })
 
-function getGuideSidebar(guide, api, bestPractices, mobile, snaps, resources) {
+function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
   return [
     {
       title: guide,
