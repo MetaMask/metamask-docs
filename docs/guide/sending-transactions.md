@@ -100,7 +100,7 @@ Optional parameter - best used on private blockchains.
 
 In Ethereum, the pool of pending transactions offers their gas price as a sort of tip to the block producers to include this transaction in a block in exchange for a transaction fee. That means high gas prices can mean faster processing, but also more expensive transactions.
 
-"MetaMask allows users to choose between "slow," "medium," and "fast" options for their gas price. To learn how to use advanced gas controls [visit here](https://metamask.zendesk.com/hc/en-us/articles/360022895972).
+In other words, while you can ignore this parameter on MetaMask's default networks, you may want to include it in situations where your application knows more about the target network than we do. On our default networks, MetaMask allows users to choose between "slow," "medium," and "fast" options for their gas price. To learn how to use advanced gas controls [visit here](https://metamask.zendesk.com/hc/en-us/articles/360022895972).
 
 We cannot know about the gas market on all blockchains because it requires some deep analysis. For this reason, while you can safely ignore this parameter on our main hosted networks, you may want to suggest a gas price in situations where your application knows more about the target network than we do.
 
