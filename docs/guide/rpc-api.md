@@ -355,7 +355,7 @@ try {
     try {
       await ethereum.request({
         method: 'wallet_addEthereumChain',
-        params: [{ chainId: '0xf00', rpcUrl: 'https://...' /* ... */ }],
+        params: [{ chainId: '0xf00', chainName: '...', rpcUrls: ['https://...'] /* ... */ }],
       });
     } catch (addError) {
       // handle "add" error
