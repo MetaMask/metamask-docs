@@ -29,10 +29,10 @@ Important methods from this API include:
 - [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction)
 - [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign)
 
-## Permissions
+## Restricted Methods
 
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
-In this permissions system, each RPC method is either _restricted_ or _open_.
+In this permissions system, each RPC method is either _restricted_ or _unrestricted_.
 If a method is restricted, an external _domain_ (like a web3 site) must have the corresponding permission in order to call it.
 Open methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `eth_sendTransaction`).
 
@@ -178,7 +178,7 @@ function requestPermissions() {
 }
 ```
 
-## Other RPC Methods
+## Unrestricted Methods
 
 ### eth_decrypt
 
@@ -470,12 +470,12 @@ ethereum
   })
   .then((success) => {
     if (success) {
-      console.log('FOO successfully added to wallet!')
+      console.log('FOO successfully added to wallet!');
     } else {
-      throw new Error('Something went wrong.')
+      throw new Error('Something went wrong.');
     }
   })
-  .catch(console.error)
+  .catch(console.error);
 ```
 
 ## Mobile Specific RPC Methods
