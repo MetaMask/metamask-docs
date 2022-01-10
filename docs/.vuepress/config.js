@@ -161,7 +161,7 @@ const guideSidebar = [
   {
     title: 'Snaps',
     collapsable: false,
-    children: ['snaps-tutorial', 'snaps-rpc-api'],
+    children: ['snaps-introduction', 'snaps-rpc-api'],
   },
   {
     title: 'Resources',
