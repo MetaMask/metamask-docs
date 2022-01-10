@@ -1,4 +1,4 @@
-# Snaps Tutorial
+# Introduction to Snaps
 
 Snaps is a plugin system for MetaMask. That's right, plugins for a plugin. Before you say, "Wow that's meta," think again—it's right there in the name.
 
@@ -75,3 +75,7 @@ Once you've connected to Flask, smash that `Send Hello` button, and watch that S
 This is of course just the starting point, as all "Hello, world!" exercises are.
 To learn more about what snaps can do, check out the [JSON-RPC API documentation](./snaps-rpc-api.html).
 In addition, there are other [example snaps available](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples), and chances are, by the time you're reading this, someone else has already begun developing something interesting that may give you further insight, as well.
+
+::: tip Feature Requests
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
+:::

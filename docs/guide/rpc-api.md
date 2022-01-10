@@ -36,7 +36,7 @@ In this permissions system, each RPC method is either _restricted_ or _unrestric
 If a method is restricted, the caller must have the corresponding permission in order to call it.
 Unrestricted methods, meanwhile, have no corresponding permission. Some of them still rely upon permissions to succeed though (e.g. the signing methods require that you have the `eth_accounts` permission for the signer account), and some require confirmation by the user (e.g. `wallet_addEthereumChain`).
 
-With the exception of [MetaMask Flask](./snaps-tutorial.html#availability), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
+With the exception of [MetaMask Flask](./snaps-introduction.html#availability), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
 
 Under the hood, permissions are plain, JSON-compatible objects, with a number of fields that are mostly used internally by MetaMask.
