@@ -29,14 +29,14 @@ Important methods from this API include:
 - [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction)
 - [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign)
 
-## Permissions
+## Restricted Methods
 
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
-In this permissions system, each RPC method is either _restricted_ or _open_.
-If a method is restricted, an external _domain_ (like a web3 site) must have the corresponding permission in order to call it.
-Open methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `wallet_addEthereumChain`).
+In this permissions system, MetaMask is the _host_ environment, and all of its RPC methods are either _restricted_ or _unrestricted_.
+If a method is restricted, an external _subject_ (like a web3 site) must have the corresponding permission in order to call it.
+Unrestricted methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `wallet_addEthereumChain`).
 
-Currently, the only permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
+With the exception of [MetaMask Flask](./snaps-tutorial.html#availability), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
 
 Under the hood, permissions are plain, JSON-compatible objects, with a number of fields that are mostly used internally by MetaMask.
@@ -52,7 +52,7 @@ interface Web3WalletPermission {
 }
 ```
 
-The permissions system is implemented in the [`rpc-cap` package](https://github.com/MetaMask/rpc-cap).
+The permissions system is implemented in the [`@metamask/snap-controllers` package](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/controllers/src/permissions).
 If you're interested in learning more about the theory behind this _capability_-inspired permissions system, we encourage you to take a look at [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 
 ### `eth_requestAccounts`
@@ -178,7 +178,7 @@ function requestPermissions() {
 }
 ```
 
-## Other RPC Methods
+## Unrestricted Methods
 
 ### `eth_decrypt`
 
