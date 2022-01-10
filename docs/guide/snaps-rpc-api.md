@@ -70,7 +70,7 @@ try {
   result = await ethereum.request({
     method: 'wallet_enable',
     // This entire object is ultimately just a list of requested permissions.
-    // Every snap has an associated permission, given be the prefix `wallet_snap_`
+    // Every snap has an associated permission or permissions, given the prefix `wallet_snap_`
     // and its ID. Here, the `wallet_snap` property exists so that callers don't
     // have to specify the full permission permission name for each snap.
     params: [
