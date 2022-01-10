@@ -3,7 +3,11 @@
 ::: tip Only Available in MetaMask Flask
 These methods are only available in [MetaMask Flask](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk).
 
-See [here](./snaps-tutorial.html#availability) for more details.
+See [here](./snaps-introduction.html#availability) for more details.
+:::
+
+::: tip Feature Requests
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
 :::
 
 ## Table of Contents
