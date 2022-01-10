@@ -1,16 +1,16 @@
 # Getting Started
 
-To develop for MetaMask, install MetaMask on your development machine. [Download here](https://metamask.io/).
+To develop for MetaMask, install MetaMask in the browser of your choice on your development machine. [Download here](https://metamask.io/).
 
 ::: warning A quick note...
 This guide assumes intermediate knowledge of HTML, CSS, and JavaScript.
 :::
 
-Once MetaMask is installed and running, you should find that new browser tabs have a `window.ethereum` object available in the developer console.
+Once MetaMask is installed and running (make sure you back up your Secret Recovery Phrase), you should find that new browser tabs have a `window.ethereum` object available in the developer console.
 This is how your website will interact with MetaMask.
 
 You can review the full API for that object [here](./ethereum-provider.html).
-Note that in **over the course of 2020**, we are introducing significant changes to this API, and we recommend that you refer to its documentation.
+Note that **over the course of 2020**, we introduced significant changes to this API, and we recommend that you refer to its documentation.
 
 ## Basic Considerations
 
@@ -39,11 +39,11 @@ Since your seed phrase has the power to control all your accounts, it is probabl
 If you're running a test blockchain and restart it, you can accidentally confuse MetaMask because it calculates the next [nonce](./sending-transactions.html#nonce-ignored)
 based on both the network state _and_ the known sent transactions.
 
-To clear MetaMask's transaction queue, and effectively reset its nonce calculation, you can use the `Reset Account` button in `Settings` (available in the top-right sandwich menu).
+To clear MetaMask's transaction queue, and effectively reset its nonce calculation, you can use the `Reset Account` button in `Settings` (available in the top-right identicon menu).
 
 ### Detecting MetaMask
 
-If you want to differentiate MetaMask from other ethereum-compatible browsers, you can detect MetaMask using `ethereum.isMetaMask`.
+If you want to differentiate MetaMask from other Ethereum-compatible browsers, you can detect MetaMask using `ethereum.isMetaMask`.
 
 ### User State
 
@@ -99,9 +99,9 @@ ethereumButton.addEventListener('click', () => {
 
 ::::
 
-This promise-returning function resolves with an array of hex-prefixed ethereum addresses, which can be used as general account references when sending transactions.
+This promise-returning function resolves with an array of hex-prefixed Ethereum addresses, which can be used as general account references when sending transactions.
 
-Over time, this method is intended to grow to include various additional parameters to help your site request all the setup it needs from the user during setup.
+Over time, this method is intended to grow to include various additional parameters to help your site request everything it needs from the user during setup.
 
 Since it returns a promise, if you're in an `async` function, you may log in like this:
 
