@@ -6,6 +6,12 @@ Snaps is a way to make MetaMask more extensible for developers, giving them the 
 
 Snaps allows developers to build and plug in their own APIs to MetaMask. No longer do you have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build.
 
+## Availability
+
+Snaps is currently only available in [MetaMask Flask](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk).
+Flask is a distribution channel for experimental, under-development MetaMask features, and Snaps is the first feature to be released through Flask.
+Snaps is fundamental to the evolution of MetaMask, and the system will be released in the regular MetaMask distribution(s) once it has matured.
+
 ## Overview
 
 Broadly speaking, MetaMask Snaps consists of two things: (1) a way to safely execute untrusted JavaScript inside the MetaMask application, and (2) APIs for websites and MetaMask to communicate with individual snaps. As with MetaMask’s [Ethereum JavaScript provider API](https://docs.metamask.io/guide/ethereum-provider.html), communication occurs via JSON-RPC requests and responses.
@@ -14,7 +20,7 @@ Broadly speaking, MetaMask Snaps consists of two things: (1) a way to safely exe
 
 At present, snaps can make JSON-RPC requests of MetaMask, and websites can make JSON-RPC requests of MetaMask and snaps running inside MetaMask. In this way, snaps can expand MetaMask’s RPC API and change the behavior of the MetaMask application at runtime. Over time, MetaMask will use this to support different blockchains and other decentralized protocols, novel kinds of cryptography, novel kinds of crypto assets, and countless other features.
 
-For the prototype Snaps system, snaps cannot modify the MetaMask UI (with [one exception]()), but can extend the MetaMask RPC API, and exchange arbitrary messages with websites visited by the user. Therefore, the user interface for any snap must exist entirely in the website during the prototype stage.
+For the prototype Snaps system, snaps cannot modify the MetaMask UI (with [one exception](./snaps-rpc-api.html#snap-confirm)), but can extend the MetaMask RPC API, and exchange arbitrary messages with websites visited by the user. Therefore, the user interface for any snap must exist entirely in the website during the prototype stage.
 
 ### Execution Environment
 
@@ -35,8 +41,7 @@ There are a number of simple snaps available for you to learn from and begin to 
 
 ### Getting Flask Running in Your Local Environment
 
-[Flask](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk) is a distribution channel for under-development, experimental MetaMask features, and Snaps is the first feature to be released through Flask.
-In this tutorial, we're going to build the latest version of Flask and load it as an extension into the Chromium-based browser of your choice.
+In this tutorial, we're going to install [MetaMask Flask](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk) from the Chrome Web Store in the Chromium-based browser of your choice.
 
 > Flask will also be available on Firefox in the near future.
 
@@ -67,4 +72,6 @@ Once you've connected to Flask, smash that `Send Hello` button, and watch that S
 
 ## Where to Go from Here
 
-Of course this is just the starting point, as all "Hello, world!" exercises are. There are other [example snaps available](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples), and chances are, by the time you're reading this, someone else has already begun developing something interesting that may give you further insight, as well.
+This is of course just the starting point, as all "Hello, world!" exercises are.
+To learn more about what snaps can do, check out the [JSON-RPC API documentation](./snaps-rpc-api.html).
+In addition, there are other [example snaps available](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples), and chances are, by the time you're reading this, someone else has already begun developing something interesting that may give you further insight, as well.
