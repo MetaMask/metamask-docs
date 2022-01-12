@@ -203,7 +203,7 @@ GREAT! Now if our end user doesn't have the MetaMask Extension they can install 
 
 ### MetaMask "Installed" Dapp Flow
 
-Next we need to revisit our `MetaMaskClientCheck` function and do similar functionality of what we did in our "MetaMask Not Installed" block to now our "MetaMask Is Installed" block of code.
+Next we need to revisit our `MetaMaskClientCheck` function and create similar functionality that we did in our "MetaMask Not Installed" block in our "MetaMask Is Installed" block of code.
 
 ```javascript
 const MetaMaskClientCheck = () => {
@@ -227,7 +227,7 @@ const MetaMaskClientCheck = () => {
 MetaMaskClientCheck();
 ```
 
-Now we've created a function that will be called whenever we click the button to trigger a connection to our wallet and disable the button. Next, let's dive into the `onClickConnect` function and build the logic inside of it.
+Now we've created a function that will be called whenever we click the button to trigger a connection to our wallet, disabling the button. Next, let's dive into the `onClickConnect` function and build the logic we need inside of it.
 
 Inside this function we want to:
 
