@@ -17,7 +17,7 @@ Make sure you have:
 
 ### Open Project Folder
 
-Open the project folder. Navigate to `start`->`index.html`, and look at the comment stating part 1. We will be using/building off of this entire section for the first part of the tutorial.
+Open the project folder. Navigate to `start`->`index.html`, and look at the comment stating part 1. This is the UI for the Simple Dapp with all of the layout and buttons that will help us learn the basics of connecting to our MetaMask extension. We will be using/building off of this entire section for the first part of the tutorial.
 
 ### Install Dependencies
 
