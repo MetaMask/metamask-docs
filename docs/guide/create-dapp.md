@@ -279,7 +279,9 @@ If you have already connected to your wallet in the previous section of the tuto
 
 Let's go ahead and press the "Connect" button again, and confirm the "Connect With MetaMask" prompt and "Connect". Now we can click the "ETH_ACCOUNTS" button again and we should see our MetaMask account public address.
 
-CONGRATULATIONS! We have just completed building out our Basic Actions functionality. You know how to Connect to MetaMask, see your connected apps and remove them, as well as retrieve "ETH_ACCOUNTS".
+**CONGRATULATIONS!**
+
+We have just completed building out our Basic Actions functionality. You know how to Connect to MetaMask, see your connected apps and remove them, as well as retrieve accounts.
 
 Now on to our next step, showing our statuses.
 
