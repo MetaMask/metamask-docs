@@ -150,7 +150,7 @@ const initialize = () => {
 
 ### MetaMask "Not Installed" Dapp Flow
 
-In our code block where MetaMask isn't installed and we ask the user to `'Click here to install MetaMask!'`, we need to make it if our button is clicked we:
+In our code block where MetaMask isn't installed and we ask the user to `'Click here to install MetaMask!'`, we need to ensure that if our button is clicked we:
 
 1. Redirect the user to the proper page to install the extension
 2. Disable the button
@@ -173,10 +173,10 @@ const MetaMaskClientCheck = () => {
 MetaMaskClientCheck();
 ```
 
-We've created a function that will be called whenever we click the button and disabled it. Let's dive into the `onClickInstall` function and create the logic inside of it.
+We've created a function that will be called when we click the button and disable it. Let's dive into the `onClickInstall` function and create the logic inside of it.
 
 ::: tip Tip
-For this part we will be using the '@metamask/onboarding' library we installed when we did the npm install. To learn more visit [here](https://github.com/MetaMask/metamask-onboarding#metamask-onboarding)
+For this part we will be using the '@metamask/onboarding' library we installed during the npm install. To learn more visit [here](https://github.com/MetaMask/metamask-onboarding#metamask-onboarding)
 :::
 Inside this function we want to:
 
@@ -199,7 +199,7 @@ const onClickInstall = () => {
 };
 ```
 
-GREAT! We've now made it to where if our end user doesn't have the MetaMask Extension they can install it. When they refresh the page the ethereum window object will be there and we can get on to connecting their MetaMask wallet to our Dapp!
+GREAT! Now if our end user doesn't have the MetaMask Extension they can install it. When they refresh the page the ethereum window object will be there and we can get on to connecting their MetaMask wallet to our Dapp!
 
 ### MetaMask "Installed" Dapp Flow
 
