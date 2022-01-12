@@ -65,7 +65,7 @@ const initialize = () => {
 window.addEventListener('DOMContentLoaded', initialize);
 ```
 
-As you can see here, as soon as the content in the DOM is loaded we are calling our initialize function. Now before we start writing any code we need to see what's on our task list for the first part of this app.
+As soon as the content in the DOM is loaded we are calling our initialize function. Now before we start writing any code let's look at our task list for the first part of this app.
 
 What we'll cover in part one:
 
