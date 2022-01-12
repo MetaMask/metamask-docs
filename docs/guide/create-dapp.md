@@ -252,7 +252,7 @@ Great! Now once you click the button the MetaMask Extension will pop up and conn
 
 ### Get Ethereum Accounts
 
-After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it.
+After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it. Replace the existing `const onboardButton` at the top of the `initialize()` function with the following three buttons: 
 
 ```javascript
 //Basic Actions Section
@@ -275,4 +275,83 @@ getAccountsButton.addEventListener('click', async () => {
 });
 ```
 
-CONGRATULATIONS! We have just completed building out our Basic Actions functionality. Now on to our next step, showing our statuses.
+If you have already connected to your wallet in the previous section of the tutorial, you can go into MetaMask's "Connected Sites" menu and remove the localhost connection. This will enable us to test both buttons again. If we refresh our page, and click the "ETH_ACCOUNTS" button, we should see `'eth_accounts result: Not able to get accounts'`.
+
+Let's go ahead and press the "Connect" button again, and confirm the "Connect With MetaMask" prompt and "Connect". Now we can click the "ETH_ACCOUNTS" button again and we should see our MetaMask account public address.
+
+CONGRATULATIONS! We have just completed building out our Basic Actions functionality. You know how to Connect to MetaMask, see your connected apps and remove them, as well as retrieve "ETH_ACCOUNTS".
+
+Now on to our next step, showing our statuses.
+
+Preview of the completed code up until this point of the tutorial:
+
+```javascript
+const forwarderOrigin = 'http://localhost:9010';
+
+const initialize = () => {
+  //Basic Actions Section
+  const onboardButton = document.getElementById('connectButton');
+  const getAccountsButton = document.getElementById('getAccounts');
+  const getAccountsResult = document.getElementById('getAccountsResult');
+
+  //Created check function to see if the MetaMask extension is installed
+  const isMetaMaskInstalled = () => {
+    //Have to check the ethereum binding on the window object to see if it's installed
+    const { ethereum } = window;
+    return Boolean(ethereum && ethereum.isMetaMask);
+  };
+
+  //We create a new MetaMask onboarding object to use in our app
+  const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
+
+  //This will start the onboarding proccess
+  const onClickInstall = () => {
+    onboardButton.innerText = 'Onboarding in progress';
+    onboardButton.disabled = true;
+    //On this object we have startOnboarding which will start the onboarding process for our end user
+    onboarding.startOnboarding();
+  };
+
+  const onClickConnect = async () => {
+    try {
+      // Will open the MetaMask UI
+      // You should disable this button while the request is pending!
+      await ethereum.request({ method: 'eth_requestAccounts' });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const MetaMaskClientCheck = () => {
+    //Now we check to see if Metmask is installed
+    if (!isMetaMaskInstalled()) {
+      //If it isn't installed we ask the user to click to install it
+      onboardButton.innerText = 'Click here to install MetaMask!';
+      //When the button is clicked we call th is function
+      onboardButton.onclick = onClickInstall;
+      //The button is now disabled
+      onboardButton.disabled = false;
+    } else {
+      //If MetaMask is installed we ask the user to connect to their wallet
+      onboardButton.innerText = 'Connect';
+      //When the button is clicked we call this function to connect the users MetaMask Wallet
+      onboardButton.onclick = onClickConnect;
+      //The button is now disabled
+      onboardButton.disabled = false;
+    }
+  };
+
+  //Eth_Accounts-getAccountsButton
+  getAccountsButton.addEventListener('click', async () => {
+    //we use eth_accounts because it returns a list of addresses owned by us.
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    //We take the first address in the array of addresses and display it
+    getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
+  });
+  
+  MetaMaskClientCheck();
+};
+
+window.addEventListener('DOMContentLoaded', initialize);
+```
+
