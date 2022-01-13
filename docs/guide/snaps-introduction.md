@@ -34,7 +34,7 @@ There are a number of simple snaps available for you to learn from and begin to 
   
 ### Getting Flask running in your local environment
 
-Flask, as described [here](LINK TO FLASK PAGE REQUIRED HERE), is a distribution channel for developmental, experimental, kooky stuff for MetaMask, and Snaps is the first feature to be released through it. 
+Flask, as described [here](LINK TO FLASK PAGE REQUIRED HERE), is a distribution channel for developmental, experimental, and kooky stuff for MetaMask. Snaps is the first feature to be released through it.
 
 * Start by downloading [Flask](LINK HERE) and adding it to Chrome
   
