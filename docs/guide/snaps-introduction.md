@@ -8,7 +8,7 @@ Snaps allows developers to build and plug in their own APIs to MetaMask. You no 
 
 ## MetaMask Snaps: Overview
 
-Broadly speaking, MetaMask Snaps consists of two things: (1) a way to run untrusted JavaScript inside the MetaMask application, and (2) APIs for websites and MetaMask to communicate with individual snaps. As with MetaMask’s [Ethereum JavaScript provider API](https://docs.metamask.io/guide/ethereum-provider.html), communication occurs via JSON-RPC requests and responses.
+MetaMask Snaps consists of two things: (1) a way to run untrusted JavaScript inside the MetaMask application, and (2) APIs for websites and MetaMask to communicate with individual snaps. As with MetaMask’s [Ethereum JavaScript provider API](https://docs.metamask.io/guide/ethereum-provider.html), communication occurs via JSON-RPC requests and responses.
 
 ### Current functionality
 
