@@ -42,9 +42,9 @@ At this point, you should see Flask added to your browser as an extension. If yo
 
 ### Serving a snap to your local environment
 
-Now that you have Flask in your browser, it's time to find something to plug into it. If you don't want to download any code for the moment, check out the example snap [deployed here](https://metamask.github.io/snap-template/) and follow the instructions below under 'Interacting with the Snap'.
+Now that you have Flask in your browser, it's time to find something to plug into it. If you don't want to download any code for the moment, check out the example snap [deployed here](https://metamask.github.io/snap-template/) and follow the instructions: [Interacting with the Snap](#interacting-with-the-snap).
 
-If you're ready to jump in and see how a Snap looks on the backend, follow the steps below!
+If you're ready to jump in and see how a snap looks on the backend, follow the steps below!
 
 Open up a new terminal window, and do the following:
 
@@ -54,7 +54,7 @@ Open up a new terminal window, and do the following:
 * install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
 * run `yarn mm-snap serve`
 
-Your terminal window should now be serving the example Snap locally. Time to see the functionality in action!
+Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
 ### Interacting with the snap
 
