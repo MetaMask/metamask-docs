@@ -12,9 +12,9 @@ MetaMask Snaps consists of two things: (1) a way to run untrusted JavaScript ins
 
 ### Current functionality
 
-At present, snaps can make JSON-RPC requests of MetaMask, and websites can make JSON-RPC requests of MetaMask and snaps running inside MetaMask. In this way, snaps can expand MetaMask’s RPC API and change the behavior of the MetaMask application at runtime. Over time, MetaMask will use this to support different blockchains and other decentralized protocols, novel kinds of cryptography, novel kinds of crypto assets, and a countless number of other features.
+At present, snaps can make JSON-RPC requests of MetaMask, and websites can make JSON-RPC requests of MetaMask as well as snaps running inside MetaMask. In this way, snaps can expand MetaMask’s RPC API and change the behavior of the MetaMask application at runtime. Over time, MetaMask will use this to support different blockchains and other decentralized protocols, novel kinds of cryptography or crypto assets, and countless other features.
 
-For the prototype Snaps system, snaps cannot modify the MetaMask UI, but can extend the MetaMask RPC API, and exchange arbitrary messages with websites visited by the user. Therefore, the user interface for any snap must exist entirely in the website during the prototype stage.
+For the prototype Snaps system, snaps cannot modify the MetaMask UI, but they can extend the MetaMask RPC API and exchange arbitrary messages with websites visited by the user. Therefore, the user interface for any snap must exist entirely in the website during the prototype stage.
 
 ### Execution Environment
 
