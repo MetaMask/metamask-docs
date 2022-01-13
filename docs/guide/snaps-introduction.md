@@ -60,9 +60,9 @@ Your terminal window should now be serving the example snap locally. Time to see
 
 If you're serving the snap locally, open up a browser window, and navigate to `http://localhost:8080`.
 
-You should see a simple message, explaining the functionality of the snap, and two buttons. Start by clicking the `Connect` button; your Flask extension should pop up, and require you to click through two notifications.
+You should see a simple message explaining the functionality of the snap and two buttons. Start by clicking the `Connect` button; your Flask extension should pop up and require you to click through two notifications.
 
-Once you've connected to Flask, smash that `Send Hello` button, and watch that Snap say hello!
+Once you've connected to Flask, smash that `Send Hello` button, and watch that snap say hello!
 
 ## Where to go from here
 
