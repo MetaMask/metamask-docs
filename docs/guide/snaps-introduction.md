@@ -2,9 +2,9 @@
 
 ## What is Snaps?
 
-Snaps are a new evolution of MetaMask's functionality. By using MetaMask Flask in conjunction with the Snaps API, developers are able to bring their own code to the wallet in a custom-made code laboratory. MetaMask is the first wallet to provide this openness and flexibility to developers, paving the way to scale the number of features and personalization available to the wallet and your Dapp.
+Snaps are a new evolution of MetaMask's functionality. Using MetaMask Flask in conjunction with the Snaps API, developers can bring their own code to the wallet in a custom-made code laboratory. MetaMask is the first wallet to provide this openness and flexibility to developers, paving the way to scale the number of features and personalization available to the wallet and your Dapp.
 
-Snaps allows developers to build and plug in their own APIs to MetaMask. No longer do you have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build. 
+Snaps allows developers to build and plug in their own APIs to MetaMask. You no longer have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build.
 
 ## MetaMask Snaps: Overview
 
