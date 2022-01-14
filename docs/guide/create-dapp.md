@@ -252,7 +252,7 @@ Great! Now once you click the button the MetaMask Extension will pop up and conn
 
 ### Get Ethereum Accounts
 
-After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it. Replace the existing `const onboardButton` at the top of the `initialize()` function with the following three buttons: 
+After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it. Replace the existing `const onboardButton` at the top of the `initialize()` function with the following three buttons:
 
 ```javascript
 //Basic Actions Section
@@ -350,10 +350,9 @@ const initialize = () => {
     //We take the first address in the array of addresses and display it
     getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
   });
-  
+
   MetaMaskClientCheck();
 };
 
 window.addEventListener('DOMContentLoaded', initialize);
 ```
-

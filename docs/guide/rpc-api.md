@@ -355,7 +355,13 @@ try {
     try {
       await ethereum.request({
         method: 'wallet_addEthereumChain',
-        params: [{ chainId: '0xf00', chainName: '...', rpcUrls: ['https://...'] /* ... */ }],
+        params: [
+          {
+            chainId: '0xf00',
+            chainName: '...',
+            rpcUrls: ['https://...'] /* ... */,
+          },
+        ],
       });
     } catch (addError) {
       // handle "add" error
@@ -470,12 +476,12 @@ ethereum
   })
   .then((success) => {
     if (success) {
-      console.log('FOO successfully added to wallet!')
+      console.log('FOO successfully added to wallet!');
     } else {
-      throw new Error('Something went wrong.')
+      throw new Error('Something went wrong.');
     }
   })
-  .catch(console.error)
+  .catch(console.error);
 ```
 
 ## Mobile Specific RPC Methods
