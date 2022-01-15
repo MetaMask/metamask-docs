@@ -13,6 +13,8 @@ This guide is currently under construction, but will expand in the coming days t
 
 ## Resources
 
+To get started with Snaps, you first have to download [MetaMask Flask](https://metamask.io/flask).
+
 While this guide is under construction, we **highly recommend** consulting the [readme of `@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli), the command line utility we created to help with snap development.
 
 In addition, you can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples) maintained by MetaMask.
