@@ -4,7 +4,7 @@
 
 Snaps are a new evolution of MetaMask's functionality. By using MetaMask Flask in conjunction with the Snaps API, developers are able to bring their own code to the wallet in a custom-made code laboratory. MetaMask is the first wallet to provide this openness and flexibility to developers, paving the way to scale the number of features and personalization available to the wallet and your Dapp.
 
-Snaps allows developers to build and plug in their own APIs to MetaMask. No longer do you have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build. 
+Snaps allows developers to build and plug in their own APIs to MetaMask. No longer do you have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build.
 
 ## MetaMask Snaps: Overview
 
@@ -26,18 +26,18 @@ There are a number of simple snaps available for you to learn from and begin to 
 
 ### Prerequisites
 
-* nodejs `^14.15`
-* nvm (recommended)
-* git
-* yarn v1 
-* macOS, Linux, or Windows Subsystem Linux
-  
+- nodejs `^14.15`
+- nvm (recommended)
+- git
+- yarn v1
+- macOS, Linux, or Windows Subsystem Linux
+
 ### Getting Flask running in your local environment
 
-Flask, as described [here](LINK TO FLASK PAGE REQUIRED HERE), is a distribution channel for developmental, experimental, kooky stuff for MetaMask, and Snaps is the first feature to be released through it. 
+Flask, as described [here](https://metamask.io/flask), is a distribution channel for developmental, experimental, kooky stuff for MetaMask, and Snaps is the first feature to be released through it.
 
-* Start by downloading [Flask](LINK HERE) and adding it to Chrome
-  
+- Start by downloading [Flask](https://metamask.io/flask) and adding it to the available browser of your choice
+
 At this point, you should see Flask added to your browser as an extension. If you currently have another build of MetaMask installed in your browser, disable it (but make sure you have your Secret Recovery Phrase backed up!).
 
 ### Serving a snap to your local environment
@@ -48,11 +48,11 @@ If you're ready to jump in and see how a Snap looks on the backend, follow the s
 
 Open up a new terminal window, and do the following:
 
-* clone the snaps monorepo [here](https://github.com/MetaMask/snaps-skunkworks)
-* `cd` into the repo, and run `nvm use 14.15` to make sure you're using the right version of nodejs
-* navigate to the "Hello, World!" snap: `cd packages/example-snap`
-* install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
-* run `yarn mm-snap serve`
+- clone the snaps monorepo [here](https://github.com/MetaMask/snaps-skunkworks)
+- `cd` into the repo, and run `nvm use 14.15` to make sure you're using the right version of nodejs
+- navigate to the "Hello, World!" snap: `cd packages/example-snap`
+- install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
+- run `yarn mm-snap serve`
 
 Your terminal window should now be serving the example Snap locally. Time to see the functionality in action!
 
