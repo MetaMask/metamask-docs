@@ -277,9 +277,11 @@ const encryptedMessage = ethUtil.bufferToHex(
   Buffer.from(
     JSON.stringify(
       sigUtil.encrypt(
-        encryptionPublicKey,
-        { data: 'Hello world!' },
-        'x25519-xsalsa20-poly1305'
+        {
+          pubKey: encryptionPublicKey,
+          data: 'hello world!,
+          version: 'x25519-xsalsa20-poly1305',
+        }
       )
     ),
     'utf8'
