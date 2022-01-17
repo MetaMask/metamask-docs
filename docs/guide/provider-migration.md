@@ -136,7 +136,7 @@ ethereum.on('chainChanged', (chainId) => {
 Before the new provider API shipped, we added the `_metamask.isEnabled` and `_metamask.isApproved` methods
 to enable web3 sites to check if they have [access to the user's accounts](./rpc-api.html#eth-requestaccounts).
 `isEnabled` and `isApproved` functioned identically, except that `isApproved` was `async`.
-These methods were arguably never that useful, and they became completely redundant with the introduction of MetaMask's [permission system](./rpc-api.html#permissions).
+These methods were arguably never that useful, and they became completely redundant with the introduction of MetaMask's [permission system](./rpc-api.html#restricted-methods).
 
 We recommend that you check for account access in the following ways:
 
