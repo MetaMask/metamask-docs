@@ -5,7 +5,7 @@
     "dev": "yarn start",
     "start": "node scripts/build.js dev",
     "build": "node scripts/build.js build",
-    "lint": "prettier docs/guide/*.md docs/snippets/*",
+    "lint": "prettier docs/guide/*.md docs/snippets/* --check",
     "lint:fix": "yarn lint --write",
     "view-info": "vuepress view-info docs",
     "show-help": "vuepress --help"
