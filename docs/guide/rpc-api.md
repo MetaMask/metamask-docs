@@ -55,7 +55,7 @@ interface Web3WalletPermission {
 The permissions system is implemented in the [`rpc-cap` package](https://github.com/MetaMask/rpc-cap).
 If you're interested in learning more about the theory behind this _capability_-inspired permissions system, we encourage you to take a look at [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 
-### eth_requestAccounts
+### `eth_requestAccounts`
 
 ::: tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
@@ -101,7 +101,7 @@ function connect() {
 }
 ```
 
-### wallet_getPermissions
+### `wallet_getPermissions`
 
 ::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
@@ -117,7 +117,7 @@ Gets the caller's current permissions.
 Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
 If the caller has no permissions, the array will be empty.
 
-### wallet_requestPermissions
+### `wallet_requestPermissions`
 
 ::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
@@ -180,7 +180,7 @@ function requestPermissions() {
 
 ## Other RPC Methods
 
-### eth_decrypt
+### `eth_decrypt`
 
 ::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
@@ -219,7 +219,7 @@ ethereum
   .catch((error) => console.log(error.message));
 ```
 
-### eth_getEncryptionPublicKey
+### `eth_getEncryptionPublicKey`
 
 ::: tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
@@ -287,7 +287,7 @@ const encryptedMessage = ethUtil.bufferToHex(
 );
 ```
 
-### wallet_addEthereumChain
+### `wallet_addEthereumChain`
 
 ::: tip EIP-3085
 This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
@@ -371,7 +371,7 @@ try {
 }
 ```
 
-### wallet_switchEthereumChain
+### `wallet_switchEthereumChain`
 
 ::: tip EIP-3326
 This method is specified by [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain).
@@ -411,7 +411,7 @@ MetaMask will automatically reject the request under the following circumstances
 - If the chain ID is malformed
 - If the chain with the specified chain ID has not been added to MetaMask
 
-### wallet_registerOnboarding
+### `wallet_registerOnboarding`
 
 ::: tip Tip
 As an API consumer, you are unlikely to have to call this method yourself.
@@ -433,7 +433,7 @@ This lets MetaMask redirect the user back to your site after onboarding has comp
 
 Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
 
-### wallet_watchAsset
+### `wallet_watchAsset`
 
 ::: tip EIP-747
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
@@ -486,7 +486,7 @@ ethereum
 
 ## Mobile Specific RPC Methods
 
-### wallet_scanQRCode
+### `wallet_scanQRCode`
 
 #### Parameters
 
