@@ -34,7 +34,7 @@ Important methods from this API include:
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is either _restricted_ or _open_.
 If a method is restricted, an external _domain_ (like a web3 site) must have the corresponding permission in order to call it.
-Open methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `eth_sendTransaction`).
+Open methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `wallet_addEthereumChain`).
 
 Currently, the only permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
