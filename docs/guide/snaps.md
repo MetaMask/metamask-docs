@@ -1,5 +1,9 @@
 # Snaps Introduction
 
+::: tip Only Available in MetaMask Flask
+Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+:::
+
 ## What is Snaps?
 
 Snaps are a new evolution of MetaMask's functionality. By using MetaMask Flask in conjunction with the Snaps API, developers are able to bring their own code to the wallet in a custom-made code laboratory. MetaMask is the first wallet to provide this openness and flexibility to developers, paving the way to scale the number of features and personalization available to the wallet and your Dapp.
@@ -34,7 +38,7 @@ There are a number of simple snaps available for you to learn from and begin to 
 
 ### Getting Flask running in your local environment
 
-Flask, as described [here](https://metamask.io/flask), is a distribution channel for developmental, experimental, kooky stuff for MetaMask, and Snaps is the first feature to be released through it.
+[MetaMask Flask](https://metamask.io/flask) is a distribution channel for developmental, experimental, kooky stuff for MetaMask, and Snaps is the first feature to be released through it.
 
 - Start by downloading [Flask](https://metamask.io/flask) and adding it to the available browser of your choice
 

@@ -4,6 +4,10 @@
 This page is under construction.
 :::
 
+::: tip Only Available in MetaMask Flask
+Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+:::
+
 ::: tip Feature Requests
 Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
 :::
