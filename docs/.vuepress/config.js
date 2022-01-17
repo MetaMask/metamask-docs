@@ -6,8 +6,8 @@ module.exports = (_ctx) => ({
     '/': {
       lang: 'en-US',
       title: 'MetaMask Docs',
-      description: 'Developer documentation for the MetaMask Ethereum wallet'
-    }
+      description: 'Developer documentation for the MetaMask Ethereum wallet',
+    },
   },
 
   head: [
@@ -15,11 +15,30 @@ module.exports = (_ctx) => ({
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    ['link', { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }],
-    ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
-    ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
-    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
+    ],
+    [
+      'link',
+      { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` },
+    ],
+    [
+      'link',
+      {
+        rel: 'mask-icon',
+        href: '/icons/safari-pinned-tab.svg',
+        color: '#3eaf7c',
+      },
+    ],
+    [
+      'meta',
+      {
+        name: 'msapplication-TileImage',
+        content: '/icons/msapplication-icon-144x144.png',
+      },
+    ],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
   ],
 
   theme: '@vuepress/theme-default',
@@ -42,46 +61,65 @@ module.exports = (_ctx) => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar('Guide', 'API Reference', 'Best Practices', 'Mobile', 'Resources'),
-        }
-      }
-    }
+          '/guide/': getGuideSidebar(
+            'Guide',
+            'API Reference',
+            'Best Practices',
+            'Mobile',
+            'Resources'
+          ),
+        },
+      },
+    },
   },
 
   plugins: [
     ['@vuepress/back-to-top', true],
-    ['@vuepress/pwa', {
-      serviceWorker: true,
-      updatePopup: true
-    }],
+    [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        updatePopup: true,
+      },
+    ],
     ['@vuepress/medium-zoom', true],
-    ['container', {
-      type: 'vue',
-      before: '<pre class="vue-container"><code>',
-      after: '</code></pre>',
-    }],
-    ['container', {
-      type: 'upgrade',
-      before: info => `<UpgradePath title="${info}">`,
-      after: '</UpgradePath>',
-    }],
-    ['vuepress-plugin-redirect', {
-      redirectors: [
-        {
-          base: '/',
-          alternative: '/guide/'
-        },
-      ],
-    }],
-    ['tabs', {
-      useUrlFragment: false
-    }]
+    [
+      'container',
+      {
+        type: 'vue',
+        before: '<pre class="vue-container"><code>',
+        after: '</code></pre>',
+      },
+    ],
+    [
+      'container',
+      {
+        type: 'upgrade',
+        before: (info) => `<UpgradePath title="${info}">`,
+        after: '</UpgradePath>',
+      },
+    ],
+    [
+      'vuepress-plugin-redirect',
+      {
+        redirectors: [
+          {
+            base: '/',
+            alternative: '/guide/',
+          },
+        ],
+      },
+    ],
+    [
+      'tabs',
+      {
+        useUrlFragment: false,
+      },
+    ],
   ],
 
-  extraWatchFiles: [
-    '.vuepress/nav/en.js',
-  ]
-})
+  extraWatchFiles: ['.vuepress/nav/en.js'],
+});
 
 function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
   return [
@@ -95,7 +133,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'initializing-dapps',
         'accessing-accounts',
         'sending-transactions',
-      ]
+      ],
     },
     {
       title: api,
@@ -105,7 +143,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'provider-migration',
         'rpc-api',
         'signing-data',
-      ]
+      ],
     },
     {
       title: bestPractices,
@@ -116,7 +154,7 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'defining-your-icon',
         'onboarding-library',
         'metamask-extension-provider',
-      ]
+      ],
     },
     {
       title: mobile,
@@ -125,16 +163,12 @@ function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
         'mobile-getting-started',
         'site-compatibility-checklist',
         'mobile-best-practices',
-      ]
+      ],
     },
     {
       title: resources,
       collapsable: false,
-      children: [
-        'create-dapp',
-        'contributors'
-      ]
-    }
-  ]
+      children: ['create-dapp', 'contributors'],
+    },
+  ];
 }
-
