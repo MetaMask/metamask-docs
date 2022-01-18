@@ -61,13 +61,7 @@ module.exports = (_ctx) => ({
         lastUpdated: 'Last Updated',
         nav: require('./nav/en'),
         sidebar: {
-          '/guide/': getGuideSidebar(
-            'Guide',
-            'API Reference',
-            'Best Practices',
-            'Mobile',
-            'Resources'
-          ),
+          '/guide/': guideSidebar,
         },
       },
     },
@@ -121,54 +115,57 @@ module.exports = (_ctx) => ({
   extraWatchFiles: ['.vuepress/nav/en.js'],
 });
 
-function getGuideSidebar(guide, api, bestPractices, mobile, resources) {
-  return [
-    {
-      title: guide,
-      collapsable: false,
-      children: [
-        '',
-        'getting-started',
-        'common-terms',
-        'initializing-dapps',
-        'accessing-accounts',
-        'sending-transactions',
-      ],
-    },
-    {
-      title: api,
-      collapsable: false,
-      children: [
-        'ethereum-provider',
-        'provider-migration',
-        'rpc-api',
-        'signing-data',
-      ],
-    },
-    {
-      title: bestPractices,
-      collapsable: false,
-      children: [
-        'registering-function-names',
-        'registering-your-token',
-        'defining-your-icon',
-        'onboarding-library',
-        'metamask-extension-provider',
-      ],
-    },
-    {
-      title: mobile,
-      collapsable: false,
-      children: [
-        'mobile-getting-started',
-        'site-compatibility-checklist',
-        'mobile-best-practices',
-      ],
-    },
-    {
-      title: resources,
-      collapsable: false,
-      children: ['create-dapp', 'contributors'],
-    },
-  ];
-}
+const guideSidebar = [
+  {
+    title: 'Guide',
+    collapsable: false,
+    children: [
+      '',
+      'getting-started',
+      'common-terms',
+      'initializing-dapps',
+      'accessing-accounts',
+      'sending-transactions',
+    ],
+  },
+  {
+    title: 'API Reference',
+    collapsable: false,
+    children: [
+      'ethereum-provider',
+      'provider-migration',
+      'rpc-api',
+      'signing-data',
+    ],
+  },
+  {
+    title: 'Best Practices',
+    collapsable: false,
+    children: [
+      'registering-function-names',
+      'registering-your-token',
+      'defining-your-icon',
+      'onboarding-library',
+      'metamask-extension-provider',
+    ],
+  },
+  {
+    title: 'Mobile',
+    collapsable: false,
+    children: [
+      'mobile-getting-started',
+      'site-compatibility-checklist',
+      'mobile-best-practices',
+    ],
+  },
+  {
+    title: 'Snaps',
+    collapsable: false,
+    children: ['snaps', 'snaps-rpc-api', 'snaps-development-guide'],
+  },
+  {
+    title: 'Resources',
+    collapsable: false,
+    children: ['create-dapp', 'contributors'],
+  },
+];
