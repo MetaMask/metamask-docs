@@ -34,7 +34,7 @@ Important methods from this API include:
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is either _restricted_ or _unrestricted_.
 If a method is restricted, the caller must have the corresponding permission in order to call it.
-Unrestricted methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `wallet_addEthereumChain`).
+Unrestricted methods, meanwhile, have no corresponding permission. Some of them still rely upon permissions to succeed though (e.g. the signing methods require that you have the `eth_accounts` permission for the signer account), and some require confirmation by the user (e.g. `wallet_addEthereumChain`).
 
 Currently, the only permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
@@ -177,6 +177,8 @@ function requestPermissions() {
 }
 ```
 
+## Unrestricted Methods
+
 ### `eth_decrypt`
 
 ::: tip Platform Availability
@@ -283,8 +285,6 @@ const encryptedMessage = ethUtil.bufferToHex(
   )
 );
 ```
-
-## Unrestricted Methods
 
 ### `wallet_addEthereumChain`
 
