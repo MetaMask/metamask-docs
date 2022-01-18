@@ -6,19 +6,19 @@ Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
 
 ## What is Snaps?
 
-Snaps are a new evolution of MetaMask's functionality. By using MetaMask Flask in conjunction with the Snaps API, developers can bring their own code to the wallet in a custom-made code laboratory. MetaMask is the first wallet to provide this openness and flexibility to developers, paving the way to scale the number of features and personalization available to the wallet and your Dapp.
-
-Snaps allows developers to build and plug in their own APIs to MetaMask. You no longer have to rely on MetaMask to roll out features and updates. The rate of innovation, and MetaMask's flexibility, are limited only by your imagination and your capacity to build.
+Snaps is a system that allows safely expanding the capabilities MetaMask. A "snap" is a program that we run in an isolated environment that can customize the wallet experience in some way. For example, a snap can add new APIs to MetaMask, add new features, or modify existing functionality using internal APIs. Snaps makes extending MetaMask easier and safer, for both users and developers.
 
 ## MetaMask Snaps: Overview
 
-MetaMask Snaps consists of two things: (1) a way to run untrusted JavaScript inside the MetaMask application, and (2) APIs for websites and MetaMask to communicate with individual snaps. As with MetaMask’s [Ethereum JavaScript provider API](https://docs.metamask.io/guide/ethereum-provider.html), communication occurs via JSON-RPC requests and responses.
+Broadly speaking, MetaMask Snaps is a system that allows running untrusted programs inside MetaMask and granting them specific capabilities. Snaps are run in an isolated environment where they have access to a limited set of capabilities, determined by the permissions they were granted by the user during installation. As with MetaMask’s [Ethereum Provider RPC API](./rpc-api.html), snaps communicate with MetaMask using a JSON-RPC API.
+
+New RPC methods have been added to our Ethereum Provider RPC API as well, which are documented as part of the [Snaps RPC API](./snaps-rpc-api.html). These methods allow websites to request that snaps be installed, and to communicate with individual snaps.
 
 ### Current Functionality
 
-At present, snaps can make JSON-RPC requests of MetaMask, and websites can make JSON-RPC requests of MetaMask as well as snaps running inside MetaMask. In this way, snaps can expand MetaMask’s RPC API and change the behavior of the MetaMask application at runtime. Over time, MetaMask will use this to support different blockchains and other decentralized protocols, novel kinds of cryptography and crypto assets, and many more features.
+At present, snaps can create new RPC methods for websites to call, they can call many of the same RPC methods that websites can call, and they have access to a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabililities to snaps.
 
-For the prototype Snaps system, snaps cannot modify the MetaMask UI, but can extend the MetaMask RPC API and exchange arbitrary messages with websites visited by the user. Therefore, the user interface for any snap must exist entirely in the website during the prototype stage.
+At the moment, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on a website that can communicate with the snap.
 
 ### Execution Environment
 
@@ -38,7 +38,7 @@ There are many simple snaps available for you to learn from and begin to underst
 
 ### Getting Flask running in your local environment
 
-[MetaMask Flask](https://metamask.io/flask) is a distribution channel for developmental, experimental, and kooky stuff for MetaMask. Snaps is just the first feature to be released through it.
+[MetaMask Flask](https://metamask.io/flask) is a separate extension for developers that provides access to additional unstable APIs. The goal of Flask is to maximize developer control, so that we can learn the full extent of what developers want to do with MetaMask and incorporate those lessons into the main MetaMask distribution. Snaps is the first feature to be released on Flask.
 
 - Start by downloading [Flask](https://metamask.io/flask) and adding it to one of the available browsers of choice
 
