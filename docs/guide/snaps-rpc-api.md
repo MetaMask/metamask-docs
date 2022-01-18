@@ -511,7 +511,7 @@ const dogecoinNode = await wallet.request({
 
 // Next, we'll create an address key deriver function for the Dogecoin coin_type node.
 // In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
-const deriveDogecoinAddress = getBIP44AddressKeyDeriver(coinTypeNode);
+const deriveDogecoinAddress = getBIP44AddressKeyDeriver(dogecoinNode);
 
 // These are Node.js Buffer representations of the extended private keys for
 // the respective addresses.
