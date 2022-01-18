@@ -4,6 +4,10 @@
 This page is under construction.
 :::
 
+::: tip Only Available in MetaMask Flask
+Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+:::
+
 ::: tip Feature Requests
 Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
 :::
@@ -12,6 +16,8 @@ Developing Snaps is much like developing any JavaScript project, but there are s
 This guide is currently under construction, but will expand in the coming days to thoroughly cover the ins and outs of snap development.
 
 ## Resources
+
+To get started with Snaps, you first have to download [MetaMask Flask](https://metamask.io/flask).
 
 While this guide is under construction, we **highly recommend** consulting the [readme of `@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli), the command line utility we created to help with snap development.
 

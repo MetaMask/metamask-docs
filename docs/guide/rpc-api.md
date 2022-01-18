@@ -34,9 +34,9 @@ Important methods from this API include:
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, MetaMask is the _host_ environment, and all of its RPC methods are either _restricted_ or _unrestricted_.
 If a method is restricted, an external _subject_ (like a web3 site) must have the corresponding permission in order to call it.
-Unrestricted methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `eth_sendTransaction`).
+Unrestricted methods, meanwhile, do not require permissions to call, but may require confirmation by the user in order to succeed (e.g. `wallet_addEthereumChain`).
 
-With the exception of [MetaMask Flask](./snaps-introduction.html#availability), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
+With the exception of [MetaMask Flask](https://metamask.io/flask), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
 
 Under the hood, permissions are plain, JSON-compatible objects, with a number of fields that are mostly used internally by MetaMask.
