@@ -46,7 +46,7 @@ After adding Flask as a browser extension, if you currently have another build o
 
 ### Serving a Snap to Your Local Environment
 
-With Flask in your browser, it's time to plug something into it. If you don't want to download any code for the moment, check out the example snap [deployed here](https://metamask.github.io/snap-template/) and follow the instructions below under 'Interacting with the Snap'.
+With Flask in your browser, it's time to plug something into it. If you don't want to download any code for the moment, check out the example snap [deployed here](https://metamask.github.io/template-snap/) and follow the instructions below under 'Interacting with the Snap'.
 
 If you're ready to jump in and see how a Snap looks on the backend, follow the steps below!
 
