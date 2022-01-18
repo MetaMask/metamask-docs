@@ -22,7 +22,7 @@ For the prototype Snaps system, snaps cannot modify the MetaMask UI, but can ext
 
 ### Execution Environment
 
-Snaps are untrusted JavaScript programs but execute safely inside the MetaMask application. To isolate snaps from the rest of the application and to provide a “fully virtualizable” execution environment, MetaMask uses [Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), a subset of JavaScript developed by [Agoric](https://agoric.com/). Among other things, SES allows us to restrict access to global JavaScript APIs and to isolate untrusted code from other parts of the application. SES does this at the cost of some performance and incompatibility with some JavaScript practices, such as modifying prototypes of intrinsic objects, e.g., the Promise constructor.
+Snaps are untrusted JavaScript programs but execute safely inside the MetaMask application. To isolate snaps from the rest of the application and to provide a “fully virtualizable” execution environment, MetaMask uses [Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), a subset of JavaScript developed by [Agoric](https://agoric.com/). Among other things, SES allows us to restrict access to global JavaScript APIs and to isolate untrusted code from other parts of the application. SES does this at the cost of some performance and incompatibility with some JavaScript practices, such as modifying prototypes of intrinsic objects (e.g. the `Promise` constructor).
 
 ## Sample Snap Tutorial
 
@@ -53,7 +53,7 @@ If you're ready to jump in and see how a Snap looks on the backend, follow the s
 Open up a new terminal window, and do the following:
 
 - clone the snaps monorepo [here](https://github.com/MetaMask/snaps-skunkworks)
-- `cd` into the repo, and run `nvm use 14.15` our reccomended version of nodejs
+- `cd` into the repo, and then run `nvm use 14.15` to switch to our recommended version of Node.js
 - navigate to the "Hello, World!" snap: `cd packages/example-snap`
 - install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
 - run `yarn mm-snap serve`
