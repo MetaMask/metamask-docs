@@ -54,9 +54,11 @@ Open up a new terminal window, and do the following:
 
 - clone the [template-snap](https://github.com/MetaMask/template-snap) repo
 - `cd` into the repo, and run `nvm install`
-    - this will install and/or use the recommended NVM version from `.nvmrc`
+  - this will install and/or use the recommended NVM version from `.nvmrc`
 - run `yarn install && yarn build:clean && yarn serve`
-    - this runs the commands needed to install dependencies, build and serve the template snap project
+  - this runs the commands needed to install dependencies
+  - if there is a `dist/` folder, it is cleaned before the build command is ran
+  - finaly, it serves the dapp on `http://localhost:8080`
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
