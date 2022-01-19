@@ -58,7 +58,7 @@ Open up a new terminal window, and do the following:
 - run `yarn install && yarn build:clean && yarn serve`
   - this runs the commands needed to install dependencies
   - if there is a `dist/` folder, it is cleaned before the build command is ran
-  - finaly, we serve the dapp on `http://localhost:8080`
+  - finally, we serve the dapp on `http://localhost:8080`
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
