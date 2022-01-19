@@ -30,7 +30,7 @@ There are many simple snaps available for you to learn from and begin to underst
 
 ### Prerequisites
 
-- nodejs `^14.15`
+- nodejs
 - nvm (recommended)
 - git
 - yarn v1
@@ -52,11 +52,13 @@ If you're ready to jump in and see how a Snap looks on the backend, follow the s
 
 Open up a new terminal window, and do the following:
 
-- clone the snaps monorepo [here](https://github.com/MetaMask/snaps-skunkworks)
-- `cd` into the repo, and then run `nvm use 14.15` to switch to our recommended version of Node.js
-- navigate to the "Hello, World!" snap: `cd packages/example-snap`
-- install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
-- run `yarn mm-snap serve`
+- clone the [template-snap](https://github.com/MetaMask/template-snap) repo
+- `cd` into the repo, and run `nvm install`
+  - this will install and/or use the recommended NVM version from `.nvmrc`
+- run `yarn install && yarn build:clean && yarn serve`
+  - this runs the commands needed to install dependencies
+  - if there is a `dist/` folder, it is cleaned before the build command is ran
+  - finally, we serve the dapp on `http://localhost:8080`
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
