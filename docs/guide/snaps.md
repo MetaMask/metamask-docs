@@ -52,11 +52,11 @@ If you're ready to jump in and see how a Snap looks on the backend, follow the s
 
 Open up a new terminal window, and do the following:
 
-- clone the snaps monorepo [here](https://github.com/MetaMask/snaps-skunkworks)
-- `cd` into the repo, and then run `nvm use 14.15` to switch to our recommended version of Node.js
-- navigate to the "Hello, World!" snap: `cd packages/example-snap`
-- install [@metamask/snaps-cli](https://npmjs.com/package/@metamask/snaps-cli) package locally: `yarn add snaps-cli`
-- run `yarn mm-snap serve`
+- clone the [template-snap](https://github.com/MetaMask/template-snap) repo
+- `cd` into the repo, and run `nvm install`
+    - this will install and use the recommended NVM version from `.nvmrc`
+- run `yarn && yarn build:clean && yarn serve`
+    - this runs the commands needed to install dependencies, build and serve the template snap project
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
