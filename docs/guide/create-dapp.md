@@ -45,7 +45,7 @@ This will install all the necessary dependencies we'll need for our project. Thi
 Next run:
 
 ```bash
-yarn run start
+yarn run serve
 ```
 
 Navigate to `http://localhost:9011`
