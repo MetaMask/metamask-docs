@@ -37,7 +37,7 @@ You'll have some more files but that's nothing to worry about!
 Open your terminal and navigate into the start folder. In this folder run:
 
 ```bash
-npm install
+yarn install
 ```
 
 This will install all the necessary dependencies we'll need for our project. This will have created a `node_modules/` folder where all the dependencies are stored.
@@ -45,7 +45,7 @@ This will install all the necessary dependencies we'll need for our project. Thi
 Next run:
 
 ```bash
-npm run serve
+yarn run serve
 ```
 
 Navigate to `http://localhost:9011`
