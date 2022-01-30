@@ -278,7 +278,7 @@ const encryptedMessage = ethUtil.bufferToHex(
       sigUtil.encrypt(
         {
           publicKey: encryptionPublicKey,
-          data: 'hello world!,
+          data: 'hello world!',
           version: 'x25519-xsalsa20-poly1305',
         }
       )
