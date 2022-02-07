@@ -6,11 +6,16 @@ Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
 
 ## What is Snaps?
 
-Snaps is a system that allows safely expanding the capabilities MetaMask. A "snap" is a program that we run in an isolated environment that can customize the wallet experience in some way. For example, a snap can add new APIs to MetaMask, add new features, or modify existing functionality using internal APIs. Snaps makes extending MetaMask easier and safer, for both users and developers.
+Snaps is a system that allows anyone to safely expand the capabilities MetaMask.
+A "snap" is a program that we run in an isolated environment that can customize the wallet experience.
+For example, a snap can add new APIs to MetaMask, add support for different blockchain protocols, or modify existing functionality using internal APIs.
+Snaps is a new way to create web3 end user experiences, by modifying MetaMask in ways that were impossible before.
 
 Snaps are run in an isolated environment where they have access to a limited set of capabilities, determined by the permissions they were granted by the user during installation. As with MetaMask’s [Ethereum Provider RPC API](./rpc-api.html), snaps communicate with MetaMask using JSON-RPC.
 
-New RPC methods have been added to our Ethereum Provider JSON-RPC API as well, which are documented as part of the [Snaps RPC API](./snaps-rpc-api.html). These methods allow websites to request that snaps be installed, and to communicate with individual snaps.
+New RPC methods have been added to our Ethereum Provider JSON-RPC API as well, which are documented as part of the [Snaps RPC API](./snaps-rpc-api.html).
+These new methods are what allow snaps to modify the functionality of MetaMask.
+In addition, they also allow websites to install and communicate with individual snaps.
 
 ### Current Functionality
 
