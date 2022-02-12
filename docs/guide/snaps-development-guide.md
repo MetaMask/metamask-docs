@@ -133,7 +133,7 @@ The manifest file of `hello-snap` would look something like this:
 ```
 
 The manifest tells MetaMask important information about your snap, most especially where it's published (via `source.location`) and how to verify the integrity of the snap source code (by attempting to reproduce the `source.shasum` value).
-For the time being, snaps can only be published to the official npm registry, and the manifest must also match the corresponding fields of the `package.json` file.
+For the time being, snaps can only be [published to the official npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry), and the manifest must also match the corresponding fields of the `package.json` file.
 Over time, developers will be able to distribute snaps in a variety of different ways, and the manifest will expand to support different publishing solutions.
 
 ::: tip The Snaps Publishing Specification
@@ -188,7 +188,7 @@ You can find an example of how to do this in the [template snap's manifest](http
 #### Accessing the Internet
 
 Snaps do not get access to any sensitive APIs or features by default, and Internet access is no exception to that rule.
-To access the Internet, you must be specify the permission `endowment:network-access` in the `initialPermissions` of your `snap.manifest.json` file.
+To access the Internet, you must specify the permission `endowment:network-access` in the `initialPermissions` of your `snap.manifest.json` file.
 This will grant you access to the global `fetch` API.
 Other global network APIs may be made available in the future.
 
@@ -258,8 +258,9 @@ To give you an idea of a common error and how to fix it, "sloppily" declared var
 If you get an error during the `eval` step that says something like `variableName is not defined`, simply prepending `var variableName;` to your snap bundle may solve the problem.
 (This actually happened so frequently with [Babel's](https://babeljs.io/) `regeneratorRuntime` that `mm-snap build` automatically handles that one.)
 
-::: warning Did you modify the snap bundle after running `mm-snap build`?
+::: warning Did you modify the snap bundle after building?
 Don't forget to run `mm-snap manifest --fix` if you modified your snap bundle after building.
+Otherwise your manifest `shasum` value won't be correct, and attempting to install your snap will fail.
 :::
 
 If you run into a build or eval issue that you can't solve on your own, please create an issue on the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
