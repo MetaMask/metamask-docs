@@ -6,7 +6,7 @@ Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
 
 ## What is Snaps?
 
-Snaps is a system that allows anyone to safely expand the capabilities MetaMask.
+Snaps is a system that allows anyone to safely expand the capabilities of MetaMask.
 A "snap" is a program that we run in an isolated environment that can customize the wallet experience.
 For example, a snap can add new APIs to MetaMask, add support for different blockchain protocols, or modify existing functionality using internal APIs.
 Snaps is a new way to create web3 end user experiences, by modifying MetaMask in ways that were impossible before.
