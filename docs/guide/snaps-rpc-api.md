@@ -1,4 +1,4 @@
-# Snaps JSON-RPC API
+# JSON-RPC API
 
 ::: tip Only Available in MetaMask Flask
 Snaps is only available in [MetaMask Flask](https://metamask.io/flask).

@@ -275,13 +275,11 @@ const ethUtil = require('ethereumjs-util');
 const encryptedMessage = ethUtil.bufferToHex(
   Buffer.from(
     JSON.stringify(
-      sigUtil.encrypt(
-        {
-          publicKey: encryptionPublicKey,
-          data: 'hello world!,
-          version: 'x25519-xsalsa20-poly1305',
-        }
-      )
+      sigUtil.encrypt({
+        publicKey: encryptionPublicKey,
+        data: 'hello world!',
+        version: 'x25519-xsalsa20-poly1305',
+      })
     ),
     'utf8'
   )
