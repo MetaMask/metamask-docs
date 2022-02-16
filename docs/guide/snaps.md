@@ -46,7 +46,7 @@ There are many simple snaps available for you to learn from and begin to underst
 
 - First, in a Firefox or Chromium browser, create a new browser profile or disable any existing installed versions of MetaMask.
   - Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
-- Next, downlaod [Flask](https://metamask.io/flask) and add it your chosen browser.
+- Next, download [Flask](https://metamask.io/flask) and add it your chosen browser.
 
 ### Serving a Snap to Your Local Environment
 
@@ -56,21 +56,21 @@ If you're ready to jump in and see how a Snap looks on the backend, follow the s
 
 Open up a new terminal window, and do the following:
 
-- clone the [template snap](https://github.com/MetaMask/template-snap) repo
-- `cd` into the repo, and run `nvm use`
-  - this will install and/or use the recommended NVM version from `.nvmrc`
-- run `yarn install && yarn build:clean && yarn serve`
-  - this runs the commands needed to install dependencies
-  - if there is a `dist/` folder, it is cleaned before the build command is ran
-  - finally, we serve the dapp on `http://localhost:8080`
+- Clone the [template snap](https://github.com/MetaMask/template-snap) repo.
+- `cd` into the repo, and run `nvm use`.
+  - This will install and/or use the recommended NVM version from `.nvmrc`.
+- Run `yarn install && yarn build:clean && yarn serve`.
+  1. This first runs the commands needed to install dependencies.
+  1. If there is a `dist/` folder, it is then cleaned before the build command is run.
+  1. Finally, the dapp is served on `http://localhost:8080`.
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
 ### Interacting with the Snap
 
-If you're serving the snap locally, open up a browser window, and navigate to `http://localhost:8080`.
+If you're serving the snap locally, open up a browser window and navigate to `http://localhost:8080`.
 
-You should see a simple message explaining the functionality of the snap, and two buttons. Start by clicking the `Connect` button; your Flask extension should pop up and require you to click through two notifications.
+You should see a simple message explaining the functionality of the snap and two buttons. Start by clicking the `Connect` button; your Flask extension should pop up and require you to click through two notifications.
 
 Once you've connected to Flask, smash that `Send Hello` button, and watch the snap display your "hello" message!
 
