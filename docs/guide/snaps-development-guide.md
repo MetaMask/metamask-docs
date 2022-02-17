@@ -166,7 +166,7 @@ In this section, we'll go into detail about how to actually develop a snap and o
 
 Before beginning the development of your snap, it's important to understand the snap lifecycle.
 Just like [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) or AWS lambda functions, snaps are designed to wake up in response to messages / events, and shut down when they are idle.
-We say that snaps have an "ephemeral" lifecycle; here one moment, gone the next.
+We say that snaps have an "ephemeral" lifecycle: here one moment, gone the next.
 In addition, if MetaMask detects that a snap becomes unresponsive, it will be shut down.
 This does not mean that you can't create long-running snaps, but it does mean that your snaps must handle being shut down, especially when they are not within the JSON-RPC request / response cycle.
 
@@ -180,8 +180,8 @@ If a snap is disabled, the user must re-enable it before it can start again.
 
 ### Permissions
 
-Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, so do snaps need to request access to the sensitive methods in the snaps RPC API.
-Snaps can effectively expand the MetaMask RPC API by implementing their own using `wallet.registerRpcMessageHandler()`, but in order integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
+Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
+Snaps can effectively expand the MetaMask RPC API by implementing their own using `wallet.registerRpcMessageHandler()`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
 You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap/blob/main/snap.manifest.json).
 
@@ -203,9 +203,9 @@ At the moment, we only use this permission type to enable snap internet access, 
 Any snap will need to represent itself and what it does to the end user.
 Via the MetaMask settings page, the user can see their installed snaps. For each snap, the user can:
 
-- see most of its manifest data.
-- see its execution status (running, stopped, or crashed).
-- enable and disable the snap.
+- see most of its manifest data
+- see its execution status (running, stopped, or crashed)
+- enable and disable the snap
 
 Other than the settings page, the only way a snap can modify the MetaMask UI is by creating a confirmation using the [`snap_confirm`](./snaps-rpc.html#snap-confirm) RPC method.
 This means that many snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
@@ -267,7 +267,7 @@ If you run into a build or eval issue that you can't solve on your own, please c
 
 #### Using Other Build Tools
 
-If `mm-snap build` isn't enough to bundle your snap - if you are using TypeScript, for example - you will have to compose `mm-snap build` with the rest of your build process.
+If `mm-snap build` isn't enough to bundle your snap — if you are using TypeScript, for example — you will have to compose `mm-snap build` with the rest of your build process.
 If you have to complete any build steps before running `mm-snap build`, simply put your intermediate build files in a temporary directory and use the main entry point there as your `--src` argument to `mm-snap build`.
 
 If you have to run any build steps after `mm-snap build`, remember that the file you ship must be a single `.js` file, and that you must run `mm-snap manifest --fix` to ensure that the manifest `shasum` value is correct.
