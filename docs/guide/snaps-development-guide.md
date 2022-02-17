@@ -276,6 +276,26 @@ If you have to run any build steps after `mm-snap build`, remember that the file
 
 Test your snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its RPC methods from a web page.
 
+### Debugging Your Snap
+
+To debug your snap, your best bet is to use `console.log` and inspecting the MetaMask background process.
+You can add your log statements in your source coder and then build your snap, or add them directly to your snap bundle and use `mm-snap manifest --fix` to update the shasum in your snap manifest file.
+Recall that the manifest shasum must match the contents of your bundle at the time that MetaMask fetches your snap.
+
+::: tip Remember to Reinstall Your Snap
+Because adding logs modifies the snap source code, you have to reinstall the snap whenever you add a log statement.
+The process of reinstalling your snap during local development will improve in the next release of MetaMask Flask, and soon be available in prerelease builds.
+:::
+
+The log output will only be visible in the extension background process console.
+Follow these instructions to inspect the background process and view its console:
+
+- Chromium
+  - Go to `chrome://extensions`
+  - Find the MetaMask extension
+  - Click on "Details"
+  - Under "Inspect Views", click `background.html`
+
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
