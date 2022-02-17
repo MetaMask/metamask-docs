@@ -283,7 +283,7 @@ You can add your log statements in your source coder and then build your snap, o
 Recall that the manifest shasum must match the contents of your bundle at the time that MetaMask fetches your snap.
 
 ::: tip Remember to Reinstall Your Snap
-Because adding logs modifies the snap source code, you have to reinstall the snap whenever you add log statement.
+Because adding logs modifies the snap source code, you have to reinstall the snap whenever you add a log statement.
 The process of reinstalling your snap during local development will improve in the next release of MetaMask Flask, and soon be available in prerelease builds.
 :::
 
