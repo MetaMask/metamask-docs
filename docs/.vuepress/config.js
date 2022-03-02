@@ -15,7 +15,13 @@ module.exports = (_ctx) => ({
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['script', { 'data-domain': 'docs.metamask.io', src: 'https://plausible.io/js/plausible.js' }],
+    [
+      'script',
+      {
+        'data-domain': 'docs.metamask.io',
+        src: 'https://plausible.io/js/plausible.js',
+      },
+    ],
     [
       'meta',
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
