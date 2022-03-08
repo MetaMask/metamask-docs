@@ -18,7 +18,7 @@ Read on to learn more!
 ## The Snaps CLI
 
 Before continuing, you should know that [`@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli) exists, and will be one of your most important tools as you get started with snap development.
-The CLI is can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap project and building, executing, and serving your snap for local development.
+The CLI can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap project and building, executing, and serving your snap for local development.
 Executing `mm-snap --help` will provide detailed usage instructions.
 
 ## The Anatomy of a Snap
