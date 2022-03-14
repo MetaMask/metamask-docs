@@ -304,8 +304,13 @@ If you have a website that expects the user to install a snap, ask the user to i
 In the future, MetaMask will create some way for users to more easily discover snaps, but everyone will always be able to build, publish, and use snaps without MetaMask's permission.
 (Although we may try to make it difficult to use known scams.)
 
-## Resources
+## Resources and Tools
 
 You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
+
+MetaMask also maintains a growing list of tools to help developers debug, build and maintain Snaps:
+
+- [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
+- [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
 
 Finally, if you need help, you can ask for help in the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
