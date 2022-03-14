@@ -90,12 +90,10 @@ You can now
 
 ![image](https://user-images.githubusercontent.com/1038445/150916135-c9d019ad-86f3-474d-a0ef-d53dabe799f9.png)
 
-If your application starts with the `-m` (bip39 mnemonic phrase for generating a PRNG seed) flag, you can feed it the same seed phrase you have in your MetaMask, and the test network will give each of your first 10 accounts 100 test ether, which makes it easier to start work.
-
+If your application starts with the `-m` flag, you can feed it the same seed phrase you have in your MetaMask, and the test network will give each of your first 10 accounts 100 test ether, which makes it easier to start work.
 
 Using the same Mnumonic phrase will generate the same set of 10 account numbers when you restart Ganache
 ``` ganache-cli -m "random set of words to generate same account numbers each restart" ```
-
 
 Since your seed phrase has the power to control all your accounts, it is probably worth keeping at least one seed phrase for development, separate from any that you use for storing real value. One easy way to manage multiple seed phrases with MetaMask is with multiple browser profiles, each of which can have its own clean extension installations.
 
