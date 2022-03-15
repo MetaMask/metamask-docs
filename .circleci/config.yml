@@ -15,7 +15,7 @@ workflows:
           filters:
             branches:
               only:
-                - main
+                - master
           requires:
             - prep-deps
             - lint
@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Build
           command: |
-            if [[ "$CIRCLE_BRANCH" == "main" ]]
+            if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
               if [[ -z "$ALGOLIA_API_KEY" || -z "$ALGOLIA_INDEX_NAME" ]]
               then
