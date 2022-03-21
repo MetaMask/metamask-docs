@@ -306,7 +306,7 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 ## Resources and Tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
 
 MetaMask also maintains a growing list of tools to help developers debug, build and maintain Snaps:
 
