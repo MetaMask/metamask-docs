@@ -30,7 +30,9 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 ```typescript
 interface WalletEnableParam {
   wallet_snap: {
-    [snapId: string]: {};
+    [snapId: string]: {
+      version?: string;
+    };
   };
   [permissionName: string]: {};
 }
@@ -75,7 +77,12 @@ try {
       {
         wallet_snap: {
           'npm:@metamask/example-snap': {},
-          'npm:fooSnap': {},
+          'npm:fooSnap': {
+            // The optional version argument allows requesting
+            // SemVer version range, with semantics same as in
+            // package.json ranges.
+            version: '^1.0.2',
+          },
         },
         eth_accounts: {},
       },
@@ -199,7 +206,9 @@ You probably want to use [`wallet_enable`](#wallet-enable) instead, which both r
 
 ```typescript
 interface InstallSnapsParam {
-  [snapId: string]: {};
+  [snapId: string]: {
+    version?: string;
+  };
 }
 ```
 
@@ -226,6 +235,8 @@ interface WalletInstallSnapsResult {
 This method attempts to install the requested snaps, if they are permitted.
 If the installation of any snap fails, its object value on the result will contain an `error` property with the error that caused the installation to fail.
 
+Optionally you can specify a [SemVer range](https://www.npmjs.com/package/semver) of a Snap to be installed. Metamask will try to install a version that is max-satisfying of all the possible versions within that range. Should a Snap be already installed with a version that isn't in the requested range, Metamask will try to upgrade the installed Snap to satisfy the range, or an error returned if an upgrade is not possible or denied by the user.
+
 #### Example
 
 ```javascript
@@ -234,7 +245,12 @@ const result = await ethereum.request({
   params: [
     {
       'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting
+        // SemVer version range, with semantics same as in
+        // package.json ranges.
+        version: '^1.0.2',
+      },
     },
   ],
 });
