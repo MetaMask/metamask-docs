@@ -18,7 +18,7 @@ Read on to learn more!
 ## The Snaps CLI
 
 Before continuing, you should know that [`@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli) exists, and will be one of your most important tools as you get started with snap development.
-The CLI is can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap project and building, executing, and serving your snap for local development.
+The CLI can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap project and building, executing, and serving your snap for local development.
 Executing `mm-snap --help` will provide detailed usage instructions.
 
 ## The Anatomy of a Snap
@@ -276,6 +276,26 @@ If you have to run any build steps after `mm-snap build`, remember that the file
 
 Test your snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its RPC methods from a web page.
 
+### Debugging Your Snap
+
+To debug your snap, your best bet is to use `console.log` and inspecting the MetaMask background process.
+You can add your log statements in your source coder and then build your snap, or add them directly to your snap bundle and use `mm-snap manifest --fix` to update the shasum in your snap manifest file.
+Recall that the manifest shasum must match the contents of your bundle at the time that MetaMask fetches your snap.
+
+::: tip Remember to Reinstall Your Snap
+Because adding logs modifies the snap source code, you have to reinstall the snap whenever you add a log statement.
+The process of reinstalling your snap during local development will improve in the next release of MetaMask Flask, and soon be available in prerelease builds.
+:::
+
+The log output will only be visible in the extension background process console.
+Follow these instructions to inspect the background process and view its console:
+
+- Chromium
+  - Go to `chrome://extensions`
+  - Find the MetaMask extension
+  - Click on "Details"
+  - Under "Inspect Views", click `background.html`
+
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
@@ -284,8 +304,13 @@ If you have a website that expects the user to install a snap, ask the user to i
 In the future, MetaMask will create some way for users to more easily discover snaps, but everyone will always be able to build, publish, and use snaps without MetaMask's permission.
 (Although we may try to make it difficult to use known scams.)
 
-## Resources
+## Resources and Tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/snap-examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
+
+MetaMask also maintains a growing list of tools to help developers debug, build and maintain Snaps:
+
+- [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
+- [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
 
 Finally, if you need help, you can ask for help in the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
