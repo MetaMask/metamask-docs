@@ -271,6 +271,7 @@ Here's an example of how to encrypt a message using [`eth-sig-util`](https://git
 
 ```javascript
 const ethUtil = require('ethereumjs-util');
+const sigUtil = require('@metamask/eth-sig-util');
 
 const encryptedMessage = ethUtil.bufferToHex(
   Buffer.from(
