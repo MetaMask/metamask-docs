@@ -19,7 +19,7 @@ In addition, they also allow websites to install and communicate with individual
 
 ### Current Functionality
 
-At present, snaps can create new RPC methods for websites to call, can call many of the same RPC methods that websites can call, and access a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabililities to snaps.
+At present, snaps can create new RPC methods for websites to call, can call many of the same RPC methods that websites can call, and access a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabilities to snaps.
 
 At the moment, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on a website that can communicate with the snap.
 
