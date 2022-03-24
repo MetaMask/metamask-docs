@@ -30,7 +30,9 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 ```typescript
 interface WalletEnableParam {
   wallet_snap: {
-    [snapId: string]: {};
+    [snapId: string]: {
+      version?: string;
+    };
   };
   [permissionName: string]: {};
 }
@@ -75,7 +77,12 @@ try {
       {
         wallet_snap: {
           'npm:@metamask/example-snap': {},
-          'npm:fooSnap': {},
+          'npm:fooSnap': {
+            // The optional version argument allows requesting
+            // SemVer version range, with semantics same as in
+            // package.json ranges.
+            version: '^1.0.2',
+          },
         },
         eth_accounts: {},
       },
@@ -199,7 +206,9 @@ You probably want to use [`wallet_enable`](#wallet-enable) instead, which both r
 
 ```typescript
 interface InstallSnapsParam {
-  [snapId: string]: {};
+  [snapId: string]: {
+    version?: string;
+  };
 }
 ```
 
@@ -226,6 +235,12 @@ interface WalletInstallSnapsResult {
 This method attempts to install the requested snaps, if they are permitted.
 If the installation of any snap fails, its object value on the result will contain an `error` property with the error that caused the installation to fail.
 
+Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
+If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
+If a compatible version of a snap is already installed, the request to install that snap will automatically succeed.
+If an incompatible version is installed, MetaMask will attempt to update the snap to the latest version that satisfies the requested range.
+The request will succeed if the snap is successfully updated, and fail if the update could not be completed.
+
 #### Example
 
 ```javascript
@@ -234,7 +249,11 @@ const result = await ethereum.request({
   params: [
     {
       'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting a SemVer version
+        // range, with the same semantics as npm package.json ranges.
+        version: '^1.0.2',
+      },
     },
   ],
 });

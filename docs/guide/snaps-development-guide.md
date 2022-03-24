@@ -81,7 +81,9 @@ await ethereum.request({
   params: [
     {
       wallet_snap: {
-        'npm:hello-snap': {},
+        'npm:hello-snap': {
+          version: '^1.0.0',
+        },
       },
     },
   ],
