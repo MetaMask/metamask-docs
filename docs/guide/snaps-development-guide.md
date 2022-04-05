@@ -225,7 +225,7 @@ In addition, the following globals are available:
 
 - `console`
 - `crypto`
-- `fetch` (with the [appropriate permission](#accessing-the-internet))
+- `fetch` / `WebSocket` (with the [appropriate permission](#accessing-the-internet))
 - `setTimeout` / `clearTimeout`
 - `setInterval` / `clearInterval`
 - `SubtleCrypto`
