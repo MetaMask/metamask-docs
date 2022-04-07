@@ -37,7 +37,7 @@ You'll have some more files but that's nothing to worry about!
 Open your terminal and navigate into the start folder. In this folder run:
 
 ```bash
-npm install
+yarn install
 ```
 
 This will install all the necessary dependencies we'll need for our project. This will have created a `node_modules/` folder where all the dependencies are stored.
@@ -45,7 +45,7 @@ This will install all the necessary dependencies we'll need for our project. Thi
 Next run:
 
 ```bash
-npm run serve
+yarn run serve
 ```
 
 Navigate to `http://localhost:9011`
@@ -252,7 +252,7 @@ Great! Now once you click the button the MetaMask Extension will pop up and conn
 
 ### Get Ethereum Accounts
 
-After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it. Replace the existing `const onboardButton` at the top of the `initialize()` function with the following three buttons: 
+After this what we'd like to do next is whenever we press the `eth_accounts` button we'd like to get our Ethereum account and display it. Replace the existing `const onboardButton` at the top of the `initialize()` function with the following three buttons:
 
 ```javascript
 //Basic Actions Section
@@ -350,10 +350,9 @@ const initialize = () => {
     //We take the first address in the array of addresses and display it
     getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
   });
-  
+
   MetaMaskClientCheck();
 };
 
 window.addEventListener('DOMContentLoaded', initialize);
 ```
-

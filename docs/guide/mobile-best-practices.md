@@ -85,7 +85,7 @@ Test and debug your web3 site using MetaMask Mobile on any iOS or Android device
 3. In the MetaMask Mobile web browser, navigate to your website at `http://YOUR_LOCAL_IP:PORT`.
 
 ::: tip Tip
-If you're using an Android device, you must use `xip` in your url. Example: `http://192.168.x.x.xip.io:8000`
+If you're using an Android device, you must use `sslip` in your url. Example: `http://192.168.x.x.sslip.io:8000`
 :::
 
 ### Debugging
