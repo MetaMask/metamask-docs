@@ -225,9 +225,14 @@ In addition, the following globals are available:
 
 - `console`
 - `crypto`
-- `fetch` (with the [appropriate permission](#accessing-the-internet))
+- `fetch` / `WebSocket` (with the [appropriate permission](#accessing-the-internet))
 - `setTimeout` / `clearTimeout`
+- `setInterval` / `clearInterval`
 - `SubtleCrypto`
+- `WebAssembly`
+- `TextEncoder` / `TextDecoder`
+- `atob` / `btoa`
+- `URL`
 
 The execution environment is instrumented in this way to:
 
