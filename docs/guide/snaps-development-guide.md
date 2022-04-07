@@ -259,7 +259,11 @@ In our experience, these incompatibilities tend to occur in dependencies.
 While the errors you get from SES may seem scary, they're usually not that hard to fix.
 The actual file, function, and variable names in the `mm-snap eval` error stack trace may not make a lot of sense to you, but the line numbers should correspond to your snap bundle file.
 In this way, you can identify if the error is due to your code or one of your dependencies.
-If the problem is in a dependency, you can try a different version or to fix the issue locally by using tools such as [`patch-package`](https://npmjs.com/package/patch-package) or modifying the snap bundle file directly.
+If the problem is in a dependency, you can try a different version or to fix the issue locally by using tools such as [`patch-package`](https://npmjs.com/package/patch-package) or by modifying the snap bundle file directly.
+
+::: tip Patching Dependencies
+You can read more about patching dependencies [here](./snaps-patching-dependencies.html)
+:::
 
 To give you an idea of a common error and how to fix it, "sloppily" declared variables (i.e. assigning to a new variable without an explicit variable declaration) are forbidden in strict mode, and therefore in SES as well.
 If you get an error during the `eval` step that says something like `variableName is not defined`, simply prepending `var variableName;` to your snap bundle may solve the problem.
