@@ -53,6 +53,7 @@ module.exports = (_ctx) => ({
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
     docsDir: 'docs',
+    docsBranch: 'main',
     editLinks: true,
     logo: '/metamask-fox.svg',
     smoothScroll: true,
