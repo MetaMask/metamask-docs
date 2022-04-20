@@ -78,5 +78,5 @@ Once you've connected to Flask, smash that `Send Hello` button, and watch the sn
 
 - If you're interested in developing your own snap, your next destination is probably [the snaps development guide](./snaps-development-guide.html).
 - You may also wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap/).
-- Check out the list of [Awesome MetaMask Snaps](https://github.com/piotr-roslaniec/awesome-metamask-snaps) and other resources.
+- Check out the list of [Awesome MetaMask Snaps](https://github.com/piotr-roslaniec/awesome-metamask-snaps) , [Snaplist](https://snaplist.org) and other resources.
 - Currently, snaps are mostly discovered through word-of-mouth. As the system matures, MetaMask will provide means for both developers and users to discover snaps.
