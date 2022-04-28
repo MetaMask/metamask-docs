@@ -482,9 +482,19 @@ interface BIP44CoinTypeNode {
   readonly depth: 2;
 
   /**
-   * The Base64-encoded string representation of the key material for this node.
+   * The hexadecimal-encoded string representation of the private key for this node.
    */
-  readonly key: string;
+  readonly privateKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the public key for this node.
+   */
+  readonly publicKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the chain code for this node.
+   */
+  readonly chainCode: string;
 
   /**
    * A human-readable representation of the BIP-44 HD tree path of this node.
@@ -532,8 +542,8 @@ const dogecoinNode = await wallet.request({
 // In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
 const deriveDogecoinAddress = getBIP44AddressKeyDeriver(dogecoinNode);
 
-// These are Node.js Buffer representations of the extended private keys for
-// the respective addresses.
+// These are BIP-44 nodes containing the extended private keys for
+// the respective derivation paths.
 
 // m / 44' / 3' / 0' / 0 / 0
 const addressKey0 = deriveDogecoinAddress(0);
