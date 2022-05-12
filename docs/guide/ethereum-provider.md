@@ -499,5 +499,5 @@ Use [`message`](#message) instead.
 :::
 
 ```typescript
-ethereum.on('notification', handler: (payload: any) => void);
+ethereum.on('notification', handler: (payload: any) => );
 ```
