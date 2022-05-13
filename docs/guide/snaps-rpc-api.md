@@ -1,11 +1,11 @@
 # JSON-RPC API
 
-::: tip Only Available in MetaMask Flask
-Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+::: tip Developer Preview Software 
+Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
 :::
 
 ## Table of Contents
