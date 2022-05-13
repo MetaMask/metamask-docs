@@ -1,14 +1,10 @@
 # Development Guide
 
-::: tip Only Available in MetaMask Flask
-[Snaps](./snaps.html) is only available in [MetaMask Flask](https://metamask.io/flask).
+::: tip Developer Preview Software 
+Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
-::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
-:::
-
-Developing a snap is much like developing any JavaScript project, but there are some things that may be new even to a seasoned developer.
+Developing a snap is much like developing any JavaScript project, but there are some things that may be new even to a seasoned developer. 
 Read on to learn more!
 
 ## Table of Contents
@@ -27,7 +23,8 @@ Executing `mm-snap --help` will provide detailed usage instructions.
 This guide assumes that you've completed the ["Getting Started" tutorial](./snaps.html#getting-started).
 :::
 
-So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap](https://github.com/MetaMask/template-snap) repository, and have served the "Hello, World!" snap locally. It's time to develop your own snap.
+So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap](https://github.com/MetaMask/template-snap) repository, and have served the "Hello, World!" snap locally. 
+It's time to develop your own snap.
 
 A snap is a JavaScript program that, conceptually, runs in a sandboxed environment inside MetaMask.
 At the moment, snaps must be distributed as npm packages on the official npm registry (`https://registry.npmjs.org/`), but different distribution mechanisms will be supported in the future.
@@ -317,12 +314,18 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 ## Resources and Tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
-
-MetaMask also maintains a growing list of tools to help developers debug, build and maintain Snaps:
+MetaMask maintains a growing list of tools to help developers debug, build and maintain Snaps:
 
 - [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
 - [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
-- [5-Minute Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
+- Snaps Tutorials: 
+  - A 5-minute tutorial that uses the `network-access` permission: [Gas Fee Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
+  - A 30-minute tutorial that uses the `manageState` permission: [Address Book Snap Tutorial](https://github.com/Montoya/address-book-snap-tutorial#readme)
 
-Finally, if you need help, you can ask for help in the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
+You can also try the following example snaps. Each one is fully functional and open-source:
+
+  - [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
+  - [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+  - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+
+Finally, if you need help, you can ask for help in our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions). 
