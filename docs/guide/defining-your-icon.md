@@ -9,5 +9,5 @@ The tag's `href` attribute will be used for assigning the site icon.
 ```html
 <head>
   <link rel="shortcut icon" href="https://your-site.com/your-icon.png" />
-</head>
+</head>Github
 ```
