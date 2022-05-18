@@ -1,7 +1,7 @@
 # Development Guide
 
 ::: tip Developer Preview Software 
-Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
+[Snaps](./snaps.html) is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 Developing a snap is much like developing any JavaScript project, but there are some things that may be new even to a seasoned developer. 
@@ -314,18 +314,20 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 ## Resources and Tools
 
-MetaMask maintains a growing list of tools to help developers debug, build and maintain Snaps:
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:  
+
+- [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
+- [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+
+You can also follow these tutorials which will walk you through the steps to develop and test a Snap: 
+
+- A 5-minute tutorial that uses the `network-access` permission: [Gas Fee Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
+- A 30-minute tutorial that uses the `manageState` permission: [Address Book Snap Tutorial](https://github.com/Montoya/address-book-snap-tutorial#readme)
+
+MetaMask also maintains tools to help developers debug, build and maintain Snaps:
 
 - [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
 - [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
-- Snaps Tutorials: 
-  - A 5-minute tutorial that uses the `network-access` permission: [Gas Fee Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
-  - A 30-minute tutorial that uses the `manageState` permission: [Address Book Snap Tutorial](https://github.com/Montoya/address-book-snap-tutorial#readme)
 
-You can also try the following example snaps. Each one is fully functional and open-source:
-
-  - [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
-  - [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
-  - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
-
-Finally, if you need help, you can ask for help in our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions). 
+Finally, if you need help, you can ask for help in our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-skunkworks/issues). 
