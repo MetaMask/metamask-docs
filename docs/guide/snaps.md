@@ -61,8 +61,8 @@ Open up a new terminal window, and do the following:
   - This will install and/or use the recommended NVM version from `.nvmrc`.
 - Run `yarn install && yarn build:clean && yarn serve`.
   1. This first runs the commands needed to install dependencies.
-  2. If there is a `dist/` folder, it is then cleaned before the build command is run.
-  3. Finally, the dapp is served on `http://localhost:8080`.
+  1. If there is a `dist/` folder, it is then cleaned before the build command is run.
+  1. Finally, the dapp is served on `http://localhost:8080`.
 
 Your terminal window should now be serving the example snap locally. Time to see the functionality in action!
 
