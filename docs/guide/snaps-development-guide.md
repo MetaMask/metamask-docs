@@ -278,10 +278,14 @@ If you run into a build or eval issue that you can't solve on your own, please c
 
 #### Using Other Build Tools
 
-If `mm-snap build` isn't enough to bundle your snap — if you are using TypeScript, for example — you will have to compose `mm-snap build` with the rest of your build process.
-If you have to complete any build steps before running `mm-snap build`, simply put your intermediate build files in a temporary directory and use the main entry point there as your `--src` argument to `mm-snap build`.
+If you prefer building your snap with a build system you are more comfortable with, we have released severals plugins for other build systems that you can use. We currently support:
+- [Webpack](https://www.npmjs.com/package/@metamask/snaps-webpack-plugin)
+- [Rollup](https://www.npmjs.com/package/@metamask/rollup-plugin-snaps)
+- [Browserify](https://www.npmjs.com/package/@metamask/snaps-browserify-plugin)
 
-If you have to run any build steps after `mm-snap build`, remember that the file you ship must be a single `.js` file, and that you must run `mm-snap manifest --fix` to ensure that the manifest `shasum` value is correct.
+For examples on how to set up these build systems yourself, please visit our [examples](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples).
+
+We still recommend using our CLI `mm-snap` to make sure your manifest `shasum` value is correct by running `mm-snap manifest --fix` after creating your bundle. You may also benefit from running `mm-snap eval` to detect any SES issues up front.
 
 ### Testing Your Snap
 
