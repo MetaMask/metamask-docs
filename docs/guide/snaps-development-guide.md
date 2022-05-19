@@ -157,7 +157,7 @@ Snaps exist in order to modify the functionality of MetaMask at runtime while on
 As we have seen in the [introduction to snaps](./snaps.html) and this guide, snaps can:
 
 1. Extend the dapp-facing MetaMask JSON-RPC API in arbitrary ways.
-2. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
+1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
 
 In this section, we'll go into detail about how to actually develop a snap and overcome common issues encountered during development.
 
@@ -172,7 +172,7 @@ This does not mean that you can't create long-running snaps, but it does mean th
 A snap is considered "unresponsive" if:
 
 1. It has not received a JSON-RPC request for 30 seconds.
-2. It takes more than 60 seconds to process a JSON-RPC request.
+1. It takes more than 60 seconds to process a JSON-RPC request.
 
 Stopped snaps are started whenever they receive a JSON-RPC request, unless they have been disabled.
 If a snap is disabled, the user must re-enable it before it can start again.
@@ -235,8 +235,8 @@ The execution environment is instrumented in this way to:
 
 1. Prevent snaps from influencing any other running code, including MetaMask itself.
    - In plain terms, to prevent all snaps from polluting the global environment and malicious snaps from stealing the user's stuff.
-2. Prevent snaps from accessing sensitive JavaScript APIs (like `fetch`) without permission.
-3. Ensure that the execution environment is "fully virtualizable", i.e. platform-independent.
+1. Prevent snaps from accessing sensitive JavaScript APIs (like `fetch`) without permission.
+1. Ensure that the execution environment is "fully virtualizable", i.e. platform-independent.
 
 This allows us to safely execute snaps anywhere, without the snap needing to worry about where and how it is executed.
 
@@ -303,6 +303,21 @@ Follow these instructions to inspect the background process and view its console
   - Find the MetaMask extension
   - Click on "Details"
   - Under "Inspect Views", click `background.html`
+
+### Publishing Your Snap
+
+Snaps are npm packages, so publishing a Snap is as simple as publishing an npm package.
+Refer to the [npm cli documentation](https://docs.npmjs.com/cli/v8/commands/npm-publish) for details on publishing to the public registry.
+Take note of the following details specific to Snaps:
+
+- The version in `package.json` and `snap.manifest.json` must match
+- The image specified in `iconPath` in the manifest file will be used as the icon displayed when installing and displaying confirmations from the Snap
+
+After publishing the Snap, any dapp can connect to the Snap by using the snapId `npm:[packageName]`.
+
+### Updating Your Snap
+
+If you need to update your Snap, simply publish a new version to npm. Users will get the updated Snap the next time they connect to it via a dapp.
 
 ### Distributing Your Snap
 
