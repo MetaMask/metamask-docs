@@ -1,6 +1,6 @@
 # Introduction
 
-::: tip Developer Preview Software 
+::: tip Developer Preview Software
 Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
@@ -77,7 +77,7 @@ Once you've connected to Flask, smash that `Send Hello` button, and watch the sn
 ## Where to Go from Here
 
 - If you're interested in developing your own snap, your next destination is probably [the Snaps development guide](./snaps-development-guide.html).
-- You can also try the following example snaps. Each one is fully functional and open-source:  
+- You can also try the following example snaps. Each one is fully functional and open-source:
   - [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
   - [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
   - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
