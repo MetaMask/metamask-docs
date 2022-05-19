@@ -191,7 +191,7 @@ You can find an example of how to do this in the [template snap's manifest](http
 
 Snaps do not get access to any sensitive APIs or features by default, and Internet access is no exception to that rule.
 To access the Internet, you must specify the permission `endowment:network-access` in the `initialPermissions` of your `snap.manifest.json` file.
-This will grant you access to the global `fetch` API.
+This will grant you access to the global `fetch` and `WebSocket` APIs.
 Other global network APIs may be made available in the future.
 
 ::: tip "Endowment"?
