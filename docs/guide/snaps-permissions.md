@@ -8,7 +8,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
 :::
 
-To access certain powerful JavaScript globals or JSON-RPC methods, your snap may need to request permission from the user. Snaps follow the [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and your snaps required permissions must be specified in the `initialPermissions` field of your `snap.manifest.json` file.
+To access certain powerful JavaScript globals or JSON-RPC methods, your snap may need to request permission from the user. Snaps follow the [EIP-2255 wallet permissions specification](https://eips.ethereum.org/EIPS/eip-2255), and your snap's required permissions must be specified in the `initialPermissions` field of your `snap.manifest.json` file.
 
 ## Table of Contents
 
