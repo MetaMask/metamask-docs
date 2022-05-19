@@ -315,10 +315,6 @@ Take note of the following details specific to Snaps:
 
 After publishing the Snap, any dapp can connect to the Snap by using the snapId `npm:[packageName]`.
 
-### Updating Your Snap
-
-If you need to update your Snap, simply publish a new version to npm. Users will get the updated Snap the next time they connect to it via a dapp.
-
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
