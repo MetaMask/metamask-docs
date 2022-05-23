@@ -634,8 +634,7 @@ enum NotificationType {
   native = 'native',
 
   /**
-   * A in-app notification stored in the metamask state.
-   * Can be found in the notification panel.
+   * An in-app notification showed inside the MetaMask UI
    */
   inApp = 'inApp',
 }
@@ -647,7 +646,7 @@ enum NotificationType {
 
 #### Description
 
-Calling this method causes a notification to be added in the MetaMask UI.
+Calling this method shows a notification natively in the browser or in MetaMask.
 The contents and the way the notification is displayed depend on the parameters, see above for their meaning and format.
 
 #### Example
