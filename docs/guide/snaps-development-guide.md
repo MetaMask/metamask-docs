@@ -211,6 +211,33 @@ This means that many snaps will have to rely on web pages (i.e., dapps) and thei
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
 
+#### Detecting the User's MetaMask Version
+
+When developing a website that depends on Snaps, it's important to know whether MetaMask Flask is installed.
+For this purpose, we recommend using the [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider)
+package [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
+RPC method as demonstrated in the following snippet:
+
+```js
+import detectEthereumProvider from '@metamask/detect-provider';
+
+// This resolves to the value of window.ethereum or null
+const provider = await detectEthereumProvider();
+
+// web3_clientVersion returns the installed MetaMask version as a string
+const isFlask = (
+  await provider?.request({ method: 'web3_clientVersion' })
+)?.includes('flask');
+
+if (provider && isFlask) {
+  console.log('MetaMask Flask successfully detected!');
+
+  // Now you can use Snaps!
+} else {
+  console.error('Please install MetaMask Flask!', error);
+}
+```
+
 ### The Snap Execution Environment
 
 Snaps execute in a sandboxed environment that's running Secure EcmaScript (SES, see [below](#secure-ecmascript-ses)).
