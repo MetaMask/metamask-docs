@@ -41,6 +41,9 @@ template-snap/
 ├─ ... (other stuff)
 ```
 
+Source files other than `index.js` are located through its imports.
+The defaults can be overwritten using the `snap.config.json` [config file](#the-snap-configuration-file).
+
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
 Nevertheless, cloning the [template snap repository](https://github.com/MetaMask/template-snap) is probably the best way to get started.
@@ -142,6 +145,37 @@ The [snaps publishing specification](https://github.com/MetaMask/specifications/
 In the course of developing your snap, you will have to modify some of the manifest fields manually.
 For example, if you change the location of the (optional) icon SVG file, `source.location.npm.iconPath` must be updated to match.
 Meanwhile, the CLI will update some of the fields for you, e.g. `source.shasum` whenever you run `mm-snap build` (by default) or `mm-snap manifest --fix`.
+
+### The Snap Configuration File
+
+`snap.config.js` can be placed in the project root directory. It can override cli options - the property `cliOptions` should have string keys matching command arguments. Values become argument defaults, which can still be overriden on the command line. It would look something like this:
+
+```javascript
+module.exports = {
+  cliOptions: {
+    src: 'lib/index.js',
+    dist: 'out',
+    port: 9000,
+  },
+};
+```
+
+Should you want to customize your build process, you can provide `bundlerCustomizer` property. It's a function that takes one argument, the [browserify object](https://github.com/browserify/browserify#api-example) which we use internally to bundle the snap. You can transform it in any way you want, for example adding plugins. The `bundleCustomizer` function would look something like this:
+
+```javascript
+const brfs = require('brfs');
+
+module.exports = {
+  cliOptions: {
+    /* ... */
+  },
+  bundlerCustomizer: (bundler) => {
+    bundler.transform(brfs);
+  },
+};
+```
+
+The configuration file should not be published.
 
 ### The Snap Bundle File
 
