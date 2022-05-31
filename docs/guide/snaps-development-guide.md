@@ -148,7 +148,7 @@ Meanwhile, the CLI will update some of the fields for you, e.g. `source.shasum` 
 
 ### The Snap Configuration File
 
-`snap.config.js` can be placed in the project root directory. It can override cli options - the property `cliOptions` should have string keys matching command arguments. Values become argument defaults, which can still be overriden on the command line. It would look something like this:
+`snap.config.js` should be placed in the project root directory. It can override cli options - the property `cliOptions` should have string keys matching command arguments. Values become argument defaults, which can still be overridden on the command line. It would look something like this:
 
 ```javascript
 module.exports = {
@@ -160,7 +160,7 @@ module.exports = {
 };
 ```
 
-Should you want to customize your build process, you can provide `bundlerCustomizer` property. It's a function that takes one argument, the [browserify object](https://github.com/browserify/browserify#api-example) which we use internally to bundle the snap. You can transform it in any way you want, for example adding plugins. The `bundleCustomizer` function would look something like this:
+If you want to customize the Browserify build process, you can provide `bundlerCustomizer` property. It's a function that takes one argument, the [browserify object](https://github.com/browserify/browserify#api-example) which we use internally to bundle the snap. You can transform it in any way you want, for example adding plugins. The `bundleCustomizer` function would look something like this:
 
 ```javascript
 const brfs = require('brfs');
