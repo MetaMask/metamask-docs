@@ -279,6 +279,7 @@ If you run into a build or eval issue that you can't solve on your own, please c
 #### Using Other Build Tools
 
 If you prefer building your snap with a build system you are more comfortable with, we have released severals plugins for other build systems that you can use. We currently support:
+
 - [Webpack](https://www.npmjs.com/package/@metamask/snaps-webpack-plugin)
 - [Rollup](https://www.npmjs.com/package/@metamask/rollup-plugin-snaps)
 - [Browserify](https://www.npmjs.com/package/@metamask/snaps-browserify-plugin)
