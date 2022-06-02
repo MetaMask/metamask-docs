@@ -18,10 +18,11 @@ Here are a couple live web applications that let you enter your token details, a
 If you'd like to integrate suggesting a token into your own web app, you can follow this code snippet to implement it:
 
 ```javascript
-const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
-const tokenSymbol = 'TUT';
+const tokenAddress = '0xc3157da1260D7516B67582536E4C0F5f23950014';
+const tokenSymbol = 'CKO';
 const tokenDecimals = 18;
-const tokenImage = 'http://placekitten.com/200/300';
+const tokenImage = 'http://placekitten.com/320/320![logo](https://user-images.githubusercontent.com/106775715/171736383-f8bd0941-81b4-4986-b2b8-2cc0e3747a08.png)
+';
 
 try {
   // wasAdded is a boolean. Like any RPC method, an error may be thrown.
