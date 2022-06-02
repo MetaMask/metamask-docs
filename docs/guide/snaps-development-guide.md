@@ -53,6 +53,10 @@ In this section, we'll review the major components of a snap: the source code, t
 
 ### The Snap Source Code
 
+::: tip TypeScript Support
+This guide currently covers writing snaps in JavaScript, but TypeScript is also supported. See this [example](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples/typescript) for more information.
+:::
+
 If you're familiar with JavaScript or TypeScript development of any kind, developing a snap should feel quite familiar to you.
 Consider this trivial snap, which we'll call `hello-snap`:
 
