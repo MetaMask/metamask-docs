@@ -61,7 +61,7 @@ If you're familiar with JavaScript or TypeScript development of any kind, develo
 Consider this trivial snap, which we'll call `hello-snap`:
 
 ```javascript
-module.exports.onMessage = (async (originString, requestObject) => {
+module.exports.onMessage = async (originString, requestObject) => {
   switch (requestObject.method) {
     case 'hello':
       return 'world!';
@@ -69,7 +69,7 @@ module.exports.onMessage = (async (originString, requestObject) => {
     default:
       throw new Error('Method not found.');
   }
-});
+};
 ```
 
 In order to communicate with the outside world, the snap must implement its own RPC API by exposing an exported function called `onMessage`.
