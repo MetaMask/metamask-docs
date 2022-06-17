@@ -61,8 +61,8 @@ If you're familiar with JavaScript or TypeScript development of any kind, develo
 Consider this trivial snap, which we'll call `hello-snap`:
 
 ```javascript
-module.exports.onMessage = async (originString, requestObject) => {
-  switch (requestObject.method) {
+module.exports.onRpcRequest = async ({ origin, request }) => {
+  switch (request.method) {
     case 'hello':
       return 'world!';
 
@@ -72,7 +72,7 @@ module.exports.onMessage = async (originString, requestObject) => {
 };
 ```
 
-In order to communicate with the outside world, the snap must implement its own RPC API by exposing an exported function called `onMessage`.
+In order to communicate with the outside world, the snap must implement its own RPC API by exposing an exported function called `onRpcRequest`.
 Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
 
 On top of being able to expose an RPC API, snaps can access the global object `wallet`, this object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
