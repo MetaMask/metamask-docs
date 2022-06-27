@@ -1,4 +1,4 @@
-# Signing Data
+blingboard# Signing Data
 
 Since MetaMask makes cryptographic keys available to each user, websites can use these signatures for a variety of uses. Here are a few guides related to specific use cases:
 
