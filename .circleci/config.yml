@@ -1,99 +1,26 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-workflows:
-  test-and-deploy:
-    jobs:
-      - prep-deps
-      - lint:
-          requires:
-            - prep-deps
-      - build:
-          requires:
-            - prep-deps
-            - lint
-      - deploy:
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - prep-deps
-            - lint
-            - build
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  prep-deps:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: circleci/node:12
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          name: Install deps
-          command: |
-            yarn --frozen-lockfile --ignore-scripts
-      - persist_to_workspace:
-          root: .
-          paths:
-            - node_modules
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-  lint:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Lint
-          command: |
-            yarn lint
-
-  build:
-    docker:
-      - image: circleci/node:12
-    environment:
-      - TARGET_BRANCH: gh-pages
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Build
-          command: |
-            if [[ "$CIRCLE_BRANCH" == "main" ]]
-            then
-              if [[ -z "$ALGOLIA_API_KEY" || -z "$ALGOLIA_INDEX_NAME" ]]
-              then
-                printf '%s\n' 'ERROR: Algolia API key or index name not set.' >&2
-                exit 1
-              fi
-            else
-              printf '%s\n' 'Non-main build does not require Algolia API key or index name'
-            fi
-            yarn build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - docs/dist/
-
-  deploy:
-    docker:
-      - image: circleci/node:12
-    environment:
-      - TARGET_BRANCH: gh-pages
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Deploy site
-          command: |
-            git config --global user.email $GH_EMAIL
-            git config --global user.name $GH_NAME
-            git checkout $TARGET_BRANCH
-            rm -rf `ls -a | grep "[^.|..|.git|.nojekyll|docs|LICENSE|CNAME|index.html]"`
-            cp -r docs/dist/* .
-            rm -rf docs
-            git add -A
-            git commit -m "Automated deployment: ${CIRCLE_SHA1} [ci skip]" --allow-empty
-            git push -f origin $TARGET_BRANCH
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello
