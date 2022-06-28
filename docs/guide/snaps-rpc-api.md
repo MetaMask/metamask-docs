@@ -540,16 +540,16 @@ const dogecoinNode = await wallet.request({
 
 // Next, we'll create an address key deriver function for the Dogecoin coin_type node.
 // In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
-const deriveDogecoinAddress = getBIP44AddressKeyDeriver(dogecoinNode);
+const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
 
 // These are BIP-44 nodes containing the extended private keys for
 // the respective derivation paths.
 
 // m / 44' / 3' / 0' / 0 / 0
-const addressKey0 = deriveDogecoinAddress(0);
+const addressKey0 = await deriveDogecoinAddress(0);
 
 // m / 44' / 3' / 0' / 0 / 1
-const addressKey1 = deriveDogecoinAddress(1);
+const addressKey1 = await deriveDogecoinAddress(1);
 
 // Now, you can ask the user to e.g. sign transactions!
 ```
