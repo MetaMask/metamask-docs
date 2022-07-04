@@ -220,7 +220,7 @@ const MetaMaskClientCheck = () => {
     onboardButton.innerText = 'Connect';
     //When the button is clicked we call this function to connect the users MetaMask Wallet
     onboardButton.onclick = onClickConnect;
-    //The button is now disabled
+    //The button is now enabled
     onboardButton.disabled = false;
   }
 };
