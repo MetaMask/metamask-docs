@@ -1,7 +1,7 @@
 # Introduction
 
-::: tip Only Available in MetaMask Flask
-Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+::: tip Developer Preview Software
+Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 ## What is Snaps?
@@ -19,7 +19,7 @@ In addition, they also allow websites to install and communicate with individual
 
 ### Current Functionality
 
-At present, snaps can create new RPC methods for websites to call, can call many of the same RPC methods that websites can call, and access a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabililities to snaps.
+At present, snaps can create new RPC methods for websites to call, can call many of the same RPC methods that websites can call, and access a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabilities to snaps.
 
 At the moment, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on a website that can communicate with the snap.
 
@@ -42,7 +42,7 @@ There are many simple snaps available for you to learn from and begin to underst
 
 ### Installing MetaMask Flask
 
-[MetaMask Flask](https://metamask.io/flask) is a separate extension for developers that provides access to additional unstable APIs. The goal of Flask is to maximize developer control, so that we can learn the full extent of what developers want to do with MetaMask and incorporate those lessons into the main MetaMask distribution. Snaps is the first feature to be released on Flask.
+[MetaMask Flask](https://metamask.io/flask) is a separate extension for developers that provides access to additional unstable APIs. The goal of Flask is to maximize developer control, so that we can learn the full extent of what developers want to do with MetaMask and incorporate those lessons into the stable MetaMask distribution. Snaps is the first feature to be released on Flask.
 
 - First, in a Firefox or Chromium browser, create a new browser profile or disable any existing installed versions of MetaMask.
   - Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
@@ -52,7 +52,7 @@ There are many simple snaps available for you to learn from and begin to underst
 
 With Flask in your browser, it's time to plug something into it. If you don't want to download any code for the moment, check out the example snap [deployed here](https://metamask.github.io/template-snap/) and follow the instructions below under 'Interacting with the Snap'.
 
-If you're ready to jump in and see how a Snap looks on the backend, follow the steps below!
+If you're ready to jump in and see how a Snap looks under the hood, follow the steps below!
 
 Open up a new terminal window, and do the following:
 
@@ -76,8 +76,9 @@ Once you've connected to Flask, smash that `Send Hello` button, and watch the sn
 
 ## Where to Go from Here
 
-If you're interested in developing your own snap, your next destination is probably [the snaps development guide](./snaps-development-guide.html).
-
-You may also wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap/).
-
-Currently, snaps are discovered through word-of-mouth. As the system matures, MetaMask will provide means for both developers and users to discover snaps.
+- If you're interested in developing your own snap, your next destination is probably [the Snaps development guide](./snaps-development-guide.html).
+- You can also try the following example snaps. Each one is fully functional and open-source:
+  - [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
+  - [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+  - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+- If you have questions or need help, join our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions).

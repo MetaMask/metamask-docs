@@ -53,6 +53,7 @@ module.exports = (_ctx) => ({
   themeConfig: {
     repo: 'MetaMask/metamask-docs',
     docsDir: 'docs',
+    docsBranch: 'main',
     editLinks: true,
     logo: '/metamask-fox.svg',
     smoothScroll: true,
@@ -168,7 +169,12 @@ const guideSidebar = [
   {
     title: 'Snaps',
     collapsable: false,
-    children: ['snaps', 'snaps-development-guide', 'snaps-rpc-api'],
+    children: [
+      'snaps',
+      'snaps-development-guide',
+      'snaps-rpc-api',
+      'snaps-patching-dependencies',
+    ],
   },
   {
     title: 'Resources',

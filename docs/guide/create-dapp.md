@@ -214,13 +214,13 @@ const MetaMaskClientCheck = () => {
     //When the button is clicked we call th is function
     onboardButton.onclick = onClickInstall;
     //The button is now disabled
-    onboardButton.disabled = false;
+    onboardButton.disabled = true;
   } else {
     //If MetaMask is installed we ask the user to connect to their wallet
     onboardButton.innerText = 'Connect';
     //When the button is clicked we call this function to connect the users MetaMask Wallet
     onboardButton.onclick = onClickConnect;
-    //The button is now disabled
+    //The button is now enabled
     onboardButton.disabled = false;
   }
 };

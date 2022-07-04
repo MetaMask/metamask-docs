@@ -7,7 +7,7 @@ Since MetaMask makes cryptographic keys available to each user, websites can use
 
 ## Signing Data with MetaMask
 
-If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/danfinlay/js-eth-personal-sign-examples).
+If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/MetaMask/test-dapp).
 
 If you’d like to read our JavaScript implementations of these methods, they are all available in the npm package [eth-sig-util](https://github.com/MetaMask/eth-sig-util).
 
