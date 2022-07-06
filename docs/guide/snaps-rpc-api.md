@@ -609,12 +609,12 @@ await wallet.request({
 ```typescript
 interface SnapNotifyParams {
   /**
-   * Enum type to determine notification type.
+   * Enum determining the notification type.
    */
   type: NotificationType;
 
   /**
-   * A message to show on the notification.
+   * A message to show in the notification.
    */
   message: string;
 }
@@ -629,14 +629,16 @@ interface SnapNotifyParams {
 ```typescript
 enum NotificationType {
   /**
-   * A default browser notification
-   */
-  native = 'native',
-
-  /**
-   * An in-app notification showed inside the MetaMask UI
+   * A notification displayed in the MetaMask UI.
    */
   inApp = 'inApp',
+
+  /**
+   * A notification displayed in and by the browser. There is no guarantee that
+   * these will be displayed to the user, and we recommend using `inApp`
+   * notifications unless you have a compelling reason not to.
+   */
+  native = 'native',
 }
 ```
 
@@ -646,8 +648,9 @@ enum NotificationType {
 
 #### Description
 
-Calling this method shows a notification natively in the browser or in MetaMask.
-The contents and the way the notification is displayed depend on the parameters, see above for their meaning and format.
+Calling this method displays a notification in MetaMask or natively in the browser.
+The notification type and content are determined by the method's parameters.
+See above for their meaning and format.
 
 #### Example
 
@@ -657,7 +660,7 @@ await wallet.request({
   params: [
     {
       type: 'inApp',
-      message: `The message you want to display...`,
+      message: `Hello, world!`,
     },
   ],
 });
