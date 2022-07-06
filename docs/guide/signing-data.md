@@ -105,7 +105,7 @@ Hopefully soon we will also have good examples for parsing method input into str
 
 `message`: Completely open to what you would like the structure of it to be. Every field is optional.
 
-Below is an example of signing typed data with MetaMask. Reference [here](https://github.com/danfinlay/js-eth-personal-sign-examples)
+Below is an example of signing typed data with MetaMask. Reference [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 ### Example
 
