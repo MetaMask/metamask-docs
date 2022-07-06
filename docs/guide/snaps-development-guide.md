@@ -1,11 +1,7 @@
 # Development Guide
 
-::: tip Only Available in MetaMask Flask
-[Snaps](./snaps.html) is only available in [MetaMask Flask](https://metamask.io/flask).
-:::
-
-::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
+::: tip Developer Preview Software
+[Snaps](./snaps.html) is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 Developing a snap is much like developing any JavaScript project, but there are some things that may be new even to a seasoned developer.
@@ -27,7 +23,8 @@ Executing `mm-snap --help` will provide detailed usage instructions.
 This guide assumes that you've completed the ["Getting Started" tutorial](./snaps.html#getting-started).
 :::
 
-So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap](https://github.com/MetaMask/template-snap) repository, and have served the "Hello, World!" snap locally. It's time to develop your own snap.
+So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap](https://github.com/MetaMask/template-snap) repository, and have served the "Hello, World!" snap locally.
+It's time to develop your own snap.
 
 A snap is a JavaScript program that, conceptually, runs in a sandboxed environment inside MetaMask.
 At the moment, snaps must be distributed as npm packages on the official npm registry (`https://registry.npmjs.org/`), but different distribution mechanisms will be supported in the future.
@@ -44,6 +41,9 @@ template-snap/
 ├─ ... (other stuff)
 ```
 
+Source files other than `index.js` are located through its imports.
+The defaults can be overwritten using the `snap.config.json` [config file](#the-snap-configuration-file).
+
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
 Nevertheless, cloning the [template snap repository](https://github.com/MetaMask/template-snap) is probably the best way to get started.
@@ -52,6 +52,10 @@ Nevertheless, cloning the [template snap repository](https://github.com/MetaMask
 In this section, we'll review the major components of a snap: the source code, the manifest (and `package.json`), and the bundle file.
 
 ### The Snap Source Code
+
+::: tip TypeScript Support
+This guide currently covers writing snaps in JavaScript, but TypeScript is also supported. See this [example](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples/typescript) for more information.
+:::
 
 If you're familiar with JavaScript or TypeScript development of any kind, developing a snap should feel quite familiar to you.
 Consider this trivial snap, which we'll call `hello-snap`:
@@ -146,6 +150,37 @@ In the course of developing your snap, you will have to modify some of the manif
 For example, if you change the location of the (optional) icon SVG file, `source.location.npm.iconPath` must be updated to match.
 Meanwhile, the CLI will update some of the fields for you, e.g. `source.shasum` whenever you run `mm-snap build` (by default) or `mm-snap manifest --fix`.
 
+### The Snap Configuration File
+
+`snap.config.js` should be placed in the project root directory. It can override cli options - the property `cliOptions` should have string keys matching command arguments. Values become argument defaults, which can still be overridden on the command line. It would look something like this:
+
+```javascript
+module.exports = {
+  cliOptions: {
+    src: 'lib/index.js',
+    dist: 'out',
+    port: 9000,
+  },
+};
+```
+
+If you want to customize the Browserify build process, you can provide `bundlerCustomizer` property. It's a function that takes one argument, the [browserify object](https://github.com/browserify/browserify#api-example) which we use internally to bundle the snap. You can transform it in any way you want, for example adding plugins. The `bundleCustomizer` function would look something like this:
+
+```javascript
+const brfs = require('brfs');
+
+module.exports = {
+  cliOptions: {
+    /* ... */
+  },
+  bundlerCustomizer: (bundler) => {
+    bundler.transform(brfs);
+  },
+};
+```
+
+The configuration file should not be published.
+
 ### The Snap Bundle File
 
 Because of the way snaps are executed, they must be published as a single `.js` file containing the entire source code and all dependencies.
@@ -160,7 +195,7 @@ Snaps exist in order to modify the functionality of MetaMask at runtime while on
 As we have seen in the [introduction to snaps](./snaps.html) and this guide, snaps can:
 
 1. Extend the dapp-facing MetaMask JSON-RPC API in arbitrary ways.
-2. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
+1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
 
 In this section, we'll go into detail about how to actually develop a snap and overcome common issues encountered during development.
 
@@ -175,7 +210,7 @@ This does not mean that you can't create long-running snaps, but it does mean th
 A snap is considered "unresponsive" if:
 
 1. It has not received a JSON-RPC request for 30 seconds.
-2. It takes more than 60 seconds to process a JSON-RPC request.
+1. It takes more than 60 seconds to process a JSON-RPC request.
 
 Stopped snaps are started whenever they receive a JSON-RPC request, unless they have been disabled.
 If a snap is disabled, the user must re-enable it before it can start again.
@@ -214,6 +249,33 @@ This means that many snaps will have to rely on web pages (i.e., dapps) and thei
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
 
+#### Detecting the User's MetaMask Version
+
+When developing a website that depends on Snaps, it's important to know whether MetaMask Flask is installed.
+For this purpose, we recommend using the [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider)
+package [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
+RPC method as demonstrated in the following snippet:
+
+```js
+import detectEthereumProvider from '@metamask/detect-provider';
+
+// This resolves to the value of window.ethereum or null
+const provider = await detectEthereumProvider();
+
+// web3_clientVersion returns the installed MetaMask version as a string
+const isFlask = (
+  await provider?.request({ method: 'web3_clientVersion' })
+)?.includes('flask');
+
+if (provider && isFlask) {
+  console.log('MetaMask Flask successfully detected!');
+
+  // Now you can use Snaps!
+} else {
+  console.error('Please install MetaMask Flask!', error);
+}
+```
+
 ### The Snap Execution Environment
 
 Snaps execute in a sandboxed environment that's running Secure EcmaScript (SES, see [below](#secure-ecmascript-ses)).
@@ -238,8 +300,8 @@ The execution environment is instrumented in this way to:
 
 1. Prevent snaps from influencing any other running code, including MetaMask itself.
    - In plain terms, to prevent all snaps from polluting the global environment and malicious snaps from stealing the user's stuff.
-2. Prevent snaps from accessing sensitive JavaScript APIs (like `fetch`) without permission.
-3. Ensure that the execution environment is "fully virtualizable", i.e. platform-independent.
+1. Prevent snaps from accessing sensitive JavaScript APIs (like `fetch`) without permission.
+1. Ensure that the execution environment is "fully virtualizable", i.e. platform-independent.
 
 This allows us to safely execute snaps anywhere, without the snap needing to worry about where and how it is executed.
 
@@ -278,10 +340,15 @@ If you run into a build or eval issue that you can't solve on your own, please c
 
 #### Using Other Build Tools
 
-If `mm-snap build` isn't enough to bundle your snap — if you are using TypeScript, for example — you will have to compose `mm-snap build` with the rest of your build process.
-If you have to complete any build steps before running `mm-snap build`, simply put your intermediate build files in a temporary directory and use the main entry point there as your `--src` argument to `mm-snap build`.
+If you prefer building your snap with a build system you are more comfortable with, we have released severals plugins for other build systems that you can use. We currently support:
 
-If you have to run any build steps after `mm-snap build`, remember that the file you ship must be a single `.js` file, and that you must run `mm-snap manifest --fix` to ensure that the manifest `shasum` value is correct.
+- [Webpack](https://www.npmjs.com/package/@metamask/snaps-webpack-plugin)
+- [Rollup](https://www.npmjs.com/package/@metamask/rollup-plugin-snaps)
+- [Browserify](https://www.npmjs.com/package/@metamask/snaps-browserify-plugin)
+
+For examples on how to set up these build systems yourself, please visit our [examples](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples).
+
+We still recommend using our CLI `mm-snap` to make sure your manifest `shasum` value is correct by running `mm-snap manifest --fix` after creating your bundle. You may also benefit from running `mm-snap eval` to detect any SES issues up front.
 
 ### Testing Your Snap
 
@@ -307,6 +374,17 @@ Follow these instructions to inspect the background process and view its console
   - Click on "Details"
   - Under "Inspect Views", click `background.html`
 
+### Publishing Your Snap
+
+Snaps are npm packages, so publishing a Snap is as simple as publishing an npm package.
+Refer to the [npm cli documentation](https://docs.npmjs.com/cli/v8/commands/npm-publish) for details on publishing to the public registry.
+Take note of the following details specific to Snaps:
+
+- The version in `package.json` and `snap.manifest.json` must match
+- The image specified in `iconPath` in the manifest file will be used as the icon displayed when installing and displaying confirmations from the Snap
+
+After publishing the Snap, any dapp can connect to the Snap by using the snapId `npm:[packageName]`.
+
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
@@ -317,12 +395,20 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 ## Resources and Tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, and you may wish to check out the first functional key management snap ever made, [the Filecoin Snap, or `filsnap`](https://github.com/Chainsafe/filsnap).
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:
 
-MetaMask also maintains a growing list of tools to help developers debug, build and maintain Snaps:
+- [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
+- [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+
+You can also follow these tutorials which will walk you through the steps to develop and test a Snap:
+
+- A 5-minute tutorial that uses the `network-access` permission: [Gas Fee Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
+- A 30-minute tutorial that uses the `manageState` permission: [Address Book Snap Tutorial](https://github.com/Montoya/address-book-snap-tutorial#readme)
+
+MetaMask also maintains tools to help developers debug, build and maintain Snaps:
 
 - [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
 - [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
-- [5-Minute Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
 
-Finally, if you need help, you can ask for help in the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
+Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-skunkworks/issues).

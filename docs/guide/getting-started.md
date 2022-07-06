@@ -152,7 +152,7 @@ async function getAccount() {
 
 Convenience libraries exist for a variety of reasons.
 
-Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and on.
+Some of them simplify the creation of specific user interface elements, some entirely manage the user account onboarding, and others give you a variety of methods of interacting with smart contracts, for a variety of API preferences, from promises, to callbacks, to strong types, and so on.
 
 The provider API itself is very simple, and wraps
 [Ethereum JSON-RPC](https://eth.wiki/json-rpc/API#json-rpc-methods)

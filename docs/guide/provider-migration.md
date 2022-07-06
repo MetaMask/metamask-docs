@@ -100,7 +100,6 @@ We created the [**MetaMask Legacy Web3 Extension**](https://github.com/MetaMask/
 
 As with the regular extension, it’s critical that you only install from the official browser extension stores. Please follow the relevant link below to install the Legacy Web3 extension in your browser:
 
-- [Chrome, Brave](https://chrome.google.com/webstore/detail/metamask-legacy-web3/dgoegggfhkapjphahmgihfgemkgecdgl)
 - [Edge](https://microsoftedge.microsoft.com/addons/detail/metamask-legacy-web3/obkfjbjkiofoponpkmphnpaaadebfloh?hl=en-US)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/metamask-legacy-web3/)
 
