@@ -482,9 +482,19 @@ interface BIP44CoinTypeNode {
   readonly depth: 2;
 
   /**
-   * The Base64-encoded string representation of the key material for this node.
+   * The hexadecimal-encoded string representation of the private key for this node.
    */
-  readonly key: string;
+  readonly privateKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the public key for this node.
+   */
+  readonly publicKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the chain code for this node.
+   */
+  readonly chainCode: string;
 
   /**
    * A human-readable representation of the BIP-44 HD tree path of this node.
@@ -530,16 +540,16 @@ const dogecoinNode = await wallet.request({
 
 // Next, we'll create an address key deriver function for the Dogecoin coin_type node.
 // In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
-const deriveDogecoinAddress = getBIP44AddressKeyDeriver(dogecoinNode);
+const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
 
-// These are Node.js Buffer representations of the extended private keys for
-// the respective addresses.
+// These are BIP-44 nodes containing the extended private keys for
+// the respective derivation paths.
 
 // m / 44' / 3' / 0' / 0 / 0
-const addressKey0 = deriveDogecoinAddress(0);
+const addressKey0 = await deriveDogecoinAddress(0);
 
 // m / 44' / 3' / 0' / 0 / 1
-const addressKey1 = deriveDogecoinAddress(1);
+const addressKey1 = await deriveDogecoinAddress(1);
 
 // Now, you can ask the user to e.g. sign transactions!
 ```
