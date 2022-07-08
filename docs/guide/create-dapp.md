@@ -164,7 +164,7 @@ const MetaMaskClientCheck = () => {
     //When the button is clicked we call this function
     onboardButton.onclick = onClickInstall;
     //The button is now disabled
-    onboardButton.disabled = false;
+    onboardButton.disabled = true;
   } else {
     //If it is installed we change our button text
     onboardButton.innerText = 'Connect';
