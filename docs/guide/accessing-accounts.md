@@ -4,7 +4,7 @@ User accounts are used in a variety of contexts in Ethereum, including as identi
 
 - `eth_sendTransaction`
 - `eth_sign` (insecure and unadvised to use)
-- `eth_personalSign`
+- `personal_sign`
 - `eth_signTypedData`
 
 Once you've [connected to a user](./getting-started.html), you can always re-check the current account by checking `ethereum.selectedAddress`.
