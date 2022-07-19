@@ -61,21 +61,23 @@ If you're familiar with JavaScript or TypeScript development of any kind, develo
 Consider this trivial snap, which we'll call `hello-snap`:
 
 ```javascript
-wallet.registerRpcMessageHandler(async (originString, requestObject) => {
-  switch (requestObject.method) {
+module.exports.onRpcRequest = async ({ origin, request }) => {
+  switch (request.method) {
     case 'hello':
       return 'world!';
 
     default:
       throw new Error('Method not found.');
   }
-});
+};
 ```
 
-`wallet` is a global object that exposes the MetaMask Snap API, much like `window.ethereum` exposes our API to dapps.
+In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
+Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
+
+In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
+This object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
 Any message sent via `wallet.request()` will be received and processed by MetaMask.
-In order to communicate with the outside world, the snap must implement its own RPC API by passing a handler function to `registerRpcMessageHandler`.
-Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), the handler function will be called with the above parameters.
 
 If a dapp wanted to use `hello-snap`, it would do something like this:
 
@@ -104,7 +106,7 @@ console.log(hello); // 'world!'
 The snap's RPC API is completely up to you, so long as it's a valid [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 ::: tip Does my snap need to have an RPC API?
-Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip calling `registerRpcMessageHandler`.
+Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip exporting `onRpcRequest`.
 However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
 :::
 
@@ -218,7 +220,7 @@ If a snap is disabled, the user must re-enable it before it can start again.
 ### Permissions
 
 Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
-Snaps can effectively expand the MetaMask RPC API by implementing their own using `wallet.registerRpcMessageHandler()`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
+Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
 You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap/blob/main/snap.manifest.json).
 
