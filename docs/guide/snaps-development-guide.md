@@ -72,10 +72,11 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-In order to communicate with the outside world, the snap must implement its own RPC API by exposing an exported function called `onRpcRequest`.
+In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
 Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
 
-On top of being able to expose an RPC API, snaps can access the global object `wallet`, this object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
+In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
+This object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
 Any message sent via `wallet.request()` will be received and processed by MetaMask.
 
 If a dapp wanted to use `hello-snap`, it would do something like this:
