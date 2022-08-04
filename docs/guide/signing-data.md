@@ -197,16 +197,16 @@ signTypedDataV4Button.addEventListener('click', function (event) {
     },
   });
 
-  var from = web3.eth.accounts[0];
+  var from = web3.eth.getAccounts();
 
-  var params = [from, msgParams];
+  var params = [from[0], msgParams];
   var method = 'eth_signTypedData_v4';
 
   web3.currentProvider.sendAsync(
     {
       method,
       params,
-      from,
+      from: from[0],
     },
     function (err, result) {
       if (err) return console.dir(err);
