@@ -344,7 +344,7 @@ MetaMask stringently validates the parameters for this method, and will reject t
 if any parameter is incorrectly formatted.
 In addition, MetaMask will automatically reject the request under the following circumstances:
 
-- If the RPC endpoint doesn't respond to RPC calls.
+- If the RPC endpoint doesn't respond to RPC calls from the extension's background page (if you use an origin allowlist, `chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn` must be allowed).
 - If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
 - If the chain ID corresponds to any default MetaMask chains.
 
