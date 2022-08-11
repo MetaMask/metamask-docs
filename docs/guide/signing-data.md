@@ -125,7 +125,7 @@ Below is an example of signing typed data with MetaMask. Reference [here](https:
 ::: tab JavaScript
 
 ```javascript
-signTypedDataV4Button.addEventListener('click', function (event) {
+signTypedDataV4Button.addEventListener('click', async function (event) {
   event.preventDefault();
 
   const msgParams = JSON.stringify({
@@ -197,7 +197,7 @@ signTypedDataV4Button.addEventListener('click', function (event) {
     },
   });
 
-  var from = web3.eth.getAccounts();
+  var from = await web3.eth.getAccounts();
 
   var params = [from[0], msgParams];
   var method = 'eth_signTypedData_v4';
