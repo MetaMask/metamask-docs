@@ -345,6 +345,7 @@ if any parameter is incorrectly formatted.
 In addition, MetaMask will automatically reject the request under the following circumstances:
 
 - If the RPC endpoint doesn't respond to RPC calls.
+  NOTE: Calls are made from the extension's background page, _not_ the foreground page. If you use an origin allowlist, they will be blocked.
 - If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
 - If the chain ID corresponds to any default MetaMask chains.
 
