@@ -356,6 +356,10 @@ We still recommend using our CLI `mm-snap` to make sure your manifest `shasum` v
 
 Test your snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its RPC methods from a web page.
 
+### Iterating On Your Snap
+
+Watch your Snap's source code and host it locally at the same time using `mm-snap watch`. Every time you make a change to your snap, the source code will automatically be re-bundled to the `dist` directory. You'll then have to [reinstall your snap](#reinstalling-your-snap).
+
 ### Debugging Your Snap
 
 To debug your snap, your best bet is to use `console.log` and inspecting the MetaMask background process.
@@ -363,7 +367,7 @@ You can add your log statements in your source coder and then build your snap, o
 Recall that the manifest shasum must match the contents of your bundle at the time that MetaMask fetches your snap.
 
 ::: tip Remember to Reinstall Your Snap
-Because adding logs modifies the snap source code, you have to reinstall the snap whenever you add a log statement.
+Because adding logs modifies the snap source code, you have to [reinstall the snap](#reinstalling-your-snap) whenever you add a log statement.
 The process of reinstalling your snap during local development will improve in the next release of MetaMask Flask, and soon be available in prerelease builds.
 :::
 
@@ -375,6 +379,14 @@ Follow these instructions to inspect the background process and view its console
   - Find the MetaMask extension
   - Click on "Details"
   - Under "Inspect Views", click `background.html`
+
+### Reinstalling your snap
+Every time you make a change to the source code of your snap, or modify the snap bundle manually, you'll have to reinstall your snap. The currently recommended way to do this is:
+
+1. Go to Metamask > Settings > Snaps
+2. Locate your snap and press "See details"
+3. Scroll to the bottom of the details screen and press "Remove Snap"
+4. Re-execute the `wallet_enable` method from your dapp by pressing the button you created for this purpose
 
 ### Publishing Your Snap
 
