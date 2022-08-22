@@ -556,11 +556,6 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 ### `snap_manageState`
 
-::: danger Plaintext Data Storage
-The data stored by this method is persisted to disk in unencrypted / plaintext form.
-**Never** store any secrets using this method.
-:::
-
 ::: warning Only Callable By
 
 - Snaps
@@ -579,8 +574,8 @@ The data stored by this method is persisted to disk in unencrypted / plaintext f
 
 #### Description
 
-This method allows the snap to persist some data to disk in plaintext form and retrieve it at will.
-Since the data is in plaintext, the method should **never** be used to store secrets of any kind.
+This method allows the snap to persist some data to disk in encrypted form and retrieve it at will.
+The data is automatically encrypted when `update`d using a snap-specific key, and automatically decrypted when retrieved using `get`.
 
 #### Example
 
