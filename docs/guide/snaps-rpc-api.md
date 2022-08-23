@@ -574,8 +574,8 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 #### Description
 
-This method allows the snap to persist some data to disk in encrypted form and retrieve it at will.
-The data is automatically encrypted when `update`d using a snap-specific key, and automatically decrypted when retrieved using `get`.
+This method allows the snap to persist some data to disk and retrieve it at will.
+The data is automatically encrypted using a snap-specific key and automatically decrypted when retrieved.
 
 #### Example
 
