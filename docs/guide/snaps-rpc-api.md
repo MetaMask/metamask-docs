@@ -447,7 +447,274 @@ if (result === true) {
 }
 ```
 
+### `snap_getBip32Entropy`
+
+::: danger Powerful Method
+If you call this method, you will receive the user's parent key for the derivation path that they requested.
+When that happens, you are now managing a person's keys, and whatever assets they control, on their behalf.
+Their safety is your responsibility.
+:::
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Object`
+  - `path` - An array, starting with `m`, containing the BIP-32 derivation path to the key to retrieve, e.g., `["m", "44'", "60'"]`.
+  - `curve` - The curve to use for the key derivation, must be `'ed25519'` or `'secp256k1'`.
+
+#### Returns
+
+```typescript
+interface SLIP10Node {
+  /**
+   * The 0-indexed path depth of this node.
+   */
+  readonly depth: number;
+
+  /**
+   * The fingerprint of the parent key, or 0 if this is a master node.
+   */
+  readonly parentFingerprint: number;
+
+  /**
+   * The index of the node, or 0 if this is a master node.
+   */
+  readonly index: number;
+
+  /**
+   * The private key of this node.
+   */
+  readonly privateKey: string;
+
+  /**
+   * The public key of this node.
+   */
+  readonly publicKey: string;
+
+  /**
+   * The chain code of this node.
+   */
+  readonly chainCode: string;
+
+  /**
+   * The name of the curve used by the node.
+   */
+  readonly curve: 'ed25519' | 'secp256k1';
+}
+```
+
+`SLIP10Node` - An object representing the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) HD Tree node and containing its corresponding key material.
+
+#### Description
+
+Gets the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) key for the `path` and `curve` specified by the method name.
+This is the "key management" permission of Snaps; use it with the utmost care.
+
+This restricted method is both implemented and designed to be used with [`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree).
+See the `@metamask/key-tree` documentation and below example for more information.
+
+Note that `@metamask/key-tree` can help you get the [extended private keys](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#extended-keys) for user addresses, but it is your responsibility to know how to use those keys to e.g. derive an address for the relevant protocol or sign a transaction for the user.
+
+#### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab Manifest
+
+```json5
+{
+  "initialPermissions": {
+    "snap_getBip32Entropy": [
+      {
+        "path": ["m", "44'", "3'"],
+        "curve": "secp256k1" // Or "ed25519"
+      }
+    ]
+  }
+}
+```
+
+:::
+
+::: tab Code
+
+```javascript
+import { SLIP10Node } from '@metamask/key-tree';
+
+// By way of example, we will use Dogecoin, which has a derivation path starting
+// with `m/44'/3'`.
+const dogecoinNode = await wallet.request({
+  method: 'snap_getBip44Entropy',
+  params: [
+    {
+      // Must be specified exactly in the manifest
+      path: ['m', "44'", "3'"],
+      curve: 'secp256k1',
+    },
+  ],
+});
+
+// Next, we'll create an instance of a SLIP-10 node for the Dogecoin node.
+const dogecoinSlip10Node = await SLIP10Node.fromJson(dogecoinNode);
+
+// m / 44' / 3' / 0'
+const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"]);
+
+// m / 44' / 3' / 1'
+const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
+
+// Now, you can ask the user to e.g. sign transactions!
+```
+
+:::
+
+::::
+
+### `snap_getBip44Entropy`
+
+::: danger Powerful Method
+If you call this method, you will receive the user's parent key for the protocol that they requested.
+When that happens, you are now managing a person's keys, and whatever assets they control, on their behalf.
+Their safety is your responsibility.
+:::
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Object`
+  - `coinType` (`number`) - The BIP-44 coin type to get the entropy for.
+
+#### Returns
+
+```typescript
+interface BIP44CoinTypeNode {
+  /**
+   * The BIP-44 `coin_type` value of this node.
+   */
+  readonly coin_type: number;
+
+  /**
+   * The 0-indexed BIP-44 path depth of this node.
+   *
+   * Since this is a `coin_type` node, it will be the number `2`.
+   */
+  readonly depth: 2;
+
+  /**
+   * The hexadecimal-encoded string representation of the private key for this node.
+   */
+  readonly privateKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the public key for this node.
+   */
+  readonly publicKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the chain code for this node.
+   */
+  readonly chainCode: string;
+
+  /**
+   * A human-readable representation of the BIP-44 HD tree path of this node.
+   *
+   * Since this is a `coin_type` node, it will be of the form:
+   *
+   * `m / 44' / coin_type'`
+   *
+   * Recall that a complete BIP-44 HD tree path consists of the following nodes:
+   *
+   * `m / 44' / coin_type' / account' / change / address_index`
+   *
+   * With the following depths:
+   *
+   * `0 / 1 / 2 / 3 / 4 / 5`
+   */
+  readonly path: string;
+}
+```
+
+`BIP44CoinTypeNode` - An object representing the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD Tree node and containing its corresponding key material.
+
+#### Description
+
+Gets the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` key for the `coin_type` number specified by the method name.
+This is the "key management" permission of Snaps; use it with the utmost care.
+For the authoritative list of available protocols and their `coin_type` values, see [SLIP-44](https://github.com/satoshilabs/slips/blob/master/slip-0044.md).
+
+This restricted method is both implemented and designed to be used with [`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree).
+See the `@metamask/key-tree` documentation and below example for more information.
+
+Note that `@metamask/key-tree` can help you get the [extended private keys](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#extended-keys) for user addresses, but it is your responsibility to know how to use those keys to e.g. derive an address for the relevant protocol or sign a transaction for the user.
+
+#### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab Manifest
+
+```json
+{
+  "initialPermissions": {
+    "snap_getBip44Entropy": [
+      {
+        "coinType": "3"
+      }
+    ]
+  }
+}
+```
+
+:::
+
+::: tab Code
+
+```javascript
+import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
+
+// By way of example, we will use Dogecoin, which has `coin_type` 3.
+const dogecoinNode = await wallet.request({
+  method: 'snap_getBip44Entropy',
+  params: [
+    {
+      coinType: 3,
+    },
+  ],
+});
+
+// Next, we'll create an address key deriver function for the Dogecoin coin_type node.
+// In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
+const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
+
+// These are BIP-44 nodes containing the extended private keys for
+// the respective derivation paths.
+
+// m / 44' / 3' / 0' / 0 / 0
+const addressKey0 = await deriveDogecoinAddress(0);
+
+// m / 44' / 3' / 0' / 0 / 1
+const addressKey1 = await deriveDogecoinAddress(1);
+
+// Now, you can ask the user to e.g. sign transactions!
+```
+
+:::
+
+::::
+
 ### `snap_getBip44Entropy_*`
+
+::: danger Deprecated
+This function is deprecated in favour of `snap_getBip44Entropy`, and will be removed in a future version.
+:::
 
 ::: danger Powerful Method
 If you call this method, you will receive the user's parent key for the protocol that they requested.
