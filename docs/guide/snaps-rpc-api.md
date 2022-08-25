@@ -527,14 +527,14 @@ Note that `@metamask/key-tree` can help you get the [extended private keys](http
 
 ```json5
 {
-  "initialPermissions": {
-    "snap_getBip32Entropy": [
+  initialPermissions: {
+    snap_getBip32Entropy: [
       {
-        "path": ["m", "44'", "3'"],
-        "curve": "secp256k1" // Or "ed25519"
-      }
-    ]
-  }
+        path: ['m', "44'", "3'"],
+        curve: 'secp256k1', // Or "ed25519"
+      },
+    ],
+  },
 }
 ```
 
