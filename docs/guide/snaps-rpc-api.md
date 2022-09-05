@@ -525,16 +525,16 @@ Note that `@metamask/key-tree` can help you get the [extended private keys](http
 
 ::: tab Manifest
 
-```json5
+```json
 {
-  initialPermissions: {
-    snap_getBip32Entropy: [
+  "initialPermissions": {
+    "snap_getBip32Entropy": [
       {
-        path: ['m', "44'", "3'"],
-        curve: 'secp256k1', // Or "ed25519"
-      },
-    ],
-  },
+        "path": ["m", "44'", "3'"],
+        "curve": "secp256k1" // Or "ed25519"
+      }
+    ]
+  }
 }
 ```
 
@@ -548,14 +548,12 @@ import { SLIP10Node } from '@metamask/key-tree';
 // By way of example, we will use Dogecoin, which has a derivation path starting
 // with `m/44'/3'`.
 const dogecoinNode = await wallet.request({
-  method: 'snap_getBip44Entropy',
-  params: [
-    {
-      // Must be specified exactly in the manifest
-      path: ['m', "44'", "3'"],
-      curve: 'secp256k1',
-    },
-  ],
+  method: 'snap_getBip32Entropy',
+  params: {
+    // Must be specified exactly in the manifest
+    path: ['m', "44'", "3'"],
+    curve: 'secp256k1',
+  },
 });
 
 // Next, we'll create an instance of a SLIP-10 node for the Dogecoin node.
@@ -666,7 +664,7 @@ Note that `@metamask/key-tree` can help you get the [extended private keys](http
   "initialPermissions": {
     "snap_getBip44Entropy": [
       {
-        "coinType": "3"
+        "coinType": 3
       }
     ]
   }
@@ -683,11 +681,9 @@ import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
 // By way of example, we will use Dogecoin, which has `coin_type` 3.
 const dogecoinNode = await wallet.request({
   method: 'snap_getBip44Entropy',
-  params: [
-    {
-      coinType: 3,
-    },
-  ],
+  params: {
+    coinType: 3,
+  },
 });
 
 // Next, we'll create an address key deriver function for the Dogecoin coin_type node.
