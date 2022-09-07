@@ -6,7 +6,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 
 If you have questions about anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-skunkworks/discussions).
 
-## What is Snaps?
+## What is MetaMask Snaps?
 
 Snaps is a system that allows anyone to safely extend the capabilities of MetaMask. A _snap_ is a program that we run in an isolated environment that can customize the wallet experience. 
 
@@ -18,18 +18,32 @@ New RPC methods have been added to our Ethereum Provider JSON-RPC API as well, w
 These new methods are what allow snaps to modify the functionality of MetaMask.
 In addition, they also allow websites to install and communicate with individual snaps.
 
-### Current Functionality
-
-At present, snaps can create new RPC methods for websites to call, can call many of the same RPC methods that websites can call, and access a limited set of snap-exclusive RPC methods. See the [Snaps RPC API documentation](./snaps-rpc-api.html) for more details. Over time, MetaMask will expose more internal functionality as RPC methods, granting more capabilities to snaps.
-
-At the moment, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on a website that can communicate with the snap.
-
-### Execution Environment
+### Execution environment
 
 Snaps are untrusted JavaScript programs but execute safely inside the MetaMask application. To isolate snaps from the rest of the application and to provide a “fully virtualizable” execution environment, MetaMask uses [Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), a subset of JavaScript developed by [Agoric](https://agoric.com/).
+
 Among other things, SES allows us to restrict access to global JavaScript APIs and to isolate untrusted code from other parts of the application. SES does this at the cost of some performance and incompatibility with some JavaScript practices, such as modifying prototypes of intrinsic objects (e.g. the `Promise` constructor).
 
-## Getting Started
+## Snaps features
+At present, snaps can; 
+- create new RPC methods for websites to call
+- call many of the same RPC methods that websites can call
+- access a limited set of snap-exclusive RPC methods. 
+
+At the moment, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on the website(s) that communicate with the snap(s).
+
+For detailed integration specifications, see the [Snaps RPC API documentation](./snaps-rpc-api.html). Over time, MetaMask will expose more internal functionality as RPC methods—granting more capabilities to snaps.
+
+### Current functionality
+Lorem ipsum
+
+### Coming soon
+Lorem ipsum
+
+### Propose a feature
+Lorem ipsum
+
+## Getting started
 
 ### Prerequisites
 - [Node.js 16.0](https://nodejs.org/) or later.
@@ -47,13 +61,13 @@ git clone git@github.com:MetaMask/template-snap-monorepo.git
 ```
 
 
-Setup the development environment serving both the frontend and the snap: 
+`cd` into the cloned repository and setup the development environment: 
 ```shell
 yarn install && yarn start
 ```
 
-### Get started by editing `index.js`
-Add your APIs and features to MetaMask.
+### Get started by editing `src/index.js`
+Lorem ipsum add your APIs and features to MetaMask.
 
 
 ## Next up
