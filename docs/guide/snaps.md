@@ -66,7 +66,7 @@ git clone git@github.com:MetaMask/template-snap-monorepo.git
 yarn install && yarn start
 ```
 
-### Get started by editing `src/index.js`
+### Get started by editing `index.js` in the `snap` folder
 Lorem ipsum add your APIs and features to MetaMask.
 
 
