@@ -52,7 +52,7 @@ Setup the development environment serving both the frontend and the snap:
 yarn install && yarn start
 ```
 
-### Get started by editing `index.js`
+### Get started by editing `index.js` in the `snap` folder
 Add your APIs and features to MetaMask.
 
 
