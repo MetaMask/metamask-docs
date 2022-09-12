@@ -399,8 +399,8 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:
 
-- [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
-- [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+- [StarkNet](https://github.com/ConsenSys/starknet-snap)
+- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
 - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
 
 You can also follow these tutorials which will walk you through the steps to develop and test a Snap:

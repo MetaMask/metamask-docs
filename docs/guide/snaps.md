@@ -143,15 +143,15 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Discover the [features](#features) you can utilize when building your snap, see what's [coming soon](#coming-soon), and read detailed documentation about our [JSON-RPC API](./snaps-rpc-api.html).
+Modify the text in the `description` or `textAreaContent` field. Open the Settings tab in MetaMask Flask to remove the snap, refresh the dapp in your browser, and connect to re-install the snap. The next time you click the **Send message-button**, you will see the new text in the confirmation screen. *This flow will be improved in the next update to the template-snap-monorepo.*
 
 ## Next up
 If you're interested in building your own snap, next up is the [Snaps development guide](./snaps-development-guide.html).
 
 You can also look at some of the existing snaps being developed right now. Each one is fully functional and open-source:
-  - [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
-  - [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
-  - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+- [StarkNet](https://github.com/ConsenSys/starknet-snap)
+- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
+- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
 
 ## GitHub discussion board
 
