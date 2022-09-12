@@ -1,4 +1,4 @@
-# JSON-RPC API
+# Snaps JSON-RPC API
 
 ::: tip Developer Preview Software
 Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
