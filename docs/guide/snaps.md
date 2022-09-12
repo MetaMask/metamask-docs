@@ -1,4 +1,4 @@
-# MetaMask Snaps
+# Introduction
 
 ::: tip Snaps is pre-release software.
 To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
@@ -29,29 +29,25 @@ Among other things, SES allows us to restrict access to global JavaScript APIs a
 
 At present, snaps can (1) create new RPC methods for websites to call, (2) call many of the same RPC methods that websites can call, and (3) access a limited set of snap-exclusive RPC methods. 
 
-### Current features 
-
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative; top: 20px;" />
 
-#### Display a custom confirmation screen in MetaMask 
+#### Display a custom confirmation screen in MetaMask &bull; [Learn more](./snaps-rpc-api.html#snap-confirm)
 Show a MetaMask popup with custom text and buttons to approve or reject an action. This can be used to create requests, confirmations, and opt-in flows for a snap.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative; top: 20px;" />
 
-#### Notify users in MetaMask
+#### Notify users in MetaMask &bull; [Learn more](./snaps-rpc-api.html#snap-notify)
 MetaMask Flask introduces a generic notifications interface that can be utilized by any snap with the notifications permission. A short notification text can be triggered by a snap for actionable or time-sensitive information.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
-#### Store and manage data on your device
+#### Store and manage data on your device &bull; [Learn more](./snaps-rpc-api.html#snap-managestate)
 Store, update, and retrieve data securely, with encryption by default.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
-### Control non-EVM accounts and assets in MetaMask
+#### Control non-EVM accounts and assets in MetaMask &bull; [Learn more](./snaps-rpc-api.html#snap-getbip44entropy)
 Derive BIP-32 and BIP-44 keypairs based on the Secret Recovery Phrase without exposing it. With the power to manage keys, you can build snaps to support a variety of blockchain protocols.
-
-### Coming soon
 
 <img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
@@ -62,6 +58,8 @@ Bring your insights, anti-phishing, and security solutions to the MetaMask UI wi
 
 #### Custom UI in MetaMask using a defined set of components
 Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input. 
+
+<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
 #### Schedule actions with cron jobs 
 Perform actions that run periodically at fixed times, dates, or intervals. 
@@ -143,7 +141,9 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Modify the text in the `description` or `textAreaContent` field. Open the Settings tab in MetaMask Flask to remove the snap, refresh the dapp in your browser, and connect to re-install the snap. The next time you click the **Send message-button**, you will see the new text in the confirmation screen. *This flow will be improved in the next update to the template-snap-monorepo.*
+Modify the text in the `description` or `textAreaContent` field. Open the Settings tab in MetaMask Flask to remove the snap, refresh the dapp in your browser, and connect to re-install the snap. 
+
+The next time you click the **Send message-button**, you will see the updated text in the confirmation screen. *This flow will be improved in the next update to the template-snap-monorepo.*
 
 ## Next up
 If you're interested in building your own snap, next up is the [Snaps development guide](./snaps-development-guide.html).
