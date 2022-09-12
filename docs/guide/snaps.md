@@ -15,7 +15,7 @@ For example, a snap can add new APIs to MetaMask, add support for different bloc
 Snaps are run in an isolated environment where they have access to a limited set of capabilities, determined by the permissions they were granted by the user during installation. 
 As with MetaMask’s [Ethereum Provider RPC API](./rpc-api.html), snaps communicate with MetaMask using JSON-RPC.
 
-New JSON-RPC methods for snaps have been added to our JSON-RPC API, which are documented as part of the [Snaps JSON RPC API](./snaps-rpc-api.html). 
+New JSON-RPC methods for snaps have been added to our JSON-RPC API, which are documented as part of the [Snaps JSON-RPC API](./snaps-rpc-api.html). 
 These new methods are what allow snaps to modify the functionality of MetaMask. 
 In addition, they also allow websites to install and communicate with individual snaps.
 
@@ -29,45 +29,42 @@ Among other things, SES allows us to restrict access to global JavaScript APIs a
 
 At present, snaps can (1) create new RPC methods for websites to call, (2) call many of the same RPC methods that websites can call, and (3) access a limited set of snap-exclusive RPC methods. 
 
-### Current Features 
+### Current features 
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative; top: 20px;" />
 
-#### Display a custom confirmation screen in MetaMask • [Documentation](./snaps-rpc-api.html)
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art. 
+#### Display a custom confirmation screen in MetaMask 
+Show a MetaMask popup with custom text and buttons to approve or reject an action. This can be used to create requests, confirmations, and opt-in flows for a snap.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative; top: 20px;" />
 
 #### Notify users in MetaMask
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art. 
+MetaMask Flask introduces a generic notifications interface that can be utilized by any snap with the notifications permission. A short notification text can be triggered by a snap for actionable or time-sensitive information.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
-#### Store and manage data on your disk
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art. 
+#### Store and manage data on your device
+Store, update, and retrieve data securely, with encryption by default.
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
-#### Control BIP-44 accounts and assets
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art.
-
-<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
-
-#### Control BIP-32 accounts and assets
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art.
+### Control non-EVM accounts and assets in MetaMask
+Derive BIP-32 and BIP-44 keypairs based on the Secret Recovery Phrase without exposing it. With the power to manage keys, you can build snaps to support a variety of blockchain protocols.
 
 ### Coming soon
 
 <img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
-#### Populate MetaMask's confirmation screens with transaction insights
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art.
+#### Populate MetaMask's pre-transaction window with custom transaction insights
+Bring your insights, anti-phishing, and security solutions to the MetaMask UI with the transaction insights API. 
 
 <img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
 #### Custom UI in MetaMask using a defined set of components
+Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input. 
 
-Modernipsum dolor sit amet caravaggisti post-painterly abstraction, relational art neue slowenische kunst romanticism tonalism die brücke, futurism neoclassicism stuckism installation art.
+#### Schedule actions with cron jobs 
+Perform actions that run periodically at fixed times, dates, or intervals. 
 
 
 ### Propose a feature
@@ -102,7 +99,7 @@ Next step is to [install MetaMask Flask](https://metamask.io/flask/).
 
 ### Install MetaMask Flask
 
-To interact with (your) Snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features. 
+To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features. 
 
 Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
 
