@@ -15,22 +15,21 @@ For example, a snap can add new APIs to MetaMask, add support for different bloc
 Snaps are run in an isolated environment where they have access to a limited set of capabilities, determined by the permissions they were granted by the user during installation. 
 As with MetaMask’s [Ethereum Provider RPC API](./rpc-api.html), snaps communicate with MetaMask using JSON-RPC.
 
-New RPC methods have been added to our JSON-RPC API as well, which are documented as part of the [Snaps JSON RPC API](./snaps-rpc-api.html). 
+New JSON-RPC methods for snaps have been added to our JSON-RPC API, which are documented as part of the [Snaps JSON RPC API](./snaps-rpc-api.html). 
 These new methods are what allow snaps to modify the functionality of MetaMask. 
 In addition, they also allow websites to install and communicate with individual snaps.
 
 ### Execution environment
 
-Snaps are untrusted JavaScript programs but execute safely inside the MetaMask application. To isolate snaps from the rest of the application and to provide a “fully virtualizable” execution environment, MetaMask uses [Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), a subset of JavaScript developed by [Agoric](https://agoric.com/).
+Snaps are untrusted JavaScript programs that execute safely inside the MetaMask application. To isolate snaps from the rest of the application and to provide a “fully virtualizable” execution environment, MetaMask uses [Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), a subset of JavaScript developed by [Agoric](https://agoric.com/).
 
 Among other things, SES allows us to restrict access to global JavaScript APIs and to isolate untrusted code from other parts of the application. SES does this at the cost of some performance and incompatibility with some JavaScript practices, such as modifying prototypes of intrinsic objects (e.g. the `Promise` constructor).
 
 ## Features
-At present, snaps can (1) create new RPC methods for websites to call, (2) call many of the same RPC methods that websites can call, (3) access a limited set of snap-exclusive RPC methods. 
 
-For detailed integration specifications, see the [Snaps RPC API documentation](./snaps-rpc-api.html). Over time, MetaMask will expose more internal functionality as RPC methods—granting more capabilities to snaps.
+At present, snaps can (1) create new RPC methods for websites to call, (2) call many of the same RPC methods that websites can call, and (3) access a limited set of snap-exclusive RPC methods. 
 
-### Currently
+### Current Features 
 
 <img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative; top: 20px;" />
 
