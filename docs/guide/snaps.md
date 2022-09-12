@@ -104,13 +104,13 @@ To interact with (your) snaps, you will need to install [MetaMask Flask](https:/
 Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
 
 ### Connecting to the snap
-Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile *without normal MetaMask*) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
+Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile *without MetaMask stable*) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
 
-1. Click the **Connect-button** and the MetaMask Flask extension should pop up and require you to approve the template's permissions.
+1. Click the **Connect-button** and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
 
 2. Once connected, try out the **Send message-button** to display a custom message within a confirmation screen in MetaMask.
 
-And voilà, you've successfully connected and interacted with your snap.
+And voilà, you've successfully connected, installed, and interacted with your snap.
 
 ### Let's start building
 
@@ -142,8 +142,6 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
   }
 };
 ```
-
-Currently, snaps cannot modify the MetaMask UI directly. If a snap needs a UI, that UI must exist entirely on the website(s) that communicate with the snap(s).
 
 Discover the [features](#features) you can utilize when building your snap, see what's [coming soon](#coming-soon), and read detailed documentation about our [JSON-RPC API](./snaps-rpc-api.html).
 
