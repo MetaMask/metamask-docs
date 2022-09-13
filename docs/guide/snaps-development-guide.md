@@ -23,7 +23,7 @@ Executing `mm-snap --help` will provide detailed usage instructions.
 This guide assumes that you've completed the ["Getting Started" tutorial](./snaps.html#getting-started).
 :::
 
-So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap](https://github.com/MetaMask/template-snap) repository, and have served the "Hello, World!" snap locally.
+So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo) repository, and have served the "Hello, World!" snap locally.
 It's time to develop your own snap.
 
 A snap is a JavaScript program that, conceptually, runs in a sandboxed environment inside MetaMask.
@@ -31,13 +31,21 @@ At the moment, snaps must be distributed as npm packages on the official npm reg
 If you look at the directory structure of the template snap repository, you'll see that it looks something like this:
 
 ```text
-template-snap/
-├─ dist/
-│  ├─ bundle.js
+template-snap-monorepo/
+├─ packages/
+│  ├─ site/
+|  |  |- src/
+|  |  |  |- App.tsx
+|  |  ├─ package.json
+|  |  |- ...(react app content)
+|  |
+│  ├─ snap/
+|  |  ├─ src/
+|  |  |  |- index.ts
+|  |  ├─ snap.manifest.json
+|  |  ├─ package.json
+|  |  |- ... (snap content)
 ├─ package.json
-├─ snap.manifest.json
-├─ src/
-│  ├─ index.js
 ├─ ... (other stuff)
 ```
 
@@ -46,16 +54,12 @@ The defaults can be overwritten using the `snap.config.json` [config file](#the-
 
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
-Nevertheless, cloning the [template snap repository](https://github.com/MetaMask/template-snap) is probably the best way to get started.
+Nevertheless, cloning the [template snap repository](https://github.com/MetaMask/template-snap-monorepo) is probably the best way to get started.
 :::
 
 In this section, we'll review the major components of a snap: the source code, the manifest (and `package.json`), and the bundle file.
 
 ### The Snap Source Code
-
-::: tip TypeScript Support
-This guide currently covers writing snaps in JavaScript, but TypeScript is also supported. See this [example](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples/typescript) for more information.
-:::
 
 If you're familiar with JavaScript or TypeScript development of any kind, developing a snap should feel quite familiar to you.
 Consider this trivial snap, which we'll call `hello-snap`:
@@ -222,7 +226,7 @@ If a snap is disabled, the user must re-enable it before it can start again.
 Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
 Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
-You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap/blob/main/snap.manifest.json).
+You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap-monorepo/blob/main/packages/snap/snap.manifest.json).
 
 #### Accessing the Internet
 
@@ -399,8 +403,8 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:
 
-- [Filsnap for Filecoin support](https://github.com/Chainsafe/filsnap/)
-- [BitcoinSnap for Bitcoin support](https://github.com/KeystoneHQ/btcsnap)
+- [StarkNet](https://github.com/ConsenSys/starknet-snap)
+- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
 - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
 
 You can also follow these tutorials which will walk you through the steps to develop and test a Snap:
