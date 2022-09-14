@@ -86,7 +86,7 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
 
 ### Quick start using our template
 
-Get started with Snaps using [our template](https://github.com/MetaMask/template-snap-monorepo) built with TypeScript and React. Create the repository [via GitHub](https://github.com/MetaMask/template-snap-monorepo/generate) and [clone it](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) down to your local machine using e.g. the command line.
+Get started with Snaps using [our template](https://github.com/MetaMask/template-snap-monorepo) built with TypeScript and React. Create the repository [via GitHub](https://github.com/MetaMask/template-snap-monorepo) and [clone it](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) down to your local machine using e.g. the command line.
 
 To ensure the correct Node version, `cd` into your cloned repository and run:
 
