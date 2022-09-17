@@ -12,5 +12,4 @@ Please direct your users to either the relevant app store listing or to [the Met
 
 Instead of creating your own `Connect With MetaMask` button here are a couple of options:
 
-- [Rimble UI](https://rimble.consensys.design/)
 - [Decentraland UI](https://ui.decentraland.org/?path=/story/atlas--uncontrolled)

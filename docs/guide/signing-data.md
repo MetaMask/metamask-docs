@@ -7,7 +7,7 @@ Since MetaMask makes cryptographic keys available to each user, websites can use
 
 ## Signing Data with MetaMask
 
-If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/danfinlay/js-eth-personal-sign-examples).
+If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/MetaMask/test-dapp).
 
 If you’d like to read our JavaScript implementations of these methods, they are all available in the npm package [eth-sig-util](https://github.com/MetaMask/eth-sig-util).
 
@@ -105,7 +105,7 @@ Hopefully soon we will also have good examples for parsing method input into str
 
 `message`: Completely open to what you would like the structure of it to be. Every field is optional.
 
-Below is an example of signing typed data with MetaMask. Reference [here](https://github.com/danfinlay/js-eth-personal-sign-examples)
+Below is an example of signing typed data with MetaMask. Reference [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 ### Example
 
@@ -125,7 +125,7 @@ Below is an example of signing typed data with MetaMask. Reference [here](https:
 ::: tab JavaScript
 
 ```javascript
-signTypedDataV4Button.addEventListener('click', function (event) {
+signTypedDataV4Button.addEventListener('click', async function (event) {
   event.preventDefault();
 
   const msgParams = JSON.stringify({
@@ -198,16 +198,16 @@ signTypedDataV4Button.addEventListener('click', function (event) {
     },
   });
 
-  var from = web3.eth.accounts[0];
+  var from = await web3.eth.getAccounts();
 
-  var params = [from, msgParams];
+  var params = [from[0], msgParams];
   var method = 'eth_signTypedData_v4';
 
   web3.currentProvider.sendAsync(
     {
       method,
       params,
-      from,
+      from: from[0],
     },
     function (err, result) {
       if (err) return console.dir(err);

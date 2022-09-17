@@ -179,10 +179,16 @@ function requestPermissions() {
 
 ## Unrestricted Methods
 
-### `eth_decrypt`
+### `eth_decrypt` (DEPRECATED)
+
+::: warning
+This method is deprecated and may be removed in the future.
+
+[See here for more information.](https://medium.com/metamask/metamask-api-method-deprecation-2b0564a84686)
+:::
 
 ::: tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
+This RPC method is not available in MetaMask Mobile.
 :::
 
 #### Parameters
@@ -218,10 +224,16 @@ ethereum
   .catch((error) => console.log(error.message));
 ```
 
-### `eth_getEncryptionPublicKey`
+### `eth_getEncryptionPublicKey` (DEPRECATED)
+
+::: warning
+This method is deprecated and may be removed in the future.
+
+[See here for more information.](https://medium.com/metamask/metamask-api-method-deprecation-2b0564a84686)
+:::
 
 ::: tip Platform Availability
-This RPC method is not yet available in MetaMask Mobile.
+This RPC method is not available in MetaMask Mobile.
 :::
 
 #### Parameters
@@ -333,6 +345,7 @@ if any parameter is incorrectly formatted.
 In addition, MetaMask will automatically reject the request under the following circumstances:
 
 - If the RPC endpoint doesn't respond to RPC calls.
+  NOTE: Calls are made from the extension's background page, _not_ the foreground page. If you use an origin allowlist, they will be blocked.
 - If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
 - If the chain ID corresponds to any default MetaMask chains.
 

@@ -1,11 +1,11 @@
-# JSON-RPC API
+# Snaps JSON-RPC API
 
-::: tip Only Available in MetaMask Flask
-Snaps is only available in [MetaMask Flask](https://metamask.io/flask).
+::: tip Developer Preview Software
+Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://community.metamask.io/c/metamask-flask) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
 :::
 
 ## Table of Contents
@@ -482,9 +482,19 @@ interface BIP44CoinTypeNode {
   readonly depth: 2;
 
   /**
-   * The Base64-encoded string representation of the key material for this node.
+   * The hexadecimal-encoded string representation of the private key for this node.
    */
-  readonly key: string;
+  readonly privateKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the public key for this node.
+   */
+  readonly publicKey: string;
+
+  /**
+   * The hexadecimal-encoded string representation of the chain code for this node.
+   */
+  readonly chainCode: string;
 
   /**
    * A human-readable representation of the BIP-44 HD tree path of this node.
@@ -530,26 +540,21 @@ const dogecoinNode = await wallet.request({
 
 // Next, we'll create an address key deriver function for the Dogecoin coin_type node.
 // In this case, its path will be: m / 44' / 3' / 0' / 0 / address_index
-const deriveDogecoinAddress = getBIP44AddressKeyDeriver(dogecoinNode);
+const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
 
-// These are Node.js Buffer representations of the extended private keys for
-// the respective addresses.
+// These are BIP-44 nodes containing the extended private keys for
+// the respective derivation paths.
 
 // m / 44' / 3' / 0' / 0 / 0
-const addressKey0 = deriveDogecoinAddress(0);
+const addressKey0 = await deriveDogecoinAddress(0);
 
 // m / 44' / 3' / 0' / 0 / 1
-const addressKey1 = deriveDogecoinAddress(1);
+const addressKey1 = await deriveDogecoinAddress(1);
 
 // Now, you can ask the user to e.g. sign transactions!
 ```
 
 ### `snap_manageState`
-
-::: danger Plaintext Data Storage
-The data stored by this method is persisted to disk in unencrypted / plaintext form.
-**Never** store any secrets using this method.
-:::
 
 ::: warning Only Callable By
 
@@ -569,8 +574,8 @@ The data stored by this method is persisted to disk in unencrypted / plaintext f
 
 #### Description
 
-This method allows the snap to persist some data to disk in plaintext form and retrieve it at will.
-Since the data is in plaintext, the method should **never** be used to store secrets of any kind.
+This method allows the snap to persist some data to disk and retrieve it at will.
+The data is automatically encrypted using a snap-specific key and automatically decrypted when retrieved.
 
 #### Example
 
@@ -594,5 +599,74 @@ console.log(persistedData);
 await wallet.request({
   method: 'snap_manageState',
   params: ['clear'],
+});
+```
+
+### `snap_notify`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+```typescript
+interface SnapNotifyParams {
+  /**
+   * Enum determining the notification type.
+   */
+  type: NotificationType;
+
+  /**
+   * A message to show in the notification.
+   */
+  message: string;
+}
+```
+
+- `Array`
+
+  0. `SnapNotifyParams` - An object containing the contents of the notification.
+
+#### Notification Type
+
+```typescript
+enum NotificationType {
+  /**
+   * A notification displayed in the MetaMask UI.
+   */
+  inApp = 'inApp',
+
+  /**
+   * A notification displayed in and by the browser. There is no guarantee that
+   * these will be displayed to the user, and we recommend using `inApp`
+   * notifications unless you have a compelling reason not to.
+   */
+  native = 'native',
+}
+```
+
+#### Returns
+
+`null` - This method doesn't return any data.
+
+#### Description
+
+Calling this method displays a notification in MetaMask or natively in the browser.
+The notification type and content are determined by the method's parameters.
+See above for their meaning and format.
+
+#### Example
+
+```javascript
+await wallet.request({
+  method: 'snap_notify',
+  params: [
+    {
+      type: 'inApp',
+      message: `Hello, world!`,
+    },
+  ],
 });
 ```
