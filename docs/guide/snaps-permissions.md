@@ -29,6 +29,10 @@ For snaps that need to access the internet, the snap can request the `endowment:
 `XMLHttpRequest` is never available in snaps, and you should replace it with `fetch`. If your dependencies are using `XMLHttpRequest`, you can learn how to patch it away [here](./snaps-patching-dependencies.md#patching-the-use-of-xmlhttprequest).
 :::
 
+### `endowment:transaction-insight`
+
+For snaps that provides transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method.
+
 ## RPC Permissions
 
 To use any restricted RPC method, a snap will need to request permissions to access that method. For a list of available RPC methods and thus valid RPC permissions see [JSON-RPC API](./snaps-rpc-api.html#restricted-methods)
