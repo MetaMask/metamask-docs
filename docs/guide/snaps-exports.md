@@ -49,7 +49,7 @@ In order for the extension to call the `onTransaction` method of the snap, the `
 
 ### Parameters
 
-- `onTransactionArgs` - the raw transaction payload and the [CAIP2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) chain ID.
+- `onTransactionArgs` - the raw transaction payload and the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
 
 ```typescript
 interface OnTransactionArgs {
