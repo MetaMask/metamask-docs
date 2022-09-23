@@ -41,7 +41,7 @@ type RpcHandlerReturn = Promise<unknown>;
 
 ## `onTransaction`
 
-If the snap whats to provide transactions insights before they are accepted for signing by the uses, the snap must export a function called `onTransaction`. Whenever a transaction is submited to the extension this function will be called. The raw transaction payload, before it is signed, will be passed to this method.
+If the snap wants to provide transaction insights before a user signs a transaction, the snap must export a function called `onTransaction`. Whenever there is a contract interaction and a transaction is submitted via the extension, this function will be called. The raw unsigned transaction payload will be passed to the `onTransaction` handler function.
 
 ::: tip Requesting the transaction insight permission
 In order for the extension to call the `onTransaction` method of the snap, the `endowment:transaction-insight` permission must be requested. see [Permissions](./snaps-permissions.html#endowment-transaction-insight)
