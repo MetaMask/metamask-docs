@@ -61,7 +61,7 @@ interface OnTransactionArgs {
 ### Returns
 
 ```typescript
-type onTransactionHandlerReturn = Promise<onTransactionResponse>;
+type onTransactionHandlerReturn = Promise<OnTransactionResponse>;
 ```
 
 ```typescript
