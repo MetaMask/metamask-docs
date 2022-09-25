@@ -25,6 +25,8 @@ Well, no, that's also up to you! If your snap can do something useful without re
 - `RpcHandlerArgs` - The origin and the JSON-RPC request.
 
 ```typescript
+import { JsonRpcRequest } from '@metamask/types';
+
 interface RpcHandlerArgs = {
   origin: string;
   request: JsonRpcRequest<unknown[] | { [key: string]: unknown }>;
@@ -34,10 +36,55 @@ interface RpcHandlerArgs = {
 ### Returns
 
 ```typescript
-type RpcHandlerReturn = Promise<unknown>;
+type RpcHandlerReturn = Promise<unknown> | unknown;
 ```
 
 `RpcHandlerReturn` - A promise containing the return of the implemented RPC Method.
+
+### Examples
+
+#### Typescript
+
+```typescript
+import { OnRpcRequestHandler } from '@metamask/snap-types';
+
+export const getMessage = (originString: string): string =>
+  `Hello, ${originString}!`;
+
+export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
+  switch (request.method) {
+    case 'hello':
+      return wallet.request({
+        method: 'snap_confirm',
+        params: [
+          {
+            prompt: getMessage(origin),
+            description:
+              'This custom confirmation is just for display purposes.',
+            textAreaContent:
+              'But you can edit the snap source code to make it do something, if you want to!',
+          },
+        ],
+      });
+    default:
+      throw new Error('Method not found.');
+  }
+};
+```
+
+#### Javascript
+
+```js
+module.exports.onRpcRequest = async ({ origin, request }) => {
+  switch (request.method) {
+    case 'hello':
+      return 'world!';
+
+    default:
+      throw new Error('Method not found.');
+  }
+};
+```
 
 ## `onTransaction`
 
@@ -49,7 +96,7 @@ In order for the extension to call the `onTransaction` method of the snap, the `
 
 ### Parameters
 
-- `onTransactionArgs` - the raw transaction payload and the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
+- `onTransactionArgs` - the raw transaction payload and the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). For more details on the transaction object see [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
 
 ```typescript
 interface OnTransactionArgs {
@@ -62,12 +109,38 @@ interface OnTransactionArgs {
 
 ```typescript
 type onTransactionHandlerReturn = Promise<OnTransactionResponse>;
-```
 
-```typescript
 interface OnTransactionResponse {
   insights: { [key: string]: unknown };
 }
 ```
 
 - `onTransactionResponse` - The `insights` object returned by the snap will be displayed alongside the confirmation for the transaction that `onTransaction` was called with. Keys and values will be displayed in the order received, with each key rendered as a title and each value rendered as a string.
+
+### Examples
+
+#### Typescript
+
+```typescript
+import { OnTransactionHandler } from "@metamask/snap-types";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+}) => {
+  const insights = /* Get insights */;
+  return { insights };
+};
+```
+
+#### Javascript
+
+```js
+module.exports.onTransaction = async ({
+  transaction,
+  chainId,
+}) => {
+  const insights = /* Get insights */;
+  return { insights };
+};
+```

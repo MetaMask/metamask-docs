@@ -31,7 +31,7 @@ For snaps that need to access the internet, the snap can request the `endowment:
 
 ### `endowment:transaction-insight`
 
-For snaps that provides transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method.
+For snaps that provides transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. see [Exports](./snaps-exports.html#ontransaction)
 
 ## RPC Permissions
 
