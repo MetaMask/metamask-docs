@@ -53,9 +53,9 @@ Store, update, and retrieve data securely, with encryption by default.
 
 Derive BIP-32 and BIP-44 keypairs based on the Secret Recovery Phrase without exposing it. With the power to manage keys, you can build snaps to support a variety of blockchain protocols.
 
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
+<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
-#### Populate MetaMask's pre-transaction window with custom transaction insights
+#### Populate MetaMask's pre-transaction window with custom transaction insights &bull; [Learn more](./snaps-exports.html#ontransaction)
 
 Bring your insights, anti-phishing, and security solutions to the MetaMask UI with the transaction insights API.
 
