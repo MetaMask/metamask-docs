@@ -95,7 +95,7 @@ interface OnTransactionArgs {
 ### Returns
 
 ```typescript
-type onTransactionHandlerReturn = Promise<OnTransactionResponse>;
+type OnTransactionHandlerReturn = Promise<OnTransactionResponse>;
 
 interface OnTransactionResponse {
   insights: { [key: string]: unknown };
