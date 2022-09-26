@@ -48,7 +48,10 @@ type RpcHandlerReturn = Promise<unknown> | unknown;
 ```typescript
 import { OnRpcRequestHandler } from '@metamask/snap-types';
 
-export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({
+  origin,
+  request,
+}) => {
   switch (request.method) {
     case 'hello':
       return 'world!';
