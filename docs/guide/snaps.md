@@ -114,11 +114,11 @@ Make sure to install Flask in a new browser profile or disable any existing inst
 
 Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile _without MetaMask stable_) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
 
-1. Click the **Connect-button** and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
+1. Click the **Connect** button and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
 
-2. Once connected, try out the **Send message-button** to display a custom message within a confirmation screen in MetaMask.
+2. Once connected, try out the **Send message** button to display a custom message within a confirmation screen in MetaMask.
 
-And voilà, you've successfully connected, installed, and interacted with your snap.
+You've now successfully connected, installed, and interacted with your snap.
 
 ### Let's start building
 
@@ -151,9 +151,13 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Modify the text in the `description` or `textAreaContent` field. Open the Settings tab in MetaMask Flask to remove the snap, refresh the dapp in your browser, and connect to re-install the snap.
+Modify the text in the `description` or `textAreaContent` field. Refresh the dapp in your browser, and click the **Connect** button to reinstall the snap.
 
-The next time you click the **Send message-button**, you will see the updated text in the confirmation screen. _This flow will be improved in the next update to the template-snap-monorepo._
+::: tip Local Snap Reinstallation
+MetaMask automatically reinstalls locally hosted snaps whenever it receives a connection request for them.
+:::
+
+The next time you click the **Send message** button, you will see the updated text in the confirmation screen. _This flow will be improved in the next update to the template-snap-monorepo._
 
 ## Next up
 
