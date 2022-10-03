@@ -590,7 +590,7 @@ Note that this returns the public key, not the extended public key (`xpub`), or 
   "initialPermissions": {
     "snap_getBip32PublicKey": [
       {
-        "path": ["m", "44'", "3'"],
+        "path": ["m", "44'", "3'", "0'", "0", "0"],
         "curve": "secp256k1" // Or "ed25519"
       }
     ]
