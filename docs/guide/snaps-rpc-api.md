@@ -554,6 +554,75 @@ const addressKey1 = await deriveDogecoinAddress(1);
 // Now, you can ask the user to e.g. sign transactions!
 ```
 
+### `snap_getBip32PublicKey`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Object`
+  - `path` - An array, starting with `m`, containing the BIP-32 derivation path to the public key to retrieve, e.g., `["m", "44'", "60'"]`.
+  - `curve` - The curve to use for the key derivation, must be `'ed25519'` or `'secp256k1'`.
+  - `compressed` - Whether the public key should be compressed. Defaults to `false`.
+
+#### Returns
+
+The public key as hexadecimal `string`.
+
+#### Description
+
+Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the derivation path
+specified by the `path` parameter.
+
+Note that this returns the public key, not the extended public key (`xpub`), or (Ethereum) address.
+
+#### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab Manifest
+
+```json
+{
+  "initialPermissions": {
+    "snap_getBip32PublicKey": [
+      {
+        "path": ["m", "44'", "3'"],
+        "curve": "secp256k1" // Or "ed25519"
+      }
+    ]
+  }
+}
+```
+
+:::
+
+::: tab Code
+
+```javascript
+// By way of example, we will use Dogecoin, which has a derivation path starting
+// with `m/44'/3'`.
+const dogecoinPublicKey = await wallet.request({
+  method: 'snap_getBip32PublicKey',
+  params: {
+    // The path and curve must be specified in the initial permissions.
+    path: ['m', "44'", "3'", "0'", '0', '0'],
+    curve: 'secp256k1',
+    compressed: false,
+  },
+});
+
+// `0x...`
+console.log(dogecoinPublicKey);
+```
+
+:::
+
+::::
+
 ### `snap_manageState`
 
 ::: warning Only Callable By
