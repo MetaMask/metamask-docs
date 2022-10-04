@@ -94,20 +94,12 @@ From the root of the repo, install the dependencies:
 
 ```shell
 yarn
-# or
-npm install
-# or
-pnpm install
 ```
 
 Start the development server:
 
 ```shell
 yarn start
-# or
-npm run start
-# or
-pnpm start
 ```
 
 You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:3000/`](http://localhost:3000/).
