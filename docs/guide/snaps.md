@@ -82,25 +82,27 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
 ### Prerequisites
 
 - Up-to-date Chromium or Firefox browser
-- [Node.js 16.0](https://nodejs.org/) (we recommend using [nvm](https://github.com/nvm-sh/nvm))
+- [Node.js](https://nodejs.org/)
 
 ### Quick start using our template
 
 Get started with Snaps using [our template](https://github.com/MetaMask/template-snap-monorepo) built with TypeScript and React. Create the repository [via GitHub](https://github.com/MetaMask/template-snap-monorepo/generate) and [clone it](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) down to your local machine using e.g. the command line.
 
-To ensure the correct Node version, `cd` into your cloned repository and run:
+> NB: Snaps should work with the latest LTS version of Node.js, but we recommend using the version specified in the template's `.nvmrc` file. If you use [nvm](https://github.com/nvm-sh/nvm) you can switch easily with calling `nvm use` at the root of the project.
+
+From the root of the repo, install the dependencies:
 
 ```shell
-nvm use
+yarn
 ```
 
-Setup the development environment:
+Start the development server:
 
 ```shell
-yarn install && yarn start
+yarn start
 ```
 
-You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at `http://localhost:3000/`.
+You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:3000/`](http://localhost:3000/).
 
 Next step is to [install MetaMask Flask](https://metamask.io/flask/).
 
