@@ -18,10 +18,10 @@ Here are a couple live web applications that let you enter your token details, a
 If you'd like to integrate suggesting a token into your own web app, you can follow this code snippet to implement it:
 
 ```javascript
-const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
-const tokenSymbol = 'TUT';
+const tokenAddress = '0x7659ce147d0e714454073a5dd7003544234b6aa0';
+const tokenSymbol = 'XCAD';
 const tokenDecimals = 18;
-const tokenImage = 'http://placekitten.com/200/300';
+const tokenImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM7SURBVFhH7ZZrSBRRFMfPmbtiZllJaQWFpGX1Kc1Ce1AYZhEEfsggK4uwIiMrED8UQiF+EIqeYBGRJAkRRdCbwkIqCo2gwDCzBxS9iILIdZ07pzO7h3HXHd3xUx/yB5e9//99nXvn3JmFYf57UH4H5NzspmlI+jBXo/oi0K6N7RveiwzSMPNcHKDvJFdTQ044eLW0veSsiCAxA7C5mHnmFhEVinQwAGrXdJTtExnk0ozTNRowwrNBwJemoRave7X5p1hBPAVwM+NEAZF1G4Ai+vOk3xXoKcvf7PHb+k760WITsIn7cWzh4A8TVd7qzvIOMRw8BWDTklbXQmAtEumgAEsWvqu68DitNt0E9ZSAkqUpCAfZa6FRtORt5XWxIvAcwPOpB4uI9GWRDjzBgzjSK3iHzRZArtgOhKoq+0N1ncgoPAdg0zm56hnvMEtkEN4hGGRd0YhFYjlwSz1h/I7pHw+QWFEMKYCvqRUlFliNMOB0YSDeC6CxaurnIz3iuDKkAPzjtqNWup1vRKZYriDiOw1GbtL3U1/EGpAhBWCjk0vLOBlPi3TjNx/9UvWjoU30oPS7Lh4wem8Aar5tmsN3K9ZOr4vbDCkAc0LxCELdxAv5ohcOFTRMU7p7wvMjCKSsQQOonhNwq1juILTxS2t+3LfLfCtj4/kEFJqVnAFb3XYdUUDPNQwqCI2KjacA9MTVxQS61mXBPy4ev3x0hQyNScxHoCetyuJrf5+rSSHHwY+EywjpKtfHh6w+ECFHfboeMxkHPQE9Kz+FEnsuwcieJC7QVwKA8b371edrjyAh0BTZ5pTdMs2gDHgCekFePAXUDU66fLEc0MLzZPpKfS+aSWcvzuZTaLXtUKsDoY8y1JOHXaJdcQ3AWjkHyVTHQWO5WOG0Q6/KUy1PfokGnZ/zlH/mhVQYBhxTd1sHzQf3RzAqsBdG+8thbDdEFn83jA6sD1/cBsf0NHBbv75ckvzbrbWzo/IjnKgTsLakF4KFjUTgE8uBk67aaHh9XKSD3pSRyEn3msckiOXAL48a42znIZFRRAVAZemG/S9DZARY/4bvmTu0jcfZ3+Z+8IeLjFNdnl5KwwwzzD8A4C8M/zdzwBw3GwAAAABJRU5ErkJggg==';
 
 try {
   // wasAdded is a boolean. Like any RPC method, an error may be thrown.
