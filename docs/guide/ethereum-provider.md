@@ -204,7 +204,7 @@ ethereum.on('disconnect', handler: (error: ProviderRpcError) => void);
 The MetaMask provider emits this event if it becomes unable to submit RPC requests to any chain.
 In general, this will only happen due to network connectivity issues or some unforeseen error.
 
-Once `disconnect` has been emitted, the provider will not accept any new requests until the connection to the chain has been re-restablished, which requires reloading the page.
+Once `disconnect` has been emitted, the provider will not accept any new requests until the connection to the chain has been re-established, which requires reloading the page.
 You can also use the [`ethereum.isConnected()` method](#ethereum-isconnected) to determine if the provider is disconnected.
 
 ### accountsChanged
