@@ -706,6 +706,54 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 ::::
 
+### `snap_manageState`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Array`
+
+  0. `'clear' | 'get' | 'update'` - The state operation to perform.
+  1. `Record<string, unknown> | void` - The value to update state with if the operation is `update`, and nothing otherwise.
+
+#### Returns
+
+`null | Record<string, unknown>` - The value stored in state of the operation is `get`, and `null` otherwise.
+
+#### Description
+
+This method allows the snap to persist some data to disk and retrieve it at will.
+The data is automatically encrypted using a snap-specific key and automatically decrypted when retrieved.
+
+#### Example
+
+```javascript
+// First, let's persist some data
+await wallet.request({
+  method: 'snap_manageState',
+  params: ['update', { hello: 'world' }],
+});
+
+// Then, at some later time, let's get the data we stored
+const persistedData = await wallet.request({
+  method: 'snap_manageState',
+  params: ['get'],
+});
+
+console.log(persistedData);
+// { hello: 'world' }
+
+// Finally, if there's no need to store data anymore, we can clear it out
+await wallet.request({
+  method: 'snap_manageState',
+  params: ['clear'],
+});
+```
+
 ### `snap_notify`
 
 ::: warning Only Callable By
