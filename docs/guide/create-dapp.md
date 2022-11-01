@@ -48,7 +48,7 @@ Next run:
 yarn run serve
 ```
 
-Navigate to `http://localhost:9011`
+Navigate to [`http://localhost:9011`](http://localhost:9011)
 
 ## Basic Action(Part 1)
 
