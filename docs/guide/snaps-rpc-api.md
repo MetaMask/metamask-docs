@@ -706,7 +706,6 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 ::::
 
-
 ### `snap_getBip32PublicKey`
 
 ::: warning Only Callable By
