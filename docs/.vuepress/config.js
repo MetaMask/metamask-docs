@@ -174,6 +174,7 @@ const guideSidebar = [
       'snaps-development-guide',
       ['snaps-rpc-api', 'JSON-RPC API'],
       'snaps-permissions',
+      'snaps-exports',
       'snaps-patching-dependencies',
     ],
   },
