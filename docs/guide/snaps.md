@@ -102,7 +102,7 @@ Start the development server:
 yarn start
 ```
 
-You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:3000/`](http://localhost:3000/).
+You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:8000/`](http://localhost:8000/).
 
 Next step is to [install MetaMask Flask](https://metamask.io/flask/).
 
