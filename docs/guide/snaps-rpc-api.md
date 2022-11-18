@@ -371,7 +371,7 @@ Snaps are fully responsible for implementing their JSON-RPC API; consult the sna
 const result = await ethereum.request({
   method: 'wallet_snap_npm:@metamask/example-snap',
   params: {
-      method: 'hello',
+    method: 'hello',
   },
 });
 
@@ -883,7 +883,7 @@ See above for their meaning and format.
 await wallet.request({
   method: 'snap_notify',
   params: {
-    type: 'inApp', 
+    type: 'inApp',
     message: `Hello, world!`,
   },
 });
