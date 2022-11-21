@@ -785,7 +785,7 @@ console.log(dogecoinPublicKey);
 #### Parameters
 
 - `Object`
-  - `version` - The literal number `1`. This is to allow for future versions of this method to be added.
+  - `version` - The literal number `1`. This is reserved for future use.
   - `salt` - An arbitrary string to be used as a salt for the entropy. This can be used to generate different entropy
     for different purposes.
 
