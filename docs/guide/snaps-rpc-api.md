@@ -775,6 +775,70 @@ console.log(dogecoinPublicKey);
 
 ::::
 
+### `snap_getEntropy`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Object`
+  - `version` - The literal number `1`. This is to allow for future versions of this method to be added.
+  - `salt` - An arbitrary string to be used as a salt for the entropy. This can be used to generate different entropy
+    for different purposes.
+
+#### Returns
+
+The entropy as hexadecimal `string`.
+
+#### Description
+
+Gets a deterministic 256-bit entropy value, which is specific to the Snap and the user's account. This entropy can be
+used to generate a private key, or any other value that requires a high level of randomness. Other Snaps will not be
+able to access this entropy, and it will change if the user's secret recovery phrase changes.
+
+This value is deterministic, meaning that it will always be the same for the same Snap, user account, and salt.
+
+You can optionally specify a salt to generate different entropy for different purposes. Using a salt will result in
+completely different entropy, that is unrelated to the entropy generated without a salt.
+
+#### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab Manifest
+
+```json
+{
+  "initialPermissions": {
+    "snap_getEntropy": {}
+  }
+}
+```
+
+:::
+
+::: tab Code
+
+```javascript
+const entropy = await wallet.request({
+  method: 'snap_getEntropy',
+  params: {
+    version: 1,
+    salt: 'foo', // Optional
+  },
+});
+
+// `0x...`
+console.log(entropy);
+```
+
+:::
+
+::::
+
 ### `snap_manageState`
 
 ::: warning Only Callable By
