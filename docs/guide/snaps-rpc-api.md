@@ -782,6 +782,10 @@ console.log(dogecoinPublicKey);
 - Snaps
   :::
 
+::: tip Storage Limit
+Snaps can currently use this RPC method to store up to 100MB of data.
+:::
+
 #### Parameters
 
 - `Array`
