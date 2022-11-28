@@ -27,7 +27,6 @@ function startApp(provider) {
 /**********************************************************/
 
 const chainId = await ethereum.request({ method: 'eth_chainId' });
-handleChainChanged(chainId);
 
 ethereum.on('chainChanged', handleChainChanged);
 
