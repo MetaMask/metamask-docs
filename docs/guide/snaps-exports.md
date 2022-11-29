@@ -34,7 +34,7 @@ import { JsonRpcRequest } from '@metamask/types';
 interface RpcHandlerArgs {
   origin: string;
   request: JsonRpcRequest<unknown[] | { [key: string]: unknown }>;
-};
+}
 ```
 
 ### Returns
