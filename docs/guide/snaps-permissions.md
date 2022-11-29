@@ -16,6 +16,23 @@ To access certain powerful JavaScript globals or JSON-RPC methods, your snap wil
 
 ## Endowments
 
+### `endowment:rpc`
+
+For snaps that need to handle arbitrary JSON-RPC requests, the `rpc` endowment is required. This permission grants a snap access to JSON-RPC requests sent to the snap, using the `onRpcRequest` method. See [Exports](./snaps-exports.html#onrpcrequest) for more information.
+
+This permission requires an object with a `snaps` or `dapps` property (or both), to signal if the snap can receive JSON-RPC requests from other snaps, or dapps, respectively. Both values default to `false`.
+
+```json
+{
+  "initialPermissions": {
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    }
+  }
+}
+```
+
 ### `endowment:long-running`
 
 For snaps that are computationally heavy and can't finish execution within [the snap lifecycle requirements](./snaps-development-guide.md#the-snap-lifecycle), the snap can request the `endowment:long-running` permission.
@@ -31,7 +48,7 @@ For snaps that need to access the internet, the snap can request the `endowment:
 
 ### `endowment:transaction-insight`
 
-For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. see [Exports](./snaps-exports.html#ontransaction)
+For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. See [Exports](./snaps-exports.html#ontransaction)
 
 ## RPC Permissions
 
