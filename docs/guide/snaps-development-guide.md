@@ -406,15 +406,20 @@ You can review the growing number of [example snaps](https://github.com/MetaMask
 - [StarkNet](https://github.com/ConsenSys/starknet-snap)
 - [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
 - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+- [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap) (uses Truffle for local testing)
 
 You can also follow these tutorials which will walk you through the steps to develop and test a Snap:
 
 - A 5-minute tutorial that uses the `network-access` permission: [Gas Fee Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme)
 - A 30-minute tutorial that uses the `manageState` permission: [Address Book Snap Tutorial](https://github.com/Montoya/address-book-snap-tutorial#readme)
+- A 45-minute tutorial that shows you how to build a transaction insights snap: [4byte API snap video](https://archive.devcon.org/archive/watch/6/getting-started-with-metamask-snaps/?tab=YouTube) and [text guide](https://hackmd.io/@rekmarks/devcon-vi)
 
-MetaMask also maintains tools to help developers debug, build and maintain Snaps:
+MetaMask also maintains tools to help developers build, debug, and maintain snaps:
 
-- [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
+- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes TypeScript/React and vanilla JS options and a CLI for building, packaging, and deploying your snap and a companion dapp
+- [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts with Ganache
+- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a dapp for evaluating them
+- [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps
 - [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
 
 Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-monorepo/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-monorepo/issues).

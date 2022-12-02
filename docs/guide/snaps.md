@@ -165,12 +165,6 @@ The next time you click the **Send message** button, you will see the updated te
 
 If you're interested in building your own snap, next up is the [Snaps development guide](./snaps-development-guide.html).
 
-You can also look at some of the existing snaps being developed right now. Each one is fully functional and open-source:
-
-- [StarkNet](https://github.com/ConsenSys/starknet-snap)
-- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
-- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
-
-## GitHub discussion board
+## Need help?
 
 If you have questions, proposals, or need help with anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions).
