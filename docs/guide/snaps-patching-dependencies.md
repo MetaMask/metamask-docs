@@ -24,7 +24,7 @@ Then add a postinstall script to your `package.json`.
 
 Now you can make changes to your dependencies inside `node_modules` and run `yarn patch-package package-name` to save the changes as a patch. This will create a `.patch` file containing your dependency patch. These patches can be committed to your Git repository and will be replayed when you re-install your dependencies.
 
-**If you need guidance in how you can patch your dependencies or otherwise need help troubleshooting dependency problems, please create an issue on the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.**
+**If you need guidance in how you can patch your dependencies or otherwise need help troubleshooting dependency problems, please create an issue on the [MetaMask/snaps-monorepo](https://github.com/MetaMask/snaps-monorepo) repository.**
 
 ## Patching the use of XMLHttpRequest
 
