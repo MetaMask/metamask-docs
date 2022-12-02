@@ -73,7 +73,7 @@ Perform actions that run periodically at fixed times, dates, or intervals.
 
 ### Propose a feature
 
-Create a feature proposal with your ideas in our [GitHub discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions).
+Create a feature proposal with your ideas in our [GitHub discussion board](https://github.com/MetaMask/snaps-monorepo/discussions).
 
 ## Getting started
 
@@ -173,4 +173,4 @@ You can also look at some of the existing snaps being developed right now. Each 
 
 ## GitHub discussion board
 
-If you have questions, proposals, or need help with anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-skunkworks/discussions).
+If you have questions, proposals, or need help with anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions).

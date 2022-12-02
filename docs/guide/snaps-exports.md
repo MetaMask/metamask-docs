@@ -5,7 +5,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-monorepo/discussions) to join the discussion.
 :::
 
 ## Table of Contents

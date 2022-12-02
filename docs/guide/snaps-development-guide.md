@@ -342,7 +342,7 @@ Don't forget to run `mm-snap manifest --fix` if you modified your snap bundle af
 Otherwise your manifest `shasum` value won't be correct, and attempting to install your snap will fail.
 :::
 
-If you run into a build or eval issue that you can't solve on your own, please create an issue on the [MetaMask/snaps-skunkworks](https://github.com/MetaMask/snaps-skunkworks) repository.
+If you run into a build or eval issue that you can't solve on your own, please create an issue on the [MetaMask/snaps-monorepo](https://github.com/MetaMask/snaps-monorepo) repository.
 
 #### Using Other Build Tools
 
@@ -352,7 +352,7 @@ If you prefer building your snap with a build system you are more comfortable wi
 - [Rollup](https://www.npmjs.com/package/@metamask/rollup-plugin-snaps)
 - [Browserify](https://www.npmjs.com/package/@metamask/snaps-browserify-plugin)
 
-For examples on how to set up these build systems yourself, please visit our [examples](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples/examples).
+For examples on how to set up these build systems yourself, please visit our [examples](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples/examples).
 
 We still recommend using our CLI `mm-snap` to make sure your manifest `shasum` value is correct by running `mm-snap manifest --fix` after creating your bundle. You may also benefit from running `mm-snap eval` to detect any SES issues up front.
 
@@ -401,7 +401,7 @@ In the future, MetaMask will create some way for users to more easily discover s
 
 ## Resources and Tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-skunkworks/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained by MetaMask, as well as the following reference Snaps. Each one is fully-functional and open-source:
 
 - [StarkNet](https://github.com/ConsenSys/starknet-snap)
 - [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
@@ -417,4 +417,4 @@ MetaMask also maintains tools to help developers debug, build and maintain Snaps
 - [Snaps Inspector](https://inspector.open-rpc.org/?request[jsonrpc]=2.0&request[method]=confirm&request[params][0]=hello&request[params][1]=more&request[params][2]=lorem%20ipsum&request[id]=0&url=npm:@metamask/test-snap-confirm&customTransport[type]=plugin&customTransport[name]=Snaps&customTransport[transport][type]=postmessageiframe&customTransport[transport][name]=PostMessageIframe&customTransport[uri]=https://xops.github.io/inspector-snaps-transport/) - An API tool to make JSON-RPC requests directly to Snaps.
 - [Snaps OpenRPC Generator](https://github.com/xops/snaps-openrpc-generator) - A project skeleton generator that creates a Snap and documentation from your [OpenRPC document](https://spec.open-rpc.org/#openrpc-document)
 
-Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-skunkworks/issues).
+Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-monorepo/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-monorepo/issues).
