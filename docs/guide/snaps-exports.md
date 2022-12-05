@@ -53,7 +53,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   request,
 }) => {
   switch (request.method) {
-    case 'exampleMethodOne':
+    case 'hello':
       return 'world!';
 
     default:
@@ -67,7 +67,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'exampleMethodOne':
+    case 'hello':
       return 'world!';
 
     default:
@@ -162,7 +162,7 @@ import { OnCronjobHandler } from '@metamask/snap-types';
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case 'hello':
+    case 'exampleMethodOne':
       return wallet.request({
         method: 'snap_notify',
         params: [
@@ -184,7 +184,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 ```js
 module.exports.onCronjob = async ({ request }) => {
   switch (request.method) {
-    case 'hello':
+    case 'exampleMethodOne':
       return wallet.request({
         method: 'snap_notify',
         params: [
