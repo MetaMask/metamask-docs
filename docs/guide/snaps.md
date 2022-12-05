@@ -153,7 +153,7 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Modify the text in the `description` or `textAreaContent` field. Refresh the dapp in your browser, and click the **Reconnect** button to reinstall the snap.
+Modify the text in the `description` or `textAreaContent` field and click the **Reconnect** button to reinstall the snap.
 
 ::: tip Local Snap Reinstallation
 MetaMask automatically reinstalls locally hosted snaps whenever it receives a connection request for them.
