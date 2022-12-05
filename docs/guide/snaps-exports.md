@@ -53,7 +53,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   request,
 }) => {
   switch (request.method) {
-    case 'hello':
+    case 'exampleMethodOne':
       return 'world!';
 
     default:
@@ -67,7 +67,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
+    case 'exampleMethodOne':
       return 'world!';
 
     default:
