@@ -50,7 +50,7 @@ For snaps that need to access the internet, the snap can request the `endowment:
 
 For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. See [Exports](./snaps-exports.html#ontransaction) for more information.
 
-This permission requires an object with a `allowTransactionOrigin` property, to signal if the snap should pass the `origin` property to `onTransaction` parameters. This property represent the transaction initiator origin. Default to `false`.
+This permission requires an object with an `allowTransactionOrigin` property, to signal if the snap should pass the `origin` property to the `onTransaction` parameters. This property represents the transaction initiator origin. Default to `false`.
 
 ```json
 {
