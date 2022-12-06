@@ -425,7 +425,7 @@ The user can either approve or reject the confirmation, which will be indicated 
 #### Example
 
 ```javascript
-const result = await wallet.request({
+const result = await snap.request({
   method: 'snap_confirm',
   params: [
     {
@@ -543,7 +543,7 @@ import { SLIP10Node } from '@metamask/key-tree';
 
 // By way of example, we will use Dogecoin, which has a derivation path starting
 // with `m/44'/3'`.
-const dogecoinNode = await wallet.request({
+const dogecoinNode = await snap.request({
   method: 'snap_getBip32Entropy',
   params: {
     // Must be specified exactly in the manifest
@@ -675,7 +675,7 @@ Note that `@metamask/key-tree` can help you get the [extended private keys](http
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
 
 // By way of example, we will use Dogecoin, which has `coin_type` 3.
-const dogecoinNode = await wallet.request({
+const dogecoinNode = await snap.request({
   method: 'snap_getBip44Entropy',
   params: {
     coinType: 3,
@@ -753,7 +753,7 @@ Note that this returns the public key, not the extended public key (`xpub`), or 
 ```javascript
 // By way of example, we will use Dogecoin, which has a derivation path starting
 // with `m/44'/3'`.
-const dogecoinPublicKey = await wallet.request({
+const dogecoinPublicKey = await snap.request({
   method: 'snap_getBip32PublicKey',
   params: {
     // The path and curve must be specified in the initial permissions.
@@ -865,13 +865,13 @@ The data is automatically encrypted using a snap-specific key and automatically 
 
 ```javascript
 // First, let's persist some data
-await wallet.request({
+await snap.request({
   method: 'snap_manageState',
   params: { operation: 'update', newState: { hello: 'world' } },
 });
 
 // Then, at some later time, let's get the data we stored
-const persistedData = await wallet.request({
+const persistedData = await snap.request({
   method: 'snap_manageState',
   params: { operation: 'get' },
 });
@@ -880,7 +880,7 @@ console.log(persistedData);
 // { hello: 'world' }
 
 // Finally, if there's no need to store data anymore, we can clear it out
-await wallet.request({
+await snap.request({
   method: 'snap_manageState',
   params: { operation: 'clear' },
 });
@@ -944,7 +944,7 @@ See above for their meaning and format.
 #### Example
 
 ```javascript
-await wallet.request({
+await snap.request({
   method: 'snap_notify',
   params: {
     type: 'inApp',

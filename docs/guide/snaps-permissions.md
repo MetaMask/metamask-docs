@@ -91,6 +91,10 @@ Cronjobs are specified as follows:
 }
 ```
 
+### `endowment:ethereum-provider`
+
+For snaps that wish to communicate with a node via MetaMask, the snap can request the `endowment:ethereum-provider` permission. This permission will expose the global API `ethereum` to the snap execution environment. Without this permission, this global will not be available. This global is a EIP-1193 provider.
+
 ## RPC Permissions
 
 To use any restricted RPC method, a snap will need to request permissions to access that method. For a list of available RPC methods and thus valid RPC permissions see [JSON-RPC API](./snaps-rpc-api.html#restricted-methods).

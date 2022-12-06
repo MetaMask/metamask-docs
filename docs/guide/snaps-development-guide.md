@@ -83,9 +83,8 @@ Whenever the snap receives a JSON-RPC request from an external entity (a dapp or
 In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
 :::
 
-In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
-This object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
-Any message sent via `wallet.request()` will be received and processed by MetaMask.
+In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
+This object can be used to make snap specific JSON-RPC requests.
 
 If a dapp wanted to use `hello-snap`, it would do something like this:
 
@@ -289,7 +288,7 @@ if (provider && isFlask) {
 ### The Snap Execution Environment
 
 Snaps execute in a sandboxed environment that's running Secure EcmaScript (SES, see [below](#secure-ecmascript-ses)).
-There is no DOM, no Node.js builtins, and no platform-specific APIs other than MetaMask's `wallet` global object.
+There is no DOM, no Node.js builtins, and no platform-specific APIs other than MetaMask's `snap` global object.
 Almost all standard JavaScript globals contained in [this list](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) that are also in Node.js are available as normal.
 This includes things like `Promise`, `Error`, `Math`, `Set`, `Reflect` etc.
 
