@@ -382,31 +382,41 @@ const result = await ethereum.request({
 console.log(result); // We happen to know that this will be `true` or `false`
 ```
 
-### `snap_confirm`
+### `snap_dialog`
 
 ::: warning Only Callable By
 
 - Snaps
   :::
 
-#### Parameters
+#### Description
+
+Calling this method causes a dialog to be displayed in the MetaMask UI.
+There are three types of dialogs: Alert, Confirmation, and Prompt.
+Each of these dialog types has different parameters and return types, detailed below.
+
+##### Alert Dialog
+
+Displays an alert that can only be acknowledged.
+
+###### Parameters
 
 ```typescript
-interface SnapConfirmParam {
+interface SnapAlertDialogParam {
   /**
-   * A prompt, phrased as a question, no greater than 40 characters long.
+   * The alert title, no greater than 40 characters long.
    */
-  prompt: string;
+  title: string;
 
   /**
-   * A description, displayed with the prompt, no greater than 140 characters
-   * long.
+   * A description, displayed with the title, no greater
+   * than 140 characters long.
    */
   description?: string;
 
   /**
-   * Free-from text content, no greater than 1800 characters long.
-   * It will be displayed in monospace font in a scrollable text area.
+   * Free-from text content, no greater than 1800
+   * characters long.
    */
   textAreaContent?: string;
 }
@@ -414,38 +424,135 @@ interface SnapConfirmParam {
 
 - `Array`
 
-  0. `SnapConfirmParam` - An object containing the contents of the confirmation.
+  0. `SnapAlertDialogParam` - An object containing the contents of the alert dialog.
 
-#### Returns
+###### Returns
 
-`boolean` - `true` if the user accepted the confirmation, and `false` otherwise.
+`null`
 
-#### Description
+###### Example
 
-Calling this method causes a confirmation to be displayed in the MetaMask UI.
-The contents of the confirmation depend on the parameters, see above for their meaning and format.
-The user can either approve or reject the confirmation, which will be indicated by the method's return value.
+```javascript
+await wallet.request({
+  method: 'snap_dialog',
+  params: [
+    {
+      type: DialogType.Alert,
+      title: 'Watch out!',
+      description: 'Look, a bird just flew by!',
+      textAreaContent: 'Birds are a group of warm-blooded vertebrates that are characterized by their ability to fly.',
+    },
+  ],
+});
 
-#### Example
+// Code that should execute after the alert has been acknowledged
+```
+
+
+##### Confirmation Dialog
+
+Displays a confirmation dialog that can be accepted or rejected.
+
+###### Parameters
+
+```typescript
+interface SnapConfirmationDialogParam {
+  /**
+   * The confirmation title, no greater than 40 characters long.
+   */
+  title: string;
+
+  /**
+   * A description, displayed with the title, no greater
+   * than 140 characters long.
+   */
+  description?: string;
+
+  /**
+   * Free-from text content, no greater than 1800
+   * characters long.
+   */
+  textAreaContent?: string;
+}
+```
+
+- `Array`
+
+  0. `SnapConfirmationDialogParam` - An object containing the contents of the confirmation dialog.
+
+###### Returns
+
+`boolean` - `true` if the confirmation was accepted, `false` otherwise
+
+###### Example
 
 ```javascript
 const result = await wallet.request({
-  method: 'snap_confirm',
+  method: 'snap_dialog',
   params: [
     {
-      prompt: 'Would you like to take the action?',
-      description: 'The action is...',
-      textAreaContent: 'Very detailed information about the action...',
+      type: DialogType.Confirmation,
+      title: 'Replace batteries?',
+      description: 'Do you want to replace the bird\'s batteries?',
+      textAreaContent: 'The batteries in the birds planted by the government have a limited lifetime. Would you like to replace the batteries?',
     },
   ],
 });
 
 if (result === true) {
-  // Take the action
+  // Replace the batteries
 } else {
-  // Do not take the action
+  // Don't replace the batteries
 }
 ```
+
+
+##### Prompt Dialog
+
+Displays a prompt where the user can enter a text response.
+
+###### Parameters
+
+```typescript
+interface SnapPromptDialogParam {
+  /**
+   * The prompt title, no greater than 40 characters long.
+   */
+  title: string;
+
+  /**
+   * A description, displayed with the title, no greater
+   * than 140 characters long.
+   */
+  description?: string;
+}
+```
+
+- `Array`
+
+  0. `SnapPromptDialogParam` - An object containing the contents of the prompt dialog.
+
+###### Returns
+
+`string` - The text entered by the user
+
+###### Example
+
+```javascript
+const birdProof = await wallet.request({
+  method: 'snap_dialog',
+  params: [
+    {
+      type: DialogType.Prompt,
+      title: 'About birds...',
+      description: 'What are some proofs that birds aren\'t real?',
+    },
+  ],
+});
+
+// `birdProof` will contain the text typed by the user
+```
+
 
 ### `snap_getBip32Entropy`
 
