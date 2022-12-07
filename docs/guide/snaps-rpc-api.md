@@ -823,7 +823,7 @@ completely different entropy, that is unrelated to the entropy generated without
 ::: tab Code
 
 ```javascript
-const entropy = await wallet.request({
+const entropy = await snap.request({
   method: 'snap_getEntropy',
   params: {
     version: 1,
