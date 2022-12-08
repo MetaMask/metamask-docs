@@ -438,9 +438,9 @@ await wallet.request({
   params: [
     {
       type: DialogType.Alert,
-      title: 'Watch out!',
-      description: 'Look, a bird just flew by!',
-      textAreaContent: 'Birds are a group of warm-blooded vertebrates that are characterized by their ability to fly.',
+      title: 'Something happened in the system',
+      description: 'The thing that happened is...',
+      textAreaContent: 'Very detailed information about the thing that happened...',
     },
   ],
 });
@@ -492,9 +492,9 @@ const result = await wallet.request({
   params: [
     {
       type: DialogType.Confirmation,
-      title: 'Replace batteries?',
-      description: 'Do you want to replace the bird\'s batteries?',
-      textAreaContent: 'The batteries in the birds planted by the government have a limited lifetime. Would you like to replace the batteries?',
+      title: 'Would you like to take the action?',
+      description: 'The action is...',
+      textAreaContent: 'Very detailed information about the action...',
     },
   ],
 });
@@ -539,18 +539,18 @@ interface SnapPromptDialogParam {
 ###### Example
 
 ```javascript
-const birdProof = await wallet.request({
+const walletAddress = await wallet.request({
   method: 'snap_dialog',
   params: [
     {
       type: DialogType.Prompt,
-      title: 'About birds...',
-      description: 'What are some proofs that birds aren\'t real?',
+      title: 'What is the wallet address?',
+      description: 'Please enter the wallet address to be monitored...',
     },
   ],
 });
 
-// `birdProof` will contain the text typed by the user
+// `walletAddress` will be a string containing the address entered by the user
 ```
 
 
