@@ -382,6 +382,71 @@ const result = await ethereum.request({
 console.log(result); // We happen to know that this will be `true` or `false`
 ```
 
+### `snap_confirm`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+```typescript
+interface SnapConfirmParam {
+  /**
+   * A prompt, phrased as a question, no greater than 40 characters long.
+   */
+  prompt: string;
+
+  /**
+   * A description, displayed with the prompt, no greater than 140 characters
+   * long.
+   */
+  description?: string;
+
+  /**
+   * Free-from text content, no greater than 1800 characters long.
+   * It will be displayed in monospace font in a scrollable text area.
+   */
+  textAreaContent?: string;
+}
+```
+
+- `Array`
+
+  0. `SnapConfirmParam` - An object containing the contents of the confirmation.
+
+#### Returns
+
+`boolean` - `true` if the user accepted the confirmation, and `false` otherwise.
+
+#### Description
+
+Calling this method causes a confirmation to be displayed in the MetaMask UI.
+The contents of the confirmation depend on the parameters, see above for their meaning and format.
+The user can either approve or reject the confirmation, which will be indicated by the method's return value.
+
+#### Example
+
+```javascript
+const result = await wallet.request({
+  method: 'snap_confirm',
+  params: [
+    {
+      prompt: 'Would you like to take the action?',
+      description: 'The action is...',
+      textAreaContent: 'Very detailed information about the action...',
+    },
+  ],
+});
+
+if (result === true) {
+  // Take the action
+} else {
+  // Do not take the action
+}
+```
+
 ### `snap_dialog`
 
 ::: warning Only Callable By
