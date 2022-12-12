@@ -21,7 +21,7 @@ Well, no, that's also up to you! If your snap can do something useful without re
 :::
 
 ::: warning Requesting the JSON-RPC permission
-In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. see [Permissions](./snaps-permissions.html#endowment-rpc)
+In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
 :::
 
 ### Parameters
