@@ -36,3 +36,10 @@ One thing that's not documented is how to properly do Markdown inside tabs. For 
   </TabItem>
 </Tabs>
 ```
+
+### Live Code Blocks
+Rather than implementing our own live code blocks, we use the [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) Remark plugin. This allows us to define a code block that will be loaded live in a CodeSandbox iframe, by adding a meta to the codeblock, like ```javascript codesandbox=vanilla
+
+This allows us to keep our code blocks versioned and in our codebase, while giving us the full power of CodeSandbox to showcase any example we want, with any dependency we want.
+
+The plugin allows for simple codeblocks where the content of the block replaces the CodeSandbox entry point, or more complex examples that can be loaded directly from the filesystem, by using `codesandbox=file:./example-folder`, as detailed in the plugin's documentation.

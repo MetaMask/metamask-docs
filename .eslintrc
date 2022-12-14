@@ -1,4 +1,18 @@
 {
+  "env": {
+    "node": true,
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "overrides": [
+    {
+      "files": "**/*.js",
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
   "extends": [
     "plugin:@docusaurus/recommended",
     "eslint:recommended",

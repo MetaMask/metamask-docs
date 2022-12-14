@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const codeTheme = require("prism-react-renderer/themes/dracula");
+const remarkCodesandbox = require("remark-codesandbox");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -34,6 +35,12 @@ const config = {
         docs: {
           path: "docs",
           sidebarCollapsible: false,
+          remarkPlugins: [
+            [remarkCodesandbox, {
+              mode: "iframe",
+              autoDeploy: process.env.NODE_ENV === "production",
+            }],
+          ],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
