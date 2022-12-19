@@ -599,7 +599,7 @@ interface SnapPromptDialogParam {
 
 ###### Returns
 
-`string` - The text entered by the user
+`string` - The text entered by the user.
 
 ###### Example
 
