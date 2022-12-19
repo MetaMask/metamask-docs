@@ -11,6 +11,12 @@ Our instance of Docusaurus uses multiple of its powerful features, including:
 * [MDX](https://docusaurus.io/docs/markdown-features/react#importing-markdown)
 * [Custom Sidebars](https://docusaurus.io/docs/sidebar): normally sidebars are auto-generated based on the docs directory structure. Having a custom sidebar allows us to define the order and inclusion of documentation items, with any hierarchy we want. The current proposed hierarchy is here: https://docs.google.com/spreadsheets/d/1fr1qnP830Zrdbzq0rPvoTVQsYBwL2Sq-wEJjL4tGfM8/edit
 
+
+## Running locally
+
+`yarn install && yarn start`
+
+
 ## MDX
 
 ### Tabs
