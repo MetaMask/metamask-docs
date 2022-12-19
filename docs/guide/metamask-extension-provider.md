@@ -1,3 +1,4 @@
+
 # MetaMask Extension Provider
 
 A module for accessing the user's MetaMask [provider](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3currentprovider) from other WebExtensions.
@@ -63,3 +64,5 @@ You'll need to edit the method `getMetaMaskId()` to return your local developmen
 ## Current Limitations
 
 In order to identify when there is a problem (like MetaMask was not connected), some kind of proper error handling must be added to [metamask-inpage-provider](https://github.com/MetaMask/metamask-inpage-provider) that exposes the errors to the consumer of the provider. Maybe making it an event-emitter, so it can emit its errors, instead of just logging them.
+
+
