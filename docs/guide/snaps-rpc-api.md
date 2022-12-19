@@ -467,29 +467,18 @@ Displays an alert that can only be acknowledged.
 ###### Parameters
 
 ```typescript
-interface SnapAlertDialogParam {
+interface SnapAlertDialogParam {  
   /**
-   * The alert title, no greater than 40 characters long.
+   * The type of the dialog.
    */
-  title: string;
-
+  type: 'Alert';
+  
   /**
-   * A description, displayed with the title, no greater
-   * than 140 characters long.
+   * The content of the alert, as a Custom UI component
    */
-  description?: string;
-
-  /**
-   * Free-from text content, no greater than 1800
-   * characters long.
-   */
-  textAreaContent?: string;
+  content: Component;
 }
 ```
-
-- `Array`
-
-  0. `SnapAlertDialogParam` - An object containing the contents of the alert dialog.
 
 ###### Returns
 
@@ -497,17 +486,16 @@ interface SnapAlertDialogParam {
 
 ###### Example
 
-```javascript
+```typescript
 await wallet.request({
   method: 'snap_dialog',
-  params: [
-    {
-      type: DialogType.Alert,
-      title: 'Something happened in the system',
-      description: 'The thing that happened is...',
-      textAreaContent: 'Very detailed information about the thing that happened...',
-    },
-  ],
+  params: {
+    type: 'Alert',
+    content: panel([
+      heading('Something happened in the system'),
+      text('The thing that happened is...'),
+    ]),
+  },
 });
 
 // Code that should execute after the alert has been acknowledged
@@ -523,27 +511,16 @@ Displays a confirmation dialog that can be accepted or rejected.
 ```typescript
 interface SnapConfirmationDialogParam {
   /**
-   * The confirmation title, no greater than 40 characters long.
+   * The type of the dialog.
    */
-  title: string;
-
+  type: 'Confirmation';
+  
   /**
-   * A description, displayed with the title, no greater
-   * than 140 characters long.
+   * The content of the confirmation, as a Custom UI component
    */
-  description?: string;
-
-  /**
-   * Free-from text content, no greater than 1800
-   * characters long.
-   */
-  textAreaContent?: string;
+  content: Component;
 }
 ```
-
-- `Array`
-
-  0. `SnapConfirmationDialogParam` - An object containing the contents of the confirmation dialog.
 
 ###### Returns
 
@@ -551,23 +528,20 @@ interface SnapConfirmationDialogParam {
 
 ###### Example
 
-```javascript
+```typescript
 const result = await wallet.request({
   method: 'snap_dialog',
-  params: [
-    {
-      type: DialogType.Confirmation,
-      title: 'Would you like to take the action?',
-      description: 'The action is...',
-      textAreaContent: 'Very detailed information about the action...',
-    },
-  ],
+  params: {
+    type: 'Confirmation',
+    content: panel([
+      heading('Would you like to take the action?'),
+      text('The action is...'),
+    ]),
+  },
 });
 
 if (result === true) {
-  // Replace the batteries
-} else {
-  // Don't replace the batteries
+  // Do the action
 }
 ```
 
@@ -581,21 +555,21 @@ Displays a prompt where the user can enter a text response.
 ```typescript
 interface SnapPromptDialogParam {
   /**
-   * The prompt title, no greater than 40 characters long.
+   * The type of the dialog.
    */
-  title: string;
+  type: 'Prompt';
+  
+  /**
+   * The content of the confirmation, as a Custom UI component.
+   */
+  content: Component;
 
   /**
-   * A description, displayed with the title, no greater
-   * than 140 characters long.
+   * Text that will be in the input field when nothing is typed.
    */
-  description?: string;
+  placeholder: string;
 }
 ```
-
-- `Array`
-
-  0. `SnapPromptDialogParam` - An object containing the contents of the prompt dialog.
 
 ###### Returns
 
@@ -603,16 +577,17 @@ interface SnapPromptDialogParam {
 
 ###### Example
 
-```javascript
+```typescript
 const walletAddress = await wallet.request({
   method: 'snap_dialog',
-  params: [
-    {
-      type: DialogType.Prompt,
-      title: 'What is the wallet address?',
-      description: 'Please enter the wallet address to be monitored...',
-    },
-  ],
+  params: {
+    type: 'Prompt',
+    content: panel([
+      heading('What is the wallet address?'),
+      text('Please enter the wallet address to be monitored'),
+    ]),
+    placeholder: '0x123...',
+  },
 });
 
 // `walletAddress` will be a string containing the address entered by the user
