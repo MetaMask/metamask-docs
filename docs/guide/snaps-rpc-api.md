@@ -487,6 +487,8 @@ interface SnapAlertDialogParam {
 ###### Example
 
 ```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
 await wallet.request({
   method: 'snap_dialog',
   params: {
@@ -529,6 +531,8 @@ interface SnapConfirmationDialogParam {
 ###### Example
 
 ```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
 const result = await wallet.request({
   method: 'snap_dialog',
   params: {
@@ -578,6 +582,8 @@ interface SnapPromptDialogParam {
 ###### Example
 
 ```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
 const walletAddress = await wallet.request({
   method: 'snap_dialog',
   params: {
