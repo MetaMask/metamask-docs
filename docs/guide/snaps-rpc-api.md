@@ -547,7 +547,7 @@ interface SnapConfirmationDialogParam {
 
 ###### Returns
 
-`boolean` - `true` if the confirmation was accepted, `false` otherwise
+`boolean` - `true` if the confirmation was accepted, `false` otherwise.
 
 ###### Example
 
