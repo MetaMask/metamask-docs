@@ -17,7 +17,7 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 In order to communicate with dapps and other snaps, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`. Whenever the snap receives a JSON-RPC request, the `onRpcRequest` handler function will be called with the below parameters.
 
 ::: tip Does my snap need to have an RPC API?
-Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip exporting onRpcRequest. However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that sends transactions for that protocol via your snap, for example, you need to specify an RPC API.
+Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, e.g. providing [transaction insights](#ontransaction), then you can skip exporting onRpcRequest. However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that sends transactions for that protocol via your snap, for example, you need to specify an RPC API.
 :::
 
 ### Parameters
