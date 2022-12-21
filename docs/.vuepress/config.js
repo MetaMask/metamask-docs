@@ -176,6 +176,7 @@ const guideSidebar = [
       'snaps-permissions',
       'snaps-exports',
       'snaps-patching-dependencies',
+      'snaps-concepts',
     ],
   },
   {
