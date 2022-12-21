@@ -75,6 +75,7 @@ Consider this trivial snap, which we'll call `hello-snap`:
 ```javascript
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
+    // Expose a "hello" RPC method to dApps
     case 'hello':
       return 'world!';
 
@@ -94,6 +95,7 @@ Any message sent via `wallet.request()` will be received and processed by MetaMa
 If a dapp wanted to use `hello-snap`, it would do something like this:
 
 ```javascript
+// Connect to the Snap, enabling its usage inside the dApp
 await ethereum.request({
   method: 'wallet_enable',
   params: [
@@ -107,6 +109,7 @@ await ethereum.request({
   ],
 });
 
+// Invoke the "hello" RPC method exposed by the Snap
 const hello = await ethereum.request({
   method: 'wallet_invokeSnap',
   params: ['npm:hello-snap', { method: 'hello' }],
