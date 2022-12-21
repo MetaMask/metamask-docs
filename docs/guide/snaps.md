@@ -83,6 +83,13 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
 
 - Up-to-date Chromium or Firefox browser
 - [Node.js](https://nodejs.org/)
+- MetaMask Flask
+
+  To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+
+  ::: warning
+  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
+  :::
 
 ### Quick start using our template
 
@@ -104,17 +111,9 @@ yarn start
 
 You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:8000/`](http://localhost:8000/).
 
-Next step is to [install MetaMask Flask](https://metamask.io/flask/).
-
-### Install MetaMask Flask
-
-To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
-
-Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
-
 ### Connecting to the snap
 
-Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile _without MetaMask stable_) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
+Once you have the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
 
 1. Click the **Connect** button and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
 
