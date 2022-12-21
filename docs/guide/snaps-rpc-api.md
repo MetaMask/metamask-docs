@@ -467,12 +467,12 @@ Displays an alert that can only be acknowledged.
 ###### Parameters
 
 ```typescript
-interface SnapAlertDialogParam {  
+interface SnapAlertDialogParam {
   /**
    * The type of the dialog.
    */
   type: 'Alert';
-  
+
   /**
    * The content of the alert, as a Custom UI component
    */
@@ -503,7 +503,6 @@ await wallet.request({
 // Code that should execute after the alert has been acknowledged
 ```
 
-
 ##### Confirmation Dialog
 
 Displays a confirmation dialog that can be accepted or rejected.
@@ -516,7 +515,7 @@ interface SnapConfirmationDialogParam {
    * The type of the dialog.
    */
   type: 'Confirmation';
-  
+
   /**
    * The content of the confirmation, as a Custom UI component
    */
@@ -549,7 +548,6 @@ if (result === true) {
 }
 ```
 
-
 ##### Prompt Dialog
 
 Displays a prompt where the user can enter a text response.
@@ -562,7 +560,7 @@ interface SnapPromptDialogParam {
    * The type of the dialog.
    */
   type: 'Prompt';
-  
+
   /**
    * The content of the confirmation, as a Custom UI component.
    */
@@ -598,7 +596,6 @@ const walletAddress = await wallet.request({
 
 // `walletAddress` will be a string containing the address entered by the user
 ```
-
 
 ### `snap_getBip32Entropy`
 
