@@ -63,9 +63,7 @@ Bring your insights, anti-phishing, and security solutions to the MetaMask UI wi
 
 #### Custom UI in MetaMask using a defined set of components
 
-Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
-
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
+Display [custom UI](./snaps-concepts.md#custom-ui) within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
 
 #### Schedule actions with cron jobs
 
