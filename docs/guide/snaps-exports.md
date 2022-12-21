@@ -98,14 +98,16 @@ interface OnTransactionArgs {
 ### Returns
 
 ```typescript
+import { Component } from '@metamask/snaps-ui';
+
 type OnTransactionHandlerReturn = Promise<OnTransactionResponse>;
 
 interface OnTransactionResponse {
-  insights: { [key: string]: unknown };
+  content: Component;
 }
 ```
 
-- `onTransactionResponse` - The `insights` object returned by the snap will be displayed alongside the confirmation for the transaction that `onTransaction` was called with. Keys and values will be displayed in the order received, with each key rendered as a title and each value rendered as a string.
+- `onTransactionResponse` - The `content` object returned by the snap will be displayed using Custom UI alongside the confirmation for the transaction that `onTransaction` was called with. Keys and values will be displayed in the order received, with each key rendered as a title and each value rendered as a string.
 
 ### Examples
 
@@ -113,17 +115,25 @@ interface OnTransactionResponse {
 
 ```typescript
 import { OnTransactionHandler } from "@metamask/snap-types";
+import { panel, heading, text } from "@metamask/snaps-ui";
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
   chainId,
 }) => {
   const insights = /* Get insights */;
-  return { insights };
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value)))
+    ])
+  };
 };
 ```
 
 #### Javascript
+import { panel, heading, text } from "@metamask/snaps-ui";
 
 ```js
 module.exports.onTransaction = async ({
@@ -131,6 +141,12 @@ module.exports.onTransaction = async ({
   chainId,
 }) => {
   const insights = /* Get insights */;
-  return { insights };
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value)))
+    ])
+  };
 };
 ```
