@@ -261,8 +261,12 @@ Via the MetaMask settings page, the user can see their installed snaps. For each
 - see its execution status (running, stopped, or crashed)
 - enable and disable the snap
 
-Other than the settings page, the only way a snap can modify the MetaMask UI is by creating a confirmation using the [`snap_confirm`](./snaps-rpc-api.html#snap-confirm) RPC method.
-This means that many snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
+Other than the settings page, there are only a few select ways a snap can modify the MetaMask UI:
+
+- By opening a dialog using the [`snap_dialog`](./snaps-rpc-api.html#snap-dialog) RPC method.
+- By returning transaction insights from the [`onTransaction`](./snaps-exports.md#ontransaction) export.
+
+This means that most snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
 
