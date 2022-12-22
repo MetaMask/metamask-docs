@@ -272,9 +272,9 @@ Providing more ways for snaps to modify the MetaMask UI is an important goal of 
 
 #### Detecting the User's MetaMask Version
 
-When developing a website that depends on Snaps, it's important to know whether MetaMask Flask is installed.
+When developing a website/Dapp that depends on Snaps, it's important to know whether MetaMask Flask is installed.
 For this purpose, we recommend using the [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider)
-package [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
+package's [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
 RPC method as demonstrated in the following snippet:
 
 ```js
