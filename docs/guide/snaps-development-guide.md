@@ -196,7 +196,7 @@ module.exports = {
 };
 ```
 
-The configuration file should not be published.
+The configuration file should not be published to NPM, since it's only used for development and building. That being said, it can be committed to GitHub to share the configuration with your team, since it shouldn't contain any secrets.
 
 ### The Snap Bundle File
 
