@@ -36,7 +36,7 @@ const config = {
           path: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           sidebarCollapsible: true,
-          sidebarCollapsed: false,
+          breadcrumbs: false,
           remarkPlugins: [
             [remarkCodesandbox, {
               mode: "iframe",

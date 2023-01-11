@@ -1,9 +1,13 @@
-# Integrate with MetaMask (API & SDK)
+---
+title: Introduction
+---
 
-Integrate with MetaMask using the [MetaMask API](#metamask-api) directly,
-[MetaMask SDK](#metamask-sdk), or a [convenience library](#convenience-libraries).
+# Integrate with MetaMask using the API and SDK
 
-## MetaMask API
+You can integrate your dapp with MetaMask using the [MetaMask Ethereum provider API](#metamask-api)
+directly, [MetaMask SDK](#metamask-sdk), or a [convenience library](#convenience-libraries).
+
+## MetaMask Ethereum provider API
 
 MetaMask injects a global API into websites visited by its users at `window.ethereum`.
 This API allows websites to request users' Ethereum accounts, read data from blockchains the user is
