@@ -20,7 +20,7 @@ This is currently the most readable signature method that is also efficient to p
 
 A SignTypedData payload uses a standard format of encoding structs which is recursive, but has a different format for the top-level struct that is signed, which includes some `domain` metadata about the verifying contract to provide replay-protection of these signatures between different contract instances.
 
-The top level SignTypedData object is the concatenation of
+The top level SignTypedData object is the concatenation of:
 
 - A `domain` struct, which can include the contract's address, chainId, a version, and a name, for cross-contract replay protection.
 - The top level struct hash to sign.
@@ -44,16 +44,42 @@ V4 of this method includes some improvements that are not available in older ite
 V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
 :::
 
-### Params
+### Parameters
 
-`domain`: The Domain or domain signature is important because it:
-`domain.name`: A human-readable name that will be shown to the user as the requesting contract. You should make it something familiar so the user would recognize it if a phishing site later requested a signature for your domain.
-`domain.chainId`: The chain that these signatures should be valid on, if only one.
-`domain.verifyingContract`: The address of the contract that will verify this contract, to ensure this signature is not also meaningful in unintended ways on other contracts. You can also provide a URL here.
-`domain.version`: A number you can add as an extra level of replay protection. Probably totally overkill since you should be providing `verifyingContract` already.
-`primaryType`: The name of the type of the struct that you are requesting the user sign.
-`types`: An object representing all of the solidity types that will be involved in signing the intended message.
-`message`: The contents of the struct you are proposing the user sign.
+- `domain`: The Domain or domain signature is important because it:
+- `domain.name`: A human-readable name that will be shown to the user as the requesting contract. You should make it something familiar so the user would recognize it if a phishing site later requested a signature for your domain.
+- `domain.chainId`: The chain that these signatures should be valid on, if only one.
+- `domain.verifyingContract`: The address of the contract that will verify this contract, to ensure this signature is not also meaningful in unintended ways on other contracts. You can also provide a URL here.
+- `domain.version`: A number you can add as an extra level of replay protection. Probably totally overkill since you should be providing `verifyingContract` already.
+- `primaryType`: The name of the type of the struct that you are requesting the user sign.
+- `types`: An object representing all of the solidity types that will be involved in signing the intended message.
+- `message`: An object representing the contents of the struct you are proposing the user sign.
+
+Here are the parameter typescript definitions as defined in [eth-sig-util](https://github.com/MetaMask/eth-sig-util/blob/main/src/sign-typed-data.ts):
+```typescript
+interface MessageTypeProperty {
+  name: string;
+  type: string;
+}
+
+interface MessageTypes {
+  EIP712Domain: MessageTypeProperty[];
+  [additionalProperties: string]: MessageTypeProperty[];
+}
+
+interface TypedMessage<T extends MessageTypes> {
+  types: T;
+  primaryType: keyof T;
+  domain: {
+    name?: string;
+    version?: string;
+    chainId?: number;
+    verifyingContract?: string;
+    salt?: ArrayBuffer;
+  };
+  message: Record<string, unknown>;
+}
+```
 
 Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
