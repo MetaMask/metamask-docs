@@ -16,10 +16,12 @@ This is currently the most readable signature method that is also efficient to p
 A SignTypedData payload uses a standard format of encoding structs which is recursive, but has a different format for the top-level struct that is signed, which includes some `domain` metadata about the verifying contract to provide replay-protection of these signatures between different contract instances.
 
 The top level SignTypedData object is the concatenation of
+
 - A `domain` struct, which can include the contract's address, chainId, a version, and a name, for cross-contract replay protection.
 - The top level struct hash to sign.
 
 The format of an EIP-712 struct hash is the hash of the concatenation of:
+
 - A typestring, derived from the struct definition itself, defined in `encodeType` of the spec.
 - Each field of the struct, in the order defined by `encodeType` (alphabetical). Fields under 32 bytes are included in full, and fields over 32 bytes are hashed.
 
@@ -28,12 +30,13 @@ Internally, MetaMask uses the [eth-sig-util](https://github.com/MetaMask/eth-sig
 You can use [eip712-codegen](https://github.com/danfinlay/eip712-codegen#readme) to generate most of the Solidity required to verify these signatures on-chain. It currently does not generate the top-level struct verification code (with the `domain`), though. That part will need to be written manually. You can see an example implementation [here](https://github.com/delegatable/delegatable-sol/blob/fb34bb259890417285f7185bc6500fb0ab8bf86f/contracts/Delegatable.sol#L80).
 
 ::: tip What Kind of Data Can it Sign?
- V4 of this method includes some improvements that are not available in older iterations of the method, so those methods are not recommended here.
- - V1 only allowed the signing of an array of primitive fields.
- - V2 was some minor improvements, and is not available on MetaMask.
- - V3 introduced signing structs.
+V4 of this method includes some improvements that are not available in older iterations of the method, so those methods are not recommended here.
 
- V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
+- V1 only allowed the signing of an array of primitive fields.
+- V2 was some minor improvements, and is not available on MetaMask.
+- V3 introduced signing structs.
+
+V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
 :::
 
 ### Params
@@ -45,7 +48,7 @@ You can use [eip712-codegen](https://github.com/danfinlay/eip712-codegen#readme)
 `domain.version`: A number you can add as an extra level of replay protection. Probably totally overkill since you should be providing `verifyingContract` already.
 `primaryType`: The name of the type of the struct that you are requesting the user sign.
 `types`: An object representing all of the solidity types that will be involved in signing the intended message.
-`message`: The contents of the struct you are proposing the user sign. 
+`message`: The contents of the struct you are proposing the user sign.
 
 Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
@@ -185,7 +188,7 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 
 ::::
 
-### personal_sign 
+### personal_sign
 
 The personal sign method is a way to present the user with some human readable text for them to sign. It's often used for signature challenges that are authenticated on a web server, as with [Sign in with Ethereum (SiWE)](https://login.xyz/).
 
@@ -195,9 +198,10 @@ Some other signers have implemented this same method as `eth_sign` because the g
 
 ::: warning Keeping users safe
 This method is all about user readability, but the safety of your system relies on you using it responsibly!
+
 - Don't use this method to display binary data, or the user will not be able to understand what they're agreeing to.
 - If using this as a signature challenge, think about what would prevent a phisher from reusing the same challenge and impersonating your site: Add text referring to your domain, or the current time, so the user can easily verify if this challenge is legitimate.
-:::
+  :::
 
 For historical reasons, the message to sign must be submitted to the method in hex-encoded UTF-8. Here is an exmample of generating that code using a node.js style `Buffer` shim in the browser, as used in our [example dapp](https://metamask.github.io/test-dapp/#personalSign).
 
