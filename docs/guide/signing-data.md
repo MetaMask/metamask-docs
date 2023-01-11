@@ -1,111 +1,53 @@
 # Signing Data
 
-Since MetaMask makes cryptographic keys available to each user, websites can use these signatures for a variety of uses. Here are a few guides related to specific use cases:
+MetaMask lets you request cryptographic signatures from users in a number of ways.
 
-- [Authenticating websites](https://medium.com/hackernoon/writing-for-blockchain-wallet-signature-request-messages-6ede721160d5)
-- Some examples of signing off-chain messages for an on-chain protocol from our [MetaTransaction Hackathon](https://medium.com/metamask/our-metatransaction-hackathon-winner-a620551ccb9b)
+- [eth_sendTransaction](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction): For proposing transactions on evm-based blockchains.
+- [eth_signTypedData_v4](#signtypeddata-v4) for the most readable signatures that are also efficient to process on chain.
+- [personal_sign](#personal-sign) for the easiest way to get a human readable signature of data that does not need to be efficiently processed on-chain.
+- [eth_sign](#eth-sign) (Not recommended) If you need to perform low-level signatures and don't mind having the user presented with high security friction, because the proposal is not readable.
 
-## Signing Data with MetaMask
+## SignTypedData V4
 
-If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/MetaMask/test-dapp).
+This is currently the most readable signature method that is also efficient to process on-chain. It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) standard to allow requesting the user sign a struct that can be verified on-chain. It produces confirmations that render the structure of a given struct, and tries to render that information as usefully as possible to the user (like displaying known account names in place of addresses).
 
-If you’d like to read our JavaScript implementations of these methods, they are all available in the npm package [eth-sig-util](https://github.com/MetaMask/eth-sig-util).
+<img src="../assets/712.png" alt="Coming soon" style="width: 400px; position: relative; top: 20px;" />
 
-Note that MetaMask supports signing transactions with Trezor and Ledger hardware wallets. These hardware wallets currently only support signing data using the `personal_sign` method. If you have trouble logging in to a website or dapp when using a Ledger or Trezor, the site may be requesting you sign data via an unsupported method, in which case we recommend using your standard MetaMask account.
+A SignTypedData payload uses a standard format of encoding structs which is recursive, but has a different format for the top-level struct that is signed, which includes some `domain` metadata about the verifying contract to provide replay-protection of these signatures between different contract instances.
 
-## A Brief History
+The top level SignTypedData object is the concatenation of
+- A `domain` struct, which can include the contract's address, chainId, a version, and a name, for cross-contract replay protection.
+- The top level struct hash to sign.
 
-There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods yields some guiding lessons for the emergence of decentralized standards. Our current five methods are:
+The format of an EIP-712 struct hash is the hash of the concatenation of:
+- A typestring, derived from the struct definition itself, defined in `encodeType` of the spec.
+- Each field of the struct, in the order defined by `encodeType` (alphabetical). Fields under 32 bytes are included in full, and fields over 32 bytes are hashed.
 
-- `eth_sign`
-- `personal_sign`
-- `signTypedData` (currently identical to `signTypedData_v1`)
-- `signTypedData_v1`
-- `signTypedData_v3`
-- `signTypedData_v4`
+Internally, MetaMask uses the [eth-sig-util](https://github.com/MetaMask/eth-sig-util) module to perform signatures and validation of EIP-712 code in JavaScript, so we recommend using it to generate and validate your own signatures.
 
-There are likely to be many more over time. When MetaMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
+You can use [eip712-codegen](https://github.com/danfinlay/eip712-codegen#readme) to generate most of the Solidity required to verify these signatures on-chain. It currently does not generate the top-level struct verification code (with the `domain`), though. That part will need to be written manually. You can see an example implementation [here](https://github.com/delegatable/delegatable-sol/blob/fb34bb259890417285f7185bc6500fb0ab8bf86f/contracts/Delegatable.sol#L80).
 
-In particular, the method `eth_sign` is an open-ended signing method that allows signing an arbitrary hash, which means it can be used to sign transactions, or any other data, making it a dangerous phishing risk.
+::: tip What Kind of Data Can it Sign?
+ V4 of this method includes some improvements that are not available in older iterations of the method, so those methods are not recommended here.
+ - V1 only allowed the signing of an array of primitive fields.
+ - V2 was some minor improvements, and is not available on MetaMask.
+ - V3 introduced signing structs.
 
-For this reason, we make this method show the most frightening possible message to the user, and generally discourage using this method in production. However, some applications (usually admin panels internal to teams) use this method for the sake of its ease of use, and so we have continued to support it for the sake of not breaking the workflows of active projects.
+ V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
+:::
 
-Eventually, the `personal_sign` [spec](https://github.com/ethereum/go-ethereum/pull/2940) was proposed, which added a prefix to the data so it could not impersonate transactions. We also made this method able to display human readable text when UTF-8 encoded, making it a popular choice for site logins.
-
-However, the text-prefix made those signatures expensive to verify on-chain, and so with the help of the [0xProtocol](https://0x.org/) team and [SpankChain](https://spankchain.com/), the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) spec was written.
-
-The strange part of EIP-712, and this decentralized standards ecosystem, is that the proposal changed several times while retaining the same EIP. This means what we initially implemented as `signTypedData` was the earliest proposed version, while other groups implemented later versions under the same method name.
-
-To avoid compatibility issues between clients, we recommend using the hard-versioned method names `signTypedData_v1` and `signTypedData_v3`. The missing `v2` represents an intermediary design that was implemented by the Cipher browser, so that we have room to implement it if there is ever enough developer demand for it.
-
-In the future, it may help to have method names include a hash of their exact proposal, since in a decentralized ecosystem, there is no absolute source of truth of what a given name should map to. Instead, we are forced to invent new patterns of collaboration, where we can drive forward and innovate, while simultaneously avoiding creating a brittle ecosystem by changing our meanings out from under the words.
-
-I hope this has been a useful introduction to the history of our signing methods!
-
-## Sign Typed Data v1
-
-This early version of the spec lacked some later security improvements, and should generally be neglected in favor of [signTypedData_v3](#sign-typed-data-v3).
-
-Also known as `signTypedData`, originally premiered October 2017 in [this blog post](https://medium.com/metamask/scaling-web3-with-signtypeddata-91d6efc8b290), this method was the original state-channel-centric signing method.
-
-The `signTypedData` family has a few major design considerations:
-
-- Cheap to verify on chain
-- Still somewhat human readable
-- Hard to phish signatures
-
-If on-chain verifiability cost is a high priority for you, you might want to consider it.
-
-## Sign Typed Data v3
-
-The method `signTypedData_v3` is a highly used version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712).
-
-This does not mean it is perfect. Most recently, we released `v4`, but we intend to protect this namespace and keep it compatible going forwards.
-
-We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
-
-Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
-
-## Sign Typed Data v4
-
-The method `signTypedData_v4` currently represents the latest version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712), with added support for arrays and with a breaking fix for the way structs are encoded.
-
-This does not mean it is perfect, and does not mean we will not eventually have a `v5`, but we do intend to protect this namespace and keep it compatible going forwards.
-
-We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
-
-Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
-
-### Sign Typed Data Message Parameters
+### Params
 
 `domain`: The Domain or domain signature is important because it:
+`domain.name`: A human-readable name that will be shown to the user as the requesting contract. You should make it something familiar so the user would recognize it if a phishing site later requested a signature for your domain.
+`domain.chainId`: The chain that these signatures should be valid on, if only one.
+`domain.verifyingContract`: The address of the contract that will verify this contract, to ensure this signature is not also meaningful in unintended ways on other contracts. You can also provide a URL here.
+`domain.version`: A number you can add as an extra level of replay protection. Probably totally overkill since you should be providing `verifyingContract` already.
+`primaryType`: The name of the type of the struct that you are requesting the user sign.
+`types`: An object representing all of the solidity types that will be involved in signing the intended message.
+`message`: The contents of the struct you are proposing the user sign. 
 
-- Will only be accepted for a specific website/contract.
-- Makes sure signatures are valid only where they are intended to be valid.
-- Allows you have a unique contract that verifies the address.
-- This is a bunch of information that restricts where the signature is valid.
-- This is the domain of validity. Could be a contract, a url, etc.
-- What needs to be put in here specifically what the DApp tells you.
-- Makes sure your signature(s) don't collide with other signatures.
-
-`chainId`: The chainId tell you what chain you're on and this is important because:
-
-- It makes sure signatures signed on Rinkeby are not valid on another chain, such as the Ethereum Main Net.
-
-`name`: This is primarily for UX(User Experience) purposes.
-
-- For example, as a user, you're using an Ether Mail app and a dialog comes up for cryptokitties exchange, this would arouse suspicion due to what the name is on the signature.
-
-`verifyingContract`: This is an extra layer of assurance. Even if two developers end up creating an app with the same name, they will never have the same contract address.(You can add another field `salt` but it's complete overkill and unnecessary)
-
-- If you are unsure of the name this will show the contract responsible for message verification.
-- This field will also take a url.
-
-`version`: This tell you the current version of the domain object.
-
-`message`: Completely open to what you would like the structure of it to be. Every field is optional.
-
-Below is an example of signing typed data with MetaMask. Reference [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
+Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 ### Example
 
@@ -238,3 +180,65 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 :::
 
 ::::
+
+
+## Signing Data with MetaMask
+
+If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/MetaMask/test-dapp).
+
+If you’d like to read our JavaScript implementations of these methods, they are all available in the npm package [eth-sig-util](https://github.com/MetaMask/eth-sig-util).
+
+Note that MetaMask supports signing transactions with Trezor and Ledger hardware wallets. These hardware wallets currently only support signing data using the `personal_sign` method. If you have trouble logging in to a website or dapp when using a Ledger or Trezor, the site may be requesting you sign data via an unsupported method, in which case we recommend using your standard MetaMask account.
+
+## A Brief History
+
+There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods yields some guiding lessons for the emergence of decentralized standards. Our current five methods are:
+
+- `eth_sign`
+- `personal_sign`
+- `signTypedData` (currently identical to `signTypedData_v1`)
+- `signTypedData_v1`
+- `signTypedData_v3`
+- `signTypedData_v4`
+
+There are likely to be many more over time. When MetaMask first started, the Provider API wasn’t designed to be exposed to untrusted websites, and so some considerations weren’t taken as seriously as they were later.
+
+In particular, the method `eth_sign` is an open-ended signing method that allows signing an arbitrary hash, which means it can be used to sign transactions, or any other data, making it a dangerous phishing risk.
+
+For this reason, we make this method show the most frightening possible message to the user, and generally discourage using this method in production. However, some applications (usually admin panels internal to teams) use this method for the sake of its ease of use, and so we have continued to support it for the sake of not breaking the workflows of active projects.
+
+Eventually, the `personal_sign` [spec](https://github.com/ethereum/go-ethereum/pull/2940) was proposed, which added a prefix to the data so it could not impersonate transactions. We also made this method able to display human readable text when UTF-8 encoded, making it a popular choice for site logins.
+
+However, the text-prefix made those signatures expensive to verify on-chain, and so with the help of the [0xProtocol](https://0x.org/) team and [SpankChain](https://spankchain.com/), the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) spec was written.
+
+The strange part of EIP-712, and this decentralized standards ecosystem, is that the proposal changed several times while retaining the same EIP. This means what we initially implemented as `signTypedData` was the earliest proposed version, while other groups implemented later versions under the same method name.
+
+To avoid compatibility issues between clients, we recommend using the hard-versioned method names `signTypedData_v1` and `signTypedData_v3`. The missing `v2` represents an intermediary design that was implemented by the Cipher browser, so that we have room to implement it if there is ever enough developer demand for it.
+
+In the future, it may help to have method names include a hash of their exact proposal, since in a decentralized ecosystem, there is no absolute source of truth of what a given name should map to. Instead, we are forced to invent new patterns of collaboration, where we can drive forward and innovate, while simultaneously avoiding creating a brittle ecosystem by changing our meanings out from under the words.
+
+I hope this has been a useful introduction to the history of our signing methods!
+
+## Sign Typed Data v1
+
+This early version of the spec lacked some later security improvements, and should generally be neglected in favor of [signTypedData_v3](#sign-typed-data-v3).
+
+Also known as `signTypedData`, originally premiered October 2017 in [this blog post](https://medium.com/metamask/scaling-web3-with-signtypeddata-91d6efc8b290), this method was the original state-channel-centric signing method.
+
+The `signTypedData` family has a few major design considerations:
+
+- Cheap to verify on chain
+- Still somewhat human readable
+- Hard to phish signatures
+
+If on-chain verifiability cost is a high priority for you, you might want to consider it.
+
+## Sign Typed Data v3
+
+The method `signTypedData_v3` is a highly used version of the [EIP-712 spec](https://eips.ethereum.org/EIPS/eip-712).
+
+This does not mean it is perfect. Most recently, we released `v4`, but we intend to protect this namespace and keep it compatible going forwards.
+
+We have a [great introductory blog post to this method here](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
+
+Hopefully soon we will also have good examples for parsing method input into structs for verification on-chain (great contribution opportunity!)
