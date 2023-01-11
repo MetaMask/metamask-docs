@@ -63,7 +63,6 @@ interface MessageTypeProperty {
 }
 
 interface MessageTypes {
-  EIP712Domain: MessageTypeProperty[];
   [additionalProperties: string]: MessageTypeProperty[];
 }
 
