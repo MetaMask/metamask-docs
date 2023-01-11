@@ -34,7 +34,9 @@ const config = {
       ({
         docs: {
           path: "docs",
-          sidebarCollapsible: false,
+          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsible: true,
+          sidebarCollapsed: false,
           remarkPlugins: [
             [remarkCodesandbox, {
               mode: "iframe",
@@ -49,23 +51,6 @@ const config = {
     ],
   ],
   plugins: [
-    [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
-      ({
-        id: "snaps",
-        path: "snaps",
-        routeBasePath: "snaps",
-        sidebarPath: require.resolve("./snaps-sidebars.js"),
-        sidebarCollapsible: false,
-        versions: {
-          production: {
-            label: "Current",
-            badge: false,
-          },
-        },
-      }),
-    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -79,13 +64,12 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "index",
-            label: "SDK & API",
+            docId: "api-sdk/index",
+            label: "API & SDK",
           },
           {
             type: "doc",
-            docId: "index",
-            docsPluginId: "snaps",
+            docId: "snaps/index",
             label: "Snaps",
           },
         ],
