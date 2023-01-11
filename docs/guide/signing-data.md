@@ -5,13 +5,13 @@ MetaMask lets you request cryptographic signatures from users in a number of way
 - [eth_sendTransaction](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction): For proposing transactions on evm-based blockchains.
 - [eth_signTypedData_v4](#signtypeddata-v4) for the most readable signatures that are also efficient to process on chain.
 - [personal_sign](#personal-sign) for the easiest way to get a human readable signature of data that does not need to be efficiently processed on-chain.
-- [eth_sign](#eth-sign) (Not recommended) If you need to perform low-level signatures and don't mind having the user presented with high security friction, because the proposal is not readable.
+- `eth_sign` (Not recommended) If you need to perform low-level signatures and don't mind having the user presented with high security friction, because the proposal is not readable.
 
 ## SignTypedData V4
 
 This is currently the most readable signature method that is also efficient to process on-chain. It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) standard to allow requesting the user sign a struct that can be verified on-chain. It produces confirmations that render the structure of a given struct, and tries to render that information as usefully as possible to the user (like displaying known account names in place of addresses).
 
-<img src="../assets/712.png" alt="Coming soon" style="width: 400px; position: relative; top: 20px;" />
+<img src="../assets/712.png" alt="Sign typed data example" style="width: 400px; position: relative; top: 20px;" />
 
 A SignTypedData payload uses a standard format of encoding structs which is recursive, but has a different format for the top-level struct that is signed, which includes some `domain` metadata about the verifying contract to provide replay-protection of these signatures between different contract instances.
 
@@ -48,6 +48,10 @@ You can use [eip712-codegen](https://github.com/danfinlay/eip712-codegen#readme)
 `message`: The contents of the struct you are proposing the user sign. 
 
 Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
+
+::: warning Safety First!
+Since the top level struct and `domain.name` are presented to the user prominently in the confirmation, consider the names of your contract and structs to be user-facing security interface. Will these labels catch the user's eye and keep them safe when a new website claiming to be an NFT giveaway presents it to them? It's up to you to make sure your contract is as readable as possible to the user.
+:::
 
 ### Example
 
@@ -181,6 +185,62 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 
 ::::
 
+### personal_sign 
+
+The personal sign method is a way to present the user with some human readable text for them to sign. It's often used for signature challenges that are authenticated on a web server, as with [Sign in with Ethereum (SiWE)](https://login.xyz/).
+
+<img src="../assets/personal_sign.png" alt="Personal Sign Example" style="width: 400px; position: relative; top: 20px;" />
+
+Some other signers have implemented this same method as `eth_sign` because the geth client changed the behavior of their `eth_sign` method, but because of our need to continue supporting existing applications, we support the original behavior. You may need to check with the signers you support to see what method they use for a given implementation.
+
+::: warning Keeping users safe
+This method is all about user readability, but the safety of your system relies on you using it responsibly!
+- Don't use this method to display binary data, or the user will not be able to understand what they're agreeing to.
+- If using this as a signature challenge, think about what would prevent a phisher from reusing the same challenge and impersonating your site: Add text referring to your domain, or the current time, so the user can easily verify if this challenge is legitimate.
+:::
+
+For historical reasons, the message to sign must be submitted to the method in hex-encoded UTF-8. Here is an exmample of generating that code using a node.js style `Buffer` shim in the browser, as used in our [example dapp](https://metamask.github.io/test-dapp/#personalSign).
+
+### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab HTML
+
+```html
+<div>
+  <h3>Personal Sign</h3>
+  <button type="button" id="personalSignButton">personal_sign</button>
+</div>
+```
+
+:::
+
+::: tab JavaScript
+
+```javascript
+personalSignButton.addEventListener('click', async function (event) {
+  event.preventDefault();
+  const exampleMessage = 'Example `personal_sign` message.';
+  try {
+    const from = accounts[0];
+    const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
+    const sign = await ethereum.request({
+      method: 'personal_sign',
+      params: [msg, from, 'Example password'],
+    });
+    personalSignResult.innerHTML = sign;
+    personalSignVerify.disabled = false;
+  } catch (err) {
+    console.error(err);
+    personalSign.innerHTML = `Error: ${err.message}`;
+  }
+});
+```
+
+:::
+
+::::
 
 ## Signing Data with MetaMask
 
