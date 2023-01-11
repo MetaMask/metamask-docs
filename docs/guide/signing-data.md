@@ -6,11 +6,11 @@ MetaMask lets you request cryptographic signatures from users in a number of way
 - [personal_sign](#personal-sign) for the easiest way to get a human readable signature of data that does not need to be efficiently processed on-chain.
 - `eth_sign` (Not recommended) If you need to perform low-level signatures and don't mind having the user presented with high security friction, because the proposal is not readable.
 
-| Signing Methods       | Human readable | Efficient to process on-chain | Easy to use |
-|------------------------|----------------|-----------------------------|-------------|
-| `eth_signTypedData_v4` | ✅             | ✅                           | ❌          |
-| `personal_sign`        | ✅             | ❌                           | ✅         |
-| `eth_sign`             | ❌             | ❓                           | ❌          |
+| Signing Methods        | Human readable | Efficient to process on-chain | Easy to use |
+| ---------------------- | -------------- | ----------------------------- | ----------- |
+| `eth_signTypedData_v4` | ✅             | ✅                            | ❌          |
+| `personal_sign`        | ✅             | ❌                            | ✅          |
+| `eth_sign`             | ❌             | ❓                            | ❌          |
 
 ## SignTypedData V4
 
@@ -56,6 +56,7 @@ V4 added the ability to sign Arrays as well. So with V4, you're able to sign str
 - `message`: An object representing the contents of the struct you are proposing the user sign.
 
 Here are the parameter typescript definitions as defined in [eth-sig-util](https://github.com/MetaMask/eth-sig-util/blob/main/src/sign-typed-data.ts):
+
 ```typescript
 interface MessageTypeProperty {
   name: string;
