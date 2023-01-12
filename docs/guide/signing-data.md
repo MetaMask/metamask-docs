@@ -277,6 +277,8 @@ personalSignButton.addEventListener('click', async function (event) {
 
 ::::
 
+The requested text is prepended with `\x19Ethereum Signed Message:\n<length of message>` before being hashed and signed. You can try the method out in [our interactive API playground](https://metamask.github.io/api-playground/api-documentation/#personal_sign).
+
 ## Signing Data with MetaMask
 
 If you’d like to jump to some working signature examples, [you can visit this repository](https://github.com/MetaMask/test-dapp).
