@@ -77,7 +77,7 @@ interface TypedMessage<T extends MessageTypes> {
 
 ### Example
 
-Below is an example of signing typed data with MetaMask. dive example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
+Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -276,6 +276,8 @@ personalSignButton.addEventListener('click', async function (event) {
 :::
 
 ::::
+
+The requested text is prepended with `\x19Ethereum Signed Message:\n<length of message>` before being hashed and signed. You can try the method out in [our interactive API playground](https://metamask.github.io/api-playground/api-documentation/#personal_sign).
 
 ## Signing Data with MetaMask
 
