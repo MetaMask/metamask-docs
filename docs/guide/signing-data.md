@@ -77,7 +77,7 @@ interface TypedMessage<T extends MessageTypes> {
 
 ### Example
 
-Below is an example of signing typed data with MetaMask. dive example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
+Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 :::: tabs :options="{ useUrlFragment: false }"
 
