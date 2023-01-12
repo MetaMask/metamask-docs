@@ -44,6 +44,10 @@ V4 of this method includes some improvements that are not available in older ite
 V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
 :::
 
+::: warning Safety First!
+Since the top level struct and `domain.name` are presented to the user prominently in the confirmation, consider the names of your contract and structs to be user-facing security interface. Will these labels catch the user's eye and keep them safe when a new website claiming to be an NFT giveaway presents it to them? It's up to you to make sure your contract is as readable as possible to the user.
+:::
+
 ### Parameters
 
 - `domain`: The domain is an options object with a number of optional fields that are used to ensure that signatures intended for your contract cannot be replayed on other contracts. You can opt out of these safety measures if you want your signatures to work across chains or contracts, for example.
@@ -81,13 +85,9 @@ interface TypedMessage<T extends MessageTypes> {
 }
 ```
 
-Below is an example of signing typed data with MetaMask. Live example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
-
-::: warning Safety First!
-Since the top level struct and `domain.name` are presented to the user prominently in the confirmation, consider the names of your contract and structs to be user-facing security interface. Will these labels catch the user's eye and keep them safe when a new website claiming to be an NFT giveaway presents it to them? It's up to you to make sure your contract is as readable as possible to the user.
-:::
-
 ### Example
+
+Below is an example of signing typed data with MetaMask. dive example [here](https://metamask.github.io/test-dapp/#signTypedDataV4)
 
 :::: tabs :options="{ useUrlFragment: false }"
 
