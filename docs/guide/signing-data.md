@@ -46,7 +46,7 @@ V4 added the ability to sign Arrays as well. So with V4, you're able to sign str
 
 ### Parameters
 
-- `domain`: The Domain or domain signature is important because it:
+- `domain`: The domain is an options object with a number of optional fields that are used to ensure that signatures intended for your contract cannot be replayed on other contracts. You can opt out of these safety measures if you want your signatures to work across chains or contracts, for example.
 - `domain.name`: A human-readable name that will be shown to the user as the requesting contract. You should make it something familiar so the user would recognize it if a phishing site later requested a signature for your domain.
 - `domain.chainId`: The chain that these signatures should be valid on, if only one.
 - `domain.verifyingContract`: The address of the contract that will verify this contract, to ensure this signature is not also meaningful in unintended ways on other contracts. You can also provide a URL here.
