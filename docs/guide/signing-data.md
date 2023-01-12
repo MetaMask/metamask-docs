@@ -34,16 +34,6 @@ Internally, MetaMask uses the [eth-sig-util](https://github.com/MetaMask/eth-sig
 
 You can use [eip712-codegen](https://github.com/danfinlay/eip712-codegen#readme) to generate most of the Solidity required to verify these signatures on-chain. It currently does not generate the top-level struct verification code (with the `domain`), though. That part will need to be written manually. You can see an example implementation [here](https://github.com/delegatable/delegatable-sol/blob/fb34bb259890417285f7185bc6500fb0ab8bf86f/contracts/Delegatable.sol#L80).
 
-::: tip What Kind of Data Can it Sign?
-V4 of this method includes some improvements that are not available in older iterations of the method, so those methods are not recommended here.
-
-- V1 only allowed the signing of an array of primitive fields.
-- V2 was some minor improvements, and is not available on MetaMask.
-- V3 introduced signing structs.
-
-V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
-:::
-
 ::: warning Safety First!
 Since the top level struct and `domain.name` are presented to the user prominently in the confirmation, consider the names of your contract and structs to be user-facing security interface. Will these labels catch the user's eye and keep them safe when a new website claiming to be an NFT giveaway presents it to them? It's up to you to make sure your contract is as readable as possible to the user.
 :::
@@ -218,6 +208,16 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 :::
 
 ::::
+
+::: tip What Kind of Data Can it Sign?
+V4 of this method includes some improvements that are not available in older iterations of the method, so those methods are not recommended here.
+
+- V1 only allowed the signing of an array of primitive fields.
+- V2 was some minor improvements, and is not available on MetaMask.
+- V3 introduced signing structs.
+
+V4 added the ability to sign Arrays as well. So with V4, you're able to sign structs which contain any solidity primitive field, including arrays, and arrays of structs, although these structs are limited to the same constraints of other Solidity structs, including the inability to have circular types. If you have the need for circular types, you should probably make a linked list instead.
+:::
 
 ### personal_sign
 
