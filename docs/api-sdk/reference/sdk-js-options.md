@@ -38,9 +38,3 @@ The following table shows the full list of options:
 If your project is a web app and `injectProvider` is `true`, then the `ethereum` object should be
 available in `window.ethereum`.
 :::
-
-
-
-
-
-

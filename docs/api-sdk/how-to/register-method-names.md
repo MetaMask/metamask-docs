@@ -56,14 +56,3 @@ MetaMask reads from the mainnet `eth-method-registry` endpoint, regardless of th
 :::
 
 For more details, see [this StackExchange answer](https://ethereum.stackexchange.com/questions/59678/metamask-shows-unknown-function-when-calling-method-send-function).
-
-
-
-
-
-
-
-
-
-
-

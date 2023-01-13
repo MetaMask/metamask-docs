@@ -105,20 +105,20 @@ and run it on a simulator or physical device.
 
 ### iOS
 
-1. Open **Safari Preferences** -> **Advanced** -> enable the **Show Develop menu in menu bar** checkbox.
+1. Open **Safari Preferences > Advanced > check Show Develop menu in menu bar**.
 1. Open MetaMask Mobile in an iOS simulator or iOS device.
-1. In the Safari menu bar -> **Develop** -> **[device name]** -> **[app name]** -> **[url - title]**
+1. In the Safari menu bar, **Develop > [device name] > [app name] > [url - title]**.
 
 :::note
 When debugging on a physical device, you must enable Web Inspector in your device's settings:
 
-**Settings** -> **Safari** -> **Advanced** -> **Web Inspector**
+**Settings > Safari > Advanced > Web Inspector**
 :::
 
 ### Android
 
 1. Open MetaMask Mobile in an Android emulator or Android device.
-1. Open Google Chrome's DevTools -> menu (`...`) -> **More tools** -> **Remote devices**.
+1. Open Google Chrome's **DevTools > menu (`...`) > More tools > Remote devices**.
     You can also navigate to `chrome://inspect` from Chrome to display the list of available devices
     for debugging.
 1. Select your device on the left and select **Inspect** on the browser contents you'd like to inspect.
@@ -126,7 +126,7 @@ When debugging on a physical device, you must enable Web Inspector in your devic
 :::note
 When debugging on a physical device you must enable USB debugging in your device's settings:
 
-**Settings** -> **System** -> **About Phone** -> **Developer options** -> **Enable USB debugging**
+**Settings > System > About Phone > Developer options > Enable USB debugging**
 :::
 
 You can now debug MetaMask Mobile's browser contents just as you would on the web.

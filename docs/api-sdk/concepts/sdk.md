@@ -14,12 +14,10 @@ This happens for all actions that need user approval.
 
 ## Connections
 
-### Lifecycle
-
 When connecting with MetaMask Mobile wallet, it's important to understand when connections get
 paused, resumed and cleared.
 
-#### Paused:
+#### Paused connections
 
 Connections get paused after the MetaMask Mobile app is in background (minimized) for 20 seconds.
 This is to accomodate OS restrictions, and it means that all traffic into MetaMask Mobile gets
@@ -30,27 +28,24 @@ maintained in paused mode until it's opened again.
 
 For this reason, polling data from the wallet may not work for long periods of time.
 
-#### Cleared:
+#### Cleared connections
 
-Connections get cleared if the dapp is closed or refreshed (in the case of a browser) as we don't
-persist connections on the dapp side.
-We did this for simplicity and for security purposes.
-We believe that creating a connection should be very easy so there is no need to persist, but this
+Connections get cleared if the dapp is closed or refreshed (in the case of a browser) as MetaMask
+doesn't persist connections on the dapp side.
+This is for simplicity and for security purposes.
+We believe that creating a connection should be very easy so there's no need to persist, but this
 may change in the future.
 
-If the MetaMask Mobile app is completely closed without entering pause mode first, we close the
-connection as we believe it means the user is no longer using the wallet for any further actions.
+If the MetaMask Mobile app is completely closed without entering pause mode first, MetaMask infers
+that the user isn't using the wallet and closes the connection.
 
-#### Close connections manually:
+#### Close connections manually
 
-In order to close connections manually from the MetaMask Mobile app, you can go into **Settings** ->
-**Experimental**.
+To close connections manually from the MetaMask Mobile app, go into **Settings > Experimental**.
 
 ![Connections](../../assets/sdk-clear-connections.png)
 
 ## Communication layer
-
-### Security
 
 The security layer is handled using elliptic curve integrated encryption scheme (ECIES).
 ECIES is a hybrid encryption scheme that combines the benefits of both symmetric and asymmetric encryption.
@@ -71,10 +66,3 @@ It also provides security against eavesdropping and tampering, as the shared sec
 the sender's and recipient's private keys, which are both kept secret.
 
 ![Sequence diagram](../../assets/sdk-comm-diagram.svg)
-
-
-
-
-
-
-

@@ -77,7 +77,57 @@ Much of the `web3` API simply maps to RPC methods, all of which can be requested
 For example, here are a couple of actions performed using first `window.web3`, and then their
 equivalents using `window.ethereum`.
 
-<<< @/docs/snippets/web3ToProvider.js
+```javascript
+/**
+ * Getting Accounts
+ */
+
+// window.web3
+const accounts = web3.eth.accounts;
+
+// window.ethereum
+const accounts = await ethereum.request({ method: 'eth_accounts' });
+
+/**
+ * Sending a Transaction
+ */
+
+// window.web3
+web3.eth.sendTransaction(
+  {
+    to: '0x...',
+    'from': '0x...',
+    value: '0x...',
+    // And so on...
+  },
+  (error, result) => {
+    if (error) {
+      return console.error(error);
+    }
+    // Handle the result
+    console.log(result);
+  }
+);
+
+// window.ethereum
+try {
+  const transactionHash = await ethereum.request({
+    method: 'eth_sendTransaction',
+    params: [
+      {
+        to: '0x...',
+        'from': '0x...',
+        value: '0x...',
+        // And so on...
+      },
+    ],
+  });
+  // Handle the result
+  console.log(transactionHash);
+} catch (error) {
+  console.error(error);
+}
+```
 
 ### Use an updated convenience library
 
@@ -200,8 +250,3 @@ Some convenience libraries, such as [ethers](https://www.npmjs.com/package/ether
 reload the page by default.
 If you don't use such a convenience library, you'll have to reload the page manually.
 Please see the [`chainChanged` event](../reference/provider-api.md#chainchanged) for details.
-
-
-
-
-
