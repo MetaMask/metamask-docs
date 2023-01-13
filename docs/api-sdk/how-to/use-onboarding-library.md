@@ -1,45 +1,37 @@
 # Use onboarding library
 
-As an Ethereum enabled site developer, sending users offsite to install MetaMask presents challenges.
-Most notably, you must inform the user to return to your site and refresh their browser after the
-installation. Your site will detect the user's newly installed MetaMask extension only after that refresh.
-We at MetaMask care deeply about user experience, and we knew that this workflow needed to be improved.
+Use the MetaMask [onboarding library](../concepts/onboarding-library.md) to simplify the experience
+of onboarding new users to MetaMask.
 
-MetaMask now provides a [metamask-onboarding library](https://github.com/MetaMask/metamask-onboarding)
-designed to improve and simplify the onboarding experience.
-The new library exposes an API to initiate the onboarding process.
-In the process, it registers your site as the origin of the onboarding request.
-MetaMask will check for this origin after the user completes the onboarding flow. If it finds an origin, the final confirmation button of the MetaMask onboarding flow will indicate that the user will be redirected back to your site.
+## Steps
 
-## Get started
+1. [Install @metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
+1. Import the library or include it in your page:
 
-1. Install @metamask/onboarding using npm or yarn.
-2. Import the Onboarding Library or include it in your page.
+    ```javascript
+    // As an ES6 module
+    import MetaMaskOnboarding from '@metamask/onboarding';
+    // Or as an ES5 module
+    const MetaMaskOnboarding = require('@metamask/onboarding');
+    ```
+    
+    If you prefer, you can instead include the prebuilt ES5 bundle that ships with the library:
+    
+    ```html
+    <script src="./metamask-onboarding.bundle.js"></script>
+    ```
 
-```javascript
-// As an ES6 module
-import MetaMaskOnboarding from '@metamask/onboarding';
-// Or as an ES5 module
-const MetaMaskOnboarding = require('@metamask/onboarding');
-```
+1. Create a new instance of the onboarding library:
 
-If you'd prefer you can instead include the prebuilt ES5 bundle that ships with the library:
+    ```javascript
+    const onboarding = new MetaMaskOnboarding();
+    ```
 
-```html
-<script src="./metamask-onboarding.bundle.js"></script>
-```
+1. Start the onboarding process in response to a user event (for example, a button click):
 
-3. Create a new instance of the Onboarding library
-
-```javascript
-const onboarding = new MetaMaskOnboarding();
-```
-
-4. Start the onboarding process in response to a user event (e.g. a button click).
-
-```javascript
-onboarding.startOnboarding();
-```
+    ```javascript
+    onboarding.startOnboarding();
+    ```
 
 ## Examples
 
@@ -50,7 +42,7 @@ const onboarding = new MetaMaskOnboarding();
 onboarding.startOnboarding();
 ```
 
-### Use React
+### React
 
 ```jsx
 import MetaMaskOnboarding from '@metamask/onboarding';
@@ -117,20 +109,22 @@ export function OnboardingButton() {
 }
 ```
 
-### Use TypeScript
+### TypeScript
 
-We ship our TypeScript types with `@metamask/onboarding`. Modifying the above example to get type safety when using the onboarding library is simple:
+We ship our TypeScript types with `@metamask/onboarding`.
+Modifying the [React example](#react) to get type safety when using the onboarding library is simple:
 
 ```jsx
   -const onboarding = React.useRef();
   +const onboarding = React.useRef<MetaMaskOnboarding>();
 ```
 
-Doing this step will give you editor auto-completion for the methods exposed by the library, and helpful documentation.
+Taking this step gives you editor auto-completion for the methods exposed by the library, and
+helpful documentation.
 
 ![Editor Highlighting](https://user-images.githubusercontent.com/4448075/85584481-ccc7ec00-b604-11ea-9b74-49c76ee0bf22.png)
 
-### Use Vanilla Javascript + HTML
+### Vanilla JavaScript + HTML
 
 ```html
 <!DOCTYPE html>

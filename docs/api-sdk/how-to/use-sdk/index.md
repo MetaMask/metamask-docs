@@ -1,6 +1,6 @@
 # Use MetaMask SDK
 
-MetaMask SDK currently supports JavaScript-based dapps.
+[MetaMask SDK](../../concepts/sdk.md) currently supports JavaScript-based dapps.
 It enables these dapps to easily connect with a MetaMask wallet client.
 
 The following instructions work for dapps based on standard JavaScript, React, NodeJS, Electron, and
@@ -9,13 +9,13 @@ MetaMask SDK also supports [React Native](react-native.md) and [pure JavaScript]
 
 ## Prerequisites
 
-- MetaMask Mobile v5.8.1 or above. Developers need access to a MetaMask Mobile build that is
-  compatible with the SDK.
-- yarn or npm.
+- MetaMask Mobile v5.8.1 or above
+- [Yarn](https://yarnpkg.com/getting-started/install) or
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## 1. Install the SDK
 
-Install the SDK using yarn or npm.
+Install the SDK using Yarn or npm:
 
 ```bash
 yarn add @metamask/sdk
@@ -31,15 +31,13 @@ import MetaMaskSDK from '@metamask/sdk';
 
 ## 3. Instantiate the SDK
 
-For all Javascript-based apps, instantiate the SDK like this:
-
 ```javascript
 const MMSDK = new MetaMaskSDK(options);
 
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
 
-For a list of possible `options` check [here](/metamask-sdk-js/metamask-sdk-js-options.html)
+See the [list of options](../../reference/sdk-js-options.md).
 
 ## 4. Use the SDK
 
@@ -47,6 +45,6 @@ For a list of possible `options` check [here](/metamask-sdk-js/metamask-sdk-js-o
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```
 
-You should always call `eth_requestAccounts` first!
+Always call `eth_requestAccounts` first, since it prompts the installation or connection popup to appear.
 
-For possible methods, check [the Ethereum Provider API](/ethereum-provider.html)
+See the [Ethereum provider API](../../reference/provider-api.md) for all methods.

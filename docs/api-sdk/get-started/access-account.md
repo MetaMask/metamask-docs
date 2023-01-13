@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Access an account
 
 "Connecting" or "logging in" to MetaMask effectively means "to access the user's Ethereum account(s)".
@@ -32,30 +35,23 @@ ethereum.request({ method: 'eth_requestAccounts' });
 
 <EthConnectButton />
 
-:::: tabs :options="{ useUrlFragment: false }"
+<Tabs>
+  <TabItem value="html" label="HTML" default>
 
-::: tab HTML
+    <button class="enableEthereumButton">Enable Ethereum</button>
 
-```html
-<button class="enableEthereumButton">Enable Ethereum</button>
-```
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
 
-:::
+    const ethereumButton = document.querySelector('.enableEthereumButton');
 
-::: tab JavaScript
+    ethereumButton.addEventListener('click', () => {
+      //Will Start the metamask extension
+      ethereum.request({ method: 'eth_requestAccounts' });
+    });
 
-```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
-
-ethereumButton.addEventListener('click', () => {
-  //Will Start the metamask extension
-  ethereum.request({ method: 'eth_requestAccounts' });
-});
-```
-
-:::
-
-::::
+  </TabItem>
+</Tabs>
 
 This promise-returning function resolves with an array of hex-prefixed Ethereum addresses, which can
 be used as general account references when sending transactions.
@@ -76,37 +72,30 @@ const account = accounts[0];
 
 <EthAsyncConnectButton />
 
-:::: tabs :options="{ useUrlFragment: false }"
+<Tabs>
+  <TabItem value="html" label="HTML" default>
 
-::: tab HTML
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <h2>Account: <span class="showAccount"></span></h2>
 
-```html
-<button class="enableEthereumButton">Enable Ethereum</button>
-<h2>Account: <span class="showAccount"></span></h2>
-```
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
 
-:::
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const showAccount = document.querySelector('.showAccount');
+    
+    ethereumButton.addEventListener('click', () => {
+      getAccount();
+    });
+    
+    async function getAccount() {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+      showAccount.innerHTML = account;
+    }
 
-::: tab JavaScript
-
-```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const showAccount = document.querySelector('.showAccount');
-
-ethereumButton.addEventListener('click', () => {
-  getAccount();
-});
-
-async function getAccount() {
-  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-  const account = accounts[0];
-  showAccount.innerHTML = account;
-}
-```
-
-:::
-
-::::
+  </TabItem>
+</Tabs>
 
 ## Re-check an account
 

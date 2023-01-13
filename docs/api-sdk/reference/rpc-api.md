@@ -1,45 +1,48 @@
 # RPC API
 
-MetaMask uses the [`ethereum.request(args)` method](./ethereum-provider.html#ethereum-request-args) to wrap an RPC API.
+MetaMask uses the [`ethereum.request(args)` method](provider-api.md#ethereumrequestargs) to wrap an
+RPC API.
 
-The API is based on an interface exposed by all Ethereum clients, along with a growing number of methods that may or may not be supported by other wallets.
+The API is based on an interface exposed by all Ethereum clients, along with a growing number of
+methods that may or may not be supported by other wallets.
 
-::: tip Tip
+:::note
 All RPC method requests can return errors.
 Make sure to handle errors for every call to `ethereum.request(args)`.
 :::
 
-::: tip Try Ethereum Methods
-Visit our [API Playground](https://metamask.github.io/api-playground/api-documentation/)
+:::tip Try Ethereum methods
+Visit our [API Playground](https://metamask.github.io/api-playground/api-documentation/).
 :::
 
-## Table of Contents
+## Ethereum JSON-RPC methods
 
-[[toc]]
-
-## Ethereum JSON-RPC Methods
-
-For the Ethereum JSON-RPC API, please see [the Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods).
+For the Ethereum JSON-RPC API, please see the [Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods).
 
 Important methods from this API include:
 
-- [`eth_accounts`](https://eth.wiki/json-rpc/API#eth_accounts)
-- [`eth_call`](https://eth.wiki/json-rpc/API#eth_call)
-- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getbalance)
-- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction)
-- [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign)
+- [`eth_accounts`](https://eth.wiki/json-rpc/API#eth_accounts).
+- [`eth_call`](https://eth.wiki/json-rpc/API#eth_call).
+- [`eth_getBalance`](https://eth.wiki/json-rpc/API#eth_getbalance).
+- [`eth_sendTransaction`](https://eth.wiki/json-rpc/API#eth_sendtransaction).
+- [`eth_sign`](https://eth.wiki/json-rpc/API#eth_sign).
 
-## Restricted Methods
+## Restricted methods
 
 MetaMask introduced Web3 Wallet Permissions via [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is either _restricted_ or _unrestricted_.
 If a method is restricted, the caller must have the corresponding permission in order to call it.
-Unrestricted methods, meanwhile, have no corresponding permission. Some of them still rely upon permissions to succeed though (e.g. the signing methods require that you have the `eth_accounts` permission for the signer account), and some require confirmation by the user (e.g. `wallet_addEthereumChain`).
+Unrestricted methods, meanwhile, have no corresponding permission.
+Some of them still rely upon permissions to succeed though (for example, the signing methods require
+that you have the `eth_accounts` permission for the signer account), and some require confirmation
+by the user (for example, `wallet_addEthereumChain`).
 
-With the exception of [MetaMask Flask](https://metamask.io/flask), the only existing permission is `eth_accounts`, which allows you to access the user's Ethereum address(es).
+With the exception of [MetaMask Flask](https://metamask.io/flask), the only existing permission is
+`eth_accounts`, which allows you to access the user's Ethereum address(es).
 More permissions will be added in the future.
 
-Under the hood, permissions are plain, JSON-compatible objects, with a number of fields that are mostly used internally by MetaMask.
+Under the hood, permissions are plain, JSON-compatible objects, with a number of fields that are
+mostly used internally by MetaMask.
 The following interface lists the fields that may be of interest to consumers:
 
 ```typescript
@@ -52,15 +55,18 @@ interface Web3WalletPermission {
 }
 ```
 
-If you're interested in learning more about the theory behind this _capability_-inspired permissions system, we encourage you to take a look at [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
+If you're interested in learning more about the theory behind this _capability_-inspired permissions
+system, see [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 
 ### `eth_requestAccounts`
 
-::: tip EIP-1102
+:::tip EIP-1102
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
-It is equivalent to the deprecated [`ethereum.enable()`](./ethereum-provider.html#ethereum-enable) provider API method.
+It's equivalent to the deprecated [`ethereum.enable()`](provider-api.md#ethereumenable-deprecated)
+provider API method.
 
-Under the hood, it calls [`wallet_requestPermissions`](#wallet-requestpermissions) for the `eth_accounts` permission.
+Under the hood, it calls [`wallet_requestPermissions`](#wallet_requestpermissions) for the
+`eth_accounts` permission.
 Since `eth_accounts` is currently the only permission, this method is all you need for now.
 :::
 
@@ -76,7 +82,8 @@ If the user denies the request, the Promise will reject with a `4001` error.
 
 The request causes a MetaMask popup to appear.
 You should only request the user's accounts in response to user action, such as a button click.
-You should always disable the button that caused the request to be dispatched, while the request is still pending.
+You should always disable the button that caused the request to be dispatched, while the request is
+still pending.
 
 If you can't retrieve the user's account(s), you should encourage the user to initiate an account request.
 
@@ -102,7 +109,7 @@ function connect() {
 
 ### `wallet_getPermissions`
 
-::: tip Platform Availability
+:::tip Platform availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -114,11 +121,11 @@ This RPC method is not yet available in MetaMask Mobile.
 
 Gets the caller's current permissions.
 Returns a Promise that resolves to an array of `Web3WalletPermission` objects.
-If the caller has no permissions, the array will be empty.
+If the caller has no permissions, the array is empty.
 
 ### `wallet_requestPermissions`
 
-::: tip Platform Availability
+:::tip Platform Availability
 This RPC method is not yet available in MetaMask Mobile.
 :::
 
@@ -141,8 +148,9 @@ interface RequestedPermissions {
 #### Description
 
 Requests the given permissions from the user.
-Returns a Promise that resolves to a non-empty array of `Web3WalletPermission` objects, corresponding to the caller's current permissions.
-If the user denies the request, the Promise will reject with a `4001` error.
+Returns a Promise that resolves to a non-empty array of `Web3WalletPermission` objects,
+corresponding to the caller's current permissions.
+If the user denies the request, the Promise rejects with a `4001` error.
 
 The request causes a MetaMask popup to appear.
 You should only request permissions in response to user action, such as a button click.
@@ -177,17 +185,17 @@ function requestPermissions() {
 }
 ```
 
-## Unrestricted Methods
+## Unrestricted methods
 
 ### `eth_decrypt` (DEPRECATED)
 
-::: warning
+:::caution
 This method is deprecated and may be removed in the future.
 
 [See here for more information.](https://medium.com/metamask/metamask-api-method-deprecation-2b0564a84686)
 :::
 
-::: tip Platform Availability
+:::tip Platform availability
 This RPC method is not available in MetaMask Mobile.
 :::
 
@@ -208,7 +216,7 @@ Requests that MetaMask decrypts the given encrypted message.
 The message must have been encrypted using the public encryption key of the given Ethereum address.
 Returns a Promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
 
-See [`eth_getEncryptionPublicKey`](#eth-getencryptionpublickey) for more information.
+See [`eth_getEncryptionPublicKey`](#eth_getencryptionpublickey-deprecated) for more information.
 
 #### Example
 
@@ -226,13 +234,13 @@ ethereum
 
 ### `eth_getEncryptionPublicKey` (DEPRECATED)
 
-::: warning
+:::caution
 This method is deprecated and may be removed in the future.
 
 [See here for more information.](https://medium.com/metamask/metamask-api-method-deprecation-2b0564a84686)
 :::
 
-::: tip Platform Availability
+:::tip Platform availability
 This RPC method is not available in MetaMask Mobile.
 :::
 
@@ -251,7 +259,8 @@ This RPC method is not available in MetaMask Mobile.
 Requests that the user shares their public encryption key.
 Returns a Promise that resolve to the public encryption key, or rejects if the user denied the request.
 
-The public key is computed from entropy associated with the specified user account, using the [`nacl`](https://github.com/dchest/tweetnacl-js) implementation of the `X25519_XSalsa20_Poly1305` algorithm.
+The public key is computed from entropy associated with the specified user account, using the
+[`nacl`](https://github.com/dchest/tweetnacl-js) implementation of the `X25519_XSalsa20_Poly1305` algorithm.
 
 #### Example
 
@@ -276,10 +285,11 @@ ethereum
   });
 ```
 
-#### Encrypting
+#### Encryption
 
-The point of the encryption key is of course to encrypt things.
-Here's an example of how to encrypt a message using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util):
+The point of the encryption key is to encrypt things.
+Here's an example of how to encrypt a message using
+[`eth-sig-util`](https://github.com/MetaMask/eth-sig-util):
 
 ```javascript
 const ethUtil = require('ethereumjs-util');
@@ -301,7 +311,7 @@ const encryptedMessage = ethUtil.bufferToHex(
 
 ### `wallet_addEthereumChain`
 
-::: tip EIP-3085
+:::tip EIP-3085
 This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
 :::
 
@@ -311,7 +321,8 @@ This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
 
     0. `AddEthereumChainParameter` - Metadata about the chain that will be added to MetaMask.
 
-For the `rpcUrls` and `blockExplorerUrls` arrays, at least one element is required, and only the first element will be used.
+For the `rpcUrls` and `blockExplorerUrls` arrays, at least one element is required, and only the
+first element will be used.
 
 ```typescript
 interface AddEthereumChainParameter {
@@ -340,21 +351,24 @@ The user may choose to switch to the chain once it has been added.
 As with any method that causes a confirmation to appear, `wallet_addEthereumChain`
 should **only** be called as a result of direct user action, such as the click of a button.
 
-MetaMask stringently validates the parameters for this method, and will reject the request
+MetaMask stringently validates the parameters for this method, and rejects the request
 if any parameter is incorrectly formatted.
-In addition, MetaMask will automatically reject the request under the following circumstances:
+In addition, MetaMask automatically rejects the request under the following circumstances:
 
 - If the RPC endpoint doesn't respond to RPC calls.
-  NOTE: Calls are made from the extension's background page, _not_ the foreground page. If you use an origin allowlist, they will be blocked.
+  :::note
+  Calls are made from the extension's background page, _not_ the foreground page.
+  If you use an origin allowlist, they're blocked.
+  :::
 - If the RPC endpoint returns a different chain ID when `eth_chainId` is called.
 - If the chain ID corresponds to any default MetaMask chains.
 
 MetaMask does not yet support chains with native currencies that do not have 18 decimals,
 but may do so in the future.
 
-#### Usage with `wallet_switchEthereumChain`
+#### Use with `wallet_switchEthereumChain`
 
-We recommend using this method with [`wallet_addEthereumChain`](#wallet-addethereumchain):
+We recommend using this method with [`wallet_addEthereumChain`](#wallet_addethereumchain):
 
 ```javascript
 try {
@@ -386,7 +400,7 @@ try {
 
 ### `wallet_switchEthereumChain`
 
-::: tip EIP-3326
+:::tip EIP-3326
 This method is specified by [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain).
 :::
 
@@ -406,12 +420,13 @@ interface SwitchEthereumChainParameter {
 
 `null` - The method returns `null` if the request was successful, and an error otherwise.
 
-If the error code (`error.code`) is `4902`, then the requested chain has not been added by MetaMask, and you have to request to add it via [`wallet_addEthereumChain`](#wallet-addethereumchain).
+If the error code (`error.code`) is `4902`, then the requested chain has not been added by MetaMask,
+and you have to request to add it via [`wallet_addEthereumChain`](#wallet_addethereumchain).
 
 #### Description
 
-::: tip Tip
-See [above](#usage-with-wallet-switchethereumchain) for how to use this method with `wallet_addEthereumChain`.
+:::tip
+See [how to use this method with `wallet_addEthereumChain`](#use-with-wallet_switchethereumchain).
 :::
 
 Creates a confirmation asking the user to switch to the chain with the specified `chainId`.
@@ -419,16 +434,16 @@ Creates a confirmation asking the user to switch to the chain with the specified
 As with any method that causes a confirmation to appear, `wallet_switchEthereumChain`
 should **only** be called as a result of direct user action, such as the click of a button.
 
-MetaMask will automatically reject the request under the following circumstances:
+MetaMask automatically rejects the request:
 
-- If the chain ID is malformed
-- If the chain with the specified chain ID has not been added to MetaMask
+- If the chain ID is malformed.
+- If the chain with the specified chain ID has not been added to MetaMask.
 
 ### `wallet_registerOnboarding`
 
-::: tip Tip
-As an API consumer, you are unlikely to have to call this method yourself.
-Please see the [Onboarding Library documentation](./onboarding-library.html) for more information.
+:::tip
+As an API consumer, you're unlikely to have to call this method yourself.
+See the [how to use the onboarding library](../how-to/use-onboarding-library.md) for more information.
 :::
 
 #### Returns
@@ -440,15 +455,17 @@ Please see the [Onboarding Library documentation](./onboarding-library.html) for
 Registers the requesting site with MetaMask as the initiator of onboarding.
 Returns a Promise that resolves to `true`, or rejects if there's an error.
 
-This method is intended to be called after MetaMask has been installed, but before the MetaMask onboarding has completed.
+This method is intended to be called after MetaMask has been installed, but before the MetaMask
+onboarding has completed.
 You can use this method to inform MetaMask that you were the one that suggested installing MetaMask.
 This lets MetaMask redirect the user back to your site after onboarding has completed.
 
-Instead of calling this method directly, you should use the [`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
+Instead of calling this method directly, you should use the
+[`@metamask/onboarding` library](https://github.com/MetaMask/metamask-onboarding).
 
 ### `wallet_watchAsset`
 
-::: tip EIP-747
+:::tip EIP-747
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 :::
 
@@ -456,11 +473,21 @@ This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
 - `WatchAssetParams` - The metadata of the asset to watch.
 
-<<< @/docs/snippets/WatchAssetParams.ts
+```ts
+interface WatchAssetParams {
+  type: 'ERC20'; // In the future, other standards will be supported
+  options: {
+    address: string; // The address of the token contract
+    'symbol': string; // A ticker symbol or shorthand, up to 11 characters
+    decimals: number; // The number of token decimals
+    image: string; // A string url of the token logo
+  };
+}
+```
 
 #### Returns
 
-`boolean` - `true` if the the token was added, `false` otherwise.
+`boolean` - `true` if the token was added, `false` otherwise.
 
 #### Description
 
@@ -468,8 +495,10 @@ Requests that the user tracks the token in MetaMask.
 Returns a `boolean` indicating if the token was successfully added.
 
 Most Ethereum wallets support some set of tokens, usually from a centrally curated registry of tokens.
-`wallet_watchAsset` enables web3 application developers to ask their users to track tokens in their wallets, at runtime.
-Once added, the token is indistinguishable from those added via legacy methods, such as a centralized registry.
+`wallet_watchAsset` enables web3 application developers to ask their users to track tokens in their
+wallets, at runtime.
+Once added, the token is indistinguishable from those added via legacy methods, such as a
+centralized registry.
 
 #### Example
 
@@ -497,7 +526,9 @@ ethereum
   .catch(console.error);
 ```
 
-## Mobile Specific RPC Methods
+## Mobile RPC methods
+
+The following methods are specific to MetaMask Mobile.
 
 ### `wallet_scanQRCode`
 
@@ -516,12 +547,13 @@ ethereum
 Requests that the user scans a QR code using their device camera.
 Returns a Promise that resolves to a string, matching either:
 
-1. The regex parameter, if provided
-2. An ethereum address, if no regex parameter was provided
+1. The regex parameter, if provided.
+1. An Ethereum address, if no regex parameter was provided.
 
-If neither condition is met, the Promise will reject with an error.
+If neither condition is met, the Promise rejects with an error.
 
-MetaMask previously introduced this feature per the proposed [EIP-945](https://github.com/ethereum/EIPs/issues/945).
+MetaMask previously introduced this feature per the proposed
+[EIP-945](https://github.com/ethereum/EIPs/issues/945).
 The functionality was temporarily removed before being reintroduced as this RPC method.
 
 #### Example

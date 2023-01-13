@@ -1,7 +1,7 @@
 # Detect MetaMask
 
-To verify if the browser is running MetaMask, copy and paste the code snippet below in the developer
-console of your web browser:
+To verify if the browser is running MetaMask, copy and paste the following code snippet in the
+developer console of your web browser:
 
 ```javascript
 if (typeof window.ethereum !== 'undefined') {
@@ -9,7 +9,7 @@ if (typeof window.ethereum !== 'undefined') {
 }
 ```
 
-You can review the full API for the `window.ethereum` object [here].
+View the [full API](../reference/provider-api.md) for the `window.ethereum` object.
 
-If you want to differentiate MetaMask from other Ethereum-compatible browsers, you can detect
-MetaMask using `ethereum.isMetaMask`.
+To differentiate MetaMask from other Ethereum-compatible browsers, you can detect MetaMask using
+`ethereum.isMetaMask`.

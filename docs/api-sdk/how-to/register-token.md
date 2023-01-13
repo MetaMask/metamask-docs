@@ -1,21 +1,28 @@
 # Register a token with users
 
-When a user opens their MetaMask, they are shown a variety of assets, including tokens. By default, MetaMask auto-detects some major popular tokens and auto-displays them, but for most tokens, the user will need to add the token themselves.
+When a user opens MetaMask, they're shown a variety of assets, including tokens.
+By default, MetaMask auto-detects some major popular tokens and auto-displays them, but for most
+tokens, the user must add the token themselves.
 
-While this is possible using our UI with the `Add Token` button, that process can be cumbersome, and involves the user interacting with contract addresses, and is very error prone.
+While this is possible using our UI with the **Add Token** button, that process can be cumbersome,
+involves the user interacting with contract addresses, and is very error prone.
 
-You can greatly improve the security and experience of users adding your token to their MetaMask by taking advantage of the `wallet_watchAsset` API as defined in [EIP-747](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md).
+You can improve the security and experience of users adding your token to their MetaMask interface
+by taking advantage of the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC API
+method.
 
-## Code-free Example
+## Code-free examples
 
-Here are a couple live web applications that let you enter your token details, and then share them with a simple web link:
+The following are live web applications that let you enter your token details, and then share them
+with a simple web link:
 
 - [Watch Token](https://vittominacori.github.io/watch-token/create/)
 - [Add Token App](https://metamask.github.io/Add-Token/#edit)
 
 ## Example
 
-If you'd like to integrate suggesting a token into your own web app, you can follow this code snippet to implement it:
+If you'd like to integrate suggesting a token into your own web app, you can use the following code
+snippet:
 
 ```javascript
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';

@@ -35,7 +35,7 @@ const sidebars = {
             'api-sdk/how-to/use-sdk/pure-js'
           ]
         },
-        'api-sdk/how-to/use-metamask-mobile',
+        'api-sdk/how-to/use-mobile',
         'api-sdk/how-to/interact-with-smart-contracts',
         'api-sdk/how-to/send-transactions',
         'api-sdk/how-to/sign-data',
