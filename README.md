@@ -28,9 +28,10 @@ One thing that's not documented is how to properly do Markdown inside tabs. For 
 ```jsx
 <Tabs>
   <TabItem value="apple" label="Apple" default>
-    - This is a markdown apple 🍎 
-    - This is **meow**
-  
+
+- This is a markdown apple 🍎
+- This is **meow**
+
 
   </TabItem> {/* notice **two** skipped lines above*/}
   <TabItem value="orange" label="Orange">
