@@ -11,6 +11,12 @@
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
       }
+    },
+    {
+      "files": "**/*.md",
+      "rules": {
+        "no-multiple-empty-lines": ["error", { "max": 2 }]
+      }
     }
   ],
   "extends": [

@@ -44,8 +44,23 @@ One thing that's not documented is how to properly do Markdown inside tabs. For 
 ```
 
 ### Live Code Blocks
+
 Rather than implementing our own live code blocks, we use the [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) Remark plugin. This allows us to define a code block that will be loaded live in a CodeSandbox iframe, by adding a meta to the codeblock, like ```javascript codesandbox=vanilla
 
 This allows us to keep our code blocks versioned and in our codebase, while giving us the full power of CodeSandbox to showcase any example we want, with any dependency we want.
 
 The plugin allows for simple codeblocks where the content of the block replaces the CodeSandbox entry point, or more complex examples that can be loaded directly from the filesystem, by using `codesandbox=file:./example-folder`, as detailed in the plugin's documentation.
+
+### Styling:
+
+In this repository, we use design tokens [implemented here](https://github.com/MetaMask/design-tokens). These design tokens are available as CSS variables, which makes it easy for developers to use them in their code.
+
+By using design tokens, we ensure consistency in the design of the Metamask user interface across different platforms and devices. To use the design tokens in your code, simply reference the CSS variables in your styles.
+
+For example, to use the primary color of the Metamask design, you would use the following CSS code:
+
+```css
+color: var(--color-text-default);
+```
+
+You can refer to all design tokens in the [design-tokens](https://github.com/MetaMask/design-tokens/blob/main/src/css/design-tokens.css) repository.
