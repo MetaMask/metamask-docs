@@ -33,24 +33,26 @@ ethereum.request({ method: 'eth_requestAccounts' });
 
 **Example:**
 
-<EthConnectButton />
-
 <Tabs>
-  <TabItem value="html" label="HTML" default>
+<TabItem value="html" label="HTML" default>
 
-    <button class="enableEthereumButton">Enable Ethereum</button>
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+```
 
-  </TabItem>
-  <TabItem value="javascript" label="JavaScript">
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
 
-    const ethereumButton = document.querySelector('.enableEthereumButton');
+```javascript
+const ethereumButton = document.querySelector('.enableEthereumButton');
 
-    ethereumButton.addEventListener('click', () => {
-      //Will Start the metamask extension
-      ethereum.request({ method: 'eth_requestAccounts' });
-    });
+ethereumButton.addEventListener('click', () => {
+  //Will Start the metamask extension
+  ethereum.request({ method: 'eth_requestAccounts' });
+});
+```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 This promise-returning function resolves with an array of hex-prefixed Ethereum addresses, which can
@@ -70,40 +72,39 @@ const account = accounts[0];
 
 **Example:**
 
-<EthAsyncConnectButton />
-
 <Tabs>
-  <TabItem value="html" label="HTML" default>
+<TabItem value="html" label="HTML" default>
 
-    <button class="enableEthereumButton">Enable Ethereum</button>
-    <h2>Account: <span class="showAccount"></span></h2>
+```html
+<button class="enableEthereumButton">Enable Ethereum</button>
+<h2>Account: <span class="showAccount"></span></h2>
+```
 
-  </TabItem>
-  <TabItem value="javascript" label="JavaScript">
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
 
-    const ethereumButton = document.querySelector('.enableEthereumButton');
-    const showAccount = document.querySelector('.showAccount');
-    
-    ethereumButton.addEventListener('click', () => {
-      getAccount();
-    });
-    
-    async function getAccount() {
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      const account = accounts[0];
-      showAccount.innerHTML = account;
-    }
+```javascript
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const showAccount = document.querySelector('.showAccount');
 
-  </TabItem>
+ethereumButton.addEventListener('click', () => {
+  getAccount();
+});
+
+async function getAccount() {
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}
+```
+
+</TabItem>
 </Tabs>
 
 ## Re-check an account
 
 Once you've connected to a user, you can always re-check the current account by checking
 `ethereum.selectedAddress`.
-
-**Example:**
-<ChangeAccount />
 
 If you'd like to be notified when the address changes, we have an event you can subscribe to:
 

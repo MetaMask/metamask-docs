@@ -35,50 +35,52 @@ const txHash = await ethereum.request({
 
 ## Example
 
-<SendTransaction />
-
 <Tabs>
-  <TabItem value="html" label="HTML" default>
+<TabItem value="html" label="HTML" default>
 
-    <button class="enableEthereumButton btn">Enable Ethereum</button>
-    <button class="sendEthButton btn">Send Eth</button>
+```html
+<button class="enableEthereumButton btn">Enable Ethereum</button>
+<button class="sendEthButton btn">Send Eth</button>
+```
 
-  </TabItem>
-  <TabItem value="javascript" label="JavaScript">
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
 
-    const ethereumButton = document.querySelector('.enableEthereumButton');
-    const sendEthButton = document.querySelector('.sendEthButton');
-    
-    let accounts = [];
-    
-    //Sending Ethereum to an address
-    sendEthButton.addEventListener('click', () => {
-      ethereum
-        .request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              from: accounts[0],
-              to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
-              value: '0x29a2241af62c0000',
-              gasPrice: '0x09184e72a000',
-              gas: '0x2710',
-            },
-          ],
-        })
-        .then((txHash) => console.log(txHash))
-        .catch((error) => console.error);
-    });
-    
-    ethereumButton.addEventListener('click', () => {
-      getAccount();
-    });
-    
-    async function getAccount() {
-      accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    }
+```javascript
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const sendEthButton = document.querySelector('.sendEthButton');
 
-  </TabItem>
+let accounts = [];
+
+//Sending Ethereum to an address
+sendEthButton.addEventListener('click', () => {
+  ethereum
+    .request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: accounts[0],
+          to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+          value: '0x29a2241af62c0000',
+          gasPrice: '0x09184e72a000',
+          gas: '0x2710',
+        },
+      ],
+    })
+    .then((txHash) => console.log(txHash))
+    .catch((error) => console.error);
+});
+
+ethereumButton.addEventListener('click', () => {
+  getAccount();
+});
+
+async function getAccount() {
+  accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+}
+```
+
+</TabItem>
 </Tabs>
 
 ## Transaction parameters
