@@ -33,8 +33,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "docs",
-          sidebarCollapsible: false,
+          path: "api-sdk",
+          routeBasePath: "api-sdk",
+          sidebarPath: require.resolve("./api-sdk-sidebar.js"),
+          breadcrumbs: false,
           remarkPlugins: [
             [remarkCodesandbox, {
               mode: "iframe",
@@ -56,8 +58,8 @@ const config = {
         id: "snaps",
         path: "snaps",
         routeBasePath: "snaps",
-        sidebarPath: require.resolve("./snaps-sidebars.js"),
-        sidebarCollapsible: false,
+        sidebarPath: require.resolve("./snaps-sidebar.js"),
+        breadcrumbs: false,
         versions: {
           production: {
             label: "Current",
@@ -80,7 +82,7 @@ const config = {
           {
             type: "doc",
             docId: "index",
-            label: "SDK & API",
+            label: "API & SDK",
           },
           {
             type: "doc",

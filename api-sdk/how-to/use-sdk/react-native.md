@@ -1,0 +1,125 @@
+---
+title: React Native
+---
+
+# Use MetaMask SDK with React Native
+
+You can import MetaMask SDK into your React Native dapp to enable your users to easily connect
+with their MetaMask Mobile wallet.
+
+## Install the SDK
+
+Use [rn-nodeify](https://github.com/tradle/rn-nodeify) to install the SDK.
+
+### 1. Install rn-nodeify
+
+```bash
+yarn add --dev rn-nodeify
+or
+npm i --dev rn-nodeify
+```
+
+### 2. Install rn-nodeify libraries
+
+```bash
+yarn add react-native-crypto
+yarn add react-native-randombytes
+yarn add crypto
+yarn add process
+yarn add stream
+yarn add events
+```
+
+### 3. Insert rn-nodeify post install script into `package.json` -> `"scripts"`
+
+```bash
+"postinstall": "rn-nodeify --install 'crypto,process,stream,events' --hack"
+```
+
+### 4. Import rn-nodeify shim.js
+
+rn-nodeify creates a shim.js file in your project root directory.
+Import it in the root file of your application.
+
+```bash
+import './shim'
+```
+
+### 5. Install react-native-background-timer
+
+```bash
+yarn add react-native-background-timer
+
+cd ios && pod install && cd ..
+```
+
+### 6. Install MetaMask SDK
+
+```bash
+yarn add @metamask/sdk
+```
+
+### 7. Run postinstall
+
+Run the postinstall script after everything is installed.
+
+```bash
+yarn postinstall
+```
+
+### 8. Install pods
+
+Finally, install the necessary pods that come with the libraries.
+
+```bash
+cd ios && pod install && cd ..
+```
+
+## Use the SDK
+
+```javascript
+import MetaMaskSDK from '@metamask/sdk';
+import { Linking } from 'react-native';
+import BackgroundTimer from 'react-native-background-timer';
+
+const MMSDK = new MetaMaskSDK({
+  openDeeplink: (link) => {
+    Linking.openURL(link); // Use React Native Linking method or your favourite way of opening deeplinks
+  },
+  timer: BackgroundTimer, // To keep the app alive once it goes to background
+  dappMetadata: {
+    name: 'My App', // The name of your application
+    url: 'https://myapp.com', // The url of your website
+  },
+});
+
+const ethereum = MMSDK.getProvider();
+
+const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+```
+
+You can now use [EthersJS](https://docs.ethers.io/v5/getting-started/) with your React Native dapp:
+
+```javascript
+const provider = new ethers.providers.Web3Provider(ethereum);
+
+// Get the balance of an account (by address or ENS name, if supported by network)
+const balance = await provider.getBalance(ethereum.selectedAddress);
+
+// Often you need to format the output to something more user-friendly,
+// such as in ether (instead of wei)
+const balanceInETH = ethers.utils.formatEther(balance);
+// '0.182826475815887608'
+```
+
+:::note
+The MetaMask team is creating a `metamask-react-native-sdk` package that will install all of this
+automatically, making the installation much easier for React Native dapps.
+:::
+
+## Examples
+
+View the [React Native dapp](https://recordit.co/FClppLgWzT) recording.
+
+View the [React Native example](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/downloads/reactNativeApp_v0.1.0.zip).
+Install the example using `yarn setup` and run it using `yarn ios` or `yarn android`.
