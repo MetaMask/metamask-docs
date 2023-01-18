@@ -43,7 +43,7 @@ that the user isn't using the wallet and closes the connection.
 
 To close connections manually from the MetaMask Mobile app, go into **Settings > Experimental**.
 
-![Connections](../../assets/sdk-clear-connections.png)
+![Connections](../assets/sdk-clear-connections.png)
 
 ## Communication layer
 
@@ -65,4 +65,4 @@ without having to exchange a shared secret beforehand.
 It also provides security against eavesdropping and tampering, as the shared secret is derived from
 the sender's and recipient's private keys, which are both kept secret.
 
-![Sequence diagram](../../assets/sdk-comm-diagram.svg)
+![Sequence diagram](../assets/sdk-comm-diagram.svg)

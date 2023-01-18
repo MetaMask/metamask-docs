@@ -33,9 +33,9 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "docs",
-          sidebarPath: require.resolve("./sidebars.js"),
-          sidebarCollapsible: true,
+          path: "api-sdk",
+          routeBasePath: "api-sdk",
+          sidebarPath: require.resolve("./api-sdk-sidebar.js"),
           breadcrumbs: false,
           remarkPlugins: [
             [remarkCodesandbox, {
@@ -51,6 +51,23 @@ const config = {
     ],
   ],
   plugins: [
+    [
+      "content-docs",
+      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
+      ({
+        id: "snaps",
+        path: "snaps",
+        routeBasePath: "snaps",
+        sidebarPath: require.resolve("./snaps-sidebar.js"),
+        breadcrumbs: false,
+        versions: {
+          production: {
+            label: "Current",
+            badge: false,
+          },
+        },
+      }),
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -64,12 +81,13 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "api-sdk/index",
+            docId: "index",
             label: "API & SDK",
           },
           {
             type: "doc",
-            docId: "snaps/index",
+            docId: "index",
+            docsPluginId: "snaps",
             label: "Snaps",
           },
         ],
