@@ -11,6 +11,22 @@ Our instance of Docusaurus uses multiple of its powerful features, including:
 * [MDX](https://docusaurus.io/docs/markdown-features/react#importing-markdown)
 * [Custom Sidebars](https://docusaurus.io/docs/sidebar): normally sidebars are auto-generated based on the docs directory structure. Having a custom sidebar allows us to define the order and inclusion of documentation items, with any hierarchy we want. The current proposed hierarchy is here: https://docs.google.com/spreadsheets/d/1fr1qnP830Zrdbzq0rPvoTVQsYBwL2Sq-wEJjL4tGfM8/edit
 
+## Getting Started
+All the documentation is in the form of Markdown files located in the `docs` directory. To add a new document:
+
+1. Create the `.md` file in an appropriate location in the `docs` directory, and add your content
+2. Edit the `sidebars.js` file to add the document to its appropriate place in the sidebar.
+
+## Migrating documentation from the `MetaMask/metamask-docs` repo
+For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be copied directly. However, a few things are to be noted:
+
+* The new documents won't appear in the sidebar automatically. An entry has to be added in the `sidebars.js` file to make that happen
+* Any custom Vue component will need to be migrated to React
+* You'll need to migrate the admonitions
+  * `::: admonition` becomes `:::admonition` (without the space)
+  * Available admonitions are: `note`, `tip`, `info`, `caution`, `danger`. Any others will have to be adjusted to the available ones
+  * The `:::: tabs` and `::: tab` admonitions will have to be migrated to [MDX Tabs](https://docusaurus.io/docs/markdown-features/tabs)
+* Embedded code will have to be migrated to [Live Code Blocks](#live-code-blocks).
 
 ## Running locally
 
@@ -45,13 +61,13 @@ One thing that's not documented is how to properly do Markdown inside tabs. For 
 
 ### Live Code Blocks
 
-Rather than implementing our own live code blocks, we use the [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) Remark plugin. This allows us to define a code block that will be loaded live in a CodeSandbox iframe, by adding a meta to the codeblock, like ```javascript codesandbox=vanilla
+Rather than implementing our own live code blocks, we use the [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) Remark plugin. This allows us to define a code block that will be loaded live in a CodeSandbox iframe, by adding a meta to the codeblock, like ` ```javascript codesandbox=vanilla`
 
 This allows us to keep our code blocks versioned and in our codebase, while giving us the full power of CodeSandbox to showcase any example we want, with any dependency we want.
 
 The plugin allows for simple codeblocks where the content of the block replaces the CodeSandbox entry point, or more complex examples that can be loaded directly from the filesystem, by using `codesandbox=file:./example-folder`, as detailed in the plugin's documentation.
 
-### Styling:
+## Styling
 
 In this repository, we use design tokens [implemented here](https://github.com/MetaMask/design-tokens). These design tokens are available as CSS variables, which makes it easy for developers to use them in their code.
 
