@@ -18,22 +18,49 @@ const sidebar = {
   snapsSidebar: [
     'index',
     {
-      type: "category",
-      label: "How To",
-      link: { type: "generated-index" },
+      type: 'category',
+      label: 'Get started',
+      link: { type: 'generated-index' },
+      collapsed: false,
       items: [
-        "how-to/guide",
-        "how-to/patching-dependencies",
+        'get-started/install-snaps',
+        'get-started/quickstart'
       ]
     },
     {
-      type: "category",
-      label: "Reference",
-      link: { type: "generated-index" },
+      type: 'category',
+      label: 'How to',
+      link: { type: 'generated-index' },
       items: [
-        "reference/rpc-api",
-        "reference/permissions",
-        "reference/exports"
+        'how-to/develop-a-snap',
+        'how-to/request-permissions',
+        'how-to/patch-dependencies'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      link: { type: 'generated-index' },
+      items: [
+        'reference/rpc-api',
+        'reference/exports',
+        'reference/cli'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Concepts',
+      link: { type: 'generated-index' },
+      items: [
+        'concepts/anatomy'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      link: { type: 'generated-index' },
+      items: [
+        'tutorials/tutorials'
       ]
     }
   ]

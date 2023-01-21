@@ -61,7 +61,7 @@ const config = {
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
         versions: {
-          production: {
+          current: {
             label: "Current",
             badge: false,
           },
