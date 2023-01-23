@@ -69,7 +69,7 @@ try {
       },
     },
   });
-  
+
   console.log(result);
   // Will print something of the form:
   // {
