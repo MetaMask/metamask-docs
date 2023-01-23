@@ -6,7 +6,7 @@
  * work well for content-centric websites.
  */
 /* You can override the default Infima variables here. */
-: root {
+:root {
   --ifm-color-primary: var(--brand-colors-blue-blue500);
   --ifm-color-primary-dark: var(--brand-colors-blue-blue600);
   --ifm-color-primary-darker: var(--brand-colors-blue-blue700);

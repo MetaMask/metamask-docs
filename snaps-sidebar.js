@@ -16,7 +16,7 @@ const sidebar = {
 
   // But you can create a sidebar manually
   snapsSidebar: [
-    'index',
+    "index",
     {
       type: "category",
       label: "How To",
@@ -24,7 +24,7 @@ const sidebar = {
       items: [
         "how-to/guide",
         "how-to/patching-dependencies",
-      ]
+      ],
     },
     {
       type: "category",
@@ -33,10 +33,10 @@ const sidebar = {
       items: [
         "reference/rpc-api",
         "reference/permissions",
-        "reference/exports"
-      ]
-    }
-  ]
+        "reference/exports",
+      ],
+    },
+  ],
 };
 
 module.exports = sidebar;

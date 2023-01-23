@@ -1,10 +1,10 @@
 # Patching Dependencies
 
 :::tip Only Available in MetaMask Flask
-[Snaps](./snaps.html) is only available in [MetaMask Flask](https://metamask.io/flask).
+[Snaps](../) is only available in [MetaMask Flask](https://metamask.io/flask).
 :::
 
-A problem that may arise as you develop your snap is that some dependencies make use of APIs that aren't available in the snaps execution environment. To work around this, we firstly recommend that you check if another library is available that makes use of the APIs made available for snaps (see [Snaps Development Guide](./snaps-development-guide.html#the-snap-execution-environment) for a list of APIs).
+A problem that may arise as you develop your snap is that some dependencies make use of APIs that aren't available in the snaps execution environment. To work around this, we firstly recommend that you check if another library is available that makes use of the APIs made available for snaps (see [Snaps Development Guide](./guide#the-snap-execution-environment) for a list of APIs).
 
 If you are unable to find another library (or version) that works with the snaps execution environment, another way of solving the problem is by patching the dependency yourself. For this we can leverage [`patch-package`](https://npmjs.com/package/patch-package).
 

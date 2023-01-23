@@ -3,80 +3,80 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
   apiSidebar: [
-    'index',
+    "index",
     {
-      type: 'category',
-      label: 'Get started',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Get started",
+      link: { type: "generated-index" },
       collapsed: false,
       items: [
-        'get-started/set-up-dev-environment',
-        'get-started/run-test-network',
-        'get-started/detect-metamask',
-        'get-started/access-account',
-        'get-started/log-in-users'
-      ]
+        "get-started/set-up-dev-environment",
+        "get-started/run-test-network",
+        "get-started/detect-metamask",
+        "get-started/access-account",
+        "get-started/log-in-users",
+      ],
     },
     {
-      type: 'category',
-      label: 'How to',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "How to",
+      link: { type: "generated-index" },
       items: [
         {
-          type: 'category',
-          label: 'Use MetaMask SDK',
+          type: "category",
+          label: "Use MetaMask SDK",
           collapsed: true,
           link: {
-            type: 'doc',
-            id: 'how-to/use-sdk/index'
+            type: "doc",
+            id: "how-to/use-sdk/index",
           },
           items: [
-            'how-to/use-sdk/react-native',
-            'how-to/use-sdk/pure-js'
-          ]
+            "how-to/use-sdk/react-native",
+            "how-to/use-sdk/pure-js",
+          ],
         },
-        'how-to/use-mobile',
-        'how-to/interact-with-smart-contracts',
-        'how-to/send-transactions',
-        'how-to/sign-data',
-        'how-to/register-token',
-        'how-to/register-method-names',
-        'how-to/access-provider',
-        'how-to/use-onboarding-library',
-        'how-to/set-icon',
-        'how-to/migrate-api'
-      ]
+        "how-to/use-mobile",
+        "how-to/interact-with-smart-contracts",
+        "how-to/send-transactions",
+        "how-to/sign-data",
+        "how-to/register-token",
+        "how-to/register-method-names",
+        "how-to/access-provider",
+        "how-to/use-onboarding-library",
+        "how-to/set-icon",
+        "how-to/migrate-api",
+      ],
     },
     {
-      type: 'category',
-      label: 'Reference',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Reference",
+      link: { type: "generated-index" },
       items: [
-        'reference/provider-api',
-        'reference/rpc-api',
-        'reference/sdk-js-options'
-      ]
+        "reference/provider-api",
+        "reference/rpc-api",
+        "reference/sdk-js-options",
+      ],
     },
     {
-      type: 'category',
-      label: 'Concepts',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Concepts",
+      link: { type: "generated-index" },
       items: [
-        'concepts/sdk',
-        'concepts/signing-methods',
-        'concepts/onboarding-library'
-      ]
+        "concepts/sdk",
+        "concepts/signing-methods",
+        "concepts/onboarding-library",
+      ],
     },
     {
-      type: 'category',
-      label: 'Tutorials',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Tutorials",
+      link: { type: "generated-index" },
       items: [
-        'tutorials/create-simple-dapp',
-        'tutorials/create-simple-dapp-with-sdk'
-      ]
-    }
-  ]
+        "tutorials/create-simple-dapp",
+        "tutorials/create-simple-dapp-with-sdk",
+      ],
+    },
+  ],
 };
 
 module.exports = sidebar;

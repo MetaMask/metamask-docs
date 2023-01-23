@@ -60,12 +60,6 @@ const config = {
         routeBasePath: "snaps",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
-        versions: {
-          production: {
-            label: "Current",
-            badge: false,
-          },
-        },
       }),
     ],
   ],

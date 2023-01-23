@@ -58,7 +58,7 @@ interface WalletEnableResult {
 #### Description
 
 This is a convenience method for requesting the user's accounts and connecting to / installing snaps.
-You can think of it as a combination of [`eth_requestAccounts`](./rpc-api.html#eth-requestaccounts), [`wallet_installSnaps`](#wallet-installsnaps), and [`wallet_requestPermissions`](./rpc-api.html#wallet-requestpermissions).
+You can think of it as a combination of [`eth_requestAccounts`](#eth-requestaccounts), [`wallet_installSnaps`](#wallet-installsnaps), and [`wallet_requestPermissions`](#wallet-requestpermissions).
 
 See the examples for details.
 
@@ -332,7 +332,7 @@ console.log(result); // We happen to know that this will be `true` or `false`
 If a method is _restricted_, it means that you need the requisite permission before you can call it.
 Both snaps and dapps / websites can have permissions.
 Some permissions are only available to snaps, and some are only available to websites.
-See [here](./rpc-api.html#restricted-methods) for more information about the permission system.
+See [here](#restricted-methods) for more information about the permission system.
 
 ### `wallet_snap_*`
 

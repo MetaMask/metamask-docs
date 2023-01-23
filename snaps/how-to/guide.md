@@ -1,7 +1,7 @@
 # Development Guide
 
 :::tip Developer Preview Software
-[Snaps](./snaps.html) is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
+[Snaps](../) is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
 :::
 
 Developing a snap is much like developing any JavaScript project, but there are some things that may be new even to a seasoned developer.
@@ -20,7 +20,7 @@ Executing `mm-snap --help` will provide detailed usage instructions.
 ## The Anatomy of a Snap
 
 :::caution Prerequisite Reading
-This guide assumes that you've completed the ["Getting Started" tutorial](./snaps.html#getting-started).
+This guide assumes that you've completed the ["Getting Started" tutorial](../#getting-started).
 :::
 
 So, you have installed [MetaMask Flask](https://metamask.io/flask), cloned the [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo) repository, and have served the "Hello, World!" snap locally.
@@ -198,10 +198,10 @@ If this sounds like a lot to worry about, `mm-snap build` is your friend, becaus
 ## Developing a Snap
 
 Snaps exist in order to modify the functionality of MetaMask at runtime while only asking the user for permission.
-As we have seen in the [introduction to snaps](./snaps.html) and this guide, snaps can:
+As we have seen in the [introduction to snaps](../) and this guide, snaps can:
 
 1. Extend the dapp-facing MetaMask JSON-RPC API in arbitrary ways.
-1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
+1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](../reference/rpc-api).
 
 In this section, we'll go into detail about how to actually develop a snap and overcome common issues encountered during development.
 
@@ -224,7 +224,7 @@ If a snap is disabled, the user must re-enable it before it can start again.
 ### Permissions
 
 Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
-Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
+Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](../reference/rpc-api#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
 You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap-monorepo/blob/main/packages/snap/snap.manifest.json).
 
@@ -250,7 +250,7 @@ Via the MetaMask settings page, the user can see their installed snaps. For each
 - see its execution status (running, stopped, or crashed)
 - enable and disable the snap
 
-Other than the settings page, the only way a snap can modify the MetaMask UI is by creating a confirmation using the [`snap_confirm`](./snaps-rpc-api.html#snap-confirm) RPC method.
+Other than the settings page, the only way a snap can modify the MetaMask UI is by creating a confirmation using the [`snap_confirm`](../reference/rpc-api#snap-confirm) RPC method.
 This means that many snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
@@ -330,7 +330,7 @@ In this way, you can identify if the error is due to your code or one of your de
 If the problem is in a dependency, you can try a different version or to fix the issue locally by using tools such as [`patch-package`](https://npmjs.com/package/patch-package) or by modifying the snap bundle file directly.
 
 :::tip Patching Dependencies
-You can read more about patching dependencies [here](./snaps-patching-dependencies.html)
+You can read more about patching dependencies [here](./patching-dependencies)
 :::
 
 To give you an idea of a common error and how to fix it, "sloppily" declared variables (i.e. assigning to a new variable without an explicit variable declaration) are forbidden in strict mode, and therefore in SES as well.
@@ -394,7 +394,7 @@ After publishing the Snap, any dapp can connect to the Snap by using the snapId 
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
-If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_enable`](./snaps-rpc-api.html#wallet-enable) RPC method.
+If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_enable`](../reference/rpc-api#wallet-enable) RPC method.
 
 In the future, MetaMask will create some way for users to more easily discover snaps, but everyone will always be able to build, publish, and use snaps without MetaMask's permission.
 (Although we may try to make it difficult to use known scams.)
