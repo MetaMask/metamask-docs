@@ -5,7 +5,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-monorepo/discussions) to join the discussion.
 :::
 
 ## Table of Contents
@@ -132,5 +132,71 @@ module.exports.onTransaction = async ({
 }) => {
   const insights = /* Get insights */;
   return { insights };
+};
+```
+
+## `onCronjob`
+
+If a snap wants to to run periodic actions for the user, the snap must export a function called `onCronjob`. This function will be called at the specified times with the specified payloads defined in the `endowment:cronjob` permission.
+
+::: tip Requesting the cronjob permission
+In order for the extension to call the `onCronjob` method of the snap, the `endowment:cronjob` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-cronjob)
+:::
+
+### Parameters
+
+- `onCronjobArgs` - exclusively containing an RPC request specified in the `endowment:cronjob` permission.
+
+```typescript
+interface onCronjobArgs {
+  request: JsonRpcRequest<unknown[] | { [key: string]: unknown }>;
+}
+```
+
+### Examples
+
+#### Typescript
+
+```typescript
+import { OnCronjobHandler } from '@metamask/snap-types';
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case 'exampleMethodOne':
+      return wallet.request({
+        method: 'snap_notify',
+        params: [
+          {
+            type: 'inApp',
+            message: `Hello, world!`,
+          },
+        ],
+      });
+
+    default:
+      throw new Error('Method not found.');
+  }
+};
+```
+
+#### Javascript
+
+```js
+module.exports.onCronjob = async ({ request }) => {
+  switch (request.method) {
+    case 'exampleMethodOne':
+      return wallet.request({
+        method: 'snap_notify',
+        params: [
+          {
+            type: 'inApp',
+            message: `Hello, world!`,
+          },
+        ],
+      });
+
+    default:
+      throw new Error('Method not found.');
+  }
 };
 ```

@@ -59,21 +59,21 @@ Derive BIP-32 and BIP-44 keypairs based on the Secret Recovery Phrase without ex
 
 Bring your insights, anti-phishing, and security solutions to the MetaMask UI with the transaction insights API.
 
+<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
+
+#### Schedule actions with cron jobs &bull; [Learn more](./snaps-exports.html#oncronjob)
+
+Perform actions that run periodically at fixed times, dates, or intervals.
+
 <img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
 #### Custom UI in MetaMask using a defined set of components
 
 Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
 
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
-
-#### Schedule actions with cron jobs
-
-Perform actions that run periodically at fixed times, dates, or intervals.
-
 ### Propose a feature
 
-Create a feature proposal with your ideas in our [GitHub discussion board](https://github.com/MetaMask/snaps-skunkworks/discussions).
+Create a feature proposal with your ideas in our [GitHub discussion board](https://github.com/MetaMask/snaps-monorepo/discussions).
 
 ## Getting started
 
@@ -83,6 +83,13 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
 
 - Up-to-date Chromium or Firefox browser
 - [Node.js](https://nodejs.org/)
+- MetaMask Flask
+
+  To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+
+  ::: warning
+  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
+  :::
 
 ### Quick start using our template
 
@@ -104,17 +111,9 @@ yarn start
 
 You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:8000/`](http://localhost:8000/).
 
-Next step is to [install MetaMask Flask](https://metamask.io/flask/).
-
-### Install MetaMask Flask
-
-To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
-
-Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
-
 ### Connecting to the snap
 
-Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile _without MetaMask stable_) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
+Once you have the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
 
 1. Click the **Connect** button and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
 
@@ -153,7 +152,7 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Modify the text in the `description` or `textAreaContent` field. Refresh the dapp in your browser, and click the **Connect** button to reinstall the snap.
+Modify the text in the `description` or `textAreaContent` field and click the **Reconnect** button to reinstall the snap.
 
 ::: tip Local Snap Reinstallation
 MetaMask automatically reinstalls locally hosted snaps whenever it receives a connection request for them.
@@ -165,12 +164,6 @@ The next time you click the **Send message** button, you will see the updated te
 
 If you're interested in building your own snap, next up is the [Snaps development guide](./snaps-development-guide.html).
 
-You can also look at some of the existing snaps being developed right now. Each one is fully functional and open-source:
+## Need help?
 
-- [StarkNet](https://github.com/ConsenSys/starknet-snap)
-- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
-- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
-
-## GitHub discussion board
-
-If you have questions, proposals, or need help with anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-skunkworks/discussions).
+If you have questions, proposals, or need help with anything related to Snaps, you're always welcome to ask our team and community on [GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions).

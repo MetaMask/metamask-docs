@@ -5,7 +5,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-monorepo/discussions) to join the discussion.
 :::
 
 ## Table of Contents
@@ -437,7 +437,7 @@ const dogecoinNode = await wallet.request({
 });
 
 // Next, we'll create an instance of a SLIP-10 node for the Dogecoin node.
-const dogecoinSlip10Node = await SLIP10Node.fromJson(dogecoinNode);
+const dogecoinSlip10Node = await SLIP10Node.fromJSON(dogecoinNode);
 
 // m / 44' / 3' / 0'
 const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"]);
@@ -661,6 +661,10 @@ console.log(dogecoinPublicKey);
 
 - Snaps
   :::
+
+::: tip Storage Limit
+Snaps can currently use this RPC method to store up to 100MB of data.
+:::
 
 #### Parameters
 

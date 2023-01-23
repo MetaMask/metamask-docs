@@ -5,7 +5,7 @@ Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://me
 :::
 
 ::: tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-skunkworks/discussions) to join the discussion.
+Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-monorepo/discussions) to join the discussion.
 :::
 
 To access certain powerful JavaScript globals or JSON-RPC methods, your snap will need to ask the user for permission. Snaps follow the [EIP-2255 wallet permissions specification](https://eips.ethereum.org/EIPS/eip-2255), and your snap's required permissions must be specified in the `initialPermissions` field of your [`snap.manifest.json` file](./snaps-development-guide.md#the-snap-manifest).
@@ -32,6 +32,47 @@ For snaps that need to access the internet, the snap can request the `endowment:
 ### `endowment:transaction-insight`
 
 For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. see [Exports](./snaps-exports.html#ontransaction)
+
+### `endowment:cronjob`
+
+For snaps that wants to run periodic actions for the user, the snap can request the `endowment:cronjob` permission. This permission allows a snap to specify periodic requests that will trigger the exported `onCronjob` method. see [Exports](./snaps-exports.html#oncronjob).
+
+Cronjobs are specified as follows:
+
+```json
+{
+  "initialPermissions": {
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": {
+            "minute": "*",
+            "hour": "*",
+            "dayOfMonth": "*",
+            "month": "*",
+            "dayOfWeek": "*"
+          },
+          "request": {
+            "method": "exampleMethodOne",
+            "params": {
+              "param1": "foo"
+            }
+          }
+        },
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "exampleMethodTwo",
+            "params": {
+              "param1": "bar"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
 
 ## RPC Permissions
 
