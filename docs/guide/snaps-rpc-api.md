@@ -37,11 +37,7 @@ interface RequestSnapsParams {
 
 ```typescript
 interface RequestSnapsResult {
-  [snapId: string]:
-    | WalletGetSnapsResult[string]
-    | {
-        error: Error;
-      };
+  [snapId: string]: WalletGetSnapsResult[string];
 }
 ```
 
@@ -50,7 +46,7 @@ interface RequestSnapsResult {
 #### Description
 
 This method requests permission for a DApp to communicate with the given snaps and attempts to install them if they aren't already.
-If the installation of any snap fails, its object value on the result will contain an `error` property with the error that caused the installation to fail.
+If the installation of any snap fails, `wallet_requestSnaps` will throw with the error that caused the installation to fail.
 
 Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
 If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
@@ -61,30 +57,40 @@ The request will succeed if the snap is successfully updated, and fail if the up
 #### Example
 
 ```javascript
-const result = await ethereum.request({
-  method: 'wallet_requestSnaps',
-  params: {
-    'npm:@metamask/example-snap': {},
-    'npm:fooSnap': {
-      // The optional version argument allows requesting a SemVer version
-      // range, with the same semantics as npm package.json ranges.
-      version: '^1.0.2',
+try {
+  const result = await ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      'npm:@metamask/example-snap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting a SemVer version
+        // range, with the same semantics as npm package.json ranges.
+        version: '^1.0.2',
+      },
     },
-  },
-});
-
-console.log(result);
-// Could print something of the form:
-// {
-//   'npm:@metamask/example-snap': {
-//     version: '1.0.0',
-//     permissionName: 'wallet_snap_npm:@metamask/example-snap',
-//     ...
-//   },
-//   'npm:fooSnap': {
-//     error: { message: 'The snap does not exist.' },
-//   },
-// }
+  });
+  
+  console.log(result);
+  // Will print something of the form:
+  // {
+  //   'npm:@metamask/example-snap': {
+  //     version: '1.0.0',
+  //     permissionName: 'wallet_snap_npm:@metamask/example-snap',
+  //     ...
+  //   },
+  //   'npm:fooSnap': {
+  //     version: '1.0.5',
+  //     permissionName: 'wallet_snap_npm:fooSnap',
+  //     ...
+  //   },
+  // }
+} catch (error) {
+  console.log(error);
+  // Will print something of the form:
+  // {
+  //    message: 'The snap does not exist.'
+  // }
+}
 ```
 
 ### `wallet_getSnaps`
