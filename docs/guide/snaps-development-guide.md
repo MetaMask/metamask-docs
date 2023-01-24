@@ -393,6 +393,7 @@ Follow these instructions to inspect the background process and view its console
   - Go to `chrome://extensions`
   - Find the MetaMask extension
   - Click on "Details"
+  - Turn on "Developer Mode" (top right)
   - Under "Inspect Views", click `background.html`
 
 ### Publishing Your Snap
