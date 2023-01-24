@@ -65,11 +65,11 @@ Bring your insights, anti-phishing, and security solutions to the MetaMask UI wi
 
 Perform actions that run periodically at fixed times, dates, or intervals.
 
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
+<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
 #### Custom UI in MetaMask using a defined set of components
 
-Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
+Display custom UI within MetaMask using a set of pre-defined components, including inline Markdown. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
 
 ### Propose a feature
 
