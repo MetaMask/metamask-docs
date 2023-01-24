@@ -82,6 +82,9 @@ jobs:
     environment:
       - TARGET_BRANCH: gh-pages
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '51:93:ea:e9:0a:c1:de:db:6a:77:8c:b6:fb:f6:4e:0e'
       - checkout
       - attach_workspace:
           at: .
