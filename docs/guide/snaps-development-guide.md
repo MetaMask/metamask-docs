@@ -75,7 +75,7 @@ Consider this trivial snap, which we'll call `hello-snap`:
 ```javascript
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    // Expose a "hello" RPC method to dApps
+    // Expose a "hello" RPC method to Dapps
     case 'hello':
       return 'world!';
 
@@ -86,16 +86,16 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 ```
 
 In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
-Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
+Whenever the snap receives a JSON-RPC request from an external entity (a Dapp or even another snap), this handler function will be called with the above parameters.
 
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
-This object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
+This object exposes a very similar API to the one exposed to Dapps via `window.ethereum`.
 Any message sent via `wallet.request()` will be received and processed by MetaMask.
 
-If a dapp wanted to use `hello-snap`, it would do something like this:
+If a Dapp wanted to use `hello-snap`, it would do something like this:
 
 ```javascript
-// Connect to the Snap, enabling its usage inside the dApp
+// Connect to the Snap, enabling its usage inside the Dapp
 await ethereum.request({
   method: 'wallet_enable',
   params: [
@@ -122,7 +122,7 @@ The snap's RPC API is completely up to you, so long as it's a valid [JSON-RPC](h
 
 ::: tip Does my snap need to have an RPC API?
 Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, e.g. providing [transaction insights](./snaps-exports.html#ontransaction), then you can skip exporting `onRpcRequest`.
-However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
+However, if you want to do something like manage the user's keys for a particular protocol and create a Dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
 :::
 
 ### The Snap Manifest
@@ -211,7 +211,7 @@ If this sounds like a lot to worry about, `mm-snap build` is your friend, becaus
 Snaps exist in order to modify the functionality of MetaMask at runtime while only asking the user for permission.
 As we have seen in the [introduction to snaps](./snaps.html) and this guide, snaps can:
 
-1. Extend the dapp-facing MetaMask JSON-RPC API in arbitrary ways.
+1. Extend the Dapp-facing MetaMask JSON-RPC API in arbitrary ways.
 1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
 
 In this section, we'll go into detail about how to actually develop a snap and overcome common issues encountered during development.
@@ -234,7 +234,7 @@ If a snap is disabled, the user must re-enable it before it can start again.
 
 ### Permissions
 
-Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
+Just like Dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
 Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
 You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap-monorepo/blob/main/packages/snap/snap.manifest.json).
@@ -266,7 +266,7 @@ Other than the settings page, there are only a few select ways a snap can modify
 - By opening a dialog using the [`snap_dialog`](./snaps-rpc-api.html#snap-dialog) RPC method.
 - By returning transaction insights from the [`onTransaction`](./snaps-exports.md#ontransaction) export.
 
-This means that most snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
+This means that most snaps will have to rely on web pages (i.e., Dapps) and their own RPC methods to present their data to the user.
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
 
@@ -405,7 +405,7 @@ Take note of the following details specific to Snaps:
 - The version in `package.json` and `snap.manifest.json` must match
 - The image specified in `iconPath` in the manifest file will be used as the icon displayed when installing and displaying confirmations from the Snap
 
-After publishing the Snap, any dapp can connect to the Snap by using the snapId `npm:[packageName]`.
+After publishing the Snap, any Dapp can connect to the Snap by using the snapId `npm:[packageName]`.
 
 ### Distributing Your Snap
 
@@ -432,8 +432,8 @@ You can also follow these tutorials which will walk you through the steps to dev
 
 MetaMask also maintains tools to help developers build, debug, and maintain snaps:
 
-- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes TypeScript/React and vanilla JS options and a CLI for building, packaging, and deploying your snap and a companion dapp
+- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes TypeScript/React and vanilla JS options and a CLI for building, packaging, and deploying your snap and a companion Dapp
 - [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts with Ganache
-- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a dapp for evaluating them
+- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a Dapp for evaluating them
 
 Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-monorepo/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-monorepo/issues).

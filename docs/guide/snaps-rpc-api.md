@@ -330,7 +330,7 @@ console.log(result); // We happen to know that this will be `true` or `false`
 ## Restricted Methods
 
 If a method is _restricted_, it means that you need the requisite permission before you can call it.
-Both snaps and dapps / websites can have permissions.
+Both snaps and Dapps / websites can have permissions.
 Some permissions are only available to snaps, and some are only available to websites.
 See [here](./rpc-api.html#restricted-methods) for more information about the permission system.
 
