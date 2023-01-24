@@ -69,7 +69,7 @@ Perform actions that run periodically at fixed times, dates, or intervals.
 
 #### Custom UI in MetaMask using a defined set of components
 
-Display custom UI within MetaMask using a set of pre-defined components, including inline Markdown. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
+Display [Custom UI](./snaps-concepts.html#custom-ui) within MetaMask using a set of pre-defined components, including inline Markdown.
 
 ### Propose a feature
 
