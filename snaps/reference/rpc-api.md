@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Snaps JSON-RPC API
 
 Snaps communicate with MetaMask using the Snaps JSON-RPC API.
@@ -8,8 +11,8 @@ communicate with individual snaps.
 
 ### `wallet_enable`
 
-:::caution Only callable by
-- Websites
+:::note
+This method is only callable by websites.
 :::
 
 #### Parameters
@@ -49,11 +52,11 @@ granted permissions.
 
 #### Description
 
-This is a convenience method for requesting the user's accounts and connecting to / installing snaps.
-You can think of it as a combination of [`eth_requestAccounts`](./rpc-api.html#eth-requestaccounts),
-[`wallet_installSnaps`](#wallet-installsnaps), and [`wallet_requestPermissions`](./rpc-api.html#wallet-requestpermissions).
-
-See the examples for details.
+This is a convenience method for requesting the user's accounts and connecting to and installing snaps.
+You can think of it as a combination of
+[`eth_requestAccounts`](../../api-sdk/reference/rpc-api.md#eth_requestaccounts),
+[`wallet_installSnaps`](#wallet_installsnaps), and
+[`wallet_requestPermissions`](../../api-sdk/reference/rpc-api.md#wallet_requestpermissions).
 
 #### Example
 
@@ -120,8 +123,8 @@ if (result.errors) {
 
 ### `wallet_getSnaps`
 
-:::caution Only Callable By
-- Websites
+:::note
+This method is only callable by websites.
 :::
 
 #### Returns
@@ -184,13 +187,13 @@ console.log(result);
 
 ### `wallet_installSnaps`
 
-:::caution Only Callable By
-- Websites
+:::note
+This method is only callable by websites.
 :::
 
-:::caution Is this the method you're looking for?
+:::tip
 This method only installs the requested snaps if the caller is permitted to do so.
-You probably want to use [`wallet_enable`](#wallet-enable) instead, which both requests the
+You might want to use [`wallet_enable`](#wallet_enable) instead, which both requests the
 permissions for the snaps _and_ installs them.
 :::
 
@@ -220,20 +223,20 @@ interface WalletInstallSnapsResult {
 }
 ```
 
-`WalletInstallSnapsResult` - An object mapping the IDs of installed snaps to their metadata or an
-error if installation failed.
+`WalletInstallSnapsResult` - An object mapping the IDs of installed snaps to their metadata, or an
+error if installation fails.
 
 #### Description
 
-This method attempts to install the requested snaps, if they are permitted.
-If the installation of any snap fails, its object value on the result will contain an `error`
+This method attempts to install the requested snaps, if they're permitted.
+If the installation of any snap fails, its object value on the result contains an `error`
 property with the error that caused the installation to fail.
 
 Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to
 be installed.
 If you do so, MetaMask attempts to install a version of the snap that satisfies the requested range.
 If a compatible version of a snap is already installed, the request to install that snap
-automatically succeed.
+automatically succeeds.
 If an incompatible version is installed, MetaMask attempts to update the snap to the latest
 version that satisfies the requested range.
 The request succeeds if the snap is successfully updated, and fails if the update can't be completed.
@@ -271,8 +274,8 @@ console.log(result);
 
 ### `wallet_invokeSnap`
 
-:::caution Only callable by
-- Websites
+:::note
+This method is only callable by websites.
 :::
 
 #### Parameters
@@ -293,7 +296,7 @@ interface SnapRequest {
 
 - `Array`
 
-  0. `string` - The id of the snap to invoke.
+  0. `string` - The ID of the snap to invoke.
   1. `SnapRequest` - The JSON-RPC request object to send to the invoked snap.
 
 #### Returns
@@ -306,8 +309,8 @@ Invokes the specified JSON-RPC method of the specified snap.
 The snap must be installed and the caller must have the permission to communicate with the snap, or
 the request is rejected.
 
-Snaps are fully responsible for implementing their JSON-RPC API; consult the snap's documentation
-for available methods, their parameters, and return values.
+Snaps are fully responsible for implementing their JSON-RPC API.
+Consult the snap's documentation for available methods, their parameters, and return values.
 
 #### Example
 
@@ -327,22 +330,22 @@ console.log(result); // We happen to know that this will be `true` or `false`
 
 ## Restricted methods
 
-If a method is _restricted_, it means that you need the requisite permission before you can call it.
-Both snaps and dapps / websites can have permissions.
+If a method is _restricted_, you must [request permission](../how-to/request-permissions.md) before
+you can call it.
+Both snaps and dapps/websites can have permissions.
 Some permissions are only available to snaps, and some are only available to websites.
-See [here](./rpc-api.html#restricted-methods) for more information about the permission system.
 
 ### `wallet_snap_*`
 
-:::caution Only callable by
-- Websites
+:::note
+This method is only callable by websites.
 :::
 
-:::caution Is this the method you're looking for?
-[`wallet_invokeSnap`](#wallet-invokesnap) provides a more convenient way of calling this method.
+:::tip
+[`wallet_invokeSnap`](#wallet_invokesnap) provides a more convenient way of calling this method.
 :::
 
-:::tip Namespaced method
+:::tip
 This is a namespaced restricted method.
 The `*` in the name is always substituted for a string, in this case a snap ID.
 :::
@@ -363,8 +366,8 @@ Invokes the specified JSON-RPC method of the snap corresponding to the specified
 The snap must be installed and the caller must have the permission to communicate with the snap, or
 the request is rejected.
 
-Snaps are fully responsible for implementing their JSON-RPC API; consult the snap's documentation
-for available methods, their parameters, and return values.
+Snaps are fully responsible for implementing their JSON-RPC API.
+Consult the snap's documentation for available methods, their parameters, and return values.
 
 #### Example
 
@@ -383,8 +386,8 @@ console.log(result); // We happen to know that this will be `true` or `false`
 
 ### `snap_confirm`
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Parameters
@@ -421,7 +424,7 @@ interface SnapConfirmParam {
 #### Description
 
 Calling this method causes a confirmation to be displayed in the MetaMask UI.
-The contents of the confirmation depend on the parameters, see above for their meaning and format.
+The contents of the confirmation depend on the parameters.
 The user can either approve or reject the confirmation, which is indicated by the method's return value.
 
 Use this method to show a MetaMask popup with custom text and buttons to approve or reject an action.
@@ -450,15 +453,16 @@ if (result === true) {
 
 ### `snap_dialog`
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Description
 
 Calling this method causes a dialog to be displayed in the MetaMask UI.
-There are three types of dialogs: Alert, Confirmation, and Prompt.
-Each of these dialog types has different parameters and return types, detailed below.
+There are three types of dialogs: [alert](#alert-dialog), [confirmation](#confirmation-dialog), and
+[prompt](#prompt-dialog).
+Each of these dialog types has different parameters and return types.
 
 ##### Alert dialog
 
@@ -513,7 +517,6 @@ await wallet.request({
 // Code that should execute after the alert has been acknowledged
 ```
 
-
 ##### Confirmation dialog
 
 Displays a confirmation dialog that can be accepted or rejected.
@@ -547,7 +550,7 @@ interface SnapConfirmationDialogParam {
 
 ###### Returns
 
-`boolean` - `true` if the confirmation was accepted, `false` otherwise
+`boolean` - `true` if the confirmation was accepted, `false` otherwise.
 
 ###### Example
 
@@ -570,7 +573,6 @@ if (result === true) {
   // Don't replace the batteries
 }
 ```
-
 
 ##### Prompt Dialog
 
@@ -599,7 +601,7 @@ interface SnapPromptDialogParam {
 
 ###### Returns
 
-`string` - The text entered by the user
+`string` - The text entered by the user.
 
 ###### Example
 
@@ -618,17 +620,16 @@ const walletAddress = await wallet.request({
 // `walletAddress` will be a string containing the address entered by the user
 ```
 
-
 ### `snap_getBip32Entropy`
 
-:::danger Powerful method
-If you call this method, you receive the user's parent key for the derivation path that they requested.
-When that happens, you are now managing a person's keys, and whatever assets they control, on their behalf.
+:::danger
+If you call this method, you receive the user's parent key for the derivation path they requested.
+You're then managing a person's keys, and whatever assets they control, on their behalf.
 Their safety is your responsibility.
 :::
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Parameters
@@ -679,8 +680,9 @@ interface SLIP10Node {
 }
 ```
 
-`SLIP10Node` - An object representing the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md)
-HD tree node and containing its corresponding key material.
+`SLIP10Node` - An object representing the
+[SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) HD tree node and containing
+its corresponding key material.
 
 #### Description
 
@@ -699,9 +701,8 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 #### Example
 
-:::: tabs :options="{ useUrlFragment: false }"
-
-::: tab Manifest
+<Tabs>
+<TabItem value="manifest" label="Manifest">
 
 ```json
 {
@@ -716,9 +717,8 @@ derive an address for the relevant protocol or sign a transaction for the user.
 }
 ```
 
-:::
-
-::: tab Code
+</TabItem>
+<TabItem value="code" label="Code">
 
 ```javascript
 import { SLIP10Node } from '@metamask/key-tree';
@@ -746,20 +746,19 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 // Now, you can ask the user to e.g. sign transactions!
 ```
 
-:::
-
-::::
+</TabItem>
+</Tabs>
 
 ### `snap_getBip44Entropy`
 
-:::danger Powerful method
-If you call this method, you receive the user's parent key for the protocol that they requested.
-When that happens, you are now managing a person's keys, and whatever assets they control, on their behalf.
+:::danger
+If you call this method, you receive the user's parent key for the protocol they requested.
+You're then managing a person's keys, and whatever assets they control, on their behalf.
 Their safety is your responsibility.
 :::
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Parameters
@@ -840,9 +839,8 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 #### Example
 
-:::: tabs :options="{ useUrlFragment: false }"
-
-::: tab Manifest
+<Tabs>
+<TabItem value="manifest" label="Manifest">
 
 ```json
 {
@@ -856,9 +854,8 @@ derive an address for the relevant protocol or sign a transaction for the user.
 }
 ```
 
-:::
-
-::: tab Code
+</TabItem>
+<TabItem value="code" label="Code">
 
 ```javascript
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
@@ -887,14 +884,13 @@ const addressKey1 = await deriveDogecoinAddress(1);
 // Now, you can ask the user to e.g. sign transactions!
 ```
 
-:::
-
-::::
+</TabItem>
+</Tabs>
 
 ### `snap_getBip32PublicKey`
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Parameters
@@ -903,7 +899,8 @@ const addressKey1 = await deriveDogecoinAddress(1);
   - `path` - An array, starting with `m`, containing the BIP-32 derivation path to the public key to
     retrieve, for example, `["m", "44'", "60'"]`.
   - `curve` - The curve to use for the key derivation, must be `'ed25519'` or `'secp256k1'`.
-  - `compressed` - Whether the public key should be compressed. Defaults to `false`.
+  - `compressed` - Indicates whether the public key should be compressed.
+    The default is `false`.
 
 #### Returns
 
@@ -914,13 +911,12 @@ The public key as hexadecimal `string`.
 Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the
 derivation path specified by the `path` parameter.
 
-Note that this returns the public key, not the extended public key (`xpub`), or (Ethereum) address.
+Note that this returns the public key, not the extended public key (`xpub`), or Ethereum address.
 
 #### Example
 
-:::: tabs :options="{ useUrlFragment: false }"
-
-::: tab Manifest
+<Tabs>
+<TabItem value="manifest" label="Manifest">
 
 ```json
 {
@@ -935,9 +931,8 @@ Note that this returns the public key, not the extended public key (`xpub`), or 
 }
 ```
 
-:::
-
-::: tab Code
+</TabItem>
+<TabItem value="code" label="Code">
 
 ```javascript
 // By way of example, we will use Dogecoin, which has a derivation path starting
@@ -956,18 +951,17 @@ const dogecoinPublicKey = await wallet.request({
 console.log(dogecoinPublicKey);
 ```
 
-:::
-
-::::
+</TabItem>
+</Tabs>
 
 ### `snap_manageState`
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
-:::tip Storage limit
-Snaps can currently use this RPC method to store up to 100 MB of data.
+:::note
+Snaps can currently use this method to store up to 100 MB of data.
 :::
 
 #### Parameters
@@ -1014,8 +1008,8 @@ await wallet.request({
 
 ### `snap_notify`
 
-:::caution Only callable by
-- Snaps
+:::note
+This method is only callable by snaps.
 :::
 
 #### Parameters
@@ -1038,7 +1032,7 @@ interface SnapNotifyParams {
 
   0. `SnapNotifyParams` - An object containing the contents of the notification.
 
-#### Notification Type
+#### Notification type
 
 ```typescript
 enum NotificationType {
@@ -1067,7 +1061,7 @@ The notification type and content are determined by the method's parameters.
 See above for their meaning and format.
 
 This generic notifications interface can be used by any snap with the notifications permission.
-A short notification text can be triggered by a snap for actionable or time-sensitive information.
+A short notification text can be triggered by a snap for actionable or time sensitive information.
 
 #### Example
 

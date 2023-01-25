@@ -24,8 +24,8 @@ const sidebar = {
       collapsed: false,
       items: [
         "get-started/install-snaps",
-        "get-started/quickstart"
-      ]
+        "get-started/quickstart",
+      ],
     },
     {
       type: "category",
@@ -34,18 +34,8 @@ const sidebar = {
       items: [
         "how-to/develop-a-snap",
         "how-to/request-permissions",
-        "how-to/troubleshoot"
-      ]
-    },
-    {
-      type: "category",
-      label: "Reference",
-      link: { type: "generated-index" },
-      items: [
-        "reference/rpc-api",
-        "reference/exports",
-        "reference/cli"
-      ]
+        "how-to/troubleshoot",
+      ],
     },
     {
       type: "category",
@@ -55,18 +45,28 @@ const sidebar = {
         "concepts/anatomy",
         "concepts/lifecycle",
         "concepts/user-interface",
-        "concepts/execution-environment"
-      ]
+        "concepts/execution-environment",
+      ],
     },
     {
       type: "category",
       label: "Tutorials",
       link: { type: "generated-index" },
       items: [
-        "tutorials/tutorials"
-      ]
-    }
-  ]
+        "tutorials/tutorials",
+      ],
+    },
+    {
+      type: "category",
+      label: "Reference",
+      link: { type: "generated-index" },
+      items: [
+        "reference/rpc-api",
+        "reference/exports",
+        "reference/options",
+      ],
+    },
+  ],
 };
 
 module.exports = sidebar;

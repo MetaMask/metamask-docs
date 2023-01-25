@@ -4,17 +4,17 @@ A snap can export the following functions.
 
 ## `onRpcRequest`
 
-In order to communicate with dapps and other snaps, the snap must implement its own JSON-RPC API by
-exposing an exported function called `onRpcRequest`.
+To communicate with dapps and other snaps, the snap must implement its own JSON-RPC API by exposing
+an exported function called `onRpcRequest`.
 Whenever the snap receives a JSON-RPC request, the `onRpcRequest` handler function is called with
 the following parameters.
 
 :::tip Does my snap need to have an RPC API?
-Well, no, that's also up to you!
+No, that's up to you!
 If your snap can do something useful without receiving and responding to JSON-RPC requests, then you
-can skip exporting onRpcRequest.
-However, if you want to do something like manage the user's keys for a particular protocol and
-create a dapp that sends transactions for that protocol via your snap, for example, you need to
+can skip exporting `onRpcRequest`.
+However, if you want to do something such as manage the user's keys for a particular protocol and
+create a dapp that sends transactions for that protocol via your snap, for example, you must
 specify an RPC API.
 :::
 
@@ -37,7 +37,7 @@ interface RpcHandlerArgs = {
 type RpcHandlerReturn = Promise<unknown> | unknown;
 ```
 
-`RpcHandlerReturn` - A promise containing the return of the implemented RPC method.
+`RpcHandlerReturn` - A promise containing the return of the implemented method.
 
 ### Examples
 
@@ -78,19 +78,19 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 If the snap wants to provide transaction insights before a user signs a transaction, the snap must
 export a function called `onTransaction`.
-Whenever there is a contract interaction and a transaction is submitted via the extension, this
+Whenever there's a contract interaction, and a transaction is submitted via the extension, this
 function is called.
 The raw unsigned transaction payload is passed to the `onTransaction` handler function.
 
-:::tip Requesting the transaction insight permission
-In order for the extension to call the `onTransaction` method of the snap, the
-`endowment:transaction-insight` permission must be requested.
-See [Permissions](./snaps-permissions.html#endowment-transaction-insight)
+:::note
+For the extension to call the `onTransaction` method of the snap, you must request the
+[`endowment:transaction-insight`](../how-to/request-permissions.md#endowmenttransaction-insight)
+permission.
 :::
 
 ### Parameters
 
-- `onTransactionArgs` - the raw transaction payload and the
+- `onTransactionArgs` - The raw transaction payload and the
   [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
   For more details on the transaction object see
   [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
@@ -149,17 +149,16 @@ module.exports.onTransaction = async ({
 
 If a snap wants to run periodic actions for the user, the snap must export a function called `onCronjob`.
 This function is called at the specified times with the specified payloads defined in the
-`endowment:cronjob` permission.
+[`endowment:cronjob`](../how-to/request-permissions.md#endowmentcronjob) permission.
 
-::: tip Requesting the cronjob permission
-In order for the extension to call the `onCronjob` method of the snap, the `endowment:cronjob`
-permission must be requested.
-See [Permissions](./snaps-permissions.html#endowment-cronjob)
+:::note
+For the extension to call the `onCronjob` method of the snap, you must request the
+[`endowment:cronjob`](../how-to/request-permissions.md#endowmentcronjob) permission.
 :::
 
 ### Parameters
 
-- `onCronjobArgs` - exclusively containing an RPC request specified in the `endowment:cronjob` permission.
+- `onCronjobArgs` - Exclusively containing an RPC request specified in the `endowment:cronjob` permission.
 
 ```typescript
 interface onCronjobArgs {

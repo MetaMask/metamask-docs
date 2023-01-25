@@ -26,7 +26,7 @@ Running multiple instances of MetaMask in the same browser profile breaks dapp i
 
 ## Install the Snaps CLI
 
-The [Snaps CLI](../reference/cli.md) provides commands for initiating a snap project and building,
+The [Snaps CLI](../reference/options.md) provides commands for initiating a snap project and building,
 executing, and serving your snap for local development.
 
 In a terminal window, install the CLI globally using npm or Yarn:

@@ -10,4 +10,4 @@ The pages in this section should transcribe the following tutorials:
   [4byte API snap video](https://archive.devcon.org/archive/watch/6/getting-started-with-metamask-snaps/?tab=YouTube)
   and [text guide](https://hackmd.io/@rekmarks/devcon-vi)
   
-See more in this issue.
+See more in [this issue](https://github.com/MetaMask/mm-docs-v2/issues/6).

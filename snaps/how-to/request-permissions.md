@@ -5,7 +5,7 @@ Snaps follow the [EIP-2255 wallet permissions specification](https://eips.ethere
 and you must specify a snap's required permissions in the `initialPermissions` field of the
 [manifest file](../concepts/anatomy.md#manifest-file).
 
-## API methods
+## RPC API permissions
 
 You must request permission to use any
 [restricted JSON-RPC API methods](../reference/rpc-api.md#restricted-methods).
@@ -55,4 +55,63 @@ If your dependencies are using `XMLHttpRequest`, you can
   "endowment:network-access": {}
 },
 ...
+```
+
+### `endowment:transaction-insight`
+
+For snaps that provide transaction insights, the snap can request the
+`endowment:transaction-insight` permission.
+This permission grants a snap read-only access to raw transaction payloads, before they're accepted
+for signing by the user, by exporting the [`onTransaction`](../reference/exports.md#ontransaction) method.
+
+```json
+...
+"initialPermissions": {
+  "endowment:transaction-insight": {}
+},
+...
+```
+
+### `endowment:cronjob`
+
+For snaps that wants to run periodic actions for the user, the snap can request the
+`endowment:cronjob` permission.
+This permission allows a snap to specify periodic requests that trigger the exported
+[`onCronjob`](../reference/exports.md#oncronjob) method.
+
+Cronjobs are specified as follows:
+
+```json
+{
+  "initialPermissions": {
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": {
+            "minute": "*",
+            "hour": "*",
+            "dayOfMonth": "*",
+            "month": "*",
+            "dayOfWeek": "*"
+          },
+          "request": {
+            "method": "exampleMethodOne",
+            "params": {
+              "param1": "foo"
+            }
+          }
+        },
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "exampleMethodTwo",
+            "params": {
+              "param1": "bar"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
 ```
