@@ -16,54 +16,54 @@ const sidebar = {
 
   // But you can create a sidebar manually
   snapsSidebar: [
-    'index',
+    "index",
     {
-      type: 'category',
-      label: 'Get started',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Get started",
+      link: { type: "generated-index" },
       collapsed: false,
       items: [
-        'get-started/install-snaps',
-        'get-started/quickstart'
+        "get-started/install-snaps",
+        "get-started/quickstart"
       ]
     },
     {
-      type: 'category',
-      label: 'How to',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "How to",
+      link: { type: "generated-index" },
       items: [
-        'how-to/develop-a-snap',
-        'how-to/request-permissions',
-        'how-to/troubleshoot'
+        "how-to/develop-a-snap",
+        "how-to/request-permissions",
+        "how-to/troubleshoot"
       ]
     },
     {
-      type: 'category',
-      label: 'Reference',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Reference",
+      link: { type: "generated-index" },
       items: [
-        'reference/rpc-api',
-        'reference/exports',
-        'reference/cli'
+        "reference/rpc-api",
+        "reference/exports",
+        "reference/cli"
       ]
     },
     {
-      type: 'category',
-      label: 'Concepts',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Concepts",
+      link: { type: "generated-index" },
       items: [
-        'concepts/anatomy',
-        'concepts/lifecycle',
-        'concepts/user-interface',
-        'concepts/execution-environment'
+        "concepts/anatomy",
+        "concepts/lifecycle",
+        "concepts/user-interface",
+        "concepts/execution-environment"
       ]
     },
     {
-      type: 'category',
-      label: 'Tutorials',
-      link: { type: 'generated-index' },
+      type: "category",
+      label: "Tutorials",
+      link: { type: "generated-index" },
       items: [
-        'tutorials/tutorials'
+        "tutorials/tutorials"
       ]
     }
   ]

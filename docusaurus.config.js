@@ -59,13 +59,7 @@ const config = {
         path: "snaps",
         routeBasePath: "snaps",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
-        breadcrumbs: false,
-        versions: {
-          current: {
-            label: "Current",
-            badge: false,
-          },
-        },
+        breadcrumbs: false
       }),
     ],
   ],
