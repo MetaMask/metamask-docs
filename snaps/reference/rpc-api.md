@@ -1,5 +1,9 @@
 # Snaps JSON-RPC API
 
+Snaps communicate with MetaMask using the Snaps JSON-RPC API.
+These API methods allow snaps to modify the functionality of MetaMask, and websites to install and
+communicate with individual snaps.
+
 ## Unrestricted methods
 
 ### `wallet_enable`
@@ -419,6 +423,9 @@ interface SnapConfirmParam {
 Calling this method causes a confirmation to be displayed in the MetaMask UI.
 The contents of the confirmation depend on the parameters, see above for their meaning and format.
 The user can either approve or reject the confirmation, which is indicated by the method's return value.
+
+Use this method to show a MetaMask popup with custom text and buttons to approve or reject an action.
+You can use this to create requests, confirmations, and opt-in flows for a snap.
 
 #### Example
 
@@ -1058,6 +1065,9 @@ enum NotificationType {
 Calling this method displays a notification in MetaMask or natively in the browser.
 The notification type and content are determined by the method's parameters.
 See above for their meaning and format.
+
+This generic notifications interface can be used by any snap with the notifications permission.
+A short notification text can be triggered by a snap for actionable or time-sensitive information.
 
 #### Example
 

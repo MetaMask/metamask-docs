@@ -34,7 +34,7 @@ const sidebar = {
       items: [
         'how-to/develop-a-snap',
         'how-to/request-permissions',
-        'how-to/patch-dependencies'
+        'how-to/troubleshoot'
       ]
     },
     {
@@ -52,7 +52,10 @@ const sidebar = {
       label: 'Concepts',
       link: { type: 'generated-index' },
       items: [
-        'concepts/anatomy'
+        'concepts/anatomy',
+        'concepts/lifecycle',
+        'concepts/user-interface',
+        'concepts/execution-environment'
       ]
     },
     {

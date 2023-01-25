@@ -1,28 +1,44 @@
 # Install Snaps
 
-To install snaps, you'll need:
+To use Snaps, you must install [MetaMask Flask](#install-metamask-flask) and the [Snaps CLI](#install-the-snaps-cli).
+
+You can then [get started quickly using the Snaps template](quickstart.md).
+
+## Prerequisites
 
 - Up-to-date Chromium or Firefox browser
 - [Node.js](https://nodejs.org/)
-- MetaMask Flask
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [Yarn](https://yarnpkg.com/)
 
-  To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/),
-  a canary distribution for developers that provides access to upcoming features.
+## Install MetaMask Flask
 
-  ::: warning
-  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask.
-  Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
-  :::
-  
-Learn more about the anatomy of a snap.
+[MetaMask Flask](https://metamask.io/flask/) is a canary distribution for developers that provides
+access to upcoming MetaMask features.
+Snaps is the first feature rolled out in the Flask environment.
 
-We recommend getting started with snaps using our template.
+[Install Flask](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk)
+in a new browser profile, or disable any existing installed versions of MetaMask before installing
+Flask.
 
-## Install the snaps CLI
+:::caution
+Running multiple instances of MetaMask in the same browser profile breaks dapp interactions.
+:::
 
-Before continuing, you should know that
-[`@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli) exists, and will be one
-of your most important tools as you get started with snap development.
-The CLI can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap
-project and building, executing, and serving your snap for local development.
-Executing `mm-snap --help` will provide detailed usage instructions.
+## Install the Snaps CLI
+
+The [Snaps CLI](../reference/cli.md) provides commands for initiating a snap project and building,
+executing, and serving your snap for local development.
+
+In a terminal window, install the CLI globally using npm or Yarn:
+
+```bash
+npm install -g @metamask/snaps-cli
+or
+yarn global add @metamask/snaps-cli
+```
+
+Verify the installation and display usage instructions:
+
+```bash
+mm-snap --help
+```

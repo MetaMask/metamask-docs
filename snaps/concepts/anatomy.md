@@ -1,4 +1,4 @@
-# Anatomy of a snap
+# Snap anatomy
 
 This section describes the anatomy of a snap based on the template used in the connect to a snap
 tutorial.
@@ -46,7 +46,7 @@ is probably the best way to get started.
 In this section, we'll review the major components of a snap: the source code, the manifest
 (and `package.json`), and the bundle file.
 
-## The snap source code
+## Source code
 
 If you're familiar with JavaScript or TypeScript development of any kind, developing a snap should
 feel quite familiar to you.
@@ -105,7 +105,7 @@ Well, no, that's also up to you! If your snap can do something useful without re
 However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
 :::
 
-### The snap manifest
+### Manifest file
 
 In order to get MetaMask to execute your snap, you need to have a valid manifest file, located in
 your package root directory under the name `snap.manifest.json`.
@@ -155,7 +155,7 @@ For example, if you change the location of the (optional) icon SVG file,
 Meanwhile, the CLI will update some of the fields for you, e.g. `source.shasum` whenever you run
 `mm-snap build` (by default) or `mm-snap manifest --fix`.
 
-### The snap configuration file
+### Configuration file
 
 `snap.config.js` should be placed in the project root directory.
 It can override cli options - the property `cliOptions` should have string keys matching command arguments.
@@ -194,7 +194,7 @@ module.exports = {
 
 The configuration file should not be published.
 
-### The snap bundle file
+### Bundle file
 
 Because of the way snaps are executed, they must be published as a single `.js` file containing the
 entire source code and all dependencies.
