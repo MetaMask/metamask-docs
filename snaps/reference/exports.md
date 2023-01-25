@@ -168,7 +168,7 @@ interface onCronjobArgs {
 
 ### Examples
 
-#### Typescript
+#### TypeScript
 
 ```typescript
 import { OnCronjobHandler } from '@metamask/snap-types';
@@ -192,7 +192,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 };
 ```
 
-#### Javascript
+#### JavaScript
 
 ```js
 module.exports.onCronjob = async ({ request }) => {
