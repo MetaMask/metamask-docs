@@ -6,9 +6,9 @@
 
 ### Introduction
 
-Custom UI is a UI definition system used by various Snaps features. Rather than returning simply text strings, certain Snaps actions will have the ability to return a richer UI to express their output.
+Custom UI is a UI definition system used by various Snaps features. It enables Snaps to describe a rich UI to be displayed in some contexts.
 
-Custom UI is used to return custom user interfaces in [`snap_dialog`](./snaps-rpc-api.html#snap-dialog), and in the [`onTransaction` export](./snaps-exports.html#ontransaction).
+Custom UI is used to describe custom user interfaces in [`snap_dialog`](./snaps-rpc-api.html#snap-dialog), and in the [`onTransaction` export](./snaps-exports.html#ontransaction).
 
 ### How to use it
 
@@ -18,7 +18,7 @@ To use Custom UI, you must first install the `@metamask/snaps-ui` NPM package:
 yarn add @metamask/snaps-ui
 ```
 
-Then, whenever you're required to return a custom UI, import the components you need from the package, and build your UI with them. For example:
+Then, whenever you're required to return a Custom UI, import the components you need from the package, and build your UI with them. For example:
 
 ```javascript
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -41,7 +41,7 @@ The `NodeType` enum exported by `@metamask/snaps-ui` details the available compo
 
 ##### Description
 
-Outputs a copyable text field.
+Outputs a read-only text field with a copy-to-clipboard shortcut.
 
 ##### Usage
 
@@ -77,7 +77,7 @@ const content = panel([
 
 ##### Description
 
-Outputs a heading, useful e.g. for panel titles.
+Outputs a heading. Useful for panel titles.
 
 ##### Usage
 
@@ -96,7 +96,7 @@ const content = panel([
 
 ##### Description
 
-Outputs a panel, a container for other components.
+Outputs a panel, which can be used as a container for other components.
 
 ##### Usage
 
@@ -118,7 +118,7 @@ const content = panel([
 
 ##### Description
 
-Outputs a spinner.
+Outputs a loading indicator.
 
 ##### Usage
 
