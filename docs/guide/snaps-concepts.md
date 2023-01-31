@@ -12,7 +12,7 @@ Custom UI is used to return custom user interfaces in [`snap_dialog`](./snaps-rp
 
 ### How to use it
 
-To use custom UI, you must first install the `@metamask/snaps-ui` NPM package:
+To use Custom UI, you must first install the `@metamask/snaps-ui` NPM package:
 
 ```sh
 yarn add @metamask/snaps-ui
