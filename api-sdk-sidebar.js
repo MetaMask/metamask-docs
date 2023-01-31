@@ -33,6 +33,7 @@ const sidebar = {
           items: [
             "how-to/use-sdk/react-native",
             "how-to/use-sdk/pure-js",
+            "how-to/use-sdk/unity",
           ],
         },
         "how-to/use-mobile",
@@ -62,9 +63,10 @@ const sidebar = {
       label: "Concepts",
       link: { type: "generated-index" },
       items: [
-        "concepts/sdk",
+        "concepts/sdk-connections",
         "concepts/signing-methods",
         "concepts/onboarding-library",
+        "concepts/convenience-libraries",
       ],
     },
     {

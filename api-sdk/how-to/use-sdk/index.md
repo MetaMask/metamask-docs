@@ -1,11 +1,21 @@
 # Use MetaMask SDK
 
-[MetaMask SDK](../../concepts/sdk.md) currently supports JavaScript-based dapps.
+[MetaMask SDK](../../concepts/sdk-connections.md) currently supports JavaScript-based dapps.
 It enables these dapps to easily connect with a MetaMask wallet client.
 
 The following instructions work for dapps based on standard JavaScript, React, NodeJS, Electron, and
 other web frameworks.
-MetaMask SDK also supports [React Native](react-native.md) and [pure JavaScript](pure-js.md) dapps.
+MetaMask SDK also supports [React Native](react-native.md), [pure JavaScript](pure-js.md), and
+[Unity gaming](unity.md) dapps.
+
+:::tip
+The MetaMask SDK instance returns the [`ethereum` web3 provider](reference/provider-api.md) that
+developers are already used to, so existing dapps work out of the box with the SDK!
+:::
+
+:::note
+SDK support for Android native apps, iOS native apps, and Unreal Engine is coming soon.
+:::
 
 ## Prerequisites
 

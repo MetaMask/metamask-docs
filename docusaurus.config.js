@@ -89,6 +89,7 @@ const config = {
       footer: {},
       prism: {
         theme: codeTheme,
+        additionalLanguages: [`csharp`],
       },
     }),
 };

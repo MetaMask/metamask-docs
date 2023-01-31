@@ -5,9 +5,9 @@ This API allows websites to request users' Ethereum accounts, read data from blo
 connected to, and suggest that the user sign messages and transactions.
 The presence of the provider object indicates an Ethereum user.
 We recommend using [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider)
-to detect our provider, on any platform or browser.
+to detect the provider, on any platform or browser.
 
-The Ethereum JavaScript provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
+The Ethereum provider API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
 
 ```javascript
 // This function detects most providers injected at window.ethereum

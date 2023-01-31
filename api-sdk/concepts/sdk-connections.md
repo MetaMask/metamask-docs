@@ -1,4 +1,4 @@
-# MetaMask SDK
+# MetaMask SDK connections
 
 If you're developing a web application that users can access via a desktop or mobile browser, you
 can [use MetaMask SDK](../how-to/use-sdk) to guide users to easily connect with MetaMask.
@@ -17,7 +17,7 @@ This happens for all actions that need user approval.
 When connecting with MetaMask Mobile wallet, it's important to understand when connections get
 paused, resumed and cleared.
 
-#### Paused connections
+### Paused connections
 
 Connections get paused after the MetaMask Mobile app is in background (minimized) for 20 seconds.
 This is to accomodate OS restrictions, and it means that all traffic into MetaMask Mobile gets
@@ -28,7 +28,7 @@ maintained in paused mode until it's opened again.
 
 For this reason, polling data from the wallet may not work for long periods of time.
 
-#### Cleared connections
+### Cleared connections
 
 Connections get cleared if the dapp is closed or refreshed (in the case of a browser) as MetaMask
 doesn't persist connections on the dapp side.
