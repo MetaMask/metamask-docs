@@ -460,11 +460,21 @@ Calling this method causes a dialog to be displayed in the MetaMask UI.
 There are three types of dialogs: Alert, Confirmation, and Prompt.
 Each of these dialog types has different parameters and return types, detailed below.
 
-##### Alert Dialog
+#### The `Component` type
+
+The `Component` type, used as the `content` property for dialogs, is [defined in source code](https://github.com/MetaMask/snaps-monorepo/blob/main/packages/snaps-ui/src/nodes.ts#L171) as:
+
+```typescript
+type Component = Infer<typeof ComponentStruct>;
+```
+
+By itself this is opaque. A simple way to understand it is as the return type of the UI functions exported from the `@metamask/snaps-ui` package, i.e. `heading`, `panel`, `text`, and other UI functions.
+
+#### Alert Dialog
 
 Displays an alert that can only be acknowledged.
 
-###### Parameters
+##### Parameters
 
 ```typescript
 interface SnapAlertDialogParam {
@@ -480,11 +490,11 @@ interface SnapAlertDialogParam {
 }
 ```
 
-###### Returns
+##### Returns
 
 `null`
 
-###### Example
+##### Example
 
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -503,11 +513,11 @@ await wallet.request({
 // Code that should execute after the alert has been acknowledged
 ```
 
-##### Confirmation Dialog
+#### Confirmation Dialog
 
 Displays a confirmation dialog that can be accepted or rejected.
 
-###### Parameters
+##### Parameters
 
 ```typescript
 interface SnapConfirmationDialogParam {
@@ -523,11 +533,11 @@ interface SnapConfirmationDialogParam {
 }
 ```
 
-###### Returns
+##### Returns
 
 `boolean` - `true` if the confirmation was accepted, `false` otherwise.
 
-###### Example
+##### Example
 
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -548,11 +558,11 @@ if (result === true) {
 }
 ```
 
-##### Prompt Dialog
+#### Prompt Dialog
 
 Displays a prompt where the user can enter a text response.
 
-###### Parameters
+##### Parameters
 
 ```typescript
 interface SnapPromptDialogParam {
@@ -573,11 +583,11 @@ interface SnapPromptDialogParam {
 }
 ```
 
-###### Returns
+##### Returns
 
 `string` - The text entered by the user.
 
-###### Example
+##### Example
 
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
