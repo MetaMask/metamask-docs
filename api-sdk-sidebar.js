@@ -50,16 +50,6 @@ const sidebar = {
     },
     {
       type: "category",
-      label: "Reference",
-      link: { type: "generated-index" },
-      items: [
-        "reference/provider-api",
-        "reference/rpc-api",
-        "reference/sdk-js-options",
-      ],
-    },
-    {
-      type: "category",
       label: "Concepts",
       link: { type: "generated-index" },
       items: [
@@ -76,6 +66,16 @@ const sidebar = {
       items: [
         "tutorials/create-simple-dapp",
         "tutorials/create-simple-dapp-with-sdk",
+      ],
+    },
+    {
+      type: "category",
+      label: "Reference",
+      link: { type: "generated-index" },
+      items: [
+        "reference/provider-api",
+        "reference/rpc-api",
+        "reference/sdk-js-options",
       ],
     },
   ],

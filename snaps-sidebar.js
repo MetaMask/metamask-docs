@@ -19,11 +19,41 @@ const sidebar = {
     "index",
     {
       type: "category",
-      label: "How To",
+      label: "Get started",
+      link: { type: "generated-index" },
+      collapsed: false,
+      items: [
+        "get-started/install-snaps",
+        "get-started/quickstart",
+      ],
+    },
+    {
+      type: "category",
+      label: "How to",
       link: { type: "generated-index" },
       items: [
-        "how-to/guide",
-        "how-to/patching-dependencies",
+        "how-to/develop-a-snap",
+        "how-to/request-permissions",
+        "how-to/troubleshoot",
+      ],
+    },
+    {
+      type: "category",
+      label: "Concepts",
+      link: { type: "generated-index" },
+      items: [
+        "concepts/anatomy",
+        "concepts/lifecycle",
+        "concepts/user-interface",
+        "concepts/execution-environment",
+      ],
+    },
+    {
+      type: "category",
+      label: "Tutorials",
+      link: { type: "generated-index" },
+      items: [
+        "tutorials/tutorials",
       ],
     },
     {
@@ -32,8 +62,8 @@ const sidebar = {
       link: { type: "generated-index" },
       items: [
         "reference/rpc-api",
-        "reference/permissions",
         "reference/exports",
+        "reference/options",
       ],
     },
   ],
