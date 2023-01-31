@@ -59,17 +59,17 @@ Derive BIP-32 and BIP-44 keypairs based on the Secret Recovery Phrase without ex
 
 Bring your insights, anti-phishing, and security solutions to the MetaMask UI with the transaction insights API.
 
+<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
+
+#### Schedule actions with cron jobs &bull; [Learn more](./snaps-exports.html#oncronjob)
+
+Perform actions that run periodically at fixed times, dates, or intervals.
+
 <img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
 
 #### Custom UI in MetaMask using a defined set of components
 
 Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
-
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
-
-#### Schedule actions with cron jobs
-
-Perform actions that run periodically at fixed times, dates, or intervals.
 
 ### Propose a feature
 
@@ -83,6 +83,13 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
 
 - Up-to-date Chromium or Firefox browser
 - [Node.js](https://nodejs.org/)
+- MetaMask Flask
+
+  To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+
+  ::: warning
+  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
+  :::
 
 ### Quick start using our template
 
@@ -104,17 +111,9 @@ yarn start
 
 You should now be serving both (1) the front-end and (2) the snap locally. Time to check it out in action at [`http://localhost:8000/`](http://localhost:8000/).
 
-Next step is to [install MetaMask Flask](https://metamask.io/flask/).
-
-### Install MetaMask Flask
-
-To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
-
-Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
-
 ### Connecting to the snap
 
-Once you have [MetaMask Flask](https://metamask.io/flask/) installed (in a new browser profile _without MetaMask stable_) and the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
+Once you have the [development environment](./snaps.html#quick-start-using-our-template) running, you should be able to **connect** and **install** the snap.
 
 1. Click the **Connect** button and the MetaMask Flask extension should pop up and require you to approve the template snap's permissions.
 
