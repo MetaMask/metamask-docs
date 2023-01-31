@@ -1,23 +1,21 @@
-# Exports
+# Snaps exports
 
-:::tip Developer Preview Software
-Snaps is pre-release software. To try Snaps, install [MetaMask Flask](https://metamask.io/flask).
-:::
-
-:::tip Feature Requests
-Do you have feature requests? Other ideas? We'd love to hear about them! [Click here](https://github.com/MetaMask/snaps-monorepo/discussions) to join the discussion.
-:::
-
-## Table of Contents
-
-[[toc]]
+A snap can export the following functions.
 
 ## `onRpcRequest`
 
-In order to communicate with dapps and other snaps, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`. Whenever the snap receives a JSON-RPC request, the `onRpcRequest` handler function will be called with the below parameters.
+To communicate with dapps and other snaps, the snap must implement its own JSON-RPC API by exposing
+an exported function called `onRpcRequest`.
+Whenever the snap receives a JSON-RPC request, the `onRpcRequest` handler function is called with
+the following parameters.
 
 :::tip Does my snap need to have an RPC API?
-Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip exporting onRpcRequest. However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that sends transactions for that protocol via your snap, for example, you need to specify an RPC API.
+No, that's up to you!
+If your snap can do something useful without receiving and responding to JSON-RPC requests, then you
+can skip exporting `onRpcRequest`.
+However, if you want to do something such as manage the user's keys for a particular protocol and
+create a dapp that sends transactions for that protocol via your snap, for example, you must
+specify an RPC API.
 :::
 
 ### Parameters
@@ -39,11 +37,11 @@ interface RpcHandlerArgs = {
 type RpcHandlerReturn = Promise<unknown> | unknown;
 ```
 
-`RpcHandlerReturn` - A promise containing the return of the implemented RPC Method.
+`RpcHandlerReturn` - A promise containing the return of the implemented method.
 
 ### Examples
 
-#### Typescript
+#### TypeScript
 
 ```typescript
 import { OnRpcRequestHandler } from '@metamask/snap-types';
@@ -62,7 +60,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 };
 ```
 
-#### Javascript
+#### JavaScript
 
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -78,15 +76,24 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 ## `onTransaction`
 
-If the snap wants to provide transaction insights before a user signs a transaction, the snap must export a function called `onTransaction`. Whenever there is a contract interaction and a transaction is submitted via the extension, this function will be called. The raw unsigned transaction payload will be passed to the `onTransaction` handler function.
+If the snap wants to provide transaction insights before a user signs a transaction, the snap must
+export a function called `onTransaction`.
+Whenever there's a contract interaction, and a transaction is submitted via the extension, this
+function is called.
+The raw unsigned transaction payload is passed to the `onTransaction` handler function.
 
-:::tip Requesting the transaction insight permission
-In order for the extension to call the `onTransaction` method of the snap, the `endowment:transaction-insight` permission must be requested. see [Permissions](./permissions#endowment-transaction-insight)
+:::note
+For the extension to call the `onTransaction` method of the snap, you must request the
+[`endowment:transaction-insight`](../how-to/request-permissions.md#endowmenttransaction-insight)
+permission.
 :::
 
 ### Parameters
 
-- `onTransactionArgs` - the raw transaction payload and the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). For more details on the transaction object see [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
+- `onTransactionArgs` - The raw transaction payload and the
+  [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md).
+  For more details on the transaction object see
+  [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
 
 ```typescript
 interface OnTransactionArgs {
@@ -105,11 +112,14 @@ interface OnTransactionResponse {
 }
 ```
 
-- `onTransactionResponse` - The `insights` object returned by the snap will be displayed alongside the confirmation for the transaction that `onTransaction` was called with. Keys and values will be displayed in the order received, with each key rendered as a title and each value rendered as a string.
+- `onTransactionResponse` - The `insights` object returned by the snap is displayed alongside the
+  confirmation for the transaction that `onTransaction` was called with.
+  Keys and values are displayed in the order received, with each key rendered as a title and each
+  value rendered as a string.
 
 ### Examples
 
-#### Typescript
+#### TypeScript
 
 ```typescript
 import { OnTransactionHandler } from "@metamask/snap-types";
@@ -123,7 +133,7 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
-#### Javascript
+#### JavaScript
 
 ```js
 module.exports.onTransaction = async ({
@@ -134,3 +144,71 @@ module.exports.onTransaction = async ({
   return { insights };
 };
 ```
+
+## `onCronjob`
+
+If a snap wants to run periodic actions for the user, the snap must export a function called `onCronjob`.
+This function is called at the specified times with the specified payloads defined in the
+[`endowment:cronjob`](../how-to/request-permissions.md#endowmentcronjob) permission.
+
+:::note
+For the extension to call the `onCronjob` method of the snap, you must request the
+[`endowment:cronjob`](../how-to/request-permissions.md#endowmentcronjob) permission.
+:::
+
+### Parameters
+
+- `onCronjobArgs` - Exclusively containing an RPC request specified in the `endowment:cronjob` permission.
+
+```typescript
+interface onCronjobArgs {
+  request: JsonRpcRequest<unknown[] | { [key: string]: unknown }>;
+}
+```
+
+### Examples
+
+#### TypeScript
+
+```typescript
+import { OnCronjobHandler } from '@metamask/snap-types';
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case 'exampleMethodOne':
+      return wallet.request({
+        method: 'snap_notify',
+        params: [
+          {
+            type: 'inApp',
+            message: `Hello, world!`,
+          },
+        ],
+      });
+
+    default:
+      throw new Error('Method not found.');
+  }
+};
+```
+
+#### JavaScript
+
+```js
+module.exports.onCronjob = async ({ request }) => {
+  switch (request.method) {
+    case 'exampleMethodOne':
+      return wallet.request({
+        method: 'snap_notify',
+        params: [
+          {
+            type: 'inApp',
+            message: `Hello, world!`,
+          },
+        ],
+      });
+
+    default:
+      throw new Error('Method not found.');
+  }
+};
