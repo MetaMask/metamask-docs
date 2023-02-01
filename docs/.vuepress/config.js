@@ -172,6 +172,7 @@ const guideSidebar = [
     children: [
       'snaps',
       'snaps-development-guide',
+      'snaps-concepts',
       ['snaps-rpc-api', 'JSON-RPC API'],
       'snaps-permissions',
       'snaps-exports',
