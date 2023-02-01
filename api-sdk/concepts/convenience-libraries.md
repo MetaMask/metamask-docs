@@ -16,3 +16,6 @@ You can refer to those tools' documentation to interact with the provider.
 
 The provider API is all you need to create a full-featured web3 application, but if you need
 higher-level abstractions than those provided by the API, we recommend using a convenience library.
+
+## MetaMask SDK and WalletConnect
+

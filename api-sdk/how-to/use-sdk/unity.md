@@ -6,25 +6,31 @@ title: Unity gaming
 
 You can import MetaMask SDK into your Unity game to enable users to easily connect to their MetaMask
 Mobile wallet.
-The supported platforms are macOS, Windows, Linux, IOS, Android, and WebGL.
+The MetaMask Unity SDK supports macOS, Windows, Linux, IOS, Android, and WebGL.
 
-The SDK renders a QR code in the UI via a dedicated prefab which players can scan with their
+## How it works
+
+The SDK renders a QR code in the UI using a dedicated prefab which players can scan with their
 MetaMask Mobile app.
 It also supports deeplinking on mobile platforms.
 You can use all the [provider API methods](../../reference/provider-api.md) right from your game.
 
 ## Video tutorial
 
-The following video tutorial explains how to install and use MetaMask SDK with Unity.
+The following video tutorial explains how to install and use the MetaMask Unity SDK.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0D1cIH-PZtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p align="center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/0D1cIH-PZtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
-## 1. Install the SDK for Unity
+## Steps
+
+### 1. Install the SDK for Unity
 
 To install the module, first download the
 [Unity SDK Package](https://drive.google.com/u/0/uc?id=1ArTJvKIZXK5vkUOM3cgr0t0NspenWRU9&export=download).
 
-Then, go to the Window menu > **Package Manager**.
+Then, go to the menu > **Package Manager**.
 Select **My Assets**, **MetaMask Unity SDK**, and **Install**.
 You should see the MetaMask SDK package listed in the project packages and be able to interface
 with it and its examples in the scene.
@@ -32,7 +38,7 @@ with it and its examples in the scene.
 You also need to install [TextMeshPro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html).
 If you don't have TextMeshPro installed, the Unity editor automatically prompts you to install it.
 
-## 2. Initialize MetaMask
+### 2. Initialize MetaMask
 
 The main class you interface with is called `MetaMaskWallet`.
 It handles the connection to the user's wallet, as well as processing the requests to it using a
@@ -54,7 +60,7 @@ You first must initialize by doing one of the following:
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
 You can now make calls to the user's wallet using [provider API methods](../../reference/provider-api.md).
 
-## 3. Connect to MetaMask
+### 3. Connect to MetaMask
 
 Once the wallet is prepared and initialized, you can connect to MetaMask.
 Call the `Connect()` method on the wallet instance as follows:
@@ -93,7 +99,7 @@ scene with its fields provided.
 The transport field is also required if you want to use it isolated from the canvas that is spawned
 by the transport, then it generates the QR code for you.
 
-## 4. Use MetaMask
+### 4. Use MetaMask
 
 Once the wallet is authorized, you can make requests to it.
 The wallet is authorized when the buttons become interactable or the `WalletAuthorized` event is fired:
@@ -127,11 +133,9 @@ var request = new MetaMaskEthereumRequest
 await wallet.Request(request);
 ```
 
-## 5. Configure MetaMask
+### 5. Configure MetaMask
 
 You can customize the default configuration or create your own configuration.
-
-### Edit the default configuration
 
 Edit the default configuration by doing one of the following:
 
@@ -139,8 +143,6 @@ Edit the default configuration by doing one of the following:
 - Open the `MetaMaskConfig` asset in the project window.
 
 Edit the fields and save the changes.
-
-### Create a new configuration
 
 Create a new configuration by right-clicking on the project window and navigating to
 **MetaMask > Config**.

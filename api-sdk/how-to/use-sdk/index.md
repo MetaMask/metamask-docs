@@ -1,31 +1,87 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use MetaMask SDK
 
-[MetaMask SDK](../../concepts/sdk-connections.md) currently supports JavaScript-based dapps.
-It enables these dapps to easily connect with a MetaMask wallet client.
+MetaMask SDK currently supports all JavaScript-based apps and Unity gaming apps.
+It enables these apps to easily connect with a MetaMask wallet client.
 
-The following instructions work for dapps based on standard JavaScript, React, NodeJS, Electron, and
+The following instructions work for apps based on standard JavaScript, React, Node.js, Electron, and
 other web frameworks.
-MetaMask SDK also supports [React Native](react-native.md), [pure JavaScript](pure-js.md), and
-[Unity gaming](unity.md) dapps.
+You can also see instructions for [React Native](react-native.md), [pure JavaScript](pure-js.md),
+and [Unity gaming](unity.md) apps.
 
-:::tip
-The MetaMask SDK instance returns the [`ethereum` web3 provider](reference/provider-api.md) that
-developers are already used to, so existing dapps work out of the box with the SDK!
-:::
-
-:::note
+:::tip Coming soon
 SDK support for Android native apps, iOS native apps, and Unreal Engine is coming soon.
 :::
 
+:::note
+MetaMask SDK uses the [Ethereum provider](../../reference/provider-api.md) that developers are
+already used to, so existing dapps work out of the box with the SDK.
+:::
+
+## How it works
+
+<Tabs>
+<TabItem value="desktop" label="Desktop browser">
+
+If a user accesses your app on a desktop browser and doesn't have the MetaMask extension installed,
+a popup appears that prompts the user to either install the MetaMask extension or connect to
+MetaMask Mobile using a QR code.
+
+![SDK desktop browser example](../../assets/sdk-desktop-browser.gif)
+
+You can try the
+[hosted test dapp with the SDK installed](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/test-dapp-2/).
+You can also see this
+[React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
+
+</TabItem>
+<TabItem value="mobile" label="Mobile browser">
+
+If a user accesses your app on a mobile browser, the SDK automatically deeplinks to MetaMask Mobile
+(or if the user doesn't already have it, prompts them to install it).
+Once the user accepts the connection, they're automatically redirected back to your web app.
+This happens for all actions that need user approval.
+
+<p align="center">
+
+![SDK mobile browser example](../../assets/sdk-mobile-browser.gif)
+
+</p>
+
+You can try the
+[hosted test dapp with the SDK installed](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/test-dapp-2/).
+You can also see this
+[React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
+
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+
+When a user accesses your Node.js app, the SDK renders a QR code on the console which users can scan
+with their MetaMask Mobile app.
+
+<p align="center">
+
+![SDK Node.js example](../../assets/sdk-nodejs.gif)
+
+</p>
+
+</TabItem>
+</Tabs>
+
 ## Prerequisites
 
-- MetaMask Mobile v5.8.1 or above
+- An existing or [new project](../../get-started/set-up-dev-environment.md) set up
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) v5.8.1 or above
 - [Yarn](https://yarnpkg.com/getting-started/install) or
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-## 1. Install the SDK
+## Steps
 
-Install the SDK using Yarn or npm:
+### 1. Install the SDK
+
+In your project directory, install the SDK using Yarn or npm:
 
 ```bash
 yarn add @metamask/sdk
@@ -33,13 +89,17 @@ or
 npm i @metamask/sdk
 ```
 
-## 2. Import the SDK
+### 2. Import the SDK
+
+In your project script, add the following to import the SDK:
 
 ```javascript
 import MetaMaskSDK from '@metamask/sdk';
 ```
 
-## 3. Instantiate the SDK
+### 3. Instantiate the SDK
+
+Instantiate the SDK using any [options](../../reference/sdk-js-options.md):
 
 ```javascript
 const MMSDK = new MetaMaskSDK(options);
@@ -47,14 +107,13 @@ const MMSDK = new MetaMaskSDK(options);
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
 
-See the [list of options](../../reference/sdk-js-options.md).
+### 4. Use the SDK
 
-## 4. Use the SDK
+Use the SDK by calling any [provider API methods](../../reference/provider-api.md).
+Always call [`eth_requestAccounts`](../../reference/rpc-api.md#eth_requestaccounts) using
+[`ethereum.request()`](../../reference/provider-api.md#ethereumrequestargs) first, since it prompts
+the installation or connection popup to appear.
 
 ```javascript
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```
-
-Always call `eth_requestAccounts` first, since it prompts the installation or connection popup to appear.
-
-See the [Ethereum provider API](../../reference/provider-api.md) for all methods.
