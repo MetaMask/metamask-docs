@@ -24,7 +24,7 @@ And here are some examples of abiding by the above policy:
 
 1. Manipulation of the private keys, their storage in snaps' persistent storage, without them ever leaving the Snaps Secure EcmaScript sandbox
 2. Arbitrary code execution without access to destructive operations nor private keys
-3. Doing destructive operations, one, multiple, or even creating an allowance without further confirmations, with prior informing the user of what's going to happen in an a way that a layman can understand and asking for consent
+3. Doing destructive operations -- for example transactions --, one, multiple, or even creating an allowance without further confirmations, with prior informing the user of what's going to happen in an a way that a layman can understand and asking for consent
 
 ### How to derive keys
 
