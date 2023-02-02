@@ -52,7 +52,7 @@ MetaMask made the following breaking changes to the `window.ethereum` API:
 :::caution Pages no longer reload on chain changes
 Since we removed `window.web3`, MetaMask no longer automatically reloads the page on chain/network changes.
 
-Please see [Handling the removal of `ethereum.autoRefreshOnNetworkChange`](#handling-the-removal-of-ethereumautorefreshonnetworkchange)
+Please see [Handling the removal of `ethereum.autoRefreshOnNetworkChange`](#handle-the-removal-of-ethereumautorefreshonnetworkchange)
 for details.
 :::
 

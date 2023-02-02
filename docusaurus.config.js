@@ -66,8 +66,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       navbar: {
-        title: "MetaMask Docs",
+        title: "MetaMask docs",
+        hideOnScroll: true,
         logo: {
           alt: "My Site Logo",
           src: "img/metamask-fox.svg",
@@ -89,6 +95,7 @@ const config = {
       footer: {},
       prism: {
         theme: codeTheme,
+        additionalLanguages: ["csharp"],
       },
     }),
 };

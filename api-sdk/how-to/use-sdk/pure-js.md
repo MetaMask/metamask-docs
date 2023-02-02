@@ -4,8 +4,12 @@ title: Pure JavaScript
 
 # Use MetaMask SDK with pure JavaScript
 
-If your project just uses pure JavaScript, you can import the SDK by putting a script on the head
-section of your website:
+You can import MetaMask SDK into your pure JavaScript dapp to enable your users to easily connect
+with a MetaMask wallet client.
+The SDK for pure JavaScript [works the same way](index.md#how-it-works) and has the
+[same prerequisites](index.md#prerequisites) as for standard JavaScript and other web frameworks.
+
+To import, instantiate, and use the SDK, you can insert a script in the head section of your website:
 
 ```javascript
 <head>
@@ -26,3 +30,9 @@ section of your website:
 ...
 </head>
 ```
+
+You can configure the SDK using any [options](../../reference/sdk-js-options.md) and call any
+[provider API methods](../../reference/provider-api.md).
+Always call [`eth_requestAccounts`](../../reference/rpc-api.md#eth_requestaccounts) using
+[`ethereum.request()`](../../reference/provider-api.md#ethereumrequestargs) first, since it prompts
+the installation or connection popup to appear.
