@@ -3,16 +3,17 @@ import TabItem from '@theme/TabItem';
 
 # Use MetaMask SDK
 
-MetaMask SDK currently supports all JavaScript-based apps and Unity gaming apps.
-It enables these apps to easily connect with a MetaMask wallet client.
+MetaMask SDK currently supports all JavaScript-based dapps and Unity gaming dapps.
+It provides a reliable, secure, and seamless [connection](../../concepts/sdk-connections.md) from
+your dapp to a MetaMask wallet client.
 
-The following instructions work for apps based on standard JavaScript, React, Node.js, Electron, and
-other web frameworks.
+The following instructions work for dapps based on standard JavaScript, React, Node.js, Electron,
+and other web frameworks.
 You can also see instructions for [React Native](react-native.md), [pure JavaScript](pure-js.md),
-and [Unity gaming](unity.md) apps.
+and [Unity gaming](unity.md) dapps.
 
 :::tip Coming soon
-SDK support for Android native apps, iOS native apps, and Unreal Engine is coming soon.
+SDK support for Android native, iOS native, and Unreal Engine dapps is coming soon.
 :::
 
 :::note
@@ -25,9 +26,9 @@ already used to, so existing dapps work out of the box with the SDK.
 <Tabs>
 <TabItem value="desktop" label="Desktop browser">
 
-If a user accesses your app on a desktop browser and doesn't have the MetaMask extension installed,
-a popup appears that prompts the user to either install the MetaMask extension or connect to
-MetaMask Mobile using a QR code.
+If a user accesses your web dapp on a desktop browser and doesn't have the MetaMask extension
+installed, a popup appears that prompts the user to either install the MetaMask extension or connect
+to MetaMask Mobile using a QR code.
 
 ![SDK desktop browser example](../../assets/sdk-desktop-browser.gif)
 
@@ -39,9 +40,9 @@ You can also see this
 </TabItem>
 <TabItem value="mobile" label="Mobile browser">
 
-If a user accesses your app on a mobile browser, the SDK automatically deeplinks to MetaMask Mobile
-(or if the user doesn't already have it, prompts them to install it).
-Once the user accepts the connection, they're automatically redirected back to your web app.
+If a user accesses your web dapp on a mobile browser, the SDK automatically deeplinks to MetaMask
+Mobile (or if the user doesn't already have it, prompts them to install it).
+Once the user accepts the connection, they're automatically redirected back to your dapp.
 This happens for all actions that need user approval.
 
 <p align="center">
@@ -58,8 +59,8 @@ You can also see this
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-When a user accesses your Node.js app, the SDK renders a QR code on the console which users can scan
-with their MetaMask Mobile app.
+When a user accesses your Node.js dapp, the SDK renders a QR code on the console which users can
+scan with their MetaMask Mobile app.
 
 <p align="center">
 

@@ -4,14 +4,14 @@ title: React Native
 
 # Use MetaMask SDK with React Native
 
-You can import MetaMask SDK into your React Native app to enable your users to easily connect
+You can import MetaMask SDK into your React Native dapp to enable your users to easily connect
 with their MetaMask Mobile wallet.
 
 ## How it works
 
-When a user accesses your mobile React Native app, the SDK automatically deeplinks to MetaMask
+When a user accesses your mobile React Native dapp, the SDK automatically deeplinks to MetaMask
 Mobile (or if the user doesn't already have it, prompts them to install it).
-Once the user accepts the connection, they're automatically redirected back to your app.
+Once the user accepts the connection, they're automatically redirected back to your dapp.
 This happens for all actions that need user approval.
 
 <p align="center">
@@ -35,7 +35,7 @@ Install the example using `yarn setup` and run it using `yarn ios` or `yarn andr
 
 :::tip Coming soon
 A `metamask-react-native-sdk` package that simplifies the installation of the SDK for React Native
-apps is coming soon.
+dapps is coming soon.
 :::
 
 Use [`rn-nodeify`](https://github.com/tradle/rn-nodeify) to install the SDK.
@@ -144,7 +144,3 @@ const balance = await provider.getBalance(ethereum.selectedAddress);
 const balanceInETH = ethers.utils.formatEther(balance);
 // '0.182826475815887608'
 ```
-
-## Examples
-
-View the [React Native dapp](https://recordit.co/FClppLgWzT) recording.

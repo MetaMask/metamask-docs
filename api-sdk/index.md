@@ -20,8 +20,9 @@ is connected to, and suggest that the user sign messages and transactions.
 
 ## What is MetaMask SDK?
 
-MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
-to the MetaMask browser extension and MetaMask Mobile.
+MetaMask SDK is a library that provides a reliable, secure, and seamless
+[connection](concepts/sdk-connections.md) from your dapp to the MetaMask browser extension and
+MetaMask Mobile.
 You can install the SDK into your dapp to enable your users to easily connect to a MetaMask wallet
 client from multiple platforms (web, desktop, and mobile).
 
@@ -31,7 +32,6 @@ wallet using a QR code.
 For dapps running on a mobile browser, MetaMask SDK automatically deeplinks to the user's MetaMask
 Mobile wallet to make the connection.
 
-[Learn more about MetaMask SDK connections](concepts/sdk-connections.md) and
-[get started using the SDK](how-to/use-sdk/index.md).
+[Get started using the SDK](how-to/use-sdk/index.md).
 
 If you have questions about the SDK, you can join the [MetaMask SDK Discord](https://discord.gg/N3jSkZbYm6).

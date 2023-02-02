@@ -4,7 +4,7 @@ title: Pure JavaScript
 
 # Use MetaMask SDK with pure JavaScript
 
-You can import MetaMask SDK into your pure JavaScript app to enable your users to easily connect
+You can import MetaMask SDK into your pure JavaScript dapp to enable your users to easily connect
 with a MetaMask wallet client.
 The SDK for pure JavaScript [works the same way](index.md#how-it-works) and has the
 [same prerequisites](index.md#prerequisites) as for standard JavaScript and other web frameworks.
