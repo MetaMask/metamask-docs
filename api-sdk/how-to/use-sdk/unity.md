@@ -15,9 +15,9 @@ MetaMask Mobile app.
 It also supports deeplinking on mobile platforms.
 You can use all the [provider API methods](../../reference/provider-api.md) right from your game.
 
-## Video tutorial
+## Video demo
 
-The following video tutorial explains how to install and use the MetaMask Unity SDK.
+The following video demonstrates how to install and use the MetaMask Unity SDK.
 
 <p align="center">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/0D1cIH-PZtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

@@ -27,8 +27,9 @@ You can install the SDK into your dapp to enable your users to easily connect to
 client from multiple platforms (web, desktop, and mobile).
 
 For example, for dapps running on a desktop browser, MetaMask SDK checks if the MetaMask extension
-is installed and, if not, it prompts the user to install it or connect to their MetaMask Mobile
-wallet using a QR code.
+is installed.
+If MetaMask isn't installed, the SDK prompts the user to install it or connect to their MetaMask
+Mobile wallet using a QR code.
 For dapps running on a mobile browser, MetaMask SDK automatically deeplinks to the user's MetaMask
 Mobile wallet to make the connection.
 
