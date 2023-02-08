@@ -144,8 +144,8 @@ module.exports.onTransaction = async ({
   const insights = /* Get insights */;
   return {
     content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
       ...(insights.map((insight) => text(insight.value)))
     ])
   };
