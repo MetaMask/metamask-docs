@@ -98,7 +98,7 @@ As an example, if you're trying to derive Dogecoin keys:
 3. Dogecoin uses the following derivation path:
 
    ```
-   m/44'/3'/0'/0/{account_index}
+   m/44'/3'/0'/0/{address_index}
    ```
 
    To get the second Dogecoin account, we would write the following code:
