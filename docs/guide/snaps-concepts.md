@@ -91,7 +91,7 @@ As an example, if you're trying to derive Dogecoin keys:
          }
        ]
      }
-     // other values
+     // Other values
    }
    ```
 
