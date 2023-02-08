@@ -135,7 +135,7 @@ export const onTransaction: OnTransactionHandler = async ({
 #### Javascript
 
 ```js
-import { panel, heading, text } from "@metamask/snaps-ui";
+import { panel, heading, text } from '@metamask/snaps-ui';
 
 module.exports.onTransaction = async ({
   transaction,
