@@ -524,7 +524,7 @@ interface SnapConfirmationDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'Confirmation';
+  type: 'confirmation';
 
   /**
    * The content of the confirmation, as a Custom UI component
