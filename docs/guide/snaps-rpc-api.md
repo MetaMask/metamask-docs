@@ -592,10 +592,10 @@ interface SnapPromptDialogParam {
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
-const walletAddress = await wallet.request({
+const walletAddress = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Prompt',
+    type: 'prompt',
     content: panel([
       heading('What is the wallet address?'),
       text('Please enter the wallet address to be monitored'),
