@@ -55,7 +55,7 @@ The derivation path is completely dependent on the application you're building. 
 m/44'/3'/0'/0/{account_index}
 ```
 
-This means that you'd be using [`snap_getBip44Entropy`](./snaps-rpc-api.html#snap-getbip44entropy) with the permission `coinType` having a value of `60`.
+This means that you'd be using [`snap_getBip44Entropy`](./snaps-rpc-api.html#snap-getbip44entropy) with the permission `coinType` having a value of `3`.
 
 ### Adding permissions to the manifest file
 
