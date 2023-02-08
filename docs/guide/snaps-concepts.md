@@ -45,7 +45,7 @@ m / purpose' / coin_type' / account' / change / address_index
 
 Then you should use [`snap_getBip44Entropy`](./snaps-rpc-api.html#snap-getbip44entropy) to derive your keys. Its permissions are simpler, since it requires only a coin type.
 
-If the key ayou are trying to derive do not conform to the BIP-44 structure, then you should use [`snap_getBip32Entropy`].
+If the key you are trying to derive do not conform to the BIP-44 structure, then you should use [`snap_getBip32Entropy`](./snaps-rpc-api.html#snap-getbip32entropy).
 
 ### Finding out the derivation path
 
