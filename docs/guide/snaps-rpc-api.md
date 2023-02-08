@@ -569,7 +569,7 @@ interface SnapPromptDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'Prompt';
+  type: 'prompt';
 
   /**
    * The content of the confirmation, as a Custom UI component.
