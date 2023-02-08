@@ -481,7 +481,7 @@ interface SnapAlertDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'Alert';
+  type: 'alert';
 
   /**
    * The content of the alert, as a Custom UI component
