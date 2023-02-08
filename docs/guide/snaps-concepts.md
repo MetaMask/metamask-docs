@@ -107,7 +107,7 @@ As an example, if you're trying to derive Dogecoin keys:
    import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'
-   const dogecoinNode = await wallet.request({
+   const dogecoinNode = await snap.request({
      method: 'snap_getBip44Entropy',
      params: {
        coinType: 3,
