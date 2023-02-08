@@ -114,8 +114,8 @@ interface OnTransactionResponse {
 #### Typescript
 
 ```typescript
-import { OnTransactionHandler } from "@metamask/snap-types";
-import { panel, heading, text } from "@metamask/snaps-ui";
+import { OnTransactionHandler } from '@metamask/snap-types';
+import { panel, heading, text } from '@metamask/snaps-ui';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
