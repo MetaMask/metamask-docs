@@ -499,7 +499,7 @@ interface SnapAlertDialogParam {
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
-await wallet.request({
+await snap.request({
   method: 'snap_dialog',
   params: {
     type: 'Alert',
