@@ -502,7 +502,7 @@ import { panel, text, heading } from '@metamask/snaps-ui';
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Alert',
+    type: 'alert',
     content: panel([
       heading('Something happened in the system'),
       text('The thing that happened is...'),
