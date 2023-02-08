@@ -15,10 +15,10 @@ The general guideline for responsible key management is:
 In practice, here are some examples that would break the above policy:
 
 1. Allowing extraction of private keys outside the snap in any way, especially through RPC or network connections
-2. Arbitrary code execution with access to private keys
-3. Not informing the user properly or not getting informed consent before doing a destructive operation, for example a transaction
-4. Asking for consent but ignoring the decison
-5. A bug that leads to any of the above
+2. Arbitrary code execution with access to private keys.
+3. Not informing the user properly or not getting informed consent before doing a destructive operation, for example a transaction.
+4. Asking for consent but ignoring the decision.
+5. A bug that leads to any of the above.
 
 And here are some examples of abiding by the above policy:
 
