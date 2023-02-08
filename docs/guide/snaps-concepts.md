@@ -31,7 +31,7 @@ And here are some examples of abiding by the above policy:
 To derive a user's private keys, you need to:
 
 1. Figure out whether you'll be using the BIP-32 or BIP-44 specifications to derive the user's private keys. BIP-44 is more strict in the structure and shape of the derivation paths, while BIP-32 allows for more flexibility.
-2. Find out the derivation path that you need to use. For example, if you're trying to derive keys for Dogecoin, the path is of the form `m/44'/3'/0'/0/{account_index}`.
+2. Find out the derivation path that you need to use. For example, if you're trying to derive keys for Dogecoin, the path is of the form `m/44'/3'/0'/0/{address_index}`.
 3. Add the required permission to your manifest file
 4. Write code in your snap to derive the keys. This will usually be done using the `@metamask/key-tree` NPM package. Any further code to e.g. derive addresses from the keys will be custom code that depends on your application.
 
