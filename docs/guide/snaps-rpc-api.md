@@ -542,10 +542,10 @@ interface SnapConfirmationDialogParam {
 ```typescript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
-const result = await wallet.request({
+const result = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Confirmation',
+    type: 'confirmation',
     content: panel([
       heading('Would you like to take the action?'),
       text('The action is...'),
