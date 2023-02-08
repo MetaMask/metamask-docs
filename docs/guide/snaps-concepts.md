@@ -52,7 +52,7 @@ If the key ayou are trying to derive do not conform to the BIP-44 structure, the
 The derivation path is completely dependent on the application you're building. As an example, if you're trying to reproduce the Dogecoin derivation path, that would be:
 
 ```
-m/44'/3'/0'/0/{account_index}
+m/44'/3'/0'/0/{address_index}
 ```
 
 This means that you'd be using [`snap_getBip44Entropy`](./snaps-rpc-api.html#snap-getbip44entropy) with the permission `coinType` having a value of `3`.
