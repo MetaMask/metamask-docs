@@ -79,7 +79,7 @@ The authoritative list of coin types is defined in [`SLIP-44`](https://github.co
 
 As an example, if you're trying to derive Dogecoin keys:
 
-1. Dogecoin uses the BIP-44 scheme so we'll be using [`snap_getBip44Entropy`]
+1. Dogecoin uses the BIP-44 scheme so we'll be using [`snap_getBip44Entropy`].
 2. Dogecoin has coin type `3`, so our manifest file will have the following:
 
    ```json
