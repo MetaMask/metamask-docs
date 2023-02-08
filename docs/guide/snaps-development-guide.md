@@ -121,7 +121,7 @@ console.log(hello); // 'world!'
 The snap's RPC API is completely up to you, so long as it's a valid [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 ::: tip Does my snap need to have an RPC API?
-Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, e.g. providing [transaction insights](./snaps-exports.html#ontransaction), then you can skip exporting `onRpcRequest`.
+Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, e.g., providing [transaction insights](./snaps-exports.html#ontransaction), then you can skip exporting `onRpcRequest`.
 However, if you want to do something like manage the user's keys for a particular protocol and create a Dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
 :::
 
