@@ -73,7 +73,7 @@ For `snap_getBip44Entropy`, you only need to specify the `coinType`, like this:
 }
 ```
 
-The authoritative list of coin types is defined in [`SLIP-44`](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
+The authoritative list of coin types is defined in [`SLIP-44`](https://github.com/satoshilabs/slips/blob/master/slip-0044.md).
 
 ### Example of private key derivation
 
