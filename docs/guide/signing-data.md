@@ -4,13 +4,15 @@ MetaMask lets you request cryptographic signatures from users in a number of way
 
 - [eth_signTypedData_v4](#signtypeddata-v4) for the most readable signatures that are also efficient to process on chain.
 - [personal_sign](#personal-sign) for the easiest way to get a human readable signature of data that does not need to be efficiently processed on-chain.
-- `eth_sign` (Not recommended) If you need to perform low-level signatures and don't mind having the user presented with high security friction, because the proposal is not readable.
+- `eth_sign` (deprecated) By default MetaMask treats this method as disabled because the proposal is not readable.
 
 | Signing Methods        | Human readable | Efficient to process on-chain | Easy to use |
 | ---------------------- | -------------- | ----------------------------- | ----------- |
 | `eth_signTypedData_v4` | ✅             | ✅                            | ❌          |
 | `personal_sign`        | ✅             | ❌                            | ✅          |
 | `eth_sign`             | ❌             | ❓                            | ❌          |
+
+See also: [A Brief History](#history)
 
 ## SignTypedData V4
 
@@ -287,7 +289,7 @@ If you’d like to read our JavaScript implementations of these methods, they ar
 
 Note that MetaMask supports signing transactions with Trezor and Ledger hardware wallets. These hardware wallets currently only support signing data using the `personal_sign` method. If you have trouble logging in to a website or dapp when using a Ledger or Trezor, the site may be requesting you sign data via an unsupported method, in which case we recommend using your standard MetaMask account.
 
-## A Brief History
+## <a name="history"></a> A Brief History
 
 There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods yields some guiding lessons for the emergence of decentralized standards. Our current five methods are:
 
@@ -302,7 +304,7 @@ There are likely to be many more over time. When MetaMask first started, the Pro
 
 In particular, the method `eth_sign` is an open-ended signing method that allows signing an arbitrary hash, which means it can be used to sign transactions, or any other data, making it a dangerous phishing risk.
 
-For this reason, we make this method show the most frightening possible message to the user, and generally discourage using this method in production. However, some applications (usually admin panels internal to teams) use this method for the sake of its ease of use, and so we have continued to support it for the sake of not breaking the workflows of active projects.
+For this reason, we have disabled the method by default and generally discourage using this method in production. However, there may be some applications (usually admin panels internal to teams) using this method for the sake of its ease of use or inability to change the associated dapp. If a wallet user needs to interact with a dapp that still uses it and accepts the risks, then they can still re-enable it through advanced settings.
 
 Eventually, the `personal_sign` [spec](https://github.com/ethereum/go-ethereum/pull/2940) was proposed, which added a prefix to the data so it could not impersonate transactions. We also made this method able to display human readable text when UTF-8 encoded, making it a popular choice for site logins.
 
