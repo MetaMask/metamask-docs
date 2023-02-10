@@ -1,5 +1,5 @@
 import fs from "fs";
-import { OpenrpcDocument, MethodObject, ContentDescriptorObject, JSONSchemaObject, MethodOrReference } from "@open-rpc/meta-schema";
+import { OpenrpcDocument, MethodObject, ContentDescriptorObject, JSONSchemaObject, MethodOrReference, ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
 import {  parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
 console.log("Generating MDX from OpenRPC document...");
 
@@ -123,8 +123,32 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
     }
 
     if (method.examples && method.examples.length > 0) {
-      markdown += "### Examples\n\n";
-      method.examples.forEach((example) => {
+      markdown += "\n### Examples\n\n";
+      method.examples.forEach((e) => {
+        const example = e as unknown as ExamplePairingObject;
+        if (example.name) {
+          markdown += `**Name**: ${example.name}\n\n`;
+        }
+
+        markdown += "#### Request\n\n";
+
+        markdown += "```json\n";
+        let paramsString = JSON.stringify(example.params.map((param: any) => param.value));
+        if (method.paramStructure === "by-position") {
+          paramsString = "{";
+          example.params.forEach((param: any, index: number) => {
+            markdown += `  ${(example.params[index] as ExampleObject).name}: ${JSON.stringify(param.value, null, 4)},\n`;
+          });
+          paramsString += "}";
+        } else {
+          paramsString = JSON.stringify(example.params.map((param: any) => param.value), null, 4);
+        }
+        console.log("paramSString", paramsString);
+        markdown += JSON.stringify(JSON.parse(`{ "jsonrpc": "2.0", "id": 0, "method": "${method.name}", "params":  ${paramsString} }`), null, 4);
+        
+        markdown += "\n```\n";
+
+        markdown += "#### Result\n\n";
         markdown += "```json\n";
         markdown += JSON.stringify({ "jsonrpc": "2.0", "id": 0, "result": (example as any).result.value }, null, 4);
         markdown += "\n```\n";
