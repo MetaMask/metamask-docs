@@ -35,6 +35,8 @@
     "@docusaurus/module-type-aliases": "2.4.0",
     "@docusaurus/plugin-client-redirects": "2.4.0",
     "@lavamoat/allow-scripts": "^2.3.0",
+    "@open-rpc/meta-schema": "^1.14.5",
+    "@open-rpc/schema-utils-js": "^1.16.1",
     "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
