@@ -36,7 +36,7 @@ bundle: 'out/bundle.js'
 Path to the snap [bundle file](../../concepts/anatomy.md#bundle-file).
 The default is `dist/bundle.js`.
 
-You can use this option with [`eval`](subcommands.md#e-eval) subcommand.
+You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
 
 `-b` is an alias for `--bundle`.
 
@@ -171,7 +171,7 @@ When validating the snap [manifest file](../../concepts/anatomy.md#manifest-file
 the manifest file.
 The default is `true`.
 
-`--writeManifest` is an alias for `--fix`.
+`--fix` is an alias for `--writeManifest`.
 
 ## h, help
 

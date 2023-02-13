@@ -51,7 +51,7 @@ mm-snap e -b out/snap.js
 
 Attempts to evaluate the snap bundle in SES.
 
-`e` is an alias for the `eval`.
+`e` is an alias for `eval`.
 
 ## i, init
 
@@ -148,10 +148,10 @@ source directory.
 :::note
 All files in the parent and child directories of the source directory are watched for changes, except:
 
-- The `node_modules` directory.
-- Any `test` or `tests` directories.
+- Files in the `node_modules` directory.
+- Files in the `test` or `tests` directories.
 - Any files named `test.js` or `test.ts`.
-- The `dist` directory, or the directory specified using [`--dist`](options.md#d-dist).
+- Files in the `dist` directory, or the directory specified using [`--dist`](options.md#d-dist).
 - Dotfiles.
 :::
   

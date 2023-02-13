@@ -151,7 +151,7 @@ details the requirements of both `snap.manifest.json` and its relationship to `p
 You might need to modify some manifest fields manually.
 For example, if you change the location of the (optional) icon SVG file, you must update
 `source.location.npm.iconPath` to match.
-You can also use the [command line](../reference/cli/options.md) to update some fields for you.
+You can also use the [command line](../reference/cli/index.md) to update some fields for you.
 For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`.
 
 ## Configuration file
