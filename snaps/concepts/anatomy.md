@@ -90,7 +90,7 @@ const hello = await ethereum.request({
 console.log(hello); // 'world!'
 ```
 
-The snap's RPC API is completely up to you, so long as it's a valid
+The snap's RPC API is completely up to you, as long as it's a valid
 [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 :::tip Does my snap need to have an RPC API?
@@ -151,15 +151,14 @@ details the requirements of both `snap.manifest.json` and its relationship to `p
 You might need to modify some manifest fields manually.
 For example, if you change the location of the (optional) icon SVG file, you must update
 `source.location.npm.iconPath` to match.
-You can also use the [command line](../reference/options.md) to update some fields for you.
+You can also use the [command line](../reference/cli/index.md) to update some fields for you.
 For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`.
 
 ## Configuration file
 
 The snap configuration file, `snap.config.js`, should be placed in the project root directory.
-You can override [CLI options](../reference/options.md) in the configuration file by specifying
-string keys matching command arguments in the property `cliOptions`.
-Values become argument defaults, which you can still override on the command line.
+You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
+them in the `cliOptions` property of the configuration file.
 For example:
 
 ```javascript

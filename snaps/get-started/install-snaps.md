@@ -7,7 +7,7 @@ You can then [get started quickly using the Snaps template](quickstart.md).
 ## Prerequisites
 
 - Up-to-date Chromium or Firefox browser
-- [Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org/) version 16 or later
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [Yarn](https://yarnpkg.com/)
 
 ## Install MetaMask Flask
@@ -26,7 +26,7 @@ Running multiple instances of MetaMask in the same browser profile breaks dapp i
 
 ## Install the Snaps CLI
 
-The [Snaps CLI](../reference/options.md) provides commands for initiating a snap project and building,
+The [Snaps CLI](../reference/cli/index.md) provides commands for initiating a snap project and building,
 executing, and serving your snap for local development.
 
 In a terminal window, install the CLI globally using npm or Yarn:

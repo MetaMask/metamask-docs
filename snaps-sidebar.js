@@ -63,7 +63,19 @@ const sidebar = {
       items: [
         "reference/rpc-api",
         "reference/exports",
-        "reference/options",
+        {
+          type: "category",
+          label: "Snaps CLI",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "reference/cli/index",
+          },
+          items: [
+            "reference/cli/options",
+            "reference/cli/subcommands",
+          ],
+        },
       ],
     },
   ],
