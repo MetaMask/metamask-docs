@@ -557,7 +557,7 @@ const dogecoinNode = await wallet.request({
 });
 
 // Next, we'll create an instance of a SLIP-10 node for the Dogecoin node.
-const dogecoinSlip10Node = await SLIP10Node.fromJson(dogecoinNode);
+const dogecoinSlip10Node = await SLIP10Node.fromJSON(dogecoinNode);
 
 // m / 44' / 3' / 0'
 const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"]);

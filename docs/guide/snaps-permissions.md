@@ -50,6 +50,47 @@ For snaps that need to access the internet, the snap can request the `endowment:
 
 For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. See [Exports](./snaps-exports.html#ontransaction) for more information.
 
+### `endowment:cronjob`
+
+For snaps that wants to run periodic actions for the user, the snap can request the `endowment:cronjob` permission. This permission allows a snap to specify periodic requests that will trigger the exported `onCronjob` method. see [Exports](./snaps-exports.html#oncronjob).
+
+Cronjobs are specified as follows:
+
+```json
+{
+  "initialPermissions": {
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": {
+            "minute": "*",
+            "hour": "*",
+            "dayOfMonth": "*",
+            "month": "*",
+            "dayOfWeek": "*"
+          },
+          "request": {
+            "method": "exampleMethodOne",
+            "params": {
+              "param1": "foo"
+            }
+          }
+        },
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "exampleMethodTwo",
+            "params": {
+              "param1": "bar"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
 ## RPC Permissions
 
 To use any restricted RPC method, a snap will need to request permissions to access that method. For a list of available RPC methods and thus valid RPC permissions see [JSON-RPC API](./snaps-rpc-api.html#restricted-methods).

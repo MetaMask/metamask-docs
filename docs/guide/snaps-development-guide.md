@@ -153,7 +153,7 @@ For the time being, snaps can only be [published to the official npm registry](h
 Over time, developers will be able to distribute snaps in a variety of different ways, and the manifest will expand to support different publishing solutions.
 
 ::: tip The Snaps Publishing Specification
-The [snaps publishing specification](https://github.com/MetaMask/specifications/blob/main/snaps/publishing.md) details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
+The [snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md) details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
 :::
 
 In the course of developing your snap, you will have to modify some of the manifest fields manually.
@@ -382,6 +382,7 @@ Follow these instructions to inspect the background process and view its console
   - Go to `chrome://extensions`
   - Find the MetaMask extension
   - Click on "Details"
+  - Turn on "Developer Mode" (top right)
   - Under "Inspect Views", click `background.html`
 
 ### Publishing Your Snap
