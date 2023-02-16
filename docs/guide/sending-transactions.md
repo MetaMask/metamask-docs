@@ -64,7 +64,7 @@ sendEthButton.addEventListener('click', () => {
       ],
     })
     .then((txHash) => console.log(txHash))
-    .catch((error) => console.error);
+    .catch((error) => console.error(error));
 });
 
 ethereumButton.addEventListener('click', () => {
