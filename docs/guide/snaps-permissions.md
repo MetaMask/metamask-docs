@@ -50,6 +50,16 @@ For snaps that need to access the internet, the snap can request the `endowment:
 
 For snaps that provide transaction insights, the snap can request the `endowment:transaction-insight` permission. This permission grants a snap read-only access to raw transaction payloads, before they are accepted for signing by the user, by exporting the `onTransaction` method. See [Exports](./snaps-exports.html#ontransaction) for more information.
 
+This permission requires an object with an `allowTransactionOrigin` property to signal if the snap should pass the `transactionOrigin` property as part of the `onTransaction` parameters. This property represents the transaction initiator origin. Default to `false`.
+
+```json
+{
+  "endowment:transaction-insight": {
+    "allowTransactionOrigin": true
+  }
+}
+```
+
 ### `endowment:cronjob`
 
 For snaps that wants to run periodic actions for the user, the snap can request the `endowment:cronjob` permission. This permission allows a snap to specify periodic requests that will trigger the exported `onCronjob` method. see [Exports](./snaps-exports.html#oncronjob).
