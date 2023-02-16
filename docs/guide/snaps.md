@@ -88,7 +88,7 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
   To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
 
   ::: warning
-  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
+  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break Dapp interactions.
   :::
 
 ### Quick start using our template

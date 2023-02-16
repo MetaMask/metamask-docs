@@ -14,7 +14,15 @@ Read on to learn more!
 ## The Snaps CLI
 
 Before continuing, you should know that [`@metamask/snaps-cli`](https://www.npmjs.com/package/@metamask/snaps-cli) exists, and will be one of your most important tools as you get started with snap development.
-The CLI can be installed globally using `npm` or `yarn`, and provides commands for initiating a snap project and building, executing, and serving your snap for local development.
+The CLI can be installed globally using `npm` or `yarn`:
+
+```sh
+yarn global add @metamask/snaps-cli
+# or...
+npm i -g @metamask/snaps-cli
+```
+
+The CLI provides commands for initiating a snap project and building, executing, and serving your snap for local development.
 Executing `mm-snap --help` will provide detailed usage instructions.
 
 ## The Anatomy of a Snap
@@ -49,7 +57,7 @@ template-snap-monorepo/
 ├─ ... (other stuff)
 ```
 
-Source files other than `index.js` are located through its imports.
+Source files other than `index.ts` are located through its imports.
 The defaults can be overwritten using the `snap.config.js` [config file](#the-snap-configuration-file).
 
 ::: tip Creating a Snap Project
@@ -67,6 +75,7 @@ Consider this trivial snap, which we'll call `hello-snap`:
 ```javascript
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
+    // Expose a "hello" RPC method to Dapps
     case 'hello':
       return 'world!';
 
@@ -77,7 +86,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 ```
 
 In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
-Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
+Whenever the snap receives a JSON-RPC request from an external entity (a Dapp or even another snap), this handler function will be called with the above parameters.
 
 ::: warning Requesting the JSON-RPC permission
 In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
@@ -86,9 +95,10 @@ In order for the extension to call the `onRpcRequest` method of the snap, the `e
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
 This object can be used to make snap specific JSON-RPC requests.
 
-If a dapp wanted to use `hello-snap`, it would do something like this:
+If a Dapp wanted to use `hello-snap`, it would do something like this:
 
 ```javascript
+// Connect to the Snap, enabling its usage inside the Dapp
 await ethereum.request({
   method: 'wallet_requestSnaps',
   params: {
@@ -98,6 +108,7 @@ await ethereum.request({
   },
 });
 
+// Invoke the "hello" RPC method exposed by the Snap
 const hello = await ethereum.request({
   method: 'wallet_invokeSnap',
   params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
@@ -109,8 +120,8 @@ console.log(hello); // 'world!'
 The snap's RPC API is completely up to you, so long as it's a valid [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 ::: tip Does my snap need to have an RPC API?
-Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip exporting `onRpcRequest`.
-However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that e.g. sends transactions for that protocol via your snap, you need to specify an RPC API.
+Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, e.g., providing [transaction insights](./snaps-exports.html#ontransaction), then you can skip exporting `onRpcRequest`.
+However, if you want to do something like manage the user's keys for a particular protocol and create a Dapp that sends transactions for that protocol via your snap for example, you need to specify an RPC API.
 :::
 
 ### The Snap Manifest
@@ -184,7 +195,7 @@ module.exports = {
 };
 ```
 
-The configuration file should not be published.
+The configuration file should not be published to NPM, since it's only used for development and building. That being said, it can be committed to GitHub to share the configuration with your team, since it shouldn't contain any secrets.
 
 ### The Snap Bundle File
 
@@ -199,7 +210,7 @@ If this sounds like a lot to worry about, `mm-snap build` is your friend, becaus
 Snaps exist in order to modify the functionality of MetaMask at runtime while only asking the user for permission.
 As we have seen in the [introduction to snaps](./snaps.html) and this guide, snaps can:
 
-1. Extend the dapp-facing MetaMask JSON-RPC API in arbitrary ways.
+1. Extend the Dapp-facing MetaMask JSON-RPC API in arbitrary ways.
 1. Integrate with and extend the functionality of MetaMask using the [snaps RPC methods and permissions](./snaps-rpc-api.html).
 
 In this section, we'll go into detail about how to actually develop a snap and overcome common issues encountered during development.
@@ -222,7 +233,7 @@ If a snap is disabled, the user must re-enable it before it can start again.
 
 ### Permissions
 
-Just like dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
+Just like Dapps need to request the `eth_accounts` permission in order to access the user's Ethereum accounts, snaps need to request access to the sensitive methods in the snaps RPC API.
 Snaps can effectively expand the MetaMask RPC API by implementing their own and exposing it via `onRpcRequest`, but in order to integrate deeply with MetaMask, you need to make use of the Snaps RPC API's [restricted methods](./snaps-rpc-api.html#restricted-methods).
 Access restriction is implemented using [EIP-2255 wallet permissions](https://eips.ethereum.org/EIPS/eip-2255), and you must specify the permissions required by your snap in the manifest's `initialPermissions` field.
 You can find an example of how to do this in the [template snap's manifest](https://github.com/MetaMask/template-snap-monorepo/blob/main/packages/snap/snap.manifest.json).
@@ -249,17 +260,20 @@ Via the MetaMask settings page, the user can see their installed snaps. For each
 - see its execution status (running, stopped, or crashed)
 - enable and disable the snap
 
-Other than the settings page, the only way a snap can modify the MetaMask UI is by creating a confirmation using the [`snap_confirm`](./snaps-rpc-api.html#snap-confirm) RPC method.
-This means that many snaps will have to rely on web pages (i.e., dapps) and their own RPC methods to present their data to the user.
+Other than the settings page, there are only a few select ways a snap can modify the MetaMask UI:
+
+- By opening a dialog using the [`snap_dialog`](./snaps-rpc-api.html#snap-dialog) RPC method.
+- By returning transaction insights from the [`onTransaction`](./snaps-exports.md#ontransaction) export.
+
+This means that most snaps will have to rely on web pages (i.e., Dapps) and their own RPC methods to present their data to the user.
 
 Providing more ways for snaps to modify the MetaMask UI is an important goal of the snaps system, and over time more and more snaps will be able to contain their user interfaces entirely within MetaMask itself.
 
 #### Detecting the User's MetaMask Version
 
-When developing a website that depends on Snaps, it's important to know whether MetaMask Flask is installed.
-For this purpose, we recommend using the [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider)
-package [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
-RPC method as demonstrated in the following snippet:
+When developing a website/Dapp that depends on Snaps, it's important to know whether MetaMask Flask is installed.
+
+We recommend calling the [`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion) RPC method to obtain this information. Here we are using the [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get the provider object from MetaMask first:
 
 ```js
 import detectEthereumProvider from '@metamask/detect-provider';
@@ -389,7 +403,7 @@ Take note of the following details specific to Snaps:
 - The version in `package.json` and `snap.manifest.json` must match
 - The image specified in `iconPath` in the manifest file will be used as the icon displayed when installing and displaying confirmations from the Snap
 
-After publishing the Snap, any dapp can connect to the Snap by using the snapId `npm:[packageName]`.
+After publishing the Snap, any Dapp can connect to the Snap by using the snapId `npm:[packageName]`.
 
 ### Distributing Your Snap
 
@@ -416,8 +430,8 @@ You can also follow these tutorials which will walk you through the steps to dev
 
 MetaMask also maintains tools to help developers build, debug, and maintain snaps:
 
-- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes TypeScript/React and vanilla JS options and a CLI for building, packaging, and deploying your snap and a companion dapp
+- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes TypeScript/React and vanilla JS options and a CLI for building, packaging, and deploying your snap and a companion Dapp
 - [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts with Ganache
-- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a dapp for evaluating them
+- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a Dapp for evaluating them
 
 Finally, if you need help, you can ask for help on our [discussion board](https://github.com/MetaMask/snaps-monorepo/discussions), and if you encounter any issues, please open an issue in our [issue tracker](https://github.com/MetaMask/snaps-monorepo/issues).
