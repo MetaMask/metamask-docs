@@ -107,21 +107,24 @@ The `transactionOrigin` property is only passed to `onTransaction` if `allowTran
 ### Returns
 
 ```typescript
+import { Component } from '@metamask/snaps-ui';
+
 type OnTransactionHandlerReturn = Promise<OnTransactionResponse>;
 
 interface OnTransactionResponse {
-  insights: { [key: string]: unknown };
+  content: Component;
 }
 ```
 
-- `onTransactionResponse` - The `insights` object returned by the snap will be displayed alongside the confirmation for the transaction that `onTransaction` was called with. Keys and values will be displayed in the order received, with each key rendered as a title and each value rendered as a string.
+- `onTransactionResponse` - The `content` object returned by the snap will be displayed using [Custom UI](./snaps-concepts.html#custom-ui) alongside the confirmation for the transaction that `onTransaction` was called with.
 
 ### Examples
 
 #### Typescript
 
 ```typescript
-import { OnTransactionHandler } from "@metamask/snap-types";
+import { OnTransactionHandler } from '@metamask/snap-types';
+import { panel, heading, text } from '@metamask/snaps-ui';
 
 export const onTransaction: OnTransactionHandler = async ({
   transactionOrigin
@@ -129,20 +132,34 @@ export const onTransaction: OnTransactionHandler = async ({
   chainId,
 }) => {
   const insights = /* Get insights */;
-  return { insights };
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ])
+  };
 };
 ```
 
 #### Javascript
 
 ```js
+import { panel, heading, text } from '@metamask/snaps-ui';
+
 module.exports.onTransaction = async ({
   transactionOrigin
   transaction,
   chainId,
 }) => {
   const insights = /* Get insights */;
-  return { insights };
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ])
+  };
 };
 ```
 
