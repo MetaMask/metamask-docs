@@ -101,7 +101,7 @@ interface OnTransactionArgs {
 ```
 
 ::: warning Getting the `transactionOrigin` parameter
-the `transactionOrigin` property is only passed to `onTransaction` if `allowTransactionOrigin` is set to `true` in the `endowment:transaction-insight` permission object. See [Permissions](./snaps-permissions.html#endowment-transaction-insight) for more information.
+The `transactionOrigin` property is only passed to `onTransaction` if `allowTransactionOrigin` is set to `true` in the `endowment:transaction-insight` permission object. See [Permissions](./snaps-permissions.html#endowment-transaction-insight) for more information.
 :::
 
 ### Returns
