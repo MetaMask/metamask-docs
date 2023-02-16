@@ -20,6 +20,10 @@ In order to communicate with dapps and other snaps, the snap must implement its 
 Well, no, that's also up to you! If your snap can do something useful without receiving and responding to JSON-RPC requests, then you can skip exporting onRpcRequest. However, if you want to do something like manage the user's keys for a particular protocol and create a dapp that sends transactions for that protocol via your snap, for example, you need to specify an RPC API.
 :::
 
+::: warning Requesting the JSON-RPC permission
+In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
+:::
+
 ### Parameters
 
 - `RpcHandlerArgs` - The origin and the JSON-RPC request.
@@ -27,10 +31,10 @@ Well, no, that's also up to you! If your snap can do something useful without re
 ```typescript
 import { JsonRpcRequest } from '@metamask/types';
 
-interface RpcHandlerArgs = {
+interface RpcHandlerArgs {
   origin: string;
   request: JsonRpcRequest<unknown[] | { [key: string]: unknown }>;
-};
+}
 ```
 
 ### Returns
@@ -80,20 +84,25 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 If the snap wants to provide transaction insights before a user signs a transaction, the snap must export a function called `onTransaction`. Whenever there is a contract interaction and a transaction is submitted via the extension, this function will be called. The raw unsigned transaction payload will be passed to the `onTransaction` handler function.
 
-::: tip Requesting the transaction insight permission
-In order for the extension to call the `onTransaction` method of the snap, the `endowment:transaction-insight` permission must be requested. see [Permissions](./snaps-permissions.html#endowment-transaction-insight)
+::: warning Requesting the transaction insight permission
+In order for the extension to call the `onTransaction` method of the snap, the `endowment:transaction-insight` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-transaction-insight) for more information.
 :::
 
 ### Parameters
 
-- `onTransactionArgs` - the raw transaction payload and the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md). For more details on the transaction object see [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
+- `onTransactionArgs` - the raw transaction payload, the [CAIP-2 chain ID](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) and the transaction origin if [allowTransactionOrigin](./snaps-permissions.html#endowment-transaction-insight) is set to `true`. For more details on the transaction object see [SIP-3](https://metamask.github.io/SIPs/SIPS/sip-3#appendix-i-ethereum-transaction-objects).
 
 ```typescript
 interface OnTransactionArgs {
   transaction: Record<string, unknown>;
   chainId: string;
+  transactionOrigin?: string;
 }
 ```
+
+::: warning Getting the `transactionOrigin` parameter
+The `transactionOrigin` property is only passed to `onTransaction` if `allowTransactionOrigin` is set to `true` in the `endowment:transaction-insight` permission object. See [Permissions](./snaps-permissions.html#endowment-transaction-insight) for more information.
+:::
 
 ### Returns
 
@@ -115,6 +124,7 @@ interface OnTransactionResponse {
 import { OnTransactionHandler } from "@metamask/snap-types";
 
 export const onTransaction: OnTransactionHandler = async ({
+  transactionOrigin
   transaction,
   chainId,
 }) => {
@@ -127,6 +137,7 @@ export const onTransaction: OnTransactionHandler = async ({
 
 ```js
 module.exports.onTransaction = async ({
+  transactionOrigin
   transaction,
   chainId,
 }) => {
