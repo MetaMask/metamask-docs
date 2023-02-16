@@ -295,10 +295,9 @@ interface SnapRequest {
 }
 ```
 
-- `Array`
-
-  0. `string` - The id of the snap to invoke.
-  1. `SnapRequest` - The JSON-RPC request object to send to the invoked snap.
+- `Object`
+  - `snapId` - `string` - The id of the snap to invoke.
+  - `request` - `SnapRequest` - The JSON-RPC request object to send to the invoked snap.
 
 #### Returns
 
@@ -316,12 +315,12 @@ Snaps are fully responsible for implementing their JSON-RPC API; consult the sna
 ```javascript
 const result = await ethereum.request({
   method: 'wallet_invokeSnap',
-  params: [
-    'npm:@metamask/example-snap',
-    {
+  params: {
+    snapId: 'npm:@metamask/example-snap',
+    request: {
       method: 'hello',
     },
-  ],
+  },
 });
 
 console.log(result); // We happen to know that this will be `true` or `false`
@@ -352,9 +351,8 @@ The `*` in the name will always be substituted for a string, in this case a snap
 
 #### Parameters
 
-- `Array`
-
-  0. `SnapRequest` - The JSON-RPC request object to send to the invoked snap.
+- `Object` (`SnapRequest`)
+  - The JSON-RPC request object to send to the invoked snap.
 
 #### Returns
 
@@ -372,11 +370,9 @@ Snaps are fully responsible for implementing their JSON-RPC API; consult the sna
 ```javascript
 const result = await ethereum.request({
   method: 'wallet_snap_npm:@metamask/example-snap',
-  params: [
-    {
-      method: 'hello',
-    },
-  ],
+  params: {
+    method: 'hello',
+  },
 });
 
 console.log(result); // We happen to know that this will be `true` or `false`
@@ -775,6 +771,70 @@ console.log(dogecoinPublicKey);
 
 ::::
 
+### `snap_getEntropy`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Parameters
+
+- `Object`
+  - `version` - The literal number `1`. This is reserved for future use.
+  - `salt` - An arbitrary string to be used as a salt for the entropy. This can be used to generate different entropy
+    for different purposes.
+
+#### Returns
+
+The entropy as hexadecimal `string`.
+
+#### Description
+
+Gets a deterministic 256-bit entropy value, which is specific to the Snap and the user's account. This entropy can be
+used to generate a private key, or any other value that requires a high level of randomness. Other Snaps will not be
+able to access this entropy, and it will change if the user's secret recovery phrase changes.
+
+This value is deterministic, meaning that it will always be the same for the same Snap, user account, and salt.
+
+You can optionally specify a salt to generate different entropy for different purposes. Using a salt will result in
+completely different entropy, that is unrelated to the entropy generated without a salt.
+
+#### Example
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab Manifest
+
+```json
+{
+  "initialPermissions": {
+    "snap_getEntropy": {}
+  }
+}
+```
+
+:::
+
+::: tab Code
+
+```javascript
+const entropy = await snap.request({
+  method: 'snap_getEntropy',
+  params: {
+    version: 1,
+    salt: 'foo', // Optional
+  },
+});
+
+// `0x...`
+console.log(entropy);
+```
+
+:::
+
+::::
+
 ### `snap_manageState`
 
 ::: warning Only Callable By
@@ -788,10 +848,9 @@ Snaps can currently use this RPC method to store up to 100MB of data.
 
 #### Parameters
 
-- `Array`
-
-  0. `'clear' | 'get' | 'update'` - The state operation to perform.
-  1. `Record<string, unknown> | void` - The value to update state with if the operation is `update`, and nothing otherwise.
+- `Object`
+  - `operation` - `'clear' | 'get' | 'update'` - The state operation to perform.
+  - `newState` - `Record<string, unknown> | void` - The value to update state with if the operation is `update`, and nothing otherwise.
 
 #### Returns
 
@@ -808,13 +867,13 @@ The data is automatically encrypted using a snap-specific key and automatically 
 // First, let's persist some data
 await wallet.request({
   method: 'snap_manageState',
-  params: ['update', { hello: 'world' }],
+  params: { operation: 'update', newState: { hello: 'world' } },
 });
 
 // Then, at some later time, let's get the data we stored
 const persistedData = await wallet.request({
   method: 'snap_manageState',
-  params: ['get'],
+  params: { operation: 'get' },
 });
 
 console.log(persistedData);
@@ -823,7 +882,7 @@ console.log(persistedData);
 // Finally, if there's no need to store data anymore, we can clear it out
 await wallet.request({
   method: 'snap_manageState',
-  params: ['clear'],
+  params: { operation: 'clear' },
 });
 ```
 
@@ -850,9 +909,9 @@ interface SnapNotifyParams {
 }
 ```
 
-- `Array`
-
-  0. `SnapNotifyParams` - An object containing the contents of the notification.
+- `Object` (`SnapNotifyParams`) - An object containing the contents of the notification.
+  - `type` - `'native' | 'inApp'` - Notification type to be used.
+  - `message` - Message to be displayed.
 
 #### Notification Type
 
@@ -887,11 +946,9 @@ See above for their meaning and format.
 ```javascript
 await wallet.request({
   method: 'snap_notify',
-  params: [
-    {
-      type: 'inApp',
-      message: `Hello, world!`,
-    },
-  ],
+  params: {
+    type: 'inApp',
+    message: `Hello, world!`,
+  },
 });
 ```
