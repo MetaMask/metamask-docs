@@ -14,7 +14,7 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 
 ## Unrestricted Methods
 
-### `wallet_enable`
+### `wallet_requestSnaps`
 
 ::: warning Only Callable By
 
@@ -23,104 +23,72 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 
 #### Parameters
 
-- `Array`
-
-  0. `RequestedPermissions` - The requested permissions.
+- `Object`
 
 ```typescript
-interface WalletEnableParam {
-  wallet_snap: {
-    [snapId: string]: {
-      version?: string;
-    };
+interface RequestSnapsParams {
+  [snapId: string]: {
+    version?: string;
   };
-  [permissionName: string]: {};
 }
 ```
 
 #### Returns
 
 ```typescript
-interface WalletEnableResult {
-  // The user's Ethereum accounts, if the eth_accounts permission has been
-  // granted.
-  accounts: string[];
-  // The permissions granted to the requester.
-  permissions: Web3WalletPermission[];
-  // The user's installed snaps that the requester is permitted to access.
-  snaps: WalletInstallSnapsResult;
-  errors?: Error[]; // Any errors encountered during processing.
+interface RequestSnapsResult {
+  [snapId: string]: WalletGetSnapsResult[string];
 }
 ```
 
-`WalletEnableResult` - An object containing the requester's permitted Ethereum accounts, snaps, and granted permissions.
+`RequestSnapsResult` - An object mapping the IDs of installed snaps to their metadata or an error if installation failed.
 
 #### Description
 
-This is a convenience method for requesting the user's accounts and connecting to / installing snaps.
-You can think of it as a combination of [`eth_requestAccounts`](./rpc-api.html#eth-requestaccounts), [`wallet_installSnaps`](#wallet-installsnaps), and [`wallet_requestPermissions`](./rpc-api.html#wallet-requestpermissions).
+This method requests permission for a DApp to communicate with the given snaps and attempts to install them if they aren't already.
+If the installation of any snap fails, `wallet_requestSnaps` will throw with the error that caused the installation to fail.
 
-See the examples for details.
+Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
+If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
+If a compatible version of a snap is already installed, the request to install that snap will automatically succeed.
+If an incompatible version is installed, MetaMask will attempt to update the snap to the latest version that satisfies the requested range.
+The request will succeed if the snap is successfully updated, and fail if the update could not be completed.
 
 #### Example
 
 ```javascript
-let result;
 try {
-  result = await ethereum.request({
-    method: 'wallet_enable',
-    // This entire object is ultimately just a list of requested permissions.
-    // Every snap has an associated permission or permissions, given the prefix `wallet_snap_`
-    // and its ID. Here, the `wallet_snap` property exists so that callers don't
-    // have to specify the full permission permission name for each snap.
-    params: [
-      {
-        wallet_snap: {
-          'npm:@metamask/example-snap': {},
-          'npm:fooSnap': {
-            // The optional version argument allows requesting
-            // SemVer version range, with semantics same as in
-            // package.json ranges.
-            version: '^1.0.2',
-          },
-        },
-        eth_accounts: {},
+  const result = await ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      'npm:@metamask/example-snap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting a SemVer version
+        // range, with the same semantics as npm package.json ranges.
+        version: '^1.0.2',
       },
-    ],
+    },
   });
-} catch (error) {
-  // The `wallet_enable` call will throw if the requested permissions are
-  // rejected.
-  if (error.code === 4001) {
-    console.log('The user rejected the request.');
-  } else {
-    console.log('Unexpected error:', error);
-  }
-}
 
-// If the installation of all snaps fails, the associated error(s) will be
-// returned in the `result.errors` array.
-if (result.errors) {
-  console.log('Snap installation failure :(', result.errors);
-} else {
-  console.log('Success!', result);
-  // Could print something of the form:
+  console.log(result);
+  // Will print something of the form:
   // {
-  //   accounts: ['0xa...', '0xb...'],
-  //   permissions: {
-  //     eth_accounts: {},
-  //     'wallet_snap_npm:@metamask/example-snap': {},
+  //   'npm:@metamask/example-snap': {
+  //     version: '1.0.0',
+  //     permissionName: 'wallet_snap_npm:@metamask/example-snap',
+  //     ...
   //   },
-  //   snaps: {
-  //     'npm:@metamask/example-snap': {
-  //       version: '1.0.0',
-  //       permissionName: 'wallet_snap_npm:@metamask/example-snap',
-  //       ...
-  //     },
-  //     'npm:fooSnap': {
-  //       error: { message: 'The snap does not exist.' },
-  //     },
-  //   }
+  //   'npm:fooSnap': {
+  //     version: '1.0.5',
+  //     permissionName: 'wallet_snap_npm:fooSnap',
+  //     ...
+  //   },
+  // }
+} catch (error) {
+  console.log(error);
+  // Will print something of the form:
+  // {
+  //    message: 'The snap does not exist.'
   // }
 }
 ```
@@ -187,88 +155,6 @@ console.log(result);
 //       ...
 //     }
 //   }
-// }
-```
-
-### `wallet_installSnaps`
-
-::: warning Only Callable By
-
-- Websites
-  :::
-
-::: warning Is this the method you're looking for?
-This method only installs the requested snaps if the caller is permitted to do so.
-You probably want to use [`wallet_enable`](#wallet-enable) instead, which both requests the permissions for the snaps _and_ installs them.
-:::
-
-#### Parameters
-
-```typescript
-interface InstallSnapsParam {
-  [snapId: string]: {
-    version?: string;
-  };
-}
-```
-
-- `Array`
-
-  0. `InstallSnapsParam` - The snaps to install.
-
-#### Returns
-
-```typescript
-interface WalletInstallSnapsResult {
-  [snapId: string]:
-    | WalletGetSnapsResult[string]
-    | {
-        error: Error;
-      };
-}
-```
-
-`WalletInstallSnapsResult` - An object mapping the IDs of installed snaps to their metadata or an error if installation failed.
-
-#### Description
-
-This method attempts to install the requested snaps, if they are permitted.
-If the installation of any snap fails, its object value on the result will contain an `error` property with the error that caused the installation to fail.
-
-Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
-If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
-If a compatible version of a snap is already installed, the request to install that snap will automatically succeed.
-If an incompatible version is installed, MetaMask will attempt to update the snap to the latest version that satisfies the requested range.
-The request will succeed if the snap is successfully updated, and fail if the update could not be completed.
-
-#### Example
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_installSnaps',
-  params: [
-    {
-      'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {
-        // The optional version argument allows requesting a SemVer version
-        // range, with the same semantics as npm package.json ranges.
-        version: '^1.0.2',
-      },
-    },
-  ],
-});
-
-console.log(result);
-// Could print something of the form:
-// {
-//   'npm:@metamask/example-snap': {
-//     version: '1.0.0',
-//     permissionName: 'wallet_snap_npm:@metamask/example-snap',
-//     ...
-//   },
-//   'npm:fooSnap': {
-//     error: { message: 'The snap does not exist.' },
-//   },
 // }
 ```
 
@@ -425,7 +311,7 @@ The user can either approve or reject the confirmation, which will be indicated 
 #### Example
 
 ```javascript
-const result = await wallet.request({
+const result = await snap.request({
   method: 'snap_confirm',
   params: [
     {
@@ -441,6 +327,166 @@ if (result === true) {
 } else {
   // Do not take the action
 }
+```
+
+### `snap_dialog`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Description
+
+Calling this method causes a dialog to be displayed in the MetaMask UI.
+There are three types of dialogs: Alert, Confirmation, and Prompt.
+Each of these dialog types has different parameters and return types, detailed below.
+
+#### The `Component` type
+
+The `Component` type, used as the `content` property for dialogs, is [defined in source code](https://github.com/MetaMask/snaps-monorepo/blob/main/packages/snaps-ui/src/nodes.ts#L171) as:
+
+```typescript
+type Component = Infer<typeof ComponentStruct>;
+```
+
+By itself this is opaque. A simple way to understand it is as the return type of the UI functions exported from the `@metamask/snaps-ui` package, i.e. `heading`, `panel`, `text`, and other UI functions.
+
+#### Alert Dialog
+
+Displays an alert that can only be acknowledged.
+
+##### Parameters
+
+```typescript
+interface SnapAlertDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Alert';
+
+  /**
+   * The content of the alert, as a Custom UI component
+   */
+  content: Component;
+}
+```
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    content: panel([
+      heading('Something happened in the system'),
+      text('The thing that happened is...'),
+    ]),
+  },
+});
+
+// Code that should execute after the alert has been acknowledged
+```
+
+#### Confirmation Dialog
+
+Displays a confirmation dialog that can be accepted or rejected.
+
+##### Parameters
+
+```typescript
+interface SnapConfirmationDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Confirmation';
+
+  /**
+   * The content of the confirmation, as a Custom UI component
+   */
+  content: Component;
+}
+```
+
+##### Returns
+
+`boolean` - `true` if the confirmation was accepted, `false` otherwise.
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+const result = await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Confirmation',
+    content: panel([
+      heading('Would you like to take the action?'),
+      text('The action is...'),
+    ]),
+  },
+});
+
+if (result === true) {
+  // Do the action
+}
+```
+
+#### Prompt Dialog
+
+Displays a prompt where the user can enter a text response.
+
+##### Parameters
+
+```typescript
+interface SnapPromptDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Prompt';
+
+  /**
+   * The content of the prompt, as a Custom UI component.
+   */
+  content: Component;
+
+  /**
+   * Text that will be in the input field when nothing is typed.
+   */
+  placeholder: string;
+}
+```
+
+##### Returns
+
+`string` - The text entered by the user.
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+const walletAddress = await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Prompt',
+    content: panel([
+      heading('What is the wallet address?'),
+      text('Please enter the wallet address to be monitored'),
+    ]),
+    placeholder: '0x123...',
+  },
+});
+
+// `walletAddress` will be a string containing the address entered by the user
 ```
 
 ### `snap_getBip32Entropy`
@@ -543,7 +589,7 @@ import { SLIP10Node } from '@metamask/key-tree';
 
 // By way of example, we will use Dogecoin, which has a derivation path starting
 // with `m/44'/3'`.
-const dogecoinNode = await wallet.request({
+const dogecoinNode = await snap.request({
   method: 'snap_getBip32Entropy',
   params: {
     // Must be specified exactly in the manifest
@@ -675,7 +721,7 @@ Note that `@metamask/key-tree` can help you get the [extended private keys](http
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
 
 // By way of example, we will use Dogecoin, which has `coin_type` 3.
-const dogecoinNode = await wallet.request({
+const dogecoinNode = await snap.request({
   method: 'snap_getBip44Entropy',
   params: {
     coinType: 3,
@@ -753,7 +799,7 @@ Note that this returns the public key, not the extended public key (`xpub`), or 
 ```javascript
 // By way of example, we will use Dogecoin, which has a derivation path starting
 // with `m/44'/3'`.
-const dogecoinPublicKey = await wallet.request({
+const dogecoinPublicKey = await snap.request({
   method: 'snap_getBip32PublicKey',
   params: {
     // The path and curve must be specified in the initial permissions.
@@ -865,13 +911,13 @@ The data is automatically encrypted using a snap-specific key and automatically 
 
 ```javascript
 // First, let's persist some data
-await wallet.request({
+await snap.request({
   method: 'snap_manageState',
   params: { operation: 'update', newState: { hello: 'world' } },
 });
 
 // Then, at some later time, let's get the data we stored
-const persistedData = await wallet.request({
+const persistedData = await snap.request({
   method: 'snap_manageState',
   params: { operation: 'get' },
 });
@@ -880,7 +926,7 @@ console.log(persistedData);
 // { hello: 'world' }
 
 // Finally, if there's no need to store data anymore, we can clear it out
-await wallet.request({
+await snap.request({
   method: 'snap_manageState',
   params: { operation: 'clear' },
 });
@@ -944,7 +990,7 @@ See above for their meaning and format.
 #### Example
 
 ```javascript
-await wallet.request({
+await snap.request({
   method: 'snap_notify',
   params: {
     type: 'inApp',
