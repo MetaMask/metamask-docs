@@ -10,3 +10,11 @@ ethereum.request({
     },
   },
 });
+  .then((success) => {
+    if (success) {
+      console.log('FOO successfully added to wallet!')
+    } else {
+      throw new Error('Something went wrong.')
+    }
+  })
+  .catch(console.error)
