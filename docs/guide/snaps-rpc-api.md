@@ -477,7 +477,7 @@ interface SnapAlertDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'alert';
+  type: 'Alert';
 
   /**
    * The content of the alert, as a Custom UI component
@@ -498,7 +498,7 @@ import { panel, text, heading } from '@metamask/snaps-ui';
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'alert',
+    type: 'Alert',
     content: panel([
       heading('Something happened in the system'),
       text('The thing that happened is...'),
@@ -520,7 +520,7 @@ interface SnapConfirmationDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'confirmation';
+  type: 'Confirmation';
 
   /**
    * The content of the confirmation, as a Custom UI component
@@ -541,7 +541,7 @@ import { panel, text, heading } from '@metamask/snaps-ui';
 const result = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'confirmation',
+    type: 'Confirmation',
     content: panel([
       heading('Would you like to take the action?'),
       text('The action is...'),
@@ -565,7 +565,7 @@ interface SnapPromptDialogParam {
   /**
    * The type of the dialog.
    */
-  type: 'prompt';
+  type: 'Prompt';
 
   /**
    * The content of the confirmation, as a Custom UI component.
@@ -591,7 +591,7 @@ import { panel, text, heading } from '@metamask/snaps-ui';
 const walletAddress = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'prompt',
+    type: 'Prompt',
     content: panel([
       heading('What is the wallet address?'),
       text('Please enter the wallet address to be monitored'),
