@@ -58,7 +58,7 @@ template-snap-monorepo/
 ```
 
 Source files other than `index.ts` are located through its imports.
-The defaults can be overwritten using the `snap.config.json` [config file](#the-snap-configuration-file).
+The defaults can be overwritten using the `snap.config.js` [config file](#the-snap-configuration-file).
 
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
@@ -88,31 +88,30 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
 Whenever the snap receives a JSON-RPC request from an external entity (a Dapp or even another snap), this handler function will be called with the above parameters.
 
-In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
-This object exposes a very similar API to the one exposed to Dapps via `window.ethereum`.
-Any message sent via `wallet.request()` will be received and processed by MetaMask.
+::: warning Requesting the JSON-RPC permission
+In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
+:::
+
+In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
+This object can be used to make snap specific JSON-RPC requests.
 
 If a Dapp wanted to use `hello-snap`, it would do something like this:
 
 ```javascript
 // Connect to the Snap, enabling its usage inside the Dapp
 await ethereum.request({
-  method: 'wallet_enable',
-  params: [
-    {
-      wallet_snap: {
-        'npm:hello-snap': {
-          version: '^1.0.0',
-        },
-      },
+  method: 'wallet_requestSnaps',
+  params: {
+    'npm:hello-snap': {
+      version: '^1.0.0',
     },
-  ],
+  },
 });
 
 // Invoke the "hello" RPC method exposed by the Snap
 const hello = await ethereum.request({
   method: 'wallet_invokeSnap',
-  params: ['npm:hello-snap', { method: 'hello' }],
+  params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
 });
 
 console.log(hello); // 'world!'
@@ -299,7 +298,7 @@ if (provider && isFlask) {
 ### The Snap Execution Environment
 
 Snaps execute in a sandboxed environment that's running Secure EcmaScript (SES, see [below](#secure-ecmascript-ses)).
-There is no DOM, no Node.js builtins, and no platform-specific APIs other than MetaMask's `wallet` global object.
+There is no DOM, no Node.js builtins, and no platform-specific APIs other than MetaMask's `snap` global object.
 Almost all standard JavaScript globals contained in [this list](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) that are also in Node.js are available as normal.
 This includes things like `Promise`, `Error`, `Math`, `Set`, `Reflect` etc.
 
@@ -409,7 +408,7 @@ After publishing the Snap, any Dapp can connect to the Snap by using the snapId 
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
-If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_enable`](./snaps-rpc-api.html#wallet-enable) RPC method.
+If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_requestSnaps`](./snaps-rpc-api.html#wallet-requestsnaps) RPC method.
 
 In the future, MetaMask will create some way for users to more easily discover snaps, but everyone will always be able to build, publish, and use snaps without MetaMask's permission.
 (Although we may try to make it difficult to use known scams.)
