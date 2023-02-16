@@ -454,7 +454,7 @@ interface SnapPromptDialogParam {
   type: 'Prompt';
 
   /**
-   * The content of the confirmation, as a Custom UI component.
+   * The content of the prompt, as a Custom UI component.
    */
   content: Component;
 
