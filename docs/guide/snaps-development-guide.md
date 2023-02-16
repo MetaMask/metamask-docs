@@ -50,7 +50,7 @@ template-snap-monorepo/
 ```
 
 Source files other than `index.js` are located through its imports.
-The defaults can be overwritten using the `snap.config.json` [config file](#the-snap-configuration-file).
+The defaults can be overwritten using the `snap.config.js` [config file](#the-snap-configuration-file).
 
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
@@ -78,6 +78,10 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 In order to communicate with the outside world, the snap must implement its own JSON-RPC API by exposing an exported function called `onRpcRequest`.
 Whenever the snap receives a JSON-RPC request from an external entity (a dapp or even another snap), this handler function will be called with the above parameters.
+
+::: warning Requesting the JSON-RPC permission
+In order for the extension to call the `onRpcRequest` method of the snap, the `endowment:rpc` permission must be requested. See [Permissions](./snaps-permissions.html#endowment-rpc)
+:::
 
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `wallet`.
 This object exposes a very similar API to the one exposed to dapps via `window.ethereum`.
@@ -145,7 +149,7 @@ For the time being, snaps can only be [published to the official npm registry](h
 Over time, developers will be able to distribute snaps in a variety of different ways, and the manifest will expand to support different publishing solutions.
 
 ::: tip The Snaps Publishing Specification
-The [snaps publishing specification](https://github.com/MetaMask/specifications/blob/main/snaps/publishing.md) details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
+The [snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md) details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
 :::
 
 In the course of developing your snap, you will have to modify some of the manifest fields manually.
