@@ -12,7 +12,7 @@ MetaMask lets you request cryptographic signatures from users in a number of way
 | `personal_sign`        | ✅             | ❌                            | ✅          |
 | `eth_sign`             | ❌             | ❓                            | ❌          |
 
-See also: [A Brief History](#history)
+See also: [A Brief History](#a-brief-history)
 
 ## SignTypedData V4
 
@@ -289,7 +289,7 @@ If you’d like to read our JavaScript implementations of these methods, they ar
 
 Note that MetaMask supports signing transactions with Trezor and Ledger hardware wallets. These hardware wallets currently only support signing data using the `personal_sign` method. If you have trouble logging in to a website or dapp when using a Ledger or Trezor, the site may be requesting you sign data via an unsupported method, in which case we recommend using your standard MetaMask account.
 
-## <a name="history"></a> A Brief History
+## A Brief History
 
 There are currently six signing methods in MetaMask, and you might wonder the history of these methods. Studying the history of these methods yields some guiding lessons for the emergence of decentralized standards. Our current five methods are:
 
