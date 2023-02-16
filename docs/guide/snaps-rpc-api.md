@@ -14,7 +14,7 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 
 ## Unrestricted Methods
 
-### `wallet_enable`
+### `wallet_requestSnaps`
 
 ::: warning Only Callable By
 
@@ -23,104 +23,72 @@ Do you have feature requests? Other ideas? We'd love to hear about them! [Click 
 
 #### Parameters
 
-- `Array`
-
-  0. `RequestedPermissions` - The requested permissions.
+- `Object`
 
 ```typescript
-interface WalletEnableParam {
-  wallet_snap: {
-    [snapId: string]: {
-      version?: string;
-    };
+interface RequestSnapsParams {
+  [snapId: string]: {
+    version?: string;
   };
-  [permissionName: string]: {};
 }
 ```
 
 #### Returns
 
 ```typescript
-interface WalletEnableResult {
-  // The user's Ethereum accounts, if the eth_accounts permission has been
-  // granted.
-  accounts: string[];
-  // The permissions granted to the requester.
-  permissions: Web3WalletPermission[];
-  // The user's installed snaps that the requester is permitted to access.
-  snaps: WalletInstallSnapsResult;
-  errors?: Error[]; // Any errors encountered during processing.
+interface RequestSnapsResult {
+  [snapId: string]: WalletGetSnapsResult[string];
 }
 ```
 
-`WalletEnableResult` - An object containing the requester's permitted Ethereum accounts, snaps, and granted permissions.
+`RequestSnapsResult` - An object mapping the IDs of installed snaps to their metadata or an error if installation failed.
 
 #### Description
 
-This is a convenience method for requesting the user's accounts and connecting to / installing snaps.
-You can think of it as a combination of [`eth_requestAccounts`](./rpc-api.html#eth-requestaccounts), [`wallet_installSnaps`](#wallet-installsnaps), and [`wallet_requestPermissions`](./rpc-api.html#wallet-requestpermissions).
+This method requests permission for a DApp to communicate with the given snaps and attempts to install them if they aren't already.
+If the installation of any snap fails, `wallet_requestSnaps` will throw with the error that caused the installation to fail.
 
-See the examples for details.
+Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
+If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
+If a compatible version of a snap is already installed, the request to install that snap will automatically succeed.
+If an incompatible version is installed, MetaMask will attempt to update the snap to the latest version that satisfies the requested range.
+The request will succeed if the snap is successfully updated, and fail if the update could not be completed.
 
 #### Example
 
 ```javascript
-let result;
 try {
-  result = await ethereum.request({
-    method: 'wallet_enable',
-    // This entire object is ultimately just a list of requested permissions.
-    // Every snap has an associated permission or permissions, given the prefix `wallet_snap_`
-    // and its ID. Here, the `wallet_snap` property exists so that callers don't
-    // have to specify the full permission permission name for each snap.
-    params: [
-      {
-        wallet_snap: {
-          'npm:@metamask/example-snap': {},
-          'npm:fooSnap': {
-            // The optional version argument allows requesting
-            // SemVer version range, with semantics same as in
-            // package.json ranges.
-            version: '^1.0.2',
-          },
-        },
-        eth_accounts: {},
+  const result = await ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      'npm:@metamask/example-snap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting a SemVer version
+        // range, with the same semantics as npm package.json ranges.
+        version: '^1.0.2',
       },
-    ],
+    },
   });
-} catch (error) {
-  // The `wallet_enable` call will throw if the requested permissions are
-  // rejected.
-  if (error.code === 4001) {
-    console.log('The user rejected the request.');
-  } else {
-    console.log('Unexpected error:', error);
-  }
-}
 
-// If the installation of all snaps fails, the associated error(s) will be
-// returned in the `result.errors` array.
-if (result.errors) {
-  console.log('Snap installation failure :(', result.errors);
-} else {
-  console.log('Success!', result);
-  // Could print something of the form:
+  console.log(result);
+  // Will print something of the form:
   // {
-  //   accounts: ['0xa...', '0xb...'],
-  //   permissions: {
-  //     eth_accounts: {},
-  //     'wallet_snap_npm:@metamask/example-snap': {},
+  //   'npm:@metamask/example-snap': {
+  //     version: '1.0.0',
+  //     permissionName: 'wallet_snap_npm:@metamask/example-snap',
+  //     ...
   //   },
-  //   snaps: {
-  //     'npm:@metamask/example-snap': {
-  //       version: '1.0.0',
-  //       permissionName: 'wallet_snap_npm:@metamask/example-snap',
-  //       ...
-  //     },
-  //     'npm:fooSnap': {
-  //       error: { message: 'The snap does not exist.' },
-  //     },
-  //   }
+  //   'npm:fooSnap': {
+  //     version: '1.0.5',
+  //     permissionName: 'wallet_snap_npm:fooSnap',
+  //     ...
+  //   },
+  // }
+} catch (error) {
+  console.log(error);
+  // Will print something of the form:
+  // {
+  //    message: 'The snap does not exist.'
   // }
 }
 ```
@@ -187,88 +155,6 @@ console.log(result);
 //       ...
 //     }
 //   }
-// }
-```
-
-### `wallet_installSnaps`
-
-::: warning Only Callable By
-
-- Websites
-  :::
-
-::: warning Is this the method you're looking for?
-This method only installs the requested snaps if the caller is permitted to do so.
-You probably want to use [`wallet_enable`](#wallet-enable) instead, which both requests the permissions for the snaps _and_ installs them.
-:::
-
-#### Parameters
-
-```typescript
-interface InstallSnapsParam {
-  [snapId: string]: {
-    version?: string;
-  };
-}
-```
-
-- `Array`
-
-  0. `InstallSnapsParam` - The snaps to install.
-
-#### Returns
-
-```typescript
-interface WalletInstallSnapsResult {
-  [snapId: string]:
-    | WalletGetSnapsResult[string]
-    | {
-        error: Error;
-      };
-}
-```
-
-`WalletInstallSnapsResult` - An object mapping the IDs of installed snaps to their metadata or an error if installation failed.
-
-#### Description
-
-This method attempts to install the requested snaps, if they are permitted.
-If the installation of any snap fails, its object value on the result will contain an `error` property with the error that caused the installation to fail.
-
-Optionally, you can specify a [SemVer range](https://www.npmjs.com/package/semver) for any snap to be installed.
-If you do so, MetaMask will try to install a version of the snap that satisfies the requested range.
-If a compatible version of a snap is already installed, the request to install that snap will automatically succeed.
-If an incompatible version is installed, MetaMask will attempt to update the snap to the latest version that satisfies the requested range.
-The request will succeed if the snap is successfully updated, and fail if the update could not be completed.
-
-#### Example
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_installSnaps',
-  params: [
-    {
-      'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {
-        // The optional version argument allows requesting a SemVer version
-        // range, with the same semantics as npm package.json ranges.
-        version: '^1.0.2',
-      },
-    },
-  ],
-});
-
-console.log(result);
-// Could print something of the form:
-// {
-//   'npm:@metamask/example-snap': {
-//     version: '1.0.0',
-//     permissionName: 'wallet_snap_npm:@metamask/example-snap',
-//     ...
-//   },
-//   'npm:fooSnap': {
-//     error: { message: 'The snap does not exist.' },
-//   },
 // }
 ```
 
