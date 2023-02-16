@@ -329,6 +329,166 @@ if (result === true) {
 }
 ```
 
+### `snap_dialog`
+
+::: warning Only Callable By
+
+- Snaps
+  :::
+
+#### Description
+
+Calling this method causes a dialog to be displayed in the MetaMask UI.
+There are three types of dialogs: Alert, Confirmation, and Prompt.
+Each of these dialog types has different parameters and return types, detailed below.
+
+#### The `Component` type
+
+The `Component` type, used as the `content` property for dialogs, is [defined in source code](https://github.com/MetaMask/snaps-monorepo/blob/main/packages/snaps-ui/src/nodes.ts#L171) as:
+
+```typescript
+type Component = Infer<typeof ComponentStruct>;
+```
+
+By itself this is opaque. A simple way to understand it is as the return type of the UI functions exported from the `@metamask/snaps-ui` package, i.e. `heading`, `panel`, `text`, and other UI functions.
+
+#### Alert Dialog
+
+Displays an alert that can only be acknowledged.
+
+##### Parameters
+
+```typescript
+interface SnapAlertDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Alert';
+
+  /**
+   * The content of the alert, as a Custom UI component
+   */
+  content: Component;
+}
+```
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    content: panel([
+      heading('Something happened in the system'),
+      text('The thing that happened is...'),
+    ]),
+  },
+});
+
+// Code that should execute after the alert has been acknowledged
+```
+
+#### Confirmation Dialog
+
+Displays a confirmation dialog that can be accepted or rejected.
+
+##### Parameters
+
+```typescript
+interface SnapConfirmationDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Confirmation';
+
+  /**
+   * The content of the confirmation, as a Custom UI component
+   */
+  content: Component;
+}
+```
+
+##### Returns
+
+`boolean` - `true` if the confirmation was accepted, `false` otherwise.
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+const result = await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Confirmation',
+    content: panel([
+      heading('Would you like to take the action?'),
+      text('The action is...'),
+    ]),
+  },
+});
+
+if (result === true) {
+  // Do the action
+}
+```
+
+#### Prompt Dialog
+
+Displays a prompt where the user can enter a text response.
+
+##### Parameters
+
+```typescript
+interface SnapPromptDialogParam {
+  /**
+   * The type of the dialog.
+   */
+  type: 'Prompt';
+
+  /**
+   * The content of the prompt, as a Custom UI component.
+   */
+  content: Component;
+
+  /**
+   * Text that will be in the input field when nothing is typed.
+   */
+  placeholder: string;
+}
+```
+
+##### Returns
+
+`string` - The text entered by the user.
+
+##### Example
+
+```typescript
+import { panel, text, heading } from '@metamask/snaps-ui';
+
+const walletAddress = await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Prompt',
+    content: panel([
+      heading('What is the wallet address?'),
+      text('Please enter the wallet address to be monitored'),
+    ]),
+    placeholder: '0x123...',
+  },
+});
+
+// `walletAddress` will be a string containing the address entered by the user
+```
+
 ### `snap_getBip32Entropy`
 
 ::: danger Powerful Method
