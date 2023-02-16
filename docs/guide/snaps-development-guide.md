@@ -50,7 +50,7 @@ template-snap-monorepo/
 ```
 
 Source files other than `index.js` are located through its imports.
-The defaults can be overwritten using the `snap.config.json` [config file](#the-snap-configuration-file).
+The defaults can be overwritten using the `snap.config.js` [config file](#the-snap-configuration-file).
 
 ::: tip Creating a Snap Project
 When you create a new snap project using `mm-snap init`, you'll notice that it will have all of these files.
