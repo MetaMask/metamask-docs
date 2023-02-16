@@ -65,11 +65,11 @@ Bring your insights, anti-phishing, and security solutions to the MetaMask UI wi
 
 Perform actions that run periodically at fixed times, dates, or intervals.
 
-<img src="../assets/soon.png" alt="Coming soon" style="width: 106px; position: relative; top: 20px;" />
+<img src="../assets/flask.png" alt="Live in MetaMask Flask" style="width: 171px; position: relative;top: 20px;" />
 
 #### Custom UI in MetaMask using a defined set of components
 
-Display custom UI within MetaMask using a set of pre-defined components, including Markdown, form controls, and images. This custom UI can include actionable controls for dynamic interfaces that respond to user input.
+Display [Custom UI](./snaps-concepts.html#custom-ui) within MetaMask using a set of pre-defined components, including inline Markdown.
 
 ### Propose a feature
 
@@ -88,7 +88,7 @@ Let's extend the functionality of MetaMask and build the wallet experience of th
   To interact with (your) snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
 
   ::: warning
-  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break dapp interactions.
+  Make sure to install Flask in a new browser profile or disable any existing installed versions of MetaMask. Running multiple instances of MetaMask in the same browser profile will break Dapp interactions.
   :::
 
 ### Quick start using our template
@@ -134,7 +134,7 @@ import { getMessage } from './message';
 export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
   switch (request.method) {
     case 'hello':
-      return wallet.request({
+      return snap.request({
         method: 'snap_confirm',
         params: [
           {
