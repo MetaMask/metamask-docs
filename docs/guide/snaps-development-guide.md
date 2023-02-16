@@ -90,21 +90,17 @@ If a dapp wanted to use `hello-snap`, it would do something like this:
 
 ```javascript
 await ethereum.request({
-  method: 'wallet_enable',
-  params: [
-    {
-      wallet_snap: {
-        'npm:hello-snap': {
-          version: '^1.0.0',
-        },
-      },
+  method: 'wallet_requestSnaps',
+  params: {
+    'npm:hello-snap': {
+      version: '^1.0.0',
     },
-  ],
+  },
 });
 
 const hello = await ethereum.request({
   method: 'wallet_invokeSnap',
-  params: ['npm:hello-snap', { method: 'hello' }],
+  params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
 });
 
 console.log(hello); // 'world!'
@@ -398,7 +394,7 @@ After publishing the Snap, any dapp can connect to the Snap by using the snapId 
 ### Distributing Your Snap
 
 Since snaps are currently intended for a developer audience, MetaMask does not currently facilitate distributing snaps to a wide audience.
-If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_enable`](./snaps-rpc-api.html#wallet-enable) RPC method.
+If you have a website that expects the user to install a snap, ask the user to install MetaMask Flask, and then ask the user to install the snap using the [`wallet_requestSnaps`](./snaps-rpc-api.html#wallet-requestsnaps) RPC method.
 
 In the future, MetaMask will create some way for users to more easily discover snaps, but everyone will always be able to build, publish, and use snaps without MetaMask's permission.
 (Although we may try to make it difficult to use known scams.)
