@@ -1,10 +1,9 @@
 import fs from "fs";
-import { OpenrpcDocument, MethodObject, ContentDescriptorObject, JSONSchemaObject, MethodOrReference, ExampleObject, ExamplePairingObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument, MethodObject, JSONSchemaObject, MethodOrReference, ExampleObject, ExamplePairingObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
 import {  parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
 console.log("Generating MDX from OpenRPC document...");
 
 const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.json";
-
 
 const convertJsonSchemaToMarkdown = (schema: JSONSchemaObject, indentationLevel: number): string => {
   let markdown = "";
@@ -12,7 +11,7 @@ const convertJsonSchemaToMarkdown = (schema: JSONSchemaObject, indentationLevel:
     indentationLevel = 4;
   }
 
-  const SPACE = "&nbsp;";
+  const SPACE = " ";
   const indentation = SPACE.repeat(indentationLevel);
 
 
@@ -27,77 +26,123 @@ const convertJsonSchemaToMarkdown = (schema: JSONSchemaObject, indentationLevel:
 
 
   if (schema.allOf) {
-    markdown += `${indentation} allOf:<br />`;
+    markdown += `${indentation} allOf:\n`;
     schema.allOf.forEach((allOfSchema) => {
       markdown += convertJsonSchemaToMarkdown(allOfSchema, indentationLevel + 4);
     });
   } else if (schema.anyOf) {
-    markdown += `${indentation} anyOf:<br />`;
+    markdown += `${indentation} anyOf:\n`;
     schema.anyOf.forEach((anyOfSchema) => {
       markdown += convertJsonSchemaToMarkdown(anyOfSchema, indentationLevel + 4);
     });
   } else if (schema.oneOf) {
-    markdown += `${indentation} oneOf:<br />`;
+    markdown += `${indentation} oneOf:\n`;
     schema.oneOf.forEach((oneOfSchema) => {
       markdown += convertJsonSchemaToMarkdown(oneOfSchema, indentationLevel + 4);
     });
   } else if (schema.type === "object") {
-    markdown += `${indentation}  object<br />`;
+    markdown += `${indentation}  object\n`;
     writeDescription();
   } else if (schema.type === "array") {
-    markdown += `${indentation} array<br />`;
+    markdown += `${indentation} array\n`;
     writeDescription();
     if (schema.items) {
-      markdown += `${indentation}  items:<br />`;
+      markdown += `${indentation}  items:\n`;
       markdown += convertJsonSchemaToMarkdown(schema.items, indentationLevel + 8);
     }
   } else if (schema.type === "string") {
-    markdown += `${indentation} string<br />`;
+    markdown += `${indentation} string\n`;
     writeDescription();
   } else if (schema.type === "number") {
-    markdown += `${indentation} number<br />`;
+    markdown += `${indentation} number\n`;
     if (schema.minimum) {
-      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}<br />`;
+      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}\n`;
     }
     if (schema.maximum) {
-      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}<br />`;
+      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}\n`;
     }
     if (schema.enum) {
-      markdown += `${indentation}${SPACE.repeat(4)}enum: ${schema.enum.join(" ")}<br />`;
+      markdown += `${indentation}${SPACE.repeat(4)}enum: ${schema.enum.join(" ")}\n`;
     }
     writeDescription();
   } else if (schema.type === "integer") {
-    markdown += `${indentation} integer<br />`;
+    markdown += `${indentation} integer\n`;
+
+    if (schema.format) {  
+      markdown += `${indentation}${SPACE.repeat(4)}format: ${schema.format}\n`;
+    }
+
     if (schema.minimum) {
-      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}<br />`;
+      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}\n`;
     }
     if (schema.maximum) {
-      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}<br />`;
+      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}\n`;
     }
     writeDescription();
   } else if (schema.type === "boolean") {
-    markdown += `${indentation} boolean<br />`;
+    markdown += `${indentation} boolean\n`;
     writeDescription();
   }
 
 
   if (schema.type === "object" && schema.properties) {
-    markdown += `${indentation}${SPACE.repeat(4)}properties:<br />`;
+    markdown += `${indentation}${SPACE.repeat(4)}properties:\n`;
     for (const [propertyName, propertySchema] of Object.entries(schema.properties)) {
-      markdown += `${indentation}${SPACE.repeat(8)}${propertyName}:<br />`;
+      markdown += `${indentation}${SPACE.repeat(8)}${propertyName}:\n`;
       markdown += convertJsonSchemaToMarkdown(propertySchema, indentationLevel + 12);
     }
   }
   return markdown;
 };
 
+
+const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, index: number): string => {
+  const param = contentDescriptor;
+  let markdown = "";
+  markdown += `${index + 1}. _${param.name}_${param.required ? " **(required)**" : ""}: `;
+  if (param.schema) {
+    let typeString = param.schema.type;
+    if (param.schema.type === "array") {
+      if (param.schema.items.type === "object" || param.schema.items.type === "array") {
+        typeString = `${param.schema.items.title}[]`;
+      } else {
+        typeString = `${param.schema.items.type}[]`;
+      }
+    }
+    if (param.schema.type === "object") {
+      if (param.schema.title) {
+        typeString = `${param.schema.title}`;
+      } else {
+        typeString = param.schema.type;
+      }
+    }
+
+    markdown += "`" + typeString + "`";
+  }
+  if (param.summary) {
+    markdown += `${param.summary}`;
+  }
+
+  markdown += "\n";
+
+  if (param.description) {
+    markdown += `\n- ${param.description}\n`;
+  }
+  return markdown;
+};
+
+
 const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
-  const openrpcDocument = await parseOpenRPCDocument(doc as any);
+  const openrpcDocument = await parseOpenRPCDocument(doc as any); //dereffed. maybe we dont want to
   let markdown = "";
 
   openrpcDocument.methods.forEach((m: MethodOrReference)  => {
     const method = m as MethodObject;
     markdown += `## ${method.name}\n\n`;
+
+    markdown += "\n---\n";
+
+
     if (method.description) {
       markdown += `${method.description}\n\n`;
     }
@@ -106,20 +151,15 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
       markdown += `${method.summary}\n\n`;
     }
 
-    if (method.params.length > 0) {
-      markdown += "### Params\n\n";
-      markdown += "| Name | Summary | Description | Type | \n";
-      markdown += "| --- | --- | --- | --- |\n";
+    markdown += `### Params (${method.params.length}) \n\n`;
 
-      method.params.forEach((param: ContentDescriptorObject) => {
-        const typeString = convertJsonSchemaToMarkdown(param.schema, 2);
-        markdown += `| \`${param.name}\` | ${param.summary || " "} | ${param.description || " "} | ${typeString || " "}\n`;
-      });
+    if (method.params.length > 0) {
+      markdown += method.params.map(renderContentDescriptor).join("\n");
     }
 
     if (method.result) {
       markdown += "### Result\n\n";
-      markdown += convertJsonSchemaToMarkdown((method.result as ContentDescriptorObject).schema, 4);
+      markdown += method.params.map(renderContentDescriptor).join("\n");
     }
 
     if (method.examples && method.examples.length > 0) {
@@ -143,7 +183,6 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
         } else {
           paramsString = JSON.stringify(example.params.map((param: any) => param.value), null, 4);
         }
-        console.log("paramSString", paramsString);
         markdown += JSON.stringify(JSON.parse(`{ "jsonrpc": "2.0", "id": 0, "method": "${method.name}", "params":  ${paramsString} }`), null, 4);
         
         markdown += "\n```\n";
