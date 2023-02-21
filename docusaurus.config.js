@@ -33,9 +33,9 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "api-sdk",
-          routeBasePath: "api-sdk",
-          sidebarPath: require.resolve("./api-sdk-sidebar.js"),
+          path: "wallet",
+          routeBasePath: "wallet",
+          sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
           remarkPlugins: [
             [remarkCodesandbox, {
@@ -77,7 +77,7 @@ const config = {
           {
             type: "doc",
             docId: "index",
-            label: "API & SDK",
+            label: "Wallet",
           },
           {
             type: "doc",

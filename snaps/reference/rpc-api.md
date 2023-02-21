@@ -54,9 +54,9 @@ granted permissions.
 
 This is a convenience method for requesting the user's accounts and connecting to and installing snaps.
 You can think of it as a combination of
-[`eth_requestAccounts`](../../api-sdk/reference/rpc-api#eth_requestaccounts),
+[`eth_requestAccounts`](../../wallet/reference/rpc-api#eth_requestaccounts),
 [`wallet_installSnaps`](#wallet_installsnaps), and
-[`wallet_requestPermissions`](../../api-sdk/reference/rpc-api#wallet_requestpermissions).
+[`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions).
 
 #### Example
 

@@ -2,12 +2,13 @@
 title: Introduction
 ---
 
-# Integrate with MetaMask using the API and SDK
+# Integrate with the MetaMask wallet
 
-Integrate your dapp with MetaMask using the [MetaMask Ethereum provider API](reference/provider-api.md),
-which enables your dapp to interact with its users' Ethereum accounts.
+Integrate your dapp with the MetaMask wallet using the
+[MetaMask Ethereum provider API](reference/provider-api.md), which enables your dapp to interact
+with its users' Ethereum accounts.
 We recommend using [MetaMask SDK](how-to/use-sdk) to easily enable your users to connect to their
-MetaMask wallet from any platform.
+MetaMask wallet client from any platform.
 
 Get started by [setting up your development environment](get-started/set-up-dev-environment.md).
 

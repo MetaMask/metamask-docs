@@ -2,7 +2,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
-  apiSidebar: [
+  walletSidebar: [
     "index",
     {
       type: "category",
