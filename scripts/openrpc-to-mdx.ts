@@ -6,37 +6,45 @@ console.log("Generating MDX from OpenRPC document...");
 const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.json";
 
 
-const renderSchema = (schema: JSONSchemaObject, indendationLevel = 1): string => {
+const renderSchema = (schema: JSONSchemaObject, indendationLevel = 1, addDashType = false): string => {
   let markdown = "";
   const indendation = "\t".repeat(indendationLevel);
   
-  let typeString = schema.type || "";
+  const typeString = schema.type || null;
   let compositionString = "";
   if (schema.oneOf) {
-    compositionString += `\n\n${indendation}One Of  ` + schema.oneOf.map((oneOf: any) => "`" + (oneOf.title || oneOf.type) + "`").join(" OR ");
+    compositionString += `\n\n${indendation}- One Of\n  ` + schema.oneOf.map((oneOf: any) => renderSchema(oneOf, indendationLevel + 1, true)).join(`\n${indendation}- **OR**\n\n`);
   } else if (schema.anyOf) {
-    compositionString += `\n\n${indendation}Any Of  ` + schema.anyOf.map((anyOf: any) =>  "`" + (anyOf.title || anyOf.type)+ "`").join(" OR ");
+    compositionString += `\n\n${indendation}- Any Of\n` + schema.anyOf.map((anyOf: any) =>  renderSchema(anyOf, indendationLevel + 1, true)).join(`\n${indendation}- **OR**\n\n`);
   } else if (schema.allOf) {
-    compositionString += `\n\n${indendation}All Of  ` + schema.allOf.map((allOf: any) =>  "`" + (allOf.title + allOf.type) + "`").join(" AND ");
+    console.log(schema.allOf);
+    compositionString += `\n\n${indendation}- All Of\n` + schema.allOf.map((allOf: any) =>  renderSchema(allOf, indendationLevel + 1, true)).join(`\n${indendation}- **AND**\n\n`);
   } else if (schema.type === "array") {
     if (schema.items.type === "object" || schema.items.type === "array") {
-      typeString = `${schema.items.title}[]`;
-    } else {
-      typeString = `${schema.items.type}[]`;
+      // recurse
+      compositionString += `Array of ${renderSchema(schema.items as JSONSchemaObject, indendationLevel)}`;
     }
-  } else if (schema.type === "object") {
-    if (schema.title) {
-      typeString = schema.type;
-    } else {
-      typeString = schema.type;
-    }
-  }
+  } 
 
   if (compositionString) {
     markdown += compositionString;
-  } else {
-    markdown += "`" + typeString + "`";
+  } else if (typeString) {
+    if (addDashType && schema.type !== "object" && schema.type !== "array") {
+      markdown += indendation + "- `" + typeString + "`\n";
+    } else {
+      markdown += "`" + typeString + "`";
+    }
   }
+  
+  if (schema.type === "object" || schema.properties) {
+    if (schema.properties) {
+      markdown += Object.keys(schema.properties).map((key) => {
+        const property = schema.properties[key];
+        return `\n${indendation}- _${key}_: ${renderSchema(property as JSONSchemaObject,  indendationLevel + 1)}`;
+      }).join("");
+    }
+  }
+
 
   return markdown;
 };
