@@ -65,7 +65,6 @@ const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, ind
   return markdown;
 };
 
-
 const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
   const openrpcDocument = await parseOpenRPCDocument(doc as any); //dereffed. maybe we dont want to
   let markdown = "";
@@ -134,7 +133,8 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
 };
 
 const main = async () => {
-  const openrpcDocument = await fetch(OpenRPCDocumentUrl).then((res) => res.json());
+  const res = await fetch(OpenRPCDocumentUrl);
+  const openrpcDocument = await res.json();
   const mdx = await openRPCToMarkdown(openrpcDocument);
   fs.writeFileSync("api.md", mdx);
 };
