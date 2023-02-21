@@ -30,3 +30,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+
+# Generated Files
+api.md

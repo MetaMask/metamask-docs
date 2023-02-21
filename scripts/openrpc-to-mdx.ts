@@ -1,123 +1,57 @@
 import fs from "fs";
-import { OpenrpcDocument, MethodObject, JSONSchemaObject, MethodOrReference, ExampleObject, ExamplePairingObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument, MethodObject, MethodOrReference, ExampleObject, ExamplePairingObject, ContentDescriptorObject, JSONSchemaObject } from "@open-rpc/meta-schema";
 import {  parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
 console.log("Generating MDX from OpenRPC document...");
 
 const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.json";
 
-const convertJsonSchemaToMarkdown = (schema: JSONSchemaObject, indentationLevel: number): string => {
+
+const renderSchema = (schema: JSONSchemaObject, indendationLevel = 1): string => {
   let markdown = "";
-  if (indentationLevel === 0) {
-    indentationLevel = 4;
-  }
-
-  const SPACE = " ";
-  const indentation = SPACE.repeat(indentationLevel);
-
-
-  const writeDescription = () => {
-    if (schema.title) {
-      markdown += `${indentation}${SPACE.repeat(4)}title: ${schema.title}<br />`;
-    }
-    if (schema.description) {
-      markdown += `${indentation}${SPACE.repeat(4)}description: ${schema.description}<br />`;
-    }
-  };
-
-
-  if (schema.allOf) {
-    markdown += `${indentation} allOf:\n`;
-    schema.allOf.forEach((allOfSchema) => {
-      markdown += convertJsonSchemaToMarkdown(allOfSchema, indentationLevel + 4);
-    });
+  const indendation = "\t".repeat(indendationLevel);
+  
+  let typeString = schema.type || "";
+  let compositionString = "";
+  if (schema.oneOf) {
+    compositionString += `\n\n${indendation}One Of  ` + schema.oneOf.map((oneOf: any) => "`" + (oneOf.title || oneOf.type) + "`").join(" OR ");
   } else if (schema.anyOf) {
-    markdown += `${indentation} anyOf:\n`;
-    schema.anyOf.forEach((anyOfSchema) => {
-      markdown += convertJsonSchemaToMarkdown(anyOfSchema, indentationLevel + 4);
-    });
-  } else if (schema.oneOf) {
-    markdown += `${indentation} oneOf:\n`;
-    schema.oneOf.forEach((oneOfSchema) => {
-      markdown += convertJsonSchemaToMarkdown(oneOfSchema, indentationLevel + 4);
-    });
-  } else if (schema.type === "object") {
-    markdown += `${indentation}  object\n`;
-    writeDescription();
+    compositionString += `\n\n${indendation}Any Of  ` + schema.anyOf.map((anyOf: any) =>  "`" + (anyOf.title || anyOf.type)+ "`").join(" OR ");
+  } else if (schema.allOf) {
+    compositionString += `\n\n${indendation}All Of  ` + schema.allOf.map((allOf: any) =>  "`" + (allOf.title + allOf.type) + "`").join(" AND ");
   } else if (schema.type === "array") {
-    markdown += `${indentation} array\n`;
-    writeDescription();
-    if (schema.items) {
-      markdown += `${indentation}  items:\n`;
-      markdown += convertJsonSchemaToMarkdown(schema.items, indentationLevel + 8);
+    if (schema.items.type === "object" || schema.items.type === "array") {
+      typeString = `${schema.items.title}[]`;
+    } else {
+      typeString = `${schema.items.type}[]`;
     }
-  } else if (schema.type === "string") {
-    markdown += `${indentation} string\n`;
-    writeDescription();
-  } else if (schema.type === "number") {
-    markdown += `${indentation} number\n`;
-    if (schema.minimum) {
-      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}\n`;
-    }
-    if (schema.maximum) {
-      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}\n`;
-    }
-    if (schema.enum) {
-      markdown += `${indentation}${SPACE.repeat(4)}enum: ${schema.enum.join(" ")}\n`;
-    }
-    writeDescription();
-  } else if (schema.type === "integer") {
-    markdown += `${indentation} integer\n`;
-
-    if (schema.format) {  
-      markdown += `${indentation}${SPACE.repeat(4)}format: ${schema.format}\n`;
-    }
-
-    if (schema.minimum) {
-      markdown += `${indentation}${SPACE.repeat(4)}minimum: ${schema.minimum}\n`;
-    }
-    if (schema.maximum) {
-      markdown += `${indentation}${SPACE.repeat(4)}maximum: ${schema.maximum}\n`;
-    }
-    writeDescription();
-  } else if (schema.type === "boolean") {
-    markdown += `${indentation} boolean\n`;
-    writeDescription();
-  }
-
-
-  if (schema.type === "object" && schema.properties) {
-    markdown += `${indentation}${SPACE.repeat(4)}properties:\n`;
-    for (const [propertyName, propertySchema] of Object.entries(schema.properties)) {
-      markdown += `${indentation}${SPACE.repeat(8)}${propertyName}:\n`;
-      markdown += convertJsonSchemaToMarkdown(propertySchema, indentationLevel + 12);
+  } else if (schema.type === "object") {
+    if (schema.title) {
+      typeString = schema.type;
+    } else {
+      typeString = schema.type;
     }
   }
+
+  if (compositionString) {
+    markdown += compositionString;
+  } else {
+    markdown += "`" + typeString + "`";
+  }
+
   return markdown;
 };
 
-
-const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, index: number): string => {
+const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, index?: number, indendationLevel = 1): string => {
   const param = contentDescriptor;
   let markdown = "";
-  markdown += `${index + 1}. _${param.name}_${param.required ? " **(required)**" : ""}: `;
-  if (param.schema) {
-    let typeString = param.schema.type;
-    if (param.schema.type === "array") {
-      if (param.schema.items.type === "object" || param.schema.items.type === "array") {
-        typeString = `${param.schema.items.title}[]`;
-      } else {
-        typeString = `${param.schema.items.type}[]`;
-      }
-    }
-    if (param.schema.type === "object") {
-      if (param.schema.title) {
-        typeString = `${param.schema.title}`;
-      } else {
-        typeString = param.schema.type;
-      }
-    }
+  const indendation = "\t".repeat(indendationLevel);
+  if (index !== undefined) {
+    markdown += `${index + 1}. `;
+  }
+  markdown += `_${param.name}_${param.required ? " **(required)**" : ""}: `;
 
-    markdown += "`" + typeString + "`";
+  if (param.schema) {
+    markdown += renderSchema(param.schema as JSONSchemaObject, indendationLevel);
   }
   if (param.summary) {
     markdown += `${param.summary}`;
@@ -126,7 +60,7 @@ const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, ind
   markdown += "\n";
 
   if (param.description) {
-    markdown += `\n- ${param.description}\n`;
+    markdown += `\n${index === undefined ? "" : indendation} ${param.description}\n`;
   }
   return markdown;
 };
@@ -154,12 +88,12 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
     markdown += `### Params (${method.params.length}) \n\n`;
 
     if (method.params.length > 0) {
-      markdown += method.params.map(renderContentDescriptor).join("\n");
+      markdown += method.params.map((p, index) => renderContentDescriptor(p as ContentDescriptorObject, index)).join("\n");
     }
 
     if (method.result) {
       markdown += "### Result\n\n";
-      markdown += method.params.map(renderContentDescriptor).join("\n");
+      markdown += renderContentDescriptor(method.result as ContentDescriptorObject, undefined, 0);
     }
 
     if (method.examples && method.examples.length > 0) {
