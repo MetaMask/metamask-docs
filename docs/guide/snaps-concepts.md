@@ -267,3 +267,7 @@ import { text } from '@metamask/snaps-ui';
 
 const content = text('This is a simple text UI');
 ```
+
+### Markdown
+
+Text-based components accept a very small subset of Markdown, that is, `**bold**` and `_italic_`. There are plans to increase this subset in the future.
