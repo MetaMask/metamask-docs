@@ -12,16 +12,20 @@ MetaMask wallet client from any platform.
 
 Get started by [setting up your development environment](get-started/set-up-dev-environment.md).
 
+:::note
+This documentation assumes intermediate knowledge of JavaScript, HTML, and CSS.
+:::
+
 ## What is the MetaMask Ethereum provider API?
 
-The [MetaMask Ethereum provider API](reference/provider-api.md) is an API that MetaMask injects into
-websites visited by MetaMask users.
+The [MetaMask Ethereum provider API](reference/provider-api.md) is a JavaScript API that MetaMask
+injects into websites visited by MetaMask users.
 Your dapp can use this API to request users' Ethereum accounts, read data from blockchains the user
 is connected to, and suggest that the user sign messages and transactions.
 
 ## What is MetaMask SDK?
 
-MetaMask SDK is a library that provides a reliable, secure, and seamless
+[MetaMask SDK](how-to/use-sdk/index.md) is a library that provides a reliable, secure, and seamless
 [connection](concepts/sdk-connections.md) from your dapp to the MetaMask browser extension and
 MetaMask Mobile.
 You can install the SDK into your dapp to enable your users to easily connect to a MetaMask wallet
@@ -33,7 +37,5 @@ If MetaMask isn't installed, the SDK prompts the user to install it or connect t
 Mobile wallet using a QR code.
 For dapps running on a mobile browser, MetaMask SDK automatically deeplinks to the user's MetaMask
 Mobile wallet to make the connection.
-
-[Get started using the SDK](how-to/use-sdk/index.md).
 
 If you have questions about the SDK, you can join the [MetaMask SDK Discord](https://discord.gg/N3jSkZbYm6).

@@ -73,10 +73,10 @@ scan with their MetaMask Mobile app.
 
 ## Prerequisites
 
-- An existing or [new project](../../get-started/set-up-dev-environment.md) set up
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) v5.8.1 or above
+- An existing or [new project](../../get-started/set-up-dev-environment.md) set up.
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) v5.8.1 or above.
 - [Yarn](https://yarnpkg.com/getting-started/install) or
-  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 ## Steps
 
