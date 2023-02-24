@@ -1,0 +1,36 @@
+name: Publish docs to GitHub Pages
+
+on:
+  workflow_call:
+    inputs:
+      destination_dir:
+        required: true
+        type: string
+
+jobs:
+  publish-docs-to-gh-pages:
+    name: Publish docs to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Ensure `destination_dir` is not empty
+        if: ${{ inputs.destination_dir == '' }}
+        run: exit 1
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - name: Install npm dependencies
+        run: yarn --immutable
+      - name: Run build script
+        run: yarn build
+      - name: Deploy to `${{ inputs.destination_dir }}` directory of `gh-pages` branch
+        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          destination_dir: ${{ inputs.destination_dir }}
