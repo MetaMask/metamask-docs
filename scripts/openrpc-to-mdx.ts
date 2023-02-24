@@ -13,11 +13,11 @@ const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashTyp
   const typeString = schema.type || null;
   let compositionString = "";
   if (schema.oneOf) {
-    compositionString += `\n${indentation}- One Of  ` + schema.oneOf.map((oneOf: any) => renderSchema(oneOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
+    compositionString += `\n${indentation}- One Of  ` + schema.oneOf.map((oneOf: JSONSchemaObject) => renderSchema(oneOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
   } else if (schema.anyOf) {
-    compositionString += `\n${indentation}- Any Of` + schema.anyOf.map((anyOf: any) =>  renderSchema(anyOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
+    compositionString += `\n${indentation}- Any Of` + schema.anyOf.map((anyOf: JSONSchemaObject) =>  renderSchema(anyOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
   } else if (schema.allOf) {
-    compositionString += `\n${indentation}- All Of` + schema.allOf.map((allOf: any) =>  renderSchema(allOf, indentationLevel + 1, true)).join(`\n${indentation}- **AND**`);
+    compositionString += `\n${indentation}- All Of` + schema.allOf.map((allOf: JSONSchemaObject) =>  renderSchema(allOf, indentationLevel + 1, true)).join(`\n${indentation}- **AND**`);
   } else if (schema.type === "array") {
     // recurse
     if (schema.title) {
