@@ -1,6 +1,6 @@
 import fs from "fs";
 import { OpenrpcDocument, MethodObject, MethodOrReference, ExampleObject, ExamplePairingObject, ContentDescriptorObject, JSONSchemaObject } from "@open-rpc/meta-schema";
-import {  parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
+import { parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
 console.log("Generating MDX from OpenRPC document...");
 
 const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.json";
@@ -9,15 +9,15 @@ const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.
 const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashType = false): string => {
   let markdown = "";
   const indentation = "\t".repeat(indentationLevel);
-  
+
   const typeString = schema.type || null;
   let compositionString = "";
   if (schema.oneOf) {
     compositionString += `\n${indentation}- One Of  ` + schema.oneOf.map((oneOf: JSONSchemaObject) => renderSchema(oneOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
   } else if (schema.anyOf) {
-    compositionString += `\n${indentation}- Any Of` + schema.anyOf.map((anyOf: JSONSchemaObject) =>  renderSchema(anyOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
+    compositionString += `\n${indentation}- Any Of` + schema.anyOf.map((anyOf: JSONSchemaObject) => renderSchema(anyOf, indentationLevel + 1, true)).join(`\n${indentation}- **OR**`);
   } else if (schema.allOf) {
-    compositionString += `\n${indentation}- All Of` + schema.allOf.map((allOf: JSONSchemaObject) =>  renderSchema(allOf, indentationLevel + 1, true)).join(`\n${indentation}- **AND**`);
+    compositionString += `\n${indentation}- All Of` + schema.allOf.map((allOf: JSONSchemaObject) => renderSchema(allOf, indentationLevel + 1, true)).join(`\n${indentation}- **AND**`);
   } else if (schema.type === "array") {
     // recurse
     if (schema.title) {
@@ -47,12 +47,12 @@ const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashTyp
   } else if (!addDashType) {
     // markdown += "\n";
   }
-  
+
   if (schema.type === "object" || schema.properties) {
     if (schema.properties) {
       markdown += Object.keys(schema.properties).map((key) => {
         const property = schema.properties[key];
-        return `\n${indentation}- _${key}_: ${renderSchema(property as JSONSchemaObject,  indentationLevel + 1)}`;
+        return `\n${indentation}- _${key}_: ${renderSchema(property as JSONSchemaObject, indentationLevel + 1)}`;
       }).join("");
     }
   }
@@ -88,7 +88,7 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
   const openrpcDocument = await parseOpenRPCDocument(doc as any); //dereffed. maybe we dont want to
   let markdown = "";
 
-  openrpcDocument.methods.forEach((m: MethodOrReference)  => {
+  openrpcDocument.methods.forEach((m: MethodOrReference) => {
     const method = m as MethodObject;
     markdown += `## ${method.name}\n\n`;
 
@@ -136,7 +136,7 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
           paramsString = JSON.stringify(example.params.map((param: any) => param.value), null, 4);
         }
         markdown += JSON.stringify(JSON.parse(`{ "jsonrpc": "2.0", "id": 0, "method": "${method.name}", "params":  ${paramsString} }`), null, 4);
-        
+
         markdown += "\n```\n";
 
         markdown += "#### Result\n\n";
@@ -155,7 +155,7 @@ const main = async () => {
   const res = await fetch(OpenRPCDocumentUrl);
   const openrpcDocument = await res.json();
   const mdx = await openRPCToMarkdown(openrpcDocument);
-  fs.writeFileSync("api-sdk/reference/api.md", mdx);
+  fs.writeFileSync("wallet/reference/api.md", mdx);
 };
 
 main();
