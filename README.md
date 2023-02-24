@@ -17,18 +17,7 @@ All the documentation is in the form of Markdown files located in the `docs` dir
 1. Create the `.md` file in an appropriate location in the `docs` directory, and add your content
 2. Edit the `sidebars.js` file to add the document to its appropriate place in the sidebar.
 
-## Migrating documentation from the `MetaMask/metamask-docs` repo
-For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be copied directly. However, a few things are to be noted:
-
-* The new documents won't appear in the sidebar automatically. An entry has to be added in the `sidebars.js` file to make that happen
-* Any custom Vue component will need to be migrated to React
-* You'll need to migrate the admonitions
-  * `::: admonition` becomes `:::admonition` (without the space)
-  * Available admonitions are: `note`, `tip`, `info`, `caution`, `danger`. Any others will have to be adjusted to the available ones
-  * The `:::: tabs` and `::: tab` admonitions will have to be migrated to [MDX Tabs](https://docusaurus.io/docs/markdown-features/tabs)
-* Embedded code will have to be migrated to [Live Code Blocks](#live-code-blocks).
-
-### Setup
+## Setup
 
 - Install [Node.js](https://nodejs.org) version 16
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
@@ -39,6 +28,16 @@ For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be co
 
 `yarn start`
 
+## Migrating documentation from the `MetaMask/metamask-docs` repo
+For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be copied directly. However, a few things are to be noted:
+
+* The new documents won't appear in the sidebar automatically. An entry has to be added in the `sidebars.js` file to make that happen
+* Any custom Vue component will need to be migrated to React
+* You'll need to migrate the admonitions
+  * `::: admonition` becomes `:::admonition` (without the space)
+  * Available admonitions are: `note`, `tip`, `info`, `caution`, `danger`. Any others will have to be adjusted to the available ones
+  * The `:::: tabs` and `::: tab` admonitions will have to be migrated to [MDX Tabs](https://docusaurus.io/docs/markdown-features/tabs)
+* Embedded code will have to be migrated to [Live Code Blocks](#live-code-blocks).
 
 ## MDX
 
@@ -87,3 +86,4 @@ color: var(--color-text-default);
 ```
 
 You can refer to all design tokens in the [design-tokens](https://github.com/MetaMask/design-tokens/blob/main/src/css/design-tokens.css) repository.
+
