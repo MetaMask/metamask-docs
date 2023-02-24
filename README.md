@@ -28,9 +28,16 @@ For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be co
   * The `:::: tabs` and `::: tab` admonitions will have to be migrated to [MDX Tabs](https://docusaurus.io/docs/markdown-features/tabs)
 * Embedded code will have to be migrated to [Live Code Blocks](#live-code-blocks).
 
+### Setup
+
+- Install [Node.js](https://nodejs.org) version 16
+  - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+- Install [Yarn v3](https://yarnpkg.com/getting-started/install)
+- Run `yarn install` to install dependencies and run any required post-install scripts
+
 ## Running locally
 
-`yarn install && yarn start`
+`yarn start`
 
 
 ## MDX
