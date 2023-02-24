@@ -18,6 +18,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
-      - run: yarn install --prefer-offline
+      - run: yarn install --immutable
       - run: yarn lint
       - run: yarn build

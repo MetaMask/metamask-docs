@@ -30,6 +30,7 @@
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^2.2.0",
     "@docusaurus/module-type-aliases": "2.2.0",
+    "@lavamoat/allow-scripts": "^2.3.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
@@ -52,5 +53,12 @@
   },
   "engines": {
     "node": ">=16.14"
+  },
+  "packageManager": "yarn@3.4.1",
+  "lavamoat": {
+    "allowScripts": {
+      "@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
+      "@docusaurus/core>core-js": false
+    }
   }
 }
