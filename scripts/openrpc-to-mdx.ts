@@ -19,7 +19,6 @@ const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashTyp
   } else if (schema.allOf) {
     compositionString += `\n${indentation}- All Of` + schema.allOf.map((allOf: any) =>  renderSchema(allOf, indentationLevel + 1, true)).join(`\n${indentation}- **AND**`);
   } else if (schema.type === "array") {
-    // if (schema.items.type === "object" || schema.items.type === "array") {
     // recurse
     if (schema.title) {
       compositionString += `\n${indentation}-  Array of _${schema.title}_`;
@@ -27,9 +26,7 @@ const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashTyp
       compositionString += `\n${indentation}- Array of`;
     }
     compositionString += renderSchema(schema.items as JSONSchemaObject, indentationLevel + 1, true);
-    // } else {
-    // compositionString += `\n\n${indentation}- Array of ${schema.items.type}`;
-    // }
+
   } else if (schema.type === "string" && addDashType && schema.title) {
     compositionString = `\n${indentation}- ${schema.title}  \`string\``;
   }
