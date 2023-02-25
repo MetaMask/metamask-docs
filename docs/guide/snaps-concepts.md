@@ -10,7 +10,7 @@ The Snaps API contains functionality that allows you to manage users' private ke
 
 The general guideline for responsible key management is:
 
-> Don't create a situation where your user can lose money
+> Don't create a situation where your user can lose assets
 
 In practice, here are some examples that would break the above policy:
 
