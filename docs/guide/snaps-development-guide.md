@@ -297,7 +297,7 @@ if (provider && isFlask) {
 
 ### The Snap Execution Environment
 
-Snaps execute in a sandboxed environment that's running Secure EcmaScript (SES, see [below](#secure-ecmascript-ses)).
+Snaps execute in a sandboxed environment that's running Secure ECMAScript (SES, see [below](#secure-ecmascript-ses)).
 There is no DOM, no Node.js builtins, and no platform-specific APIs other than MetaMask's `snap` global object.
 Almost all standard JavaScript globals contained in [this list](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) that are also in Node.js are available as normal.
 This includes things like `Promise`, `Error`, `Math`, `Set`, `Reflect` etc.
@@ -324,9 +324,9 @@ The execution environment is instrumented in this way to:
 
 This allows us to safely execute snaps anywhere, without the snap needing to worry about where and how it is executed.
 
-#### Secure EcmaScript (SES)
+#### Secure ECMAScript (SES)
 
-Secure EcmaScript, or [SES](https://github.com/endojs/endo/tree/master/packages/ses), is effectively a subset of the JavaScript language designed to enable mutually suspicious programs to execute in the same JavaScript process (or more accurately, the same [realm](https://tc39.es/ecma262/#realm)).
+Secure ECMAScript, or [SES](https://github.com/endojs/endo/tree/master/packages/ses), is effectively a subset of the JavaScript language designed to enable mutually suspicious programs to execute in the same JavaScript process (or more accurately, the same [realm](https://tc39.es/ecma262/#realm)).
 You can think of it as a more severe form of [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode).
 
 ### Fixing Build / Eval Issues
