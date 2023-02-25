@@ -12,7 +12,7 @@ The general guideline for responsible key management is:
 
 > Don't create a situation where your user can lose assets
 
-In practice, here are some examples that would break the above policy:
+In practice, here are some examples that would break this:
 
 1. Allowing extraction of private keys outside the snap in any way, especially through RPC or network connections
 2. Arbitrary code execution with access to private keys.
