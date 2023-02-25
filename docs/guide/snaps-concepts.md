@@ -4,7 +4,7 @@
 
 ## Accounts and Key Management
 
-The Snaps API contains functionality that allows you to manage users' private keys, with their approval. This capability comes with great responsiblity on the part of the developer: misplaced or stolen private keys will lead to a complete loss of funds for the users of the snap. Our team has developed some guidelines to help you assess the feasibility and sanity of your snap.
+The Snaps API contains functionality that allows you to manage users' private keys, with their approval. This capability comes with great responsibility on part of the developer: Misplaced or stolen private keys may lead to a complete loss of funds for users of the snap. Below are some guidelines to help snap developers assess the feasibility and sanity of their snaps.
 
 ### Key Management Guidelines
 
