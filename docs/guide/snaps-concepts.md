@@ -16,7 +16,7 @@ In practice, here are some examples that would break this:
 
 1. Allowing extraction of private keys outside the snap in any way, especially through RPC or network connections
 2. Execution of arbitrary/untrusted code with access to private keys.
-3. Not informing the user properly or not getting informed consent before doing a destructive operation, for example a transaction.
+3. Not getting properly informed consent before doing a irreversible operation (for example submission of a signature or transaction).
 4. Asking for consent but ignoring the decision.
 5. A bug that leads to any of the above.
 
