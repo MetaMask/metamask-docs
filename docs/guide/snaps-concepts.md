@@ -18,7 +18,8 @@ In practice, here are some examples that would break this:
 2. Execution of arbitrary/untrusted code with access to private keys.
 3. Not getting properly informed consent before doing a irreversible operation (for example submission of a signature or transaction).
 4. Asking for consent but ignoring the decision.
-5. A bug that leads to any of the above.
+5. Exposing key material in clear-text.
+6. A bug that leads to any of the above.
 
 And here are some examples of abiding by the above policy:
 
