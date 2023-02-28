@@ -1,0 +1,69 @@
+name: Publish a preview build
+
+on:
+  issue_comment:
+    types: created
+
+jobs:
+  is-fork-pull-request:
+    name: Determine whether this issue comment was on a pull request from a fork
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '@metamaskbot publish-preview') }}
+    runs-on: ubuntu-latest
+    outputs:
+      IS_FORK: ${{ steps.is-fork.outputs.IS_FORK }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Determine whether this PR is from a fork
+        id: is-fork
+        run: echo "IS_FORK=$(gh pr view --json isCrossRepository --jq '.isCrossRepository' "${PR_NUMBER}" )" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+
+  get-commit-hash:
+    name: Get the commit hash for the commit being previewed
+    needs: is-fork-pull-request
+    # This ensures we don't publish on forks. We can't trust forks to publish on our domain.
+    if: ${{ needs.is-fork-pull-request.outputs.IS_FORK == 'false' }}
+    runs-on: ubuntu-latest
+    outputs:
+      COMMIT_SHA: ${{ steps.commit-sha.outputs.COMMIT_SHA }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout pull request
+        run: gh pr checkout "${PR_NUMBER}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+      - name: Get commit SHA
+        id: commit-sha
+        run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Ensure commit hash is not empty
+        if: ${{ steps.commit-sha.outputs.COMMIT_SHA == '' }}
+        run: exit 1
+
+  publish-to-gh-pages:
+    name: Publish docs to commit hash directory of `gh-pages` branch
+    needs: get-commit-hash
+    permissions:
+      contents: write
+    uses: ./.github/workflows/publish-docs.yml
+    with:
+      destination_dir: preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
+  
+  post-preview-comment:
+    name: Post preview in comment
+    needs:
+      - get-commit-hash
+      - publish-to-gh-pages
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Post preview in comment
+        run: gh pr comment "${PR_NUMBER}" --body "${COMMENT_BODY}"
+        env:
+          COMMENT_BODY: "Preview published: [preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}/)"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
