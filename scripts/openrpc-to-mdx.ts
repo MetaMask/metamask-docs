@@ -61,6 +61,94 @@ const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashTyp
   return markdown;
 };
 
+const getJavascriptExample = (method: MethodObject, example: ExamplePairingObject) => {
+  const paramString = JSON.stringify(
+    example.params.map((p: ExampleObject) => p.value),
+    undefined,
+    2
+  ).split("\n").map((l, i) => i === 0 ? l : `  ${l}`).join('\n');
+  const request = [
+    "```javascript",
+    "const result = await ethereum.request({",
+    `  method: ${method.name},`,
+    `  params: ${paramString}`,
+    "});",
+    "```",
+  ].join("\n");
+
+  const response = [
+    "```javascript",
+    "console.log(result);",
+    "/**",
+    " * Outputs:",
+    JSON
+      .stringify((example.result as ExampleObject).value, undefined, '  ')
+      .split("\n")
+      .map((l) => ` * ${l}`)
+      .join("\n"),
+    " */",
+    "```",
+  ].join('\n');
+
+  return { request, response };
+};
+
+const getJsonExample = (method: MethodObject, example: ExamplePairingObject) => {
+  const [request, response] = [
+    {
+      method: method.name,
+      params: example.params.map((p: ExampleObject) => p.value),
+    },
+    {
+      result: (example.result as ExampleObject).value,
+    }
+  ].map((r) => {
+    return [
+      "```json",
+      JSON.stringify({ jsonrpc: "2.0", id: 1, ...r }, undefined, 4),
+      "```"
+    ].join("\n");
+  });
+
+  return { request, response };
+};
+
+const getExamples = (method: MethodObject) => {
+  let markdown = "";
+
+  const e = method.examples[0];
+  const example = e as unknown as ExamplePairingObject;
+  const jsonExample = getJsonExample(method, example);
+  const javascriptExample = getJavascriptExample(method, example);
+
+  markdown += `\n### Example \n\n`;
+
+  markdown += `<Tabs>\n\n`;
+
+  markdown += `<TabItem value="json" label="JSON">\n\n`;
+  markdown += "#### Request\n\n";
+  markdown += jsonExample.request;
+  markdown += "\n";
+
+  markdown += "#### Response\n\n";
+  markdown += jsonExample.response;
+  markdown += "\n\n";
+  markdown += `</TabItem>\n`;
+
+  markdown += `<TabItem value="javascript" label="Javascript">\n\n`;
+  markdown += "#### Request\n\n";
+  markdown += javascriptExample.request;
+  markdown += "\n";
+
+  markdown += "#### Response\n\n";
+  markdown += javascriptExample.response;
+  markdown += "\n";
+  markdown += `</TabItem>\n`;
+
+  markdown += `</Tabs>\n`;
+  return markdown;
+};
+
 const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, index?: number, indentationLevel = 1): string => {
   const param = contentDescriptor;
   let markdown = "";
@@ -86,7 +174,10 @@ const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, ind
 
 const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
   const openrpcDocument = await parseOpenRPCDocument(doc as any); //dereffed. maybe we dont want to
-  let markdown = "";
+  let markdown = [
+    "import Tabs from '@theme/Tabs';",
+    "import TabItem from '@theme/TabItem';"
+  ].join("\n") + "\n\n";
 
   openrpcDocument.methods.forEach((m: MethodOrReference) => {
     const method = m as MethodObject;
@@ -115,35 +206,7 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
     }
 
     if (method.examples && method.examples.length > 0) {
-      markdown += "\n### Examples\n\n";
-      method.examples.forEach((e) => {
-        const example = e as unknown as ExamplePairingObject;
-        if (example.name) {
-          markdown += `**Name**: ${example.name}\n\n`;
-        }
-
-        markdown += "#### Request\n\n";
-
-        markdown += "```json\n";
-        let paramsString = JSON.stringify(example.params.map((param: any) => param.value));
-        if (method.paramStructure === "by-position") {
-          paramsString = "{";
-          example.params.forEach((param: any, index: number) => {
-            markdown += `  ${(example.params[index] as ExampleObject).name}: ${JSON.stringify(param.value, null, 4)},\n`;
-          });
-          paramsString += "}";
-        } else {
-          paramsString = JSON.stringify(example.params.map((param: any) => param.value), null, 4);
-        }
-        markdown += JSON.stringify(JSON.parse(`{ "jsonrpc": "2.0", "id": 0, "method": "${method.name}", "params":  ${paramsString} }`), null, 4);
-
-        markdown += "\n```\n";
-
-        markdown += "#### Result\n\n";
-        markdown += "```json\n";
-        markdown += JSON.stringify({ "jsonrpc": "2.0", "id": 0, "result": (example as any).result.value }, null, 4);
-        markdown += "\n```\n";
-      });
+      markdown += getExamples(method);
     }
     markdown += "\n";
   });
