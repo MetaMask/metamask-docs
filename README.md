@@ -39,6 +39,12 @@ For the most part, Markdown files in the `MetaMask/metamask-docs` repo can be co
   * The `:::: tabs` and `::: tab` admonitions will have to be migrated to [MDX Tabs](https://docusaurus.io/docs/markdown-features/tabs)
 * Embedded code will have to be migrated to [Live Code Blocks](#live-code-blocks).
 
+## Preview builds
+
+Generate a preview build of a PR by making a comment starting with `@metamaskbot publish-preview`. The contents of the PR will be published as a preview, then linked in a PR comment.
+
+Note that this feature is only available for branches on this repository. If you're working from a fork, you'll have to build locally to preview your work.
+
 ## MDX
 
 ### Tabs
@@ -87,3 +93,8 @@ color: var(--color-text-default);
 
 You can refer to all design tokens in the [design-tokens](https://github.com/MetaMask/design-tokens/blob/main/src/css/design-tokens.css) repository.
 
+## Publishing
+
+Every commit to `main` is published automatically to GitHub pages under `/staging`.
+
+The `/latest` version of the package tracks the `prod` branch. The typical workflow would be to merge `main` into `prod` to update `/latest`.
