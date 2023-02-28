@@ -70,7 +70,7 @@ const getJavascriptExample = (method: MethodObject, example: ExamplePairingObjec
   const request = [
     "```javascript",
     "const result = await ethereum.request({",
-    `  method: ${method.name},`,
+    `  method: "${method.name}",`,
     `  params: ${paramString}`,
     "});",
     "```",
