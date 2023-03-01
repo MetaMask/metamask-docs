@@ -1,76 +1,73 @@
+---
+description: Sign data using eth_signTypedData_v4 and personal_sign.
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Sign data
 
-Since MetaMask makes cryptographic keys available to each user, websites can use these signatures
-for a variety of uses.
-Here are a few guides related to specific use cases:
+You can use the following RPC methods to request cryptographic signatures from users:
 
-- [Authenticating websites](https://medium.com/hackernoon/writing-for-blockchain-wallet-signature-request-messages-6ede721160d5)
-- [Signing off-chain messages for an on-chain protocol](https://medium.com/metamask/our-metatransaction-hackathon-winner-a620551ccb9b)
+- [`eth_signTypedData_v4`](#use-ethsigntypeddatav4) - Use this method to request the most human-readable
+  signatures that are efficient to process on-chain.
+  We recommend this for most use cases.
+- [`personal_sign`](#use-personalsign) - Use this method for the easiest way to request human-readable
+  signatures that don't need to be efficiently processed on-chain.
 
-There are currently six signing methods:
+Read more about [the history of the signing methods](../concepts/signing-methods.md).
 
-- `eth_sign`
-- `personal_sign`
-- `signTypedData` (currently identical to `signTypedData_v1`)
-- `signTypedData_v1`
-- `signTypedData_v3`
-- `signTypedData_v4`
-
-We recommend using `signTypedData_v4` for most use cases.
-Read more about the [history of the signing methods](../concepts/signing-methods.md).
-
-:::note
-MetaMask supports signing transactions with Trezor and Ledger hardware wallets.
-These hardware wallets currently only support signing data using the `personal_sign` method.
-If you have trouble logging in to a website or dapp when using a Ledger or Trezor, the site may be
-requesting you to sign data via an unsupported method, in which case we recommend using your
-standard MetaMask account.
+:::caution
+[`eth_sign`](../concepts/signing-methods.md#ethsign) is deprecated.
 :::
 
-## Sign typed data message parameters
+:::note
+MetaMask supports signing transactions using Trezor and Ledger hardware wallets.
+These wallets only support signing data using `personal_sign`.
+If you can't log in to a dapp when using a Ledger or Trezor, the dapp might be requesting you to
+sign data using an unsupported method, in which case we recommend using your standard MetaMask account.
+:::
 
-- `domain`: Domain or domain signature.
-  This:
-    - Is only accepted for a specific website/contract.
-    - Makes sure signatures are valid only where they are intended to be valid.
-    - Allows you to have a unique contract that verifies the address.
-    - Is a bunch of information that restricts where the signature is valid.
-    - Is the domain of validity. It could be a contract, URL, etc.
-    - Contains specifically what the dapp tells you.
-    - Makes sure your signature(s) don't collide with other signatures.
-- `chainId`: Chain ID.
-  This makes sure signatures signed on one chain aren't valid on another chain.
-- `name`: This parameter is primarily for UX purposes.
-  For example, as a user, if you're using an Ether Mail app and a dialog comes up for Cryptokitties
-  exchange, this would arouse suspicion due to what the name is on the signature.
-- `verifyingContract`: This is an extra layer of assurance.
-  Even if two developers end up creating an app with the same name, they will never have the same
-  contract address.
-  If you're unsure of the name, this shows the contract responsible for message verification.
-  This field also takes a URL.
-- `version`: Current version of the domain object.
-- `message`: This parameter is completely open to any structure.
-  Every field is optional.
+## Use eth_signTypedData_v4
 
-## Example
+`eth_signTypedData_v4` provides the most human-readable signatures that are efficient to process on-chain.
+It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification to allow users to sign
+typed structured data that can be verified on-chain.
+It renders the structured data as usefully as possible to the user (for example, displaying known
+account names in place of addresses).
 
-This is an example of signing typed data with MetaMask.
-See the [reference](https://metamask.github.io/test-dapp/#signTypedDataV4).
+<p align="center">
+
+![eth_signTypedData_v4](../assets/signTypedData.png)
+
+</p>
+
+An `eth_signTypedData_v4` payload uses a standard format of encoding structs, but has a different
+format for the top-level struct that is signed, which includes some metadata about the verifying
+contract to provide replay protection of these signatures between different contract instances.
+
+We recommend using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util) to generate and
+validate signatures.
+You can use [`eip712-codegen`](https://github.com/danfinlay/eip712-codegen#readme) to generate most
+of the Solidity required to verify these signatures on-chain.
+It currently doesn't generate the top-level struct verification code, so you must write that part manually.
+See
+[this example implementation](https://github.com/delegatable/delegatable-sol/blob/fb34bb259890417285f7185bc6500fb0ab8bf86f/contracts/Delegatable.sol#L80).
+
+:::caution
+Since the top-level struct type's name and the `domain.name` are presented to the user prominently
+in the confirmation, consider your contract name, the top-level struct name, and the struct keys to
+be a user-facing security interface.
+Ensure your contract is as readable as possible to the user.
+:::
+
+### Example
+
+The following is an example of using `eth_signTypedData_v4` with MetaMask.
+See the [live example](https://metamask.github.io/test-dapp/#signTypedDataV4) and
+[test dapp source code](https://github.com/MetaMask/test-dapp).
 
 <Tabs>
-<TabItem value="html" label="HTML" default>
-
-```html
-<div>
-  <h3>Sign Typed Data V4</h3>
-  <button type="button" id="signTypedDataV4Button">sign typed data v4</button>
-</div>
-```
-
-</TabItem>
 <TabItem value="javascript" label="JavaScript">
 
 ```javascript
@@ -79,24 +76,20 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 
   const msgParams = JSON.stringify({
     domain: {
-      // Defining the chain aka Rinkeby testnet or Ethereum Main Net
+      // This defines the network, in this case, Mainnet.
       chainId: 1,
-      // Give a user friendly name to the specific contract you are signing for.
+      // Give a user-friendly name to the specific contract you're signing for.
       name: 'Ether Mail',
-      // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
+      // Add a verifying contract to make sure you're establishing contracts with the proper entity.
       verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-      // Just let's you know the latest version. Definitely make sure the field name is correct.
+      // This identifies the latest version.
       version: '1',
     },
 
-    // Defining the message signing data content.
+    // This defines the message you're proposing the user to sign, is dapp-specific, and contains
+    // anything you want. There are no required fields. Be as explicit as possible when building out
+    // the message schema.
     message: {
-      /*
-       - Anything you want. Just a JSON Blob that encodes the data you want to send
-       - No required fields
-       - This is DApp Specific
-       - Be as explicit as possible when building out the message schema.
-      */
       contents: 'Hello, Bob!',
       attachedMoneyInEth: 4.2,
       from: {
@@ -117,28 +110,28 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
         },
       ],
     },
-    // Refers to the keys of the *types* object below.
+    // This refers to the keys of the following types object.
     primaryType: 'Mail',
     types: {
-      // TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
+      // This refers to the domain the contract is hosted on.
       EIP712Domain: [
         { name: 'name', type: 'string' },
         { name: 'version', type: 'string' },
         { name: 'chainId', type: 'uint256' },
         { name: 'verifyingContract', type: 'address' },
       ],
-      // Not an EIP712Domain definition
+      // Not an EIP712Domain definition.
       Group: [
         { name: 'name', type: 'string' },
         { name: 'members', type: 'Person[]' },
       ],
-      // Refer to PrimaryType
+      // Refer to primaryType.
       Mail: [
         { name: 'from', type: 'Person' },
         { name: 'to', type: 'Person[]' },
         { name: 'contents', type: 'string' },
       ],
-      // Not an EIP712Domain definition
+      // Not an EIP712Domain definition.
       Person: [
         { name: 'name', type: 'string' },
         { name: 'wallets', type: 'address[]' },
@@ -185,4 +178,84 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 ```
 
 </TabItem>
+<TabItem value="html" label="HTML">
+
+```html
+<h3>Sign typed data v4</h3>
+<button type="button" id="signTypedDataV4Button">eth_signTypedData_v4</button>
+```
+
+</TabItem>
 </Tabs>
+
+## Use personal_sign
+
+[`personal_sign`](https://metamask.github.io/api-playground/api-documentation/#personal_sign) is the
+easiest way to request human-readable signatures that don't need to be efficiently processed on-chain.
+It's often used for signature challenges that are authenticated on a web server, such as
+[Sign-In with Ethereum](https://login.xyz/).
+
+<p align="center">
+
+![personal_sign](../assets/personal_sign.png)
+
+</p>
+
+Some other signers implement `personal_sign` as `eth_sign`, because the Go Ethereum client changed
+the behavior of their `eth_sign` method.
+Because MetaMask supports existing applications, MetaMask implements both `personal_sign` and `eth_sign`.
+You might need to check what method your supported signers use for a given implementation.
+
+:::caution important
+- Don't use this method to display binary data, because the user wouldn't be able to understand what
+  they're agreeing to.
+- If using this method for a signature challenge, think about what would prevent a phisher from
+  reusing the same challenge and impersonating your site.
+  Add text referring to your domain, or the current time, so the user can easily verify if this
+  challenge is legitimate.
+:::
+
+### Example
+
+The following is an example of using `personal_sign` with MetaMask.
+See the [live example](https://metamask.github.io/test-dapp/#personalSign) and
+[test dapp source code](https://github.com/MetaMask/test-dapp).
+
+<Tabs>
+<TabItem value="javascript" label="JavaScript">
+
+```javascript
+personalSignButton.addEventListener('click', async function (event) {
+  event.preventDefault();
+  const exampleMessage = 'Example `personal_sign` message.';
+  try {
+    const from = accounts[0];
+    // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
+    // This uses a Node.js-style buffer shim in the browser.
+    const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
+    const sign = await ethereum.request({
+      method: 'personal_sign',
+      params: [msg, from, 'Example password'],
+    });
+    personalSignResult.innerHTML = sign;
+    personalSignVerify.disabled = false;
+  } catch (err) {
+    console.error(err);
+    personalSign.innerHTML = `Error: ${err.message}`;
+  }
+});
+```
+
+</TabItem>
+<TabItem value="html" label="HTML">
+
+```html
+<h3>Personal sign</h3>
+<button type="button" id="personalSignButton">personal_sign</button>
+```
+
+</TabItem>
+</Tabs>
+
+`personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
+hashing and signing it.

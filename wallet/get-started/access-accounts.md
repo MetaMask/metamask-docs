@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Access a user's accounts
 
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
-signing transactions.
+[signing transactions](../how-to/sign-data.md).
 To request a signature from a user or have a user approve a transaction, your dapp must
 access the user's accounts using the
 [`eth_requestAccounts`](../reference/rpc-api.md#ethereum-json-rpc-methods) RPC method.
