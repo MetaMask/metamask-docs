@@ -6,6 +6,9 @@ on:
       destination_dir:
         required: true
         type: string
+      ref:
+        required: false
+        type: string
 
 jobs:
   publish-docs-to-gh-pages:
@@ -19,6 +22,8 @@ jobs:
         run: exit 1
       - name: Checkout the repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:

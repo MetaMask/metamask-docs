@@ -50,7 +50,8 @@ jobs:
     uses: ./.github/workflows/publish-docs.yml
     with:
       destination_dir: preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
-  
+      ref: ${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
+
   post-preview-comment:
     name: Post preview in comment
     needs:
