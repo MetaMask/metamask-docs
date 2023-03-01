@@ -112,7 +112,7 @@ import { Component } from '@metamask/snaps-ui';
 type OnTransactionHandlerReturn = Promise<OnTransactionResponse>;
 
 interface OnTransactionResponse {
-  content: Component;
+  content: Component | null;
 }
 ```
 
@@ -191,14 +191,12 @@ import { OnCronjobHandler } from '@metamask/snap-types';
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
     case 'exampleMethodOne':
-      return wallet.request({
+      return snap.request({
         method: 'snap_notify',
-        params: [
-          {
-            type: 'inApp',
-            message: `Hello, world!`,
-          },
-        ],
+        params: {
+          type: 'inApp',
+          message: `Hello, world!`,
+        },
       });
 
     default:
@@ -213,14 +211,12 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 module.exports.onCronjob = async ({ request }) => {
   switch (request.method) {
     case 'exampleMethodOne':
-      return wallet.request({
+      return snap.request({
         method: 'snap_notify',
-        params: [
-          {
-            type: 'inApp',
-            message: `Hello, world!`,
-          },
-        ],
+        params: {
+          type: 'inApp',
+          message: `Hello, world!`,
+        },
       });
 
     default:
