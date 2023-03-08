@@ -71,7 +71,7 @@ const sidebar = {
       link: { type: "generated-index" },
       items: [
         "reference/provider-api",
-        "reference/rpc-api",
+        "reference/api",
         "reference/sdk-js-options",
       ],
     },

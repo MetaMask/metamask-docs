@@ -197,7 +197,7 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
 
 
     markdown += "<summary>\n\n";
-    markdown += `## \`${method.name}\`\n <small>${method.summary}</small>\n`;
+    markdown += `## ${method.name}\n <small>${method.summary}</small>\n`;
     markdown += "\n</summary>\n\n";
 
     // markdown += "\n---\n";
