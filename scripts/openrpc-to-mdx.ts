@@ -191,17 +191,13 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
     "import TabItem from '@theme/TabItem';",
   ].join("\n") + "\n\n";
 
-
-  console.log("MD GREY MATTER START", markdown);
-
   openrpcDocument.methods.forEach((m: MethodOrReference) => {
     const method = m as MethodObject;
     markdown += "<details>\n";
 
 
     markdown += "<summary>\n\n";
-    // markdown += <h3 id="${method.name}" style={{display: "inline"}}><code>${method.name}</code></h3><small>&nbsp;${method.summary}</small></summary>\n\n`;
-    markdown += `## ${method.name}\n`;
+    markdown += `## \`${method.name}\`\n <small>${method.summary}</small>\n`;
     markdown += "\n</summary>\n\n";
 
     // markdown += "\n---\n";

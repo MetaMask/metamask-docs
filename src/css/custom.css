@@ -97,3 +97,12 @@ details h2 {
 summary::before {
   top: .6em !important;
 }
+
+.docs-doc-id-reference\/api summary h2 {
+  margin-right: 10px;
+  display: inline;
+}
+
+.docs-doc-id-reference\/api summary h2 .hash-link {
+  display: none;
+}
