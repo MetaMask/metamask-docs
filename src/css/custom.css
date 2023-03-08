@@ -89,8 +89,11 @@ h4 {
 .navbar__title {
   font-weight: 500;
 }
-=======
+
 details h2 {
   margin-bottom: 1px;
 }
->>>>>>> 2a14da1 (Added collapsed sections with method name as summary)
+
+summary::before {
+  top: .6em !important;
+}
