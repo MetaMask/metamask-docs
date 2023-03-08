@@ -6,6 +6,17 @@ console.log("Generating MDX from OpenRPC document...");
 const OpenRPCDocumentUrl = "https://metamask.github.io/api-specs/latest/openrpc.json";
 
 
+const renderGreyMatter = (openrpcDocument: OpenrpcDocument) => {
+  let markdown = "---\n";
+  markdown += `title: ${openrpcDocument.info.title}\n`;
+  markdown += `description: ${openrpcDocument.info.description}\n`;
+  markdown += "toc_min_heading_level: 2\n";
+  markdown += "toc_max_heading_level: 2\n";
+  markdown += "---\n";
+  return markdown;
+};
+
+
 const renderSchema = (schema: JSONSchemaObject, indentationLevel = 1, addDashType = false): string => {
   let markdown = "";
   const indentation = "\t".repeat(indentationLevel);
@@ -65,8 +76,8 @@ const getJavascriptExample = (method: MethodObject, example: ExamplePairingObjec
   const paramString = JSON.stringify(
     example.params.map((p: ExampleObject) => p.value),
     undefined,
-    2
-  ).split("\n").map((l, i) => i === 0 ? l : `  ${l}`).join('\n');
+    2,
+  ).split("\n").map((l, i) => i === 0 ? l : `  ${l}`).join("\n");
   const request = [
     "```javascript",
     "const result = await ethereum.request({",
@@ -82,13 +93,13 @@ const getJavascriptExample = (method: MethodObject, example: ExamplePairingObjec
     "/**",
     " * Outputs:",
     JSON
-      .stringify((example.result as ExampleObject).value, undefined, '  ')
+      .stringify((example.result as ExampleObject).value, undefined, "  ")
       .split("\n")
       .map((l) => ` * ${l}`)
       .join("\n"),
     " */",
     "```",
-  ].join('\n');
+  ].join("\n");
 
   return { request, response };
 };
@@ -101,12 +112,12 @@ const getJsonExample = (method: MethodObject, example: ExamplePairingObject) => 
     },
     {
       result: (example.result as ExampleObject).value,
-    }
+    },
   ].map((r) => {
     return [
       "```json",
       JSON.stringify({ jsonrpc: "2.0", id: 1, ...r }, undefined, 4),
-      "```"
+      "```",
     ].join("\n");
   });
 
@@ -121,11 +132,11 @@ const getExamples = (method: MethodObject) => {
   const jsonExample = getJsonExample(method, example);
   const javascriptExample = getJavascriptExample(method, example);
 
-  markdown += `\n### Example \n\n`;
+  markdown += "\n### Example \n\n";
 
-  markdown += `<Tabs>\n\n`;
+  markdown += "<Tabs>\n\n";
 
-  markdown += `<TabItem value="json" label="JSON">\n\n`;
+  markdown += "<TabItem value=\"json\" label=\"JSON\">\n\n";
   markdown += "#### Request\n\n";
   markdown += jsonExample.request;
   markdown += "\n";
@@ -133,9 +144,9 @@ const getExamples = (method: MethodObject) => {
   markdown += "#### Response\n\n";
   markdown += jsonExample.response;
   markdown += "\n\n";
-  markdown += `</TabItem>\n`;
+  markdown += "</TabItem>\n";
 
-  markdown += `<TabItem value="javascript" label="Javascript">\n\n`;
+  markdown += "<TabItem value=\"javascript\" label=\"Javascript\">\n\n";
   markdown += "#### Request\n\n";
   markdown += javascriptExample.request;
   markdown += "\n";
@@ -143,9 +154,9 @@ const getExamples = (method: MethodObject) => {
   markdown += "#### Response\n\n";
   markdown += javascriptExample.response;
   markdown += "\n";
-  markdown += `</TabItem>\n`;
+  markdown += "</TabItem>\n";
 
-  markdown += `</Tabs>\n`;
+  markdown += "</Tabs>\n";
   return markdown;
 };
 
@@ -167,31 +178,37 @@ const renderContentDescriptor = (contentDescriptor: ContentDescriptorObject, ind
   if (param.schema) {
     markdown += renderSchema(param.schema as JSONSchemaObject, indentationLevel);
   }
+  markdown += "\n\n";
 
-  markdown += "\n";
   return markdown;
 };
 
 const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
   const openrpcDocument = await parseOpenRPCDocument(doc as any); //dereffed. maybe we dont want to
-  let markdown = [
+  let markdown = renderGreyMatter(openrpcDocument);
+  markdown += [
     "import Tabs from '@theme/Tabs';",
-    "import TabItem from '@theme/TabItem';"
+    "import TabItem from '@theme/TabItem';",
   ].join("\n") + "\n\n";
+
+
+  console.log("MD GREY MATTER START", markdown);
 
   openrpcDocument.methods.forEach((m: MethodOrReference) => {
     const method = m as MethodObject;
-    markdown += `## ${method.name}\n\n`;
+    markdown += "<details>\n";
 
-    markdown += "\n---\n";
+
+    markdown += "<summary>\n\n";
+    // markdown += <h3 id="${method.name}" style={{display: "inline"}}><code>${method.name}</code></h3><small>&nbsp;${method.summary}</small></summary>\n\n`;
+    markdown += `## ${method.name}\n`;
+    markdown += "\n</summary>\n\n";
+
+    // markdown += "\n---\n";
 
 
     if (method.description) {
       markdown += `${method.description}\n\n`;
-    }
-
-    if (method.summary) {
-      markdown += `${method.summary}\n\n`;
     }
 
     markdown += `### Params (${method.params.length}) \n\n`;
@@ -208,7 +225,7 @@ const openRPCToMarkdown = async (doc: OpenrpcDocument): Promise<string> => {
     if (method.examples && method.examples.length > 0) {
       markdown += getExamples(method);
     }
-    markdown += "\n";
+    markdown += "\n</details>\n";
   });
 
   return markdown;

@@ -29,6 +29,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+<<<<<<< HEAD
 [data-theme='light'] .DocSearch {
   /* --docsearch-primary-color: var(--ifm-color-primary); */
   /* --docsearch-text-color: var(--ifm-font-color-base); */
@@ -88,3 +89,8 @@ h4 {
 .navbar__title {
   font-weight: 500;
 }
+=======
+details h2 {
+  margin-bottom: 1px;
+}
+>>>>>>> 2a14da1 (Added collapsed sections with method name as summary)
