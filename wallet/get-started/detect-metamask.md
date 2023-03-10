@@ -18,7 +18,7 @@ if (typeof window.ethereum !== 'undefined') {
 
 :::tip
 To differentiate MetaMask from other Ethereum-compatible browsers, you can detect MetaMask using the
-[`ethereum.isMetaMask`](../reference/provider-api.md#ethereumismetamask) property.
+[`window.ethereum.isMetaMask`](../reference/provider-api.md#windowethereumismetamask) property.
 :::
 
 ## Use @metamask/detect-provider

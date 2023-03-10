@@ -9,7 +9,7 @@ to the currently connected network.
 
 Use the [`eth_chainId`](https://metamask.github.io/api-playground/api-documentation/#eth_chainId)
 RPC method to detect the chain ID of the user's current network.
-Subscribe to the [`chainChanged`](../reference/provider-api.md#chainchanged) provider event to
+Listen to the [`chainChanged`](../reference/provider-api.md#chainchanged) provider event to
 detect when the user changes networks.
 
 In the [example project script](set-up-dev-environment.md#example), the following code detects a
@@ -31,9 +31,9 @@ function handleChainChanged(chainId) {
 These are the chain IDs of the Ethereum networks that MetaMask supports by default.
 Consult [chainid.network](https://chainid.network) for more.
 
-| Hex      | Decimal  | Network                         |
-| -------- | -------- | ------------------------------- |
-| 0x1      | 1        | Ethereum main network (mainnet) |
-| 0x5      | 5        | Goerli test network             |
-| 0xaa36a7 | 11155111 | Sepolia test network            |
+| Hex      | Decimal  | Network                                                                   |
+|----------|----------|---------------------------------------------------------------------------|
+| 0x1      | 1        | Ethereum main network (mainnet)                                           |
+| 0x5      | 5        | Goerli test network                                                       |
+| 0xaa36a7 | 11155111 | Sepolia test network                                                      |
 | 0x539    | 1337     | Localhost test networks (including [Ganache](run-development-network.md)) |
