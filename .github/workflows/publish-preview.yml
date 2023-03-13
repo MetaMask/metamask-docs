@@ -37,7 +37,7 @@ jobs:
           PR_NUMBER: ${{ github.event.issue.number }}
       - name: Get commit SHA
         id: commit-sha
-        run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+        run: echo "COMMIT_SHA=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Ensure commit hash is not empty
         if: ${{ steps.commit-sha.outputs.COMMIT_SHA == '' }}
         run: exit 1
