@@ -16,7 +16,7 @@ const accounts = await ethereum.request({ method: 'eth_accounts' });
 web3.eth.sendTransaction(
   {
     to: '0x...',
-    'from': '0x...',
+    from: '0x...',
     value: '0x...',
     // And so on...
   },
@@ -36,7 +36,7 @@ try {
     params: [
       {
         to: '0x...',
-        'from': '0x...',
+        from: '0x...',
         value: '0x...',
         // And so on...
       },
