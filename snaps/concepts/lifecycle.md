@@ -1,14 +1,18 @@
+---
+description: Learn about the lifecycle of a snap.
+---
+
 # Snap lifecycle
 
 Just like [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) or
 AWS lambda functions, snaps are designed to wake up in response to messages/events, and shut down
 when idle.
-We say that snaps have an "ephemeral" lifecycle: here one moment, gone the next.
+Snaps have an ephemeral lifecycle: they're here one moment, gone the next.
 Also, if MetaMask detects that a snap becomes unresponsive, it shuts the snap down.
 This doesn't mean that you can't create long-running snaps, but it does mean that your snaps must
 handle being shut down, especially when they're not within the JSON-RPC request/response cycle.
 
-A snap is considered "unresponsive" if:
+A snap is considered unresponsive if:
 
 1. It hasn't received a JSON-RPC request for 30 seconds.
 1. It takes more than 60 seconds to process a JSON-RPC request.

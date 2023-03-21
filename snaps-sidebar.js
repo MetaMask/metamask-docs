@@ -34,6 +34,8 @@ const sidebar = {
       items: [
         "how-to/develop-a-snap",
         "how-to/request-permissions",
+        "how-to/manage-keys",
+        "how-to/use-custom-ui",
         "how-to/troubleshoot",
       ],
     },
@@ -76,6 +78,7 @@ const sidebar = {
             "reference/cli/subcommands",
           ],
         },
+        "reference/permissions",
       ],
     },
   ],

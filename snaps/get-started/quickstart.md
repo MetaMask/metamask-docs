@@ -1,3 +1,7 @@
+---
+description: Get started quickly using the Snaps template.
+---
+
 # Snaps quickstart
 
 Get started with Snaps using the
@@ -58,26 +62,27 @@ Open the project in a text editor.
 You can customize your snap by editing `index.ts` in the `packages/snap/src` folder.
 
 `index.ts` contains an example request that uses the
-[`snap_confirm`](../reference/rpc-api.md#snap_confirm) method to display a custom confirmation screen:
+[`snap_dialog`](../reference/rpc-api.md#snapdialog) method to display a custom confirmation screen:
 
 ```ts
-import { OnRpcRequestHandler } from '@metamask/snap-types';
+import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { getMessage } from './message';
 
 export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
   switch (request.method) {
     case 'hello':
-      return wallet.request({
-        method: 'snap_confirm',
-        params: [
-          {
-            prompt: getMessage(origin),
-            description:
-              'This custom confirmation is just for display purposes.',
-            textAreaContent:
-              'Edit the source code to make your snap do what you want.',
-          },
-        ],
+      return snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'Confirmation',
+          content: panel([
+            text(`Hello, **${origin}**!`),
+            text('This custom confirmation is just for display purposes.'),
+            text(
+              'But you can edit the snap source code to make it do something, if you want to!',
+            ),
+          ]),
+        },
       });
     default:
       throw new Error('Method not found.');

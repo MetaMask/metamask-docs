@@ -1,3 +1,7 @@
+---
+description: Install Snaps dependencies.
+---
+
 # Install Snaps
 
 To use Snaps, you must install [MetaMask Flask](#install-metamask-flask) and the [Snaps CLI](#install-the-snaps-cli).

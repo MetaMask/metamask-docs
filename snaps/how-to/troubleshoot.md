@@ -1,3 +1,7 @@
+---
+description: Solve common issues.
+---
+
 # Troubleshoot
 
 This page describes common issues you may encounter when developing a snap, and how to resolve them.
@@ -7,7 +11,7 @@ If you encounter any issues that you can't solve on your own, please
 
 ## Fix build and evaluation issues
 
-Because [Secure EcmaScript (SES)](../concepts/execution-environment.md) adds additional restrictions
+Because [Secure ECMAScript (SES)](../concepts/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
 `mm-snap build` by default attempts to execute a snap in a stubbed SES environment.

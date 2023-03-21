@@ -1,11 +1,12 @@
 ---
 title: Snap execution environment
+description: Learn about the Snaps execution environment.
 ---
 
 # Snaps execution environment
 
 Snaps are untrusted JavaScript programs that execute safely in a sandboxed environment that runs
-[Secure EcmaScript (SES)](#secure-ecmascript-ses).
+[Secure ECMAScript (SES)](#secure-ecmascript-ses).
 There's no DOM, no Node.js built-ins, and no platform-specific APIs other than MetaMask's `wallet`
 global object.
 Almost all standard JavaScript globals contained in
@@ -37,9 +38,9 @@ The execution environment is instrumented in this way to:
 This allows you to safely execute snaps anywhere, without the snap needing to worry about where and
 how it's executed.
 
-## Secure EcmaScript (SES)
+## Secure ECMAScript (SES)
 
-[Secure EcmaScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), is a subset of
+[Secure ECMAScript (SES)](https://github.com/endojs/endo/tree/master/packages/ses), is a subset of
 the JavaScript language designed to enable mutually suspicious programs to execute in the same
 JavaScript process (or more accurately, the same [realm](https://tc39.es/ecma262/#realm)).
 You can think of it as a more severe form of

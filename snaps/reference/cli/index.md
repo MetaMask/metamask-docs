@@ -1,3 +1,7 @@
+---
+description: Snaps CLI subcommands and options reference
+---
+
 # Snaps command line interface
 
 This reference describes the syntax of the Snaps command line interface (CLI) subcommands and options.
