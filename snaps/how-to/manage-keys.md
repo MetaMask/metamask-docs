@@ -54,7 +54,7 @@ To derive a user's private keys:
 4. Use the [`@metamask/key-tree`](https://github.com/MetaMask/key-tree) module to derive the keys.
     Any additional code, for example, to derive addresses from keys, is application-specific.
 
-### Example
+### Dogecoin example
 
 For example, to derive Dogecoin keys:
 
@@ -102,3 +102,10 @@ For example, to derive Dogecoin keys:
    // Derive the second Dogecoin address, which has index 1.
    const secondAccount = deriveDogecoinAddress(1);
    ```
+   
+## Examples
+
+The following are examples of existing snaps that manage accounts and keys:
+
+- [KeystoneHQ's Btcsnap](https://github.com/KeystoneHQ/btcsnap-1)
+- [ConsenSys's Starknet Snap](https://github.com/ConsenSys/starknet-snap)

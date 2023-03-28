@@ -18,6 +18,8 @@ Get started with Snaps using the
 
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 
+- [Yarn](https://yarnpkg.com/) version 3
+
 ## Create the project
 
 Use the Snaps template by

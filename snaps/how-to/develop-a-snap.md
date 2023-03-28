@@ -16,7 +16,7 @@ Before developing a snap, it's important to understand:
 - [The Snaps execution environment](../concepts/execution-environment.md).
 
 You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
-[tutorial](../tutorials).
+[tutorial](../category/tutorials).
 
 This page describes additional important steps when developing a snap.
 
@@ -60,7 +60,7 @@ API methods from a web page.
 ## Debug your snap
 
 To debug your snap, use `console.log` and inspect the MetaMask background process.
-You can add your log statements in your source coder and build your snap, or add them directly
+You can add your log statements in your source code and build your snap, or add them directly
 to your snap bundle and use `mm-snap manifest --fix` to update the `shasum` in your snap manifest file.
 The manifest `shasum` must match the contents of your bundle at the time MetaMask fetches your snap.
 
@@ -69,15 +69,16 @@ Because adding logs modifies the snap source code, you must re-install the snap 
 log statement.
 :::
 
-The log output is only visible in the extension background process console.
+The snap log output is only visible in the extension background process console.
 If you're using a Chromium browser, use the following steps to inspect the background process and
 view its console:
 
 1. Go to `chrome://extensions`.
-2. Find the MetaMask extension.
-3. Select **Details**.
-4. Toggle **Developer mode** on in the top right corner.
-5. Under **Inspect views**, select `background.html`.
+2. Toggle **Developer mode** on in the top right corner.
+3. Find MetaMask Flask, and select **Details**.
+4. Under **Inspect views**, select `background.html`.
+
+The log output displays in the console that pops up.
 
 ## Publish your snap
 
