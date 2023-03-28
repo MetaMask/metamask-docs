@@ -1,28 +1,18 @@
+---
+description: Register a token with users using wallet_watchAsset.
+---
+
 # Register a token with users
 
 When a user opens MetaMask, they're shown a variety of assets, including tokens.
-By default, MetaMask auto-detects some major popular tokens and auto-displays them, but for most
-tokens, the user must add the token themselves.
+By default, MetaMask detects some major popular tokens and displays them, but for most tokens, the
+user must register the token themselves.
+This process can be cumbersome, involves the user interacting with contract addresses, and is error-prone.
 
-While this is possible using our UI with the **Add Token** button, that process can be cumbersome,
-involves the user interacting with contract addresses, and is very error prone.
+You can improve the security and experience of users registering your token on their MetaMask
+interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#walletwatchasset) RPC method.
 
-You can improve the security and experience of users adding your token to their MetaMask interface
-by taking advantage of the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC API
-method.
-
-## Code-free examples
-
-The following are live web applications that let you enter your token details, and then share them
-with a simple web link:
-
-- [Watch Token](https://vittominacori.github.io/watch-token/create/)
-- [Add Token App](https://metamask.github.io/Add-Token/#edit)
-
-## Example
-
-If you'd like to integrate suggesting a token into your own web app, you can use the following code
-snippet:
+For example, you can add something like the following to your project script:
 
 ```javascript
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
@@ -31,16 +21,16 @@ const tokenDecimals = 18;
 const tokenImage = 'http://placekitten.com/200/300';
 
 try {
-  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  // wasAdded is a boolean. Like any RPC method, an error can be thrown.
   const wasAdded = await ethereum.request({
     method: 'wallet_watchAsset',
     params: {
-      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+      type: 'ERC20', // Initially only supports ERC-20 tokens, but eventually more!
       options: {
-        address: tokenAddress, // The address that the token is at.
-        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-        decimals: tokenDecimals, // The number of decimals in the token
-        image: tokenImage, // A string url of the token logo
+        address: tokenAddress, // The address of the token.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 characters.
+        decimals: tokenDecimals, // The number of decimals in the token.
+        image: tokenImage, // A string URL of the token logo.
       },
     },
   });
@@ -54,3 +44,9 @@ try {
   console.log(error);
 }
 ```
+
+For more examples, the following are live web dapps that let you enter your token details and share
+them using a simple web link:
+
+- [WatchToken](https://vittominacori.github.io/watch-token/create/)
+- [Add Token dapp](https://metamask.github.io/Add-Token/#edit)

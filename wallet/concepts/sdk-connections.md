@@ -1,3 +1,7 @@
+---
+description: Learn about MetaMask SDK connections.
+---
+
 # MetaMask SDK connections
 
 You can [use MetaMask SDK](../how-to/use-sdk/index.md) to enable users to easily connect from your

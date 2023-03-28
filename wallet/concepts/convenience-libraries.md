@@ -1,3 +1,7 @@
+---
+description: Learn about convenience libraries.
+---
+
 # Convenience libraries
 
 Various convenience libraries exist for dapp developers.

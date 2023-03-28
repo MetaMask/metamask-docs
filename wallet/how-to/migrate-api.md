@@ -1,11 +1,9 @@
+---
+title: Migrate the provider API
+description: Migrate to the current provider API.
+---
+
 # Migrate to the current provider API
-
-:::caution Important
-If you're a MetaMask user attempting to use a legacy Ethereum website that hasn't migrated to the
-new API, please see the [MetaMask legacy Web3 extension](#using-the-metamask-legacy-web3-extension).
-
-Except for such legacy websites, no action is required for MetaMask users.
-:::
 
 In January 2021, MetaMask made a number of breaking changes to the
 [provider API](../reference/provider-api.md), and removed the injected `window.web3`.
@@ -17,6 +15,13 @@ These changes are live on all platforms as of version:
 This guide describes how to migrate to the new provider API, and how to replace `window.web3`.
 To understand why MetaMask made these changes, please see
 [this blog post](https://medium.com/metamask/breaking-changes-to-the-metamask-provider-are-here-7b11c9388be9).
+
+:::note
+If you're a MetaMask user attempting to use a legacy Ethereum website that hasn't migrated to the
+new API, please see the [MetaMask legacy Web3 extension](#use-the-metamask-legacy-web3-extension).
+
+Except for such legacy websites, no action is required for MetaMask users.
+:::
 
 ## Summary of breaking changes
 

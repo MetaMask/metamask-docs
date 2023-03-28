@@ -1,3 +1,7 @@
+---
+description: MetaMask Ethereum RPC API reference
+---
+
 # RPC API
 
 MetaMask uses the [`ethereum.request(args)` method](provider-api.md#ethereumrequestargs) to wrap an

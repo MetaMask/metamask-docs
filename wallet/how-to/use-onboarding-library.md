@@ -1,11 +1,29 @@
-# Use onboarding library
+---
+title: Use the onboarding library
+description: Simplify the MetaMask onboarding experience for your users.
+---
 
-Use the MetaMask [onboarding library](../concepts/onboarding-library.md) to simplify the experience
-of onboarding new users to MetaMask.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Use the MetaMask onboarding library
+
+Sending users away from your dapp to install MetaMask presents challenges.
+You must inform the user to return to your dapp and refresh their browser after the installation.
+Your dapp detects the user's newly installed MetaMask extension only after that refresh.
+
+You can use MetaMask's [onboarding library](https://github.com/MetaMask/metamask-onboarding) to
+improve and simplify the onboarding experience.
+The library exposes an API to initiate the onboarding process.
+
+During the onboarding process, the library registers your dapp as the origin of the onboarding request.
+MetaMask checks for this origin after the user completes the onboarding flow.
+If it finds an origin, the final confirmation button of the MetaMask onboarding flow indicates that
+the user will be redirected back to your dapp.
 
 ## Steps
 
-1. [Install @metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
+1. Install [@metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
 1. Import the library or include it in your page:
 
     ```javascript
@@ -15,7 +33,7 @@ of onboarding new users to MetaMask.
     const MetaMaskOnboarding = require('@metamask/onboarding');
     ```
     
-    If you prefer, you can instead include the prebuilt ES5 bundle that ships with the library:
+    Alternatively, you can include the prebuilt ES5 bundle that ships with the library:
     
     ```html
     <script src="./metamask-onboarding.bundle.js"></script>
@@ -33,16 +51,12 @@ of onboarding new users to MetaMask.
     onboarding.startOnboarding();
     ```
 
-## Examples
+## Example
 
-### Basic usage
+The following are example ways to use the onboarding library in various frameworks:
 
-```javascript
-const onboarding = new MetaMaskOnboarding();
-onboarding.startOnboarding();
-```
-
-### React
+<Tabs>
+<TabItem value="React">
 
 ```jsx
 import MetaMaskOnboarding from '@metamask/onboarding';
@@ -109,22 +123,24 @@ export function OnboardingButton() {
 }
 ```
 
-### TypeScript
+</TabItem>
+<TabItem value="TypeScript">
 
-We ship our TypeScript types with `@metamask/onboarding`.
-Modifying the [React example](#react) to get type safety when using the onboarding library is simple:
+The onboarding library ships with MetaMask's TypeScript types.
+Modify the React example as follows to get type safety:
 
 ```jsx
-  -const onboarding = React.useRef();
-  +const onboarding = React.useRef<MetaMaskOnboarding>();
+-const onboarding = React.useRef();
++const onboarding = React.useRef<MetaMaskOnboarding>();
 ```
 
-Taking this step gives you editor auto-completion for the methods exposed by the library, and
-helpful documentation.
+This gives you editor auto-completion for the methods exposed by the library, and
+helpful documentation:
 
 ![Editor Highlighting](https://user-images.githubusercontent.com/4448075/85584481-ccc7ec00-b604-11ea-9b74-49c76ee0bf22.png)
 
-### Vanilla JavaScript + HTML
+</TabItem>
+<TabItem value="Vanilla JavaScript and HTML">
 
 ```html
 <!DOCTYPE html>
@@ -177,3 +193,6 @@ helpful documentation.
   </body>
 </html>
 ```
+
+</TabItem>
+</Tabs>

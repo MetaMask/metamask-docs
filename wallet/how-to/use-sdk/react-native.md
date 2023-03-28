@@ -111,12 +111,12 @@ import BackgroundTimer from 'react-native-background-timer';
 
 const MMSDK = new MetaMaskSDK({
   openDeeplink: (link) => {
-    Linking.openURL(link); // Use React Native Linking method or your favourite way of opening deeplinks
+    Linking.openURL(link); // Use React Native Linking method or another way of opening deeplinks.
   },
-  timer: BackgroundTimer, // To keep the app alive once it goes to background
+  timer: BackgroundTimer, // To keep the dapp alive once it goes to background.
   dappMetadata: {
-    name: 'My App', // The name of your application
-    url: 'https://myapp.com', // The url of your website
+    name: 'My dapp', // The name of your dapp.
+    url: 'https://mydapp.com', // The URL of your website.
   },
 });
 
@@ -136,11 +136,11 @@ You can use [EthersJS](https://docs.ethers.io/v5/getting-started/) with your Rea
 ```javascript
 const provider = new ethers.providers.Web3Provider(ethereum);
 
-// Get the balance of an account (by address or ENS name, if supported by network)
+// Get the balance of an account (by address or ENS name, if supported by network).
 const balance = await provider.getBalance(ethereum.selectedAddress);
 
 // Often you need to format the output to something more user-friendly,
-// such as in ether (instead of wei)
+// such as in ether (instead of wei).
 const balanceInETH = ethers.utils.formatEther(balance);
 // '0.182826475815887608'
 ```

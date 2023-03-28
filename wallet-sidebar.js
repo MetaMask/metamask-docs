@@ -55,18 +55,13 @@ const sidebar = {
       items: [
         "concepts/sdk-connections",
         "concepts/signing-methods",
-        "concepts/onboarding-library",
         "concepts/convenience-libraries",
       ],
     },
     {
-      type: "category",
+      type: "doc",
+      id: "tutorials/index",
       label: "Tutorials",
-      link: { type: "generated-index" },
-      items: [
-        "tutorials/create-simple-dapp",
-        "tutorials/create-simple-dapp-with-sdk",
-      ],
     },
     {
       type: "category",
