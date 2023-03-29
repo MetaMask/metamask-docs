@@ -111,7 +111,7 @@ const config = {
               },
               {
                 label: "Tutorials",
-                to: "/wallet/category/tutorials",
+                to: "/wallet/tutorials",
               },
               {
                 label: "Reference",
