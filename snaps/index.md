@@ -4,14 +4,16 @@ title: Introduction
 
 # Extend the functionality of MetaMask using Snaps
 
-:::note
-Snaps is pre-release software.
-:::
-
 Snaps is an open source system that allows anyone to safely extend the functionality of MetaMask,
 creating new web3 end user experiences.
 
 Get started by [installing Snaps](get-started/install-snaps.md).
+
+:::note
+- Snaps is pre-release software.
+- To learn how to integrate your dapp with MetaMask, visit the
+  [MetaMask wallet developer documentation](../wallet).
+:::
 
 ## What is a snap?
 

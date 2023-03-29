@@ -13,7 +13,9 @@ MetaMask wallet client from any platform.
 Get started by [setting up your development environment](get-started/set-up-dev-environment.md).
 
 :::note
-This documentation assumes intermediate knowledge of JavaScript, HTML, and CSS.
+- This documentation assumes intermediate knowledge of JavaScript, HTML, and CSS.
+- To learn how to extend the functionality of MetaMask, visit the
+  [MetaMask Snaps developer documentation](../snaps).
 :::
 
 ## What is the MetaMask Ethereum provider API?

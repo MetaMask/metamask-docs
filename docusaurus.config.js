@@ -6,7 +6,7 @@ const remarkCodesandbox = require("remark-codesandbox");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "MetaMask Docs",
+  title: "MetaMask docs",
   // tagline: '',
   url: "https://metamask.github.io/",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
@@ -70,7 +70,7 @@ const config = {
         title: "MetaMask docs",
         hideOnScroll: true,
         logo: {
-          alt: "My Site Logo",
+          alt: "MetaMask logo",
           src: "img/metamask-fox.svg",
         },
         items: [
@@ -87,7 +87,100 @@ const config = {
           },
         ],
       },
-      footer: {},
+      footer: {
+        logo: {
+          alt: "MetaMask logo",
+          src: "img/metamask-fox.svg",
+          href: "https://metamask.io/",
+        },
+        links: [
+          {
+            title: "Wallet",
+            items: [
+              {
+                label: "Introduction",
+                to: "/wallet",
+              },
+              {
+                label: "Get started",
+                to: "/wallet/category/get-started",
+              },
+              {
+                label: "How to guides",
+                to: "/wallet/category/how-to",
+              },
+              {
+                label: "Tutorials",
+                to: "/wallet/category/tutorials",
+              },
+              {
+                label: "Reference",
+                to: "/wallet/category/reference",
+              },
+            ],
+          },
+          {
+            title: "Snaps",
+            items: [
+              {
+                label: "Introduction",
+                to: "/snaps",
+              },
+              {
+                label: "Get started",
+                to: "/snaps/category/get-started",
+              },
+              {
+                label: "How to guides",
+                to: "/snaps/category/how-to",
+              },
+              {
+                label: "Tutorials",
+                to: "/snaps/category/tutorials",
+              },
+              {
+                label: "Reference",
+                to: "/snaps/category/reference",
+              },
+            ],
+          },
+          {
+            title: "Community",
+            items: [
+              {
+                label: "ConsenSys Discord",
+                href: "https://discord.gg/consensys",
+              },
+              {
+                label: "Documentation requests",
+                href: "https://github.com/MetaMask/mm-docs-v2/issues/new",
+              },
+              {
+                label: "User support",
+                href: "https://support.metamask.io/hc/en-us",
+              },
+            ],
+          },
+          {
+            title: "Contributors",
+            items: [
+              {
+                label: "Contribute to the documentation",
+                href: "https://github.com/MetaMask/mm-docs-v2",
+              },
+              {
+                label: "Contribute to the MetaMask wallet",
+                href: "https://github.com/MetaMask/metamask-extension/",
+              },
+              {
+                label: "Contribute to MetaMask Snaps",
+                href: "https://github.com/MetaMask/snaps-monorepo",
+              },
+            ],
+          },
+        ],
+        copyright: `© ${new Date().getFullYear()} MetaMask • A ConsenSys Formation`,
+      },
       prism: {
         theme: codeTheme,
         additionalLanguages: ["csharp"],
