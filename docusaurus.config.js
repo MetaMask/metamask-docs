@@ -62,6 +62,122 @@ const config = {
         breadcrumbs: false,
       }),
     ],
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        fromExtensions: ["html", "htm"],
+        redirects: [
+          {
+            from: "/guide/",
+            to: "/wallet/",
+          },
+          {
+            from: "/guide/getting-started",
+            to: "/wallet/get-started/set-up-dev-environment",
+          },
+          {
+            from: "/guide/common-terms",
+            to: "/wallet/",
+          },
+          {
+            from: "/guide/initializing-dapps",
+            to: "/wallet/how-to/interact-with-smart-contracts",
+          },
+          {
+            from: "/guide/accessing-accounts",
+            to: "/wallet/get-started/access-accounts",
+          },
+          {
+            from: "/guide/sending-transactions",
+            to: "/wallet/how-to/send-transactions",
+          },
+          {
+            from: "/guide/ethereum-provider",
+            to: "/wallet/reference/provider-api",
+          },
+          {
+            from: "/guide/provider-migration",
+            to: "/wallet/how-to/migrate-api",
+          },
+          {
+            from: "/guide/rpc-api",
+            to: "/wallet/reference/rpc-api",
+          },
+          {
+            from: "/guide/signing-data",
+            to: "/wallet/how-to/sign-data",
+          },
+          {
+            from: "/guide/registering-function-names",
+            to: "/wallet/how-to/register-method-names",
+          },
+          {
+            from: "/guide/registering-your-token",
+            to: "/wallet/how-to/register-token",
+          },
+          {
+            from: "/guide/defining-your-icon",
+            to: "/wallet/how-to/set-icon",
+          },
+          {
+            from: "/guide/onboarding-library",
+            to: "/wallet/how-to/use-onboarding-library",
+          },
+          {
+            from: "/guide/metamask-extension-provider",
+            to: "/wallet/how-to/access-provider",
+          },
+          {
+            from: "/guide/mobile-getting-started",
+            to: "/wallet/how-to/use-mobile",
+          },
+          {
+            from: "/guide/site-compatibility-checklist",
+            to: "/wallet/how-to/use-mobile",
+          },
+          {
+            from: "/guide/mobile-best-practices",
+            to: "/wallet/how-to/use-mobile",
+          },
+          {
+            from: "/guide/snaps",
+            to: "/snaps/",
+          },
+          {
+            from: "/guide/snaps-development-guide",
+            to: "/snaps/how-to/develop-a-snap",
+          },
+          {
+            from: "/guide/snaps-concepts",
+            to: "/snaps/category/concepts",
+          },
+          {
+            from: "/guide/snaps-rpc-api",
+            to: "/snaps/reference/rpc-api",
+          },
+          {
+            from: "/guide/snaps-permissions",
+            to: "/snaps/how-to/request-permissions",
+          },
+          {
+            from: "/guide/snaps-exports",
+            to: "/snaps/reference/exports",
+          },
+          {
+            from: "/guide/snaps-patching-dependencies",
+            to: "/snaps/how-to/troubleshoot",
+          },
+          {
+            from: "/guide/create-dapp",
+            to: "/wallet/get-started/set-up-dev-environment",
+          },
+          {
+            from: "/guide/contributors",
+            to: "/wallet/",
+          },
+        ],
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -72,6 +188,7 @@ const config = {
         logo: {
           alt: "MetaMask logo",
           src: "img/metamask-fox.svg",
+          href: "/wallet/",
         },
         items: [
           {
