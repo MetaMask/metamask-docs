@@ -39,5 +39,6 @@ For example, you can:
 
 ## Questions?
 
-If you have questions or want to propose a new feature, you can interact with the Snaps team and
-community on [GitHub discussions](https://github.com/MetaMask/snaps-skunkworks/discussions).
+If you have questions about using Snaps or want to propose a new feature, you can interact with the
+Snaps team and community on [GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions)
+and the Snaps channel on [ConsenSys Discord](https://discord.gg/consensys).

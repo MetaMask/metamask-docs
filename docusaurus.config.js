@@ -152,6 +152,10 @@ const config = {
                 href: "https://discord.gg/consensys",
               },
               {
+                label: "Snaps GitHub discussions",
+                href: "https://github.com/MetaMask/snaps-monorepo/discussions",
+              },
+              {
                 label: "Documentation requests",
                 href: "https://github.com/MetaMask/mm-docs-v2/issues/new",
               },

@@ -40,4 +40,7 @@ Mobile wallet using a QR code.
 For dapps running on a mobile browser, MetaMask SDK automatically deeplinks to the user's MetaMask
 Mobile wallet to make the connection.
 
-If you have questions about the SDK, you can join the [MetaMask SDK Discord](https://discord.gg/N3jSkZbYm6).
+## Questions?
+
+If you have questions about integrating your dapp with MetaMask, you can interact with the MetaMask
+team and community on the MetaMask channels on [ConsenSys Discord](https://discord.gg/consensys).
