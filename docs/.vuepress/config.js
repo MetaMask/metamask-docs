@@ -155,6 +155,7 @@ const guideSidebar = [
       'defining-your-icon',
       'onboarding-library',
       'metamask-extension-provider',
+      'security-controls',
     ],
   },
   {
