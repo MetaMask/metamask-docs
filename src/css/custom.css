@@ -28,3 +28,23 @@
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+.navbar__title {
+  font-weight: 500;
+}
