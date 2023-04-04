@@ -1,13 +1,12 @@
 name: Publish a preview build
 
 on:
-  issue_comment:
-    types: created
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   is-fork-pull-request:
-    name: Determine whether this issue comment was on a pull request from a fork
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '@metamaskbot publish-preview') }}
+    name: Determine whether this pull request is from a fork
     runs-on: ubuntu-latest
     outputs:
       IS_FORK: ${{ steps.is-fork.outputs.IS_FORK }}
@@ -18,7 +17,7 @@ jobs:
         run: echo "IS_FORK=$(gh pr view --json isCrossRepository --jq '.isCrossRepository' "${PR_NUMBER}" )" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
 
   get-commit-hash:
     name: Get the commit hash for the commit being previewed
@@ -34,7 +33,7 @@ jobs:
         run: gh pr checkout "${PR_NUMBER}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
       - name: Get commit SHA
         id: commit-sha
         run: echo "COMMIT_SHA=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
@@ -49,7 +48,7 @@ jobs:
       contents: write
     uses: ./.github/workflows/publish-docs.yml
     with:
-      destination_dir: preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
+      destination_dir: ${{ github.head_ref }}
       ref: ${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
 
   post-preview-comment:
@@ -65,6 +64,6 @@ jobs:
       - name: Post preview in comment
         run: gh pr comment "${PR_NUMBER}" --body "${COMMENT_BODY}"
         env:
-          COMMENT_BODY: "Preview published: [preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/${{ needs.get-commit-hash.outputs.COMMIT_SHA }}/)"
+          COMMENT_BODY: "Preview published: [${{ github.head_ref }}](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.head_ref }}/)"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
