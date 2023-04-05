@@ -39,3 +39,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           destination_dir: ${{ inputs.destination_dir }}
+          keep_files: true
+
