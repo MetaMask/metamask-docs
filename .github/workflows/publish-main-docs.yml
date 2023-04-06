@@ -10,5 +10,3 @@ jobs:
     permissions:
       contents: write
     uses: ./.github/workflows/publish-docs.yml
-    with:
-      destination_dir: ./
