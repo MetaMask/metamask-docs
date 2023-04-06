@@ -43,6 +43,7 @@ const sidebar = {
         "how-to/register-token",
         "how-to/register-method-names",
         "how-to/access-provider",
+        "how-to/secure-dapp",
         "how-to/use-onboarding-library",
         "how-to/set-icon",
         "how-to/migrate-api",
