@@ -42,6 +42,7 @@ const config = {
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
           remarkPlugins: [
+            require("remark-docusaurus-tabs"),
             [remarkCodesandbox, {
               mode: "iframe",
               autoDeploy: process.env.NODE_ENV === "production",
@@ -64,6 +65,9 @@ const config = {
         routeBasePath: "snaps",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
+        remarkPlugins: [
+          require("remark-docusaurus-tabs"),
+        ],
       }),
     ],
     [

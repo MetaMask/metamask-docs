@@ -9456,6 +9456,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     remark-codesandbox: ^0.10.1
+    remark-docusaurus-tabs: ^0.2.0
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
@@ -11634,6 +11635,16 @@ __metadata:
     unist-util-is: ^4.0.1
     unist-util-visit: ^2.0.1
   checksum: ca660f686e84a58fbba5f09a4008bc9c615e231d5faf68bf3b40b964b59bad17699074b72b953b06e3b0d107c2bb243a39d8fcd61b73dd6c6e9d2999492f992d
+  languageName: node
+  linkType: hard
+
+"remark-docusaurus-tabs@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "remark-docusaurus-tabs@npm:0.2.0"
+  dependencies:
+    mdast-util-to-string: ^2.0.0
+    unist-util-visit: ^2.0.3
+  checksum: 764721ab42f683cbf86770cd04b58a276350c4189ab5f3401f3e5300d71512f7701b9e71bc23fe35e2f4079df1e385b25ea72c6762d4ac23a1794146537d0c8d
   languageName: node
   linkType: hard
 

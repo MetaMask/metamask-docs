@@ -2,9 +2,6 @@
 description: Set up a new simple dapp to integrate with MetaMask.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Set up your development environment
 
 You can easily set up a simple dapp to integrate with MetaMask.
@@ -59,8 +56,9 @@ and seamless connection from your dapp to a MetaMask wallet client.
 
 The following is an example simple dapp script and HTML file:
 
-<Tabs>
-<TabItem value="javascript" label="JavaScript">
+<!--tabs-->
+
+# JavaScript
 
 ```javascript title="index.js"
 /*****************************************/
@@ -142,8 +140,7 @@ async function getAccount() {
 }
 ```
 
-</TabItem>
-<TabItem value="html" label="HTML">
+# HTML
 
 ```html title="index.html"
 <!DOCTYPE html>
@@ -162,5 +159,4 @@ async function getAccount() {
 </html>
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->

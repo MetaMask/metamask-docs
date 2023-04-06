@@ -2,9 +2,6 @@
 description: Snaps JSON-RPC API reference
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Snaps JSON-RPC API
 
 Snaps communicate with MetaMask using the Snaps JSON-RPC API.
@@ -36,8 +33,9 @@ Each snap is an object containing:
 
 #### Example
 
-<Tabs>
-<TabItem value="javascript" label="JavaScript">
+<!--tabs-->
+
+# JavaScript
 
 ```javascript
 const result = await window.ethereum.request({ method: 'wallet_getSnaps' });
@@ -45,8 +43,7 @@ const result = await window.ethereum.request({ method: 'wallet_getSnaps' });
 console.log(result);
 ```
 
-</TabItem>
-<TabItem value="result" label="Result">
+# Result
 
 ```javascript
 // Example result if any snaps are permitted
@@ -66,8 +63,7 @@ console.log(result);
 }
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ### wallet_invokeSnap
 
@@ -132,8 +128,9 @@ An object mapping the IDs of installed snaps to either their metadata or an erro
 
 #### Example
 
-<Tabs>
-<TabItem value="javascript" label="JavaScript">
+<!--tabs-->
+
+# JavaScript
 
 ```javascript
 try {
@@ -156,8 +153,7 @@ try {
 }
 ```
 
-</TabItem>
-<TabItem value="result" label="Result">
+# Result
 
 ```javascript
 {
@@ -174,8 +170,7 @@ try {
 }
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ## Restricted methods
 
@@ -387,8 +382,9 @@ its corresponding key material:
 
 #### Example
 
-<Tabs>
-<TabItem value="manifest" label="Manifest file">
+<!--tabs-->
+
+# Manifest file
 
 ```json
 {
@@ -403,8 +399,7 @@ its corresponding key material:
 }
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```javascript
 import { SLIP10Node } from '@metamask/key-tree';
@@ -431,8 +426,7 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 // Now, you can ask the user to sign transactions, etc.
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ### snap_getBip32PublicKey
 
@@ -460,8 +454,9 @@ The public key as hexadecimal string.
 
 #### Example
 
-<Tabs>
-<TabItem value="manifest" label="Manifest file">
+<!--tabs-->
+
+# Manifest file
 
 ```json
 {
@@ -476,8 +471,7 @@ The public key as hexadecimal string.
 }
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```javascript
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
@@ -495,8 +489,7 @@ const dogecoinPublicKey = await snap.request({
 console.log(dogecoinPublicKey);
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ### snap_getBip44Entropy
 
@@ -542,8 +535,9 @@ and containing its corresponding key material:
 
 #### Example
 
-<Tabs>
-<TabItem value="manifest" label="Manifest file">
+<!--tabs-->
+
+# Manifest file
 
 ```json
 {
@@ -557,8 +551,7 @@ and containing its corresponding key material:
 }
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```javascript
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
@@ -587,8 +580,7 @@ const addressKey1 = await deriveDogecoinAddress(1);
 // Now, you can ask the user to sign transactions, etc.
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ### snap_getEntropy
 
@@ -619,8 +611,9 @@ The entropy as a hexadecimal string.
 
 #### Example
 
-<Tabs>
-<TabItem value="manifest" label="Manifest file">
+<!--tabs-->
+
+# Manifest file
 
 ```json
 {
@@ -630,8 +623,7 @@ The entropy as a hexadecimal string.
 }
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```javascript
 const entropy = await snap.request({
@@ -646,8 +638,7 @@ const entropy = await snap.request({
 console.log(entropy);
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ### snap_manageState
 

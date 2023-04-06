@@ -117,36 +117,34 @@ MetaMask documentation.
 
 The following sections describe features that aren't documented in the Docusaurus documentation.
 
-### Code inside tabs
+### Simplified tabs
 
-The simplest way to add code or Markdown inside [tabs](https://docusaurus.io/docs/markdown-features/tabs)
-is to un-indent the content and tags, and add blank lines around the content.
+The [`remark-docusaurus-tabs`](https://github.com/mccleanp/remark-docusaurus-tabs) plugin allows you
+to add content in [tabs](https://docusaurus.io/docs/markdown-features/tabs) using simplified syntax.
 
-For example:
+For example, add code blocks to tabs as follows:
 
 ````jsx
-<Tabs>
-<TabItem value="html" label="HTML">
+<!--tabs-->
+
+# HTML
 
 ```html
 <!-- HTML code block -->
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```javascript
 // JavaScript code block
 ```
 
-</TabItem>
-<TabItem value="markdown" label="Markdown">
+# Markdown
 
 - This is an example Markdown list.
 - This is **bold** and *italicized* text.
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 ````
 
 ### Live code blocks

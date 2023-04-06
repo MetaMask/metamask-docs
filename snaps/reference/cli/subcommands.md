@@ -9,22 +9,21 @@ import TabItem from '@theme/TabItem';
 
 ## b, build
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap build [options]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap b -s lib/index.js -d out -n snap.js
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Builds a snap from source.
 
@@ -32,22 +31,21 @@ Builds a snap from source.
 
 ## e, eval
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap eval [options]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap e -b out/snap.js
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Attempts to evaluate the snap bundle in SES.
 
@@ -55,22 +53,21 @@ Attempts to evaluate the snap bundle in SES.
 
 ## i, init
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap init [directory]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap i my-snap
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Initializes a snap project in the specified directory.
 If no directory is specified, the snap project is initialized in the current directory.
@@ -79,22 +76,21 @@ If no directory is specified, the snap project is initialized in the current dir
 
 ## m, manifest
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap manifest [options]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap m --fix false
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Validates the snap [manifest file](../../concepts/anatomy.md#manifest-file).
 
@@ -102,22 +98,21 @@ Validates the snap [manifest file](../../concepts/anatomy.md#manifest-file).
 
 ## s, serve
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap serve [options]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap s -r out -p 9000
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Locally serves snap files for testing.
 
@@ -125,28 +120,27 @@ Locally serves snap files for testing.
 
 ## w, watch
 
-<Tabs>
-<TabItem value="syntax" label="Syntax">
+<!--tabs-->
+
+# Syntax
 
 ```bash
 mm-snap watch [options]
 ```
 
-</TabItem>
-<TabItem value="example" label="Example">
+# Example
 
 ```bash
 mm-snap w -s lib/index.js -d out
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 Rebuilds a snap from source upon changes to the files in the parent and child directories of the
 source directory.
 
 :::note
-All files in the parent and child directories of the source directory are watched for changes, except:
+All files in the parent and child directories of sthe source directory are watched for changes, except:
 
 - Files in the `node_modules` directory.
 - Files in the `test` or `tests` directories.

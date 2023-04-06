@@ -2,9 +2,6 @@
 description: Access a user's accounts and handle changed accounts.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Access a user's accounts
 
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
@@ -34,8 +31,9 @@ In the [example project code](set-up-dev-environment.md#example), the following 
 accesses the user's accounts when they select a connect button, and the following HTML code
 displays the button and the current account:
 
-<Tabs>
-<TabItem value="javascript" label="JavaScript">
+<!--tabs-->
+
+# JavaScript
 
 ```javascript title="index.js"
 // You should only attempt to request the user's account in response to user
@@ -70,8 +68,7 @@ async function getAccount() {
 }
 ```
 
-</TabItem>
-<TabItem value="html" label="HTML">
+# HTML
 
 ```html title="index.html"
 <!-- Display a connect button and the current account -->
@@ -79,8 +76,7 @@ async function getAccount() {
 <h2>Account: <span class="showAccount"></span></h2>
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 :::note
 MetaMask currently returns at most one account in the `accounts` array.

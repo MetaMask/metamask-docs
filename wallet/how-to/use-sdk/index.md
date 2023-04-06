@@ -1,6 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Use MetaMask SDK
 
 MetaMask SDK currently supports all JavaScript-based dapps and Unity gaming dapps.
@@ -23,8 +20,9 @@ already used to, so existing dapps work out of the box with the SDK.
 
 ## How it works
 
-<Tabs>
-<TabItem value="desktop" label="Desktop browser">
+<!--tabs-->
+
+# Desktop browser
 
 If a user accesses your web dapp on a desktop browser and doesn't have the MetaMask extension
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
@@ -37,8 +35,7 @@ You can try the
 You can also see this
 [React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
 
-</TabItem>
-<TabItem value="mobile" label="Mobile browser">
+# Mobile browser
 
 If a user accesses your web dapp on a mobile browser, the SDK automatically deeplinks to MetaMask
 Mobile (or if the user doesn't already have it, prompts them to install it).
@@ -56,8 +53,7 @@ You can try the
 You can also see this
 [React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
 
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
+# Node.js
 
 When a user accesses your Node.js dapp, the SDK renders a QR code on the console which users can
 scan with their MetaMask Mobile app.
@@ -68,8 +64,7 @@ scan with their MetaMask Mobile app.
 
 </p>
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ## Prerequisites
 

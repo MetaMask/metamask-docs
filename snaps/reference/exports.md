@@ -1,9 +1,7 @@
 ---
 description: Snaps exports reference
+toc_max_heading_level: 2
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Snaps exports
 
@@ -36,8 +34,9 @@ A promise containing the return of the implemented method.
 
 ### Example
 
-<Tabs>
-<TabItem value="typescript" label="TypeScript">
+<!--tabs-->
+
+# TypeScript
 
 ```typescript
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
@@ -56,8 +55,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 };
 ```
 
-</TabItem>
-<TabItem value="javascript" label="JavaScript">
+# JavaScript
 
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -71,8 +69,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ## onTransaction
 
@@ -103,8 +100,9 @@ for the transaction that `onTransaction` was called with.
 
 ### Example
 
-<Tabs>
-<TabItem value="typescript" label="TypeScript">
+<!--tabs-->
+
+# TypeScript
 
 ```typescript
 import { OnTransactionHandler } from '@metamask/snap-types';
@@ -126,8 +124,7 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
-</TabItem>
-<TabItem value="JavaScript">
+# JavaScript
 
 ```js
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -148,8 +145,7 @@ module.exports.onTransaction = async ({
 };
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
 
 ## onCronjob
 
@@ -168,8 +164,9 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 
 ### Example
 
-<Tabs>
-<TabItem value="TypeScript">
+<!--tabs-->
+
+# TypeScript
 
 ```typescript
 import { OnCronjobHandler } from '@metamask/snaps-types';
@@ -191,8 +188,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 };
 ```
 
-</TabItem>
-<TabItem value="JavaScript">
+# JavaScript
 
 ```js
 module.exports.onCronjob = async ({ request }) => {
@@ -212,5 +208,4 @@ module.exports.onCronjob = async ({ request }) => {
 };
 ```
 
-</TabItem>
-</Tabs>
+<!--/tabs-->
