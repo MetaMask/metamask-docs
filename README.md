@@ -50,8 +50,12 @@ To contribute changes:
     Refer to the [style guide](#style-guide) and [Markdown guide](#markdown-guide) when making
     documentation changes.
 
-    > **Note:** If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
-    `snaps-sidebar.js` to [add the page to the sidebar](https://docusaurus.io/docs/sidebar/items).
+    > **Notes:**
+    > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
+        `snaps-sidebar.js` to [add the page to the sidebar](https://docusaurus.io/docs/sidebar/items).
+    > - If you delete or rename a documentation file, make sure to add a redirect to the
+        [redirect plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-client-redirects)
+        in `docusaurus.config.js`.
 
 5. [Preview your changes locally](#preview-locally) to check that the changes render correctly.
 
@@ -70,16 +74,12 @@ To contribute changes:
     [Link the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
     that your PR fixes by adding `fixes #<ISSUE-NUM>` to the PR description.
 
-8. Generate a preview build of your PR by adding a PR comment starting with `@metamaskbot publish-preview`.
-    MetaMask Bot publishes the PR as a site preview, then links it in a PR comment.
-    This allows reviewers to easily preview the changes made in your PR.
-
-9. Specific reviewers are automatically requested when you submit a PR.
+8. Specific reviewers are automatically requested when you submit a PR.
     You can request additional reviewers in the right sidebar of your PR – for example, the original
     issue raiser.
     Make any required changes to your PR based on reviewer feedback, repeating steps 4–6.
 
-10. After your PR is approved by two reviewers, all checks have passed, and your branch has no
+9. After your PR is approved by two reviewers, all checks have passed, and your branch has no
     conflicts with the main branch, you can merge your PR.
     If you don't have merge access, a maintainer will merge your PR for you.
     You can delete the topic branch after your PR is merged.
@@ -95,6 +95,10 @@ As a prerequisite, make sure you have the following installed:
   - Run `yarn install` to install dependencies and run any required post-install scripts.
 
 Preview your changes locally by running `yarn start` in the documentation repository.
+
+> **Note:** If you make changes to the
+[redirects](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-client-redirects), you can
+preview them by running `yarn build && yarn serve`.
 
 ## Style guide
 
