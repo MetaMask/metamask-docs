@@ -64,6 +64,6 @@ jobs:
       - name: Post preview in comment
         run: gh pr comment "${PR_NUMBER}" --body "${COMMENT_BODY}"
         env:
-          COMMENT_BODY: "Preview published: [${{ github.head_ref }}](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.head_ref }}/)"
+          COMMENT_BODY: "Preview published: [${{ github.head_ref }}](https://docs.metamask.io/${{ github.head_ref }}/)"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
