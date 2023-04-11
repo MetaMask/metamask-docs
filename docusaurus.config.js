@@ -8,7 +8,7 @@ const remarkCodesandbox = require("remark-codesandbox");
 const config = {
   title: "MetaMask docs",
   // tagline: '',
-  url: "https://metamask.github.io/",
+  url: "https://docs.metamask.io",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
