@@ -1,16 +1,16 @@
 # Use MetaMask SDK
 
-MetaMask SDK currently supports all JavaScript-based dapps and Unity gaming dapps.
+MetaMask SDK currently supports all JavaScript-based, native iOS, and Unity gaming dapps.
 It provides a reliable, secure, and seamless [connection](../../concepts/sdk-connections.md) from
 your dapp to a MetaMask wallet client.
 
 The following instructions work for dapps based on standard JavaScript, React, Node.js, Electron,
 and other web frameworks.
 You can also see instructions for [React Native](react-native.md), [pure JavaScript](pure-js.md),
-and [Unity gaming](unity.md) dapps.
+[native iOS](ios.md), and [Unity gaming](unity.md) dapps.
 
 :::tip Coming soon
-SDK support for Android native, iOS native, and Unreal Engine dapps is coming soon.
+SDK support for Android and Unreal Engine dapps is coming soon.
 :::
 
 :::note

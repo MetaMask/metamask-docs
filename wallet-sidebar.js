@@ -33,6 +33,7 @@ const sidebar = {
           items: [
             "how-to/use-sdk/react-native",
             "how-to/use-sdk/pure-js",
+            "how-to/use-sdk/ios",
             "how-to/use-sdk/unity",
           ],
         },

@@ -319,7 +319,7 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ["csharp"],
+        additionalLanguages: ["csharp","swift"],
       },
       algolia: {
         // The application ID provided by Algolia
