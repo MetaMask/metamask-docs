@@ -18,11 +18,13 @@ The following globals are also available:
 
 - `console`
 - `crypto`
-- `fetch` / `WebSocket` (with the [appropriate permission](../how-to/request-permissions.md#endowmentnetwork-access))
+- `fetch` (with the
+  [`endowment:network-access`](../reference/permissions.md#endowment--network-access) permission)
 - `setTimeout` / `clearTimeout`
 - `setInterval` / `clearInterval`
 - `SubtleCrypto`
-- `WebAssembly`
+- `WebAssembly` (with the
+  [`endowment:webassembly`](../reference/permissions.md#endowment--webassembly) permission)
 - `TextEncoder` / `TextDecoder`
 - `atob` / `btoa`
 - `URL`

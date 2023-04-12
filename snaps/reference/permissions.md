@@ -140,3 +140,16 @@ Specify this permission in the manifest file as follows:
   }
 },
 ```
+
+## endowment:webassembly
+
+To use WebAssembly, a snap must request the `endowment:webassembly` permission.
+This permission exposes the global `WebAssembly` API to the snap execution environment.
+
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "endowment:webassembly": {}
+},
+```
