@@ -4,9 +4,9 @@ title: Unity gaming
 
 # Use MetaMask SDK with Unity
 
-You can import MetaMask SDK into your Unity game to enable users to easily connect to their MetaMask
-Mobile wallet.
-The MetaMask Unity SDK supports macOS, Windows, Linux, IOS, Android, and WebGL.
+You can import MetaMask SDK into your [Unity](https://unity.com/) game to enable users to easily
+connect to their MetaMask Mobile wallet.
+The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 
 ## How it works
 
@@ -25,12 +25,32 @@ The following video demonstrates how to install and use the MetaMask Unity SDK.
 
 ## Steps
 
-### 1. Install the SDK for Unity
+### 1. Configure build settings
 
-To install the module, first download the
-[Unity SDK Package](https://drive.google.com/u/0/uc?id=1ArTJvKIZXK5vkUOM3cgr0t0NspenWRU9&export=download).
+To build the SDK, configure the following settings in your Unity editor according to your
+development platform:
 
-Then, go to the menu > **Package Manager**.
+- iOS:
+  - Go to **Build Settings > Build Options** and set **Enable Bitcode** to **NO**.
+- Android:
+  - Go to the **Assets** dropdown menu and select **External Dependency Manager > Android
+    Resolver > Resolve**.
+  - Go to **Build Settings > Player Settings** and set **Minimum API level** to **Android 7.0
+    'Nougat'** (API level 24).
+- WebGL:
+  - Go to **Build Settings > Player Settings**, switch to the **Resolution & Presentation Tab**, and
+    select **MetaMask**.
+
+For all platforms, also set the **Scripting Backend** in **Player Settings** to **IL2CPP**, and set
+**IL2CPP Code Generation** in **Build Settings** to **Faster (smaller) builds**.
+
+### 2. Install the SDK for Unity
+
+Download the
+[MetaMask SDK for Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786)
+from the Unity Asset Store.
+
+In your Unity editor, go to the menu > **Package Manager**.
 Select **My Assets**, **MetaMask Unity SDK**, and **Install**.
 You should see the MetaMask SDK package listed in the project packages and be able to interface
 with it and its examples in the scene.
@@ -38,7 +58,7 @@ with it and its examples in the scene.
 You also need to install [TextMeshPro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html).
 If you don't have TextMeshPro installed, the Unity editor automatically prompts you to install it.
 
-### 2. Initialize MetaMask
+### 3. Initialize MetaMask
 
 The main class you interface with is called `MetaMaskWallet`.
 It handles the connection to the user's wallet, as well as processing the requests to it using a
@@ -60,7 +80,7 @@ You first must initialize by doing one of the following:
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
 You can now make calls to the user's wallet using [provider API methods](../../reference/provider-api.md).
 
-### 3. Connect to MetaMask
+### 4. Connect to MetaMask
 
 Once the wallet is prepared and initialized, you can connect to MetaMask.
 Call the `Connect()` method on the wallet instance as follows:
@@ -99,7 +119,7 @@ scene with its fields provided.
 The transport field is also required if you want to use it isolated from the canvas that is spawned
 by the transport, then it generates the QR code for you.
 
-### 4. Use MetaMask
+### 5. Use MetaMask
 
 Once the wallet is authorized, you can make requests to it.
 The wallet is authorized when the buttons become interactable or the `WalletAuthorized` event is fired:
@@ -109,7 +129,7 @@ var wallet = MetaMaskUnity.Instance.Wallet;
 wallet.WalletAuthorized += OnWalletAuthorized;
 
 void OnWalletAuthorized(object sender, EventArgs e) {
-    Deebug.Log("Wallet is authorized");
+    Debug.Log("Wallet is authorized");
 }
 ```
 
@@ -118,7 +138,7 @@ The following is a sample transaction request:
 
 ```csharp
 var wallet = MetaMaskUnity.Instance.Wallet;
-var transactionParams = new MetaMaskTranscation
+var transactionParams = new MetaMaskTransaction
 {
     To = "0xd0059fB234f15dFA9371a7B45c09d451a2dd2B5a",
     From = MetaMaskUnity.Instance.Wallet.SelectedAddress,
@@ -128,12 +148,12 @@ var transactionParams = new MetaMaskTranscation
 var request = new MetaMaskEthereumRequest
 {
     Method = "eth_sendTransaction",
-    Parameters = new MetaMaskTranscation[] { transactionParams }
+    Parameters = new MetaMaskTransaction[] { transactionParams }
 };
 await wallet.Request(request);
 ```
 
-### 5. Configure MetaMask
+### 6. Configure MetaMask
 
 You can customize the default configuration or create your own configuration.
 
@@ -224,3 +244,51 @@ You can use it to call any [provider API method](../../reference/provider-api.md
 | `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling |
 | `LICENSE.md`             | Package license                                |
 | `Third Party Notices.md` | Third party notices                            |
+
+## FAQS
+
+<details>
+
+<summary>I can't find the SDK installation option.</summary>
+
+If you don't see the option to [install the SDK](#2-install-the-sdk-for-unity) in your Unity menu,
+ensure you're on the latest Unity version and that you have no red errors printed in your console.
+This option not appearing is typically due to incorrect editor initialization, which you can
+usually resolve by restarting the editor or updating your Unity version.
+
+</details>
+
+<details>
+
+<summary>On iOS, why does a popup appear when using a deeplink?</summary>
+
+When deeplinking, a background service is created to facilitate the communication layer between the
+Unity game and MetaMask.
+On iOS, background services expire after a certain amount of time.
+A notification pops up to let you know the socket connection has expired.
+
+</details>
+
+<details>
+
+<summary>What does the external dependency manager do?</summary>
+
+The Unity Jar Resolver is an external dependency manager specifically for Unity projects that use
+external libraries.
+It helps manage the dependencies between Unity and external libraries, which can sometimes be
+complicated due to differences between the two environments.
+This tool is particularly useful for MetaMask SDK, since Android and iOS need a variety of native
+libraries to facilitate deeplinking and the persistent socket connection.
+
+</details>
+
+<details>
+
+<summary>Does the SDK increase my compilation time?</summary>
+
+No.
+If you notice an increased compilation time, it might be related to the ILL2CP pipeline, which can
+take longer to build at compile time.
+The SDK is filled with precompiled libraries to save on runtime compilation.
+
+</details>
