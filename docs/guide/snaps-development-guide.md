@@ -310,7 +310,7 @@ In addition, the following globals are available:
 - `setTimeout` / `clearTimeout`
 - `setInterval` / `clearInterval`
 - `SubtleCrypto`
-- `WebAssembly`
+- `WebAssembly` (with the `endowment:webassembly` permission)
 - `TextEncoder` / `TextDecoder`
 - `atob` / `btoa`
 - `URL`
