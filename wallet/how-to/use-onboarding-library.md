@@ -5,6 +5,12 @@ description: Simplify the MetaMask onboarding experience for your users.
 
 # Use the MetaMask onboarding library
 
+:::caution important
+We recommend using [MetaMask SDK](use-sdk/index.md), which incorporates the functionality of the
+MetaMask onboarding library.
+You don't need to set up the onboarding library if you use the SDK.
+:::
+
 Sending users away from your dapp to install MetaMask presents challenges.
 You must inform the user to return to your dapp and refresh their browser after the installation.
 Your dapp detects the user's newly installed MetaMask extension only after that refresh.
