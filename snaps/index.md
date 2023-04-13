@@ -28,10 +28,10 @@ modify existing functionalities using the [Snaps JSON-RPC API](reference/rpc-api
 
 For example, you can:
 
-- [Display a custom confirmation screen](reference/rpc-api.md#snapdialog) in MetaMask.
+- [Display a custom confirmation screen](reference/rpc-api.md#snap_dialog) in MetaMask.
 - [Notify users](reference/rpc-api.md#snapnotify) in MetaMask.
-- [Securely store and manage data](reference/rpc-api.md#snapmanagestate) on your device.
-- [Control non-EVM accounts and assets](reference/rpc-api.md#snapgetbip44entropy) in MetaMask.
+- [Securely store and manage data](reference/rpc-api.md#snap_managestate) on your device.
+- [Control non-EVM accounts and assets](reference/rpc-api.md#snap_getbip44entropy) in MetaMask.
 - [Provide transaction insights](reference/exports.md#ontransaction) in MetaMask's pre-transaction window.
 - [Schedule periodic actions](reference/exports.md#oncronjob) for your users.
 - [Display custom UI](how-to/use-custom-ui.md) in MetaMask using a set of pre-defined components,

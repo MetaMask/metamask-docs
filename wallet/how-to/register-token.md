@@ -10,7 +10,7 @@ user must register the token themselves.
 This process can be cumbersome, involves the user interacting with contract addresses, and is error-prone.
 
 You can improve the security and experience of users registering your token on their MetaMask
-interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#walletwatchasset) RPC method.
+interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
 
 For example, you can add something like the following to your project script:
 

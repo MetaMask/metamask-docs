@@ -58,8 +58,8 @@ method using the global Ethereum provider made available to snaps.
 To enable your snap to provide transaction insights and use the global Ethereum provider, open
 `/packages/snap/snap.manifest.json` in a text editor.
 Request the
-[`endowment:transaction-insight`](../reference/permissions.md#endowment--transaction-insight) and
-[`endowment:ethereum-provider`](../reference/permissions.md#endowment--ethereum-provider)
+[`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight) and
+[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider)
 permissions by modifying `initialPermissions`:
 
 ```json title="snap.manifest.json"

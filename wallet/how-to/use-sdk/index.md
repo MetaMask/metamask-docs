@@ -107,8 +107,8 @@ const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 
 Use the SDK by calling any [provider API methods](../../reference/provider-api.md).
 Always call [`eth_requestAccounts`](../../reference/rpc-api.md#eth_requestaccounts) using
-[`ethereum.request()`](../../reference/provider-api.md#ethereumrequestargs) first, since it prompts
-the installation or connection popup to appear.
+[`ethereum.request(args)`](../../reference/provider-api.md#windowethereumrequestargs)
+first, since it prompts the installation or connection popup to appear.
 
 ```javascript
 ethereum.request({ method: 'eth_requestAccounts', params: [] });

@@ -6,16 +6,16 @@ description: Sign data using eth_signTypedData_v4 and personal_sign.
 
 You can use the following RPC methods to request cryptographic signatures from users:
 
-- [`eth_signTypedData_v4`](#use-ethsigntypeddatav4) - Use this method to request the most human-readable
+- [`eth_signTypedData_v4`](#use-eth_signtypeddata_v4) - Use this method to request the most human-readable
   signatures that are efficient to process on-chain.
   We recommend this for most use cases.
-- [`personal_sign`](#use-personalsign) - Use this method for the easiest way to request human-readable
+- [`personal_sign`](#use-personal_sign) - Use this method for the easiest way to request human-readable
   signatures that don't need to be efficiently processed on-chain.
 
 Read more about [the history of the signing methods](../concepts/signing-methods.md).
 
 :::caution
-[`eth_sign`](../concepts/signing-methods.md#ethsign) is deprecated.
+[`eth_sign`](../concepts/signing-methods.md#eth_sign) is deprecated.
 :::
 
 :::note
@@ -27,7 +27,8 @@ sign data using an unsupported method, in which case we recommend using your sta
 
 ## Use eth_signTypedData_v4
 
-`eth_signTypedData_v4` provides the most human-readable signatures that are efficient to process on-chain.
+[`eth_signTypedData_v4`](https://metamask.github.io/api-playground/api-documentation/#eth_signTypedData_v4)
+provides the most human-readable signatures that are efficient to process on-chain.
 It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification to allow users to sign
 typed structured data that can be verified on-chain.
 It renders the structured data as usefully as possible to the user (for example, displaying known

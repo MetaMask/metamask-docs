@@ -4,7 +4,7 @@ description: MetaMask Ethereum JSON-RPC API reference
 
 # JSON-RPC API
 
-MetaMask uses the [`window.ethereum.request(args)`](provider-api.md#windowethereumrequest--args-)
+MetaMask uses the [`window.ethereum.request(args)`](provider-api.md#windowethereumrequestargs)
 provider method to wrap a JSON-RPC API.
 The API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
@@ -19,7 +19,7 @@ Methods in the API playground may have the following tags:
   by other wallets.
   Some of these methods are documented in more detail on this page.
 - **Restricted** - These methods are [restricted](#restricted-methods), which require requesting
-  permission using [`wallet_requestPermissions`](#walletrequestpermissions).
+  permission using [`wallet_requestPermissions`](#wallet_requestpermissions).
 - **Mobile** - These methods are only available on MetaMask Mobile.
 
 For more information on the standard Ethereum RPC methods, see the
@@ -28,7 +28,7 @@ For more information on the standard Ethereum RPC methods, see the
 :::note
 All RPC method requests can return errors.
 Make sure to handle errors for every call to
-[`window.ethereum.request(args)`](provider-api.md#windowethereumrequest--args-).
+[`window.ethereum.request(args)`](provider-api.md#windowethereumrequestargs).
 :::
 
 ## Restricted methods
@@ -36,7 +36,7 @@ Make sure to handle errors for every call to
 MetaMask introduced web3 wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is restricted or unrestricted.
 If a method is restricted, the caller must request permission to call it using
-[`wallet_requestPermssions`](#walletrequestpermissions).
+[`wallet_requestPermssions`](#wallet_requestpermissions).
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
@@ -52,7 +52,7 @@ Unrestricted methods have no corresponding permission, but they might still rely
 succeed (for example, the signing methods require calling the restricted
 [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts) method),
 or they might require confirmation by the user (for example,
-[`wallet_addEthereumChain`](#walletaddethereumchain)).
+[`wallet_addEthereumChain`](#wallet_addethereumchain)).
 
 The following are some MetaMask-specific unrestricted methods.
 For the full list of MetaMask JSON-RPC API methods, see the
@@ -66,7 +66,7 @@ Use this method to [access a user's accounts](../get-started/access-accounts.md)
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 
 :::info
-Internally, this method calls [`wallet_requestPermissions`](#walletrequestpermissions) for
+Internally, this method calls [`wallet_requestPermissions`](#wallet_requestpermissions) for
 permission to call [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts).
 :::
 
@@ -206,7 +206,7 @@ An array containing an object containing the following metadata about the chain 
 
 #### Example
 
-We recommend using this method with [`wallet_addEthereumChain`](#walletaddethereumchain):
+We recommend using this method with [`wallet_addEthereumChain`](#wallet_addethereumchain):
 
 ```javascript
 try {
@@ -258,11 +258,11 @@ An array containing an object containing `chainId`, the chain ID as a `0x`-prefi
 `null` if the request was successful, and an error otherwise.
 
 If the error code is `4902`, the requested chain hasn't been added by MetaMask, and you must request
-to add it using [`wallet_addEthereumChain`](#walletaddethereumchain).
+to add it using [`wallet_addEthereumChain`](#wallet_addethereumchain).
 
 #### Example
 
-See the [`wallet_addEthereumChain`](#walletaddethereumchain) example.
+See the [`wallet_addEthereumChain`](#wallet_addethereumchain) example.
 
 ### wallet_registerOnboarding
 

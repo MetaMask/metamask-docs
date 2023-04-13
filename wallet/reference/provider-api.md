@@ -178,7 +178,7 @@ window.ethereum.on('connect', handler: (connectInfo: ConnectInfo) => void);
 
 The provider emits this event when it's first able to submit RPC requests to a chain.
 We recommend listening to this event and using the
-[`window.ethereum.isConnected()`](#windowethereumisconnected--) provider method to determine when
+[`window.ethereum.isConnected()`](#windowethereumisconnected) provider method to determine when
 the provider is connected.
 
 ### disconnect
@@ -192,7 +192,7 @@ In general, this only happens due to network connectivity issues or some unfores
 
 When the provider emits this event, it doesn't accept new requests until the connection to the chain
 is re-established, which requires reloading the page.
-You can also use the [`window.ethereum.isConnected()`](#windowethereumisconnected--) provider method
+You can also use the [`window.ethereum.isConnected()`](#windowethereumisconnected) provider method
 to determine if the provider is disconnected.
 
 ### message
@@ -210,8 +210,9 @@ The provider emits this event when it receives a message that the user should be
 The `type` property identifies the kind of message.
 
 RPC subscription updates are a common use case for this event.
-For example, if you create a subscription using `eth_subscribe`, each subscription update is emitted
-as a `message` event with a `type` of `eth_subscription`.
+For example, if you create a subscription using
+[`eth_subscribe`](https://metamask.github.io/api-playground/api-documentation/#eth_subscribe), each
+subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
 ## Errors
 
@@ -225,7 +226,7 @@ interface ProviderRpcError extends Error {
 }
 ```
 
-The [`window.ethereum.request(args)`](#windowethereumrequest--args-) provider method throws errors
+The [`window.ethereum.request(args)`](#windowethereumrequestargs) provider method throws errors
 eagerly.
 You can use the error `code` property to determine why the request failed.
 Common codes and their meaning include:

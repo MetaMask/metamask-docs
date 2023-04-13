@@ -56,8 +56,9 @@ versions with hard-versioned method names:
 - `eth_signTypedData_v3` – A highly used version of the EIP-712 specification.
   Read the
   [introductory blog post to this method](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
-- `eth_signTypedData_v4` – The latest version of the EIP-712 specification, with added
-  support for arrays and a breaking fix for the way structs are encoded.
+- [`eth_signTypedData_v4`](https://metamask.github.io/api-playground/api-documentation/#eth_signTypedData_v4)
+  – The latest version of the EIP-712 specification, with added support for arrays and a breaking
+  fix for the way structs are encoded.
   Read the
   [introductory blog post to this method](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 

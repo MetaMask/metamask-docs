@@ -182,7 +182,7 @@ to use a restricted method.
 
 :::caution
 This method is deprecated.
-Please migrate all instances of `snap_confirm` to [`snap_dialog`](#snapdialog).
+Please migrate all instances of `snap_confirm` to [`snap_dialog`](#snap_dialog).
 :::
 
 Displays a confirmation in the MetaMask UI.
@@ -730,7 +730,7 @@ The `*` in the name is always substituted for a string, in this case a snap ID.
 :::
 
 :::tip
-[`wallet_invokeSnap`](#walletinvokesnap) provides a more convenient way of calling this method.
+[`wallet_invokeSnap`](#wallet_invokesnap) provides a more convenient way of calling this method.
 :::
 
 #### Parameters

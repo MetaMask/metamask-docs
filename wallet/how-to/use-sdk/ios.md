@@ -73,7 +73,7 @@ project file:
 ```
 
 The following examples use the
-[`window.ethereum.request(args)`](../../reference/provider-api.md#windowethereumrequest--args-)
+[`window.ethereum.request(args)`](../../reference/provider-api.md#windowethereumrequestargs)
 provider API method to call various [RPC API](../../reference/rpc-api.md) methods.
 
 #### Example: Get chain ID

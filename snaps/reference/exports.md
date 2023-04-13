@@ -80,7 +80,7 @@ MetaMask passes the raw unsigned transaction payload to the `onTransaction` hand
 
 :::note
 For MetaMask to call the snap's `onTransaction` method, you must request the
-[`endowment:transaction-insight`](permissions.md#endowment--transaction-insight) permission.
+[`endowment:transaction-insight`](permissions.md#endowmenttransaction-insight) permission.
 :::
 
 ### Parameters
@@ -91,7 +91,7 @@ An object containing:
 - `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
   chain ID.
 - `transactionOrigin` - The transaction origin if
-  [`allowTransactionOrigin`](permissions.md#endowment--transaction-insight) is set to `true`.
+  [`allowTransactionOrigin`](permissions.md#endowmenttransaction-insight) is set to `true`.
 
 ### Returns
 
@@ -151,11 +151,11 @@ module.exports.onTransaction = async ({
 
 To run periodic actions for the user (cron jobs), a snap must export `onCronjob`.
 This method is called at the specified times with the specified payloads defined in the
-[`endowment:cronjob`](permissions.md#endowment--cronjob) permission.
+[`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 
 :::note
 For MetaMask to call the snap's `onCronjob` method, you must request the
-[`endowment:cronjob`](permissions.md#endowment--cronjob) permission.
+[`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
 
 ### Parameters

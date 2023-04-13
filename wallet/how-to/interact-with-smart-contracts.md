@@ -19,8 +19,8 @@ Many dapp developers deploy their contract to a testnet first, in order to avoid
 disastrous fees if something goes wrong during development and testing on Mainnet.
 
 Regardless of which network you deploy your final dapp on, your users must be able to access it.
-Use the [`wallet_switchEthereumChain`](../reference/rpc-api.md#walletswitchethereumchain) and
-[`wallet_addEthereumChain`](../reference/rpc-api.md#walletaddethereumchain) RPC methods to prompt
+Use the [`wallet_switchEthereumChain`](../reference/rpc-api.md#wallet_switchethereumchain) and
+[`wallet_addEthereumChain`](../reference/rpc-api.md#wallet_addethereumchain) RPC methods to prompt
 the user to add a chain that you suggest, and switch to it using a confirmation dialogue.
 
 ## Contract address

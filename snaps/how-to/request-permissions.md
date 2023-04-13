@@ -14,7 +14,7 @@ and you must specify a snap's required permissions in the `initialPermissions` f
 You must request permission to use any
 [restricted JSON-RPC API methods](../reference/rpc-api.md#restricted-methods).
 
-For example, to request to use [`snap_dialog`](../reference/rpc-api.md#snapdialog), add the
+For example, to request to use [`snap_dialog`](../reference/rpc-api.md#snap_dialog), add the
 following to the manifest file:
 
 ```json
@@ -29,7 +29,7 @@ Endowments are a type of permission.
 See the [Snaps permissions reference](../reference/permissions.md) for the full list of endowments
 you can specify in the manifest file.
 
-For example, to request the [`endowment:long-running`](../reference/permissions.md#endowment--long-running)
+For example, to request the [`endowment:long-running`](../reference/permissions.md#endowmentlong-running)
 permission, add the following to the manifest file:
 
 ```json

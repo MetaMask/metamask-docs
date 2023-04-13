@@ -78,7 +78,7 @@ you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATIO
 
 For many web3 sites, the API provided by `window.ethereum` is sufficient.
 Much of the `web3` API simply maps to RPC methods, all of which can be requested using
-[`ethereum.request()`](../reference/provider-api.md#ethereumrequestargs).
+[`ethereum.request()`](../reference/provider-api.md#windowethereumrequestargs).
 For example, here are a couple of actions performed using first `window.web3`, and then their
 equivalents using `window.ethereum`.
 
@@ -181,7 +181,7 @@ Please follow the relevant link below to install the Legacy Web3 extension in yo
 The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead
 of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
 MetaMask's implementation of `eth_chainId` used to return 0-padded values for the
-[default Ethereum chains](../reference/provider-api.md#chain-ids) _except_ Kovan.
+[default Ethereum chains](../get-started/detect-network.md#chain-ids) _except_ Kovan.
 If you expect 0-padded chain ID values from `eth_chainId`, make sure to update your code to expect
 the correct format instead.
 
@@ -216,10 +216,10 @@ introduction of MetaMask's [permission system](../reference/rpc-api.md#restricte
 
 We recommend that you check for account access in the following ways:
 
-1. You can call the [`wallet_getPermissions` RPC method](../reference/rpc-api.md#wallet_getpermissions)
+1. You can call the [`wallet_getPermissions`](../reference/rpc-api.md#wallet_getpermissions) RPC method
     and check for the `eth_accounts` permission.
 1. You can call the `eth_accounts` RPC method and the
-    [`ethereum._metamask.isUnlocked()` method](../reference/provider-api.md#ethereum_metamaskisunlocked).
+    [`ethereum._metamask.isUnlocked()`](../reference/provider-api.md#windowethereum_metamaskisunlocked) method.
     - MetaMask has to be unlocked before you can access the user's accounts.
       If the array returned by `eth_accounts` is empty, check if MetaMask is locked using `isUnlocked()`.
     - If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request
@@ -233,7 +233,7 @@ and accessing the `publicConfigStore` internal state directly.
 
 We recommend that you search your code and its dependencies for references to `publicConfigStore`.
 If you find any references, you should understand what it's being used for, and migrate to
-[one of the recommended provider APIs](../reference/provider-api.md#using-the-provider) instead.
+[one of the recommended provider APIs](../reference/provider-api.md) instead.
 If you don't find any references, you should not be affected by this change.
 
 Although it is possible that your dependencies use the `publicConfigStore`, we have confirmed that

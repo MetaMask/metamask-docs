@@ -62,7 +62,7 @@ This is a free icon, **Gas** by Mello from
 ### 3. Enable network access
 
 To enable your snap to use the `fetch` API, request the
-[`endowment:network-access`](../reference/permissions.md#endowment--network-access) permission by
+[`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access) permission by
 modifying `initialPermissions` in `snap.manifest.json`:
 
 ```json title="snap.manifest.json"

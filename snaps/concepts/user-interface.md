@@ -15,7 +15,7 @@ For each snap, the user can:
 Other than the settings page, a snap can modify the MetaMask UI using
 [custom UI](../how-to/use-custom-ui.md) in only two ways:
 
-- By opening a dialog using the [`snap_dialog`](../reference/rpc-api.md#snapdialog) RPC method.
+- By opening a dialog using the [`snap_dialog`](../reference/rpc-api.md#snap_dialog) RPC method.
 - By returning transaction insights from the [`onTransaction`](../reference/exports.md#ontransaction)
   export.
 
