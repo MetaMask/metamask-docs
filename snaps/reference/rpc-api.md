@@ -11,8 +11,7 @@ Some methods are only callable by snaps, and some are only callable by websites.
 
 ## Unrestricted methods
 
-You can use unrestricted methods without [requesting permission](../how-to/request-permissions.md)
-to do so.
+You can call unrestricted methods without requesting permission to do so.
 
 ### wallet_getSnaps
 
@@ -28,8 +27,9 @@ Each snap is an object containing:
 - `id` - The ID of the snap.
 - `initialPermissions` - The initial permissions of the snap, which will be requested when the snap
   is installed.
-- `permissionName` - The name of the permission used to invoke the snap.
 - `version` - The version of the snap.
+- `enabled` - `true` if the snap is enabled, `false` otherwise.
+- `blocked` - `true` if the snap is blocked, `false` otherwise.
 
 #### Example
 
@@ -48,18 +48,12 @@ console.log(result);
 ```javascript
 // Example result if any snaps are permitted
 {
-  accountRPC methods?s: ['0xa...', '0xb...'],
-  permissions: {
-    eth_accounts: {},
-    'wallet_snap_npm:@metamask/example-snap': {},
+  'npm:@metamask/example-snap': {
+    version: '1.0.0',
+    id: 'npm:@metamask/example-snap',
+    enabled: true,
+    blocked: false,
   },
-  snaps: {
-    'npm:@metamask/example-snap': {
-      version: '1.0.0',
-      permissionName: 'wallet_snap_npm:@metamask/example-snap',
-      ...
-    }
-  }
 }
 ```
 
@@ -159,13 +153,15 @@ try {
 {
   'npm:@metamask/example-snap': {
     version: '1.0.0',
-    permissionName: 'wallet_snap_npm:@metamask/example-snap',
-    ...
+    id: 'npm:@metamask/example-snap',
+    enabled: true,
+    blocked: false,
   },
   'npm:fooSnap': {
     version: '1.0.5',
-    permissionName: 'wallet_snap_npm:fooSnap',
-    ...
+    id: 'npm:fooSnap',
+    enabled: true,
+    blocked: false,
   },
 }
 ```
@@ -174,9 +170,10 @@ try {
 
 ## Restricted methods
 
-You must
-[request permission](../how-to/request-permissions.md#rpc-api-permissions) in the snap manifest file
-to use a restricted method.
+For restricted methods callable by snaps, a snap must request permission to call the method in the
+[snap manifest file](../how-to/request-permissions.md).
+For restricted methods callable by websites, a website must request permission to call the method using
+[`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions).
 
 ### snap_confirm (deprecated)
 
@@ -707,49 +704,90 @@ An object containing the contents of the notification:
 await snap.request({
   method: 'snap_notify',
   params: {
-      type: 'inApp',
-      message: `Hello, world!`,
+    type: 'inApp',
+    message: 'Hello, world!',
   },
 });
 ```
 
-### wallet\_snap\_*
+### wallet_snap
 
-Invokes the specified JSON-RPC method of the snap corresponding to the specified permission name.
-The snap must be installed and the caller must have permission to communicate with the snap, or the
-request is rejected.
+A website must request the `wallet_snap` permission using
+[`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions) to
+interact with the specified snaps.
 
-Snaps are responsible for implementing their JSON-RPC API.
-Consult the snap's documentation for available methods, their parameters, and return values.
+A website can also call this method to invoke the specified JSON-RPC method of the specified snap.
 
-This method is only callable by websites.
+This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap), and is only callable by websites.
 
 :::note
-This is a namespaced method.
-The `*` in the name is always substituted for a string, in this case a snap ID.
-:::
-
-:::tip
-[`wallet_invokeSnap`](#wallet_invokesnap) provides a more convenient way of calling this method.
+Most websites only make one call to `wallet_requestPermissions`.
+Consecutive calls to `wallet_requestPermissions` for the `wallet_snap` permission overwrites a
+website's existing permissions to interact with snaps.
+To deal with this, you must write custom logic to merge existing snap IDs with new ones you're requesting.
+Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a website's permitted snaps.
 :::
 
 #### Parameters
 
-The JSON-RPC request object to send to the invoked snap.
+When requesting this permission, specify a caveat of type `snapIds`.
+Specify each snap to request permission to interact with as an entry in the `value` field of the caveat.
+Each snap entry can include a `version` to install.
+The default is the latest version.
+
+When calling this method, specify an object containing:
+
+- `snapId` - The ID of the snap to invoke.
+- `request` - The JSON-RPC request object to send to the invoked snap.
 
 #### Returns
 
-The result of the snap method call.
+Result of the snap method call.
 
 #### Example
 
+<!--tabs-->
+
+# wallet_requestPermissions
+
+The following is an example of calling `wallet_requestPermissions` to request the `wallet_snap`
+permission:
+
 ```javascript
 const result = await ethereum.request({
-  method: 'wallet_snap_npm:@metamask/example-snap',
+  method: 'wallet_requestPermissions',
+  params: [{
+    wallet_snap: {
+      caveats: [
+        {
+          type: 'snapIds',
+          value: {
+            'npm:@metamask/example-snap': { version: '1.0.0' },
+            'npm:@metamask/foo-bar-snap': { version: '1.2.1' },
+          }
+        }
+      ]
+    }
+  }],
+});
+```
+
+# wallet_snap
+
+The following is an example of calling `wallet_snap`:
+
+```javascript
+const result = await ethereum.request({
+  method: 'wallet_snap',
   params: {
-    method: 'hello',
+    snapId: 'npm:@metamask/example-snap',
+    request: {
+      method: 'hello',
+    },
   },
 });
 
 console.log(result); // In this example, the result is a boolean.
 ```
+
+<!--/tabs-->
