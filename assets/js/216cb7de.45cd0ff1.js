@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmm_docs_v_2=self.webpackChunkmm_docs_v_2||[]).push([[6322],{355:e=>{e.exports=JSON.parse('{"title":"Concepts","slug":"/category/concepts","permalink":"/snaps/category/concepts","navigation":{"previous":{"title":"Troubleshoot","permalink":"/snaps/how-to/troubleshoot"},"next":{"title":"Snap anatomy","permalink":"/snaps/concepts/anatomy"}}}')}}]);
