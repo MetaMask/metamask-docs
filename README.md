@@ -6,10 +6,6 @@ technical documentation.
 
 All documentation content is located in the `wallet` and `snaps` directories.
 
-> **Important:** This is an alpha version of the new documentation.
-The site is published temporarily at
-[metamask.github.io/mm-docs-v2/staging](https://metamask.github.io/mm-docs-v2/staging/).
-
 ## Contribution workflow
 
 The MetaMask documentation contribution workflow involves proposing changes by creating
