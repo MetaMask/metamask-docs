@@ -36,5 +36,7 @@ jobs:
           git clone -b gh-pages --single-branch https://github.com/${{ github.repository }} gh-pages
           cd gh-pages
           git rm -r ${{ github.event.pull_request.head.ref }}
-          git commit -m "Delete ${{ github.event.pull_request.head.ref }} folder from gh-pages branch"
+          git commit -m "Delete ${BRANCH_NAME} folder from gh-pages branch"
           git push origin gh-pages
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
