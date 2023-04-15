@@ -62,7 +62,7 @@ To disable this, set `MetaMaskSDK.shared.enableDebug = false` or `ethereum.enabl
 
 ### 4. Call provider methods
 
-You can now call any [provider API method](../../reference/provider-api.md).
+You can now call any [provider API method](../../../reference/provider-api.md).
 
 The SDK uses [Combine](https://developer.apple.com/documentation/combine) to publish Ethereum
 events, so you need to define an `AnyCancellable` storage by adding the following line to your
@@ -73,8 +73,8 @@ project file:
 ```
 
 The following examples use the
-[`window.ethereum.request(args)`](../../reference/provider-api.md#windowethereumrequestargs)
-provider API method to call various [RPC API](../../reference/rpc-api.md) methods.
+[`window.ethereum.request(args)`](../../../reference/provider-api.md#windowethereumrequestargs)
+provider API method to call various [RPC API](../../../reference/rpc-api.md) methods.
 
 #### Example: Get chain ID
 

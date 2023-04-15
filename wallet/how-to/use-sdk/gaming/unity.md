@@ -1,5 +1,5 @@
 ---
-title: Unity gaming
+title: Unity
 ---
 
 # Use MetaMask SDK with Unity
@@ -10,10 +10,10 @@ The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 
 ## How it works
 
-The SDK renders a QR code in the UI using a dedicated prefab which players can scan with their
-MetaMask Mobile app.
+The SDK renders a QR code in the Unity game UI using a dedicated prefab which players can scan with
+their MetaMask Mobile app.
 It also supports deeplinking on mobile platforms.
-You can use all the [provider API methods](../../reference/provider-api.md) right from your game.
+You can use all the [provider API methods](../../../reference/provider-api.md) right from your game.
 
 ## Video demo
 
@@ -78,7 +78,7 @@ You first must initialize by doing one of the following:
 - Check **Initialize On Start** on the component within the editor.
 
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
-You can now make calls to the user's wallet using [provider API methods](../../reference/provider-api.md).
+You can now make calls to the user's wallet using [provider API methods](../../../reference/provider-api.md).
 
 ### 4. Connect to MetaMask
 
@@ -231,7 +231,7 @@ This method disconnects the user that is connected from the MetaMask app session
 #### `Request`
 
 This method sends a request to MetaMask.
-You can use it to call any [provider API method](../../reference/provider-api.md).
+You can use it to call any [provider API method](../../../reference/provider-api.md).
 
 ## Package structure
 

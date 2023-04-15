@@ -25,16 +25,51 @@ const sidebar = {
         {
           type: "category",
           label: "Use MetaMask SDK",
-          collapsed: true,
           link: {
             type: "doc",
             id: "how-to/use-sdk/index",
           },
           items: [
-            "how-to/use-sdk/react-native",
-            "how-to/use-sdk/pure-js",
-            "how-to/use-sdk/ios",
-            "how-to/use-sdk/unity",
+            {
+              type: "category",
+              label: "JavaScript",
+              link: {
+                type: "doc",
+                id: "how-to/use-sdk/javascript/index",
+              },
+              items: [
+                "how-to/use-sdk/javascript/react",
+                "how-to/use-sdk/javascript/pure-js",
+                "how-to/use-sdk/javascript/other-web-frameworks",
+                "how-to/use-sdk/javascript/react-native",
+                "how-to/use-sdk/javascript/nodejs",
+                "how-to/use-sdk/javascript/electron",
+              ],
+            },
+            {
+              type: "category",
+              label: "Mobile",
+              link: {
+                type: "doc",
+                id: "how-to/use-sdk/mobile/index",
+              },
+              items: [
+                "how-to/use-sdk/mobile/ios",
+                "how-to/use-sdk/mobile/android",
+              ],
+            },
+            {
+              type: "category",
+              label: "Gaming",
+              link: {
+                type: "doc",
+                id: "how-to/use-sdk/gaming/index",
+              },
+              items: [
+                "how-to/use-sdk/gaming/unity",
+                "how-to/use-sdk/gaming/unreal-engine",
+              ],
+            },
           ],
         },
         "how-to/use-mobile",
