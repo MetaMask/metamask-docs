@@ -89,18 +89,10 @@ h4 {
   font-weight: 500;
 }
 
-table {
-  display: table;
-  width: 100%;
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
   grid-gap: 2rem;
   padding: 1rem 2rem 3rem;
-}
-
-.card {
 }
