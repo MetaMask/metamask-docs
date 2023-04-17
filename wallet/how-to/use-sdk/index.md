@@ -104,21 +104,4 @@ You can download the
 [Node.js example](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/downloads/nodejs_v0.0.1_beta5.zip).
 Install the example using `yarn` and run it using `node .`.
 
-# React Native
-
-When a user accesses your mobile React Native dapp, the SDK automatically deeplinks to MetaMask
-Mobile (or if the user doesn't already have it, prompts them to install it).
-Once the user accepts the connection, they're automatically redirected back to your dapp.
-This happens for all actions that need user approval.
-
-<p align="center">
-
-![SDK React Native example](../../assets/sdk-react-native.gif)
-
-</p>
-
-You can download the
-[React Native example](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/downloads/reactNativeApp_v0.1.0.zip).
-Install the example using `yarn setup` and run it using `yarn ios` or `yarn android`.
-
 <!--/tabs-->
