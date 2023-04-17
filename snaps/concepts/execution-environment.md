@@ -1,5 +1,5 @@
 ---
-title: Snap execution environment
+title: Snaps execution environment
 description: Learn about the Snaps execution environment.
 ---
 
@@ -32,8 +32,8 @@ The following globals are also available:
 The execution environment is instrumented in this way to:
 
 1. Prevent snaps from influencing any other running code, including MetaMask itself.
-    That is, prevent all snaps from polluting the global environment and malicious snaps from
-    stealing the user's stuff.
+   That is, prevent all snaps from polluting the global environment and malicious snaps from
+   stealing the user's stuff.
 1. Prevent snaps from accessing sensitive JavaScript APIs (such as `fetch`) without permission.
 1. Ensure that the execution environment is "fully virtualizable," that is, platform-independent.
 
