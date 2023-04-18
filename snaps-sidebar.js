@@ -24,7 +24,7 @@ const sidebar = {
       collapsed: false,
       items: [
         "get-started/install-snaps",
-        "get-started/quickstart"
+        "get-started/quickstart",
       ],
     },
     {
