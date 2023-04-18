@@ -175,51 +175,6 @@ For restricted methods callable by snaps, a snap must request permission to call
 For restricted methods callable by websites, a website must request permission to call the method using
 [`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions).
 
-### snap_confirm (deprecated)
-
-:::caution
-This method is deprecated.
-Please migrate all instances of `snap_confirm` to [`snap_dialog`](#snap_dialog).
-:::
-
-Displays a confirmation in the MetaMask UI.
-The contents of the confirmation depend on the parameters.
-The user can approve or reject the confirmation, which is indicated by the method's return value.
-
-Use this method to show a MetaMask popup with custom text and buttons to approve or reject an action.
-You can use this to create requests, confirmations, and opt-in flows for a snap.
-
-This method is only callable by snaps.
-
-#### Parameters
-
-An object containing the contents of the confirmation.
-
-#### Returns
-
-`true` if the user accepted the confirmation, and `false` otherwise.
-
-#### Example
-
-```javascript
-const result = await snap.request({
-  method: 'snap_confirm',
-  params: [
-    {
-      prompt: 'Would you like to take the action?',
-      description: 'The action is...',
-      textAreaContent: 'Very detailed information about the action...',
-    },
-  ],
-});
-
-if (result === true) {
-  // Take the action
-} else {
-  // Do not take the action
-}
-```
-
 ### snap_dialog
 
 Displays a dialog in the MetaMask UI.
