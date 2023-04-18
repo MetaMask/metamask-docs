@@ -5,7 +5,7 @@ description: Guiding principles for designers, developers, builders, and writers
 
 # Snaps design guidelines
 
-:::tip Summary
+:::note Summary
 Outlined here are guiding principles for designers, developers, builders, and writers to create snap install flows that are accessible for all types of users. You should use the guidelines in this document when introducing your snap within a dapp or website.
 :::
 
@@ -26,20 +26,22 @@ Consider whether the details that interest you as a developer are relevant to th
 - **Be consistent**
   Identify synonyms and eliminate them. Each important object and action should have a single word to represent it. Inconsistency can blur the lines for users, creating uncertainty and confusion.
 
+---
+
 ## Introducing your snap
 
 Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introducing your snap in the context of your application is a good way to make it clear what the user gets if they install.
 
-- ❌ _Allow the snap to perform actions that run periodically at fixed times, dates, or intervals. This can be used to trigger time-sensitive interactions or notifications._
+:::note How to (not) describe what your snap does
 
-- ❌ _Allow this snap to display notifications regarding your Ethereum Name Service expiration._
+❌ _Allow the snap to perform actions that run periodically at fixed times, dates, or intervals. This can be used to trigger time-sensitive interactions or notifications._
 
-- ✅ _Let this snap schedule and run recurring tasks or notifications._
+❌ _Allow this snap to display notifications regarding your Ethereum Name Service expiration._
 
-- ✅ _Let this snap notify you when your ENS is about to expire._
+✅ _Let this snap schedule and run recurring tasks or notifications._
 
-:::tip Tip
-Some studies estimate users read only 20-28% of text on any screen, so write about your snap with language that’s impactful, clear, and direct.
+✅ _Let this snap notify you when your ENS is about to expire._
+
 :::
 
 ### Details to include when introducing your snap
@@ -54,13 +56,21 @@ Consider introducing your snap on your website with a modal, tooltip, or card. T
 - Security precautions in plain, basic language that anyone can understand
 - Descriptions of the features that make your snap appealing to the intended users
 
-## When your snap is embedded in existing flows
+:::tip Tip
+Some studies estimate users read only 20-28% of text on any screen, so write about your snap with language that’s impactful, clear, and direct.
+:::
+
+---
+
+## Embedded in existing flows
 
 Introduce the snap as a natural extension of existing elements on your screen, and suggest installation when the time is right. This can be a make or break moment for your snap, so put yourself in the shoes of the intended user.
 
 At what point does it make the most sense to prompt an install? Don’t ask the user to install your snap before they do anything in the dapp or website, as this will probably be declined. Instead, **wait to prompt installation** **until a point where the snap is required**.
 
 An example of where you might introduce a snap, in this case a key management snap is suggested in the context of a network picker screen (as seen below).
+
+---
 
 ## Making the most of your metadata
 
@@ -76,17 +86,23 @@ When naming your snap, it is important to keep the name short and easy to rememb
 
 Using a descriptive name can help users understand how they will benefit from installing your snap, and may increase the likelihood that they will install and use it. **Never** use the word **“snap”** in your name — your name should be specific and memorable, and which will differentiate your snap from others.
 
-:::note Do's and don'ts
+:::note How to (not) name your snap
 
 ❌ _Solana Snap_
+
 ❌ _Snap for Filecoin_
+
 ❌ _Best manager for Bitcoin_
 
 ✅ _Solana Manager_
+
 ✅ _Bitcoin Helper_
+
 ✅ _Filecoin Wallet_
 
 :::
+
+---
 
 ## Upleveling your copy
 
@@ -100,12 +116,17 @@ Write your copy in active voice. There are certain situations where passive voic
 _Subject_ (person/thing acting) _verb_ (the action) _object_ (receives the action).
 :::
 
-- ❌ _The problem is being investigated_
-- ✅ _We’re investigating the problem_
+:::note How to (not) write in active voice
+❌ _The problem is being investigated_
+
+✅ _We’re investigating the problem_
+:::
 
 #### Capitalization
 
 With few exceptions, use **sentence case as a default**. Sentence case is capitalizing only the first word of a line of copy. Not only is sentence case is more casual and conversational, it’s also easier to scan than title case. Keep in mind, there are a handful of times that title case is the way to go.
+
+---
 
 ## Guidelines at a glance
 
