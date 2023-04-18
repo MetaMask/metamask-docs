@@ -22,7 +22,10 @@ const sidebar = {
       label: "Get started",
       link: { type: "generated-index" },
       collapsed: false,
-      items: ["get-started/install-snaps", "get-started/quickstart"],
+      items: [
+        "get-started/install-snaps",
+        "get-started/quickstart"
+      ],
     },
     {
       type: "category",
