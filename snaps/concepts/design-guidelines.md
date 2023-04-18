@@ -32,6 +32,8 @@ Consider whether the details that interest you as a developer are relevant to th
 
 Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introducing your snap in the context of your application is a good way to make it clear what the user gets if they install.
 
+<img width="1920" alt="SnapsModal_github" src="https://user-images.githubusercontent.com/34306844/232785573-0730e187-3f32-446f-b242-371b1bb92887.png">
+
 :::note How to (not) describe what your snap does
 
 ❌ _Allow the snap to perform actions that run periodically at fixed times, dates, or intervals. This can be used to trigger time-sensitive interactions or notifications._
@@ -70,6 +72,8 @@ At what point does it make the most sense to prompt an install? Don’t ask the 
 
 An example of where you might introduce a snap, in this case a key management snap is suggested in the context of a network picker screen (as seen below).
 
+<img width="1920" alt="networkpicker_github" src="https://user-images.githubusercontent.com/34306844/232785393-d46a13ca-8ebe-46a5-bd38-24d82c3dfc01.png">
+
 ---
 
 ## Making the most of your metadata
@@ -83,8 +87,6 @@ Your snap’s avatar should be suitable for a **32 px circular frame in SVG form
 **Name**
 
 When naming your snap, it is important to keep the name short and easy to remember. The name should be **21 characters maximum**, **including spaces**, to ensure that it is easy to read and fits comfortably on small screens.
-
-Using a descriptive name can help users understand how they will benefit from installing your snap, and may increase the likelihood that they will install and use it. **Never** use the word **“snap”** in your name — your name should be specific and memorable, and which will differentiate your snap from others.
 
 :::note How to (not) name your snap
 
@@ -101,6 +103,12 @@ Using a descriptive name can help users understand how they will benefit from in
 ✅ _Filecoin Wallet_
 
 :::
+
+Using a descriptive name can help users understand how they will benefit from installing your snap, and may increase the likelihood that they will install and use it. **Never** use the word **“snap”** in your name — your name should be specific and memorable, and which will differentiate your snap from others.
+
+<img width="1920" alt="Install_github" src="https://user-images.githubusercontent.com/34306844/232785843-9fa44db1-33d4-45f4-8b91-69e9b04f95fd.png">
+<img width="1920" alt="Insights_github" src="https://user-images.githubusercontent.com/34306844/232785866-dc94ed99-2c8e-4efe-b637-b015ce3b6307.png">
+<img width="1920" alt="Dialog_github" src="https://user-images.githubusercontent.com/34306844/232785878-bd93a6a4-ad8a-4a69-af04-0bac32ea384f.png">
 
 ---
 
