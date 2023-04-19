@@ -66,7 +66,7 @@ const App = () => {
 
   return (
     <div className="App">
-      
+      <button>Connect MetaMask</button>
     </div>
   )
 }
@@ -86,7 +86,7 @@ interface Window {
 }
 ```
 
-Also, for some basic styling purposes, let's change the `src/App.css` to:
+Also, let's change the `src/App.css` to:
 
 ```css
 .App {
@@ -101,6 +101,8 @@ button {
   margin-top: 0.5em;
 }
 ```
+
+At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask
 
 ## Detecting MetaMask
 
