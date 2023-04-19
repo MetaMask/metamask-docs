@@ -10,8 +10,8 @@ The SDK for Node.js has the [same prerequisites](index.md#prerequisites) as for 
 
 ## How it works
 
-When a user accesses your Node.js dapp, the SDK renders a QR code on the console which users can
-scan with their MetaMask Mobile app.
+When a user accesses your Node.js dapp, the SDK renders a QR code on the console to scan
+with their MetaMask Mobile app.
 
 <p align="center">
 

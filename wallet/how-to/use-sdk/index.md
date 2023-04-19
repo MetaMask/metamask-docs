@@ -58,7 +58,7 @@ The following are examples of how a user experiences a dapp with the SDK install
 
 # Desktop
 
-When a user accesses your web dapp on a desktop browser and doesn't have the MetaMask extension
+When a user accesses your web dapp on a desktop browser that doesn't have the MetaMask extension
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
 to MetaMask Mobile using a QR code.
 
@@ -74,7 +74,7 @@ Install the example using `yarn` and run it using `yarn start`.
 
 When a user accesses your mobile dapp, or web dapp on a mobile browser, the SDK automatically
 deeplinks to MetaMask Mobile (or if the user doesn't already have it, prompts them to install it).
-Once the user accepts the connection, they're automatically redirected back to your dapp.
+After the user accepts the connection, they're automatically redirected back to your dapp.
 This happens for all actions that need user approval.
 
 <p align="center">
