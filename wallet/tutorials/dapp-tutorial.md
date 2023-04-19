@@ -102,7 +102,7 @@ button {
 }
 ```
 
-At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask
+At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask. The state of our app at this point is also the `start` branch found in our on GitHub source code: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react).
 
 ## Detecting MetaMask
 
