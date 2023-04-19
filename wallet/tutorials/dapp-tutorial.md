@@ -44,13 +44,13 @@ Using React makes working with state management and building with components tha
 Scaffold a new project with [Vite.js](https://v3.vitejs.dev/guide), React & TypeScript:
 
 ```bash
-npm create vite@latest mm-sdk-react -- --template react-ts
+npm create vite@latest mm-dapp-react -- --template react-ts
 ```
 
 Install our dependencies:
 
 ```bash
-cd mm-sdk-react && npm install
+cd mm-dapp-react && npm install
 ```
 
 Open the project in your code editor of choice. We will start by resetting the `App.tsx` page to give us a blank slate.
@@ -438,6 +438,3 @@ You may need to have a list of whitelisted chainId's that your app supports, you
 ### Single Component Conclusion
 
 Our code is starting to get a little confusing. But don't think we have led you astray. We now have our head around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use something like [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information pertaining to our MetaMask wallet.
-
-We also would like to bring in the MetaMask SDK, it's only an import and a few lines of code, we will do that now before lifting up our state to a global context so that you can see it's implementation in both scenarios. In the next section of the tutorial we will introduce MetaMask SDK which will enable our users to connect via Metamask Extension or MetaMask mobile and we will sort out our application state and make it global.
-
