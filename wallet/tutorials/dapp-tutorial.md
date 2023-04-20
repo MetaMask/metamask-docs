@@ -510,14 +510,14 @@ const App = () => {
     setWallet({ accounts, balance, chainId })
   }
 
-  const handleConnect = async () => {
+  const handleConnect = async () => {                   /* Updated */
     setIsConnecting(true)                               /* New */
     await window.ethereum.request({                     /* Updated */
       method: "eth_requestAccounts",
     })
     .then((accounts:[]) => {                            /* New */
       setError(false)                                   /* New */
-      updateWallet(accounts)                            /* Updated */
+      updateWallet(accounts)                            /* New */
     })                                                  /* New */
     .catch((err:any) => {                               /* New */
       setError(true)                                    /* New */
