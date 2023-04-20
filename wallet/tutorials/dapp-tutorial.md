@@ -11,8 +11,8 @@ description: Beyond getting started, working with the MetaMask API and SDK to co
 - [Detecting MetaMask](#detecting-metamask)
 - [Connecting to MetaMask](#connecting-to-metamask)
 - [Manage More MetaMask State Locally](#manage-more-metamask-state-locally)
-  - [Watch User Balance](#watch-user-balance)
-  - [Watch User Chain](#watch-user-chain)
+  - [Watch User Balance and Chain](#watch-user-balance-and-chain)
+  - [Basic Error Handling](#basic-error-handling)
   - [Single Component Conclusion](#single-component-conclusion)
 
 ## Pre Requisites
@@ -334,7 +334,7 @@ In learning how to connect to MetaMask from a React application, we have learned
 
 Now we will add `balance` and `chainId` to our state.
 
-### Watching The User's Balance and Chain
+### Watch User Balance and Chain
 
 To update our current component for displaying the connected address's balance and the current `chainId`, we need to update our `initialState` object. Since we already use the `eth_requestAccounts` RPC endpoint to determine the accounts, we need to add a dependent call to `eth_getBalance` once we have that account information.
 
@@ -563,3 +563,12 @@ With these changes in place we covered most of the basics around working with Me
 ### Single Component Conclusion
 
 Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
+
+
+<!-- Notes
+ue takes a function that we are passing to ue, this func creates a closure around the env where it is defined and included a var called wallet. the func inside the ue gets called once right now because we didnt set up any dep, on inital render, and the closure it creates is created around the intial state of the wallet, but later on when the closure gets called (refreshChain) it has a closure around the same reference. 
+
+refresh gets called whenever the listener pops off, and in that execution of refresh the wallet is a ref to the inital state of the wallet. bcuz thats what it was when it was defined.
+
+we are passing a func that does not depend on tha wallet reference that wil receive the param the current value of what that wallet state should be and allows us to not have to add wallet as a dep.
+ -->
