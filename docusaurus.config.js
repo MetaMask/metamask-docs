@@ -37,7 +37,6 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          id: 'openrpc',
           path: "wallet",
           routeBasePath: "wallet",
           sidebarPath: require.resolve("./wallet-sidebar.js"),
@@ -58,14 +57,6 @@ const config = {
   ],
   plugins: [
     [
-      "@metamask/docusaurus-openrpc",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
-      {
-        outputFile: 'snaps/reference/api.md',
-        openrpcDocument: "https://raw.githubusercontent.com/open-rpc/examples/master/service-descriptions/simple-math-openrpc.json"
-      },
-    ],
-    [
       "content-docs",
       /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
       ({
@@ -78,6 +69,14 @@ const config = {
           require("remark-docusaurus-tabs"),
         ],
       }),
+    ],
+    [
+      "@metamask/docusaurus-openrpc",
+      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
+      {
+        path: "/api-playground",
+        openrpcDocument: "https://raw.githubusercontent.com/open-rpc/examples/master/service-descriptions/simple-math-openrpc.json"
+      },
     ],
     [
       "@docusaurus/plugin-client-redirects",
