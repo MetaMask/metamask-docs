@@ -79,7 +79,7 @@ const config = {
       /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
       {
         path: "/api-playground",
-        openrpcDocument: "https://raw.githubusercontent.com/open-rpc/examples/master/service-descriptions/simple-math-openrpc.json"
+        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json"
       },
     ],
     [
