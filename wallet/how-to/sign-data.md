@@ -73,6 +73,7 @@ See the [live example](https://metamask.github.io/test-dapp/#signTypedDataV4) an
 signTypedDataV4Button.addEventListener('click', async function (event) {
   event.preventDefault();
 
+  // eth_signTypedData_v4 parameters. All of these parameters affect the resulting signature.
   const msgParams = JSON.stringify({
     domain: {
       // This defines the network, in this case, Mainnet.
