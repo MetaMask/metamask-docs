@@ -14,8 +14,6 @@ description: Beyond getting started, working with the MetaMask API and SDK to co
   - [Watch User Balance](#watch-user-balance)
   - [Watch User Chain](#watch-user-chain)
   - [Single Component Conclusion](#single-component-conclusion)
-<!-- - [Connect MetaMask via SDK](#Connect-metamask-via-SDK) -->
-- [Manage MetaMask State Globally](#manage-metamask-state-globally)
 
 ## Pre Requisites
 
@@ -26,8 +24,6 @@ Ensure you have the following before starting this tutorial.
 - Code Editor
 - [MetaMask Extension](https://metamask.io/download)
 - Basic Knowledge of JavaScript and React
-
-<!-- You can use MetaMask Extension exclusively for this tutorial, however; the MetaMask SDK enables the ability to easily connect to Extension or Mobile; having MetaMask Mobile installed on iOS or Android is recommended for Part 2. -->
 
 ## Why Vite and React
 
@@ -440,14 +436,130 @@ A few things to note are that our tutorial's app only needs to display informati
 
 You may need to have a list of whitelisted chainId's that your app supports, you may need to create UI that shows the information on that network, and you might want to present a button that allows them to connect to a supported chain. Knowing the user's wallet is on the correct chain and reacting to that in your application is crucial in almost every Web3 application.
 
+## Basic Error Handling
+
+Now that we have all of this in place and our app is working, I want to setup error handling, you could approach this in several ways so we want to first just add the minimal suggestions for how to handle an error or rejection when the user is connecting their wallet with he `handleConnect` function.
+
+We will add `useState` to track 
+
+- `isConnecting`
+- `error` and 
+- `errorMessage`
+
+When a user is in the middle of connecting, we will disable the "Connect MetaMask" button. Ifs an error is received we will update `error` to a value of `true` and set the `errorMessage` for display. As well we need to set `isConnecting` back to a value of `false` once they have either connected or we have caught the error, as well set `error` back to `false` if the message has been seen and dealt with.
+
+```ts
+import './App.css'
+import { useState, useEffect } from 'react'
+import { formatBalance, formatChainAsNum } from './utils'
+import detectEthereumProvider from '@metamask/detect-provider'
+
+const App = () => {
+  const [hasProvider, setHasProvider] = useState<boolean | null>(null)
+  const initialState = { accounts: [], balance: "", chainId: "" }
+  const [wallet, setWallet] = useState(initialState)
+
+  const [isConnecting, setIsConnecting] = useState(false)  /* New */
+  const [error, setError] = useState(false)                /* New */
+  const [errorMessage, setErrorMessage] = useState("")     /* New */
+
+  useEffect(() => {
+    const refreshAccounts = (accounts: any) => {
+      if (accounts.length > 0) {
+        updateWallet(accounts)
+      } else {
+        // if length 0, user is disconnected
+        setWallet(initialState)
+      }
+    }
+
+    const refreshChain = (chainId: any) => {
+      setWallet((wallet) => ({ ...wallet, chainId }))
+    }
+
+    const getProvider = async () => {
+      const provider = await detectEthereumProvider({ silent: true })
+      setHasProvider(Boolean(provider))
+
+      if (provider) {
+        const accounts = await window.ethereum.request(
+          { method: 'eth_accounts' }
+        )
+        refreshAccounts(accounts)
+        window.ethereum.on('accountsChanged', refreshAccounts)
+        window.ethereum.on("chainChanged", refreshChain)
+      }
+    }
+
+    getProvider()
+
+    return () => {
+      window.ethereum?.removeListener('accountsChanged', refreshAccounts)
+      window.ethereum?.removeListener("chainChanged", refreshChain)
+    }
+  }, [])
+
+  const updateWallet = async (accounts: any) => {
+    const balance = formatBalance(await window.ethereum!.request({
+      method: "eth_getBalance",
+      params: [accounts[0], "latest"],
+    }))
+    const chainId = await window.ethereum!.request({
+      method: "eth_chainId",
+    })
+    setWallet({ accounts, balance, chainId })
+  }
+
+  const handleConnect = async () => {
+    setIsConnecting(true)                               /* New */
+    await window.ethereum.request({                     /* Updated */
+      method: "eth_requestAccounts",
+    })
+    .then((accounts:[]) => {                            /* New */
+      setError(false)                                   /* New */
+      updateWallet(accounts)                            /* Updated */
+    })                                                  /* New */
+    .catch((err:any) => {                               /* New */
+      setError(true)                                    /* New */
+      setErrorMessage(err.message)                      /* New */
+    })                                                  /* New */
+    setIsConnecting(false)                              /* New */
+  }
+
+  const disableConnect = Boolean(wallet) && isConnecting;
+
+  return (
+    <div className="App">
+      <div>Injected Provider {hasProvider ? 'DOES' : 'DOES NOT'} Exist</div>
+
+      {window.ethereum?.isMetaMask && wallet.accounts.length < 1 &&
+                /* Updated */
+        <button disabled={disableConnect} onClick={handleConnect}>Connect MetaMask</button>
+      }
+
+      {wallet.accounts.length > 0 &&
+        <>
+          <div>Wallet Accounts: {wallet.accounts[0]}</div>
+          <div>Wallet Balance: {wallet.balance}</div>
+          <div>Hex ChainId: {wallet.chainId}</div>
+          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>
+        </>
+      }
+      { error && (                                        /* New Code Block */
+          <div onClick={() => setError(false)}>
+            <strong>Error:</strong> {errorMessage}
+          </div>
+        )
+      }
+    </div>
+  )
+}
+
+export default App
+```
+
+With these changes in place we covered most of the basics around working with MetaMask and it's API from within a single component and managing that state locally.
+
 ### Single Component Conclusion
 
-Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use something like [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
-
-<!-- Notes
-ue takes a function that we are passing to ue, this func creates a closure around the env where it is defined and included a var called wallet. the func inside the ue gets called once right now because we didnt set up any dep, on inital render, and the closure it creates is created around the intial state of the wallet, but later on when the closure gets called (refreshChain) it has a closure around the same reference. 
-
-refresh gets called whenever the listener pops off, and in that execution of refresh the wallet is a ref to the inital state of the wallet. bcuz thats what it was when it was defined.
-
-we are passing a func that does not depend on tha wallet reference that wil receive the param the current value of what that wallet state should be and allows us to not have to add wallet as a dep.
- -->
+Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
