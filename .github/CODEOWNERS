@@ -1,4 +1,2 @@
-# Lines starting with '#' are comments.
-# Each line is a file pattern followed by one or more owners.
-
-*                                    @MetaMask/devs @BboyAkers
+/snaps/ @MetaMask/tech-writers @MetaMask/snaps
+/wallet/ @MetaMask/tech-writers @MetaMask/dev-ex @ziad-saab
