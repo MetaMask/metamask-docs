@@ -6,6 +6,15 @@ description: Configure and connect a Ganache development network.
 
 You can run a personal Ethereum development network using [Ganache](https://www.trufflesuite.com/ganache),
 which allows you to develop a dapp in a secure test environment.
+
+:::note
+When using a local development blockchain such as Ganache or
+[anvil](https://www.alchemy.com/dapps/foundry-anvil), your node must calculate gas in order to make
+transactions on MetaMask.
+:::
+
+## Connect to Ganache
+
 Follow the [Ganache quickstart](https://trufflesuite.com/docs/ganache/quickstart/) to set
 up a development network.
 
