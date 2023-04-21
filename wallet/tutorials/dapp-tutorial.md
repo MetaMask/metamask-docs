@@ -86,7 +86,6 @@ Also, let's change the `src/App.css` to:
 
 ```css
 .App {
-  margin: 1em;
   display: flex;
   flex-direction: column;
   place-items: center;
