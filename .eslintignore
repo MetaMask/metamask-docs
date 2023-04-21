@@ -1,2 +1,3 @@
 /build
 /.yarn
+/static/js/custom-script.js
