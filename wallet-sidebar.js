@@ -64,6 +64,10 @@ const sidebar = {
       type: "doc",
       id: "tutorials/index",
       label: "Tutorials",
+      link: { type: "generated-index" },
+      items: [
+        "react-dapp-tutorial",
+      ],
     },
     {
       type: "category",
