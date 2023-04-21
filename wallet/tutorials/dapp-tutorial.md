@@ -13,7 +13,7 @@ description: Beyond getting started, working with the MetaMask API and SDK to co
 - [Manage More MetaMask State Locally](#manage-more-metamask-state-locally)
   - [Watch User Balance and Chain](#watch-user-balance-and-chain)
   - [Basic Error Handling](#basic-error-handling)
-  - [Single Component Conclusion](#single-component-conclusion)
+- [Single Component Conclusion](#single-component-conclusion)
 
 ## Pre Requisites
 
@@ -97,7 +97,11 @@ button {
 }
 ```
 
-At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask. The state of our app at this point is also the `start` branch found in our on GitHub source code: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react).
+At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask.  
+
+![](../assets/tutorials/dapp-tutorial/img-01.png)
+
+This starting point of our app (`start` branch) can be found in our on GitHub at: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react).
 
 ## Detecting MetaMask
 
@@ -120,7 +124,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>Injected Provider { injectedProvider ? 'DOES' : 'DOES NOT'} Exist</div>
+      <h2>Injected Provider { injectedProvider ? 'DOES' : 'DOES NOT'} Exist</h2>>
       { isMetaMask && 
         <button>Connect MetaMask</button>
       }
@@ -131,9 +135,17 @@ const App = () => {
 export default App
 ```
 
-If we have MetaMask installed, we manage our browser extensions and disable MetaMask refresh our application, and then enable it again and refresh. We should see that our application is appropriately detecting the presence of our MetaMask wallet.
+If MetaMask is not installed we will not see a "Connect MetaMask" button, and the text should display "Injected Provider DOES NOT Exist".
 
-The approach above is often what developers will try when first tasked in detecting an injected provider (Wallet Extension). Still, the MetaMask team provides a library called [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) with a module to detect the MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser. Let's install it and change our code to implement it instead.
+![](../assets/tutorials/dapp-tutorial/img-02.png)
+
+If we do have the MetaMask extension installed, we should see the "Connect MetaMask" button and the text should display "Injected Provider DOES Exist" and we will see the provider being printed in the console.
+
+![](../assets/tutorials/dapp-tutorial/img-03.png)
+
+We can toggle back and forth between these two states by enabling and disabling the MetaMask extension from our browsers **Manage Extensions** menu.
+
+The approach above is often what developers will try when first tasked in detecting an injected provider (Wallet Extension). Still, the MetaMask team provides a library called [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) with a module to detect the MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser. Let's install it and change our code to implement it instead of sniffing for the provider ourselves.
 
 Install the dependency:
 
@@ -154,6 +166,7 @@ const App = () => {
   useEffect(() => {
     const getProvider = async () => {
       const provider = await detectEthereumProvider({ silent: true })
+      console.log(provider)
       setHasProvider(Boolean(provider)) // transform provider to true or false
     }
 
@@ -173,13 +186,13 @@ const App = () => {
 export default App
 ```
 
-We are creating a piece of local state of type `boolean` or `null` value, initialized with a null value.
+We are creating a piece of local state called `hasProvider` of type `boolean` or `null` value, initialized with a null value.
 
-Next, we create a `useEffect` with zero dependencies (it will only run once in our component lifecycle). React's `useEffect` hook allows components to run code when a component is mounted or when some property's state changes. This hook also allows cleaning up when the component is unmounted. If you explicitly declare no dependencies by passing in an empty array `[]` like we have done on line 15, `useEffect` will only run once before the component mounts.
+Next, we create a `useEffect` with zero dependencies (it will only run once in our component lifecycle). React's `useEffect` hook allows components to run code when a component is mounted or when some property's state changes. This hook also allows cleaning up when the component is unmounted. If you explicitly declare no dependencies by passing in an empty array `[]`, our `useEffect` will only run once before the component mounts.
 
 Inside that `useEffect`, we create an `async` function called `getProvider`. This function awaits the `detectEthereumProvider` and uses an option (`silent: true`) to silence any console errors related to the provider not being available. YOu can choose not to use that option if you like. We use our setter function from within our `useState` and transform the provider's detection to a `boolean` (true/false) value.
 
-If we run our code now, we'll see that we are no longer blocking our component's rendering, and there is no error in our console.
+If we run our code now, we will see the same result in our app, but we are using  `detect-detectEthereumProvider` rather than our own code.
 
 ## Connecting to MetaMask
 
@@ -244,6 +257,16 @@ We create an object representing the initial empty state and a new `useState` ho
 We have added an `updateWallet` function that sets our new wallet state when we connect. It will also be called when we add code later that refreshes our wallet state. This function will come in handy as we start syncing our `balance` and `chainId`.
 
 We have added a `handleConnect` function that our UI will call to connect to MetaMask using `window.ethereum.request` and its `eth_requestAccounts` method. We store the awaited result from this RPC call in a variable named `accounts` and then pass it to our `updateWallet` function.
+
+This enables our "Connect MetaMask" button to run our `handleConnect` function and call the `eth_requestAccounts` RPC method on MetaMask which prompts the user to connect:
+
+![](../assets/tutorials/dapp-tutorial/img-04.png)  
+
+![](../assets/tutorials/dapp-tutorial/img-05.png)
+
+And once connected we will see our account address displayed in our dapp:
+
+![](../assets/tutorials/dapp-tutorial/img-06.png)
 
 ### React We Have a Problem
 
@@ -323,7 +346,7 @@ export default App
 
 One thing to note on the code added is that `useEffect` is a side effect, we use them for fetching data, reading and writing to local storage, and setting up event listeners or subscriptions. Our side effect occurs on the first render only, as we have nothing in our dependency array. We also want to clean up those listeners upon unmount of our component.
 
-We can now test our application and see that when we refresh the page, we retain our display of the user's address. When syncing with a source outside our application, managing the state in a single component is a lot of work. But most of the logic is in place to add more properties to our state object.
+We can now test our application and see that when we refresh the page, we retain our display of the user's address. We've synced with a source outside our application, and  we are managing the state in a single component. The logic is in place to add more properties to our state object.
 
 ### Connection Wrap Up
 
@@ -427,7 +450,9 @@ const App = () => {
 export default App
 ```
 
-That wasn't too bad, the changes were minimal because we only needed to update or duplicate existing functionality and add a few utility functions.
+That wasn't too bad, the changes were minimal because we only needed to update or duplicate existing functionality and add a few utility functions. Our application will now display `account`, `balance`, and `chainId` represented as a hex value and number.
+
+![](../assets/tutorials/dapp-tutorial/img-07.png)
 
 We detect any change of the `balance` or `chain`, and our utility functions help us format hex strings to be human-readable for display. For chainId's, we want to be able to use the hex version in RPC calls and the numeric version for display. To get the human-readable number of the chain, we use `parseInt`.
 
@@ -557,9 +582,21 @@ const App = () => {
 export default App
 ```
 
+To test out our error handling we can just disconnect from the accounts we are connected to inside of MetaMask:
+
+![](../assets/tutorials/dapp-tutorial/img-08.png)
+
+And we can attempt to connect again and choose to reject the connection:
+
+![](../assets/tutorials/dapp-tutorial/img-09.png)
+
+And then we will see the error message displayed on the app and in the console:
+
+![](../assets/tutorials/dapp-tutorial/img-10.png)
+
 With these changes in place we covered most of the basics around working with MetaMask and it's API from within a single component and managing that state locally.
 
-### Single Component Conclusion
+## Single Component Conclusion
 
 Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
 
