@@ -550,7 +550,7 @@ const App = () => {
     setIsConnecting(false)                              /* New */
   }
 
-  const disableConnect = Boolean(wallet) && isConnecting;
+  const disableConnect = Boolean(wallet) && isConnecting
 
   return (
     <div className="App">
