@@ -29,8 +29,7 @@ const config = {
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
-    { src: `${process.env.DEST ? require.resolve("./static/js/custom-script.js") : '/js/custom-script.js'}`, defer: true, async: true },
-   // { src: `${process.env.DEST ? '/' + process.env.DEST : ''}/js/custom-script.js`, defer: true, async: true },
+    { src: `${process.env.DEST ? process.env.DEST : ''}/js/custom-script.js`, defer: true, async: true },
   ],
 
   presets: [
