@@ -360,6 +360,24 @@ In learning how to connect to MetaMask from a React application, we have learned
 
 Now we will add `balance` and `chainId` to our state.
 
+Before we get started in our `/src/App.tsx` we are going to need a few `util` functions to format our `balance` and `chainId`.
+
+Create a new file at `/src/utils/index.tsx` with the following code:
+
+```ts
+export const formatBalance = (rawBalance: string) => {
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
+}
+
+export const formatChainAsNum = (chainIdHex: string) => {
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
+}
+```
+
+With those functions exported we will be able to import them into our component and use them as functions where needed to get human-readable balance and chain information.
+
 ### Watch User Balance and Chain
 
 To update our current component for displaying the connected address's balance and the current `chainId`, we need to update our `initialState` object. Since we already use the `eth_requestAccounts` RPC endpoint to determine the accounts, we need to add a dependent call to `eth_getBalance` once we have that account information.
