@@ -1,9 +1,9 @@
 ---
-title: React Dapp Tutorial
+title: Simple React Dapp
 description: Beyond getting started, working with the MetaMask API to connect from a React application using Vite.
 ---
 
-# React Dapp Tutorial
+# Simple React Dapp
 
 A follow along tutorial that will get you started connecting to MetaMask within a React dApp.
 
