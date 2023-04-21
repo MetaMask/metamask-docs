@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmm_docs_v_2=self.webpackChunkmm_docs_v_2||[]).push([[3237],{9754:(e,t,c)=>{c.r(t),c.d(t,{default:()=>_});var l=c(7294),s=c(6550),u=c(4996);function _(){return l.createElement(s.l_,{to:(0,u.Z)("/wallet")})}}}]);
