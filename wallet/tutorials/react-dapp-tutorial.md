@@ -622,11 +622,4 @@ With these changes in place we covered most of the basics around working with Me
 
 Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
 
-
-<!-- Notes
-ue takes a function that we are passing to ue, this func creates a closure around the env where it is defined and included a var called wallet. the func inside the ue gets called once right now because we didnt set up any dep, on inital render, and the closure it creates is created around the intial state of the wallet, but later on when the closure gets called (refreshChain) it has a closure around the same reference. 
-
-refresh gets called whenever the listener pops off, and in that execution of refresh the wallet is a ref to the inital state of the wallet. bcuz thats what it was when it was defined.
-
-we are passing a func that does not depend on tha wallet reference that wil receive the param the current value of what that wallet state should be and allows us to not have to add wallet as a dep.
- -->
+This final code for this app (`single-component-final` branch) can be found in our on GitHub at: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final).
