@@ -103,7 +103,7 @@ button {
 
 At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask.  
 
-![](../assets/tutorials/dapp-tutorial/img-01.png)
+![Initial App State with Button](../assets/tutorials/dapp-tutorial/img-01.png)
 
 This starting point of our app (`start` branch) can be found in our on GitHub at: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react).
 
@@ -141,11 +141,11 @@ export default App
 
 If MetaMask is not installed we will not see a "Connect MetaMask" button, and the text should display "Injected Provider DOES NOT Exist".
 
-![](../assets/tutorials/dapp-tutorial/img-02.png)
+![Injected Provider DOES NOT Exist](../assets/tutorials/dapp-tutorial/img-02.png)
 
 If we do have the MetaMask extension installed, we should see the "Connect MetaMask" button and the text should display "Injected Provider DOES Exist" and we will see the provider being printed in the console.
 
-![](../assets/tutorials/dapp-tutorial/img-03.png)
+![Injected Provider DOES Exist](../assets/tutorials/dapp-tutorial/img-03.png)
 
 We can toggle back and forth between these two states by enabling and disabling the MetaMask extension from our browsers **Manage Extensions** menu.
 
@@ -262,15 +262,15 @@ We have added an `updateWallet` function that sets our new wallet state when we 
 
 We have added a `handleConnect` function that our UI will call to connect to MetaMask using `window.ethereum.request` and its `eth_requestAccounts` method. We store the awaited result from this RPC call in a variable named `accounts` and then pass it to our `updateWallet` function.
 
-This enables our "Connect MetaMask" button to run our `handleConnect` function and call the `eth_requestAccounts` RPC method on MetaMask which prompts the user to connect:
+On click, our "Connect MetaMask" button calls `handleConnect`, from which an RPC call of `eth_requestAccounts` is awaited and the user is prompted to connect to MetaMask:
 
-![](../assets/tutorials/dapp-tutorial/img-04.png)  
+![Choose which MetaMask connects](../assets/tutorials/dapp-tutorial/img-04.png)  
 
-![](../assets/tutorials/dapp-tutorial/img-05.png)
+![Grant permissions over MetaMask](../assets/tutorials/dapp-tutorial/img-05.png)
 
 And once connected we will see our account address displayed in our dapp:
 
-![](../assets/tutorials/dapp-tutorial/img-06.png)
+![MetaMask Account Address](../assets/tutorials/dapp-tutorial/img-06.png)
 
 ### React We Have a Problem
 
@@ -474,7 +474,7 @@ export default App
 
 That wasn't too bad, the changes were minimal because we only needed to update or duplicate existing functionality and add a few utility functions. Our application will now display `account`, `balance`, and `chainId` represented as a hex value and number.
 
-![](../assets/tutorials/dapp-tutorial/img-07.png)
+![MetaMask address, balance, and chain](../assets/tutorials/dapp-tutorial/img-07.png)
 
 We detect any change of the `balance` or `chain`, and our utility functions help us format hex strings to be human-readable for display. For chainId's, we want to be able to use the hex version in RPC calls and the numeric version for display. To get the human-readable number of the chain, we use `parseInt`.
 
@@ -606,15 +606,15 @@ export default App
 
 To test out our error handling we can just disconnect from the accounts we are connected to inside of MetaMask:
 
-![](../assets/tutorials/dapp-tutorial/img-08.png)
+![Disconnect from selected Account](../assets/tutorials/dapp-tutorial/img-08.png)
 
 And we can attempt to connect again and choose to reject the connection:
 
-![](../assets/tutorials/dapp-tutorial/img-09.png)
+![Cancel request to connect](../assets/tutorials/dapp-tutorial/img-09.png)
 
 And then we will see the error message displayed on the app and in the console:
 
-![](../assets/tutorials/dapp-tutorial/img-10.png)
+![MetaMask User Reject Request Error](../assets/tutorials/dapp-tutorial/img-10.png)
 
 With these changes in place we covered most of the basics around working with MetaMask and it's API from within a single component and managing that state locally.
 
