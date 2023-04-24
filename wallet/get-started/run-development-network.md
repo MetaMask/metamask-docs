@@ -9,7 +9,7 @@ which allows you to develop a dapp in a secure test environment.
 
 :::note
 When using a local development blockchain such as Ganache or
-[anvil](https://www.alchemy.com/dapps/foundry-anvil), your node must calculate gas in order to make
+[anvil](https://book.getfoundry.sh/anvil/#overview-of-anvil), your node must calculate gas to make
 transactions on MetaMask.
 :::
 
