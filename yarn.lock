@@ -9191,6 +9191,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"metamask-docs@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "metamask-docs@workspace:."
+  dependencies:
+    "@docusaurus/core": 2.4.0
+    "@docusaurus/eslint-plugin": ^2.4.0
+    "@docusaurus/module-type-aliases": 2.4.0
+    "@docusaurus/plugin-client-redirects": 2.4.0
+    "@docusaurus/preset-classic": 2.4.0
+    "@lavamoat/allow-scripts": ^2.3.0
+    "@mdx-js/react": ^1.6.22
+    "@metamask/design-tokens": ^1.11.1
+    "@tsconfig/docusaurus": ^1.0.5
+    "@typescript-eslint/eslint-plugin": ^5.41.0
+    "@typescript-eslint/parser": ^5.41.0
+    clsx: ^1.2.1
+    eslint: ^8.26.0
+    eslint-plugin-react: ^7.31.10
+    eslint-plugin-unused-imports: ^2.0.0
+    prism-react-renderer: ^1.3.5
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    remark-codesandbox: ^0.10.1
+    remark-docusaurus-tabs: ^0.2.0
+    typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
 "methods@npm:~1.1.2":
   version: 1.1.2
   resolution: "methods@npm:1.1.2"
@@ -9454,34 +9482,6 @@ __metadata:
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
   languageName: node
   linkType: hard
-
-"mm-docs-v-2@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "mm-docs-v-2@workspace:."
-  dependencies:
-    "@docusaurus/core": 2.4.0
-    "@docusaurus/eslint-plugin": ^2.4.0
-    "@docusaurus/module-type-aliases": 2.4.0
-    "@docusaurus/plugin-client-redirects": 2.4.0
-    "@docusaurus/preset-classic": 2.4.0
-    "@lavamoat/allow-scripts": ^2.3.0
-    "@mdx-js/react": ^1.6.22
-    "@metamask/design-tokens": ^1.11.1
-    "@tsconfig/docusaurus": ^1.0.5
-    "@typescript-eslint/eslint-plugin": ^5.41.0
-    "@typescript-eslint/parser": ^5.41.0
-    clsx: ^1.2.1
-    eslint: ^8.26.0
-    eslint-plugin-react: ^7.31.10
-    eslint-plugin-unused-imports: ^2.0.0
-    prism-react-renderer: ^1.3.5
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    remark-codesandbox: ^0.10.1
-    remark-docusaurus-tabs: ^0.2.0
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
 
 "move-concurrently@npm:^1.0.1":
   version: 1.0.1
