@@ -80,6 +80,8 @@ const config = {
       {
         path: "/api-playground",
         openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json"
+        // uncomment line below to build reference docs from local api-specs
+        // openrpcDocument: "../api-specs/dist/build/openrpc.json"
       },
     ],
     [
