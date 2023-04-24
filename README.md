@@ -17,7 +17,7 @@ This facilitates open contributions, testing, and peer review.
 
 To contribute changes:
 
-1. Search for an [existing issue](https://github.com/MetaMask/mm-docs-v2/issues) to work on, or
+1. Search for an [existing issue](https://github.com/MetaMask/metamask-docs/issues) to work on, or
     [create a new issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue)
     describing the content issue you'd like to address.
     Make sure no one else is assigned to the issue, and assign yourself to it.
@@ -27,7 +27,7 @@ To contribute changes:
     this repository to your computer.
 
     ```bash
-    git clone https://github.com/MetaMask/mm-docs-v2.git
+    git clone https://github.com/MetaMask/metamask-docs.git
     ```
 
 3. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
@@ -64,7 +64,7 @@ To contribute changes:
     git push origin
     ```
 
-7. On [this repository on GitHub](https://github.com/MetaMask/mm-docs-v2), you’ll see a banner
+7. On [this repository on GitHub](https://github.com/MetaMask/metamask-docs), you’ll see a banner
     prompting you to create a PR with your recent changes.
     Create a PR, describing your changes in detail.
     [Link the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
