@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[3917],{9342:s=>{s.exports=JSON.parse('{"name":"docusaurus-openrpc","id":"default"}')}}]);
