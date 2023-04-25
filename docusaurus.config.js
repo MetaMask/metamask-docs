@@ -225,12 +225,11 @@ const config = {
             docsPluginId: "snaps",
             label: "Snaps",
           },
-          // {
-          //   type: "doc",
-          //   docId: "api-reference",
-          //   docsPluginId: "@metamask/docusaurus-openrpc",
-          //   label: "API Reference",
-          // },
+          {
+            docId: "api-playground",
+            to: '/api-playground',
+            label: 'Playground'
+          },
         ],
       },
       footer: {
