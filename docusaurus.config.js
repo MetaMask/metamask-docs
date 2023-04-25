@@ -234,8 +234,8 @@ const config = {
           },
           {
             docId: "api-playground",
-            to: '/api-playground',
-            label: 'Playground'
+            to: "/api-playground",
+            label: "Playground",
           },
         ],
       },
