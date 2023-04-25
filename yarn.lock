@@ -1883,7 +1883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.4.0":
+"@docusaurus/plugin-content-docs@npm:2.4.0, @docusaurus/plugin-content-docs@npm:^2.4.0":
   version: 2.4.0
   resolution: "@docusaurus/plugin-content-docs@npm:2.4.0"
   dependencies:
@@ -2382,6 +2382,58 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@json-schema-spec/json-pointer@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@json-schema-spec/json-pointer@npm:0.1.2"
+  checksum: 2a691ffc11f1a266ca4d0c9e2c99791679d580f343ef69746fad623d1abcf4953adde987890e41f906767d7729604c0182341e9012388b73a44d5b21fb296453
+  languageName: node
+  linkType: hard
+
+"@json-schema-tools/dereferencer@npm:1.5.4":
+  version: 1.5.4
+  resolution: "@json-schema-tools/dereferencer@npm:1.5.4"
+  dependencies:
+    "@json-schema-tools/reference-resolver": ^1.2.4
+    "@json-schema-tools/traverse": ^1.7.8
+    fast-safe-stringify: ^2.0.7
+  checksum: da7ca7e01a428fb8e3e1af44f92945dc9416c8a34e05fe7e82a0824b2f25affe3ca93f7424daa0bc3b578252243be8606e1a31b7b4e7001073942886fc1421d2
+  languageName: node
+  linkType: hard
+
+"@json-schema-tools/meta-schema@npm:1.6.19":
+  version: 1.6.19
+  resolution: "@json-schema-tools/meta-schema@npm:1.6.19"
+  checksum: 0105281416ee79fe027b10b952eec02e21466a7a0ffffc5e280d7d32ec8776536fd420456d0b4f605ecb1bef04efe3e35e75687aa3b1a256e8825078d4843233
+  languageName: node
+  linkType: hard
+
+"@json-schema-tools/reference-resolver@npm:1.2.4":
+  version: 1.2.4
+  resolution: "@json-schema-tools/reference-resolver@npm:1.2.4"
+  dependencies:
+    "@json-schema-spec/json-pointer": ^0.1.2
+    isomorphic-fetch: ^3.0.0
+  checksum: 6d5763c3632cb86a542dcffb67114c2176a5f20812ccf0a21ebc64d10bc569a7904a4323b26fc87339c3f16129a44c63b5b37dab06f575c9845e037d80aa2f9a
+  languageName: node
+  linkType: hard
+
+"@json-schema-tools/reference-resolver@npm:^1.2.4":
+  version: 1.2.5
+  resolution: "@json-schema-tools/reference-resolver@npm:1.2.5"
+  dependencies:
+    "@json-schema-spec/json-pointer": ^0.1.2
+    isomorphic-fetch: ^3.0.0
+  checksum: 469aa847c9d90dff5909fda01164076c5ab66baa671640a1b0cffc81fb72bd2a9339d7a4a5b7115b824c99efd98fce1f4eb1a3c98fdc1d968929ad7becebbdbd
+  languageName: node
+  linkType: hard
+
+"@json-schema-tools/traverse@npm:^1.7.8":
+  version: 1.10.1
+  resolution: "@json-schema-tools/traverse@npm:1.10.1"
+  checksum: 230e0700e3840ef206a13acaae67942f8c9d67c9ef315deec6868f0c7852c148c3e697eb038326c98bf242ace80b8d1d08cb5022995d623c9cbcb68fd6a5a4e0
+  languageName: node
+  linkType: hard
+
 "@lavamoat/aa@npm:^3.1.1":
   version: 3.1.2
   resolution: "@lavamoat/aa@npm:3.1.2"
@@ -2465,6 +2517,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/docusaurus-openrpc@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@metamask/docusaurus-openrpc@npm:0.0.3"
+  dependencies:
+    "@docusaurus/plugin-content-docs": ^2.4.0
+    "@open-rpc/schema-utils-js": ^1.16.1
+    react: ^18.2.0
+  peerDependencies:
+    "@docusaurus/core": 2.x
+  checksum: a8dc4ff7e9fba84aa7f70d02a6183c0b0751b33833a483be00d88ea237cf2a2c5344e7a3d871ed6c29b592769e06648f610760fd0a4a4b505a4117e9c8e6b0ea
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2537,6 +2602,31 @@ __metadata:
     node-gyp: ^7.1.0
     read-package-json-fast: ^2.0.1
   checksum: 41924e7925452ac8e78d78bef5d65b3d58f86eea4481a453e11e3a9099504bfbfcf1f65d7f75d92170b846fa347d05424e58e617fb9c17b3efd87db599a0f46e
+  languageName: node
+  linkType: hard
+
+"@open-rpc/meta-schema@npm:1.14.2":
+  version: 1.14.2
+  resolution: "@open-rpc/meta-schema@npm:1.14.2"
+  checksum: 63d3672aeea6941a96522ab2b7a9f95c4b3216ea6d7b700bdbb0ca0595b0ad28e439818d22788991a36403953e39cda9f8c7a99ed5c18258b0a45b815ecfaf8b
+  languageName: node
+  linkType: hard
+
+"@open-rpc/schema-utils-js@npm:^1.16.1":
+  version: 1.16.1
+  resolution: "@open-rpc/schema-utils-js@npm:1.16.1"
+  dependencies:
+    "@json-schema-tools/dereferencer": 1.5.4
+    "@json-schema-tools/meta-schema": 1.6.19
+    "@json-schema-tools/reference-resolver": 1.2.4
+    "@open-rpc/meta-schema": 1.14.2
+    ajv: ^6.10.0
+    detect-node: ^2.0.4
+    fast-safe-stringify: ^2.0.7
+    fs-extra: ^9.0.0
+    is-url: ^1.2.4
+    isomorphic-fetch: ^3.0.0
+  checksum: 0a7d89849aa575c1597defac089d766ab351ddf1d796069b73f100907580163e2acf72ad1e0b0ac8f889060ac87d81d006f32c55f30fcbdcb0b6625b3f7f32b6
   languageName: node
   linkType: hard
 
@@ -6458,6 +6548,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-safe-stringify@npm:^2.0.7":
+  version: 2.1.1
+  resolution: "fast-safe-stringify@npm:2.1.1"
+  checksum: a851cbddc451745662f8f00ddb622d6766f9bd97642dabfd9a405fb0d646d69fc0b9a1243cbf67f5f18a39f40f6fa821737651ff1bceeba06c9992ca2dc5bd3d
+  languageName: node
+  linkType: hard
+
 "fast-url-parser@npm:1.1.3":
   version: 1.1.3
   resolution: "fast-url-parser@npm:1.1.3"
@@ -8425,6 +8522,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-url@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "is-url@npm:1.2.4"
+  checksum: 100e74b3b1feab87a43ef7653736e88d997eb7bd32e71fd3ebc413e58c1cbe56269699c776aaea84244b0567f2a7d68dfaa512a062293ed2f9fdecb394148432
+  languageName: node
+  linkType: hard
+
 "is-weakref@npm:^1.0.2":
   version: 1.0.2
   resolution: "is-weakref@npm:1.0.2"
@@ -8513,6 +8617,16 @@ __metadata:
     node-fetch: ^1.0.1
     whatwg-fetch: ">=0.10.0"
   checksum: bb5daa7c3785d6742f4379a81e55b549a469503f7c9bf9411b48592e86632cf5e8fe8ea878dba185c0f33eb7c510c23abdeb55aebfdf5d3c70f031ced68c5424
+  languageName: node
+  linkType: hard
+
+"isomorphic-fetch@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "isomorphic-fetch@npm:3.0.0"
+  dependencies:
+    node-fetch: ^2.6.1
+    whatwg-fetch: ^3.4.1
+  checksum: e5ab79a56ce5af6ddd21265f59312ad9a4bc5a72cebc98b54797b42cb30441d5c5f8d17c5cd84a99e18101c8af6f90c081ecb8d12fd79e332be1778d58486d75
   languageName: node
   linkType: hard
 
@@ -9203,6 +9317,7 @@ __metadata:
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1
+    "@metamask/docusaurus-openrpc": ^0.0.3
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
@@ -9639,6 +9754,20 @@ __metadata:
     encoding: ^0.1.11
     is-stream: ^1.0.1
   checksum: 3bb0528c05d541316ebe52770d71ee25a6dce334df4231fd55df41a644143e07f068637488c18a5b0c43f05041dbd3346752f9e19b50df50569a802484544d5b
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.1":
+  version: 2.6.9
+  resolution: "node-fetch@npm:2.6.9"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: acb04f9ce7224965b2b59e71b33c639794d8991efd73855b0b250921382b38331ffc9d61bce502571f6cc6e11a8905ca9b1b6d4aeb586ab093e2756a1fd190d0
   languageName: node
   linkType: hard
 
@@ -11437,6 +11566,15 @@ __metadata:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
+  languageName: node
+  linkType: hard
+
+"react@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "react@npm:18.2.0"
+  dependencies:
+    loose-envify: ^1.1.0
+  checksum: 88e38092da8839b830cda6feef2e8505dec8ace60579e46aa5490fc3dc9bba0bd50336507dc166f43e3afc1c42939c09fe33b25fae889d6f402721dcd78fca1b
   languageName: node
   linkType: hard
 
@@ -14140,7 +14278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:>=0.10.0":
+"whatwg-fetch@npm:>=0.10.0, whatwg-fetch@npm:^3.4.1":
   version: 3.6.2
   resolution: "whatwg-fetch@npm:3.6.2"
   checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
