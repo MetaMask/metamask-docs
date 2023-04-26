@@ -66,9 +66,9 @@ Some studies estimate users read only 20-28% of text on any screen, so write abo
 
 Introduce the snap as a natural extension of existing elements on your screen, and suggest installation when the time is right. This can be a make or break moment for your snap, so put yourself in the shoes of the intended user.
 
-At what point does it make the most sense to prompt an install? Don’t ask the user to install your snap before they do anything in the dapp or website, as this will probably be declined. Instead, **wait to prompt installation** **until a point where the snap is required**.
+At what point does it make the most sense to prompt an install? Don’t ask the user to install your snap before they do anything in the dapp or website, as they will probably decline. Instead, **wait to prompt installation** **until a point where the snap is required**.
 
-An example of where you might introduce a snap, in this case a key management snap is suggested in the context of a network picker screen (as seen below).
+In the following example, a key management snap is suggested in the context of a network picker screen.
 
 ![Installation and connection to your snap embedded in existing flows](../assets/picker.png)
 
