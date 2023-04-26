@@ -27,14 +27,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
+          ref: gh-pages
       - name: Delete Branch Folder on gh-pages
         if: ${{ github.event.pull_request.head.ref != 'wallet' && github.event.pull_request.head.ref != 'snaps' && github.event.pull_request.head.ref != 'guide' && github.event.pull_request.head.ref != 'assets' && github.event.pull_request.head.ref != 'img' && github.event.pull_request.head.ref != 'search' }}
         run: |
-          cd ..
-          git clone -b gh-pages --single-branch https://github.com/${{ github.repository }} gh-pages
-          cd gh-pages
           git rm -r "${BRANCH_NAME}"
           git commit -m "Delete ${BRANCH_NAME} folder from gh-pages branch"
           git push origin gh-pages
