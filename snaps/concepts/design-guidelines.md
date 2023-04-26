@@ -84,7 +84,7 @@ Your snap’s avatar should be suitable for a **32 px circular frame in SVG form
 
 **Name**
 
-When naming your snap, it is important to keep the name short and easy to remember. The name should be **21 characters maximum**, **including spaces**, to ensure that it is easy to read and fits comfortably on small screens.
+Your snap's name should be short and easy to remember. It should be **21 characters maximum**, **including spaces**, to ensure that it is easy to read and fits comfortably on small screens.
 
 :::note How to (not) name your snap
 
