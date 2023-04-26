@@ -23,7 +23,8 @@ jobs:
     name: Get the commit hash for the commit being previewed
     needs: is-fork-pull-request
     # This ensures we don't publish on forks. We can't trust forks to publish on our domain.
-    if: ${{ needs.is-fork-pull-request.outputs.IS_FORK == 'false' }}
+    # also ensures we dont publish previews to folders that are already used
+    if: ${{ needs.is-fork-pull-request.outputs.IS_FORK == 'false' && github.event.pull_request.head.ref != 'wallet' && github.event.pull_request.head.ref != 'snaps' && github.event.pull_request.head.ref != 'guide' && github.event.pull_request.head.ref != 'assets' && github.event.pull_request.head.ref != 'img' && github.event.pull_request.head.ref != 'search' }}
     runs-on: ubuntu-latest
     outputs:
       COMMIT_SHA: ${{ steps.commit-sha.outputs.COMMIT_SHA }}
