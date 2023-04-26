@@ -1,65 +1,57 @@
 ---
-title: Simple React Dapp
-description: Beyond getting started, working with the MetaMask API to connect from a React application using Vite.
+title: Create a simple React dapp
+description: Create a simple React dapp to integrate with MetaMask.
+toc_max_heading_level: 4
 ---
 
-# Simple React Dapp
+# Create a simple React dapp
 
-A follow along tutorial that will get you started connecting to MetaMask within a React dApp.
+This tutorial walks you through integrating a simple React dapp with MetaMask.
+You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and TypeScript to create
+the dapp.
 
-## Table of Contents
+This tutorial builds up your knowledge of working with MetaMask incrementally; this means you won't
+implement the best solution at first, but you'll experiment with the MetaMask API and continually
+work towards better solutions.
 
-- [Pre Requisites](#pre-requisites)
-- [Why Vite and React](#why-vite-and-react)
-- [Scaffold a Vite React Project](#scaffold-vite)
-- [Detecting MetaMask](#detecting-metamask)
-- [Connecting to MetaMask](#connecting-to-metamask)
-- [Manage More MetaMask State Locally](#manage-more-metamask-state-locally)
-  - [Watch User Balance and Chain](#watch-user-balance-and-chain)
-  - [Basic Error Handling](#basic-error-handling)
-- [Single Component Conclusion](#single-component-conclusion)
+:::info Why React?
+React is familiar to most web developers, and it makes it easy to work with state management and
+build with components that need updating.
+:::
 
-## Pre Requisites
+## Prerequisites
 
-Ensure you have the following before starting this tutorial.
+- [Node.js](https://nodejs.org/) version 18+
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
+- A text editor (for example, [VS Code](https://code.visualstudio.com/))
+- The [MetaMask extension](https://metamask.io/download) installed
+- Basic knowledge of JavaScript and React
 
-- Node Version 18+
-- NPM Version 9+
-- Code Editor
-- [MetaMask Extension](https://metamask.io/download)
-- Basic Knowledge of JavaScript and React
+## Steps
 
-## Why Vite and React
+### 1. Set up the project
 
-[Vite.js](https://v3.vitejs.dev/guide) is a build tool for modern web projects. You can create VanillaJS, Vue, React, Preact, Lit, and Svelte projects using JavaScript or TypeScript.
-
-This tutorial uses Vite + React (with TypeScript). We will step up our use of TypeScript only as we need to.
-
-We will build up our knowledge of working with MetaMask incrementally; this may mean we don't go with the best solution right out of the gate, but the idea is to experiment with the MetaMask API and continually work towards better solutions.
-
-Using React makes working with state management and building with components that need updating easy and allows us to rapidly develop an application using a library and concepts familiar to most web developers.
-
-## Scaffold Vite
-
-Scaffold a new project with [Vite.js](https://v3.vitejs.dev/guide), React & TypeScript:
+Set up a new project using Vite, React, and TypeScript, by running the following command:
 
 ```bash
 npm create vite@latest mm-dapp-react -- --template react-ts
 ```
 
-Install our dependencies:
+Install the dependencies:
 
 ```bash
 cd mm-dapp-react && npm install
 ```
 
-The `npx vite` or `npm run dev` commands can be used to run our project at any time if the development server has been stopped.
+:::note
+You can use the `npx vite` or `npm run dev` command to run your project at any time if the
+development server has been stopped.
+:::
 
-Open the project in your code editor of choice. We will reset the `App.tsx` page to give us a blank slate.
+Open the project in a text editor.
+To start with a blank slate, replace the code in `src/App.tsx` with the following:
 
-Update `App.tsx` to:
-
-```ts
+```tsx title="App.tsx"
 import './App.css'
 
 const App = () => {
@@ -74,11 +66,10 @@ const App = () => {
 export default App
 ```
 
-We want to define the `window.ethereum` object as `any`; this will get us around type-checking for this demo; note that there are other approaches beyond this tutorial's scope.
+You'll need to get around type-checking by defining the `window.ethereum` object as `any`.
+Update `src/vite-env.d.ts` to the following:
 
-In the `src/vite-env.d.ts` file, update to:
-
-```ts
+```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
 interface Window {
@@ -86,9 +77,9 @@ interface Window {
 }
 ```
 
-Also, let's change the `src/App.css` to:
+Also, update `src/App.css` to the following:
 
-```css
+```css title="App.css"
 .App {
   display: flex;
   flex-direction: column;
@@ -101,19 +92,22 @@ button {
 }
 ```
 
-At this point we have a working React application with no errors, some basic styling and a button that we will use to connect to MetaMask.  
+At this point, you have a working React application with no errors, some basic styling, and a button
+that you'll use to connect to MetaMask.  
 
 ![Initial App State with Button](../assets/tutorials/dapp-tutorial/img-01.png)
 
-This starting point of our app (`start` branch) can be found in our on GitHub at: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react).
+You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/start) for this
+starting point of the dapp.
 
-## Detecting MetaMask
+### 2. Detect MetaMask
 
-Detecting the injected provider that browser extension wallets use is fairly straightforward. Let's write some code to conditionally render a "Connect MetaMask" button in our component.
+Next, detect the injected provider that browser extension wallets use.
 
-Update the `src/App.tsx` as follows:
+Add code to conditionally render a **Connect MetaMask** button in your component, by updating
+`src/App.tsx` to the following:
 
-```ts
+```tsx title="App.tsx"
 import './App.css'
 let injectedProvider = false
 
@@ -139,27 +133,41 @@ const App = () => {
 export default App
 ```
 
-If MetaMask is not installed we will not see a "Connect MetaMask" button, and the text should display "Injected Provider DOES NOT Exist".
+If MetaMask isn't installed, you won't see a **Connect MetaMask** button, and the text displays
+**Injected Provider DOES NOT Exist**.
 
 ![Injected Provider DOES NOT Exist](../assets/tutorials/dapp-tutorial/img-02.png)
 
-If we do have the MetaMask extension installed, we should see the "Connect MetaMask" button and the text should display "Injected Provider DOES Exist" and we will see the provider being printed in the console.
+If MetaMask is installed, you'll see the **Connect MetaMask** button, and the text displays
+**Injected Provider DOES Exist**.
+You'll also see the provider being printed in the console.
 
 ![Injected Provider DOES Exist](../assets/tutorials/dapp-tutorial/img-03.png)
 
-We can toggle back and forth between these two states by enabling and disabling the MetaMask extension from our browsers **Manage Extensions** menu.
+You can toggle back and forth between these two states by enabling and disabling the MetaMask
+extension from your browser's **Manage Extensions** menu.
 
-The approach above is often what developers will try when first tasked in detecting an injected provider (Wallet Extension). Still, the MetaMask team provides a library called [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) with a module to detect the MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser. Let's install it and change our code to implement it instead of sniffing for the provider ourselves.
+#### Use @metamask/detect-provider
 
-Install the dependency:
+Developers often use the previous approach when tasked with detecting an injected provider (wallet extension).
+However, MetaMask provides the [@metamask/detect-provider](https://github.com/MetaMask/detect-provider)
+module to detect the MetaMask Ethereum provider or any provider injected at `window.ethereum` on any
+platform or browser.
+
+:::caution important
+We recommend [using `@metamask/detect-provider`](../get-started/detect-metamask.md#use-metamaskdetect-provider)
+instead of manually detecting the provider yourself.
+:::
+
+In your project directory, install the module using the following command:
 
 ```bash
 npm install @metamask/detect-provider
 ```
 
-With this, we can update our `src/App.tsx` to:
+Update `src/App.tsx` to the following:
 
-```ts
+```tsx title="App.tsx"
 import './App.css'
 import { useState, useEffect } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
@@ -190,23 +198,37 @@ const App = () => {
 export default App
 ```
 
-We are creating a piece of local state called `hasProvider` of type `boolean` or `null` value, initialized with a null value.
+This code creates a piece of local state called `hasProvider` of type `boolean` or `null` value,
+initialized with a `null` value.
 
-Next, we create a `useEffect` with zero dependencies (it will only run once in our component lifecycle). React's `useEffect` hook allows components to run code when a component is mounted or when some property's state changes. This hook also allows cleaning up when the component is unmounted. If you explicitly declare no dependencies by passing in an empty array `[]`, our `useEffect` will only run once before the component mounts.
+Next, it creates a `useEffect` with zero dependencies (it only runs once in your component lifecycle).
+React's `useEffect` hook allows components to run code when a component is mounted or when some
+property's state changes.
+This hook also allows cleaning up when the component is unmounted.
+If you explicitly declare no dependencies by passing in an empty array, then `useEffect` only runs
+once before the component mounts.
 
-Inside that `useEffect`, we create an `async` function called `getProvider`. This function awaits the `detectEthereumProvider` and uses an option (`silent: true`) to silence any console errors related to the provider not being available. YOu can choose not to use that option if you like. We use our setter function from within our `useState` and transform the provider's detection to a `boolean` (true/false) value.
+Inside `useEffect`, there's an `async` function called `getProvider`.
+This function awaits the `detectEthereumProvider` and uses an option (`silent: true`) to silence any
+console errors related to the provider not being available.
+You can choose to not use that option if you prefer.
+The setter function within `useEffect` transforms the provider's detection to a `boolean` value.
 
-If we run our code now, we will see the same result in our app, but we are using  `detect-detectEthereumProvider` rather than our own code.
+If you run the code now, you'll see the same result in your dapp, but you're using 
+`@metamask/detect-provider` instead of your own code.
 
-## Connecting to MetaMask
+### 3. Connect to MetaMask
 
-We will create another `useState` named `wallet`, aiding us in keeping our application up to date with various MetaMask wallet properties like `accounts`, `balance`, and  `chainId`. These are important properties of the MetaMask wallet that we want to sync with our application constantly. We will first add a state for `accounts` and slowly build up our state over the following few sections of the tutorial.
+To connect your dapp to MetaMask, you'll create another `useState` named `wallet`, which keeps your
+dapp up to date with various MetaMask wallet properties such as `accounts`, `balance`, and  `chainId`.
+These are important properties to sync with your dapp constantly.
+You'll first add a state for `accounts` and slowly build up your state over the following few
+tutorial sections.
+You'll also set up a button to connect to the MetaMask wallet.
 
-We will also be wiring up our button to connect to the MetaMask wallet.
+Update the `src/App.tsx` to the following:
 
-Update the `src/App.tsx` to:
-
-```ts
+```tsx title="App.tsx" {7-8,19-21,23-28,34-36,38-40} showLineNumbers
 import './App.css'
 import { useState, useEffect } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
@@ -254,33 +276,45 @@ const App = () => {
 export default App
 ```
 
-I've added comments that indicate any new or updated lines of code. Let's talk about these changes.
+The comments in the code snippet indicate any new or updated lines of code.
+The changes include:
 
-We create an object representing the initial empty state and a new `useState` hook to reflect our MetaMask wallet state.
+- **Lines 7-8:** Create an object representing the initial empty state and a new `useState` hook to
+  reflect your MetaMask wallet state.
 
-We have added an `updateWallet` function that sets our new wallet state when we connect. It will also be called when we add code later that refreshes our wallet state. This function will come in handy as we start syncing our `balance` and `chainId`.
+- **Lines 19-21:** Add an `updateWallet` function that sets your new wallet state when you connect.
+  This will also be called when you add code later that refreshes our wallet state.
+  This function will come in handy as you start syncing the `balance` and `chainId`.
 
-We have added a `handleConnect` function that our UI will call to connect to MetaMask using `window.ethereum.request` and its `eth_requestAccounts` method. We store the awaited result from this RPC call in a variable named `accounts` and then pass it to our `updateWallet` function.
+- **Lines 23-28:** Add a `handleConnect` function that the UI calls to connect to MetaMask using
+  `window.ethereum.request` and the `eth_requestAccounts` RPC method.
+  Your dapp stores the result from this RPC call in a variable named `accounts` and passes it to
+  the `updateWallet` function.
 
-On click, our "Connect MetaMask" button calls `handleConnect`, from which an RPC call of `eth_requestAccounts` is awaited and the user is prompted to connect to MetaMask:
+- **Lines 34-36:** On click, the **Connect MetaMask** button calls `handleConnect`, from which an RPC
+  call of `eth_requestAccounts` is awaited and the user is prompted to connect to MetaMask:
 
-![Choose which MetaMask connects](../assets/tutorials/dapp-tutorial/img-04.png)  
+  ![Choose which MetaMask connects](../assets/tutorials/dapp-tutorial/img-04.png)  
 
-![Grant permissions over MetaMask](../assets/tutorials/dapp-tutorial/img-05.png)
+  ![Grant permissions over MetaMask](../assets/tutorials/dapp-tutorial/img-05.png)
 
-And once connected we will see our account address displayed in our dapp:
+ - **Lines 38-40:** Once connected, you'll see your account address displayed in your dapp:
 
-![MetaMask Account Address](../assets/tutorials/dapp-tutorial/img-06.png)
+  ![MetaMask Account Address](../assets/tutorials/dapp-tutorial/img-06.png)
 
-### React We Have a Problem
+### 4. Handle state change
 
-We lose our account data if we refresh the page. When we connect with the button, we set `accounts` in our state, but when the page refreshes, we need something in our `useEffect` to check if we already have connected and update our wallet state.
+With the current code, your dapp loses the account data if you refresh the page.
+When you connect using the button, the dapp sets `accounts` in its state, but in the case of a
+browser refresh, you need something in `useEffect` to check if you've already connected and update
+the wallet state.
 
-Thinking ahead, we know that once we are tracking more than just `accounts`, we will also need a mechanism to get the `balance` and `chainId` and update their state.
+Thinking ahead, once you track more than just `accounts`, you also need a mechanism to get the
+`balance` and `chainId` and update their state.
 
-Let's update our `src/App.tsx` with some added logic to our `useEffect`:
+Update `src/App.tsx` with some added logic to `useEffect`:
 
-```ts
+```tsx title="App.tsx" {11-18,24-30,34-36,54} showLineNumbers
 import './App.css'
 import { useState, useEffect } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
@@ -348,23 +382,32 @@ const App = () => {
 export default App
 ```
 
-One thing to note on the code added is that `useEffect` is a side effect, we use them for fetching data, reading and writing to local storage, and setting up event listeners or subscriptions. Our side effect occurs on the first render only, as we have nothing in our dependency array. We also want to clean up those listeners upon unmount of our component.
+Note that `useEffect` is a side effect; you use the hooks for fetching data, reading and writing to
+local storage, and setting up event listeners or subscriptions.
+The side effect occurs on the first render only, since you have nothing in your dependency array.
+You also need to clean up those listeners upon unmount of your component.
 
-We can now test our application and see that when we refresh the page, we retain our display of the user's address. We've synced with a source outside our application, and  we are managing the state in a single component. The logic is in place to add more properties to our state object.
+You can now test your dapp and see that when you refresh the page, you retain the display of the
+user's address.
+You've synced with a source outside your dapp, and you're managing the state in a single component.
+The logic is in place to add more properties to your state object.
 
-### Connection Wrap Up
+:::info Connection summary
+In learning how to connect to MetaMask from a React application, you've learned how to track some
+essential state of your wallet, precisely, which account is selected and active in the MetaMask wallet.
+Your dapp syncs this state locally using React's `useState` and the React `useEffect` hooks.
+The dapp ensures that if a user manually disconnects, changes the account, or refreshes the page,
+the component is aware of any state change.
+:::
 
-In learning how to connect to MetaMask from a React application, we have learned how to track some essential state of our wallet (accounts), precisely, which one is selected and active in the MetaMask wallet. We sync this state locally using React `useState` and the React `useEffect` Hooks. We ensure that if a user manually disconnects, changes the account, or refreshes the page; our component is aware of any state change.
+### 5. Manage more MetaMask state
 
-## Manage More MetaMask State Locally
+Next, you'll add `balance` and `chainId` to your state.
 
-Now we will add `balance` and `chainId` to our state.
+Before editing `src/App.tsx`, you need a few utility functions to format `balance` and `chainId`.
+Create a new file at `src/utils/index.tsx` with the following code:
 
-Before we get started in our `/src/App.tsx` we are going to need a few `util` functions to format our `balance` and `chainId`.
-
-Create a new file at `/src/utils/index.tsx` with the following code:
-
-```ts
+```tsx title="index.tsx"
 export const formatBalance = (rawBalance: string) => {
   const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
   return balance
@@ -376,15 +419,22 @@ export const formatChainAsNum = (chainIdHex: string) => {
 }
 ```
 
-With those functions exported we will be able to import them into our component and use them as functions where needed to get human-readable balance and chain information.
+With those functions exported, you can import them into your component and use them to get
+human-readable balance and chain information.
 
-### Watch User Balance and Chain
+#### Watch user balance and chain
 
-To update our current component for displaying the connected address's balance and the current `chainId`, we need to update our `initialState` object. Since we already use the `eth_requestAccounts` RPC endpoint to determine the accounts, we need to add a dependent call to `eth_getBalance` once we have that account information.
+To display the connected address's balance and the current chain ID, you need to update the
+`initialState` object in your component.
+Since your dapp already uses `eth_requestAccounts` to determine the accounts, you need to add a
+dependent call to `eth_getBalance` once you have that account information.
 
-Finally, we need to parse the returned value of the balance and format it into a human-readable string. We'll create a function called `formatBalance` as well.
+Finally, you need to parse the returned value of the balance and format it into a human-readable string.
+You'll create a function called `formatBalance` as well.
 
-```ts
+Update `src/App.tsx` to the following:
+
+```tsx title="App.tsx" {3,8,21-23,35,43,48-55,74,76-78} showLineNumbers
 import './App.css'
 import { useState, useEffect } from 'react'
 import { formatBalance, formatChainAsNum } from './utils'  /* New */
@@ -472,29 +522,47 @@ const App = () => {
 export default App
 ```
 
-That wasn't too bad, the changes were minimal because we only needed to update or duplicate existing functionality and add a few utility functions. Our application will now display `account`, `balance`, and `chainId` represented as a hex value and number.
+The changes here are minimal because you only need to update or duplicate existing functionality and
+add a few utility functions.
+Your dapp now displays `account`, `balance`, and `chainId`, represented as hex values and numbers.
 
 ![MetaMask address, balance, and chain](../assets/tutorials/dapp-tutorial/img-07.png)
 
-We detect any change of the `balance` or `chain`, and our utility functions help us format hex strings to be human-readable for display. For chainId's, we want to be able to use the hex version in RPC calls and the numeric version for display. To get the human-readable number of the chain, we use `parseInt`.
+Your dapp detects any changes to `balance` or `chain`, and the utility functions format hex strings
+to be human-readable for display.
+For chain IDs, you use the hex version in RPC calls and the numeric version for display.
+To get the human-readable number of the chain, you use `parseInt`.
 
-A few things to note are that our tutorial's app only needs to display information about our wallet. But in a real Web3 app, you may need to add more functionality for switching chains programmatically or initiating transactions. 
+:::caution important
+For this tutorial, your dapp only needs to display information about your wallet.
+For a real web3 dapp, you might add more functionality for switching chains programmatically or
+initiating transactions.
 
-You may need to have a list of whitelisted chainId's that your app supports, you may need to create UI that shows the information on that network, and you might want to present a button that allows them to connect to a supported chain. Knowing the user's wallet is on the correct chain and reacting to that in your application is crucial in almost every Web3 application.
+You might need to:
 
-## Basic Error Handling
+- Have a list of chain IDs that your dapp supports.
+- Create UI that shows information on the supported networks.
+- Present a button that allows users to connect to a supported network.
 
-Now that we have all of this in place and our app is working, I want to setup error handling, you could approach this in several ways so we want to first just add the minimal suggestions for how to handle an error or rejection when the user is connecting their wallet with he `handleConnect` function.
+[Detecting a user's network](../get-started/detect-network.md) is crucial in almost every web3 dapp.
+:::
 
-We will add `useState` to track 
+### 6. Handle errors
 
-- `isConnecting`
-- `error` and 
-- `errorMessage`
+Now that you have a working dapp, you should set up error handling.
+You can approach this in several ways; the following is a basic suggestion for handling an error or
+rejection when the user connects their wallet using the `handleConnect` function.
 
-When a user is in the middle of connecting, we will disable the "Connect MetaMask" button. Ifs an error is received we will update `error` to a value of `true` and set the `errorMessage` for display. As well we need to set `isConnecting` back to a value of `false` once they have either connected or we have caught the error, as well set `error` back to `false` if the message has been seen and dealt with.
+You'll add `useState` to track `isConnecting`, `error`, and `errorMessage`.
 
-```ts
+When a user is in the middle of connecting, you'll disable the **Connect MetaMask** button.
+If you receive an error, you'll update `error` to `true` and set the `errorMessage` for display.
+You'll also set `isConnecting` back to `false` once either the user has connected or you've caught
+the error, and set `error` back to `false` once the message is resolved.
+
+Update `src/App.tsx` to the following:
+
+```tsx title="App.tsx" {11-13,62-64,67-75,97-102} showLineNumbers
 import './App.css'
 import { useState, useEffect } from 'react'
 import { formatBalance, formatChainAsNum } from './utils'
@@ -591,7 +659,7 @@ const App = () => {
           <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>
         </>
       }
-      { error && (                                        /* New Code Block */
+      { error && (                                        /* New code block */
           <div onClick={() => setError(false)}>
             <strong>Error:</strong> {errorMessage}
           </div>
@@ -604,22 +672,27 @@ const App = () => {
 export default App
 ```
 
-To test out our error handling we can just disconnect from the accounts we are connected to inside of MetaMask:
+To test the error handling, disconnect from your accounts in MetaMask:
 
 ![Disconnect from selected Account](../assets/tutorials/dapp-tutorial/img-08.png)
 
-And we can attempt to connect again and choose to reject the connection:
+Attempt to connect again and choose to cancel the connection:
 
 ![Cancel request to connect](../assets/tutorials/dapp-tutorial/img-09.png)
 
-And then we will see the error message displayed on the app and in the console:
+You'll see the error message displayed on the dapp and in the console:
 
 ![MetaMask User Reject Request Error](../assets/tutorials/dapp-tutorial/img-10.png)
 
-With these changes in place we covered most of the basics around working with MetaMask and it's API from within a single component and managing that state locally.
+## Conclusion
 
-## Single Component Conclusion
+This tutorial walked you through creating a single component dapp using Vite, some basics of
+interacting with MetaMask and its API, and managing state locally.
+You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final)
+for the final state of this dapp tutorial.
 
-Our code is getting confusing. But we have yet to lead you astray. We now have our heads around connecting and listening to the MetaMask wallet state. But, if we want to bring this functionality to an application with more than one component subscribing to its state, we're going to have to break out of this local state and use [React's Context API](https://react.dev/reference/react/useContext) to manage the state globally and ensure that any component in our application can be aware and conditionally render or display information about our MetaMask wallet.
-
-This final code for this app (`single-component-final` branch) can be found in our on GitHub at: [MetaMask/dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final).
+To bring this functionality to a dapp with more than one component subscribing to its state, you
+must use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
+globally and ensure that any component in your dapp can be aware and conditionally render or display
+information about your MetaMask wallet.
+The sequel to this tutorial, which is coming soon, will walk you through this.
