@@ -31,6 +31,8 @@ jobs:
       - name: Delete Branch Folder on gh-pages
         if: ${{ github.event.pull_request.head.ref != 'wallet' && github.event.pull_request.head.ref != 'snaps' && github.event.pull_request.head.ref != 'guide' && github.event.pull_request.head.ref != 'assets' && github.event.pull_request.head.ref != 'img' && github.event.pull_request.head.ref != 'search' }}
         run: |
+          git config --local user.name "Metamask Preview Bot"
+          git config --local user.email "preview-bot@metamask.io"
           git rm -r "${BRANCH_NAME}"
           git commit -m "Delete ${BRANCH_NAME} folder from gh-pages branch"
           git push origin gh-pages
