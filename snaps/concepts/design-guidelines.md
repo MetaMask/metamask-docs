@@ -5,9 +5,7 @@ description: Guiding principles for designers, developers, builders, and writers
 
 # Snaps design guidelines
 
-:::note Summary
-Outlined here are guiding principles for designers, developers, builders, and writers to create snap install flows that are accessible for all types of users. You should use the guidelines in this document when introducing your snap within a dapp or website.
-:::
+This page outlines guiding principles for designers, developers, builders, and writers to create snap install flows that are accessible for all users. Use these guidelines when introducing your snap within a dapp or website.
 
 ## Why this matters
 
