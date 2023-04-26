@@ -170,15 +170,11 @@ See the
 [`remark-codesandbox` documentation](https://github.com/kevin940726/remark-codesandbox/#documentation)
 for more information.
 
+### Update RPC API documentation
 
-### Updating api-specs and regenerating api reference
+Wallet RPC API reference documentation is generated from the [`docusaurus-openrpc`](https://github.com/MetaMask/docusaurus-openrpc) plugin using [`api-specs`](https://github.com/MetaMask/api-specs/) as the OpenRPC document source. To update this documentation:
 
-Reference documentation is generated from [the docusaurus-openrpc plugin](https://github.com/MetaMask/docusaurus-openrpc) using [api-specs](https://github.com/MetaMask/api-specs/) as the OpenRPC document source. In order to update these docs, follow the following steps:
-
-1. Clone [api-specs](https://github.com/MetaMask/api-specs/)
-  1. `cd api-specs`
-  2. `yarn`
-  3. `yarn build:watch`
-2. Inside metamask-docs/docusaurus.config.js:
-  1. update the reference to the built openrpc doc under the key 'openrpcDocument'. It should point to whereever you have the api-specs repo cloned. ex: `openrpcDocument: "../api-specs/dist/build/openrpc.json"`
-  2. `yarn start`
+1. Clone [`api-specs`](https://github.com/MetaMask/api-specs/), and run `yarn` and `yarn build:watch` in your local repository.
+2. In `metamask-docs/docusaurus.config.js`:
+  1. Update the reference to the built OpenRPC document under the key 'openrpcDocument'. It should point to wherever you have the `api-specs` repository cloned. For example, `openrpcDocument: "../api-specs/dist/build/openrpc.json"`.
+  2. Run `yarn start`.
