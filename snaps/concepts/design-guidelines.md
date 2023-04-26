@@ -50,11 +50,11 @@ This is your chance to share the benefits of your snap to the intended user. If 
 
 Consider introducing your snap on your website with a modal, tooltip, or card. This introduction can happen before or alongside the installation prompt, but should always be clear and descriptive.
 
-#### Important details look like:
+#### Important details include:
 
-- What your snap does, why someone would use it, and how it works
-- Security precautions in plain, basic language that anyone can understand
-- Descriptions of the features that make your snap appealing to the intended users
+- What your snap does, why someone would use it, and how it works.
+- Security precautions in plain, basic language that anyone can understand.
+- Descriptions of the features that make your snap appealing to the intended users.
 
 :::tip Tip
 Some studies estimate users read only 20-28% of text on any screen, so write about your snap with language that’s impactful, clear, and direct.
