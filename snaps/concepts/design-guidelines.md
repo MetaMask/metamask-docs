@@ -28,7 +28,7 @@ Consider whether the details that interest you as a developer are relevant to th
 
 ## Introducing your snap
 
-Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introducing your snap in the context of your application is a good way to make it clear what the user gets if they install.
+Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introduce your snap in the context of your application to make it clear what the user gets if they install.
 
 ![Introducing your snap's features via a modal](../assets/install-modal.png)
 
