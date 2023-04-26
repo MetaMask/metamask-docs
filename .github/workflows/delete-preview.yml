@@ -25,9 +25,10 @@ jobs:
     if: ${{ needs.is-fork-pull-request.outputs.IS_FORK == 'false' }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Delete Branch Folder on gh-pages
         if: ${{ github.event.pull_request.head.ref != 'wallet' && github.event.pull_request.head.ref != 'snaps' && github.event.pull_request.head.ref != 'guide' && github.event.pull_request.head.ref != 'assets' && github.event.pull_request.head.ref != 'img' && github.event.pull_request.head.ref != 'search' }}
         run: |
