@@ -151,4 +151,3 @@ With few exceptions, use **sentence case as a default**. Sentence case is capita
 
 Write in active voice and use sentence case. Avoid jargon—write in plain language that can be understood at a glance.
 
-Happy building! 👋
