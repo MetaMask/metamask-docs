@@ -96,9 +96,12 @@ const sidebar = {
       ],
     },
     {
-      type: "doc",
-      id: "tutorials/index",
+      type: "category",
       label: "Tutorials",
+      link: { type: "generated-index" },
+      items: [
+        "tutorials/simple-react-dapp",
+      ],
     },
     {
       type: "category",

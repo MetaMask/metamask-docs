@@ -243,7 +243,7 @@ const config = {
               },
               {
                 label: "Tutorials",
-                to: "/wallet/tutorials",
+                to: "/wallet/category/tutorials",
               },
               {
                 label: "Reference",
