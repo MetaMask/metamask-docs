@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[3237],{9754:(e,t,a)=>{a.r(t),a.d(t,{default:()=>u});var s=a(7294),c=a(6550),l=a(4996);function u(){return s.createElement(c.l_,{to:(0,l.Z)("/wallet")})}}}]);
