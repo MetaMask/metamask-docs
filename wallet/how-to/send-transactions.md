@@ -5,7 +5,7 @@ description: Send transactions using eth_sendTransaction.
 # Send transactions
 
 You can send a transaction in MetaMask using the
-[`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
+[`eth_sendTransaction`](https://metamask.github.io/api-playground/api-documentation/#eth_sendTransaction)
 RPC method.
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
@@ -26,15 +26,15 @@ sendEthButton.addEventListener('click', () => {
   ethereum
     .request({
       method: 'eth_sendTransaction',
+      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
       params: [
         {
           from: accounts[0], // The user's active address.
-          to: '0x0c54FcCd2e384b4BB6f2E405Bf5Cbc15a017AaFb', // Required except during contract publications.
-          value: '0x29a2241af62c0000', // Only required to send ether to the recipient from the initiating external account.
-          maxPriorityFeePerGas: '0x77359400', // Customizable by the user during MetaMask confirmation.
-          maxFeePerGas: '0x2F08236400', // Customizable by the user during MetaMask confirmation.
-          gas: '0x2710', // Customizable by the user during MetaMask confirmation.
-          type: '0x2', // Transaction type.
+          to: <recipient address> // Required except during contract publications.
+          value: <value in wei to send> // Only required to send ether to the recipient from the initiating external account.
+          gasLimit: '0x5028', // Customizable by the user during MetaMask confirmation.
+          maxPriorityFeePerGas: '0x3b9aca00', // Customizable by the user during MetaMask confirmation.
+          maxFeePerGas: '0x2540be400', // Customizable by the user during MetaMask confirmation.
         },
       ],
     })
