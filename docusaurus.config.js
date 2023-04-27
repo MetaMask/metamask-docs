@@ -225,11 +225,6 @@ const config = {
             docsPluginId: "snaps",
             label: "Snaps",
           },
-          {
-            docId: "api-playground",
-            to: "/api-playground",
-            label: "Playground",
-          },
         ],
       },
       footer: {
