@@ -29,7 +29,7 @@ const config = {
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
-    { src: `${process.env.DEST ? process.env.DEST + '/' : '/'}js/feedback-script.js`, defer: true, async: true },
+    { src: `${process.env.DEST ? process.env.DEST : ''}/js/feedback-script.js`, defer: true, async: true },
   ],
 
   presets: [
