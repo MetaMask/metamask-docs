@@ -22,6 +22,8 @@ jobs:
   delete_branch_folder_job:
     runs-on: ubuntu-latest
     needs: is-fork-pull-request
+    permissions:
+      contents: write
     if: ${{ needs.is-fork-pull-request.outputs.IS_FORK == 'false' && github.event.pull_request.head.ref != 'wallet' && github.event.pull_request.head.ref != 'snaps' && github.event.pull_request.head.ref != 'guide' && github.event.pull_request.head.ref != 'assets' && github.event.pull_request.head.ref != 'img' && github.event.pull_request.head.ref != 'search' }}
     steps:
       - name: Checkout Repository
