@@ -96,3 +96,7 @@ h4 {
   grid-gap: 2rem;
   padding: 1rem 2rem 3rem;
 }
+
+img {
+  border-radius: 0.4rem;
+}
