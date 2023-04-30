@@ -22,16 +22,12 @@ a confirmation dialog.
 
 ### 1. Set up the project
 
-Use the Snaps template by
-[creating a new repository from the template](https://github.com/MetaMask/template-snap-monorepo/generate).
-
-Give your project a new name, such as `gas-estimation-snap`.
-
-[Clone the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-using the command line:
+Create a new snap project by using the command line:
 
 ```bash
-git clone git@github.com:<your-username>/gas-estimation-snap.git
+yarn create @metamask/snap gas-estimation-snap
+# or...
+npm create @metamask/snap gas-estimation-snap
 ```
 
 To initialize your development environment with the required dependencies, in your project

@@ -4,7 +4,7 @@ description: Install Snaps dependencies.
 
 # Install Snaps
 
-To use Snaps, you must install [MetaMask Flask](#install-metamask-flask) and the [Snaps CLI](#install-the-snaps-cli).
+To use Snaps, you must install [MetaMask Flask](#install-metamask-flask).
 
 You can then [get started quickly using the Snaps template](quickstart.md).
 
@@ -27,22 +27,3 @@ Flask.
 :::caution
 Running multiple instances of MetaMask in the same browser profile breaks dapp interactions.
 :::
-
-## Install the Snaps CLI
-
-The [Snaps CLI](../reference/cli/index.md) provides commands for initiating a snap project and building,
-executing, and serving your snap for local development.
-
-In a terminal window, install the CLI globally using npm or Yarn:
-
-```bash
-npm install -g @metamask/snaps-cli
-or
-yarn global add @metamask/snaps-cli
-```
-
-Verify the installation and display usage instructions:
-
-```bash
-mm-snap --help
-```
