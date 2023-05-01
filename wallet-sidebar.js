@@ -100,7 +100,8 @@ const sidebar = {
       label: "Tutorials",
       link: { type: "generated-index" },
       items: [
-        "tutorials/simple-react-dapp",
+        "tutorials/simple-react-dapp-local-state",
+        "tutorials/simple-react-dapp-global-state",
       ],
     },
     {

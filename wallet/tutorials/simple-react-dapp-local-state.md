@@ -1,10 +1,10 @@
 ---
-title: Create a simple React dapp
+title: Simple React Dapp with Local State
 description: Create a simple React dapp to integrate with MetaMask.
 toc_max_heading_level: 4
 ---
 
-# Create a simple React dapp
+# Create a Simple React Dapp with Local State
 
 This tutorial walks you through integrating a simple React dapp with MetaMask.
 You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and TypeScript to create
@@ -95,7 +95,7 @@ button {
 At this point, you have a working React application with no errors, some basic styling, and a button
 that you'll use to connect to MetaMask.  
 
-![Initial App State with Button](../assets/tutorials/dapp-tutorial/img-01.png)
+![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)
 
 You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/start) for this
 starting point of the dapp.
@@ -136,13 +136,13 @@ export default App
 If MetaMask isn't installed, you won't see a **Connect MetaMask** button, and the text displays
 **Injected Provider DOES NOT Exist**.
 
-![Injected Provider DOES NOT Exist](../assets/tutorials/dapp-tutorial/img-02.png)
+![Injected Provider DOES NOT Exist](../assets/tutorials/react-dapp/pt1-02.png)
 
 If MetaMask is installed, you'll see the **Connect MetaMask** button, and the text displays
 **Injected Provider DOES Exist**.
 You'll also see the provider being printed in the console.
 
-![Injected Provider DOES Exist](../assets/tutorials/dapp-tutorial/img-03.png)
+![Injected Provider DOES Exist](../assets/tutorials/react-dapp/pt1-03.png)
 
 You can toggle back and forth between these two states by enabling and disabling the MetaMask
 extension from your browser's **Manage Extensions** menu.
@@ -294,13 +294,13 @@ The changes include:
 - **Lines 34-36:** On click, the **Connect MetaMask** button calls `handleConnect`, from which an RPC
   call of `eth_requestAccounts` is awaited and the user is prompted to connect to MetaMask:
 
-  ![Choose which MetaMask connects](../assets/tutorials/dapp-tutorial/img-04.png)  
+  ![Choose which MetaMask connects](../assets/tutorials/react-dapp/pt1-04.png)  
 
-  ![Grant permissions over MetaMask](../assets/tutorials/dapp-tutorial/img-05.png)
+  ![Grant permissions over MetaMask](../assets/tutorials/react-dapp/pt1-05.png)
 
  - **Lines 38-40:** Once connected, you'll see your account address displayed in your dapp:
 
-  ![MetaMask Account Address](../assets/tutorials/dapp-tutorial/img-06.png)
+  ![MetaMask Account Address](../assets/tutorials/react-dapp/pt1-06.png)
 
 ### 4. Handle state change
 
@@ -526,7 +526,7 @@ The changes here are minimal because you only need to update or duplicate existi
 add a few utility functions.
 Your dapp now displays `account`, `balance`, and `chainId`, represented as hex values and numbers.
 
-![MetaMask address, balance, and chain](../assets/tutorials/dapp-tutorial/img-07.png)
+![MetaMask address, balance, and chain](../assets/tutorials/react-dapp/pt1-07.png)
 
 Your dapp detects any changes to `balance` or `chain`, and the utility functions format hex strings
 to be human-readable for display.
@@ -674,15 +674,15 @@ export default App
 
 To test the error handling, disconnect from your accounts in MetaMask:
 
-![Disconnect from selected Account](../assets/tutorials/dapp-tutorial/img-08.png)
+![Disconnect from selected Account](../assets/tutorials/react-dapp/pt1-08.png)
 
 Attempt to connect again and choose to cancel the connection:
 
-![Cancel request to connect](../assets/tutorials/dapp-tutorial/img-09.png)
+![Cancel request to connect](../assets/tutorials/react-dapp/pt1-09.png)
 
 You'll see the error message displayed on the dapp and in the console:
 
-![MetaMask User Reject Request Error](../assets/tutorials/dapp-tutorial/img-10.png)
+![MetaMask User Reject Request Error](../assets/tutorials/react-dapp/pt1-10.png)
 
 ## Conclusion
 
