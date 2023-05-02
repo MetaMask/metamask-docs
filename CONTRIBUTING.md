@@ -56,7 +56,7 @@ To contribute changes:
    > - All documentation content is located in the `wallet` and `snaps` directories.
    > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
        `snaps-sidebar.js` to [add the page to the sidebar](https://docusaurus.io/docs/sidebar/items).
-   > - If you delete or rename a documentation file, make sure to add a redirect to the
+   > - If you delete, rename, or move a documentation file, make sure to add a redirect to the
        [redirect plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-client-redirects)
        in `docusaurus.config.js`.
 
