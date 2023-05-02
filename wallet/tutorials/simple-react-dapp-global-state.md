@@ -40,5 +40,44 @@ We will go over the structure of this new architecture, as it's still fairly sim
 
 ![](../assets/tutorials/react-dapp/pt2-01.png)
 
-Here we have three components, each with just some text loading, but we have the beginning of what we could turn into a fully working application complete with a navigation bar, main content "Display" area, and a footer area that we will utilize to show errors when we have them.
+Here we have three components, each with just static text, but the structure exists for a multi-component application consisting of a logo, navigation, main content "Display" area, and footer area that we will utilize to show errors when we have them.
 
+### Styling Strategy
+
+We have removed some styles that come default with ViteJS. `App.css` and `index.css` have been removed and we are opting for a modular approach to CSS in our project, but you really need not be concerned with those files unless you want to change the overall styles.
+
+In the `/src` directory we have `App.global.css` which is styling that is specific to the entire application and is not related to a single component or has styling that we might want to reuse in many places in the case we scale the application further.
+
+As well `/src` directory we have `App.module.css`. Considering our `App.tsx` is the container component for our application, `App.module.css` relates to it and its `appContainer` class which utilizes Flexbox to define the `display` type (`flex`) and the `flex-direction` (`column`). This ensures that any children components represented as `div`s are laid out in a single column layout (vertically).
+
+Finally, we have a `/src/components` directory which has a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and a corresponding modular CSS file that is specific to the component it is paired up with. The styles within those modules are specific to that component.
+
+### Project Structure
+
+
+```
+├── src
+│   ├── assets
+│   ├── components
+│   │   └── Display
+│   │   |   └── index.tsx
+│   │   |   └── Display.module.css
+│   │   |   └── Display.tsx
+│   │   ├── MetaMaskError
+│   │   |   └── index.tsx
+│   │   |   └── MetaMaskError.module.css
+│   │   |   └── MetaMaskError.tsx
+│   │   ├─── Navigation
+│   │   |   └── index.tsx
+│   │   |   └── Navigation.module.css
+│   │   |   └── Navigation.tsx
+│   ├── hooks
+│   │   ├── useMetaMask.tsx
+│   ├── utils
+│   │   └── index.tsx
+├── App.global.css
+├── App.module.css
+├── App.tsx
+├── main.tsx
+├── vite-env.d.ts
+```
