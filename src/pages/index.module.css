@@ -1,0 +1,29 @@
+@media screen and (max-width: 996px) {
+  .introductionBlock {
+    padding: 2rem;
+    word-wrap: normal;
+  }
+}
+
+.introductionBlock {
+  background-color: #2b3137;
+  padding: 5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.forceColor {
+  color: var(--ifm-color-content-inverse);
+}
+
+html[data-theme="dark"] .forceColor {
+  color: var(--ifm-color-secondary-dark);
+}
+
+.title {
+  font-size: clamp(2rem, 2.5vw, 4rem);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+}

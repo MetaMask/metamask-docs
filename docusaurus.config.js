@@ -6,7 +6,7 @@ const remarkCodesandbox = require("remark-codesandbox");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "MetaMask docs",
+  title: "MetaMask developer documentation",
   // tagline: '',
   url: "https://docs.metamask.io",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
@@ -200,7 +200,6 @@ const config = {
           alt: "MetaMask logo",
           src: "img/metamask-logo.svg",
           srcDark: "img/metamask-logo-dark.svg",
-          href: "/wallet/",
           width: 150,
         },
         items: [
