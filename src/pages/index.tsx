@@ -10,7 +10,7 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx(styles.introductionBlock, "margin-bottom--lg")}>
+    <header className={"margin-bottom--lg", styles.introductionBlock}>
       <div className="container">
         <h1 className={clsx("hero__title", styles.title, styles.forceColor)}>
           {siteConfig.title}
@@ -29,7 +29,7 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   return (
     <Layout
-      title={`Welcome`}>
+      title={"Home"}>
       <HomepageHeader />
       <main>
         <WalletSection />

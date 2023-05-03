@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import Link from "@docusaurus/Link";
 
 type CardItem = {
@@ -27,7 +26,7 @@ const CardList: CardItem[] = [
   },
   {
     title: "🌐 Snaps JSON-RPC API",
-    link: "/reference/cli",
+    link: "/snaps/reference/cli",
     description: (<>
       Use the Snaps JSON-RPC API to modify the functionality of MetaMask and communicate between dapps and snaps.
     </>),
@@ -36,7 +35,7 @@ const CardList: CardItem[] = [
 
 function Card({ title, link, description }: CardItem) {
   return (
-    <div className={clsx("col", "col--4", "margin-top--sm")}>
+    <div className="col col--4 margin-top--sm">
       <Link className="card homepage-card padding--sm" href={link}>
         <div className="card__header"><h3>{title}</h3></div>
         <div className="card__body">{description}</div>

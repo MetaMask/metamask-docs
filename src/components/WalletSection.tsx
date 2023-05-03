@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import Link from "@docusaurus/Link";
 
 type CardItem = {
@@ -51,7 +50,7 @@ export default function WalletSection(): JSX.Element {
         Get started →
       </Link>
       <p>
-        Your dapp can use the MetaMask APIs to request users' Ethereum accounts, read data from
+        Your dapp can use the MetaMask APIs to request users&apos; Ethereum accounts, read data from
         blockchains the user is connected to, suggest that the user sign messages and transactions,
         and perform other advanced functions.
       </p>
