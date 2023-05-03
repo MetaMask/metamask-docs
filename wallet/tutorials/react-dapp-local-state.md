@@ -92,7 +92,7 @@ button {
 }
 ```
 
-At this point, you have a working React application with no errors, some basic styling, and a button
+At this point, you have a working React app, some basic styling, and a button
 that you'll use to connect to MetaMask.  
 
 ![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)

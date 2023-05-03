@@ -34,7 +34,7 @@ git clone https://github.com/MetaMask/dapp-tutorial-react.git \
 && npm install
 ```
 
-We should have a basic running application at this point, but we have wiped out the code we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/dapp-tutorial-react/blob/single-component-final/src/App.tsx).
+We have a working React app at this point, but we have wiped out the code we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/dapp-tutorial-react/blob/single-component-final/src/App.tsx).
 
 We will review this new structure. But first, let's run our App using `npx vite` and make sure that our starting point looks like the following:
 
