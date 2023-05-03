@@ -449,6 +449,8 @@ When we generate an error by canceling the connection to MetaMask this will show
 
 Upon clicking on that red area, the error will be dismissed. In a real world application the best UI/UX for this would a component that displays in a modal or overlay, for the sake of simplicity we have just utilized our footer area for this but the logic we have learned can be applied to any situation.
 
+You can see the final state of our multi-component app by checking out the [multi-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-final) branch of the source code.
+
 ## Conclusion
 
 We've successfully converted an app using simple local component state to one that utilizes REact Context and Provider to have a global state that we can modify through the use of functions and data that when used anywhere in our application will show up to date data associated with our MetaMask wallet. 👊😉👍
