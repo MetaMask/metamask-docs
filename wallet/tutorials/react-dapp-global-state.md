@@ -6,7 +6,7 @@ toc_max_heading_level: 4
 
 # Create a Simple React Dapp with Global State
 
-This tutorial picks up where the [previous tutorial](./simple-react-dapp-local-state.md) left off. We will be starting our work from the [multi-component-start](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-start) branch of the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository.
+This tutorial picks up where the [previous tutorial](./react-dapp-local-state.md) left off. We will be starting our work from the [multi-component-start](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-start) branch of the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository.
 
 We will also be utilizing TypeScript and a few best practices to ensure a clean code base as we will now have multiple components and a slightly more complex file structure in our [Vite](https://v3.vitejs.dev/guide/) + React project.
 
