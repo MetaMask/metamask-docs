@@ -1,6 +1,6 @@
 ---
-title: Simple React Dapp with Global State
-description: Update a simple (single component) React dapp that integrates MetaMask to utilize React Context Provider (global state).
+title: React Dapp with Global State
+description: Create a simple React dapp that integrates MetaMask and utilize React Context Provider for global state.
 toc_max_heading_level: 4
 ---
 

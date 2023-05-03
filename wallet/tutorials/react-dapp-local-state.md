@@ -1,5 +1,5 @@
 ---
-title: Simple React Dapp with Local State
+title: React Dapp with Local State
 description: Create a simple React dapp to integrate with MetaMask.
 toc_max_heading_level: 4
 ---
