@@ -44,8 +44,8 @@ Here we have three components, each with static text consisting of a logo, navig
 
 Before we get started, let's comment or remove the `border` selector line of code in each style sheet.
 
-```css
-border: 1px solid rgb(...);
+```css  title="Display.module.css | MetaMaskError.module.css | Navigation.module.css"
+// border: 1px solid rgb(...);
 ```
 
 This code was only there to show the three different components as a visual aid distinctly, and you can remove it from the following files:
@@ -117,9 +117,9 @@ The `useMetaMask` file we have supplied does not have code yet, but we have adde
 
 Next, we will export a React Hook called `useMetaMask`, which uses our `MetaMaskContext`.
 
-Update the `/src/hooks/useMetaMask` file with the following code:
+Update the `/src/hooks/useMetaMask.tsx` file with the following code:
 
-```ts
+```ts title="useMetaMask.tsx"
 import { useState, useEffect, createContext, PropsWithChildren, useContext } from 'react'
 
 import detectEthereumProvider from '@metamask/detect-provider'
@@ -258,7 +258,7 @@ Let's open the `/src/App.tsx` file, import our `MetaMaskContextProvider` and wra
 
 Update the code in `/src/App.tsx`:
 
-```ts
+```ts  title="App.tsx"
 import './App.global.css'
 import styles from './App.module.css'
 
@@ -291,7 +291,7 @@ Navigation will connect to MetaMask, use conditional rendering to show an **"Ins
 
 In the `/src/components/Navigation/Navigation.tsx` file, add the following code:
 
-```ts
+```ts  title="Navigation.tsx"
 import { useMetaMask } from '@/hooks/useMetaMask'
 import { formatAddress } from '@/utils'
 import styles from './Navigation.module.css'
@@ -348,7 +348,7 @@ This `formatAddress` function doesn't exist in that `@utils` file yet, let's add
 
 Update `/src/utils/index.tsx` with the following code:
 
-```ts
+```ts title="utils/index.tsx"
 export const formatBalance = (rawBalance: string) => {
   const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
   return balance
@@ -376,7 +376,7 @@ In our `Display` component, we will not call any functions that modify state; we
 
 Update the `/src/components/Display/Display.tsx` file with the following code:
 
-```ts
+```ts title="Display.tsx"
 import { useMetaMask } from '@/hooks/useMetaMask'
 import styles from './Display.module.css'
 import { formatChainAsNum } from '@/utils'
@@ -418,7 +418,7 @@ If a user clicks on that error, we will dismiss the error, which will again hide
 
 In the `/src/components/MetaMaskError/MetaMaskError.tsx` file, add the following code:
 
-```ts
+```ts title="MetaMaskError.tsx"
 import { useMetaMask } from '@/hooks/useMetaMask'
 import styles from './MetaMaskError.module.css'
 
