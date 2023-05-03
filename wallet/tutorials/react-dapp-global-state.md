@@ -83,3 +83,7 @@ Finally, we have a `/src/components` directory which has a folder for `Display`,
 ├── main.tsx
 ├── vite-env.d.ts
 ```
+
+Rather than building our page with a single component, you can see we have broken it up into multiple components and added the `src/components` directory. We also have a directory named `hooks` where we will track our state by creating a Context Provider. This provider will sit in our `src/App.tsx` file and wrap all other component which are described in our app as it's children. Those child component will have access to the state and functions which update our global state thereby ensuring that any change to our wallet `address`, `balance` or `chainId`  state that happen get reflected by rerendering those child component when it changes.
+
+![](../assets/tutorials/react-dapp/pt2-02.png)
