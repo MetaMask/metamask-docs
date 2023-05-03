@@ -10,7 +10,7 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={"margin-bottom--lg", styles.introductionBlock}>
+    <header className={clsx(styles.introductionBlock, "margin-bottom--lg")}>
       <div className="container">
         <h1 className={clsx("hero__title", styles.title, styles.forceColor)}>
           {siteConfig.title}
