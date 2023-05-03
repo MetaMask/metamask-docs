@@ -11,7 +11,7 @@ This tutorial picks up where the [previous tutorial](./simple-react-dapp-local-s
 We will also be utilizing TypeScript and a few best practices to ensure a clean code base as we will now have multiple components and a slightly more complex file structure in our [Vite](https://v3.vitejs.dev/guide/) + React project.
 
 :::info Why Global State?
-Our previous tutorial approached connecting to MetaMask and keeping changed wallet state in sync with a single component. In this tutorial we are going to move that state and its relevant functions into React Context and lift it to global state so that other components can be aware of any wallet state changes.
+Our previous tutorial approached connecting to MetaMask and keeping the changes of account, balance and chainId in sync with a single component. Sooner or later you will have to respond to some state change in a different component. In this tutorial we are going to move that state and its relevant functions into React Context and making it global state so that other components and UI can be aware of changes in wallet state.
 :::
 
 ## Prerequisites
@@ -42,17 +42,19 @@ We will go over the structure of this new architecture, as it's still fairly sim
 
 Here we have three components, each with just static text, but the structure exists for a multi-component application consisting of a logo, navigation, main content "Display" area, and footer area that we will utilize to show errors when we have them.
 
-### Styling Strategy
+#### Styling Strategy
 
-We have removed some styles that come default with ViteJS. `App.css` and `index.css` have been removed and we are opting for a modular approach to CSS in our project, but you really need not be concerned with those files unless you want to change the overall styles.
+NOt specific to MetaMask, but we wanted our new app to have a bit more structured and appealing layout, use some common best practices around styling that you could actually use in a real app.
 
-In the `/src` directory we have `App.global.css` which is styling that is specific to the entire application and is not related to a single component or has styling that we might want to reuse in many places in the case we scale the application further.
+Vite's typical `App.css` and `index.css` have been removed and we are opting for a modular approach to CSS.
 
-As well `/src` directory we have `App.module.css`. Considering our `App.tsx` is the container component for our application, `App.module.css` relates to it and its `appContainer` class which utilizes Flexbox to define the `display` type (`flex`) and the `flex-direction` (`column`). This ensures that any children components represented as `div`s are laid out in a single column layout (vertically).
+In the `/src` directory we have `App.global.css` who's styles are specific to the entire application (not related to a single component) or has styles that we might want to reuse in many places (like buttons).
 
-Finally, we have a `/src/components` directory which has a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and a corresponding modular CSS file that is specific to the component it is paired up with. The styles within those modules are specific to that component.
+In the `/src` directory we have `App.module.css`. Since our `App.tsx` is the container component for our application, `App.module.css` relates to it and its `appContainer` class which utilizes [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox) to define the `display` type (`flex`) and the `flex-direction` (`column`). This ensures that any child `div`s are laid out in a single column layout (vertically).
 
-### Project Structure
+Finally, we have a `/src/components` directory which has a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and a corresponding modular CSS file that is specific to the component it is paired up with and are specific to that component. Each of these three components are [flex-items](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-basics-and-terminology) within a [flex-container](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flexbox-properties), stacked in a vertical column with the top (`Navigation`) and Footer (`MetaMaskError`) being of fixed height and the middle component (`Display`) taking up the remaining vertical space.
+
+#### Project Structure
 
 
 ```
