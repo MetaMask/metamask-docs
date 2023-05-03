@@ -8,10 +8,10 @@ toc_max_heading_level: 4
 
 This tutorial picks up where the [previous tutorial](./react-dapp-local-state.md) left off. We will be starting our work from the [multi-component-start](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-start) branch of the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository.
 
-We will also be utilizing TypeScript and a few best practices to ensure a clean code base as we will now have multiple components and a slightly more complex file structure in our [Vite](https://v3.vitejs.dev/guide/) + React project.
+We will also utilize TypeScript and a few best practices to ensure a clean code base as we now have multiple components and a slightly more complex file structure in our [Vite](https://v3.vitejs.dev/guide/) + React project.
 
-:::info Why Global State?
-Our previous tutorial approached connecting to MetaMask and keeping the changes of account, balance and chainId in sync with a single component. Sooner or later you will have to respond to some state change in a different component. In this tutorial we are going to move that state and its relevant functions into React Context and making it global state so that other components and UI can be aware of changes in wallet state.
+:::info The purpose of utilizing Global State?
+Our previous tutorial approached connecting to MetaMask and keeping the changes of account, balance and chainId in sync with a single component. Sooner or later, you must respond to some state change in a different component. In this tutorial, we will move that state and its relevant functions into React Context and make it global so that other components and UI can be aware of changes in the wallet state.
 :::
 
 ## Prerequisites
@@ -26,7 +26,7 @@ Our previous tutorial approached connecting to MetaMask and keeping the changes 
 
 ### 1. Clone React Dapp Repository
 
-Our first step to get started with this tutorial is to clone the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) repository on GitHub and switch to the `multi-component-start` branch and install our node module dependencies.
+Our first step is to clone the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository on GitHub and check out the `multi-component-start` branch and install our node module dependencies.
 
 ```bash
 git clone https://github.com/MetaMask/dapp-tutorial-react.git \
@@ -34,21 +34,21 @@ git clone https://github.com/MetaMask/dapp-tutorial-react.git \
 && npm install
 ```
 
-At this point we should have a basic running application, but we have wiped out the code that we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/dapp-tutorial-react/blob/single-component-final/src/App.tsx).
+We should have a basic running application at this point, but we have wiped out the code we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/dapp-tutorial-react/blob/single-component-final/src/App.tsx).
 
-We will go over the structure of this new architecture, as it's still fairly simple. But first let's run our app using `npx vite` and make sure that your starting point looks the same as the image below:
+We will review this new structure. But first, let's run our App using `npx vite` and make sure that our starting point looks like the following:
 
 ![](../assets/tutorials/react-dapp/pt2-01.png)
 
-Here we have three components, each with just static text, but the structure exists for a multi-component application consisting of a logo, navigation, main content "Display" area, and footer area that we will utilize to show errors when we have them.
+Here we have three components, each with static text consisting of a logo, navigation, main content "Display" area, and footer area that we will utilize to show MetaMask errors.
 
-Before we get started, let's comment out or remove the `border` selector line of code in each of the style sheets
+Before we get started, let's comment or remove the `border` selector line of code in each style sheet.
 
 ```css
 border: 1px solid rgb(...);
 ```
 
-This code was only there to distinctly show the three different components as a visual aid and you can remove it from the following files if you like:
+This code was only there to show the three different components as a visual aid distinctly, and you can remove it from the following files:
 
 - `Display.module.css`
 - `MetaMaskError.module.css`
@@ -56,19 +56,19 @@ This code was only there to distinctly show the three different components as a 
 
 #### Styling Strategy
 
-NOt specific to MetaMask, but we wanted our new app to have a bit more structured and appealing layout, use some common best practices around styling that you could actually use in a real app.
+Not specific to MetaMask, but we wanted our new App to have a more structured and appealing layout and use some standard best practices around styling.
 
-Vite's typical `App.css` and `index.css` have been removed and we are opting for a modular approach to CSS.
+Vite's typical `App.css` and `index.css` have been removed, and we are opting for a modular approach to CSS.
 
-In the `/src` directory we have `App.global.css` who's styles are specific to the entire application (not related to a single component) or has styles that we might want to reuse in many places (like buttons).
+In the `/src` directory, we have `App.global.css`, who's styles are specific to the entire application (not related to a single component) or have styles we might want to reuse (like buttons).
 
-In the `/src` directory we have `App.module.css`. Since our `App.tsx` is the container component for our application, `App.module.css` relates to it and its `appContainer` class which utilizes [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox) to define the `display` type (`flex`) and the `flex-direction` (`column`). This ensures that any child `div`s are laid out in a single column layout (vertically).
+In the `/src` directory, we have `App.module.css`. Since our `App.tsx` is the container component for our application, `App.module.css` relates to it and its `appContainer` class which utilizes [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox) to define the `display` type (`flex`) and the `flex-direction` (`column`). Using Flexbox here ensures that any child `div`s are laid out in a single-column layout (vertically).
 
-Finally, we have a `/src/components` directory which has a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and a corresponding modular CSS file that is specific to the component it is paired up with and are specific to that component. Each of these three components are [flex-items](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-basics-and-terminology) within a [flex-container](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flexbox-properties), stacked in a vertical column with the top (`Navigation`) and Footer (`MetaMaskError`) being of fixed height and the middle component (`Display`) taking up the remaining vertical space.
+Finally, we have a `/src/components` directory with a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and corresponding modular CSS files specific to that component. Each of these three components are [flex-items](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-basics-and-terminology) within a [flex-container](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flexbox-properties), stacked in a vertical column with the top (`Navigation`) and Footer (`MetaMaskError`) being of fixed height and the middle component (`Display`) taking up the remaining vertical space.
 
 #### Project Structure
 
-Below is a tree representation of our application's `/src` directory.
+Below is a tree representation of our App `/src` directory.
 
 ```
 ├── src
@@ -97,27 +97,27 @@ Below is a tree representation of our application's `/src` directory.
 ├── vite-env.d.ts
 ```
 
-Rather than building our page with a single component, you can see we have broken it up into multiple components and added the `src/components` directory. We also have a directory named `hooks` where we will track our state by creating a Context Provider. This provider will sit in our `src/App.tsx` file and wrap all other component which are described in our app as it's children. 
+Rather than building our page with a single component, we have added the `src/components` directory and distributed our prior UI and functionality into multiple components. We also have a directory named `hooks` where we will modify our state and make it available to the rest of the App using a Context Provider. This provider will sit in our `src/App.tsx` file and wrap the three children components. 
 
-Those child component will have access to the state and functions which update our global state thereby ensuring that any change to our wallet `address`, `balance` or `chainId`  state that happen get reflected by rerendering those child component when it changes.
+Those child components will have access to the state and the functions that modify the global state, thereby ensuring that any change to our `wallet` (`address`, `balance`, and `chainId`), `hasProvider`, `error`, `errorMessage`, and `isConnecting`  state and their modifiers. That state will get refreshed by rerendering those child components when any part of it changes.
 
 ![](../assets/tutorials/react-dapp/pt2-02.png)
 
-In the graphic above we demonstrate how this Context Provider wraps its child components providing them access to the state modifier functions and the actual state itself. SInce React uses a one-way data flow, any change to the data gets rerendered in those components automatically.
+The graphic above demonstrates how this Context Provider wraps its child components, providing access to the state modifier functions and the actual state itself. Since React uses a one-way data flow, any change to the data gets rerendered in those components automatically.
 
 ### 2. Building Our Context Provider
 
-We have provided a file `/src/hooks/useMetaMask` which we will create this Context and Provider component named `MetaMaskContextProvider`. This provider component will utilize the same `useState` and `useEffect` hooks with minimal change from our previous tutorials single component. It will also have similar `UpdateWallet`, `ConnectMetaMask`, and `clearError` functions all of which do their part to either connect to MetaMask or update our MetaMask state.
+We have provided a file `/src/hooks/useMetaMask` which we will create this Context and Provider component named `MetaMaskContextProvider`. This provider component will utilize the same `useState` and `useEffect` hooks with minimal change from our previous tutorial's single component. It will also have similar `UpdateWallet`, `ConnectMetaMask`, and `clearError` functions, all of which do their part to connect to MetaMask or update our MetaMask state.
 
 :::note Check the Comments
-The `useMetaMask` file we have supplied does not have code in it yet, but we have added some basic comments (psuedo-code) that notes the changes we need to make to this file. Reading through those comments before pasting in your code will be useful.
+The `useMetaMask` file we have supplied does not have code yet, but we have added some comments (pseudo-code) that note the work we need to do in this file. Reading through those comments before pasting your code in will be beneficial.
 :::
 
-It will return a `MetaMaskContext.Provider` which takes a value of type `MetaMaskData` supplying that to it's `{children}`.
+`MetaMaskContext` will return a `MetaMaskContext.Provider`, which takes a value of type `MetaMaskData`, supplying that to its `{children}`.
 
-And Finally we will export a React Hook called `useMetaMask`  which uses our `MetaMaskContext`.
+Next, we will export a React Hook called `useMetaMask`, which uses our `MetaMaskContext`.
 
-Let's add that code to the file `/src/hooks/useMetaMask`:
+Update the `/src/hooks/useMetaMask` file with the following code:
 
 ```ts
 import { useState, useEffect, createContext, PropsWithChildren, useContext } from 'react'
@@ -236,15 +236,17 @@ export const useMetaMask = () => {
 }
 ```
 
-:::note We are using tsconfig-paths
-One configuration change we have made to this application is the use of `tsconfig-paths` which lets us load modules whose location is specified in the paths section of `tsconfig.json`.
+:::note Why we are using TS Config Paths
+One configuration change we have made to this application is the use of `vite-tsconfig-paths`, which lets us load modules whose location is specified in the paths section of our project's `tsconfig.json` file.
 
-We have installed a package named `vite-tsconfig-paths` and we import that into the `vite.config.ts` and add it to the plugin array. As well we have updated the `tsconfig.json` to add a path corresponding to the `./src/*` directory using the `@/*` symbol to represent it. We also add the reference to the `./tsconfig.node.json` as a reference.
+We import `tsconfigPaths` from `vite-tsconfig-paths` in our `vite.config.ts` and add it to the `plugins` array. 
 
-You can find additional information at [vite-tsconfig-paths](https://github.com/aleclarson/vite-tsconfig-paths)
+We have also updated the `tsconfig.json` to add a path corresponding to the `./src/*` directory using the `@/*` symbol to represent it. Finally, we add a `reference` in the `./tsconfig.node.json`.
 
-This allows us to use `'@/utils'` to import our utility functions and is a best practice.
+You can find additional information at [vite-tsconfig-paths](https://github.com/aleclarson/vite-tsconfig-paths).
 :::
+
+First, notice the use of our paths `"@/utils"` to import our utility functions.
 
 Nothing special outside of the creation of the Context Provider is happening in this file that we have not previously done is some form in our previous tutorial.
 
@@ -252,7 +254,7 @@ With this Context Provider in place, we can now update our `/src/App.tsx` file t
 
 ### 3. Wrap Components with Context Provider
 
-Let's open the `/src/App.tsx` file and import our new Context Provider and wrap that component around the existing `Display`, `Navigation`, and `MetaMaskError` components.
+Let's open the `/src/App.tsx` file, import our `MetaMaskContextProvider` and wrap that component around the existing `Display`, `Navigation`, and `MetaMaskError` components.
 
 Update the code in `/src/App.tsx`:
 
@@ -279,15 +281,15 @@ export const App = () => {
 }
 ```
 
-With our `App.tsx` file updated we can move on to updating our `Display`, `Navigation`, and `MetaMaskError` components which will each in some form utilize our `useMetaMask` hooks to invoke our functions that modify state or use the state itself.
+With our `App.tsx` file updated, we can move on to updating our `Display`, `Navigation`, and `MetaMaskError` components which will each in some form utilize our `useMetaMask` hooks to invoke our functions that modify state or use the state itself.
 
 ### 4. Connect to MetaMask in Navigation
 
-In our previous tutorial were connecting to MetaMask, displaying `address`, `balance`, and `chainId` information all in one component. But now we want to split all of that up amongst our various components. 
+In our previous tutorial, we connected to MetaMask, displaying `address`, `balance`, and `chainId` information in one component. But now, we want to split that up among our various components. 
 
-Navigation will simply connect to MetaMask, use conditional rendering to show an Install or Connect button or once connected display our wallet address in a link that connects to [etherescan](https://etherscan.io).
+Navigation will connect to MetaMask, use conditional rendering to show an **"Install MetaMask"** or **"Connect MetaMask"** button or, once connected, display our wallet address in a hypertext link that connects to [Etherescan](https://etherscan.io).
 
-In the `/src/components/Navigation/Navigation.tsx` file add the following code:
+In the `/src/components/Navigation/Navigation.tsx` file, add the following code:
 
 ```ts
 import { useMetaMask } from '@/hooks/useMetaMask'
@@ -318,7 +320,7 @@ export const Navigation = () => {
               className="text_link tooltip-bottom"
               href={`https://etherscan.io/address/${wallet}`}
               target="_blank"
-              data-tooltip="Open in Block Explorer"
+              data-tooltip= "Open in Block Explorer"
             >
               {formatAddress(wallet.accounts[0])}
             </a>
@@ -330,13 +332,13 @@ export const Navigation = () => {
 }
 ```
 
-Notice how we are now using `useMetaMask` and destrucuring its return value to get just the parts of the `MetaMaskData` state and functions that we need.
+Notice how we use `useMetaMask` and destructure its return value to get the `MetaMaskData` state and functions we need.
 
 ```ts
 const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask()
 ```
 
-Also we are using a function to format our wallet address for display purposes:
+Also, we are using a function to format our wallet address for display purposes:
 
 ```ts
 {formatAddress(wallet.accounts[0])}
@@ -362,15 +364,15 @@ export const formatAddress = (addr: string) => {
 }
 ```
 
-Great, that should take care of any errors we were getting in our `Navigation` component.
+That should address any build errors in our `Navigation` component.
 
-Other than the use of our new styling practice, the only thing we are dong different from our previous tutorial is that we are displaying the users `address` formatted inside of a lnk once they are connected.
+Other than using our new styling practice, the only thing we are doing differently from our previous tutorial is displaying the user's `address` formatted inside of a link once they are connected.
 
 ![](../assets/tutorials/react-dapp/pt2-03.png)
 
 ### 5. Display MetaMaskData in Display
 
-In our `Display` component we will not be calling any functions that modify state, we will simply be reading from our `MetaMaskData` so this will be a very simple update.
+In our `Display` component, we will not call any functions that modify state; we will read from our `MetaMaskData`, which will be an effortless update.
 
 Update the `/src/components/Display/Display.tsx` file with the following code:
 
@@ -398,23 +400,23 @@ export const Display = () => {
 }
 ```
 
-Notice how we are now using `useMetaMask` and destrucuring its return value to get only the `{ wallet }` data.
+Notice how we now use `useMetaMask` and destructuring its return value to get only the `{ wallet }` data.
 
 ```ts
 const { wallet } = useMetaMask()
 ```
 
-At this point we will be able to display `account`, `balance`, and `chainId` in our `Display` component:
+At this point, we will be able to display `account`, `balance`, and `chainId` in our `Display` component:
 
 ![](../assets/tutorials/react-dapp/pt2-04.png)
 
 ### 5. Show and Hide Errors in MetaMaskError
 
-We are almost done, but we want to make sure that if MetaMask errors or if the user rejects a connection that we have a component to display that error. 
+We're rounding the bases and close to finalizing our demo, but we want to ensure that if MetaMask errors or the user rejects a connection, we have a component to display that error. 
 
-If a user clicks on that error we will dismiss the error which will again hide that information and we do this using the `clearError` function that we set up in the `useMetaMask` hook.
+If a user clicks on that error, we will dismiss the error, which will again hide that information, and we do this using the `clearError` function that we set up in the `useMetaMask` hook.
 
-In the `/src/components/MetaMaskError/MetaMaskError.tsx` file add the following code:
+In the `/src/components/MetaMaskError/MetaMaskError.tsx` file, add the following code:
 
 ```ts
 import { useMetaMask } from '@/hooks/useMetaMask'
@@ -424,7 +426,7 @@ export const MetaMaskError = () => {
   const { error, errorMessage, clearError } = useMetaMask()
   return (
     <div className={styles.metaMaskError} style={
-      error ? { backgroundColor: 'brown' } : {}
+      error ? { backgroundColor: 'brown'} : {}
     }>
       { error && (
           <div onClick={clearError}>
@@ -437,20 +439,20 @@ export const MetaMaskError = () => {
 }
 ```
 
-Notice how we are now using `useMetaMask` and destrucuring its return value to get only the `{ error, errorMessage, clearError }`, data and a function that will modify the error state.
+Notice how we are now using `useMetaMask` and destructuring its return value to get only the `{ error, errorMessage, clearError }` data and a function that will modify the error state.
 
 ```ts
 const { error, errorMessage, clearError } = useMetaMask()
 ```
 
-When we generate an error by canceling the connection to MetaMask this will show that footer component as well it will temporarily make it's background a dark red color:
+When we generate an error by cancelling the connection to MetaMask, this will show up in the footer component; it will temporarily make its background a dark red color:
 
 ![](../assets/tutorials/react-dapp/pt2-05.png)
 
-Upon clicking on that red area, the error will be dismissed. In a real world application the best UI/UX for this would a component that displays in a modal or overlay, for the sake of simplicity we have just utilized our footer area for this but the logic we have learned can be applied to any situation.
+Upon clicking on that red area, the error will be dismissed. In a real-world application, the best UI/UX for this would be a component that displays in a modal or overlay; for the sake of simplicity, we have just utilized our footer area for this, but the logic we have can be applied to any situation.
 
-You can see the final state of our multi-component app by checking out the [multi-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-final) branch of the source code.
+You can see the final state of our multi-component App by checking out the [multi-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-final) branch of the source code.
 
 ## Conclusion
 
-We've successfully converted an app using simple local component state to one that utilizes REact Context and Provider to have a global state that we can modify through the use of functions and data that when used anywhere in our application will show up to date data associated with our MetaMask wallet. 👊😉👍
+We've successfully converted an app using a simple local component state to one that utilizes React Context and Provider to have a global state that we can modify through functions and data that, when used anywhere in our application, will show up-to-date data associated with our MetaMask wallet. 👊😉👍
