@@ -29,6 +29,8 @@ build with components that need updating.
 
 ## Steps
 
+You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/start) repository on GitHub for the starting point of the dapp or check out the final state in the [single-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final) branch.
+
 ### 1. Set up the project
 
 Set up a new project using Vite, React, and TypeScript, by running the following command:
@@ -97,8 +99,6 @@ that you'll use to connect to MetaMask.
 
 ![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)
 
-You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/start) repository on GitHub for the starting point of the dapp or check out the final state in the [single-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final) branch.
-
 ### 2. Detect MetaMask
 
 Next, detect the injected provider that browser extension wallets use.
@@ -121,7 +121,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h2>Injected Provider { injectedProvider ? 'DOES' : 'DOES NOT'} Exist</h2>>
+      <h2>Injected Provider { injectedProvider ? 'DOES' : 'DOES NOT'} Exist</h2>
       { isMetaMask && 
         <button>Connect MetaMask</button>
       }
