@@ -10,7 +10,7 @@ const config = {
   // tagline: '',
   url: "https://docs.metamask.io",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/metamask-fox.svg",
 
@@ -28,7 +28,6 @@ const config = {
   },
 
   trailingSlash: true,
-  onBrokenLinks: 'warn',
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
