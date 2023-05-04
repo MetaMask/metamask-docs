@@ -6,9 +6,7 @@ description: Create a snap that provides transaction insights.
 
 This tutorial walks you through creating a snap that calculates the percentage of gas fees that
 a user would pay when creating a transaction.
-The snap is based on the
-[Snaps template](https://github.com/MetaMask/template-snap-monorepo), and it provides transaction
-insights in the MetaMask transaction window.
+The snap provides transaction insights in the MetaMask transaction window.
 
 ## Prerequisites
 
@@ -28,7 +26,7 @@ insights in the MetaMask transaction window.
 
 ### 1. Set up the project
 
-Create a new snap project by using the command line:
+Create a new snap project using the Create Snap CLI by running the following command:
 
 ```bash
 yarn create @metamask/snap transaction-insights-snap

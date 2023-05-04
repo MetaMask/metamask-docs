@@ -5,7 +5,8 @@ description: Get started quickly using the Snaps template.
 # Snaps quickstart
 
 Get started with Snaps using the
-[Create Snap CLI](https://github.com/MetaMask/snaps-monorepo/packages/create-snap). With the CLI, you can initialize a snap monorepo project built with TypeScript and React.
+[Create Snap CLI](https://github.com/MetaMask/snaps-monorepo/packages/create-snap).
+With the CLI, you can initialize a snap monorepo project built with TypeScript and React.
 
 ## Prerequisites
 
@@ -22,7 +23,7 @@ Get started with Snaps using the
 
 ## Create the project
 
-Create a new snap project by using the command line:
+Create a new snap project using the Create Snap CLI by running the following command:
 
 ```bash
 yarn create @metamask/snap your-snap-name
