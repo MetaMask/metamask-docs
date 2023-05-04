@@ -28,6 +28,7 @@ const config = {
   },
 
   trailingSlash: true,
+  onBrokenLinks: 'warn',
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
