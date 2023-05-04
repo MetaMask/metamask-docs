@@ -26,8 +26,8 @@ const config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-  
-  trailingSlash: false,
+
+  trailingSlash: true,
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
