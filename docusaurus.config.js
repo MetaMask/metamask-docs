@@ -10,7 +10,7 @@ const config = {
   // tagline: '',
   url: "https://docs.metamask.io",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
-  onBrokenLinks: "warn",
+  onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/metamask-fox.svg",
 
