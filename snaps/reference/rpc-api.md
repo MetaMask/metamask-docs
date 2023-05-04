@@ -173,7 +173,7 @@ try {
 For restricted methods callable by snaps, a snap must request permission to call the method in the
 [snap manifest file](../how-to/request-permissions.md).
 For restricted methods callable by websites, a website must request permission to call the method using
-[`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions).
+[`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions).
 
 ### snap_dialog
 
@@ -668,7 +668,7 @@ await snap.request({
 ### wallet_snap
 
 A website must request the `wallet_snap` permission using
-[`wallet_requestPermissions`](../../wallet/reference/rpc-api#wallet_requestpermissions) to
+[`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions) to
 interact with the specified snaps.
 
 A website can also call this method to invoke the specified JSON-RPC method of the specified snap.

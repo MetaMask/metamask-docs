@@ -4,7 +4,7 @@ description: Develop, test, and publish a snap.
 
 # Develop a snap
 
-A snap can extend the dapp-facing [MetaMask JSON-RPC API](../../wallet/reference/rpc-api) in
+A snap can extend the dapp-facing [MetaMask JSON-RPC API](/wallet/reference/rpc-api) in
 arbitrary ways, or integrate with and extend the functionality of MetaMask using the
 [Snaps JSON-RPC API](../reference/rpc-api.md) and [permissions](request-permissions.md).
 
@@ -16,7 +16,7 @@ Before developing a snap, it's important to understand:
 - [The Snaps execution environment](../concepts/execution-environment.md).
 
 You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
-[tutorial](../category/tutorials).
+[tutorial](/snaps/category/tutorials).
 
 This page describes additional important steps when developing a snap.
 
