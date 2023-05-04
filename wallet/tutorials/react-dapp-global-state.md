@@ -156,7 +156,11 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
       }
     }
 
-    const refreshChain = (chainId: any) => {
+    const refreshChain = async (chainId: any) => {
+      const accounts = await window.ethereum.request(
+        { method: 'eth_accounts' }
+      )
+      refreshAccounts(accounts)
       setWallet((wallet) => ({ ...wallet, chainId }))
     }
 
