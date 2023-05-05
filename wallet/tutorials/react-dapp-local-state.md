@@ -29,7 +29,7 @@ build with components that need updating.
 
 ## Steps
 
-You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/start) repository on GitHub for the starting point of the dapp or check out the final state in the [single-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final) branch.
+You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-start) repository on GitHub for the starting point of the dapp or check out the final state in the [local-state-final](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-start) branch.
 
 ### 1. Set up the project
 
@@ -687,7 +687,7 @@ You'll see the error message displayed on the dapp and in the console:
 
 This tutorial walked you through creating a single component dapp using Vite, some basics of
 interacting with MetaMask and its API, and managing state locally.
-You can see the [source code](https://github.com/MetaMask/dapp-tutorial-react/tree/single-component-final)
+You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
 for the final state of this dapp tutorial.
 
 To bring this functionality to a dapp with more than one component subscribing to its state, you

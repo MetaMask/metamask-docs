@@ -6,7 +6,7 @@ toc_max_heading_level: 4
 
 # Create a Simple React Dapp with Global State
 
-This tutorial picks up where the [previous tutorial](./react-dapp-local-state.md) left off. We will be starting our work from the [multi-component-start](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-start) branch of the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository.
+This tutorial picks up where the [previous tutorial](./react-dapp-local-state.md) left off. We will be starting our work from the [global-state-start](https://github.com/MetaMask/react-dapp-tutorial/tree/global-state-start) branch of the [react-dapp-tutorial](https://github.com/MetaMask/react-dapp-tutorial) source code repository.
 
 We will also utilize TypeScript and a few best practices to ensure a clean code base as we now have multiple components and a slightly more complex file structure in our [Vite](https://v3.vitejs.dev/guide/) + React project.
 
@@ -26,15 +26,15 @@ Our previous tutorial approached connecting to MetaMask and keeping the changes 
 
 ### 1. Clone React Dapp Repository
 
-Our first step is to clone the [dapp-tutorial-react](https://github.com/MetaMask/dapp-tutorial-react) source code repository on GitHub and check out the `multi-component-start` branch and install our node module dependencies.
+Our first step is to clone the [react-dapp-tutorial](https://github.com/MetaMask/react-dapp-tutorial) source code repository on GitHub and check out the `global-state-start` branch and install our node module dependencies.
 
 ```bash
-git clone https://github.com/MetaMask/dapp-tutorial-react.git \
-&& cd dapp-tutorial-react && git checkout multi-component-start \
+git clone https://github.com/MetaMask/react-dapp-tutorial.git \
+&& cd react-dapp-tutorial && git checkout local-state-start \
 && npm install
 ```
 
-We have a working React app at this point, but we have wiped out the code we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/dapp-tutorial-react/blob/single-component-final/src/App.tsx).
+We have a working React app at this point, but we have wiped out the code we wrote in our previous branches [App.tsx file](https://github.com/MetaMask/react-dapp-tutorial/blob/local-state-final/src/App.tsx).
 
 We will review this new structure. But first, let's run our App using `npx vite` and make sure that our starting point looks like the following:
 
@@ -455,7 +455,7 @@ When we generate an error by cancelling the connection to MetaMask, this will sh
 
 Upon clicking on that red area, the error will be dismissed. In a real-world application, the best UI/UX for this would be a component that displays in a modal or overlay; for the sake of simplicity, we have just utilized our footer area for this, but the logic we have can be applied to any situation.
 
-You can see the final state of our multi-component App by checking out the [multi-component-final](https://github.com/MetaMask/dapp-tutorial-react/tree/multi-component-final) branch of the source code.
+You can see the final state of our `global-state` App by checking out the [global-state-final](https://github.com/MetaMask/react-dapp-tutorial/tree/global-state-final) branch of the source code.
 
 ## Conclusion
 
