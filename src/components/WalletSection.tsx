@@ -1,11 +1,5 @@
 import React from "react";
-import Link from "@docusaurus/Link";
-
-type CardItem = {
-  title: string;
-  link: string;
-  description: JSX.Element;
-};
+import Card, {type CardItem} from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
@@ -31,24 +25,10 @@ const CardList: CardItem[] = [
   },
 ];
 
-function Card({ title, link, description }: CardItem) {
-  return (
-    <div className="col col--4 margin-top--sm">
-      <Link className="card homepage-card padding--sm" href={link}>
-        <div className="card__header"><h3>{title}</h3></div>
-        <div className="card__body">{description}</div>
-      </Link>
-    </div>
-  );
-}
-
 export default function WalletSection(): JSX.Element {
   return (
-    <section className="container margin-top--lg margin-bottom--xl">
-      <h1 className="header-item margin-right--md">Integrate your dapp with the MetaMask wallet</h1>
-      <Link className="button button--outline button--primary header-button header-item" to="/wallet">
-        Get started →
-      </Link>
+    <section className="container margin-top--md">
+      <h1>Integrate your dapp with the MetaMask wallet</h1>
       <p>
         Your dapp can use the MetaMask APIs to request users&apos; Ethereum accounts, read data from
         blockchains the user is connected to, suggest that the user sign messages and transactions,

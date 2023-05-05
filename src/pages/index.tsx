@@ -19,7 +19,7 @@ function HomepageHeader() {
           Integrate with and extend upon the world&apos;s leading self-custodial crypto wallet.
         </p>
         <Link className="button homepage-button button--lg" to="/wallet">
-          Go to docs →
+          Get started
         </Link>
       </div>
     </header>
