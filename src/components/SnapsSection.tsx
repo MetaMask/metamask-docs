@@ -1,5 +1,5 @@
 import React from "react";
-import Card, {type CardItem} from "@site/src/components/Card";
+import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
