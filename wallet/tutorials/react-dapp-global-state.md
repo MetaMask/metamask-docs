@@ -119,14 +119,20 @@ Next, we will export a React Hook called `useMetaMask`, which uses our `MetaMask
 
 Update the `/src/hooks/useMetaMask.tsx` file with the following code:
 
-```ts title="useMetaMask.tsx"
+```tsx title="useMetaMask.tsx"
 import { useState, useEffect, createContext, PropsWithChildren, useContext } from 'react'
 
 import detectEthereumProvider from '@metamask/detect-provider'
-import { formatBalance } from '@/utils'
+import { formatBalance } from '~/utils'
+
+interface WalletState {
+  accounts: any[]
+  balance: string
+  chainId: string
+}
 
 interface MetaMaskData {
-  wallet: typeof initialState
+  wallet: WalletState
   hasProvider: boolean | null
   error: boolean
   errorMessage: string
@@ -135,84 +141,78 @@ interface MetaMaskData {
   clearError: () => void
 }
 
-const initialState = { accounts: [], balance: '', chainId: '' }
+const disconnectedState: WalletState = { accounts: [], balance: '', chainId: '' }
 
 const MetaMaskContext = createContext<MetaMaskData>({} as MetaMaskData)
 
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const [hasProvider, setHasProvider] = useState<boolean | null>(null)
-  const [wallet, setWallet] = useState(initialState)
 
   const [isConnecting, setIsConnecting] = useState(false)
+
   const [errorMessage, setErrorMessage] = useState('')
+  const clearError = () => setErrorMessage('')
+
+  const [wallet, setWallet] = useState(disconnectedState)
+  const _updateWallet = async (providedAccounts?: any) => {
+    const accounts = providedAccounts || await window.ethereum.request(
+      { method: 'eth_accounts' }
+    )
+
+    if (accounts.length === 0) {
+      // if there are no accounts, then the user is disconnected
+      setWallet(disconnectedState)
+      return
+    }
+
+    const balance = formatBalance(await window.ethereum.request({
+      method: 'eth_getBalance',
+      params: [accounts[0], 'latest'],
+    }))
+    const chainId = await window.ethereum.request({
+      method: 'eth_chainId',
+    })
+
+    setWallet({ accounts, balance, chainId })
+  }
+
+  const updateWalletAndAccounts = () => _updateWallet()
+  const updateWallet = (accounts: any) => _updateWallet(accounts)
 
   useEffect(() => {
-    const refreshAccounts = (accounts: any) => {
-      if (accounts.length > 0) {
-        updateWallet(accounts)
-      } else {
-        // if length 0, user is disconnected
-        setWallet(initialState)
-      }
-    }
-
-    const refreshChain = async (chainId: any) => {
-      const accounts = await window.ethereum.request(
-        { method: 'eth_accounts' }
-      )
-      refreshAccounts(accounts)
-      setWallet((wallet) => ({ ...wallet, chainId }))
-    }
-
     const getProvider = async () => {
       const provider = await detectEthereumProvider({ silent: true })
       setHasProvider(Boolean(provider))
 
       if (provider) {
-        const accounts = await window.ethereum.request(
-          { method: 'eth_accounts' }
-        )
-        refreshAccounts(accounts)
-        window.ethereum.on('accountsChanged', refreshAccounts)
-        window.ethereum.on('chainChanged', refreshChain)
+        updateWalletAndAccounts();
+        window.ethereum.on('accountsChanged', updateWallet)
+        window.ethereum.on('chainChanged', updateWalletAndAccounts)
       }
     }
 
     getProvider()
 
     return () => {
-      window.ethereum?.removeListener('accountsChanged', refreshAccounts)
-      window.ethereum?.removeListener('chainChanged', refreshChain)
+      window.ethereum?.removeListener('accountsChanged', updateWallet)
+      window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts)
     }
   }, [])
 
-  const updateWallet = async (accounts: any) => {
-    const balance = formatBalance(await window.ethereum!.request({
-      method: 'eth_getBalance',
-      params: [accounts[0], 'latest'],
-    }))
-    const chainId = await window.ethereum!.request({
-      method: 'eth_chainId',
-    })
-    setWallet({ accounts, balance, chainId })
-  }
-
   const connectMetaMask = async () => {
     setIsConnecting(true)
-    await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    })
-      .then((accounts: []) => {
-        setErrorMessage('')
-        updateWallet(accounts)
+
+    try {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
       })
-      .catch((err: any) => {
-        setErrorMessage(err.message)
-      })
+      clearError()
+      updateWallet(accounts)
+    } catch(err: any) {
+      setErrorMessage(err.message)
+    }
     setIsConnecting(false)
   }
-
-  const clearError = () => setErrorMessage('')
 
   return (
     <MetaMaskContext.Provider
@@ -245,12 +245,12 @@ One configuration change we have made to this application is the use of `vite-ts
 
 We import `tsconfigPaths` from `vite-tsconfig-paths` in our `vite.config.ts` and add it to the `plugins` array. 
 
-We have also updated the `tsconfig.json` to add a path corresponding to the `./src/*` directory using the `@/*` symbol to represent it. Finally, we add a `reference` in the `./tsconfig.node.json`.
+We have also updated the `tsconfig.json` to add a path corresponding to the `./src/*` directory using the `~/*` symbol to represent it. Finally, we add a `reference` in the `./tsconfig.node.json`.
 
 You can find additional information at [vite-tsconfig-paths](https://github.com/aleclarson/vite-tsconfig-paths).
 :::
 
-First, notice the use of our paths `"@/utils"` to import our utility functions.
+First, notice the use of our paths `"~/utils"` to import our utility functions.
 
 Nothing special outside of the creation of the Context Provider is happening in this file that we have not previously done is some form in our previous tutorial.
 
@@ -262,7 +262,7 @@ Let's open the `/src/App.tsx` file, import our `MetaMaskContextProvider` and wra
 
 Update the code in `/src/App.tsx`:
 
-```ts  title="App.tsx"
+```tsx  title="App.tsx"
 import './App.global.css'
 import styles from './App.module.css'
 
@@ -295,9 +295,9 @@ Navigation will connect to MetaMask, use conditional rendering to show an **"Ins
 
 In the `/src/components/Navigation/Navigation.tsx` file, add the following code:
 
-```ts  title="Navigation.tsx"
-import { useMetaMask } from '@/hooks/useMetaMask'
-import { formatAddress } from '@/utils'
+```tsx  title="Navigation.tsx"
+import { useMetaMask } from '~/hooks/useMetaMask'
+import { formatAddress } from '~/utils'
 import styles from './Navigation.module.css'
 
 export const Navigation = () => {
@@ -352,7 +352,7 @@ This `formatAddress` function doesn't exist in that `@utils` file yet, let's add
 
 Update `/src/utils/index.tsx` with the following code:
 
-```ts title="utils/index.tsx"
+```ts title="utils/index.ts"
 export const formatBalance = (rawBalance: string) => {
   const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
   return balance
@@ -380,10 +380,10 @@ In our `Display` component, we will not call any functions that modify state; we
 
 Update the `/src/components/Display/Display.tsx` file with the following code:
 
-```ts title="Display.tsx"
-import { useMetaMask } from '@/hooks/useMetaMask'
+```tsx title="Display.tsx"
+import { useMetaMask } from '~/hooks/useMetaMask'
 import styles from './Display.module.css'
-import { formatChainAsNum } from '@/utils'
+import { formatChainAsNum } from '~/utils'
 
 export const Display = () => {
 
@@ -422,8 +422,8 @@ If a user clicks on that error, we will dismiss the error, which will again hide
 
 In the `/src/components/MetaMaskError/MetaMaskError.tsx` file, add the following code:
 
-```ts title="MetaMaskError.tsx"
-import { useMetaMask } from '@/hooks/useMetaMask'
+```tsx title="MetaMaskError.tsx"
+import { useMetaMask } from '~/hooks/useMetaMask'
 import styles from './MetaMaskError.module.css'
 
 export const MetaMaskError = () => {
