@@ -701,10 +701,10 @@ You'll see the error message displayed on the dapp and in the console:
 ## Conclusion
 
 This tutorial walked you through creating a single component dapp using Vite, some basics of
-interacting with MetaMask and its API, and managing state locally.  
+interacting with MetaMask and its API, and managing state locally.
 
 You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
-for the final state of this dapp tutorial.  
+for the final state of this dapp tutorial.
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
 This follow-up tutorial walks you through adding more than one component and working with global state.

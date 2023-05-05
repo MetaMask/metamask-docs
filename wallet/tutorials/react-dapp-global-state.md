@@ -388,11 +388,11 @@ each of which will use the `useMetaMask` hook to display the state or invoke fun
 
 ### 4. Connect to MetaMask in the navigation
 
-The navigation component will connect to MetaMask using conditional rendering to show an
+The `Navigation` component will connect to MetaMask using conditional rendering to show an
 **Install MetaMask** or **Connect MetaMask** button or, once connected, display your wallet address
-in a hypertext link that connects to [Etherescan](https://etherscan.io).  
+in a hypertext link that connects to [Etherscan](https://etherscan.io).  
 
-In the `/src/components/Navigation/Navigation.tsx` file, add the following code:
+Update `/src/components/Navigation/Navigation.tsx` to the following:
 
 ```tsx  title="Navigation.tsx"
 import { useMetaMask } from '~/hooks/useMetaMask'
@@ -435,21 +435,20 @@ export const Navigation = () => {
 }
 ```
 
-Notice how `useMetaMask` destructures its return value to get at the items within the `MetaMaskContextData`.
+Notice how `useMetaMask` de-structures its return value to get the items within `MetaMaskContextData`:
 
 ```ts
 const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask()
 ```
 
-Also, you are using a function to format your wallet address for display purposes:
+Also, the `formatAddress` function formats the wallet address for display purposes:
 
 ```ts
 {formatAddress(wallet.accounts[0])}
 ```
 
-This `formatAddress` function doesn't exist in that `@utils` file yet, let's add it.  
-
-Update `/src/utils/index.tsx` with the following code:
+This function doesn't exist in the `@utils` file yet, so you'll need to add it.
+Update `/src/utils/index.tsx` to the following:
 
 ```ts title="utils/index.ts"
 export const formatBalance = (rawBalance: string) => {
@@ -467,21 +466,21 @@ export const formatAddress = (addr: string) => {
 }
 ```
 
-That should address any build errors in your `Navigation` component.  
+This should address any build errors in your `Navigation` component.  
 
-Other than using your new styling, the only thing you do differently from the local-state tutorial
-is display the user's `address` formatted inside a link once they are connected.
-Now that you have a place for connecting and showing the address, one could build out an entire
-profile component if they wanted (side quest).
+Other than using the new styling, the only thing this dapp has done differently than the local-state
+tutorial is display the user's `address` formatted inside a link once they're connected.
+Now that you have a place for connecting and showing the address, you could build out an entire
+profile component (side quest).
 
 ![](../assets/tutorials/react-dapp/pt2-03.png)
 
 ### 5. Display MetaMask data
 
-In your `Display` component, you will not call any functions that modify state; you will read from
-your `MetaMaskData`, a simple update.  
+In the `Display` component, you won't call any functions that modify state; you'll read from
+`MetaMaskData`, a simple update.
 
-Update the `/src/components/Display/Display.tsx` file with the following code:
+Update `/src/components/Display/Display.tsx` to the following:
 
 ```tsx title="Display.tsx"
 import { useMetaMask } from '~/hooks/useMetaMask'
@@ -507,25 +506,22 @@ export const Display = () => {
 }
 ```
 
-Notice how we now use `useMetaMask` and destructuring its return value to get only the `{ wallet }` data.
+Notice how `useMetaMask` de-structures its return value to get only the `wallet` data:
 
 ```ts
 const { wallet } = useMetaMask()
 ```
 
-At this point, we will be able to display `account`, `balance`, and `chainId` in your `Display` component:
+At this point, you can display `account`, `balance`, and `chainId` in the `Display` component:
 
 ![](../assets/tutorials/react-dapp/pt2-04.png)
 
-### 5. Show MetaMask errors in the footer
+### 6. Show MetaMask errors in the footer
 
-We're rounding the bases and close to finalizing your demo, but we want to ensure that if MetaMask
-errors or the user rejects a connection, you have a component to display that error. 
+If MetaMask errors or the user rejects a connection, you can display that error in the footer, or
+`MetaMaskError` component.
 
-If a user clicks on that error, you will dismiss the error, which will again hide that information,
-and you do this using the `clearError` function that you set up in the `useMetaMask` hook.
-
-In the `/src/components/MetaMaskError/MetaMaskError.tsx` file, add the following code:
+Update `/src/components/MetaMaskError/MetaMaskError.tsx` to the following:
 
 ```tsx title="MetaMaskError.tsx"
 import { useMetaMask } from '~/hooks/useMetaMask'
@@ -548,29 +544,28 @@ export const MetaMaskError = () => {
 }
 ```
 
-Notice how you are now using `useMetaMask` and destructuring its return value to get only the
-`{ error, errorMessage, clearError }` data and a function that will modify the error state.
+Notice how `useMetaMask` de-structures its return value to get only the `error`, `errorMessage`, and
+`clearError` data:
 
 ```ts
 const { error, errorMessage, clearError } = useMetaMask()
 ```
 
-When you generate an error by cancelling the connection to MetaMask, this will show up in the footer
-component; it will temporarily make its background a dark red color:
+When you generate an error by cancelling the connection to MetaMask, this shows up in the footer.
+The background temporarily turns a dark red color:
 
 ![](../assets/tutorials/react-dapp/pt2-05.png)
 
-You can dismiss any MetaMask error displayed in this footer component by simply clicking on it.
-In a real-world application, the best UI/UX for this would be a component that displays in a modal
-or overlay and provides an obvious dismiss button; for the sake of simplicity, you have used your
-footer in this way, however; this logic you have, can be applied to any solution.  
-
-You can see the final state of your `global-state` dapp by checking out the
-[global-state-final](https://github.com/MetaMask/react-dapp-tutorial/tree/global-state-final) branch
-of the source code.
+In this tutorial's dapp, you can dismiss any MetaMask error displayed in the footer by selecting it.
+In a real-world dapp, the best UI/UX for error dismissing would be a component that displays in a
+modal or overlay and provides an obvious dismiss button.
 
 ## Conclusion
 
-We've successfully converted an app using a simple local component state to one that uses React
-Context and Provider to have a global state that you can modify through functions and data that,
-when used anywhere in your application, will show up-to-date data associated with your MetaMask wallet.
+You've successfully converted a single component dapp with local state to a multiple component dapp
+with global state, using React context and provider.
+You can modify the dapp's global state using functions and data that, when used anywhere in the dapp,
+will show up-to-date data associated with your MetaMask wallet.
+
+You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/global-state-final)
+for the final state of this dapp tutorial.
