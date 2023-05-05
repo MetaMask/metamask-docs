@@ -66,6 +66,24 @@ In the `/src` directory, we have `App.module.css`. Since our `App.tsx` is the co
 
 Finally, we have a `/src/components` directory with a folder for `Display`, `Navigation`, and `MetaMaskError`. Inside those folders are the component file and corresponding modular CSS files specific to that component. Each of these three components are [flex-items](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-basics-and-terminology) within a [flex-container](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flexbox-properties), stacked in a vertical column with the top (`Navigation`) and Footer (`MetaMaskError`) being of fixed height and the middle component (`Display`) taking up the remaining vertical space.
 
+#### Optional: Linting with ESLint
+
+This project utilizes a standard ESLint configuration to keep the code consistent. If you want to use ESLint, two options are available:
+
+1. Run `npm run lint` or `npm run lint:fix` from the command line. The former will display all the linting errors, and the latter will update your code to fix linting errors where possible
+2. Setup your IDE to show linting errors and automatically fix them on save. For example in VSCode, you can create or update the file at `.vscode/settings.json` in the root of the project with the following settings:
+
+    ```json
+    {
+      "eslint.format.enable": true,
+      "eslint.packageManager": "npm",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.codeActionsOnSave.mode": "all"
+    }
+    ```
+
 #### Project Structure
 
 Below is a tree representation of our App `/src` directory.
@@ -107,11 +125,7 @@ The graphic above demonstrates how this Context Provider wraps its child compone
 
 ### 2. Building Our Context Provider
 
-We have provided a file `/src/hooks/useMetaMask` which we will create this Context and Provider component named `MetaMaskContextProvider`. This provider component will utilize the same `useState` and `useEffect` hooks with minimal change from our previous tutorial's single component. It will also have similar `UpdateWallet`, `ConnectMetaMask`, and `clearError` functions, all of which do their part to connect to MetaMask or update our MetaMask state.
-
-:::note Check the Comments
-The `useMetaMask` file we have supplied does not have code yet, but we have added some comments (pseudo-code) that note the work we need to do in this file. Reading through those comments before pasting your code in will be beneficial.
-:::
+We have provided a file `/src/hooks/useMetaMask` which we will create this Context and Provider component named `MetaMaskContextProvider`. This provider component will utilize similar `useState` and `useEffect` hooks with some changes from our previous tutorial's local state component to make it more DRY. It will also have similar `updateWallet`, `connectMetaMask`, and `clearError` functions, all of which do their part to connect to MetaMask or update our MetaMask state.
 
 `MetaMaskContext` will return a `MetaMaskContext.Provider`, which takes a value of type `MetaMaskData`, supplying that to its `{children}`.
 
@@ -120,7 +134,8 @@ Next, we will export a React Hook called `useMetaMask`, which uses our `MetaMask
 Update the `/src/hooks/useMetaMask.tsx` file with the following code:
 
 ```tsx title="useMetaMask.tsx"
-import { useState, useEffect, createContext, PropsWithChildren, useContext } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect, createContext, PropsWithChildren, useContext, useCallback } from 'react'
 
 import detectEthereumProvider from '@metamask/detect-provider'
 import { formatBalance } from '~/utils'
@@ -131,7 +146,7 @@ interface WalletState {
   chainId: string
 }
 
-interface MetaMaskData {
+interface MetaMaskContextData {
   wallet: WalletState
   hasProvider: boolean | null
   error: boolean
@@ -143,7 +158,7 @@ interface MetaMaskData {
 
 const disconnectedState: WalletState = { accounts: [], balance: '', chainId: '' }
 
-const MetaMaskContext = createContext<MetaMaskData>({} as MetaMaskData)
+const MetaMaskContext = createContext<MetaMaskContextData>({} as MetaMaskContextData)
 
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const [hasProvider, setHasProvider] = useState<boolean | null>(null)
@@ -154,13 +169,14 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const clearError = () => setErrorMessage('')
 
   const [wallet, setWallet] = useState(disconnectedState)
-  const _updateWallet = async (providedAccounts?: any) => {
+  // useCallback ensures that we don't uselessly re-create the _updateWallet function on every render
+  const _updateWallet = useCallback(async (providedAccounts?: any) => {
     const accounts = providedAccounts || await window.ethereum.request(
-      { method: 'eth_accounts' }
+      { method: 'eth_accounts' },
     )
 
     if (accounts.length === 0) {
-      // if there are no accounts, then the user is disconnected
+      // If there are no accounts, then the user is disconnected
       setWallet(disconnectedState)
       return
     }
@@ -174,18 +190,24 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     })
 
     setWallet({ accounts, balance, chainId })
-  }
+  }, [])
 
-  const updateWalletAndAccounts = () => _updateWallet()
-  const updateWallet = (accounts: any) => _updateWallet(accounts)
+  const updateWalletAndAccounts = useCallback(() => _updateWallet(), [_updateWallet])
+  const updateWallet = useCallback((accounts: any) => _updateWallet(accounts), [_updateWallet])
 
+  /**
+   * This logic checks if MetaMask is installed. If it is, then we setup some
+   * event handlers to update the wallet state when MetaMask changes. The function
+   * returned from useEffect is used as a "clean-up": in there, we remove the event
+   * handlers whenever the MetaMaskProvider is unmounted.
+   */
   useEffect(() => {
     const getProvider = async () => {
       const provider = await detectEthereumProvider({ silent: true })
       setHasProvider(Boolean(provider))
 
       if (provider) {
-        updateWalletAndAccounts();
+        updateWalletAndAccounts()
         window.ethereum.on('accountsChanged', updateWallet)
         window.ethereum.on('chainChanged', updateWalletAndAccounts)
       }
@@ -197,7 +219,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
       window.ethereum?.removeListener('accountsChanged', updateWallet)
       window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts)
     }
-  }, [])
+  }, [updateWallet, updateWalletAndAccounts])
 
   const connectMetaMask = async () => {
     setIsConnecting(true)
@@ -222,8 +244,8 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         error: !!errorMessage,
         errorMessage,
         isConnecting,
-        connectMetaMask: connectMetaMask,
-        clearError
+        connectMetaMask,
+        clearError,
       }}
     >
       {children}
@@ -382,8 +404,8 @@ Update the `/src/components/Display/Display.tsx` file with the following code:
 
 ```tsx title="Display.tsx"
 import { useMetaMask } from '~/hooks/useMetaMask'
-import styles from './Display.module.css'
 import { formatChainAsNum } from '~/utils'
+import styles from './Display.module.css'
 
 export const Display = () => {
 
@@ -430,13 +452,13 @@ export const MetaMaskError = () => {
   const { error, errorMessage, clearError } = useMetaMask()
   return (
     <div className={styles.metaMaskError} style={
-      error ? { backgroundColor: 'brown'} : {}
+      error ? { backgroundColor: 'brown' } : {}
     }>
       { error && (
-          <div onClick={clearError}>
-            <strong>Error:</strong> {errorMessage}
-          </div>
-        )
+        <div onClick={clearError}>
+          <strong>Error:</strong> {errorMessage}
+        </div>
+      )
       }
     </div>
   )
