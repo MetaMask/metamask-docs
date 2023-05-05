@@ -185,8 +185,8 @@ const config = {
           },
           {
             from: "/wallet/tutorials/simple-react-dapp",
-            to: "/wallet/tutorials/react-dapp-local-state"
-          }
+            to: "/wallet/tutorials/react-dapp-local-state",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
