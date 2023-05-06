@@ -6,7 +6,7 @@ description: Set up a new simple dapp to integrate with MetaMask.
 
 You can easily set up a simple dapp to integrate with MetaMask.
 For a full end-to-end tutorial using [Vite](https://v3.vitejs.dev/guide/), see the
-[Create a simple React dapp](../tutorials/simple-react-dapp.md) tutorial.
+[Create a simple React dapp](../tutorials/react-dapp-local-state.md) tutorial.
 
 ## Prerequisites
 
