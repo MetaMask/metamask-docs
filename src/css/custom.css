@@ -100,32 +100,3 @@ h4 {
 img {
   border-radius: 0.4rem;
 }
-
-.homepage-card {
-  --ifm-link-color: var(--ifm-color-emphasis-800);
-  --ifm-link-hover-color: var(--ifm-color-emphasis-700);
-  --ifm-link-hover-decoration: none;
-  box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  transition: all var(--ifm-transition-fast) ease;
-  transition-property: border, box-shadow;
-}
-
-.homepage-card:hover {
-  border-color: #1098FC;
-  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
-}
-
-.homepage-button {
-  background-color: #1098FC;
-  border-radius: 0.3rem;
-}
-
-.homepage-button:hover {
-  background-color: #43AEFC;
-}
-
-.snaps-section {
-  margin-top: 40px;
-  margin-bottom: 60px;
-}

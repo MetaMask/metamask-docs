@@ -27,3 +27,12 @@ html[data-theme="dark"] .forceColor {
 .subtitle {
   font-size: clamp(1rem, 1.5vw, 1.5rem);
 }
+
+.homepageButton {
+  background-color: #1098FC;
+  border-radius: 0.3rem;
+}
+
+.homepageButton:hover {
+  background-color: #43AEFC;
+}

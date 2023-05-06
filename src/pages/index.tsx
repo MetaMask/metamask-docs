@@ -18,7 +18,7 @@ function HomepageHeader() {
         <p className={clsx("hero__subtitle", styles.subtitle, styles.forceColor)}>
           Integrate with and extend upon the world&apos;s leading self-custodial crypto wallet.
         </p>
-        <Link className="button homepage-button button--lg" to="/wallet">
+        <Link className={clsx(styles.homepageButton, "button button--lg")} to="/wallet">
           Get started
         </Link>
       </div>

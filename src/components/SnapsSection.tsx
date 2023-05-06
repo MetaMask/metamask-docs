@@ -29,7 +29,7 @@ const CardList: CardItem[] = [
 
 export default function SnapsSection(): JSX.Element {
   return (
-    <section className="container snaps-section">
+    <section className="container margin-top--lg">
       <h1>Extend the functionality of MetaMask using Snaps</h1>
       <p>
         A snap is a JavaScript program run in an isolated environment that customizes the MetaMask
