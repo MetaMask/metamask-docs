@@ -48,16 +48,14 @@ const sidebar = {
         "concepts/lifecycle",
         "concepts/user-interface",
         "concepts/execution-environment",
+        "concepts/design-guidelines",
       ],
     },
     {
       type: "category",
       label: "Tutorials",
       link: { type: "generated-index" },
-      items: [
-        "tutorials/gas-estimation",
-        "tutorials/transaction-insights",
-      ],
+      items: ["tutorials/gas-estimation", "tutorials/transaction-insights"],
     },
     {
       type: "category",
@@ -74,10 +72,7 @@ const sidebar = {
             type: "doc",
             id: "reference/cli/index",
           },
-          items: [
-            "reference/cli/options",
-            "reference/cli/subcommands",
-          ],
+          items: ["reference/cli/options", "reference/cli/subcommands"],
         },
         "reference/permissions",
       ],

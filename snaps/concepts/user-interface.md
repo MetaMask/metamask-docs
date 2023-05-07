@@ -1,8 +1,9 @@
 ---
+title: Snaps user interface
 description: Learn about the user interface of a snap.
 ---
 
-# Snap user interface
+# Snaps user interface
 
 Any snap must represent itself and what it does to the end user.
 Using the MetaMask settings page, the user can see their installed snaps.
