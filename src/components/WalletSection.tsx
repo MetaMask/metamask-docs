@@ -4,7 +4,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 const CardList: CardItem[] = [
   {
     title: "👨‍💻 Create a simple React dapp",
-    link: "/wallet/tutorials/simple-react-dapp",
+    link: "/wallet/tutorials/react-dapp-local-state",
     description: (<>
       Get started quickly by creating a simple dapp, using Vite with React and TypeScript, to integrate with MetaMask.
     </>),
