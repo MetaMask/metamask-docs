@@ -89,7 +89,7 @@ Now you can make changes to your dependencies inside `node_modules` and run
 This creates a `.patch` file containing your dependency patch.
 These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
 
-### Patch the use of `XMLHttpRequest`
+### Patch the use of XMLHttpRequest
 
 The `XMLHttpRequest` API is not exposed in the Snaps execution environment and won't be in the future.
 Because of this, you may run into issues with dependencies in your dependency tree attempting to
@@ -99,7 +99,7 @@ The following are examples of popular libraries that use `XMLHttpRequest` and ar
 compatible with the Snaps execution environment.
 This section also describes patching strategies for fixing dependencies that try to use these libraries.
 
-### `cross-fetch`
+#### cross-fetch
 
 `cross-fetch` is a popular library used for cross-platform access to the `fetch` API across multiple
 environments.
@@ -151,7 +151,7 @@ index f216aa3..6b3263b 100644
 Using either of these methods allows your dependencies to access the `fetch` API correctly and
 `cross-fetch` compatible with the Snaps execution environment.
 
-### `axios`
+#### axios
 
 `axios` is a popular networking library that uses `XMLHttpRequest` under the hood.
 
@@ -165,7 +165,9 @@ The following is an example of how you can rewrite your dependency to use `fetch
 In a production environment this may be a large task depending on the usage of `axios`.
 :::
 
-**axios**
+<!--tabs-->
+
+# axios
 
 ```javascript
 const instance = axios.create({
@@ -188,7 +190,7 @@ instance
   });
 ```
 
-**fetch**
+# fetch
 
 ```javascript
 fetch('https://api.github.com/users/MetaMask')
@@ -202,6 +204,7 @@ fetch('https://api.github.com/users/MetaMask')
   .catch((err) => console.error(err));
 ```
 
-More resources:
+<!--/tabs-->
 
-- [Replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper)
+For more information, see how to
+[replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper).
