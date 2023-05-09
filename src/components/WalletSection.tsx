@@ -31,7 +31,7 @@ export default function WalletSection(): JSX.Element {
       <h1>Integrate your dapp with the MetaMask wallet</h1>
       <p>
         Your dapp can use the MetaMask APIs to request users&apos; Ethereum accounts, read data from
-        blockchains the user is connected to, suggest that the user sign messages and transactions,
+        connected blockchains, suggest that the user sign messages and transactions,
         and perform other advanced functions.
       </p>
       <div className="row">
