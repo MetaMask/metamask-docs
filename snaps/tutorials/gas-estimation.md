@@ -138,10 +138,10 @@ To build and test your snap:
     ```bash
     You can now view site in the browser.
     
-      http://localhost:8000/
+      http://localhost:8080/
     ```
 
-3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
+3. Open [`localhost:8080`](http://localhost:8080/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
     ![Test dapp with template snap](../assets/template-snap.png)

@@ -48,7 +48,7 @@ Start the development server:
 yarn start
 ```
 
-You're now serving the snap and its front-end at [`http://localhost:8000`](http://localhost:8000/).
+You're now serving the snap and its front-end at [`http://localhost:8080`](http://localhost:8080/).
 
 ## Connect to the snap
 

@@ -126,16 +126,16 @@ To build and test your snap:
 1. From the command line, run `yarn start` in the root of your project.
     This starts two development servers: one for watching and compiling the snap, and another for the
     React site.
-    The snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
+    The snap bundle is served from `localhost:8080`, and the site is served from `localhost:8080`.
     You should get a message that includes:
 
     ```bash
     You can now view site in the browser.
     
-      http://localhost:8000/
+      http://localhost:8080/
     ```
 
-2. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
+2. Open [`localhost:8080`](http://localhost:8080) in your browser (with MetaMask Flask installed).
 
 3. Select **Connect**, and accept the permission request.
 
