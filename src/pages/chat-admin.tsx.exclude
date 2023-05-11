@@ -1,0 +1,77 @@
+import React, { useEffect, useState, useRef } from "react";
+import { useMetaMask } from "../hooks/useMetaMask";
+import Layout from '@theme/Layout';
+
+function usePrevious(value) {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef();
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+}
+
+// in a json file or a config object
+const AllowList = new Set([
+  // Gu
+  "0x9b9251c41d2c27c6c01007d15189d3201f756454",
+  // eric
+  "0x7E52459C31989EF14C7E61D5b3b03D0A8e6a5Ba6",
+])
+const REDIRECT_LOCATION = "/";
+
+export default function ChatAdmin() {
+
+  // read wallet state
+  const { wallet } = useMetaMask();
+  
+  const prevWallet = usePrevious(wallet);
+  //   derive the permission from being present in the list of admins (allow list)
+  const [allowed, setAllowed] = useState(
+    wallet ? AllowList.has(wallet) : false
+  );
+
+  useEffect(() => {
+    // allow list presence allows you to see admin page
+    if (wallet && AllowList.has(wallet)) {
+      setAllowed(true);
+    } else {
+      // any error goes wrong,or something changes, not allowed to see admin
+      setAllowed(false);
+    }
+
+    // Wallet state must hydrate first. It starts undefined.
+    // We only guard against unconnected wallets if the current state has hydrated and we don't find a wallet
+    if (typeof prevWallet !== "undefined" && Boolean(wallet) === false) {
+      window.location.pathname = REDIRECT_LOCATION;
+    }
+
+    // if user disconnects
+    if (typeof prevWallet === "string" && Boolean(wallet) === false) {
+      window.location.pathname = REDIRECT_LOCATION;
+    }
+
+    // connected user but not admin
+    if (typeof wallet === "string" && !AllowList.has(wallet)) {
+      window.location.pathname = REDIRECT_LOCATION;
+    }
+  }, [wallet, prevWallet]);
+
+  return (
+    <Layout title="Admin" description="Chat Admin">
+      <div style={{ color: "white", padding: 50 }}>
+        { allowed ? (
+        <button onClick={() => alert("admin nuked the docs")}>
+          {/* render children */}
+          nuke the docs
+        </button>
+        ) : (
+          <>Not allowed</>
+        )}
+      </div>
+    </Layout>
+  );
+}
