@@ -24,7 +24,6 @@
     "@emotion/styled": "^11.11.0",
     "@mdx-js/react": "^1.6.22",
     "@metamask/design-tokens": "^1.11.1",
-    "@metamask/detect-provider": "^2.0.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
     "@uiw/react-markdown-preview": "^4.1.13",
