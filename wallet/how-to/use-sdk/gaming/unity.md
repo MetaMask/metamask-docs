@@ -1,5 +1,6 @@
 ---
-title: Unity
+sidebar_label: Unity
+sidebar_position: 1
 ---
 
 # Use MetaMask SDK with Unity

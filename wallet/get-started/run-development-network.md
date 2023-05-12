@@ -1,5 +1,6 @@
 ---
 description: Configure and connect a Ganache development network.
+sidebar_position: 2
 ---
 
 # Run a development network

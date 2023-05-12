@@ -1,5 +1,6 @@
 ---
 description: MetaMask Ethereum JSON-RPC API reference
+sidebar_position: 2
 ---
 
 # JSON-RPC API

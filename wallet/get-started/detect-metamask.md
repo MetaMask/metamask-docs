@@ -1,5 +1,6 @@
 ---
 description: Detect the MetaMask Ethereum provider object.
+sidebar_position: 3
 ---
 
 # Detect MetaMask

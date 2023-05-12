@@ -1,5 +1,6 @@
 ---
 description: Secure your dapp using HTTPS and CSP.
+sidebar_position: 9
 ---
 
 # Secure your dapp

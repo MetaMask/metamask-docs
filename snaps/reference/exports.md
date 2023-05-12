@@ -1,6 +1,7 @@
 ---
 description: Snaps exports reference
 toc_max_heading_level: 2
+sidebar_position: 2
 ---
 
 # Snaps exports

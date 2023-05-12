@@ -1,6 +1,7 @@
 ---
 title: Use the onboarding library
 description: Simplify the MetaMask onboarding experience for your users.
+sidebar_position: 11
 ---
 
 # Use the MetaMask onboarding library

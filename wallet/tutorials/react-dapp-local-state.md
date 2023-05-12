@@ -1,7 +1,7 @@
 ---
-title: Create a React dapp with local state
 description: Create a single component React dapp with local state.
 toc_max_heading_level: 4
+sidebar_position: 1
 ---
 
 # Create a React dapp with local state

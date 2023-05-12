@@ -1,9 +1,9 @@
 ---
-title: Signing methods
 description: A brief history of the signing RPC methods.
+sidebar_position: 2
 ---
 
-# History of the signing methods
+# Signing methods
 
 This page describes a brief history of the signing RPC methods in MetaMask.
 Learn how to [use the recommended signing methods](../how-to/sign-data.md).

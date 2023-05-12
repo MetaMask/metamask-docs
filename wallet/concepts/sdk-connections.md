@@ -1,5 +1,6 @@
 ---
 description: Learn about MetaMask SDK connections.
+sidebar_position: 1
 ---
 
 # MetaMask SDK connections

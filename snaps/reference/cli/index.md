@@ -1,5 +1,6 @@
 ---
 description: Snaps CLI subcommands and options reference
+sidebar_position: 3
 ---
 
 # Snaps command line interface

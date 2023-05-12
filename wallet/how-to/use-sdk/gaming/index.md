@@ -1,3 +1,8 @@
+---
+sidebar_label: Gaming
+sidebar_position: 2
+---
+
 # Use MetaMask SDK with gaming dapps
 
 You can import MetaMask SDK into your gaming dapp to enable your users to easily connect with their

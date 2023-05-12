@@ -1,5 +1,6 @@
 ---
 description: Set up a new simple dapp to integrate with MetaMask.
+sidebar_position: 1
 ---
 
 # Set up your development environment

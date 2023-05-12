@@ -1,5 +1,6 @@
 ---
 description: Learn about convenience libraries.
+sidebar_position: 3
 ---
 
 # Convenience libraries

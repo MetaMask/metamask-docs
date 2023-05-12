@@ -1,7 +1,7 @@
 ---
-title: Create a React dapp with global state
 description: Create a multi-component React dapp with global state.
 toc_max_heading_level: 4
+sidebar_position: 2
 ---
 
 # Create a React dapp with global state

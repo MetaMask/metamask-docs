@@ -1,6 +1,6 @@
 ---
-title: Snaps anatomy
 description: Learn about the anatomy of a snap project.
+sidebar_position: 1
 ---
 
 # Snaps anatomy

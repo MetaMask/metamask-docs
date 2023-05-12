@@ -1,6 +1,6 @@
 ---
-title: Snaps execution environment
 description: Learn about the Snaps execution environment.
+sidebar_position: 4
 ---
 
 # Snaps execution environment

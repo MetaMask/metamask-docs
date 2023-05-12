@@ -1,5 +1,6 @@
 ---
 description: Request permissions in a manifest file.
+sidebar_position: 2
 ---
 
 # Request permissions

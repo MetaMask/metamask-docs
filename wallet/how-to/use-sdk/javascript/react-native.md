@@ -1,5 +1,6 @@
 ---
-title: React Native
+sidebar_label: React Native
+sidebar_position: 4
 ---
 
 # Use MetaMask SDK with React Native

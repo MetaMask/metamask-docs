@@ -1,5 +1,6 @@
 ---
 description: Snaps JSON-RPC API reference
+sidebar_position: 1
 ---
 
 # Snaps JSON-RPC API

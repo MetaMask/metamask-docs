@@ -1,5 +1,6 @@
 ---
 description: Integrate your dapp with MetaMask Mobile.
+sidebar_position: 2
 ---
 
 # Use MetaMask Mobile

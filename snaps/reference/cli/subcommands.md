@@ -1,5 +1,6 @@
 ---
-title: Subcommands
+sidebar_label: Subcommands
+sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';

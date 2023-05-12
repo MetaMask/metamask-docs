@@ -1,5 +1,6 @@
 ---
 description: Register a contract's method names on the Ethereum Signature Database.
+sidebar_position: 7
 ---
 
 # Register a contract's method names

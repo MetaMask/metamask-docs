@@ -1,5 +1,6 @@
 ---
 description: Create a snap that provides transaction insights.
+sidebar_position: 2
 ---
 
 # Create a transaction insights snap

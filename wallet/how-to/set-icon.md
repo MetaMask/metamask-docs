@@ -1,5 +1,6 @@
 ---
 description: Set an icon on MetaMask for your dapp.
+sidebar_position: 10
 ---
 
 # Set an icon

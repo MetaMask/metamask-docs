@@ -1,6 +1,6 @@
 ---
-title: Snaps user interface
 description: Learn about the user interface of a snap.
+sidebar_position: 3
 ---
 
 # Snaps user interface

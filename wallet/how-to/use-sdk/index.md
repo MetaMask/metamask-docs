@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Use MetaMask SDK
 
 MetaMask SDK provides a reliable, secure, and seamless [connection](../../concepts/sdk-connections.md)

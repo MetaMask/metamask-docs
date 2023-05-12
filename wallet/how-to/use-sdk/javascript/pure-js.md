@@ -1,5 +1,6 @@
 ---
-title: Pure JavaScript
+sidebar_label: Pure JavaScript
+sidebar_position: 2
 ---
 
 # Use MetaMask SDK with pure JavaScript

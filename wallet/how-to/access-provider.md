@@ -1,5 +1,6 @@
 ---
 description: Access a user's MetaMask provider using metamask-extension-provider.
+sidebar_position: 8
 ---
 
 # Access a user's MetaMask provider

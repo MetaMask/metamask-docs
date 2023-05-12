@@ -1,5 +1,6 @@
 ---
-title: Native Android (coming soon)
+sidebar_label: Native Android (coming soon)
+sidebar_position: 2
 ---
 
 # Use MetaMask SDK with Android

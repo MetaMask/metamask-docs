@@ -1,5 +1,6 @@
 ---
 description: Manage users' private keys.
+sidebar_position: 3
 ---
 
 # Manage keys

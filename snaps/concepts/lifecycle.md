@@ -1,6 +1,6 @@
 ---
-title: Snaps lifecycle
 description: Learn about the lifecycle of a snap.
+sidebar_position: 2
 ---
 
 # Snaps lifecycle

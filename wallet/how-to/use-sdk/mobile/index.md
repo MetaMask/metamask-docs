@@ -1,3 +1,8 @@
+---
+sidebar_label: Mobile
+sidebar_position: 3
+---
+
 # Use MetaMask SDK with mobile dapps
 
 You can import MetaMask SDK into your mobile dapp to enable your users to easily connect with their
