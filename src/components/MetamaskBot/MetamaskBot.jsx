@@ -58,7 +58,7 @@ export const MetamaskBot = () => {
         <TransitionGroup>
           {messages.map((message, index) => {
             return (
-              <Collapse key={message.createdAt}>
+              <Collapse key={index}>
                 <Box sx={{ width: "100%", display: "inline-block" }}>
                   <MessageBox message={message} index={index} />
                 </Box>
@@ -124,6 +124,7 @@ export const MetamaskBot = () => {
           color="secondary"
           disableTouchRipple
           sx={{ position: "fixed", right: "2rem", bottom: "1rem" }}
+          onClick={handleOpen}
         >
           <Avatar
             sx={{
@@ -133,7 +134,6 @@ export const MetamaskBot = () => {
             }}
             alt="Metamask Bot"
             src={useBaseUrl("/img/mm-bot.png")}
-            onClick={handleOpen}
           />
         </IconButton>
       </Fade>
