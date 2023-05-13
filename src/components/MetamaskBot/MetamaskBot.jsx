@@ -18,6 +18,7 @@ import { ask } from "./api/LLM";
 import { DialogTransition } from "./components/DialogTransition";
 import { INITIAL_BOT_MESSAGE } from "./constants";
 import { ResetButton } from "./components/ResetButton";
+import { PromptSuggestions } from "./components/PromptSuggestions";
 
 export const MetamaskBot = () => {
   const [open, setOpen] = useState(false);
@@ -48,6 +49,10 @@ export const MetamaskBot = () => {
 
   const resetChat = () => {
     setMessages([INITIAL_BOT_MESSAGE]);
+  };
+
+  const onPromptSuggestion = (question) => {
+    onSubmit(question);
   };
 
   /**
@@ -178,6 +183,9 @@ export const MetamaskBot = () => {
           >
             {getContent()}
             <ResetButton onClick={resetChat} disabled={loading} />
+            {messages.length === 1 && (
+              <PromptSuggestions onClick={onPromptSuggestion} />
+            )}
           </Box>
           <MessageInput onSubmit={onSubmit} loading={loading} />
         </Box>
