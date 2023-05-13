@@ -16,16 +16,13 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import { theme } from "./theme";
 import { ask } from "./api/LLM";
 import { DialogTransition } from "./components/DialogTransition";
+import { INITIAL_BOT_MESSAGE } from "./constants";
+import { ResetButton } from "./components/ResetButton";
 
 export const MetamaskBot = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      ownerType: "Bot",
-      text: "Hello, I'm the Metamask bot. How can i help you?",
-    },
-  ]);
+  const [messages, setMessages] = useState([INITIAL_BOT_MESSAGE]);
   const messageListRef = useRef(null);
 
   const handleOpen = () => setOpen(true);
@@ -47,6 +44,10 @@ export const MetamaskBot = () => {
     }
 
     messageList.scrollTop = messageList.scrollHeight;
+  };
+
+  const resetChat = () => {
+    setMessages([INITIAL_BOT_MESSAGE]);
   };
 
   /**
@@ -176,6 +177,7 @@ export const MetamaskBot = () => {
             }}
           >
             {getContent()}
+            <ResetButton onClick={resetChat} disabled={loading} />
           </Box>
           <MessageInput onSubmit={onSubmit} loading={loading} />
         </Box>
