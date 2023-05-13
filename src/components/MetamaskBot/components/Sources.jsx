@@ -30,9 +30,9 @@ export const Sources = (props) => {
             mb: "10px",
           }}
           key={index}
-          label={source}
+          label={source.text || source}
           color="secondary"
-          onClick={() => window.open(source)}
+          onClick={() => window.open(source.link || source)}
         />
       ))}
     </>
