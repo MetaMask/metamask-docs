@@ -33,12 +33,13 @@ const MessageBox = (props) => {
           gap={2}
           sx={{
             width: "88%",
-            backgroundColor: isUser ? "primary.main" : "#0d1117",
+            backgroundColor: isUser ? "white" : "#0d1117",
+            border: isUser ? "2px solid rgb(246, 133, 27)" : "none",
             padding: "10px",
             margin: "10px 5px",
             float: isUser ? "right" : "left",
             borderRadius: "10px",
-            color: "white",
+            color: isUser ? "black" : "white",
           }}
         >
           {isUser ? (

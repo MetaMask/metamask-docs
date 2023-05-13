@@ -8,23 +8,26 @@ import {
   Fade,
   IconButton,
   ThemeProvider,
+  useMediaQuery,
 } from "@mui/material";
 import MessageBox from "./components/MessageBox";
 import { MessageInput } from "./components/MessageInput";
 import { TransitionGroup } from "react-transition-group";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import { theme } from "./theme";
 import { ask } from "./api/LLM";
 import { DialogTransition } from "./components/DialogTransition";
 import { INITIAL_BOT_MESSAGE } from "./constants";
 import { ResetButton } from "./components/ResetButton";
 import { PromptSuggestions } from "./components/PromptSuggestions";
+import CloseIcon from "@mui/icons-material/Close";
+import { theme } from "./theme";
 
 export const MetamaskBot = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([INITIAL_BOT_MESSAGE]);
   const messageListRef = useRef(null);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -150,6 +153,7 @@ export const MetamaskBot = () => {
 
       <Dialog
         open={open}
+        fullScreen={fullScreen}
         TransitionComponent={DialogTransition}
         keepMounted
         onClose={handleClose}
@@ -157,15 +161,31 @@ export const MetamaskBot = () => {
         PaperProps={{
           sx: {
             borderRadius: "20px",
-            maxWidth: "800px",
+            minWidth: fullScreen ? "100%" : "800px",
           },
         }}
       >
+        {fullScreen && (
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              color: (theme) => theme.palette.grey[500],
+              zIndex: 1,
+              top: 0,
+              left: 0,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        )}
         <Box
           sx={{
-            width: "800px",
+            width: "100%",
             backgroundColor: "white",
             padding: "1.2rem",
+            marginTop: fullScreen ? "40px" : "0px",
           }}
         >
           <Box
@@ -182,9 +202,16 @@ export const MetamaskBot = () => {
             }}
           >
             {getContent()}
-            <ResetButton onClick={resetChat} disabled={loading} />
+            <ResetButton
+              fullScreen={fullScreen}
+              onClick={resetChat}
+              disabled={loading}
+            />
             {messages.length === 1 && (
-              <PromptSuggestions onClick={onPromptSuggestion} />
+              <PromptSuggestions
+                fullScreen={fullScreen}
+                onClick={onPromptSuggestion}
+              />
             )}
           </Box>
           <MessageInput onSubmit={onSubmit} loading={loading} />
