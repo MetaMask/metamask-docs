@@ -75,13 +75,15 @@ export const MetamaskBot = () => {
 
   // Handle errors
   const handleError = () => {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        message: "Houston! There seems to be an error. Please try again.",
-        type: "Bot",
-      },
-    ]);
+    setMessages((prevMessages) => {
+      let newMessages = [...prevMessages];
+      newMessages[prevMessages.length - 1] = {
+        text: "Houston! There seems to be an error. Please try again.",
+        ownerType: "Bot",
+      };
+      return newMessages;
+    });
+
     setLoading(false);
   };
 
@@ -111,6 +113,7 @@ export const MetamaskBot = () => {
         return newMessages;
       });
     } catch (e) {
+      handleError();
       console.error(e);
     }
 

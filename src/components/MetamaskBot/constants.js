@@ -1,1 +1,1 @@
-export const API_URL = "https:/chatbot.ittasks.work/ask";
+export const API_URL = "https://chatbot.ittasks.work/ask";
