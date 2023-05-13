@@ -40,7 +40,9 @@ export const MessageInput = ({ onSubmit, loading }) => {
     >
       <TextField
         color="secondary"
-        placeholder="Type your question"
+        placeholder={
+          loading ? "We are working on your answer..." : "Type your question"
+        }
         id="question-input"
         minRows={2}
         maxRows={8}
