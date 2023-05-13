@@ -4,11 +4,13 @@ import { Avatar, Box, Skeleton, Stack, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import MarkdownPreview from "@uiw/react-markdown-preview";
+import { Sources } from "./Sources";
 
 const MessageBox = (props) => {
   const { index, message } = props;
   const isUser = message?.ownerType === "User";
   const loading = message.loading;
+  const sources = message.sources || [];
 
   return (
     <>
@@ -62,6 +64,7 @@ const MessageBox = (props) => {
                 }}
                 source={message.text}
               />
+              <Sources sources={sources} />
             </Box>
           )}
         </Stack>

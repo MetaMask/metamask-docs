@@ -109,6 +109,7 @@ export const MetamaskBot = () => {
         newMessages[prevMessages.length - 1] = {
           text: data.answer.text || data.answer,
           ownerType: "Bot",
+          sources: data.sources,
         };
         return newMessages;
       });
