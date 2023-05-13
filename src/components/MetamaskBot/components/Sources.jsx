@@ -31,7 +31,7 @@ export const Sources = (props) => {
           }}
           key={index}
           label={source}
-          variant="outlined"
+          color="secondary"
           onClick={() => window.open(source)}
         />
       ))}
