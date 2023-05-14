@@ -14,6 +14,11 @@ export const Sources = (props) => {
     if (slices[neededLastIndex] === "index.md") {
       neededLastIndex--;
     }
+
+    if (slices.length === 1) {
+      return slices[0];
+    }
+
     return slices[neededLastIndex - 1] + "/" + slices[neededLastIndex];
   };
 
