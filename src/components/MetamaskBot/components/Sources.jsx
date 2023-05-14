@@ -8,6 +8,8 @@ export const Sources = (props) => {
     return null;
   }
 
+  const regex = /\/([^\/]+\.md)$/
+
   return (
     <Box sx={{
       backgroundColor: "#485377",
@@ -50,9 +52,9 @@ export const Sources = (props) => {
               },
             }}
             key={index}
-            label={source.text || source}
+            label={source.match(regex)}
             color="secondary"
-            onClick={() => window.open(source.link || source)}
+            onClick={() => window.open(source)}
           />
         ))}
       </Box>
