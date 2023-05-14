@@ -4,21 +4,22 @@ import { Chip, Stack } from "@mui/material";
 import { METAMASK_PROMPT_SUGGESTIONS } from "../constants";
 
 export const PromptSuggestions = (props) => {
-  const { onClick, fullScreen } = props;
+  const { onClick } = props;
   return (
-    <Stack direction={fullScreen ? "column" : "row"} sx={{
-      padding: "6px"
-    }}>
+    <Stack
+      direction="row"
+      useFlexGap
+      flexWrap="wrap"
+      sx={{
+        padding: "6px",
+      }}
+    >
       {METAMASK_PROMPT_SUGGESTIONS.map((s, index) => (
         <Chip
           sx={{
-            mr: "10px",
-            mb: "10px",
-
             border: "1px solid #555555",
             color: "white",
             backgroundColor: "#555555",
-            maxWidth: "250px",
             mr: "10px",
             mb: "10px",
             "&:hover": {

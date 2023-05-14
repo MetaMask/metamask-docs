@@ -32,7 +32,7 @@ const MessageBox = (props) => {
           alignItems="flex-start"
           gap={fullScreen ? 1 : 2}
           sx={{
-            maxWidth: fullScreen ? "95%" : "88%",
+            width: fullScreen ? "95%" : "88%",
             backgroundColor: isUser ? "#6895b4" : "#5a6894",
             padding: "12px",
             margin: fullScreen ? "0px" : "5px",

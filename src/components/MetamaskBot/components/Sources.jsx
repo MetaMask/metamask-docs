@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Chip, Stack, Typography } from "@mui/material";
 
 /* eslint-disable react/prop-types */
 export const Sources = (props) => {
@@ -8,22 +8,22 @@ export const Sources = (props) => {
     return null;
   }
 
-  const regex = /\/([^\/]+\.md)$/
-
   return (
-    <Box sx={{
-      backgroundColor: "#485377",
-      padding: "4px 16px",
-      marginTop: "0.5rem",
-      borderRadius: "0.4rem",
-      maxHeight: "110px"
-    }}>
+    <Box
+      sx={{
+        backgroundColor: "#485377",
+        padding: "4px 16px",
+        marginTop: "0.5rem",
+        borderRadius: "0.4rem",
+        maxHeight: "110px",
+      }}
+    >
       {sources.length > 0 && (
         <Typography
           sx={{
             marginTop: "2px",
             fontSize: "small",
-            fontFamily: "monospace"
+            fontFamily: "monospace",
           }}
           variant="subtitle2"
           gutterBottom
@@ -31,11 +31,7 @@ export const Sources = (props) => {
           {"Sources:"}
         </Typography>
       )}
-      <Box sx={{
-        display: "flex",
-        flexDirection: "row",
-        maxHeight: "50px"
-      }}>
+      <Stack direction="row" useFlexGap flexWrap="wrap">
         {sources.map((source, index) => (
           <Chip
             sx={{
@@ -52,12 +48,12 @@ export const Sources = (props) => {
               },
             }}
             key={index}
-            label={source.match(regex)}
+            label={source.substring(source.lastIndexOf("/") + 1)}
             color="secondary"
             onClick={() => window.open(source)}
           />
         ))}
-      </Box>
+      </Stack>
     </Box>
   );
 };
