@@ -4,7 +4,7 @@ import { Button, Tooltip } from "@mui/material";
 import ReplayIcon from "@mui/icons-material/Replay";
 
 export const ResetButton = (props) => {
-  const { onClick, disabled } = props;
+  const { onClick, disabled, fullScreen } = props;
 
   return (
     <Tooltip title="Reset chat" placement="bottom">
@@ -17,8 +17,8 @@ export const ResetButton = (props) => {
           width: "40px",
           height: "40px",
           position: "absolute",
-          right: "1rem",
-          top: "1rem",
+          right: fullScreen ? "0.1rem" : "1rem",
+          top: fullScreen ? "0.1rem" : "1rem",
           color: "white",
         }}
         onClick={onClick}

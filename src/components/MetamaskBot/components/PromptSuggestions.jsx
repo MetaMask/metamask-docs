@@ -4,9 +4,9 @@ import { Chip, Stack } from "@mui/material";
 import { METAMASK_PROMPT_SUGGESTIONS } from "../constants";
 
 export const PromptSuggestions = (props) => {
-  const { onClick } = props;
+  const { onClick, fullScreen } = props;
   return (
-    <Stack direction="row" sx={{
+    <Stack direction={fullScreen ? "column" : "row"} sx={{
       padding: "6px"
     }}>
       {METAMASK_PROMPT_SUGGESTIONS.map((s, index) => (
