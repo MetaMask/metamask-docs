@@ -18,9 +18,9 @@ const MessageBox = (props) => {
         <Skeleton
           variant="rounded"
           width={fullScreen ? "95%" : "88%"}
-          height={60}
+          height={64}
           sx={{
-            margin: fullScreen ? "0px" : "10px 5px",
+            margin: fullScreen ? "0px" : "5px",
             borderRadius: "10px",
             bgcolor: "grey.600",
           }}
@@ -32,14 +32,13 @@ const MessageBox = (props) => {
           alignItems="center"
           gap={fullScreen ? 1 : 2}
           sx={{
-            width: fullScreen ? "95%" : "88%",
-            backgroundColor: isUser ? "white" : "#0d1117",
-            border: isUser ? "2px solid rgb(246, 133, 27)" : "none",
-            padding: "10px",
-            margin: fullScreen ? "0px" : "10px 5px",
+            maxWidth: fullScreen ? "95%" : "88%",
+            backgroundColor: isUser ? "secondary.main" : "#0d1117",
+            padding: "12px",
+            margin: fullScreen ? "0px" : "5px",
             float: isUser ? "right" : "left",
             borderRadius: "10px",
-            color: isUser ? "black" : "white",
+            color: "white",
           }}
         >
           {isUser ? (
