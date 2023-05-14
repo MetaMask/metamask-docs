@@ -7,7 +7,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import { Sources } from "./Sources";
 
 const MessageBox = (props) => {
-  const { index, message } = props;
+  const { index, message, fullScreen } = props;
   const isUser = message?.ownerType === "User";
   const loading = message.loading;
   const sources = message.sources || [];
@@ -17,10 +17,10 @@ const MessageBox = (props) => {
       {loading ? (
         <Skeleton
           variant="rounded"
-          width={"88%"}
+          width={fullScreen ? "95%" : "88%"}
           height={60}
           sx={{
-            margin: "10px 5px",
+            margin: fullScreen ? "0px" : "10px 5px",
             borderRadius: "10px",
             bgcolor: "grey.600",
           }}
@@ -30,13 +30,13 @@ const MessageBox = (props) => {
           key={index}
           direction={"row"}
           alignItems="center"
-          gap={2}
+          gap={fullScreen ? 1 : 2}
           sx={{
-            width: "88%",
+            width: fullScreen ? "95%" : "88%",
             backgroundColor: isUser ? "white" : "#0d1117",
             border: isUser ? "2px solid rgb(246, 133, 27)" : "none",
             padding: "10px",
-            margin: "10px 5px",
+            margin: fullScreen ? "0px" : "10px 5px",
             float: isUser ? "right" : "left",
             borderRadius: "10px",
             color: isUser ? "black" : "white",

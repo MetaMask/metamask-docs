@@ -69,7 +69,11 @@ export const MetamaskBot = () => {
             return (
               <Collapse key={index}>
                 <Box sx={{ width: "100%", display: "inline-block" }}>
-                  <MessageBox message={message} index={index} />
+                  <MessageBox
+                    fullScreen={fullScreen}
+                    message={message}
+                    index={index}
+                  />
                 </Box>
                 {index + 1 < messages.length && (
                   <Divider sx={{ marginBottom: "8px" }} />
@@ -184,7 +188,7 @@ export const MetamaskBot = () => {
           sx={{
             width: "100%",
             backgroundColor: "white",
-            padding: "1.2rem",
+            padding: fullScreen ? "0.2rem" : "1.2rem",
             marginTop: fullScreen ? "40px" : "0px",
           }}
         >
