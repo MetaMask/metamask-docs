@@ -2,15 +2,11 @@ import { API_URL } from "../constants";
 
 export const ask = async (question) => {
   const url = API_URL;
-  const requestData = {
-    question,
-  };
+  const requestData = { question };
 
   const response = await fetch(url, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(requestData),
   });
 
@@ -19,6 +15,8 @@ export const ask = async (question) => {
   }
 
   const data = await response.json();
+  console.log(`data: `)
+  console.log(data)
 
   return {
     ok: true,

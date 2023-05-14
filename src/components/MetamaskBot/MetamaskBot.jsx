@@ -1,4 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+import { theme } from "./theme";
+import MessageBox from "./components/MessageBox";
+import { MessageInput } from "./components/MessageInput";
+import { TransitionGroup } from "react-transition-group";
+import { DialogTransition } from "./components/DialogTransition";
 import {
   Avatar,
   Box,
@@ -9,13 +16,8 @@ import {
   IconButton,
   ThemeProvider,
 } from "@mui/material";
-import MessageBox from "./components/MessageBox";
-import { MessageInput } from "./components/MessageInput";
-import { TransitionGroup } from "react-transition-group";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import { theme } from "./theme";
+
 import { ask } from "./api/LLM";
-import { DialogTransition } from "./components/DialogTransition";
 import { INITIAL_BOT_MESSAGE } from "./constants";
 import { ResetButton } from "./components/ResetButton";
 import { PromptSuggestions } from "./components/PromptSuggestions";
@@ -64,12 +66,12 @@ export const MetamaskBot = () => {
         <TransitionGroup>
           {messages.map((message, index) => {
             return (
-              <Collapse key={index}>
+              <Collapse key={message.createdAt} sx={{ width: "100%", display: "inline-block" }}>
                 <Box sx={{ width: "100%", display: "inline-block" }}>
                   <MessageBox message={message} index={index} />
                 </Box>
                 {index + 1 < messages.length && (
-                  <Divider sx={{ marginBottom: "8px" }} />
+                  <Divider sx={{ marginBottom: "8px", backgroundColor: "#444444" }} />
                 )}
               </Collapse>
             );
@@ -173,10 +175,10 @@ export const MetamaskBot = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "rgb(233, 235, 238)",
-              padding: "5px",
+              backgroundColor: "#2e2e2e",
+              padding: "4px",
               marginBottom: "20px",
-              borderRadius: "0.5rem",
+              borderRadius: "0.4rem",
               maxHeight: "600px",
               overflowY: "auto",
             }}

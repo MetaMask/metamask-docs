@@ -103,4 +103,5 @@ img {
 
 .wmde-markdown {
   color: white !important;
+  background-color: transparent !important;
 }

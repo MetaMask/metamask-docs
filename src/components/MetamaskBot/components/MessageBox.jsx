@@ -29,11 +29,11 @@ const MessageBox = (props) => {
         <Stack
           key={index}
           direction={"row"}
-          alignItems="center"
+          alignItems="flex-start"
           gap={2}
           sx={{
             width: "88%",
-            backgroundColor: isUser ? "primary.main" : "#0d1117",
+            backgroundColor: isUser ? "#6895b4" : "#5a6894",
             padding: "10px",
             margin: "10px 5px",
             float: isUser ? "right" : "left",
