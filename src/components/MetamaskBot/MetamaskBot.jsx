@@ -69,7 +69,10 @@ export const MetamaskBot = () => {
         <TransitionGroup>
           {messages.map((message, index) => {
             return (
-              <Collapse key={message.createdAt} sx={{ width: "100%", display: "inline-block" }}>
+              <Collapse
+                key={index}
+                sx={{ width: "100%", display: "inline-block" }}
+              >
                 <Box sx={{ width: "100%", display: "inline-block" }}>
                   <MessageBox
                     fullScreen={fullScreen}
@@ -78,7 +81,9 @@ export const MetamaskBot = () => {
                   />
                 </Box>
                 {index + 1 < messages.length && (
-                  <Divider sx={{ marginBottom: "8px", backgroundColor: "#444444" }} />
+                  <Divider
+                    sx={{ marginBottom: "8px", backgroundColor: "#444444" }}
+                  />
                 )}
               </Collapse>
             );

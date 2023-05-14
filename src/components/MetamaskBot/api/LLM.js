@@ -15,8 +15,6 @@ export const ask = async (question) => {
   }
 
   const data = await response.json();
-  console.log(`data: `)
-  console.log(data)
 
   return {
     ok: true,

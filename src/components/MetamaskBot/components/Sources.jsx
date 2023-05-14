@@ -8,6 +8,15 @@ export const Sources = (props) => {
     return null;
   }
 
+  const getSourceLabel = (source) => {
+    const slices = source.split("/");
+    let neededLastIndex = slices.length - 1;
+    if (slices[neededLastIndex] === "index.md") {
+      neededLastIndex--;
+    }
+    return slices[neededLastIndex - 1] + "/" + slices[neededLastIndex];
+  };
+
   return (
     <Box
       sx={{
@@ -48,7 +57,7 @@ export const Sources = (props) => {
               },
             }}
             key={index}
-            label={source.substring(source.lastIndexOf("/") + 1)}
+            label={getSourceLabel(source)}
             color="secondary"
             onClick={() => window.open(source)}
           />
