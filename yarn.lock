@@ -2605,20 +2605,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/docusaurus-openrpc@npm:0.0.6":
-  version: 0.0.6
-  resolution: "@metamask/docusaurus-openrpc@npm:0.0.6"
+"@metamask/docusaurus-openrpc@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@metamask/docusaurus-openrpc@npm:0.0.7"
   dependencies:
     "@docusaurus/plugin-content-docs": ^2.4.0
     "@open-rpc/schema-utils-js": ^1.16.1
     docusaurus-open-rpc-docs-react: 0.0.0-development
+    node-polyfill-webpack-plugin: ^2.0.1
     path-browserify: ^1.0.1
     process: ^0.11.10
   peerDependencies:
     "@docusaurus/core": 2.x
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 60be9ab21ebc14e82e2b7ec3c84fc8f92e7157428f4ddff0e23883e9badd8dec3cc739b5ddd51a9e6b383e0852b686f5902a57e27909b15cf29ce911a3f2daf8
+  checksum: e68da4c0c0cf7bdf9ea8ca9f525a6d21ee67fb6ce9171fbfb2b605b74595e99afe2fe84afc6399fbc4252033c452c59a907f0a04ec1833846e444d13124033fa
   languageName: node
   linkType: hard
 
@@ -11469,7 +11470,7 @@ __metadata:
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1
-    "@metamask/docusaurus-openrpc": 0.0.6
+    "@metamask/docusaurus-openrpc": ^0.0.7
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
