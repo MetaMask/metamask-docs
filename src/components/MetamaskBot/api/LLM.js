@@ -19,5 +19,6 @@ export const ask = async (question) => {
   return {
     ok: true,
     ...data,
+    sources: data.sources || data.references,
   };
 };
