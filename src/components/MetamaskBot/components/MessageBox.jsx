@@ -48,7 +48,7 @@ const MessageBox = (props) => {
               sx={{
                 bgcolor: "white",
               }}
-              alt="Metamask Bot"
+              alt="MetaMask Bot"
               src={useBaseUrl("/img/mm-bot.png")}
             />
           )}

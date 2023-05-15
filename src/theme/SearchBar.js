@@ -1,12 +1,12 @@
 import React from "react";
 import SearchBar from "@theme-original/SearchBar";
-import { MetamaskBot } from "../components/MetamaskBot/MetamaskBot";
+import { MetaMaskBot } from "../components/MetaMaskBot/MetaMaskBot";
 
 export default function SearchBarWrapper(props) {
   return (
     <>
       <SearchBar {...props} />
-      <MetamaskBot />
+      <MetaMaskBot />
     </>
   );
 }

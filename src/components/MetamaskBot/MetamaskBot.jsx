@@ -24,7 +24,7 @@ import { ResetButton } from "./components/ResetButton";
 import { PromptSuggestions } from "./components/PromptSuggestions";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const MetamaskBot = () => {
+export const MetaMaskBot = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([INITIAL_BOT_MESSAGE]);
@@ -156,7 +156,7 @@ export const MetamaskBot = () => {
               width: 60,
               height: 60,
             }}
-            alt="Metamask Bot"
+            alt="MetaMask Bot"
             src={useBaseUrl("/img/mm-bot.png")}
           />
         </IconButton>
