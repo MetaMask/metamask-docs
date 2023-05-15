@@ -2619,9 +2619,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/docusaurus-openrpc@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "@metamask/docusaurus-openrpc@npm:0.0.8"
+"@metamask/docusaurus-openrpc@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@metamask/docusaurus-openrpc@npm:0.0.9"
   dependencies:
     "@docusaurus/plugin-content-docs": ^2.4.0
     "@open-rpc/schema-utils-js": ^1.16.1
@@ -2632,7 +2632,7 @@ __metadata:
     "@docusaurus/core": 2.x
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: f61c389663914650b2df327235259ebe576cc48201efab3f43ce6a0c764191f6c34e1b0976873491f8e63c360cf3d455912bb2665cb0b3841b4e21338857a0d1
+  checksum: cffaefc8a4b3a66013f292fdce6e1b1650cf587ac4ab3bccbbaf6b8975b2f2f226e0c0ae1d936eab16cce1dbd9b8d70727b7d465e32e9e710cedd2e24930872e
   languageName: node
   linkType: hard
 
@@ -11655,7 +11655,7 @@ __metadata:
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1
-    "@metamask/docusaurus-openrpc": ^0.0.8
+    "@metamask/docusaurus-openrpc": ^0.0.9
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
