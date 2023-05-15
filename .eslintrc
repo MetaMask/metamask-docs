@@ -5,6 +5,11 @@
     "commonjs": true,
     "es6": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "overrides": [
     {
       "files": "**/*.js",
@@ -27,30 +32,15 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
-    "indent": [
-        "error",
-        2
-    ],
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "double"
-    ],
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
-    "semi": [
-        "error",
-        "always"
-    ],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "semi": ["error", "always"],
     "react/react-in-jsx-scope": 0,
     "object-curly-spacing": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],
@@ -59,11 +49,11 @@
     "unused-imports/no-unused-vars": [
       "error",
       {
-                "vars": "all",
-                "varsIgnorePattern": "^_",
-                "args": "after-used",
-                "argsIgnorePattern": "^_"
-            }
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
     ],
     "object-shorthand": ["error", "properties"]
   }

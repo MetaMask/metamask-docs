@@ -64,5 +64,3 @@ One of the main benefits of ECIES is that it allows the sender and recipient to 
 without having to exchange a shared secret beforehand.
 It also provides security against eavesdropping and tampering, since the shared secret is derived
 from the sender's and recipient's private keys, which are both kept secret.
-
-![Sequence diagram](../assets/sdk-comm-diagram.svg)

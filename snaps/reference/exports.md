@@ -105,7 +105,7 @@ for the transaction that `onTransaction` was called with.
 # TypeScript
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snap-types';
+import { OnTransactionHandler } from '@metamask/snaps-types';
 import { panel, heading, text } from '@metamask/snaps-ui';
 
 export const onTransaction: OnTransactionHandler = async ({

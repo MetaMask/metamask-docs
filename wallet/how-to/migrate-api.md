@@ -25,14 +25,14 @@ Except for such legacy websites, no action is required for MetaMask users.
 
 ## Summary of breaking changes
 
-### `window.web3` removal
+### window.web3 removal
 
 As part of the breaking changes, MetaMask stopped injecting `web3.js` version `0.20.7` as `window.web3`
 into web pages.
 MetaMask still injects a dummy object at `window.web3`, in order to issue warnings when websites
 attempt to access `window.web3`.
 
-### `window.ethereum` API changes
+### window.ethereum API changes
 
 MetaMask made the following breaking changes to the `window.ethereum` API:
 
@@ -52,7 +52,7 @@ MetaMask made the following breaking changes to the `window.ethereum` API:
     - Use [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) to detect the
       current provider.
 
-## Replace `window.web3`
+## Replace window.web3
 
 :::caution Pages no longer reload on chain changes
 Since we removed `window.web3`, MetaMask no longer automatically reloads the page on chain/network changes.
@@ -74,7 +74,7 @@ Regardless of how you choose to migrate, you may want to read the `web3@0.20.7` 
 you can find [here](https://github.com/ethereum/web3.js/blob/0.20.7/DOCUMENTATION.md).
 :::
 
-### Use `window.ethereum` directly
+### Use window.ethereum directly
 
 For many web3 sites, the API provided by `window.ethereum` is sufficient.
 Much of the `web3` API simply maps to RPC methods, all of which can be requested using
@@ -140,7 +140,7 @@ If you decide that you need a convenience library, you have to convert your usag
 to an updated convenience library.
 We recommend [`ethers`](https://npmjs.com/package/ethers) ([documentation](https://docs.ethers.io/)).
 
-### Use `@metamask/legacy-web3`
+### Use @metamask/legacy-web3
 
 :::caution
 We strongly recommend that you consider one of the other two migration paths before resorting to this one.
@@ -176,7 +176,7 @@ Please follow the relevant link below to install the Legacy Web3 extension in yo
 
 ## Migrate to the new provider API
 
-### Handle `eth_chainId` return values
+### Handle eth_chainId return values
 
 The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead
 of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
@@ -188,7 +188,7 @@ the correct format instead.
 For more details on chain IDs and how to handle them, see the
 [`chainChanged` event](../reference/provider-api.md#chainchanged).
 
-### Handle the removal of `chainIdChanged`
+### Handle the removal of chainIdChanged
 
 `chainIdChanged` is a typo of `chainChanged`.
 To migrate, simply listen for `chainChanged` instead:
@@ -205,7 +205,7 @@ ethereum.on('chainChanged', (chainId) => {
 });
 ```
 
-### Handle the removal of `isEnabled()` and `isApproved()`
+### Handle the removal of isEnabled() and isApproved()
 
 Before the new provider API shipped, we added the `_metamask.isEnabled` and `_metamask.isApproved`
 methods to enable web3 sites to check if they have
@@ -225,7 +225,7 @@ We recommend that you check for account access in the following ways:
     - If MetaMask is unlocked and you still aren't receiving any accounts, it's time to request
       accounts using the [`eth_requestAccounts` RPC method](../reference/rpc-api.md#eth_requestaccounts).
 
-### Handle the removal of `ethereum.publicConfigStore`
+### Handle the removal of ethereum.publicConfigStore
 
 How to handle this change depends on if and how you relied on the `publicConfigStore`.
 We have seen examples of listening for provider state changes the `publicConfigStore` `data` event,
@@ -243,7 +243,7 @@ change:
 - `ethers`
 - `web3` (web3.js)
 
-### Handle the removal of `ethereum.autoRefreshOnNetworkChange`
+### Handle the removal of ethereum.autoRefreshOnNetworkChange
 
 The `ethereum.autoRefreshOnNetworkChange` was a mutable boolean property used to control whether
 MetaMask reloaded the page on chain/network changes.

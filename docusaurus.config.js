@@ -193,6 +193,10 @@ const config = {
             from: "/guide/contributors",
             to: "/wallet/",
           },
+          {
+            from: "/wallet/tutorials/simple-react-dapp",
+            to: "/wallet/tutorials/react-dapp-local-state",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -253,7 +257,7 @@ const config = {
               },
               {
                 label: "Tutorials",
-                to: "/wallet/tutorials",
+                to: "/wallet/category/tutorials",
               },
               {
                 label: "Reference",

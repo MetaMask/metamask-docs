@@ -2713,6 +2713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+
 "@open-rpc/schema-utils-js@npm:^1.16.1":
   version: 1.16.1
   resolution: "@open-rpc/schema-utils-js@npm:1.16.1"
@@ -2728,6 +2729,12 @@ __metadata:
     is-url: ^1.2.4
     isomorphic-fetch: ^3.0.0
   checksum: 0a7d89849aa575c1597defac089d766ab351ddf1d796069b73f100907580163e2acf72ad1e0b0ac8f889060ac87d81d006f32c55f30fcbdcb0b6625b3f7f32b6
+
+"@sideway/formula@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@sideway/formula@npm:3.0.1"
+  checksum: e4beeebc9dbe2ff4ef0def15cec0165e00d1612e3d7cea0bc9ce5175c3263fc2c818b679bd558957f49400ee7be9d4e5ac90487e1625b4932e15c4aa7919c57a
+
   languageName: node
   linkType: hard
 
@@ -10672,6 +10679,7 @@ __metadata:
   checksum: 9b85bf06955b23eaa4b7328aa8892e3887e81ca731dd27af04a5f5f1458fbc5e1de57a24442e3272f8a888dd1abe1cb68eb693324035f6b3aeba4fcab7667d62
   languageName: node
   linkType: hard
+
 
 "json5@npm:^2.1.2, json5@npm:^2.2.2":
   version: 2.2.3

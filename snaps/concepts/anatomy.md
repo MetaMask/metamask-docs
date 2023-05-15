@@ -1,8 +1,9 @@
 ---
+title: Snaps anatomy
 description: Learn about the anatomy of a snap project.
 ---
 
-# Snap anatomy
+# Snaps anatomy
 
 If you look at the directory structure of the
 [Snaps template repository](https://github.com/MetaMask/template-snap-monorepo) used in the
@@ -53,11 +54,11 @@ Consider this simple snap, `hello-snap`:
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
     // Expose a "hello" RPC method to dapps
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -75,12 +76,12 @@ If a dapp wants to use `hello-snap`, it can implement something like this:
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
 await window.ethereum.request({
-  method: 'wallet_enable',
+  method: "wallet_enable",
   params: [
     {
       wallet_snap: {
-        'npm:hello-snap': {
-          version: '^1.0.0',
+        "npm:hello-snap": {
+          version: "^1.0.0",
         },
       },
     },
@@ -89,8 +90,8 @@ await window.ethereum.request({
 
 // Invoke the "hello" RPC method exposed by the snap
 const hello = await window.ethereum.request({
-  method: 'wallet_invokeSnap',
-  params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
+  method: "wallet_invokeSnap",
+  params: { snapId: "npm:hello-snap", request: { method: "hello" } },
 });
 
 console.log(hello); // 'world!'
@@ -171,8 +172,8 @@ For example:
 ```javascript
 module.exports = {
   cliOptions: {
-    src: 'lib/index.js',
-    dist: 'out',
+    src: "lib/index.js",
+    dist: "out",
     port: 9000,
   },
 };
@@ -186,7 +187,7 @@ You can transform it in any way you want, for example, adding plugins.
 The `bundleCustomizer` function looks something like this:
 
 ```javascript
-const brfs = require('brfs');
+const brfs = require("brfs");
 
 module.exports = {
   cliOptions: {

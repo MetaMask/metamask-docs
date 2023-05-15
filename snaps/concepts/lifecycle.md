@@ -1,8 +1,9 @@
 ---
+title: Snaps lifecycle
 description: Learn about the lifecycle of a snap.
 ---
 
-# Snap lifecycle
+# Snaps lifecycle
 
 Just like [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) or
 AWS lambda functions, snaps are designed to wake up in response to messages/events, and shut down
