@@ -1,5 +1,6 @@
 ---
-title: Node.js
+sidebar_label: Node.js
+sidebar_position: 5
 ---
 
 # Use MetaMask SDK with Node.js

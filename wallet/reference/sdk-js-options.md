@@ -1,5 +1,6 @@
 ---
 description: MetaMask JavaScript SDK options
+sidebar_position: 3
 ---
 
 # MetaMask JavaScript SDK options

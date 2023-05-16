@@ -1,5 +1,6 @@
 ---
-title: Electron
+sidebar_label: Electron
+sidebar_position: 6
 ---
 
 # Use MetaMask SDK with Electron

@@ -1,5 +1,6 @@
 ---
 description: Install Snaps dependencies.
+sidebar_position: 1
 ---
 
 # Install Snaps

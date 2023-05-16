@@ -1,5 +1,6 @@
 ---
-title: Unreal Engine (coming soon)
+sidebar_label: Unreal Engine (coming soon)
+sidebar_position: 2
 ---
 
 # Use MetaMask SDK with Unreal Engine

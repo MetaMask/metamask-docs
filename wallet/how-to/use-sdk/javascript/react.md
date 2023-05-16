@@ -1,5 +1,6 @@
 ---
-title: React
+sidebar_label: React
+sidebar_position: 1
 ---
 
 # Use MetaMask SDK with React

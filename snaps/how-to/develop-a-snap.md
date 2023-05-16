@@ -1,5 +1,6 @@
 ---
 description: Develop, test, and publish a snap.
+sidebar_position: 1
 ---
 
 # Develop a snap

@@ -1,5 +1,6 @@
 ---
 description: Enable your dapp to interact with smart contracts.
+sidebar_position: 3
 ---
 
 # Interact with smart contracts

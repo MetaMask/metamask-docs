@@ -1,5 +1,6 @@
 ---
-title: Other web frameworks
+sidebar_label: Other web frameworks
+sidebar_position: 3
 ---
 
 # Use MetaMask SDK with other web frameworks

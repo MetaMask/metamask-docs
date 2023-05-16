@@ -1,5 +1,6 @@
 ---
-title: Native iOS
+sidebar_label: Native iOS
+sidebar_position: 1
 ---
 
 # Use MetaMask SDK with iOS

@@ -1,5 +1,6 @@
 ---
 description: Register a token with users using wallet_watchAsset.
+sidebar_position: 6
 ---
 
 # Register a token with users

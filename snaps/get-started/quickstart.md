@@ -1,5 +1,6 @@
 ---
 description: Get started quickly using the Snaps template.
+sidebar_position: 2
 ---
 
 # Snaps quickstart

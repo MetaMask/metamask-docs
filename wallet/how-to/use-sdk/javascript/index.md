@@ -1,3 +1,8 @@
+---
+sidebar_label: JavaScript
+sidebar_position: 1
+---
+
 # Use MetaMask SDK with JavaScript
 
 You can import MetaMask SDK into your JavaScript dapp to enable your users to easily connect

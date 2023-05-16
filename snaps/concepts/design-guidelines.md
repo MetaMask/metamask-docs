@@ -1,11 +1,11 @@
 ---
-title: Snaps design guidelines
-description: Guiding principles for designers, developers, builders, and writers to create snap install flows that are accessible for all types of users.
+description: Learn about best practices for creating snap installation flows.
+sidebar_position: 5
 ---
 
 # Snaps design guidelines
 
-This page outlines guiding principles for designers, developers, builders, and writers to create snap install flows that are accessible for all users. Use these guidelines when introducing your snap within a dapp or website.
+This page outlines guiding principles for designers, developers, builders, and writers to create snap installation flows that are accessible for all users. Use these guidelines when introducing your snap within a dapp or website.
 
 ## Why this matters
 
