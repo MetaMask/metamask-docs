@@ -59,6 +59,6 @@ The bytecode doesn't describe how to interact with the final contract.
 ## Contract source code
 
 If your dapp allows users to edit smart contract source code and compile it, similar to
-[Remix](http://remix.ethereum.org/), you can import a whole compiler.
+[Remix](https://remix.ethereum.org/), you can import a whole compiler.
 You derive your bytecode and ABI from that source code, and eventually derive the contract's address
 from the completed transaction, where that bytecode is published.
