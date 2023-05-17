@@ -82,7 +82,7 @@ Specify this permission in the manifest file as follows:
 ## endowment:network-access
 
 To access the internet, a snap must request the `endowment:network-access` permission.
-This permission exposes the global networking APIs `fetch` and `WebSocket` to the Snaps execution environment.
+This permission exposes the global `fetch` API to the Snaps execution environment.
 
 :::caution
 `XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.

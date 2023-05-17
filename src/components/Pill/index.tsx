@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { PropsWithChildren } from "react";
-import styles from "./Pill.module.css";
+import styles from "./styles.module.css";
 
 const colors = new Set(["green", "red", "yellow", "blue"]);
 
