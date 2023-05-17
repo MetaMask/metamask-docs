@@ -7,6 +7,7 @@ export interface CardItem {
   title?: string;
   description?: string;
   href?: string;
+  icon?: string;
 }
 
 interface CardProps {
@@ -18,11 +19,14 @@ export default function Card({ item }: CardProps): JSX.Element {
     <>
       {item.title && (
         <h2 className={clsx("text--truncate", styles.cardTitle)} title={item.title}>
-          {item.title}
+          {item.icon && (
+            <img src={item.icon} className={styles.cardIcon} />
+          )}
+          <span>{item.title}</span>
         </h2>
       )}
       {item.description && (
-        <p className={styles.cardDescription}>
+        <p>
           {item.description}
         </p>
       )}

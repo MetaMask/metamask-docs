@@ -27,8 +27,12 @@
 
 .cardTitle {
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
-.cardDescription {
-  font-size: 1rem;
+.cardIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
