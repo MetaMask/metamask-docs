@@ -41,7 +41,7 @@ If a method is restricted, a dapp must request permission to call it using
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
-Outside of [Snaps restricted methods](../../snaps/reference/rpc-api#restricted-methods), the only
+Outside of [Snaps restricted methods](/snaps/reference/rpc-api/#restricted-methods), the only
 restricted method is
 [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts), which
 allows you to access the user's Ethereum accounts.

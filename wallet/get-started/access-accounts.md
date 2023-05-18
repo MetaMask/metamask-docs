@@ -84,7 +84,7 @@ MetaMask currently returns at most one account in the `accounts` array.
 The array may contain more than one account in the future.
 
 To retrieve the full list of accounts for which the user has permitted access, use the
-[`wallet_getPermissions`](../reference/rpc-api#wallet_getpermissions) RPC method.
+[`wallet_getPermissions`](../reference/rpc-api.md#wallet_getpermissions) RPC method.
 :::
 
 ## Handle accounts
