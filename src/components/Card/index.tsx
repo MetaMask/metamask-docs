@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
 
 export interface CardItem {
-  title?: string;
-  description?: string;
+  title?: ReactNode;
+  description?: ReactNode;
   href?: string;
   icon?: string;
 }
@@ -18,7 +18,7 @@ export default function Card({ item }: CardProps): JSX.Element {
   const cardContent = (
     <>
       {item.title && (
-        <h2 className={clsx("text--truncate", styles.cardTitle)} title={item.title}>
+        <h2 className={clsx("text--truncate", styles.cardTitle)}>
           {item.icon && (
             <img src={item.icon} className={styles.cardIcon} />
           )}
