@@ -10,11 +10,11 @@ export interface CardItem {
   icon?: string;
 }
 
-interface CardProps {
+interface CardListItemProps {
   item: CardItem;
 }
 
-export default function Card({ item }: CardProps): JSX.Element {
+export default function CardListItem({ item }: CardListItemProps): JSX.Element {
   const cardContent = (
     <>
       {item.title && (
