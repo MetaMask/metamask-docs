@@ -112,7 +112,7 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
         return snap.request({
           method: 'snap_dialog',
           params: {
-            type: 'Alert',
+            type: 'alert',
             content: panel([
               text(`Hello, **${origin}**!`),
               text(`Current gas fee estimates: ${fees}`),
