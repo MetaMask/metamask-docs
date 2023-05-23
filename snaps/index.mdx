@@ -1,0 +1,90 @@
+---
+title: Introduction
+---
+
+import CardList from '@site/src/components/CardList'
+
+# Extend the functionality of MetaMask using Snaps
+
+Snaps is an open source system that allows anyone to safely extend the functionality of MetaMask,
+creating new web3 end user experiences.
+
+Get started by [installing Snaps](get-started/install-snaps.md).
+
+:::note
+- Snaps is pre-release software.
+- To learn how to integrate your dapp with MetaMask, visit the
+  [MetaMask wallet developer documentation](../wallet).
+:::
+
+## What is a snap?
+
+A snap is a JavaScript program run in an isolated environment that customizes the wallet experience.
+Snaps have access to a limited set of capabilities, determined by the
+[permissions](how-to/request-permissions.md) the user granted them during installation.
+
+## What can you do with a snap?
+
+A snap can add new API methods to MetaMask, add support for different blockchain protocols, or
+modify existing functionalities using the [Snaps JSON-RPC API](reference/rpc-api.md).
+
+Features include:
+
+<CardList
+  items={[
+    {
+      icon: require("./assets/features/dialog.png").default,
+      href: "reference/rpc-api#snap_dialog",
+      title: "Dialogs",
+      description: "Display custom alert, confirmation, or prompt screens in MetaMask."
+    },
+    {
+      icon: require("./assets/features/notifications.png").default,
+      href: "reference/rpc-api#snap_notify",
+      title: "Notifications",
+      description: "Notify users directly in MetaMask, or in their OS."
+    },
+    {
+      icon: require("./assets/features/state.png").default,
+      href: "reference/rpc-api#snap_managestate",
+      title: "Encrypted storage",
+      description: "Securely store and manage data on the user's device."
+    },
+    {
+      icon: require("./assets/features/manage-keys.png").default,
+      href: "how-to/manage-keys",
+      title: "Non-EVM chain support",
+      description: "Control non-EVM accounts and assets in MetaMask."
+    },
+    {
+      icon: require("./assets/features/insights.png").default,
+      href: "reference/exports#ontransaction",
+      title: "Transaction insights",
+      description: "Provide transaction insights in MetaMask's pre-transaction window."
+    },
+    {
+      icon: require("./assets/features/cronjob.png").default,
+      href: "reference/exports#oncronjob",
+      title: "Cron jobs",
+      description: "Schedule periodic actions for your users."
+    },
+    {
+      icon: require("./assets/features/custom-ui.png").default,
+      href: "how-to/use-custom-ui",
+      title: "Custom UI",
+      description: "Display custom UI in MetaMask using a set of pre-defined components, including inline Markdown."
+    },
+    {
+      icon: require("./assets/features/network.png").default,
+      href: "reference/permissions#endowmentnetwork-access",
+      title: "Network access",
+      description: <>Make API calls using <code>fetch()</code>.</>
+    }
+  ]}
+/>
+
+## Questions?
+
+If you have questions about using Snaps or want to propose a new feature, you can interact with the
+Snaps team and community on [GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions)
+and the Snaps channel on [ConsenSys Discord](https://discord.gg/consensys).
