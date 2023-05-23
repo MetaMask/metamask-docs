@@ -2619,20 +2619,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/docusaurus-openrpc@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "@metamask/docusaurus-openrpc@npm:0.0.11"
+"@metamask/docusaurus-openrpc@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "@metamask/docusaurus-openrpc@npm:0.0.12"
   dependencies:
     "@docusaurus/plugin-content-docs": ^2.4.0
     "@open-rpc/schema-utils-js": ^1.16.1
-    docusaurus-open-rpc-docs-react: 0.0.0-development
+    docusaurus-open-rpc-docs-react: ^0.0.1
     node-polyfill-webpack-plugin: ^2.0.1
     process: ^0.11.10
   peerDependencies:
     "@docusaurus/core": 2.x
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: b128aee9ace5ddbf2b312c7aaaa8b61e381a8e8df20f125af3343ebf804afff64729e2b840922f172925f0187a6db27933ec53fff8da6c69551c96813b3b5f45
+  checksum: 2a4db9e8838b026f875f4fff29c82c1cf3a5fc17ce4135ecf25be5c26362363759fb8a09c13051581b8f2da1225cd6bb8cadfed61bd73c584f3a897821742488
   languageName: node
   linkType: hard
 
@@ -7081,9 +7081,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-open-rpc-docs-react@npm:0.0.0-development":
-  version: 0.0.0-development
-  resolution: "docusaurus-open-rpc-docs-react@npm:0.0.0-development"
+"docusaurus-open-rpc-docs-react@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "docusaurus-open-rpc-docs-react@npm:0.0.1"
   dependencies:
     "@json-schema-tools/traverse": ^1.10.1
     "@open-rpc/examples": ^1.6.1
@@ -7105,7 +7105,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: b0e705de458c1d99d18dae1619245a4a8214876f4e588b5f24589c3916376e374df361a12494bf9673b622a0735968db262aab4e4dceb22792803f28324a31f7
+  checksum: f6cdbff17ba996a96cdf99dd5680fbee79126a0cf94dffef48d6382238eb61082e448ac1357a04b7ee48539017a03d0673983bc6969b34da49c800c1101a27f8
   languageName: node
   linkType: hard
 
@@ -11655,7 +11655,7 @@ __metadata:
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1
-    "@metamask/docusaurus-openrpc": ^0.0.11
+    "@metamask/docusaurus-openrpc": ^0.0.12
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
