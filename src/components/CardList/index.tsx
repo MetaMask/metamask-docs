@@ -1,5 +1,5 @@
 import React from "react";
-import Card, { CardItem } from "@site/src/components/Card";
+import CardListItem, { CardItem } from "./CardListItem";
 
 interface CardListProps {
   items: CardItem[];
@@ -12,7 +12,7 @@ export default function CardList(props: CardListProps): JSX.Element {
     <section className="row">
       {items.map((item, index) => (
         <article key={index} className="col col--6 margin-bottom--lg">
-          <Card item={item} />
+          <CardListItem item={item} />
         </article>
       ))}
     </section>
