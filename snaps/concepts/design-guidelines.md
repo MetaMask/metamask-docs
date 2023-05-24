@@ -30,7 +30,7 @@ Write in active voice and use sentence case. Avoid jargon—write in plain langu
 
 ## Think like your users, write like a human
 
-Consider whether the details that interest you as a developer are relevant to the user’s experience. Oftentimes, content can be drastically reduced by cutting jargon and run-on sentences. Read your content out loud to hear what stands out most in your messaging. If something is hard to say, it’s probably hard to read.
+Consider whether the details that interest you as a developer are relevant to the user’s experience. Often, content can be drastically reduced by cutting jargon and run-on sentences. Read your content out loud to hear what stands out most in your messaging. If something is hard to say, it’s probably hard to read.
 
 - **Be clear.**
 
