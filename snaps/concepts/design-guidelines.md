@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Snaps design guidelines
 
-This page outlines guiding principles for designers, developers, builders, and writers to create snap installation flows that are accessible for all users. Use these guidelines when introducing your snap within a dapp or website.
+This page outlines guiding principles for designers, developers, builders, and writers to create snap installation flows that are accessible to all users. Use these guidelines when introducing your snap within a dapp or website.
 
 ## Why this matters
 
@@ -18,7 +18,7 @@ The snap installation process contains critical info about your snap, including 
 - Keep your name to **21 characters or less** (including spaces).
 - Never use “snap” in your snap’s name. Use the space for something more descriptive.
 - Your avatar should fit in a **32px circular frame, SVG format**.
-- Always aim for short and simple copy.
+- Always aim for a short and simple copy.
 
 **Before** asking for permission to install, provide users with **clear and concise information** about:
 
@@ -30,7 +30,7 @@ Write in active voice and use sentence case. Avoid jargon—write in plain langu
 
 ## Think like your users, write like a human
 
-Consider whether the details that interest you as a developer are relevant to the user’s experience. Often times, content can be drastically reduced by cutting jargon and run-on sentences. Read your content out loud to hear what stands out most in your messaging. If something is hard to say, it’s probably hard to read.
+Consider whether the details that interest you as a developer are relevant to the user’s experience. Often, content can be drastically reduced by cutting jargon and run-on sentences. Read your content out loud to hear what stands out most in your messaging. If something is hard to say, it’s probably hard to read.
 
 - **Be clear.**
 
@@ -46,7 +46,7 @@ Consider whether the details that interest you as a developer are relevant to th
 
 ## Introducing your snap
 
-Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introduce your snap in the context of your application to make it clear what the user gets if they install.
+Use conversational language when explaining the snap. If you need to use a technical term, briefly define it so everyone can understand. Avoid jargon whenever possible, and keep your words short and simple. Introduce your snap in the context of your application to make it clear what the user gets if they install it.
 
 ![Introducing your snap's features via a modal](../assets/install-modal.png)
 
@@ -68,7 +68,7 @@ Use conversational language when explaining the snap. If you need to use a techn
 
 ### Details to include when introducing your snap
 
-This is your chance to share the benefits of your snap to the intended user. If it isn’t clear what a user stands to gain from your snap, chances are they won’t even install it. So don’t be afraid to think like a marketer and emphasize the benefits of your snap.
+This is your chance to share the benefits of your snap with the intended user. If it isn’t clear what a user stands to gain from your snap, chances are they won’t even install it. So don’t be afraid to think like a marketer and emphasize the benefits of your snap.
 
 Consider introducing your snap on your website with a modal, tooltip, or card. This introduction can happen before or alongside the installation prompt, but should always be clear and descriptive.
 
@@ -79,7 +79,7 @@ Consider introducing your snap on your website with a modal, tooltip, or card. T
 - Descriptions of the features that make your snap appealing to the intended users.
 
 :::tip Tip
-Some studies estimate users read only 20-28% of text on any screen, so write about your snap with language that’s impactful, clear, and direct.
+Some studies estimate users read only 20-28% of the text on any screen, so write about your snap with language that’s impactful, clear, and direct.
 :::
 
 ## Embedded in existing flows
@@ -137,7 +137,7 @@ At MetaMask, we use an in-depth style guide to inform our writing decisions. Her
 
 ### Capitalization
 
-With few exceptions, use **sentence case as a default**. Sentence case is capitalizing only the first word of a line of copy. Not only is sentence case is more casual and conversational, it’s also easier to scan than title case. Keep in mind, there are a handful of times that title case is the way to go.
+With few exceptions, use **sentence case as a default**. Sentence case is capitalizing only the first word of a line of copy. Not only is sentence case is more casual and conversational, but it’s also easier to scan than title case. Keep in mind, there are a handful of times that title case is the way to go.
 
 ### Active voice
 
