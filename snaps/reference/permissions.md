@@ -100,7 +100,7 @@ Specify this permission in the manifest file as follows:
 
 ### Same-origin policy and CORS
 
-`fetch()` requests done inside a snap are bound by browsers' [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access). Since snaps code is executed in an iframe with the `sandbox` property, the browser will send an `Origin` header with the value `null` with outgoing requests. For the snap to be able to read the response, an [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header with the value `*` or `null` must be sent in the response.
+`fetch()` requests in a snap are bound by browsers' [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access). Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin` header with the value `null` with outgoing requests. For the snap to be able to read the response, the server must send an [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header with the value `*` or `null` in the response.
 
 ## endowment:rpc
 
