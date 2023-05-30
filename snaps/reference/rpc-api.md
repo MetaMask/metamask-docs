@@ -60,44 +60,6 @@ console.log(result);
 
 <!--/tabs-->
 
-### wallet_invokeSnap
-
-Invokes the specified JSON-RPC method of the specified snap.
-The snap must be installed and the caller must have the permission to communicate with the snap, or
-the request is rejected.
-
-Snaps are fully responsible for implementing their JSON-RPC API.
-Consult the snap's documentation for available methods, their parameters, and return values.
-
-This method is only callable by websites.
-
-#### Parameters
-
-An object containing:
-
-- `snapId` - The ID of the snap to invoke.
-- `request` - The JSON-RPC request object to send to the invoked snap.
-
-#### Returns
-
-Result of the snap method call.
-
-#### Example
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_invokeSnap',
-  params: {
-    snapId: 'npm:@metamask/example-snap',
-    request: {
-      method: 'hello',
-    },
-  },
-});
-
-console.log(result); // In this example, the result is a boolean.
-```
-
 ### wallet_requestSnaps
 
 Requests permission for a website to communicate with the specified snaps and attempts to install
@@ -747,3 +709,41 @@ console.log(result); // In this example, the result is a boolean.
 ```
 
 <!--/tabs-->
+
+### wallet_invokeSnap
+
+Invokes the specified JSON-RPC method of the specified snap.
+The snap must be installed and the caller must have the permission to communicate with the snap, or
+the request is rejected.
+
+Snaps are fully responsible for implementing their JSON-RPC API.
+Consult the snap's documentation for available methods, their parameters, and return values.
+
+This method is only callable by websites.
+
+#### Parameters
+
+An object containing:
+
+- `snapId` - The ID of the snap to invoke.
+- `request` - The JSON-RPC request object to send to the invoked snap.
+
+#### Returns
+
+Result of the snap method call.
+
+#### Example
+
+```javascript
+const result = await ethereum.request({
+  method: 'wallet_invokeSnap',
+  params: {
+    snapId: 'npm:@metamask/example-snap',
+    request: {
+      method: 'hello',
+    },
+  },
+});
+
+console.log(result); // In this example, the result is a boolean.
+```
