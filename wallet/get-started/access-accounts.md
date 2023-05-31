@@ -127,8 +127,8 @@ function handleAccountsChanged(accounts) {
 }
 ```
 
-:::note
-MetaMask currently returns at most one account in the `accounts` array.
-The array may contain more than one account in the future.
+:::caution
+MetaMask now returns the full list of accounts for which the user has permitted access to.
+Previously, MetaMask returned at most one account in the `accounts` array.
 The first account in the array will always be considered the user's "selected" account.
 :::
