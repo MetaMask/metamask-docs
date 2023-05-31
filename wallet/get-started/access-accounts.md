@@ -81,7 +81,7 @@ async function getAccount() {
 
 ## Handle accounts
 
-Use the [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts)
+Use the [`eth_accounts`](/api-playground/eth_accounts)
 RPC method to handle user accounts.
 Listen to the [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event to
 be notified when the user changes accounts.

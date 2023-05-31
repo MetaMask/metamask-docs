@@ -27,7 +27,7 @@ When developing a website that depends on Snaps, you need to know whether the us
 [MetaMask Flask](../get-started/install-snaps.md#install-metamask-flask) installed.
 
 We recommend calling the
-[`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
+[`web3_clientVersion`](/api-playground/web3_clientVersion)
 MetaMask RPC method to obtain this information.
 The following example uses the
 [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get

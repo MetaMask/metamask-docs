@@ -64,7 +64,7 @@ In practice, if a method has parameters, they're almost always of type `Array<an
 If the request fails, the promise rejects with an [error](#errors).
 
 The following is an example of using `window.ethereum.request(args)` to call
-[`eth_sendTransaction`](https://metamask.github.io/api-playground/api-documentation/#eth_sendTransaction):
+[`eth_sendTransaction`](/api-playground/eth_sendTransaction):
 
 ```javascript
 params: [
@@ -138,7 +138,7 @@ window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void
 ```
 
 The provider emits this event when the return value of the
-[`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts) RPC
+[`eth_accounts`](/api-playground/eth_accounts) RPC
 method changes.
 `eth_accounts` returns either an empty array, or an array that contains the addresses of the accounts
 the caller is permitted to access with the most recently used account first.
@@ -212,7 +212,7 @@ The `type` property identifies the kind of message.
 
 RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
-[`eth_subscribe`](https://metamask.github.io/api-playground/api-documentation/#eth_subscribe), each
+[`eth_subscribe`](/api-playground/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
 ## Errors
