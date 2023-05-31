@@ -26,7 +26,7 @@ seamless connection from your dapp to a MetaMask wallet client.
 ## Create a connect button
 
 We recommend providing a button to allow users to connect MetaMask to your dapp.
-Selecting this button should call `eth_requestAccounts` to access the user's account.
+Selecting this button should call `eth_requestAccounts` to access the user's accounts.
 
 In the [example project code](set-up-dev-environment.md#example), the following JavaScript code
 accesses the user's accounts when they select a connect button, and the following HTML code
@@ -79,14 +79,6 @@ async function getAccount() {
 
 <!--/tabs-->
 
-:::note
-MetaMask currently returns at most one account in the `accounts` array.
-The array may contain more than one account in the future.
-
-To retrieve the full list of accounts for which the user has permitted access, use the
-[`wallet_getPermissions`](../reference/rpc-api.md#wallet_getpermissions) RPC method.
-:::
-
 ## Handle accounts
 
 Use the [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts)
@@ -127,8 +119,8 @@ function handleAccountsChanged(accounts) {
 }
 ```
 
-:::caution
-MetaMask now returns the full list of accounts for which the user has permitted access to.
-Previously, MetaMask returned at most one account in the `accounts` array.
+:::note
+`eth_accounts` now returns the full list of accounts for which the user has permitted access to.
+Previously, `eth_accounts` returned at most one account in the `accounts` array.
 The first account in the array will always be considered the user's "selected" account.
 :::
