@@ -6,10 +6,8 @@ sidebar_position: 1
 # Create a gas estimation snap
 
 This tutorial walks you through creating a snap that estimates gas fees.
-The snap is based on the
-[Snaps template](https://github.com/MetaMask/template-snap-monorepo).
-It uses the `fetch` API to request information from the internet, and displays custom information in
-a confirmation dialog.
+The snap uses the `fetch` API to request information from the internet, and displays custom
+information in a confirmation dialog.
 
 ## Prerequisites
 
@@ -23,16 +21,12 @@ a confirmation dialog.
 
 ### 1. Set up the project
 
-Use the Snaps template by
-[creating a new repository from the template](https://github.com/MetaMask/template-snap-monorepo/generate).
-
-Give your project a new name, such as `gas-estimation-snap`.
-
-[Clone the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-using the command line:
+Create a new snap project using the Create Snap CLI by running the following command:
 
 ```bash
-git clone git@github.com:<your-username>/gas-estimation-snap.git
+yarn create @metamask/snap gas-estimation-snap
+# or...
+npm create @metamask/snap gas-estimation-snap
 ```
 
 To initialize your development environment with the required dependencies, in your project
