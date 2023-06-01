@@ -192,7 +192,7 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 [`personal_sign`](https://metamask.github.io/api-playground/api-documentation/#personal_sign) is the
 easiest way to request human-readable signatures that don't need to be efficiently processed on-chain.
 It's often used for signature challenges that are authenticated on a web server, such as
-[Sign-In with Ethereum](https://docs.login.xyz/).
+[Sign-In with Ethereum](use-siwe.md).
 
 <p align="center">
 
