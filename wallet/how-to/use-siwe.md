@@ -5,8 +5,8 @@ sidebar_position: 5.5
 
 # Use Sign-In with Ethereum
 
-You can set up [Sign-In with Ethereum (SIWE)](https://docs.login.xyz/) in your dapp to enable users
-to easily sign in to your dapp by authenticating with their MetaMask wallet.
+You can set up [Sign-In with Ethereum (SIWE)](https://docs.login.xyz/) to enable users to easily 
+sign in to your dapp by authenticating with their MetaMask wallet.
 
 MetaMask supports the SIWE standard message format as specified in [ERC-4361](https://eips.ethereum.org/EIPS/eip-4361).
 When your dapp prompts a user to sign a message that follows the SIWE format,
