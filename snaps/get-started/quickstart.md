@@ -28,8 +28,6 @@ Create a new snap project using the Create Snap CLI by running the following com
 
 ```bash
 yarn create @metamask/snap your-snap-name
-# or...
-npm create @metamask/snap your-snap-name
 ```
 
 You can learn about the [anatomy of your snap project files](../concepts/anatomy.md).
