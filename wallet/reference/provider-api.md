@@ -140,8 +140,8 @@ window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void
 The provider emits this event when the return value of the
 [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts) RPC
 method changes.
-`eth_accounts` returns either an empty array, or an array that contains the address of the most
-recently used account the caller is permitted to access.
+`eth_accounts` returns either an empty array, or an array that contains the addresses of the accounts
+the caller is permitted to access with the most recently used account first.
 Callers are identified by their URL origin, which means that all sites with the same origin share
 the same permissions.
 
