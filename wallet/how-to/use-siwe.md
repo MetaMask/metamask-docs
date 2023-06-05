@@ -57,7 +57,7 @@ const siweSign = async (siweMessage) => {
     const msg = `0x${Buffer.from(siweMessage, 'utf8').toString('hex')}`;
     const sign = await ethereum.request({
       method: 'personal_sign',
-      params: [msg, from, 'Example password'],
+      params: [msg, from],
     });
     siweResult.innerHTML = sign;
   } catch (err) {
