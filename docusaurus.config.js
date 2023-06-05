@@ -33,39 +33,55 @@ const config = {
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
   ],
 
+  clientModules: [require.resolve("./src/css/custom.css")],
+
   presets: [
-    [
-      "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: {
-          path: "wallet",
-          routeBasePath: "wallet",
-          sidebarPath: require.resolve("./wallet-sidebar.js"),
-          breadcrumbs: false,
-          remarkPlugins: [
-            require("remark-docusaurus-tabs"),
-            [remarkCodesandbox, {
-              mode: "iframe",
-              autoDeploy: process.env.NODE_ENV === "production",
-            }],
-          ],
-          editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-        },
-        theme: {
-          customCss: require.resolve("./src/css/custom.css"),
-        },
-      }),
-    ],
+    // [
+    //   "classic",
+    //   /** @type {import('@docusaurus/preset-classic').Options} */
+    //   ({
+    //     theme: {
+    //       customCss: require.resolve("./src/css/custom.css"),
+    //     },
+    //   }),
+    // ],
   ],
   plugins: [
     [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
+      "@docusaurus/plugin-sitemap",
+      {
+        changefreq: "weekly",
+        priority: 0.5,
+        filename: "sitemap.xml",
+      },
+    ],
+    [
+      "./content-docs-enhanced-open-rpc/index.js",
+      ({
+        id: "default",
+        path: "wallet",
+        routeBasePath: "wallet",
+        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+        sidebarPath: require.resolve("./wallet-sidebar.js"),
+        openrpcPath: "reference",
+        breadcrumbs: false,
+        remarkPlugins: [
+          require("remark-docusaurus-tabs"),
+          [remarkCodesandbox, {
+            mode: "iframe",
+            autoDeploy: process.env.NODE_ENV === "production",
+          }],
+        ],
+      }),
+    ],
+    [
+      "./content-docs-enhanced-open-rpc/index.js",
       ({
         id: "snaps",
         path: "snaps",
         routeBasePath: "snaps",
+        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+        openrpcPath: "reference",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
         remarkPlugins: [
@@ -74,16 +90,16 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
       }),
     ],
-    [
-      "@metamask/docusaurus-openrpc",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
-      {
-        path: "/api-playground",
-        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
-        // uncomment line below to build reference docs from local api-specs
-        // openrpcDocument: "../../ethereum/execution-apis/openrpc.json"
-      },
-    ],
+    // [
+    //   "@metamask/docusaurus-openrpc",
+    //   /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
+    //   {
+    //     path: "/api-playground",
+    //     openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+    //     // uncomment line below to build reference docs from local api-specs
+    //     // openrpcDocument: "../../ethereum/execution-apis/openrpc.json"
+    //   },
+    // ],
     [
       "@docusaurus/plugin-client-redirects",
       {
@@ -222,14 +238,11 @@ const config = {
         },
         items: [
           {
-            type: "doc",
-            docId: "index",
+            to: "wallet",
             label: "Wallet",
           },
           {
-            type: "doc",
-            docId: "index",
-            docsPluginId: "snaps",
+            to: "snaps",
             label: "Snaps",
           },
         ],

@@ -11,7 +11,7 @@ The API contains standard Ethereum JSON-RPC API methods and MetaMask-specific me
 
 :::tip MetaMask API playground
 The RPC methods are documented in the interactive
-[MetaMask JSON-RPC API Playground](/api-playground/wallet_watchasset).
+[MetaMask JSON-RPC API Playground](/wallet/reference/wallet_watchasset).
 :::
 
 Methods in the API playground may have the following tags:
@@ -43,7 +43,7 @@ internally by MetaMask.
 
 Outside of [Snaps restricted methods](/snaps/reference/rpc-api/#restricted-methods), the only
 restricted method is
-[`eth_accounts`](/api-playground/eth_accounts), which
+[`eth_accounts`](/wallet/reference/eth_accounts), which
 allows you to access the user's Ethereum accounts.
 More restricted methods will be added in the future.
 
@@ -51,13 +51,13 @@ More restricted methods will be added in the future.
 
 Unrestricted methods have no corresponding permission, but they might still rely on permissions to
 succeed (for example, the signing methods require calling the restricted
-[`eth_accounts`](/api-playground/eth_accounts) method),
+[`eth_accounts`](/wallet/reference/eth_accounts) method),
 or they might require confirmation by the user (for example,
 [`wallet_addEthereumChain`](#wallet_addethereumchain)).
 
 The following are some MetaMask-specific unrestricted methods.
 For the full list of MetaMask JSON-RPC API methods, see the
-[API playground](/api-playground/wallet_watchasset).
+[API playground](/wallet/reference/wallet_watchasset).
 
 ### eth_requestAccounts
 
@@ -68,7 +68,7 @@ This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 
 :::info
 Internally, this method calls [`wallet_requestPermissions`](#wallet_requestpermissions) for
-permission to call [`eth_accounts`](/api-playground/eth_accounts).
+permission to call [`eth_accounts`](/wallet/reference/eth_accounts).
 :::
 
 #### Returns
@@ -177,7 +177,7 @@ MetaMask also rejects the request if any of the following occurs:
   If you use an origin allowlist, they're blocked.
   :::
 - The RPC endpoint returns a different chain ID when
-  [`eth_chainId`](/api-playground/eth_chainId) is called.
+  [`eth_chainId`](/wallet/reference/eth_chainId) is called.
 - The chain ID corresponds to any default MetaMask chains.
 
 This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
