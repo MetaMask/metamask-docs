@@ -13,7 +13,7 @@ You can then [get started quickly using the Create Snap CLI](quickstart.md).
 
 - Up-to-date Chromium or Firefox browser
 - [Node.js](https://nodejs.org/) version 16 or later
-- [Yarn](https://yarnpkg.com/)
+- [Yarn](https://yarnpkg.com/) version 3
 
 ## Install MetaMask Flask
 
