@@ -33,7 +33,7 @@ site logins.
 
 The text prefix of `personal_sign` makes signatures expensive to verify on-chain.
 If you don't need signatures to be efficiently processed on-chain, you can
-[use this method](../how-to/sign-data.md#use-personalsign).
+[use this method](../how-to/sign-data.md#use-personal_sign).
 
 ### eth_signTypedData
 
@@ -44,7 +44,7 @@ If you don't need signatures to be efficiently processed on-chain, you can
 - Protected against phishing signatures.
 
 If on-chain verifiability cost is a high priority for you, we recommend
-[using this method](../how-to/sign-data.md#use-ethsigntypeddatav4).
+[using this method](../how-to/sign-data.md#use-eth_signtypeddatav4).
 
 The EIP-712 specification changed several times while retaining the same EIP, meaning that MetaMask
 originally implemented `eth_signTypedData` as the earliest proposed version, then implemented later
