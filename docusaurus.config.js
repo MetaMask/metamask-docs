@@ -56,7 +56,7 @@ const config = {
       },
     ],
     [
-      "./content-docs-enhanced-open-rpc/index.js",
+      "@metamask/docusaurus-openrpc/dist/content-docs-enhanced-open-rpc",
       ({
         id: "default",
         path: "wallet",
@@ -75,7 +75,7 @@ const config = {
       }),
     ],
     [
-      "./content-docs-enhanced-open-rpc/index.js",
+      "@metamask/docusaurus-openrpc/dist/content-docs-enhanced-open-rpc",
       ({
         id: "snaps",
         path: "snaps",
