@@ -235,7 +235,7 @@ personalSignButton.addEventListener('click', async function (event) {
     const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
     const sign = await ethereum.request({
       method: 'personal_sign',
-      params: [msg, from, 'Example password'],
+      params: [msg, from],
     });
     personalSignResult.innerHTML = sign;
     personalSignVerify.disabled = false;
