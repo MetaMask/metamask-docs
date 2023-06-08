@@ -26,15 +26,12 @@ const config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-  themes: [],
 
   trailingSlash: true,
 
   scripts: [
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
   ],
-
-  clientModules: [],
 
   presets: [
     [
@@ -46,7 +43,7 @@ const config = {
           routeBasePath: "wallet",
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
-          openrpcDocument: "../api-specs/dist/build/openrpc.json",
+          openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
           openrpcPath: "reference",
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
