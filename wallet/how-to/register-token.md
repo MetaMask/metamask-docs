@@ -8,10 +8,13 @@ sidebar_position: 6
 When a user opens MetaMask, they're shown a variety of assets, including tokens.
 By default, MetaMask detects some major popular tokens and displays them, but for most tokens, the
 user must register the token themselves.
-This process can be cumbersome, involves the user interacting with contract addresses, and is error-prone.
+This process involves the user interacting with contract addresses, and is error-prone.
 
-You can improve the security and experience of users registering your token on their MetaMask
-interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
+You can improve the security and experience of users registering your [ERC-20 token](#register-an-erc-20-token)
+or their [NFTs](#register-nfts) on their MetaMask interface by using the
+[`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
+
+## Register an ERC-20 token
 
 For example, you can add something like the following to your project script:
 
@@ -22,11 +25,11 @@ const tokenDecimals = 18;
 const tokenImage = 'http://placekitten.com/200/300';
 
 try {
-  // wasAdded is a boolean. Like any RPC method, an error can be thrown.
+  // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
   const wasAdded = await ethereum.request({
     method: 'wallet_watchAsset',
     params: {
-      type: 'ERC20', // Initially only supports ERC-20 tokens, but eventually more!
+      type: 'ERC20',
       options: {
         address: tokenAddress, // The address of the token.
         symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 characters.
@@ -51,3 +54,29 @@ them using a simple web link:
 
 - [WatchToken](https://vittominacori.github.io/watch-token/create/)
 - [Add Token dapp](https://metamask.github.io/Add-Token/#edit)
+
+## Register NFTs
+
+```javascript
+try {
+  // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC721`, // or 'ERC1155'
+      options: {
+        address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', // The address of the token.
+        tokenId: '1', // ERC-721 or ERC-1155 token ID.
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('User successfully added the token!');
+  } else {
+    console.log('User did not add the token.');
+  }
+} catch (error) {
+  console.log(error);
+}
+```
