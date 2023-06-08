@@ -50,6 +50,7 @@ const config = {
               autoDeploy: process.env.NODE_ENV === "production",
             }],
           ],
+          editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -70,6 +71,7 @@ const config = {
         remarkPlugins: [
           require("remark-docusaurus-tabs"),
         ],
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
       }),
     ],
     [
