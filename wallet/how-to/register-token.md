@@ -6,17 +6,33 @@ sidebar_position: 6
 # Register a token with users
 
 When a user opens MetaMask, they're shown a variety of assets, including tokens.
-By default, MetaMask detects some major popular tokens and displays them, but for most tokens, the
-user must register the token themselves.
+By default, MetaMask detects some major ERC-20 tokens and displays them, but for most custom ERC-20
+tokens, the user must [register the token
+manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
 This process involves the user interacting with contract addresses, and is error-prone.
+
+MetaMask also supports displaying a user's NFTs in their wallet, but MetaMask doesn't detect and
+display the NFTs by default.
+The user must [explicitly turn on NFT autodetection or add their NFTs
+manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
+Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
 
 You can improve the security and experience of users registering your [ERC-20 token](#register-an-erc-20-token)
 or their [NFTs](#register-nfts) on their MetaMask interface by using the
 [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
+`wallet_watchAsset` provides a friendly interface that prompts users to add tokens to their wallet,
+without having to interact with contract addresses.
+
+:::tip Adding NFTs
+With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
+autodetection disabled.
+You can also display NFTs from networks other than Ethereum Mainnet.
+:::
 
 ## Register an ERC-20 token
 
-For example, you can add something like the following to your project script:
+To prompt users to register an ERC-20 token, you can add something like the following to your
+project script:
 
 ```javascript
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
@@ -56,6 +72,9 @@ them using a simple web link:
 - [Add Token dapp](https://metamask.github.io/Add-Token/#edit)
 
 ## Register NFTs
+
+To prompt users to add an NFT, you can add something like the following to your project script.
+`wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
 ```javascript
 try {
