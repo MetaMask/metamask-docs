@@ -13,8 +13,6 @@ You can use the following RPC methods to request cryptographic signatures from u
 - [`personal_sign`](#use-personal_sign) - Use this method for the easiest way to request human-readable
   signatures that don't need to be efficiently processed on-chain.
 
-Read more about [the history of the signing methods](../concepts/signing-methods.md).
-
 :::caution
 [`eth_sign`](../concepts/signing-methods.md#eth_sign) is deprecated.
 :::
