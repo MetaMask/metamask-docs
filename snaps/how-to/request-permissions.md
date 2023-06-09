@@ -30,11 +30,11 @@ Endowments are a type of permission.
 See the [Snaps permissions reference](../reference/permissions.md) for the full list of endowments
 you can specify in the manifest file.
 
-For example, to request the [`endowment:long-running`](../reference/permissions.md#endowmentlong-running)
+For example, to request the [`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access)
 permission, add the following to the manifest file:
 
 ```json
 "initialPermissions": {
-  "endowment:long-running": {}
+  "endowment:network-access": {}
 },
 ```

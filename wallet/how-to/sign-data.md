@@ -13,8 +13,6 @@ You can use the following RPC methods to request cryptographic signatures from u
 - [`personal_sign`](#use-personal_sign) - Use this method for the easiest way to request human-readable
   signatures that don't need to be efficiently processed on-chain.
 
-Read more about [the history of the signing methods](../concepts/signing-methods.md).
-
 :::caution
 [`eth_sign`](../concepts/signing-methods.md#eth_sign) is deprecated.
 :::
@@ -192,7 +190,7 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 [`personal_sign`](https://metamask.github.io/api-playground/api-documentation/#personal_sign) is the
 easiest way to request human-readable signatures that don't need to be efficiently processed on-chain.
 It's often used for signature challenges that are authenticated on a web server, such as
-[Sign-In with Ethereum](https://login.xyz/).
+[Sign-In with Ethereum](use-siwe.md).
 
 <p align="center">
 
@@ -235,7 +233,7 @@ personalSignButton.addEventListener('click', async function (event) {
     const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
     const sign = await ethereum.request({
       method: 'personal_sign',
-      params: [msg, from, 'Example password'],
+      params: [msg, from],
     });
     personalSignResult.innerHTML = sign;
     personalSignVerify.disabled = false;

@@ -100,3 +100,13 @@ h4 {
 img {
   border-radius: 0.4rem;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+  text-align: center;
+}
