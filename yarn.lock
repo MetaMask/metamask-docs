@@ -10976,6 +10976,7 @@ __metadata:
     "@docusaurus/eslint-plugin": ^2.4.1
     "@docusaurus/module-type-aliases": 2.4.1
     "@docusaurus/plugin-client-redirects": 2.4.1
+    "@docusaurus/plugin-content-docs": ^2.4.1
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1

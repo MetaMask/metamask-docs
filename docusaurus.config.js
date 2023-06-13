@@ -62,13 +62,11 @@ const config = {
   ],
   plugins: [
     [
-      "@metamask/docusaurus-openrpc/dist/content-docs-enhanced-open-rpc",
+      "@docusaurus/plugin-content-docs",
       ({
         id: "snaps",
         path: "snaps",
         routeBasePath: "snaps",
-        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
-        openrpcPath: "reference",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
