@@ -55,7 +55,7 @@ const config = {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
             sidebarLabel: "API Playground",
-          }
+          },
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
