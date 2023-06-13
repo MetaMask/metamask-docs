@@ -2620,9 +2620,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/docusaurus-openrpc@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@metamask/docusaurus-openrpc@npm:0.1.1"
+"@metamask/docusaurus-openrpc@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@metamask/docusaurus-openrpc@npm:0.2.0"
   dependencies:
     "@docusaurus/core": ^2.4.1
     "@docusaurus/plugin-content-blog": ^2.4.1
@@ -2638,7 +2638,7 @@ __metadata:
     "@docusaurus/theme-search-algolia": ^2.4.1
     "@docusaurus/types": ^2.4.1
     "@docusaurus/utils": ^2.4.1
-    "@metamask/open-rpc-docs-react": ^0.0.3
+    "@metamask/open-rpc-docs-react": ^0.1.0
     "@open-rpc/schema-utils-js": ^1.16.1
     node-polyfill-webpack-plugin: ^2.0.1
     process: ^0.11.10
@@ -2646,13 +2646,13 @@ __metadata:
     "@docusaurus/core": 2.x
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 8cf15dfcab3957ef806cbef8d20b0225e05ac4d00f1d6ff0b8dde684439d72b6a79e7de65126e7692fc6bc7713a523c57dcd1a05378c8bd5334a272b81c23b1b
+  checksum: e97077d60a93dcc5518896acdd7d30699884514b3be23811c022a3cf902f2277977235121d3867692cce94eee39063b503ccbd8780d676f9408b3fff07138e95
   languageName: node
   linkType: hard
 
-"@metamask/open-rpc-docs-react@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@metamask/open-rpc-docs-react@npm:0.0.3"
+"@metamask/open-rpc-docs-react@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@metamask/open-rpc-docs-react@npm:0.1.0"
   dependencies:
     "@json-schema-tools/traverse": ^1.10.1
     "@open-rpc/examples": ^1.6.1
@@ -2671,7 +2671,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 0623029a2f3456458cdf341a12f1dbdb69bd29d1e5c3bf45e2b0564700b33c5b05754f7883e0279ed2a3f2226935b51f6acfa30b0eae8e10701e182763eaba3a
+  checksum: 3ffc39610d7a440b604e19fa919f9aea9584a1b612cc8b5c9d9f5cbfd3cf36670f88a14725ed210630a722e4f5be6534701a0c7a6bfbf5d487b066fc73e23023
   languageName: node
   linkType: hard
 
@@ -10980,7 +10980,7 @@ __metadata:
     "@lavamoat/allow-scripts": ^2.3.0
     "@mdx-js/react": ^1.6.22
     "@metamask/design-tokens": ^1.11.1
-    "@metamask/docusaurus-openrpc": ^0.1.1
+    "@metamask/docusaurus-openrpc": ^0.2.0
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0

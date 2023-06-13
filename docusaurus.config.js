@@ -43,8 +43,6 @@ const config = {
           routeBasePath: "wallet",
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
-          openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
-          openrpcPath: "reference",
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
             require("remark-docusaurus-tabs"),
@@ -53,6 +51,11 @@ const config = {
               autoDeploy: process.env.NODE_ENV === "production",
             }],
           ],
+          openrpc: {
+            openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+            path: "reference",
+            sidebarLabel: "API Playground",
+          }
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
