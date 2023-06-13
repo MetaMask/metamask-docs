@@ -18,9 +18,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@docusaurus/core": "2.4.0",
-    "@docusaurus/plugin-content-docs": "^2.4.1",
-    "@docusaurus/preset-classic": "2.4.0",
+    "@docusaurus/core": "2.4.1",
     "@mdx-js/react": "^1.6.22",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.1.1",
@@ -33,9 +31,9 @@
     "remark-docusaurus-tabs": "^0.2.0"
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "^2.4.0",
-    "@docusaurus/module-type-aliases": "2.4.0",
-    "@docusaurus/plugin-client-redirects": "2.4.0",
+    "@docusaurus/eslint-plugin": "^2.4.1",
+    "@docusaurus/module-type-aliases": "2.4.1",
+    "@docusaurus/plugin-client-redirects": "2.4.1",
     "@lavamoat/allow-scripts": "^2.3.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
