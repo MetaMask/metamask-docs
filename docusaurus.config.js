@@ -61,23 +61,6 @@ const config = {
     ],
   ],
   plugins: [
-    // [
-    //   "@metamask/docusaurus-openrpc/dist/content-docs-enhanced-open-rpc",
-    //   ({
-    //     id: "default",
-    //     path: "wallet",
-    //     routeBasePath: "wallet",
-    //     sidebarPath: require.resolve("./wallet-sidebar.js"),
-    //     breadcrumbs: false,
-    //     remarkPlugins: [
-    //       require("remark-docusaurus-tabs"),
-    //       [remarkCodesandbox, {
-    //         mode: "iframe",
-    //         autoDeploy: process.env.NODE_ENV === "production",
-    //       }],
-    //     ],
-    //   }),
-    // ],
     [
       "@metamask/docusaurus-openrpc/dist/content-docs-enhanced-open-rpc",
       ({
@@ -94,16 +77,6 @@ const config = {
         ],
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
       }),
-    ],
-    [
-      "@metamask/docusaurus-openrpc",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
-      {
-        path: "/api-playground",
-        openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
-        // uncomment line below to build reference docs from local api-specs
-        // openrpcDocument: "../../ethereum/execution-apis/openrpc.json"
-      },
     ],
     [
       "@docusaurus/plugin-client-redirects",
