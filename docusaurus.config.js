@@ -75,7 +75,6 @@ const config = {
         remarkPlugins: [
           require("remark-docusaurus-tabs"),
         ],
-        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
       }),
     ],
     [
