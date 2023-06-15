@@ -10,7 +10,7 @@ Learn how to [use the recommended signing methods](../how-to/sign-data.md).
 
 ## eth_signTypedData_v4
 
-[`eth_signTypedData_v4`](/wallet/reference/eth_signTypedDatav4)
+[`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4)
 is:
 
 - Cheap to verify on chain.
