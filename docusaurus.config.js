@@ -52,7 +52,7 @@ const config = {
             }],
           ],
           openrpc: {
-            openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+            openrpcDocument: "../api-specs/dist/build/openrpc.json",
             path: "reference",
             sidebarLabel: "API Playground",
           },
