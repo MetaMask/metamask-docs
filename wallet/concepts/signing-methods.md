@@ -10,7 +10,7 @@ Learn how to [use the recommended signing methods](../how-to/sign-data.md).
 
 ## eth_signTypedData_v4
 
-[`eth_signTypedData_v4`](https://metamask.github.io/api-playground/api-documentation/#eth_signTypedDatav4)
+[`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4)
 is:
 
 - Cheap to verify on chain.
@@ -22,10 +22,10 @@ If onchain verifiability cost is a high priority,
 
 ## personal_sign
 
-[`personal_sign`](https://metamask.github.io/api-playground/api-documentation/#personal_sign): 
+[`personal_sign`](/wallet/reference/personal_sign):
 
 - Displays human-readable text when UTF-8 encoded, making it a popular choice for site logins
-  (for example, [Sign-In with Ethereum](../how-to/use-siwe.md)). 
+  (for example, [Sign-In with Ethereum](../how-to/use-siwe.md)).
 - Is protected against phishing signatures.
 
 The text prefix of `personal_sign` makes signatures expensive to verify on-chain.
@@ -50,7 +50,7 @@ use, or due to an inability to change the associated dapp.
 If a wallet user must interact with a dapp that uses `eth_sign` and accepts the risks,
 the wallet user can re-enable `eth_sign` through advanced settings.
 
-### eth_signTypedData_v1 and eth_signTypedData_v3 
+### eth_signTypedData_v1 and eth_signTypedData_v3
 
 `eth_signTypedData` was introduced by [EIP-712](https://eips.ethereum.org/EIPS/eip-712).
 The EIP-712 specification changed several times resulting in multiple versions
@@ -65,7 +65,7 @@ The earlier versions are:
   Read the
   [introductory blog post to this method](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 
-The missing `v2` represents an intermediary design that the Cipher browser implemented. 
+The missing `v2` represents an intermediary design that the Cipher browser implemented.
 
 All early versions of this method lack later security improvements.
 Use the latest version, [`eth_signTypedData_v4`](#eth_signtypeddata_v4).

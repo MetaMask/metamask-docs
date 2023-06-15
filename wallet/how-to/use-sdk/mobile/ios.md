@@ -80,7 +80,7 @@ provider API method to call various [RPC API](../../../reference/rpc-api.md) met
 #### Example: Get chain ID
 
 The following example gets the user's chain ID by calling
-[`eth_chainId`](https://metamask.github.io/api-playground/api-documentation/#eth_chainId).
+[`eth_chainId`](/wallet/reference/eth_chainId).
 
 ```swift
 @State var chainId: String?
@@ -102,7 +102,7 @@ ethereum.request(chainIdRequest)?.sink(receiveCompletion: { completion in
 #### Example: Get account balance
 
 The following example gets the user's account balance by calling
-[`eth_getBalance`](https://metamask.github.io/api-playground/api-documentation/#eth_getBalance).
+[`eth_getBalance`](/wallet/reference/eth_getBalance).
 
 ```swift
 @State var balance: String?
@@ -134,7 +134,7 @@ ethereum.request(getBalanceRequest)?.sink(receiveCompletion: { completion in
 #### Example: Send transaction
 
 The following examples send a transaction by calling
-[`eth_sendTransaction`](https://metamask.github.io/api-playground/api-documentation/#eth_sendTransaction).
+[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
 
 <!--tabs-->
 

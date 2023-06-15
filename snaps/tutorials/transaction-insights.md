@@ -47,7 +47,7 @@ Instead, it provides transaction insights directly in the MetaMask transaction w
 
 In particular, the snap shows the user the percentage of gas fees they would pay for their transaction.
 It gets the current gas price by calling the
-[`eth_gasPrice`](https://metamask.github.io/api-playground/api-documentation/#eth_gasPrice) RPC
+[`eth_gasPrice`](/wallet/reference/eth_gasPrice) RPC
 method using the global Ethereum provider made available to snaps.
 
 To enable your snap to provide transaction insights and use the global Ethereum provider, open
@@ -80,7 +80,7 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   const currentGasPrice = await window.ethereum.request({
     method: 'eth_gasPrice',
   });
-  
+
   // Get fields from the transaction object.
   const transactionGas = parseInt(transaction.gas as string, 16);
   const currentGasPriceInWei = parseInt(currentGasPrice ?? '', 16);
@@ -126,7 +126,7 @@ To build and test your snap:
 
     ```bash
     You can now view site in the browser.
-    
+
       http://localhost:8000/
     ```
 

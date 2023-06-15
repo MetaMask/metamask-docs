@@ -110,3 +110,8 @@ img {
   padding: 10px;
   text-align: center;
 }
+
+/* Reset SVG to be inline by default */
+svg {
+  display: inline;
+}
