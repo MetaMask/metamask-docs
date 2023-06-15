@@ -6,7 +6,7 @@ sidebar_position: 4
 # Send transactions
 
 You can send a transaction in MetaMask using the
-[`eth_sendTransaction`](https://metamask.github.io/api-playground/api-documentation/#eth_sendTransaction)
+[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
 RPC method.
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
