@@ -22,7 +22,7 @@
     "@docusaurus/plugin-content-docs": "^2.4.1",
     "@mdx-js/react": "^1.6.22",
     "@metamask/design-tokens": "^1.11.1",
-    "@metamask/docusaurus-openrpc": "^0.2.1",
+    "@metamask/docusaurus-openrpc": "^0.2.2",
     "clsx": "^1.2.1",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prism-react-renderer": "^1.3.5",
