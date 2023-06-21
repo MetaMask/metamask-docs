@@ -74,7 +74,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript
-import MetaMaskSDK from '@metamask/sdk';
+import { MetaMaskSDK } from '@metamask/sdk';
 ```
 
 ### 3. Instantiate the SDK
