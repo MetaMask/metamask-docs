@@ -50,6 +50,14 @@ Install the node module dependencies:
 cd mm-dapp-react && npm install
 ```
 
+Launch the development server by running the following command. 
+
+```bash
+npm run dev
+```
+
+This will display a `localhost` url address on your Terminal where you ran the above command. Copy this url address into your browser and open it. 
+
 :::note
 You can use the `npx vite` or `npm run dev` command to run your project at any time if the
 development server has been stopped.
@@ -106,7 +114,7 @@ connect to MetaMask.
 
 ### 2. Detect MetaMask
 
-Next, detect the injected provider that browser extension wallets use.
+Next, detect the injected provider that browser extension wallets use. The MetaMask browser extension injects a JavaScript Ethereum provider into the browser at `window.ethereum`. You will use this injected provider in your dapp to request user information from the Metamask extension wallet.
 
 Add code to conditionally render a **Connect MetaMask** button in your component by updating
 `src/App.tsx` to the following:
@@ -166,7 +174,7 @@ We recommend [using `@metamask/detect-provider`](../get-started/detect-metamask.
 instead of manually detecting the provider yourself.
 :::
 
-In your project directory, install the module using the following command:
+In your project directory (the `mm-dapp-react` directory), install the module using the following command:
 
 ```bash
 npm install @metamask/detect-provider
@@ -400,7 +408,7 @@ The side effect occurs on the first render only since you have nothing in your d
 You also need to clean up those listeners upon unmount of your component.
 
 You can now test your dapp and see that when you refresh the page, you retain the display of the
-user's address.
+user's address. You can also disable the Metamask browser extension, enable it again and reconnect to it. You will see that the React dapp has retained the user address.
 
 You've synced with a source outside your dapp and managed the state in a single component.
 
@@ -409,7 +417,7 @@ In learning how to connect to MetaMask from a React application, you've learned 
 essential state of your wallet, precisely, which account is selected and active in the MetaMask wallet.
 
 Your dapp syncs this state locally using React's `useState` and the React `useEffect` hooks.
-The dapp ensures that if a user manually disconnects, changes the account, or refreshes the page,
+The dapp ensures that if a user manually disconnects or changes the account, or refreshes the page,
 the component is aware of any state change.
 :::
 
@@ -539,14 +547,13 @@ export default App
 The changes here are minimal because you only need to update or duplicate existing functionality and
 add a few utility functions.
 
-Your dapp now displays `account`, `balance`, and `chainId`, represented as hex values and numbers.
+Your dapp now displays `account`, `balance`, and `chainId`. The `chainId` is represented in both hex and decimal formats. The values on your display will reflect your Metamask wallet contents and may not be the same as you see below.
 
 ![MetaMask address, balance, and chain](../assets/tutorials/react-dapp/pt1-07.png)
 
-Your dapp detects any changes to `balance` or `chain`, and the utility functions format hex strings
-to be human-readable for display.
+Your dapp detects any changes to `balance` or `chainId`. For the `chainId` the utility functions convert the hex strings into a human-readable decimal value for display.
 
-For chain IDs, you use the hex version in RPC calls and the numeric version for display.
+For chain IDs, you use the hex version in RPC calls and the decimal version for display.
 To get the human-readable number of the chain, you use `parseInt`.
 
 :::caution important
