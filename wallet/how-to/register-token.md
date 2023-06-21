@@ -26,7 +26,7 @@ without having to interact with contract addresses.
 :::tip Adding NFTs
 With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
 autodetection disabled.
-You can also display NFTs from networks other than Ethereum Mainnet.
+You can also add NFTs from networks other than Ethereum Mainnet.
 :::
 
 ## Register an ERC-20 token
@@ -42,7 +42,7 @@ const tokenImage = 'http://placekitten.com/200/300';
 
 try {
   // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-  const wasAdded = await ethereum.request({
+  const wasAdded = await window.ethereum.request({
     method: 'wallet_watchAsset',
     params: {
       type: 'ERC20',
@@ -98,4 +98,29 @@ try {
 } catch (error) {
   console.log(error);
 }
+```
+
+You can prompt users to add multiple NFTs using `window.ethereum.sendAsync()` instead of
+`window.ethereum.request()`:
+
+```javascript
+window.ethereum.sendAsync([{
+ method: 'wallet_watchAsset',
+  params: {
+    type: 'ERC721',
+    options: {
+      address: contractAddress,
+      tokenId: 1,
+    },
+  }, {
+  method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC721',
+      options: {
+        address: contractAddress,
+        tokenId: 2,
+      },
+    },
+  ...
+])
 ```
