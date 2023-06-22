@@ -50,13 +50,13 @@ Install the node module dependencies:
 cd mm-dapp-react && npm install
 ```
 
-Launch the development server by running the following command. 
+Launch the development server: 
 
 ```bash
 npm run dev
 ```
 
-This will display a `localhost` url address on your Terminal where you ran the above command. Copy this url address into your browser and open it. 
+This displays a `localhost` URL on your terminal. Copy this URL into your browser and open it. 
 
 :::note
 You can use the `npx vite` or `npm run dev` command to run your project at any time if the
