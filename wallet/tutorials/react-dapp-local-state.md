@@ -547,7 +547,7 @@ export default App
 The changes here are minimal because you only need to update or duplicate existing functionality and
 add a few utility functions.
 
-Your dapp now displays `account`, `balance`, and `chainId`. The `chainId` is represented in both hex and decimal formats. The values on your display will reflect your Metamask wallet contents and may not be the same as you see below.
+Your dapp now displays `account`, `balance`, and `chainId`. The `chainId` is represented in both hex and decimal formats. The values on your display reflect your MetaMask wallet contents and may not be the same as in the following example.
 
 ![MetaMask address, balance, and chain](../assets/tutorials/react-dapp/pt1-07.png)
 
