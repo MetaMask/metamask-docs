@@ -408,7 +408,7 @@ The side effect occurs on the first render only since you have nothing in your d
 You also need to clean up those listeners upon unmount of your component.
 
 You can now test your dapp and see that when you refresh the page, you retain the display of the
-user's address. You can also disable the Metamask browser extension, enable it again and reconnect to it. You will see that the React dapp has retained the user address.
+user's address. You can also disable the Metamask browser extension, enable it again, and reconnect to it. You will see that the React dapp has retained the user address.
 
 You've synced with a source outside your dapp and managed the state in a single component.
 
