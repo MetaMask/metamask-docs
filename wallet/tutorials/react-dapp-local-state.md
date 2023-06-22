@@ -114,7 +114,7 @@ connect to MetaMask.
 
 ### 2. Detect MetaMask
 
-Next, detect the injected provider that browser extension wallets use. The MetaMask browser extension injects a JavaScript Ethereum provider into the browser at `window.ethereum`. You will use this injected provider in your dapp to request user information from the Metamask extension wallet.
+Next, detect the injected provider that browser extension wallets use. MetaMask injects a JavaScript Ethereum provider into the browser at `window.ethereum`. You will use this provider in your dapp to request user information from Metamask.
 
 Add code to conditionally render a **Connect MetaMask** button in your component by updating
 `src/App.tsx` to the following:
