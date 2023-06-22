@@ -551,7 +551,7 @@ Your dapp now displays `account`, `balance`, and `chainId`. The `chainId` is rep
 
 ![MetaMask address, balance, and chain](../assets/tutorials/react-dapp/pt1-07.png)
 
-Your dapp detects any changes to `balance` or `chainId`. For the `chainId` the utility functions convert the hex strings into a human-readable decimal value for display.
+Your dapp detects any changes to `balance` or `chainId`. For the `chainId`, the utility functions convert the hex strings into a human-readable decimal value for display.
 
 For chain IDs, you use the hex version in RPC calls and the decimal version for display.
 To get the human-readable number of the chain, you use `parseInt`.
