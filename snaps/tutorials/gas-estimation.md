@@ -37,7 +37,7 @@ Next, `cd` into the `gas-estimation-map` project directory and run:
 yarn install
 ```
 
-This will initialize your development environment with the required dependencies.
+This initializes your development environment with the required dependencies.
 
 ### 2. Set a custom icon
 
