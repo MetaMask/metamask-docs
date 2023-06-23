@@ -160,7 +160,7 @@ To build and test your snap:
 
 5. Select **Approve & install**.
 
-6. After install, the **Send message** button on the page will be enabled. Click on this **Send message** button. A dialog prompt displays with the response from the gas fee API:
+6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 
