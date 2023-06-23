@@ -136,7 +136,7 @@ To build and test your snap:
     `0.1.0`, increase it to `0.2.0`).
 
 2. From the command line, run `yarn start`.
-    On the Terminal, at the bottom of the message log, you will see the browser url address:
+    In the terminal, at the bottom of the message log, you see the browser URL:
 
     ```bash
     You can now view site in the browser.
