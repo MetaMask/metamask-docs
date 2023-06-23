@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Install Snaps
 
-To install Snaps, you must install the [MetaMask Flask browser extension](#install-metamask-flask).
+To install Snaps, you must [install the MetaMask Flask browser extension](#install-the-metamask-flask-browser-extension).
 
 ## Prerequisites
 
