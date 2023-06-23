@@ -13,7 +13,7 @@ To install Snaps, you must install the [MetaMask Flask browser extension](#insta
 - [Node.js](https://nodejs.org/) version 16 or later
 - [Yarn](https://yarnpkg.com/) version 3
 
-## Install MetaMask Flask Browser Extension
+## Install the MetaMask Flask browser extension
 
 The [MetaMask Flask](https://metamask.io/flask/) is an experimental playground that provides the developers 
 access to upcoming MetaMask features. It is available as a browser extension.
