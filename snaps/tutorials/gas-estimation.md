@@ -56,7 +56,7 @@ Edit the `npm` object (within the `location` object) and change the value for th
 }
 ```
 
-Next, download [this free `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) into the `/packages/snap/images` folder.
+Next, download [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) into the `/packages/snap/images` folder.
 This is a free icon, **Gas** by Mello from
 [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
 
