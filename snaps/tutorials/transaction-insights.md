@@ -45,7 +45,7 @@ Next, `cd` into the `transaction-insights-snap` project directory and run:
 yarn install
 ```
 
-This will initialize your development environment with the required dependencies.
+This initializes your development environment with the required dependencies.
 
 ### 2. Enable transaction insights and the Ethereum provider
 
