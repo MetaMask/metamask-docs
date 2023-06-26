@@ -5,41 +5,43 @@ sidebar_position: 2
 
 # Snaps quickstart
 
-Get started with Snaps using the
-[Create Snap CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap).
+Get started with Snaps using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap).
 With the CLI, you can initialize a snap monorepo project built with TypeScript and React.
 
 ## Prerequisites
 
 - [Snaps installed](install-snaps.md)
 
-  :::note
+  :::tip
   Snaps works with the latest LTS version of Node.js, but we recommend using the version specified in
   the template's [`.nvmrc`](https://github.com/MetaMask/template-snap-monorepo/blob/main/.nvmrc) file.
   :::
 
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-
 - [Yarn](https://yarnpkg.com/) version 3
 
 ## Create the project
 
-Create a new snap project using the Create Snap CLI by running the following command:
+Create a new snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
 
 ```bash
 yarn create @metamask/snap your-snap-name
-# or...
+```
+
+or
+
+```bash
 npm create @metamask/snap your-snap-name
 ```
 
-You can learn about the [anatomy of your snap project files](../concepts/anatomy.md).
+See the section [Snaps anatomy](../concepts/anatomy.md) to learn about the anatomy of your snap project files.
 
 ## Start the snap
 
 From the root of the newly created project, install the project dependencies using Yarn:
 
 ```shell
-yarn
+yarn install
 ```
 
 Start the development server:
@@ -48,7 +50,7 @@ Start the development server:
 yarn start
 ```
 
-You're now serving the snap and its front-end at [`http://localhost:8000`](http://localhost:8000/).
+You are now serving the snap and its front-end at [`http://localhost:8000`](http://localhost:8000/).
 
 ## Connect to the snap
 
