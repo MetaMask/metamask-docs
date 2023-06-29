@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Use MetaMask SDK with Unity
 
-You can import [MetaMask SDK](../../../concepts/sdk.md) into your
+You can import [MetaMask SDK](../../../../concepts/sdk.md) into your
 [Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786) game
 to enable users to easily connect to their MetaMask Mobile wallet.
 The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
@@ -73,7 +73,7 @@ You first must initialize by doing one of the following:
 - Check **Initialize On Start** on the component within the editor.
 
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
-You can now make calls to the user's wallet using [provider API methods](../../../reference/provider-api.md).
+You can now make calls to the user's wallet using [provider API methods](../../../../reference/provider-api.md).
 
 ### 4. Connect to MetaMask
 
@@ -226,7 +226,7 @@ This method disconnects the user that is connected from the MetaMask app session
 #### `Request`
 
 This method sends a request to MetaMask.
-You can use it to call any [provider API method](../../../reference/provider-api.md).
+You can use it to call any [provider API method](../../../../reference/provider-api.md).
 
 ## Package structure
 

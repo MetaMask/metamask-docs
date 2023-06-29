@@ -4,7 +4,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 const CardList: CardItem[] = [
   {
     title: "💻📱 MetaMask SDK",
-    link: "/wallet/how-to/set-up-sdk",
+    link: "/wallet/how-to/connect/set-up-sdk",
     description: (<>
       Enable your users to easily connect to a MetaMask wallet client from multiple dapp platforms using MetaMask SDK.
     </>),

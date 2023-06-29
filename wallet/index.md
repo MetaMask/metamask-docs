@@ -12,7 +12,7 @@ You can enable users to connect to their MetaMask wallets from the following dap
 - Games built on platforms such as Unity
 
 :::tip Integrate using MetaMask SDK
-[Set up MetaMask SDK](how-to/set-up-sdk/index.md) to start integrating your dapp with MetaMask.
+[Set up MetaMask SDK](how-to/connect/set-up-sdk/index.md) to start integrating your dapp with MetaMask.
 [MetaMask SDK](concepts/sdk.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 
@@ -33,7 +33,6 @@ If you're new to dapp development or want to refresh your knowledge, we recommen
 following guides:
 
 - [Get started building a dapp](how-to/get-started-building)
-- [Set up MetaMask SDK](how-to/set-up-sdk)
 - [Connect to MetaMask](how-to/connect)
 
 For an end-to-end example, you can also follow the
@@ -42,7 +41,7 @@ For an end-to-end example, you can also follow the
 ## Want to use advanced features?
 
 If you're a developer looking to optimize your dapp for MetaMask, you can
-[set up MetaMask SDK](how-to/set-up-sdk) in an existing dapp and implement MetaMask-specific
+[connect to MetaMask](how-to/connect) from an existing dapp and implement MetaMask-specific
 functions, including:
 
 - [Sign data](how-to/sign-data)

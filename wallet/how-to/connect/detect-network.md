@@ -1,6 +1,6 @@
 ---
 description: Detect a user's network and network changes.
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Detect a user's network

@@ -51,7 +51,7 @@ See [Webpack's Getting Started guide](https://webpack.js.org/guides/getting-star
 :::
 
 :::tip
-We also recommend [setting up MetaMask SDK](../set-up-sdk/index.md) to enable a reliable, secure,
+We also recommend [setting up MetaMask SDK](../connect/set-up-sdk/index.md) to enable a reliable, secure,
 and seamless connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 :::
 

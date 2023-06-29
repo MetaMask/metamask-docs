@@ -7,7 +7,7 @@ sidebar_position: 10
 # Integrate your dapp with MetaMask Mobile
 
 :::caution Use MetaMask SDK
-We recommend [using MetaMask SDK](set-up-sdk/index.md) to easily enable a reliable, secure,
+We recommend [using MetaMask SDK](connect/set-up-sdk/index.md) to easily enable a reliable, secure,
 and seamless connection from your dapp to both the MetaMask extension and MetaMask Mobile.
 :::
 

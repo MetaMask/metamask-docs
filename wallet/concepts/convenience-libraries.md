@@ -24,5 +24,5 @@ It onboards users smoothly from multiple dapp platforms using the MetaMask brows
 MetaMask Mobile, and your dapp can call any [provider API method](../reference/provider-api.md)
 with the SDK installed.
 
-Get started by [setting up the SDK](../how-to/set-up-sdk/index.md).
+Get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
 :::

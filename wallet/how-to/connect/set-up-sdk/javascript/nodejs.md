@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Use MetaMask SDK with Node.js
 
-You can import [MetaMask SDK](../../../concepts/sdk.md) into your Node.js dapp to enable your users
+You can import [MetaMask SDK](../../../../concepts/sdk.md) into your Node.js dapp to enable your users
 to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for Node.js has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
@@ -35,7 +35,7 @@ import { MetaMaskSDK } from '@metamask/sdk';
 
 ### 3. Instantiate the SDK
 
-Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
+Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md):
 
 ```javascript
 const MMSDK = new MetaMaskSDK(options);
@@ -45,9 +45,9 @@ const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 
 ### 4. Use the SDK
 
-Use the SDK by calling any [provider API methods](../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](../../../reference/rpc-api.md#eth_requestaccounts) using
-[`ethereum.request()`](../../../reference/provider-api.md#ethereumrequestargs) first, since it
+Use the SDK by calling any [provider API methods](../../../../reference/provider-api.md).
+Always call [`eth_requestAccounts`](../../../../reference/rpc-api.md#eth_requestaccounts) using
+[`ethereum.request()`](../../../../reference/provider-api.md#ethereumrequestargs) first, since it
 prompts the installation or connection popup to appear.
 
 ```javascript

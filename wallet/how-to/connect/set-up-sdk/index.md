@@ -1,10 +1,10 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Set up MetaMask SDK
 
-[MetaMask SDK](../../concepts/sdk.md) is a library that provides a reliable, secure, and seamless
+[MetaMask SDK](../../../concepts/sdk.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 It supports the following dapp platforms:
 
@@ -50,6 +50,6 @@ It supports the following dapp platforms:
 </div>
 
 :::note
-MetaMask SDK uses the [Ethereum provider](../../reference/provider-api.md) that developers are
+MetaMask SDK uses the [Ethereum provider](../../../reference/provider-api.md) that developers are
 already used to, so existing dapps work out of the box with the SDK.
 :::

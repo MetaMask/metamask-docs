@@ -7,7 +7,7 @@ sidebar_position: 11
 # Use the MetaMask onboarding library
 
 :::caution Use MetaMask SDK
-We recommend [using MetaMask SDK](set-up-sdk/index.md), which incorporates the functionality of the
+We recommend [using MetaMask SDK](connect/set-up-sdk/index.md), which incorporates the functionality of the
 MetaMask onboarding library.
 You don't need to set up the onboarding library if you use the SDK.
 :::
