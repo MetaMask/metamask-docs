@@ -5,13 +5,13 @@ sidebar_position: 5
 
 # Interact with smart contracts
 
-To interact with a smart contract, your dapp needs the contract's:
+To interact with a smart contract, your dapp needs the following information:
 
-- [Network](#contract-network).
-- [Address](#contract-address).
-- [ABI](#contract-abi).
-- [Bytecode](#contract-bytecode).
-- [Source code](#contract-source-code).
+- [Contract network](#contract-network)
+- [Contract address](#contract-address)
+- [Contract ABI](#contract-abi)
+- [Contract bytecode](#contract-bytecode)
+- [Contract source code](#contract-source-code)
 
 ## Contract network
 
@@ -40,13 +40,13 @@ The ABI is an array of method-describing objects, and when you feed this and the
 contract-abstraction library, the ABI tells those libraries about what methods to provide, and
 how to compose transactions to call those methods.
 
-Example libraries include:
+Example libraries include the following:
 
-- [Ethers](https://www.npmjs.com/package/ethers).
-- [web3.js](https://www.npmjs.com/package/web3).
-- [Embark](https://framework.embarklabs.io/).
-- [ethjs](https://www.npmjs.com/package/ethjs).
-- [Truffle](https://www.trufflesuite.com/).
+- [Ethers](https://www.npmjs.com/package/ethers)
+- [web3.js](https://www.npmjs.com/package/web3)
+- [Embark](https://framework.embarklabs.io/)
+- [ethjs](https://www.npmjs.com/package/ethjs)
+- [Truffle](https://www.trufflesuite.com/)
 
 ## Contract bytecode
 
