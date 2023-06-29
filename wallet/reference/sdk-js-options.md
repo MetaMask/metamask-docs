@@ -1,11 +1,11 @@
 ---
 description: MetaMask JavaScript SDK options
-sidebar_position: 3
+sidebar_position: 1
 ---
 
-# MetaMask JavaScript SDK options
+# JavaScript SDK options
 
-The JavaScript version of [MetaMask SDK](../how-to/use-sdk/index.md) takes several options.
+The JavaScript version of [MetaMask SDK](../concepts/sdk.md) takes several options.
 For example, you can specify options as follows:
 
 ```javascript

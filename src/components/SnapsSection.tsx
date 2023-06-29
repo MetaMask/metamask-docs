@@ -12,7 +12,7 @@ const CardList: CardItem[] = [
   },
   {
     title: "⚙️⛽ Snaps tutorials",
-    link: "/snaps/category/tutorials",
+    link: "/snaps/tutorials",
     description: (<>
       Follow the step-by-step tutorials to create snaps that estimate gas fees and provide
       transaction insights with custom UI.

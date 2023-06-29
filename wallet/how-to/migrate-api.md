@@ -182,7 +182,7 @@ Please follow the relevant link below to install the Legacy Web3 extension in yo
 The `eth_chainId` RPC method now returns correctly formatted values, e.g. `0x1` and `0x2`, instead
 of _incorrectly_ formatted values, e.g. `0x01` and `0x02`.
 MetaMask's implementation of `eth_chainId` used to return 0-padded values for the
-[default Ethereum chains](../get-started/detect-network.md#chain-ids) _except_ Kovan.
+[default Ethereum chains](connect/detect-network.md#chain-ids) _except_ Kovan.
 If you expect 0-padded chain ID values from `eth_chainId`, make sure to update your code to expect
 the correct format instead.
 

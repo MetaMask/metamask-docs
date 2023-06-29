@@ -1,6 +1,6 @@
 ---
 description: MetaMask Ethereum JSON-RPC API reference
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # JSON-RPC API
@@ -62,7 +62,7 @@ For the full list of MetaMask JSON-RPC API methods, see the
 ### eth_requestAccounts
 
 Requests that the user provide an Ethereum address to be identified by.
-Use this method to [access a user's accounts](../get-started/access-accounts.md).
+Use this method to [access a user's accounts](../how-to/connect/access-accounts.md).
 
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 
@@ -272,7 +272,7 @@ This method is intended to be called after MetaMask has been installed, but befo
 onboarding has completed.
 
 Instead of calling this method directly, you should
-[use the MetaMask onboarding library](../how-to/use-onboarding-library.md).
+[use the MetaMask onboarding library](../how-to/onboard-users.md).
 
 #### Returns
 
