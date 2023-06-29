@@ -30,5 +30,5 @@ recommend using the SDK to enable users to easily connect to the MetaMask browse
 MetaMask Mobile.
 The SDK supports multiple dapp platforms including mobile and gaming dapps.
 
-Get started by [setting up the SDK](../how-to/set-up-sdk).
+Get started by [setting up the SDK](../how-to/set-up-sdk/index.md).
 :::

@@ -5,8 +5,8 @@ sidebar_position: 1
 
 # Use MetaMask SDK with iOS
 
-You can import [MetaMask SDK](../../../concepts) into your native iOS dapp to enable your users to
-easily connect with their MetaMask Mobile wallet.
+You can import [MetaMask SDK](../../../concepts/sdk.md) into your native iOS dapp to enable your
+users to easily connect with their MetaMask Mobile wallet.
 
 ## Prerequisites
 

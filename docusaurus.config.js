@@ -289,9 +289,9 @@ const config = {
           return acc;
         }, []),
         createRedirects(existingPath) {
-          if (existingPath.includes('/set-up-sdk')) {
+          if (existingPath.includes("/set-up-sdk")) {
             return [
-              existingPath.replace('/set-up-sdk', '/use-sdk'),
+              existingPath.replace("/set-up-sdk", "/use-sdk"),
             ];
           }
           return undefined;

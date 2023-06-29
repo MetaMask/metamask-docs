@@ -17,7 +17,7 @@ connecting to MetaMask Mobile, and the different [connection statuses](#connecti
 
 :::tip important
 MetaMask SDK is the recommended method of integrating your dapp with the MetaMask wallet.
-You can get started by [setting up the SDK](../how-to/set-up-sdk).
+You can get started by [setting up the SDK](../how-to/set-up-sdk/index.md).
 :::
 
 ## User experience
