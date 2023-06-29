@@ -3,7 +3,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "🏁 Snaps quickstart",
+    title: "🏁 Get started with Snaps",
     link: "/snaps/get-started/quickstart",
     description: (<>
       Get started quickly by creating and customizing a simple snap, using the Snaps template built
@@ -11,7 +11,7 @@ const CardList: CardItem[] = [
     </>),
   },
   {
-    title: "⚙️⛽ Snaps tutorials",
+    title: "⚙️ Snaps tutorials",
     link: "/snaps/tutorials",
     description: (<>
       Follow the step-by-step tutorials to create snaps that estimate gas fees and provide

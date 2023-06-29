@@ -3,24 +3,24 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "💻📱 MetaMask SDK",
-    link: "/wallet/how-to/connect/set-up-sdk",
+    title: "🏁 Get started building a dapp",
+    link: "/wallet/how-to/get-started-building",
     description: (<>
-      Enable your users to easily connect to a MetaMask wallet client from multiple dapp platforms using MetaMask SDK.
+      If you're new to dapp development, you can get started building a new dapp from scratch to integrate with MetaMask.
     </>),
   },
   {
-    title: "⚙️👨‍💻 Dapp tutorials",
-    link: "/wallet/tutorials",
+    title: "↔️ Connect your dapp to MetaMask",
+    link: "/wallet/how-to/connect",
     description: (<>
-      Follow the step-by-step tutorials to create dapps, using Vite with React and TypeScript, to integrate with MetaMask.
+      If you have a dapp you want connect to MetaMask, you can set up MetaMask SDK and access users' Ethereum accounts.
     </>),
   },
   {
-    title: "🌐 MetaMask APIs",
-    link: "/wallet/reference/provider-api",
+    title: "🛠️ Use advanced MetaMask features",
+    link: "/wallet/how-to",
     description: (<>
-      Interact with the MetaMask wallet using the MetaMask Ethereum provider API and the MetaMask JSON-RPC API.
+      If you want to optimize your dapp for MetaMask, you can use MetaMask-specific functions, such as signing typed data.
     </>),
   },
 ];
