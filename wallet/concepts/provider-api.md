@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 1.5
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
@@ -17,7 +17,7 @@ The MetaMask Ethereum provider API contains the following:
   detects if a user has MetaMask installed.
 - [Methods](../reference/provider-api.md#methods) - The provider contains methods that dapps can call.
   The [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs)
-  provider method wraps the [MetaMask JSON-RPC API](../reference/rpc-api.md); dapps can use this
+  provider method wraps the [MetaMask JSON-RPC API](rpc-api.md); dapps can use this
   provider method to call any RPC method.
 - [Events](../reference/provider-api.md#events) - The provider emits events that dapps can listen to.
 

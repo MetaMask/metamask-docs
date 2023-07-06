@@ -6,21 +6,21 @@ const CardList: CardItem[] = [
     title: "🏁 Get started building a dapp",
     link: "/wallet/how-to/get-started-building",
     description: (<>
-      If you&apos;re new to dapp development, you can get started building a new dapp from scratch to integrate with MetaMask.
+      If you&apos;re new to dapp development, get started building a new dapp from scratch to integrate with MetaMask.
     </>),
   },
   {
     title: "↔️ Connect your dapp to MetaMask",
     link: "/wallet/how-to/connect",
     description: (<>
-      If you have a dapp you want connect to MetaMask, you can set up MetaMask SDK and access users&apos; Ethereum accounts.
+      Connect your dapp to MetaMask by setting up MetaMask SDK and accessing users&apos; Ethereum accounts.
     </>),
   },
   {
     title: "🛠️ Use advanced MetaMask features",
     link: "/wallet/how-to",
     description: (<>
-      If you want to optimize your dapp for MetaMask, you can use MetaMask-specific functions, such as signing typed data.
+      Optimize your dapp for MetaMask by using MetaMask-specific API methods, such as signing typed data.
     </>),
   },
 ];
