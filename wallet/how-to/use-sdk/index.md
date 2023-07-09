@@ -10,7 +10,8 @@ It supports the following dapp platforms:
 
 <div class="cards">
   <div class="card">
-    <div class="card__header">
+    <div class="card__header">![punk0860](https://github.com/MetaMask/metamask-docs/assets/127161846/c6ad1934-3f8d-409a-9739-81d5b0970637)
+
       <h3><a href="javascript">JavaScript</a></h3>
     </div>
     <div class="card__body">
