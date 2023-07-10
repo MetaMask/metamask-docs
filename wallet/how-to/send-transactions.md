@@ -6,7 +6,7 @@ sidebar_position: 4
 # Send transactions
 
 You can send a transaction in MetaMask using the
-[`eth_sendTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sendtransaction)
+[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
 RPC method.
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
@@ -27,13 +27,15 @@ sendEthButton.addEventListener('click', () => {
   ethereum
     .request({
       method: 'eth_sendTransaction',
+      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
       params: [
         {
           from: accounts[0], // The user's active address.
-          to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970', // Required except during contract publications.
-          value: '0x29a2241af62c0000', // Only required to send ether to the recipient from the initiating external account.
-          gasPrice: '0x09184e72a000', // Customizable by the user during MetaMask confirmation.
-          gas: '0x2710', // Customizable by the user during MetaMask confirmation.
+          to: <recipient address> // Required except during contract publications.
+          value: <value in wei to send> // Only required to send ether to the recipient from the initiating external account.
+          gasLimit: '0x5028', // Customizable by the user during MetaMask confirmation.
+          maxPriorityFeePerGas: '0x3b9aca00', // Customizable by the user during MetaMask confirmation.
+          maxFeePerGas: '0x2540be400', // Customizable by the user during MetaMask confirmation.
         },
       ],
     })

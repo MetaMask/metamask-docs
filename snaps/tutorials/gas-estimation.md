@@ -12,31 +12,38 @@ information in a confirmation dialog.
 ## Prerequisites
 
 - [Snaps installed](../get-started/install-snaps.md)
-
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-
 - [Yarn](https://yarnpkg.com/) version 3
 
 ## Steps
 
 ### 1. Set up the project
 
-Create a new snap project using the Create Snap CLI by running the following command:
+Create a new snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
 
 ```bash
 yarn create @metamask/snap gas-estimation-snap
-# or...
+```
+
+or
+
+```bash
 npm create @metamask/snap gas-estimation-snap
 ```
 
-To initialize your development environment with the required dependencies, in your project
-directory, enter the command `yarn`.
+Next, `cd` into the `gas-estimation-map` project directory and run:
+
+```bash
+yarn install
+```
+
+This initializes your development environment with the required dependencies.
 
 ### 2. Set a custom icon
 
 Open `/packages/snap/snap.manifest.json` in a text editor.
-This file has the main configuration details for your snap.
-Edit the section under `npm` to change the `iconPath` to your new icon:
+This file contains the main configuration details for your snap.
+Edit the `npm` object (within the `location` object) and change the value for the `iconPath` key by giving the path `"images/gas.svg"` to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
@@ -46,19 +53,18 @@ Edit the section under `npm` to change the `iconPath` to your new icon:
       "packageName": "snap",
       "registry": "https://registry.npmjs.org/"
    }
+}
 ```
 
-Then, place
-[this file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into the `/packages/snap/images` folder.
+Next, download [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) into the `/packages/snap/images` folder.
 This is a free icon, **Gas** by Mello from
 [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
 
 ### 3. Enable network access
 
-To enable your snap to use the `fetch` API, request the
+To enable your snap to use the `fetch` API, make a request for the
 [`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access) permission by
-modifying `initialPermissions` in `snap.manifest.json`:
+adding `"endowment:network-access": {}` to the `initialPermissions` object in `snap.manifest.json`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -69,6 +75,8 @@ modifying `initialPermissions` in `snap.manifest.json`:
   }, 
   "endowment:network-access": {}
 },
+"manifestVersion": "0.1"
+...
 ```
 
 ### 4. Fetch gas fee estimates
@@ -89,8 +97,8 @@ async function getFees() {
 }
 ```
 
-Then, modify the snap RPC message handler that displays the confirmation window.
-This handler uses a switch statement to handle various request methods, but in this case there's
+Next, modify the snap RPC message handler that displays the confirmation window.
+This handler uses a switch statement to handle various request methods, but in this case there is
 only one method, `hello`.
 For this method, the handler returns a call to MetaMask with the parameters to display a
 confirmation window, and passes some static strings.
@@ -124,11 +132,11 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 
 To build and test your snap:
 
-1. Open `package.json` in the root directory of the project, and bump the version (if the version is
-    `0.1.0`, bump it to `0.2.0`).
+1. Open `package.json` in the root directory of the project, and increase the `"version"` (if the `"version"` is
+    `0.1.0`, increase it to `0.2.0`).
 
 2. From the command line, run `yarn start`.
-    You should get a message that includes:
+    In the terminal, at the bottom of the message log, you see the browser URL:
 
     ```bash
     You can now view site in the browser.
@@ -150,8 +158,9 @@ To build and test your snap:
     - **Access the internet.**
     - **Display dialog windows in MetaMask.**
 
-5. Select **Approve & install**, then **Send message**.
-    A dialog prompt displays with the response from the gas fee API:
+5. Select **Approve & install**.
+
+6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 
@@ -164,8 +173,10 @@ You've integrated a public API into MetaMask and displayed real-time gas fee est
 
 ### 6. Next steps
 
-Next, you can try parsing the JSON response from the remote API and displaying the fees in a nicely
-formatted way.
+Next, you can try:
+
+- Parsing the JSON response from the remote API.
+- Displaying the fees in a nicely formatted way.
 
 You can also update the fields in `snap.manifest.json` to match your custom snap:
 
@@ -176,9 +187,9 @@ You can also update the fields in `snap.manifest.json` to match your custom snap
   If you decided to publish your snap to npm, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you don't plan to publish your snap to npm.
+`/packages/snap/package.json` even if you do not plan to publish your snap to [`npm`](https://www.npmjs.com/).
 
-:::note
+:::tip
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
 :::
 
@@ -187,5 +198,5 @@ name of the method for showing gas fee estimates.
 If you change the method name, make sure to change the method name in `/packages/snap/src/index.ts`
 to match.
 
-Once you've made all necessary changes, you can
+After you have made all necessary changes, you can
 [publish your snap to npm](../how-to/develop-a-snap.md#publish-your-snap).

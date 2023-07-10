@@ -35,14 +35,15 @@ const config = {
 
   presets: [
     [
-      "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
+      "@metamask/docusaurus-openrpc/dist/preset",
+      /** @type {import('@metamask/docusaurus-openrpc/dist/preset').Options} */
       ({
         docs: {
           path: "wallet",
           routeBasePath: "wallet",
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
+          editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
             require("remark-docusaurus-tabs"),
             [remarkCodesandbox, {
@@ -50,7 +51,11 @@ const config = {
               autoDeploy: process.env.NODE_ENV === "production",
             }],
           ],
-          editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+          openrpc: {
+            openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
+            path: "reference",
+            sidebarLabel: "API Playground",
+          },
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -60,18 +65,17 @@ const config = {
   ],
   plugins: [
     [
-      "content-docs",
-      /** @type {import('@docusaurus/plugin-content-docs').PluginOptions} */
+      "@docusaurus/plugin-content-docs",
       ({
         id: "snaps",
         path: "snaps",
         routeBasePath: "snaps",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
         remarkPlugins: [
           require("remark-docusaurus-tabs"),
         ],
-        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
       }),
     ],
     [
@@ -212,14 +216,11 @@ const config = {
         },
         items: [
           {
-            type: "doc",
-            docId: "index",
+            to: "wallet",
             label: "Wallet",
           },
           {
-            type: "doc",
-            docId: "index",
-            docsPluginId: "snaps",
+            to: "snaps",
             label: "Snaps",
           },
         ],

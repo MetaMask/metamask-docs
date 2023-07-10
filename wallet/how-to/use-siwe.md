@@ -42,7 +42,7 @@ This is to not break existing dapps that may have use cases for mismatched domai
 ## Example
 
 The following is an example of setting up SIWE with MetaMask using
-[`personal_sign`](https://metamask.github.io/api-playground/api-documentation/#personal_sign).
+[`personal_sign`](/wallet/reference/personal_sign).
 See the [live example](https://metamask.github.io/test-dapp/#siwe) and
 [test dapp source code](https://github.com/MetaMask/test-dapp).
 
