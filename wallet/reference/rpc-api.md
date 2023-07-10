@@ -284,7 +284,7 @@ Requests that the user track the specified ERC-20 token or NFT(s) in their MetaM
 Use this method to [display tokens](../how-to/register-token.md) in MetaMask.
 
 :::caution Experimental feature
-Support for NFTs (ERC-721 and ERC-1155 tokens) is currently experimental and limited to the
+Support for NFTs (ERC-721 and ERC-1155 tokens) is experimental and currently only available on the
 extension (not on mobile).
 See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md)
 and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle)
@@ -298,8 +298,8 @@ This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 An object containing the following metadata of the token to watch:
 
 - `type` - Supports ERC-20, ERC-721, and ERC-1155 tokens.
-  Support for ERC-721 and ERC-1155 tokens is currently experimental and limited to the extension
-  (not on mobile).
+  Support for ERC-721 and ERC-1155 tokens is experimental and currently only available on the
+  extension (not on mobile).
 - `options` - An object containing:
   - `address` - The address of the token contract.
   - `symbol` - The symbol of the token, up to 11 characters (optional for ERC-20 tokens).

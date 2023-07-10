@@ -5,31 +5,30 @@ sidebar_position: 6
 
 # Display tokens
 
-When a user opens MetaMask, they're shown some major ERC-20 tokens by default.
-However, for most custom ERC-20 tokens, the user must [register the token
+When a user opens MetaMask, they're shown some major tokens by default.
+However, for most custom ERC-20 tokens, the user must [add the token
 manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
-This process involves the user interacting with contract addresses, and is error-prone.
-
-MetaMask also doesn't detect and display a user's NFTs by default.
-The user must [explicitly turn on NFT autodetection or add their NFTs
+For a user's NFTs, the user must [explicitly turn on NFT autodetection or add their NFTs
 manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
-Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
 
-You can improve the security and experience of users registering your [ERC-20 token](#register-an-erc-20-token)
-or their [NFTs](#register-nfts) on their MetaMask interface by using the
-[`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
+Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
+
+You can improve the security and experience of users adding your
+[ERC-20 token](#register-an-erc-20-token) or their [NFTs](#register-nfts) on their MetaMask
+interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to add tokens to their wallet,
 without having to interact with contract addresses.
 
 :::tip Adding NFTs
 With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
 autodetection disabled.
-You can also add NFTs from networks other than Ethereum Mainnet.
+Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
+With `wallet_watchAsset`, you can add NFTs from other networks.
 :::
 
 :::caution Experimental feature
-Using `wallet_watchAsset` to display NFTs is currently experimental and limited to the extension
-(not on mobile).
+Using `wallet_watchAsset` to display NFTs is experimental and currently only available on the
+extension (not on mobile).
 :::
 
 ## Display an ERC-20 token
@@ -83,8 +82,8 @@ them using a simple web link:
 ## Display NFTs
 
 :::caution Experimental feature
-Using `wallet_watchAsset` to display NFTs is currently experimental and limited to the extension
-(not on mobile).
+Using `wallet_watchAsset` to display NFTs is experimental and currently only available on the
+extension (not on mobile).
 See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md)
 and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle)
 for more information.
@@ -130,7 +129,8 @@ try {
 ```
 
 To prompt users to add multiple NFTs, use `window.ethereum.sendAsync()` instead of
-`window.ethereum.request()` to call `wallet_watchAsset`:
+`window.ethereum.request()` to call `wallet_watchAsset`.
+For example:
 
 ```javascript
 window.ethereum.sendAsync([{
