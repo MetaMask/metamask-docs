@@ -280,12 +280,16 @@ Instead of calling this method directly, you should
 
 ### wallet_watchAsset
 
-Requests that the user track the specified token in MetaMask.
+Requests that the user track the specified ERC-20 token or NFT(s) in their MetaMask wallet.
+Use this method to [display tokens](../how-to/register-token.md) in MetaMask.
 
-Most Ethereum wallets support some set of tokens, usually from a centrally curated registry of tokens.
-This method enables dapp developers to ask their users to track tokens in their wallets, at runtime.
-Once added, the token is indistinguishable from those added using legacy methods, such as a
-centralized registry.
+:::caution Experimental feature
+Support for NFTs (ERC-721 and ERC-1155 tokens) is currently experimental and limited to the
+extension (not on mobile).
+See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md)
+and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle)
+for more information.
+:::
 
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
@@ -293,12 +297,15 @@ This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
 An object containing the following metadata of the token to watch:
 
-- `type` - Currently only supports `ERC20`.
+- `type` - Supports ERC-20, ERC-721, and ERC-1155 tokens.
+  Support for ERC-721 and ERC-1155 tokens is currently experimental and limited to the extension
+  (not on mobile).
 - `options` - An object containing:
   - `address` - The address of the token contract.
-  - `symbol` - The symbol of the token, up to 11 characters.
-  - `decimals` - The number of token decimals.
-  - `image` - A URL string of the token logo.
+  - `symbol` - The symbol of the token, up to 11 characters (optional for ERC-20 tokens).
+  - `decimals` - The number of token decimals (optional for ERC-20 tokens).
+  - `image` - A URL string of the token logo (optional for ERC-20 tokens).
+  - `tokenId` - The unique identifier of the NFT (required for ERC-721 and ERC-1155 tokens).
 
 #### Returns
 

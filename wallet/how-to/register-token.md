@@ -3,16 +3,14 @@ description: Register a token with users using wallet_watchAsset.
 sidebar_position: 6
 ---
 
-# Register a token with users
+# Display tokens
 
-When a user opens MetaMask, they're shown a variety of assets, including tokens.
-By default, MetaMask detects some major ERC-20 tokens and displays them, but for most custom ERC-20
-tokens, the user must [register the token
+When a user opens MetaMask, they're shown some major ERC-20 tokens by default.
+However, for most custom ERC-20 tokens, the user must [register the token
 manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
 This process involves the user interacting with contract addresses, and is error-prone.
 
-MetaMask also supports displaying a user's NFTs in their wallet, but MetaMask doesn't detect and
-display the NFTs by default.
+MetaMask also doesn't detect and display a user's NFTs by default.
 The user must [explicitly turn on NFT autodetection or add their NFTs
 manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
 Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
@@ -29,7 +27,12 @@ autodetection disabled.
 You can also add NFTs from networks other than Ethereum Mainnet.
 :::
 
-## Register an ERC-20 token
+:::caution Experimental feature
+Using `wallet_watchAsset` to display NFTs is currently experimental and limited to the extension
+(not on mobile).
+:::
+
+## Display an ERC-20 token
 
 To prompt users to register an ERC-20 token, you can add something like the following to your
 project script:
@@ -65,15 +68,41 @@ try {
 }
 ```
 
+:::note
+If the chain ID of your token doesn't match the user's network, they can get unexpected results.
+We recommend [detecting the user's network chain ID](../get-started/detect-network.md) and
+[prompting them to switch chains](../reference/rpc-api.md#wallet_switchethereumchain), if necessary.
+:::
+
 For more examples, the following are live web dapps that let you enter your token details and share
 them using a simple web link:
 
 - [WatchToken](https://vittominacori.github.io/watch-token/create/)
 - [Add Token dapp](https://metamask.github.io/Add-Token/#edit)
 
-## Register NFTs
+## Display NFTs
 
-To prompt users to add an NFT, you can add something like the following to your project script.
+:::caution Experimental feature
+Using `wallet_watchAsset` to display NFTs is currently experimental and limited to the extension
+(not on mobile).
+See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md)
+and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle)
+for more information.
+:::
+
+You can prompt users to add a single NFT or multiple NFTs using `wallet_watchAsset`.
+The confirmation screens look like the following:
+
+<div class="row">
+    <div class="column">
+        <img src={require("../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid black'}} />
+    </div>
+    <div class="column">
+        <img src={require("../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid black'}} />
+    </div>
+</div>
+
+To prompt users to add a single NFT, add something like the following to your project script.
 `wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
 ```javascript
@@ -100,8 +129,8 @@ try {
 }
 ```
 
-You can prompt users to add multiple NFTs using `window.ethereum.sendAsync()` instead of
-`window.ethereum.request()`:
+To prompt users to add multiple NFTs, use `window.ethereum.sendAsync()` instead of
+`window.ethereum.request()` to call `wallet_watchAsset`:
 
 ```javascript
 window.ethereum.sendAsync([{
