@@ -6,24 +6,24 @@ sidebar_position: 6
 # Display tokens
 
 When a user opens MetaMask, they're shown some major tokens by default.
-However, for most custom ERC-20 tokens, the user must [add the token
+However, to display most custom ERC-20 tokens, the user must [add the token
 manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
-For a user's NFTs, the user must [explicitly turn on NFT autodetection or add their NFTs
+To display a user's NFTs, the user must [explicitly turn on NFT autodetection or add their NFTs
 manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
 
 Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
 
-You can improve the security and experience of users adding your
-[ERC-20 token](#register-an-erc-20-token) or their [NFTs](#register-nfts) on their MetaMask
-interface by using the [`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
-`wallet_watchAsset` provides a friendly interface that prompts users to add tokens to their wallet,
-without having to interact with contract addresses.
+You can improve the security and experience of displaying your
+[ERC-20 token](#register-an-erc-20-token) or users' [NFTs](#register-nfts) in MetaMask by using the
+[`wallet_watchAsset`](../reference/rpc-api.md#wallet_watchasset) RPC method.
+`wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
+MetaMask wallet, without having to interact with contract addresses.
 
-:::tip Adding NFTs
+:::tip Displaying NFTs
 With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
 autodetection disabled.
 Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
-With `wallet_watchAsset`, you can add NFTs from other networks.
+With `wallet_watchAsset`, users can add NFTs from other networks.
 :::
 
 :::caution Experimental feature
@@ -33,8 +33,7 @@ extension (not on mobile).
 
 ## Display an ERC-20 token
 
-To prompt users to register an ERC-20 token, you can add something like the following to your
-project script:
+To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
@@ -90,7 +89,7 @@ for more information.
 :::
 
 You can prompt users to add a single NFT or multiple NFTs using `wallet_watchAsset`.
-The confirmation screens look like the following:
+The add NFT interfaces look like the following:
 
 <div class="row">
     <div class="column">
