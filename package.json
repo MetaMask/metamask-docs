@@ -77,7 +77,8 @@
       "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
       "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
       "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false
+      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
+      "$root$": false
     }
   }
 }
