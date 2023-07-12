@@ -3,6 +3,7 @@
 
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
+const path = require("path");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -77,6 +78,17 @@ const config = {
           require("remark-docusaurus-tabs"),
         ],
       }),
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        entryPoints: ["./external/keyring-api/src/index.ts"],
+        tsconfig: "./external/keyring-api/tsconfig.json",
+        out: path.join(__dirname, "snaps/reference/keyring-api"),
+        sidebar: {
+          categoryLabel: "Keyring API",
+        },
+      },
     ],
     [
       "@docusaurus/plugin-client-redirects",
