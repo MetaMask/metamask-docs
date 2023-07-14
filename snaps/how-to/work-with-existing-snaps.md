@@ -1,6 +1,6 @@
 # Working with third-party snaps
 
-Some snaps are designed to communicate with Dapps. If you are a Dapp developer, you can use these snaps to take advantage of new features enabled by snaps. This is possible because [snaps can expose an RPC API](../reference/exports/#onrpcrequest). Snaps can decide to make their API available to Dapps by requesting the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
+Some snaps are designed to communicate with Dapps. If you are a Dapp developer, you can use these snaps to take advantage of new features enabled by snaps. This is possible because [snaps can expose an RPC API](../../reference/exports/#onrpcrequest). Snaps can decide to make their API available to Dapps by requesting the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission.
 
 ## Connecting to a snap
 
@@ -14,7 +14,7 @@ Snaps are installed into the MetaMask instance of each user. If a snap stores da
 
 ## Finding out whether a snap is installed
 
-Finding out whether a snap is installed is done using the [`wallet_getSnaps`](../reference/rpc-api.md#wallet_getsnaps) method from your Dapp. You'll receive a list of _only_ those snaps that are connected to your current Dapp.
+Finding out whether a snap is installed is done using the [`wallet_getSnaps`](../../reference/rpc-api.md#wallet_getsnaps) method from your Dapp. You'll receive a list of _only_ those snaps that are connected to your current Dapp.
 
 The response comes in the form of an object keyed by the ID of the snap. Each value is a nested object with additional information like the version of the snap that is installed.
 
