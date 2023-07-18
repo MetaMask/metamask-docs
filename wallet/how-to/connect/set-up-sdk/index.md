@@ -11,7 +11,7 @@ It supports the following dapp platforms:
 <div class="cards">
   <div class="card">
     <div class="card__header">
-      <h3><a href="javascript">JavaScript</a></h3>
+      <h3>💻 <a href="javascript">JavaScript</a></h3>
     </div>
     <div class="card__body">
       <ul>
@@ -26,7 +26,7 @@ It supports the following dapp platforms:
   </div>
   <div class="card">
     <div class="card__header">
-      <h3><a href="mobile">Mobile</a></h3>
+      <h3>📱 <a href="mobile">Mobile</a></h3>
     </div>
     <div class="card__body">
       <ul>
@@ -38,7 +38,7 @@ It supports the following dapp platforms:
   </div>
   <div class="card">
     <div class="card__header">
-      <h3><a href="gaming">Gaming</a></h3>
+      <h3>🎮 <a href="gaming">Gaming</a></h3>
     </div>
     <div class="card__body">
       <ul>
