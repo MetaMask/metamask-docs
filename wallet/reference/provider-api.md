@@ -1,18 +1,14 @@
 ---
 description: MetaMask Ethereum provider API reference
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Ethereum provider API
 
-MetaMask injects a global JavaScript API into websites visited by its users using the
-`window.ethereum` provider object.
-This API allows websites to request users' Ethereum accounts, read data from blockchains the user is
-connected to, and suggest that the user sign messages and transactions.
-
+MetaMask injects the [provider API](../concepts/provider-api.md) into websites visited by its users
+using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in
 your dapp.
-Get started by [setting up your development environment](../get-started/set-up-dev-environment.md).
 
 ## Properties
 
