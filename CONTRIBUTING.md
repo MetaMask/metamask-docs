@@ -1,18 +1,16 @@
 # Contribute to the documentation
 
 Thank you for your interest in contributing to the MetaMask developer documentation!
-These docs generally follow the [Consensys docs guide](https://docs-template.consensys.net/).
-This page describes contribution guidelines specific to MetaMask, and refers to the Consensys docs
-guide in some places.
 
 ## Table of contents
 
 - [Contribution workflow](#contribution-workflow)
-- [Preview locally](#preview-locally)
+   - [Preview locally](#preview-locally)
 - [Style guide](#style-guide)
-- [Add images](#add-images)
-- [Format Markdown and MDX](#format-markdown-and-mdx)
-  - [Live code blocks](#live-code-blocks)
+   - [Images](#images)
+- [Markdown guide](#markdown-guide)
+   - [Simplified tabs](#simplified-tabs)
+   - [Live code blocks](#live-code-blocks)
 
 ## Contribution workflow
 
@@ -37,17 +35,6 @@ To contribute changes:
     ```bash
     git clone https://github.com/MetaMask/metamask-docs.git
     ```
-   
-   > **Note**: If you don't have write access to this repository, you must [fork the
-   > repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository)
-   > to your personal account and clone your forked repository instead.
-   > [Add an upstream remote](https://docs.github.com/en/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-upstream-repository)
-   > to be able to pull from and push to the original repository.
-   > 
-   > ```bash
-   > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
-   > git remote add upstream https://github.com/MetaMask/metamask-docs.git
-   > ```
 
 3. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
    naming it appropriately.
@@ -62,19 +49,18 @@ To contribute changes:
 
 4. Open this repository in a text editor of your choice (for example,
    [VS Code](https://code.visualstudio.com/)) and make your changes.
-   Make sure to [follow the style guidelines](https://docs-template.consensys.net/contribute/style-guide)
-   and [format your Markdown correctly](https://docs-template.consensys.net/contribute/format-markdown).
+   Refer to the [style guide](#style-guide) and [Markdown guide](#markdown-guide) when making
+   documentation changes.
 
    > **Notes:**
    > - All documentation content is located in the `wallet` and `snaps` directories.
    > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
-       `snaps-sidebar.js` to add the page to the
-   >   [sidebar](https://docs-template.consensys.net/contribute/configure-docusaurus#sidebar).
-   > - If you delete, rename, or move a documentation file, make sure to add a
-   >   [redirect](https://docs-template.consensys.net/contribute/configure-docusaurus#redirects).
+       `snaps-sidebar.js` to [add the page to the sidebar](https://docusaurus.io/docs/sidebar/items).
+   > - If you delete, rename, or move a documentation file, make sure to add a redirect to the
+       [redirect plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-client-redirects)
+       in `docusaurus.config.js`.
 
-5. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
-   that the changes render correctly.
+5. [Preview your changes locally](#preview-locally) to check that the changes render correctly.
 
 6. Add and commit your changes, briefly describing your changes in the commit message.
    Push your changes to the remote origin.
@@ -101,30 +87,79 @@ To contribute changes:
    If you don't have merge access, a maintainer will merge your PR for you.
    You can delete the topic branch after your PR is merged.
 
-## Preview locally
+### Preview locally
 
-[Preview the docs locally using npm or Yarn.](https://docs-template.consensys.net/contribute/preview)
+As a prerequisite, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org) version 16+
+   - If you're using [nvm](https://github.com/creationix/nvm#installation) (recommended), running
+     `nvm use` automatically chooses the right Node.js version for you.
+- [Yarn](https://yarnpkg.com/getting-started/install) version 3
+   - Run `yarn install` to install dependencies and run any required post-install scripts.
+
+Preview your changes locally by running `yarn start` in the documentation repository.
+
+> **Note:** If you make changes to the
+[redirects](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-client-redirects), you can
+preview them by running `yarn build && yarn serve`.
 
 ## Style guide
 
-Refer to the [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide).
+The MetaMask documentation follows the
+[ConsenSys documentation style guide](https://docs-template.consensys.net/getting-started/style-guide)
+and the [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/).
+Refer to those guides for any questions on writing style.
 
-## Add images
+### Images
 
 All images are located in the `wallet/assets` and `snaps/assets` directories.
 When adding a new image, such as a screenshot or diagram, make sure the image has a white or
 `#1b1b1d` color background in order for it to be compatible with the site's light and dark modes.
 
-Additionally, follow the [Consensys guidelines on adding images](https://docs-template.consensys.net/contribute/add-images).
-
-## Format Markdown and MDX
+## Markdown guide
 
 The documentation is built using [Docusaurus](https://docusaurus.io/), which is powered by
 [MDX](https://mdxjs.com/), an extension to [Markdown](https://www.markdownguide.org/) that allows
-you to use [React JSX](https://www.w3schools.com/react/react_jsx.asp) in your Markdown content.
+you to use JavaScript in your documentation content.
+See the [Docusaurus documentation](https://docusaurus.io/docs/markdown-features) on how to use its
+Markdown and MDX features.
 
-Follow the [Consensys guidelines on formatting Markdown](https://docs-template.consensys.net/contribute/format-markdown).
-The MetaMask docs also use a plugin to implement [live code blocks](#live-code-blocks).
+> **Tip:** [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions),
+[tabs](https://docusaurus.io/docs/markdown-features/tabs), and
+[code blocks](https://docusaurus.io/docs/markdown-features/code-blocks) are frequently used in the
+MetaMask documentation.
+
+The following sections describe features that aren't documented in the Docusaurus documentation.
+
+### Simplified tabs
+
+The [`remark-docusaurus-tabs`](https://github.com/mccleanp/remark-docusaurus-tabs) plugin allows you
+to add content in [tabs](https://docusaurus.io/docs/markdown-features/tabs) using simplified syntax.
+
+For example, add code blocks to tabs as follows:
+
+````jsx
+<!--tabs-->
+
+# HTML
+
+```html
+<!-- HTML code block -->
+```
+
+# JavaScript
+
+```javascript
+// JavaScript code block
+```
+
+# Markdown
+
+- This is an example Markdown list.
+- This is **bold** and *italicized* text.
+
+<!--/tabs-->
+````
 
 ### Live code blocks
 

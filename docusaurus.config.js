@@ -54,7 +54,7 @@ const config = {
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
-            sidebarLabel: "JSON-RPC API playground",
+            sidebarLabel: "API Playground",
           },
         },
         theme: {
@@ -389,7 +389,7 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Consensys Discord",
+                label: "ConsenSys Discord",
                 href: "https://discord.gg/consensys",
               },
               {
@@ -424,7 +424,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} MetaMask • A Consensys Formation`,
+        copyright: `© ${new Date().getFullYear()} MetaMask • A ConsenSys Formation`,
       },
       prism: {
         theme: codeTheme,
