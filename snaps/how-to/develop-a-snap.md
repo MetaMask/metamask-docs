@@ -109,7 +109,7 @@ You can review the growing number of
 [example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained
 by MetaMask, as well as the following fully functional and open source snaps:
 
-- [StarkNet](https://github.com/ConsenSys/starknet-snap)
+- [StarkNet](https://github.com/Consensys/starknet-snap)
 - [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
 - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
 - [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
