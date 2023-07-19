@@ -54,3 +54,12 @@ network state *and* the known sent transactions.
 
 To clear MetaMask's transaction queue and reset its nonce calculation, go to **Settings > Advanced**
 and select **Reset account**.
+
+## Next steps
+
+Once you have your development environment set up and development network running, you can
+[connect to MetaMask](/wallet/how-to/connect) by setting up MetaMask SDK, detecting MetaMask, detecting a user's
+network, and accessing a user's accounts.
+
+For an end-to-end example, you can also follow the
+[Create a simple React dapp](../../tutorials/react-dapp-local-state.md) tutorial.
