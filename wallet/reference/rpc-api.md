@@ -291,6 +291,13 @@ and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvemen
 for more information.
 :::
 
+:::tip Displaying NFTs
+With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
+autodetection disabled.
+Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
+With `wallet_watchAsset`, users can add NFTs from other networks.
+:::
+
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
 #### Parameters

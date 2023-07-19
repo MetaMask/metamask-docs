@@ -100,6 +100,8 @@ The add NFT interfaces look like the following:
     </div>
 </div>
 
+### Display a single NFT
+
 To prompt users to add a single NFT, add something like the following to your project script.
 `wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
@@ -126,6 +128,8 @@ try {
   console.log(error);
 }
 ```
+
+### Display multiple NFTs
 
 To prompt users to add multiple NFTs, use `window.ethereum.sendAsync()` instead of
 `window.ethereum.request()` to call `wallet_watchAsset`.
