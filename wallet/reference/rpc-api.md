@@ -281,7 +281,7 @@ Instead of calling this method directly, you should
 ### wallet_watchAsset
 
 Requests that the user track the specified ERC-20 token or NFT(s) in their MetaMask wallet.
-Use this method to [display tokens](../how-to/register-token.md) in MetaMask.
+Use this method to [display tokens](../how-to/display/tokens.md) in MetaMask.
 
 :::caution Experimental feature
 Support for NFTs (ERC-721 and ERC-1155 tokens) is experimental and currently only available on the
