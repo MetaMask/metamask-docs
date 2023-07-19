@@ -120,6 +120,7 @@ MetaMask also maintains tools to help developers build, debug, and maintain snap
 - [Template snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes
   TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
   your snap and a companion dapp.
+- [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating snaps in the browser, streamlining the development process.
 - [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines
   the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts
   with Ganache.
