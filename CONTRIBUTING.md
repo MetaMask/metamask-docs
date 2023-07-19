@@ -92,10 +92,10 @@ To contribute changes:
 As a prerequisite, make sure you have the following installed:
 
 - [Node.js](https://nodejs.org) version 16+
-  - If you're using [nvm](https://github.com/creationix/nvm#installation) (recommended), running
-    `nvm use` automatically chooses the right Node.js version for you.
+   - If you're using [nvm](https://github.com/creationix/nvm#installation) (recommended), running
+     `nvm use` automatically chooses the right Node.js version for you.
 - [Yarn](https://yarnpkg.com/getting-started/install) version 3
-  - Run `yarn install` to install dependencies and run any required post-install scripts.
+   - Run `yarn install` to install dependencies and run any required post-install scripts.
 
 Preview your changes locally by running `yarn start` in the documentation repository.
 
