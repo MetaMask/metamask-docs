@@ -389,7 +389,7 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "ConsenSys Discord",
+                label: "Consensys Discord",
                 href: "https://discord.gg/consensys",
               },
               {
@@ -424,7 +424,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} MetaMask • A ConsenSys Formation`,
+        copyright: `© ${new Date().getFullYear()} MetaMask • A Consensys Formation`,
       },
       prism: {
         theme: codeTheme,

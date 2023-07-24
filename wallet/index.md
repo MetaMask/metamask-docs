@@ -51,5 +51,5 @@ functions, including:
 
 ## Questions?
 
-If you have questions about integrating your dapp with MetaMask, you can ask on the MetaMask
-channels on [ConsenSys Discord](https://discord.gg/consensys).
+If you have questions about integrating your dapp with MetaMask, you can interact with the MetaMask
+team and community on the MetaMask channels on [Consensys Discord](https://discord.gg/consensys).
