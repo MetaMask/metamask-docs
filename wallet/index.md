@@ -43,4 +43,4 @@ Mobile wallet to make the connection.
 ## Questions?
 
 If you have questions about integrating your dapp with MetaMask, you can interact with the MetaMask
-team and community on the MetaMask channels on [ConsenSys Discord](https://discord.gg/consensys).
+team and community on the MetaMask channels on [Consensys Discord](https://discord.gg/consensys).
