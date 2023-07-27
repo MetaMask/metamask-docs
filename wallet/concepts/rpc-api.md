@@ -18,13 +18,13 @@ Methods in the API playground may have the following tags:
 
 - **MetaMask** - These methods behave in ways specific to MetaMask, and may or may not be supported
   by other wallets.
-  Some of these methods are documented in more detail on this page.
+  Some of these methods are documented in more detail on the [JSON-RPC reference](../reference/rpc-api.md).
 - **Restricted** - These methods are [restricted](#restricted-methods), which require requesting
   permission using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
 - **Mobile** - These methods are only available on MetaMask Mobile.
-
-For more information on the standard Ethereum RPC methods, see the
-[Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods).
+- **Ethereum API** - These are standard Ethereum JSON-RPC API methods.
+  See the [Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods) for more information on
+  these methods.
 
 :::note
 All RPC method requests can return errors.
