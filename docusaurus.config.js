@@ -321,6 +321,9 @@ const config = {
                 label: "Contributor License Agreement",
                 href: "https://metamask.io/cla/",
               },
+              {
+                html: "<button id='manage-cookie-btn'>Manage cookie</button>",
+              },
             ],
           },
         ],
