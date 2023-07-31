@@ -115,3 +115,19 @@ img {
 svg {
   display: inline;
 }
+
+/* Hide Osano cookie widget */
+.osano-cm-widget {
+  display: none;
+}
+
+#manage-cookie-btn {
+  color: var(--ifm-footer-link-color);
+  border: 0;
+  background-color: unset;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+  line-height: 2;
+}
