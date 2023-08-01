@@ -1,5 +1,5 @@
 ---
-description: Available RPC methods for signing transactions in MetaMask.
+descriptionAvailable RPC methods for signing transactions in MetaMask.
 sidebar_position: 2
 ---
 
