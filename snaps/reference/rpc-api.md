@@ -160,7 +160,7 @@ An object containing the contents of the alert dialog:
 - `type` - The type of dialog (`'Alert'`).
 - `content` - The content of the alert, as a [custom UI](../how-to/use-custom-ui.md) component.
 
-#### Example
+##### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -194,7 +194,7 @@ An object containing the contents of the confirmation dialog:
 
 `true` if the confirmation was accepted, `false` otherwise.
 
-#### Example
+##### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -231,7 +231,7 @@ An object containing the contents of the prompt dialog:
 
 The text entered by the user.
 
-#### Example
+##### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -746,4 +746,225 @@ const result = await ethereum.request({
 });
 
 console.log(result); // In this example, the result is a boolean.
+```
+
+### snap_manageAccounts
+
+Manages [Keyring snap](../how-to/integrate-custom-evm-accounts.md) accounts.
+This method is organized into multiple sub-methods which each take their own parameters:
+
+- [`createAccount`](#createaccount)
+- [`updateAccount`](#updateaccount)
+- [`deleteAccount`](#deleteaccount)
+- [`listAccounts`](#listaccounts)
+- [`submitResponse`](#submitresponse)
+
+This method is only callable by snaps.
+
+#### `createAccount`
+
+Creates a new snap account.
+
+:::note
+The snap is responsible for maintaining its own record of accounts. This can be done using [`snap_manageState`](#snap_managestate).
+:::
+
+##### Parameters
+
+- `account` - A [`KeyringAccount`](./keyring-api/modules.md#keyringaccountstruct) object
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { Keyring, KeyringAccount } from '@metamask/keyring-api';
+
+class MyKeyring implements Keyring {
+  // ... other methods
+
+  async createAccount(
+    name: string,
+    options: Record<string, Json> | null = null,
+  ): Promise<KeyringAccount> {
+
+    const account: KeyringAccount = {
+      id: uuid(),
+      name,
+      options,
+      address,
+      supportedMethods: [
+        'eth_sendTransaction',
+        'eth_sign',
+        'eth_signTransaction',
+        'eth_signTypedData_v1',
+        'eth_signTypedData_v2',
+        'eth_signTypedData_v3',
+        'eth_signTypedData_v4',
+        'eth_signTypedData',
+        'personal_sign',
+      ],
+      type: 'eip155:eoa',
+    };
+
+    // Store the account in state
+
+    await snap.request({
+      method: 'snap_manageAccounts',
+      params: {
+        method: 'createAccount',
+        params: { account },
+      },
+    });
+
+    return account;
+  }
+}
+```
+
+#### `updateAccount`
+
+Updates an existing snap account.
+
+:::note
+The snap is responsible for maintaining its own record of accounts. This can be done using [`snap_manageState`](#snap_managestate).
+:::
+
+
+##### Parameters
+
+- `account` - A [`KeyringAccount`](./keyring-api/modules.md#keyringaccountstruct) object
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { Keyring, KeyringAccount } from '@metamask/keyring-api';
+
+class MyKeyring implements Keyring {
+  // ... other methods
+
+  async updateAccount(account: KeyringAccount): Promise<void> {
+    // Store the new account details in state
+
+    await snap.request({
+      method: 'snap_manageAccounts',
+      params: {
+        method: 'updateAccount',
+        params: { account },
+      },
+    });
+  }
+}
+```
+
+#### `deleteAccount`
+
+Deletes a snap account.
+
+:::note
+The snap is responsible for maintaining its own record of accounts. This can be done using [`snap_manageState`](#snap_managestate).
+:::
+
+##### Parameters
+
+- `id` - The ID of the account to be deleted
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { Keyring } from '@metamask/keyring-api';
+
+class MyKeyring implements Keyring {
+  // ... other methods
+
+  async deleteAccount(id: string): Promise<void> {
+    // Delete the account from state
+
+    await snap.request({
+      method: 'snap_manageAccounts',
+      params: {
+        method: 'deleteAccount',
+        params: { id },
+      },
+    });
+  }
+}
+```
+
+#### `listAccounts`
+
+Lists the calling snap's accounts that are known to MetaMask. This method won't call back to the snap. Instead, it can be used by the snap to check whether there's a discrepancy between its internal state of accounts and the one known to MetaMask.
+
+##### Returns
+
+[`Array<KeyringAccount>`](./keyring-api/modules.md#keyringaccountstruct)
+
+##### Example
+
+```typescript
+import { Keyring, KeyringAccount } from '@metamask/keyring-api';
+
+class MyKeyring implements Keyring {
+  // ... other methods
+
+  async checkIfAccountsInSync(): Promise<boolean> {
+
+    const knownAccounts: KeyringAccount[] = /* grab accounts from snap state */;
+
+    const listedAccounts: KeyringAccount[] = await snap.request({
+      method: 'snap_manageAccounts',
+      params: {
+        method: 'listAccounts'
+      },
+    });
+
+    // compare the arrays and return the response
+  }
+}
+```
+
+#### `submitResponse`
+
+Finalizes a signing request. It is usually called as part of `approveRequest` in a `Keyring` class.
+
+##### Parameters
+
+`id` - The ID of the request to finalize.
+`result` - The result that should be returned to the original JSON-RPC caller
+
+##### Returns
+
+`null`
+
+##### Example
+
+```typescript
+import { Keyring } from '@metamask/keyring-api';
+import { Json } from '@metamask/utils';
+
+class MyKeyring implements Keyring {
+  // ... other methods
+
+  async approveRequest(id: string, result?: Json): Promise<void> {
+    // Do any snap-side logic to finish approving the request
+
+    await snap.request({
+      method: 'snap_manageAccounts',
+      params: {
+        method: 'submitResponse',
+        params: { id, result}
+      },
+    });
+  }
+}
 ```
