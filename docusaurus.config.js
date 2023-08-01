@@ -31,6 +31,7 @@ const config = {
   trailingSlash: true,
 
   scripts: [
+    { src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js" },
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
   ],
 
@@ -300,7 +301,7 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "ConsenSys Discord",
+                label: "Consensys Discord",
                 href: "https://discord.gg/consensys",
               },
               {
@@ -332,10 +333,13 @@ const config = {
                 label: "Contributor License Agreement",
                 href: "https://metamask.io/cla/",
               },
+              {
+                html: "<button id='manage-cookie-btn'>Manage cookie</button>",
+              },
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} MetaMask • A ConsenSys Formation`,
+        copyright: `© ${new Date().getFullYear()} MetaMask • A Consensys Formation`,
       },
       prism: {
         theme: codeTheme,
