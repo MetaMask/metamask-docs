@@ -25,10 +25,10 @@ View the [provider API reference](../reference/provider-api.md) for all the prov
 methods, and events.
 
 :::tip Use MetaMask SDK with the provider API
-You can call the provider API from a dapp with or without MetaMask SDK installed, but we
+You can call the provider API from a dapp with or without [MetaMask SDK](sdk.md) installed, but we
 recommend using the SDK to enable users to easily connect to the MetaMask browser extension and
 MetaMask Mobile.
 The SDK supports multiple dapp platforms including mobile and gaming dapps.
 
-Get started by [setting up the SDK](../how-to/use-sdk/index.md).
+Get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
 :::
