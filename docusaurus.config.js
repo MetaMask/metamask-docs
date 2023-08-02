@@ -90,7 +90,7 @@ const config = {
           },
           {
             from: "/guide/getting-started",
-            to: "/wallet/get-started/set-up-dev-environment",
+            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
           },
           {
             from: "/guide/common-terms",
@@ -102,7 +102,7 @@ const config = {
           },
           {
             from: "/guide/accessing-accounts",
-            to: "/wallet/get-started/access-accounts",
+            to: "/wallet/how-to/connect/access-accounts",
           },
           {
             from: "/guide/sending-transactions",
@@ -126,19 +126,19 @@ const config = {
           },
           {
             from: "/guide/registering-function-names",
-            to: "/wallet/how-to/register-method-names",
+            to: "/wallet/how-to/display/method-names",
           },
           {
             from: "/guide/registering-your-token",
-            to: "/wallet/how-to/register-token",
+            to: "/wallet/how-to/display/tokens",
           },
           {
             from: "/guide/defining-your-icon",
-            to: "/wallet/how-to/set-icon",
+            to: "/wallet/how-to/display/icon",
           },
           {
             from: "/guide/onboarding-library",
-            to: "/wallet/how-to/use-onboarding-library",
+            to: "/wallet/how-to/onboard-users",
           },
           {
             from: "/guide/metamask-extension-provider",
@@ -146,15 +146,15 @@ const config = {
           },
           {
             from: "/guide/mobile-getting-started",
-            to: "/wallet/how-to/use-mobile",
+            to: "/wallet/how-to/integrate-with-mobile",
           },
           {
             from: "/guide/site-compatibility-checklist",
-            to: "/wallet/how-to/use-mobile",
+            to: "/wallet/how-to/integrate-with-mobile",
           },
           {
             from: "/guide/mobile-best-practices",
-            to: "/wallet/how-to/use-mobile",
+            to: "/wallet/how-to/integrate-with-mobile",
           },
           {
             from: "/guide/snaps",
@@ -166,7 +166,7 @@ const config = {
           },
           {
             from: "/guide/snaps-concepts",
-            to: "/snaps/category/concepts",
+            to: "/snaps/concepts",
           },
           {
             from: "/guide/snaps-rpc-api",
@@ -186,7 +186,7 @@ const config = {
           },
           {
             from: "/guide/create-dapp",
-            to: "/wallet/get-started/set-up-dev-environment",
+            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
           },
           {
             from: "/guide/contributors",
@@ -196,11 +196,107 @@ const config = {
             from: "/wallet/tutorials/simple-react-dapp",
             to: "/wallet/tutorials/react-dapp-local-state",
           },
+          {
+            from: "/wallet/category/how-to",
+            to: "/wallet/how-to",
+          },
+          {
+            from: "/wallet/category/concepts",
+            to: "/wallet/concepts",
+          },
+          {
+            from: "/wallet/category/tutorials",
+            to: "/wallet/tutorials",
+          },
+          {
+            from: "/wallet/category/reference",
+            to: "/wallet/reference",
+          },
+          {
+            from: "/snaps/category/get-started",
+            to: "/snaps/get-started",
+          },
+          {
+            from: "/snaps/category/how-to",
+            to: "/snaps/how-to",
+          },
+          {
+            from: "/snaps/category/concepts",
+            to: "/snaps/concepts",
+          },
+          {
+            from: "/snaps/category/tutorials",
+            to: "/snaps/tutorials",
+          },
+          {
+            from: "/snaps/category/reference",
+            to: "/snaps/reference",
+          },
+          {
+            from: "/wallet/category/get-started",
+            to: "/wallet/how-to/get-started-building",
+          },
+          {
+            from: "/wallet/get-started/set-up-dev-environment",
+            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
+          },
+          {
+            from: "/wallet/get-started/run-development-network",
+            to: "/wallet/how-to/get-started-building/run-devnet",
+          },
+          {
+            from: "/wallet/how-to/secure-dapp",
+            to: "/wallet/how-to/get-started-building/secure-dapp",
+          },
+          {
+            from: "/wallet/get-started/detect-metamask",
+            to: "/wallet/how-to/connect/detect-metamask",
+          },
+          {
+            from: "/wallet/get-started/detect-network",
+            to: "/wallet/how-to/connect/detect-network",
+          },
+          {
+            from: "/wallet/get-started/access-accounts",
+            to: "/wallet/how-to/connect/access-accounts",
+          },
+          {
+            from: "/wallet/how-to/use-siwe",
+            to: "/wallet/how-to/sign-data/siwe",
+          },
+          {
+            from: "/wallet/how-to/use-mobile",
+            to: "/wallet/how-to/integrate-with-mobile",
+          },
+          {
+            from: "/wallet/how-to/use-onboarding-library",
+            to: "/wallet/how-to/onboard-users",
+          },
+          {
+            from: "/wallet/how-to/register-token",
+            to: "/wallet/how-to/display/tokens",
+          },
+          {
+            from: "/wallet/how-to/register-method-names",
+            to: "/wallet/how-to/display/method-names",
+          },
+          {
+            from: "/wallet/how-to/set-icon",
+            to: "/wallet/how-to/display/icon",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
           return acc;
         }, []),
+        createRedirects(existingPath) {
+          if (existingPath.includes("/connect/set-up-sdk")) {
+            return [
+              existingPath.replace("/connect/set-up-sdk", "/use-sdk"),
+            ];
+          }
+          return undefined;
+        },
       },
     ],
   ],
@@ -226,6 +322,11 @@ const config = {
           },
         ],
       },
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true,
+        },
+      },
       footer: {
         logo: {
           alt: "MetaMask logo",
@@ -243,20 +344,20 @@ const config = {
                 to: "/wallet",
               },
               {
-                label: "Get started",
-                to: "/wallet/category/get-started",
-              },
-              {
                 label: "How to guides",
                 to: "/wallet/category/how-to",
               },
               {
+                label: "Concepts",
+                to: "/wallet/concepts",
+              },
+              {
                 label: "Tutorials",
-                to: "/wallet/category/tutorials",
+                to: "/wallet/tutorials",
               },
               {
                 label: "Reference",
-                to: "/wallet/category/reference",
+                to: "/wallet/reference",
               },
             ],
           },
@@ -269,19 +370,19 @@ const config = {
               },
               {
                 label: "Get started",
-                to: "/snaps/category/get-started",
+                to: "/snaps/get-started",
               },
               {
                 label: "How to guides",
-                to: "/snaps/category/how-to",
+                to: "/snaps/how-to",
               },
               {
                 label: "Tutorials",
-                to: "/snaps/category/tutorials",
+                to: "/snaps/tutorials",
               },
               {
                 label: "Reference",
-                to: "/snaps/category/reference",
+                to: "/snaps/reference",
               },
             ],
           },
