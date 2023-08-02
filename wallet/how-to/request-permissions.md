@@ -1,6 +1,6 @@
 ---
 description: Request permissions to call restricted methods.
-sidebar_position: 7.75
+sidebar_position: 7
 ---
 
 # Request permissions
