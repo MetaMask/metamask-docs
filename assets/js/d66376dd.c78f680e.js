@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[1385],{87977:t=>{t.exports=JSON.parse('{"title":"Get started","slug":"/get-started","permalink":"/snaps/get-started","navigation":{"previous":{"title":"Introduction","permalink":"/snaps/"},"next":{"title":"Install Snaps","permalink":"/snaps/get-started/install-snaps"}}}')}}]);

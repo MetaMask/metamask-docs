@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[6322],{70355:s=>{s.exports=JSON.parse('{"title":"Concepts","slug":"/concepts","permalink":"/snaps/concepts","navigation":{"previous":{"title":"Troubleshoot","permalink":"/snaps/how-to/troubleshoot"},"next":{"title":"Snaps anatomy","permalink":"/snaps/concepts/anatomy"}}}')}}]);
