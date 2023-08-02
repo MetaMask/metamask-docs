@@ -109,7 +109,7 @@ You can review the growing number of
 [example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained
 by MetaMask, as well as the following fully functional and open source snaps:
 
-- [StarkNet](https://github.com/ConsenSys/starknet-snap)
+- [StarkNet](https://github.com/Consensys/starknet-snap)
 - [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
 - [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
 - [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
@@ -120,6 +120,7 @@ MetaMask also maintains tools to help developers build, debug, and maintain snap
 - [Template snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes
   TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
   your snap and a companion dapp.
+- [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating snaps in the browser, streamlining the development process.
 - [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines
   the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts
   with Ganache.

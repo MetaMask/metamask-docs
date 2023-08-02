@@ -94,7 +94,13 @@ h4 {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
   grid-gap: 2rem;
-  padding: 1rem 2rem 3rem;
+  padding: 1rem 0rem 3rem;
+}
+
+.card {
+  box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 10px;
 }
 
 img {
@@ -114,4 +120,20 @@ img {
 /* Reset SVG to be inline by default */
 svg {
   display: inline;
+}
+
+/* Hide Osano cookie widget */
+.osano-cm-widget {
+  display: none;
+}
+
+#manage-cookie-btn {
+  color: var(--ifm-footer-link-color);
+  border: 0;
+  background-color: unset;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+  line-height: 2;
 }

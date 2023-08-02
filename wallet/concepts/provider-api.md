@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
