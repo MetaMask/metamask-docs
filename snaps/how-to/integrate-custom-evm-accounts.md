@@ -6,17 +6,43 @@ description: Learn how to integrate custom EVM accounts in MetaMask
 
 Using the [Snaps Keyring API](../concepts/keyring-api.md), you can integrate custom EVM accounts directly in MetaMask. These accounts will be displayed alongside MetaMask-controlled accounts in the UI:
 
-![Deep UI integration for custom EVM accounts](../assets/keyring/keyring-accounts-ui.png)
+![Keyring snap accounts in Metamask UI](../assets/keyring/accounts-ui.png)
 
 Creating a keyring snap allows Dapps to connect to its accounts and submit requests like `personal_sign`, `eth_sendTransaction`, etc. as if these were regular, MetaMask-controlled accounts.
+
+## Terminology
+
+Let's introduce some terminology used across the Keyring API:
+
+- **Blockchain account**: An object in a single blockchain, representing an account, with its balance, nonce, etc.
+- **Request**: A request sent by a Dapp to MetaMask.
+- **Keyring account**: An account model that represents one or more blockchain accounts.
+- **Keyring snap**: A snap that implements the Keyring API.
+- **Keyring request**: A request from MetaMask to a keyring snap, to perform an action on or using a keyring account. It wraps the original request sent by the Dapp and adds some metadata to it.
+
+## Components diagram
+
+When interacting with accounts managed by a Keyring snap, we will encounter the following components:
+
+![Keyring snap component diagram](../assets/keyring/components-diagram.png)
+
+- **User**: The web3 user interacting with the snap, the Dapp, and MetaMask.
+- **Dapp**: The web3 application that is requesting an action to be performed on an account.
+- **MetaMask**: The web3 provider that dApps connect to. It routes requests to the keyring snaps and lets the user perform some level of account management.
+- **Snap**: A snap that implements the Keyring API to manage the user's accounts, and to handle requests that use these accounts.
+- **Snap UI**: The snap's UI component that allows the user to interact with the snap to perform custom operations on accounts and requests.
 
 ## Implementing a `Keyring` class
 
 The first step for creating a Keyring snap is to implement the [`Keyring` interface](../reference/keyring-api/modules.md#keyring). This interface describes all the methods necessary to make your custom EVM accounts work inside MetaMask with your own logic. The next sections will go over the methods of the `Keyring` interface by describing the different flows that it handles.
 
-### Snap account creation flow
+## Snap account creation flow
 
-The first interaction between users and your Keyring snap will be the snap account creation process. The MetaMask account selection modal has an option called "Add snap account":
+The first interaction between users and your Keyring snap will be the snap account creation process. Here is a diagram of the process:
+
+![Keyring snap account creation flow](../assets/keyring/create-account-flow.png)
+
+The MetaMask account selection modal has an option called "Add snap account":
 
 ![add snap account option](../assets/keyring/add-snap-account.png)
 
@@ -28,11 +54,11 @@ In your `Keyring` class' `createAccount` method, your responsibility is to creat
 
 Once your snap has created an account, that account can be used to sign messages and transactions. In the following sections we'll look at how this can be done.
 
-### Synchronous signing flow
+## Synchronous signing flow
 
 Your Keyring snap will implement the simple flow if it's able to sign transactions directly. This would be the case if the snap doesn't need a third-party such as a hardware key or a second account's signature, as would be the case for a threshold signature scheme. The flow would look like this:
 
-![Simple keyring snap flow](../assets/keyring/keyring-snap-simple-flow.png)
+![Synchronous signing flow](../assets/keyring/synchronous-flow.png)
 
 For a full example of a simple keyring snap, see [`snap-simple-keyring` on GitHub](https://github.com/MetaMask/snap-simple-keyring).
 
@@ -45,11 +71,11 @@ After the user approves the transaction in the UI, MetaMask will call the `submi
 If your Keyring snap receives an `eth_sendTransaction` request, you must treat it like an `eth_signTransaction` request. That is, your snap is responsible for providing the signature in the response, and MetaMask is responsible for broadcasting the transaction.
 :::
 
-### Asynchronous signing flow
+## Asynchronous signing flow
 
 If your keyring snap implements a more complex scheme, e.g. threshold signing, then the flow will be more involved, and more `Keyring` methods will be used. The diagram below will help you visualize the flow:
 
-![Keyring snap complex flow](../assets/keyring/keyring-snap-complex-flow.png)
+![Asynchronous signing flow](../assets/keyring/asynchronous-flow.png)
 
 The flow starts the same way: a request to sign a transaction or arbitrary data is initiated by a Dapp or by the user. After approval, your snap's `submitRequest` method is called. 
 
@@ -62,6 +88,20 @@ The Dapp will list your snap's pending requests using an RPC call facilitated by
 Once the signing process is completed, the companion Dapp will resolve the request using the [`KeyringSnapRpcClient`'s `approveRequest` method](../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest), which will call the snap's `Keyring` method of the same name. This method receives the request's ID, as well as the final result.
 
 When `approveRequest` gets called, it can resolve the pending request by using the [`snap_manageAccounts`' `submitResponse` method](../reference/rpc-api.md#submitresponse).
+
+## Adding the `snap_manageAccounts` permission
+
+Since your snap will make use of the `snap_manageAccounts` function, it needs to request permission for it in the manifest. Edit `snap.manifest.json` as follows:
+
+```json
+{
+  // ...other settings
+  "initialPermissions": {
+    // ...other permissions
+    "snap_manageAccounts": {}
+  }
+}
+```
 
 ## Exposing the `Keyring` class as JSON-RPC endpoints
 
@@ -139,4 +179,28 @@ export const onRpcRequest: OnRpcRequestHandler = buildHandlersChain(
 
 ## Using the keyring API from a Dapp
 
-TODO
+As you're building a companion Dapp to provide a user interface for your Keyring snap, you'll need to interact with your snap's JSON-RPC API. While you could do this by making regular RPC calls using [`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we provide a more elegant solution.
+
+From your Dapp, you can use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md) from the `@metamask/keyring-api` package, like so:
+
+```typescript
+import { KeyringSnapRpcClient } from '@metamask/keyring-api';
+import { defaultSnapOrigin as snapId } from '../config';
+
+const keyringClient = new KeyringSnapRpcClient(snapId, window.ethereum);
+
+// Example usage, after the user fills the steps to create an account...
+keyringClient.createAccount(name, options);
+
+// The above call is equivalent to
+window.ethereum.request({
+  method: 'wallet_invokeSnap',
+  params: {
+      snapId,
+      request: {
+        method: 'keyring_createAccount',
+        params: { name, options }
+      }
+  },
+});
+```
