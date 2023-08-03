@@ -1,0 +1,9 @@
+{
+  "label": "Get started building a dapp",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "slug": "how-to/get-started-building",
+    "description": "Get started building a new dapp to integrate with MetaMask."
+  }
+}
