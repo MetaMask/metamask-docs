@@ -24,7 +24,7 @@ For the full list of MetaMask JSON-RPC API methods, see the
 
 ## eth_requestAccounts
 
-Requests that the user provide an Ethereum address to be identified by.
+Requests the user to provide their Ethereum address.
 Use this method to [access a user's accounts](../how-to/connect/access-accounts.md).
 
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).

@@ -48,8 +48,8 @@ More restricted methods will be added in the future.
 
 ## Unrestricted methods
 
-Unrestricted methods have no corresponding permission, but they might still rely on permissions to
-succeed (for example, the signing methods require calling the restricted
+Unrestricted methods do not require requesting permission to call them, but they might still rely on
+permissions to succeed (for example, the signing methods require calling the restricted
 [`eth_accounts`](/wallet/reference/eth_accounts) method), or they might require confirmation by the
 user (for example, [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain)).
 
