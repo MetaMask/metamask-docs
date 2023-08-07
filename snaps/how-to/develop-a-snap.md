@@ -105,7 +105,7 @@ can always build, publish, and use snaps without MetaMask's permission.
 
 ## Resources and tools
 
-You can review the growing number of [example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained by MetaMask, as well as the following fully functional and open source snaps: 
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) maintained by MetaMask, as well as the following fully functional and open source snaps: 
 
 - [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
 - [StarkNet](https://github.com/Consensys/starknet-snap)
