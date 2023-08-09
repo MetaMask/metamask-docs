@@ -158,3 +158,22 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 },
 ```
+
+## snap_notify 
+To display a notification in MetaMask or natively in the browser, a snap must request `snap_notify` permission.
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "snap_notify": {},
+},
+```
+## snap_dialog
+To display a dialog in the MetaMask UI, a snap must request `snap_dialog` permission.
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "snap_dialog": {},
+},
+```
