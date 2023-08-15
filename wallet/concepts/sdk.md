@@ -10,15 +10,27 @@ to the MetaMask browser extension and MetaMask Mobile.
 You can install the SDK in existing dapps, and call any [provider API](provider-api.md) methods from
 your dapp.
 
-This page demonstrates the [user experience](#user-experience) of using a dapp with the SDK
-installed.
-It also describes the secure [communication layer](#communication-layer) the SDK uses when
-connecting to MetaMask Mobile, and the different [connection statuses](#connection-status).
-
-:::tip important
+:::tip Get started
 MetaMask SDK is the recommended method of integrating your dapp with the MetaMask wallet.
 You can get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
 :::
+
+## Why MetaMask SDK?
+
+Before MetaMask SDK, there were three ways to connect a dapp to MetaMask:
+
+1. Connect from a web dapp in a desktop browser to the MetaMask browser extension
+2. Have a user open a web dapp in MetaMask Mobile's in-app browser
+3. Use third party libraries such as WalletConnect to connect a mobile dapp to MetaMask Mobile
+
+With MetaMask SDK, there are more ways to seamlessly connect:
+
+1. Connect from a web dapp in a desktop browser to the MetaMask browser extension or MetaMask Mobile
+2. Connect from a web dapp in a mobile browser to MetaMask Mobile
+3. Connect from desktop, mobile, and gaming dapps to MetaMask Mobile
+
+MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
+multiple dapp platforms, without relying on third party libraries.
 
 ## User experience
 
@@ -103,6 +115,9 @@ It also provides security against eavesdropping and tampering, since the shared 
 from the sender's and recipient's private keys, which are both kept secret.
 
 ## Connection status
+
+The connection from the SDK to MetaMask Mobile can [pause](#paused-connections) and
+[clear](#cleared-connections).
 
 ### Paused connections
 

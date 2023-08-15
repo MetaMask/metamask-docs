@@ -7,9 +7,10 @@ title: Introduction
 Integrate your dapp with MetaMask to interact with your dapp users' Ethereum accounts.
 You can enable users to connect to their MetaMask wallets from the following dapp platforms:
 
-- Web dapps on desktop and mobile browsers
-- Desktop and mobile dapps
-- Games built on platforms such as Unity
+- [Web dapps](how-to/connect/set-up-sdk/javascript/index.md) on desktop and mobile browsers
+- [Desktop](how-to/connect/set-up-sdk/javascript/index.md) and
+  [mobile](how-to/connect/set-up-sdk/mobile/index.md) dapps
+- Games built on platforms such as [Unity](how-to/connect/set-up-sdk/gaming/unity.md)
 
 :::tip Integrate using MetaMask SDK
 [Set up MetaMask SDK](how-to/connect/set-up-sdk/index.md) to start integrating your dapp with MetaMask.
