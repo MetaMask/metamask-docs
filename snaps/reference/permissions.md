@@ -8,7 +8,23 @@ sidebar_position: 4
 You can [request the following permissions](../how-to/request-permissions.md) in your snap manifest
 file.
 
-## endowment:cronjob
+## RPC API permissions
+
+You must request permission to use any
+[restricted JSON-RPC API methods](rpc-api.md#restricted-methods).
+
+For example, to request to use [`snap_dialog`](rpc-api.md#snap_dialog), add the following to the
+manifest file:
+
+```json
+"initialPermissions": {
+  "snap_dialog": {}
+},
+```
+
+## Endowments
+
+### endowment:cronjob
 
 To run periodic actions for the user (cron jobs), a snap must request the `endowment:cronjob` permission.
 This permission allows the snap to specify cron jobs that trigger the exported
@@ -51,7 +67,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-## endowment:ethereum-provider
+### endowment:ethereum-provider
 
 To communicate with a node using MetaMask, a snap must request the `endowment:ethereum-provider` permission.
 This permission exposes the global API `ethereum` to the snap execution environment.
@@ -65,7 +81,7 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:long-running
+### endowment:long-running
 
 A snap that is computationally heavy and can't finish execution within the
 [snap lifecycle requirements](../concepts/lifecycle.md) must request the `endowment:long-running` permission.
@@ -79,7 +95,7 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:network-access
+### endowment:network-access
 
 To access the internet, a snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
@@ -98,11 +114,16 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-### Same-origin policy and CORS
+#### Same-origin policy and CORS
 
-`fetch()` requests in a snap are bound by browsers' [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access). Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin` header with the value `null` with outgoing requests. For the snap to be able to read the response, the server must send an [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header with the value `*` or `null` in the response.
+`fetch()` requests in a snap are bound by browsers' [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
+Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
+header with the value `null` with outgoing requests.
+For the snap to be able to read the response, the server must send an
+[`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
+with the value `*` or `null` in the response.
 
-## endowment:rpc
+### endowment:rpc
 
 To handle arbitrary JSON-RPC requests, a snap must request the `endowment:rpc` permission.
 This permission grants a snap access to JSON-RPC requests sent to the snap, using the exported
@@ -125,7 +146,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-## endowment:transaction-insight
+### endowment:transaction-insight
 
 To provide transaction insights, a snap must request the `endowment:transaction-insight` permission.
 This permission grants a snap read-only access to raw transaction payloads, before they're accepted
@@ -146,7 +167,7 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:webassembly
+### endowment:webassembly
 
 To use WebAssembly, a snap must request the `endowment:webassembly` permission.
 This permission exposes the global `WebAssembly` API to the snap execution environment.
