@@ -4,9 +4,38 @@ Some snaps are designed to communicate with Dapps. If you are a Dapp developer, 
 
 ## Connecting to a snap
 
-Connecting to a snap is done by using the [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps) method from your Dapp. If a user does not have a snap installed in their MetaMask, MetaMask will prompt the user to install the snap.
+Connecting to a snap is done by using the [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps) method from your Dapp. If a user does not have a snap installed in their MetaMask, MetaMask will prompt the user to install the snap. There are different possible outcomes from calling `wallet_requestSnaps`:
 
-TO DO: show the response that the dapp developer will receive when the snap is already installed, when it has to be installed, when the user rejects the installation, or when the RPC endowment is not available for that snap.
+
+### User rejects the install request
+
+If the user rejects the install request, the call to `wallet_requestSnaps` will throw with:
+
+```json
+{ code: 4001, message: "User rejected the request." Z}
+```
+
+### User approves the install request
+
+If the user approves the install request, the call to `wallet_requestSnaps` will return an object with the following shape:
+
+```json
+{
+    "SNAP_ID": {
+        "blocked": false,
+        "enabled": true,
+        "id": "SNAP_ID",
+        "initialPermissions": {
+            // ...all the permissions in the snap's manifest
+        },
+        "version": "SNAP_VERSION"
+    }
+}
+```
+
+### Snap is already installed
+
+If the snap was already installed, the call to `wallet_requestSnaps` will return the same object as for a fresh install of the snap, with the difference that the user won't see a confirmation pop-up asking them to install the snap.
 
 :::tip
 Snaps are installed into the MetaMask instance of each user. If a snap stores data, that data is specific to that user's instance of MetaMask. However, that data can be shared with multiple dapps. Do not assume that data stored by a snap is unique to your dapp. 
@@ -40,4 +69,18 @@ It is not possible for a user to install multiple versions of a snap into the sa
 
 ## Reconnecting to a snap
 
-At any time, a user can open their MetaMask Snaps settings menu and see all of the dapps that are connected to a snap. From that menu they can revoke a dapp connection. If your dapp loses the connection to a snap, you can reconnect with `wallet_requestSnaps`. Since the snap is already installed, you will get a success response without MetaMask showing a popup. However, if the user has removed or disabled the snap, you will get TO DO: explain the responses. 
+At any time, a user can open their MetaMask Snaps settings menu and see all of the dapps that are connected to a snap. From that menu they can revoke a dapp connection. If your dapp loses the connection to a snap, you can reconnect with `wallet_requestSnaps`. Since the snap is already installed, you will get a success response without MetaMask showing a popup. However, if the user has disabled the snap, the response will have `enabled` set to `false` for your SNAP_ID:
+
+```json
+{
+    "SNAP_ID": {
+        "blocked": false,
+        "enabled": false,
+        "id": "SNAP_ID",
+        "initialPermissions": {
+            // ...all the permissions in the snap's manifest
+        },
+        "version": "SNAP_VERSION"
+    }
+}
+```
