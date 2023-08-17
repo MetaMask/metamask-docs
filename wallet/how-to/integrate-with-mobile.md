@@ -69,7 +69,7 @@ it's fully initialized.
 
 With WalletConnect, your users can use MetaMask Mobile as a signer while using other web, desktop,
 or mobile apps.
-Read the [WalletConnect mobile linking documentation](https://docs.walletconnect.org/mobile-linking)
+Read the [WalletConnect mobile linking documentation](https://docs.walletconnect.com/2.0/api/mobileLinking)
 for more information.
 
 ## Use deeplinks
