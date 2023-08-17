@@ -21,11 +21,12 @@ Before MetaMask SDK, there were three ways to connect a dapp to MetaMask:
 
 1. Connect from a web dapp in a desktop browser to the MetaMask browser extension
 2. Have a user open a web dapp in MetaMask Mobile's in-app browser
-3. Use third party libraries such as WalletConnect to connect a mobile dapp to MetaMask Mobile
+3. Use third party libraries such as [WalletConnect](https://walletconnect.com/) to connect a mobile
+   dapp to MetaMask Mobile
 
 With MetaMask SDK, there are more ways to seamlessly connect:
 
-1. Connect from a web dapp in a desktop browser to the MetaMask browser extension or MetaMask Mobile
+1. Connect from a web dapp in a desktop browser to the MetaMask browser extension or to MetaMask Mobile
 2. Connect from a web dapp in a mobile browser to MetaMask Mobile
 3. Connect from desktop, mobile, and gaming dapps to MetaMask Mobile
 
