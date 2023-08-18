@@ -12,7 +12,7 @@ Connecting to a snap is done by using the [`wallet_requestSnaps`](../reference/r
 If the user rejects the install request, the call to `wallet_requestSnaps` will throw with:
 
 ```json
-{ code: 4001, message: "User rejected the request." Z}
+{ code: 4001, message: "User rejected the request." }
 ```
 
 ### User approves the install request
