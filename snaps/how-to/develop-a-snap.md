@@ -105,13 +105,11 @@ can always build, publish, and use snaps without MetaMask's permission.
 
 ## Resources and tools
 
-You can review the growing number of
-[example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained
-by MetaMask, as well as the following fully functional and open source snaps:
+You can review the growing number of [example snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) maintained by MetaMask, as well as the following fully functional and open source snaps: 
 
+- [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
 - [StarkNet](https://github.com/Consensys/starknet-snap)
-- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
-- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+- [MobyMask Phishing Warning](https://github.com/Montoya/mobymask-snap)
 - [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
   (uses Truffle for local testing)
 
