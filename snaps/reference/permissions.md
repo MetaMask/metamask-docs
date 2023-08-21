@@ -179,3 +179,30 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 },
 ```
+
+## Dynamic permissions
+
+Dynamic permissions are not requested in the manifest file. Instead, they are acquired during the lifecycle of the snap.
+
+## eth_accounts
+
+This dynamic permission is acquired when a snap calls the `eth_requestAccounts` method of the Ethereum provider. Calling `eth_requestAccounts` requires the [`ethereum-provider` endowment](#endowmentethereum-provider). The presence of the permission can be checked by calling [`wallet_getPermissions`](../../wallet/reference/rpc-api/#wallet_getpermissions). If the permission is present, the return value of `wallet_getPermissions` will contain a permission with a `parentCapability` of `eth_accounts`. It will come with a caveat of `restrictReturnedAccounts`, an array of all the accounts that the user allowed for this snap:
+
+```json
+{
+  "id": "47vm2UUi1pccNAeYKGmwF", // example
+  "parentCapability": "eth_accounts",
+  "invoker": "npm:SNAP_ID",
+  "caveats": [
+    {
+      "type": "restrictReturnedAccounts",
+      "value": [
+        "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
+      ]
+    }
+  ],
+  "date": 1692616452846
+}
+```
+
+This permission can be revoked by the user by going to the "Connected sites" option in the MetaMask UI, and removing the connection from an account to the snap.
