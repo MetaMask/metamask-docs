@@ -83,6 +83,10 @@ Specify this permission in the manifest file as follows:
 
 ### endowment:long-running
 
+:::caution
+`endowment:long-running` is deprecated.
+:::
+
 A snap that is computationally heavy and can't finish execution within the
 [snap lifecycle requirements](../concepts/lifecycle.md) must request the `endowment:long-running` permission.
 This permission allows the snap to run indefinitely while processing RPC requests.
