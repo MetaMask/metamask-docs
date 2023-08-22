@@ -24,7 +24,7 @@ The following are different possible outcomes from calling `wallet_requestSnaps`
 If the user rejects the installation request, the call to `wallet_requestSnaps` throws the following error:
 
 ```json
-{ code: 4001, message: "User rejected the request." }
+{ "code": 4001, "message": "User rejected the request." }
 ```
 
 ### User approves the installation request
