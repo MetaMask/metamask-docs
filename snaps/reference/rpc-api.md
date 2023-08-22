@@ -636,7 +636,7 @@ interact with the specified snaps.
 
 A website can also call this method to invoke the specified JSON-RPC method of the specified snap.
 
-This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap), and is only callable by websites.
+This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap).
 
 :::note
 Most websites only make one call to `wallet_requestPermissions`.
@@ -718,8 +718,6 @@ the request is rejected.
 
 Snaps are fully responsible for implementing their JSON-RPC API.
 Consult the snap's documentation for available methods, their parameters, and return values.
-
-This method is only callable by websites.
 
 #### Parameters
 
