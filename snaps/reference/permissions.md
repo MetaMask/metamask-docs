@@ -205,4 +205,4 @@ This dynamic permission is acquired when a snap calls the `eth_requestAccounts` 
 }
 ```
 
-This permission can be revoked by the user by going to the "Connected sites" option in the MetaMask UI, and removing the connection from an account to the snap.
+This permission can be revoked by the user by going to the snap's settings under "snap permissions".
