@@ -184,7 +184,7 @@ Specify this permission in the manifest file as follows:
 
 Dynamic permissions are not requested in the manifest file. Instead, they are acquired during the lifecycle of the snap.
 
-## eth_accounts
+### eth_accounts
 
 This dynamic permission is acquired when a snap calls the `eth_requestAccounts` method of the Ethereum provider. Calling `eth_requestAccounts` requires the [`ethereum-provider` endowment](#endowmentethereum-provider). The presence of the permission can be checked by calling [`wallet_getPermissions`](/wallet/reference/rpc-api/#wallet_getpermissions). If the permission is present, the return value of `wallet_getPermissions` will contain a permission with a `parentCapability` of `eth_accounts`. It will come with a caveat of `restrictReturnedAccounts`, an array of all the accounts that the user allowed for this snap:
 
