@@ -428,6 +428,11 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 This method is only callable by snaps.
 
+:::danger important
+Coin type 60 is reserved for MetaMask accounts and is blocked for snaps. 
+If you wish to connect to MetaMask accounts in a snap, use `eth_accounts`.
+:::
+
 #### Parameters
 
 An object containing `coinType`, the BIP-44 coin type to get the entropy for.
