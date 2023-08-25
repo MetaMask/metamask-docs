@@ -84,7 +84,7 @@ Specify this permission in the manifest file as follows:
 :::note 
 The global `ethereum` API in Snaps has fewer capabilities than `window.ethereum` for dapps. 
 You can only use it to make read requests from the RPC provider, not to write to the blockchain or initiate transactions. 
-You can also use it to access Ethereum accounts with `eth_requestAccounts` and then use `personal_sign` with 
+You can also use it to connect to Ethereum accounts with `eth_requestAccounts` and then use `personal_sign` with 
 those connected accounts.
 :::
 
