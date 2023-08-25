@@ -86,8 +86,7 @@ on publishing to the public registry.
 The following details are specific to Snaps:
 
 - The version in `package.json` and `snap.manifest.json` must match.
-- The image specified in `iconPath` in the manifest file is used as the icon displayed when
-  installing and displaying confirmations from the snap.
+- The image specified in `iconPath` in the manifest file is used as the icon displayed when installing the snap, in custom dialogs, and in the settings menu.
   - This icon must be a valid SVG.
   - The icon will be cropped in a circle when displayed in MetaMask; you do not need to make the icon circular.
 
