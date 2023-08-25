@@ -88,8 +88,17 @@ The following details are specific to Snaps:
 - The version in `package.json` and `snap.manifest.json` must match.
 - The image specified in `iconPath` in the manifest file is used as the icon displayed when
   installing and displaying confirmations from the snap.
+  - This icon must be a valid SVG.
+  - The icon will be cropped in a circle when displayed in MetaMask; you do not need to make the icon circular.
 
 After publishing the snap, any dapp can connect to the snap by using the snap ID `npm:[packageName]`.
+
+:::caution
+If you are using the snap template, make sure to only publish the snap package in `/packages/snap`. 
+You can use the [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest) to verify 
+that your snap was published correctly &mdash; just click on "localhost" in the top right corner and change the 
+snap location to be "npm" and the ID of your snap. 
+:::
 
 ## Distribute your snap
 
