@@ -5,8 +5,7 @@ sidebar_position: 4
 
 # Snaps permissions
 
-You can [request the following permissions](../how-to/request-permissions.md) in your snap manifest
-file.
+Your snap can [request the following permissions](../how-to/request-permissions.md).
 
 ## RPC API permissions
 
@@ -182,11 +181,19 @@ Specify this permission in the manifest file as follows:
 
 ## Dynamic permissions
 
-Dynamic permissions are not requested in the manifest file. Instead, they are acquired during the lifecycle of the snap.
+Dynamic permissions are not requested in the manifest file.
+Instead, your snap can acquire dynamic permissions during its lifecycle.
 
 ### eth_accounts
 
-This dynamic permission is acquired when a snap calls the `eth_requestAccounts` method of the Ethereum provider. Calling `eth_requestAccounts` requires the [`ethereum-provider` endowment](#endowmentethereum-provider). The presence of the permission can be checked by calling [`wallet_getPermissions`](/wallet/reference/rpc-api/#wallet_getpermissions). If the permission is present, the return value of `wallet_getPermissions` will contain a permission with a `parentCapability` of `eth_accounts`. It will come with a caveat of `restrictReturnedAccounts`, an array of all the accounts that the user allowed for this snap:
+A snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
+RPC method by calling the provider's [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+Calling `eth_requestAccounts` requires the [`ethereum-provider`](#endowmentethereum-provider) endowment.
+
+You can check the presence of the permission by calling [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
+If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
+It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this snap.
+The following is an example `eth_accounts` permission:
 
 ```json
 {
@@ -205,4 +212,4 @@ This dynamic permission is acquired when a snap calls the `eth_requestAccounts` 
 }
 ```
 
-This permission can be revoked by the user by going to the snap's settings under "snap permissions".
+The user can revoke this permission by going to the snap's settings under **Snap permissions**.
