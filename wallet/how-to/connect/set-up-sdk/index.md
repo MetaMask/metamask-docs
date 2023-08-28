@@ -32,7 +32,7 @@ It supports the following dapp platforms:
       <ul>
         <li><a href="javascript/react-native">React Native</a></li>
         <li><a href="mobile/ios">Native iOS</a></li>
-        <li><a href="mobile/android">Native Android</a> (coming soon)</li>
+        <li><a href="mobile/android">Native Android</a></li>
       </ul>
     </div>
   </div>
