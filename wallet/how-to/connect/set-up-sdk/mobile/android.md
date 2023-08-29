@@ -16,7 +16,7 @@ for examples on how to use the SDK to make Ethereum requests.
 
 ## Prerequisites
 
-- MetaMask Mobile version 7.6.0 or higher installed on your target device (that is, a physical
+- MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical
   device or emulator)
 
   :::note
@@ -25,7 +25,7 @@ for examples on how to use the SDK to make Ethereum requests.
   and build to your target device.
   :::
 
-- Android SDK version 23 or higher
+- Android SDK version 23 or above
 
 ## Steps
 
