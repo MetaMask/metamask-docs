@@ -5,24 +5,40 @@ sidebar_position: 2
 
 # Run a development network
 
-You can run a personal Ethereum development network using [Ganache](https://www.trufflesuite.com/ganache),
+You can run a personal Ethereum development network using [Hardhat](https://hardhat.org/),
 which allows you to develop a dapp in a secure test environment.
 
 :::note
-When using a local development blockchain such as Ganache or
+When using a local development blockchain such as Hardhat or
 [anvil](https://book.getfoundry.sh/anvil/#overview-of-anvil), your node must calculate gas to make
 transactions on MetaMask.
 :::
 
-## Connect to Ganache
+## Connect to Hardhat
 
-Follow the [Ganache quickstart](https://trufflesuite.com/docs/ganache/quickstart/) to set
-up a development network.
+Follow the [Hardhat Quick Start](https://hardhat.org/hardhat-runner/docs/getting-started#quick-start)
+to set up a Hardhat development network.
 
-When you create a Ganache workspace, enter your MetaMask seed phrase into
-the **Account & Keys** setting.
-Ganache automatically gives each of your first 10 accounts 100 test ether (you can configure
-these numbers in **Accounts & Keys**), which makes it easy to start development.
+In your `hardhat.config.js` file, specify your
+[MetaMask seed phrase](https://support.metamask.io/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase)
+in the [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts) field of the
+`networks.hardhat` configuration:
+
+```js title="hardhat.config.js"
+module.exports = {
+  networks: {
+    hardhat: {
+      accounts: {
+        mnemonic: "<your MetaMask seed phrase>",
+      },
+    },
+  },
+};
+```
+
+Hardhat automatically gives each of your first 20 accounts 10000 test ether (you can modify
+these numbers in the [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts)
+configuration), which makes it easy to start development.
 
 :::caution important
 Your seed phrase controls all your accounts, so we recommend keeping at least one seed phrase for
@@ -31,20 +47,16 @@ You can manage multiple seed phrases by using multiple browser profiles, each wi
 MetaMask installation.
 :::
 
-In the **Server** setting of your workspace, find the hostname and port of your Ganache
-network, which comprises the RPC URL of your network:
+To run a Hardhat development network and expose a JSON-RPC interface, run `npx hardhat node`.
+You can now connect MetaMask to your development network RPC URL, `http://127.0.0.1:8545/`.
 
-```text
-http://<hostname>:<port>
-```
+In the MetaMask extension:
 
-In the MetaMask extension, connect to your Ganache network:
-
-1. Select the network you're currently connected to.
+1. In the upper left corner, select the network you're currently connected to.
 1. Select **Add network**.
 1. Select **Add a network manually**.
-1. Enter the RPC URL of your network.
-1. Enter MetaMask's default [chain ID](../connect/detect-network.md#chain-ids) for Ganache, `1337`.
+1. Enter the RPC URL of your Hardhat network, `http://127.0.0.1:8545/`.
+1. Enter MetaMask's default chain ID for Hardhat, `31337`.
 
 ## Reset your local nonce calculation
 
