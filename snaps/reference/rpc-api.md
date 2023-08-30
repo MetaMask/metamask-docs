@@ -229,7 +229,7 @@ An object containing the contents of the prompt dialog:
 
 ##### Returns
 
-The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value will be an empty string.
+The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
 
 #### Example
 
