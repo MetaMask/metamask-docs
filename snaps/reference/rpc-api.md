@@ -229,7 +229,7 @@ An object containing the contents of the prompt dialog:
 
 ##### Returns
 
-The text entered by the user.
+The text entered by the user if the prompt was submitted, `null` otherwise.
 
 #### Example
 
