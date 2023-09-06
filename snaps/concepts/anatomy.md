@@ -162,37 +162,25 @@ For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`
 
 The snap configuration file, `snap.config.ts`, should be placed in the project root directory.
 You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
-them in the `cliOptions` property of the configuration file.
+them in the `config` object of the configuration file.
 For example:
 
-```javascript
-module.exports = {
-  cliOptions: {
-    src: "lib/index.js",
-    dist: "out",
-    port: 9000,
+```ts
+import { resolve } from 'path';
+import type { SnapConfig } from '@metamask/snaps-cli';
+
+const config: SnapConfig = {
+  bundler: 'webpack',
+  input: resolve(__dirname, 'src/index.ts'),
+  server: {
+    port: 8080,
+  },
+  polyfills: {
+    buffer: true,
   },
 };
-```
 
-If you want to customize the Browserify build process, you can provide the `bundlerCustomizer` property.
-It's a function that takes one argument, the
-[browserify object](https://github.com/browserify/browserify#api-example) which MetaMask uses
-internally to bundle the snap.
-You can transform it in any way you want, for example, adding plugins.
-The `bundleCustomizer` function looks something like this:
-
-```javascript
-const brfs = require("brfs");
-
-module.exports = {
-  cliOptions: {
-    /* ... */
-  },
-  bundlerCustomizer: (bundler) => {
-    bundler.transform(brfs);
-  },
-};
+export default config;
 ```
 
 :::note
@@ -210,6 +198,12 @@ Moreover, the [Snaps execution environment](execution-environment.md) has no DOM
 APIs, and no filesystem access, so anything that relies on the DOM doesn't work, and any Node
 built-ins must be bundled along with the snap.
 
-Use the command `mm-snap build` to bundle your snap using [Browserify](https://browserify.org).
+Use the command `mm-snap build` to bundle your snap using 
+[webpack](https://webpack.js.org/) or 
+[Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.
+
+:::note
+If you are using the template snap monorepo, running `yarn start` will bundle your snap for you.
+:::
