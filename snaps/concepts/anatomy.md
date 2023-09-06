@@ -119,8 +119,8 @@ The manifest file of `hello-snap` would look something like this:
 ```json
 {
   "version": "1.0.0",
-  "proposedName": "hello-snap",
-  "description": "A snap that says hello!",
+  "proposedName": "Hello World",
+  "description": "A Snap that says hello!",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hello/hello-snap.git"
