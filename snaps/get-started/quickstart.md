@@ -10,10 +10,10 @@ With the CLI, you can initialize a snap monorepo project built with TypeScript a
 
 ## Prerequisites
 
-- [Snaps installed](install-snaps.md)
+- [MetaMask Flask installed](install-flask.md)
 
   :::tip
-  Snaps works with the latest LTS version of Node.js, but we recommend using the version specified in
+  MetaMask Snaps works with the latest LTS version of Node.js, but we recommend using the version specified in
   the template's [`.nvmrc`](https://github.com/MetaMask/template-snap-monorepo/blob/main/.nvmrc) file.
   :::
 
@@ -50,7 +50,7 @@ Start the development server:
 yarn start
 ```
 
-You are now serving the snap and its front-end at [`http://localhost:8000`](http://localhost:8000/).
+You are now serving the snap at [`http://localhost:8080`](http://localhost:8080/) and its front-end at [`http://localhost:8000`](http://localhost:8000/).
 
 ## Connect to the snap
 
@@ -58,7 +58,7 @@ On the front-end, select the **Connect** button and the MetaMask Flask extension
 requires you to approve the snap's permissions.
 
 Once connected, select the **Send message** button to display a custom message within a confirmation
-screen in MetaMask.
+screen in MetaMask Flask.
 
 ## Customize the snap
 
@@ -94,11 +94,11 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-Edit the text in the `description` or `textAreaContent` field and select the **Reconnect** button
+Edit the text in any `text()` component and select the **Reconnect** button
 on the front-end to re-install the snap.
 
 :::note
-MetaMask automatically re-installs locally hosted snaps whenever it receives a connection request
+MetaMask Flask automatically re-installs locally hosted snaps whenever it receives a connection request
 for them.
 :::
 
