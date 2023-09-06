@@ -71,7 +71,7 @@ called with the specified parameters.
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
 You can use this object to make Snaps-specific JSON-RPC requests.
 
-If a dapp wants to use `Hello World`, assuming it is published to npm using the package name `hello-snap`, it can implement something like this:
+If a dapp wants to use `Hello World`, assuming the snap is published to npm using the package name `hello-snap`, the dapp can implement something like this:
 
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
