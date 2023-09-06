@@ -75,24 +75,22 @@ If a dapp wants to use `Hello World`, assuming it is published to npm using the 
 
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
+// If the snap is not already installed, the MetaMask user 
+// will be prompted to install it
 await window.ethereum.request({
   method: 'wallet_requestSnaps',
   params: {
-    'npm:hello-snap': {
-      // The optional version argument allows requesting a SemVer version
-      // range, with the same semantics as npm package.json ranges.
-      version: '^1.0.0',
-    },
+    'npm:hello-snap': {},
   },
 });
 
 // Invoke the "hello" RPC method exposed by the snap
-const hello = await window.ethereum.request({
+const response = await window.ethereum.request({
   method: "wallet_invokeSnap",
   params: { snapId: "npm:hello-snap", request: { method: "hello" } },
 });
 
-console.log(hello); // 'world!'
+console.log(response); // 'world!'
 ```
 
 The snap's RPC API is completely up to you, as long as it's a valid
