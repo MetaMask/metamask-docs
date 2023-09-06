@@ -7,16 +7,17 @@ sidebar_position: 6
 
 In some cases, such as when [interacting with smart contracts](interact-with-smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
-Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC),
-your dapp can use the
+Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
+which requires them to configure RPC URLs and chain IDs, your dapp can use the
 [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain) and
 [`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain) RPC methods to prompt
-the user to add the network to their MetaMask wallet.
+the user to add a specific, pre-configured network to their MetaMask wallet.
 
 These methods are specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085) and
 [EIP-3326](https://eips.ethereum.org/EIPS/eip-3326), and we recommend using them together.
-`wallet_addEthereumChain` creates a confirmation asking the user to add the specified network to MetaMask.
-`wallet_switchEthereumChain` creates a confirmation asking the user to switch to the specified network.
+
+1. `wallet_addEthereumChain` creates a confirmation asking the user to add the specified network to MetaMask.
+2. `wallet_switchEthereumChain` creates a confirmation asking the user to switch to the specified network.
 
 The confirmations look like the following:
 
