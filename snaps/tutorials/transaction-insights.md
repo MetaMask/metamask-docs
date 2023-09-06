@@ -11,7 +11,7 @@ The snap provides transaction insights in the MetaMask transaction window.
 
 ## Prerequisites
 
-- [Snaps installed](../get-started/install-snaps.md)
+- [MetaMask Flask installed](../get-started/install-flask.md)
 
 - An account on your MetaMask Flask instance with testnet ETH
 
