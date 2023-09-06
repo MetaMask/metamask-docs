@@ -5,10 +5,25 @@ sidebar_position: 4
 
 # Snaps permissions
 
-You can [request the following permissions](../how-to/request-permissions.md) in your snap manifest
-file.
+Your snap can [request the following permissions](../how-to/request-permissions.md).
 
-## endowment:cronjob
+## RPC API permissions
+
+You must request permission to use any
+[restricted JSON-RPC API methods](rpc-api.md#restricted-methods).
+
+For example, to request to use [`snap_dialog`](rpc-api.md#snap_dialog), add the following to the
+manifest file:
+
+```json
+"initialPermissions": {
+  "snap_dialog": {}
+},
+```
+
+## Endowments
+
+### endowment:cronjob
 
 To run periodic actions for the user (cron jobs), a snap must request the `endowment:cronjob` permission.
 This permission allows the snap to specify cron jobs that trigger the exported
@@ -51,7 +66,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-## endowment:ethereum-provider
+### endowment:ethereum-provider
 
 To communicate with a node using MetaMask, a snap must request the `endowment:ethereum-provider` permission.
 This permission exposes the global API `ethereum` to the snap execution environment.
@@ -65,7 +80,18 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:long-running
+:::note 
+The global `ethereum` API in Snaps has fewer capabilities than `window.ethereum` for dapps. 
+You can only use it to make read requests from the RPC provider, not to write to the blockchain or initiate transactions. 
+You can also use it to connect to Ethereum accounts with `eth_requestAccounts` and then use `personal_sign` with 
+those connected accounts.
+:::
+
+### endowment:long-running
+
+:::caution
+`endowment:long-running` is deprecated.
+:::
 
 A snap that is computationally heavy and can't finish execution within the
 [snap lifecycle requirements](../concepts/lifecycle.md) must request the `endowment:long-running` permission.
@@ -79,7 +105,7 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:network-access
+### endowment:network-access
 
 To access the internet, a snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
@@ -98,11 +124,16 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-### Same-origin policy and CORS
+#### Same-origin policy and CORS
 
-`fetch()` requests in a snap are bound by browsers' [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access). Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin` header with the value `null` with outgoing requests. For the snap to be able to read the response, the server must send an [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header with the value `*` or `null` in the response.
+`fetch()` requests in a snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
+Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
+header with the value `null` with outgoing requests.
+For the snap to be able to read the response, the server must send an
+[`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
+with the value `*` or `null` in the response.
 
-## endowment:rpc
+### endowment:rpc
 
 To handle arbitrary JSON-RPC requests, a snap must request the `endowment:rpc` permission.
 This permission grants a snap access to JSON-RPC requests sent to the snap, using the exported
@@ -125,7 +156,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-## endowment:transaction-insight
+### endowment:transaction-insight
 
 To provide transaction insights, a snap must request the `endowment:transaction-insight` permission.
 This permission grants a snap read-only access to raw transaction payloads, before they're accepted
@@ -146,7 +177,7 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-## endowment:webassembly
+### endowment:webassembly
 
 To use WebAssembly, a snap must request the `endowment:webassembly` permission.
 This permission exposes the global `WebAssembly` API to the snap execution environment.
@@ -158,3 +189,38 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 },
 ```
+
+## Dynamic permissions
+
+Dynamic permissions are not requested in the manifest file.
+Instead, your snap can acquire dynamic permissions during its lifecycle.
+
+### eth_accounts
+
+A snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
+RPC method by calling the provider's [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+Calling `eth_requestAccounts` requires the [`ethereum-provider`](#endowmentethereum-provider) endowment.
+
+You can check the presence of the permission by calling [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
+If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
+It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this snap.
+The following is an example `eth_accounts` permission:
+
+```json
+{
+  "id": "47vm2UUi1pccNAeYKGmwF", // example
+  "parentCapability": "eth_accounts",
+  "invoker": "npm:SNAP_ID",
+  "caveats": [
+    {
+      "type": "restrictReturnedAccounts",
+      "value": [
+        "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
+      ]
+    }
+  ],
+  "date": 1692616452846
+}
+```
+
+The user can revoke this permission by going to the snap's settings under **Snap permissions**.

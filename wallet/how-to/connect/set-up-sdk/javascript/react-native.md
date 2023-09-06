@@ -10,8 +10,8 @@ users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
 
-- A React Native project set up
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) v5.8.1 or above
+- A [React Native](https://reactnative.dev/docs/0.71/getting-started) project set up with React Native version 0.71 or above
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or above
 - [Yarn](https://yarnpkg.com/getting-started/install) or
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 

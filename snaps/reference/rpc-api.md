@@ -229,7 +229,7 @@ An object containing the contents of the prompt dialog:
 
 ##### Returns
 
-The text entered by the user.
+The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
 
 #### Example
 
@@ -427,6 +427,13 @@ for user addresses, but it's your responsibility to know how to use those keys t
 derive an address for the relevant protocol or sign a transaction for the user.
 
 This method is only callable by snaps.
+
+:::caution 
+Coin type 60 is reserved for MetaMask accounts and blocked for snaps. 
+If you wish to connect to MetaMask accounts in a snap, use 
+[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and 
+`eth_requestAccounts`.
+:::
 
 #### Parameters
 
@@ -636,7 +643,7 @@ interact with the specified snaps.
 
 A website can also call this method to invoke the specified JSON-RPC method of the specified snap.
 
-This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap), and is only callable by websites.
+This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap).
 
 :::note
 Most websites only make one call to `wallet_requestPermissions`.
@@ -718,8 +725,6 @@ the request is rejected.
 
 Snaps are fully responsible for implementing their JSON-RPC API.
 Consult the snap's documentation for available methods, their parameters, and return values.
-
-This method is only callable by websites.
 
 #### Parameters
 

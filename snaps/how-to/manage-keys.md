@@ -108,5 +108,6 @@ For example, to derive Dogecoin keys:
 
 The following are examples of existing snaps that manage accounts and keys:
 
-- [KeystoneHQ's Btcsnap](https://github.com/KeystoneHQ/btcsnap-1)
-- [Consensys's Starknet Snap](https://github.com/Consensys/starknet-snap)
+- [Dogecoin snap tutorial](https://github.com/ziad-saab/dogecoin-snap)
+- [Consensys StarkNet snap](https://github.com/Consensys/starknet-snap)
+- [Account Labs Bitcoin snap](https://github.com/snapdao/btcsnap)
