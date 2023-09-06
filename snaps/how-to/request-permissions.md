@@ -48,5 +48,5 @@ For example, your snap can request permission to call the Ethereum provider's
 [`eth_accounts`](../reference/permissions.md#eth_accounts) RPC method by calling the provider's
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
-See the [Ethereum JSON-RPC API restricted methods](/wallet/concepts/rpc-api#restricted-methods)
+See the [`eth_accounts` Dynamic Permission](../reference/permissions.md#eth_accounts)
 for more information.

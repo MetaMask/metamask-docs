@@ -7,11 +7,11 @@ sidebar_position: 1
 
 This tutorial walks you through creating a snap that estimates gas fees.
 The snap uses the `fetch` API to request information from the internet, and displays custom
-information in a confirmation dialog.
+information in an alert dialog.
 
 ## Prerequisites
 
-- [Snaps installed](../get-started/install-snaps.md)
+- [MetaMask Flask installed](../get-started/install-flask.md)
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Yarn](https://yarnpkg.com/) version 3
 

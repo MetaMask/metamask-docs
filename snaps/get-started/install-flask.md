@@ -1,11 +1,16 @@
 ---
-description: Install Snaps dependencies.
+description: Install MetaMask Flask to start building your own Snaps.
 sidebar_position: 1
 ---
 
-# Install Snaps
+# Install MetaMask Flask
 
 To get started building your own snaps, you must [install the MetaMask Flask browser extension](#install-the-metamask-flask-browser-extension).
+
+:::danger Developers only
+MetaMask Flask is an experimental tool only for developers. 
+If you are not a developer, you should not install MetaMask Flask. 
+:::
 
 ## Prerequisites
 
