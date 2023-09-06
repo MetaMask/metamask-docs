@@ -78,9 +78,9 @@ If a dapp wants to use `Hello World`, assuming it is published to npm using the 
 // If the snap is not already installed, the MetaMask user 
 // will be prompted to install it
 await window.ethereum.request({
-  method: 'wallet_requestSnaps',
+  method: "wallet_requestSnaps",
   params: {
-    'npm:hello-snap': {},
+    "npm:hello-snap": {},
   },
 });
 
