@@ -164,7 +164,7 @@ For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`
 
 ## Configuration file
 
-The snap configuration file, `snap.config.js`, should be placed in the project root directory.
+The snap configuration file, `snap.config.ts`, should be placed in the project root directory.
 You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
 them in the `cliOptions` property of the configuration file.
 For example:
