@@ -76,16 +76,14 @@ If a dapp wants to use `Hello World`, assuming it is published to npm using the 
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
 await window.ethereum.request({
-  method: "wallet_enable",
-  params: [
-    {
-      wallet_snap: {
-        "npm:hello-snap": {
-          version: "^1.0.0",
-        },
-      },
+  method: 'wallet_requestSnaps',
+  params: {
+    'npm:hello-snap': {
+      // The optional version argument allows requesting a SemVer version
+      // range, with the same semantics as npm package.json ranges.
+      version: '^1.0.0',
     },
-  ],
+  },
 });
 
 // Invoke the "hello" RPC method exposed by the snap
