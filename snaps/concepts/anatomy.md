@@ -48,7 +48,7 @@ This page examines the major components of a snap:
 
 If you're familiar with JavaScript or TypeScript development, developing a snap might feel familiar
 to you.
-Consider this simple snap, `hello-snap`:
+Consider this simple snap, `Hello World`:
 
 ```typescript title="index.ts"
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -71,7 +71,7 @@ called with the specified parameters.
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
 You can use this object to make Snaps-specific JSON-RPC requests.
 
-If a dapp wants to use `hello-snap`, it can implement something like this:
+If a dapp wants to use `Hello World`, assuming it is published to npm using the package name `hello-snap`, it can implement something like this:
 
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
