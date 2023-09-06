@@ -110,7 +110,7 @@ specify an RPC API.
 
 To get MetaMask to execute your snap, you must have a valid manifest file named `snap.manifest.json`,
 located in your package root directory.
-The manifest file of `hello-snap` would look something like this:
+The manifest file of `Hello World` would look something like this:
 
 ```json
 {
