@@ -71,7 +71,7 @@ Make sure to handle errors for every call to
 
 ### Restricted methods
 
-MetaMask introduced web3 wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
+MetaMask introduced wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
 In this permissions system, each RPC method is restricted or unrestricted.
 If a method is restricted, a dapp must request permission to call it using
 [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
