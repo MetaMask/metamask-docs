@@ -3,11 +3,11 @@ description: Learn about MetaMask SDK.
 sidebar_position: 2
 ---
 
-# MetaMask SDK
+# What is MetaMask SDK?
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
 to the MetaMask browser extension and MetaMask Mobile.
-You can install the SDK in existing dapps, and call any [provider API](provider-api.md) methods from
+You can install the SDK in existing dapps, and call any [provider API](apis.md) methods from
 your dapp.
 
 :::tip Get started
