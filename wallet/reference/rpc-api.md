@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 # JSON-RPC API
 
 MetaMask uses the [`window.ethereum.request(args)`](provider-api.md#windowethereumrequestargs)
-provider method to wrap a [JSON-RPC API](../concepts/rpc-api.md).
+provider method to wrap a [JSON-RPC API](../concepts/apis.md#json-rpc-api).
 The API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
 :::tip MetaMask API playground
@@ -18,7 +18,7 @@ The RPC methods are documented in the interactive
 For more information on the standard Ethereum RPC methods, see the
 [Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods).
 
-The following are some MetaMask-specific [unrestricted methods](../concepts/rpc-api.md#unrestricted-methods).
+The following are some MetaMask-specific [unrestricted methods](../concepts/apis.md#unrestricted-methods).
 For the full list of MetaMask JSON-RPC API methods, see the
 [API playground](/wallet/reference/eth_subscribe).
 
