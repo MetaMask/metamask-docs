@@ -750,7 +750,7 @@ console.log(result); // In this example, the result is a boolean.
 
 ### snap_manageAccounts
 
-Manages [Keyring snap](../how-to/integrate-custom-evm-accounts.md) accounts.
+Manages [Keyring snap](../tutorials/integrate-custom-evm-accounts.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
 - [`createAccount`](#createaccount)
