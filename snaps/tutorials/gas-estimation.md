@@ -31,7 +31,7 @@ or
 npm create @metamask/snap gas-estimation-snap
 ```
 
-Next, `cd` into the `gas-estimation-map` project directory and run:
+Next, `cd` into the `gas-estimation-snap` project directory and run:
 
 ```bash
 yarn install
