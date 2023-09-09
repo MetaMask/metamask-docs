@@ -1,5 +1,5 @@
 ---
-sidebar_label: Native Android
+sidebar_label: Android
 sidebar_position: 2
 toc_max_heading_level: 4
 ---
@@ -41,20 +41,33 @@ dependencies {
 ```
 
 Then, sync your project with the Gradle settings.
-Once the syncing has completed, you can import the SDK.
+Once the syncing completes, you can set up the rest of your project.
 
-### 2. Import the SDK
+### 2. Set up your project
 
-Import the SDK by adding the following line to the top of your project file:
+#### 2.1. Set up Gradle
 
-```kotlin
-import io.metamask.androidsdk
-```
+The SDK uses Hilt for Dagger dependency injection, so you must add the corresponding dependencies to
+your Gradle files.
 
-The SDK uses Hilt for Dagger dependency injection, so you must add the corresponding dependencies
-in your `app/build.gradle`:
+Add the following to your project's root `build.gradle` file:
 
 ```gradle title="build.gradle"
+buildscript {
+    // other setup here
+    dependencies {
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.43.2'
+    }
+}
+plugins {
+    // other setup here
+    id 'com.google.dagger.hilt.android' version '2.43.2' apply false
+}
+```
+
+Add the following to your `app/build.gradle` file:
+
+```gradle title="app/build.gradle"
 plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -71,16 +84,96 @@ dependencies {
 }
 ```
 
+#### 2.2. Inject ViewModel dependencies
+
+The SDK uses Hilt dependency injections, so you must create a module defining an Ethereum ViewModel injection.
+This is a single instance that is shared across various view models and survives configuration changes:
+
+```kotlin title="ViewModelModule.kt"
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import io.metamask.androidsdk.ApplicationRepository
+import io.metamask.androidsdk.EthereumViewModel
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object EthereumViewModelModule {
+
+    @Provides
+    @Singleton
+    fun provideEthereumViewModel(repository: ApplicationRepository): EthereumViewModel {
+        return EthereumViewModel(repository)
+    }
+}
+```
+
+#### 2.3. Set up an application class
+
+If you don't have an application class, you must create one:
+
+```kotlin title="MetaMaskDappApplication.kt"
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class DappApplication : Application() {}
+```
+
+In the `AndroidManifest.xml` file, update `android:name` to this application class:
+
+```xml title="AndroidManifest.xml"
+<manifest>
+    <application
+        android:name=".DappApplication"
+        ...
+    </application>
+</manifest>
+```
+
+#### 2.4. Add @AndroidEntryPoint
+
+If you need to inject your dependencies in an activity, you must add `@AndroidEntryPoint` to your
+activity class.
+However, if you need to inject your dependencies in a fragment, you must add `@AndroidEntryPoint` to
+both the fragment and the activity that hosts the fragment.
+
+```kotlin title="MainActivity.kt"
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+   // ...
+}
+```
+
+```kotlin title="LoginFragment.kt"
+@AndroidEntryPoint
+class LoginFragment : Fragment() {
+   // ...
+}
+```
+
+:::note
 Refer to the [example dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) for more
 details on how to set up a Jetpack Compose project to work with the SDK.
+:::
 
-### 3. Connect your dapp
+### 3. Import the SDK
 
-Connect your dapp to MetaMask by adding the following code to your project file.
-The Ethereum module requires the app context, so you must instantiate it from an Activity or a
-module that injects a context.
+Import the SDK by adding the following line to the top of your project file:
 
 ```kotlin
+import io.metamask.androidsdk.EthereumViewModel
+```
+
+### 4. Connect your dapp
+
+Connect your dapp to MetaMask by adding the following code to your project file.
+The Ethereum module requires the app context, so you must instantiate it from an activity or a
+module that injects a context.
+
+```kotlin title="MainActivity.kt"
 // MainActivity
 
 // Obtain EthereumViewModel using viewModels()
@@ -102,13 +195,13 @@ By default, MetaMask logs three SDK events: `connectionRequest`, `connected`, an
 This allows MetaMask to monitor any SDK connection issues.
 To disable this, set `ethereumViewModel.enableDebug = false`.
 
-### 4. Call provider methods
+### 5. Call provider methods
 
 You can now call any [provider API method](../../../../reference/provider-api.md).
 
 The following examples use the
 [`window.ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs)
-provider API method to call various [RPC API](../../../../concepts/rpc-api.md) methods.
+provider API method to call various [RPC API](../../../../concepts/apis.md#json-rpc-api) methods.
 
 #### Example: Get chain ID
 

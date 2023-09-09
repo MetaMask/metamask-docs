@@ -1,5 +1,5 @@
 ---
-sidebar_label: Native iOS
+sidebar_label: iOS
 sidebar_position: 1
 toc_max_heading_level: 4
 ---
@@ -76,7 +76,7 @@ project file:
 
 The following examples use the
 [`window.ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs)
-provider API method to call various [RPC API](../../../../concepts/rpc-api.md) methods.
+provider API method to call various [RPC API](../../../../concepts/apis.md#json-rpc-api) methods.
 
 #### Example: Get chain ID
 
