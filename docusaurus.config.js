@@ -284,6 +284,14 @@ const config = {
             from: "/wallet/how-to/set-icon",
             to: "/wallet/how-to/display/icon",
           },
+          {
+            from: "/wallet/concepts/provider-api",
+            to: "/wallet/concepts/apis",
+          },
+          {
+            from: "/wallet/concepts/rpc-api",
+            to: "/wallet/concepts/apis",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
