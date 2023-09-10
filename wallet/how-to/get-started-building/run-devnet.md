@@ -5,21 +5,20 @@ sidebar_position: 2
 
 # Run a development network
 
-You can run a personal Ethereum development network using [Hardhat](https://hardhat.org/),
+You can run a personal Ethereum development network using [Hardhat](https://hardhat.org/hardhat-network/docs/overview#hardhat-network),
 which allows you to develop a dapp in a secure test environment.
 
 :::note
-When using a local development blockchain such as Hardhat or
+When using a local development blockchain such as Hardhat Network or
 [anvil](https://book.getfoundry.sh/anvil/#overview-of-anvil), your node must calculate gas to make
 transactions on MetaMask.
 :::
 
-## Connect to Hardhat
+## Connect to Hardhat Network
 
-Follow these steps to connect MetaMask to a Hardhat development network.
+Follow these steps to connect MetaMask to Hardhat Network.
 
-1. Follow the [Hardhat Quick Start](https://hardhat.org/hardhat-runner/docs/getting-started#quick-start)
-    to set up a Hardhat development network.
+1. [Set up a Hardhat project.](https://hardhat.org/hardhat-runner/docs/guides/project-setup)
 
 2. Create a new
     [MetaMask seed phrase](https://support.metamask.io/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure#:~:text=Your%20Secret%20Recovery%20Phrase%20(SRP,are%20connected%20to%20that%20phrase.))
@@ -32,10 +31,13 @@ Follow these steps to connect MetaMask to a Hardhat development network.
     MetaMask installation.
     :::
 
-3. In your `hardhat.config.js` file, in the `networks.hardhat` configuration:
+3. In your `hardhat.config.js` file, specify a
+    [`networks` configuration](https://hardhat.org/hardhat-runner/docs/config#networks-configuration)
+    with a `hardhat` network.
+    In this `networks.hardhat` configuration:
 
     - Specify your MetaMask seed phrase in the
-      [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts) field.
+      [`accounts.mnemonic`](https://hardhat.org/hardhat-network/docs/reference#accounts) field.
 
       :::tip
       Alternatively, to prevent committing your seed phrase, we recommend adding your seed phrase to a
@@ -46,12 +48,14 @@ Follow these steps to connect MetaMask to a Hardhat development network.
     - Specify the [chain ID `1337`](https://hardhat.org/hardhat-network/docs/metamask-issue) in the
       [`chainId`](https://hardhat.org/hardhat-network/docs/reference#chainid) field.
 
+    For example:
+
     ```js title="hardhat.config.js"
     module.exports = {
       networks: {
         hardhat: {
           accounts: {
-            mnemonic: "<your MetaMask seed phrase>",
+            mnemonic: process.env.SEED_PHRASE,
           },
           chainId: 1337
         },
@@ -63,9 +67,9 @@ Follow these steps to connect MetaMask to a Hardhat development network.
     these numbers in the [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts)
     configuration), which makes it easy to start development.
 
-4. Run `npx hardhat node` to run a Hardhat development network and expose a JSON-RPC interface.
+4. Run `npx hardhat node` to run Hardhat Network and expose a JSON-RPC interface.
 
-5. You can now connect MetaMask to your development network RPC URL, `http://127.0.0.1:8545/`.
+5. You can now connect MetaMask to your Hardhat Network RPC URL, `http://127.0.0.1:8545/`.
     In the MetaMask extension:
 
    1. In the upper left corner, select the network you're currently connected to.
@@ -74,12 +78,12 @@ Follow these steps to connect MetaMask to a Hardhat development network.
    
    3. Select **Add a network manually**.
    
-   4. Enter the RPC URL of your Hardhat network, `http://127.0.0.1:8545/` (or `http://localhost:8545`).
+   4. Enter your Hardhat Network RPC URL, `http://127.0.0.1:8545/` (or `http://localhost:8545`).
    
-   5. Enter the chain ID of your Hardhat network, `1337` (or `0x539` in hexadecimal format).
+   5. Enter your Hardhat Network chain ID, `1337` (or `0x539` in hexadecimal format).
 
    :::tip
-   Alternatively, you can add your Hardhat network to MetaMask using
+   Alternatively, you can add Hardhat Network to MetaMask using
    [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain/?AddEthereumChainParameter[rpcUrls][0]=http://127.0.0.1:8545&AddEthereumChainParameter[chainId]=0x539&AddEthereumChainParameter[chainName]=Hardhat&AddEthereumChainParameter[nativeCurrency][name]=testEth&AddEthereumChainParameter[nativeCurrency][symbol]=testEth&AddEthereumChainParameter[nativeCurrency][decimals]=18)
    in the interactive API playground.
    :::
