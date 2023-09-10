@@ -1,7 +1,7 @@
----
+---yarn add @metamask/sdk
 sidebar_label: Other web frameworks
 sidebar_position: 3
----
+---ethereum.request({ method: 'eth_requestAccounts', params: [] });
 
 # Use MetaMask SDK with other web frameworks
 
@@ -14,7 +14,7 @@ standard JavaScript.
 
 ### 1. Install the SDK
 
-In your project directory, install the SDK using Yarn or npm:
+In your project directory, install the SDK using Yarn or npm:yarn add @metamask/sdk
 
 ```bash
 yarn add @metamask/sdk
