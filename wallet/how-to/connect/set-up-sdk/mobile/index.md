@@ -10,5 +10,5 @@ to easily connect with their MetaMask Mobile wallet.
 See the instructions for the following mobile platforms:
 
 - [React Native](../javascript/react-native.md)
-- [Native iOS](ios.md)
-- [Native Android](android.md) (coming soon)
+- [iOS](ios.md)
+- [Android](android.md)
