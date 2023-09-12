@@ -36,7 +36,7 @@ add the following entry to the `dependencies` block:
 
 ```gradle title="build.gradle"
 dependencies {
-  implementation 'io.metamask.androidsdk:metamask-android-sdk:0.1.0'
+  implementation 'io.metamask.androidsdk:metamask-android-sdk:0.1.1'
 }
 ```
 
@@ -55,13 +55,16 @@ Add the following to your project's root `build.gradle` file:
 ```gradle title="build.gradle"
 buildscript {
     // other setup here
+    ext {
+        hilt_version = '2.43.2'
+    }
     dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.43.2'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 plugins {
     // other setup here
-    id 'com.google.dagger.hilt.android' version '2.43.2' apply false
+    id 'com.google.dagger.hilt.android' version "$hilt_version" apply false
 }
 ```
 
@@ -75,9 +78,9 @@ plugins {
 
 dependencies {
     // dagger-hilt
-    implementation 'com.google.dagger:hilt-android:2.43.2'
-    kapt 'com.google.dagger:hilt-compiler:2.43.2'
-    
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
     // viewmodel-related
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
@@ -232,11 +235,11 @@ var balance: String? = null
 
 // Create parameters
 val params: List<String> = listOf(
-    ethereumViewModel.selectedAddress, 
+    ethereumViewModel.selectedAddress,
     "latest" // "latest", "earliest" or "pending" (optional)
     )
-  
-// Create request  
+
+// Create request
 let getBalanceRequest = EthereumRequest(
     EthereumMethod.ETHGETBALANCE.value,
     params)
@@ -305,7 +308,7 @@ ethereumViewModel.sendRequest(transactionRequest) { result ->
     } else {
         Log.d(TAG, "Ethereum transaction result: $result")
     }
-} 
+}
 ```
 
 #### Example: Switch chain
