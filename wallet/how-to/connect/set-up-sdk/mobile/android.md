@@ -55,11 +55,9 @@ Add the following to your project's root `build.gradle` file:
 ```gradle title="build.gradle"
 buildscript {
     // other setup here
-
     ext {
         hilt_version = '2.43.2'
     }
-
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
