@@ -61,12 +61,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:$hilt_version'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 }
 plugins {
     // other setup here
-    id 'com.google.dagger.hilt.android' version '$hilt_version' apply false
+    id 'com.google.dagger.hilt.android' version "$hilt_version" apply false
 }
 ```
 
@@ -80,8 +80,8 @@ plugins {
 
 dependencies {
     // dagger-hilt
-    implementation 'com.google.dagger:hilt-android:$hilt_version'
-    kapt 'com.google.dagger:hilt-compiler:$hilt_version'
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // viewmodel-related
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
