@@ -5,7 +5,7 @@ sidebar_position: 6
 
 # Add a network
 
-In some cases, such as when [interacting with smart contracts](interact-with-smart-contracts.md),
+In some cases, such as when [interacting with smart contracts](interact-with-smart-contracts/index.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
 which requires them to configure RPC URLs and chain IDs, your dapp can use the

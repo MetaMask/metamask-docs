@@ -1,6 +1,6 @@
 ---
 description: MetaMask Ethereum provider API reference
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Ethereum provider API
