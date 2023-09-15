@@ -84,8 +84,8 @@ To set the current contract factory, you can use `Contract.ContractFactory`:
 Contract.ContractFactory = new BackedTypeContractFactory();
 ```
 
-Usually, you will never need to do this, unless you are creating a custom contract factory.
-You should use the default contract factories for each runtime:
+You don't need to do this, unless you create a custom contract factory.
+We recommend just using the default contract factories for each runtime:
 
 - Mono runtime - [Impromptu contract factory](#impromptu-contract-factory)
 - IL2CPP runtime - [Backed typed contract factory](#backed-type-contract-factory)

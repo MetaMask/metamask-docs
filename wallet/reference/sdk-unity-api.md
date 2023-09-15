@@ -40,28 +40,30 @@ MetaMaskUnity.Instance.Initialize(config, transport, socketProvider);
 
 ### SaveSession
 
-This method saves the current session to the persistent storage.
-This is useful when you want to save the session and restore it later.
-This is automatically called when the application quits, but you can also manually call it.
+This method saves the current session to persistent storage.
+It is useful when you want to save the session and restore it later.
+When the application starts, it automatically calls this method.
+You can also manually call this method.
 
 ### LoadSession
 
-This method loads the session from the persistent storage.
-This is useful when you want to restore the session after the application quits.
-This is automatically called when the application starts, but you can also manually call it.
+This method loads the session from persistent storage.
+It is useful when you want to restore the session after the application quits.
+When the application starts, it automatically calls this method.
+You can also manually call this method.
 
 ## MetaMaskWallet
 
 ### Connect
 
-This method connects to the MetaMask app.
+This method connects to MetaMask.
 It renders a generated QR code in the user interface for your users to scan with MetaMask Mobile.
-After the user scans this QR code, a connect screen appears in MetaMask Mobile where the user can
-approve the connection with your game application.
+After the user scans this QR code, a connection screen appears in MetaMask Mobile where the user can
+approve the connection with your Unity game.
 
 ### Disconnect
 
-This method disconnects the user that is connected from the MetaMask app session.
+This method disconnects the user from the MetaMask session.
 
 ### Request
 

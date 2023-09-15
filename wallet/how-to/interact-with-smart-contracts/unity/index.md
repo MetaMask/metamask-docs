@@ -21,7 +21,7 @@ The code generator automatically generates backed types for all contract interfa
 the [contract factory](contract-factory.md#backed-type-contract-factory).
 
 In your Unity editor, go to **Tools > MetaMask > Contract ABI Converter**.
-This opens a new dialog box:
+A new dialog box opens:
 
 <p align="center">
 
@@ -94,7 +94,7 @@ selecting one of the following:
 - **ERC721**
 - **ERC1155**
 
-Before using the contract template, you must configure the contract address to use for each chain:
+Before using the contract template, configure the contract address to use for each chain:
 
 <p align="center">
 

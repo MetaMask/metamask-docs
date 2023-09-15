@@ -6,14 +6,14 @@ sidebar_position: 1
 
 When [interacting with smart contracts in Unity](index.md), the `IContract` interface defines an
 interface of a given contract.
-This interface includes all the functions of the contract, and optionally includes a constructor
-function and `Bytecode` field.
+This interface includes all the functions of the contract, and an optional constructor function and
+`Bytecode` field.
 
 You can use the [contract code generator](index.md#generate-contract-code) to generate a contract
 interface given a contract ABI or Hardhat artifact JSON file.
 
-To manually create a new contract interface, you must define a new interface that inherits from `IContract`.
-You may optionally declare the [`BackedType` attribute](contract-factory.md#backed-type-contract-factory).
+To manually create a new contract interface, define a new interface that inherits from `IContract`.
+Optionally, declare the [`BackedType` attribute](contract-factory.md#backed-type-contract-factory).
 
 ```csharp
 #if UNITY_EDITOR || !ENABLE_MONO  
@@ -89,7 +89,7 @@ public interface ERC20 : IContract
 
 ### Use the Task return type
 
-It's recommend to always use `Task` as the return type when declaring contract functions, even if
+We recommend always using `Task` as the return type when declaring contract functions, even if
 the given [provider](contract-provider.md) does not use `Task`.
 When you don't use `Task`, the `Contract` class is blocked until a response from the given
 `Provider` is received.
@@ -103,7 +103,7 @@ function declaring the constructor.
 The return type of the function must be the type of the interface, since a new instance of the
 interface is returned by the `Contract` class.
 
-You must also do one of the following:
+Also, do one of the following:
 
 - Declare a `static readonly string Bytecode` in the interface that has the bytecode.
 
