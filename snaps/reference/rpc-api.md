@@ -771,7 +771,7 @@ The snap is responsible for maintaining its own record of accounts. This can be 
 
 ##### Parameters
 
-- `account` - A [`KeyringAccount`](./keyring-api/Variables/variable.KeyringAccountStruct/) object
+- `account` - A [`KeyringAccount`](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md) object
 
 ##### Returns
 
@@ -835,7 +835,7 @@ The snap is responsible for maintaining its own record of accounts. This can be 
 
 ##### Parameters
 
-- `account` - A [`KeyringAccount`](./keyring-api/Variables/variable.KeyringAccountStruct/) object
+- `account` - A [`KeyringAccount`](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md) object
 
 ##### Returns
 
@@ -907,7 +907,7 @@ Lists the calling snap's accounts that are known to MetaMask. This method won't 
 
 ##### Returns
 
-[`Array<KeyringAccount>`](./keyring-api/Variables/variable.KeyringAccountStruct/)
+[`Array<KeyringAccount>`](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md)
 
 ##### Example
 
