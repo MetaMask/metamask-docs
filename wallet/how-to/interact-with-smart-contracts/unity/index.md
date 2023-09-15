@@ -47,7 +47,7 @@ This function takes a type `T` which must be the interface type of the contract 
 This function returns that type `T`.
 
 You must provide the `address` string the contract should be loaded from, and the
-[provider](../../../concepts/sdk/unity-contract-interaction.md#provider) to use to interact with the contract.
+[provider](contract-provider.md) to use to interact with the contract.
 Usually, the provider is `MetaMaskUnity.Instance.Wallet`.
 
 The following is an example of using a contract:

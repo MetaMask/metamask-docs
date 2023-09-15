@@ -66,4 +66,4 @@ This method disconnects the user that is connected from the MetaMask app session
 ### Request
 
 This method sends a request to MetaMask.
-You can use it to call any [provider API method](../../../../reference/provider-api.md).
+You can use it to call any [provider API method](provider-api.md).
