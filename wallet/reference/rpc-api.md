@@ -1,6 +1,6 @@
 ---
 description: MetaMask Ethereum JSON-RPC API reference
-sidebar_position: 3
+sidebar_position: 4
 toc_max_heading_level: 2
 ---
 
