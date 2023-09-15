@@ -123,4 +123,4 @@ To learn more about and customize your contract interactions using the Unity SDK
 - [Contract interface](contract-interface.md)
 - [Contract factory](contract-factory.md)
 - [Contract proxy class](contract-proxy-class.md)
-- [Provider](contract-provider.md)
+- [Contract provider](contract-provider.md)

@@ -10,7 +10,7 @@ This interface includes all the functions of the contract, and optionally includ
 function and `Bytecode` field.
 
 You can use the [contract code generator](index.md#generate-contract-code) to generate a contract
-interface given a contract ABI or Truffle artifact JSON file.
+interface given a contract ABI or Hardhat artifact JSON file.
 
 To manually create a new contract interface, you must define a new interface that inherits from `IContract`.
 You may optionally declare the [`BackedType` attribute](contract-factory.md#backed-type-contract-factory).
