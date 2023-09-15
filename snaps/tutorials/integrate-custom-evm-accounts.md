@@ -4,6 +4,10 @@ description: Learn how to integrate custom EVM accounts in MetaMask
 
 # Integrate custom EVM accounts in MetaMask
 
+:::caution
+The APIs mentioned in this tutorial are only available in MetaMask Flask, the canary distribution of MetaMask.
+:::
+
 ## Adding the `snap_manageAccounts` permission
 
 Since your snap will make use of the `snap_manageAccounts` function, it needs to request permission for it in the manifest. Edit `snap.manifest.json` as follows:
