@@ -9,7 +9,9 @@ You can interact with smart contracts from your Unity game with MetaMask SDK ins
 ## Prerequisites
 
 - [MetaMask SDK set up](../../connect/set-up-sdk/gaming/unity.md) in your Unity game
-- A [contract ABI](../index.md#contract-abi) JSON file or Truffle artifact JSON file
+- A [contract ABI](../index.md#contract-abi) JSON file or
+  [Hardhat artifact](https://hardhat.org/hardhat-runner/docs/advanced/artifacts#compilation-artifacts)
+  JSON file
 
 ## Generate contract code
 
@@ -27,8 +29,8 @@ This opens a new dialog box:
 
 </p>
 
-Paste your contract ABI JSON file or Truffle build artifact JSON file.
-If you plan to deploy your contract, you must provide a Truffle build artifact JSON, since this
+Paste your contract ABI JSON file or Hardhat artifact JSON file.
+If you plan to deploy your contract, you must provide a Hardhat artifact, since this
 has the required [contract bytecode](../index.md#contract-bytecode) needed for deployment.
 
 You can also specify the `Root Namespace` for the generated contract code.
