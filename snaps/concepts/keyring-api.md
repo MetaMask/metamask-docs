@@ -40,7 +40,7 @@ When interacting with accounts managed by a Keyring snap, we will encounter the 
 
 ## Implementing a `Keyring` class
 
-The first step for creating a Keyring snap is to implement the [`Keyring` interface](../reference/keyring-api/modules.md#keyring). This interface describes all the methods necessary to make your custom EVM accounts work inside MetaMask with your own logic. The next sections will go over the methods of the `Keyring` interface by describing the different flows that it handles.
+The first step for creating a Keyring snap is to implement the [`Keyring` interface](../reference/keyring-api/Type%20Aliases/type-alias.Keyring/). This interface describes all the methods necessary to make your custom EVM accounts work inside MetaMask with your own logic. The next sections will go over the methods of the `Keyring` interface by describing the different flows that it handles.
 
 ## Snap account creation flow
 
@@ -70,7 +70,7 @@ For a full example of a simple keyring snap, see [`snap-simple-keyring` on GitHu
 
 The flow starts when a Dapp calls a method such as `personal_sign` or `eth_signTransaction`, or when the user initiates a new funds transfer from the MetaMask UI. At that point, MetaMask will detect that this interaction is requested for an account controlled by your Keyring snap.
 
-After the user approves the transaction in the UI, MetaMask will call the `submitRequest` method of your `Keyring` class. `submitRequest` will receive the original RPC request, and will need to return a [`SubmitRequestResponse`](../reference/keyring-api/modules.md#submitrequestresponsestruct) with `pending` set to `false`, and `result` set to the requested signature.
+After the user approves the transaction in the UI, MetaMask will call the `submitRequest` method of your `Keyring` class. `submitRequest` will receive the original RPC request, and will need to return a [`SubmitRequestResponse`](../reference/keyring-api/Variables/variable.SubmitRequestResponseStruct/) with `pending` set to `false`, and `result` set to the requested signature.
 
 :::caution
 If your Keyring snap receives an `eth_sendTransaction` request, you must treat it like an `eth_signTransaction` request. That is, your snap is responsible for providing the signature in the response, and MetaMask is responsible for broadcasting the transaction.

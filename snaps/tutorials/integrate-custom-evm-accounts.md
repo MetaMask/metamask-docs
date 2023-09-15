@@ -26,9 +26,9 @@ Since your snap will make use of the `snap_manageAccounts` function, it needs to
 
 Once you've written all the business logic for your custom EVM account type, the next step is to expose it as a JSON-RPC API. Exposing a JSON-RPC API in Snaps is done by [exporting an `onRpcRequest` function](../reference/exports.md#onrpcrequest) from the snap package.
 
-The `@metamask/keyring-api` package provides a helper called [`handleKeyringRequest`](../reference/keyring-api/modules.md#handlekeyringrequest). This helper takes an instance of your `Keyring` class and a request object. It responds to requests where the `method` is of type `keyring_*`, and throws a [`MethodNotSupportedError`](../reference/keyring-api/classes/MethodNotSupportedError.md) if it doesn't recognize the request method.
+The `@metamask/keyring-api` package provides a helper called [`handleKeyringRequest`](../reference/keyring-api/Functions/function.handleKeyringRequest/). This helper takes an instance of your `Keyring` class and a request object. It responds to requests where the `method` is of type `keyring_*`, and throws a [`MethodNotSupportedError`](../reference/keyring-api/Classes/class.MethodNotSupportedError/) if it doesn't recognize the request method.
 
-Since your snap will most likely want to answer other JSON-RPC requests than the `keyring_*` ones, another helper called [`buildHandlersChain`](../reference/keyring-api/modules.md#buildhandlerschain) lets you chain multiple RPC handlers together. As each handler in the chain throws a [`MethodNotSupportedError`](../reference/keyring-api/classes/MethodNotSupportedError.md), the next handler in the chain will be called. The return value of `buildHandlersChain` is a function that can be used as the `onRpcRequest` export.
+Since your snap will most likely want to answer other JSON-RPC requests than the `keyring_*` ones, another helper called [`buildHandlersChain`](../reference/keyring-api/Functions/function.buildHandlersChain/) lets you chain multiple RPC handlers together. As each handler in the chain throws a [`MethodNotSupportedError`](../reference/keyring-api/Classes/class.MethodNotSupportedError/), the next handler in the chain will be called. The return value of `buildHandlersChain` is a function that can be used as the `onRpcRequest` export.
 
 Here's an example of composing two handlers: the keyring handler and a custom handler. This code would go in `packages/snap/src/index.ts`:
 
@@ -100,7 +100,7 @@ export const onRpcRequest: OnRpcRequestHandler = buildHandlersChain(
 
 As you're building a companion Dapp to provide a user interface for your Keyring snap, you'll need to interact with your snap's JSON-RPC API. While you could do this by making regular RPC calls using [`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we provide a more elegant solution.
 
-From your Dapp, you can use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md) from the `@metamask/keyring-api` package, like so:
+From your Dapp, you can use the [`KeyringSnapRpcClient`](../reference/keyring-api/Classes/class.KeyringSnapRpcClient/) from the `@metamask/keyring-api` package, like so:
 
 ```typescript
 import { KeyringSnapRpcClient } from '@metamask/keyring-api';
