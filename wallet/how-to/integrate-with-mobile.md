@@ -1,7 +1,7 @@
 ---
 sidebar_label: Integrate with MetaMask Mobile
 description: Integrate your dapp with MetaMask Mobile.
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 # Integrate your dapp with MetaMask Mobile

@@ -28,7 +28,7 @@ public interface ERC20 : IContract
 ## Declare contract functions
 
 To declare a `view` or `pure` function of the contract, first set the return type, the function name
-(may differ from the actual name), and all parameters the function takes in a `Task`:
+(may differ from the actual name), and all parameters the function takes in a Task:
 
 ```csharp
 #if UNITY_EDITOR || !ENABLE_MONO  
@@ -93,8 +93,8 @@ We recommend always using `Task` as the return type when declaring contract func
 the given [provider](contract-provider.md) does not use `Task`.
 When you don't use `Task`, the `Contract` class is blocked until a response from the given
 `Provider` is received.
-This means if the `Provider` returns a `Task` of the request, the `Contract` class is blocked until
-that `Task` completes, which may lead to a deadlock.
+This means if the `Provider` returns a Task of the request, the `Contract` class is blocked until
+that Task completes, which may lead to a deadlock.
 
 ### Define a contract constructor
 

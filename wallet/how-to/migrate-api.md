@@ -1,7 +1,7 @@
 ---
 title: Migrate the provider API
 description: Migrate to the current provider API.
-sidebar_position: 12
+sidebar_position: 13
 ---
 
 # Migrate to the current provider API
