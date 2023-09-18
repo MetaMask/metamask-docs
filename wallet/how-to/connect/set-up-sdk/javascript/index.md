@@ -10,7 +10,8 @@ users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The following instructions work for web dapps based on standard JavaScript.
 You can also see instructions for the following JavaScript-based platforms:
 
-- [React](react.md)
+- [React](react/index.md)
+  - [React UI](react/react-ui.md)
 - [Pure JavaScript](pure-js.md)
 - [Other web frameworks](other-web-frameworks.md)
 - [React Native](react-native.md)
