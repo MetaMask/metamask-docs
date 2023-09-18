@@ -3,7 +3,7 @@ sidebar_label: React UI
 sidebar_position: 1
 ---
 
-# Use MetaMask with React UI
+# Use MetaMask SDK with React UI
 
 You can import [MetaMask SDK](../../../../../concepts/sdk.md) into your React dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
