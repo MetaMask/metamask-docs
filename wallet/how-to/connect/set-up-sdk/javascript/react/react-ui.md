@@ -82,7 +82,7 @@ For the full list of options you can set for `sdkOptions`, see the
 Use the SDK by using the `useSDK` hook in your React components.
 See the [instructions for `@metamask/sdk-react`](index.md#4-use-the-sdk).
 
-### 5. Use the MetaMaskButton Component
+### 5. Use the MetaMaskButton component
 
 The `@metamask/sdk-react-ui` package provides a pre-styled button, `MetaMaskButton`, to initiate a
 connection to MetaMask.
