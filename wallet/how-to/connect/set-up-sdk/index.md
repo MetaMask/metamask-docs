@@ -31,8 +31,8 @@ It supports the following dapp platforms:
     <div class="card__body">
       <ul>
         <li><a href="javascript/react-native">React Native</a></li>
-        <li><a href="mobile/ios">Native iOS</a></li>
-        <li><a href="mobile/android">Native Android</a> (coming soon)</li>
+        <li><a href="mobile/ios">iOS</a></li>
+        <li><a href="mobile/android">Android</a></li>
       </ul>
     </div>
   </div>

@@ -1,6 +1,6 @@
 ---
 description: Learn about convenience libraries.
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Convenience libraries
@@ -13,8 +13,8 @@ contracts, for a variety of API preferences (for example, promises, callbacks, a
 The [MetaMask Ethereum provider API](../reference/provider-api.md) is very simple, and wraps
 [Ethereum JSON-RPC](../reference/rpc-api.md) formatted messages, which is why
 some developers use a convenience library for interacting with the provider, such as
-[Ethers](https://www.npmjs.com/package/ethers), [web3.js](https://www.npmjs.com/package/web3),
-[Truffle](https://www.trufflesuite.com/), and [Embark](https://framework.embarklabs.io/).
+[Ethers](https://www.npmjs.com/package/ethers), [web3.js](https://www.npmjs.com/package/web3), and
+[Embark](https://framework.embarklabs.io/).
 You can refer to those tools' documentation to use them.
 
 :::tip Use MetaMask SDK

@@ -9,7 +9,7 @@ User accounts are used in a variety of contexts in Ethereum, including as identi
 [signing transactions](../sign-data/index.md).
 To request a signature from a user or have a user approve a transaction, your dapp must
 access the user's accounts using the
-[`eth_requestAccounts`](../../reference/rpc-api.md#eth_requestaccounts) RPC method.
+[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
 When accessing a user's accounts:
 

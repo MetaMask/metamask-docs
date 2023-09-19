@@ -5,8 +5,7 @@ sidebar_position: 4
 
 # Snaps permissions
 
-You can [request the following permissions](../how-to/request-permissions.md) in your snap manifest
-file.
+Your snap can [request the following permissions](../how-to/request-permissions.md).
 
 ## RPC API permissions
 
@@ -81,19 +80,12 @@ Specify this permission in the manifest file as follows:
 },
 ```
 
-### endowment:long-running
-
-A snap that is computationally heavy and can't finish execution within the
-[snap lifecycle requirements](../concepts/lifecycle.md) must request the `endowment:long-running` permission.
-This permission allows the snap to run indefinitely while processing RPC requests.
-
-Specify this permission in the manifest file as follows:
-
-```json
-"initialPermissions": {
-  "endowment:long-running": {}
-},
-```
+:::note 
+The global `ethereum` API in Snaps has fewer capabilities than `window.ethereum` for dapps. 
+You can only use it to make read requests from the RPC provider, not to write to the blockchain or initiate transactions. 
+You can also use it to connect to Ethereum accounts with `eth_requestAccounts` and then use `personal_sign` with 
+those connected accounts.
+:::
 
 ### endowment:network-access
 
@@ -179,3 +171,38 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 },
 ```
+
+## Dynamic permissions
+
+Dynamic permissions are not requested in the manifest file.
+Instead, your snap can acquire dynamic permissions during its lifecycle.
+
+### eth_accounts
+
+A snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
+RPC method by calling the provider's [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+Calling `eth_requestAccounts` requires the [`ethereum-provider`](#endowmentethereum-provider) endowment.
+
+You can check the presence of the permission by calling [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
+If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
+It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this snap.
+The following is an example `eth_accounts` permission:
+
+```json
+{
+  "id": "47vm2UUi1pccNAeYKGmwF", // example
+  "parentCapability": "eth_accounts",
+  "invoker": "npm:SNAP_ID",
+  "caveats": [
+    {
+      "type": "restrictReturnedAccounts",
+      "value": [
+        "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
+      ]
+    }
+  ],
+  "date": 1692616452846
+}
+```
+
+The user can revoke this permission by going to the snap's settings under **Snap permissions**.
