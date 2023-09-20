@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Use KeyringSnapRpcClient
 
-KeyringSnapRpcClient is to be used on the client side to invoke `keyring_*` rpc methods on the snap.
+[`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md) is to be used on the client side to invoke `keyring_*` rpc methods on the snap.
 
 Keyring RPC methods can be invoked directly like so:
 
@@ -28,9 +28,9 @@ window.ethereum.request({
 });
 ```
 
-But to make it easier for developers we abstracted much of the logic into the `KeyringRpcSnapClient` available in `@metamask/keyring-api` package.
+But to make it easier for developers we abstracted much of the logic into the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md) available in [`@metamask/keyring-api`](../reference/keyring-api/modules.md) package.
 
-To use `KeyringSnapRpcClient`, first install `@metamask/keyring-api` using the following command:
+To use [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md), first install [`@metamask/keyring-api`](../reference/keyring-api/modules.md) using the following command:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -44,7 +44,7 @@ import { KeyringSnapRpcClient } from "@metamask/keyring-api";
 let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ```
 
-You can now use the client to invoke the following `Keyring API` methods on your snap:
+You can now use the client to invoke the following [`Keyring API`](../reference/keyring-api/index.md) methods on your snap:
 
 - [`keyring_createAccount`](#create-account)
 - [`keyring_getAccount`](#get-account)
