@@ -1,7 +1,7 @@
 ---
 sidebar_label: Onboard users
 description: Simplify the MetaMask onboarding experience for your users.
-sidebar_position: 11
+sidebar_position: 12
 ---
 
 # Use the MetaMask onboarding library

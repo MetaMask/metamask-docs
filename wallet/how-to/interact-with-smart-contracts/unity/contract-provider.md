@@ -59,9 +59,9 @@ It should decode the response, but it's not required.
 It may return any of the following:
 
 - The response as a JSON string
-- The response as a JSON string, wrapped in a `Task`
+- The response as a JSON string, wrapped in a Task
 - The response decoded into some object
-- The response decoded into some object, wrapped in a `Task`
+- The response decoded into some object, wrapped in a Task
 
 If the function returns a JSON string, then the `Contract` class attempts to deserialize the JSON
 string into the desired type.

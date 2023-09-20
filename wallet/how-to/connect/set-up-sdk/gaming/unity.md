@@ -238,5 +238,7 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 ## Next steps
 
-Once you have the MetaMask Unity SDK set up, you can
-[interact with smart contracts](../../../interact-with-smart-contracts/unity/index.md) from your Unity game.
+Once you have the MetaMask Unity SDK set up, you can:
+
+- [Interact with smart contracts in Unity.](../../../interact-with-smart-contracts/unity/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../../use-3rd-party-integrations/unity-dweb.md)
