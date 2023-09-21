@@ -17,7 +17,7 @@ You can enable users to connect to their MetaMask wallets from the following dap
 [MetaMask SDK](concepts/sdk.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 
-With the SDK installed, your dapp can use the [MetaMask Ethereum provider API](concepts/provider-api.md)
+With the SDK installed, your dapp can use the [MetaMask Ethereum provider API](concepts/apis.md)
 to request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 :::
@@ -47,7 +47,7 @@ functions, including:
 
 - [Sign data](how-to/sign-data)
 - [Display tokens, contract methods, and icons in MetaMask](how-to/display)
-- [Interact with smart contracts](how-to/interact-with-smart-contracts.md)
+- [Interact with smart contracts](how-to/interact-with-smart-contracts/index.md)
 - [Access a user's MetaMask provider](how-to/access-provider.md)
 
 ## Questions?

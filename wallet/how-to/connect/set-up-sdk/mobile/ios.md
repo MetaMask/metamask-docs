@@ -1,6 +1,7 @@
 ---
-sidebar_label: Native iOS
+sidebar_label: iOS
 sidebar_position: 1
+toc_max_heading_level: 4
 ---
 
 # Use MetaMask SDK with iOS
@@ -40,13 +41,13 @@ It currently doesn't support `ios-ax86_64-simulator` (Intel chip simulators).
 
 Import the SDK by adding the following line to the top of your project file:
 
-```
+```swift
 import metamask_ios_sdk
 ```
 
 ### 3. Connect your dapp
 
-Connect your dapp by adding the following code to your project file:
+Connect your dapp to MetaMask by adding the following code to your project file:
 
 ```swift
 @ObservedObject var ethereum = MetaMaskSDK.shared.ethereum
@@ -75,7 +76,7 @@ project file:
 
 The following examples use the
 [`window.ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs)
-provider API method to call various [RPC API](../../../../reference/rpc-api.md) methods.
+provider API method to call various [RPC API](../../../../concepts/apis.md#json-rpc-api) methods.
 
 #### Example: Get chain ID
 
@@ -133,7 +134,7 @@ ethereum.request(getBalanceRequest)?.sink(receiveCompletion: { completion in
 
 #### Example: Send transaction
 
-The following examples send a transaction by calling
+The following example sends a transaction by calling
 [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
 
 <!--tabs-->

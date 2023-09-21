@@ -48,7 +48,7 @@ This page examines the major components of a snap:
 
 If you're familiar with JavaScript or TypeScript development, developing a snap might feel familiar
 to you.
-Consider this simple snap, `hello-snap`:
+Consider this simple snap, `Hello World`:
 
 ```typescript title="index.ts"
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -71,30 +71,26 @@ called with the specified parameters.
 In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
 You can use this object to make Snaps-specific JSON-RPC requests.
 
-If a dapp wants to use `hello-snap`, it can implement something like this:
+If a dapp wants to use `Hello World`, assuming the snap is published to npm using the package name `hello-snap`, the dapp can implement something like this:
 
 ```javascript
 // Connect to the snap, enabling its usage inside the dapp
+// If the snap is not already installed, the MetaMask user 
+// will be prompted to install it
 await window.ethereum.request({
-  method: "wallet_enable",
-  params: [
-    {
-      wallet_snap: {
-        "npm:hello-snap": {
-          version: "^1.0.0",
-        },
-      },
-    },
-  ],
+  method: "wallet_requestSnaps",
+  params: {
+    "npm:hello-snap": {},
+  },
 });
 
 // Invoke the "hello" RPC method exposed by the snap
-const hello = await window.ethereum.request({
+const response = await window.ethereum.request({
   method: "wallet_invokeSnap",
   params: { snapId: "npm:hello-snap", request: { method: "hello" } },
 });
 
-console.log(hello); // 'world!'
+console.log(response); // 'world!'
 ```
 
 The snap's RPC API is completely up to you, as long as it's a valid
@@ -114,13 +110,13 @@ specify an RPC API.
 
 To get MetaMask to execute your snap, you must have a valid manifest file named `snap.manifest.json`,
 located in your package root directory.
-The manifest file of `hello-snap` would look something like this:
+The manifest file of `Hello World` would look something like this:
 
 ```json
 {
   "version": "1.0.0",
-  "proposedName": "hello-snap",
-  "description": "A snap that says hello!",
+  "proposedName": "Hello World",
+  "description": "A Snap that says hello!",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hello/hello-snap.git"
@@ -157,46 +153,34 @@ details the requirements of both `snap.manifest.json` and its relationship to `p
 :::
 
 You might need to modify some manifest fields manually.
-For example, if you change the location of the (optional) icon SVG file, you must update
+For example, if you change the location of the icon SVG file, you must update
 `source.location.npm.iconPath` to match.
 You can also use the [command line](../reference/cli/index.md) to update some fields for you.
 For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`.
 
 ## Configuration file
 
-The snap configuration file, `snap.config.js`, should be placed in the project root directory.
+The snap configuration file, `snap.config.ts`, should be placed in the project root directory.
 You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
-them in the `cliOptions` property of the configuration file.
+them in the `config` object of the configuration file.
 For example:
 
-```javascript
-module.exports = {
-  cliOptions: {
-    src: "lib/index.js",
-    dist: "out",
-    port: 9000,
+```ts
+import { resolve } from 'path';
+import type { SnapConfig } from '@metamask/snaps-cli';
+
+const config: SnapConfig = {
+  bundler: 'webpack',
+  input: resolve(__dirname, 'src/index.ts'),
+  server: {
+    port: 8080,
+  },
+  polyfills: {
+    buffer: true,
   },
 };
-```
 
-If you want to customize the Browserify build process, you can provide the `bundlerCustomizer` property.
-It's a function that takes one argument, the
-[browserify object](https://github.com/browserify/browserify#api-example) which MetaMask uses
-internally to bundle the snap.
-You can transform it in any way you want, for example, adding plugins.
-The `bundleCustomizer` function looks something like this:
-
-```javascript
-const brfs = require("brfs");
-
-module.exports = {
-  cliOptions: {
-    /* ... */
-  },
-  bundlerCustomizer: (bundler) => {
-    bundler.transform(brfs);
-  },
-};
+export default config;
 ```
 
 :::note
@@ -214,6 +198,12 @@ Moreover, the [Snaps execution environment](execution-environment.md) has no DOM
 APIs, and no filesystem access, so anything that relies on the DOM doesn't work, and any Node
 built-ins must be bundled along with the snap.
 
-Use the command `mm-snap build` to bundle your snap using [Browserify](https://browserify.org).
+Use the command `mm-snap build` to bundle your snap using 
+[webpack](https://webpack.js.org/) or 
+[Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.
+
+:::note
+If you are using the template snap monorepo, running `yarn start` will bundle your snap for you.
+:::

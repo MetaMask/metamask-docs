@@ -3,7 +3,7 @@ description: Create a snap that provides transaction insights.
 sidebar_position: 2
 ---
 
-# Create a transaction insights snap
+# Create a snap to calculate gas fee percentages
 
 This tutorial walks you through creating a snap that calculates the percentage of gas fees that
 a user would pay when creating a transaction.
@@ -11,7 +11,7 @@ The snap provides transaction insights in the MetaMask transaction window.
 
 ## Prerequisites
 
-- [Snaps installed](../get-started/install-snaps.md)
+- [MetaMask Flask installed](../get-started/install-flask.md)
 
 - An account on your MetaMask Flask instance with testnet ETH
 

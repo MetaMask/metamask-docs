@@ -3,15 +3,15 @@ description: Create a snap that estimates gas fees.
 sidebar_position: 1
 ---
 
-# Create a gas estimation snap
+# Create a snap to estimate gas fees
 
 This tutorial walks you through creating a snap that estimates gas fees.
 The snap uses the `fetch` API to request information from the internet, and displays custom
-information in a confirmation dialog.
+information in an alert dialog.
 
 ## Prerequisites
 
-- [Snaps installed](../get-started/install-snaps.md)
+- [MetaMask Flask installed](../get-started/install-flask.md)
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Yarn](https://yarnpkg.com/) version 3
 
@@ -31,7 +31,7 @@ or
 npm create @metamask/snap gas-estimation-snap
 ```
 
-Next, `cd` into the `gas-estimation-map` project directory and run:
+Next, `cd` into the `gas-estimation-snap` project directory and run:
 
 ```bash
 yarn install

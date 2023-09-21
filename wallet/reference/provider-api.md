@@ -1,12 +1,12 @@
 ---
 description: MetaMask Ethereum provider API reference
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Ethereum provider API
 
-MetaMask injects the [provider API](../concepts/provider-api.md) into websites visited by its users
-using the `window.ethereum` provider object.
+MetaMask injects the [provider API](../concepts/apis.md#ethereum-provider-api) into websites visited
+by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in
 your dapp.
 
