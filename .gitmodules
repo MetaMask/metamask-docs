@@ -1,3 +1,6 @@
 [submodule "external/keyring-api"]
 	path = external/keyring-api
 	url = git@github.com:MetaMask/keyring-api.git
+[submodule "keyring-api"]
+	path = keyring-api
+	url = https://github.com/MetaMask/keyring-api

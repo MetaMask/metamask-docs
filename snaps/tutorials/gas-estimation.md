@@ -3,7 +3,7 @@ description: Create a snap that estimates gas fees.
 sidebar_position: 1
 ---
 
-# Create a gas estimation snap
+# Create a snap to estimate gas fees
 
 This tutorial walks you through creating a snap that estimates gas fees.
 The snap uses the `fetch` API to request information from the internet, and displays custom
