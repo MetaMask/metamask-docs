@@ -210,3 +210,78 @@ module.exports.onCronjob = async ({ request }) => {
 ```
 
 <!--/tabs-->
+
+## onNameLookup
+
+To resolve names to addresses and vice versa, a Snap must export `onNameLookup`.
+Whenever the user is typing in the send field, MetaMask calls this method.
+MetaMask passes the user input to the `onNameLookup` handler method.
+
+:::note
+For MetaMask to call the snap's `onNameLookup` method, you must request the
+[`endowment:name-lookup`](permissions.md#endowmentname-lookup) permission.
+:::
+
+
+### Parameters
+
+An object containing:
+
+- `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain ID.
+- `address` or `domain` - Either of these parameters will be defined, while the other will be undefined. 
+
+### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnNameLookupHandler } from '@metamask/snaps-types';
+import { numberToHex } from '@metamask/utils';
+
+export const onNameLookup: OnNameLookupHandler = async (request) => {
+  const { chainId, address, domain } = request;
+
+  if (address) {
+    const shortAddress = `0x${address.substring(2, 5)}`;
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
+    const chainIdHex = numberToHex(chainIdDecimal);
+    const resolvedDomain = `example.domain - ${shortAddress} / ${chainIdHex}`;
+    return { resolvedDomain };
+  }
+
+  if (domain) {
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
+    return { resolvedAddress };
+  }
+
+  return null;
+};
+```
+
+# JavaScript
+
+```js
+module.exports.onNameLookup = async ({ request }) => {
+  const { chainId, address, domain } = request;
+
+  if (address) {
+    const shortAddress = `0x${address.substring(2, 5)}`;
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
+    const chainIdHex = numberToHex(chainIdDecimal);
+    const resolvedDomain = `example.domain - ${shortAddress} / ${chainIdHex}`;
+    return { resolvedDomain };
+  }
+
+  if (domain) {
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
+    return { resolvedAddress };
+  }
+
+  return null;
+};
+```
+
+<!--/tabs-->

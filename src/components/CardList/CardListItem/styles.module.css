@@ -12,6 +12,7 @@
 
   box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
   border: 1px solid var(--ifm-color-emphasis-200);
+  position: relative;
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
 }
@@ -35,4 +36,15 @@
   width: 24px;
   height: 24px;
   margin-right: 8px;
+}
+
+.cardFlag { 
+  border-radius: 0 0 0 0.25rem;
+  position: absolute;
+  top:0;
+  right:0;
+  padding:0.25rem 0.75rem;
+  background-color: rgb(138, 66, 173);
+  color: white; 
+  text-transform: uppercase;
 }

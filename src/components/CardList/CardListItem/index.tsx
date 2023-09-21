@@ -8,6 +8,7 @@ export interface CardItem {
   description?: ReactNode;
   href?: string;
   icon?: string;
+  flag?: string;
 }
 
 interface CardListItemProps {
@@ -24,6 +25,9 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
           )}
           <span>{item.title}</span>
         </h2>
+      )}
+      {item.flag && (
+        <span className={clsx(styles.cardFlag)}>{item.flag}</span>
       )}
       {item.description && (
         <p>
