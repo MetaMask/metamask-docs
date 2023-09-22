@@ -88,7 +88,7 @@ const config = {
         out: path.join(__dirname, "snaps/reference/keyring-api"),
         sidebar: {
           categoryLabel: "Keyring API",
-          position: 99,
+          position: 5
         },
         identifiersAsCodeBlocks: true,
       },
