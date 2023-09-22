@@ -128,7 +128,7 @@ const config = {
           },
           {
             from: "/guide/provider-migration",
-            to: "/wallet/how-to/migrate-api",
+            to: "/wallet/concepts/apis",
           },
           {
             from: "/guide/rpc-api",
@@ -160,15 +160,15 @@ const config = {
           },
           {
             from: "/guide/mobile-getting-started",
-            to: "/wallet/how-to/integrate-with-mobile",
+            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/guide/site-compatibility-checklist",
-            to: "/wallet/how-to/integrate-with-mobile",
+            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/guide/mobile-best-practices",
-            to: "/wallet/how-to/integrate-with-mobile",
+            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/guide/snaps",
@@ -280,7 +280,7 @@ const config = {
           },
           {
             from: "/wallet/how-to/use-mobile",
-            to: "/wallet/how-to/integrate-with-mobile",
+            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/wallet/how-to/use-onboarding-library",
@@ -304,6 +304,14 @@ const config = {
           },
           {
             from: "/wallet/concepts/rpc-api",
+            to: "/wallet/concepts/apis",
+          },
+          {
+            from: "/wallet/how-to/integrate-with-mobile",
+            to: "/wallet/how-to/connect/set-up-sdk",
+          },
+          {
+            from: "/wallet/how-to/migrate-api",
             to: "/wallet/concepts/apis",
           },
         ].reduce((acc, item) => {
@@ -337,6 +345,10 @@ const config = {
           {
             to: "wallet",
             label: "Wallet",
+          },
+          {
+            to: "/wallet/how-to/connect/set-up-sdk",
+            label: "SDK",
           },
           {
             to: "snaps",
