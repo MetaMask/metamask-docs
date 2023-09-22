@@ -3,7 +3,7 @@ description: Create a snap that provides transaction insights.
 sidebar_position: 2
 ---
 
-# Create a transaction insights snap
+# Create a snap to calculate gas fee percentages
 
 This tutorial walks you through creating a snap that calculates the percentage of gas fees that
 a user would pay when creating a transaction.
