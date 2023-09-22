@@ -308,11 +308,11 @@ const config = {
           },
           {
             from: "/wallet/how-to/integrate-with-mobile",
-            to: "/wallet/how-to/connect/set-up-sdk"
+            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/wallet/how-to/migrate-api",
-            to: "/wallet/concepts/apis"
+            to: "/wallet/concepts/apis",
           },
         ].reduce((acc, item) => {
           acc.push(item);
