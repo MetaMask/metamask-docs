@@ -562,6 +562,33 @@ console.log(entropy);
 
 <!--/tabs-->
 
+### snap_getLocale
+
+Gets the user's locale setting. This can be used for localizing text in your Snap. 
+
+#### Example
+
+```javascript
+import { panel, text } from '@metamask/snaps-ui';
+
+const locale = await snap.request({ method: 'snap_getLocale' });
+
+let greeting = 'Hello'; 
+if(locale === 'es') { 
+  greeting = 'Hola'; 
+}
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    content: panel([
+      text(greeting),
+    ]),
+  },
+});
+```
+
 ### snap_manageAccounts
 
 Manages [Keyring snap](../concepts/keyring-api.md) accounts.
