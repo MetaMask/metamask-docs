@@ -1,2 +1,3 @@
 /build
 /.yarn
+/external/keyring-api
