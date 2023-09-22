@@ -127,11 +127,8 @@ export const onRpcRequest: OnRpcRequestHandler = buildHandlersChain(
 As you build a companion dapp to provide a user interface for your Keyring snap, you'll need to
 interact with your snap's JSON-RPC API.
 While you could do this by making regular RPC calls using
-[`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we recommend using the Keyring API.
-
-From your dapp, use the
-[`KeyringSnapRpcClient`](../reference/keyring-api/02-Classes/04-class.KeyringSnapRpcClient.md) as
-follows:
+[`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we recommend
+[using the Keyring API from your dapp](../how-to/use-keyring-api.md):
 
 ```typescript
 import { KeyringSnapRpcClient } from '@metamask/keyring-api';
