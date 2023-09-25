@@ -87,24 +87,6 @@ You can also use it to connect to Ethereum accounts with `eth_requestAccounts` a
 those connected accounts.
 :::
 
-### endowment:long-running
-
-:::caution
-`endowment:long-running` is deprecated.
-:::
-
-A snap that is computationally heavy and can't finish execution within the
-[snap lifecycle requirements](../concepts/lifecycle.md) must request the `endowment:long-running` permission.
-This permission allows the snap to run indefinitely while processing RPC requests.
-
-Specify this permission in the manifest file as follows:
-
-```json
-"initialPermissions": {
-  "endowment:long-running": {}
-},
-```
-
 ### endowment:network-access
 
 To access the internet, a snap must request the `endowment:network-access` permission.

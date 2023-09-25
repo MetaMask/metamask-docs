@@ -47,7 +47,7 @@ functions, including:
 
 - [Sign data](how-to/sign-data)
 - [Display tokens, contract methods, and icons in MetaMask](how-to/display)
-- [Interact with smart contracts](how-to/interact-with-smart-contracts.md)
+- [Interact with smart contracts](how-to/interact-with-smart-contracts/index.md)
 - [Access a user's MetaMask provider](how-to/access-provider.md)
 
 ## Questions?

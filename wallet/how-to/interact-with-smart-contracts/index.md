@@ -5,6 +5,10 @@ sidebar_position: 5
 
 # Interact with smart contracts
 
+This is a high-level overview of how to interact with smart contracts.
+You can also see how to
+[interact with smart contracts from your Unity game](unity/index.md).
+
 To interact with a smart contract, your dapp needs the following information:
 
 - [Contract network](#contract-network)

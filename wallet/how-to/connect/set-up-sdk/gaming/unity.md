@@ -53,6 +53,26 @@ with it and its examples in the scene.
 You also need to install [TextMeshPro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html).
 If you don't have TextMeshPro installed, the Unity editor automatically prompts you to install it.
 
+<details>
+
+<summary>Unity SDK package structure</summary>
+<p>
+
+| File or directory        | Contents                                       |
+| ------------------------ | ---------------------------------------------- |
+| `Documentation`          | Documentation and link to online documentation |
+| `Editor`                 | Editor-only code such as Setup GUI windows, data persistence for SDK settings |
+| `Plugins`                | Plugins needed by the package (the ECIES Platform runtime libraries and core SDK Codebase) |
+| `Runtime`                | Main scripts for the SDK that are environment-agnostic, including the C# scripts that provide the base implementation of the SDK |
+| `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling |
+| `LICENSE.md`             | Package license                                |
+| `Third Party Notices.md` | Third party notices                            |
+
+
+</p>
+
+</details>
+
 ### 3. Initialize MetaMask
 
 The main class you interface with is called `MetaMaskWallet`.
@@ -128,7 +148,7 @@ void OnWalletAuthorized(object sender, EventArgs e) {
 }
 ```
 
-You can call any Ethereum request on the wallet using `wallet.Request(myRequest)`.
+You can call any [JSON-RPC API method](/wallet/reference/eth_subscribe) using `wallet.Request(myRequest)`.
 The following is a sample transaction request:
 
 ```csharp
@@ -148,6 +168,11 @@ var request = new MetaMaskEthereumRequest
 await wallet.Request(request);
 ```
 
+:::note
+See the [Unity SDK API reference](../../../../reference/sdk-unity-api.md) for an overview of the
+API methods from the most important classes.
+:::
+
 ### 6. Configure MetaMask
 
 You can customize the default configuration or create your own configuration.
@@ -162,83 +187,6 @@ Edit the fields and save the changes.
 Create a new configuration by right-clicking on the project window and navigating to
 **MetaMask > Config**.
 Name the new configuration and use it when initializing the `MetaMaskUnity` instance.
-
-## API
-
-The following is an overview of the APIs from the most important classes.
-
-### MetaMaskUnity
-
-This is a singleton class that you can use to access the `MetaMaskWallet` instance, which is
-specific to Unity.
-
-#### `Instance`
-
-This is the singleton instance of the `MetaMaskUnity` class that is lazy-loaded when you access it
-for the first time.
-
-#### `Initialize`
-
-This method initializes the `MetaMaskWallet` instance and makes it accessible via the `Wallet` property.
-You can also pass extra options and parameters to it to customize the wallet instance:
-
-```csharp
-// Initialize using default settings
-MetaMaskUnity.Instance.Initialize();
-
-// Initialize using custom transport and socket provider
-var transport = new MyCustomTransport();
-var socketProvider = new MyCustomSocketProvider();
-MetaMaskUnity.Instance.Initialize(transport, socketProvider);
-
-// Initialize using custom config, transport and socket provider
-var config = myMetaMaskConfig;
-var transport = new MyCustomTransport();
-var socketProvider = new MyCustomSocketProvider();
-MetaMaskUnity.Instance.Initialize(config, transport, socketProvider);
-```
-
-#### `SaveSession`
-
-This method saves the current session to the persistent storage.
-This is useful when you want to save the session and restore it later.
-This is automatically called when the application quits, but you can also manually call it.
-
-#### `LoadSession`
-
-This method loads the session from the persistent storage.
-This is useful when you want to restore the session after the application quits.
-This is automatically called when the application starts, but you can also manually call it.
-
-### MetaMaskWallet
-
-#### `Connect`
-
-This method connects to the MetaMask app.
-It renders a generated QR code in the user interface for your users to scan with MetaMask Mobile.
-After the user scans this QR code, a connect screen appears in MetaMask Mobile where the user can
-approve the connection with your game application.
-
-#### `Disconnect`
-
-This method disconnects the user that is connected from the MetaMask app session.
-
-#### `Request`
-
-This method sends a request to MetaMask.
-You can use it to call any [provider API method](../../../../reference/provider-api.md).
-
-## Package structure
-
-| File or directory        | Contents                                       |
-| ------------------------ | ---------------------------------------------- |
-| `Documentation`          | Documentation and link to online documentation |
-| `Editor`                 | Editor-only code such as Setup GUI windows, data persistence for SDK settings |
-| `Plugins`                | Plugins needed by the package (the ECIES Platform runtime libraries and core SDK Codebase) |
-| `Runtime`                | Main scripts for the SDK that are environment-agnostic, including the C# scripts that provide the base implementation of the SDK |
-| `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling |
-| `LICENSE.md`             | Package license                                |
-| `Third Party Notices.md` | Third party notices                            |
 
 ## FAQS
 
@@ -287,3 +235,10 @@ take longer to build at compile time.
 The SDK is filled with precompiled libraries to save on runtime compilation.
 
 </details>
+
+## Next steps
+
+Once you have the MetaMask Unity SDK set up, you can:
+
+- [Interact with smart contracts in Unity.](../../../interact-with-smart-contracts/unity/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../../use-3rd-party-integrations/unity-dweb.md)

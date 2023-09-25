@@ -3,7 +3,7 @@ sidebar_position: 3
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
-# What are the MetaMask APIs?
+# About the MetaMask APIs
 
 MetaMask supports an [Ethereum provider API](#ethereum-provider-api), which wraps a [JSON-RPC API](#json-rpc-api).
 
