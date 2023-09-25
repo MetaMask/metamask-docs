@@ -1,0 +1,44 @@
+---
+sidebar_position: 1
+---
+
+# Android SDK architecture
+
+The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
+MetaMask Mobile wallet.
+[Set up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md) to get
+started.
+
+The [architecture](#architecture-diagram) and [communication flow](#communication-flow-diagram) of
+the Android SDK differs from the other SDK platforms.
+
+## Architecture diagram
+
+The following diagram outlines the high-level architecture of the Android SDK:
+
+![Android SDK architecture diagram](../../assets/sdk-android-architecture.png)
+
+The MetaMask Android SDK consists of two components:
+
+- **The client SDK**, imported in the dapp
+- **The server SDK**, an Android Native Module embedded in the MetaMask React Native wallet
+
+The client SDK communicates with the server SDK using
+[Interprocess communication (IPC)](https://developer.android.com/guide/components/processes-and-threads#IPC).
+The JSON-RPC calls are implemented using the
+[Android Interface Definition Language (AIDL)](https://developer.android.com/guide/components/aidl).
+Communication over IPC is encrypted using elliptic curve integrated encryption scheme (ECIES).
+
+Within MetaMask, the wallet (written in React Native) communicates with the Native Module (written
+in Kotlin) using different mechanisms depending on the direction of communication:
+
+- **Native Module &rarr; React Native** - The Native Module broadcasts messages as events that the wallet
+  listens to and handles upon receipt.
+- **React Native &rarr; Native Module** - The wallet calls the Native Module using the `NativeModules` API,
+  which enables React Native code to call native Kotlin primitives.
+
+## Communication flow diagram
+
+The following diagram outlines the communication flow between the Android client SDK and server SDK:
+
+![Android SDK communication diagram](../../assets/sdk-android-communication.png)

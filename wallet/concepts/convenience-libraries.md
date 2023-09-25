@@ -18,7 +18,7 @@ some developers use a convenience library for interacting with the provider, suc
 You can refer to those tools' documentation to use them.
 
 :::tip Use MetaMask SDK
-We recommend using [MetaMask SDK](sdk.md), which provides a reliable, secure, and seamless
+We recommend using [MetaMask SDK](sdk/index.md), which provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask wallet.
 It onboards users smoothly from multiple dapp platforms using the MetaMask browser extension or
 MetaMask Mobile, and your dapp can call any [provider API method](../reference/provider-api.md)
