@@ -42,3 +42,12 @@ in Kotlin) using different mechanisms depending on the direction of communicatio
 The following diagram outlines the communication flow between the Android client SDK and server SDK:
 
 ![Android SDK communication diagram](../../assets/sdk-android-communication.png)
+
+The flow is as follows:
+
+1. The dapp, with the SDK installed, initiates communication when a user connects MetaMask.
+    The dapp deeplinks to MetaMask, and MetaMask sets up the Android Native Module to receive client requests.
+2. The dapp generates an ECIES public/private key pair.
+    The dapp and MetaMask exchange public keys over IPC.
+3. The dapp and MetaMask perform end-to-end encrypted JSON-RPC calls.
+    
