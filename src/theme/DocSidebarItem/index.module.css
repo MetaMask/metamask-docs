@@ -1,0 +1,13 @@
+.flaskOnly > a::after {
+  content: "Flask";
+  margin-left: 0.5em;
+  background-color: hsl(280, 45%, 85%);
+  color: hsl(280, 45%, 15%);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+html[data-theme='dark'] .flaskOnly > a::after {
+  color: hsl(280, 45%, 85%);
+  background-color: hsl(280, 45%, 25%);
+}

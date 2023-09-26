@@ -1,5 +1,7 @@
 ---
 description: Create a Keyring snap to connect to custom EVM accounts in MetaMask.
+sidebar_custom_props:
+  flask_only: true
 ---
 
 # Create a snap to connect to custom EVM accounts
@@ -7,9 +9,7 @@ description: Create a Keyring snap to connect to custom EVM accounts in MetaMask
 This tutorial walks you through creating a snap that uses the [Keyring API](../concepts/keyring-api.md)
 to integrate custom EVM accounts in MetaMask.
 
-:::caution important
-The [Keyring API methods](../reference/keyring-api/index.md) mentioned in this tutorial are only
-available in [MetaMask Flask](../get-started/install-flask.md), the canary distribution of MetaMask.
+:::flaskOnly
 :::
 
 ## Prerequisites

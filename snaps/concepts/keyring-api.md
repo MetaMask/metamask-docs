@@ -1,6 +1,8 @@
 ---
 description: Learn about the Snaps Keyring API.
 sidebar_position: 6
+sidebar_custom_props:
+  flask_only: true
 ---
 
 # About the Keyring API
