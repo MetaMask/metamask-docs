@@ -5,9 +5,7 @@ sidebar_position: 6
 
 # About the Keyring API
 
-:::caution important
-This API is only available in [MetaMask Flask](../get-started/install-flask.md), the canary
-distribution of MetaMask.
+:::flaskOnly
 :::
 
 :::tip API documentation
