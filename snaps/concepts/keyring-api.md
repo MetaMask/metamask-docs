@@ -1,13 +1,13 @@
 ---
 description: Learn about the Snaps Keyring API.
 sidebar_position: 6
+sidebar_custom_props:
+  flask_only: true
 ---
 
 # About the Keyring API
 
-:::caution important
-This API is only available in [MetaMask Flask](../get-started/install-flask.md), the canary
-distribution of MetaMask.
+:::flaskOnly
 :::
 
 :::tip API documentation

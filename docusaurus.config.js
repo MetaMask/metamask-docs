@@ -78,6 +78,21 @@ const config = {
         remarkPlugins: [
           require("remark-docusaurus-tabs"),
         ],
+        admonitions: {
+          tag: ":::",
+          keywords: [
+            "info",
+            "success",
+            "danger",
+            "note",
+            "tip",
+            "warning",
+            "important",
+            "caution",
+            "security",
+            "flaskOnly",
+          ],
+        },
       }),
     ],
     [
