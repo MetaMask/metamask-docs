@@ -1,0 +1,13 @@
+.alert.theme-admonition-flaskOnly {
+  --ifm-alert-background-color: hsl(280, 45%, 85%);
+  --ifm-alert-background-color-highlight: hsl(280, 45%, 85%);
+  --ifm-alert-foreground-color: hsl(280, 45%, 15%);
+  --ifm-alert-border-color: hsl(280, 45%, 45%);
+}
+
+html[data-theme='dark'] .alert.theme-admonition-flaskOnly {
+  --ifm-alert-background-color: hsl(280, 45%, 15%);
+  --ifm-alert-background-color-highlight: hsl(280, 45%, 15%);
+  --ifm-alert-foreground-color: hsl(280, 45%, 85%);
+  --ifm-alert-border-color: hsl(280, 45%, 45%);
+}

@@ -2,9 +2,15 @@
 description: Use the KeyringSnapRpcClient from a dapp.
 sidebar_label: Use the Keyring API
 sidebar_position: 5
+sidebar_custom_props:
+  flask_only: true
 ---
 
 # Use the Keyring API from a dapp
+
+:::flaskOnly
+:::
+
 
 Your dapp can use the [Keyring API](../concepts/keyring-api.md) to interact with custom EVM accounts.
 Use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md)
