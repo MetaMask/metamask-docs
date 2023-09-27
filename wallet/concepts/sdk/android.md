@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Android SDK architecture
@@ -40,7 +40,7 @@ in Kotlin) using different mechanisms depending on the direction of communicatio
 - **React Native &rarr; Native Module** - The wallet calls the Native Module using the `NativeModules` API,
   which enables React Native code to call native Kotlin primitives.
 
-## Communication flow diagram
+## Connection flow diagram
 
 The following diagram outlines the communication flow between the Android client SDK and server SDK:
 

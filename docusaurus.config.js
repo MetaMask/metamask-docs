@@ -331,6 +331,10 @@ const config = {
             from: "/wallet/how-to/migrate-api",
             to: "/wallet/concepts/apis",
           },
+          {
+            from: "/sdk",
+            to: "/wallet/how-to/connect/set-up-sdk",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
