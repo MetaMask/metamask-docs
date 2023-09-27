@@ -13,7 +13,7 @@ sidebar_custom_props:
 
 
 Your dapp can use the [Keyring API](../concepts/keyring-api.md) to interact with custom EVM accounts.
-Use the [`KeyringSnapRpcClient`](../reference/keyring-api/02-Classes/04-class.KeyringSnapRpcClient.md)
+Use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md)
 of the Keyring API to invoke Keyring RPC methods on your [Keyring snap](../concepts/keyring-api.md#terminology).
 
 :::tip tutorial
