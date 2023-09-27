@@ -19,8 +19,8 @@
     "postinstall": "cd external/keyring-api && yarn install"
   },
   "dependencies": {
-    "@docusaurus/core": "2.4.1",
-    "@docusaurus/plugin-content-docs": "2.4.1",
+    "@docusaurus/core": "2.4.3",
+    "@docusaurus/plugin-content-docs": "2.4.3",
     "@mdx-js/react": "^1.6.22",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.2.2",
@@ -37,9 +37,9 @@
     "typedoc-plugin-markdown": "4.0.0-next.22"
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "2.4.1",
-    "@docusaurus/module-type-aliases": "2.4.1",
-    "@docusaurus/plugin-client-redirects": "2.4.1",
+    "@docusaurus/eslint-plugin": "2.4.3",
+    "@docusaurus/module-type-aliases": "2.4.3",
+    "@docusaurus/plugin-client-redirects": "2.4.3",
     "@lavamoat/allow-scripts": "^2.3.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
