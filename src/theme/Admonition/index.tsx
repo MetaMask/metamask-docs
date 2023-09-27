@@ -1,13 +1,13 @@
-import React from 'react';
-import Admonition from '@theme-original/Admonition';
-import { Props as AdmonitionPropsRaw } from '@theme/Admonition';
-import type {WrapperProps} from '@docusaurus/types';
+import React from "react";
+import Admonition from "@theme-original/Admonition";
+import { Props as AdmonitionPropsRaw } from "@theme/Admonition";
+import type { WrapperProps } from "@docusaurus/types";
 
-import FlaskIcon from './flask-icon.svg';
-import './index.css';
+import FlaskIcon from "./flask-icon.svg";
+import "./index.css";
 
-type AdmonitionProps = Omit<AdmonitionPropsRaw, 'type'> & {
-  type: AdmonitionPropsRaw['type'] | 'flaskOnly';
+type AdmonitionProps = Omit<AdmonitionPropsRaw, "type"> & {
+  type: AdmonitionPropsRaw["type"] | "flaskOnly";
 }
 
 declare function AdmonitionComponent(props: AdmonitionProps): JSX.Element;
@@ -15,7 +15,7 @@ declare function AdmonitionComponent(props: AdmonitionProps): JSX.Element;
 type Props = WrapperProps<typeof AdmonitionComponent>;
 
 export default function AdmonitionWrapper(props: Props): JSX.Element {
-  if (props.type === 'flaskOnly') {
+  if (props.type === "flaskOnly") {
     return (
       <Admonition
         {...props}
