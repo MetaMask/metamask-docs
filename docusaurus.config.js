@@ -86,7 +86,9 @@ const config = {
         entryPoints: ["./external/keyring-api/src/index.ts"],
         tsconfig: "./external/keyring-api/tsconfig.json",
         out: path.join(__dirname, "snaps/reference/keyring-api"),
-        sidebar: { filteredIds: ["reference/keyring-api/index"] },
+        sidebar: {
+          filteredIds: ["reference/keyring-api/index"]
+        },
         useCodeBlocks: true,
         expandObjects: true,
         parametersFormat: "table",
