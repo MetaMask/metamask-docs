@@ -7,12 +7,12 @@ sidebar_position: 2
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
 to the MetaMask browser extension and MetaMask Mobile.
-You can install the SDK in existing dapps, and call any [provider API](apis.md) methods from
+You can install the SDK in existing dapps, and call any [provider API](../apis.md) methods from
 your dapp.
 
 :::tip Get started
 MetaMask SDK is the recommended method of integrating your dapp with the MetaMask wallet.
-You can get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
+You can get started by [setting up the SDK](../../how-to/connect/set-up-sdk/index.md).
 :::
 
 ## Why MetaMask SDK?
@@ -45,7 +45,7 @@ When a user accesses your web dapp on a desktop browser that doesn't have the Me
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
 to MetaMask Mobile using a QR code.
 
-![SDK desktop browser example](../assets/sdk-desktop-browser.gif)
+![SDK desktop browser example](../../assets/sdk-desktop-browser.gif)
 
 You can download the
 [React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
@@ -60,7 +60,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
 
-![SDK mobile browser example](../assets/sdk-mobile-browser.gif)
+![SDK mobile browser example](../../assets/sdk-mobile-browser.gif)
 
 </p>
 
@@ -79,7 +79,7 @@ scan with their MetaMask Mobile app.
 
 <p align="center">
 
-![SDK Node.js example](../assets/sdk-nodejs.gif)
+![SDK Node.js example](../../assets/sdk-nodejs.gif)
 
 </p>
 

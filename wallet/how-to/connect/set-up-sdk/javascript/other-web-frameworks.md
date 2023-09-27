@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Use MetaMask SDK with other web frameworks
 
-You can import [MetaMask SDK](../../../../concepts/sdk.md) into your web dapp to enable your users to
+You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your web dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for other web frameworks has the [same prerequisites](index.md#prerequisites) as for
 standard JavaScript.
