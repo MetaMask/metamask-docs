@@ -10,7 +10,7 @@ You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your nativ
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip Learn more
-- Refer to the [example Android dapp source code](https://github.com/MetaMask/metamask-android-sdk/tree/main/app)
+- See the [example Android dapp source code](https://github.com/MetaMask/metamask-android-sdk/tree/main/app)
 for examples on how to use the SDK to make Ethereum requests.
 - See more information about the [Android SDK architecture](../../../../concepts/sdk/android.md).
 :::

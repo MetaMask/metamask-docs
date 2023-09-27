@@ -16,7 +16,7 @@ Alternatively, you can use the [`@metamask/sdk-react-ui`](react-ui.md) package t
 :::
 
 :::tip Examples
-Refer to the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+See the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
 for advanced use cases.
 :::
 

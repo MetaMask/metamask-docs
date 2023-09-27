@@ -17,7 +17,7 @@ MetaMask SDK is the recommended method of integrating your dapp with the MetaMas
 You can get started by [setting up the SDK](../../how-to/connect/set-up-sdk/index.md).
 :::
 
-## Why MetaMask SDK?
+## Benefits of MetaMask SDK
 
 Before MetaMask SDK, there were three ways to connect a dapp to MetaMask:
 
@@ -51,9 +51,11 @@ to MetaMask Mobile using a QR code.
   <ReactPlayer playing controls url='/sdk-desktop.mov' width='560' />
 </p>
 
-You can download the
-[React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
-Install the example using `yarn` and run it using `yarn start`.
+:::tip Get started
+- Get started by [setting up the SDK in your web dapp](../../how-to/connect/set-up-sdk/javascript/index.md).
+- See the [JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+  for advanced use cases.
+:::
 
 # Mobile
 
@@ -66,13 +68,11 @@ This happens for all actions that need user approval.
   <ReactPlayer playing controls url='/sdk-mobile-browser.mov' width='560' />
 </p>
 
-You can download the
-[React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
-Install the example using `yarn` and run it using `yarn start`.
-
-You can also download the
-[React Native example](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/downloads/reactNativeApp_v0.1.0.zip).
-Install the example using `yarn setup` and run it using `yarn ios` or `yarn android`.
+:::tip Get started
+- Get started by [setting up the SDK in your mobile dapp](../../how-to/connect/set-up-sdk/mobile/index.md).
+- See the [Android SDK example](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) and
+  [Android SDK architecture](android.md) for more information.
+:::
 
 # Node.js
 
@@ -83,19 +83,27 @@ scan with their MetaMask Mobile app.
   <ReactPlayer playing controls url='/sdk-nodejs.mp4' width='560' />
 </p>
 
-You can download the
-[Node.js example](https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/downloads/nodejs_v0.0.1_beta5.zip).
-Install the example using `yarn` and run it using `node .`.
+:::tip Get started
+- Get started by [setting up the SDK in your Node.js dapp](../../how-to/connect/set-up-sdk/javascript/nodejs.md).
+- See the [Node.js SDK example](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
+for advanced use cases.
+:::
 
 # Unity
 
 When a user accesses your Unity game, the SDK renders a QR code in the game UI using a dedicated
 prefab which players can scan with their MetaMask Mobile app.
-It also supports deeplinking on mobile platforms.
+It also supports deeplinking on mobile platforms, such as in the following screen recording.
 
 <p align="center">
   <ReactPlayer playing controls url='/sdk-unity.mov' width='560' />
 </p>
+
+:::tip Get started
+- Get started by [setting up the SDK in your Unity game](../../how-to/connect/set-up-sdk/gaming/unity.md).
+- See the [Unity demo game with the SDK installed](https://assetstore.unity.com/packages/decentralization/demo-game-dragon-crasher-with-metamask-sdk-infura-and-truffle-249789)
+for advanced use cases.
+:::
 
 <!--/tabs-->
 

@@ -18,7 +18,7 @@ into your React dapp.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
 :::tip Examples
-Refer to the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+See the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
 for advanced use cases.
 :::
 

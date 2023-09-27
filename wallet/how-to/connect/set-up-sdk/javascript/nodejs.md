@@ -9,6 +9,11 @@ You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your Node.
 to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for Node.js has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
+:::tip example
+See the [Node.js SDK example](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
+for advanced use cases.
+:::
+
 ## Steps
 
 ### 1. Install the SDK

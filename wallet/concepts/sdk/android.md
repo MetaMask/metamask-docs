@@ -6,11 +6,14 @@ sidebar_position: 1
 
 The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
 MetaMask Mobile wallet.
-[Set up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md) to get
-started.
-
 The [architecture](#architecture-diagram) and [communication flow](#communication-flow-diagram) of
 the Android SDK differs from the other SDK platforms.
+
+:::tip Get started
+- Get started by [setting up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md).
+- See the [Android SDK example](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) for
+  advanced use cases.
+:::
 
 ## Architecture diagram
 

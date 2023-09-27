@@ -9,6 +9,11 @@ You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your pure 
 your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
+:::tip example
+See the [pure JavaScript SDK example](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/pure-javascript)
+for advanced use cases.
+:::
+
 To import, instantiate, and use the SDK, you can insert a script in the head section of your website:
 
 ```javascript
