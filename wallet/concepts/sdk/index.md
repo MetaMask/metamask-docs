@@ -3,6 +3,8 @@ description: Learn about MetaMask SDK.
 sidebar_position: 2
 ---
 
+import ReactPlayer from 'react-player'
+
 # About MetaMask SDK
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
@@ -45,7 +47,9 @@ When a user accesses your web dapp on a desktop browser that doesn't have the Me
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
 to MetaMask Mobile using a QR code.
 
-![SDK desktop browser example](../../assets/sdk-desktop-browser.gif)
+<p align="center">
+  <ReactPlayer playing controls url='/sdk-desktop.mov' width='560' />
+</p>
 
 You can download the
 [React project example](https://github.com/MetaMask/examples/tree/main/metamask-with/metamask-sdk-create-react-app).
@@ -59,9 +63,7 @@ After the user accepts the connection, they're automatically redirected back to 
 This happens for all actions that need user approval.
 
 <p align="center">
-
-![SDK mobile browser example](../../assets/sdk-mobile-browser.gif)
-
+  <ReactPlayer playing controls url='/sdk-mobile-browser.mov' width='560' />
 </p>
 
 You can download the
@@ -78,9 +80,7 @@ When a user accesses your Node.js dapp, the SDK renders a QR code on the console
 scan with their MetaMask Mobile app.
 
 <p align="center">
-
-![SDK Node.js example](../../assets/sdk-nodejs.gif)
-
+  <ReactPlayer playing controls url='/sdk-nodejs.mp4' width='560' />
 </p>
 
 You can download the
@@ -92,6 +92,10 @@ Install the example using `yarn` and run it using `node .`.
 When a user accesses your Unity game, the SDK renders a QR code in the game UI using a dedicated
 prefab which players can scan with their MetaMask Mobile app.
 It also supports deeplinking on mobile platforms.
+
+<p align="center">
+  <ReactPlayer playing controls url='/sdk-unity.mov' width='560' />
+</p>
 
 <!--/tabs-->
 

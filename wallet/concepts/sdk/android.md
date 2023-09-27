@@ -45,7 +45,7 @@ The following diagram outlines the communication flow between the Android client
 
 The flow is as follows:
 
-1. The dapp, with the SDK installed, initiates communication when a user connects MetaMask.
+1. The dapp, with the SDK installed, initiates communication when a user connects to MetaMask.
     The dapp deeplinks to MetaMask, and MetaMask sets up the Android Native Module to receive client requests.
 2. The dapp generates an ECIES public/private key pair.
     The dapp and MetaMask exchange public keys over IPC.
