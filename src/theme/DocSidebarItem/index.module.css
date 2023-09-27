@@ -7,10 +7,6 @@
   border-radius: 4px;
   padding: 2px 4px;
   transform: none;
-
-  :global(html[data-theme='dark']) & {
-    border: 2px solid red;
-  }
 }
 
 html[data-theme='dark'] .flaskOnly > :global(a.menu__link::after),
