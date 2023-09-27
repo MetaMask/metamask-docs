@@ -84,6 +84,9 @@ const sidebar = {
             type: "doc",
             id: "reference/keyring-api/index",
           },
+          customProps: {
+            flask_only: true
+          },
           items: require("./snaps/reference/keyring-api/typedoc-sidebar.cjs"),
         },
       ],

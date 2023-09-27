@@ -11,7 +11,9 @@ type Props = WrapperProps<typeof DocSidebarItemType>;
 export default function DocSidebarItemWrapper(props: Props): JSX.Element {
   if (props.item.type === "category" || props.item.type === "link") {
     const { className, ...itemProps } = props.item;
-
+    if (props.item.label === 'Keyring API') {
+      console.log(itemProps)
+    }
     return (
       <>
         <DocSidebarItem
