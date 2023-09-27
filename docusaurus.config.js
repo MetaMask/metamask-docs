@@ -87,10 +87,12 @@ const config = {
         tsconfig: "./external/keyring-api/tsconfig.json",
         out: path.join(__dirname, "snaps/reference/keyring-api"),
         sidebar: {
-          categoryLabel: "Keyring API",
-          position: 99,
+          filteredIds: ["reference/keyring-api/index"],
         },
-        identifiersAsCodeBlocks: true,
+        useCodeBlocks: true,
+        expandObjects: true,
+        parametersFormat: "table",
+        hideGenerator: true,
       },
     ],
     [
