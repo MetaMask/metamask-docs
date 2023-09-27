@@ -63,7 +63,7 @@ Keyring snap:
 ## Keyring interface
 
 The first step to create a Keyring snap is to implement the
-[`Keyring`](../reference/keyring-api/03-Type%20Aliases/02-type-alias.Keyring.md) interface.
+[`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface.
 This interface describes all the methods necessary to make your custom EVM accounts work inside
 MetaMask with your own logic.
 
@@ -86,7 +86,7 @@ This option shows a list of Keyring snaps.
 Each snap redirects the user to the companion dapp that contains all the UI to configure and manage the snap.
 
 The dapp presents a custom UI allowing the user to configure their custom EVM account.
-The dapp uses the [`createAccount`](../reference/keyring-api/02-Classes/04-class.KeyringSnapRpcClient.md#createaccount)
+The dapp uses the [`createAccount`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#createaccount)
 method of the `KeyringSnapRpcClient`, which calls the `Keyring` interface's method of the same name.
 You can find an example of this in the [example Keyring snap companion dapp](https://github.com/MetaMask/snap-simple-keyring/blob/d3f7f0156c59059c995fea87f90a3d0ad3a4c135/packages/site/src/pages/index.tsx#L136).
 
@@ -120,7 +120,7 @@ Keyring snap.
 After the user approves the transaction in the UI, MetaMask calls the `submitRequest` method of the
 `Keyring` interface.
 `submitRequest` receives the original RPC request, and returns a
-[`SubmitRequestResponse`](../reference/keyring-api/04-Variables/05-variable.SubmitRequestResponseStruct.md)
+[`SubmitRequestResponse`](../reference/keyring-api/variables/SubmitRequestResponseStruct.md)
 with `pending` set to `false`, and `result` set to the requested signature.
 
 :::caution important
@@ -153,12 +153,12 @@ After storing the pending request, the snap creates a pop-up using
 dapp's URL.
 
 The dapp lists the snap's pending requests using an RPC call facilitated by the
-[`listRequests`](../reference/keyring-api/02-Classes/04-class.KeyringSnapRpcClient.md#listrequests)
+[`listRequests`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#listrequests)
 method of the `KeyringSnapRpcClient`.
 The user can then act on those requests using whatever process applies to the snap.
 
 Once the signing process completes, the companion dapp resolves the request using the
-[`approveRequest`](../reference/keyring-api/02-Classes/04-class.KeyringSnapRpcClient.md#approverequest)
+[`approveRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest)
 method of the `KeyringSnapRpcClient`, which calls the `Keyring` interface's method of the same name.
 This method receives the request's ID and final result.
 
