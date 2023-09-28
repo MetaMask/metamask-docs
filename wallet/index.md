@@ -14,7 +14,7 @@ You can enable users to connect to their MetaMask wallets from the following dap
 
 :::tip Integrate using MetaMask SDK
 [Set up MetaMask SDK](how-to/connect/set-up-sdk/index.md) to start integrating your dapp with MetaMask.
-[MetaMask SDK](concepts/sdk/index.mdx) is a library that provides a reliable, secure, and seamless
+[MetaMask SDK](concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 
 With the SDK installed, your dapp can use the [MetaMask Ethereum provider API](concepts/apis.md)

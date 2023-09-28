@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Use MetaMask SDK with React
 
-You can import [MetaMask SDK](../../../../../concepts/sdk/index.mdx) into your React dapp to enable your users to
+You can import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 

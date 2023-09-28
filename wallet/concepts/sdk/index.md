@@ -3,8 +3,6 @@ description: Learn about MetaMask SDK.
 sidebar_position: 2
 ---
 
-import ReactPlayer from 'react-player'
-
 # About MetaMask SDK
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
@@ -48,7 +46,9 @@ installed, a popup appears that prompts the user to either install the MetaMask 
 to MetaMask Mobile using a QR code.
 
 <p align="center">
-  <ReactPlayer playing controls url='/sdk-desktop.mp4' width='560' />
+  <video width="950" controls>
+    <source src="/sdk-desktop.mp4" type="video/mp4" />
+  </video>
 </p>
 
 :::tip Get started
@@ -65,7 +65,9 @@ After the user accepts the connection, they're automatically redirected back to 
 This happens for all actions that need user approval.
 
 <p align="center">
-  <ReactPlayer playing controls url='/sdk-ios.mp4' width='560' />
+  <video width="300" controls>
+    <source src="/sdk-ios.mp4" type="video/mp4" />
+  </video>
 </p>
 
 :::tip Get started
@@ -80,7 +82,9 @@ When a user accesses your Node.js dapp, the SDK renders a QR code on the console
 scan with their MetaMask Mobile app.
 
 <p align="center">
-  <ReactPlayer playing controls url='/sdk-nodejs.mp4' width='560' />
+  <video width="625" controls>
+    <source src="/sdk-nodejs.mp4" type="video/mp4" />
+  </video>
 </p>
 
 :::tip Get started
@@ -96,7 +100,9 @@ prefab which players can scan with their MetaMask Mobile app.
 It also supports deeplinking on mobile platforms, such as in the following screen recording.
 
 <p align="center">
-  <ReactPlayer playing controls url='/sdk-unity.mp4' width='560' />
+  <video width="300" controls>
+    <source src="/sdk-unity.mp4" type="video/mp4" />
+  </video>
 </p>
 
 :::tip Get started
