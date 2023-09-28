@@ -13,20 +13,19 @@ You can install the SDK in existing dapps, and call any [provider API](../apis.m
 your dapp.
 
 :::tip Get started
-MetaMask SDK is the recommended method of integrating your dapp with the MetaMask wallet.
+MetaMask SDK is the recommended method of integrating your dapp with MetaMask.
 You can get started by [setting up the SDK](../../how-to/connect/set-up-sdk/index.md).
 :::
 
 ## Benefits of MetaMask SDK
 
-Before MetaMask SDK, there were three ways to connect a dapp to MetaMask:
+Before MetaMask SDK, there were three ways to connect a dapp to a user's MetaMask wallet:
 
 1. Connect from a web dapp in a desktop browser to the MetaMask browser extension
-2. Have a user open a web dapp in MetaMask Mobile's in-app browser
-3. Use third party libraries such as [WalletConnect](https://walletconnect.com/) to connect a mobile
-   dapp to MetaMask Mobile
+2. Connect from a web dapp in MetaMask Mobile's in-app browser to MetaMask Mobile
+3. Use third party libraries such as WalletConnect to connect a mobile dapp to MetaMask Mobile
 
-With MetaMask SDK, there are more ways to seamlessly connect:
+With MetaMask SDK, there are more ways to connect:
 
 1. Connect from a web dapp in a desktop browser to the MetaMask browser extension or to MetaMask Mobile
 2. Connect from a web dapp in a mobile browser to MetaMask Mobile
@@ -107,3 +106,5 @@ for advanced use cases.
 :::
 
 <!--/tabs-->
+
+You can read more about the [connection flow](connections.md) between the SDK and MetaMask.

@@ -21,6 +21,7 @@
   "dependencies": {
     "@docusaurus/core": "2.4.3",
     "@docusaurus/plugin-content-docs": "2.4.3",
+    "@docusaurus/theme-mermaid": "^2.4.3",
     "@mdx-js/react": "^1.6.22",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.2.2",

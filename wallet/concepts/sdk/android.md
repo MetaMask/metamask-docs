@@ -15,7 +15,7 @@ the Android SDK differs from the other SDK platforms.
   advanced use cases.
 :::
 
-## Architecture diagram
+## Architecture
 
 The following diagram outlines the high-level architecture of the Android SDK:
 
@@ -40,7 +40,7 @@ in Kotlin) using different mechanisms depending on the direction of communicatio
 - **React Native &rarr; Native Module** - The wallet calls the Native Module using the `NativeModules` API,
   which enables React Native code to call native Kotlin primitives.
 
-## Connection flow diagram
+## Connection flow
 
 The following diagram outlines the communication flow between the Android client SDK and server SDK:
 
