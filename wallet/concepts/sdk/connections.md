@@ -5,8 +5,8 @@ sidebar_label: SDK connections
 
 # MetaMask SDK connections
 
-This page expands upon how a dapp with [MetaMask SDK](index.md) installed connects to a user's
-MetaMask wallet.
+This page provides details on how a dapp with [MetaMask SDK](index.md) installed connects to a
+user's MetaMask wallet.
 
 ## Initial connection flow
 
@@ -25,7 +25,7 @@ flowchart LR
     A -->|Mobile| K(Deeplink to<br>MM Mobile) --> H
 ```
 
-The flow first depends whether the dapp is on a desktop or mobile platform:
+The path first depends on whether the dapp is on a desktop or mobile platform:
 
 - If the dapp is on a desktop platform (for example, a desktop web dapp), the dapp shows a modal
   asking the user to select if they want to connect to MetaMask using the browser extension or
@@ -42,7 +42,7 @@ The flow first depends whether the dapp is on a desktop or mobile platform:
       Mobile](#metamask-mobile-connection) is established.
    
   :::note
-  The choice between the extension and MetaMask Mobile is persisted unless the user or dapp disconnects.
+  The choice between the extension and MetaMask Mobile persists until the user or dapp disconnects.
   At that point, the dapp displays the modal again.
   :::
 

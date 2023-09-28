@@ -34,8 +34,7 @@ multiple dapp platforms, without relying on third party libraries.
 
 ## User experience
 
-The following are example screen recordings of how a user experiences a dapp with the SDK installed,
-on various platforms.
+The following are examples of how a user experiences a dapp with the SDK installed, on various platforms.
 
 <!--tabs-->
 
@@ -113,4 +112,4 @@ for advanced use cases.
 
 <!--/tabs-->
 
-You can read more about the [connection flow](connections.md) between the SDK and MetaMask.
+You can read more about the [connection flow between the SDK and MetaMask](connections.md).
