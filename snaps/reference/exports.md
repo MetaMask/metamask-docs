@@ -148,10 +148,14 @@ module.exports.onTransaction = async ({
 
 <!--/tabs-->
 
-### New in MetaMask Flask: Transaction Severity Level
+### New in MetaMask Flask: Transaction severity level
 
-A new feature in MetaMask Flask permits transaction insight Snaps to return an optional severity level of `'critical'`. 
-MetaMask will show a modal before the user can confirm the transaction to help ensure that the user will see the warning. Using the above example, to return an insight with the severity level of `'critical'`, you can do the following: 
+A new feature in [MetaMask Flask](../get-started/install-flask.md) permits transaction insight snaps
+to return an optional severity level of `'critical'`. 
+MetaMask shows a modal before the user can confirm the transaction to help ensure that the user sees
+the warning.
+Using the previous example for `onTransaction`, the following code adds a single line to return an
+insight with the severity level of `'critical'`: 
 
 <!--tabs-->
 
@@ -172,7 +176,8 @@ export const onTransaction: OnTransactionHandler = async ({
       heading('My Transaction Insights'),
       text('Here are the insights:'),
       ...(insights.map((insight) => text(insight.value)))
-    ]), 
+    ]),
+    // highlight-next-line
     severity: 'critical'
   };
 };
@@ -194,7 +199,8 @@ module.exports.onTransaction = async ({
       heading('My Transaction Insights'),
       text('Here are the insights:'),
       ...(insights.map((insight) => text(insight.value)))
-    ]), 
+    ]),
+    // highlight-next-line
     severity: 'critical'
   };
 };
@@ -267,8 +273,8 @@ module.exports.onCronjob = async ({ request }) => {
 
 ## onNameLookup
 
-To resolve names to addresses and vice versa, a Snap must export `onNameLookup`.
-Whenever the user is typing in the send field, MetaMask calls this method.
+To resolve names to addresses and addresses to names, a Snap must export `onNameLookup`.
+Whenever a user types in the send field, MetaMask calls this method.
 MetaMask passes the user input to the `onNameLookup` handler method.
 
 :::note
@@ -276,14 +282,13 @@ For MetaMask to call the snap's `onNameLookup` method, you must request the
 [`endowment:name-lookup`](permissions.md#endowmentname-lookup) permission.
 :::
 
-
 ### Parameters
 
 An object containing:
 
 - `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
   chain ID.
-- `address` or `domain` - Either of these parameters will be defined, while the other will be undefined. 
+- `address` or `domain` - One of these parameters is defined, and the other is undefined. 
 
 ### Example
 

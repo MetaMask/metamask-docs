@@ -90,9 +90,12 @@ those connected accounts.
 ### endowment:name-lookup
 
 To provide name resolution, a snap must request the `endowment:name-lookup` permission.
-This permission grants a snap read-only access to user input or an address by exporting the [`onNameLookup`](../reference/exports.md#onnamelookup) method.
+This permission grants the snap read-only access to user input or an address by exporting the
+[`onNameLookup`](../reference/exports.md#onnamelookup) method.
 
-This permission takes an optional array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) chain IDs for which the Snap can resolve names and addresses.
+This permission takes an optional array of
+[CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) chain IDs for which the
+snap can resolve names and addresses.
 
 Specify this permission in the manifest file as follows:
 
@@ -158,7 +161,7 @@ Specify this permission in the manifest file as follows:
 ### endowment:transaction-insight
 
 To provide transaction insights, a snap must request the `endowment:transaction-insight` permission.
-This permission grants a snap read-only access to raw transaction payloads, before they're accepted
+This permission grants the snap read-only access to raw transaction payloads, before they're accepted
 for signing by the user, by exporting the [`onTransaction`](../reference/exports.md#ontransaction) method.
 
 This permission requires an object with an `allowTransactionOrigin` property to signal if the snap

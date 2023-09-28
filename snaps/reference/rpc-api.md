@@ -564,7 +564,11 @@ console.log(entropy);
 
 ### snap_getLocale
 
-Gets the user's locale setting. This can be used for localizing text in your Snap. 
+Gets the user's locale setting. You can use this method to localize text in your snap.
+
+#### Returns
+
+The user's locale setting.
 
 #### Example
 
