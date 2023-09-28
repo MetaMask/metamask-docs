@@ -38,7 +38,7 @@ The following are examples of how a user experiences a dapp with the SDK install
 
 <!--tabs-->
 
-# Desktop
+# Desktop browser
 
 When a user accesses your web dapp on a desktop browser that doesn't have the MetaMask extension
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
@@ -56,10 +56,29 @@ to MetaMask Mobile using a QR code.
   for advanced use cases.
 :::
 
-# Mobile
+# Mobile browser
 
-When a user accesses your mobile dapp, or web dapp on a mobile browser, the SDK automatically
-deeplinks to MetaMask Mobile (or if the user doesn't already have it, prompts them to install it).
+When a user accesses your web dapp on a mobile browser, the SDK automatically deeplinks to MetaMask
+Mobile (or if the user doesn't already have it, prompts them to install it).
+After the user accepts the connection, they're automatically redirected back to your dapp.
+This happens for all actions that need user approval.
+
+<p align="center">
+  <video width="300" controls>
+    <source src="/sdk-concepts/sdk-mobile-browser.mp4" type="video/mp4" />
+  </video>
+</p>
+
+:::tip Get started
+- Get started by [setting up the SDK in your web dapp](../../how-to/connect/set-up-sdk/javascript/index.md).
+- See the [JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+  for advanced use cases.
+:::
+
+# iOS
+
+When a user accesses your iOS dapp, the SDK automatically deeplinks to MetaMask Mobile (or if the
+user doesn't already have it, prompts them to install it).
 After the user accepts the connection, they're automatically redirected back to your dapp.
 This happens for all actions that need user approval.
 
@@ -70,7 +89,25 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your mobile dapp](../../how-to/connect/set-up-sdk/mobile/index.md).
+- Get started by [setting up the SDK in your iOS dapp](../../how-to/connect/set-up-sdk/mobile/ios.md).
+- See the [iOS SDK example](https://github.com/MetaMask/metamask-ios-sdk) for advanced use cases.
+:::
+
+# Android
+
+When a user accesses your Android dapp, the SDK automatically deeplinks to MetaMask Mobile (or if
+the user doesn't already have it, prompts them to install it).
+After the user accepts the connection, they're automatically redirected back to your dapp.
+This happens for all actions that need user approval.
+
+<p align="center">
+  <video width="300" controls>
+    <source src="/sdk-concepts/sdk-android.mp4" type="video/mp4" />
+  </video>
+</p>
+
+:::tip Get started
+- Get started by [setting up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md).
 - See the [Android SDK example](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) and
   [Android SDK architecture](android.md) for more information.
 :::
