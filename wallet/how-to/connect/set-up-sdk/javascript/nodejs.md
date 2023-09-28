@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Use MetaMask SDK with Node.js
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your Node.js dapp to enable your users
+You can import [MetaMask SDK](../../../../concepts/sdk/index.mdx) into your Node.js dapp to enable your users
 to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for Node.js has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 

@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Use MetaMask SDK with React UI
 
-You can import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your
+You can import [MetaMask SDK](../../../../../concepts/sdk/index.mdx) into your React dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The `@metamask/sdk-react-ui` package not only exports hooks from [`@metamask/sdk-react`](index.md),
 but also provides wrappers around [wagmi](https://wagmi.sh/) hooks and a basic UI button component

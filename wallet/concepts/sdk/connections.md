@@ -5,7 +5,7 @@ sidebar_label: SDK connections
 
 # MetaMask SDK connections
 
-This page expands upon how a dapp with [MetaMask SDK](index.md) installed connects to a user's
+This page expands upon how a dapp with [MetaMask SDK](index.mdx) installed connects to a user's
 MetaMask wallet.
 
 ## Initial connection flow

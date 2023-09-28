@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Android SDK architecture
 
-The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
+The Android version of [MetaMask SDK](index.mdx) enables your users to easily connect with their
 MetaMask Mobile wallet.
 The [architecture](#architecture-diagram) and [communication flow](#communication-flow-diagram) of
 the Android SDK differs from the other SDK platforms.
