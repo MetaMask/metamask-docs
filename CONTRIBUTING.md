@@ -9,6 +9,7 @@ guide in some places.
 
 - [Contribution workflow](#contribution-workflow)
 - [Preview locally](#preview-locally)
+- [Update the submodule](#update-the-submodule)
 - [Style guide](#style-guide)
 - [Add images](#add-images)
 - [Format Markdown and MDX](#format-markdown-and-mdx)
@@ -32,10 +33,11 @@ To contribute changes:
    If you don't have permission to assign yourself to it, leave a comment on the issue.
 
 2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-   this repository to your computer.
+   this repository to your computer and navigate into it.
 
     ```bash
     git clone https://github.com/MetaMask/metamask-docs.git
+    cd https://github.com/MetaMask/metamask-docs.git
     ```
 
    > **Note**: If you don't have write access to this repository, you must [fork the
@@ -46,10 +48,17 @@ To contribute changes:
    >
    > ```bash
    > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
+   > git cd https://github.com/<YOUR-USERNAME>/metamask-docs.git
    > git remote add upstream https://github.com/MetaMask/metamask-docs.git
    > ```
 
-3. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
+3. [Initialize and update the submodule.](#update-the-submodule)
+
+    ```bash
+    git submodule init && git submodule update
+    ```
+
+4. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
    naming it appropriately.
    We recommend including the issue number and a short description in the branch name (for example,
    `183-doc-cli-option`), which is a reminder to fix only one issue in a PR.
@@ -60,7 +69,7 @@ To contribute changes:
 
    > **Tip:** You can use a Git client such as [Fork](https://fork.dev/) instead of the command line.
 
-4. Open this repository in a text editor of your choice (for example,
+5. Open this repository in a text editor of your choice (for example,
    [VS Code](https://code.visualstudio.com/)) and make your changes.
    Make sure to [follow the style guidelines](https://docs-template.consensys.net/contribute/style-guide)
    and [format your Markdown correctly](https://docs-template.consensys.net/contribute/format-markdown).
@@ -73,10 +82,10 @@ To contribute changes:
    > - If you delete, rename, or move a documentation file, make sure to add a
    >   [redirect](https://docs-template.consensys.net/contribute/configure-docusaurus#redirects).
 
-5. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
+6. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
    that the changes render correctly.
 
-6. Add and commit your changes, briefly describing your changes in the commit message.
+7. Add and commit your changes, briefly describing your changes in the commit message.
    Push your changes to the remote origin.
 
     ```bash
@@ -85,25 +94,40 @@ To contribute changes:
     git push origin
     ```
 
-7. On [this repository on GitHub](https://github.com/MetaMask/metamask-docs), you’ll see a banner
+8. On [this repository on GitHub](https://github.com/MetaMask/metamask-docs), you’ll see a banner
    prompting you to create a PR with your recent changes.
    Create a PR, describing your changes in detail.
    [Link the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
    that your PR fixes by adding `fixes #<ISSUE-NUM>` to the PR description.
 
-8. Specific reviewers are automatically requested when you submit a PR.
+9. Specific reviewers are automatically requested when you submit a PR.
    You can request additional reviewers in the right sidebar of your PR – for example, the original
    issue raiser.
-   Make any required changes to your PR based on reviewer feedback, repeating steps 4–6.
+   Make any required changes to your PR based on reviewer feedback, repeating steps 5–7.
 
-9. After your PR is approved by two reviewers, all checks have passed, and your branch has no
-   conflicts with the main branch, you can merge your PR.
-   If you don't have merge access, a maintainer will merge your PR for you.
-   You can delete the topic branch after your PR is merged.
+10. After your PR is approved by two reviewers, all checks have passed, and your branch has no
+    conflicts with the main branch, you can merge your PR.
+    If you don't have merge access, a maintainer will merge your PR for you.
+    You can delete the topic branch after your PR is merged.
 
 ## Preview locally
 
 [Preview the docs locally using npm or Yarn.](https://docs-template.consensys.net/contribute/preview)
+
+## Update the submodule
+
+This repository uses the [`keyring-api`](https://github.com/MetaMask/keyring-api) repository as a
+Git [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+Run the following command to initialize and update the submodule when you first clone the
+repository, and every time the submodule's target commit is updated:
+
+```bash
+git submodule init && git submodule update
+```
+
+> **Note**: You'll see when the submodule's commit is updated when you `git merge` or `git pull`.
+> If you have trouble previewing the docs locally, try updating the submodule.
 
 ## Style guide
 
