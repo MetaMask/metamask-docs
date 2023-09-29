@@ -21,7 +21,7 @@ Before MetaMask SDK, there were three ways to connect a dapp to a user's MetaMas
 
 1. Connect from a web dapp in a desktop browser to the MetaMask browser extension
 2. Connect from a web dapp in MetaMask Mobile's in-app browser to MetaMask Mobile
-3. Use third party libraries to connect a mobile dapp to MetaMask Mobile
+3. Use third-party libraries to connect a mobile dapp to MetaMask Mobile
 
 With MetaMask SDK, there are more ways to connect:
 
@@ -30,7 +30,7 @@ With MetaMask SDK, there are more ways to connect:
 3. Connect from desktop, mobile, and gaming dapps to MetaMask Mobile
 
 MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
-multiple dapp platforms, without relying on third party libraries.
+multiple dapp platforms, without relying on third-party libraries.
 
 ## User experience
 
@@ -133,7 +133,7 @@ for advanced use cases.
 
 When a user accesses your Unity game, the SDK renders a QR code in the game UI using a dedicated
 prefab which players can scan with their MetaMask Mobile app.
-It also supports deeplinking on mobile platforms, such as in the following screen recording.
+It also supports deeplinking on mobile platforms, as demonstrated in the following screen recording.
 
 <p align="center">
   <video width="300" controls>

@@ -91,11 +91,11 @@ sequenceDiagram
 
 The flow is as follows:
 
-1. The dapp generates a UUID v4 (Socket.io room ID) and ECIES key pair.
+1. The dapp generates a UUID v4 ([Socket.io](https://socket.io/) room ID) and ECIES key pair.
 2. The dapp connects to the Socket.io server using the room ID.
 3. The dapp sends a deeplink to MetaMask Mobile (either directly, if on mobile, or through a QR
     code, if on desktop) containing its ECIES public key and the Socket.io room ID.
-4. MetaMask Mobile opens the QR code/deeplink and connects to the Socket.io server using the room ID.
+4. MetaMask Mobile opens the QR code or deeplink and connects to the Socket.io server using the room ID.
 5. MetaMask Mobile generates an ECIES key pair.
 6. MetaMask Mobile sends its ECIES public key to the dapp using the Socket.io channel, and the two
     parties generate a shared secret.
