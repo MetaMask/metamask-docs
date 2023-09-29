@@ -3,6 +3,8 @@ sidebar_label: Unity
 sidebar_position: 1
 ---
 
+import ReactPlayer from 'react-player/lazy'
+
 # Use MetaMask SDK with Unity
 
 You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your
@@ -15,7 +17,7 @@ The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 The following video demonstrates how to install and use the MetaMask Unity SDK.
 
 <p align="center">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/0D1cIH-PZtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <ReactPlayer url='https://www.youtube.com/embed/0D1cIH-PZtI' />
 </p>
 
 ## Steps

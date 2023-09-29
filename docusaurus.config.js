@@ -35,6 +35,11 @@ const config = {
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
   ],
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ["@docusaurus/theme-mermaid"],
+
   presets: [
     [
       "@metamask/docusaurus-openrpc/dist/preset",
@@ -331,6 +336,10 @@ const config = {
             from: "/wallet/how-to/migrate-api",
             to: "/wallet/concepts/apis",
           },
+          {
+            from: "/sdk",
+            to: "/wallet/how-to/connect/set-up-sdk",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -513,6 +522,20 @@ const config = {
         searchPagePath: "search",
 
         //... other Algolia params
+      },
+      mermaid: {
+        options: {
+          fontFamily: "arial, verdana, sans-serif;",
+          wrap: true,
+          sequence: {
+            diagramMarginX: 25,
+            diagramMarginY: 25,
+          },
+          flowchart: {
+            diagramPadding: 5,
+            nodeSpacing: 75,
+          },
+        },
       },
     }),
 };

@@ -10,6 +10,11 @@ easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for other web frameworks has the [same prerequisites](index.md#prerequisites) as for
 standard JavaScript.
 
+:::tip Examples
+See the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+for advanced use cases.
+:::
+
 ## Steps
 
 ### 1. Install the SDK

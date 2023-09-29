@@ -1,18 +1,21 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Android SDK architecture
 
 The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
 MetaMask Mobile wallet.
-[Set up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md) to get
-started.
-
 The [architecture](#architecture-diagram) and [communication flow](#communication-flow-diagram) of
 the Android SDK differs from the other SDK platforms.
 
-## Architecture diagram
+:::tip Get started
+- Get started by [setting up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md).
+- See the [Android SDK example](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) for
+  advanced use cases.
+:::
+
+## Architecture
 
 The following diagram outlines the high-level architecture of the Android SDK:
 
@@ -37,7 +40,7 @@ in Kotlin) using different mechanisms depending on the direction of communicatio
 - **React Native &rarr; Native Module** - The wallet calls the Native Module using the `NativeModules` API,
   which enables React Native code to call native Kotlin primitives.
 
-## Communication flow diagram
+## Connection flow
 
 The following diagram outlines the communication flow between the Android client SDK and server SDK:
 
@@ -45,7 +48,7 @@ The following diagram outlines the communication flow between the Android client
 
 The flow is as follows:
 
-1. The dapp, with the SDK installed, initiates communication when a user connects MetaMask.
+1. The dapp, with the SDK installed, initiates communication when a user connects to MetaMask.
     The dapp deeplinks to MetaMask, and MetaMask sets up the Android Native Module to receive client requests.
 2. The dapp generates an ECIES public/private key pair.
     The dapp and MetaMask exchange public keys over IPC.
