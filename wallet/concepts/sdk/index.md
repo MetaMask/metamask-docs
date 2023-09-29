@@ -46,7 +46,7 @@ to MetaMask Mobile using a QR code.
 
 <p align="center">
   <video width="950" controls>
-    <source src="/sdk-concepts/sdk-desktop.mp4" type="video/mp4" />
+    <source src="/sdk-desktop.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -65,7 +65,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="/sdk-concepts/sdk-mobile-browser.mp4" type="video/mp4" />
+    <source src="/sdk-mobile-browser.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -84,7 +84,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="/sdk-concepts/sdk-ios.mp4" type="video/mp4" />
+    <source src="/sdk-ios.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -102,7 +102,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="/sdk-concepts/sdk-android.mp4" type="video/mp4" />
+    <source src="/sdk-android.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -119,7 +119,7 @@ scan with their MetaMask Mobile app.
 
 <p align="center">
   <video width="625" controls>
-    <source src="/sdk-concepts/sdk-nodejs.mp4" type="video/mp4" />
+    <source src="/sdk-nodejs.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -137,7 +137,7 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
 
 <p align="center">
   <video width="300" controls>
-    <source src="/sdk-concepts/sdk-unity.mp4" type="video/mp4" />
+    <source src="/sdk-unity.mp4" type="video/mp4" />
   </video>
 </p>
 
