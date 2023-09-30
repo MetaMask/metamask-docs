@@ -1,12 +1,12 @@
 ---
-description: Create a Keyring snap to connect to custom EVM accounts in MetaMask.
+description: Create a Keyring Snap to connect to custom EVM accounts in MetaMask.
 sidebar_custom_props:
   flask_only: true
 ---
 
-# Create a snap to connect to custom EVM accounts
+# Create a Snap to connect to custom EVM accounts
 
-This tutorial walks you through creating a snap that uses the [Keyring API](../concepts/keyring-api.md)
+This tutorial walks you through creating a Snap that uses the [Keyring API](../concepts/keyring-api.md)
 to integrate custom EVM accounts in MetaMask.
 
 :::flaskOnly
@@ -14,7 +14,7 @@ to integrate custom EVM accounts in MetaMask.
 
 ## Prerequisites
 
-- A snap set up using the [Snaps quickstart](../get-started/quickstart.md)
+- A Snap set up using the [Snaps quickstart](../get-started/quickstart.md)
 - Business logic written for your custom EVM account type
 
 ## Steps
@@ -22,7 +22,7 @@ to integrate custom EVM accounts in MetaMask.
 ### 1. Add the snap_manageAccounts permission
 
 Request permission to call [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts) by
-editing the `snap.manifest.json` file in your snap:
+editing the `snap.manifest.json` file in your Snap:
 
 ```json title="snap.manifest.json"
 {
@@ -36,7 +36,7 @@ editing the `snap.manifest.json` file in your snap:
 
 ### 2. Expose the Keyring interface as a JSON-RPC API
 
-Export the [`onRpcRequest`](../reference/exports.md#onrpcrequest) function from the snap to expose
+Export the [`onRpcRequest`](../reference/exports.md#onrpcrequest) function from the Snap to expose
 the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md)
 interface as a JSON-RPC API.
 
@@ -47,7 +47,7 @@ It responds to requests where the `method` is of type `keyring_*`, and throws a
 [`MethodNotSupportedError`](../reference/keyring-api/classes/MethodNotSupportedError.md)
 if it doesn't recognize the request method.
 
-Since your snap most likely wants to answer other JSON-RPC requests in addition to the `keyring_*` ones,
+Since your Snap most likely wants to answer other JSON-RPC requests in addition to the `keyring_*` ones,
 another helper called [`buildHandlersChain`](../reference/keyring-api/functions/buildHandlersChain.md)
 lets you chain multiple RPC handlers together.
 As each handler in the chain throws a
@@ -92,7 +92,7 @@ const keyringHandler: OnRpcRequestHandler = async ({ request }) => {
 };
 
 /**
- * Execute a custom snap request.
+ * Execute a custom Snap request.
  *
  * @param args - Request arguments.
  * @param args.request - Request to execute.
@@ -124,8 +124,8 @@ export const onRpcRequest: OnRpcRequestHandler = buildHandlersChain(
 
 ### 3. Use the Keyring API from a dapp
 
-As you build a companion dapp to provide a user interface for your Keyring snap, you'll need to
-interact with your snap's JSON-RPC API.
+As you build a companion dapp to provide a user interface for your Keyring Snap, you'll need to
+interact with your Snap's JSON-RPC API.
 While you could do this by making regular RPC calls using
 [`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we recommend
 [using the Keyring API from your dapp](../how-to/use-keyring-api.md):

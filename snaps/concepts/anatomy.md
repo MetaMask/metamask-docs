@@ -1,5 +1,5 @@
 ---
-description: Learn about the anatomy of a snap project.
+description: Learn about the anatomy of a Snap project.
 sidebar_position: 1
 ---
 
@@ -23,7 +23,7 @@ template-snap-monorepo/
 |  |  |  |- index.ts
 |  |  ├─ snap.manifest.json
 |  |  ├─ package.json
-|  |  |- ... (snap content)
+|  |  |- ... (Snap content)
 ├─ package.json
 ├─ ... (other stuff)
 ```
@@ -31,24 +31,24 @@ template-snap-monorepo/
 Source files other than `index.ts` are located through its imports.
 The defaults can be overwritten in the [configuration file](#configuration-file).
 
-:::tip Create a snap project
-When you create a new snap project using `mm-snap init`, it has all these files.
+:::tip Create a Snap project
+When you create a new Snap project using `mm-snap init`, it has all these files.
 Still, we recommend
-[cloning the template snap repository to get started](../get-started/quickstart.md).
+[cloning the template Snap repository to get started](../get-started/quickstart.md).
 :::
 
-This page examines the major components of a snap:
+This page examines the major components of a Snap:
 
-- [The source code](#source-code) contains the primary code of the snap.
-- [The manifest file](#manifest-file) tells MetaMask important information about the snap.
-- [The configuration file](#configuration-file) specifies configuration options for the snap.
-- [The bundle file](#bundle-file) is the output file of the published snap.
+- [The source code](#source-code) contains the primary code of the Snap.
+- [The manifest file](#manifest-file) tells MetaMask important information about the Snap.
+- [The configuration file](#configuration-file) specifies configuration options for the Snap.
+- [The bundle file](#bundle-file) is the output file of the published Snap.
 
 ## Source code
 
-If you're familiar with JavaScript or TypeScript development, developing a snap might feel familiar
+If you're familiar with JavaScript or TypeScript development, developing a Snap might feel familiar
 to you.
-Consider this simple snap, `Hello World`:
+Consider this simple Snap, `Hello World`:
 
 ```typescript title="index.ts"
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -63,19 +63,19 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-To communicate with the outside world, the snap must implement its own JSON-RPC API by exposing
+To communicate with the outside world, the Snap must implement its own JSON-RPC API by exposing
 the exported function [`onRpcRequest`](../reference/exports.md#onrpcrequest).
-Whenever the snap receives a JSON-RPC request from a dapp or another snap, this handler function is
+Whenever the Snap receives a JSON-RPC request from a dapp or another Snap, this handler function is
 called with the specified parameters.
 
-In addition to being able to expose a JSON-RPC API, snaps can access the global object `snap`.
+In addition to being able to expose a JSON-RPC API, Snaps can access the global object `snap`.
 You can use this object to make Snaps-specific JSON-RPC requests.
 
-If a dapp wants to use `Hello World`, assuming the snap is published to npm using the package name `hello-snap`, the dapp can implement something like this:
+If a dapp wants to use `Hello World`, assuming the Snap is published to npm using the package name `hello-snap`, the dapp can implement something like this:
 
 ```javascript
-// Connect to the snap, enabling its usage inside the dapp
-// If the snap is not already installed, the MetaMask user 
+// Connect to the Snap, enabling its usage inside the dapp
+// If the Snap is not already installed, the MetaMask user 
 // will be prompted to install it
 await window.ethereum.request({
   method: "wallet_requestSnaps",
@@ -84,7 +84,7 @@ await window.ethereum.request({
   },
 });
 
-// Invoke the "hello" RPC method exposed by the snap
+// Invoke the "hello" RPC method exposed by the Snap
 const response = await window.ethereum.request({
   method: "wallet_invokeSnap",
   params: { snapId: "npm:hello-snap", request: { method: "hello" } },
@@ -93,22 +93,22 @@ const response = await window.ethereum.request({
 console.log(response); // 'world!'
 ```
 
-The snap's RPC API is completely up to you, as long as it's a valid
+The Snap's RPC API is completely up to you, as long as it's a valid
 [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
-:::tip Does my snap need to have an RPC API?
+:::tip Does my Snap need to have an RPC API?
 No, that's also up to you!
-If your snap can do something useful without receiving and responding to JSON-RPC requests, such as
+If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
 providing [transaction insights](../reference/exports.md#ontransaction), then you can skip exporting
 `onRpcRequest`.
 However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that, for example, sends transactions for that protocol using your snap, you must
+create a dapp that, for example, sends transactions for that protocol using your Snap, you must
 specify an RPC API.
 :::
 
 ## Manifest file
 
-To get MetaMask to execute your snap, you must have a valid manifest file named `snap.manifest.json`,
+To get MetaMask to execute your Snap, you must have a valid manifest file named `snap.manifest.json`,
 located in your package root directory.
 The manifest file of `Hello World` would look something like this:
 
@@ -137,18 +137,18 @@ The manifest file of `Hello World` would look something like this:
 }
 ```
 
-The manifest tells MetaMask important information about your snap, such as where it's published
-(using `source.location`) and how to verify the integrity of the snap source code (by attempting to
+The manifest tells MetaMask important information about your Snap, such as where it's published
+(using `source.location`) and how to verify the integrity of the Snap source code (by attempting to
 reproduce the `source.shasum` value).
 
 :::note
-Currently, snaps can only be
+Currently, Snaps can only be
 [published to the official npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry),
 and the manifest must also match the corresponding fields of the `package.json` file.
-In the future, developers will be able to distribute snaps in different ways, and the manifest will
+In the future, developers will be able to distribute Snaps in different ways, and the manifest will
 expand to support different publishing solutions.
 
-The [snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md)
+The [Snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md)
 details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
 :::
 
@@ -160,7 +160,7 @@ For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`
 
 ## Configuration file
 
-The snap configuration file, `snap.config.ts`, should be placed in the project root directory.
+The Snap configuration file, `snap.config.ts`, should be placed in the project root directory.
 You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
 them in the `config` object of the configuration file.
 For example:
@@ -192,18 +192,18 @@ shouldn't contain any secrets.
 
 ## Bundle file
 
-Because of the way snaps are executed, they must be published as a single `.js` file containing the
+Because of the way Snaps are executed, they must be published as a single `.js` file containing the
 entire source code and all dependencies.
 Moreover, the [Snaps execution environment](execution-environment.md) has no DOM, no Node.js
 APIs, and no filesystem access, so anything that relies on the DOM doesn't work, and any Node
-built-ins must be bundled along with the snap.
+built-ins must be bundled along with the Snap.
 
-Use the command `mm-snap build` to bundle your snap using 
+Use the command `mm-snap build` to bundle your Snap using 
 [webpack](https://webpack.js.org/) or 
 [Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.
 
 :::note
-If you are using the template snap monorepo, running `yarn start` will bundle your snap for you.
+If you are using the template Snap monorepo, running `yarn start` will bundle your Snap for you.
 :::

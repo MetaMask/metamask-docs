@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Snaps permissions
 
-Your snap can [request the following permissions](../how-to/request-permissions.md).
+Your Snap can [request the following permissions](../how-to/request-permissions.md).
 
 ## RPC API permissions
 
@@ -25,8 +25,8 @@ manifest file:
 
 ### endowment:cronjob
 
-To run periodic actions for the user (cron jobs), a snap must request the `endowment:cronjob` permission.
-This permission allows the snap to specify cron jobs that trigger the exported
+To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
+This permission allows the Snap to specify cron jobs that trigger the exported
 [`onCronjob`](../reference/exports.md#oncronjob) method.
 
 Specify this permission in the manifest file as follows:
@@ -68,8 +68,8 @@ Specify this permission in the manifest file as follows:
 
 ### endowment:ethereum-provider
 
-To communicate with a node using MetaMask, a snap must request the `endowment:ethereum-provider` permission.
-This permission exposes the global API `ethereum` to the snap execution environment.
+To communicate with a node using MetaMask, a Snap must request the `endowment:ethereum-provider` permission.
+This permission exposes the global API `ethereum` to the Snap execution environment.
 This global is an EIP-1193 provider.
 
 Specify this permission in the manifest file as follows:
@@ -89,7 +89,7 @@ those connected accounts.
 
 ### endowment:network-access
 
-To access the internet, a snap must request the `endowment:network-access` permission.
+To access the internet, a Snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
 
 :::caution
@@ -108,21 +108,21 @@ Specify this permission in the manifest file as follows:
 
 #### Same-origin policy and CORS
 
-`fetch()` requests in a snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
-Since snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
+`fetch()` requests in a Snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
+Since Snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
 header with the value `null` with outgoing requests.
-For the snap to be able to read the response, the server must send an
+For the Snap to be able to read the response, the server must send an
 [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
 with the value `*` or `null` in the response.
 
 ### endowment:rpc
 
-To handle arbitrary JSON-RPC requests, a snap must request the `endowment:rpc` permission.
-This permission grants a snap access to JSON-RPC requests sent to the snap, using the exported
+To handle arbitrary JSON-RPC requests, a Snap must request the `endowment:rpc` permission.
+This permission grants a Snap access to JSON-RPC requests sent to the Snap, using the exported
 [`onRpcRequest`](exports.md#onrpcrequest) method.
 
 This permission requires an object with a `snaps` or `dapps` property (or both), to signal if the
-snap can receive JSON-RPC requests from other snaps, or dapps, respectively.
+snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
 Specify this permission in the manifest file as follows:
@@ -140,11 +140,11 @@ Specify this permission in the manifest file as follows:
 
 ### endowment:transaction-insight
 
-To provide transaction insights, a snap must request the `endowment:transaction-insight` permission.
-This permission grants a snap read-only access to raw transaction payloads, before they're accepted
+To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
+This permission grants a Snap read-only access to raw transaction payloads, before they're accepted
 for signing by the user, by exporting the [`onTransaction`](../reference/exports.md#ontransaction) method.
 
-This permission requires an object with an `allowTransactionOrigin` property to signal if the snap
+This permission requires an object with an `allowTransactionOrigin` property to signal if the Snap
 should pass the `transactionOrigin` property as part of the `onTransaction` parameters.
 This property represents the transaction initiator origin.
 The default is `false`.
@@ -161,8 +161,8 @@ Specify this permission in the manifest file as follows:
 
 ### endowment:webassembly
 
-To use WebAssembly, a snap must request the `endowment:webassembly` permission.
-This permission exposes the global `WebAssembly` API to the snap execution environment.
+To use WebAssembly, a Snap must request the `endowment:webassembly` permission.
+This permission exposes the global `WebAssembly` API to the Snap execution environment.
 
 Specify this permission in the manifest file as follows:
 
@@ -175,17 +175,17 @@ Specify this permission in the manifest file as follows:
 ## Dynamic permissions
 
 Dynamic permissions are not requested in the manifest file.
-Instead, your snap can acquire dynamic permissions during its lifecycle.
+Instead, your Snap can acquire dynamic permissions during its lifecycle.
 
 ### eth_accounts
 
-A snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
+A Snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
 RPC method by calling the provider's [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 Calling `eth_requestAccounts` requires the [`ethereum-provider`](#endowmentethereum-provider) endowment.
 
 You can check the presence of the permission by calling [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
 If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
-It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this snap.
+It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this Snap.
 The following is an example `eth_accounts` permission:
 
 ```json
@@ -205,4 +205,4 @@ The following is an example `eth_accounts` permission:
 }
 ```
 
-The user can revoke this permission by going to the snap's settings under **Snap permissions**.
+The user can revoke this permission by going to the Snap's settings under **Snap permissions**.
