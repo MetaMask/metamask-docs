@@ -1,12 +1,12 @@
 ---
-description: Create a snap that estimates gas fees.
+description: Create a Snap that estimates gas fees.
 sidebar_position: 1
 ---
 
-# Create a snap to estimate gas fees
+# Create a Snap to estimate gas fees
 
-This tutorial walks you through creating a snap that estimates gas fees.
-The snap uses the `fetch` API to request information from the internet, and displays custom
+This tutorial walks you through creating a Snap that estimates gas fees.
+The Snap uses the `fetch` API to request information from the internet, and displays custom
 information in an alert dialog.
 
 ## Prerequisites
@@ -19,7 +19,7 @@ information in an alert dialog.
 
 ### 1. Set up the project
 
-Create a new snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
+Create a new Snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
 
 ```bash
 yarn create @metamask/snap gas-estimation-snap
@@ -42,7 +42,7 @@ This initializes your development environment with the required dependencies.
 ### 2. Set a custom icon
 
 Open `/packages/snap/snap.manifest.json` in a text editor.
-This file contains the main configuration details for your snap.
+This file contains the main configuration details for your Snap.
 Edit the `npm` object (within the `location` object) and change the value for the `iconPath` key by giving the path `"images/gas.svg"` to your new icon:
 
 ```json title="snap.manifest.json"
@@ -62,7 +62,7 @@ This is a free icon, **Gas** by Mello from
 
 ### 3. Enable network access
 
-To enable your snap to use the `fetch` API, make a request for the
+To enable your Snap to use the `fetch` API, make a request for the
 [`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access) permission by
 adding `"endowment:network-access": {}` to the `initialPermissions` object in `snap.manifest.json`:
 
@@ -82,7 +82,7 @@ adding `"endowment:network-access": {}` to the `initialPermissions` object in `s
 ### 4. Fetch gas fee estimates
 
 Open `/packages/snap/src/index.ts`.
-This is the main code file for your snap.
+This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
 Add the following `getFees()` function to the top of the file:
@@ -97,7 +97,7 @@ async function getFees() {
 }
 ```
 
-Next, modify the snap RPC message handler that displays the confirmation window.
+Next, modify the Snap RPC message handler that displays the confirmation window.
 This handler uses a switch statement to handle various request methods, but in this case there is
 only one method, `hello`.
 For this method, the handler returns a call to MetaMask with the parameters to display a
@@ -128,9 +128,9 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 };
 ```
 
-### 5. Build and test the snap
+### 5. Build and test the Snap
 
-To build and test your snap:
+To build and test your Snap:
 
 1. Open `package.json` in the root directory of the project, and increase the `"version"` (if the `"version"` is
     `0.1.0`, increase it to `0.2.0`).
@@ -147,14 +147,14 @@ To build and test your snap:
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
-    ![Test dapp with template snap](../assets/template-snap.png)
+    ![Test dapp with template Snap](../assets/template-snap.png)
 
-    This is a boilerplate test dapp for installing and testing your snap.
+    This is a boilerplate test dapp for installing and testing your Snap.
 
 4. Select **Connect** to connect Flask to the dapp.
-    After connecting, you're prompted to install the snap with the following permissions:
+    After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow websites to communicate directly with this snap.**
+    - **Allow websites to communicate directly with this Snap.**
     - **Access the internet.**
     - **Display dialog windows in MetaMask.**
 
@@ -178,16 +178,16 @@ Next, you can try:
 - Parsing the JSON response from the remote API.
 - Displaying the fees in a nicely formatted way.
 
-You can also update the fields in `snap.manifest.json` to match your custom snap:
+You can also update the fields in `snap.manifest.json` to match your custom Snap:
 
-- `proposedName` - The name of your snap.
-- `description` - The description of your snap.
+- `proposedName` - The name of your Snap.
+- `description` - The description of your Snap.
 - `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
-  If you decided to publish your snap to npm, update the `location` to its published location.
+  If you decided to publish your Snap to npm, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you do not plan to publish your snap to [`npm`](https://www.npmjs.com/).
+`/packages/snap/package.json` even if you do not plan to publish your Snap to [`npm`](https://www.npmjs.com/).
 
 :::tip
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
@@ -199,4 +199,4 @@ If you change the method name, make sure to change the method name in `/packages
 to match.
 
 After you have made all necessary changes, you can
-[publish your snap to npm](../how-to/develop-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../how-to/develop-a-snap.md#publish-your-snap).

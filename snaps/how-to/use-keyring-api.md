@@ -14,10 +14,10 @@ sidebar_custom_props:
 
 Your dapp can use the [Keyring API](../concepts/keyring-api.md) to interact with custom EVM accounts.
 Use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md)
-of the Keyring API to invoke Keyring RPC methods on your [Keyring snap](../concepts/keyring-api.md#terminology).
+of the Keyring API to invoke Keyring RPC methods on your [Keyring Snap](../concepts/keyring-api.md#terminology).
 
 :::tip tutorial
-You can follow the end-to-end tutorial to [create a snap to connect to custom EVM accounts](../tutorials/custom-evm-accounts.md).
+You can follow the end-to-end tutorial to [create a Snap to connect to custom EVM accounts](../tutorials/custom-evm-accounts.md).
 :::
 
 :::info API documentation
@@ -50,7 +50,7 @@ let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ## Call Keyring API methods
 
 You can now use the `KeyringSnapRpcClient` to invoke the following
-[`Keyring API`](../reference/keyring-api/index.md) methods on your snap.
+[`Keyring API`](../reference/keyring-api/index.md) methods on your Snap.
 
 ### createAccount
 
@@ -71,7 +71,7 @@ let keyringAccount = await client.getAccount(accountId);
 
 ### listAccounts
 
-Lists all Keyring accounts created by the snap.
+Lists all Keyring accounts created by the Snap.
 
 ```ts
 let keyringAccounts = await client.listAccounts();
@@ -109,7 +109,7 @@ let submitRequestResponse = await client.submitRequest({
         jsonrpc: "2.0",
         // Unique ID to identify every request
         id: uuid(),
-        // The method and parameter structure is subjective to the Keyring API implementation in the snap code.
+        // The method and parameter structure is subjective to the Keyring API implementation in the Snap code.
         method: "eth_sendTransaction",
         params:
             {
@@ -134,7 +134,7 @@ let keyringRequest = await client.getRequest(requestId);
 
 ### listRequests
 
-Lists all requests submitted to the snap.
+Lists all requests submitted to the Snap.
 
 ```ts
 let requests = await client.listRequests();
