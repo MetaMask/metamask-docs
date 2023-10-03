@@ -6,9 +6,9 @@ sidebar_position: 1
 # Snaps JSON-RPC API
 
 Snaps communicate with MetaMask using the Snaps JSON-RPC API.
-These API methods allow snaps to modify the functionality of MetaMask, and websites (dapps) to
-install and communicate with individual snaps.
-Some methods are only callable by snaps, and some are only callable by websites.
+These API methods allow Snaps to modify the functionality of MetaMask, and websites (dapps) to
+install and communicate with individual Snaps.
+Some methods are only callable by Snaps, and some are only callable by websites.
 
 ## Unrestricted methods
 
@@ -16,21 +16,21 @@ You can call unrestricted methods without requesting permission to do so.
 
 ### wallet_getSnaps
 
-Returns the IDs of the caller's permitted snaps and some relevant metadata.
+Returns the IDs of the caller's permitted Snaps and some relevant metadata.
 
 This method is only callable by websites.
 
 #### Returns
 
-An object containing the requester's permitted snaps.
-Each snap is an object containing:
+An object containing the requester's permitted Snaps.
+Each Snap is an object containing:
 
-- `id` - The ID of the snap.
-- `initialPermissions` - The initial permissions of the snap, which will be requested when the snap
+- `id` - The ID of the Snap.
+- `initialPermissions` - The initial permissions of the Snap, which will be requested when the Snap
   is installed.
-- `version` - The version of the snap.
-- `enabled` - `true` if the snap is enabled, `false` otherwise.
-- `blocked` - `true` if the snap is blocked, `false` otherwise.
+- `version` - The version of the Snap.
+- `enabled` - `true` if the Snap is enabled, `false` otherwise.
+- `blocked` - `true` if the Snap is blocked, `false` otherwise.
 
 #### Example
 
@@ -47,7 +47,7 @@ console.log(result);
 # Result
 
 ```javascript
-// Example result if any snaps are permitted
+// Example result if any Snaps are permitted
 {
   'npm:@metamask/example-snap': {
     version: '1.0.0',
@@ -62,26 +62,26 @@ console.log(result);
 
 ### wallet_requestSnaps
 
-Requests permission for a website to communicate with the specified snaps and attempts to install
+Requests permission for a website to communicate with the specified Snaps and attempts to install
 them if they're not already installed.
-If the installation of any snap fails, returns the error that caused the failure.
+If the installation of any Snap fails, returns the error that caused the failure.
 
-You can optionally specify a [SemVer range](https://www.npmjs.com/package/semver) for a snap.
-MetaMask attempts to install a version of the snap that satisfies the requested range.
-If a compatible version of a snap is already installed, the request succeeds.
-If an incompatible version is installed, MetaMask attempts to update the snap to the latest version
+You can optionally specify a [SemVer range](https://www.npmjs.com/package/semver) for a Snap.
+MetaMask attempts to install a version of the Snap that satisfies the requested range.
+If a compatible version of a Snap is already installed, the request succeeds.
+If an incompatible version is installed, MetaMask attempts to update the Snap to the latest version
 that satisfies the requested range.
-The request succeeds if the snap is successfully updated.
+The request succeeds if the Snap is successfully updated.
 
 This method is only callable by websites.
 
 #### Parameters
 
-An object containing the snaps to request permission to communicate with.
+An object containing the Snaps to request permission to communicate with.
 
 #### Returns
 
-An object mapping the IDs of installed snaps to either their metadata or an error if installation fails.
+An object mapping the IDs of installed Snaps to either their metadata or an error if installation fails.
 
 #### Example
 
@@ -133,7 +133,7 @@ try {
 
 ## Restricted methods
 
-For restricted methods callable by snaps, a snap must request permission to call the method in the
+For restricted methods callable by Snaps, a Snap must request permission to call the method in the
 [snap manifest file](../how-to/request-permissions.md).
 For restricted methods callable by websites, a website must request permission to call the method using
 [`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions).
@@ -147,7 +147,7 @@ There are three types of dialogs with different parameters and return types:
 - [Confirmation](#confirmation-dialog)
 - [Prompt](#prompt-dialog)
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Alert dialog
 
@@ -269,7 +269,7 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Parameters
 
@@ -349,7 +349,7 @@ Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
 derivation path specified by the `path` parameter.
 Note that this returns the public key, not the extended public key (`xpub`), or Ethereum address.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Parameters
 
@@ -426,11 +426,11 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 :::caution 
-Coin type 60 is reserved for MetaMask accounts and blocked for snaps. 
-If you wish to connect to MetaMask accounts in a snap, use 
+Coin type 60 is reserved for MetaMask accounts and blocked for Snaps. 
+If you wish to connect to MetaMask accounts in a Snap, use 
 [`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and 
 `eth_requestAccounts`.
 :::
@@ -506,17 +506,17 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 ### snap_getEntropy
 
-Gets a deterministic 256-bit entropy value, specific to the snap and the user's account.
+Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
 You can use this entropy to generate a private key, or any other value that requires a high level of
 randomness.
-Other snaps can't access this entropy, and it changes if the user's secret recovery phrase changes.
+Other Snaps can't access this entropy, and it changes if the user's secret recovery phrase changes.
 
 You can optionally specify a salt to generate different entropy for different purposes.
 Using a salt results in entropy unrelated to the entropy generated without a salt.
 
-This value is deterministic: it's always the same for the same snap, user account, and salt.
+This value is deterministic: it's always the same for the same Snap, user account, and salt.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Parameters
 
@@ -595,7 +595,7 @@ await snap.request({
 
 ### snap_manageAccounts
 
-Manages [Keyring snap](../concepts/keyring-api.md) accounts.
+Manages [Keyring Snap](../concepts/keyring-api.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
 - [`createAccount`](#createaccount)
@@ -604,20 +604,20 @@ This method is organized into multiple sub-methods which each take their own par
 - [`listAccounts`](#listaccounts)
 - [`submitResponse`](#submitresponse)
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### `createAccount`
 
-Creates a new snap account.
+Creates a new Snap account.
 
 :::note
-The snap is responsible for maintaining its own record of accounts.
+The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
 ##### Parameters
 
-`account` - A [`KeyringAccount`](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md) object.
+`account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
 
 ##### Returns
 
@@ -672,16 +672,16 @@ class MyKeyring implements Keyring {
 
 #### `updateAccount`
 
-Updates an existing snap account.
+Updates an existing Snap account.
 
 :::note
-The snap is responsible for maintaining its own record of accounts.
+The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
 ##### Parameters
 
-`account` - A [`KeyringAccount`](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md) object.
+`account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
 
 ##### Returns
 
@@ -711,10 +711,10 @@ class MyKeyring implements Keyring {
 
 #### `deleteAccount`
 
-Deletes a snap account.
+Deletes a Snap account.
 
 :::note
-The snap is responsible for maintaining its own record of accounts.
+The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
@@ -750,14 +750,14 @@ class MyKeyring implements Keyring {
 
 #### `listAccounts`
 
-Lists the calling snap's accounts that are known to MetaMask.
-This method does not call back to the snap.
-Instead, the snap can use it to check whether there's a discrepancy between the snap's internal
+Lists the calling Snap's accounts that are known to MetaMask.
+This method does not call back to the Snap.
+Instead, the Snap can use it to check whether there's a discrepancy between the Snap's internal
 state of accounts and the state known to MetaMask.
 
 ##### Returns
 
-An array of [keyring accounts](./keyring-api/04-Variables/02-variable.KeyringAccountStruct.md).
+An array of [keyring accounts](./keyring-api/variables/KeyringAccountStruct.md).
 
 ##### Example
 
@@ -769,7 +769,7 @@ class MyKeyring implements Keyring {
 
   async checkIfAccountsInSync(): Promise<boolean> {
 
-    const knownAccounts: KeyringAccount[] = /* grab accounts from snap state */;
+    const knownAccounts: KeyringAccount[] = /* grab accounts from Snap state */;
 
     const listedAccounts: KeyringAccount[] = await snap.request({
       method: 'snap_manageAccounts',
@@ -787,7 +787,7 @@ class MyKeyring implements Keyring {
 
 Finalizes a signing request.
 This is usually called as part of the `approveRequest` method of the
-[`Keyring`](keyring-api/03-Type%20Aliases/02-type-alias.Keyring.md) interface.
+[`Keyring`](keyring-api/type-aliases/Keyring.md) interface.
 
 ##### Parameters
 
@@ -808,7 +808,7 @@ class MyKeyring implements Keyring {
   // ... other methods
 
   async approveRequest(id: string, result?: Json): Promise<void> {
-    // Do any snap-side logic to finish approving the request
+    // Do any Snap-side logic to finish approving the request
 
     await snap.request({
       method: 'snap_manageAccounts',
@@ -823,10 +823,10 @@ class MyKeyring implements Keyring {
 
 ### snap_manageState
 
-Allows the snap to persist up to 100 MB of data to disk and retrieve it at will.
-The data is automatically encrypted using a snap-specific key and automatically decrypted when retrieved.
+Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
+The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Parameters
 
@@ -869,7 +869,7 @@ await snap.request({
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
 
-This method is only callable by snaps.
+This method is only callable by Snaps.
 
 #### Parameters
 
@@ -898,35 +898,35 @@ await snap.request({
 
 A website must request the `wallet_snap` permission using
 [`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions) to
-interact with the specified snaps.
+interact with the specified Snaps.
 
-A website can also call this method to invoke the specified JSON-RPC method of the specified snap.
+A website can also call this method to invoke the specified JSON-RPC method of the specified Snap.
 
 This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap).
 
 :::note
 Most websites only make one call to `wallet_requestPermissions`.
 Consecutive calls to `wallet_requestPermissions` for the `wallet_snap` permission overwrites a
-website's existing permissions to interact with snaps.
-To deal with this, you must write custom logic to merge existing snap IDs with new ones you're requesting.
-Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a website's permitted snaps.
+website's existing permissions to interact with Snaps.
+To deal with this, you must write custom logic to merge existing Snap IDs with new ones you're requesting.
+Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a website's permitted Snaps.
 :::
 
 #### Parameters
 
 When requesting this permission, specify a caveat of type `snapIds`.
-Specify each snap to request permission to interact with as an entry in the `value` field of the caveat.
-Each snap entry can include a `version` to install.
+Specify each Snap to request permission to interact with as an entry in the `value` field of the caveat.
+Each Snap entry can include a `version` to install.
 The default is the latest version.
 
 When calling this method, specify an object containing:
 
-- `snapId` - The ID of the snap to invoke.
-- `request` - The JSON-RPC request object to send to the invoked snap.
+- `snapId` - The ID of the Snap to invoke.
+- `request` - The JSON-RPC request object to send to the invoked Snap.
 
 #### Returns
 
-Result of the snap method call.
+Result of the Snap method call.
 
 #### Example
 
@@ -978,23 +978,23 @@ console.log(result); // In this example, the result is a boolean.
 
 ### wallet_invokeSnap
 
-Invokes the specified JSON-RPC method of the specified snap.
-The snap must be installed and the caller must have the permission to communicate with the snap, or
+Invokes the specified JSON-RPC method of the specified Snap.
+The Snap must be installed and the caller must have the permission to communicate with the Snap, or
 the request is rejected.
 
 Snaps are fully responsible for implementing their JSON-RPC API.
-Consult the snap's documentation for available methods, their parameters, and return values.
+Consult the Snap's documentation for available methods, their parameters, and return values.
 
 #### Parameters
 
 An object containing:
 
-- `snapId` - The ID of the snap to invoke.
-- `request` - The JSON-RPC request object to send to the invoked snap.
+- `snapId` - The ID of the Snap to invoke.
+- `request` - The JSON-RPC request object to send to the invoked Snap.
 
 #### Returns
 
-Result of the snap method call.
+Result of the Snap method call.
 
 #### Example
 

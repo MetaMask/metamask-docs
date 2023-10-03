@@ -1,0 +1,16 @@
+.flaskOnly > :global(a.menu__link::after),
+.flaskOnly > :global(.menu__list-item-collapsible) > :global(a.menu__link::after) {
+  content: "Flask";
+  margin-left: 0.5em;
+  background-color: hsl(280, 45%, 85%);
+  color: hsl(280, 45%, 15%);
+  border-radius: 4px;
+  padding: 2px 4px;
+  transform: none;
+}
+
+html[data-theme='dark'] .flaskOnly > :global(a.menu__link::after),
+html[data-theme='dark'] .flaskOnly > :global(.menu__list-item-collapsible) > :global(a.menu__link::after) {
+  color: hsl(280, 45%, 85%);
+  background-color: hsl(280, 45%, 25%);
+}

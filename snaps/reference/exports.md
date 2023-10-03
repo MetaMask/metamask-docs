@@ -6,19 +6,19 @@ sidebar_position: 2
 
 # Snaps exports
 
-A snap can export the following methods.
+A Snap can export the following methods.
 
 ## onRpcRequest
 
-To communicate with dapps and other snaps, a snap must implement its own JSON-RPC API by exporting
+To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exporting
 `onRpcRequest`.
-Whenever the snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
+Whenever the Snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
 
 :::caution important
-If your snap can do something useful without receiving and responding to JSON-RPC requests, such as
+If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
 providing [transaction insights](#ontransaction), you can skip exporting `onRpcRequest`.
 However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that sends transactions for that protocol via your snap, for example, you must
+create a dapp that sends transactions for that protocol via your Snap, for example, you must
 specify an RPC API.
 :::
 
@@ -74,13 +74,13 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 ## onTransaction
 
-To provide transaction insights before a user signs a transaction, a snap must export `onTransaction`.
+To provide transaction insights before a user signs a transaction, a Snap must export `onTransaction`.
 Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
 extension, MetaMask calls this method.
 MetaMask passes the raw unsigned transaction payload to the `onTransaction` handler method.
 
 :::note
-For MetaMask to call the snap's `onTransaction` method, you must request the
+For MetaMask to call the Snap's `onTransaction` method, you must request the
 [`endowment:transaction-insight`](permissions.md#endowmenttransaction-insight) permission.
 :::
 
@@ -210,12 +210,12 @@ module.exports.onTransaction = async ({
 
 ## onCronjob
 
-To run periodic actions for the user (cron jobs), a snap must export `onCronjob`.
+To run periodic actions for the user (cron jobs), a Snap must export `onCronjob`.
 This method is called at the specified times with the specified payloads defined in the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 
 :::note
-For MetaMask to call the snap's `onCronjob` method, you must request the
+For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
 
