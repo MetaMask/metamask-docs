@@ -564,6 +564,9 @@ console.log(entropy);
 
 ### snap_getLocale
 
+:::flaskOnly
+:::
+
 Gets the user's locale setting. You can use this method to localize text in your snap.
 
 #### Returns

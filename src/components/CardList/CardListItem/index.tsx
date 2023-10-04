@@ -8,7 +8,7 @@ export interface CardItem {
   description?: ReactNode;
   href?: string;
   icon?: string;
-  flag?: string;
+  flaskOnly?: boolean;
 }
 
 interface CardListItemProps {
@@ -26,9 +26,6 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
           <span>{item.title}</span>
         </h2>
       )}
-      {item.flag && (
-        <span className={clsx(styles.cardFlag)}>{item.flag}</span>
-      )}
       {item.description && (
         <p>
           {item.description}
@@ -37,7 +34,14 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
     </>
   );
   
-  const rootClassName = clsx("card padding--lg", styles.cardContainer);
+  const rootClassName = clsx(
+    "card",
+    "padding--lg",
+    styles.cardContainer,
+    {
+      [styles.flaskOnly]: item.flaskOnly,
+    },
+  );
 
   if (item.href) {
     return (

@@ -148,10 +148,12 @@ module.exports.onTransaction = async ({
 
 <!--/tabs-->
 
-### New in MetaMask Flask: Transaction severity level
+### Transaction severity level
 
-A new feature in [MetaMask Flask](../get-started/install-flask.md) permits transaction insight snaps
-to return an optional severity level of `'critical'`. 
+:::flaskOnly
+:::
+
+This feature permits transaction insight snaps to return an optional severity level of `'critical'`.
 MetaMask shows a modal before the user can confirm the transaction to help ensure that the user sees
 the warning.
 Using the previous example for `onTransaction`, the following code adds a single line to return an
@@ -272,6 +274,9 @@ module.exports.onCronjob = async ({ request }) => {
 <!--/tabs-->
 
 ## onNameLookup
+
+:::flaskOnly
+:::
 
 To resolve names to addresses and addresses to names, a Snap must export `onNameLookup`.
 Whenever a user types in the send field, MetaMask calls this method.
