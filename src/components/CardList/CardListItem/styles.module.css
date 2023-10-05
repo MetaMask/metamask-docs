@@ -17,7 +17,7 @@
   transition-property: border, box-shadow;
 }
 
-.cardContainer.flaskOnly::after {
+.flaskOnly::after {
   content: "Flask";
   border-bottom-left-radius: var(--ifm-card-border-radius);
   position: absolute;
