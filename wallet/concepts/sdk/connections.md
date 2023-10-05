@@ -12,18 +12,22 @@ user's MetaMask wallet.
 
 The following flowchart outlines the initial connection flow between a dapp and MetaMask:
 
+<p align="center">
+
 ```mermaid
-flowchart LR
-    A{Dapp platform?}
-    A -->|Desktop| C(Show modal) --> D{Connect via?}
-    D -->|Extension| E{Extension<br>installed?}
-    E -->|No| F(Chrome store) --> G(Connect via<br>extension)
+flowchart TD
+    A{{Dapp platform?}}
+    A -->|Desktop| C(Show modal) --> D{{Connect via?}}
+    D -->|Extension| E{{Extension installed?}}
+    E -->|No| F(Chrome store) --> G(Connect via extension)
     E -->|Yes| G
-    D -->|MM Mobile| H{MM Mobile<br>installed?}
+    D -->|MM Mobile| H{{MM Mobile installed?}}
     H -->|Yes| J
-    H -->|No| I(App store) --> J(Connect via<br>MM Mobile)
-    A -->|Mobile| K(Deeplink to<br>MM Mobile) --> H
+    H -->|No| I(App store) --> J(Connect via MM Mobile)
+    A -->|Mobile| K(Deeplink to MM Mobile) --> H
 ```
+
+</p>
 
 The path first depends on whether the dapp is on a desktop or mobile platform:
 
