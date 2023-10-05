@@ -1,6 +1,6 @@
 # Keyring API
 
-This section contains documentation for the [Keyring API](../../concepts/keyring-api.md) methods.
+This section describes the [Keyring API](../../concepts/keyring-api.md) methods.
 
 :::tip Learn more
 - Follow the end-to-end tutorial to [create a Keyring Snap to connect to custom EVM accounts](../../tutorials/custom-evm-accounts.md).
