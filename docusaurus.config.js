@@ -105,6 +105,7 @@ const config = {
       {
         entryPoints: ["./external/keyring-api/src/index.ts"],
         tsconfig: "./external/keyring-api/tsconfig.json",
+        readme: "snaps/reference/keyring-api-index/index.md",
         out: path.join(__dirname, "snaps/reference/keyring-api"),
         sidebar: {
           filteredIds: ["reference/keyring-api/index"],
@@ -405,7 +406,7 @@ const config = {
               },
               {
                 label: "How to guides",
-                to: "/wallet/category/how-to",
+                to: "/wallet/how-to",
               },
               {
                 label: "Concepts",

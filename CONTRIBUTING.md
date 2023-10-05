@@ -37,7 +37,7 @@ To contribute changes:
 
     ```bash
     git clone https://github.com/MetaMask/metamask-docs.git
-    cd https://github.com/MetaMask/metamask-docs.git
+    cd metamask-docs
     ```
 
    > **Note**: If you don't have write access to this repository, you must [fork the
@@ -48,7 +48,7 @@ To contribute changes:
    >
    > ```bash
    > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
-   > git cd https://github.com/<YOUR-USERNAME>/metamask-docs.git
+   > cd metamask-docs
    > git remote add upstream https://github.com/MetaMask/metamask-docs.git
    > ```
 

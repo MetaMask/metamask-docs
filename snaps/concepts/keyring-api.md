@@ -47,7 +47,14 @@ Keyring Snap:
 
 <p align="center">
 
-![Keyring Snap component diagram](../assets/keyring/components-diagram.png)
+```mermaid
+graph TD
+  User -->|Starts a request| Dapp
+  Dapp -->|Submits a request| MetaMask
+  MetaMask -->|Submits requests<br/>and manages accounts| Snap
+  Site[Snap UI] -->|Manages requests<br/>and accounts| Snap
+  User -.->|Uses for<br/>Snap-specific logic| Site
+```
 
 </p>
 
@@ -74,7 +81,49 @@ The following sections describe the different flows that the `Keyring` interface
 The first interaction between users and the Keyring Snap is the Snap account creation process.
 The flow looks like the following:
 
-![Keyring Snap account creation flow](../assets/keyring/create-account-flow.png)
+```mermaid
+%%{
+  init: {
+    'sequence': {
+      'actorMargin': 25,
+      'width': 225
+    }
+  }
+}%%
+
+sequenceDiagram
+autonumber
+
+actor User
+participant MetaMask
+participant Snap
+participant Site as Snap UI
+
+alt Optional
+  User ->>+ MetaMask: Add new Snap account
+  MetaMask ->> MetaMask: Display suggested Snaps
+  User ->> MetaMask: Select Snap
+  MetaMask ->> Site: Open in a new tab
+  deactivate MetaMask
+end
+
+alt If the Snap is not installed yet
+  Site ->>+ MetaMask: Install Snap
+  MetaMask ->> MetaMask: Display permissions dialog
+  User ->> MetaMask: Approve permissions
+  MetaMask -->>- Site: OK
+end
+
+User ->>+ Site: Create new account
+Site ->> Site: Custom logic to create account
+Site ->>+ Snap: keyring_createAccount(options)
+Snap ->> Snap: Custom logic to create account
+Snap ->>+ MetaMask: snap_manageAccounts("event:accountCreated", account)
+User ->> MetaMask: Approve account creation
+MetaMask -->>- Snap: OK
+Snap -->>- Site: OK
+Site -->>- User: Done
+```
 
 The MetaMask account selection modal has an option called **Add Snap account**:
 
@@ -107,7 +156,37 @@ If the Snap needs a third party such as a hardware key or a second account's sig
 in a threshold signature scheme), it implements an [asynchronous signing flow](#asynchronous-signing-flow).
 The synchronous flow looks like the following:
 
-![Synchronous signing flow](../assets/keyring/synchronous-flow.png)
+```mermaid
+%%{
+  init: {
+    'sequence': {
+      'actorMargin': 25,
+      'width': 225
+    }
+  }
+}%%
+
+sequenceDiagram
+  autonumber
+
+  actor User
+  participant Dapp
+  participant MetaMask
+  participant Snap
+
+  User ->>+ Dapp: Create new sign request
+  Dapp ->>+ MetaMask: personal_sign(request)
+  User -) MetaMask: Approve operation
+
+  MetaMask ->>+ Snap: keyring_submitRequest(request)
+  Snap ->> Snap: Add request to Snap's state
+  Snap ->> Snap: signature = signRequest(request)
+  Snap -->>- MetaMask: signature
+
+  MetaMask -->>- Dapp: signature
+
+  Dapp -->>- User: Signature
+```
 
 See the [example Keyring Snap companion dapp](https://github.com/MetaMask/snap-simple-keyring) for a
 full example.
@@ -137,7 +216,53 @@ If the Keyring Snap implements a complex scheme such as threshold signing, it im
 asynchronous signing flow with more `Keyring` methods.
 The asynchronous flow looks like the following:
 
-![Asynchronous signing flow](../assets/keyring/asynchronous-flow.png)
+```mermaid
+%%{
+  init: {
+    'sequence': {
+      'actorMargin': 20,
+      'width': 200
+    }
+  }
+}%%
+
+sequenceDiagram
+  autonumber
+
+  actor User
+  participant Dapp
+  participant MetaMask
+  participant Snap
+  participant Site as Snap's UI
+
+  User ->>+ Dapp: Create new sign request
+  Dapp ->>+ MetaMask: personal_sign(request)
+  User -) MetaMask: Approve operation
+
+  MetaMask ->>+ Snap: keyring_submitRequest(request)
+  Snap ->> Snap: Add request to Snap's state
+  Snap -->>- MetaMask: OK
+  deactivate MetaMask
+
+  loop Polling
+    Site ->>+ Snap: keyring_listRequests()
+    Snap -->>- Site: requests
+
+    alt There is a pending request
+	  User ->>+ Site: Approve request
+      Site ->>+ Snap: keyring_approveRequest(id)
+      Snap ->> Snap: signature = signRequest(request)
+      Snap ->>+ MetaMask: snap_manageAccounts("submit", id, signature)
+
+	  MetaMask -->> Dapp: signature
+	  MetaMask -->>- Snap: OK
+	  Snap -->>- Site: OK
+	  deactivate Site
+
+      Dapp -->>- User: Signature
+    end
+  end
+```
 
 The flow starts the same way as the [synchronous flow](#synchronous-signing-flow): a dapp or user
 initiates a request to sign a transaction or arbitrary data.
