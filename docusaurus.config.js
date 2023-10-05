@@ -405,7 +405,7 @@ const config = {
               },
               {
                 label: "How to guides",
-                to: "/wallet/category/how-to",
+                to: "/wallet/wallet/how-to",
               },
               {
                 label: "Concepts",
