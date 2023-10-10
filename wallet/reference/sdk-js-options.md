@@ -51,7 +51,7 @@ checkInstallationImmediately: true
 
 <!--/tabs-->
 
-Enables or disables checking if MetaMask is installed on the user's browser before each RPC call.
+Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
 The default is `false`.
 
 ### communicationLayerPreference
@@ -148,7 +148,7 @@ defaultReadOnlyChainId: '0x1'
 
 <!--/tabs-->
 
-Enables sending read-only RPC calls before the user has connected to the wallet.
+Enables sending read-only RPC requests before the user has connected to the wallet.
 The value is automatically updated to the wallet chain ID once connected.
 
 ### enableDebug
@@ -478,12 +478,6 @@ Options for customizing the storage manager used by the SDK.
 
 <!--tabs-->
 
-# Syntax
-
-```javascript
-timer: <React Native background timer>
-```
-
 # Example
 
 ```javascript
@@ -492,7 +486,8 @@ timer: BackgroundTimer
 
 <!--/tabs-->
 
-Used by React Native dapps to keep the dapp alive while using `react-native-background-timer`.
+Used by React Native dapps to keep the dapp alive while using
+[`react-native-background-timer`](https://github.com/ocetnik/react-native-background-timer).
 
 ### transports
 
