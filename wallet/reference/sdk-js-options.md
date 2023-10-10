@@ -105,7 +105,7 @@ The URL of the communication server to use for the SDK.
 dappMetadata: {
   name: <string>,
   url: <string>,
-  base64Icon: <string> // base64-encoded icon
+  base64Icon: <string>, // base64-encoded icon
 }
 ```
 
@@ -255,7 +255,7 @@ infuraAPIKey: process.env.INFURA_API_KEY
 
 The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id) to
 use for RPC requests.
-Configure this option to [use Infura APIs from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
+Configure this option to [use the Infura API from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
 
 :::tip
 To prevent committing your Infura API key, we recommend adding your key to a
@@ -373,7 +373,7 @@ openDeeplink: (link: string) => {
   if (canOpenLink) {
     Linking.openURL(link);
   }
-},
+}
 ```
 
 <!--/tabs-->
@@ -455,7 +455,7 @@ storage: {
   enabled: <boolean>,
   debug: <boolean>,
   duration: <number>,
-  storageManager: <storage manager> // Allows user to customize the storage manager
+  storageManager: <storage manager>, // Allows user to customize the storage manager
 }
 ```
 
@@ -466,7 +466,7 @@ storage: {
   enabled: true,
   debug: true,
   duration: 10,
-  storageManager: StorageManager
+  storageManager: StorageManager,
 }
 ```
 
