@@ -26,8 +26,8 @@ checkInstallationImmediately: true
 
 <!--/tabs-->
 
-Enables or disables checking if MetaMask is installed on the user's browser immediately.
-If `true`, upon page load the SDK checks for installation and sends a connection request, prompting
+Enables or disables the immediate check for MetaMask installation on the user's browser.
+If `true`, the SDK checks for installation upon page load and sends a connection request, prompting
 the user to install MetaMask if it's not already installed.
 If `false`, the SDK waits for the connect method to be called to check for installation.
 
@@ -40,13 +40,13 @@ The default is `false`.
 # Syntax
 
 ```javascript
-checkInstallationImmediately: <boolean>
+checkInstallationOnAllCalls: <boolean>
 ```
 
 # Example
 
 ```javascript
-checkInstallationImmediately: true
+checkInstallationOnAllCalls: true
 ```
 
 <!--/tabs-->
@@ -105,7 +105,7 @@ The URL of the communication server to use for the SDK.
 dappMetadata: {
   name: <string>,
   url: <string>,
-  base64Icon: <string>, // base64-encoded icon
+  base64Icon: <string>,
 }
 ```
 
@@ -122,10 +122,15 @@ dappMetadata: {
 <!--/tabs-->
 
 Metadata about the dapp using the SDK.
+The metadata options are:
 
-:::caution important
-Setting `dappMetaData` is important to create a clear and trustworthy user experience when
-connecting your dapp to MetaMask Mobile.
+- `name` - Name of the dapp
+- `url` - URL of the dapp
+- `base64Icon` - A base64-encoded icon
+
+:::tip important
+Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
+MetaMask Mobile.
 MetaMask Mobile displays this metadata in the connection modal to help users identify and verify the
 connection request.
 :::
@@ -149,7 +154,7 @@ defaultReadOnlyChainId: '0x1'
 <!--/tabs-->
 
 Enables sending read-only RPC requests before the user has connected to the wallet.
-The value is automatically updated to the wallet chain ID once connected.
+The value is automatically set to the wallet chain ID once connected.
 
 ### enableDebug
 
@@ -190,7 +195,7 @@ extensionOnly: true
 
 <!--/tabs-->
 
-Enables or disables directly using the MetaMask browser extension if it's detected.
+Enables or disables automatically using the MetaMask browser extension if it's detected.
 The default is `false`.
 
 ### forceDeleteProvider
@@ -211,7 +216,7 @@ forceDeleteProvider: true
 
 <!--/tabs-->
 
-Enables or disables force deleting the provider from the global `window` object.
+Enables or disables force deleting the Ethereum provider from the global `window` object.
 The default is `false`.
 
 ### forceInjectProvider
@@ -232,7 +237,7 @@ forceInjectProvider: true
 
 <!--/tabs-->
 
-Enables or disables force injecting the provider into the global `window` object.
+Enables or disables force injecting the Ethereum provider into the global `window` object.
 The default is `false`.
 
 ### infuraAPIKey
@@ -281,7 +286,7 @@ injectProvider: false
 
 <!--/tabs-->
 
-Enables or disables injecting the provider into the global `window` object.
+Enables or disables injecting the Ethereum provider into the global `window` object.
 The default is `true`.
 
 :::tip
@@ -314,6 +319,10 @@ logging: {
 <!--/tabs-->
 
 Options for customizing the logging behavior of the SDK.
+The logging options are:
+
+- `developerMode` -
+- `sdk` -
 
 ### modals
 
@@ -399,6 +408,7 @@ preferDesktop: true
 <!--/tabs-->
 
 Enables or disables preferring the MetaMask browser extension over MetaMask Mobile.
+The default is `false`.
 
 ### readonlyRPCMap
 
@@ -440,8 +450,8 @@ shouldShimWeb3: false
 
 <!--/tabs-->
 
-Enables or disables shimming the `window.web3` object with the provider returned by the SDK (useful
-for compatibility with older browsers).
+Enables or disables shimming the `window.web3` object with the Ethereum provider returned by the SDK
+(useful for compatibility with older browsers).
 The default is `true`.
 
 ### storage
@@ -455,7 +465,7 @@ storage: {
   enabled: <boolean>,
   debug: <boolean>,
   duration: <number>,
-  storageManager: <storage manager>, // Allows user to customize the storage manager
+  storageManager: <storage manager>,
 }
 ```
 
@@ -473,6 +483,12 @@ storage: {
 <!--/tabs-->
 
 Options for customizing the storage manager used by the SDK.
+The storage manager options are:
+
+- `enabled` -
+- `debug` -
+- `duration` -
+- `storageManager` - 
 
 ### timer
 
@@ -534,6 +550,10 @@ ui: {
 <!--/tabs-->
 
 Options for customizing the SDK UI.
+The UI options are:
+
+- `installer` -
+- `confirm` -
 
 ### useDeeplink
 

@@ -3,7 +3,7 @@ sidebar_position: 2
 description: Use Infura and custom nodes to make direct, read-only requests.
 ---
 
-# Make read-only requests from your JavaScript dapp
+# Make read-only requests from JavaScript dapps
 
 You can use the [Infura API](https://docs.infura.io/) from your JavaScript dapp with
 [MetaMask SDK](../connect/set-up-sdk/javascript/index.md) installed to make direct, read-only
@@ -13,12 +13,8 @@ Direct, read-only JSON-RPC requests are blockchain requests that do not require 
 Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/eth_subscribe), bypassing
 user wallet authentication for read-only operations.
 
-<details>
-<summary>JSON-RPC methods you <b>cannot</b> directly call</summary>
-<p>
-
-Your dapp can directly call all JSON-RPC API methods EXCEPT the following methods, which require
-user wallet interaction:
+:::note
+Your dapp CANNOT directly call the following RPC methods, which require user wallet interaction:
 
 - `eth_requestAccounts`
 - `eth_sendTransaction`
@@ -30,11 +26,9 @@ user wallet interaction:
 - `wallet_watchAsset`
 - `wallet_addEthereumChain`
 - `wallet_switchEthereumChain`
+:::
 
-</p>
-</details>
-
-You can configure your dapp to make read-only requests using the [Infura API](#use-the-infura-api),
+Configure your dapp to make read-only requests using the [Infura API](#use-the-infura-api),
 [custom nodes](#use-custom-nodes), or [both](#use-the-infura-api-and-custom-nodes).
 
 ## Prerequisites
