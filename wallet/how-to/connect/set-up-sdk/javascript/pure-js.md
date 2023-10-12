@@ -5,13 +5,13 @@ sidebar_position: 2
 
 # Use MetaMask SDK with pure JavaScript
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your pure JavaScript dapp to enable
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your pure JavaScript dapp to enable
 your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
-:::tip example
-See the [pure JavaScript SDK example](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/pure-javascript)
-for advanced use cases.
+:::tip Example
+See the [example pure JavaScript dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/pure-javascript)
+in the JavaScript SDK GitHub repository for advanced use cases.
 :::
 
 To import, instantiate, and use the SDK, you can insert a script in the head section of your website:

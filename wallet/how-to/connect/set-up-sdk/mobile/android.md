@@ -6,12 +6,12 @@ toc_max_heading_level: 4
 
 # Use MetaMask SDK with Android
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native Android dapp to enable
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip Learn more
-- See the [example Android dapp source code](https://github.com/MetaMask/metamask-android-sdk/tree/main/app)
-for examples on how to use the SDK to make Ethereum requests.
+- See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
+  the Android SDK GitHub repository for advanced use cases.
 - See more information about the [Android SDK architecture](../../../../concepts/sdk/android.md).
 :::
 
