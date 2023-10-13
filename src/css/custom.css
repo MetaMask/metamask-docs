@@ -137,3 +137,12 @@ svg {
   font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
   line-height: 2;
 }
+
+.getfeedback-container {
+  margin-top: 50px;
+  margin-bottom: -2rem;
+}
+
+.getfeedback-hidden {
+  display: none !important;
+}

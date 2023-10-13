@@ -33,6 +33,7 @@ const config = {
   scripts: [
     { src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js" },
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
+    { src: `/js/getfeedback.js`, defer: true, async: true },
   ],
 
   markdown: {
