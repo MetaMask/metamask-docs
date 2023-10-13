@@ -6,11 +6,12 @@ toc_max_heading_level: 4
 
 # Use MetaMask SDK with iOS
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native iOS dapp to enable your
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native iOS dapp to enable your
 users to easily connect with their MetaMask Mobile wallet.
 
-:::tip example
-See the [iOS SDK example](https://github.com/MetaMask/metamask-ios-sdk) for advanced use cases.
+:::tip Example
+See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk) in the iOS SDK GitHub
+repository for advanced use cases.
 :::
 
 ## Prerequisites

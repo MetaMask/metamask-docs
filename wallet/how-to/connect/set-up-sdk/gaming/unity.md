@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player/lazy'
 
 # Use MetaMask SDK with Unity
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your
 [Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786) game
 to enable users to easily connect to their MetaMask Mobile wallet.
 The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.

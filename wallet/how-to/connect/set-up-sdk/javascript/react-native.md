@@ -5,12 +5,12 @@ sidebar_position: 4
 
 # Use MetaMask SDK with React Native
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React Native dapp to enable your
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React Native dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
-:::tip example
-See the [React Native SDK example](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
-for advanced use cases.
+:::tip Example
+See the [example React Native dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
+in the JavaScript SDK GitHub repository for advanced use cases.
 :::
 
 ## Prerequisites
