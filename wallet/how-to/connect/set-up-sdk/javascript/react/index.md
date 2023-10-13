@@ -62,14 +62,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MetaMaskProvider debug={false} sdkOptions={{
-      logging:{
-          developerMode: false,
-        },
-        checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
-        dappMetadata: {
-          name: "Demo React App",
-          url: window.location.host,
-        }
+      logging: {
+        developerMode: false,
+      },
+      checkInstallationImmediately: false,
+      dappMetadata: {
+        name: "Demo React App",
+        url: window.location.host,
+      }
     }}>
       <App />
     </MetaMaskProvider>
@@ -77,9 +77,18 @@ root.render(
 );
 ```
 
-When initializing `MetaMaskProvider`, setting `debug` to `true` activates debug mode.
+When initializing `MetaMaskProvider`, set `debug` to `true` to activate debug mode.
 For the full list of options you can set for `sdkOptions`, see the
 [JavaScript SDK options reference](../../../../../reference/sdk-js-options.md).
+
+:::note Important SDK options
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to customize the logic and UI of
+  the displayed modals.
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+:::
 
 ### 4. Use the SDK
 

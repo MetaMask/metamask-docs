@@ -98,11 +98,14 @@ sdkOptions={{
   infuraAPIKey: 'YOUR-API-KEY',
   readonlyRPCMap: {
     '0x539': 'http://localhost:8545',  // Custom node
-    '0x1': 'https://mainnet.infura.io/v3/YOUR-API-KEY',  // Override Infura mainnet
+    '0x1': 'https://mainnet.infura.io/v3/YOUR-API-KEY',  // Override Infura Mainnet
   },
+  defaultReadOnlyChainId: '0x1',
   // Other options
 }
 ```
 
-In this example, read-only requests to Mainnet use the Infura API, while read-only requests to the
-local testnet (chain ID `0x539`) use the custom node.
+In this example, read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only
+requests to the local testnet (chain ID `0x539`) use the custom node.
+[`defaultReadOnlyChainId`](../../reference/sdk-js-options.md#defaultreadonlychainid) enables making
+read-only requests before the user connects to MetaMask, and specifies to make those requests to Mainnet.

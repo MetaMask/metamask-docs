@@ -26,7 +26,7 @@ checkInstallationImmediately: true
 
 <!--/tabs-->
 
-Enables or disables the immediate check for MetaMask installation on the user's browser.
+Enables or disables immediately checking if MetaMask is installed on the user's browser.
 If `true`, the SDK checks for installation upon page load and sends a connection request, prompting
 the user to install MetaMask if it's not already installed.
 If `false`, the SDK waits for the connect method to be called to check for installation.
@@ -72,8 +72,8 @@ communicationLayerPreference: SOCKET
 
 <!--/tabs-->
 
-The preferred communication layer to use for the SDK.
-The default is `SOCKET`.
+The preferred communication layer to use.
+The default and only option is `SOCKET` for [Socket.IO](https://socket.io/docs/v4/).
 
 ### communicationServerUrl
 
@@ -93,7 +93,8 @@ communicationServerUrl: 'https://metamask-sdk-socket.metafi.codefi.network/'
 
 <!--/tabs-->
 
-The URL of the communication server to use for the SDK.
+The URL of the communication server to use.
+This option is mainly used for debugging and testing the SDK.
 
 ### dappMetadata
 
@@ -153,8 +154,9 @@ defaultReadOnlyChainId: '0x1'
 
 <!--/tabs-->
 
-Enables sending read-only RPC requests before the user has connected to the wallet.
-The value is automatically set to the wallet chain ID once connected.
+Enables sending [read-only RPC requests](../how-to/use-3rd-party-integrations/js-infura-api.md) to
+this chain ID before the user connects to MetaMask.
+The value is automatically updated to the chain ID used in MetaMask once connected.
 
 ### enableDebug
 
@@ -198,48 +200,6 @@ extensionOnly: true
 Enables or disables automatically using the MetaMask browser extension if it's detected.
 The default is `false`.
 
-### forceDeleteProvider
-
-<!--tabs-->
-
-# Syntax
-
-```javascript
-forceDeleteProvider: <boolean>
-```
-
-# Example
-
-```javascript
-forceDeleteProvider: true
-```
-
-<!--/tabs-->
-
-Enables or disables force deleting the Ethereum provider from the global `window` object.
-The default is `false`.
-
-### forceInjectProvider
-
-<!--tabs-->
-
-# Syntax
-
-```javascript
-forceInjectProvider: <boolean>
-```
-
-# Example
-
-```javascript
-forceInjectProvider: true
-```
-
-<!--/tabs-->
-
-Enables or disables force injecting the Ethereum provider into the global `window` object.
-The default is `false`.
-
 ### infuraAPIKey
 
 <!--tabs-->
@@ -260,38 +220,12 @@ infuraAPIKey: process.env.INFURA_API_KEY
 
 The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id) to
 use for RPC requests.
-Configure this option to [use the Infura API from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
+Configure this option to [make read-only RPC requests from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
 
 :::tip
 To prevent committing your Infura API key, we recommend adding your key to a
 [`.env` file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv) and using the
 `process.env` global variable when specifying this option.
-:::
-
-### injectProvider
-
-<!--tabs-->
-
-# Syntax
-
-```javascript
-injectProvider: <boolean>
-```
-
-# Example
-
-```javascript
-injectProvider: false
-```
-
-<!--/tabs-->
-
-Enables or disables injecting the Ethereum provider into the global `window` object.
-The default is `true`.
-
-:::tip
-If your project is a web dapp and `injectProvider` is `true`, then the `ethereum` object is
-available in `window.ethereum`.
 :::
 
 ### logging
@@ -430,7 +364,7 @@ readonlyRPCMap: {
 
 <!--/tabs-->
 
-A map of RPC URLs to use for [read-only JSON-RPC requests](../how-to/use-3rd-party-integrations/js-infura-api.md).
+A map of RPC URLs to use for [read-only RPC requests](../how-to/use-3rd-party-integrations/js-infura-api.md).
 
 ### shouldShimWeb3
 
@@ -523,7 +457,7 @@ transports: ['websocket', 'polling']
 
 <!--/tabs-->
 
-Sets the preference on [socket.io](https://socket.io/docs/v4/) transports.
+Sets the preference on [Socket.IO](https://socket.io/docs/v4/) transports.
 
 ### ui
 
