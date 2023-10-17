@@ -150,9 +150,9 @@ import io.metamask.androidsdk.Ethereum
 You can connect your dapp to MetaMask in one of two ways:
 
 1. [Use the `ethereum` provider object directly](#41-use-the-provider-object-directly).
-    We recommend using this option within a pure model layer.
+    We recommend using this method in a pure model layer.
 2. [Use a ViewModel](#42-use-a-viewmodel) that injects the `ethereum` provider object.
-    We recommend using this option at the app level, because it provides a single instance that
+    We recommend using this method at the app level, because it provides a single instance that
     survives configuration changes and can be shared across all views.
 
 #### 4.1. Use the provider object directly
@@ -230,7 +230,7 @@ ethereum.connect(dapp) { result ->
 
 See the example dapp's
 [`EthereumViewModel.kt`](https://github.com/MetaMask/metamask-android-sdk/blob/main/app/src/main/java/com/metamask/dapp/EthereumViewModel.kt)
-for more information.
+file for more information.
 
 By default, MetaMask logs three SDK events: `connection_request`, `connected`, and `disconnected`.
 This allows MetaMask to monitor any SDK connection issues.
@@ -238,7 +238,7 @@ To disable this, set `ethereum.enableDebug = false`.
 
 ### 5. Call methods
 
-You can now call any [JSON-RPC API method](../../../../reference/eth_subscribe) using
+You can now call any [JSON-RPC API method](/wallet/reference/eth_subscribe) using
 `ethereum.sendRequest()`.
 
 #### Example: Get account balance

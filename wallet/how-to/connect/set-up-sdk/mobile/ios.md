@@ -69,7 +69,7 @@ To disable this, set `MetaMaskSDK.shared.enableDebug = false` or `ethereum.enabl
 
 ### 4. Call methods
 
-You can now call any [JSON-RPC API method](../../../../reference/eth_subscribe) using `ethereum.request()`.
+You can now call any [JSON-RPC API method](/wallet/reference/eth_subscribe) using `ethereum.request()`.
 
 The SDK uses [Combine](https://developer.apple.com/documentation/combine) to publish Ethereum
 events, so you need to define an `AnyCancellable` storage by adding the following line to your
