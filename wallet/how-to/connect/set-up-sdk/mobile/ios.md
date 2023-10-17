@@ -10,8 +10,8 @@ Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native iOS da
 users to easily connect with their MetaMask Mobile wallet.
 
 :::tip Example
-See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk) in the iOS SDK GitHub
-repository for advanced use cases.
+See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk/tree/main/Example) in the
+iOS SDK GitHub repository for advanced use cases.
 :::
 
 ## Prerequisites
@@ -67,9 +67,9 @@ By default, MetaMask logs three SDK events: `connectionRequest`, `connected`, an
 This allows MetaMask to monitor any SDK connection issues.
 To disable this, set `MetaMaskSDK.shared.enableDebug = false` or `ethereum.enableDebug = false`.
 
-### 4. Call provider methods
+### 4. Call methods
 
-You can now call any [provider API method](../../../../reference/provider-api.md).
+You can now call any [JSON-RPC API method](../../../../reference/eth_subscribe) using `ethereum.request()`.
 
 The SDK uses [Combine](https://developer.apple.com/documentation/combine) to publish Ethereum
 events, so you need to define an `AnyCancellable` storage by adding the following line to your
@@ -78,10 +78,6 @@ project file:
 ```swift
 @State private var cancellables: Set<AnyCancellable> = []
 ```
-
-The following examples use the
-[`window.ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs)
-provider API method to call various [RPC API](../../../../concepts/apis.md#json-rpc-api) methods.
 
 #### Example: Get chain ID
 
