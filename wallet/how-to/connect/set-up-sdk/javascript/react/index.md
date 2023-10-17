@@ -62,9 +62,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MetaMaskProvider debug={false} sdkOptions={{
-      logging: {
-        developerMode: false,
-      },
       checkInstallationImmediately: false,
       dappMetadata: {
         name: "Demo React App",

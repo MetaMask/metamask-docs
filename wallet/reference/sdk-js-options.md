@@ -228,36 +228,6 @@ To prevent committing your Infura API key, we recommend adding your key to a
 `process.env` global variable when specifying this option.
 :::
 
-### logging
-
-<!--tabs-->
-
-# Syntax
-
-```javascript
-logging: {
-  developerMode: <boolean>,
-  sdk: <boolean>,
-}
-```
-
-# Example
-
-```javascript
-logging: {
-  developerMode: false,
-  sdk: false,
-}
-```
-
-<!--/tabs-->
-
-Options for customizing the logging behavior of the SDK.
-The logging options are:
-
-- `developerMode` -
-- `sdk` -
-
 ### modals
 
 <!--tabs-->
@@ -387,42 +357,6 @@ shouldShimWeb3: false
 Enables or disables shimming the `window.web3` object with the Ethereum provider returned by the SDK
 (useful for compatibility with older browsers).
 The default is `true`.
-
-### storage
-
-<!--tabs-->
-
-# Syntax
-
-```javascript
-storage: {
-  enabled: <boolean>,
-  debug: <boolean>,
-  duration: <number>,
-  storageManager: <storage manager>,
-}
-```
-
-# Example
-
-```javascript
-storage: {
-  enabled: true,
-  debug: true,
-  duration: 10,
-  storageManager: StorageManager,
-}
-```
-
-<!--/tabs-->
-
-Options for customizing the storage manager used by the SDK.
-The storage manager options are:
-
-- `enabled` -
-- `debug` -
-- `duration` -
-- `storageManager` - 
 
 ### timer
 
