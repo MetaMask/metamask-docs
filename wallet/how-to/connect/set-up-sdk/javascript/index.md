@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Use MetaMask SDK with JavaScript
 
-You can import [MetaMask SDK](../../../../concepts/sdk/index.md) into your JavaScript dapp to enable your
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your JavaScript dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The following instructions work for web dapps based on standard JavaScript.
 You can also see instructions for the following JavaScript-based platforms:
@@ -17,6 +17,11 @@ You can also see instructions for the following JavaScript-based platforms:
 - [React Native](react-native.md)
 - [Node.js](nodejs.md)
 - [Electron](electron.md)
+
+:::tip Examples
+See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+in the JavaScript SDK GitHub repository for advanced use cases.
+:::
 
 ## Prerequisites
 
