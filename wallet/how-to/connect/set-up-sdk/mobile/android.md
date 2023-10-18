@@ -180,7 +180,7 @@ class SomeModel(private val repository: ApplicationRepository) {
 
 #### 4.2. Use a ViewModel
 
-To connect your dapp to MetaMask using a ViewModel, first create a ViewModel that injects the
+To connect your dapp to MetaMask using a ViewModel, create a ViewModel that injects the
 `ethereum` provider object, then add wrapper functions for each Ethereum method you wish to call.
 
 :::note info
