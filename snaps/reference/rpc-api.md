@@ -562,6 +562,40 @@ console.log(entropy);
 
 <!--/tabs-->
 
+### snap_getLocale
+
+:::flaskOnly
+:::
+
+Gets the user's locale setting. You can use this method to localize text in your snap.
+
+#### Returns
+
+The user's locale setting.
+
+#### Example
+
+```javascript
+import { panel, text } from '@metamask/snaps-ui';
+
+const locale = await snap.request({ method: 'snap_getLocale' });
+
+let greeting = 'Hello';
+if(locale === 'es') {
+  greeting = 'Hola';
+}
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    content: panel([
+      text(greeting),
+    ]),
+  },
+});
+```
+
 ### snap_manageAccounts
 
 :::flaskOnly
