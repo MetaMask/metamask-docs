@@ -571,7 +571,7 @@ Gets the user's locale setting. You can use this method to localize text in your
 
 #### Returns
 
-The user's locale setting.
+The user's locale setting as a [language code](https://github.com/MetaMask/metamask-extension/blob/develop/app/_locales/index.json).
 
 #### Example
 
@@ -580,9 +580,9 @@ import { panel, text } from '@metamask/snaps-ui';
 
 const locale = await snap.request({ method: 'snap_getLocale' });
 
-let greeting = 'Hello'; 
-if(locale === 'es') { 
-  greeting = 'Hola'; 
+let greeting = 'Hello';
+if(locale === 'es') {
+  greeting = 'Hola';
 }
 
 await snap.request({
