@@ -47,16 +47,16 @@ html[data-theme="dark"] .forceColor {
 }
 
 .devBannerTitle {
-  font-size: clamp(1.5rem, 1.75vw, 3rem);
+  font-size: clamp(1.75rem, 1.75vw, 2rem);
 }
 
 .devBannerSubtitle {
-  font-size: clamp(1rem, 1.25vw, 1.5rem);
+  font-size: clamp(1rem, 1vw, 1.25rem);
 }
 
 .devBannerBlock {
   background-color: var(--ifm-color-emphasis-200);
-  padding: 6rem;
+  padding: 5rem;
   text-align: center;
   width: 100%;
 }
