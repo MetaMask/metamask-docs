@@ -406,22 +406,9 @@ ui: {
 }
 ```
 
-# Example
-
-```javascript
-ui: {
-  installer: ,
-  confirm: ,
-}
-```
-
 <!--/tabs-->
 
 Options for customizing the SDK UI.
-The UI options are:
-
-- `installer` -
-- `confirm` -
 
 ### useDeeplink
 
