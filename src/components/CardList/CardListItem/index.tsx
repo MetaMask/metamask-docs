@@ -8,6 +8,7 @@ export interface CardItem {
   description?: ReactNode;
   href?: string;
   icon?: string;
+  flaskOnly?: boolean;
 }
 
 interface CardListItemProps {
@@ -33,7 +34,14 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
     </>
   );
   
-  const rootClassName = clsx("card padding--lg", styles.cardContainer);
+  const rootClassName = clsx(
+    "card",
+    "padding--lg",
+    styles.cardContainer,
+    {
+      [styles.flaskOnly]: item.flaskOnly,
+    },
+  );
 
   if (item.href) {
     return (

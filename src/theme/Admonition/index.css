@@ -1,13 +1,6 @@
 .alert.theme-admonition-flaskOnly {
-  --ifm-alert-background-color: hsl(280, 45%, 85%);
-  --ifm-alert-background-color-highlight: hsl(280, 45%, 85%);
-  --ifm-alert-foreground-color: hsl(280, 45%, 15%);
-  --ifm-alert-border-color: hsl(280, 45%, 45%);
-}
-
-html[data-theme='dark'] .alert.theme-admonition-flaskOnly {
-  --ifm-alert-background-color: hsl(280, 45%, 15%);
-  --ifm-alert-background-color-highlight: hsl(280, 45%, 15%);
-  --ifm-alert-foreground-color: hsl(280, 45%, 85%);
-  --ifm-alert-border-color: hsl(280, 45%, 45%);
+  --ifm-alert-background-color: var(--mm-flask-background-color);
+  --ifm-alert-background-color-highlight: var(--mm-flask-color);
+  --ifm-alert-foreground-color: var(--mm-flask-color);
+  --ifm-alert-border-color: var(--mm-flask-border-color);
 }
