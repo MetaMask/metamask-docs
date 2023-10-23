@@ -126,6 +126,15 @@ Always call [`eth_requestAccounts`](../../../../reference/rpc-api.md#eth_request
 [`ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs) first,
 since it prompts the installation or connection popup to appear.
 
+:::note Important SDK options
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to customize the logic and UI of
+  the displayed modals.
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+:::
+
 You can use [EthersJS](https://docs.ethers.io/v5/getting-started/) with your React Native app:
 
 ```javascript
