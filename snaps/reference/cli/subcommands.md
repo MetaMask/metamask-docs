@@ -1,5 +1,6 @@
 ---
-title: Subcommands
+sidebar_label: Subcommands
+sidebar_position: 2
 ---
 
 import Tabs from '@theme/Tabs';
@@ -25,7 +26,7 @@ mm-snap b -s lib/index.js -d out -n snap.js
 
 <!--/tabs-->
 
-Builds a snap from source.
+Builds a Snap from source.
 
 `b` is an alias for `build`.
 
@@ -47,7 +48,7 @@ mm-snap e -b out/snap.js
 
 <!--/tabs-->
 
-Attempts to evaluate the snap bundle in SES.
+Attempts to evaluate the Snap bundle in SES.
 
 `e` is an alias for `eval`.
 
@@ -69,8 +70,8 @@ mm-snap i my-snap
 
 <!--/tabs-->
 
-Initializes a snap project in the specified directory.
-If no directory is specified, the snap project is initialized in the current directory.
+Initializes a Snap project in the specified directory.
+If no directory is specified, the Snap project is initialized in the current directory.
 
 `i` is an alias for `init`.
 
@@ -92,7 +93,7 @@ mm-snap m --fix false
 
 <!--/tabs-->
 
-Validates the snap [manifest file](../../concepts/anatomy.md#manifest-file).
+Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
 
 `m` is an alias for `manifest`.
 
@@ -114,7 +115,7 @@ mm-snap s -r out -p 9000
 
 <!--/tabs-->
 
-Locally serves snap files for testing.
+Locally serves Snap files for testing.
 
 `s` is an alias for `serve`.
 
@@ -136,7 +137,7 @@ mm-snap w -s lib/index.js -d out
 
 <!--/tabs-->
 
-Rebuilds a snap from source upon changes to the files in the parent and child directories of the
+Rebuilds a Snap from source upon changes to the files in the parent and child directories of the
 source directory.
 
 :::note

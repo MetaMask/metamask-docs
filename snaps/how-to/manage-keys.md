@@ -1,5 +1,6 @@
 ---
 description: Manage users' private keys.
+sidebar_position: 3
 ---
 
 # Manage keys
@@ -9,7 +10,7 @@ their approval.
 
 :::caution important
 Managing users' keys comes with great responsibility: Misplaced or stolen
-private keys can lead to a complete loss of funds for users of your snap.
+private keys can lead to a complete loss of funds for users of your Snap.
 :::
 
 ## Responsible key management
@@ -29,7 +30,7 @@ The general rule is: **Don't create a situation where your users can lose assets
 
 :::danger examples of irresponsible key management:
 
-- Allowing extraction of private keys outside the snap in any way, especially through RPC or
+- Allowing extraction of private keys outside the Snap in any way, especially through RPC or
   network connections.
 - Executing arbitrary or untrusted code with access to private keys.
 - Not getting properly informed consent before performing irreversible operations.
@@ -80,7 +81,7 @@ For example, to derive Dogecoin keys:
    m/44'/3'/0'/0/{address_index}
    ```
 
-   To get the second Dogecoin account, add the following code to your snap:
+   To get the second Dogecoin account, add the following code to your Snap:
 
    ```javascript
    import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
@@ -105,7 +106,8 @@ For example, to derive Dogecoin keys:
    
 ## Examples
 
-The following are examples of existing snaps that manage accounts and keys:
+The following are examples of existing Snaps that manage accounts and keys:
 
-- [KeystoneHQ's Btcsnap](https://github.com/KeystoneHQ/btcsnap-1)
-- [ConsenSys's Starknet Snap](https://github.com/ConsenSys/starknet-snap)
+- [Dogecoin Snap tutorial](https://github.com/ziad-saab/dogecoin-snap)
+- [Consensys StarkNet Snap](https://github.com/Consensys/starknet-snap)
+- [Account Labs Bitcoin Snap](https://github.com/snapdao/btcsnap)

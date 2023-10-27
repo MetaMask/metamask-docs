@@ -1,33 +1,32 @@
 ---
-description: Develop, test, and publish a snap.
+description: Develop, test, and publish a Snap.
+sidebar_position: 1
 ---
 
-# Develop a snap
+# Develop a Snap
 
-A snap can extend the dapp-facing [MetaMask JSON-RPC API](../../wallet/reference/rpc-api) in
+A Snap can extend the dapp-facing [MetaMask JSON-RPC API](/wallet/reference/rpc-api) in
 arbitrary ways, or integrate with and extend the functionality of MetaMask using the
-[Snaps JSON-RPC API](../reference/rpc-api.md) and [permissions](request-permissions.md).
+[Snaps Exports](../reference/exports.md), [Snaps JSON-RPC API](../reference/rpc-api.md), and
+[permissions](request-permissions.md).
 
-Before developing a snap, it's important to understand:
+Before developing a Snap, it's important to understand:
 
-- [The snap anatomy](../concepts/anatomy.md).
-- [The snap lifecycle](../concepts/lifecycle.md).
-- [The snap user interface](../concepts/user-interface.md).
-- [The Snaps execution environment](../concepts/execution-environment.md).
+- [The Snap anatomy](../concepts/anatomy.md).
+- [The Snap lifecycle](../concepts/lifecycle.md).
+- [The Snap user interface](../concepts/user-interface.md).
+- [The MetaMask Snaps execution environment](../concepts/execution-environment.md).
 
 You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
-[tutorial](../category/tutorials).
+[tutorial](/snaps/category/tutorials).
 
-This page describes additional important steps when developing a snap.
+This page describes additional important steps when developing a Snap.
 
 ## Detect the user's MetaMask version
 
-When developing a website that depends on Snaps, you need to know whether the user has
-[MetaMask Flask](../get-started/install-snaps.md#install-metamask-flask) installed.
+When developing a website that depends on [MetaMask Flask](../get-started/install-flask.md#install-metamask-flask),
+you first need to know whether the user has it installed.
 
-We recommend calling the
-[`web3_clientVersion`](https://metamask.github.io/api-playground/api-documentation/#web3_clientVersion)
-MetaMask RPC method to obtain this information.
 The following example uses the
 [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get
 the provider object from MetaMask first:
@@ -52,24 +51,29 @@ if (provider && isFlask) {
 }
 ```
 
-## Test your snap
+## Test your Snap
 
-Test your snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its
+Test your Snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its
 API methods from a web page.
 
-## Debug your snap
+:::note
+If you use the template Snap monorepo, running `yarn start` will serve the Snap at 
+[`http://localhost:8080`](http://localhost:8080/)
+:::
 
-To debug your snap, use `console.log` and inspect the MetaMask background process.
-You can add your log statements in your source code and build your snap, or add them directly
-to your snap bundle and use `mm-snap manifest --fix` to update the `shasum` in your snap manifest file.
-The manifest `shasum` must match the contents of your bundle at the time MetaMask fetches your snap.
+## Debug your Snap
+
+To debug your Snap, use `console.log` and inspect the MetaMask background process.
+You can add your log statements in your source code and build your Snap, or add them directly
+to your Snap bundle and use `mm-snap manifest --fix` to update the `shasum` in your Snap manifest file.
+The manifest `shasum` must match the contents of your bundle at the time MetaMask fetches your Snap.
 
 :::note
-Because adding logs modifies the snap source code, you must re-install the snap whenever you add a
+Because adding logs modifies the Snap source code, you must re-install the Snap whenever you add a
 log statement.
 :::
 
-The snap log output is only visible in the extension background process console.
+The Snap log output is only visible in the extension background process console.
 If you're using a Chromium browser, use the following steps to inspect the background process and
 view its console:
 
@@ -80,52 +84,59 @@ view its console:
 
 The log output displays in the console that pops up.
 
-## Publish your snap
+## Publish your Snap
 
-Snaps are npm packages, so publishing a snap is as simple as publishing an npm package.
+Snaps are npm packages, so publishing a Snap is as simple as publishing an npm package.
 Refer to the [npm CLI documentation](https://docs.npmjs.com/cli/v8/commands/npm-publish) for details
 on publishing to the public registry.
 The following details are specific to Snaps:
 
-- The version in `package.json` and `snap.manifest.json` must match.
+- The version in `package.json` and `snap.manifest.json` should match.
+- The `repository.url` field in `package.json` should match the correct repository for your Snap.
+- The `source.location.npm.packageName` in `snap.manifest.json` should match the name in `package.json`.
+- The `proposedName` in `snap.manifest.json` should be a human-readable name and should not include
+  the words "MetaMask" or "Snap." 
 - The image specified in `iconPath` in the manifest file is used as the icon displayed when
-  installing and displaying confirmations from the snap.
+  installing the Snap, in custom dialogs, and in the settings menu.
+  - This icon should be a valid SVG.
+  - The icon will be cropped in a circle when displayed in MetaMask; you do not need to make the icon circular.
 
-After publishing the snap, any dapp can connect to the snap by using the snap ID `npm:[packageName]`.
+After publishing the Snap, any dapp can connect to the Snap by using the Snap ID `npm:[packageName]`.
 
-## Distribute your snap
+:::caution
+If you are using the Snap template, make sure to only publish the Snap package in `/packages/snap`. 
+You can use the [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest) to verify 
+that your Snap was published correctly &mdash; just select **localhost** in the top right corner and change the 
+Snap location to **npm** and the ID of your Snap. 
 
-Since snaps are currently intended for a developer audience, MetaMask doesn't currently facilitate
-distributing snaps to a wide audience.
-If you have a website that expects the user to install a snap, ask the user to install MetaMask
-Flask, and then ask the user to install the snap using the
-[`wallet_enable`](../reference/rpc-api.md#wallet_enable) API method.
+Also, make sure to update the manifest file, icon file, and README to differentiate your Snap from the template.
+:::
 
-In the future, MetaMask will create some way for users to more easily discover snaps, but everyone
-can always build, publish, and use snaps without MetaMask's permission.
-(Although we may try to make it difficult to use known scams.)
+## Distribute your Snap
+
+You should deploy a dapp where users can learn about your Snap and install it, or integrate with your existing dapp.
+
+If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](work-with-existing-snaps.md).
 
 ## Resources and tools
 
-You can review the growing number of
-[example snaps](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples) maintained
-by MetaMask, as well as the following fully functional and open source snaps:
+You can review the growing number of [example Snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) maintained by MetaMask, as well as the following fully functional and open source Snaps: 
 
-- [StarkNet](https://github.com/ConsenSys/starknet-snap)
-- [FilSnap for Filecoin](https://github.com/Chainsafe/filsnap/)
-- [Password Manager Snap](https://github.com/ritave/snap-passwordManager)
+- [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
+- [StarkNet](https://github.com/Consensys/starknet-snap)
+- [MobyMask Phishing Warning](https://github.com/Montoya/mobymask-snap)
 - [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
-  (uses Truffle for local testing)
 
-MetaMask also maintains tools to help developers build, debug, and maintain snaps:
+MetaMask also maintains tools to help developers build, debug, and maintain Snaps:
 
-- [Template snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes
+- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes
   TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
-  your snap and a companion dapp.
+  your Snap and a companion dapp.
+- [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating Snaps in the browser, streamlining the development process.
 - [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines
-  the TypeScript template snap and Truffle so you can easily test snaps that use smart contracts
+  the TypeScript template Snap and Truffle so you can easily test Snaps that use smart contracts
   with Ganache.
-- [Test snaps](https://github.com/MetaMask/test-snaps) - A collection of test snaps and a dapp for
+- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test Snaps and a dapp for
   evaluating them.
 
 If you have any questions, ask them on

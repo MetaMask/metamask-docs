@@ -1,82 +1,46 @@
 ---
 description: MetaMask Ethereum JSON-RPC API reference
+sidebar_position: 4
+toc_max_heading_level: 2
 ---
 
 # JSON-RPC API
 
 MetaMask uses the [`window.ethereum.request(args)`](provider-api.md#windowethereumrequestargs)
-provider method to wrap a JSON-RPC API.
+provider method to wrap a [JSON-RPC API](../concepts/apis.md#json-rpc-api).
 The API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
 :::tip MetaMask API playground
 The RPC methods are documented in the interactive
-[MetaMask JSON-RPC API Playground](https://metamask.github.io/api-playground/api-documentation/).
+[MetaMask JSON-RPC API Playground](/wallet/reference/eth_subscribe).
 :::
-
-Methods in the API playground may have the following tags:
-
-- **MetaMask** - These methods behave in ways specific to MetaMask, and may or may not be supported
-  by other wallets.
-  Some of these methods are documented in more detail on this page.
-- **Restricted** - These methods are [restricted](#restricted-methods), which require requesting
-  permission using [`wallet_requestPermissions`](#wallet_requestpermissions).
-- **Mobile** - These methods are only available on MetaMask Mobile.
 
 For more information on the standard Ethereum RPC methods, see the
 [Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods).
 
-:::note
-All RPC method requests can return errors.
-Make sure to handle errors for every call to
-[`window.ethereum.request(args)`](provider-api.md#windowethereumrequestargs).
-:::
-
-## Restricted methods
-
-MetaMask introduced web3 wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
-In this permissions system, each RPC method is restricted or unrestricted.
-If a method is restricted, a dapp must request permission to call it using
-[`wallet_requestPermssions`](#wallet_requestpermissions).
-Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
-internally by MetaMask.
-
-Outside of [Snaps restricted methods](../../snaps/reference/rpc-api#restricted-methods), the only
-restricted method is
-[`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts), which
-allows you to access the user's Ethereum accounts.
-More restricted methods will be added in the future.
-
-## Unrestricted methods
-
-Unrestricted methods have no corresponding permission, but they might still rely on permissions to
-succeed (for example, the signing methods require calling the restricted
-[`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts) method),
-or they might require confirmation by the user (for example,
-[`wallet_addEthereumChain`](#wallet_addethereumchain)).
-
-The following are some MetaMask-specific unrestricted methods.
+The following are some MetaMask-specific [unrestricted methods](../concepts/apis.md#unrestricted-methods).
 For the full list of MetaMask JSON-RPC API methods, see the
-[API playground](https://metamask.github.io/api-playground/api-documentation/).
+[API playground](/wallet/reference/eth_subscribe).
 
-### eth_requestAccounts
+## eth_requestAccounts
 
-Requests that the user provide an Ethereum address to be identified by.
-Use this method to [access a user's accounts](../get-started/access-accounts.md).
+Requests the user to provide their Ethereum address.
+Use this method to [access a user's accounts](../how-to/connect/access-accounts.md).
 
 This method is specified by [EIP-1102](https://eips.ethereum.org/EIPS/eip-1102).
 
 :::info
 Internally, this method calls [`wallet_requestPermissions`](#wallet_requestpermissions) for
-permission to call [`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts).
+permission to call [`eth_accounts`](/wallet/reference/eth_accounts).
 :::
 
-#### Returns
+### Returns
 
 If the user accepts the request, this method returns an array of a single, hexadecimal Ethereum
 address string.
 If they reject the request, this method rejects with a `4001` error.
 
-#### Example
+### Example
 
 ```javascript
 document.getElementById('connectButton', connect);
@@ -96,7 +60,7 @@ function connect() {
 }
 ```
 
-### wallet_getPermissions
+## wallet_getPermissions
 
 Gets the caller's current [permissions](#restricted-methods).
 
@@ -104,12 +68,12 @@ Gets the caller's current [permissions](#restricted-methods).
 This method is not yet available on MetaMask Mobile.
 :::
 
-#### Returns
+### Returns
 
 An array of the caller's permission objects.
 If the caller has no permissions, the array is empty.
 
-### wallet_requestPermissions
+## wallet_requestPermissions
 
 Requests [permissions](#restricted-methods) from the user.
 
@@ -120,16 +84,16 @@ You should only request permissions in response to a direct user action, such as
 This method is not yet available on MetaMask Mobile.
 :::
 
-#### Parameters
+### Parameters
 
 An array containing the requested permission objects.
 
-#### Returns
+### Returns
 
 An array of the caller's permission objects.
 If the user denies the request, a `4001` error is returned.
 
-#### Example
+### Example
 
 ```javascript
 document.getElementById('requestPermissionsButton', requestPermissions);
@@ -159,7 +123,7 @@ function requestPermissions() {
 }
 ```
 
-### wallet_addEthereumChain
+## wallet_addEthereumChain
 
 Creates a confirmation asking the user to add the specified chain to MetaMask.
 The user may choose to switch to the chain once it has been added.
@@ -176,12 +140,12 @@ MetaMask also rejects the request if any of the following occurs:
   If you use an origin allowlist, they're blocked.
   :::
 - The RPC endpoint returns a different chain ID when
-  [`eth_chainId`](https://metamask.github.io/api-playground/api-documentation/#eth_chainId) is called.
+  [`eth_chainId`](/wallet/reference/eth_chainId) is called.
 - The chain ID corresponds to any default MetaMask chains.
 
 This method is specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085).
 
-#### Parameters
+### Parameters
 
 An array containing an object containing the following metadata about the chain to be added to MetaMask:
 
@@ -198,11 +162,11 @@ An array containing an object containing the following metadata about the chain 
   At least one item is required, and only the first item is used.
 - `iconUrls` (optional, currently ignored) - An array of icon URL strings.
 
-#### Returns
+### Returns
 
 `null` if the request was successful, and an error otherwise.
 
-#### Example
+### Example
 
 We recommend using this method with [`wallet_addEthereumChain`](#wallet_addethereumchain):
 
@@ -234,7 +198,7 @@ try {
 }
 ```
 
-### wallet_switchEthereumChain
+## wallet_switchEthereumChain
 
 Creates a confirmation asking the user to switch to the chain with the specified chain ID.
 
@@ -247,22 +211,22 @@ MetaMask rejects the request if any of the following occurs:
 
 This method is specified by [EIP-3326](https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain).
 
-#### Parameters
+### Parameters
 
 An array containing an object containing `chainId`, the chain ID as a `0x`-prefixed hexadecimal string.
 
-#### Returns
+### Returns
 
 `null` if the request was successful, and an error otherwise.
 
 If the error code is `4902`, the requested chain hasn't been added by MetaMask, and you must request
 to add it using [`wallet_addEthereumChain`](#wallet_addethereumchain).
 
-#### Example
+### Example
 
 See the [`wallet_addEthereumChain`](#wallet_addethereumchain) example.
 
-### wallet_registerOnboarding
+## wallet_registerOnboarding
 
 Registers the requesting site with MetaMask as the initiator of onboarding, enabling MetaMask to
 redirect the user back to the site after onboarding has completed.
@@ -271,39 +235,53 @@ This method is intended to be called after MetaMask has been installed, but befo
 onboarding has completed.
 
 Instead of calling this method directly, you should
-[use the MetaMask onboarding library](../how-to/use-onboarding-library.md).
+[use the MetaMask onboarding library](../how-to/onboard-users.md).
 
-#### Returns
+### Returns
 
 `true` if the request was successful, `false` otherwise.
 
-### wallet_watchAsset
+## wallet_watchAsset
 
-Requests that the user track the specified token in MetaMask.
+Requests that the user track the specified ERC-20 token or NFT(s) in their MetaMask wallet.
+Use this method to [display tokens](../how-to/display/tokens.md) in MetaMask.
 
-Most Ethereum wallets support some set of tokens, usually from a centrally curated registry of tokens.
-This method enables dapp developers to ask their users to track tokens in their wallets, at runtime.
-Once added, the token is indistinguishable from those added using legacy methods, such as a
-centralized registry.
+:::caution Experimental feature
+Support for NFTs (ERC-721 and ERC-1155 tokens) is experimental and currently only available on the
+extension (not on mobile).
+See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md)
+and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle)
+for more information.
+:::
+
+:::tip Displaying NFTs
+With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
+autodetection disabled.
+Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
+With `wallet_watchAsset`, users can add NFTs from other networks.
+:::
 
 This method is specified by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
 
-#### Parameters
+### Parameters
 
 An object containing the following metadata of the token to watch:
 
-- `type` - Currently only supports `ERC20`.
+- `type` - Supports ERC-20, ERC-721, and ERC-1155 tokens.
+  Support for ERC-721 and ERC-1155 tokens is experimental and currently only available on the
+  extension (not on mobile).
 - `options` - An object containing:
   - `address` - The address of the token contract.
-  - `symbol` - The symbol of the token, up to 11 characters.
-  - `decimals` - The number of token decimals.
-  - `image` - A URL string of the token logo.
+  - `symbol` - The symbol of the token, up to 11 characters (optional for ERC-20 tokens).
+  - `decimals` - The number of token decimals (optional for ERC-20 tokens).
+  - `image` - A URL string of the token logo (optional for ERC-20 tokens).
+  - `tokenId` - The unique identifier of the NFT (required for ERC-721 and ERC-1155 tokens).
 
-#### Returns
+### Returns
 
 `true` if the token was added, `false` otherwise.
 
-#### Example
+### Example
 
 ```javascript
 ethereum
@@ -329,7 +307,7 @@ ethereum
   .catch(console.error);
 ```
 
-### wallet_scanQRCode
+## wallet_scanQRCode
 
 Requests that the user scan a QR code using their device camera.
 
@@ -340,18 +318,18 @@ The functionality was temporarily removed before being re-introduced as this RPC
 This method is only available on MetaMask Mobile.
 :::
 
-#### Parameters
+### Parameters
 
 An array containing an optional regular expression (regex) string for matching arbitrary QR code strings.
 
-#### Returns
+### Returns
 
 A string corresponding to the scanned QR code.
 If a regex string is provided, the resulting string matches it.
 If no regex string is provided, the resulting string matches an Ethereum address.
 If neither condition is met, the method returns an error.
 
-#### Example
+### Example
 
 ```javascript
 ethereum

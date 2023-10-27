@@ -1,17 +1,14 @@
 ---
 description: MetaMask Ethereum provider API reference
+sidebar_position: 3
 ---
 
 # Ethereum provider API
 
-MetaMask injects a global JavaScript API into websites visited by its users using the
-`window.ethereum` provider object.
-This API allows websites to request users' Ethereum accounts, read data from blockchains the user is
-connected to, and suggest that the user sign messages and transactions.
-
+MetaMask injects the [provider API](../concepts/apis.md#ethereum-provider-api) into websites visited
+by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in
 your dapp.
-Get started by [setting up your development environment](../get-started/set-up-dev-environment.md).
 
 ## Properties
 
@@ -38,7 +35,7 @@ If the provider isn't connected, the page must be reloaded to re-establish the c
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 :::note
-This method is unrelated to [accessing a user's accounts](../get-started/access-accounts.md).
+This method is unrelated to [accessing a user's accounts](../how-to/connect/access-accounts.md).
 In the provider interface, "connected" and "disconnected" refer to whether the provider can make RPC
 requests to the current chain.
 :::
@@ -63,7 +60,7 @@ In practice, if a method has parameters, they're almost always of type `Array<an
 If the request fails, the promise rejects with an [error](#errors).
 
 The following is an example of using `window.ethereum.request(args)` to call
-[`eth_sendTransaction`](https://metamask.github.io/api-playground/api-documentation/#eth_sendTransaction):
+[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction):
 
 ```javascript
 params: [
@@ -137,15 +134,15 @@ window.ethereum.on('accountsChanged', handler: (accounts: Array<string>) => void
 ```
 
 The provider emits this event when the return value of the
-[`eth_accounts`](https://metamask.github.io/api-playground/api-documentation/#eth_accounts) RPC
+[`eth_accounts`](/wallet/reference/eth_accounts) RPC
 method changes.
-`eth_accounts` returns either an empty array, or an array that contains the address of the most
-recently used account the caller is permitted to access.
+`eth_accounts` returns either an empty array, or an array that contains the addresses of the accounts
+the caller is permitted to access with the most recently used account first.
 Callers are identified by their URL origin, which means that all sites with the same origin share
 the same permissions.
 
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
-Listen to this event to [handle accounts](../get-started/access-accounts.md#handle-accounts).
+Listen to this event to [handle accounts](../how-to/connect/access-accounts.md#handle-accounts).
 
 ### chainChanged
 
@@ -154,7 +151,7 @@ window.ethereum.on('chainChanged', handler: (chainId: string) => void);
 ```
 
 The provider emits this event when the currently connected chain changes.
-Listen to this event to [detect a user's network](../get-started/detect-network.md).
+Listen to this event to [detect a user's network](../how-to/connect/detect-network.md).
 
 :::caution important
 
@@ -211,7 +208,7 @@ The `type` property identifies the kind of message.
 
 RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
-[`eth_subscribe`](https://metamask.github.io/api-playground/api-documentation/#eth_subscribe), each
+[`eth_subscribe`](/wallet/reference/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
 ## Errors

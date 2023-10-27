@@ -16,6 +16,9 @@
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --ifm-code-font-size: var(--font-size-3);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --mm-flask-background-color: hsl(280, 45%, 85%);
+  --mm-flask-color: hsl(280, 45%, 30%);
+  --mm-flask-border-color: hsl(280, 45%, 45%);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -27,6 +30,9 @@
   --ifm-color-primary-light: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --mm-flask-background-color: hsl(280, 45%, 30%);
+  --mm-flask-color: hsl(280, 45%, 85%);
+  --mm-flask-border-color: hsl(280, 45%, 45%);
 }
 
 [data-theme='light'] .DocSearch {
@@ -94,5 +100,55 @@ h4 {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
   grid-gap: 2rem;
-  padding: 1rem 2rem 3rem;
+  padding: 1rem 0rem 3rem;
+}
+
+.card {
+  box-shadow: 0 1.5px 3px 0 rgb(0 0 0 / 15%);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 10px;
+}
+
+img {
+  border-radius: 0.4rem;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Reset SVG to be inline by default */
+svg {
+  display: inline;
+}
+
+/* Hide Osano cookie widget */
+.osano-cm-widget {
+  display: none;
+}
+
+#manage-cookie-btn {
+  color: var(--ifm-footer-link-color);
+  border: 0;
+  background-color: unset;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+  line-height: 2;
+}
+
+.getfeedback-container {
+  margin-top: 50px;
+  margin-bottom: -2rem;
+}
+
+.getfeedback-hidden {
+  display: none !important;
 }

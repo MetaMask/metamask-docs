@@ -1,0 +1,9 @@
+{
+  "label": "Connect to MetaMask",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "how-to/connect",
+    "description": "Once you have your dapp set up, perform these functions to connect to MetaMask."
+  }
+}

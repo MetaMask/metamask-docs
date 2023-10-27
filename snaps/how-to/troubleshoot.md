@@ -1,10 +1,11 @@
 ---
 description: Solve common issues.
+sidebar_position: 7
 ---
 
 # Troubleshoot
 
-This page describes common issues you may encounter when developing a snap, and how to resolve them.
+This page describes common issues you may encounter when developing a Snap, and how to resolve them.
 
 If you encounter any issues that you can't solve on your own, please
 [open a GitHub issue](https://github.com/MetaMask/snaps-monorepo/issues).
@@ -14,7 +15,7 @@ If you encounter any issues that you can't solve on your own, please
 Because [Secure ECMAScript (SES)](../concepts/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
-`mm-snap build` by default attempts to execute a snap in a stubbed SES environment.
+`mm-snap build` by default attempts to execute a Snap in a stubbed SES environment.
 You can also disable this behavior and run the evaluation step separately using `mm-snap eval`.
 If an error is thrown during this step, it's likely due to a SES incompatibility, and you must fix
 the issues manually.
@@ -22,7 +23,7 @@ These incompatibilities tend to occur in dependencies.
 
 While the errors you get from SES may seem scary, they're usually not that hard to fix.
 The actual file, function, and variable names in the `mm-snap eval` error stack trace might not make
-a lot of sense to you, but the line numbers should correspond to your snap
+a lot of sense to you, but the line numbers should correspond to your Snap
 [bundle file](../concepts/anatomy.md#bundle-file).
 Thus, you can identify if the error is due to your code or one of your dependencies.
 If the problem is in a dependency, you can try a different version or to fix the issue locally by
@@ -33,18 +34,18 @@ To give you an idea of a common error and how to fix it, "sloppily" declared var
 assigning to a new variable without an explicit variable declaration) are forbidden in strict mode,
 and therefore in SES as well.
 If you get an error during the `eval` step that says something like `variableName is not defined`,
-simply prepending `var variableName;` to your snap bundle may solve the problem.
+simply prepending `var variableName;` to your Snap bundle may solve the problem.
 (This actually happened so frequently with [Babel's](https://babeljs.io/) `regeneratorRuntime` that
 `mm-snap build` automatically handles that one.)
 
 :::caution
-Run `mm-snap manifest --fix` if you modified your snap bundle after building.
-Otherwise your manifest `shasum` value won't be correct, and attempting to install your snap fails.
+Run `mm-snap manifest --fix` if you modified your Snap bundle after building.
+Otherwise your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::
 
 ### Use other build tools
 
-If you prefer building your snap with a build system you're more comfortable with, Snaps implements
+If you prefer building your Snap with a build system you're more comfortable with, Snaps implements
 plugins for several other build systems:
 
 - [Webpack](https://www.npmjs.com/package/@metamask/snaps-webpack-plugin)
@@ -60,7 +61,7 @@ You may also benefit from running `mm-snap eval` to detect any SES issues up fro
 
 ## Patch dependencies
 
-Some dependencies might make use of APIs that aren't available in the
+Some dependencies might use APIs that aren't available in the
 [Snaps execution environment](../concepts/execution-environment.md).
 To work around this, we recommend checking if another library is available that makes use of those APIs.
 
@@ -89,7 +90,7 @@ Now you can make changes to your dependencies inside `node_modules` and run
 This creates a `.patch` file containing your dependency patch.
 These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
 
-### Patch the use of `XMLHttpRequest`
+### Patch the use of XMLHttpRequest
 
 The `XMLHttpRequest` API is not exposed in the Snaps execution environment and won't be in the future.
 Because of this, you may run into issues with dependencies in your dependency tree attempting to
@@ -99,11 +100,11 @@ The following are examples of popular libraries that use `XMLHttpRequest` and ar
 compatible with the Snaps execution environment.
 This section also describes patching strategies for fixing dependencies that try to use these libraries.
 
-### `cross-fetch`
+#### cross-fetch
 
 `cross-fetch` is a popular library used for cross-platform access to the `fetch` API across multiple
 environments.
-Under the hood, however, the library uses `XMLHttpRequest` and thus causes issues when used in a snap.
+Under the hood, however, the library uses `XMLHttpRequest` and thus causes issues when used in a Snap.
 
 You can easily patch this issue using `patch-package`.
 Open `node_modules/cross-fetch/browser-ponyfill.js` and find the following lines near the bottom of
@@ -151,7 +152,7 @@ index f216aa3..6b3263b 100644
 Using either of these methods allows your dependencies to access the `fetch` API correctly and
 `cross-fetch` compatible with the Snaps execution environment.
 
-### `axios`
+#### axios
 
 `axios` is a popular networking library that uses `XMLHttpRequest` under the hood.
 
@@ -165,7 +166,9 @@ The following is an example of how you can rewrite your dependency to use `fetch
 In a production environment this may be a large task depending on the usage of `axios`.
 :::
 
-**axios**
+<!--tabs-->
+
+# axios
 
 ```javascript
 const instance = axios.create({
@@ -188,7 +191,7 @@ instance
   });
 ```
 
-**fetch**
+# fetch
 
 ```javascript
 fetch('https://api.github.com/users/MetaMask')
@@ -202,6 +205,7 @@ fetch('https://api.github.com/users/MetaMask')
   .catch((err) => console.error(err));
 ```
 
-More resources:
+<!--/tabs-->
 
-- [Replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper)
+For more information, see how to
+[replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper).

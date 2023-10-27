@@ -1,5 +1,6 @@
 ---
 description: Use a custom user interface.
+sidebar_position: 4
 ---
 
 # Use custom UI

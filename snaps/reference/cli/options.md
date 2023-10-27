@@ -1,5 +1,6 @@
 ---
-title: Options
+sidebar_label: Options
+sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
@@ -31,7 +32,7 @@ bundle: 'out/bundle.js'
 
 <!--/tabs-->
 
-Path to the snap [bundle file](../../concepts/anatomy.md#bundle-file).
+Path to the Snap [bundle file](../../concepts/anatomy.md#bundle-file).
 The default is `dist/bundle.js`.
 
 You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
@@ -124,7 +125,7 @@ eval: false
 
 <!--/tabs-->
 
-Indicates whether to attempt to evaluate the snap bundle in SES.
+Indicates whether to attempt to evaluate the Snap bundle in SES.
 The default is `true`.
 
 You can use this option with the [`build`](subcommands.md#b-build) and
@@ -156,7 +157,7 @@ fix: false
 
 <!--/tabs-->
 
-When validating the snap [manifest file](../../concepts/anatomy.md#manifest-file) using the
+When validating the Snap [manifest file](../../concepts/anatomy.md#manifest-file) using the
 [`manifest`](subcommands.md#m-manifest) subcommand, indicates whether to make necessary changes to
 the manifest file.
 The default is `true`.
@@ -198,7 +199,7 @@ manifest: false
 
 <!--/tabs-->
 
-Indicates whether to validate the snap [manifest file](../../concepts/anatomy.md#manifest-file).
+Indicates whether to validate the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
 The default is `true`.
 
 You can use this option with the [`build`](subcommands.md#b-build) and
@@ -230,7 +231,7 @@ outfileName: 'snap.js'
 
 <!--/tabs-->
 
-Output file name when building a snap from source.
+Output file name when building a Snap from source.
 The default is `bundle.js`.
 
 You can use this option with the [`build`](subcommands.md#b-build) and
@@ -326,7 +327,7 @@ src: 'lib/index.js'
 
 <!--/tabs-->
 
-Path to the snap source file.
+Path to the Snap source file.
 The default is `src/index.js`.
 
 You can use this option with the [`build`](subcommands.md#b-build) and
@@ -459,7 +460,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 [`watch`](subcommands.md#w-watch) subcommands.
 
 :::note
-For TypeScript snaps, `--transpilationMode` must be set to either `localOnly` or `localAndDeps`.
+For TypeScript Snaps, `--transpilationMode` must be set to either `localOnly` or `localAndDeps`.
 :::
 
 ## verboseErrors
