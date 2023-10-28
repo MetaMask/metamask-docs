@@ -18,15 +18,12 @@ your users to easily connect with their MetaMask Mobile wallet.
 ## Prerequisites
 
 - MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical
-  device or emulator)
-
-  :::note
+  device or emulator).
   You can install MetaMask Mobile from [Google Play](https://play.google.com/store/apps/details?id=io.metamask),
   or clone and compile MetaMask Mobile from [source](https://github.com/MetaMask/metamask-mobile)
   and build to your target device.
-  :::
 
-- Android SDK version 23 or above
+- Android SDK version 23 or above.
 
 ## Steps
 
@@ -56,9 +53,9 @@ import io.metamask.androidsdk.Ethereum
 
 You can connect your dapp to MetaMask in one of two ways:
 
-1. [Use the `ethereum` provider object directly](#41-use-the-provider-object-directly).
+1. [Use the `ethereum` provider object directly](#31-use-the-provider-object-directly).
     We recommend using this method in a pure model layer.
-2. [Use a ViewModel](#42-use-a-viewmodel) that injects the `ethereum` provider object.
+2. [Use a ViewModel](#32-use-a-viewmodel) that injects the `ethereum` provider object.
     We recommend using this method at the app level, because it provides a single instance that
     survives configuration changes and can be shared across all views.
 

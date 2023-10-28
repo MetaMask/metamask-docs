@@ -16,11 +16,38 @@ iOS SDK GitHub repository for advanced use cases.
 
 ## Prerequisites
 
-An iOS project set up with iOS version 14+.
+- MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical device
+  or emulator).
+  You can install MetaMask Mobile from the [App Store](https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202)
+  or clone and compile MetaMask Mobile from [source](https://github.com/MetaMask/metamask-mobile)
+  and build to your target device.
+
+- iOS version 14 or above.
+
+  :::note
+  The SDK supports `ios-arm64` (iOS devices) and `ios-arm64-simulator` (M1 chip simulators).
+  It currently doesn't support `ios-ax86_64-simulator` (Intel chip simulators).
+  :::
 
 ## Steps
 
 ### 1. Install the SDK
+
+#### CocoaPods
+
+To add the SDK as a CocoaPods dependency to your project, add the following entry to our Podfile:
+
+```text
+pod 'metamask-ios-sdk'
+```
+
+Run the following command:
+
+```bash
+pod install
+```
+
+#### Swift Package Manager
 
 To add the SDK as a Swift Package Manager (SPM) package to your project, in Xcode, select
 **File > Swift Packages > Add Package Dependency**.
@@ -36,11 +63,6 @@ dependencies: [
     )
 ]
 ```
-
-:::note
-The SDK supports `ios-arm64` (iOS devices) and `ios-arm64-simulator` (M1 chip simulators).
-It currently doesn't support `ios-ax86_64-simulator` (Intel chip simulators).
-:::
 
 ### 2. Import the SDK
 
