@@ -17,13 +17,13 @@ your users to easily connect with their MetaMask Mobile wallet.
 
 ## Prerequisites
 
-- MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical
+- MetaMask Mobile version 7.6.0 or later installed on your target device (that is, a physical
   device or emulator).
   You can install MetaMask Mobile from [Google Play](https://play.google.com/store/apps/details?id=io.metamask),
   or clone and compile MetaMask Mobile from [source](https://github.com/MetaMask/metamask-mobile)
   and build to your target device.
 
-- Android SDK version 23 or above.
+- Android SDK version 23 or later.
 
 ## Steps
 

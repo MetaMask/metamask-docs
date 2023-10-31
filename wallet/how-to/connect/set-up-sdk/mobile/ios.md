@@ -16,18 +16,15 @@ iOS SDK GitHub repository for advanced use cases.
 
 ## Prerequisites
 
-- MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical device
+- MetaMask Mobile version 7.6.0 or later installed on your target device (that is, a physical device
   or emulator).
   You can install MetaMask Mobile from the [App Store](https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202)
   or clone and compile MetaMask Mobile from [source](https://github.com/MetaMask/metamask-mobile)
   and build to your target device.
 
-- iOS version 14 or above.
-
-  :::note
+- iOS version 14 or later.
   The SDK supports `ios-arm64` (iOS devices) and `ios-arm64-simulator` (M1 chip simulators).
   It currently doesn't support `ios-ax86_64-simulator` (Intel chip simulators).
-  :::
 
 ## Steps
 
