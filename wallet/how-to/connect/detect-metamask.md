@@ -8,8 +8,8 @@ sidebar_position: 2
 The presence of the MetaMask Ethereum provider object, `window.ethereum`, in a user's browser
 indicates an Ethereum user.
 
-To demonstrate this, verify if your browser is running MetaMask by copying and pasting the following
-code snippet in the developer console of your browser:
+To demonstrate this, verify whether your browser is running MetaMask by copying and pasting the following 
+code snippet into your browser's developer console:
 
 ```javascript
 if (typeof window.ethereum !== 'undefined') {
