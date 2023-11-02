@@ -48,8 +48,14 @@ It supports the following dapp platforms:
     </div>
   </div>
 </div>
-
-:::note
-MetaMask SDK uses the [Ethereum provider](../../../reference/provider-api.md) that developers are
-already used to, so existing dapps work out of the box with the SDK.
-:::
+<div class="card margin-bottom--lg">
+  <div class="card__header">
+    <h3>↔️ <a href="gaming">Third-party integrations</a></h3>
+  </div>
+  <div class="card__body">
+    <ul>
+      <li><a href="gaming/unity">Web3-Onboard</a></li>
+      <li>Wagmi (coming soon)</li>
+    </ul>
+  </div>
+</div>

@@ -101,6 +101,7 @@ h4 {
   grid-auto-rows: auto;
   grid-gap: 2rem;
   padding: 1rem 0rem 3rem;
+  margin-bottom: -15px;
 }
 
 .card {

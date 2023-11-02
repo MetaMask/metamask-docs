@@ -23,6 +23,8 @@ connection from your dapp to the MetaMask wallet.
 It onboards users smoothly from multiple dapp platforms using the MetaMask browser extension or
 MetaMask Mobile, and your dapp can call any [provider API method](../reference/provider-api.md)
 with the SDK installed.
-
 Get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
 :::
+
+You can also [use Web3-Onboard with MetaMask SDK](../how-to/use-3rd-party-integrations/web3-onboard.md)
+in your JavaScript dapp.
