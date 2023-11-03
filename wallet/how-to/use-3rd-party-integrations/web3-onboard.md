@@ -36,7 +36,7 @@ In your project script, add the following to import the module:
 import metamaskSDK from '@web3-onboard/metamask'
 ```
 
-### 2. Instantiate the module
+### 3. Instantiate the module
 
 Instantiate the module using any [JavaScript SDK options](../../reference/sdk-js-options.md), for
 example, [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata):
@@ -50,7 +50,7 @@ const metamaskSDKWallet = metamaskSDK({options: {
 }})
 ```
 
-### 3. Use the module
+### 4. Use the module
 
 Use the module as follows:
 
