@@ -50,11 +50,11 @@ It supports the following dapp platforms:
 </div>
 <div class="card margin-bottom--lg">
   <div class="card__header">
-    <h3>↔️ <a href="gaming">Third-party integrations</a></h3>
+    <h3>↔️ <a href="../../use-3rd-party-integrations">Third-party integrations</a></h3>
   </div>
   <div class="card__body">
     <ul>
-      <li><a href="gaming/unity">Web3-Onboard</a></li>
+      <li><a href="../../use-3rd-party-integrations/web3-onboard">Web3-Onboard</a></li>
       <li>Wagmi (coming soon)</li>
     </ul>
   </div>
