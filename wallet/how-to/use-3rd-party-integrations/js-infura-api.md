@@ -3,7 +3,7 @@ sidebar_position: 2
 description: Use Infura and custom nodes to make direct, read-only requests.
 ---
 
-# Make read-only requests from JavaScript dapps
+# Make read-only requests in JavaScript
 
 You can use the [Infura API](https://docs.infura.io/) from your JavaScript dapp with
 [MetaMask SDK](../connect/set-up-sdk/javascript/index.md) installed to make direct, read-only
