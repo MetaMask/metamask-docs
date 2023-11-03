@@ -72,5 +72,5 @@ console.log(connectedWallets)
 For an example of using Web3-Onboard with MetaMask SDK, see the
 [example dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/with-web3onboard)
 in the JavaScript SDK GitHub repository.
-In particular, see the [`App.tsx`](https://github.com/MetaMask/metamask-sdk/blob/main/packages/examples/with-web3onboard/src/App.tsx)
+See the [`App.tsx`](https://github.com/MetaMask/metamask-sdk/blob/main/packages/examples/with-web3onboard/src/App.tsx)
 file for more details on implementing the integration in a React dapp.

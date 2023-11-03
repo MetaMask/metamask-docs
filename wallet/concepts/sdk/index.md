@@ -31,7 +31,7 @@ With MetaMask SDK, there are more ways to connect:
 
 MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
 multiple dapp platforms, without relying on third-party libraries.
-Moreover, it uses the [Ethereum provider](../apis.md#ethereum-provider-api) that developers are
+Moreover, the SDK uses the [Ethereum provider](../apis.md#ethereum-provider-api) that developers are
 already used to, so existing dapps work out of the box with the SDK.
 
 ## User experience
