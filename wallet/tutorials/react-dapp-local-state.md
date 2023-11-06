@@ -158,8 +158,7 @@ You'll also see the `ethereum` provider printed to the console.
 
 ![Injected Provider DOES Exist](../assets/tutorials/react-dapp/pt1-03.png)
 
-You can toggle back and forth between these two states by enabling and disabling the MetaMask
-extension from your browser's **Manage Extensions** menu.
+You can switch between these two states by enabling or disabling the MetaMask extension through your browser's **Manage Extensions** menu.
 
 #### Use @metamask/detect-provider
 
