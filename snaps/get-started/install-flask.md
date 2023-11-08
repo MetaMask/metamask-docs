@@ -1,4 +1,4 @@
----
+---LamarisSmiley/metamask-docs
 description: Install MetaMask Flask to start building your own Snaps.
 sidebar_position: 1
 ---
