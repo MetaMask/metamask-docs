@@ -83,9 +83,10 @@ const content = panel([
 ### image
 
 Outputs an image. 
-This component takes inline SVG. 
+This component takes an inline SVG. 
 It does not support remote URLs. 
 You can embed JPG or PNG in SVG using data URIs. 
+The SVG is rendered within an \<img\> tag, which prevents JavaScript or interaction events from being supported.
 
 ```javascript
 import { image } from '@metamask/snaps-ui';
