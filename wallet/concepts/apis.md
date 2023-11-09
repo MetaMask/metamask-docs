@@ -24,9 +24,9 @@ that the user sign messages and transactions, and more.
 
 :::note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism for the `window.ethereum` provider object, enabling dapps to support
-[wallet interoperability](wallet-interoperabilty.md) and discover multiple injected wallet providers
-in a web page.
+alternative discovery mechanism to the `window.ethereum` injected provider, enabling dapps to
+support [wallet interoperability](wallet-interoperabilty.md) and discover multiple injected wallet
+providers in a user's browser.
 :::
 
 The MetaMask Ethereum provider API contains the following:

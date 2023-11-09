@@ -1,5 +1,5 @@
 ---
-description: Add support for EIP-6963 to discover multiple wallets.
+description: Use an alternative discovery mechanism for multiple wallets.
 sidebar_position: 10
 ---
 
