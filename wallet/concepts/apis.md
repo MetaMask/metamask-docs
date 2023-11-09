@@ -22,6 +22,13 @@ This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), an
 request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
+:::note
+MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
+alternative discovery mechanism for the `window.ethereum` provider object, enabling dapps to support
+[wallet interoperability](wallet-interoperabilty.md) and discover multiple injected wallet providers
+in a web page.
+:::
+
 The MetaMask Ethereum provider API contains the following:
 
 - [Properties](../reference/provider-api.md#properties) - The provider contains a property that
