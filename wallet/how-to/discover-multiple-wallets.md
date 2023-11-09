@@ -13,3 +13,5 @@ We recommend [setting up MetaMask SDK](connect/set-up-sdk/javascript/index.md) i
 EIP-6963 by default.
 
 If you don't have the SDK set up, you can directly update your dapp code to support EIP-6963.
+See the [test dapp source code](https://github.com/MetaMask/test-dapp) for an example of how to
+implement this.
