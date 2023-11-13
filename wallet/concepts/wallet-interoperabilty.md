@@ -12,7 +12,7 @@ EIP-6963 introduces an alternative discovery mechanism to the [`window.ethereum`
 enabling dapps to discover multiple injected wallet providers in a user's browser.
 
 <p align="center">
-  <video width="950" controls>
+  <video width="100%" controls>
     <source src="/eip-6963/eip-6963.mov" />
   </video>
 </p>
@@ -36,8 +36,6 @@ See the [list of wallets that support EIP-6963](https://github.com/WalletConnect
 
 ## Backwards compatibility
 
-Dapps that do not support EIP-6963 can still detect MetaMask through the `window.ethereum` provider.
-However, we recommend adding support (or simply using the SDK) to improve the user experience for
-multiple installed wallets.
-
+Dapps that do not support EIP-6963 can still detect MetaMask using the `window.ethereum` provider.
+However, we recommend adding support to improve the user experience for multiple installed wallets.
 Read more about [EIP-6963 backwards compatibility](https://eips.ethereum.org/EIPS/eip-6963#backwards-compatibility).
