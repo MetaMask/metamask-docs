@@ -10,3 +10,5 @@ jobs:
     permissions:
       contents: write
     uses: ./.github/workflows/publish-docs.yml
+    env:
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}

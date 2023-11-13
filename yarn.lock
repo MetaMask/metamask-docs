@@ -2709,6 +2709,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ndhoule/each@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@ndhoule/each@npm:2.0.1"
+  dependencies:
+    "@ndhoule/keys": ^2.0.0
+  checksum: f2aa44fb4248b2939b038c6cdbfb442f29cebb181f6058081b9af402c8c6e1e82a26fd9d89c2a2fc72be98b934902ecdf260bcfff171fa48aea4261a26a0e0c7
+  languageName: node
+  linkType: hard
+
+"@ndhoule/keys@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@ndhoule/keys@npm:2.0.0"
+  checksum: f77be060eb706a072e9c41d8939dcbd7bf27ead2f113a75fd9718b3c6a623540f324f7200e474418feb6277f1b99952b67667129bd66a39fdf93531980066488
+  languageName: node
+  linkType: hard
+
+"@ndhoule/map@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@ndhoule/map@npm:2.0.1"
+  dependencies:
+    "@ndhoule/each": ^2.0.1
+  checksum: b3bffd71babe9b9cdb882bd89d7785bb36d6063d44757aa7ed726a15a5d3c2ecb5198dbcda43a63d4585b4dfed96e2bd75b7b54bc1b5e44c58945118a2304d5c
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -3065,6 +3090,15 @@ __metadata:
   peerDependencies:
     "@rjsf/utils": ^5.12.x
   checksum: 421d051ba390d744accf32f36dee73efce8d7431bcaaaf1c8cf99392db09fb3e77c9b9dd391428ed79ec5d0aba7ffe6a104b2455c23a981f0caa066b01e2cc7d
+  languageName: node
+  linkType: hard
+
+"@segment/snippet@npm:^4.13.2":
+  version: 4.16.2
+  resolution: "@segment/snippet@npm:4.16.2"
+  dependencies:
+    "@ndhoule/map": ^2.0.1
+  checksum: b6552be6df431a32f91a1d848bdad264a74bd7448e702a3465489b163d81ad429fca12b2e763d140cb75866e415f2822a67c98e0d8636f338f0003ab97e1d0c7
   languageName: node
   linkType: hard
 
@@ -7399,6 +7433,15 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: fd7673ca77fe26cd5cba38d816bc72d641f500f1f9b25b83e8ce28827fe2da7ad583a8da26ab6af85f834138cf8dae9f69b0cd6ab925f52ddab1754db44d99ce
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-segment@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "docusaurus-plugin-segment@npm:1.0.4"
+  dependencies:
+    "@segment/snippet": ^4.13.2
+  checksum: 6475edb5055563c6aaac53d3a55dcd554a0d81034088a1a89b163321e93b6a486ec1353eb551895112abae326be25294bfc35ca7be99d4f97243eaf38c6ffcdd
   languageName: node
   linkType: hard
 
@@ -11942,6 +11985,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
     clsx: ^1.2.1
+    docusaurus-plugin-segment: ^1.0.4
     docusaurus-plugin-typedoc: 1.0.0-next.17
     eslint: ^8.26.0
     eslint-plugin-react: ^7.31.10

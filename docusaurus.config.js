@@ -366,6 +366,13 @@ const config = {
         },
       },
     ],
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+        page: true,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
