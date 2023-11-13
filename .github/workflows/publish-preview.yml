@@ -51,6 +51,8 @@ jobs:
     with:
       destination_dir: ${{ github.head_ref }}
       ref: ${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
+    env:
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
 
   post-preview-comment:
     name: Post preview in comment
