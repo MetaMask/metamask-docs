@@ -8,10 +8,9 @@ on:
       ref:
         required: false
         type: string
-      secret:
-        SEGMENT_ANALYTICS_KEY:
-          required: true
-          type: string
+      SEGMENT_ANALYTICS_KEY:
+        required: true
+        type: secret
 
 jobs:
   publish-docs-to-gh-pages:
