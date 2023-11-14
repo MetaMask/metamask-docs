@@ -40,7 +40,6 @@ const generateRemoteContent = (pages = []) => {
     "@docusaurus/plugin-content-docs",
     ({
       id: "infura",
-      // @ts-ignore
       path: "infura",
       routeBasePath: "infura",
       editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
