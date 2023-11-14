@@ -79,7 +79,7 @@ const sidebar = {
         },
         {
           type: "doc",
-          id: "reference/jest"
+          id: "reference/jest",
         },
         {
           type: "category",
