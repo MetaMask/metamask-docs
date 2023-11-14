@@ -1,9 +1,74 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
+
+const DOCS_REPO_SRC = "https://raw.githubusercontent.com/INFURA/docs/main/docs";
+
+const INFURA_DOCS_PAGES = [
+  // {
+  //   name: "getting-started",
+  //   token: "GHSAT0AAAAAABZRBJM72UM5SA747KJBCYHGZKTNNBA",
+  // },
+];
+
+const generateRemoteContent = (pages = []) => {
+  if (pages.length === 0) return [];
+  const contentItems = pages.map((item, i) => (
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: item.name,
+        id: `${i}`,
+        sourceBaseUrl: DOCS_REPO_SRC,
+        outDir: "infura",
+        documents: [`${item.name}.md`],
+        requestConfig: {
+          headers: {
+            "header": item.name,
+          },
+          params: {
+            token: item.token,
+          },
+          responseType: "arraybuffer",
+        },
+      },
+    ]
+  ));
+  contentItems.push([
+    "@docusaurus/plugin-content-docs",
+    ({
+      id: "infura",
+      // @ts-ignore
+      path: "infura",
+      routeBasePath: "infura",
+      editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+      breadcrumbs: false,
+      remarkPlugins: [
+        require("remark-docusaurus-tabs"),
+      ],
+      admonitions: {
+        tag: ":::",
+        keywords: [
+          "info",
+          "success",
+          "danger",
+          "note",
+          "tip",
+          "warning",
+          "important",
+          "caution",
+          "security",
+          "flaskOnly",
+        ],
+      },
+    }),
+  ]);
+  return contentItems;
+};
+
+const INT_INFURA_PAGES = generateRemoteContent(INFURA_DOCS_PAGES);
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -36,6 +101,10 @@ const config = {
     { src: "/js/feedback-script.js", defer: true, async: true },
     { src: "/js/getfeedback.js", defer: true, async: true },
   ],
+  clientModules: ["/js/update-links.js"],
+  customFields: {
+    infuraRemotePages: INFURA_DOCS_PAGES,
+  },
 
   markdown: {
     mermaid: true,
@@ -358,6 +427,7 @@ const config = {
         },
       },
     ],
+    ...INT_INFURA_PAGES,
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -383,6 +453,11 @@ const config = {
             to: "snaps",
             label: "Snaps",
           },
+          ... INFURA_DOCS_PAGES.length > 0 ?
+            [{
+              to: "infura",
+              label: "Infura",
+            }] : [],
         ],
       },
       docs: {
