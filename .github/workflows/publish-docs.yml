@@ -8,6 +8,10 @@ on:
       ref:
         required: false
         type: string
+      secret:
+        SEGMENT_ANALYTICS_KEY:
+          required: true
+          type: string
 
 jobs:
   publish-docs-to-gh-pages:
