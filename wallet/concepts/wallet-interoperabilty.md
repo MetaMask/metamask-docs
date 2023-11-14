@@ -10,6 +10,7 @@ A web dapp can integrate with multiple wallets simultaneously by adding support 
 user has multiple wallet browser extensions installed.
 EIP-6963 introduces an alternative discovery mechanism to the [`window.ethereum` injected provider](apis.md#ethereum-provider-api),
 enabling dapps to discover multiple injected wallet providers in a user's browser.
+We recommend using this new mechanism for provider discovery.
 
 <p align="center">
   <video width="100%" controls>
