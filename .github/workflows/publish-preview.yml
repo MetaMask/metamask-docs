@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+
 jobs:
   is-fork-pull-request:
     name: Determine whether this pull request is from a fork
@@ -51,8 +54,6 @@ jobs:
     with:
       destination_dir: ${{ github.head_ref }}
       ref: ${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
-    secrets:
-      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
 
   post-preview-comment:
     name: Post preview in comment

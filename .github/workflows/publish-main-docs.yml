@@ -4,11 +4,12 @@ on:
   push:
     branches: main
 
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+
 jobs:
   publish-to-gh-pages:
     name: Publish docs to `./` directory of `gh-pages` branch
     permissions:
       contents: write
     uses: ./.github/workflows/publish-docs.yml
-    secrets:
-      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
