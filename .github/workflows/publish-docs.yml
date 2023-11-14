@@ -8,9 +8,9 @@ on:
       ref:
         required: false
         type: string
-    secrets:
       SEGMENT_ANALYTICS_KEY:
         required: true
+        type: string
 
 jobs:
   publish-docs-to-gh-pages:
@@ -33,7 +33,7 @@ jobs:
         run: yarn --immutable
       - name: Run build script
         env:
-            SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+            SEGMENT_ANALYTICS_KEY: ${{ inputs.SEGMENT_ANALYTICS_KEY }}
         run: DEST="/${{ inputs.destination_dir }}" yarn build
       - name: Deploy to `${{ inputs.destination_dir }}` directory of `gh-pages` branch
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
