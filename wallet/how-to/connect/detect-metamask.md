@@ -24,9 +24,9 @@ To differentiate MetaMask from other Ethereum-compatible browsers, you can detec
 
 :::caution Important
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider, enabling dapps to
-support [wallet interoperability](../../concepts/wallet-interoperabilty.md) by discovering multiple
-injected wallet providers in a user's browser.
+alternative discovery mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperabilty.md)
+by discovering multiple injected wallet providers in a user's browser.
 We recommend [setting up SDK](../connect/set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
 :::
 
