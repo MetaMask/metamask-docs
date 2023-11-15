@@ -30,8 +30,7 @@ one switch between the mobile dapp and MetaMask Mobile.
   [iOS](../connect/set-up-sdk/mobile/ios.md) dapp.
 
 - MetaMask Mobile version 7.10 or later.
-  It's important to ensure that users have an updated version of MetaMask Mobile to guarantee the
-  correct functioning of this feature.
+  Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
   For older versions of MetaMask, this function may not work as expected, and you might have to use
   the SDK's regular `connect` method.
 
