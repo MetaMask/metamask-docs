@@ -10,7 +10,7 @@ and [options](#options).
 
 ## API methods
 
-### `installSnap`
+### installSnap
 
 Installs a Snap in the browser.
 We recommend using this method in each test to ensure that it starts with a clean slate.
@@ -37,7 +37,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `request`
+### request
 
 Sends a JSON-RPC request to the Snap.
 
@@ -74,7 +74,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `sendTransaction`
+### sendTransaction
 
 Sends a transaction to the Snap.
 
@@ -125,7 +125,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `runCronJob`
+### runCronJob
 
 Runs a cronjob in the Snap.
 The request is normally specified in the Snap manifest file under the
@@ -161,7 +161,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `close`
+### close
 
 Closes the page the test is running on.
 This is useful for cleaning up after a test, and is not required.
@@ -181,7 +181,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `getInterface`
+### getInterface
 
 If your Snap uses [`snap_dialog`](rpc-api.md#snap_dialog) to show user interfaces, you can use the
 `request.getInterface` method to interact with the user interfaces.
@@ -225,7 +225,7 @@ describe('MySnap', () => {
 });
 ```
 
-### `mock`
+### mock
 
 Mocks the response of any network request made by the Snap through the
 [`endowment:network-access`](permissions.md#endowmentnetwork-access) permission.
@@ -300,7 +300,7 @@ response from a Snap matches an expected value:
 You can pass the following options when [configuring `@metamask/snaps-jest`](../how-to/test-a-snap.md#2-configure-metamasksnaps-jest).
 All options are optional.
 
-### `browser`
+### browser
 
 Options for the browser used to run the tests.
 
@@ -327,7 +327,7 @@ module.exports = {
 };
 ```
 
-### `executionEnvironmentUrl`
+### executionEnvironmentUrl
 
 The URL of the [execution environment](../concepts/execution-environment.md) to use for testing.
 This is the URL to be loaded by the Snaps simulator in the tests.
@@ -349,7 +349,7 @@ module.exports = {
 };
 ```
 
-### `keepAlive`
+### keepAlive
 
 Enables or disables keeping the Jest environment running after the tests have finished.
 When set to `true`, the Jest process does not exit on its own, and must be manually terminated.
@@ -370,7 +370,7 @@ module.exports = {
 };
 ```
 
-### `server`
+### server
 
 Options for the built-in HTTP server included with this package.
 This server serves the execution environment, simulator, and the Snap bundle during tests.
@@ -403,7 +403,7 @@ module.exports = {
 };
 ```
 
-### `simulatorUrl`
+### simulatorUrl
 
 The URL of the simulator to use for testing.
 This is the URL to be loaded in the browser when running tests.
