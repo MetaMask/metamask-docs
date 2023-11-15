@@ -14,7 +14,7 @@ We recommend using this new mechanism for provider discovery.
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/eip-6963/eip-6963.mov" />
+    <source src="/eip-6963.mov" />
   </video>
 </p>
 
