@@ -97,32 +97,51 @@ import { useSDK } from '@metamask/sdk-react';
 import React, { useState } from 'react';
 
 export const App = () => {
-  const { sdk } = useSDK();
-  const [signedMessage, setSignedMessage] = useState("");
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-  const handleConnectAndSign = async () => {
+  const connect = async () => {
     try {
-      const message = "Your message here";
-      const signature = await sdk.connectAndSign({ msg: message });
-      setSignedMessage(signature);
-    } catch (error) {
-      console.error("Error in signing:", error);
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+    } catch(err) {
+      console.warn(`failed to connect..`, err);
     }
   };
 
   return (
-    <div>
-      <button onClick={handleConnectAndSign}>Connect and Sign</button>
-      {signedMessage && <p>Signed Message: {signedMessage}</p>}
+    <div className="App">
+      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+        Connect
+      </button>
+      {connected && (
+        <div>
+          <>
+            {chainId && `Connected chain: ${chainId}`}
+            <p></p>
+            {account && `Connected account: ${account}`}
+          </>
+        </div>
+      )}
     </div>
   );
 };
 ```
 
-The [`connectAndSign` method](../../../../sign-data/connect-and-sign.md) initiates a connection to
-MetaMask and requests the user to sign a message.
-Alternatively, you can use the `connect` method to only initiate a connection to MetaMask and return
-an array of connected accounts:
+<details>
+<summary>useSDK return values</summary>
+<p>
+
+- `sdk`: Main SDK object that facilitates connection and actions related to MetaMask.
+- `connected`: Boolean value indicating if the dapp is connected to MetaMask.
+- `connecting`: Boolean value indicating if a connection is in process.
+- `provider`: The provider object which can be used for lower-level interactions with the Ethereum blockchain.
+- `chainId`: Currently connected blockchain's chain ID.
+
+</p>
+</details>
+
+The `sdk.connect()` method initiates a connection to MetaMask and returns an array of connected accounts:
 
 ```javascript
 const connect = async () => {
