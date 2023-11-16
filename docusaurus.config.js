@@ -345,7 +345,7 @@ const config = {
           },
           {
             from: "/wallet/reference/rpc-api",
-            to: "/wallet/reference/json-rpc-api",
+            to: "/wallet/concepts/apis",
           },
         ].reduce((acc, item) => {
           acc.push(item);
