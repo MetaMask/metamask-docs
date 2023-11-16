@@ -31,8 +31,7 @@ one switch between the mobile dapp and MetaMask Mobile.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
-  For older versions of MetaMask, this function may not work as expected, and you might have to use
-  the SDK's regular `connect` method.
+  For older versions of MetaMask, this function may not work as expected.
 
 ## Use the connectAndSign method
 
