@@ -41,7 +41,7 @@ development platform:
 For all platforms, also set the **Scripting Backend** in **Player Settings** to **IL2CPP**, and set
 **IL2CPP Code Generation** in **Build Settings** to **Faster (smaller) builds**.
 
-### 2. Install the SDK for Unity
+### 2. Install the Unity SDK
 
 Download the
 [MetaMask SDK for Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786)
@@ -74,6 +74,8 @@ If you don't have TextMeshPro installed, the Unity editor automatically prompts 
 </p>
 
 </details>
+
+When new versions of the Unity SDK are released, [update the Unity SDK in your project](#update-the-unity-sdk).
 
 ### 3. Initialize MetaMask
 
@@ -189,6 +191,20 @@ Edit the fields and save the changes.
 Create a new configuration by right-clicking on the project window and navigating to
 **MetaMask > Config**.
 Name the new configuration and use it when initializing the `MetaMaskUnity` instance.
+
+## Update the Unity SDK
+
+Update your project's version of the MetaMask Unity SDK to ensure that your project uses the SDK's
+latest functionalities and improvements.
+To update the SDK to the latest version available on the Unity Asset Store:
+
+1. Update and import the latest package using the Unity Package Manager.
+2. Go to **Tools > MetaMask > Install in Unity**.
+3. Select the **Already Installed** button.
+    This updates the SDK in your project.
+
+Alternatively, you can delete the existing MetaMask folder in your project and re-import it from the
+Package Manager or Asset Store.
 
 ## FAQS
 
