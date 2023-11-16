@@ -343,6 +343,10 @@ const config = {
             from: "/sdk",
             to: "/wallet/how-to/connect/set-up-sdk",
           },
+          {
+            from: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });

@@ -10,7 +10,7 @@ You can use the [Infura API](https://docs.infura.io/) from your JavaScript dapp 
 JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
-Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/eth_subscribe), bypassing
+Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-rpc-api), bypassing
 user wallet authentication for read-only operations.
 
 :::note

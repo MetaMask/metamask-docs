@@ -144,7 +144,7 @@ file for more information.
 
 ### 4. Call methods
 
-You can now call any [JSON-RPC API method](/wallet/reference/eth_subscribe) using
+You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using
 `ethereum.sendRequest()`.
 
 #### Example: Get account balance
