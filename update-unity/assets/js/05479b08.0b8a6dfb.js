@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[3464],{96958:e=>{e.exports=JSON.parse('{"title":"JSON-RPC API playground","slug":"wallet/reference/json-rpc-api","permalink":"/update-unity/wallet/reference/json-rpc-api","navigation":{"previous":{"title":"JSON-RPC API","permalink":"/update-unity/wallet/reference/rpc-api"}}}')}}]);
