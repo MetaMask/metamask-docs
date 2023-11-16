@@ -157,7 +157,7 @@ const config = {
           },
           {
             from: "/guide/rpc-api",
-            to: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
           {
             from: "/guide/signing-data",
@@ -345,7 +345,7 @@ const config = {
           },
           {
             from: "/wallet/reference/rpc-api",
-            to: "/wallet/concepts/apis",
+            to: "/wallet/reference/json-rpc-api",
           },
         ].reduce((acc, item) => {
           acc.push(item);
