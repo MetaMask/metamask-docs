@@ -148,6 +148,68 @@ module.exports.onTransaction = async ({
 
 <!--/tabs-->
 
+### Transaction severity level
+
+:::flaskOnly
+:::
+
+This feature permits transaction insight snaps to return an optional severity level of `'critical'`.
+MetaMask shows a modal before the user can confirm the transaction to help ensure that the user sees
+the warning.
+Using the previous example for `onTransaction`, the following code adds a single line to return an
+insight with the severity level of `'critical'`: 
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import { OnTransactionHandler } from '@metamask/snaps-types';
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    // highlight-next-line
+    severity: 'critical'
+  };
+};
+```
+
+# JavaScript
+
+```js
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+module.exports.onTransaction = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    // highlight-next-line
+    severity: 'critical'
+  };
+};
+```
+
+<!--/tabs-->
+
 ## onCronjob
 
 To run periodic actions for the user (cron jobs), a Snap must export `onCronjob`.
