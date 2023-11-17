@@ -63,7 +63,7 @@ const config = {
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
-            sidebarLabel: "JSON-RPC API playground",
+            sidebarLabel: "JSON-RPC API",
           },
         },
         theme: {
