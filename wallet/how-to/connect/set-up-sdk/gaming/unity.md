@@ -194,8 +194,8 @@ Name the new configuration and use it when initializing the `MetaMaskUnity` inst
 
 ## Update the Unity SDK
 
-Update your project's version of the MetaMask Unity SDK to ensure that your project uses the SDK's
-latest functionalities and improvements.
+Update your project's version of the MetaMask Unity SDK to ensure that your project uses the latest
+SDK functionalities and improvements.
 To update the SDK to the latest version available on the Unity Asset Store:
 
 1. Update and import the latest package using the Unity Package Manager.
