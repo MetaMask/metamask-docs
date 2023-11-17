@@ -22,10 +22,18 @@ To differentiate MetaMask from other Ethereum-compatible browsers, you can detec
 [`window.ethereum.isMetaMask`](../../reference/provider-api.md#windowethereumismetamask) property.
 :::
 
+:::caution Important
+MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
+alternative discovery mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperabilty.md)
+by discovering multiple injected wallet providers in a user's browser.
+We recommend [setting up SDK](../connect/set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
+:::
+
 ## Use @metamask/detect-provider
 
-We recommend using the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider)
-module to detect the MetaMask Ethereum provider on any platform or browser.
+You can use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module to
+detect the MetaMask Ethereum provider on any platform or browser.
 
 Use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install
 `@metamask/detect-provider` in your project directory:
