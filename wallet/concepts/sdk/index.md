@@ -47,7 +47,7 @@ installed, a popup appears that prompts the user to either install the MetaMask 
 to MetaMask Mobile using a QR code.
 
 <p align="center">
-  <video width="950" controls>
+  <video width="100%" controls>
     <source src="/sdk-desktop.mp4" type="video/mp4" />
   </video>
 </p>

@@ -61,6 +61,8 @@ If you use the template Snap monorepo, running `yarn start` will serve the Snap 
 [`http://localhost:8080`](http://localhost:8080/)
 :::
 
+For end-to-end Snap testing, [use the `@metamask/snaps-jest` package](test-a-snap.md).
+
 ## Debug your Snap
 
 To debug your Snap, use `console.log` and inspect the MetaMask background process.
