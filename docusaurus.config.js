@@ -63,7 +63,7 @@ const config = {
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
-            sidebarLabel: "JSON-RPC API playground",
+            sidebarLabel: "JSON-RPC API",
           },
         },
         theme: {
@@ -157,7 +157,7 @@ const config = {
           },
           {
             from: "/guide/rpc-api",
-            to: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
           {
             from: "/guide/signing-data",
@@ -342,6 +342,10 @@ const config = {
           {
             from: "/sdk",
             to: "/wallet/how-to/connect/set-up-sdk",
+          },
+          {
+            from: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
         ].reduce((acc, item) => {
           acc.push(item);

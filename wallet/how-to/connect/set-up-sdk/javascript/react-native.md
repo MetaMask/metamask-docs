@@ -122,7 +122,7 @@ const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
 You can configure the SDK using any [options](../../../../reference/sdk-js-options.md) and call any
 [provider API methods](../../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](../../../../reference/rpc-api.md#eth_requestaccounts) using
+Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 [`ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs) first,
 since it prompts the installation or connection popup to appear.
 
