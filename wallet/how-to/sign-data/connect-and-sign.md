@@ -19,7 +19,7 @@ the mobile dapp and MetaMask Mobile.
 
 <p align="center">
   <video width="350" controls>
-    <source src="/995-sdk-connect-and-sign/connect-and-sign.mp4" type="video/mp4" />
+    <source src="/connect-and-sign.mp4" type="video/mp4" />
   </video>
 </p>
 
