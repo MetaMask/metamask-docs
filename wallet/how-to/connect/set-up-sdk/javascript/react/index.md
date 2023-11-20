@@ -155,7 +155,7 @@ const connect = async () => {
 ```
 
 You can also [use the `connectAndSign` method](../../../../sign-data/connect-and-sign.md) to
-initiate a connection and request to sign data in a single interaction.
+connect to MetaMask and sign data in a single interaction.
 
 Refer to the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
 for advanced use cases.

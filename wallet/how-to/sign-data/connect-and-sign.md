@@ -6,17 +6,16 @@ sidebar_position: 1
 # Connect and sign
 
 You can connect to MetaMask and sign data in a single interaction from your JavaScript or iOS dapp
-with [MetaMask SDK](../../concepts/sdk/index.md) installed.
+using [MetaMask SDK](../../concepts/sdk/index.md).
 
-The SDK provides a `connectAndSign` method, which is a streamlined approach for dapps to interact
-with MetaMask.
+The SDK's `connectAndSign` method provides a streamlined approach for dapps to interact with MetaMask.
 This method combines the [`eth_requestAccounts`] and [`personal_sign`] RPC methods, executing them sequentially.
 `connectAndSign` takes one parameter, the message string to be signed, and passes the message and
 the output of [`eth_requestAccounts`] directly to [`personal_sign`].
 
-This streamlined method improves dapp user experience, especially on mobile platforms, since it
-requests the user to connect to MetaMask and sign a message in a single interaction, requiring only
-one switch between the mobile dapp and MetaMask Mobile.
+This method enhances dapp user experience, especially on mobile platforms, by allowing users to
+connect to MetaMask and sign a message in a single interaction, requiring only one switch between
+the mobile dapp and MetaMask Mobile.
 
 <p align="center">
   <video width="350" controls>
