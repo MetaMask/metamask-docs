@@ -38,12 +38,14 @@ html[data-theme="dark"] .forceColor {
 }
 
 .devBannerButton {
-  background-color: #F8883B;
+  background-color: #FFC70A;
   border-radius: 0.3rem;
+  color: #1c1e21;
 }
 
 .devBannerButton:hover {
-  background-color: #FAA66C;
+  background-color: #FFD957;
+  color: #1c1e21;
 }
 
 .devBannerTitle {
