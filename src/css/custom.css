@@ -16,6 +16,9 @@
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --ifm-code-font-size: var(--font-size-3);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --mm-flask-background-color: hsl(280, 45%, 85%);
+  --mm-flask-color: hsl(280, 45%, 30%);
+  --mm-flask-border-color: hsl(280, 45%, 45%);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -27,6 +30,9 @@
   --ifm-color-primary-light: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --mm-flask-background-color: hsl(280, 45%, 30%);
+  --mm-flask-color: hsl(280, 45%, 85%);
+  --mm-flask-border-color: hsl(280, 45%, 45%);
 }
 
 [data-theme='light'] .DocSearch {
@@ -74,15 +80,15 @@ h1 {
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 28px;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 19px;
 }
 
 .navbar__title {
@@ -95,6 +101,7 @@ h4 {
   grid-auto-rows: auto;
   grid-gap: 2rem;
   padding: 1rem 0rem 3rem;
+  margin-bottom: -15px;
 }
 
 .card {

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 description: Integrate Decentraweb into your Unity game to enable human-readable addresses.
 ---
 

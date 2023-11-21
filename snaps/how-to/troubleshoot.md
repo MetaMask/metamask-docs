@@ -1,6 +1,6 @@
 ---
 description: Solve common issues.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Troubleshoot

@@ -48,10 +48,19 @@ const MMSDK = new MetaMaskSDK(options);
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
 
+:::note Important SDK options
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+:::
+
 ### 4. Use the SDK
 
 Use the SDK by calling any [provider API methods](../../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](../../../../reference/rpc-api.md#eth_requestaccounts) using
+Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 [`ethereum.request()`](../../../../reference/provider-api.md#ethereumrequestargs) first, since it
 prompts the installation or connection popup to appear.
 

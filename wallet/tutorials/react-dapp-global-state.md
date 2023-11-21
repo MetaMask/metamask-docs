@@ -421,7 +421,7 @@ export const Navigation = () => {
           {hasProvider && wallet.accounts.length > 0 &&
             <a
               className="text_link tooltip-bottom"
-              href={`https://etherscan.io/address/${wallet}`}
+              href={`https://etherscan.io/address/${wallet.accounts[0]}`}
               target="_blank"
               data-tooltip= "Open in Block Explorer"
             >

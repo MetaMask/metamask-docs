@@ -8,7 +8,7 @@ sidebar_position: 8
 Use the [`@metamask/providers`](https://github.com/MetaMask/providers) module to access a user's
 MetaMask provider from other sources, such as external extension providers and inpage providers.
 
-The account provided by this provider is the user's MetaMask account.
+The accounts provided by this provider are the user's MetaMask accounts.
 When sending signing requests to this provider, MetaMask prompts the user to sign with their accounts.
 
 This module works in Chrome and Firefox.

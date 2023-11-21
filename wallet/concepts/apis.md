@@ -11,7 +11,7 @@ MetaMask supports an [Ethereum provider API](#ethereum-provider-api), which wrap
 The API methods are documented in the following references:
 
 - [Ethereum provider API reference](../reference/provider-api.md)
-- [JSON-RPC API playground](/wallet/reference/eth_subscribe)
+- [JSON-RPC API reference](/wallet/reference/json-rpc-api)
 :::
 
 ## Ethereum provider API
@@ -21,6 +21,14 @@ MetaMask injects a global JavaScript API into websites visited by its users usin
 This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), and it allows dapps to
 request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
+
+:::note
+MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
+alternative discovery mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperabilty.md)
+by discovering multiple injected wallet providers in a user's browser.
+We recommend using this mechanism for provider discovery.
+:::
 
 The MetaMask Ethereum provider API contains the following:
 
@@ -50,8 +58,7 @@ MetaMask uses the [`window.ethereum.request(args)`](../reference/provider-api.md
 method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
-The RPC methods are documented in the interactive
-[JSON-RPC API playground](/wallet/reference/eth_subscribe).
+The RPC methods are documented in the interactive [JSON-RPC API reference](/wallet/reference/json-rpc-api).
 Methods in the API playground may have the following tags:
 
 - **MetaMask** - These methods behave in ways specific to MetaMask, and may or may not be supported

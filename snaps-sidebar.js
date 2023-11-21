@@ -78,6 +78,10 @@ const sidebar = {
           ],
         },
         {
+          type: "doc",
+          id: "reference/jest",
+        },
+        {
           type: "category",
           label: "Keyring API",
           link: {

@@ -33,6 +33,7 @@ const config = {
   scripts: [
     { src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js" },
     { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
+    { src: "/js/feedback-script.js", defer: true, async: true },
     { src: "/js/getfeedback.js", defer: true, async: true },
   ],
 
@@ -62,7 +63,7 @@ const config = {
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
-            sidebarLabel: "JSON-RPC API playground",
+            sidebarLabel: "JSON-RPC API",
           },
         },
         theme: {
@@ -156,7 +157,7 @@ const config = {
           },
           {
             from: "/guide/rpc-api",
-            to: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
           {
             from: "/guide/signing-data",
@@ -341,6 +342,10 @@ const config = {
           {
             from: "/sdk",
             to: "/wallet/how-to/connect/set-up-sdk",
+          },
+          {
+            from: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
         ].reduce((acc, item) => {
           acc.push(item);
