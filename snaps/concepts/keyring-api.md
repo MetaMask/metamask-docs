@@ -26,7 +26,7 @@ Now you can display these custom accounts alongside regular MetaMask accounts in
 [Create a Keyring Snap to integrate custom EVM accounts in MetaMask.](../tutorials/custom-evm-accounts.md)
 Your dapp can then use the [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) MetaMask
 JSON-RPC API method to connect to the custom accounts, and seamlessly interact with them using other
-[JSON-RPC methods](/wallet/reference/eth_subscribe).
+[JSON-RPC methods](/wallet/reference/json-rpc-api).
 
 ## Terminology
 
@@ -191,7 +191,7 @@ sequenceDiagram
 See the [example Keyring Snap companion dapp](https://github.com/MetaMask/snap-simple-keyring) for a
 full example.
 
-The flow starts when a dapp calls a [MetaMask JSON-RPC method](/wallet/reference/eth_subscribe), or
+The flow starts when a dapp calls a [MetaMask JSON-RPC method](/wallet/reference/json-rpc-api), or
 when the user initiates a new funds transfer from the MetaMask UI.
 At that point, MetaMask detects that this interaction is requested for an account controlled by the
 Keyring Snap.

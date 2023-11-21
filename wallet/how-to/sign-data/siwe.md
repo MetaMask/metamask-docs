@@ -1,6 +1,6 @@
 ---
 description: Enable your users to sign in with Ethereum.
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Sign in with Ethereum
