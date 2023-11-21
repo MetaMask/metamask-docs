@@ -40,6 +40,15 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
 
 You can configure the SDK using any [options](../../../../reference/sdk-js-options.md) and call any
 [provider API methods](../../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](../../../../reference/rpc-api.md#eth_requestaccounts) using
+Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 [`ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs) first,
 since it prompts the installation or connection popup to appear.
+
+:::note Important SDK options
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+:::

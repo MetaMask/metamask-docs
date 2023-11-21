@@ -77,6 +77,15 @@ root.render(
 For the full list of options you can set for `sdkOptions`, see the
 [JavaScript SDK options reference](../../../../../reference/sdk-js-options.md).
 
+:::note Important SDK options
+- Use [`dappMetadata`](../../../../../reference/sdk-js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`modals`](../../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+:::
+
 ### 4. Use the SDK
 
 Use the SDK by using the `useSDK` hook in your React components.

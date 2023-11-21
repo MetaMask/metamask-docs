@@ -17,16 +17,13 @@ your users to easily connect with their MetaMask Mobile wallet.
 
 ## Prerequisites
 
-- MetaMask Mobile version 7.6.0 or above installed on your target device (that is, a physical
-  device or emulator)
-
-  :::note
+- MetaMask Mobile version 7.6.0 or later installed on your target device (that is, a physical
+  device or emulator).
   You can install MetaMask Mobile from [Google Play](https://play.google.com/store/apps/details?id=io.metamask),
   or clone and compile MetaMask Mobile from [source](https://github.com/MetaMask/metamask-mobile)
   and build to your target device.
-  :::
 
-- Android SDK version 23 or above
+- Android SDK version 23 or later.
 
 ## Steps
 
@@ -37,107 +34,14 @@ add the following entry to the `dependencies` block:
 
 ```gradle title="build.gradle"
 dependencies {
-  implementation 'io.metamask.androidsdk:metamask-android-sdk:0.2.0'
+    implementation 'io.metamask.androidsdk:metamask-android-sdk:0.2.1'
 }
 ```
 
 Then, sync your project with the Gradle settings.
 Once the syncing completes, you can set up the rest of your project.
 
-### 2. Set up your project
-
-#### 2.1. Set up Gradle
-
-The SDK uses Hilt for Dagger dependency injection, so you must add the corresponding dependencies to
-your Gradle files.
-
-Add the following to your project's root `build.gradle` file:
-
-```gradle title="build.gradle"
-buildscript {
-    // other setup here
-    ext {
-        hilt_version = '2.43.2'
-    }
-    dependencies {
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-    }
-}
-plugins {
-    // other setup here
-    id 'com.google.dagger.hilt.android' version "$hilt_version" apply false
-}
-```
-
-Add the following to your `app/build.gradle` file:
-
-```gradle title="app/build.gradle"
-plugins {
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-}
-
-dependencies {
-    // dagger-hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-
-    // viewmodel-related
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-}
-```
-
-#### 2.2. Set up an application class
-
-If you don't have an application class, you must create one:
-
-```kotlin title="MetaMaskDappApplication.kt"
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-
-@HiltAndroidApp
-class DappApplication : Application() {}
-```
-
-In the `AndroidManifest.xml` file, update `android:name` to this application class:
-
-```xml title="AndroidManifest.xml"
-<manifest>
-    <application
-        android:name=".DappApplication"
-        ...
-    </application>
-</manifest>
-```
-
-#### 2.3. Add @AndroidEntryPoint
-
-If you need to inject your dependencies in an activity, you must add `@AndroidEntryPoint` to your
-activity class.
-However, if you need to inject your dependencies in a fragment, you must add `@AndroidEntryPoint` to
-both the fragment and the activity that hosts the fragment.
-
-```kotlin title="MainActivity.kt"
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-   // ...
-}
-```
-
-```kotlin title="LoginFragment.kt"
-@AndroidEntryPoint
-class LoginFragment : Fragment() {
-   // ...
-}
-```
-
-:::note
-Refer to the [example dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) for more
-details on how to set up a Jetpack Compose project to work with the SDK.
-:::
-
-### 3. Import the SDK
+### 2. Import the SDK
 
 Import the SDK by adding the following line to the top of your project file:
 
@@ -145,17 +49,23 @@ Import the SDK by adding the following line to the top of your project file:
 import io.metamask.androidsdk.Ethereum
 ```
 
-### 4. Connect your dapp
+### 3. Connect your dapp
 
 You can connect your dapp to MetaMask in one of two ways:
 
-1. [Use the `ethereum` provider object directly](#41-use-the-provider-object-directly).
+1. [Use the `ethereum` provider object directly](#31-use-the-provider-object-directly).
     We recommend using this method in a pure model layer.
-2. [Use a ViewModel](#42-use-a-viewmodel) that injects the `ethereum` provider object.
+2. [Use a ViewModel](#32-use-a-viewmodel) that injects the `ethereum` provider object.
     We recommend using this method at the app level, because it provides a single instance that
     survives configuration changes and can be shared across all views.
 
-#### 4.1. Use the provider object directly
+:::note Logging
+By default, MetaMask logs three SDK events: `connection_request`, `connected`, and `disconnected`.
+This allows MetaMask to monitor any SDK connection issues.
+To disable this, set `ethereum.enableDebug = false`.
+:::
+
+#### 3.1. Use the provider object directly
 
 Use the `ethereum` provider object directly to connect your dapp to MetaMask by adding the following
 code to your project file:
@@ -163,7 +73,7 @@ code to your project file:
 ```kotlin
 @AndroidEntryPoint
 class SomeModel(private val repository: ApplicationRepository) {
-    val ethereum = Ethereum(repository)
+    val ethereum = Ethereum(context)
     
     val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
 
@@ -178,14 +88,14 @@ class SomeModel(private val repository: ApplicationRepository) {
 }
 ```
 
-#### 4.2. Use a ViewModel
+#### 3.2. Use a ViewModel
 
 To connect your dapp to MetaMask using a ViewModel, create a ViewModel that injects the
 `ethereum` provider object, then add wrapper functions for each Ethereum method you wish to call.
 
-:::note info
-Hilt enables you to maintain the state of your ViewModel across configuration changes.
-:::
+You can use a dependency manager such as [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+to initialize the ViewModel and maintain its state across configuration changes.
+If you use Hilt, your setup might look like the following:
 
 ```kotlin title="EthereumViewModel.kt"
 @HiltViewModel
@@ -232,13 +142,9 @@ See the example dapp's
 [`EthereumViewModel.kt`](https://github.com/MetaMask/metamask-android-sdk/blob/main/app/src/main/java/com/metamask/dapp/EthereumViewModel.kt)
 file for more information.
 
-By default, MetaMask logs three SDK events: `connection_request`, `connected`, and `disconnected`.
-This allows MetaMask to monitor any SDK connection issues.
-To disable this, set `ethereum.enableDebug = false`.
+### 4. Call methods
 
-### 5. Call methods
-
-You can now call any [JSON-RPC API method](/wallet/reference/eth_subscribe) using
+You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using
 `ethereum.sendRequest()`.
 
 #### Example: Get account balance
@@ -256,9 +162,10 @@ val params: List<String> = listOf(
     )
 
 // Create request
-let getBalanceRequest = EthereumRequest(
-    EthereumMethod.ETHGETBALANCE.value,
-    params)
+val getBalanceRequest = EthereumRequest(
+    method = EthereumMethod.ETHGETBALANCE.value,
+    params = params
+)
 
 // Make request
 ethereum.sendRequest(getBalanceRequest) { result ->
@@ -282,8 +189,8 @@ val from = ethereum.selectedAddress
 val params: List<String> = listOf(from, message)
 
 val signRequest = EthereumRequest(
-    EthereumMethod.ETH_SIGN_TYPED_DATA_V4.value,
-    params
+    method = EthereumMethod.ETH_SIGN_TYPED_DATA_V4.value,
+    params = params
 )
 
 ethereum.sendRequest(signRequest) { result ->
@@ -313,8 +220,8 @@ val params: Map<String, Any> = mapOf(
 
 // Create request
 val transactionRequest = EthereumRequest(
-    EthereumMethod.ETH_SEND_TRANSACTION.value,
-    listOf(params)
+    method = EthereumMethod.ETH_SEND_TRANSACTION.value,
+    params = listOf(params)
 )
 
 // Make a transaction request
