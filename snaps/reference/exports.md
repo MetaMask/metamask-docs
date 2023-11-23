@@ -1,6 +1,5 @@
 ---
 description: Snaps exports reference
-toc_max_heading_level: 2
 sidebar_position: 2
 ---
 
@@ -22,18 +21,18 @@ create a dapp that sends transactions for that protocol via your Snap, for examp
 specify an RPC API.
 :::
 
-### Parameters
+#### Parameters
 
 An object containing:
 
 - `origin` - The origin as a string.
 - `request` - The JSON-RPC request.
 
-### Returns
+#### Returns
 
 A promise containing the return of the implemented method.
 
-### Example
+#### Example
 
 <!--tabs-->
 
@@ -84,7 +83,7 @@ For MetaMask to call the Snap's `onTransaction` method, you must request the
 [`endowment:transaction-insight`](permissions.md#endowmenttransaction-insight) permission.
 :::
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -94,12 +93,12 @@ An object containing:
 - `transactionOrigin` - The transaction origin if
   [`allowTransactionOrigin`](permissions.md#endowmenttransaction-insight) is set to `true`.
 
-### Returns
+#### Returns
 
 A content object displayed using [custom UI](../how-to/use-custom-ui.md), alongside the confirmation
 for the transaction that `onTransaction` was called with.
 
-### Example
+#### Example
 
 <!--tabs-->
 
@@ -148,6 +147,67 @@ module.exports.onTransaction = async ({
 
 <!--/tabs-->
 
+### Transaction severity level
+
+:::flaskOnly
+:::
+
+This feature enables transaction insight Snaps to return an optional severity level of `critical`.
+MetaMask shows a modal with the warning before the user can confirm the transaction.
+Using the previous example for `onTransaction`, the following code adds a single line to return an
+insight with the severity level `critical`: 
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import { OnTransactionHandler } from '@metamask/snaps-types';
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    // highlight-next-line
+    severity: 'critical'
+  };
+};
+```
+
+# JavaScript
+
+```js
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+module.exports.onTransaction = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Transaction Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    // highlight-next-line
+    severity: 'critical'
+  };
+};
+```
+
+<!--/tabs-->
+
 ## onCronjob
 
 To run periodic actions for the user (cron jobs), a Snap must export `onCronjob`.
@@ -159,11 +219,11 @@ For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
 
-### Parameters
+#### Parameters
 
 An object containing an RPC request specified in the `endowment:cronjob` permission.
 
-### Example
+#### Example
 
 <!--tabs-->
 

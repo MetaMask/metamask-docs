@@ -11,7 +11,7 @@ MetaMask supports an [Ethereum provider API](#ethereum-provider-api), which wrap
 The API methods are documented in the following references:
 
 - [Ethereum provider API reference](../reference/provider-api.md)
-- [JSON-RPC API playground](/wallet/reference/eth_subscribe)
+- [JSON-RPC API reference](/wallet/reference/json-rpc-api)
 :::
 
 ## Ethereum provider API
@@ -58,8 +58,7 @@ MetaMask uses the [`window.ethereum.request(args)`](../reference/provider-api.md
 method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
-The RPC methods are documented in the interactive
-[JSON-RPC API playground](/wallet/reference/eth_subscribe).
+The RPC methods are documented in the interactive [JSON-RPC API reference](/wallet/reference/json-rpc-api).
 Methods in the API playground may have the following tags:
 
 - **MetaMask** - These methods behave in ways specific to MetaMask, and may or may not be supported

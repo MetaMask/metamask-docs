@@ -63,7 +63,7 @@ const config = {
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/latest/openrpc.json",
             path: "reference",
-            sidebarLabel: "JSON-RPC API playground",
+            sidebarLabel: "JSON-RPC API",
           },
         },
         theme: {
@@ -157,7 +157,7 @@ const config = {
           },
           {
             from: "/guide/rpc-api",
-            to: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
           },
           {
             from: "/guide/signing-data",
@@ -343,6 +343,10 @@ const config = {
             from: "/sdk",
             to: "/wallet/how-to/connect/set-up-sdk",
           },
+          {
+            from: "/wallet/reference/rpc-api",
+            to: "/wallet/reference/json-rpc-api",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -400,52 +404,44 @@ const config = {
         },
         links: [
           {
-            title: "Wallet",
+            title: "Documentation",
             items: [
               {
-                label: "Introduction",
+                label: "Home",
+                to: "/",
+              },
+              {
+                label: "MetaMask wallet",
                 to: "/wallet",
               },
               {
-                label: "How to guides",
-                to: "/wallet/how-to",
+                label: "MetaMask SDK",
+                to: "/sdk",
               },
               {
-                label: "Concepts",
-                to: "/wallet/concepts",
-              },
-              {
-                label: "Tutorials",
-                to: "/wallet/tutorials",
-              },
-              {
-                label: "Reference",
-                to: "/wallet/reference",
+                label: "Snaps",
+                to: "/snaps",
               },
             ],
           },
           {
-            title: "Snaps",
+            title: "GitHub",
             items: [
               {
-                label: "Introduction",
-                to: "/snaps",
+                label: "Documentation GitHub",
+                href: "https://github.com/MetaMask/metamask-docs",
               },
               {
-                label: "Get started",
-                to: "/snaps/get-started",
+                label: "MetaMask wallet GitHub",
+                href: "https://github.com/MetaMask/metamask-extension/",
               },
               {
-                label: "How to guides",
-                to: "/snaps/how-to",
+                label: "MetaMask SDK GitHub",
+                href: "https://github.com/MetaMask/metamask-sdk/",
               },
               {
-                label: "Tutorials",
-                to: "/snaps/tutorials",
-              },
-              {
-                label: "Reference",
-                to: "/snaps/reference",
+                label: "Snaps GitHub",
+                href: "https://github.com/MetaMask/snaps-monorepo",
               },
             ],
           },
@@ -457,16 +453,12 @@ const config = {
                 href: "https://discord.gg/consensys",
               },
               {
-                label: "Documentation GitHub",
-                href: "https://github.com/MetaMask/metamask-docs",
+                label: "Contribute to MetaMask",
+                href: "https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md",
               },
               {
-                label: "MetaMask wallet GitHub",
-                href: "https://github.com/MetaMask/metamask-extension/",
-              },
-              {
-                label: "Snaps GitHub",
-                href: "https://github.com/MetaMask/snaps-monorepo",
+                label: "Contribute to the docs",
+                href: "https://github.com/MetaMask/metamask-docs/blob/main/CONTRIBUTING.md",
               },
             ],
           },
@@ -486,7 +478,7 @@ const config = {
                 href: "https://metamask.io/cla/",
               },
               {
-                html: "<button id='manage-cookie-btn'>Manage cookie</button>",
+                html: "<button id='manage-cookie-btn'>Manage cookies</button>",
               },
             ],
           },

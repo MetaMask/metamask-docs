@@ -51,7 +51,7 @@ interface RequestArguments {
 window.ethereum.request(args: RequestArguments): Promise<unknown>;
 ```
 
-Use this method to submit [RPC API](rpc-api.md) requests to Ethereum using MetaMask.
+Use this method to submit [JSON-RPC API requests](/wallet/reference/json-rpc-api) to Ethereum using MetaMask.
 It returns a promise that resolves to the result of the RPC method call.
 
 The parameters and return value vary by RPC method.
