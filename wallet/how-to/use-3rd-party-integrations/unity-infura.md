@@ -25,7 +25,7 @@ your Unity game.
 
 3. Select the `MetaMaskUnitySDK` Prefab to view its properties in the **Inspector** window. 
 
-4. In the **MetaMask Unity (Script)** section, input your Infura API key into the **Infura Project
+4. In the **MetaMask Unity (Script)** section, enter your Infura API key into the **Infura Project
     Id** field.
 
 <p align="center">
