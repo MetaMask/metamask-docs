@@ -258,5 +258,6 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
+- [Set up Infura in Unity.](../../../use-3rd-party-integrations/unity-infura.md)
 - [Interact with smart contracts in Unity.](../../../interact-with-smart-contracts/unity/index.md)
 - [Enable human-readable addresses in Unity using Decentraweb.](../../../use-3rd-party-integrations/unity-dweb.md)
