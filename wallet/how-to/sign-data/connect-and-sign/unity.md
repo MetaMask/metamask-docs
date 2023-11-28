@@ -27,11 +27,11 @@ You can [connect and sign](index.md) in a single interaction from your Unity gam
     }
     ```
 
-    You can replace the test message with any string message you want to sign.
+    Replace the test message with any string message you want to sign.
 
     :::caution important
-    Make sure [`MetaMaskUnity.Instance`](../../../reference/sdk-unity-api.md#instance) is
-    initialized before using this function.
+    Make sure you initialize [`MetaMaskUnity.Instance`](../../../reference/sdk-unity-api.md#instance)
+    before using this function.
     To do this, enable **Initialize On Awake** in the **MetaMask Unity** script inspector, or run
     [`MetaMask.Instance.Initialize()`](../../../reference/sdk-unity-api.md#initialize).
     :::
