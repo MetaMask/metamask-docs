@@ -1,6 +1,6 @@
 ---
 description: Use an alternative discovery mechanism for multiple wallets.
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 # Discover multiple wallets
