@@ -7,9 +7,15 @@ sidebar_position: 4
 
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
 [signing transactions](../sign-data/index.md).
-To request a signature from a user or have a user approve a transaction, your dapp must
+To request a signature from a user or have a user approve a transaction, your dapp can
 access the user's accounts using the
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+
+:::info note
+`eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
+to [request permission](../manage-permissions.md) to call the restricted
+[`eth_accounts`](/wallet/reference/eth_accounts) method.
+:::
 
 When accessing a user's accounts:
 
@@ -118,3 +124,11 @@ function handleAccountsChanged(accounts) {
 Previously, `eth_accounts` returned at most one account in the `accounts` array.
 The first account in the array will always be considered the user's "selected" account.
 :::
+
+## Revoke access to a user's accounts
+
+Since `eth_requestAccounts` internally calls `wallet_requestPermissions` for permission to call
+`eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
+to revoke this permission, revoking your dapp's access to the user's accounts.
+
+See [how to revoke permissions](../manage-permissions.md#revoke-permissions-example) for an example.
