@@ -222,6 +222,9 @@ The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-pr
 use for RPC requests.
 Configure this option to [make read-only RPC requests from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
 
+Make sure to [configure an allowlist for your API key.](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+If you don't protect your API key using an allowlist, all requests to your API key are accepted.
+
 :::tip
 To prevent committing your Infura API key, we recommend adding your key to a
 [`.env` file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv) and using the

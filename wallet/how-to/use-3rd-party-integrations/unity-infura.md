@@ -13,6 +13,8 @@ your Unity game.
 - An Infura API key.
   Create one by following the first two steps in the
   [Infura getting started guide](https://docs.infura.io/getting-started).
+- [An allowlist configured for your API key.](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+  If you don't protect your API key using an allowlist, all requests to your API key are accepted.
 - [MetaMask SDK set up](../connect/set-up-sdk/gaming/unity.md) in your Unity game.
 
 ## Steps

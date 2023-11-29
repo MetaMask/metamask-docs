@@ -14,7 +14,7 @@ Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-r
 user wallet authentication for read-only operations.
 
 :::note
-Your dapp CANNOT directly call the following RPC methods, which require user wallet interaction:
+Your dapp cannot directly call the following RPC methods, which require user wallet interaction:
 
 - `eth_requestAccounts`
 - `eth_sendTransaction`
@@ -36,6 +36,8 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
 - An Infura API key.
   Create one by following the first two steps in the
   [Infura getting started guide](https://docs.infura.io/getting-started).
+- [An allowlist configured for your API key.](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+  If you don't protect your API key using an allowlist, all requests to your API key are accepted.
 - [MetaMask SDK set up](../connect/set-up-sdk/javascript/index.md) in your JavaScript dapp.
 
 ## Use the Infura API
