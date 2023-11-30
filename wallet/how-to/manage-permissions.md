@@ -1,13 +1,17 @@
 ---
-description: Request permissions to call restricted methods.
+description: Request and revoke permissions to call restricted methods.
 sidebar_position: 9
 ---
 
-# Request permissions
+# Manage permissions
 
-To call a restricted RPC method, your dapp must request permission from the user to call it using
+To call a restricted RPC method, your dapp must request permission from the user using
 the [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions) RPC method.
-This method is specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
+You can get the user's current permissions using [`wallet_getPermissions`](/wallet/reference/wallet_getPermissions),
+and revoke permissions previously granted to your dapp using
+[`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions).
+These methods are specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) and
+[MIP-2](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md).
 
 `wallet_requestPermissions` creates a confirmation asking the user to connect to an account and
 allow the dapp to call the requested method.
@@ -15,7 +19,7 @@ The confirmation screen describes the functions and data the requested method ca
 For example, something like the following confirmation displays when you request permission to call
 the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
 
-<div class="row">
+<div class="row margin-bottom--md">
     <div class="column">
         <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid black'}} />
     </div>
@@ -24,10 +28,16 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
     </div>
 </div>
 
-## Example
+:::info note
+To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
+which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
+internally.
+See [how to access a user's accounts](connect/access-accounts.md) for more information.
+:::
 
-The following is an example of using `wallet_requestPermissions` to request permission from the user
-to call `eth_accounts`.
+## Request permissions example
+
+The following example uses `wallet_requestPermissions` to request permission from the user to call `eth_accounts`:
 
 ```javascript
 document.getElementById('requestPermissionsButton', requestPermissions);
@@ -55,4 +65,19 @@ function requestPermissions() {
       }
     });
 }
+```
+
+## Revoke permissions example
+
+The following example uses `wallet_revokePermissions` to revoke the dapp's permission to call `eth_accounts`:
+
+```javascript
+await window.ethereum.request({
+  "method": "wallet_revokePermissions",
+  "params": [
+    {
+      "eth_accounts": {}
+    }
+  ]
+});
 ```

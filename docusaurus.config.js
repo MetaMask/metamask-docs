@@ -347,6 +347,10 @@ const config = {
             from: "/wallet/reference/rpc-api",
             to: "/wallet/reference/json-rpc-api",
           },
+          {
+            from: "/wallet/how-to/request-permissions",
+            to: "/wallet/how-to/manage-permissions",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
