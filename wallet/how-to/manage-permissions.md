@@ -28,16 +28,16 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
     </div>
 </div>
 
-:::info Accessing accounts
-We recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts), which
-internally calls `wallet_requestPermissions` for permission to call `eth_accounts`.
+:::info note
+To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
+which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
+internally.
 See [how to access a user's accounts](connect/access-accounts.md) for more information.
 :::
 
 ## Request permissions example
 
-The following is an example of using `wallet_requestPermissions` to request permission from the user
-to call `eth_accounts`.
+The following example uses `wallet_requestPermissions` to request permission from the user to call `eth_accounts`:
 
 ```javascript
 document.getElementById('requestPermissionsButton', requestPermissions);
@@ -69,8 +69,7 @@ function requestPermissions() {
 
 ## Revoke permissions example
 
-The following is an example of using `wallet_revokePermissions` to revoke the dapp's permission to
-call `eth_accounts`:
+The following example uses `wallet_revokePermissions` to revoke the dapp's permission to call `eth_accounts`:
 
 ```javascript
 await window.ethereum.request({
