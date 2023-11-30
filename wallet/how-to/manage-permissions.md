@@ -7,8 +7,9 @@ sidebar_position: 7
 
 To call a restricted RPC method, your dapp must request permission from the user using
 the [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions) RPC method.
-You can revoke previously granted permissions using the
-[`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) RPC method.
+You can get the user's current permissions using [`wallet_getPermissions`](/wallet/reference/wallet_getPermissions),
+and revoke permissions previously granted to your dapp using
+[`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions).
 These methods are specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) and
 [MIP-2](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md).
 

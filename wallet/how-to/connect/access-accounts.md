@@ -125,10 +125,14 @@ Previously, `eth_accounts` returned at most one account in the `accounts` array.
 The first account in the array will always be considered the user's "selected" account.
 :::
 
-## Revoke access to a user's accounts
+## Disconnect a user's accounts
 
 Since `eth_requestAccounts` internally calls `wallet_requestPermissions` for permission to call
 `eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
 to revoke this permission, revoking your dapp's access to the user's accounts.
+
+This is useful as a method for users to log out (or disconnect) from your dapp.
+You can then use [`wallet_getPermissions`](/wallet/reference/wallet_getPermissions) to determine
+whether the user is connected or disconnected to your dapp.
 
 See [how to revoke permissions](../manage-permissions.md#revoke-permissions-example) for an example.
