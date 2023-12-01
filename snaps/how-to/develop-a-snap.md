@@ -127,7 +127,6 @@ You can review the growing number of [example Snaps](https://github.com/MetaMask
 - [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
 - [StarkNet](https://github.com/Consensys/starknet-snap)
 - [MobyMask Phishing Warning](https://github.com/Montoya/mobymask-snap)
-- [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
 
 MetaMask also maintains tools to help developers build, debug, and maintain Snaps:
 
@@ -135,9 +134,6 @@ MetaMask also maintains tools to help developers build, debug, and maintain Snap
   TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
   your Snap and a companion dapp.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating Snaps in the browser, streamlining the development process.
-- [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines
-  the TypeScript template Snap and Truffle so you can easily test Snaps that use smart contracts
-  with Ganache.
 - [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test Snaps and a dapp for
   evaluating them.
 
