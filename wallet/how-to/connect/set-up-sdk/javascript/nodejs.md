@@ -1,6 +1,9 @@
 ---
 sidebar_label: Node.js
 sidebar_position: 5
+description: Set up the SDK in your Node.js dapp.
+tags:
+  - JavaScript SDK
 ---
 
 # Use MetaMask SDK with Node.js

@@ -1,6 +1,9 @@
 ---
 sidebar_label: Unity
 sidebar_position: 1
+description: Set up the SDK in your Unity game.
+tags:
+  - Unity SDK
 ---
 
 import ReactPlayer from 'react-player/lazy'

@@ -1,6 +1,9 @@
 ---
 sidebar_label: Gaming
 sidebar_position: 2
+description: Set up the SDK in your gaming dapp.
+tags:
+  - Unity SDK
 ---
 
 # Use MetaMask SDK with gaming dapps

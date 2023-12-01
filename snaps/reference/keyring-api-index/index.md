@@ -1,3 +1,9 @@
+---
+description: See the Keyring API reference.
+tags:
+  - Keyring API
+---
+
 # Keyring API
 
 This section describes the [Keyring API](../../concepts/keyring-api.md) methods.

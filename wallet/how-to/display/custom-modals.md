@@ -1,6 +1,8 @@
 ---
 description: Display custom modals using the JavaScript SDK.
 sidebar_position: 4
+tags:
+  - JavaScript SDK
 ---
 
 # Display custom modals

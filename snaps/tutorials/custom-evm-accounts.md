@@ -2,6 +2,8 @@
 description: Create a Keyring Snap to connect to custom EVM accounts in MetaMask.
 sidebar_custom_props:
   flask_only: true
+tags:
+  - Keyring API
 ---
 
 # Create a Snap to connect to custom EVM accounts

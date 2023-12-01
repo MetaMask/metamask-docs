@@ -4,6 +4,8 @@ sidebar_label: Use the Keyring API
 sidebar_position: 6
 sidebar_custom_props:
   flask_only: true
+tags:
+  - Keyring API
 ---
 
 # Use the Keyring API from a dapp

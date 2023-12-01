@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+description: Learn about the Android SDK architecture.
+tags:
+  - Android SDK
 ---
 
 # Android SDK architecture

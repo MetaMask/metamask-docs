@@ -1,6 +1,8 @@
 ---
-description: Unity SDK API reference
+description: See the Unity SDK API reference.
 sidebar_position: 2
+tags:
+  - Unity SDK
 ---
 
 # Unity SDK API

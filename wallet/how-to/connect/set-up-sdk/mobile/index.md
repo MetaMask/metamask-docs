@@ -1,6 +1,10 @@
 ---
 sidebar_label: Mobile
 sidebar_position: 3
+description: Set up the SDK in your mobile dapp.
+tags:
+  - iOS SDK
+  - Android SDK
 ---
 
 # Use MetaMask SDK with mobile dapps

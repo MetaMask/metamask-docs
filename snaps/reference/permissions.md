@@ -1,5 +1,5 @@
 ---
-description: Snaps permissions reference
+description: See the Snaps permissions reference.
 sidebar_position: 4
 ---
 
