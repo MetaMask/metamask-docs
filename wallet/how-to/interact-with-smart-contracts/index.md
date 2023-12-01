@@ -50,7 +50,7 @@ Example libraries include the following:
 - [web3.js](https://www.npmjs.com/package/web3)
 - [Embark](https://framework.embarklabs.io/)
 - [ethjs](https://www.npmjs.com/package/ethjs)
-- [Truffle](https://www.trufflesuite.com/)
+- [Hardhat](https://hardhat.org/)
 
 ## Contract bytecode
 
