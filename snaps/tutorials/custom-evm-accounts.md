@@ -37,12 +37,12 @@ editing the `snap.manifest.json` file in your Snap:
 ### 2. Expose the Keyring interface as a JSON-RPC API
 
 Export the [`onRpcRequest`](../reference/exports.md#onrpcrequest) function from the Snap to expose
-the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md)
-interface as a JSON-RPC API.
+the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface as a JSON-RPC API.
 
 The Keyring API provides a helper called
 [`handleKeyringRequest`](../reference/keyring-api/functions/handleKeyringRequest.md).
-This helper takes an instance of your `Keyring` interface and a request object.
+This helper takes an instance of your [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md)
+interface and a request object.
 It responds to requests where the `method` is of type `keyring_*`, and throws a
 [`MethodNotSupportedError`](../reference/keyring-api/classes/MethodNotSupportedError.md)
 if it doesn't recognize the request method.
@@ -53,9 +53,11 @@ lets you chain multiple RPC handlers together.
 As each handler in the chain throws a
 [`MethodNotSupportedError`](../reference/keyring-api/classes/MethodNotSupportedError.md),
 the next handler in the chain is called.
-The return value of `buildHandlersChain` is a function that can be used as the `onRpcRequest` export.
+The return value of [`buildHandlersChain`](../reference/keyring-api/functions/buildHandlersChain.md)
+is a function that can be used as the
+[`onRpcRequest`](../reference/exports.md#onrpcrequest) export.
 
-The following is an example of composing two handlers: the keyring handler and a custom handler.
+The following is an example of composing two handlers: the Keyring request handler and a custom handler.
 This code goes in the `packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
@@ -72,7 +74,7 @@ import { MyKeyring } from './keyring';
 let keyring: MyKeyring;
 
 /**
- * Handle keyring requests.
+ * Handle Keyring requests.
  *
  * @param args - Request arguments.
  * @param args.request - Request to execute.
@@ -128,7 +130,7 @@ As you build a companion dapp to provide a user interface for your Keyring Snap,
 interact with your Snap's JSON-RPC API.
 While you could do this by making regular RPC calls using
 [`wallet_invokeSnap`](../reference/rpc-api.md#wallet_invokesnap), we recommend
-[using the Keyring API from your dapp](../how-to/use-keyring-api.md):
+[using the Keyring API from your dapp](../how-to/use-keyring-api/dapp.md):
 
 ```typescript
 import { KeyringSnapRpcClient } from '@metamask/keyring-api';

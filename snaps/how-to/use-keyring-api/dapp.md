@@ -1,9 +1,6 @@
 ---
-description: Use the KeyringSnapRpcClient from a dapp.
-sidebar_label: Use the Keyring API
-sidebar_position: 6
-sidebar_custom_props:
-  flask_only: true
+description: Call Keyring API methods from your dapp.
+sidebar_position: 2
 ---
 
 # Use the Keyring API from a dapp
@@ -11,23 +8,20 @@ sidebar_custom_props:
 :::flaskOnly
 :::
 
+Your dapp can use the Keyring API to interact with custom EVM accounts.
+Use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md)
+of the Keyring API to invoke Keyring RPC methods on your [Keyring Snap](../../tutorials/custom-evm-accounts.md).
 
-Your dapp can use the [Keyring API](../concepts/keyring-api.md) to interact with custom EVM accounts.
-Use the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md)
-of the Keyring API to invoke Keyring RPC methods on your [Keyring Snap](../concepts/keyring-api.md#terminology).
-
-:::tip tutorial
-You can follow the end-to-end tutorial to [create a Snap to connect to custom EVM accounts](../tutorials/custom-evm-accounts.md).
-:::
-
-:::info API documentation
-See the [Keyring API reference](../reference/keyring-api/index.md) for all the Keyring API methods.
+:::tip see also
+- [Create a Keyring Snap](snap/index.md)
+- [About the Keyring API](../../concepts/keyring-api.md)
+- [Keyring API reference](../../reference/keyring-api)
 :::
 
 ## Create the KeyringSnapRpcClient
 
-To use the `KeyringSnapRpcClient`, install `@metamask/keyring-api` in your project directory using
-Yarn or npm:
+To use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md),
+install `@metamask/keyring-api` in your project directory using Yarn or npm:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -49,8 +43,8 @@ let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 
 ## Call Keyring API methods
 
-You can now use the `KeyringSnapRpcClient` to invoke the following
-[`Keyring API`](../reference/keyring-api/index.md) methods on your Snap.
+You can now use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md)
+to invoke the following Keyring API methods on your Snap.
 
 ### createAccount
 
