@@ -10,8 +10,7 @@ sidebar_position: 2
 
 :::tip see also
 - [Create a Keyring Snap](index.md)
-- [Keyring Snap EVM methods](methods.md)
 - [Use the Keyring API from a dapp](../dapp.md)
 - [About the Keyring API](../../../concepts/keyring-api.md)
-- [Keyring API reference](../../../reference/keyring-api)
+- [Keyring API reference](../../../reference/keyring-api/index.md)
 :::

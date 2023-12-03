@@ -118,7 +118,7 @@ Also, make sure to update the manifest file, icon file, and README to differenti
 
 You should deploy a dapp where users can learn about your Snap and install it, or integrate with your existing dapp.
 
-If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](work-with-existing-snaps.md).
+If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](use-3rd-party-snaps.md).
 
 ## Resources and tools
 

@@ -7,9 +7,6 @@ sidebar_custom_props:
 
 # About the Keyring API
 
-:::flaskOnly
-:::
-
 The Keyring API integrates custom EVM accounts inside MetaMask.
 You can use the Keyring API to display custom accounts, such as multi-party computation (MPC)
 accounts, alongside regular MetaMask accounts in the user interface:
@@ -19,14 +16,14 @@ accounts, alongside regular MetaMask accounts in the user interface:
 </p>
 
 To use the Keyring API, you first implement the API in a Keyring Snap.
-Your dapp can then invoke Keyring API methods on the Keyring Snap, calling
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) and other
-[MetaMask JSON-RPC methods](/wallet/reference/json-rpc-api) to connect to and interact with the
-custom accounts.
+Your dapp can then invoke Keyring API methods on the Keyring Snap to connect to and interact with
+the custom accounts.
+
+:::flaskOnly
+:::
 
 :::tip see also
 - [Create a Keyring Snap](../how-to/use-keyring-api/snap/index.md)
-  - [Keyring Snap EVM methods](../how-to/use-keyring-api/snap/methods.md)
   - [Keyring Snap security guidelines](../how-to/use-keyring-api/snap/security.md)
 - [Use the Keyring API from a dapp](../how-to/use-keyring-api/dapp.md)
 - [Keyring API reference](../reference/keyring-api/index.md)
@@ -158,28 +155,25 @@ method of the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringS
 which calls the [`createAccount`](../reference/keyring-api/type-aliases/Keyring.md#createaccount)
 method of the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface, creating an
 account based on the parameters passed to the method.
-You can find an example of this in the [example Keyring Snap companion dapp](https://github.com/MetaMask/snap-simple-keyring/blob/d3f7f0156c59059c995fea87f90a3d0ad3a4c135/packages/site/src/pages/index.tsx#L136).
 
 The Snap keeps track of the accounts that it creates using [`snap_manageState`](../reference/rpc-api.md#snap_managestate).
 Once the Snap has created an account, it notifies MetaMask using the
 [`createAccount`](../reference/rpc-api.md#createaccount) sub-method of
 [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts).
-You can find an example of this process in the
-[example companion dapp](https://github.com/MetaMask/snap-simple-keyring/blob/d3f7f0156c59059c995fea87f90a3d0ad3a4c135/packages/snap/src/keyring.ts#L61).
 
 Once the Snap has created an account, that account can be used to sign messages and transactions.
 
 ## Transaction flows
 
-The Keyring API supports two flows for handling requests: [synchronous](#synchronous-signing-flow)
-and [asynchronous](#asynchronous-signing-flow).
+The Keyring API supports two flows for handling requests: [synchronous](#synchronous-transaction-flow)
+and [asynchronous](#asynchronous-transaction-flow).
 
 In general, you should use the asynchronous flow when the request requires user interaction (for
 example, using a hardware key or a threshold signature scheme) or when the request takes a long time
 to complete.
 You should use the synchronous flow for any other use case.
 
-### Synchronous signing flow
+### Synchronous transaction flow
 
 The synchronous flow looks like the following:
 
@@ -215,8 +209,7 @@ MetaMask -->>- Dapp: result
 Dapp -->>- User: Done
 ```
 
-The flow starts when a dapp calls a [MetaMask JSON-RPC method](/wallet/reference/json-rpc-api), or
-when the user initiates a funds transfer from MetaMask.
+The flow starts when a user or dapp initiates a [sign request](#supported-signing-methods).
 At that point, MetaMask detects that this interaction is requested for an account controlled by the
 Keyring Snap.
 
@@ -227,9 +220,7 @@ RPC request and returns a
 [`SubmitRequestResponse`](../reference/keyring-api/variables/SubmitRequestResponseStruct.md)
 with `pending` set to `false`, and `result` set to the requested signature.
 
-See the [example Keyring Snap](https://github.com/MetaMask/snap-simple-keyring) for a full example.
-
-### Asynchronous signing flow
+### Asynchronous transaction flow
 
 The asynchronous flow looks like the following:
 
@@ -282,8 +273,8 @@ deactivate Site
 Dapp -->>- User: Done
 ```
 
-The flow starts the same way as the [synchronous flow](#synchronous-signing-flow): a dapp or user
-initiates a Keyring request to sign a transaction or arbitrary data.
+The flow starts the same way as the [synchronous flow](#synchronous-transaction-flow): a user or
+dapp initiates a [sign request](#supported-signing-methods).
 After approval, the [`submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest)
 method of the Snap's [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface is called.
 
@@ -306,3 +297,18 @@ This method receives the request's ID and final result.
 It resolves the pending request using the [`submitResponse`](../reference/rpc-api.md#submitresponse)
 sub-method of [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts), notifying
 MetaMask of the result.
+
+## Supported signing methods
+
+A Keyring Snap can implement support for handling the following Ethereum signing methods:
+
+- `personal_sign`
+- (deprecated) `eth_sign`
+- `eth_signTransaction` (`eth_sendTransaction` should be treated as `eth_signTransaction`)
+- `eth_signTypedData_v4`
+- (deprecated) `eth_signTypedData_v1`
+- (deprecated) `eth_signTypedData_v3`
+
+## Example
+
+See the [example Keyring Snap source code](https://github.com/MetaMask/snap-simple-keyring) for more information.

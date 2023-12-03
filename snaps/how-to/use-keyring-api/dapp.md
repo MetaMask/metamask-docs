@@ -5,23 +5,29 @@ sidebar_position: 2
 
 # Use the Keyring API from a dapp
 
+Use the Keyring API from your dapp to create and interact with custom EVM accounts.
+Use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md) to
+invoke Keyring API methods on your Keyring Snap.
+
 :::flaskOnly
 :::
-
-Your dapp can use the Keyring API to interact with custom EVM accounts.
-Use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md)
-of the Keyring API to invoke Keyring RPC methods on your [Keyring Snap](../../tutorials/custom-evm-accounts.md).
 
 :::tip see also
 - [Create a Keyring Snap](snap/index.md)
 - [About the Keyring API](../../concepts/keyring-api.md)
-- [Keyring API reference](../../reference/keyring-api)
+- [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
-## Create the KeyringSnapRpcClient
+## Prerequisites
 
-To use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md),
-install `@metamask/keyring-api` in your project directory using Yarn or npm:
+- A [Keyring Snap](snap/index.md) set up.
+- A dapp from which to use to the Keyring API.
+
+## Steps
+
+### 1. Install the Keyring API
+
+Install `@metamask/keyring-api` in your project directory using Yarn or npm:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -33,18 +39,29 @@ or
 npm install @metamask/keyring-api
 ```
 
-Create the client by adding the following to your project script:
+### 2. Create the KeyringSnapRpcClient
+
+Create the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md):
 
 ```ts
 import { KeyringSnapRpcClient } from "@metamask/keyring-api";
+import { defaultSnapOrigin as snapId } from '../config';
 
 let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ```
 
-## Call Keyring API methods
+### 3. Call Keyring API methods
 
 You can now use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md)
 to invoke the following Keyring API methods on your Snap.
+
+Invoke the Keyring API methods on your Keyring Snap from your dapp.
+For example:
+
+```typescript
+const client = new KeyringSnapRpcClient(snapId, window.ethereum);
+const accounts = await client.listAccounts();
+```
 
 ### createAccount
 
