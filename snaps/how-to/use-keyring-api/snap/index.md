@@ -19,8 +19,9 @@ Create a Keyring Snap to connect to custom EVM accounts.
 
 ## Prerequisites
 
-A Snap set up.
-See the [Snaps quickstart](../../../get-started/quickstart.md) and [how to develop a Snap](../../develop-a-snap.md).
+- Set up a Snap.
+  See the [Snaps quickstart](../../../get-started/quickstart.md) and [how to develop a Snap](../../develop-a-snap.md).
+- Read the [Keyring Snap security guidelines](security.md).
 
 ## Steps
 

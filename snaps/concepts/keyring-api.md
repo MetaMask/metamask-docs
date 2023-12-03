@@ -15,9 +15,10 @@ accounts, alongside regular MetaMask accounts in the user interface:
 <img src={require('../assets/keyring/accounts-ui.png').default} alt="Keyring Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
 </p>
 
-To use the Keyring API, you first implement the API in a Keyring Snap.
-Your dapp can then invoke Keyring API methods on the Keyring Snap to connect to and interact with
-the custom accounts.
+To use the Keyring API, you first [implement the API in a Keyring Snap](../how-to/use-keyring-api/snap/index.md)
+(also known as an "account Snap").
+Your dapp can then [invoke Keyring API methods](../how-to/use-keyring-api/dapp.md) on the Keyring
+Snap to connect to and interact with the custom accounts.
 
 :::flaskOnly
 :::
@@ -28,18 +29,6 @@ the custom accounts.
 - [Use the Keyring API from a dapp](../how-to/use-keyring-api/dapp.md)
 - [Keyring API reference](../reference/keyring-api/index.md)
 :::
-
-## Terminology
-
-The following terminology is used across the Keyring API:
-
-- **Blockchain account**: An object in a single blockchain, representing an account, with its
-    balance, nonce, and other account details.
-- **Request**: A request from a dapp to MetaMask.
-- **Keyring account**: An account model that represents one or more blockchain accounts.
-- **Keyring Snap** or **account Snap**: A Snap that implements the Keyring API.
-- **Keyring request**: A request from MetaMask to a Keyring Snap. 
-    MetaMask wraps the original request sent by the dapp and adds some metadata to it.
 
 ## System context diagram
 
@@ -114,7 +103,7 @@ This option shows a list of Keyring Snaps.
 Each Snap redirects the user to the companion dapp that contains the user interface to configure and
 manage the Snap.
 
-## Keyring account creation flow
+## Custom account creation flow
 
 Once the Keyring Snap is installed, the user can use the Snap companion dapp to create or import
 custom accounts.
@@ -300,14 +289,18 @@ MetaMask of the result.
 
 ## Supported signing methods
 
-A Keyring Snap can implement support for handling the following Ethereum signing methods:
+A Keyring Snap should implement support for handling the [`personal_sign`](/wallet/reference/personal_sign)
+and [`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4) Ethereum signing methods.
 
-- `personal_sign`
-- (deprecated) `eth_sign`
-- `eth_signTransaction` (`eth_sendTransaction` should be treated as `eth_signTransaction`)
-- `eth_signTypedData_v4`
-- (deprecated) `eth_signTypedData_v1`
-- (deprecated) `eth_signTypedData_v3`
+If the Snap receives an [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction) request, the
+Snap should treat the request like an
+[`eth_signTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_signtransaction) request.
+That is, the Snap is responsible for providing the signature in the response, and MetaMask is
+responsible for broadcasting the transaction.
+
+The Snap can also implement support for [deprecated signing
+methods](../../wallet/concepts/signing-methods.md#deprecated-signing-methods) that some dapps still
+might use.
 
 ## Example
 
