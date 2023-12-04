@@ -139,15 +139,10 @@ Site -->>- User: Done
 ```
 
 The companion dapp presents a user interface allowing the user to configure their custom account.
-The dapp uses the [`createAccount`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#createaccount)
-method of the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md),
-which calls the [`createAccount`](../reference/keyring-api/type-aliases/Keyring.md#createaccount)
-method of the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface, creating an
-account based on the parameters passed to the method.
+The dapp creates an account using [`keyring_createAccount`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#createaccount).
 
 The Snap keeps track of the accounts that it creates using [`snap_manageState`](../reference/rpc-api.md#snap_managestate).
-Once the Snap has created an account, it notifies MetaMask using the
-[`createAccount`](../reference/rpc-api.md#createaccount) sub-method of
+Once the Snap has created an account, it notifies MetaMask using
 [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts).
 
 Once the Snap has created an account, that account can be used to sign messages and transactions.
@@ -202,10 +197,9 @@ The flow starts when a user or dapp initiates a [sign request](#supported-signin
 At that point, MetaMask detects that this interaction is requested for an account controlled by the
 Keyring Snap.
 
-After the user approves the transaction in MetaMask, MetaMask calls the
-[`submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
-[`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface, which receives the original
-RPC request and returns a
+After the user approves the transaction in MetaMask, MetaMask calls
+[`keyring_submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest), which
+receives the original RPC request and returns a
 [`SubmitRequestResponse`](../reference/keyring-api/variables/SubmitRequestResponseStruct.md)
 with `pending` set to `false`, and `result` set to the requested signature.
 
@@ -246,7 +240,7 @@ alt There is a redirect URL
 end
 deactivate MetaMask
 
-Site ->>+ Snap: keyring_getRequests(id)
+Site ->>+ Snap: keyring_getRequest(id)
 Snap -->>- Site: request
 
 Site ->> Site: Custom logic to handle request
@@ -264,8 +258,7 @@ Dapp -->>- User: Done
 
 The flow starts the same way as the [synchronous flow](#synchronous-transaction-flow): a user or
 dapp initiates a [sign request](#supported-signing-methods).
-After approval, the [`submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest)
-method of the Snap's [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface is called.
+After approval, MetaMask calls [`keyring_submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest).
 
 Since the Snap doesn't answer the request directly, it stores the pending request in its internal
 state using [`snap_manageState`](../reference/rpc-api.md#snap_managestate).
@@ -274,22 +267,16 @@ be handled asynchronously.
 This response can optionally contain a redirect URL that MetaMask will open in a new tab to allow
 the user to interact with the Snap companion dapp.
 
-The companion dapp gets the Snap's pending requests using the
-[`getRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#getrequest)
-method of the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md).
-It resolves the request using the
-[`approveRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest)
-method of the [`KeyringSnapRpcClient`](../reference/keyring-api/classes/KeyringSnapRpcClient.md),
-which calls the [`approveRequest`](../reference/keyring-api/type-aliases/Keyring.md#approverequest)
-method of the [`Keyring`](../reference/keyring-api/type-aliases/Keyring.md) interface.
-This method receives the request's ID and final result.
-It resolves the pending request using the [`submitResponse`](../reference/rpc-api.md#submitresponse)
-sub-method of [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts), notifying
-MetaMask of the result.
+The companion dapp gets the Snap's pending request using
+[`keyring_getRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#getrequest).
+It resolves the request using
+[`keyring_approveRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest),
+and the Snap resolves the request using [`snap_manageAccounts`](../reference/rpc-api.md#snap_manageaccounts),
+notifying MetaMask of the result.
 
 ## Supported signing methods
 
-A Keyring Snap should implement support for handling the [`personal_sign`](/wallet/reference/personal_sign)
+A Keyring Snap can implement support for handling the [`personal_sign`](/wallet/reference/personal_sign)
 and [`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4) Ethereum signing methods.
 
 If the Snap receives an [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction) request, the
@@ -299,7 +286,7 @@ That is, the Snap is responsible for providing the signature in the response, an
 responsible for broadcasting the transaction.
 
 The Snap can also implement support for [deprecated signing
-methods](../../wallet/concepts/signing-methods.md#deprecated-signing-methods) that some dapps still
+methods](/wallet/concepts/signing-methods/#deprecated-signing-methods) that some dapps still
 might use.
 
 ## Example

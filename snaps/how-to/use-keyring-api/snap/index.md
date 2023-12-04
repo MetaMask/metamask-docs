@@ -47,7 +47,7 @@ Specify the following [permissions](../../request-permissions.md) in your Snap m
 "initialPermissions": {
   "endowment:keyring": {
     "allowedOrigins": [
-      "https://metamask.github.io"
+      "https://<dapp domain>"
     ]
   },
   "endowment:rpc": {
@@ -58,9 +58,12 @@ Specify the following [permissions](../../request-permissions.md) in your Snap m
 },
 ```
 
+Add a list of URLs of dapps allowed to call Keyring API methods on your Snap using the
+[`endowment:keyring`](../../../reference/permissions.md#endowmentkeyring) permission.
+
 ### 3. Implement the Keyring API
 
-Implement the [Keyring API methods called by MetaMask] in your Snap:
+Implement the [required Keyring API methods](security.md#limit-the-methods-exposed-to-dapps) in your Snap:
 
 ```typescript
 class MySnapKeyring implements Keyring {
@@ -196,7 +199,8 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
 
 ### 6. Expose the Keyring API
 
-Create a handler function to expose the Keyring API methods to MetaMask and your dapp:
+Create a handler function using the `onKeyringRequest` export to expose the Keyring API methods to
+MetaMask and your dapp:
 
 ```typescript
 export const onKeyringRequest: OnKeyringRequestHandler = async ({
