@@ -3102,6 +3102,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@segment/snippet@npm:^4.13.2":
+  version: 4.16.2
+  resolution: "@segment/snippet@npm:4.16.2"
+  dependencies:
+    "@ndhoule/map": ^2.0.1
+  checksum: b6552be6df431a32f91a1d848bdad264a74bd7448e702a3465489b163d81ad429fca12b2e763d140cb75866e415f2822a67c98e0d8636f338f0003ab97e1d0c7
+  languageName: node
+  linkType: hard
+
 "@sentry/browser@npm:6.19.7":
   version: 6.19.7
   resolution: "@sentry/browser@npm:6.19.7"
