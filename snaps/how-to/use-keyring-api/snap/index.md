@@ -3,15 +3,15 @@ description: Get started by creating a Keyring Snap.
 sidebar_position: 1
 ---
 
-# Create a Keyring Snap
+# Create an account management Snap
 
-Create a Keyring Snap to connect to custom EVM accounts.
+Create an account management Snap to connect to custom EVM accounts.
 
 :::flaskOnly
 :::
 
 :::tip see also
-- [Keyring Snap security guidelines](security.md)
+- [Account management Snap security guidelines](security.md)
 - [Use the Keyring API from a dapp](../dapp.md)
 - [About the Keyring API](../../../concepts/keyring-api.md)
 - [Keyring API reference](../../../reference/keyring-api/index.md)
@@ -21,7 +21,7 @@ Create a Keyring Snap to connect to custom EVM accounts.
 
 - Set up a Snap.
   See the [Snaps quickstart](../../../get-started/quickstart.md) and [how to develop a Snap](../../develop-a-snap.md).
-- Read the [Keyring Snap security guidelines](security.md).
+- Read the [account management Snap security guidelines](security.md).
 
 ## Steps
 
@@ -214,16 +214,16 @@ export const onKeyringRequest: OnKeyringRequestHandler = async ({
 
 ### 7. Create a companion dapp
 
-Create a companion dapp to provide a user interface for your Keyring Snap.
+Create a companion dapp to provide a user interface for your account management Snap.
 See the [example Snap companion dapp source code](https://github.com/MetaMask/snap-simple-keyring/tree/main/packages/site)
 for more information.
 
 ## Next steps
 
-Now that you've created a Keyring Snap and a user interface for it, you can
+Now that you've created an account management Snap and a user interface for it, you can
 [call the Keyring API methods from your dapp](../dapp.md) to create and interact with custom EVM accounts.
 
 ## Example
 
-See the [example Keyring Snap source code](https://github.com/MetaMask/snap-simple-keyring/tree/main/packages/snap)
+See the [example account management Snap source code](https://github.com/MetaMask/snap-simple-keyring/tree/main/packages/snap)
 for more information.

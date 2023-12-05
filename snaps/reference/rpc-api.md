@@ -601,7 +601,7 @@ await snap.request({
 :::flaskOnly
 :::
 
-Manages [Keyring Snap](../concepts/keyring-api.md) accounts.
+Manages [account management Snap](../concepts/keyring-api.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
 - [`createAccount`](#createaccount)
