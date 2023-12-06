@@ -138,6 +138,29 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
+Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
+Calls from any other origins will be rejected. 
+
+Specify this caveat in the manifest file as follows: 
+
+```json
+{
+  "initialPermissions": {
+    "endowment:rpc": { 
+      "allowedOrigins": [
+        "metamask.io", 
+        "consensys.io",
+        "npm:@metamask/example-snap"
+      ] 
+    }
+  }
+}
+```
+
+:::note
+If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
+:::
+
 ### endowment:transaction-insight
 
 To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
