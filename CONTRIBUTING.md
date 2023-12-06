@@ -182,3 +182,8 @@ If you need to test analytics events in your local development enviorment be sur
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"
 ```
+Then build the project in production mode using the following command:
+
+```bash
+yarn build && yarn serve
+```
