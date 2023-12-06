@@ -36,17 +36,17 @@ _Guidelines related to user notifications and authorizations._
 - **Limit Access to Sensitive Methods**: If you are building a Snap that has sensitive RPC methods, you probably want to have a dedicated dapp that is used as an "admin interface" to interact with your Snap's sensitive methods. There are two ways to do this: 
   
   1. You can restrict the `endowment:rpc` permission to specific URLs using the `allowedOrigins` caveat: 
-    ```JavaScript
+    ```json
     {
       "initialPermissions": {
         "endowment:rpc": {
-          "allowedOrigins": ['metamask.io', 'consensys.io']
+          "allowedOrigins": ["metamask.io", "consensys.io"]
         }
       }
     } 
     ```
 
-    In this example, all RPC methods will only be callable by dapps hosted at `https://metamask.io` or `https://consensys.io` (and any subdomains). Calls from any other website will fail.
+    In this example, the RPC methods will only be callable by dapps hosted at `https://metamask.io` or `https://consensys.io` (and any subdomains). Calls from any other website, or any Snap, will be rejected.
   
   2. You can filter specific methods to specific URLs using the built-in [URL library](https://developer.mozilla.org/en-US/docs/Web/API/URL): 
 
