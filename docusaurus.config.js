@@ -4,6 +4,7 @@
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
+const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -374,6 +375,15 @@ const config = {
         },
       },
     ],
+    isProd ? 
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+        load: {cookie: { sameSite: 'None', secure: true}},
+        page: true,
+      },
+    ] : null,
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
