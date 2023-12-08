@@ -1,150 +1,224 @@
 ---
-sidebar_label: React Native
+sidebar_label: Expo and React Native
 sidebar_position: 4
 ---
 
-# Use MetaMask SDK with React Native
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React Native dapp to enable your
-users to easily connect to the MetaMask browser extension and MetaMask Mobile.
+# Use MetaMask SDK with Expo and React Native
 
-:::tip Example
-See the [example React Native dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your Expo or React Native dapp to
+enable your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
 
-- A [React Native](https://reactnative.dev/docs/0.71/getting-started) project set up with React Native version 0.71 or above
 - [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or above
-- [Yarn](https://yarnpkg.com/getting-started/install) or
-  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## Steps
 
-### 1. Install the SDK
+### 1. Create a new Expo or React project
 
-:::info Coming soon
-A `metamask-react-native-sdk` package that simplifies the installation of the SDK for React Native
-dapps is coming soon.
-:::
+<Tabs>
+  <TabItem value="Expo">
 
-Use [`rn-nodeify`](https://github.com/tradle/rn-nodeify) to install the SDK.
-In your project directory, install `rn-nodeify`:
+  ```bash
+  npx create-expo-app devexpo --template
+  ```
 
-```bash
-yarn add --dev rn-nodeify
-```
+  </TabItem>
+  <TabItem value="React Native">
 
-or
+  ```bash
+  npx react-native@latest init MyProject
+  ```
 
-```bash
-npm i --dev rn-nodeify
-```
+  </TabItem>
+</Tabs>
 
-Install the `rn-nodeify` libraries:
+### 2. Install the SDK and its dependencies
 
-```bash
-yarn add react-native-crypto
-yarn add react-native-randombytes
-yarn add crypto
-yarn add process
-yarn add stream
-yarn add events
-```
+<Tabs>
+  <TabItem value="Expo">
 
-In your project's `package.json` file, insert the `rn-nodeify` command into the postinstall script:
+  ```bash
+  npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
+  ```
 
-```json title="package.json"
-"scripts": {
-  ...,
-  "postinstall": "rn-nodeify --install 'crypto,process,stream,events' --hack"
-}
-```
+  </TabItem>
+  <TabItem value="React Native">
 
-`rn-nodeify` creates a `shim.js` file in your project root directory.
-Import it in the root file of your application:
+  ```bash
+  npm install eciesjs @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-react-native react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values
+  ```
 
-```bash
-import './shim'
-```
+  </TabItem>
+</Tabs>
 
-Install `react-native-background-timer`:
+### 3. Update the Metro configuration file
+
+In Expo, run the following command to create a default Metro configuration file:
 
 ```bash
-yarn add react-native-background-timer
-
-cd ios && pod install && cd ..
+npx expo customize metro.config.js
 ```
 
-Install MetaMask SDK:
+In Expo and React Native, update the default Metro configuration file to the following:
+
+<Tabs>
+  <TabItem value="Expo">
+
+  ```javascript title="metro.config.js"
+  const config = getDefaultConfig(__dirname);
+
+  config.resolver.extraNodeModules = {
+    ...require("node-libs-expo"),
+  };
+
+  config.transformer.getTransformOptions = async () => ({
+    transform: {
+      experimentalImportSupport: false,
+      inlineRequires: true,
+    },
+  });
+
+  module.exports = config;
+  ```
+
+  </TabItem>
+  <TabItem value="React Native">
+
+  ```javascript title="metro.config.js"
+  const {
+    getDefaultConfig,
+    mergeConfig,
+  } = require("@react-native/metro-config");
+
+  const defaultConfig = getDefaultConfig(__dirname);
+
+  const config = {
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
+    resolver: {
+      extraNodeModules: {
+        ...require("node-libs-react-native"),
+      },
+    },
+  };
+
+  module.exports = mergeConfig(defaultConfig, config);
+  ```
+
+  </TabItem>
+</Tabs>
+
+### 4. Add import statements to the entry file
+
+<Tabs>
+  <TabItem value="Expo">
+
+  ```javascript title="App.tsx"
+  import "node-libs-expo/globals";
+  import "react-native-url-polyfill/auto";
+  import "react-native-get-random-values";
+  ```
+
+  </TabItem>
+  <TabItem value="React Native">
+
+  ```javascript title="index.js or App.tsx"
+  import "node-libs-react-native/globals";
+  import "react-native-url-polyfill/auto";
+  import "react-native-get-random-values";
+  ```
+
+  </TabItem>
+</Tabs>
+
+### 5. (Expo only) Prebuild the project
 
 ```bash
-yarn add @metamask/sdk
+npx expo prebuild
 ```
 
-Run the postinstall script after everything is installed:
+### 6. Run the project
 
-```bash
-yarn postinstall
-```
+<Tabs>
+  <TabItem value="Expo">
 
-Finally, install the necessary pods that come with the libraries:
+  ```bash
+  npx expo run:android
+  npx expo run:ios
+  ```
 
-```bash
-cd ios && pod install && cd ..
-```
+  </TabItem>
+  <TabItem value="React Native">
 
-### 2. Use the SDK
+  ```bash
+  npx react-native run-android
+  npx react-native run-ios
+  ```
 
-Import, instantiate, and use the SDK by adding something similar to the following to your project script:
+  </TabItem>
+</Tabs>
+
+### 7. Use the SDK
+
+Initialize and use the SDK in your Expo or React Native project using the `useSDK` hook.
+The following code snippets demonstrate how to use the hook.
+
+Import the hook:
 
 ```javascript
-import MetaMaskSDK from '@metamask/sdk';
-import { Linking } from 'react-native';
-import BackgroundTimer from 'react-native-background-timer';
-
-const MMSDK = new MetaMaskSDK({
-  openDeeplink: (link) => {
-    Linking.openURL(link); // Use React Native Linking method or another way of opening deeplinks.
-  },
-  timer: BackgroundTimer, // To keep the dapp alive once it goes to background.
-  dappMetadata: {
-    name: 'My dapp', // The name of your dapp.
-    url: 'https://mydapp.com', // The URL of your website.
-  },
-});
-
-const ethereum = MMSDK.getProvider();
-
-const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+import { useSDK } from "@metamask/sdk-react";
 ```
 
-You can configure the SDK using any [options](../../../../reference/sdk-js-options.md) and call any
-[provider API methods](../../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
-[`ethereum.request(args)`](../../../../reference/provider-api.md#windowethereumrequestargs) first,
-since it prompts the installation or connection popup to appear.
-
-:::note Important SDK options
-- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
-  about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../display/custom-modals.md).
-- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
-:::
-
-You can use [EthersJS](https://docs.ethers.io/v5/getting-started/) with your React Native app:
+Initialize the SDK in your main component:
 
 ```javascript
-const provider = new ethers.providers.Web3Provider(ethereum);
-
-// Get the balance of an account (by address or ENS name, if supported by network).
-const balance = await provider.getBalance(ethereum.selectedAddress);
-
-// Often you need to format the output to something more user-friendly,
-// such as in ether (instead of wei).
-const balanceInETH = ethers.utils.formatEther(balance);
-// '0.182826475815887608'
+const { connect, disconnect, account, chainId, ethereum } = useSDK();
 ```
+
+Connect to MetaMask:
+
+```javascript
+const connectWallet = async () => {
+  try {
+    await connect();
+  } catch (error) {
+    console.error("Failed to connect wallet:", error);
+  }
+};
+```
+
+Handle your dapp's state:
+
+```javascript
+useEffect(() => {
+  // Use the 'account' and 'chainId' returned by 'useSDK'
+  if (account && chainId) {
+    // Handle account and network changes
+  }
+}, [account, chainId]);
+```
+
+Disconnect from MetaMask:
+
+```javascript
+const disconnectWallet = async () => {
+  await disconnect();
+};
+```
+
+## Examples
+
+See the [example Expo dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)
+and the [example React Native dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
+in the JavaScript SDK GitHub repository for more detailed implementations.
