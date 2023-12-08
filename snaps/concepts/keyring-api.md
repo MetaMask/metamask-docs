@@ -278,14 +278,10 @@ notifying MetaMask of the result.
 
 ## Supported signing methods
 
-An account management Snap can implement support for handling the [`personal_sign`](/wallet/reference/personal_sign)
-and [`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4) Ethereum signing methods.
-
-If the Snap receives an [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction) request, the
-Snap should treat the request like an
-[`eth_signTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_signtransaction) request.
-That is, the Snap is responsible for providing the signature in the response, and MetaMask is
-responsible for broadcasting the transaction.
+An account management Snap can implement support for handling the [`personal_sign`](/wallet/reference/personal_sign),
+[`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4), and
+[`eth_signTransaction`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_signtransaction)
+Ethereum signing methods.
 
 The Snap can also implement support for [deprecated signing
 methods](/wallet/concepts/signing-methods/#deprecated-signing-methods) that some dapps still
