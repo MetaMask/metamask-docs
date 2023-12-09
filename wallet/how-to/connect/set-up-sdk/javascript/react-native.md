@@ -18,7 +18,9 @@ enable your users to easily connect to the MetaMask browser extension and MetaMa
 
 ## Steps
 
-### 1. Create a new Expo or React project
+### 1. Create a new project
+
+Create a new Expo or React Native project using the following commands:
 
 <Tabs>
   <TabItem value="Expo">
@@ -37,7 +39,9 @@ enable your users to easily connect to the MetaMask browser extension and MetaMa
   </TabItem>
 </Tabs>
 
-### 2. Install the SDK and its dependencies
+### 2. Install the SDK
+
+Install the SDK and its dependencies using the following commands:
 
 <Tabs>
   <TabItem value="Expo">
@@ -56,15 +60,15 @@ enable your users to easily connect to the MetaMask browser extension and MetaMa
   </TabItem>
 </Tabs>
 
-### 3. Update the Metro configuration file
+### 3. Update the configuration file
 
-In Expo, run the following command to create a default Metro configuration file:
+If you're using Expo, run the following command to create a default Metro configuration file:
 
 ```bash
 npx expo customize metro.config.js
 ```
 
-In Expo and React Native, update the default Metro configuration file to the following:
+In Expo or React Native, update the default Metro configuration file to the following:
 
 <Tabs>
   <TabItem value="Expo">
@@ -119,7 +123,9 @@ In Expo and React Native, update the default Metro configuration file to the fol
   </TabItem>
 </Tabs>
 
-### 4. Add import statements to the entry file
+### 4. Add import statements
+
+Add the following import statements to the Expo or React Native entry file:
 
 <Tabs>
   <TabItem value="Expo">
@@ -142,13 +148,17 @@ In Expo and React Native, update the default Metro configuration file to the fol
   </TabItem>
 </Tabs>
 
-### 5. (Expo only) Prebuild the project
+### 5. Prebuild the project
+
+If you're using Expo, prebuild the project using the following command:
 
 ```bash
 npx expo prebuild
 ```
 
 ### 6. Run the project
+
+Run the Expo or React Native project on Android or iOS using the following commands:
 
 <Tabs>
   <TabItem value="Expo">
