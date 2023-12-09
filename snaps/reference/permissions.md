@@ -122,21 +122,35 @@ This permission grants a Snap access to JSON-RPC requests sent to the Snap, usin
 [`onRpcRequest`](exports.md#onrpcrequest) method.
 
 This permission requires an object with a `snaps` or `dapps` property (or both), to signal if the
-snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
+Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
+
+Alternatively, use the `allowedOrigins` caveat to restrict the Snap to receive JSON-RPC requests
+from specific URLs.
+We recommend using `allowedOrigins` for Snaps with sensitive RPC methods.
 
 Specify this permission in the manifest file as follows:
 
 ```json
-{
-  "initialPermissions": {
-    "endowment:rpc": {
-      "dapps": true,
-      "snaps": false
-    }
+"initialPermissions": {
+  "endowment:rpc": {
+    "dapps": true
   }
 }
 ```
+
+or
+
+```json
+"initialPermissions": {
+  "endowment:rpc": {
+    "allowedOrigins": ["metamask.io", "consensys.io"]
+  }
+}
+```
+
+In this example, RPC methods are only callable by sites hosted at `https://metamask.io` or
+`https://consensys.io` (and any subdomains).
 
 ### endowment:transaction-insight
 

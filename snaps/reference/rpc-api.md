@@ -428,16 +428,16 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 This method is only callable by Snaps.
 
-:::caution 
-Coin type 60 is reserved for MetaMask accounts and blocked for Snaps. 
-If you wish to connect to MetaMask accounts in a Snap, use 
-[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and 
-`eth_requestAccounts`.
-:::
-
 #### Parameters
 
 An object containing `coinType`, the BIP-44 coin type to get the entropy for.
+
+:::caution
+Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
+If you wish to connect to MetaMask accounts in a Snap, use
+[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
+[`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+:::
 
 #### Returns
 
@@ -983,6 +983,11 @@ console.log(result); // In this example, the result is a boolean.
 <!--/tabs-->
 
 ### wallet_invokeSnap
+
+:::caution
+This method is deprecated.
+Use [`wallet_requestSnaps`](#wallet_requestsnaps) instead.
+:::
 
 Invokes the specified JSON-RPC method of the specified Snap.
 The Snap must be installed and the caller must have the permission to communicate with the Snap, or
