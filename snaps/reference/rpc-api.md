@@ -984,11 +984,6 @@ console.log(result); // In this example, the result is a boolean.
 
 ### wallet_invokeSnap
 
-:::caution
-This method is deprecated.
-Use [`wallet_requestSnaps`](#wallet_requestsnaps) instead.
-:::
-
 Invokes the specified JSON-RPC method of the specified Snap.
 The Snap must be installed and the caller must have the permission to communicate with the Snap, or
 the request is rejected.

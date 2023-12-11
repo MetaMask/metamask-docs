@@ -52,30 +52,21 @@ The following are guidelines for handling and signing transactions:
 
 The following are guidelines for user notifications and authorizations:
 
-- **Transparent state changes** - Notify the user about important state changes.
-  Provide a prompt where the user can accept or reject the action.
-
-- **Consentful network/account switching** - Ensure the user authorizes switching networks or accounts.
-
-- **Ensure the user is in control** - When modifying or reading internal state, display a
-  confirmation dialog to inform the user of the request and allow them to accept or reject the action.
-
-- **Consentful transaction signing** - Before signing a transaction, prompt the user with the
-  transaction details and provide an option to accept or reject the signature.
-  If your Snap is designed to allow automatic transactions, prompt the user before enabling this and
-  make sure they know how it works.
-  Also provide a way to disable it.
-
-- **Consentful account management** - When deriving or generating key pairs, accounts, or smart
-  contracts, inform the user and ask for their consent.
+- **Transparent and consentful actions** - Before performing any of the following actions, provide a
+  prompt that displays detailed information about the action and asks the user to reject or accept it:
+  - **Modifying or reading state.** (In general, notify the user about any state changes.)
+  - **Switching networks or accounts.**
+  - **Deriving or generating key pairs, accounts, or smart contracts.**
+  - **Signing transactions.** (If your Snap is designed to allow automatic transactions, prompt the
+    user before enabling this and make sure they know how it works.
+    Also provide a way to disable it.)
 
 - **Protect user keys** - Do not allow your Snap to return all user wallet addresses to the
   site, even public keys.
-  As per MetaMask behavior, only authorized/connected addresses are exposed to the site.
   Users should choose and authorize the addresses to expose.
 
 - **Limit access to sensitive methods** - When building a Snap with sensitive RPC methods,
-  use a dedicated dapp as an "admin interface" to interact with your Snap's sensitive methods.
+  use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
   There are two ways to do this:
   
   1. Restrict the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission to specific
@@ -106,108 +97,96 @@ The following are guidelines for user notifications and authorizations:
 
 ## Responsible information management
 
-The following are guidelines for handling sensitive data:
+The following are guidelines for handling sensitive or personally identifiable information such as
+user IPs, emails, passwords, and private keys:
 
-- **Logging** - Remove all logs to the JavaScript console that contain sensitive information, such
-  as private keys.
+- **Logging** - Remove all logs to the JavaScript console that contain sensitive information.
   Disable all logging before publishing your Snap.
 
-- **Beware of errors** - Be cautious about potential errors/exceptions that could write sensitive
-  information to the console.
-  Review parts of your code where errors/exceptions could be raised.
-  In these cases, error stacks could be written to the console with sensitive information (e.g., a
-  private key).
-  This information could then be captured in data logs, or the user could be phished into copying
-  that console error to be sent to a malicious actor.
+- **Errors** - Review parts of your code where errors and exceptions can be raised.
+  In some cases, error stacks can be written to the console with sensitive information.
+  This information can be captured in data logs, or a malicious actor can phish the user into
+  copying and sending the error.
 
-- **Keep private keys private** - Avoid retrieving the user's private key from the Snap unless
+- **Private keys** - Avoid retrieving the user's private key from the Snap unless
   absolutely necessary, such as to sign a transaction.
-  If all you need is the user's public key, request it with the method: `snap_getBip32PublicKey`,
+  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/rpc-api.md#snap_getbip32publickey)
   instead of deriving it from the private key.
   Never return the private key in an RPC method to a dapp or another Snap.
-  If you want to give users a way to view their private key, you should display it in a dialog
-  rather than exposing it to a dapp.
+  To give users a way to view their private key, display it in a dialog.
 
-- **Limit exposure** - Avoid accidentally returning sensitive data from a method.
-  In some cases, a developer may have a method that is supposed to return sensitive data only in
-  specific cases, but due to a typo or bad logic, they end up returning the sensitive data
-  incorrectly, causing potential data leaks.
-  Even if a Snap has a legitimate reason for allowing a user to export sensitive data such as a
-  password or private key, the developer should still take extra measures to prevent that
-  information from being revealed carelessly (similar to how MetaMask makes it hard to reveal a
-  Secret Recovery Phrase and hard for an observer looking over a user’s shoulder to see it).
-  _When in doubt, choose friction over convenience for sensitive data._
+- **Limit exposure** - Avoid accidentally returning sensitive information from a method.
+  For example, you might have a method that intends to return sensitive information only in specific
+  cases, but due to a typo or bad logic, it returns the information incorrectly, leaking data.
+  Even if you have a legitimate reason for allowing a user to export sensitive information, you
+  should prevent that information from being revealed carelessly (similar to how MetaMask makes it
+  difficult to reveal a Secret Recovery Phrase and for an observer looking over a user's shoulder to
+  see it).
+
+When in doubt, choose friction over convenience for sensitive information.
 
 ## Input validation
 
-The following guidelines are related to validating RPC parameters and handling values:
+The following are guidelines for validating RPC parameters and handling values:
 
-- **User input validation** - Always validate and sanitize user inputs coming into the Snap-exposed
-  RPC methods.
-  Be vigilant about validation.
-  Never assume that a parameter is safe to use.
-  If not, and those values are used inside the logic of your Snap methods, a dapp or a user can
+- **Validate user inputs** - Validate and sanitize user inputs coming into the Snap-exposed RPC methods.
+  Never assume a parameter is safe to use.
+  If unvalidated user inputs are used inside the logic of your Snap methods, a dapp or a user can
   exploit that logic in an unsafe way.
 
-- **Obtain values from MetaMask** - Always obtain values such as chain ID or address from MetaMask
-  instead of the dapp.
-  This is because a dapp could display incorrect values, or a malicious one could phish the user by
-  showing different values with the intention of tricking them into performing actions they wouldn't
-  want to do (for example, signing a transaction for a network they didn't intend to broadcast the
-  transaction to).
-  Furthermore, if the dapp is providing values that do not match the values from MetaMask, you
-  should warn the user in your confirmation flow.
+- **Get values from MetaMask** - Get values such as chain ID or address from MetaMask instead
+  of the dapp.
+  A dapp can accidentally or maliciously display incorrect values, tricking users into performing
+  certain actions (for example, signing a transaction for a network to which they didn't intend to
+  broadcast the transaction).
+  If a dapp provides values that do not match the values from MetaMask, warn the user in your
+  confirmation flow.
 
-- **Use `copyable` for safe disclosures** - When displaying arbitrary content, use
-  [`copyable`](../how-to/use-custom-ui.md/#copyable) instead of `text`.
-  A common use case for a Snap dialog is to show a confirmation with some arbitrary content, such as
-  for signing a message.
-  One common pitfall when using dialogs is that the input may contain special characters that will
-  render as Markdown and could mislead the user.
+- **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
+  as for signing a message, use the [`copyable`](../how-to/use-custom-ui.md/#copyable) user
+  interface component instead of `text`.
+  When using dialogs, the input may contain special characters that render as Markdown and can
+  mislead the user.
   For example: 
 
   ![Example not using copyable with Markdown rendering](../assets/copyable-example-1.png)
 
-  The problem is that the special characters `*` and `_` may render Markdown formatting and thus
-  what the user sees will not match the content.
+  The special characters `*` and `_` render Markdown formatting, so what the user sees does not
+  match the content.
   To avoid this, use `copyable` instead:
 
   ![Example using copyable with clean rendering](../assets/copyable-example-2.png)
 
-  `copyable` does not render Markdown and has the added benefit that the user can click to copy the content.
+  `copyable` does not render Markdown and has the added benefit that the user can select to copy the content.
   Also, the formatting provides a visual delineator to separate arbitrary input or fields from user
   interface text.
 
-- **Transaction data size check** - Always check the size of a transaction data's function arguments.
-  The encoded transaction data includes the function signature and its arguments.
-  The ABI specification requires that all arguments, regardless of their types, must be 32 bytes in size.
-  If an argument does not have 32 bytes in an ABI-encoded transaction data, the calling contract may
-  behave differently depending on the contract compiler version.
-  For instance, Solidity 0.5.0 treats these non-aligned arguments as invalid and reverts the
-  function call.
-  However, versions before Solidity 0.5.0 automatically append zeros at the end of the transaction
-  data to ensure all arguments are 32-byte sized.
-  An attacker could exploit this feature to bypass any security checks implemented in the
-  corresponding contract function that reads those function arguments.
+- **Check transaction data size** - Check the size of the ABI-encoded transaction data's function arguments.
+  The ABI specification requires all arguments, regardless of their type, to be 32 bytes.
+  If an argument is not 32 bytes, the calling contract's behavior might depend on the contract
+  compiler version.
+  For example, Solidity 0.5.0 treats these non-aligned arguments as invalid and reverts the function call.
+  Older Solidity versions automatically append zeros at the end of the transaction data to ensure
+  all arguments are 32 bytes.
+  An attacker can exploit this feature to bypass security checks implemented in the corresponding
+  contract function that reads those function arguments.
 
 ## Deprecated methods
 
 Avoid using the following deprecated methods:
 
-- Don't use `wallet_enable` or `wallet_invokeSnap`, which are deprecated in favor of
-  [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
+- `wallet_enable`, which is deprecated in favor of [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
 
-- Don't use `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/rpc-api.md#snap_dialog).
+- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/rpc-api.md#snap_dialog).
 
-- Don't use `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in
-  MetaMask Flask.
+- `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in MetaMask Flask.
 
 ## Coding best practices
 
 The following are coding security tips and warnings:
 
-- **SES compatibility** - Always use packages or libraries that are compatible with SES (hardened JavaScript).
-  If not, you may encounter errors that require [patching a specific
+- **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
+  If you don't, you might encounter errors that require [patching a specific
   dependency](../how-to/troubleshoot.md/#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
@@ -216,18 +195,15 @@ The following are coding security tips and warnings:
   In the Snaps execution environment, the precision of these timers has been reduced to prevent this.
 
 - **Unsafe cryptographic libraries** - Avoid using unsafe cryptographic libraries.
-  `Math.random` is not sufficiently random for generating cryptographic hashes, which can expose a
-  user to reverse engineering or brute-forcing keys in the future.
-  Usage of `Math.random` is discouraged in Snaps for any critical random number generation.
-  Insufficient hashing algorithms such as `md5` or `sha2` should also not be used.
-  Use safe hashing algorithms such as `sha256`.
-  Also, avoid using custom or unproven cryptography methods or libraries.
-  _Developers should never roll their own cryptography_ or use cryptographic methods that are
-  insufficiently tested.
-  Consider using [`snap_getEntropy`](../reference/rpc-api.md/#snap_getentropy) for entropy and
-  consider using the built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
-  or [Noble cryptography libraries](https://paulmillr.com/noble/).
-  _When in doubt, choose audited, widely used libraries over obscure, untested implementations._
+  Do not use `Math.random`, which is not sufficiently random for generating cryptographic hashes and
+  can expose a user to reverse engineering or brute-forcing keys in the future.
+  Do not use insufficient hashing algorithms such as `md5` or `sha2`.
+  Do not roll your own cryptography or use custom or unproven cryptography methods or libraries.
+
+  We recommend using [`snap_getEntropy`](../reference/rpc-api.md/#snap_getentropy) for entropy, the
+  built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) or
+  [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
+  Choose audited, widely used libraries over obscure, untested implementations.
 
 ## Dependency management
 
@@ -235,71 +211,37 @@ The following are guidelines for securing your supply chain:
 
 - **Pin npm package dependencies** - Pin all npm package dependencies in the Snap's dependency tree
   to exact versions.
-  If not done, a supply chain attack could be used to trick you into including a malicious version
-  of that package instead of the original, legitimate one.
+  If you don't, a supply chain attacker can trick you into including a malicious version of a
+  package instead of the original, legitimate one.
+  You can quickly check the status of your dependencies by running `npm audit` in your Snap directory.
 
-- **Secure your stack** - Your Snap's companion dapp and any remote servers are part of your
-  security model.
-  Consider using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of your
-  stack and follow security best practices for your website or server as well. 
+- **Secure your stack** - Your Snap companion dapp and any remote servers are part of your security model.
+  We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of
+  your stack and following security best practices for your website or server.
 
-## Publishing and Serving
+## Publishing and serving
 
 The following are guidelines for making your Snap available to users safely:
 
 - **Snap updates** - When serving a Snap from a particular website, make sure users are getting the
   latest version of your Snap.
-  Do not allow any actions on that website before reconnecting it to MetaMask and loading a new or
+  Do not allow any actions on the website before reconnecting it to MetaMask and loading a new or
   updated version of the Snap.
-  This will prevent users from using outdated versions of the snap that may have potential bugs and
+  This prevents users from using outdated versions of the Snap that may have potential bugs and
   security issues.
 
 - **Snap publication** - Ensure correct publication of the Snap.
-  You only need to publish the `packages/snap` folder, not, for example, the entire GitHub
-  repository for a project.
+  Only publish the `packages/snap` folder, and not the entire GitHub repository for a project.
 
-- **Other wallet extensions** - Be aware that if the user has other wallet extensions installed in
-  the browser, a call to the MetaMask provider `window.ethereum` can be overridden by them.
-  Instead of relying on `window.ethereum`, use EIP-6963 to access the MetaMask provider in a
-  reliable way: [Connecting to Snaps with EIP-6963](https://github.com/MetaMask/snaps/discussions/2001). 
+- **Other wallet extensions** - Be aware that if the user has other wallet browser extensions
+  installed, a call to the MetaMask provider `window.ethereum` can be overridden.
+  [Connect to Snaps using EIP-6963](https://github.com/MetaMask/snaps/discussions/2001) to reliably
+  access the MetaMask provider.
 
-## General rules
+## Conclusion
 
-In general, when developing new Snaps, you should always put yourself in the user’s shoes and
-consider their perspective and how they use MetaMask.
-You should always prioritize their privacy and the security of their assets.
+In general, when developing Snaps, put yourself in the user's shoes and consider how they use MetaMask.
+Always prioritize their privacy and the security of their assets.
 
-- Always inform the user about any action happening in the Snap through the Snap UI, especially for
-  more sensitive actions.
-  This allows the user to decide whether to proceed with a particular action or not.
-  Avoid performing actions in the background, especially when dealing with Snap's state, private
-  keys, transaction signing, or a user's Personally Identifiable Information (PII).
-  For instance, a Snap RPC method that exports a user's private key without any feedback to the user
-  (and a way for them to deny it) is a bad practice.
-  A threat actor could exploit this to phish the user into exposing their private key without their knowledge.
-
-- When signing transactions, always warn the user and display all details of the transaction in a
-  clear and understandable format.
-  This allows the user to decide whether to sign it or not and helps prevent scams related to wallet drainage.
-
-- Always display the "Origin" domain of the dapp that initiated an action in the Snap.
-  This clarifies to the user which dapp is requesting a particular action in the Snap.
-
-- Protect user info and privacy by being careful about what you are sending to external servers.
-  This includes user IPs, emails, and any PII that can uniquely identify the user.
-  Include a privacy policy for maximum transparency.
-
-- Only manipulate a user's private key if strictly necessary, and especially avoid doing so when
-  dealing with key pairs already managed by MetaMask itself.
-
-- Always use the minimum necessary permissions.
-  This ensures no unforeseen security issues will arise related to "unused" permissions.
-
-- Always keep your Snap source code updated with the latest npm packages and always pin specific
-  versions for those packages.
-  This prevents possible security bugs that may arise in outdated versions of packages/libraries and
-  defends against supply chain attacks.
-  _You can quickly check the status of your dependencies by running `npm audit` in your Snap directory._
-
-_Have a security best practice not listed here?
-Share it in our [discussion board](https://github.com/MetaMask/snaps/discussions)._
+If you have any questions or a security best practice not listed here, post it in the
+[Snaps GitHub discussions](https://github.com/MetaMask/snaps/discussions).
