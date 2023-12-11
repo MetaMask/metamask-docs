@@ -1,7 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const codeTheme = require("prism-react-renderer/themes/dracula");
+const codeTheme = require("prism-react-renderer").themes.dracula;
+
 const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
 const isProd = process.env.NODE_ENV === 'production';
@@ -55,7 +56,6 @@ const config = {
           breadcrumbs: false,
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
-            require("remark-docusaurus-tabs"),
             [remarkCodesandbox, {
               mode: "iframe",
               autoDeploy: process.env.NODE_ENV === "production",
@@ -83,24 +83,21 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
-        remarkPlugins: [
-          require("remark-docusaurus-tabs"),
-        ],
-        admonitions: {
-          tag: ":::",
-          keywords: [
-            "info",
-            "success",
-            "danger",
-            "note",
-            "tip",
-            "warning",
-            "important",
-            "caution",
-            "security",
-            "flaskOnly",
-          ],
-        },
+        // admonitions: {
+        //   tag: ":::",
+        //   keywords: [
+        //     "info",
+        //     "success",
+        //     "danger",
+        //     "note",
+        //     "tip",
+        //     "warning",
+        //     "important",
+        //     "caution",
+        //     "security",
+        //     "flaskOnly",
+        //   ],
+        // },
       }),
     ],
     [
