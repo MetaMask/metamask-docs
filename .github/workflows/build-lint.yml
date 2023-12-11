@@ -2,6 +2,9 @@ name: Build and lint
 
 on:
   workflow_call:
+  secrets:
+      SEGMENT_ANALYTICS_KEY:
+        required: true
 
 jobs:
   prepare:
@@ -35,6 +38,8 @@ jobs:
           cache: 'yarn'
       - run: yarn --immutable --immutable-cache
       - run: yarn build
+        env:
+            SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
       - name: Require clean working directory
         shell: bash
         run: |

@@ -172,3 +172,18 @@ filesystem.
 See the
 [`remark-codesandbox` documentation](https://github.com/kevin940726/remark-codesandbox/#documentation)
 for more information.
+
+## Analytics
+
+The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables simple usage analytics to inform documentation improvements that may be needed.
+
+If you need to test analytics events in your local development enviorment be sure to export the appropriate key for the environment you are testing against before building and running the project:
+
+```bash
+export SEGMENT_ANALYTICS_KEY="<your key>"
+```
+Then build the project in production mode using the following command:
+
+```bash
+yarn build && yarn serve
+```
