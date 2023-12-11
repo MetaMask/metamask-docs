@@ -1,14 +1,14 @@
 ---
-sidebar_label: Expo and React Native
+sidebar_label: React Native and Expo
 sidebar_position: 4
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Use MetaMask SDK with Expo and React Native
+# Use MetaMask SDK with React Native and Expo
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your Expo or React Native dapp to
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React Native or Expo dapp to
 enable your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
@@ -20,20 +20,20 @@ enable your users to easily connect to the MetaMask browser extension and MetaMa
 
 ### 1. Create a new project
 
-Create a new Expo or React Native project using the following commands:
+Create a new React Native or Expo project using the following commands:
 
 <Tabs>
-  <TabItem value="Expo">
-
-  ```bash
-  npx create-expo-app devexpo --template
-  ```
-
-  </TabItem>
   <TabItem value="React Native">
 
   ```bash
   npx react-native@latest init MyProject
+  ```
+
+  </TabItem>
+  <TabItem value="Expo">
+
+  ```bash
+  npx create-expo-app devexpo --template
   ```
 
   </TabItem>
@@ -44,17 +44,17 @@ Create a new Expo or React Native project using the following commands:
 Install the SDK and its dependencies using the following commands:
 
 <Tabs>
-  <TabItem value="Expo">
-
-  ```bash
-  npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
-  ```
-
-  </TabItem>
   <TabItem value="React Native">
 
   ```bash
   npm install eciesjs @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-react-native react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values
+  ```
+
+  </TabItem>
+  <TabItem value="Expo">
+
+  ```bash
+  npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
   ```
 
   </TabItem>
@@ -68,29 +68,9 @@ If you're using Expo, run the following command to create a default Metro config
 npx expo customize metro.config.js
 ```
 
-In Expo or React Native, update the default Metro configuration file to the following:
+In React Native or Expo, update the default Metro configuration file to the following:
 
 <Tabs>
-  <TabItem value="Expo">
-
-  ```javascript title="metro.config.js"
-  const config = getDefaultConfig(__dirname);
-
-  config.resolver.extraNodeModules = {
-    ...require("node-libs-expo"),
-  };
-
-  config.transformer.getTransformOptions = async () => ({
-    transform: {
-      experimentalImportSupport: false,
-      inlineRequires: true,
-    },
-  });
-
-  module.exports = config;
-  ```
-
-  </TabItem>
   <TabItem value="React Native">
 
   ```javascript title="metro.config.js"
@@ -121,26 +101,46 @@ In Expo or React Native, update the default Metro configuration file to the foll
   ```
 
   </TabItem>
+  <TabItem value="Expo">
+
+  ```javascript title="metro.config.js"
+  const config = getDefaultConfig(__dirname);
+
+  config.resolver.extraNodeModules = {
+    ...require("node-libs-expo"),
+  };
+
+  config.transformer.getTransformOptions = async () => ({
+    transform: {
+      experimentalImportSupport: false,
+      inlineRequires: true,
+    },
+  });
+
+  module.exports = config;
+  ```
+
+  </TabItem>
 </Tabs>
 
 ### 4. Add import statements
 
-Add the following import statements to the Expo or React Native entry file:
+Add the following import statements to the React Native or Expo entry file:
 
 <Tabs>
-  <TabItem value="Expo">
+  <TabItem value="React Native">
 
-  ```javascript title="App.tsx"
-  import "node-libs-expo/globals";
+  ```javascript title="index.js or App.tsx"
+  import "node-libs-react-native/globals";
   import "react-native-url-polyfill/auto";
   import "react-native-get-random-values";
   ```
 
   </TabItem>
-  <TabItem value="React Native">
+  <TabItem value="Expo">
 
-  ```javascript title="index.js or App.tsx"
-  import "node-libs-react-native/globals";
+  ```javascript title="App.tsx"
+  import "node-libs-expo/globals";
   import "react-native-url-polyfill/auto";
   import "react-native-get-random-values";
   ```
@@ -156,19 +156,13 @@ If you're using Expo, prebuild the project using the following command:
 npx expo prebuild
 ```
 
+React Native doesn't require prebuilding.
+
 ### 6. Run the project
 
-Run the Expo or React Native project on Android or iOS using the following commands:
+Run the React Native or Expo project on Android or iOS using the following commands:
 
 <Tabs>
-  <TabItem value="Expo">
-
-  ```bash
-  npx expo run:android
-  npx expo run:ios
-  ```
-
-  </TabItem>
   <TabItem value="React Native">
 
   ```bash
@@ -177,11 +171,19 @@ Run the Expo or React Native project on Android or iOS using the following comma
   ```
 
   </TabItem>
+  <TabItem value="Expo">
+
+  ```bash
+  npx expo run:android
+  npx expo run:ios
+  ```
+
+  </TabItem>
 </Tabs>
 
 ### 7. Use the SDK
 
-Initialize and use the SDK in your Expo or React Native project using the `useSDK` hook.
+Initialize and use the SDK in your React Native or Expo project using the `useSDK` hook.
 The following code snippets demonstrate how to use the hook.
 
 Import the hook:
@@ -229,6 +231,6 @@ const disconnectWallet = async () => {
 
 ## Examples
 
-See the [example Expo dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)
-and the [example React Native dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
+See the [example React Native dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
+and the [example Expo dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)
 in the JavaScript SDK GitHub repository for more detailed implementations.
