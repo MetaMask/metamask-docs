@@ -23,7 +23,7 @@ Create an account management Snap to connect to custom EVM accounts.
 ## Prerequisites
 
 - Set up a Snap.
-  See the [Snaps quickstart](../../get-started/quickstart.md) and [how to develop a Snap](../develop-a-snap.md).
+  See the [Snaps quickstart](../../get-started/quickstart.mdx) and [how to develop a Snap](../develop-a-snap.md).
 - Read the [account management Snap security guidelines](security.md).
 
 ## Steps
