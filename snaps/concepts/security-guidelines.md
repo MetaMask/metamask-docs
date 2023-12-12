@@ -8,7 +8,7 @@ sidebar_position: 6
 This page outlines essential principles for builders to develop secure and reliable Snaps.
 Use these guidelines when creating your Snap to ensure it is safe for users.
 
-## Permissions
+## Managing permissions
 
 The following are guidelines for managing permissions in the Snap [manifest file](../concepts/anatomy.md/#manifest-file).
 
@@ -30,7 +30,7 @@ The following are guidelines for managing permissions in the Snap [manifest file
   If your Snap needs this permission, inform the user before communicating with remote servers and
   include a privacy policy in your Snap that explains how data is shared.
 
-## Transaction handling and signing
+## Handling transactions
 
 The following are guidelines for handling and signing transactions:
 
@@ -45,7 +45,7 @@ The following are guidelines for handling and signing transactions:
 - **Consentful confirmations** - Before signing a transaction, display a user confirmation prompt
   with all the transaction details as previously mentioned.
 
-## User notifications and authorizations
+## User authorizations
 
 The following are guidelines for user notifications and authorizations:
 
@@ -92,7 +92,7 @@ The following are guidelines for user notifications and authorizations:
     The URL library provides a much more reliable interface for matching URLs.
     :::
 
-## Securing sensitive user information
+## Securing sensitive information
 
 The following are guidelines for handling sensitive or personally identifiable information such as
 user IPs, emails, passwords, and private keys:
@@ -122,7 +122,7 @@ user IPs, emails, passwords, and private keys:
 
 When in doubt, choose friction over convenience for sensitive information.
 
-## Validating parameters and handling values
+## Validating parameters
 
 The following are guidelines for validating RPC parameters and handling values:
 
@@ -202,7 +202,7 @@ The following are coding security tips and warnings:
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.
 
-## Dependency management
+## Managing dependencies
 
 The following are guidelines for securing your supply chain:
 
