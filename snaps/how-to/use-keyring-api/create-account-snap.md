@@ -3,6 +3,9 @@ description: Get started by creating an account management Snap.
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Create an account management Snap
 
 Create an account management Snap to connect to custom EVM accounts.
@@ -58,7 +61,7 @@ Specify the following [permissions](../request-permissions.md) in your Snap mani
 },
 ```
 
-Add a list of URLs of dapps allowed to call Keyring API methods on your Snap using the
+Add a list of dapp URLs allowed to call Keyring API methods on your Snap using the
 [`endowment:keyring`](../../reference/permissions.md#endowmentkeyring) permission.
 
 ### 3. Implement the Keyring API
@@ -73,7 +76,7 @@ class MySnapKeyring implements Keyring {
 
 ### 4. Handle requests submitted by MetaMask
 
-MetaMask will submit Ethereum sign requests from dapps using the
+MetaMask submits Ethereum sign requests from dapps using the
 [`submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
 Keyring API.
 See the [supported signing methods](../../concepts/keyring-api.md#supported-signing-methods).
@@ -104,25 +107,32 @@ The request includes:
 - `account` - The ID of the account that should handle the request.
 - `request` - The request object.
 
-Your Snap must respond with either a synchronous result:
+Your Snap must respond with either a synchronous or asynchronous result:
+
+<Tabs>
+<TabItem value="Synchronous">
 
 ```typescript
 return { pending: false, result };
 ```
 
-Or an asynchronous result:
+</TabItem>
+<TabItem value="Asynchronous">
 
 ```typescript
 return { pending: true, redirect: { message, url } };
 ```
 
-The redirect message and URL is displayed to the user to inform them on how to continue the transaction flow.
+The redirect message and URL is displayed to the user to help them continue the transaction flow.
+
+</TabItem>
+</Tabs>
 
 ### 5. Notify MetaMask about events
 
-Notify MetaMask when the following events take place, using the `emitSnapKeyringEvent()` helper function.
+Notify MetaMask when the following events take place, using the `emitSnapKeyringEvent()` helper function:
 
-1. An account is created:
+- An account is created:
 
    ```typescript
    try {
@@ -135,7 +145,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
 
    MetaMask returns an error if the account already exists or the account object is invalid.
 
-2. An account is updated:
+- An account is updated:
 
    ```typescript
    try {
@@ -149,7 +159,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
    MetaMask returns an error if the account does not exist, the account object is invalid, or the
    account address changes.
 
-3. An account is deleted:
+- An account is deleted:
 
    ```typescript
    try {
@@ -164,7 +174,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
   
    The delete event is idempotent, so it is safe to emit even if the account does not exist.
 
-4. A request is approved:
+- A request is approved:
 
    ```typescript
    try {
@@ -182,7 +192,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
    This event only applies to Snaps that implement the
    [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
 
-5. A request is rejected:
+- A request is rejected:
 
    ```typescript
    try {
