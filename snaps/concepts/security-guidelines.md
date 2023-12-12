@@ -13,7 +13,7 @@ Use these guidelines when creating your Snap to ensure it is safe for users.
 The following are guidelines for using the Snap [manifest file](../concepts/anatomy.md/#manifest-file)
 and its [permissions](../reference/permissions.md):
 
-- **Minimum permissions** - Follow the principle of least authority: only add the minimum
+- **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
   Before publishing your Snap, check the permissions again and remove any unused permissions.
   You can validate your permissions using the [Snaps Simulator Manifest
@@ -35,11 +35,10 @@ and its [permissions](../reference/permissions.md):
 
 The following are guidelines for handling and signing transactions:
 
-- **Transaction details** - When handling transactions, present the user with a prompt displaying
-  all transaction details such as the receiver address, chain ID, network, and amount.
-  Show the domain name of the site that originated the transaction request, and the blockchain it
-  will be sent to.
-  The receiver address is crucial to prevent the user from sending funds to the wrong destination.
+- **Transaction details** - When handling transactions, provide a prompt displaying
+  all transaction details, including the receiver address, chain ID, network, and amount.
+  Display the originating site's domain name and the target blockchain.
+  Ensure the user verifies the receiver address to avoid sending funds to an incorrect destination.
 
 - **Transparent signing** - Display the message to be signed by the user in the Snap confirmation flow.
   Do not rely on the requesting site for this, as it can choose not to display it and let the
@@ -48,7 +47,7 @@ The following are guidelines for handling and signing transactions:
 - **Consentful confirmations** - Before signing a transaction, show the user a confirmation prompt
   with all the transaction details as previously mentioned.
 
-## Authorization
+## User notifications and authorizations
 
 The following are guidelines for user notifications and authorizations:
 
@@ -125,7 +124,7 @@ user IPs, emails, passwords, and private keys:
 
 When in doubt, choose friction over convenience for sensitive information.
 
-## Input validation
+## Validating parameters and handling values
 
 The following are guidelines for validating RPC parameters and handling values:
 
