@@ -10,8 +10,7 @@ Use these guidelines when creating your Snap to ensure it is safe for users.
 
 ## Permissions
 
-The following are guidelines for using the Snap [manifest file](../concepts/anatomy.md/#manifest-file)
-and its [permissions](../reference/permissions.md):
+The following are guidelines for managing permissions in the Snap [manifest file](../concepts/anatomy.md/#manifest-file).
 
 - **Minimum permissions** - Follow the principle of least authority: only add the minimum
   permissions needed by your Snap in the manifest file.
@@ -31,7 +30,7 @@ and its [permissions](../reference/permissions.md):
   If your Snap needs this permission, inform the user before communicating with remote servers and
   include a privacy policy in your Snap that explains how data is shared.
 
-## Transactions
+## Transaction handling and signing
 
 The following are guidelines for handling and signing transactions:
 
@@ -42,10 +41,9 @@ The following are guidelines for handling and signing transactions:
   The receiver address is crucial to prevent the user from sending funds to the wrong destination.
 
 - **Transparent signing** - Display the message to be signed by the user in the Snap confirmation flow.
-  Do not rely on the requesting site for this, as it can choose not to display it and let the
-  Snap silently sign the message.
+  Do not rely on the requesting site to display this message, as it might choose not to, leading to the Snap signing the message silently.
 
-- **Consentful confirmations** - Before signing a transaction, show the user a confirmation prompt
+- **Consentful confirmations** - Before signing a transaction, display a user confirmation prompt
   with all the transaction details as previously mentioned.
 
 ## Authorization
@@ -95,7 +93,7 @@ The following are guidelines for user notifications and authorizations:
     The URL library provides a much more reliable interface for matching URLs.
     :::
 
-## Responsible information management
+## Securing sensitive user information
 
 The following are guidelines for handling sensitive or personally identifiable information such as
 user IPs, emails, passwords, and private keys:
@@ -171,7 +169,7 @@ The following are guidelines for validating RPC parameters and handling values:
   An attacker can exploit this feature to bypass security checks implemented in the corresponding
   contract function that reads those function arguments.
 
-## Deprecated methods
+## Avoid using deprecated methods
 
 Avoid using the following deprecated methods:
 
@@ -219,7 +217,7 @@ The following are guidelines for securing your supply chain:
   We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of
   your stack and following security best practices for your website or server.
 
-## Publishing and serving
+## Publishing and serving your Snap
 
 The following are guidelines for making your Snap available to users safely:
 
