@@ -21,7 +21,7 @@ Before developing a Snap, make sure you understand the following concepts and gu
 - [Snaps security guidelines](../concepts/security-guidelines.md)
 :::
 
-You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
+You can [get started quickly using the Snaps template](../get-started/quickstart.mdx) or follow a
 [tutorial](/snaps/category/tutorials).
 
 This page describes additional important steps when developing a Snap.

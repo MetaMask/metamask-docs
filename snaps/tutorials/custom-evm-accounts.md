@@ -14,7 +14,7 @@ to integrate custom EVM accounts in MetaMask.
 
 ## Prerequisites
 
-- A Snap set up using the [Snaps quickstart](../get-started/quickstart.md)
+- A Snap set up using the [Snaps quickstart](../get-started/quickstart.mdx)
 - Business logic written for your custom EVM account type
 
 ## Steps
