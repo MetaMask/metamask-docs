@@ -10,12 +10,16 @@ arbitrary ways, or integrate with and extend the functionality of MetaMask using
 [Snaps Exports](../reference/exports.md), [Snaps JSON-RPC API](../reference/rpc-api.md), and
 [permissions](request-permissions.md).
 
-Before developing a Snap, it's important to understand:
+:::caution important
+Before developing a Snap, make sure you understand the following concepts and guidelines:
 
-- [The Snap anatomy](../concepts/anatomy.md).
-- [The Snap lifecycle](../concepts/lifecycle.md).
-- [The Snap user interface](../concepts/user-interface.md).
-- [The MetaMask Snaps execution environment](../concepts/execution-environment.md).
+- [Snaps anatomy](../concepts/anatomy.md)
+- [Snaps lifecycle](../concepts/lifecycle.md)
+- [Snaps user interface](../concepts/user-interface.md)
+- [Snaps execution environment](../concepts/execution-environment.md)
+- [Snaps design guidelines](../concepts/design-guidelines.md)
+- [Snaps security guidelines](../concepts/security-guidelines.md)
+:::
 
 You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
 [tutorial](/snaps/category/tutorials).
