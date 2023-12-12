@@ -1,27 +1,27 @@
 ---
-description: Follow these security guidelines when creating a Keyring Snap.
+description: Follow these security guidelines when creating an account management Snap.
 sidebar_label: Security guidelines
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Account management Snap security guidelines
 
-Refer to the following security guidelines when [creating an account management Snap](index.md).
+Refer to the following security guidelines when [creating an account management Snap](create-account-snap.md).
 
 :::flaskOnly
 :::
 
 :::tip see also
-- [Create an account management Snap](index.md)
-- [Use the Keyring API from a dapp](../dapp.md)
-- [About the Keyring API](../../../concepts/keyring-api.md)
-- [Keyring API reference](../../../reference/keyring-api/index.md)
+- [Create an account management Snap](create-account-snap.md)
+- [Create an account management companion dapp](create-companion-dapp.md)
+- [About the Keyring API](../../concepts/keyring-api.md)
+- [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
 ## Do not add secret information to account objects
 
 Ensure that you do not store any secret information in account objects
-([`KeyringAccount`](../../../reference/keyring-api/type-aliases/KeyringAccount.md) instances), since
+([`KeyringAccount`](../../reference/keyring-api/type-aliases/KeyringAccount.md) instances), since
 they are exposed to dapps and MetaMask.
 For example:
 
@@ -87,7 +87,7 @@ For example, a dapp is not allowed to call the `keyring_submitRequest` method of
 MetaMask is not allowed to call the `keyring_createAccount` method of your Snap.
 
 MetaMask also enforces that only dapps allowlisted in the Snap's manifest file using the
-[`endowment:keyring`](../../../reference/permissions.md#endowmentkeyring) permission can call these methods.
+[`endowment:keyring`](../../reference/permissions.md#endowmentkeyring) permission can call these methods.
 
 :::caution important
 We recommend further restricting the methods exposed to dapps according to your Snap's functionality.
@@ -118,7 +118,7 @@ Both dapps must be allowlisted in the Snap's manifest file.
 
 ## Ensure the redirect URL cannot be manipulated
 
-If your Snap implements an [asynchronous transaction flow](../../../concepts/keyring-api.md#asynchronous-transaction-flow),
+If your Snap implements an [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow),
 ensure that the redirect URL is valid and cannot be manipulated, otherwise the user can be
 redirected to a malicious website.
 
@@ -179,7 +179,7 @@ For example:
 
 ## Expose Keyring API methods using the onKeyringRequest export
 
-The [`onRpcRequest`](../../../reference/exports.md#onrpcrequest) export is a general-purpose export
+The [`onRpcRequest`](../../reference/exports.md#onrpcrequest) export is a general-purpose export
 and has no restrictions on the methods that can be called.
 Ensure that you only export Keyring API methods using the `onKeyringRequest` export, which has extra
 security checks.

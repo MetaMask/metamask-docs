@@ -15,18 +15,18 @@ accounts, alongside regular MetaMask accounts in the user interface:
 <img src={require('../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
 </p>
 
-To use the Keyring API, you first [implement the API in an account management Snap](../how-to/use-keyring-api/snap/index.md)
+To use the Keyring API, you first [implement the API in an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
 (also known as an "account Snap").
-Your dapp can then [invoke Keyring API methods](../how-to/use-keyring-api/dapp.md) on the account
-management Snap to connect to and interact with the custom accounts.
+Your can then [call Keyring API methods from a companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
+to enable users to create and interact with the custom accounts.
 
 :::flaskOnly
 :::
 
 :::tip see also
-- [Create an account management Snap](../how-to/use-keyring-api/snap/index.md)
-  - [Account management Snap security guidelines](../how-to/use-keyring-api/snap/security.md)
-- [Use the Keyring API from a dapp](../how-to/use-keyring-api/dapp.md)
+- [Create an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
+- [Create an account management companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
+- [Account management Snap security guidelines](../how-to/use-keyring-api/security.md)
 - [Keyring API reference](../reference/keyring-api/index.md)
 :::
 
@@ -52,14 +52,14 @@ graph TD
 
 The diagram contains the following components:
 
-- **User**: The user interacting with the dapp, the Snap companion dapp, and MetaMask.
-- **Dapp**: The dapp requesting an action to be performed on an account.
-- **MetaMask**: The wallet the dapp connects to.
+- **User** - The user interacting with the dapp, the Snap companion dapp, and MetaMask.
+- **Dapp** - The dapp requesting an action to be performed on an account.
+- **MetaMask** - The wallet the dapp connects to.
   MetaMask routes requests to the account management Snap and lets the user perform some level of
   account management.
-- **Snap**: The account management Snap that implements the Keyring API to manage the user's
+- **Snap** - The account management Snap that implements the Keyring API to manage the user's
   accounts and handle requests that use these accounts.
-- **Snap companion dapp**: The Snap's user interface component that allows the user to interact with
+- **Snap companion dapp** - The Snap's user interface component that allows the user to interact with
   the Snap to manage accounts and requests.
 
 ## Account management Snap installation flow

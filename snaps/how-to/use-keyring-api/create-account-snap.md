@@ -1,5 +1,5 @@
 ---
-description: Get started by creating a Keyring Snap.
+description: Get started by creating an account management Snap.
 sidebar_position: 1
 ---
 
@@ -11,16 +11,16 @@ Create an account management Snap to connect to custom EVM accounts.
 :::
 
 :::tip see also
+- [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
-- [Use the Keyring API from a dapp](../dapp.md)
-- [About the Keyring API](../../../concepts/keyring-api.md)
-- [Keyring API reference](../../../reference/keyring-api/index.md)
+- [About the Keyring API](../../concepts/keyring-api.md)
+- [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
 ## Prerequisites
 
 - Set up a Snap.
-  See the [Snaps quickstart](../../../get-started/quickstart.md) and [how to develop a Snap](../../develop-a-snap.md).
+  See the [Snaps quickstart](../../get-started/quickstart.md) and [how to develop a Snap](../develop-a-snap.md).
 - Read the [account management Snap security guidelines](security.md).
 
 ## Steps
@@ -41,7 +41,7 @@ npm install @metamask/keyring-api
 
 ### 2. Add permissions
 
-Specify the following [permissions](../../request-permissions.md) in your Snap manifest file:
+Specify the following [permissions](../request-permissions.md) in your Snap manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -59,7 +59,7 @@ Specify the following [permissions](../../request-permissions.md) in your Snap m
 ```
 
 Add a list of URLs of dapps allowed to call Keyring API methods on your Snap using the
-[`endowment:keyring`](../../../reference/permissions.md#endowmentkeyring) permission.
+[`endowment:keyring`](../../reference/permissions.md#endowmentkeyring) permission.
 
 ### 3. Implement the Keyring API
 
@@ -73,8 +73,10 @@ class MySnapKeyring implements Keyring {
 
 ### 4. Handle requests submitted by MetaMask
 
-MetaMask will submit Ethereum sign requests from dapps using the [`submitRequest`] method of the Keyring API.
-See the [supported signing methods](../../../concepts/keyring-api.md#supported-signing-methods).
+MetaMask will submit Ethereum sign requests from dapps using the
+[`submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
+Keyring API.
+See the [supported signing methods](../../concepts/keyring-api.md#supported-signing-methods).
 
 The following is an example of a `personal_sign` request:
 
@@ -178,7 +180,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
   
    MetaMask returns an error if the request does not exist.
    This event only applies to Snaps that implement the
-   [asynchronous transaction flow](../../../concepts/keyring-api.md#asynchronous-transaction-flow).
+   [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
 
 5. A request is rejected:
 
@@ -195,7 +197,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
   
    MetaMask returns an error if the request does not exist.
    This event only applies to Snaps that implement the
-   [asynchronous transaction flow](../../../concepts/keyring-api.md#asynchronous-transaction-flow).
+   [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
 
 ### 6. Expose the Keyring API
 
@@ -214,14 +216,8 @@ export const onKeyringRequest: OnKeyringRequestHandler = async ({
 
 ### 7. Create a companion dapp
 
-Create a companion dapp to provide a user interface for your account management Snap.
-See the [example Snap companion dapp source code](https://github.com/MetaMask/snap-simple-keyring/tree/main/packages/site)
-for more information.
-
-## Next steps
-
-Now that you've created an account management Snap and a user interface for it, you can
-[call the Keyring API methods from your dapp](../dapp.md) to create and interact with custom EVM accounts.
+[Create a companion dapp](create-companion-dapp.md) to provide a user interface for your account
+management Snap, enabling them to create and interact with custom EVM accounts.
 
 ## Example
 
