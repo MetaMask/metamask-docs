@@ -354,7 +354,7 @@ const config = {
           },
           {
             from: "/snaps/tutorials/custom-evm-accounts",
-            to: "/snaps/how-to/use-keyring-api/snap",
+            to: "/snaps/how-to/use-keyring-api/create-account-snap",
           },
           {
             from: "/snaps/how-to/work-with-existing-snaps",
