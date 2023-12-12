@@ -352,6 +352,14 @@ const config = {
             from: "/wallet/how-to/request-permissions",
             to: "/wallet/how-to/manage-permissions",
           },
+          {
+            from: "/snaps/tutorials/custom-evm-accounts",
+            to: "/snaps/how-to/use-keyring-api/create-account-snap",
+          },
+          {
+            from: "/snaps/how-to/work-with-existing-snaps",
+            to: "/snaps/how-to/use-3rd-party-snaps",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });

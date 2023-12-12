@@ -23,10 +23,10 @@ The confirmations look like the following:
 
 <div class="row">
     <div class="column">
-        <img src={require("../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid gray'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid gray'}} />
     </div>
 </div>
 
