@@ -10,7 +10,7 @@ const DOCS_REPO_SRC = "https://raw.githubusercontent.com/INFURA/docs/main/docs";
 const INFURA_DOCS_PAGES = [
   // {
   //   name: "getting-started",
-  //   token: "GHSAT0AAAAAABZRBJM72UM5SA747KJBCYHGZKTNNBA",
+  //   token: "GHSAT0AAAAAACFCLQUVH7C7RKBD3GHQMN6UZL2ELNA",
   // },
 ];
 
