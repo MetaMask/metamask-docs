@@ -7,7 +7,7 @@ sidebar_position: 1
 
 If you look at the directory structure of the
 [Snaps template repository](https://github.com/MetaMask/template-snap-monorepo) used in the
-[Snaps quickstart](../get-started/quickstart.md), it looks something like this:
+[Snaps quickstart](../get-started/quickstart.mdx), it looks something like this:
 
 ```text
 template-snap-monorepo/
@@ -34,7 +34,7 @@ The defaults can be overwritten in the [configuration file](#configuration-file)
 :::tip Create a Snap project
 When you create a new Snap project using `mm-snap init`, it has all these files.
 Still, we recommend
-[cloning the template Snap repository to get started](../get-started/quickstart.md).
+[cloning the template Snap repository to get started](../get-started/quickstart.mdx).
 :::
 
 This page examines the major components of a Snap:

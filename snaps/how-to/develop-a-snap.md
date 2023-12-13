@@ -10,14 +10,18 @@ arbitrary ways, or integrate with and extend the functionality of MetaMask using
 [Snaps Exports](../reference/exports.md), [Snaps JSON-RPC API](../reference/rpc-api.md), and
 [permissions](request-permissions.md).
 
-Before developing a Snap, it's important to understand:
+:::caution important
+Before developing a Snap, make sure you understand the following concepts and guidelines:
 
-- [The Snap anatomy](../concepts/anatomy.md).
-- [The Snap lifecycle](../concepts/lifecycle.md).
-- [The Snap user interface](../concepts/user-interface.md).
-- [The MetaMask Snaps execution environment](../concepts/execution-environment.md).
+- [Snaps anatomy](../concepts/anatomy.md)
+- [Snaps lifecycle](../concepts/lifecycle.md)
+- [Snaps user interface](../concepts/user-interface.md)
+- [Snaps execution environment](../concepts/execution-environment.md)
+- [Snaps design guidelines](../concepts/design-guidelines.md)
+- [Snaps security guidelines](../concepts/security-guidelines.md)
+:::
 
-You can [get started quickly using the Snaps template](../get-started/quickstart.md) or follow a
+You can [get started quickly using the Snaps template](../get-started/quickstart.mdx) or follow a
 [tutorial](/snaps/category/tutorials).
 
 This page describes additional important steps when developing a Snap.
@@ -60,6 +64,8 @@ API methods from a web page.
 If you use the template Snap monorepo, running `yarn start` will serve the Snap at 
 [`http://localhost:8080`](http://localhost:8080/)
 :::
+
+For end-to-end Snap testing, [use the `@metamask/snaps-jest` package](test-a-snap.md).
 
 ## Debug your Snap
 
@@ -116,7 +122,7 @@ Also, make sure to update the manifest file, icon file, and README to differenti
 
 You should deploy a dapp where users can learn about your Snap and install it, or integrate with your existing dapp.
 
-If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](work-with-existing-snaps.md).
+If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](use-3rd-party-snaps.md).
 
 ## Resources and tools
 
@@ -125,7 +131,6 @@ You can review the growing number of [example Snaps](https://github.com/MetaMask
 - [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
 - [StarkNet](https://github.com/Consensys/starknet-snap)
 - [MobyMask Phishing Warning](https://github.com/Montoya/mobymask-snap)
-- [Transaction Simulation with Ganache](https://github.com/Montoya/tx-simulation-with-ganache-snap)
 
 MetaMask also maintains tools to help developers build, debug, and maintain Snaps:
 
@@ -133,9 +138,6 @@ MetaMask also maintains tools to help developers build, debug, and maintain Snap
   TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
   your Snap and a companion dapp.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating Snaps in the browser, streamlining the development process.
-- [Snaps Truffle Box](https://trufflesuite.com/boxes/metamask-snap-box/) - A template that combines
-  the TypeScript template Snap and Truffle so you can easily test Snaps that use smart contracts
-  with Ganache.
 - [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test Snaps and a dapp for
   evaluating them.
 

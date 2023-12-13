@@ -33,12 +33,9 @@ Paste your contract ABI JSON file or Hardhat artifact JSON file.
 If you plan to deploy your contract, you must provide a Hardhat artifact, since this
 has the required [contract bytecode](../index.md#contract-bytecode) needed for deployment.
 
-You can also specify the `Root Namespace` for the generated contract code.
-The default value is `Contracts`, so make sure to add `using Contracts;` at the top of your scripts
-before using the generated code.
+You can also specify the `Root Namespace` for the generated contract code, with the default value being `Contracts`. Ensure that you include `using Contracts`; at the beginning of your scripts before using the generated code.
 
-Select **Convert**, which opens a save dialog box.
-Select a folder to save the generated code files to, somewhere inside the `Assets` folder.
+Select **Convert**, which opens a save dialog box. Then, select a folder to save the generated code files to, somewhere inside the `Assets` folder.
 
 ## Use the contract
 

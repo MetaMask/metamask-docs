@@ -147,7 +147,7 @@ To build and test your Snap:
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
-    ![Test dapp with template Snap](../assets/template-snap.png)
+    <img src={require('../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
 
     This is a boilerplate test dapp for installing and testing your Snap.
 
@@ -163,9 +163,7 @@ To build and test your Snap:
 6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-
-![Gas estimation dialog](../assets/gas-estimation.png)
-
+<img src={require('../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
 </p>
 
 Congratulations!

@@ -8,7 +8,7 @@ sidebar_position: 3
 This reference describes the syntax of the Snaps command line interface (CLI) subcommands and options.
 
 :::note
-The CLI is installed when you [create a Snap project](../../get-started/quickstart.md).
+The CLI is installed when you [create a Snap project](../../get-started/quickstart.mdx).
 :::
 
 You can specify subcommands and options using the `mm-snap` command:

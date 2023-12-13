@@ -1,6 +1,6 @@
 ---
 description: Enable your users to sign in with Ethereum.
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Sign in with Ethereum
@@ -14,7 +14,7 @@ MetaMask parses the message and gives the user a friendly interface prompting th
 your dapp:
 
 <p align="center">
-    <img src={require("../../assets/siwe.png").default} alt="Sign-in with Ethereum request" style={{border: '1px solid black'}} />
+    <img src={require("../../assets/siwe.png").default} alt="Sign-in with Ethereum request" style={{border: '1px solid gray'}} />
 </p>
 
 ## Domain binding

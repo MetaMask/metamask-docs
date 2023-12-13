@@ -21,7 +21,7 @@ html[data-theme="dark"] .forceColor {
 }
 
 .title {
-  font-size: clamp(2rem, 2.5vw, 4rem);
+  font-size: clamp(2rem, 2.75vw, 4rem);
 }
 
 .subtitle {
@@ -35,4 +35,53 @@ html[data-theme="dark"] .forceColor {
 
 .homepageButton:hover {
   background-color: #43AEFC;
+}
+
+.devBannerButton {
+  border-radius: 0.3rem;
+  border-color: #1c1e21;
+  border-width: 1.5px;
+  color: #1c1e21;
+}
+
+.devBannerButton:hover {
+  background-color: #1c1e21;
+  color: #FFF;
+}
+
+html[data-theme="dark"] .devBannerButton {
+  border-color: #FFF;
+  border-width: 1px;
+}
+
+html[data-theme="dark"] .devBannerButton:hover {
+  background-color: #FFF;
+  color: #1c1e21;
+}
+
+.devBannerTitle {
+  font-size: clamp(1.75rem, 1.75vw, 2rem);
+}
+
+.devBannerSubtitle {
+  font-size: clamp(1rem, 1vw, 1.25rem);
+}
+
+.devBannerBlock {
+  background-color: var(--ifm-color-emphasis-200);
+  padding: 5rem;
+  text-align: center;
+  width: 100%;
+}
+
+html[data-theme="dark"] .devBannerBlock {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.devBannerForceColor {
+  color: var(--ifm-color-emphasis-900);
+}
+
+html[data-theme="dark"] .devBannerForceColor {
+  color: var(--ifm-color-secondary-dark);
 }
