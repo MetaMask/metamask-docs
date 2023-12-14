@@ -475,10 +475,11 @@ const config = {
             to: "/wallet/how-to/connect/set-up-sdk",
             label: "SDK",
           },
-          {
-            to: "web3-services",
-            label: "Web3 services",
-          },
+          ... INFURA_DOCS_PAGES.length > 0 ?
+            [{
+              to: "web3-services",
+              label: "Web3 services",
+            }] : [],
           {
             to: "snaps",
             label: "Snaps",
