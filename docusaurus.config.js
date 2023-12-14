@@ -6,6 +6,71 @@ const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
 const isProd = process.env.NODE_ENV === 'production';
 
+const DOCS_REPO_SRC = "https://raw.githubusercontent.com/INFURA/docs/main/docs";
+
+const INFURA_DOCS_PAGES = [
+  // {
+  //   name: "network-endpoints",
+  //   token: "GHSAT0AAAAAACFCLQUUDH4GNNQJTIKNUUPCZL2O3SA",
+  // },
+];
+
+const generateRemoteContent = (pages = []) => {
+  if (pages.length === 0) return [];
+  const contentItems = pages.map((item, i) => (
+    [
+      "docusaurus-plugin-remote-content",
+      {
+        name: item.name,
+        id: `${i}`,
+        sourceBaseUrl: DOCS_REPO_SRC,
+        outDir: "web3-services",
+        documents: [`${item.name}.md`],
+        requestConfig: {
+          headers: {
+            "header": item.name,
+          },
+          params: {
+            token: item.token,
+          },
+          responseType: "arraybuffer",
+        },
+      },
+    ]
+  ));
+  contentItems.push([
+    "@docusaurus/plugin-content-docs",
+    ({
+      id: "web3-services",
+      path: "web3-services",
+      routeBasePath: "web3-services",
+      editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+      breadcrumbs: false,
+      remarkPlugins: [
+        require("remark-docusaurus-tabs"),
+      ],
+      admonitions: {
+        tag: ":::",
+        keywords: [
+          "info",
+          "success",
+          "danger",
+          "note",
+          "tip",
+          "warning",
+          "important",
+          "caution",
+          "security",
+          "flaskOnly",
+        ],
+      },
+    }),
+  ]);
+  return contentItems;
+};
+
+const INT_INFURA_PAGES = generateRemoteContent(INFURA_DOCS_PAGES);
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "MetaMask developer documentation",
@@ -37,6 +102,10 @@ const config = {
     { src: "/js/feedback-script.js", defer: true, async: true },
     { src: "/js/getfeedback.js", defer: true, async: true },
   ],
+  clientModules: ["/js/update-links.js"],
+  customFields: {
+    infuraRemotePages: INFURA_DOCS_PAGES,
+  },
 
   markdown: {
     mermaid: true,
@@ -375,6 +444,7 @@ const config = {
         },
       },
     ],
+    ...INT_INFURA_PAGES,
     isProd ? 
     [
       "docusaurus-plugin-segment",
@@ -404,6 +474,10 @@ const config = {
           {
             to: "/wallet/how-to/connect/set-up-sdk",
             label: "SDK",
+          },
+          {
+            to: "web3-services",
+            label: "Web3 services",
           },
           {
             to: "snaps",
