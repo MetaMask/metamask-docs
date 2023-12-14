@@ -1,6 +1,8 @@
 ---
 description: Get started by creating an account management Snap.
 sidebar_position: 1
+tags:
+  - Keyring API
 ---
 
 import Tabs from '@theme/Tabs';

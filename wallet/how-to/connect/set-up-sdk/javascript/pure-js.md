@@ -1,6 +1,9 @@
 ---
 sidebar_label: Pure JavaScript
 sidebar_position: 2
+description: Set up the SDK in your Pure JavaScript dapp.
+tags:
+  - JavaScript SDK
 ---
 
 # Use MetaMask SDK with pure JavaScript

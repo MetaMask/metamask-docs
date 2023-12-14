@@ -1,5 +1,5 @@
 ---
-description: Snaps exports reference
+description: See the Snaps exports reference.
 sidebar_position: 2
 ---
 

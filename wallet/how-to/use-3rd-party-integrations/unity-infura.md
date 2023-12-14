@@ -1,6 +1,8 @@
 ---
 description: Set up MetaMask SDK with Infura in your Unity game.
 sidebar_position: 3
+tags:
+  - Unity SDK
 ---
 
 # Set up Infura in Unity

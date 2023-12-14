@@ -1,6 +1,11 @@
 ---
 description: Learn about MetaMask SDK.
 sidebar_position: 2
+tags:
+  - JavaScript SDK
+  - iOS SDK
+  - Android SDK
+  - Unity SDK
 ---
 
 # About MetaMask SDK

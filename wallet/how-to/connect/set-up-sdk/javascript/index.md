@@ -1,6 +1,9 @@
 ---
 sidebar_label: JavaScript
 sidebar_position: 1
+description: Set up the SDK in your JavaScript dapp.
+tags:
+  - JavaScript SDK
 ---
 
 # Use MetaMask SDK with JavaScript

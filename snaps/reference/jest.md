@@ -1,5 +1,5 @@
 ---
-description: Jest end-to-end testing reference
+description: See the Jest API and options reference.
 ---
 
 # Jest API and options

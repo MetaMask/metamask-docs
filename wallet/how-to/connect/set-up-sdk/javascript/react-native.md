@@ -1,6 +1,9 @@
 ---
 sidebar_label: React Native and Expo
 sidebar_position: 4
+description: Set up the SDK in your React Native dapp.
+tags:
+  - JavaScript SDK
 ---
 
 import Tabs from '@theme/Tabs';

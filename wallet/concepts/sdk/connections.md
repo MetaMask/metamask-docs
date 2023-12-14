@@ -1,6 +1,12 @@
 ---
 sidebar_position: 1
 sidebar_label: SDK connections
+description: Learn about how a dapp with the SDK installed connects to MetaMask.
+tags:
+  - JavaScript SDK
+  - iOS SDK
+  - Android SDK
+  - Unity SDK
 ---
 
 # MetaMask SDK connections

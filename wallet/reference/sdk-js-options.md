@@ -1,6 +1,8 @@
 ---
-description: MetaMask JavaScript SDK options
+description: See the JavaScript SDK options reference.
 sidebar_position: 1
+tags:
+  - JavaScript SDK
 ---
 
 # JavaScript SDK options

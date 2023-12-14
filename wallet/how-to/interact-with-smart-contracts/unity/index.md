@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+description: Interact with smart contracts in your Unity game.
+tags:
+  - Unity SDK
 ---
 
 # Interact with smart contracts in Unity

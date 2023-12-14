@@ -1,6 +1,8 @@
 ---
-description: Integrate the MetaMask JavaScript SDK with Web3-Onboard.
+description: Integrate MetaMask SDK with Web3-Onboard in your JavaScript dapp.
 sidebar_position: 1
+tags:
+  - JavaScript SDK
 ---
 
 # Use Web3-Onboard with MetaMask SDK

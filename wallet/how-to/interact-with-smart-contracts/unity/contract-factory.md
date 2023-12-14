@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+description: Learn about the contract factory in Unity.
+tags:
+  - Unity SDK
 ---
 
 # Contract factory

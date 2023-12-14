@@ -2,6 +2,9 @@
 sidebar_label: iOS
 sidebar_position: 1
 toc_max_heading_level: 4
+description: Set up the SDK in your iOS dapp.
+tags:
+  - iOS SDK
 ---
 
 # Use MetaMask SDK with iOS

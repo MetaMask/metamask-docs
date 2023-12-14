@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+description: Learn about the contract proxy class in Unity.
+tags:
+  - Unity SDK
 ---
 
 # Contract proxy class

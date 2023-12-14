@@ -1,6 +1,9 @@
 ---
 sidebar_label: React UI
 sidebar_position: 1
+description: Set up the SDK in your React dapp using the React UI package.
+tags:
+  - JavaScript SDK
 ---
 
 # Use MetaMask SDK with React UI

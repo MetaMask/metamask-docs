@@ -1,6 +1,9 @@
 ---
 description: Use MetaMask SDK to connect and sign in a single interaction.
 sidebar_position: 1
+tags:
+  - JavaScript SDK
+  - iOS SDK
 ---
 
 # Connect and sign

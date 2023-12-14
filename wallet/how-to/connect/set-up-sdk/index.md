@@ -1,5 +1,11 @@
 ---
 sidebar_position: 1
+description: Get started by setting up the SDK in your dapp.
+tags:
+  - JavaScript SDK
+  - iOS SDK
+  - Android SDK
+  - Unity SDK
 ---
 
 # Set up MetaMask SDK
