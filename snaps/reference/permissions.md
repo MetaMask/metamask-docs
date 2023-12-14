@@ -87,6 +87,26 @@ You can also use it to connect to Ethereum accounts with `eth_requestAccounts` a
 those connected accounts.
 :::
 
+### endowment:keyring
+
+:::flaskOnly
+:::
+
+For a dapp to call [Keyring API](../concepts/keyring-api.md) methods on an account management Snap,
+the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
+If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
+MetaMask rejects the request.
+
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "endowment:keyring": {
+    "allowedOrigins": ["https://<dapp domain>"]
+  }
+}
+```
+
 ### endowment:network-access
 
 To access the internet, a Snap must request the `endowment:network-access` permission.
@@ -137,6 +157,29 @@ Specify this permission in the manifest file as follows:
   }
 }
 ```
+
+Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
+Calls from any other origins will be rejected. 
+
+Specify this caveat in the manifest file as follows: 
+
+```json
+{
+  "initialPermissions": {
+    "endowment:rpc": { 
+      "allowedOrigins": [
+        "metamask.io", 
+        "consensys.io",
+        "npm:@metamask/example-snap"
+      ] 
+    }
+  }
+}
+```
+
+:::note
+If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
+:::
 
 ### endowment:transaction-insight
 

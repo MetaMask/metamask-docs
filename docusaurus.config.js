@@ -4,6 +4,7 @@
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
+const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -351,6 +352,14 @@ const config = {
             from: "/wallet/how-to/request-permissions",
             to: "/wallet/how-to/manage-permissions",
           },
+          {
+            from: "/snaps/tutorials/custom-evm-accounts",
+            to: "/snaps/how-to/use-keyring-api/create-account-snap",
+          },
+          {
+            from: "/snaps/how-to/work-with-existing-snaps",
+            to: "/snaps/how-to/use-3rd-party-snaps",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -366,6 +375,15 @@ const config = {
         },
       },
     ],
+    isProd ? 
+    [
+      "docusaurus-plugin-segment",
+      {
+        apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+        load: {cookie: { sameSite: 'None', secure: true}},
+        page: true,
+      },
+    ] : null,
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

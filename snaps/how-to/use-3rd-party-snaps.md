@@ -3,7 +3,7 @@ description: Connect your dapp to existing, third-party Snaps.
 sidebar_position: 7
 ---
 
-# Work with third-party Snaps
+# Use third-party Snaps
 
 Some existing, third-party Snaps are designed to communicate with dapps.
 As a dapp developer, you can use these Snaps to take advantage of new features enabled by Snaps.
