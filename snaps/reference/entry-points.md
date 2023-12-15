@@ -1,21 +1,21 @@
 ---
-description: See the Snaps exports reference.
+description: See the Snaps entry points reference.
 sidebar_position: 2
 ---
 
-# Snaps exports
+# Snaps entry points
 
-A Snap can export the following methods.
+A Snap can expose the following entry points.
 
 ## onRpcRequest
 
-To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exporting
-`onRpcRequest`.
+To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exposing
+the `onRpcRequest` entry point.
 Whenever the Snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
 
 :::caution important
 If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](#ontransaction), you can skip exporting `onRpcRequest`.
+providing [transaction insights](#ontransaction), you can skip using `onRpcRequest`.
 However, if you want to do something such as manage the user's keys for a particular protocol and
 create a dapp that sends transactions for that protocol via your Snap, for example, you must
 specify an RPC API.
@@ -73,7 +73,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 ## onTransaction
 
-To provide transaction insights before a user signs a transaction, a Snap must export `onTransaction`.
+To provide transaction insights before a user signs a transaction, a Snap must expose the
+`onTransaction` entry point.
 Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
 extension, MetaMask calls this method.
 MetaMask passes the raw unsigned transaction payload to the `onTransaction` handler method.
@@ -210,7 +211,7 @@ module.exports.onTransaction = async ({
 
 ## onCronjob
 
-To run periodic actions for the user (cron jobs), a Snap must export `onCronjob`.
+To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
 This method is called at the specified times with the specified payloads defined in the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 

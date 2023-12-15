@@ -63,8 +63,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-To communicate with the outside world, the Snap must implement its own JSON-RPC API by exposing
-the exported function [`onRpcRequest`](../reference/exports.md#onrpcrequest).
+To communicate with the outside world, the Snap must implement its own JSON-RPC API by exposing the
+[`onRpcRequest`](../reference/entry-points.md#onrpcrequest) entry point.
 Whenever the Snap receives a JSON-RPC request from a dapp or another Snap, this handler function is
 called with the specified parameters.
 
@@ -99,8 +99,8 @@ The Snap's RPC API is completely up to you, as long as it's a valid
 :::tip Does my Snap need to have an RPC API?
 No, that's also up to you!
 If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](../reference/exports.md#ontransaction), then you can skip exporting
-`onRpcRequest`.
+providing [transaction insights](../reference/entry-points.md#ontransaction), then you can skip
+using `onRpcRequest`.
 However, if you want to do something such as manage the user's keys for a particular protocol and
 create a dapp that, for example, sends transactions for that protocol using your Snap, you must
 specify an RPC API.

@@ -7,7 +7,7 @@ sidebar_position: 7
 
 Some existing, third-party Snaps are designed to communicate with dapps.
 As a dapp developer, you can use these Snaps to take advantage of new features enabled by Snaps.
-This is possible because [Snaps can expose a JSON-RPC API](../reference/exports.md#onrpcrequest).
+This is possible because [Snaps can expose a JSON-RPC API](../reference/entry-points.md#onrpcrequest).
 Snaps can decide to make their API available to dapps by requesting the
 [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
 

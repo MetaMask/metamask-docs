@@ -6,8 +6,8 @@ sidebar_position: 1
 # Develop a Snap
 
 A Snap can extend the dapp-facing [MetaMask JSON-RPC API](/wallet/reference/rpc-api) in
-arbitrary ways, or integrate with and extend the functionality of MetaMask using the
-[Snaps Exports](../reference/exports.md), [Snaps JSON-RPC API](../reference/rpc-api.md), and
+arbitrary ways, or integrate with and extend the functionality of MetaMask using
+[entry points](../reference/entry-points.md), [JSON-RPC API methods](../reference/rpc-api.md), and
 [permissions](request-permissions.md).
 
 :::caution important

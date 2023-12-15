@@ -26,8 +26,8 @@ manifest file:
 ### endowment:cronjob
 
 To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
-This permission allows the Snap to specify cron jobs that trigger the exported
-[`onCronjob`](../reference/exports.md#oncronjob) method.
+This permission allows the Snap to specify cron jobs that trigger the
+[`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
 
 Specify this permission in the manifest file as follows:
 
@@ -138,8 +138,8 @@ with the value `*` or `null` in the response.
 ### endowment:rpc
 
 To handle arbitrary JSON-RPC requests, a Snap must request the `endowment:rpc` permission.
-This permission grants a Snap access to JSON-RPC requests sent to the Snap, using the exported
-[`onRpcRequest`](exports.md#onrpcrequest) method.
+This permission grants a Snap access to JSON-RPC requests sent to the Snap, using the
+[`onRpcRequest`](entry-points.md#onrpcrequest) entry point.
 
 This permission requires an object with a `snaps` or `dapps` property (or both), to signal if the
 snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
@@ -185,7 +185,8 @@ If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 
 To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
 This permission grants a Snap read-only access to raw transaction payloads, before they're accepted
-for signing by the user, by exporting the [`onTransaction`](../reference/exports.md#ontransaction) method.
+for signing by the user, by exposing the [`onTransaction`](../reference/entry-points.md#ontransaction)
+entry point.
 
 This permission requires an object with an `allowTransactionOrigin` property to signal if the Snap
 should pass the `transactionOrigin` property as part of the `onTransaction` parameters.
