@@ -97,6 +97,10 @@ const sidebar = {
           },
           items: require("./snaps/reference/keyring-api/typedoc-sidebar.cjs"),
         },
+        {
+          type: "doc",
+          id: "reference/resources",
+        },
       ],
     },
   ],
