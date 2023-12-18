@@ -22,7 +22,7 @@ export default function AdmonitionWrapper(props: Props): JSX.Element {
         icon={<FlaskIcon />}
         title="Flask Only"
       >
-        This feature is only available in <a href="https://metamask.io/flask" target="_blank" rel="noopener noreferrer">MetaMask Flask</a>, the canary distribution of MetaMask.
+        This feature is only available in <a href="https://docs.metamask.io/snaps/get-started/install-flask/">MetaMask Flask</a>, the canary distribution of MetaMask.
       </Admonition>
     );
   }
