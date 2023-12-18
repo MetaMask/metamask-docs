@@ -104,6 +104,17 @@ const config = {
       }),
     ],
     [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "web3-services",
+        path: "web3-services",
+        routeBasePath: "web3-services",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./web3-services-sidebar.js"),
+        breadcrumbs: false,
+      },
+    ],
+    [
       "docusaurus-plugin-typedoc",
       {
         entryPoints: ["./external/keyring-api/src/index.ts"],
@@ -413,6 +424,10 @@ const config = {
             to: "snaps",
             label: "Snaps",
           },
+          {
+            to: "web3-services",
+            label: "Web3 services",
+          },
         ],
       },
       docs: {
@@ -447,6 +462,10 @@ const config = {
               {
                 label: "Snaps",
                 to: "/snaps",
+              },
+              {
+                label: "Web3 services",
+                to: "/web3-services",
               },
             ],
           },
