@@ -360,6 +360,10 @@ const config = {
             from: "/snaps/how-to/work-with-existing-snaps",
             to: "/snaps/how-to/use-3rd-party-snaps",
           },
+          {
+            from: "/snaps/get-started/install-snaps/",
+            to: "/snaps/get-started/install-flask/",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
