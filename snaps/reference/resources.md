@@ -10,7 +10,6 @@ View the following Snaps resources in addition to this documentation site.
 
 - [Snaps homepage](https://metamask.io/snaps/)
 - [Snaps directory](https://snaps.metamask.io/) - A directory of allowlisted Snaps you can try.
-- [MetaMask Flask](https://metamask.io/flask/) - Install Flask to build your own Snaps and run Snaps locally.
 - [SIPs](https://github.com/MetaMask/SIPs) - Snaps Improvement Proposals.
 - [Open Beta Readiness Guide](https://github.com/MetaMask/snaps/discussions/1411) - A guide to get
   your Snap allowlisted on MetaMask.
@@ -36,8 +35,8 @@ View the following Snaps resources in addition to this documentation site.
   deploying your Snap, and a companion dapp UI you can build on.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A tool for simulating
   Snaps in the browser, streamlining the development process.
-- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test Snaps and a dapp for
-  evaluating them.
+- [Test Snaps](https://github.com/MetaMask/snaps/tree/main/packages/test-snaps) - A collection of
+  test Snaps and [a dapp for evaluating them](https://metamask.github.io/snaps/test-snaps/latest/).
 
 ## Blog posts
 
