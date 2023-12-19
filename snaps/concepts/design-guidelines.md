@@ -137,7 +137,7 @@ At MetaMask, we use an in-depth style guide to inform our writing decisions. Her
 
 ### Capitalization
 
-With few exceptions, use **sentence case as a default**. Sentence case is capitalizing only the first word of a line of copy. Not only is sentence case is more casual and conversational, but it’s also easier to scan than title case. Keep in mind, there are a handful of times that title case is the way to go.
+With few exceptions, use **sentence case as a default**. Sentence case is capitalizing only the first word of a line of copy. Not only is sentence case more casual and conversational, but it’s also easier to scan than title case. Keep in mind, there are a handful of times that title case is the way to go.
 
 ### Active voice
 
