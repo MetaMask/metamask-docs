@@ -19,7 +19,7 @@ accounts, alongside regular MetaMask accounts in the user interface:
 
 To use the Keyring API, you first [implement the API in an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
 (also known as an "account Snap").
-Your can then [call Keyring API methods from a companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
+You can then [call Keyring API methods from a companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
 to enable users to create and interact with the custom accounts.
 
 :::flaskOnly
