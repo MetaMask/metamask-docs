@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 Returns the busy threshold for the specified blockchain network.
 
-For example, a `busyThreshold` value of `30` GWEI indicates that 90% of the historical base fees on
-the network have been below `30` GWEI.
+For example, a `busyThreshold` value of `30` Gwei indicates that 90% of the historical base fees on
+the network have been below `30` Gwei.
 If the current base fee exceeds this value, it suggests that the network is busier than usual,
 likely due to a high volume of transactions.
 

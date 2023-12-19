@@ -9,8 +9,8 @@ import TabItem from '@theme/TabItem';
 
 Returns the base fee percentile (50th percentile) of the specified blockchain network.
 
-For example, if the API returns a value of `20` GWEI, it means that 50% of the historical base fees
-are less than or equal to `20` GWEI.
+For example, if the API returns a value of `20` Gwei, it means that 50% of the historical base fees
+are less than or equal to `20` Gwei.
 
 This can be useful for users or applications to estimate the optimal gas price for transactions
 based on historical data.

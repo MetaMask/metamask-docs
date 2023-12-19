@@ -8,8 +8,8 @@ This section provides reference information for the various Gas REST APIs.
 Use the APIs to:
 
 - [Get EIP-1559 gas prices.](./gasprices-type2.md)
-- [Get the base fee history (in GWEI).](./basefeehistory.md)
-- [Get the base fee percentile (in GWEI).](./basefeepercentile.md)
+- [Get the base fee history (in Gwei).](./basefeehistory.md)
+- [Get the base fee percentile (in Gwei).](./basefeepercentile.md)
 - [Get the busy threshold for a network.](./busythreshold.md)
 
 :::info

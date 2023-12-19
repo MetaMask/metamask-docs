@@ -9,40 +9,40 @@ The Gas API supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 
-### Arbitrum
+## Arbitrum
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 42161    |
 | Nova    | 42170    |
 
-### Avalanche (C-Chain)
+## Avalanche (C-Chain)
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 43114    |
 
 
-### Base
+## Base
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 8453     |
 
-### BNB Chain
+## BNB Chain
 
 | Network         | Chain ID |
 |-----------------|----------|
 | Mainnet         | 56       |
 | opBNB (layer 2) | 204      |
 
-### Cronos
+## Cronos
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 25       |
 
-### Ethereum
+## Ethereum
 
 | Network | Chain ID |
 |---------|----------|
@@ -50,39 +50,39 @@ Specify the chain ID in your request to interact with the relevant network.
 | Goerli  | 5        |
 | Sepolia | 11155111 |
 
-### Fantom
+## Fantom
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 250      |
 
-### Filecoin
+## Filecoin
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 314      |
 
-### Linea
+## Linea
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 59144    |
 | Testnet | 59140    |
 
-### Optimism
+## Optimism
 
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 10       |
 
-### Polygon
+## Polygon
 
 | Network | Network ID |
 |---------|------------|
 | Mainnet | 137        |
 | Mumbai  | 80001      |
 
-### zkSync Era
+## zkSync Era
 
 | Network | Chain ID |
 |---------|----------|
