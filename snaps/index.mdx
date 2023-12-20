@@ -3,14 +3,17 @@ title: Introduction
 ---
 
 import CardList from '@site/src/components/CardList'
-import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
+import ReactPlayer from 'react-player/lazy'
 
 # Extend the functionality of MetaMask using Snaps
 
-<YoutubeEmbed url="https://www.youtube.com/embed/lmxKo4Qx7cM?si=zRJEUbH4_46MKbLL" />
-
 MetaMask Snaps is an open source system that allows anyone to safely extend the functionality of MetaMask,
 creating new web3 end user experiences.
+Learn more in this video:
+
+<p align="center">
+  <ReactPlayer url='https://www.youtube.com/embed/lmxKo4Qx7cM?si=zRJEUbH4_46MKbLL' />
+</p>
 
 Want to build your own Snaps? Get started by [installing MetaMask Flask](get-started/install-flask.md).
 
@@ -30,7 +33,7 @@ Snaps have access to a limited set of capabilities, determined by the
 A Snap can add new API methods to MetaMask, add support for different blockchain protocols, or
 modify existing functionalities using the [Snaps JSON-RPC API](reference/rpc-api.md).
 
-Features include:
+The following Snaps features are available in the stable version of MetaMask:
 
 <CardList
   items={[
@@ -81,7 +84,15 @@ Features include:
       href: "reference/permissions#endowmentnetwork-access",
       title: "Network access",
       description: <>Make API calls using <code>fetch()</code>.</>
-    },
+    }
+  ]}
+/>
+
+The following Snaps features are only available in [MetaMask Flask](get-started/install-flask.md),
+the canary distribution of MetaMask:
+
+<CardList
+  items={[
     {
       icon: require("./assets/features/network.png").default,
       href: "concepts/keyring-api",
