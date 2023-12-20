@@ -12,10 +12,8 @@ tags:
 Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
-:::tip Learn more
-- See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
-  the Android SDK GitHub repository for advanced use cases.
-- See more information about the [Android SDK architecture](../../../../concepts/sdk/android.md).
+:::tip See also
+- [Android SDK architecture](../../../../concepts/sdk/android.md)
 :::
 
 ## Prerequisites
@@ -311,3 +309,8 @@ private fun addEthereumChain(
     }
 }
 ```
+
+## Example
+
+See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
+the Android SDK GitHub repository for more information.

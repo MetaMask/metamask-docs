@@ -7,15 +7,13 @@ tags:
   - iOS SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use MetaMask SDK with iOS
 
 Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your native iOS dapp to enable your
 users to easily connect with their MetaMask Mobile wallet.
-
-:::tip Example
-See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk/tree/main/Example) in the
-iOS SDK GitHub repository for advanced use cases.
-:::
 
 ## Prerequisites
 
@@ -33,7 +31,8 @@ iOS SDK GitHub repository for advanced use cases.
 
 ### 1. Install the SDK
 
-#### CocoaPods
+<Tabs>
+<TabItem value="CocoaPods">
 
 To add the SDK as a CocoaPods dependency to your project, add the following entry to our Podfile:
 
@@ -47,7 +46,8 @@ Run the following command:
 pod install
 ```
 
-#### Swift Package Manager
+</TabItem>
+<TabItem value="Swift Package Manager">
 
 To add the SDK as a Swift Package Manager (SPM) package to your project, in Xcode, select
 **File > Swift Packages > Add Package Dependency**.
@@ -63,6 +63,9 @@ dependencies: [
     )
 ]
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Import the SDK
 
@@ -213,3 +216,8 @@ let result = await metamaskSDK.request(transactionRequest)
 ```
 
 <!--/tabs-->
+
+## Example
+
+See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk/tree/main/Example) in the
+iOS SDK GitHub repository for more information.
