@@ -14,7 +14,7 @@ to easily connect to the MetaMask browser extension and MetaMask Mobile.
 On the frontend, see the instructions to [use the SDK with React](react/index.md).
 On the backend, see the instructions to [use the SDK with Node.js](nodejs.md).
 
-:::tip example
+## Example
+
 See the [example Electron dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/electronjs)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
+in the JavaScript SDK GitHub repository for more information.

@@ -6,6 +6,9 @@ tags:
   - JavaScript SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use MetaMask SDK with React
 
 Import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your users to
@@ -16,11 +19,6 @@ The SDK for React has the [same prerequisites](../index.md#prerequisites) as for
 This page provides instructions for using the standard `@metamask/sdk-react` package.
 Alternatively, you can use the [`@metamask/sdk-react-ui`](react-ui.md) package to easily use
 [wagmi](https://wagmi.sh/) hooks and a pre-styled UI button component for connecting to MetaMask.
-:::
-
-:::tip Examples
-See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
-in the JavaScript SDK GitHub repository for advanced use cases.
 :::
 
 ## Steps
@@ -65,11 +63,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MetaMaskProvider debug={false} sdkOptions={{
-      checkInstallationImmediately: false,
       dappMetadata: {
-        name: "Demo React App",
+        name: "Example React Dapp",
         url: window.location.host,
       }
+      // Other options
     }}>
       <App />
     </MetaMaskProvider>
@@ -160,5 +158,79 @@ const connect = async () => {
 You can also [use the `connectAndSign` method](../../../../sign-data/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction.
 
-Refer to the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
-for advanced use cases.
+## Example
+
+You can copy the full React example to get started:
+
+<Tabs>
+<TabItem value="Root component">
+
+```javascript title="index.tsx"
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { MetaMaskProvider } from '@metamask/sdk-react';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <MetaMaskProvider debug={false} sdkOptions={{
+      dappMetadata: {
+        name: "Example React Dapp",
+        url: window.location.host,
+      }
+      // Other options
+    }}>
+      <App />
+    </MetaMaskProvider>
+  </React.StrictMode>
+);
+```
+
+</TabItem>
+<TabItem value="React component">
+
+```javascript title="App.tsx"
+import { useSDK } from '@metamask/sdk-react';
+import React, { useState } from 'react';
+
+export const App = () => {
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
+
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+    } catch(err) {
+      console.warn(`failed to connect..`, err);
+    }
+  };
+
+  return (
+    <div className="App">
+      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+        Connect
+      </button>
+      {connected && (
+        <div>
+          <>
+            {chainId && `Connected chain: ${chainId}`}
+            <p></p>
+            {account && `Connected account: ${account}`}
+          </>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+</TabItem>
+</Tabs>
+
+See the [example React dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/create-react-app)
+in the JavaScript SDK GitHub repository for more information.

@@ -12,11 +12,6 @@ Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your Node.js dapp 
 to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for Node.js has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
-:::tip Example
-See the [example Node.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
-
 ## Steps
 
 ### 1. Install the SDK
@@ -46,7 +41,13 @@ import { MetaMaskSDK } from '@metamask/sdk';
 Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md):
 
 ```javascript
-const MMSDK = new MetaMaskSDK(options);
+const MMSDK = new MetaMaskSDK(
+  dappMetadata: {
+    name: "Example Node.js Dapp",
+    url: window.location.host,
+  }
+  // Other options
+);
 
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
@@ -70,3 +71,26 @@ prompts the installation or connection popup to appear.
 ```javascript
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```
+
+## Example
+
+You can copy the full Node.js example to get started:
+
+```javascript title="index.js"
+import { MetaMaskSDK } from '@metamask/sdk';
+
+const MMSDK = new MetaMaskSDK(
+  dappMetadata: {
+    name: "Example Node.js Dapp",
+    url: window.location.host,
+  }
+  // Other options
+);
+
+const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+
+ethereum.request({ method: 'eth_requestAccounts', params: [] });
+```
+
+See the [example Node.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
+in the JavaScript SDK GitHub repository for advanced use cases.
