@@ -24,9 +24,9 @@ understanding its purpose.
 Ensure your Snap metadata follows these guidelines:
 
 - Keep your Snap's name to **21 characters or fewer** (including spaces).
-- Use a descriptive name—don't use "Snap" in the name.
-- Your avatar should fit in a **32px circular frame, SVG format**.
+- Use a descriptive name&mdash;don't use "Snap" in the name.
 - Use short and simple copy.
+- Your avatar should fit in a **32px circular frame, SVG format**.
 
 **Before** asking for permission to install, provide users with clear and concise information about:
 
@@ -35,7 +35,7 @@ Ensure your Snap metadata follows these guidelines:
 - Any _security precautions_ they should know.
 
 Write in active voice and use sentence case.
-Avoid jargon—write in plain language that can be understood by all users.
+Avoid jargon&mdash;write in plain language that can be understood by all users.
 
 ## Think like your users, write like a human
 
@@ -109,6 +109,12 @@ These are also a key part of your Snap's identity, so it's worth spending time o
 Your Snap's avatar should fit in a **32px circular frame in SVG format**.
 Avoid using images with small details, as they won't be impactful in the allotted space.
 Use something bold, simple, and easily understood.
+
+The avatar must be a valid SVG. 
+It should be clearly visible on both light and dark backgrounds. 
+It should also be square, or else it will be stretched or cropped.
+
+You can use [SVGviewer.dev](https://www.svgviewer.dev/) to validate and optimize your SVG.
 
 **Name**
 
