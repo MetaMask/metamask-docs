@@ -106,11 +106,11 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "web3-services",
-        path: "web3-services",
-        routeBasePath: "web3-services",
+        id: "services",
+        path: "services",
+        routeBasePath: "services",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-        sidebarPath: require.resolve("./web3-services-sidebar.js"),
+        sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
       },
     ],
@@ -425,8 +425,8 @@ const config = {
             label: "Snaps",
           },
           {
-            to: "web3-services",
-            label: "Web3 services",
+            to: "services",
+            label: "Services",
           },
         ],
       },
@@ -464,8 +464,8 @@ const config = {
                 to: "/snaps",
               },
               {
-                label: "Web3 services",
-                to: "/web3-services",
+                label: "Services",
+                to: "/services",
               },
             ],
           },
