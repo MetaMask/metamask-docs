@@ -124,23 +124,7 @@ You should deploy a dapp where users can learn about your Snap and install it, o
 
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](use-3rd-party-snaps.md).
 
-## Resources and tools
+## Resources
 
-You can review the growing number of [example Snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) maintained by MetaMask, as well as the following fully functional and open source Snaps: 
-
-- [Dogecoin](https://github.com/ziad-saab/dogecoin-snap)
-- [StarkNet](https://github.com/Consensys/starknet-snap)
-- [MobyMask Phishing Warning](https://github.com/Montoya/mobymask-snap)
-
-MetaMask also maintains tools to help developers build, debug, and maintain Snaps:
-
-- [Template Snap](https://github.com/MetaMask/template-snap-monorepo) - A template that includes
-  TypeScript/React and vanilla JavaScript options and a CLI for building, packaging, and deploying
-  your Snap and a companion dapp.
-- [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A developer tool built for simulating Snaps in the browser, streamlining the development process.
-- [Test Snaps](https://github.com/MetaMask/test-snaps) - A collection of test Snaps and a dapp for
-  evaluating them.
-
-If you have any questions, ask them on
-[GitHub discussions](https://github.com/MetaMask/snaps-monorepo/discussions), and if you encounter
-any issues, please [open a GitHub issue](https://github.com/MetaMask/snaps-monorepo/issues).
+See the full list of [Snaps resources](../reference/resources.md) for more information on developer
+tools, example Snaps, and more.
