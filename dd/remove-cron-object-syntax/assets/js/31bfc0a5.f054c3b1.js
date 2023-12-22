@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7698],{64312:e=>{e.exports=JSON.parse('[{"label":"Keyring API","permalink":"/dd/remove-cron-object-syntax/snaps/tags/keyring-api","count":6}]')}}]);
