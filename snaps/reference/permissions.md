@@ -37,13 +37,7 @@ Specify this permission in the manifest file as follows:
     "endowment:cronjob": {
       "jobs": [
         {
-          "expression": {
-            "minute": "*",
-            "hour": "*",
-            "dayOfMonth": "*",
-            "month": "*",
-            "dayOfWeek": "*"
-          },
+          "expression": "* * * * *",
           "request": {
             "method": "exampleMethodOne",
             "params": {
@@ -52,7 +46,7 @@ Specify this permission in the manifest file as follows:
           }
         },
         {
-          "expression": "* * * * *",
+          "expression": "*/2 * * * *",
           "request": {
             "method": "exampleMethodTwo",
             "params": {
