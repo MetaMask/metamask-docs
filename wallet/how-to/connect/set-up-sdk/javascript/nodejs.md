@@ -41,13 +41,13 @@ import { MetaMaskSDK } from '@metamask/sdk';
 Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md):
 
 ```javascript
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example Node.js Dapp",
     url: window.location.host,
   }
   // Other options
-);
+});
 
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
@@ -79,13 +79,13 @@ You can copy the full Node.js example to get started:
 ```javascript title="index.js"
 import { MetaMaskSDK } from '@metamask/sdk';
 
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example Node.js Dapp",
     url: window.location.host,
   }
   // Other options
-);
+});
 
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 
