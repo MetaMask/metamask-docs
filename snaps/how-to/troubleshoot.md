@@ -15,16 +15,17 @@ If you encounter any issues that you can't solve on your own, please
 Because [Secure ECMAScript (SES)](../concepts/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
-`mm-snap build` by default attempts to execute a Snap in a stubbed SES environment.
-You can also disable this behavior and run the evaluation step separately using `mm-snap eval`.
+[`yarn run mm-snap build`](../reference/cli/subcommands.md#b-build) by default attempts to execute a
+Snap in a stubbed SES environment.
+You can also disable this behavior and run the evaluation step separately using
+[`yarn run mm-snap eval`](../reference/cli/subcommands.md#e-eval).
 If an error is thrown during this step, it's likely due to a SES incompatibility, and you must fix
 the issues manually.
 These incompatibilities tend to occur in dependencies.
 
-While the errors you get from SES may seem scary, they're usually not that hard to fix.
-The actual file, function, and variable names in the `mm-snap eval` error stack trace might not make
-a lot of sense to you, but the line numbers should correspond to your Snap
-[bundle file](../concepts/anatomy.md#bundle-file).
+The errors you get from SES are usually easy to fix.
+The actual file, function, and variable names in the `eval` error stack trace might not make sense
+to you, but the line numbers should correspond to your Snap [bundle file](../concepts/anatomy.md#bundle-file).
 Thus, you can identify if the error is due to your code or one of your dependencies.
 If the problem is in a dependency, you can try a different version or to fix the issue locally by
 using tools such as [`patch-package`](https://npmjs.com/package/patch-package) (see how to
@@ -36,10 +37,11 @@ and therefore in SES as well.
 If you get an error during the `eval` step that says something like `variableName is not defined`,
 simply prepending `var variableName;` to your Snap bundle may solve the problem.
 (This actually happened so frequently with [Babel's](https://babeljs.io/) `regeneratorRuntime` that
-`mm-snap build` automatically handles that one.)
+`yarn run mm-snap build` automatically handles that one.)
 
 :::caution
-Run `mm-snap manifest --fix` if you modified your Snap bundle after building.
+Run [`yarn run mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) if you modified
+your Snap bundle after building.
 Otherwise your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::
 
@@ -55,9 +57,10 @@ plugins for several other build systems:
 For examples on how to set up these build systems yourself, please see the
 [examples](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples/examples).
 
-We still recommend using the Snaps CLI to make sure your manifest `shasum` value is correct, by
-running `mm-snap manifest --fix` after creating your bundle.
-You may also benefit from running `mm-snap eval` to detect any SES issues up front.
+We recommend running [`yarn run mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest)
+after creating your bundle to make sure your manifest `shasum` value is correct.
+You might also benefit from running [`yarn run mm-snap eval`](../reference/cli/subcommands.md#e-eval)
+to detect any SES issues up front.
 
 ## Patch dependencies
 

@@ -16,7 +16,7 @@ enable your users to easily connect to the MetaMask browser extension and MetaMa
 
 ## Prerequisites
 
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or above
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or later
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## Steps

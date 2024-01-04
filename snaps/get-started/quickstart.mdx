@@ -8,8 +8,8 @@ import ReactPlayer from 'react-player/lazy'
 # Snaps quickstart
 
 Get started creating your own Snap.
-Use the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
-to initialize a Snap monorepo project built with TypeScript and React.
+Use the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+CLI to initialize a Snap monorepo project built with TypeScript and React.
 See the following video demo:
 
 <p align="center">
@@ -19,18 +19,14 @@ See the following video demo:
 ## Prerequisites
 
 - [MetaMask Flask installed](install-flask.md)
-
-  :::tip
-  MetaMask Snaps works with the latest LTS version of Node.js, but we recommend using the version specified in
-  the template's [`.nvmrc`](https://github.com/MetaMask/template-snap-monorepo/blob/main/.nvmrc) file.
-  :::
-
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
 - [Yarn](https://yarnpkg.com/) version 3
 
 ## Create the project
 
-Create a new Snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
+Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+CLI by running:
 
 ```bash
 yarn create @metamask/snap your-snap-name
@@ -42,7 +38,7 @@ or
 npm create @metamask/snap your-snap-name
 ```
 
-See the section [Snaps anatomy](../concepts/anatomy.md) to learn about the anatomy of your Snap project files.
+See [Snaps anatomy](../concepts/anatomy.md) to learn about the anatomy of your Snap project files.
 
 ## Start the Snap
 
@@ -58,11 +54,11 @@ Start the development server:
 yarn start
 ```
 
-You are now serving the Snap at [`http://localhost:8080`](http://localhost:8080/) and its front-end at [`http://localhost:8000`](http://localhost:8000/).
+You are now serving the Snap at [`http://localhost:8080`](http://localhost:8080/) and its front-end dapp at [`http://localhost:8000`](http://localhost:8000/).
 
 ## Connect to the Snap
 
-On the front-end, select the **Connect** button and the MetaMask Flask extension pops up and
+On the front-end dapp, select the **Connect** button and the MetaMask Flask extension pops up and
 requires you to approve the Snap's permissions.
 
 Once connected, select the **Send message** button to display a custom message within a confirmation

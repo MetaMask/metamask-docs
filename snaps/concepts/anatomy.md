@@ -5,12 +5,11 @@ sidebar_position: 1
 
 # Snaps anatomy
 
-If you look at the directory structure of the
-[Snaps template repository](https://github.com/MetaMask/template-snap-monorepo) used in the
+If you look at the directory structure of the Snaps monorepo project generated in the
 [Snaps quickstart](../get-started/quickstart.mdx), it looks something like this:
 
 ```text
-template-snap-monorepo/
+your-snap-name/
 ├─ packages/
 │  ├─ site/
 |  |  |- src/
@@ -30,12 +29,6 @@ template-snap-monorepo/
 
 Source files other than `index.ts` are located through its imports.
 The defaults can be overwritten in the [configuration file](#configuration-file).
-
-:::tip Create a Snap project
-When you create a new Snap project using `mm-snap init`, it has all these files.
-Still, we recommend
-[cloning the template Snap repository to get started](../get-started/quickstart.mdx).
-:::
 
 This page examines the major components of a Snap:
 
@@ -155,8 +148,9 @@ details the requirements of both `snap.manifest.json` and its relationship to `p
 You might need to modify some manifest fields manually.
 For example, if you change the location of the icon SVG file, you must update
 `source.location.npm.iconPath` to match.
-You can also use the [command line](../reference/cli/index.md) to update some fields for you.
-For example, `mm-snap build` or `mm-snap manifest --fix` updates `source.shasum`.
+You can also use the [Snaps CLI](../reference/cli/subcommands.md) to update some fields for you.
+For example, running [`yarn run mm-snap build`](../reference/cli/subcommands.md#b-build) or
+[`yarn run mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
 
 ## Configuration file
 
@@ -184,7 +178,7 @@ export default config;
 ```
 
 :::note
-You should not publish the configuration file to NPM, since it's only used for development and
+You should not publish the configuration file to npm, since it's only used for development and
 building.
 However, you can commit the file to GitHub to share the configuration with your team, since it
 shouldn't contain any secrets.
@@ -198,12 +192,9 @@ Moreover, the [Snaps execution environment](execution-environment.md) has no DOM
 APIs, and no filesystem access, so anything that relies on the DOM doesn't work, and any Node
 built-ins must be bundled along with the Snap.
 
-Use the command `mm-snap build` to bundle your Snap using 
-[webpack](https://webpack.js.org/) or 
-[Browserify](https://browserify.org).
+Running `yarn start` bundles your Snap for you.
+
+You can also run [`yarn run mm-snap build`](../reference/cli/subcommands.md#b-build) to bundle your
+Snap using [webpack](https://webpack.js.org/) or [Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.
-
-:::note
-If you are using the template Snap monorepo, running `yarn start` will bundle your Snap for you.
-:::

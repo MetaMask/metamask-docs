@@ -21,8 +21,8 @@ Before developing a Snap, make sure you understand the following concepts and gu
 - [Snaps security guidelines](../concepts/security-guidelines.md)
 :::
 
-You can [get started quickly using the Snaps template](../get-started/quickstart.mdx) or follow a
-[tutorial](/snaps/category/tutorials).
+You can get started by [creating a new Snap project](../get-started/quickstart.mdx) or following a
+[tutorial](/snaps/tutorials).
 
 This page describes additional important steps when developing a Snap.
 
@@ -57,13 +57,8 @@ if (provider && isFlask) {
 
 ## Test your Snap
 
-Test your Snap by hosting it locally using `mm-snap serve`, installing it in Flask, and calling its
+Test your Snap by hosting it locally using `yarn start`, installing it in Flask, and calling its
 API methods from a web page.
-
-:::note
-If you use the template Snap monorepo, running `yarn start` will serve the Snap at 
-[`http://localhost:8080`](http://localhost:8080/)
-:::
 
 For end-to-end Snap testing, [use the `@metamask/snaps-jest` package](test-a-snap.md).
 
@@ -71,7 +66,8 @@ For end-to-end Snap testing, [use the `@metamask/snaps-jest` package](test-a-sna
 
 To debug your Snap, use `console.log` and inspect the MetaMask background process.
 You can add your log statements in your source code and build your Snap, or add them directly
-to your Snap bundle and use `mm-snap manifest --fix` to update the `shasum` in your Snap manifest file.
+to your Snap bundle and use [`yarn run mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest)
+to update the `shasum` in your Snap manifest file.
 The manifest `shasum` must match the contents of your bundle at the time MetaMask fetches your Snap.
 
 :::note
@@ -110,7 +106,8 @@ The following details are specific to Snaps:
 After publishing the Snap, any dapp can connect to the Snap by using the Snap ID `npm:[packageName]`.
 
 :::caution
-If you are using the Snap template, make sure to only publish the Snap package in `/packages/snap`. 
+If you are using the Snap monorepo project generated in the [quickstart](../get-started/quickstart.mdx),
+make sure to only publish the Snap package in `/packages/snap`. 
 You can use the [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest) to verify 
 that your Snap was published correctly &mdash; just select **localhost** in the top right corner and change the 
 Snap location to **npm** and the ID of your Snap. 
