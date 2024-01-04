@@ -65,11 +65,8 @@ const sidebar = {
         },
         {
           type: "category",
-          label: "Snaps command line interface",
-          link: {
-            type: "doc",
-            id: "reference/cli/index",
-          },
+          label: "Snaps command line",
+          link: { type: "generated-index", slug: "reference/cli" },
           items: [
             {
               type: "doc",

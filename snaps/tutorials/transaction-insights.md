@@ -12,25 +12,29 @@ The Snap provides transaction insights in the MetaMask transaction window.
 ## Prerequisites
 
 - [MetaMask Flask installed](../get-started/install-flask.md)
-
 - An account on your MetaMask Flask instance with testnet ETH
-
   :::tip
   You can use [Infura's Sepolia faucet](https://www.infura.io/faucet) to get Sepolia ETH.
   :::
-
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-
-- [Yarn](https://yarnpkg.com/) version 3
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
+- [Yarn](https://yarnpkg.com/)
 
 ## Steps
 
 ### 1. Set up the project
 
-Create a new Snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
+Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+starter kit by running:
 
 ```bash
 yarn create @metamask/snap transaction-insights-snap
+```
+
+or
+
+```bash
+npx @metamask/create-snap transaction-insights-snap
 ```
 
 or
@@ -49,7 +53,7 @@ This initializes your development environment with the required dependencies.
 
 ### 2. Enable transaction insights and the Ethereum provider
 
-The default template Snap, such as the one in [Create a gas estimation Snap](./gas-estimation.md#5-build-and-test-the-snap), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
+The default template Snap, such as the one in [Create a gas estimation Snap](./gas-estimation.md), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
 dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose any API.
 Instead, it provides transaction insights directly in the MetaMask transaction window.

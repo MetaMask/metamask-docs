@@ -24,7 +24,7 @@ You can also see instructions for the following JavaScript-based platforms:
 ## Prerequisites
 
 - An existing or [new project](../../../get-started-building/set-up-dev-environment.md) set up
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or above
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or later
 - [Yarn](https://yarnpkg.com/getting-started/install) or
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
