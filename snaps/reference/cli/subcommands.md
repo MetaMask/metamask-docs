@@ -11,10 +11,10 @@ import TabItem from '@theme/TabItem';
 
 This reference describes the syntax of the Snaps command line interface (CLI) subcommands.
 
-You can specify subcommands and options using the `yarn run mm-snap` command:
+You can specify subcommands and options using the `yarn mm-snap` command:
 
 ```bash
-yarn run mm-snap [SUBCOMMAND] [OPTIONS]
+yarn mm-snap [SUBCOMMAND] [OPTIONS]
 ```
 
 ## b, build
@@ -24,13 +24,13 @@ yarn run mm-snap [SUBCOMMAND] [OPTIONS]
 # Syntax
 
 ```bash
-yarn run mm-snap build [options]
+yarn mm-snap build [options]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap b -s lib/index.js -d out -n snap.js
+yarn mm-snap b -s lib/index.js -d out -n snap.js
 ```
 
 <!--/tabs-->
@@ -46,13 +46,13 @@ Builds a Snap from source.
 # Syntax
 
 ```bash
-yarn run mm-snap eval [options]
+yarn mm-snap eval [options]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap e -b out/snap.js
+yarn mm-snap e -b out/snap.js
 ```
 
 <!--/tabs-->
@@ -68,13 +68,13 @@ Attempts to evaluate the Snap bundle in SES.
 # Syntax
 
 ```bash
-yarn run mm-snap init [directory]
+yarn mm-snap init [directory]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap i my-snap
+yarn mm-snap i my-snap
 ```
 
 <!--/tabs-->
@@ -91,13 +91,13 @@ If no directory is specified, the Snap project is initialized in the current dir
 # Syntax
 
 ```bash
-yarn run mm-snap manifest [options]
+yarn mm-snap manifest [options]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap m --fix false
+yarn mm-snap m --fix false
 ```
 
 <!--/tabs-->
@@ -113,13 +113,13 @@ Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
 # Syntax
 
 ```bash
-yarn run mm-snap serve [options]
+yarn mm-snap serve [options]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap s -r out -p 9000
+yarn mm-snap s -r out -p 9000
 ```
 
 <!--/tabs-->
@@ -135,13 +135,13 @@ Locally serves Snap files for testing.
 # Syntax
 
 ```bash
-yarn run mm-snap watch [options]
+yarn mm-snap watch [options]
 ```
 
 # Example
 
 ```bash
-yarn run mm-snap w -s lib/index.js -d out
+yarn mm-snap w -s lib/index.js -d out
 ```
 
 <!--/tabs-->

@@ -149,8 +149,8 @@ You might need to modify some manifest fields manually.
 For example, if you change the location of the icon SVG file, you must update
 `source.location.npm.iconPath` to match.
 You can also use the [Snaps CLI](../reference/cli/subcommands.md) to update some fields for you.
-For example, running [`yarn run mm-snap build`](../reference/cli/subcommands.md#b-build) or
-[`yarn run mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
+For example, running [`yarn mm-snap build`](../reference/cli/subcommands.md#b-build) or
+[`yarn mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
 
 ## Configuration file
 
@@ -194,7 +194,7 @@ built-ins must be bundled along with the Snap.
 
 Running `yarn start` bundles your Snap for you.
 
-You can also run [`yarn run mm-snap build`](../reference/cli/subcommands.md#b-build) to bundle your
+You can also run [`yarn mm-snap build`](../reference/cli/subcommands.md#b-build) to bundle your
 Snap using [webpack](https://webpack.js.org/) or [Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.

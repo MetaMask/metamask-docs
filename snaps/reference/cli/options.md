@@ -17,10 +17,10 @@ You can specify options:
 
 - In the [configuration file](../../concepts/anatomy.md#configuration-file).
 
-- On the command line using the `yarn run mm-snap` command.
+- On the command line using the `yarn mm-snap` command.
 
   ```bash
-  yarn run mm-snap [SUBCOMMAND] [OPTIONS]
+  yarn mm-snap [SUBCOMMAND] [OPTIONS]
   ```
 
 ## Options
