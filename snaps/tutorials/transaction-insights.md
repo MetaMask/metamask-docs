@@ -18,17 +18,23 @@ The Snap provides transaction insights in the MetaMask transaction window.
   :::
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
-- [Yarn](https://yarnpkg.com/) version 3
+- [Yarn](https://yarnpkg.com/)
 
 ## Steps
 
 ### 1. Set up the project
 
 Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
-CLI by running:
+starter kit by running:
 
 ```bash
 yarn create @metamask/snap transaction-insights-snap
+```
+
+or
+
+```bash
+npx @metamask/create-snap transaction-insights-snap
 ```
 
 or
