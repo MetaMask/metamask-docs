@@ -270,3 +270,137 @@ module.exports.onCronjob = async ({ request }) => {
 ```
 
 <!--/tabs-->
+
+## onInstall
+
+To run an action on installation, a Snap must export `onInstall`.
+This method is called after the Snap is installed successfully. 
+
+:::note
+For MetaMask to call the Snap's `onInstall` method, you must request the
+[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
+:::
+
+#### Parameters
+
+None.
+
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnInstallHandler } from '@metamask/snaps-sdk';
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for installing my Snap'),
+        text(
+          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+        ),
+      ]),
+    },
+  });
+};
+```
+
+# JavaScript
+
+```js
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+module.exports.onInstall = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for installing my Snap'),
+        text(
+          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+        ),
+      ]),
+    },
+  });
+};
+```
+
+<!--/tabs-->
+
+## onUpdate
+
+To run an action on update, a Snap must export `onUpdate`.
+This method is called after the Snap is updated successfully. 
+
+:::note
+For MetaMask to call the Snap's `onUpdate` method, you must request the
+[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
+:::
+
+#### Parameters
+
+None.
+
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnUpdateHandler } from '@metamask/snaps-sdk';
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+export const onUpdate: OnUpdateHandler = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for updating my Snap'),
+        text(
+          'New features added in this version:',
+        ),
+        text(
+          'Added a dialog that appears when updating'
+        ), 
+      ]),
+    },
+  });
+};
+```
+
+# JavaScript
+
+```js
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+module.exports.onUpdate = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for updating my Snap'),
+        text(
+          'New features added in this version:',
+        ),
+        text(
+          'Added a dialog that appears when updating'
+        ), 
+      ]),
+    },
+  });
+};
+```
+
+<!--/tabs-->
