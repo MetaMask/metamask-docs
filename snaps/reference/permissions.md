@@ -81,6 +81,19 @@ You can also use it to connect to Ethereum accounts with `eth_requestAccounts` a
 those connected accounts.
 :::
 
+### endowment:page-home
+
+:::flaskOnly
+:::
+
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "endowment:page-home": {}
+}
+```
+
 ### endowment:keyring
 
 :::flaskOnly
