@@ -285,9 +285,6 @@ For MetaMask to call the Snap's `onInstall` method, you must request the
 
 None.
 
-#### Returns
-
-A promise containing the return of the implemented method.
 
 #### Example
 
