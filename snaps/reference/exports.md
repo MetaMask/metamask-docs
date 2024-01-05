@@ -276,8 +276,8 @@ module.exports.onCronjob = async ({ request }) => {
 :::flaskOnly
 :::
 
-To build an embedded UI in MetaMask that any user can access via the Snaps menu, a Snap must export `onHomePage`. 
-This method is called when the user clicks the Snap name in the Snaps menu. 
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must export `onHomePage`. 
+This method is called when the user selects the Snap name in the Snaps menu. 
 
 :::note
 For MetaMask to call the Snap's `onHomePage` method, you must request the
