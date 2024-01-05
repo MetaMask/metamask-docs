@@ -107,7 +107,7 @@ To run an action when the user installs or updates the Snap, a Snap must request
 This permission allows the Snap to export the 
 [`onInstall`](../reference/exports.md#oninstall) and 
 [`onUpdate`](../reference/exports.md#onupdate) 
-methods, which will be called by MetaMask after a successful install or update, respectively.
+methods, which MetaMask calls after a successful installation or update, respectively.
 
 Specify this permission in the manifest file as follows:
 
