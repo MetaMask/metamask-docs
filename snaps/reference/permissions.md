@@ -86,6 +86,11 @@ those connected accounts.
 :::flaskOnly
 :::
 
+To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
+This permission allows the Snap to specify a "home page" entrypoint with the exported 
+[`onHomePage`](../reference/exports.md#onhomepage) method. 
+This "home page" can use any [custom UI components](../how-to/use-custom-ui.md) to build an embedded page accessible via the Snaps menu. 
+
 Specify this permission in the manifest file as follows:
 
 ```json
