@@ -404,3 +404,61 @@ module.exports.onUpdate = async () => {
 ```
 
 <!--/tabs-->
+
+## onHomePage
+
+:::flaskOnly
+:::
+
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must export `onHomePage`. 
+This method is called when the user selects the Snap name in the Snaps menu. 
+
+:::note
+For MetaMask to call the Snap's `onHomePage` method, you must request the
+[`endowment:page-home`](permissions.md#endowmentpage-home) permission.
+:::
+
+#### Parameters
+
+None.
+
+#### Returns
+
+A content object displayed using [custom UI](../how-to/use-custom-ui.md).
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnHomePageHandler } from '@metamask/snaps-sdk';
+import { panel, text, heading } from '@metamask/snaps-sdk';
+
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: panel([
+      heading('Hello world!'),
+      text('Welcome to my Snap home page!'),
+    ]),
+  };
+};
+```
+
+# JavaScript
+
+```js
+import { panel, text, heading } from '@metamask/snaps-sdk';
+
+module.exports.onHomePage = async () => {
+  return {
+    content: panel([
+      heading('Hello world!'),
+      text('Welcome to my Snap home page!'),
+    ]),
+  };
+};
+```
+
+<!--/tabs-->
