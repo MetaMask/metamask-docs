@@ -119,6 +119,22 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
+### endowment:lifecycle-hooks
+
+To run an action when the user installs or updates the Snap, a Snap must request the `endowment:lifecycle-hooks` permission.
+This permission allows the Snap to export the 
+[`onInstall`](../reference/exports.md#oninstall) and 
+[`onUpdate`](../reference/exports.md#onupdate) 
+methods, which MetaMask calls after a successful installation or update, respectively.
+
+Specify this permission in the manifest file as follows:
+
+```json
+"initialPermissions": {
+  "endowment:lifecycle-hooks": {}
+},
+```
+
 ### endowment:network-access
 
 To access the internet, a Snap must request the `endowment:network-access` permission.
