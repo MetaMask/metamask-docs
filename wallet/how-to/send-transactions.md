@@ -137,7 +137,8 @@ information on how the data is encoded.
 MetaMask ignores this field.
 :::
 
-The chain ID is derived from the user's current selected network at `window.ethereum.networkVersion`.
+The chain ID is derived from the user's current selected network at `window.ethereum.request({method: 'net_version'})`,
+otherwise use `eth_chainId`.
 
 In the future, MetaMask might allow connecting to multiple networks at the same time, at which point
 this parameter will become important, so it might be useful to be in the habit of including it now.
