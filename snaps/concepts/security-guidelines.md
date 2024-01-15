@@ -75,7 +75,7 @@ The following are guidelines for user notifications and authorizations:
     ```JavaScript
     const referrer = new URL(origin);
 
-    if(referrer.protocol === "https:" && referrer.host.endsWith("metamask.io")) { 
+    if(referrer.protocol === "https:" && referrer.host.endsWith(".metamask.io")) { 
       console.log("URL is valid"); 
     }
     else { 
