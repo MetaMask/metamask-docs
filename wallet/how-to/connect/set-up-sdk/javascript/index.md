@@ -60,7 +60,7 @@ Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md)
 const MMSDK = new MetaMaskSDK(
   dappMetadata: {
     name: "JavaScript example dapp",
-    url: window.location.host,
+    url: window.location.href,
   }
   // Other options
 );
@@ -98,7 +98,7 @@ import { MetaMaskSDK } from '@metamask/sdk';
 const MMSDK = new MetaMaskSDK(
   dappMetadata: {
     name: "Example JavaScript Dapp",
-    url: window.location.host,
+    url: window.location.href,
   }
   // Other options
 );

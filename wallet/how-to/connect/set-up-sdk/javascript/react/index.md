@@ -65,7 +65,7 @@ root.render(
     <MetaMaskProvider debug={false} sdkOptions={{
       dappMetadata: {
         name: "Example React Dapp",
-        url: window.location.host,
+        url: window.location.href,
       }
       // Other options
     }}>
@@ -180,7 +180,7 @@ root.render(
     <MetaMaskProvider debug={false} sdkOptions={{
       dappMetadata: {
         name: "Example React Dapp",
-        url: window.location.host,
+        url: window.location.href,
       }
       // Other options
     }}>
