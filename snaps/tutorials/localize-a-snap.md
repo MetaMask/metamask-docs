@@ -41,7 +41,7 @@ For example, you can create files named `snap/locales/<language_code>.json with 
 }
 ```
 
-These files can be used from a localization module. Here's an example of a working one:
+You can use these files with a localization module. The following is an example of a working module:
 
 ```ts
 import da from '../locales/da.json';
