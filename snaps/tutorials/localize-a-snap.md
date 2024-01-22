@@ -48,7 +48,7 @@ import da from '../locales/da.json';
 import en from '../locales/en.json';
 import nl from '../locales/nl.json';
 
-// Fallback language, to be used if we don't have a valid translation in
+// Fallback language, to be used if there is not a valid translation in
 // the requested locale.
 const FALLBACK_LANGUAGE: Locale = 'en';
 
