@@ -25,7 +25,7 @@ In your Snap code, you can determine the user's language by using the [`snap_get
 }
 ```
 
-With this permission granted, your Snap code can now call `snap_getLocale`. This will return a language code like `"en"`, `"es"`, ... It's then up to you to determine how to use this code to customize your Snap's UI.
+With this permission granted, your Snap code can call `snap_getLocale` to obtain a language code (such as "en" or "es"). You can then decide how to use this language code to customize the functionality of your Snap's UI.
 
 As an example, you can create files of the form `snap/locales/[language_code].json` like so:
 
