@@ -10,7 +10,7 @@ This tutorial walks you through localizing your Snap. This is done in two places
 - in your Snaps's code, by building upon the [`snap_getLocale`](../reference/rpc-api.md#snap_getlocale) function
 - in the manifest, where fields like title and description can be shown in the user's language
 
-## Localizing Snap UI
+## Localize the Snap UI
 
 In your Snap code, you can access the user's language by calling the [`snap_getLocale`](../reference/rpc-api.md#snap_getlocale) function. To do so, you must first request the permission by adding it to the `initialPermissions` section of `snap.manifest.json`:
 
