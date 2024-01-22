@@ -91,7 +91,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 };
 ```
 
-## Localizing the Snap's manifest
+## Localize the Snap's manifest
 
 In addition to containing purely technical metadata like `version` or `shasum`, the Snap manifest also contains textual data such as `proposedName` and `description`. These manifest fields can be localized as well.
 
