@@ -13,9 +13,11 @@ Below is a visual demo of that user experience showing the data provided from ea
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/eip-6963.mov" />
+    <source src="/eip-6963-demo.mp4" />
   </video>
 </p>
+
+For implementing EIP-6963 in React, check out our [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts).
 
 ## What Developers Need to Know
 
@@ -29,9 +31,7 @@ As well, we will need an interface to represent the [EIP-1193 Provider](https://
 
 The `EIP1193Provider` interface serves as the foundational structure for Ethereum wallet providers, outlining essential properties and methods for interaction with dapps. It includes attributes such as `isStatus`, `host`, and `path`, providing details about the provider's status and connection information. 
 
-Also, it defines functions like `sendAsync`, `send`, and `request` for handling asynchronous communication and making requests to the Ethereum blockchain. This interface, defined by the previous [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), lays the groundwork for wallet interoperability and seamless integration with the Ethereum ecosystem. Developers can leverage this interface to implement and interact with Ethereum wallet providers in a standardized manner.
-
-If you decide to implement EIP-6963 from scratch in your applications you will need all of these interfaces and types that can be found here in the source code: [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts).
+It also defines functions like `sendAsync`, `send`, and `request` for handling asynchronous communication and making requests to the Ethereum blockchain. This interface, defined by the previous [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), lays the groundwork for wallet interoperability and seamless integration with the Ethereum ecosystem. Developers can leverage this interface to implement and interact with Ethereum wallet providers in a standardized manner.
 
 ## Third Party Library Support
 
