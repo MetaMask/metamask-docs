@@ -3,7 +3,7 @@ description: Learn about wallet interoperability.
 sidebar_position: 6
 ---
 
-# Wallet Interoperability
+# Wallet interoperability
 
 With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. 
 
