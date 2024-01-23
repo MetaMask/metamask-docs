@@ -8,7 +8,21 @@ sidebar_position: 2
 To access certain powerful JavaScript globals or API methods, a Snap must ask the user for permission.
 Snaps follow the [EIP-2255 wallet permissions specification](https://eips.ethereum.org/EIPS/eip-2255),
 and you must specify a Snap's required permissions (except for [dynamic permissions](#dynamic-permissions))
-in the `initialPermissions` field of the [manifest file](../concepts/anatomy.md#manifest-file).
+in the `initialPermissions` field of the [manifest file](../concepts/files.md#manifest-file).
+
+## Request permissions from a Snap
+
+### API methods
+
+### Endowments
+
+### Dynamic permissions
+
+`eth_accounts`
+
+## Request permissions from a dapp
+
+`wallet_snap` and `wallet_invokeSnap`
 
 ## RPC API permissions
 

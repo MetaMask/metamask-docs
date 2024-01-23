@@ -1,142 +1,19 @@
 ---
-description: See the Snaps JSON-RPC API reference.
+description: See the Snaps API reference.
 sidebar_position: 1
 ---
 
-# Snaps JSON-RPC API
+# Snaps API
 
-Snaps communicate with MetaMask using the Snaps JSON-RPC API.
-These API methods allow Snaps to modify the functionality of MetaMask, and websites (dapps) to
-install and communicate with individual Snaps.
-Some methods are only callable by Snaps, and some are only callable by websites.
+Snaps communicate with MetaMask using the Snaps API.
+These API methods allow Snaps to modify the functionality of MetaMask, and dapps to install and
+communicate with individual Snaps.
+Some methods are only callable by Snaps, and some are only callable by dapps.
 
-## Unrestricted methods
+## Callable by Snaps
 
-You can call unrestricted methods without requesting permission to do so.
-
-### wallet_getSnaps
-
-Returns the IDs of the caller's permitted Snaps and some relevant metadata.
-
-This method is only callable by websites.
-
-#### Returns
-
-An object containing the requester's permitted Snaps.
-Each Snap is an object containing:
-
-- `id` - The ID of the Snap.
-- `initialPermissions` - The initial permissions of the Snap, which will be requested when the Snap
-  is installed.
-- `version` - The version of the Snap.
-- `enabled` - `true` if the Snap is enabled, `false` otherwise.
-- `blocked` - `true` if the Snap is blocked, `false` otherwise.
-
-#### Example
-
-<!--tabs-->
-
-# JavaScript
-
-```javascript
-const result = await window.ethereum.request({ method: 'wallet_getSnaps' });
-
-console.log(result);
-```
-
-# Result
-
-```javascript
-// Example result if any Snaps are permitted
-{
-  'npm:@metamask/example-snap': {
-    version: '1.0.0',
-    id: 'npm:@metamask/example-snap',
-    enabled: true,
-    blocked: false,
-  },
-}
-```
-
-<!--/tabs-->
-
-### wallet_requestSnaps
-
-Requests permission for a website to communicate with the specified Snaps and attempts to install
-them if they're not already installed.
-If the installation of any Snap fails, returns the error that caused the failure.
-
-You can optionally specify a [SemVer range](https://www.npmjs.com/package/semver) for a Snap.
-MetaMask attempts to install a version of the Snap that satisfies the requested range.
-If a compatible version of a Snap is already installed, the request succeeds.
-If an incompatible version is installed, MetaMask attempts to update the Snap to the latest version
-that satisfies the requested range.
-The request succeeds if the Snap is successfully updated.
-
-This method is only callable by websites.
-
-#### Parameters
-
-An object containing the Snaps to request permission to communicate with.
-
-#### Returns
-
-An object mapping the IDs of installed Snaps to either their metadata or an error if installation fails.
-
-#### Example
-
-<!--tabs-->
-
-# JavaScript
-
-```javascript
-try {
-  const result = await window.ethereum.request({
-    method: 'wallet_requestSnaps',
-    params: {
-      'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {
-        // The optional version argument allows requesting a SemVer version
-        // range, with the same semantics as npm package.json ranges.
-        version: '^1.0.2',
-      },
-    },
-  });
-
-  console.log(result);
-
-} catch (error) {
-  console.log(error);
-}
-```
-
-# Result
-
-```javascript
-{
-  'npm:@metamask/example-snap': {
-    version: '1.0.0',
-    id: 'npm:@metamask/example-snap',
-    enabled: true,
-    blocked: false,
-  },
-  'npm:fooSnap': {
-    version: '1.0.5',
-    id: 'npm:fooSnap',
-    enabled: true,
-    blocked: false,
-  },
-}
-```
-
-<!--/tabs-->
-
-## Restricted methods
-
-For restricted methods callable by Snaps, a Snap must request permission to call the method in the
+For methods callable by Snaps, a Snap must request permission to call the method in the
 [snap manifest file](../how-to/request-permissions.md).
-For restricted methods callable by websites, a website must request permission to call the method using
-[`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions).
 
 ### snap_dialog
 
@@ -900,22 +777,141 @@ await snap.request({
 });
 ```
 
+## Callable by dapps
+
+### wallet_getSnaps
+
+Returns the IDs of the caller's permitted Snaps and some relevant metadata.
+
+This method is only callable by dapps.
+
+#### Returns
+
+An object containing the requester's permitted Snaps.
+Each Snap is an object containing:
+
+- `id` - The ID of the Snap.
+- `initialPermissions` - The initial permissions of the Snap, which will be requested when the Snap
+  is installed.
+- `version` - The version of the Snap.
+- `enabled` - `true` if the Snap is enabled, `false` otherwise.
+- `blocked` - `true` if the Snap is blocked, `false` otherwise.
+
+#### Example
+
+<!--tabs-->
+
+# JavaScript
+
+```javascript
+const result = await window.ethereum.request({ method: 'wallet_getSnaps' });
+
+console.log(result);
+```
+
+# Result
+
+```javascript
+// Example result if any Snaps are permitted
+{
+  'npm:@metamask/example-snap': {
+    version: '1.0.0',
+    id: 'npm:@metamask/example-snap',
+    enabled: true,
+    blocked: false,
+  },
+}
+```
+
+<!--/tabs-->
+
+### wallet_requestSnaps
+
+Requests permission for a dapp to communicate with the specified Snaps and attempts to install
+them if they're not already installed.
+If the installation of any Snap fails, returns the error that caused the failure.
+
+You can optionally specify a [SemVer range](https://www.npmjs.com/package/semver) for a Snap.
+MetaMask attempts to install a version of the Snap that satisfies the requested range.
+If a compatible version of a Snap is already installed, the request succeeds.
+If an incompatible version is installed, MetaMask attempts to update the Snap to the latest version
+that satisfies the requested range.
+The request succeeds if the Snap is successfully updated.
+
+This method is only callable by dapps.
+
+#### Parameters
+
+An object containing the Snaps to request permission to communicate with.
+
+#### Returns
+
+An object mapping the IDs of installed Snaps to either their metadata or an error if installation fails.
+
+#### Example
+
+<!--tabs-->
+
+# JavaScript
+
+```javascript
+try {
+  const result = await window.ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      'npm:@metamask/example-snap': {},
+      'npm:fooSnap': {
+        // The optional version argument allows requesting a SemVer version
+        // range, with the same semantics as npm package.json ranges.
+        version: '^1.0.2',
+      },
+    },
+  });
+
+  console.log(result);
+
+} catch (error) {
+  console.log(error);
+}
+```
+
+# Result
+
+```javascript
+{
+  'npm:@metamask/example-snap': {
+    version: '1.0.0',
+    id: 'npm:@metamask/example-snap',
+    enabled: true,
+    blocked: false,
+  },
+  'npm:fooSnap': {
+    version: '1.0.5',
+    id: 'npm:fooSnap',
+    enabled: true,
+    blocked: false,
+  },
+}
+```
+
+<!--/tabs-->
+
 ### wallet_snap
 
-A website must request the `wallet_snap` permission using
+A dapp must request the `wallet_snap` permission using
 [`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions) to
 interact with the specified Snaps.
 
-A website can also call this method to invoke the specified JSON-RPC method of the specified Snap.
+A dapp can also call this method to invoke the specified JSON-RPC method of the specified Snap.
 
 This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap).
 
 :::note
-Most websites only make one call to `wallet_requestPermissions`.
+Most dapps only make one call to `wallet_requestPermissions`.
 Consecutive calls to `wallet_requestPermissions` for the `wallet_snap` permission overwrites a
-website's existing permissions to interact with Snaps.
+dapp's existing permissions to interact with Snaps.
 To deal with this, you must write custom logic to merge existing Snap IDs with new ones you're requesting.
-Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a website's permitted Snaps.
+Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a dapp's permitted Snaps.
 :::
 
 #### Parameters

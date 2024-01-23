@@ -10,7 +10,7 @@ Use these guidelines when creating your Snap to ensure it is safe for users.
 
 ## Managing permissions
 
-The following are guidelines for managing permissions in the Snap [manifest file](../concepts/anatomy.md/#manifest-file).
+The following are guidelines for managing permissions in the Snap [manifest file](files.md/#manifest-file).
 
 - **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
@@ -216,15 +216,15 @@ The following are guidelines for securing your supply chain:
 
 - **Secure your stack** - Your Snap companion dapp and any remote servers are part of your security model.
   We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of
-  your stack and following security best practices for your website or server.
+  your stack and following security best practices for your dapp or server.
 
 ## Publishing and serving your Snap
 
 The following are guidelines for making your Snap available to users safely:
 
-- **Snap updates** - When serving a Snap from a particular website, make sure users are getting the
-  latest version of your Snap.
-  Do not allow any actions on the website before reconnecting it to MetaMask and loading a new or
+- **Snap updates** - When serving a Snap from a dapp, make sure users are getting the latest version
+  of your Snap.
+  Do not allow any actions on the dapp before reconnecting it to MetaMask and loading a new or
   updated version of the Snap.
   This prevents users from using outdated versions of the Snap that may have potential bugs and
   security issues.

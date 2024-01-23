@@ -8,14 +8,14 @@ toc_max_heading_level: 2
 
 This page outlines guiding principles for designers, developers, builders, and writers to create
 Snap installation flows that are accessible to all users.
-Use these guidelines when introducing your Snap within a dapp or website.
+Use these guidelines when introducing your Snap within a dapp.
 
 ## Why this matters
 
 The Snap installation process contains critical info about your Snap, including what it does, how it
 enhances your application, and why it's beneficial for users.
-It's important to provide this information on your dapp or website to help users understand the
-purpose and benefits of the Snap before installing it.
+It's important to provide this information on your dapp to help users understand the purpose and
+benefits of the Snap before installing it.
 Without this information, users may drop out during installation or install the Snap without fully
 understanding its purpose.
 
@@ -63,7 +63,7 @@ When you introduce your Snap, take this opportunity to highlight the benefits of
 intended user.
 If the user doesn't understand what they can gain from your Snap, they likely won't install it.
 
-Consider introducing your Snap on your website with a modal, tooltip, or card.
+Consider introducing your Snap on your dapp with a modal, tooltip, or card.
 This introduction should be impactful, clear, and direct, and can happen before or alongside the
 installation prompt.
 
@@ -90,8 +90,7 @@ Introduce your Snap as a natural extension of existing elements on your screen, 
 installation when the time is right.
 This can be a make or break moment for your Snap, so put yourself in the shoes of the intended user.
 
-Don't ask the user to install your Snap before they do anything in the dapp or website, as they will
-probably decline.
+Don't ask the user to install your Snap before they do anything in the dapp, as they will probably decline.
 Instead, **wait to prompt installation until a point when the Snap is required**.
 
 In the following example, a key management Snap is suggested when the user is prompted to pick networks:

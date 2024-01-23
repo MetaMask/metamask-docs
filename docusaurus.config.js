@@ -372,8 +372,16 @@ const config = {
             to: "/snaps/how-to/use-3rd-party-snaps",
           },
           {
-            from: "/snaps/get-started/install-snaps/",
-            to: "/snaps/get-started/install-flask/",
+            from: "/snaps/get-started/install-snaps",
+            to: "/snaps/get-started/install-flask",
+          },
+          {
+            from: "/snaps/concepts/anatomy",
+            to: "/snaps/concepts/files",
+          },
+          {
+            from: ["/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
+            to: "/snaps/concepts/overview",
           },
         ].reduce((acc, item) => {
           acc.push(item);

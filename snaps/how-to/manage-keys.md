@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Manage keys
 
-The [Snaps JSON-RPC API](../reference/rpc-api.md) allows you to manage users' private keys with
+The [Snaps API](../reference/rpc-api.md) allows you to manage users' private keys with
 their approval.
 
 :::caution important
