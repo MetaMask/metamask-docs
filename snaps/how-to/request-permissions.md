@@ -12,24 +12,11 @@ in the `initialPermissions` field of the [manifest file](../concepts/files.md#ma
 
 ## Request permissions from a Snap
 
-### API methods
+### Snaps API methods
 
-### Endowments
+A Snap must request permission to use any [Snaps API methods](../reference/snaps-api.md).
 
-### Dynamic permissions
-
-`eth_accounts`
-
-## Request permissions from a dapp
-
-`wallet_snap` and `wallet_invokeSnap`
-
-## RPC API permissions
-
-You must request permission to use any
-[restricted JSON-RPC API methods](../reference/rpc-api.md#restricted-methods).
-
-For example, to request to use [`snap_dialog`](../reference/rpc-api.md#snap_dialog), add the
+For example, to request to use [`snap_dialog`](../reference/snaps-api.md#snap_dialog), add the
 following to the manifest file:
 
 ```json
@@ -38,7 +25,7 @@ following to the manifest file:
 },
 ```
 
-## Endowments
+### Endowments
 
 Endowments are a type of permission.
 See the [Snaps permissions reference](../reference/permissions.md) for the full list of endowments
@@ -53,7 +40,7 @@ permission, add the following to the manifest file:
 },
 ```
 
-## Dynamic permissions
+### Dynamic permissions
 
 Dynamic permissions are not requested in the manifest file.
 Instead, your Snap can acquire dynamic permissions during its lifecycle.
@@ -62,5 +49,11 @@ For example, your Snap can request permission to call the Ethereum provider's
 [`eth_accounts`](../reference/permissions.md#eth_accounts) RPC method by calling the provider's
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
-See the [`eth_accounts` Dynamic Permission](../reference/permissions.md#eth_accounts)
+See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_accounts)
 for more information.
+
+`eth_accounts`
+
+## Request permissions from a dapp
+
+`wallet_snap` and `wallet_invokeSnap`

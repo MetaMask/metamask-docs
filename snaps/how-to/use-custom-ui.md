@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Use custom UI
 
-The [`snap_dialog`](../reference/rpc-api.md#snap_dialog) RPC method and
+The [`snap_dialog`](../reference/snaps-api.md#snap_dialog) RPC method and
 [`onTransaction`](../reference/exports.md#ontransaction) exported method use the
 `@metamask/snaps-ui` module to display custom user interface (UI) components.
 

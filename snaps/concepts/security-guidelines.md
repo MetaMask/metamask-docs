@@ -109,7 +109,7 @@ user IPs, emails, passwords, and private keys:
 
 - **Private keys** - Avoid retrieving the user's private key from the Snap unless
   absolutely necessary, such as to sign a transaction.
-  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/rpc-api.md#snap_getbip32publickey)
+  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
   instead of deriving it from the private key.
   Never return the private key in an RPC method to a dapp or another Snap.
   To give users a way to view their private key, display it in a dialog.
@@ -174,9 +174,9 @@ The following are guidelines for validating RPC parameters and handling values:
 
 Avoid using the following deprecated methods:
 
-- `wallet_enable`, which is deprecated in favor of [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
+- `wallet_enable`, which is deprecated in favor of [`wallet_requestSnaps`](../reference/snaps-api.md#wallet_requestsnaps).
 
-- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/rpc-api.md#snap_dialog).
+- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/snaps-api.md#snap_dialog).
 
 - `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in MetaMask Flask.
 
@@ -199,7 +199,7 @@ The following are coding security tips and warnings:
   Do not use insufficient hashing algorithms such as `md5` or `sha2`.
   Do not roll your own cryptography or use custom or unproven cryptography methods or libraries.
 
-  We recommend using [`snap_getEntropy`](../reference/rpc-api.md/#snap_getentropy) for entropy, the
+  We recommend using [`snap_getEntropy`](../reference/snaps-api.md/#snap_getentropy) for entropy, the
   built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) or
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.

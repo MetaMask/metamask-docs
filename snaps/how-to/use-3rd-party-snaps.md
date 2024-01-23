@@ -13,7 +13,7 @@ Snaps can decide to make their API available to dapps by requesting the
 
 ## Connect to a Snap
 
-Connect to a Snap by calling the [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps)
+Connect to a Snap by calling the [`wallet_requestSnaps`](../reference/snaps-api.md#wallet_requestsnaps)
 method from your dapp.
 If a user doesn't have the Snap installed in their MetaMask wallet, MetaMask prompts the user to
 install the Snap.
@@ -60,7 +60,7 @@ Do not assume that data stored by a Snap is unique to your dapp.
 
 ## Determine whether a Snap is installed
 
-Determine whether a Snap is installed by calling the [`wallet_getSnaps`](../reference/rpc-api.md#wallet_getsnaps)
+Determine whether a Snap is installed by calling the [`wallet_getSnaps`](../reference/snaps-api.md#wallet_getsnaps)
 method from your dapp.
 This method returns a list of only those Snaps that are connected to your current dapp.
 
@@ -98,7 +98,7 @@ to work with that version.
 At any time, a user can open their MetaMask Snaps settings menu and see all the dapps connected to a Snap.
 From that menu they can revoke a dapp connection.
 If your dapp loses the connection to a Snap, you can reconnect by calling
-[`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](../reference/snaps-api.md#wallet_requestsnaps).
 Since the Snap is already installed, this returns a success response without MetaMask showing a pop-up.
 However, if the user has disabled the Snap, the response has `enabled` set to `false` for your `SNAP_ID`:
 

@@ -10,9 +10,9 @@ Your Snap can [request the following permissions](../how-to/request-permissions.
 ## RPC API permissions
 
 You must request permission to use any
-[restricted JSON-RPC API methods](rpc-api.md#restricted-methods).
+[restricted JSON-RPC API methods](snaps-api.md#restricted-methods).
 
-For example, to request to use [`snap_dialog`](rpc-api.md#snap_dialog), add the following to the
+For example, to request to use [`snap_dialog`](snaps-api.md#snap_dialog), add the following to the
 manifest file:
 
 ```json

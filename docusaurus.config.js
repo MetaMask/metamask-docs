@@ -220,8 +220,8 @@ const config = {
             to: "/snaps/concepts",
           },
           {
-            from: "/guide/snaps-rpc-api",
-            to: "/snaps/reference/rpc-api",
+            from: ["/guide/snaps-rpc-api", "/snaps/reference/rpc-api"],
+            to: "/snaps/reference/snaps-api",
           },
           {
             from: "/guide/snaps-permissions",

@@ -9,10 +9,11 @@ sidebar_position: 2
 
 Snaps can access the global object `snap`.
 You can use this object to make Snaps-specific JSON-RPC requests.
+These API methods allow Snaps to modify the functionality of MetaMask.
 
 ## MetaMask JSON-RPC API
 
-Dapps can interact with Snaps using the following MetaMask JSON-RPC API methods:
+Dapps can install and communicate with Snaps using the following MetaMask JSON-RPC API methods:
 
 - `wallet_getSnap`
 - `wallet_requestSnaps`

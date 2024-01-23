@@ -53,7 +53,7 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          id: "reference/rpc-api",
+          id: "reference/snaps-api",
         },
         {
           type: "doc",
