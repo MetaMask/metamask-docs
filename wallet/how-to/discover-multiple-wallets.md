@@ -33,7 +33,7 @@ If you intend to support discovery of other wallets, we recommend using other me
 EIP-6963 support.
 :::
 
-The MetaMask SDK not only supports EIP-6963 on its own for detecting MetaMask, but is also being integrated into [WAGMI 2.0+]() which supports EIP-6963. If you only want to connect to MetaMask extension and MetaMask mobile:
+The MetaMask SDK not only supports EIP-6963 on its own for detecting MetaMask, but is also being integrated into [WAGMI 2.0+](https://wagmi.sh/) which supports EIP-6963. If you only want to connect to MetaMask extension and MetaMask mobile:
 
 - [Set up MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
 
