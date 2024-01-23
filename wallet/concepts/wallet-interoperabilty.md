@@ -5,9 +5,11 @@ sidebar_position: 6
 
 # Wallet Interoperability
 
-With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. This greatly improves the user experience and gives developers an alternative discovery mechanism to the [`window.ethereum` injected provider](apis.md#ethereum-provider-api).
+With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. 
 
-We recommend using this new mechanism for provider discovery. Below is a visual demo of that user experience and shows the data provided from each installed wallet.
+The primary implication for developers is the shift from relying solely on `window.ethereum` for wallet detection giving developers an alternative discovery mechanism to the [`window.ethereum` injected provider](apis.md#ethereum-provider-api). We recommend using this new mechanism for provider discovery by using the standardized events and interfaces provided by EIP-6963.
+
+Below is a visual demo of that user experience showing the data provided from each installed wallet.
 
 <p align="center">
   <video width="100%" controls>
@@ -17,20 +19,19 @@ We recommend using this new mechanism for provider discovery. Below is a visual 
 
 ## What Developers Need to Know
 
-As a developer implementing [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), one simply needs to understand the initial motive, the value that this new approach brings users and more importantly the [types and interfaces]() needed in your application.
+As a developer implementing [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), one simply needs to understand the initial motive, the value that this new approach brings users, and more importantly the types and interfaces needed in your application.
 
 - [Provider Info](https://eips.ethereum.org/EIPS/eip-6963#provider-info)
-- [Provider Detail](https://eips.ethereum.org/EIPS/eip-6963#provider-info)
-- []()
+- [Provider Detail](https://eips.ethereum.org/EIPS/eip-6963#provider-detail)
+- [Announce and Request Events](https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events)
 
-And the interface for the original EIP-1193 Provider
-- [EIP1193 Provider]()
+As well, we will need an interface to represent the [EIP-1193 Provider](https://eips.ethereum.org/EIPS/eip-1193)
 
 The `EIP1193Provider` interface serves as the foundational structure for Ethereum wallet providers, outlining essential properties and methods for interaction with dapps. It includes attributes such as `isStatus`, `host`, and `path`, providing details about the provider's status and connection information. 
 
-Additionally, it defines functions like `sendAsync`, `send`, and `request` for handling asynchronous communication and making requests to the Ethereum blockchain. This interface, defined by the previous [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), lays the groundwork for wallet interoperability and seamless integration with the Ethereum ecosystem. Developers can leverage this interface to implement and interact with Ethereum wallet providers in a standardized manner.
+Also, it defines functions like `sendAsync`, `send`, and `request` for handling asynchronous communication and making requests to the Ethereum blockchain. This interface, defined by the previous [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), lays the groundwork for wallet interoperability and seamless integration with the Ethereum ecosystem. Developers can leverage this interface to implement and interact with Ethereum wallet providers in a standardized manner.
 
-If you decide to implement EIP-6963 from scratch in your applications you will need all of these interfaces and types as in the following [ViteJS React demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts).
+If you decide to implement EIP-6963 from scratch in your applications you will need all of these interfaces and types that can be found here in the source code: [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts).
 
 ## Third Party Library Support
 
@@ -42,7 +43,7 @@ You can add support for connecting to the MetaMask browser extension via EIP-696
 ### The MetaMask SDK
 
 :::note
-MetaMask SDK doesn't support connecting to non-MetaMask wallets via EIP-6963.
+MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
 If you intend to support discovery of other wallets, we recommend using other methods of adding
 EIP-6963 support.
 :::
