@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Snaps permissions
 
-Your Snap can [request the following permissions](../how-to/request-permissions.md).
+Snaps can [request the following permissions](../how-to/request-permissions.md).
 
 ## RPC API permissions
 
@@ -61,8 +61,9 @@ Specify this permission in the manifest file as follows:
 ### endowment:ethereum-provider
 
 To communicate with a node using MetaMask, a Snap must request the `endowment:ethereum-provider` permission.
-This permission exposes the global API `ethereum` to the Snap execution environment.
-This global is an EIP-1193 provider.
+This permission exposes the `ethereum` global to the Snap execution environment, allowing Snaps to
+call some [MetaMask JSON-RPC API](/wallet/reference/json-rpc-api) methods.
+This global is an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider.
 
 Specify this permission in the manifest file as follows:
 
@@ -73,10 +74,8 @@ Specify this permission in the manifest file as follows:
 ```
 
 :::note 
-The global `ethereum` API in Snaps has fewer capabilities than `window.ethereum` for dapps. 
-You can only use it to make read requests from the RPC provider, not to write to the blockchain or initiate transactions. 
-You can also use it to connect to Ethereum accounts with `eth_requestAccounts` and then use `personal_sign` with 
-those connected accounts.
+The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
+See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not available to Snaps.
 :::
 
 ### endowment:page-home

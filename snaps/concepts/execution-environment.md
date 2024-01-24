@@ -7,6 +7,9 @@ sidebar_position: 4
 
 Snaps are untrusted JavaScript programs that execute safely in a sandboxed environment that runs
 [Secure ECMAScript (SES)](#secure-ecmascript-ses).
+This allows MetaMask to restrict access to global JavaScript APIs and to isolate a Snap's code from
+other parts of the application.
+
 There's no DOM, no Node.js built-ins, and no platform-specific APIs other than MetaMask's `wallet`
 global object.
 Almost all standard JavaScript globals contained in
