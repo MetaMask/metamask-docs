@@ -9,13 +9,11 @@ Your Snap can [request the following permissions](../how-to/request-permissions.
 
 ## RPC API permissions
 
-You must request permission to use any
-[restricted JSON-RPC API methods](snaps-api.md#restricted-methods).
-
-For example, to request to use [`snap_dialog`](snaps-api.md#snap_dialog), add the following to the
+You must request permission to call [Snaps API methods](snaps-api.md).
+For example, to request to call [`snap_dialog`](snaps-api.md#snap_dialog), add the following to the
 manifest file:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "snap_dialog": {}
 },
@@ -31,7 +29,7 @@ This permission allows the Snap to specify cron jobs that trigger the exported
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 {
   "initialPermissions": {
     "endowment:cronjob": {
@@ -68,7 +66,7 @@ This global is an EIP-1193 provider.
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:ethereum-provider": {}
 },
@@ -93,7 +91,7 @@ You can use any [custom UI components](../how-to/use-custom-ui.md) to build an e
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:page-home": {}
 }
@@ -111,7 +109,7 @@ MetaMask rejects the request.
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:keyring": {
     "allowedOrigins": ["https://<dapp domain>"]
@@ -129,7 +127,7 @@ methods, which MetaMask calls after a successful installation or update, respect
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:lifecycle-hooks": {}
 },
@@ -148,7 +146,7 @@ If your dependencies use `XMLHttpRequest`, you can
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:network-access": {}
 },
@@ -175,7 +173,7 @@ The default for both properties is `false`.
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 {
   "initialPermissions": {
     "endowment:rpc": {
@@ -191,7 +189,7 @@ Calls from any other origins will be rejected.
 
 Specify this caveat in the manifest file as follows: 
 
-```json
+```json title="snap.manifest.json"
 {
   "initialPermissions": {
     "endowment:rpc": { 
@@ -222,7 +220,7 @@ The default is `false`.
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:transaction-insight": {
     "allowTransactionOrigin": true
@@ -237,7 +235,7 @@ This permission exposes the global `WebAssembly` API to the Snap execution envir
 
 Specify this permission in the manifest file as follows:
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:webassembly": {}
 },
@@ -245,18 +243,18 @@ Specify this permission in the manifest file as follows:
 
 ## Dynamic permissions
 
-Dynamic permissions are not requested in the manifest file.
-Instead, your Snap can acquire dynamic permissions during its lifecycle.
-
 ### eth_accounts
 
-A Snap can request permission to call the Ethereum provider's [`eth_accounts`](/wallet/reference/eth_accounts)
-RPC method by calling the provider's [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
-Calling `eth_requestAccounts` requires the [`ethereum-provider`](#endowmentethereum-provider) endowment.
+A Snap can request permission to call the [`eth_accounts`](/wallet/reference/eth_accounts) MetaMask
+JSON-RPC API method by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
+Calling `eth_requestAccounts` requires the
+[`endowment:ethereum-provider`](#endowmentethereum-provider) permission.
 
-You can check the presence of the permission by calling [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
+You can check the presence of the permission by calling
+[`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
 If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
-It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows for this Snap.
+It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows
+for this Snap.
 The following is an example `eth_accounts` permission:
 
 ```json
