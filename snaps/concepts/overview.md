@@ -11,9 +11,6 @@ For example, a Snap can add support for different blockchain protocols, add cust
 provide additional functionality using its own APIs.
 This allows MetaMask to be used with a far more diverse set of protocols, dapps, and services.
 
-## Architecture diagram
-
-
 ## Technical overview
 
 A Snap is a JavaScript program run in an isolated and secure [execution environment](execution-environment.md).

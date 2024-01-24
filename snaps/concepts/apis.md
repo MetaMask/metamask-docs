@@ -111,7 +111,7 @@ Snaps can also call some MetaMask JSON-RPC API methods using the `ethereum` glob
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
 [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) permission.
 
-For example, to call [`eth_requestAccounts`](/wallet/refernce/eth_requestaccounts):
+For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts):
 
 <Tabs>
 <TabItem value="Request permission">
