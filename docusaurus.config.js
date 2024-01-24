@@ -400,27 +400,6 @@ const config = {
         },
       ] : null,
   ],
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      navbar: {
-        title: " │ ‎ Documentation",
-        logo: {
-          alt: "MetaMask logo",
-          src: "img/metamask-logo.svg",
-          srcDark: "img/metamask-logo-dark.svg",
-          width: 150,
-        },
-        items: [
-          {
-            to: "wallet",
-            label: "Wallet",
-          },
-          {
-            to: "/wallet/how-to/connect/set-up-sdk",
-            label: "SDK",
-          },
-          {
             to: "snaps",
             label: "Snaps",
           },
