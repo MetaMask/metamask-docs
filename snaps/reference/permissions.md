@@ -271,8 +271,8 @@ await ethereum.request({
 You can check the presence of the permission by calling
 [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
 If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
-It comes with a caveat of `restrictReturnedAccounts`, an array of all the accounts the user allows
-for this Snap.
+The permission contains a `restrictReturnedAccounts` caveat, an array of all the accounts the user
+allows for this Snap.
 The following is an example `eth_accounts` permission:
 
 ```json

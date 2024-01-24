@@ -3,9 +3,6 @@ description: Learn about the Snaps APIs.
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # About the Snaps APIs
 
 Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API](#snaps-api),
@@ -16,13 +13,11 @@ Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API]
 Snaps can access the global object `snap`, which has one method: `request`.
 You can use this object to make [Snaps API](../reference/snaps-api.md) requests.
 These API methods allow Snaps to extend or modify the functionality of MetaMask.
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the
-Snap manifest file.
 
-For example, to call [`snap_notify`](../reference/snaps-api.md#snap_notify):
-
-<Tabs>
-<TabItem value="Request permission">
+To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
+manifest file.
+For example, to call [`snap_notify`](../reference/snaps-api.md#snap_notify), first request the
+`snap_notify` permission:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -30,8 +25,7 @@ For example, to call [`snap_notify`](../reference/snaps-api.md#snap_notify):
 }
 ```
 
-</TabItem>
-<TabItem value="Call method">
+Your Snap can then call `snap_notify` in its source code:
 
 ```typescript title="index.ts"
 await snap.request({
@@ -42,9 +36,6 @@ await snap.request({
   },
 });
 ```
-
-</TabItem>
-</Tabs>
 
 ## MetaMask JSON-RPC API
 
@@ -60,10 +51,7 @@ Dapps can install and communicate with Snaps using the following
 
 To call restricted methods, a dapp must first request permission using
 [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
-For example, to call `wallet_snap`:
-
-<Tabs>
-<TabItem value="Request permission">
+For example, to call `wallet_snap`, first request the `wallet_snap` permission:
 
 ```js title="index.js"
 await window.ethereum.request({
@@ -84,8 +72,7 @@ await window.ethereum.request({
 });
 ```
 
-</TabItem>
-<TabItem value="Call method">
+The dapp can then call `wallet_snap`:
 
 ```js title="index.js"
 await window.ethereum.request({
@@ -101,20 +88,15 @@ await window.ethereum.request({
 });
 ```
 
-</TabItem>
-</Tabs>
-
 ### Snap requests
 
 Snaps can also call some MetaMask JSON-RPC API methods using the `ethereum` global, which is an
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider.
+
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
 [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) permission.
-
-For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts):
-
-<Tabs>
-<TabItem value="Request permission">
+For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts), first request
+the required permission:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -122,17 +104,13 @@ For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccoun
 }
 ```
 
-</TabItem>
-<TabItem value="Call method">
+Your Snap can then call `eth_requestAccounts` in its source code:
 
 ```typescript title="index.ts"
 await ethereum.request({
   "method": "eth_requestAccounts"
 });
 ```
-
-</TabItem>
-</Tabs>
 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
@@ -169,10 +147,7 @@ However, if you want to do something such as manage the user's keys for a partic
 create a dapp that sends transactions for that protocol via your Snap, you must implement a custom API.
 :::
 
-For example, to create a simple Snap, `Hello World`, and invoke its JSON-RPC method `hello` from a dapp:
-
-<Tabs>
-<TabItem value="Request permission">
+For example, to create a simple Snap with a custom API, first request the `endowment:rpc` permission:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -182,8 +157,7 @@ For example, to create a simple Snap, `Hello World`, and invoke its JSON-RPC met
 }
 ```
 
-</TabItem>
-<TabItem value="Expose method from a Snap">
+Your Snap can then implement and expose a custom API using the `onRpcRequest` function:
 
 ```typescript title="index.ts"
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -198,8 +172,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-</TabItem>
-<TabItem value="Call method from a dapp">
+A dapp can then install the Snap and call the exposed method:
 
 ```javascript title="index.js"
 // Connect to the Snap, enabling its usage inside the dapp.
@@ -221,6 +194,3 @@ const response = await window.ethereum.request({
 
 console.log(response); // 'world!'
 ```
-
-</TabItem>
-</Tabs>

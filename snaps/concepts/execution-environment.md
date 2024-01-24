@@ -10,8 +10,8 @@ Snaps are untrusted JavaScript programs that execute safely in a sandboxed envir
 This allows MetaMask to restrict access to global JavaScript APIs and to isolate a Snap's code from
 other parts of the application.
 
-There's no DOM, no Node.js built-ins, and no platform-specific APIs other than the default `snap`
-global and MetaMask's `ethereum` global.
+This environment does not have a DOM, Node.js built-ins, or platform-specific APIs other than the
+default `snap` global and MetaMask's `ethereum` global.
 
 :::note
 A Snap can access the [Snaps API](apis.md#snaps-api) using the `snap` global, and the

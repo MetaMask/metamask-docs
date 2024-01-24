@@ -7,8 +7,8 @@ toc_max_heading_level: 2
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../concepts/apis.md#snaps-api).
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the
-Snap manifest file.
+To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
+manifest file.
 
 ## snap_dialog
 
