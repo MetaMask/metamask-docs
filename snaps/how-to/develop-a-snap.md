@@ -5,8 +5,7 @@ sidebar_position: 1
 
 # Develop a Snap
 
-A Snap can extend the dapp-facing [MetaMask JSON-RPC API](/wallet/reference/rpc-api) in
-arbitrary ways, or integrate with and extend the functionality of MetaMask using the
+A Snap can integrate with and extend the functionality of MetaMask using the
 [Snaps exports](../reference/exports.md), [Snaps API](../reference/snaps-api.md), and
 [permissions](request-permissions.md).
 
@@ -16,14 +15,12 @@ Before developing a Snap, make sure you understand the following concepts and gu
 - [Snaps overview](../concepts/overview.md)
 - [Snaps APIs](../concepts/apis.md)
 - [Snaps files](../concepts/files.md)
-- [Snaps execution environment](../concepts/execution-environment.md)
 - [Snaps design guidelines](../concepts/design-guidelines.md)
 - [Snaps security guidelines](../concepts/security-guidelines.md)
 :::
 
 You can get started by [creating a new Snap project](../get-started/quickstart.mdx) or following a
 [tutorial](/snaps/tutorials).
-
 This page describes additional important steps when developing a Snap.
 
 ## Detect the user's MetaMask version

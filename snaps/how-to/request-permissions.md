@@ -24,7 +24,7 @@ following to the manifest file:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "snap_dialog": {}
-},
+}
 ```
 
 ### Endowments
@@ -40,7 +40,7 @@ permission, add the following to the manifest file:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:network-access": {}
-},
+}
 ```
 
 ### Dynamic permissions
@@ -61,8 +61,8 @@ Request permission to call these methods by calling
 [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions).
 For example, to request permission to call `wallet_snap`:
 
-```js
-const result = await ethereum.request({
+```js title="index.js"
+await window.ethereum.request({
   method: 'wallet_requestPermissions',
   params: [{
     wallet_snap: {

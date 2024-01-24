@@ -36,7 +36,7 @@ other Snaps.
 
 Dapps can also use certain MetaMask JSON-RPC API methods to install and communicate with Snaps.
 
-A Snap can implement its own custom JSON-RPC API so dapps and other Snaps can communicate with it.
+A Snap can implement its own custom JSON-RPC API to communicate with dapps and other Snaps.
 
 Learn more [about the Snaps APIs](apis.md).
 

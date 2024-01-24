@@ -3,6 +3,9 @@ description: See the Snaps permissions reference.
 sidebar_position: 4
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Snaps permissions
 
 Snaps can [request the following permissions](../how-to/request-permissions.md).
@@ -16,7 +19,7 @@ manifest file:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "snap_dialog": {}
-},
+}
 ```
 
 ## Endowments
@@ -30,32 +33,31 @@ This permission allows the Snap to specify cron jobs that trigger the exported
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
-{
-  "initialPermissions": {
-    "endowment:cronjob": {
-      "jobs": [
-        {
-          "expression": "* * * * *",
-          "request": {
-            "method": "exampleMethodOne",
-            "params": {
-              "param1": "foo"
-            }
-          }
-        },
-        {
-          "expression": "*/2 * * * *",
-          "request": {
-            "method": "exampleMethodTwo",
-            "params": {
-              "param1": "bar"
-            }
+"initialPermissions": {
+  "endowment:cronjob": {
+    "jobs": [
+      {
+        "expression": "* * * * *",
+        "request": {
+          "method": "exampleMethodOne",
+          "params": {
+            "param1": "foo"
           }
         }
-      ]
-    }
+      },
+      {
+        "expression": "*/2 * * * *",
+        "request": {
+          "method": "exampleMethodTwo",
+          "params": {
+            "param1": "bar"
+          }
+        }
+      }
+    ]
   }
 }
+
 ```
 
 ### endowment:ethereum-provider
@@ -70,7 +72,7 @@ Specify this permission in the manifest file as follows:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:ethereum-provider": {}
-},
+}
 ```
 
 :::note 
@@ -129,7 +131,7 @@ Specify this permission in the manifest file as follows:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:lifecycle-hooks": {}
-},
+}
 ```
 
 ### endowment:network-access
@@ -148,7 +150,7 @@ Specify this permission in the manifest file as follows:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:network-access": {}
-},
+}
 ```
 
 #### Same-origin policy and CORS
@@ -167,37 +169,33 @@ This permission grants a Snap access to JSON-RPC requests sent to the Snap, usin
 [`onRpcRequest`](exports.md#onrpcrequest) method.
 
 This permission requires an object with a `snaps` or `dapps` property (or both), to signal if the
-snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
+Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
-{
-  "initialPermissions": {
-    "endowment:rpc": {
-      "dapps": true,
-      "snaps": false
-    }
+"initialPermissions": {
+  "endowment:rpc": {
+    "dapps": true,
+    "snaps": false
   }
 }
 ```
 
 Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
-Calls from any other origins will be rejected. 
+Calls from any other origins are rejected. 
 
 Specify this caveat in the manifest file as follows: 
 
 ```json title="snap.manifest.json"
-{
-  "initialPermissions": {
-    "endowment:rpc": { 
-      "allowedOrigins": [
-        "metamask.io", 
-        "consensys.io",
-        "npm:@metamask/example-snap"
-      ] 
-    }
+"initialPermissions": {
+  "endowment:rpc": { 
+    "allowedOrigins": [
+      "metamask.io", 
+      "consensys.io",
+      "npm:@metamask/example-snap"
+    ] 
   }
 }
 ```
@@ -224,7 +222,7 @@ Specify this permission in the manifest file as follows:
   "endowment:transaction-insight": {
     "allowTransactionOrigin": true
   }
-},
+}
 ```
 
 ### endowment:webassembly
@@ -237,7 +235,7 @@ Specify this permission in the manifest file as follows:
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:webassembly": {}
-},
+}
 ```
 
 ## Dynamic permissions
@@ -247,7 +245,28 @@ Specify this permission in the manifest file as follows:
 A Snap can request permission to call the [`eth_accounts`](/wallet/reference/eth_accounts) MetaMask
 JSON-RPC API method by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 Calling `eth_requestAccounts` requires the
-[`endowment:ethereum-provider`](#endowmentethereum-provider) permission.
+[`endowment:ethereum-provider`](#endowmentethereum-provider) permission:
+
+<Tabs>
+<TabItem value="Manifest file">
+
+```json
+"initialPermissions": {
+  "endowment:ethereum-provider": {}
+}
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js
+await ethereum.request({
+  "method": "eth_requestAccounts"
+});
+```
+
+</TabItem>
+</Tabs>
 
 You can check the presence of the permission by calling
 [`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).

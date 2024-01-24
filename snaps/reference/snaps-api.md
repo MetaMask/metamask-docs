@@ -167,15 +167,13 @@ its corresponding key material:
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip32Entropy": [
-      {
-        "path": ["m", "44'", "3'"],
-        "curve": "secp256k1" // Or "ed25519"
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip32Entropy": [
+    {
+      "path": ["m", "44'", "3'"],
+      "curve": "secp256k1" // Or "ed25519"
+    }
+  ]
 }
 ```
 
@@ -237,15 +235,13 @@ The public key as hexadecimal string.
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip32PublicKey": [
-      {
-        "path": ["m", "44'", "3'", "0'", "0", "0"],
-        "curve": "secp256k1" // Or "ed25519"
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip32PublicKey": [
+    {
+      "path": ["m", "44'", "3'", "0'", "0", "0"],
+      "curve": "secp256k1" // Or "ed25519"
+    }
+  ]
 }
 ```
 
@@ -323,14 +319,12 @@ and containing its corresponding key material:
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip44Entropy": [
-      {
-        "coinType": 3
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip44Entropy": [
+    {
+      "coinType": 3
+    }
+  ]
 }
 ```
 
@@ -397,10 +391,8 @@ The entropy as a hexadecimal string.
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getEntropy": {}
-  }
+"initialPermissions": {
+  "snap_getEntropy": {}
 }
 ```
 
