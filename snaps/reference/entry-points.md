@@ -494,6 +494,83 @@ module.exports.onHomePage = async () => {
 </TabItem>
 </Tabs>
 
+## `onSignature`
+
+:::flaskOnly
+:::
+
+To provide signature insights before a user signs a message, a Snap must export `onSignature`.
+Whenever any of the message signature methods like `personal_sign` or `eth_signTypedData_v4`, MetaMask calls this method.
+MetaMask passes the raw unsigned signature payload to the `onSignature` handler method.
+
+:::note
+For MetaMask to call the Snap's `onSignature` method, you must request the
+[`endowment:signature-insight`](permissions.md#endowmentsignature-insight) permission.
+:::
+
+#### Parameters
+
+An object containing:
+
+- `signature` - The raw signature payload.
+- `signatureOrigin` - The signature origin if
+  [`allowSignatureOrigin`](permissions.md#endowmentsignature-insight) is set to `true`.
+
+#### Returns
+
+- An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`
+- A `content` object displayed using [custom UI](../how-to/use-custom-ui.md) after the user presses the "Sign" button. At this time due to limitations of MetaMask's signature confirmation UI, the content will only be displayed if the `severity` property is present and set to `SeverityLevel.Critical`.
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import { OnSignatureHandler, SeverityLevel } from '@metamask/snaps-types';
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+export const onSignature: OnSignatureHandler = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Signature Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    severity: SeverityLevel.Critical
+  };
+};
+```
+
+# JavaScript
+
+```js
+import { SeverityLevel } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-ui';
+
+module.exports.onSignature = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading('My Signature Insights'),
+      text('Here are the insights:'),
+      ...(insights.map((insight) => text(insight.value)))
+    ]),
+    severity: SeverityLevel.Critical
+  };
+};
+```
+
+<!--/tabs-->
+
 ## `onUserInput`
 
 :::flaskOnly
