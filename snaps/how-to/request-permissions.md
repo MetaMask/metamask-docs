@@ -55,7 +55,7 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 ## Request permissions from a dapp
 
 Dapps that communicate with Snaps must request permission to do so by calling the
-`wallet_requestSnaps` MetaMask JSON-RPC API method.
+[`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) MetaMask JSON-RPC API method.
 
 For example, to request permission to connect to the `hello-snap` Snap:
 
