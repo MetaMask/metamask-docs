@@ -1,5 +1,5 @@
 ---
-description: Provide insights to your users in MetaMask's signature confirmation window.
+description: Provide insights to your users in MetaMask's signature confirmation flow.
 sidebar_position: 10
 ---
 
