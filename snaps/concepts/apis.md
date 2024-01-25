@@ -49,43 +49,26 @@ Dapps can install and communicate with Snaps using the following
 - `wallet_snap` - (Restricted) Calls the specified custom JSON-RPC API method of the specified Snap.
 - `wallet_invokeSnap` - (Restricted) Synonymous with `wallet_snap`.
 
-To call restricted methods, a dapp must first request permission using
-[`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
-For example, to call `wallet_snap`, first request the `wallet_snap` permission:
+A dapp must first request permission to communicate with a Snap using `wallet_requestSnaps`.
+The dapp can then call `wallet_snap` or `wallet_invokeSnap` on the permitted Snap.
+For example, to call `wallet_snap`:
 
 ```js title="index.js"
+// Request permission to connect to the Snap.
 await window.ethereum.request({
-  method: 'wallet_requestPermissions',
-  params: [{
-    wallet_snap: {
-      caveats: [
-        {
-          type: 'snapIds',
-          value: {
-            'npm:@metamask/example-snap': { version: '1.0.0' },
-            'npm:@metamask/foo-bar-snap': { version: '1.2.1' },
-          }
-        }
-      ]
-    }
-  }],
+  method: 'wallet_requestSnaps',
+  params: {
+    'npm:hello-snap': {},
+  },
 });
-```
 
-The dapp can then call `wallet_snap`:
-
-```js title="index.js"
-await window.ethereum.request({
-  'method': 'wallet_snap',
-  'params': [
-    {
-      'snapId': 'npm:@metamask/example-snap',
-      'request': {
-        'method': 'hello'
-      }
-    }
-  ]
+// Call the 'hello' method of the Snap using wallet_snap.
+const response = await window.ethereum.request({
+  method: 'wallet_snap',
+  params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
 });
+
+console.log(response); // 'world!'
 ```
 
 ### Snap requests
@@ -175,9 +158,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 A dapp can then install the Snap and call the exposed method:
 
 ```javascript title="index.js"
-// Connect to the Snap, enabling its usage inside the dapp.
-// If the Snap is not already installed, the MetaMask user will be prompted to
-// install it.
+// Request permission to connect to the Snap.
+// If the Snap is not already installed, the user will be prompted to install it.
 await window.ethereum.request({
   method: 'wallet_requestSnaps',
   params: {
