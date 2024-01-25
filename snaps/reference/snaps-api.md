@@ -1,166 +1,33 @@
 ---
-description: See the Snaps JSON-RPC API reference.
+description: See the Snaps API reference.
 sidebar_position: 1
+toc_max_heading_level: 2
 ---
 
-# Snaps JSON-RPC API
+# Snaps API
 
-Snaps communicate with MetaMask using the Snaps JSON-RPC API.
-These API methods allow Snaps to modify the functionality of MetaMask, and websites (dapps) to
-install and communicate with individual Snaps.
-Some methods are only callable by Snaps, and some are only callable by websites.
+Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../concepts/apis.md#snaps-api).
+To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
+manifest file.
 
-## Unrestricted methods
-
-You can call unrestricted methods without requesting permission to do so.
-
-### wallet_getSnaps
-
-Returns the IDs of the caller's permitted Snaps and some relevant metadata.
-
-This method is only callable by websites.
-
-#### Returns
-
-An object containing the requester's permitted Snaps.
-Each Snap is an object containing:
-
-- `id` - The ID of the Snap.
-- `initialPermissions` - The initial permissions of the Snap, which will be requested when the Snap
-  is installed.
-- `version` - The version of the Snap.
-- `enabled` - `true` if the Snap is enabled, `false` otherwise.
-- `blocked` - `true` if the Snap is blocked, `false` otherwise.
-
-#### Example
-
-<!--tabs-->
-
-# JavaScript
-
-```javascript
-const result = await window.ethereum.request({ method: 'wallet_getSnaps' });
-
-console.log(result);
-```
-
-# Result
-
-```javascript
-// Example result if any Snaps are permitted
-{
-  'npm:@metamask/example-snap': {
-    version: '1.0.0',
-    id: 'npm:@metamask/example-snap',
-    enabled: true,
-    blocked: false,
-  },
-}
-```
-
-<!--/tabs-->
-
-### wallet_requestSnaps
-
-Requests permission for a website to communicate with the specified Snaps and attempts to install
-them if they're not already installed.
-If the installation of any Snap fails, returns the error that caused the failure.
-
-You can optionally specify a [SemVer range](https://www.npmjs.com/package/semver) for a Snap.
-MetaMask attempts to install a version of the Snap that satisfies the requested range.
-If a compatible version of a Snap is already installed, the request succeeds.
-If an incompatible version is installed, MetaMask attempts to update the Snap to the latest version
-that satisfies the requested range.
-The request succeeds if the Snap is successfully updated.
-
-This method is only callable by websites.
-
-#### Parameters
-
-An object containing the Snaps to request permission to communicate with.
-
-#### Returns
-
-An object mapping the IDs of installed Snaps to either their metadata or an error if installation fails.
-
-#### Example
-
-<!--tabs-->
-
-# JavaScript
-
-```javascript
-try {
-  const result = await window.ethereum.request({
-    method: 'wallet_requestSnaps',
-    params: {
-      'npm:@metamask/example-snap': {},
-      'npm:fooSnap': {
-        // The optional version argument allows requesting a SemVer version
-        // range, with the same semantics as npm package.json ranges.
-        version: '^1.0.2',
-      },
-    },
-  });
-
-  console.log(result);
-
-} catch (error) {
-  console.log(error);
-}
-```
-
-# Result
-
-```javascript
-{
-  'npm:@metamask/example-snap': {
-    version: '1.0.0',
-    id: 'npm:@metamask/example-snap',
-    enabled: true,
-    blocked: false,
-  },
-  'npm:fooSnap': {
-    version: '1.0.5',
-    id: 'npm:fooSnap',
-    enabled: true,
-    blocked: false,
-  },
-}
-```
-
-<!--/tabs-->
-
-## Restricted methods
-
-For restricted methods callable by Snaps, a Snap must request permission to call the method in the
-[snap manifest file](../how-to/request-permissions.md).
-For restricted methods callable by websites, a website must request permission to call the method using
-[`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions).
-
-### snap_dialog
+## snap_dialog
 
 Displays a dialog in the MetaMask UI.
-There are three types of dialogs with different parameters and return types:
+There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
+[confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
 
-- [Alert](#alert-dialog)
-- [Confirmation](#confirmation-dialog)
-- [Prompt](#prompt-dialog)
-
-This method is only callable by Snaps.
-
-#### Alert dialog
+### Alert dialog
 
 Displays an alert that can only be acknowledged.
 
-##### Parameters
+#### Parameters
 
 An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`'Alert'`).
 - `content` - The content of the alert, as a [custom UI](../how-to/use-custom-ui.md) component.
 
-##### Example
+#### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -179,22 +46,22 @@ await snap.request({
 // Code that should execute after the alert has been acknowledged
 ```
 
-#### Confirmation dialog
+### Confirmation dialog
 
 Displays a confirmation that can be accepted or rejected.
 
-##### Parameters
+#### Parameters
 
 An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`'Confirmation'`).
 - `content` - The content of the confirmation, as a [custom UI](../how-to/use-custom-ui.md) component.
 
-##### Returns
+#### Returns
 
 `true` if the confirmation was accepted, `false` otherwise.
 
-##### Example
+#### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -215,11 +82,11 @@ if (result === true) {
 }
 ```
 
-#### Prompt dialog
+### Prompt dialog
 
 Displays a prompt where the user can enter a text response.
 
-##### Parameters
+#### Parameters
 
 An object containing the contents of the prompt dialog:
 
@@ -227,11 +94,11 @@ An object containing the contents of the prompt dialog:
 - `content` - The content of the prompt, as a [custom UI](../how-to/use-custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
 
-##### Returns
+#### Returns
 
 The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
 
-##### Example
+#### Example
 
 ```javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
@@ -251,7 +118,7 @@ const walletAddress = await snap.request({
 // `walletAddress` will be a string containing the address entered by the user
 ```
 
-### snap_getBip32Entropy
+## snap_getBip32Entropy
 
 :::danger important
 If you call this method, you receive the user's parent key for the derivation path they request.
@@ -269,9 +136,7 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing:
 
@@ -281,7 +146,7 @@ An object containing:
 - `curve` - The curve to use for the key derivation.
   Must be `'ed25519'` or `'secp256k1'`.
 
-#### Returns
+### Returns
 
 An object representing the
 [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) HD tree node and containing
@@ -295,22 +160,20 @@ its corresponding key material:
 - `chainCode` - The chain code of the node.
 - `curve` - The name of the curve used by the node: `'ed25519'` or `'secp256k1'`.
 
-#### Example
+### Example
 
 <!--tabs-->
 
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip32Entropy": [
-      {
-        "path": ["m", "44'", "3'"],
-        "curve": "secp256k1" // Or "ed25519"
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip32Entropy": [
+    {
+      "path": ["m", "44'", "3'"],
+      "curve": "secp256k1" // Or "ed25519"
+    }
+  ]
 }
 ```
 
@@ -343,15 +206,13 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 
 <!--/tabs-->
 
-### snap_getBip32PublicKey
+## snap_getBip32PublicKey
 
 Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the
 derivation path specified by the `path` parameter.
 Note that this returns the public key, not the extended public key (`xpub`), or Ethereum address.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing:
 
@@ -363,26 +224,24 @@ An object containing:
 - `compressed` - Indicates whether the public key should be compressed.
   The default is `false`.
 
-#### Returns
+### Returns
 
 The public key as hexadecimal string.
 
-#### Example
+### Example
 
 <!--tabs-->
 
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip32PublicKey": [
-      {
-        "path": ["m", "44'", "3'", "0'", "0", "0"],
-        "curve": "secp256k1" // Or "ed25519"
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip32PublicKey": [
+    {
+      "path": ["m", "44'", "3'", "0'", "0", "0"],
+      "curve": "secp256k1" // Or "ed25519"
+    }
+  ]
 }
 ```
 
@@ -406,7 +265,7 @@ console.log(dogecoinPublicKey);
 
 <!--/tabs-->
 
-### snap_getBip44Entropy
+## snap_getBip44Entropy
 
 :::danger important
 If you call this method, you receive the user's parent key for the protocol they request.
@@ -426,9 +285,7 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 
@@ -439,7 +296,7 @@ If you wish to connect to MetaMask accounts in a Snap, use
 [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
 :::
 
-#### Returns
+### Returns
 
 An object representing the
 [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD tree node
@@ -455,21 +312,19 @@ and containing its corresponding key material:
 - `path` - A human-readable representation of the BIP-44 HD tree path of the node.
   Since this is a `coin_type` node, the path is of the form `m / 44' / coin_type'`.
 
-#### Example
+### Example
 
 <!--tabs-->
 
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getBip44Entropy": [
-      {
-        "coinType": 3
-      }
-    ]
-  }
+"initialPermissions": {
+  "snap_getBip44Entropy": [
+    {
+      "coinType": 3
+    }
+  ]
 }
 ```
 
@@ -504,7 +359,7 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 <!--/tabs-->
 
-### snap_getEntropy
+## snap_getEntropy
 
 Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
 You can use this entropy to generate a private key, or any other value that requires a high level of
@@ -516,9 +371,7 @@ Using a salt results in entropy unrelated to the entropy generated without a sal
 
 This value is deterministic: it's always the same for the same Snap, user account, and salt.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing:
 
@@ -527,21 +380,19 @@ An object containing:
 - `salt` (optional) - An arbitrary string to be used as a salt for the entropy.
   This can be used to generate different entropy for different purposes.
 
-#### Returns
+### Returns
 
 The entropy as a hexadecimal string.
 
-#### Example
+### Example
 
 <!--tabs-->
 
 # Manifest file
 
 ```json
-{
-  "initialPermissions": {
-    "snap_getEntropy": {}
-  }
+"initialPermissions": {
+  "snap_getEntropy": {}
 }
 ```
 
@@ -562,18 +413,18 @@ console.log(entropy);
 
 <!--/tabs-->
 
-### snap_getLocale
+## snap_getLocale
 
 :::flaskOnly
 :::
 
 Gets the user's locale setting. You can use this method to localize text in your snap.
 
-#### Returns
+### Returns
 
 The user's locale setting as a [language code](https://github.com/MetaMask/metamask-extension/blob/develop/app/_locales/index.json).
 
-#### Example
+### Example
 
 ```javascript
 import { panel, text } from '@metamask/snaps-ui';
@@ -596,7 +447,7 @@ await snap.request({
 });
 ```
 
-### snap_manageAccounts
+## snap_manageAccounts
 
 :::flaskOnly
 :::
@@ -610,9 +461,7 @@ This method is organized into multiple sub-methods which each take their own par
 - [`listAccounts`](#listaccounts)
 - [`submitResponse`](#submitresponse)
 
-This method is only callable by Snaps.
-
-#### `createAccount`
+### createAccount
 
 Creates a new Snap account.
 
@@ -621,15 +470,15 @@ The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
-##### Parameters
+#### Parameters
 
 `account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
 
-##### Returns
+#### Returns
 
 `null`
 
-##### Example
+#### Example
 
 ```typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
@@ -676,7 +525,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-#### `updateAccount`
+### updateAccount
 
 Updates an existing Snap account.
 
@@ -685,15 +534,15 @@ The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
-##### Parameters
+#### Parameters
 
 `account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
 
-##### Returns
+#### Returns
 
 `null`
 
-##### Example
+#### Example
 
 ```typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
@@ -715,7 +564,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-#### `deleteAccount`
+### deleteAccount
 
 Deletes a Snap account.
 
@@ -724,15 +573,15 @@ The Snap is responsible for maintaining its own record of accounts.
 This can be done using [`snap_manageState`](#snap_managestate).
 :::
 
-##### Parameters
+#### Parameters
 
 `id` - The ID of the account to be deleted.
 
-##### Returns
+#### Returns
 
 `null`
 
-##### Example
+#### Example
 
 ```typescript
 import { Keyring } from '@metamask/keyring-api';
@@ -754,18 +603,18 @@ class MyKeyring implements Keyring {
 }
 ```
 
-#### `listAccounts`
+### listAccounts
 
 Lists the calling Snap's accounts that are known to MetaMask.
 This method does not call back to the Snap.
 Instead, the Snap can use it to check whether there's a discrepancy between the Snap's internal
 state of accounts and the state known to MetaMask.
 
-##### Returns
+#### Returns
 
 An array of [keyring accounts](./keyring-api/variables/KeyringAccountStruct.md).
 
-##### Example
+#### Example
 
 ```typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
@@ -789,22 +638,22 @@ class MyKeyring implements Keyring {
 }
 ```
 
-#### `submitResponse`
+### submitResponse
 
 Finalizes a signing request.
 This is usually called as part of the `approveRequest` method of the
 [`Keyring`](keyring-api/type-aliases/Keyring.md) interface.
 
-##### Parameters
+#### Parameters
 
 - `id` - The ID of the request to finalize.
 - `result` - The result that should be returned to the original JSON-RPC caller.
 
-##### Returns
+#### Returns
 
 `null`
 
-##### Example
+#### Example
 
 ```typescript
 import { Keyring } from '@metamask/keyring-api';
@@ -827,25 +676,23 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### snap_manageState
+## snap_manageState
 
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
 The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing:
 
 - `operation` - The state operation to perform (`'clear'`, `'get'`, or `'update'`).
 - `newState` - The value to update state with if the operation is `update`, and nothing otherwise.
 
-#### Returns
+### Returns
 
 The value stored in state if the operation is `get`, and `null` otherwise.
 
-#### Example
+### Example
 
 ```javascript
 // Persist some data.
@@ -870,14 +717,12 @@ await snap.request({
 });
 ```
 
-### snap_notify
+## snap_notify
 
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
 
-This method is only callable by Snaps.
-
-#### Parameters
+### Parameters
 
 An object containing the contents of the notification:
 
@@ -888,7 +733,7 @@ An object containing the contents of the notification:
   the user.
 - `message` - A message to show in the notification.
 
-#### Example
+### Example
 
 ```javascript
 await snap.request({
@@ -898,122 +743,4 @@ await snap.request({
     message: 'Hello, world!',
   },
 });
-```
-
-### wallet_snap
-
-A website must request the `wallet_snap` permission using
-[`wallet_requestPermissions`](/wallet/reference/rpc-api/#wallet_requestpermissions) to
-interact with the specified Snaps.
-
-A website can also call this method to invoke the specified JSON-RPC method of the specified Snap.
-
-This method is synonymous to [`wallet_invokeSnap`](#wallet_invokesnap).
-
-:::note
-Most websites only make one call to `wallet_requestPermissions`.
-Consecutive calls to `wallet_requestPermissions` for the `wallet_snap` permission overwrites a
-website's existing permissions to interact with Snaps.
-To deal with this, you must write custom logic to merge existing Snap IDs with new ones you're requesting.
-Use [`wallet_getSnaps`](#wallet_getsnaps) to get a list of a website's permitted Snaps.
-:::
-
-#### Parameters
-
-When requesting this permission, specify a caveat of type `snapIds`.
-Specify each Snap to request permission to interact with as an entry in the `value` field of the caveat.
-Each Snap entry can include a `version` to install.
-The default is the latest version.
-
-When calling this method, specify an object containing:
-
-- `snapId` - The ID of the Snap to invoke.
-- `request` - The JSON-RPC request object to send to the invoked Snap.
-
-#### Returns
-
-Result of the Snap method call.
-
-#### Example
-
-<!--tabs-->
-
-# wallet_requestPermissions
-
-The following is an example of calling `wallet_requestPermissions` to request the `wallet_snap`
-permission:
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_requestPermissions',
-  params: [{
-    wallet_snap: {
-      caveats: [
-        {
-          type: 'snapIds',
-          value: {
-            'npm:@metamask/example-snap': { version: '1.0.0' },
-            'npm:@metamask/foo-bar-snap': { version: '1.2.1' },
-          }
-        }
-      ]
-    }
-  }],
-});
-```
-
-# wallet_snap
-
-The following is an example of calling `wallet_snap`:
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_snap',
-  params: {
-    snapId: 'npm:@metamask/example-snap',
-    request: {
-      method: 'hello',
-    },
-  },
-});
-
-console.log(result); // In this example, the result is a boolean.
-```
-
-<!--/tabs-->
-
-### wallet_invokeSnap
-
-Invokes the specified JSON-RPC method of the specified Snap.
-The Snap must be installed and the caller must have the permission to communicate with the Snap, or
-the request is rejected.
-
-Snaps are fully responsible for implementing their JSON-RPC API.
-Consult the Snap's documentation for available methods, their parameters, and return values.
-
-#### Parameters
-
-An object containing:
-
-- `snapId` - The ID of the Snap to invoke.
-- `request` - The JSON-RPC request object to send to the invoked Snap.
-
-#### Returns
-
-Result of the Snap method call.
-
-#### Example
-
-```javascript
-const result = await ethereum.request({
-  method: 'wallet_invokeSnap',
-  params: {
-    snapId: 'npm:@metamask/example-snap',
-    request: {
-      method: 'hello',
-    },
-  },
-});
-
-console.log(result); // In this example, the result is a boolean.
 ```

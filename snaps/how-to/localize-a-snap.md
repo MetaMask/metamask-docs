@@ -13,7 +13,7 @@ title and description) in the user's language.
 ### 1. Get the user's language
 
 In your Snap's code, determine the user's language by using the
-[`snap_getLocale`](../reference/rpc-api.md#snap_getlocale) API method.
+[`snap_getLocale`](../reference/snaps-api.md#snap_getlocale) API method.
 To call `snap_getLocale`, first request the required permission by adding it to the
 `initialPermissions` field in your manifest file:
 
@@ -100,7 +100,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
 ###  3. Localize the Snap's manifest file
 
-The Snap [manifest file](../concepts/anatomy.md#manifest-file) contains textual metadata such as
+The Snap [manifest file](../concepts/files.md#manifest-file) contains textual metadata such as
 `proposedName` and `description` that you can localize to display in the user's language.
 
 The following is an example of a localized manifest file:

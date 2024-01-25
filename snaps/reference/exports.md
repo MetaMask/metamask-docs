@@ -5,20 +5,17 @@ sidebar_position: 2
 
 # Snaps exports
 
-A Snap can export the following methods.
+Snaps can export the following methods.
 
 ## onRpcRequest
 
-To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exporting
-`onRpcRequest`.
+To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
+dapps and other Snaps, a Snap must export `onRpcRequest`.
 Whenever the Snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
 
-:::caution important
-If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](#ontransaction), you can skip exporting `onRpcRequest`.
-However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that sends transactions for that protocol via your Snap, for example, you must
-specify an RPC API.
+:::note
+For MetaMask to call the Snap's `onRpcRequest` method, you must request the
+[`endowment:rpc`](permissions.md#endowmentrpc) permission.
 :::
 
 #### Parameters

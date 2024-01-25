@@ -25,7 +25,7 @@ These incompatibilities tend to occur in dependencies.
 
 The errors you get from SES are usually easy to fix.
 The actual file, function, and variable names in the `eval` error stack trace might not make sense
-to you, but the line numbers should correspond to your Snap [bundle file](../concepts/anatomy.md#bundle-file).
+to you, but the line numbers should correspond to your Snap [bundle file](../concepts/files.md#bundle-file).
 Thus, you can identify if the error is due to your code or one of your dependencies.
 If the problem is in a dependency, you can try a different version or to fix the issue locally by
 using tools such as [`patch-package`](https://npmjs.com/package/patch-package) (see how to

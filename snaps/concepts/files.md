@@ -1,9 +1,9 @@
 ---
-description: Learn about the anatomy of a Snap project.
-sidebar_position: 1
+description: Learn about the Snap project files.
+sidebar_position: 3
 ---
 
-# Snaps anatomy
+# Snaps files
 
 If you look at the directory structure of the Snaps monorepo project generated in the
 [Snaps quickstart](../get-started/quickstart.mdx), it looks something like this:
@@ -27,77 +27,14 @@ your-snap-name/
 ├─ ... (other stuff)
 ```
 
-Source files other than `index.ts` are located through its imports.
-The defaults can be overwritten in the [configuration file](#configuration-file).
+The `snap` folder contains the Snap implementation, and the `site` folder contains the Snap
+companion dapp implementation.
 
-This page examines the major components of a Snap:
+This page examines the following Snap project files:
 
-- [The source code](#source-code) contains the primary code of the Snap.
 - [The manifest file](#manifest-file) tells MetaMask important information about the Snap.
 - [The configuration file](#configuration-file) specifies configuration options for the Snap.
 - [The bundle file](#bundle-file) is the output file of the published Snap.
-
-## Source code
-
-If you're familiar with JavaScript or TypeScript development, developing a Snap might feel familiar
-to you.
-Consider this simple Snap, `Hello World`:
-
-```typescript title="index.ts"
-module.exports.onRpcRequest = async ({ origin, request }) => {
-  switch (request.method) {
-    // Expose a "hello" RPC method to dapps
-    case "hello":
-      return "world!";
-
-    default:
-      throw new Error("Method not found.");
-  }
-};
-```
-
-To communicate with the outside world, the Snap must implement its own JSON-RPC API by exposing
-the exported function [`onRpcRequest`](../reference/exports.md#onrpcrequest).
-Whenever the Snap receives a JSON-RPC request from a dapp or another Snap, this handler function is
-called with the specified parameters.
-
-In addition to being able to expose a JSON-RPC API, Snaps can access the global object `snap`.
-You can use this object to make Snaps-specific JSON-RPC requests.
-
-If a dapp wants to use `Hello World`, assuming the Snap is published to npm using the package name `hello-snap`, the dapp can implement something like this:
-
-```javascript
-// Connect to the Snap, enabling its usage inside the dapp
-// If the Snap is not already installed, the MetaMask user 
-// will be prompted to install it
-await window.ethereum.request({
-  method: "wallet_requestSnaps",
-  params: {
-    "npm:hello-snap": {},
-  },
-});
-
-// Invoke the "hello" RPC method exposed by the Snap
-const response = await window.ethereum.request({
-  method: "wallet_invokeSnap",
-  params: { snapId: "npm:hello-snap", request: { method: "hello" } },
-});
-
-console.log(response); // 'world!'
-```
-
-The Snap's RPC API is completely up to you, as long as it's a valid
-[JSON-RPC](https://www.jsonrpc.org/specification) API.
-
-:::tip Does my Snap need to have an RPC API?
-No, that's also up to you!
-If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](../reference/exports.md#ontransaction), then you can skip exporting
-`onRpcRequest`.
-However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that, for example, sends transactions for that protocol using your Snap, you must
-specify an RPC API.
-:::
 
 ## Manifest file
 
@@ -131,8 +68,9 @@ The manifest file of `Hello World` would look something like this:
 ```
 
 The manifest tells MetaMask important information about your Snap, such as where it's published
-(using `source.location`) and how to verify the integrity of the Snap source code (by attempting to
-reproduce the `source.shasum` value).
+(using `source.location`), how to verify the integrity of the Snap source code (by attempting to
+reproduce the `source.shasum` value), and what
+[permissions the Snap requests](../how-to/request-permissions.md) (using `initialPermissions`).
 
 :::note
 Currently, Snaps can only be

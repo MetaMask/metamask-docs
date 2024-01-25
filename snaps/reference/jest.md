@@ -183,7 +183,7 @@ describe('MySnap', () => {
 
 ### getInterface
 
-If your Snap uses [`snap_dialog`](rpc-api.md#snap_dialog) to show user interfaces, you can use the
+If your Snap uses [`snap_dialog`](snaps-api.md#snap_dialog) to show user interfaces, you can use the
 `request.getInterface` method to interact with the user interfaces.
 This method is present on the return value of the [`request`](#request) method.
 
@@ -292,7 +292,7 @@ response from a Snap matches an expected value:
   If the response is not an error, this matcher fails.
 - `toSendNotification(notificationText)` - Checks if a Snap sent a notification.
 - `toRender(expectedInterface)` - Checks if a Snap rendered an interface.
-  This is useful for testing the user interface of a Snap, either for a [`snap_dialog`](rpc-api.md#snap_dialog)
+  This is useful for testing the user interface of a Snap, either for a [`snap_dialog`](snaps-api.md#snap_dialog)
   or a user interface rendered by the [transaction insights API](exports.md#ontransaction).
 
 ## Options
