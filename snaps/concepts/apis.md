@@ -44,12 +44,12 @@ await snap.request({
 Dapps can install and communicate with Snaps using the following
 [MetaMask JSON-RPC API](/wallet/reference/json-rpc-api) methods:
 
-- [`wallet_getSnap`](/wallet/reference/wallet_getsnap) - Gets the dapp's permitted Snaps.
-- [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) - Requests permission to
+- `wallet_getSnap` - Gets the dapp's permitted Snaps.
+- `wallet_requestSnaps` - Requests permission to
   communicate with the specified Snaps.
-- [`wallet_snap`](/wallet/reference/wallet_snap) - (Restricted) Calls the specified custom JSON-RPC
+- `wallet_snap` - (Restricted) Calls the specified custom JSON-RPC
   API method of the specified Snap.
-- [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) - (Restricted) Synonymous with `wallet_snap`.
+- `wallet_invokeSnap` - (Restricted) Synonymous with `wallet_snap`.
 
 A dapp must first request permission to communicate with a Snap using `wallet_requestSnaps`.
 The dapp can then call `wallet_snap` or `wallet_invokeSnap` on the permitted Snap.
