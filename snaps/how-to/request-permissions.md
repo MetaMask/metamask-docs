@@ -54,28 +54,16 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 ## Request permissions from a dapp
 
-Dapps that communicate with Snaps must request permission to call the `wallet_snap` and
-`wallet_invokeSnap` [MetaMask JSON-RPC API](/wallet/reference/json-rpc-api) methods.
+Dapps that communicate with Snaps must request permission to do so by calling the
+[`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) MetaMask JSON-RPC API method.
 
-Request permission to call these methods by calling
-[`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions).
-For example, to request permission to call `wallet_snap`:
+For example, to request permission to connect to the `hello-snap` Snap:
 
 ```js title="index.js"
 await window.ethereum.request({
-  method: 'wallet_requestPermissions',
-  params: [{
-    wallet_snap: {
-      caveats: [
-        {
-          type: 'snapIds',
-          value: {
-            'npm:@metamask/example-snap': { version: '1.0.0' },
-            'npm:@metamask/foo-bar-snap': { version: '1.2.1' },
-          }
-        }
-      ]
-    }
-  }],
+  method: 'wallet_requestSnaps',
+  params: {
+    'npm:hello-snap': {},
+  },
 });
 ```
