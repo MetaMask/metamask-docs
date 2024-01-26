@@ -13,11 +13,11 @@ Below is a visual demo of that user experience showing the data provided from ea
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/eip-6963-demo.mp4" />
+    <source src="/eip-6963-demo.mp4" type="video/mp4" />
   </video>
 </p>
 
-To implement EIP-6963 in a dapp, check out our [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts) or visit our ["Discover Multiple Wallets Page"](../how-to/discover-multiple-wallets.md).
+To implement EIP-6963 in a dapp, check out our [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts) or visit our ["Discover Multiple Wallets Page"](../how-to/connect/detect-metamask.md#discover-multiple-wallets-with-eip-6963).
 
 ## Third Party Library Support
 
