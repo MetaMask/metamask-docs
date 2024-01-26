@@ -19,7 +19,7 @@ if (typeof window.ethereum !== 'undefined') {
 
 :::tip
 To differentiate MetaMask from other Ethereum-compatible browsers, you can detect MetaMask using the
-[`window.ethereum.isMetaMask`](../../reference/provider-api.md#windowethereumismetamask) property.
+[`window.ethereum.isMetaMask`](../reference/provider-api.md#windowethereumismetamask) property.
 :::
 
 :::caution Important
@@ -27,7 +27,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative discovery mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperabilty.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [setting up SDK](../../connect/set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
+We recommend [setting up SDK](../connect//set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
 :::
 
 ## Use @metamask/detect-provider
@@ -142,7 +142,7 @@ EIP-6963 support.
 
 The MetaMask SDK not only supports EIP-6963 on its own for detecting MetaMask, but is also being integrated into [WAGMI 2.0+](https://wagmi.sh/) which supports EIP-6963. If you only want to connect to MetaMask extension and MetaMask mobile:
 
-- [Set up MetaMask SDK](../../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
+- [Set up MetaMask SDK](../connect/set-up-sdk/javascript/index.md) in your dapp.
 
 The SDKs integration of EIP-6963 is for the efficient discovery and connection with the MetaMask Extension only. This enhancement is pivotal in streamlining the user experience and promoting seamless interactions with the Ethereum blockchain. 
 
