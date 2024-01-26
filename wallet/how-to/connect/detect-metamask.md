@@ -27,7 +27,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative discovery mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperabilty.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [setting up SDK](../connect/set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
+We recommend [setting up SDK](../../connect/set-up-sdk/javascript/index.md), which supports EIP-6963 by default.
 :::
 
 ## Use @metamask/detect-provider
@@ -113,7 +113,7 @@ See [Webpack's Getting Started guide](https://webpack.js.org/guides/getting-star
 EIP-6963 is an alternative discovery mechanism for multiple wallets and is the shift from relying solely on `window.ethereum` for wallet detection.
 
 If a user has multiple wallet browser extensions installed, your web dapp can support
-[wallet interoperability](../concepts/wallet-interoperabilty.md) by adding support for
+[wallet interoperability](../../concepts/wallet-interoperabilty.md) by adding support for
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which enables your dapp to discover and connect to multiple installed wallets.
 
 To implement EIP-6963 in a React dapp, check out our [EIP-6963 ViteJS React + TypeScript Demo](https://github.com/MetaMask/vite-react-ts-eip-6963/blob/main/src/vite-env.d.ts)
@@ -142,7 +142,7 @@ EIP-6963 support.
 
 The MetaMask SDK not only supports EIP-6963 on its own for detecting MetaMask, but is also being integrated into [WAGMI 2.0+](https://wagmi.sh/) which supports EIP-6963. If you only want to connect to MetaMask extension and MetaMask mobile:
 
-- [Set up MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
+- [Set up MetaMask SDK](../../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
 
 The SDKs integration of EIP-6963 is for the efficient discovery and connection with the MetaMask Extension only. This enhancement is pivotal in streamlining the user experience and promoting seamless interactions with the Ethereum blockchain. 
 
