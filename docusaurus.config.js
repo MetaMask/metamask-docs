@@ -136,23 +136,19 @@ const config = {
         fromExtensions: ["html", "htm"],
         redirects: [
           {
-            from: "/guide/",
+            from: ["/guide/", "/guide/common-terms", "/guide/contributors"],
             to: "/wallet/",
           },
           {
-            from: "/guide/getting-started",
+            from: ["/guide/getting-started", "/guide/create-dapp", "/wallet/get-started/set-up-dev-environment"],
             to: "/wallet/how-to/get-started-building/set-up-dev-environment",
-          },
-          {
-            from: "/guide/common-terms",
-            to: "/wallet/",
           },
           {
             from: "/guide/initializing-dapps",
             to: "/wallet/how-to/interact-with-smart-contracts",
           },
           {
-            from: "/guide/accessing-accounts",
+            from: ["/guide/accessing-accounts", "/wallet/get-started/access-accounts"],
             to: "/wallet/how-to/connect/access-accounts",
           },
           {
@@ -164,11 +160,11 @@ const config = {
             to: "/wallet/reference/provider-api",
           },
           {
-            from: "/guide/provider-migration",
+            from: ["/guide/provider-migration", "/wallet/concepts/provider-api", "/wallet/concepts/rpc-api", "/wallet/how-to/migrate-api"],
             to: "/wallet/concepts/apis",
           },
           {
-            from: "/guide/rpc-api",
+            from: ["/guide/rpc-api", "/wallet/reference/rpc-api"],
             to: "/wallet/reference/json-rpc-api",
           },
           {
@@ -176,36 +172,24 @@ const config = {
             to: "/wallet/how-to/sign-data",
           },
           {
-            from: "/guide/registering-function-names",
+            from: ["/guide/registering-function-names", "/wallet/how-to/register-method-names"],
             to: "/wallet/how-to/display/method-names",
           },
           {
-            from: "/guide/registering-your-token",
+            from: ["/guide/registering-your-token", "/wallet/how-to/register-token"],
             to: "/wallet/how-to/display/tokens",
           },
           {
-            from: "/guide/defining-your-icon",
+            from: ["/guide/defining-your-icon", "/wallet/how-to/set-icon"],
             to: "/wallet/how-to/display/icon",
           },
           {
-            from: "/guide/onboarding-library",
+            from: ["/guide/onboarding-library", "/wallet/how-to/use-onboarding-library"],
             to: "/wallet/how-to/onboard-users",
           },
           {
             from: "/guide/metamask-extension-provider",
             to: "/wallet/how-to/access-provider",
-          },
-          {
-            from: "/guide/mobile-getting-started",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/guide/site-compatibility-checklist",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/guide/mobile-best-practices",
-            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/guide/snaps",
@@ -234,14 +218,6 @@ const config = {
           {
             from: "/guide/snaps-patching-dependencies",
             to: "/snaps/how-to/troubleshoot",
-          },
-          {
-            from: "/guide/create-dapp",
-            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
-          },
-          {
-            from: "/guide/contributors",
-            to: "/wallet/",
           },
           {
             from: "/wallet/tutorials/simple-react-dapp",
@@ -288,10 +264,6 @@ const config = {
             to: "/wallet/how-to/get-started-building",
           },
           {
-            from: "/wallet/get-started/set-up-dev-environment",
-            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
-          },
-          {
             from: "/wallet/get-started/run-development-network",
             to: "/wallet/how-to/get-started-building/run-devnet",
           },
@@ -308,56 +280,12 @@ const config = {
             to: "/wallet/how-to/connect/detect-network",
           },
           {
-            from: "/wallet/get-started/access-accounts",
-            to: "/wallet/how-to/connect/access-accounts",
-          },
-          {
             from: "/wallet/how-to/use-siwe",
             to: "/wallet/how-to/sign-data/siwe",
           },
           {
-            from: "/wallet/how-to/use-mobile",
+            from: ["/wallet/how-to/use-mobile", "/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/integrate-with-mobile", "/sdk"],
             to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/wallet/how-to/use-onboarding-library",
-            to: "/wallet/how-to/onboard-users",
-          },
-          {
-            from: "/wallet/how-to/register-token",
-            to: "/wallet/how-to/display/tokens",
-          },
-          {
-            from: "/wallet/how-to/register-method-names",
-            to: "/wallet/how-to/display/method-names",
-          },
-          {
-            from: "/wallet/how-to/set-icon",
-            to: "/wallet/how-to/display/icon",
-          },
-          {
-            from: "/wallet/concepts/provider-api",
-            to: "/wallet/concepts/apis",
-          },
-          {
-            from: "/wallet/concepts/rpc-api",
-            to: "/wallet/concepts/apis",
-          },
-          {
-            from: "/wallet/how-to/integrate-with-mobile",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/wallet/how-to/migrate-api",
-            to: "/wallet/concepts/apis",
-          },
-          {
-            from: "/sdk",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/wallet/reference/rpc-api",
-            to: "/wallet/reference/json-rpc-api",
           },
           {
             from: "/wallet/how-to/request-permissions",
@@ -398,7 +326,7 @@ const config = {
         },
       },
     ],
-    isProd ? 
+    isProd ?
       [
         "docusaurus-plugin-segment",
         {
