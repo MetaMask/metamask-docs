@@ -9,7 +9,7 @@ tags:
 
 # Use MetaMask SDK with mobile dapps
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your mobile dapp to enable your users
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your mobile dapp to enable your users
 to easily connect with their MetaMask Mobile wallet.
 See the instructions for the following mobile platforms:
 

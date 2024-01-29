@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Use MetaMask SDK with React Native and Expo
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React Native or Expo dapp to
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your React Native or Expo dapp to
 enable your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites

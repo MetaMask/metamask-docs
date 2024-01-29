@@ -152,8 +152,8 @@ const config = {
             to: "/wallet/how-to/interact-with-smart-contracts",
           },
           {
-            from: "/guide/accessing-accounts",
-            to: "/wallet/how-to/connect/access-accounts",
+            from: ["/guide/accessing-accounts", "/wallet/how-to/connect/access-accounts"],
+            to: "/wallet/how-to/access-accounts",
           },
           {
             from: "/guide/sending-transactions",
@@ -196,16 +196,8 @@ const config = {
             to: "/wallet/how-to/access-provider",
           },
           {
-            from: "/guide/mobile-getting-started",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/guide/site-compatibility-checklist",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
-            from: "/guide/mobile-best-practices",
-            to: "/wallet/how-to/connect/set-up-sdk",
+            from: ["/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/use-mobile", "/wallet/how-to/integrate-with-mobile", "/sdk"],
+            to: "/wallet/how-to/use-sdk",
           },
           {
             from: "/guide/snaps",
@@ -240,8 +232,8 @@ const config = {
             to: "/wallet/how-to/get-started-building/set-up-dev-environment",
           },
           {
-            from: "/guide/contributors",
-            to: "/wallet/",
+            from: ["/guide/contributors", "/wallet/how-to/get-started-building", "/wallet/how-to/set-up-dev-environment"],
+            to: "/wallet",
           },
           {
             from: "/wallet/tutorials/simple-react-dapp",
@@ -292,20 +284,20 @@ const config = {
             to: "/wallet/how-to/get-started-building/set-up-dev-environment",
           },
           {
-            from: "/wallet/get-started/run-development-network",
-            to: "/wallet/how-to/get-started-building/run-devnet",
+            from: ["/wallet/get-started/run-development-network", "/wallet/how-to/get-started-building/run-devnet"],
+            to: "/wallet/how-to/run-devnet",
           },
           {
-            from: "/wallet/how-to/secure-dapp",
-            to: "/wallet/how-to/get-started-building/secure-dapp",
+            from: "/wallet/how-to/get-started-building/secure-dapp",
+            to: "/wallet/how-to/secure-dapp",
           },
           {
-            from: "/wallet/get-started/detect-metamask",
-            to: "/wallet/how-to/connect/detect-metamask",
+            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask"],
+            to: "/wallet/how-to/detect-metamask",
           },
           {
-            from: "/wallet/get-started/detect-network",
-            to: "/wallet/how-to/connect/detect-network",
+            from: ["/wallet/get-started/detect-network", "/wallet/how-to/connect/detect-network"],
+            to: "/wallet/how-to/detect-network",
           },
           {
             from: "/wallet/get-started/access-accounts",
@@ -314,10 +306,6 @@ const config = {
           {
             from: "/wallet/how-to/use-siwe",
             to: "/wallet/how-to/sign-data/siwe",
-          },
-          {
-            from: "/wallet/how-to/use-mobile",
-            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/wallet/how-to/use-onboarding-library",
@@ -344,16 +332,8 @@ const config = {
             to: "/wallet/concepts/apis",
           },
           {
-            from: "/wallet/how-to/integrate-with-mobile",
-            to: "/wallet/how-to/connect/set-up-sdk",
-          },
-          {
             from: "/wallet/how-to/migrate-api",
             to: "/wallet/concepts/apis",
-          },
-          {
-            from: "/sdk",
-            to: "/wallet/how-to/connect/set-up-sdk",
           },
           {
             from: "/wallet/reference/rpc-api",
@@ -383,15 +363,19 @@ const config = {
             from: ["/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
             to: "/snaps/concepts/overview",
           },
+          {
+            from: "/wallet/how-to/connect",
+            to: "/wallet/quickstart/javascript",
+          }
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
           return acc;
         }, []),
         createRedirects(existingPath) {
-          if (existingPath.includes("/connect/set-up-sdk")) {
+          if (existingPath.includes("/use-sdk")) {
             return [
-              existingPath.replace("/connect/set-up-sdk", "/use-sdk"),
+              existingPath.replace("/use-sdk", "/connect/set-up-sdk"),
             ];
           }
           return undefined;
@@ -425,7 +409,7 @@ const config = {
             label: "Wallet",
           },
           {
-            to: "/wallet/how-to/connect/set-up-sdk",
+            to: "/wallet/how-to/use-sdk",
             label: "SDK",
           },
           {

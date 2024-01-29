@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Use MetaMask SDK with React
 
-Import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your users to
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
@@ -77,15 +77,15 @@ root.render(
 
 When initializing `MetaMaskProvider`, set `debug` to `true` to activate debug mode.
 For the full list of options you can set for `sdkOptions`, see the
-[JavaScript SDK options reference](../../../../../reference/sdk-js-options.md).
+[JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
 
 :::note Important SDK options
-- Use [`dappMetadata`](../../../../../reference/sdk-js-options.md#dappmetadata) to display information
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../../display/custom-modals.md).
-- Use [`infuraAPIKey`](../../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
 :::
 
 ### 4. Use the SDK
@@ -155,7 +155,7 @@ const connect = async () => {
 };
 ```
 
-You can also [use the `connectAndSign` method](../../../../sign-data/connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../sign-data/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction.
 
 ## Example

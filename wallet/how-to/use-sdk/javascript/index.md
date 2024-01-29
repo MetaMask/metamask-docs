@@ -8,7 +8,7 @@ tags:
 
 # Use MetaMask SDK with JavaScript
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your JavaScript dapp to enable your
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your JavaScript dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The following instructions work for web dapps based on standard JavaScript.
 You can also see instructions for the following JavaScript-based platforms:
@@ -23,7 +23,7 @@ You can also see instructions for the following JavaScript-based platforms:
 
 ## Prerequisites
 
-- An existing or [new project](../../../get-started-building/set-up-dev-environment.md) set up
+- An existing or [new project](../../get-started-building/set-up-dev-environment.md) set up
 - [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or later
 - [Yarn](https://yarnpkg.com/getting-started/install) or
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
@@ -54,7 +54,7 @@ import { MetaMaskSDK } from '@metamask/sdk';
 
 ### 3. Instantiate the SDK
 
-Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md):
+Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 
 ```javascript
 const MMSDK = new MetaMaskSDK(
@@ -69,19 +69,19 @@ const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
 
 :::note Important SDK options
-- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+- Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../display/custom-modals.md).
-- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
 :::
 
 ### 4. Use the SDK
 
-Use the SDK by calling any [provider API methods](../../../../reference/provider-api.md).
+Use the SDK by calling any [provider API methods](../../../reference/provider-api.md).
 Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
-[`ethereum.request()`](../../../../reference/provider-api.md#ethereumrequestargs) first, since it
+[`ethereum.request()`](../../../reference/provider-api.md#ethereumrequestargs) first, since it
 prompts the installation or connection popup to appear.
 
 ```javascript

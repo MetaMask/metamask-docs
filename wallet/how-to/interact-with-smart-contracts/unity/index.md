@@ -11,7 +11,7 @@ You can interact with smart contracts from your Unity game with MetaMask SDK ins
 
 ## Prerequisites
 
-- [MetaMask SDK set up](../../connect/set-up-sdk/gaming/unity.md) in your Unity game
+- [MetaMask SDK set up](../../use-sdk/gaming/unity.md) in your Unity game
 - A [contract ABI](../index.md#contract-abi) JSON file or
   [Hardhat artifact](https://hardhat.org/hardhat-runner/docs/advanced/artifacts#compilation-artifacts)
   JSON file

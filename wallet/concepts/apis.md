@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
@@ -49,7 +49,7 @@ recommend using the SDK to enable users to easily connect to the MetaMask browse
 MetaMask Mobile.
 The SDK supports multiple dapp platforms including mobile and gaming dapps.
 
-Get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
+Get started by [setting up the SDK](../how-to/use-sdk/index.md).
 :::
 
 ## JSON-RPC API

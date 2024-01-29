@@ -6,14 +6,14 @@ sidebar_position: 4
 # Access a user's accounts
 
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
-[signing transactions](../sign-data/index.md).
+[signing transactions](sign-data/index.md).
 To request a signature from a user or have a user approve a transaction, your dapp can
 access the user's accounts using the
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
 :::info note
 `eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
-to [request permission](../manage-permissions.md) to call the restricted
+to [request permission](manage-permissions.md) to call the restricted
 [`eth_accounts`](/wallet/reference/eth_accounts) method.
 :::
 
@@ -83,10 +83,10 @@ async function getAccount() {
 
 Use the [`eth_accounts`](/wallet/reference/eth_accounts)
 RPC method to handle user accounts.
-Listen to the [`accountsChanged`](../../reference/provider-api.md#accountschanged) provider event to
+Listen to the [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event to
 be notified when the user changes accounts.
 
-In the [example project script](../get-started-building/set-up-dev-environment.md#example), the following code handles user
+In the [example project script](get-started-building/set-up-dev-environment.md#example), the following code handles user
 accounts and detects when the user changes accounts:
 
 ```javascript title="index.js"
@@ -135,4 +135,4 @@ This is useful as a method for users to log out (or disconnect) from your dapp.
 You can then use [`wallet_getPermissions`](/wallet/reference/wallet_getPermissions) to determine
 whether the user is connected or disconnected to your dapp.
 
-See [how to revoke permissions](../manage-permissions.md#revoke-permissions-example) for an example.
+See [how to revoke permissions](manage-permissions.md#revoke-permissions-example) for an example.

@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Use MetaMask SDK with React UI
 
-Import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your
+Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The `@metamask/sdk-react-ui` package not only exports hooks from [`@metamask/sdk-react`](index.md),
 but also provides wrappers around [wagmi](https://wagmi.sh/) hooks and a basic UI button component
@@ -78,15 +78,15 @@ root.render(
 ```
 
 For the full list of options you can set for `sdkOptions`, see the
-[JavaScript SDK options reference](../../../../../reference/sdk-js-options.md).
+[JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
 
 :::note Important SDK options
-- Use [`dappMetadata`](../../../../../reference/sdk-js-options.md#dappmetadata) to display information
+- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../../display/custom-modals.md).
-- Use [`infuraAPIKey`](../../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../../display/custom-modals.md).
+- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
 :::
 
 ### 4. Use the SDK

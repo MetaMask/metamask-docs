@@ -20,7 +20,7 @@ We recommend using this new mechanism for provider discovery.
 
 You can add support for connecting to the MetaMask browser extension via EIP-6963 in the following ways:
 
-- [Set up MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
+- [Set up MetaMask SDK](../how-to/use-sdk/javascript/index.md) in your dapp.
   The SDK connects to the MetaMask extension via EIP-6963 by default, and we recommend using this method.
 - [Directly update your dapp code](../how-to/discover-multiple-wallets.md) to support EIP-6963.
 - Use third-party libraries that support EIP-6963.

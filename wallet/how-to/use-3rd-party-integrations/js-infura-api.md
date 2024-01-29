@@ -8,7 +8,7 @@ tags:
 # Make read-only requests in JavaScript
 
 You can use the [Infura API](https://docs.infura.io/) from your JavaScript dapp with
-[MetaMask SDK](../connect/set-up-sdk/javascript/index.md) installed to make direct, read-only
+[MetaMask SDK](../use-sdk/javascript/index.md) installed to make direct, read-only
 JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
@@ -52,7 +52,7 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](../connect/set-up-sdk/javascript/index.md) in your JavaScript dapp.
+- [MetaMask SDK set up](../use-sdk/javascript/index.md) in your JavaScript dapp.
 
 ## Use the Infura API
 

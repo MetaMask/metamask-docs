@@ -19,10 +19,10 @@ const CardList: CardItem[] = [
     </>),
   },
   {
-    title: "🌐 Snaps JSON-RPC API",
-    link: "/snaps/reference/rpc-api",
+    title: "🌐 Snaps API",
+    link: "/snaps/reference/snaps-api",
     description: (<>
-      Use the Snaps JSON-RPC API to modify the functionality of MetaMask and communicate between dapps and Snaps.
+      Use the Snaps API to modify the functionality of MetaMask and communicate between dapps and Snaps.
     </>),
   },
 ];

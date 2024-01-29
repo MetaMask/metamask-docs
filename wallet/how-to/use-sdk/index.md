@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: Get started by setting up the SDK in your dapp.
+description: Use the SDK in your dapp.
 tags:
   - JavaScript SDK
   - iOS SDK
@@ -8,9 +8,9 @@ tags:
   - Unity SDK
 ---
 
-# Set up MetaMask SDK
+# Use MetaMask SDK
 
-[MetaMask SDK](../../../concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless
+[MetaMask SDK](../../concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
 It supports the following dapp platforms:
 

@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player/lazy'
 
 # Use MetaMask SDK with Unity
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your
 [Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786) game
 to enable users to easily connect to their MetaMask Mobile wallet.
 The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
@@ -100,7 +100,7 @@ You first must initialize by doing one of the following:
 - Check **Initialize On Start** on the component within the editor.
 
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
-You can now make calls to the user's wallet using [provider API methods](../../../../reference/provider-api.md).
+You can now make calls to the user's wallet using [provider API methods](../../../reference/provider-api.md).
 
 ### 4. Connect to MetaMask
 
@@ -176,7 +176,7 @@ await wallet.Request(request);
 ```
 
 :::note
-See the [Unity SDK API reference](../../../../reference/sdk-unity-api.md) for an overview of the
+See the [Unity SDK API reference](../../../reference/sdk-unity-api.md) for an overview of the
 API methods from the most important classes.
 :::
 
@@ -261,6 +261,6 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
-- [Set up Infura in Unity.](../../../use-3rd-party-integrations/unity-infura.md)
-- [Interact with smart contracts in Unity.](../../../interact-with-smart-contracts/unity/index.md)
-- [Enable human-readable addresses in Unity using Decentraweb.](../../../use-3rd-party-integrations/unity-dweb.md)
+- [Set up Infura in Unity.](../../use-3rd-party-integrations/unity-infura.md)
+- [Interact with smart contracts in Unity.](../../interact-with-smart-contracts/unity/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../use-3rd-party-integrations/unity-dweb.md)

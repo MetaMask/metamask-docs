@@ -1,6 +1,6 @@
 ---
 description: Learn about MetaMask SDK.
-sidebar_position: 2
+sidebar_position: 3
 tags:
   - JavaScript SDK
   - iOS SDK
@@ -17,7 +17,7 @@ your dapp.
 
 :::tip Get started
 MetaMask SDK is the recommended method of integrating your dapp with MetaMask.
-You can get started by [setting up the SDK](../../how-to/connect/set-up-sdk/index.md).
+You can get started by [setting up the SDK](../../how-to/use-sdk/index.md).
 :::
 
 ## Benefits of MetaMask SDK
@@ -58,7 +58,7 @@ to MetaMask Mobile using a QR code.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your web dapp](../../how-to/connect/set-up-sdk/javascript/index.md).
+- Get started by [setting up the SDK in your web dapp](../../how-to/use-sdk/javascript/index.md).
 - See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
   in the JavaScript SDK GitHub repository for advanced use cases.
 :::
@@ -77,7 +77,7 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your web dapp](../../how-to/connect/set-up-sdk/javascript/index.md).
+- Get started by [setting up the SDK in your web dapp](../../how-to/use-sdk/javascript/index.md).
 - See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
   in the JavaScript SDK GitHub repository for advanced use cases.
 :::
@@ -96,7 +96,7 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your iOS dapp](../../how-to/connect/set-up-sdk/mobile/ios.md).
+- Get started by [setting up the SDK in your iOS dapp](../../how-to/use-sdk/mobile/ios.md).
 - See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk) in the iOS SDK GitHub
   repository for advanced use cases.
 :::
@@ -115,7 +115,7 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md).
+- Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository and the [Android SDK architecture](android.md) for more information.
 :::
@@ -132,7 +132,7 @@ scan with their MetaMask Mobile app.
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your Node.js dapp](../../how-to/connect/set-up-sdk/javascript/nodejs.md).
+- Get started by [setting up the SDK in your Node.js dapp](../../how-to/use-sdk/javascript/nodejs.md).
 - See the [example Node.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
   in the Node.js SDK GitHub repository for advanced use cases.
 :::
@@ -150,7 +150,7 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your Unity game](../../how-to/connect/set-up-sdk/gaming/unity.md).
+- Get started by [setting up the SDK in your Unity game](../../how-to/use-sdk/gaming/unity.md).
 - See the [Unity demo game with the SDK installed](https://assetstore.unity.com/packages/decentralization/demo-game-dragon-crasher-with-metamask-sdk-infura-and-truffle-249789)
   for advanced use cases.
 :::

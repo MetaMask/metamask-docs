@@ -8,7 +8,7 @@ tags:
 
 # Use MetaMask SDK with gaming dapps
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your gaming dapp to enable your users
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your gaming dapp to enable your users
 to easily connect with their MetaMask Mobile wallet.
 See the instructions for the following gaming platforms:
 
