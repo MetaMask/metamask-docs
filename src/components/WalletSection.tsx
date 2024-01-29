@@ -20,7 +20,7 @@ const CardList: CardItem[] = [
     title: "🌐 MetaMask JSON-RPC API",
     link: "/wallet/reference/json-rpc-api",
     description: (<>
-      Use the MetaMask JSON-RPC API to interact with your users' Ethereum accounts.
+      Use the MetaMask JSON-RPC API to interact with your users&apos; Ethereum accounts.
     </>),
   },
 ];
