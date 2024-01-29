@@ -148,7 +148,7 @@ const config = {
             to: "/wallet/how-to/interact-with-smart-contracts",
           },
           {
-            from: ["/guide/accessing-accounts", "/wallet/how-to/connect/access-accounts"],
+            from: ["/guide/accessing-accounts", "/wallet/how-to/connect/access-accounts", "/wallet/get-started/access-accounts"],
             to: "/wallet/how-to/access-accounts",
           },
           {
@@ -284,10 +284,6 @@ const config = {
             to: "/wallet/how-to/detect-network",
           },
           {
-            from: "/wallet/get-started/access-accounts",
-            to: "/wallet/how-to/connect/access-accounts",
-          },
-          {
             from: "/wallet/how-to/use-siwe",
             to: "/wallet/how-to/sign-data/siwe",
           },
@@ -395,10 +391,12 @@ const config = {
           {
             to: "/wallet/how-to/use-sdk",
             label: "SDK",
+            className: "navbar-item-beta",
           },
           {
             to: "snaps",
             label: "Snaps",
+            className: "navbar-item-beta",
           },
           {
             to: "services",

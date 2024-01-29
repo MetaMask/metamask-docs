@@ -3,7 +3,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "🏁 Get started with Snaps",
+    title: "🏁 Snaps quickstart",
     link: "/snaps/get-started/quickstart",
     description: (<>
       Get started quickly by creating and customizing a simple Snap, using the Snaps template built

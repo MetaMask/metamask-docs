@@ -18,10 +18,15 @@ Get started [using the SDK](../../how-to/use-sdk/index.md).
 
 ## Benefits of MetaMask SDK
 
+MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
+multiple dapp platforms, without relying on third-party libraries.
+The SDK uses the [Ethereum provider](../apis.md#ethereum-provider-api), so existing dapps work out
+of the box with the SDK.
+
 The following table outlines some of the features available when you integrate your dapp with
-MetaMask using MetaMask SDK.
-Most of these features are not available if you only integrate your dapp directly using the
-[provider API](../apis.md#ethereum-provider-api).
+MetaMask using the SDK.
+Most of these features are not available if you only integrate your dapp directly using the MetaMask
+provider API.
 
 | Feature                                                                                                  | MetaMask provider API only | MetaMask SDK |
 |----------------------------------------------------------------------------------------------------------|:--------------------------:|:------------:|
@@ -30,10 +35,6 @@ Most of these features are not available if you only integrate your dapp directl
 | Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                                        |             ❌              |      ✅       |
 | Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md)            |             ❌              |      ✅       |
 | [Make read-only requests](../../how-to/use-3rd-party-integrations/js-infura-api.md) using the Infura API |             ❌              |      ✅       |
-
-The SDK enables your dapp to provide a seamless user experience for MetaMask users, from multiple
-dapp platforms, without relying on third-party libraries.
-Moreover, the SDK uses the Ethereum provider, so existing dapps work out of the box with the SDK.
 
 ## User experience
 
