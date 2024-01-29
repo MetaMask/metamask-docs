@@ -3,12 +3,27 @@ description: Integrate your React dapp with MetaMask.
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # React quickstart
 
+This page provides code samples to quickly connect to your users' MetaMask accounts from a
+React dapp.
+You can:
+
+- [Connect to the MetaMask browser extension](#connect-to-the-metamask-browser-extension)
+  directly using the MetaMask APIs.
+- [Connect to the MetaMask extension and MetaMask mobile](#connect-to-the-metamask-extension-and-metamask-mobile)
+  using the SDK.
+
 ## Connect to the MetaMask browser extension
+
+Connect to the MetaMask browser extension directly using the
+[MetaMask Ethereum provider API](../concepts/apis.md).
+This example uses the [Vite](https://v3.vitejs.dev/guide/) build tool with React and Typescript, so
+you can get started quickly with an optimized dapp.
+
+First, follow Step 1 in the [React dapp tutorial](../tutorials/react-dapp-local-state.md) to set up
+a Vite project.
+Then add the following code to your project file:
 
 ```typescript title="App.tsx"
 import './App.css'
@@ -56,15 +71,25 @@ const App = () => {
 export default App
 ```
 
-```typescript title="vite-env.d.ts"
-interface Window {
-  ethereum: any;
-}
+## Connect to the MetaMask extension and MetaMask Mobile
+
+Connect to the MetaMask browser extension and MetaMask Mobile using [MetaMask SDK](../concepts/sdk/index.md).
+The SDK automatically detects MetaMask in the user's browsers, and enables them to seamlessly
+connect to the extension and the mobile wallet.
+
+:::note
+The SDK uses the [Ethereum provider](../concepts/apis.md#ethereum-provider-api), so you can use the
+SDK as a wrapper around an existing JavaScript dapp and call
+[MetaMask Ethereum provider API methods](../reference/provider-api.md) from your dapp as normal.
+:::
+
+First, install the [MetaMask React SDK](../how-to/use-sdk/javascript/react/index.md) in your project directory:
+
+```bash
+npm i @metamask/sdk-react
 ```
 
-## Connect to multiple wallets
-
-## Connect to the MetaMask extension and MetaMask Mobile
+Then wrap your root component in a `MetaMaskProvider`:
 
 ```typescript title="index.tsx"
 import React from 'react';
@@ -75,8 +100,6 @@ import { MetaMaskProvider } from '@metamask/sdk-react';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-// Initialize the SDK
 
 root.render(
   <React.StrictMode>
@@ -92,11 +115,11 @@ root.render(
 );
 ```
 
+To use the SDK, use the `useSDK` hook in your React components:
+
 ```typescript title="App.tsx"
 import { useSDK } from '@metamask/sdk-react';
 import React, { useState } from 'react';
-
-// Prompt users to connect to MetaMask
 
 export const App = () => {
   const [account, setAccount] = useState<string>();

@@ -12,32 +12,28 @@ tags:
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
 to the MetaMask browser extension and MetaMask Mobile.
-You can install the SDK in existing dapps, and call any [provider API](../apis.md) methods from
-your dapp.
-
-:::tip Get started
-MetaMask SDK is the recommended method of integrating your dapp with MetaMask.
-You can get started by [setting up the SDK](../../how-to/use-sdk/index.md).
-:::
+You can install the SDK in existing dapps, and call any
+[provider API methods](../../reference/provider-api.md) from your dapp.
+Get started [using the SDK](../../how-to/use-sdk/index.md).
 
 ## Benefits of MetaMask SDK
 
-Before MetaMask SDK, there were three ways to connect a dapp to a user's MetaMask wallet:
+The following table outlines some of the features available when you integrate your dapp with
+MetaMask using MetaMask SDK.
+Most of these features are not available if you only integrate your dapp directly using the
+[provider API](../apis.md#ethereum-provider-api).
 
-1. Connect from a web dapp in a desktop browser to the MetaMask browser extension
-2. Connect from a web dapp in MetaMask Mobile's in-app browser to MetaMask Mobile
-3. Use third-party libraries to connect a mobile dapp to MetaMask Mobile
+| Feature                                                                                                  | MetaMask provider API only | MetaMask SDK |
+|----------------------------------------------------------------------------------------------------------|:--------------------------:|:------------:|
+| Connect from a web dapp to the MetaMask extension                                                        |             ✅              |      ✅       |
+| Connect from a web dapp to MetaMask Mobile                                                               |             ❌              |      ✅       |
+| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                                        |             ❌              |      ✅       |
+| Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md)            |             ❌              |      ✅       |
+| [Make read-only requests](../../how-to/use-3rd-party-integrations/js-infura-api.md) using the Infura API |             ❌              |      ✅       |
 
-With MetaMask SDK, there are more ways to connect:
-
-1. Connect from a web dapp in a desktop browser to the MetaMask browser extension or to MetaMask Mobile
-2. Connect from a web dapp in a mobile browser to MetaMask Mobile
-3. Connect from desktop, mobile, and gaming dapps to MetaMask Mobile
-
-MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
-multiple dapp platforms, without relying on third-party libraries.
-Moreover, the SDK uses the [Ethereum provider](../apis.md#ethereum-provider-api) that developers are
-already used to, so existing dapps work out of the box with the SDK.
+The SDK enables your dapp to provide a seamless user experience for MetaMask users, from multiple
+dapp platforms, without relying on third-party libraries.
+Moreover, the SDK uses the Ethereum provider, so existing dapps work out of the box with the SDK.
 
 ## User experience
 

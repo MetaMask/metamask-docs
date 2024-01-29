@@ -140,10 +140,6 @@ const config = {
             to: "/wallet/",
           },
           {
-            from: "/guide/getting-started",
-            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
-          },
-          {
             from: "/guide/common-terms",
             to: "/wallet/",
           },
@@ -228,11 +224,7 @@ const config = {
             to: "/snaps/how-to/troubleshoot",
           },
           {
-            from: "/guide/create-dapp",
-            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
-          },
-          {
-            from: ["/guide/contributors", "/wallet/how-to/get-started-building", "/wallet/how-to/set-up-dev-environment"],
+            from: ["/guide/contributors", "/wallet/how-to/get-started-building", "/wallet/how-to/set-up-dev-environment", "/guide/create-dapp", "/guide/getting-started", "/wallet/category/get-started", "/wallet/get-started/set-up-dev-environment", "/wallet/how-to/get-started-building/set-up-dev-environment"],
             to: "/wallet",
           },
           {
@@ -274,14 +266,6 @@ const config = {
           {
             from: "/snaps/category/reference",
             to: "/snaps/reference",
-          },
-          {
-            from: "/wallet/category/get-started",
-            to: "/wallet/how-to/get-started-building",
-          },
-          {
-            from: "/wallet/get-started/set-up-dev-environment",
-            to: "/wallet/how-to/get-started-building/set-up-dev-environment",
           },
           {
             from: ["/wallet/get-started/run-development-network", "/wallet/how-to/get-started-building/run-devnet"],

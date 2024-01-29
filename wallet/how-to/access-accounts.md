@@ -86,8 +86,7 @@ RPC method to handle user accounts.
 Listen to the [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event to
 be notified when the user changes accounts.
 
-In the [example project script](get-started-building/set-up-dev-environment.md#example), the following code handles user
-accounts and detects when the user changes accounts:
+The following code handles user accounts and detects when the user changes accounts:
 
 ```javascript title="index.js"
 let currentAccount = null;
