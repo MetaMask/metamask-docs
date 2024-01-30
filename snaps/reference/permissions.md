@@ -86,8 +86,8 @@ See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not availab
 :::
 
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
-This permission allows the Snap to specify a "home page" entrypoint using the exported 
-[`onHomePage`](../reference/exports.md#onhomepage) method. 
+This permission allows the Snap to specify a "home page" by exposing the
+[`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
 You can use any [custom UI components](../how-to/use-custom-ui.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
@@ -121,10 +121,10 @@ Specify this permission in the manifest file as follows:
 ### endowment:lifecycle-hooks
 
 To run an action when the user installs or updates the Snap, a Snap must request the `endowment:lifecycle-hooks` permission.
-This permission allows the Snap to export the 
-[`onInstall`](../reference/exports.md#oninstall) and 
-[`onUpdate`](../reference/exports.md#onupdate) 
-methods, which MetaMask calls after a successful installation or update, respectively.
+This permission allows the Snap to expose the 
+[`onInstall`](../reference/entry-points.md#oninstall) and 
+[`onUpdate`](../reference/entry-points.md#onupdate) 
+entry points, which MetaMask calls after a successful installation or update, respectively.
 
 Specify this permission in the manifest file as follows:
 

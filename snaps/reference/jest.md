@@ -47,7 +47,7 @@ A JSON-RPC request object with an addition optional `origin` property.
 
 #### Returns
 
-A promise that resolves to the response from the [`onRpcRequest`](entry-points.md#onrpcrequest) function,
+A promise that resolves to the response from the [`onRpcRequest`](entry-points.md#onrpcrequest) entry point,
 which can be checked using [Jest matchers](#jest-matchers).
 
 #### Example
@@ -100,7 +100,7 @@ Most values can be specified as a hex string or a decimal number.
 #### Returns
 
 An object with the user interface that was shown by the Snap, in the
-[`onTransaction`](entry-points.md#ontransaction) function.
+[`onTransaction`](entry-points.md#ontransaction) entry point.
 
 #### Example
 
@@ -138,7 +138,7 @@ A JSON-RPC request object.
 
 #### Returns
 
-A promise that resolves to the response from the [`onCronjob`](entry-points.md#oncronjob) function,
+A promise that resolves to the response from the [`onCronjob`](entry-points.md#oncronjob) entry point,
 which can be checked using [Jest matchers](#jest-matchers).
 
 #### Example

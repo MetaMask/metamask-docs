@@ -228,7 +228,7 @@ const config = {
             to: "/snaps/how-to/request-permissions",
           },
           {
-            from: "/guide/snaps-exports",
+            from: ["/guide/snaps-exports", "/snaps/reference/exports"],
             to: "/snaps/reference/entry-points",
           },
           {
@@ -370,10 +370,6 @@ const config = {
           {
             from: "/snaps/how-to/work-with-existing-snaps",
             to: "/snaps/how-to/use-3rd-party-snaps",
-          },
-          {
-            from: "/snaps/reference/exports",
-            to: "/snaps/reference/entry-points",
           },
           {
             from: "/snaps/get-started/install-snaps",
