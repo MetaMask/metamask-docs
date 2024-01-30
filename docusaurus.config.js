@@ -411,6 +411,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Metadata array here for the open graph image tag
+      metadata: [
+        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+      ],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {
