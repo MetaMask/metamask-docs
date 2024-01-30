@@ -7,13 +7,13 @@ sidebar_position: 6
 
 With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. 
 
-The primary implication for developers is the shift from relying solely on `window.ethereum` for wallet detection giving developers an alternative discovery mechanism to the [`window.ethereum` injected provider](apis.md#ethereum-provider-api). We recommend using this new mechanism for provider discovery by using the standardized events and interfaces provided by EIP-6963.
+r discovery by using the standardized events and interfaces provided by EIP-6963.
 
 Below is a visual demo of that user experience showing the data provided from each installed wallet.
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/eip-6963-demo.mp4" type="video/mp4" />
+    <source src="/update-wallet-interop/eip-6963-demo.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -21,18 +21,22 @@ To implement EIP-6963 in a dapp, check out our [EIP-6963 ViteJS React + TypeScri
 
 ## Third Party Library Support
 
-You can add support for connecting to the MetaMask browser extension via EIP-6963 in the following ways:
+You can add support for connecting to the MetaMask browser extension via EIP-6963 using third-party libraries that either support EIP-6963 or are tools built specifically to help manage the providers in a more custom way.
 
-- Use third-party libraries that support EIP-6963
-- [WAGMI 2+](https://wagmi.sh)
+- [Wagmi 2+](https://wagmi.sh)
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
+- [MIPD Store](https://github.com/wevm/mipd)
 - [MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md)
 
 :::note
 MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
 If you intend to support discovery of other wallets, we recommend using other methods of adding
-EIP-6963 support like using WAGMI (v2.0+).
+EIP-6963 support like using Wagmi (v2.0+).
 :::
+
+### MIPD Store
+
+The [MIPD Store](https://github.com/wevm/mipd) stores the Providers that have been emitted by a Wallet (or other source), and provides a way to subscribe to the store and retrieve the Providers. Unlike Wagmi and Web3Onboard which are libraries that provide components and connectors for connections to multiple wallets and depend on the MetaMask SDK for integration. The MIPD store is a utility library that makes it easier to work with EIP-6963 and supports TypeScript types.
 
 ## Community support
 
