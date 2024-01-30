@@ -271,7 +271,7 @@ module.exports.onCronjob = async ({ request }) => {
 
 ## onInstall
 
-To run an action on installation, a Snap must export `onInstall`.
+To run an action on installation, a Snap must expose the `onInstall` entry point.
 This method is called after the Snap is installed successfully. 
 
 :::note
@@ -335,7 +335,7 @@ module.exports.onInstall = async () => {
 
 ## onUpdate
 
-To run an action on update, a Snap must export `onUpdate`.
+To run an action on update, a Snap must expose the `onUpdate` entry point.
 This method is called after the Snap is updated successfully. 
 
 :::note
@@ -408,7 +408,8 @@ module.exports.onUpdate = async () => {
 :::flaskOnly
 :::
 
-To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must export `onHomePage`. 
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
+expose the `onHomePage` entry point. 
 This method is called when the user selects the Snap name in the Snaps menu. 
 
 :::note

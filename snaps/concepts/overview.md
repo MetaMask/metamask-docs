@@ -49,7 +49,7 @@ For each Snap, the user can:
 
 Other than the settings page, a Snap can [modify the MetaMask UI](../how-to/use-custom-ui.md) only
 by [displaying a dialog](../reference/snaps-api.md#snap_dialog) or
-[displaying transaction insights](../reference/exports.md#ontransaction).
+[displaying transaction insights](../reference/entry-points.md#ontransaction).
 
 This means that most Snaps must rely on companion dapps and their custom JSON-RPC API methods to
 present their data to the user.
