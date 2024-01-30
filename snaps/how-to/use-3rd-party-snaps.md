@@ -1,19 +1,17 @@
 ---
 description: Connect your dapp to existing, third-party Snaps.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Use third-party Snaps
 
 Some existing, third-party Snaps are designed to communicate with dapps.
 As a dapp developer, you can use these Snaps to take advantage of new features enabled by Snaps.
-This is possible because [Snaps can expose a JSON-RPC API](../reference/entry-points.md#onrpcrequest).
-Snaps can decide to make their API available to dapps by requesting the
-[`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
+This is possible because Snaps can expose a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis).
 
 ## Connect to a Snap
 
-Connect to a Snap by calling the [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps)
+Connect to a Snap by calling the [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps)
 method from your dapp.
 If a user doesn't have the Snap installed in their MetaMask wallet, MetaMask prompts the user to
 install the Snap.
@@ -60,8 +58,8 @@ Do not assume that data stored by a Snap is unique to your dapp.
 
 ## Determine whether a Snap is installed
 
-Determine whether a Snap is installed by calling the [`wallet_getSnaps`](../reference/rpc-api.md#wallet_getsnaps)
-method from your dapp.
+Determine whether a Snap is installed by calling the
+[`wallet_getSnaps`](/wallet/reference/wallet_getsnaps) method from your dapp.
 This method returns a list of only those Snaps that are connected to your current dapp.
 
 The response is in the form of an object keyed by the ID of the Snap.
@@ -98,7 +96,7 @@ to work with that version.
 At any time, a user can open their MetaMask Snaps settings menu and see all the dapps connected to a Snap.
 From that menu they can revoke a dapp connection.
 If your dapp loses the connection to a Snap, you can reconnect by calling
-[`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps).
 Since the Snap is already installed, this returns a success response without MetaMask showing a pop-up.
 However, if the user has disabled the Snap, the response has `enabled` set to `false` for your `SNAP_ID`:
 

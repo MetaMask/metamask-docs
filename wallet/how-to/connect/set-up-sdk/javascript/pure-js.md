@@ -12,31 +12,27 @@ Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your pure JavaScri
 your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
-:::tip Example
-See the [example pure JavaScript dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/pure-javascript)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
-
 To import, instantiate, and use the SDK, you can insert a script in the head section of your website:
 
-```javascript
+```html title="index.html"
 <head>
 ...
-
 <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
-
 <script>
+  const MMSDK = new MetaMaskSDK.MetaMaskSDK(
+    dappMetadata: {
+      name: "Example Pure JS Dapp",
+      url: window.location.href,
+    }
+    // Other options
+  )
+  // Because init process of the MetaMaskSDK is async.
+  setTimeout(() => {
+    const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
 
-    const MMSDK = new MetaMaskSDK.MetaMaskSDK()
-    // Because init process of the MetaMaskSDK is async.
-    setTimeout(() => {
-        const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
-
-        ethereum.request({ method: 'eth_requestAccounts' })
-    }, 0)
-
+    ethereum.request({ method: 'eth_requestAccounts' })
+  }, 0)
 </script>
-
 ...
 </head>
 ```
@@ -55,3 +51,8 @@ since it prompts the installation or connection popup to appear.
 - Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
 :::
+
+## Example
+
+See the [example pure JavaScript dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/pure-javascript)
+in the JavaScript SDK GitHub repository for more information.

@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Manage keys
 
-The [Snaps JSON-RPC API](../reference/rpc-api.md) allows you to manage users' private keys with
+The [Snaps API](../reference/snaps-api.md) allows you to manage users' private keys with
 their approval.
 
 :::caution important
@@ -47,8 +47,8 @@ To derive a user's private keys:
 1. Choose between the BIP-32 or BIP-44 specifications to derive the user's private keys.
     If the keys you want to derive conform to the
     [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) structure, use
-    [`snap_getBip44Entropy`](../reference/rpc-api.md#snap_getbip44entropy) to derive them.
-    Otherwise, use [`snap_getBip32Entropy`](../reference/rpc-api.md#snap_getbip32entropy).
+    [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy) to derive them.
+    Otherwise, use [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy).
 2. Add the required permission to your manifest file.
 3. Find out the derivation path to use.
     This is dependent on the application you're building.
@@ -60,7 +60,7 @@ To derive a user's private keys:
 For example, to derive Dogecoin keys:
 
 1. Dogecoin uses the BIP-44 scheme, so you'll use
-   [`snap_getBip44Entropy`](../reference/rpc-api.md#snap_getbip44entropy).
+   [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy).
 2. Dogecoin has coin type `3`, so add the following to the manifest file:
 
    ```json

@@ -21,15 +21,10 @@ You can also see instructions for the following JavaScript-based platforms:
 - [Node.js](nodejs.md)
 - [Electron](electron.md)
 
-:::tip Examples
-See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
-
 ## Prerequisites
 
 - An existing or [new project](../../../get-started-building/set-up-dev-environment.md) set up
-- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or above
+- [MetaMask Mobile](https://github.com/MetaMask/metamask-mobile) version 5.8.1 or later
 - [Yarn](https://yarnpkg.com/getting-started/install) or
   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
@@ -62,7 +57,13 @@ import { MetaMaskSDK } from '@metamask/sdk';
 Instantiate the SDK using any [options](../../../../reference/sdk-js-options.md):
 
 ```javascript
-const MMSDK = new MetaMaskSDK(options);
+const MMSDK = new MetaMaskSDK(
+  dappMetadata: {
+    name: "JavaScript example dapp",
+    url: window.location.href,
+  }
+  // Other options
+);
 
 const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
 ```
@@ -86,3 +87,26 @@ prompts the installation or connection popup to appear.
 ```javascript
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```
+
+## Example
+
+You can copy the full JavaScript example to get started:
+
+```javascript title="index.js"
+import { MetaMaskSDK } from '@metamask/sdk';
+
+const MMSDK = new MetaMaskSDK(
+  dappMetadata: {
+    name: "Example JavaScript Dapp",
+    url: window.location.href,
+  }
+  // Other options
+);
+
+const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+
+ethereum.request({ method: 'eth_requestAccounts', params: [] });
+```
+
+See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+in the JavaScript SDK GitHub repository for more information.

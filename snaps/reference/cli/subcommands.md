@@ -1,12 +1,21 @@
 ---
 sidebar_label: Subcommands
 sidebar_position: 2
+description: See the Snaps CLI subcommands reference.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Snaps subcommands
+
+This reference describes the syntax of the Snaps command line interface (CLI) subcommands.
+
+You can specify subcommands and options using the `yarn mm-snap` command:
+
+```bash
+yarn mm-snap [SUBCOMMAND] [OPTIONS]
+```
 
 ## b, build
 
@@ -15,13 +24,13 @@ import TabItem from '@theme/TabItem';
 # Syntax
 
 ```bash
-mm-snap build [options]
+yarn mm-snap build [options]
 ```
 
 # Example
 
 ```bash
-mm-snap b -s lib/index.js -d out -n snap.js
+yarn mm-snap b -s lib/index.js -d out -n snap.js
 ```
 
 <!--/tabs-->
@@ -37,13 +46,13 @@ Builds a Snap from source.
 # Syntax
 
 ```bash
-mm-snap eval [options]
+yarn mm-snap eval [options]
 ```
 
 # Example
 
 ```bash
-mm-snap e -b out/snap.js
+yarn mm-snap e -b out/snap.js
 ```
 
 <!--/tabs-->
@@ -59,13 +68,13 @@ Attempts to evaluate the Snap bundle in SES.
 # Syntax
 
 ```bash
-mm-snap init [directory]
+yarn mm-snap init [directory]
 ```
 
 # Example
 
 ```bash
-mm-snap i my-snap
+yarn mm-snap i my-snap
 ```
 
 <!--/tabs-->
@@ -82,18 +91,18 @@ If no directory is specified, the Snap project is initialized in the current dir
 # Syntax
 
 ```bash
-mm-snap manifest [options]
+yarn mm-snap manifest [options]
 ```
 
 # Example
 
 ```bash
-mm-snap m --fix false
+yarn mm-snap m --fix false
 ```
 
 <!--/tabs-->
 
-Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
+Validates the Snap [manifest file](../../concepts/files.md#manifest-file).
 
 `m` is an alias for `manifest`.
 
@@ -104,13 +113,13 @@ Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
 # Syntax
 
 ```bash
-mm-snap serve [options]
+yarn mm-snap serve [options]
 ```
 
 # Example
 
 ```bash
-mm-snap s -r out -p 9000
+yarn mm-snap s -r out -p 9000
 ```
 
 <!--/tabs-->
@@ -126,13 +135,13 @@ Locally serves Snap files for testing.
 # Syntax
 
 ```bash
-mm-snap watch [options]
+yarn mm-snap watch [options]
 ```
 
 # Example
 
 ```bash
-mm-snap w -s lib/index.js -d out
+yarn mm-snap w -s lib/index.js -d out
 ```
 
 <!--/tabs-->

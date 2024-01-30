@@ -13,16 +13,24 @@ information in an alert dialog.
 
 - [MetaMask Flask installed](../get-started/install-flask.md)
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-- [Yarn](https://yarnpkg.com/) version 3
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
+- [Yarn](https://yarnpkg.com/)
 
 ## Steps
 
 ### 1. Set up the project
 
-Create a new Snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
+Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+starter kit by running:
 
 ```bash
 yarn create @metamask/snap gas-estimation-snap
+```
+
+or
+
+```bash
+npx @metamask/create-snap gas-estimation-snap
 ```
 
 or
@@ -154,7 +162,7 @@ To build and test your Snap:
 4. Select **Connect** to connect Flask to the dapp.
     After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow websites to communicate directly with this Snap.**
+    - **Allow dapps to communicate directly with this Snap.**
     - **Access the internet.**
     - **Display dialog windows in MetaMask.**
 

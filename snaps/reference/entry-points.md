@@ -5,20 +5,17 @@ sidebar_position: 2
 
 # Snaps entry points
 
-A Snap can expose the following entry points.
+Snaps can expose the following entry points.
 
 ## onRpcRequest
 
-To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exposing
-the `onRpcRequest` entry point.
+To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
+dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
 Whenever the Snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
 
-:::caution important
-If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](#ontransaction), you can skip using `onRpcRequest`.
-However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that sends transactions for that protocol via your Snap, for example, you must
-specify an RPC API.
+:::note
+For MetaMask to call the Snap's `onRpcRequest` method, you must request the
+[`endowment:rpc`](permissions.md#endowmentrpc) permission.
 :::
 
 #### Parameters
@@ -267,6 +264,198 @@ module.exports.onCronjob = async ({ request }) => {
     default:
       throw new Error('Method not found.');
   }
+};
+```
+
+<!--/tabs-->
+
+## onInstall
+
+To run an action on installation, a Snap must export `onInstall`.
+This method is called after the Snap is installed successfully. 
+
+:::note
+For MetaMask to call the Snap's `onInstall` method, you must request the
+[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
+:::
+
+#### Parameters
+
+None.
+
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnInstallHandler } from '@metamask/snaps-sdk';
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for installing my Snap'),
+        text(
+          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+        ),
+      ]),
+    },
+  });
+};
+```
+
+# JavaScript
+
+```js
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+module.exports.onInstall = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for installing my Snap'),
+        text(
+          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+        ),
+      ]),
+    },
+  });
+};
+```
+
+<!--/tabs-->
+
+## onUpdate
+
+To run an action on update, a Snap must export `onUpdate`.
+This method is called after the Snap is updated successfully. 
+
+:::note
+For MetaMask to call the Snap's `onUpdate` method, you must request the
+[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
+:::
+
+#### Parameters
+
+None.
+
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnUpdateHandler } from '@metamask/snaps-sdk';
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+export const onUpdate: OnUpdateHandler = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for updating my Snap'),
+        text(
+          'New features added in this version:',
+        ),
+        text(
+          'Added a dialog that appears when updating'
+        ), 
+      ]),
+    },
+  });
+};
+```
+
+# JavaScript
+
+```js
+import { heading, panel, text } from '@metamask/snaps-sdk';
+
+module.exports.onUpdate = async () => {
+  await snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: 'alert',
+      content: panel([
+        heading('Thank you for updating my Snap'),
+        text(
+          'New features added in this version:',
+        ),
+        text(
+          'Added a dialog that appears when updating'
+        ), 
+      ]),
+    },
+  });
+};
+```
+
+<!--/tabs-->
+
+## onHomePage
+
+:::flaskOnly
+:::
+
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must export `onHomePage`. 
+This method is called when the user selects the Snap name in the Snaps menu. 
+
+:::note
+For MetaMask to call the Snap's `onHomePage` method, you must request the
+[`endowment:page-home`](permissions.md#endowmentpage-home) permission.
+:::
+
+#### Parameters
+
+None.
+
+#### Returns
+
+A content object displayed using [custom UI](../how-to/use-custom-ui.md).
+
+#### Example
+
+<!--tabs-->
+
+# TypeScript
+
+```typescript
+import type { OnHomePageHandler } from '@metamask/snaps-sdk';
+import { panel, text, heading } from '@metamask/snaps-sdk';
+
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: panel([
+      heading('Hello world!'),
+      text('Welcome to my Snap home page!'),
+    ]),
+  };
+};
+```
+
+# JavaScript
+
+```js
+import { panel, text, heading } from '@metamask/snaps-sdk';
+
+module.exports.onHomePage = async () => {
+  return {
+    content: panel([
+      heading('Hello world!'),
+      text('Welcome to my Snap home page!'),
+    ]),
+  };
 };
 ```
 

@@ -6,6 +6,9 @@ tags:
   - JavaScript SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use MetaMask SDK with React UI
 
 Import [MetaMask SDK](../../../../../concepts/sdk/index.md) into your React dapp to enable your
@@ -19,11 +22,6 @@ the core functionality and the pre-styled UI components to streamline the integr
 into your React dapp.
 
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
-
-:::tip Examples
-See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
-in the JavaScript SDK GitHub repository for advanced use cases.
-:::
 
 ## Steps
 
@@ -68,8 +66,10 @@ root.render(
   <React.StrictMode>
     <MetaMaskUIProvider sdkOptions={{
       dappMetadata: {
-        name: "Demo UI React App",
+        name: "Example React UI Dapp",
+        url: window.location.href,
       }
+      // Other options
     }}>
       <App />
     </MetaMaskUIProvider>
@@ -123,5 +123,93 @@ export const App = () => {
 </p>
 </details>
 
-Refer to the [MetaMask JavaScript SDK examples](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
-for advanced use cases.
+## Example
+
+You can copy the full React UI example to get started:
+
+<Tabs>
+<TabItem value="Root component">
+
+```javascript title="index.js"
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { MetaMaskUIProvider } from '@metamask/sdk-react-ui';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <MetaMaskUIProvider sdkOptions={{
+      dappMetadata: {
+        name: "Example React UI Dapp",
+        url: window.location.href,
+      }
+      // Other options
+    }}>
+      <App />
+    </MetaMaskUIProvider>
+  </React.StrictMode>
+);
+```
+
+</TabItem>
+<TabItem value="React component">
+
+```javascript title="App.js"
+import { MetaMaskButton, useAccount, useSDK, useSignMessage} from '@metamask/sdk-react-ui';
+import './App.css';
+
+function AppReady() {
+  const {
+    data: signData,
+    isError: isSignError,
+    isLoading: isSignLoading,
+    isSuccess: isSignSuccess,
+    signMessage,
+  } = useSignMessage({
+    message: 'gm wagmi frens',
+  });
+
+  const { isConnected } = useAccount();
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <MetaMaskButton theme={'light'} color="white"></MetaMaskButton>
+        {isConnected && (
+          <>
+            <div style={{ marginTop: 20 }}>
+              <button disabled={isSignLoading} onClick={() => signMessage()}>
+                Sign message
+              </button>
+              {isSignSuccess && <div>Signature: {signData}</div>}
+              {isSignError && <div>Error signing message</div>}
+            </div>
+          </>
+        )}
+      </header>
+    </div>
+  );
+}
+
+function App() {
+  const { ready } = useSDK();
+
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
+
+  return <AppReady />;
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
+
+See the [example React UI dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/react-metamask-button)
+in the JavaScript SDK GitHub repository for more information.

@@ -18,16 +18,22 @@ We recommend using this new mechanism for provider discovery.
   </video>
 </p>
 
-You can add support for EIP-6963 in one of the following ways:
+You can add support for connecting to the MetaMask browser extension via EIP-6963 in the following ways:
 
 - [Set up MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) in your dapp.
-  The SDK supports EIP-6963 by default, and we recommend using this method.
+  The SDK connects to the MetaMask extension via EIP-6963 by default, and we recommend using this method.
 - [Directly update your dapp code](../how-to/discover-multiple-wallets.md) to support EIP-6963.
 - Use third-party libraries that support EIP-6963.
 
 Alternatively, you can use [convenience libraries](convenience-libraries.md) that support wallet
 interoperability.
 We recommend using the SDK for the best MetaMask user experience.
+
+:::note
+MetaMask SDK doesn't support connecting to non-MetaMask wallets via EIP-6963.
+If you intend to support discovery of other wallets, we recommend using other methods of adding
+EIP-6963 support.
+:::
 
 ## Community support
 

@@ -4,7 +4,7 @@
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
 const path = require("path");
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -102,6 +102,17 @@ const config = {
           ],
         },
       }),
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "services",
+        path: "services",
+        routeBasePath: "services",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./services-sidebar.js"),
+        breadcrumbs: false,
+      },
     ],
     [
       "docusaurus-plugin-typedoc",
@@ -209,8 +220,8 @@ const config = {
             to: "/snaps/concepts",
           },
           {
-            from: "/guide/snaps-rpc-api",
-            to: "/snaps/reference/rpc-api",
+            from: ["/guide/snaps-rpc-api", "/snaps/reference/rpc-api"],
+            to: "/snaps/reference/snaps-api",
           },
           {
             from: "/guide/snaps-permissions",
@@ -364,6 +375,18 @@ const config = {
             from: "/snaps/reference/exports",
             to: "/snaps/reference/entry-points",
           },
+          {
+            from: "/snaps/get-started/install-snaps",
+            to: "/snaps/get-started/install-flask",
+          },
+          {
+            from: "/snaps/concepts/anatomy",
+            to: "/snaps/concepts/files",
+          },
+          {
+            from: ["/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
+            to: "/snaps/concepts/overview",
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -380,18 +403,22 @@ const config = {
       },
     ],
     isProd ? 
-    [
-      "docusaurus-plugin-segment",
-      {
-        apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-        load: {cookie: { sameSite: 'None', secure: true}},
-        page: true,
-      },
-    ] : null,
+      [
+        "docusaurus-plugin-segment",
+        {
+          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+          load: { cookie: { sameSite: "None", secure: true } },
+          page: true,
+        },
+      ] : null,
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Metadata array here for the open graph image tag
+      metadata: [
+        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+      ],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {
@@ -412,6 +439,10 @@ const config = {
           {
             to: "snaps",
             label: "Snaps",
+          },
+          {
+            to: "services",
+            label: "Services",
           },
         ],
       },
@@ -447,6 +478,10 @@ const config = {
               {
                 label: "Snaps",
                 to: "/snaps",
+              },
+              {
+                label: "Services",
+                to: "/services",
               },
             ],
           },

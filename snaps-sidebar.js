@@ -53,7 +53,7 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          id: "reference/rpc-api",
+          id: "reference/snaps-api",
         },
         {
           type: "doc",
@@ -65,11 +65,8 @@ const sidebar = {
         },
         {
           type: "category",
-          label: "Snaps command line interface",
-          link: {
-            type: "doc",
-            id: "reference/cli/index",
-          },
+          label: "Snaps command line",
+          link: { type: "generated-index", slug: "reference/cli" },
           items: [
             {
               type: "doc",
@@ -96,6 +93,10 @@ const sidebar = {
             flask_only: true,
           },
           items: require("./snaps/reference/keyring-api/typedoc-sidebar.cjs"),
+        },
+        {
+          type: "doc",
+          id: "reference/resources",
         },
       ],
     },
