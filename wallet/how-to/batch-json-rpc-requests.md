@@ -84,7 +84,7 @@ The following is an example of using `metamask_batch` to batch
 
 ```javascript
 <script>
-import { metamask_batch } from 'metamask-sdk';
+import { metamask_batch } from "metamask-sdk";
 
 export default {
   methods: {
@@ -105,7 +105,7 @@ export default {
         const results = await metamask_batch(batchRequests);
         console.log(results);
       } catch (error) {
-        console.error('Error in batch request', error);
+        console.error("Error in batch request", error);
       }
     }
   }
