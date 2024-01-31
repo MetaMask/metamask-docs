@@ -343,12 +343,10 @@ const config = {
           {
             to: "/wallet/how-to/use-sdk",
             label: "SDK",
-            className: "navbar-item-beta",
           },
           {
             to: "snaps",
             label: "Snaps",
-            className: "navbar-item-beta",
           },
           {
             to: "services",
