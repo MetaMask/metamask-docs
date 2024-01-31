@@ -296,8 +296,8 @@ const config = {
             to: "/snaps/reference/snaps-api",
           },
           {
-            from: "/guide/snaps-exports",
-            to: "/snaps/reference/exports",
+            from: ["/guide/snaps-exports", "/snaps/reference/exports"],
+            to: "/snaps/reference/entry-points",
           }
         ].reduce((acc, item) => {
           acc.push(item);

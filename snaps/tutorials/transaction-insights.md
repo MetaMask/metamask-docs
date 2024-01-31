@@ -155,8 +155,8 @@ To build and test your Snap:
     You can set up multiple accounts to transfer between your accounts.
 
 6. On the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
-    Switching to the tab activates the [`onTransaction`](../reference/exports.md#ontransaction)
-    export of your Snap and displays the percentage of gas fees in the transaction insights UI:
+    Switching to the tab activates the [`onTransaction`](../reference/entry-points.md#ontransaction)
+    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
 <img src={require('../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
@@ -166,7 +166,7 @@ To build and test your Snap:
 
 The Snap should only display a gas fee percentage if the user is doing a regular ETH transfer.
 For contract interactions, it should display a UI that conveys that message.
-Add the following code to the beginning of the `onTransaction` export:
+Add the following code to the beginning of the `onTransaction` entry point:
 
 ```typescript
 if (typeof transaction.data === 'string' && transaction.data !== '0x') {

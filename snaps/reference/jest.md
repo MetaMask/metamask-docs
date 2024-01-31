@@ -47,7 +47,7 @@ A JSON-RPC request object with an addition optional `origin` property.
 
 #### Returns
 
-A promise that resolves to the response from the [`onRpcRequest`](exports.md#onrpcrequest) function,
+A promise that resolves to the response from the [`onRpcRequest`](entry-points.md#onrpcrequest) entry point,
 which can be checked using [Jest matchers](#jest-matchers).
 
 #### Example
@@ -100,7 +100,7 @@ Most values can be specified as a hex string or a decimal number.
 #### Returns
 
 An object with the user interface that was shown by the Snap, in the
-[`onTransaction`](exports.md#ontransaction) function.
+[`onTransaction`](entry-points.md#ontransaction) entry point.
 
 #### Example
 
@@ -138,7 +138,7 @@ A JSON-RPC request object.
 
 #### Returns
 
-A promise that resolves to the response from the [`onCronjob`](exports.md#oncronjob) function,
+A promise that resolves to the response from the [`onCronjob`](entry-points.md#oncronjob) entry point,
 which can be checked using [Jest matchers](#jest-matchers).
 
 #### Example
@@ -293,7 +293,7 @@ response from a Snap matches an expected value:
 - `toSendNotification(notificationText)` - Checks if a Snap sent a notification.
 - `toRender(expectedInterface)` - Checks if a Snap rendered an interface.
   This is useful for testing the user interface of a Snap, either for a [`snap_dialog`](snaps-api.md#snap_dialog)
-  or a user interface rendered by the [transaction insights API](exports.md#ontransaction).
+  or a user interface rendered by the [transaction insights API](entry-points.md#ontransaction).
 
 ## Options
 

@@ -179,12 +179,12 @@ For example:
   }
   ```
 
-## Expose Keyring API methods using the onKeyringRequest export
+## Expose Keyring API methods using the onKeyringRequest entry point
 
-The [`onRpcRequest`](../../reference/exports.md#onrpcrequest) export is a general-purpose export
-and has no restrictions on the methods that can be called.
-Ensure that you only export Keyring API methods using the `onKeyringRequest` export, which has extra
-security checks.
+The [`onRpcRequest`](../../reference/entry-points.md#onrpcrequest) entry point is a general-purpose
+entry point and has no restrictions on the methods that can be called.
+Ensure that you only expose Keyring API methods using the `onKeyringRequest` entry point, which has
+extra security checks.
 
 For example:
 

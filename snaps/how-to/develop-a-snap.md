@@ -6,7 +6,7 @@ sidebar_position: 1
 # Develop a Snap
 
 A Snap can integrate with and extend the functionality of MetaMask using the
-[Snaps exports](../reference/exports.md), [Snaps API](../reference/snaps-api.md), and
+[Snaps entry points](../reference/entry-points.md), [Snaps API](../reference/snaps-api.md), and
 [permissions](request-permissions.md).
 
 :::caution important
