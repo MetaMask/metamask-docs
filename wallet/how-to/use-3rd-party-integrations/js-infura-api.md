@@ -45,7 +45,7 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
   Your API key, when used with the SDK, is vulnerable to exposure.
   If someone inspects your dapp's code, they can potentially retrieve your API key and submit
   requests to Infura, impersonating your account.
-  
+
   Use [allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
   to protect against this vulnerability.
   You can restrict interactions with your API key to specific addresses, origins, user agents, and request methods.
@@ -61,7 +61,7 @@ To use the Infura API to make read-only requests, specify your Infura API key us
 in your dapp.
 
 ```javascript
-infuraAPIKey: 'YOUR-API-KEY'
+infuraAPIKey: "YOUR-API-KEY"
 ```
 
 ## Use custom nodes
@@ -73,7 +73,7 @@ SDK in your dapp.
 
 ```javascript
 readonlyRPCMap: {
-  '0x539': 'http://localhost:8545',
+  "0x539": "http://localhost:8545",
 }
 ```
 
@@ -88,12 +88,12 @@ SDK in your dapp.
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: 'YOUR-API-KEY',
-  readonlyRPCMap: {
-    '0x539': 'http://localhost:8545',
-  },
-  // Other options
-}
+    infuraAPIKey: "YOUR-API-KEY",
+    readonlyRPCMap: {
+        "0x539": "http://localhost:8545",
+    },
+    // Other options
+}}
 ```
 
 `infuraAPIKey` provides access to various networks supported by Infura, and `readonlyRPCMap`
@@ -111,13 +111,13 @@ The following is an example of using both the Infura API and custom nodes with t
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: 'YOUR-API-KEY',
-  readonlyRPCMap: {
-    '0x539': 'http://localhost:8545',  // Custom node
-    '0x1': 'https://mainnet.infura.io/v3/YOUR-API-KEY',  // Override Infura Mainnet
-  },
-  defaultReadOnlyChainId: '0x1',
-  // Other options
+    infuraAPIKey: "YOUR-API-KEY",
+    readonlyRPCMap: {
+        "0x539": "http://localhost:8545",  // Custom node
+        "0x1": "https://mainnet.infura.io/v3/YOUR-API-KEY",  // Override Infura Mainnet
+    },
+    defaultReadOnlyChainId: "0x1",
+    // Other options
 }
 ```
 

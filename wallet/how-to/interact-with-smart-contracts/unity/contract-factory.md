@@ -35,13 +35,13 @@ that specifies which concrete `class` type must be used when creating a new `Con
 The declared `class` must inherit from the given interface type `T`.
 
 ```csharp
-[BackedType(typeof(ERC20Backing))]  
-public interface ERC20 : IContract  
+[BackedType(typeof(ERC20Backing))]
+public interface ERC20 : IContract
 {
-	[EvmMethodInfo(Name = "decimals", View = true)]  
-	[return: EvmParameterInfo(Type = "uint8")]  
+	[EvmMethodInfo(Name = "decimals", View = true)]
+	[return: EvmParameterInfo(Type = "uint8")]
 	Task<BigInteger> Decimals();
-	
+
 	// TODO Define other interface methods
 }
 ```
@@ -53,19 +53,19 @@ method being invoked, and then you can use `base.InvokeMethod(MethodInfo method,
 invoke the correct logic for the given `method` and `args`.
 
 ```csharp
-public class ERC20Backing : Contract, ERC20  
+public class ERC20Backing : Contract, ERC20
 {
-	public string Address  
-	{  
-	   get => base.Address;  
+	public string Address
+	{
+	    get => base.Address;
 	}
-	
-	[EvmMethodInfo(Name = "decimals", View = true)]  
-	[return: EvmParameterInfo(Type = "uint8")]  
-	public Task<BigInteger> Decimals()  
-	{  
-	   var method = System.Reflection.MethodBase.GetCurrentMethod();  
-	   return (Task<BigInteger>) InvokeMethod(method, new object[] {  });  
+
+	[EvmMethodInfo(Name = "decimals", View = true)]
+	[return: EvmParameterInfo(Type = "uint8")]
+	public Task<BigInteger> Decimals()
+	{
+	    var method = System.Reflection.MethodBase.GetCurrentMethod();
+	    return (Task<BigInteger>) InvokeMethod(method, new object[] {  });
 	}
 
 	// TODO Define other interface methods

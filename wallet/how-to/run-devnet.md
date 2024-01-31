@@ -44,7 +44,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
       [`.env` file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv) and using the
       `process.env` global variable in `hardhat.config.js`.
       :::
-   
+
     - Specify the [chain ID `1337`](https://hardhat.org/hardhat-network/docs/metamask-issue) in the
       [`chainId`](https://hardhat.org/hardhat-network/docs/reference#chainid) field.
 
@@ -52,14 +52,14 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
     ```js title="hardhat.config.js"
     module.exports = {
-      networks: {
-        hardhat: {
-          accounts: {
-            mnemonic: process.env.SEED_PHRASE,
-          },
-          chainId: 1337
+        networks: {
+            hardhat: {
+                accounts: {
+                    mnemonic: process.env.SEED_PHRASE,
+                },
+                chainId: 1337,
+            },
         },
-      },
     };
     ```
 
@@ -75,11 +75,11 @@ Follow these steps to connect MetaMask to Hardhat Network.
    1. In the upper left corner, select the network you're currently connected to.
 
    2. Select **Add network**.
-   
+
    3. Select **Add a network manually**.
-   
+
    4. Enter your Hardhat Network RPC URL, `http://127.0.0.1:8545/` (or `http://localhost:8545`).
-   
+
    5. Enter your Hardhat Network chain ID, `1337` (or `0x539` in hexadecimal format).
 
    :::tip

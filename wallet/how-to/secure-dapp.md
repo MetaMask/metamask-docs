@@ -45,11 +45,11 @@ For example, in Express.js, add the following middleware at the top of your serv
 
 ```js
 app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; frame-ancestors 'none'"
-  );
-  next();
+    res.setHeader(
+        "Content-Security-Policy",
+        "default-src 'self'; frame-ancestors 'none'"
+    );
+    next();
 });
 ```
 
@@ -74,10 +74,10 @@ For example:
 
 ```html
 <head>
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="default-src 'self'; frame-ancestors 'none'"
-  />
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; frame-ancestors 'none'"
+    />
 </head>
 ```
 

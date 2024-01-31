@@ -101,24 +101,24 @@ If you use Hilt, your setup might look like the following:
 ```kotlin title="EthereumViewModel.kt"
 @HiltViewModel
 class EthereumViewModel @Inject constructor(
-        private val ethereum: Ethereum
+    private val ethereum: Ethereum
 ): ViewModel() {
 
-  val ethereumState = MediatorLiveData<EthereumState>().apply {
-    addSource(ethereum.ethereumState) { newEthereumState ->
-      value = newEthereumState
+    val ethereumState = MediatorLiveData<EthereumState>().apply {
+        addSource(ethereum.ethereumState) { newEthereumState ->
+            value = newEthereumState
+        }
     }
-  }
 
-  // Wrapper function to connect the dapp
-  fun connect(dapp: Dapp, callback: ((Any?) -> Unit)?) {
-    ethereum.connect(dapp, callback)
-  }
-  
-  // Wrapper function call all RPC methods
-  fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
-    ethereum.sendRequest(request, callback)
-  }
+    // Wrapper function to connect the dapp
+    fun connect(dapp: Dapp, callback: ((Any?) -> Unit)?) {
+        ethereum.connect(dapp, callback)
+    }
+
+    // Wrapper function call all RPC methods
+    fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
+        ethereum.sendRequest(request, callback)
+    }
 }
 ```
 
@@ -160,7 +160,7 @@ var balance: String? = null
 val params: List<String> = listOf(
     ethereum.selectedAddress,
     "latest" // "latest", "earliest" or "pending" (optional)
-    )
+)
 
 // Create request
 val getBalanceRequest = EthereumRequest(

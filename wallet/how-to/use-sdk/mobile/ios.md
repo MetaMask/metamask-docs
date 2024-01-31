@@ -117,12 +117,13 @@ let account = metamaskSDK.account
 let parameters: [String] = [
     account, // account to check for balance
     "latest" // "latest", "earliest" or "pending" (optional)
-  ]
+]
 
 // Create request
 let getBalanceRequest = EthereumRequest(
     method: .ethGetBalance,
-    params: parameters)
+    params: parameters
+)
 
 // Make request
 let accountBalance = await metamaskSDK.request(getBalanceRequest)
@@ -149,13 +150,13 @@ let parameters: [String: String] = [
     "to": "0x...", // receiver address
     "from": account, // sender address
     "value": "0x..." // amount
-  ]
+]
 
 // Create request
 let transactionRequest = EthereumRequest(
     method: .ethSendTransaction,
     params: [parameters] // eth_sendTransaction expects an array parameters object
-    )
+)
 
 // Make a transaction request
 let transactionResult = await metamaskSDK.request(transactionRequest)
@@ -209,7 +210,7 @@ let transaction = Transaction(
 let transactionRequest = EthereumRequest(
     method: .ethSendTransaction,
     params: [transaction] // eth_sendTransaction expects an array parameters object
-    )
+)
 
 // Make a transaction request
 let result = await metamaskSDK.request(transactionRequest)

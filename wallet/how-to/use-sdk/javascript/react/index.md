@@ -42,7 +42,7 @@ npm i @metamask/sdk-react
 In your project script, add the following to import the SDK:
 
 ```javascript
-import { MetaMaskProvider } from '@metamask/sdk-react';
+import { MetaMaskProvider } from "@metamask/sdk-react";
 ```
 
 ### 3. Wrap your project with MetaMaskProvider
@@ -51,27 +51,30 @@ Wrap your root component in a `MetaMaskProvider`.
 For example:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { MetaMaskProvider } from '@metamask/sdk-react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <MetaMaskProvider debug={false} sdkOptions={{
-      dappMetadata: {
-        name: "Example React Dapp",
-        url: window.location.href,
-      }
-      // Other options
-    }}>
-      <App />
-    </MetaMaskProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <MetaMaskProvider
+            debug={false}
+            sdkOptions={{
+                dappMetadata: {
+                    name: "Example React Dapp",
+                    url: window.location.href,
+                },
+                // Other options
+            }}
+        >
+            <App />
+        </MetaMaskProvider>
+    </React.StrictMode>
 );
 ```
 
@@ -94,38 +97,38 @@ Use the SDK by using the `useSDK` hook in your React components.
 For example:
 
 ```js
-import { useSDK } from '@metamask/sdk-react';
-import React, { useState } from 'react';
+import { useSDK } from "@metamask/sdk-react";
+import React, { useState } from "react";
 
 export const App = () => {
-  const [account, setAccount] = useState<string>();
-  const { sdk, connected, connecting, provider, chainId } = useSDK();
+    const [account, setAccount] = useState<string>();
+    const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-  const connect = async () => {
-    try {
-      const accounts = await sdk?.connect();
-      setAccount(accounts?.[0]);
-    } catch(err) {
-      console.warn(`failed to connect..`, err);
-    }
-  };
+    const connect = async () => {
+        try {
+            const accounts = await sdk?.connect();
+            setAccount(accounts?.[0]);
+        } catch (err) {
+            console.warn("failed to connect..", err);
+        }
+    };
 
-  return (
-    <div className="App">
-      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-        Connect
-      </button>
-      {connected && (
-        <div>
-          <>
-            {chainId && `Connected chain: ${chainId}`}
-            <p></p>
-            {account && `Connected account: ${account}`}
-          </>
+    return (
+        <div className="App">
+            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+                Connect
+            </button>
+            {connected && (
+                <div>
+                    <>
+                        {chainId && `Connected chain: ${chainId}`}
+                        <p></p>
+                        {account && `Connected account: ${account}`}
+                    </>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 ```
 
@@ -146,12 +149,12 @@ The `sdk.connect()` method initiates a connection to MetaMask and returns an arr
 
 ```javascript
 const connect = async () => {
-  try {
-    const accounts = await sdk?.connect();
-    setAccount(accounts?.[0]);
-  } catch(err) {
-    console.warn(`failed to connect..`, err);
-  }
+    try {
+        const accounts = await sdk?.connect();
+        setAccount(accounts?.[0]);
+    } catch (err) {
+        console.warn(`failed to connect..`, err);
+    }
 };
 ```
 
@@ -166,27 +169,30 @@ You can copy the full React example to get started:
 <TabItem value="Root component">
 
 ```javascript title="index.tsx"
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { MetaMaskProvider } from '@metamask/sdk-react';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <MetaMaskProvider debug={false} sdkOptions={{
-      dappMetadata: {
-        name: "Example React Dapp",
-        url: window.location.href,
-      }
-      // Other options
-    }}>
-      <App />
-    </MetaMaskProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <MetaMaskProvider
+            debug={false}
+            sdkOptions={{
+                dappMetadata: {
+                    name: "Example React Dapp",
+                    url: window.location.href,
+                },
+                // Other options
+            }}
+        >
+            <App />
+        </MetaMaskProvider>
+    </React.StrictMode>
 );
 ```
 
@@ -194,38 +200,38 @@ root.render(
 <TabItem value="React component">
 
 ```javascript title="App.tsx"
-import { useSDK } from '@metamask/sdk-react';
-import React, { useState } from 'react';
+import { useSDK } from "@metamask/sdk-react";
+import React from "react";
 
 export const App = () => {
-  const [account, setAccount] = useState<string>();
-  const { sdk, connected, connecting, provider, chainId } = useSDK();
+    const [account, setAccount] = useState<string>();
+    const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-  const connect = async () => {
-    try {
-      const accounts = await sdk?.connect();
-      setAccount(accounts?.[0]);
-    } catch(err) {
-      console.warn(`failed to connect..`, err);
-    }
-  };
+    const connect = async () => {
+        try {
+            const accounts = await sdk?.connect();
+            setAccount(accounts?.[0]);
+        } catch (err) {
+            console.warn("failed to connect..", err);
+        }
+    };
 
-  return (
-    <div className="App">
-      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-        Connect
-      </button>
-      {connected && (
-        <div>
-          <>
-            {chainId && `Connected chain: ${chainId}`}
-            <p></p>
-            {account && `Connected account: ${account}`}
-          </>
+    return (
+        <div className="App">
+            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+                Connect
+            </button>
+            {connected && (
+                <div>
+                    <>
+                        {chainId && `Connected chain: ${chainId}`}
+                        <p></p>
+                        {account && `Connected account: ${account}`}
+                    </>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 ```
 
