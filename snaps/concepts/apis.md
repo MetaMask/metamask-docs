@@ -118,15 +118,15 @@ Snaps can call all MetaMask API methods **except** the following:
 ## Custom JSON-RPC APIs
 
 Snaps can implement their own custom JSON-RPC APIs to communicate with dapps and other Snaps.
-To do so, a Snap must export the [`onRpcRequest`](../reference/exports.md#onrpcrequest) function and
-request the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
+To do so, a Snap must expose the [`onRpcRequest`](../reference/entry-points.md#onrpcrequest) entry
+point and request the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
 
 The Snap's custom API is entirely up to you, as long as it's a valid
 [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 :::note Does my Snap need a custom API?
 If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](../reference/exports.md#ontransaction), you do not need to
+providing [transaction insights](../reference/entry-points.md#ontransaction), you do not need to
 implement a custom API.
 However, if you want to do something such as manage the user's keys for a particular protocol and
 create a dapp that sends transactions for that protocol via your Snap, you must implement a custom API.

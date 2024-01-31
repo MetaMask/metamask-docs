@@ -228,8 +228,8 @@ const config = {
             to: "/snaps/how-to/request-permissions",
           },
           {
-            from: "/guide/snaps-exports",
-            to: "/snaps/reference/exports",
+            from: ["/guide/snaps-exports", "/snaps/reference/exports"],
+            to: "/snaps/reference/entry-points",
           },
           {
             from: "/guide/snaps-patching-dependencies",

@@ -213,8 +213,8 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
 
 ### 6. Expose the Keyring API
 
-Create a handler function using the `onKeyringRequest` export to expose the Keyring API methods to
-MetaMask and your dapp:
+Create an `onKeyringRequest` entry point handler method to expose the Keyring API methods
+to MetaMask and your dapp:
 
 ```typescript
 export const onKeyringRequest: OnKeyringRequestHandler = async ({

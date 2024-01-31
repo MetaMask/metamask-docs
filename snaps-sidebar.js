@@ -57,7 +57,7 @@ const sidebar = {
         },
         {
           type: "doc",
-          id: "reference/exports",
+          id: "reference/entry-points",
         },
         {
           type: "doc",
