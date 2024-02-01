@@ -8,7 +8,7 @@ sidebar_position: 2
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative discovery mechanism
 for multiple wallets, shifting from relying solely on [`window.ethereum`](metamask.md) for wallet detection.
 
-If a user has multiple wallet browser extensions installed, your dapp can support
+If a user has multiple wallet browser extensions installed, your web dapp can support
 [wallet interoperability](../../../concepts/wallet-interoperabilty.md) by adding support for
 EIP-6963, which enables your dapp to detect and connect to multiple installed wallets.
 You can [use third-party libraries](#use-third-party-libraries) or directly

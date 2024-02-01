@@ -5,15 +5,16 @@ sidebar_position: 6
 
 # Wallet interoperability
 
-With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), dapps can easily detect multiple wallets
-installed in the user's browser and connect to them.
-This discovery is enabled by using the standardized events and interfaces provided by EIP-6963.
+A web dapp can integrate with multiple wallets simultaneously by adding support for
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an alternative discovery
+mechanism to the [`window.ethereum`](apis.md#ethereum-provider-api) injected provider.
+This discovery is enabled by using the standardized events and interfaces defined by EIP-6963.
 
 The following is a visual demo of the user experience, showing the data provided from each installed wallet:
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/eip-6963-demo.mp4" type="video/mp4" />
+    <source src="/update-wallet-interop/eip-6963.mp4" />
   </video>
 </p>
 
@@ -45,14 +46,14 @@ The following third-party libraries support EIP-6963:
 The [MetaMask JavaScript SDK](../how-to/connect/set-up-sdk/javascript/index.md) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
 This eliminates the need for manual configuration or detection methods, simplifying the initial
-setup process for developers and users alike.
+setup process for both developers and users.
 
 By adhering to the standards set by EIP-6963, the SDK unambiguously identifies and connects to
 MetaMask, resolving potential conflicts that might arise with other wallet extensions, ensuring a
 more stable and reliable interaction for users.
 
 The SDK is also being integrated into [Wagmi 2+](https://wagmi.sh/), which supports EIP-6963.
-The SDK on its own supports connecting only to MetaMask via EIP-6963, so if you intend to support
+The SDK on its own supports connecting *only* to MetaMask via EIP-6963, so if you intend to support
 discovery of other wallets, we recommend using other methods of adding EIP-6963 support, such as
 Wagmi 2+.
 
