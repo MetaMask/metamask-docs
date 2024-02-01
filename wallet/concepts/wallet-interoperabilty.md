@@ -5,9 +5,7 @@ sidebar_position: 6
 
 # Wallet interoperability
 
-With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. 
-
-r discovery by using the standardized events and interfaces provided by EIP-6963.
+With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), web dapps can easily discover multiple wallets installed in the users browser and connect to them. This discovery is enabled by using the standardized events and interfaces provided by EIP-6963.
 
 Below is a visual demo of that user experience showing the data provided from each installed wallet.
 
