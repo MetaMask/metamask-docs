@@ -33,7 +33,7 @@ your users to easily connect with their MetaMask Mobile wallet.
 To add the SDK from Maven Central as a dependency to your project, in your `app/build.gradle` file,
 add the following entry to the `dependencies` block:
 
-```gradle title="build.gradle"
+```gradle
 dependencies {
     implementation 'io.metamask.androidsdk:metamask-android-sdk:0.2.1'
 }
@@ -75,7 +75,7 @@ code to your project file:
 @AndroidEntryPoint
 class SomeModel(private val repository: ApplicationRepository) {
     val ethereum = Ethereum(context)
-    
+
     val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
 
     // This is the same as calling eth_requestAccounts
@@ -159,7 +159,8 @@ var balance: String? = null
 // Create parameters
 val params: List<String> = listOf(
     ethereum.selectedAddress,
-    "latest" // "latest", "earliest" or "pending" (optional)
+    // "latest", "earliest" or "pending" (optional)
+    "latest"
 )
 
 // Create request

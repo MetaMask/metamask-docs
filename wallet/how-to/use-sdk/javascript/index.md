@@ -49,7 +49,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript
-import { MetaMaskSDK } from '@metamask/sdk';
+import { MetaMaskSDK } from "@metamask/sdk";
 ```
 
 ### 3. Instantiate the SDK
@@ -65,7 +65,8 @@ const MMSDK = new MetaMaskSDK(
   // Other options
 );
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 ```
 
 :::note Important SDK options
@@ -85,15 +86,15 @@ Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 prompts the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: 'eth_requestAccounts', params: [] });
+ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
 
 ## Example
 
 You can copy the full JavaScript example to get started:
 
-```javascript title="index.js"
-import { MetaMaskSDK } from '@metamask/sdk';
+```javascript
+import { MetaMaskSDK } from "@metamask/sdk";
 
 const MMSDK = new MetaMaskSDK(
   dappMetadata: {
@@ -103,7 +104,8 @@ const MMSDK = new MetaMaskSDK(
   // Other options
 );
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```

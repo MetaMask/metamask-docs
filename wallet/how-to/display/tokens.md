@@ -48,10 +48,14 @@ try {
         params: {
             type: "ERC20",
             options: {
-                address: tokenAddress, // The address of the token.
-                symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 characters.
-                decimals: tokenDecimals, // The number of decimals in the token.
-                image: tokenImage, // A string URL of the token logo.
+                // The address of the token.
+                address: tokenAddress,
+                // A ticker symbol or shorthand, up to 5 characters.
+                symbol: tokenSymbol,
+                // The number of decimals in the token.
+                decimals: tokenDecimals,
+                // A string URL of the token logo.
+                image: tokenImage,
             },
         },
     });
@@ -111,10 +115,13 @@ try {
     const wasAdded = await ethereum.request({
         method: "wallet_watchAsset",
         params: {
-            type: "ERC721", // or 'ERC1155'
+            // or 'ERC1155'
+            type: "ERC721",
             options: {
-                address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e", // The address of the token.
-                tokenId: "1", // ERC-721 or ERC-1155 token ID.
+                // The address of the token.
+                address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                // ERC-721 or ERC-1155 token ID.
+                tokenId: "1",
             },
         },
     });

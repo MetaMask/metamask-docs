@@ -126,7 +126,7 @@ There are two ways to use ESLint:
     For example, in VS Code, you can create or update the file at `.vscode/settings.json` in the
     root of the project with the following settings:
 
-    ```json title="settings.json"
+    ```json
     {
         "eslint.format.enable": true,
         "eslint.packageManager": "npm",
@@ -207,7 +207,7 @@ Update `/src/hooks/useMetaMask.tsx` with the following:
 The following code contains comments describing advanced React patterns and how MetaMask state is managed.
 :::
 
-```tsx title="useMetaMask.tsx"
+```tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     useState,
@@ -386,7 +386,7 @@ around the existing `Display`, `Navigation`, and `MetaMaskError` components.
 
 Update `/src/App.tsx` to the following:
 
-```tsx title="App.tsx"
+```tsx
 import "./App.global.css";
 import styles from "./App.module.css";
 
@@ -419,7 +419,7 @@ in a hypertext link that connects to [Etherscan](https://etherscan.io).
 
 Update `/src/components/Navigation/Navigation.tsx` to the following:
 
-```tsx title="Navigation.tsx"
+```tsx
 import { useMetaMask } from "~/hooks/useMetaMask";
 import { formatAddress } from "~/utils";
 import styles from "./Navigation.module.css";
@@ -481,7 +481,7 @@ Also, the `formatAddress` function formats the wallet address for display purpos
 This function doesn't exist in the `@utils` file yet, so you'll need to add it.
 Update `/src/utils/index.tsx` to the following:
 
-```ts title="utils/index.ts"
+```ts
 export const formatBalance = (rawBalance: string) => {
     const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
     return balance;
@@ -513,7 +513,7 @@ In the `Display` component, you won't call any functions that modify state; you'
 
 Update `/src/components/Display/Display.tsx` to the following:
 
-```tsx title="Display.tsx"
+```tsx
 import { useMetaMask } from "~/hooks/useMetaMask";
 import { formatChainAsNum } from "~/utils";
 import styles from "./Display.module.css";
@@ -555,7 +555,7 @@ If MetaMask errors or the user rejects a connection, you can display that error 
 
 Update `/src/components/MetaMaskError/MetaMaskError.tsx` to the following:
 
-```tsx title="MetaMaskError.tsx"
+```tsx
 import { useMetaMask } from "~/hooks/useMetaMask";
 import styles from "./MetaMaskError.module.css";
 

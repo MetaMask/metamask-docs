@@ -113,8 +113,10 @@ The following is an example of using both the Infura API and custom nodes with t
 sdkOptions={{
     infuraAPIKey: "YOUR-API-KEY",
     readonlyRPCMap: {
-        "0x539": "http://localhost:8545",  // Custom node
-        "0x1": "https://mainnet.infura.io/v3/YOUR-API-KEY",  // Override Infura Mainnet
+        // Custom node
+        "0x539": "http://localhost:8545",
+        // Override Infura Mainnet
+        "0x1": "https://mainnet.infura.io/v3/YOUR-API-KEY",
     },
     defaultReadOnlyChainId: "0x1",
     // Other options

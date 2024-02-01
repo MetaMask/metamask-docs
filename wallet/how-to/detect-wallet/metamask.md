@@ -43,7 +43,7 @@ npm i @metamask/detect-provider
 
 For example, the following code detects the provider using `@metamask/detect-provider`:
 
-```javascript title="index.js"
+```javascript
 // This function detects most providers injected at window.ethereum.
 import detectEthereumProvider from "@metamask/detect-provider";
 
@@ -66,4 +66,3 @@ function startApp(provider) {
     }
     // Access the decentralized web!
 }
-```

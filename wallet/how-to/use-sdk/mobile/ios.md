@@ -115,8 +115,10 @@ The following example gets the user's account balance by calling
 let account = metamaskSDK.account
 
 let parameters: [String] = [
-    account, // account to check for balance
-    "latest" // "latest", "earliest" or "pending" (optional)
+    // account to check for balance
+    account,
+    // "latest", "earliest" or "pending" (optional)
+    "latest"
 ]
 
 // Create request
@@ -147,15 +149,19 @@ Note that `Any` or even `AnyHashable` types aren't supported, since the type mus
 let account = metamaskSDK.account
 
 let parameters: [String: String] = [
-    "to": "0x...", // receiver address
-    "from": account, // sender address
-    "value": "0x..." // amount
+    // receiver address
+    "to": "0x...",
+    // sender address
+    "from": account,
+    // amount
+    "value": "0x..."
 ]
 
 // Create request
 let transactionRequest = EthereumRequest(
     method: .ethSendTransaction,
-    params: [parameters] // eth_sendTransaction expects an array parameters object
+    // eth_sendTransaction expects an array parameters object
+    params: [parameters]
 )
 
 // Make a transaction request
@@ -201,15 +207,19 @@ struct Transaction: CodableData {
 let account = metamaskSDK.account
 
 let transaction = Transaction(
-    to: "0x...", // receiver address
-    from: account, // sender address
-    value: "0x..." // amount
+    // receiver address
+    to: "0x...",
+    // sender address
+    from: account,
+    // amount
+    value: "0x..."
 )
 
 // Create request
 let transactionRequest = EthereumRequest(
     method: .ethSendTransaction,
-    params: [transaction] // eth_sendTransaction expects an array parameters object
+    // eth_sendTransaction expects an array parameters object
+    params: [transaction]
 )
 
 // Make a transaction request

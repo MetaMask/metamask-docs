@@ -14,7 +14,7 @@ The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites)
 
 To import, instantiate, and use the SDK, you can insert a script in the head section of your website:
 
-```html title="index.html"
+```html
 <head>
     ...
     <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
@@ -28,7 +28,8 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
         )
         // Because init process of the MetaMaskSDK is async.
         setTimeout(() => {
-            const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
+            // You can also access via window.ethereum
+            const ethereum = MMSDK.getProvider()
 
             ethereum.request({ method: 'eth_requestAccounts' })
         }, 0)

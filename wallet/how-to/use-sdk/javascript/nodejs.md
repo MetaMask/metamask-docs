@@ -49,7 +49,8 @@ const MMSDK = new MetaMaskSDK({
     // Other options
 });
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 ```
 
 :::note Important SDK options
@@ -76,7 +77,7 @@ ethereum.request({ method: "eth_requestAccounts", params: [] });
 
 You can copy the full Node.js example to get started:
 
-```javascript title="index.js"
+```javascript
 import { MetaMaskSDK } from "@metamask/sdk";
 
 const MMSDK = new MetaMaskSDK({
@@ -87,7 +88,8 @@ const MMSDK = new MetaMaskSDK({
     // Other options
 });
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 
 ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```

@@ -36,7 +36,7 @@ button, and the following HTML code displays the button and the current account:
 
 # JavaScript
 
-```javascript title="index.js"
+```javascript
 // You should only attempt to request the user's account in response to user
 // interaction, such as selecting a button.
 // Otherwise, you popup-spam the user like it's 1999.
@@ -72,7 +72,7 @@ async function getAccount() {
 
 # HTML
 
-```html title="index.html"
+```html
 <!-- Display a connect button and the current account -->
 <button class="enableEthereumButton">Enable Ethereum</button>
 <h2>Account: <span class="showAccount"></span></h2>
@@ -89,7 +89,7 @@ be notified when the user changes accounts.
 
 The following code handles user accounts and detects when the user changes accounts:
 
-```javascript title="index.js"
+```javascript
 let currentAccount = null;
 window.ethereum
     .request({ method: "eth_accounts" })
