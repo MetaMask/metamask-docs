@@ -44,4 +44,4 @@ Both parameters are optional. If you don't pass `message`, then a pre-determined
 
 Known errors are thrown back to the caller as JSON-RPC errors. They have a numeric `code`, a `message` string, and a `data` object.
 
-The [Snaps known errors reference](../reference/known-errors.md) lists all the known errors with their codes and indented usage.
+The [Snaps known errors reference](../reference/known-errors.md) lists all the known errors with their codes and intended usage.
