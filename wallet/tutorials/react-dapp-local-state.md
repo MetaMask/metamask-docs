@@ -169,7 +169,7 @@ However, MetaMask provides the
 MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser.
 
 :::caution important
-We recommend [using `@metamask/detect-provider`](../how-to/connect/detect-metamask.md#use-metamaskdetect-provider)
+We recommend [using `@metamask/detect-provider`](../how-to/connect/detect-wallet/metamask.md#use-metamaskdetect-provider)
 instead of manually detecting the provider yourself.
 :::
 

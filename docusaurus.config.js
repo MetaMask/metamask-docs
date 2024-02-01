@@ -300,8 +300,8 @@ const config = {
             to: "/wallet/how-to/get-started-building/secure-dapp",
           },
           {
-            from: "/wallet/get-started/detect-metamask",
-            to: "/wallet/how-to/connect/detect-metamask",
+            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask"],
+            to: "/wallet/how-to/connect/detect-wallet/metamask",
           },
           {
             from: "/wallet/get-started/detect-network",
@@ -382,6 +382,10 @@ const config = {
           {
             from: ["/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
             to: "/snaps/concepts/overview",
+          },
+          {
+            from: "/wallet/how-to/discover-multiple-wallets",
+            to: "/wallet/how-to/connect/detect-wallet/multiple-wallets",
           },
         ].reduce((acc, item) => {
           acc.push(item);
