@@ -749,9 +749,6 @@ await snap.request({
 
 ## snap_getClientStatus
 
-:::flaskOnly
-:::
-
 Gets the status of the Snaps client. Currently this returns a `locked` boolean flag to let you determine whether or not MetaMask is locked.
 
 This is helpful if you're doing background operations that require MetaMask to be unlocked. If MetaMask is locked, the user would get a popup asking them to enter their password. This could throw them off 
