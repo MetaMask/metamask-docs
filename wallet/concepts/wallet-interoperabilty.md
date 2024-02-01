@@ -9,7 +9,7 @@ With [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), dapps can easily detec
 installed in the user's browser and connect to them.
 This discovery is enabled by using the standardized events and interfaces provided by EIP-6963.
 
-The following is a visual demo of the user experience, showing the data provided from each installed wallet.
+The following is a visual demo of the user experience, showing the data provided from each installed wallet:
 
 <p align="center">
   <video width="100%" controls>
