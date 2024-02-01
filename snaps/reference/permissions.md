@@ -1,6 +1,5 @@
 ---
 description: See the Snaps permissions reference.
-sidebar_position: 4
 ---
 
 import Tabs from '@theme/Tabs';
