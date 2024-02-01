@@ -359,6 +359,42 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 <!--/tabs-->
 
+## snap_getClientStatus
+
+Gets the locked status of the Snaps client.
+
+This is useful if you're running background operations that require MetaMask to be unlocked.
+If MetaMask is locked, the user gets a popup asking them to enter their password, which might be
+unexpected or confusing.
+
+### Returns
+
+`true` if MetaMask is locked, `false` if MetaMask is unlocked.
+
+### Example
+
+```typescript
+import type { OnCronjobHandler } from '@metamask/snaps-sdk';
+import { MethodNotFoundError } from '@metamask/snaps-sdk';
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case 'execute':
+      // Find out if MetaMask is locked
+      const { locked } = await snap.request({
+        method: 'snap_getClientStatus'
+      });
+
+      if (!locked) {
+        // Do something that requires MetaMask to be unlocked, like access encrypted state
+      }
+
+    default:
+      throw new MethodNotFoundError();
+  }
+};
+```
+
 ## snap_getEntropy
 
 Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
@@ -681,7 +717,12 @@ class MyKeyring implements Keyring {
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
 The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
 
-Accessing encrypted state requires MetaMask to be unlocked. If you need to access encrypted state in a background task like a cronjob, you can use [`snap_getClientStatus`](#snap_getclientstatus) beforehand to ensure that MetaMask is unlocked, preventing an invasive password popup when the user doesn't expect it.
+:::note
+Accessing encrypted state requires MetaMask to be unlocked.
+If you need to access encrypted state in a background task such as a cron job, you can use
+[`snap_getClientStatus`](#snap_getclientstatus) to ensure that MetaMask is unlocked, preventing an
+unexpected password request popup.
+:::
 
 ### Parameters
 
@@ -745,38 +786,4 @@ await snap.request({
     message: 'Hello, world!',
   },
 });
-```
-
-## snap_getClientStatus
-
-Gets the status of the Snaps client. Currently this returns a `locked` boolean flag to let you determine whether or not MetaMask is locked.
-
-This is helpful if you're doing background operations that require MetaMask to be unlocked. If MetaMask is locked, the user would get a popup asking them to enter their password. This could throw them off 
-
-### Returns
-
-The locked status of MetaMask as a boolean.
-
-### Example
-
-```typescript
-import type { OnCronjobHandler } from '@metamask/snaps-sdk';
-import { MethodNotFoundError } from '@metamask/snaps-sdk';
-
-export const onCronjob: OnCronjobHandler = async ({ request }) => {
-  switch (request.method) {
-    case 'execute':
-      // Find out if MetaMask is locked
-      const { locked } = await snap.request({
-        method: 'snap_getClientStatus'
-      });
-
-      if (!locked) {
-        // Do something that requires MetaMask to be unlocked, like access encrypted state
-      }
-
-    default:
-      throw new MethodNotFoundError();
-  }
-};
 ```
