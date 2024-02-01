@@ -162,7 +162,7 @@ To build and test your Snap:
 4. Select **Connect** to connect Flask to the dapp.
     After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow websites to communicate directly with this Snap.**
+    - **Allow dapps to communicate directly with this Snap.**
     - **Access the internet.**
     - **Display dialog windows in MetaMask.**
 

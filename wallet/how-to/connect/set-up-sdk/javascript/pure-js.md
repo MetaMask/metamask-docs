@@ -22,7 +22,7 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
   const MMSDK = new MetaMaskSDK.MetaMaskSDK(
     dappMetadata: {
       name: "Example Pure JS Dapp",
-      url: window.location.host,
+      url: window.location.href,
     }
     // Other options
   )

@@ -5,30 +5,27 @@ sidebar_position: 1
 
 # Develop a Snap
 
-A Snap can extend the dapp-facing [MetaMask JSON-RPC API](/wallet/reference/rpc-api) in
-arbitrary ways, or integrate with and extend the functionality of MetaMask using the
-[Snaps Exports](../reference/exports.md), [Snaps JSON-RPC API](../reference/rpc-api.md), and
+A Snap can integrate with and extend the functionality of MetaMask using the
+[Snaps entry points](../reference/entry-points.md), [Snaps API](../reference/snaps-api.md), and
 [permissions](request-permissions.md).
 
 :::caution important
 Before developing a Snap, make sure you understand the following concepts and guidelines:
 
-- [Snaps anatomy](../concepts/anatomy.md)
-- [Snaps lifecycle](../concepts/lifecycle.md)
-- [Snaps user interface](../concepts/user-interface.md)
-- [Snaps execution environment](../concepts/execution-environment.md)
+- [Snaps overview](../concepts/overview.md)
+- [Snaps APIs](../concepts/apis.md)
+- [Snaps files](../concepts/files.md)
 - [Snaps design guidelines](../concepts/design-guidelines.md)
 - [Snaps security guidelines](../concepts/security-guidelines.md)
 :::
 
 You can get started by [creating a new Snap project](../get-started/quickstart.mdx) or following a
 [tutorial](/snaps/tutorials).
-
 This page describes additional important steps when developing a Snap.
 
 ## Detect the user's MetaMask version
 
-When developing a website that depends on [MetaMask Flask](../get-started/install-flask.md#install-metamask-flask),
+When developing a dapp that depends on [MetaMask Flask](../get-started/install-flask.md#install-metamask-flask),
 you first need to know whether the user has it installed.
 
 The following example uses the
@@ -58,7 +55,7 @@ if (provider && isFlask) {
 ## Test your Snap
 
 Test your Snap by hosting it locally using `yarn start`, installing it in Flask, and calling its
-API methods from a web page.
+API methods from a dapp.
 
 For end-to-end Snap testing, [use the `@metamask/snaps-jest` package](test-a-snap.md).
 

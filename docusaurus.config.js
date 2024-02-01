@@ -220,16 +220,16 @@ const config = {
             to: "/snaps/concepts",
           },
           {
-            from: "/guide/snaps-rpc-api",
-            to: "/snaps/reference/rpc-api",
+            from: ["/guide/snaps-rpc-api", "/snaps/reference/rpc-api"],
+            to: "/snaps/reference/snaps-api",
           },
           {
             from: "/guide/snaps-permissions",
             to: "/snaps/how-to/request-permissions",
           },
           {
-            from: "/guide/snaps-exports",
-            to: "/snaps/reference/exports",
+            from: ["/guide/snaps-exports", "/snaps/reference/exports"],
+            to: "/snaps/reference/entry-points",
           },
           {
             from: "/guide/snaps-patching-dependencies",
@@ -372,8 +372,16 @@ const config = {
             to: "/snaps/how-to/use-3rd-party-snaps",
           },
           {
-            from: "/snaps/get-started/install-snaps/",
-            to: "/snaps/get-started/install-flask/",
+            from: "/snaps/get-started/install-snaps",
+            to: "/snaps/get-started/install-flask",
+          },
+          {
+            from: "/snaps/concepts/anatomy",
+            to: "/snaps/concepts/files",
+          },
+          {
+            from: ["/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
+            to: "/snaps/concepts/overview",
           },
         ].reduce((acc, item) => {
           acc.push(item);
@@ -403,6 +411,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Metadata array here for the open graph image tag
+      metadata: [
+        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+      ],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {

@@ -1,24 +1,21 @@
 ---
-description: See the Snaps exports reference.
+description: See the Snaps entry points reference.
 sidebar_position: 2
 ---
 
-# Snaps exports
+# Snaps entry points
 
-A Snap can export the following methods.
+Snaps can expose the following entry points.
 
 ## onRpcRequest
 
-To communicate with dapps and other Snaps, a Snap must implement its own JSON-RPC API by exporting
-`onRpcRequest`.
-Whenever the Snap receives a JSON-RPC request, the `onRpcRequest` handler method is called.
+To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
+dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
+Whenever the Snap receives a JSON-RPC request, MetaMask calls the `onRpcRequest` handler method.
 
-:::caution important
-If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](#ontransaction), you can skip exporting `onRpcRequest`.
-However, if you want to do something such as manage the user's keys for a particular protocol and
-create a dapp that sends transactions for that protocol via your Snap, for example, you must
-specify an RPC API.
+:::note
+For MetaMask to call the Snap's `onRpcRequest` method, you must request the
+[`endowment:rpc`](permissions.md#endowmentrpc) permission.
 :::
 
 #### Parameters
@@ -73,10 +70,11 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 ## onTransaction
 
-To provide transaction insights before a user signs a transaction, a Snap must export `onTransaction`.
+To provide transaction insights before a user signs a transaction, a Snap must expose the
+`onTransaction` entry point.
 Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
-extension, MetaMask calls this method.
-MetaMask passes the raw unsigned transaction payload to the `onTransaction` handler method.
+extension, MetaMask calls the `onTransaction` handler method.
+MetaMask passes the raw unsigned transaction payload to `onTransaction`.
 
 :::note
 For MetaMask to call the Snap's `onTransaction` method, you must request the
@@ -210,9 +208,9 @@ module.exports.onTransaction = async ({
 
 ## onCronjob
 
-To run periodic actions for the user (cron jobs), a Snap must export `onCronjob`.
-This method is called at the specified times with the specified payloads defined in the
-[`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
+To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
+MetaMask calls the `onCronjob` handler method at the specified times with the specified payloads
+defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 
 :::note
 For MetaMask to call the Snap's `onCronjob` method, you must request the
@@ -273,8 +271,8 @@ module.exports.onCronjob = async ({ request }) => {
 
 ## onInstall
 
-To run an action on installation, a Snap must export `onInstall`.
-This method is called after the Snap is installed successfully. 
+To run an action on installation, a Snap must expose the `onInstall` entry point.
+MetaMask calls the `onInstall` handler method after the Snap is installed successfully. 
 
 :::note
 For MetaMask to call the Snap's `onInstall` method, you must request the
@@ -337,8 +335,8 @@ module.exports.onInstall = async () => {
 
 ## onUpdate
 
-To run an action on update, a Snap must export `onUpdate`.
-This method is called after the Snap is updated successfully. 
+To run an action on update, a Snap must expose the `onUpdate` entry point.
+MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
 
 :::note
 For MetaMask to call the Snap's `onUpdate` method, you must request the
@@ -410,8 +408,9 @@ module.exports.onUpdate = async () => {
 :::flaskOnly
 :::
 
-To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must export `onHomePage`. 
-This method is called when the user selects the Snap name in the Snaps menu. 
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
+expose the `onHomePage` entry point. 
+MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
 
 :::note
 For MetaMask to call the Snap's `onHomePage` method, you must request the

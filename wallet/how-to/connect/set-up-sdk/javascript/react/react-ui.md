@@ -67,7 +67,7 @@ root.render(
     <MetaMaskUIProvider sdkOptions={{
       dappMetadata: {
         name: "Example React UI Dapp",
-        url: window.location.host,
+        url: window.location.href,
       }
       // Other options
     }}>
@@ -145,7 +145,7 @@ root.render(
     <MetaMaskUIProvider sdkOptions={{
       dappMetadata: {
         name: "Example React UI Dapp",
-        url: window.location.host,
+        url: window.location.href,
       }
       // Other options
     }}>

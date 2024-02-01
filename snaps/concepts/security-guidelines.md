@@ -10,7 +10,7 @@ Use these guidelines when creating your Snap to ensure it is safe for users.
 
 ## Managing permissions
 
-The following are guidelines for managing permissions in the Snap [manifest file](../concepts/anatomy.md/#manifest-file).
+The following are guidelines for managing permissions in the Snap [manifest file](files.md/#manifest-file).
 
 - **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
@@ -75,7 +75,9 @@ The following are guidelines for user notifications and authorizations:
     ```JavaScript
     const referrer = new URL(origin);
 
-    if(referrer.protocol === "https:" && referrer.host.endsWith(".metamask.io")) { 
+    if(referrer.protocol === "https:" && 
+       (referrer.host.endsWith(".metamask.io") || 
+        referrer.host === "metamask.io")) { 
       console.log("URL is valid"); 
     }
     else { 
@@ -107,7 +109,7 @@ user IPs, emails, passwords, and private keys:
 
 - **Private keys** - Avoid retrieving the user's private key from the Snap unless
   absolutely necessary, such as to sign a transaction.
-  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/rpc-api.md#snap_getbip32publickey)
+  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
   instead of deriving it from the private key.
   Never return the private key in an RPC method to a dapp or another Snap.
   To give users a way to view their private key, display it in a dialog.
@@ -172,9 +174,10 @@ The following are guidelines for validating RPC parameters and handling values:
 
 Avoid using the following deprecated methods:
 
-- `wallet_enable`, which is deprecated in favor of [`wallet_requestSnaps`](../reference/rpc-api.md#wallet_requestsnaps).
+- `wallet_enable`, which is deprecated in favor of
+  [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps).
 
-- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/rpc-api.md#snap_dialog).
+- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/snaps-api.md#snap_dialog).
 
 - `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in MetaMask Flask.
 
@@ -197,7 +200,7 @@ The following are coding security tips and warnings:
   Do not use insufficient hashing algorithms such as `md5` or `sha2`.
   Do not roll your own cryptography or use custom or unproven cryptography methods or libraries.
 
-  We recommend using [`snap_getEntropy`](../reference/rpc-api.md/#snap_getentropy) for entropy, the
+  We recommend using [`snap_getEntropy`](../reference/snaps-api.md/#snap_getentropy) for entropy, the
   built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) or
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.
@@ -214,15 +217,15 @@ The following are guidelines for securing your supply chain:
 
 - **Secure your stack** - Your Snap companion dapp and any remote servers are part of your security model.
   We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of
-  your stack and following security best practices for your website or server.
+  your stack and following security best practices for your dapp or server.
 
 ## Publishing and serving your Snap
 
 The following are guidelines for making your Snap available to users safely:
 
-- **Snap updates** - When serving a Snap from a particular website, make sure users are getting the
-  latest version of your Snap.
-  Do not allow any actions on the website before reconnecting it to MetaMask and loading a new or
+- **Snap updates** - When serving a Snap from a dapp, make sure users are getting the latest version
+  of your Snap.
+  Do not allow any actions on the dapp before reconnecting it to MetaMask and loading a new or
   updated version of the Snap.
   This prevents users from using outdated versions of the Snap that may have potential bugs and
   security issues.

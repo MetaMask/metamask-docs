@@ -53,11 +53,11 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          id: "reference/rpc-api",
+          id: "reference/snaps-api",
         },
         {
           type: "doc",
-          id: "reference/exports",
+          id: "reference/entry-points",
         },
         {
           type: "doc",
