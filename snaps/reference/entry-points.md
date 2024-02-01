@@ -217,6 +217,8 @@ For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
 
+If the cron job's logic requires access to encrypted state, you can use [`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to check if MetaMask is locked before accessing state. This will prevent an unexpected password popup, improving the user's experience.
+
 #### Parameters
 
 An object containing an RPC request specified in the `endowment:cronjob` permission.
