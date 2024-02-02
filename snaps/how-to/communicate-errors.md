@@ -11,8 +11,9 @@ See the [Snaps known errors reference](../reference/known-errors.md) for the ful
 
 ## Import and throw errors
 
-To throw these known errors, first import them from the `@metamask/snaps-sdk` package, then throw
-them where needed.
+To throw these known errors, first import them from the
+[`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) package,
+then throw them where needed.
 For example:
 
 ```typescript
