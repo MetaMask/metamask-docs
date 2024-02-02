@@ -124,7 +124,7 @@ interface EIP1193Provider {
 ```
 
 :::note
-In addition to the EIP-6963 interfaces, you need the `EIP1193Provider`` interface (defined by
+In addition to the EIP-6963 interfaces, you need the `EIP1193Provider` interface (defined by
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for
 Ethereum wallet providers. This structure represents the essential properties and methods for interacting with dapps.
 :::
