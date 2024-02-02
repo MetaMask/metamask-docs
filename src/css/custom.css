@@ -161,3 +161,11 @@ svg {
 .getfeedback-hidden {
   display: none !important;
 }
+
+.markdown {
+  > h1, h2, h3, h4, h5, h6 {
+    > code {
+      font-size: inherit;
+    }
+  }
+}

@@ -64,6 +64,10 @@ const sidebar = {
           id: "reference/permissions",
         },
         {
+          type: "doc",
+          id: "reference/known-errors",
+        },
+        {
           type: "category",
           label: "Snaps command line",
           link: { type: "generated-index", slug: "reference/cli" },
