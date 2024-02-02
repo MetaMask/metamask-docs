@@ -5,11 +5,15 @@ sidebar_position: 9
 
 # Communicate errors
 
-The Snaps SDK exposes a set of known errors that can be thrown from your Snap code without crashing the Snap.
+The Snaps SDK exposes a set of known errors that can be thrown from your Snap code without crashing
+the Snap.
+See the [Snaps known errors reference](../reference/known-errors.md) for the full list of errors.
 
 ## Import and throw errors
 
-To throw these known errors, you have to import them from the `@metamask/snaps-sdk` package, then throw them where needed. Here's an example:
+To throw these known errors, first import them from the `@metamask/snaps-sdk` package, then throw
+them where needed.
+For example:
 
 ```typescript
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
@@ -26,7 +30,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 };
 ```
 
-### Pass data along with the error
+### Pass data with the error
 
 The error class constructors exported by `@metamask/snaps-sdk` have the following signature:
 
@@ -36,12 +40,16 @@ class SnapJsonRpcError extends SnapError {
 }
 ```
 
-Both parameters are optional. If you don't pass `message`, then a pre-determined message is used. If you don't pass `data`, then an empty object is passed.
+Both parameters are optional.
+If you don't pass `message`, then a pre-determined message is used.
+If you don't pass `data`, then an empty object is passed.
 
 `data` can be any JSON-serializable object.
 
-## Detect known errors in Dapps
+## Detect known errors in dapps
 
-Known errors are thrown back to the caller as JSON-RPC errors. They have a numeric `code`, a `message` string, and a `data` object.
+Known errors are thrown back to the caller as JSON-RPC errors.
+They have a numeric `code`, a `message` string, and a `data` object.
 
-The [Snaps known errors reference](../reference/known-errors.md) lists all the known errors with their codes and intended usage.
+The [Snaps known errors reference](../reference/known-errors.md) lists all the known errors with
+their codes and intended usage.
