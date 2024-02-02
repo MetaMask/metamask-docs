@@ -34,6 +34,7 @@ provider API.
 | Connect from a web dapp to MetaMask Mobile                                                               |             ❌              |      ✅       |
 | Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                                        |             ❌              |      ✅       |
 | Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md)            |             ❌              |      ✅       |
+| [Batch multiple RPC requests](../../how-to/batch-json-rpc-requests.md)                                   |             ❌              |      ✅       |
 | [Make read-only requests](../../how-to/use-3rd-party-integrations/js-infura-api.md) using the Infura API |             ❌              |      ✅       |
 
 ## User experience
