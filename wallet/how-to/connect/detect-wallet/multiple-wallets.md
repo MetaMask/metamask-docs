@@ -34,8 +34,7 @@ You can add support for EIP-6963 by using the following third-party libraries:
 
 ## Implement EIP-6963
 
-You can directly implement support for EIP-6963 in your React dapp.
-The steps are as follows:
+To directly implement support for EIP-6963 in your React dapp:
 
 ### 1. Review the EIP-6963 interfaces
 
@@ -125,9 +124,9 @@ interface EIP1193Provider {
 ```
 
 :::note
-In addition to the EIP-6963 interfaces, you need the `EIP1193Provider` interface, defined by
-[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), which is the foundational structure for
-Ethereum wallet providers, representing essential properties and methods for interacting with dapps.
+In addition to the EIP-6963 interfaces, you need the `EIP1193Provider`` interface (defined by
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for
+Ethereum wallet providers. This structure represents the essential properties and methods for interacting with dapps.
 :::
 
 Then, create a `hooks` directory and add the following two files:
