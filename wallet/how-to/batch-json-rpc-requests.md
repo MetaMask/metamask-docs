@@ -27,7 +27,7 @@ enhancing the user experience and operational efficiency.
 
 ## Prerequisites
 
-[Set up MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) in your JavaScript dapp.
+[Set up MetaMask SDK](../how-to/use-sdk/javascript/index.md) in your JavaScript dapp.
 
 ## Use the metamask_batch method
 
