@@ -14,7 +14,7 @@ The following is a visual demo of the user experience, showing the data provided
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/update-wallet-interop/eip-6963.mp4" />
+    <source src="/eip-6963.mp4" />
   </video>
 </p>
 
