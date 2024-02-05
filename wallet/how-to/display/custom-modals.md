@@ -18,7 +18,7 @@ other web frameworks such as Vue.js or pure HTML/JavaScript.
 ## Prerequisites
 
 MetaMask SDK set up in your JavaScript dapp.
-This example uses the [MetaMask React SDK](../connect/set-up-sdk/javascript/react/index.md).
+This example uses the [MetaMask React SDK](../use-sdk/javascript/react/index.md).
 
 ## Steps
 
@@ -40,7 +40,7 @@ export default CustomModal;
 
 ### 2. Implement custom modal logic
 
-When initializing [`MetaMaskProvider`](../connect/set-up-sdk/javascript/react/index.md#3-wrap-your-project-with-metamaskprovider),
+When initializing [`MetaMaskProvider`](../use-sdk/javascript/react/index.md#3-wrap-your-project-with-metamaskprovider),
 use the [`modals`](../../reference/sdk-js-options.md#modals) SDK option to set up custom behavior
 for scenarios such as when MetaMask isn't installed.
 For example:

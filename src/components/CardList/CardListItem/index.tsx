@@ -19,7 +19,7 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
   const cardContent = (
     <>
       {item.title && (
-        <h2 className={clsx("text--truncate", styles.cardTitle)}>
+        <h2 className={clsx(styles.cardTitle)}>
           {item.icon && (
             <img src={item.icon} className={styles.cardIcon} />
           )}

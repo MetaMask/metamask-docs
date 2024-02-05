@@ -18,7 +18,7 @@ The following is a visual demo of the user experience, showing the data provided
   </video>
 </p>
 
-Learn [how to detect multiple wallets](../how-to/connect/detect-wallet/metamask.md#detect-multiple-wallets)
+Learn [how to detect multiple wallets](../how-to/detect-wallet/metamask.md#detect-multiple-wallets)
 and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
@@ -27,7 +27,7 @@ for more information.
 
 The following third-party libraries support EIP-6963:
 
-- [MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md)
+- [MetaMask SDK](../how-to/use-sdk/javascript/index.md)
 
   :::note
   MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
@@ -43,7 +43,7 @@ The following third-party libraries support EIP-6963:
 
 ### MetaMask SDK
 
-The [MetaMask JavaScript SDK](../how-to/connect/set-up-sdk/javascript/index.md) automatically checks
+The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
 This eliminates the need for manual configuration or detection methods, simplifying the initial
 setup process for both developers and users.
@@ -74,6 +74,6 @@ See the [list of wallets that support EIP-6963](https://github.com/WalletConnect
 ## Backwards compatibility
 
 Dapps that do not support EIP-6963 can still
-[detect MetaMask using the `window.ethereum` provider](../how-to/connect/detect-wallet/metamask.md).
+[detect MetaMask using the `window.ethereum` provider](../how-to/detect-wallet/metamask.md).
 However, we recommend adding support to improve the user experience for multiple installed wallets.
 Read more about [EIP-6963 backwards compatibility](https://eips.ethereum.org/EIPS/eip-6963#backwards-compatibility).

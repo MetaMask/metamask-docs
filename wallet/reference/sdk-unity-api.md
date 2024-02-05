@@ -7,7 +7,7 @@ tags:
 
 # Unity SDK API
 
-The following is an overview of the API methods used in the [Unity SDK](../how-to/connect/set-up-sdk/gaming/unity.md).
+The following is an overview of the API methods used in the [Unity SDK](../how-to/use-sdk/gaming/unity.md).
 
 ## MetaMaskUnity
 

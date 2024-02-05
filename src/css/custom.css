@@ -95,6 +95,14 @@ h4 {
   font-weight: 500;
 }
 
+.navbar__brand:hover, .navbar__brand:active {
+  color: var(--ifm-navbar-link-color);
+}
+
+[data-theme="dark"] .navbar__brand:hover, .navbar__brand:active {
+  color: var(--ifm-navbar-link-color);
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

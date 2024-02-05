@@ -7,7 +7,7 @@ tags:
 
 # JavaScript SDK options
 
-The [JavaScript version of MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md) takes the
+The [JavaScript version of MetaMask SDK](../how-to/use-sdk/javascript/index.md) takes the
 following options.
 
 ### checkInstallationImmediately

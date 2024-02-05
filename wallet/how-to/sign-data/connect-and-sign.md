@@ -28,8 +28,8 @@ the mobile dapp and MetaMask Mobile.
 
 ## Prerequisites
 
-- MetaMask SDK set up in your [JavaScript](../connect/set-up-sdk/javascript/index.md) or
-  [iOS](../connect/set-up-sdk/mobile/ios.md) dapp.
+- MetaMask SDK set up in your [JavaScript](../use-sdk/javascript/index.md) or
+  [iOS](../use-sdk/mobile/ios.md) dapp.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
