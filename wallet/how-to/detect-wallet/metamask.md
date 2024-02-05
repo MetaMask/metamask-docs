@@ -17,28 +17,15 @@ if (typeof window.ethereum !== 'undefined') {
 }
 ```
 
-<<<<<<<< HEAD:wallet/how-to/detect-metamask.md
-:::tip
-To differentiate MetaMask from other Ethereum-compatible browsers, you can detect MetaMask using the
-[`window.ethereum.isMetaMask`](../reference/provider-api.md#windowethereumismetamask) property.
-:::
-========
 You can use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module to
 detect the MetaMask Ethereum provider.
->>>>>>>> main:wallet/how-to/connect/detect-wallet/metamask.md
 
 :::tip Detect multiple wallets
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative discovery mechanism to the `window.ethereum` injected provider.
-<<<<<<<< HEAD:wallet/how-to/detect-metamask.md
-This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperabilty.md)
-by discovering multiple injected wallet providers in a user's browser.
-We recommend [setting up SDK](use-sdk/javascript/index.md), which supports EIP-6963 by default.
-========
 This alternative mechanism enables dapps to [detect multiple wallets](multiple-wallets.md) in
 the user's browser.
 We recommend detecting multiple wallets to improve the user experience.
->>>>>>>> main:wallet/how-to/connect/detect-wallet/metamask.md
 :::
 
 ## Steps

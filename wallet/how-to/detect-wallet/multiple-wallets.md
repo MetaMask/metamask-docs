@@ -18,7 +18,7 @@ You can [use third-party libraries](#use-third-party-libraries) or directly
 
 You can add support for EIP-6963 by using the following third-party libraries:
 
-- [MetaMask SDK](../set-up-sdk/javascript/index.md)
+- [MetaMask SDK](../use-sdk/javascript/index.md)
 
   :::note
   MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.

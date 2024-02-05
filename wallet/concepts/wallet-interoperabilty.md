@@ -27,7 +27,7 @@ for more information.
 
 The following third-party libraries support EIP-6963:
 
-- [MetaMask SDK](../how-to/connect/set-up-sdk/javascript/index.md)
+- [MetaMask SDK](../how-to/use-sdk/javascript/index.md)
 
   :::note
   MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
@@ -43,7 +43,7 @@ The following third-party libraries support EIP-6963:
 
 ### MetaMask SDK
 
-The [MetaMask JavaScript SDK](../how-to/connect/set-up-sdk/javascript/index.md) automatically checks
+The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
 This eliminates the need for manual configuration or detection methods, simplifying the initial
 setup process for both developers and users.
