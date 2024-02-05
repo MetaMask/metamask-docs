@@ -12,7 +12,9 @@ tags:
 
 [MetaMask SDK](../../concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless
 connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
-It supports the following dapp platforms:
+By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
+preferred MetaMask client.
+The SDK supports the following dapp platforms:
 
 <div class="cards">
   <div class="card">

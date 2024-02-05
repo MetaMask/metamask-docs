@@ -76,9 +76,11 @@ you can get started quickly with an optimized dapp.
 
 Connect to the MetaMask browser extension and MetaMask Mobile using [MetaMask SDK](../concepts/sdk/index.md).
 The SDK automatically detects MetaMask in the user's browsers, and enables them to seamlessly
-connect to the extension and the mobile wallet.
+connect to the extension or mobile wallet.
+By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
+preferred MetaMask client.
 
-:::note
+:::info note
 The SDK uses the [Ethereum provider](../concepts/apis.md#ethereum-provider-api), so you can use the
 SDK as a wrapper around an existing JavaScript dapp and call
 [MetaMask Ethereum provider API methods](../reference/provider-api.md) from your dapp as normal.
