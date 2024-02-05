@@ -18,7 +18,7 @@ You can:
 
 Connect to the MetaMask browser extension directly using the
 [MetaMask Ethereum provider API](../concepts/apis.md).
-You must [detect MetaMask](../how-to/detect-metamask.md) in the user's browser, then
+You must [detect MetaMask](/wallet/how-to/detect-wallet) in the user's browser, then
 [access the user's accounts](../how-to/access-accounts.md) by prompting them to connect to MetaMask.
 
 1. Install the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module in

@@ -152,8 +152,8 @@ const config = {
             to: "/wallet/how-to/use-sdk",
           },
           {
-            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask"],
-            to: "/wallet/how-to/detect-metamask",
+            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/discover-multiple-wallets"],
+            to: "/wallet/how-to/detect-wallet",
           },
           {
             from: ["/wallet/get-started/detect-network", "/wallet/how-to/connect/detect-network"],
