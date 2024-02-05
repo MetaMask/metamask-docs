@@ -38,7 +38,7 @@ simple-dapp/
 
 For any Ethereum dapp to work, your project script `index.js` must:
 
-- [Detect the Ethereum provider.](../connect/detect-metamask.md)
+- [Detect the Ethereum provider.](../connect/detect-wallet/metamask.md)
 - [Detect which Ethereum network the user is connected to.](../connect/detect-network.md)
 - [Access the user's Ethereum accounts.](../connect/access-accounts.md)
 
