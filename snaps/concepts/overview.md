@@ -17,7 +17,7 @@ The following diagram outlines the high-level architecture of the Snaps system:
 
 ![Snaps architecture diagram](../assets/snaps-architecture.png)
 
-The following diagram illustrates how Snaps can derive users' keys using
+The following diagram illustrates how Snaps can derive keys using
 [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy),
 [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy), and
 [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy):
