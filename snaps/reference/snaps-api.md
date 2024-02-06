@@ -687,6 +687,10 @@ An object containing:
 - `operation` - The state operation to perform (`'clear'`, `'get'`, or `'update'`).
 - `newState` - The value to update state with if the operation is `update`, and nothing otherwise.
 
+#### Unencrypted state
+
+- `encrypted` - Optional, defaults to `true`. If set to `false`, Snaps will use a separate storage section, and will not encrypt the data. This is useful to access that data from background operations without requiring the user to enter their password in the case that MetaMask is locked.
+
 ### Returns
 
 The value stored in state if the operation is `get`, and `null` otherwise.

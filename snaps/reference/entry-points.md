@@ -268,6 +268,12 @@ module.exports.onCronjob = async ({ request }) => {
 
 <!--/tabs-->
 
+#### Access data from cronjobs
+
+When accessing encrypted data from cronjobs using [`snap_manageState`](../reference/snaps-api.md#snap_managestate), MetaMask will require the user to enter their password if the wallet is locked. This interaction can be jarring, as the data access happens in the background without the user being aware.
+
+If your Snap's cronjob needs to access non-sensitive, public data, you should store that data in [unencrypted state](../reference/snaps-api.md#unencrypted-state) instead. This is done by passing `encrypted: false` to the `snap_manageState` methods, as shown in the reference.
+
 ## onInstall
 
 To run an action on installation, a Snap must expose the `onInstall` entry point.
