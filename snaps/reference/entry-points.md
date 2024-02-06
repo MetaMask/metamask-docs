@@ -1,6 +1,5 @@
 ---
 description: See the Snaps entry points reference.
-sidebar_position: 2
 ---
 
 # Snaps entry points

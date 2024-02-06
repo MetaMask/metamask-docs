@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
@@ -42,15 +42,6 @@ The MetaMask Ethereum provider API contains the following:
 
 View the [provider API reference](../reference/provider-api.md) for all the provider properties,
 methods, and events.
-
-:::tip Use MetaMask SDK with the provider API
-You can call the provider API from a dapp without [MetaMask SDK](sdk/index.md) installed, but we
-recommend using the SDK to enable users to easily connect to the MetaMask browser extension and
-MetaMask Mobile.
-The SDK supports multiple dapp platforms including mobile and gaming dapps.
-
-Get started by [setting up the SDK](../how-to/connect/set-up-sdk/index.md).
-:::
 
 ## JSON-RPC API
 

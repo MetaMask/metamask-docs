@@ -29,7 +29,7 @@ your Unity game.
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](../connect/set-up-sdk/gaming/unity.md) in your Unity game.
+- [MetaMask SDK set up](../use-sdk/gaming/unity.md) in your Unity game.
 
 ## Steps
 
