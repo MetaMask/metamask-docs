@@ -5,7 +5,8 @@ description: Learn about the MetaMask Ethereum provider API.
 
 # About the Wallet API
 
-MetaMask supports an [Ethereum provider API](#ethereum-provider-api), which wraps a [JSON-RPC API](#json-rpc-api).
+MetaMask's Wallet API consists of an [Ethereum provider API](#ethereum-provider-api), which wraps
+a [JSON-RPC API](#json-rpc-api).
 
 :::tip API documentation
 The API methods are documented in the following references:
