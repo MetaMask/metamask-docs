@@ -9,11 +9,15 @@ Snaps can communicate with and modify the functionality of MetaMask using the [S
 To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
 manifest file.
 
-## snap_dialog
+## `snap_dialog`
 
 Displays a dialog in the MetaMask UI.
 There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
 [confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
+
+:::caution
+Dialogs do not work when MetaMask is locked. To find out if MetaMask is locked, use the [`snap_getClientStatus` method](#snap_getclientstatus).
+:::
 
 ### Alert dialog
 
@@ -117,7 +121,7 @@ const walletAddress = await snap.request({
 // `walletAddress` will be a string containing the address entered by the user
 ```
 
-## snap_getBip32Entropy
+## `snap_getBip32Entropy`
 
 :::danger important
 If you call this method, you receive the user's parent key for the derivation path they request.
@@ -205,7 +209,7 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 
 <!--/tabs-->
 
-## snap_getBip32PublicKey
+## `snap_getBip32PublicKey`
 
 Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the
 derivation path specified by the `path` parameter.
@@ -264,7 +268,7 @@ console.log(dogecoinPublicKey);
 
 <!--/tabs-->
 
-## snap_getBip44Entropy
+## `snap_getBip44Entropy`
 
 :::danger important
 If you call this method, you receive the user's parent key for the protocol they request.
@@ -358,13 +362,14 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 <!--/tabs-->
 
-## snap_getClientStatus
+## `snap_getClientStatus`
 
 Gets the locked status of the Snaps client.
 
-This is useful if you're running background operations that require MetaMask to be unlocked.
-If MetaMask is locked, the user gets a popup asking them to enter their password, which might be
-unexpected or confusing.
+It is useful to find out if MetaMask is locked in the following situations:
+
+- When running background operations that require MetaMask to be unlocked, for example [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
+- When [popping up a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 
 ### Returns
 
@@ -394,7 +399,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 };
 ```
 
-## snap_getEntropy
+## `snap_getEntropy`
 
 Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
 You can use this entropy to generate a private key, or any other value that requires a high level of
@@ -448,7 +453,7 @@ console.log(entropy);
 
 <!--/tabs-->
 
-## snap_getLocale
+## `snap_getLocale`
 
 :::flaskOnly
 :::
@@ -482,7 +487,7 @@ await snap.request({
 });
 ```
 
-## snap_manageAccounts
+## `snap_manageAccounts`
 
 :::flaskOnly
 :::
@@ -711,7 +716,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-## snap_manageState
+## `snap_manageState`
 
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
 The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
@@ -759,7 +764,7 @@ await snap.request({
 });
 ```
 
-## snap_notify
+## `snap_notify`
 
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
