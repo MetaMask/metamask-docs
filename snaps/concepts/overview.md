@@ -24,6 +24,13 @@ The following diagram illustrates how Snaps can derive keys using
 
 ![Snaps get entropy diagram](../assets/snaps-getentropy.png)
 
+:::note
+Snaps cannot access the user's Secret Recovery Phrase.
+Snaps can only derive keys using the provided methods.
+Furthermore, Snaps cannot derive Ethereum keys and any Snap that derives keys must undergo a
+security audit before it can be made available to MetaMask users.
+:::
+
 ## Technical overview
 
 A Snap is a JavaScript program run in an isolated and secure [execution environment](execution-environment.md).
