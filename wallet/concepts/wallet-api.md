@@ -51,16 +51,6 @@ method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
 The RPC methods are documented in the interactive [JSON-RPC API reference](/wallet/reference/json-rpc-api).
-Methods in the API playground may have the following tags:
-
-- **MetaMask** - These methods behave in ways specific to MetaMask, and may or may not be supported
-  by other wallets.
-- **Restricted** - These methods are [restricted](#restricted-methods), which require requesting
-  permission using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
-- **Mobile** - These methods are only available on MetaMask Mobile.
-- **Ethereum API** - These are standard Ethereum JSON-RPC API methods.
-  See the [Ethereum wiki](https://eth.wiki/json-rpc/API#json-rpc-methods) for more information on
-  these methods.
 
 :::note
 All RPC method requests can return errors.
