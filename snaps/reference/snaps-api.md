@@ -16,7 +16,7 @@ There are three types of dialogs with different parameters and return types: [al
 [confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
 
 :::caution
-Dialogs do not work when MetaMask is locked. To find out if MetaMask is locked, use the [`snap_getClientStatus` method](#snap_getclientstatus).
+Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [`snap_getClientStatus`](#snap_getclientstatus).
 :::
 
 ### Alert dialog
@@ -366,10 +366,10 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 Gets the locked status of the Snaps client.
 
-It is useful to find out if MetaMask is locked in the following situations:
+It is useful to check if MetaMask is locked in the following situations:
 
-- When running background operations that require MetaMask to be unlocked, for example [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
-- When [popping up a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
+- When running background operations that require MetaMask to be unlocked, for example, [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
+- When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 
 ### Returns
 
