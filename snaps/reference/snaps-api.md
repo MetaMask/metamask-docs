@@ -678,7 +678,9 @@ class MyKeyring implements Keyring {
 ## snap_manageState
 
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
-The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
+By default, the data is automatically encrypted using a Snap-specific key and automatically
+decrypted when retrieved.
+You can set `encrypted` to `false` to use unencrypted storage.
 
 ### Parameters
 
@@ -686,10 +688,11 @@ An object containing:
 
 - `operation` - The state operation to perform (`'clear'`, `'get'`, or `'update'`).
 - `newState` - The value to update state with if the operation is `update`, and nothing otherwise.
-
-#### Unencrypted state
-
-- `encrypted` - Optional, defaults to `true`. If set to `false`, Snaps will use a separate storage section, and will not encrypt the data. This is useful to access that data from background operations without requiring the user to enter their password in the case that MetaMask is locked.
+- `encrypted` (optional) - Indicates whether the Snap will encrypt the data.
+  The default is `true`.
+  If set to `false`, the Snap will use a separate storage section, and will not encrypt the data.
+  This is useful to access the data from background operations without requiring the user to enter
+  their password in the case that MetaMask is locked.
 
 ### Returns
 
