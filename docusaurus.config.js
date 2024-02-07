@@ -220,8 +220,8 @@ const config = {
             to: "/wallet/concepts",
           },
           {
-            from: ["/guide/provider-migration", "/wallet/concepts/provider-api", "/wallet/concepts/rpc-api", "/wallet/how-to/migrate-api"],
-            to: "/wallet/concepts/apis",
+            from: ["/guide/provider-migration", "/wallet/concepts/provider-api", "/wallet/concepts/rpc-api", "/wallet/how-to/migrate-api", "/wallet/concepts/apis"],
+            to: "/wallet/concepts/wallet-api",
           },
           {
             from: "/wallet/category/tutorials",
