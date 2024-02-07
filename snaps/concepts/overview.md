@@ -11,6 +11,26 @@ For example, a Snap can add support for different blockchain protocols, add cust
 provide additional functionality using its own APIs.
 This allows MetaMask to be used with a far more diverse set of protocols, dapps, and services.
 
+## Diagrams
+
+The following diagram outlines the high-level architecture of the Snaps system:
+
+![Snaps architecture diagram](../assets/snaps-architecture.png)
+
+The following diagram illustrates how Snaps can derive keys using
+[`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy),
+[`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy), and
+[`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy):
+
+![Snaps get entropy diagram](../assets/snaps-getentropy.png)
+
+:::note
+Snaps cannot access the user's Secret Recovery Phrase.
+Snaps can only derive keys using the provided methods.
+Furthermore, Snaps cannot derive Ethereum keys and any Snap that derives keys must undergo a
+security audit before it can be made available to MetaMask users.
+:::
+
 ## Technical overview
 
 A Snap is a JavaScript program run in an isolated and secure [execution environment](execution-environment.md).
