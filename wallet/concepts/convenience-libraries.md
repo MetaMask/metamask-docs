@@ -23,5 +23,5 @@ It onboards users smoothly from multiple dapp platforms using the MetaMask brows
 MetaMask Mobile, and your dapp can call any [provider API method](../reference/provider-api.md)
 with the SDK installed.
 
-You can also [use Web3-Onboard with MetaMask SDK](../how-to/use-3rd-party-integrations/web3-onboard.md)
+You can also [use Web3-Onboard with MetaMask SDK](../how-to/use-sdk/3rd-party-libraries/web3-onboard.md)
 in your JavaScript dapp.

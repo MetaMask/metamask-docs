@@ -86,7 +86,7 @@ For the full list of options you can set for `sdkOptions`, see the
 - Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
   the displayed modals](../../../display/custom-modals.md).
 - Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../use-3rd-party-integrations/js-infura-api.md) from your dapp.
+  [make read-only RPC requests](../../../js-infura-api.md) from your dapp.
 :::
 
 ### 4. Use the SDK

@@ -30,14 +30,15 @@ MetaMask using the SDK.
 Most of these features are not available if you only integrate your dapp directly using the MetaMask
 provider API.
 
-| Feature                                                                                                  | MetaMask provider API only | MetaMask SDK |
-|----------------------------------------------------------------------------------------------------------|:--------------------------:|:------------:|
-| Connect from a web dapp to the MetaMask extension                                                        |             ✅              |      ✅       |
-| Connect from a web dapp to MetaMask Mobile                                                               |             ❌              |      ✅       |
-| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                                        |             ❌              |      ✅       |
-| Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md)            |             ❌              |      ✅       |
-| [Batch multiple RPC requests](../../how-to/batch-json-rpc-requests.md)                                   |             ❌              |      ✅       |
-| [Make read-only requests](../../how-to/use-3rd-party-integrations/js-infura-api.md) using the Infura API |             ❌              |      ✅       |
+| Feature                                                                                       | MetaMask provider API only | MetaMask SDK |
+|-----------------------------------------------------------------------------------------------|:--------------------------:|:------------:|
+| Connect from a web dapp to the MetaMask extension                                             |             ✅              |      ✅       |
+| Connect from a web dapp to MetaMask Mobile                                                    |             ❌              |      ✅       |
+| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                             |             ❌              |      ✅       |
+| Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md) |             ❌              |      ✅       |
+| [Display custom modals](../../how-to/display/custom-modals.md) in MetaMask                    |             ❌              |      ✅       |
+| [Make read-only requests](../../how-to/js-infura-api.md) using the Infura API                 |             ❌              |      ✅       |
+| [Batch multiple RPC requests](../../how-to/batch-json-rpc-requests.md)                        |             ❌              |      ✅       |
 
 ## User experience
 
@@ -150,7 +151,7 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
 </p>
 
 :::tip Get started
-- Get started by [setting up the SDK in your Unity game](../../how-to/use-sdk/gaming/unity.md).
+- Get started by [setting up the SDK in your Unity game](../../how-to/use-sdk/gaming/unity/index.md).
 - See the [Unity demo game with the SDK installed](https://assetstore.unity.com/packages/decentralization/demo-game-dragon-crasher-with-metamask-sdk-infura-and-truffle-249789)
   for advanced use cases.
 :::

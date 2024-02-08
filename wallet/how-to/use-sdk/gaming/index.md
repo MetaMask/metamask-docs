@@ -12,5 +12,5 @@ Import [MetaMask SDK](../../../concepts/sdk/index.md) into your gaming dapp to e
 to easily connect with their MetaMask Mobile wallet.
 See the instructions for the following gaming platforms:
 
-- [Unity](unity.md)
+- [Unity](unity/index.md)
 - [Unreal Engine](unreal-engine.md) (coming soon)

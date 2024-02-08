@@ -1,9 +1,0 @@
-{
-  "label": "Use third party integrations",
-  "position": 10,
-  "link": {
-    "type": "generated-index",
-    "slug": "how-to/use-3rd-party-integrations",
-    "description": "You can use the following third party integrations with MetaMask SDK."
-  }
-}

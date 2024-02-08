@@ -1,5 +1,6 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
+sidebar_label: Interact with smart contracts
 description: Interact with smart contracts in your Unity game.
 tags:
   - Unity SDK
@@ -11,8 +12,8 @@ You can interact with smart contracts from your Unity game with MetaMask SDK ins
 
 ## Prerequisites
 
-- [MetaMask SDK set up](../../use-sdk/gaming/unity.md) in your Unity game
-- A [contract ABI](../index.md#contract-abi) JSON file or
+- [MetaMask SDK set up](../index.md) in your Unity game
+- A [contract ABI](../../../../../concepts/smart-contracts.md#contract-abi) JSON file or
   [Hardhat artifact](https://hardhat.org/hardhat-runner/docs/advanced/artifacts#compilation-artifacts)
   JSON file
 
@@ -28,13 +29,13 @@ A new dialog box opens:
 
 <p align="center">
 
-![dialog](../../../assets/contract-abi-converter-dialog.png)
+![dialog](../../../../../assets/contract-abi-converter-dialog.png)
 
 </p>
 
 Paste your contract ABI JSON file or Hardhat artifact JSON file.
 If you plan to deploy your contract, you must provide a Hardhat artifact, since this
-has the required [contract bytecode](../index.md#contract-bytecode) needed for deployment.
+has the required [contract bytecode](../../../../../concepts/smart-contracts.md#contract-bytecode) needed for deployment.
 
 You can also specify the `Root Namespace` for the generated contract code, with the default value being `Contracts`. Ensure that you include `using Contracts`; at the beginning of your scripts before using the generated code.
 
@@ -98,7 +99,7 @@ Before using the contract template, configure the contract address to use for ea
 
 <p align="center">
 
-![empty template](../../../assets/unity-empty-template.png)
+![empty template](../../../../../assets/unity-empty-template.png)
 
 </p>
 
@@ -108,7 +109,7 @@ When adding a new address, if you don't see your desired blockchain listed, you 
 
 <p align="center">
 
-![full template](../../../assets/unity-example-template.png)
+![full template](../../../../../assets/unity-example-template.png)
 
 </p>
 

@@ -1,13 +1,14 @@
 ---
 description: Set up MetaMask SDK with Infura in your Unity game.
-sidebar_position: 3
+sidebar_position: 2
+sidebar_label: Set up Infura
 tags:
   - Unity SDK
 ---
 
 # Set up Infura in Unity
 
-You can set up [MetaMask SDK](../../concepts/sdk/index.md) with [Infura](https://docs.infura.io/) in
+You can set up [MetaMask SDK](../../../../concepts/sdk/index.md) with [Infura](https://docs.infura.io/) in
 your Unity game.
 
 ## Prerequisites
@@ -29,7 +30,7 @@ your Unity game.
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](../use-sdk/gaming/unity.md) in your Unity game.
+- [MetaMask SDK set up](index.md) in your Unity game.
 
 ## Steps
 
@@ -46,7 +47,7 @@ your Unity game.
 
 <p align="center">
 
-![MetaMask Unity script](../../assets/unity-infura.png)
+![MetaMask Unity script](../../../../assets/unity-infura.png)
 
 </p>
 
