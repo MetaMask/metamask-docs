@@ -1,9 +1,9 @@
 ---
 description: Solve common issues.
-sidebar_position: 9
+sidebar_position: 1
 ---
 
-# Troubleshoot
+# Troubleshoot common issues
 
 This page describes common issues you may encounter when developing a Snap, and how to resolve them.
 
@@ -12,20 +12,20 @@ If you encounter any issues that you can't solve on your own, please
 
 ## Fix build and evaluation issues
 
-Because [Secure ECMAScript (SES)](../concepts/execution-environment.md) adds additional restrictions
+Because [Secure ECMAScript (SES)](../../learn/about-snaps/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
-[`yarn mm-snap build`](../reference/cli/subcommands.md#b-build) by default attempts to execute a
+[`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) by default attempts to execute a
 Snap in a stubbed SES environment.
 You can also disable this behavior and run the evaluation step separately using
-[`yarn mm-snap eval`](../reference/cli/subcommands.md#e-eval).
+[`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval).
 If an error is thrown during this step, it's likely due to a SES incompatibility, and you must fix
 the issues manually.
 These incompatibilities tend to occur in dependencies.
 
 The errors you get from SES are usually easy to fix.
 The actual file, function, and variable names in the `eval` error stack trace might not make sense
-to you, but the line numbers should correspond to your Snap [bundle file](../concepts/files.md#bundle-file).
+to you, but the line numbers should correspond to your Snap [bundle file](../../learn/about-snaps/files.md#bundle-file).
 Thus, you can identify if the error is due to your code or one of your dependencies.
 If the problem is in a dependency, you can try a different version or to fix the issue locally by
 using tools such as [`patch-package`](https://npmjs.com/package/patch-package) (see how to
@@ -40,7 +40,7 @@ simply prepending `var variableName;` to your Snap bundle may solve the problem.
 `yarn mm-snap build` automatically handles that one.)
 
 :::caution
-Run [`yarn mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) if you modified
+Run [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) if you modified
 your Snap bundle after building.
 Otherwise your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::
@@ -57,15 +57,15 @@ plugins for several other build systems:
 For examples on how to set up these build systems yourself, please see the
 [examples](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples/examples).
 
-We recommend running [`yarn mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest)
+We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest)
 after creating your bundle to make sure your manifest `shasum` value is correct.
-You might also benefit from running [`yarn mm-snap eval`](../reference/cli/subcommands.md#e-eval)
+You might also benefit from running [`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval)
 to detect any SES issues up front.
 
 ## Patch dependencies
 
 Some dependencies might use APIs that aren't available in the
-[Snaps execution environment](../concepts/execution-environment.md).
+[Snaps execution environment](../../learn/about-snaps/execution-environment.md).
 To work around this, we recommend checking if another library is available that makes use of those APIs.
 
 If you can't find another library (or version) that works with the Snaps execution environment, you

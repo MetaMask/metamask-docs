@@ -102,7 +102,7 @@ yarn mm-snap m --fix false
 
 <!--/tabs-->
 
-Validates the Snap [manifest file](../../concepts/files.md#manifest-file).
+Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 
 `m` is an alias for `manifest`.
 

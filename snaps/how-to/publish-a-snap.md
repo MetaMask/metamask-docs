@@ -1,9 +1,9 @@
 ---
 description: Develop, test, and publish a Snap.
-sidebar_position: 1
+sidebar_position: 7
 ---
 
-# Develop a Snap
+# Publish a Snap
 
 A Snap can integrate with and extend the functionality of MetaMask using the
 [Snaps entry points](../reference/entry-points.md), [Snaps API](../reference/snaps-api.md), and
@@ -12,15 +12,15 @@ A Snap can integrate with and extend the functionality of MetaMask using the
 :::caution important
 Before developing a Snap, make sure you understand the following concepts and guidelines:
 
-- [Snaps overview](../concepts/overview.md)
-- [Snaps APIs](../concepts/apis.md)
-- [Snaps files](../concepts/files.md)
-- [Snaps design guidelines](../concepts/design-guidelines.md)
-- [Snaps security guidelines](../concepts/security-guidelines.md)
+- [Snaps overview](../learn/about-snaps/index.md)
+- [Snaps APIs](../learn/about-snaps/apis.md)
+- [Snaps files](../learn/about-snaps/files.md)
+- [Snaps design guidelines](design-a-snap.md)
+- [Snaps security guidelines](secure-a-snap.md)
 :::
 
 You can get started by [creating a new Snap project](../get-started/quickstart.mdx) or following a
-[tutorial](/snaps/tutorials).
+[tutorial](/snaps/learn/tutorials).
 This page describes additional important steps when developing a Snap.
 
 ## Detect the user's MetaMask version
@@ -116,7 +116,7 @@ Also, make sure to update the manifest file, icon file, and README to differenti
 
 You should deploy a dapp where users can learn about your Snap and install it, or integrate with your existing dapp.
 
-If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](use-3rd-party-snaps.md).
+If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](connect-to-a-snap/use-3rd-party-snaps.md).
 
 ## Resources
 

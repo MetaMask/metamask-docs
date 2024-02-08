@@ -1,9 +1,9 @@
 ---
 description: Display your Snap's UI and metadata in the user's language.
-sidebar_position: 5
+sidebar_position: 2
 ---
 
-# Localize a Snap
+# Localization
 
 Localize your Snap to display your Snap's user interface (UI) text and textual metadata (such as
 title and description) in the user's language.
@@ -100,7 +100,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
 ###  3. Localize the Snap's manifest file
 
-The Snap [manifest file](../concepts/files.md#manifest-file) contains textual metadata such as
+The Snap [manifest file](../learn/about-snaps/files.md#manifest-file) contains textual metadata such as
 `proposedName` and `description` that you can localize to display in the user's language.
 
 The following is an example of a localized manifest file:

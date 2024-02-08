@@ -1,6 +1,6 @@
 ---
 description: Communicate errors from your Snap without crashing it
-sidebar_position: 9
+sidebar_position: 4
 ---
 
 # Communicate errors

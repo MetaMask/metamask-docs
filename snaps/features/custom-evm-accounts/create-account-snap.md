@@ -16,16 +16,16 @@ Create an account management Snap to connect to custom EVM accounts.
 :::
 
 :::tip see also
+- [About custom EVM accounts](index.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
-- [About the Keyring API](../../concepts/keyring-api.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
 ## Prerequisites
 
 - Set up a Snap.
-  See the [Snaps quickstart](../../get-started/quickstart.mdx) and [how to develop a Snap](../develop-a-snap.md).
+  See the [Snaps quickstart](../../get-started/quickstart.mdx) and [how to develop a Snap](../../how-to/publish-a-snap.md).
 - Read the [account management Snap security guidelines](security.md).
 
 ## Steps
@@ -46,7 +46,7 @@ npm install @metamask/keyring-api
 
 ### 2. Add permissions
 
-Specify the following [permissions](../request-permissions.md) in your Snap manifest file:
+Specify the following [permissions](../../how-to/request-permissions.md) in your Snap manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -81,7 +81,7 @@ class MySnapKeyring implements Keyring {
 MetaMask submits Ethereum sign requests from dapps using the
 [`submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
 Keyring API.
-See the [supported signing methods](../../concepts/keyring-api.md#supported-signing-methods).
+See the [supported signing methods](index.md#supported-signing-methods).
 
 The following is an example of a `personal_sign` request:
 
@@ -192,7 +192,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
   
    MetaMask returns an error if the request does not exist.
    This event only applies to Snaps that implement the
-   [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
+   [asynchronous transaction flow](index.md#asynchronous-transaction-flow).
 
 - A request is rejected:
 
@@ -209,7 +209,7 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
   
    MetaMask returns an error if the request does not exist.
    This event only applies to Snaps that implement the
-   [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
+   [asynchronous transaction flow](index.md#asynchronous-transaction-flow).
 
 ### 6. Expose the Keyring API
 

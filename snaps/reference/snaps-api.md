@@ -5,7 +5,7 @@ toc_max_heading_level: 2
 
 # Snaps API
 
-Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../concepts/apis.md#snaps-api).
+Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
 To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
 manifest file.
 
@@ -24,7 +24,7 @@ Displays an alert that can only be acknowledged.
 An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`'Alert'`).
-- `content` - The content of the alert, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
 
 #### Example
 
@@ -54,7 +54,7 @@ Displays a confirmation that can be accepted or rejected.
 An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`'Confirmation'`).
-- `content` - The content of the confirmation, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
 
 #### Returns
 
@@ -90,7 +90,7 @@ Displays a prompt where the user can enter a text response.
 An object containing the contents of the prompt dialog:
 
 - `type` - The type of dialog (`'Prompt'`).
-- `content` - The content of the prompt, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
 
 #### Returns
@@ -451,7 +451,7 @@ await snap.request({
 :::flaskOnly
 :::
 
-Manages [account management Snap](../concepts/keyring-api.md) accounts.
+Manages [account management Snap](../features/custom-evm-accounts/index.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
 - [`createAccount`](#createaccount)

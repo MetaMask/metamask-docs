@@ -14,9 +14,9 @@ Refer to the following security guidelines when [creating an account management 
 :::
 
 :::tip see also
+- [About custom EVM accounts](index.md)
 - [Create an account management Snap](create-account-snap.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
-- [About the Keyring API](../../concepts/keyring-api.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
@@ -120,7 +120,7 @@ Both dapps must be allowlisted in the Snap's manifest file.
 
 ## Ensure the redirect URL cannot be manipulated
 
-If your Snap implements an [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow),
+If your Snap implements an [asynchronous transaction flow](index.md#asynchronous-transaction-flow),
 ensure that the redirect URL is valid and cannot be manipulated, otherwise the user can be
 redirected to a malicious website.
 

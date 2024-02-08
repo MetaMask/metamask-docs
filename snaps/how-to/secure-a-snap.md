@@ -1,9 +1,9 @@
 ---
 description: Learn about best practices for creating secure and reliable Snaps.
-sidebar_position: 6
+sidebar_position: 2
 ---
 
-# Snaps security guidelines
+# Secure a Snap
 
 This page outlines essential principles for builders to develop secure and reliable Snaps.
 Use these guidelines when creating your Snap to ensure it is safe for users.
@@ -142,7 +142,7 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../how-to/use-custom-ui.md/#copyable) user
+  as for signing a message, use the [`copyable`](../features/custom-ui.md/#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
@@ -187,7 +187,7 @@ The following are coding security tips and warnings:
 
 - **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
   If you don't, you might encounter errors that require [patching a specific
-  dependency](../how-to/troubleshoot.md/#patch-dependencies) to fix.
+  dependency](debug-a-snap/troubleshoot.md/#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
   `Date.now`) can expose critical system information, making a user vulnerable to

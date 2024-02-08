@@ -329,7 +329,7 @@ module.exports = {
 
 ### executionEnvironmentUrl
 
-The URL of the [execution environment](../concepts/execution-environment.md) to use for testing.
+The URL of the [execution environment](../learn/about-snaps/execution-environment.md) to use for testing.
 This is the URL to be loaded by the Snaps simulator in the tests.
 The default is the URL of the built-in HTTP server included in this package.
 

@@ -1,10 +1,10 @@
 ---
 description: Learn about best practices for creating Snap installation flows.
-sidebar_position: 5
+sidebar_position: 1
 toc_max_heading_level: 2
 ---
 
-# Snaps design guidelines
+# Design a Snap
 
 This page outlines guiding principles for designers, developers, builders, and writers to create
 Snap installation flows that are accessible to all users.

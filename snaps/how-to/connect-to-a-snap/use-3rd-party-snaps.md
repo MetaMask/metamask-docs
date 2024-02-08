@@ -7,7 +7,7 @@ sidebar_position: 8
 
 Some existing, third-party Snaps are designed to communicate with dapps.
 As a dapp developer, you can use these Snaps to take advantage of new features enabled by Snaps.
-This is possible because Snaps can expose a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis).
+This is possible because Snaps can expose a [custom JSON-RPC API](../../learn/about-snaps/apis.md#custom-json-rpc-apis).
 
 ## Connect to a Snap
 
