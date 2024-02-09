@@ -56,7 +56,7 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from '@metamask/snaps-jest';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should respond to foo with bar', async () => {
     const { request } = await installSnap(/* optional snap ID */);
     const response = await request({
       origin: 'http://localhost:8080',
@@ -109,7 +109,7 @@ import { installSnap } from '@metamask/snaps-jest';
 import { panel, text } from '@metamask/snaps-sdk';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should return insights', async () => {
     const { onTransaction } = await installSnap(/* optional Snap ID */);
     const response = await onTransaction({
       value: '0x0',
@@ -147,7 +147,7 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from '@metamask/snaps-jest';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should end foo cronjobs with response bar', async () => {
     const { onCronjob } = await installSnap(/* optional snap ID */);
     const response = await onCronjob({
       method: 'foo',
@@ -157,6 +157,27 @@ describe('MySnap', () => {
     // Check the response using Jest matchers
     expect(response).toRespondWith('bar');
     expect(response).not.toRespondWithError('baz');
+  });
+});
+```
+
+### `onHomePage`
+
+The `onHomePage` function can be used to request the home page of the snap. It
+takes no arguments, and returns a promise that resolves to the response from the
+[`onHomePage`](entry-points#onhomepage)
+function.
+
+```js
+import { installSnap } from '@metamask/snaps-jest';
+import { panel, text } from '@metamask/snaps-sdk';
+
+describe('MySnap', () => {
+  it('should render the home page', async () => {
+    const { onHomePage } = await installSnap(/* optional snap ID */);
+    const response = await onHomePage();
+
+    expect(response).toRender(panel([text('Hello, world!')]));
   });
 });
 ```
@@ -180,7 +201,7 @@ import { text } from '@metamask/snaps-sdk';
 import { assert } from '@metamask/utils';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should render an alert with hello world', async () => {
     const { request } = await installSnap(/* optional Snap ID */);
 
     // Note: You cannot resolve the promise yet!
@@ -226,76 +247,6 @@ response from a Snap matches an expected value:
 You can pass the following options when [configuring `@metamask/snaps-jest`](../how-to/test-a-snap.md#2-configure-metamasksnaps-jest).
 All options are optional.
 
-### `browser`
-
-Options for the browser used to run the tests.
-
-The `headless` browser option enables or disables running the browser in headless mode.
-Set this option to `false` to see the browser window while the tests are running.
-The default is `true`.
-
-:::note
-Disabling `browser.headless` requires you to have a graphical environment available, so we do not
-recommend this for CI environments.
-It can be useful for debugging in conjunction with the [`keepAlive`](#keepalive) option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    browser: {
-      headless: false,
-    },
-  },
-};
-```
-
-### `executionEnvironmentUrl`
-
-The URL of the [execution environment](../concepts/execution-environment.md) to use for testing.
-This is the URL to be loaded by the Snaps simulator in the tests.
-The default is the URL of the built-in HTTP server included in this package.
-
-:::note
-This option is intended for advanced use cases.
-In most cases, you do not need to configure this option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    executionEnvironmentUrl: 'http://localhost:8080',
-  },
-};
-```
-
-### `keepAlive`
-
-Enables or disables keeping the Jest environment running after the tests have finished.
-When set to `true`, the Jest process does not exit on its own, and must be manually terminated.
-The default is `false`.
-
-:::note
-This is useful for debugging, but should not be used in CI environments.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    keepAlive: true,
-  },
-};
-```
-
 ### `server`
 
 Options for the built-in HTTP server included with this package.
@@ -304,8 +255,7 @@ This server serves the execution environment, simulator, and the Snap bundle dur
 The server options are:
 
 - `enabled` - Enables or disables the built-in HTTP server.
-  Set to `false` to use your own HTTP server, which you can specify using the
-  [`executionEnvironmentUrl`](#executionenvironmenturl) and [`simulatorUrl`](#simulatorurl) options.
+  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap).
   The default is `true`.
 - `port` - The port to use for the built-in HTTP server.
   The default is a random available (unprivileged) port.
@@ -321,32 +271,9 @@ module.exports = {
   preset: '@metamask/snaps-jest',
   testEnvironmentOptions: {
     server: {
-      enabled: false,
       port: 8080,
       root: '/path/to/snap/files',
     },
-  },
-};
-```
-
-### `simulatorUrl`
-
-The URL of the simulator to use for testing.
-This is the URL to be loaded in the browser when running tests.
-The default is the URL of the built-in HTTP server included with this package.
-
-:::note
-This option is intended for advanced use cases.
-In most cases, you do not need to configure this option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    simulatorUrl: 'http://localhost:8081',
   },
 };
 ```
