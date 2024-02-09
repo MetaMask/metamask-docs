@@ -252,40 +252,68 @@ const config = {
             to: "/snaps/get-started/install-flask",
           },
           {
+            from: ["/guide/snaps-concepts", "/snaps/category/concepts", "/snaps/concepts/lifecycle", "/snaps/concepts/user-interface", "/snaps/concepts/overview", "/snaps/concepts", "/snaps/concepts/apis", "/snaps/concepts/execution-environment"],
+            to: "/snaps/learn/about-snaps",
+          },
+          {
+            from: ["/snaps/concepts/anatomy", "/snaps/concepts/files"],
+            to: "/snaps/learn/about-snaps/files",
+          },
+          {
+            from: ["/snaps/category/tutorials", "/snaps/tutorials"],
+            to: "/snaps/learn/tutorials",
+          },
+          {
+            from: "/snaps/tutorials/gas-estimation",
+            to: "/snaps/learn/tutorials/gas-estimation",
+          },
+          {
+            from: "/snaps/tutorials/transaction-insights",
+            to: "/snaps/learn/tutorials/transaction-insights",
+          },
+          {
             from: "/snaps/category/how-to",
             to: "/snaps/how-to",
           },
           {
-            from: "/guide/snaps-development-guide",
-            to: "/snaps/how-to/develop-a-snap",
+            from: "/snaps/how-to/use-custom-ui",
+            to: "/snaps/features/custom-ui",
+          },
+          {
+            from: "/snaps/how-to/localize-a-snap",
+            to: "/snaps/features/localization",
+          },
+          {
+            from: "/snaps/how-to/manage-keys",
+            to: "/snaps/features/non-evm-networks",
+          },
+          {
+            from: "/snaps/tutorials/custom-evm-accounts",
+            to: "/snaps/features/custom-evm-accounts/create-account-snap",
+          },
+          {
+            from: "/snaps/concepts/design-guidelines",
+            to: "/snaps/how-to/design-a-snap",
+          },
+          {
+            from: "/snaps/concepts/security-guidelines",
+            to: "/snaps/how-to/secure-a-snap",
           },
           {
             from: "/guide/snaps-permissions",
             to: "/snaps/how-to/request-permissions",
           },
           {
-            from: "/snaps/tutorials/custom-evm-accounts",
-            to: "/snaps/how-to/use-keyring-api/create-account-snap",
+            from: ["/guide/snaps-patching-dependencies", "/snaps/how-to/troubleshoot"],
+            to: "/snaps/how-to/debug-a-snap/common-issues",
           },
           {
-            from: "/snaps/how-to/work-with-existing-snaps",
-            to: "/snaps/how-to/use-3rd-party-snaps",
+            from: ["/guide/snaps-development-guide", "/snaps/how-to/develop-a-snap"],
+            to: "/snaps/how-to/publish-a-snap",
           },
           {
-            from: "/guide/snaps-patching-dependencies",
-            to: "/snaps/how-to/troubleshoot",
-          },
-          {
-            from: ["/guide/snaps-concepts", "/snaps/category/concepts", "/snaps/concepts/lifecycle", "/snaps/concepts/user-interface"],
-            to: "/snaps/concepts/overview",
-          },
-          {
-            from: "/snaps/concepts/anatomy",
-            to: "/snaps/concepts/files",
-          },
-          {
-            from: "/snaps/category/tutorials",
-            to: "/snaps/tutorials",
+            from: ["/snaps/how-to/work-with-existing-snaps", "/snaps/how-to/use-3rd-party-snaps"],
+            to: "/snaps/how-to/connect-to-a-snap",
           },
           {
             from: "/snaps/category/reference",
@@ -308,6 +336,11 @@ const config = {
           if (existingPath.includes("/use-sdk")) {
             return [
               existingPath.replace("/use-sdk", "/connect/set-up-sdk"),
+            ];
+          }
+          if (existingPath.includes("/features/custom-evm-accounts")) {
+            return [
+              existingPath.replace("/features/custom-evm-accounts", "/how-to/use-keyring-api"),
             ];
           }
           return undefined;

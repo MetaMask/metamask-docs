@@ -141,7 +141,7 @@ This permission exposes the global `fetch` API to the Snaps execution environmen
 :::caution
 `XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
 If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/debug-a-snap/troubleshoot.md#patch-the-use-of-xmlhttprequest).
+[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
 :::
 
 Specify this permission in the manifest file as follows:

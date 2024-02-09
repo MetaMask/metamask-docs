@@ -187,7 +187,7 @@ The following are coding security tips and warnings:
 
 - **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
   If you don't, you might encounter errors that require [patching a specific
-  dependency](debug-a-snap/troubleshoot.md/#patch-dependencies) to fix.
+  dependency](debug-a-snap/common-issues.md/#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
   `Date.now`) can expose critical system information, making a user vulnerable to

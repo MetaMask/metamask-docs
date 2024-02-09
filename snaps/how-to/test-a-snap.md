@@ -5,8 +5,11 @@ sidebar_position: 5
 
 # Test a Snap
 
-Use the [`@metamask/snaps-jest`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-jest)
-package for end-to-end Snap testing in a Jest environment.
+Test your Snap by hosting it locally using `yarn start`, installing it in Flask, and calling its
+API methods from a dapp.
+
+For end-to-end Snap testing in a Jest environment, use the
+[`@metamask/snaps-jest`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-jest) package.
 
 ## Steps
 
