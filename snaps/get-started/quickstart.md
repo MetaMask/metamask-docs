@@ -42,7 +42,7 @@ or
 npm create @metamask/snap your-snap-name
 ```
 
-See [Snaps files](../concepts/files.md) to learn about your Snap project files.
+See [Snaps files](../learn/about-snaps/files.md) to learn about your Snap project files.
 
 ## Start the Snap
 
@@ -116,15 +116,7 @@ You've now successfully connected, installed, interacted with, and customized yo
 
 ## Next steps
 
-- To learn more about the Snaps system, review fundamental concepts including the Snaps
-  [overview](../concepts/overview.md), [APIs](../concepts/apis.md), and
-  [project files](../concepts/files.md).
-- To implement advanced features and use cases, see the
-  [Snaps features list](../index.mdx#what-can-you-do-with-a-snap) or follow the tutorials for
-  creating a [gas estimation](../tutorials/gas-estimation.md) or
-  [transaction insights](../tutorials/transaction-insights.md) Snap.
-- To ensure your Snap installation flow is accessible to all users, read the
-  [Snaps design guidelines](../concepts/design-guidelines.md).
-- To ensure your Snap is safe for users, read the
-  [Snaps security guidelines](../concepts/security-guidelines.md).
-- To test, debug, and publish, your Snap, read about how to [develop a Snap](../how-to/develop-a-snap.md).
+- To learn more about the Snaps system, review [fundamental Snaps concepts](../learn/about-snaps)
+  and try the [Snaps tutorials](../learn/tutorials).
+- To implement specific features and use cases, see the [Snaps feature guides](../features).
+- To follow best practices for developing a Snap, see the [Snaps how-to guides](../how-to).

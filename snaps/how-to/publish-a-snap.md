@@ -23,7 +23,7 @@ The following details are specific to Snaps:
 After publishing the Snap, any dapp can connect to the Snap by using the Snap ID `npm:[packageName]`.
 
 :::caution
-If you are using the Snap monorepo project generated in the [quickstart](../get-started/quickstart.mdx),
+If you are using the Snap monorepo project generated in the [quickstart](../get-started/quickstart.md),
 make sure to only publish the Snap package in `/packages/snap`. 
 You can use the [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest) to verify 
 that your Snap was published correctly &mdash; just select **localhost** in the top right corner and change the 

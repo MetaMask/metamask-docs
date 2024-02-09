@@ -6,7 +6,7 @@ sidebar_position: 2
 # Snaps files
 
 If you look at the directory structure of the Snaps monorepo project generated in the
-[Snaps quickstart](../../get-started/quickstart.mdx), it looks something like this:
+[Snaps quickstart](../../get-started/quickstart.md), it looks something like this:
 
 ```text
 your-snap-name/
