@@ -190,7 +190,7 @@ User ->> MetaMask: Approve request
 
 MetaMask ->>+ Snap: keyring_submitRequest(request)
 Snap ->> Snap: Custom logic to handle request
-Snap -->>- MetaMask: { pendind: false, result }
+Snap -->>- MetaMask: { pending: false, result }
 
 MetaMask -->>- Dapp: result
 
