@@ -163,10 +163,10 @@ describe('MySnap', () => {
 
 ### `onHomePage`
 
-The `onHomePage` function can be used to request the home page of the snap. It
+Requests the home page of the Snap. It
 takes no arguments, and returns a promise that resolves to the response from the
 [`onHomePage`](entry-points#onhomepage)
-function.
+entry point.
 
 ```js
 import { installSnap } from '@metamask/snaps-jest';
