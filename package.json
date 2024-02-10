@@ -27,6 +27,7 @@
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.3.1",
     "clsx": "^1.2.1",
+    "docusaurus-plugin-remote-content": "^4.0.0",
     "docusaurus-plugin-segment": "^1.0.4",
     "docusaurus-plugin-typedoc": "1.0.0-next.17",
     "node-polyfill-webpack-plugin": "^2.0.1",
