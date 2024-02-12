@@ -34,6 +34,8 @@ Also, make sure to update the manifest file, icon file, and README to differenti
 
 ## Distribute your Snap
 
-You should deploy a dapp where users can learn about your Snap and install it, or integrate with your existing dapp.
+You should deploy a companion dapp where users can learn about your Snap and install it, or
+integrate with your existing dapp.
 
-If your Snap is designed to communicate with dapps, you can encourage other dapp developers to [integrate your Snap](connect-to-a-snap.md).
+If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
+[connect to your Snap](connect-to-a-snap.md).

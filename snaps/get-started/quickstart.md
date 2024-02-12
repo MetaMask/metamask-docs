@@ -116,7 +116,7 @@ You've now successfully connected, installed, interacted with, and customized yo
 
 ## Next steps
 
-- To learn more about the Snaps system, review [fundamental Snaps concepts](../learn/about-snaps)
-  and try the [Snaps tutorials](../learn/tutorials).
-- To implement specific features and use cases, see the [Snaps feature guides](../features).
-- To follow best practices for developing a Snap, see the [Snaps how-to guides](../how-to).
+- To learn more about the Snaps system, review [fundamental Snaps concepts](/snaps/learn/about-snaps)
+  and try the [Snaps tutorials](/snaps/learn/tutorials).
+- To implement specific features and use cases, see the [Snaps feature guides](/snaps/features).
+- To follow best practices for developing a Snap, see the [Snaps how-to guides](/snaps/how-to).

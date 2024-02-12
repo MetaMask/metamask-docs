@@ -17,7 +17,7 @@ The following diagram outlines the high-level architecture of the Snaps system:
 
 ![Snaps architecture diagram](../../assets/snaps-architecture.png)
 
-The following diagram illustrates how Snaps can [manage keys](../../features/non-evm-networks.md) using
+The following diagram illustrates how Snaps can [derive non-EVM keys](../../features/non-evm-networks.md) using
 [`snap_getBip32Entropy`](../../reference/snaps-api.md#snap_getbip32entropy),
 [`snap_getBip44Entropy`](../../reference/snaps-api.md#snap_getbip44entropy), and
 [`snap_getEntropy`](../../reference/snaps-api.md#snap_getentropy):
@@ -26,9 +26,9 @@ The following diagram illustrates how Snaps can [manage keys](../../features/non
 
 :::note
 Snaps cannot access the user's Secret Recovery Phrase.
-Snaps can only derive keys using the provided methods.
-Furthermore, Snaps cannot derive Ethereum keys and any Snap that derives keys must undergo a
-security audit before it can be made available to MetaMask users.
+Snaps can only derive non-EVM keys using the provided methods.
+Furthermore, any Snap that derives keys must undergo a security audit before it can be made
+available to MetaMask users.
 :::
 
 ## Technical overview

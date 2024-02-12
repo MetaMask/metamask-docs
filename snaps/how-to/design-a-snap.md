@@ -1,21 +1,21 @@
 ---
-description: Learn about best practices for creating Snap installation flows.
-sidebar_position: 1
+description: Create accessible Snap installation flows.
+sidebar_position: 3
 toc_max_heading_level: 2
 ---
 
-# Design a Snap
+# Design a Snap installation flow
 
 This page outlines guiding principles for designers, developers, builders, and writers to create
 Snap installation flows that are accessible to all users.
-Use these guidelines when introducing your Snap within a dapp.
+Use these guidelines when introducing your Snap within a companion dapp.
 
 ## Why this matters
 
 The Snap installation process contains critical info about your Snap, including what it does, how it
 enhances your application, and why it's beneficial for users.
-It's important to provide this information on your dapp to help users understand the purpose and
-benefits of the Snap before installing it.
+It's important to provide this information in your companion dapp to help users understand the
+purpose and benefits of the Snap before installing it.
 Without this information, users may drop out during installation or install the Snap without fully
 understanding its purpose.
 
@@ -63,7 +63,7 @@ When you introduce your Snap, take this opportunity to highlight the benefits of
 intended user.
 If the user doesn't understand what they can gain from your Snap, they likely won't install it.
 
-Consider introducing your Snap on your dapp with a modal, tooltip, or card.
+Consider introducing your Snap in your companion dapp using a modal, tooltip, or card.
 This introduction should be impactful, clear, and direct, and can happen before or alongside the
 installation prompt.
 

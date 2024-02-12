@@ -5,14 +5,14 @@ sidebar_position: 8
 
 # Connect to a Snap
 
-Dapps can connect to your Snap or a third-party Snap designed to communicate with dapps.
+Dapps can connect to Snaps designed to communicate with dapps.
 Dapps can use these Snaps to take advantage of new features enabled by Snaps.
 This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis).
 
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
-See the Wallet documentation for [how to detect MetaMask](/wallet/how-to/detect-wallet).
+See the Wallet documentation on [how to detect MetaMask](/wallet/how-to/detect-wallet).
 
 ### Detect MetaMask Flask
 
