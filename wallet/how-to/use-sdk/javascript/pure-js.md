@@ -14,7 +14,7 @@ The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites)
 
 To import, instantiate, and use the SDK, you can insert a script in the head section of your website:
 
-```html
+```html title="index.html"
 <head>
     ...
     <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>

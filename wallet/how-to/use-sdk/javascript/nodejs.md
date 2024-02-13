@@ -77,7 +77,7 @@ ethereum.request({ method: "eth_requestAccounts", params: [] });
 
 You can copy the full Node.js example to get started:
 
-```javascript
+```javascript title="index.js"
 import { MetaMaskSDK } from "@metamask/sdk";
 
 const MMSDK = new MetaMaskSDK({

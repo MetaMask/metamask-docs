@@ -15,7 +15,7 @@ detect when the user changes networks.
 
 For example, the following code detects a user's network and when the user changes networks:
 
-```javascript
+```javascript title="index.js"
 const chainId = await window.ethereum.request({ method: "eth_chainId" });
 
 window.ethereum.on("chainChanged", handleChainChanged);

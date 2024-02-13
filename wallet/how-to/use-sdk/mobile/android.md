@@ -33,7 +33,7 @@ your users to easily connect with their MetaMask Mobile wallet.
 To add the SDK from Maven Central as a dependency to your project, in your `app/build.gradle` file,
 add the following entry to the `dependencies` block:
 
-```gradle
+```gradle title="build.gradle"
 dependencies {
     implementation 'io.metamask.androidsdk:metamask-android-sdk:0.2.1'
 }

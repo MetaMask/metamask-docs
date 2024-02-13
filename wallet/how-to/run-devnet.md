@@ -50,7 +50,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
     For example:
 
-    ```js
+    ```js title="hardhat.config.js"
     module.exports = {
         networks: {
             hardhat: {
