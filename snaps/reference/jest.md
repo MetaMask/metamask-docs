@@ -165,7 +165,7 @@ describe('MySnap', () => {
 
 Requests the home page of the Snap. It
 takes no arguments, and returns a promise that resolves to the response from the
-[`onHomePage`](entry-points#onhomepage)
+[`onHomePage`](entry-points.md#onhomepage)
 entry point.
 
 ```js
