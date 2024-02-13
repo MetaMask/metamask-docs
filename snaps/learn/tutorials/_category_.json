@@ -3,7 +3,6 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "slug": "learn/tutorials",
-    "description": "Try these end-to-end tutorials."
+    "slug": "learn/tutorials"
   }
 }
