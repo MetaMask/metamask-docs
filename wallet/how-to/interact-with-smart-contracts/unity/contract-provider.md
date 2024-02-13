@@ -28,9 +28,11 @@ It must decode the JSON-RPC result response into the type `TR`.
 The `IProvider` must also define two additional properties:
 
 ```csharp
-long ChainId { get; }  // The current chain ID the provider is connected to
-  
-string ConnectedAddress { get; } // The current address connected to the provider
+// The current chain ID the provider is connected to
+long ChainId { get; }
+
+// The current address connected to the provider
+string ConnectedAddress { get; }
 ```
 
 For backwards compatibility, the `ILegacyProvider` function is also defined:
@@ -42,9 +44,9 @@ object Request(string method, object[] parameters = null);
 To easily support this function, use `Request<object>`:
 
 ```csharp
-public object Request(string method, object[] parameters = null)  
-{  
-    return this.Request<object>(method, parameters);  
+public object Request(string method, object[] parameters = null)
+{
+    return this.Request<object>(method, parameters);
 }
 ```
 
@@ -75,7 +77,9 @@ The desired type is defined in the [contract interface](contract-interface.md) u
 The `ILegacyProvider` must also define two additional properties:
 
 ```csharp
-long ChainId { get; } // The current chain ID the provider is connected to
-  
-string ConnectedAddress { get; } // The current address connected to the provider
+// The current chain ID the provider is connected to
+long ChainId { get; }
+
+// The current address connected to the provider
+string ConnectedAddress { get; }
 ```
