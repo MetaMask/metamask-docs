@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7698],{64312:a=>{a.exports=JSON.parse('[{"label":"Keyring API","permalink":"/fix/am-snap-diagram-style-and-typo/snaps/tags/keyring-api","count":6}]')}}]);
