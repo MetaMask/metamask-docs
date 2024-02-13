@@ -46,7 +46,7 @@ const MMSDK = new MetaMaskSDK(
     dappMetadata: {
         name: "Example JavaScript Dapp",
         url: window.location.href,
-    }
+    },
     // Other options
 );
 
@@ -85,7 +85,7 @@ const MMSDK = new MetaMaskSDK(
     dappMetadata: {
         name: "Example JavaScript Dapp",
         url: window.location.href,
-    }
+    },
     // Other options
 );
 

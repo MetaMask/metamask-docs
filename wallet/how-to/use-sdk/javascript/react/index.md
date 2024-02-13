@@ -224,9 +224,9 @@ export const App = () => {
             {connected && (
                 <div>
                     <>
-                        {chainId && `Connected chain: ${chainId}`}
+                        {chainId && "Connected chain: ${chainId}"}
                         <p></p>
-                        {account && `Connected account: ${account}`}
+                        {account && "Connected account: ${account}"}
                     </>
                 </div>
             )}

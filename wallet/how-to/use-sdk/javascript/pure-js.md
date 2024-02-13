@@ -23,15 +23,15 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
             dappMetadata: {
                 name: "Example Pure JS Dapp",
                 url: window.location.href,
-            }
+            },
             // Other options
         )
-        // Because init process of the MetaMaskSDK is async.
+        // Because the init process of MetaMask SDK is async.
         setTimeout(() => {
             // You can also access via window.ethereum
-            const ethereum = MMSDK.getProvider()
+            const ethereum = MMSDK.getProvider();
 
-            ethereum.request({ method: 'eth_requestAccounts' })
+            ethereum.request({ method: 'eth_requestAccounts' });
         }, 0)
     </script>
     ...

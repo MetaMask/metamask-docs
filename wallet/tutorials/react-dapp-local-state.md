@@ -66,7 +66,7 @@ development server has been stopped.
 Open the project in a text editor.
 To start with a blank slate, replace the code in `src/App.tsx` with the following:
 
-```tsx
+```tsx title="App.tsx"
 import "./App.css";
 
 const App = () => {
@@ -83,7 +83,7 @@ export default App;
 You'll need to get around type-checking by defining the `window.ethereum` object as `any`.
 Update `src/vite-env.d.ts` to the following:
 
-```tsx
+```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
 interface Window {
@@ -93,7 +93,7 @@ interface Window {
 
 Also, update `src/App.css` to the following:
 
-```css
+```css title="App.css"
 .App {
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@ Next, detect the injected provider that browser extension wallets use. MetaMask 
 Add code to conditionally render a **Connect MetaMask** button in your component by updating
 `src/App.tsx` to the following:
 
-```tsx
+```tsx title="App.tsx"
 import "./App.css";
 let injectedProvider = false;
 
@@ -179,7 +179,7 @@ npm install @metamask/detect-provider
 
 Update `src/App.tsx` to the following:
 
-```tsx
+```tsx title="App.tsx"
 import "./App.css";
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -245,7 +245,7 @@ You'll also set up a button to connect to the MetaMask wallet.
 
 Update the `src/App.tsx` to the following:
 
-```tsx
+```tsx title="App.tsx" {7-8,19-21,23-28,34-36,38-40} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -333,7 +333,7 @@ Thinking ahead, once you track more than just `accounts`, you also need a mechan
 
 Update `src/App.tsx` with some added logic to `useEffect`:
 
-```tsx
+```tsx title="App.tsx" {11-18,24-30,34-36,54} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -434,7 +434,7 @@ Next, you'll add `balance` and `chainId` to your state.
 Before editing `src/App.tsx`, you need a few utility functions to format `balance` and `chainId`.
 Create a new file at `src/utils/index.tsx` with the following code:
 
-```tsx
+```tsx title="index.tsx"
 export const formatBalance = (rawBalance: string) => {
     const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
     return balance;
@@ -462,7 +462,7 @@ You'll also create a function called `formatBalance`.
 
 Update `src/App.tsx` to the following:
 
-```tsx
+```tsx title="App.tsx" {3,8,21-23,35,43,48-55,74,76-78} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import { formatBalance, formatChainAsNum } from "./utils"; /* New */
@@ -604,7 +604,7 @@ the error, and set `error` back to `false` once the message is resolved.
 
 Update `src/App.tsx` to the following:
 
-```tsx
+```tsx title="App.tsx" {11-13,62-64,67-75,97-102} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import { formatBalance, formatChainAsNum } from "./utils";
