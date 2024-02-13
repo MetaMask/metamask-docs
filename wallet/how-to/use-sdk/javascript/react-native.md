@@ -77,27 +77,24 @@ In React Native or Expo, update the default Metro configuration file to the foll
   <TabItem value="React Native">
 
   ```javascript title="metro.config.js"
-  const {
-    getDefaultConfig,
-    mergeConfig,
-  } = require("@react-native/metro-config");
+  const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
 
   const defaultConfig = getDefaultConfig(__dirname);
 
   const config = {
-    transformer: {
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
-    },
-    resolver: {
-      extraNodeModules: {
-        ...require("node-libs-react-native"),
+      transformer: {
+          getTransformOptions: async () => ({
+              transform: {
+                  experimentalImportSupport: false,
+                  inlineRequires: true,
+              },
+          }),
       },
-    },
+      resolver: {
+          extraNodeModules: {
+              ...require("node-libs-react-native"),
+          },
+      },
   };
 
   module.exports = mergeConfig(defaultConfig, config);
@@ -110,14 +107,14 @@ In React Native or Expo, update the default Metro configuration file to the foll
   const config = getDefaultConfig(__dirname);
 
   config.resolver.extraNodeModules = {
-    ...require("node-libs-expo"),
+      ...require("node-libs-expo"),
   };
 
   config.transformer.getTransformOptions = async () => ({
-    transform: {
-      experimentalImportSupport: false,
-      inlineRequires: true,
-    },
+      transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+      },
   });
 
   module.exports = config;
@@ -205,11 +202,11 @@ Connect to MetaMask:
 
 ```javascript
 const connectWallet = async () => {
-  try {
-    await connect();
-  } catch (error) {
-    console.error("Failed to connect wallet:", error);
-  }
+    try {
+        await connect();
+    } catch (error) {
+        console.error("Failed to connect wallet:", error);
+    }
 };
 ```
 
@@ -217,10 +214,10 @@ Handle your dapp's state:
 
 ```javascript
 useEffect(() => {
-  // Use the 'account' and 'chainId' returned by 'useSDK'
-  if (account && chainId) {
-    // Handle account and network changes
-  }
+    // Use the 'account' and 'chainId' returned by 'useSDK'
+    if (account && chainId) {
+        // Handle account and network changes
+    }
 }, [account, chainId]);
 ```
 
@@ -228,7 +225,7 @@ Disconnect from MetaMask:
 
 ```javascript
 const disconnectWallet = async () => {
-  await disconnect();
+    await disconnect();
 };
 ```
 

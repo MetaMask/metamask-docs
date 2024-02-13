@@ -90,7 +90,7 @@ communicationServerUrl: <string>
 # Example
 
 ```javascript
-communicationServerUrl: 'https://metamask-sdk-socket.metafi.codefi.network/'
+communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/"
 ```
 
 <!--/tabs-->
@@ -106,9 +106,9 @@ This option is mainly used for debugging and testing the SDK.
 
 ```javascript
 dappMetadata: {
-  name: <string>,
-  url: <string>,
-  base64Icon: <string>,
+    name: <string>,
+    url: <string>,
+    base64Icon: <string>,
 }
 ```
 
@@ -116,9 +116,9 @@ dappMetadata: {
 
 ```javascript
 dappMetadata: {
-  name: 'My Dapp',
-  url: 'https://mydapp.com',
-  base64Icon: 'data:image/png;base64,...',
+    name: "My Dapp",
+    url: "https://mydapp.com",
+    base64Icon: "data:image/png;base64,...",
 }
 ```
 
@@ -151,7 +151,7 @@ defaultReadOnlyChainId: <number or hexadecimal string>
 # Example
 
 ```javascript
-defaultReadOnlyChainId: '0x1'
+defaultReadOnlyChainId: "0x1"
 ```
 
 <!--/tabs-->
@@ -245,25 +245,25 @@ modals: <object>
 
 ```javascript
 modals: {
-  onPendingModalDisconnect: () => {
-    // Custom logic for pending modal disconnect
-  },
-  install: (params) => {
-    // Custom install modal logic
-    const { link, debug, installer, terminate, connectWithExtension } = params;
-    return {
-      mount: (link) => { /* custom mount logic */ },
-      unmount: (shouldTerminate) => { /* custom unmount logic */ },
-    };
-  },
-  otp: ({ debug, onDisconnect }) => {
-    // Custom OTP modal logic
-    return {
-      mount: () => { /* custom mount logic */ },
-      updateOTPValue: (otpValue) => { /* custom OTP value update logic */ },
-      unmount: () => { /* custom unmount logic */ },
-    };
-  },
+    onPendingModalDisconnect: () => {
+        // Custom logic for pending modal disconnect
+    },
+    install: (params) => {
+        // Custom install modal logic
+        const { link, debug, installer, terminate, connectWithExtension } = params;
+        return {
+            mount: (link) => { /* custom mount logic */ },
+            unmount: (shouldTerminate) => { /* custom unmount logic */ },
+        };
+    },
+    otp: ({ debug, onDisconnect }) => {
+        // Custom OTP modal logic
+        return {
+            mount: () => { /* custom mount logic */ },
+            updateOTPValue: (otpValue) => { /* custom OTP value update logic */ },
+            unmount: () => { /* custom unmount logic */ },
+        };
+    },
 }
 ```
 
@@ -286,9 +286,9 @@ openDeeplink: <function>
 
 ```javascript
 openDeeplink: (link: string) => {
-  if (canOpenLink) {
-    Linking.openURL(link);
-  }
+    if (canOpenLink) {
+        Linking.openURL(link);
+    }
 }
 ```
 
@@ -331,7 +331,7 @@ readonlyRPCMap: <map>
 
 ```javascript
 readonlyRPCMap: {
-  '0x539': 'http://localhost:8545',
+    "0x539": "http://localhost:8545",
 }
 ```
 
@@ -389,7 +389,7 @@ transports: <array of strings>
 # Example
 
 ```javascript
-transports: ['websocket', 'polling']
+transports: ["websocket", "polling"]
 ```
 
 <!--/tabs-->
@@ -404,8 +404,8 @@ Sets the preference on [Socket.IO](https://socket.io/docs/v4/) transports.
 
 ```javascript
 ui: {
-  installer: <function>,
-  confirm: <function>,
+    installer: <function>,
+    confirm: <function>,
 }
 ```
 

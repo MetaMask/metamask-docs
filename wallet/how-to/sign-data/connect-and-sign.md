@@ -41,14 +41,14 @@ Use the `connectAndSign` method as follows:
 
 ```javascript
 const connectAndSign = async () => {
-  try {
-    const signResult = await sdk?.connectAndSign({
-      msg: "Connect + Sign message",
-    });
-    setResponse(signResult);
-  } catch (err) {
-    console.warn(`failed to connect..`, err);
-  }
+    try {
+        const signResult = await sdk?.connectAndSign({
+            msg: "Connect + Sign message",
+        });
+        setResponse(signResult);
+    } catch (err) {
+        console.warn(`failed to connect..`, err);
+    }
 };
 ```
 
@@ -68,25 +68,25 @@ import React, { useState } from "react";
 import { useSDK } from "@metamask/sdk-react";
 
 function MyComponent() {
-  const { sdk } = useSDK();
-  const [signedMessage, setSignedMessage] = useState("");
+    const { sdk } = useSDK();
+    const [signedMessage, setSignedMessage] = useState("");
 
-  const handleConnectAndSign = async () => {
-    try {
-      const message = "Your message here";
-      const signature = await sdk.connectAndSign({ msg: message });
-      setSignedMessage(signature);
-    } catch (error) {
-      console.error("Error in signing:", error);
-    }
-  };
+    const handleConnectAndSign = async () => {
+        try {
+            const message = "Your message here";
+            const signature = await sdk.connectAndSign({ msg: message });
+            setSignedMessage(signature);
+        } catch (error) {
+            console.error("Error in signing:", error);
+        }
+    };
 
-  return (
-    <div>
-      <button onClick={handleConnectAndSign}>Connect and Sign</button>
-      {signedMessage && <p>Signed Message: {signedMessage}</p>}
-    </div>
-  );
+    return (
+        <div>
+            <button onClick={handleConnectAndSign}>Connect and Sign</button>
+            {signedMessage && <p>Signed Message: {signedMessage}</p>}
+        </div>
+    );
 }
 ```
 
