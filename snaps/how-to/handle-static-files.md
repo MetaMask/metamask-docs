@@ -5,7 +5,7 @@ sidebar_position: 11
 
 # Handle static files
 
-The Snaps platform provides a static file API that is useful to load Wasm modules, ZK keys, or anything else that needs to be lazily loaded.
+The Snaps platform provides a static file API that is useful to load Wasm modules, ZK circuits, or anything else that needs to be lazily loaded.
 
 To handle static files in your Snap bundle, you have to:
 
