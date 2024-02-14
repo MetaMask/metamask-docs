@@ -7,7 +7,7 @@ sidebar_position: 6
 
 A web dapp can integrate with multiple wallets simultaneously by adding support for
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an alternative discovery
-mechanism to the [`window.ethereum`](apis.md#ethereum-provider-api) injected provider.
+mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) injected provider.
 This discovery is enabled by using the standardized events and interfaces defined by EIP-6963.
 
 The following is a visual demo of the user experience, showing the data provided from each installed wallet:

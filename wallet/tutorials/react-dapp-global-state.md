@@ -72,7 +72,7 @@ If you use VS Code, you can run the command `code .` to open the project.
 :::
 
 This is a working React dapp, but it's wiped out the code from the previous tutorial's
-[`App.tsx`](https://github.com/MetaMask/react-dapp-tutorial/blob/local-state-final/src/App.tsx) file.  
+[`App.tsx`](https://github.com/MetaMask/react-dapp-tutorial/blob/local-state-final/src/App.tsx) file.
 
 Run the dapp using the command `npx vite`.
 The starting point looks like the following:
@@ -81,7 +81,7 @@ The starting point looks like the following:
 
 There are three components, each with static text: navigation (with a logo area and connect button),
 display (main content area), and footer.
-You'll use the footer to show any MetaMask errors.  
+You'll use the footer to show any MetaMask errors.
 
 Before you start, comment out or remove the `border` CSS selector, as it's only used as a visual aid.
 Remove the following line from each component style sheet:
@@ -95,15 +95,15 @@ Remove the following line from each component style sheet:
 This dapp has Vite's typical `App.css` and `index.css` files removed, and uses a modular approach to CSS.
 
 In the `/src` directory, `App.global.css` contains styles for the entire dapp (not specific to a
-single component), and styles you might want to reuse (such as buttons).  
+single component), and styles you might want to reuse (such as buttons).
 
 In the `/src` directory, `App.module.css` contains styles specific to `App.tsx`, your dapp's
 container component.
 It uses the `appContainer` class, which sets up a
 [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox) to define the `display` type
-(`flex`) and the `flex-direction` (`column`).   
+(`flex`) and the `flex-direction` (`column`).
 
-Using Flexbox here ensures that any child `div`s are laid out in a single-column layout (vertically).  
+Using Flexbox here ensures that any child `div`s are laid out in a single-column layout (vertically).
 
 Finally, the `/src/components` directory has subdirectories for `Display`, `Navigation`, and `MetaMaskError`.
 Each subdirectory contains a corresponding component file and CSS file.
@@ -128,12 +128,12 @@ There are two ways to use ESLint:
 
     ```json title="settings.json"
     {
-      "eslint.format.enable": true,
-      "eslint.packageManager": "npm",
-      "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-      },
-      "eslint.codeActionsOnSave.mode": "all"
+        "eslint.format.enable": true,
+        "eslint.packageManager": "npm",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "eslint.codeActionsOnSave.mode": "all"
     }
     ```
 
@@ -172,7 +172,7 @@ Instead of a single component, there's a `src/components` directory with UI and 
 distributed into multiple components.
 You'll modify the dapp's state in this directory and make it available to the rest of the dapp using
 a [context provider](https://react.dev/reference/react/useContext).
-This provider will sit in the `src/App.tsx` file and wrap the three child components.  
+This provider will sit in the `src/App.tsx` file and wrap the three child components.
 
 The child components will have access to the global state and the functions that modify the global state.
 This ensures that any change to the `wallet` (`address`, `balance`, and `chainId`), or the global
@@ -209,137 +209,163 @@ The following code contains comments describing advanced React patterns and how 
 
 ```tsx title="useMetaMask.tsx"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, createContext, PropsWithChildren, useContext, useCallback } from 'react'
+import {
+    useState,
+    useEffect,
+    createContext,
+    PropsWithChildren,
+    useContext,
+    useCallback,
+} from "react";
 
-import detectEthereumProvider from '@metamask/detect-provider'
-import { formatBalance } from '~/utils'
+import detectEthereumProvider from "@metamask/detect-provider";
+import { formatBalance } from "~/utils";
 
 interface WalletState {
-  accounts: any[]
-  balance: string
-  chainId: string
+    accounts: any[];
+    balance: string;
+    chainId: string;
 }
 
 interface MetaMaskContextData {
-  wallet: WalletState
-  hasProvider: boolean | null
-  error: boolean
-  errorMessage: string
-  isConnecting: boolean
-  connectMetaMask: () => void
-  clearError: () => void
+    wallet: WalletState;
+    hasProvider: boolean | null;
+    error: boolean;
+    errorMessage: string;
+    isConnecting: boolean;
+    connectMetaMask: () => void;
+    clearError: () => void;
 }
 
-const disconnectedState: WalletState = { accounts: [], balance: '', chainId: '' }
+const disconnectedState: WalletState = {
+    accounts: [],
+    balance: "",
+    chainId: "",
+};
 
-const MetaMaskContext = createContext<MetaMaskContextData>({} as MetaMaskContextData)
+const MetaMaskContext = createContext<MetaMaskContextData>(
+    {} as MetaMaskContextData
+);
 
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null)
+    const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
-  const [isConnecting, setIsConnecting] = useState(false)
+    const [isConnecting, setIsConnecting] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('')
-  const clearError = () => setErrorMessage('')
+    const [errorMessage, setErrorMessage] = useState("");
+    const clearError = () => setErrorMessage("");
 
-  const [wallet, setWallet] = useState(disconnectedState)
-  // useCallback ensures that you don't uselessly recreate the _updateWallet function on every render
-  const _updateWallet = useCallback(async (providedAccounts?: any) => {
-    const accounts = providedAccounts || await window.ethereum.request(
-      { method: 'eth_accounts' },
-    )
+    const [wallet, setWallet] = useState(disconnectedState);
+    // useCallback ensures that you don't uselessly recreate the _updateWallet function on every render
+    const _updateWallet = useCallback(async (providedAccounts?: any) => {
+        const accounts =
+            providedAccounts ||
+            (await window.ethereum.request({ method: "eth_accounts" }));
 
-    if (accounts.length === 0) {
-      // If there are no accounts, then the user is disconnected
-      setWallet(disconnectedState)
-      return
-    }
+        if (accounts.length === 0) {
+            // If there are no accounts, then the user is disconnected
+            setWallet(disconnectedState);
+            return;
+        }
 
-    const balance = formatBalance(await window.ethereum.request({
-      method: 'eth_getBalance',
-      params: [accounts[0], 'latest'],
-    }))
-    const chainId = await window.ethereum.request({
-      method: 'eth_chainId',
-    })
+        const balance = formatBalance(
+            await window.ethereum.request({
+                method: "eth_getBalance",
+                params: [accounts[0], "latest"],
+            })
+        );
+        const chainId = await window.ethereum.request({
+            method: "eth_chainId",
+        });
 
-    setWallet({ accounts, balance, chainId })
-  }, [])
+        setWallet({ accounts, balance, chainId });
+    }, []);
 
-  const updateWalletAndAccounts = useCallback(() => _updateWallet(), [_updateWallet])
-  const updateWallet = useCallback((accounts: any) => _updateWallet(accounts), [_updateWallet])
+    const updateWalletAndAccounts = useCallback(
+        () => _updateWallet(),
+        [_updateWallet]
+    );
+    const updateWallet = useCallback(
+        (accounts: any) => _updateWallet(accounts),
+        [_updateWallet]
+    );
 
-  /**
-   * This logic checks if MetaMask is installed. If it is, some event handlers are set up
-   * to update the wallet state when MetaMask changes. The function returned by useEffect
-   * is used as a "cleanup": it removes the event handlers whenever the MetaMaskProvider
-   * is unmounted.
-   */
-  useEffect(() => {
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true })
-      setHasProvider(Boolean(provider))
+    /**
+     * This logic checks if MetaMask is installed. If it is, some event handlers are set up
+     * to update the wallet state when MetaMask changes. The function returned by useEffect
+     * is used as a "cleanup": it removes the event handlers whenever the MetaMaskProvider
+     * is unmounted.
+     */
+    useEffect(() => {
+        const getProvider = async () => {
+            const provider = await detectEthereumProvider({ silent: true });
+            setHasProvider(Boolean(provider));
 
-      if (provider) {
-        updateWalletAndAccounts()
-        window.ethereum.on('accountsChanged', updateWallet)
-        window.ethereum.on('chainChanged', updateWalletAndAccounts)
-      }
-    }
+            if (provider) {
+                updateWalletAndAccounts();
+                window.ethereum.on("accountsChanged", updateWallet);
+                window.ethereum.on("chainChanged", updateWalletAndAccounts);
+            }
+        };
 
-    getProvider()
+        getProvider();
 
-    return () => {
-      window.ethereum?.removeListener('accountsChanged', updateWallet)
-      window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts)
-    }
-  }, [updateWallet, updateWalletAndAccounts])
+        return () => {
+            window.ethereum?.removeListener("accountsChanged", updateWallet);
+            window.ethereum?.removeListener(
+                "chainChanged",
+                updateWalletAndAccounts
+            );
+        };
+    }, [updateWallet, updateWalletAndAccounts]);
 
-  const connectMetaMask = async () => {
-    setIsConnecting(true)
+    const connectMetaMask = async () => {
+        setIsConnecting(true);
 
-    try {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      })
-      clearError()
-      updateWallet(accounts)
-    } catch(err: any) {
-      setErrorMessage(err.message)
-    }
-    setIsConnecting(false)
-  }
+        try {
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            clearError();
+            updateWallet(accounts);
+        } catch (err: any) {
+            setErrorMessage(err.message);
+        }
+        setIsConnecting(false);
+    };
 
-  return (
-    <MetaMaskContext.Provider
-      value={{
-        wallet,
-        hasProvider,
-        error: !!errorMessage,
-        errorMessage,
-        isConnecting,
-        connectMetaMask,
-        clearError,
-      }}
-    >
-      {children}
-    </MetaMaskContext.Provider>
-  )
-}
+    return (
+        <MetaMaskContext.Provider
+            value={{
+                wallet,
+                hasProvider,
+                error: !!errorMessage,
+                errorMessage,
+                isConnecting,
+                connectMetaMask,
+                clearError,
+            }}
+        >
+            {children}
+        </MetaMaskContext.Provider>
+    );
+};
 
 export const useMetaMask = () => {
-  const context = useContext(MetaMaskContext)
-  if (context === undefined) {
-    throw new Error('useMetaMask must be used within a "MetaMaskContextProvider"')
-  }
-  return context
-}
+    const context = useContext(MetaMaskContext);
+    if (context === undefined) {
+        throw new Error(
+            "useMetaMask must be used within a MetaMaskContextProvider"
+        );
+    }
+    return context;
+};
 ```
 
 With this context provider in place, you can update `/src/App.tsx` to include the provider and wrap
-it around the three components.  
+it around the three components.
 
-Notice the use of `~/utils` to import the utility functions.  
+Notice the use of `~/utils` to import the utility functions.
 
 :::note vite-tsconfig-paths
 This dapp is configured to use `vite-tsconfig-paths`, allowing it to load modules with locations
@@ -348,7 +374,7 @@ The path corresponding to the `./src/*` directory is represented by the `~/*` sy
 There's also a reference to `./tsconfig.node.json` in the `reference`'s array objects that correspond
 to `path`.
 
-`vite.config.ts` imports `tsconfigPaths` from `vite-tsconfig-paths` and adds it to the `plugins` array.  
+`vite.config.ts` imports `tsconfigPaths` from `vite-tsconfig-paths` and adds it to the `plugins` array.
 
 See more information about [`vite-tsconfig-paths`](https://github.com/aleclarson/vite-tsconfig-paths).
 :::
@@ -360,27 +386,26 @@ around the existing `Display`, `Navigation`, and `MetaMaskError` components.
 
 Update `/src/App.tsx` to the following:
 
-```tsx  title="App.tsx"
-import './App.global.css'
-import styles from './App.module.css'
+```tsx title="App.tsx"
+import "./App.global.css";
+import styles from "./App.module.css";
 
-import { Navigation } from './components/Navigation'
-import { Display } from './components/Display'
-import { MetaMaskError } from './components/MetaMaskError'
-import { MetaMaskContextProvider } from './hooks/useMetaMask'
+import { Navigation } from "./components/Navigation";
+import { Display } from "./components/Display";
+import { MetaMaskError } from "./components/MetaMaskError";
+import { MetaMaskContextProvider } from "./hooks/useMetaMask";
 
 export const App = () => {
-
-  return (
-    <MetaMaskContextProvider>
-      <div className={styles.appContainer}>
-        <Navigation />
-        <Display />
-        <MetaMaskError />
-      </div>
-    </MetaMaskContextProvider>
-  )
-}
+    return (
+        <MetaMaskContextProvider>
+            <div className={styles.appContainer}>
+                <Navigation />
+                <Display />
+                <MetaMaskError />
+            </div>
+        </MetaMaskContextProvider>
+    );
+};
 ```
 
 With `App.tsx` updated, you can update the `Display`, `Navigation`, and `MetaMaskError` components,
@@ -390,61 +415,67 @@ each of which will use the `useMetaMask` hook to display the state or invoke fun
 
 The `Navigation` component will connect to MetaMask using conditional rendering to show an
 **Install MetaMask** or **Connect MetaMask** button or, once connected, display your wallet address
-in a hypertext link that connects to [Etherscan](https://etherscan.io).  
+in a hypertext link that connects to [Etherscan](https://etherscan.io).
 
 Update `/src/components/Navigation/Navigation.tsx` to the following:
 
-```tsx  title="Navigation.tsx"
-import { useMetaMask } from '~/hooks/useMetaMask'
-import { formatAddress } from '~/utils'
-import styles from './Navigation.module.css'
+```tsx title="Navigation.tsx"
+import { useMetaMask } from "~/hooks/useMetaMask";
+import { formatAddress } from "~/utils";
+import styles from "./Navigation.module.css";
 
 export const Navigation = () => {
+    const { wallet, hasProvider, isConnecting, connectMetaMask } =
+        useMetaMask();
 
-  const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask()
-
-  return (
-    <div className={styles.navigation}>
-      <div className={styles.flexContainer}>
-        <div className={styles.leftNav}>Vite + React & MetaMask</div>
-        <div className={styles.rightNav}>
-          {!hasProvider &&
-            <a href="https://metamask.io" target="_blank">
-              Install MetaMask
-            </a>
-          }
-          {window.ethereum?.isMetaMask && wallet.accounts.length < 1 &&
-            <button disabled={isConnecting} onClick={connectMetaMask}>
-              Connect MetaMask
-            </button>
-          }
-          {hasProvider && wallet.accounts.length > 0 &&
-            <a
-              className="text_link tooltip-bottom"
-              href={`https://etherscan.io/address/${wallet.accounts[0]}`}
-              target="_blank"
-              data-tooltip= "Open in Block Explorer"
-            >
-              {formatAddress(wallet.accounts[0])}
-            </a>
-          }
+    return (
+        <div className={styles.navigation}>
+            <div className={styles.flexContainer}>
+                <div className={styles.leftNav}>Vite + React & MetaMask</div>
+                <div className={styles.rightNav}>
+                    {!hasProvider && (
+                        <a href="https://metamask.io" target="_blank">
+                            Install MetaMask
+                        </a>
+                    )}
+                    {window.ethereum?.isMetaMask &&
+                        wallet.accounts.length < 1 && (
+                            <button
+                                disabled={isConnecting}
+                                onClick={connectMetaMask}
+                            >
+                                Connect MetaMask
+                            </button>
+                        )}
+                    {hasProvider && wallet.accounts.length > 0 && (
+                        <a
+                            className="text_link tooltip-bottom"
+                            href={`https://etherscan.io/address/${wallet.accounts[0]}`}
+                            target="_blank"
+                            data-tooltip="Open in Block Explorer"
+                        >
+                            {formatAddress(wallet.accounts[0])}
+                        </a>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
-}
+    );
+};
 ```
 
 Notice how `useMetaMask` de-structures its return value to get the items within `MetaMaskContextData`:
 
 ```ts
-const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask()
+const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask();
 ```
 
 Also, the `formatAddress` function formats the wallet address for display purposes:
 
 ```ts
-{formatAddress(wallet.accounts[0])}
+{
+    formatAddress(wallet.accounts[0]);
+}
 ```
 
 This function doesn't exist in the `@utils` file yet, so you'll need to add it.
@@ -452,21 +483,21 @@ Update `/src/utils/index.tsx` to the following:
 
 ```ts title="utils/index.ts"
 export const formatBalance = (rawBalance: string) => {
-  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
-  return balance
-}
+    const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
+    return balance;
+};
 
 export const formatChainAsNum = (chainIdHex: string) => {
-  const chainIdNum = parseInt(chainIdHex)
-  return chainIdNum
-}
+    const chainIdNum = parseInt(chainIdHex);
+    return chainIdNum;
+};
 
 export const formatAddress = (addr: string) => {
-  return `${addr.substring(0, 8)}...`
-}
+    return `${addr.substring(0, 8)}...`;
+};
 ```
 
-This should address any build errors in your `Navigation` component.  
+This should address any build errors in your `Navigation` component.
 
 Other than using the new styling, the only thing this dapp has done differently than the local-state
 tutorial is display the user's `address` formatted inside a link once they're connected.
@@ -483,33 +514,34 @@ In the `Display` component, you won't call any functions that modify state; you'
 Update `/src/components/Display/Display.tsx` to the following:
 
 ```tsx title="Display.tsx"
-import { useMetaMask } from '~/hooks/useMetaMask'
-import { formatChainAsNum } from '~/utils'
-import styles from './Display.module.css'
+import { useMetaMask } from "~/hooks/useMetaMask";
+import { formatChainAsNum } from "~/utils";
+import styles from "./Display.module.css";
 
 export const Display = () => {
+    const { wallet } = useMetaMask();
 
-  const { wallet } = useMetaMask()
-
-  return (
-    <div className={styles.display}>
-      {wallet.accounts.length > 0 &&
-        <>
-          <div>Wallet Accounts: {wallet.accounts[0]}</div>
-          <div>Wallet Balance: {wallet.balance}</div>
-          <div>Hex ChainId: {wallet.chainId}</div>
-          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>
-        </>
-      }
-    </div>
-  )
-}
+    return (
+        <div className={styles.display}>
+            {wallet.accounts.length > 0 && (
+                <>
+                    <div>Wallet Accounts: {wallet.accounts[0]}</div>
+                    <div>Wallet Balance: {wallet.balance}</div>
+                    <div>Hex ChainId: {wallet.chainId}</div>
+                    <div>
+                        Numeric ChainId: {formatChainAsNum(wallet.chainId)}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
 ```
 
 Notice how `useMetaMask` de-structures its return value to get only the `wallet` data:
 
 ```ts
-const { wallet } = useMetaMask()
+const { wallet } = useMetaMask();
 ```
 
 At this point, you can display `account`, `balance`, and `chainId` in the `Display` component:
@@ -524,31 +556,31 @@ If MetaMask errors or the user rejects a connection, you can display that error 
 Update `/src/components/MetaMaskError/MetaMaskError.tsx` to the following:
 
 ```tsx title="MetaMaskError.tsx"
-import { useMetaMask } from '~/hooks/useMetaMask'
-import styles from './MetaMaskError.module.css'
+import { useMetaMask } from "~/hooks/useMetaMask";
+import styles from "./MetaMaskError.module.css";
 
 export const MetaMaskError = () => {
-  const { error, errorMessage, clearError } = useMetaMask()
-  return (
-    <div className={styles.metaMaskError} style={
-      error ? { backgroundColor: 'brown' } : {}
-    }>
-      { error && (
-        <div onClick={clearError}>
-          <strong>Error:</strong> {errorMessage}
+    const { error, errorMessage, clearError } = useMetaMask();
+    return (
+        <div
+            className={styles.metaMaskError}
+            style={error ? { backgroundColor: "brown" } : {}}
+        >
+            {error && (
+                <div onClick={clearError}>
+                    <strong>Error:</strong> {errorMessage}
+                </div>
+            )}
         </div>
-      )
-      }
-    </div>
-  )
-}
+    );
+};
 ```
 
 Notice how `useMetaMask` de-structures its return value to get only the `error`, `errorMessage`, and
 `clearError` data:
 
 ```ts
-const { error, errorMessage, clearError } = useMetaMask()
+const { error, errorMessage, clearError } = useMetaMask();
 ```
 
 When you generate an error by cancelling the connection to MetaMask, this shows up in the footer.

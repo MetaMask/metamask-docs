@@ -16,24 +16,25 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
 
 ```html title="index.html"
 <head>
-...
-<script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
-<script>
-  const MMSDK = new MetaMaskSDK.MetaMaskSDK(
-    dappMetadata: {
-      name: "Example Pure JS Dapp",
-      url: window.location.href,
-    }
-    // Other options
-  )
-  // Because init process of the MetaMaskSDK is async.
-  setTimeout(() => {
-    const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
+    ...
+    <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+    <script>
+        const MMSDK = new MetaMaskSDK.MetaMaskSDK(
+            dappMetadata: {
+                name: "Example Pure JS Dapp",
+                url: window.location.href,
+            },
+            // Other options
+        )
+        // Because the init process of MetaMask SDK is async.
+        setTimeout(() => {
+            // You can also access via window.ethereum
+            const ethereum = MMSDK.getProvider();
 
-    ethereum.request({ method: 'eth_requestAccounts' })
-  }, 0)
-</script>
-...
+            ethereum.request({ method: 'eth_requestAccounts' });
+        }, 0)
+    </script>
+    ...
 </head>
 ```
 

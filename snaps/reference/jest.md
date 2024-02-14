@@ -10,10 +10,10 @@ and [options](#options).
 
 ## API methods
 
-### installSnap
+### `installSnap`
 
-Installs a Snap in the browser.
-We recommend using this method in each test to ensure that it starts with a clean slate.
+Installs a Snap in the execution environment.
+We recommend using this function in each test to ensure that it starts with a clean slate.
 
 #### Parameters
 
@@ -37,7 +37,7 @@ describe('MySnap', () => {
 });
 ```
 
-### request
+### `request`
 
 Sends a JSON-RPC request to the Snap.
 
@@ -56,7 +56,7 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from '@metamask/snaps-jest';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should respond to foo with bar', async () => {
     const { request } = await installSnap(/* optional snap ID */);
     const response = await request({
       origin: 'http://localhost:8080',
@@ -74,7 +74,7 @@ describe('MySnap', () => {
 });
 ```
 
-### sendTransaction
+### `onTransaction`
 
 Sends a transaction to the Snap.
 
@@ -109,9 +109,9 @@ import { installSnap } from '@metamask/snaps-jest';
 import { panel, text } from '@metamask/snaps-sdk';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
-    const { sendTransaction } = await installSnap(/* optional Snap ID */);
-    const response = await sendTransaction({
+  it('should return insights', async () => {
+    const { onTransaction } = await installSnap(/* optional Snap ID */);
+    const response = await onTransaction({
       value: '0x0',
       data: '0x',
       gasLimit: '0x5208',
@@ -125,7 +125,7 @@ describe('MySnap', () => {
 });
 ```
 
-### runCronJob
+### `onCronjob`
 
 Runs a cronjob in the Snap.
 The request is normally specified in the Snap manifest file under the
@@ -147,9 +147,9 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from '@metamask/snaps-jest';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
-    const { runCronjob } = await installSnap(/* optional snap ID */);
-    const response = await runCronjob({
+  it('should end foo cronjobs with response bar', async () => {
+    const { onCronjob } = await installSnap(/* optional snap ID */);
+    const response = await onCronjob({
       method: 'foo',
       params: [],
     });
@@ -161,27 +161,28 @@ describe('MySnap', () => {
 });
 ```
 
-### close
+### `onHomePage`
 
-Closes the page the test is running on.
-This is useful for cleaning up after a test, and is not required.
-It can potentially speed up your tests, since it prevents too many pages from being open at the same time.
+Requests the home page of the Snap. It
+takes no arguments, and returns a promise that resolves to the response from the
+[`onHomePage`](entry-points.md#onhomepage)
+entry point.
 
-#### Example
-
-```javascript
+```js
 import { installSnap } from '@metamask/snaps-jest';
+import { panel, text } from '@metamask/snaps-sdk';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
-    const { close } = await installSnap(/* optional Snap ID */);
-    // ...
-    await close();
+  it('should render the home page', async () => {
+    const { onHomePage } = await installSnap(/* optional snap ID */);
+    const response = await onHomePage();
+
+    expect(response).toRender(panel([text('Hello, world!')]));
   });
 });
 ```
 
-### getInterface
+### `getInterface`
 
 If your Snap uses [`snap_dialog`](snaps-api.md#snap_dialog) to show user interfaces, you can use the
 `request.getInterface` method to interact with the user interfaces.
@@ -200,7 +201,7 @@ import { text } from '@metamask/snaps-sdk';
 import { assert } from '@metamask/utils';
 
 describe('MySnap', () => {
-  it('should do something', async () => {
+  it('should render an alert with hello world', async () => {
     const { request } = await installSnap(/* optional Snap ID */);
 
     // Note: You cannot resolve the promise yet!
@@ -221,60 +222,6 @@ describe('MySnap', () => {
     // Now you can resolve the promise.
     const result = await response;
     expect(result).toRespondWith('bar');
-  });
-});
-```
-
-### mock
-
-Mocks the response of any network request made by the Snap through the
-[`endowment:network-access`](permissions.md#endowmentnetwork-access) permission.
-
-#### Parameters
-
-An object with the following properties:
-
-- `url` - The URL of the request.
-  This can be a string or a regular expression.
-- `partial` - If set to `true`, the request is mocked if the URL starts with the given URL.
-  This option is ignored if a regular expression is provided to the `url` option.
-  The default is `false`.
-- `response` - An object with the response.
-  - `status` - The status code of the response.
-    The default is `200`.
-  - `body` - The body of the response.
-    The default is an empty string.
-  - `headers` - An object with the headers of the response.
-    By default, this uses headers that enable CORS.
-  - `contentType` - The content type of the response.
-    The default is `text/plain`.
-
-All properties are optional except `url`.
-
-#### Returns
-
-An object with an `unmock` function that can be used to remove the mock.
-If the mock is not removed, it remains active only for the rest of the Snap installation, so it does
-not affect other tests with a new Snap installation.
-
-#### Example
-
-```javascript
-import { installSnap } from '@metamask/snaps-jest';
-
-describe('MySnap', () => {
-  it('should do something', async () => {
-    const { mock, request } = await installSnap(/* optional Snap ID */);
-
-    const { unmock } = mock({
-      url: 'https://example.com',
-      status: 200,
-      body: 'Hello, world!',
-    });
-
-    // ...
-
-    unmock();
   });
 });
 ```
@@ -300,77 +247,7 @@ response from a Snap matches an expected value:
 You can pass the following options when [configuring `@metamask/snaps-jest`](../how-to/test-a-snap.md#2-configure-metamasksnaps-jest).
 All options are optional.
 
-### browser
-
-Options for the browser used to run the tests.
-
-The `headless` browser option enables or disables running the browser in headless mode.
-Set this option to `false` to see the browser window while the tests are running.
-The default is `true`.
-
-:::note
-Disabling `browser.headless` requires you to have a graphical environment available, so we do not
-recommend this for CI environments.
-It can be useful for debugging in conjunction with the [`keepAlive`](#keepalive) option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    browser: {
-      headless: false,
-    },
-  },
-};
-```
-
-### executionEnvironmentUrl
-
-The URL of the [execution environment](../concepts/execution-environment.md) to use for testing.
-This is the URL to be loaded by the Snaps simulator in the tests.
-The default is the URL of the built-in HTTP server included in this package.
-
-:::note
-This option is intended for advanced use cases.
-In most cases, you do not need to configure this option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    executionEnvironmentUrl: 'http://localhost:8080',
-  },
-};
-```
-
-### keepAlive
-
-Enables or disables keeping the Jest environment running after the tests have finished.
-When set to `true`, the Jest process does not exit on its own, and must be manually terminated.
-The default is `false`.
-
-:::note
-This is useful for debugging, but should not be used in CI environments.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    keepAlive: true,
-  },
-};
-```
-
-### server
+### `server`
 
 Options for the built-in HTTP server included with this package.
 This server serves the execution environment, simulator, and the Snap bundle during tests.
@@ -378,8 +255,7 @@ This server serves the execution environment, simulator, and the Snap bundle dur
 The server options are:
 
 - `enabled` - Enables or disables the built-in HTTP server.
-  Set to `false` to use your own HTTP server, which you can specify using the
-  [`executionEnvironmentUrl`](#executionenvironmenturl) and [`simulatorUrl`](#simulatorurl) options.
+  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap), e.g. `installSnap('local:http://my-server')`.
   The default is `true`.
 - `port` - The port to use for the built-in HTTP server.
   The default is a random available (unprivileged) port.
@@ -395,32 +271,9 @@ module.exports = {
   preset: '@metamask/snaps-jest',
   testEnvironmentOptions: {
     server: {
-      enabled: false,
       port: 8080,
       root: '/path/to/snap/files',
     },
-  },
-};
-```
-
-### simulatorUrl
-
-The URL of the simulator to use for testing.
-This is the URL to be loaded in the browser when running tests.
-The default is the URL of the built-in HTTP server included with this package.
-
-:::note
-This option is intended for advanced use cases.
-In most cases, you do not need to configure this option.
-:::
-
-#### Example
-
-```javascript
-module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    simulatorUrl: 'http://localhost:8081',
   },
 };
 ```

@@ -10,14 +10,13 @@ React dapp.
 You can:
 
 - [Connect to the MetaMask browser extension](#connect-to-the-metamask-browser-extension)
-  directly using the MetaMask APIs.
+  directly using the Wallet API.
 - [Connect to the MetaMask extension and MetaMask mobile](#connect-to-the-metamask-extension-and-metamask-mobile)
-  using the SDK.
+  using MetaMask SDK.
 
 ## Connect to the MetaMask browser extension
 
-Connect to the MetaMask browser extension directly using the
-[MetaMask Ethereum provider API](../concepts/apis.md).
+Connect to the MetaMask browser extension directly using the [Wallet API](../concepts/wallet-api.md).
 This example uses the [Vite](https://v3.vitejs.dev/guide/) build tool with React and Typescript, so
 you can get started quickly with an optimized dapp.
 
@@ -81,9 +80,9 @@ By integrating your dapp using the SDK, millions of MetaMask Mobile users can co
 preferred MetaMask client.
 
 :::info note
-The SDK uses the [Ethereum provider](../concepts/apis.md#ethereum-provider-api), so you can use the
-SDK as a wrapper around an existing JavaScript dapp and call
-[MetaMask Ethereum provider API methods](../reference/provider-api.md) from your dapp as normal.
+The SDK uses the [MetaMask Ethereum provider](../concepts/wallet-api.md#ethereum-provider-api), so
+you can use the SDK as a wrapper around an existing JavaScript dapp and call Wallet API methods from
+your dapp as normal.
 :::
 
 1. Install the [MetaMask React SDK](../how-to/use-sdk/javascript/react/index.md) in your project directory:
