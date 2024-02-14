@@ -168,6 +168,14 @@ svg {
       font-size: inherit;
     }
   }
+  > p > .ReactPlayer {
+    border-radius: 10px; 
+    overflow: hidden; 
+  }
+  > p > video {
+    border-radius: 10px; 
+    overflow: hidden; 
+  }
 }
 
 .table-of-contents code {
