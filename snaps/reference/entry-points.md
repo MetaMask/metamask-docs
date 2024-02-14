@@ -6,7 +6,7 @@ description: See the Snaps entry points reference.
 
 Snaps can expose the following entry points.
 
-## onRpcRequest
+## `onRpcRequest`
 
 To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
 dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
@@ -67,7 +67,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 <!--/tabs-->
 
-## onTransaction
+## `onTransaction`
 
 To provide transaction insights before a user signs a transaction, a Snap must expose the
 `onTransaction` entry point.
@@ -205,7 +205,7 @@ module.exports.onTransaction = async ({
 
 <!--/tabs-->
 
-## onCronjob
+## `onCronjob`
 
 To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
 MetaMask calls the `onCronjob` handler method at the specified times with the specified payloads
@@ -215,6 +215,11 @@ defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission
 For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
+
+If the cron job's logic requires access to encrypted state, you can use
+[`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to ensure that MetaMask is
+unlocked before accessing state.
+This will prevent an unexpected password request popup, improving the user's experience.
 
 #### Parameters
 
@@ -268,7 +273,7 @@ module.exports.onCronjob = async ({ request }) => {
 
 <!--/tabs-->
 
-## onInstall
+## `onInstall`
 
 To run an action on installation, a Snap must expose the `onInstall` entry point.
 MetaMask calls the `onInstall` handler method after the Snap is installed successfully. 
@@ -332,7 +337,7 @@ module.exports.onInstall = async () => {
 
 <!--/tabs-->
 
-## onUpdate
+## `onUpdate`
 
 To run an action on update, a Snap must expose the `onUpdate` entry point.
 MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
@@ -402,7 +407,7 @@ module.exports.onUpdate = async () => {
 
 <!--/tabs-->
 
-## onHomePage
+## `onHomePage`
 
 :::flaskOnly
 :::
