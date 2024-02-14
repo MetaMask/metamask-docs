@@ -453,6 +453,56 @@ console.log(entropy);
 
 <!--/tabs-->
 
+## `snap_getFile`
+
+Gets a static file's content in utf8, base64, or hex. The file has to be [specified in the Snap's manifest](../how-to/handle-static-files.md#specify-static-files-in-the-snaps-manifest).
+
+### Parameters
+
+An object containing:
+
+- `path`: The path to the file, relative to the Snap's package directory, i.e. one level above `src`
+- `encoding`: One of `utf8`, `base64`, or `hex`. Optional, defaults to `base64`.
+
+### Returns
+
+The file contents as a string in the requested encoding.
+
+### Example
+
+<!--tabs-->
+
+# Manifest file
+
+```json title="snap.manifest.json"
+"source": {
+  "shasum": "xxx",
+  "location": {
+    // ...
+  },
+  "files": [
+    "./files/myfile.bin"
+  ]
+}
+```
+
+# JavaScript
+
+```javascript title="snap/src/index.js"
+const contents = await snap.request({
+  method: 'snap_getFile',
+  params: {
+    path: './files/myfile.bin',
+    encoding: 'hex',
+  },
+});
+
+// `0x...`
+console.log(contents);
+```
+
+<!--/tabs-->
+
 ## `snap_getLocale`
 
 :::flaskOnly
