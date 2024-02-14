@@ -169,3 +169,7 @@ svg {
     }
   }
 }
+
+.table-of-contents code {
+  font-size: inherit;
+}
