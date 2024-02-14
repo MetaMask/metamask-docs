@@ -169,11 +169,11 @@ svg {
     }
   }
   > p > .ReactPlayer {
-    border-radius: 10px; 
+    border-radius: 3px; 
     overflow: hidden; 
   }
   > p > video {
-    border-radius: 10px; 
+    border-radius: 3px; 
     overflow: hidden; 
   }
 }
