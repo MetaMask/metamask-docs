@@ -40,6 +40,7 @@ The following third-party libraries support EIP-6963:
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
 
 - [MIPD Store](https://github.com/wevm/mipd)
+- [RainbowKit](https://www.rainbowkit.com/)
 
 ### MetaMask SDK
 
@@ -64,6 +65,16 @@ subscribe to the store and retrieve the providers.
 Unlike Wagmi and Web3-Onboard, which are libraries that provide components and connectors for
 multiple wallets and depend on MetaMask SDK for integration, the MIPD Store is a utility library
 that makes it easier to work with EIP-6963 and supports TypeScript types.
+
+### RainBowKitV2
+
+The [RainbowKit V2](https://www.rainbowkit.com/) has support for EIP-6963 and is fully compatible 
+with [Wagmi 2+](https://wagmi.sh/).
+It has support for Multiple wallet connection sessions, Sign-In with Ethereum (SIWE) support with 
+multiple wallet connections, a new streamlined API and more.
+It is easy to install, posesses a Super smooth wallet management mechanism, has support for 
+TanStack Query and is faster and produces a lighter bundle size.
+
 
 ## Wallet support
 
