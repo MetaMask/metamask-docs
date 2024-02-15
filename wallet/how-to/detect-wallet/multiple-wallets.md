@@ -31,6 +31,7 @@ You can add support for EIP-6963 by using the following third-party libraries:
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
 
 - [MIPD Store](https://github.com/wevm/mipd)
+
 - [RainbowKit](https://www.rainbowkit.com/)
 
 ## Implement EIP-6963
