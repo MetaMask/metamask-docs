@@ -32,6 +32,8 @@ You can add support for EIP-6963 by using the following third-party libraries:
 
 - [MIPD Store](https://github.com/wevm/mipd)
 
+- [RainbowKit](https://www.rainbowkit.com/)
+
 ## Implement EIP-6963
 
 To directly implement support for EIP-6963 in your React dapp:
