@@ -363,6 +363,8 @@ const config = {
           if (existingPath.includes("/use-sdk/gaming/unity")) {
             return [
               existingPath.replace("/use-sdk/gaming/unity", "/interact-with-smart-contracts/unity"),
+            ];
+          }
           if (existingPath.includes("/features/custom-evm-accounts")) {
             return [
               existingPath.replace("/features/custom-evm-accounts", "/how-to/use-keyring-api"),
