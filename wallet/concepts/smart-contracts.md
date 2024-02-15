@@ -1,13 +1,13 @@
 ---
-description: Enable your dapp to interact with smart contracts.
-sidebar_position: 10
+description: Learn about interacting with smart contracts.
+sidebar_position: 7
 ---
 
-# Interact with smart contracts
+# Smart contracts
 
-This is a high-level overview of how to interact with smart contracts.
+This is a high-level overview of interacting with smart contracts.
 You can also see how to
-[interact with smart contracts from your Unity game](unity/index.md).
+[interact with smart contracts from your Unity game](../how-to/use-sdk/gaming/unity/smart-contracts/index.md).
 
 To interact with a smart contract, your dapp needs the following information:
 

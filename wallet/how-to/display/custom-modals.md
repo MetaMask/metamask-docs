@@ -7,7 +7,7 @@ tags:
 
 # Display custom modals
 
-Use [MetaMask SDK](../../concepts/sdk/index.md) to display custom MetaMask modals in your JavaScript dapp.
+You can use [MetaMask SDK](../../concepts/sdk/index.md) to display custom MetaMask modals.
 
 When integrating a web dapp with MetaMask, you can enhance the user experience by customizing the
 logic and user interface of the displayed modals, which initiate user interactions such as prompting

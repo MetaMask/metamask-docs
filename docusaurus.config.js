@@ -134,6 +134,7 @@ const config = {
       "@docusaurus/plugin-client-redirects",
       {
         fromExtensions: ["html", "htm"],
+        // These redirects are (mostly) organized in the same order as the sidebar.
         redirects: [
           {
             from: ["/guide", "/guide/common-terms", "/guide/contributors", "/wallet/how-to/get-started-building", "/wallet/how-to/set-up-dev-environment", "/guide/create-dapp", "/guide/getting-started", "/wallet/category/get-started", "/wallet/get-started/set-up-dev-environment", "/wallet/how-to/get-started-building/set-up-dev-environment"],
@@ -150,6 +151,22 @@ const config = {
           {
             from: ["/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/use-mobile", "/wallet/how-to/integrate-with-mobile", "/sdk"],
             to: "/wallet/how-to/use-sdk",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/unity-dweb",
+            to: "/wallet/how-to/use-sdk/gaming/unity/dweb",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/unity-infura",
+            to: "/wallet/how-to/use-sdk/gaming/unity/infura",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations",
+            to: "/wallet/how-to/use-sdk/3rd-party-libraries",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/web3-onboard",
+            to: "/wallet/how-to/use-sdk/3rd-party-libraries/web3-onboard",
           },
           {
             from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/discover-multiple-wallets"],
@@ -188,6 +205,10 @@ const config = {
             to: "/wallet/how-to/display/icon",
           },
           {
+            from: "/wallet/how-to/use-3rd-party-integrations/js-infura-api",
+            to: "/wallet/how-to/make-read-only-requests",
+          },
+          {
             from: "/wallet/how-to/request-permissions",
             to: "/wallet/how-to/manage-permissions",
           },
@@ -196,8 +217,8 @@ const config = {
             to: "/wallet/how-to/access-provider",
           },
           {
-            from: "/guide/initializing-dapps",
-            to: "/wallet/how-to/interact-with-smart-contracts",
+            from: ["/guide/initializing-dapps", "/wallet/how-to/interact-with-smart-contracts"],
+            to: "/wallet/concepts/smart-contracts",
           },
           {
             from: "/guide/ethereum-provider",
@@ -334,8 +355,14 @@ const config = {
         }, []),
         createRedirects(existingPath) {
           if (existingPath.includes("/use-sdk")) {
+            // Redirect from /connect/set-up-sdk/X to /use-sdk/X
             return [
               existingPath.replace("/use-sdk", "/connect/set-up-sdk"),
+            ];
+          }
+          if (existingPath.includes("/use-sdk/gaming/unity")) {
+            return [
+              existingPath.replace("/use-sdk/gaming/unity", "/interact-with-smart-contracts/unity"),
             ];
           }
           if (existingPath.includes("/features/custom-evm-accounts")) {

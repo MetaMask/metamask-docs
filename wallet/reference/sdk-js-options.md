@@ -156,7 +156,7 @@ defaultReadOnlyChainId: "0x1"
 
 <!--/tabs-->
 
-Enables sending [read-only RPC requests](../how-to/use-3rd-party-integrations/js-infura-api.md) to
+Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) to
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
@@ -222,7 +222,7 @@ infuraAPIKey: process.env.INFURA_API_KEY
 
 The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id) to
 use for RPC requests.
-Configure this option to [make read-only RPC requests from your dapp](../how-to/use-3rd-party-integrations/js-infura-api.md).
+Configure this option to [make read-only RPC requests from your dapp](../how-to/make-read-only-requests.md).
 
 :::caution important
 Use [Infura allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
@@ -337,7 +337,7 @@ readonlyRPCMap: {
 
 <!--/tabs-->
 
-A map of RPC URLs to use for [read-only RPC requests](../how-to/use-3rd-party-integrations/js-infura-api.md).
+A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
 
 ### shouldShimWeb3
 
