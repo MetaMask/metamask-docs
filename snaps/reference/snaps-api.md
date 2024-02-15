@@ -455,18 +455,19 @@ console.log(entropy);
 
 ## `snap_getFile`
 
-Gets a static file's content in utf8, base64, or hex. The file has to be [specified in the Snap's manifest](../how-to/handle-static-files.md#specify-static-files-in-the-snaps-manifest).
+Gets a static file's content in UTF-8, Base64, or hexadecimal.
+The file must be [specified in the Snap's manifest file](../features/static-files.md).
 
 ### Parameters
 
 An object containing:
 
-- `path`: The path to the file, relative to the Snap's package directory, i.e. one level above `src`
-- `encoding`: One of `utf8`, `base64`, or `hex`. Optional, defaults to `base64`.
+- `path` - The path to the file, relative to the Snap's package directory (that is, one level above `src`).
+- `encoding` (optional) - One of `utf8`, `base64`, or `hex`. The default is `base64`.
 
 ### Returns
 
-The file contents as a string in the requested encoding.
+The file content as a string in the requested encoding.
 
 ### Example
 
@@ -474,7 +475,7 @@ The file contents as a string in the requested encoding.
 
 # Manifest file
 
-```json title="snap.manifest.json"
+```json
 "source": {
   "shasum": "xxx",
   "location": {
@@ -488,7 +489,7 @@ The file contents as a string in the requested encoding.
 
 # JavaScript
 
-```javascript title="snap/src/index.js"
+```javascript
 const contents = await snap.request({
   method: 'snap_getFile',
   params: {

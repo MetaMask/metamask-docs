@@ -5,9 +5,9 @@ sidebar_position: 1
 
 # Custom UI
 
-The [`snap_dialog`](../reference/snaps-api.md#snap_dialog) RPC method and
-[`onTransaction`](../reference/entry-points.md#ontransaction) entry point use the
-`@metamask/snaps-ui` module to display custom user interface (UI) components.
+You can display custom user interface (UI) components using the `@metamask/snaps-ui` module with the
+[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method or
+[`onTransaction`](../reference/entry-points.md#ontransaction) entry point.
 
 To use custom UI, first install `@metamask/snaps-ui` using the following command:
 
