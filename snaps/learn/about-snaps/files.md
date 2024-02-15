@@ -1,12 +1,12 @@
 ---
 description: Learn about the Snap project files.
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Snaps files
 
 If you look at the directory structure of the Snaps monorepo project generated in the
-[Snaps quickstart](../get-started/quickstart.mdx), it looks something like this:
+[Snaps quickstart](../../get-started/quickstart.md), it looks something like this:
 
 ```text
 your-snap-name/
@@ -70,7 +70,7 @@ The manifest file of `Hello World` would look something like this:
 The manifest tells MetaMask important information about your Snap, such as where it's published
 (using `source.location`), how to verify the integrity of the Snap source code (by attempting to
 reproduce the `source.shasum` value), and what
-[permissions the Snap requests](../how-to/request-permissions.md) (using `initialPermissions`).
+[permissions the Snap requests](../../how-to/request-permissions.md) (using `initialPermissions`).
 
 :::note
 Currently, Snaps can only be
@@ -86,14 +86,14 @@ details the requirements of both `snap.manifest.json` and its relationship to `p
 You might need to modify some manifest fields manually.
 For example, if you change the location of the icon SVG file, you must update
 `source.location.npm.iconPath` to match.
-You can also use the [Snaps CLI](../reference/cli/subcommands.md) to update some fields for you.
-For example, running [`yarn mm-snap build`](../reference/cli/subcommands.md#b-build) or
-[`yarn mm-snap manifest --fix`](../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
+You can also use the [Snaps CLI](../../reference/cli/subcommands.md) to update some fields for you.
+For example, running [`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) or
+[`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
 
 ## Configuration file
 
 The Snap configuration file, `snap.config.ts`, should be placed in the project root directory.
-You can override the default values of the [Snaps CLI options](../reference/cli/options.md) by specifying
+You can override the default values of the [Snaps CLI options](../../reference/cli/options.md) by specifying
 them in the `config` object of the configuration file.
 For example:
 
@@ -132,7 +132,7 @@ built-ins must be bundled along with the Snap.
 
 Running `yarn start` bundles your Snap for you.
 
-You can also run [`yarn mm-snap build`](../reference/cli/subcommands.md#b-build) to bundle your
+You can also run [`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) to bundle your
 Snap using [webpack](https://webpack.js.org/) or [Browserify](https://browserify.org).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.

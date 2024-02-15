@@ -11,7 +11,7 @@ The Snap provides transaction insights in the MetaMask transaction window.
 
 ## Prerequisites
 
-- [MetaMask Flask installed](../get-started/install-flask.md)
+- [MetaMask Flask installed](../../get-started/install-flask.md)
 - An account on your MetaMask Flask instance with testnet ETH
   :::tip
   You can use [Infura's Sepolia faucet](https://www.infura.io/faucet) to get Sepolia ETH.
@@ -53,7 +53,7 @@ This initializes your development environment with the required dependencies.
 
 ### 2. Enable transaction insights and the Ethereum provider
 
-The default template Snap, such as the one in [Create a gas estimation Snap](./gas-estimation.md), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
+The default template Snap, such as the one in [Create a gas estimation Snap](gas-estimation.md), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
 dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose any API.
 Instead, it provides transaction insights directly in the MetaMask transaction window.
@@ -66,8 +66,8 @@ method using the global Ethereum provider made available to Snaps.
 To enable your Snap to provide transaction insights and use the global Ethereum provider, open
 `/packages/snap/snap.manifest.json` in a text editor.
 Request the
-[`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight) and
-[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider)
+[`endowment:transaction-insight`](../../reference/permissions.md#endowmenttransaction-insight) and
+[`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider)
 permissions by modifying `initialPermissions`:
 
 ```json title="snap.manifest.json"
@@ -155,11 +155,11 @@ To build and test your Snap:
     You can set up multiple accounts to transfer between your accounts.
 
 6. On the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
-    Switching to the tab activates the [`onTransaction`](../reference/entry-points.md#ontransaction)
+    Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
     entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
-<img src={require('../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
 </p>
 
 ### 5. Display a different UI for contract interactions
@@ -204,4 +204,4 @@ Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such
 template **Send Hello** button.
 
 Once you've made all necessary changes, you can
-[publish your Snap to npm](../how-to/develop-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../../how-to/publish-a-snap.md#publish-your-snap).

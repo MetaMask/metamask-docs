@@ -245,7 +245,7 @@ You'll also set up a button to connect to the MetaMask wallet.
 
 Update the `src/App.tsx` to the following:
 
-```tsx title="App.tsx" {7-8,19-21,23-28,34-36,38-40} showLineNumbers
+```tsx title="App.tsx" {7-8,19-21,23-28,36-38,40-42} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -310,14 +310,14 @@ The changes include:
   Your dapp stores the result from this RPC call in a variable named `accounts` and passes it to
   the `updateWallet` function.
 
-- **Lines 34-36:** On click, the **Connect MetaMask** button calls `handleConnect`, from which an RPC
+- **Lines 36-38:** On click, the **Connect MetaMask** button calls `handleConnect`, from which an RPC
   call of `eth_requestAccounts` is awaited, and the user is prompted to connect to MetaMask:
 
   ![Choose which MetaMask connects](../assets/tutorials/react-dapp/pt1-04.png)
 
   ![Grant permissions over MetaMask](../assets/tutorials/react-dapp/pt1-05.png)
 
-- **Lines 38-40:** Once connected, you'll see your account address displayed in your dapp:
+- **Lines 40-42:** Once connected, you'll see your account address displayed in your dapp:
 
   ![MetaMask Account Address](../assets/tutorials/react-dapp/pt1-06.png)
 
@@ -333,7 +333,7 @@ Thinking ahead, once you track more than just `accounts`, you also need a mechan
 
 Update `src/App.tsx` with some added logic to `useEffect`:
 
-```tsx title="App.tsx" {11-18,24-30,34-36,54} showLineNumbers
+```tsx title="App.tsx" {11-18,24-33,37-39,59-60} showLineNumbers
 import "./App.css";
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -344,35 +344,35 @@ const App = () => {
     const [wallet, setWallet] = useState(initialState);
 
     useEffect(() => {
-        const refreshAccounts = (accounts: any) => {                /* New */
-            if (accounts.length > 0) {                              /* New */
-                updateWallet(accounts);                             /* New */
-            } else {                                                /* New */
-                // if length 0, user is disconnected                /* New */
-                setWallet(initialState);                            /* New */
-            }                                                       /* New */
-        };                                                          /* New */
+        const refreshAccounts = (accounts: any) => {              /* New */
+            if (accounts.length > 0) {                            /* New */
+                updateWallet(accounts);                           /* New */
+            } else {                                              /* New */
+                // if length 0, user is disconnected              /* New */
+                setWallet(initialState);                          /* New */
+            }                                                     /* New */
+        };                                                        /* New */
 
         const getProvider = async () => {
             const provider = await detectEthereumProvider({ silent: true });
             setHasProvider(Boolean(provider));
 
-            if (provider) {                                         /* New */
-                const accounts = await window.ethereum.request(     /* New */
-                    { method: "eth_accounts" }                      /* New */
-                );                                                  /* New */
-                refreshAccounts(accounts);                          /* New */
-                window.ethereum.on(
-                    "accountsChanged",
-                    refreshAccounts
-                );                                                  /* New */
-            }                                                       /* New */
+            if (provider) {                                       /* New */
+                const accounts = await window.ethereum.request(   /* New */
+                    { method: "eth_accounts" }                    /* New */
+                );                                                /* New */
+                refreshAccounts(accounts);                        /* New */
+                window.ethereum.on(                               /* New */
+                    "accountsChanged",                            /* New */
+                    refreshAccounts                               /* New */
+                );                                                /* New */
+            }                                                     /* New */
         };
 
         getProvider();
-        return () => {                                              /* New */
+        return () => {                                            /* New */
             window.ethereum?.removeListener("accountsChanged", refreshAccounts);
-        };                                                          /* New */
+        };                                                        /* New */
     }, []);
 
     const updateWallet = async (accounts: any) => {
@@ -392,8 +392,8 @@ const App = () => {
                 Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist
             </div>
 
-            {window.ethereum?.isMetaMask &&
-                wallet.accounts.length < 1 && (                       /* Updated */
+            {window.ethereum?.isMetaMask &&                       /* Updated */
+                wallet.accounts.length < 1 && (                       
                     <button onClick={handleConnect}>Connect MetaMask</button>
                 )}
 

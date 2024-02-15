@@ -17,8 +17,8 @@ EVM accounts.
 :::
 
 :::tip see also
+- [About custom EVM accounts](index.md)
 - [Create an account management Snap](create-account-snap.md)
-- [About the Keyring API](../../concepts/keyring-api.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 

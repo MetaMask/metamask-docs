@@ -1,9 +1,9 @@
 ---
-description: Use a custom user interface.
-sidebar_position: 4
+description: Display custom user interface components.
+sidebar_position: 1
 ---
 
-# Use custom UI
+# Custom UI
 
 The [`snap_dialog`](../reference/snaps-api.md#snap_dialog) RPC method and
 [`onTransaction`](../reference/entry-points.md#ontransaction) entry point use the

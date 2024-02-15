@@ -8,7 +8,7 @@ Snaps can expose the following entry points.
 
 ## `onRpcRequest`
 
-To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
+To implement a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) to communicate with
 dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
 Whenever the Snap receives a JSON-RPC request, MetaMask calls the `onRpcRequest` handler method.
 
@@ -92,7 +92,7 @@ An object containing:
 
 #### Returns
 
-A content object displayed using [custom UI](../how-to/use-custom-ui.md), alongside the confirmation
+A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
 for the transaction that `onTransaction` was called with.
 
 #### Example
@@ -214,6 +214,16 @@ defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission
 :::note
 For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
+:::
+
+:::info Access data from cron jobs
+When accessing encrypted data from cron jobs using [`snap_manageState`](../reference/snaps-api.md#snap_managestate),
+MetaMask requires the user to enter their password if the wallet is locked.
+This interaction can be confusing to the user, since the Snap accesses the data in the background
+without the user being aware.
+
+If your Snap's cron job does not need to access sensitive data, store that data in unencrypted state
+by setting `encrypted` to `false` when using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
 :::
 
 If the cron job's logic requires access to encrypted state, you can use
@@ -427,7 +437,7 @@ None.
 
 #### Returns
 
-A content object displayed using [custom UI](../how-to/use-custom-ui.md).
+A content object displayed using [custom UI](../features/custom-ui.md).
 
 #### Example
 

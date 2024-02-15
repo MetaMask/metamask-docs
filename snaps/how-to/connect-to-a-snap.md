@@ -3,11 +3,53 @@ description: Connect your dapp to existing, third-party Snaps.
 sidebar_position: 8
 ---
 
-# Use third-party Snaps
+# Connect to a Snap
 
-Some existing, third-party Snaps are designed to communicate with dapps.
-As a dapp developer, you can use these Snaps to take advantage of new features enabled by Snaps.
-This is possible because Snaps can expose a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis).
+Dapps can connect to Snaps designed to communicate with dapps.
+Dapps can use these Snaps to take advantage of new features enabled by Snaps.
+This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis).
+
+## Detect wallet
+
+To connect to a Snap, dapps must first detect MetaMask in the user's browser.
+See the Wallet documentation on [how to detect MetaMask](/wallet/how-to/detect-wallet).
+
+### Detect MetaMask Flask
+
+If you want to connect to Snap in [MetaMask Flask](../get-started/install-flask.md), you first need
+to know whether the user has Flask installed.
+
+The following example uses the
+[`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get
+the provider object from MetaMask first:
+
+```js
+import detectEthereumProvider from '@metamask/detect-provider';
+
+// This resolves to the value of window.ethereum or null
+const provider = await detectEthereumProvider();
+
+// web3_clientVersion returns the installed MetaMask version as a string
+const isFlask = (
+  await provider?.request({ method: 'web3_clientVersion' })
+)?.includes('flask');
+
+if (provider && isFlask) {
+  console.log('MetaMask Flask successfully detected!');
+
+  // Now you can use Snaps!
+} else {
+  console.error('Please install MetaMask Flask!', error);
+}
+```
+
+### Detect multiple wallets
+
+See the following resources for detecting multiple wallets (via
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963)) in the user's browser:
+
+- [How to detect multiple wallets](/wallet/how-to/detect-wallet/multiple-wallets)
+- [Connect to Snap via EIP-6963 example](https://github.com/Montoya/snap-connect-example)
 
 ## Connect to a Snap
 
@@ -15,6 +57,7 @@ Connect to a Snap by calling the [`wallet_requestSnaps`](/wallet/reference/walle
 method from your dapp.
 If a user doesn't have the Snap installed in their MetaMask wallet, MetaMask prompts the user to
 install the Snap.
+
 The following are different possible outcomes from calling `wallet_requestSnaps`.
 
 ### User rejects the installation request
