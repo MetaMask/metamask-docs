@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Localization
 
-Localize your Snap to display your Snap's user interface (UI) text and textual metadata (such as
+You can localize your Snap to display your Snap's user interface (UI) text and textual metadata (such as
 title and description) in the user's language.
 
 ## Steps

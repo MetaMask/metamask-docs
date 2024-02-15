@@ -5,8 +5,8 @@ sidebar_position: 3
 
 # Non-EVM networks
 
-The [Snaps API](../reference/snaps-api.md) allows you to manage users' non-EVM accounts and assets
-with their approval.
+You can manage users' non-EVM accounts and assets with their approval, using
+[Snaps API](../reference/snaps-api.md) methods.
 
 :::caution important
 Managing users' keys comes with great responsibility: Misplaced or stolen
