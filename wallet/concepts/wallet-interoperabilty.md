@@ -41,6 +41,8 @@ The following third-party libraries support EIP-6963:
 
 - [MIPD Store](https://github.com/wevm/mipd)
 
+- [RainbowKit](https://www.rainbowkit.com/)
+
 ### MetaMask SDK
 
 The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks

@@ -15,7 +15,7 @@ This reference describes the syntax of the Snaps command line interface (CLI) op
 
 You can specify options:
 
-- In the [configuration file](../../concepts/files.md#configuration-file).
+- In the [configuration file](../../learn/about-snaps/files.md#configuration-file).
 
 - On the command line using the `yarn mm-snap` command.
 
@@ -49,7 +49,7 @@ bundle: 'out/bundle.js'
 
 <!--/tabs-->
 
-Path to the Snap [bundle file](../../concepts/files.md#bundle-file).
+Path to the Snap [bundle file](../../learn/about-snaps/files.md#bundle-file).
 The default is `dist/bundle.js`.
 
 You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
@@ -174,7 +174,7 @@ fix: false
 
 <!--/tabs-->
 
-When validating the Snap [manifest file](../../concepts/files.md#manifest-file) using the
+When validating the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) using the
 [`manifest`](subcommands.md#m-manifest) subcommand, indicates whether to make necessary changes to
 the manifest file.
 The default is `true`.
@@ -216,7 +216,7 @@ manifest: false
 
 <!--/tabs-->
 
-Indicates whether to validate the Snap [manifest file](../../concepts/files.md#manifest-file).
+Indicates whether to validate the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 The default is `true`.
 
 You can use this option with the [`build`](subcommands.md#b-build) and

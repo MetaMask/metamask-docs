@@ -1,6 +1,6 @@
 ---
 description: Request permissions in a manifest file.
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Request permissions
@@ -17,7 +17,7 @@ Snaps and dapps follow the [EIP-2255 wallet permissions specification](https://e
 ### Snaps API methods
 
 Request permission to call [Snaps API methods](../reference/snaps-api.md) in the
-`initialPermissions` field of the Snap [manifest file](../concepts/files.md#manifest-file).
+`initialPermissions` field of the Snap [manifest file](../learn/about-snaps/files.md#manifest-file).
 For example, to request to call [`snap_dialog`](../reference/snaps-api.md#snap_dialog), add the
 following to the manifest file:
 
@@ -31,7 +31,7 @@ following to the manifest file:
 
 Endowments are a type of permission.
 Request endowments in the `initialPermissions` field of the Snap
-[manifest file](../concepts/files.md#manifest-file).
+[manifest file](../learn/about-snaps/files.md#manifest-file).
 See the [Snaps permissions reference](../reference/permissions.md) for the full list of endowments.
 
 For example, to request the [`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access)

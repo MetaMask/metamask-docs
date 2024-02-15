@@ -49,7 +49,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript
-import { MetaMaskSDK } from '@metamask/sdk';
+import { MetaMaskSDK } from "@metamask/sdk";
 ```
 
 ### 3. Instantiate the SDK
@@ -57,15 +57,16 @@ import { MetaMaskSDK } from '@metamask/sdk';
 Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 
 ```javascript
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "JavaScript example dapp",
     url: window.location.href,
-  }
+  },
   // Other options
-);
+});
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 ```
 
 :::note Important SDK options
@@ -85,7 +86,7 @@ Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 prompts the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: 'eth_requestAccounts', params: [] });
+ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
 
 ## Example
@@ -93,17 +94,18 @@ ethereum.request({ method: 'eth_requestAccounts', params: [] });
 You can copy the full JavaScript example to get started:
 
 ```javascript title="index.js"
-import { MetaMaskSDK } from '@metamask/sdk';
+import { MetaMaskSDK } from "@metamask/sdk";
 
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example JavaScript Dapp",
     url: window.location.href,
-  }
+  },
   // Other options
-);
+});
 
-const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
 
 ethereum.request({ method: 'eth_requestAccounts', params: [] });
 ```

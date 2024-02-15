@@ -16,13 +16,13 @@ detect when the user changes networks.
 For example, the following code detects a user's network and when the user changes networks:
 
 ```javascript title="index.js"
-const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+const chainId = await window.ethereum.request({ method: "eth_chainId" });
 
-window.ethereum.on('chainChanged', handleChainChanged);
+window.ethereum.on("chainChanged", handleChainChanged);
 
 function handleChainChanged(chainId) {
-  // We recommend reloading the page, unless you must do otherwise.
-  window.location.reload();
+    // We recommend reloading the page, unless you must do otherwise.
+    window.location.reload();
 }
 ```
 

@@ -1,35 +1,35 @@
 ---
-description: Learn about the Keyring API.
-sidebar_position: 7
+description: Connect to custom EVM accounts using the Keyring API.
+sidebar_position: 4
 sidebar_custom_props:
   flask_only: true
 tags:
   - Keyring API
 ---
 
-# About the Keyring API
+# Custom EVM accounts
 
 The Keyring API integrates custom EVM accounts inside MetaMask.
 You can use the Keyring API to display custom accounts, such as multi-party computation (MPC)
 accounts, alongside regular MetaMask accounts in the user interface:
 
 <p align="center">
-<img src={require('../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
 </p>
 
-To use the Keyring API, you first [implement the API in an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
+To use the Keyring API, you first [implement the API in an account management Snap](create-account-snap.md)
 (also known as an "account Snap").
-You can then [call Keyring API methods from a companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
+You can then [call Keyring API methods from a companion dapp](create-companion-dapp.md)
 to enable users to create and interact with the custom accounts.
 
 :::flaskOnly
 :::
 
 :::tip see also
-- [Create an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
-- [Create an account management companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
-- [Account management Snap security guidelines](../how-to/use-keyring-api/security.md)
-- [Keyring API reference](../reference/keyring-api/index.md)
+- [Create an account management Snap](create-account-snap.md)
+- [Create an account management companion dapp](create-companion-dapp.md)
+- [Account management Snap security guidelines](security.md)
+- [Keyring API reference](../../reference/keyring-api/index.md)
 :::
 
 ## System context diagram
@@ -135,7 +135,7 @@ User ->>+ Site: Create new account
 Site ->> Site: Custom logic to create account
 Site ->>+ Snap: keyring_createAccount(options)
 Snap ->> Snap: Custom logic to create account
-Snap ->>+ MetaMask: snap_manageAccounts("notify:accountCreated", account)
+Snap ->>+ MetaMask: snap_manageAccounts(<br/>"notify:accountCreated", account)
 User ->> MetaMask: Approve account creation
 MetaMask -->>- Snap: OK
 Snap -->>- Site: OK
@@ -143,11 +143,11 @@ Site -->>- User: Done
 ```
 
 The companion dapp presents a user interface allowing the user to configure their custom account.
-The dapp creates an account using [`keyring_createAccount`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#createaccount).
+The dapp creates an account using [`keyring_createAccount`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md#createaccount).
 
-The Snap keeps track of the accounts that it creates using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+The Snap keeps track of the accounts that it creates using [`snap_manageState`](../../reference/snaps-api.md#snap_managestate).
 Once the Snap has created an account, it notifies MetaMask using
-[`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts).
+[`snap_manageAccounts`](../../reference/snaps-api.md#snap_manageaccounts).
 
 Once the Snap has created an account, that account can be used to sign messages and transactions.
 
@@ -190,7 +190,7 @@ User ->> MetaMask: Approve request
 
 MetaMask ->>+ Snap: keyring_submitRequest(request)
 Snap ->> Snap: Custom logic to handle request
-Snap -->>- MetaMask: { pendind: false, result }
+Snap -->>- MetaMask: { pending: false, result }
 
 MetaMask -->>- Dapp: result
 
@@ -202,9 +202,9 @@ At that point, MetaMask detects that this interaction is requested for an accoun
 account management Snap.
 
 After the user approves the transaction in MetaMask, MetaMask calls
-[`keyring_submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest), which
+[`keyring_submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest), which
 receives the original RPC request and returns a
-[`SubmitRequestResponse`](../reference/keyring-api/variables/SubmitRequestResponseStruct.md)
+[`SubmitRequestResponse`](../../reference/keyring-api/variables/SubmitRequestResponseStruct.md)
 with `pending` set to `false`, and `result` set to the requested signature.
 
 ### Asynchronous transaction flow
@@ -250,7 +250,7 @@ Snap -->>- Site: request
 Site ->> Site: Custom logic to handle request
 Site ->>+ Snap: keyring_approveRequest(id, data?)
 Snap ->> Snap: Custom logic to handle request
-Snap ->>+ MetaMask: snap_manageAccounts("notify:requestApproved", { id, result })
+Snap ->>+ MetaMask: snap_manageAccounts(<br/>"notify:requestApproved", { id, result })
 
 MetaMask -->> Dapp: result
 MetaMask -->>- Snap: OK
@@ -262,20 +262,20 @@ Dapp -->>- User: Done
 
 The flow starts the same way as the [synchronous flow](#synchronous-transaction-flow): a user or
 dapp initiates a [sign request](#supported-signing-methods).
-After approval, MetaMask calls [`keyring_submitRequest`](../reference/keyring-api/type-aliases/Keyring.md#submitrequest).
+After approval, MetaMask calls [`keyring_submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest).
 
 Since the Snap doesn't answer the request directly, it stores the pending request in its internal
-state using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+state using [`snap_manageState`](../../reference/snaps-api.md#snap_managestate).
 The Snap sends a `{ pending: true, redirect? }` response to indicate that the request will be
 handled asynchronously.
 This response can optionally contain a redirect URL that MetaMask will open in a new tab to allow
 the user to interact with the Snap companion dapp.
 
 The companion dapp gets the Snap's pending request using
-[`keyring_getRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#getrequest).
+[`keyring_getRequest`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md#getrequest).
 It resolves the request using
-[`keyring_approveRequest`](../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest),
-and the Snap resolves the request using [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts),
+[`keyring_approveRequest`](../../reference/keyring-api/classes/KeyringSnapRpcClient.md#approverequest),
+and the Snap resolves the request using [`snap_manageAccounts`](../../reference/snaps-api.md#snap_manageaccounts),
 notifying MetaMask of the result.
 
 ## Supported signing methods

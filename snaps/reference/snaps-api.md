@@ -5,15 +5,19 @@ toc_max_heading_level: 2
 
 # Snaps API
 
-Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../concepts/apis.md#snaps-api).
+Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
 To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
 manifest file.
 
-## snap_dialog
+## `snap_dialog`
 
 Displays a dialog in the MetaMask UI.
 There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
 [confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
+
+:::caution
+Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [`snap_getClientStatus`](#snap_getclientstatus).
+:::
 
 ### Alert dialog
 
@@ -24,7 +28,7 @@ Displays an alert that can only be acknowledged.
 An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`'Alert'`).
-- `content` - The content of the alert, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
 
 #### Example
 
@@ -54,7 +58,7 @@ Displays a confirmation that can be accepted or rejected.
 An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`'Confirmation'`).
-- `content` - The content of the confirmation, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
 
 #### Returns
 
@@ -90,7 +94,7 @@ Displays a prompt where the user can enter a text response.
 An object containing the contents of the prompt dialog:
 
 - `type` - The type of dialog (`'Prompt'`).
-- `content` - The content of the prompt, as a [custom UI](../how-to/use-custom-ui.md) component.
+- `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
 
 #### Returns
@@ -117,7 +121,7 @@ const walletAddress = await snap.request({
 // `walletAddress` will be a string containing the address entered by the user
 ```
 
-## snap_getBip32Entropy
+## `snap_getBip32Entropy`
 
 :::danger important
 If you call this method, you receive the user's parent key for the derivation path they request.
@@ -205,7 +209,7 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 
 <!--/tabs-->
 
-## snap_getBip32PublicKey
+## `snap_getBip32PublicKey`
 
 Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the
 derivation path specified by the `path` parameter.
@@ -264,7 +268,7 @@ console.log(dogecoinPublicKey);
 
 <!--/tabs-->
 
-## snap_getBip44Entropy
+## `snap_getBip44Entropy`
 
 :::danger important
 If you call this method, you receive the user's parent key for the protocol they request.
@@ -358,7 +362,44 @@ const addressKey1 = await deriveDogecoinAddress(1);
 
 <!--/tabs-->
 
-## snap_getEntropy
+## `snap_getClientStatus`
+
+Gets the locked status of the Snaps client.
+
+It is useful to check if MetaMask is locked in the following situations:
+
+- When running background operations that require MetaMask to be unlocked, for example, [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
+- When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
+
+### Returns
+
+`true` if MetaMask is locked, `false` if MetaMask is unlocked.
+
+### Example
+
+```typescript
+import type { OnCronjobHandler } from '@metamask/snaps-sdk';
+import { MethodNotFoundError } from '@metamask/snaps-sdk';
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case 'execute':
+      // Find out if MetaMask is locked
+      const { locked } = await snap.request({
+        method: 'snap_getClientStatus'
+      });
+
+      if (!locked) {
+        // Do something that requires MetaMask to be unlocked, like access encrypted state
+      }
+
+    default:
+      throw new MethodNotFoundError();
+  }
+};
+```
+
+## `snap_getEntropy`
 
 Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
 You can use this entropy to generate a private key, or any other value that requires a high level of
@@ -412,7 +453,58 @@ console.log(entropy);
 
 <!--/tabs-->
 
-## snap_getLocale
+## `snap_getFile`
+
+Gets a static file's content in UTF-8, Base64, or hexadecimal.
+The file must be [specified in the Snap's manifest file](../features/static-files.md).
+
+### Parameters
+
+An object containing:
+
+- `path` - The path to the file, relative to the Snap's package directory (that is, one level above `src`).
+- `encoding` (optional) - One of `utf8`, `base64`, or `hex`. The default is `base64`.
+
+### Returns
+
+The file content as a string in the requested encoding.
+
+### Example
+
+<!--tabs-->
+
+# Manifest file
+
+```json
+"source": {
+  "shasum": "xxx",
+  "location": {
+    // ...
+  },
+  "files": [
+    "./files/myfile.bin"
+  ]
+}
+```
+
+# JavaScript
+
+```javascript
+const contents = await snap.request({
+  method: 'snap_getFile',
+  params: {
+    path: './files/myfile.bin',
+    encoding: 'hex',
+  },
+});
+
+// `0x...`
+console.log(contents);
+```
+
+<!--/tabs-->
+
+## `snap_getLocale`
 
 :::flaskOnly
 :::
@@ -446,12 +538,12 @@ await snap.request({
 });
 ```
 
-## snap_manageAccounts
+## `snap_manageAccounts`
 
 :::flaskOnly
 :::
 
-Manages [account management Snap](../concepts/keyring-api.md) accounts.
+Manages [account management Snap](../features/custom-evm-accounts/index.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
 - [`createAccount`](#createaccount)
@@ -675,10 +767,19 @@ class MyKeyring implements Keyring {
 }
 ```
 
-## snap_manageState
+## `snap_manageState`
 
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
-The data is automatically encrypted using a Snap-specific key and automatically decrypted when retrieved.
+By default, the data is automatically encrypted using a Snap-specific key and automatically
+decrypted when retrieved.
+You can set `encrypted` to `false` to use unencrypted storage.
+
+:::note
+Accessing encrypted state requires MetaMask to be unlocked.
+If you need to access encrypted state in a background task such as a cron job, you can use
+[`snap_getClientStatus`](#snap_getclientstatus) to ensure that MetaMask is unlocked, preventing an
+unexpected password request popup.
+:::
 
 ### Parameters
 
@@ -686,6 +787,11 @@ An object containing:
 
 - `operation` - The state operation to perform (`'clear'`, `'get'`, or `'update'`).
 - `newState` - The value to update state with if the operation is `update`, and nothing otherwise.
+- `encrypted` (optional) - Indicates whether the Snap will encrypt the data.
+  The default is `true`.
+  If set to `false`, the Snap will use a separate storage section, and will not encrypt the data.
+  This is useful to access the data from background operations without requiring the user to enter
+  their password in the case that MetaMask is locked.
 
 ### Returns
 
@@ -716,7 +822,7 @@ await snap.request({
 });
 ```
 
-## snap_notify
+## `snap_notify`
 
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.

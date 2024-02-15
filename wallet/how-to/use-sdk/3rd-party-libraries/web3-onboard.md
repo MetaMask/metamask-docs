@@ -36,7 +36,7 @@ npm i @web3-onboard/metamask
 In your project script, add the following to import the module:
 
 ```javascript
-import metamaskSDK from '@web3-onboard/metamask'
+import metamaskSDK from "@web3-onboard/metamask";
 ```
 
 ### 3. Instantiate the module
@@ -45,12 +45,14 @@ Instantiate the module using any [JavaScript SDK options](../../../reference/sdk
 example, [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata):
 
 ```javascript
-const metamaskSDKWallet = metamaskSDK({options: {
-  extensionOnly: false,
-  dappMetadata: {
-    name: 'Demo Web3Onboard'
-  }
-}})
+const metamaskSDKWallet = metamaskSDK({
+    options: {
+        extensionOnly: false,
+        dappMetadata: {
+            name: "Example Web3-Onboard Dapp",
+        },
+    },
+});
 ```
 
 ### 4. Use the module
@@ -59,15 +61,15 @@ Use the module as follows:
 
 ```javascript
 const onboard = Onboard({
-  // Other Onboard options
-  wallets: [
-    metamaskSDKWallet
-    // Other wallets
-  ]
-})
+    // Other Onboard options
+    wallets: [
+        metamaskSDKWallet,
+        // Other wallets
+    ],
+});
 
-const connectedWallets = await onboard.connectWallet()
-console.log(connectedWallets)
+const connectedWallets = await onboard.connectWallet();
+console.log(connectedWallets);
 ```
 
 ## Example

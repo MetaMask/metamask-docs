@@ -23,7 +23,7 @@ manifest file:
 
 ## Endowments
 
-### endowment:cronjob
+### `endowment:cronjob`
 
 To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
 This permission allows the Snap to specify cron jobs that trigger the
@@ -59,7 +59,7 @@ Specify this permission in the manifest file as follows:
 
 ```
 
-### endowment:ethereum-provider
+### `endowment:ethereum-provider`
 
 To communicate with a node using MetaMask, a Snap must request the `endowment:ethereum-provider` permission.
 This permission exposes the `ethereum` global to the Snap execution environment, allowing Snaps to
@@ -76,10 +76,10 @@ Specify this permission in the manifest file as follows:
 
 :::note 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
-See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not available to Snaps.
+See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
 :::
 
-### endowment:page-home
+### `endowment:page-home`
 
 :::flaskOnly
 :::
@@ -87,7 +87,7 @@ See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not availab
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../how-to/use-custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+You can use any [custom UI components](../features/custom-ui.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
@@ -97,12 +97,12 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-### endowment:keyring
+### `endowment:keyring`
 
 :::flaskOnly
 :::
 
-For a dapp to call [Keyring API](../concepts/keyring-api.md) methods on an account management Snap,
+For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
 the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
@@ -117,7 +117,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-### endowment:lifecycle-hooks
+### `endowment:lifecycle-hooks`
 
 To run an action when the user installs or updates the Snap, a Snap must request the `endowment:lifecycle-hooks` permission.
 This permission allows the Snap to expose the 
@@ -133,7 +133,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-### endowment:network-access
+### `endowment:network-access`
 
 To access the internet, a Snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
@@ -141,7 +141,7 @@ This permission exposes the global `fetch` API to the Snaps execution environmen
 :::caution
 `XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
 If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/troubleshoot.md#patch-the-use-of-xmlhttprequest).
+[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -161,7 +161,7 @@ For the Snap to be able to read the response, the server must send an
 [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
 with the value `*` or `null` in the response.
 
-### endowment:rpc
+### `endowment:rpc`
 
 To handle arbitrary JSON-RPC requests, a Snap must request the `endowment:rpc` permission.
 This permission grants a Snap access to JSON-RPC requests sent to the Snap, using the
@@ -203,7 +203,7 @@ Specify this caveat in the manifest file as follows:
 If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
 :::
 
-### endowment:transaction-insight
+### `endowment:transaction-insight`
 
 To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
 This permission grants a Snap read-only access to raw transaction payloads, before they're accepted
@@ -225,7 +225,7 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-### endowment:webassembly
+### `endowment:webassembly`
 
 To use WebAssembly, a Snap must request the `endowment:webassembly` permission.
 This permission exposes the global `WebAssembly` API to the Snap execution environment.
@@ -240,7 +240,7 @@ Specify this permission in the manifest file as follows:
 
 ## Dynamic permissions
 
-### eth_accounts
+### `eth_accounts`
 
 A Snap can request permission to call the [`eth_accounts`](/wallet/reference/eth_accounts) MetaMask
 JSON-RPC API method by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).

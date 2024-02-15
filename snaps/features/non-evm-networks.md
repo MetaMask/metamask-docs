@@ -1,12 +1,12 @@
 ---
-description: Manage users' private keys.
+description: Manage users' non-EVM accounts and assets.
 sidebar_position: 3
 ---
 
-# Manage keys
+# Non-EVM networks
 
-The [Snaps API](../reference/snaps-api.md) allows you to manage users' private keys with
-their approval.
+You can manage users' non-EVM accounts and assets with their approval, using
+[Snaps API](../reference/snaps-api.md) methods.
 
 :::caution important
 Managing users' keys comes with great responsibility: Misplaced or stolen
@@ -21,7 +21,7 @@ The general rule is: **Don't create a situation where your users can lose assets
 :::tip examples of responsible key management:
 
 - Deriving private keys and/or storing them in Snaps persistent storage, without ever moving them
-  out of the [Snaps execution environment](../concepts/execution-environment.md).
+  out of the [Snaps execution environment](../learn/about-snaps/execution-environment.md).
 - Ensuring arbitrary code execution can't access irreversible operations or private keys.
 - Asking the user for consent and informing them of what's going to happen before performing
   irreversible operations.

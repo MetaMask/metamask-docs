@@ -1,6 +1,6 @@
 ---
 description: Learn about the Snaps execution environment.
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Snaps execution environment
@@ -17,7 +17,7 @@ default `snap` global and MetaMask's `ethereum` global.
 A Snap can access the [Snaps API](apis.md#snaps-api) using the `snap` global, and the
 [MetaMask JSON-RPC API](apis.md#metamask-json-rpc-api) using the `ethereum` global.
 To access the `ethereum` global, a Snap must request the
-[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) permission.
+[`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
 :::
 
 Almost all
@@ -30,12 +30,12 @@ The following globals are also available:
 - `console`
 - `crypto`
 - `fetch` (with the
-  [`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access) permission)
+  [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) permission)
 - `setTimeout` / `clearTimeout`
 - `setInterval` / `clearInterval`
 - `SubtleCrypto`
 - `WebAssembly` (with the
-  [`endowment:webassembly`](../reference/permissions.md#endowmentwebassembly) permission)
+  [`endowment:webassembly`](../../reference/permissions.md#endowmentwebassembly) permission)
 - `TextEncoder` / `TextDecoder`
 - `atob` / `btoa`
 - `URL`
