@@ -11,8 +11,6 @@ For example, a Snap can add support for different blockchain networks, add custo
 provide additional functionality using its own APIs.
 This allows MetaMask to be used with a far more diverse set of protocols, dapps, and services.
 
-## Diagrams
-
 The following diagram outlines the high-level architecture of the Snaps system:
 
 ![Snaps architecture diagram](../../assets/snaps-architecture.png)
@@ -24,7 +22,7 @@ The following diagram illustrates how Snaps can [derive non-EVM keys](../../feat
 
 ![Snaps get entropy diagram](../../assets/snaps-getentropy.png)
 
-:::note
+:::caution important
 Snaps cannot access the user's Secret Recovery Phrase.
 Snaps can only derive non-EVM keys using the provided methods.
 Furthermore, any Snap that derives keys must undergo a security audit before it can be made

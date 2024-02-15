@@ -1,6 +1,7 @@
 ---
 description: Learn about the Snaps APIs.
 sidebar_position: 1
+sidebar_label: Snaps APIs
 ---
 
 # About the Snaps APIs
