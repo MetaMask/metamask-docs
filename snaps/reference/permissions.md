@@ -76,7 +76,7 @@ Specify this permission in the manifest file as follows:
 
 :::note 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
-See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not available to Snaps.
+See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
 :::
 
 ### `endowment:page-home`
@@ -87,7 +87,7 @@ See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not availab
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../how-to/use-custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+You can use any [custom UI components](../features/custom-ui.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
@@ -102,7 +102,7 @@ Specify this permission in the manifest file as follows:
 :::flaskOnly
 :::
 
-For a dapp to call [Keyring API](../concepts/keyring-api.md) methods on an account management Snap,
+For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
 the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
@@ -141,7 +141,7 @@ This permission exposes the global `fetch` API to the Snaps execution environmen
 :::caution
 `XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
 If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/troubleshoot.md#patch-the-use-of-xmlhttprequest).
+[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
 :::
 
 Specify this permission in the manifest file as follows:

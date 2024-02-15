@@ -1,6 +1,7 @@
 ---
 description: Learn about the Snaps APIs.
-sidebar_position: 2
+sidebar_position: 1
+sidebar_label: Snaps APIs
 ---
 
 # About the Snaps APIs
@@ -11,12 +12,12 @@ Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API]
 ## Snaps API
 
 Snaps can access the global object `snap`, which has one method: `request`.
-You can use this object to make [Snaps API](../reference/snaps-api.md) requests.
+You can use this object to make [Snaps API](../../reference/snaps-api.md) requests.
 These API methods allow Snaps to extend or modify the functionality of MetaMask.
 
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
+To call each method, you must first [request permission](../../how-to/request-permissions.md) in the Snap
 manifest file.
-For example, to call [`snap_notify`](../reference/snaps-api.md#snap_notify), first request the
+For example, to call [`snap_notify`](../../reference/snaps-api.md#snap_notify), first request the
 `snap_notify` permission:
 
 ```json title="snap.manifest.json"
@@ -79,7 +80,7 @@ Snaps can also call some MetaMask JSON-RPC API methods using the `ethereum` glob
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider.
 
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
-[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) permission.
+[`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
 For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts), first request
 the required permission:
 
@@ -118,15 +119,15 @@ Snaps can call all MetaMask API methods **except** the following:
 ## Custom JSON-RPC APIs
 
 Snaps can implement their own custom JSON-RPC APIs to communicate with dapps and other Snaps.
-To do so, a Snap must expose the [`onRpcRequest`](../reference/entry-points.md#onrpcrequest) entry
-point and request the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission.
+To do so, a Snap must expose the [`onRpcRequest`](../../reference/entry-points.md#onrpcrequest) entry
+point and request the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission.
 
 The Snap's custom API is entirely up to you, as long as it's a valid
 [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
 :::note Does my Snap need a custom API?
 If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
-providing [transaction insights](../reference/entry-points.md#ontransaction), you do not need to
+providing [transaction insights](../../reference/entry-points.md#ontransaction), you do not need to
 implement a custom API.
 However, if you want to do something such as manage the user's keys for a particular protocol and
 create a dapp that sends transactions for that protocol via your Snap, you must implement a custom API.

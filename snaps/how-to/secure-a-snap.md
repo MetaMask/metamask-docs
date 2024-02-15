@@ -1,16 +1,16 @@
 ---
 description: Learn about best practices for creating secure and reliable Snaps.
-sidebar_position: 6
+sidebar_position: 4
 ---
 
-# Snaps security guidelines
+# Secure a Snap
 
 This page outlines essential principles for builders to develop secure and reliable Snaps.
 Use these guidelines when creating your Snap to ensure it is safe for users.
 
-## Managing permissions
+## Manage permissions
 
-The following are guidelines for managing permissions in the Snap [manifest file](files.md/#manifest-file).
+The following are guidelines for [managing permissions](request-permissions.md) in the Snap manifest file.
 
 - **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
@@ -30,7 +30,7 @@ The following are guidelines for managing permissions in the Snap [manifest file
   If your Snap needs this permission, inform the user before communicating with remote servers and
   include a privacy policy in your Snap that explains how data is shared.
 
-## Handling transactions
+## Handle transactions securely
 
 The following are guidelines for handling and signing transactions:
 
@@ -45,7 +45,7 @@ The following are guidelines for handling and signing transactions:
 - **Consentful confirmations** - Before signing a transaction, display a user confirmation prompt
   with all the transaction details as previously mentioned.
 
-## User authorizations
+## Notify users
 
 The following are guidelines for user notifications and authorizations:
 
@@ -94,7 +94,7 @@ The following are guidelines for user notifications and authorizations:
     The URL library provides a much more reliable interface for matching URLs.
     :::
 
-## Securing sensitive information
+## Secure sensitive information
 
 The following are guidelines for handling sensitive or personally identifiable information such as
 user IPs, emails, passwords, and private keys:
@@ -124,7 +124,7 @@ user IPs, emails, passwords, and private keys:
 
 When in doubt, choose friction over convenience for sensitive information.
 
-## Validating parameters
+## Validate parameters
 
 The following are guidelines for validating RPC parameters and handling values:
 
@@ -142,7 +142,7 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../how-to/use-custom-ui.md/#copyable) user
+  as for signing a message, use the [`copyable`](../features/custom-ui.md/#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
@@ -187,7 +187,7 @@ The following are coding security tips and warnings:
 
 - **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
   If you don't, you might encounter errors that require [patching a specific
-  dependency](../how-to/troubleshoot.md/#patch-dependencies) to fix.
+  dependency](debug-a-snap/common-issues.md/#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
   `Date.now`) can expose critical system information, making a user vulnerable to
@@ -205,7 +205,7 @@ The following are coding security tips and warnings:
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.
 
-## Managing dependencies
+## Manage dependencies
 
 The following are guidelines for securing your supply chain:
 
@@ -219,7 +219,7 @@ The following are guidelines for securing your supply chain:
   We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of
   your stack and following security best practices for your dapp or server.
 
-## Publishing and serving your Snap
+## Publish and serve your Snap
 
 The following are guidelines for making your Snap available to users safely:
 

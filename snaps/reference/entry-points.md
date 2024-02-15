@@ -8,7 +8,7 @@ Snaps can expose the following entry points.
 
 ## `onRpcRequest`
 
-To implement a [custom JSON-RPC API](../concepts/apis.md#custom-json-rpc-apis) to communicate with
+To implement a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) to communicate with
 dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
 Whenever the Snap receives a JSON-RPC request, MetaMask calls the `onRpcRequest` handler method.
 
@@ -92,7 +92,7 @@ An object containing:
 
 #### Returns
 
-A content object displayed using [custom UI](../how-to/use-custom-ui.md), alongside the confirmation
+A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
 for the transaction that `onTransaction` was called with.
 
 #### Example
@@ -437,7 +437,7 @@ None.
 
 #### Returns
 
-A content object displayed using [custom UI](../how-to/use-custom-ui.md).
+A content object displayed using [custom UI](../features/custom-ui.md).
 
 #### Example
 

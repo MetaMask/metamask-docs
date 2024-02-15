@@ -11,7 +11,7 @@ information in an alert dialog.
 
 ## Prerequisites
 
-- [MetaMask Flask installed](../get-started/install-flask.md)
+- [MetaMask Flask installed](../../get-started/install-flask.md)
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
 - [Yarn](https://yarnpkg.com/)
@@ -71,7 +71,7 @@ This is a free icon, **Gas** by Mello from
 ### 3. Enable network access
 
 To enable your Snap to use the `fetch` API, make a request for the
-[`endowment:network-access`](../reference/permissions.md#endowmentnetwork-access) permission by
+[`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) permission by
 adding `"endowment:network-access": {}` to the `initialPermissions` object in `snap.manifest.json`:
 
 ```json title="snap.manifest.json"
@@ -155,7 +155,7 @@ To build and test your Snap:
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
-    <img src={require('../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
+    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
 
     This is a boilerplate test dapp for installing and testing your Snap.
 
@@ -171,7 +171,7 @@ To build and test your Snap:
 6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-<img src={require('../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
 </p>
 
 Congratulations!
@@ -205,4 +205,4 @@ If you change the method name, make sure to change the method name in `/packages
 to match.
 
 After you have made all necessary changes, you can
-[publish your Snap to npm](../how-to/develop-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../../how-to/publish-a-snap.md#publish-your-snap).
