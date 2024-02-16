@@ -10,7 +10,7 @@ You can also use a tool such as [cURL](https://curl.se/) or [Postman](https://ww
 call the REST APIs.
 
 :::tip
-View the [API reference content](api-reference/index.md) to view the `curl` command for each API. 
+View the [API reference content](api-reference/index.md) to view the `curl` command for each API.
 :::
 
 ## Prerequisites
@@ -77,7 +77,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 const Auth = Buffer.from(
-  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
+  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET
 ).toString("base64");
 
 // The chain ID of the supported network
@@ -91,7 +91,7 @@ const chainId = 1;
         headers: {
           Authorization: `Basic ${Auth}`,
         },
-      },
+      }
     );
     console.log("Suggested gas fees:", data);
   } catch (error) {

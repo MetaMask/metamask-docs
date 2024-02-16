@@ -51,12 +51,10 @@ curl -X 'GET' \
 ```javascript
 const axios = require("axios");
 
-const apiKey = '<API-KEY>'; // replace with your API key
-const apiKeySecret = '<API-KEY-SECRET>'; // replace with your API key secret
+const apiKey = "<API-KEY>"; // replace with your API key
+const apiKeySecret = "<API-KEY-SECRET>"; // replace with your API key secret
 
-const Auth = Buffer.from(
-  apiKey + ":" + apiKeySecret,
-).toString("base64");
+const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64");
 
 // The chain ID of the supported network
 const chainId = 1;
@@ -69,7 +67,7 @@ const chainId = 1;
         headers: {
           Authorization: `Basic ${Auth}`,
         },
-      },
+      }
     );
     console.log("Base fee history:", data);
   } catch (error) {
@@ -88,4 +86,3 @@ const chainId = 1;
   "baseFeePercentile": "23.227829059"
 }
 ```
-

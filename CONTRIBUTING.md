@@ -13,7 +13,7 @@ guide in some places.
 - [Style guide](#style-guide)
 - [Add images](#add-images)
 - [Format Markdown and MDX](#format-markdown-and-mdx)
-    - [Live code blocks](#live-code-blocks)
+  - [Live code blocks](#live-code-blocks)
 
 ## Contribution workflow
 
@@ -35,10 +35,10 @@ To contribute changes:
 2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
    this repository to your computer and navigate into it.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-docs.git
-    cd metamask-docs
-    ```
+   ```bash
+   git clone https://github.com/MetaMask/metamask-docs.git
+   cd metamask-docs
+   ```
 
    > **Note**: If you don't have write access to this repository, you must [fork the
    > repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository)
@@ -54,18 +54,18 @@ To contribute changes:
 
 3. [Initialize and update the submodule.](#update-the-submodule)
 
-    ```bash
-    git submodule init && git submodule update
-    ```
+   ```bash
+   git submodule init && git submodule update
+   ```
 
 4. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
    naming it appropriately.
    We recommend including the issue number and a short description in the branch name (for example,
    `183-doc-cli-option`), which is a reminder to fix only one issue in a PR.
 
-    ```bash
-    git checkout -b <ISSUE-NUM>-<ISSUE-DESC>
-    ```
+   ```bash
+   git checkout -b <ISSUE-NUM>-<ISSUE-DESC>
+   ```
 
    > **Tip:** You can use a Git client such as [Fork](https://fork.dev/) instead of the command line.
 
@@ -75,6 +75,7 @@ To contribute changes:
    and [format your Markdown correctly](https://docs-template.consensys.net/contribute/format-markdown).
 
    > **Notes:**
+   >
    > - All documentation content is located in the `wallet` and `snaps` directories.
    > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
    >   `snaps-sidebar.js` to add the page to the
@@ -88,11 +89,11 @@ To contribute changes:
 7. Add and commit your changes, briefly describing your changes in the commit message.
    Push your changes to the remote origin.
 
-    ```bash
-    git add *
-    git commit -m "<COMMIT-MESSAGE>"
-    git push origin
-    ```
+   ```bash
+   git add *
+   git commit -m "<COMMIT-MESSAGE>"
+   git push origin
+   ```
 
 8. On [this repository on GitHub](https://github.com/MetaMask/metamask-docs), you’ll see a banner
    prompting you to create a PR with your recent changes.
@@ -163,7 +164,7 @@ For example:
 ````jsx
 ```javascript codesandbox=vanilla
 // JavaScript live code block
-```
+```;
 ````
 
 `remark-codesandbox` allows for simple code blocks where the content of the block replaces the
@@ -182,6 +183,7 @@ If you need to test analytics events in your local development enviorment be sur
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"
 ```
+
 Then build the project in production mode using the following command:
 
 ```bash
