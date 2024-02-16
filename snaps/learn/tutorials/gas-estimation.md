@@ -80,7 +80,7 @@ adding `"endowment:network-access": {}` to the `initialPermissions` object in `s
   "endowment:rpc": {
     "dapps": true,
     "snaps": false
-  }, 
+  },
   "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
@@ -96,11 +96,11 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the top of the file:
 
 ```typescript title="index.ts"
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
-import { panel, text } from '@metamask/snaps-ui';
+import { OnRpcRequestHandler } from "@metamask/snaps-types";
+import { panel, text } from "@metamask/snaps-ui";
 
 async function getFees() {
-  const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow'); 
+  const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow");
   return response.text();
 }
 ```
@@ -117,21 +117,21 @@ Rewrite the `hello` method with the following code:
 ```typescript title="index.ts"
 export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
-      return getFees().then(fees => {
+    case "hello":
+      return getFees().then((fees) => {
         return snap.request({
-          method: 'snap_dialog',
+          method: "snap_dialog",
           params: {
-            type: 'alert',
+            type: "alert",
             content: panel([
               text(`Hello, **${origin}**!`),
               text(`Current gas fee estimates: ${fees}`),
             ]),
-          }
+          },
         });
       });
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -141,30 +141,34 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
 To build and test your Snap:
 
 1. Open `package.json` in the root directory of the project, and increase the `"version"` (if the `"version"` is
-    `0.1.0`, increase it to `0.2.0`).
+   `0.1.0`, increase it to `0.2.0`).
 
 2. From the command line, run `yarn start`.
-    In the terminal, at the bottom of the message log, you see the browser URL:
+   In the terminal, at the bottom of the message log, you see the browser URL:
 
-    ```bash
-    You can now view site in the browser.
-    
-      http://localhost:8000/
-    ```
+   ```bash
+   You can now view site in the browser.
+
+     http://localhost:8000/
+   ```
 
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
-    A page like the following displays:
+   A page like the following displays:
 
+<<<<<<< Updated upstream:snaps/learn/tutorials/gas-estimation.md
     <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
+=======
+   <img src={require('../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
+>>>>>>> Stashed changes:snaps/tutorials/gas-estimation.md
 
-    This is a boilerplate test dapp for installing and testing your Snap.
+   This is a boilerplate test dapp for installing and testing your Snap.
 
 4. Select **Connect** to connect Flask to the dapp.
-    After connecting, you're prompted to install the Snap with the following permissions:
+   After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow dapps to communicate directly with this Snap.**
-    - **Access the internet.**
-    - **Display dialog windows in MetaMask.**
+   - **Allow dapps to communicate directly with this Snap.**
+   - **Access the internet.**
+   - **Display dialog windows in MetaMask.**
 
 5. Select **Approve & install**.
 

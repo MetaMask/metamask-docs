@@ -35,18 +35,18 @@ A promise containing the return of the implemented method.
 # TypeScript
 
 ```typescript
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import { OnRpcRequestHandler } from "@metamask/snaps-types";
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -56,11 +56,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -152,7 +152,7 @@ module.exports.onTransaction = async ({
 This feature enables transaction insight Snaps to return an optional severity level of `critical`.
 MetaMask shows a modal with the warning before the user can confirm the transaction.
 Using the previous example for `onTransaction`, the following code adds a single line to return an
-insight with the severity level `critical`: 
+insight with the severity level `critical`:
 
 <!--tabs-->
 
@@ -242,21 +242,21 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 # TypeScript
 
 ```typescript
-import { OnCronjobHandler } from '@metamask/snaps-types';
+import { OnCronjobHandler } from "@metamask/snaps-types";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case 'exampleMethodOne':
+    case "exampleMethodOne":
       return snap.request({
-        method: 'snap_notify',
+        method: "snap_notify",
         params: {
-          type: 'inApp',
+          type: "inApp",
           message: `Hello, world!`,
         },
       });
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -266,17 +266,17 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 ```js
 module.exports.onCronjob = async ({ request }) => {
   switch (request.method) {
-    case 'exampleMethodOne':
+    case "exampleMethodOne":
       return snap.request({
-        method: 'snap_notify',
+        method: "snap_notify",
         params: {
-          type: 'inApp',
+          type: "inApp",
           message: `Hello, world!`,
         },
       });
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -286,7 +286,7 @@ module.exports.onCronjob = async ({ request }) => {
 ## `onInstall`
 
 To run an action on installation, a Snap must expose the `onInstall` entry point.
-MetaMask calls the `onInstall` handler method after the Snap is installed successfully. 
+MetaMask calls the `onInstall` handler method after the Snap is installed successfully.
 
 :::note
 For MetaMask to call the Snap's `onInstall` method, you must request the
@@ -297,7 +297,6 @@ For MetaMask to call the Snap's `onInstall` method, you must request the
 
 None.
 
-
 #### Example
 
 <!--tabs-->
@@ -305,18 +304,18 @@ None.
 # TypeScript
 
 ```typescript
-import type { OnInstallHandler } from '@metamask/snaps-sdk';
-import { heading, panel, text } from '@metamask/snaps-sdk';
+import type { OnInstallHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
-    method: 'snap_dialog',
+    method: "snap_dialog",
     params: {
-      type: 'alert',
+      type: "alert",
       content: panel([
-        heading('Thank you for installing my Snap'),
+        heading("Thank you for installing my Snap"),
         text(
-          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io)."
         ),
       ]),
     },
@@ -327,17 +326,17 @@ export const onInstall: OnInstallHandler = async () => {
 # JavaScript
 
 ```js
-import { heading, panel, text } from '@metamask/snaps-sdk';
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onInstall = async () => {
   await snap.request({
-    method: 'snap_dialog',
+    method: "snap_dialog",
     params: {
-      type: 'alert',
+      type: "alert",
       content: panel([
-        heading('Thank you for installing my Snap'),
+        heading("Thank you for installing my Snap"),
         text(
-          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io)."
         ),
       ]),
     },
@@ -350,7 +349,7 @@ module.exports.onInstall = async () => {
 ## `onUpdate`
 
 To run an action on update, a Snap must expose the `onUpdate` entry point.
-MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
+MetaMask calls the `onUpdate` handler method after the Snap is updated successfully.
 
 :::note
 For MetaMask to call the Snap's `onUpdate` method, you must request the
@@ -361,7 +360,6 @@ For MetaMask to call the Snap's `onUpdate` method, you must request the
 
 None.
 
-
 #### Example
 
 <!--tabs-->
@@ -369,22 +367,18 @@ None.
 # TypeScript
 
 ```typescript
-import type { OnUpdateHandler } from '@metamask/snaps-sdk';
-import { heading, panel, text } from '@metamask/snaps-sdk';
+import type { OnUpdateHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
-    method: 'snap_dialog',
+    method: "snap_dialog",
     params: {
-      type: 'alert',
+      type: "alert",
       content: panel([
-        heading('Thank you for updating my Snap'),
-        text(
-          'New features added in this version:',
-        ),
-        text(
-          'Added a dialog that appears when updating'
-        ), 
+        heading("Thank you for updating my Snap"),
+        text("New features added in this version:"),
+        text("Added a dialog that appears when updating"),
       ]),
     },
   });
@@ -394,21 +388,17 @@ export const onUpdate: OnUpdateHandler = async () => {
 # JavaScript
 
 ```js
-import { heading, panel, text } from '@metamask/snaps-sdk';
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onUpdate = async () => {
   await snap.request({
-    method: 'snap_dialog',
+    method: "snap_dialog",
     params: {
-      type: 'alert',
+      type: "alert",
       content: panel([
-        heading('Thank you for updating my Snap'),
-        text(
-          'New features added in this version:',
-        ),
-        text(
-          'Added a dialog that appears when updating'
-        ), 
+        heading("Thank you for updating my Snap"),
+        text("New features added in this version:"),
+        text("Added a dialog that appears when updating"),
       ]),
     },
   });
@@ -423,7 +413,7 @@ module.exports.onUpdate = async () => {
 :::
 
 To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
-expose the `onHomePage` entry point. 
+expose the `onHomePage` entry point.
 MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
 
 :::note
@@ -446,14 +436,14 @@ A content object displayed using [custom UI](../features/custom-ui.md).
 # TypeScript
 
 ```typescript
-import type { OnHomePageHandler } from '@metamask/snaps-sdk';
-import { panel, text, heading } from '@metamask/snaps-sdk';
+import type { OnHomePageHandler } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk";
 
 export const onHomePage: OnHomePageHandler = async () => {
   return {
     content: panel([
-      heading('Hello world!'),
-      text('Welcome to my Snap home page!'),
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
     ]),
   };
 };
@@ -462,13 +452,13 @@ export const onHomePage: OnHomePageHandler = async () => {
 # JavaScript
 
 ```js
-import { panel, text, heading } from '@metamask/snaps-sdk';
+import { panel, text, heading } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
   return {
     content: panel([
-      heading('Hello world!'),
-      text('Welcome to my Snap home page!'),
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
     ]),
   };
 };

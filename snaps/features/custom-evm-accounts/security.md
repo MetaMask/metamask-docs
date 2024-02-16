@@ -14,11 +14,15 @@ Refer to the following security guidelines when [creating an account management 
 :::
 
 :::tip see also
+<<<<<<< Updated upstream:snaps/features/custom-evm-accounts/security.md
 - [About custom EVM accounts](index.md)
+=======
+
+>>>>>>> Stashed changes:snaps/how-to/use-keyring-api/security.md
 - [Create an account management Snap](create-account-snap.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-:::
+  :::
 
 ## Do not add secret information to account objects
 
@@ -29,41 +33,41 @@ For example:
 
 - ❌ **Do NOT do this:**
 
-    ```ts
-    const account: KeyringAccount = {
-      id: uuid(),
-      options: {
-        privateKey: '0x01234...78', // !!! DO NOT DO THIS !!!
-      },
-      address,
-      methods: [
-        EthMethod.PersonalSign,
-        EthMethod.Sign,
-        EthMethod.SignTransaction,
-        EthMethod.SignTypedDataV1,
-        EthMethod.SignTypedDataV3,
-        EthMethod.SignTypedDataV4,
-      ],
-      type: EthAccountType.Eoa,
-    };
-    ```
+  ```ts
+  const account: KeyringAccount = {
+    id: uuid(),
+    options: {
+      privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
+    },
+    address,
+    methods: [
+      EthMethod.PersonalSign,
+      EthMethod.Sign,
+      EthMethod.SignTransaction,
+      EthMethod.SignTypedDataV1,
+      EthMethod.SignTypedDataV3,
+      EthMethod.SignTypedDataV4,
+    ],
+    type: EthAccountType.Eoa,
+  };
+  ```
 
 - ✅ **Do this instead:**
 
-    *Store any secret information that you need in the Snap's state:*
-    
-    ```ts
-    await snap.request({
-      method: 'snap_manageState',
-      params: {
-        operation: 'update',
-        newState: {
-          // Your Snap's state here...
-          privateKey: '0x01234...78',
-        },
+  _Store any secret information that you need in the Snap's state:_
+
+  ```ts
+  await snap.request({
+    method: "snap_manageState",
+    params: {
+      operation: "update",
+      newState: {
+        // Your Snap's state here...
+        privateKey: "0x01234...78",
       },
-    });
-    ```
+    },
+  });
+  ```
 
 ## Limit the methods exposed to dapps
 
@@ -71,7 +75,7 @@ By default, MetaMask enforces the following restrictions on calling Keyring API 
 based on the caller origin:
 
 | Method                        |  MetaMask origin   |    Dapp origin     |
-|:------------------------------|:------------------:|:------------------:|
+| :---------------------------- | :----------------: | :----------------: |
 | `keyring_listAccounts`        | :white_check_mark: | :white_check_mark: |
 | `keyring_getAccount`          | :white_check_mark: | :white_check_mark: |
 | `keyring_createAccount`       |        :x:         | :white_check_mark: |
@@ -103,15 +107,15 @@ The following is an example of implementing such logic:
 
 ```ts
 const permissions: Record<string, string[]> = {
-  'https://<Dapp 1 domain>': [
+  "https://<Dapp 1 domain>": [
     // List of allowed methods for Dapp 1.
   ],
-  'https://<Dapp 2 domain>': [
+  "https://<Dapp 2 domain>": [
     // List of allowed methods for Dapp 2.
   ],
 };
 
-if (origin !== 'metamask' && !permissions[origin]?.includes(request.method)) {
+if (origin !== "metamask" && !permissions[origin]?.includes(request.method)) {
   // Reject the request.
 }
 ```
@@ -175,7 +179,7 @@ For example:
     const privateKey = toBuffer(inputSecretValue);
     // Use `privateKey` here...
   } catch (error) {
-    throw new Error('Invalid private key');
+    throw new Error("Invalid private key");
   }
   ```
 

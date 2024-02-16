@@ -61,9 +61,9 @@ For example, to request permission to connect to the `hello-snap` Snap:
 
 ```js title="index.js"
 await window.ethereum.request({
-  method: 'wallet_requestSnaps',
+  method: "wallet_requestSnaps",
   params: {
-    'npm:hello-snap': {},
+    "npm:hello-snap": {},
   },
 });
 ```

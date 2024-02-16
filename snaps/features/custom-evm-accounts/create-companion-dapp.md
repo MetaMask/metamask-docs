@@ -17,10 +17,14 @@ EVM accounts.
 :::
 
 :::tip see also
+<<<<<<< Updated upstream:snaps/features/custom-evm-accounts/create-companion-dapp.md
 - [About custom EVM accounts](index.md)
+=======
+
+>>>>>>> Stashed changes:snaps/how-to/use-keyring-api/create-companion-dapp.md
 - [Create an account management Snap](create-account-snap.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-:::
+  :::
 
 ## Prerequisites
 
@@ -48,7 +52,7 @@ Create the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringS
 
 ```ts
 import { KeyringSnapRpcClient } from "@metamask/keyring-api";
-import { defaultSnapOrigin as snapId } from '../config';
+import { defaultSnapOrigin as snapId } from "../config";
 
 let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ```

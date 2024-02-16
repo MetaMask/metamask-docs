@@ -74,9 +74,15 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
+<<<<<<< Updated upstream
 :::note 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
 See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
+=======
+:::note
+The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
+See the [list of methods](../concepts/apis.md#metamask-json-rpc-api) not available to Snaps.
+>>>>>>> Stashed changes
 :::
 
 ### `endowment:page-home`
@@ -84,10 +90,15 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 :::flaskOnly
 :::
 
-To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
+To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission.
 This permission allows the Snap to specify a "home page" by exposing the
+<<<<<<< Updated upstream
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
 You can use any [custom UI components](../features/custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+=======
+[`onHomePage`](../reference/entry-points.md#onhomepage) entry point.
+You can use any [custom UI components](../how-to/use-custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+>>>>>>> Stashed changes
 
 Specify this permission in the manifest file as follows:
 
@@ -120,9 +131,9 @@ Specify this permission in the manifest file as follows:
 ### `endowment:lifecycle-hooks`
 
 To run an action when the user installs or updates the Snap, a Snap must request the `endowment:lifecycle-hooks` permission.
-This permission allows the Snap to expose the 
-[`onInstall`](../reference/entry-points.md#oninstall) and 
-[`onUpdate`](../reference/entry-points.md#onupdate) 
+This permission allows the Snap to expose the
+[`onInstall`](../reference/entry-points.md#oninstall) and
+[`onUpdate`](../reference/entry-points.md#onupdate)
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
 Specify this permission in the manifest file as follows:
@@ -182,25 +193,25 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
-Calls from any other origins are rejected. 
+Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs.
+Calls from any other origins are rejected.
 
-Specify this caveat in the manifest file as follows: 
+Specify this caveat in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": { 
+  "endowment:rpc": {
     "allowedOrigins": [
-      "metamask.io", 
+      "metamask.io",
       "consensys.io",
       "npm:@metamask/example-snap"
-    ] 
+    ]
   }
 }
 ```
 
 :::note
-If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
+If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 :::
 
 ### `endowment:transaction-insight`
@@ -261,7 +272,7 @@ Calling `eth_requestAccounts` requires the
 
 ```js
 await ethereum.request({
-  "method": "eth_requestAccounts"
+  method: "eth_requestAccounts",
 });
 ```
 

@@ -16,11 +16,15 @@ Create an account management Snap to connect to custom EVM accounts.
 :::
 
 :::tip see also
+<<<<<<< Updated upstream:snaps/features/custom-evm-accounts/create-account-snap.md
 - [About custom EVM accounts](index.md)
+=======
+
+>>>>>>> Stashed changes:snaps/how-to/use-keyring-api/create-account-snap.md
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-:::
+  :::
 
 ## Prerequisites
 
@@ -136,48 +140,49 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
 
 - An account is created:
 
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
+  ```typescript
+  try {
+    emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
+    // Update your Snap's state...
+  } catch (error) {
+    // Handle the error...
+  }
+  ```
 
-   MetaMask returns an error if the account already exists or the account object is invalid.
+  MetaMask returns an error if the account already exists or the account object is invalid.
 
 - An account is updated:
 
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountUpdated, { account });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   MetaMask returns an error if the account does not exist, the account object is invalid, or the
-   account address changes.
+  ```typescript
+  try {
+    emitSnapKeyringEvent(snap, KeyringEvent.AccountUpdated, { account });
+    // Update your Snap's state...
+  } catch (error) {
+    // Handle the error...
+  }
+  ```
+
+  MetaMask returns an error if the account does not exist, the account object is invalid, or the
+  account address changes.
 
 - An account is deleted:
 
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountDeleted, {
-       id: account.id,
-     });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   The delete event is idempotent, so it is safe to emit even if the account does not exist.
+  ```typescript
+  try {
+    emitSnapKeyringEvent(snap, KeyringEvent.AccountDeleted, {
+      id: account.id,
+    });
+    // Update your Snap's state...
+  } catch (error) {
+    // Handle the error...
+  }
+  ```
+
+  The delete event is idempotent, so it is safe to emit even if the account does not exist.
 
 - A request is approved:
 
+<<<<<<< Updated upstream:snaps/features/custom-evm-accounts/create-account-snap.md
    ```typescript
    try {
      emitSnapKeyringEvent(snap, KeyringEvent.RequestApproved, {
@@ -210,6 +215,40 @@ Notify MetaMask when the following events take place, using the `emitSnapKeyring
    MetaMask returns an error if the request does not exist.
    This event only applies to Snaps that implement the
    [asynchronous transaction flow](index.md#asynchronous-transaction-flow).
+=======
+  ```typescript
+  try {
+    emitSnapKeyringEvent(snap, KeyringEvent.RequestApproved, {
+      id: request.id,
+      result,
+    });
+    // Update your Snap's state...
+  } catch (error) {
+    // Handle the error...
+  }
+  ```
+
+  MetaMask returns an error if the request does not exist.
+  This event only applies to Snaps that implement the
+  [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
+
+- A request is rejected:
+
+  ```typescript
+  try {
+    emitSnapKeyringEvent(snap, KeyringEvent.RequestRejected, {
+      id: request.id,
+    });
+    // Update your Snap's state...
+  } catch (error) {
+    // Handle the error...
+  }
+  ```
+
+  MetaMask returns an error if the request does not exist.
+  This event only applies to Snaps that implement the
+  [asynchronous transaction flow](../../concepts/keyring-api.md#asynchronous-transaction-flow).
+>>>>>>> Stashed changes:snaps/how-to/use-keyring-api/create-account-snap.md
 
 ### 6. Expose the Keyring API
 

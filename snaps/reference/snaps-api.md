@@ -33,15 +33,15 @@ An object containing the contents of the alert dialog:
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from "@metamask/snaps-ui";
 
 await snap.request({
-  method: 'snap_dialog',
+  method: "snap_dialog",
   params: {
-    type: 'Alert',
+    type: "Alert",
     content: panel([
-      heading('Something happened in the system'),
-      text('The thing that happened is...'),
+      heading("Something happened in the system"),
+      text("The thing that happened is..."),
     ]),
   },
 });
@@ -67,15 +67,15 @@ An object containing the contents of the confirmation dialog:
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from "@metamask/snaps-ui";
 
 const result = await snap.request({
-  method: 'snap_dialog',
+  method: "snap_dialog",
   params: {
-    type: 'Confirmation',
+    type: "Confirmation",
     content: panel([
-      heading('Would you like to take the action?'),
-      text('The action is...'),
+      heading("Would you like to take the action?"),
+      text("The action is..."),
     ]),
   },
 });
@@ -104,17 +104,17 @@ The text entered by the user if the prompt was submitted or `null` if the prompt
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from "@metamask/snaps-ui";
 
 const walletAddress = await snap.request({
-  method: 'snap_dialog',
+  method: "snap_dialog",
   params: {
-    type: 'Prompt',
+    type: "Prompt",
     content: panel([
-      heading('What is the wallet address?'),
-      text('Please enter the wallet address to be monitored'),
+      heading("What is the wallet address?"),
+      text("Please enter the wallet address to be monitored"),
     ]),
-    placeholder: '0x123...',
+    placeholder: "0x123...",
   },
 });
 
@@ -183,15 +183,15 @@ its corresponding key material:
 # JavaScript
 
 ```javascript
-import { SLIP10Node } from '@metamask/key-tree';
+import { SLIP10Node } from "@metamask/key-tree";
 
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
 const dogecoinNode = await snap.request({
-  method: 'snap_getBip32Entropy',
+  method: "snap_getBip32Entropy",
   params: {
     // Must be specified exactly in the manifest
-    path: ['m', "44'", "3'"],
-    curve: 'secp256k1',
+    path: ["m", "44'", "3'"],
+    curve: "secp256k1",
   },
 });
 
@@ -253,11 +253,11 @@ The public key as hexadecimal string.
 ```javascript
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
 const dogecoinPublicKey = await snap.request({
-  method: 'snap_getBip32PublicKey',
+  method: "snap_getBip32PublicKey",
   params: {
     // The path and curve must be specified in the initial permissions.
-    path: ['m', "44'", "3'", "0'", '0', '0'],
-    curve: 'secp256k1',
+    path: ["m", "44'", "3'", "0'", "0", "0"],
+    curve: "secp256k1",
     compressed: false,
   },
 });
@@ -334,11 +334,11 @@ and containing its corresponding key material:
 # JavaScript
 
 ```javascript
-import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
+import { getBIP44AddressKeyDeriver } from "@metamask/key-tree";
 
 // This example uses Dogecoin, which has `coin_type` 3.
 const dogecoinNode = await snap.request({
-  method: 'snap_getBip44Entropy',
+  method: "snap_getBip44Entropy",
   params: {
     coinType: 3,
   },
@@ -378,15 +378,15 @@ It is useful to check if MetaMask is locked in the following situations:
 ### Example
 
 ```typescript
-import type { OnCronjobHandler } from '@metamask/snaps-sdk';
-import { MethodNotFoundError } from '@metamask/snaps-sdk';
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+import { MethodNotFoundError } from "@metamask/snaps-sdk";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
-    case 'execute':
+    case "execute":
       // Find out if MetaMask is locked
       const { locked } = await snap.request({
-        method: 'snap_getClientStatus'
+        method: "snap_getClientStatus",
       });
 
       if (!locked) {
@@ -440,10 +440,10 @@ The entropy as a hexadecimal string.
 
 ```javascript
 const entropy = await snap.request({
-  method: 'snap_getEntropy',
+  method: "snap_getEntropy",
   params: {
     version: 1,
-    salt: 'foo', // Optional
+    salt: "foo", // Optional
   },
 });
 
@@ -518,22 +518,20 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 ### Example
 
 ```javascript
-import { panel, text } from '@metamask/snaps-ui';
+import { panel, text } from "@metamask/snaps-ui";
 
-const locale = await snap.request({ method: 'snap_getLocale' });
+const locale = await snap.request({ method: "snap_getLocale" });
 
-let greeting = 'Hello';
-if(locale === 'es') {
-  greeting = 'Hola';
+let greeting = "Hello";
+if (locale === "es") {
+  greeting = "Hola";
 }
 
 await snap.request({
-  method: 'snap_dialog',
+  method: "snap_dialog",
   params: {
-    type: 'Alert',
-    content: panel([
-      text(greeting),
-    ]),
+    type: "Alert",
+    content: panel([text(greeting)]),
   },
 });
 ```
@@ -572,41 +570,40 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript
-import { Keyring, KeyringAccount } from '@metamask/keyring-api';
+import { Keyring, KeyringAccount } from "@metamask/keyring-api";
 
 class MyKeyring implements Keyring {
   // ... other methods
 
   async createAccount(
     name: string,
-    options: Record<string, Json> | null = null,
+    options: Record<string, Json> | null = null
   ): Promise<KeyringAccount> {
-
     const account: KeyringAccount = {
       id: uuid(),
       name,
       options,
       address,
       supportedMethods: [
-        'eth_sendTransaction',
-        'eth_sign',
-        'eth_signTransaction',
-        'eth_signTypedData_v1',
-        'eth_signTypedData_v2',
-        'eth_signTypedData_v3',
-        'eth_signTypedData_v4',
-        'eth_signTypedData',
-        'personal_sign',
+        "eth_sendTransaction",
+        "eth_sign",
+        "eth_signTransaction",
+        "eth_signTypedData_v1",
+        "eth_signTypedData_v2",
+        "eth_signTypedData_v3",
+        "eth_signTypedData_v4",
+        "eth_signTypedData",
+        "personal_sign",
       ],
-      type: 'eip155:eoa',
+      type: "eip155:eoa",
     };
 
     // Store the account in state
 
     await snap.request({
-      method: 'snap_manageAccounts',
+      method: "snap_manageAccounts",
       params: {
-        method: 'createAccount',
+        method: "createAccount",
         params: { account },
       },
     });
@@ -636,7 +633,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript
-import { Keyring, KeyringAccount } from '@metamask/keyring-api';
+import { Keyring, KeyringAccount } from "@metamask/keyring-api";
 
 class MyKeyring implements Keyring {
   // ... other methods
@@ -645,9 +642,9 @@ class MyKeyring implements Keyring {
     // Store the new account details in state
 
     await snap.request({
-      method: 'snap_manageAccounts',
+      method: "snap_manageAccounts",
       params: {
-        method: 'updateAccount',
+        method: "updateAccount",
         params: { account },
       },
     });
@@ -675,7 +672,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript
-import { Keyring } from '@metamask/keyring-api';
+import { Keyring } from "@metamask/keyring-api";
 
 class MyKeyring implements Keyring {
   // ... other methods
@@ -684,9 +681,9 @@ class MyKeyring implements Keyring {
     // Delete the account from state
 
     await snap.request({
-      method: 'snap_manageAccounts',
+      method: "snap_manageAccounts",
       params: {
-        method: 'deleteAccount',
+        method: "deleteAccount",
         params: { id },
       },
     });
@@ -747,8 +744,8 @@ This is usually called as part of the `approveRequest` method of the
 #### Example
 
 ```typescript
-import { Keyring } from '@metamask/keyring-api';
-import { Json } from '@metamask/utils';
+import { Keyring } from "@metamask/keyring-api";
+import { Json } from "@metamask/utils";
 
 class MyKeyring implements Keyring {
   // ... other methods
@@ -757,10 +754,10 @@ class MyKeyring implements Keyring {
     // Do any Snap-side logic to finish approving the request
 
     await snap.request({
-      method: 'snap_manageAccounts',
+      method: "snap_manageAccounts",
       params: {
-        method: 'submitResponse',
-        params: { id, result}
+        method: "submitResponse",
+        params: { id, result },
       },
     });
   }
@@ -802,14 +799,14 @@ The value stored in state if the operation is `get`, and `null` otherwise.
 ```javascript
 // Persist some data.
 await snap.request({
-  method: 'snap_manageState',
-  params: { operation: 'update', newState: { hello: 'world' } },
+  method: "snap_manageState",
+  params: { operation: "update", newState: { hello: "world" } },
 });
 
 // At a later time, get the data stored.
 const persistedData = await snap.request({
-  method: 'snap_manageState',
-  params: { operation: 'get' },
+  method: "snap_manageState",
+  params: { operation: "get" },
 });
 
 console.log(persistedData);
@@ -817,8 +814,8 @@ console.log(persistedData);
 
 // If there's no need to store data anymore, clear it out.
 await snap.request({
-  method: 'snap_manageState',
-  params: { operation: 'clear' },
+  method: "snap_manageState",
+  params: { operation: "clear" },
 });
 ```
 
@@ -842,10 +839,10 @@ An object containing the contents of the notification:
 
 ```javascript
 await snap.request({
-  method: 'snap_notify',
+  method: "snap_notify",
   params: {
-    type: 'inApp',
-    message: 'Hello, world!',
+    type: "inApp",
+    message: "Hello, world!",
   },
 });
 ```

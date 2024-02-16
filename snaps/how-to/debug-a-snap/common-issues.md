@@ -175,14 +175,14 @@ In a production environment this may be a large task depending on the usage of `
 
 ```javascript
 const instance = axios.create({
-  baseURL: 'https://api.github.com/',
+  baseURL: "https://api.github.com/",
 });
 
 instance
-  .get('users/MetaMask')
+  .get("users/MetaMask")
   .then((res) => {
     if (res.status >= 400) {
-      throw new Error('Bad response from server');
+      throw new Error("Bad response from server");
     }
     return res.data;
   })
@@ -197,10 +197,10 @@ instance
 # fetch
 
 ```javascript
-fetch('https://api.github.com/users/MetaMask')
+fetch("https://api.github.com/users/MetaMask")
   .then((res) => {
     if (!res.ok) {
-      throw new Error('Bad response from server');
+      throw new Error("Bad response from server");
     }
     return res.json();
   })

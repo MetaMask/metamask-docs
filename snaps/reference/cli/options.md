@@ -44,7 +44,7 @@ You can specify options:
 # Configuration file
 
 ```js
-bundle: 'out/bundle.js' 
+bundle: "out/bundle.js";
 ```
 
 <!--/tabs-->
@@ -75,7 +75,7 @@ You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
 # Configuration file
 
 ```js
-dist: 'out'
+dist: "out";
 ```
 
 <!--/tabs-->
@@ -107,7 +107,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-depsToTranspile: ['dep1','dep2']
+depsToTranspile: ["dep1", "dep2"];
 ```
 
 <!--/tabs-->
@@ -137,7 +137,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-eval: false
+eval: false;
 ```
 
 <!--/tabs-->
@@ -169,7 +169,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-fix: false
+fix: false;
 ```
 
 <!--/tabs-->
@@ -211,7 +211,7 @@ You can use this option with `mm-snap` or any [subcommand](subcommands.md).
 # Configuration file
 
 ```js
-manifest: false
+manifest: false;
 ```
 
 <!--/tabs-->
@@ -243,7 +243,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-outfileName: 'snap.js'
+outfileName: "snap.js";
 ```
 
 <!--/tabs-->
@@ -275,7 +275,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-port: 9000
+port: 9000;
 ```
 
 <!--/tabs-->
@@ -307,7 +307,7 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 # Configuration file
 
 ```js
-root: 'out'
+root: "out";
 ```
 
 <!--/tabs-->
@@ -339,7 +339,7 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 # Configuration file
 
 ```js
-src: 'lib/index.js'
+src: "lib/index.js";
 ```
 
 <!--/tabs-->
@@ -371,7 +371,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-sourceMaps: true
+sourceMaps: true;
 ```
 
 <!--/tabs-->
@@ -401,7 +401,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-strip: false
+strip: false;
 ```
 
 <!--/tabs-->
@@ -433,7 +433,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 # Configuration file
 
 ```js
-suppressWarnings: true
+suppressWarnings: true;
 ```
 
 <!--/tabs-->
@@ -462,7 +462,7 @@ You can use this option with any [subcommand](subcommands.md).
 # Configuration file
 
 ```js
-transpilationMode: 'localAndDeps'
+transpilationMode: "localAndDeps";
 ```
 
 <!--/tabs-->
@@ -499,7 +499,7 @@ For TypeScript Snaps, `--transpilationMode` must be set to either `localOnly` or
 # Configuration file
 
 ```js
-verboseErrors: false
+verboseErrors: false;
 ```
 
 <!--/tabs-->
@@ -507,7 +507,7 @@ verboseErrors: false
 Indicates whether to display original errors.
 The default is `true`.
 
-You can use this option with any [subcommand](subcommands.md). 
+You can use this option with any [subcommand](subcommands.md).
 
 ### version
 

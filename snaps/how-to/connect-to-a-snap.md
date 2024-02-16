@@ -75,15 +75,15 @@ with the following shape:
 
 ```json
 {
-    "SNAP_ID": {
-        "blocked": false,
-        "enabled": true,
-        "id": "SNAP_ID",
-        "initialPermissions": {
-            // ...all the permissions in the Snap's manifest
-        },
-        "version": "SNAP_VERSION"
-    }
+  "SNAP_ID": {
+    "blocked": false,
+    "enabled": true,
+    "id": "SNAP_ID",
+    "initialPermissions": {
+      // ...all the permissions in the Snap's manifest
+    },
+    "version": "SNAP_VERSION"
+  }
 }
 ```
 
@@ -96,7 +96,7 @@ new installation of the Snap, but the user won't see a confirmation pop-up askin
 Snaps are installed into the MetaMask instance of each user.
 If a Snap stores data, that data is specific to that user's MetaMask instance.
 However, that data can be shared with multiple dapps.
-Do not assume that data stored by a Snap is unique to your dapp. 
+Do not assume that data stored by a Snap is unique to your dapp.
 :::
 
 ## Determine whether a Snap is installed
@@ -110,17 +110,17 @@ Each value is a nested object with additional information, such as the version o
 
 :::note
 `wallet_getSnaps` only returns the Snaps that are connected to your dapp.
-The user may have other Snaps installed that your dapp is not aware of. 
+The user may have other Snaps installed that your dapp is not aware of.
 :::
 
 The following example verifies whether a Snap with ID `npm:super-snap` is installed:
 
 ```ts
 const snaps = await ethereum.request({
-  method: 'wallet_getSnaps'
+  method: "wallet_getSnaps",
 });
 
-const isMySnapInstalled = Object.keys(snaps).includes('npm:super-snap');
+const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap");
 ```
 
 If you need to work with a specific version of a Snap, you can instead iterate over
@@ -145,14 +145,14 @@ However, if the user has disabled the Snap, the response has `enabled` set to `f
 
 ```json
 {
-    "SNAP_ID": {
-        "blocked": false,
-        "enabled": false,
-        "id": "SNAP_ID",
-        "initialPermissions": {
-            // ...all the permissions in the Snap's manifest
-        },
-        "version": "SNAP_VERSION"
-    }
+  "SNAP_ID": {
+    "blocked": false,
+    "enabled": false,
+    "id": "SNAP_ID",
+    "initialPermissions": {
+      // ...all the permissions in the Snap's manifest
+    },
+    "version": "SNAP_VERSION"
+  }
 }
 ```

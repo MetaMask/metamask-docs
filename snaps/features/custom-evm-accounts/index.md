@@ -26,11 +26,20 @@ to enable users to create and interact with the custom accounts.
 :::
 
 :::tip see also
+<<<<<<< Updated upstream:snaps/features/custom-evm-accounts/index.md
 - [Create an account management Snap](create-account-snap.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
 :::
+=======
+
+- [Create an account management Snap](../how-to/use-keyring-api/create-account-snap.md)
+- [Create an account management companion dapp](../how-to/use-keyring-api/create-companion-dapp.md)
+- [Account management Snap security guidelines](../how-to/use-keyring-api/security.md)
+- [Keyring API reference](../reference/keyring-api/index.md)
+  :::
+>>>>>>> Stashed changes:snaps/concepts/keyring-api.md
 
 ## System context diagram
 

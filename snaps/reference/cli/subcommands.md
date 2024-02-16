@@ -157,6 +157,6 @@ All files in the parent and child directories of sthe source directory are watch
 - Any files named `test.js` or `test.ts`.
 - Files in the `dist` directory, or the directory specified using [`--dist`](options.md#d-dist).
 - Dotfiles.
-:::
-  
+  :::
+
 `w` is an alias for `watch`.

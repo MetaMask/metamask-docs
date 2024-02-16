@@ -7,7 +7,7 @@ description: See the Snaps known errors reference
 Snaps can [communicate the following errors](../how-to/communicate-errors.md) without crashing the Snap:
 
 | Error                      | What the error indicates                                    | Error code |
-|----------------------------|-------------------------------------------------------------|:----------:|
+| -------------------------- | ----------------------------------------------------------- | :--------: |
 | `ChainDisconnectedError`   | The provider is disconnected from the requested chain.      |   `4901`   |
 | `DisconnectedError`        | The provider is disconnected.                               |   `4900`   |
 | `InternalError`            | An internal error has occurred.                             |  `-32603`  |

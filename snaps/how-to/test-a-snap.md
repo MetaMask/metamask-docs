@@ -36,7 +36,7 @@ In the `jest.config.js` file, add the following:
 
 ```js title="jest.config.js"
 module.exports = {
-  preset: '@metamask/snaps-jest',
+  preset: "@metamask/snaps-jest",
 };
 ```
 
@@ -56,8 +56,8 @@ environment and matchers to your Jest configuration manually:
 
 ```js title="jest.config.js"
 module.exports = {
-  testEnvironment: '@metamask/snaps-jest',
-  setupFilesAfterEnv: ['@metamask/snaps-jest/dist/cjs/setup.js'],
+  testEnvironment: "@metamask/snaps-jest",
+  setupFilesAfterEnv: ["@metamask/snaps-jest/dist/cjs/setup.js"],
 };
 ```
 
@@ -67,7 +67,7 @@ For example:
 
 ```js title="jest.config.js"
 module.exports = {
-  preset: '@metamask/snaps-jest',
+  preset: "@metamask/snaps-jest",
   testEnvironmentOptions: {
     // Options go here
   },

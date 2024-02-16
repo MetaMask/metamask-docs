@@ -83,30 +83,29 @@ To calculate and display the gas fees a user would pay as a percentage of their 
 replace the code in `/packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { heading, panel, text } from '@metamask/snaps-ui';
+import { OnTransactionHandler } from "@metamask/snaps-types";
+import { heading, panel, text } from "@metamask/snaps-ui";
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
-
   // Use the window.ethereum global provider to fetch the gas price.
   const currentGasPrice = await window.ethereum.request({
-    method: 'eth_gasPrice',
+    method: "eth_gasPrice",
   });
 
   // Get fields from the transaction object.
   const transactionGas = parseInt(transaction.gas as string, 16);
-  const currentGasPriceInWei = parseInt(currentGasPrice ?? '', 16);
+  const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
   const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
   const maxPriorityFeePerGasInWei = parseInt(
     transaction.maxPriorityFeePerGas as string,
-    16,
+    16
   );
 
   // Calculate gas fees the user would pay.
   const gasFees = Math.min(
     maxFeePerGasInWei * transactionGas,
-    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
+    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas
   );
 
   // Calculate gas fees as percentage of transaction.
@@ -116,11 +115,11 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   // Display percentage of gas fees in the transaction insights UI.
   return {
     content: panel([
-      heading('Transaction insights Snap'),
+      heading("Transaction insights Snap"),
       text(
         `As set up, you are paying **${gasFeesPercentage.toFixed(
-          2,
-        )}%** in gas fees for this transaction.`,
+          2
+        )}%** in gas fees for this transaction.`
       ),
     ]),
   };
@@ -132,31 +131,36 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 To build and test your Snap:
 
 1. From the command line, run `yarn start` in the root of your project.
-    This starts two development servers: one for watching and compiling the Snap, and another for the
-    React site.
-    The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
-    You should get a message that includes:
+   This starts two development servers: one for watching and compiling the Snap, and another for the
+   React site.
+   The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
+   You should get a message that includes:
 
-    ```bash
-    You can now view site in the browser.
+   ```bash
+   You can now view site in the browser.
 
-      http://localhost:8000/
-    ```
+     http://localhost:8000/
+   ```
 
 2. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
 
 3. Select **Connect**, and accept the permission request.
 
 4. After connecting, you're prompted to install the Snap with the **Fetch and display transaction
-    insights** and **Access the Ethereum provider** permissions.
-    Select **Approve & install**.
+   insights** and **Access the Ethereum provider** permissions.
+   Select **Approve & install**.
 
 5. From MetaMask Flask, create a new testnet ETH transfer.
-    You can set up multiple accounts to transfer between your accounts.
+   You can set up multiple accounts to transfer between your accounts.
 
 6. On the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+<<<<<<< Updated upstream:snaps/learn/tutorials/transaction-insights.md
     Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
     entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
+=======
+   Switching to the tab activates the [`onTransaction`](../reference/entry-points.md#ontransaction)
+   entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
+>>>>>>> Stashed changes:snaps/tutorials/transaction-insights.md
 
 <p align="center">
 <img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
@@ -169,12 +173,12 @@ For contract interactions, it should display a UI that conveys that message.
 Add the following code to the beginning of the `onTransaction` entry point:
 
 ```typescript
-if (typeof transaction.data === 'string' && transaction.data !== '0x') {
+if (typeof transaction.data === "string" && transaction.data !== "0x") {
   return {
     content: panel([
-      heading('Percent Snap'),
+      heading("Percent Snap"),
       text(
-        'This Snap only provides transaction insights for simple ETH transfers.',
+        "This Snap only provides transaction insights for simple ETH transfers."
       ),
     ]),
   };
