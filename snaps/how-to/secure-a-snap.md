@@ -1,6 +1,6 @@
 ---
 description: Learn about best practices for creating secure and reliable Snaps.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Secure a Snap
