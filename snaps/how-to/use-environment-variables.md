@@ -32,7 +32,7 @@ SNAP_ENV=dev
 ```
 
 Use the environment variables in your Snap's
-[configuration file](../learn/about-snaps/files.md#configuration-file) by modifying the browserify object:
+[configuration file](../learn/about-snaps/files.md#configuration-file) by modifying the bundler object:
 
 ```javascript title="snap.config.js"
 const envify = require("envify/custom");
