@@ -1,4 +1,4 @@
-name: Build and lint
+name: Build
 
 on:
   workflow_call:
