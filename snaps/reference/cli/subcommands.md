@@ -129,7 +129,6 @@ yarn mm-snap s -r out -p 9000
 </TabItem>
 </Tabs>
 
-
 Locally serves Snap files for testing.
 
 `s` is an alias for `serve`.

@@ -210,9 +210,9 @@ fetch('https://api.github.com/users/MetaMask')
   .then((json) => console.log(json))
   .catch((err) => console.error(err));
 ```
+
 </TabItem>
 </Tabs>
-
 
 For more information, see how to
 [replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper).

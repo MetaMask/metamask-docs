@@ -169,7 +169,7 @@ its corresponding key material:
 ### Example
 
 <Tabs>
-<TabItem value="manifest" label="Manifest file" default>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -238,7 +238,7 @@ The public key as hexadecimal string.
 ### Example
 
 <Tabs>
-<TabItem value="manifest" label="Manifest file" default>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -323,7 +323,7 @@ and containing its corresponding key material:
 ### Example
 
 <Tabs>
-<TabItem value="manifest" label="Manifest file" default>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -433,7 +433,7 @@ The entropy as a hexadecimal string.
 ### Example
 
 <Tabs>
-<TabItem value="manifest" label="Manifest file" default>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -479,7 +479,7 @@ The file content as a string in the requested encoding.
 ### Example
 
 <Tabs>
-<TabItem value="manifest" label="Manifest file" default>
+<TabItem value="Manifest file">
 
 ```json
 "source": {

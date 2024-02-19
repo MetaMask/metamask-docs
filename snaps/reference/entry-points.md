@@ -52,6 +52,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   }
 };
 ```
+
 </TabItem>
 <TabItem value="JavaScript">
 
@@ -66,6 +67,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
   }
 };
 ```
+
 </TabItem>
 </Tabs>
 
@@ -188,7 +190,6 @@ export const onTransaction: OnTransactionHandler = async ({
 
 </TabItem>
 <TabItem value="JavaScript">
-
 
 ```js
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -404,6 +405,7 @@ export const onUpdate: OnUpdateHandler = async () => {
   });
 };
 ```
+
 </TabItem>
 <TabItem value="JavaScript">
 
