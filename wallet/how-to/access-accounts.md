@@ -75,8 +75,6 @@ async function getAccount() {
 </TabItem>
 <TabItem value="HTML">
 
-# HTML
-
 ```html title="index.html"
 <!-- Display a connect button and the current account -->
 <button class="enableEthereumButton">Enable Ethereum</button>
