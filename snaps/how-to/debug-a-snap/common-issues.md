@@ -3,6 +3,9 @@ description: Solve common issues.
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Troubleshoot common issues
 
 This page describes common issues you may encounter when developing a Snap, and how to resolve them.
@@ -169,9 +172,8 @@ The following is an example of how you can rewrite your dependency to use `fetch
 In a production environment this may be a large task depending on the usage of `axios`.
 :::
 
-<!--tabs-->
-
-# axios
+<Tabs>
+<TabItem value="axios">
 
 ```javascript
 const instance = axios.create({
@@ -194,7 +196,8 @@ instance
   });
 ```
 
-# fetch
+</TabItem>
+<TabItem value="fetch">
 
 ```javascript
 fetch('https://api.github.com/users/MetaMask')
@@ -208,7 +211,8 @@ fetch('https://api.github.com/users/MetaMask')
   .catch((err) => console.error(err));
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 For more information, see how to
 [replace axios with a simple custom fetch wrapper](https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper).

@@ -3,6 +3,9 @@ description: See the Snaps API reference.
 toc_max_heading_level: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
@@ -165,9 +168,8 @@ its corresponding key material:
 
 ### Example
 
-<!--tabs-->
-
-# Manifest file
+<Tabs>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -180,7 +182,8 @@ its corresponding key material:
 }
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```javascript
 import { SLIP10Node } from '@metamask/key-tree';
@@ -207,7 +210,8 @@ const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 // Now, you can ask the user to sign transactions, etc.
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `snap_getBip32PublicKey`
 
@@ -233,9 +237,8 @@ The public key as hexadecimal string.
 
 ### Example
 
-<!--tabs-->
-
-# Manifest file
+<Tabs>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -248,7 +251,8 @@ The public key as hexadecimal string.
 }
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```javascript
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
@@ -266,7 +270,8 @@ const dogecoinPublicKey = await snap.request({
 console.log(dogecoinPublicKey);
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `snap_getBip44Entropy`
 
@@ -317,9 +322,8 @@ and containing its corresponding key material:
 
 ### Example
 
-<!--tabs-->
-
-# Manifest file
+<Tabs>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -331,7 +335,8 @@ and containing its corresponding key material:
 }
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```javascript
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
@@ -360,7 +365,8 @@ const addressKey1 = await deriveDogecoinAddress(1);
 // Now, you can ask the user to sign transactions, etc.
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `snap_getClientStatus`
 
@@ -426,9 +432,8 @@ The entropy as a hexadecimal string.
 
 ### Example
 
-<!--tabs-->
-
-# Manifest file
+<Tabs>
+<TabItem value="Manifest file">
 
 ```json
 "initialPermissions": {
@@ -436,7 +441,8 @@ The entropy as a hexadecimal string.
 }
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```javascript
 const entropy = await snap.request({
@@ -451,7 +457,8 @@ const entropy = await snap.request({
 console.log(entropy);
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `snap_getFile`
 
@@ -471,9 +478,8 @@ The file content as a string in the requested encoding.
 
 ### Example
 
-<!--tabs-->
-
-# Manifest file
+<Tabs>
+<TabItem value="Manifest file">
 
 ```json
 "source": {
@@ -487,7 +493,8 @@ The file content as a string in the requested encoding.
 }
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```javascript
 const contents = await snap.request({
@@ -502,7 +509,8 @@ const contents = await snap.request({
 console.log(contents);
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `snap_getLocale`
 
