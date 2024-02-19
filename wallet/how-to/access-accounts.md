@@ -3,6 +3,9 @@ description: Access a user's accounts and handle changed accounts.
 sidebar_position: 4
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Access a user's accounts
 
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
@@ -32,9 +35,8 @@ Selecting this button should call `eth_requestAccounts` to access the user's acc
 For example, the following JavaScript code accesses the user's accounts when they select a connect
 button, and the following HTML code displays the button and the current account:
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript title="index.js"
 // You should only attempt to request the user's account in response to user
@@ -70,6 +72,9 @@ async function getAccount() {
 }
 ```
 
+</TabItem>
+<TabItem value="HTML">
+
 # HTML
 
 ```html title="index.html"
@@ -78,7 +83,8 @@ async function getAccount() {
 <h2>Account: <span class="showAccount"></span></h2>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Handle accounts
 

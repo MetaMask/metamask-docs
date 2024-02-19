@@ -4,6 +4,9 @@ description: Simplify the MetaMask onboarding experience for your users.
 sidebar_position: 13
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use the MetaMask onboarding library
 
 Sending users away from your dapp to install MetaMask presents challenges.
@@ -58,9 +61,8 @@ You don't need to set up the onboarding library if you use the SDK.
 
 The following are example ways to use the onboarding library in various frameworks:
 
-<!--tabs-->
-
-# React
+<Tabs>
+<TabItem value="React">
 
 ```jsx
 import MetaMaskOnboarding from "@metamask/onboarding";
@@ -130,7 +132,8 @@ export function OnboardingButton() {
 }
 ```
 
-# TypeScript
+</TabItem>
+<TabItem value="TypeScript">
 
 The onboarding library ships with MetaMask's TypeScript types.
 Modify the React example as follows to get type safety:
@@ -145,7 +148,8 @@ helpful documentation:
 
 ![Editor Highlighting](https://user-images.githubusercontent.com/4448075/85584481-ccc7ec00-b604-11ea-9b74-49c76ee0bf22.png)
 
-# Vanilla JavaScript and HTML
+</TabItem>
+<TabItem value="Vanilla JavaScript and HTML">
 
 ```html
 <!doctype html>
@@ -200,4 +204,5 @@ helpful documentation:
 </html>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
