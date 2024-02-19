@@ -2,6 +2,9 @@
 description: Get the estimated gas prices for a chain.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Get EIP-1559 gas prices
 
 Returns the estimated [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559) gas fees for the specified
