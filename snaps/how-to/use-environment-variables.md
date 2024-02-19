@@ -54,7 +54,7 @@ module.exports = {
 };
 ```
 
-You can also use environment variables in directly in your Snap.
+You can also use environment variables directly in your Snap.
 For example:
 
 ```typescript title="index.ts"
