@@ -6,6 +6,9 @@ tags:
   - Unity SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Enable human-readable addresses in Unity
 
 You can integrate the [Decentraweb](https://decentraweb.org/) name resolver into your Unity game
@@ -39,9 +42,8 @@ API can understand, and sends the translated request to the name resolver using 
 
 The name resolver processes the request and responds with the Ethereum address.
 
-<!--tabs-->
-
-# Method
+<Tabs>
+<TabItem value="Method">
 
 ```csharp
 // Initialize the wrapper
@@ -54,7 +56,8 @@ var name = "user.dweb";
 var address = await apiWrapper.ResolveNameAsync(name);
 ```
 
-# JSON response
+</TabItem>
+<TabItem value="JSON response">
 
 ```json
 {
@@ -63,7 +66,8 @@ var address = await apiWrapper.ResolveNameAsync(name);
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Convert an Ethereum address to a name
 
@@ -75,9 +79,8 @@ sends the translated request to the SDK.
 
 The SDK processes the request and responds with the human-readable name.
 
-<!--tabs-->
-
-# Method
+<Tabs>
+<TabItem value="Method">
 
 ```csharp
 // Initialize the wrapper
@@ -90,7 +93,8 @@ var address = "0xcB3E45F337Dd3Beeba98F5F9F9A16e9cD152cC86"
 var name = await apiWrapper.GetNameAsync(address)
 ```
 
-# JSON response
+</TabItem>
+<TabItem value="JSON response">
 
 ```json
 {
@@ -102,7 +106,8 @@ var name = await apiWrapper.GetNameAsync(address)
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Example
 

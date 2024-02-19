@@ -8,6 +8,9 @@ tags:
   - Unity SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # About MetaMask SDK
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
@@ -44,9 +47,8 @@ Most of these features are not available if you only integrate your dapp directl
 
 The following are examples of how a user experiences a dapp with the SDK installed, on various platforms.
 
-<!--tabs-->
-
-# Desktop browser
+<Tabs>
+<TabItem value="Desktop browser">
 
 When a user accesses your web dapp on a desktop browser that doesn't have the MetaMask extension
 installed, a popup appears that prompts the user to either install the MetaMask extension or connect
@@ -64,7 +66,8 @@ to MetaMask Mobile using a QR code.
   in the JavaScript SDK GitHub repository for advanced use cases.
 :::
 
-# Mobile browser
+</TabItem>
+<TabItem value="Mobile browser">
 
 When a user accesses your web dapp on a mobile browser, the SDK automatically deeplinks to MetaMask
 Mobile (or if the user doesn't already have it, prompts them to install it).
@@ -83,7 +86,8 @@ This happens for all actions that need user approval.
   in the JavaScript SDK GitHub repository for advanced use cases.
 :::
 
-# iOS
+</TabItem>
+<TabItem value="iOS">
 
 When a user accesses your iOS dapp, the SDK automatically deeplinks to MetaMask Mobile (or if the
 user doesn't already have it, prompts them to install it).
@@ -102,7 +106,8 @@ This happens for all actions that need user approval.
   repository for advanced use cases.
 :::
 
-# Android
+</TabItem>
+<TabItem value="Android">
 
 When a user accesses your Android dapp, the SDK automatically deeplinks to MetaMask Mobile (or if
 the user doesn't already have it, prompts them to install it).
@@ -121,7 +126,8 @@ This happens for all actions that need user approval.
   the Android SDK GitHub repository and the [Android SDK architecture](android.md) for more information.
 :::
 
-# Node.js
+</TabItem>
+<TabItem value="Node.js">
 
 When a user accesses your Node.js dapp, the SDK renders a QR code on the console which users can
 scan with their MetaMask Mobile app.
@@ -138,7 +144,8 @@ scan with their MetaMask Mobile app.
   in the Node.js SDK GitHub repository for advanced use cases.
 :::
 
-# Unity
+</TabItem>
+<TabItem value="Unity">
 
 When a user accesses your Unity game, the SDK renders a QR code in the game UI using a dedicated
 prefab which players can scan with their MetaMask Mobile app.
@@ -156,6 +163,7 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
   for advanced use cases.
 :::
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 You can read more about the [connection flow between the SDK and MetaMask](connections.md).

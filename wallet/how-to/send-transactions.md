@@ -3,6 +3,9 @@ description: Send transactions using eth_sendTransaction.
 sidebar_position: 5
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Send transactions
 
 You can send a transaction in MetaMask using the
@@ -12,9 +15,8 @@ RPC method.
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
 select each button, and the following HTML displays the buttons.
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript
 const ethereumButton = document.querySelector(".enableEthereumButton");
@@ -58,14 +60,16 @@ async function getAccount() {
 }
 ```
 
-# HTML
+</TabItem>
+<TabItem value="HTML">
 
 ```html
 <button class="enableEthereumButton btn">Enable Ethereum</button>
 <button class="sendEthButton btn">Send ETH</button>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Transaction parameters
 
