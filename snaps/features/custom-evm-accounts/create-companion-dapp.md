@@ -13,9 +13,6 @@ Use the [`KeyringSnapRpcClient`](../../reference/keyring-api/classes/KeyringSnap
 call Keyring API methods from your companion dapp, enabling users to create and interact with custom
 EVM accounts.
 
-:::flaskOnly
-:::
-
 :::tip see also
 - [About custom EVM accounts](index.md)
 - [Create an account management Snap](create-account-snap.md)

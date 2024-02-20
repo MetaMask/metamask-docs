@@ -12,9 +12,6 @@ import TabItem from '@theme/TabItem';
 
 Create an account management Snap to connect to custom EVM accounts.
 
-:::flaskOnly
-:::
-
 :::tip see also
 - [About custom EVM accounts](index.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
