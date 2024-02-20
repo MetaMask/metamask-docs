@@ -5,6 +5,9 @@ tags:
   - JavaScript SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # JavaScript SDK options
 
 The [JavaScript version of MetaMask SDK](../how-to/use-sdk/javascript/index.md) takes the
@@ -12,21 +15,22 @@ following options.
 
 ### checkInstallationImmediately
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 checkInstallationImmediately: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 checkInstallationImmediately: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables immediately checking if MetaMask is installed on the user's browser.
 If `true`, the SDK checks for installation upon page load and sends a connection request, prompting
@@ -37,72 +41,74 @@ The default is `false`.
 
 ### checkInstallationOnAllCalls
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 checkInstallationOnAllCalls: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 checkInstallationOnAllCalls: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
 The default is `false`.
 
 ### communicationLayerPreference
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 communicationLayerPreference: <type>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 communicationLayerPreference: SOCKET
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 The preferred communication layer to use.
 The default and only option is `SOCKET` for [Socket.IO](https://socket.io/docs/v4/).
 
 ### communicationServerUrl
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 communicationServerUrl: <string>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/"
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 The URL of the communication server to use.
 This option is mainly used for debugging and testing the SDK.
 
 ### dappMetadata
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 dappMetadata: {
@@ -112,7 +118,8 @@ dappMetadata: {
 }
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 dappMetadata: {
@@ -122,7 +129,8 @@ dappMetadata: {
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Metadata about the dapp using the SDK.
 The metadata options are:
@@ -140,21 +148,22 @@ connection request.
 
 ### defaultReadOnlyChainId
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 defaultReadOnlyChainId: <number or hexadecimal string>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 defaultReadOnlyChainId: "0x1"
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) to
 this chain ID before the user connects to MetaMask.
@@ -162,63 +171,66 @@ The value is automatically updated to the chain ID used in MetaMask once connect
 
 ### enableDebug
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 enableDebug: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 enableDebug: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables sending anonymous analytics to MetaMask to help improve the SDK.
 The default is `true`.
 
 ### extensionOnly
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 extensionOnly: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 extensionOnly: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables automatically using the MetaMask browser extension if it's detected.
 The default is `false`.
 
 ### infuraAPIKey
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 infuraAPIKey: <string>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 infuraAPIKey: process.env.INFURA_API_KEY
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id) to
 use for RPC requests.
@@ -233,15 +245,15 @@ We recommend using all allowlist options to maximize the security of your API ke
 
 ### modals
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 modals: <object>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 modals: {
@@ -267,22 +279,23 @@ modals: {
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
 This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
 
 ### openDeeplink
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 openDeeplink: <function>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 openDeeplink: (link: string) => {
@@ -292,42 +305,44 @@ openDeeplink: (link: string) => {
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 A function that is called to open a deeplink to the MetaMask Mobile app.
 
 ### preferDesktop
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 preferDesktop: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 preferDesktop: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables preferring the MetaMask browser extension over MetaMask Mobile.
 The default is `false`.
 
 ### readonlyRPCMap
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 readonlyRPCMap: <map>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 readonlyRPCMap: {
@@ -335,27 +350,29 @@ readonlyRPCMap: {
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
 
 ### shouldShimWeb3
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 shouldShimWeb3: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 shouldShimWeb3: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables shimming the `window.web3` object with the Ethereum provider returned by the SDK
 (useful for compatibility with older browsers).
@@ -363,44 +380,44 @@ The default is `true`.
 
 ### timer
 
-<!--tabs-->
-
-# Example
+<Tabs>
+<TabItem value="Example">
 
 ```javascript
 timer: BackgroundTimer
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Used by React Native dapps to keep the dapp alive while using
 [`react-native-background-timer`](https://github.com/ocetnik/react-native-background-timer).
 
 ### transports
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 transports: <array of strings>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 transports: ["websocket", "polling"]
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Sets the preference on [Socket.IO](https://socket.io/docs/v4/) transports.
 
 ### ui
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 ui: {
@@ -409,27 +426,29 @@ ui: {
 }
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Options for customizing the SDK UI.
 
 ### useDeeplink
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 useDeeplink: <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 useDeeplink: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Enables or disables using deeplinks to connect with MetaMask Mobile.
 If `false`, the SDK uses universal links instead.
@@ -437,21 +456,22 @@ The default is `false`.
 
 ### wakeLockType
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```javascript
 wakeLockType: <type>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```javascript
 wakeLockType: Temporary
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 The type of wake lock to use when the SDK is running in the background.
 Options are `Disabled`, `Temporary`, and `UntilResponse`.

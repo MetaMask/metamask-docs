@@ -27,27 +27,29 @@ You can specify options:
 
 ### b, bundle
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --bundle <file>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -b out/bundle.js
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 bundle: 'out/bundle.js' 
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Path to the Snap [bundle file](../../learn/about-snaps/files.md#bundle-file).
 The default is `dist/bundle.js`.
@@ -58,27 +60,29 @@ You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
 
 ### d, dist
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --dist <directory>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -d out
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 dist: 'out'
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Path to the output directory.
 The default is `dist`.
@@ -90,27 +94,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### depsToTranspile
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --depsToTranspile <array>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --depsToTranspile dep1,dep2
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 depsToTranspile: ['dep1','dep2']
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 List of dependencies to transpile, if [`--transpilationMode`](#transpilationmode) is set to
 `localAndDeps`.
@@ -120,27 +126,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### e, eval
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --eval <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -e false
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 eval: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether to attempt to evaluate the Snap bundle in SES.
 The default is `true`.
@@ -152,27 +160,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### fix, writeManifest
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --fix <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --fix false
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 fix: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 When validating the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) using the
 [`manifest`](subcommands.md#m-manifest) subcommand, indicates whether to make necessary changes to
@@ -194,27 +204,29 @@ You can use this option with `mm-snap` or any [subcommand](subcommands.md).
 
 ### m, manifest
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --manifest <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -m false
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 manifest: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether to validate the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 The default is `true`.
@@ -226,27 +238,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### n, outfileName
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --outfileName <string>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -n snap.js
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 outfileName: 'snap.js'
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Output file name when building a Snap from source.
 The default is `bundle.js`.
@@ -258,27 +272,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### p, port
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --port <number>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -p 9000
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 port: 9000
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Local server port for testing.
 The default is `8081`.
@@ -290,27 +306,29 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 
 ### r, root
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --root <directory>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -r out
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 root: 'out'
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Server root directory.
 The default is the current working directory (`.`).
@@ -322,27 +340,29 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 
 ### s, src
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --src <file>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 -s lib/index.js
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 src: 'lib/index.js'
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Path to the Snap source file.
 The default is `src/index.js`.
@@ -354,27 +374,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### sourceMaps
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --sourceMaps <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --sourceMaps true
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 sourceMaps: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether builds should include source maps.
 The default is `false`.
@@ -384,27 +406,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### strip, stripComments
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --strip <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --strip false
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 strip: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether to remove code comments from the build output.
 The default is `true`.
@@ -416,27 +440,29 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 ### suppressWarnings
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --suppressWarnings <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --suppressWarnings true
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 suppressWarnings: true
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether to suppress warnings.
 The default is `false`.
@@ -445,27 +471,29 @@ You can use this option with any [subcommand](subcommands.md).
 
 ### transpilationMode
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --transpilationMode <string>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --transpilationMode localAndDeps
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 transpilationMode: 'localAndDeps'
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 [Babel](https://babeljs.io/) transpilation mode.
 Specify `localAndDeps` to transpile all source code including dependencies, `localOnly` to transpile
@@ -482,27 +510,29 @@ For TypeScript Snaps, `--transpilationMode` must be set to either `localOnly` or
 
 ### verboseErrors
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 --verboseErrors <boolean>
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 --verboseErrors false
 ```
 
-# Configuration file
+</TabItem>
+<TabItem value="Configuration file">
 
 ```js
 verboseErrors: false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Indicates whether to display original errors.
 The default is `true`.

@@ -19,21 +19,22 @@ yarn mm-snap [SUBCOMMAND] [OPTIONS]
 
 ## b, build
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap build [options]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap b -s lib/index.js -d out -n snap.js
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Builds a Snap from source.
 
@@ -41,21 +42,22 @@ Builds a Snap from source.
 
 ## e, eval
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap eval [options]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap e -b out/snap.js
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Attempts to evaluate the Snap bundle in SES.
 
@@ -63,21 +65,22 @@ Attempts to evaluate the Snap bundle in SES.
 
 ## i, init
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap init [directory]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap i my-snap
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Initializes a Snap project in the specified directory.
 If no directory is specified, the Snap project is initialized in the current directory.
@@ -86,21 +89,22 @@ If no directory is specified, the Snap project is initialized in the current dir
 
 ## m, manifest
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap manifest [options]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap m --fix false
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 
@@ -108,21 +112,22 @@ Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-fil
 
 ## s, serve
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap serve [options]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap s -r out -p 9000
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Locally serves Snap files for testing.
 
@@ -130,21 +135,22 @@ Locally serves Snap files for testing.
 
 ## w, watch
 
-<!--tabs-->
-
-# Syntax
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
 yarn mm-snap watch [options]
 ```
 
-# Example
+</TabItem>
+<TabItem value="Example">
 
 ```bash
 yarn mm-snap w -s lib/index.js -d out
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 Rebuilds a Snap from source upon changes to the files in the parent and child directories of the
 source directory.

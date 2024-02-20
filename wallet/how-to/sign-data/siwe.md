@@ -3,6 +3,9 @@ description: Enable your users to sign in with Ethereum.
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Sign in with Ethereum
 
 You can set up [Sign-In with Ethereum (SIWE)](https://docs.login.xyz/) to enable users to easily
@@ -46,9 +49,8 @@ The following is an example of setting up SIWE with MetaMask using
 See the [live example](https://metamask.github.io/test-dapp/#siwe) and
 [test dapp source code](https://github.com/MetaMask/test-dapp).
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript
 const siweSign = async (siweMessage) => {
@@ -74,7 +76,8 @@ siwe.onclick = async () => {
 };
 ```
 
-# HTML
+</TabItem>
+<TabItem value="HTML">
 
 ```html
 <h4>Sign-In with Ethereum</h4>
@@ -82,4 +85,5 @@ siwe.onclick = async () => {
 <p class="alert">Result:<span id="siweResult"></span></p>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>

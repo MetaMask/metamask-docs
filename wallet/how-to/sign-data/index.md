@@ -3,6 +3,9 @@ description: Sign data using eth_signTypedData_v4 and personal_sign.
 sidebar_position: 6
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Sign data
 
 You can use the following RPC methods to request cryptographic signatures from users:
@@ -64,9 +67,8 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask.
 See the [live example](https://metamask.github.io/test-dapp/#signTypedDataV4) and
 [test dapp source code](https://github.com/MetaMask/test-dapp).
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript
 signTypedDataV4Button.addEventListener("click", async function (event) {
@@ -180,14 +182,16 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
 });
 ```
 
-# HTML
+</TabItem>
+<TabItem value="HTML">
 
 ```html
 <h3>Sign typed data v4</h3>
 <button type="button" id="signTypedDataV4Button">eth_signTypedData_v4</button>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Use personal_sign
 
@@ -222,9 +226,8 @@ The following is an example of using `personal_sign` with MetaMask.
 See the [live example](https://metamask.github.io/test-dapp/#personalSign) and
 [test dapp source code](https://github.com/MetaMask/test-dapp).
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript
 personalSignButton.addEventListener("click", async function (event) {
@@ -248,14 +251,16 @@ personalSignButton.addEventListener("click", async function (event) {
 });
 ```
 
-# HTML
+</TabItem>
+<TabItem value="HTML">
 
 ```html
 <h3>Personal sign</h3>
 <button type="button" id="personalSignButton">personal_sign</button>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 `personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
 hashing and signing it.

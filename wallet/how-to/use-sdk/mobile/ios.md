@@ -136,9 +136,8 @@ let accountBalance = await metamaskSDK.request(getBalanceRequest)
 The following example sends a transaction by calling
 [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
 
-<!--tabs-->
-
-# Use a dictionary
+<Tabs>
+<TabItem value="Use a dictionary">
 
 If your request parameters make up a simple dictionary of string key-value pairs, you can use the
 dictionary directly.
@@ -168,7 +167,8 @@ let transactionRequest = EthereumRequest(
 let transactionResult = await metamaskSDK.request(transactionRequest)
 ```
 
-# Use a struct
+</TabItem>
+<TabItem value="Use a struct">
 
 For more complex parameter representations, define and use a struct that conforms to `CodableData`,
 that is, a struct that implements the following requirement:
@@ -226,7 +226,8 @@ let transactionRequest = EthereumRequest(
 let result = await metamaskSDK.request(transactionRequest)
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Example
 

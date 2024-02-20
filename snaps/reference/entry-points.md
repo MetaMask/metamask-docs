@@ -2,6 +2,9 @@
 description: See the Snaps entry points reference.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Snaps entry points
 
 Snaps can expose the following entry points.
@@ -30,9 +33,8 @@ A promise containing the return of the implemented method.
 
 #### Example
 
-<!--tabs-->
-
-# TypeScript
+<Tabs>
+<TabItem value="TypeScript">
 
 ```typescript
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
@@ -51,7 +53,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 module.exports.onRpcRequest = async ({ origin, request }) => {
@@ -65,7 +68,8 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `onTransaction`
 
@@ -97,7 +101,8 @@ for the transaction that `onTransaction` was called with.
 
 #### Example
 
-<!--tabs-->
+<Tabs>
+<TabItem value="TypeScript">
 
 # TypeScript
 
@@ -121,7 +126,8 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -142,7 +148,8 @@ module.exports.onTransaction = async ({
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ### Transaction severity level
 
@@ -154,7 +161,8 @@ MetaMask shows a modal with the warning before the user can confirm the transact
 Using the previous example for `onTransaction`, the following code adds a single line to return an
 insight with the severity level `critical`: 
 
-<!--tabs-->
+<Tabs>
+<TabItem value="TypeScript">
 
 # TypeScript
 
@@ -180,7 +188,8 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -203,7 +212,8 @@ module.exports.onTransaction = async ({
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `onCronjob`
 
@@ -237,7 +247,8 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 
 #### Example
 
-<!--tabs-->
+<Tabs>
+<TabItem value="TypeScript">
 
 # TypeScript
 
@@ -261,7 +272,8 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 module.exports.onCronjob = async ({ request }) => {
@@ -281,7 +293,8 @@ module.exports.onCronjob = async ({ request }) => {
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `onInstall`
 
@@ -300,7 +313,8 @@ None.
 
 #### Example
 
-<!--tabs-->
+<Tabs>
+<TabItem value="TypeScript">
 
 # TypeScript
 
@@ -324,7 +338,8 @@ export const onInstall: OnInstallHandler = async () => {
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 import { heading, panel, text } from '@metamask/snaps-sdk';
@@ -345,7 +360,8 @@ module.exports.onInstall = async () => {
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `onUpdate`
 
@@ -364,9 +380,8 @@ None.
 
 #### Example
 
-<!--tabs-->
-
-# TypeScript
+<Tabs>
+<TabItem value="TypeScript">
 
 ```typescript
 import type { OnUpdateHandler } from '@metamask/snaps-sdk';
@@ -391,7 +406,8 @@ export const onUpdate: OnUpdateHandler = async () => {
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 import { heading, panel, text } from '@metamask/snaps-sdk';
@@ -415,7 +431,8 @@ module.exports.onUpdate = async () => {
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## `onHomePage`
 
@@ -441,9 +458,8 @@ A content object displayed using [custom UI](../features/custom-ui.md).
 
 #### Example
 
-<!--tabs-->
-
-# TypeScript
+<Tabs>
+<TabItem value="TypeScript">
 
 ```typescript
 import type { OnHomePageHandler } from '@metamask/snaps-sdk';
@@ -459,7 +475,8 @@ export const onHomePage: OnHomePageHandler = async () => {
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
 import { panel, text, heading } from '@metamask/snaps-sdk';
@@ -474,4 +491,5 @@ module.exports.onHomePage = async () => {
 };
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
