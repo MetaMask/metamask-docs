@@ -548,9 +548,6 @@ await snap.request({
 
 ## `snap_manageAccounts`
 
-:::flaskOnly
-:::
-
 Manages [account management Snap](../features/custom-evm-accounts/index.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
