@@ -95,6 +95,12 @@ The following Snaps features are available in the stable version of MetaMask:
       href: "features/static-files",
       title: "Static files",
       description: "Lazy-load static files such as Wasm modules or ZK circuits."
+    },
+    {
+      icon: require("./assets/features/network.png").default,
+      href: "features/custom-evm-accounts",
+      title: "Custom EVM accounts",
+      description: "Connect to custom EVM accounts in MetaMask."
     }
   ]}
 />
@@ -104,13 +110,6 @@ the canary distribution of MetaMask:
 
 <CardList
   items={[
-    {
-      icon: require("./assets/features/network.png").default,
-      href: "features/custom-evm-accounts",
-      title: "Custom EVM accounts",
-      description: "Connect to custom EVM accounts in MetaMask.",
-      flaskOnly: true
-    },
     {
       icon: require("./assets/features/tx-severity.png").default,
       href: "reference/entry-points/#transaction-severity-level",

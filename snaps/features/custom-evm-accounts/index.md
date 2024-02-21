@@ -1,8 +1,6 @@
 ---
 description: Connect to custom EVM accounts using the Keyring API.
 sidebar_position: 4
-sidebar_custom_props:
-  flask_only: true
 tags:
   - Keyring API
 ---
@@ -21,9 +19,6 @@ To use the Keyring API, you first [implement the API in an account management Sn
 (also known as an "account Snap").
 You can then [call Keyring API methods from a companion dapp](create-companion-dapp.md)
 to enable users to create and interact with the custom accounts.
-
-:::flaskOnly
-:::
 
 :::tip see also
 - [Create an account management Snap](create-account-snap.md)

@@ -99,9 +99,6 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:keyring`
 
-:::flaskOnly
-:::
-
 For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
 the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,

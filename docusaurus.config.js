@@ -309,6 +309,10 @@ const config = {
             to: "/snaps/features/non-evm-networks",
           },
           {
+            from: "/snaps/concepts/keyring-api",
+            to: "/snaps/features/custom-evm-accounts",
+          },
+          {
             from: "/snaps/tutorials/custom-evm-accounts",
             to: "/snaps/features/custom-evm-accounts/create-account-snap",
           },
