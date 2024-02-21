@@ -835,6 +835,13 @@ await snap.request({
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
 
+:::info Notification rate limits
+The ability for Snaps to trigger notifications is rate-limited to:
+
+- 2 native notifications per 5 minutes per Snap
+- 5 in-app notifications per minute per Snap
+:::
+
 ### Parameters
 
 An object containing the contents of the notification:
