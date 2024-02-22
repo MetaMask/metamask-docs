@@ -5,14 +5,15 @@ sidebar_position: 1
 
 # Custom UI
 
-You can display custom user interface (UI) components using the `@metamask/snaps-ui` module with the
-[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method or
-[`onTransaction`](../reference/entry-points.md#ontransaction) entry point.
+You can display custom user interface (UI) components using the `@metamask/snaps-sdk` module with the
+[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method,
+[`onTransaction`](../reference/entry-points.md#ontransaction) entry point,
+or [`onHomepage`](../reference/entry-points.md#onhomepage) entry point.
 
-To use custom UI, first install `@metamask/snaps-ui` using the following command:
+To use custom UI, first install `@metamask/snaps-sdk` using the following command:
 
 ```bash
-yarn add @metamask/snaps-ui
+yarn add @metamask/snaps-sdk
 ```
 
 Then, whenever you're required to return a custom UI component, import the components from the
@@ -20,7 +21,7 @@ package and build your UI with them.
 For example:
 
 ```javascript
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -34,14 +35,14 @@ return content;
 
 ## Components
 
-The `NodeType` enum exported by `@metamask/snaps-ui` details the available components.
+The `NodeType` enum exported by `@metamask/snaps-sdk` details the available components.
 
 ### `copyable`
 
 Outputs a read-only text field with a copy-to-clipboard shortcut.
 
 ```javascript
-import { copyable } from '@metamask/snaps-ui';
+import { copyable } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -53,7 +54,7 @@ const content = copyable('Text to be copied');
 Outputs a horizontal divider.
 
 ```javascript
-import { panel, divider, text } from '@metamask/snaps-ui';
+import { panel, divider, text } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -70,7 +71,7 @@ Outputs a heading.
 This is useful for [panel](#panel) titles.
 
 ```javascript
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -89,7 +90,7 @@ You can embed JPG or PNG in SVG using data URIs.
 The SVG is rendered within an \<img\> tag, which prevents JavaScript or interaction events from being supported.
 
 ```javascript
-import { image } from '@metamask/snaps-ui';
+import { image } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -101,7 +102,7 @@ const content = image('<svg width="400" height="400" viewBox="0 0 24 24" xmlns="
 Outputs a panel, which can be used as a container for other components.
 
 ```javascript
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -119,7 +120,7 @@ const content = panel([
 Outputs a loading indicator.
 
 ```javascript
-import { panel, heading, spinner } from '@metamask/snaps-ui';
+import { panel, heading, spinner } from '@metamask/snaps-sdk';
 
 // ...
 
@@ -131,7 +132,7 @@ const content = panel([heading('Please wait...'), spinner()]);
 Outputs text.
 
 ```javascript
-import { text } from '@metamask/snaps-ui';
+import { text } from '@metamask/snaps-sdk';
 
 // ...
 

@@ -77,7 +77,7 @@ You can customize your Snap by editing `index.ts` in the `packages/snap/src` fol
 [`snap_dialog`](../reference/snaps-api.md#snapdialog) method to display a custom confirmation screen:
 
 ```ts
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import { getMessage } from './message';
 
 export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {

@@ -36,7 +36,7 @@ An object containing the contents of the alert dialog:
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from '@metamask/snaps-sdk';
 
 await snap.request({
   method: 'snap_dialog',
@@ -70,7 +70,7 @@ An object containing the contents of the confirmation dialog:
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from '@metamask/snaps-sdk';
 
 const result = await snap.request({
   method: 'snap_dialog',
@@ -107,7 +107,7 @@ The text entered by the user if the prompt was submitted or `null` if the prompt
 #### Example
 
 ```javascript
-import { panel, text, heading } from '@metamask/snaps-ui';
+import { panel, text, heading } from '@metamask/snaps-sdk';
 
 const walletAddress = await snap.request({
   method: 'snap_dialog',
@@ -526,7 +526,7 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 ### Example
 
 ```javascript
-import { panel, text } from '@metamask/snaps-ui';
+import { panel, text } from '@metamask/snaps-sdk';
 
 const locale = await snap.request({ method: 'snap_getLocale' });
 

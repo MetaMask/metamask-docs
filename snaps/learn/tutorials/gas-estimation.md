@@ -96,8 +96,8 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the top of the file:
 
 ```typescript title="index.ts"
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
-import { panel, text } from '@metamask/snaps-ui';
+import { panel, text } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 async function getFees() {
   const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow'); 

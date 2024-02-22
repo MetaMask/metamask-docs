@@ -83,8 +83,8 @@ To calculate and display the gas fees a user would pay as a percentage of their 
 replace the code in `/packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { heading, panel, text } from '@metamask/snaps-ui';
+import { heading, panel, text } from '@metamask/snaps-sdk';
+import type { OnTransactionHandler } from '@metamask/snaps-sdk';
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
