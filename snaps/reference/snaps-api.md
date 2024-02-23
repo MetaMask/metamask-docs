@@ -606,9 +606,9 @@ const state = await snap.request({
 console.log(state);
 /*
 {
-  "top-level-input": "whatever the user typed in that field",
+  "top-level-input": "what the user typed in that field",
   "example-form": {
-    "nested-input": "whatever the user typed in that field"
+    "nested-input": "what the user typed in that field"
   }
 }
 */
