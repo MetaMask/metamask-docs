@@ -1,6 +1,5 @@
 ---
 description: Call Keyring API methods from your companion dapp.
-sidebar_position: 2
 sidebar_label: Create a companion dapp
 tags:
   - Keyring API

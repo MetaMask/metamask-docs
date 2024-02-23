@@ -1,6 +1,5 @@
 ---
 description: Display custom user interface components.
-sidebar_position: 1
 ---
 
 # Custom UI

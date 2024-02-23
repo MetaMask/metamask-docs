@@ -1,7 +1,6 @@
 ---
 description: Follow these security guidelines when creating an account management Snap.
 sidebar_label: Security guidelines
-sidebar_position: 3
 tags:
   - Keyring API
 ---

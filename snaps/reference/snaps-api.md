@@ -14,6 +14,9 @@ manifest file.
 
 ## `snap_createInterface`
 
+:::flaskOnly
+:::
+
 Creates an interface for use in [`interactive UI`](../features/interactive-ui.md).
 
 ### Parameters
@@ -554,6 +557,9 @@ console.log(contents);
 
 ## `snap_getInterfaceState`
 
+:::flaskOnly
+:::
+
 Gets the state of an interactive interface by its ID.
 
 ### Parameters
@@ -965,6 +971,9 @@ await snap.request({
 ```
 
 ## `snap_updateInterface`
+
+:::flaskOnly
+:::
 
 Updates an interface used in [`interactive UI`](../features/interactive-ui.md).
 
