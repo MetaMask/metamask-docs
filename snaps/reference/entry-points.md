@@ -500,4 +500,12 @@ module.exports.onHomePage = async () => {
 :::
 
 To respond to events in [interactive UI](../features/interactive-ui.md), a Snap must expose the `onUserInput` entry point.
-MetaMask calls the `onUserInput` entry point when an event occurs in interactive UI.
+MetaMask calls the `onUserInput` entry point when an event occurs in [interactive UI](../features/interactive-ui.md).
+
+This entry point receives an object with:
+
+- `id` - The ID of the interface that received user input.
+- `event` - An object describing the user input event, with:
+  - `type` - The type of the event, either `'ButtonClickEvent'` or `'FormSubmitEvent'`.
+  - `name` - The name of the object that the event happened on
+  - `value` - Only passed when the `type` is `'FormSubmitEvent'`. An object where the keys are the input names in the form, and the values are what the user typed in those fields.
