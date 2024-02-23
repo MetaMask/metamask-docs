@@ -10,9 +10,6 @@ tags:
 
 Refer to the following security guidelines when [creating an account management Snap](create-account-snap.md).
 
-:::flaskOnly
-:::
-
 :::tip see also
 - [About custom EVM accounts](index.md)
 - [Create an account management Snap](create-account-snap.md)
