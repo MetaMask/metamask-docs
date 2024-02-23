@@ -32,13 +32,7 @@ You can also see the [Unity instructions](../use-sdk/gaming/unity/connect-and-si
 
 ## Prerequisites
 
-<<<<<<< HEAD:wallet/how-to/sign-data/connect-and-sign/index.md
-- MetaMask SDK set up in your [JavaScript](../../connect/set-up-sdk/javascript/index.md) or
-  [iOS](../../connect/set-up-sdk/mobile/ios.md) dapp.
-=======
-- MetaMask SDK set up in your [JavaScript](../use-sdk/javascript/index.md) or
-  [iOS](../use-sdk/mobile/ios.md) dapp.
->>>>>>> main:wallet/how-to/sign-data/connect-and-sign.md
+- [MetaMask SDK set up](../use-sdk/javascript/index.md) in your JavaScript dapp.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
