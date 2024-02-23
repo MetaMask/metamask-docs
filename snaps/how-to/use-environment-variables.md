@@ -35,43 +35,21 @@ or [in a `.env` file](#use-environment-variables-in-a-env-file).
     SNAP_ENV=dev
     ```
 
-2. Install the [`envify`](https://github.com/hughsk/envify) package using Yarn or npm:
-
-    ```bash
-    yarn add envify
-    ```
-    
-    or
-    
-    ```bash
-    npm install envify
-    ```
-
-3. Use the environment variables in your Snap's
-    [configuration file](../learn/about-snaps/files.md#configuration-file) by modifying the bundler object.
+2. Specify the environment variables in your Snap's
+    [configuration file](../learn/about-snaps/files.md#configuration-file) using the `environment` option.
     For example:
 
     ```javascript title="snap.config.js"
-    const envify = require("envify/custom");
-    require("dotenv").config();
-    
     module.exports = {
-        cliOptions: {
-            src: "./src/index.ts",
-            port: 8080,
+        environment: {
+            SNAP_ENV: process.env.SNAP_ENV,
+            PUBLIC_KEY: process.env.PUBLIC_KEY,
         },
-        bundlerCustomizer: (bundler) => {
-            bundler.transform(
-                envify({
-                    SNAP_ENV: process.env.SNAP_ENV,
-                    PUBLIC_KEY: process.env.PUBLIC_KEY,
-                }),
-            );
-        },
+        // Other options
     };
     ```
 
-4. You can also use environment variables directly in your Snap.
+3. You can also use environment variables directly in your Snap.
     For example:
 
     ```typescript title="index.ts"
