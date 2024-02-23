@@ -9,7 +9,8 @@ tags:
 
 The Keyring API integrates custom EVM accounts inside MetaMask.
 You can use the Keyring API to display custom accounts, such as multi-party computation (MPC)
-accounts, alongside regular MetaMask accounts in the user interface:
+accounts and [ERC-4337 accounts](#account-abstraction-erc-4337), alongside regular MetaMask accounts
+in the user interface:
 
 <p align="center">
 <img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
