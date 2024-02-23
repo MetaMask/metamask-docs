@@ -499,5 +499,5 @@ module.exports.onHomePage = async () => {
 :::flaskOnly
 :::
 
-To respond to events in [interactive UI](../features/interactive-ui), a Snap must expose the `onUserInput` entry point.
+To respond to events in [interactive UI](../features/interactive-ui.md), a Snap must expose the `onUserInput` entry point.
 MetaMask calls the `onUserInput` entry point when an event occurs in interactive UI.

@@ -14,7 +14,7 @@ manifest file.
 
 ## `snap_createInterface`
 
-Creates an interface for use in [`interactive UI`](../features/interactive-ui).
+Creates an interface for use in [`interactive UI`](../features/interactive-ui.md).
 
 ### Parameters
 
@@ -966,7 +966,7 @@ await snap.request({
 
 ## `snap_updateInterface`
 
-Updates an interface used in [`interactive UI`](../features/interactive-ui).
+Updates an interface used in [`interactive UI`](../features/interactive-ui.md).
 
 ### Parameters
 

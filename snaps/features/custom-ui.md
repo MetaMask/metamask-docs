@@ -39,7 +39,7 @@ The `NodeType` enum exported by `@metamask/snaps-sdk` details the available comp
 
 ### `button`
 
-Outputs a clickable button for use in [interactive UI](./interactive-ui).
+Outputs a clickable button for use in [interactive UI](./interactive-ui.md).
 
 #### Parameters
 
@@ -99,7 +99,7 @@ const content = panel([
 
 ### `form`
 
-Outputs a form for use in [interactive UI](./interactive-ui).
+Outputs a form for use in [interactive UI](./interactive-ui.md).
 
 #### Parameters
 
@@ -162,7 +162,7 @@ const content = image('<svg width="400" height="400" viewBox="0 0 24 24" xmlns="
 
 ### `input`
 
-Outputs an input component for use in [interactive UI](./interactive-ui).
+Outputs an input component for use in [interactive UI](./interactive-ui.md).
 
 #### Parameters
 
