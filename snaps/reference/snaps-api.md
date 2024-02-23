@@ -9,8 +9,48 @@ import TabItem from '@theme/TabItem';
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
+To call some of these methods, you must first [request permission](../how-to/request-permissions.md) in the Snap
 manifest file.
+
+## `snap_createInterface`
+
+Creates an interface for use in [`interactive UI`](../features/interactive-ui).
+
+### Parameters
+
+An object with:
+
+- `ui` - The [Custom UI](../features/custom-ui.md) to create.
+
+### Returns
+
+A string, the interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from [`onTransaction`](./entry-points.md#ontransaction), or [`onHomePage`](./entry-points.md#onhomepage).
+
+### Example
+
+```js
+const interfaceId = await snap.request({
+  method: 'snap_createInterface',
+  params: {
+    ui: panel([
+      heading('Interactive interface'),
+      button({
+        value: 'Click me',
+        name: 'interactive-button',
+      }),
+    ])
+  },
+});
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    id: interfaceId
+  }
+});
+```
+
 
 ## `snap_dialog`
 
@@ -512,6 +552,68 @@ console.log(contents);
 </TabItem>
 </Tabs>
 
+## `snap_getInterfaceState`
+
+Gets the state of an interactive interface by its ID.
+
+### Parameters
+
+- `id` - The ID of the interface.
+
+### Returns
+
+An object where each top-level property can be either:
+
+- The `name` of an [`input`](../features/custom-ui.md#input) with its current value
+- The `name` of a [`form`](../features/custom-ui.md#form), with a nested object containing the current values of all [`input`s](../features/custom-ui.md#input) in the form.
+
+### Example
+
+```js
+const interfaceId = await snap.request({
+  method: 'snap_createInterface',
+  params: {
+    ui: panel([
+      heading('Interactive UI Example Snap'),
+      // A top-level input
+      input({
+        name: 'top-level-input',
+        placeholder: 'Enter something',
+      }),
+      // A top-level form...
+      form({
+        name: 'example-form',
+        children: [
+          ...with a nested input
+          input({
+            name: 'nested-input',
+            placeholder: 'Enter something',
+          }),
+          button('Submit', ButtonType.Submit, 'sumbit'),
+        ],
+      }),
+    ]),
+  },
+});
+
+const state = await snap.request({
+  method: 'snap_getInterfaceState',
+  params: {
+    id: interfaceId
+  },
+});
+
+console.log(state);
+/*
+{
+  "top-level-input": "whatever the user typed in that field",
+  "example-form": {
+    "nested-input": "whatever the user typed in that field"
+  }
+}
+*/
+```
+
 ## `snap_getLocale`
 
 :::flaskOnly
@@ -860,4 +962,33 @@ await snap.request({
     message: 'Hello, world!',
   },
 });
+```
+
+## `snap_updateInterface`
+
+Updates an interface used in [`interactive UI`](../features/interactive-ui).
+
+### Parameters
+
+An object with:
+
+- `id` - The ID of the interface to be updated, usually received in the [`onUserInput` entry point](./entry-points.md#onuserinput).
+- `ui` - The [Custom UI](../features/custom-ui.md) to create.
+
+### Example
+
+```js
+export function onUserInput({ id, event }) {
+  console.log('Received input event', event);
+
+  await snap.request({
+    method: 'snap_updateInterface',
+    params: {
+      id,
+      ui: panel([
+        heading('New interface')
+      ])
+    }
+  });
+}
 ```
