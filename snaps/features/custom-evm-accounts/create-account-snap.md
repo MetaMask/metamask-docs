@@ -78,7 +78,8 @@ class MySnapKeyring implements Keyring {
 MetaMask submits Ethereum sign requests from dapps using the
 [`submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
 Keyring API.
-See the [supported signing methods](index.md#supported-signing-methods).
+See the methods for [externally owned accounts](index.md#eoa-methods) and
+[ERC-4337 accounts](index.md#account-abstraction-erc-4337).
 
 The following is an example of a `personal_sign` request:
 
