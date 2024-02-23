@@ -1,7 +1,10 @@
 ---
 description: Send transactions using eth_sendTransaction.
-sidebar_position: 3.5
+sidebar_position: 5
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Send transactions
 
@@ -12,54 +15,61 @@ RPC method.
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
 select each button, and the following HTML displays the buttons.
 
-<!--tabs-->
-
-# JavaScript
+<Tabs>
+<TabItem value="JavaScript">
 
 ```javascript
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const sendEthButton = document.querySelector('.sendEthButton');
+const ethereumButton = document.querySelector(".enableEthereumButton");
+const sendEthButton = document.querySelector(".sendEthButton");
 
 let accounts = [];
 
 // Send Ethereum to an address
-sendEthButton.addEventListener('click', () => {
-  ethereum
-    .request({
-      method: 'eth_sendTransaction',
-      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
-      params: [
-        {
-          from: accounts[0], // The user's active address.
-          to: <recipient address> // Required except during contract publications.
-          value: <value in wei to send> // Only required to send ether to the recipient from the initiating external account.
-          gasLimit: '0x5028', // Customizable by the user during MetaMask confirmation.
-          maxPriorityFeePerGas: '0x3b9aca00', // Customizable by the user during MetaMask confirmation.
-          maxFeePerGas: '0x2540be400', // Customizable by the user during MetaMask confirmation.
-        },
-      ],
-    })
-    .then((txHash) => console.log(txHash))
-    .catch((error) => console.error(error));
+sendEthButton.addEventListener("click", () => {
+    ethereum
+        .request({
+            method: "eth_sendTransaction",
+            // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
+            params: [
+                {
+                    // The user's active address.
+                    from: accounts[0],
+                    // Required except during contract publications.
+                    to: <recipient address>,
+                    // Only required to send ether to the recipient from the initiating external account.
+                    value: <value in wei to send>,
+                    // Customizable by the user during MetaMask confirmation.
+                    gasLimit: '0x5028',
+                    // Customizable by the user during MetaMask confirmation.
+                    maxPriorityFeePerGas: '0x3b9aca00',
+                    // Customizable by the user during MetaMask confirmation.
+                    maxFeePerGas: '0x2540be400',
+                },
+            ],
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.error(error));
 });
 
-ethereumButton.addEventListener('click', () => {
-  getAccount();
+ethereumButton.addEventListener("click", () => {
+    getAccount();
 });
 
 async function getAccount() {
-  accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    accounts = await ethereum.request({ method: "eth_requestAccounts" });
 }
 ```
 
-# HTML
+</TabItem>
+<TabItem value="HTML">
 
 ```html
 <button class="enableEthereumButton btn">Enable Ethereum</button>
 <button class="sendEthButton btn">Send ETH</button>
 ```
 
-<!--/tabs-->
+</TabItem>
+</Tabs>
 
 ## Transaction parameters
 
@@ -137,7 +147,9 @@ information on how the data is encoded.
 MetaMask ignores this field.
 :::
 
-The chain ID is derived from the user's current selected network at `window.ethereum.networkVersion`.
+The chain ID is derived from the user's current selected network.
+Use [`eth_chainId`](/wallet/reference/eth_chainid) to get the user's chain ID.
+If you need the network version, use [`net_version`](https://ethereum.org/en/developers/docs/apis/json-rpc/#net_version).
 
 In the future, MetaMask might allow connecting to multiple networks at the same time, at which point
 this parameter will become important, so it might be useful to be in the habit of including it now.

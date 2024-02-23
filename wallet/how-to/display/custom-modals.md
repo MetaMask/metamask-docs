@@ -1,11 +1,13 @@
 ---
 description: Display custom modals using the JavaScript SDK.
 sidebar_position: 4
+tags:
+  - JavaScript SDK
 ---
 
 # Display custom modals
 
-Use [MetaMask SDK](../../concepts/sdk/index.md) to display custom MetaMask modals in your JavaScript dapp.
+You can use [MetaMask SDK](../../concepts/sdk/index.md) to display custom MetaMask modals.
 
 When integrating a web dapp with MetaMask, you can enhance the user experience by customizing the
 logic and user interface of the displayed modals, which initiate user interactions such as prompting
@@ -16,7 +18,7 @@ other web frameworks such as Vue.js or pure HTML/JavaScript.
 ## Prerequisites
 
 MetaMask SDK set up in your JavaScript dapp.
-This example uses the [MetaMask React SDK](../connect/set-up-sdk/javascript/react/index.md).
+This example uses the [MetaMask React SDK](../use-sdk/javascript/react/index.md).
 
 ## Steps
 
@@ -25,12 +27,12 @@ This example uses the [MetaMask React SDK](../connect/set-up-sdk/javascript/reac
 Create a custom modal component that aligns with your dapp's design and functionality requirements.
 
 ```javascript
-import React from 'react';
+import React from "react";
 
 const CustomModal = ({ onClose }) => (
-  <div className="modal">
-    <button onClick={onClose}>Close</button>
-  </div>
+    <div className="modal">
+        <button onClick={onClose}>Close</button>
+    </div>
 );
 
 export default CustomModal;
@@ -38,51 +40,53 @@ export default CustomModal;
 
 ### 2. Implement custom modal logic
 
-When initializing [`MetaMaskProvider`](../connect/set-up-sdk/javascript/react/index.md#3-wrap-your-project-with-metamaskprovider),
+When initializing [`MetaMaskProvider`](../use-sdk/javascript/react/index.md#3-wrap-your-project-with-metamaskprovider),
 use the [`modals`](../../reference/sdk-js-options.md#modals) SDK option to set up custom behavior
 for scenarios such as when MetaMask isn't installed.
 For example:
 
 ```javascript
-import { MetaMaskProvider } from '@metamask/sdk-react';
-import CustomModal from './CustomModal';
-import ReactDOM from 'react-dom';
+import { MetaMaskProvider } from "@metamask/sdk-react";
+import CustomModal from "./CustomModal";
+import ReactDOM from "react-dom";
 
 const App = () => (
-  <MetaMaskProvider
-    sdkOptions={{
-      modals: {
-        install: ({ link }) => {
-          let modalContainer = null;
+    <MetaMaskProvider
+        sdkOptions={{
+            modals: {
+                install: ({ link }) => {
+                    let modalContainer = null;
 
-          return {
-            mount: () => {
-              modalContainer = document.createElement('div');
-              document.body.appendChild(modalContainer);
+                    return {
+                        mount: () => {
+                            modalContainer = document.createElement("div");
+                            document.body.appendChild(modalContainer);
 
-              ReactDOM.render(
-                <CustomModal
-                  onClose={() => {
-                    ReactDOM.unmountComponentAtNode(modalContainer);
-                    modalContainer.remove();
-                  }}
-                />,
-                modalContainer,
-              );
+                            ReactDOM.render(
+                                <CustomModal
+                                    onClose={() => {
+                                        ReactDOM.unmountComponentAtNode(
+                                            modalContainer
+                                        );
+                                        modalContainer.remove();
+                                    }}
+                                />,
+                                modalContainer
+                            );
+                        },
+                        unmount: () => {
+                            if (modalContainer) {
+                                ReactDOM.unmountComponentAtNode(modalContainer);
+                                modalContainer.remove();
+                            }
+                        },
+                    };
+                },
             },
-            unmount: () => {
-              if (modalContainer) {
-                ReactDOM.unmountComponentAtNode(modalContainer);
-                modalContainer.remove();
-              }
-            },
-          };
-        },
-      },
-    }}
-  >
-    {/* Other components */}
-  </MetaMaskProvider>
+        }}
+    >
+        {/* Other components */}
+    </MetaMaskProvider>
 );
 
 export default App;

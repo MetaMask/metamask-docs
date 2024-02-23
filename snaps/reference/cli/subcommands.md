@@ -1,6 +1,7 @@
 ---
 sidebar_label: Subcommands
 sidebar_position: 2
+description: See the Snaps CLI subcommands reference.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -8,23 +9,32 @@ import TabItem from '@theme/TabItem';
 
 # Snaps subcommands
 
+This reference describes the syntax of the Snaps command line interface (CLI) subcommands.
+
+You can specify subcommands and options using the `yarn mm-snap` command:
+
+```bash
+yarn mm-snap [SUBCOMMAND] [OPTIONS]
+```
+
 ## b, build
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap build [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap b -s lib/index.js -d out -n snap.js
+yarn mm-snap build [options]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap b -s lib/index.js -d out -n snap.js
+```
+
+</TabItem>
+</Tabs>
 
 Builds a Snap from source.
 
@@ -32,21 +42,22 @@ Builds a Snap from source.
 
 ## e, eval
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap eval [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap e -b out/snap.js
+yarn mm-snap eval [options]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap e -b out/snap.js
+```
+
+</TabItem>
+</Tabs>
 
 Attempts to evaluate the Snap bundle in SES.
 
@@ -54,21 +65,22 @@ Attempts to evaluate the Snap bundle in SES.
 
 ## i, init
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap init [directory]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap i my-snap
+yarn mm-snap init [directory]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap i my-snap
+```
+
+</TabItem>
+</Tabs>
 
 Initializes a Snap project in the specified directory.
 If no directory is specified, the Snap project is initialized in the current directory.
@@ -77,43 +89,45 @@ If no directory is specified, the Snap project is initialized in the current dir
 
 ## m, manifest
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap manifest [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap m --fix false
+yarn mm-snap manifest [options]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
 
-Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
+```bash
+yarn mm-snap m --fix false
+```
+
+</TabItem>
+</Tabs>
+
+Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 
 `m` is an alias for `manifest`.
 
 ## s, serve
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap serve [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap s -r out -p 9000
+yarn mm-snap serve [options]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap s -r out -p 9000
+```
+
+</TabItem>
+</Tabs>
 
 Locally serves Snap files for testing.
 
@@ -121,21 +135,22 @@ Locally serves Snap files for testing.
 
 ## w, watch
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap watch [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap w -s lib/index.js -d out
+yarn mm-snap watch [options]
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap w -s lib/index.js -d out
+```
+
+</TabItem>
+</Tabs>
 
 Rebuilds a Snap from source upon changes to the files in the parent and child directories of the
 source directory.

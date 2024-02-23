@@ -76,7 +76,7 @@
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 34px;
 }
 
 h2 {
@@ -93,6 +93,14 @@ h4 {
 
 .navbar__title {
   font-weight: 500;
+}
+
+.navbar__brand:hover, .navbar__brand:active {
+  color: var(--ifm-navbar-link-color);
+}
+
+[data-theme="dark"] .navbar__brand:hover, .navbar__brand:active {
+  color: var(--ifm-navbar-link-color);
 }
 
 .cards {
@@ -152,4 +160,24 @@ svg {
 
 .getfeedback-hidden {
   display: none !important;
+}
+
+.markdown {
+  > h1, h2, h3, h4, h5, h6 {
+    > code {
+      font-size: inherit;
+    }
+  }
+  > p > .ReactPlayer {
+    border-radius: 3px; 
+    overflow: hidden; 
+  }
+  > p > video {
+    border-radius: 3px; 
+    overflow: hidden; 
+  }
+}
+
+.table-of-contents code {
+  font-size: inherit;
 }

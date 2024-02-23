@@ -1,11 +1,13 @@
 ---
-description: Unity SDK API reference
+description: See the Unity SDK API reference.
 sidebar_position: 2
+tags:
+  - Unity SDK
 ---
 
 # Unity SDK API
 
-The following is an overview of the API methods used in the [Unity SDK](../how-to/connect/set-up-sdk/gaming/unity.md).
+The following is an overview of the API methods used in the [Unity SDK](../how-to/use-sdk/gaming/unity/index.md).
 
 ## MetaMaskUnity
 

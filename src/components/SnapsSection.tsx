@@ -3,7 +3,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "🏁 Get started with Snaps",
+    title: "🏁 Snaps quickstart",
     link: "/snaps/get-started/quickstart",
     description: (<>
       Get started quickly by creating and customizing a simple Snap, using the Snaps template built
@@ -19,10 +19,10 @@ const CardList: CardItem[] = [
     </>),
   },
   {
-    title: "🌐 Snaps JSON-RPC API",
-    link: "/snaps/reference/rpc-api",
+    title: "🌐 Snaps API",
+    link: "/snaps/reference/snaps-api",
     description: (<>
-      Use the Snaps JSON-RPC API to modify the functionality of MetaMask and communicate between dapps and Snaps.
+      Use the Snaps API to modify the functionality of MetaMask and communicate between dapps and Snaps.
     </>),
   },
 ];

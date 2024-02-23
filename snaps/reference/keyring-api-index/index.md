@@ -1,10 +1,17 @@
+---
+description: See the Keyring API reference.
+tags:
+  - Keyring API
+---
+
 # Keyring API
 
-This section describes the [Keyring API](../../concepts/keyring-api.md) methods.
+This section describes the Keyring API methods.
+See the left sidebar for the API categories and methods.
 
-:::tip Learn more
-- Follow the end-to-end tutorial to [create a Keyring Snap to connect to custom EVM accounts](../../tutorials/custom-evm-accounts.md).
-- Learn [how to use the Keyring API from a dapp](../../how-to/use-keyring-api.md).
-- See the [`keyring-api`](https://github.com/MetaMask/keyring-api) repository on GitHub for more
-  information about using this module.
+:::tip See also
+- [Create an account management Snap](../../features/custom-evm-accounts/create-account-snap.md)
+  - [Account management Snap security guidelines](../../features/custom-evm-accounts/security.md)
+- [Create an account management companion dapp](../../features/custom-evm-accounts/create-companion-dapp.md)
+- [About the Keyring API](../../features/custom-evm-accounts/index.md)
 :::

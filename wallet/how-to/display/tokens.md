@@ -36,39 +36,43 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
-const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
-const tokenSymbol = 'TUT';
+const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513";
+const tokenSymbol = "TUT";
 const tokenDecimals = 18;
-const tokenImage = 'http://placekitten.com/200/300';
+const tokenImage = "http://placekitten.com/200/300";
 
 try {
-  // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-  const wasAdded = await window.ethereum.request({
-    method: 'wallet_watchAsset',
-    params: {
-      type: 'ERC20',
-      options: {
-        address: tokenAddress, // The address of the token.
-        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 characters.
-        decimals: tokenDecimals, // The number of decimals in the token.
-        image: tokenImage, // A string URL of the token logo.
-      },
-    },
-  });
+    // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
+    const wasAdded = await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+            type: "ERC20",
+            options: {
+                // The address of the token.
+                address: tokenAddress,
+                // A ticker symbol or shorthand, up to 5 characters.
+                symbol: tokenSymbol,
+                // The number of decimals in the token.
+                decimals: tokenDecimals,
+                // A string URL of the token logo.
+                image: tokenImage,
+            },
+        },
+    });
 
-  if (wasAdded) {
-    console.log('Thanks for your interest!');
-  } else {
-    console.log('Your loss!');
-  }
+    if (wasAdded) {
+        console.log("Thanks for your interest!");
+    } else {
+        console.log("Your loss!");
+    }
 } catch (error) {
-  console.log(error);
+    console.log(error);
 }
 ```
 
 :::note
 If the chain ID of your token doesn't match the user's network, they can get unexpected results.
-We recommend [detecting the user's network chain ID](../connect/detect-network.md) and
+We recommend [detecting the user's network chain ID](../detect-network.md) and
 [prompting them to switch chains](/wallet/reference/wallet_switchethereumchain), if necessary.
 :::
 
@@ -107,25 +111,28 @@ To prompt users to add a single NFT, add something like the following to your pr
 
 ```javascript
 try {
-  // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-  const wasAdded = await ethereum.request({
-    method: 'wallet_watchAsset',
-    params: {
-      type: 'ERC721', // or 'ERC1155'
-      options: {
-        address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', // The address of the token.
-        tokenId: '1', // ERC-721 or ERC-1155 token ID.
-      },
-    },
-  });
+    // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
+    const wasAdded = await ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+            // or 'ERC1155'
+            type: "ERC721",
+            options: {
+                // The address of the token.
+                address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                // ERC-721 or ERC-1155 token ID.
+                tokenId: "1",
+            },
+        },
+    });
 
-  if (wasAdded) {
-    console.log('User successfully added the token!');
-  } else {
-    console.log('User did not add the token.');
-  }
+    if (wasAdded) {
+        console.log("User successfully added the token!");
+    } else {
+        console.log("User did not add the token.");
+    }
 } catch (error) {
-  console.log(error);
+    console.log(error);
 }
 ```
 
@@ -137,22 +144,24 @@ For example:
 
 ```javascript
 window.ethereum.sendAsync([{
- method: 'wallet_watchAsset',
-  params: {
-    type: 'ERC721',
-    options: {
-      address: contractAddress,
-      tokenId: 1,
-    },
-  }, {
-  method: 'wallet_watchAsset',
+    method: "wallet_watchAsset",
     params: {
-      type: 'ERC721',
-      options: {
-        address: contractAddress,
-        tokenId: 2,
-      },
+        type: 'ERC721',
+        options: {
+          address: contractAddress,
+          tokenId: 1,
+        },
+    }
+}, {
+    method: "wallet_watchAsset",
+    params: {
+        type: 'ERC721',
+        options: {
+          address: contractAddress,
+          tokenId: 2,
+        },
     },
-  ...
+},
+...
 ])
 ```

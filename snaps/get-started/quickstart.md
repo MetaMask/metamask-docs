@@ -1,28 +1,30 @@
 ---
-description: Get started quickly using the Snaps template.
+description: Get started quickly using the create-snap starter kit.
 sidebar_position: 2
 ---
 
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
+
 # Snaps quickstart
 
-Get started with Snaps using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap).
-With the CLI, you can initialize a Snap monorepo project built with TypeScript and React.
+Get started creating your own Snap.
+Use the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+starter kit to initialize a Snap monorepo project built with TypeScript and React.
+See the following video demo:
+
+<YoutubeEmbed url="https://www.youtube.com/embed/qZRAryYwgdg?si=CeImIULgH3iD-FF0" />
 
 ## Prerequisites
 
 - [MetaMask Flask installed](install-flask.md)
-
-  :::tip
-  MetaMask Snaps works with the latest LTS version of Node.js, but we recommend using the version specified in
-  the template's [`.nvmrc`](https://github.com/MetaMask/template-snap-monorepo/blob/main/.nvmrc) file.
-  :::
-
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-- [Yarn](https://yarnpkg.com/) version 3
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
+- [Yarn](https://yarnpkg.com/)
 
 ## Create the project
 
-Create a new Snap project using the [`@metamask/create-snap` CLI](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) by running:
+Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+starter kit by running:
 
 ```bash
 yarn create @metamask/snap your-snap-name
@@ -31,10 +33,16 @@ yarn create @metamask/snap your-snap-name
 or
 
 ```bash
+npx @metamask/create-snap your-snap-name
+```
+
+or
+
+```bash
 npm create @metamask/snap your-snap-name
 ```
 
-See the section [Snaps anatomy](../concepts/anatomy.md) to learn about the anatomy of your Snap project files.
+See [Snaps files](../learn/about-snaps/files.md) to learn about your Snap project files.
 
 ## Start the Snap
 
@@ -50,11 +58,11 @@ Start the development server:
 yarn start
 ```
 
-You are now serving the Snap at [`http://localhost:8080`](http://localhost:8080/) and its front-end at [`http://localhost:8000`](http://localhost:8000/).
+You are now serving the Snap at [`http://localhost:8080`](http://localhost:8080/) and its front-end dapp at [`http://localhost:8000`](http://localhost:8000/).
 
 ## Connect to the Snap
 
-On the front-end, select the **Connect** button and the MetaMask Flask extension pops up and
+On the front-end dapp, select the **Connect** button and the MetaMask Flask extension pops up and
 requires you to approve the Snap's permissions.
 
 Once connected, select the **Send message** button to display a custom message within a confirmation
@@ -66,7 +74,7 @@ Open the project in a text editor.
 You can customize your Snap by editing `index.ts` in the `packages/snap/src` folder.
 
 `index.ts` contains an example request that uses the
-[`snap_dialog`](../reference/rpc-api.md#snapdialog) method to display a custom confirmation screen:
+[`snap_dialog`](../reference/snaps-api.md#snapdialog) method to display a custom confirmation screen:
 
 ```ts
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
@@ -105,4 +113,10 @@ for them.
 The next time you select the **Send message** button, you see the updated text in the confirmation screen.
 
 You've now successfully connected, installed, interacted with, and customized your Snap!
-Learn more about [developing a Snap](../how-to/develop-a-snap.md).
+
+## Next steps
+
+- To learn more about the Snaps system, review [fundamental Snaps concepts](/snaps/learn/about-snaps)
+  and try the [Snaps tutorials](/snaps/learn/tutorials).
+- To implement specific features and use cases, see the [Snaps feature guides](/snaps/features).
+- To follow best practices for developing a Snap, see the [Snaps how-to guides](/snaps/how-to).
