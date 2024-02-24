@@ -1,5 +1,6 @@
 ---
 description: See the Keyring API reference.
+sidebar_position: 6
 tags:
   - Keyring API
 ---

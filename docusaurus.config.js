@@ -3,7 +3,6 @@
 
 const codeTheme = require("prism-react-renderer/themes/dracula");
 const remarkCodesandbox = require("remark-codesandbox");
-const path = require("path");
 const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
@@ -112,22 +111,6 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
-      },
-    ],
-    [
-      "docusaurus-plugin-typedoc",
-      {
-        entryPoints: ["./external/keyring-api/src/index.ts"],
-        tsconfig: "./external/keyring-api/tsconfig.json",
-        readme: "snaps/reference/keyring-api-index/index.md",
-        out: path.join(__dirname, "snaps/reference/keyring-api"),
-        sidebar: {
-          filteredIds: ["reference/keyring-api/index"],
-        },
-        useCodeBlocks: true,
-        expandObjects: true,
-        parametersFormat: "table",
-        hideGenerator: true,
       },
     ],
     [
