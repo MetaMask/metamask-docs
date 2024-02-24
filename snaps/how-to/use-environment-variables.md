@@ -66,7 +66,7 @@ or [in a `.env` file](#use-environment-variables-in-a-env-file).
     dotenv.config();
     
     const config: SnapConfig = {
-        environment = {
+        environment: {
             SNAP_ENV: process.env.SNAP_ENV,
             PUBLIC_KEY: process.env.PUBLIC_KEY,
         },
