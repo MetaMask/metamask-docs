@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Keyring Interface API
 
 [Account management Snaps](../../features/custom-evm-accounts) can implement the Keyring Interface
-API to support dapp requests.
+API to support dapp requests from custom accounts.
 
 ## EOA methods
 

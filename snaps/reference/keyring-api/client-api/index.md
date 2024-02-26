@@ -7,10 +7,10 @@ import TabItem from '@theme/TabItem';
 
 # Keyring Client API
 
-Dapps can communicate with [account management Snaps](../../features/custom-evm-accounts/index.md)
+Dapps can communicate with [account management Snaps](../../../features/custom-evm-accounts/index.md)
 using the Keyring Client API.
 The dapp must be [allowed to call each
-method](../../features/custom-evm-accounts/security.md#limit-the-methods-exposed-to-dapps).
+method](../../../features/custom-evm-accounts/security.md#limit-the-methods-exposed-to-dapps).
 
 ## Account methods
 
@@ -24,18 +24,11 @@ Creates a new account.
 
 An object containing:
 
-- `options`: `Record<string, Json>` - Snap-defined options required for the account creation.
+- `options`: `Record<string, Json>` - Snap-defined account options.
 
 #### Returns
 
-An account object containing:
-
-- `address`: `string` - Account address.
-- `id`: `string` - Account ID.
-- `methods`: `string[]` - List of supported [Keyring Interface API](interface-api.md) methods.
-- `options`: `Record<string, Json>` - Snap-defined options.
-- `type`: `string` - `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for
-  an [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
+[An account object.](objects.md#keyringaccount)
 
 #### Example
 
@@ -86,7 +79,7 @@ Deletes an existing account.
 
 An object containing:
 
-- `id`: `string` - ID of the account to be deleted.
+- `id`: `string` - ID of the account to be deleted (UUIDv4).
 
 #### Returns
 
@@ -125,7 +118,7 @@ A Snap might choose to not support this method.
 
 An object containing:
 
-- `id`: `string` - ID of the account to be exported.
+- `id`: `string` - ID of the account to be exported (UUIDv4).
 
 #### Returns
 
@@ -167,7 +160,7 @@ TO DO
 
 An object containing:
 
-- `id`: `string` - Account ID.
+- `id`: `string` - Account ID (UUIDv4).
 - `chains`: `string[]` - TO DO
 
 #### Returns
@@ -207,18 +200,11 @@ Gets an account from an ID.
 
 An object containing:
 
-- `id`: `string` - Account ID.
+- `id`: `string` - Account ID (UUIDv4).
 
 #### Returns
 
-An account object containing:
-
-- `address`: `string` - Account address.
-- `id`: `string` - Account ID.
-- `methods`: `string[]` - List of supported [Keyring Interface API](interface-api.md) methods.
-- `options`: `Record<string, Json>` - Snap-defined options.
-- `type`: `string` - `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for
-  an [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
+[An account object.](objects.md#keyringaccount)
 
 #### Example
 
@@ -268,15 +254,7 @@ None
 
 #### Returns
 
-An array of account objects handled by the Snap.
-An account object contains:
-
-- `address`: `string` - Account address.
-- `id`: `string` - Account ID.
-- `methods`: `string[]` - List of supported [Keyring Interface API](interface-api.md) methods.
-- `options`: `Record<string, Json>` - Snap-defined options.
-- `type`: `string` - `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for
-  an [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
+An array of [account objects](objects.md#keyringaccount) handled by the Snap.
 
 #### Example
 
@@ -331,14 +309,7 @@ Updates an account.
 
 #### Parameters
 
-An account object containing:
-
-- `address`: `string` - Account address.
-- `id`: `string` - Account ID.
-- `methods`: `string[]` - List of supported [Keyring Interface API](interface-api.md) methods.
-- `options`: `Record<string, Json>` - Snap-defined options.
-- `type`: `string` - `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for
-  an [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
+[An account object.](objects.md#keyringaccount)
 
 #### Returns
 
@@ -435,15 +406,7 @@ An object containing:
 
 #### Returns
 
-A request object containing:
-
-- `account`: `string` - Account ID.
-- `id`: `string` - Request ID.
-- `request` - Inner request sent by the client application, containing:
-  - `method`: `string` - The request method.
-  - `params`: `Json[]` - Optional method parameters.
-- `scope`: `string` - Request's scope ([CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID).
+[A request object.](objects.md#keyringrequest)
 
 #### Example
 
@@ -490,16 +453,7 @@ None
 
 #### Returns
 
-An array of pending request objects.
-A request object contains:
-
-- `account`: `string` - Account ID.
-- `id`: `string` - Request ID.
-- `request` - Inner request sent by the client application, containing:
-  - `method`: `string` - The request method.
-  - `params`: `Json[]` - Optional method parameters.
-- `scope`: `string` - Request's scope ([CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID).
+An array of pending [request objects](objects.md#keyringrequest).
 
 #### Example
 
@@ -598,25 +552,17 @@ Submits a new request.
 
 #### Parameters
 
-A request object containing:
-
-- `account`: `string` - Account ID.
-- `id`: `string` - Request ID.
-- `request` - Inner request sent by the client application, containing:
-  - `method`: `string` - The request method.
-  - `params`: `Json[]` - Optional method parameters.
-- `scope`: `string` - Request's scope ([CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID).
+[A request object.](objects.md#keyringrequest)
 
 #### Returns
 
-If the request is [synchronous](../../features/custom-evm-accounts/index.md#synchronous-transaction-flow),
+If the request is [synchronous](../../../features/custom-evm-accounts/index.md#synchronous-transaction-flow),
 `keyring_submitRequest` returns an object containing:
 
 - `pending` - `false` to indicate a synchronous request.
 - `result`: `Json` - Request result.
 
-If the request is [asynchronous](../../features/custom-evm-accounts/index.md#asynchronous-transaction-flow),
+If the request is [asynchronous](../../../features/custom-evm-accounts/index.md#asynchronous-transaction-flow),
 `keyring_submitRequest` returns an object containing:
 
 - `pending` - `true` to indicate that the request will be handled asynchronously.
