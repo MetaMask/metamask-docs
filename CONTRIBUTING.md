@@ -89,7 +89,7 @@ To contribute changes:
    Push your changes to the remote origin.
 
     ```bash
-    git add *
+    git add .
     git commit -m "<COMMIT-MESSAGE>"
     git push origin
     ```
