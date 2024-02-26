@@ -357,6 +357,7 @@ See the following example account management Snap implementations:
 
 - [Simple Account Snap](https://github.com/MetaMask/snap-simple-keyring)
 - [Simple Account Abstraction Snap](https://github.com/MetaMask/snap-account-abstraction-keyring/tree/main) (ERC-4337)
+- [Biconomy Smart Account Snap](https://github.com/bcnmy/smart-account-keyring-template) (ERC-4337)
 - [Silent Shard Snap](https://github.com/silence-laboratories/silent-shard-snap)
 - [Safeheron MPC Snap](https://github.com/Safeheron/multi-mpc-snap-monorepo)
 - [Capsule Keyring Snap](https://github.com/capsule-org/mm-snap-keyring)
