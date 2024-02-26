@@ -360,3 +360,4 @@ See the following example account management Snap implementations:
 - [Silent Shard Snap](https://github.com/silence-laboratories/silent-shard-snap)
 - [Safeheron MPC Snap](https://github.com/Safeheron/multi-mpc-snap-monorepo)
 - [Capsule Keyring Snap](https://github.com/capsule-org/mm-snap-keyring)
+- [Biconomy Smart Account Template](https://github.com/bcnmy/smart-account-keyring-template)
