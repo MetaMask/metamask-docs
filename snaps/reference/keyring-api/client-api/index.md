@@ -165,7 +165,9 @@ An object containing:
 
 #### Returns
 
-TO DO
+An object containing:
+
+- `chains`: `string[]` - TO DO
 
 #### Example
 
@@ -186,7 +188,9 @@ TO DO
 <TabItem value="Response">
 
 ```json
-// TO DO
+{
+    "chains": // TO DO
+}
 ```
 
 </TabItem>
@@ -377,7 +381,7 @@ An object containing:
 
 ```json
 {
-	"method": "keyring_approveRequest",
+    "method": "keyring_approveRequest",
 	"params": {
 	    "id": "f84d3a97-b6e1-47ea-8b0c-fd8609efaad4"
 	}

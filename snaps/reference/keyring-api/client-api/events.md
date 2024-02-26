@@ -55,7 +55,7 @@ The delete event is idempotent, so it is safe to emit even if the account does n
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.AccountDeleted, {
-      id: account.id,
+        id: account.id,
     });
     // Update your Snap's state...
 } catch (error) {
@@ -75,8 +75,8 @@ This event only applies to Snaps that
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.RequestApproved, {
-      id: request.id,
-      result,
+        id: request.id,
+        result,
     });
     // Update your Snap's state...
 } catch (error) {
@@ -96,7 +96,7 @@ This event only applies to Snaps that
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.RequestRejected, {
-      id: request.id,
+        id: request.id,
     });
     // Update your Snap's state...
 } catch (error) {

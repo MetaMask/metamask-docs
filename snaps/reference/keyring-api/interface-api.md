@@ -7,8 +7,8 @@ import TabItem from '@theme/TabItem';
 
 # Keyring Interface API
 
-[Account management Snaps](../../features/custom-evm-accounts) can implement the Keyring Interface
-API to support dapp requests from custom accounts.
+[Account management Snaps](../../features/custom-evm-accounts/index.md) can implement the Keyring
+Interface API to support dapp requests from custom accounts.
 
 ## EOA methods
 
@@ -278,7 +278,7 @@ A user operation details object containing:
   - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
   - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
   - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-    execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+    execution, to pay for `callData`, and to account for overhead that can't be tracked on-chain.
 - `dummySignature`: `string` - Dummy `signature`.
 - `dummyPaymasterAndData`: `string` - Dummy `paymasterAndData`.
 - `bundlerUrl`: `string` - Bundler URL.

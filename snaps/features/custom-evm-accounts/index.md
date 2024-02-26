@@ -282,7 +282,7 @@ externally owned accounts (EOAs):
 - [`personal_sign`](../../reference/keyring-api/interface-api.md#personal_sign)
 - [`eth_signTypedData_v4`](../../reference/keyring-api/interface-api.md#eth_signtypeddata_v4)
 - [`eth_signTransaction`](../../reference/keyring-api/interface-api.md#eth_signtransaction)
-- [Deprecated signing methods](../../reference/keyring-api/interface-api.md#deprecated-methods)
+- [Deprecated signing methods](/wallet/concepts/signing-methods/#deprecated-signing-methods)
 
 ## Account abstraction (ERC-4337)
 
