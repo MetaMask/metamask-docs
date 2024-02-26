@@ -22,11 +22,13 @@ Creates a new account.
 
 #### Parameters
 
-`options`: `Record<string, Json>` - Snap-defined options required for the account creation.
+An object containing:
+
+- `options`: `Record<string, Json>` - Snap-defined options required for the account creation.
 
 #### Returns
 
-An account object containing the following details:
+An account object containing:
 
 - `address`: `string` - Account address.
 - `id`: `string` - Account ID.
@@ -82,7 +84,9 @@ Deletes an existing account.
 
 #### Parameters
 
-`id`: `string` - ID of the account to be deleted.
+An object containing:
+
+- `id`: `string` - ID of the account to be deleted.
 
 #### Returns
 
@@ -119,11 +123,15 @@ A Snap might choose to not support this method.
 
 #### Parameters
 
-`id`: `string` - ID of the account to be exported.
+An object containing:
+
+- `id`: `string` - ID of the account to be exported.
 
 #### Returns
 
-An object containing `privateKey`, the account's private key.
+An object containing:
+
+- `privateKey`: `string` - The account's private key.
 
 #### Example
 
@@ -156,6 +164,8 @@ An object containing `privateKey`, the account's private key.
 TO DO
 
 #### Parameters
+
+An object containing:
 
 - `id`: `string` - Account ID.
 - `chains`: `string[]` - TO DO
@@ -195,11 +205,13 @@ Gets an account from an ID.
 
 #### Parameters
 
-`id`: `string` - Account ID.
+An object containing:
+
+- `id`: `string` - Account ID.
 
 #### Returns
 
-An account object containing the following details:
+An account object containing:
 
 - `address`: `string` - Account address.
 - `id`: `string` - Account ID.
@@ -257,7 +269,7 @@ None
 #### Returns
 
 An array of account objects handled by the Snap.
-An account object contains the following details:
+An account object contains:
 
 - `address`: `string` - Account address.
 - `id`: `string` - Account ID.
@@ -319,7 +331,7 @@ Updates an account.
 
 #### Parameters
 
-An account object containing the following details:
+An account object containing:
 
 - `address`: `string` - Account address.
 - `id`: `string` - Account ID.
@@ -378,6 +390,8 @@ Approves a pending request.
 
 #### Parameters
 
+An object containing:
+
 - `id`: `string` - Request ID.
 - `data`: `Record<string, Json>` - Optional Snap-defined arguments.
 
@@ -415,11 +429,13 @@ Gets a request from an ID.
 
 #### Parameters
 
-`id`: `string` - Request ID.
+An object containing:
+
+- `id`: `string` - Request ID.
 
 #### Returns
 
-A request object containing the following details:
+A request object containing:
 
 - `account`: `string` - Account ID.
 - `id`: `string` - Request ID.
@@ -475,7 +491,7 @@ None
 #### Returns
 
 An array of pending request objects.
-A request object contains the following details:
+A request object contains:
 
 - `account`: `string` - Account ID.
 - `id`: `string` - Request ID.
@@ -544,7 +560,9 @@ Rejects a pending request and removes it from the list of pending requests.
 
 #### Parameters
 
-`id`: `string` - Request ID.
+An object containing:
+
+- `id`: `string` - Request ID.
 
 #### Returns
 
@@ -580,7 +598,7 @@ Submits a new request.
 
 #### Parameters
 
-A request object containing the following details:
+A request object containing:
 
 - `account`: `string` - Account ID.
 - `id`: `string` - Request ID.
