@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7698],{64312:s=>{s.exports=JSON.parse('[{"label":"Keyring API","permalink":"/1014-unity-connect-and-sign/snaps/tags/keyring-api","count":6}]')}}]);
