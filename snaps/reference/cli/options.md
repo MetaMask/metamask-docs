@@ -7,542 +7,270 @@ description: See the Snaps CLI options reference.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Snaps command line options
+# Snaps configuration options
 
-This reference describes the syntax of the Snaps command line interface (CLI) options.
+This reference describes the syntax of the Snaps command line interface (CLI) configuration options.
+You can specify these options in the
+[configuration file](../../learn/about-snaps/files.md#configuration-file).
 
-## Specify options
-
-You can specify options:
-
-- In the [configuration file](../../learn/about-snaps/files.md#configuration-file).
-
-- On the command line using the `yarn mm-snap` command.
-
-  ```bash
-  yarn mm-snap [SUBCOMMAND] [OPTIONS]
-  ```
-
-## Options
-
-### b, bundle
+## `bundler`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```bash
---bundle <file>
+```javascript
+bundler: <BUNDLER>,
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```bash
--b out/bundle.js
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-bundle: 'out/bundle.js' 
+```javascript
+bundler: "webpack",
 ```
 
 </TabItem>
 </Tabs>
 
-Path to the Snap [bundle file](../../learn/about-snaps/files.md#bundle-file).
-The default is `dist/bundle.js`.
+The bundler to use.
+The options are `"browserify"` and `"webpack"`.
 
-You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
+For backwards compatibility, the default is `"browserify"`, but we recommend using `"webpack"`.
+This reference describes the options for the Webpack bundler.
+For Browserify, see the [legacy options](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli#legacy-options).
 
-`-b` is an alias for `--bundle`.
-
-### d, dist
+## `customizeWebpackConfig`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```bash
---dist <directory>
+```typescript
+customizeWebpackConfig: <FUNCTION>,
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```bash
--d out
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-dist: 'out'
+```typescript
+customizeWebpackConfig: (config) =>
+    merge(config, {
+        plugins: [
+            // Add a plugin.
+        ],
+        module: {
+            rules: [
+                // Add a loader.
+            ],
+        },
+    }),
 ```
 
 </TabItem>
 </Tabs>
 
-Path to the output directory.
-The default is `dist`.
+A function that customizes the Webpack configuration.
+For example, you can use this option to add a Webpack plugin, provide a polyfill, or add a loader.
 
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
+The function should receive the Webpack configuration object and return the modified configuration object.
+For convenience, the Snaps CLI exports a `merge` function that you can use to merge the
+configuration object with the
+[default Webpack configuration](https://github.com/MetaMask/snaps/blob/main/packages/snaps-cli/src/webpack/config.ts).
 
-`-d` is an alias for `--dist`.
-
-### depsToTranspile
+## `environment`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```bash
---depsToTranspile <array>
+```javascript
+environment: <ENVIRONMENT>,
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```bash
---depsToTranspile dep1,dep2
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-depsToTranspile: ['dep1','dep2']
+```javascript
+environment: {
+    SNAP_ENV: process.env.SNAP_ENV,
+    PUBLIC_KEY: process.env.PUBLIC_KEY,
+},
 ```
 
 </TabItem>
 </Tabs>
 
-List of dependencies to transpile, if [`--transpilationMode`](#transpilationmode) is set to
-`localAndDeps`.
+The environment configuration.
+You can use this to [set environment variables for the Snap](../../how-to/use-environment-variables.md),
+which can be accessed using `process.env`.
 
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-### e, eval
+## `evaluate`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```bash
---eval <boolean>
+```javascript
+evaluate: <BOOLEAN>,
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```bash
--e false
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-eval: false
+```javascript
+evaluate: true,
 ```
 
 </TabItem>
 </Tabs>
 
-Indicates whether to attempt to evaluate the Snap bundle in SES.
-The default is `true`.
+Whether to evaluate the bundle.
+When set to `true`, the bundle is checked for compatibility issues with the Snaps runtime.
+If there are any issues, the CLI exits with an error.
 
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
+## `experimental`
 
-`-e` is an alias for `--eval`.
+Experimental features.
 
-### fix, writeManifest
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---fix <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
---fix false
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-fix: false
-```
-
-</TabItem>
-</Tabs>
-
-When validating the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) using the
-[`manifest`](subcommands.md#m-manifest) subcommand, indicates whether to make necessary changes to
-the manifest file.
-The default is `true`.
-
-`--fix` is an alias for `--writeManifest`.
-
-### h, help
-
-```bash
--h, --help
-```
-
-Displays the help message and exits.
-You can use this option with `mm-snap` or any [subcommand](subcommands.md).
-
-`-h` is an alias for `--help`.
-
-### m, manifest
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---manifest <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
--m false
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-manifest: false
-```
-
-</TabItem>
-</Tabs>
-
-Indicates whether to validate the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
-The default is `true`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`-m` is an alias for `--manifest`.
-
-### n, outfileName
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---outfileName <string>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
--n snap.js
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-outfileName: 'snap.js'
-```
-
-</TabItem>
-</Tabs>
-
-Output file name when building a Snap from source.
-The default is `bundle.js`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`-n` is an alias for `--outfileName`.
-
-### p, port
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---port <number>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
--p 9000
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-port: 9000
-```
-
-</TabItem>
-</Tabs>
-
-Local server port for testing.
-The default is `8081`.
-
-You can use this option with the [`serve`](subcommands.md#s-serve) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`-p` is an alias for `--port`.
-
-### r, root
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---root <directory>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
--r out
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-root: 'out'
-```
-
-</TabItem>
-</Tabs>
-
-Server root directory.
-The default is the current working directory (`.`).
-
-You can use this option with the [`serve`](subcommands.md#s-serve) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`-r` is an alias for `--root`.
-
-### s, src
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---src <file>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
--s lib/index.js
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-src: 'lib/index.js'
-```
-
-</TabItem>
-</Tabs>
-
-Path to the Snap source file.
-The default is `src/index.js`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`-s` is an alias for `--src`.
-
-### sourceMaps
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---sourceMaps <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
---sourceMaps true
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-sourceMaps: true
-```
-
-</TabItem>
-</Tabs>
-
-Indicates whether builds should include source maps.
-The default is `false`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-### strip, stripComments
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---strip <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
---strip false
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-strip: false
-```
-
-</TabItem>
-</Tabs>
-
-Indicates whether to remove code comments from the build output.
-The default is `true`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-`--strip` is an alias for `--stripComments`.
-
-### suppressWarnings
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---suppressWarnings <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
---suppressWarnings true
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-suppressWarnings: true
-```
-
-</TabItem>
-</Tabs>
-
-Indicates whether to suppress warnings.
-The default is `false`.
-
-You can use this option with any [subcommand](subcommands.md).
-
-### transpilationMode
-
-<Tabs>
-<TabItem value="Syntax">
-
-```bash
---transpilationMode <string>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
---transpilationMode localAndDeps
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-transpilationMode: 'localAndDeps'
-```
-
-</TabItem>
-</Tabs>
-
-[Babel](https://babeljs.io/) transpilation mode.
-Specify `localAndDeps` to transpile all source code including dependencies, `localOnly` to transpile
-local source code only, and `none` to transpile nothing.
-
-The default is `localOnly`.
-
-You can use this option with the [`build`](subcommands.md#b-build) and
-[`watch`](subcommands.md#w-watch) subcommands.
-
-:::note
-For TypeScript Snaps, `--transpilationMode` must be set to either `localOnly` or `localAndDeps`.
+:::caution
+These features are not stable, and may change in the future.
 :::
 
-### verboseErrors
+### `experimental.wasm`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```bash
---verboseErrors <boolean>
+```javascript
+experimental: {
+    wasm: <BOOLEAN>,
+},
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```bash
---verboseErrors false
-```
-
-</TabItem>
-<TabItem value="Configuration file">
-
-```js
-verboseErrors: false
+```javascript
+experimental: {
+    wasm: true,
+},
 ```
 
 </TabItem>
 </Tabs>
 
-Indicates whether to display original errors.
-The default is `true`.
+Enables or disables WebAssembly support.
+When set to `true`, WebAssembly files can be imported in the Snap.
+For example:
 
-You can use this option with any [subcommand](subcommands.md). 
+```typescript
+import program from './program.wasm';
 
-### version
-
-```bash
---version
+// Program is initialized synchronously.
+// ...
 ```
 
-Displays the version number and exits.
+## `input`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+input: <FILE>,
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+input: "src/index.js",
+```
+
+</TabItem>
+</Tabs>
+
+The entry point of the Snap.
+This is the file that will be bundled.
+The default is `"src/index.js"`.
+
+## `manifest`
+
+The Snap manifest configuration.
+
+### `manifest.path`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+manifest: {
+    path: <FILE>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+manifest: {
+    path: "snap.manifest.json",
+},
+```
+
+</TabItem>
+</Tabs>
+
+Path to the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
+The default is `"snap.manifest.json`.
+
+### `manifest.update`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+manifest: {
+    update: <FILE>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+manifest: {
+    update: "snap.manifest.json",
+},
+```
+
+</TabItem>
+</Tabs>
+
+## `output`
+
+### `output.clean`
+
+### `output.filename`
+
+### `output.minimize`
+
+### `output.path`
+
+## `server`
+
+### `server.enabled`
+
+### `server.root`
+
+### `server.port`
+
+## `sourceMap`
+
+## `stats`
+
+### `stats.buffer`
+
+### `stats.builtIns`
+
+#### `stats.builtIns.ignore`
+
+### `stats.verbose`
+
+## Legacy options
