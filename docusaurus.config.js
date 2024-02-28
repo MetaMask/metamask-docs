@@ -416,6 +416,11 @@ const config = {
             to: "services",
             label: "Services",
           },
+          {
+            to: "whats-new",
+            label: "What's new",
+            position: "right",
+          },
         ],
       },
       docs: {
@@ -454,6 +459,11 @@ const config = {
               {
                 label: "Services",
                 to: "/services",
+              },
+              {
+                label: "What's new",
+                to: "whats-new",
+                position: "right",
               },
             ],
           },
