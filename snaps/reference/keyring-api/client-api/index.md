@@ -154,20 +154,22 @@ An object containing:
 
 ### `keyring_filterAccountChains`
 
-TO DO
+Filters for chains that an account can be used on.
 
 #### Parameters
 
 An object containing:
 
 - `id`: `string` - Account ID (UUIDv4).
-- `chains`: `string[]` - TO DO
+- `chains`: `string[]` - List of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+  chain IDs to filter.
 
 #### Returns
 
 An object containing:
 
-- `chains`: `string[]` - TO DO
+- `chains`: `string[]` - List of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+  chain IDs that the account can be used on.
 
 #### Example
 
@@ -179,7 +181,12 @@ An object containing:
     "method": "keyring_filterAccountChains",
     "params": {
         "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-        "chains": // TO DO
+        "chains": [
+            "eip155:W", 
+            "eip155:X",
+            "eip155:Y",
+            "eip155:Z"
+        ]
     }
 }
 ```
@@ -189,7 +196,10 @@ An object containing:
 
 ```json
 {
-    "chains": // TO DO
+    "chains": [
+        "eip155:X",
+        "eip155:Y"
+    ]
 }
 ```
 
