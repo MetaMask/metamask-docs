@@ -105,7 +105,7 @@ For example:
 <Tabs>
 <TabItem value="JavaScript">
 
-```javascript
+```javascript title="snap.config.js"
 module.exports = {
     bundler: "webpack",
     input: "src/index.js",
@@ -121,7 +121,7 @@ module.exports = {
 </TabItem>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="snap.config.ts"
 import type { SnapConfig } from "@metamask/snaps-cli";
 
 const config: SnapConfig = {
