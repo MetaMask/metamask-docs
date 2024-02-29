@@ -569,7 +569,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 
 #### Parameters
 
-`account` - [An account object.](keyring-api/client-api/objects.md#keyringaccount)
+`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
@@ -633,7 +633,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 
 #### Parameters
 
-`account` - [An account object.](keyring-api/client-api/objects.md#keyringaccount)
+`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
@@ -709,7 +709,7 @@ state of accounts and the state known to MetaMask.
 
 #### Returns
 
-An array of [account objects](keyring-api/client-api/objects.md#keyringaccount).
+An array of [account objects](keyring-api/account-management/objects.md#keyringaccount).
 
 #### Example
 
@@ -739,7 +739,7 @@ class MyKeyring implements Keyring {
 
 Finalizes a signing request.
 This is usually called as part of the
-[`keyring_approveRequest`](keyring-api/client-api/index.md#keyring_approverequest) method.
+[`keyring_approveRequest`](keyring-api/account-management/index.md#keyring_approverequest) method.
 
 #### Parameters
 

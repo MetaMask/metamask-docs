@@ -20,7 +20,7 @@ Refer to the following security guidelines when [creating an account management 
 ## Do not add secret information to account objects
 
 Ensure that you do not store any secret information in
-[account objects](../../reference/keyring-api/client-api/objects.md#keyringaccount), since they are
+[account objects](../../reference/keyring-api/account-management/objects.md#keyringaccount), since they are
 exposed to dapps and MetaMask.
 For example:
 
@@ -65,23 +65,23 @@ For example:
 ## Limit the methods exposed to dapps
 
 By default, MetaMask enforces the following restrictions on calling
-[Keyring Client API](../../reference/keyring-api/client-api/index.md) methods on your Snap based on
+[Account Management API](../../reference/keyring-api/account-management/index.md) methods on your Snap based on
 the caller origin:
 
 | Method                                                                                                       |  MetaMask origin   |    Dapp origin     |
 |:-------------------------------------------------------------------------------------------------------------|:------------------:|:------------------:|
-| [`keyring_listAccounts`](../../reference/keyring-api/client-api/index.md#keyring_listaccounts)               | :white_check_mark: | :white_check_mark: |
-| [`keyring_getAccount`](../../reference/keyring-api/client-api/index.md#keyring_getaccount)                   | :white_check_mark: | :white_check_mark: |
-| [`keyring_createAccount`](../../reference/keyring-api/client-api/index.md#keyring_createaccount)             |        :x:         | :white_check_mark: |
-| [`keyring_filterAccountChains`](../../reference/keyring-api/client-api/index.md#keyring_filteraccountchains) | :white_check_mark: | :white_check_mark: |
-| [`keyring_updateAccount`](../../reference/keyring-api/client-api/index.md#keyring_updateaccount)             |        :x:         | :white_check_mark: |
-| [`keyring_deleteAccount`](../../reference/keyring-api/client-api/index.md#keyring_deleteaccount)             | :white_check_mark: | :white_check_mark: |
-| [`keyring_exportAccount`](../../reference/keyring-api/client-api/index.md#keyring_exportaccount)             |        :x:         | :white_check_mark: |
-| [`keyring_listRequests`](../../reference/keyring-api/client-api/index.md#keyring_listrequests)               | :white_check_mark: | :white_check_mark: |
-| [`keyring_getRequest`](../../reference/keyring-api/client-api/index.md#keyring_getrequest)                   | :white_check_mark: | :white_check_mark: |
-| [`keyring_submitRequest`](../../reference/keyring-api/client-api/index.md#keyring_submitrequest)             | :white_check_mark: |        :x:         |
-| [`keyring_approveRequest`](../../reference/keyring-api/client-api/index.md#keyring_approverequest)           |        :x:         | :white_check_mark: |
-| [`keyring_rejectRequest`](../../reference/keyring-api/client-api/index.md#keyring_rejectrequest)             | :white_check_mark: | :white_check_mark: |
+| [`keyring_listAccounts`](../../reference/keyring-api/account-management/index.md#keyring_listaccounts)               | :white_check_mark: | :white_check_mark: |
+| [`keyring_getAccount`](../../reference/keyring-api/account-management/index.md#keyring_getaccount)                   | :white_check_mark: | :white_check_mark: |
+| [`keyring_createAccount`](../../reference/keyring-api/account-management/index.md#keyring_createaccount)             |        :x:         | :white_check_mark: |
+| [`keyring_filterAccountChains`](../../reference/keyring-api/account-management/index.md#keyring_filteraccountchains) | :white_check_mark: | :white_check_mark: |
+| [`keyring_updateAccount`](../../reference/keyring-api/account-management/index.md#keyring_updateaccount)             |        :x:         | :white_check_mark: |
+| [`keyring_deleteAccount`](../../reference/keyring-api/account-management/index.md#keyring_deleteaccount)             | :white_check_mark: | :white_check_mark: |
+| [`keyring_exportAccount`](../../reference/keyring-api/account-management/index.md#keyring_exportaccount)             |        :x:         | :white_check_mark: |
+| [`keyring_listRequests`](../../reference/keyring-api/account-management/index.md#keyring_listrequests)               | :white_check_mark: | :white_check_mark: |
+| [`keyring_getRequest`](../../reference/keyring-api/account-management/index.md#keyring_getrequest)                   | :white_check_mark: | :white_check_mark: |
+| [`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest)             | :white_check_mark: |        :x:         |
+| [`keyring_approveRequest`](../../reference/keyring-api/account-management/index.md#keyring_approverequest)           |        :x:         | :white_check_mark: |
+| [`keyring_rejectRequest`](../../reference/keyring-api/account-management/index.md#keyring_rejectrequest)             | :white_check_mark: | :white_check_mark: |
 
 For example, a dapp is not allowed to call the `keyring_submitRequest` method of your Snap, and
 MetaMask is not allowed to call the `keyring_createAccount` method of your Snap.
@@ -177,11 +177,11 @@ For example:
   }
   ```
 
-## Expose Keyring API methods using the onKeyringRequest entry point
+## Expose Account Management API methods using the onKeyringRequest entry point
 
 The [`onRpcRequest`](../../reference/entry-points.md#onrpcrequest) entry point is a general-purpose
 entry point and has no restrictions on the methods that can be called.
-Ensure that you only expose Keyring API methods using the `onKeyringRequest` entry point, which has
+Ensure that you only expose Account Management API methods using the `onKeyringRequest` entry point, which has
 extra security checks.
 
 For example:

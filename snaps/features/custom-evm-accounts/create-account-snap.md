@@ -29,7 +29,8 @@ Create an account management Snap to connect to custom EVM accounts.
 
 ### 1. Install the Keyring API
 
-Install `@metamask/keyring-api` in your project directory using Yarn or npm:
+Install the [`@metamask/keyring-api`](https://github.com/MetaMask/keyring-api) module in your
+project directory using Yarn or npm:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -63,9 +64,9 @@ Specify the following [permissions](../../how-to/request-permissions.md) in your
 Add a list of dapp URLs allowed to call Keyring API methods on your Snap using the
 [`endowment:keyring`](../../reference/permissions.md#endowmentkeyring) permission.
 
-### 3. Implement the Keyring API
+### 3. Implement the Account Management API
 
-Implement the [Keyring Client API](../../reference/keyring-api/client-api/index.md) in your Snap.
+Implement the [Account Management API](../../reference/keyring-api/account-management/index.md) in your Snap.
 Make sure to [limit the methods exposed to dapps](security.md#limit-the-methods-exposed-to-dapps).
 
 ```typescript
@@ -77,10 +78,10 @@ class MySnapKeyring implements Keyring {
 ### 4. Handle requests submitted by MetaMask
 
 MetaMask submits EVM requests from dapps using the
-[`keyring_submitRequest`](../../reference/keyring-api/client-api/index.md#keyring_submitrequest)
+[`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest)
 method of the Keyring API.
-See the EVM methods for [externally owned accounts](../../reference/keyring-api/interface-api.md#eoa-methods)
-and [ERC-4337 accounts](../../reference/keyring-api/interface-api.md#erc-4337-methods).
+See the EVM methods for [externally owned accounts](../../reference/keyring-api/chain-methods.md#eoa-methods)
+and [ERC-4337 accounts](../../reference/keyring-api/chain-methods.md#erc-4337-methods).
 
 The following is an example of a `personal_sign` request:
 
@@ -131,8 +132,8 @@ The redirect message and URL is displayed to the user to help them continue the 
 
 ### 5. Notify MetaMask about events
 
-Notify MetaMask when [Keyring API events](../../reference/keyring-api/client-api/events.md) take
-place, using the `emitSnapKeyringEvent()` helper function.
+Notify MetaMask when [Account Management API events](../../reference/keyring-api/account-management/events.md)
+take place, using the `emitSnapKeyringEvent()` helper function.
 
 For example, when an account is created:
 
@@ -147,9 +148,9 @@ try {
 
 MetaMask returns an error if the account already exists or the account object is invalid.
 
-### 6. Expose the Keyring API
+### 6. Expose the Account Management API
 
-Create an `onKeyringRequest` entry point handler method to expose the Keyring API methods
+Create an `onKeyringRequest` entry point handler method to expose the Account Management API methods
 to MetaMask and your dapp:
 
 ```typescript

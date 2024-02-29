@@ -4,10 +4,10 @@ toc_max_heading_level: 2
 sidebar_label: Events
 ---
 
-# Keyring Client API events
+# Account Management API events
 
 [Account management Snaps](../../../features/custom-evm-accounts/index.md) can notify MetaMask of the
-following [Keyring Client API](index.md) events.
+following [Account Management API](index.md) events.
 
 ## `AccountCreated`
 

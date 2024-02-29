@@ -4,10 +4,10 @@ toc_max_heading_level: 2
 sidebar_label: Objects
 ---
 
-# Keyring Client API objects
+# Account Management API objects
 
 [Account management Snaps](../../../features/custom-evm-accounts/index.md) use the following objects
-with the [Keyring Client API](index.md).
+with the [Account Management API](index.md).
 
 ## `KeyringAccount`
 
@@ -16,7 +16,7 @@ An account object contains:
 
 - `address`: `string` - Account address or next receive address (UTXO).
 - `id`: `string` - Account ID (UUIDv4).
-- `methods`: `string[]` - List of supported [Keyring Interface API](../interface-api.md) methods.
+- `methods`: `string[]` - List of supported [Keyring Interface API](../chain-methods.md) methods.
 - `options`: `Record<string, Json>` - Snap-defined account options.
 - `type`: `string` - Account type.
   `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for an

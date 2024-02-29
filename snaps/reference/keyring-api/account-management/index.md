@@ -5,10 +5,10 @@ sidebar_position: 1
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Keyring Client API
+# Account Management API
 
 Dapps can communicate with [account management Snaps](../../../features/custom-evm-accounts/index.md)
-using the Keyring Client API.
+using the Account Management API.
 The dapp must be [allowed to call each
 method](../../../features/custom-evm-accounts/security.md#limit-the-methods-exposed-to-dapps).
 

@@ -5,10 +5,10 @@ sidebar_position: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Keyring Interface API
+# Chain Methods API
 
-[Account management Snaps](../../features/custom-evm-accounts/index.md) can implement the Keyring
-Interface API to support dapp requests from custom accounts.
+[Account management Snaps](../../features/custom-evm-accounts/index.md) can choose to implement the
+following EVM methods to support dapp requests from custom accounts.
 
 ## EOA methods
 

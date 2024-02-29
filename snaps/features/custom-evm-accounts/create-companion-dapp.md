@@ -26,7 +26,8 @@ An [account management Snap](create-account-snap.md) set up.
 
 ### 1. Install the Keyring API
 
-Install `@metamask/keyring-api` in your project directory using Yarn or npm:
+Install the [`@metamask/keyring-api`](https://github.com/MetaMask/keyring-api) module in your
+project directory using Yarn or npm:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -49,12 +50,12 @@ import { defaultSnapOrigin as snapId } from '../config';
 let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ```
 
-### 3. Call Keyring API methods
+### 3. Call Account Management API methods
 
 You can now use the `KeyringSnapRpcClient` to invoke
-[Keyring Client API](../../reference/keyring-api/client-api/index.md) methods on your Snap.
+[Account Management API](../../reference/keyring-api/account-management/index.md) methods on your Snap.
 
-For example, to call [`keyring_listAccounts`](../../reference/keyring-api/client-api/index.md#keyringlist_accounts):
+For example, to call [`keyring_listAccounts`](../../reference/keyring-api/account-management/index.md#keyringlist_accounts):
 
 ```typescript
 const accounts = await client.listAccounts();

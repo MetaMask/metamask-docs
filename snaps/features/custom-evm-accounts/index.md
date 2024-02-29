@@ -139,7 +139,7 @@ Site -->>- User: Done
 ```
 
 The companion dapp presents a user interface allowing the user to configure their custom account.
-The dapp creates an account using [`keyring_createAccount`](../../reference/keyring-api/client-api/index.md#keyring_createaccount).
+The dapp creates an account using [`keyring_createAccount`](../../reference/keyring-api/account-management/index.md#keyring_createaccount).
 
 The Snap keeps track of the accounts that it creates using [`snap_manageState`](../../reference/snaps-api.md#snap_managestate).
 Once the Snap has created an account, it notifies MetaMask using
@@ -198,7 +198,7 @@ At that point, MetaMask detects that this interaction is requested for an accoun
 account management Snap.
 
 After the user approves the transaction in MetaMask, MetaMask calls
-[`keyring_submitRequest`](../../reference/keyring-api/client-api/index.md#keyring_submitrequest),
+[`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest),
 which receives the original RPC request and returns a response with `pending` set to `false`, and
 `result` set to the requested signature.
 
@@ -258,7 +258,7 @@ Dapp -->>- User: Done
 The flow starts the same way as the [synchronous flow](#synchronous-transaction-flow): a user or
 dapp initiates a sign request.
 After approval, MetaMask calls
-[`keyring_submitRequest`](../../reference/keyring-api/client-api/index.md#keyring_submitrequest).
+[`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest).
 
 Since the Snap doesn't answer the request directly, it stores the pending request in its internal
 state using [`snap_manageState`](../../reference/snaps-api.md#snap_managestate).
@@ -268,9 +268,9 @@ This response can optionally contain a redirect URL that MetaMask will open in a
 the user to interact with the Snap companion dapp.
 
 The companion dapp gets the Snap's pending request using
-[`keyring_getRequest`](../../reference/keyring-api/client-api/index.md#keyring_getrequest).
+[`keyring_getRequest`](../../reference/keyring-api/account-management/index.md#keyring_getrequest).
 It resolves the request using
-[`keyring_approveRequest`](../../reference/keyring-api/client-api/index.md#keyring_approverequest),
+[`keyring_approveRequest`](../../reference/keyring-api/account-management/index.md#keyring_approverequest),
 and the Snap resolves the request using [`snap_manageAccounts`](../../reference/snaps-api.md#snap_manageaccounts),
 notifying MetaMask of the result.
 
@@ -279,9 +279,9 @@ notifying MetaMask of the result.
 An account management Snap can implement the following methods to support dapp requests from
 externally owned accounts (EOAs):
 
-- [`personal_sign`](../../reference/keyring-api/interface-api.md#personal_sign)
-- [`eth_signTypedData_v4`](../../reference/keyring-api/interface-api.md#eth_signtypeddata_v4)
-- [`eth_signTransaction`](../../reference/keyring-api/interface-api.md#eth_signtransaction)
+- [`personal_sign`](../../reference/keyring-api/chain-methods.md#personal_sign)
+- [`eth_signTypedData_v4`](../../reference/keyring-api/chain-methods.md#eth_signtypeddata_v4)
+- [`eth_signTransaction`](../../reference/keyring-api/chain-methods.md#eth_signtransaction)
 - [Deprecated signing methods](/wallet/concepts/signing-methods/#deprecated-signing-methods)
 
 ## Account abstraction (ERC-4337)
@@ -297,9 +297,9 @@ Users can use these ERC-4337 accounts instead of externally owned accounts as pr
 An account management Snap can implement the following methods to support dapp requests from
 ERC-4337 accounts:
 
-- [`eth_prepareUserOperation`](../../reference/keyring-api/interface-api.md#eth_prepareuseroperation)
-- [`eth_patchUserOperation`](../../reference/keyring-api/interface-api.md#eth_patchuseroperation)
-- [`eth_signUserOperation`](../../reference/keyring-api/interface-api.md#eth_signuseroperation)
+- [`eth_prepareUserOperation`](../../reference/keyring-api/chain-methods.md#eth_prepareuseroperation)
+- [`eth_patchUserOperation`](../../reference/keyring-api/chain-methods.md#eth_patchuseroperation)
+- [`eth_signUserOperation`](../../reference/keyring-api/chain-methods.md#eth_signuseroperation)
 
 The user operation signing flow in an ERC-4337 compatible account Snap looks like the following:
 
@@ -348,7 +348,7 @@ MetaMask ->> MetaMask: Submit userOp to bundler and wait for transaction hash
 MetaMask -->>- Dapp: Transaction hash
 ```
 
-See the [ERC-4337 methods](../../reference/keyring-api/interface-api.md#erc-4337-methods) for more
+See the [ERC-4337 methods](../../reference/keyring-api/chain-methods.md#erc-4337-methods) for more
 information about their parameters and response details.
 
 ## Examples
