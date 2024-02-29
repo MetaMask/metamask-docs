@@ -91,7 +91,7 @@ yarn mm-snap manifest --fix false
 </TabItem>
 </Tabs>
 
-Indicates whether to make necessary changes to the manifest file.
+Enables or disables making any changes to fix the manifest file.
 The default is `true`.
 
 ## `s`, `serve`
@@ -117,7 +117,7 @@ yarn mm-snap serve --port <PORT>
 <TabItem value="Example">
 
 ```bash
-yarn mm-snap serve --port 8000
+yarn mm-snap serve --port 9000
 ```
 
 </TabItem>
@@ -151,7 +151,7 @@ yarn mm-snap watch --port <PORT>
 <TabItem value="Example">
 
 ```bash
-yarn mm-snap watch --port 8000
+yarn mm-snap watch --port 9000
 ```
 
 </TabItem>

@@ -33,11 +33,16 @@ bundler: "webpack",
 </Tabs>
 
 The bundler to use.
-The options are `"browserify"` and `"webpack"`.
+The options are `"webpack"` and `"browserify"`.
+The default is `"webpack"`.
 
-For backwards compatibility, the default is `"browserify"`, but we recommend using `"webpack"`.
-This reference describes the options for the Webpack bundler.
-For Browserify, see the [legacy options](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli#legacy-options).
+:::caution important
+We recommend using the Webpack bundler.
+The Browserify-based configuration is deprecated and will be removed in the future.
+This reference describes the configuration options for Webpack.
+For Browserify, see the
+[legacy options](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli#legacy-options).
+:::
 
 ## `customizeWebpackConfig`
 
@@ -121,7 +126,7 @@ evaluate: true,
 </TabItem>
 </Tabs>
 
-Whether to evaluate the bundle.
+Enables or disables evaluating the bundle.
 When set to `true`, the bundle is checked for compatibility issues with the Snaps runtime.
 If there are any issues, the CLI exits with an error.
 
@@ -192,7 +197,7 @@ The default is `"src/index.js"`.
 
 ## `manifest`
 
-The Snap manifest configuration.
+The Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) configuration.
 
 ### `manifest.path`
 
@@ -217,8 +222,8 @@ manifest: {
 </TabItem>
 </Tabs>
 
-Path to the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
-The default is `"snap.manifest.json`.
+Path to the Snap manifest file.
+The default is `"snap.manifest.json"`.
 
 ### `manifest.update`
 
@@ -227,7 +232,7 @@ The default is `"snap.manifest.json`.
 
 ```javascript
 manifest: {
-    update: <FILE>,
+    update: <BOOLEAN>,
 },
 ```
 
@@ -236,41 +241,330 @@ manifest: {
 
 ```javascript
 manifest: {
-    update: "snap.manifest.json",
+    update: false,
 },
 ```
 
 </TabItem>
 </Tabs>
 
+Enables or disables updating the manifest file with the bundle shasum, and making any other possible updates.
+If set to `false`, the manifest is not updated, and an error is thrown if the manifest is not up-to-date.
+The default is `true`.
+
 ## `output`
+
+The output configuration.
 
 ### `output.clean`
 
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+output: {
+    clean: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+output: {
+    clean: true,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables cleaning the output directory before building.
+The default is `false`.
+
 ### `output.filename`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+output: {
+    filename: <FILE>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+output: {
+    filename: "bundle.js",
+},
+```
+
+</TabItem>
+</Tabs>
+
+The output filename.
+The default is `"bundle.js"`.
 
 ### `output.minimize`
 
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+output: {
+    minimize: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+output: {
+    minimize: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables minimizing the bundle.
+Minimizing the bundle removes comments and whitespace, mangles variable names, and performs other optimizations.
+The default is `true`.
+
 ### `output.path`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+output: {
+    path: <DIRECTORY>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+output: {
+    path: "dist",
+},
+```
+
+</TabItem>
+</Tabs>
+
+Path to the output directory.
+The default is `"dist"`.
 
 ## `server`
 
+The development server configuration.
+The development server is used to test the Snap during development, using the
+[`watch`](subcommands.md#w-watch) and [`serve`](subcommands.md#s-serve) subcommands.
+
 ### `server.enabled`
 
-### `server.root`
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+server: {
+    enabled: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+server: {
+    enabled: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables the development server.
 
 ### `server.port`
 
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+server: {
+    port: <PORT>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+server: {
+    port: 9000,
+},
+```
+
+</TabItem>
+</Tabs>
+
+The port to run the development server on.
+If set to `0`, a random port is used.
+The default is `8081`.
+
+### `server.root`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+server: {
+    root: <DIRECTORY>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+server: {
+    root: "snap",
+},
+```
+
+</TabItem>
+</Tabs>
+
+The root directory of the development server.
+This is the directory that is served by the development server.
+The default is the current working directory.
+
 ## `sourceMap`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+sourceMap: <BOOLEAN|"inline">,
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+sourceMap: "inline",
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables generating a source map.
+If set to `"inline"`, the source map is inlined in the bundle.
+If set to `true` or not specified, it is written to a separate file.
+The default is `true`.
 
 ## `stats`
 
+The stats configuration, which controls the log output of the CLI.
+
 ### `stats.buffer`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+stats: {
+    buffer: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+stats: {
+    buffer: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables showing a warning if the `Buffer` global is used but not provided.
+The `Buffer` global is not available in the Snaps runtime by default, and must be provided using the
+[`customizeWebpackConfig`](#customizewebpackconfig) option.
+
+The default is `true`.
 
 ### `stats.builtIns`
 
-#### `stats.builtIns.ignore`
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+stats: {
+    builtIns: <false|IGNORE_LIST>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+stats: {
+    builtIns: {
+        ignore: [
+            // Built-in modules to ignore.
+        ]
+    },
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables checking for missing built-in modules.
+
+Not specifying this option, or specifying an ignore list, enables checking for missing built-in modules.
+When enabled, the CLI shows a warning if a built-in is used but not provided.
+The Snaps CLI does not support Node.js built-ins out of the box, and any used built-ins must be
+provided using the [`customizeWebpackConfig`](#customizewebpackconfig) option.
+
+You can specify a list of built-ins to ignore when checking for missing built-ins.
+This is useful if the built-in is not actually used in the Snap, but is added by a dependency.
+
+The default is an empty ignore list.
 
 ### `stats.verbose`
 
-## Legacy options
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+stats: {
+    verbose: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+stats: {
+    verbose: true,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables verbose logging.
+If set to `true`, the CLI logs more information.
+The default is `false`.
