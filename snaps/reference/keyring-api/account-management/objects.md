@@ -52,8 +52,8 @@ A request object contains:
 - `request` - Inner request sent by the client application, containing:
   - `method`: `string` - The request method.
   - `params`: `Json[]` - Optional method parameters.
-- `scope`: `string` - Request's scope ([CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID).
+- `scope`: `string` - [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+  chain ID of the blockchain network for the request.
 
 ### Example
 

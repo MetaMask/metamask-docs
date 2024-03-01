@@ -154,7 +154,7 @@ An object containing:
 
 ### `keyring_filterAccountChains`
 
-Filters for chains that an account can be used on.
+Filters for blockchain networks that an account can be used on.
 
 #### Parameters
 
@@ -162,14 +162,14 @@ An object containing:
 
 - `id`: `string` - Account ID (UUIDv4).
 - `chains`: `string[]` - List of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain IDs to filter.
+  chain IDs of blockchain networks to filter.
 
 #### Returns
 
 An object containing:
 
 - `chains`: `string[]` - List of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain IDs that the account can be used on.
+  chain IDs of blockchain networks that the account can be used on.
 
 #### Example
 
