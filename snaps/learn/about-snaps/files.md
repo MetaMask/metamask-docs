@@ -107,7 +107,6 @@ For example:
 
 ```javascript title="snap.config.js"
 module.exports = {
-    bundler: "webpack",
     input: "src/index.js",
     output: {
         path: "dist",
@@ -125,7 +124,6 @@ module.exports = {
 import type { SnapConfig } from "@metamask/snaps-cli";
 
 const config: SnapConfig = {
-    bundler: "webpack",
     input: "src/index.js",
     output: {
         path: "dist",
