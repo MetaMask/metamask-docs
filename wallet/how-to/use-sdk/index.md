@@ -63,7 +63,7 @@ The SDK supports the following dapp platforms:
   <div class="card__body">
     <ul>
       <li><a href="3rd-party-libraries/web3-onboard">Web3-Onboard</a></li>
-      <li>Wagmi (coming soon)</li>
+      <li><a href="3rd-party-libraries/wagmi">Wagmi</a></li>
     </ul>
   </div>
 </div>
