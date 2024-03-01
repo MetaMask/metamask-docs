@@ -41,7 +41,7 @@ We recommend using the Webpack bundler.
 The Browserify-based configuration is deprecated and will be removed in the future.
 This reference describes the configuration options for Webpack.
 For Browserify, see the
-[legacy options](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli#legacy-options).
+[legacy options](https://github.com/MetaMask/snaps/tree/455366f19281801ed4220431100e45237dd5cf1e/packages/snaps-cli#legacy-options).
 :::
 
 ## `customizeWebpackConfig`
