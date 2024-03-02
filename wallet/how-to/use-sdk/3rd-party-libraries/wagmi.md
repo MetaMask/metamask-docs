@@ -8,32 +8,25 @@ tags:
 
 # Use Wagmi with MetaMask SDK
 
-Wagmi is a powerful and efficient library designed to streamline the development of dapps by
-simplifying Ethereum interactions.
-Through the MetaMask SDK integration with Wagmi, developers can offer users a seamless and secure
-way to integrate their MetaMask wallets with dapps, facilitating a wide range of blockchain operations.
+[Wagmi](https://wagmi.sh/) is a powerful and efficient React Hooks library designed to streamline
+dapp development by simplifying Ethereum interactions.
 
-This guide explains how to integrate MetaMask SDK into your dapp using Wagmi.
+You can integrate [MetaMask SDK](../../../concepts/sdk/index.md) into your dapp alongside Wagmi,
+using the MetaMask connector with Wagmi, to enable your users to seamlessly and securely connect to
+the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
 
-Before proceeding with the integration, ensure you have a basic understanding of Ethereum smart
-contracts and React Hooks.
-It's also crucial to start with a Wagmi-based project.
-If you haven't set up a Wagmi project yet, follow the getting-started guide to create one:
-
-[Getting Started with Wagmi](https://wagmi.sh/react/getting-started)
-
-This guide will provide you with all the necessary steps to set up a new Wagmi project, from
-installation to initial configuration, ensuring you have the right foundation to integrate MetaMask SDK.
+- Ensure you have a basic understanding of Ethereum smart contracts and React Hooks.
+- Set up a project with [Wagmi](https://wagmi.sh/react/getting-started).
+- Create an Infura API key and allowlist to [make read-only requests](../../make-read-only-requests.md).
 
 ## Steps
 
-### 1. Configure Wagmi with the SDK connector
+### 1. Configure Wagmi with the MetaMask connector
 
-The first step in integrating MetaMask with your dapp is to configure Wagmi to use the MetaMask connector.
-This involves setting up the Wagmi configuration to include MetaMask as a connector and specifying
-the Ethereum chains your application will support.
+Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support.
+For example:
 
 ```javascript
 import { createConfig, http } from "wagmi";
@@ -41,43 +34,64 @@ import { mainnet, sepolia } from "wagmi/chains";
 import { metaMask } from "wagmi/connectors";
 
 export const config = createConfig({
-  chains: [mainnet, sepolia],
-  connectors: [
-    metaMask({
-      dappMetadata: {
-        name: "Your dapp name",
-      },
-    }),
-  ],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-  },
+    chains: [mainnet, sepolia],
+    connectors: [
+        metaMask({
+            dappMetadata: {
+                name: "Example Wagmi dapp",
+            },
+        }),
+    ],
+    transports: {
+        [mainnet.id]: http(),
+        [sepolia.id]: http(),
+    },
 });
 ```
 
 ### 2. Configure the SDK
 
+When configuring the connector, make sure to configure the proper
+[SDK options](../../../reference/sdk-js-options.md).
+
+```javascript
+connectors: [
+    metaMask({
+        dappMetadata: {
+            name: "Example Wagmi dapp",
+        },
+        infuraAPIKey: "YOUR-API-KEY",
+        // Other options
+    }),
+],
+```
+
 #### Dapp metadata
 
-It is crucial to provide [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) when
-configuring your connector, as it is now a mandatory requirement for integration.
-This metadata helps in identifying your dapp within the MetaMask ecosystem.
+It is required to specify the [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata)
+option when configuring the MetaMask connector with Wagmi.
+This metadata helps identify your dapp within the MetaMask ecosystem.
+
+#### Infura API key
+
+We recommend specifying the [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey)
+option to [make read-only requests](../../make-read-only-requests.md) using the Infura API.
+Read more about the [benefits of using the Infura API with Wagmi](#benefits-of-using-the-infura-api-with-wagmi).
 
 #### Universal links
 
-To avoid issues with deep links on iOS, use universal links in your dapp.
+We do not recommend enabling the [`useDeeplink`](../../../reference/sdk-js-options.md#usedeeplink) option.
+To avoid issues with deeplinks on iOS, use universal links instead of deeplinks.
 This ensures a smoother transition for users accessing your dapp from mobile devices, providing a
-better user experience compared to traditional deep linking methods.
-
-So we don't recommend setting the MetaMaskSDK
-[`useDeeplink`](../../../reference/sdk-js-options.md#usedeeplink) option to `true`.
+better user experience compared to traditional deeplinking methods.
 
 ### 3. Implement contract interaction using `usePrepareContractWrite`
 
-Due to a known issue in Safari where a 500ms timeout can interrupt smart contract interactions, it
-is recommended to use the `usePrepareContractWrite` hook from Wagmi.
-This approach ensures smooth transactions by preparing the contract write operation ahead of the actual execution.
+Due to a known issue in Safari where a 500ms timeout can interrupt smart contract interactions, we
+recommend using the [`usePrepareContractWrite`](https://1.x.wagmi.sh/react/prepare-hooks/usePrepareContractWrite)
+hook from Wagmi.
+This approach ensures smooth transactions by preparing the contract write operation ahead of the
+actual execution.
 
 ```javascript
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
@@ -94,36 +108,30 @@ const { write } = useContractWrite(config);
 write();
 ```
 
-### 4. Use the Infura API for read-only calls
-
-For read-only blockchain calls, it's best practice to use the Infura API.
-This approach offloads the read operations to Infura's nodes, reducing the load on your own
-infrastructure and ensuring high availability and reliability.
+## Benefits of using the Infura API with Wagmi
 
 Wagmi is not optimized for mobile environments.
-This limitation becomes evident when dealing with read-only calls, which are queries that fetch data
+This limitation becomes evident when making read-only requests, which are queries that fetch data
 from the blockchain without making a transaction.
-Since mobile apps may not maintain a continuous connection to MetaMask, these read-only calls can
-fail, leading to a suboptimal user experience.
+Since mobile dapps might not maintain a continuous connection to MetaMask, these read-only requests
+can fail, leading to a suboptimal user experience.
 
-These are the errors that might occur after a while in mobile environments when using Wagmi in your
-dapp without an Infura API key:
+These are some errors that might occur in mobile environments:
 
 ![Wagmi errors](../../../assets/wagmi-errors.png)
 
-An Infura API key is crucial because it provides a direct and reliable connection to the Ethereum
-network, independent of the user's wallet connection.
-This is particularly beneficial for mobile apps that rely on Wagmi, which is not inherently designed
-for mobile's variable connectivity and background processing constraints.
+To overcome this limitation in mobile dapps that rely on Wagmi, use the Infura API to make read-only
+requests.
+You can do this by [configuring the SDK with an Infura API key](#2-configure-the-sdk).
+This approach offloads the read operations to Infura's nodes, reducing the load on your own
+infrastructure and ensuring high availability and reliability, independent of the user's wallet connection.
 
-By including an Infura API key in the MetaMask SDK props, developers ensure:
+By using the Infura API, you can ensure:
 
-- **Uninterrupted Access:** Continuous network access for read-only calls, regardless of MetaMask's state.
+- **Uninterrupted access:** Continuous network access for read-only requests, regardless of MetaMask's state.
 
-- **Enhanced Stability:** Stabilized app functionality by relying on Infura's robust infrastructure
-  rather than mobile's fluctuating network conditions.
+- **Enhanced stability:** Stabilized dapp functionality by relying on Infura's robust infrastructure
+  rather than the mobile environment's variable connectivity and background processing constraints.
 
-In essence, an Infura API key compensates for Wagmi's lack of mobile optimization by providing a
+In summary, using the Infura API compensates for Wagmi's lack of mobile optimization by providing a
 stable network backend for read-only operations.
-
-Visit [Infura.io](https://www.infura.io/) to get an API key.

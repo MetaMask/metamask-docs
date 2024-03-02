@@ -14,12 +14,12 @@ It provides a smooth user interface, a variety of wallet integrations, and is hi
 meet the needs of your dapp.
 
 You can integrate [MetaMask SDK](../../../concepts/sdk/index.md) into your dapp alongside Web3-Onboard,
-using the Web3-Onboard MetaMask module, to enable your users to easily connect to the MetaMask
-browser extension and MetaMask Mobile.
+using the Web3-Onboard MetaMask module, to enable your users to seamlessly and securely connect to
+the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
 
-A project set up with [Web3-Onboard](https://onboard.blocknative.com/docs/getting-started/installation).
+Set up a project with [Web3-Onboard](https://onboard.blocknative.com/docs/getting-started/installation).
 
 ## Steps
 
