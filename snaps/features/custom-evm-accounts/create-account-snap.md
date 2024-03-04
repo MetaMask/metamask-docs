@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 Create an account management Snap to connect to custom EVM accounts.
 
 :::tip see also
-- [About custom EVM accounts](index.md)
+- [Custom EVM accounts](index.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
@@ -29,7 +29,8 @@ Create an account management Snap to connect to custom EVM accounts.
 
 ### 1. Install the Keyring API
 
-Install `@metamask/keyring-api` in your project directory using Yarn or npm:
+Install the [`@metamask/keyring-api`](https://github.com/MetaMask/keyring-api) module in your
+project directory using Yarn or npm:
 
 ```bash
 yarn add @metamask/keyring-api
@@ -63,9 +64,10 @@ Specify the following [permissions](../../how-to/request-permissions.md) in your
 Add a list of dapp URLs allowed to call Keyring API methods on your Snap using the
 [`endowment:keyring`](../../reference/permissions.md#endowmentkeyring) permission.
 
-### 3. Implement the Keyring API
+### 3. Implement the Account Management API
 
-Implement the [required Keyring API methods](security.md#limit-the-methods-exposed-to-dapps) in your Snap:
+Implement the [Account Management API](../../reference/keyring-api/account-management/index.md) in your Snap.
+Make sure to [limit the methods exposed to dapps](security.md#limit-the-methods-exposed-to-dapps).
 
 ```typescript
 class MySnapKeyring implements Keyring {
@@ -75,11 +77,11 @@ class MySnapKeyring implements Keyring {
 
 ### 4. Handle requests submitted by MetaMask
 
-MetaMask submits Ethereum sign requests from dapps using the
-[`submitRequest`](../../reference/keyring-api/type-aliases/Keyring.md#submitrequest) method of the
-Keyring API.
-See the methods for [externally owned accounts](index.md#eoa-methods) and
-[ERC-4337 accounts](index.md#account-abstraction-erc-4337).
+MetaMask submits EVM requests from dapps using the
+[`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest)
+method of the Keyring API.
+See the EVM methods for [externally owned accounts](../../reference/keyring-api/chain-methods.md#eoa-methods)
+and [ERC-4337 accounts](../../reference/keyring-api/chain-methods.md#erc-4337-methods).
 
 The following is an example of a `personal_sign` request:
 
@@ -130,88 +132,25 @@ The redirect message and URL is displayed to the user to help them continue the 
 
 ### 5. Notify MetaMask about events
 
-Notify MetaMask when the following events take place, using the `emitSnapKeyringEvent()` helper function:
+Notify MetaMask when [Account Management API events](../../reference/keyring-api/account-management/events.md)
+take place, using the `emitSnapKeyringEvent()` helper function.
 
-- An account is created:
+For example, when an account is created:
 
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
+```typescript
+try {
+    emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
+    // Update your Snap's state...
+} catch (error) {
+    // Handle the error...
+}
+```
 
-   MetaMask returns an error if the account already exists or the account object is invalid.
+MetaMask returns an error if the account already exists or the account object is invalid.
 
-- An account is updated:
+### 6. Expose the Account Management API
 
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountUpdated, { account });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   MetaMask returns an error if the account does not exist, the account object is invalid, or the
-   account address changes.
-
-- An account is deleted:
-
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.AccountDeleted, {
-       id: account.id,
-     });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   The delete event is idempotent, so it is safe to emit even if the account does not exist.
-
-- A request is approved:
-
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.RequestApproved, {
-       id: request.id,
-       result,
-     });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   MetaMask returns an error if the request does not exist.
-   This event only applies to Snaps that implement the
-   [asynchronous transaction flow](index.md#asynchronous-transaction-flow).
-
-- A request is rejected:
-
-   ```typescript
-   try {
-     emitSnapKeyringEvent(snap, KeyringEvent.RequestRejected, {
-       id: request.id,
-     });
-     // Update your Snap's state...
-   } catch (error) {
-     // Handle the error...
-   }
-   ```
-  
-   MetaMask returns an error if the request does not exist.
-   This event only applies to Snaps that implement the
-   [asynchronous transaction flow](index.md#asynchronous-transaction-flow).
-
-### 6. Expose the Keyring API
-
-Create an `onKeyringRequest` entry point handler method to expose the Keyring API methods
+Create an `onKeyringRequest` entry point handler method to expose the Account Management API methods
 to MetaMask and your dapp:
 
 ```typescript

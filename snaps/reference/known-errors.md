@@ -1,5 +1,6 @@
 ---
 description: See the Snaps known errors reference
+sidebar_position: 5
 ---
 
 # Snaps known errors
