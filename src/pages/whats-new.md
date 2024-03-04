@@ -1,5 +1,5 @@
 ---
-title: "What's new in the MetaMask documentation"
+title: "What's new in the documentation"
 description: Summary of the latest updates to this documentation.
 ---
 
