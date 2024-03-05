@@ -1,5 +1,6 @@
 ---
 description: See the Jest API and options reference.
+sidebar_position: 7
 ---
 
 # Jest API and options

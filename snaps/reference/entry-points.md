@@ -1,5 +1,6 @@
 ---
 description: See the Snaps entry points reference.
+sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';

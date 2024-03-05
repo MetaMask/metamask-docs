@@ -1,5 +1,6 @@
 ---
 description: See more Snaps resources.
+sidebar_position: 8
 ---
 
 # Resources
