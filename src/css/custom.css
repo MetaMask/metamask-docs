@@ -163,21 +163,42 @@ svg {
 }
 
 .markdown {
+  h1 {
+    font-size: 2.25em; 
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.75em;
+  }
+  h4 {
+    font-size: 1.5em;
+  }
+  h5 {
+    font-size: 1.25em;
+  }
+  h6 {
+    font-size: 1em;
+  }
+
   > h1, h2, h3, h4, h5, h6 {
     > code {
       font-size: inherit;
     }
   }
-  > p > .ReactPlayer {
-    border-radius: 3px; 
-    overflow: hidden; 
-  }
-  > p > video {
-    border-radius: 3px; 
-    overflow: hidden; 
-  }
+}
+
+p > .ReactPlayer {
+  border-radius: 3px; 
+  overflow: hidden; 
+}
+
+p > video {
+  border-radius: 3px; 
+  overflow: hidden; 
 }
 
 .table-of-contents code {
-  font-size: inherit;
+  font-size: 75%;
 }
