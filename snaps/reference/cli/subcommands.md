@@ -17,7 +17,7 @@ You can specify subcommands and options using the `yarn mm-snap` command:
 yarn mm-snap [SUBCOMMAND] [OPTIONS]
 ```
 
-## b, build
+## `b`, `build`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -40,7 +40,7 @@ Builds a Snap from source.
 
 `b` is an alias for `build`.
 
-## e, eval
+## `e`, `eval`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -63,7 +63,7 @@ Attempts to evaluate the Snap bundle in SES.
 
 `e` is an alias for `eval`.
 
-## i, init
+## `i`, `init`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -87,7 +87,7 @@ If no directory is specified, the Snap project is initialized in the current dir
 
 `i` is an alias for `init`.
 
-## m, manifest
+## `m`, `manifest`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -110,7 +110,7 @@ Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-fil
 
 `m` is an alias for `manifest`.
 
-## s, serve
+## `s`, `serve`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -133,7 +133,7 @@ Locally serves Snap files for testing.
 
 `s` is an alias for `serve`.
 
-## w, watch
+## `w`, `watch`
 
 <Tabs>
 <TabItem value="Syntax">

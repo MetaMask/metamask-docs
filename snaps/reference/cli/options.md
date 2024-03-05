@@ -25,7 +25,7 @@ You can specify options:
 
 ## Options
 
-### b, bundle
+### `b`, `bundle`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -58,7 +58,7 @@ You can use this option with the [`eval`](subcommands.md#e-eval) subcommand.
 
 `-b` is an alias for `--bundle`.
 
-### d, dist
+### `d`, `dist`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -92,7 +92,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `-d` is an alias for `--dist`.
 
-### depsToTranspile
+### `depsToTranspile`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -124,7 +124,7 @@ List of dependencies to transpile, if [`--transpilationMode`](#transpilationmode
 You can use this option with the [`build`](subcommands.md#b-build) and
 [`watch`](subcommands.md#w-watch) subcommands.
 
-### e, eval
+### `e`, `eval`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -158,7 +158,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `-e` is an alias for `--eval`.
 
-### fix, writeManifest
+### `fix`, `writeManifest`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -191,7 +191,7 @@ The default is `true`.
 
 `--fix` is an alias for `--writeManifest`.
 
-### h, help
+### `h`, `help`
 
 ```bash
 -h, --help
@@ -202,7 +202,7 @@ You can use this option with `mm-snap` or any [subcommand](subcommands.md).
 
 `-h` is an alias for `--help`.
 
-### m, manifest
+### `m`, `manifest`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -236,7 +236,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `-m` is an alias for `--manifest`.
 
-### n, outfileName
+### `n`, `outfileName`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -270,7 +270,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `-n` is an alias for `--outfileName`.
 
-### p, port
+### `p`, `port`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -304,7 +304,7 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 
 `-p` is an alias for `--port`.
 
-### r, root
+### `r`, `root`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -338,7 +338,7 @@ You can use this option with the [`serve`](subcommands.md#s-serve) and
 
 `-r` is an alias for `--root`.
 
-### s, src
+### `s`, `src`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -372,7 +372,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `-s` is an alias for `--src`.
 
-### sourceMaps
+### `sourceMaps`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -404,7 +404,7 @@ The default is `false`.
 You can use this option with the [`build`](subcommands.md#b-build) and
 [`watch`](subcommands.md#w-watch) subcommands.
 
-### strip, stripComments
+### `strip`, `stripComments`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -438,7 +438,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 
 `--strip` is an alias for `--stripComments`.
 
-### suppressWarnings
+### `suppressWarnings`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -469,7 +469,7 @@ The default is `false`.
 
 You can use this option with any [subcommand](subcommands.md).
 
-### transpilationMode
+### `transpilationMode`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -508,7 +508,7 @@ You can use this option with the [`build`](subcommands.md#b-build) and
 For TypeScript Snaps, `--transpilationMode` must be set to either `localOnly` or `localAndDeps`.
 :::
 
-### verboseErrors
+### `verboseErrors`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -539,7 +539,7 @@ The default is `true`.
 
 You can use this option with any [subcommand](subcommands.md). 
 
-### version
+### `version`
 
 ```bash
 --version

@@ -9,7 +9,7 @@ tags:
 
 The following is an overview of the API methods used in the [Unity SDK](../how-to/use-sdk/gaming/unity/index.md).
 
-## MetaMaskUnity
+## `MetaMaskUnity`
 
 This is a singleton class that you can use to access the `MetaMaskWallet` instance, which is
 specific to Unity.
@@ -54,7 +54,7 @@ It is useful when you want to restore the session after the application quits.
 When the application starts, it automatically calls this method.
 You can also manually call this method.
 
-## MetaMaskWallet
+## `MetaMaskWallet`
 
 ### Connect
 
