@@ -68,9 +68,9 @@ connectors: [
 
 #### Dapp metadata
 
-It is required to specify the [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata)
-option when configuring the MetaMask connector with Wagmi.
-This metadata helps identify your dapp within the MetaMask ecosystem.
+Specify the [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) option to help
+identify your dapp within the MetaMask ecosystem.
+This option is required when configuring the MetaMask connector with Wagmi.
 
 #### Infura API key
 
@@ -80,10 +80,10 @@ Read more about the [benefits of using the Infura API with Wagmi](#benefits-of-u
 
 #### Universal links
 
-We do not recommend enabling the [`useDeeplink`](../../../reference/sdk-js-options.md#usedeeplink) option.
-To avoid issues with deeplinks on iOS, use universal links instead of deeplinks.
-This ensures a smoother transition for users accessing your dapp from mobile devices, providing a
-better user experience compared to traditional deeplinking methods.
+We recommend using universal links instead of deeplinks to avoid issues on iOS.
+Thus, do not enable the [`useDeeplink`](../../../reference/sdk-js-options.md#usedeeplink) option.
+Using universal links ensures a smoother transition for users accessing your dapp from mobile
+devices, providing a better user experience compared to traditional deeplinking methods.
 
 ### 3. Implement contract interaction using `usePrepareContractWrite`
 
