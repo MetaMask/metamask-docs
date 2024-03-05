@@ -164,13 +164,8 @@ svg {
 
 .markdown {
   > h1, h2, h3, h4, h5, h6 {
-    > code > code {
-      background-color: rgba(27,31,35,.05); 
-      font-family: Consolas, "Courier New", monospace; 
-      padding: 0.2em 0.4em;
-      font-size: 0.9em; 
-      border-radius: 3px; 
-      border: 1px solid #d1d5da; 
+    > code {
+      font-size: inherit;
     }
     }
   }
