@@ -13,6 +13,15 @@ your Snap.
 You can use environment variables [on the command line](#use-environment-variables-on-the-command-line)
 or [in a `.env` file](#use-environment-variables-in-a-env-file).
 
+:::note
+In addition to the environment variables you set, the following environment variables are set by the
+Snaps CLI:
+
+- `NODE_ENV="production"`
+- `NODE_DEBUG=false`
+- `DEBUG=false`
+:::
+
 ## Use environment variables on the command line
 
 1. Specify environment variables on the command line.
