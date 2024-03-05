@@ -95,7 +95,7 @@ For example, running [`yarn mm-snap build`](../../reference/cli/subcommands.md#b
 
 ## Configuration file
 
-The Snap configuration file, `snap.config.js` or `snap.config.ts`, should be placed in the project
+The Snap configuration file, `snap.config.js` or `snap.config.ts`, must be placed in the project
 root directory.
 You can override the default values of the
 [Snaps configuration options](../../reference/cli/options.md) by specifying them in the
