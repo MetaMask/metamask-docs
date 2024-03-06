@@ -10,7 +10,7 @@ For a comprehensive list of recent product changes, visit the "Release Notes" se
 
 ## February 2024
 
-- Documented [account abstraction via ERC-4337](/snaps/features/custom-evm-accounts/#account-abstraction-erc-4337). ([#1167](https://github.com/MetaMask/metamask-docs/pull/1167))
+- Documented [account abstraction using ERC-4337](/snaps/features/custom-evm-accounts/#account-abstraction-erc-4337). ([#1167](https://github.com/MetaMask/metamask-docs/pull/1167))
 
 - Documented [how to use Snaps environment variables](/snaps/how-to/use-environment-variables). ([#1149](https://github.com/MetaMask/metamask-docs/pull/1149))
 
@@ -22,5 +22,4 @@ For a comprehensive list of recent product changes, visit the "Release Notes" se
 
 - Documented [`snap_getClientStatus`](/snaps/reference/snaps-api/#snap_getclientstatus). ([#1119](https://github.com/MetaMask/metamask-docs/pull/1119))
 
-- Documented [how to detect multiple wallets via EIP-6963](/wallet/how-to/detect-wallet/multiple-wallets). ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
-
+- Documented [how to detect multiple wallets using EIP-6963](/wallet/how-to/detect-wallet/multiple-wallets). ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
