@@ -399,6 +399,11 @@ const config = {
             to: "services",
             label: "Services",
           },
+          {
+            to: "whats-new",
+            label: "What's new",
+            position: "right",
+          },
         ],
       },
       docs: {
