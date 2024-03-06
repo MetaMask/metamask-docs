@@ -374,6 +374,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+      ],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {
@@ -398,6 +401,11 @@ const config = {
           {
             to: "services",
             label: "Services",
+          },
+          {
+            to: "whats-new",
+            label: "What's new",
+            position: "right",
           },
         ],
       },

@@ -32,19 +32,13 @@ Build the documentation site locally using the following steps.
     > git remote add upstream https://github.com/MetaMask/metamask-docs.git
     > ```
    
-2. Initialize and update the [`keyring-api`](https://github.com/MetaMask/keyring-api) submodule.
-
-    ```bash
-    git submodule init && git submodule update
-    ```
-   
-3. Install dependencies.
+2. Install dependencies.
 
     ```bash
     yarn install
     ```
    
-4. Start the development server.
+3. Start the development server.
 
     ```bash
     yarn start
