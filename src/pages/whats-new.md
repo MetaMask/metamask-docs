@@ -16,7 +16,7 @@ For a comprehensive list of recent product changes, visit the "Release Notes" se
 
 - Documented [Snaps static files](/snaps/features/static-files). ([#1138](https://github.com/MetaMask/metamask-docs/pull/1138))
 
-- Restructured [Snaps documentation](/snaps) for improved readability. ([#1129](https://github.com/MetaMask/metamask-docs/pull/1129))
+- Restructured [Snaps documentation](/snaps) for improved readability and accessibility. ([#1129](https://github.com/MetaMask/metamask-docs/pull/1129))
 
 - Added [Snaps architecture diagrams](/snaps/learn/about-snaps). ([#1123](https://github.com/MetaMask/metamask-docs/pull/1123))
 
