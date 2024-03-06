@@ -9,17 +9,17 @@ tags:
 
 The following is an overview of the API methods used in the [Unity SDK](../how-to/use-sdk/gaming/unity/index.md).
 
-## MetaMaskUnity
+## `MetaMaskUnity`
 
 This is a singleton class that you can use to access the `MetaMaskWallet` instance, which is
 specific to Unity.
 
-### Instance
+### `Instance`
 
 This is the singleton instance of the `MetaMaskUnity` class that is lazy-loaded when you access it
 for the first time.
 
-### Initialize
+### `Initialize`
 
 This method initializes the `MetaMaskWallet` instance and makes it accessible via the `Wallet` property.
 You can also pass extra options and parameters to it to customize the wallet instance:
@@ -40,34 +40,34 @@ var socketProvider = new MyCustomSocketProvider();
 MetaMaskUnity.Instance.Initialize(config, transport, socketProvider);
 ```
 
-### SaveSession
+### `SaveSession`
 
 This method saves the current session to persistent storage.
 It is useful when you want to save the session and restore it later.
 When the application starts, it automatically calls this method.
 You can also manually call this method.
 
-### LoadSession
+### `LoadSession`
 
 This method loads the session from persistent storage.
 It is useful when you want to restore the session after the application quits.
 When the application starts, it automatically calls this method.
 You can also manually call this method.
 
-## MetaMaskWallet
+## `MetaMaskWallet`
 
-### Connect
+### `Connect`
 
 This method connects to MetaMask.
 It renders a generated QR code in the user interface for your users to scan with MetaMask Mobile.
 After the user scans this QR code, a connection screen appears in MetaMask Mobile where the user can
 approve the connection with your Unity game.
 
-### Disconnect
+### `Disconnect`
 
 This method disconnects the user from the MetaMask session.
 
-### Request
+### `Request`
 
 This method sends a request to MetaMask.
 You can use it to call any [provider API method](provider-api.md).
