@@ -1,16 +1,16 @@
 ---
 description: Learn about best practices for creating secure and reliable Snaps.
-sidebar_position: 5
+sidebar_position: 2
 ---
 
-# Secure a Snap
+# Snaps security guidelines
 
 This page outlines essential principles for builders to develop secure and reliable Snaps.
 Use these guidelines when creating your Snap to ensure it is safe for users.
 
 ## Manage permissions
 
-The following are guidelines for [managing permissions](request-permissions.md) in the Snap manifest file.
+The following are guidelines for [managing permissions](../../how-to/request-permissions.md) in the Snap manifest file.
 
 - **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
@@ -66,7 +66,7 @@ The following are guidelines for user notifications and authorizations:
   use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
   There are two ways to do this:
   
-  1. Restrict the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission to specific
+  1. Restrict the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission to specific
      URLs using the `allowedOrigins` caveat.
   
   2. Filter specific methods to specific URLs using the built-in [URL
@@ -109,7 +109,7 @@ user IPs, emails, passwords, and private keys:
 
 - **Private keys** - Avoid retrieving the user's private key from the Snap unless
   absolutely necessary, such as to sign a transaction.
-  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
+  If you only need the user's public key, use [`snap_getBip32PublicKey`](../../reference/snaps-api.md#snap_getbip32publickey)
   instead of deriving it from the private key.
   Never return the private key in an RPC method to a dapp or another Snap.
   To give users a way to view their private key, display it in a dialog.
@@ -148,13 +148,13 @@ The following are guidelines for validating RPC parameters and handling values:
   mislead the user.
   For example: 
 
-  ![Example not using copyable with Markdown rendering](../assets/copyable-example-1.png)
+  ![Example not using copyable with Markdown rendering](../../assets/copyable-example-1.png)
 
   The special characters `*` and `_` render Markdown formatting, so what the user sees does not
   match the content.
   To avoid this, use `copyable` instead:
 
-  ![Example using copyable with clean rendering](../assets/copyable-example-2.png)
+  ![Example using copyable with clean rendering](../../assets/copyable-example-2.png)
 
   `copyable` does not render Markdown and has the added benefit that the user can select to copy the content.
   Also, the formatting provides a visual delineator to separate arbitrary input or fields from user
@@ -177,7 +177,7 @@ Avoid using the following deprecated methods:
 - `wallet_enable`, which is deprecated in favor of
   [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps).
 
-- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/snaps-api.md#snap_dialog).
+- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../../reference/snaps-api.md#snap_dialog).
 
 - `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in MetaMask Flask.
 

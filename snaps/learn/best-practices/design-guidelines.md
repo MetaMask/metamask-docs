@@ -1,10 +1,10 @@
 ---
 description: Create accessible Snap installation flows.
-sidebar_position: 4
+sidebar_position: 1
 toc_max_heading_level: 2
 ---
 
-# Design a Snap installation flow
+# Snaps design guidelines
 
 This page outlines guiding principles for designers, developers, builders, and writers to create
 Snap installation flows that are accessible to all users.
@@ -67,7 +67,7 @@ Consider introducing your Snap in your companion dapp using a modal, tooltip, or
 This introduction should be impactful, clear, and direct, and can happen before or alongside the
 installation prompt.
 
-![Introducing your Snap's features via a modal](../assets/install-modal.png)
+![Introducing your Snap's features via a modal](../../assets/install-modal.png)
 
 Important details to include when introducing your Snap:
 
@@ -95,7 +95,7 @@ Instead, **wait to prompt installation until a point when the Snap is required**
 
 In the following example, a key management Snap is suggested when the user is prompted to pick networks:
 
-![Installation and connection to your Snap embedded in existing flows](../assets/picker.png)
+![Installation and connection to your Snap embedded in existing flows](../../assets/picker.png)
 
 ## Optimize your metadata
 
@@ -142,9 +142,9 @@ For example:
 The following images demonstrate how your Snap's avatar and name are displayed during installation,
 transaction insights, and custom dialogs:
 
-![How your Snap's avatar and name are displayed during installation](../assets/install.png)
-![How your Snap's name is displayed during transaction insights](../assets/insights.png)
-![How your Snap's avatar and name are displayed during a custom dialog screen](../assets/dialog.png)
+![How your Snap's avatar and name are displayed during installation](../../assets/install.png)
+![How your Snap's name is displayed during transaction insights](../../assets/insights.png)
+![How your Snap's avatar and name are displayed during a custom dialog screen](../../assets/dialog.png)
 
 ## Enhance your copy
 
