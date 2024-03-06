@@ -14,7 +14,7 @@
   --ifm-color-primary-light: var(--brand-colors-blue-blue400);
   --ifm-color-primary-lighter: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
-  --ifm-menu-color: var(--color-text-paragraph);
+  --ifm-menu-color: var(--ifm-heading-color);
   --ifm-code-font-size: var(--font-size-3);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --mm-flask-background-color: hsl(280, 45%, 85%);
