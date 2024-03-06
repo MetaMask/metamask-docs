@@ -18,12 +18,12 @@ The following are guidelines for [managing permissions](../../how-to/request-per
   You can validate your permissions using the [Snaps Simulator Manifest
   Validator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest).
 
-- **Minimum RPC access** - When adding the [`endowment:rpc`](../reference/permissions.md/#endowmentrpc)
+- **Minimum RPC access** - When adding the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc)
   permission for Snaps or dapps, ask yourself if both are necessary.
   For example, if permission is granted to communicate with Snaps, it means other Snaps can call
   your Snap's sensitive RPC methods.
 
-- **Minimum network access** - Only add the [`endowment:network-access`](../reference/permissions.md/#endowmentnetwork-access)
+- **Minimum network access** - Only add the [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access)
   permission if it's absolutely necessary, such as when needing to communicate with a remote API
   that is part of your Snap's functionality.
   This to mitigate users' concern about sharing wallet usage to remote servers.
@@ -142,7 +142,7 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../features/custom-ui.md/#copyable) user
+  as for signing a message, use the [`copyable`](../../features/custom-ui.md#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
@@ -187,7 +187,7 @@ The following are coding security tips and warnings:
 
 - **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
   If you don't, you might encounter errors that require [patching a specific
-  dependency](debug-a-snap/common-issues.md/#patch-dependencies) to fix.
+  dependency](../../how-to/debug-a-snap/common-issues.md#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
   `Date.now`) can expose critical system information, making a user vulnerable to
@@ -200,7 +200,7 @@ The following are coding security tips and warnings:
   Do not use insufficient hashing algorithms such as `md5` or `sha2`.
   Do not roll your own cryptography or use custom or unproven cryptography methods or libraries.
 
-  We recommend using [`snap_getEntropy`](../reference/snaps-api.md/#snap_getentropy) for entropy, the
+  We recommend using [`snap_getEntropy`](../../reference/snaps-api.md#snap_getentropy) for entropy, the
   built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) or
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.
