@@ -311,12 +311,12 @@ const config = {
             to: "/snaps/features/custom-evm-accounts/create-account-snap",
           },
           {
-            from: "/snaps/concepts/design-guidelines",
-            to: "/snaps/how-to/design-a-snap",
+            from: ["/snaps/concepts/design-guidelines", "/snaps/how-to/design-a-snap"],
+            to: "/snaps/learn/best-practices/design-guidelines",
           },
           {
-            from: "/snaps/concepts/security-guidelines",
-            to: "/snaps/how-to/secure-a-snap",
+            from: ["/snaps/concepts/security-guidelines", "/snaps/how-to/secure-a-snap"],
+            to: "/snaps/learn/best-practices/security-guidelines",
           },
           {
             from: "/guide/snaps-permissions",

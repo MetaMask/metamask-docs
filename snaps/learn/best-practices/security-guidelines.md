@@ -1,16 +1,16 @@
 ---
 description: Learn about best practices for creating secure and reliable Snaps.
-sidebar_position: 5
+sidebar_position: 2
 ---
 
-# Secure a Snap
+# Snaps security guidelines
 
 This page outlines essential principles for builders to develop secure and reliable Snaps.
 Use these guidelines when creating your Snap to ensure it is safe for users.
 
 ## Manage permissions
 
-The following are guidelines for [managing permissions](request-permissions.md) in the Snap manifest file.
+The following are guidelines for [managing permissions](../../how-to/request-permissions.md) in the Snap manifest file.
 
 - **Minimum permissions** - Follow the principle of least authority by only adding the minimum
   permissions needed by your Snap in the manifest file.
@@ -18,12 +18,12 @@ The following are guidelines for [managing permissions](request-permissions.md) 
   You can validate your permissions using the [Snaps Simulator Manifest
   Validator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest).
 
-- **Minimum RPC access** - When adding the [`endowment:rpc`](../reference/permissions.md/#endowmentrpc)
+- **Minimum RPC access** - When adding the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc)
   permission for Snaps or dapps, ask yourself if both are necessary.
   For example, if permission is granted to communicate with Snaps, it means other Snaps can call
   your Snap's sensitive RPC methods.
 
-- **Minimum network access** - Only add the [`endowment:network-access`](../reference/permissions.md/#endowmentnetwork-access)
+- **Minimum network access** - Only add the [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access)
   permission if it's absolutely necessary, such as when needing to communicate with a remote API
   that is part of your Snap's functionality.
   This to mitigate users' concern about sharing wallet usage to remote servers.
@@ -66,7 +66,7 @@ The following are guidelines for user notifications and authorizations:
   use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
   There are two ways to do this:
   
-  1. Restrict the [`endowment:rpc`](../reference/permissions.md#endowmentrpc) permission to specific
+  1. Restrict the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission to specific
      URLs using the `allowedOrigins` caveat.
   
   2. Filter specific methods to specific URLs using the built-in [URL
@@ -109,7 +109,7 @@ user IPs, emails, passwords, and private keys:
 
 - **Private keys** - Avoid retrieving the user's private key from the Snap unless
   absolutely necessary, such as to sign a transaction.
-  If you only need the user's public key, use [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
+  If you only need the user's public key, use [`snap_getBip32PublicKey`](../../reference/snaps-api.md#snap_getbip32publickey)
   instead of deriving it from the private key.
   Never return the private key in an RPC method to a dapp or another Snap.
   To give users a way to view their private key, display it in a dialog.
@@ -142,19 +142,19 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../features/custom-ui.md/#copyable) user
+  as for signing a message, use the [`copyable`](../../features/custom-ui.md#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
   For example: 
 
-  ![Example not using copyable with Markdown rendering](../assets/copyable-example-1.png)
+  ![Example not using copyable with Markdown rendering](../../assets/copyable-example-1.png)
 
   The special characters `*` and `_` render Markdown formatting, so what the user sees does not
   match the content.
   To avoid this, use `copyable` instead:
 
-  ![Example using copyable with clean rendering](../assets/copyable-example-2.png)
+  ![Example using copyable with clean rendering](../../assets/copyable-example-2.png)
 
   `copyable` does not render Markdown and has the added benefit that the user can select to copy the content.
   Also, the formatting provides a visual delineator to separate arbitrary input or fields from user
@@ -177,7 +177,7 @@ Avoid using the following deprecated methods:
 - `wallet_enable`, which is deprecated in favor of
   [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps).
 
-- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../reference/snaps-api.md#snap_dialog).
+- `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../../reference/snaps-api.md#snap_dialog).
 
 - `endowment:long-running`, which is deprecated for MetaMask stable but still allowed in MetaMask Flask.
 
@@ -187,7 +187,7 @@ The following are coding security tips and warnings:
 
 - **SES compatibility** - Use packages or libraries compatible with SES (hardened JavaScript).
   If you don't, you might encounter errors that require [patching a specific
-  dependency](debug-a-snap/common-issues.md/#patch-dependencies) to fix.
+  dependency](../../how-to/debug-a-snap/common-issues.md#patch-dependencies) to fix.
 
 - **Timers and side-channel attacks** - Certain JavaScript features such as timers (for example,
   `Date.now`) can expose critical system information, making a user vulnerable to
@@ -200,7 +200,7 @@ The following are coding security tips and warnings:
   Do not use insufficient hashing algorithms such as `md5` or `sha2`.
   Do not roll your own cryptography or use custom or unproven cryptography methods or libraries.
 
-  We recommend using [`snap_getEntropy`](../reference/snaps-api.md/#snap_getentropy) for entropy, the
+  We recommend using [`snap_getEntropy`](../../reference/snaps-api.md#snap_getentropy) for entropy, the
   built-in [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) or
   [Noble cryptography libraries](https://paulmillr.com/noble/), and safe hashing algorithms such as `sha256`.
   Choose audited, widely used libraries over obscure, untested implementations.

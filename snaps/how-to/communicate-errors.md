@@ -1,5 +1,5 @@
 ---
-description: Communicate errors from your Snap without crashing it
+description: Communicate errors from your Snap without crashing it.
 sidebar_position: 2
 ---
 
