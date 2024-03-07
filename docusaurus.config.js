@@ -114,6 +114,17 @@ const config = {
       },
     ],
     [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "docs",
+        path: "docs",
+        routeBasePath: "/",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: false,
+        breadcrumbs: false,
+      },
+    ],
+    [
       "@docusaurus/plugin-client-redirects",
       {
         fromExtensions: ["html", "htm"],

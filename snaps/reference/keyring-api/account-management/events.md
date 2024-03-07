@@ -2,6 +2,8 @@
 sidebar_position: 2
 toc_max_heading_level: 2
 sidebar_label: Events
+tags:
+  - Keyring API
 ---
 
 # Account Management API events
