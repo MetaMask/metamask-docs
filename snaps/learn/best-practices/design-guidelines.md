@@ -1,5 +1,5 @@
 ---
-description: Create accessible Snap installation flows.
+description: Learn about best practices for designing accessible Snap installation flows.
 sidebar_position: 1
 toc_max_heading_level: 2
 ---
