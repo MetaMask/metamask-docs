@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Ethereum provider API
 
-This section provides a reference for the the Ethereum provider API of MetaMask's [Wallet API](../concepts/wallet-api.md).
+This section provides a reference for the Ethereum provider API of MetaMask's [Wallet API](../concepts/wallet-api.md).
 MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 

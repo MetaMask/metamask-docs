@@ -114,6 +114,17 @@ const config = {
       },
     ],
     [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "docs",
+        path: "docs",
+        routeBasePath: "/",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: false,
+        breadcrumbs: false,
+      },
+    ],
+    [
       "@docusaurus/plugin-client-redirects",
       {
         fromExtensions: ["html", "htm"],
@@ -300,12 +311,12 @@ const config = {
             to: "/snaps/features/custom-evm-accounts/create-account-snap",
           },
           {
-            from: "/snaps/concepts/design-guidelines",
-            to: "/snaps/how-to/design-a-snap",
+            from: ["/snaps/concepts/design-guidelines", "/snaps/how-to/design-a-snap"],
+            to: "/snaps/learn/best-practices/design-guidelines",
           },
           {
-            from: "/snaps/concepts/security-guidelines",
-            to: "/snaps/how-to/secure-a-snap",
+            from: ["/snaps/concepts/security-guidelines", "/snaps/how-to/secure-a-snap"],
+            to: "/snaps/learn/best-practices/security-guidelines",
           },
           {
             from: "/guide/snaps-permissions",
@@ -374,6 +385,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+      ],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {
@@ -398,6 +412,11 @@ const config = {
           {
             to: "services",
             label: "Services",
+          },
+          {
+            to: "whats-new",
+            label: "What's new",
+            position: "right",
           },
         ],
       },

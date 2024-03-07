@@ -2,6 +2,8 @@
 sidebar_position: 1
 toc_max_heading_level: 2
 sidebar_label: Objects
+tags:
+  - Keyring API
 ---
 
 # Account Management API objects
