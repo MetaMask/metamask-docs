@@ -15,7 +15,7 @@
   --ifm-color-primary-lighter: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --ifm-menu-color: var(--ifm-heading-color);
-  --ifm-code-font-size: var(--font-size-3);
+  --ifm-code-font-size: 87%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --mm-flask-background-color: hsl(280, 45%, 85%);
   --mm-flask-color: hsl(280, 45%, 30%);
@@ -172,10 +172,6 @@ p > .ReactPlayer {
 p > video {
   border-radius: 3px; 
   overflow: hidden; 
-}
-
-.table-of-contents code {
-  font-size: 92%;
 }
 
 .menu__link {
