@@ -164,34 +164,6 @@ svg {
   display: none !important;
 }
 
-.markdown {
-
-  h1 {
-    font-size: 32px; 
-  }
-  h2 {
-    font-size: 24px;
-  }
-  h3 {
-    font-size: 18px;
-  }
-  h4 {
-    font-size: 16px;
-  }
-  h5 {
-    font-size: 14px;
-  }
-  h6 {
-    font-size: 12px;
-  }
-
-  > h1, h2, h3, h4, h5, h6 {
-    > code {
-      font-size: 90%;
-    }
-  }
-}
-
 p > .ReactPlayer {
   border-radius: 3px; 
   overflow: hidden; 
@@ -203,7 +175,7 @@ p > video {
 }
 
 .table-of-contents code {
-  font-size: 95%;
+  font-size: 92%;
 }
 
 .menu__link {
