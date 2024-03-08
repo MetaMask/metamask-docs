@@ -155,7 +155,7 @@ for more information.
 
 The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables simple usage analytics to inform documentation improvements that may be needed.
 
-If you need to test analytics events in your local development enviorment be sure to export the appropriate key for the environment you are testing against before building and running the project:
+If you need to test analytics events in your local development environment be sure to export the appropriate key for the environment you are testing against before building and running the project:
 
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"

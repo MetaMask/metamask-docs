@@ -125,7 +125,7 @@ return { pending: false, result };
 return { pending: true, redirect: { message, url } };
 ```
 
-The redirect message and URL is displayed to the user to help them continue the transaction flow.
+The redirect message and URL are displayed to the user to help them continue the transaction flow.
 
 </TabItem>
 </Tabs>
