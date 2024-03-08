@@ -1,6 +1,7 @@
 ---
 sidebar_label: Subcommands
 sidebar_position: 2
+toc_max_heading_level: 4
 description: See the Snaps CLI subcommands reference.
 ---
 
@@ -18,7 +19,7 @@ You can specify subcommands and their options using the `yarn mm-snap` command:
 yarn mm-snap [SUBCOMMAND] [SUBCOMMAND OPTIONS]
 ```
 
-## `b`, `build`
+### `b`, `build`
 
 ```bash
 yarn mm-snap build
@@ -28,7 +29,7 @@ Builds a Snap from source.
 
 `b` is an alias for `build`.
 
-### `c`, `config`
+#### `c`, `config`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -51,7 +52,7 @@ Path to the [configuration file](../../learn/about-snaps/files.md#configuration-
 
 `-c` is an alias for `--config`.
 
-## `e`, `eval`
+### `e`, `eval`
 
 ```bash
 yarn mm-snap eval
@@ -62,7 +63,7 @@ Attempts to evaluate the Snap bundle in
 
 `e` is an alias for `eval`.
 
-## `m`, `manifest`
+### `m`, `manifest`
 
 ```bash
 yarn mm-snap manifest
@@ -72,7 +73,7 @@ Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-fil
 
 `m` is an alias for `manifest`.
 
-### `fix`
+#### `fix`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -94,7 +95,7 @@ yarn mm-snap manifest --fix false
 Enables or disables making any changes to fix the manifest file.
 The default is `true`.
 
-## `s`, `serve`
+### `s`, `serve`
 
 ```bash
 yarn mm-snap serve
@@ -104,7 +105,7 @@ Locally serves Snap files for testing.
 
 `s` is an alias for `serve`.
 
-### `p`, `port`
+#### `p`, `port`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -128,7 +129,7 @@ The default is `8081`.
 
 `-p` is an alias for `--port`.
 
-## `w`, `watch`
+### `w`, `watch`
 
 ```bash
 yarn mm-snap watch
@@ -138,7 +139,7 @@ Rebuilds a Snap from source upon changes.
 
 `w` is an alias for `watch`.
 
-### `p`, `port`
+#### `p`, `port`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -164,7 +165,7 @@ The default is `8081`.
 
 ## Global options
 
-### `h`, `help`
+#### `h`, `help`
 
 ```bash
 -h, --help
@@ -175,7 +176,7 @@ You can use this option with `mm-snap` or any subcommand.
 
 `-h` is an alias for `--help`.
 
-### `version`
+#### `version`
 
 ```bash
 --version

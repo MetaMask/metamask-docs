@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-toc_max_heading_level: 2
 sidebar_label: Objects
 tags:
   - Keyring API
@@ -11,7 +10,7 @@ tags:
 [Account management Snaps](../../../features/custom-evm-accounts/index.md) use the following objects
 with the [Account Management API](index.md).
 
-## `KeyringAccount`
+### `KeyringAccount`
 
 An object representing an account with its properties and capabilities.
 An account object contains:
@@ -24,7 +23,7 @@ An account object contains:
   `"eip155:eoa"` for an externally owned account (EOA) or `"eip155:erc4337"` for an
   [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) account.
 
-### Example
+#### Example
 
 ```json
 {
@@ -44,7 +43,7 @@ An account object contains:
 }
 ```
 
-## `KeyringRequest`
+### `KeyringRequest`
 
 An object representing a request made to the account management Snap for account-related operations.
 A request object contains:
@@ -57,7 +56,7 @@ A request object contains:
 - `scope`: `string` - [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
   chain ID of the blockchain network for the request.
 
-### Example
+#### Example
 
 ```json
 {

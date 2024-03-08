@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 The [JavaScript version of MetaMask SDK](../how-to/use-sdk/javascript/index.md) takes the
 following options.
 
-## `checkInstallationImmediately`
+### `checkInstallationImmediately`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -39,7 +39,7 @@ If `false`, the SDK waits for the connect method to be called to check for insta
 
 The default is `false`.
 
-## `checkInstallationOnAllCalls`
+### `checkInstallationOnAllCalls`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -61,7 +61,7 @@ checkInstallationOnAllCalls: true
 Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
 The default is `false`.
 
-## `communicationLayerPreference`
+### `communicationLayerPreference`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -83,7 +83,7 @@ communicationLayerPreference: SOCKET
 The preferred communication layer to use.
 The default and only option is `SOCKET` for [Socket.IO](https://socket.io/docs/v4/).
 
-## `communicationServerUrl`
+### `communicationServerUrl`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -105,7 +105,7 @@ communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/"
 The URL of the communication server to use.
 This option is mainly used for debugging and testing the SDK.
 
-## `dappMetadata`
+### `dappMetadata`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -146,7 +146,7 @@ MetaMask Mobile displays this metadata in the connection modal to help users ide
 connection request.
 :::
 
-## `defaultReadOnlyChainId`
+### `defaultReadOnlyChainId`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -169,7 +169,7 @@ Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) t
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
-## `enableDebug`
+### `enableDebug`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -191,7 +191,7 @@ enableDebug: false
 Enables or disables sending anonymous analytics to MetaMask to help improve the SDK.
 The default is `true`.
 
-## `extensionOnly`
+### `extensionOnly`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -213,7 +213,7 @@ extensionOnly: true
 Enables or disables automatically using the MetaMask browser extension if it's detected.
 The default is `false`.
 
-## `infuraAPIKey`
+### `infuraAPIKey`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -243,7 +243,7 @@ You can restrict interactions to specific addresses, origins, user agents, and r
 We recommend using all allowlist options to maximize the security of your API key and dapp.
 :::
 
-## `modals`
+### `modals`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -285,7 +285,7 @@ modals: {
 An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
 This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
 
-## `openDeeplink`
+### `openDeeplink`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -310,7 +310,7 @@ openDeeplink: (link: string) => {
 
 A function that is called to open a deeplink to the MetaMask Mobile app.
 
-## `preferDesktop`
+### `preferDesktop`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -332,7 +332,7 @@ preferDesktop: true
 Enables or disables preferring the MetaMask browser extension over MetaMask Mobile.
 The default is `false`.
 
-## `readonlyRPCMap`
+### `readonlyRPCMap`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -355,7 +355,7 @@ readonlyRPCMap: {
 
 A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
 
-## `shouldShimWeb3`
+### `shouldShimWeb3`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -378,7 +378,7 @@ Enables or disables shimming the `window.web3` object with the Ethereum provider
 (useful for compatibility with older browsers).
 The default is `true`.
 
-## `timer`
+### `timer`
 
 <Tabs>
 <TabItem value="Example">
@@ -393,7 +393,7 @@ timer: BackgroundTimer
 Used by React Native dapps to keep the dapp alive while using
 [`react-native-background-timer`](https://github.com/ocetnik/react-native-background-timer).
 
-## `transports`
+### `transports`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -414,7 +414,7 @@ transports: ["websocket", "polling"]
 
 Sets the preference on [Socket.IO](https://socket.io/docs/v4/) transports.
 
-## `ui`
+### `ui`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -431,7 +431,7 @@ ui: {
 
 Options for customizing the SDK UI.
 
-## `useDeeplink`
+### `useDeeplink`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -454,7 +454,7 @@ Enables or disables using deeplinks to connect with MetaMask Mobile.
 If `false`, the SDK uses universal links instead.
 The default is `false`.
 
-## `wakeLockType`
+### `wakeLockType`
 
 <Tabs>
 <TabItem value="Syntax">

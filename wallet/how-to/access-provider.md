@@ -13,7 +13,7 @@ When sending signing requests to this provider, MetaMask prompts the user to sig
 
 This module works in Chrome and Firefox.
 
-## Use @metamask/providers
+## Use `@metamask/providers`
 
 Install `@metamask/providers` using the following command:
 

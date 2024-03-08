@@ -14,7 +14,7 @@ The provider is responsible for sending the request formed inside the
 the response.
 If the provider doesn't decode the response, then it's considered an [`ILegacyProvider`](#ilegacyprovider).
 
-## IProvider
+## `IProvider`
 
 The `IProvider` interface defines the following function:
 
@@ -50,7 +50,7 @@ public object Request(string method, object[] parameters = null)
 }
 ```
 
-## ILegacyProvider
+## `ILegacyProvider`
 
 The `ILegacyProvider` is an interface that declares an interface that does not support response decoding.
 The `ILegacyProvider` interface defines the following function:

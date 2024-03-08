@@ -38,7 +38,7 @@ You can also see the [Unity instructions](../use-sdk/gaming/unity/connect-and-si
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
   For older versions of MetaMask, this function may not work as expected.
 
-## Use the connectAndSign method
+## Use the `connectAndSign` method
 
 Use the `connectAndSign` method as follows:
 

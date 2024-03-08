@@ -30,7 +30,7 @@ We recommend detecting multiple wallets to improve the user experience.
 
 ## Steps
 
-### 1. Install @metamask/detect-provider
+### 1. Install `@metamask/detect-provider`
 
 Use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install
 `@metamask/detect-provider` in your project directory:

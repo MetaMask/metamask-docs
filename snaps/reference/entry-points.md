@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 Snaps can expose the following entry points.
 
-## `onRpcRequest`
+### `onRpcRequest`
 
 To implement a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) to communicate with
 dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
@@ -72,7 +72,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 </TabItem>
 </Tabs>
 
-## `onTransaction`
+### `onTransaction`
 
 To provide transaction insights before a user signs a transaction, a Snap must expose the
 `onTransaction` entry point.
@@ -104,8 +104,6 @@ for the transaction that `onTransaction` was called with.
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import { OnTransactionHandler } from '@metamask/snaps-types';
@@ -165,8 +163,6 @@ insight with the severity level `critical`:
 <Tabs>
 <TabItem value="TypeScript">
 
-# TypeScript
-
 ```typescript
 import { OnTransactionHandler } from '@metamask/snaps-types';
 import { panel, heading, text } from '@metamask/snaps-ui';
@@ -216,7 +212,7 @@ module.exports.onTransaction = async ({
 </TabItem>
 </Tabs>
 
-## `onCronjob`
+### `onCronjob`
 
 To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
 MetaMask calls the `onCronjob` handler method at the specified times with the specified payloads
@@ -250,8 +246,6 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import { OnCronjobHandler } from '@metamask/snaps-types';
@@ -297,7 +291,7 @@ module.exports.onCronjob = async ({ request }) => {
 </TabItem>
 </Tabs>
 
-## `onInstall`
+### `onInstall`
 
 To run an action on installation, a Snap must expose the `onInstall` entry point.
 MetaMask calls the `onInstall` handler method after the Snap is installed successfully. 
@@ -311,13 +305,10 @@ For MetaMask to call the Snap's `onInstall` method, you must request the
 
 None.
 
-
 #### Example
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import type { OnInstallHandler } from '@metamask/snaps-sdk';
@@ -364,7 +355,7 @@ module.exports.onInstall = async () => {
 </TabItem>
 </Tabs>
 
-## `onUpdate`
+### `onUpdate`
 
 To run an action on update, a Snap must expose the `onUpdate` entry point.
 MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
@@ -377,7 +368,6 @@ For MetaMask to call the Snap's `onUpdate` method, you must request the
 #### Parameters
 
 None.
-
 
 #### Example
 
@@ -435,7 +425,7 @@ module.exports.onUpdate = async () => {
 </TabItem>
 </Tabs>
 
-## `onHomePage`
+### `onHomePage`
 
 :::flaskOnly
 :::

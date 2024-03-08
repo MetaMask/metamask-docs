@@ -45,7 +45,7 @@ In your project script, add the following to import the SDK:
 import { MetaMaskProvider } from "@metamask/sdk-react";
 ```
 
-### 3. Wrap your project with MetaMaskProvider
+### 3. Wrap your project with `MetaMaskProvider`
 
 Wrap your root component in a `MetaMaskProvider`.
 For example:
