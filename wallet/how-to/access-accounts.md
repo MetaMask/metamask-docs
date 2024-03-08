@@ -1,6 +1,6 @@
 ---
 description: Access a user's accounts and handle changed accounts.
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';

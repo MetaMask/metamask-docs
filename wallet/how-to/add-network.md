@@ -1,6 +1,6 @@
 ---
 description: Prompt a user to add or switch to an Ethereum network.
-sidebar_position: 8
+sidebar_position: 7
 ---
 
 # Add a network

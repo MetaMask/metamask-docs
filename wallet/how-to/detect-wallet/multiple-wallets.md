@@ -18,20 +18,9 @@ You can [use third-party libraries](#use-third-party-libraries) or directly
 
 You can add support for EIP-6963 by using the following third-party libraries:
 
-- [MetaMask SDK](../use-sdk/javascript/index.md)
-
-  :::note
-  MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
-  If you intend to support discovery of other wallets, we recommend using other methods of adding
-  EIP-6963 support such as Wagmi 2+.
-  :::
-
 - [Wagmi 2+](https://wagmi.sh)
-
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
-
 - [MIPD Store](https://github.com/wevm/mipd)
-
 - [RainbowKit](https://www.rainbowkit.com/)
 
 ## Implement EIP-6963
