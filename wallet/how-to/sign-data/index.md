@@ -27,7 +27,7 @@ If you can't log in to a dapp when using a Ledger or Trezor, the dapp might be r
 sign data using an unsupported method, in which case we recommend using your standard MetaMask account.
 :::
 
-## Use eth_signTypedData_v4
+## Use `eth_signTypedData_v4`
 
 [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
 provides the most human-readable signatures that are efficient to process on-chain.
@@ -193,7 +193,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
 </TabItem>
 </Tabs>
 
-## Use personal_sign
+## Use `personal_sign`
 
 [`personal_sign`](/wallet/reference/personal_sign) is the
 easiest way to request human-readable signatures that don't need to be efficiently processed on-chain.

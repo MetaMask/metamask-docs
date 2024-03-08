@@ -1,6 +1,7 @@
 ---
 sidebar_label: Options
 sidebar_position: 1
+toc_max_heading_level: 4
 description: See the Snaps CLI options reference.
 ---
 
@@ -13,7 +14,7 @@ This reference describes the syntax of the Snaps command line interface (CLI) co
 You can specify these options in the
 [configuration file](../../learn/about-snaps/files.md#configuration-file).
 
-## `bundler`
+### `bundler`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -44,7 +45,7 @@ For Browserify, see the
 [legacy options](https://github.com/MetaMask/snaps/tree/455366f19281801ed4220431100e45237dd5cf1e/packages/snaps-cli#legacy-options).
 :::
 
-## `customizeWebpackConfig`
+### `customizeWebpackConfig`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -81,7 +82,7 @@ For convenience, the Snaps CLI exports a `merge` function that you can use to me
 configuration object with the
 [default Webpack configuration](https://github.com/MetaMask/snaps/blob/main/packages/snaps-cli/src/webpack/config.ts).
 
-## `environment`
+### `environment`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -107,7 +108,7 @@ The environment configuration.
 You can use this to [set environment variables for the Snap](../../how-to/use-environment-variables.md),
 which can be accessed using `process.env`.
 
-## `evaluate`
+### `evaluate`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -130,7 +131,7 @@ Enables or disables evaluating the bundle.
 When set to `true`, the bundle is checked for compatibility issues with the Snaps runtime.
 If there are any issues, the CLI exits with an error.
 
-## `experimental`
+### `experimental`
 
 Experimental features.
 
@@ -138,7 +139,7 @@ Experimental features.
 These features are not stable, and might change in the future.
 :::
 
-### `experimental.wasm`
+#### `experimental.wasm`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -172,7 +173,7 @@ import program from './program.wasm';
 // ...
 ```
 
-## `input`
+### `input`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -195,11 +196,11 @@ The entry point of the Snap.
 This is the file that will be bundled.
 The default is `"src/index.js"`.
 
-## `manifest`
+### `manifest`
 
 The Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) configuration.
 
-### `manifest.path`
+#### `manifest.path`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -225,7 +226,7 @@ manifest: {
 Path to the Snap manifest file.
 The default is `"snap.manifest.json"`.
 
-### `manifest.update`
+#### `manifest.update`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -252,11 +253,11 @@ Enables or disables updating the manifest file with the bundle shasum, and makin
 If set to `false`, the manifest is not updated, and an error is thrown if the manifest is not up-to-date.
 The default is `true`.
 
-## `output`
+### `output`
 
 The output configuration.
 
-### `output.clean`
+#### `output.clean`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -282,7 +283,7 @@ output: {
 Enables or disables cleaning the output directory before building.
 The default is `false`.
 
-### `output.filename`
+#### `output.filename`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -308,7 +309,7 @@ output: {
 The output filename.
 The default is `"bundle.js"`.
 
-### `output.minimize`
+#### `output.minimize`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -335,7 +336,7 @@ Enables or disables minimizing the bundle.
 Minimizing the bundle removes comments and whitespace, mangles variable names, and performs other optimizations.
 The default is `true`.
 
-### `output.path`
+#### `output.path`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -361,13 +362,13 @@ output: {
 Path to the output directory.
 The default is `"dist"`.
 
-## `server`
+### `server`
 
 The development server configuration.
 The development server is used to test the Snap during development, using the
 [`watch`](subcommands.md#w-watch) and [`serve`](subcommands.md#s-serve) subcommands.
 
-### `server.enabled`
+#### `server.enabled`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -392,7 +393,7 @@ server: {
 
 Enables or disables the development server.
 
-### `server.port`
+#### `server.port`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -419,7 +420,7 @@ The port to run the development server on.
 If set to `0`, a random port is used.
 The default is `8081`.
 
-### `server.root`
+#### `server.root`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -446,7 +447,7 @@ The root directory of the development server.
 This is the directory that is served by the development server.
 The default is the current working directory.
 
-## `sourceMap`
+### `sourceMap`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -470,11 +471,11 @@ If set to `"inline"`, the source map is inlined in the bundle.
 If set to `true` or not specified, it is written to a separate file.
 The default is `true`.
 
-## `stats`
+### `stats`
 
 The stats configuration, which controls the log output of the CLI.
 
-### `stats.buffer`
+#### `stats.buffer`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -503,7 +504,7 @@ The `Buffer` global is not available in the Snaps runtime by default, and must b
 
 The default is `true`.
 
-### `stats.builtIns`
+#### `stats.builtIns`
 
 <Tabs>
 <TabItem value="Syntax">
@@ -542,7 +543,7 @@ This is useful if the built-in is not actually used in the Snap, but is added by
 
 The default is an empty ignore list.
 
-### `stats.verbose`
+#### `stats.verbose`
 
 <Tabs>
 <TabItem value="Syntax">

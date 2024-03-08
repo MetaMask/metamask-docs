@@ -11,7 +11,7 @@ You can use the provider [properties](#properties), [methods](#methods), and [ev
 
 ## Properties
 
-### window.ethereum.isMetaMask
+### `window.ethereum.isMetaMask`
 
 This property is `true` if the user has MetaMask installed.
 
@@ -22,7 +22,7 @@ Non-MetaMask providers may also set this property to `true`.
 
 ## Methods
 
-### window.ethereum.isConnected()
+### `window.ethereum.isConnected()`
 
 ```typescript
 window.ethereum.isConnected(): boolean;
@@ -39,7 +39,7 @@ In the provider interface, "connected" and "disconnected" refer to whether the p
 requests to the current chain.
 :::
 
-### window.ethereum.request(args)
+### `window.ethereum.request(args)`
 
 ```typescript
 interface RequestArguments {
@@ -90,7 +90,7 @@ window.ethereum
     });
 ```
 
-### window.ethereum._metamask.isUnlocked()
+### `window.ethereum._metamask.isUnlocked()`
 
 :::caution
 This method is experimental.
@@ -128,7 +128,7 @@ window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
 The first argument of `window.ethereum.removeListener` is the event name, and the second argument is
 a reference to the function passed to `window.ethereum.on` for the event.
 
-### accountsChanged
+### `accountsChanged`
 
 ```typescript
 window.ethereum.on("accountsChanged", handler: (accounts: Array<string>) => void);
@@ -145,7 +145,7 @@ the same permissions.
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
 Listen to this event to [handle accounts](../how-to/access-accounts.md#handle-accounts).
 
-### chainChanged
+### `chainChanged`
 
 ```typescript
 window.ethereum.on("chainChanged", handler: (chainId: string) => void);
@@ -164,7 +164,7 @@ window.ethereum.on("chainChanged", (chainId) => window.location.reload());
 
 :::
 
-### connect
+### `connect`
 
 ```typescript
 interface ConnectInfo {
@@ -179,7 +179,7 @@ We recommend listening to this event and using the
 [`window.ethereum.isConnected()`](#windowethereumisconnected) provider method to determine when
 the provider is connected.
 
-### disconnect
+### `disconnect`
 
 ```typescript
 ethereum.on("disconnect", handler: (error: ProviderRpcError) => void);
@@ -193,7 +193,7 @@ is re-established, which requires reloading the page.
 You can also use the [`window.ethereum.isConnected()`](#windowethereumisconnected) provider method
 to determine if the provider is disconnected.
 
-### message
+### `message`
 
 ```typescript
 interface ProviderMessage {

@@ -158,7 +158,7 @@ You'll also see the `ethereum` provider printed to the console.
 
 You can switch between these two states by enabling or disabling the MetaMask extension through your browser's **Manage Extensions** menu.
 
-#### Use @metamask/detect-provider
+#### Use `@metamask/detect-provider`
 
 Developers often use the previous approach when tasked with detecting an injected provider (wallet extension).
 

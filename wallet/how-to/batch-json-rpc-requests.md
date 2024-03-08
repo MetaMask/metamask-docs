@@ -31,7 +31,7 @@ enhancing the user experience and operational efficiency.
 
 [Set up MetaMask SDK](../how-to/use-sdk/javascript/index.md) in your JavaScript dapp.
 
-## Use the metamask_batch method
+## Use the `metamask_batch` method
 
 `metamask_batch` takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
 

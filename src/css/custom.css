@@ -15,7 +15,7 @@
   --ifm-color-primary-lighter: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
   --ifm-menu-color: var(--ifm-heading-color);
-  --ifm-code-font-size: var(--font-size-3);
+  --ifm-code-font-size: 90%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --mm-flask-background-color: hsl(280, 45%, 85%);
   --mm-flask-color: hsl(280, 45%, 30%);
@@ -164,24 +164,14 @@ svg {
   display: none !important;
 }
 
-.markdown {
-  > h1, h2, h3, h4, h5, h6 {
-    > code {
-      font-size: inherit;
-    }
-  }
-  > p > .ReactPlayer {
-    border-radius: 3px; 
-    overflow: hidden; 
-  }
-  > p > video {
-    border-radius: 3px; 
-    overflow: hidden; 
-  }
+p > .ReactPlayer {
+  border-radius: 3px; 
+  overflow: hidden; 
 }
 
-.table-of-contents code {
-  font-size: inherit;
+p > video {
+  border-radius: 3px; 
+  overflow: hidden; 
 }
 
 .menu__link {
@@ -205,4 +195,8 @@ svg {
 
 .menu__list .menu__list .menu__caret {
   opacity: 0.7;
+}
+
+code {
+  border-style: none;
 }
