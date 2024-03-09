@@ -1,4 +1,4 @@
----
+[---
 description: See the Snaps API reference.
 toc_max_heading_level: 2
 sidebar_position: 1
@@ -862,3 +862,4 @@ await snap.request({
   },
 });
 ```
+](https://github.com/Deepak2030/metamask-docs.git)https://github.com/Deepak2030/metamask-docs.git
