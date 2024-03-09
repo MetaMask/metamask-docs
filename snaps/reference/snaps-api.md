@@ -1,4 +1,4 @@
-[---
+---
 description: See the Snaps API reference.
 toc_max_heading_level: 2
 sidebar_position: 1
@@ -13,14 +13,14 @@ Snaps can communicate with and modify the functionality of MetaMask using the [S
 To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
 manifest file.
 
-## `snap_dialog`
+## snap_dialog
 
 Displays a dialog in the MetaMask UI.
 There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
 [confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
 
 :::caution
-Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [`snap_getClientStatus`](#snap_getclientstatus).
+Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [snap_getClientStatus](#snap_getclientstatus).
 :::
 
 ### Alert dialog
@@ -31,18 +31,18 @@ Displays an alert that can only be acknowledged.
 
 An object containing the contents of the alert dialog:
 
-- `type` - The type of dialog (`'Alert'`).
-- `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
+- type - The type of dialog ('alert').
+- content - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
 
 #### Example
 
-```javascript
+javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Alert',
+    type: 'alert',
     content: panel([
       heading('Something happened in the system'),
       text('The thing that happened is...'),
@@ -51,7 +51,7 @@ await snap.request({
 });
 
 // Code that should execute after the alert has been acknowledged
-```
+
 
 ### Confirmation dialog
 
@@ -61,22 +61,22 @@ Displays a confirmation that can be accepted or rejected.
 
 An object containing the contents of the confirmation dialog:
 
-- `type` - The type of dialog (`'Confirmation'`).
-- `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
+- type - The type of dialog ('confirmation').
+- content - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
 
 #### Returns
 
-`true` if the confirmation was accepted, `false` otherwise.
+true if the confirmation was accepted, false otherwise.
 
 #### Example
 
-```javascript
+javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
 const result = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Confirmation',
+    type: 'confirmation',
     content: panel([
       heading('Would you like to take the action?'),
       text('The action is...'),
@@ -87,7 +87,7 @@ const result = await snap.request({
 if (result === true) {
   // Do the action
 }
-```
+
 
 ### Prompt dialog
 
@@ -97,23 +97,23 @@ Displays a prompt where the user can enter a text response.
 
 An object containing the contents of the prompt dialog:
 
-- `type` - The type of dialog (`'Prompt'`).
-- `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
-- `placeholder` - Text that will be in the input field when nothing is typed.
+- type - The type of dialog ('prompt').
+- content - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
+- placeholder - Text that will be in the input field when nothing is typed.
 
 #### Returns
 
-The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
+The text entered by the user if the prompt was submitted or null if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
 
 #### Example
 
-```javascript
+javascript
 import { panel, text, heading } from '@metamask/snaps-ui';
 
 const walletAddress = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Prompt',
+    type: 'prompt',
     content: panel([
       heading('What is the wallet address?'),
       text('Please enter the wallet address to be monitored'),
@@ -123,9 +123,9 @@ const walletAddress = await snap.request({
 });
 
 // `walletAddress` will be a string containing the address entered by the user
-```
 
-## `snap_getBip32Entropy`
+
+## snap_getBip32Entropy
 
 :::danger important
 If you call this method, you receive the user's parent key for the derivation path they request.
@@ -133,12 +133,12 @@ You're managing the user's keys and assets on their behalf.
 Their safety is your responsibility.
 :::
 
-Gets the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) key for the `path`
-and `curve` specified by the method name.
+Gets the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) key for the path
+and curve specified by the method name.
 
 This method is designed to be used with the
-[`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree) module.
-`@metamask/key-tree` can help you get the
+[@metamask/key-tree](https://npmjs.com/package/@metamask/key-tree) module.
+@metamask/key-tree can help you get the
 [extended private keys](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#extended-keys)
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
@@ -147,11 +147,11 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 An object containing:
 
-- `path` - An array, starting with `m`, containing the BIP-32 derivation path to the key to
+- path - An array, starting with m, containing the BIP-32 derivation path to the key to
   retrieve.
-  For example, `["m", "44'", "60'"]`.
-- `curve` - The curve to use for the key derivation.
-  Must be `'ed25519'` or `'secp256k1'`.
+  For example, ["m", "44'", "60'"].
+- curve - The curve to use for the key derivation.
+  Must be 'ed25519' or 'secp256k1'.
 
 ### Returns
 
@@ -159,20 +159,20 @@ An object representing the
 [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) HD tree node and containing
 its corresponding key material:
 
-- `depth` - The 0-indexed path depth of the node.
-- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a master node.
-- `index` - The index of the node, or 0 if this is a master node.
-- `privateKey` - The private key of the node.
-- `publicKey` - The public key of the node.
-- `chainCode` - The chain code of the node.
-- `curve` - The name of the curve used by the node: `'ed25519'` or `'secp256k1'`.
+- depth - The 0-indexed path depth of the node.
+- parentFingerprint - The fingerprint of the parent key, or 0 if this is a master node.
+- index - The index of the node, or 0 if this is a master node.
+- privateKey - The private key of the node.
+- publicKey - The public key of the node.
+- chainCode - The chain code of the node.
+- curve - The name of the curve used by the node: 'ed25519' or 'secp256k1'.
 
 ### Example
 
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+json
 "initialPermissions": {
   "snap_getBip32Entropy": [
     {
@@ -181,12 +181,12 @@ its corresponding key material:
     }
   ]
 }
-```
+
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```javascript
+javascript
 import { SLIP10Node } from '@metamask/key-tree';
 
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
@@ -209,28 +209,28 @@ const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"]);
 const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
 
 // Now, you can ask the user to sign transactions, etc.
-```
+
 
 </TabItem>
 </Tabs>
 
-## `snap_getBip32PublicKey`
+## snap_getBip32PublicKey
 
 Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) public key for the
-derivation path specified by the `path` parameter.
-Note that this returns the public key, not the extended public key (`xpub`), or Ethereum address.
+derivation path specified by the path parameter.
+Note that this returns the public key, not the extended public key (xpub), or Ethereum address.
 
 ### Parameters
 
 An object containing:
 
-- `path` - An array, starting with `m`, containing the BIP-32 derivation path to the public key to
+- path - An array, starting with m, containing the BIP-32 derivation path to the public key to
   retrieve.
-  For example, `["m", "44'", "60'"]`.
-- `curve` - The curve to use for the key derivation.
-  Must be `'ed25519'` or `'secp256k1'`.
-- `compressed` - Indicates whether the public key should be compressed.
-  The default is `false`.
+  For example, ["m", "44'", "60'"].
+- curve - The curve to use for the key derivation.
+  Must be 'ed25519' or 'secp256k1'.
+- compressed - Indicates whether the public key should be compressed.
+  The default is false.
 
 ### Returns
 
@@ -241,7 +241,7 @@ The public key as hexadecimal string.
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+json
 "initialPermissions": {
   "snap_getBip32PublicKey": [
     {
@@ -250,12 +250,12 @@ The public key as hexadecimal string.
     }
   ]
 }
-```
+
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```javascript
+javascript
 // This example uses Dogecoin, which has a derivation path starting with `m/44'/3'`.
 const dogecoinPublicKey = await snap.request({
   method: 'snap_getBip32PublicKey',
@@ -269,12 +269,12 @@ const dogecoinPublicKey = await snap.request({
 
 // `0x...`
 console.log(dogecoinPublicKey);
-```
+
 
 </TabItem>
 </Tabs>
 
-## `snap_getBip44Entropy`
+## snap_getBip44Entropy
 
 :::danger important
 If you call this method, you receive the user's parent key for the protocol they request.
@@ -282,51 +282,51 @@ You're managing the user's keys and assets on their behalf.
 Their safety is your responsibility.
 :::
 
-Gets the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` key
-for the `coin_type` number specified by the method name.
+Gets the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) coin_type key
+for the coin_type number specified by the method name.
 See [SLIP-44](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) for the list of
-available protocols and their `coin_type` values.
+available protocols and their coin_type values.
 
 This method is designed to be used with the
-[`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree) module.
-`@metamask/key-tree` can help you get the
+[@metamask/key-tree](https://npmjs.com/package/@metamask/key-tree) module.
+@metamask/key-tree can help you get the
 [extended private keys](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#extended-keys)
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
 ### Parameters
 
-An object containing `coinType`, the BIP-44 coin type to get the entropy for.
+An object containing coinType, the BIP-44 coin type to get the entropy for.
 
 :::caution
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 If you wish to connect to MetaMask accounts in a Snap, use
-[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
-[`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+[endowment:ethereum-provider](../reference/permissions.md/#endowmentethereum-provider) and
+[eth_requestAccounts](/wallet/reference/eth_requestAccounts).
 :::
 
 ### Returns
 
 An object representing the
-[BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD tree node
+[BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) coin_type HD tree node
 and containing its corresponding key material:
 
-- `coin_type` - The BIP-44 [coin type](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
+- coin_type - The BIP-44 [coin type](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
   value of the node.
-- `depth` - The 0-indexed BIP-44 path depth of the node.
-  Since this is a `coin_type` node, the depth is `2`.
-- `privateKey` - The hexadecimal-encoded string representation of the private key for the node.
-- `publicKey` - The hexadecimal-encoded string representation of the public key for the node.
-- `chainCode` - The hexadecimal-encoded string representation of the chain code for the node.
-- `path` - A human-readable representation of the BIP-44 HD tree path of the node.
-  Since this is a `coin_type` node, the path is of the form `m / 44' / coin_type'`.
+- depth - The 0-indexed BIP-44 path depth of the node.
+  Since this is a coin_type node, the depth is 2.
+- privateKey - The hexadecimal-encoded string representation of the private key for the node.
+- publicKey - The hexadecimal-encoded string representation of the public key for the node.
+- chainCode - The hexadecimal-encoded string representation of the chain code for the node.
+- path - A human-readable representation of the BIP-44 HD tree path of the node.
+  Since this is a coin_type node, the path is of the form m / 44' / coin_type'.
 
 ### Example
 
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+json
 "initialPermissions": {
   "snap_getBip44Entropy": [
     {
@@ -334,12 +334,12 @@ and containing its corresponding key material:
     }
   ]
 }
-```
+
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```javascript
+javascript
 import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
 
 // This example uses Dogecoin, which has `coin_type` 3.
@@ -364,12 +364,12 @@ const addressKey0 = await deriveDogecoinAddress(0);
 const addressKey1 = await deriveDogecoinAddress(1);
 
 // Now, you can ask the user to sign transactions, etc.
-```
+
 
 </TabItem>
 </Tabs>
 
-## `snap_getClientStatus`
+## snap_getClientStatus
 
 Gets the locked status of the Snaps client.
 
@@ -380,11 +380,11 @@ It is useful to check if MetaMask is locked in the following situations:
 
 ### Returns
 
-`true` if MetaMask is locked, `false` if MetaMask is unlocked.
+true if MetaMask is locked, false if MetaMask is unlocked.
 
 ### Example
 
-```typescript
+typescript
 import type { OnCronjobHandler } from '@metamask/snaps-sdk';
 import { MethodNotFoundError } from '@metamask/snaps-sdk';
 
@@ -404,9 +404,9 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
       throw new MethodNotFoundError();
   }
 };
-```
 
-## `snap_getEntropy`
+
+## snap_getEntropy
 
 Gets a deterministic 256-bit entropy value, specific to the Snap and the user's account.
 You can use this entropy to generate a private key, or any other value that requires a high level of
@@ -422,9 +422,9 @@ This value is deterministic: it's always the same for the same Snap, user accoun
 
 An object containing:
 
-- `version` - The number `1`.
+- version - The number 1.
   This is reserved for future use.
-- `salt` (optional) - An arbitrary string to be used as a salt for the entropy.
+- salt (optional) - An arbitrary string to be used as a salt for the entropy.
   This can be used to generate different entropy for different purposes.
 
 ### Returns
@@ -436,16 +436,16 @@ The entropy as a hexadecimal string.
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+json
 "initialPermissions": {
   "snap_getEntropy": {}
 }
-```
+
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```javascript
+javascript
 const entropy = await snap.request({
   method: 'snap_getEntropy',
   params: {
@@ -456,12 +456,12 @@ const entropy = await snap.request({
 
 // `0x...`
 console.log(entropy);
-```
+
 
 </TabItem>
 </Tabs>
 
-## `snap_getFile`
+## snap_getFile
 
 Gets a static file's content in UTF-8, Base64, or hexadecimal.
 The file must be [specified in the Snap's manifest file](../features/static-files.md).
@@ -470,8 +470,8 @@ The file must be [specified in the Snap's manifest file](../features/static-file
 
 An object containing:
 
-- `path` - The path to the file, relative to the Snap's package directory (that is, one level above `src`).
-- `encoding` (optional) - One of `utf8`, `base64`, or `hex`. The default is `base64`.
+- path - The path to the file, relative to the Snap's package directory (that is, one level above src).
+- encoding (optional) - One of utf8, base64, or hex. The default is base64.
 
 ### Returns
 
@@ -482,7 +482,7 @@ The file content as a string in the requested encoding.
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+json
 "source": {
   "shasum": "xxx",
   "location": {
@@ -492,12 +492,12 @@ The file content as a string in the requested encoding.
     "./files/myfile.bin"
   ]
 }
-```
+
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```javascript
+javascript
 const contents = await snap.request({
   method: 'snap_getFile',
   params: {
@@ -508,12 +508,12 @@ const contents = await snap.request({
 
 // `0x...`
 console.log(contents);
-```
+
 
 </TabItem>
 </Tabs>
 
-## `snap_getLocale`
+## snap_getLocale
 
 :::flaskOnly
 :::
@@ -526,7 +526,7 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 
 ### Example
 
-```javascript
+javascript
 import { panel, text } from '@metamask/snaps-ui';
 
 const locale = await snap.request({ method: 'snap_getLocale' });
@@ -539,24 +539,24 @@ if(locale === 'es') {
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Alert',
+    type: 'alert',
     content: panel([
       text(greeting),
     ]),
   },
 });
-```
 
-## `snap_manageAccounts`
+
+## snap_manageAccounts
 
 Manages [account management Snap](../features/custom-evm-accounts/index.md) accounts.
 This method is organized into multiple sub-methods which each take their own parameters:
 
-- [`createAccount`](#createaccount)
-- [`updateAccount`](#updateaccount)
-- [`deleteAccount`](#deleteaccount)
-- [`listAccounts`](#listaccounts)
-- [`submitResponse`](#submitresponse)
+- [createAccount](#createaccount)
+- [updateAccount](#updateaccount)
+- [deleteAccount](#deleteaccount)
+- [listAccounts](#listaccounts)
+- [submitResponse](#submitresponse)
 
 ### createAccount
 
@@ -564,20 +564,20 @@ Creates a new Snap account.
 
 :::note
 The Snap is responsible for maintaining its own record of accounts.
-This can be done using [`snap_manageState`](#snap_managestate).
+This can be done using [snap_manageState](#snap_managestate).
 :::
 
 #### Parameters
 
-`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
+account - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
-`null`
+null
 
 #### Example
 
-```typescript
+typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
 
 class MyKeyring implements Keyring {
@@ -620,7 +620,7 @@ class MyKeyring implements Keyring {
     return account;
   }
 }
-```
+
 
 ### updateAccount
 
@@ -628,20 +628,20 @@ Updates an existing Snap account.
 
 :::note
 The Snap is responsible for maintaining its own record of accounts.
-This can be done using [`snap_manageState`](#snap_managestate).
+This can be done using [snap_manageState](#snap_managestate).
 :::
 
 #### Parameters
 
-`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
+account - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
-`null`
+null
 
 #### Example
 
-```typescript
+typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
 
 class MyKeyring implements Keyring {
@@ -659,7 +659,7 @@ class MyKeyring implements Keyring {
     });
   }
 }
-```
+
 
 ### deleteAccount
 
@@ -667,20 +667,20 @@ Deletes a Snap account.
 
 :::note
 The Snap is responsible for maintaining its own record of accounts.
-This can be done using [`snap_manageState`](#snap_managestate).
+This can be done using [snap_manageState](#snap_managestate).
 :::
 
 #### Parameters
 
-`id` - The ID of the account to be deleted.
+id - The ID of the account to be deleted.
 
 #### Returns
 
-`null`
+null
 
 #### Example
 
-```typescript
+typescript
 import { Keyring } from '@metamask/keyring-api';
 
 class MyKeyring implements Keyring {
@@ -698,7 +698,7 @@ class MyKeyring implements Keyring {
     });
   }
 }
-```
+
 
 ### listAccounts
 
@@ -713,7 +713,7 @@ An array of [account objects](keyring-api/account-management/objects.md#keyringa
 
 #### Example
 
-```typescript
+typescript
 import { Keyring, KeyringAccount } from '@metamask/keyring-api';
 
 class MyKeyring implements Keyring {
@@ -733,26 +733,26 @@ class MyKeyring implements Keyring {
     // compare the arrays and return the response
   }
 }
-```
+
 
 ### submitResponse
 
 Finalizes a signing request.
 This is usually called as part of the
-[`keyring_approveRequest`](keyring-api/account-management/index.md#keyring_approverequest) method.
+[keyring_approveRequest](keyring-api/account-management/index.md#keyring_approverequest) method.
 
 #### Parameters
 
-- `id` - The ID of the request to finalize.
-- `result` - The result that should be returned to the original JSON-RPC caller.
+- id - The ID of the request to finalize.
+- result - The result that should be returned to the original JSON-RPC caller.
 
 #### Returns
 
-`null`
+null
 
 #### Example
 
-```typescript
+typescript
 import { Keyring } from '@metamask/keyring-api';
 import { Json } from '@metamask/utils';
 
@@ -771,19 +771,19 @@ class MyKeyring implements Keyring {
     });
   }
 }
-```
 
-## `snap_manageState`
+
+## snap_manageState
 
 Allows the Snap to persist up to 100 MB of data to disk and retrieve it at will.
 By default, the data is automatically encrypted using a Snap-specific key and automatically
 decrypted when retrieved.
-You can set `encrypted` to `false` to use unencrypted storage.
+You can set encrypted to false to use unencrypted storage.
 
 :::note
 Accessing encrypted state requires MetaMask to be unlocked.
 If you need to access encrypted state in a background task such as a cron job, you can use
-[`snap_getClientStatus`](#snap_getclientstatus) to ensure that MetaMask is unlocked, preventing an
+[snap_getClientStatus](#snap_getclientstatus) to ensure that MetaMask is unlocked, preventing an
 unexpected password request popup.
 :::
 
@@ -791,21 +791,21 @@ unexpected password request popup.
 
 An object containing:
 
-- `operation` - The state operation to perform (`'clear'`, `'get'`, or `'update'`).
-- `newState` - The value to update state with if the operation is `update`, and nothing otherwise.
-- `encrypted` (optional) - Indicates whether the Snap will encrypt the data.
-  The default is `true`.
-  If set to `false`, the Snap will use a separate storage section, and will not encrypt the data.
+- operation - The state operation to perform ('clear', 'get', or 'update').
+- newState - The value to update state with if the operation is update, and nothing otherwise.
+- encrypted (optional) - Indicates whether the Snap will encrypt the data.
+  The default is true.
+  If set to false, the Snap will use a separate storage section, and will not encrypt the data.
   This is useful to access the data from background operations without requiring the user to enter
   their password in the case that MetaMask is locked.
 
 ### Returns
 
-The value stored in state if the operation is `get`, and `null` otherwise.
+The value stored in state if the operation is get, and null otherwise.
 
 ### Example
 
-```javascript
+javascript
 // Persist some data.
 await snap.request({
   method: 'snap_manageState',
@@ -826,9 +826,9 @@ await snap.request({
   method: 'snap_manageState',
   params: { operation: 'clear' },
 });
-```
 
-## `snap_notify`
+
+## snap_notify
 
 Displays a notification in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
@@ -844,16 +844,16 @@ The ability for Snaps to trigger notifications is rate-limited to:
 
 An object containing the contents of the notification:
 
-- `type` - The notification type.
-  Specify `inApp` to display the notification in the MetaMask UI, and `native` to display the
+- type - The notification type.
+  Specify inApp to display the notification in the MetaMask UI, and native to display the
   notification in the browser.
-  We recommend using `inApp` because there's no guarantee that native notifications are displayed to
+  We recommend using inApp because there's no guarantee that native notifications are displayed to
   the user.
-- `message` - A message to show in the notification.
+- message - A message to show in the notification.
 
 ### Example
 
-```javascript
+javascript
 await snap.request({
   method: 'snap_notify',
   params: {
@@ -861,5 +861,3 @@ await snap.request({
     message: 'Hello, world!',
   },
 });
-```
-](https://github.com/Deepak2030/metamask-docs.git)https://github.com/Deepak2030/metamask-docs.git
