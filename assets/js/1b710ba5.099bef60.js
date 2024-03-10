@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[5362],{24002:t=>{t.exports=JSON.parse('{"title":"How to","slug":"/how-to","permalink":"/wallet/how-to","navigation":{"previous":{"title":"React quickstart","permalink":"/wallet/quickstart/react"},"next":{"title":"Detect wallet","permalink":"/wallet/how-to/detect-wallet"}}}')}}]);
