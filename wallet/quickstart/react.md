@@ -5,16 +5,8 @@ sidebar_position: 2
 
 # React quickstart
 
-This page provides code samples to quickly connect to your users' MetaMask accounts from a
+This page provides a code sample to quickly connect to your users' MetaMask accounts from a
 React dapp.
-You can:
-
-- [Connect to the MetaMask browser extension](#connect-to-the-metamask-browser-extension)
-  directly using the Wallet API.
-- [Connect to the MetaMask extension and MetaMask mobile](#connect-to-the-metamask-extension-and-metamask-mobile)
-  using MetaMask SDK.
-
-## Connect to the MetaMask browser extension
 
 Connect to the MetaMask browser extension directly using the [Wallet API](../concepts/wallet-api.md).
 This example uses the [Vite](https://v3.vitejs.dev/guide/) build tool with React and Typescript, so
@@ -69,88 +61,4 @@ you can get started quickly with an optimized dapp.
       )
     }
     export default App
-    ```
-
-## Connect to the MetaMask extension and MetaMask Mobile
-
-Connect to the MetaMask browser extension and MetaMask Mobile using [MetaMask SDK](../concepts/sdk/index.md).
-The SDK automatically detects MetaMask in the user's browsers, and enables them to seamlessly
-connect to the extension or mobile wallet.
-By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
-preferred MetaMask client.
-
-:::info note
-The SDK uses the [MetaMask Ethereum provider](../concepts/wallet-api.md#ethereum-provider-api), so
-you can use the SDK as a wrapper around an existing JavaScript dapp and call Wallet API methods from
-your dapp as normal.
-:::
-
-1. Install the [MetaMask React SDK](../how-to/use-sdk/javascript/react/index.md) in your project directory:
-
-    ```bash
-    npm i @metamask/sdk-react
-    ```
-
-2. Wrap your root component in a `MetaMaskProvider`:
-
-    ```typescript title="index.tsx"
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
-    import App from './App';
-    import { MetaMaskProvider } from '@metamask/sdk-react';
-    
-    const root = ReactDOM.createRoot(
-      document.getElementById('root') as HTMLElement
-    );
-    
-    root.render(
-      <React.StrictMode>
-        <MetaMaskProvider debug={false} sdkOptions={{
-          dappMetadata: {
-            name: "Example React Dapp",
-            url: window.location.host,
-          }
-        }}>
-          <App />
-        </MetaMaskProvider>
-      </React.StrictMode>
-    );
-    ```
-
-3. To use the SDK, use the `useSDK` hook in your React components:
-
-    ```typescript title="App.tsx"
-    import { useSDK } from '@metamask/sdk-react';
-    import React, { useState } from 'react';
-    
-    export const App = () => {
-      const [account, setAccount] = useState<string>();
-      const { sdk, connected, connecting, provider, chainId } = useSDK();
-    
-      const connect = async () => {
-        try {
-          const accounts = await sdk?.connect();
-          setAccount(accounts?.[0]);
-        } catch(err) {
-          console.warn(`failed to connect..`, err);
-        }
-      };
-    
-      return (
-        <div className="App">
-          <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-            Connect
-          </button>
-          {connected && (
-            <div>
-              <>
-                {chainId && `Connected chain: ${chainId}`}
-                <p></p>
-                {account && `Connected account: ${account}`}
-              </>
-            </div>
-          )}
-        </div>
-      );
-    };
     ```

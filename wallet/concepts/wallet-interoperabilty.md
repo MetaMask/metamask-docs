@@ -18,7 +18,7 @@ The following is a visual demo of the user experience, showing the data provided
   </video>
 </p>
 
-Learn [how to detect multiple wallets](../how-to/detect-wallet/metamask.md#detect-multiple-wallets)
+Learn [how to detect multiple wallets](../how-to/detect-wallet/multiple-wallets.md)
 and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
@@ -27,23 +27,27 @@ for more information.
 
 The following third-party libraries support EIP-6963:
 
-- [MetaMask SDK](../how-to/use-sdk/javascript/index.md)
-
-  :::note
-  MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
-  If you intend to support discovery of other wallets, we recommend using other methods of adding
-  EIP-6963 support such as Wagmi 2+.
-  :::
-
 - [Wagmi 2+](https://wagmi.sh)
-
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
-
 - [MIPD Store](https://github.com/wevm/mipd)
-
 - [RainbowKit](https://www.rainbowkit.com/)
 
-### MetaMask SDK
+### MIPD Store
+
+The [MIPD Store](https://github.com/wevm/mipd) stores the wallet providers and enables you to
+subscribe to the store and retrieve the providers.
+Unlike [Wagmi](https://wagmi.sh) and [Web3-Onboard](https://onboard.blocknative.com/), which are
+libraries that provide components and connectors for multiple wallets and depend on MetaMask SDK for
+integration, the MIPD Store is a utility library that makes it easier to work with EIP-6963 and
+supports TypeScript types.
+
+## MetaMask SDK support
+
+:::note
+MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
+If you intend to support discovery of other wallets, we recommend using other methods of adding
+EIP-6963 support such as [Wagmi 2+](https://wagmi.sh).
+:::
 
 The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
@@ -58,14 +62,6 @@ The SDK is also being integrated into [Wagmi 2+](https://wagmi.sh/), which suppo
 The SDK on its own supports connecting *only* to MetaMask via EIP-6963, so if you intend to support
 discovery of other wallets, we recommend using other methods of adding EIP-6963 support, such as
 Wagmi 2+.
-
-### MIPD Store
-
-The [MIPD Store](https://github.com/wevm/mipd) stores the wallet providers and enables you to
-subscribe to the store and retrieve the providers.
-Unlike Wagmi and Web3-Onboard, which are libraries that provide components and connectors for
-multiple wallets and depend on MetaMask SDK for integration, the MIPD Store is a utility library
-that makes it easier to work with EIP-6963 and supports TypeScript types.
 
 ## Wallet support
 

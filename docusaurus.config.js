@@ -402,10 +402,6 @@ const config = {
             label: "Wallet",
           },
           {
-            to: "/wallet/how-to/use-sdk",
-            label: "SDK",
-          },
-          {
             to: "snaps",
             label: "Snaps",
           },
