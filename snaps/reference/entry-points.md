@@ -427,9 +427,6 @@ module.exports.onUpdate = async () => {
 
 ### `onHomePage`
 
-:::flaskOnly
-:::
-
 To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
 expose the `onHomePage` entry point. 
 MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.

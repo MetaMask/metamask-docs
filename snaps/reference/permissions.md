@@ -82,9 +82,6 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 
 ### `endowment:page-home`
 
-:::flaskOnly
-:::
-
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
