@@ -46,14 +46,14 @@ Next, `cd` into the `gas-estimation-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies. You may get a warning like the following: 
+This initializes your development environment with the required dependencies. You may get a warning similar to the following: 
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
-You can fix this by running the following command: 
+You can resolve this error by running the following command: 
 
 ```bash 
 yarn run allow-scripts auto
@@ -61,14 +61,14 @@ yarn run allow-scripts auto
 
 ### 2. Add a custom icon
 
-Your Snap needs an icon to be displayed in MetaMask. 
-First, create a new folder `images` inside the Snap package at `packages/snap/`: 
+Your Snap must display an icon in MetaMask. 
+To add a Snap image, create a new folder `images` in the Snap package `packages/snap/`: 
 
 ```bash 
 mkdir packages/snap/images
 ```
 
-Then, download 
+Download 
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) 
 into the folder you just created.  
 This is a free icon, **Gas** by Mello from
@@ -98,10 +98,10 @@ gas-estimation-snap/
 ├─ ... (other stuff)
 ```
 
-Next, open `packages/snap/snap.manifest.json` in a text editor. 
+Open `packages/snap/snap.manifest.json` in a text editor. 
 This file contains the main configuration details for your Snap. 
-Edit the `npm` object (within the `location` object) 
-and add a key `iconPath` with the value `"images/gas.svg"` to point to your new icon: 
+Edit the `npm` object, within the `location` object,
+and add `iconPath` with the value `"images/gas.svg"` to point to your new icon: 
 
 ```json title="snap.manifest.json"
 "location": {
@@ -114,7 +114,7 @@ and add a key `iconPath` with the value `"images/gas.svg"` to point to your new 
 }
 ```
 
-Finally, open `packages/snap/package.json` in a text editor.
+Open `packages/snap/package.json` in a text editor.
 Edit the `files` array and add the `images/` folder: 
 
 ```json title="package.json"
@@ -150,7 +150,7 @@ Open `/packages/snap/src/index.ts`.
 This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
-Add the following `getFees()` function to the top of the file:
+Add the following `getFees()` function to the beginning of the file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
@@ -162,7 +162,7 @@ async function getFees() {
 }
 ```
 
-Also, add one more UI component `copyable` to the second import at the top of the file: 
+Next, add the component `copyable` to the second import of the file: 
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
@@ -233,8 +233,7 @@ To build and test your Snap:
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
 </p>
 
-Congratulations!
-You've integrated a public API into MetaMask and displayed real-time gas fee estimates.
+You have  integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
 ### 6. Next steps
 
