@@ -219,7 +219,7 @@ You can update the fields in `snap.manifest.json` to match your custom Snap:
   If you decided to publish your Snap to npm, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you don't plan to publish your Snap to npm.
+`packages/snap/package.json` even if you don't plan to publish your Snap to npm.
 
 :::note
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
@@ -228,7 +228,7 @@ The `version` field in `snap.manifest.json` inherits the `version` field from `p
 You should also add an icon, by following the same steps as in the 
 [gas estimation Snap tutorial](../tutorials/gas-estimation.md#2-add-a-custom-icon). 
 
-Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such as removing the
+Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such as removing the
 template **Send Hello** button.
 
 Once you've made all necessary changes, you can
