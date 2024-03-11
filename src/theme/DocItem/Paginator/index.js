@@ -1,5 +1,4 @@
-import React from 'react';
 
-export default function PaginatorWrapper(props) {
+export default function PaginatorWrapper() {
   return null;
 }
