@@ -17,14 +17,15 @@ The Snap provides transaction insights in the MetaMask transaction window.
   You can use [Infura's Sepolia faucet](https://www.infura.io/faucet) to get Sepolia ETH.
   :::
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
 - [Yarn](https://yarnpkg.com/)
 
 ## Steps
 
 ### 1. Set up the project
 
-Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+Create a new Snap project using the 
+[`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
 ```bash
@@ -49,12 +50,24 @@ Next, `cd` into the `transaction-insights-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies.
+This initializes your development environment with the required dependencies. You may get a warning like the following: 
+
+```bash
+@lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
+run "allow-scripts auto" to automatically populate the configuration.
+```
+
+You can fix this by running the following command: 
+
+```bash 
+yarn run allow-scripts auto
+```
 
 ### 2. Enable transaction insights and the Ethereum provider
 
-The default template Snap, such as the one in [Create a gas estimation Snap](gas-estimation.md), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
-dialog box.
+The default template Snap, such as the one in 
+[Create a gas estimation Snap](gas-estimation.md), 
+is set up to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose any API.
 Instead, it provides transaction insights directly in the MetaMask transaction window.
 
@@ -64,7 +77,7 @@ It gets the current gas price by calling the
 method using the global Ethereum provider made available to Snaps.
 
 To enable your Snap to provide transaction insights and use the global Ethereum provider, open
-`/packages/snap/snap.manifest.json` in a text editor.
+`packages/snap/snap.manifest.json` in a text editor.
 Request the
 [`endowment:transaction-insight`](../../reference/permissions.md#endowmenttransaction-insight) and
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider)
@@ -77,14 +90,19 @@ permissions by modifying `initialPermissions`:
 }
 ```
 
+:::tip
+In this tutorial, you can replace what was previously in `initialPermissions`; 
+you do not need any permissions other than these two.
+:::
+
 ### 3. Calculate and display the percentage of gas fees
 
 To calculate and display the gas fees a user would pay as a percentage of their outgoing transaction,
-replace the code in `/packages/snap/src/index.ts` with the following:
+replace the code in `packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
 import { OnTransactionHandler } from '@metamask/snaps-types';
-import { heading, panel, text } from '@metamask/snaps-ui';
+import { heading, panel, text } from '@metamask/snaps-sdk';
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
@@ -199,6 +217,9 @@ Similarly, you should update the `name`, `version`, `description`, and `reposito
 :::note
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
 :::
+
+You should also add an icon, by following the same steps as in the 
+[gas estimation Snap tutorial](../tutorials/gas-estimation.md#2-add-a-custom-icon). 
 
 Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such as removing the
 template **Send Hello** button.
