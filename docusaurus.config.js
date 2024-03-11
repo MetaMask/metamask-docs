@@ -345,7 +345,7 @@ const config = {
           {
             from: ["/guide/snaps-exports", "/snaps/reference/exports"],
             to: "/snaps/reference/entry-points",
-          }
+          },
         ].reduce((acc, item) => {
           acc.push(item);
           acc.push({ from: item.from + ".html", to: item.to });
@@ -386,7 +386,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        { name: 'og:image', content: '/img/metamaskog.jpeg' },
+        { name: "og:image", content: "/img/metamaskog.jpeg" },
       ],
       navbar: {
         title: " │ ‎ Documentation",

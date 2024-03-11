@@ -1,6 +1,5 @@
-import React from 'react';
 
-function DocPaginator(props) {
+function DocPaginator() {
   return null;
 }
 
