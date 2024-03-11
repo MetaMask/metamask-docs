@@ -46,7 +46,8 @@ Next, `cd` into the `gas-estimation-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies. You may get a warning similar to the following: 
+This initializes your development environment with the required dependencies. 
+You may get a warning similar to the following: 
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
@@ -70,11 +71,11 @@ mkdir packages/snap/images
 
 Download 
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) 
-into the folder you just created.  
+into the `ìmages` folder you just created.  
 This is a free icon, **Gas** by Mello from
 [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
 
-Now your file structure should look like this: 
+Your file structure should look like this: 
 
 ```text
 gas-estimation-snap/
@@ -127,7 +128,7 @@ Edit the `files` array and add the `images/` folder:
 
 ### 3. Enable network access
 
-To enable your Snap to use the `fetch` API, add the
+To enable your Snap to use the `fetch` API, enable the
 [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) 
 permission by adding `"endowment:network-access": {}` to the `initialPermissions` object in `snap.manifest.json`:
 
@@ -141,7 +142,6 @@ permission by adding `"endowment:network-access": {}` to the `initialPermissions
   "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
-...
 ```
 
 ### 4. Fetch gas fee estimates
@@ -150,7 +150,7 @@ Open `/packages/snap/src/index.ts`.
 This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
-Add the following `getFees()` function to the beginning of the file:
+Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
@@ -162,21 +162,21 @@ async function getFees() {
 }
 ```
 
-Next, add the component `copyable` to the second import of the file: 
+Next, add the `copyable` component to the second import of the file: 
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import { panel, text, copyable } from '@metamask/snaps-sdk';
 ```
 
-Next, modify the Snap RPC message handler that displays the dialog.
-This handler uses a switch statement to handle various request methods, but in this case there is
+Modify the Snap RPC message handler that displays the dialog.
+This handler uses a switch statement to handle various request methods, but in this instance there is
 only one method, `hello`.
-For this method, the handler returns a call to MetaMask with the parameters to display a
+For the `hello` method, the handler returns a call to MetaMask with the parameters to display a
 dialog, and passes some static strings.
 
 Since `getFees()` returns a promise, you must use `then()` to resolve it in your `hello` method.
-Rewrite the `hello` method with the following code:
+Rewrite the `hello` method using the following code:
 
 ```typescript title="index.ts"
 case 'hello':
@@ -221,8 +221,8 @@ To build and test your Snap:
 4. Select **Connect** to connect Flask to the dapp.
     After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow dapps to communicate directly with this Snap.**
-    - **Access the internet.**
+    - **Allow dapps to communicate directly with this Snap**
+    - **Access the internet**
     - **Display dialog windows in MetaMask.**
 
 5. Select **Approve & install**.
@@ -233,7 +233,7 @@ To build and test your Snap:
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
 </p>
 
-You have  integrated a public API into MetaMask and displayed real-time gas fee estimates.
+You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
 ### 6. Next steps
 
@@ -259,7 +259,7 @@ The `version` field in `snap.manifest.json` inherits the `version` field from `p
 
 Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such as changing the
 name of the method for showing gas fee estimates.
-If you change the method name, make sure to change the method name in `/packages/snap/src/index.ts`
+If you change the method name, ensure you change the method name in `/packages/snap/src/index.ts`
 to match.
 
 After you have made all necessary changes, you can
