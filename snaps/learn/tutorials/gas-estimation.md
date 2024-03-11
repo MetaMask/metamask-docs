@@ -153,7 +153,7 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the top of the file:
 
 ```typescript title="index.ts"
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import { panel, text } from '@metamask/snaps-sdk';
 
 async function getFees() {
@@ -165,7 +165,7 @@ async function getFees() {
 Also, add one more UI component `copyable` to the second import at the top of the file: 
 
 ```typescript title="index.ts"
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import { panel, text, copyable } from '@metamask/snaps-sdk';
 ```
 
