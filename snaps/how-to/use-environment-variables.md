@@ -92,12 +92,12 @@ Snaps CLI:
     For example:
 
     ```typescript title="index.ts"
-    import { panel, text, heading } from '@metamask/snaps-ui';
+    import { panel, text, heading } from '@metamask/snaps-sdk';
     
     await snap.request({
         method: "snap_dialog",
         params: {
-            type: "Alert",
+            type: "alert",
             content: panel([
                 heading("This custom alert is just for display purposes."),
                 text("SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}"),
