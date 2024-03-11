@@ -101,16 +101,16 @@ To calculate and display the gas fees a user would pay as a percentage of their 
 replace the code in `packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
-import { OnTransactionHandler } from '@metamask/snaps-types';
+import { OnTransactionHandler } from '@metamask/snaps-sdk';
 import { heading, panel, text } from '@metamask/snaps-sdk';
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
-  // Use the window.ethereum global provider to fetch the gas price.
-  const currentGasPrice = await window.ethereum.request({
+  // Use the ethereum provider to fetch the gas price.
+  const currentGasPrice = await ethereum.request({
     method: 'eth_gasPrice',
-  });
+  }) as string;
 
   // Get fields from the transaction object.
   const transactionGas = parseInt(transaction.gas as string, 16);
@@ -144,6 +144,13 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   };
 };
 ```
+
+:::tip
+If you have coded a dapp at some point, you may be accustomed to using 
+`window.ethereum` to access the Ethereum provider. 
+In a Snap context, there is no `window` object. 
+Instead, the `ethereum` global is made available to your Snap when you request the `endowment:ethereum-provider` permission. 
+:::
 
 ### 4. Build and test the Snap
 
