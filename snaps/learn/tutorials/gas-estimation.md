@@ -221,11 +221,11 @@ To build and test your Snap:
 4. Select **Connect** to connect Flask to the dapp.
     After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow dapps to communicate directly with this Snap**
-    - **Access the internet**
+    - **Allow dapps to communicate directly with this Snap.**
+    - **Access the internet.**
     - **Display dialog windows in MetaMask.**
 
-5. Select **Approve & install**.
+5. Select **Approve** > **Install**.
 
 6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
@@ -248,7 +248,7 @@ You can also update the fields in `snap.manifest.json` to match your custom Snap
 - `description` - The description of your Snap.
 - `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
-  If you decided to publish your Snap to npm, update the `location` to its published location.
+  If you decided to publish your Snap to `npm`, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to [`npm`](https://www.npmjs.com/).
@@ -257,10 +257,9 @@ Similarly, you should update the `name`, `version`, `description`, and `reposito
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
 :::
 
-Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such as changing the
+You can update the content of `/packages/site/src/pages/index.tsx` by changing the
 name of the method for showing gas fee estimates.
-If you change the method name, ensure you change the method name in `/packages/snap/src/index.ts`
-to match.
+If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method name in `/packages/snap/src/index.ts` to match.
 
 After you have made all necessary changes, you can
 [publish your Snap to npm](../../how-to/publish-a-snap.md#publish-your-snap).
