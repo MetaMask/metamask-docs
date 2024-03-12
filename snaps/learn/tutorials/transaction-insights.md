@@ -224,7 +224,7 @@ Similarly, you should update the `name`, `version`, `description`, and `reposito
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
 :::
 
-You should also add an icon, by following the steps outlined in the 
+You should also add an icon by following the steps outlined in the 
 [gas estimation Snap tutorial](../tutorials/gas-estimation.md#2-add-a-custom-icon). 
 
 Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such as removing the
