@@ -72,7 +72,7 @@ mkdir packages/snap/images
 Download 
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) 
 into the `ìmages` folder you just created.  
-This is a free icon, **Gas** by Mello from
+This is a free icon, "Gas" by Mello from
 [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
 
 Your file structure should look like this: 
@@ -199,7 +199,7 @@ case 'hello':
 
 To build and test your Snap:
 
-1. Open `package.json` in the root directory of the project, and increase the `"version"` (if the `"version"` is
+1. Open `package.json` in the root directory of the project, and increment the `"version"` (if the `"version"` is
     `0.1.0`, increase it to `0.2.0`).
 
 2. From the command line, run `yarn start`.
