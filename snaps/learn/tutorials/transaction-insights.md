@@ -6,7 +6,7 @@ sidebar_position: 2
 # Create a Snap to calculate gas fee percentages
 
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees that
-a user would pay when creating a transaction.
+a user pays when creating a transaction.
 The Snap provides transaction insights in the MetaMask transaction window.
 
 ## Prerequisites
@@ -17,14 +17,15 @@ The Snap provides transaction insights in the MetaMask transaction window.
   You can use [Infura's Sepolia faucet](https://www.infura.io/faucet) to get Sepolia ETH.
   :::
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 18.16 or later
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
 - [Yarn](https://yarnpkg.com/)
 
 ## Steps
 
 ### 1. Set up the project
 
-Create a new Snap project using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
+Create a new Snap project using the 
+[`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
 ```bash
@@ -49,12 +50,25 @@ Next, `cd` into the `transaction-insights-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies.
+This initializes your development environment with the required dependencies. 
+You may get a warning similar to the following: 
+
+```bash
+@lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
+run "allow-scripts auto" to automatically populate the configuration.
+```
+
+You can resolve the issue by running the following command: 
+
+```bash 
+yarn run allow-scripts auto
+```
 
 ### 2. Enable transaction insights and the Ethereum provider
 
-The default template Snap, such as the one in [Create a gas estimation Snap](gas-estimation.md), is set up to expose a JSON-RPC API with a simple hello command, which brings up a
-dialog box.
+The default template Snap, such as the one in 
+[Create a gas estimation Snap](gas-estimation.md), 
+is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose any API.
 Instead, it provides transaction insights directly in the MetaMask transaction window.
 
@@ -64,7 +78,7 @@ It gets the current gas price by calling the
 method using the global Ethereum provider made available to Snaps.
 
 To enable your Snap to provide transaction insights and use the global Ethereum provider, open
-`/packages/snap/snap.manifest.json` in a text editor.
+`packages/snap/snap.manifest.json` in a text editor.
 Request the
 [`endowment:transaction-insight`](../../reference/permissions.md#endowmenttransaction-insight) and
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider)
@@ -77,22 +91,27 @@ permissions by modifying `initialPermissions`:
 }
 ```
 
+:::tip
+In this tutorial, you can replace what was previously in `initialPermissions`.
+You do not need any permissions other than `endowment:transaction-insight` and `endowment:ethereum-provider`.
+:::
+
 ### 3. Calculate and display the percentage of gas fees
 
 To calculate and display the gas fees a user would pay as a percentage of their outgoing transaction,
-replace the code in `/packages/snap/src/index.ts` with the following:
+replace the code in `packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { heading, panel, text } from '@metamask/snaps-ui';
+import type { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { heading, panel, text } from '@metamask/snaps-sdk';
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
-  // Use the window.ethereum global provider to fetch the gas price.
-  const currentGasPrice = await window.ethereum.request({
+  // Use the ethereum provider to fetch the gas price.
+  const currentGasPrice = await ethereum.request({
     method: 'eth_gasPrice',
-  });
+  }) as string;
 
   // Get fields from the transaction object.
   const transactionGas = parseInt(transaction.gas as string, 16);
@@ -127,6 +146,12 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 };
 ```
 
+:::tip
+If you have previously developed a decentralized app (dApp), you're likely familiar with 
+accessing the Ethereum provider using `window.ethereum`. In a Snap, the `window` object is not available.
+Instead when you request the `endowment:ethereum-provider` permission, your Snap is granted access to the `ethereum` global object. 
+:::
+
 ### 4. Build and test the Snap
 
 To build and test your Snap:
@@ -145,18 +170,18 @@ To build and test your Snap:
 
 2. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
 
-3. Select **Connect**, and accept the permission request.
+3. Select **Connect** and accept the permission request.
 
 4. After connecting, you're prompted to install the Snap with the **Fetch and display transaction
     insights** and **Access the Ethereum provider** permissions.
-    Select **Approve & install**.
+    Select **Approve** > **Install**.
 
 5. From MetaMask Flask, create a new testnet ETH transfer.
-    You can set up multiple accounts to transfer between your accounts.
+   You can set up multiple accounts to transfer between your accounts.
 
-6. On the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
-    Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
-    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
+6. In the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+   Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
+   entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
 <img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
@@ -164,9 +189,8 @@ To build and test your Snap:
 
 ### 5. Display a different UI for contract interactions
 
-The Snap should only display a gas fee percentage if the user is doing a regular ETH transfer.
-For contract interactions, it should display a UI that conveys that message.
-Add the following code to the beginning of the `onTransaction` entry point:
+The Snap should display a gas fee percentage for ETH transfers initiated by the user.
+For contract interactions, add the following code to the beginning of the `onTransaction` entry point:
 
 ```typescript
 if (typeof transaction.data === 'string' && transaction.data !== '0x') {
@@ -194,14 +218,17 @@ You can update the fields in `snap.manifest.json` to match your custom Snap:
   If you decided to publish your Snap to npm, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you don't plan to publish your Snap to npm.
+`packages/snap/package.json` even if you don't plan to publish your Snap to `npm`.
 
 :::note
 The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
 :::
 
-Lastly, you can update the content of `/packages/site/src/pages/index.tsx`, such as removing the
+You should also add an icon by following the steps outlined in the 
+[gas estimation Snap tutorial](../tutorials/gas-estimation.md#2-add-a-custom-icon). 
+
+Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such as removing the
 template **Send Hello** button.
 
-Once you've made all necessary changes, you can
-[publish your Snap to npm](../../how-to/publish-a-snap.md#publish-your-snap).
+After you've made all necessary changes, you can
+[publish your Snap to `npm`](../../how-to/publish-a-snap.md#publish-your-snap).
