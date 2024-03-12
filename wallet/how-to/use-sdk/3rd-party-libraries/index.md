@@ -10,5 +10,5 @@ tags:
 
 Use [MetaMask SDK](../../../concepts/sdk/index.md) with the following third-party libraries:
 
-- [Web3-Onboard](web3-onboard.md)
-- Wagmi (coming soon)
+- [Web3-Onboard](https://onboard.blocknative.com/docs/wallets/metamask#wallet-module-for-connecting-metamask-wallet-sdk-to-web3-onboard)
+- [Wagmi](https://wagmi.sh/react/api/connectors/metaMask)
