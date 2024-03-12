@@ -38,7 +38,7 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
@@ -248,7 +248,7 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnCronjobHandler } from '@metamask/snaps-types';
+import { OnCronjobHandler } from '@metamask/sdk';
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
