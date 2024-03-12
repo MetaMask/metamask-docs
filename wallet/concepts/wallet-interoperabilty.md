@@ -18,7 +18,7 @@ The following is a visual demo of the user experience, showing the data provided
   </video>
 </p>
 
-Learn [how to detect multiple wallets](../how-to/detect-wallet/multiple-wallets.md)
+Learn [how to detect multiple wallets](../how-to/connect/index.md)
 and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
@@ -72,6 +72,6 @@ See the [list of wallets that support EIP-6963](https://github.com/WalletConnect
 ## Backwards compatibility
 
 Dapps that do not support EIP-6963 can still
-[detect MetaMask using the `window.ethereum` provider](../how-to/detect-wallet/metamask.md).
+[detect MetaMask using the `window.ethereum` provider](../how-to/connect/detect-metamask.md).
 However, we recommend adding support to improve the user experience for multiple installed wallets.
 Read more about [EIP-6963 backwards compatibility](https://eips.ethereum.org/EIPS/eip-6963#backwards-compatibility).

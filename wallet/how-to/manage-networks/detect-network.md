@@ -1,6 +1,6 @@
 ---
 description: Detect a user's network and network changes.
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Detect a user's network
@@ -10,7 +10,7 @@ to the currently connected network.
 
 Use the [`eth_chainId`](/wallet/reference/eth_chainId)
 RPC method to detect the chain ID of the user's current network.
-Listen to the [`chainChanged`](../reference/provider-api.md#chainchanged) provider event to
+Listen to the [`chainChanged`](../../reference/provider-api.md#chainchanged) provider event to
 detect when the user changes networks.
 
 For example, the following code detects a user's network and when the user changes networks:

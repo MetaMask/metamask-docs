@@ -72,7 +72,7 @@ try {
 
 :::note
 If the chain ID of your token doesn't match the user's network, they can get unexpected results.
-We recommend [detecting the user's network chain ID](../detect-network.md) and
+We recommend [detecting the user's network chain ID](../manage-networks/detect-network.md) and
 [prompting them to switch chains](/wallet/reference/wallet_switchethereumchain), if necessary.
 :::
 

@@ -1,6 +1,6 @@
 ---
 description: Send transactions using eth_sendTransaction.
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';

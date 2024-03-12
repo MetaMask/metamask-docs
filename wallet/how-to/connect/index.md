@@ -1,12 +1,12 @@
 ---
-description: Detect MetaMask and other wallets via EIP-6963.
-sidebar_position: 2
+description: Connect to MetaMask via EIP-6963.
+sidebar_position: 1
 ---
 
-# Detect multiple wallets
+# Connect to MetaMask
 
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative discovery mechanism
-for multiple wallets, shifting from relying solely on [`window.ethereum`](metamask.md) for wallet detection.
+for multiple wallets, shifting from relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
 
 If a user has multiple wallet browser extensions installed, your web dapp can support
 [wallet interoperability](../../concepts/wallet-interoperabilty.md) by adding support for
@@ -23,7 +23,7 @@ You can add support for EIP-6963 by using the following third-party libraries:
 - [MIPD Store](https://github.com/wevm/mipd)
 - [RainbowKit](https://www.rainbowkit.com/)
 
-## Implement EIP-6963
+## Connect to MetaMask directly
 
 To directly implement support for EIP-6963 in your React dapp:
 

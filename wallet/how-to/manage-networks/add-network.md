@@ -1,11 +1,11 @@
 ---
 description: Prompt a user to add or switch to an Ethereum network.
-sidebar_position: 7
+sidebar_position: 2
 ---
 
 # Add a network
 
-In some cases, such as when [interacting with smart contracts](../concepts/smart-contracts.md),
+In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
 which requires them to configure RPC URLs and chain IDs, your dapp can use the
@@ -23,10 +23,10 @@ The confirmations look like the following:
 
 <div class="row">
     <div class="column">
-        <img src={require("../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid gray'}} />
+        <img src={require("../../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid gray'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid gray'}} />
+        <img src={require("../../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid gray'}} />
     </div>
 </div>
 

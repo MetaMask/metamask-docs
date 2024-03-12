@@ -5,6 +5,14 @@ sidebar_position: 1
 
 # Detect MetaMask
 
+:::caution Important
+MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
+alternative discovery mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to [detect multiple wallets](index.md) in
+the user's browser.
+We recommend detecting multiple wallets to improve the user experience.
+:::
+
 The presence of the MetaMask Ethereum provider object, `window.ethereum`, in a user's browser
 indicates an Ethereum user.
 
@@ -19,14 +27,6 @@ if (typeof window.ethereum !== "undefined") {
 
 You can use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module to
 detect the MetaMask Ethereum provider.
-
-:::tip Detect multiple wallets
-MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to [detect multiple wallets](multiple-wallets.md) in
-the user's browser.
-We recommend detecting multiple wallets to improve the user experience.
-:::
 
 ## Steps
 
