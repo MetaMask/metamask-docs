@@ -106,7 +106,7 @@ for the transaction that `onTransaction` was called with.
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snaps-sdk';
+import type { OnTransactionHandler } from '@metamask/snaps-sdk';
 import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
