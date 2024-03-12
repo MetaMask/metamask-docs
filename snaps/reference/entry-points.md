@@ -106,8 +106,8 @@ for the transaction that `onTransaction` was called with.
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -129,7 +129,7 @@ export const onTransaction: OnTransactionHandler = async ({
 <TabItem value="JavaScript">
 
 ```js
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 module.exports.onTransaction = async ({
   transaction,
@@ -164,8 +164,8 @@ insight with the severity level `critical`:
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -189,7 +189,7 @@ export const onTransaction: OnTransactionHandler = async ({
 <TabItem value="JavaScript">
 
 ```js
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 module.exports.onTransaction = async ({
   transaction,
