@@ -517,16 +517,17 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   const { chainId, address, domain } = request;
 
   if (address) {
-    const shortAddress = `0x${address.substring(2, 5)}`;
+    const shortAddress = address.substring(2, 5);
     const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
-    const chainIdHex = numberToHex(chainIdDecimal);
-    const resolvedDomain = `example.domain - ${shortAddress} / ${chainIdHex}`;
-    return { resolvedDomain };
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] };
   }
 
   if (domain) {
     const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
-    return { resolvedAddress };
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol' }],
+    };
   }
 
   return null;
@@ -541,16 +542,17 @@ module.exports.onNameLookup = async ({ request }) => {
   const { chainId, address, domain } = request;
 
   if (address) {
-    const shortAddress = `0x${address.substring(2, 5)}`;
+    const shortAddress = address.substring(2, 5);
     const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
-    const chainIdHex = numberToHex(chainIdDecimal);
-    const resolvedDomain = `example.domain - ${shortAddress} / ${chainIdHex}`;
-    return { resolvedDomain };
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] };
   }
 
   if (domain) {
     const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
-    return { resolvedAddress };
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol' }],
+    };
   }
 
   return null;
