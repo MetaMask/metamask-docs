@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+description: Learn about the Android SDK architecture.
+tags:
+  - Android SDK
 ---
 
 # Android SDK architecture
@@ -10,7 +13,7 @@ The [architecture](#architecture) and [connection flow](#connection-flow) of
 the Android SDK differs from the other SDK platforms.
 
 :::tip Get started
-- Get started by [setting up the SDK in your Android dapp](../../how-to/connect/set-up-sdk/mobile/android.md).
+- Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository for advanced use cases.
 :::

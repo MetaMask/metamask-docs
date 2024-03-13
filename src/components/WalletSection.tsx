@@ -3,24 +3,24 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "🏁 Get started building a dapp",
-    link: "/wallet/how-to/get-started-building",
+    title: "🏁 Wallet quickstart",
+    link: "/wallet/quickstart",
     description: (<>
-      If you&apos;re new to dapp development, get started building a new dapp from scratch to integrate with MetaMask.
+      Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.
     </>),
   },
   {
-    title: "↔️ Connect your dapp to MetaMask",
-    link: "/wallet/how-to/connect",
+    title: "⚙️ Wallet tutorials",
+    link: "/wallet/tutorials",
     description: (<>
-      Connect your dapp to MetaMask by setting up MetaMask SDK and accessing users&apos; Ethereum accounts.
+      Follow the step-by-step tutorials to create a simple React dapp and integrate it with MetaMask.
     </>),
   },
   {
-    title: "🛠️ Use advanced MetaMask features",
-    link: "/wallet/how-to",
+    title: "🌐 Wallet API",
+    link: "/wallet/reference/json-rpc-api",
     description: (<>
-      Optimize your dapp for MetaMask by using MetaMask-specific API methods, such as signing typed data.
+      Use the JSON-RPC methods of MetaMask&apos;s Wallet API to interact with your users&apos; Ethereum accounts.
     </>),
   },
 ];
@@ -30,7 +30,7 @@ export default function WalletSection(): JSX.Element {
     <section className="container margin-top--md">
       <h1>Integrate your dapp with the MetaMask wallet</h1>
       <p>
-        Your dapp can use MetaMask SDK and the MetaMask APIs to request users&apos; Ethereum accounts, read data from
+        Your dapp can use the Wallet API and MetaMask SDK to request users&apos; Ethereum accounts, read data from
         connected blockchains, suggest that the user sign messages and transactions,
         and perform other functions on MetaMask from multiple dapp platforms.
       </p>

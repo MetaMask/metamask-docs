@@ -1,6 +1,8 @@
 ---
 sidebar_label: Subcommands
 sidebar_position: 2
+toc_max_heading_level: 4
+description: See the Snaps CLI subcommands reference.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -8,146 +10,176 @@ import TabItem from '@theme/TabItem';
 
 # Snaps subcommands
 
-## b, build
+This reference describes the syntax of the Snaps command line interface (CLI) subcommands and
+subcommand options.
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap build [options]
-```
-
-# Example
+You can specify subcommands and their options using the `yarn mm-snap` command:
 
 ```bash
-mm-snap b -s lib/index.js -d out -n snap.js
+yarn mm-snap [SUBCOMMAND] [SUBCOMMAND OPTIONS]
 ```
 
-<!--/tabs-->
+### `b`, `build`
+
+```bash
+yarn mm-snap build
+```
 
 Builds a Snap from source.
 
 `b` is an alias for `build`.
 
-## e, eval
+#### `c`, `config`
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap eval [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap e -b out/snap.js
+yarn mm-snap build --config <FILE>
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
 
-Attempts to evaluate the Snap bundle in SES.
+```bash
+yarn mm-snap build --config ./snap.config.build.ts
+```
+
+</TabItem>
+</Tabs>
+
+Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file).
+
+`-c` is an alias for `--config`.
+
+### `e`, `eval`
+
+```bash
+yarn mm-snap eval
+```
+
+Attempts to evaluate the Snap bundle in
+[Secure ECMAScript (SES)](../../learn/about-snaps/execution-environment.md#secure-ecmascript-ses).
 
 `e` is an alias for `eval`.
 
-## i, init
-
-<!--tabs-->
-
-# Syntax
+### `m`, `manifest`
 
 ```bash
-mm-snap init [directory]
+yarn mm-snap manifest
 ```
 
-# Example
-
-```bash
-mm-snap i my-snap
-```
-
-<!--/tabs-->
-
-Initializes a Snap project in the specified directory.
-If no directory is specified, the Snap project is initialized in the current directory.
-
-`i` is an alias for `init`.
-
-## m, manifest
-
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap manifest [options]
-```
-
-# Example
-
-```bash
-mm-snap m --fix false
-```
-
-<!--/tabs-->
-
-Validates the Snap [manifest file](../../concepts/anatomy.md#manifest-file).
+Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
 
 `m` is an alias for `manifest`.
 
-## s, serve
+#### `fix`
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap serve [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap s -r out -p 9000
+yarn mm-snap manifest --fix <BOOLEAN>
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap manifest --fix false
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables making any changes to fix the manifest file.
+The default is `true`.
+
+### `s`, `serve`
+
+```bash
+yarn mm-snap serve
+```
 
 Locally serves Snap files for testing.
 
 `s` is an alias for `serve`.
 
-## w, watch
+#### `p`, `port`
 
-<!--tabs-->
-
-# Syntax
-
-```bash
-mm-snap watch [options]
-```
-
-# Example
+<Tabs>
+<TabItem value="Syntax">
 
 ```bash
-mm-snap w -s lib/index.js -d out
+yarn mm-snap serve --port <PORT>
 ```
 
-<!--/tabs-->
+</TabItem>
+<TabItem value="Example">
 
-Rebuilds a Snap from source upon changes to the files in the parent and child directories of the
-source directory.
+```bash
+yarn mm-snap serve --port 9000
+```
 
-:::note
-All files in the parent and child directories of sthe source directory are watched for changes, except:
+</TabItem>
+</Tabs>
 
-- Files in the `node_modules` directory.
-- Files in the `test` or `tests` directories.
-- Any files named `test.js` or `test.ts`.
-- Files in the `dist` directory, or the directory specified using [`--dist`](options.md#d-dist).
-- Dotfiles.
-:::
-  
+The local server port for testing.
+The default is `8081`.
+
+`-p` is an alias for `--port`.
+
+### `w`, `watch`
+
+```bash
+yarn mm-snap watch
+```
+
+Rebuilds a Snap from source upon changes.
+
 `w` is an alias for `watch`.
+
+#### `p`, `port`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```bash
+yarn mm-snap watch --port <PORT>
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap watch --port 9000
+```
+
+</TabItem>
+</Tabs>
+
+The local server port for testing.
+The default is `8081`.
+
+`-p` is an alias for `--port`.
+
+## Global options
+
+#### `h`, `help`
+
+```bash
+-h, --help
+```
+
+Displays the help message and exits.
+You can use this option with `mm-snap` or any subcommand.
+
+`-h` is an alias for `--help`.
+
+#### `version`
+
+```bash
+--version
+```
+
+Displays the version number and exits.

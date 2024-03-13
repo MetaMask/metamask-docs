@@ -2,6 +2,9 @@ name: Build and lint
 
 on:
   workflow_call:
+  secrets:
+      SEGMENT_ANALYTICS_KEY:
+        required: true
 
 jobs:
   prepare:
@@ -9,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,8 +27,6 @@ jobs:
       - prepare
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -35,6 +34,8 @@ jobs:
           cache: 'yarn'
       - run: yarn --immutable --immutable-cache
       - run: yarn build
+        env:
+            SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
       - name: Require clean working directory
         shell: bash
         run: |
@@ -50,8 +51,6 @@ jobs:
       - prepare
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:

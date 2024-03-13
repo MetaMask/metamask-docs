@@ -11,7 +11,7 @@ Build the documentation site locally using the following steps.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) version 16+
+- [Node.js](https://nodejs.org/) version 16
 - [Yarn](https://yarnpkg.com/) version 3
 - [Git](https://git-scm.com/)
 
@@ -23,20 +23,22 @@ Build the documentation site locally using the following steps.
     git clone https://github.com/MetaMask/metamask-docs.git
     cd metamask-docs
     ```
-   
-2. Initialize and update the [`keyring-api`](https://github.com/MetaMask/keyring-api) submodule.
 
-    ```bash
-    git submodule init && git submodule update
-    ```
+    > **Note:** If you don't have write access to this repository, you must [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) to your personal account and clone your forked repository instead. [Add an upstream remote](https://docs.github.com/en/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-upstream-repository) to be able to pull from and push to the original repository.
+    >
+    > ```bash
+    > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
+    > cd metamask-docs
+    > git remote add upstream https://github.com/MetaMask/metamask-docs.git
+    > ```
    
-3. Install dependencies.
+2. Install dependencies.
 
     ```bash
     yarn install
     ```
    
-4. Start the development server.
+3. Start the development server.
 
     ```bash
     yarn start

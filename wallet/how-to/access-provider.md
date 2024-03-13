@@ -1,6 +1,6 @@
 ---
 description: Access a user's MetaMask provider using metamask-extension-provider.
-sidebar_position: 8
+sidebar_position: 12
 ---
 
 # Access a user's MetaMask provider
@@ -13,7 +13,7 @@ When sending signing requests to this provider, MetaMask prompts the user to sig
 
 This module works in Chrome and Firefox.
 
-## Use @metamask/providers
+## Use `@metamask/providers`
 
 Install `@metamask/providers` using the following command:
 
@@ -24,25 +24,25 @@ npm install @metamask/providers
 Initialize the provider using the following code:
 
 ```javascript
-import { initializeProvider } from '@metamask/providers';
+import { initializeProvider } from "@metamask/providers";
 
 // Create a stream to a remote provider
 const metamaskStream = new LocalMessageDuplexStream({
-  name: 'inpage',
-  target: 'contentscript',
+    name: "inpage",
+    target: "contentscript",
 });
 
 // Initialize the provider and set it as window.ethereum
 initializeProvider({
-  connectionStream: metamaskStream,
+    connectionStream: metamaskStream,
 });
 ```
 
 Create an external extension provider using the following code:
 
 ```javascript
-import { createExternalExtensionProvider } from '@metamask/providers';
+import { createExternalExtensionProvider } from "@metamask/providers";
 
 let provider = createExternalExtensionProvider();
-const accounts = await provider.request({ method: 'eth_requestAccounts' });
+const accounts = await provider.request({ method: "eth_requestAccounts" });
 ```

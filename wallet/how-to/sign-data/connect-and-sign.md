@@ -1,12 +1,15 @@
 ---
 description: Use MetaMask SDK to connect and sign in a single interaction.
 sidebar_position: 1
+tags:
+  - JavaScript SDK
+  - iOS SDK
 ---
 
 # Connect and sign
 
-You can connect to MetaMask and sign data in a single interaction from your JavaScript or iOS dapp
-using [MetaMask SDK](../../concepts/sdk/index.md).
+You can connect to MetaMask and sign data in a single interaction from your JavaScript, iOS,
+Android, or Unity dapp using [MetaMask SDK](../../concepts/sdk/index.md).
 
 The SDK's `connectAndSign` method provides a streamlined approach for dapps to interact with MetaMask.
 This method combines the [`eth_requestAccounts`] and [`personal_sign`] RPC methods, executing them sequentially.
@@ -16,6 +19,7 @@ the output of [`eth_requestAccounts`] directly to [`personal_sign`].
 This method enhances dapp user experience, especially on mobile platforms, by allowing users to
 connect to MetaMask and sign a message in a single interaction, requiring only one switch between
 the mobile dapp and MetaMask Mobile.
+This is useful for various purposes such as authentication and transaction verification.
 
 <p align="center">
   <video width="350" controls>
@@ -23,29 +27,31 @@ the mobile dapp and MetaMask Mobile.
   </video>
 </p>
 
+The following instructions describe how to connect and sign in JavaScript.
+You can also see the [Unity instructions](../use-sdk/gaming/unity/connect-and-sign.md).
+
 ## Prerequisites
 
-- MetaMask SDK set up in your [JavaScript](../connect/set-up-sdk/javascript/index.md) or
-  [iOS](../connect/set-up-sdk/mobile/ios.md) dapp.
+- [MetaMask SDK set up](../use-sdk/javascript/index.md) in your JavaScript dapp.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
   For older versions of MetaMask, this function may not work as expected.
 
-## Use the connectAndSign method
+## Use the `connectAndSign` method
 
 Use the `connectAndSign` method as follows:
 
 ```javascript
 const connectAndSign = async () => {
-  try {
-    const signResult = await sdk?.connectAndSign({
-      msg: "Connect + Sign message",
-    });
-    setResponse(signResult);
-  } catch (err) {
-    console.warn(`failed to connect..`, err);
-  }
+    try {
+        const signResult = await sdk?.connectAndSign({
+            msg: "Connect + Sign message",
+        });
+        setResponse(signResult);
+    } catch (err) {
+        console.warn(`failed to connect..`, err);
+    }
 };
 ```
 
@@ -65,25 +71,25 @@ import React, { useState } from "react";
 import { useSDK } from "@metamask/sdk-react";
 
 function MyComponent() {
-  const { sdk } = useSDK();
-  const [signedMessage, setSignedMessage] = useState("");
+    const { sdk } = useSDK();
+    const [signedMessage, setSignedMessage] = useState("");
 
-  const handleConnectAndSign = async () => {
-    try {
-      const message = "Your message here";
-      const signature = await sdk.connectAndSign({ msg: message });
-      setSignedMessage(signature);
-    } catch (error) {
-      console.error("Error in signing:", error);
-    }
-  };
+    const handleConnectAndSign = async () => {
+        try {
+            const message = "Your message here";
+            const signature = await sdk.connectAndSign({ msg: message });
+            setSignedMessage(signature);
+        } catch (error) {
+            console.error("Error in signing:", error);
+        }
+    };
 
-  return (
-    <div>
-      <button onClick={handleConnectAndSign}>Connect and Sign</button>
-      {signedMessage && <p>Signed Message: {signedMessage}</p>}
-    </div>
-  );
+    return (
+        <div>
+            <button onClick={handleConnectAndSign}>Connect and Sign</button>
+            {signedMessage && <p>Signed Message: {signedMessage}</p>}
+        </div>
+    );
 }
 ```
 

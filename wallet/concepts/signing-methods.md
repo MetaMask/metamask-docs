@@ -8,7 +8,7 @@ sidebar_position: 5
 This page describes the signing RPC methods in MetaMask.
 Learn how to [use the recommended signing methods](../how-to/sign-data/index.md).
 
-## eth_signTypedData_v4
+### `eth_signTypedData_v4`
 
 [`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4)
 is:
@@ -20,7 +20,7 @@ is:
 If onchain verifiability cost is a high priority,
 [use `eth_signTypedData_v4`](../how-to/sign-data/index.md#use-eth_signtypeddata_v4).
 
-## personal_sign
+### `personal_sign`
 
 [`personal_sign`](/wallet/reference/personal_sign):
 
@@ -39,7 +39,7 @@ If onchain verifiability cost is not a priority, you can
 Use `eth_signTypedData_v4` or `personal_sign`.
 :::
 
-### eth_sign
+### `eth_sign`
 
 `eth_sign` allows signing an arbitrary hash, which means it can be used to sign transactions, or any other
 data. Using `eth_sign` is a dangerous phishing risk.
@@ -50,7 +50,7 @@ use, or due to an inability to change the associated dapp.
 If a wallet user must interact with a dapp that uses `eth_sign` and accepts the risks,
 the wallet user can re-enable `eth_sign` through advanced settings.
 
-### eth_signTypedData_v1 and eth_signTypedData_v3
+### `eth_signTypedData_v1` and `eth_signTypedData_v3`
 
 `eth_signTypedData` was introduced by [EIP-712](https://eips.ethereum.org/EIPS/eip-712).
 The EIP-712 specification changed several times resulting in multiple versions
