@@ -61,16 +61,19 @@ Make sure to handle errors for every call to
 ### Restricted methods
 
 MetaMask introduced wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
-In this permissions system, each RPC method is restricted or unrestricted.
-If a method is restricted, a dapp must request permission to call it using
-[`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions).
+In this permissions system, each RPC method is restricted or unrestricted. 
+
+Restricted methods are methods that cannot be called unless you have permission to do so using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or [wallet_requestSnaps](/wallet/reference/wallet_requestSnaps).
+
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
-Outside of [Snaps restricted methods](/snaps/reference/rpc-api/#restricted-methods), the only
-restricted method is [`eth_accounts`](/wallet/reference/eth_accounts), which allows you to access
-the user's Ethereum accounts.
-More restricted methods will be added in the future.
+Outside of [Snaps restricted methods](/snaps/reference/rpc-api/#restricted-methods), there is the
+restricted method [`eth_accounts`](/wallet/reference/eth_accounts), which allows you to access
+the user's Ethereum accounts. DApps must explicitly request user consent using `wallet_requestPermissions` before using `eth_accounts`.
+
+Granting permission for `eth_accounts` also implicitly grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData`](/wallet/reference/eth_signTypedData). 
+
 
 ### Unrestricted methods
 
