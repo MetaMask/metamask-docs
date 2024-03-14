@@ -5,10 +5,10 @@ sidebar_position: 6
 
 # Wallet interoperability
 
-A web dapp can integrate with multiple wallets simultaneously by adding support for
-[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an alternative discovery
+A web dapp can integrate with multiple installed browser wallets simultaneously by adding support for
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an alternative wallet detection
 mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) injected provider.
-This discovery is enabled by using the standardized events and interfaces defined by EIP-6963.
+This mechanism is enabled by using the standardized events and interfaces defined by EIP-6963.
 
 The following is a visual demo of the user experience, showing the data provided from each installed wallet:
 
@@ -18,8 +18,7 @@ The following is a visual demo of the user experience, showing the data provided
   </video>
 </p>
 
-Learn [how to detect multiple wallets](../how-to/connect/index.md)
-and see the
+You can [connect to MetaMask using EIP-6963](../how-to/connect/index.md) and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
 

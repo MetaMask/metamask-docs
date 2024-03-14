@@ -24,9 +24,9 @@ const sendEthButton = document.querySelector(".sendEthButton");
 
 let accounts = [];
 
-// Send Ethereum to an address
+// Send Ethereum to an address.
 sendEthButton.addEventListener("click", () => {
-    ethereum
+    provider // Or window.ethereum if you don't support EIP-6963.
         .request({
             method: "eth_sendTransaction",
             // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
@@ -56,7 +56,8 @@ ethereumButton.addEventListener("click", () => {
 });
 
 async function getAccount() {
-    accounts = await ethereum.request({ method: "eth_requestAccounts" });
+    accounts = await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({ method: "eth_requestAccounts" });
 }
 ```
 

@@ -43,22 +43,23 @@ const tokenImage = "http://placekitten.com/200/300";
 
 try {
     // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-    const wasAdded = await window.ethereum.request({
-        method: "wallet_watchAsset",
-        params: {
-            type: "ERC20",
-            options: {
-                // The address of the token.
-                address: tokenAddress,
-                // A ticker symbol or shorthand, up to 5 characters.
-                symbol: tokenSymbol,
-                // The number of decimals in the token.
-                decimals: tokenDecimals,
-                // A string URL of the token logo.
-                image: tokenImage,
+    const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+            method: "wallet_watchAsset",
+            params: {
+                type: "ERC20",
+                options: {
+                    // The address of the token.
+                    address: tokenAddress,
+                    // A ticker symbol or shorthand, up to 5 characters.
+                    symbol: tokenSymbol,
+                    // The number of decimals in the token.
+                    decimals: tokenDecimals,
+                    // A string URL of the token logo.
+                    image: tokenImage,
+                },
             },
-        },
-    });
+        });
 
     if (wasAdded) {
         console.log("Thanks for your interest!");
@@ -112,19 +113,20 @@ To prompt users to add a single NFT, add something like the following to your pr
 ```javascript
 try {
     // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-    const wasAdded = await ethereum.request({
-        method: "wallet_watchAsset",
-        params: {
-            // or 'ERC1155'
-            type: "ERC721",
-            options: {
-                // The address of the token.
-                address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-                // ERC-721 or ERC-1155 token ID.
-                tokenId: "1",
+    const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+            method: "wallet_watchAsset",
+            params: {
+                // or 'ERC1155'
+                type: "ERC721",
+                options: {
+                    // The address of the token.
+                    address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+                    // ERC-721 or ERC-1155 token ID.
+                    tokenId: "1",
+                },
             },
-        },
-    });
+        });
 
     if (wasAdded) {
         console.log("User successfully added the token!");
@@ -138,30 +140,31 @@ try {
 
 ### Display multiple NFTs
 
-To prompt users to add multiple NFTs, use `window.ethereum.sendAsync()` instead of
-`window.ethereum.request()` to call `wallet_watchAsset`.
+To prompt users to add multiple NFTs, use `sendAsync()` instead of
+`request()` to call `wallet_watchAsset`.
 For example:
 
 ```javascript
-window.ethereum.sendAsync([{
-    method: "wallet_watchAsset",
-    params: {
-        type: 'ERC721',
-        options: {
-          address: contractAddress,
-          tokenId: 1,
-        },
-    }
-}, {
-    method: "wallet_watchAsset",
-    params: {
-        type: 'ERC721',
-        options: {
-          address: contractAddress,
-          tokenId: 2,
+provider // Or window.ethereum if you don't support EIP-6963.
+    .sendAsync([{
+        method: "wallet_watchAsset",
+        params: {
+            type: 'ERC721',
+            options: {
+              address: contractAddress,
+              tokenId: 1,
+            },
+        }
+    }, {
+        method: "wallet_watchAsset",
+        params: {
+            type: 'ERC721',
+            options: {
+              address: contractAddress,
+              tokenId: 2,
+            },
         },
     },
-},
-...
-])
+    ...
+    ])
 ```

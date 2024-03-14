@@ -43,7 +43,7 @@ The following example uses `wallet_requestPermissions` to request permission fro
 document.getElementById("requestPermissionsButton", requestPermissions);
 
 function requestPermissions() {
-    ethereum
+    provider // Or window.ethereum if you don't support EIP-6963.
         .request({
             method: "wallet_requestPermissions",
             params: [{ eth_accounts: {} }],
@@ -72,12 +72,13 @@ function requestPermissions() {
 The following example uses `wallet_revokePermissions` to revoke the dapp's permission to call `eth_accounts`:
 
 ```javascript
-await window.ethereum.request({
-    method: "wallet_revokePermissions",
-    params: [
-        {
-            eth_accounts: {},
-        },
-    ],
-});
+await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+        method: "wallet_revokePermissions",
+        params: [
+            {
+                eth_accounts: {},
+            },
+        ],
+    });
 ```

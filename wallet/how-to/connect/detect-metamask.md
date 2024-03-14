@@ -7,10 +7,12 @@ sidebar_position: 1
 
 :::caution Important
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to [detect multiple wallets](index.md) in
-the user's browser.
-We recommend detecting multiple wallets to improve the user experience.
+alternative wallet detection mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperabilty.md)
+by discovering multiple injected wallet providers in a user's browser.
+
+This page describes the legacy method of connecting to MetaMask using `window.ethereum`.
+We recommend [connecting to MetaMask using EIP-6963](index.md) instead.
 :::
 
 The presence of the MetaMask Ethereum provider object, `window.ethereum`, in a user's browser
@@ -53,7 +55,7 @@ const provider = await detectEthereumProvider();
 if (provider) {
     // From now on, this should always be true:
     // provider === window.ethereum
-    startApp(provider); // initialize your app
+    startApp(provider); // Initialize your app.
 } else {
     console.log("Please install MetaMask!");
 }

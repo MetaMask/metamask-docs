@@ -29,6 +29,12 @@ When accessing a user's accounts:
 
 ## Create a connect button
 
+:::caution Important
+This section describes how to create a single connect button.
+When connecting to multiple wallets, use the [Connect to MetaMask](index.md) guide to create
+multiple connect buttons.
+:::
+
 We recommend providing a button to allow users to connect MetaMask to your dapp.
 Selecting this button should call `eth_requestAccounts` to access the user's accounts.
 
@@ -39,11 +45,9 @@ button, and the following HTML code displays the button and the current account:
 <TabItem value="JavaScript">
 
 ```javascript title="index.js"
-// You should only attempt to request the user's account in response to user
-// interaction, such as selecting a button.
-// Otherwise, you popup-spam the user like it's 1999.
-// If you fail to retrieve the user's account, you should encourage the user
-// to initiate the attempt.
+// You should only attempt to request the user's account in response to user interaction, such as
+// selecting a button. Otherwise, you pop-up spam the user like it's 1999. If you fail to retrieve the
+// user's account, you should encourage the user to initiate the attempt.
 const ethereumButton = document.querySelector(".enableEthereumButton");
 const showAccount = document.querySelector(".showAccount");
 
@@ -51,16 +55,14 @@ ethereumButton.addEventListener("click", () => {
     getAccount();
 });
 
-// While awaiting the call to eth_requestAccounts, you should disable
-// any buttons the user can select to initiate the request.
-// MetaMask rejects any additional requests while the first is still
-// pending.
+// While awaiting the call to eth_requestAccounts, you should disable any buttons the user can select
+// to initiate the request. MetaMask rejects any additional requests while the first is still pending.
 async function getAccount() {
-    const accounts = await window.ethereum
+    const accounts = await provider // Or window.ethereum if you don't support EIP-6963.
         .request({ method: "eth_requestAccounts" })
         .catch((err) => {
             if (err.code === 4001) {
-                // EIP-1193 userRejectedRequest error
+                // EIP-1193 userRejectedRequest error.
                 // If this happens, the user rejected the connection request.
                 console.log("Please connect to MetaMask.");
             } else {
@@ -95,20 +97,20 @@ The following code handles user accounts and detects when the user changes accou
 
 ```javascript title="index.js"
 let currentAccount = null;
-window.ethereum
+provider // Or window.ethereum if you don't support EIP-6963.
     .request({ method: "eth_accounts" })
     .then(handleAccountsChanged)
     .catch((err) => {
         // Some unexpected error.
-        // For backwards compatibility reasons, if no accounts are available,
-        // eth_accounts returns an empty array.
+        // For backwards compatibility reasons, if no accounts are available, eth_accounts returns
+        // an empty array.
         console.error(err);
     });
 
-// Note that this event is emitted on page load.
-// If the array of accounts is non-empty, you're already
+// Note that this event is emitted on page load. If the array of accounts is non-empty, you're already
 // connected.
-window.ethereum.on("accountsChanged", handleAccountsChanged);
+provider // Or window.ethereum if you don't support EIP-6963.
+    .on("accountsChanged", handleAccountsChanged);
 
 // eth_accounts always returns an array.
 function handleAccountsChanged(accounts) {

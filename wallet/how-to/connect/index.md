@@ -5,18 +5,23 @@ sidebar_position: 1
 
 # Connect to MetaMask
 
-[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative discovery mechanism
-for multiple wallets, shifting from relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
+You can connect to your users' MetaMask wallets from your dapp by detecting MetaMask in their
+browsers and connecting to their accounts.
 
-If a user has multiple wallet browser extensions installed, your web dapp can support
-[wallet interoperability](../../concepts/wallet-interoperabilty.md) by adding support for
-EIP-6963, which enables your dapp to detect and connect to multiple installed wallets.
-You can [use third-party libraries](#use-third-party-libraries) or directly
-[implement EIP-6963](#implement-eip-6963) in your dapp.
+This page describes how to connect to MetaMask using the alternative wallet detection mechanism
+introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+EIP-6963 enables
+[wallet interoperability](../../concepts/wallet-interoperabilty.md), and shifts dapps from
+relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
+If a user has multiple wallet browser extensions installed, this alternative mechanism allows your
+dapp to detect and connect to multiple installed wallets.
+
+You can [use third-party libraries](#use-third-party-libraries) or
+[connect to MetaMask directly](#connect-to-metamask-directly) from your dapp.
 
 ## Use third-party libraries
 
-You can add support for EIP-6963 by using the following third-party libraries:
+You can connect to MetaMask using the following third-party libraries that support EIP-6963:
 
 - [Wagmi 2+](https://wagmi.sh)
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
@@ -25,7 +30,8 @@ You can add support for EIP-6963 by using the following third-party libraries:
 
 ## Connect to MetaMask directly
 
-To directly implement support for EIP-6963 in your React dapp:
+To connect to MetaMask directly, implement support for EIP-6963 in your dapp.
+The following steps describe how to connect to MetaMask from a React dapp.
 
 ### 1. Review the EIP-6963 interfaces
 
@@ -38,10 +44,10 @@ represents the assets needed to display a wallet:
 
 ```typescript
 interface EIP6963ProviderInfo {
-  uuid: string;
-  name: string;
-  icon: string;
-  rdns: string;
+    uuid: string;
+    name: string;
+    icon: string;
+    rdns: string;
 }
 ```
 
@@ -52,8 +58,8 @@ represents additional metadata about the wallet:
 
 ```typescript
 interface EIP6963ProviderDetail {
-  info: EIP6963ProviderInfo;
-  provider: EIP1193Provider;
+    info: EIP6963ProviderInfo;
+    provider: EIP1193Provider;
 }
 ```
 
@@ -64,8 +70,8 @@ interface announces an event dispatched by the wallet:
 
 ```typescript
 interface EIP6963AnnounceProviderEvent extends CustomEvent {
-  type: "eip6963:announceProvider";
-  detail: EIP6963ProviderDetail;
+    type: "eip6963:announceProvider";
+    detail: EIP6963ProviderDetail;
 }
 ```
 
@@ -74,7 +80,7 @@ interface requests an event dispatched by a dapp:
 
 ```typescript
 interface EIP6963RequestProviderEvent extends Event {
-  type: "eip6963:requestProvider";
+    type: "eip6963:requestProvider";
 }
 ```
 
@@ -86,31 +92,31 @@ Set up a Vite project and update `src/vite-env.d.ts` with the EIP-6963 interface
 /// <reference types="vite/client" />
 
 interface EIP6963ProviderDetail {
-  info: EIP6963ProviderInfo;
-  provider: EIP1193Provider;
+    info: EIP6963ProviderInfo;
+    provider: EIP1193Provider;
 }
 
 interface EIP6963ProviderInfo {
-  walletId: string;
-  uuid: string;
-  name: string;
-  icon: string;
+    walletId: string;
+    uuid: string;
+    name: string;
+    icon: string;
 }
 
 type EIP6963AnnounceProviderEvent = {
-  detail:{
-    info: EIP6963ProviderInfo,
-    provider: EIP1193Provider
-  }
+    detail: {
+        info: EIP6963ProviderInfo,
+        provider: EIP1193Provider
+    }
 }
 
 interface EIP1193Provider {
-  isStatus?: boolean;
-  host?: string;
-  path?: string;
-  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+    isStatus?: boolean;
+    host?: string;
+    path?: string;
+    sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+    send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+    request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 ```
 
@@ -131,26 +137,26 @@ export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store
 
 ```tsx title="store.tsx"
 declare global {
-  interface WindowEventMap {
-    "eip6963:announceProvider": CustomEvent
-  }
+    interface WindowEventMap {
+      "eip6963:announceProvider": CustomEvent
+    }
 }
 
 let providers: EIP6963ProviderDetail[] = []
 
 export const store = {
-  value: ()=>providers,
-  subscribe: (callback: ()=>void)=>{
-    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
-      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
-      providers = [...providers, event.detail]
-      callback()
-    }
-    window.addEventListener("eip6963:announceProvider", onAnnouncement);
-    window.dispatchEvent(new Event("eip6963:requestProvider"));
+    value: ()=>providers,
+    subscribe: (callback: ()=>void)=>{
+        function onAnnouncement(event: EIP6963AnnounceProviderEvent){
+            if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
+            providers = [...providers, event.detail]
+            callback()
+        }
+        window.addEventListener("eip6963:announceProvider", onAnnouncement);
+        window.dispatchEvent(new Event("eip6963:requestProvider"));
     
-    return ()=>window.removeEventListener("eip6963:announceProvider", onAnnouncement)
-  }
+        return ()=>window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+    }
 }
 ```
 
@@ -164,50 +170,50 @@ import { useSyncProviders } from '../hooks/useSyncProviders'
 import { formatAddress } from '~/utils'
 
 export const DiscoverWalletProviders = () => {
-  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
-  const [userAccount, setUserAccount] = useState<string>('')
-  const providers = useSyncProviders()
+    const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
+    const [userAccount, setUserAccount] = useState<string>('')
+    const providers = useSyncProviders()
   
-  const handleConnect = async(providerWithInfo: EIP6963ProviderDetail)=> {
-    const accounts = await providerWithInfo.provider
-      .request({method:'eth_requestAccounts'})
-      .catch(console.error)
+    const handleConnect = async(providerWithInfo: EIP6963ProviderDetail)=> {
+        const accounts = await providerWithInfo.provider
+            .request({method:'eth_requestAccounts'})
+            .catch(console.error)
       
-    if(accounts?.[0]){
-      setSelectedWallet(providerWithInfo)
-      setUserAccount(accounts?.[0])
-    }
-  }
- 
-  return (
-    <>
-      <h2>Wallets Detected:</h2>
-      <div>
-        {
-          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail)=>(
-            <button key={provider.info.uuid} onClick={()=>handleConnect(provider)} >
-              <img src={provider.info.icon} alt={provider.info.name} />
-              <div>{provider.info.name}</div>
-            </button>
-          )) :
-          <div>
-            there are no Announced Providers
-          </div>
+        if(accounts?.[0]){
+            setSelectedWallet(providerWithInfo)
+            setUserAccount(accounts?.[0])
         }
-      </div>
-      <hr />
-      <h2>{ userAccount ? "" : "No " }Wallet Selected</h2>
-      { userAccount &&
-        <div>
-          <div>
-            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
-            <div>{selectedWallet.info.name}</div>
-            <div>({formatAddress(userAccount)})</div>
-          </div>
-        </div>
-      }
-    </>
-  )
+    }
+ 
+    return (
+        <>
+            <h2>Wallets Detected:</h2>
+            <div>
+                {
+                    providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail)=>(
+                        <button key={provider.info.uuid} onClick={()=>handleConnect(provider)} >
+                            <img src={provider.info.icon} alt={provider.info.name} />
+                            <div>{provider.info.name}</div>
+                        </button>
+                    )) :
+                    <div>
+                        There are no announced providers.
+                    </div>
+                }
+            </div>
+            <hr />
+            <h2>{ userAccount ? "" : "No " }Wallet Selected</h2>
+            { userAccount &&
+                <div>
+                    <div>
+                        <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
+                        <div>{selectedWallet.info.name}</div>
+                        <div>({formatAddress(userAccount)})</div>
+                    </div>
+                </div>
+            }
+        </>
+    )
 }
 ```
 
@@ -221,12 +227,11 @@ import './App.css'
 import { DiscoverWalletProviders } from './components/DiscoverWalletProviders'
 
 function App() {
-
-  return (
-    <>
-      <DiscoverWalletProviders/>
-    </>
-  )
+    return (
+        <>
+            <DiscoverWalletProviders/>
+        </>
+    )
 }
 
 export default App
@@ -236,3 +241,12 @@ export default App
 
 See the [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for a detailed example and more information.
+
+## Next steps
+
+After connecting to MetaMask, you can:
+
+- [Detect, add, and switch networks](../manage-networks).
+- [Send transactions](../send-transactions.md).
+- [Sign data](../sign-data/index.md).
+- [Display tokens, contract methods, and icons in MetaMask](../display).

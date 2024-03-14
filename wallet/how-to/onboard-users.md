@@ -102,22 +102,24 @@ export function OnboardingButton() {
             setAccounts(newAccounts);
         }
         if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-            window.ethereum
+            provider // Or window.ethereum if you don't support EIP-6963.
                 .request({ method: "eth_requestAccounts" })
                 .then(handleNewAccounts);
-            window.ethereum.on("accountsChanged", handleNewAccounts);
+            provider // Or window.ethereum if you don't support EIP-6963.
+                .on("accountsChanged", handleNewAccounts);
             return () => {
-                window.ethereum.removeListener(
-                    "accountsChanged",
-                    handleNewAccounts
-                );
+                provider // Or window.ethereum if you don't support EIP-6963.
+                    .removeListener(
+                        "accountsChanged",
+                        handleNewAccounts
+                    );
             };
         }
     }, []);
 
     const onClick = () => {
         if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-            window.ethereum
+            provider // Or window.ethereum if you don't support EIP-6963.
                 .request({ method: "eth_requestAccounts" })
                 .then((newAccounts) => setAccounts(newAccounts));
         } else {
@@ -184,19 +186,21 @@ helpful documentation:
                     } else {
                         onboardButton.innerText = "Connect";
                         onboardButton.onclick = async () => {
-                            await window.ethereum.request({
-                                method: "eth_requestAccounts",
-                            });
+                            await provider // Or window.ethereum if you don't support EIP-6963.
+                                .request({
+                                    method: "eth_requestAccounts",
+                                });
                         };
                     }
                 };
 
                 updateButton();
                 if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-                    window.ethereum.on("accountsChanged", (newAccounts) => {
-                        accounts = newAccounts;
-                        updateButton();
-                    });
+                    provider // Or window.ethereum if you don't support EIP-6963.
+                        .on("accountsChanged", (newAccounts) => {
+                            accounts = newAccounts;
+                            updateButton();
+                        });
                 }
             });
         </script>
