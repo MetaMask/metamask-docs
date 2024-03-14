@@ -511,7 +511,6 @@ An object containing:
 
 ```typescript
 import type { OnNameLookupHandler } from '@metamask/snaps-types';
-import { numberToHex } from '@metamask/utils';
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
   const { chainId, address, domain } = request;
