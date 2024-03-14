@@ -262,4 +262,4 @@ name of the method for showing gas fee estimates.
 If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method name in `/packages/snap/src/index.ts` to match.
 
 After you have made all necessary changes, you can
-[publish your Snap to npm](../../how-to/publish-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../../how-to/publish-a-snap.md).

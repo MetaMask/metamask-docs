@@ -38,7 +38,7 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnRpcRequestHandler } from '@metamask/snaps-types';
+import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
@@ -106,8 +106,8 @@ for the transaction that `onTransaction` was called with.
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+import type { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -129,7 +129,7 @@ export const onTransaction: OnTransactionHandler = async ({
 <TabItem value="JavaScript">
 
 ```js
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 module.exports.onTransaction = async ({
   transaction,
@@ -164,8 +164,8 @@ insight with the severity level `critical`:
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnTransactionHandler } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+import type { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -189,7 +189,7 @@ export const onTransaction: OnTransactionHandler = async ({
 <TabItem value="JavaScript">
 
 ```js
-import { panel, heading, text } from '@metamask/snaps-ui';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 module.exports.onTransaction = async ({
   transaction,
@@ -248,7 +248,7 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 <TabItem value="TypeScript">
 
 ```typescript
-import { OnCronjobHandler } from '@metamask/snaps-types';
+import type { OnCronjobHandler } from '@metamask/sdk';
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {

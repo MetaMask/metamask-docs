@@ -147,9 +147,9 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 ```
 
 :::tip
-If you have previously developed a decentralized app (dApp), you're likely familiar with 
-accessing the Ethereum provider using `window.ethereum`. In a Snap, the `window` object is not available.
-Instead when you request the `endowment:ethereum-provider` permission, your Snap is granted access to the `ethereum` global object. 
+If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider using `window.ethereum`.
+In a Snap, the `window` object is not available.
+Instead, when you request the `endowment:ethereum-provider` permission, your Snap is granted access to the [`ethereum` global object](../about-snaps/apis.md#snap-requests).
 :::
 
 ### 4. Build and test the Snap
