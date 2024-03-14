@@ -1,9 +1,11 @@
 ---
-description: Add custom domain name resolution to MetaMask.
-sidebar_position: 8
+description: Resolve names to addresses and vice versa.
+sidebar_position: 6
+sidebar_custom_props:
+  flask_only: true
 ---
 
-# Implement custom name resolution
+# Custom name resolution
 
 The Snaps platform allows developers to implement custom domain resolution and reverse resolution.
 The steps to implement this are:
@@ -58,3 +60,8 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   return null;
 };
 ```
+
+## Example
+
+See the [`@metamask/name-lookup-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/name-lookup)
+package for a full example of implementing custom name resolution.
