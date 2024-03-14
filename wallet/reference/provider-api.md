@@ -9,7 +9,7 @@ This page is a reference for the Ethereum provider API of MetaMask's [Wallet API
 MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
-:::note
+:::info Note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperabilty.md)
@@ -31,12 +31,17 @@ This property is non-standard.
 Non-MetaMask providers may also set this property to `true`.
 :::
 
+#### Example
+
+```typescript
+provider.isMetaMask; // Or window.ethereum.isMetaMask if you don't support EIP-6963.
+```
+
 ## Methods
 
 ### `isConnected()`
 
 Indicates whether the provider is connected to the current chain.
-
 If the provider isn't connected, the page must be reloaded to re-establish the connection.
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 

@@ -10,7 +10,8 @@ A web dapp can integrate with multiple installed browser wallets simultaneously 
 mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) injected provider.
 This mechanism is enabled by using the standardized events and interfaces defined by EIP-6963.
 
-The following is a visual demo of the user experience, showing the data provided from each installed wallet:
+The following is a demo of the user experience of detecting multiple wallets, showing the data
+provided from each installed wallet:
 
 <p align="center">
   <video width="100%" controls>
