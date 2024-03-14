@@ -160,7 +160,7 @@ Specify this permission in the manifest file as in the example below:
 },
 ```
 
-With the previous example, the Snap's [`onNameLookup` entry point](./entry-points.md#onnamelookup) would be called for domains such as `someuser.crypto` or `farcaster:someuser`, as long as the domain resolution is happening on Ethereum Mainnet.
+With the previous example, the Snap's [`onNameLookup` entry point](./entry-points.md#onnamelookup) would be called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the domain resolution is happening on Ethereum Mainnet.
 
 ### `endowment:network-access`
 
