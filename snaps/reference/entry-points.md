@@ -487,12 +487,12 @@ module.exports.onHomePage = async () => {
 :::flaskOnly
 :::
 
-To resolve names to addresses and addresses to names, a Snap must export `onNameLookup`.
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must export `onNameLookup`.
 Whenever a user types in the send field, MetaMask calls this method.
 MetaMask passes the user input to the `onNameLookup` handler method.
 
 :::note
-For MetaMask to call the snap's `onNameLookup` method, you must request the
+For MetaMask to call the Snap's `onNameLookup` method, you must request the
 [`endowment:name-lookup`](permissions.md#endowmentname-lookup) permission.
 :::
 
