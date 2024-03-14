@@ -14,15 +14,15 @@ The steps to implement this are:
 ## Request permission to provide name resolution
 
 Like all other permissions and endowments, the permission to provide name resolution must be declared in the Snap manifest.
-The permission is called `endowment:name-lookup`, and optionally takes an array of [CAIP-2 chain IDs](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) for which your Snap can provide domain resolution.
+The permission is called `endowment:name-lookup`. It takes some [optional parameters](../reference/permissions.md#endowmentname-lookup) which help reduce its scope.
 
 As an example, to resolve Ethereum mainnet domains, add the following to the Snap's manifest:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:name-lookup": [
-    "eip155:1"
-  ]
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"]
+  }
 }
 ```
 
