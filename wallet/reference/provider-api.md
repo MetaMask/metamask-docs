@@ -5,14 +5,14 @@ sidebar_position: 3
 
 # Ethereum provider API
 
-This section is a reference for the Ethereum provider API of MetaMask's [Wallet API](../concepts/wallet-api.md).
+This page is a reference for the Ethereum provider API of MetaMask's [Wallet API](../concepts/wallet-api.md).
 MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
 :::note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperabilty.md)
+alternative wallet detection mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperabilty.md)
 by discovering multiple injected wallet providers in a user's browser.
 We recommend [using this mechanism to connect to MetaMask](../how-to/connect/index.md).
 
