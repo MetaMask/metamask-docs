@@ -140,13 +140,16 @@ This permission grants the Snap read-only access to user input or an address by 
 
 This permission takes an object with two optional properties:
 
-- `chains` - an array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) chain IDs for which the Snap can resolve names and addresses. Pass this array to reduce overhead on your Snap by making sure it only receives requests for chains it can resolve.
-- `matchers` - an object that helps reduce overhead by further filtering the domains that are passed to your Snap. It must contain at least one of the following properties:
+- `chains` - An array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain IDs for which the Snap can resolve names and addresses.
+  Pass this array to reduce overhead on your Snap by making sure it only receives requests for
+  chains it can resolve.
+- `matchers` - An object that helps reduce overhead by filtering the domains passed to your Snap.
+  This must contain at least one of the following properties:
+  - `tlds` - An array of strings for top-level domains that the Snap supports.
+  - `schemes` - An array of strings for schemes that the Snap supports.
 
-  - `tlds` - an array of strings for top-level domains that the Snap supports.
-  - `schemes` - an array of strings for schemes that the Snap supports.
-
-Specify this permission in the manifest file as in the example below:
+Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -160,7 +163,9 @@ Specify this permission in the manifest file as in the example below:
 },
 ```
 
-With the previous example, the Snap's [`onNameLookup` entry point](./entry-points.md#onnamelookup) would be called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the domain resolution is happening on Ethereum Mainnet.
+In this example, the Snap's [`onNameLookup`](./entry-points.md#onnamelookup) entry point would be
+called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the
+domain resolution is happening on Ethereum Mainnet.
 
 ### `endowment:network-access`
 
