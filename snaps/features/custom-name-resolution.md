@@ -16,18 +16,15 @@ You can implement custom domain resolution and reverse resolution using the foll
 
 ### 1. Request permission to provide name resolution
 
-Request the [`endowment:name-lookup`](../reference/permissions.md#endowmentname-lookup) permission,
-which optionally takes an array of
-[CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md) chain IDs for which
-your Snap can provide domain resolution.
+Request the [`endowment:name-lookup`](../reference/permissions.md#endowmentname-lookup) permission.
 
 For example, to resolve Ethereum Mainnet domains, add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:name-lookup": [
-        "eip155:1"
-    ]
+    "endowment:name-lookup": {
+        "chains": ["eip155:1"]
+    }
 }
 ```
 
@@ -57,7 +54,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
         const resolvedAddress = data.records["crypto.ETH.address"];
         if (address) {
             return {
-                resolvedAddresses: [{ resolvedAddress, protocol: "Unstoppable Domains"'" }],
+                resolvedAddresses: [{ resolvedAddress, protocol: "Unstoppable Domains" }],
             };
         }
     }
