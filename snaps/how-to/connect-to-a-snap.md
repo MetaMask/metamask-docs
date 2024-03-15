@@ -1,6 +1,6 @@
 ---
 description: Connect your dapp to existing, third-party Snaps.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Connect to a Snap
