@@ -28,11 +28,15 @@ Furthermore, any Snap that uses any of the following permissions pertaining to k
 - `snap_getEntropy`
 - `snap_manageAccounts`
 
-A list of approved third-party auditors and details about submitting your audit report are available on the [MetaMask Snaps Builder Team Space](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3). 
+A list of approved third-party auditors and details about the audit process are available on the 
+[MetaMask Snaps Builder Team Space](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3). 
 
 ## Submit your Snap
 
-When you are ready to submit your Snap, you should navigate to the [MetaMask Snaps Registry](https://github.com/MetaMask/snaps-registry) repository and open a new issue with "Add Snap Request." You will need to provide the following information: 
+When you are ready to submit your Snap, you should navigate to the 
+[MetaMask Snaps Registry](https://github.com/MetaMask/snaps-registry) 
+repository and open a new issue with "Add Snap Request." 
+You will need to provide the following information: 
 
 - Title: the name of your Snap. This must match the `displayName` from the Snap manifest.
 - Snap ID: the npm ID of your published Snap. Example: `npm:@metamask/simple-snap-keyring`
@@ -48,7 +52,19 @@ When you are ready to submit your Snap, you should navigate to the [MetaMask Sna
 - FAQ: a webpage with frequently asked questions.
 - Knowledge Base
 
+If your Snap has an audit report, you should link to the audit report from the README of your repository or include the audit report file in your repository. 
+You can also upload the audit report in a comment on the issue after creating the issue. 
 
+## Allowlist review
+
+Your Snap will be reviewed by the MetaMask Snaps team to ensure it is functional and well-designed. 
+If the Snap requires an audit, the audit report will be reviewed to ensure that all vulnerabilities with "medium" or higher risk have been addressed. 
+All Snaps will require at least 3 approvals to be allowlisted. 
+
+## Directory listing
+
+Once your Snap is on the allowlist, it will appear in the [MetaMask Snaps Directory](https://snaps.metamask.io). 
+You can direct users to the directory to find and install your Snap. 
 
 ## Distribute your Snap
 
