@@ -5,14 +5,13 @@ sidebar_position: 1
 
 # Connect to MetaMask
 
-You can connect to your users' MetaMask wallets from your dapp by detecting MetaMask in their
-browsers and connecting to their accounts.
+You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
+connecting to their accounts.
 
-This page describes how to connect to MetaMask using the alternative wallet detection mechanism
-introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
-EIP-6963 enables
-[wallet interoperability](../../concepts/wallet-interoperabilty.md), and shifts dapps from
-relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
+This page describes how to connect to MetaMask using the wallet detection mechanism introduced by
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+EIP-6963 enables [wallet interoperability](../../concepts/wallet-interoperability.md), and shifts
+dapps from relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
 If a user has multiple wallet browser extensions installed, you can detect multiple wallets and
 connect to each one without conflict.
 
@@ -34,53 +33,16 @@ To connect to MetaMask directly, implement support for EIP-6963 in your dapp and
 [Wallet API](../../concepts/wallet-api.md).
 The following steps describe how to connect to MetaMask from a React dapp.
 
-### 1. Review the EIP-6963 interfaces
+### Prerequisites
 
-Review and understand the interfaces implemented and exposed by wallets that support EIP-6963:
+- Review and understand the [EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces).
+- [Set up a Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
 
-#### Provider info
+### Steps
 
-The [`EIP6963ProviderInfo`](https://eips.ethereum.org/EIPS/eip-6963#provider-info) interface
-represents the assets needed to display a wallet:
+#### 1. Set up the project
 
-- `uuid` - The wallet ID ([UUIDv4](https://www.rfc-editor.org/rfc/rfc4122)).
-- `name` - A human-readable name of the wallet.
-- `icon` - A [URI](https://www.rfc-editor.org/rfc/rfc3986) pointing to an icon of the wallet.
-- `rdns` - The wallet's domain name.
-
-#### Provider detail
-
-The [`EIP6963ProviderDetail`](https://eips.ethereum.org/EIPS/eip-6963#provider-detail) interface
-represents additional metadata about the wallet:
-
-- `info` - The [`EIP6963ProviderInfo`](#provider-info).
-- `provider` - The `EIP1193Provider` defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
-
-#### Announce and request events
-
-The [`EIP6963AnnounceProviderEvent`](https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events)
-interface announces an event dispatched by the wallet:
-
-```typescript
-interface EIP6963AnnounceProviderEvent extends CustomEvent {
-    type: "eip6963:announceProvider";
-    detail: EIP6963ProviderDetail;
-}
-```
-
-The [`EIP6963RequestProviderEvent`](https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events)
-interface requests an event dispatched by a dapp:
-
-```typescript
-interface EIP6963RequestProviderEvent extends Event {
-    type: "eip6963:requestProvider";
-}
-```
-
-### 2. Set up a Vite project
-
-[Set up a Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project) and update
-`src/vite-env.d.ts` with the EIP-6963 interfaces:
+In your Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
 
 ```typescript title="vite-env.d.ts"
 interface EIP6963ProviderDetail {
@@ -119,7 +81,7 @@ Ethereum wallet providers.
 This interface represents the essential properties and methods for interacting with dapps.
 :::
 
-### 3. Add React Hooks
+#### 2. Add React Hooks
 
 Create a `hooks` directory and add the following two files:
 
@@ -155,7 +117,7 @@ export const store = {
 }
 ```
 
-### 4. Detect and connect to wallets
+#### 3. Detect and connect to wallets
 
 Create a component in the `src/components` directory with the following code:
 

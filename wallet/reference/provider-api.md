@@ -12,7 +12,7 @@ You can use the provider [properties](#properties), [methods](#methods), and [ev
 :::info Note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperabilty.md)
+This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperability.md)
 by discovering multiple injected wallet providers in a user's browser.
 We recommend [using this mechanism to connect to MetaMask](../how-to/connect/index.md).
 

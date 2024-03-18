@@ -8,7 +8,7 @@ sidebar_position: 6
 A web dapp can integrate with multiple installed browser wallets simultaneously by adding support for
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an alternative wallet detection
 mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) injected provider.
-This mechanism is enabled by using the standardized events and interfaces defined by EIP-6963.
+This mechanism is enabled by using the standardized interfaces defined by EIP-6963.
 
 The following is a demo of the user experience of detecting multiple wallets, showing the data
 provided from each installed wallet:
@@ -22,6 +22,51 @@ provided from each installed wallet:
 You can [connect to MetaMask using EIP-6963](../how-to/connect/index.md) and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
+
+## EIP-6963 interfaces
+
+Wallets that support EIP-6963 implement and expose the following standardized interfaces.
+When [connecting to MetaMask using EIP-6963](../how-to/connect/index.md), it's important to review
+and understand these interfaces.
+
+### Provider info
+
+The [`EIP6963ProviderInfo`](https://eips.ethereum.org/EIPS/eip-6963#provider-info) interface
+represents the assets needed to display a wallet:
+
+- `uuid` - The wallet ID ([UUIDv4](https://www.rfc-editor.org/rfc/rfc4122)).
+- `name` - A human-readable name of the wallet.
+- `icon` - A [URI](https://www.rfc-editor.org/rfc/rfc3986) pointing to an icon of the wallet.
+- `rdns` - The wallet's domain name.
+
+### Provider detail
+
+The [`EIP6963ProviderDetail`](https://eips.ethereum.org/EIPS/eip-6963#provider-detail) interface
+represents additional metadata about the wallet:
+
+- `info` - The [`EIP6963ProviderInfo`](#provider-info).
+- `provider` - The `EIP1193Provider` defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193).
+
+### Announce and request events
+
+The [`EIP6963AnnounceProviderEvent`](https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events)
+interface announces an event dispatched by the wallet:
+
+```typescript
+interface EIP6963AnnounceProviderEvent extends CustomEvent {
+    type: "eip6963:announceProvider";
+    detail: EIP6963ProviderDetail;
+}
+```
+
+The [`EIP6963RequestProviderEvent`](https://eips.ethereum.org/EIPS/eip-6963#announce-and-request-events)
+interface requests an event dispatched by a dapp:
+
+```typescript
+interface EIP6963RequestProviderEvent extends Event {
+    type: "eip6963:requestProvider";
+}
+```
 
 ## Third-party library support
 
