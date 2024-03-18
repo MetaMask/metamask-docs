@@ -1,11 +1,11 @@
 ---
 description: Prompt a user to add or switch to an Ethereum network.
-sidebar_position: 7
+sidebar_position: 2
 ---
 
 # Add a network
 
-In some cases, such as when [interacting with smart contracts](../concepts/smart-contracts.md),
+In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
 which requires them to configure RPC URLs and chain IDs, your dapp can use the
@@ -23,10 +23,10 @@ The confirmations look like the following:
 
 <div class="row">
     <div class="column">
-        <img src={require("../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid gray'}} />
+        <img src={require("../../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid gray'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid gray'}} />
+        <img src={require("../../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid gray'}} />
     </div>
 </div>
 
@@ -37,28 +37,30 @@ prompt a user to add and switch to a new network:
 
 ```javascript
 try {
-    await ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0xf00" }],
-    });
+    await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0xf00" }],
+        });
 } catch (switchError) {
     // This error code indicates that the chain has not been added to MetaMask.
     if (switchError.code === 4902) {
         try {
-            await ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                    {
-                        chainId: "0xf00",
-                        chainName: "...",
-                        rpcUrls: ["https://..."] /* ... */,
-                    },
-                ],
-            });
+            await provider // Or window.ethereum if you don't support EIP-6963.
+                .request({
+                    method: "wallet_addEthereumChain",
+                    params: [
+                        {
+                            chainId: "0xf00",
+                            chainName: "...",
+                            rpcUrls: ["https://..."] /* ... */,
+                        },
+                    ],
+                });
         } catch (addError) {
-            // handle "add" error
+            // Handle "add" error.
         }
     }
-    // handle other "switch" errors
+    // Handle other "switch" errors.
 }
 ```

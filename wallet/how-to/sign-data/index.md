@@ -1,6 +1,6 @@
 ---
 description: Sign data using eth_signTypedData_v4 and personal_sign.
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 import Tabs from '@theme/Tabs';
@@ -145,40 +145,41 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
     var params = [from[0], msgParams];
     var method = "eth_signTypedData_v4";
 
-    web3.currentProvider.sendAsync(
-        {
-            method,
-            params,
-            from: from[0],
-        },
-        function (err, result) {
-            if (err) return console.dir(err);
-            if (result.error) {
-                alert(result.error.message);
+    provider // Or window.ethereum if you don't support EIP-6963.
+        .sendAsync(
+            {
+                method,
+                params,
+                from: from[0],
+            },
+            function (err, result) {
+                if (err) return console.dir(err);
+                if (result.error) {
+                    alert(result.error.message);
+                }
+                if (result.error) return console.error("ERROR", result);
+                console.log("TYPED SIGNED:" + JSON.stringify(result.result));
+    
+                const recovered = sigUtil.recoverTypedSignature_v4({
+                    data: JSON.parse(msgParams),
+                    sig: result.result,
+                });
+    
+                if (
+                    ethUtil.toChecksumAddress(recovered) ===
+                    ethUtil.toChecksumAddress(from)
+                ) {
+                    alert("Successfully recovered signer as " + from);
+                } else {
+                    alert(
+                        "Failed to verify signer when comparing " +
+                            result +
+                            " to " +
+                            from
+                    );
+                }
             }
-            if (result.error) return console.error("ERROR", result);
-            console.log("TYPED SIGNED:" + JSON.stringify(result.result));
-
-            const recovered = sigUtil.recoverTypedSignature_v4({
-                data: JSON.parse(msgParams),
-                sig: result.result,
-            });
-
-            if (
-                ethUtil.toChecksumAddress(recovered) ===
-                ethUtil.toChecksumAddress(from)
-            ) {
-                alert("Successfully recovered signer as " + from);
-            } else {
-                alert(
-                    "Failed to verify signer when comparing " +
-                        result +
-                        " to " +
-                        from
-                );
-            }
-        }
-    );
+        );
 });
 ```
 
