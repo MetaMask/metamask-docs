@@ -6,13 +6,13 @@ sidebar_position: 1
 # Detect MetaMask
 
 :::caution Important
-MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative wallet detection mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperability.md)
-by discovering multiple injected wallet providers in a user's browser.
-
 This page describes the legacy method of connecting to MetaMask using `window.ethereum`.
 We recommend [connecting to MetaMask using EIP-6963](index.md) instead.
+
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
+mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperability.md)
+by discovering multiple injected wallet providers in a user's browser.
 :::
 
 The presence of the MetaMask Ethereum provider object, `window.ethereum`, in a user's browser
