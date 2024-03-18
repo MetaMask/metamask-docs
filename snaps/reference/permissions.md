@@ -216,6 +216,8 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
+#### Allowed origins
+
 Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
 Calls from any other origins are rejected. 
 
