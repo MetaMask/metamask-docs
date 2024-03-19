@@ -23,12 +23,15 @@ This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), an
 request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
-:::note
+:::info Note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperabilty.md)
+alternative wallet detection mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperability.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend using this mechanism for provider discovery.
+We recommend [using this mechanism to connect to MetaMask](../how-to/connect/index.md).
+
+You can access the provider API using the selected EIP-6963 provider object.
+Throughout this documentation, we refer to the selected provider using `provider`.
 :::
 
 The MetaMask Ethereum provider API contains the following:
@@ -36,7 +39,7 @@ The MetaMask Ethereum provider API contains the following:
 - [Properties](../reference/provider-api.md#properties) - The provider contains a property that
   detects if a user has MetaMask installed.
 - [Methods](../reference/provider-api.md#methods) - The provider contains methods that dapps can call.
-  The [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs)
+  The [`request()`](../reference/provider-api.md#request)
   provider method wraps the [JSON-RPC API](#json-rpc-api); dapps can use this
   provider method to call any RPC method.
 - [Events](../reference/provider-api.md#events) - The provider emits events that dapps can listen to.
@@ -46,7 +49,7 @@ methods, and events.
 
 ## JSON-RPC API
 
-MetaMask uses the [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs)
+MetaMask uses the [`request()`](../reference/provider-api.md#request)
 method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
@@ -55,7 +58,7 @@ The RPC methods are documented in the interactive [JSON-RPC API reference](/wall
 :::note
 All RPC method requests can return errors.
 Make sure to handle errors for every call to
-[`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs).
+[`request()`](../reference/provider-api.md#request).
 :::
 
 ### Restricted methods
