@@ -31,6 +31,10 @@ Many of the endowments defined below entail having MetaMask run arbitrary code d
 This execution timeout can be modified by adding a caveat `maxRequestTime` to the permission. It can take values from `5000` (5 seconds) all the way to `180000` (3 minutes). The following endowments accept this caveat:
 
 - `endowment:cronjob`
+- `endowment:keyring`
+- `endowment:lifecycle-hooks`
+- `endowment:name-lookup`
+- `endowment:page-home`
 - `endowment:rpc`
 - `endowment:transaction-insight`
 
@@ -115,6 +119,10 @@ the Snap must configure a list of allowed dapp URLs using the `endowment:keyring
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
+:::tip
+You can increase the keyring entry point execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -132,6 +140,10 @@ This permission allows the Snap to expose the
 [`onInstall`](../reference/entry-points.md#oninstall) and 
 [`onUpdate`](../reference/entry-points.md#onupdate) 
 entry points, which MetaMask calls after a successful installation or update, respectively.
+
+:::tip
+You can increase the execution time of your lifecycle hooks by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
 
 Specify this permission in the manifest file as follows:
 
@@ -161,6 +173,10 @@ This permission takes an object with two optional properties:
   This must contain at least one of the following properties:
   - `tlds` - An array of strings for top-level domains that the Snap supports.
   - `schemes` - An array of strings for schemes that the Snap supports.
+
+:::tip
+You can increase the name lookup logic's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
 
 Specify this permission in the manifest file as follows:
 
