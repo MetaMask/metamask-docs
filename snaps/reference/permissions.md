@@ -24,6 +24,16 @@ manifest file:
 
 ## Endowments
 
+### Snap-defined timeouts
+
+Many of the endowments defined below entail having MetaMask run arbitrary code defined in the Snap. The default execution timeout is 60000ms, that is one minute.
+
+This execution timeout can be modified by adding a caveat `maxRequestTime` to the permission. It can take values from `5000` (5 seconds) all the way to `180000` (3 minutes). The following endowments accept this caveat:
+
+- `endowment:cronjob`
+- `endowment:rpc`
+- `endowment:transaction-insight`
+
 ### `endowment:cronjob`
 
 To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
@@ -57,7 +67,6 @@ Specify this permission in the manifest file as follows:
     ]
   }
 }
-
 ```
 
 ### `endowment:ethereum-provider`
