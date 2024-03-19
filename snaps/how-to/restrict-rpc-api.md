@@ -5,9 +5,9 @@ sidebar_position: 7
 
 # Restrict a Snap's RPC API methods
 
-## All Dapps are allowed by default
+## All dapps are allowed by default
 
-By default, a Snap's RPC API is callable by any Dapp if the [`dapps` caveat to `endowment:rpc`](../reference/permissions.md#endowmentrpc) is set to `true` in the Snap's manifest.
+By default, a Snap's RPC API is callable by any dapp if the [`dapps` caveat to `endowment:rpc`](../reference/permissions.md#endowmentrpc) is set to `true` in the Snap's manifest.
 
 ## Restrict the whole API
 
@@ -48,6 +48,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   switch (request.method) {
     case 'hello':
       return 'world!';
+    
+    case 'secureMethod':
+      return 'The secret is: 42';
 
     default:
       throw new Error('Method not found.');
