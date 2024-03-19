@@ -40,6 +40,10 @@ To run periodic actions for the user (cron jobs), a Snap must request the `endow
 This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
 
+:::tip
+You can increase the cron job's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -214,6 +218,11 @@ This permission requires an object with a `snaps` or `dapps` property (or both),
 Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
+:::tip
+You can increase the RPC API's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -257,6 +266,11 @@ This permission requires an object with an `allowTransactionOrigin` property to 
 should pass the `transactionOrigin` property as part of the `onTransaction` parameters.
 This property represents the transaction initiator origin.
 The default is `false`.
+
+:::tip
+You can increase the transaction insight logic's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 
 Specify this permission in the manifest file as follows:
 
