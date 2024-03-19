@@ -58,26 +58,40 @@ Make sure to handle errors for every call to
 [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs).
 :::
 
+Dapps communicate with MetaMask through JSON-RPC methods. 
+These methods are divided into the following:
+
+- **Unrestricted methods**: Allow dapps to perform basic actions without permission (for example retrieving a public address).
+- **Restricted methods**: Require user consent for actions that impact assets or data (for example initiating a transaction).
+
 ### Restricted methods
 
-MetaMask introduced wallet permissions in [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255).
-In this permissions system, each RPC method is restricted or unrestricted. 
-
-Restricted methods are methods that cannot be called unless you have permission to do so using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or [wallet_requestSnaps](/wallet/reference/wallet_requestSnaps).
-
+MetaMask implements permissions based on [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) to enhance security for when users interact with dapps. 
+This requires that dapps obtain user consent before accessing certain features. 
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
-Outside of [Snaps restricted methods](/snaps/reference/rpc-api/#restricted-methods), there is the
-restricted method [`eth_accounts`](/wallet/reference/eth_accounts), which allows you to access
-the user's Ethereum accounts. DApps must explicitly request user consent using `wallet_requestPermissions` before using `eth_accounts`.
+Restricted methods are methods that cannot be called unless you have permission to do so using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or [wallet_requestSnaps](/wallet/reference/wallet_requestSnaps).
 
-Granting permission for `eth_accounts` also implicitly grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData`](/wallet/reference/eth_signTypedData). 
+The following methods are restricted:
 
+- [eth_accounts](/wallet/reference/eth_accounts) - Requires passing `eth_accounts` as a parameter of `wallet_requestPermissions`. 
+
+  :::info note
+  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+  This method automatically obtains permissions for `eth_accounts` through an internal `wallet_requestPermissions` call.
+  See [how to access a user's accounts](access-accounts.md) for more information.
+  :::
+
+  Granting permissions for `eth_accounts` or `eth_requestAccounts` also provides permissions for the following methods:
+  - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
+  - [`personal_sign`](/wallet/reference/personal_sign)
+  - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData)
+
+- [`wallet_snap`](/wallet/reference/wallet_snap) - Gaining permission requires calling `wallet_requestSnap`.
+- [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
 
 ### Unrestricted methods
 
-Unrestricted methods do not require requesting permission to call them, but they might still rely on
-permissions to succeed (for example, the signing methods require calling the restricted
-[`eth_accounts`](/wallet/reference/eth_accounts) method), or they might require confirmation by the
+Unrestricted methods do not require requesting permission to call them, but they might require confirmation by the
 user (for example, [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain)).

@@ -29,11 +29,11 @@ the restricted method [`eth_accounts`](/wallet/reference/eth_accounts):
 </div>
 
 :::info note
-Granting permission for `eth_accounts` also implicitly grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData`](/wallet/reference/eth_signTypedData). 
 To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
 internally. 
 See [how to access a user's accounts](access-accounts.md) for more information.
+Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData). 
 :::
 
 ## Request permissions example
