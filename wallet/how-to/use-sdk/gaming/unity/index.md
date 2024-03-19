@@ -141,6 +141,11 @@ scene with its fields provided.
 The transport field is also required if you want to use it isolated from the canvas that is spawned
 by the transport, then it generates the QR code for you.
 
+:::info Connect and sign
+You can also [use the `connectAndSign` method](connect-and-sign.md) to
+connect to MetaMask and sign data in a single interaction.
+:::
+
 ### 5. Use MetaMask
 
 Once the wallet is authorized, you can make requests to it.
@@ -261,6 +266,7 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
+- [Connect and sign in Unity.](connect-and-sign.md)
 - [Set up Infura in Unity.](infura.md)
 - [Interact with smart contracts in Unity.](smart-contracts/index.md)
 - [Enable human-readable addresses in Unity using Decentraweb.](dweb.md)

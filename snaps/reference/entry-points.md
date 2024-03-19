@@ -1,5 +1,6 @@
 ---
 description: See the Snaps entry points reference.
+sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,18 +21,18 @@ For MetaMask to call the Snap's `onRpcRequest` method, you must request the
 [`endowment:rpc`](permissions.md#endowmentrpc) permission.
 :::
 
-#### Parameters
+### Parameters
 
 An object containing:
 
 - `origin` - The origin as a string.
 - `request` - The JSON-RPC request.
 
-#### Returns
+### Returns
 
 A promise containing the return of the implemented method.
 
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
@@ -84,7 +85,7 @@ For MetaMask to call the Snap's `onTransaction` method, you must request the
 [`endowment:transaction-insight`](permissions.md#endowmenttransaction-insight) permission.
 :::
 
-#### Parameters
+### Parameters
 
 An object containing:
 
@@ -94,21 +95,19 @@ An object containing:
 - `transactionOrigin` - The transaction origin if
   [`allowTransactionOrigin`](permissions.md#endowmenttransaction-insight) is set to `true`.
 
-#### Returns
+### Returns
 
 A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
 for the transaction that `onTransaction` was called with.
 
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
 
-# TypeScript
-
 ```typescript
-import { panel, heading, text } from '@metamask/snaps-sdk';
 import type { OnTransactionHandler } from '@metamask/snaps-sdk';
+import { panel, heading, text } from '@metamask/snaps-sdk';
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -163,8 +162,6 @@ insight with the severity level `critical`:
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import type { OnTransactionHandler } from '@metamask/snaps-sdk';
@@ -241,16 +238,14 @@ If the cron job's logic requires access to encrypted state, you can use
 unlocked before accessing state.
 This will prevent an unexpected password request popup, improving the user's experience.
 
-#### Parameters
+### Parameters
 
 An object containing an RPC request specified in the `endowment:cronjob` permission.
 
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import type { OnCronjobHandler } from '@metamask/snaps-sdk';
@@ -306,17 +301,14 @@ For MetaMask to call the Snap's `onInstall` method, you must request the
 [`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
 :::
 
-#### Parameters
+### Parameters
 
 None.
 
-
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
-
-# TypeScript
 
 ```typescript
 import type { OnInstallHandler } from '@metamask/snaps-sdk';
@@ -373,12 +365,11 @@ For MetaMask to call the Snap's `onUpdate` method, you must request the
 [`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
 :::
 
-#### Parameters
+### Parameters
 
 None.
 
-
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
@@ -436,9 +427,6 @@ module.exports.onUpdate = async () => {
 
 ## `onHomePage`
 
-:::flaskOnly
-:::
-
 To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
 expose the `onHomePage` entry point. 
 MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
@@ -448,15 +436,15 @@ For MetaMask to call the Snap's `onHomePage` method, you must request the
 [`endowment:page-home`](permissions.md#endowmentpage-home) permission.
 :::
 
-#### Parameters
+### Parameters
 
 None.
 
-#### Returns
+### Returns
 
 A content object displayed using [custom UI](../features/custom-ui.md).
 
-#### Example
+### Example
 
 <Tabs>
 <TabItem value="TypeScript">
@@ -494,95 +482,81 @@ module.exports.onHomePage = async () => {
 </TabItem>
 </Tabs>
 
-## `onSignature`
+## `onNameLookup`
 
 :::flaskOnly
 :::
 
-To provide signature insights before a user signs a message, a Snap must export `onSignature`.
-Whenever any of the message signature methods like `personal_sign` or `eth_signTypedData_v4`, MetaMask calls this method.
-MetaMask passes the raw unsigned signature payload to the `onSignature` handler method.
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must export `onNameLookup`.
+Whenever a user types in the send field, MetaMask calls this method.
+MetaMask passes the user input to the `onNameLookup` handler method.
 
 :::note
-For MetaMask to call the Snap's `onSignature` method, you must request the
-[`endowment:signature-insight`](permissions.md#endowmentsignature-insight) permission.
+For MetaMask to call the Snap's `onNameLookup` method, you must request the
+[`endowment:name-lookup`](permissions.md#endowmentname-lookup) permission.
 :::
 
-#### Parameters
+### Parameters
 
 An object containing:
 
-- `signature` - The raw signature payload.
-- `signatureOrigin` - The signature origin if
-  [`allowSignatureOrigin`](permissions.md#endowmentsignature-insight) is set to `true`.
+- `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain ID.
+- `address` or `domain` - One of these parameters is defined, and the other is undefined. 
 
-#### Returns
+### Example
 
-- An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`
-- A `content` object displayed using [custom UI](../features/custom-ui.md) after the user presses the "Sign" button. At this time due to limitations of MetaMask's signature confirmation UI, the content will only be displayed if the `severity` property is present and set to `SeverityLevel.Critical`.
-
-#### Example
-
-<!--tabs-->
-
-# TypeScript
+<Tabs>
+<TabItem value="TypeScript">
 
 ```typescript
-import { OnSignatureHandler, SeverityLevel } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+import type { OnNameLookupHandler } from '@metamask/snaps-types';
 
-export const onSignature: OnSignatureHandler = async ({
-  signature,
-  signatureOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Signature Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ]),
-    severity: SeverityLevel.Critical
-  };
+export const onNameLookup: OnNameLookupHandler = async (request) => {
+  const { chainId, address, domain } = request;
+
+  if (address) {
+    const shortAddress = address.substring(2, 5);
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] };
+  }
+
+  if (domain) {
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol' }],
+    };
+  }
+
+  return null;
 };
 ```
 
-# JavaScript
+</TabItem>
+<TabItem value="JavaScript">
 
 ```js
-import { SeverityLevel } from '@metamask/snaps-sdk';
-import { panel, heading, text } from '@metamask/snaps-ui';
+module.exports.onNameLookup = async ({ request }) => {
+  const { chainId, address, domain } = request;
 
-module.exports.onSignature = async ({
-  signature,
-  signatureOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Signature Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ]),
-    severity: SeverityLevel.Critical
-  };
+  if (address) {
+    const shortAddress = address.substring(2, 5);
+    const chainIdDecimal = parseInt(chainId.split(':')[1], 10);
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: 'test protocol' }] };
+  }
+
+  if (domain) {
+    const resolvedAddress = '0xc0ffee254729296a45a3885639AC7E10F9d54979';
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: 'test protocol' }],
+    };
+  }
+
+  return null;
 };
 ```
 
-<!--/tabs-->
-
-## `onUserInput`
-
-:::flaskOnly
-:::
-
-To respond to events in [interactive UI](../features/interactive-ui.md), a Snap must expose the `onUserInput` entry point.
-MetaMask calls the `onUserInput` entry point when an event occurs in [interactive UI](../features/interactive-ui.md).
-
-This entry point receives an object with:
-
-- `id` - The ID of the interface that received user input.
-- `event` - An object describing the user input event, with:
-  - `type` - The type of the event, either `'ButtonClickEvent'` or `'FormSubmitEvent'`.
-  - `name` - The name of the object that the event happened on
-  - `value` - Only passed when the `type` is `'FormSubmitEvent'`. An object where the keys are the input names in the form, and the values are what the user typed in those fields.
+</TabItem>
+</Tabs>

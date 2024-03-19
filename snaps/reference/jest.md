@@ -1,5 +1,6 @@
 ---
 description: See the Jest API and options reference.
+sidebar_position: 7
 ---
 
 # Jest API and options
@@ -129,7 +130,7 @@ describe('MySnap', () => {
 
 Runs a cronjob in the Snap.
 The request is normally specified in the Snap manifest file under the
-[`endowment:cronjob`](permissions.md#endowmentcronjob) permission, but this method alows you to
+[`endowment:cronjob`](permissions.md#endowmentcronjob) permission, but this method allows you to
 run cronjobs that are not specified in the manifest as well.
 
 #### Parameters

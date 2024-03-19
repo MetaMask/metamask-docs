@@ -1,5 +1,6 @@
 ---
 description: See more Snaps resources.
+sidebar_position: 8
 ---
 
 # Resources
@@ -9,15 +10,15 @@ View the following Snaps resources in addition to this documentation site.
 ## Primary resources
 
 - [Snaps homepage](https://metamask.io/snaps/)
-- [Snaps directory](https://snaps.metamask.io/) - A directory of allowlisted Snaps you can try.
-- [SIPs](https://github.com/MetaMask/SIPs) - Snaps Improvement Proposals.
-- [Open Beta Readiness Guide](https://github.com/MetaMask/snaps/discussions/1411) - A guide to get
-  your Snap allowlisted on MetaMask.
+- [Snaps directory](https://snaps.metamask.io/) - A directory of allowlisted Snaps you can try in the MetaMask extension.
+- [SIPs](https://github.com/MetaMask/SIPs) - Suggest new Snaps APIs with Snaps Improvement Proposals.
+- [Builder Team Space](https://go.metamask.io/snaps-builders) - Connect with the Snaps builder engagement team and get support while building your Snap.
 
 ## Example Snaps
 
 - [Example Snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) - A directory of
   Snaps maintained by MetaMask.
+- [Simple Keyring Snap](https://github.com/MetaMask/snap-simple-keyring) - An example account management Snap using the [Keyring API](../reference/keyring-api/index.md).
 - [Dogecoin Snap](https://github.com/ziad-saab/dogecoin-snap) - A tutorial for creating a Snap to
   add Dogecoin to MetaMask.
 - [Starknet Snap](https://github.com/Consensys/starknet-snap) - A Snap to add Starknet to MetaMask.
@@ -51,6 +52,7 @@ View the following Snaps resources in addition to this documentation site.
   Hood](https://agoric.com/blog/announcements/metamask-snaps-launch-with-hardened-javascript-under-the-hood) by Agoric
 - [Navigating the Security Landscape of MetaMask Snaps](https://metamask.io/news/developers/navigating-the-security-landscape-of-metamask-snaps/)
   by Martin Ortner & Valentin Quelquejay
+- [Going Beyond The Secret Recovery Phrase In MetaMask With Account Management Snaps](https://metamask.io/news/latest/going-beyond-the-secret-recovery-phrase-in-metamask-with-account-management/) by Alex Jupiter
 
 ## Videos
 
@@ -63,6 +65,7 @@ View the following Snaps resources in addition to this documentation site.
   ([Slides](https://docs.google.com/presentation/d/1ZjhYF-3mwGmsFdcbDgqgFR6t3YIab4_Hk3dRAWjvSQg/edit?usp=sharing))
 - [Building the Future with MetaMask Snaps](https://www.youtube.com/watch?v=iE8CGzadKZ8&t=288s) (22 min)
   ([Slides](https://docs.google.com/presentation/d/1LG8MqRrbb9qSg4m8ZjJXPQFccb9YPc-6387hSNpscpY/edit?usp=sharing))
+- [MetaMask Snaps YouTube playlist](https://www.youtube.com/playlist?list=PLJ8kQp5OiaEM6ad6mC1NmJCGJSZm7cBfI)
 
 ## Community
 

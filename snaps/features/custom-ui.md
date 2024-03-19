@@ -4,10 +4,11 @@ description: Display custom user interface components.
 
 # Custom UI
 
-You can display custom user interface (UI) components using the `@metamask/snaps-sdk` module with the
-[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method,
-[`onTransaction`](../reference/entry-points.md#ontransaction) entry point,
-or [`onHomepage`](../reference/entry-points.md#onhomepage) entry point.
+You can display custom user interface (UI) components using the 
+`@metamask/snaps-sdk` module with the 
+[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method or the 
+[`onTransaction`](../reference/entry-points.md#ontransaction) and 
+[`onHomePage`](../reference/entry-points.md#onhomepage) entry points.
 
 To use custom UI, first install `@metamask/snaps-sdk` using the following command:
 
@@ -16,7 +17,7 @@ yarn add @metamask/snaps-sdk
 ```
 
 Then, whenever you're required to return a custom UI component, import the components from the
-package and build your UI with them.
+SDK and build your UI with them.
 For example:
 
 ```javascript
@@ -36,6 +37,25 @@ return content;
 
 The `NodeType` enum exported by `@metamask/snaps-sdk` details the available components.
 
+### `address`
+
+Outputs a formatted text field for an Ethereum address. 
+The address is automatically displayed with a jazzicon and truncated value. 
+Hovering the address shows the full value in a tooltip. 
+
+```javascript
+import { panel, heading, address } from '@metamask/snaps-sdk';
+
+// ...
+
+const content = panel([
+  heading('Are you sure you want to send tokens to this address?'),
+  address('0x000000000000000000000000000000000000dEaD'),
+]);
+
+return content;
+```
+
 ### `button`
 
 Outputs a clickable button for use in [interactive UI](./interactive-ui.md).
@@ -45,7 +65,7 @@ Outputs a clickable button for use in [interactive UI](./interactive-ui.md).
 An object with:
 
 - `value`: A string containing the text of the button
-- `type`: Optional, `button` or `submit`. Defaults to `button`.
+- `buttonType`: Optional, `button` or `submit`. Defaults to `button`.
 - `name`: Optional, a string that will be sent to [`onUserInput`](../reference/entry-points.md#onuserinput) when the button is clicked.
 - `variant`: Optional, `primary` or `secondary`. Defaults to `primary`. Determines the appearance of the button.
 
@@ -187,7 +207,8 @@ const amountInput = input({
 
 ### `panel`
 
-Outputs a panel, which can be used as a container for other components.
+Outputs a panel, which can be used as a container for other components. 
+This component takes an array of custom UI components.
 
 ```javascript
 import { panel, heading, text } from '@metamask/snaps-sdk';
@@ -203,6 +224,22 @@ const content = panel([
 ]);
 ```
 
+### `row`
+
+Outputs a row with a label and value, which can be used for key-value data. 
+The label must be a string. The value can be a child component of type 
+`text` or `address`. 
+
+```javascript 
+import { panel, row, text, address } from '@metamask/snaps-sdk'; 
+
+// ...
+const content = panel([
+  row("Address",address("0x000000000000000000000000000000000000dEaD")),
+  row("Balance",text("1.78 ETH")),
+]);
+```
+
 ### `spinner`
 
 Outputs a loading indicator.
@@ -212,12 +249,15 @@ import { panel, heading, spinner } from '@metamask/snaps-sdk';
 
 // ...
 
-const content = panel([heading('Please wait...'), spinner()]);
+const content = panel([
+  heading('Please wait...'),
+  spinner()
+]);
 ```
 
 ### `text`
 
-Outputs text.
+Outputs text. 
 
 ```javascript
 import { text } from '@metamask/snaps-sdk';
@@ -230,7 +270,29 @@ const content = text('This is a simple text UI');
 ## Markdown
 
 Text-based components accept a very small subset of inline Markdown: `**bold**` and `_italic_`.
-This subset will be increased in the future.
+
+## Links
+
+`text()` components accept inline links. 
+To make a link, use the following Markdown: 
+
+```javascript
+import { text } from '@metamask/snaps-sdk';
+
+// ...
+
+const contentWithLink = text('Download [MetaMask](https://metamask.io)');
+```
+
+You can also make a link with just the URL with the following Markdown: 
+
+```javascript
+import { text } from '@metamask/snaps-sdk';
+
+// ...
+
+const contentWithLink = text('Visit our site: [](https://metamask.io)');
+```
 
 ## Emoji
 

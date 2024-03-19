@@ -1,6 +1,7 @@
 ---
 description: See the Snaps API reference.
 toc_max_heading_level: 2
+sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
@@ -73,7 +74,7 @@ Displays an alert that can only be acknowledged.
 
 An object containing the contents of the alert dialog:
 
-- `type` - The type of dialog (`'Alert'`).
+- `type` - The type of dialog (`'alert'`).
 - `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
 
 #### Example
@@ -84,7 +85,7 @@ import { panel, text, heading } from '@metamask/snaps-sdk';
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Alert',
+    type: 'alert',
     content: panel([
       heading('Something happened in the system'),
       text('The thing that happened is...'),
@@ -103,7 +104,7 @@ Displays a confirmation that can be accepted or rejected.
 
 An object containing the contents of the confirmation dialog:
 
-- `type` - The type of dialog (`'Confirmation'`).
+- `type` - The type of dialog (`'confirmation'`).
 - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
 
 #### Returns
@@ -118,7 +119,7 @@ import { panel, text, heading } from '@metamask/snaps-sdk';
 const result = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Confirmation',
+    type: 'confirmation',
     content: panel([
       heading('Would you like to take the action?'),
       text('The action is...'),
@@ -139,7 +140,7 @@ Displays a prompt where the user can enter a text response.
 
 An object containing the contents of the prompt dialog:
 
-- `type` - The type of dialog (`'Prompt'`).
+- `type` - The type of dialog (`'prompt'`).
 - `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
 
@@ -155,7 +156,7 @@ import { panel, text, heading } from '@metamask/snaps-sdk';
 const walletAddress = await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Prompt',
+    type: 'prompt',
     content: panel([
       heading('What is the wallet address?'),
       text('Please enter the wallet address to be monitored'),
@@ -622,9 +623,6 @@ console.log(state);
 
 ## `snap_getLocale`
 
-:::flaskOnly
-:::
-
 Gets the user's locale setting. You can use this method to localize text in your snap.
 
 ### Returns
@@ -646,7 +644,7 @@ if(locale === 'es') {
 await snap.request({
   method: 'snap_dialog',
   params: {
-    type: 'Alert',
+    type: 'alert',
     content: panel([
       text(greeting),
     ]),
@@ -676,7 +674,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 
 #### Parameters
 
-`account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
+`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
@@ -740,7 +738,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 
 #### Parameters
 
-`account` - A [`KeyringAccount`](./keyring-api/variables/KeyringAccountStruct.md) object.
+`account` - [An account object.](keyring-api/account-management/objects.md#keyringaccount)
 
 #### Returns
 
@@ -816,7 +814,7 @@ state of accounts and the state known to MetaMask.
 
 #### Returns
 
-An array of [keyring accounts](./keyring-api/variables/KeyringAccountStruct.md).
+An array of [account objects](keyring-api/account-management/objects.md#keyringaccount).
 
 #### Example
 
@@ -845,8 +843,8 @@ class MyKeyring implements Keyring {
 ### submitResponse
 
 Finalizes a signing request.
-This is usually called as part of the `approveRequest` method of the
-[`Keyring`](keyring-api/type-aliases/Keyring.md) interface.
+This is usually called as part of the
+[`keyring_approveRequest`](keyring-api/account-management/index.md#keyring_approverequest) method.
 
 #### Parameters
 

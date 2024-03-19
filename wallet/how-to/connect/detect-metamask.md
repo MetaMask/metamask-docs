@@ -5,6 +5,16 @@ sidebar_position: 1
 
 # Detect MetaMask
 
+:::caution Important
+This page describes the legacy method of connecting to MetaMask using `window.ethereum`.
+We recommend [connecting to MetaMask using EIP-6963](index.md) instead.
+
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
+mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](../../concepts/wallet-interoperability.md)
+by discovering multiple injected wallet providers in a user's browser.
+:::
+
 The presence of the MetaMask Ethereum provider object, `window.ethereum`, in a user's browser
 indicates an Ethereum user.
 
@@ -20,17 +30,9 @@ if (typeof window.ethereum !== "undefined") {
 You can use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module to
 detect the MetaMask Ethereum provider.
 
-:::tip Detect multiple wallets
-MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to [detect multiple wallets](multiple-wallets.md) in
-the user's browser.
-We recommend detecting multiple wallets to improve the user experience.
-:::
-
 ## Steps
 
-### 1. Install @metamask/detect-provider
+### 1. Install `@metamask/detect-provider`
 
 Use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install
 `@metamask/detect-provider` in your project directory:
@@ -53,14 +55,15 @@ const provider = await detectEthereumProvider();
 if (provider) {
     // From now on, this should always be true:
     // provider === window.ethereum
-    startApp(provider); // initialize your app
+    startApp(provider); // Initialize your dapp.
 } else {
     console.log("Please install MetaMask!");
 }
 
 function startApp(provider) {
-    // If the provider returned by detectEthereumProvider isn't the same as
-    // window.ethereum, something is overwriting it – perhaps another wallet.
+    // If the provider returned by detectEthereumProvider isn't the same as window.ethereum, something
+    // is overwriting it – perhaps another wallet. See the "Connect to MetaMask" guide for detecting
+    // and connecting to multiple wallets.
     if (provider !== window.ethereum) {
         console.error("Do you have multiple wallets installed?");
     }
