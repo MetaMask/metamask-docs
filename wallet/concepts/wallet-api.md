@@ -61,8 +61,8 @@ Make sure to handle errors for every call to
 Dapps communicate with MetaMask through JSON-RPC methods. 
 These methods are divided into the following:
 
-- **Unrestricted methods**: Allow dapps to perform basic actions without permission (for example retrieving a public address).
-- **Restricted methods**: Require user consent for actions that impact assets or data (for example initiating a transaction).
+- **Unrestricted methods** - Allow dapps to perform basic actions without permission (for example retrieving a public address).
+- **Restricted methods** - Require user consent for actions that impact assets or data (for example initiating a transaction).
 
 ### Restricted methods
 
@@ -80,16 +80,20 @@ The following methods are restricted:
   :::info note
   To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
   This method automatically obtains permissions for `eth_accounts` through an internal `wallet_requestPermissions` call.
-  See [how to access a user's accounts](access-accounts.md) for more information.
+  See [how to access a user's accounts](../how-to/connect/access-acounts.md) for more information.
   :::
 
   Granting permissions for `eth_accounts` or `eth_requestAccounts` also provides permissions for the following methods:
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
   - [`personal_sign`](/wallet/reference/personal_sign)
-  - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData)
+  - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
 
 - [`wallet_snap`](/wallet/reference/wallet_snap) - Gaining permission requires calling `wallet_requestSnap`.
 - [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
+  
+  :::info note
+  For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of [About the Snaps APIs](../snaps/learn/about-snaps/apis/#custom-json-rpc-apis) page.
+  :::
 
 ### Unrestricted methods
 
