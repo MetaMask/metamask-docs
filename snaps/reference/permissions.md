@@ -128,6 +128,45 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
+### `endowment:name-lookup`
+
+:::flaskOnly
+:::
+
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must request the
+`endowment:name-lookup` permission.
+This permission grants the Snap read-only access to user input or an address by exporting the
+[`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point.
+
+This permission takes an object with two optional properties:
+
+- `chains` - An array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain IDs for which the Snap can resolve names and addresses.
+  Pass this array to reduce overhead on your Snap by making sure it only receives requests for
+  chains it can resolve.
+- `matchers` - An object that helps reduce overhead by filtering the domains passed to your Snap.
+  This must contain at least one of the following properties:
+  - `tlds` - An array of strings for top-level domains that the Snap supports.
+  - `schemes` - An array of strings for schemes that the Snap supports.
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"],
+    "matchers": {
+      "tlds": ["crypto"],
+      "schemes": ["farcaster"]
+    }
+  }
+},
+```
+
+In this example, the Snap's [`onNameLookup`](./entry-points.md#onnamelookup) entry point would be
+called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the
+domain resolution is happening on Ethereum Mainnet.
+
 ### `endowment:network-access`
 
 To access the internet, a Snap must request the `endowment:network-access` permission.

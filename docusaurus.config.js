@@ -135,44 +135,28 @@ const config = {
             to: "/wallet",
           },
           {
-            from: "/wallet/how-to/connect",
-            to: "/wallet/quickstart/javascript",
-          },
-          {
             from: "/wallet/category/how-to",
             to: "/wallet/how-to",
           },
           {
-            from: ["/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/use-mobile", "/wallet/how-to/integrate-with-mobile", "/sdk"],
-            to: "/wallet/how-to/use-sdk",
+            from: ["/wallet/quickstart/javascript", "/wallet/quickstart/react", "/wallet/quickstart/other-platforms", "/wallet/how-to/discover-multiple-wallets", "/wallet/how-to/detect-wallet", "/wallet/how-to/detect-wallet/multiple-wallets", "/guide/metamask-extension-provider", "/wallet/how-to/access-provider"],
+            to: "/wallet/how-to/connect",
           },
           {
-            from: "/wallet/how-to/use-3rd-party-integrations/unity-dweb",
-            to: "/wallet/how-to/use-sdk/gaming/unity/dweb",
+            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/detect-wallet/metamask"],
+            to: "/wallet/how-to/connect/detect-metamask",
           },
           {
-            from: "/wallet/how-to/use-3rd-party-integrations/unity-infura",
-            to: "/wallet/how-to/use-sdk/gaming/unity/infura",
+            from: ["/guide/accessing-accounts", "/wallet/how-to/access-accounts", "/wallet/get-started/access-accounts"],
+            to: "/wallet/how-to/connect/access-accounts",
           },
           {
-            from: "/wallet/how-to/use-3rd-party-integrations",
-            to: "/wallet/how-to/use-sdk/3rd-party-libraries",
+            from: ["/wallet/get-started/detect-network", "/wallet/how-to/connect/detect-network", "/wallet/how-to/detect-network"],
+            to: "/wallet/how-to/manage-networks/detect-network",
           },
           {
-            from: "/wallet/how-to/use-3rd-party-integrations/web3-onboard",
-            to: "/wallet/how-to/use-sdk/3rd-party-libraries/web3-onboard",
-          },
-          {
-            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/connect/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/discover-multiple-wallets"],
-            to: "/wallet/how-to/detect-wallet",
-          },
-          {
-            from: ["/wallet/get-started/detect-network", "/wallet/how-to/connect/detect-network"],
-            to: "/wallet/how-to/detect-network",
-          },
-          {
-            from: ["/guide/accessing-accounts", "/wallet/how-to/connect/access-accounts", "/wallet/get-started/access-accounts"],
-            to: "/wallet/how-to/access-accounts",
+            from: "/wallet/how-to/add-network",
+            to: "/wallet/how-to/manage-networks/add-network",
           },
           {
             from: "/guide/sending-transactions",
@@ -207,8 +191,24 @@ const config = {
             to: "/wallet/how-to/manage-permissions",
           },
           {
-            from: "/guide/metamask-extension-provider",
-            to: "/wallet/how-to/access-provider",
+            from: ["/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/use-mobile", "/wallet/how-to/integrate-with-mobile", "/sdk"],
+            to: "/wallet/how-to/use-sdk",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/unity-dweb",
+            to: "/wallet/how-to/use-sdk/gaming/unity/dweb",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/unity-infura",
+            to: "/wallet/how-to/use-sdk/gaming/unity/infura",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations",
+            to: "/wallet/how-to/use-sdk/3rd-party-libraries",
+          },
+          {
+            from: "/wallet/how-to/use-3rd-party-integrations/web3-onboard",
+            to: "/wallet/how-to/use-sdk/3rd-party-libraries/web3-onboard",
           },
           {
             from: ["/guide/initializing-dapps", "/wallet/how-to/interact-with-smart-contracts"],
@@ -411,7 +411,7 @@ const config = {
           },
           {
             to: "whats-new",
-            label: "What's new",
+            label: "What's new?",
             position: "right",
           },
         ],
