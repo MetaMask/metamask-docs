@@ -1,14 +1,15 @@
 ---
 description: Display custom user interface components.
+sidebar_position: 1
 ---
 
 # Custom UI
 
 You can display custom user interface (UI) components using the 
 `@metamask/snaps-sdk` module with the 
-[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method or the 
-[`onTransaction`](../reference/entry-points.md#ontransaction) and 
-[`onHomePage`](../reference/entry-points.md#onhomepage) entry points.
+[`snap_dialog`](../../reference/snaps-api.md#snap_dialog) method or the 
+[`onTransaction`](../../reference/entry-points.md#ontransaction) and 
+[`onHomePage`](../../reference/entry-points.md#onhomepage) entry points.
 
 To use custom UI, first install `@metamask/snaps-sdk` using the following command:
 
@@ -58,33 +59,49 @@ return content;
 
 ### `button`
 
-Outputs a clickable button for use in [interactive UI](./interactive-ui.md).
+:::flaskOnly
+:::
+
+Outputs a button that the user can select.
+For use in [interactive UI](interactive-ui.md).
 
 #### Parameters
 
-An object with:
+An object containing:
 
-- `value`: A string containing the text of the button
-- `buttonType`: Optional, `button` or `submit`. Defaults to `button`.
-- `name`: Optional, a string that will be sent to [`onUserInput`](../reference/entry-points.md#onuserinput) when the button is clicked.
-- `variant`: Optional, `primary` or `secondary`. Defaults to `primary`. Determines the appearance of the button.
+- `value`: `string` - The text of the button.
+- `buttonType`: `string` - (Optional) Possible values are `button` or `submit`.
+  The default is `button`.
+- `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  when a user selects the button.
+- `variant` - (Optional) Determines the appearance of the button.
+  Possible values are `primary` or `secondary`.
+  The default is `primary`.
 
 #### Example
 
 ```javascript
-import { button, panel, heading } from '@metamask/snaps-sdk';
+import { button, panel, heading } from "@metamask/snaps-sdk";
 
 const interfaceId = await snap.request({
-  method: 'snap_createInterface',
-  params: {
-    ui: panel([
-      heading('Interactive interface'),
-      button({
-        value: 'Click me',
-        name: 'interactive-button',
-      }),
-    ])
-  },
+    method: "snap_createInterface",
+    params: {
+        ui: panel([
+            heading("Interactive interface"),
+            button({
+                value: "Click me",
+                name: "interactive-button",
+            }),
+        ]),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
 });
 ```
 
@@ -118,32 +135,49 @@ const content = panel([
 
 ### `form`
 
-Outputs a form for use in [interactive UI](./interactive-ui.md).
+:::flaskOnly
+:::
+
+Outputs a form for use in [interactive UI](interactive-ui.md).
 
 #### Parameters
 
-An object with:
+An object containing:
 
-- `name`: A string that will be sent to [`onUserInput`](../reference/entry-points.md#onuserinput) when the form is interacted with.
-- `children`: An array of [`input`](#input) or [`button`](#button) components.
+- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  when a user interacts with the form.
+- `children`: `array` - An array of [`input`](#input) or [`button`](#button) components.
 
 #### Example
 
 ```js
-import { input, button, form } from '@metamask/snaps-sdk';
+import { input, button, form } from "@metamask/snaps-sdk";
 
-const form = form({
-  name: 'form-to-fill',
-  children: [
-    input({
-      name: 'user-name',
-      placeholder: 'Your name',
-    }),
-    button({
-      value: 'Submit!',
-      type: 'submit'
-    }),
-  ]
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: form({
+            name: "form-to-fill",
+            children: [
+                input({
+                    name: "user-name",
+                    placeholder: "Your name",
+                }),
+                button({
+                    value: "Submit",
+                    type: "submit"
+                }),
+            ],
+        }),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
 });
 ```
 
@@ -181,27 +215,51 @@ const content = image('<svg width="400" height="400" viewBox="0 0 24 24" xmlns="
 
 ### `input`
 
-Outputs an input component for use in [interactive UI](./interactive-ui.md).
+:::flaskOnly
+:::
+
+Outputs an input component for use in [interactive UI](interactive-ui.md).
 
 #### Parameters
 
-An object with:
+An object containing:
 
-- `name`: A string that will be used as a key to the event sent to [`onUserInput`](../reference/entry-points.md#onuserinput) when the containing form is submitted.
-- `inputType`: Optional. `text`, `number`, or `password`. Defaults to `text`.
-- `placeholder`: Optional, a string that is displayed when the input is empty.
-- `label`: Optional, a string that is displayed alongside the input to label it.
-- `value`: Optional, the default value of the input.
+- `name`: `string` - The name that will be used as a key to the event sent to
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+- `inputType`: `string` - (Optional) Type of input.
+  Possible values are `text`, `number`, or `password`.
+  The default is `text`.
+- `placeholder`: `string` - (Optional) The text displayed when the input is empty.
+- `label`: `string` (Optional) The text displayed alongside the input to label it.
+- `value`: `string` (Optional) The default value of the input.
 
 #### Example
 
 ```js
-import { input } from '@metamask/snaps-sdk';
+import { input, form } from "@metamask/snaps-sdk";
 
-const amountInput = input({
-  type: 'number',
-  name: 'amount-to-send',
-  placeholder: 'Amount to send'
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: form({
+            name: "form-to-fill",
+            children: [
+                input({
+                    type: "number",
+                    name: "amount-to-send",
+                    placeholder: "Amount to send",
+                }),
+            ],
+        }),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
 });
 ```
 

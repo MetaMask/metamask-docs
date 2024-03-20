@@ -142,7 +142,7 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../../features/custom-ui.md#copyable) user
+  as for signing a message, use the [`copyable`](../../features/custom-ui/index.md#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.

@@ -18,17 +18,18 @@ manifest file.
 :::flaskOnly
 :::
 
-Creates an interface for use in [`interactive UI`](../features/interactive-ui.md).
+Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
 ### Parameters
 
-An object with:
+An object containing:
 
-- `ui` - The [Custom UI](../features/custom-ui.md) to create.
+- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
 
 ### Returns
 
-A string, the interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from [`onTransaction`](./entry-points.md#ontransaction), or [`onHomePage`](./entry-points.md#onhomepage).
+The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
+[`onTransaction`](./entry-points.md#ontransaction) or [`onHomePage`](./entry-points.md#onhomepage).
 
 ### Example
 
@@ -76,8 +77,8 @@ An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`'alert'`).
 - One of:
-  - `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
-  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
+  - `content` - The content of the alert, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Example
 
@@ -108,8 +109,8 @@ An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`'confirmation'`).
 - One of:
-  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
-  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
+  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Returns
 
@@ -147,8 +148,8 @@ An object containing the contents of the prompt dialog:
 - `type` - The type of dialog (`'prompt'`).
 - `placeholder` - Text that will be in the input field when nothing is typed.
 - One of:
-  - `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
-  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
+  - `content` - The content of the prompt, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Returns
 
@@ -568,6 +569,7 @@ console.log(contents);
 :::
 
 Gets the state of an interactive interface by its ID.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
 ### Parameters
 
@@ -575,10 +577,11 @@ Gets the state of an interactive interface by its ID.
 
 ### Returns
 
-An object where each top-level property can be either:
+An object where each top-level property can be one of the following:
 
-- The `name` of an [`input`](../features/custom-ui.md#input) with its current value
-- The `name` of a [`form`](../features/custom-ui.md#form), with a nested object containing the current values of all [`input`s](../features/custom-ui.md#input) in the form.
+- The `name` of an [`input`](../features/custom-ui/index.md#input) with its current value.
+- The `name` of a [`form`](../features/custom-ui/index.md#form), with a nested object containing the
+  current values of all [`inputs`](../features/custom-ui/index.md#input) in the form.
 
 ### Example
 
@@ -597,7 +600,7 @@ const interfaceId = await snap.request({
       form({
         name: 'example-form',
         children: [
-          ...with a nested input
+          // ...with a nested input
           input({
             name: 'nested-input',
             placeholder: 'Enter something',
@@ -619,9 +622,9 @@ const state = await snap.request({
 console.log(state);
 /*
 {
-  "top-level-input": "what the user typed in that field",
+  "top-level-input": "What the user typed in that field",
   "example-form": {
-    "nested-input": "what the user typed in that field"
+    "nested-input": "What the user typed in that field"
   }
 }
 */
@@ -979,14 +982,16 @@ await snap.request({
 :::flaskOnly
 :::
 
-Updates an interface used in [`interactive UI`](../features/interactive-ui.md).
+Updates an interactive interface.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
 ### Parameters
 
-An object with:
+An object containing:
 
-- `id` - The ID of the interface to be updated, usually received in the [`onUserInput` entry point](./entry-points.md#onuserinput).
-- `ui` - The [Custom UI](../features/custom-ui.md) to create.
+- `id` - The ID of the interface to be updated, usually received in the
+  [`onUserInput`](./entry-points.md#onuserinput) entry point.
+- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
 
 ### Example
 
