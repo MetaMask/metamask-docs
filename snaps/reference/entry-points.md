@@ -1,5 +1,6 @@
 ---
 description: See the Snaps entry points reference.
+toc_max_heading_level: 2
 sidebar_position: 3
 ---
 
