@@ -24,20 +24,6 @@ manifest file:
 
 ## Endowments
 
-### Snap-defined timeouts
-
-Many of the endowments defined below entail having MetaMask run arbitrary code defined in the Snap. The default execution timeout is 60000ms, that is one minute.
-
-This execution timeout can be modified by adding a caveat `maxRequestTime` to the permission. It can take values from `5000` (5 seconds) all the way to `180000` (3 minutes). The following endowments accept this caveat:
-
-- `endowment:cronjob`
-- `endowment:keyring`
-- `endowment:lifecycle-hooks`
-- `endowment:name-lookup`
-- `endowment:page-home`
-- `endowment:rpc`
-- `endowment:transaction-insight`
-
 ### `endowment:cronjob`
 
 To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
@@ -45,7 +31,7 @@ This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
 
 :::tip
-You can increase the cron job's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the cron job's execution limit by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -120,7 +106,7 @@ If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call
 MetaMask rejects the request.
 
 :::tip
-You can increase the keyring entry point execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the keyring entry point execution limit by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -142,7 +128,7 @@ This permission allows the Snap to expose the
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
 :::tip
-You can increase the execution time of your lifecycle hooks by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the execution limit of your lifecycle hooks by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -175,7 +161,7 @@ This permission takes an object with two optional properties:
   - `schemes` - An array of strings for schemes that the Snap supports.
 
 :::tip
-You can increase the name lookup logic's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the name lookup logic's execution limit by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -235,7 +221,7 @@ Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
 :::tip
-You can increase the RPC API's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the RPC API's execution limit by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 
@@ -284,7 +270,7 @@ This property represents the transaction initiator origin.
 The default is `false`.
 
 :::tip
-You can increase the transaction insight logic's execution time by using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the transaction insight logic's execution limit by using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 
@@ -310,6 +296,20 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 }
 ```
+
+### Snap-defined timeouts
+
+Many of the endowments defined below entail having MetaMask run arbitrary code defined in the Snap. The default execution timeout is 60000ms, that is one minute.
+
+This execution timeout can be modified by adding a caveat `maxRequestTime` to the permission. It can take values from `5000` (5 seconds) all the way to `180000` (3 minutes). The following endowments accept this caveat:
+
+- `endowment:cronjob`
+- `endowment:keyring`
+- `endowment:lifecycle-hooks`
+- `endowment:name-lookup`
+- `endowment:page-home`
+- `endowment:rpc`
+- `endowment:transaction-insight`
 
 ## Dynamic permissions
 
