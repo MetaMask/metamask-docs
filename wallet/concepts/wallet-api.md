@@ -26,7 +26,7 @@ that the user sign messages and transactions, and more.
 :::note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative discovery mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperabilty.md)
+This alternative mechanism enables dapps to support [wallet interoperability](../wallet-interoperability)
 by discovering multiple injected wallet providers in a user's browser.
 We recommend using this mechanism for provider discovery.
 :::
@@ -91,7 +91,7 @@ See [how to access a user's accounts](../how-to/connect/access-accounts.md) for 
 - [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
   
 :::info note
-For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of the [About the Snaps APIs](../../../../snaps/learn/about-snaps/apis/#custom-json-rpc-apis) page.
+For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of the [About the Snaps APIs](../../../../snaps/learn/about-snaps/apis#custom-json-rpc-apis) page.
 :::
 
 ### Unrestricted methods
