@@ -58,7 +58,7 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-       content: panel([
+        content: panel([
             heading("Are you sure you want to send tokens to this address?"),
             address("0x000000000000000000000000000000000000dEaD"),
         ]),
@@ -200,7 +200,7 @@ module.exports.onTransaction = async ({ transaction }) => {
                     2,
                 )}%** in gas fees for this transaction.`,
             ),
-        ])
+        ]),
     };
 };
 ```
@@ -287,8 +287,7 @@ module.exports.onHomePage = async () => {
 
 ## Markdown
 
-Text-based components (such as [`heading`](#heading) and [`text`](#text)) accept bold and italic
-inline Markdown.
+[`text`](#text) components accept bold and italic inline Markdown.
 
 #### Example
 
@@ -349,10 +348,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             heading("Hello world!"),
             text("This is an apple 🍎 and this is an orange 🍊."),
-        ]);
+        ]),
     },
 });
 ```
