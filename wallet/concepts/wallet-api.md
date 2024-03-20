@@ -91,7 +91,7 @@ See [how to access a user's accounts](../how-to/connect/access-accounts.md) for 
 - [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
   
 :::info note
-For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of the [About the Snaps APIs](../../../../snaps/learn/about-snaps/apis) page.
+For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of the [About the Snaps APIs](../../../../snaps/learn/about-snaps/apis.md#custom-json-rpc-apis) page.
 :::
 
 ### Unrestricted methods
