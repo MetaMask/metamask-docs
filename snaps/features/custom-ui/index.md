@@ -22,7 +22,7 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK and build your UI with them.
-For example, to display a [`panel`](#panel) using [`snap_dialog`](../reference/snaps-api.md#snap_dialog):
+For example, to display a [`panel`](#panel) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript
 import { panel, heading, text } from "@metamask/snaps-sdk";
