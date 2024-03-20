@@ -23,15 +23,12 @@ This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), an
 request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
-:::info Note
+:::note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
-alternative wallet detection mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperability.md)
+alternative discovery mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperabilty.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../how-to/connect/index.md).
-
-You can access the provider API using the selected EIP-6963 provider object.
-Throughout this documentation, we refer to the selected provider using `provider`.
+We recommend using this mechanism for provider discovery.
 :::
 
 The MetaMask Ethereum provider API contains the following:
@@ -39,7 +36,7 @@ The MetaMask Ethereum provider API contains the following:
 - [Properties](../reference/provider-api.md#properties) - The provider contains a property that
   detects if a user has MetaMask installed.
 - [Methods](../reference/provider-api.md#methods) - The provider contains methods that dapps can call.
-  The [`request()`](../reference/provider-api.md#request)
+  The [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs)
   provider method wraps the [JSON-RPC API](#json-rpc-api); dapps can use this
   provider method to call any RPC method.
 - [Events](../reference/provider-api.md#events) - The provider emits events that dapps can listen to.
@@ -49,7 +46,7 @@ methods, and events.
 
 ## JSON-RPC API
 
-MetaMask uses the [`request()`](../reference/provider-api.md#request)
+MetaMask uses the [`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs)
 method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
@@ -58,14 +55,14 @@ The RPC methods are documented in the interactive [JSON-RPC API reference](/wall
 :::note
 All RPC method requests can return errors.
 Make sure to handle errors for every call to
-[`request()`](../reference/provider-api.md#request).
+[`window.ethereum.request(args)`](../reference/provider-api.md#windowethereumrequestargs).
 :::
 
 Dapps communicate with MetaMask through JSON-RPC methods. 
 These methods are divided into the following:
 
-- **Unrestricted methods** - Allow dapps to perform basic actions without permission (for example retrieving a public address).
-- **Restricted methods** - Require user consent for actions that impact assets or data (for example initiating a transaction).
+- [Restricted methods](#restricted-methods) -  Require user consent for actions that impact assets or data (for example initiating a transaction).
+- [Unrestricted methods](#unrestricted-methods) - Allow dapps to perform basic actions without permission (for example retrieving a public address).
 
 ### Restricted methods
 
@@ -78,25 +75,24 @@ Restricted methods are methods that cannot be called unless you have permission 
 
 The following methods are restricted:
 
-- [eth_accounts](/wallet/reference/eth_accounts) - Requires passing `eth_accounts` as a parameter of `wallet_requestPermissions`. 
-
-  :::info note
-  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
-  This method automatically obtains permissions for `eth_accounts` through an internal `wallet_requestPermissions` call.
-  See [how to access a user's accounts](../how-to/connect/access-acounts.md) for more information.
-  :::
-
-  Granting permissions for `eth_accounts` or `eth_requestAccounts` also provides permissions for the following methods:
+- [eth_accounts](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`. 
+Granting permissions for `eth_accounts` also provides permissions for the following methods:
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
   - [`personal_sign`](/wallet/reference/personal_sign)
   - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
 
+:::info note
+To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+This method automatically obtains permissions for `eth_accounts` through an internal `wallet_requestPermissions` call.
+See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
+:::
+
 - [`wallet_snap`](/wallet/reference/wallet_snap) - Gaining permission requires calling `wallet_requestSnap`.
 - [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
   
-  :::info note
-  For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of [About the Snaps APIs](../snaps/learn/about-snaps/apis/#custom-json-rpc-apis) page.
-  :::
+:::info note
+For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the example at the end of the [About the Snaps APIs](../../../../snaps/learn/about-snaps/apis/#custom-json-rpc-apis) page.
+:::
 
 ### Unrestricted methods
 
