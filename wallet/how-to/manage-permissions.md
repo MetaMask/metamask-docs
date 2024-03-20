@@ -21,10 +21,10 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
 
 <div class="row margin-bottom--md">
     <div class="column">
-        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid gray'}} />
+        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" style={{border: '1px solid gray'}} />
+        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
 
