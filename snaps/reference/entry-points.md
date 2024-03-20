@@ -97,8 +97,10 @@ An object containing:
 
 ### Returns
 
-A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
+One of:
+- A `content` object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
 for the transaction that `onTransaction` was called with.
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for interactive UIs
 
 ### Example
 
@@ -442,7 +444,9 @@ None.
 
 ### Returns
 
-A content object displayed using [custom UI](../features/custom-ui.md).
+One of:
+- A `content` object displayed using [custom UI](../features/custom-ui.md).
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for interactive UIs
 
 ### Example
 

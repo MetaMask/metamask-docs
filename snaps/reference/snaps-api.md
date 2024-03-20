@@ -75,7 +75,9 @@ Displays an alert that can only be acknowledged.
 An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`'alert'`).
-- `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
+- One of:
+  - `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
+  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
 
 #### Example
 
@@ -105,7 +107,9 @@ Displays a confirmation that can be accepted or rejected.
 An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`'confirmation'`).
-- `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
+- One of:
+  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
+  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
 
 #### Returns
 
@@ -141,8 +145,10 @@ Displays a prompt where the user can enter a text response.
 An object containing the contents of the prompt dialog:
 
 - `type` - The type of dialog (`'prompt'`).
-- `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
+- One of:
+  - `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
+  - `id` - A string with the ID of an [interactive interface](#snap_createinterface)
 
 #### Returns
 
