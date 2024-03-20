@@ -214,7 +214,7 @@ To build and test your Snap:
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
-    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
+    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
     This is a boilerplate test dapp for installing and testing your Snap.
 
@@ -230,7 +230,7 @@ To build and test your Snap:
 6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
