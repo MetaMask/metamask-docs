@@ -31,10 +31,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             heading("Alert heading"),
             text("Something happened in the system."),
-        ]);
+        ]),
     },
 });
 ```
@@ -58,10 +58,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+       content: panel([
             heading("Are you sure you want to send tokens to this address?"),
             address("0x000000000000000000000000000000000000dEaD"),
-        ]);
+        ]),
     },
 });
 ```
@@ -88,10 +88,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             text("Your address:"),
             copyable("0x000000000000000000000000000000000000dEaD"),
-        ]);
+        ]),
     },
 });
 ```
@@ -224,10 +224,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             row("Address", address("0x000000000000000000000000000000000000dEaD")),
             row("Balance", text("1.78 ETH")),
-        ]);
+        ]),
     },
 });
 ```
@@ -249,10 +249,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             heading("Please wait..."),
             spinner(),
-        ]);
+        ]),
     },
 });
 ```
@@ -299,10 +299,10 @@ await snap.request({
     method: "snap_dialog",
     params: {
         type: "alert",
-        const content = panel([
+        content: panel([
             heading("Hello world!"),
             text("This is **bold** and this is _italic_."),
-        ]);
+        ]),
     },
 });
 ```
