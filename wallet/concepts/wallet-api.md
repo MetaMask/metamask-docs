@@ -61,11 +61,10 @@ Make sure to handle errors for every call to
 [`request()`](../reference/provider-api.md#request).
 :::
 
-Dapps communicate with MetaMask through JSON-RPC methods. 
-These methods are divided into the following:
+The RPC methods are divided into the following:
 
-- [Restricted methods](#restricted-methods) -  Require user consent for actions that impact assets or data (for example initiating a transaction).
-- [Unrestricted methods](#unrestricted-methods) - Allow dapps to perform basic actions without permission (for example retrieving a public address).
+- [Restricted methods](#restricted-methods) -  Require user consent for actions that impact assets or data (for example, initiating a transaction).
+- [Unrestricted methods](#unrestricted-methods) - Allow dapps to perform basic actions without permission (for example, retrieving a public address).
 
 ### Restricted methods
 
@@ -78,15 +77,14 @@ Restricted methods are methods that cannot be called unless you have permission 
 
 The following methods are restricted:
 
-- [eth_accounts](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`. 
-Granting permissions for `eth_accounts` also provides permissions for the following methods:
+- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`. 
+Granting permission for `eth_accounts` also grants permissions for the following methods:
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
   - [`personal_sign`](/wallet/reference/personal_sign)
   - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
 
-:::info note
-To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
-This method automatically obtains permissions for `eth_accounts` through an internal `wallet_requestPermissions` call.
+:::caution important
+To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts), which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
 See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
 :::
 
