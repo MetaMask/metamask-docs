@@ -14,7 +14,13 @@ You can display interactive user interface (UI) components.
 Interactive UI is an extension of [custom UI](index.md).
 It allows interfaces returned from [`snap_dialog`](../../reference/snaps-api.md#snap_dialog),
 [`onTransaction`](../../reference/entry-points.md#ontransaction), and
-[`onHomePage`](../../reference/entry-points.md#onhomepage) to respond to user input.
+[`onHomePage`](../../reference/entry-points.md#onhomepage) to respond to user input.]
+
+The following interactive UI components are available:
+
+- [`button`](index.md#button)
+- [`form`](index.md#form)
+- [`input`](index.md#input)
 
 ## Create an interactive interface
 

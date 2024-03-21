@@ -123,6 +123,10 @@ await snap.request({
 });
 ```
 
+<p align="center">
+<img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `copyable`
 
 Outputs a read-only text field with a copy-to-clipboard shortcut.
@@ -205,7 +209,7 @@ const interfaceId = await snap.request({
                 }),
                 button({
                     value: "Submit",
-                    type: "submit"
+                    type: "submit",
                 }),
             ],
         }),
@@ -220,6 +224,10 @@ await snap.request({
     },
 });
 ```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ### `heading`
 
@@ -307,9 +315,12 @@ const interfaceId = await snap.request({
             name: "form-to-fill",
             children: [
                 input({
-                    type: "number",
-                    name: "amount-to-send",
-                    placeholder: "Amount to send",
+                    name: "user-name",
+                    placeholder: "Your name",
+                }),
+                button({
+                    value: "Submit",
+                    type: "submit",
                 }),
             ],
         }),
@@ -324,6 +335,10 @@ await snap.request({
     },
 });
 ```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ### `panel`
 
