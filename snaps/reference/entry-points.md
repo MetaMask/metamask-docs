@@ -519,7 +519,7 @@ An object containing:
 <TabItem value="TypeScript">
 
 ```typescript
-import type { OnNameLookupHandler } from '@metamask/snaps-types';
+import type { OnNameLookupHandler } from '@metamask/snaps-sdk';
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
   const { chainId, address, domain } = request;
@@ -564,6 +564,53 @@ module.exports.onNameLookup = async ({ request }) => {
   }
 
   return null;
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onUserInput`
+
+:::flaskOnly
+:::
+
+To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, a Snap must export `onUserInput`.
+
+### Parameters
+
+- `id` - The ID of the interface being acted on.
+- `event` - An event object containing:
+  - `type` - The type of the event. One of `ButtonClickEvent`, `FormSubmitEvent`, or `InputChangeEvent`. These enums are exported from `@metamask/snaps-sdk`
+  - `name` - The name of the component that fired the event. Optional when the event type is `ButtonClickEvent`.
+  - `value` - When the event type is `FormSubmitEvent`, this will contain the values in the form as an object.
+
+### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript
+import type { OnUserInputHandler } from '@metamask/snaps-sdk';
+import { UserInputEventType } from '@metamask/snaps-sdk'
+
+export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
+  if (event.type === UserInputEventType.FormSubmitEvent) {
+    console.log('The submitted form values are', event.value);
+  }
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js
+const { UserInputEventType } = require('@metamask/snaps-sdk');
+
+module.exports.onUserInput = async ({ id, event }) => {
+  if (event.type === UserInputEventType.FormSubmitEvent) {
+    console.log('The submitted form values are', event.value);
+  }
 };
 ```
 
