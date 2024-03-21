@@ -209,7 +209,7 @@ const interfaceId = await snap.request({
                 }),
                 button({
                     value: "Submit",
-                    type: "submit",
+                    buttonType: "submit",
                 }),
             ],
         }),
@@ -320,7 +320,7 @@ const interfaceId = await snap.request({
                 }),
                 button({
                     value: "Submit",
-                    type: "submit",
+                    buttonType: "submit",
                 }),
             ],
         }),
