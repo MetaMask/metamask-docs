@@ -1,6 +1,6 @@
 ---
 description: Use Jest for end-to-end Snap testing.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Test a Snap
