@@ -30,6 +30,10 @@ To run periodic actions for the user (cron jobs), a Snap must request the `endow
 This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
 
+:::tip
+You can modify the cron job's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -57,7 +61,6 @@ Specify this permission in the manifest file as follows:
     ]
   }
 }
-
 ```
 
 ### `endowment:ethereum-provider`
@@ -102,6 +105,10 @@ the Snap must configure a list of allowed dapp URLs using the `endowment:keyring
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
+:::tip
+You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -119,6 +126,10 @@ This permission allows the Snap to expose the
 [`onInstall`](../reference/entry-points.md#oninstall) and 
 [`onUpdate`](../reference/entry-points.md#onupdate) 
 entry points, which MetaMask calls after a successful installation or update, respectively.
+
+:::tip
+You can modify the lifecycle hooks' execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
 
 Specify this permission in the manifest file as follows:
 
@@ -148,6 +159,10 @@ This permission takes an object with two optional properties:
   This must contain at least one of the following properties:
   - `tlds` - An array of strings for top-level domains that the Snap supports.
   - `schemes` - An array of strings for schemes that the Snap supports.
+
+:::tip
+You can modify the name lookup logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
 
 Specify this permission in the manifest file as follows:
 
@@ -205,6 +220,11 @@ This permission requires an object with a `snaps` or `dapps` property (or both),
 Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
+:::tip
+You can modify the RPC API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -251,6 +271,11 @@ should pass the `transactionOrigin` property as part of the `onTransaction` para
 This property represents the transaction initiator origin.
 The default is `false`.
 
+:::tip
+You can modify the transaction insight logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -273,6 +298,33 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 }
 ```
+
+### Snap-defined timeouts
+
+Many endowments entail having MetaMask run arbitrary code defined in the Snap.
+The default execution timeout is 60000 milliseconds, or one minute.
+
+You can modify this execution timeout by adding a caveat `maxRequestTime` to the permission.
+It can take values from `5000` (5 seconds) to `180000` (3 minutes).
+For example:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:transaction-insight": {
+    "maxRequestTime": 10000
+  }
+}
+```
+
+The following endowments accept this caveat:
+
+- [`endowment:cronjob`](#endowmentcronjob)
+- [`endowment:keyring`](#endowmentkeyring)
+- [`endowment:lifecycle-hooks`](#endowmentlifecycle-hooks)
+- [`endowment:name-lookup`](#endowmentname-lookup)
+- [`endowment:page-home`](#endowmentpage-home)
+- [`endowment:rpc`](#endowmentrpc)
+- [`endowment:transaction-insight`](#endowmenttransaction-insight)
 
 ## Dynamic permissions
 

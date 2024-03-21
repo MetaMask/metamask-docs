@@ -184,7 +184,7 @@ To build and test your Snap:
    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
-<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 ### 5. Display a different UI for contract interactions
