@@ -12,10 +12,6 @@ to communicate with Snaps.
 
 Snaps and dapps follow the [EIP-2255 wallet permissions specification](https://eips.ethereum.org/EIPS/eip-2255).
 
-  :::info note
-  The [JSON-RPC](/wallet/reference/json-rpc-api) methods [`wallet_snap`](/wallet/reference/wallet_snap) and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) are restricted. To use these restricted methods, you must first obtain permission through [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps).
-  :::
-
 ## Request permissions from a Snap
 
 ### Snaps API methods
@@ -60,6 +56,12 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 Dapps that communicate with Snaps must request permission to do so by calling the
 [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) MetaMask JSON-RPC API method.
+
+:::info note
+Restricted [JSON-RPC](/wallet/reference/json-rpc-api) methods [`wallet_snap`](/wallet/reference/wallet_snap) 
+and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) require obtaining permission 
+through [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps) before use.
+:::
 
 For example, to request permission to connect to the `hello-snap` Snap:
 
