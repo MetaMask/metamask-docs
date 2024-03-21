@@ -72,7 +72,7 @@ The following are guidelines for user notifications and authorizations:
   2. Filter specific methods to specific URLs using the built-in [URL
      library](https://developer.mozilla.org/en-US/docs/Web/API/URL): 
 
-    ```JavaScript
+    ```javascript
     const referrer = new URL(origin);
 
     if(referrer.protocol === "https:" && 
