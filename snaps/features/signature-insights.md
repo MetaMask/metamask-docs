@@ -9,7 +9,7 @@ sidebar_position: 7
 :::
 
 
-Similarly to [providing transaction insights](../tutorials/transaction-insights.md), Snaps allows you to provide signature insights to your users.
+Snaps allows developers to provide signature insights to their users.
 
 ## Steps
 
@@ -101,7 +101,7 @@ Your Snap should use `signatureMethod` as the source of the truth to identify th
 
 Once you've identified the signature object, your Snap may run any logic it wants, including calling APIs. Then, your Snap must either return `null` if it has no insights to provide, or an object with a `content` property and an optional `severity` property.
 
-The `content` object must be an instance of [Custom UI](./use-custom-ui.md). The `severity`, if provided, must be an instance of the `SeverityLevel` enum exported by the `@metamask/snaps-sdk` package. Currently the only severity level available is `SeverityLevel.Critical`.
+The `content` object must be an instance of [Custom UI](./custom-ui.md). The `severity`, if provided, must be an instance of the `SeverityLevel` enum exported by the `@metamask/snaps-sdk` package. Currently the only severity level available is `SeverityLevel.Critical`.
 
 :::caution
 Due to current MetaMask UI limitations, signature insights will only be displayed if your Snap's logic deems the signature to be one that a user shouldn't sign, that is if you return a severity level of `SeverityLevel.Critical`.
@@ -136,4 +136,4 @@ When your Snap returns a signature insight with a `severity` of `SeverityLevel.C
 ## Reference
 
 - [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
-- [`onSignature` export](../reference/exports.md#onsignature)
+- [`onSignature` export](../reference/entry-points.md#onsignature)
