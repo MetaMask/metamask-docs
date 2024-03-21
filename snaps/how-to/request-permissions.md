@@ -13,7 +13,7 @@ to communicate with Snaps.
 Snaps and dapps follow the [EIP-2255 wallet permissions specification](https://eips.ethereum.org/EIPS/eip-2255).
 
   :::info note
-  The [JSON-RPC](/wallet/reference/json-rpc-api) methods [`wallet_snap`](/wallet/reference/wallet_snap) and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) are restricted. To use these restricted methods, you must first obtain permission through [`wallet_requestSnap`](/wallet/reference/wallet_requestSnaps).
+  The [JSON-RPC](/wallet/reference/json-rpc-api) methods [`wallet_snap`](/wallet/reference/wallet_snap) and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) are restricted. To use these restricted methods, you must first obtain permission through [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps).
   :::
 
 ## Request permissions from a Snap
