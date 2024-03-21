@@ -1,6 +1,5 @@
 ---
 description: See the Snaps API reference.
-toc_max_heading_level: 2
 sidebar_position: 1
 ---
 
@@ -10,52 +9,8 @@ import TabItem from '@theme/TabItem';
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
-To call some of these methods, you must first [request permission](../how-to/request-permissions.md) in the Snap
-manifest file.
-
-## `snap_createInterface`
-
-:::flaskOnly
-:::
-
-Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
-
-### Parameters
-
-An object containing:
-
-- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
-
-### Returns
-
-The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
-[`onTransaction`](./entry-points.md#ontransaction) or [`onHomePage`](./entry-points.md#onhomepage).
-
-### Example
-
-```js
-const interfaceId = await snap.request({
-  method: 'snap_createInterface',
-  params: {
-    ui: panel([
-      heading('Interactive interface'),
-      button({
-        value: 'Click me',
-        name: 'interactive-button',
-      }),
-    ])
-  },
-});
-
-await snap.request({
-  method: 'snap_dialog',
-  params: {
-    type: 'Alert',
-    id: interfaceId
-  }
-});
-```
-
+To call each method (except the [interactive UI methods](#interactive-ui-methods)), you must first
+[request permission](../how-to/request-permissions.md) in the Snap manifest file.
 
 ## `snap_dialog`
 
@@ -193,7 +148,7 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -203,7 +158,7 @@ An object containing:
 - `curve` - The curve to use for the key derivation.
   Must be `'ed25519'` or `'secp256k1'`.
 
-### Returns
+#### Returns
 
 An object representing the
 [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) HD tree node and containing
@@ -217,7 +172,7 @@ its corresponding key material:
 - `chainCode` - The chain code of the node.
 - `curve` - The name of the curve used by the node: `'ed25519'` or `'secp256k1'`.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Manifest file">
@@ -270,7 +225,7 @@ Gets the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
 derivation path specified by the `path` parameter.
 Note that this returns the public key, not the extended public key (`xpub`), or Ethereum address.
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -282,11 +237,11 @@ An object containing:
 - `compressed` - Indicates whether the public key should be compressed.
   The default is `false`.
 
-### Returns
+#### Returns
 
 The public key as hexadecimal string.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Manifest file">
@@ -344,7 +299,7 @@ This method is designed to be used with the
 for user addresses, but it's your responsibility to know how to use those keys to, for example,
 derive an address for the relevant protocol or sign a transaction for the user.
 
-### Parameters
+#### Parameters
 
 An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 
@@ -355,7 +310,7 @@ If you wish to connect to MetaMask accounts in a Snap, use
 [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
 :::
 
-### Returns
+#### Returns
 
 An object representing the
 [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD tree node
@@ -371,7 +326,7 @@ and containing its corresponding key material:
 - `path` - A human-readable representation of the BIP-44 HD tree path of the node.
   Since this is a `coin_type` node, the path is of the form `m / 44' / coin_type'`.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Manifest file">
@@ -428,11 +383,11 @@ It is useful to check if MetaMask is locked in the following situations:
 - When running background operations that require MetaMask to be unlocked, for example, [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
 - When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 
-### Returns
+#### Returns
 
 `true` if MetaMask is locked, `false` if MetaMask is unlocked.
 
-### Example
+#### Example
 
 ```typescript
 import type { OnCronjobHandler } from '@metamask/snaps-sdk';
@@ -468,7 +423,7 @@ Using a salt results in entropy unrelated to the entropy generated without a sal
 
 This value is deterministic: it's always the same for the same Snap, user account, and salt.
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -477,11 +432,11 @@ An object containing:
 - `salt` (optional) - An arbitrary string to be used as a salt for the entropy.
   This can be used to generate different entropy for different purposes.
 
-### Returns
+#### Returns
 
 The entropy as a hexadecimal string.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Manifest file">
@@ -516,18 +471,18 @@ console.log(entropy);
 Gets a static file's content in UTF-8, Base64, or hexadecimal.
 The file must be [specified in the Snap's manifest file](../features/static-files.md).
 
-### Parameters
+#### Parameters
 
 An object containing:
 
 - `path` - The path to the file, relative to the Snap's package directory (that is, one level above `src`).
 - `encoding` (optional) - One of `utf8`, `base64`, or `hex`. The default is `base64`.
 
-### Returns
+#### Returns
 
 The file content as a string in the requested encoding.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Manifest file">
@@ -563,82 +518,15 @@ console.log(contents);
 </TabItem>
 </Tabs>
 
-## `snap_getInterfaceState`
-
-:::flaskOnly
-:::
-
-Gets the state of an interactive interface by its ID.
-For use in [interactive UI](../features/custom-ui/interactive-ui.md).
-
-### Parameters
-
-- `id` - The ID of the interface.
-
-### Returns
-
-An object where each top-level property can be one of the following:
-
-- The `name` of an [`input`](../features/custom-ui/index.md#input) with its current value.
-- The `name` of a [`form`](../features/custom-ui/index.md#form), with a nested object containing the
-  current values of all [`inputs`](../features/custom-ui/index.md#input) in the form.
-
-### Example
-
-```js
-const interfaceId = await snap.request({
-  method: 'snap_createInterface',
-  params: {
-    ui: panel([
-      heading('Interactive UI Example Snap'),
-      // A top-level input
-      input({
-        name: 'top-level-input',
-        placeholder: 'Enter something',
-      }),
-      // A top-level form...
-      form({
-        name: 'example-form',
-        children: [
-          // ...with a nested input
-          input({
-            name: 'nested-input',
-            placeholder: 'Enter something',
-          }),
-          button('Submit', ButtonType.Submit, 'sumbit'),
-        ],
-      }),
-    ]),
-  },
-});
-
-const state = await snap.request({
-  method: 'snap_getInterfaceState',
-  params: {
-    id: interfaceId
-  },
-});
-
-console.log(state);
-/*
-{
-  "top-level-input": "What the user typed in that field",
-  "example-form": {
-    "nested-input": "What the user typed in that field"
-  }
-}
-*/
-```
-
 ## `snap_getLocale`
 
 Gets the user's locale setting. You can use this method to localize text in your snap.
 
-### Returns
+#### Returns
 
 The user's locale setting as a [language code](https://github.com/MetaMask/metamask-extension/blob/develop/app/_locales/index.json).
 
-### Example
+#### Example
 
 ```javascript
 import { panel, text } from '@metamask/snaps-sdk';
@@ -901,7 +789,7 @@ If you need to access encrypted state in a background task such as a cron job, y
 unexpected password request popup.
 :::
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -913,11 +801,11 @@ An object containing:
   This is useful to access the data from background operations without requiring the user to enter
   their password in the case that MetaMask is locked.
 
-### Returns
+#### Returns
 
 The value stored in state if the operation is `get`, and `null` otherwise.
 
-### Example
+#### Example
 
 ```javascript
 // Persist some data.
@@ -954,7 +842,7 @@ The ability for Snaps to trigger notifications is rate-limited to:
 - 5 in-app notifications per minute per Snap.
 :::
 
-### Parameters
+#### Parameters
 
 An object containing the contents of the notification:
 
@@ -965,7 +853,7 @@ An object containing the contents of the notification:
   the user.
 - `message` - A message to show in the notification.
 
-### Example
+#### Example
 
 ```javascript
 await snap.request({
@@ -977,7 +865,122 @@ await snap.request({
 });
 ```
 
-## `snap_updateInterface`
+## Interactive UI methods
+
+The following methods are used in [interactive UI](../features/custom-ui/interactive-ui.md).
+These methods do not require requesting permission in the Snap manifest file.
+
+### `snap_createInterface`
+
+:::flaskOnly
+:::
+
+Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+
+#### Returns
+
+The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
+[`onTransaction`](./entry-points.md#ontransaction) or [`onHomePage`](./entry-points.md#onhomepage).
+
+#### Example
+
+```js
+const interfaceId = await snap.request({
+  method: 'snap_createInterface',
+  params: {
+    ui: panel([
+      heading('Interactive interface'),
+      button({
+        value: 'Click me',
+        name: 'interactive-button',
+      }),
+    ])
+  },
+});
+
+await snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'Alert',
+    id: interfaceId
+  }
+});
+```
+
+### `snap_getInterfaceState`
+
+:::flaskOnly
+:::
+
+Gets the state of an interactive interface by its ID.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+- `id` - The ID of the interface.
+
+#### Returns
+
+An object where each top-level property can be one of the following:
+
+- The `name` of an [`input`](../features/custom-ui/index.md#input) with its current value.
+- The `name` of a [`form`](../features/custom-ui/index.md#form), with a nested object containing the
+  current values of all [`inputs`](../features/custom-ui/index.md#input) in the form.
+
+#### Example
+
+```js
+const interfaceId = await snap.request({
+  method: 'snap_createInterface',
+  params: {
+    ui: panel([
+      heading('Interactive UI Example Snap'),
+      // A top-level input
+      input({
+        name: 'top-level-input',
+        placeholder: 'Enter something',
+      }),
+      // A top-level form...
+      form({
+        name: 'example-form',
+        children: [
+          // ...with a nested input
+          input({
+            name: 'nested-input',
+            placeholder: 'Enter something',
+          }),
+          button('Submit', ButtonType.Submit, 'sumbit'),
+        ],
+      }),
+    ]),
+  },
+});
+
+const state = await snap.request({
+  method: 'snap_getInterfaceState',
+  params: {
+    id: interfaceId
+  },
+});
+
+console.log(state);
+/*
+{
+  "top-level-input": "What the user typed in that field",
+  "example-form": {
+    "nested-input": "What the user typed in that field"
+  }
+}
+*/
+```
+
+### `snap_updateInterface`
 
 :::flaskOnly
 :::
@@ -985,7 +988,7 @@ await snap.request({
 Updates an interactive interface.
 For use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
-### Parameters
+#### Parameters
 
 An object containing:
 
@@ -993,7 +996,7 @@ An object containing:
   [`onUserInput`](./entry-points.md#onuserinput) entry point.
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
 
-### Example
+#### Example
 
 ```js
 export function onUserInput({ id, event }) {
