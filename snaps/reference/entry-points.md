@@ -238,7 +238,7 @@ An object containing:
 ### Returns
 
 - An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`
-- A `content` object displayed using [custom UI](../how-to/use-custom-ui.md) after the user presses the "Sign" button. At this time due to limitations of MetaMask's signature confirmation UI, the content will only be displayed if the `severity` property is present and set to `SeverityLevel.Critical`.
+- A `content` object displayed using [custom UI](../features/custom-ui.md) after the user presses the "Sign" button. At this time due to limitations of MetaMask's signature confirmation UI, the content will only be displayed if the `severity` property is present and set to `SeverityLevel.Critical`.
 
 ### Example
 
