@@ -92,7 +92,7 @@ See [how to access a user's accounts](../how-to/connect/access-accounts.md) for 
 - [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
   
 :::info note
-For more information on requesting permission to connect to `wallet_snap` and `wallet_invokeSnap`, see the [requesting permissions from a dapp](/snaps/how-to/request-permissions/#request-permissions-from-a-dapp) example.
+For more information on using `wallet_snap` and `wallet_invokeSnap`, see the [how to request Snap permissions from a dapp](/snaps/how-to/request-permissions/#request-permissions-from-a-dapp).
 :::
 
 ### Unrestricted methods
