@@ -102,19 +102,19 @@ The `ethereum` global available to Snaps has fewer capabilities than `window.eth
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
 Snaps can call all MetaMask API methods **except** the following:
 
-- `wallet_requestSnaps`
-- `wallet_requestPermissions`
-- `wallet_revokePermissions`
-- `wallet_addEthereumChain`
-- `wallet_switchEthereumChain`
-- `wallet_watchAsset`
-- `wallet_registerOnboarding`
-- `wallet_scanQRCode`
-- `eth_sendRawTransaction`
-- `eth_sendTransaction`
-- `eth_signTypedData_v4`
-- `eth_decrypt`
-- `eth_getEncryptionPublicKey`
+- [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps)
+- [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
+- [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
+- [`wallet_addEthereumChain`](/wallet/reference/wallet_addEthereumChain)
+- [`wallet_switchEthereumChain`](/wallet/reference/wallet_switchEthereumChain)
+- [`wallet_watchAsset`](/wallet/reference/wallet_watchAsset)
+- [`wallet_registerOnboarding`](/wallet/reference/wallet_registerOnboarding)
+- [`wallet_scanQRCode`](/wallet/reference/wallet_scanQRCode)
+- [`eth_sendRawTransaction`](/wallet/reference/eth_sendRawTransaction)
+- [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
+- [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
+- [`eth_decrypt`](/wallet/reference/eth_decrypt)
+- [`eth_getEncryptionPublicKey`](/wallet/reference/eth_getEncryptionPublicKey)
 
 ## Custom JSON-RPC APIs
 
