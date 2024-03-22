@@ -97,7 +97,7 @@ interface SignTypedDataV4Signature {
 }
 ```
 
-Your Snap should use `signatureMethod` as the source of the truth to identify the signature scheme it is providing insights for.
+Your Snap should use `signatureMethod` as the source of truth to identify the signature scheme it is providing insights for.
 
 Once you've identified the signature object, your Snap may run any logic it wants, including calling APIs. Then, your Snap must either return `null` if it has no insights to provide, or an object with a `content` property and an optional `severity` property.
 
