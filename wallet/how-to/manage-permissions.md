@@ -17,7 +17,7 @@ These methods are specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-225
 allow the dapp to call the requested method.
 The confirmation screen describes the functions and data the requested method can access.
 For example, something like the following confirmation displays when you request permission to call
-the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
+the restricted method [`eth_accounts`](/wallet/reference/eth_accounts):
 
 <div class="row margin-bottom--md">
     <div class="column">
@@ -31,8 +31,9 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
 :::info note
 To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
-internally.
-See [how to access a user's accounts](connect/access-accounts.md) for more information.
+internally. 
+See [how to access a user's accounts](../connect/access-accounts) for more information.
+Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4). 
 :::
 
 ## Request permissions example
