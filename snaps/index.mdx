@@ -7,8 +7,8 @@ import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
 
 # Extend the functionality of MetaMask using Snaps
 
-MetaMask Snaps is an open source system that allows anyone to safely extend the functionality of MetaMask,
-creating new web3 end user experiences.
+Snaps is an open source system that allows anyone to safely extend the functionality of
+[MetaMask](https://metamask.io/), creating new web3 end user experiences.
 Get started building your own Snaps by [installing MetaMask Flask](get-started/install-flask.md).
 
 ## What can you do with a Snap?
@@ -101,6 +101,12 @@ The following Snaps features are available in the stable version of MetaMask:
       href: "features/custom-evm-accounts",
       title: "Custom EVM accounts",
       description: "Connect to custom EVM accounts in MetaMask."
+    },
+    {
+      icon: require("./assets/features/homepage.png").default,
+      href: "reference/permissions#endowmentpage-home",
+      title: "Home pages",
+      description: "Present a dedicated UI page in MetaMask for your Snap."
     }
   ]}
 />
@@ -118,17 +124,17 @@ the canary distribution of MetaMask:
       flaskOnly: true
     },
     {
-      icon: require("./assets/features/homepage.png").default,
-      href: "reference/permissions#endowmentpage-home",
-      title: "Home pages",
-      description: "Present a dedicated UI page in MetaMask for your Snap.",
-      flaskOnly: true
-    },
-    {
       icon: require("./assets/features/network.png").default,
       href: "features/custom-evm-accounts#account-abstraction-erc-4337",
       title: "Account abstraction",
       description: "Connect to ERC-4337 accounts in MetaMask.",
+      flaskOnly: true
+    },
+    {
+      icon: require("./assets/features/name-resolution.png").default,
+      href: "features/custom-name-resolution",
+      title: "Name resolution",
+      description: "Resolve names to addresses and vice versa.",
       flaskOnly: true
     }
   ]}

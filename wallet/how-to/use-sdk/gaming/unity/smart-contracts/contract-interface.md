@@ -90,7 +90,7 @@ public interface ERC20 : IContract
 }
 ```
 
-### Use the Task return type
+### Use the `Task` return type
 
 We recommend always using `Task` as the return type when declaring contract functions, even if
 the given [provider](contract-provider.md) does not use `Task`.

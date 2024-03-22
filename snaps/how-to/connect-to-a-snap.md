@@ -1,6 +1,6 @@
 ---
 description: Connect your dapp to existing, third-party Snaps.
-sidebar_position: 9
+sidebar_position: 8
 ---
 
 # Connect to a Snap
@@ -12,7 +12,7 @@ This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
-See the Wallet documentation on [how to detect MetaMask](/wallet/how-to/detect-wallet).
+See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/connect).
 
 ### Detect MetaMask Flask
 
@@ -48,7 +48,7 @@ if (provider && isFlask) {
 See the following resources for detecting multiple wallets (via
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963)) in the user's browser:
 
-- [How to detect multiple wallets](/wallet/how-to/detect-wallet/multiple-wallets)
+- [How to connect to MetaMask](/wallet/how-to/connect)
 - [Connect to Snap via EIP-6963 example](https://github.com/Montoya/snap-connect-example)
 
 ## Connect to a Snap

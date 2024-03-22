@@ -1,7 +1,8 @@
 ---
 sidebar_position: 2
-toc_max_heading_level: 2
 sidebar_label: Events
+tags:
+  - Keyring API
 ---
 
 # Account Management API events
@@ -9,12 +10,12 @@ sidebar_label: Events
 [Account management Snaps](../../../features/custom-evm-accounts/index.md) can notify MetaMask of the
 following [Account Management API](index.md) events.
 
-## `AccountCreated`
+### `AccountCreated`
 
 An account is created.
 MetaMask returns an error if the account already exists or the account object is invalid.
 
-### Example
+#### Example
 
 ```typescript
 try {
@@ -25,7 +26,7 @@ try {
 }
 ```
 
-## `AccountUpdated`
+### `AccountUpdated`
 
 An account is updated.
 MetaMask returns an error if one of the following is true:
@@ -34,7 +35,7 @@ MetaMask returns an error if one of the following is true:
 - The account object is invalid.
 - The account address is updated.
 
-### Example
+#### Example
 
 ```typescript
 try {
@@ -45,12 +46,12 @@ try {
 }
 ```
 
-## `AccountDeleted`
+### `AccountDeleted`
 
 An account is deleted.
 The delete event is idempotent, so it is safe to emit even if the account does not exist.
 
-### Example
+#### Example
 
 ```typescript
 try {
@@ -63,14 +64,14 @@ try {
 }
 ```
 
-## `RequestApproved`
+### `RequestApproved`
 
 A request is approved.
 MetaMask returns an error if the request does not exist.
 This event only applies to Snaps that
 [handle requests asynchronously](../../../features/custom-evm-accounts/index.md#asynchronous-transaction-flow).
 
-### Example
+#### Example
 
 ```typescript
 try {
@@ -84,14 +85,14 @@ try {
 }
 ```
 
-## `RequestRejected`
+### `RequestRejected`
 
 A request is rejected.
 MetaMask returns an error if the request does not exist.
 This event only applies to Snaps that
 [handle requests asynchronously](../../../features/custom-evm-accounts/index.md#asynchronous-transaction-flow).
 
-### Example
+#### Example
 
 ```typescript
 try {

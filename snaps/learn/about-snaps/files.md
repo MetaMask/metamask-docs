@@ -3,6 +3,9 @@ description: Learn about the Snap project files.
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Snaps files
 
 If you look at the directory structure of the Snaps monorepo project generated in the
@@ -92,28 +95,49 @@ For example, running [`yarn mm-snap build`](../../reference/cli/subcommands.md#b
 
 ## Configuration file
 
-The Snap configuration file, `snap.config.ts`, should be placed in the project root directory.
-You can override the default values of the [Snaps CLI options](../../reference/cli/options.md) by specifying
-them in the `config` object of the configuration file.
+The Snap configuration file, `snap.config.js` or `snap.config.ts`, must be placed in the project
+root directory.
+You can override the default values of the
+[Snaps configuration options](../../reference/cli/options.md) by specifying them in the
+configuration file.
 For example:
 
-```ts
-import { resolve } from 'path';
-import type { SnapConfig } from '@metamask/snaps-cli';
+<Tabs>
+<TabItem value="JavaScript">
+
+```javascript title="snap.config.js"
+module.exports = {
+    input: "src/index.js",
+    output: {
+        path: "dist",
+    },
+    server: {
+        port: 9000,
+    },
+};
+```
+
+</TabItem>
+<TabItem value="TypeScript">
+
+```typescript title="snap.config.ts"
+import type { SnapConfig } from "@metamask/snaps-cli";
 
 const config: SnapConfig = {
-  bundler: 'webpack',
-  input: resolve(__dirname, 'src/index.ts'),
-  server: {
-    port: 8080,
-  },
-  polyfills: {
-    buffer: true,
-  },
+    input: "src/index.js",
+    output: {
+        path: "dist",
+    },
+    server: {
+        port: 9000,
+    },
 };
 
 export default config;
 ```
+
+</TabItem>
+</Tabs>
 
 :::note
 You should not publish the configuration file to npm, since it's only used for development and

@@ -1,6 +1,6 @@
 ---
 description: Request and revoke permissions to call restricted methods.
-sidebar_position: 11
+sidebar_position: 6
 ---
 
 # Manage permissions
@@ -21,10 +21,10 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
 
 <div class="row margin-bottom--md">
     <div class="column">
-        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid gray'}} />
+        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" style={{border: '1px solid gray'}} />
+        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
 
@@ -32,7 +32,7 @@ the [`eth_accounts`](/wallet/reference/eth_accounts) restricted method:
 To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
 internally.
-See [how to access a user's accounts](access-accounts.md) for more information.
+See [how to access a user's accounts](connect/access-accounts.md) for more information.
 :::
 
 ## Request permissions example
@@ -43,7 +43,7 @@ The following example uses `wallet_requestPermissions` to request permission fro
 document.getElementById("requestPermissionsButton", requestPermissions);
 
 function requestPermissions() {
-    ethereum
+    provider // Or window.ethereum if you don't support EIP-6963.
         .request({
             method: "wallet_requestPermissions",
             params: [{ eth_accounts: {} }],
@@ -72,12 +72,13 @@ function requestPermissions() {
 The following example uses `wallet_revokePermissions` to revoke the dapp's permission to call `eth_accounts`:
 
 ```javascript
-await window.ethereum.request({
-    method: "wallet_revokePermissions",
-    params: [
-        {
-            eth_accounts: {},
-        },
-    ],
-});
+await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+        method: "wallet_revokePermissions",
+        params: [
+            {
+                eth_accounts: {},
+            },
+        ],
+    });
 ```

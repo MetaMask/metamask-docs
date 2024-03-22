@@ -30,6 +30,10 @@ To run periodic actions for the user (cron jobs), a Snap must request the `endow
 This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
 
+:::tip
+You can modify the cron job's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -57,7 +61,6 @@ Specify this permission in the manifest file as follows:
     ]
   }
 }
-
 ```
 
 ### `endowment:ethereum-provider`
@@ -82,9 +85,6 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 
 ### `endowment:page-home`
 
-:::flaskOnly
-:::
-
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
@@ -105,6 +105,10 @@ the Snap must configure a list of allowed dapp URLs using the `endowment:keyring
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
+:::tip
+You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -123,6 +127,10 @@ This permission allows the Snap to expose the
 [`onUpdate`](../reference/entry-points.md#onupdate) 
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
+:::tip
+You can modify the lifecycle hooks' execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -130,6 +138,49 @@ Specify this permission in the manifest file as follows:
   "endowment:lifecycle-hooks": {}
 }
 ```
+
+### `endowment:name-lookup`
+
+:::flaskOnly
+:::
+
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must request the
+`endowment:name-lookup` permission.
+This permission grants the Snap read-only access to user input or an address by exporting the
+[`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point.
+
+This permission takes an object with two optional properties:
+
+- `chains` - An array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain IDs for which the Snap can resolve names and addresses.
+  Pass this array to reduce overhead on your Snap by making sure it only receives requests for
+  chains it can resolve.
+- `matchers` - An object that helps reduce overhead by filtering the domains passed to your Snap.
+  This must contain at least one of the following properties:
+  - `tlds` - An array of strings for top-level domains that the Snap supports.
+  - `schemes` - An array of strings for schemes that the Snap supports.
+
+:::tip
+You can modify the name lookup logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"],
+    "matchers": {
+      "tlds": ["crypto"],
+      "schemes": ["farcaster"]
+    }
+  }
+},
+```
+
+In this example, the Snap's [`onNameLookup`](./entry-points.md#onnamelookup) entry point would be
+called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the
+domain resolution is happening on Ethereum Mainnet.
 
 ### `endowment:network-access`
 
@@ -169,6 +220,11 @@ This permission requires an object with a `snaps` or `dapps` property (or both),
 Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
+:::tip
+You can modify the RPC API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -180,7 +236,9 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
+#### Allowed origins
+
+Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs. 
 Calls from any other origins are rejected. 
 
 Specify this caveat in the manifest file as follows: 
@@ -213,6 +271,11 @@ should pass the `transactionOrigin` property as part of the `onTransaction` para
 This property represents the transaction initiator origin.
 The default is `false`.
 
+:::tip
+You can modify the transaction insight logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -235,6 +298,33 @@ Specify this permission in the manifest file as follows:
   "endowment:webassembly": {}
 }
 ```
+
+### Snap-defined timeouts
+
+Many endowments entail having MetaMask run arbitrary code defined in the Snap.
+The default execution timeout is 60000 milliseconds, or one minute.
+
+You can modify this execution timeout by adding a caveat `maxRequestTime` to the permission.
+It can take values from `5000` (5 seconds) to `180000` (3 minutes).
+For example:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:transaction-insight": {
+    "maxRequestTime": 10000
+  }
+}
+```
+
+The following endowments accept this caveat:
+
+- [`endowment:cronjob`](#endowmentcronjob)
+- [`endowment:keyring`](#endowmentkeyring)
+- [`endowment:lifecycle-hooks`](#endowmentlifecycle-hooks)
+- [`endowment:name-lookup`](#endowmentname-lookup)
+- [`endowment:page-home`](#endowmentpage-home)
+- [`endowment:rpc`](#endowmentrpc)
+- [`endowment:transaction-insight`](#endowmenttransaction-insight)
 
 ## Dynamic permissions
 
