@@ -54,16 +54,10 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 ## Request permissions from a dapp
 
-Dapps that communicate with Snaps must request permission to do so by calling the
+Dapps that communicate with Snaps using [`wallet_snap`](/wallet/reference/wallet_snap) and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) must request permission to do so by calling the
 [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) MetaMask JSON-RPC API method.
 
-:::info note
-Restricted [JSON-RPC](/wallet/reference/json-rpc-api) methods [`wallet_snap`](/wallet/reference/wallet_snap) 
-and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) require obtaining permission 
-through [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps) before use.
-:::
-
-For example, to request permission to connect to the `hello-snap` Snap:
+The following example calls `wallet_requestSnaps` to request permission to connect to the `hello-snap` Snap, then calls `wallet_invokeSnap` to invoke the `hello` JSON-RPC method exposed by the Snap:
 
 ```js title="index.js"
 // If the Snap is not already installed, the user will be prompted to install it.
@@ -84,4 +78,6 @@ const response = await window.ethereum.request({
 console.log(response); // 'world!'
 ```
 
-See [About the Snaps APIs](/snaps/learn/about-snaps/apis/#custom-json-rpc-apis) for more information on implementing custom JSON-RPC APIs to communicate with dapps and other Snaps.
+:::note
+Learn more about implementing [custom JSON-RPC APIs](../learn/about-snaps/apis.md#custom-json-rpc-apis) in a Snap.
+:::
