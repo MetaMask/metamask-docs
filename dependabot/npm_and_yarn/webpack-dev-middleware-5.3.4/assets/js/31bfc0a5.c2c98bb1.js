@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7698],{64312:e=>{e.exports=JSON.parse('[{"label":"Keyring API","permalink":"/dependabot/npm_and_yarn/webpack-dev-middleware-5.3.4/snaps/tags/keyring-api","count":9}]')}}]);
