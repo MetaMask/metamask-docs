@@ -8,6 +8,11 @@ description: Summary of the latest updates to this documentation.
 The latest major MetaMask documentation updates are listed by the month they were added to the documentation. 
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom of the [MetaMask developer page](https://metamask.io/developer/).
 
+## March 2024
+
+- Documented [Snaps signature insights](/snaps/features/signature-insights).
+  ([#1228](https://github.com/MetaMask/metamask-docs/pull/1228))
+
 ## February 2024
 
 - Documented [account abstraction using ERC-4337](/snaps/features/custom-evm-accounts/#account-abstraction-erc-4337). ([#1167](https://github.com/MetaMask/metamask-docs/pull/1167))
