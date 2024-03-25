@@ -286,11 +286,15 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-### endowment:signature-insight
+### `endowment:signature-insight`
 
-To provide signature insights, a Snap must request the `endowment:signature-insight` permission.
+:::flaskOnly
+:::
+
+To provide [signature insights](../features/signature-insights.md), a Snap must request the
+`endowment:signature-insight` permission.
 This permission grants a Snap read-only access to raw signature payloads, before they're accepted
-for signing by the user, by exporting the [`onSignature`](./entry-points.md#onsignature) method.
+for signing by the user, by exposing the [`onSignature`](./entry-points.md#onsignature) entry point.
 
 This permission requires an object with an `allowSignatureOrigin` property to signal if the Snap
 should pass the `signatureOrigin` property as part of the `onSignature` parameters.

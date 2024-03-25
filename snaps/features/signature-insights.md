@@ -1,139 +1,170 @@
 ---
 description: Provide insights to your users in MetaMask's signature confirmation flow.
 sidebar_position: 7
+sidebar_custom_props:
+  flask_only: true
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Signature insights
 
 :::flaskOnly
 :::
 
-
-Snaps allows developers to provide signature insights to their users.
+You can provide signature insights before a user signs a message.
+For example, you can warn the user about potentially dangerous signature requests.
 
 ## Steps
 
 ### 1. Request permission to display signature insights
 
-To display signature insights to your users, you first need to add the [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight) permission to your Snap's manifest:
+Request the [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
+permission by adding the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
 {
-  "initialPermissions": {
-    "endowment:signature-insight": {}
-  }
-}
-```
-
-Additionally, if you need to receive the origin of the signature request, you must add `allowSignatureOrigin` to the permission object, and set it to `true`:
-
-```json title="snap.manifest.json"
-{
-  "initialPermissions": {
-    "endowment:signature-insight": {
-      "allowSignatureOrigin": true
+    "initialPermissions": {
+        "endowment:signature-insight": {}
     }
-  }
 }
 ```
 
-When requesting the permission, this is how it will be displayed in the MetaMask UI when installing the Snap:
+If you need to receive the origin of the signature request, add `allowSignatureOrigin` to the
+permission object, and set it to `true`:
 
-![Signature insights permission](../assets/signature-insights-permission.png)
+```json title="snap.manifest.json"
+{
+    "initialPermissions": {
+        "endowment:signature-insight": {
+            "allowSignatureOrigin": true
+        }
+    }
+}
+```
+
+When requesting this permission, the following displays in the MetaMask UI when a user installs the Snap:
+
+<p align="center">
+<img src={require("../assets/signature-insights-permission.png").default} alt="Signature insights permission" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ### 2. Implement `onSignature` and export it from `index.ts`
 
-The next step is for your Snap to export an `onSignature` function. This function receives a `signature` object. The shape of this object depends on the chain, as well as on the signing method used. This is why it's typed as `Record<string, unknown>`.
+Expose an [`onSignature`](../reference/entry-points.md#onsignature) entry point, which receives a
+`signature` object.
+The shape of this object depends on the chain and the signing method used.
+This is why it's typed as `Record<string, unknown>`.
 
-For Ethereum and Ethereum-compatible chains, the `signature` object can have one of the following shapes, depending on the signging method used:
+For Ethereum and Ethereum-compatible chains, the `signature` object can have one of the following
+shapes, depending on the signing method used:
 
-#### eth_sign
+<Tabs>
+<TabItem value="eth_sign">
 
 ```typescript
 interface EthSignature {
-  from: string;
-  data: string;
-  signatureMethod: 'eth_sign';
+    from: string;
+    data: string;
+    signatureMethod: "eth_sign";
 }
 ```
 
-#### personal_sign
+</TabItem>
+<TabItem value="personal_sign">
 
 ```typescript
 interface PersonalSignature {
-  from: string;
-  data: string;
-  signatureMethod: 'personal_sign';
+    from: string;
+    data: string;
+    signatureMethod: "personal_sign";
 }
 ```
 
-#### eth_signTypedData
+</TabItem>
+<TabItem value="eth_signTypedData">
 
 ```typescript
 interface SignTypedDataSignature {
-  from: string;
-  data: Record<string, any>[];
-  signatureMethod: 'eth_signTypedData';
+    from: string;
+    data: Record<string, any>[];
+    signatureMethod: "eth_signTypedData";
 }
 ```
 
-#### eth_signTypedData_v3
+</TabItem>
+<TabItem value="eth_signTypedData_v3">
 
 ```typescript
 interface SignTypedDataV3Signature {
-  from: string;
-  data: Record<string, any>;
-  signatureMethod: 'eth_signTypedData_v3';
+    from: string;
+    data: Record<string, any>;
+    signatureMethod: "eth_signTypedData_v3";
 }
 ```
 
-#### eth_signTypedData_v4
+</TabItem>
+<TabItem value="eth_signTypedData_v4">
 
 ```typescript
 interface SignTypedDataV4Signature {
-  from: string;
-  data: Record<string, any>;
-  signatureMethod: 'eth_signTypedData_v4';
+    from: string;
+    data: Record<string, any>;
+    signatureMethod: "eth_signTypedData_v4";
 }
 ```
 
-Your Snap should use `signatureMethod` as the source of truth to identify the signature scheme it is providing insights for.
+</TabItem>
+</Tabs>
 
-Once you've identified the signature object, your Snap may run any logic it wants, including calling APIs. Then, your Snap must either return `null` if it has no insights to provide, or an object with a `content` property and an optional `severity` property.
+Your Snap should use `signatureMethod` as the source of truth to identify the signature scheme it is
+providing insights for.
 
-The `content` object must be an instance of [Custom UI](./custom-ui.md). The `severity`, if provided, must be an instance of the `SeverityLevel` enum exported by the `@metamask/snaps-sdk` package. Currently the only severity level available is `SeverityLevel.Critical`.
+Once you've identified the signature object, your Snap can run any logic, including calling APIs.
+Then, your Snap must either return `null` if it has no insights to provide, or an object with a
+`content` property and an optional `severity` property as specified in the
+[`onSignature`](../reference/entry-points.md#onsignature) entry point.
 
 :::caution
-Due to current MetaMask UI limitations, signature insights will only be displayed if your Snap's logic deems the signature to be one that a user shouldn't sign, that is if you return a severity level of `SeverityLevel.Critical`.
+Due to current MetaMask UI limitations, signature insights will only be displayed if your Snap's
+logic deems the signature to be one that a user shouldn't sign, that is, if you return a severity
+level of `SeverityLevel.Critical`.
 :::
 
-Here's an example implementation of `onSignature`:
+The following is an example implementation of `onSignature`:
 
-```typescript
-import { OnSignatureHandler, SeverityLevel } from '@metamask/snaps-types';
-import { panel, heading, text } from '@metamask/snaps-ui';
+```typescript title="index.ts"
+import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onSignature: OnSignatureHandler = async ({
-  signature,
-  signatureOrigin,
+    signature,
+    signatureOrigin,
 }) => {
-  const insights = /* Get insights based on custom logic */;
-  return {
-    content: panel([
-      heading('My Signature Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ]),
-    severity: SeverityLevel.Critical
-  };
+    const insights = /* Get insights based on custom logic */;
+    return {
+        content: panel([
+            heading("My Signature Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value)))
+        ]),
+        severity: SeverityLevel.Critical
+    };
 };
 ```
 
-When your Snap returns a signature insight with a `severity` of `SeverityLevel.Critical`, the Custom UI will be displayed in a modal after the user presses the "Sign" button, like so:
+When your Snap returns a signature insight with a `severity` of `SeverityLevel.Critical`, the custom
+UI displays in a modal after the user selects the **Sign** button.
+For example:
+
+<p align="center">
 
 ![Signature insights warning](../assets/signature-insights-warning.png)
 
-## Reference
+</p>
 
-- [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
-- [`onSignature` export](../reference/entry-points.md#onsignature)
+## Example
+
+See the [`@metamask/signature-insights-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/signature-insights)
+package for a full example of implementing signature insights.

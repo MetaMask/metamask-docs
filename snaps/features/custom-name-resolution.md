@@ -30,7 +30,7 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 
 ### 2. Implement custom name resolution
 
-Export an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
+Expose an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
 `chainId` and either a `domain` or an `address`.
 The following example implements a very basic resolution from Unstoppable Domains domain names to
 Ethereum addresses in `onNameLookup`:
