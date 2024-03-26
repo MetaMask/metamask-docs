@@ -134,6 +134,36 @@ img {
   text-align: center;
 }
 
+/* Responsive YouTube video embeds */
+.video-responsive {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.video-responsive iframe,
+.video-responsive video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px; 
+}
+
+/* Increased border-radius for GIFs */
+img[src*=".gif"],
+img[src*=".mp4"] { 
+  border-radius: 8px;
+}
+
+/* Ensure full-screen playback is enabled for video elements */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Reset SVG to be inline by default */
 svg {
   display: inline;
