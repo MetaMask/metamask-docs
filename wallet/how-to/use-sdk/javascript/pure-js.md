@@ -24,6 +24,7 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
                 name: "Example Pure JS Dapp",
                 url: window.location.href,
             },
+            infuraAPIKey: process.env.INFURA_API_KEY,
             // Other options
         )
         // Because the init process of MetaMask SDK is async.
@@ -38,20 +39,22 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
 </head>
 ```
 
-You can configure the SDK using any [options](../../../reference/sdk-js-options.md) and call any
-[provider API methods](../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
-[`request()`](../../../reference/provider-api.md#request) first,
-since it prompts the installation or connection popup to appear.
+You can configure the SDK using any [options](../../../reference/sdk-js-options.md):
 
-:::note Important SDK options
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../display/custom-modals.md).
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../make-read-only-requests.md) from your dapp.
-:::
+  [make read-only RPC requests](make-read-only-requests.md) from your dapp.
+- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](display-custom-modals.md).
+
+You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
+Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
+[`request()`](../../../reference/provider-api.md#request) first, since it prompts the installation
+or connection popup to appear.
+
+You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](batch-json-rpc-requests.md) using the `metamask_batch` method.
 
 ## Example
 
