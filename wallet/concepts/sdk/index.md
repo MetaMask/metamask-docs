@@ -38,10 +38,10 @@ Most of these features are not available if you only integrate your dapp directl
 | Connect from a web dapp to the MetaMask extension                                             |        ✅        |      ✅       |
 | Connect from a web dapp to MetaMask Mobile                                                    |        ❌        |      ✅       |
 | Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                             |        ❌        |      ✅       |
-| Use custom RPC methods such as [`connectAndSign`](../../how-to/sign-data/connect-and-sign.md) |        ❌        |      ✅       |
-| [Display custom modals](../../how-to/display/custom-modals.md) in MetaMask                    |        ❌        |      ✅       |
-| [Make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API                 |        ❌        |      ✅       |
-| [Batch multiple RPC requests](../../how-to/batch-json-rpc-requests.md)                        |        ❌        |      ✅       |
+| Use custom RPC methods such as [`connectAndSign`](../../how-to/use-sdk/javascript/connect-and-sign.md) |        ❌        |      ✅       |
+| [Display custom modals](../../how-to/use-sdk/javascript/display-custom-modals.md) in MetaMask                    |        ❌        |      ✅       |
+| [Make read-only requests](../../how-to/use-sdk/javascript/make-read-only-requests.md) using the Infura API                 |        ❌        |      ✅       |
+| [Batch multiple RPC requests](../../how-to/use-sdk/javascript/batch-json-rpc-requests.md)                        |        ❌        |      ✅       |
 
 ## User experience
 

@@ -50,6 +50,11 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [how to connect and sign using the Unity SDK](/wallet/how-to/use-sdk/gaming/unity/connect-and-sign).
   ([#1023](https://github.com/MetaMask/metamask-docs/pull/1023))
 
+## March 2024
+
+- Documented [Snaps signature insights](/snaps/features/signature-insights).
+  ([#1228](https://github.com/MetaMask/metamask-docs/pull/1228))
+
 ## February 2024
 
 - Documented [account abstraction using ERC-4337](/snaps/features/custom-evm-accounts/#account-abstraction-erc-4337).

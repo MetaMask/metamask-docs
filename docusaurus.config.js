@@ -183,16 +183,28 @@ const config = {
             to: "/wallet/how-to/display/icon",
           },
           {
-            from: "/wallet/how-to/use-3rd-party-integrations/js-infura-api",
-            to: "/wallet/how-to/make-read-only-requests",
-          },
-          {
             from: "/wallet/how-to/request-permissions",
             to: "/wallet/how-to/manage-permissions",
           },
           {
             from: ["/guide/mobile-getting-started", "/guide/site-compatibility-checklist", "/guide/mobile-best-practices", "/wallet/how-to/use-mobile", "/wallet/how-to/integrate-with-mobile", "/sdk"],
             to: "/wallet/how-to/use-sdk",
+          },
+          {
+            from: "/wallet/how-to/sign-data/connect-and-sign",
+            to: "/wallet/how-to/use-sdk/javascript/connect-and-sign",
+          },
+          {
+            from: ["/wallet/how-to/use-3rd-party-integrations/js-infura-api", "/wallet/how-to/make-read-only-requests"],
+            to: "/wallet/how-to/use-sdk/javascript/make-read-only-requests",
+          },
+          {
+            from: "/wallet/how-to/batch-json-rpc-requests",
+            to: "/wallet/how-to/use-sdk/javascript/batch-json-rpc-requests",
+          },
+          {
+            from: "/wallet/how-to/display/custom-modals",
+            to: "/wallet/how-to/use-sdk/javascript/display-custom-modals",
           },
           {
             from: "/wallet/how-to/use-3rd-party-integrations/unity-dweb",
