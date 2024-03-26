@@ -121,7 +121,7 @@ const walletAddress = await snap.request({
     },
 });
 
-//`walletAddress will be a string containing the address entered by the user.
+// walletAddress will be a string containing the address entered by the user.
 ```
 
 ## `snap_getBip32Entropy`
@@ -245,7 +245,7 @@ The public key as hexadecimal string.
     "snap_getBip32PublicKey": [
         {
             "path": ["m", "44'", "3'", "0'", "0", "0"],
-            "curve": "secp256k1" // Or "ed25519"
+            "curve": "secp256k1"
         }
     ]
 }
@@ -260,7 +260,7 @@ const dogecoinPublicKey = await snap.request({
     method: "snap_getBip32PublicKey",
     params: {
         // The path and curve must be specified in the initial permissions.
-        path: ['m", "44'", "3'", "0'", '0", '0'],
+        path: ["m", "44'", "3'", "0'", "0", "0"],
         curve: "secp256k1",
         compressed: false,
     },

@@ -388,14 +388,14 @@ The following is an example `eth_accounts` permission:
 
 ```json
 {
-    "id": "47vm2UUi1pccNAeYKGmwF", // example
+    "id": "47vm2UUi1pccNAeYKGmwF",
     "parentCapability": "eth_accounts",
     "invoker": "npm:SNAP_ID",
     "caveats": [
         {
             "type": "restrictReturnedAccounts",
             "value": [
-                "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
+                "0xc403b37bf1e700cb214ea1be9de066824b420de6"
             ]
         }
     ],

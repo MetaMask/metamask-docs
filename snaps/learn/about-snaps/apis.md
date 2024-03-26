@@ -136,12 +136,13 @@ However, if you want to do something such as manage the user's keys for a partic
 create a dapp that sends transactions for that protocol via your Snap, you must implement a custom API.
 :::
 
-For example, to create a simple Snap with a custom API, first request the `endowment:rpc` permission:
+For example, to create a simple Snap with a custom API, first request the `endowment:rpc` permission.
+Set `dapps` to `true` to enable dapps to make JSON-RPC requests.
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
     "endowment:rpc": {
-        "dapps": true // Enable dapps to make JSON-RPC requests.
+        "dapps": true
     }
 }
 ```
