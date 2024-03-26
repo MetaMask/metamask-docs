@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2024
 
+- Documented [Snaps signature insights](/snaps/features/signature-insights).
+  ([#1228](https://github.com/MetaMask/metamask-docs/pull/1228))
 - Documented [how to restrict a Snap's RPC API methods](https://github.com/MetaMask/metamask-docs/pull/1223).
   ([#1223](https://github.com/MetaMask/metamask-docs/pull/1223))
 - Documented [Snap-defined timeouts](/snaps/reference/permissions/#snap-defined-timeouts).
@@ -43,17 +45,10 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1187](https://github.com/MetaMask/metamask-docs/pull/1187))
 - Updated [Snaps CLI reference](/snaps/reference/cli) with Webpack configuration options.
   ([#1178](https://github.com/MetaMask/metamask-docs/pull/1178))
-- Documented [how to use Wagmi with the SDK](/wallet/how-to/use-sdk/3rd-party-libraries/wagmi).
-  ([#1180](https://github.com/MetaMask/metamask-docs/pull/1180))
 - Improved and restructured the [Snaps Keyring API reference](/snaps/reference/keyring-api).
   ([#1170](https://github.com/MetaMask/metamask-docs/pull/1170))
 - Documented [how to connect and sign using the Unity SDK](/wallet/how-to/use-sdk/gaming/unity/connect-and-sign).
   ([#1023](https://github.com/MetaMask/metamask-docs/pull/1023))
-
-## March 2024
-
-- Documented [Snaps signature insights](/snaps/features/signature-insights).
-  ([#1228](https://github.com/MetaMask/metamask-docs/pull/1228))
 
 ## February 2024
 
