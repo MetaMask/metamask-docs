@@ -23,23 +23,22 @@ The following example uses the
 [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get
 the provider object from MetaMask first:
 
-```js
-import detectEthereumProvider from '@metamask/detect-provider';
+```js title="index.js"
+import detectEthereumProvider from "@metamask/detect-provider";
 
-// This resolves to the value of window.ethereum or null
+// This resolves to the value of window.ethereum or null.
 const provider = await detectEthereumProvider();
 
-// web3_clientVersion returns the installed MetaMask version as a string
+// web3_clientVersion returns the installed MetaMask version as a string.
 const isFlask = (
-  await provider?.request({ method: 'web3_clientVersion' })
-)?.includes('flask');
+    await provider?.request({ method: "web3_clientVersion" })
+)?.includes("flask");
 
 if (provider && isFlask) {
-  console.log('MetaMask Flask successfully detected!');
-
-  // Now you can use Snaps!
+    console.log("MetaMask Flask successfully detected!");
+    // Now you can use Snaps!
 } else {
-  console.error('Please install MetaMask Flask!', error);
+    console.error("Please install MetaMask Flask!", error);
 }
 ```
 
@@ -115,12 +114,12 @@ The user may have other Snaps installed that your dapp is not aware of.
 
 The following example verifies whether a Snap with ID `npm:super-snap` is installed:
 
-```ts
+```ts title="index.ts"
 const snaps = await ethereum.request({
-  method: 'wallet_getSnaps'
+    method: "wallet_getSnaps"
 });
 
-const isMySnapInstalled = Object.keys(snaps).includes('npm:super-snap');
+const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap");
 ```
 
 If you need to work with a specific version of a Snap, you can instead iterate over

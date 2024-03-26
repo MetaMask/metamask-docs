@@ -106,12 +106,12 @@ and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
-   "npm": {
-      "filePath": "dist/bundle.js",
-      "iconPath": "images/gas.svg",
-      "packageName": "snap",
-      "registry": "https://registry.npmjs.org/"
-   }
+    "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/gas.svg",
+        "packageName": "snap",
+        "registry": "https://registry.npmjs.org/"
+    }
 }
 ```
 
@@ -120,9 +120,9 @@ Edit the `files` array and add the `images/` folder:
 
 ```json title="package.json"
 "files": [
-  "dist/",
-  "images/",
-  "snap.manifest.json"
+    "dist/",
+    "images/",
+    "snap.manifest.json"
 ],
 ```
 
@@ -134,12 +134,12 @@ permission by adding `"endowment:network-access": {}` to the `initialPermissions
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_dialog": {},
-  "endowment:rpc": {
-    "dapps": true,
-    "snaps": false
-  }, 
-  "endowment:network-access": {}
+    "snap_dialog": {},
+    "endowment:rpc": {
+        "dapps": true,
+        "snaps": false
+    }, 
+    "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
 ```
@@ -153,20 +153,20 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { panel, text } from "@metamask/snaps-sdk";
 
 async function getFees() {
-  const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow'); 
-  return response.text();
+    const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow"); 
+    return response.text();
 }
 ```
 
 Next, add the `copyable` component to the second import of the file: 
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text, copyable } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { panel, text, copyable } from "@metamask/snaps-sdk";
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
@@ -176,23 +176,23 @@ For the `hello` method, the handler returns a call to MetaMask with the paramete
 dialog, and passes some static strings.
 
 Since `getFees()` returns a promise, you must use `then()` to resolve it in your `hello` method.
-Rewrite the `hello` method using the following code:
+Update the `hello` method with the following code:
 
 ```typescript title="index.ts"
-case 'hello':
-  return getFees().then(fees => {
-    return snap.request({
-      method: 'snap_dialog',
-      params: {
-        type: 'alert',
-        content: panel([
-          text(`Hello, **${origin}**!`),
-          text(`Current gas fee estimates:`),
-          copyable(fees),
-        ]),
-      }
+case "hello":
+    return getFees().then(fees => {
+        return snap.request({
+            method: 'snap_dialog',
+            params: {
+                type: "alert",
+                content: panel([
+                    text(`Hello, **${origin}**!`),
+                    text("Current gas fee estimates:"),
+                    copyable(fees),
+                ]),
+            }
+        });
     });
-  });
 ```
 
 ### 5. Build and test the Snap

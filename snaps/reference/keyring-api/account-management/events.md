@@ -20,9 +20,9 @@ MetaMask returns an error if the account already exists or the account object is
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```
 
@@ -40,9 +40,9 @@ MetaMask returns an error if one of the following is true:
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.AccountUpdated, { account });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```
 
@@ -58,9 +58,9 @@ try {
     emitSnapKeyringEvent(snap, KeyringEvent.AccountDeleted, {
         id: account.id,
     });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```
 
@@ -79,9 +79,9 @@ try {
         id: request.id,
         result,
     });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```
 
@@ -99,8 +99,8 @@ try {
     emitSnapKeyringEvent(snap, KeyringEvent.RequestRejected, {
         id: request.id,
     });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```

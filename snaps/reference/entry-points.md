@@ -45,7 +45,7 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnCronjobHandler } from "@metamask/sdk";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
@@ -68,7 +68,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 module.exports.onCronjob = async ({ request }) => {
     switch (request.method) {
         case "exampleMethodOne":
@@ -113,7 +113,7 @@ A content object displayed using [custom UI](../features/custom-ui.md).
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
@@ -130,7 +130,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
@@ -165,7 +165,7 @@ None.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnInstallHandler } from "@metamask/snaps-sdk";
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
@@ -188,7 +188,7 @@ export const onInstall: OnInstallHandler = async () => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onInstall = async () => {
@@ -237,7 +237,7 @@ An object containing:
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnNameLookupHandler } from "@metamask/snaps-types";
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
@@ -264,7 +264,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 module.exports.onNameLookup = async ({ request }) => {
     const { chainId, address, domain } = request;
   
@@ -316,7 +316,7 @@ A promise containing the return of the implemented method.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
@@ -336,7 +336,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
     case 'hello':
@@ -388,7 +388,7 @@ An object containing:
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -401,9 +401,9 @@ export const onSignature: OnSignatureHandler = async ({
         content: panel([
             heading("My Signature Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
+            ...(insights.map((insight) => text(insight.value))),
         ]),
-        severity: SeverityLevel.Critical
+        severity: SeverityLevel.Critical,
     };
 };
 ```
@@ -411,7 +411,7 @@ export const onSignature: OnSignatureHandler = async ({
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -424,9 +424,9 @@ module.exports.onSignature = async ({
         content: panel([
             heading("My Signature Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
+            ...(insights.map((insight) => text(insight.value))),
         ]),
-        severity: SeverityLevel.Critical
+        severity: SeverityLevel.Critical,
     };
 };
 ```
@@ -467,7 +467,7 @@ for the transaction that `onTransaction` was called with.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -481,8 +481,8 @@ export const onTransaction: OnTransactionHandler = async ({
         content: panel([
             heading("My Transaction Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
-        ])
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
     };
 };
 ```
@@ -490,7 +490,7 @@ export const onTransaction: OnTransactionHandler = async ({
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
@@ -503,8 +503,8 @@ module.exports.onTransaction = async ({
         content: panel([
             heading("My Transaction Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
-        ])
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
     };
 };
 ```
@@ -525,7 +525,7 @@ insight with the severity level `critical`:
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -539,10 +539,10 @@ export const onTransaction: OnTransactionHandler = async ({
         content: panel([
             heading("My Transaction Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
+            ...(insights.map((insight) => text(insight.value))),
         ]),
         // highlight-next-line
-        severity: "critical"
+        severity: "critical",
     };
 };
 ```
@@ -550,7 +550,7 @@ export const onTransaction: OnTransactionHandler = async ({
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
@@ -563,10 +563,10 @@ module.exports.onTransaction = async ({
         content: panel([
             heading("My Transaction Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
+            ...(insights.map((insight) => text(insight.value))),
         ]),
         // highlight-next-line
-        severity: "critical"
+        severity: "critical",
     };
 };
 ```
@@ -593,7 +593,7 @@ None.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnUpdateHandler } from "@metamask/snaps-sdk";
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
@@ -619,7 +619,7 @@ export const onUpdate: OnUpdateHandler = async () => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onUpdate = async () => {

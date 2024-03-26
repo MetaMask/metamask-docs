@@ -147,9 +147,9 @@ export const onSignature: OnSignatureHandler = async ({
         content: panel([
             heading("My Signature Insights"),
             text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value)))
+            ...(insights.map((insight) => text(insight.value))),
         ]),
-        severity: SeverityLevel.Critical
+        severity: SeverityLevel.Critical,
     };
 };
 ```

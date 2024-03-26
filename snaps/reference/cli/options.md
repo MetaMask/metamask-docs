@@ -167,7 +167,7 @@ When set to `true`, WebAssembly files can be imported in the Snap.
 For example:
 
 ```typescript
-import program from './program.wasm';
+import program from "./program.wasm";
 
 // Program is initialized synchronously.
 // ...
@@ -523,7 +523,7 @@ stats: {
     builtIns: {
         ignore: [
             // Built-in modules to ignore.
-        ]
+        ],
     },
 },
 ```

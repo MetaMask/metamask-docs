@@ -25,7 +25,7 @@ You can restrict by method and origin using the `origin` parameter of the
 [`onRpcRequest`](../reference/entry-points.md#onrpcrequest) entry point.
 For example:
 
-```typescript
+```typescript title="index.ts"
 import type { OnRpcRequestHandler, UnauthorizedError } from "@metamask/snaps-sdk";
 
 type MethodPermission = "*" | string[];
@@ -34,7 +34,7 @@ const RPC_PERMISSIONS: Record<string, MethodPermission> = {
     hello: "*",
     secureMethod: [
         "https://metamask.io",
-        "https://www.mydomain.com"
+        "https://www.mydomain.com",
     ]
 };
 
