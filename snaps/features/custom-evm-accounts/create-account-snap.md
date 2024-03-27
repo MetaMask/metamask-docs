@@ -158,7 +158,7 @@ export const onKeyringRequest: OnKeyringRequestHandler = async ({
     origin,
     request,
 }) => {
-    // Your custom logic here.
+    // Add custom logic here.
     return handleKeyringRequest(keyring, request);
 };
 ```
