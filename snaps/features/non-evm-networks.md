@@ -63,15 +63,15 @@ For example, to derive Dogecoin keys:
    [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy).
 2. Dogecoin has coin type `3`, so add the following to the manifest file:
 
-   ```json
+   ```json title="snap.manifest.json"
    {
-     "initialPermissions": {
-       "snap_getBip44Entropy": [
-         {
-           "coinType": 3
-         }
-       ]
-     }
+       "initialPermissions": {
+           "snap_getBip44Entropy": [
+               {
+                   "coinType": 3
+               }
+           ]
+       }
    }
    ```
 
@@ -83,15 +83,15 @@ For example, to derive Dogecoin keys:
 
    To get the second Dogecoin account, add the following code to your Snap:
 
-   ```javascript
-   import { getBIP44AddressKeyDeriver } from '@metamask/key-tree';
+   ```javascript title="index.js"
+   import { getBIP44AddressKeyDeriver } from "@metamask/key-tree";
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'.
    const dogecoinNode = await snap.request({
-     method: 'snap_getBip44Entropy',
-     params: {
-       coinType: 3,
-     },
+       method: "snap_getBip44Entropy",
+       params: {
+           coinType: 3,
+       },
    });
 
    /**

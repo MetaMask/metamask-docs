@@ -45,28 +45,28 @@ To get MetaMask to execute your Snap, you must have a valid manifest file named 
 located in your package root directory.
 The manifest file of `Hello World` would look something like this:
 
-```json
+```json title="snap.manifest.json"
 {
-  "version": "1.0.0",
-  "proposedName": "Hello World",
-  "description": "A Snap that says hello!",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Hello/hello-snap.git"
-  },
-  "source": {
-    "shasum": "w3FltkDjKQZiPwM+AThnmypt0OFF7hj4ycg/kxxv+nU=",
-    "location": {
-      "npm": {
-        "filePath": "dist/bundle.js",
-        "iconPath": "images/icon.svg",
-        "packageName": "hello-snap",
-        "registry": "https://registry.npmjs.org/"
-      }
-    }
-  },
-  "initialPermissions": {},
-  "manifestVersion": "0.1"
+    "version": "1.0.0",
+    "proposedName": "Hello World",
+    "description": "A Snap that says hello!",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Hello/hello-snap.git"
+    },
+    "source": {
+        "shasum": "w3FltkDjKQZiPwM+AThnmypt0OFF7hj4ycg/kxxv+nU=",
+        "location": {
+            "npm": {
+                "filePath": "dist/bundle.js",
+                "iconPath": "images/icon.svg",
+                "packageName": "hello-snap",
+                "registry": "https://registry.npmjs.org/"
+            }
+        }
+    },
+    "initialPermissions": {},
+    "manifestVersion": "0.1"
 }
 ```
 

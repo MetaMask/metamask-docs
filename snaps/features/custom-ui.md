@@ -24,7 +24,7 @@ Then, whenever you're required to return a custom UI component, import the compo
 SDK and build your UI with them.
 For example, to display a [`panel`](#panel) using [`snap_dialog`](../reference/snaps-api.md#snap_dialog):
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -51,7 +51,7 @@ Hovering the address shows the full value in a tooltip.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, address } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -81,7 +81,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { text, copyable } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -106,7 +106,7 @@ Outputs a horizontal divider.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, divider, text } from "@metamask/snaps-sdk";
 
@@ -132,7 +132,7 @@ This is useful for [`panel`](#panel) titles.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -160,7 +160,7 @@ The SVG is rendered within an `<img>` tag, which prevents JavaScript or interact
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text, image } from "@metamask/snaps-sdk";
 
@@ -186,7 +186,7 @@ This component takes an array of custom UI components.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -217,7 +217,7 @@ The label must be a string. The value can be a child component of type
 
 #### Example
 
-```javascript 
+```javascript title="index.js"
 import { panel, row, text, address } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -242,7 +242,7 @@ Outputs a loading indicator.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, spinner } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -267,7 +267,7 @@ Outputs text.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -291,7 +291,7 @@ module.exports.onHomePage = async () => {
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -316,7 +316,7 @@ await snap.request({
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, text } from "@metamask/snaps-sdk";
 
@@ -341,7 +341,7 @@ Text-based components (such as [`heading`](#heading) and [`text`](#text)) accept
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({

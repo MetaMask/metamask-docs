@@ -28,7 +28,7 @@ For example:
         "files": [
             "./files/myfile.bin"
         ]
-     }
+    }
 }
 ```
 
@@ -38,7 +38,7 @@ In your Snap code, load static files using [`snap_getFile`](../reference/snaps-a
 This method returns a string in the encoding specified, with a default of Base64 if no encoding is specified.
 For example:
 
-```javascript title="snap/src/index.js"
+```javascript title="index.js"
 const contents = await snap.request({
     method: "snap_getFile",
     params: {
@@ -47,6 +47,6 @@ const contents = await snap.request({
     },
 });
 
-// `0x...`
+// "0x..."
 console.log(contents);
 ```

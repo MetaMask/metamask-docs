@@ -48,16 +48,16 @@ Specify the following [permissions](../../how-to/request-permissions.md) in your
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:keyring": {
-    "allowedOrigins": [
-      "https://<dapp domain>"
-    ]
-  },
-  "endowment:rpc": {
-    "dapps": true
-  },
-  "snap_manageAccounts": {},
-  "snap_manageState": {}
+    "endowment:keyring": {
+        "allowedOrigins": [
+            "https://<dapp domain>"
+        ]
+    },
+    "endowment:rpc": {
+        "dapps": true
+    },
+    "snap_manageAccounts": {},
+    "snap_manageState": {}
 },
 ```
 
@@ -71,7 +71,7 @@ Make sure to [limit the methods exposed to dapps](security.md#limit-the-methods-
 
 ```typescript
 class MySnapKeyring implements Keyring {
-  // Implement the required methods here...
+    // Implement the required methods here.
 }
 ```
 
@@ -87,16 +87,16 @@ The following is an example of a `personal_sign` request:
 
 ```json
 {
-  "id": "d6e23af6-4bea-48dd-aeb0-7d3c30ea67f9",
-  "scope": "",
-  "account": "69438371-bef3-4957-9f91-c3f22c1d75f3",
-  "request": {
-    "method": "personal_sign",
-    "params": [
-      "0x4578616d706c652060706572736f6e616c5f7369676e60206d657373616765",
-      "0x5874174dcf1ab6F7Efd8496f4f09404CD1c5bA84"
-    ]
-  }
+    "id": "d6e23af6-4bea-48dd-aeb0-7d3c30ea67f9",
+    "scope": "",
+    "account": "69438371-bef3-4957-9f91-c3f22c1d75f3",
+    "request": {
+        "method": "personal_sign",
+        "params": [
+            "0x4578616d706c652060706572736f6e616c5f7369676e60206d657373616765",
+            "0x5874174dcf1ab6F7Efd8496f4f09404CD1c5bA84"
+        ]
+    }
 }
 ```
 
@@ -140,9 +140,9 @@ For example, when an account is created:
 ```typescript
 try {
     emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
-    // Update your Snap's state...
+    // Update your Snap's state.
 } catch (error) {
-    // Handle the error...
+    // Handle the error.
 }
 ```
 
@@ -155,11 +155,11 @@ to MetaMask and your dapp:
 
 ```typescript
 export const onKeyringRequest: OnKeyringRequestHandler = async ({
-  origin,
-  request,
+    origin,
+    request,
 }) => {
-  // Your custom logic here...
-  return handleKeyringRequest(keyring, request);
+    // Add custom logic here.
+    return handleKeyringRequest(keyring, request);
 };
 ```
 
