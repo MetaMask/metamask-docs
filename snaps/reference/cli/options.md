@@ -173,6 +173,34 @@ import program from "./program.wasm";
 // ...
 ```
 
+### `features`
+
+#### `features.images`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+features: {
+    images: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+features: {
+    images: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables [image support](../../features/custom-ui.md#image).
+The default is `true`.
+
 ### `input`
 
 <Tabs>
