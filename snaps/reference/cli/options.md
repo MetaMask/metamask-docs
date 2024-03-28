@@ -167,11 +167,39 @@ When set to `true`, WebAssembly files can be imported in the Snap.
 For example:
 
 ```typescript
-import program from './program.wasm';
+import program from "./program.wasm";
 
 // Program is initialized synchronously.
 // ...
 ```
+
+### `features`
+
+#### `features.images`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+features: {
+    images: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+features: {
+    images: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables [image support](../../features/custom-ui.md#image).
+The default is `true`.
 
 ### `input`
 
@@ -523,7 +551,7 @@ stats: {
     builtIns: {
         ignore: [
             // Built-in modules to ignore.
-        ]
+        ],
     },
 },
 ```

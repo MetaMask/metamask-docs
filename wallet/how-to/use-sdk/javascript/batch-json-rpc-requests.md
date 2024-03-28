@@ -7,7 +7,7 @@ tags:
 
 # Batch JSON-RPC requests
 
-You can batch multiple JSON-RPC requests using [MetaMask SDK](../concepts/sdk/index.md).
+You can batch multiple JSON-RPC requests using [MetaMask SDK](../../../concepts/sdk/index.md).
 
 The SDK's `metamask_batch` method enables you to batch multiple JSON-RPC requests in a single call,
 providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
@@ -29,7 +29,7 @@ enhancing the user experience and operational efficiency.
 
 ## Prerequisites
 
-[Set up MetaMask SDK](../how-to/use-sdk/javascript/index.md) in your JavaScript dapp.
+[Set up MetaMask SDK](index.md) in your JavaScript dapp.
 
 ## Use the `metamask_batch` method
 
@@ -53,28 +53,28 @@ The following is an example of using `metamask_batch` to batch
 import { metamask_batch } from "metamask-sdk";
 
 function MyComponent() {
-  const handleBatchRequest = async () => {
-    const batchRequests = [
-      { method: "personal_sign", params: ["message", "address"] },
-      {
-        method: "eth_sendTransaction",
-        params: [
-          {
-            /* transaction parameters */
-          },
-        ],
-      },
-    ];
+    const handleBatchRequest = async () => {
+        const batchRequests = [
+            { method: "personal_sign", params: ["message", "address"] },
+            {
+                method: "eth_sendTransaction",
+                params: [
+                    {
+                        /* transaction parameters */
+                    },
+                ],
+            },
+        ];
+    
+        try {
+            const results = await metamask_batch(batchRequests);
+            console.log(results); // Process results
+        } catch (error) {
+            console.error("Batch request failed", error);
+        }
+    };
 
-    try {
-      const results = await metamask_batch(batchRequests);
-      console.log(results); // Process results
-    } catch (error) {
-      console.error("Batch request failed", error);
-    }
-  };
-
-  return <button onClick={handleBatchRequest}>Send Batch Request</button>;
+    return <button onClick={handleBatchRequest}>Send Batch Request</button>;
 }
 ```
 
@@ -89,28 +89,28 @@ The following is an example of using `metamask_batch` to batch
 import { metamask_batch } from "metamask-sdk";
 
 export default {
-  methods: {
-    async sendBatchRequest() {
-      const batchRequests = [
-        { method: "personal_sign", params: ["message", "address"] },
-        {
-          method: "eth_sendTransaction",
-          params: [
-            {
-              /* transaction parameters */
-            },
-          ],
-        },
-      ];
-
-      try {
-        const results = await metamask_batch(batchRequests);
-        console.log(results);
-      } catch (error) {
-        console.error("Error in batch request", error);
-      }
+    methods: {
+        async sendBatchRequest() {
+            const batchRequests = [
+                { method: "personal_sign", params: ["message", "address"] },
+                {
+                    method: "eth_sendTransaction",
+                    params: [
+                        {
+                            /* transaction parameters */
+                        },
+                    ],
+                },
+            ];
+      
+            try {
+                const results = await metamask_batch(batchRequests);
+                console.log(results);
+            } catch (error) {
+                console.error("Error in batch request", error);
+            }
+        }
     }
-  }
 }
 </script>
 ```

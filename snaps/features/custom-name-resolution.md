@@ -30,12 +30,12 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 
 ### 2. Implement custom name resolution
 
-Export an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
+Expose an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
 `chainId` and either a `domain` or an `address`.
 The following example implements a very basic resolution from Unstoppable Domains domain names to
 Ethereum addresses in `onNameLookup`:
 
-```typescript title="snap/src/index.ts"
+```typescript title="index.ts"
 import type { OnNameLookupHandler } from "@metamask/snaps-types";
 
 const UNSTOPPABLE_API_KEY = "xxx";
@@ -47,7 +47,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
         const response = await fetch(`https://api.unstoppabledomains.com/resolve/domains/${domain}`, {
             headers: {
                 accept: "application/json",
-                authorization: `Bearer ${UNSTOPPABLE_API_KEY}`
+                authorization: `Bearer ${UNSTOPPABLE_API_KEY}`,
             },
         });
         const data = await response.json();

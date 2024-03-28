@@ -28,13 +28,13 @@ An object with functions that can be used to interact with the Snap.
 #### Example
 
 ```javascript
-import { installSnap } from '@metamask/snaps-jest';
+import { installSnap } from "@metamask/snaps-jest";
 
-describe('MySnap', () => {
-  it('should do something', async () => {
-    await installSnap(/* optional Snap ID */);
-    // ...
-  });
+describe("MySnap", () => {
+    it("should do something", async () => {
+        await installSnap(/* optional Snap ID */);
+        // ...
+    });
 });
 ```
 
@@ -54,24 +54,23 @@ which can be checked using [Jest matchers](#jest-matchers).
 #### Example
 
 ```javascript
-import { installSnap } from '@metamask/snaps-jest';
+import { installSnap } from "@metamask/snaps-jest";
 
-describe('MySnap', () => {
-  it('should respond to foo with bar', async () => {
-    const { request } = await installSnap(/* optional snap ID */);
-    const response = await request({
-      origin: 'http://localhost:8080',
-      method: 'foo',
-      params: [],
+describe("MySnap", () => {
+    it("should respond to foo with bar", async () => {
+        const { request } = await installSnap(/* optional snap ID */);
+        const response = await request({
+            origin: "http://localhost:8080",
+            method: "foo",
+            params: [],
+        });
+    
+        /* Check the response using Jest matchers. Since the response is a standard JSON-RPC response,
+         * you can use any standard Jest matchers to check it, including snapshot matchers. */
+        expect(response).toRespondWith("bar");
+        expect(response).not.toRespondWithError("baz");
+        expect(response).toMatchSnapshot();
     });
-
-    /* Check the response using Jest matchers. Since the response
-     * is a standard JSON-RPC response, you can use any standard
-     * Jest matchers to check it, including snapshot matchers. */
-    expect(response).toRespondWith('bar');
-    expect(response).not.toRespondWithError('baz');
-    expect(response).toMatchSnapshot();
-  });
 });
 ```
 
@@ -106,23 +105,23 @@ An object with the user interface that was shown by the Snap, in the
 #### Example
 
 ```javascript
-import { installSnap } from '@metamask/snaps-jest';
-import { panel, text } from '@metamask/snaps-sdk';
+import { installSnap } from "@metamask/snaps-jest";
+import { panel, text } from "@metamask/snaps-sdk";
 
-describe('MySnap', () => {
-  it('should return insights', async () => {
-    const { onTransaction } = await installSnap(/* optional Snap ID */);
-    const response = await onTransaction({
-      value: '0x0',
-      data: '0x',
-      gasLimit: '0x5208',
-      maxFeePerGas: '0x5208',
-      maxPriorityFeePerGas: '0x5208',
-      nonce: '0x0',
+describe("MySnap", () => {
+    it("should return insights", async () => {
+        const { onTransaction } = await installSnap(/* optional Snap ID */);
+        const response = await onTransaction({
+            value: "0x0",
+            data: "0x",
+            gasLimit: "0x5208",
+            maxFeePerGas: "0x5208",
+            maxPriorityFeePerGas: "0x5208",
+            nonce: "0x0",
+        });
+    
+        expect(response).toRender(panel([text("Hello, world!")]));
     });
-
-    expect(response).toRender(panel([text('Hello, world!')]));
-  });
 });
 ```
 
@@ -145,20 +144,20 @@ which can be checked using [Jest matchers](#jest-matchers).
 #### Example
 
 ```javascript
-import { installSnap } from '@metamask/snaps-jest';
+import { installSnap } from "@metamask/snaps-jest";
 
-describe('MySnap', () => {
-  it('should end foo cronjobs with response bar', async () => {
-    const { onCronjob } = await installSnap(/* optional snap ID */);
-    const response = await onCronjob({
-      method: 'foo',
-      params: [],
+describe("MySnap", () => {
+    it("should end foo cronjobs with response bar", async () => {
+        const { onCronjob } = await installSnap(/* optional snap ID */);
+        const response = await onCronjob({
+            method: "foo",
+            params: [],
+        });
+    
+        // Check the response using Jest matchers.
+        expect(response).toRespondWith("bar");
+        expect(response).not.toRespondWithError("baz");
     });
-
-    // Check the response using Jest matchers
-    expect(response).toRespondWith('bar');
-    expect(response).not.toRespondWithError('baz');
-  });
 });
 ```
 
@@ -170,16 +169,16 @@ takes no arguments, and returns a promise that resolves to the response from the
 entry point.
 
 ```js
-import { installSnap } from '@metamask/snaps-jest';
-import { panel, text } from '@metamask/snaps-sdk';
+import { installSnap } from "@metamask/snaps-jest";
+import { panel, text } from "@metamask/snaps-sdk";
 
-describe('MySnap', () => {
-  it('should render the home page', async () => {
-    const { onHomePage } = await installSnap(/* optional snap ID */);
-    const response = await onHomePage();
-
-    expect(response).toRender(panel([text('Hello, world!')]));
-  });
+describe("MySnap", () => {
+    it("should render the home page", async () => {
+        const { onHomePage } = await installSnap(/* optional snap ID */);
+        const response = await onHomePage();
+    
+        expect(response).toRender(panel([text("Hello, world!")]));
+    });
 });
 ```
 
@@ -197,33 +196,32 @@ be used to interact with the user interface.
 #### Example
 
 ```javascript
-import { installSnap } from '@metamask/snaps-jest';
-import { text } from '@metamask/snaps-sdk';
-import { assert } from '@metamask/utils';
+import { installSnap } from "@metamask/snaps-jest";
+import { text } from "@metamask/snaps-sdk";
+import { assert } from "@metamask/utils";
 
-describe('MySnap', () => {
-  it('should render an alert with hello world', async () => {
-    const { request } = await installSnap(/* optional Snap ID */);
-
-    // Note: You cannot resolve the promise yet!
-    const response = request({
-      method: 'foo',
+describe("MySnap", () => {
+    it("should render an alert with hello world", async () => {
+        const { request } = await installSnap(/* optional Snap ID */);
+    
+        // Note: You cannot resolve the promise yet!
+        const response = request({
+            method: "foo",
+        });
+    
+        const ui = await response.getInterface();
+    
+        // This is useful if you're using TypeScript, since it infers the type of the user interface.
+        assert(ui.type === "alert");
+        expect(ui).toRender(text("Hello, world!"));
+    
+        // Select the OK button.
+        await ui.ok();
+    
+        // Now you can resolve the promise.
+        const result = await response;
+        expect(result).toRespondWith("bar");
     });
-
-    const ui = await response.getInterface();
-
-    // This is useful if you're using TypeScript, since it infers the type
-    // of the user interface.
-    assert(ui.type === 'alert');
-    expect(ui).toRender(text('Hello, world!'));
-
-    // "Click" the OK button.
-    await ui.ok();
-
-    // Now you can resolve the promise.
-    const result = await response;
-    expect(result).toRespondWith('bar');
-  });
 });
 ```
 
@@ -256,7 +254,7 @@ This server serves the execution environment, simulator, and the Snap bundle dur
 The server options are:
 
 - `enabled` - Enables or disables the built-in HTTP server.
-  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap), e.g. `installSnap('local:http://my-server')`.
+  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap), e.g. `installSnap("local:http://my-server")`.
   The default is `true`.
 - `port` - The port to use for the built-in HTTP server.
   The default is a random available (unprivileged) port.
@@ -267,14 +265,14 @@ The server options are:
 
 #### Example
 
-```javascript
+```javascript title="jest.config.js"
 module.exports = {
-  preset: '@metamask/snaps-jest',
-  testEnvironmentOptions: {
-    server: {
-      port: 8080,
-      root: '/path/to/snap/files',
+    preset: "@metamask/snaps-jest",
+    testEnvironmentOptions: {
+        server: {
+            port: 8080,
+            root: "/path/to/snap/files",
+        },
     },
-  },
 };
 ```

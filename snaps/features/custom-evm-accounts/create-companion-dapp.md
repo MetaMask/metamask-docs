@@ -45,7 +45,7 @@ Create a `KeyringSnapRpcClient`:
 
 ```ts
 import { KeyringSnapRpcClient } from "@metamask/keyring-api";
-import { defaultSnapOrigin as snapId } from '../config';
+import { defaultSnapOrigin as snapId } from "../config";
 
 let client = new KeyringSnapRpcClient(snapId, window.ethereum);
 ```

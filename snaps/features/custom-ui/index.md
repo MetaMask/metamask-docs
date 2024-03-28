@@ -24,7 +24,7 @@ Then, whenever you're required to return a custom UI component, import the compo
 SDK and build your UI with them.
 For example, to display a [`panel`](#panel) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -51,7 +51,7 @@ Hovering the address shows the full value in a tooltip.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, address } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -133,7 +133,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { text, copyable } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -158,7 +158,7 @@ Outputs a horizontal divider.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, divider, text } from "@metamask/snaps-sdk";
 
@@ -236,7 +236,7 @@ This is useful for [`panel`](#panel) titles.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -257,23 +257,34 @@ module.exports.onHomePage = async () => {
 ### `image`
 
 Outputs an image. 
-This component takes an inline SVG. 
-It does not support remote URLs. 
-You can embed JPG or PNG in SVG using data URIs. 
-The SVG is rendered within an `<img>` tag, which prevents JavaScript or interaction events from being supported.
+This component takes an inline SVG.
+It does not support remote URLs.
+
+You can import SVG, PNG, and JPEG files using an import statement.
+These files are automatically imported as SVG strings, so you can pass them directly to the `image` component.
+
+The SVG is rendered within an `<img>` tag, which prevents JavaScript or interaction events from
+being supported.
+
+:::note
+To disable image support, set the [`features.images`](../reference/cli/options.md#featuresimages)
+configuration option to `false`.
+The default is `true`.
+:::
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text, image } from "@metamask/snaps-sdk";
+import svgIcon from "./path/to/icon.svg";
 
 module.exports.onHomePage = async () => {
     return {
         content: panel([
             heading("Hello world!"),
             text("Welcome to my Snap home page!"),
-            image("<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'><path d='m2.514 17.874 9 5c.021.011.043.016.064.026s.051.021.078.031a.892.892 0 0 0 .688 0c.027-.01.052-.019.078-.031s.043-.015.064-.026l9-5A1 1 0 0 0 22 16.9L21 7V2a1 1 0 0 0-1.625-.781L14.649 5h-5.3L4.625 1.219A1 1 0 0 0 3 2v4.9l-1 10a1 1 0 0 0 .514.974ZM5 7V4.081l3.375 2.7A1 1 0 0 0 9 7h6a1 1 0 0 0 .625-.219L19 4.079V7.1l.934 9.345L13 20.3v-2.967l1.42-.946A1.3 1.3 0 0 0 15 15.3a1.3 1.3 0 0 0-1.3-1.3h-3.4A1.3 1.3 0 0 0 9 15.3a1.3 1.3 0 0 0 .58 1.084l1.42.946v2.97l-6.94-3.855Zm3.5 6a2 2 0 1 1 2-2 2 2 0 0 1-2 2Zm5-2a2 2 0 1 1 2 2 2 2 0 0 1-2-2Z'/></svg>"),
+            image(svgIcon),
         ]),
     };
 };
@@ -340,6 +351,11 @@ await snap.request({
 <img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+:::note
+See the [`@metamask/images-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/images)
+package for a full example of implementing images.
+:::
+
 ### `panel`
 
 Outputs a panel, which can be used as a container for other components. 
@@ -347,7 +363,7 @@ This component takes an array of custom UI components.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -378,7 +394,7 @@ The label must be a string. The value can be a child component of type
 
 #### Example
 
-```javascript 
+```javascript title="index.js"
 import { panel, row, text, address } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -403,7 +419,7 @@ Outputs a loading indicator.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, spinner } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -428,7 +444,7 @@ Outputs text.
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
@@ -452,7 +468,7 @@ module.exports.onHomePage = async () => {
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -477,7 +493,7 @@ await snap.request({
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, text } from "@metamask/snaps-sdk";
 
@@ -502,7 +518,7 @@ Text-based components (such as [`heading`](#heading) and [`text`](#text)) accept
 
 #### Example
 
-```javascript
+```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -523,8 +539,9 @@ await snap.request({
 
 ## Examples
 
-See the [`@metamask/dialog-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/dialogs),
-[`@metamask/transaction-insight-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/transaction-insights),
-and
-[`@metamask/home-page-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/home-page)
-packages for full examples of implementing custom UI.
+See the following packages for full examples of implementing custom UI:
+
+- [`@metamask/dialog-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/dialogs)
+- [`@metamask/transaction-insight-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/transaction-insights)
+- [`@metamask/home-page-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/home-page)
+- [`@metamask/images-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/images)
