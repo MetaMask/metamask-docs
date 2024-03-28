@@ -382,8 +382,8 @@ An object containing:
 #### Returns
 
 - An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`.
-- A content object displayed using [custom UI](../features/custom-ui.md) after the user selects
-  the **Sign** button.
+- A content object displayed using [custom UI](../features/custom-ui/index.md) after the user
+  selects the **Sign** button.
   Due to current limitations of MetaMask's signature confirmation UI, the content will only be displayed if
   the `severity` property is present and set to `SeverityLevel.Critical`.
 
@@ -675,7 +675,7 @@ To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, 
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnUserInputHandler } from "@metamask/snaps-sdk";
 import { UserInputEventType } from "@metamask/snaps-sdk";
 
@@ -689,7 +689,7 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 const { UserInputEventType } = require("@metamask/snaps-sdk");
 
 module.exports.onUserInput = async ({ id, event }) => {

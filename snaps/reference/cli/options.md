@@ -198,7 +198,7 @@ features: {
 </TabItem>
 </Tabs>
 
-Enables or disables [image support](../../features/custom-ui.md#image).
+Enables or disables [image support](../../features/custom-ui/index.md#image).
 The default is `true`.
 
 ### `input`
