@@ -46,7 +46,7 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/sdk";
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
     switch (request.method) {
@@ -106,7 +106,11 @@ None.
 
 #### Returns
 
-A content object displayed using [custom UI](../features/custom-ui.md).
+One of the following:
+
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md).
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+  [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
 
@@ -238,7 +242,7 @@ An object containing:
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnNameLookupHandler } from "@metamask/snaps-types";
+import type { OnNameLookupHandler } from "@metamask/snaps-sdk";
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
     const { chainId, address, domain } = request;
@@ -378,8 +382,8 @@ An object containing:
 #### Returns
 
 - An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`.
-- A content object displayed using [custom UI](../features/custom-ui.md) after the user selects
-  the **Sign** button.
+- A content object displayed using [custom UI](../features/custom-ui/index.md) after the user
+  selects the **Sign** button.
   Due to current limitations of MetaMask's signature confirmation UI, the content will only be displayed if
   the `severity` property is present and set to `SeverityLevel.Critical`.
 
@@ -459,8 +463,12 @@ An object containing:
 
 #### Returns
 
-A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
-for the transaction that `onTransaction` was called with.
+One of the following:
+
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
+  for the transaction that `onTransaction` was called with.
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+  [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
 
@@ -638,6 +646,56 @@ module.exports.onUpdate = async () => {
             ]),
         },
     });
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onUserInput`
+
+:::flaskOnly
+:::
+
+To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, a Snap must export `onUserInput`.
+
+#### Parameters
+
+- `id` - The ID of the interface being acted on.
+- `event` - An event object containing:
+  - `type` - The type of the event.
+    Possible values are `ButtonClickEvent`, `FormSubmitEvent`, or `InputChangeEvent`.
+    These enums are exported from the `@metamask/snaps-sdk` module.
+  - `name` - The name of the component that fired the event.
+    Optional when the event type is `ButtonClickEvent`.
+  - `value` - When the event type is `FormSubmitEvent`, the values in the form as an object.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnUserInputHandler } from "@metamask/snaps-sdk";
+import { UserInputEventType } from "@metamask/snaps-sdk";
+
+export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
+    if (event.type === UserInputEventType.FormSubmitEvent) {
+        console.log("The submitted form values are", event.value);
+    }
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+const { UserInputEventType } = require("@metamask/snaps-sdk");
+
+module.exports.onUserInput = async ({ id, event }) => {
+    if (event.type === UserInputEventType.FormSubmitEvent) {
+        console.log("The submitted form values are", event.value);
+    }
 };
 ```
 

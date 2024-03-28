@@ -31,7 +31,9 @@ Displays an alert that can only be acknowledged.
 An object containing the contents of the alert dialog:
 
 - `type` - The type of dialog (`"alert"`).
-- `content` - The content of the alert, as a [custom UI](../features/custom-ui.md) component.
+- One of:
+  - `content` - The content of the alert, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Example
 
@@ -61,7 +63,9 @@ Displays a confirmation that can be accepted or rejected.
 An object containing the contents of the confirmation dialog:
 
 - `type` - The type of dialog (`"confirmation"`).
-- `content` - The content of the confirmation, as a [custom UI](../features/custom-ui.md) component.
+- One of:
+  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Returns
 
@@ -97,8 +101,10 @@ Displays a prompt where the user can enter a text response.
 An object containing the contents of the prompt dialog:
 
 - `type` - The type of dialog (`"prompt"`).
-- `content` - The content of the prompt, as a [custom UI](../features/custom-ui.md) component.
 - `placeholder` - Text that will be in the input field when nothing is typed.
+- One of:
+  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
+  - `id` - The ID of an [interactive interface](#snap_createinterface).
 
 #### Returns
 
@@ -861,4 +867,153 @@ await snap.request({
         message: "Hello, world!",
     },
 });
+```
+
+## Interactive UI methods
+
+The following methods are used in [interactive UI](../features/custom-ui/interactive-ui.md).
+These methods do not require requesting permission in the Snap manifest file.
+
+### `snap_createInterface`
+
+:::flaskOnly
+:::
+
+Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+
+#### Returns
+
+The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
+[`onTransaction`](./entry-points.md#ontransaction) or [`onHomePage`](./entry-points.md#onhomepage).
+
+#### Example
+
+```js title="index.js"
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: panel([
+            heading("Interactive interface"),
+            button({
+                value: "Click me",
+                name: "interactive-button",
+            }),
+        ])
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId
+    }
+});
+```
+
+### `snap_getInterfaceState`
+
+:::flaskOnly
+:::
+
+Gets the state of an interactive interface by its ID.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+- `id` - The ID of the interface.
+
+#### Returns
+
+An object where each top-level property can be one of the following:
+
+- The `name` of an [`input`](../features/custom-ui/index.md#input) with its current value.
+- The `name` of a [`form`](../features/custom-ui/index.md#form), with a nested object containing the
+  current values of all [`inputs`](../features/custom-ui/index.md#input) in the form.
+
+#### Example
+
+```js title="index.js"
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: panel([
+            heading("Interactive UI Example Snap"),
+            // A top-level input.
+            input({
+                name: "top-level-input",
+                placeholder: "Enter something",
+            }),
+            // A top-level form...
+            form({
+                name: "example-form",
+                children: [
+                    // ...with a nested input.
+                    input({
+                        name: "nested-input",
+                        placeholder: "Enter something",
+                    }),
+                    button("Submit", ButtonType.Submit, "submit"),
+                ],
+            }),
+        ]),
+    },
+});
+
+const state = await snap.request({
+    method: "snap_getInterfaceState",
+    params: {
+        id: interfaceId,
+    },
+});
+
+console.log(state);
+/*
+{
+    "top-level-input": "What the user typed in that field",
+    "example-form": {
+        "nested-input": "What the user typed in that field"
+    }
+}
+*/
+```
+
+### `snap_updateInterface`
+
+:::flaskOnly
+:::
+
+Updates an interactive interface.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `id` - The ID of the interface to be updated, usually received in the
+  [`onUserInput`](./entry-points.md#onuserinput) entry point.
+- `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+
+#### Example
+
+```js title="index.js"
+export function onUserInput({ id, event }) {
+    console.log("Received input event", event);
+  
+    await snap.request({
+        method: "snap_updateInterface",
+        params: {
+            id,
+            ui: panel([
+                heading("New interface"),
+            ]),
+        },
+    });
+};
 ```

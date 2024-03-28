@@ -5,13 +5,13 @@ sidebar_position: 1
 
 # Custom UI
 
-You can display custom user interface (UI) components using the 
+You can display custom user interface (UI) components using the
 [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) module with
 the following methods and entry points:
 
-- [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
-- [`onTransaction`](../reference/entry-points.md#ontransaction) 
-- [`onHomePage`](../reference/entry-points.md#onhomepage)
+- [`snap_dialog`](../../reference/snaps-api.md#snap_dialog)
+- [`onTransaction`](../../reference/entry-points.md#ontransaction) 
+- [`onHomePage`](../../reference/entry-points.md#onhomepage)
 
 To use custom UI, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)
 using the following command:
@@ -22,7 +22,7 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK and build your UI with them.
-For example, to display a [`panel`](#panel) using [`snap_dialog`](../reference/snaps-api.md#snap_dialog):
+For example, to display a [`panel`](#panel) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.js"
 import { panel, heading, text } from "@metamask/snaps-sdk";
@@ -68,12 +68,64 @@ await snap.request({
 
 <div class="row">
     <div class="column">
-        <img src={require("../assets/custom-ui-address.png").default} alt="Address UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+        <img src={require("../../assets/custom-ui-address.png").default} alt="Address UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+        <img src={require("../../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
+
+### `button`
+
+:::flaskOnly
+:::
+
+Outputs a button that the user can select.
+For use in [interactive UI](interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `value`: `string` - The text of the button.
+- `buttonType`: `string` - (Optional) Possible values are `button` or `submit`.
+  The default is `button`.
+- `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  when a user selects the button.
+- `variant` - (Optional) Determines the appearance of the button.
+  Possible values are `primary` or `secondary`.
+  The default is `primary`.
+
+#### Example
+
+```javascript
+import { button, panel, heading } from "@metamask/snaps-sdk";
+
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: panel([
+            heading("Interactive interface"),
+            button({
+                value: "Click me",
+                name: "interactive-button",
+            }),
+        ]),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ### `copyable`
 
@@ -97,7 +149,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-copyable.png").default} alt="Copyable UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-copyable.png").default} alt="Copyable UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `divider`
@@ -122,7 +174,59 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-divider.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-divider.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+### `form`
+
+:::flaskOnly
+:::
+
+Outputs a form for use in [interactive UI](interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  when a user interacts with the form.
+- `children`: `array` - An array of [`input`](#input) or [`button`](#button) components.
+
+#### Example
+
+```js
+import { input, button, form } from "@metamask/snaps-sdk";
+
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: form({
+            name: "form-to-fill",
+            children: [
+                input({
+                    name: "user-name",
+                    placeholder: "Your name",
+                }),
+                button({
+                    value: "Submit",
+                    buttonType: "submit",
+                }),
+            ],
+        }),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `heading`
@@ -147,7 +251,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-heading.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `image`
@@ -163,7 +267,7 @@ The SVG is rendered within an `<img>` tag, which prevents JavaScript or interact
 being supported.
 
 :::note
-To disable image support, set the [`features.images`](../reference/cli/options.md#featuresimages)
+To disable image support, set the [`features.images`](../../reference/cli/options.md#featuresimages)
 configuration option to `false`.
 The default is `true`.
 :::
@@ -187,7 +291,64 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-image.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-image.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+### `input`
+
+:::flaskOnly
+:::
+
+Outputs an input component for use in [interactive UI](interactive-ui.md).
+
+#### Parameters
+
+An object containing:
+
+- `name`: `string` - The name that will be used as a key to the event sent to
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+- `inputType`: `string` - (Optional) Type of input.
+  Possible values are `text`, `number`, or `password`.
+  The default is `text`.
+- `placeholder`: `string` - (Optional) The text displayed when the input is empty.
+- `label`: `string` (Optional) The text displayed alongside the input to label it.
+- `value`: `string` (Optional) The default value of the input.
+
+#### Example
+
+```js
+import { input, form } from "@metamask/snaps-sdk";
+
+const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+        ui: form({
+            name: "form-to-fill",
+            children: [
+                input({
+                    name: "user-name",
+                    placeholder: "Your name",
+                }),
+                button({
+                    value: "Submit",
+                    buttonType: "submit",
+                }),
+            ],
+        }),
+    },
+});
+
+await snap.request({
+    method: "snap_dialog",
+    params: {
+        type: "Alert",
+        id: interfaceId,
+    },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 :::note
@@ -222,7 +383,7 @@ module.exports.onTransaction = async ({ transaction }) => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-panel.png").default} alt="Panel UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-panel.png").default} alt="Panel UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `row`
@@ -249,7 +410,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `spinner`
@@ -274,7 +435,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-spinner.gif").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-spinner.gif").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `text`
@@ -298,7 +459,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-heading.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Markdown
@@ -323,7 +484,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-markdown.png").default} alt="Markdown UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-markdown.png").default} alt="Markdown UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Links
@@ -348,7 +509,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-links.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-links.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Emojis
@@ -373,7 +534,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../assets/custom-ui-emojis.png").default} alt="Emojis UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-emojis.png").default} alt="Emojis UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Examples
