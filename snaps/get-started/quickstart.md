@@ -3,7 +3,7 @@ description: Get started quickly using the create-snap starter kit.
 sidebar_position: 2
 ---
 
-import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
 # Snaps quickstart
 
