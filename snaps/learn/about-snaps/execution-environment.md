@@ -15,9 +15,8 @@ default `snap` global and MetaMask's `ethereum` global.
 
 The execution environment is designed to:
 
-- Prevent Snaps from influencing any other running code, including MetaMask itself.
-  That is, it prevents all Snaps from polluting the global environment and malicious Snaps from
-  stealing from users.
+- Prevent Snaps from polluting the global environment.
+- Prevent malicious Snaps from stealing from users.
 - Prevent Snaps from accessing sensitive JavaScript global APIs (such as `fetch`) without permission.
 - Be "fully virtualizable," or platform-independent.
 
