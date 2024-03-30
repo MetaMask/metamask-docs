@@ -50,9 +50,8 @@ The following globals are also available:
 - `URL`
 
 :::info note
-To use the `Buffer` global, or a Node.js built-in module such as `crypto` or `path`, you
-must [provide a fallback](https://webpack.js.org/configuration/resolve/#resolvefallback) using the
-[`customizeWebpackConfig`](../../reference/cli/options.md#customizewebpackconfig) configuration option.
+To use Node.js built-in modules such as `crypto` and `path`, set the
+[`polyfills`](../../reference/cli/options.md#polyfills) option to `true`.
 :::
 
 ## Secure ECMAScript (SES)
