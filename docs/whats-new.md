@@ -11,6 +11,12 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2024
 
+- Documented [Snaps `polyfills` configuration option](/snaps/reference/cli/options/#polyfills).
+  ([#1238](https://github.com/MetaMask/metamask-docs/pull/1238))
+- Documented [Snaps interactive UI](/snaps/features/custom-ui/interactive-ui).
+  ([#1166](https://github.com/MetaMask/metamask-docs/pull/1166))
+- Documented [Snaps improved image support](/snaps/features/custom-ui/#image).
+  ([#1236](https://github.com/MetaMask/metamask-docs/pull/1236))
 - Documented [Snaps signature insights](/snaps/features/signature-insights).
   ([#1228](https://github.com/MetaMask/metamask-docs/pull/1228))
 - Documented [how to restrict a Snap's RPC API methods](https://github.com/MetaMask/metamask-docs/pull/1223).
@@ -62,7 +68,14 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1129](https://github.com/MetaMask/metamask-docs/pull/1129))
 - Added [Snaps architecture diagrams](/snaps/learn/about-snaps).
   ([#1123](https://github.com/MetaMask/metamask-docs/pull/1123))
+- Documented [Snaps unecrypted state](/snaps/reference/snaps-api/#snap_managestate).
+  ([#1124](https://github.com/MetaMask/metamask-docs/pull/1124))
 - Documented [`snap_getClientStatus`](/snaps/reference/snaps-api/#snap_getclientstatus).
   ([#1119](https://github.com/MetaMask/metamask-docs/pull/1119))
+- Restructured and improved [Wallet documentation](/wallet) and introduced "Wallet API" terminology.
+  ([#1114](https://github.com/MetaMask/metamask-docs/pull/1114) and
+  [#1125](https://github.com/MetaMask/metamask-docs/pull/1125))
 - Documented [how to detect multiple wallets using EIP-6963](/wallet/how-to/connect).
   ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
+- Documented [how to communicate errors in Snaps](/snaps/how-to/communicate-errors).
+  ([#1117](https://github.com/MetaMask/metamask-docs/pull/1117))
