@@ -212,15 +212,16 @@ You can update the fields in `snap.manifest.json` to match your custom Snap:
 - `proposedName` - The name of your Snap.
   This replaces **TYPESCRIPT EXAMPLE SNAP** in the transaction insights UI.
 - `description` - The description of your Snap.
-- `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
   If you decided to publish your Snap to npm, update the `location` to its published location.
 
-Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`packages/snap/package.json` even if you don't plan to publish your Snap to `npm`.
+Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
+`packages/snap/package.json` even if you don't plan to publish your Snap to npm.
 
-:::note
-The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
+:::caution important
+The `version` and `repository` fields in `snap.manifest.json` inherit the values from
+`package.json` and overwrite them in `snap.manifest.json`.
+We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
 You should also add an icon by following the steps outlined in the 
@@ -230,4 +231,4 @@ Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such 
 template **Send Hello** button.
 
 After you've made all necessary changes, you can
-[publish your Snap to `npm`](../../how-to/publish-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../../how-to/publish-a-snap.md).

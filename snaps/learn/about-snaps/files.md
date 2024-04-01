@@ -75,23 +75,30 @@ The manifest tells MetaMask important information about your Snap, such as where
 reproduce the `source.shasum` value), and what
 [permissions the Snap requests](../../how-to/request-permissions.md) (using `initialPermissions`).
 
-:::note
-Currently, Snaps can only be
-[published to the official npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry),
-and the manifest must also match the corresponding fields of the `package.json` file.
-In the future, developers will be able to distribute Snaps in different ways, and the manifest will
-expand to support different publishing solutions.
-
-The [Snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md)
-details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
-:::
-
 You might need to modify some manifest fields manually.
 For example, if you change the location of the icon SVG file, you must update
 `source.location.npm.iconPath` to match.
 You can also use the [Snaps CLI](../../reference/cli/subcommands.md) to update some fields for you.
 For example, running [`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) or
 [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) updates `source.shasum`.
+
+:::caution important
+Some manifest fields must match the corresponding fields of the `/snap/package.json` file.
+
+When updating the `version` and `repository` fields, the Snap inherits the values from `package.json`
+and overwrites them in `snap.manifest.json`.
+We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
+
+The [Snaps publishing specification](https://github.com/MetaMask/SIPs/blob/main/SIPS/sip-9.md)
+details the requirements of both `snap.manifest.json` and its relationship to `package.json`.
+:::
+
+:::note
+Currently, Snaps can only be
+[published to the official npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+In the future, developers will be able to distribute Snaps in different ways, and the manifest will
+expand to support different publishing solutions.
+:::
 
 ## Configuration file
 
