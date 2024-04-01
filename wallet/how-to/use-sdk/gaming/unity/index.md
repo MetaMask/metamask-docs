@@ -21,7 +21,6 @@ The following video demonstrates how to install and use the MetaMask Unity SDK.
 
 <YoutubeEmbed url='https://www.youtube.com/embed/0D1cIH-PZtI' />
 
-
 ## Steps
 
 ### 1. Configure build settings
