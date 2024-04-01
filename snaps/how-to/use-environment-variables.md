@@ -62,7 +62,7 @@ Snaps CLI:
             SNAP_ENV: process.env.SNAP_ENV,
             PUBLIC_KEY: process.env.PUBLIC_KEY,
         },
-        // Other options
+        // Other options.
     };
     ```
    
@@ -79,7 +79,7 @@ Snaps CLI:
             SNAP_ENV: process.env.SNAP_ENV,
             PUBLIC_KEY: process.env.PUBLIC_KEY,
         },
-        // Other options
+        // Other options.
     };
     
     export default config;
@@ -92,7 +92,7 @@ Snaps CLI:
     For example:
 
     ```typescript title="index.ts"
-    import { panel, text, heading } from '@metamask/snaps-sdk';
+    import { panel, text, heading } from "@metamask/snaps-sdk";
     
     await snap.request({
         method: "snap_dialog",
@@ -100,7 +100,7 @@ Snaps CLI:
             type: "alert",
             content: panel([
                 heading("This custom alert is just for display purposes."),
-                text("SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}"),
+                text(`SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`),
             ]),
         },
     });

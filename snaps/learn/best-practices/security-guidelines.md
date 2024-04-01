@@ -76,12 +76,11 @@ The following are guidelines for user notifications and authorizations:
     const referrer = new URL(origin);
 
     if(referrer.protocol === "https:" && 
-       (referrer.host.endsWith(".metamask.io") || 
-        referrer.host === "metamask.io")) { 
-      console.log("URL is valid"); 
+        (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")) { 
+            console.log("URL is valid"); 
     }
     else { 
-      console.log("URL is NOT valid"); 
+        console.log("URL is NOT valid"); 
     }
     ```
     
@@ -142,19 +141,19 @@ The following are guidelines for validating RPC parameters and handling values:
   confirmation flow.
 
 - **Use `copyable` for safe disclosures** - When displaying arbitrary content in a Snap dialog, such
-  as for signing a message, use the [`copyable`](../../features/custom-ui.md#copyable) user
+  as for signing a message, use the [`copyable`](../../features/custom-ui/index.md#copyable) user
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
   For example: 
 
-  ![Example not using copyable with Markdown rendering](../../assets/copyable-example-1.png)
+  <img src={require("../../assets/copyable-example-1.png").default} alt="Example not using copyable with Markdown rendering" style={{border: "1px solid #DCDCDC"}} />
 
   The special characters `*` and `_` render Markdown formatting, so what the user sees does not
   match the content.
   To avoid this, use `copyable` instead:
 
-  ![Example using copyable with clean rendering](../../assets/copyable-example-2.png)
+  <img src={require("../../assets/copyable-example-2.png").default} alt="Example using copyable with clean rendering" style={{border: "1px solid #DCDCDC"}} />
 
   `copyable` does not render Markdown and has the added benefit that the user can select to copy the content.
   Also, the formatting provides a visual delineator to separate arbitrary input or fields from user

@@ -70,6 +70,7 @@ root.render(
                     name: "Example React UI Dapp",
                     url: window.location.href,
                 },
+                infuraAPIKey: process.env.INFURA_API_KEY,
                 // Other options
             }}
         >
@@ -81,15 +82,14 @@ root.render(
 
 For the full list of options you can set for `sdkOptions`, see the
 [JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
+Important options include:
 
-:::note Important SDK options
-- Use [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) to display information
+- [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../display/custom-modals.md).
-- Use [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../make-read-only-requests.md) from your dapp.
-:::
+- [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
+  [make read-only RPC requests](../make-read-only-requests.md) from your dapp.
+- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
+  the displayed modals](../display-custom-modals.md).
 
 ### 4. Use the SDK
 
@@ -150,6 +150,7 @@ root.render(
                     name: "Example React UI Dapp",
                     url: window.location.href,
                 },
+                infuraAPIKey: process.env.INFURA_API_KEY,
                 // Other options
             }}
         >

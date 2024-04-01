@@ -18,7 +18,7 @@ manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_dialog": {}
+    "snap_dialog": {}
 }
 ```
 
@@ -38,28 +38,28 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:cronjob": {
-    "jobs": [
-      {
-        "expression": "* * * * *",
-        "request": {
-          "method": "exampleMethodOne",
-          "params": {
-            "param1": "foo"
-          }
-        }
-      },
-      {
-        "expression": "*/2 * * * *",
-        "request": {
-          "method": "exampleMethodTwo",
-          "params": {
-            "param1": "bar"
-          }
-        }
-      }
-    ]
-  }
+    "endowment:cronjob": {
+        "jobs": [
+            {
+                "expression": "* * * * *",
+                "request": {
+                    "method": "exampleMethodOne",
+                    "params": {
+                        "param1": "foo"
+                    }
+                }
+            },
+            {
+                "expression": "*/2 * * * *",
+                "request": {
+                    "method": "exampleMethodTwo",
+                    "params": {
+                        "param1": "bar"
+                    }
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -74,7 +74,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:ethereum-provider": {}
+    "endowment:ethereum-provider": {}
 }
 ```
 
@@ -88,13 +88,13 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../features/custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+You can use any [custom UI components](../features/custom-ui/index.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:page-home": {}
+    "endowment:page-home": {}
 }
 ```
 
@@ -113,9 +113,9 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:keyring": {
-    "allowedOrigins": ["https://<dapp domain>"]
-  }
+    "endowment:keyring": {
+        "allowedOrigins": ["https://<dapp domain>"]
+    }
 }
 ```
 
@@ -135,7 +135,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:lifecycle-hooks": {}
+    "endowment:lifecycle-hooks": {}
 }
 ```
 
@@ -168,13 +168,13 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:name-lookup": {
-    "chains": ["eip155:1"],
-    "matchers": {
-      "tlds": ["crypto"],
-      "schemes": ["farcaster"]
+    "endowment:name-lookup": {
+        "chains": ["eip155:1"],
+        "matchers": {
+            "tlds": ["crypto"],
+            "schemes": ["farcaster"]
+        }
     }
-  }
 },
 ```
 
@@ -197,7 +197,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:network-access": {}
+    "endowment:network-access": {}
 }
 ```
 
@@ -229,10 +229,10 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": {
-    "dapps": true,
-    "snaps": false
-  }
+    "endowment:rpc": {
+        "dapps": true,
+        "snaps": false
+    }
 }
 ```
 
@@ -245,13 +245,13 @@ Specify this caveat in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": { 
-    "allowedOrigins": [
-      "metamask.io", 
-      "consensys.io",
-      "npm:@metamask/example-snap"
-    ] 
-  }
+    "endowment:rpc": { 
+        "allowedOrigins": [
+            "metamask.io", 
+            "consensys.io",
+            "npm:@metamask/example-snap"
+        ] 
+    }
 }
 ```
 
@@ -280,10 +280,35 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:transaction-insight": {
-    "allowTransactionOrigin": true
-  }
+    "endowment:transaction-insight": {
+        "allowTransactionOrigin": true
+    }
 }
+```
+
+### `endowment:signature-insight`
+
+:::flaskOnly
+:::
+
+To provide [signature insights](../features/signature-insights.md), a Snap must request the
+`endowment:signature-insight` permission.
+This permission grants a Snap read-only access to raw signature payloads, before they're accepted
+for signing by the user, by exposing the [`onSignature`](./entry-points.md#onsignature) entry point.
+
+This permission requires an object with an `allowSignatureOrigin` property to signal if the Snap
+should pass the `signatureOrigin` property as part of the `onSignature` parameters.
+This property represents the signature initiator origin.
+The default is `false`.
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+    "endowment:signature-insight": {
+        "allowSignatureOrigin": true
+    }
+},
 ```
 
 ### `endowment:webassembly`
@@ -295,7 +320,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:webassembly": {}
+    "endowment:webassembly": {}
 }
 ```
 
@@ -310,9 +335,9 @@ For example:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:transaction-insight": {
-    "maxRequestTime": 10000
-  }
+    "endowment:transaction-insight": {
+        "maxRequestTime": 10000
+    }
 }
 ```
 
@@ -338,19 +363,17 @@ Calling `eth_requestAccounts` requires the
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:ethereum-provider": {}
+    "endowment:ethereum-provider": {}
 }
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-await ethereum.request({
-  "method": "eth_requestAccounts"
-});
+```js title="index.js"
+await ethereum.request({ "method": "eth_requestAccounts" });
 ```
 
 </TabItem>
@@ -365,18 +388,18 @@ The following is an example `eth_accounts` permission:
 
 ```json
 {
-  "id": "47vm2UUi1pccNAeYKGmwF", // example
-  "parentCapability": "eth_accounts",
-  "invoker": "npm:SNAP_ID",
-  "caveats": [
-    {
-      "type": "restrictReturnedAccounts",
-      "value": [
-        "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
-      ]
-    }
-  ],
-  "date": 1692616452846
+    "id": "47vm2UUi1pccNAeYKGmwF",
+    "parentCapability": "eth_accounts",
+    "invoker": "npm:SNAP_ID",
+    "caveats": [
+        {
+            "type": "restrictReturnedAccounts",
+            "value": [
+                "0xc403b37bf1e700cb214ea1be9de066824b420de6"
+            ]
+        }
+    ],
+    "date": 1692616452846
 }
 ```
 

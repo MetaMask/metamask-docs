@@ -23,9 +23,18 @@ following to the manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_dialog": {}
+    "snap_dialog": {}
 }
 ```
+
+:::note
+All Snaps API methods except the following interactive UI methods require requesting permission in
+the manifest file:
+
+- [`snap_createInterface`](../reference/snaps-api.md#snap_createinterface)
+- [`snap_getInterfaceState`](../reference/snaps-api.md#snap_getinterfacestate)
+- [`snap_updateInterface`](../reference/snaps-api.md#snap_updateInterface)
+:::
 
 ### Endowments
 
@@ -39,7 +48,7 @@ permission, add the following to the manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:network-access": {}
+    "endowment:network-access": {}
 }
 ```
 
@@ -62,20 +71,20 @@ The following example calls `wallet_requestSnaps` to request permission to conne
 ```js title="index.js"
 // If the Snap is not already installed, the user will be prompted to install it.
 await window.ethereum.request({
-  method: 'wallet_requestSnaps',
-  params: {
-    // Assuming the Snap is published to npm using the package name 'hello-snap'.
-    'npm:hello-snap': {},
-  },
+    method: "wallet_requestSnaps",
+    params: {
+        // Assuming the Snap is published to npm using the package name "hello-snap".
+        "npm:hello-snap": {},
+    },
 });
 
-// Invoke the 'hello' JSON-RPC method exposed by the Snap.
+// Invoke the "hello" JSON-RPC method exposed by the Snap.
 const response = await window.ethereum.request({
-  method: 'wallet_invokeSnap',
-  params: { snapId: 'npm:hello-snap', request: { method: 'hello' } },
+    method: "wallet_invokeSnap",
+    params: { snapId: "npm:hello-snap", request: { method: "hello" } },
 });
 
-console.log(response); // 'world!'
+console.log(response); // "world!"
 ```
 
 :::note

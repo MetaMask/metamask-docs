@@ -28,20 +28,20 @@ For example:
 
     ```ts
     const account: KeyringAccount = {
-      id: uuid(),
-      options: {
-        privateKey: '0x01234...78', // !!! DO NOT DO THIS !!!
-      },
-      address,
-      methods: [
-        EthMethod.PersonalSign,
-        EthMethod.Sign,
-        EthMethod.SignTransaction,
-        EthMethod.SignTypedDataV1,
-        EthMethod.SignTypedDataV3,
-        EthMethod.SignTypedDataV4,
-      ],
-      type: EthAccountType.Eoa,
+        id: uuid(),
+        options: {
+            privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
+        },
+        address,
+        methods: [
+            EthMethod.PersonalSign,
+            EthMethod.Sign,
+            EthMethod.SignTransaction,
+            EthMethod.SignTypedDataV1,
+            EthMethod.SignTypedDataV3,
+            EthMethod.SignTypedDataV4,
+        ],
+        type: EthAccountType.Eoa,
     };
     ```
 
@@ -51,14 +51,14 @@ For example:
     
     ```ts
     await snap.request({
-      method: 'snap_manageState',
-      params: {
-        operation: 'update',
-        newState: {
-          // Your Snap's state here...
-          privateKey: '0x01234...78',
+        method: "snap_manageState",
+        params: {
+            operation: "update",
+            newState: {
+                // Your Snap's state here.
+                privateKey: "0x01234...78",
+            },
         },
-      },
     });
     ```
 
@@ -68,8 +68,8 @@ By default, MetaMask enforces the following restrictions on calling
 [Account Management API](../../reference/keyring-api/account-management/index.md) methods on your Snap based on
 the caller origin:
 
-| Method                                                                                                       |  MetaMask origin   |    Dapp origin     |
-|:-------------------------------------------------------------------------------------------------------------|:------------------:|:------------------:|
+| Method                                                                                                               |  MetaMask origin   |    Dapp origin     |
+|:---------------------------------------------------------------------------------------------------------------------|:------------------:|:------------------:|
 | [`keyring_listAccounts`](../../reference/keyring-api/account-management/index.md#keyring_listaccounts)               | :white_check_mark: | :white_check_mark: |
 | [`keyring_getAccount`](../../reference/keyring-api/account-management/index.md#keyring_getaccount)                   | :white_check_mark: | :white_check_mark: |
 | [`keyring_createAccount`](../../reference/keyring-api/account-management/index.md#keyring_createaccount)             |        :x:         | :white_check_mark: |
@@ -101,16 +101,16 @@ The following is an example of implementing such logic:
 
 ```ts
 const permissions: Record<string, string[]> = {
-  'https://<Dapp 1 domain>': [
-    // List of allowed methods for Dapp 1.
-  ],
-  'https://<Dapp 2 domain>': [
-    // List of allowed methods for Dapp 2.
-  ],
+    "https://<Dapp 1 domain>": [
+        // List of allowed methods for Dapp 1.
+    ],
+    "https://<Dapp 2 domain>": [
+        // List of allowed methods for Dapp 2.
+    ],
 };
 
-if (origin !== 'metamask' && !permissions[origin]?.includes(request.method)) {
-  // Reject the request.
+if (origin !== "metamask" && !permissions[origin]?.includes(request.method)) {
+    // Reject the request.
 }
 ```
 
@@ -124,14 +124,14 @@ redirected to a malicious website.
 
 ```ts
 async submitRequest(request: KeyringRequest): Promise<SubmitRequestResponse> {
-  // Your Snap's custom logic...
-  return {
-    pending: true,
-    redirect: {
-      message: 'Please continue in the dapp.',
-      url: 'https://<dapp domain>/sign?tx=1234', // !!! ENSURE THIS IS A SAFE URL !!!
-    },
-  };
+    // Your Snap's custom logic.
+    return {
+        pending: true,
+        redirect: {
+            message: "Please continue in the dapp.",
+            url: "https://<dapp domain>/sign?tx=1234", // !!! ENSURE THIS IS A SAFE URL !!!
+        },
+    };
 }
 ```
 
@@ -160,20 +160,20 @@ For example:
 - ❌ **Do NOT do this:**
 
   ```ts
-  // If `inputSecretValue` contains invalid hexadecimal characters, its value
-  // will be added to the error thrown by `toBuffer`.
+  // If inputSecretValue contains invalid hexadecimal characters, its value
+  // will be added to the error thrown by toBuffer.
   const privateKey = toBuffer(inputSecretValue);
-  // Use `privateKey` here...
+  // Use privateKey here.
   ```
 
 - ✅ **Do this instead:**
 
   ```ts
   try {
-    const privateKey = toBuffer(inputSecretValue);
-    // Use `privateKey` here...
+      const privateKey = toBuffer(inputSecretValue);
+      // Use privateKey here.
   } catch (error) {
-    throw new Error('Invalid private key');
+      throw new Error("Invalid private key");
   }
   ```
 
@@ -190,11 +190,11 @@ For example:
 
   ```ts
   export const onRpcRequest: OnRpcRequestHandler = async ({
-    //           ~~~           ~~~
-    origin,
-    request,
+      //         ~~~           ~~~
+      origin,
+      request,
   }) => {
-    return handleKeyringRequest(keyring, request);
+      return handleKeyringRequest(keyring, request);
   };
   ```
 
@@ -202,12 +202,12 @@ For example:
 
   ```ts
   export const onKeyringRequest: OnKeyringRequestHandler = async ({
-    //           ~~~~~~~           ~~~~~~~
-    origin,
-    request,
+      //         ~~~~~~~           ~~~~~~~
+      origin,
+      request,
   }) => {
-    // Any custom logic or extra security checks here...
-    return handleKeyringRequest(keyring, request);
+      // Any custom logic or extra security checks here.
+      return handleKeyringRequest(keyring, request);
   };
   ```
 

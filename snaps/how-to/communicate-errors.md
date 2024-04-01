@@ -16,18 +16,18 @@ To throw these known errors, first import them from the
 then throw them where needed.
 For example:
 
-```typescript
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { MethodNotFoundError } from '@metamask/snaps-sdk';
+```typescript title="index.ts"
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { MethodNotFoundError } from "@metamask/snaps-sdk";
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
-  switch (request.method) {
-    case 'hello':
-      return 'Hello World!';
+    switch (request.method) {
+        case "hello":
+            return "Hello World!";
     default:
-      // Throw a known error to avoid crashing the Snap
-      throw new MethodNotFoundError();
-  }
+        // Throw a known error to avoid crashing the Snap.
+        throw new MethodNotFoundError();
+    }
 };
 ```
 
@@ -37,7 +37,7 @@ The error class constructors exported by `@metamask/snaps-sdk` have the followin
 
 ```typescript
 class SnapJsonRpcError extends SnapError {
-  new (message?: string, data?: Record<string, Json>)
+    new (message?: string, data?: Record<string, Json>)
 }
 ```
 

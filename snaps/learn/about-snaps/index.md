@@ -65,7 +65,7 @@ For each Snap, the user can:
 - See its execution status (running, stopped, or crashed).
 - Enable and disable the Snap.
 
-Other than the settings page, a Snap can [modify the MetaMask UI](../../features/custom-ui.md) only
+Other than the settings page, a Snap can [modify the MetaMask UI](../../features/custom-ui/index.md) only
 by [displaying a dialog](../../reference/snaps-api.md#snap_dialog) or
 [displaying transaction insights](../../reference/entry-points.md#ontransaction).
 
