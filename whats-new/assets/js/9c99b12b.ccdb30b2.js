@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[6076],{80780:t=>{t.exports=JSON.parse('{"title":"How to","slug":"/how-to","permalink":"/whats-new/wallet/how-to","navigation":{"previous":{"title":"Introduction","permalink":"/whats-new/wallet/"},"next":{"title":"Connect to MetaMask","permalink":"/whats-new/wallet/how-to/connect/"}}}')}}]);
