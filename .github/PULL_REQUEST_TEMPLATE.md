@@ -12,7 +12,7 @@ Closes #
     - Entries should be added in reverse chronological order, with the most recent updates at the top of the page.
     - Adhere to a consistent format for each entry to ensure the 'What's New?' page is easy to read and navigate
     
-    Follow these guidelines when adding an etrie to the "What's New" page :
+    Follow these guidelines when adding an entry to the "What's New" page :
     - **Title**: Provide a clear and concise title for the feature or change.
     - **Description**: Offer a brief explanation of the change, focusing on the user or system impact.
     - **Link**: Include a link to the PR and detailed documentation for further reading.
