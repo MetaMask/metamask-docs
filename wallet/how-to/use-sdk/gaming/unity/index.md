@@ -20,7 +20,7 @@ The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 The following video demonstrates how to install and use the MetaMask Unity SDK.
 
 <p align="center">
-  <ReactPlayer url='https://www.youtube.com/embed/0D1cIH-PZtI' />
+  <YoutubeEmbed url='https://www.youtube.com/embed/0D1cIH-PZtI' />
 </p>
 
 ## Steps

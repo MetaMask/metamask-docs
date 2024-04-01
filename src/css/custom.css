@@ -164,6 +164,21 @@ video {
   height: auto;
 }
 
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Makes the video responsive */
+.video-container video {
+  width: 100%; 
+  max-width: 300px; 
+  height: auto;
+}
+
 /* Reset SVG to be inline by default */
 svg {
   display: inline;
