@@ -6,7 +6,7 @@ tags:
   - Unity SDK
 ---
 
-import ReactPlayer from 'react-player/lazy'
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
 # Use MetaMask SDK with Unity
 
