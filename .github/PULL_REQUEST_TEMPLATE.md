@@ -1,18 +1,20 @@
-Closes #
+# PR description
 
-## Changes proposed
+<!-- Provide a description of what your PR changes. -->
 
-- <Briefly describe the changes made in th is pull request>
+## Issue(s) fixed
+
+<!-- Include the issue number that this PR fixes -->
+
+Fixes #
+
+## Preview
+
+<!-- Provide a PR preview link to the page(s) changed. -->
 
 ## Checklist
+
+Complete this checklist before merging your PR:
+
+- [ ] If this PR contains a major change to the documentation content, I have added an entry to the top of the ["What's new?"](https://github.com/MetaMask/metamask-docs/blob/main/docs/whats-new.md) page.
 - [ ] The proposed changes have been reviewed and approved by a member of the documentation team.
-- [ ] The proposed changes have been thoroughly tested and verified for correctness and accuracy. 
-- [ ] I have added an entry to the ["What's New?"](https://docs.metamask.io/whats-new/) page to reflect the proposed changes. 
-    
-### Updating "What's New"
-Update the "What's New?" page with significant changes such as new features, improvements, bug fixes, and significant updates. Add entries in reverse chronological order, placing the latest updates at the top, and maintain a consistent format for each entry to enhance readability and navigation of the page.
-Follow these guidelines when adding an entry to the "What's New" page :
-    - [ ] **Title**: Provide a clear and concise title for the feature or change.
-    - [ ] **Description**: Offer a brief explanation of the change, focusing on the user or system impact.
-    - [ ] **Link**: Include a link to the PR and detailed documentation for further reading.
-   
