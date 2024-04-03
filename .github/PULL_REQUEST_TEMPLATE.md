@@ -1,6 +1,6 @@
 # Description
 
-<!-- Describe the changes made in your pull request (PR).-->
+<!-- Describe the changes made in your pull request (PR). -->
 
 ## Issue(s) fixed
 
