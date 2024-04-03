@@ -1,10 +1,10 @@
-# PR description
+# Description
 
-<!-- Provide a description of what your PR changes. -->
+<!-- Describe the changes made in your pull request (PR).-->
 
 ## Issue(s) fixed
 
-<!-- Include the issue number that this PR fixes -->
+<!-- Include the issue number that this PR fixes. -->
 
 Fixes #
 
