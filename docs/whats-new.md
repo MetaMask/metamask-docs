@@ -68,7 +68,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1129](https://github.com/MetaMask/metamask-docs/pull/1129))
 - Added [Snaps architecture diagrams](/snaps/learn/about-snaps).
   ([#1123](https://github.com/MetaMask/metamask-docs/pull/1123))
-- Documented [Snaps unecrypted state](/snaps/reference/snaps-api/#snap_managestate).
+- Documented [Snaps unencrypted state](/snaps/reference/snaps-api/#snap_managestate).
   ([#1124](https://github.com/MetaMask/metamask-docs/pull/1124))
 - Documented [`snap_getClientStatus`](/snaps/reference/snaps-api/#snap_getclientstatus).
   ([#1119](https://github.com/MetaMask/metamask-docs/pull/1119))
