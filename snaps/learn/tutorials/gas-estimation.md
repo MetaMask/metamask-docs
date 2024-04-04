@@ -246,15 +246,16 @@ You can also update the fields in `snap.manifest.json` to match your custom Snap
 
 - `proposedName` - The name of your Snap.
 - `description` - The description of your Snap.
-- `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
   If you decided to publish your Snap to `npm`, update the `location` to its published location.
 
-Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you do not plan to publish your Snap to [`npm`](https://www.npmjs.com/).
+Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
+`/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 
-:::tip
-The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
+:::caution important
+The `version` and `repository` fields in `snap.manifest.json` inherit the values from
+`package.json` and overwrite them in `snap.manifest.json`.
+We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
 You can update the content of `/packages/site/src/pages/index.tsx` by changing the
