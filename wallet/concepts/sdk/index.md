@@ -56,7 +56,7 @@ to MetaMask Mobile using a QR code.
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/public-videos/sdk-desktop.mp4" type="video/mp4" />
+    <source src="../public-videos/sdk-desktop.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -96,7 +96,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="../../public-videos/sdk-ios.mp4" type="video/mp4" />
+    <source src=../../public-videos/sdk-ios.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -116,7 +116,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="/public-videos/sdk-android.mp4" type="video/mp4" />
+    <source src="../../../../public-videos/sdk-android.mp4" type="video/mp4" />
   </video>
 </p>
 
