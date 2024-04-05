@@ -96,7 +96,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="../../../public-videos/sdk-ios.mp4" type="video/mp4" />
+    <source src="../../public-videos/sdk-ios.mp4" type="video/mp4" />
   </video>
 </p>
 
