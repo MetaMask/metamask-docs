@@ -104,13 +104,13 @@ const chainId = 1;
 
 ```json
 {
-  "low":{
+  "low": {
     "suggestedMaxPriorityFeePerGas": "0.05",
     "suggestedMaxFeePerGas": "16.334026964",
     "minWaitTimeEstimate": 15000,
     "maxWaitTimeEstimate": 30000
   },
-  "medium":{
+  "medium": {
     "suggestedMaxPriorityFeePerGas": "0.1",
     "suggestedMaxFeePerGas": "22.083436402",
     "minWaitTimeEstimate": 15000,
@@ -120,19 +120,19 @@ const chainId = 1;
     "suggestedMaxPriorityFeePerGas": "0.3",
     "suggestedMaxFeePerGas": "27.982845839",
     "minWaitTimeEstimate": 15000,
-    "maxWaitTimeEstimate" :60000
+    "maxWaitTimeEstimate": 60000
   },
   "estimatedBaseFee": "16.284026964",
   "networkCongestion" :0.5125,
-  "latestPriorityFeeRange":[
+  "latestPriorityFeeRange": [
     "0",
     "3"
   ],
-  "historicalPriorityFeeRange":[
+  "historicalPriorityFeeRange": [
     "0.000000001",
     "89"
   ],
-  "historicalBaseFeeRange":[
+  "historicalBaseFeeRange": [
     "13.773088584",
     "29.912845463"
   ],
