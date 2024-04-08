@@ -76,7 +76,7 @@ This happens for all actions that need user approval.
 
 <p align="center">
   <video width="300" controls>
-    <source src="sdk-mobile-browser.mp4" type="video/mp4" />
+    <source src="/static/video/sdk-mobile-browser.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -134,7 +134,7 @@ scan with their MetaMask Mobile app.
 
 <p align="center">
   <video width="625" controls>
-    <source src="sdk-nodejs.mp4" type="video/mp4" />
+    <source src="/static/video/sdk-nodejs.mp4" type="video/mp4" />
   </video>
 </p>
 
@@ -153,7 +153,7 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
 
 <div class="video-container">
   <video controls>
-    <source src="sdk-unity.mp4" type="video/mp4" />
+    <source src="/static/video/sdk-unity.mp4" type="video/mp4" />
   </video>
 </div>
 

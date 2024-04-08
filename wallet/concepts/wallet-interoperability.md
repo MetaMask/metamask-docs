@@ -15,7 +15,7 @@ provided from each installed wallet:
 
 <p align="center">
   <video width="100%" controls>
-    <source src="../assets/video/eip-6963.mp4" />
+    <source src="../static/video/eip-6963.mp4" />
   </video>
 </p>
 

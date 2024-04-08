@@ -23,7 +23,7 @@ This is useful for various purposes such as authentication and transaction verif
 
 <p align="center">
   <video width="350" controls>
-    <source src="../../../../public-videos/connect-and-sign.mp4" type="video/mp4" />
+    <source src="../../../../static/video/connect-and-sign.mp4" type="video/mp4" />
   </video>
 </p>
 
