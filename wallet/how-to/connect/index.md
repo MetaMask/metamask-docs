@@ -140,27 +140,19 @@ const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent['detail'
 };
 
 export function listProviders(element: HTMLDivElement) {
-
   window.addEventListener('eip6963:announceProvider',
-    // Event handler function: second argument called to perform work when the event occurs. 
     (event: EIP6963AnnounceProviderEvent) => {
       const button = document.createElement('button');
-
-      // use string interpolation to set the button's innerHTML
+    
       button.innerHTML = `
         <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
         <div>${event.detail.info.name}</div>`;
-      
-      // Add an onClick event listener to the button that calls the `connectWithProvider` function
+    
       button.onclick = () => connectWithProvider(event.detail);
       element.appendChild(button);
     }
   );
 
-  /*
-    dispatch custom event on `window` object used to notify other parts of the dapp that a provider 
-    is being requested, and any event listeners set up to listen for this event, respond accordingly.
-  */
   window.dispatchEvent(new Event("eip6963:requestProvider"));
 }
 ```
@@ -173,8 +165,7 @@ And we are directly passing the `event.detail` object to the `connectWithProvide
 
 The `connectWithProvider` is then called when the button is clicked.
 
-This method seems to be more straightforward and less error-prone as it directly passes the required data without 
-attempting to stringify data objects which led to circular reference errors due to the object's structure. 
+We `dispatchEvent` on `window` to notify other parts of the dapp that a provider is being requested, and that any event listeners set up to listen for this event, respond accordingly.
 
 ### Example
 
