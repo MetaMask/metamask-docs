@@ -167,10 +167,17 @@ The `connectWithProvider` is then called when the button is clicked.
 
 We `dispatchEvent` on `window` to notify other parts of the dapp that a provider is being requested, and that any event listeners set up to listen for this event, respond accordingly.
 
+At this point you could run `npm run dev` to test the Vite project in a browser.
+
 ### Example
 
 See the [EIP-6963 TypeScript implementation](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
 for cloning a runnable example.
+
+```bash title="Run the code"
+git clone https://github.com/MetaMask/vite-vanilla-ts-eip-6963 && cd vite-vanilla-ts-eip-6963 &&
+npm i && npm run dev
+```
 
 ### Vite + React and TypeScript Steps
 
