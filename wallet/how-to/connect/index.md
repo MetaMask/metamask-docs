@@ -39,33 +39,37 @@ The following steps describe how to connect to MetaMask from a React dapp.
 ### Prerequisites
 
 - Review and understand the [EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces).
-- [Set up a Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
+- [Set up a Vite Vanilla TypeScript project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
+
+```bash title="vite-env.d.ts"
+npm create vite@latest vite-ts-6963 -- --template vanilla-ts
+```
 
 ### Steps
 
 #### 1. Set up the project
 
-In your Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
+In a Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
+
+interface EIP6963ProviderInfo {
+  rdns: string;
+  uuid: string;
+  name: string;
+  icon: string;
+}
 
 interface EIP6963ProviderDetail {
   info: EIP6963ProviderInfo;
   provider: EIP1193Provider;
 }
 
-interface EIP6963ProviderInfo {
-  walletId: string;
-  uuid: string;
-  name: string;
-  icon: string;
-}
-
 type EIP6963AnnounceProviderEvent = {
-  detail: {
+  detail:{
     info: EIP6963ProviderInfo,
-    provider: EIP1193Provider
+    provider: Readonly<EIP1193Provider>
   }
 }
 
@@ -84,127 +88,94 @@ In addition to the EIP-6963 interfaces, you need the `EIP1193Provider` interface
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for
 Ethereum wallet providers.
 
-This interface represents the essential properties and methods for interacting with dapps.
+This `EIP1193Provider` interface represents the essential properties and methods for interacting with dapps.
 :::
 
-#### 2. Add React Hooks
+#### 2. Update Main.ts 
 
-Create a `hooks` directory and add the following two files:
+Create a `div` to manipulate with our JavaScript
 
-```tsx title="useSyncProviders.tsx"
-import { useSyncExternalStore } from "react";
-import { store } from "./store";
+```tsx title="main.ts"
+import './style.css'
+import { listProviders } from './providers.ts'
 
-export const useSyncProviders = () => useSyncExternalStore(store.subscribe, store.value, store.value)
+document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  <div>
+    <div id="providerButtons"></div>
+  </div>
+`
+
+listProviders(document.querySelector<HTMLDivElement>('#providerButtons')!)
 ```
 
-```tsx title="store.tsx"
+The `querySelector` is used to select an element with the id of `app` and set its innerHTML 
+to include a div (or place) that we can inject our provider buttons into after discovering which wallet providers exits.
+
+The `listProviders` function is what we will create next and we need to pass an argument which represents the div element
+This function will be responsible for connecting to the specific provider using `eth_requestAccounts`
+then using appendChild to add each button to the element within the div with the id of `providerButtons`
+
+#### 3. Our JavaScript/TypeScript Functions
+
+Create a TypeScript file in the `src/` directory named `providers.ts`
+
+```ts title="providers.ts"
 declare global {
   interface WindowEventMap {
-    "eip6963:announceProvider": CustomEvent
+    "eip6963:announceProvider": CustomEvent;
   }
 }
 
-let providers: EIP6963ProviderDetail[] = []
-
-export const store = {
-  value: ()=>providers,
-  subscribe: (callback: ()=>void)=>{
-    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
-      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
-        providers = [...providers, event.detail]
-        callback()
-      }
-    window.addEventListener("eip6963:announceProvider", onAnnouncement);
-    window.dispatchEvent(new Event("eip6963:requestProvider"));
-    
-    return ()=>window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent['detail']) => {
+  try {
+    await wallet.provider
+      .request({ method: 'eth_requestAccounts' })
+  } catch (error) {
+    console.error("Failed to connect to provider:", error);
   }
-}
-```
+};
 
-#### 3. Detect and connect to wallets
+export function listProviders(element: HTMLDivElement) {
 
-Create a component in the `src/components` directory with the following code:
+  window.addEventListener('eip6963:announceProvider',
+    // Event handler function: second argument called to perform work when the event occurs. 
+    (event: EIP6963AnnounceProviderEvent) => {
+      const button = document.createElement('button');
 
-```tsx title="DiscoverWalletProviders.tsx"
-import { useState } from 'react'
-import { useSyncProviders } from '../hooks/useSyncProviders'
-import { formatAddress } from '~/utils'
-
-export const DiscoverWalletProviders = () => {
-  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
-  const [userAccount, setUserAccount] = useState<string>('')
-  const providers = useSyncProviders()
-  
-  const handleConnect = async(providerWithInfo: EIP6963ProviderDetail)=> {
-    const accounts = await providerWithInfo.provider
-      .request({method:'eth_requestAccounts'})
-      .catch(console.error)
+      // use string interpolation to set the button's innerHTML
+      button.innerHTML = `
+        <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
+        <div>${event.detail.info.name}</div>`;
       
-    if(accounts?.[0]){
-      setSelectedWallet(providerWithInfo)
-      setUserAccount(accounts?.[0])
+      // Add an onClick event listener to the button that calls the `connectWithProvider` function
+      button.onclick = () => connectWithProvider(event.detail);
+      element.appendChild(button);
     }
-  }
- 
-  return (
-    <>
-      <h2>Wallets Detected:</h2>
-      <div>
-        {
-          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail)=>(
-            <button key={provider.info.uuid} onClick={()=>handleConnect(provider)} >
-              <img src={provider.info.icon} alt={provider.info.name} />
-              <div>{provider.info.name}</div>
-            </button>
-          )) :
-          <div>
-            There are no announced providers.
-          </div>
-        }
-      </div>
-      <hr />
-      <h2>{ userAccount ? "" : "No " }Wallet Selected</h2>
-      { userAccount &&
-        <div>
-          <div>
-            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
-            <div>{selectedWallet.info.name}</div>
-            <div>({formatAddress(userAccount)})</div>
-          </div>
-        </div>
-      }
-    </>
-  )
+  );
+
+  /*
+    dispatch custom event on `window` object used to notify other parts of the dapp that a provider 
+    is being requested, and any event listeners set up to listen for this event, respond accordingly.
+  */
+  window.dispatchEvent(new Event("eip6963:requestProvider"));
 }
 ```
 
-This component detects the installed wallets and creates a connect button for each one, which is
-used to call the [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method of the
-Wallet API to [access the user's accounts](access-accounts.md).
+The `connectWithProvider` function is responsible for connecting to the provider using `eth_requestAccounts`.
+The `wallet` object is passed as an argument to the function indicating the detail of its type as the argument type.
 
-Finally, link to this component from `src/App.tsx`:
+In the `listProviders` function we've opted for a simplified approach (over mapping and joining an entire block of HTML).
+And we are directly passing the `event.detail` object to the `connectWithProvider` function when a provider is announced.
 
-```tsx title="App.tsx"
-import './App.css'
-import { DiscoverWalletProviders } from './components/DiscoverWalletProviders'
+The `connectWithProvider` is then called when the button is clicked.
 
-function App() {
-  return (
-    <>
-      <DiscoverWalletProviders/>
-    </>
-  )
-}
-
-export default App
-```
+This method seems to be more straightforward and less error-prone as it directly passes the required data without 
+attempting to stringify data objects which led to circular reference errors due to the object's structure. 
 
 ### Example
 
-See the [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
-for a full example.
+See the [EIP-6963 TypeScript implementation](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
+for cloning a runnable example.
 
 ### Next steps
 
