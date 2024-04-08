@@ -26,12 +26,13 @@ You can connect to MetaMask using the following third-party libraries that suppo
 - [Wagmi 2+](https://wagmi.sh)
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
 - [MIPD Store](https://github.com/wevm/mipd)
-- [RainbowKit](https://www.rainbowkit.com/)
+- [RainbowKit](https://www.rainbowkit.com)
+- [Web3Onboard](https://onboard.blocknative.com)
 
 ## Connect to MetaMask directly
 
-To connect to MetaMask directly, implement support for EIP-6963 in your React dapp and use the
-[Wallet API](../../concepts/wallet-api.md).  
+To connect to MetaMask directly, implement support for EIP-6963 in JavaScript/TypeScript and use the
+[Wallet API's](../../concepts/wallet-api.md) `eth_requestAccounts` RPC endpoint.  
 
 The following steps describe how to connect to MetaMask from a React dapp.
 
@@ -94,7 +95,7 @@ Create a `hooks` directory and add the following two files:
 import { useSyncExternalStore } from "react";
 import { store } from "./store";
 
-export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
+export const useSyncProviders = () => useSyncExternalStore(store.subscribe, store.value, store.value)
 ```
 
 ```tsx title="store.tsx"
