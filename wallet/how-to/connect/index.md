@@ -30,7 +30,7 @@ You can connect to MetaMask using the following third-party libraries that suppo
 - [RainbowKit](https://www.rainbowkit.com)
 - [Web3Onboard](https://onboard.blocknative.com)
 
-## Connect to MetaMask
+## Connect to MetaMask with ViteJS
 
 For connecting to MetaMask, we suggest implementing support for EIP-6963 in JavaScript/TypeScript or React and use the
 [Wallet API's](../../concepts/wallet-api.md) `eth_requestAccounts` RPC endpoint. 
@@ -54,8 +54,10 @@ or
 npm create vite@latest react-ts-6963 -- --template react-ts
 ```
 
-#### Add TypeScript interfaces and types
-In your Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
+### Vite + Vanilla TypeScript Steps
+
+<Tabs>
+<TabItem value="vite-env.d.ts">
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -89,17 +91,12 @@ interface EIP1193Provider {
 }
 ```
 
-:::note
 In addition to the EIP-6963 interfaces, you need a `EIP1193Provider` interface (defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for Ethereum wallet providers and represents the essential properties and methods for interacting with MetaMask with JavaScript.
-:::
 
-### Vite + Vanilla TypeScript Steps
+</TabItem>
+<TabItem value="main.ts">
 
-#### 1. Add your HTML structure in `main.ts`
-
-Create a `div` to manipulate with our JavaScript
-
-```tsx title="main.ts"
+```typescript title="main.ts"
 import './style.css'
 import { listProviders } from './providers.ts'
 
@@ -119,9 +116,8 @@ The `listProviders` function is what we will create next and we need to pass an 
 This function will be responsible for connecting to the specific provider using `eth_requestAccounts`
 then using appendChild to add each button to the element within the div with the id of `providerButtons`
 
-#### 3. Our JavaScript/TypeScript Functions
-
-Create a TypeScript file in the `src/` directory named `providers.ts`
+</TabItem>
+<TabItem value="providers.ts">
 
 ```ts title="providers.ts"
 declare global {
@@ -169,7 +165,10 @@ We `dispatchEvent` on `window` to notify other parts of the dapp that a provider
 
 At this point you could run `npm run dev` to test the Vite project in a browser.
 
-### Example
+</TabItem>
+</Tabs>
+
+#### Examples
 
 See the [EIP-6963 TypeScript implementation](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
 for cloning a runnable example.
