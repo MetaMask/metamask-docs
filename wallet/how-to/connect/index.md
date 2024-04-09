@@ -1,5 +1,5 @@
 ---
-description: Connect to MetaMask via EIP-6963.
+Description: Connect to MetaMask via EIP-6963.
 sidebar_position: 1
 ---
 
@@ -8,24 +8,21 @@ import TabItem from '@theme/TabItem';
 
 # Connect to MetaMask
 
-You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
-connecting to their accounts.
+You can connect your dapp to users' MetaMask wallet by detecting MetaMask in their browsers and connecting to their desired accounts.
 
-The best practice for detecting MetaMask or any other browser extension wallet (wallet provider) uses the wallet detection mechanism introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). If a user has multiple wallet browser extensions installed, you can detect multiple wallets and connect to each one without conflicts.
+The best practice for detecting MetaMask or any other browser wallet extension (wallet provider) is to use the wallet detection mechanism introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). If a user has multiple wallet browser extensions installed, you can detect those wallets and connect to each one without conflicts.
 
 :::note
-[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) aimed to standardize the wallet interface, but conflicts emerged among implementations, causing race conditions. Wallets injecting providers clashed impacting user experience. This created UX issues for wallet discovery, onboarding, and connection, when multiple wallet extensions are enabled in the same browser. EIP-6963 solves this.
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) aimed to standardize the wallet interface, but conflicts emerged among implementations, causing race conditions. Wallets injecting providers clashed, impacting user experience. These issues affect the overall UX for wallet discovery, onboarding, and connection when multiple wallet extensions are enabled in the same browser.
 
-EIP-6963 enables [wallet interoperability](../../concepts/wallet-interoperability.md), and shifts
-dapps from relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
+EIP-6963 enables [wallet interoperability](../../concepts/wallet-interoperability.md), and shifts dapps from relying solely on [`window.ethereum`](detect-metamask.md) for wallet detection.
 :::
 
-You can connect to MetaMask [using third-party libraries](#use-third-party-libraries) or
-[directly using the Wallet API](#connect-to-metamask-directly).
+You can connect to MetaMask [using third-party libraries](#use-third-party-libraries) or [directly using the Wallet API](#connect-to-metamask-directly).
 
-## Use third-party libraries
+## Using third-party libraries
 
-You can connect to MetaMask using the following third-party libraries that support EIP-6963:
+The following are the choices for developers looking to connect to MetaMask using the third-party (multi-wallet connection) libraries that support EIP-6963:
 
 - [Wagmi 2+](https://wagmi.sh)
 - [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
@@ -35,35 +32,35 @@ You can connect to MetaMask using the following third-party libraries that suppo
 
 ## Connect to MetaMask with ViteJS
 
-For connecting to MetaMask, we suggest implementing support for EIP-6963 in JavaScript/TypeScript or React and use the
+For connecting to MetaMask, we suggest implementing support for EIP-6963 in JavaScript/TypeScript or React + TypeScript and use the
 [Wallet API's](../../concepts/wallet-api.md) `eth_requestAccounts` RPC endpoint. 
 
 ### Prerequisites
 
 - Review and understand the [EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces).
-- [Set up a Vanilla TypeScript or React TypeScript Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
+- [Set up a Vanilla TypeScript or React + TypeScript ViteJS project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
 
 #### Create a Vite project with the EIP-6963 interfaces and types
 
-This page will walk you through basic examples using Vite + Vanilla TypScript and Vite + React & TypeScript. Choose the correct following step for you're adventure:
+This page will walk you through two examples using "ViteJS + Vanilla TypScript" and "ViteJS + React & TypeScript". Choose your adventure!
 
-```bash title="Create a Vanilla JavaScript/TypeScript Vite project"
+"`bash title= "Create a Vanilla TypeScript ViteJS project"
 npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
 ```
 
 or 
 
-```bash title="Create a React JavaScript/TypeScript Vite project"
+```bash title="Create a React + TypeScript ViteJS project"
 npm create vite@latest react-ts-6963 -- --template react-ts
 ```
 
-### Vite + Vanilla TypeScript Code
+### ViteJS + Vanilla TypeScript Code
 
 <Tabs>
   <TabItem value="vite-env.d.ts">
 
-```typescript title="vite-env.d.ts"
-/// <reference types="vite/client" />
+```typescript title="src/vite-env.d.ts"
+/// <reference types= "vite/client"/>
 
 interface EIP6963ProviderInfo {
   rdns: string
@@ -94,12 +91,12 @@ interface EIP1193Provider {
 }
 ```
 
-In addition to the EIP-6963 interfaces, you need a `EIP1193Provider` interface (defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for Ethereum wallet providers and represents the essential properties and methods for interacting with MetaMask with JavaScript.
+In addition to the EIP-6963 interfaces, you need an `EIP1193Provider` interface (defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)). This interface is the foundational structure for Ethereum wallet providers and represents the essential properties and methods for interacting with MetaMask with JavaScript.
 
   </TabItem>
   <TabItem value="main.ts">
 
-```typescript title="main.ts"
+```typescript title="src/main.ts"
 import './style.css'
 import { listProviders } from './providers.ts'
 
@@ -112,15 +109,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 listProviders(document.querySelector<HTMLDivElement>('#providerButtons')!)
 ```
 
-The `querySelector` finds and returns the first HTML element that matches the CSS selector `app` and set its innerHTML 
-to include a basic HMTL structure with an inner div that we can inject a list of buttons each representing any wallet provider we have discovered.
+The `querySelector` finds and returns the first HTML element that matches the CSS selector `app` and sets its `innerHTML`. We need to include a basic HMTL structure with an inner `div` to inject a list of buttons, each representing a wallet provider we have discovered.
 
-The `listProviders` function is what we will create next and we need to pass an argument which represents the div element
-This function will be responsible for connecting to the specific provider using `eth_requestAccounts`
-then using appendChild to add each button to the element within the div with the id of `providerButtons`
+The `listProviders` function is what we will create next, and we need to pass an argument which represents the `div` element. This function will be responsible for connecting to the specific provider using `eth_requestAccounts` and then using a'ppendChild` to add each button within the `div` with the `id` of `providerButtons`
 
   </TabItem>
-  <TabItem value="providers.ts">
+  <TabItem value="src/providers.ts">
 
 ```ts title="providers.ts"
 declare global {
@@ -156,8 +150,9 @@ export function listProviders(element: HTMLDivElement) {
 }
 ```
 
-The `connectWithProvider` function is responsible for connecting to the provider using `eth_requestAccounts`.
-The `wallet` object is passed as an argument to the function indicating the detail of its type as the argument type.
+The `connectWithProvider` function connects the user to MetaMask using the selected provider with the `eth_requestAccounts` RPC endpoint.
+
+The `wallet` object is passed as an argument to the function, indicating the argument type.
 
 In the `listProviders` function we've opted for a simplified approach (over mapping and joining an entire block of HTML).
 And we are directly passing the `event.detail` object to the `connectWithProvider` function when a provider is announced.
@@ -166,7 +161,7 @@ The `connectWithProvider` is then called when the button is clicked.
 
 We `dispatchEvent` on `window` to notify other parts of the dapp that a provider is being requested, and that any event listeners set up to listen for this event, respond accordingly.
 
-At this point you could run `npm run dev` to test the Vite project in a browser.
+At this point, you could run `npm run dev` to test the Vite project in a browser.
 
   </TabItem>
 </Tabs>
@@ -176,7 +171,7 @@ At this point you could run `npm run dev` to test the Vite project in a browser.
 <Tabs>
   <TabItem value="App.tsx">
 
-```ts title="App.tsx"
+"`ts title=" src/App.tsx"
 import './App.css'
 import { DiscoverWalletProviders } from './components/DiscoverWalletProviders'
 
@@ -189,12 +184,12 @@ function App() {
 export default App
 ```
 
-In our App.tsx we are simply rendering the DiscoverWalletProviders component that contains the logic for detecting and connecting to wallet providers.
+In our `App.tsx`, we render the `DiscoverWalletProviders` component, which contains the logic for detecting and connecting to wallet providers.
 
   </TabItem>
-  <TabItem value="DiscoverWalletProviders.tsx">
+  <TabItem value= "DiscoverWalletProviders.tsx">
 
-```ts title="/components/DiscoverWalletProviders.tsx"
+"`ts title="src/components/DiscoverWalletProviders.tsx"
 import { useState } from 'react'
 import { useSyncProviders } from '../hooks/useSyncProviders'
 import { formatAddress } from '~/utils'
@@ -249,24 +244,23 @@ export const DiscoverWalletProviders = () => {
 }
 ```
 
-`selectedWallet` is a state variable that holds the users most recent selected wallet.
-`userAccount` is a state variable that holds the users connected wallet's address.
-`useSyncProviders` is a custom hook that returns the providers array (wallets extensions installed in the browser).
+`selected wallet` is a state variable that holds the user's most recently selected wallet.
+`user account` is a state variable that holds the user's connected wallet's address.
+`useSyncProviders` is a custom hook that returns the provider's array (wallet extensions installed in the browser).
   
-The `handleConnect` function takes a `providerWithInfo` which is an `EIP6963ProviderDetail` object.
-That object is then used to request the users accounts from the provider using the `eth_requestAccounts` RPC method.
+The `handleConnect` function takes a `providerWithInfo`, an `EIP6963ProviderDetail` object. That object is then used to request the user's accounts from the provider using the `eth_requestAccounts` RPC method.
 
-If the request is **successful** we set the `selectedWallet` and `userAccount` local state variables
-If we encounter an **error** we log it using `error.log` a console function.
+If the request is **successful**, we set the `selectedWallet` and `userAccount` local state variables.  
+If we encounter an **error** we log it using `error.log` a console function.  
 
-In the `return` we are mapping over the providers array and rendering a button for each provider detected unless there are no providers in which case we display a message: __"No Announced Wallet Providers"__.
+In the `return`, we map over the providers array and render a button for each provider detected unless there are no providers, in which case we display a message: __"No Announced Wallet Providers"__.
 
-Finally,  if the `userAccount` state variable is not empty we display the selected wallet icon, name, and `selectedWallet` address. When displaying the address we use the `formatAddress` utility function to only show the beginning and end of the address for readability.
+Finally, if the `userAccount` state variable is not empty, we display the selected wallet icon, name, and `selectedWallet` address. When displaying the address, we use the `formatAddress` utility function to show only the beginning and end of the address for readability.
 
   </TabItem>
   <TabItem value="store.ts">
 
-```ts title="hooks/store.ts"
+```ts title="src/hooks/store.ts"
 declare global{
   interface WindowEventMap {
     "eip6963:announceProvider": CustomEvent
@@ -302,7 +296,7 @@ The `subscribe` method takes a callback function that creates an event listener 
 We listen for the `"eip6963:announceProvider"` event and call the `onAnnouncement` function when the event is triggered.
 
 Next we  dispatch the `"eip6963:requestProvider"` event which triggers the event listener in the MetaMask wallet
-Finally we are returning a function that removes the event listener.
+Finally, we are returning a function that removes the event listener.
 
   </TabItem>
   <TabItem value="useSyncProviders.ts">
@@ -316,14 +310,14 @@ export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store
 
 This hook allows us to subscribe, read updated values from, and update components if necessary using the `store` and its subscribe and value methods.
 
-In our case the external store is MetaMask wallet state and events.
+In our case, the external store is MetaMask wallet state and events.
 
 The `store` object contains the `value` and `subscribe` methods:
 The `value` method returns the providers array (wallets extensions detected installed in the browser).
 The `subscribe` method takes a callback function that creates an event listener for the "eip6963:announceProvider" event.
 
   </TabItem>
-  <TabItem value="Utility Functions">
+  <TabItem value= "Utility Functions">
 
 ```ts title="util/index.ts"
 export const formatBalance = (rawBalance: string) => {
@@ -350,13 +344,13 @@ We are only using the `formatAddress` function, but the others are useful in a d
 
 #### Examples
 
-For both Vanilla TypeScript and React + TypeScript examples, feel free to clone the repos and try them out locally.
+Feel free to clone the repos and try out the examples locally.
 
 ##### Vanilla TypeScript Repo
 
 [Vanilla TypeScript Repo Link](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
 
-```bash title="Run the code"
+"`bash title= "Run the code"
 git clone https://github.com/MetaMask/vite-vanilla-ts-eip-6963 && cd vite-vanilla-ts-eip-6963 &&
 npm i && npm run dev
 ```
@@ -365,7 +359,7 @@ npm i && npm run dev
 
 [React + TypeScript Repo](https://github.com/MetaMask/vite-react-ts-eip-6963)
 
-```bash title="Run the code"
+"`bash title= "Run the code"
 git clone https://github.com/MetaMask/vite-react-ts-eip-69633 && cd vite-react-ts-eip-6963 &&
 npm i && npm run dev
 ```
