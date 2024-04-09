@@ -32,17 +32,17 @@ The following are the choices for developers looking to connect to MetaMask usin
 
 ## Connect to MetaMask with ViteJS
 
-For connecting to MetaMask, we suggest implementing support for EIP-6963 in JavaScript/TypeScript or React + TypeScript and use the
+For connecting to MetaMask, we suggest implementing support for EIP-6963 in JavaScript/TypeScript or React and TypeScript and use the
 [Wallet API's](../../concepts/wallet-api.md) `eth_requestAccounts` RPC endpoint. 
 
 ### Prerequisites
 
 - Review and understand the [EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces).
-- [Set up a Vanilla TypeScript or React + TypeScript ViteJS project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
+- [Set up a Vanilla TypeScript or React and TypeScript ViteJS project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project).
 
 #### Create a Vite project with the EIP-6963 interfaces and types
 
-This page will walk you through two examples using "ViteJS + Vanilla TypScript" and "ViteJS + React & TypeScript". Choose your adventure!
+This page will walk you through two examples using "ViteJS and Vanilla TypScript" and "ViteJS and React & TypeScript". Choose your adventure!
 
 "`bash title= "Create a Vanilla TypeScript ViteJS project"
 npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
@@ -50,11 +50,11 @@ npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
 
 or 
 
-```bash title="Create a React + TypeScript ViteJS project"
+```bash title="Create a React and TypeScript ViteJS project"
 npm create vite@latest react-ts-6963 -- --template react-ts
 ```
 
-### ViteJS + Vanilla TypeScript Code
+### ViteJS and Vanilla TypeScript Code
 
 <Tabs>
   <TabItem value="vite-env.d.ts">
@@ -166,7 +166,7 @@ At this point, you could run `npm run dev` to test the Vite project in a browser
   </TabItem>
 </Tabs>
 
-### Vite + React & TypeScript Code
+### Vite and React & TypeScript Code
 
 <Tabs>
   <TabItem value="App.tsx">
@@ -355,9 +355,9 @@ git clone https://github.com/MetaMask/vite-vanilla-ts-eip-6963 && cd vite-vanill
 npm i && npm run dev
 ```
 
-##### React + TypeScript Repo
+##### React and TypeScript Repo
 
-[React + TypeScript Repo](https://github.com/MetaMask/vite-react-ts-eip-6963)
+[React and TypeScript Repo](https://github.com/MetaMask/vite-react-ts-eip-6963)
 
 "`bash title= "Run the code"
 git clone https://github.com/MetaMask/vite-react-ts-eip-69633 && cd vite-react-ts-eip-6963 &&
