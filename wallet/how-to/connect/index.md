@@ -174,42 +174,183 @@ At this point you could run `npm run dev` to test the Vite project in a browser.
 ### Vite + Vanilla TypeScript Code
 
 <Tabs>
-  <TabItem value="vite-env.d.ts">
+  <TabItem value="App.tsx">
 
-```ts title="xxx.ts"
-console.log("foo")
-console.log("bar")
+```ts title="App.tsx"
+import './App.css'
+import { DiscoverWalletProviders } from './components/DiscoverWalletProviders'
+
+function App() {
+  return (
+    <DiscoverWalletProviders/>
+  )
+}
+
+export default App
 ```
 
-Some text
+In our App.tsx we are simply rendering the DiscoverWalletProviders component that contains the logic for detecting and connecting to wallet providers.
 
   </TabItem>
-  <TabItem value="main.ts">
+  <TabItem value="DiscoverWalletProviders.tsx">
 
-```ts title="yyy.ts"
-console.log("foo")
-console.log("bar")
+```ts title="/components/DiscoverWalletProviders.tsx"
+import { useState } from 'react'
+import { useSyncProviders } from '../hooks/useSyncProviders'
+import { formatAddress } from '~/utils'
+
+export const DiscoverWalletProviders = () => {
+  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
+  const [userAccount, setUserAccount] = useState<string>('')
+  const providers = useSyncProviders()
+
+  const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
+    try {
+      const accounts = await providerWithInfo.provider.request({ 
+        method: 'eth_requestAccounts' 
+      });
+
+      setSelectedWallet(providerWithInfo);
+      setUserAccount(accounts?.[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return (
+    <>
+      <h2>Wallets Detected:</h2>
+      <div>
+        {
+          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          )) :
+            <div>
+              No Announced Wallet Providers
+            </div>
+        }
+      </div>
+      <hr />
+      <h2>{userAccount ? "" : "No "}Wallet Selected</h2>
+      {userAccount &&
+        <div>
+          <div>
+            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
+            <div>{selectedWallet.info.name}</div>
+            <div>({formatAddress(userAccount)})</div>
+          </div>
+        </div>
+      }
+    </>
+  )
+}
 ```
 
-Some text
+  - `selectedWallet` is a state variable that holds the users most recent selected wallet.
+  - `userAccount` is a state variable that holds the users connected wallet's address.
+  - `useSyncProviders` is a custom hook that returns the providers array (wallets extensions installed in the browser).
+  
+  The `handleConnect` function takes a `providerWithInfo` which is an `EIP6963ProviderDetail` object.
+  That object is then used to request the users accounts from the provider using the `eth_requestAccounts` RPC method.
+  
+  If the request is **successful** we set the `selectedWallet` and `userAccount` local state variables
+  If we encounter an **error** we log it using `error.log` a console function.
+  
+  In the `return` we are mapping over the providers array and rendering a button for each provider detected unless there are no providers in which case we display a message: __"No Announced Wallet Providers"__.
+  
+  Finally,  if the `userAccount` state variable is not empty we display the selected wallet icon, name, and `selectedWallet` address. When displaying the address we use the `formatAddress` utility function to only show the beginning and end of the address for readability.
 
   </TabItem>
-  <TabItem value="providers.ts">
+  <TabItem value="store.ts">
 
-```ts title="zzz.ts"
-console.log("foo")
-console.log("bar")
+```ts title="hooks/store.ts"
+declare global{
+  interface WindowEventMap {
+    "eip6963:announceProvider": CustomEvent
+  }
+}
+
+let providers: EIP6963ProviderDetail[] = []
+
+export const store = {
+  value: ()=> providers,
+  subscribe: (callback: ()=> void) => {
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
+      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
+      providers = [...providers, event.detail]
+      callback()
+    }
+
+    window.addEventListener("eip6963:announceProvider", onAnnouncement);
+    window.dispatchEvent(new Event("eip6963:requestProvider"));
+    
+    return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  }
+}
 ```
 
-Some text
+We `declare` the `global` window event map to include the `"eip6963:announceProvider"` event as it is not standard.
+We need an array of `EIP6963ProviderDetail` objects to store the wallet providers that we will discover.
+
+`store` is an object that contains the `value` and `subscribe` methods that we use with the `useSyncExternalStore` hook as it allows us to subscribe, read updated values from this store, and update components if necessary.
+
+The `value` method returns the providers array (wallets extensions detected installed in the browser)
+The `subscribe` method takes a callback function that creates an event listener for the `"eip6963:announceProvider"` event
+We listen for the `"eip6963:announceProvider"` event and call the `onAnnouncement` function when the event is triggered.
+
+Next we  dispatch the `"eip6963:requestProvider"` event which triggers the event listener in the MetaMask wallet
+Finally we are returning a function that removes the event listener.
+
+  </TabItem>
+  <TabItem value="useSyncProviders.ts">
+
+```ts title="hooks/useSyncProviders.ts"
+import { useSyncExternalStore } from "react";
+import { store } from "./store";
+
+export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
+```
+
+This hook allows us to subscribe, read updated values from, and update components if necessary using the `store` and its subscribe and value methods.
+
+In our case the external store is MetaMask wallet state and events.
+
+The `store` object contains the `value` and `subscribe` methods:
+- `value` method returns the providers array (wallets extensions detected installed in the browser)
+- `subscribe` method takes a callback function that creates an event listener for the "eip6963:announceProvider" event
+
+  </TabItem>
+  <TabItem value="Utility Functions">
+
+```ts title="util/index.ts"
+export const formatBalance = (rawBalance: string) => {
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
+}
+
+export const formatChainAsNum = (chainIdHex: string) => {
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
+}
+
+export const formatAddress = (addr: string) => {
+  const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+  return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
+}
+```
+
+This is a good place to store utility functions that we might need to reuse throughout our dapps.
+We are only using the `formatAddress` function, but the others are useful in a dapp so we left them in.
 
   </TabItem>
 </Tabs>
 
 #### Examples
 
-See the 
-or clone, install node_modules and run the examples locally.
+For both Vanilla TypeScript and React + TypeScript examples, feel free to clone the repos and try them out locally.
 
 ##### Vanilla TypeScript Repo
 
