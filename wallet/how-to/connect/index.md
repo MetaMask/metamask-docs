@@ -3,6 +3,9 @@ description: Connect to MetaMask via EIP-6963.
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Connect to MetaMask
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
@@ -42,7 +45,7 @@ For connecting to MetaMask, we suggest implementing support for EIP-6963 in Java
 
 #### Create a Vite project with the EIP-6963 interfaces and types
 
-THis page will walk you through basic examples using Vite + Vanilla TypScript and Vite + React & TypeScript. Choose the correct following step for you're adventure:
+This page will walk you through basic examples using Vite + Vanilla TypScript and Vite + React & TypeScript. Choose the correct following step for you're adventure:
 
 ```bash title="Create a Vanilla JavaScript/TypeScript Vite project"
 npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
@@ -54,10 +57,10 @@ or
 npm create vite@latest react-ts-6963 -- --template react-ts
 ```
 
-### Vite + Vanilla TypeScript Steps
+### Vite + Vanilla TypeScript Code
 
 <Tabs>
-<TabItem value="vite-env.d.ts">
+  <TabItem value="vite-env.d.ts">
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -93,8 +96,8 @@ interface EIP1193Provider {
 
 In addition to the EIP-6963 interfaces, you need a `EIP1193Provider` interface (defined by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for Ethereum wallet providers and represents the essential properties and methods for interacting with MetaMask with JavaScript.
 
-</TabItem>
-<TabItem value="main.ts">
+  </TabItem>
+  <TabItem value="main.ts">
 
 ```typescript title="main.ts"
 import './style.css'
@@ -116,8 +119,8 @@ The `listProviders` function is what we will create next and we need to pass an 
 This function will be responsible for connecting to the specific provider using `eth_requestAccounts`
 then using appendChild to add each button to the element within the div with the id of `providerButtons`
 
-</TabItem>
-<TabItem value="providers.ts">
+  </TabItem>
+  <TabItem value="providers.ts">
 
 ```ts title="providers.ts"
 declare global {
@@ -165,22 +168,66 @@ We `dispatchEvent` on `window` to notify other parts of the dapp that a provider
 
 At this point you could run `npm run dev` to test the Vite project in a browser.
 
-</TabItem>
+  </TabItem>
+</Tabs>
+
+### Vite + Vanilla TypeScript Code
+
+<Tabs>
+  <TabItem value="vite-env.d.ts">
+
+```ts title="xxx.ts"
+console.log("foo")
+console.log("bar")
+```
+
+Some text
+
+  </TabItem>
+  <TabItem value="main.ts">
+
+```ts title="yyy.ts"
+console.log("foo")
+console.log("bar")
+```
+
+Some text
+
+  </TabItem>
+  <TabItem value="providers.ts">
+
+```ts title="zzz.ts"
+console.log("foo")
+console.log("bar")
+```
+
+Some text
+
+  </TabItem>
 </Tabs>
 
 #### Examples
 
-See the [EIP-6963 TypeScript implementation](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
-for cloning a runnable example.
+See the 
+or clone, install node_modules and run the examples locally.
+
+##### Vanilla TypeScript Repo
+
+[Vanilla TypeScript Repo Link](https://github.com/MetaMask/vite-vanilla-ts-eip-6963)
 
 ```bash title="Run the code"
 git clone https://github.com/MetaMask/vite-vanilla-ts-eip-6963 && cd vite-vanilla-ts-eip-6963 &&
 npm i && npm run dev
 ```
 
-### Vite + React and TypeScript Steps
+##### React + TypeScript Repo
 
-Steps to come here TBD
+[React + TypeScript Repo](https://github.com/MetaMask/vite-react-ts-eip-6963)
+
+```bash title="Run the code"
+git clone https://github.com/MetaMask/vite-react-ts-eip-69633 && cd vite-react-ts-eip-6963 &&
+npm i && npm run dev
+```
 
 ### Next steps
 
