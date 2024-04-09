@@ -171,7 +171,7 @@ At this point you could run `npm run dev` to test the Vite project in a browser.
   </TabItem>
 </Tabs>
 
-### Vite + Vanilla TypeScript Code
+### Vite + React & TypeScript Code
 
 <Tabs>
   <TabItem value="App.tsx">
