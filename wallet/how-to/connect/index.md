@@ -66,15 +66,15 @@ npm create vite@latest react-ts-6963 -- --template react-ts
 /// <reference types="vite/client" />
 
 interface EIP6963ProviderInfo {
-  rdns: string;
-  uuid: string;
-  name: string;
-  icon: string;
+  rdns: string
+  uuid: string
+  name: string
+  icon: string
 }
 
 interface EIP6963ProviderDetail {
-  info: EIP6963ProviderInfo;
-  provider: EIP1193Provider;
+  info: EIP6963ProviderInfo
+  provider: EIP1193Provider
 }
 
 type EIP6963AnnounceProviderEvent = {
@@ -85,9 +85,9 @@ type EIP6963AnnounceProviderEvent = {
 }
 
 interface EIP1193Provider {
-  isStatus?: boolean;
-  host?: string;
-  path?: string;
+  isStatus?: boolean
+  host?: string
+  path?: string
   sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
   send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
   request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
@@ -125,7 +125,7 @@ then using appendChild to add each button to the element within the div with the
 ```ts title="providers.ts"
 declare global {
   interface WindowEventMap {
-    "eip6963:announceProvider": CustomEvent;
+    "eip6963:announceProvider": CustomEvent
   }
 }
 
@@ -134,25 +134,25 @@ const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent['detail'
     await wallet.provider
       .request({ method: 'eth_requestAccounts' })
   } catch (error) {
-    console.error("Failed to connect to provider:", error);
+    console.error("Failed to connect to provider:", error)
   }
-};
+}
 
 export function listProviders(element: HTMLDivElement) {
   window.addEventListener('eip6963:announceProvider',
     (event: EIP6963AnnounceProviderEvent) => {
-      const button = document.createElement('button');
+      const button = document.createElement('button')
     
       button.innerHTML = `
         <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
-        <div>${event.detail.info.name}</div>`;
+        <div>${event.detail.info.name}</div>`
     
-      button.onclick = () => connectWithProvider(event.detail);
-      element.appendChild(button);
+      button.onclick = () => connectWithProvider(event.detail)
+      element.appendChild(button)
     }
-  );
+  )
 
-  window.dispatchEvent(new Event("eip6963:requestProvider"));
+  window.dispatchEvent(new Event("eip6963:requestProvider"))
 }
 ```
 
@@ -208,12 +208,12 @@ export const DiscoverWalletProviders = () => {
     try {
       const accounts = await providerWithInfo.provider.request({ 
         method: 'eth_requestAccounts' 
-      });
+      })
 
-      setSelectedWallet(providerWithInfo);
-      setUserAccount(accounts?.[0]);
+      setSelectedWallet(providerWithInfo)
+      setUserAccount(accounts?.[0])
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
@@ -284,8 +284,8 @@ export const store = {
       callback()
     }
 
-    window.addEventListener("eip6963:announceProvider", onAnnouncement);
-    window.dispatchEvent(new Event("eip6963:requestProvider"));
+    window.addEventListener("eip6963:announceProvider", onAnnouncement)
+    window.dispatchEvent(new Event("eip6963:requestProvider"))
     
     return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
   }
@@ -308,8 +308,8 @@ Finally we are returning a function that removes the event listener.
   <TabItem value="useSyncProviders.ts">
 
 ```ts title="hooks/useSyncProviders.ts"
-import { useSyncExternalStore } from "react";
-import { store } from "./store";
+import { useSyncExternalStore } from "react"
+import { store } from "./store"
 
 export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
 ```
