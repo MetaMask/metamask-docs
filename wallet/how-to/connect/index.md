@@ -249,19 +249,19 @@ export const DiscoverWalletProviders = () => {
 }
 ```
 
-  - `selectedWallet` is a state variable that holds the users most recent selected wallet.
-  - `userAccount` is a state variable that holds the users connected wallet's address.
-  - `useSyncProviders` is a custom hook that returns the providers array (wallets extensions installed in the browser).
+`selectedWallet` is a state variable that holds the users most recent selected wallet.
+`userAccount` is a state variable that holds the users connected wallet's address.
+`useSyncProviders` is a custom hook that returns the providers array (wallets extensions installed in the browser).
   
-  The `handleConnect` function takes a `providerWithInfo` which is an `EIP6963ProviderDetail` object.
-  That object is then used to request the users accounts from the provider using the `eth_requestAccounts` RPC method.
-  
-  If the request is **successful** we set the `selectedWallet` and `userAccount` local state variables
-  If we encounter an **error** we log it using `error.log` a console function.
-  
-  In the `return` we are mapping over the providers array and rendering a button for each provider detected unless there are no providers in which case we display a message: __"No Announced Wallet Providers"__.
-  
-  Finally,  if the `userAccount` state variable is not empty we display the selected wallet icon, name, and `selectedWallet` address. When displaying the address we use the `formatAddress` utility function to only show the beginning and end of the address for readability.
+The `handleConnect` function takes a `providerWithInfo` which is an `EIP6963ProviderDetail` object.
+That object is then used to request the users accounts from the provider using the `eth_requestAccounts` RPC method.
+
+If the request is **successful** we set the `selectedWallet` and `userAccount` local state variables
+If we encounter an **error** we log it using `error.log` a console function.
+
+In the `return` we are mapping over the providers array and rendering a button for each provider detected unless there are no providers in which case we display a message: __"No Announced Wallet Providers"__.
+
+Finally,  if the `userAccount` state variable is not empty we display the selected wallet icon, name, and `selectedWallet` address. When displaying the address we use the `formatAddress` utility function to only show the beginning and end of the address for readability.
 
   </TabItem>
   <TabItem value="store.ts">
@@ -319,8 +319,8 @@ This hook allows us to subscribe, read updated values from, and update component
 In our case the external store is MetaMask wallet state and events.
 
 The `store` object contains the `value` and `subscribe` methods:
-- `value` method returns the providers array (wallets extensions detected installed in the browser)
-- `subscribe` method takes a callback function that creates an event listener for the "eip6963:announceProvider" event
+The `value` method returns the providers array (wallets extensions detected installed in the browser).
+The `subscribe` method takes a callback function that creates an event listener for the "eip6963:announceProvider" event.
 
   </TabItem>
   <TabItem value="Utility Functions">
