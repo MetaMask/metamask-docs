@@ -195,7 +195,51 @@ template for React TypeScript:
 npm create vite@latest react-ts-6963 -- --template react-ts
 ```
 
-#### 2. Update `App.tsx`
+#### 2. Set up the project
+
+In your Vite project, update `src/vite-env.d.ts` with the
+[EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces):
+
+```typescript title="vite-env.d.ts"
+/// <reference types="vite/client" />
+
+interface EIP6963ProviderInfo {
+    rdns: string
+    uuid: string
+    name: string
+    icon: string
+}
+
+interface EIP6963ProviderDetail {
+    info: EIP6963ProviderInfo
+    provider: EIP1193Provider
+}
+
+type EIP6963AnnounceProviderEvent = {
+    detail: {
+        info: EIP6963ProviderInfo,
+        provider: Readonly<EIP1193Provider>,
+    }
+}
+
+interface EIP1193Provider {
+    isStatus?: boolean
+    host?: string
+    path?: string
+    sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+    send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+    request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+}
+```
+
+:::note
+In addition to the EIP-6963 interfaces, you need a `EIP1193Provider` interface (defined by
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for
+Ethereum wallet providers, and represents the essential properties and methods for interacting with
+MetaMask and other Ethereum wallets in JavaScript.
+:::
+
+#### 3. Update `App.tsx`
 
 Update `src/App.tsx` with the following code:
 
@@ -215,7 +259,7 @@ export default App
 This code renders the `DiscoverWalletProviders` component that you'll create in the next step, which
 contains the logic for detecting and connecting to wallet providers.
 
-#### 3. Detect and connect to wallets
+#### 4. Detect and connect to wallets
 
 In the `src/components` directory, create a component `DiscoverWalletProviders.tsx` with the
 following code:
@@ -294,7 +338,7 @@ Then, the component maps over the providers array and renders a button for each 
 Finally, if the `userAccount` state variable is not empty, the selected wallet icon, name, and
 address are displayed.
 
-#### 4. Add React hooks
+#### 5. Add React hooks
 
 Create a `src/hooks` directory and add a `store.ts` file with the following code:
 
@@ -341,7 +385,7 @@ export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store
 This hook allows you to subscribe to MetaMask events, read updated values, and update components.
 It uses the `store.value` and `store.subscribe` methods defined in the `store.ts` hook.
 
-#### 5. Create utility functions
+#### 6. Create utility functions
 
 Create a `src/utils` directory and add a file `index.ts` with the following code:
 
