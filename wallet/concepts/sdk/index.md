@@ -151,11 +151,11 @@ When a user accesses your Unity game, the SDK renders a QR code in the game UI u
 prefab which players can scan with their MetaMask Mobile app.
 It also supports deeplinking on mobile platforms, as demonstrated in the following screen recording.
 
-<p align="center">
-  <video width="300" controls>
+<div class="video-container">
+  <video controls>
     <source src="/sdk-unity.mp4" type="video/mp4" />
   </video>
-</p>
+</div>
 
 :::tip Get started
 - Get started by [setting up the SDK in your Unity game](../../how-to/use-sdk/gaming/unity/index.md).
