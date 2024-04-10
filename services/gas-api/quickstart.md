@@ -31,13 +31,13 @@ npm init -y
 
 Install the `axios` package:
 
-```
+```bash
 npm install axios
 ```
 
 Install the [`dotenv`](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv) package:
 
-```
+```bash
 npm install dotenv
 ```
 
@@ -45,14 +45,14 @@ npm install dotenv
 
 Create a `.env` file at the project root and add the following data:
 
-```bash
+```bash title=".env"
 INFURA_API_KEY=<API-KEY>
 INFURA_API_KEY_SECRET=<API-KEY-SECRET>
 ```
 
 Replace the Infura project credential placeholders with your own.
 
-:::danger
+:::caution warning
 Do not commit the `.env` file to your repository if it contains sensitive data.
 You can [create a `.gitignore`
 file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv#create-a-.gitignore-file)
@@ -61,42 +61,42 @@ to prevent accidentally committing the file.
 
 ## Create your script
 
-```
+```bash
 touch index.js
 ```
 
 Copy the following code into your script:
 
-:::info
+:::info note
 If using a network other than Ethereum Mainnet, update the `chainId` value (`1`) in the code to an
 alternate [supported network](supported-networks.md).
 :::
 
-```javascript
+```javascript title="index.js"
 const axios = require("axios");
 require("dotenv").config();
 
 const Auth = Buffer.from(
-  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
+    process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
 ).toString("base64");
 
-// The chain ID of the supported network
+// The chain ID of the supported network.
 const chainId = 1;
 
 (async () => {
-  try {
-    const { data } = await axios.get(
-      `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
-      {
-        headers: {
-          Authorization: `Basic ${Auth}`,
-        },
-      },
-    );
-    console.log("Suggested gas fees:", data);
-  } catch (error) {
-    console.log("Server responded with:", error);
-  }
+    try {
+        const { data } = await axios.get(
+            `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
+            {
+                headers: {
+                    Authorization: `Basic ${Auth}`,
+                },
+            },
+        );
+        console.log("Suggested gas fees:", data);
+    } catch (error) {
+        console.log("Server responded with:", error);
+    }
 })();
 ```
 
@@ -110,30 +110,30 @@ The result should look similar to:
 
 ```json
 Suggested gas fees: {
-  low: {
-    suggestedMaxPriorityFeePerGas: '0.05',
-    suggestedMaxFeePerGas: '24.086058416',
-    minWaitTimeEstimate: 15000,
-    maxWaitTimeEstimate: 30000
-  },
-  medium: {
-    suggestedMaxPriorityFeePerGas: '0.1',
-    suggestedMaxFeePerGas: '32.548678862',
-    minWaitTimeEstimate: 15000,
-    maxWaitTimeEstimate: 45000
-  },
-  high: {
-    suggestedMaxPriorityFeePerGas: '0.3',
-    suggestedMaxFeePerGas: '41.161299308',
-    minWaitTimeEstimate: 15000,
-    maxWaitTimeEstimate: 60000
-  },
-  estimatedBaseFee: '24.036058416',
-  networkCongestion: 0.7143,
-  latestPriorityFeeRange: [ '0.1', '20' ],
-  historicalPriorityFeeRange: [ '0.007150439', '113' ],
-  historicalBaseFeeRange: [ '19.531410688', '36.299069766' ],
-  priorityFeeTrend: 'down',
-  baseFeeTrend: 'down'
+    low: {
+        suggestedMaxPriorityFeePerGas: "0.05",
+        suggestedMaxFeePerGas: "24.086058416"',
+        minWaitTimeEstimate: 15000,
+        maxWaitTimeEstimate: 30000
+    },
+    medium: {
+        suggestedMaxPriorityFeePerGas: "0.1",
+        suggestedMaxFeePerGas: "32.548678862",
+        minWaitTimeEstimate: 15000,
+        maxWaitTimeEstimate: 45000
+    },
+    high: {
+        suggestedMaxPriorityFeePerGas: "0.3",
+        suggestedMaxFeePerGas: "41.161299308",
+        minWaitTimeEstimate: 15000,
+        maxWaitTimeEstimate: 60000
+    },
+    estimatedBaseFee: "24.036058416",
+    networkCongestion: 0.7143,
+    latestPriorityFeeRange: [ "0.1", "20" ],
+    historicalPriorityFeeRange: [ "0.007150439", "113" ],
+    historicalBaseFeeRange: [ "19.531410688", "36.299069766" ],
+    priorityFeeTrend: "down",
+    baseFeeTrend: "down"
 }
 ```
