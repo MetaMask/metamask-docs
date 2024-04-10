@@ -10,6 +10,14 @@ A web dapp can integrate with multiple installed browser wallets simultaneously 
 mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) injected provider.
 This mechanism is enabled by using the standardized interfaces defined by EIP-6963.
 
+:::info Why EIP-6963?
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) standardizes the interface for wallet providers, 
+but it results in conflicts when users have multiple wallets installed, due to how the provider
+object is injected. 
+This can cause issues with wallet discovery, user onboarding, and connecting. 
+The wallet discovery mechanism introduced by EIP-6963 solves these issues. 
+:::
+
 The following is a demo of the user experience of detecting multiple wallets, showing the data
 provided from each installed wallet:
 
