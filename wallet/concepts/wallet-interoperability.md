@@ -11,12 +11,10 @@ mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) inject
 This mechanism is enabled by using the standardized interfaces defined by EIP-6963.
 
 :::info Why EIP-6963?
-[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) aimed to standardize the wallet interface, but
-suffers from unpredictable conflicts when multiple wallets are installed, due to race conditions.
-Without EIP-6963, wallets injecting providers conflict with one another, which can cause UX issues
-across wallet discovery, onboarding, and connection, when multiple wallet extensions are enabled in
-the same browser.
-The mechanism introduced by EIP-6963 solves these issues.
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) standardized the wallet interface, but it suffers 
+from unpredictable conflicts when multiple wallets are installed due to how the provider object is injected. 
+This can cause issues with wallet discovery, user onboarding, and connecting. 
+The wallet discovery mechanism introduced by EIP-6963 solves these issues. 
 :::
 
 The following is a demo of the user experience of detecting multiple wallets, showing the data
