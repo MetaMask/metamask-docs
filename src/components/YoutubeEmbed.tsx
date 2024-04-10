@@ -1,5 +1,5 @@
 import React from "react";
-import styles "./YoutubeEmbed.module.css"; 
+import styles from "./YoutubeEmbed.module.css"; 
 
 interface YoutubeEmbedProps {
   url: string;  
