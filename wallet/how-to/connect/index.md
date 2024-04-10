@@ -179,7 +179,7 @@ npm run dev
 
 #### Example
 
-See the [Vanilla TypeScript example](https://github.com/MetaMask/vite-vanilla-ts-eip-6963) for more information.
+See the [vanilla TypeScript example](https://github.com/MetaMask/vite-vanilla-ts-eip-6963) for more information.
 You can clone the repository and run the example locally using `npm i && npm run dev`.
 
 ### React TypeScript
