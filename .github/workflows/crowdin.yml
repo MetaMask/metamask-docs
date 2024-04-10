@@ -5,6 +5,8 @@ on:
     path: [ "i18n/**" ]
     branches: [ main ]
 
+permissions: write-all
+
 jobs:
   crowdin:
     runs-on: ubuntu-latest

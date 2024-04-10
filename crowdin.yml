@@ -7,10 +7,10 @@ files:
     translation: /i18n/%two_letters_code%/**/%original_file_name%
   # Docs Markdown files
   - source: /wallet/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
   - source: /snaps/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
   - source: /services/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
   - source: /docs/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%
