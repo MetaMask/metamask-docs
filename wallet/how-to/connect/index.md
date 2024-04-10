@@ -164,9 +164,9 @@ The `connectWithProvider` function connects the user to the selected provider us
 
 The `wallet` object is passed as an argument to the function, indicating the argument type.
 
-The `listProviders` function uses a simplified approach (over mapping and joining an entire block of HTML).
-It directly passes the `event.detail` object to the `connectWithProvider` function when a provider
-is announced.
+The `listProviders` function uses a simplified approach.
+Instead of mapping and joining an entire block of HTML, it directly passes the `event.detail` object
+to the `connectWithProvider` function when a provider is announced.
 
 The `connectWithProvider` is called when a user selects the button.
 
@@ -192,7 +192,7 @@ Follow these steps for creating a React TypeScript project to connect to MetaMas
 #### 1. Create a project
 
 [Create a Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project) using the
-template for Vanilla TypeScript or React TypeScript:
+template for React TypeScript:
 
 ```bash
 npm create vite@latest react-ts-6963 -- --template react-ts
