@@ -8,10 +8,9 @@ toc_max_heading_level: 4
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.
-
-The recommended method for connecting to MetaMask or other browser wallets is using the wallet
-detection mechanism introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
-This method allows you to detect multiple wallets and connect to them without conflicts.
+This page provides instructions for connecting to MetaMask using the wallet detection mechanism
+introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+This approach allows you to detect multiple installed wallets and connect to them without conflicts.
 
 :::info
 Learn more about EIP-6963 in [Wallet interoperability](../../concepts/wallet-interoperability.md).
@@ -33,17 +32,17 @@ You can connect to MetaMask using the following third-party libraries that suppo
 ## Connect to MetaMask directly using Vite
 
 To connect to MetaMask directly, we recommend implementing support for EIP-6963 using the
-[Vite](https://vitejs.dev/) build tool with [Vanilla TypeScript](#vanilla-typescript) or
+[Vite](https://vitejs.dev/) build tool with [vanilla TypeScript](#vanilla-typescript) or
 [React TypeScript](#react-typescript).
 
 ### Vanilla TypeScript
 
-Follow these steps for creating a Vanilla TypeScript project to connect to MetaMask:
+Follow these steps for creating a vanilla TypeScript project to connect to MetaMask:
 
 #### 1. Create a project
 
 [Create a Vite project](https://v3.vitejs.dev/guide/#scaffolding-your-first-vite-project) using the
-template for Vanilla TypeScript:
+template for vanilla TypeScript:
 
 ```bash
 npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
