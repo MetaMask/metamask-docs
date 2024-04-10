@@ -90,7 +90,7 @@ interface EIP1193Provider {
 In addition to the EIP-6963 interfaces, you need a `EIP1193Provider` interface (defined by
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)), which is the foundational structure for
 Ethereum wallet providers, and represents the essential properties and methods for interacting with
-MetaMask in JavaScript.
+MetaMask and other Ethereum wallets in JavaScript.
 :::
 
 #### 3. Update `main.ts`
