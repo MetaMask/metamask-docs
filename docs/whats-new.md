@@ -9,6 +9,12 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## April 2024
+
+- Updated [how to connect to MetaMask](/wallet/how-to/connect) with Vanilla TypeScript and React
+  TypeScript instructions.
+  ([#1247](https://github.com/MetaMask/metamask-docs/pull/1247))
+
 ## March 2024
 
 - Documented [Snaps `polyfills` configuration option](/snaps/reference/cli/options/#polyfills).

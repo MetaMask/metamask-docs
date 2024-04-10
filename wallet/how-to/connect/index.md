@@ -54,7 +54,7 @@ npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
 In your Vite project, update `src/vite-env.d.ts` with the
 [EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces):
 
-```typescript title="src/vite-env.d.ts"
+```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
 interface EIP6963ProviderInfo {
@@ -95,7 +95,7 @@ MetaMask and other Ethereum wallets in JavaScript.
 
 #### 3. Update `main.ts`
 
-Update `main.ts` with the following code:
+Update `src/main.ts` with the following code:
 
 ```typescript title="main.ts"
 import "./style.css"
@@ -115,14 +115,12 @@ and sets its `innerHTML`.
 You need to include a basic HTML structure with an inner `div` to inject a list of buttons, each
 representing a detected wallet provider.
 
-You'll create the `listProviders` function next, and pass an argument which represents the `div` element.
-This function will connect to the specific provider using the
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method, then use `appendChild` to
-add each button within the `div` with the `id` of `providerButtons`.
+You'll create the `listProviders` function in the next step, and pass an argument which represents
+the `div` element.
 
 #### 4. Connect to wallets
 
-Create a file `providers.ts` with the following code:
+Create a file `src/providers.ts` with the following code:
 
 ```ts title="providers.ts"
 declare global {
@@ -131,6 +129,7 @@ declare global {
     }
 }
 
+// Connect to the selected provider using eth_requestAccounts.
 const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent["detail"]) => {
     try {
         await wallet.provider
@@ -140,6 +139,7 @@ const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent["detail"
     }
 }
 
+// Display detected providers as connect buttons.
 export function listProviders(element: HTMLDivElement) {
     window.addEventListener("eip6963:announceProvider",
         (event: EIP6963AnnounceProviderEvent) => {
@@ -150,27 +150,24 @@ export function listProviders(element: HTMLDivElement) {
                 <div>${event.detail.info.name}</div>
             `
         
+            // Call connectWithProvider when a user selects the button.
             button.onclick = () => connectWithProvider(event.detail)
             element.appendChild(button)
         }
     )
 
+    // Notify event listeners and other parts of the dapp that a provider is requested.
     window.dispatchEvent(new Event("eip6963:requestProvider"))
 }
 ```
 
 The `connectWithProvider` function connects the user to the selected provider using
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
-
 The `wallet` object is passed as an argument to the function, indicating the argument type.
 
 The `listProviders` function uses a simplified approach.
 Instead of mapping and joining an entire block of HTML, it directly passes the `event.detail` object
 to the `connectWithProvider` function when a provider is announced.
-
-The `connectWithProvider` is called when a user selects the button.
-
-`window.dispatchEvent` notifies event listeners and other parts of the dapp that a provider is being requested.
 
 #### 5. View the project
 
@@ -200,7 +197,7 @@ npm create vite@latest react-ts-6963 -- --template react-ts
 
 #### 2. Update `App.tsx`
 
-Update `App.tsx` with the following code:
+Update `src/App.tsx` with the following code:
 
 ```ts title="App.tsx"
 import "./App.css"
@@ -215,15 +212,15 @@ function App() {
 export default App
 ```
 
-This code renders the `DiscoverWalletProviders` component that contains the logic for detecting and
-connecting to wallet providers.
+This code renders the `DiscoverWalletProviders` component that you'll create in the next step, which
+contains the logic for detecting and connecting to wallet providers.
 
 #### 3. Detect and connect to wallets
 
 In the `src/components` directory, create a component `DiscoverWalletProviders.tsx` with the
 following code:
 
-```ts title="/components/DiscoverWalletProviders.tsx"
+```ts title="DiscoverWalletProviders.tsx"
 import { useState } from "react"
 import { useSyncProviders } from "../hooks/useSyncProviders"
 import { formatAddress } from "~/utils"
@@ -233,6 +230,7 @@ export const DiscoverWalletProviders = () => {
     const [userAccount, setUserAccount] = useState<string>("")
     const providers = useSyncProviders()
 
+    // Connect to the selected provider using eth_requestAccounts.
     const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
         try {
             const accounts = await providerWithInfo.provider.request({ 
@@ -246,6 +244,7 @@ export const DiscoverWalletProviders = () => {
         }
     }
 
+    // Display detected providers as connect buttons.
     return (
         <>
             <h2>Wallets Detected:</h2>
@@ -282,31 +281,31 @@ In this code:
 
 - `selectedWallet` is a state variable that holds the user's most recently selected wallet.
 - `userAccount` is a state variable that holds the user's connected wallet's address.
-- `useSyncProviders` is a custom hook that returns the providers array (wallet extensions installed
-  in the browser).
+- `useSyncProviders` is a custom hook that returns the providers array (wallets installed in the browser).
   
 The `handleConnect` function takes a `providerWithInfo`, which is an `EIP6963ProviderDetail` object.
-That object is used to request the user's accounts from the provider using the
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+That object is used to request the user's accounts from the provider using
+[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
 If the request succeeds, the `selectedWallet` and `userAccount` local state variables are set.
 
-The `return` maps over the providers array and renders a button for each detected provider.
+Then, the component maps over the providers array and renders a button for each detected provider.
 
 Finally, if the `userAccount` state variable is not empty, the selected wallet icon, name, and
 address are displayed.
 
 #### 4. Add React hooks
 
-Create a `hooks` directory and add a `store.ts` file with the following code:
+Create a `src/hooks` directory and add a `store.ts` file with the following code:
 
 ```ts title="hooks/store.ts"
-declare global{
+declare global {
     interface WindowEventMap {
         "eip6963:announceProvider": CustomEvent
     }
 }
 
+// An array to store the detected wallet providers.
 let providers: EIP6963ProviderDetail[] = []
 
 export const store = {
@@ -318,33 +317,19 @@ export const store = {
             callback()
         }
     
+        // Listen for eip6963:announceProvider and call onAnnouncement when the event is triggered.
         window.addEventListener("eip6963:announceProvider", onAnnouncement)
+        
+        // Dispatch the event, which triggers the event listener in the MetaMask wallet.
         window.dispatchEvent(new Event("eip6963:requestProvider"))
         
+        // Return a function that removes the event listern.
         return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
     }
 }
 ```
 
-You `declare` the `global` window event map to include the `"eip6963:announceProvider"` event as it
-is not standard.
-You need an array of `EIP6963ProviderDetail` objects to store the detected wallet providers.
-
-`store` is an object that contains the `value` and `subscribe` methods used with the
-`useSyncExternalStore` hook.
-It allows you to subscribe to events, read updated values, and update components if necessary.
-
-The `value` method returns the providers array.
-The `subscribe` method takes a callback function that creates an event listener for the
-`eip6963:announceProvider` event.
-You listen for the `eip6963:announceProvider` event and call the `onAnnouncement` function when
-the event is triggered.
-
-Next, you dispatch the `eip6963:requestProvider` event which triggers the event listener in the
-MetaMask wallet.
-Finally, you return a function that removes the event listener.
-
-Add a file `useSyncProviders.ts` with the following code to the `hooks` directory:
+Also, add a file `useSyncProviders.ts` with the following code to the `hooks` directory:
 
 ```ts title="hooks/useSyncProviders.ts"
 import { useSyncExternalStore } from "react"
@@ -353,20 +338,14 @@ import { store } from "./store"
 export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
 ```
 
-This hook allows you to subscribe to events, read updated values, and update components if necessary.
-
-In this case, the external store is the MetaMask wallet state and events.
-
-The `store` object contains the `value` and `subscribe` methods:
-The `value` method returns the providers array.
-The `subscribe` method takes a callback function that creates an event listener for the
-`eip6963:announceProvider` event.
+This hook allows you to subscribe to MetaMask events, read updated values, and update components.
+It uses the `store.value` and `store.subscribe` methods defined in the `store.ts` hook.
 
 #### 5. Create utility functions
 
-In the `util` directory, add a file `index.ts` with the following code:
+Create a `src/utils` directory and add a file `index.ts` with the following code:
 
-```ts title="util/index.ts"
+```ts title="index.ts"
 export const formatBalance = (rawBalance: string) => {
     const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
     return balance
