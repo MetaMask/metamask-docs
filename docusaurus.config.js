@@ -455,7 +455,7 @@ const config = {
               },
               {
                 label: "MetaMask SDK",
-                to: "/sdk",
+                to: "/wallet/how-to/use-sdk",
               },
               {
                 label: "Snaps",
