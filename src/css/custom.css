@@ -134,6 +134,42 @@ img {
   text-align: center;
 }
 
+/* Responsive YouTube video embeds */
+.video-responsive {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+/* Ensure rounded corners with border-radius */
+.video-responsive iframe,
+.video-responsive video,
+img[src*=".gif"],
+img[src*=".mp4"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px; /* Rounded corners */
+}
+
+/* Ensure full-screen playback is enabled for video elements */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Center videos */
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
 /* Reset SVG to be inline by default */
 svg {
   display: inline;
