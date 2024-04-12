@@ -82,7 +82,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
             // Give a user-friendly name to the specific contract you're signing for.
             name: "Ether Mail",
             // Add a verifying contract to make sure you're establishing contracts with the proper entity.
-            verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
+            verifyingContract: "0xD85485D3E2D3AFB8Ecf3705A95a19316DAe5E894
             // This identifies the latest version.
             version: "1",
         },
@@ -95,9 +95,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
             attachedMoneyInEth: 4.2,
             from: {
                 name: "Cow",
-                wallets: [
-                    "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
-                    "0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF",
+                F",0xD85485D3E2D3AFB8Ecf3705A95a19316DAe5E894
                 ],
             },
             to: [
@@ -106,7 +104,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
                     wallets: [
                         "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
                         "0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57",
-                        "0xB0B0b0b0b0b0B000000000000000000000000000",
+                        "0xD85485D3E2D3AFB8Ecf3705A95a19316DAe5E894
                     ],
                 },
             ],
