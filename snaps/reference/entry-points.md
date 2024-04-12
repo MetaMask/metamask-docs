@@ -214,6 +214,58 @@ module.exports.onInstall = async () => {
 </TabItem>
 </Tabs>
 
+## `onKeyringRequest`
+
+To implement the [Account Management API](keyring-api/account-management/index.md) to integrate
+[custom EVM accounts](../features/custom-evm-accounts/index.md), an account management Snap must
+expose the `onKeyringRequest` entry point.
+Whenever the Snap receives an Account Management API request, MetaMask calls the `onKeyringRequest`
+handler method.
+
+:::note
+For MetaMask to call the Snap's `onKeyringRequest` method, you must request the
+[`endowment:keyring`](permissions.md#endowmentkeyring) permission.
+:::
+
+#### Parameters
+
+An object containing:
+
+- `origin` - The origin as a string.
+- `request` - The JSON-RPC request.
+
+#### Returns
+
+A promise containing the return of the implemented method.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+export const onKeyringRequest: OnKeyringRequestHandler = async ({
+  origin,
+  request,
+}) => {
+  // Any custom logic or extra security checks here.
+  return handleKeyringRequest(keyring, request);
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+module.exports.onKeyringRequest = async ({ origin, request }) => {
+  // Any custom logic or extra security checks here.
+  return handleKeyringRequest(keyring, request);
+};
+```
+
+</TabItem>
+</Tabs>
+
 ## `onNameLookup`
 
 :::flaskOnly
@@ -321,18 +373,18 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -343,11 +395,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js title="index.js"
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```

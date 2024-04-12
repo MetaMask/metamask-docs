@@ -150,8 +150,8 @@ MetaMask returns an error if the account already exists or the account object is
 
 ### 6. Expose the Account Management API
 
-Create an `onKeyringRequest` entry point handler method to expose the Account Management API methods
-to MetaMask and your dapp:
+Create an [`onKeyringRequest`](../../reference/entry-points.md#onkeyringrequest) entry point handler
+method to expose the Account Management API methods to MetaMask and your dapp:
 
 ```typescript
 export const onKeyringRequest: OnKeyringRequestHandler = async ({
