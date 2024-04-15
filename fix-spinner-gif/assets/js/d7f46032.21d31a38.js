@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[577],{70991:e=>{e.exports=JSON.parse('{"title":"JSON-RPC API","slug":"wallet/reference/json-rpc-api","permalink":"/fix-spinner-gif/wallet/reference/json-rpc-api","navigation":{"previous":{"title":"Ethereum provider API","permalink":"/fix-spinner-gif/wallet/reference/provider-api"}}}')}}]);
