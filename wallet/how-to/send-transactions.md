@@ -3,9 +3,6 @@ description: Send transactions using eth_sendTransaction.
 sidebar_position: 3
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Send transactions
 
 You can send a transaction in MetaMask using the
@@ -13,12 +10,9 @@ You can send a transaction in MetaMask using the
 RPC method.
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
-select each button, and the following HTML displays the buttons.
+select each button:
 
-<Tabs>
-<TabItem value="JavaScript">
-
-```javascript
+```javascript title="index.js"
 const ethereumButton = document.querySelector(".enableEthereumButton");
 const sendEthButton = document.querySelector(".sendEthButton");
 
@@ -26,51 +20,47 @@ let accounts = [];
 
 // Send Ethereum to an address.
 sendEthButton.addEventListener("click", () => {
-    provider // Or window.ethereum if you don't support EIP-6963.
-        .request({
-            method: "eth_sendTransaction",
-            // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
-            params: [
-                {
-                    // The user's active address.
-                    from: accounts[0],
-                    // Required except during contract publications.
-                    to: <recipient address>,
-                    // Only required to send ether to the recipient from the initiating external account.
-                    value: <value in wei to send>,
-                    // Customizable by the user during MetaMask confirmation.
-                    gasLimit: '0x5028',
-                    // Customizable by the user during MetaMask confirmation.
-                    maxPriorityFeePerGas: '0x3b9aca00',
-                    // Customizable by the user during MetaMask confirmation.
-                    maxFeePerGas: '0x2540be400',
-                },
-            ],
-        })
-        .then((txHash) => console.log(txHash))
-        .catch((error) => console.error(error));
+  provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "eth_sendTransaction",
+      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
+      params: [
+        {
+          // The user's active address.
+          from: accounts[0],
+          // Required except during contract publications.
+          to: <recipient address>,
+          // Only required to send ether to the recipient from the initiating external account.
+          value: <value in wei to send>,
+          // Customizable by the user during MetaMask confirmation.
+          gasLimit: '0x5028',
+          // Customizable by the user during MetaMask confirmation.
+          maxPriorityFeePerGas: '0x3b9aca00',
+          // Customizable by the user during MetaMask confirmation.
+          maxFeePerGas: '0x2540be400',
+        },
+      ],
+    })
+    .then((txHash) => console.log(txHash))
+    .catch((error) => console.error(error));
 });
 
 ethereumButton.addEventListener("click", () => {
-    getAccount();
+  getAccount();
 });
 
 async function getAccount() {
-    accounts = await provider // Or window.ethereum if you don't support EIP-6963.
-        .request({ method: "eth_requestAccounts" });
+  accounts = await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({ method: "eth_requestAccounts" });
 }
 ```
 
-</TabItem>
-<TabItem value="HTML">
+The following HTML displays the buttons:
 
-```html
+```html title="index.html"
 <button class="enableEthereumButton btn">Enable Ethereum</button>
 <button class="sendEthButton btn">Send ETH</button>
 ```
-
-</TabItem>
-</Tabs>
 
 ## Transaction parameters
 
