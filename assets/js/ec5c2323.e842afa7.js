@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7883],{22088:e=>{e.exports=JSON.parse('{"title":"Snaps command line","slug":"reference/cli","permalink":"/snaps/reference/cli","navigation":{"previous":{"title":"Snaps API","permalink":"/snaps/reference/snaps-api"},"next":{"title":"Options","permalink":"/snaps/reference/cli/options"}}}')}}]);

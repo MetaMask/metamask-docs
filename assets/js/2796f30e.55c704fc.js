@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[7563],{22048:e=>{e.exports=JSON.parse('{"title":"Concepts","slug":"/concepts","permalink":"/wallet/concepts","navigation":{"previous":{"title":"Secure your dapp","permalink":"/wallet/how-to/secure-dapp"},"next":{"title":"Architecture","permalink":"/wallet/concepts/architecture"}}}')}}]);
