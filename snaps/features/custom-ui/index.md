@@ -459,7 +459,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-heading.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Markdown
@@ -509,7 +509,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-links.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-links.png").default} alt="Links UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Emojis
