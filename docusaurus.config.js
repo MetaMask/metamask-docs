@@ -25,7 +25,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "ru", "zh"],
+    locales: ["en"/*, "ru", "zh"*/],
   },
 
   trailingSlash: true,
@@ -426,10 +426,12 @@ const config = {
             label: "What's new?",
             position: "right",
           },
+          /* Language drop down
           {
             type: "localeDropdown",
             position: "right",
           },
+          */
         ],
       },
       docs: {
