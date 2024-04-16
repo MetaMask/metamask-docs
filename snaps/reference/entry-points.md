@@ -12,29 +12,14 @@ Snaps can expose the following entry points.
 
 ## `onCronjob`
 
-To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
-MetaMask calls the `onCronjob` handler method at the specified times with the specified payloads
+To run [cron jobs](../features/cron-jobs.md) for the user, a Snap must expose the `onCronjob` entry point.
+MetaMask calls the `onCronjob` handler method at the specified schedule with the specified requests
 defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 
 :::note
 For MetaMask to call the Snap's `onCronjob` method, you must request the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 :::
-
-:::info Access data from cron jobs
-When accessing encrypted data from cron jobs using [`snap_manageState`](../reference/snaps-api.md#snap_managestate),
-MetaMask requires the user to enter their password if the wallet is locked.
-This interaction can be confusing to the user, since the Snap accesses the data in the background
-without the user being aware.
-
-If your Snap's cron job does not need to access sensitive data, store that data in unencrypted state
-by setting `encrypted` to `false` when using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
-:::
-
-If the cron job's logic requires access to encrypted state, you can use
-[`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to ensure that MetaMask is
-unlocked before accessing state.
-This will prevent an unexpected password request popup, improving the user's experience.
 
 #### Parameters
 
@@ -52,7 +37,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
     switch (request.method) {
         case "exampleMethodOne":
             return snap.request({
-                method: 'snap_notify',
+                method: "snap_notify",
                 params: {
                     type: "inApp",
                     message: "Hello, world!",
