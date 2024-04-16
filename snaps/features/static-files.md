@@ -50,3 +50,8 @@ const contents = await snap.request({
 // "0x..."
 console.log(contents);
 ```
+
+## Example
+
+See the [`@metamask/get-file-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/get-file)
+package for a full example of handling static files.
