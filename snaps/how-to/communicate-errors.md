@@ -54,3 +54,8 @@ They have a numeric `code`, a `message` string, and a `data` object.
 
 The [Snaps known errors reference](../reference/known-errors.md) lists all the known errors with
 their codes and intended usage.
+
+## Example
+
+See the [`@metamask/error-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/errors)
+package for a full example of communicating errors.

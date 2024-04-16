@@ -135,3 +135,8 @@ For each field that needs to be localized, replace its text with `{{ <fieldName>
 When displaying this metadata to the user, MetaMask searches for the proper locale file and replaces
 the template string with its translation.
 If it doesn't find the user's locale, MetaMask uses English (`en`) as the default.
+
+## Example
+
+See the [`@metamask/localization-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/localization)
+package for a full example of localizing a Snap.
