@@ -121,7 +121,8 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:lifecycle-hooks`
 
-To run an action when the user installs or updates the Snap, a Snap must request the `endowment:lifecycle-hooks` permission.
+To implement a [lifecycle hook](../features/lifecycle-hooks.md) that runs an action when a user
+installs or updates a Snap, the Snap must request the `endowment:lifecycle-hooks` permission.
 This permission allows the Snap to expose the 
 [`onInstall`](../reference/entry-points.md#oninstall) and 
 [`onUpdate`](../reference/entry-points.md#onupdate) 
