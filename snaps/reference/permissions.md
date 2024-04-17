@@ -247,8 +247,8 @@ Specify this caveat in the manifest file as follows:
 "initialPermissions": {
     "endowment:rpc": { 
         "allowedOrigins": [
-            "metamask.io", 
-            "consensys.io",
+            "https://metamask.io", 
+            "https://consensys.io",
             "npm:@metamask/example-snap"
         ] 
     }
