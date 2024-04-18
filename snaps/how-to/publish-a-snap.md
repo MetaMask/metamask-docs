@@ -32,7 +32,8 @@ Snap location to **npm** and the ID of your Snap.
 Also, make sure to update the manifest file, icon file, and README to differentiate your Snap from the template.
 :::
 
-## Make it available to users 
+## Make a Snap available to users 
 
-Now that your Snap is published, you probably want to make it available to MetaMask users. 
-Learn how to [get allowlisted](get-allowlisted.md) so anyone can install your Snap in the MetaMask extension. 
+After publishing a Snap, you can make it available to MetaMask users by
+[getting your Snap allowlisted](get-allowlisted.md).
+Once allowlisted, anyone can install your Snap in the MetaMask extension.

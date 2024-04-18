@@ -1,5 +1,5 @@
 ---
-description: Submit your Snap for allowlisting on MetaMask extension.
+description: Submit your Snap for allowlisting on the MetaMask extension.
 sidebar_position: 8
 ---
 
@@ -25,7 +25,7 @@ Always do your own research before installing a Snap.
   You don't need to publish your Snap with an open source license, but users should be able to read
   the source code of the Snap package.
 
-- [Publish your Snap](publish-a-snap.md) to npmjs.com.
+- [Publish your Snap](publish-a-snap.md) to npm.
 
 - Ensure your Snap complies with laws and regulations.
 
@@ -52,8 +52,7 @@ Always do your own research before installing a Snap.
 
 ### 1. Submit your Snap
 
-When you are ready to submit your Snap, fill out the 
-[MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
+Fill out the [MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
 The form requests information about your Snap, including the following:
 
 - **Snap name** - The name of your Snap.
