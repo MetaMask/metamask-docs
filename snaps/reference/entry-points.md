@@ -137,7 +137,8 @@ module.exports.onHomePage = async () => {
 
 ## `onInstall`
 
-To run an action on installation, a Snap must expose the `onInstall` entry point.
+To implement a [lifecycle hook](../features/lifecycle-hooks.md) that runs an action upon
+installation, a Snap must expose the `onInstall` entry point.
 MetaMask calls the `onInstall` handler method after the Snap is installed successfully.
 
 :::note
@@ -569,7 +570,8 @@ module.exports.onTransaction = async ({
 
 ## `onUpdate`
 
-To run an action on update, a Snap must expose the `onUpdate` entry point.
+To implement a [lifecycle hook](../features/lifecycle-hooks.md) that runs an action upon update, a
+Snap must expose the `onUpdate` entry point.
 MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
 
 :::note
