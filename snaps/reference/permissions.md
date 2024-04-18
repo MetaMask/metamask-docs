@@ -26,9 +26,16 @@ manifest file:
 
 ### `endowment:cronjob`
 
-To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
+To run [cron jobs](../features/cron-jobs.md) for the user, a Snap must request the `endowment:cronjob` permission.
 This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
+
+This permission takes an object with an array of `jobs`, each containing two parameters:
+
+- `expression` - A [cron expression](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm)
+  that defines the schedule of the job.
+- `request` - A JSON-RPC request object that will be sent to the Snap's `onCronjob` entry point when
+  the job is executed.
 
 :::tip
 You can modify the cron job's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
