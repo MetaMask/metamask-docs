@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
+- Documented [Snaps lifecycle hooks](/snaps/features/lifecycle-hooks).
+  ([#1274](https://github.com/MetaMask/metamask-docs/pull/1274))
 - Documented [Snaps cron jobs](/snaps/features/cron-jobs).
   ([#1271](https://github.com/MetaMask/metamask-docs/pull/1271))
 - Updated [how to connect to MetaMask](/wallet/how-to/connect) with vanilla TypeScript and React

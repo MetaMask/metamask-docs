@@ -1,6 +1,6 @@
 ---
 description: Include and retrieve static files in the Snap bundle.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # Static files
