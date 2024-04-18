@@ -1,101 +1,149 @@
 ---
 description: Submit your Snap for allowlisting on MetaMask extension.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Get allowlisted
 
-You have built your Snap, tested it, published it to npm, and now you are ready to make it available to MetaMask users. 
-In the MetaMask Snaps Open Beta, an allowlist restricts which Snaps can be installed by users. 
+Once you have built your Snap, tested it, and published it to npm, you can make it available to
+MetaMask users.
 
-:::note 
-As part of the launch of MetaMask Snaps, individual Snaps must be put on an allowlist before they can be installed by users. This means that at this time, only selected, reviewed Snaps can be installed. In the future, this system will be opened up. By including a Snap on the allowlist, Consensys is not endorsing, recommending, or guaranteeing the safety of this Snap for your use or use for any reason. Always do your own research before installing any Snap.
+As part of the Snaps Open Beta launch, individual Snaps must be put on an allowlist before MetaMask
+users can install them.
+This means that users can only install Snaps that the MetaMask Snaps team has selected and reviewed.
+In the future, this system will be opened up.
+
+:::caution Important
+By including a Snap on the allowlist, MetaMask is not endorsing, recommending, or guaranteeing the
+safety of the Snap for use for any reason.
+Always do your own research before installing a Snap.
 :::
 
-## Pre-requisites
+## Prerequisites
 
-To be added to the allowlist, a Snap must: 
+- Make your Snap's source code publicly available.
+  You don't need to publish your Snap with an open source license, but users should be able to read
+  the source code of the Snap package.
 
-- Make the source code publicly available. This does not mean that the Snap source code has to be published with an open-source license, but users should be able to read the source code of the Snap package. 
-- Be published to npmjs.com. 
-- Not impair our compliance with laws or regulations. 
+- [Publish your Snap](publish-a-snap.md) to npmjs.com.
 
-Furthermore, any Snap that uses any of the following permissions pertaining to key management must also provide evidence of a third-party audit from an approved auditor, covering the Snap source code itself that is to run within the Snaps system along with any modules used for key management, with evidence of the commit hash that was audited and the commit that has any fixes documented in the audit report: 
+- Ensure your Snap complies with laws and regulations.
 
-- `snap_getBip32Entropy`
-- `snap_getBip32PublicKey`
-- `snap_getBip44Entropy`
-- `snap_getEntropy`
-- `snap_manageAccounts`
+- If your Snap uses any of the following API methods related to key management, you must provide
+  evidence of a third-party audit from an approved auditor:
 
-A list of approved third-party auditors and details about the audit process are available on the MetaMask Snaps Builder Engagement Program: 
-[Approved Auditors](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3). 
+  - [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
+  - [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
+  - [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy)
+  - [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
+  - [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
 
-## Submit your Snap
+  The audit must cover the Snap source code that is to run within the Snaps system, and any modules
+  used for key management.
+  You must provide the commit that was audited and the commit that has any fixes documented in the
+  audit report.
 
-When you are ready to submit your Snap, you should fill out the 
-[MetaMask Snaps Directory Information Form](https://go.metamask.io/snaps-directory-request). 
-You will need to provide the following information: 
+  :::info
+  A list of approved third-party auditors and details about the audit process are available on the
+  [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
+  :::
 
-- Email
-    - So we can get in touch with you if we have any questions.
-- Snap name
-    - The name of your Snap. This **must** match the `proposedName` field from the Snap manifest.
-    - You cannot use these words in the name: MetaMask, Snap, Meta, Mask.
-- Snap builder name and URL
-    - This should match the company, project, or personal site for your brand, where users can learn more about you.
-- Snap website URL
-    - This is a website where users can interact with your Snap. If your Snap does not require a website to be used, this can be left blank.
-    - If your Snap works with multiple websites, you can include the URLs of additional websites in the _long description_, but this URL should be specifically for an "official" website designed to interact with your Snap.
-- Snap short description
-    - Brief description of the snap, 1 or 2 sentences long.
-    - Try not to say "is a MetaMask Snap" -- users already know this!
-- Snap long description
-    - Description of the snap features and how to use them. You can use line breaks, lists, and even URLs here. You cannot use HTML.
-    - If applicable, you should also describe quick steps to onboard and use the Snap. For example: `After installing the Snap, visit the companion dapp at https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress.`
-- Link to the public GitHub repo and npm package
-    - If your Snap is hosted on a different site, like GitLab, you can link to that instead.
-    - Ensure that you have [correctly published the Snap package](../how-to/publish-a-snap.md).
-- Snap version number to be allowlisted
-    - Make sure that the version number in `package.json` and `snap.manifest.json` match, and that the Snap has been built with the correct `shasum`.
-- Snap auditor and audit report
-    - If your Snap uses one or more of the permissions listed above, provide a PDF or URL to where the audit report has been published. Otherwise, leave this field blank.
-    - Note: the audit report will be made public. You may ask your auditor to publish the report on their website and provide the link to us.
-- Customer support details
-    - To ensure a smooth user experience, we require customer support details for your Snap. This allows us to escalate any issues that the user is facing with your Snap. You can find more details [here](https://consensys.notion.site/Providing-User-Support-Information-cff79a7d896e4da6a2f8a17ce074e585). The Escalation Contact will be kept confidential between our teams, the rest of the information will be public. You must provide an Escalation Contact and at least one of the remaining items.
-- Images
-    - Here's your opportunity to provide compelling previews of your Snap! These can be screenshots or promotional images to help users get an idea of what your Snap can do. 
-    - Upload 3 images with the following dimensions: 960w x 540h. PNG or JPG are allowed.
-- Demo video
-    - This will help our team review your Snap. It may also be used by our marketing team.
+## Steps
 
-## Allowlist review
+### 1. Submit your Snap
+
+When you are ready to submit your Snap, fill out the 
+[MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
+The form requests information about your Snap, including the following:
+
+- **Snap name** - The name of your Snap.
+  This must match the `proposedName` field in the Snap [manifest file](../learn/about-snaps/files.md#manifest-file).
+  You cannot use these words in the name: "MetaMask," "Snap," "Meta," or "Mask."
+
+- **Snap builder name and URL** - The company, project, or personal site for your brand, where users
+  can learn more about you.
+
+- **Snap website URL** - A website where users can interact with your Snap.
+  If your Snap does not require a website to be used, you can leave this blank.
+  If your Snap works with multiple websites, you can include the URLs of additional websites in the
+  **long description**, but this URL should be an official website designed to interact with your Snap.
+
+- **Snap short description** - A one or two sentence description of your Snap.
+  Try not to say "is a MetaMask Snap" – users already know this!
+
+- **Snap long description** - A description of your Snap's features and how to use them.
+  You can use line breaks, lists, and URLs.
+  You cannot use HTML.
+  If applicable, describe quick steps to onboard and use the Snap.
+  For example: "After installing the Snap, visit the companion dapp at
+  https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress."
+
+- **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's
+  source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
+  If your Snap's source code is hosted on a different site, such as GitLab, you can link to that instead.
+
+- **Snap version number to be allowlisted** - The Snap version number as specified in `package.json`
+  and `snap.manifest.json`.
+  Make sure that the version numbers match and that the Snap has been built with the correct `shasum`.
+
+- **Snap auditor and audit report** - A PDF or URL of the [required audit report](#prerequisites),
+  if your Snap uses one or more of the key management API methods.
+  If your Snap doesn't require an audit, leave this field blank.
+
+  :::note
+  The audit report will be made public.
+  You can ask your auditor to publish the report on their website and provide the link to us.
+  :::
+
+- **Customer support details** -
+  [Customer support information](https://consensys.notion.site/Providing-User-Support-Information-cff79a7d896e4da6a2f8a17ce074e585)
+  to ensure a smooth user experience for your Snap.
+  This allows MetaMask to escalate any issues that a user might encounter with your Snap.
+  The escalation contact will be kept confidential within MetaMask, and the rest of the information
+  will be public.
+  You must provide an escalation contact and at least one other customer support item.
+
+- **Images** - Screenshots or promotional images to help users get an idea of what your Snap can do.
+  Here's your opportunity to provide compelling previews of your Snap!
+
+- **Demo video** - A video walking through how to use your Snap.
+  This will help MetaMask review your Snap, and might also be used by the MetaMask marketing team.
+
+### 2. Allowlist review
 
 Your Snap will be reviewed by the MetaMask Snaps team to ensure it is functional and well-designed. 
-If the Snap requires an audit, the audit report will be reviewed to ensure that all vulnerabilities with "medium" or higher risk have been addressed. 
-All Snaps will require at least 2 approvals to be allowlisted.
+If the Snap requires an audit, the team will review the audit report to ensure that all
+vulnerabilities with medium or higher risk have been addressed. 
+All Snaps require at least two approvals to be allowlisted.
 
-## Directory listing
+### 3. Directory listing
 
 Once your Snap is on the allowlist, it will appear in the [MetaMask Snaps Directory](https://snaps.metamask.io). 
 You can direct users to the directory to find and install your Snap. 
 
-## Distribute your Snap
+### 4. Distribute your Snap
 
-You should deploy a companion dapp where users can learn about your Snap and install it, or
-integrate with your existing dapp.
+You can deploy a companion dapp where users can learn about your Snap and install it, or you can
+integrate your Snap with your existing dapp.
 
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
 [connect to your Snap](connect-to-a-snap.md).
 
 :::note
-While testing your Snap, you may have designed your dapp to require MetaMask Flask. 
+While testing your Snap, you might have designed your dapp to require MetaMask Flask. 
 Once your Snap is allowlisted, you should update your dapp to support any flavor of MetaMask, 
 and show the orange MetaMask logo instead of the purple Flask logo. 
 :::
 
-## Updating your Snap 
+### 5. Update your Snap 
 
-The allowlist uses strict versioning for all Snaps. After publishing a new version of your Snap to npm, you will need to submit it for allowlisting. Users will not be able to install new versions until they are allowlisted. 
+The allowlist uses strict versioning for all Snaps.
+After publishing a new version of your Snap to npm, you must re-submit it for allowlisting by
+filling out the
+[MetaMask Snaps Directory Information Update form](https://go.metamask.io/snaps-directory-update-request).
+Users will not be able to install a new version until it is allowlisted. 
 
-Submit the [Directory Information Update Form](https://go.metamask.io/snaps-directory-update-request) for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "N/A." When providing the version to be allowlisted, you should also let us know if previous versions of your Snap should be removed from the allowlist (effectively replaced with this new version). 
+You can also update any information about your Snap using the form.
+For fields that you don't need to update, you can leave them blank or enter "N/A."
+When providing the new version to be allowlisted, you should also note whether previous versions of
+your Snap should be removed from the allowlist (effectively, replaced with the new version). 
