@@ -55,7 +55,7 @@ You will need to provide the following information:
     - If applicable, you should also describe quick steps to onboard and use the Snap. For example: `After installing the Snap, visit the companion dapp at https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress.`
 - Link to the public GitHub repo and npm package
     - If your Snap is hosted on a different site, like GitLab, you can link to that instead.
-    - Please ensure that you have [correctly published the Snap package itself](../how-to/publish-a-snap.md).
+    - Please ensure that you have [correctly published the Snap package](../how-to/publish-a-snap.md).
 - Snap version number to be allowlisted
     - Make sure that the version number in `package.json` and `snap.manifest.json` match, and that the Snap has been built with the correct `shasum`.
 - Snap auditor and audit report
