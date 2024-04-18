@@ -37,20 +37,6 @@ When you are ready to submit your Snap, you should fill out the
 [MetaMask Snaps Directory Information Form](https://docs.google.com/forms/d/e/1FAIpQLSeDAnk0Di_k8Qgrsj9_ofnf-1d_NfbG3fmSOHD1m8dKun1pXw/viewform). 
 You will need to provide the following information: 
 
-- Title: the name of your Snap. This must match the `proposedName` from the Snap manifest.
-- Snap ID: the npm ID of your published Snap. Example: `npm:@metamask/simple-snap-keyring`
-- Description: a detailed explanation of what your Snap does and how to use it. This can be multiple lines and can contain URLs.
-- Summary: a brief explanation of what the Snap does, no more than two sentences.
-- Category
-- Website: if your Snap has an official companion dapp that is required to interact with your Snap, provide the URL here.
-- Repository: the URL where your source code is hosted.
-- Open Source: check this box if your Snap is published with an open source license.
-- Author: the name of the company, team, or individual that developed the Snap.
-- Author Website
-- Support URL: an email, Discord channel, Telegram channel, or website where users can get support.
-- FAQ: a webpage with frequently asked questions.
-- Knowledge Base
-
 - Email
     - So we can get in touch with you if we have any questions.
 - Snap name
@@ -66,7 +52,7 @@ You will need to provide the following information:
     - Try not to say "is a MetaMask Snap" -- users already know this!
 - Snap long description
     - Description of the snap features and how to use them. You can use line breaks, lists, and even URLs here. You cannot use HTML.
-    - If applicable, you should also describe quick steps to onboard and use the Snap. For example: "After installing the Snap, visit the companion dapp at https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress."
+    - If applicable, you should also describe quick steps to onboard and use the Snap. For example: `After installing the Snap, visit the companion dapp at https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress.`
 - Link to the public GitHub repo and npm package
     - If your Snap is hosted on a different site, like GitLab, you can link to that instead.
     - Please ensure that you have [correctly published the Snap package itself](../how-to/publish-a-snap.md).
