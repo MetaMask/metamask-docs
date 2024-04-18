@@ -167,11 +167,39 @@ When set to `true`, WebAssembly files can be imported in the Snap.
 For example:
 
 ```typescript
-import program from './program.wasm';
+import program from "./program.wasm";
 
 // Program is initialized synchronously.
 // ...
 ```
+
+### `features`
+
+#### `features.images`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+features: {
+    images: <BOOLEAN>,
+},
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+features: {
+    images: false,
+},
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables [image support](../../features/custom-ui/index.md#image).
+The default is `true`.
 
 ### `input`
 
@@ -362,6 +390,36 @@ output: {
 Path to the output directory.
 The default is `"dist"`.
 
+### `polyfills`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```javascript
+polyfills: <BOOLEAN|OBJECT>
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```javascript
+polyfills: {
+    buffer: true,
+    crypto: true,
+    path: true,
+}
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables providing polyfills for Node.js built-in modules.
+If set to `true`, all available polyfills are provided.
+The default is `false`.
+
+You can also set this option to an object with specific polyfills set to `true`.
+See [the list of available polyfills](https://github.com/MetaMask/snaps/blob/51a1d04ea50c5c286262df1959ef0b1ced84b6e2/packages/snaps-cli/src/config.ts#L383-L416).
+
 ### `server`
 
 The development server configuration.
@@ -499,8 +557,8 @@ stats: {
 </Tabs>
 
 Enables or disables showing a warning if the `Buffer` global is used but not provided.
-The `Buffer` global is not available in the Snaps runtime by default, and must be provided using the
-[`customizeWebpackConfig`](#customizewebpackconfig) option.
+The `Buffer` global is not available in the Snaps runtime by default.
+To use `Buffer`, set [`polyfills`](#polyfills) to `true`.
 
 The default is `true`.
 
@@ -523,7 +581,7 @@ stats: {
     builtIns: {
         ignore: [
             // Built-in modules to ignore.
-        ]
+        ],
     },
 },
 ```
@@ -535,8 +593,8 @@ Enables or disables checking for missing built-in modules.
 
 Not specifying this option, or specifying an ignore list, enables checking for missing built-in modules.
 When enabled, the CLI shows a warning if a built-in is used but not provided.
-The Snaps CLI does not support Node.js built-ins out of the box, and any used built-ins must be
-provided using the [`customizeWebpackConfig`](#customizewebpackconfig) option.
+The Snaps CLI does not support Node.js built-ins out of the box.
+To use built-ins, set [`polyfills`](#polyfills) to `true`.
 
 You can specify a list of built-ins to ignore when checking for missing built-ins.
 This is useful if the built-in is not actually used in the Snap, but is added by a dependency.

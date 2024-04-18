@@ -86,8 +86,8 @@ permissions by modifying `initialPermissions`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:transaction-insight": {},
-  "endowment:ethereum-provider": {}
+    "endowment:transaction-insight": {},
+    "endowment:ethereum-provider": {}
 }
 ```
 
@@ -102,47 +102,46 @@ To calculate and display the gas fees a user would pay as a percentage of their 
 replace the code in `packages/snap/src/index.ts` with the following:
 
 ```typescript title="index.ts"
-import type { OnTransactionHandler } from '@metamask/snaps-sdk';
-import { heading, panel, text } from '@metamask/snaps-sdk';
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
-  // Use the ethereum provider to fetch the gas price.
-  const currentGasPrice = await ethereum.request({
-    method: 'eth_gasPrice',
-  }) as string;
+    // Use the Ethereum provider to fetch the gas price.
+    const currentGasPrice = await ethereum.request({
+        method: "eth_gasPrice",
+    }) as string;
 
-  // Get fields from the transaction object.
-  const transactionGas = parseInt(transaction.gas as string, 16);
-  const currentGasPriceInWei = parseInt(currentGasPrice ?? '', 16);
-  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
-  const maxPriorityFeePerGasInWei = parseInt(
-    transaction.maxPriorityFeePerGas as string,
-    16,
-  );
+    // Get fields from the transaction object.
+    const transactionGas = parseInt(transaction.gas as string, 16);
+    const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
+    const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
+    const maxPriorityFeePerGasInWei = parseInt(
+        transaction.maxPriorityFeePerGas as string,
+        16,
+    );
 
-  // Calculate gas fees the user would pay.
-  const gasFees = Math.min(
-    maxFeePerGasInWei * transactionGas,
-    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
-  );
+    // Calculate gas fees the user would pay.
+    const gasFees = Math.min(
+        maxFeePerGasInWei * transactionGas,
+        (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
+    );
 
-  // Calculate gas fees as percentage of transaction.
-  const transactionValueInWei = parseInt(transaction.value as string, 16);
-  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
+    // Calculate gas fees as percentage of transaction.
+    const transactionValueInWei = parseInt(transaction.value as string, 16);
+    const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
 
-  // Display percentage of gas fees in the transaction insights UI.
-  return {
-    content: panel([
-      heading('Transaction insights Snap'),
-      text(
-        `As set up, you are paying **${gasFeesPercentage.toFixed(
-          2,
-        )}%** in gas fees for this transaction.`,
-      ),
-    ]),
-  };
+    // Display percentage of gas fees in the transaction insights UI.
+    return {
+        content: panel([
+            heading("Transaction insights Snap"),
+            text(
+                `As set up, you are paying **${gasFeesPercentage.toFixed(2)}%**
+                in gas fees for this transaction.`,
+            ),
+        ]),
+    };
 };
 ```
 
@@ -184,7 +183,7 @@ To build and test your Snap:
    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
-<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 ### 5. Display a different UI for contract interactions
@@ -192,16 +191,16 @@ To build and test your Snap:
 The Snap should display a gas fee percentage for ETH transfers initiated by the user.
 For contract interactions, add the following code to the beginning of the `onTransaction` entry point:
 
-```typescript
-if (typeof transaction.data === 'string' && transaction.data !== '0x') {
-  return {
-    content: panel([
-      heading('Percent Snap'),
-      text(
-        'This Snap only provides transaction insights for simple ETH transfers.',
-      ),
-    ]),
-  };
+```typescript title="index.ts"
+if (typeof transaction.data === "string" && transaction.data !== "0x") {
+    return {
+        content: panel([
+            heading("Percent Snap"),
+            text(
+                "This Snap only provides transaction insights for simple ETH transfers.",
+            ),
+        ]),
+    };
 }
 ```
 
@@ -213,15 +212,16 @@ You can update the fields in `snap.manifest.json` to match your custom Snap:
 - `proposedName` - The name of your Snap.
   This replaces **TYPESCRIPT EXAMPLE SNAP** in the transaction insights UI.
 - `description` - The description of your Snap.
-- `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
   If you decided to publish your Snap to npm, update the `location` to its published location.
 
-Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`packages/snap/package.json` even if you don't plan to publish your Snap to `npm`.
+Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
+`packages/snap/package.json` even if you don't plan to publish your Snap to npm.
 
-:::note
-The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
+:::caution important
+The `version` and `repository` fields in `snap.manifest.json` inherit the values from
+`package.json` and overwrite them in `snap.manifest.json`.
+We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
 You should also add an icon by following the steps outlined in the 
@@ -231,4 +231,4 @@ Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such 
 template **Send Hello** button.
 
 After you've made all necessary changes, you can
-[publish your Snap to `npm`](../../how-to/publish-a-snap.md#publish-your-snap).
+[publish your Snap to npm](../../how-to/publish-a-snap.md).

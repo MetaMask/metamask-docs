@@ -47,6 +47,7 @@ const MMSDK = new MetaMaskSDK(
         name: "Example JavaScript Dapp",
         url: window.location.href,
     },
+    infuraAPIKey: process.env.INFURA_API_KEY,
     // Other options
 );
 
@@ -54,25 +55,26 @@ const MMSDK = new MetaMaskSDK(
 const ethereum = MMSDK.getProvider();
 ```
 
-:::note Important SDK options
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../display/custom-modals.md).
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../make-read-only-requests.md) from your dapp.
-:::
+  [make read-only RPC requests](make-read-only-requests.md) from your dapp.
+- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](display-custom-modals.md).
 
 ### 4. Use the SDK
 
 Use the SDK by calling any [provider API methods](../../../reference/provider-api.md).
 Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
-[`ethereum.request()`](../../../reference/provider-api.md#ethereumrequestargs) first, since it
+[`request()`](../../../reference/provider-api.md#request) first, since it
 prompts the installation or connection popup to appear.
 
 ```javascript
 ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
+
+You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](batch-json-rpc-requests.md) using the `metamask_batch` method.
 
 ## Example
 
@@ -86,6 +88,7 @@ const MMSDK = new MetaMaskSDK(
         name: "Example JavaScript Dapp",
         url: window.location.href,
     },
+    infuraAPIKey: process.env.INFURA_API_KEY,
     // Other options
 );
 

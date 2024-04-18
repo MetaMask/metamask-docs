@@ -12,7 +12,7 @@ This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
-See the Wallet documentation on [how to detect MetaMask](/wallet/how-to/detect-wallet).
+See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/connect).
 
 ### Detect MetaMask Flask
 
@@ -23,23 +23,22 @@ The following example uses the
 [`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get
 the provider object from MetaMask first:
 
-```js
-import detectEthereumProvider from '@metamask/detect-provider';
+```js title="index.js"
+import detectEthereumProvider from "@metamask/detect-provider";
 
-// This resolves to the value of window.ethereum or null
+// This resolves to the value of window.ethereum or null.
 const provider = await detectEthereumProvider();
 
-// web3_clientVersion returns the installed MetaMask version as a string
+// web3_clientVersion returns the installed MetaMask version as a string.
 const isFlask = (
-  await provider?.request({ method: 'web3_clientVersion' })
-)?.includes('flask');
+    await provider?.request({ method: "web3_clientVersion" })
+)?.includes("flask");
 
 if (provider && isFlask) {
-  console.log('MetaMask Flask successfully detected!');
-
-  // Now you can use Snaps!
+    console.log("MetaMask Flask successfully detected!");
+    // Now you can use Snaps!
 } else {
-  console.error('Please install MetaMask Flask!', error);
+    console.error("Please install MetaMask Flask!", error);
 }
 ```
 
@@ -48,7 +47,7 @@ if (provider && isFlask) {
 See the following resources for detecting multiple wallets (via
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963)) in the user's browser:
 
-- [How to detect multiple wallets](/wallet/how-to/detect-wallet/multiple-wallets)
+- [How to connect to MetaMask](/wallet/how-to/connect)
 - [Connect to Snap via EIP-6963 example](https://github.com/Montoya/snap-connect-example)
 
 ## Connect to a Snap
@@ -115,12 +114,12 @@ The user may have other Snaps installed that your dapp is not aware of.
 
 The following example verifies whether a Snap with ID `npm:super-snap` is installed:
 
-```ts
+```ts title="index.ts"
 const snaps = await ethereum.request({
-  method: 'wallet_getSnaps'
+    method: "wallet_getSnaps"
 });
 
-const isMySnapInstalled = Object.keys(snaps).includes('npm:super-snap');
+const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap");
 ```
 
 If you need to work with a specific version of a Snap, you can instead iterate over

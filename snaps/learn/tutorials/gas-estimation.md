@@ -106,12 +106,12 @@ and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
-   "npm": {
-      "filePath": "dist/bundle.js",
-      "iconPath": "images/gas.svg",
-      "packageName": "snap",
-      "registry": "https://registry.npmjs.org/"
-   }
+    "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/gas.svg",
+        "packageName": "snap",
+        "registry": "https://registry.npmjs.org/"
+    }
 }
 ```
 
@@ -120,9 +120,9 @@ Edit the `files` array and add the `images/` folder:
 
 ```json title="package.json"
 "files": [
-  "dist/",
-  "images/",
-  "snap.manifest.json"
+    "dist/",
+    "images/",
+    "snap.manifest.json"
 ],
 ```
 
@@ -134,12 +134,12 @@ permission by adding `"endowment:network-access": {}` to the `initialPermissions
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_dialog": {},
-  "endowment:rpc": {
-    "dapps": true,
-    "snaps": false
-  }, 
-  "endowment:network-access": {}
+    "snap_dialog": {},
+    "endowment:rpc": {
+        "dapps": true,
+        "snaps": false
+    }, 
+    "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
 ```
@@ -153,20 +153,20 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { panel, text } from "@metamask/snaps-sdk";
 
 async function getFees() {
-  const response = await fetch('https://beaconcha.in/api/v1/execution/gasnow'); 
-  return response.text();
+    const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow"); 
+    return response.text();
 }
 ```
 
 Next, add the `copyable` component to the second import of the file: 
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text, copyable } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { panel, text, copyable } from "@metamask/snaps-sdk";
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
@@ -176,23 +176,23 @@ For the `hello` method, the handler returns a call to MetaMask with the paramete
 dialog, and passes some static strings.
 
 Since `getFees()` returns a promise, you must use `then()` to resolve it in your `hello` method.
-Rewrite the `hello` method using the following code:
+Update the `hello` method with the following code:
 
 ```typescript title="index.ts"
-case 'hello':
-  return getFees().then(fees => {
-    return snap.request({
-      method: 'snap_dialog',
-      params: {
-        type: 'alert',
-        content: panel([
-          text(`Hello, **${origin}**!`),
-          text(`Current gas fee estimates:`),
-          copyable(fees),
-        ]),
-      }
+case "hello":
+    return getFees().then(fees => {
+        return snap.request({
+            method: 'snap_dialog',
+            params: {
+                type: "alert",
+                content: panel([
+                    text(`Hello, **${origin}**!`),
+                    text("Current gas fee estimates:"),
+                    copyable(fees),
+                ]),
+            }
+        });
     });
-  });
 ```
 
 ### 5. Build and test the Snap
@@ -214,7 +214,7 @@ To build and test your Snap:
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
     A page like the following displays:
 
-    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid gray'}} />
+    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
     This is a boilerplate test dapp for installing and testing your Snap.
 
@@ -230,7 +230,7 @@ To build and test your Snap:
 6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
@@ -246,15 +246,16 @@ You can also update the fields in `snap.manifest.json` to match your custom Snap
 
 - `proposedName` - The name of your Snap.
 - `description` - The description of your Snap.
-- `repository` - The URL of your cloned GitHub repository.
 - `source` - The `shasum` is set automatically when you build from the command line.
   If you decided to publish your Snap to `npm`, update the `location` to its published location.
 
-Similarly, you should update the `name`, `version`, `description`, and `repository` sections of
-`/packages/snap/package.json` even if you do not plan to publish your Snap to [`npm`](https://www.npmjs.com/).
+Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
+`/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 
-:::tip
-The `version` field in `snap.manifest.json` inherits the `version` field from `package.json`.
+:::caution important
+The `version` and `repository` fields in `snap.manifest.json` inherit the values from
+`package.json` and overwrite them in `snap.manifest.json`.
+We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
 You can update the content of `/packages/site/src/pages/index.tsx` by changing the

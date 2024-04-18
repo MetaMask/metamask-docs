@@ -166,10 +166,8 @@ However, MetaMask provides the
 [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) module to detect the
 MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser.
 
-:::caution important
-We recommend [using `@metamask/detect-provider`](../how-to/detect-wallet/metamask.md)
+We recommend [using `@metamask/detect-provider`](../how-to/connect/detect-metamask.md)
 instead of manually detecting the provider yourself.
-:::
 
 In your project directory (the `mm-dapp-react` directory), install the module using the following command:
 
@@ -586,7 +584,7 @@ You might need to:
 - Create UI that shows information on the supported networks.
 - Present a button that allows users to connect to a supported network.
 
-[Detecting a user's network](../how-to/detect-network.md) is crucial in almost every web3 dapp.
+[Detecting a user's network](../how-to/manage-networks/detect-network.md) is crucial in almost every web3 dapp.
 :::
 
 ### 6. Handle errors

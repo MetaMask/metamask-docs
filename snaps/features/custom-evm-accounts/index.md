@@ -1,6 +1,6 @@
 ---
 description: Connect to custom EVM accounts using the Keyring API.
-sidebar_position: 4
+sidebar_position: 2
 tags:
   - Keyring API
 ---
@@ -13,7 +13,7 @@ accounts and [ERC-4337 accounts](#account-abstraction-erc-4337), alongside regul
 in the user interface:
 
 <p align="center">
-<img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid gray'}} />
+<img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 To use the Keyring API, you first [implement the API in an account management Snap](create-account-snap.md)

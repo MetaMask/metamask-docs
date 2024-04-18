@@ -6,7 +6,7 @@ tags:
   - Unity SDK
 ---
 
-import ReactPlayer from 'react-player/lazy'
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
 # Use MetaMask SDK with Unity
 
@@ -19,9 +19,7 @@ The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 
 The following video demonstrates how to install and use the MetaMask Unity SDK.
 
-<p align="center">
-  <ReactPlayer url='https://www.youtube.com/embed/0D1cIH-PZtI' />
-</p>
+<YoutubeEmbed url='https://www.youtube.com/embed/0D1cIH-PZtI' />
 
 ## Steps
 

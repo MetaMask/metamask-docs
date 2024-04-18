@@ -18,7 +18,7 @@ manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_dialog": {}
+    "snap_dialog": {}
 }
 ```
 
@@ -26,38 +26,48 @@ manifest file:
 
 ### `endowment:cronjob`
 
-To run periodic actions for the user (cron jobs), a Snap must request the `endowment:cronjob` permission.
+To run [cron jobs](../features/cron-jobs.md) for the user, a Snap must request the `endowment:cronjob` permission.
 This permission allows the Snap to specify cron jobs that trigger the
 [`onCronjob`](../reference/entry-points.md#oncronjob) entry point.
+
+This permission takes an object with an array of `jobs`, each containing two parameters:
+
+- `expression` - A [cron expression](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm)
+  that defines the schedule of the job.
+- `request` - A JSON-RPC request object that will be sent to the Snap's `onCronjob` entry point when
+  the job is executed.
+
+:::tip
+You can modify the cron job's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
 
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:cronjob": {
-    "jobs": [
-      {
-        "expression": "* * * * *",
-        "request": {
-          "method": "exampleMethodOne",
-          "params": {
-            "param1": "foo"
-          }
-        }
-      },
-      {
-        "expression": "*/2 * * * *",
-        "request": {
-          "method": "exampleMethodTwo",
-          "params": {
-            "param1": "bar"
-          }
-        }
-      }
-    ]
-  }
+    "endowment:cronjob": {
+        "jobs": [
+            {
+                "expression": "* * * * *",
+                "request": {
+                    "method": "exampleMethodOne",
+                    "params": {
+                        "param1": "foo"
+                    }
+                }
+            },
+            {
+                "expression": "*/2 * * * *",
+                "request": {
+                    "method": "exampleMethodTwo",
+                    "params": {
+                        "param1": "bar"
+                    }
+                }
+            }
+        ]
+    }
 }
-
 ```
 
 ### `endowment:ethereum-provider`
@@ -71,7 +81,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:ethereum-provider": {}
+    "endowment:ethereum-provider": {}
 }
 ```
 
@@ -85,13 +95,13 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
 This permission allows the Snap to specify a "home page" by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../features/custom-ui.md) to build an embedded home page accessible through the Snaps menu.
+You can use any [custom UI components](../features/custom-ui/index.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:page-home": {}
+    "endowment:page-home": {}
 }
 ```
 
@@ -102,13 +112,17 @@ the Snap must configure a list of allowed dapp URLs using the `endowment:keyring
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
+:::tip
+You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:keyring": {
-    "allowedOrigins": ["https://<dapp domain>"]
-  }
+    "endowment:keyring": {
+        "allowedOrigins": ["https://<dapp domain>"]
+    }
 }
 ```
 
@@ -120,13 +134,60 @@ This permission allows the Snap to expose the
 [`onUpdate`](../reference/entry-points.md#onupdate) 
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
+:::tip
+You can modify the lifecycle hooks' execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:lifecycle-hooks": {}
+    "endowment:lifecycle-hooks": {}
 }
 ```
+
+### `endowment:name-lookup`
+
+:::flaskOnly
+:::
+
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must request the
+`endowment:name-lookup` permission.
+This permission grants the Snap read-only access to user input or an address by exporting the
+[`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point.
+
+This permission takes an object with two optional properties:
+
+- `chains` - An array of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain IDs for which the Snap can resolve names and addresses.
+  Pass this array to reduce overhead on your Snap by making sure it only receives requests for
+  chains it can resolve.
+- `matchers` - An object that helps reduce overhead by filtering the domains passed to your Snap.
+  This must contain at least one of the following properties:
+  - `tlds` - An array of strings for top-level domains that the Snap supports.
+  - `schemes` - An array of strings for schemes that the Snap supports.
+
+:::tip
+You can modify the name lookup logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+    "endowment:name-lookup": {
+        "chains": ["eip155:1"],
+        "matchers": {
+            "tlds": ["crypto"],
+            "schemes": ["farcaster"]
+        }
+    }
+},
+```
+
+In this example, the Snap's [`onNameLookup`](./entry-points.md#onnamelookup) entry point would be
+called for domains such as `someuser.crypto` or schemes such as `farcaster:someuser`, as long as the
+domain resolution is happening on Ethereum Mainnet.
 
 ### `endowment:network-access`
 
@@ -143,7 +204,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:network-access": {}
+    "endowment:network-access": {}
 }
 ```
 
@@ -166,31 +227,38 @@ This permission requires an object with a `snaps` or `dapps` property (or both),
 Snap can receive JSON-RPC requests from other Snaps, or dapps, respectively.
 The default for both properties is `false`.
 
+:::tip
+You can modify the RPC API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": {
-    "dapps": true,
-    "snaps": false
-  }
+    "endowment:rpc": {
+        "dapps": true,
+        "snaps": false
+    }
 }
 ```
 
-Alternatively, you can specify the caveat `allowedOrigins` to restrict requests to specific domains or Snap IDs. 
+#### Allowed origins
+
+Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs. 
 Calls from any other origins are rejected. 
 
 Specify this caveat in the manifest file as follows: 
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": { 
-    "allowedOrigins": [
-      "metamask.io", 
-      "consensys.io",
-      "npm:@metamask/example-snap"
-    ] 
-  }
+    "endowment:rpc": { 
+        "allowedOrigins": [
+            "https://metamask.io", 
+            "https://consensys.io",
+            "npm:@metamask/example-snap"
+        ] 
+    }
 }
 ```
 
@@ -210,14 +278,44 @@ should pass the `transactionOrigin` property as part of the `onTransaction` para
 This property represents the transaction initiator origin.
 The default is `false`.
 
+:::tip
+You can modify the transaction insight logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+:::
+
+
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:transaction-insight": {
-    "allowTransactionOrigin": true
-  }
+    "endowment:transaction-insight": {
+        "allowTransactionOrigin": true
+    }
 }
+```
+
+### `endowment:signature-insight`
+
+:::flaskOnly
+:::
+
+To provide [signature insights](../features/signature-insights.md), a Snap must request the
+`endowment:signature-insight` permission.
+This permission grants a Snap read-only access to raw signature payloads, before they're accepted
+for signing by the user, by exposing the [`onSignature`](./entry-points.md#onsignature) entry point.
+
+This permission requires an object with an `allowSignatureOrigin` property to signal if the Snap
+should pass the `signatureOrigin` property as part of the `onSignature` parameters.
+This property represents the signature initiator origin.
+The default is `false`.
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+    "endowment:signature-insight": {
+        "allowSignatureOrigin": true
+    }
+},
 ```
 
 ### `endowment:webassembly`
@@ -229,9 +327,36 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:webassembly": {}
+    "endowment:webassembly": {}
 }
 ```
+
+### Snap-defined timeouts
+
+Many endowments entail having MetaMask run arbitrary code defined in the Snap.
+The default execution timeout is 60000 milliseconds, or one minute.
+
+You can modify this execution timeout by adding a caveat `maxRequestTime` to the permission.
+It can take values from `5000` (5 seconds) to `180000` (3 minutes).
+For example:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+    "endowment:transaction-insight": {
+        "maxRequestTime": 10000
+    }
+}
+```
+
+The following endowments accept this caveat:
+
+- [`endowment:cronjob`](#endowmentcronjob)
+- [`endowment:keyring`](#endowmentkeyring)
+- [`endowment:lifecycle-hooks`](#endowmentlifecycle-hooks)
+- [`endowment:name-lookup`](#endowmentname-lookup)
+- [`endowment:page-home`](#endowmentpage-home)
+- [`endowment:rpc`](#endowmentrpc)
+- [`endowment:transaction-insight`](#endowmenttransaction-insight)
 
 ## Dynamic permissions
 
@@ -245,19 +370,17 @@ Calling `eth_requestAccounts` requires the
 <Tabs>
 <TabItem value="Manifest file">
 
-```json
+```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:ethereum-provider": {}
+    "endowment:ethereum-provider": {}
 }
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-await ethereum.request({
-  "method": "eth_requestAccounts"
-});
+```js title="index.js"
+await ethereum.request({ "method": "eth_requestAccounts" });
 ```
 
 </TabItem>
@@ -272,18 +395,18 @@ The following is an example `eth_accounts` permission:
 
 ```json
 {
-  "id": "47vm2UUi1pccNAeYKGmwF", // example
-  "parentCapability": "eth_accounts",
-  "invoker": "npm:SNAP_ID",
-  "caveats": [
-    {
-      "type": "restrictReturnedAccounts",
-      "value": [
-        "0xc403b37bf1e700cb214ea1be9de066824b420de6" // example connected account #1
-      ]
-    }
-  ],
-  "date": 1692616452846
+    "id": "47vm2UUi1pccNAeYKGmwF",
+    "parentCapability": "eth_accounts",
+    "invoker": "npm:SNAP_ID",
+    "caveats": [
+        {
+            "type": "restrictReturnedAccounts",
+            "value": [
+                "0xc403b37bf1e700cb214ea1be9de066824b420de6"
+            ]
+        }
+    ],
+    "date": 1692616452846
 }
 ```
 

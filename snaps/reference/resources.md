@@ -12,7 +12,7 @@ View the following Snaps resources in addition to this documentation site.
 - [Snaps homepage](https://metamask.io/snaps/)
 - [Snaps directory](https://snaps.metamask.io/) - A directory of allowlisted Snaps you can try in the MetaMask extension.
 - [SIPs](https://github.com/MetaMask/SIPs) - Suggest new Snaps APIs with Snaps Improvement Proposals.
-- [Builder Team Space](https://go.metamask.io/snaps-builders) - Connect with the Snaps builder engagement team and get support while building your Snap.
+- [Builder Engagement Program](https://go.metamask.io/snaps-builders) - Connect with the Snaps builder engagement team and get support while building your Snap.
 
 ## Example Snaps
 

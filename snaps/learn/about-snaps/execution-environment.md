@@ -13,12 +13,22 @@ other parts of the application.
 This environment does not have a DOM, Node.js built-ins, or platform-specific APIs other than the
 default `snap` global and MetaMask's `ethereum` global.
 
-:::note
+The execution environment is designed to:
+
+- Prevent Snaps from polluting the global environment.
+- Prevent malicious Snaps from stealing from users.
+- Prevent Snaps from accessing sensitive JavaScript global APIs (such as `fetch`) without permission.
+- Be "fully virtualizable," or platform-independent.
+
+This allows you to safely execute Snaps anywhere, without the Snap needing to worry about where and
+how it's executed.
+
+## Supported globals
+
 A Snap can access the [Snaps API](apis.md#snaps-api) using the `snap` global, and the
 [MetaMask JSON-RPC API](apis.md#metamask-json-rpc-api) using the `ethereum` global.
 To access the `ethereum` global, a Snap must request the
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
-:::
 
 Almost all
 [standard JavaScript globals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
@@ -28,7 +38,6 @@ This includes globals such as `Promise`, `Error`, `Math`, `Set`, and `Reflect`.
 The following globals are also available:
 
 - `console`
-- `crypto`
 - `fetch` (with the
   [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) permission)
 - `setTimeout` / `clearTimeout`
@@ -40,16 +49,10 @@ The following globals are also available:
 - `atob` / `btoa`
 - `URL`
 
-The execution environment is designed to:
-
-- Prevent Snaps from influencing any other running code, including MetaMask itself.
-  That is, it prevents all Snaps from polluting the global environment and malicious Snaps from
-  stealing from users.
-- Prevent Snaps from accessing sensitive JavaScript global APIs (such as `fetch`) without permission.
-- Be "fully virtualizable," or platform-independent.
-
-This allows you to safely execute Snaps anywhere, without the Snap needing to worry about where and
-how it's executed.
+:::info note
+To use Node.js built-in modules such as `crypto` and `path`, set the
+[`polyfills`](../../reference/cli/options.md#polyfills) configuration option to `true`.
+:::
 
 ## Secure ECMAScript (SES)
 

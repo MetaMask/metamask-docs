@@ -10,7 +10,275 @@ import TabItem from '@theme/TabItem';
 
 Snaps can expose the following entry points.
 
-### `onRpcRequest`
+## `onCronjob`
+
+To run [cron jobs](../features/cron-jobs.md) for the user, a Snap must expose the `onCronjob` entry point.
+MetaMask calls the `onCronjob` handler method at the specified schedule with the requests defined in
+the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
+
+:::note
+For MetaMask to call the Snap's `onCronjob` method, you must request the
+[`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
+:::
+
+#### Parameters
+
+An object containing an RPC request specified in the `endowment:cronjob` permission.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+    switch (request.method) {
+        case "exampleMethodOne":
+            return snap.request({
+                method: "snap_notify",
+                params: {
+                    type: "inApp",
+                    message: "Hello, world!",
+                },
+            });
+    
+        default:
+            throw new Error("Method not found.");
+    }
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+module.exports.onCronjob = async ({ request }) => {
+    switch (request.method) {
+        case "exampleMethodOne":
+            return snap.request({
+                method: "snap_notify",
+                params: {
+                    type: "inApp",
+                    message: "Hello, world!",
+                },
+            });
+    
+        default:
+            throw new Error("Method not found.");
+    }
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onHomePage`
+
+To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
+expose the `onHomePage` entry point.
+MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
+
+:::note
+For MetaMask to call the Snap's `onHomePage` method, you must request the
+[`endowment:page-home`](permissions.md#endowmentpage-home) permission.
+:::
+
+#### Parameters
+
+None.
+
+#### Returns
+
+One of the following:
+
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md).
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+  [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnHomePageHandler } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+export const onHomePage: OnHomePageHandler = async () => {
+    return {
+        content: panel([
+            heading("Hello world!"),
+            text("Welcome to my Snap home page!"),
+        ]),
+    };
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+module.exports.onHomePage = async () => {
+    return {
+        content: panel([
+            heading("Hello world!"),
+            text("Welcome to my Snap home page!"),
+        ]),
+    };
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onInstall`
+
+To run an action on installation, a Snap must expose the `onInstall` entry point.
+MetaMask calls the `onInstall` handler method after the Snap is installed successfully.
+
+:::note
+For MetaMask to call the Snap's `onInstall` method, you must request the
+[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
+:::
+
+#### Parameters
+
+None.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnInstallHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
+
+export const onInstall: OnInstallHandler = async () => {
+    await snap.request({
+        method: "snap_dialog",
+        params: {
+            type: "alert",
+            content: panel([
+                heading("Thank you for installing my Snap"),
+                text(
+                    "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+                ),
+            ]),
+        },
+    });
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+import { heading, panel, text } from "@metamask/snaps-sdk";
+
+module.exports.onInstall = async () => {
+    await snap.request({
+        method: "snap_dialog",
+        params: {
+            type: "alert",
+            content: panel([
+                heading("Thank you for installing my Snap"),
+                text(
+                    "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+                ),
+            ]),
+        },
+    });
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onNameLookup`
+
+:::flaskOnly
+:::
+
+To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must export `onNameLookup`.
+Whenever a user types in the send field, MetaMask calls this method.
+MetaMask passes the user input to the `onNameLookup` handler method.
+
+:::note
+For MetaMask to call the Snap's `onNameLookup` method, you must request the
+[`endowment:name-lookup`](permissions.md#endowmentname-lookup) permission.
+:::
+
+#### Parameters
+
+An object containing:
+
+- `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
+  chain ID.
+- `address` or `domain` - One of these parameters is defined, and the other is undefined.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnNameLookupHandler } from "@metamask/snaps-sdk";
+
+export const onNameLookup: OnNameLookupHandler = async (request) => {
+    const { chainId, address, domain } = request;
+  
+    if (address) {
+        const shortAddress = address.substring(2, 5);
+        const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
+        const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+        return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
+    }
+  
+    if (domain) {
+        const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
+        return {
+            resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+        };
+    }
+  
+    return null;
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+module.exports.onNameLookup = async ({ request }) => {
+    const { chainId, address, domain } = request;
+  
+    if (address) {
+        const shortAddress = address.substring(2, 5);
+        const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
+        const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+        return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
+    }
+  
+    if (domain) {
+        const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
+        return {
+            resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+        };
+    }
+  
+    return null;
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onRpcRequest`
 
 To implement a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) to communicate with
 dapps and other Snaps, a Snap must expose the `onRpcRequest` entry point.
@@ -37,7 +305,7 @@ A promise containing the return of the implemented method.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
+```typescript title="index.ts"
 import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
@@ -57,7 +325,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
+```js title="index.js"
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
     case 'hello':
@@ -72,7 +340,90 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 </TabItem>
 </Tabs>
 
-### `onTransaction`
+## `onSignature`
+
+:::flaskOnly
+:::
+
+To provide [signature insights](../features/signature-insights.md) before a user signs a message, a
+Snap must expose the `onSignature` entry point.
+Whenever a [signing method](/wallet/concepts/signing-methods) is called, such as `personal_sign` or
+`eth_signTypedData_v4`, MetaMask passes the raw unsigned signature payload to the `onSignature`
+handler method.
+
+:::note
+For MetaMask to call the Snap's `onSignature` method, you must request the
+[`endowment:signature-insight`](permissions.md#endowmentsignature-insight) permission.
+:::
+
+#### Parameters
+
+An object containing:
+
+- `signature` - The raw signature payload.
+- `signatureOrigin` - The signature origin if
+  [`allowSignatureOrigin`](permissions.md#endowmentsignature-insight) is set to `true`.
+
+#### Returns
+
+- An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`.
+- A content object displayed using [custom UI](../features/custom-ui/index.md) after the user
+  selects the **Sign** button.
+  Due to current limitations of MetaMask's signature confirmation UI, the content will only be displayed if
+  the `severity` property is present and set to `SeverityLevel.Critical`.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onSignature: OnSignatureHandler = async ({
+    signature,
+    signatureOrigin,
+}) => {
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Signature Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+        severity: SeverityLevel.Critical,
+    };
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+import { SeverityLevel } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+module.exports.onSignature = async ({
+    signature,
+    signatureOrigin,
+}) => {
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Signature Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+        severity: SeverityLevel.Critical,
+    };
+};
+```
+
+</TabItem>
+</Tabs>
+
+## `onTransaction`
 
 To provide transaction insights before a user signs a transaction, a Snap must expose the
 `onTransaction` entry point.
@@ -97,53 +448,57 @@ An object containing:
 
 #### Returns
 
-A content object displayed using [custom UI](../features/custom-ui.md), alongside the confirmation
-for the transaction that `onTransaction` was called with.
+One of the following:
+
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
+  for the transaction that `onTransaction` was called with.
+- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+  [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
 
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
-import type { OnTransactionHandler } from '@metamask/snaps-sdk';
-import { panel, heading, text } from '@metamask/snaps-sdk';
+```typescript title="index.ts"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
+    transaction,
+    chainId,
+    transactionOrigin,
 }) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Transaction Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ])
-  };
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Transaction Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+    };
 };
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-import { panel, heading, text } from '@metamask/snaps-sdk';
+```js title="index.js"
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
+    transaction,
+    chainId,
+    transactionOrigin,
 }) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Transaction Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ])
-  };
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Transaction Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+    };
 };
 ```
 
@@ -163,199 +518,56 @@ insight with the severity level `critical`:
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
-import type { OnTransactionHandler } from '@metamask/snaps-sdk';
-import { panel, heading, text } from '@metamask/snaps-sdk';
+```typescript title="index.ts"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
+    transaction,
+    chainId,
+    transactionOrigin,
 }) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Transaction Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ]),
-    // highlight-next-line
-    severity: 'critical'
-  };
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Transaction Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+        // highlight-next-line
+        severity: "critical",
+    };
 };
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-import { panel, heading, text } from '@metamask/snaps-sdk';
+```js title="index.js"
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
+    transaction,
+    chainId,
+    transactionOrigin,
 }) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading('My Transaction Insights'),
-      text('Here are the insights:'),
-      ...(insights.map((insight) => text(insight.value)))
-    ]),
-    // highlight-next-line
-    severity: 'critical'
-  };
+    const insights = /* Get insights */;
+    return {
+        content: panel([
+            heading("My Transaction Insights"),
+            text("Here are the insights:"),
+            ...(insights.map((insight) => text(insight.value))),
+        ]),
+        // highlight-next-line
+        severity: "critical",
+    };
 };
 ```
 
 </TabItem>
 </Tabs>
 
-### `onCronjob`
-
-To run periodic actions for the user (cron jobs), a Snap must expose the `onCronjob` entry point.
-MetaMask calls the `onCronjob` handler method at the specified times with the specified payloads
-defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
-
-:::note
-For MetaMask to call the Snap's `onCronjob` method, you must request the
-[`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
-:::
-
-:::info Access data from cron jobs
-When accessing encrypted data from cron jobs using [`snap_manageState`](../reference/snaps-api.md#snap_managestate),
-MetaMask requires the user to enter their password if the wallet is locked.
-This interaction can be confusing to the user, since the Snap accesses the data in the background
-without the user being aware.
-
-If your Snap's cron job does not need to access sensitive data, store that data in unencrypted state
-by setting `encrypted` to `false` when using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
-:::
-
-If the cron job's logic requires access to encrypted state, you can use
-[`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to ensure that MetaMask is
-unlocked before accessing state.
-This will prevent an unexpected password request popup, improving the user's experience.
-
-#### Parameters
-
-An object containing an RPC request specified in the `endowment:cronjob` permission.
-
-#### Example
-
-<Tabs>
-<TabItem value="TypeScript">
-
-```typescript
-import type { OnCronjobHandler } from '@metamask/sdk';
-
-export const onCronjob: OnCronjobHandler = async ({ request }) => {
-  switch (request.method) {
-    case 'exampleMethodOne':
-      return snap.request({
-        method: 'snap_notify',
-        params: {
-          type: 'inApp',
-          message: `Hello, world!`,
-        },
-      });
-
-    default:
-      throw new Error('Method not found.');
-  }
-};
-```
-
-</TabItem>
-<TabItem value="JavaScript">
-
-```js
-module.exports.onCronjob = async ({ request }) => {
-  switch (request.method) {
-    case 'exampleMethodOne':
-      return snap.request({
-        method: 'snap_notify',
-        params: {
-          type: 'inApp',
-          message: `Hello, world!`,
-        },
-      });
-
-    default:
-      throw new Error('Method not found.');
-  }
-};
-```
-
-</TabItem>
-</Tabs>
-
-### `onInstall`
-
-To run an action on installation, a Snap must expose the `onInstall` entry point.
-MetaMask calls the `onInstall` handler method after the Snap is installed successfully. 
-
-:::note
-For MetaMask to call the Snap's `onInstall` method, you must request the
-[`endowment:lifecycle-hooks`](permissions.md#endowmentlifecycle-hooks) permission.
-:::
-
-#### Parameters
-
-None.
-
-#### Example
-
-<Tabs>
-<TabItem value="TypeScript">
-
-```typescript
-import type { OnInstallHandler } from '@metamask/snaps-sdk';
-import { heading, panel, text } from '@metamask/snaps-sdk';
-
-export const onInstall: OnInstallHandler = async () => {
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: panel([
-        heading('Thank you for installing my Snap'),
-        text(
-          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
-        ),
-      ]),
-    },
-  });
-};
-```
-
-</TabItem>
-<TabItem value="JavaScript">
-
-```js
-import { heading, panel, text } from '@metamask/snaps-sdk';
-
-module.exports.onInstall = async () => {
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: panel([
-        heading('Thank you for installing my Snap'),
-        text(
-          'To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).',
-        ),
-      ]),
-    },
-  });
-};
-```
-
-</TabItem>
-</Tabs>
-
-### `onUpdate`
+## `onUpdate`
 
 To run an action on update, a Snap must expose the `onUpdate` entry point.
 MetaMask calls the `onUpdate` handler method after the Snap is updated successfully. 
@@ -374,108 +586,101 @@ None.
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
-import type { OnUpdateHandler } from '@metamask/snaps-sdk';
-import { heading, panel, text } from '@metamask/snaps-sdk';
+```typescript title="index.ts"
+import type { OnUpdateHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 export const onUpdate: OnUpdateHandler = async () => {
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: panel([
-        heading('Thank you for updating my Snap'),
-        text(
-          'New features added in this version:',
-        ),
-        text(
-          'Added a dialog that appears when updating'
-        ), 
-      ]),
-    },
-  });
+    await snap.request({
+        method: "snap_dialog",
+        params: {
+            type: "alert",
+            content: panel([
+                heading("Thank you for updating my Snap"),
+                text(
+                    "New features added in this version:",
+                ),
+                text(
+                    "Added a dialog that appears when updating."
+                ), 
+            ]),
+        },
+    });
 };
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-import { heading, panel, text } from '@metamask/snaps-sdk';
+```js title="index.js"
+import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onUpdate = async () => {
-  await snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: 'alert',
-      content: panel([
-        heading('Thank you for updating my Snap'),
-        text(
-          'New features added in this version:',
-        ),
-        text(
-          'Added a dialog that appears when updating'
-        ), 
-      ]),
-    },
-  });
+    await snap.request({
+        method: "snap_dialog",
+        params: {
+            type: "alert",
+            content: panel([
+                heading("Thank you for updating my Snap"),
+                text(
+                    "New features added in this version:",
+                ),
+                text(
+                    "Added a dialog that appears when updating."
+                ), 
+            ]),
+        },
+    });
 };
 ```
 
 </TabItem>
 </Tabs>
 
-### `onHomePage`
+## `onUserInput`
 
-To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
-expose the `onHomePage` entry point. 
-MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
-
-:::note
-For MetaMask to call the Snap's `onHomePage` method, you must request the
-[`endowment:page-home`](permissions.md#endowmentpage-home) permission.
+:::flaskOnly
 :::
+
+To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, a Snap must export `onUserInput`.
 
 #### Parameters
 
-None.
-
-#### Returns
-
-A content object displayed using [custom UI](../features/custom-ui.md).
+- `id` - The ID of the interface being acted on.
+- `event` - An event object containing:
+  - `type` - The type of the event.
+    Possible values are `ButtonClickEvent`, `FormSubmitEvent`, or `InputChangeEvent`.
+    These enums are exported from the `@metamask/snaps-sdk` module.
+  - `name` - The name of the component that fired the event.
+    Optional when the event type is `ButtonClickEvent`.
+  - `value` - When the event type is `FormSubmitEvent`, the values in the form as an object.
 
 #### Example
 
 <Tabs>
 <TabItem value="TypeScript">
 
-```typescript
-import type { OnHomePageHandler } from '@metamask/snaps-sdk';
-import { panel, text, heading } from '@metamask/snaps-sdk';
+```typescript title="index.ts"
+import type { OnUserInputHandler } from "@metamask/snaps-sdk";
+import { UserInputEventType } from "@metamask/snaps-sdk";
 
-export const onHomePage: OnHomePageHandler = async () => {
-  return {
-    content: panel([
-      heading('Hello world!'),
-      text('Welcome to my Snap home page!'),
-    ]),
-  };
+export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
+    if (event.type === UserInputEventType.FormSubmitEvent) {
+        console.log("The submitted form values are", event.value);
+    }
 };
 ```
 
 </TabItem>
 <TabItem value="JavaScript">
 
-```js
-import { panel, text, heading } from '@metamask/snaps-sdk';
+```js title="index.js"
+const { UserInputEventType } = require("@metamask/snaps-sdk");
 
-module.exports.onHomePage = async () => {
-  return {
-    content: panel([
-      heading('Hello world!'),
-      text('Welcome to my Snap home page!'),
-    ]),
-  };
+module.exports.onUserInput = async ({ id, event }) => {
+    if (event.type === UserInputEventType.FormSubmitEvent) {
+        console.log("The submitted form values are", event.value);
+    }
 };
 ```
 
