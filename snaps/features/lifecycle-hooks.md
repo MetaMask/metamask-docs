@@ -10,7 +10,7 @@ notification, when a user installs or updates your Snap.
 
 ## Steps
 
-### 1. Request permission to run lifecycle hooks
+### 1. Request permission to implement lifecycle hooks
 
 Request the [`endowment:lifecycle-hooks`](../reference/permissions.md#endowmentlifecycle-hooks)
 permission.
@@ -24,9 +24,9 @@ Add the following to your Snap's manifest file:
 
 ### 2. Run an action on installation
 
-Implement the [`onInstall`](../reference/entry-points.md#oninstall) entry point to run an action
-when a user installs your Snap.
-For example, you can use `onInstall` to perform any initialization that is required.
+To run an action when a user installs your Snap, expose the
+[`onInstall`](../reference/entry-points.md#oninstall) entry point and implement the action.
+For example, you can use `onInstall` to perform any initialization that is required on installation.
 
 The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) on installation:
 
@@ -52,9 +52,9 @@ export const onInstall: OnInstallHandler = async () => {
 
 ### 3. Run an action on update
 
-Implement the [`onUpdate`](../reference/entry-points.md#onupdate) entry point to run an action when
-a user updates your Snap.
-For example, you can use `onUpdate` to perform any migrations that are required.
+To run an action when a user updates your Snap, expose the
+[`onUpdate`](../reference/entry-points.md#onupdate) entry point and implement the action.
+For example, you can use `onUpdate` to perform any migrations that are required on update.
 
 The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) on update:
 
