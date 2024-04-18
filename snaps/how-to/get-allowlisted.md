@@ -55,17 +55,17 @@ You will need to provide the following information:
     - If applicable, you should also describe quick steps to onboard and use the Snap. For example: `After installing the Snap, visit the companion dapp at https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress.`
 - Link to the public GitHub repo and npm package
     - If your Snap is hosted on a different site, like GitLab, you can link to that instead.
-    - Please ensure that you have [correctly published the Snap package](../how-to/publish-a-snap.md).
+    - Ensure that you have [correctly published the Snap package](../how-to/publish-a-snap.md).
 - Snap version number to be allowlisted
     - Make sure that the version number in `package.json` and `snap.manifest.json` match, and that the Snap has been built with the correct `shasum`.
 - Snap auditor and audit report
-    - If your Snap uses one or more of the permissions listed above, please provide a PDF or link to where the audit report has been published. Otherwise, leave this field blank.
-    - Please note: the audit report will be made public. You may ask your auditor to publish the report on their website and provide the link to us.
+    - If your Snap uses one or more of the permissions listed above, provide a PDF or URL to where the audit report has been published. Otherwise, leave this field blank.
+    - Note: the audit report will be made public. You may ask your auditor to publish the report on their website and provide the link to us.
 - Customer support details
     - To ensure a smooth user experience, we require customer support details for your Snap. This allows us to escalate any issues that the user is facing with your Snap. You can find more details [here](https://consensys.notion.site/Providing-User-Support-Information-cff79a7d896e4da6a2f8a17ce074e585). The Escalation Contact will be kept confidential between our teams, the rest of the information will be public. You must provide an Escalation Contact and at least one of the remaining items.
 - Images
     - Here's your opportunity to provide compelling previews of your Snap! These can be screenshots or promotional images to help users get an idea of what your Snap can do. 
-    - Please provide 3 images with the following dimensions: 960w x 540h. PNG or JPG are allowed.
+    - Upload 3 images with the following dimensions: 960w x 540h. PNG or JPG are allowed.
 - Demo video
     - This will help our team review your Snap. It may also be used by our marketing team.
 
@@ -98,6 +98,6 @@ and show the orange MetaMask logo instead of the purple Flask logo.
 
 The allowlist uses strict versioning for all Snaps. When you have a new version of your Snap published to npm, you will need to submit it for allowlisting again. Users will not be able to install new versions until they are allowlisted. 
 
-Please submit the [Directory Information Form](https://go.metamask.io/snaps-directory-request) again for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "n/a." When providing the version to be allowlisted, please also let let us know if previous versions of your Snap can remain allowlisted or should be replaced with this new version. 
+Submit the [Directory Information Form](https://go.metamask.io/snaps-directory-request) again for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "n/a." When providing the version to be allowlisted, you should also let us know if previous versions of your Snap can remain allowlisted or should be replaced with this new version. 
 
 If you need to update information about your Snap in the [Snaps Directory](https://snaps.metamask.io) without submitting a new version to the allowlist, [get in touch with our Builder Engagement Program](https://consensys.notion.site/Connect-with-us-7ffcbcc7981b4a4da7f1a1d39f6c127b).
