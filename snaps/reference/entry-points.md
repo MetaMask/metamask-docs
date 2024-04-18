@@ -13,8 +13,8 @@ Snaps can expose the following entry points.
 ## `onCronjob`
 
 To run [cron jobs](../features/cron-jobs.md) for the user, a Snap must expose the `onCronjob` entry point.
-MetaMask calls the `onCronjob` handler method at the specified schedule with the specified requests
-defined in the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
+MetaMask calls the `onCronjob` handler method at the specified schedule with the requests defined in
+the [`endowment:cronjob`](permissions.md#endowmentcronjob) permission.
 
 :::note
 For MetaMask to call the Snap's `onCronjob` method, you must request the

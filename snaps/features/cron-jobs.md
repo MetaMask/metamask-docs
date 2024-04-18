@@ -13,9 +13,9 @@ For example, you can display a dialog or notification in MetaMask at a specific 
 ### 1. Configure a cron job
 
 To configure a cron job, request the [`endowment:cronjob`](../reference/permissions.md#endowmentcronjob)
-permission specifying a schedule of one or more cron jobs in the `jobs` array.
-Each job is defined by a [cron expression](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm)
-and request object that will be sent to the Snap's cron job handler when the job is executed.
+permission, specifying one or more cron jobs in the `jobs` array.
+Define each job with a [cron expression](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm)
+and a request object, which MetaMask sends to the Snap's cron job handler when the job is executed.
 
 For example, to configure a job that executes every minute, add the following to your Snap's manifest file:
 
@@ -37,7 +37,7 @@ For example, to configure a job that executes every minute, add the following to
 ### 2. Implement a cron job handler
 
 Expose an [`onCronjob`](../reference/entry-points.md#oncronjob) entry point, which is triggered at
-the specified schedule with the specified requests defined in the `endowment:cronjob` permission.
+the specified schedule with the requests defined in the `endowment:cronjob` permission.
 The following example handles the `execute` method specified in the previous example:
 
 ```typescript title="index.ts"
@@ -64,7 +64,7 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 };
 ```
 
-:::note Access data from cron jobs
+:::tip Access data from cron jobs
 When accessing encrypted data from cron jobs using
 [`snap_manageState`](../reference/snaps-api.md#snap_managestate), MetaMask requires the user to
 enter their password if the wallet is locked.
