@@ -34,7 +34,7 @@ A list of approved third-party auditors and details about the audit process are 
 ## Submit your Snap
 
 When you are ready to submit your Snap, you should fill out the 
-[MetaMask Snaps Directory Information Form](https://docs.google.com/forms/d/e/1FAIpQLSeDAnk0Di_k8Qgrsj9_ofnf-1d_NfbG3fmSOHD1m8dKun1pXw/viewform). 
+[MetaMask Snaps Directory Information Form](https://go.metamask.io/snaps-directory-request). 
 You will need to provide the following information: 
 
 - Email
@@ -88,10 +88,16 @@ integrate with your existing dapp.
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
 [connect to your Snap](connect-to-a-snap.md).
 
+:::note
+While testing your Snap, you may have designed your dapp to require MetaMask Flask. 
+Once your Snap is allowlisted, you should update your dapp to support any flavor of MetaMask, 
+and show the orange MetaMask logo instead of the purple Flask logo. 
+:::
+
 ## Updating your Snap 
 
 The allowlist uses strict versioning for all Snaps. When you have a new version of your Snap published to npm, you will need to submit it for allowlisting again. Users will not be able to install new versions until they are allowlisted. 
 
-Please submit the [Directory Information Form](https://docs.google.com/forms/d/e/1FAIpQLSeDAnk0Di_k8Qgrsj9_ofnf-1d_NfbG3fmSOHD1m8dKun1pXw/viewform) again for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "n/a." When providing the version to be allowlisted, please also let let us know if previous versions of your Snap can remain allowlisted or should be replaced with this new version. 
+Please submit the [Directory Information Form](https://go.metamask.io/snaps-directory-request) again for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "n/a." When providing the version to be allowlisted, please also let let us know if previous versions of your Snap can remain allowlisted or should be replaced with this new version. 
 
 If you need to update information about your Snap in the [Snaps Directory](https://snaps.metamask.io) without submitting a new version to the allowlist, [get in touch with our Builder Engagement Program](https://consensys.notion.site/Connect-with-us-7ffcbcc7981b4a4da7f1a1d39f6c127b).
