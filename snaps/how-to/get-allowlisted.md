@@ -96,8 +96,6 @@ and show the orange MetaMask logo instead of the purple Flask logo.
 
 ## Updating your Snap 
 
-The allowlist uses strict versioning for all Snaps. When you have a new version of your Snap published to npm, you will need to submit it for allowlisting again. Users will not be able to install new versions until they are allowlisted. 
+The allowlist uses strict versioning for all Snaps. After publishing a new version of your Snap to npm, you will need to submit it for allowlisting. Users will not be able to install new versions until they are allowlisted. 
 
-Submit the [Directory Information Form](https://go.metamask.io/snaps-directory-request) again for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "n/a." When providing the version to be allowlisted, you should also let us know if previous versions of your Snap can remain allowlisted or should be replaced with this new version. 
-
-If you need to update information about your Snap in the [Snaps Directory](https://snaps.metamask.io) without submitting a new version to the allowlist, [get in touch with our Builder Engagement Program](https://consensys.notion.site/Connect-with-us-7ffcbcc7981b4a4da7f1a1d39f6c127b).
+Submit the [Directory Information Update Form](https://go.metamask.io/snaps-directory-update-request) for any new version of your Snap. You can also update any information about your Snap with this form. For any fields that do not need to be changed, you can leave them blank or enter "N/A." When providing the version to be allowlisted, you should also let us know if previous versions of your Snap should be removed from the allowlist (effectively replaced with this new version). 
