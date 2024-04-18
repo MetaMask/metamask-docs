@@ -26,9 +26,9 @@ Add the following to your Snap's manifest file:
 
 To run an action when a user installs your Snap, expose the
 [`onInstall`](../reference/entry-points.md#oninstall) entry point and implement the action.
-For example, you can use `onInstall` to perform any initialization that is required on installation.
+For example, you can use `onInstall` to perform any initialization that is required upon installation.
 
-The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) on installation:
+The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) upon installation:
 
 ```typescript title="index.ts"
 import type { OnInstallHandler } from "@metamask/snaps-sdk";
@@ -54,9 +54,9 @@ export const onInstall: OnInstallHandler = async () => {
 
 To run an action when a user updates your Snap, expose the
 [`onUpdate`](../reference/entry-points.md#onupdate) entry point and implement the action.
-For example, you can use `onUpdate` to perform any migrations that are required on update.
+For example, you can use `onUpdate` to perform any migrations that are required upon update.
 
-The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) on update:
+The following example displays an [alert dialog](../reference/snaps-api.md#alert-dialog) upon update:
 
 ```typescript title="index.ts"
 import type { OnUpdateHandler } from "@metamask/snaps-sdk";
