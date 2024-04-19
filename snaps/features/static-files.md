@@ -19,16 +19,14 @@ File paths are relative to the Snap package root, that is, one level above the `
 For example:
 
 ```json title="snap.manifest.json"
-{
-    "source": {
-        "shasum": "xxx",
-        "location": {
-            // ...
-        },
-        "files": [
-            "./files/myfile.bin"
-        ]
-    }
+"source": {
+  "shasum": "xxx",
+  "location": {
+    // ...
+  },
+  "files": [
+    "./files/myfile.bin"
+  ]
 }
 ```
 
@@ -40,11 +38,11 @@ For example:
 
 ```javascript title="index.js"
 const contents = await snap.request({
-    method: "snap_getFile",
-    params: {
-        path: "./files/myfile.bin",
-        encoding: "hex",
-    },
+  method: "snap_getFile",
+  params: {
+    path: "./files/myfile.bin",
+    encoding: "hex",
+  },
 });
 
 // "0x..."

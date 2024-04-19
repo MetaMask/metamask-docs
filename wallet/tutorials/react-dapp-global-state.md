@@ -128,12 +128,12 @@ There are two ways to use ESLint:
 
     ```json title="settings.json"
     {
-        "eslint.format.enable": true,
-        "eslint.packageManager": "npm",
-        "editor.codeActionsOnSave": {
-            "source.fixAll.eslint": true
-        },
-        "eslint.codeActionsOnSave.mode": "all"
+      "eslint.format.enable": true,
+      "eslint.packageManager": "npm",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.codeActionsOnSave.mode": "all"
     }
     ```
 
@@ -210,155 +210,154 @@ The following code contains comments describing advanced React patterns and how 
 ```tsx title="useMetaMask.tsx"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-    useState,
-    useEffect,
-    createContext,
-    PropsWithChildren,
-    useContext,
-    useCallback,
+  useState,
+  useEffect,
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useCallback,
 } from "react";
 
 import detectEthereumProvider from "@metamask/detect-provider";
 import { formatBalance } from "~/utils";
 
 interface WalletState {
-    accounts: any[];
-    balance: string;
-    chainId: string;
+  accounts: any[];
+  balance: string;
+  chainId: string;
 }
 
 interface MetaMaskContextData {
-    wallet: WalletState;
-    hasProvider: boolean | null;
-    error: boolean;
-    errorMessage: string;
-    isConnecting: boolean;
-    connectMetaMask: () => void;
-    clearError: () => void;
+  wallet: WalletState;
+  hasProvider: boolean | null;
+  error: boolean;
+  errorMessage: string;
+  isConnecting: boolean;
+  connectMetaMask: () => void;
+  clearError: () => void;
 }
 
 const disconnectedState: WalletState = {
-    accounts: [],
-    balance: "",
-    chainId: "",
+  accounts: [],
+  balance: "",
+  chainId: "",
 };
 
 const MetaMaskContext = createContext<MetaMaskContextData>(
-    {} as MetaMaskContextData
+  {} as MetaMaskContextData
 );
 
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
-    const [hasProvider, setHasProvider] = useState<boolean | null>(null);
+  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
-    const [isConnecting, setIsConnecting] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
-    const [errorMessage, setErrorMessage] = useState("");
-    const clearError = () => setErrorMessage("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const clearError = () => setErrorMessage("");
 
-    const [wallet, setWallet] = useState(disconnectedState);
-    // useCallback ensures that you don't uselessly recreate the _updateWallet function on every render
-    const _updateWallet = useCallback(async (providedAccounts?: any) => {
-        const accounts =
-            providedAccounts ||
-            (await window.ethereum.request({ method: "eth_accounts" }));
+  const [wallet, setWallet] = useState(disconnectedState);
+  // useCallback ensures that you don't uselessly recreate the _updateWallet function on every render.
+  const _updateWallet = useCallback(async (providedAccounts?: any) => {
+    const accounts =
+      providedAccounts ||
+      (await window.ethereum.request({ method: "eth_accounts" }));
 
-        if (accounts.length === 0) {
-            // If there are no accounts, then the user is disconnected
-            setWallet(disconnectedState);
-            return;
-        }
+    if (accounts.length === 0) {
+      // If there are no accounts, then the user is disconnected.
+      setWallet(disconnectedState);
+      return;
+    }
 
-        const balance = formatBalance(
-            await window.ethereum.request({
-                method: "eth_getBalance",
-                params: [accounts[0], "latest"],
-            })
-        );
-        const chainId = await window.ethereum.request({
-            method: "eth_chainId",
-        });
-
-        setWallet({ accounts, balance, chainId });
-    }, []);
-
-    const updateWalletAndAccounts = useCallback(
-        () => _updateWallet(),
-        [_updateWallet]
+    const balance = formatBalance(
+      await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [accounts[0], "latest"],
+      })
     );
-    const updateWallet = useCallback(
-        (accounts: any) => _updateWallet(accounts),
-        [_updateWallet]
-    );
+    const chainId = await window.ethereum.request({
+      method: "eth_chainId",
+    });
 
-    /**
-     * This logic checks if MetaMask is installed. If it is, some event handlers are set up
-     * to update the wallet state when MetaMask changes. The function returned by useEffect
-     * is used as a "cleanup": it removes the event handlers whenever the MetaMaskProvider
-     * is unmounted.
-     */
-    useEffect(() => {
-        const getProvider = async () => {
-            const provider = await detectEthereumProvider({ silent: true });
-            setHasProvider(Boolean(provider));
+    setWallet({ accounts, balance, chainId });
+  }, []);
 
-            if (provider) {
-                updateWalletAndAccounts();
-                window.ethereum.on("accountsChanged", updateWallet);
-                window.ethereum.on("chainChanged", updateWalletAndAccounts);
-            }
-        };
+  const updateWalletAndAccounts = useCallback(
+    () => _updateWallet(),
+    [_updateWallet]
+  );
+  const updateWallet = useCallback(
+    (accounts: any) => _updateWallet(accounts),
+    [_updateWallet]
+  );
 
-        getProvider();
+  /**
+   * This logic checks if MetaMask is installed. If it is, some event handlers are set up to update
+   * the wallet state when MetaMask changes. The function returned by useEffect is used as a
+   * "cleanup"; it removes the event handlers whenever the MetaMaskProvider is unmounted.
+   */
+  useEffect(() => {
+    const getProvider = async () => {
+      const provider = await detectEthereumProvider({ silent: true });
+      setHasProvider(Boolean(provider));
 
-        return () => {
-            window.ethereum?.removeListener("accountsChanged", updateWallet);
-            window.ethereum?.removeListener(
-                "chainChanged",
-                updateWalletAndAccounts
-            );
-        };
-    }, [updateWallet, updateWalletAndAccounts]);
-
-    const connectMetaMask = async () => {
-        setIsConnecting(true);
-
-        try {
-            const accounts = await window.ethereum.request({
-                method: "eth_requestAccounts",
-            });
-            clearError();
-            updateWallet(accounts);
-        } catch (err: any) {
-            setErrorMessage(err.message);
-        }
-        setIsConnecting(false);
+      if (provider) {
+        updateWalletAndAccounts();
+        window.ethereum.on("accountsChanged", updateWallet);
+        window.ethereum.on("chainChanged", updateWalletAndAccounts);
+      }
     };
 
-    return (
-        <MetaMaskContext.Provider
-            value={{
-                wallet,
-                hasProvider,
-                error: !!errorMessage,
-                errorMessage,
-                isConnecting,
-                connectMetaMask,
-                clearError,
-            }}
-        >
-            {children}
-        </MetaMaskContext.Provider>
-    );
+    getProvider();
+
+    return () => {
+      window.ethereum?.removeListener("accountsChanged", updateWallet);
+      window.ethereum?.removeListener(
+        "chainChanged",
+        updateWalletAndAccounts
+      );
+    };
+  }, [updateWallet, updateWalletAndAccounts]);
+
+  const connectMetaMask = async () => {
+    setIsConnecting(true);
+
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      clearError();
+      updateWallet(accounts);
+    } catch (err: any) {
+      setErrorMessage(err.message);
+    }
+    setIsConnecting(false);
+  };
+
+  return (
+    <MetaMaskContext.Provider
+      value={{
+        wallet,
+        hasProvider,
+        error: !!errorMessage,
+        errorMessage,
+        isConnecting,
+        connectMetaMask,
+        clearError,
+      }}
+    >
+      {children}
+    </MetaMaskContext.Provider>
+  );
 };
 
 export const useMetaMask = () => {
-    const context = useContext(MetaMaskContext);
-    if (context === undefined) {
-        throw new Error(
-            "useMetaMask must be used within a MetaMaskContextProvider"
-        );
-    }
-    return context;
+  const context = useContext(MetaMaskContext);
+  if (context === undefined) {
+    throw new Error(
+      "useMetaMask must be used within a MetaMaskContextProvider"
+    );
+  }
+  return context;
 };
 ```
 
@@ -396,15 +395,15 @@ import { MetaMaskError } from "./components/MetaMaskError";
 import { MetaMaskContextProvider } from "./hooks/useMetaMask";
 
 export const App = () => {
-    return (
-        <MetaMaskContextProvider>
-            <div className={styles.appContainer}>
-                <Navigation />
-                <Display />
-                <MetaMaskError />
-            </div>
-        </MetaMaskContextProvider>
-    );
+  return (
+    <MetaMaskContextProvider>
+      <div className={styles.appContainer}>
+        <Navigation />
+        <Display />
+        <MetaMaskError />
+      </div>
+    </MetaMaskContextProvider>
+  );
 };
 ```
 
@@ -425,42 +424,37 @@ import { formatAddress } from "~/utils";
 import styles from "./Navigation.module.css";
 
 export const Navigation = () => {
-    const { wallet, hasProvider, isConnecting, connectMetaMask } =
-        useMetaMask();
+  const { wallet, hasProvider, isConnecting, connectMetaMask } =
+    useMetaMask();
 
-    return (
-        <div className={styles.navigation}>
-            <div className={styles.flexContainer}>
-                <div className={styles.leftNav}>Vite + React & MetaMask</div>
-                <div className={styles.rightNav}>
-                    {!hasProvider && (
-                        <a href="https://metamask.io" target="_blank">
-                            Install MetaMask
-                        </a>
-                    )}
-                    {window.ethereum?.isMetaMask &&
-                        wallet.accounts.length < 1 && (
-                            <button
-                                disabled={isConnecting}
-                                onClick={connectMetaMask}
-                            >
-                                Connect MetaMask
-                            </button>
-                        )}
-                    {hasProvider && wallet.accounts.length > 0 && (
-                        <a
-                            className="text_link tooltip-bottom"
-                            href={`https://etherscan.io/address/${wallet.accounts[0]}`}
-                            target="_blank"
-                            data-tooltip="Open in Block Explorer"
-                        >
-                            {formatAddress(wallet.accounts[0])}
-                        </a>
-                    )}
-                </div>
-            </div>
+  return (
+    <div className={styles.navigation}>
+      <div className={styles.flexContainer}>
+        <div className={styles.leftNav}>Vite + React & MetaMask</div>
+        <div className={styles.rightNav}>
+          {!hasProvider && (
+            <a href="https://metamask.io" target="_blank">Install MetaMask</a>
+          )}
+          {window.ethereum?.isMetaMask &&
+            wallet.accounts.length < 1 && (
+              <button disabled={isConnecting} onClick={connectMetaMask}>
+                Connect MetaMask
+              </button>
+            )}
+          {hasProvider && wallet.accounts.length > 0 && (
+            <a
+              className="text_link tooltip-bottom"
+              href={`https://etherscan.io/address/${wallet.accounts[0]}`}
+              target="_blank"
+              data-tooltip="Open in Block Explorer"
+            >
+              {formatAddress(wallet.accounts[0])}
+            </a>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 ```
 
@@ -474,7 +468,7 @@ Also, the `formatAddress` function formats the wallet address for display purpos
 
 ```ts
 {
-    formatAddress(wallet.accounts[0]);
+  formatAddress(wallet.accounts[0]);
 }
 ```
 
@@ -483,17 +477,17 @@ Update `/src/utils/index.tsx` to the following:
 
 ```ts title="utils/index.ts"
 export const formatBalance = (rawBalance: string) => {
-    const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
-    return balance;
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
+  return balance;
 };
 
 export const formatChainAsNum = (chainIdHex: string) => {
-    const chainIdNum = parseInt(chainIdHex);
-    return chainIdNum;
+  const chainIdNum = parseInt(chainIdHex);
+  return chainIdNum;
 };
 
 export const formatAddress = (addr: string) => {
-    return `${addr.substring(0, 8)}...`;
+  return `${addr.substring(0, 8)}...`;
 };
 ```
 
@@ -519,22 +513,20 @@ import { formatChainAsNum } from "~/utils";
 import styles from "./Display.module.css";
 
 export const Display = () => {
-    const { wallet } = useMetaMask();
+  const { wallet } = useMetaMask();
 
-    return (
-        <div className={styles.display}>
-            {wallet.accounts.length > 0 && (
-                <>
-                    <div>Wallet Accounts: {wallet.accounts[0]}</div>
-                    <div>Wallet Balance: {wallet.balance}</div>
-                    <div>Hex ChainId: {wallet.chainId}</div>
-                    <div>
-                        Numeric ChainId: {formatChainAsNum(wallet.chainId)}
-                    </div>
-                </>
-            )}
-        </div>
-    );
+  return (
+    <div className={styles.display}>
+      {wallet.accounts.length > 0 && (
+        <>
+          <div>Wallet Accounts: {wallet.accounts[0]}</div>
+          <div>Wallet Balance: {wallet.balance}</div>
+          <div>Hex ChainId: {wallet.chainId}</div>
+          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>
+        </>
+      )}
+    </div>
+  );
 };
 ```
 
@@ -560,19 +552,19 @@ import { useMetaMask } from "~/hooks/useMetaMask";
 import styles from "./MetaMaskError.module.css";
 
 export const MetaMaskError = () => {
-    const { error, errorMessage, clearError } = useMetaMask();
-    return (
-        <div
-            className={styles.metaMaskError}
-            style={error ? { backgroundColor: "brown" } : {}}
-        >
-            {error && (
-                <div onClick={clearError}>
-                    <strong>Error:</strong> {errorMessage}
-                </div>
-            )}
+  const { error, errorMessage, clearError } = useMetaMask();
+  return (
+    <div
+      className={styles.metaMaskError}
+      style={error ? { backgroundColor: "brown" } : {}}
+    >
+      {error && (
+        <div onClick={clearError}>
+          <strong>Error:</strong> {errorMessage}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 ```
 

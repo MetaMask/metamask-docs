@@ -22,7 +22,7 @@ For example, to call [`snap_notify`](../../reference/snaps-api.md#snap_notify), 
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "snap_notify": {}
+  "snap_notify": {}
 }
 ```
 
@@ -30,11 +30,11 @@ Your Snap can then call `snap_notify` in its source code:
 
 ```typescript title="index.ts"
 await snap.request({
-    method: "snap_notify",
-    params: {
-        type: "inApp",
-        message: "Hello, world!",
-    },
+  method: "snap_notify",
+  params: {
+    type: "inApp",
+    message: "Hello, world!",
+  },
 });
 ```
 
@@ -59,21 +59,21 @@ For example, to call `wallet_snap`:
 ```js title="index.js"
 // Request permission to connect to the Snap.
 await window.ethereum.request({
-    method: "wallet_requestSnaps",
-    params: {
-        "npm:hello-snap": {},
-    },
+  method: "wallet_requestSnaps",
+  params: {
+    "npm:hello-snap": {},
+  },
 });
 
 // Call the "hello" method of the Snap using wallet_snap.
 const response = await window.ethereum.request({
-    method: "wallet_snap",
-    params: {
-        snapId: "npm:hello-snap",
-        request: { 
-            method: "hello",
-        },
+  method: "wallet_snap",
+  params: {
+    snapId: "npm:hello-snap",
+    request: { 
+      method: "hello",
     },
+  },
 });
 
 console.log(response); // "world!"
@@ -91,7 +91,7 @@ the required permission:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:ethereum-provider": {}
+  "endowment:ethereum-provider": {}
 }
 ```
 
@@ -141,9 +141,9 @@ Set `dapps` to `true` to enable dapps to make JSON-RPC requests.
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:rpc": {
-        "dapps": true
-    }
+  "endowment:rpc": {
+    "dapps": true
+  }
 }
 ```
 
@@ -151,14 +151,14 @@ Your Snap can then implement and expose a custom API using the `onRpcRequest` fu
 
 ```typescript title="index.ts"
 module.exports.onRpcRequest = async ({ origin, request }) => {
-    switch (request.method) {
-        // Expose a "hello" JSON-RPC method to dapps.
-        case "hello":
-            return "world!";
-    
-        default:
-            throw new Error("Method not found.");
-    }
+  switch (request.method) {
+    // Expose a "hello" JSON-RPC method to dapps.
+    case "hello":
+      return "world!";
+
+    default:
+      throw new Error("Method not found.");
+  }
 };
 ```
 
@@ -168,22 +168,22 @@ A dapp can then install the Snap and call the exposed method:
 // Request permission to connect to the Snap.
 // If the Snap is not already installed, the user will be prompted to install it.
 await window.ethereum.request({
-    method: "wallet_requestSnaps",
-    params: {
-        // Assuming the Snap is published to npm using the package name "hello-snap".
-        "npm:hello-snap": {},
-    },
+  method: "wallet_requestSnaps",
+  params: {
+    // Assuming the Snap is published to npm using the package name "hello-snap".
+    "npm:hello-snap": {},
+  },
 });
 
 // Invoke the "hello" JSON-RPC method exposed by the Snap.
 const response = await window.ethereum.request({
-    method: "wallet_invokeSnap",
-    params: {
-        snapId: "npm:hello-snap",
-        request: {
-            method: "hello",
-        },
+  method: "wallet_invokeSnap",
+  params: {
+    snapId: "npm:hello-snap",
+    request: {
+      method: "hello",
     },
+  },
 });
 
 console.log(response); // "world!"

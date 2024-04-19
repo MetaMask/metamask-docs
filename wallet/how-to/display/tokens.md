@@ -42,32 +42,32 @@ const tokenDecimals = 18;
 const tokenImage = "http://placekitten.com/200/300";
 
 try {
-    // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-    const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
-        .request({
-            method: "wallet_watchAsset",
-            params: {
-                type: "ERC20",
-                options: {
-                    // The address of the token.
-                    address: tokenAddress,
-                    // A ticker symbol or shorthand, up to 5 characters.
-                    symbol: tokenSymbol,
-                    // The number of decimals in the token.
-                    decimals: tokenDecimals,
-                    // A string URL of the token logo.
-                    image: tokenImage,
-                },
-            },
-        });
+  // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
+  const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "wallet_watchAsset",
+      params: {
+        type: "ERC20",
+        options: {
+          // The address of the token.
+          address: tokenAddress,
+          // A ticker symbol or shorthand, up to 5 characters.
+          symbol: tokenSymbol,
+          // The number of decimals in the token.
+          decimals: tokenDecimals,
+          // A string URL of the token logo.
+          image: tokenImage,
+        },
+      },
+    });
 
-    if (wasAdded) {
-        console.log("Thanks for your interest!");
-    } else {
-        console.log("Your loss!");
-    }
+  if (wasAdded) {
+    console.log("Thanks for your interest!");
+  } else {
+    console.log("Your loss!");
+  }
 } catch (error) {
-    console.log(error);
+  console.log(error);
 }
 ```
 
@@ -112,29 +112,28 @@ To prompt users to add a single NFT, add something like the following to your pr
 
 ```javascript
 try {
-    // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-    const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
-        .request({
-            method: "wallet_watchAsset",
-            params: {
-                // or 'ERC1155'
-                type: "ERC721",
-                options: {
-                    // The address of the token.
-                    address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-                    // ERC-721 or ERC-1155 token ID.
-                    tokenId: "1",
-                },
-            },
-        });
+  // wasAdded is a boolean. Like any RPC method, an error can be thrown.
+  const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "wallet_watchAsset",
+      params: {
+        type: "ERC721", // Or "ERC1155".
+        options: {
+          // The address of the token.
+          address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+          // ERC-721 or ERC-1155 token ID.
+          tokenId: "1",
+        },
+      },
+    });
 
-    if (wasAdded) {
-        console.log("User successfully added the token!");
-    } else {
-        console.log("User did not add the token.");
-    }
+  if (wasAdded) {
+    console.log("User successfully added the token!");
+  } else {
+    console.log("User did not add the token.");
+  }
 } catch (error) {
-    console.log(error);
+  console.log(error);
 }
 ```
 
@@ -146,25 +145,25 @@ For example:
 
 ```javascript
 provider // Or window.ethereum if you don't support EIP-6963.
-    .sendAsync([{
-        method: "wallet_watchAsset",
-        params: {
-            type: 'ERC721',
-            options: {
-              address: contractAddress,
-              tokenId: 1,
-            },
-        }
-    }, {
-        method: "wallet_watchAsset",
-        params: {
-            type: 'ERC721',
-            options: {
-              address: contractAddress,
-              tokenId: 2,
-            },
-        },
+  .sendAsync([{
+    method: "wallet_watchAsset",
+    params: {
+      type: "ERC721",
+      options: {
+        address: contractAddress,
+        tokenId: 1,
+      },
+    }
+  }, {
+    method: "wallet_watchAsset",
+    params: {
+      type: "ERC721",
+      options: {
+        address: contractAddress,
+        tokenId: 2,
+      },
     },
-    ...
-    ])
+  },
+  ...
+  ])
 ```

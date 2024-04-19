@@ -37,30 +37,30 @@ prompt a user to add and switch to a new network:
 
 ```javascript
 try {
-    await provider // Or window.ethereum if you don't support EIP-6963.
-        .request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0xf00" }],
-        });
+  await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0xf00" }],
+    });
 } catch (switchError) {
-    // This error code indicates that the chain has not been added to MetaMask.
-    if (switchError.code === 4902) {
-        try {
-            await provider // Or window.ethereum if you don't support EIP-6963.
-                .request({
-                    method: "wallet_addEthereumChain",
-                    params: [
-                        {
-                            chainId: "0xf00",
-                            chainName: "...",
-                            rpcUrls: ["https://..."] /* ... */,
-                        },
-                    ],
-                });
-        } catch (addError) {
-            // Handle "add" error.
-        }
+  // This error code indicates that the chain has not been added to MetaMask.
+  if (switchError.code === 4902) {
+    try {
+      await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xf00",
+              chainName: "...",
+              rpcUrls: ["https://..."] /* ... */,
+            },
+          ],
+        });
+    } catch (addError) {
+      // Handle "add" error.
     }
-    // Handle other "switch" errors.
+  }
+  // Handle other "switch" errors.
 }
 ```

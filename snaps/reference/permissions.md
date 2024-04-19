@@ -18,7 +18,7 @@ manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "snap_dialog": {}
+  "snap_dialog": {}
 }
 ```
 
@@ -45,28 +45,28 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:cronjob": {
-        "jobs": [
-            {
-                "expression": "* * * * *",
-                "request": {
-                    "method": "exampleMethodOne",
-                    "params": {
-                        "param1": "foo"
-                    }
-                }
-            },
-            {
-                "expression": "*/2 * * * *",
-                "request": {
-                    "method": "exampleMethodTwo",
-                    "params": {
-                        "param1": "bar"
-                    }
-                }
-            }
-        ]
-    }
+  "endowment:cronjob": {
+    "jobs": [
+      {
+        "expression": "* * * * *",
+        "request": {
+          "method": "exampleMethodOne",
+          "params": {
+            "param1": "foo"
+          }
+        }
+      },
+      {
+        "expression": "*/2 * * * *",
+        "request": {
+          "method": "exampleMethodTwo",
+          "params": {
+            "param1": "bar"
+          }
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -81,7 +81,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:ethereum-provider": {}
+  "endowment:ethereum-provider": {}
 }
 ```
 
@@ -101,7 +101,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:page-home": {}
+  "endowment:page-home": {}
 }
 ```
 
@@ -120,9 +120,9 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:keyring": {
-        "allowedOrigins": ["https://<dapp domain>"]
-    }
+  "endowment:keyring": {
+    "allowedOrigins": ["https://<dapp domain>"]
+  }
 }
 ```
 
@@ -143,7 +143,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:lifecycle-hooks": {}
+  "endowment:lifecycle-hooks": {}
 }
 ```
 
@@ -176,13 +176,13 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:name-lookup": {
-        "chains": ["eip155:1"],
-        "matchers": {
-            "tlds": ["crypto"],
-            "schemes": ["farcaster"]
-        }
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"],
+    "matchers": {
+      "tlds": ["crypto"],
+      "schemes": ["farcaster"]
     }
+  }
 },
 ```
 
@@ -205,7 +205,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:network-access": {}
+  "endowment:network-access": {}
 }
 ```
 
@@ -237,10 +237,10 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:rpc": {
-        "dapps": true,
-        "snaps": false
-    }
+  "endowment:rpc": {
+    "dapps": true,
+    "snaps": false
+  }
 }
 ```
 
@@ -253,13 +253,13 @@ Specify this caveat in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:rpc": { 
-        "allowedOrigins": [
-            "https://metamask.io", 
-            "https://consensys.io",
-            "npm:@metamask/example-snap"
-        ] 
-    }
+  "endowment:rpc": { 
+    "allowedOrigins": [
+      "https://metamask.io", 
+      "https://consensys.io",
+      "npm:@metamask/example-snap"
+    ] 
+  }
 }
 ```
 
@@ -288,9 +288,9 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:transaction-insight": {
-        "allowTransactionOrigin": true
-    }
+  "endowment:transaction-insight": {
+    "allowTransactionOrigin": true
+  }
 }
 ```
 
@@ -313,9 +313,9 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:signature-insight": {
-        "allowSignatureOrigin": true
-    }
+  "endowment:signature-insight": {
+    "allowSignatureOrigin": true
+  }
 },
 ```
 
@@ -328,7 +328,7 @@ Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:webassembly": {}
+  "endowment:webassembly": {}
 }
 ```
 
@@ -343,9 +343,9 @@ For example:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:transaction-insight": {
-        "maxRequestTime": 10000
-    }
+  "endowment:transaction-insight": {
+    "maxRequestTime": 10000
+  }
 }
 ```
 
@@ -373,7 +373,7 @@ Calling `eth_requestAccounts` requires the
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:ethereum-provider": {}
+  "endowment:ethereum-provider": {}
 }
 ```
 
@@ -396,18 +396,18 @@ The following is an example `eth_accounts` permission:
 
 ```json
 {
-    "id": "47vm2UUi1pccNAeYKGmwF",
-    "parentCapability": "eth_accounts",
-    "invoker": "npm:SNAP_ID",
-    "caveats": [
-        {
-            "type": "restrictReturnedAccounts",
-            "value": [
-                "0xc403b37bf1e700cb214ea1be9de066824b420de6"
-            ]
-        }
-    ],
-    "date": 1692616452846
+  "id": "47vm2UUi1pccNAeYKGmwF",
+  "parentCapability": "eth_accounts",
+  "invoker": "npm:SNAP_ID",
+  "caveats": [
+    {
+      "type": "restrictReturnedAccounts",
+      "value": [
+        "0xc403b37bf1e700cb214ea1be9de066824b420de6"
+      ]
+    }
+  ],
+  "date": 1692616452846
 }
 ```
 

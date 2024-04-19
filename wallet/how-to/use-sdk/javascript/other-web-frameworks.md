@@ -33,7 +33,7 @@ npm i @metamask/sdk
 
 In your project script, add the following to import the SDK:
 
-```javascript
+```javascript title="index.js"
 import { MetaMaskSDK } from "@metamask/sdk";
 ```
 
@@ -41,14 +41,14 @@ import { MetaMaskSDK } from "@metamask/sdk";
 
 Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 
-```javascript
+```javascript title="index.js"
 const MMSDK = new MetaMaskSDK(
-    dappMetadata: {
-        name: "Example JavaScript Dapp",
-        url: window.location.href,
-    },
-    infuraAPIKey: process.env.INFURA_API_KEY,
-    // Other options
+  dappMetadata: {
+    name: "Example JavaScript Dapp",
+    url: window.location.href,
+  },
+  infuraAPIKey: process.env.INFURA_API_KEY,
+  // Other options
 );
 
 // You can also access via window.ethereum
@@ -84,12 +84,12 @@ You can copy the full JavaScript example to get started:
 import { MetaMaskSDK } from "@metamask/sdk";
 
 const MMSDK = new MetaMaskSDK(
-    dappMetadata: {
-        name: "Example JavaScript Dapp",
-        url: window.location.href,
-    },
-    infuraAPIKey: process.env.INFURA_API_KEY,
-    // Other options
+  dappMetadata: {
+    name: "Example JavaScript Dapp",
+    url: window.location.href,
+  },
+  infuraAPIKey: process.env.INFURA_API_KEY,
+  // Other options
 );
 
 // You can also access via window.ethereum

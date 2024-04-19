@@ -24,7 +24,7 @@ Optionally, declare the [`BackedType` attribute](contract-factory.md#backed-type
 #endif  
 public interface ERC20 : IContract  
 {
-	// TODO Declare functions
+  // Declare functions.
 }
 ```
 
@@ -39,7 +39,7 @@ To declare a `view` or `pure` function of the contract, first set the return typ
 #endif  
 public interface ERC20 : IContract  
 {
-	Task<BigInteger> BalanceOf(EvmAddress account);
+  Task<BigInteger> BalanceOf(EvmAddress account);
 }
 ```
 
@@ -53,8 +53,8 @@ This includes the `Name` and whether it's a `View` function:
 #endif  
 public interface ERC20 : IContract  
 {
-	[EvmMethodInfo(Name = "balanceOf", View = true)]
-	Task<BigInteger> BalanceOf(EvmAddress account);
+  [EvmMethodInfo(Name = "balanceOf", View = true)]
+  Task<BigInteger> BalanceOf(EvmAddress account);
 }
 ```
 
@@ -68,8 +68,8 @@ types, such as `EvmAddress` to be `address` and `string` to be `string`.
 #endif  
 public interface ERC20 : IContract  
 {
-	[EvmMethodInfo(Name = "balanceOf", View = true)]
-	Task<BigInteger> BalanceOf([EvmParameterInfo(Type = "address")] string account);
+  [EvmMethodInfo(Name = "balanceOf", View = true)]
+  Task<BigInteger> BalanceOf([EvmParameterInfo(Type = "address")] string account);
 }
 ```
 
@@ -81,12 +81,12 @@ To define the EVM return type for the function, you can use `EvmParamterInfo` on
 #endif  
 public interface ERC20 : IContract  
 {
-	[EvmMethodInfo(Name = "balanceOf", View = true)]
-	Task<BigInteger> BalanceOf(EvmAddress account);
-	
-	[EvmMethodInfo(Name = "decimals", View = true)]  
-	[return: EvmParameterInfo(Type = "uint8")]  
-	Task<BigInteger> Decimals();
+  [EvmMethodInfo(Name = "balanceOf", View = true)]
+  Task<BigInteger> BalanceOf(EvmAddress account);
+  
+  [EvmMethodInfo(Name = "decimals", View = true)]  
+  [return: EvmParameterInfo(Type = "uint8")]  
+  Task<BigInteger> Decimals();
 }
 ```
 
@@ -116,17 +116,17 @@ Also, do one of the following:
     #endif  
     public interface ERC20 : IContract  
     {
-        public static readonly string Bytecode = "0x6080604052348015620000115760008....";  
-          
-        [EvmConstructorMethod]  
-        Task<ERC20> DeployNew(String name_, String symbol_);
-    
-        [EvmMethodInfo(Name = "balanceOf", View = true)]
-        Task<BigInteger> BalanceOf(EvmAddress account);
+      public static readonly string Bytecode = "0x6080604052348015620000115760008....";  
         
-        [EvmMethodInfo(Name = "decimals", View = true)]  
-        [return: EvmParameterInfo(Type = "uint8")]  
-        Task<BigInteger> Decimals();
+      [EvmConstructorMethod]  
+      Task<ERC20> DeployNew(String name_, String symbol_);
+  
+      [EvmMethodInfo(Name = "balanceOf", View = true)]
+      Task<BigInteger> BalanceOf(EvmAddress account);
+      
+      [EvmMethodInfo(Name = "decimals", View = true)]  
+      [return: EvmParameterInfo(Type = "uint8")]  
+      Task<BigInteger> Decimals();
     }
     ```
 
@@ -138,15 +138,15 @@ Also, do one of the following:
     #endif  
     public interface ERC20 : IContract  
     {
-        [EvmConstructorMethod(Bytecode = "0x608060405238....")]  
-        Task<ERC20> DeployNew(String name_, String symbol_);
-    
-        [EvmMethodInfo(Name = "balanceOf", View = true)]
-        Task<BigInteger> BalanceOf(EvmAddress account);
-        
-        [EvmMethodInfo(Name = "decimals", View = true)]  
-        [return: EvmParameterInfo(Type = "uint8")]  
-        Task<BigInteger> Decimals();
+      [EvmConstructorMethod(Bytecode = "0x608060405238....")]  
+      Task<ERC20> DeployNew(String name_, String symbol_);
+  
+      [EvmMethodInfo(Name = "balanceOf", View = true)]
+      Task<BigInteger> BalanceOf(EvmAddress account);
+      
+      [EvmMethodInfo(Name = "decimals", View = true)]  
+      [return: EvmParameterInfo(Type = "uint8")]  
+      Task<BigInteger> Decimals();
     }
     ```
 
