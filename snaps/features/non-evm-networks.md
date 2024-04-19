@@ -1,6 +1,6 @@
 ---
 description: Manage users' non-EVM accounts and assets.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Non-EVM networks

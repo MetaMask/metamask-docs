@@ -65,9 +65,8 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 ```
 
 :::tip Access data from cron jobs
-When accessing encrypted data from cron jobs using
-[`snap_manageState`](../reference/snaps-api.md#snap_managestate), MetaMask requires the user to
-enter their password if the wallet is locked.
+When accessing [encrypted data](data-storage.md#2-use-encrypted-storage) from cron jobs, MetaMask
+requires the user to enter their password if the wallet is locked.
 This interaction can be confusing to the user, since the Snap accesses the data in the background
 without the user being aware.
 
@@ -77,8 +76,7 @@ unlocked before accessing state.
 This will prevent an unexpected password request, improving the user's experience.
 
 If the cron job does not require access to sensitive data, store that data in
-unencrypted state by setting `encrypted` to `false` when using
-[`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+[unencrypted state](data-storage.md#3-use-unencrypted-storage).
 :::
 
 ## Example

@@ -1,6 +1,6 @@
 ---
 description: Display your Snap's UI and metadata in the user's language.
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Localization
