@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
+- Documented [how to get your Snap allowlisted](/snaps/how-to/get-allowlisted).
+  ([#1222](https://github.com/MetaMask/metamask-docs/pull/1222))
 - Documented [Snaps lifecycle hooks](/snaps/features/lifecycle-hooks).
   ([#1274](https://github.com/MetaMask/metamask-docs/pull/1274))
 - Documented [Snaps cron jobs](/snaps/features/cron-jobs).
