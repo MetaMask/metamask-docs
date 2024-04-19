@@ -24,10 +24,8 @@ Request the [`endowment:signature-insight`](../reference/permissions.md#endowmen
 permission by adding the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
-{
-    "initialPermissions": {
-        "endowment:signature-insight": {}
-    }
+"initialPermissions": {
+  "endowment:signature-insight": {}
 }
 ```
 
@@ -35,12 +33,10 @@ If you need to receive the origin of the signature request, add `allowSignatureO
 permission object, and set it to `true`:
 
 ```json title="snap.manifest.json"
-{
-    "initialPermissions": {
-        "endowment:signature-insight": {
-            "allowSignatureOrigin": true
-        }
-    }
+"initialPermissions": {
+  "endowment:signature-insight": {
+    "allowSignatureOrigin": true
+  }
 }
 ```
 
@@ -65,9 +61,9 @@ shapes, depending on the signing method used:
 
 ```typescript
 interface EthSignature {
-    from: string;
-    data: string;
-    signatureMethod: "eth_sign";
+  from: string;
+  data: string;
+  signatureMethod: "eth_sign";
 }
 ```
 
@@ -76,9 +72,9 @@ interface EthSignature {
 
 ```typescript
 interface PersonalSignature {
-    from: string;
-    data: string;
-    signatureMethod: "personal_sign";
+  from: string;
+  data: string;
+  signatureMethod: "personal_sign";
 }
 ```
 
@@ -87,9 +83,9 @@ interface PersonalSignature {
 
 ```typescript
 interface SignTypedDataSignature {
-    from: string;
-    data: Record<string, any>[];
-    signatureMethod: "eth_signTypedData";
+  from: string;
+  data: Record<string, any>[];
+  signatureMethod: "eth_signTypedData";
 }
 ```
 
@@ -98,9 +94,9 @@ interface SignTypedDataSignature {
 
 ```typescript
 interface SignTypedDataV3Signature {
-    from: string;
-    data: Record<string, any>;
-    signatureMethod: "eth_signTypedData_v3";
+  from: string;
+  data: Record<string, any>;
+  signatureMethod: "eth_signTypedData_v3";
 }
 ```
 
@@ -109,9 +105,9 @@ interface SignTypedDataV3Signature {
 
 ```typescript
 interface SignTypedDataV4Signature {
-    from: string;
-    data: Record<string, any>;
-    signatureMethod: "eth_signTypedData_v4";
+  from: string;
+  data: Record<string, any>;
+  signatureMethod: "eth_signTypedData_v4";
 }
 ```
 
@@ -139,18 +135,18 @@ import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onSignature: OnSignatureHandler = async ({
-    signature,
-    signatureOrigin,
+  signature,
+  signatureOrigin,
 }) => {
-    const insights = /* Get insights based on custom logic */;
-    return {
-        content: panel([
-            heading("My Signature Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-        severity: SeverityLevel.Critical,
-    };
+  const insights = /* Get insights based on custom logic */;
+  return {
+    content: panel([
+      heading("My Signature Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+    severity: SeverityLevel.Critical,
+  };
 };
 ```
 

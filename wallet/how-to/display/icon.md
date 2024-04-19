@@ -16,6 +16,6 @@ The tag's `href` attribute is used for assigning the dapp icon.
 
 ```html
 <head>
-    <link rel="shortcut icon" href="https://your-dapp.com/your-icon.png" />
+  <link rel="shortcut icon" href="https://your-dapp.com/your-icon.png" />
 </head>
 ```

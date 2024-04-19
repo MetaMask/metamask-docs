@@ -49,32 +49,32 @@ The following is an example of using `metamask_batch` to batch
 [`personal_sign`](/wallet/reference/personal_sign) and
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in React, Next.js, or React Native/Expo:
 
-```javascript
+```javascript title="index.js"
 import { metamask_batch } from "metamask-sdk";
 
 function MyComponent() {
-    const handleBatchRequest = async () => {
-        const batchRequests = [
-            { method: "personal_sign", params: ["message", "address"] },
-            {
-                method: "eth_sendTransaction",
-                params: [
-                    {
-                        /* transaction parameters */
-                    },
-                ],
-            },
-        ];
-    
-        try {
-            const results = await metamask_batch(batchRequests);
-            console.log(results); // Process results
-        } catch (error) {
-            console.error("Batch request failed", error);
-        }
-    };
+  const handleBatchRequest = async () => {
+    const batchRequests = [
+      { method: "personal_sign", params: ["message", "address"] },
+      {
+        method: "eth_sendTransaction",
+        params: [
+          {
+            /* Transaction parameters */
+          },
+        ],
+      },
+    ];
 
-    return <button onClick={handleBatchRequest}>Send Batch Request</button>;
+    try {
+      const results = await metamask_batch(batchRequests);
+      console.log(results); // Process results.
+    } catch (error) {
+      console.error("Batch request failed", error);
+    }
+  };
+
+  return <button onClick={handleBatchRequest}>Send Batch Request</button>;
 }
 ```
 
@@ -84,33 +84,33 @@ The following is an example of using `metamask_batch` to batch
 [`personal_sign`](/wallet/reference/personal_sign) and
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in Vue.js:
 
-```javascript
+```javascript title="App.vue"
 <script>
 import { metamask_batch } from "metamask-sdk";
 
 export default {
-    methods: {
-        async sendBatchRequest() {
-            const batchRequests = [
-                { method: "personal_sign", params: ["message", "address"] },
-                {
-                    method: "eth_sendTransaction",
-                    params: [
-                        {
-                            /* transaction parameters */
-                        },
-                    ],
-                },
-            ];
-      
-            try {
-                const results = await metamask_batch(batchRequests);
-                console.log(results);
-            } catch (error) {
-                console.error("Error in batch request", error);
-            }
-        }
+  methods: {
+    async sendBatchRequest() {
+      const batchRequests = [
+        { method: "personal_sign", params: ["message", "address"] },
+        {
+          method: "eth_sendTransaction",
+          params: [
+            {
+              /* Transaction parameters */
+            },
+          ],
+        },
+      ];
+
+      try {
+        const results = await metamask_batch(batchRequests);
+        console.log(results);
+      } catch (error) {
+        console.error("Error in batch request", error);
+      }
     }
+  }
 }
 </script>
 ```

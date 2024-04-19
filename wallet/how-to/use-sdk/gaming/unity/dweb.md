@@ -28,7 +28,7 @@ This method initializes the wrapper with necessary configuration parameters, inc
 authentication details required to interact with the Decentraweb name resolver API.
 
 ```csharp
-// Initialize the wrapper
+// Initialize the wrapper.
 var apiWrapper = newDWebAPIWrapper();
 ```
 
@@ -46,13 +46,13 @@ The name resolver processes the request and responds with the Ethereum address.
 <TabItem value="Method">
 
 ```csharp
-// Initialize the wrapper
+// Initialize the wrapper.
 var apiWrapper = newDWebAPIWrapper();
 
-// Get the user's human-readable name
+// Get the user's human-readable name.
 var name = "user.dweb";
 
-// Resolve the name to an Ethereum address
+// Resolve the name to an Ethereum address.
 var address = await apiWrapper.ResolveNameAsync(name);
 ```
 
@@ -61,8 +61,8 @@ var address = await apiWrapper.ResolveNameAsync(name);
 
 ```json
 {
-    "success": true,
-    "result": "0xcB3E45F337Dd3Beeba98F5F9F9A16e9cD152cC86"
+  "success": true,
+  "result": "0xcB3E45F337Dd3Beeba98F5F9F9A16e9cD152cC86"
 }
 ```
 
@@ -83,13 +83,13 @@ The SDK processes the request and responds with the human-readable name.
 <TabItem value="Method">
 
 ```csharp
-// Initialize the wrapper
+// Initialize the wrapper.
 var apiWrapper = newDWebAPIWrapper();
 
-// Get the user's address
+// Get the user's address.
 var address = "0xcB3E45F337Dd3Beeba98F5F9F9A16e9cD152cC86"
 
-// Resolve the address to a human-readable name
+// Resolve the address to a human-readable name.
 var name = await apiWrapper.GetNameAsync(address)
 ```
 
@@ -98,11 +98,11 @@ var name = await apiWrapper.GetNameAsync(address)
 
 ```json
 {
-    "success": true,
-    "result": {
-        "name": "lordsats",
-        "confirmed": true
-    }
+  "success": true,
+  "result": {
+    "name": "lordsats",
+    "confirmed": true
+  }
 }
 ```
 
@@ -116,23 +116,23 @@ The following is an example of using the Unity SDK Decentraweb integration to cr
 ```csharp
 public async Task FormTransactionAsync()
 {
-  // Initialize the wrapper
+  // Initialize the wrapper.
   var apiWrapper = new DWebAPIWrapper();
 
-  // Get the user's human-readable name
+  // Get the user's human-readable name.
   var name = "user.dweb";
 
-  // Resolve the name to an Ethereum address
+  // Resolve the name to an Ethereum address.
   var address = await apiWrapper.ResolveNameAsync(name);
 
-  // Form the transaction
+  // Form the transaction.
   var transaction = new Transaction
   {
-      To = address,
-      Value = 1.0m,
-      Gas = 21000
+    To = address,
+    Value = 1.0m,
+    Gas = 21000
   };
 
-  // The rest of the transaction formation code...
+  // The rest of the transaction formation code.
 }
 ```

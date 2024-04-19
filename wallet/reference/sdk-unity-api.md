@@ -26,15 +26,15 @@ This method initializes the `MetaMaskWallet` instance and makes it accessible vi
 You can also pass extra options and parameters to it to customize the wallet instance:
 
 ```csharp
-// Initialize using default settings
+// Initialize using default settings.
 MetaMaskUnity.Instance.Initialize();
 
-// Initialize using custom transport and socket provider
+// Initialize using custom transport and socket provider.
 var transport = new MyCustomTransport();
 var socketProvider = new MyCustomSocketProvider();
 MetaMaskUnity.Instance.Initialize(transport, socketProvider);
 
-// Initialize using custom config, transport and socket provider
+// Initialize using custom config, transport and socket provider.
 var config = myMetaMaskConfig;
 var transport = new MyCustomTransport();
 var socketProvider = new MyCustomSocketProvider();

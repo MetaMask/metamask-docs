@@ -37,7 +37,7 @@ users to easily connect with their MetaMask Mobile wallet.
 To add the SDK as a CocoaPods dependency to your project, add the following entry to our Podfile:
 
 ```text
-pod 'metamask-ios-sdk'
+pod "metamask-ios-sdk"
 ```
 
 Run the following command:
@@ -57,10 +57,10 @@ Alternatively, you can add the URL directly in your project's package file:
 
 ```swift
 dependencies: [
-    .package(
-        url: "https://github.com/MetaMask/metamask-ios-sdk",
-        from: "0.3.0"
-    )
+  .package(
+    url: "https://github.com/MetaMask/metamask-ios-sdk",
+    from: "0.3.0"
+  )
 ]
 ```
 
@@ -111,23 +111,23 @@ The following example gets the user's account balance by calling
 [`eth_getBalance`](/wallet/reference/eth_getBalance).
 
 ```swift
-// Create parameters
+// Create parameters.
 let account = metamaskSDK.account
 
 let parameters: [String] = [
-    // account to check for balance
-    account,
-    // "latest", "earliest" or "pending" (optional)
-    "latest"
+  // Account to check for balance.
+  account,
+  // "latest", "earliest", or "pending" (optional)
+  "latest"
 ]
 
-// Create request
+// Create request.
 let getBalanceRequest = EthereumRequest(
-    method: .ethGetBalance,
-    params: parameters
+  method: .ethGetBalance,
+  params: parameters
 )
 
-// Make request
+// Make request.
 let accountBalance = await metamaskSDK.request(getBalanceRequest)
 ```
 
@@ -144,26 +144,26 @@ dictionary directly.
 Note that `Any` or even `AnyHashable` types aren't supported, since the type must be explicitly known.
 
 ```swift
-// Create parameters
+// Create parameters.
 let account = metamaskSDK.account
 
 let parameters: [String: String] = [
-    // receiver address
-    "to": "0x...",
-    // sender address
-    "from": account,
-    // amount
-    "value": "0x..."
+  // Receiver address.
+  "to": "0x...",
+  // Sender address.
+  "from": account,
+  // Amount to send.
+  "value": "0x..."
 ]
 
-// Create request
+// Create request.
 let transactionRequest = EthereumRequest(
-    method: .ethSendTransaction,
-    // eth_sendTransaction expects an array parameters object
-    params: [parameters]
+  method: .ethSendTransaction,
+  // eth_sendTransaction expects an array parameters object.
+  params: [parameters]
 )
 
-// Make a transaction request
+// Make a transaction request.
 let transactionResult = await metamaskSDK.request(transactionRequest)
 ```
 
@@ -181,48 +181,48 @@ The type can then be represented as a socket packet.
 
 ```swift
 struct Transaction: CodableData {
-    let to: String
-    let from: String
-    let value: String
-    let data: String?
+  let to: String
+  let from: String
+  let value: String
+  let data: String?
 
-    init(to: String, from: String, value: String, data: String? = nil) {
-        self.to = to
-        self.from = from
-        self.value = value
-        self.data = data
-    }
+  init(to: String, from: String, value: String, data: String? = nil) {
+    self.to = to
+    self.from = from
+    self.value = value
+    self.data = data
+  }
 
-    func socketRepresentation() -> NetworkData {
-        [
-            "to": to,
-            "from": from,
-            "value": value,
-            "data": data
-        ]
-    }
+  func socketRepresentation() -> NetworkData {
+    [
+      "to": to,
+      "from": from,
+      "value": value,
+      "data": data
+    ]
+  }
 }
 
-// Create parameters
+// Create parameters.
 let account = metamaskSDK.account
 
 let transaction = Transaction(
-    // receiver address
-    to: "0x...",
-    // sender address
-    from: account,
-    // amount
-    value: "0x..."
+  // Receiver address.
+  to: "0x...",
+  // Sender address.
+  from: account,
+  // Amount.
+  value: "0x..."
 )
 
-// Create request
+// Create request.
 let transactionRequest = EthereumRequest(
-    method: .ethSendTransaction,
-    // eth_sendTransaction expects an array parameters object
-    params: [transaction]
+  method: .ethSendTransaction,
+  // eth_sendTransaction expects an array parameters object.
+  params: [transaction]
 )
 
-// Make a transaction request
+// Make a transaction request.
 let result = await metamaskSDK.request(transactionRequest)
 ```
 

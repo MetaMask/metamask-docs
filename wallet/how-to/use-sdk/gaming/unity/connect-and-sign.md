@@ -26,7 +26,7 @@ You can [connect and sign](../../javascript/connect-and-sign.md) in a single int
     ```csharp
     public void ConnectAndSign()
     {
-        MetaMaskUnity.Instance.ConnectAndSign("This is a test message");
+      MetaMaskUnity.Instance.ConnectAndSign("This is a test message");
     }
     ```
 
@@ -45,6 +45,6 @@ You can [connect and sign](../../javascript/connect-and-sign.md) in a single int
     ```csharp
     public void OnButtonClick()
     {
-        ConnectAndSign();
+      ConnectAndSign();
     }
     ```
