@@ -27,7 +27,7 @@ Add the following to your Snap's manifest file:
 ### 2. Use encrypted storage
 
 By default, [`snap_manageState`](../reference/snaps-api.md#snap_managestate) automatically encrypts
-data before storing it on the user's disk using a Snap-specific key, and automatically decrypts it
+data using a Snap-specific key before storing it on the user's disk, and automatically decrypts it
 when retrieved.
 This is useful to store sensitive information, such as passwords.
 
@@ -93,8 +93,10 @@ await snap.request({
 // At a later time, get the stored data.
 const persistedData = await snap.request({
   method: "snap_manageState",
-  params: { operation: "get" },
-  encrypted: false,
+  params: { 
+    operation: "get",
+    encrypted: false,
+  },
 });
 
 console.log(persistedData);
@@ -113,4 +115,6 @@ await snap.request({
 ## Example
 
 See the [`@metamask/manage-state-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/manage-state)
-package for a full example of storing data.
+package for a full example of storing data using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+This example exposes a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) for
+dapps to store, retrieve, and clear data.
