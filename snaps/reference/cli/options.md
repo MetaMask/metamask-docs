@@ -59,16 +59,16 @@ customizeWebpackConfig: <FUNCTION>,
 
 ```typescript
 customizeWebpackConfig: (config) =>
-    merge(config, {
-        plugins: [
-            // Add a plugin.
-        ],
-        module: {
-            rules: [
-                // Add a loader.
-            ],
-        },
-    }),
+  merge(config, {
+    plugins: [
+      // Add a plugin.
+    ],
+    module: {
+      rules: [
+        // Add a loader.
+      ],
+    },
+  }),
 ```
 
 </TabItem>
@@ -96,8 +96,8 @@ environment: <ENVIRONMENT>,
 
 ```javascript
 environment: {
-    SNAP_ENV: process.env.SNAP_ENV,
-    PUBLIC_KEY: process.env.PUBLIC_KEY,
+  SNAP_ENV: process.env.SNAP_ENV,
+  PUBLIC_KEY: process.env.PUBLIC_KEY,
 },
 ```
 
@@ -146,7 +146,7 @@ These features are not stable, and might change in the future.
 
 ```javascript
 experimental: {
-    wasm: <BOOLEAN>,
+  wasm: <BOOLEAN>,
 },
 ```
 
@@ -155,7 +155,7 @@ experimental: {
 
 ```javascript
 experimental: {
-    wasm: true,
+  wasm: true,
 },
 ```
 
@@ -182,7 +182,7 @@ import program from "./program.wasm";
 
 ```javascript
 features: {
-    images: <BOOLEAN>,
+  images: <BOOLEAN>,
 },
 ```
 
@@ -191,7 +191,7 @@ features: {
 
 ```javascript
 features: {
-    images: false,
+  images: false,
 },
 ```
 
@@ -235,7 +235,7 @@ The Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) configu
 
 ```javascript
 manifest: {
-    path: <FILE>,
+  path: <FILE>,
 },
 ```
 
@@ -244,7 +244,7 @@ manifest: {
 
 ```javascript
 manifest: {
-    path: "snap.manifest.json",
+  path: "snap.manifest.json",
 },
 ```
 
@@ -261,7 +261,7 @@ The default is `"snap.manifest.json"`.
 
 ```javascript
 manifest: {
-    update: <BOOLEAN>,
+  update: <BOOLEAN>,
 },
 ```
 
@@ -270,7 +270,7 @@ manifest: {
 
 ```javascript
 manifest: {
-    update: false,
+  update: false,
 },
 ```
 
@@ -292,7 +292,7 @@ The output configuration.
 
 ```javascript
 output: {
-    clean: <BOOLEAN>,
+  clean: <BOOLEAN>,
 },
 ```
 
@@ -301,7 +301,7 @@ output: {
 
 ```javascript
 output: {
-    clean: true,
+  clean: true,
 },
 ```
 
@@ -318,7 +318,7 @@ The default is `false`.
 
 ```javascript
 output: {
-    filename: <FILE>,
+  filename: <FILE>,
 },
 ```
 
@@ -327,7 +327,7 @@ output: {
 
 ```javascript
 output: {
-    filename: "bundle.js",
+  filename: "bundle.js",
 },
 ```
 
@@ -344,7 +344,7 @@ The default is `"bundle.js"`.
 
 ```javascript
 output: {
-    minimize: <BOOLEAN>,
+  minimize: <BOOLEAN>,
 },
 ```
 
@@ -353,7 +353,7 @@ output: {
 
 ```javascript
 output: {
-    minimize: false,
+  minimize: false,
 },
 ```
 
@@ -371,7 +371,7 @@ The default is `true`.
 
 ```javascript
 output: {
-    path: <DIRECTORY>,
+  path: <DIRECTORY>,
 },
 ```
 
@@ -380,7 +380,7 @@ output: {
 
 ```javascript
 output: {
-    path: "dist",
+  path: "dist",
 },
 ```
 
@@ -404,9 +404,9 @@ polyfills: <BOOLEAN|OBJECT>
 
 ```javascript
 polyfills: {
-    buffer: true,
-    crypto: true,
-    path: true,
+  buffer: true,
+  crypto: true,
+  path: true,
 }
 ```
 
@@ -433,7 +433,7 @@ The development server is used to test the Snap during development, using the
 
 ```javascript
 server: {
-    enabled: <BOOLEAN>,
+  enabled: <BOOLEAN>,
 },
 ```
 
@@ -442,7 +442,7 @@ server: {
 
 ```javascript
 server: {
-    enabled: false,
+  enabled: false,
 },
 ```
 
@@ -458,7 +458,7 @@ Enables or disables the development server.
 
 ```javascript
 server: {
-    port: <PORT>,
+  port: <PORT>,
 },
 ```
 
@@ -467,7 +467,7 @@ server: {
 
 ```javascript
 server: {
-    port: 9000,
+  port: 9000,
 },
 ```
 
@@ -485,7 +485,7 @@ The default is `8081`.
 
 ```javascript
 server: {
-    root: <DIRECTORY>,
+  root: <DIRECTORY>,
 },
 ```
 
@@ -494,7 +494,7 @@ server: {
 
 ```javascript
 server: {
-    root: "snap",
+  root: "snap",
 },
 ```
 
@@ -540,7 +540,7 @@ The stats configuration, which controls the log output of the CLI.
 
 ```javascript
 stats: {
-    buffer: <BOOLEAN>,
+  buffer: <BOOLEAN>,
 },
 ```
 
@@ -549,7 +549,7 @@ stats: {
 
 ```javascript
 stats: {
-    buffer: false,
+  buffer: false,
 },
 ```
 
@@ -569,7 +569,7 @@ The default is `true`.
 
 ```javascript
 stats: {
-    builtIns: <false|IGNORE_LIST>,
+  builtIns: <false|IGNORE_LIST>,
 },
 ```
 
@@ -578,11 +578,11 @@ stats: {
 
 ```javascript
 stats: {
-    builtIns: {
-        ignore: [
-            // Built-in modules to ignore.
-        ],
-    },
+  builtIns: {
+    ignore: [
+      // Built-in modules to ignore.
+    ],
+  },
 },
 ```
 
@@ -608,7 +608,7 @@ The default is an empty ignore list.
 
 ```javascript
 stats: {
-    verbose: <BOOLEAN>,
+  verbose: <BOOLEAN>,
 },
 ```
 
@@ -617,7 +617,7 @@ stats: {
 
 ```javascript
 stats: {
-    verbose: true,
+  verbose: true,
 },
 ```
 

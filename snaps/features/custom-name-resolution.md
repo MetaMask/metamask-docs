@@ -22,9 +22,9 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:name-lookup": {
-        "chains": ["eip155:1"]
-    }
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"]
+  }
 }
 ```
 
@@ -41,25 +41,25 @@ import type { OnNameLookupHandler } from "@metamask/snaps-types";
 const UNSTOPPABLE_API_KEY = "xxx";
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
-    const { chainId, domain } = request;
+  const { chainId, domain } = request;
 
-    if (domain && chainId === "eip155:1") {
-        const response = await fetch(`https://api.unstoppabledomains.com/resolve/domains/${domain}`, {
-            headers: {
-                accept: "application/json",
-                authorization: `Bearer ${UNSTOPPABLE_API_KEY}`,
-            },
-        });
-        const data = await response.json();
-        const resolvedAddress = data.records["crypto.ETH.address"];
-        if (address) {
-            return {
-                resolvedAddresses: [{ resolvedAddress, protocol: "Unstoppable Domains" }],
-            };
-        }
+  if (domain && chainId === "eip155:1") {
+    const response = await fetch(`https://api.unstoppabledomains.com/resolve/domains/${domain}`, {
+      headers: {
+        accept: "application/json",
+        authorization: `Bearer ${UNSTOPPABLE_API_KEY}`,
+      },
+    });
+    const data = await response.json();
+    const resolvedAddress = data.records["crypto.ETH.address"];
+    if (address) {
+      return {
+        resolvedAddresses: [{ resolvedAddress, protocol: "Unstoppable Domains" }],
+      };
     }
+  }
 
-    return null;
+  return null;
 };
 ```
 

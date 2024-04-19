@@ -57,31 +57,31 @@ In your Vite project, update `src/vite-env.d.ts` with the
 /// <reference types="vite/client" />
 
 interface EIP6963ProviderInfo {
-    rdns: string
-    uuid: string
-    name: string
-    icon: string
+  rdns: string
+  uuid: string
+  name: string
+  icon: string
 }
 
 interface EIP6963ProviderDetail {
-    info: EIP6963ProviderInfo
-    provider: EIP1193Provider
+  info: EIP6963ProviderInfo
+  provider: EIP1193Provider
 }
 
 type EIP6963AnnounceProviderEvent = {
-    detail: {
-        info: EIP6963ProviderInfo,
-        provider: Readonly<EIP1193Provider>,
-    }
+  detail: {
+    info: EIP6963ProviderInfo,
+    provider: Readonly<EIP1193Provider>,
+  }
 }
 
 interface EIP1193Provider {
-    isStatus?: boolean
-    host?: string
-    path?: string
-    sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-    send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-    request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+  isStatus?: boolean
+  host?: string
+  path?: string
+  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 ```
 
@@ -101,9 +101,9 @@ import "./style.css"
 import { listProviders } from "./providers.ts"
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-    <div>
-        <div id="providerButtons"></div>
-    </div>
+  <div>
+    <div id="providerButtons"></div>
+  </div>
 `
 
 listProviders(document.querySelector<HTMLDivElement>("#providerButtons")!)
@@ -123,40 +123,40 @@ Create a file `src/providers.ts` with the following code:
 
 ```ts title="providers.ts"
 declare global {
-    interface WindowEventMap {
-        "eip6963:announceProvider": CustomEvent
-    }
+  interface WindowEventMap {
+    "eip6963:announceProvider": CustomEvent
+  }
 }
 
 // Connect to the selected provider using eth_requestAccounts.
 const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent["detail"]) => {
-    try {
-        await wallet.provider
-            .request({ method: "eth_requestAccounts" })
-    } catch (error) {
-        console.error("Failed to connect to provider:", error)
-    }
+  try {
+    await wallet.provider
+      .request({ method: "eth_requestAccounts" })
+  } catch (error) {
+    console.error("Failed to connect to provider:", error)
+  }
 }
 
 // Display detected providers as connect buttons.
 export function listProviders(element: HTMLDivElement) {
-    window.addEventListener("eip6963:announceProvider",
-        (event: EIP6963AnnounceProviderEvent) => {
-            const button = document.createElement("button")
-        
-            button.innerHTML = `
-                <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
-                <div>${event.detail.info.name}</div>
-            `
-        
-            // Call connectWithProvider when a user selects the button.
-            button.onclick = () => connectWithProvider(event.detail)
-            element.appendChild(button)
-        }
-    )
+  window.addEventListener("eip6963:announceProvider",
+    (event: EIP6963AnnounceProviderEvent) => {
+      const button = document.createElement("button")
+    
+      button.innerHTML = `
+        <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
+        <div>${event.detail.info.name}</div>
+      `
+    
+      // Call connectWithProvider when a user selects the button.
+      button.onclick = () => connectWithProvider(event.detail)
+      element.appendChild(button)
+    }
+  )
 
-    // Notify event listeners and other parts of the dapp that a provider is requested.
-    window.dispatchEvent(new Event("eip6963:requestProvider"))
+  // Notify event listeners and other parts of the dapp that a provider is requested.
+  window.dispatchEvent(new Event("eip6963:requestProvider"))
 }
 ```
 
@@ -203,31 +203,31 @@ In your Vite project, update `src/vite-env.d.ts` with the
 /// <reference types="vite/client" />
 
 interface EIP6963ProviderInfo {
-    rdns: string
-    uuid: string
-    name: string
-    icon: string
+  rdns: string
+  uuid: string
+  name: string
+  icon: string
 }
 
 interface EIP6963ProviderDetail {
-    info: EIP6963ProviderInfo
-    provider: EIP1193Provider
+  info: EIP6963ProviderInfo
+  provider: EIP1193Provider
 }
 
 type EIP6963AnnounceProviderEvent = {
-    detail: {
-        info: EIP6963ProviderInfo,
-        provider: Readonly<EIP1193Provider>,
-    }
+  detail: {
+    info: EIP6963ProviderInfo,
+    provider: Readonly<EIP1193Provider>,
+  }
 }
 
 interface EIP1193Provider {
-    isStatus?: boolean
-    host?: string
-    path?: string
-    sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-    send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-    request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+  isStatus?: boolean
+  host?: string
+  path?: string
+  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 ```
 
@@ -247,9 +247,9 @@ import "./App.css"
 import { DiscoverWalletProviders } from "./components/DiscoverWalletProviders"
 
 function App() {
-    return (
-        <DiscoverWalletProviders/>
-    )
+  return (
+    <DiscoverWalletProviders/>
+  )
 }
 
 export default App
@@ -269,54 +269,54 @@ import { useSyncProviders } from "../hooks/useSyncProviders"
 import { formatAddress } from "~/utils"
 
 export const DiscoverWalletProviders = () => {
-    const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
-    const [userAccount, setUserAccount] = useState<string>("")
-    const providers = useSyncProviders()
+  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
+  const [userAccount, setUserAccount] = useState<string>("")
+  const providers = useSyncProviders()
 
-    // Connect to the selected provider using eth_requestAccounts.
-    const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
-        try {
-            const accounts = await providerWithInfo.provider.request({ 
-                method: "eth_requestAccounts"
-            })
+  // Connect to the selected provider using eth_requestAccounts.
+  const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
+    try {
+      const accounts = await providerWithInfo.provider.request({ 
+        method: "eth_requestAccounts"
+      })
 
-            setSelectedWallet(providerWithInfo)
-            setUserAccount(accounts?.[0])
-        } catch (error) {
-            console.error(error)
-        }
+      setSelectedWallet(providerWithInfo)
+      setUserAccount(accounts?.[0])
+    } catch (error) {
+      console.error(error)
     }
+  }
 
-    // Display detected providers as connect buttons.
-    return (
-        <>
-            <h2>Wallets Detected:</h2>
+  // Display detected providers as connect buttons.
+  return (
+    <>
+      <h2>Wallets Detected:</h2>
+      <div>
+        {
+          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          )) :
             <div>
-                {
-                    providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
-                        <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
-                          <img src={provider.info.icon} alt={provider.info.name} />
-                          <div>{provider.info.name}</div>
-                        </button>
-                    )) :
-                        <div>
-                            No Announced Wallet Providers
-                        </div>
-                }
+              No Announced Wallet Providers
             </div>
-            <hr />
-            <h2>{userAccount ? "" : "No "}Wallet Selected</h2>
-            {userAccount &&
-                <div>
-                    <div>
-                        <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
-                        <div>{selectedWallet.info.name}</div>
-                        <div>({formatAddress(userAccount)})</div>
-                    </div>
-                </div>
-            }
-        </>
-    )
+        }
+      </div>
+      <hr />
+      <h2>{userAccount ? "" : "No "}Wallet Selected</h2>
+      {userAccount &&
+        <div>
+          <div>
+            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
+            <div>{selectedWallet.info.name}</div>
+            <div>({formatAddress(userAccount)})</div>
+          </div>
+        </div>
+      }
+    </>
+  )
 }
 ```
 
@@ -343,32 +343,32 @@ Create a `src/hooks` directory and add a `store.ts` file with the following code
 
 ```ts title="hooks/store.ts"
 declare global {
-    interface WindowEventMap {
-        "eip6963:announceProvider": CustomEvent
-    }
+  interface WindowEventMap {
+    "eip6963:announceProvider": CustomEvent
+  }
 }
 
 // An array to store the detected wallet providers.
 let providers: EIP6963ProviderDetail[] = []
 
 export const store = {
-    value: ()=> providers,
-    subscribe: (callback: ()=> void) => {
-        function onAnnouncement(event: EIP6963AnnounceProviderEvent){
-            if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
-            providers = [...providers, event.detail]
-            callback()
-        }
-    
-        // Listen for eip6963:announceProvider and call onAnnouncement when the event is triggered.
-        window.addEventListener("eip6963:announceProvider", onAnnouncement)
-        
-        // Dispatch the event, which triggers the event listener in the MetaMask wallet.
-        window.dispatchEvent(new Event("eip6963:requestProvider"))
-        
-        // Return a function that removes the event listern.
-        return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  value: ()=> providers,
+  subscribe: (callback: ()=> void) => {
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
+      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
+      providers = [...providers, event.detail]
+      callback()
     }
+
+    // Listen for eip6963:announceProvider and call onAnnouncement when the event is triggered.
+    window.addEventListener("eip6963:announceProvider", onAnnouncement)
+    
+    // Dispatch the event, which triggers the event listener in the MetaMask wallet.
+    window.dispatchEvent(new Event("eip6963:requestProvider"))
+    
+    // Return a function that removes the event listern.
+    return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  }
 }
 ```
 
@@ -390,18 +390,18 @@ Create a `src/utils` directory and add a file `index.ts` with the following code
 
 ```ts title="index.ts"
 export const formatBalance = (rawBalance: string) => {
-    const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
-    return balance
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
 }
 
 export const formatChainAsNum = (chainIdHex: string) => {
-    const chainIdNum = parseInt(chainIdHex)
-    return chainIdNum
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
 }
 
 export const formatAddress = (addr: string) => {
-    const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
-    return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
+  const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+  return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
 }
 ```
 

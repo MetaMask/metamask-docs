@@ -23,7 +23,7 @@ code snippet into your browser's developer console:
 
 ```javascript
 if (typeof window.ethereum !== "undefined") {
-    console.log("MetaMask is installed!");
+  console.log("MetaMask is installed!");
 }
 ```
 
@@ -53,19 +53,19 @@ import detectEthereumProvider from "@metamask/detect-provider";
 const provider = await detectEthereumProvider();
 
 if (provider) {
-    // From now on, this should always be true:
-    // provider === window.ethereum
-    startApp(provider); // Initialize your dapp.
+  // From now on, this should always be true:
+  // provider === window.ethereum
+  startApp(provider); // Initialize your dapp.
 } else {
-    console.log("Please install MetaMask!");
+  console.log("Please install MetaMask!");
 }
 
 function startApp(provider) {
-    // If the provider returned by detectEthereumProvider isn't the same as window.ethereum, something
-    // is overwriting it – perhaps another wallet. See the "Connect to MetaMask" guide for detecting
-    // and connecting to multiple wallets.
-    if (provider !== window.ethereum) {
-        console.error("Do you have multiple wallets installed?");
-    }
-    // Access the decentralized web!
+  // If the provider returned by detectEthereumProvider isn't the same as window.ethereum, something
+  // is overwriting it – perhaps another wallet. See the "Connect to MetaMask" guide for detecting
+  // and connecting to multiple wallets.
+  if (provider !== window.ethereum) {
+    console.error("Do you have multiple wallets installed?");
+  }
+  // Access the decentralized web!
 }

@@ -106,12 +106,12 @@ and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
-    "npm": {
-        "filePath": "dist/bundle.js",
-        "iconPath": "images/gas.svg",
-        "packageName": "snap",
-        "registry": "https://registry.npmjs.org/"
-    }
+  "npm": {
+    "filePath": "dist/bundle.js",
+    "iconPath": "images/gas.svg",
+    "packageName": "snap",
+    "registry": "https://registry.npmjs.org/"
+  }
 }
 ```
 
@@ -120,9 +120,9 @@ Edit the `files` array and add the `images/` folder:
 
 ```json title="package.json"
 "files": [
-    "dist/",
-    "images/",
-    "snap.manifest.json"
+  "dist/",
+  "images/",
+  "snap.manifest.json"
 ],
 ```
 
@@ -134,12 +134,12 @@ permission by adding `"endowment:network-access": {}` to the `initialPermissions
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "snap_dialog": {},
-    "endowment:rpc": {
-        "dapps": true,
-        "snaps": false
-    }, 
-    "endowment:network-access": {}
+  "snap_dialog": {},
+  "endowment:rpc": {
+    "dapps": true,
+    "snaps": false
+  }, 
+  "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
 ```
@@ -157,8 +157,8 @@ import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
 import { panel, text } from "@metamask/snaps-sdk";
 
 async function getFees() {
-    const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow"); 
-    return response.text();
+  const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow"); 
+  return response.text();
 }
 ```
 
@@ -180,19 +180,19 @@ Update the `hello` method with the following code:
 
 ```typescript title="index.ts"
 case "hello":
-    return getFees().then(fees => {
-        return snap.request({
-            method: 'snap_dialog',
-            params: {
-                type: "alert",
-                content: panel([
-                    text(`Hello, **${origin}**!`),
-                    text("Current gas fee estimates:"),
-                    copyable(fees),
-                ]),
-            }
-        });
+  return getFees().then(fees => {
+    return snap.request({
+      method: 'snap_dialog',
+      params: {
+        type: "alert",
+        content: panel([
+          text(`Hello, **${origin}**!`),
+          text("Current gas fee estimates:"),
+          copyable(fees),
+        ]),
+      }
     });
+  });
 ```
 
 ### 5. Build and test the Snap

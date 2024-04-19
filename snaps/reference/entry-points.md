@@ -34,19 +34,19 @@ An object containing an RPC request specified in the `endowment:cronjob` permiss
 import type { OnCronjobHandler } from "@metamask/snaps-sdk";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
-    switch (request.method) {
-        case "exampleMethodOne":
-            return snap.request({
-                method: "snap_notify",
-                params: {
-                    type: "inApp",
-                    message: "Hello, world!",
-                },
-            });
-    
-        default:
-            throw new Error("Method not found.");
-    }
+  switch (request.method) {
+    case "exampleMethodOne":
+      return snap.request({
+        method: "snap_notify",
+        params: {
+          type: "inApp",
+          message: "Hello, world!",
+        },
+      });
+
+    default:
+      throw new Error("Method not found.");
+  }
 };
 ```
 
@@ -55,19 +55,19 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
 
 ```js title="index.js"
 module.exports.onCronjob = async ({ request }) => {
-    switch (request.method) {
-        case "exampleMethodOne":
-            return snap.request({
-                method: "snap_notify",
-                params: {
-                    type: "inApp",
-                    message: "Hello, world!",
-                },
-            });
-    
-        default:
-            throw new Error("Method not found.");
-    }
+  switch (request.method) {
+    case "exampleMethodOne":
+      return snap.request({
+        method: "snap_notify",
+        params: {
+          type: "inApp",
+          message: "Hello, world!",
+        },
+      });
+
+    default:
+      throw new Error("Method not found.");
+  }
 };
 ```
 
@@ -107,12 +107,12 @@ import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 export const onHomePage: OnHomePageHandler = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Welcome to my Snap home page!"),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
+  };
 };
 ```
 
@@ -123,12 +123,12 @@ export const onHomePage: OnHomePageHandler = async () => {
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Welcome to my Snap home page!"),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
+  };
 };
 ```
 
@@ -160,18 +160,18 @@ import type { OnInstallHandler } from "@metamask/snaps-sdk";
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 export const onInstall: OnInstallHandler = async () => {
-    await snap.request({
-        method: "snap_dialog",
-        params: {
-            type: "alert",
-            content: panel([
-                heading("Thank you for installing my Snap"),
-                text(
-                    "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
-                ),
-            ]),
-        },
-    });
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Thank you for installing my Snap"),
+        text(
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+        ),
+      ]),
+    },
+  });
 };
 ```
 
@@ -182,18 +182,18 @@ export const onInstall: OnInstallHandler = async () => {
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onInstall = async () => {
-    await snap.request({
-        method: "snap_dialog",
-        params: {
-            type: "alert",
-            content: panel([
-                heading("Thank you for installing my Snap"),
-                text(
-                    "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
-                ),
-            ]),
-        },
-    });
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Thank you for installing my Snap"),
+        text(
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+        ),
+      ]),
+    },
+  });
 };
 ```
 
@@ -231,23 +231,23 @@ An object containing:
 import type { OnNameLookupHandler } from "@metamask/snaps-sdk";
 
 export const onNameLookup: OnNameLookupHandler = async (request) => {
-    const { chainId, address, domain } = request;
-  
-    if (address) {
-        const shortAddress = address.substring(2, 5);
-        const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
-        const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
-        return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
-    }
-  
-    if (domain) {
-        const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
-        return {
-            resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
-        };
-    }
-  
-    return null;
+  const { chainId, address, domain } = request;
+
+  if (address) {
+    const shortAddress = address.substring(2, 5);
+    const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
+  }
+
+  if (domain) {
+    const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+    };
+  }
+
+  return null;
 };
 ```
 
@@ -256,23 +256,23 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 
 ```js title="index.js"
 module.exports.onNameLookup = async ({ request }) => {
-    const { chainId, address, domain } = request;
-  
-    if (address) {
-        const shortAddress = address.substring(2, 5);
-        const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
-        const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
-        return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
-    }
-  
-    if (domain) {
-        const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
-        return {
-            resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
-        };
-    }
-  
-    return null;
+  const { chainId, address, domain } = request;
+
+  if (address) {
+    const shortAddress = address.substring(2, 5);
+    const chainIdDecimal = parseInt(chainId.split(":")[1], 10);
+    const resolvedDomain = `${shortAddress}.${chainIdDecimal}.test.domain`;
+    return { resolvedDomains: [{ resolvedDomain, protocol: "test protocol" }] };
+  }
+
+  if (domain) {
+    const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979";
+    return {
+      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+    };
+  }
+
+  return null;
 };
 ```
 
@@ -383,18 +383,18 @@ import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onSignature: OnSignatureHandler = async ({
-    signature,
-    signatureOrigin,
+  signature,
+  signatureOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Signature Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-        severity: SeverityLevel.Critical,
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Signature Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+    severity: SeverityLevel.Critical,
+  };
 };
 ```
 
@@ -406,18 +406,18 @@ import { SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onSignature = async ({
-    signature,
-    signatureOrigin,
+  signature,
+  signatureOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Signature Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-        severity: SeverityLevel.Critical,
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Signature Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+    severity: SeverityLevel.Critical,
+  };
 };
 ```
 
@@ -466,18 +466,18 @@ import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onTransaction: OnTransactionHandler = async ({
-    transaction,
-    chainId,
-    transactionOrigin,
+  transaction,
+  chainId,
+  transactionOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Transaction Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+  };
 };
 ```
 
@@ -488,18 +488,18 @@ export const onTransaction: OnTransactionHandler = async ({
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
-    transaction,
-    chainId,
-    transactionOrigin,
+  transaction,
+  chainId,
+  transactionOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Transaction Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+  };
 };
 ```
 
@@ -524,20 +524,20 @@ import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onTransaction: OnTransactionHandler = async ({
-    transaction,
-    chainId,
-    transactionOrigin,
+  transaction,
+  chainId,
+  transactionOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Transaction Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-        // highlight-next-line
-        severity: "critical",
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+    // highlight-next-line
+    severity: "critical",
+  };
 };
 ```
 
@@ -548,20 +548,20 @@ export const onTransaction: OnTransactionHandler = async ({
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({
-    transaction,
-    chainId,
-    transactionOrigin,
+  transaction,
+  chainId,
+  transactionOrigin,
 }) => {
-    const insights = /* Get insights */;
-    return {
-        content: panel([
-            heading("My Transaction Insights"),
-            text("Here are the insights:"),
-            ...(insights.map((insight) => text(insight.value))),
-        ]),
-        // highlight-next-line
-        severity: "critical",
-    };
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+    // highlight-next-line
+    severity: "critical",
+  };
 };
 ```
 
@@ -593,21 +593,21 @@ import type { OnUpdateHandler } from "@metamask/snaps-sdk";
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 export const onUpdate: OnUpdateHandler = async () => {
-    await snap.request({
-        method: "snap_dialog",
-        params: {
-            type: "alert",
-            content: panel([
-                heading("Thank you for updating my Snap"),
-                text(
-                    "New features added in this version:",
-                ),
-                text(
-                    "Added a dialog that appears when updating."
-                ), 
-            ]),
-        },
-    });
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Thank you for updating my Snap"),
+        text(
+          "New features added in this version:",
+        ),
+        text(
+          "Added a dialog that appears when updating."
+        ), 
+      ]),
+    },
+  });
 };
 ```
 
@@ -618,21 +618,21 @@ export const onUpdate: OnUpdateHandler = async () => {
 import { heading, panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onUpdate = async () => {
-    await snap.request({
-        method: "snap_dialog",
-        params: {
-            type: "alert",
-            content: panel([
-                heading("Thank you for updating my Snap"),
-                text(
-                    "New features added in this version:",
-                ),
-                text(
-                    "Added a dialog that appears when updating."
-                ), 
-            ]),
-        },
-    });
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Thank you for updating my Snap"),
+        text(
+          "New features added in this version:",
+        ),
+        text(
+          "Added a dialog that appears when updating."
+        ), 
+      ]),
+    },
+  });
 };
 ```
 
@@ -667,9 +667,9 @@ import type { OnUserInputHandler } from "@metamask/snaps-sdk";
 import { UserInputEventType } from "@metamask/snaps-sdk";
 
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
-    if (event.type === UserInputEventType.FormSubmitEvent) {
-        console.log("The submitted form values are", event.value);
-    }
+  if (event.type === UserInputEventType.FormSubmitEvent) {
+    console.log("The submitted form values are", event.value);
+  }
 };
 ```
 
@@ -680,9 +680,9 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 const { UserInputEventType } = require("@metamask/snaps-sdk");
 
 module.exports.onUserInput = async ({ id, event }) => {
-    if (event.type === UserInputEventType.FormSubmitEvent) {
-        console.log("The submitted form values are", event.value);
-    }
+  if (event.type === UserInputEventType.FormSubmitEvent) {
+    console.log("The submitted form values are", event.value);
+  }
 };
 ```
 

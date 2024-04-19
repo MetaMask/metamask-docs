@@ -58,11 +58,11 @@ Snaps CLI:
     require("dotenv").config();
     
     module.exports = {
-        environment: {
-            SNAP_ENV: process.env.SNAP_ENV,
-            PUBLIC_KEY: process.env.PUBLIC_KEY,
-        },
-        // Other options.
+      environment: {
+        SNAP_ENV: process.env.SNAP_ENV,
+        PUBLIC_KEY: process.env.PUBLIC_KEY,
+      },
+      // Other options.
     };
     ```
    
@@ -75,11 +75,11 @@ Snaps CLI:
     dotenv.config();
     
     const config: SnapConfig = {
-        environment: {
-            SNAP_ENV: process.env.SNAP_ENV,
-            PUBLIC_KEY: process.env.PUBLIC_KEY,
-        },
-        // Other options.
+      environment: {
+        SNAP_ENV: process.env.SNAP_ENV,
+        PUBLIC_KEY: process.env.PUBLIC_KEY,
+      },
+      // Other options.
     };
     
     export default config;
@@ -95,13 +95,13 @@ Snaps CLI:
     import { panel, text, heading } from "@metamask/snaps-sdk";
     
     await snap.request({
-        method: "snap_dialog",
-        params: {
-            type: "alert",
-            content: panel([
-                heading("This custom alert is just for display purposes."),
-                text(`SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`),
-            ]),
-        },
+      method: "snap_dialog",
+      params: {
+        type: "alert",
+        content: panel([
+          heading("This custom alert is just for display purposes."),
+          text(`SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`),
+        ]),
+      },
     });
     ```

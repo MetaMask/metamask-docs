@@ -62,8 +62,8 @@ interface announces an event dispatched by the wallet:
 
 ```typescript
 interface EIP6963AnnounceProviderEvent extends CustomEvent {
-    type: "eip6963:announceProvider";
-    detail: EIP6963ProviderDetail;
+  type: "eip6963:announceProvider";
+  detail: EIP6963ProviderDetail;
 }
 ```
 
@@ -72,7 +72,7 @@ interface requests an event dispatched by a dapp:
 
 ```typescript
 interface EIP6963RequestProviderEvent extends Event {
-    type: "eip6963:requestProvider";
+  type: "eip6963:requestProvider";
 }
 ```
 

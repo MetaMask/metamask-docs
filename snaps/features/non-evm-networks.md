@@ -64,14 +64,12 @@ For example, to derive Dogecoin keys:
 2. Dogecoin has coin type `3`, so add the following to the manifest file:
 
    ```json title="snap.manifest.json"
-   {
-       "initialPermissions": {
-           "snap_getBip44Entropy": [
-               {
-                   "coinType": 3
-               }
-           ]
+   "initialPermissions": {
+     "snap_getBip44Entropy": [
+       {
+         "coinType": 3
        }
+     ]
    }
    ```
 
@@ -88,10 +86,10 @@ For example, to derive Dogecoin keys:
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'.
    const dogecoinNode = await snap.request({
-       method: "snap_getBip44Entropy",
-       params: {
-           coinType: 3,
-       },
+     method: "snap_getBip44Entropy",
+     params: {
+       coinType: 3,
+     },
    });
 
    /**
