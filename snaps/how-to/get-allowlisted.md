@@ -8,28 +8,27 @@ sidebar_position: 8
 Once you have built your Snap, tested it, and published it to npm, you can make it available to
 MetaMask users.
 
-As part of the Snaps Open Beta launch, individual Snaps must be put on an allowlist before MetaMask
-users can install them.
-This means that users can only install Snaps that the MetaMask Snaps team has selected and reviewed.
+As part of the MetaMask Snaps Open Beta launch, individual Snaps must be put on an allowlist before users can install them.
+This means that at this time, only selected, reviewed Snaps can be installed. 
 In the future, this system will be opened up.
 
 :::caution Important
-By including a Snap on the allowlist, MetaMask is not endorsing, recommending, or guaranteeing the
-safety of the Snap for use for any reason.
+By including a Snap on the allowlist, Consensys is not endorsing, recommending, or guaranteeing the 
+safety of a Snap for your use or use for any reason. 
 Always do your own research before installing a Snap.
 :::
 
 ## Prerequisites
 
-- Make your Snap's source code publicly available.
-  You don't need to publish your Snap with an open source license, but users should be able to read
+To be added to the allowlist, a Snap must: 
+
+- Have publicly available source code.
+  You don't need to publish your code with an open source license, but users should be able to read
   the source code of the Snap package.
+- Be [published](publish-a-snap.md) to npm.
+- Not impair our compliance with laws or regulations.
 
-- [Publish your Snap](publish-a-snap.md) to npm.
-
-- Ensure your Snap complies with laws and regulations.
-
-- If your Snap uses any of the following API methods related to key management, you must provide
+Furthermore, if your Snap uses any of the following API methods related to key management, you must provide
   evidence of a third-party audit from an approved auditor:
 
   - [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
@@ -38,15 +37,15 @@ Always do your own research before installing a Snap.
   - [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
   - [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
 
-  The audit must cover the Snap source code that is to run within the Snaps system, and any modules
-  used for key management.
-  You must provide the commit that was audited and the commit that has any fixes documented in the
-  audit report.
+The audit must cover the Snap source code that is to run within the Snaps system, and any modules 
+used for key management. 
+You must provide the commit that was audited and the commit that has any fixes documented in the 
+audit report.
 
-  :::info
-  A list of approved third-party auditors and details about the audit process are available on the
-  [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
-  :::
+:::info
+A list of approved third-party auditors and details about the audit process are available on the 
+[MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
+:::
 
 ## Steps
 
@@ -74,8 +73,8 @@ The form requests information about your Snap, including the following:
   You can use line breaks, lists, and URLs.
   You cannot use HTML.
   If applicable, describe quick steps to onboard and use the Snap.
-  For example: "After installing the Snap, visit the companion dapp at
-  https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress."
+  For example: _After installing the Snap, visit the companion dapp at
+  https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress._
 
 - **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's
   source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
@@ -123,7 +122,7 @@ You can direct users to the directory to find and install your Snap.
 ### 4. Distribute your Snap
 
 You can deploy a companion dapp where users can learn about your Snap and install it, or you can
-integrate your Snap with your existing dapp.
+integrate your Snap with your existing dapp. 
 
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
 [connect to your Snap](connect-to-a-snap.md).
