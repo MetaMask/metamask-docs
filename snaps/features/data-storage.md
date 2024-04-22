@@ -54,7 +54,7 @@ const persistedData = await snap.request({
 console.log(persistedData);
 // { hello: "world" }
 
-// // If data storage is no longer necessary, clear it.
+// If data storage is no longer necessary, clear it.
 await snap.request({
   method: "snap_manageState",
   params: { 
