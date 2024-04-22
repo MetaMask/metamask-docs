@@ -13,7 +13,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Moved Snaps-specific Wallet API methods from the
   [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
-  [Snaps reference](/snaps/reference/wallet-json-rpc-api).
+  [Snaps reference](/snaps/reference/wallet-api-for-snaps).
   ([#1286](https://github.com/MetaMask/metamask-docs/pull/1286))
 - Documented [Snaps data storage](/snaps/features/data-storage).
   ([#1278](https://github.com/MetaMask/metamask-docs/pull/1278))
