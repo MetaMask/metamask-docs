@@ -9,8 +9,13 @@ import TabItem from "@theme/TabItem";
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
-manifest file.
+To call each method (except the [interactive UI methods](#interactive-ui-methods)), you must first
+[request permission](../how-to/request-permissions.md) in the Snap manifest file.
+
+:::note
+See the [Wallet JSON-RPC API](wallet-json-rpc-api.md) for methods that dapps can call to communicate
+with Snaps.
+:::
 
 ## `snap_dialog`
 

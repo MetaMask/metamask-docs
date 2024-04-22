@@ -63,10 +63,13 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 ## Request permissions from a dapp
 
-Dapps that communicate with Snaps using [`wallet_snap`](/wallet/reference/wallet_snap) and [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) must request permission to do so by calling the
-[`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) MetaMask JSON-RPC API method.
+Dapps that communicate with Snaps using [`wallet_snap`](../reference/wallet-json-rpc-api.md#wallet_snap)
+or [`wallet_invokeSnap`](../reference/wallet-json-rpc-api.md#wallet_invokesnap) must request
+permission to do so by calling
+[`wallet_requestSnaps`](../reference/wallet-json-rpc-api.md#wallet_requestsnaps) first.
 
-The following example calls `wallet_requestSnaps` to request permission to connect to the `hello-snap` Snap, then calls `wallet_invokeSnap` to invoke the `hello` JSON-RPC method exposed by the Snap:
+The following example calls `wallet_requestSnaps` to request permission to connect to the
+`hello-snap` Snap, then calls `wallet_invokeSnap` to invoke the `hello` JSON-RPC method exposed by the Snap:
 
 ```js title="index.js"
 // If the Snap is not already installed, the user will be prompted to install it.
