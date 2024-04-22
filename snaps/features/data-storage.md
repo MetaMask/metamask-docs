@@ -33,7 +33,7 @@ This is useful to store sensitive information, such as passwords.
 
 The following example uses `snap_manageState` to store some data using the `update` operation, and
 retrieves the data at a later time using the `get` operation.
-Once there's no need to store the data anymore, it clears the Snap's state using the `clear` operation.
+When the data is no longer required, the Snap's state is cleared using the `clear` operation.
 
 ```javascript title="index.js"
 // Persist some data.
@@ -54,7 +54,7 @@ const persistedData = await snap.request({
 console.log(persistedData);
 // { hello: "world" }
 
-// If there's no need to store data anymore, clear it out.
+// // If data storage is no longer necessary, clear it.
 await snap.request({
   method: "snap_manageState",
   params: { 
@@ -102,7 +102,7 @@ const persistedData = await snap.request({
 console.log(persistedData);
 // { hello: "world" }
 
-// If there's no need to store data anymore, clear it out.
+// If data storage is no longer necessary, clear it.
 await snap.request({
   method: "snap_manageState",
   params: { 
