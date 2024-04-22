@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 description: Call an action when your Snap is installed or updated.
 ---
 

@@ -379,7 +379,9 @@ Gets the locked status of the Snaps client.
 
 It is useful to check if MetaMask is locked in the following situations:
 
-- When running background operations that require MetaMask to be unlocked, for example, [accessing encrypted state](#snap_managestate). If MetaMask is locked, the user gets a popup asking them to enter their password, which might be unexpected or confusing.
+- When running background operations that require MetaMask to be unlocked, for example,
+  [accessing encrypted state](../features/data-storage.md#2-use-encrypted-storage).
+  If MetaMask is locked, the user gets an unexpected password request.
 - When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 
 #### Returns
@@ -781,13 +783,6 @@ By default, the data is automatically encrypted using a Snap-specific key and au
 decrypted when retrieved.
 You can set `encrypted` to `false` to use unencrypted storage.
 
-:::note
-Accessing encrypted state requires MetaMask to be unlocked.
-If you need to access encrypted state in a background task such as a cron job, you can use
-[`snap_getClientStatus`](#snap_getclientstatus) to ensure that MetaMask is unlocked, preventing an
-unexpected password request popup.
-:::
-
 #### Parameters
 
 An object containing:
@@ -796,9 +791,6 @@ An object containing:
 - `newState` - The value to update state with if the operation is `"update"`, and nothing otherwise.
 - `encrypted` (optional) - Indicates whether the Snap will encrypt the data.
   The default is `true`.
-  If set to `false`, the Snap will use a separate storage section, and will not encrypt the data.
-  This is useful to access the data from background operations without requiring the user to enter
-  their password in the case that MetaMask is locked.
 
 #### Returns
 
@@ -816,7 +808,7 @@ await snap.request({
   },
 });
 
-// At a later time, get the data stored.
+// At a later time, get the stored data.
 const persistedData = await snap.request({
   method: "snap_manageState",
   params: { operation: "get" },
