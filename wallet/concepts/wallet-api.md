@@ -73,7 +73,9 @@ This requires that dapps obtain user consent before accessing certain features.
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
-Restricted methods are methods that cannot be called unless you have permission to do so using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps).
+Restricted methods are methods that cannot be called unless you have permission to do so using
+[`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or
+[`wallet_requestSnaps`](/snaps/reference/wallet-api-for-snaps/#wallet_requestsnaps).
 
 The following methods are restricted:
 
@@ -92,10 +94,10 @@ The following methods are restricted:
   See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
   :::
 
-- [`wallet_snap`](/snaps/reference/wallet-json-rpc-api/#wallet_snap) - Gaining permission requires
+- [`wallet_snap`](/snaps/reference/wallet-api-for-snaps/#wallet_snap) - Gaining permission requires
   calling `wallet_requestSnap`.
 
-- [`wallet_invokeSnap`](/snaps/reference/wallet-json-rpc-api/#wallet_invokesnap) - Gaining
+- [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) - Gaining
   permission requires calling `wallet_requestSnap`.
 
 ### Unrestricted methods

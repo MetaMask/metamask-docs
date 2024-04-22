@@ -13,8 +13,8 @@ To call each method (except the [interactive UI methods](#interactive-ui-methods
 [request permission](../how-to/request-permissions.md) in the Snap manifest file.
 
 :::note
-See the [Wallet JSON-RPC API](wallet-json-rpc-api.md) for methods that dapps can call to communicate
-with Snaps.
+See the [Wallet API for Snaps](wallet-api-for-snaps.md) for methods that dapps can call to
+communicate with Snaps.
 :::
 
 ## `snap_dialog`

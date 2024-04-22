@@ -1,5 +1,5 @@
 ---
-description: See the Wallet JSON-RPC API reference.
+description: See the Wallet API for Snaps reference.
 sidebar_position: 2
 toc_max_heading_level: 2
 ---
@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Wallet JSON-RPC API
+# Wallet API for Snaps
 
 Dapps can install and communicate with Snaps using a subset of the
 [Wallet JSON-RPC API](/wallet/concepts/wallet-api/#json-rpc-api).
