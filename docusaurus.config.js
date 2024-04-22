@@ -255,6 +255,10 @@ const config = {
             to: "/wallet/tutorials",
           },
           {
+            from: "/wallet/how-to/connect/detect-metamask",
+            to: "/wallet/tutorials",
+          },
+          {
             from: "/wallet/tutorials/simple-react-dapp",
             to: "/wallet/tutorials/react-dapp-local-state",
           },
