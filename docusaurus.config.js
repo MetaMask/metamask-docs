@@ -143,8 +143,8 @@ const config = {
             to: "/wallet/how-to/connect",
           },
           {
-            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/detect-wallet/metamask"],
-            to: "/wallet/how-to/connect/detect-metamask",
+            from: ["/wallet/get-started/detect-metamask", "/wallet/how-to/detect-metamask", "/wallet/how-to/detect-wallet/metamask", "/wallet/how-to/connect/detect-metamask"],
+            to: "/wallet/tutorials",
           },
           {
             from: ["/guide/accessing-accounts", "/wallet/how-to/access-accounts", "/wallet/get-started/access-accounts"],
@@ -252,10 +252,6 @@ const config = {
           },
           {
             from: "/wallet/category/tutorials",
-            to: "/wallet/tutorials",
-          },
-          {
-            from: "/wallet/how-to/connect/detect-metamask",
             to: "/wallet/tutorials",
           },
           {
