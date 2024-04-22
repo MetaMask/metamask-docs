@@ -11,6 +11,10 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
+- Moved Snaps-specific Wallet API methods from the
+  [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
+  [Snaps reference](/snaps/reference/wallet-json-rpc-api).
+  ([#1286](https://github.com/MetaMask/metamask-docs/pull/1286))
 - Documented [Snaps data storage](/snaps/features/data-storage).
   ([#1278](https://github.com/MetaMask/metamask-docs/pull/1278))
 - Documented [how to get your Snap allowlisted](/snaps/how-to/get-allowlisted).
