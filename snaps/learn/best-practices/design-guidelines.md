@@ -26,7 +26,7 @@ Ensure your Snap metadata follows these guidelines:
 - Keep your Snap's name to **21 characters or fewer** (including spaces).
 - Use a descriptive name&mdash;don't use "Snap" in the name.
 - Use short and simple copy.
-- Your avatar should fit in a **32px circular frame, SVG format**.
+- [Your Snap's avatar](https://docs.metamask.io/snaps/learn/tutorials/gas-estimation/#2-add-a-custom-icon) should fit in a **32px circular frame, SVG format**.
 
 **Before** asking for permission to install, provide users with clear and concise information about:
 
