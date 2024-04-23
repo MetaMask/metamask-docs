@@ -42,19 +42,20 @@ simple-dapp/
 ├─ dist/
 │  ├─ index.html
 ```
+
 This tutorial will use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module and a bundler, [Webpack](https://github.com/webpack/webpack), to compile the module and create an output script `dist/main.js`.
 
 Add the following code to `dist/index.html`:
 
-```jsx title="index.html"
+```html title="index.html"
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Simple dapp</title>
+  <meta charset="UTF-8">
+  <title>Simple dapp</title>
 </head>
 <body>
-    <script src="../dist/index.js"></script>  <!-- Links to the JavaScript bundle created by Webpack -->
+  <script src="../dist/index.js"></script>  <!-- Links to the JavaScript bundle created by Webpack -->
 </body>
 </html>
 ```
@@ -96,7 +97,7 @@ When you run `npm run build` from your terminal, Webpack bundles the content in 
 
 :::caution
 
-Using the `window.ethereum` provider object to detect MetaMask is deprecated. We recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md) for production environments.
+The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes. In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md).
 
 :::
 
@@ -146,34 +147,31 @@ Then navigate to the project directory, and run `http-server`.
 
 Open your browser and go to the provided local server URL (typically http://127.0.0.1:8080).
 
-### 4. Determine a user's connected network
+### 5. Detect a user's network
 
-[Detect the user's network](#3-detect-metamask) to ensure all RPC requests are submitted to the currently connected network.
+[Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
 Add the following code to `src/index.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
 RPC method to detect the chain ID of the user's current network, and listens to the [`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the user changes networks:
 
-```jsx title="index.js"
+```js title="index.js"
 const chainId = await window.ethereum 
-    .request({ method: "eth_chainId" });
+  .request({ method: "eth_chainId" });
 
 window.ethereum
-    .on("chainChanged", handleChainChanged);
+  .on("chainChanged", handleChainChanged);
 
 function handleChainChanged(chainId) {
-    // We recommend reloading the page, unless you must do otherwise.
-    window.location.reload();
+  // We recommend reloading the page, unless you must do otherwise.
+  window.location.reload();
 }
 ```
-For more information on Chain IDs, see [Detect a user's network](../tutorials/javascript-dapp-simple.md)
 
 ### 5. Access an account
 
-To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
-
-#### Create a connect button
+To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
 Add the following code to `src/index.js`, which creates a button to allow users to connect to MetaMask from your dapp.
-Selecting the button activates the call to `eth_requestAccounts`, allowing you to access to user's accounts.
+Selecting the button activates the call to `eth_requestAccounts`, allowing you to access the user's accounts.
 
 ```jsx title="index.js"
 // You should only attempt to request the user's account in response to user interaction, such as
@@ -214,7 +212,7 @@ Add the following HTML code to the body of `dist/index.html`, which displays the
 <h2>Account: <span class="showAccount"></span></h2>
 ```
 
-## Example simple dapp 
+## Example
 
 The following code samples contain the full simple dapp JavaScript and HTML code that this tutorial walks through. You can copy the following full examples to get started quickly.
 
