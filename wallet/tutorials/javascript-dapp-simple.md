@@ -148,7 +148,7 @@ Open your browser and go to the provided local server URL (typically http://127.
 
 ### 4. Determine a user's connected network
 
-[Detect the user's network](../how-to/connect/detect-metamask.md) to ensure all RPC requests are submitted to the currently connected network.
+[Detect the user's network](#3-detect-metamask) to ensure all RPC requests are submitted to the currently connected network.
 Add the following code to `src/index.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
 RPC method to detect the chain ID of the user's current network, and listens to the [`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the user changes networks:
 
