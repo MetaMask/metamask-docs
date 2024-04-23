@@ -1,6 +1,6 @@
 ---
 description: Connect to custom EVM accounts using the Keyring API.
-sidebar_position: 4
+sidebar_position: 2
 tags:
   - Keyring API
 ---

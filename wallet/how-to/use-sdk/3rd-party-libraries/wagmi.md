@@ -34,18 +34,18 @@ import { mainnet, sepolia } from "wagmi/chains";
 import { metaMask } from "wagmi/connectors";
 
 export const config = createConfig({
-    chains: [mainnet, sepolia],
-    connectors: [
-        metaMask({
-            dappMetadata: {
-                name: "Example Wagmi dapp",
-            },
-        }),
-    ],
-    transports: {
-        [mainnet.id]: http(),
-        [sepolia.id]: http(),
-    },
+  chains: [mainnet, sepolia],
+  connectors: [
+    metaMask({
+      dappMetadata: {
+        name: "Example Wagmi dapp",
+      },
+    }),
+  ],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
 });
 ```
 
@@ -56,13 +56,13 @@ When configuring the connector, make sure to configure the proper
 
 ```javascript
 connectors: [
-    metaMask({
-        dappMetadata: {
-            name: "Example Wagmi dapp",
-        },
-        infuraAPIKey: "YOUR-API-KEY",
-        // Other options
-    }),
+  metaMask({
+    dappMetadata: {
+      name: "Example Wagmi dapp",
+    },
+    infuraAPIKey: "YOUR-API-KEY",
+    // Other options.
+  }),
 ],
 ```
 

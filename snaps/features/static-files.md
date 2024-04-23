@@ -1,6 +1,6 @@
 ---
 description: Include and retrieve static files in the Snap bundle.
-sidebar_position: 5
+sidebar_position: 10
 ---
 
 # Static files
@@ -19,16 +19,14 @@ File paths are relative to the Snap package root, that is, one level above the `
 For example:
 
 ```json title="snap.manifest.json"
-{
-    "source": {
-        "shasum": "xxx",
-        "location": {
-            // ...
-        },
-        "files": [
-            "./files/myfile.bin"
-        ]
-    }
+"source": {
+  "shasum": "xxx",
+  "location": {
+    // ...
+  },
+  "files": [
+    "./files/myfile.bin"
+  ]
 }
 ```
 
@@ -40,13 +38,18 @@ For example:
 
 ```javascript title="index.js"
 const contents = await snap.request({
-    method: "snap_getFile",
-    params: {
-        path: "./files/myfile.bin",
-        encoding: "hex",
-    },
+  method: "snap_getFile",
+  params: {
+    path: "./files/myfile.bin",
+    encoding: "hex",
+  },
 });
 
 // "0x..."
 console.log(contents);
 ```
+
+## Example
+
+See the [`@metamask/get-file-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/get-file)
+package for a full example of handling static files.

@@ -1,6 +1,6 @@
 ---
 description: Connect your dapp to existing, third-party Snaps.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # Connect to a Snap
@@ -31,14 +31,14 @@ const provider = await detectEthereumProvider();
 
 // web3_clientVersion returns the installed MetaMask version as a string.
 const isFlask = (
-    await provider?.request({ method: "web3_clientVersion" })
+  await provider?.request({ method: "web3_clientVersion" })
 )?.includes("flask");
 
 if (provider && isFlask) {
-    console.log("MetaMask Flask successfully detected!");
-    // Now you can use Snaps!
+  console.log("MetaMask Flask successfully detected!");
+  // Now you can use Snaps!
 } else {
-    console.error("Please install MetaMask Flask!", error);
+  console.error("Please install MetaMask Flask!", error);
 }
 ```
 
@@ -74,15 +74,15 @@ with the following shape:
 
 ```json
 {
-    "SNAP_ID": {
-        "blocked": false,
-        "enabled": true,
-        "id": "SNAP_ID",
-        "initialPermissions": {
-            // ...all the permissions in the Snap's manifest
-        },
-        "version": "SNAP_VERSION"
-    }
+  "SNAP_ID": {
+    "blocked": false,
+    "enabled": true,
+    "id": "SNAP_ID",
+    "initialPermissions": {
+      // The permissions in the Snap's manifest file.
+    },
+    "version": "SNAP_VERSION"
+  }
 }
 ```
 
@@ -144,14 +144,14 @@ However, if the user has disabled the Snap, the response has `enabled` set to `f
 
 ```json
 {
-    "SNAP_ID": {
-        "blocked": false,
-        "enabled": false,
-        "id": "SNAP_ID",
-        "initialPermissions": {
-            // ...all the permissions in the Snap's manifest
-        },
-        "version": "SNAP_VERSION"
-    }
+  "SNAP_ID": {
+    "blocked": false,
+    "enabled": false,
+    "id": "SNAP_ID",
+    "initialPermissions": {
+      // The permissions in the Snap's manifest file.
+    },
+    "version": "SNAP_VERSION"
+  }
 }
 ```

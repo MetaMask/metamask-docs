@@ -6,7 +6,7 @@ tags:
   - Unity SDK
 ---
 
-import ReactPlayer from 'react-player/lazy'
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
 # Use MetaMask SDK with Unity
 
@@ -19,9 +19,7 @@ The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
 
 The following video demonstrates how to install and use the MetaMask Unity SDK.
 
-<p align="center">
-  <ReactPlayer url='https://www.youtube.com/embed/0D1cIH-PZtI' />
-</p>
+<YoutubeEmbed url='https://www.youtube.com/embed/0D1cIH-PZtI' />
 
 ## Steps
 
@@ -63,15 +61,15 @@ If you don't have TextMeshPro installed, the Unity editor automatically prompts 
 <summary>Unity SDK package structure</summary>
 <p>
 
-| File or directory        | Contents                                       |
-| ------------------------ | ---------------------------------------------- |
-| `Documentation`          | Documentation and link to online documentation |
-| `Editor`                 | Editor-only code such as Setup GUI windows, data persistence for SDK settings |
-| `Plugins`                | Plugins needed by the package (the ECIES Platform runtime libraries and core SDK Codebase) |
+| File or directory        | Contents                                                                                                                         |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `Documentation`          | Documentation and link to online documentation                                                                                   |
+| `Editor`                 | Editor-only code such as Setup GUI windows, data persistence for SDK settings                                                    |
+| `Plugins`                | Plugins needed by the package (the ECIES Platform runtime libraries and core SDK Codebase)                                       |
 | `Runtime`                | Main scripts for the SDK that are environment-agnostic, including the C# scripts that provide the base implementation of the SDK |
-| `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling |
-| `LICENSE.md`             | Package license                                |
-| `Third Party Notices.md` | Third party notices                            |
+| `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling            |
+| `LICENSE.md`             | Package license                                                                                                                  |
+| `Third Party Notices.md` | Third party notices                                                                                                              |
 
 
 </p>
@@ -119,7 +117,7 @@ once the wallet is connected:
 wallet.WalletConnected += OnWalletConnected;
 
 void OnWalletConnected(object sender, EventArgs e) {
-    Debug.Log("Wallet is connected");
+  Debug.Log("Wallet is connected");
 }
 ```
 
@@ -156,7 +154,7 @@ var wallet = MetaMaskUnity.Instance.Wallet;
 wallet.WalletAuthorized += OnWalletAuthorized;
 
 void OnWalletAuthorized(object sender, EventArgs e) {
-    Debug.Log("Wallet is authorized");
+  Debug.Log("Wallet is authorized");
 }
 ```
 
@@ -167,15 +165,15 @@ The following is a sample transaction request:
 var wallet = MetaMaskUnity.Instance.Wallet;
 var transactionParams = new MetaMaskTransaction
 {
-    To = "0xd0059fB234f15dFA9371a7B45c09d451a2dd2B5a",
-    From = MetaMaskUnity.Instance.Wallet.SelectedAddress,
-    Value = "0x0"
+  To = "0xd0059fB234f15dFA9371a7B45c09d451a2dd2B5a",
+  From = MetaMaskUnity.Instance.Wallet.SelectedAddress,
+  Value = "0x0"
 };
 
 var request = new MetaMaskEthereumRequest
 {
-    Method = "eth_sendTransaction",
-    Parameters = new MetaMaskTransaction[] { transactionParams }
+  Method = "eth_sendTransaction",
+  Parameters = new MetaMaskTransaction[] { transactionParams }
 };
 await wallet.Request(request);
 ```

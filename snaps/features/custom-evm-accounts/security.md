@@ -28,20 +28,20 @@ For example:
 
     ```ts
     const account: KeyringAccount = {
-        id: uuid(),
-        options: {
-            privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
-        },
-        address,
-        methods: [
-            EthMethod.PersonalSign,
-            EthMethod.Sign,
-            EthMethod.SignTransaction,
-            EthMethod.SignTypedDataV1,
-            EthMethod.SignTypedDataV3,
-            EthMethod.SignTypedDataV4,
-        ],
-        type: EthAccountType.Eoa,
+      id: uuid(),
+      options: {
+        privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
+      },
+      address,
+      methods: [
+        EthMethod.PersonalSign,
+        EthMethod.Sign,
+        EthMethod.SignTransaction,
+        EthMethod.SignTypedDataV1,
+        EthMethod.SignTypedDataV3,
+        EthMethod.SignTypedDataV4,
+      ],
+      type: EthAccountType.Eoa,
     };
     ```
 
@@ -51,14 +51,14 @@ For example:
     
     ```ts
     await snap.request({
-        method: "snap_manageState",
-        params: {
-            operation: "update",
-            newState: {
-                // Your Snap's state here.
-                privateKey: "0x01234...78",
-            },
+      method: "snap_manageState",
+      params: {
+        operation: "update",
+        newState: {
+          // Your Snap's state here.
+          privateKey: "0x01234...78",
         },
+      },
     });
     ```
 
@@ -101,16 +101,16 @@ The following is an example of implementing such logic:
 
 ```ts
 const permissions: Record<string, string[]> = {
-    "https://<Dapp 1 domain>": [
-        // List of allowed methods for Dapp 1.
-    ],
-    "https://<Dapp 2 domain>": [
-        // List of allowed methods for Dapp 2.
-    ],
+  "https://<Dapp 1 domain>": [
+    // List of allowed methods for Dapp 1.
+  ],
+  "https://<Dapp 2 domain>": [
+    // List of allowed methods for Dapp 2.
+  ],
 };
 
 if (origin !== "metamask" && !permissions[origin]?.includes(request.method)) {
-    // Reject the request.
+  // Reject the request.
 }
 ```
 
@@ -124,14 +124,14 @@ redirected to a malicious website.
 
 ```ts
 async submitRequest(request: KeyringRequest): Promise<SubmitRequestResponse> {
-    // Your Snap's custom logic.
-    return {
-        pending: true,
-        redirect: {
-            message: "Please continue in the dapp.",
-            url: "https://<dapp domain>/sign?tx=1234", // !!! ENSURE THIS IS A SAFE URL !!!
-        },
-    };
+  // Your Snap's custom logic.
+  return {
+    pending: true,
+    redirect: {
+      message: "Please continue in the dapp.",
+      url: "https://<dapp domain>/sign?tx=1234", // !!! ENSURE THIS IS A SAFE URL !!!
+    },
+  };
 }
 ```
 
@@ -170,10 +170,10 @@ For example:
 
   ```ts
   try {
-      const privateKey = toBuffer(inputSecretValue);
-      // Use privateKey here.
+    const privateKey = toBuffer(inputSecretValue);
+    // Use privateKey here.
   } catch (error) {
-      throw new Error("Invalid private key");
+    throw new Error("Invalid private key");
   }
   ```
 
@@ -191,11 +191,11 @@ For example:
 
   ```ts
   export const onRpcRequest: OnRpcRequestHandler = async ({
-      //         ~~~           ~~~
-      origin,
-      request,
+    //           ~~~           ~~~
+    origin,
+    request,
   }) => {
-      return handleKeyringRequest(keyring, request);
+    return handleKeyringRequest(keyring, request);
   };
   ```
 
@@ -203,12 +203,12 @@ For example:
 
   ```ts
   export const onKeyringRequest: OnKeyringRequestHandler = async ({
-      //         ~~~~~~~           ~~~~~~~
-      origin,
-      request,
+    //           ~~~~~~~           ~~~~~~~
+    origin,
+    request,
   }) => {
-      // Any custom logic or extra security checks here.
-      return handleKeyringRequest(keyring, request);
+    // Any custom logic or extra security checks here.
+    return handleKeyringRequest(keyring, request);
   };
   ```
 

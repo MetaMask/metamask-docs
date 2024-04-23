@@ -76,11 +76,11 @@ The following are guidelines for user notifications and authorizations:
     const referrer = new URL(origin);
 
     if(referrer.protocol === "https:" && 
-        (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")) { 
-            console.log("URL is valid"); 
+      (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")) { 
+        console.log("URL is valid"); 
     }
     else { 
-        console.log("URL is NOT valid"); 
+      console.log("URL is NOT valid"); 
     }
     ```
     

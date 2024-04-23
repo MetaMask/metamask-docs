@@ -27,19 +27,19 @@ An account object contains:
 
 ```json
 {
-    "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
-    "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-    "methods": [
-        "eth_sign",
-        "eth_signTransaction",
-        "eth_signTypedData_v4",
-        "personal_sign"
-    ],
-    "options": {
-        "signerCount": 5,
-        "threshold": 3
-    },
-    "type": "eip155:eoa"
+  "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
+  "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
+  "methods": [
+    "eth_sign",
+    "eth_signTransaction",
+    "eth_signTypedData_v4",
+    "personal_sign"
+  ],
+  "options": {
+    "signerCount": 5,
+    "threshold": 3
+  },
+  "type": "eip155:eoa"
 }
 ```
 
@@ -60,15 +60,15 @@ A request object contains:
 
 ```json
 {
-    "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
-    "id": "f84d3a97-b6e1-47ea-8b0c-fd8609efaad4",
-    "request": {
-        "method": "personal_sign",
-        "params": [
-            "0x4578616d706c652060706572736f6e616c5f7369676e60206d657373616765",
-            "0xe887f3b50232722e6eb4c1d3a03b34c9b345acd1"
-        ]
-    },
-    "scope": "eip155:1"
+  "address": "0xd1f5279be4b4dd94133a23dee1b23f5bfc0db1d0",
+  "id": "f84d3a97-b6e1-47ea-8b0c-fd8609efaad4",
+  "request": {
+    "method": "personal_sign",
+    "params": [
+      "0x4578616d706c652060706572736f6e616c5f7369676e60206d657373616765",
+      "0xe887f3b50232722e6eb4c1d3a03b34c9b345acd1"
+    ]
+  },
+  "scope": "eip155:1"
 }
 ```

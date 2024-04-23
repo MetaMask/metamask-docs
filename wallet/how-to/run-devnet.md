@@ -52,14 +52,14 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
     ```js title="hardhat.config.js"
     module.exports = {
-        networks: {
-            hardhat: {
-                accounts: {
-                    mnemonic: process.env.SEED_PHRASE,
-                },
-                chainId: 1337,
-            },
+      networks: {
+        hardhat: {
+          accounts: {
+            mnemonic: process.env.SEED_PHRASE,
+          },
+          chainId: 1337,
         },
+      },
     };
     ```
 

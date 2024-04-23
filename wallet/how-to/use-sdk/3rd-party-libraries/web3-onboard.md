@@ -46,12 +46,12 @@ example, [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata):
 
 ```javascript
 const metamaskSDKWallet = metamaskSDK({
-    options: {
-        extensionOnly: false,
-        dappMetadata: {
-            name: "Example Web3-Onboard Dapp",
-        },
+  options: {
+    extensionOnly: false,
+    dappMetadata: {
+      name: "Example Web3-Onboard Dapp",
     },
+  },
 });
 ```
 
@@ -61,11 +61,11 @@ Use the module as follows:
 
 ```javascript
 const onboard = Onboard({
-    // Other Onboard options
-    wallets: [
-        metamaskSDKWallet,
-        // Other wallets
-    ],
+  // Other Onboard options.
+  wallets: [
+    metamaskSDKWallet,
+    // Other wallets.
+  ],
 });
 
 const connectedWallets = await onboard.connectWallet();

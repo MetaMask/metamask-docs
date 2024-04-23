@@ -86,8 +86,8 @@ permissions by modifying `initialPermissions`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-    "endowment:transaction-insight": {},
-    "endowment:ethereum-provider": {}
+  "endowment:transaction-insight": {},
+  "endowment:ethereum-provider": {}
 }
 ```
 
@@ -108,40 +108,40 @@ import { heading, panel, text } from "@metamask/snaps-sdk";
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
-    // Use the Ethereum provider to fetch the gas price.
-    const currentGasPrice = await ethereum.request({
-        method: "eth_gasPrice",
-    }) as string;
+  // Use the Ethereum provider to fetch the gas price.
+  const currentGasPrice = await ethereum.request({
+    method: "eth_gasPrice",
+  }) as string;
 
-    // Get fields from the transaction object.
-    const transactionGas = parseInt(transaction.gas as string, 16);
-    const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
-    const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
-    const maxPriorityFeePerGasInWei = parseInt(
-        transaction.maxPriorityFeePerGas as string,
-        16,
-    );
+  // Get fields from the transaction object.
+  const transactionGas = parseInt(transaction.gas as string, 16);
+  const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
+  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
+  const maxPriorityFeePerGasInWei = parseInt(
+    transaction.maxPriorityFeePerGas as string,
+    16,
+  );
 
-    // Calculate gas fees the user would pay.
-    const gasFees = Math.min(
-        maxFeePerGasInWei * transactionGas,
-        (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
-    );
+  // Calculate gas fees the user would pay.
+  const gasFees = Math.min(
+    maxFeePerGasInWei * transactionGas,
+    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
+  );
 
-    // Calculate gas fees as percentage of transaction.
-    const transactionValueInWei = parseInt(transaction.value as string, 16);
-    const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
+  // Calculate gas fees as percentage of transaction.
+  const transactionValueInWei = parseInt(transaction.value as string, 16);
+  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
 
-    // Display percentage of gas fees in the transaction insights UI.
-    return {
-        content: panel([
-            heading("Transaction insights Snap"),
-            text(
-                `As set up, you are paying **${gasFeesPercentage.toFixed(2)}%**
-                in gas fees for this transaction.`,
-            ),
-        ]),
-    };
+  // Display percentage of gas fees in the transaction insights UI.
+  return {
+    content: panel([
+      heading("Transaction insights Snap"),
+      text(
+        `As set up, you are paying **${gasFeesPercentage.toFixed(2)}%**
+        in gas fees for this transaction.`,
+      ),
+    ]),
+  };
 };
 ```
 
@@ -193,14 +193,14 @@ For contract interactions, add the following code to the beginning of the `onTra
 
 ```typescript title="index.ts"
 if (typeof transaction.data === "string" && transaction.data !== "0x") {
-    return {
-        content: panel([
-            heading("Percent Snap"),
-            text(
-                "This Snap only provides transaction insights for simple ETH transfers.",
-            ),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Percent Snap"),
+      text(
+        "This Snap only provides transaction insights for simple ETH transfers.",
+      ),
+    ]),
+  };
 }
 ```
 

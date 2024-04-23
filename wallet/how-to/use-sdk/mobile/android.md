@@ -35,7 +35,7 @@ add the following entry to the `dependencies` block:
 
 ```gradle title="build.gradle"
 dependencies {
-    implementation 'io.metamask.androidsdk:metamask-android-sdk:0.2.1'
+  implementation "io.metamask.androidsdk:metamask-android-sdk:0.2.1"
 }
 ```
 
@@ -74,18 +74,18 @@ code to your project file:
 ```kotlin
 @AndroidEntryPoint
 class SomeModel(private val repository: ApplicationRepository) {
-    val ethereum = Ethereum(context)
+  val ethereum = Ethereum(context)
 
-    val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
+  val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
 
-    // This is the same as calling eth_requestAccounts
-    ethereum.connect(dapp) { result ->
-        if (result is RequestError) {
-            Log.e(TAG, "Ethereum connection error: ${result.message}")
-        } else {
-            Log.d(TAG, "Ethereum connection result: $result")
-        }
+  // This is the same as calling eth_requestAccounts.
+  ethereum.connect(dapp) { result ->
+    if (result is RequestError) {
+      Log.e(TAG, "Ethereum connection error: ${result.message}")
+    } else {
+      Log.d(TAG, "Ethereum connection result: $result")
     }
+  }
 }
 ```
 
@@ -101,24 +101,24 @@ If you use Hilt, your setup might look like the following:
 ```kotlin title="EthereumViewModel.kt"
 @HiltViewModel
 class EthereumViewModel @Inject constructor(
-    private val ethereum: Ethereum
+  private val ethereum: Ethereum
 ): ViewModel() {
 
-    val ethereumState = MediatorLiveData<EthereumState>().apply {
-        addSource(ethereum.ethereumState) { newEthereumState ->
-            value = newEthereumState
-        }
+  val ethereumState = MediatorLiveData<EthereumState>().apply {
+    addSource(ethereum.ethereumState) { newEthereumState ->
+      value = newEthereumState
     }
+  }
 
-    // Wrapper function to connect the dapp
-    fun connect(dapp: Dapp, callback: ((Any?) -> Unit)?) {
-        ethereum.connect(dapp, callback)
-    }
+  // Wrapper function to connect the dapp.
+  fun connect(dapp: Dapp, callback: ((Any?) -> Unit)?) {
+    ethereum.connect(dapp, callback)
+  }
 
-    // Wrapper function call all RPC methods
-    fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
-        ethereum.sendRequest(request, callback)
-    }
+  // Wrapper function call all RPC methods.
+  fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
+    ethereum.sendRequest(request, callback)
+  }
 }
 ```
 
@@ -129,13 +129,13 @@ val ethereumViewModel: EthereumViewModel by viewModels()
 
 val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
 
-// This is the same as calling eth_requestAccounts
+// This is the same as calling eth_requestAccounts.
 ethereum.connect(dapp) { result ->
-    if (result is RequestError) {
-        Log.e(TAG, "Ethereum connection error: ${result.message}")
-    } else {
-        Log.d(TAG, "Ethereum connection result: $result")
-    }
+  if (result is RequestError) {
+    Log.e(TAG, "Ethereum connection error: ${result.message}")
+  } else {
+    Log.d(TAG, "Ethereum connection result: $result")
+  }
 }
 ```
 
@@ -156,26 +156,26 @@ The following example gets the user's account balance by calling
 ```kotlin
 var balance: String? = null
 
-// Create parameters
+// Create parameters.
 val params: List<String> = listOf(
-    ethereum.selectedAddress,
-    // "latest", "earliest" or "pending" (optional)
-    "latest"
+  ethereum.selectedAddress,
+  // "latest", "earliest", or "pending" (optional)
+  "latest"
 )
 
-// Create request
+// Create request.
 val getBalanceRequest = EthereumRequest(
-    method = EthereumMethod.ETHGETBALANCE.value,
-    params = params
+  method = EthereumMethod.ETHGETBALANCE.value,
+  params = params
 )
 
-// Make request
+// Make request.
 ethereum.sendRequest(getBalanceRequest) { result ->
-    if (result is RequestError) {
-        // handle error
-    } else {
-        balance = result
-    }
+  if (result is RequestError) {
+    // Handle error.
+  } else {
+    balance = result
+  }
 }
 ```
 
@@ -191,16 +191,16 @@ val from = ethereum.selectedAddress
 val params: List<String> = listOf(from, message)
 
 val signRequest = EthereumRequest(
-    method = EthereumMethod.ETH_SIGN_TYPED_DATA_V4.value,
-    params = params
+  method = EthereumMethod.ETH_SIGN_TYPED_DATA_V4.value,
+  params = params
 )
 
 ethereum.sendRequest(signRequest) { result ->
-    if (result is RequestError) {
-        Log.e(TAG, "Ethereum sign error: ${result.message}")
-    } else {
-        Log.d(TAG, "Ethereum sign result: $result")
-    }
+  if (result is RequestError) {
+    Log.e(TAG, "Ethereum sign error: ${result.message}")
+  } else {
+    Log.d(TAG, "Ethereum sign result: $result")
+  }
 }
 ```
 
@@ -210,29 +210,29 @@ The following example sends a transaction by calling
 [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
 
 ```kotlin
-// Create parameters
+// Create parameters.
 val from = ethereum.selectedAddress
 val to = "0x0000000000000000000000000000000000000000"
 val amount = "0x01"
 val params: Map<String, Any> = mapOf(
-    "from" to from,
-    "to" to to,
-    "amount" to amount
+  "from" to from,
+  "to" to to,
+  "amount" to amount
 )
 
-// Create request
+// Create request.
 val transactionRequest = EthereumRequest(
-    method = EthereumMethod.ETH_SEND_TRANSACTION.value,
-    params = listOf(params)
+  method = EthereumMethod.ETH_SEND_TRANSACTION.value,
+  params = listOf(params)
 )
 
-// Make a transaction request
+// Make a transaction request.
 ethereum.sendRequest(transactionRequest) { result ->
-    if (result is RequestError) {
-        // handle error
-    } else {
-        Log.d(TAG, "Ethereum transaction result: $result")
-    }
+  if (result is RequestError) {
+    // Handle error.
+  } else {
+    Log.d(TAG, "Ethereum transaction result: $result")
+  }
 }
 ```
 
@@ -244,70 +244,66 @@ The following example switches to a new Ethereum chain by calling
 
 ```kotlin
 fun switchChain(
-    chainId: String,
-    onSuccess: (message: String) -> Unit,
-    onError: (message: String, action: (() -> Unit)?) -> Unit
+  chainId: String,
+  onSuccess: (message: String) -> Unit,
+  onError: (message: String, action: (() -> Unit)?) -> Unit
 ) {
-    val switchChainParams: Map<String, String> = mapOf("chainId" to chainId)
-    val switchChainRequest = EthereumRequest(
-        method = EthereumMethod.SWITCH_ETHEREUM_CHAIN.value,
-        params = listOf(switchChainParams)
-    )
+  val switchChainParams: Map<String, String> = mapOf("chainId" to chainId)
+  val switchChainRequest = EthereumRequest(
+    method = EthereumMethod.SWITCH_ETHEREUM_CHAIN.value,
+    params = listOf(switchChainParams)
+  )
 
-    ethereum.sendRequest(switchChainRequest) { result ->
-        if (result is RequestError) {
-            if (result.code == ErrorType.UNRECOGNIZED_CHAIN_ID.code || result.code == ErrorType.SERVER_ERROR.code) {
-                val message = "${Network.chainNameFor(chainId)} ($chainId) has not been added to your MetaMask wallet. Add chain?"
+  ethereum.sendRequest(switchChainRequest) { result ->
+    if (result is RequestError) {
+      if (result.code == ErrorType.UNRECOGNIZED_CHAIN_ID.code || result.code == ErrorType.SERVER_ERROR.code) {
+        val message = "${Network.chainNameFor(chainId)} ($chainId) has not been added to your MetaMask wallet. Add chain?"
 
-                val action: () -> Unit = {
-                    addEthereumChain(
-                        chainId,
-                        onSuccess = { result ->
-                            onSuccess(result)
-                        },
-                        onError = { error ->
-                            onError(error, null)
-                        }
-                    )
-                }
-                onError(message, action)
-            } else {
-                onError("Switch chain error: ${result.message}", null)
-            }
-        } else {
-            onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
+        val action: () -> Unit = {
+          addEthereumChain(
+            chainId,
+            onSuccess = { result -> onSuccess(result) },
+            onError = { error -> onError(error, null) }
+          )
         }
+        onError(message, action)
+      } else {
+        onError("Switch chain error: ${result.message}", null)
+      }
+    } else {
+      onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
     }
+  }
 }
 
 private fun addEthereumChain(
-    chainId: String,
-    onSuccess: (message: String) -> Unit,
-    onError: (message: String) -> Unit
+  chainId: String,
+  onSuccess: (message: String) -> Unit,
+  onError: (message: String) -> Unit
 ) {
-    Logger.log("Adding chainId: $chainId")
+  Logger.log("Adding chainId: $chainId")
 
-    val addChainParams: Map<String, Any> = mapOf(
-        "chainId" to chainId,
-        "chainName" to Network.chainNameFor(chainId),
-        "rpcUrls" to Network.rpcUrls(Network.fromChainId(chainId))
-    )
-    val addChainRequest = EthereumRequest(
-        method = EthereumMethod.ADD_ETHEREUM_CHAIN.value,
-        params = listOf(addChainParams)
-    )
+  val addChainParams: Map<String, Any> = mapOf(
+    "chainId" to chainId,
+    "chainName" to Network.chainNameFor(chainId),
+    "rpcUrls" to Network.rpcUrls(Network.fromChainId(chainId))
+  )
+  val addChainRequest = EthereumRequest(
+    method = EthereumMethod.ADD_ETHEREUM_CHAIN.value,
+    params = listOf(addChainParams)
+  )
 
-    ethereum.sendRequest(addChainRequest) { result ->
-        if (result is RequestError) {
-            onError("Add chain error: ${result.message}")
-        } else {
-            if (chainId == ethereum.chainId) {
-                onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
-            } else {
-                onSuccess("Successfully added ${Network.chainNameFor(chainId)} ($chainId)")
-            }
-        }
+  ethereum.sendRequest(addChainRequest) { result ->
+    if (result is RequestError) {
+      onError("Add chain error: ${result.message}")
+    } else {
+      if (chainId == ethereum.chainId) {
+        onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
+      } else {
+        onSuccess("Successfully added ${Network.chainNameFor(chainId)} ($chainId)")
+      }
     }
+  }
 }
 ```
 

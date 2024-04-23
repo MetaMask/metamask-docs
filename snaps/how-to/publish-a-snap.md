@@ -32,10 +32,8 @@ Snap location to **npm** and the ID of your Snap.
 Also, make sure to update the manifest file, icon file, and README to differentiate your Snap from the template.
 :::
 
-## Distribute your Snap
+## Make a Snap available to users 
 
-You should deploy a companion dapp where users can learn about your Snap and install it, or
-integrate with your existing dapp.
-
-If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
-[connect to your Snap](connect-to-a-snap.md).
+After publishing a Snap, you can make it available to MetaMask users by
+[getting your Snap allowlisted](get-allowlisted.md).
+Once allowlisted, anyone can install your Snap in the MetaMask extension.

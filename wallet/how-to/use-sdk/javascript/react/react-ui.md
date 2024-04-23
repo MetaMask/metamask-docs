@@ -43,7 +43,7 @@ npm i @metamask/sdk-react-ui
 
 In your project script, add the following to import the SDK:
 
-```javascript
+```javascript title="index.js"
 import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 ```
 
@@ -52,31 +52,31 @@ import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 Wrap your root component in a `MetaMaskUIProvider`.
 For example:
 
-```js
+```js title="index.js"
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(
-    <React.StrictMode>
-        <MetaMaskUIProvider
-            sdkOptions={{
-                dappMetadata: {
-                    name: "Example React UI Dapp",
-                    url: window.location.href,
-                },
-                infuraAPIKey: process.env.INFURA_API_KEY,
-                // Other options
-            }}
-        >
-            <App />
-        </MetaMaskUIProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <MetaMaskUIProvider
+      sdkOptions={{
+        dappMetadata: {
+          name: "Example React UI Dapp",
+          url: window.location.href,
+        },
+        infuraAPIKey: process.env.INFURA_API_KEY,
+        // Other options.
+      }}
+    >
+      <App />
+    </MetaMaskUIProvider>
+  </React.StrictMode>
 );
 ```
 
@@ -102,16 +102,16 @@ The `@metamask/sdk-react-ui` package provides a pre-styled button, `MetaMaskButt
 connection to MetaMask.
 You can use it as follows:
 
-```js
+```js title="App.js"
 import { MetaMaskButton } from "@metamask/sdk-react-ui";
 import React, { useState } from "react";
 
 export const App = () => {
-    return (
-        <div className="App">
-            <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
-        </div>
-    );
+  return (
+    <div className="App">
+      <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
+    </div>
+  );
 };
 ```
 
@@ -139,24 +139,24 @@ import App from "./App";
 import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(
-    <React.StrictMode>
-        <MetaMaskUIProvider
-            sdkOptions={{
-                dappMetadata: {
-                    name: "Example React UI Dapp",
-                    url: window.location.href,
-                },
-                infuraAPIKey: process.env.INFURA_API_KEY,
-                // Other options
-            }}
-        >
-            <App />
-        </MetaMaskUIProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <MetaMaskUIProvider
+      sdkOptions={{
+        dappMetadata: {
+          name: "Example React UI Dapp",
+          url: window.location.href,
+        },
+        infuraAPIKey: process.env.INFURA_API_KEY,
+        // Other options
+      }}
+    >
+      <App />
+    </MetaMaskUIProvider>
+  </React.StrictMode>
 );
 ```
 
@@ -165,57 +165,57 @@ root.render(
 
 ```javascript title="App.js"
 import {
-    MetaMaskButton,
-    useAccount,
-    useSDK,
-    useSignMessage,
+  MetaMaskButton,
+  useAccount,
+  useSDK,
+  useSignMessage,
 } from "@metamask/sdk-react-ui";
 import "./App.css";
 
 function AppReady() {
-    const {
-        data: signData,
-        isError: isSignError,
-        isLoading: isSignLoading,
-        isSuccess: isSignSuccess,
-        signMessage,
-    } = useSignMessage({
-        message: "gm wagmi frens",
-    });
+  const {
+    data: signData,
+    isError: isSignError,
+    isLoading: isSignLoading,
+    isSuccess: isSignSuccess,
+    signMessage,
+  } = useSignMessage({
+    message: "gm wagmi frens",
+  });
 
-    const { isConnected } = useAccount();
+  const { isConnected } = useAccount();
 
-    return (
-        <div className="App">
-            <header className="App-header">
-                <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
-                {isConnected && (
-                    <>
-                        <div style={{ marginTop: 20 }}>
-                            <button
-                                disabled={isSignLoading}
-                                onClick={() => signMessage()}
-                            >
-                                Sign message
-                            </button>
-                            {isSignSuccess && <div>Signature: {signData}</div>}
-                            {isSignError && <div>Error signing message</div>}
-                        </div>
-                    </>
-                )}
-            </header>
-        </div>
-    );
+  return (
+    <div className="App">
+      <header className="App-header">
+        <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
+        {isConnected && (
+          <>
+            <div style={{ marginTop: 20 }}>
+              <button
+                disabled={isSignLoading}
+                onClick={() => signMessage()}
+              >
+                Sign message
+              </button>
+              {isSignSuccess && <div>Signature: {signData}</div>}
+              {isSignError && <div>Error signing message</div>}
+            </div>
+          </>
+        )}
+      </header>
+    </div>
+  );
 }
 
 function App() {
-    const { ready } = useSDK();
+  const { ready } = useSDK();
 
-    if (!ready) {
-        return <div>Loading...</div>;
-    }
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
 
-    return <AppReady />;
+  return <AppReady />;
 }
 
 export default App;

@@ -41,7 +41,7 @@ npm i @metamask/sdk-react
 
 In your project script, add the following to import the SDK:
 
-```javascript
+```typescript title="index.tsx"
 import { MetaMaskProvider } from "@metamask/sdk-react";
 ```
 
@@ -50,32 +50,32 @@ import { MetaMaskProvider } from "@metamask/sdk-react";
 Wrap your root component in a `MetaMaskProvider`.
 For example:
 
-```js
+```typescript title="index.tsx"
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(
-    <React.StrictMode>
-        <MetaMaskProvider
-            debug={false}
-            sdkOptions={{
-                dappMetadata: {
-                    name: "Example React Dapp",
-                    url: window.location.href,
-                },
-                infuraAPIKey: process.env.INFURA_API_KEY,
-                // Other options
-            }}
-        >
-            <App />
-        </MetaMaskProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <MetaMaskProvider
+      debug={false}
+      sdkOptions={{
+        dappMetadata: {
+          name: "Example React Dapp",
+          url: window.location.href,
+        },
+        infuraAPIKey: process.env.INFURA_API_KEY,
+        // Other options.
+      }}
+    >
+      <App />
+    </MetaMaskProvider>
+  </React.StrictMode>
 );
 ```
 
@@ -96,39 +96,39 @@ Important options include:
 Use the SDK by using the `useSDK` hook in your React components.
 For example:
 
-```js
+```typescript title="App.tsx"
 import { useSDK } from "@metamask/sdk-react";
 import React, { useState } from "react";
 
 export const App = () => {
-    const [account, setAccount] = useState<string>();
-    const { sdk, connected, connecting, provider, chainId } = useSDK();
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-    const connect = async () => {
-        try {
-            const accounts = await sdk?.connect();
-            setAccount(accounts?.[0]);
-        } catch (err) {
-            console.warn("failed to connect..", err);
-        }
-    };
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
 
-    return (
-        <div className="App">
-            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-                Connect
-            </button>
-            {connected && (
-                <div>
-                    <>
-                        {chainId && `Connected chain: ${chainId}`}
-                        <p></p>
-                        {account && `Connected account: ${account}`}
-                    </>
-                </div>
-            )}
+  return (
+    <div className="App">
+      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+        Connect
+      </button>
+      {connected && (
+        <div>
+          <>
+            {chainId && `Connected chain: ${chainId}`}
+            <p></p>
+            {account && `Connected account: ${account}`}
+          </>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 ```
 
@@ -152,14 +152,14 @@ connect to MetaMask and sign data in a single interaction:
 
 ```js
 const connectAndSign = async () => {
-    try {
-        const signResult = await sdk?.connectAndSign({
-            msg: "Connect + Sign message",
-        });
-        setResponse(signResult);
-    } catch (err) {
-        console.warn("failed to connect..", err);
-    }
+  try {
+    const signResult = await sdk?.connectAndSign({
+      msg: "Connect + Sign message",
+    });
+    setResponse(signResult);
+  } catch (err) {
+    console.warn("failed to connect..", err);
+  }
 };
 ```
 
@@ -180,25 +180,25 @@ import App from "./App";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(
-    <React.StrictMode>
-        <MetaMaskProvider
-            debug={false}
-            sdkOptions={{
-                dappMetadata: {
-                    name: "Example React Dapp",
-                    url: window.location.href,
-                },
-                infuraAPIKey: process.env.INFURA_API_KEY,
-                // Other options
-            }}
-        >
-            <App />
-        </MetaMaskProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <MetaMaskProvider
+      debug={false}
+      sdkOptions={{
+        dappMetadata: {
+          name: "Example React Dapp",
+          url: window.location.href,
+        },
+        infuraAPIKey: process.env.INFURA_API_KEY,
+        // Other options
+      }}
+    >
+      <App />
+    </MetaMaskProvider>
+  </React.StrictMode>
 );
 ```
 
@@ -210,34 +210,34 @@ import { useSDK } from "@metamask/sdk-react";
 import React from "react";
 
 export const App = () => {
-    const [account, setAccount] = useState<string>();
-    const { sdk, connected, connecting, provider, chainId } = useSDK();
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-    const connect = async () => {
-        try {
-            const accounts = await sdk?.connect();
-            setAccount(accounts?.[0]);
-        } catch (err) {
-            console.warn("failed to connect..", err);
-        }
-    };
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
 
-    return (
-        <div className="App">
-            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
-                Connect
-            </button>
-            {connected && (
-                <div>
-                    <>
-                        {chainId && "Connected chain: ${chainId}"}
-                        <p></p>
-                        {account && "Connected account: ${account}"}
-                    </>
-                </div>
-            )}
+  return (
+    <div className="App">
+      <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+        Connect
+      </button>
+      {connected && (
+        <div>
+          <>
+            {chainId && "Connected chain: ${chainId}"}
+            <p></p>
+            {account && "Connected account: ${account}"}
+          </>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 ```
 

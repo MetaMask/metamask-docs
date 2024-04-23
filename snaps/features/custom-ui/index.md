@@ -1,6 +1,6 @@
 ---
 description: Display custom user interface components.
-sidebar_position: 1
+sidebar_position: 4
 ---
 
 # Custom UI
@@ -28,14 +28,14 @@ For example, to display a [`panel`](#panel) using [`snap_dialog`](../../referenc
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            heading("Alert heading"),
-            text("Something happened in the system."),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Alert heading"),
+      text("Something happened in the system."),
+    ]),
+  },
 });
 ```
 
@@ -55,14 +55,14 @@ Hovering the address shows the full value in a tooltip.
 import { panel, heading, address } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            heading("Are you sure you want to send tokens to this address?"),
-            address("0x000000000000000000000000000000000000dEaD"),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Are you sure you want to send tokens to this address?"),
+      address("0x000000000000000000000000000000000000dEaD"),
+    ]),
+  },
 });
 ```
 
@@ -102,24 +102,24 @@ An object containing:
 import { button, panel, heading } from "@metamask/snaps-sdk";
 
 const interfaceId = await snap.request({
-    method: "snap_createInterface",
-    params: {
-        ui: panel([
-            heading("Interactive interface"),
-            button({
-                value: "Click me",
-                name: "interactive-button",
-            }),
-        ]),
-    },
+  method: "snap_createInterface",
+  params: {
+    ui: panel([
+      heading("Interactive interface"),
+      button({
+        value: "Click me",
+        name: "interactive-button",
+      }),
+    ]),
+  },
 });
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "Alert",
-        id: interfaceId,
-    },
+  method: "snap_dialog",
+  params: {
+    type: "Alert",
+    id: interfaceId,
+  },
 });
 ```
 
@@ -137,14 +137,14 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 import { text, copyable } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            text("Your address:"),
-            copyable("0x000000000000000000000000000000000000dEaD"),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      text("Your address:"),
+      copyable("0x000000000000000000000000000000000000dEaD"),
+    ]),
+  },
 });
 ```
 
@@ -163,13 +163,13 @@ import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, divider, text } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            divider(),
-            text("Welcome to my Snap home page!"),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      divider(),
+      text("Welcome to my Snap home page!"),
+    ]),
+  };
 };
 ```
 
@@ -198,30 +198,30 @@ An object containing:
 import { input, button, form } from "@metamask/snaps-sdk";
 
 const interfaceId = await snap.request({
-    method: "snap_createInterface",
-    params: {
-        ui: form({
-            name: "form-to-fill",
-            children: [
-                input({
-                    name: "user-name",
-                    placeholder: "Your name",
-                }),
-                button({
-                    value: "Submit",
-                    buttonType: "submit",
-                }),
-            ],
+  method: "snap_createInterface",
+  params: {
+    ui: form({
+      name: "form-to-fill",
+      children: [
+        input({
+          name: "user-name",
+          placeholder: "Your name",
         }),
-    },
+        button({
+          value: "Submit",
+          buttonType: "submit",
+        }),
+      ],
+    }),
+  },
 });
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "Alert",
-        id: interfaceId,
-    },
+  method: "snap_dialog",
+  params: {
+    type: "Alert",
+    id: interfaceId,
+  },
 });
 ```
 
@@ -241,12 +241,12 @@ import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Welcome to my Snap home page!"),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
+  };
 };
 ```
 
@@ -280,13 +280,13 @@ import { panel, heading, text, image } from "@metamask/snaps-sdk";
 import svgIcon from "./path/to/icon.svg";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Welcome to my Snap home page!"),
-            image(svgIcon),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+      image(svgIcon),
+    ]),
+  };
 };
 ```
 
@@ -320,30 +320,30 @@ An object containing:
 import { input, form } from "@metamask/snaps-sdk";
 
 const interfaceId = await snap.request({
-    method: "snap_createInterface",
-    params: {
-        ui: form({
-            name: "form-to-fill",
-            children: [
-                input({
-                    name: "user-name",
-                    placeholder: "Your name",
-                }),
-                button({
-                    value: "Submit",
-                    buttonType: "submit",
-                }),
-            ],
+  method: "snap_createInterface",
+  params: {
+    ui: form({
+      name: "form-to-fill",
+      children: [
+        input({
+          name: "user-name",
+          placeholder: "Your name",
         }),
-    },
+        button({
+          value: "Submit",
+          buttonType: "submit",
+        }),
+      ],
+    }),
+  },
 });
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "Alert",
-        id: interfaceId,
-    },
+  method: "snap_dialog",
+  params: {
+    type: "Alert",
+    id: interfaceId,
+  },
 });
 ```
 
@@ -368,17 +368,17 @@ import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onTransaction = async ({ transaction }) => {
-    const gasFeesPercentage = /* Calculate gas fees percentage */;
-    return {
-        content: panel([
-            heading("Transaction insights"),
-            text(
-                `As set up, you are paying **${gasFeesPercentage.toFixed(
-                    2,
-                )}%** in gas fees for this transaction.`,
-            ),
-        ]),
-    };
+  const gasFeesPercentage = /* Calculate gas fees percentage */;
+  return {
+    content: panel([
+      heading("Transaction insights"),
+      text(
+        `As set up, you are paying **${gasFeesPercentage.toFixed(
+          2,
+        )}%** in gas fees for this transaction.`,
+      ),
+    ]),
+  };
 };
 ```
 
@@ -398,14 +398,14 @@ The label must be a string. The value can be a child component of type
 import { panel, row, text, address } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            row("Address", address("0x000000000000000000000000000000000000dEaD")),
-            row("Balance", text("1.78 ETH")),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      row("Address", address("0x000000000000000000000000000000000000dEaD")),
+      row("Balance", text("1.78 ETH")),
+    ]),
+  },
 });
 ```
 
@@ -423,14 +423,14 @@ Outputs a loading indicator.
 import { panel, heading, spinner } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            heading("Please wait..."),
-            spinner(),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Please wait..."),
+      spinner(),
+    ]),
+  },
 });
 ```
 
@@ -449,17 +449,17 @@ import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Welcome to my Snap home page!"),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
+  };
 };
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-heading.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Markdown
@@ -472,14 +472,14 @@ module.exports.onHomePage = async () => {
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            heading("Hello world!"),
-            text("This is **bold** and this is _italic_."),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Hello world!"),
+      text("This is **bold** and this is _italic_."),
+    ]),
+  },
 });
 ```
 
@@ -498,18 +498,18 @@ import type { OnHomePageHandler } from "@metamask/snaps-sdk";
 import { panel, text } from "@metamask/snaps-sdk";
 
 module.exports.onHomePage = async () => {
-    return {
-        content: panel([
-            heading("Hello world!"),
-            text("Download [MetaMask](https://metamask.io)."),
-            text("Read the MetaMask docs at [](https://docs.metamask.io)."),
-        ]),
-    };
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Download [MetaMask](https://metamask.io)."),
+      text("Read the MetaMask docs at [](https://docs.metamask.io)."),
+    ]),
+  };
 };
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-links.png").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-links.png").default} alt="Links UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Emojis
@@ -522,14 +522,14 @@ Text-based components (such as [`heading`](#heading) and [`text`](#text)) accept
 import { panel, heading, text } from "@metamask/snaps-sdk";
 
 await snap.request({
-    method: "snap_dialog",
-    params: {
-        type: "alert",
-        content: panel([
-            heading("Hello world!"),
-            text("This is an apple 🍎 and this is an orange 🍊."),
-        ]),
-    },
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Hello world!"),
+      text("This is an apple 🍎 and this is an orange 🍊."),
+    ]),
+  },
 });
 ```
 

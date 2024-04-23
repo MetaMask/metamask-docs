@@ -45,11 +45,11 @@ For example, in Express.js, add the following middleware at the top of your serv
 
 ```js
 app.use((req, res, next) => {
-    res.setHeader(
-        "Content-Security-Policy",
-        "default-src 'self'; frame-ancestors 'none'"
-    );
-    next();
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; frame-ancestors 'none'"
+  );
+  next();
 });
 ```
 
@@ -74,10 +74,10 @@ For example:
 
 ```html
 <head>
-    <meta
-        http-equiv="Content-Security-Policy"
-        content="default-src 'self'; frame-ancestors 'none'"
-    />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; frame-ancestors 'none'"
+  />
 </head>
 ```
 
@@ -86,7 +86,7 @@ For example:
 CSP configuration is specific to each dapp.
 We recommend starting with the following secure and restrictive CSP:
 
-```
+```text
 default-src 'self'; frame-ancestors 'none'
 ```
 
@@ -99,7 +99,7 @@ From here, you can make adjustments as needed by your dapp to support the conten
 For example, if your dapp loads images hosted on [OpenSea](https://opensea.io/), you can enable this
 by adding `img-src 'opensea.io'` to your CSP:
 
-```
+```text
 default-src: 'self'; frame-ancestors 'none'; img-src: 'opensea.io'
 ```
 

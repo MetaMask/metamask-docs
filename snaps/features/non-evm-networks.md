@@ -1,6 +1,6 @@
 ---
 description: Manage users' non-EVM accounts and assets.
-sidebar_position: 3
+sidebar_position: 8
 ---
 
 # Non-EVM networks
@@ -64,14 +64,12 @@ For example, to derive Dogecoin keys:
 2. Dogecoin has coin type `3`, so add the following to the manifest file:
 
    ```json title="snap.manifest.json"
-   {
-       "initialPermissions": {
-           "snap_getBip44Entropy": [
-               {
-                   "coinType": 3
-               }
-           ]
+   "initialPermissions": {
+     "snap_getBip44Entropy": [
+       {
+         "coinType": 3
        }
+     ]
    }
    ```
 
@@ -88,10 +86,10 @@ For example, to derive Dogecoin keys:
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'.
    const dogecoinNode = await snap.request({
-       method: "snap_getBip44Entropy",
-       params: {
-           coinType: 3,
-       },
+     method: "snap_getBip44Entropy",
+     params: {
+       coinType: 3,
+     },
    });
 
    /**
@@ -111,3 +109,5 @@ The following are examples of existing Snaps that manage accounts and keys:
 - [Dogecoin Snap tutorial](https://github.com/ziad-saab/dogecoin-snap)
 - [Consensys StarkNet Snap](https://github.com/Consensys/starknet-snap)
 - [Account Labs Bitcoin Snap](https://github.com/snapdao/btcsnap)
+- [`@metamask/bip32-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/bip32)
+- [`@metamask/bip44-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/bip44)
