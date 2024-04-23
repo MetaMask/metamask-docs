@@ -166,7 +166,7 @@ However, MetaMask provides the
 [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) module to detect the
 MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser.
 
-We recommend [using `@metamask/detect-provider`](../javascript-dapp-simple.md) 
+We recommend [using `@metamask/detect-provider`](javascript-dapp-simple.md) 
 instead of manually detecting the provider yourself.
 
 In your project directory (the `mm-dapp-react` directory), install the module using the following command:
