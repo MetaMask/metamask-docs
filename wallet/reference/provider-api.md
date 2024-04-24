@@ -146,8 +146,9 @@ provider._metamask.isUnlocked(); // Or window.ethereum._metamask.isUnlocked() if
 The MetaMask provider emits events using the Node.js
 [`EventEmitter`](https://nodejs.org/api/events.html) API.
 The following is an example of listening to the [`accountsChanged`](#accountschanged) event.
-You should remove listeners once you're done listening to an event (for example, on component
-unmount in React).
+
+You should [remove listeners](#remove-listeners) once you're done listening to an event (for example, on component
+`unmount` in React).
 
 ```javascript
 function handleAccountsChanged(accounts) {
@@ -162,9 +163,6 @@ provider // Or window.ethereum if you don't support EIP-6963.
 provider // Or window.ethereum if you don't support EIP-6963.
   .removeListener("accountsChanged", handleAccountsChanged);
 ```
-
-The first argument of `removeListener` is the event name, and the second argument is
-a reference to the function passed to `on` for the event.
 
 ### `accountsChanged`
 
@@ -255,6 +253,59 @@ RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
 [`eth_subscribe`](/wallet/reference/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
+
+## Methods
+
+## `removeListeners`
+
+Use the `removeListener` method to remove specific event listeners from an `EventEmitter` object. 
+In the following example `removeListener` is used to remove the `connect` and `accountsChanged` events:
+
+```javascript
+window.ethereum.on('_initialized', updateWalletAndAccounts);
+window.ethereum.on('connect', updateWalletAndAccounts);
+window.ethereum.on('_initialized', () => setSdkConnected(true));
+window.ethereum.on('connect', () => setSdkConnected(true));
+window.ethereum.on('accountsChanged', updateWallet);
+window.ethereum.on('chainChanged', updateWalletAndAccounts);
+window.ethereum.on('chainChanged', updateWalletAndAccounts);
+window.ethereum.on('disconnect', disconnectWallet);
+window.ethereum.on('disconnect', () => setSdkConnected(false));
+window.ethereum.on('disconnect', () => setIsConnecting(false));
+
+return () => {
+  window.ethereum.removeListener('connect', updateWalletAndAccounts);
+  window.ethereum.removeListener('accountsChanged', updateWallet);
+```
+
+### `removeAllListeners`
+
+You can use `removeAllListeners` to remove all listeners from the event emitter at once. This method is helpful when you need to clean up all listeners simultaneously. 
+
+:::caution
+
+Use `removeAllListeners` with caution.
+This method clears all event listeners associated with the emitter, not only the listeners set up by the component. 
+Using this method can unexpectedly clear important event handlers, interfere with scripts, and make debugging more complex.
+You can use the method `removeListeners` to safely remove specific listeners.
+
+:::
+
+```javascript
+window.ethereum.on('_initialized', updateWalletAndAccounts);
+window.ethereum.on('connect', updateWalletAndAccounts);
+window.ethereum.on('_initialized', () => setSdkConnected(true));
+window.ethereum.on('connect', () => setSdkConnected(true));
+window.ethereum.on('accountsChanged', updateWallet);
+window.ethereum.on('chainChanged', updateWalletAndAccounts);
+window.ethereum.on('chainChanged', updateWalletAndAccounts);
+window.ethereum.on('disconnect', disconnectWallet);
+window.ethereum.on('disconnect', () => setSdkConnected(false));
+window.ethereum.on('disconnect', () => setIsConnecting(false));
+
+return () => {
+  window.ethereum.removeAllListener()
+```
 
 ## Errors
 
