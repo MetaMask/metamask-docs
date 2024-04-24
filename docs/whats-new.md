@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
+- Documented [Snaps `onKeyringRequest` entry point](/snaps/reference/entry-points/#onkeyringrequest).
+  ([#1258](https://github.com/MetaMask/metamask-docs/pull/1258))
 - Documented [Snaps data storage](/snaps/features/data-storage).
   ([#1278](https://github.com/MetaMask/metamask-docs/pull/1278))
 - Documented [how to get your Snap allowlisted](/snaps/how-to/get-allowlisted).
