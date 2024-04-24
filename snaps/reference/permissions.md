@@ -109,7 +109,7 @@ Specify this permission in the manifest file as follows:
 
 For a dapp to call [Account Management API](keyring-api/account-management/index.md) methods on an
 account management Snap to integrate [custom EVM accounts](../features/custom-evm-accounts/index.md),
-the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
+the Snap must configure a list of allowed dapp URLs using the `allowedOrigins` field of the `endowment:keyring` permission.
 This permission grants a Snap access to Account Management API requests sent to the Snap, using the
 [`onKeyringRequest`](entry-points.md#onkeyringrequest) entry point.
 
