@@ -256,7 +256,7 @@ subscription update is emitted as a `message` event with a `type` of `eth_subscr
 
 ## Methods
 
-## `removeListeners`
+### `removeListeners`
 
 Use the `removeListener` method to remove specific event listeners from an `EventEmitter` object. 
 In the following example `removeListener` is used to remove the `connect` and `accountsChanged` events:
@@ -277,6 +277,9 @@ return () => {
   window.ethereum.removeListener('connect', updateWalletAndAccounts);
   window.ethereum.removeListener('accountsChanged', updateWallet);
 ```
+
+The first argument of `removeListener` is the event name, and the second argument is
+a reference to the function passed to `on` for the event.
 
 ### `removeAllListeners`
 
