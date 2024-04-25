@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
-- Documented [`removeAllListeners`](/wallet/reference/provide-api) method example for tidying event listeners.
+- Documented [`removeAllListeners`](/wallet/reference/provider-api) method example for tidying event listeners.
   ([#1288](https://github.com/MetaMask/metamask-docs/pull/1288))
 - Documented [Snaps `onKeyringRequest` entry point](/snaps/reference/entry-points/#onkeyringrequest).
   ([#1258](https://github.com/MetaMask/metamask-docs/pull/1258))
