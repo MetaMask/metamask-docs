@@ -177,12 +177,13 @@ For example:
   }
   ```
 
-## Expose Account Management API methods using the onKeyringRequest entry point
+## Expose Account Management API methods using the `onKeyringRequest` entry point
 
 The [`onRpcRequest`](../../reference/entry-points.md#onrpcrequest) entry point is a general-purpose
 entry point and has no restrictions on the methods that can be called.
-Ensure that you only expose Account Management API methods using the `onKeyringRequest` entry point, which has
-extra security checks.
+Ensure that you only expose Account Management API methods using the
+[`onKeyringRequest`](../../reference/entry-points.md#onkeyringrequest) entry point, which has extra
+security checks.
 
 For example:
 
