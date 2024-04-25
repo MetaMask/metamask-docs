@@ -108,7 +108,7 @@ The `ethereum` global available to Snaps has fewer capabilities than `window.eth
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
 Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
-- [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps)
+- [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps)
 - [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
 - [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
 - [`wallet_addEthereumChain`](/wallet/reference/wallet_addEthereumChain)
