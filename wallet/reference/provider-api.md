@@ -310,6 +310,8 @@ return () => {
   window.ethereum.removeAllListener()
 ```
 
+In the provided code example, `removeAllListeners` removes all event listeners from the `window.ethereum` object when the component is unmounted.
+
 ## Errors
 
 All errors returned by the MetaMask provider follow this interface:
