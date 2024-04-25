@@ -43,7 +43,7 @@ simple-dapp/
 │  ├─ index.html
 ```
 
-This tutorial will use the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module and a bundler, [Webpack](https://github.com/webpack/webpack), to compile the module and create an output script `dist/main.js`.
+This tutorial uses the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module and a bundler, [Webpack](https://github.com/webpack/webpack), to compile the module and create an output script `dist/main.js`.
 
 Add the following code to `dist/index.html`:
 
@@ -132,7 +132,7 @@ function startApp(provider) {
 window.addEventListener("load", setup);
 ```
 
-#### Serve the project
+### 4. Serve the project
 
 To test and verify your project works with MetaMask, serve your project through a local server. 
 If using VS Code and [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), right-click the `index.html` file, and select **Open with Live Server**. 
@@ -166,7 +166,7 @@ function handleChainChanged(chainId) {
 }
 ```
 
-### 5. Access an account
+### 6. Access a user's accounts
 
 To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
@@ -211,6 +211,8 @@ Add the following HTML code to the body of `dist/index.html`, which displays the
 <button class="enableEthereumButton">Enable Ethereum</button>
 <h2>Account: <span class="showAccount"></span></h2>
 ```
+
+To complete the tutorial, [run the project on a local server](#4-serve-the-project) to view the live dapp.
 
 ## Example
 
