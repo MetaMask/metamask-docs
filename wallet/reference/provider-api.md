@@ -147,7 +147,7 @@ The MetaMask provider emits events using the Node.js
 [`EventEmitter`](https://nodejs.org/api/events.html) API.
 The following is an example of listening to the [`accountsChanged`](#accountschanged) event.
 
-You should [remove listeners](#remove-listeners) once you're done listening to an event (for example, on component
+You should [remove listeners](#removelisteners) once you're done listening to an event (for example, on component
 `unmount` in React).
 
 ```javascript
