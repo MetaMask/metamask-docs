@@ -12,12 +12,6 @@ Dapps can connect to Snaps designed to communicate with dapps.
 Dapps can use these Snaps to take advantage of new features enabled by Snaps.
 This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis).
 
-:::info
-A dapp must connect to a Snap with `wallet_requestSnaps` before it can communicate with custom JSON-RPC APIs exposed by the Snap. 
-
-You can check if your dapp is authorized to communicate with a Snap by calling `wallet_getSnaps`. 
-:::
-
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
@@ -25,24 +19,25 @@ See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/conn
 
 ### Detect MetaMask Flask
 
-While you are developing your Snap, you may need to require 
-[MetaMask Flask](../get-started/install-flask.md) 
-in your dapp. 
-The recommended method to detect MetaMask Flask is to use EIP-6963. 
-Alternatively, you can use the injected provider, but this may fail if the user is running multiple wallet extensions simultaneously. 
+When developing your Snap, you might need to require
+[MetaMask Flask](../get-started/install-flask.md) in your dapp. 
+We recommend detecting MetaMask Flask using the
+[multi-wallet detection mechanism](/wallet/concepts/wallet-interoperability) specified by EIP-6963. 
+Alternatively, you can use the `window.ethereum` injected provider, but this might fail if the user
+is running multiple wallet extensions simultaneously. 
 
-The following code can be added to `window.onload`: 
+To detect MetaMask Flask, you can add the following to `window.onload`: 
 
 <Tabs>
 <TabItem value="EIP-6963 example">
 
 ```js title="index.js"
-window.addEventListener('eip6963:announceProvider', (event) => {
-  /* event.detail contains the discovered provider interface */
+window.addEventListener("eip6963:announceProvider", (event) => {
+  /* event.detail contains the discovered provider interface. */
   const providerDetail = event.detail;
 
-  /* providerDetail.info.rdns is the best way to distinguish a wallet extension */
-  if (providerDetail.info.rdns === 'io.metamask.flask') {
+  /* providerDetail.info.rdns is the best way to distinguish a wallet extension. */
+  if (providerDetail.info.rdns === "io.metamask.flask") {
     console.log("MetaMask Flask successfully detected!");
     // Now you can use Snaps!
   } else { 
@@ -50,7 +45,7 @@ window.addEventListener('eip6963:announceProvider', (event) => {
   }
 });
 
-window.dispatchEvent(new Event('eip6963:requestProvider'));
+window.dispatchEvent(new Event("eip6963:requestProvider"));
 ```
 
 </TabItem>
