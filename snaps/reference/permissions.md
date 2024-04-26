@@ -1,6 +1,6 @@
 ---
 description: See the Snaps permissions reference.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 import Tabs from '@theme/Tabs';
@@ -107,13 +107,17 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:keyring`
 
-For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
-the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
+For a dapp to call [Account Management API](keyring-api/account-management/index.md) methods on an
+account management Snap to integrate [custom EVM accounts](../features/custom-evm-accounts/index.md),
+the Snap must configure a list of allowed dapp URLs using the `allowedOrigins` field of the `endowment:keyring` permission.
+This permission grants a Snap access to Account Management API requests sent to the Snap, using the
+[`onKeyringRequest`](entry-points.md#onkeyringrequest) entry point.
+
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
 :::tip
-You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the Account Management API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
