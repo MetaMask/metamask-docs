@@ -41,7 +41,7 @@ window.addEventListener("eip6963:announceProvider", (event) => {
     console.log("MetaMask Flask successfully detected!");
     // Now you can use Snaps!
   } else { 
-    console.error("Please install MetaMask Flask!", error);
+    console.error("Please install MetaMask Flask!");
   }
 });
 
