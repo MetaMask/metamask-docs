@@ -304,7 +304,7 @@ return () => {
  provider.removeAllListeners()
 ```
 
-In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `provider` object. This cleanup function removes any remaining event listeners after they become unnecessary.
+In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `provider` object. This cleanup function deletes any event listeners that are no longer needed.
 
 ## Errors
 
