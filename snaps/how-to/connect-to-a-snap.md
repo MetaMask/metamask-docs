@@ -3,6 +3,9 @@ description: Connect your dapp to existing, third-party Snaps.
 sidebar_position: 9
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Connect to a Snap
 
 Dapps can connect to Snaps designed to communicate with dapps.
@@ -16,23 +19,44 @@ See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/conn
 
 ### Detect MetaMask Flask
 
-If you want to connect to Snap in [MetaMask Flask](../get-started/install-flask.md), you first need
-to know whether the user has Flask installed.
+When developing your Snap, you might need to require
+[MetaMask Flask](../get-started/install-flask.md) in your dapp. 
+We recommend detecting MetaMask Flask using the
+[multi-wallet detection mechanism](/wallet/concepts/wallet-interoperability) specified by EIP-6963. 
+Alternatively, you can use the `window.ethereum` injected provider, but this might fail if the user
+is running multiple wallet extensions simultaneously. 
 
-The following example uses the
-[`@metamask/detect-provider`](https://npmjs.com/package/@metamask/detect-provider) package to get
-the provider object from MetaMask first:
+To detect MetaMask Flask, you can add the following to `window.onload`: 
+
+<Tabs>
+<TabItem value="EIP-6963 example">
 
 ```js title="index.js"
-import detectEthereumProvider from "@metamask/detect-provider";
+window.addEventListener("eip6963:announceProvider", (event) => {
+  /* event.detail contains the discovered provider interface. */
+  const providerDetail = event.detail;
 
-// This resolves to the value of window.ethereum or null.
-const provider = await detectEthereumProvider();
+  /* providerDetail.info.rdns is the best way to distinguish a wallet extension. */
+  if (providerDetail.info.rdns === "io.metamask.flask") {
+    console.log("MetaMask Flask successfully detected!");
+    // Now you can use Snaps!
+  } else { 
+    console.error("Please install MetaMask Flask!");
+  }
+});
 
-// web3_clientVersion returns the installed MetaMask version as a string.
-const isFlask = (
+window.dispatchEvent(new Event("eip6963:requestProvider"));
+```
+
+</TabItem>
+<TabItem value="Injected provider example">
+
+```js title="index.js"
+const provider = window.ethereum; 
+
+const isFlask = ( 
   await provider?.request({ method: "web3_clientVersion" })
-)?.includes("flask");
+)?.includes("flask"); 
 
 if (provider && isFlask) {
   console.log("MetaMask Flask successfully detected!");
@@ -42,13 +66,8 @@ if (provider && isFlask) {
 }
 ```
 
-### Detect multiple wallets
-
-See the following resources for detecting multiple wallets (via
-[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963)) in the user's browser:
-
-- [How to connect to MetaMask](/wallet/how-to/connect)
-- [Connect to Snap via EIP-6963 example](https://github.com/Montoya/snap-connect-example)
+</TabItem>
+</Tabs>
 
 ## Connect to a Snap
 
