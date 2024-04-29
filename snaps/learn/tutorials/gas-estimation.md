@@ -62,8 +62,8 @@ yarn run allow-scripts auto
 
 ### 2. Add a custom icon
 
-Your Snap must display an icon in MetaMask. 
-To add a Snap image, create a new folder `images` in the Snap package `packages/snap/`: 
+Your Snap must [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask. 
+To add an icon, create a new folder `images` in the Snap package `packages/snap/`: 
 
 ```bash 
 mkdir packages/snap/images
