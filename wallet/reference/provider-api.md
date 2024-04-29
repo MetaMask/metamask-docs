@@ -295,8 +295,8 @@ You can use the `removeListener` method to safely remove specific listeners.
 // Use window.ethereum instead of provider if EIP-6963 is not supported.
 
 provider.on("_initialized", updateWalletAndAccounts);
-provider.on("connect'", updateWalletAndAccounts);
-provider.on("accountsChanged'", updateWallet);
+provider.on("connect", updateWalletAndAccounts);
+provider.on("accountsChanged", updateWallet);
 provider.on("chainChanged", updateWalletAndAccounts);
 provider.on("disconnect", disconnectWallet);
 
