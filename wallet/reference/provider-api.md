@@ -264,14 +264,12 @@ In the following example `removeListener` is used to remove the `connect` and `a
 ```javascript
 window.ethereum.on('_initialized', updateWalletAndAccounts);
 window.ethereum.on('connect', updateWalletAndAccounts);
-window.ethereum.on('_initialized', () => setSdkConnected(true));
-window.ethereum.on('connect', () => setSdkConnected(true));
 window.ethereum.on('accountsChanged', updateWallet);
 window.ethereum.on('chainChanged', updateWalletAndAccounts);
-window.ethereum.on('chainChanged', updateWalletAndAccounts);
 window.ethereum.on('disconnect', disconnectWallet);
-window.ethereum.on('disconnect', () => setSdkConnected(false));
-window.ethereum.on('disconnect', () => setIsConnecting(false));
+
+return () => {
+  window.ethereum.removeAllListener()
 
 return () => {
   window.ethereum.removeListener('connect', updateWalletAndAccounts);
@@ -297,17 +295,13 @@ You can use the method `removeListeners` to safely remove specific listeners.
 ```javascript
 window.ethereum.on('_initialized', updateWalletAndAccounts);
 window.ethereum.on('connect', updateWalletAndAccounts);
-window.ethereum.on('_initialized', () => setSdkConnected(true));
-window.ethereum.on('connect', () => setSdkConnected(true));
 window.ethereum.on('accountsChanged', updateWallet);
 window.ethereum.on('chainChanged', updateWalletAndAccounts);
-window.ethereum.on('chainChanged', updateWalletAndAccounts);
 window.ethereum.on('disconnect', disconnectWallet);
-window.ethereum.on('disconnect', () => setSdkConnected(false));
-window.ethereum.on('disconnect', () => setIsConnecting(false));
 
 return () => {
   window.ethereum.removeAllListener()
+
 ```
 
 In the provided code example, `removeAllListeners` removes all event listeners from the `window.ethereum` object when the component is unmounted.
