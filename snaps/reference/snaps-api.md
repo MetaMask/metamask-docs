@@ -833,25 +833,16 @@ await snap.request({
 
 ## `snap_notify`
 
-Displays a notification in MetaMask or natively in the browser.
+Displays a [notification](../features/notifications.md) in MetaMask or natively in the browser.
 Snaps can trigger a short notification text for actionable or time sensitive information.
-
-:::info Notification rate limits
-The ability for Snaps to trigger notifications is rate-limited to:
-
-- 2 native notifications per 5 minutes per Snap.
-- 5 in-app notifications per minute per Snap.
-:::
 
 #### Parameters
 
 An object containing the contents of the notification:
 
-- `type` - The notification type.
-  Specify `inApp` to display the notification in the MetaMask UI, and `native` to display the
-  notification in the browser.
-  We recommend using `inApp` because there's no guarantee that native notifications are displayed to
-  the user.
+- `type` - The notification type (`"inApp"` or `"native"`).
+  We recommend using `type: "inApp"` because there's no guarantee that native notifications are
+  displayed to the user.
 - `message` - A message to show in the notification.
 
 #### Example
