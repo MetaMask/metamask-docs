@@ -254,32 +254,32 @@ For example, if you create a subscription using
 [`eth_subscribe`](/wallet/reference/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
-## Methods
+### Remove event listeners
 
-### `removeListeners`
+#### `removeListener`
 
 Use the `removeListener` method to remove specific event listeners from an `EventEmitter` object. 
 In the following example `removeListener` is used to remove the `connect` and `accountsChanged` events:
 
 ```javascript
-window.ethereum.on('_initialized', updateWalletAndAccounts);
-window.ethereum.on('connect', updateWalletAndAccounts);
-window.ethereum.on('accountsChanged', updateWallet);
-window.ethereum.on('chainChanged', updateWalletAndAccounts);
-window.ethereum.on('disconnect', disconnectWallet);
+window.ethereum.on("_initialized", updateWalletAndAccounts);
+window.ethereum.on("connect", updateWalletAndAccounts);
+window.ethereum.on("accountsChanged", updateWallet);
+window.ethereum.on("chainChanged", updateWalletAndAccounts);
+window.ethereum.on("disconnect", disconnectWallet);
 
 return () => {
   window.ethereum.removeAllListener()
 
 return () => {
-  window.ethereum.removeListener('connect', updateWalletAndAccounts);
-  window.ethereum.removeListener('accountsChanged', updateWallet);
+  window.ethereum.removeListener("connect", updateWalletAndAccounts);
+  window.ethereum.removeListener("accountsChanged", updateWallet);
 ```
 
 The first argument of `removeListener` is the event name, and the second argument is
 a reference to the function passed to `on` for the event.
 
-### `removeAllListeners`
+#### `removeAllListeners`
 
 You can use `removeAllListeners` to remove all listeners from the event emitter at once. This method is helpful when you need to clean up all listeners simultaneously. 
 
