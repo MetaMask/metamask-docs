@@ -286,7 +286,7 @@ You can use `removeAllListeners` to remove all listeners from the event emitter 
 :::caution
 
 Use `removeAllListeners` with caution.
-This method clears all event listeners associated with the emitter, not only the listeners set up by the component. 
+This method clears all event listeners associated with the emitter, not only the listeners set up by the application code. 
 Using this method can unexpectedly clear important event handlers, interfere with scripts, and make debugging more complex.
 You can use the method `removeListeners` to safely remove specific listeners.
 
@@ -304,7 +304,7 @@ return () => {
 
 ```
 
-In the provided code example, `removeAllListeners` removes all event listeners from the `window.ethereum` object when the component is unmounted.
+In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `window.ethereum` object. This cleanup function removes any remaining event listeners after the code block becomes unnecessary.
 
 ## Errors
 
