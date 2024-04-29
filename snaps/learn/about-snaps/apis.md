@@ -38,21 +38,24 @@ await snap.request({
 });
 ```
 
-## MetaMask JSON-RPC API
+## Wallet API
 
 ### Dapp requests
 
 Dapps can install and communicate with Snaps using the following
-[MetaMask JSON-RPC API](/wallet/reference/json-rpc-api) methods:
+[Wallet API methods for Snaps](../../reference/wallet-api-for-snaps.md):
 
-- [`wallet_getSnaps`](/wallet/reference/wallet_getsnaps) - Gets the dapp's permitted Snaps.
-- [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps) - Requests permission to
-  communicate with the specified Snaps.
-- [`wallet_snap`](/wallet/reference/wallet_snap) - (Restricted) Calls the specified custom JSON-RPC
-  API method of the specified Snap.
-- [`wallet_invokeSnap`](/wallet/reference/wallet_invokesnap) - (Restricted) Synonymous with `wallet_snap`.
+- [`wallet_getSnaps`](../../reference/wallet-api-for-snaps.md#wallet_getsnaps) - Gets the dapp's
+  permitted Snaps.
+- [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps) - Requests
+  permission to communicate with the specified Snaps.
+- [`wallet_snap`](../../reference/wallet-api-for-snaps.md#wallet_snap) - (Restricted) Calls the
+  specified custom JSON-RPC API method of the specified Snap.
+- [`wallet_invokeSnap`](../../reference/wallet-api-for-snaps.md#wallet_invokesnap) - (Restricted)
+  Synonymous with `wallet_snap`.
 
-A dapp must first request permission to communicate with a Snap using `wallet_requestSnaps`.
+A dapp must first [request permission](../../how-to/request-permissions.md#request-permissions-from-a-dapp)
+to communicate with a Snap using `wallet_requestSnaps`.
 The dapp can then call `wallet_snap` or `wallet_invokeSnap` on the permitted Snap.
 For example, to call `wallet_snap`:
 
@@ -81,7 +84,7 @@ console.log(response); // "world!"
 
 ### Snap requests
 
-Snaps can also call some MetaMask JSON-RPC API methods using the `ethereum` global, which is an
+Snaps can also call some Wallet JSON-RPC API methods using the `ethereum` global, which is an
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider.
 
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
@@ -103,9 +106,9 @@ await ethereum.request({ "method": "eth_requestAccounts" });
 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
-Snaps can call all MetaMask API methods **except** the following:
+Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
-- [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps)
+- [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps)
 - [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
 - [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
 - [`wallet_addEthereumChain`](/wallet/reference/wallet_addEthereumChain)

@@ -13,6 +13,10 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [`removeAllListeners`](/wallet/reference/provider-api) method example for tidying event listeners.
   ([#1288](https://github.com/MetaMask/metamask-docs/pull/1288))
+- Moved Snaps-specific Wallet API methods from the
+  [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
+  [Snaps reference](/snaps/reference/wallet-api-for-snaps).
+  ([#1286](https://github.com/MetaMask/metamask-docs/pull/1286))
 - Documented [Snaps `onKeyringRequest` entry point](/snaps/reference/entry-points/#onkeyringrequest).
   ([#1258](https://github.com/MetaMask/metamask-docs/pull/1258))
 - Documented [Snaps data storage](/snaps/features/data-storage).
