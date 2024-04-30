@@ -5,6 +5,13 @@ sidebar_position: 5
 
 # Data storage
 
+:::caution important
+Snaps are installed into the MetaMask instance of each user.
+If a Snap stores data, that data is specific to that user's MetaMask instance.
+However, that data can be shared with multiple dapps.
+Do not assume that data stored by a Snap is unique to your dapp. 
+:::
+
 You can store and manage sensitive information within a Snap using encrypted storage, or
 non-sensitive information using unencrypted storage.
 Use the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) API method to persist up to
