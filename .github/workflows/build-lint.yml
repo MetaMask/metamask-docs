@@ -1,4 +1,4 @@
-name: Build and lint
+name: Elevate 
 
 on:
   workflow_call:
