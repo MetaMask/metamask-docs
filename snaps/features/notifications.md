@@ -1,12 +1,12 @@
 ---
-description: Notify users directly in MetaMask, or natively in their browser.
+description: Notify users directly in MetaMask, or natively in their OS.
 sidebar_position: 9
 ---
 
 # Notifications
 
-You can display notifications directly in MetaMask or natively in a user's browser using the
-[`snap_notify`](../reference/snaps-api.md#snap_notify) API method.
+You can display notifications directly in MetaMask or natively in a user's operating system (OS)
+using the [`snap_notify`](../reference/snaps-api.md#snap_notify) API method.
 
 ## Steps
 
@@ -25,8 +25,8 @@ Add the following to your Snap's manifest file:
 
 Create a notification by calling [`snap_notify`](../reference/snaps-api.md#snap_notify), which takes
 a notification `type` and `message`.
-Specify `type: "inApp"` to display the notification in the MetaMask UI, and `type: "native"` to
-display the notification in the user's browser.
+Specify `type: "inApp"` to display the notification in the MetaMask UI, or `type: "native"` to
+display the notification in the user's OS.
 
 :::note
 We recommend using `type: "inApp"` because there's no guarantee that native notifications are

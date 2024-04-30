@@ -833,7 +833,7 @@ await snap.request({
 
 ## `snap_notify`
 
-Displays a [notification](../features/notifications.md) in MetaMask or natively in the browser.
+Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
 Snaps can trigger a short notification text for actionable or time sensitive information.
 
 #### Parameters
