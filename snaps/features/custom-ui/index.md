@@ -77,9 +77,6 @@ await snap.request({
 
 ### `button`
 
-:::flaskOnly
-:::
-
 Outputs a button that the user can select.
 For use in [interactive UI](interactive-ui.md).
 
@@ -178,9 +175,6 @@ module.exports.onHomePage = async () => {
 </p>
 
 ### `form`
-
-:::flaskOnly
-:::
 
 Outputs a form for use in [interactive UI](interactive-ui.md).
 
@@ -295,9 +289,6 @@ module.exports.onHomePage = async () => {
 </p>
 
 ### `input`
-
-:::flaskOnly
-:::
 
 Outputs an input component for use in [interactive UI](interactive-ui.md).
 
