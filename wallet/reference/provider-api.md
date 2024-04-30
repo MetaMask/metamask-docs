@@ -264,13 +264,14 @@ In the following example `removeListener` is used to remove the `connect` and `a
 ```javascript
 // Use window.ethereum instead of provider if EIP-6963 is not supported.
 
+// Add listeners
 provider.on("_initialized", updateWalletAndAccounts);
 provider.on("connect", updateWalletAndAccounts);
 provider.on("accountsChanged", updateWallet);
 provider.on("chainChanged", updateWalletAndAccounts);
 provider.on("disconnect", disconnectWallet);
 
-return () => {
+// Remove individual listeners
   provider.removeListener("connect", updateWalletAndAccounts);
   provider.removeListener("accountsChanged", updateWallet);
 ```
@@ -294,14 +295,15 @@ You can use the `removeListener` method to safely remove specific listeners.
 ```javascript
 // Use window.ethereum instead of provider if EIP-6963 is not supported.
 
+// Add listeners
 provider.on("_initialized", updateWalletAndAccounts);
 provider.on("connect", updateWalletAndAccounts);
 provider.on("accountsChanged", updateWallet);
 provider.on("chainChanged", updateWalletAndAccounts);
 provider.on("disconnect", disconnectWallet);
 
-return () => {
- provider.removeAllListeners()
+// Remove all listeners
+  provider.removeAllListeners()
 ```
 
 In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `provider` object. This cleanup function deletes any event listeners that are no longer needed.
