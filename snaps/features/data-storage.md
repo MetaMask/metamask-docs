@@ -13,7 +13,7 @@ We recommend using this method for storing data in a Snap long term.
 
 :::caution important
 You can install Snaps into each user's MetaMask instance.
-If a Snap stores data, that data resides specifically in that user's instance. 
+If a Snap stores data, that data is specific to that user's MetaMask instance.
 However, this data can be shared across multiple dapps. 
 Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
 :::
