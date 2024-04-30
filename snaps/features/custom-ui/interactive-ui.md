@@ -1,14 +1,9 @@
 ---
 description: Display and update interactive user interfaces.
 sidebar_position: 1
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Interactive UI
-
-:::flaskOnly
-:::
 
 You can display interactive user interface (UI) components.
 Interactive UI is an extension of [custom UI](index.md).

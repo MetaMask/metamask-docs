@@ -864,9 +864,6 @@ These methods do not require requesting permission in the Snap manifest file.
 
 ### `snap_createInterface`
 
-:::flaskOnly
-:::
-
 Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Parameters
@@ -906,9 +903,6 @@ await snap.request({
 ```
 
 ### `snap_getInterfaceState`
-
-:::flaskOnly
-:::
 
 Gets the state of an interactive interface by its ID.
 For use in [interactive UI](../features/custom-ui/interactive-ui.md).
@@ -973,9 +967,6 @@ console.log(state);
 ```
 
 ### `snap_updateInterface`
-
-:::flaskOnly
-:::
 
 Updates an interactive interface.
 For use in [interactive UI](../features/custom-ui/interactive-ui.md).
