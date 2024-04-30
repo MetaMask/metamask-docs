@@ -5,18 +5,18 @@ sidebar_position: 5
 
 # Data storage
 
-:::caution important
-Snaps are installed into the MetaMask instance of each user.
-If a Snap stores data, that data is specific to that user's MetaMask instance.
-However, that data can be shared with multiple dapps.
-Do not assume that data stored by a Snap is unique to a dapp unless it is designed that way. 
-:::
-
 You can store and manage sensitive information within a Snap using encrypted storage, or
 non-sensitive information using unencrypted storage.
 Use the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) API method to persist up to
 100 MB of data to the user's disk and retrieve it at will.
 We recommend using this method for storing data in a Snap long term.
+
+:::caution important
+You can install Snaps into each user's MetaMask instance.
+If a Snap stores data, that data resides specifically in that user's instance. 
+However, this data can be shared across multiple dapps. 
+Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
+:::
 
 ## Steps
 
