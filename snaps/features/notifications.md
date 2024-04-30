@@ -31,6 +31,8 @@ display the notification in the user's OS.
 :::note
 We recommend using `type: "inApp"` because there's no guarantee that native notifications are
 displayed to the user.
+You can also call `snap_notify` twice, which each notification type, to trigger both an in-app and
+native notification.
 :::
 
 The following example displays a notification in MetaMask, with the message "Hello, world!":
