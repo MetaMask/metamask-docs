@@ -272,8 +272,8 @@ provider.on("chainChanged", updateWalletAndAccounts);
 provider.on("disconnect", disconnectWallet);
 
 // Remove individual listeners
-  provider.removeListener("connect", updateWalletAndAccounts);
-  provider.removeListener("accountsChanged", updateWallet);
+provider.removeListener("connect", updateWalletAndAccounts);
+provider.removeListener("accountsChanged", updateWallet);
 ```
 
 The first argument of `removeListener` is the event name, and the second argument is
@@ -303,7 +303,7 @@ provider.on("chainChanged", updateWalletAndAccounts);
 provider.on("disconnect", disconnectWallet);
 
 // Remove all listeners
-  provider.removeAllListeners()
+provider.removeAllListeners()
 ```
 
 In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `provider` object. This cleanup function deletes any event listeners that are no longer needed.
