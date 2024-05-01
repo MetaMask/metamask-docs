@@ -146,8 +146,9 @@ provider._metamask.isUnlocked(); // Or window.ethereum._metamask.isUnlocked() if
 The MetaMask provider emits events using the Node.js
 [`EventEmitter`](https://nodejs.org/api/events.html) API.
 The following is an example of listening to the [`accountsChanged`](#accountschanged) event.
-You should remove listeners once you're done listening to an event (for example, on component
-unmount in React).
+
+You should [remove listeners](#remove-event-listeners) after you're done listening to an event (for example, on component
+`unmount` in React).
 
 ```javascript
 function handleAccountsChanged(accounts) {
@@ -162,9 +163,6 @@ provider // Or window.ethereum if you don't support EIP-6963.
 provider // Or window.ethereum if you don't support EIP-6963.
   .removeListener("accountsChanged", handleAccountsChanged);
 ```
-
-The first argument of `removeListener` is the event name, and the second argument is
-a reference to the function passed to `on` for the event.
 
 ### `accountsChanged`
 
@@ -255,6 +253,60 @@ RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
 [`eth_subscribe`](/wallet/reference/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
+
+### Remove event listeners
+
+#### `removeListener`
+
+Use the `removeListener` method to remove specific event listeners from an `EventEmitter` object. 
+In the following example `removeListener` is used to remove the `connect` and `accountsChanged` events:
+
+```javascript
+// Use window.ethereum instead of provider if EIP-6963 is not supported.
+
+// Add listeners
+provider.on("_initialized", updateWalletAndAccounts);
+provider.on("connect", updateWalletAndAccounts);
+provider.on("accountsChanged", updateWallet);
+provider.on("chainChanged", updateWalletAndAccounts);
+provider.on("disconnect", disconnectWallet);
+
+// Remove individual listeners
+provider.removeListener("connect", updateWalletAndAccounts);
+provider.removeListener("accountsChanged", updateWallet);
+```
+
+The first argument of `removeListener` is the event name, and the second argument is
+a reference to the function passed to `on` for the event.
+
+#### `removeAllListeners`
+
+You can use `removeAllListeners` to remove all listeners from the event emitter at once. This method is helpful when you need to clean up all listeners simultaneously. 
+
+:::caution
+
+Use `removeAllListeners` with caution.
+This method clears all event listeners associated with the emitter, not only the listeners set up by the application code. 
+Using this method can unexpectedly clear important event handlers, interfere with scripts, and make debugging more complex.
+You can use the `removeListener` method to safely remove specific listeners.
+
+:::
+
+```javascript
+// Use window.ethereum instead of provider if EIP-6963 is not supported.
+
+// Add listeners
+provider.on("_initialized", updateWalletAndAccounts);
+provider.on("connect", updateWalletAndAccounts);
+provider.on("accountsChanged", updateWallet);
+provider.on("chainChanged", updateWalletAndAccounts);
+provider.on("disconnect", disconnectWallet);
+
+// Remove all listeners
+provider.removeAllListeners()
+```
+
+In the provided code example, `removeAllListeners` is called to remove all event listeners attached to the `provider` object. This cleanup function deletes any event listeners that are no longer needed.
 
 ## Errors
 

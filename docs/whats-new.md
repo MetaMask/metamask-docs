@@ -9,10 +9,15 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## May 2024
+
+- Documented [provider API methods for removing event listeners](/wallet/reference/provider-api/#remove-event-listeners).
+  ([#1288](https://github.com/MetaMask/metamask-docs/pull/1288))
+
 ## April 2024
 
 - Documented [Snaps notifications](/snaps/features/notifications).
-  ([#1292](https://github.com/MetaMask/metamask-docs/pull/1292)).
+  ([#1292](https://github.com/MetaMask/metamask-docs/pull/1292))
 - Moved Snaps-specific Wallet API methods from the
   [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
   [Snaps reference](/snaps/reference/wallet-api-for-snaps).
