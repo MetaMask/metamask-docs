@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2024
 
+- Documented [Snaps notifications](/snaps/features/notifications).
+  ([#1292](https://github.com/MetaMask/metamask-docs/pull/1292)).
 - Moved Snaps-specific Wallet API methods from the
   [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
   [Snaps reference](/snaps/reference/wallet-api-for-snaps).
