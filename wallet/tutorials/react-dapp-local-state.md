@@ -111,12 +111,16 @@ connect to MetaMask.
 
 ![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)
 
-### 2. Detect MetaMask
+### 2. Discover Wallet Providers (Browser Extensions)
 
-Next, detect the injected provider that browser extension wallets use. MetaMask injects a JavaScript Ethereum provider into the browser at `window.ethereum`. You will use this provider in your dapp to request user information from Metamask.
+Currently we do not recommend the Vanilla JS detection of injected provider or the legacy MetaMask Detect provider, but they are working solutions and I will cover them quickly or you can choose to skip this section as we will not be using it in the dapp that we are building.
 
-Add code to conditionally render a **Connect MetaMask** button in your component by updating
-`src/App.tsx` to the following:
+[Skip to Modern EIP-6963" Multi Injected Provider Discovery](#3-using-eip-6963)
+
+#### Legacy Detection of MetaMask
+Previously we might use one of the following two ways to detect MetaMask:
+
+##### Using Vanilla JS
 
 ```tsx title="App.tsx"
 import "./App.css";
@@ -133,7 +137,7 @@ const App = () => {
   return (
     <div className="App">
       <h2>
-        Injected Provider {injectedProvider ? "DOES" : "DOES NOT"} Exist
+        Provider {injectedProvider ? "DOES" : "DOESN'T"} Exist
       </h2>
       {isMetaMask && <button>Connect MetaMask</button>}
     </div>
@@ -158,24 +162,18 @@ You'll also see the `ethereum` provider printed to the console.
 
 You can switch between these two states by enabling or disabling the MetaMask extension through your browser's **Manage Extensions** menu.
 
-#### Use `@metamask/detect-provider`
+##### Using Metamask Detect Provider
 
-Developers often use the previous approach when tasked with detecting an injected provider (wallet extension).
-
-However, MetaMask provides the
-[@metamask/detect-provider](https://github.com/MetaMask/detect-provider) module to detect the
+MetaMask has an NPM module: [@metamask/detect-provider](https://github.com/MetaMask/detect-provider) to detect the
 MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser.
 
-We recommend [using `@metamask/detect-provider`](../how-to/connect/detect-metamask.md)
-instead of manually detecting the provider yourself.
-
-In your project directory (the `mm-dapp-react` directory), install the module using the following command:
+You can use the [`@metamask/detect-provider`](../how-to/connect/detect-metamask.md) instead of manually detecting the provider yourself and you would need to install the following dependency:
 
 ```bash
 npm install @metamask/detect-provider
 ```
 
-Update `src/App.tsx` to the following:
+If you would like to try this method, the following code will work once the node module is installed:
 
 ```tsx title="App.tsx"
 import "./App.css";
@@ -229,6 +227,33 @@ The setter function within `useEffect` transforms the provider's detection to a 
 
 If you run the code now, you'll see the same result in your dapp, but you're using
 `@metamask/detect-provider` instead of your own code.
+
+### 3. Using EIP-6963
+
+We will opt to use the most up to date way of detecting wallet providers with EIP-6963.
+
+> [Why EIP-6963](https://eips.ethereum.org/EIPS/eip-6963): The current method where browser extensions inject Ethereum providers (EIP-1193) into window.ethereum leads to conflicts when multiple extensions are installed, due to a race condition that favors the last loaded wallet. This not only hampers user experience by restricting choice but also stifles new extension adoption by creating an unfair competitive landscape. Our proposal aims to improve Ethereum network interoperability and user experience by introducing a two-way communication protocol via window events, enabling users to choose their preferred wallet provider and promoting a fairer environment for all Wallet Providers.
+
+```tsx title="App.tsx"
+import "./App.css";
+import { useState, useEffect } from "react";
+
+const App = () => {
+
+  useEffect(() => {
+
+  }, []);
+
+  return (
+    <div className="App">
+      <button>Connect MetaMask</button>
+    </div>
+  );
+};
+
+export default App;
+```
+
 
 ### 3. Connect to MetaMask
 
