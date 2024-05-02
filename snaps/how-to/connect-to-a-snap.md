@@ -110,13 +110,6 @@ with the following shape:
 If the Snap is already installed, the call to `wallet_requestSnaps` returns the same object as for a
 new installation of the Snap, but the user won't see a confirmation pop-up asking them to install the Snap.
 
-:::caution important
-Snaps are installed into the MetaMask instance of each user.
-If a Snap stores data, that data is specific to that user's MetaMask instance.
-However, that data can be shared with multiple dapps.
-Do not assume that data stored by a Snap is unique to your dapp. 
-:::
-
 ## Determine whether a Snap is installed
 
 Determine whether a Snap is installed by calling the
