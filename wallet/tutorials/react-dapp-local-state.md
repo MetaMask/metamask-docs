@@ -232,7 +232,7 @@ If you run the code now, you'll see the same result in your dapp, but you're usi
 
 We will opt to use the most up to date way of detecting wallet providers with EIP-6963.
 
-> [Why EIP-6963](https://eips.ethereum.org/EIPS/eip-6963): The current method where browser extensions inject Ethereum providers (EIP-1193) into window.ethereum leads to conflicts when multiple extensions are installed, due to a race condition that favors the last loaded wallet. This not only hampers user experience by restricting choice but also stifles new extension adoption by creating an unfair competitive landscape. Our proposal aims to improve Ethereum network interoperability and user experience by introducing a two-way communication protocol via window events, enabling users to choose their preferred wallet provider and promoting a fairer environment for all Wallet Providers.
+> [Why EIP-6963](https://eips.ethereum.org/EIPS/eip-6963): The current method where browser extensions inject Ethereum providers (EIP-1193) into `window.ethereum` leads to conflicts when multiple extensions are installed, due to a race condition that favors the last loaded wallet. This creates an undesirable user experience. EIP-6963 improves interoperability and user experience by introducing a two-way communication protocol via window events, enabling discovery and users ability to connect to their preferred wallet provider through a unique identifier.
 
 ```tsx title="App.tsx"
 import "./App.css";
