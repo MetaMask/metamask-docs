@@ -374,9 +374,9 @@ npm run dev
 ## Conclusion
 
 This tutorial walked you through creating a single component dapp using Vite, some basics of
-detecting wallet providers via EIP-6963, and managing the .
+detecting wallet providers via EIP-6963, and managing the state in React locally.
 
-You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
+You can see the [UPDATE TBD](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
 for the final state of this dapp tutorial.
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
