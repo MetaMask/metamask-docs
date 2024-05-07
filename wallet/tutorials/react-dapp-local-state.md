@@ -357,13 +357,20 @@ Update the `div` with the class of `.App` to the following:
     </div>
 ```
 
+<p align="center">
+
+![Final View of Dapp](../assets/react-tutorial-01-final.png)
+
+</p>
 
 ## Conclusion
 
 This tutorial walked you through creating a single component dapp using Vite, some basics of
 detecting wallet providers via EIP-6963, and managing the state in React locally.
 
-You can see the [UPDATE TBD](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
+We also have added functionality to show the wallet connected to and a function to format the user's address.
+
+You can see the [UPDATE COMING TO THIS REPO](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
 for the final state of this dapp tutorial.
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
