@@ -275,6 +275,7 @@ Let's update the `:root` selector and add some margin in an `.App` selector at t
 
 .App {
   margin: 1em;
+  width: calc(100vw - 2em);
 }
 ```
 
@@ -284,6 +285,78 @@ Then we can run:
 ```bash
 npm run dev
 ```
+
+At this point we can connect to the wallets that are installed in our browser. We will focus on working with MetaMask and connecting to it through part 1 and 2 of this tutorial, however; connection should be the same for each wallet but there is a possibility that as you start to work with different wallets there could be differences in APIs.
+
+## Showing the Connected Wallet Address
+
+Finally, let's indicate when a wallet has been connected to by displaying the user's address on the page.
+
+We want to add two `useState` hooks just above the line where we declare our `providers` and add some code during the `handleConnect` function as well as a function for formatting the user address:
+
+```tsx title="App.tsx"
+import { useState } from 'react'
+import { useSyncProviders } from '../hooks/useSyncProviders'
+import { formatAddress } from '~/utils'
+
+export const DiscoverWalletProviders = () => {
+  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
+  const [userAccount, setUserAccount] = useState<string>('')
+  const providers = useSyncProviders()
+
+  const formatAddress = (addr: string) => {
+    const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+    return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
+  }
+
+  const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
+    try {
+      const accounts = await providerWithInfo.provider.request({ 
+        method: 'eth_requestAccounts' 
+      });
+
+      setSelectedWallet(providerWithInfo);
+      setUserAccount(accounts?.[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  ...
+```
+
+Next, in the JSX wrapped by our return statement of the component, we will add some code below the existing provider buttons:
+
+Update the `div` with the class of `.App` to the following:
+
+```tsx title
+    <div className="App">
+      <h2>Wallets Detected:</h2>
+      <div>
+        {
+          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          )) :
+            <div>
+              No Announced Wallet Providers
+            </div>
+        }
+      </div>
+
+      <hr />
+      <h2>{userAccount ? "" : "No "}Wallet Selected</h2>
+      {userAccount &&
+        <div>
+          <img src={selectedWallet?.info.icon} alt={selectedWallet?.info.name} />
+          <div>{selectedWallet?.info.name}</div>
+          <div>({formatAddress(userAccount)})</div>
+        </div>
+      }
+    </div>
+```
+
 
 ## Conclusion
 
