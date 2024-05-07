@@ -265,106 +265,16 @@ const App = () => {
 export default App
 ```
 
-Let's add some CSS to clean things up. Update the file at `src/index.css`
+Let's update the `:root` selector and add some margin in an `.App` selector at the top of the CSS in the file at `src/index.css`
 
 ```css title="index.css"
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  ...
   text-align: left;
 }
 
 .App {
   margin: 1em;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-hr {
-  margin-top: 2em;
-  height: 1px;
-}
-
-button {
-  min-width: 12em;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-
-  align-items: center;
-  border-radius: 0.5em;
-  padding: 0.6em 1.2em;
-  margin-bottom: 0.5em;
-
-  font-family: inherit;
-  font-size: 1em;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  transition: border-color 0.25s;
-  border: 1px solid transparent;
-  background-color: #1a1a1a;
-}
-button > img {
-  width: 1.5em;
-  height: 1.5em;
-  margin-right: 1em;
-}
-button:hover {
-  border-color: #75079d;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-button:first-child {
-  margin-top: 0.5em;
-}
-button:last-child {
-  margin-bottom: 0;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 ```
 
