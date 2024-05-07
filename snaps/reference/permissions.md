@@ -199,12 +199,6 @@ domain resolution is happening on Ethereum Mainnet.
 To access the internet, a Snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
 
-:::caution
-`XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
-If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
-:::
-
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -212,15 +206,6 @@ Specify this permission in the manifest file as follows:
   "endowment:network-access": {}
 }
 ```
-
-#### Same-origin policy and CORS
-
-`fetch()` requests in a Snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
-Since Snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
-header with the value `null` with outgoing requests.
-For the Snap to be able to read the response, the server must send an
-[`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
-with the value `*` or `null` in the response.
 
 ### `endowment:rpc`
 
