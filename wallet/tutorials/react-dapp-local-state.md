@@ -284,6 +284,10 @@ Let's add some CSS to clean things up. Update the file at `src/index.css`
   text-align: left;
 }
 
+.App {
+  margin: 1em;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
