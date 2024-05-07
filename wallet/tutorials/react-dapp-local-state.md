@@ -106,11 +106,6 @@ button {
 }
 ```
 
-At this point, you have a working React app with some basic styling and a button that you'll use to
-connect to MetaMask.
-
-![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)
-
 ### 2. Discover Wallet Providers (Browser Extensions)
 
 Currently we do not recommend the Vanilla JS detection of injected provider or the legacy MetaMask Detect provider, but they are working solutions and I will cover them quickly or you can choose to skip this section as we will not be using it in the dapp that we are building.
