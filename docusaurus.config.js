@@ -25,7 +25,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"/*, "ru", "zh"*/],
+    locales: ["en"/*, "zh", "ko"*/],
   },
 
   trailingSlash: true,
@@ -61,7 +61,7 @@ const config = {
             }],
           ],
           openrpc: {
-            openrpcDocument: "https://metamask.github.io/api-specs/0.8.4/openrpc.json",
+            openrpcDocument: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
             path: "reference",
             sidebarLabel: "JSON-RPC API",
           },

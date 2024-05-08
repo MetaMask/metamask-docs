@@ -96,7 +96,7 @@ Now you can make changes to your dependencies inside `node_modules` and run
 This creates a `.patch` file containing your dependency patch.
 These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
 
-### Patch the use of XMLHttpRequest
+### Patch the use of `XMLHttpRequest`
 
 The `XMLHttpRequest` API is not exposed in the Snaps execution environment and won't be in the future.
 Because of this, you may run into issues with dependencies in your dependency tree attempting to

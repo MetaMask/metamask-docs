@@ -11,6 +11,13 @@ Use the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) API met
 100 MB of data to the user's disk and retrieve it at will.
 We recommend using this method for storing data in a Snap long term.
 
+:::caution important
+Snaps are installed in each user's MetaMask instance.
+If a Snap stores data, that data is specific to that user's MetaMask instance.
+However, this data can be shared across multiple dapps. 
+Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
+:::
+
 ## Steps
 
 ### 1. Get permission to store data
