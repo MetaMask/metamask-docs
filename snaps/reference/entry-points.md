@@ -76,8 +76,8 @@ module.exports.onCronjob = async ({ request }) => {
 
 ## `onHomePage`
 
-To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
-expose the `onHomePage` entry point.
+To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must expose
+the `onHomePage` entry point.
 MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
 
 :::note
@@ -420,7 +420,7 @@ An object containing:
 #### Returns
 
 - An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`.
-- A content object displayed using [custom UI](../features/custom-ui/index.md) after the user
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md) after the user
   selects the **Sign** button.
   Due to current limitations of MetaMask's signature confirmation UI, the content will only be displayed if
   the `severity` property is present and set to `SeverityLevel.Critical`.
