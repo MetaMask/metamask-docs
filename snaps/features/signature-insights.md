@@ -1,6 +1,6 @@
 ---
 description: Provide insights to your users in MetaMask's signature confirmation flow.
-sidebar_position: 10
+sidebar_position: 11
 sidebar_custom_props:
   flask_only: true
 ---
