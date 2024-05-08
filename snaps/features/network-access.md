@@ -40,7 +40,8 @@ Since Snap code is executed in an iframe with the `sandbox` property, the browse
 header with the value `null` with outgoing requests.
 For the Snap to be able to read the response, the server must send an
 [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
-with the value `*` or `null` in the response.
+with the value `*` or `null` in the response. 
+Otherwise, you may need to set up a proxy.
 :::
 
 :::caution
