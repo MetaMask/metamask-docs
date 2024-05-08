@@ -27,73 +27,42 @@ For a full end-to-end tutorial that can be used in production, see the
  You can install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 extension for VS Code to easily launch a local development server for your dapp.
 
+- [Node.js](https://nodejs.org/en/) version 18 or higher.
+ 
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 ## Steps
 
 ### 1. Set up a new project
 
-Create a new project with the following structure:
+Create a new project using with the following structure:
 
 ```text
 simple-dapp/
 ├─ src/
-│  ├─ index.js
+│  ├─ detect.js
 ├─ dist/
 │  ├─ index.html
 ```
 
-This tutorial uses the [`@metamask/detect-provider`](https://github.com/MetaMask/detect-provider) module and a bundler, [Webpack](https://github.com/webpack/webpack), to compile the module and create an output script `dist/main.js`.
+Create a new project using [Vite](https://vitejs.dev/guide/):
 
-Add the following code to `dist/index.html`:
+```bash
+npm create vite@latest simple-dapp -- --template vanilla
+```
+The commmand creates the structure for the `simple-dapp` project. 
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Simple dapp</title>
-</head>
-<body>
-  <script src="../dist/index.js"></script>  <!-- Links to the JavaScript bundle created by Webpack -->
-</body>
-</html>
+The run the following commands:
+
+```bash
+cd simple-dapp 
+npm install    // Install dependencies listed in the project's package.json
+npm run dev    // Runs the dev script which starts a local development server
 ```
 
-### 2. Install and configure Webpack
+Ensure you add a `detect.js` file to the `src` directory. 
 
-Navigate to the root of your `simple-dapp` directory and run the following commands to initialize npm and install Webpack.
-
-```bash 
-npm init -y && npm install --save-dev webpack webpack-cli
-```
-
-Create a `webpack.config.js` in the root of your project with the following configuration:
-
-```js title="webpack.config.js"
-const path = require("path");
-
-module.exports = {
-  entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "index.js",
-  },
-  mode: "development",
-};
-```
-
-Then, edit `package.json` to include a build script:
-
-```json title="package.json"
-"scripts": {
-  "build": "webpack"
-}
-```
-
-When you run `npm run build` from your terminal, Webpack bundles the content in `src/index.js` into `dist/main.js`, which is linked in `index.html`.
-
-### 3. Detect MetaMask
+### 2. Detect MetaMask
 
 :::caution
 
@@ -107,9 +76,9 @@ Install the `@metamask/detect-provider` module in your project directory:
 npm i @metamask/detect-provider
 ```
 
-Add the following code to `src/index.js` to detect the MetaMask provider using `@metamask/detect-provider`:
+Add the following code to `src/detect.js` to detect the MetaMask provider using `@metamask/detect-provider`:
 
-```js title="index.js"
+```js title="detect.js"
 import detectEthereumProvider from "@metamask/detect-provider";
 
 async function setup() {
@@ -132,7 +101,7 @@ function startApp(provider) {
 window.addEventListener("load", setup);
 ```
 
-### 4. Serve the project
+### 3. Serve the project
 
 To test and verify your project works with MetaMask, serve your project through a local server. 
 If using VS Code and [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), right-click the `index.html` file, and select **Open with Live Server**. 
@@ -147,13 +116,13 @@ Then navigate to the project directory, and run `http-server`.
 
 Open your browser and go to the provided local server URL (typically http://127.0.0.1:8080).
 
-### 5. Detect a user's network
+### 4. Detect a user's network
 
 [Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
-Add the following code to `src/index.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
+Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
 RPC method to detect the chain ID of the user's current network, and listens to the [`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the user changes networks:
 
-```js title="index.js"
+```js title="detect.js"
 const chainId = await window.ethereum 
   .request({ method: "eth_chainId" });
 
@@ -166,14 +135,14 @@ function handleChainChanged(chainId) {
 }
 ```
 
-### 6. Access a user's accounts
+### 5. Access a user's accounts
 
 To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
-Add the following code to `src/index.js`, which creates a button to allow users to connect to MetaMask from your dapp.
+Add the following code to `src/detect.js`, which creates a button to allow users to connect to MetaMask from your dapp.
 Selecting the button activates the call to `eth_requestAccounts`, allowing you to access the user's accounts.
 
-```jsx title="index.js"
+```jsx title="detect.js"
 // You should only attempt to request the user's account in response to user interaction, such as
 // selecting a button. Otherwise, you risk spamming the user. If you fail to retrieve
 // the user's account, you should encourage the user to initiate the attempt.
@@ -220,7 +189,7 @@ The following code samples contain the full simple dapp JavaScript and HTML code
 
 ### JavaScript
 
-```jsx title="index.js"
+```jsx title="detect.js"
 /*****************************************/
 /* Detect the MetaMask Ethereum provider */
 /*****************************************/
@@ -295,23 +264,26 @@ ethereumButton.addEventListener('click', async () => {
 ### HTML
 
 ```html title="index.html"
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Simple dapp</title>
-  <script type="module" src="index.js"></script>
-</head>
-<body>
-  <!-- Display a connect button and the current account -->
-  <button class="enableEthereumButton">Enable Ethereum</button>
-  <h2>Account: <span class="showAccount"></span></h2>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Display a connect button and the current account -->
+      <button class="enableEthereumButton">Enable Ethereum</button>
+      <h2>Account: <span class="showAccount"></span></h2>
+    </div>
+    <script type="module" src="/detect.js"></script>
+  </body>
 </html>
 ```
 
 ## Conclusion
 
-You've successfully created a simple dapp and connected it to MetaMask using JavaScript and the `window.ethereum` provider.
+You've successfully created a simple dapp and connected it to MetaMask using JavaScript, Vite, and the `window.ethereum` provider.
 With this setup, your dapp can interact with MetaMask and allow users to securely access accounts and perform transactions on the Ethereum blockchain.
