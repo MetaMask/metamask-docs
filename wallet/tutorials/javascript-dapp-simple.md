@@ -21,15 +21,13 @@ For a full end-to-end tutorial that can be used in production, see the
 
 ## Prerequisites
 
-- [MetaMask](https://metamask.io/) installed in the browser of your choice on your development machine.
+- [Node.js](https://nodejs.org/en/) version 18+
+
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 
 - A text editor of your choice, such as [VS Code](https://code.visualstudio.com/).
- You can install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-extension for VS Code to easily launch a local development server for your dapp.
 
-- [Node.js](https://nodejs.org/en/) version 18 or higher.
- 
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+- [MetaMask](https://metamask.io/) installed in the browser of your choice on your development machine.
 
 ## Steps
 
@@ -50,17 +48,25 @@ Create a new project using [Vite](https://vitejs.dev/guide/):
 ```bash
 npm create vite@latest simple-dapp -- --template vanilla
 ```
-The commmand creates the structure for the `simple-dapp` project. 
+Ensure to include a `detect.js` file in the `src` directory of your `simple-dapp` project, if it is not already present.
 
-The run the following commands:
+Then change directories:
 
 ```bash
 cd simple-dapp 
-npm install    // Install dependencies listed in the project's package.json
-npm run dev    // Runs the dev script which starts a local development server
 ```
 
-Ensure you add a `detect.js` file to the `src` directory. 
+Install the dependencies listed in the project's `package.json`.
+
+```bash
+npm install    
+```
+
+Run the development script to start a local development server.
+
+```bash
+npm run dev
+```
 
 ### 2. Detect MetaMask
 
@@ -104,17 +110,9 @@ window.addEventListener("load", setup);
 ### 3. Serve the project
 
 To test and verify your project works with MetaMask, serve your project through a local server. 
-If using VS Code and [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), right-click the `index.html` file, and select **Open with Live Server**. 
- 
-Alternatively, you can install `http-server` using the following command:
-
-```bash
-npm install -g http-server
-```
-
-Then navigate to the project directory, and run `http-server`. 
-
-Open your browser and go to the provided local server URL (typically http://127.0.0.1:8080).
+Navigate to the project directory.
+Run the `npm run dev` command to test your application locally. 
+Open your browser and go to the provided local server URL.
 
 ### 4. Detect a user's network
 
@@ -181,11 +179,12 @@ Add the following HTML code to the body of `dist/index.html`, which displays the
 <h2>Account: <span class="showAccount"></span></h2>
 ```
 
-To complete the tutorial, [run the project on a local server](#4-serve-the-project) to view the live dapp.
+To complete the tutorial, [run the project on a local server](#3-serve-the-project) to view the live dapp.
 
 ## Example
 
-The following code samples contain the full simple dapp JavaScript and HTML code that this tutorial walks through. You can copy the following full examples to get started quickly.
+The following code samples contain the full simple dapp JavaScript and HTML code that this tutorial walks through. 
+You can copy the following full examples to get started quickly.
 
 ### JavaScript
 
