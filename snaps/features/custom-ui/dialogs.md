@@ -33,7 +33,7 @@ Add the following to your Snap's manifest file:
 
 To display an alert that can only be acknowledged, call
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "alert"`.
-The following example displays custom UI alerting the user that something happened in the system:
+The following example displays custom UI that alerts the user when something happens in the system:
 
 ```javascript title="index.js"
 import { panel, text, heading } from "@metamask/snaps-sdk";
@@ -60,8 +60,8 @@ await snap.request({
 
 To display a confirmation that can be accepted or rejected, call
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "confirmation"`.
-The following example displays custom UI asking the user to confirm whether they would like to take
-an action:
+The following example displays custom UI that asks the user to confirm whether they would like to
+take an action:
 
 ```javascript title="index.js"
 import { panel, text, heading } from "@metamask/snaps-sdk";
@@ -90,9 +90,9 @@ if (result === true) {
 
 To display a prompt where the user can enter a text response, call
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "prompt"`.
-Prompt dialogs also take a `placeholder` that will be in the input field when nothing is typed.
+Prompt dialogs also accept a `placeholder` value that displays in the input field when no text is entered.
 
-The following example displays custom UI prompting the user to enter a wallet address:
+The following example displays custom UI that prompts the user to enter a wallet address:
 
 ```javascript title="index.js"
 import { panel, text, heading } from "@metamask/snaps-sdk";

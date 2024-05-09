@@ -6,7 +6,7 @@ sidebar_position: 3
 # Home pages
 
 You can display a dedicated UI, or "home page," for your Snap within MetaMask.
-This is a useful to represent your Snap and what it does to end users.
+This is useful for introducing your Snap to end users.
 Users can access your home page through the Snaps menu in MetaMask.
 Snap home pages can contain [custom UI](index.md) and [interactive UI](interactive-ui.md)
 components.
