@@ -1,4 +1,4 @@
----
+---0xd302a0E7a0b281E80ced31f0126Eb7749118F70B
 sidebar_label: Mobile
 sidebar_position: 3
 description: Set up the SDK in your mobile dapp.
