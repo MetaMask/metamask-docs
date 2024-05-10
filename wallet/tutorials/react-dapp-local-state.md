@@ -72,7 +72,7 @@ import "./App.css";
 const App = () => {
   return (
     <div className="App">
-      <button>Button for Discovered Wallets</button>
+      <h2>Wallets Detected:</h2>
     </div>
   );
 };
@@ -80,37 +80,43 @@ const App = () => {
 export default App;
 ```
 
-You'll need to get around type-checking by defining the `window.ethereum` object as `any`.
-Update `src/vite-env.d.ts` to the following:
+I already know that I need some basic styling of the app's frame or div with the style of `App`, I also need some padding on my buttons
 
-```tsx title="vite-env.d.ts"
-/// <reference types="vite/client" />
-
-interface Window {
-  ethereum: any;
-}
-```
-
-Also, update `src/App.css` to the following:
+Update `src/App.css` to the following:
 
 ```css title="App.css"
 .App {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
   min-width: 100vw;
   min-height: 100vh;
+  text-align: center;
 }
-button {
-  margin-top: 0.5em;
+
+.metaMaskError {
+  height: 36px;
+  padding: 16px;
+  color: #EFEFEF;
+  background-color: transparent;
+}
+
+.providers {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  gap: 1em;
+
+  padding: 0.6em 1.2em;
+}
+
+.providers button img {
+  width: 2em;
 }
 ```
 
 ### 2. Discover Wallet Providers (Browser Extensions)
 
 Currently we do not recommend the Vanilla JS detection of injected provider or the legacy MetaMask Detect provider, but they are working solutions and I will cover them quickly or you can choose to skip this section as we will not be using it in the dapp that we are building.
-
-[Skip to Modern EIP-6963" Multi Injected Provider Discovery](#3-using-eip-6963)
 
 ### 3. Detect Multiple Wallet Providers
 
@@ -154,9 +160,15 @@ interface EIP6963ProviderDetail {
 // This type represents the structure of an event dispatched by a wallet to announce its presence based on EIP-6963
 type EIP6963AnnounceProviderEvent = {
   detail:{
-    info: EIP6963ProviderInfo,
+    info: EIP6963ProviderInfo
     provider: EIP1193Provider
   }
+}
+
+// An error object with optional properties, commonly encountered when handling MetaMask `eth_requestAccounts` errors
+interface MMError {
+  code?: string
+  message?: string
 }
 ```
 
@@ -165,23 +177,23 @@ To manage the state of detected wallet providers across our application, we'll c
 Add the following code to `src/hooks/store.ts`:
 
 ```ts title="store.ts"
-// This part extends the WindowEventMap interface to include a custom event named "eip6963:announceProvider".
+// Extends WindowEventMap interface including a custom event: "eip6963:announceProvider"
 declare global{
   interface WindowEventMap {
     "eip6963:announceProvider": CustomEvent
   }
 }
 
-// An array that stores detected wallet providers along with their details.
+// Array that stores detected wallet providers and their details
 let providers: EIP6963ProviderDetail[] = []
 
-// An object containing two methods, the store holds the state of detected Ethereum wallet providers. 
-// It's implemented as an external store, making it available for subscription and synchronization across the app. 
+// Object containing two methods, the store holds the state of detected Ethereum wallet providers,
+// it's implemented as an external store, making it available for subscription and synchronization across the dapp
 export const store = {
-  // A function that returns the current state of providers.
+  // Returns the current state of providers
   value: ()=> providers,
-  // A function that subscribes to provider announcements and updates the store accordingly. 
-  // It takes a callback function to be invoked on each store update and returns a function to unsubscribe from the event.
+  // Subscribes to provider announcements and updates the store accordingly
+  // Takes a callback function to be invoked on each store update returning a function to unsubscribe from the event
   subscribe: (callback: ()=> void) => {
     function onAnnouncement(event: EIP6963AnnounceProviderEvent){
       if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
@@ -222,15 +234,16 @@ Update `src/App.tsx` to the following:
 
 ```tsx title="App.tsx"
 import { useSyncProviders } from './hooks/useSyncProviders'
+import "./App.css"
 
 const App = () => {
   const providers = useSyncProviders()
 
   const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
     try {
-      await providerWithInfo.provider.request({ 
-        method: 'eth_requestAccounts' 
-      });
+      const accounts = await providerWithInfo.provider.request({
+        method: 'eth_requestAccounts'
+      }) as string[]
 
     } catch (error) {
       console.error(error);
@@ -240,7 +253,7 @@ const App = () => {
   return (
     <div className="App">
       <h2>Wallets Detected:</h2>
-      <div>
+      <div className="providers">
         {
           providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
             <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
@@ -260,20 +273,6 @@ const App = () => {
 export default App
 ```
 
-Let's update the `:root` selector and add some margin in an `.App` selector at the top of the CSS in the file at `src/index.css`
-
-```css title="index.css"
-:root {
-  ...
-  text-align: left;
-}
-
-.App {
-  margin: 1em;
-  width: calc(100vw - 2em);
-}
-```
-
 To test our application, let's ensure that we are signed into our MetaMask wallet and that it is not currently connected to our dapp.
 Then we can run:
 
@@ -285,35 +284,44 @@ At this point we can connect to the wallets that are installed in our browser. W
 
 ## Showing the Connected Wallet Address
 
-Finally, let's indicate when a wallet has been connected to by displaying the user's address on the page.
+Let's indicate when a wallet has been connected to by displaying the user's address on the page.
 
-We want to add two `useState` hooks just above the line where we declare our `providers` and add some code during the `handleConnect` function as well as a function for formatting the user address:
+We want to add two `useState` hooks just above the line where we declare our `providers` and add some code during the `handleConnect` function as well as a `formatAddress` function for displaying a readable user address, along with some basic error catching, formatting, display and a way for the user to click on and dismiss the error message.
+
+Update everything above the `return` statement in the `App.tsx` file:
 
 ```tsx title="App.tsx"
 import { useState } from 'react'
 import { useSyncProviders } from '../hooks/useSyncProviders'
 import { formatAddress } from '~/utils'
 
-export const DiscoverWalletProviders = () => {
+const App = () => {
   const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
   const [userAccount, setUserAccount] = useState<string>('')
   const providers = useSyncProviders()
 
+  const [errorMessage, setErrorMessage] = useState('')
+  const clearError = () => setErrorMessage('')
+  const setError = (error: string) => setErrorMessage(error)
+  const isError = !!errorMessage
+
   const formatAddress = (addr: string) => {
-    const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+    const upperAfterLastTwo = addr.slice(0, 2) + addr.slice(2)
     return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
   }
 
   const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
     try {
-      const accounts = await providerWithInfo.provider.request({ 
-        method: 'eth_requestAccounts' 
-      });
+      const accounts = await providerWithInfo.provider.request({
+        method: 'eth_requestAccounts'
+      }) as string[]
 
-      setSelectedWallet(providerWithInfo);
-      setUserAccount(accounts?.[0]);
+      setSelectedWallet(providerWithInfo)
+      setUserAccount(accounts?.[0])
     } catch (error) {
-      console.error(error);
+      console.error(error)
+      const mmError: MMError = error as MMError
+      setError(`Code: ${mmError.code} \nError Message: ${mmError.message}`)
     }
   }
   ...
@@ -326,7 +334,7 @@ Update the `div` with the class of `.App` to the following:
 ```tsx title
     <div className="App">
       <h2>Wallets Detected:</h2>
-      <div>
+      <div className="providers">
         {
           providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
             <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
@@ -339,16 +347,22 @@ Update the `div` with the class of `.App` to the following:
             </div>
         }
       </div>
-
       <hr />
-      <h2>{userAccount ? "" : "No "}Wallet Selected</h2>
+      <h2>{userAccount ? "" : "No"} Wallet Selected</h2>
       {userAccount &&
-        <div>
+        <div className="selectedWallet">
           <img src={selectedWallet?.info.icon} alt={selectedWallet?.info.name} />
           <div>{selectedWallet?.info.name}</div>
           <div>({formatAddress(userAccount)})</div>
         </div>
       }
+      <div className="mmError" style={isError ? { backgroundColor: 'brown' } : {}}>
+        {isError &&
+          <div onClick={clearError}>
+            <strong>Error:</strong> {errorMessage}
+          </div>
+        }
+      </div>
     </div>
 ```
 
