@@ -86,7 +86,6 @@ const config = {
           require("remark-docusaurus-tabs"),
         ],
         admonitions: {
-          tag: ":::",
           keywords: [
             "info",
             "success",
