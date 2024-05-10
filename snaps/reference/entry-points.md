@@ -480,8 +480,8 @@ module.exports.onSignature = async ({
 
 To provide [transaction insights](../features/transaction-insights.md) before a user signs a
 transaction, a Snap must expose the `onTransaction` entry point.
-Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
-extension, MetaMask calls the `onTransaction` handler method.
+When a user submits a transaction in the MetaMask extension, MetaMask calls the `onTransaction`
+handler method.
 MetaMask passes the raw unsigned transaction payload to `onTransaction`.
 
 :::note

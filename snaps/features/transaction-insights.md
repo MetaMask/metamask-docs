@@ -38,8 +38,8 @@ permission object, and set it to `true`:
 
 Expose an [`onTransaction`](../reference/entry-points.md#ontransaction) entry point, which receives
 a raw unsigned transaction payload, the chain ID, and the optional transaction origin.
-Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
-extension, MetaMask calls the `onTransaction` handler method.
+When a user submits a transaction using the MetaMask extension, MetaMask calls the `onTransaction`
+handler method.
 
 The following is an example implementation of `onTransaction`:
 
@@ -63,7 +63,7 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
-The Snap tab in the pre-transaction window displays the transaction insights:
+The Snap tab in the transaction confirmation window displays the transaction insights:
 
 <p align="center">
 <img src={require("../assets/transaction-insights-window.png").default} alt="Transaction insights" width="360px" style={{border: "1px solid #DCDCDC"}} />
