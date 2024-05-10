@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2024
 
+- Documented [Snaps transaction insights](/snaps/features/transaction-insights).
+  ([#1304](https://github.com/MetaMask/metamask-docs/pull/1304))
 - Documented [Snaps network access](/snaps/features/network-access).
   ([#1301](https://github.com/MetaMask/metamask-docs/pull/1301))
 - Documented [provider API methods for removing event listeners](/wallet/reference/provider-api/#remove-event-listeners).

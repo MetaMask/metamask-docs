@@ -478,8 +478,8 @@ module.exports.onSignature = async ({
 
 ## `onTransaction`
 
-To provide transaction insights before a user signs a transaction, a Snap must expose the
-`onTransaction` entry point.
+To provide [transaction insights](../features/transaction-insights.md) before a user signs a
+transaction, a Snap must expose the `onTransaction` entry point.
 Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
 extension, MetaMask calls the `onTransaction` handler method.
 MetaMask passes the raw unsigned transaction payload to `onTransaction`.
@@ -501,12 +501,13 @@ An object containing:
 
 #### Returns
 
-One of the following:
-
-- A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
-  for the transaction that `onTransaction` was called with.
-- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
-  [interactive UI](../features/custom-ui/interactive-ui.md).
+- An optional `severity` property that, if present, must be set to `"critical"`.
+  This feature is only available in Flask.
+- One of the following:
+  - A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
+    for the transaction that `onTransaction` was called with.
+  - An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+    [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
 
@@ -551,68 +552,6 @@ module.exports.onTransaction = async ({
       text("Here are the insights:"),
       ...(insights.map((insight) => text(insight.value))),
     ]),
-  };
-};
-```
-
-</TabItem>
-</Tabs>
-
-### Transaction severity level
-
-:::flaskOnly
-:::
-
-This feature enables transaction insight Snaps to return an optional severity level of `critical`.
-MetaMask shows a modal with the warning before the user can confirm the transaction.
-Using the previous example for `onTransaction`, the following code adds a single line to return an
-insight with the severity level `critical`: 
-
-<Tabs>
-<TabItem value="TypeScript">
-
-```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    // highlight-next-line
-    severity: "critical",
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JavaScript">
-
-```js title="index.js"
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-module.exports.onTransaction = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    // highlight-next-line
-    severity: "critical",
   };
 };
 ```
