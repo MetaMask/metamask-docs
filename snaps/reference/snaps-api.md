@@ -19,101 +19,32 @@ communicate with Snaps.
 
 ## `snap_dialog`
 
-Displays a dialog in the MetaMask UI.
-There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
-[confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
-
-:::caution
-Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [`snap_getClientStatus`](#snap_getclientstatus).
-:::
-
-### Alert dialog
-
-Displays an alert that can only be acknowledged.
+Displays a [dialog](../features/custom-ui/dialogs.md) in the MetaMask UI.
 
 #### Parameters
 
-An object containing the contents of the alert dialog:
+An object containing the contents of the dialog:
 
-- `type` - The type of dialog (`"alert"`).
+- `type` - The type of dialog.
+  Possible values are:
+  - `"alert"` - An alert that can only be acknowledged.
+  - `"confirmation"` - A confirmation that can be accepted or rejected.
+  - `"prompt"` - A prompt where the user can enter a text response.
 - One of:
   - `content` - The content of the alert, as a [custom UI](../features/custom-ui/index.md) component.
   - `id` - The ID of an [interactive interface](#snap_createinterface).
-
-#### Example
-
-```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "alert",
-    content: panel([
-      heading("Something happened in the system"),
-      text("The thing that happened is..."),
-    ]),
-  },
-});
-
-// Code that should execute after the alert has been acknowledged.
-```
-
-### Confirmation dialog
-
-Displays a confirmation that can be accepted or rejected.
-
-#### Parameters
-
-An object containing the contents of the confirmation dialog:
-
-- `type` - The type of dialog (`"confirmation"`).
-- One of:
-  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
-  - `id` - The ID of an [interactive interface](#snap_createinterface).
+- `placeholder` - Only used for `"prompt"` dialogs.
+  Text that will be in the input field when nothing is typed.
 
 #### Returns
 
-`true` if the confirmation was accepted, `false` otherwise.
+Return value depends on the dialog `type`:
 
-#### Example
-
-```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-const result = await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "confirmation",
-    content: panel([
-      heading("Would you like to take the action?"),
-      text("The action is..."),
-    ]),
-  },
-});
-
-if (result === true) {
-  // Do the action.
-}
-```
-
-### Prompt dialog
-
-Displays a prompt where the user can enter a text response.
-
-#### Parameters
-
-An object containing the contents of the prompt dialog:
-
-- `type` - The type of dialog (`"prompt"`).
-- `placeholder` - Text that will be in the input field when nothing is typed.
-- One of:
-  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
-  - `id` - The ID of an [interactive interface](#snap_createinterface).
-
-#### Returns
-
-The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
+- `"alert"` - None.
+- `"confirmation"` - `true` if the confirmation was accepted, `false` otherwise.
+- `"prompt"` - The text entered by the user if the prompt was submitted or `null` if the prompt was
+  rejected or closed.
+  If the user does not enter any text and submits the prompt, the value is an empty string.
 
 #### Example
 

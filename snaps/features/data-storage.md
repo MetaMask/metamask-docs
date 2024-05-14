@@ -18,11 +18,10 @@ However, this data can be shared across multiple dapps.
 Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
 :::
 
-## Steps
+## Request permission to store data
 
-### 1. Get permission to store data
-
-Request the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) permission.
+To store data within a Snap, first request the
+[`snap_manageState`](../reference/snaps-api.md#snap_managestate) permission.
 Add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
@@ -31,7 +30,7 @@ Add the following to your Snap's manifest file:
 }
 ```
 
-### 2. Use encrypted storage
+## Use encrypted storage
 
 By default, [`snap_manageState`](../reference/snaps-api.md#snap_managestate) automatically encrypts
 data using a Snap-specific key before storing it on the user's disk, and automatically decrypts it
@@ -77,7 +76,7 @@ If you need to access encrypted state in a background task such as a [cron job](
 unlocked before accessing state, preventing an unexpected password request.
 :::
 
-### 3. Use unencrypted storage
+## Use unencrypted storage
 
 To use unencrypted storage, set `encrypted` to `false` when storing, retrieving, or clearing data
 using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
