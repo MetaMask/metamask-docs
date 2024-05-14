@@ -10,7 +10,7 @@ using the [`snap_notify`](../reference/snaps-api.md#snap_notify) API method.
 
 ## Steps
 
-### 1. Get permission to notify users
+### 1. Request permission to notify users
 
 Request the [`snap_notify`](../reference/snaps-api.md#snap_notify) permission.
 Add the following to your Snap's manifest file:

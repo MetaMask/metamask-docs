@@ -92,10 +92,10 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 
 ### `endowment:page-home`
 
-To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
-This permission allows the Snap to specify a "home page" by exposing the
+To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must request
+the `endowment:page-home` permission. 
+This permission allows the Snap to present a dedicated UI by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../features/custom-ui/index.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
