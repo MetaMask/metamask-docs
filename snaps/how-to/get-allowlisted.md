@@ -5,11 +5,12 @@ sidebar_position: 8
 
 # Get allowlisted
 
-Once you have built your Snap, tested it, and published it to npm, you can make it available to
-MetaMask users.
+Once you have built your Snap, tested it, and published it to npm, you can make it available to MetaMask users.
 
-As part of the MetaMask Snaps Open Beta launch, individual Snaps must be put on an allowlist before users can install them.
-This means that at this time, only selected, reviewed Snaps can be installed. 
+As part of the MetaMask Snaps Open Beta launch, individual Snaps that use 
+[restricted permissions](#restricted-permissions) 
+must be put on an allowlist before users can install them.
+This means that at this time, only selected, reviewed Snaps that use restricted permissions can be installed. 
 In the future, this system will be opened up.
 
 :::caution Important
@@ -145,3 +146,22 @@ You can also update any information about your Snap using the form.
 For fields that you don't need to update, you can leave them blank or enter "N/A."
 When providing the new version to be allowlisted, you should also note whether previous versions of
 your Snap should be removed from the allowlist (effectively, replaced with the new version). 
+
+## Restricted Permissions
+
+Snaps that request restricted permissions must be allowlisted before they can be installed by users in the MetaMask Extension. 
+
+The following is a list of permissions that do require allowlisting: 
+
+- `endowment:cronjob`
+- `endowment:ethereum-provider`
+- `endowment:lifecycle-hooks`
+- `endowment:page-home`
+- `endowment:signature-insight`
+- `endowment:transaction-insight`
+- `snap_dialog`
+- `snap_getLocale`
+- `snap_manageState`
+- `snap_notify`
+
+Any permissions not on this list are _restricted_ permissions. 
