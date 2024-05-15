@@ -151,7 +151,7 @@ your Snap should be removed from the allowlist (effectively, replaced with the n
 
 Snaps that request restricted permissions must be allowlisted before they can be installed by users in the MetaMask Extension. 
 
-The following is a list of permissions that do require allowlisting: 
+The following is a list of permissions that do not require allowlisting: 
 
 - `endowment:cronjob`
 - `endowment:ethereum-provider`
