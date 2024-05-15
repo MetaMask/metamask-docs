@@ -27,16 +27,3 @@ function handleChainChanged(chainId) {
   window.location.reload();
 }
 ```
-
-## Chain IDs
-
-These are the chain IDs of the Ethereum networks that MetaMask supports by default.
-Consult [chainid.network](https://chainid.network) for more.
-
-| Hex      | Decimal  | Network                                                |
-|----------|----------|--------------------------------------------------------|
-| 0x1      | 1        | Ethereum main network (Mainnet)                        |
-| 0x5      | 5        | Goerli test network                                    |
-| 0xaa36a7 | 11155111 | Sepolia test network                                   |
-| 0xe704   | 59140    | [Linea Goerli test network](https://docs.linea.build/) |
-| 0x539    | 1337     | Localhost test networks                                |
