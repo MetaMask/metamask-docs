@@ -128,9 +128,9 @@ Edit the `files` array and add the `images/` folder:
 
 ### 3. Enable network access
 
-To enable your Snap to use the `fetch` API, enable the
-[`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) 
-permission by adding `"endowment:network-access": {}` to the `initialPermissions` object in `snap.manifest.json`:
+To enable your Snap to [access the internet using the `fetch` API](../../features/network-access.md),
+request the [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) 
+permission in `packages/snap/snap.manifest.json`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -146,7 +146,7 @@ permission by adding `"endowment:network-access": {}` to the `initialPermissions
 
 ### 4. Fetch gas fee estimates
 
-Open `/packages/snap/src/index.ts`.
+Open `packages/snap/src/index.ts`.
 This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).

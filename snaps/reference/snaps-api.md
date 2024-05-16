@@ -9,106 +9,42 @@ import TabItem from "@theme/TabItem";
 # Snaps API
 
 Snaps can communicate with and modify the functionality of MetaMask using the [Snaps API](../learn/about-snaps/apis.md#snaps-api).
-To call each method, you must first [request permission](../how-to/request-permissions.md) in the Snap
-manifest file.
+To call each method (except the [interactive UI methods](#interactive-ui-methods)), you must first
+[request permission](../how-to/request-permissions.md) in the Snap manifest file.
+
+:::note
+See the [Wallet API for Snaps](wallet-api-for-snaps.md) for methods that dapps can call to
+communicate with Snaps.
+:::
 
 ## `snap_dialog`
 
-Displays a dialog in the MetaMask UI.
-There are three types of dialogs with different parameters and return types: [alert](#alert-dialog),
-[confirmation](#confirmation-dialog), and [prompt](#prompt-dialog).
-
-:::caution
-Dialogs do not work when MetaMask is locked. To check if MetaMask is locked, use [`snap_getClientStatus`](#snap_getclientstatus).
-:::
-
-### Alert dialog
-
-Displays an alert that can only be acknowledged.
+Displays a [dialog](../features/custom-ui/dialogs.md) in the MetaMask UI.
 
 #### Parameters
 
-An object containing the contents of the alert dialog:
+An object containing the contents of the dialog:
 
-- `type` - The type of dialog (`"alert"`).
+- `type` - The type of dialog.
+  Possible values are:
+  - `"alert"` - An alert that can only be acknowledged.
+  - `"confirmation"` - A confirmation that can be accepted or rejected.
+  - `"prompt"` - A prompt where the user can enter a text response.
 - One of:
   - `content` - The content of the alert, as a [custom UI](../features/custom-ui/index.md) component.
   - `id` - The ID of an [interactive interface](#snap_createinterface).
-
-#### Example
-
-```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "alert",
-    content: panel([
-      heading("Something happened in the system"),
-      text("The thing that happened is..."),
-    ]),
-  },
-});
-
-// Code that should execute after the alert has been acknowledged.
-```
-
-### Confirmation dialog
-
-Displays a confirmation that can be accepted or rejected.
-
-#### Parameters
-
-An object containing the contents of the confirmation dialog:
-
-- `type` - The type of dialog (`"confirmation"`).
-- One of:
-  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
-  - `id` - The ID of an [interactive interface](#snap_createinterface).
+- `placeholder` - Only used for `"prompt"` dialogs.
+  Text that will be in the input field when nothing is typed.
 
 #### Returns
 
-`true` if the confirmation was accepted, `false` otherwise.
+Return value depends on the dialog `type`:
 
-#### Example
-
-```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-const result = await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "confirmation",
-    content: panel([
-      heading("Would you like to take the action?"),
-      text("The action is..."),
-    ]),
-  },
-});
-
-if (result === true) {
-  // Do the action.
-}
-```
-
-### Prompt dialog
-
-Displays a prompt where the user can enter a text response.
-
-#### Parameters
-
-An object containing the contents of the prompt dialog:
-
-- `type` - The type of dialog (`"prompt"`).
-- `placeholder` - Text that will be in the input field when nothing is typed.
-- One of:
-  - `content` - The content of the confirmation, as a [custom UI](../features/custom-ui/index.md) component.
-  - `id` - The ID of an [interactive interface](#snap_createinterface).
-
-#### Returns
-
-The text entered by the user if the prompt was submitted or `null` if the prompt was rejected or closed. If the user does not enter any text and submits the prompt, the value is an empty string.
+- `"alert"` - None.
+- `"confirmation"` - `true` if the confirmation was accepted, `false` otherwise.
+- `"prompt"` - The text entered by the user if the prompt was submitted or `null` if the prompt was
+  rejected or closed.
+  If the user does not enter any text and submits the prompt, the value is an empty string.
 
 #### Example
 
@@ -828,25 +764,16 @@ await snap.request({
 
 ## `snap_notify`
 
-Displays a notification in MetaMask or natively in the browser.
+Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
 Snaps can trigger a short notification text for actionable or time sensitive information.
-
-:::info Notification rate limits
-The ability for Snaps to trigger notifications is rate-limited to:
-
-- 2 native notifications per 5 minutes per Snap.
-- 5 in-app notifications per minute per Snap.
-:::
 
 #### Parameters
 
 An object containing the contents of the notification:
 
-- `type` - The notification type.
-  Specify `inApp` to display the notification in the MetaMask UI, and `native` to display the
-  notification in the browser.
-  We recommend using `inApp` because there's no guarantee that native notifications are displayed to
-  the user.
+- `type` - The notification type (`"inApp"` or `"native"`).
+  We recommend using `type: "inApp"` because there's no guarantee that native notifications are
+  displayed to the user.
 - `message` - A message to show in the notification.
 
 #### Example
@@ -867,9 +794,6 @@ The following methods are used in [interactive UI](../features/custom-ui/interac
 These methods do not require requesting permission in the Snap manifest file.
 
 ### `snap_createInterface`
-
-:::flaskOnly
-:::
 
 Creates an interactive interface for use in [interactive UI](../features/custom-ui/interactive-ui.md).
 
@@ -910,9 +834,6 @@ await snap.request({
 ```
 
 ### `snap_getInterfaceState`
-
-:::flaskOnly
-:::
 
 Gets the state of an interactive interface by its ID.
 For use in [interactive UI](../features/custom-ui/interactive-ui.md).
@@ -977,9 +898,6 @@ console.log(state);
 ```
 
 ### `snap_updateInterface`
-
-:::flaskOnly
-:::
 
 Updates an interactive interface.
 For use in [interactive UI](../features/custom-ui/interactive-ui.md).

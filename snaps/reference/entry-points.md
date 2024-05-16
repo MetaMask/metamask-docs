@@ -1,6 +1,6 @@
 ---
 description: See the Snaps entry points reference.
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import Tabs from '@theme/Tabs';
@@ -76,8 +76,8 @@ module.exports.onCronjob = async ({ request }) => {
 
 ## `onHomePage`
 
-To build an embedded UI in MetaMask that any user can access through the Snaps menu, a Snap must
-expose the `onHomePage` entry point.
+To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must expose
+the `onHomePage` entry point.
 MetaMask calls the `onHomePage` handler method when the user selects the Snap name in the Snaps menu.
 
 :::note
@@ -200,6 +200,58 @@ module.exports.onInstall = async () => {
 </TabItem>
 </Tabs>
 
+## `onKeyringRequest`
+
+To implement the [Account Management API](keyring-api/account-management/index.md) to integrate
+[custom EVM accounts](../features/custom-evm-accounts/index.md), an account management Snap must
+expose the `onKeyringRequest` entry point.
+Whenever the Snap receives an Account Management API request, MetaMask calls the `onKeyringRequest`
+handler method.
+
+:::note
+For MetaMask to call the Snap's `onKeyringRequest` method, you must request the
+[`endowment:keyring`](permissions.md#endowmentkeyring) permission.
+:::
+
+#### Parameters
+
+An object containing:
+
+- `origin` - The origin as a string.
+- `request` - The JSON-RPC request.
+
+#### Returns
+
+A promise containing the return of the implemented method.
+
+#### Example
+
+<Tabs>
+<TabItem value="TypeScript">
+
+```typescript title="index.ts"
+export const onKeyringRequest: OnKeyringRequestHandler = async ({
+  origin,
+  request,
+}) => {
+  // Any custom logic or extra security checks here.
+  return handleKeyringRequest(keyring, request);
+};
+```
+
+</TabItem>
+<TabItem value="JavaScript">
+
+```js title="index.js"
+module.exports.onKeyringRequest = async ({ origin, request }) => {
+  // Any custom logic or extra security checks here.
+  return handleKeyringRequest(keyring, request);
+};
+```
+
+</TabItem>
+</Tabs>
+
 ## `onNameLookup`
 
 :::flaskOnly
@@ -307,18 +359,18 @@ A promise containing the return of the implemented method.
 <TabItem value="TypeScript">
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -329,11 +381,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 ```js title="index.js"
 module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
-    case 'hello':
-      return 'world!';
+    case "hello":
+      return "world!";
 
     default:
-      throw new Error('Method not found.');
+      throw new Error("Method not found.");
   }
 };
 ```
@@ -368,7 +420,7 @@ An object containing:
 #### Returns
 
 - An optional `severity` property that, if present, must be set to `SeverityLevel.Critical`.
-- A content object displayed using [custom UI](../features/custom-ui/index.md) after the user
+- A `content` object displayed using [custom UI](../features/custom-ui/index.md) after the user
   selects the **Sign** button.
   Due to current limitations of MetaMask's signature confirmation UI, the content will only be displayed if
   the `severity` property is present and set to `SeverityLevel.Critical`.
@@ -426,10 +478,10 @@ module.exports.onSignature = async ({
 
 ## `onTransaction`
 
-To provide transaction insights before a user signs a transaction, a Snap must expose the
-`onTransaction` entry point.
-Whenever there's a contract interaction, and a transaction is submitted using the MetaMask
-extension, MetaMask calls the `onTransaction` handler method.
+To provide [transaction insights](../features/transaction-insights.md) before a user signs a
+transaction, a Snap must expose the `onTransaction` entry point.
+When a user submits a transaction in the MetaMask extension, MetaMask calls the `onTransaction`
+handler method.
 MetaMask passes the raw unsigned transaction payload to `onTransaction`.
 
 :::note
@@ -449,12 +501,13 @@ An object containing:
 
 #### Returns
 
-One of the following:
-
-- A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
-  for the transaction that `onTransaction` was called with.
-- An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
-  [interactive UI](../features/custom-ui/interactive-ui.md).
+- An optional `severity` property that, if present, must be set to `"critical"`.
+  This feature is only available in Flask.
+- One of the following:
+  - A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
+    for the transaction that `onTransaction` was called with.
+  - An `id` returned by [`snap_createInterface`](./snaps-api.md#snap_createinterface) for
+    [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
 
@@ -499,68 +552,6 @@ module.exports.onTransaction = async ({
       text("Here are the insights:"),
       ...(insights.map((insight) => text(insight.value))),
     ]),
-  };
-};
-```
-
-</TabItem>
-</Tabs>
-
-### Transaction severity level
-
-:::flaskOnly
-:::
-
-This feature enables transaction insight Snaps to return an optional severity level of `critical`.
-MetaMask shows a modal with the warning before the user can confirm the transaction.
-Using the previous example for `onTransaction`, the following code adds a single line to return an
-insight with the severity level `critical`: 
-
-<Tabs>
-<TabItem value="TypeScript">
-
-```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    // highlight-next-line
-    severity: "critical",
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JavaScript">
-
-```js title="index.js"
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-module.exports.onTransaction = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    // highlight-next-line
-    severity: "critical",
   };
 };
 ```

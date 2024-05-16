@@ -11,11 +11,17 @@ Use the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) API met
 100 MB of data to the user's disk and retrieve it at will.
 We recommend using this method for storing data in a Snap long term.
 
-## Steps
+:::caution important
+Snaps are installed in each user's MetaMask instance.
+If a Snap stores data, that data is specific to that user's MetaMask instance.
+However, this data can be shared across multiple dapps. 
+Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
+:::
 
-### 1. Get permission to store data
+## Request permission to store data
 
-Request the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) permission.
+To store data within a Snap, first request the
+[`snap_manageState`](../reference/snaps-api.md#snap_managestate) permission.
 Add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
@@ -24,7 +30,7 @@ Add the following to your Snap's manifest file:
 }
 ```
 
-### 2. Use encrypted storage
+## Use encrypted storage
 
 By default, [`snap_manageState`](../reference/snaps-api.md#snap_managestate) automatically encrypts
 data using a Snap-specific key before storing it on the user's disk, and automatically decrypts it
@@ -70,7 +76,7 @@ If you need to access encrypted state in a background task such as a [cron job](
 unlocked before accessing state, preventing an unexpected password request.
 :::
 
-### 3. Use unencrypted storage
+## Use unencrypted storage
 
 To use unencrypted storage, set `encrypted` to `false` when storing, retrieving, or clearing data
 using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).

@@ -1,6 +1,6 @@
 ---
 description: See the Snaps permissions reference.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 import Tabs from '@theme/Tabs';
@@ -92,10 +92,10 @@ See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) no
 
 ### `endowment:page-home`
 
-To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
-This permission allows the Snap to specify a "home page" by exposing the
+To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must request
+the `endowment:page-home` permission. 
+This permission allows the Snap to present a dedicated UI by exposing the
 [`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../features/custom-ui/index.md) to build an embedded home page accessible through the Snaps menu.
 
 Specify this permission in the manifest file as follows:
 
@@ -107,13 +107,17 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:keyring`
 
-For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
-the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
+For a dapp to call [Account Management API](keyring-api/account-management/index.md) methods on an
+account management Snap to integrate [custom EVM accounts](../features/custom-evm-accounts/index.md),
+the Snap must configure a list of allowed dapp URLs using the `allowedOrigins` field of the `endowment:keyring` permission.
+This permission grants a Snap access to Account Management API requests sent to the Snap, using the
+[`onKeyringRequest`](entry-points.md#onkeyringrequest) entry point.
+
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
 :::tip
-You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the Account Management API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -195,12 +199,6 @@ domain resolution is happening on Ethereum Mainnet.
 To access the internet, a Snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
 
-:::caution
-`XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
-If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
-:::
-
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -208,15 +206,6 @@ Specify this permission in the manifest file as follows:
   "endowment:network-access": {}
 }
 ```
-
-#### Same-origin policy and CORS
-
-`fetch()` requests in a Snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
-Since Snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
-header with the value `null` with outgoing requests.
-For the Snap to be able to read the response, the server must send an
-[`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
-with the value `*` or `null` in the response.
 
 ### `endowment:rpc`
 
@@ -269,7 +258,8 @@ If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 
 ### `endowment:transaction-insight`
 
-To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
+To provide [transaction insights](../features/transaction-insights.md) before a user signs a
+transaction, a Snap must request the `endowment:transaction-insight` permission.
 This permission grants a Snap read-only access to raw transaction payloads, before they're accepted
 for signing by the user, by exposing the [`onTransaction`](../reference/entry-points.md#ontransaction)
 entry point.
@@ -282,7 +272,6 @@ The default is `false`.
 :::tip
 You can modify the transaction insight logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
-
 
 Specify this permission in the manifest file as follows:
 

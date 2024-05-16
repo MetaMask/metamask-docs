@@ -1,20 +1,14 @@
 ---
 description: Display and update interactive user interfaces.
 sidebar_position: 1
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Interactive UI
 
-:::flaskOnly
-:::
-
 You can display interactive user interface (UI) components.
 Interactive UI is an extension of [custom UI](index.md).
-It allows interfaces returned from [`snap_dialog`](../../reference/snaps-api.md#snap_dialog),
-[`onTransaction`](../../reference/entry-points.md#ontransaction), and
-[`onHomePage`](../../reference/entry-points.md#onhomepage) to respond to user input.
+It allows interfaces returned from [dialogs](dialogs.md), [home pages](home-pages.md), and
+[transaction insights](../../reference/entry-points.md#ontransaction) to respond to user input.
 
 The following interactive UI components are available:
 
