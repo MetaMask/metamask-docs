@@ -14,7 +14,7 @@ manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-
 Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
 
 You can improve the security and experience of displaying your
-[ERC-20 token](#register-an-erc-20-token) or users' [NFTs](#register-nfts) in MetaMask by using the
+[ERC-20 token](#display-an-erc-20-token) or users' [NFTs](#display-nfts) in MetaMask by using the
 [`wallet_watchAsset`](/wallet/reference/wallet_watchasset) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
@@ -98,10 +98,10 @@ The add NFT interfaces look like the following:
 
 <div class="row">
     <div class="column">
-        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
 

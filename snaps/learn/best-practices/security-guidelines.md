@@ -47,10 +47,11 @@ The following are guidelines for handling and signing transactions:
 
 ## Notify users
 
-The following are guidelines for user notifications and authorizations:
+The following are guidelines for user notifications, dialogs, and authorizations:
 
-- **Transparent and consentful actions** - Before performing any of the following actions, provide a
-  prompt that displays detailed information about the action and asks the user to reject or accept it:
+- **Transparent and consentful actions** - Before performing any of the following actions, display a
+  [confirmation dialog](../../features/custom-ui/dialogs.md#display-a-confirmation-dialog) that
+  contains detailed information about the action and asks the user to reject or accept it:
   - **Modifying or reading state.** (In general, notify the user about any state changes.)
   - **Switching networks or accounts.**
   - **Deriving or generating key pairs, accounts, or smart contracts.**
@@ -174,7 +175,7 @@ The following are guidelines for validating RPC parameters and handling values:
 Avoid using the following deprecated methods:
 
 - `wallet_enable`, which is deprecated in favor of
-  [`wallet_requestSnaps`](/wallet/reference/wallet_requestsnaps).
+  [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
 
 - `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../../reference/snaps-api.md#snap_dialog).
 

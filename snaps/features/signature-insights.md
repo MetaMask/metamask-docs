@@ -1,6 +1,6 @@
 ---
 description: Provide insights to your users in MetaMask's signature confirmation flow.
-sidebar_position: 9
+sidebar_position: 11
 sidebar_custom_props:
   flask_only: true
 ---
@@ -40,13 +40,7 @@ permission object, and set it to `true`:
 }
 ```
 
-When requesting this permission, the following displays in the MetaMask UI when a user installs the Snap:
-
-<p align="center">
-<img src={require("../assets/signature-insights-permission.png").default} alt="Signature insights permission" style={{border: "1px solid #DCDCDC"}} />
-</p>
-
-### 2. Implement `onSignature` and export it from `index.ts`
+### 2. Implement the `onSignature` entry point
 
 Expose an [`onSignature`](../reference/entry-points.md#onsignature) entry point, which receives a
 `signature` object.
