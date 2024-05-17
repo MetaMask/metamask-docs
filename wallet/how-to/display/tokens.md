@@ -6,10 +6,10 @@ sidebar_position: 1
 # Display tokens
 
 When a user opens MetaMask, they're shown some major tokens by default.
-However, to display most custom ERC-20 tokens, the user must [add the token
-manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
-To display a user's NFTs, the user must [explicitly turn on NFT autodetection or add their NFTs
-manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
+However, to display most custom ERC-20 tokens, the user must [turn on token autodetection or add the token
+manually](https://support.metamask.io/managing-my-tokens/custom-tokens/how-to-display-tokens-in-metamask/).
+To display a user's NFTs, the user must [turn on NFT autodetection or add their NFTs
+manually](https://support.metamask.io/nfts/nft-tokens-in-your-metamask-wallet/).
 
 Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
 
@@ -19,11 +19,14 @@ You can improve the security and experience of displaying your
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
 
-:::tip Displaying NFTs
-With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
-autodetection disabled.
-Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
-With `wallet_watchAsset`, users can add NFTs from other networks.
+:::tip
+With `wallet_watchAsset`, you can prompt users to add their ERC-20 tokens and NFTs even when they
+have token autodetection or NFT autodetection disabled.
+
+Also, token autodetection only detects ERC-20 tokens on
+[certain networks](https://support.metamask.io/managing-my-tokens/custom-tokens/how-to-display-tokens-in-metamask/#enhanced-token-detection),
+and NFT autodetection only detects NFTs on Ethereum Mainnet.
+With `wallet_watchAsset`, users can add tokens from other networks.
 :::
 
 :::caution Experimental feature
