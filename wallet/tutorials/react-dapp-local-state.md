@@ -289,7 +289,7 @@ If you have multiple EIP-6963 wallets installed in your browser, something like 
 
 <p align="center">
 
-![View of Dapp - Wallets Detected](../assets/react-tutorial-01-final.png)
+![View of Dapp - Wallets Detected](../assets/react-tutorial-01-start.png)
 
 </p>
 
