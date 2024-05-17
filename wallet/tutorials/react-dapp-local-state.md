@@ -1,5 +1,5 @@
 ---
-description: Create a single component React dapp with local state using EIP-6963 for Multi Injected Provider Discovery.
+description: Create a single component React dapp with local state using EIP-6963.
 sidebar_position: 1
 ---
 
@@ -176,7 +176,7 @@ export const store = {
 }
 ```
 
-### 4. Synchronize provider state with React component
+### 4. Sync provider state with React component
 
 With the store in place, create a custom hook that synchronizes the provider state with the React component.
 Use the [`useSyncExternalStore`](https://react.dev/reference/react/useSyncExternalStore) React hook
@@ -194,9 +194,9 @@ export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store
 
 `useSyncExternalStore` takes three arguments:
 
-- `store.subscribe` - A subscription function to listen for changes in the external store.
-- `store.value` - A function to get the current value of the store.
-- `store.value` - An initial value for the store.
+- A subscription function to listen for changes in the external store (`store.subscribe`).
+- A function to get the current value of the store (`store.value`).
+- An initial value for the store (`store.value`).
 
 :::note
 As an alternative to `useSyncExternalStore`, you can use the `useState` React hook to manage the
@@ -417,7 +417,7 @@ If you find inconsistencies or erroneous code, feel free to create an issue on t
 ## Next steps
 
 This tutorial walked you through creating a single component dapp using Vite, detecting wallet
-providers via EIP-6963, and managing the state in React locally.
+providers using EIP-6963, and managing the state in React locally.
 You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
