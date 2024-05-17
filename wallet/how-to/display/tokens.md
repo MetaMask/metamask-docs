@@ -23,7 +23,7 @@ MetaMask wallet, without having to interact with contract addresses.
 With `wallet_watchAsset`, you can prompt users to add their ERC-20 tokens and NFTs even when they
 have token autodetection or NFT autodetection disabled.
 
-Moreover, token autodetection only detects ERC-20 tokens on
+Also, token autodetection only detects ERC-20 tokens on
 [certain networks](https://support.metamask.io/managing-my-tokens/custom-tokens/how-to-display-tokens-in-metamask/#enhanced-token-detection),
 and NFT autodetection only detects NFTs on Ethereum Mainnet.
 With `wallet_watchAsset`, users can add tokens from other networks.
