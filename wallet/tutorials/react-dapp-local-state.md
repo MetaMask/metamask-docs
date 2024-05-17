@@ -263,13 +263,6 @@ To style the buttons, update `src/App.css` to the following:
   text-align: center;
 }
 
-.metaMaskError {
-  height: 36px;
-  padding: 16px;
-  color: #EFEFEF;
-  background-color: transparent;
-}
-
 .providers {
   display: flex;
   flex-flow: column wrap;
@@ -375,7 +368,7 @@ following:
           <div>({formatAddress(userAccount)})</div>
         </div>
       }
-      <div className="mmError" style={isError ? { backgroundColor: 'brown' } : {}}>
+      <div className="mmError" style={isError ? { backgroundColor: "brown" } : {}}>
         {isError &&
           <div onClick={clearError}>
             <strong>Error:</strong> {errorMessage}
@@ -384,6 +377,17 @@ following:
       </div>
     </div>
   )
+```
+
+Add the following CSS to `src/App.css` to style the error message:
+
+```css title="App.css"
+.mmError {
+  height: 36px;
+  padding: 16px;
+  color: #EFEFEF;
+  background-color: transparent;
+}
 ```
 
 Your dapp should look similar to the following:
