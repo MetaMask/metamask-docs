@@ -21,7 +21,7 @@ For a full end-to-end tutorial that can be used in production, see the
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en/) version 18+
+- [Node.js](https://nodejs.org/en/) version 20
 
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 
@@ -33,24 +33,13 @@ For a full end-to-end tutorial that can be used in production, see the
 
 ### 1. Set up a new project
 
-Create a new project using with the following structure:
-
-```text
-simple-dapp/
-├─ src/
-│  ├─ detect.js
-├─ dist/
-│  ├─ index.html
-```
-
 Create a new project using [Vite](https://vitejs.dev/guide/):
 
 ```bash
 npm create vite@latest simple-dapp -- --template vanilla
 ```
-Ensure to include a `detect.js` file in the `src` directory of your `simple-dapp` project, if it is not already present.
 
-Then change directories:
+Change directories:
 
 ```bash
 cd simple-dapp 
@@ -62,7 +51,7 @@ Install the dependencies listed in the project's `package.json`.
 npm install    
 ```
 
-Run the development script to start a local development server.
+Run the development script to start a local development server:
 
 ```bash
 npm run dev
@@ -82,7 +71,25 @@ Install the `@metamask/detect-provider` module in your project directory:
 npm i @metamask/detect-provider
 ```
 
-Add the following code to `src/detect.js` to detect the MetaMask provider using `@metamask/detect-provider`:
+Create a `src` directory, change into it, and create a new file `detect.js`:
+
+```bash
+mkdir src
+cd src
+touch detect.js
+```
+
+Your project structure should look similar to the following:
+
+```text
+simple-dapp/
+├─ src/
+│  ├─ detect.js
+├─ dist/
+│  ├─ index.html
+```
+
+In a text editor, add the following code to `src/detect.js` to detect the MetaMask provider using `@metamask/detect-provider`:
 
 ```js title="detect.js"
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -110,9 +117,11 @@ window.addEventListener("load", setup);
 ### 3. Serve the project
 
 To test and verify your project works with MetaMask, serve your project through a local server. 
-Navigate to the project directory.
+Navigate to the simple-app project directory.
 Run the `npm run dev` command to test your application locally. 
 Open your browser and go to the provided local server URL.
+
+
 
 ### 4. Detect a user's network
 
