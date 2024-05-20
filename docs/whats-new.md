@@ -13,6 +13,14 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Added a beginner tutorial for [creating a simple dapp](/wallet/tutorials/javascript-dapp-simple) using vanilla JavaScript. 
   ([#1276](https://github.com/MetaMask/metamask-docs/pull/1276)) 
+- Updated [Snaps allowlisting guide](/snaps/how-to/get-allowlisted) with open permissions.
+  ([#1310](https://github.com/MetaMask/metamask-docs/pull/1310/))
+- Documented [Snaps transaction insights](/snaps/features/transaction-insights).
+  ([#1304](https://github.com/MetaMask/metamask-docs/pull/1304))
+- Documented [Snaps home pages](/snaps/features/custom-ui/home-pages).
+  ([#1302](https://github.com/MetaMask/metamask-docs/pull/1302))
+- Documented [Snaps dialogs](/snaps/features/custom-ui/dialogs).
+  ([#1302](https://github.com/MetaMask/metamask-docs/pull/1302))
 - Documented [Snaps network access](/snaps/features/network-access).
   ([#1301](https://github.com/MetaMask/metamask-docs/pull/1301))
 - Documented [provider API methods for removing event listeners](/wallet/reference/provider-api/#remove-event-listeners).

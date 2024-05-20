@@ -7,7 +7,7 @@ sidebar_position: 2
 
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees that
 a user pays when creating a transaction.
-The Snap provides transaction insights in the MetaMask transaction window.
+The Snap provides transaction insights in MetaMask's transaction confirmation window.
 
 ## Prerequisites
 
@@ -70,19 +70,18 @@ The default template Snap, such as the one in
 [Create a gas estimation Snap](gas-estimation.md), 
 is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose any API.
-Instead, it provides transaction insights directly in the MetaMask transaction window.
+Instead, it provides transaction insights directly in MetaMask's transaction confirmation window.
 
 In particular, the Snap shows the user the percentage of gas fees they would pay for their transaction.
 It gets the current gas price by calling the
 [`eth_gasPrice`](/wallet/reference/eth_gasPrice) RPC
 method using the global Ethereum provider made available to Snaps.
 
-To enable your Snap to provide transaction insights and use the global Ethereum provider, open
-`packages/snap/snap.manifest.json` in a text editor.
-Request the
+To enable your Snap to provide [transaction insights](../../features/transaction-insights.md) and
+use the global Ethereum provider, request the
 [`endowment:transaction-insight`](../../reference/permissions.md#endowmenttransaction-insight) and
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider)
-permissions by modifying `initialPermissions`:
+permissions in `packages/snap/snap.manifest.json`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
@@ -178,7 +177,7 @@ To build and test your Snap:
 5. From MetaMask Flask, create a new testnet ETH transfer.
    You can set up multiple accounts to transfer between your accounts.
 
-6. In the confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+6. In the transaction confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
    Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 

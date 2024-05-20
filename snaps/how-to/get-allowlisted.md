@@ -5,11 +5,13 @@ sidebar_position: 8
 
 # Get allowlisted
 
-Once you have built your Snap, tested it, and published it to npm, you can make it available to
-MetaMask users.
+Once you have built your Snap, tested it, and published it to npm, you can make it available to MetaMask users.
 
-As part of the MetaMask Snaps Open Beta launch, individual Snaps must be put on an allowlist before users can install them.
-This means that at this time, only selected, reviewed Snaps can be installed. 
+If your Snap only uses [open permissions](#open-permissions), anyone can install it on the MetaMask extension. 
+However, Snaps that use 
+[protected permissions](#open-permissions) 
+must be put on an allowlist before users can install them.
+This means that at this time, for Snaps that use protected permissions, only those that are selected and reviewed can be installed. 
 In the future, this system will be opened up.
 
 :::caution Important
@@ -145,3 +147,23 @@ You can also update any information about your Snap using the form.
 For fields that you don't need to update, you can leave them blank or enter "N/A."
 When providing the new version to be allowlisted, you should also note whether previous versions of
 your Snap should be removed from the allowlist (effectively, replaced with the new version). 
+
+## Open permissions
+
+The following is a list of permissions that do not require allowlisting: 
+
+- [`endowment:cronjob`](../reference/permissions.md#endowmentcronjob)
+- [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider)
+- [`endowment:lifecycle-hooks`](../reference/permissions.md#endowmentlifecycle-hooks)
+- [`endowment:page-home`](../reference/permissions.md#endowmentpage-home)
+- [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
+- [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
+- [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
+- [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale)
+- [`snap_manageState`](../reference/snaps-api.md#snap_managestate)
+- [`snap_notify`](../reference/snaps-api.md#snap_notify)
+
+If your Snap only uses permissions from this list, 
+it can be installed in the MetaMask extension without inclusion on the allowlist. 
+
+Any permissions not on this list are _protected permissions_ and require allowlisting. 

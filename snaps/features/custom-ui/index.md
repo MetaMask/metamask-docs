@@ -6,12 +6,13 @@ sidebar_position: 4
 # Custom UI
 
 You can display custom user interface (UI) components using the
-[`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) module with
-the following methods and entry points:
+[`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) module when
+implementing the following features:
 
-- [`snap_dialog`](../../reference/snaps-api.md#snap_dialog)
-- [`onTransaction`](../../reference/entry-points.md#ontransaction) 
-- [`onHomePage`](../../reference/entry-points.md#onhomepage)
+- [Dialogs](dialogs.md)
+- [Home pages](home-pages.md)
+- [Transaction insights](../../reference/entry-points.md#ontransaction)
+- [Signature insights](../signature-insights.md)
 
 To use custom UI, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)
 using the following command:
