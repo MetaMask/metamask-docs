@@ -110,8 +110,7 @@ write();
 
 ## Benefits of using the Infura API with Wagmi
 
-As mobile dapps may not have a continuous connection with MetaMask when using Wagmi, read-only requests
-can fail, resulting in a suboptimal user experience.
+Mobile dapps might lose their continuous connection with MetaMask, causing read-only requests to fail.
 
 These are some errors that might occur in mobile environments:
 
