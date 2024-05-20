@@ -11,6 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2024
 
+- Updated [Snaps Allowlisting Guide](/snaps/how-to/get-allowlisted.md#open-permissions) with "Open Permissions."
 - Documented [Snaps transaction insights](/snaps/features/transaction-insights).
   ([#1304](https://github.com/MetaMask/metamask-docs/pull/1304))
 - Documented [Snaps home pages](/snaps/features/custom-ui/home-pages).
