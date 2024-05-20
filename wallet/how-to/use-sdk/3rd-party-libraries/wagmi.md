@@ -110,18 +110,15 @@ write();
 
 ## Benefits of using the Infura API with Wagmi
 
-Wagmi is not optimized for mobile environments.
-This limitation becomes evident when making read-only requests, which are queries that fetch data
-from the blockchain without making a transaction.
-Since mobile dapps might not maintain a continuous connection to MetaMask, these read-only requests
+As mobile dapps may not have a continuous connection with MetaMask, this means read-only requests
 can fail, leading to a suboptimal user experience.
 
 These are some errors that might occur in mobile environments:
 
 ![Wagmi errors](../../../assets/wagmi-errors.png)
 
-To overcome this limitation in mobile dapps that rely on Wagmi, use the Infura API to make read-only
-requests.
+To overcome this limitation in mobile dapps that rely on a continuous connection with MetaMask, 
+we can use the Infura API to make read-only requests.
 You can do this by [configuring the SDK with an Infura API key](#2-configure-the-sdk).
 This approach offloads the read operations to Infura's nodes, reducing the load on your own
 infrastructure and ensuring high availability and reliability, independent of the user's wallet connection.
