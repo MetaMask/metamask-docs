@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2024
 
+- Documented [Snaps initial connections](/snaps/reference/permissions/#initial-connections).
+  ([#1318](https://github.com/MetaMask/metamask-docs/pull/1318/))
 - Updated [Snaps allowlisting guide](/snaps/how-to/get-allowlisted) with open permissions.
   ([#1310](https://github.com/MetaMask/metamask-docs/pull/1310/))
 - Documented [Snaps transaction insights](/snaps/features/transaction-insights).
