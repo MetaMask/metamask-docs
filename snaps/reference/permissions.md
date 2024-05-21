@@ -256,6 +256,8 @@ Specify this caveat in the manifest file as follows:
 If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
 :::
 
+If you want to grant a website or Snap an automatic connection to your Snap, skipping the need for users to confirm a connection, you can use [`initialConnections`](#initial-connections). 
+
 ### `endowment:transaction-insight`
 
 To provide [transaction insights](../features/transaction-insights.md) before a user signs a
@@ -401,3 +403,34 @@ The following is an example `eth_accounts` permission:
 ```
 
 The user can revoke this permission by going to the Snap's settings under **Snap permissions**.
+
+## Initial Connections
+
+A Snap can authorize specific websites or Snaps to automatically connect, 
+skipping the need for users to manually confirm a connection when the website or Snap calls [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps). 
+
+The following is an example of specifying `initialConnections` for a website: 
+
+```json title="snap.manifest.json"
+"initialConnections": {
+  "https://voyager-snap.linea.build": {}
+},
+```
+
+When a user visits the website and the website calls `wallet_requestSnaps`, if the Snap is already installed, the website will connect immediately and will be able to make further calls to the Snap. 
+If the Snap is not installed, the user will see a confirmation to install the Snap. 
+
+When testing, you can specify the local site. 
+For example: 
+
+```json title="snap.manifest.json" 
+"initialConnections": {
+  "http://localhost:8000": {}
+},
+```
+
+It is recommended to remove local sites before deploying your Snap to production.
+
+:::note
+`initialConnections` is not a replacement for [`endowment:rpc`](#endowmentrpc). It should be used alongside the endowment to grant an automatic connection. 
+:::
