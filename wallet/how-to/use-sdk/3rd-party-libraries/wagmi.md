@@ -110,7 +110,8 @@ write();
 
 ## Benefits of using the Infura API with Wagmi
 
-Mobile dapps might lose their continuous connection with MetaMask, causing read-only requests to fail.
+Read-only requests are blockchain requests that do not require user wallet interaction.
+Mobile dapps can lose their continuous connection with MetaMask, causing read-only requests to fail.
 
 These are some errors that might occur in mobile environments:
 
