@@ -404,7 +404,7 @@ The following is an example `eth_accounts` permission:
 
 The user can revoke this permission by going to the Snap's settings under **Snap permissions**.
 
-## Initial Connections
+## Initial connections
 
 A Snap can authorize specific websites or Snaps to automatically connect, 
 skipping the need for users to manually confirm a connection when the website or Snap calls [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps). 
@@ -417,8 +417,8 @@ The following is an example of specifying `initialConnections` for a website:
 },
 ```
 
-When a user visits the website and the website calls `wallet_requestSnaps`, if the Snap is already installed, the website will connect immediately and will be able to make further calls to the Snap. 
-If the Snap is not installed, the user will see a confirmation to install the Snap. 
+When a user visits the website and the website calls `wallet_requestSnaps`, if the Snap is already installed, the website connects immediately and can make further calls to the Snap. 
+If the Snap is not installed, the user sees a confirmation to install the Snap. 
 
 When testing, you can specify the local site. 
 For example: 
@@ -429,8 +429,8 @@ For example:
 },
 ```
 
-It is recommended to remove local sites before deploying your Snap to production.
+We recommend removing local sites before deploying your Snap to production.
 
 :::note
-`initialConnections` is not a replacement for [`endowment:rpc`](#endowmentrpc). It should be used alongside the endowment to grant an automatic connection. 
+`initialConnections` is not a replacement for [`endowment:rpc`](#endowmentrpc). Use `initialConnections` alongside `endowment:rpc` to grant an automatic connection. 
 :::
