@@ -48,6 +48,10 @@ Using `eth_sign` is a dangerous phishing risk.
 To enhance user security, MetaMask no longer supports using `eth_sign`.
 Use [`eth_signTypedData_v4`](#eth_signtypeddata_v4) or [`personal_sign`](#personal_sign) instead.
 
+:::note
+See [MIP-X] for more information about the discontinuation of `eth_sign`.
+:::
+
 ### `eth_signTypedData_v1` and `eth_signTypedData_v3`
 
 `eth_signTypedData` was introduced by [EIP-712](https://eips.ethereum.org/EIPS/eip-712).
