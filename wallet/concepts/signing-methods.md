@@ -49,7 +49,8 @@ To enhance user security, MetaMask no longer supports using `eth_sign`.
 Use [`eth_signTypedData_v4`](#eth_signtypeddata_v4) or [`personal_sign`](#personal_sign) instead.
 
 :::note
-See [MIP-X] for more information about the discontinuation of `eth_sign`.
+See [MIP-3](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-3.md) for
+more information about the discontinuation of `eth_sign`.
 :::
 
 ### `eth_signTypedData_v1` and `eth_signTypedData_v3`
