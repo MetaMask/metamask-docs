@@ -25,6 +25,8 @@
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
+    "@metamask/profile-sync-controller": "^0.0.0",
+    "@tanstack/react-query": "^5.37.1",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
     "node-polyfill-webpack-plugin": "^2.0.1",
@@ -34,7 +36,8 @@
     "react-dom": "^18.0.0",
     "react-player": "^2.13.0",
     "remark-codesandbox": "^0.10.1",
-    "remark-docusaurus-tabs": "^0.2.0"
+    "remark-docusaurus-tabs": "^0.2.0",
+    "wagmi": "^2.9.5"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.0.0",
