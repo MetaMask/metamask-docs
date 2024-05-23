@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2024
 
+- Discontinued support for [`eth_sign`](/wallet/concepts/signing-methods/#eth_sign).
+  ([#1319](https://github.com/MetaMask/metamask-docs/pull/1319/))
 - Documented [Snaps initial connections](/snaps/reference/permissions/#initial-connections).
   ([#1318](https://github.com/MetaMask/metamask-docs/pull/1318/))
 - Updated [Snaps allowlisting guide](/snaps/how-to/get-allowlisted) with open permissions.
