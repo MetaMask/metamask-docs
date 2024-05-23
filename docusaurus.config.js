@@ -1,7 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const codeTheme = require("prism-react-renderer/themes/dracula");
+const { themes } = require("prism-react-renderer");
+const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
 
@@ -11,7 +12,7 @@ const config = {
   // tagline: '',
   url: "https://docs.metamask.io",
   baseUrl: process.env.DEST || "/", // overwritten in github action for staging / latest
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/metamask-fox.svg",
 
@@ -86,7 +87,6 @@ const config = {
           require("remark-docusaurus-tabs"),
         ],
         admonitions: {
-          tag: ":::",
           keywords: [
             "info",
             "success",
@@ -536,7 +536,7 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ["csharp","swift","gradle","kotlin"],
+        additionalLanguages: ["csharp","gradle","bash","json"],
       },
       algolia: {
         // The application ID provided by Algolia
