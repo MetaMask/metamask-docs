@@ -41,14 +41,17 @@ Use `eth_signTypedData_v4` or `personal_sign`.
 
 ### `eth_sign`
 
-`eth_sign` allows signing an arbitrary hash, which means it can be used to sign transactions, or any other
-data. Using `eth_sign` is a dangerous phishing risk.
+`eth_sign` allows signing an arbitrary hash, which means an attacker can use it to request users to
+sign transactions or any other data.
+Using `eth_sign` is a dangerous phishing risk.
 
-MetaMask disables `eth_sign` by default and does not recommend using `eth_sign` in production.
-Some applications (usually internal administrator panels) use `eth_sign` for ease of
-use, or due to an inability to change the associated dapp.
-If a wallet user must interact with a dapp that uses `eth_sign` and accepts the risks,
-the wallet user can re-enable `eth_sign` through advanced settings.
+To enhance user security, MetaMask no longer supports using `eth_sign`.
+Use [`eth_signTypedData_v4`](#eth_signtypeddata_v4) or [`personal_sign`](#personal_sign) instead.
+
+:::note
+See [MIP-3](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-3.md) for
+more information about the discontinuation of `eth_sign`.
+:::
 
 ### `eth_signTypedData_v1` and `eth_signTypedData_v3`
 
