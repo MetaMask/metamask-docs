@@ -5798,6 +5798,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abitype@npm:1.0.0":
+  version: 1.0.0
+  resolution: "abitype@npm:1.0.0"
+  peerDependencies:
+    typescript: ">=5.0.4"
+    zod: ^3 >=3.22.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+    zod:
+      optional: true
+  checksum: ea2c0548c3ba58c37a6de7483d63389074da498e63d803b742bbe94eb4eaa1f51a35d000c424058b2583aef56698cf07c696eb3bc4dd0303bc20c6f0826a241a
+  languageName: node
+  linkType: hard
+
 "abort-controller@npm:^3.0.0":
   version: 3.0.0
   resolution: "abort-controller@npm:3.0.0"
@@ -12890,6 +12905,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isows@npm:1.0.4":
+  version: 1.0.4
+  resolution: "isows@npm:1.0.4"
+  peerDependencies:
+    ws: "*"
+  checksum: a3ee62e3d6216abb3adeeb2a551fe2e7835eac87b05a6ecc3e7739259bf5f8e83290501f49e26137390c8093f207fc3378d4a7653aab76ad7bbab4b2dba9c5b9
+  languageName: node
+  linkType: hard
+
 "istextorbinary@npm:^2.2.1":
   version: 2.6.0
   resolution: "istextorbinary@npm:2.6.0"
@@ -14335,6 +14359,7 @@ __metadata:
     remark-codesandbox: ^0.10.1
     remark-docusaurus-tabs: ^0.2.0
     typescript: ^4.7.4
+    viem: ^2.13.1
     wagmi: ^2.9.5
   languageName: unknown
   linkType: soft
@@ -21455,6 +21480,27 @@ __metadata:
     typescript:
       optional: true
   checksum: c351fdea2d53d2d781ac73c964348b3b9fc5dd46f9eb53903e867705fc9e30a893cb9f2c8d7a00acdcdeca27d14eeebf976eed9f948c28c47018dc9211369117
+  languageName: node
+  linkType: hard
+
+"viem@npm:^2.13.1":
+  version: 2.13.1
+  resolution: "viem@npm:2.13.1"
+  dependencies:
+    "@adraffy/ens-normalize": 1.10.0
+    "@noble/curves": 1.2.0
+    "@noble/hashes": 1.3.2
+    "@scure/bip32": 1.3.2
+    "@scure/bip39": 1.2.1
+    abitype: 1.0.0
+    isows: 1.0.4
+    ws: 8.13.0
+  peerDependencies:
+    typescript: ">=5.0.4"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: d03af7645db1ba347a532d64de727206b13cfb77d7728d7751fc9550b8f76bb169793dcb0d9c95cd01571de999a11d022010c4def055108da4c7431472153c4c
   languageName: node
   linkType: hard
 
