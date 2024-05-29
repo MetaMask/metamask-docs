@@ -76,6 +76,11 @@ method from your dapp.
 If a user doesn't have the Snap installed in their MetaMask wallet, MetaMask prompts the user to
 install the Snap.
 
+:::note
+A Snap can grant a dapp an [automatic connection](../how-to/allow-automatic-connections.md),
+skipping the need for users to confirm a connection.
+:::
+
 The following are different possible outcomes from calling `wallet_requestSnaps`.
 
 ### User rejects the installation request

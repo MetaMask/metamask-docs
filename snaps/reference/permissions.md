@@ -256,7 +256,7 @@ Specify this caveat in the manifest file as follows:
 If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
 :::
 
-If you want to grant a website or Snap an automatic connection to your Snap, skipping the need for
+If you want to grant a dapp or Snap an automatic connection to your Snap, skipping the need for
 users to confirm a connection, you can use [`initialConnections`](../how-to/allow-automatic-connections.md). 
 
 ### `endowment:transaction-insight`
