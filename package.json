@@ -70,6 +70,10 @@
   "packageManager": "yarn@3.4.1",
   "lavamoat": {
     "allowScripts": {
+      "wagmi>@wagmi/connectors>@metamask/sdk>eciesjs>secp256k1": false,
+      "wagmi>@wagmi/connectors>cbw-sdk>keccak": false,
+      "wagmi>viem>ws>bufferutil": false,
+      "wagmi>viem>ws>utf-8-validate": false,
       "@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
       "@docusaurus/core>core-js": false,
       "@metamask/docusaurus-openrpc>@docusaurus/plugin-content-docs>@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
