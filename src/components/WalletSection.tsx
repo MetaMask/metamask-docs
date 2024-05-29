@@ -6,7 +6,7 @@ const CardList: CardItem[] = [
     title: "🏁 Wallet quickstart",
     link: "/wallet/how-to/connect",
     description: (<>
-      Get started quickly by connecting your React dapp to MetaMask and other wallets in your users' browsers.
+      Get started quickly by connecting your React dapp to MetaMask and other wallets in your users&apos; browsers.
     </>),
   },
   {
