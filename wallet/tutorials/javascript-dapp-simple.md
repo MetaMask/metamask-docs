@@ -57,7 +57,43 @@ Run the development script to start a local development server:
 npm run dev
 ```
 
-### 2. Detect MetaMask
+Create the main JavaScript file and update the HTML file to include the basic structure of the dapp.
+
+Create the `main.js` file:
+
+```bash
+touch main.js
+```
+
+In `main.js`, add the following:
+
+```js title="main.js"
+import './style.css'
+
+document.querySelector('#app').innerHTML = `
+  <button class="enableEthereumButton">Enable Ethereum</button>
+  <h2>Account: <span class="showAccount"></span></h2>`;
+```
+
+Update `index.html` to include the script:
+
+```html title="index.html"
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple dapp</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+```
+
+### 3. Detect MetaMask
 
 :::caution
 
@@ -71,22 +107,10 @@ Install the `@metamask/detect-provider` module in your project directory:
 npm i @metamask/detect-provider
 ```
 
-Create a `src` directory, change into it, and create a new file `detect.js`:
+Create a `src` directory and create a new file `detect.js`:
 
 ```bash
-mkdir src
-cd src
-touch detect.js
-```
-
-Your project structure should look similar to the following:
-
-```text
-simple-dapp/
-├─ src/
-│  ├─ detect.js
-├─ dist/
-│  ├─ index.html
+mkdir src && touch src/detect.js
 ```
 
 In a text editor, add the following code to `src/detect.js` to detect the MetaMask provider using `@metamask/detect-provider`:
@@ -114,14 +138,8 @@ function startApp(provider) {
 window.addEventListener("load", setup);
 ```
 
-### 3. Serve the project
-
-To test and verify your project works with MetaMask, serve your project through a local server. 
-Navigate to the simple-app project directory.
 Run the `npm run dev` command to test your application locally. 
 Open your browser and go to the provided local server URL.
-
-
 
 ### 4. Detect a user's network
 
@@ -180,15 +198,29 @@ async function getAccount() {
 }
 ```
 
-Add the following HTML code to the body of `dist/index.html`, which displays the button and the current account:
+Update `index.html` with the following HTML code, which displays the button and the current account:
 
 ```html title="index.html"
-<!-- Display a connect button and the current account -->
-<button class="enableEthereumButton">Enable Ethereum</button>
-<h2>Account: <span class="showAccount"></span></h2>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple dapp</title>
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="src/detect.js"></script>
+  </head>
+  <body>
+    <!-- Display a connect button and the current account -->
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <h2>Account: <span class="showAccount"></span></h2>
+  </body>
+</html>
 ```
 
-To complete the tutorial, [run the project on a local server](#3-serve-the-project) to view the live dapp.
+Save your changes and run `npm run dev` in the `simple-dapp` project directory.
+Navigate to the local server URL to view the live dapp.
 
 ## Example
 
@@ -278,20 +310,22 @@ ethereumButton.addEventListener('click', async () => {
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Simple dapp</title>
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="src/detect.js"></script>
   </head>
   <body>
-    <div id="app">
-      <!-- Display a connect button and the current account -->
-      <button class="enableEthereumButton">Enable Ethereum</button>
-      <h2>Account: <span class="showAccount"></span></h2>
-    </div>
-    <script type="module" src="/detect.js"></script>
+    <!-- Display a connect button and the current account -->
+    <button class="enableEthereumButton">Enable Ethereum</button>
+    <h2>Account: <span class="showAccount"></span></h2>
   </body>
 </html>
 ```
 
-## Conclusion
+## Next steps
 
 You've successfully created a simple dapp and connected it to MetaMask using JavaScript, Vite, and the `window.ethereum` provider.
 With this setup, your dapp can interact with MetaMask and allow users to securely access accounts and perform transactions on the Ethereum blockchain.
+
+As a next step, you can create a [React dapp with local state](/react-dapp-local-state/). 
+This follow-up tutorial walks you through integrating a simple React dapp with MetaMask using a single JSX component for managing local state, and the Vite build tool with React and TypeScript to create the dapp.
