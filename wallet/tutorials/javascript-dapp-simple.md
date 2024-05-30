@@ -1,7 +1,7 @@
 ---
 description: Create a simple dapp to integrate with MetaMask.
 toc_max_heading_level: 4
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Create a simple dapp 
