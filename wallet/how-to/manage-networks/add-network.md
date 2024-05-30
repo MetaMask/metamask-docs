@@ -5,6 +5,10 @@ sidebar_position: 2
 
 # Add a network
 
+:::note
+See the [Connect to Hardhat Network](../how-to/run-devnet.md) documentation to run a personal Ethereum development network using Hardhat and connect MetaMask to it.
+:::
+
 In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
