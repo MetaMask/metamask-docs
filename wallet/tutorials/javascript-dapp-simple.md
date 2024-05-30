@@ -141,6 +141,8 @@ window.addEventListener("load", setup);
 Run the `npm run dev` command to test your application locally. 
 Open your browser and go to the provided local server URL.
 
+![Enable button](../assets/tutorials/beginner-tutorial/enable-button.png)
+
 ### 4. Detect a user's network
 
 [Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
@@ -221,6 +223,12 @@ Update `index.html` with the following HTML code, which displays the button and 
 
 Save your changes and run `npm run dev` in the `simple-dapp` project directory.
 Navigate to the local server URL to view the live dapp.
+
+![Connect and access dapp](../assets/tutorials/beginner-tutorial/connect.png)
+
+You are prompted to connect to MetaMask. Follow the prompts to connect and access your account.
+
+![View account](../assets/tutorials/beginner-tutorial/account.png)
 
 ## Example
 
