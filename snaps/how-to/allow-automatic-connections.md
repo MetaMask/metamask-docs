@@ -9,15 +9,14 @@ You can authorize specific dapps or Snaps to automatically connect to your Snap,
 for users to manually confirm a connection when the dapp or Snap calls
 [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
 
-To do so, add an `initialConnections` field in the Snap
-[manifest file](../learn/about-snaps/files.md#manifest-file), specifying each website you want to
+To do so, add an [`initialConnections`](../reference/permissions.md#initial-connections) field in
+the Snap manifest file, specifying each website you want to
 allow to automatically connect.
 For example:
 
 ```json title="snap.manifest.json"
 "initialConnections": {
-  "https://my-secure-site.com": {},
-  "https://www.other-allowed-site.com": {}
+  "https://voyager-snap.linea.build": {}
 }
 ```
 
@@ -41,3 +40,8 @@ We recommend removing local sites before deploying your Snap to production.
 `initialConnections` is not a replacement for [`endowment:rpc`](../reference/permissions.md#endowmentrpc).
 `endowment:rpc` is still required to allow dapps or Snaps to call RPC methods of your Snap.
 :::
+
+## Example
+
+See the [Linea Voyager Snap](https://github.com/Consensys/linea-voyager-snap) for a full example of
+allowing an automatic connection.
