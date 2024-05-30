@@ -407,10 +407,10 @@ The user can revoke this permission by going to the Snap's settings under **Snap
 
 ## Initial connections
 
-A Snap can authorize specific dapps or Snaps to automatically connect,
+A Snap can authorize specific dapps or Snaps to automatically connect, 
 skipping the need for users to manually confirm a connection when the website or Snap calls [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
 
-The following is an example of specifying `initialConnections` for a website:
+The following is an example of specifying `initialConnections` for a dapp:
 
 ```json title="snap.manifest.json"
 "initialConnections": {
@@ -418,7 +418,7 @@ The following is an example of specifying `initialConnections` for a website:
 }
 ```
 
-When a user visits the website and the website calls `wallet_requestSnaps`, if the Snap is already installed, the website connects immediately and can make further calls to the Snap.
+When a user visits the dapp and the dapp calls `wallet_requestSnaps`, if the Snap is already installed, the website connects immediately and can make further calls to the Snap.
 If the Snap is not installed, the user sees a confirmation to install the Snap.
 
 Learn more about [allowing automatic connections](../how-to/allow-automatic-connections.md).
