@@ -1,0 +1,104 @@
+---
+title: "starknet_addDeclareTransaction"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Submits a new class declaration transaction.
+
+## Parameters
+
+`declare_transaction`: [*Required*] A
+[declare transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/#declare-transaction)
+object to declare a new class on StarkNet.
+
+## Returns
+
+The result of the transaction submission, including:
+
+- `transaction_hash`: The hash of the declare transaction.
+- `class_hash`: The hash of the declared class.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_addDeclareTransaction",
+    "params": {
+      "declare_transaction": {
+        "type": "DECLARE",
+        "sender_address": "0x13e3ca9a377084c37dc7eacbd1d9f8c3e3733935bcbad887c32a0e213cd6fe0",
+        "max_fee": "0x28ed6103d0000",
+        "version": "0x3",
+        "signature": [
+          "0x42527ffe9912b338983cbed67e139cfcc26a4d8cf1d1c2a85e4125fdf5f59ed", "0x636147d06fefd02ed37984b752556d4b9aefdac1a50b3df0528ec7c201ad84b"
+        ],
+        "nonce": "0x17",
+        "contract_class": {
+          "sierra_program": [
+            "0x1",
+            "0x3",
+            "0x0",
+            "0x361",
+            "0x800000000000000700000000000000000000000000000000",
+            "0x537472756374"
+          ]
+          "entry_points_by_type": {
+            "CONSTRUCTOR": [
+              {
+                "function_idx": 14,
+                "selector": "0x28ffe4ff0f226a9107253e17a904099aa4f63a02a5621de0576e5aa71bc5194"
+              }
+            ],
+            "EXTERNAL": [
+              {
+                "function_idx": 11,
+                "selector": "0x14dfa38c36b389189b8be0b1d3f9434ffcca49bf1a88f3658579d23d16368f"
+              },
+              {
+                "function_idx": 10,
+                "selector": "0x1fd12fd4580400368d8953eca1bf472ee233e7e06245d1ef8c176ff12bd3c4"
+              }
+            ],
+            "L1_HANDLER": []
+          }
+        }
+      }
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "transaction_hash": "0x121aaba2894a63cce81acabb559eb2c114f4859dc5803e0b91349ec398d2eb0",
+    "class_hash": "0x515dd668a1798214e7ca9ec90c52e267229b8104fb296a90f20b6f70baaef53"
+  },
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>

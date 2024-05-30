@@ -1,0 +1,10 @@
+- `balance`: Hexadecimal of the current balance in wei.
+- `codeHash`: The 32-byte hash of the code of the account.
+- `nonce`: The nonce of the account.
+- `storageHash`: 32 bytes. The SHA3 of the StorageRoot. All storage will deliver a Merkle proof starting with this `rootHash`.
+- `accountProof`: An array of RLP-serialized MerkleTree-Nodes, starting with the stateRoot-Node, following the path of the SHA3 (address) as key.
+- `storageProof`: An array of storage-entries as requested. Each entry is an object with these properties:
+  - `key`: The requested storage key.
+  - `value`: The storage value.
+  - `proof`: An array of RLP-serialized MerkleTree-Nodes, starting with the storageHash-Node, following the path of the SHA3 (key) as path.
+
