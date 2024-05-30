@@ -6,7 +6,7 @@ sidebar_position: 2
 # Add a network
 
 :::note
-See the [Connect to Hardhat Network](../how-to/run-devnet.md) documentation to run a personal Ethereum development network using Hardhat and connect MetaMask to it.
+See the [Connect to Hardhat Network](../how-to/run-devnet.md) documentation to run a development network using Hardhat and connect MetaMask to it.
 :::
 
 In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
