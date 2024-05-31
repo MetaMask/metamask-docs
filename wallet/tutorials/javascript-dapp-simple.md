@@ -20,17 +20,14 @@ For a full end-to-end tutorial that can be used in production, see the
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en/) version 20
-
+- [Node.js](https://nodejs.org/en/) version 20+
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
-
 - A text editor of your choice, such as [VS Code](https://code.visualstudio.com/).
-
 - [MetaMask](https://metamask.io/) installed in the browser of your choice on your development machine.
 
 ## Steps
 
-### 1. Set up a new project
+### 1. Set up the project
 
 Create a new project using [Vite](https://vitejs.dev/guide/):
 
@@ -38,27 +35,21 @@ Create a new project using [Vite](https://vitejs.dev/guide/):
 npm create vite@latest simple-dapp -- --template vanilla
 ```
 
-Change directories:
+Change into your project directory:
 
 ```bash
-cd simple-dapp 
+cd simple-dapp
 ```
 
-Install the dependencies listed in the project's `package.json`.
+Install the dependencies listed in the project's `package.json`:
 
 ```bash
-npm install    
+npm install
 ```
 
-Run the development script to start a local development server:
+### 2. Create the dapp structure
 
-```bash
-npm run dev
-```
-
-Create the main JavaScript file and update the HTML file to include the basic structure of the dapp.
-
-Create the `main.js` file:
+In your project directory, create a `main.js` file:
 
 ```bash
 touch main.js
@@ -67,9 +58,9 @@ touch main.js
 In `main.js`, add the following:
 
 ```js title="main.js"
-import './style.css'
+import "./style.css"
 
-document.querySelector('#app').innerHTML = `
+document.querySelector("#app").innerHTML = `
   <button class="enableEthereumButton">Enable Ethereum</button>
   <h2>Account: <span class="showAccount"></span></h2>`;
 ```
@@ -92,11 +83,12 @@ Update `index.html` to include the script:
 </html>
 ```
 
-### 2. Detect MetaMask
+### 3. Detect MetaMask
 
 :::caution
 
-The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes. In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md).
+The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes.
+In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md).
 
 :::
 
@@ -137,14 +129,14 @@ function startApp(provider) {
 window.addEventListener("load", setup);
 ```
 
-Run the `npm run dev` command to test your application locally. 
-Open your browser and go to the provided local server URL.
+### 4. Detect a user's network
 
-### 3. Detect a user's network
-
-[Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
+[Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests
+are submitted to the currently connected network.
 Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
-RPC method to detect the chain ID of the user's current network, and listens to the [`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the user changes networks:
+RPC method to detect the chain ID of the user's current network, and listens to the
+[`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the
+user changes networks:
 
 ```js title="detect.js"
 const chainId = await window.ethereum 
@@ -159,11 +151,14 @@ function handleChainChanged(chainId) {
 }
 ```
 
-### 4. Access a user's accounts
+### 5. Access a user's accounts
 
-To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
+To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances,
+your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling
+[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
-Add the following code to `src/detect.js`, which creates a button to allow users to connect to MetaMask from your dapp.
+Add the following code to `src/detect.js`, which creates a button to allow users to connect to
+MetaMask from your dapp.
 Selecting the button activates the call to `eth_requestAccounts`, allowing you to access the user's accounts.
 
 ```jsx title="detect.js"
@@ -218,12 +213,29 @@ Update `index.html` with the following HTML code, which displays the button and 
 </html>
 ```
 
-Save your changes and run `npm run dev` in the `simple-dapp` project directory.
+Save your changes and run the following command in your project directory to start a local
+development server:
+
+```bash
+npm run dev
+```
+
 Navigate to the local server URL to view the live dapp.
+Something like the following displays:
+
+<p align="center">
+<img src={require("../assets/tutorials/beginner-tutorial/enable-button.png").default} alt="Enable button" width="500px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+When you select the **Enable Ethereum** button, you are prompted to connect to MetaMask.
 
 ![Connect and access dapp](../assets/tutorials/beginner-tutorial/connect.png)
 
-You are prompted to connect to MetaMask. Follow the prompts to connect and access your account.
+After connecting, your connected account displays:
+
+<p align="center">
+<img src={require("../assets/tutorials/beginner-tutorial/account.png").default} alt="View account" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ![View account](../assets/tutorials/beginner-tutorial/account.png)
 
@@ -239,71 +251,65 @@ You can copy the following full examples to get started quickly.
 /* Detect the MetaMask Ethereum provider */
 /*****************************************/
 
-import detectEthereumProvider from '@metamask/detect-provider';
+import detectEthereumProvider from "@metamask/detect-provider";
 
-const provider = await detectEthereumProvider();
+async function setup() {
+  const provider = await detectEthereumProvider();
 
-if (!provider) {
-  console.log('Please install MetaMask!');
-} else {
-  if (provider !== window.ethereum) {
-    console.error('Do you have multiple wallets installed?');
+  if (provider && provider === window.ethereum) {
+    console.log("MetaMask is available!");
+    startApp(provider);
+  } else {
+    console.log("Please install MetaMask!");
   }
 }
+
+function startApp(provider) {
+  if (provider !== window.ethereum) {
+    console.error("Do you have multiple wallets installed?");
+  }
+}
+
+window.addEventListener("load", setup);
 
 /**********************************************************/
 /* Handle chain (network) and chainChanged (per EIP-1193) */
 /**********************************************************/
 
-const handleChainChanged = () => {
+const chainId = await window.ethereum 
+  .request({ method: "eth_chainId" });
+
+window.ethereum
+  .on("chainChanged", handleChainChanged);
+
+function handleChainChanged(chainId) {
   window.location.reload();
-}; //Reload the page to reflect the new chain.
-
-window.ethereum.on('chainChanged', handleChainChanged);
-
-/***********************************************************/
-/* Handle user accounts and accountsChanged (per EIP-1193) */
-/***********************************************************/
-
-let currentAccount = null;
-
-const handleAccountsChanged = (accounts) => {
-  if (accounts.length === 0) {
-    console.log('Please connect to MetaMask.');
-  } else if (accounts[0] !== currentAccount) {
-    currentAccount = accounts[0];
-    showAccount.innerHTML = currentAccount;
-  }
-};
-
-window.ethereum.request({ method: 'eth_accounts' })
-  .then(handleAccountsChanged)
-  .catch((err) => {
-    console.error(err);
-  });
-
-window.ethereum.on('accountsChanged', handleAccountsChanged);
+}
 
 /*********************************************/
 /* Access the user's accounts (per EIP-1102) */
 /*********************************************/
 
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const showAccount = document.querySelector('.showAccount');
+const ethereumButton = document.querySelector(".enableEthereumButton");
+const showAccount = document.querySelector(".showAccount");
 
-ethereumButton.addEventListener('click', async () => {
-  try {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts[0];
-    showAccount.innerHTML = account;
-  } catch (err) {
-    if (err.code === 4001) {
-      console.log('Please connect to MetaMask.');
-    } else {
-      console.error(err);
-    }
-  }
+ethereumButton.addEventListener("click", () => {
+  getAccount();
 });
+
+async function getAccount() {
+  const accounts = await window.ethereum
+    .request({ method: "eth_requestAccounts" })
+      .catch((err) => {
+        if (err.code === 4001) {
+          console.log("Please connect to MetaMask.");
+        } else {
+          console.error(err);
+        }
+      });
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}
 ```
 
 ### HTML
@@ -320,7 +326,6 @@ ethereumButton.addEventListener('click', async () => {
     <script type="module" src="src/detect.js"></script>
   </head>
   <body>
-    <!-- Display a connect button and the current account -->
     <button class="enableEthereumButton">Enable Ethereum</button>
     <h2>Account: <span class="showAccount"></span></h2>
   </body>
@@ -330,7 +335,8 @@ ethereumButton.addEventListener('click', async () => {
 ## Next steps
 
 You've successfully created a simple dapp and connected it to MetaMask using JavaScript, Vite, and the `window.ethereum` provider.
-With this setup, your dapp can interact with MetaMask and allow users to securely access accounts and perform transactions on the Ethereum blockchain.
+With this setup, your dapp can interact with MetaMask and allow users to securely access accounts and send transactions on the Ethereum blockchain.
 
-As a next step, you can create a [React dapp with local state](/react-dapp-local-state/). 
-This follow-up tutorial walks you through integrating a simple React dapp with MetaMask using a single JSX component for managing local state, and the Vite build tool with React and TypeScript to create the dapp.
+As a next step, you can create a [React dapp with local state](react-dapp-local-state.md). 
+This follow-up tutorial walks you through integrating a simple React dapp with MetaMask using a
+single JSX component for managing local state, and the Vite build tool with React and TypeScript to create the dapp.
