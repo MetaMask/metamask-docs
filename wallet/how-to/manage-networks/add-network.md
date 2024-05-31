@@ -32,7 +32,7 @@ The confirmations look like the following:
 
 :::note
 
-To add a local development network like Hardhat to MetaMask, see the [connect a development network](../how-to/run-devnet.md) documentation.
+To add a local development network like [Hardhat](https://hardhat.org) to MetaMask, see the [connect a development network](../how-to/run-devnet.md) documentation.
 
 :::
 
