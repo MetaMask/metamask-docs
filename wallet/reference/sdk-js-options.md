@@ -123,8 +123,8 @@ dappMetadata: {
 
 ```javascript
 dappMetadata: {
-  name: "My Dapp",
-  url: "https://mydapp.com",
+  name: "DEUCES49ers",
+  url: "https://deuces9ers.com",
   base64Icon: "data:image/png;base64,...",
 }
 ```
