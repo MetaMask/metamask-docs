@@ -40,14 +40,14 @@
     "@docusaurus/eslint-plugin": "^3.0.0",
     "@docusaurus/module-type-aliases": "^3.0.0",
     "@docusaurus/plugin-client-redirects": "^3.0.0",
+    "@docusaurus/tsconfig": "3.0.0",
     "@lavamoat/allow-scripts": "^3.0.4",
-    "@tsconfig/docusaurus": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "~5.2.2"
   },
   "browserslist": {
     "production": [
