@@ -237,8 +237,6 @@ After connecting, your connected account displays:
 <img src={require("../assets/tutorials/beginner-tutorial/account.png").default} alt="View account" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
-![View account](../assets/tutorials/beginner-tutorial/account.png)
-
 ## Example
 
 The following code samples contain the full simple dapp JavaScript and HTML code that this tutorial walks through. 
