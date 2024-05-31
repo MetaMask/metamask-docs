@@ -26,6 +26,10 @@ const sidebar = {
           type: "doc",
           id: "tutorials/react-dapp-local-state",
         },
+        {
+          type: "doc",
+          id: "tutorials/javascript-dapp-simple",
+        },
       ],
     },
     {
