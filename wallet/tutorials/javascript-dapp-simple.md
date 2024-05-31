@@ -1,6 +1,6 @@
 ---
 description: Create a simple dapp to integrate with MetaMask.
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Create a simple dapp 
