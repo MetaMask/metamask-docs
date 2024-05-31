@@ -1,6 +1,5 @@
 ---
 description: Create a simple dapp to integrate with MetaMask.
-toc_max_heading_level: 4
 sidebar_position: 2
 ---
 
@@ -93,7 +92,7 @@ Update `index.html` to include the script:
 </html>
 ```
 
-### 3. Detect MetaMask
+### 2. Detect MetaMask
 
 :::caution
 
@@ -141,7 +140,7 @@ window.addEventListener("load", setup);
 Run the `npm run dev` command to test your application locally. 
 Open your browser and go to the provided local server URL.
 
-### 4. Detect a user's network
+### 3. Detect a user's network
 
 [Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
 Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
@@ -160,7 +159,7 @@ function handleChainChanged(chainId) {
 }
 ```
 
-### 5. Access a user's accounts
+### 4. Access a user's accounts
 
 To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances, your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
 
