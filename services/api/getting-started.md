@@ -1,5 +1,6 @@
 ---
 description: Get started with Infura; create your Infura API key and send requests to the Ethereum network.
+sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
