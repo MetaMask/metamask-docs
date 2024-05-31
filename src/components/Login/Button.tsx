@@ -29,6 +29,7 @@ const Button = () => {
           2,
         ),
       );
+      console.log(userProfile.profileId);
     };
     if (isConnected) {
       initAuth();
