@@ -141,8 +141,6 @@ window.addEventListener("load", setup);
 Run the `npm run dev` command to test your application locally. 
 Open your browser and go to the provided local server URL.
 
-![Enable button](../assets/tutorials/beginner-tutorial/enable-button.png)
-
 ### 4. Detect a user's network
 
 [Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests are submitted to the currently connected network.
