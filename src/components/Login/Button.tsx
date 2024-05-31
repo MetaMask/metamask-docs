@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Connector, useAccount, useConnect, useDisconnect } from "wagmi";
-import { Env, STORAGE_URL } from "@metamask/profile-sync-controller";
 import { authenticateAndAuthorize } from "../../lib/auth";
 
 const Button = () => {
@@ -20,14 +19,16 @@ const Button = () => {
 
   useEffect(() => {
     const initAuth = async () => {
-      const { accessToken, userProfile, identifier } = await authenticateAndAuthorize();
-      console.log({ userProfile, identifier });
-      const res = await fetch(STORAGE_URL(Env.DEV, "account", "user"), {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      console.log(await res.json());
+      const { userProfile } = await authenticateAndAuthorize();
+      alert(
+        JSON.stringify(
+          {
+            profileId: userProfile.profileId,
+          },
+          null,
+          2,
+        ),
+      );
     };
     if (isConnected) {
       initAuth();
@@ -35,7 +36,7 @@ const Button = () => {
   }, [connector]);
 
   return (
-    <>
+    <div style={{ marginLeft: "20px" }}>
       {!metaMaskConnector ? (
         <button>Install MetaMask</button>
       ) : !isConnected ? (
@@ -71,7 +72,7 @@ const Button = () => {
           </div>
         )
       )}
-    </>
+    </div>
   );
 };
 
