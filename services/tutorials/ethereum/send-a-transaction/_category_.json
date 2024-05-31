@@ -1,0 +1,10 @@
+{
+    "label": "Send transactions",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+      "type": "generated-index",
+      "slug": "tutorials/ethereum/send-a-transaction",
+      "description": "These tutorials use various Web3 libraries to send transactions on the Ethereum testnet."
+    }
+}
