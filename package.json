@@ -34,7 +34,8 @@
     "react-dom": "^18.0.0",
     "react-player": "^2.13.0",
     "remark-codesandbox": "^0.10.1",
-    "remark-docusaurus-tabs": "^0.2.0"
+    "remark-docusaurus-tabs": "^0.2.0",
+    "react-dropdown-select": "^4.11.0"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.0.0",
