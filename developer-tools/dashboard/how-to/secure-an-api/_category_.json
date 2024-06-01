@@ -2,7 +2,7 @@
     "position": 3,
     "label": "Secure an API",
     "collapsible": true,
-    "collapsed": false,
+    "collapsed": true,
     "link": {
       "type": "generated-index",
       "slug": "dashboard/secure-an-api",
