@@ -18,7 +18,7 @@ The following image shows how a Web3 library can connect to your node (in this e
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../images/Web3.png').default}
+      src={require('../images/Web3.png').default}
     />
   </div>
 </div>
