@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## June 2024
+
+- Updated [Snaps resources](/snaps/learn/resources) and added a new section "Snaps for developers." ([#1329](https://github.com/MetaMask/metamask-docs/pull/1329))
+
 ## May 2024
 
 - Added a beginner tutorial for [creating a simple dapp](/wallet/tutorials/javascript-dapp-simple) using vanilla JavaScript. 
