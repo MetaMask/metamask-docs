@@ -16,6 +16,10 @@ This approach allows you to detect multiple installed wallets and connect to the
 Learn more about EIP-6963 in [Wallet interoperability](../../concepts/wallet-interoperability.md).
 :::
 
+:::tip
+To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../../tutorials/javascript-dapp-simple.md) tutorial. 
+:::
+
 You can connect to MetaMask [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
 or [directly using Vite](#connect-to-metamask-directly-using-vite).
 

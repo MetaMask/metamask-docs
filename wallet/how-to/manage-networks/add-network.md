@@ -30,6 +30,12 @@ The confirmations look like the following:
     </div>
 </div>
 
+:::note
+
+To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
+
+:::
+
 ## Example
 
 The following is an example of using `wallet_addEthereumChain` and `wallet_switchEthereumChain` to
