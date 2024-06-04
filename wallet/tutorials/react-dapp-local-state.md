@@ -425,7 +425,7 @@ providers using EIP-6963, and managing the state in React locally.
 You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
-This follow-up tutorial walks you through adding more than one component and working with global state.
-You'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
-globally and ensure that any component in your dapp can be aware and conditionally render or display
-information about your MetaMask wallet.
+
+This follow-up tutorial walks you through adding more multiple components that use a global state.
+For this we'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
+globally and move away from using the `useSyncExternalStore`. This is a better approach and more realistic for building a real world (but also more complex) dapp. We will also use a new RPC endpoint [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) for disconnecting from MetaMask. This will take everything you have learned to the next level.
