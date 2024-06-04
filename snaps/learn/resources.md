@@ -1,6 +1,6 @@
 ---
 description: See more Snaps resources.
-sidebar_position: 9
+sidebar_position: 4
 ---
 
 # Resources
@@ -18,16 +18,12 @@ View the following Snaps resources in addition to this documentation site.
 
 - [Example Snaps](https://github.com/MetaMask/snaps/tree/main/packages/examples) - A directory of
   Snaps maintained by MetaMask.
+- [Linea Voyager](https://github.com/Consensys/linea-voyager-snap) - View Linea XP balance, PoH status, and current Linea Voyage activations from within MetaMask.
+- [Starknet](https://github.com/Consensys/starknet-snap) - Adds Starknet account and transaction functionality to MetaMask.
 - [Simple Keyring Snap](https://github.com/MetaMask/snap-simple-keyring) - An example account management Snap using the [Keyring API](../reference/keyring-api/index.md).
-- [Dogecoin Snap](https://github.com/ziad-saab/dogecoin-snap) - A tutorial for creating a Snap to
-  add Dogecoin to MetaMask.
-- [Starknet Snap](https://github.com/Consensys/starknet-snap) - A Snap to add Starknet to MetaMask.
-- [MobyMask Phishing Warning Snap](https://github.com/Montoya/mobymask-snap) - A Snap that warns you
-  when interacting with phishing contracts.
-- [Mystery Snap](https://github.com/Montoya/random-snap) - A Snap that returns random numbers and answers.
-- [Snappy Recovery](https://github.com/ziad-saab/snappy-recovery) - A Snap that enables social
-  recovery of private keys.
-- [Pet Fox game](https://github.com/Montoya/pet-fox) - A simple game built using a Snap.
+- [Mystery Fox](https://github.com/Montoya/mystery-fox) - Provides random answers to questions and showcases interactive UI and images.
+- [Farcaster Insights](https://github.com/Montoya/farcaster-insights) - Shows if the recipient in a transaction request has a Farcaster account and their stats.
+- [Smart Account Template](https://github.com/bcnmy/smart-account-keyring-template) - Template for integrating the Biconomy Smart Account with the [Keyring API](../reference/keyring-api/index.md). 
 
 ## Developer tools
 
@@ -66,6 +62,7 @@ View the following Snaps resources in addition to this documentation site.
 - [Building the Future with MetaMask Snaps](https://www.youtube.com/watch?v=iE8CGzadKZ8&t=288s) (22 min)
   ([Slides](https://docs.google.com/presentation/d/1LG8MqRrbb9qSg4m8ZjJXPQFccb9YPc-6387hSNpscpY/edit?usp=sharing))
 - [MetaMask Snaps YouTube playlist](https://www.youtube.com/playlist?list=PLJ8kQp5OiaEM6ad6mC1NmJCGJSZm7cBfI)
+- [How to Build Your Own Polkadot MetaMask Snap](https://www.youtube.com/watch?v=vyb1wVFahvM) (32 min)
 
 ## Community
 
@@ -74,3 +71,13 @@ View the following Snaps resources in addition to this documentation site.
 - [Consensys Discord](https://discord.gg/consensys) - Ask questions about Snaps on the **mm-snaps-dev** channel.
 - [Snaps GitHub issues](https://github.com/MetaMask/snaps/issues) - If you encounter any issues with
   Snaps, open a GitHub issue.
+
+## Snaps for developers
+
+Many Snaps are designed to be used by developers.
+
+- [CubeSigner](https://cubist.dev/cubesigner-snap-hardware-backed-key-management-for-metamask-developers) - Enables dapp developers to manage keys for Ethereum, Bitcoin, Solana, and more using secure remote hardware.
+- [Galactica ZK Vault](https://docs.galactica.com/galactica-developer-documentation) - Integrates the Galactica Network for dapps to leverage ZK-proofs for compliant privacy.
+- [Hedera Wallet](https://docs.tuum.tech/hedera-wallet-snap) - Build Hedera dapps with the methods provided by Hedera Wallet.
+- [Leap Wallet](https://docs.leapwallet.io/cosmos/leap-metamask-snap/integrating-snaps) - Connect Cosmos dapps to MetaMask with Leap Wallet.
+- [MinaPortal](https://github.com/sotatek-dev/mina-snap/tree/master/packages/snap#methods) - Build ZkApps on Mina Network with the dapp methods provided by MinaPortal.
