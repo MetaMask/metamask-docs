@@ -1,6 +1,6 @@
 ---
 description: Submit your Snap for allowlisting on the MetaMask extension.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # Get allowlisted
