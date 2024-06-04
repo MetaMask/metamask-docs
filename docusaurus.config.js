@@ -1,6 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+require("dotenv").config();
+
+const path = require("path");
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
@@ -74,6 +77,13 @@ const config = {
     ],
   ],
   plugins: [
+    [
+      "docusaurus-plugin-dotenv",
+      {
+        path: "./.env",
+        systemvars: false,
+      },
+    ],
     [
       "@docusaurus/plugin-content-docs",
       ({
@@ -393,6 +403,7 @@ const config = {
           page: true,
         },
       ] : null,
+    path.resolve(__dirname, "./src/plugins/launchdarkly"),
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
