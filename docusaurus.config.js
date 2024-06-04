@@ -1,8 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require("dotenv").config();
-
 const path = require("path");
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
