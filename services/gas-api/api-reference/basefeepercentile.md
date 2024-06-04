@@ -40,9 +40,9 @@ to authorize your account to use the APIs.
 <TabItem value="cURL">
 
 ```bash
-curl -X "GET"                     \
-    -u <API-KEY>:<API-KEY-SECRET> \
-    "https://gas.api.infura.io/networks/1/baseFeePercentile"
+curl -X "GET"                   \
+  -u <API-KEY>:<API-KEY-SECRET> \
+  "https://gas.api.infura.io/networks/1/baseFeePercentile"
 ```
 
 </TabItem>
@@ -55,26 +55,26 @@ const apiKey = "<API-KEY>"; // Replace with your API key.
 const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
 
 const Auth = Buffer.from(
-    apiKey + ":" + apiKeySecret,
+  apiKey + ":" + apiKeySecret,
 ).toString("base64");
 
 // The chain ID of the supported network.
 const chainId = 1;
 
 (async () => {
-    try {
-        const { data } = await axios.get(
-            `https://gas.api.infura.io/networks/${chainId}/baseFeePercentile`,
-            {
-                headers: {
-                    Authorization: `Basic ${Auth}`,
-                },
-            },
-        );
-        console.log("Base fee history:", data);
-    } catch (error) {
-        console.log("Server responded with:", error);
-    }
+  try {
+    const { data } = await axios.get(
+      `https://gas.api.infura.io/networks/${chainId}/baseFeePercentile`,
+      {
+        headers: {
+          Authorization: `Basic ${Auth}`,
+        },
+      },
+    );
+    console.log("Base fee history:", data);
+  } catch (error) {
+    console.log("Server responded with:", error);
+  }
 })();
 ```
 
@@ -85,7 +85,7 @@ const chainId = 1;
 
 ```json
 {
-    "baseFeePercentile": "23.227829059"
+  "baseFeePercentile": "23.227829059"
 }
 ```
 

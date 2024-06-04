@@ -77,26 +77,26 @@ const axios = require("axios");
 require("dotenv").config();
 
 const Auth = Buffer.from(
-    process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
+  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
 ).toString("base64");
 
 // The chain ID of the supported network.
 const chainId = 1;
 
 (async () => {
-    try {
-        const { data } = await axios.get(
-            `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
-            {
-                headers: {
-                    Authorization: `Basic ${Auth}`,
-                },
-            },
-        );
-        console.log("Suggested gas fees:", data);
-    } catch (error) {
-        console.log("Server responded with:", error);
-    }
+  try {
+    const { data } = await axios.get(
+      `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
+      {
+        headers: {
+          Authorization: `Basic ${Auth}`,
+        },
+      },
+    );
+    console.log("Suggested gas fees:", data);
+  } catch (error) {
+    console.log("Server responded with:", error);
+  }
 })();
 ```
 
@@ -110,30 +110,30 @@ The result should look similar to:
 
 ```json
 Suggested gas fees: {
-    low: {
-        suggestedMaxPriorityFeePerGas: "0.05",
-        suggestedMaxFeePerGas: "24.086058416"',
-        minWaitTimeEstimate: 15000,
-        maxWaitTimeEstimate: 30000
-    },
-    medium: {
-        suggestedMaxPriorityFeePerGas: "0.1",
-        suggestedMaxFeePerGas: "32.548678862",
-        minWaitTimeEstimate: 15000,
-        maxWaitTimeEstimate: 45000
-    },
-    high: {
-        suggestedMaxPriorityFeePerGas: "0.3",
-        suggestedMaxFeePerGas: "41.161299308",
-        minWaitTimeEstimate: 15000,
-        maxWaitTimeEstimate: 60000
-    },
-    estimatedBaseFee: "24.036058416",
-    networkCongestion: 0.7143,
-    latestPriorityFeeRange: [ "0.1", "20" ],
-    historicalPriorityFeeRange: [ "0.007150439", "113" ],
-    historicalBaseFeeRange: [ "19.531410688", "36.299069766" ],
-    priorityFeeTrend: "down",
-    baseFeeTrend: "down"
+  low: {
+    suggestedMaxPriorityFeePerGas: "0.05",
+    suggestedMaxFeePerGas: "24.086058416"',
+    minWaitTimeEstimate: 15000,
+    maxWaitTimeEstimate: 30000
+  },
+  medium: {
+    suggestedMaxPriorityFeePerGas: "0.1",
+    suggestedMaxFeePerGas: "32.548678862",
+    minWaitTimeEstimate: 15000,
+    maxWaitTimeEstimate: 45000
+  },
+  high: {
+    suggestedMaxPriorityFeePerGas: "0.3",
+    suggestedMaxFeePerGas: "41.161299308",
+    minWaitTimeEstimate: 15000,
+    maxWaitTimeEstimate: 60000
+  },
+  estimatedBaseFee: "24.036058416",
+  networkCongestion: 0.7143,
+  latestPriorityFeeRange: [ "0.1", "20" ],
+  historicalPriorityFeeRange: [ "0.007150439", "113" ],
+  historicalBaseFeeRange: [ "19.531410688", "36.299069766" ],
+  priorityFeeTrend: "down",
+  baseFeeTrend: "down"
 }
 ```
