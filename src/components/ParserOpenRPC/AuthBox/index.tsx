@@ -17,7 +17,7 @@ const MetamaskInstallMessage = () => (
 export const AuthBox = ({ isMetamaskInstalled }: AuthBoxProps) => {
   return (
     <>
-      {isMetamaskInstalled ? <MetamaskInstallMessage /> : null}
+      {!isMetamaskInstalled ? <MetamaskInstallMessage /> : null}
     </>
   );
 };
