@@ -23,9 +23,9 @@ the MetaMask browser extension and MetaMask Mobile.
 
 ## Steps
 
-### 1. Configure the MetaMask SDK
+### 1. Configure MetaMask SDK
 
-When configuring the MetaMask SDK connector, make sure to configure the proper [SDK options](../../../reference/sdk-js-options.md).
+In your Wagmi project, configure MetaMask SDK with the proper [SDK options](../../../reference/sdk-js-options.md).
 
 ```javascript
 const MetaMaskOptions = {
@@ -58,8 +58,8 @@ devices, providing a better user experience compared to traditional deeplinking 
 
 ### 2. Configure Wagmi with the MetaMask connector
 
-Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support. Use the `MetaMaskOptions` you
-created in the previous step when adding the `metaMask` connector.
+Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support.
+Use the `MetaMaskOptions` you created in the previous step when adding the `metaMask` connector.
 For example:
 
 ```javascript
