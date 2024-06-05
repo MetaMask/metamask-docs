@@ -18,12 +18,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.0.0",
-    "@docusaurus/plugin-content-docs": "^3.0.0",
-    "@docusaurus/theme-common": "^3.0.0",
-    "@docusaurus/theme-mermaid": "^3.0.0",
+    "@docusaurus/core": "3.4.0",
+    "@docusaurus/plugin-content-docs": "3.4.0",
+    "@docusaurus/theme-common": "3.4.0",
+    "@docusaurus/theme-mermaid": "3.4.0",
     "@mdx-js/react": "^3.0.0",
-    "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
@@ -31,23 +30,21 @@
     "prettier": "^3.0.0",
     "prism-react-renderer": "^2.1.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-player": "^2.13.0",
-    "remark-codesandbox": "^0.10.1",
-    "remark-docusaurus-tabs": "^0.2.0"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "^3.0.0",
-    "@docusaurus/module-type-aliases": "^3.0.0",
-    "@docusaurus/plugin-client-redirects": "^3.0.0",
+    "@docusaurus/eslint-plugin": "3.4.0",
+    "@docusaurus/module-type-aliases": "3.4.0",
+    "@docusaurus/plugin-client-redirects": "3.4.0",
+    "@docusaurus/tsconfig": "3.4.0",
     "@lavamoat/allow-scripts": "^3.0.4",
-    "@tsconfig/docusaurus": "^1.0.5",
+    "@metamask/design-tokens": "^2.1.1",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^5.4.5"
   },
   "browserslist": {
     "production": [

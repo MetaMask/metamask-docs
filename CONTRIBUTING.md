@@ -12,7 +12,7 @@ guide in some places.
 - [Style guide](#style-guide)
 - [Add images](#add-images)
 - [Format Markdown and MDX](#format-markdown-and-mdx)
-    - [Live code blocks](#live-code-blocks)
+- [Test analytics](#test-analytics)
 
 ## Contribution workflow
 
@@ -126,40 +126,19 @@ The documentation is built using [Docusaurus](https://docusaurus.io/), which is 
 you to use [React JSX](https://www.w3schools.com/react/react_jsx.asp) in your Markdown content.
 
 Follow the [Consensys guidelines on formatting Markdown](https://docs-template.consensys.net/contribute/format-markdown).
-The MetaMask docs also use a plugin to implement [live code blocks](#live-code-blocks).
 
-### Live code blocks
+## Test analytics
 
-The [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) plugin allows you to
-define a code block to be loaded live in a CodeSandbox iframe.
-This enhances the documentation by keeping the code blocks versioned and in the codebase, while
-using CodeSandbox to showcase any example with any dependency.
+The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables
+simple usage analytics to inform documentation improvements.
 
-Define a live code block by adding a `codesandbox` key to the code block.
-For example:
-
-````jsx
-```javascript codesandbox=vanilla
-// JavaScript live code block
-```
-````
-
-`remark-codesandbox` allows for simple code blocks where the content of the block replaces the
-CodeSandbox entry point, and more complex code blocks that can be loaded directly from the
-filesystem.
-See the
-[`remark-codesandbox` documentation](https://github.com/kevin940726/remark-codesandbox/#documentation)
-for more information.
-
-## Analytics
-
-The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables simple usage analytics to inform documentation improvements that may be needed.
-
-If you need to test analytics events in your local development environment be sure to export the appropriate key for the environment you are testing against before building and running the project:
+If you need to test analytics events in your local development environment, export the appropriate
+key for the environment you are testing against before building and running the project:
 
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"
 ```
+
 Then build the project in production mode using the following command:
 
 ```bash

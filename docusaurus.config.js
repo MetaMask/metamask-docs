@@ -3,7 +3,6 @@
 
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
-const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
@@ -54,13 +53,6 @@ const config = {
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-          remarkPlugins: [
-            require("remark-docusaurus-tabs"),
-            [remarkCodesandbox, {
-              mode: "iframe",
-              autoDeploy: process.env.NODE_ENV === "production",
-            }],
-          ],
           openrpc: {
             openrpcDocument: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
             path: "reference",
@@ -83,9 +75,6 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
-        remarkPlugins: [
-          require("remark-docusaurus-tabs"),
-        ],
         admonitions: {
           keywords: [
             "info",
