@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[2273],{39725:a=>{a.exports=JSON.parse('{"tags":[{"label":"Keyring API","permalink":"/allowlisting-audit-caveat/snaps/tags/keyring-api","count":9}]}')}}]);
