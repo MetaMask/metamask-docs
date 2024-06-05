@@ -11193,11 +11193,11 @@ __metadata:
   linkType: hard
 
 "jiti@npm:^1.20.0":
-  version: 1.21.0
-  resolution: "jiti@npm:1.21.0"
+  version: 1.21.1
+  resolution: "jiti@npm:1.21.1"
   bin:
     jiti: bin/jiti.js
-  checksum: a7bd5d63921c170eaec91eecd686388181c7828e1fa0657ab374b9372bfc1f383cf4b039e6b272383d5cb25607509880af814a39abdff967322459cca41f2961
+  checksum: 8f213e08afebf6ce85944afbab8c810ecbc4dd64639865b90bc82145678666aaed8581b77ec8f01a4153f29f6b6942de64c83dbd131f1a8cc2af515cc8fa5109
   languageName: node
   linkType: hard
 
@@ -18106,7 +18106,7 @@ __metadata:
 
 "typescript@patch:typescript@~5.2.2#~builtin<compat/typescript>":
   version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=85af82"
+  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
