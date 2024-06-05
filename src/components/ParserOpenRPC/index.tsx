@@ -4,6 +4,7 @@ import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
+import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -50,6 +51,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       </div>
       <div className="col col--5">
         <AuthBox isMetamaskInstalled={metamaskInstalled} />
+        <RequestBox
+          isMetamaskInstalled={metamaskInstalled}
+          method={method}
+          params={[]}
+          response={"0x"}
+        />
         <InteractiveBox
           method={method}
           params={currentMethodData.params}
