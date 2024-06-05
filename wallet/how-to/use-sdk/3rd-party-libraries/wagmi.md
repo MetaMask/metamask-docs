@@ -23,47 +23,18 @@ the MetaMask browser extension and MetaMask Mobile.
 
 ## Steps
 
-### 1. Configure Wagmi with the MetaMask connector
+### 1. Configure the MetaMask SDK
 
-Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support.
-For example:
+When configuring the MetaMask SDK connector, make sure to configure the proper [SDK options](../../../reference/sdk-js-options.md).
 
 ```javascript
-import { createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
-import { metaMask } from "wagmi/connectors";
-
-export const config = createConfig({
-  chains: [mainnet, sepolia],
-  connectors: [
-    metaMask({
-      dappMetadata: {
-        name: "Example Wagmi dapp",
-      },
-    }),
-  ],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
+const MetaMaskOptions = {
+  dappMetadata: {
+    name: "Example Wagmi dapp",
   },
-});
-```
-
-### 2. Configure the SDK
-
-When configuring the connector, make sure to configure the proper
-[SDK options](../../../reference/sdk-js-options.md).
-
-```javascript
-connectors: [
-  metaMask({
-    dappMetadata: {
-      name: "Example Wagmi dapp",
-    },
-    infuraAPIKey: "YOUR-API-KEY",
-    // Other options.
-  }),
-],
+  infuraAPIKey: "YOUR-API-KEY",
+  // Other options.
+};
 ```
 
 #### Dapp metadata
@@ -84,6 +55,38 @@ We recommend using universal links instead of deeplinks to avoid issues on iOS.
 Thus, do not enable the [`useDeeplink`](../../../reference/sdk-js-options.md#usedeeplink) option.
 Using universal links ensures a smoother transition for users accessing your dapp from mobile
 devices, providing a better user experience compared to traditional deeplinking methods.
+
+### 2. Configure Wagmi with the MetaMask connector
+
+Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support. Use the `MetaMaskOptions` you
+created in the previous step when adding the `metaMask` connector.
+For example:
+
+```javascript
+import { createConfig, http } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import { metaMask } from "wagmi/connectors";
+
+const MetaMaskOptions = {
+  dappMetadata: {
+    name: "Example Wagmi dapp",
+  },
+  infuraAPIKey: "YOUR-API-KEY",
+  // Other options.
+};
+
+export const config = createConfig({
+  chains: [mainnet, sepolia],
+  connectors: [
+    metaMask(MetaMaskOptions),
+    // Other connectors
+  ],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
+});
+```
 
 ### 3. Implement contract interaction using `usePrepareContractWrite`
 
