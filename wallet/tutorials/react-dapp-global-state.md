@@ -1,5 +1,5 @@
 ---
-description: Create a multi-component React dapp with global state.
+description: Create a multi-component React dapp with global state using EIP-6963.
 toc_max_heading_level: 4
 sidebar_position: 2
 ---
@@ -12,8 +12,7 @@ You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and Typ
 the dapp.
 
 :::tip
-We recommend first [creating a React dapp with local state](react-dapp-local-state.md).
-This tutorial is a follow-up to that tutorial.
+We recommend first [creating a React dapp with local state](react-dapp-local-state.md) as it contains important information and introductions to [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), however; if you skip the first tutorial, you may still want to check out our [wallet interoperability](../concepts/wallet-interoperability.md) page to get up to speed on discovering multiple injected wallet providers.
 :::
 
 The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963: Multi Injected Provider Discovery, iterates over all found providers and connects and remembers the selected wallet, all within a single component.
@@ -125,18 +124,12 @@ The following is a tree representation of the dapp's `/src` directory:
 ├── src
 │   ├── assets
 │   ├── components
-│   │   └── WalletDiscovery
-│   │   |   └── WalletDiscovery.module.css
-│   │   |   └── WalletDiscovery.tsx
-│   │   ├─── WalletList
-│   │   |   └── WalletList.module.css
-│   │   |   └── WalletList.tsx
-│   │   ├── SelectedWallet
-│   │   |   └── SelectedWallet.module.css
-│   │   |   └── SelectedWallet.tsx
-│   │   ├── MetaMaskError
-│   │   |   └── MetaMaskError.module.css
-│   │   |   └── MetaMaskError.tsx
+│   │   ├──  SelectedWallet.module.css
+│   │   ├──  SelectedWallet.tsx
+│   │   ├──  WalletError.module.css
+│   │   ├──  WalletError.tsx
+│   │   ├──  WalletList.module.css
+│   │   └── WalletList.tsx
 │   ├── hooks
 │   │   ├── Eip6963Provider.tsx
 │   │   └── useEip6963Provider.tsx
