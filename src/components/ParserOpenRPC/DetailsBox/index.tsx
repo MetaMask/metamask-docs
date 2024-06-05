@@ -4,45 +4,8 @@ import { MDContent } from "./MDContent";
 import { parseSchema } from "./RenderParams";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import { MethodParam, SchemaComponents } from "@site/src/components/ParserOpenRPC/interfaces";
 
-interface SchemaPropertyType {
-  name?: string;
-  $ref?: any;
-  items?: any;
-  title?: string;
-  type: string;
-  description?: string;
-  required?: boolean;
-  properties?: Record<string, SchemaPropertyType>;
-  enum?: string[];
-  default?: string;
-  schema?: Schema;
-}
-
-interface Schema {
-  summary: any;
-  description: any;
-  required: boolean;
-  title: string;
-  type: string;
-  properties?: Record<string, SchemaPropertyType>;
-  items?: SchemaPropertyType;
-  oneOf?: SchemaPropertyType[];
-  allOf?: SchemaPropertyType[];
-  anyOf?: SchemaPropertyType[];
-  $ref?: string;
-}
-
-interface MethodParam {
-  name: string;
-  description: string;
-  schema: Schema;
-  required?: boolean;
-}
-
-interface SchemaComponents {
-  [key: string]: Schema;
-}
 
 interface DetailsBoxProps {
   method: string;

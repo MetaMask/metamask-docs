@@ -17,26 +17,3 @@
   font-size: 14px;
   line-height: 22px;
 }
-
-.primaryBtn {
-  background: #1098FC;
-  color: #141618;
-  font-size: 14px;
-  line-height: 1;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  padding: 12px 16px;
-  margin-bottom: 1px;
-  cursor: pointer;
-  transition-property: 'color', 'background-color';
-  transition-duration: .4s;
-  transition-timing-function: ease;
-}
-
-.primaryBtn:hover {
-  text-decoration: none;
-  color: #fff;
-  background-color: #036AB5;
-}
