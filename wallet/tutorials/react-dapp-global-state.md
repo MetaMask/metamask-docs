@@ -345,19 +345,19 @@ We also added an interface for our WalletErrors too.
 
 This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects and RPC calls will be needed to create our React Context component that will wrap our application providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets.
 
-Let's open the file at `src/hooks/WalletProvider`. We will start by importing the React types, functions and hooks and setting up the `SelectedAccountByWallet` type and `WalletProviderContext` interface which will define the shape of our React Context:
+Add the following code to `src/hooks/WalletProvider`:
 
 ```ts title="WalletProvider" showLineNumbers
 import { PropsWithChildren, createContext, useCallback, useEffect, useState } from 'react'
 type SelectedAccountByWallet = Record<string, string | null>
 interface WalletProviderContext {
-  wallets: Record<string, EIP6963ProviderDetail>         // Record of wallets by UUID
-  selectedWallet: EIP6963ProviderDetail | null           // Currently selected wallet
-  selectedAccount: string | null                         // Account address of selected wallet
-  errorMessage: string | null                            // Error message
-  connectWallet: (walletUuid: string) => Promise<void>   // Function to trigger wallet connection
-  disconnectWallet: () => void                           // Function to trigger wallet disconnection
-  clearError: () => void                                 // Function to clear error message
+  wallets: Record<string, EIP6963ProviderDetail>
+  selectedWallet: EIP6963ProviderDetail | null
+  selectedAccount: string | null
+  errorMessage: string | null
+  connectWallet: (walletUuid: string) => Promise<void>
+  disconnectWallet: () => void
+  clearError: () => void
 }
 ```
 
