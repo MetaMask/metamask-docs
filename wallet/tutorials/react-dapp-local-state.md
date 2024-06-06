@@ -35,13 +35,13 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 Set up a new project using Vite, React, and TypeScript by running the following command:
 
 ```bash
-npm create vite@latest mm-dapp-react -- --template react-ts
+npm create vite@latest vite-react-local-state -- --template react-ts
 ```
 
 Install the node module dependencies:
 
 ```bash
-cd mm-dapp-react && npm install
+cd vite-react-local-state && npm install
 ```
 
 Launch the development server:
@@ -53,7 +53,8 @@ npm run dev
 This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note
-If the development server has been stopped, you can re-run your project using the `npx vite` or
+1. If you use VS Code, you can run the command `code .` to open the project.
+2. If the development server has been stopped, you can re-run your project using the `npx vite` or
 `npm run dev` command.
 :::
 
