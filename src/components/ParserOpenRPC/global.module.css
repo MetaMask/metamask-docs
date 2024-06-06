@@ -36,3 +36,9 @@
   cursor: pointer;
   font-family: var(--font-family-sans);
 }
+
+.stickyCol {
+  position: sticky;
+  top: 60px;
+  left: 0;
+}

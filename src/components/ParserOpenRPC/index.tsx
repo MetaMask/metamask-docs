@@ -5,6 +5,8 @@ import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
+import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
+import global from "./global.module.css";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -23,11 +25,26 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const currentMethodData = useMemo(() => {
     const currentMethod = currentNetwork.data.methods?.find((met: { name: string; }) => met.name === method);
     if (!currentMethod) return null;
+    const preparedErrors = () => {
+      if (!currentMethod.errors || currentMethod.errors.length === 0) return [];
+      const updatedErrors = currentMethod.errors.map(item => {
+        if (item?.code && item?.message) {
+          return item;
+        }
+        if (item?.$ref) {
+          const ref = item.$ref.replace("#/components/errors/", "");
+          const refErrorItem = currentNetwork.data.components.errors[ref];
+          if (refErrorItem) return refErrorItem;
+        }
+      });
+      return updatedErrors.filter(Boolean);
+    };
     return ({
-      description: currentMethod.summary || null,
+      description: currentMethod.summary || currentMethod.description || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
+      errors: preparedErrors(),
     });
   }, [netData, network]);
 
@@ -48,20 +65,23 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           components={currentMethodData.components.schemas}
           result={currentMethodData.result}
         />
+        <ErrorsBox errors={currentMethodData.errors} />
       </div>
       <div className="col col--5">
-        <AuthBox isMetamaskInstalled={metamaskInstalled} />
-        <RequestBox
-          isMetamaskInstalled={metamaskInstalled}
-          method={method}
-          params={[]}
-          response={"0x"}
-        />
-        <InteractiveBox
-          method={method}
-          params={currentMethodData.params}
-          components={currentMethodData.components.schemas}
-        />
+        <div className={global.stickyCol}>
+          <AuthBox isMetamaskInstalled={metamaskInstalled} />
+          <RequestBox
+            isMetamaskInstalled={metamaskInstalled}
+            method={method}
+            params={[]}
+            response={"0x"}
+          />
+          <InteractiveBox
+            method={method}
+            params={currentMethodData.params}
+            components={currentMethodData.components.schemas}
+          />
+        </div>
       </div>
     </div>
   );

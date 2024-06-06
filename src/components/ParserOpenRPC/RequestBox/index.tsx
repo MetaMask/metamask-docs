@@ -31,7 +31,7 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
     <>
       <div className={styles.cardWrapper}>
         <div className={styles.cardHeader}>
-          <strong>Request</strong>
+          <strong className={styles.cardHeading}>Request</strong>
         </div>
         <div>
           <CodeBlock language="javascript" className="margin-bottom--none">
@@ -52,7 +52,7 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
       </div>
       <div className={styles.cardWrapper}>
         <div className={styles.cardHeader}>
-          <strong>Response</strong>
+          <strong className={styles.cardHeading}>Response</strong>
         </div>
         <div>
           <CodeBlock language="javascript" className="margin-bottom--none">
