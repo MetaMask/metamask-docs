@@ -12,16 +12,20 @@ You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and Typ
 the dapp.
 
 :::tip
-We recommend first [creating a React dapp with local state](react-dapp-local-state.md) as it contains important information and introductions to [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), however; if you skip the first tutorial, you may still want to check out our [wallet interoperability](../concepts/wallet-interoperability.md) page to get up to speed on discovering multiple injected wallet providers.
+We recommend first completing the [creating a React dapp with local state](react-dapp-local-state.md) tutorial, which contains important information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963. If you skip the first tutorial, ensure you review [wallet interoperability](../concepts/wallet-interoperability.md) documentation to learn about multiple injected wallet providers.
 :::
 
-The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963: Multi Injected Provider Discovery, iterates over all found providers and connects and remembers the selected wallet, all within a single component.
-In real world use cases, a dapp will need to share global state across many components.
+The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963. It demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection, all within a single component.
 
-In this tutorial, the state will be lifted up and put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
-ensuring other components and UI can benefit from it's data and functions. This will involve rethinking how we deal with synchronization of the wallet state and persisting the selected wallet in the case of a page refresh with the help of localstorage, ensuring that the last connected wallet state does not get wiped out.
+In real world use cases, a dapp usually shares global state across many components.
 
-Finally, we'll deal with an edge case where a browser wallet could be disabled or uninstalled between refreshes and add a disconnect function that resets the state and uses [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to correctly disconnect from MetaMask.
+In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
+that allows other components and UI elements to benefit from its data and functions. 
+This process involves re-evaluating the synchronization of the wallet state and ensuring the persistence of the selected wallet using localStorage. 
+This ensuers that the last connected wallet state remains intact even after a page refresh.
+
+Finally, this tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between refreshes. 
+A disconnect function is added to reset the state and use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
 
 :::info Project source code
 You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-react-global-tutorial).
@@ -34,17 +38,17 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - The [MetaMask extension](https://metamask.io/download) installed
 - Basic knowledge of TypeScript, React, React Context and React Hooks
-- Complete the [Creating a React dapp with local state](react-dapp-local-state.md)
+- You have completed the [Creating a React dapp with local state](react-dapp-local-state.md) tutorial
 
 ## Steps
 
 ### 1. Set up the project
 
-Since we will be taking a fresh approach to the structure of this project, we will not be using the previous tutorials code or last known state. Instead, I will walk you through a few steps to break the single component structure into multiple components.
+This project takes a fresh approach to its structure, the code or last known state from previous tutorials are not used. Instead, this tutorial walks through steps to break the single component structure into multiple components.
 
-Where the previous tutorial took the least amount of steps possible to discover and connect to wallets, this tutorial will prepare you for building in a more advanced and real world situation.
+The previous tutorial minimized steps to discover and connect to wallets, this tutorial prepares for more advanced, real-world scenarios.
 
-Let's start by creating a new ViteJS project and adding the necessary directory structure we will need.
+Begin by creating a new ViteJS project and adding the necessary directory structure:
 
 ```bash
 npm create vite@latest vite-react-global-state -- --template react-ts
@@ -65,20 +69,23 @@ npm run dev
 This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note tip
-1. If you use VS Code, you can run the command `code .` to open the project.
-2. If the development server has been stopped, you can re-run your project using the `npx vite` or
-`npm run dev` command.
+If you are using VS Code, you can run the `code .` command to open the project.
+
+If the development server stops, you can use the `npx vite` or
+`npm run dev` command to re-run your project. 
 :::
 
-Once you have opened up the ViteJS React project in your editor of choice, we will want to add three directories within the `src` directory. You can use your code editor to create a `src/components`, `src/hooks` and `src/utils` directory or (if on a mac) use the command below in the terminal at the root of the project:
+After you open the ViteJS React project in your editor of choice, add three directories within the `src` directory. 
+Create a `src/components`, `src/hooks` and `src/utils` directory in the root of the project, using the followinng commands:
 
 ```bash
 mkdir src/components && mkdir src/hooks && mkdir src/utils
 ```
 
-Next we will need to create the components that will list the wallets installed, show the connected wallet information and a component for our errors as well as a CSS module for each component.
+Next, create components for listing the installed wallets, displaying the connected wallet information, and handling errors. 
+Additionally, create a CSS module for each component.
 
-Create the following files inside `src/components`:
+Create the following files in `src/components`:
 
 - `SelectedWallet.module.css`
 - `SelectedWallet.tsx`
@@ -87,20 +94,21 @@ Create the following files inside `src/components`:
 - `WalletList.module.css`
 - `WalletList.tsx`
 
-Create the following files inside `src/hooks`:
+Create the following files in `src/hooks`:
 
 - `Eip6963Provider.tsx`
 - `useEip6963Provider.tsx`
 
-Create the following files inside `src/utils`:
+Create the following file in `src/utils`:
 
 - `index.ts`
 
-These are all of the components, hooks, and utility files we will need for our project. As we add code to each one, we will go over their purpose and the code needed to meet our goals: multiple components for UI, shared state (context provider), custom hooks and and helper functions.
+The components, hooks, and utility files are required for the project. 
+Each file includes the necessary code to meet the project goals: creating multiple UI components, establishing shared state with a context provider, and implementing custom hooks and helper functions. 
 
 #### Styling
 
-Since our tutorial's scope does not really involve learning about CSS and styling, we are keeping it simple, so I will just flat out give you the CSS we need for each CSS file in out project, let's get that out of the way:
+Add the following CSS to `SelectedWallet.module.css`, `WalletError.module.css`, and `WalletList.module.css`:
 
 ```css title="SelectedWallet.module.css"
 .selectedWallet {
@@ -152,7 +160,7 @@ Since our tutorial's scope does not really involve learning about CSS and stylin
 }
 ```
 
-And finally, the `src/index.css` needs a few changes, just replace the existing code with:
+Replace the existing code in `src/index.css` with the following:
 
 ```css title="index.css"
 :root {
@@ -253,8 +261,8 @@ button:last-child {
 
 #### Project structure
 
-We now have some basic global and component level styling for our application.
-Check your directory structure in comparison to the The following directory tree from within the dapp's `/src` directory:
+You now have some basic global and component level styling for your application.
+The directory tree in the dapp's `/src` directory should look similar to the following:
 
 ```text
 ├── src
