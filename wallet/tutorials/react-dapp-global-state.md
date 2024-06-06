@@ -17,15 +17,14 @@ We recommend first completing the [creating a React dapp with local state](react
 
 The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963. It demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection, all within a single component.
 
-In real world use cases, a dapp usually shares global state across many components.
+In real world use cases, a dapp usually shares global state across many components. This tutorial is intentionally complex for what it does, but if you are planning on rolling your own wallet detection and connection solution, this will be a great primer.
 
 In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
-This process involves re-evaluating the synchronization of the wallet state and ensuring the persistence of the selected wallet using localStorage. 
-This ensuers that the last connected wallet state remains intact even after a page refresh.
 
-Finally, this tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between refreshes. 
-A disconnect function is added to reset the state and use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
+We will also persist the selected wallet using `localStorage` ensuring that the last connected wallet state remains intact even after a page refresh.
+
+Finally, this tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between refreshes or visits to the dapp. As well a disconnect function is added to reset the state and use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
 
 :::info Project source code
 You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-react-global-tutorial).
@@ -418,7 +417,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
 ```
 
 1. On line 1 we Create a React Context for the EIP-6963 WalletProvider with the defined interface `WalletProviderContext` with a default of `null`.
-2. On line 3 we define the `WalletProvider` component which will wrap all other components in our dapp and provide their children with the data and functions needed, initializing state for wallets, the selected wallet RDNS, and selected accounts. Using `React.FC<PropsWithChildren>` provides a structured way to type your functional React components that include children props. Defining it this way is necessary because it ensures that the component's return type is correctly typed as a React element preventing common errors and improves reliability. `PropsWithChildren` is a utility type that adds a children prop to the component's props. This makes it clear and explicit that `WalletProvider` is meant to wrap other components, and those wrapped components will be accessible as children. With `React.FC`, you don't need to explicitly define the children prop in your props interface. This reduces boilerplate code and makes your component's props definition cleaner and more concise and supports `defaultProps` and `propTypes` out of the box, useful for setting default values and type-checking props at runtime.
+2. On line 3 we define the `WalletProvider` component. The WalletProvider component wraps all other components in our dApp, providing them with the necessary data and functions related to wallets. Using `React.FC<PropsWithChildren>` ensures that the component properly types the children it wraps, reducing errors and improving reliability by clearly indicating that WalletProvider will have children components. This approach also simplifies the props definition, making the code cleaner and more concise.
 3. Lines 4 through 10 are our state Definitions: 
   - `wallets`: State to hold detected wallets. 
   - `selectedWalletRdns`: State to hold the RDNS of the selected wallet. 
@@ -462,6 +461,8 @@ Add the following code to `src/hooks/WalletProvider`:
     }
   }, [wallets, selectedAccountByWalletRdns])
 ```
+
+
 
 #### Eip6963
 
