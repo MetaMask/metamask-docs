@@ -343,7 +343,7 @@ We also added an interface for our WalletErrors too.
 
 ### 2. Build the context provider
 
-This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects and RPC calls will be needed to create our React Context component that will wrap our application providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets.
+This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects and RPC calls will be needed to create our React Context component that will wrap our application providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets. We will add each piece in succession and explain each.
 
 Add the following code to `src/hooks/WalletProvider`:
 
@@ -363,8 +363,105 @@ interface WalletProviderContext {
 
 1. The first line is the imports that will be needed for our Context provider.
 2. The second line is a type alias for a record where the keys are wallet identifiers and the values are account addresses (or null).
-3. Starting on line 3, is a definition of the context interface for the EIP-6963 provider. 
-   This includes the list of wallets (record of wallets by rdns), the selected wallet (of type `EIP6963ProviderDetail`), the selected account as a `string`, error message as a string, and functions to connect and disconnect wallets.
+3. Starting on line 3, is a definition of the context interface for the EIP-6963 provider. This includes the list of wallets (record of wallets by rdns), the selected wallet (of type `EIP6963ProviderDetail`), the selected account address (`string`), error message (`string`), and functions to connect and disconnect wallets.
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```ts title="WalletProvider"
+declare global{
+  interface WindowEventMap {
+    'eip6963:announceProvider': CustomEvent
+  }
+}
+```
+
+Here we extend the global `WindowEventMap` interface to include the custom `eip6963:announceProvider` event, ensuring type safety and a better developer experience when working with TypeScript. Since this custom event is not natively recognized by TypeScript, we need to declare it explicitly to avoid type errors and provide proper type checking and autocompletion and helping TypeScript understand the new event type.
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```ts title="WalletProvider" showLineNumbers
+export const WalletProviderContext = createContext<WalletProviderContext>(null)
+
+export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const [wallets, setWallets] = useState<Record<string, EIP6963ProviderDetail>>({})
+  const [selectedWalletRdns, setSelectedWalletRdns] = useState<string | null>(null)
+  const [selectedAccountByWalletRdns, setSelectedAccountByWalletRdns] = useState<SelectedAccountByWallet>({})
+
+  const [errorMessage, setErrorMessage] = useState('')
+  const clearError = () => setErrorMessage('')
+  const setError = (error: string) => setErrorMessage(error)
+
+  useEffect(() => {
+    const savedSelectedWalletRdns = localStorage.getItem('selectedWalletRdns')
+    const savedSelectedAccountByWalletRdns = localStorage.getItem('selectedAccountByWalletRdns')
+
+    if (savedSelectedAccountByWalletRdns) {
+      setSelectedAccountByWalletRdns(JSON.parse(savedSelectedAccountByWalletRdns))
+    }
+
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
+      setWallets(currentWallets => ({
+        ...currentWallets,
+        [event.detail.info.rdns]: event.detail
+      }))
+
+      if (savedSelectedWalletRdns && event.detail.info.rdns === savedSelectedWalletRdns) {
+        setSelectedWalletRdns(savedSelectedWalletRdns)
+      }
+    }
+
+    window.addEventListener('eip6963:announceProvider', onAnnouncement)
+    window.dispatchEvent(new Event('eip6963:requestProvider'))
+    
+    return () => window.removeEventListener('eip6963:announceProvider', onAnnouncement)
+  }, [])
+```
+
+1. On line 1 we Create a React Context for the EIP-6963 WalletProvider with the defined interface `WalletProviderContext` with a default of `null`.
+2. On line 3 we define the `WalletProvider` component which will wrap all other components in our dapp and provide their children with the data and functions needed, initializing state for wallets, the selected wallet RDNS, and selected accounts. Using `React.FC<PropsWithChildren>` provides a structured way to type your functional React components that include children props. Defining it this way is necessary because it ensures that the component's return type is correctly typed as a React element preventing common errors and improves reliability. `PropsWithChildren` is a utility type that adds a children prop to the component's props. This makes it clear and explicit that `WalletProvider` is meant to wrap other components, and those wrapped components will be accessible as children. With `React.FC`, you don't need to explicitly define the children prop in your props interface. This reduces boilerplate code and makes your component's props definition cleaner and more concise and supports `defaultProps` and `propTypes` out of the box, useful for setting default values and type-checking props at runtime.
+3. Lines 4 through 10 are our state Definitions: 
+  - `wallets`: State to hold detected wallets. 
+  - `selectedWalletRdns`: State to hold the RDNS of the selected wallet. 
+  - `selectedAccountByWalletRdns`: State to hold accounts associated with each wallet.
+  - `errorMessage`: State to hold the error message when a wallet errors on connection.
+  - `clearError`: Function to clear the state in `errorMessage`.
+  - `setError`: Function to set the state in `errorMessage` (with a `string`)
+4. Line 12 is our `useEffect` hook and it handles:
+  - Local Storage Retrieval: On mount, retrieve the saved selected wallet and accounts from local storage.
+  - Event Listener: Adds an event listener for the custom `eip6963:announceProvider` event. 
+  - `OnAnnouncement`: When a provider announces itself, update the state.
+  - Provider Request: Dispatch an event to request existing providers.
+  - Cleanup: A `return` statement in a `useEffect` is used for cleanup, in our case it removes the event listener on unmount. 
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```ts title="WalletProvider" showLineNumbers
+  const connectWallet = useCallback(async (walletRdns: string) => {
+    try {
+      const wallet = wallets[walletRdns]
+      const accounts = await wallet.provider.request({method:'eth_requestAccounts'}) as string[]
+
+      if(accounts?.[0]) {
+        setSelectedWalletRdns(wallet.info.rdns)
+        setSelectedAccountByWalletRdns((currentAccounts) => ({
+          ...currentAccounts,
+          [wallet.info.rdns]: accounts[0],
+        }))
+        
+        // Save state to local storage for persistence
+        localStorage.setItem('selectedWalletRdns', wallet.info.rdns)
+        localStorage.setItem('selectedAccountByWalletRdns', JSON.stringify({
+          ...selectedAccountByWalletRdns,
+          [wallet.info.rdns]: accounts[0],
+        }))
+      }
+    } catch (error) {
+      console.error('Failed to connect to provider:', error)
+      const walletError: WalletError = error as WalletError
+      setError(`Code: ${walletError.code} \nError Message: ${walletError.message}`)
+    }
+  }, [wallets, selectedAccountByWalletRdns])
+```
 
 #### Eip6963
 
