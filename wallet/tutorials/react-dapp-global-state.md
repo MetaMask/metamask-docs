@@ -278,7 +278,63 @@ Check your directory structure in comparison to the The following directory tree
 ├── vite-env.d.ts
 ```
 
+### 2. Import EIP-6963 interfaces
+
+Your dapp will connect to MetaMask using the mechanism introduced by
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+
+:::info Why EIP-6963?
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
+mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support
+[wallet interoperability](../concepts/wallet-interoperability.md) by discovering multiple injected
+wallet providers in a user's browser.
+:::
+
+Update the Vite environment variable file, `src/vite-env.d.ts`, with the types and interfaces
+needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193):
+
+```tsx title="vite-env.d.ts"
+/// <reference types="vite/client" />
+
+interface EIP1193Provider {
+  isStatus?: boolean;
+  host?: string;
+  path?: string;
+  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+}
+
+interface EIP6963ProviderInfo {
+  rdns: string;
+  uuid: string;
+  name: string;
+  icon: string;
+}
+
+interface EIP6963ProviderDetail {
+  info: EIP6963ProviderInfo;
+  provider: EIP1193Provider;
+}
+
+type EIP6963AnnounceProviderEvent = {
+  detail:{
+    info: EIP6963ProviderInfo,
+    provider: Readonly<EIP1193Provider>
+  }
+}
+
+interface WalletError {
+  code?: string
+  message?: string
+}
+```
+
 ### 2. Build the context provider
+
+This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects and RPC calls will be needed to create our React Context component that will wrap our application providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets.
 
 
 ### 3. Wrap components with the context provider
