@@ -267,8 +267,8 @@ Check your directory structure in comparison to the The following directory tree
 │   │   ├──  WalletList.module.css
 │   │   └──  WalletList.tsx
 │   ├── hooks
-│   │   ├── Eip6963Provider.tsx
-│   │   └── useEip6963Provider.tsx
+│   │   ├── WalletProvider.tsx
+│   │   └── useWalletProvider.tsx
 │   ├── utils
 │   │   └── index.tsx
 ├── App.css
@@ -280,8 +280,7 @@ Check your directory structure in comparison to the The following directory tree
 
 ### 2. Import EIP-6963 interfaces
 
-Your dapp will connect to MetaMask using the mechanism introduced by
-[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+Your dapp will connect to MetaMask using [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduced in the first tutorial.
 
 :::info Why EIP-6963?
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
@@ -332,16 +331,41 @@ interface WalletError {
 }
 ```
 
+We also added an interface for our WalletErrors too.
+
 ### 2. Build the context provider
 
 This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects and RPC calls will be needed to create our React Context component that will wrap our application providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets.
 
+Let's open the file at `src/hooks/WalletProvider`. We will start by importing the React types, functions and hooks and setting up the `SelectedAccountByWallet` type and `WalletProviderContext` interface which will define the shape of our React Context:
+
+```ts title="WalletProvider" showLineNumbers
+import { PropsWithChildren, createContext, useCallback, useEffect, useState } from 'react'
+type SelectedAccountByWallet = Record<string, string | null>
+interface WalletProviderContext {
+  wallets: Record<string, EIP6963ProviderDetail>         // Record of wallets by UUID
+  selectedWallet: EIP6963ProviderDetail | null           // Currently selected wallet
+  selectedAccount: string | null                         // Account address of selected wallet
+  errorMessage: string | null                            // Error message
+  connectWallet: (walletUuid: string) => Promise<void>   // Function to trigger wallet connection
+  disconnectWallet: () => void                           // Function to trigger wallet disconnection
+  clearError: () => void                                 // Function to clear error message
+}
+```
+
+1. The first line is the imports that will be needed for our Context provider.
+2. The second line is a type alias for a record where the keys are wallet identifiers and the values are account addresses (or null).
+3. Starting on line 3, is a definition of the context interface for the EIP-6963 provider. 
+   This includes the list of wallets (record of wallets by rdns), the selected wallet (of type `EIP6963ProviderDetail`), the selected account as a `string`, error message as a string, and functions to connect and disconnect wallets.
+
+#### Eip6963
 
 ### 3. Wrap components with the context provider
 
 
-### 4. Create the components that discover, list and connect to installed wallets
+### 4. Create the UI components
 
+These components will iterate over the discovered wallets, list each injected provider as a button that handles connecting to a specific wallet, display the connected wallet and allow for disconnecting from the wallet once selected.
 
 ### 5. Display MetaMask data
 
