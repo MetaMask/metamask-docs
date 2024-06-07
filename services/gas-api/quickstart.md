@@ -3,6 +3,9 @@ description: Get started with the Gas APIs.
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Quickstart
 
 This quickstart shows you how to call the Gas API using JavaScript.
@@ -10,31 +13,8 @@ You can also use a tool such as [cURL](https://curl.se/) or [Postman](https://ww
 call the REST APIs.
 
 :::tip
-You can view the [API reference content](api-reference/index.md) to view the `curl` command for each API. 
+View the [API reference content](api-reference/index.md) to view the `curl` command for each API. 
 :::
-
-You can call the Gas APIs in two ways:
-
-- **Using the API key only** - Add your [API key](https://docs.infura.io/api/getting-started#4-secure-your-api-key)
-    as a path option.
-- **Using the API key and API key secret** - Use basic authentication and specify the API key
-    and [API key secret](https://docs.infura.io/dashboard/secure-an-api/api-key-secret).
-
-<Tabs>
-  <TabItem value="API key only" label="Use an API key only" default>
-
-```bash
-curl -X 'GET' "https://gas.api.infura.io/v3/<API_KEY>/networks/1/suggestedGasFees"
-```
-
-  </TabItem>
-  <TabItem value="API key and API key secret" label="Use an API key and API key secret" >
-
-  ```bash
-curl -X 'GET' -u <API_KEY>:<API_KEY_SECRET> "https://gas.api.infura.io/networks/1/suggestedGasFees"
-```
-  </TabItem>
-  </Tabs>
 
 ## Prerequisites
 
@@ -84,10 +64,15 @@ Replace the Infura project credential placeholders with your own.
 
 :::note
 The `INFURA_API_KEY_SECRET` is optional and only necessary if you are using an
-[API key secret](../../../dashboard/secure-an-api/api-key-secret.md) to authenticate requests.
+[API key secret](https://docs.infura.io/dashboard/secure-an-api/api-key-secret) to authenticate requests.
 :::
 
 ## Create your script
+
+The Gas API supports [multiple request formats](./api-reference/index.md#supported-api-request-formats), and
+you can call the methods with or without specifying an API key secret.
+
+Create a file (in this example `index.js`):
 
 ```bash
 touch index.js
@@ -100,6 +85,31 @@ If using a network other than Ethereum Mainnet, update the `chainId` value (`1`)
 alternate [supported network](supported-networks.md).
 :::
 
+<Tabs>
+  <TabItem value="Use API key" label="Use an API key only" default>
+
+```javascript title="index.js"
+const axios = require("axios");
+require("dotenv").config();
+
+// The chain ID of the supported network
+const chainId = 1;
+
+(async () => {
+  try {
+    const { data } = await axios.get(
+      `https://gas.api.infura.io/v3/${process.env.INFURA_API_KEY}/networks/${chainId}/suggestedGasFees`
+    );
+    console.log("Suggested gas fees:", data);
+  } catch (error) {
+    console.log("Server responded with:", error);
+  }
+})();
+```
+
+  </TabItem>
+  <TabItem value="With basic authentication" label="Use an API key and API key secret" default>
+
 ```javascript title="index.js"
 const axios = require("axios");
 require("dotenv").config();
@@ -108,7 +118,7 @@ const Auth = Buffer.from(
   process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
 ).toString("base64");
 
-// The chain ID of the supported network.
+// The chain ID of the supported network
 const chainId = 1;
 
 (async () => {
@@ -119,7 +129,7 @@ const chainId = 1;
         headers: {
           Authorization: `Basic ${Auth}`,
         },
-      }
+      },
     );
     console.log("Suggested gas fees:", data);
   } catch (error) {
@@ -127,6 +137,8 @@ const chainId = 1;
   }
 })();
 ```
+  </TabItem>
+</Tabs>
 
 ## Run the script
 

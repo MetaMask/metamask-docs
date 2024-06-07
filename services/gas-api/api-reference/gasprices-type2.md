@@ -56,20 +56,12 @@ and optional [API key secret](https://docs.infura.io/networks/ethereum/how-to/se
 to authorize your account to use the APIs.
 
 :::tip
-You can call the API with only an API key, and [include it as a path parameter](https://docs.infura.io/api/infura-expansion-apis/gas-api/api-reference#supported-api-request-formats)
+You can call the API with only an API key, and [include it as a path parameter](./index.md#supported-api-request-formats)
 instead of using the cURL authentication option (`-u`).
 :::
 
 <Tabs>
-<TabItem value="API key only" label="Use an API key only" default>
-
-```bash
-curl -X 'GET' \ 
-  "https://gas.api.infura.io/v3/<API_KEY>/networks/1/suggestedGasFees"
-```
-
-</TabItem>
-<TabItem value="API key and API key secret" label="Use an API key and API key secret" >
+  <TabItem value="cURL" label="cURL" default >
 
 ```bash
 curl -X 'GET' \
@@ -77,8 +69,8 @@ curl -X 'GET' \
   "https://gas.api.infura.io/networks/1/suggestedGasFees"
 ```
 
-</TabItem>
-<TabItem value="JavaScript">
+  </TabItem>
+  <TabItem value="JavaScript">
 
 ```javascript
 const axios = require("axios");
@@ -110,7 +102,7 @@ const chainId = 1;
 })();
 ```
 
-</TabItem>
+  </TabItem>
 </Tabs>
 
 ### Response

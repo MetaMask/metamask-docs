@@ -11,6 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## June 2024
 
+- Documented that the Gas API can be [called without an API key secret](/services/gas-api/quickstart). ([#1346](https://github.com/MetaMask/metamask-docs/pull/1346))
 - Updated [Snaps resources](/snaps/learn/resources) and added a new section "Snaps for developers." ([#1329](https://github.com/MetaMask/metamask-docs/pull/1329))
 - Documented [how to allow automatic connections to a Snap](/snaps/how-to/allow-automatic-connections).
   ([#1322](https://github.com/MetaMask/metamask-docs/pull/1322))
