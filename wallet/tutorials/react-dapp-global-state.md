@@ -430,7 +430,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   - Event Listener: Adds an event listener for the custom `eip6963:announceProvider` event. 
   - `OnAnnouncement`: When a provider announces itself, update the state.
   - Provider Request: Dispatch an event to request existing providers.
-  - Cleanup: A `return` statement in a `useEffect` is used for cleanup, in our case it removes the event listener on unmount. 
+  - Cleanup: A `return` statement in a `useEffect` is used for cleanup, in our case it removes the event listener on unmount.
 
 Add the following code to `src/hooks/WalletProvider`:
 
@@ -462,24 +462,311 @@ Add the following code to `src/hooks/WalletProvider`:
   }, [wallets, selectedAccountByWalletRdns])
 ```
 
+This function is responsible for connecting a wallet and updating the component's state accordingly. The parameter `walletRdns` is the Reverse Domain Name System identifier of the wallet to connect to.
 
+Inside the function, an asynchronous operation is performed to request accounts from the wallet provider using the Ethereum JSON-RPC method `eth_requestAccounts`.
 
-#### Eip6963
+**State Update:** If the operation is successful (`accounts?.[0]` evaluates to `true`), the selected wallet `rdns` and the corresponding account are updated in the component's state.
+
+**Local Storage:** The selected wallet `rdns` and account information are also stored in the browser's local storage to persist the state across page reloads.
+
+**Error Handling:** Errors that occur during the connection process are caught and logged to the console.
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```ts title="WalletProvider"
+  const disconnectWallet = useCallback(async () => {
+    if (selectedWalletRdns) {
+      setSelectedAccountByWalletRdns((currentAccounts) => ({
+        ...currentAccounts,
+        [selectedWalletRdns]: null,
+      }))
+      const wallet = wallets[selectedWalletRdns];
+      setSelectedWalletRdns(null)
+
+      // Clear state from local storage
+      localStorage.removeItem('selectedWalletRdns')
+
+      // Revoke permissions
+      try {
+        await wallet.provider.request({
+          method: 'wallet_revokePermissions',
+          params: [{ 'eth_accounts': {} }]
+        });
+      } catch (error) {
+        console.error('Failed to revoke permissions:', error);
+      }
+    }
+  }, [wallets, selectedWalletRdns])
+```
+
+**Definition:** This function is responsible for disconnecting the currently selected wallet and performing necessary cleanup tasks.
+
+**Condition Check:** It checks if a wallet is currently selected (`selectedWalletRdns` is truthy).
+
+**Update State:** If a wallet is selected, it sets the account for that wallet to `null` in the component's state, effectively disconnecting the wallet.
+
+**Local Storage Cleanup:** Removes the selected wallet `rdns` from local storage to clear any persisted state related to the disconnected wallet.
+
+**Revoke Permissions:** Programmatically sends a request to revoke permissions (disconnects from the dapp) for the disconnected wallet using the [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) method. This ensures that the dApp no longer has access to the account information of the disconnected wallet.
+
+:::caution important
+`wallet_revokePermission` is an experimental RPC method that may only work with MetaMask, however; setting it up in a try/catch and having it separated from the rest of the cleanup ensures that if a wallet does not support it the rest of the disconnect functionality happens and it fails gracefully with a simple console log indicating: **__"WalletProvider.tsx:141 Failed to revoke permissions: method [wallet_revokePermissions] doesn't has corresponding handler"__**.
+:::
+
+**Error Handling:** Errors that occur during the permission revocation process are caught and logged to the console.
+
+#### The reason for utilizing `useCallback`
+
+Both of the previous functions utilize `useCallback`. It is used to memoize the `connectWallet` function optimizing performance and preventing unnecessary re-renders. It ensures that the function instance remains consistent between renders if its dependencies haven't changed. 
+
+Let's take the case of `disconnectWallet`:
+
+Each time the `WalletProvider` component re-renders, without `useCallback` a new instance of `disconnectWallet` would be created, leading to unnecessary re-renders of child components that depend on this function. By memoizing it with `useCallback`, React ensures that the function instance remains the same between renders if its dependencies (`wallets` and `selectedWalletRdns`) haven't changed. This prevents child components from re-rendering unnecessarily.
+
+Even though `useCallback` is not completely necessary, we want to show best practices and we can't always assume the way in which a context provider like this one will be used or how the dapp might change or scale that would benefit from this performance consideration and it's fairly easy to implement.
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```ts title="WalletProvider" showLineNumbers
+  const contextValue: WalletProviderContext = {
+    wallets,
+    selectedWallet: selectedWalletRdns === null ? null : wallets[selectedWalletRdns],
+    selectedAccount: selectedWalletRdns === null ? null : selectedAccountByWalletRdns[selectedWalletRdns],
+    errorMessage,
+    connectWallet,
+    disconnectWallet,
+    clearError,
+  }
+
+  return (
+    <WalletProviderContext.Provider value={contextValue}>
+      {children}
+    </WalletProviderContext.Provider>
+  )
+```
+
+The purpose of `contextValue` is to bundle together the state and functions related to wallet management, making them accessible to all components within the `WalletProvider` context. It is important because it centralizes the wallet-related logic and state, allowing any component in the component tree to easily access and interact with the wallet data and actions without the need for prop drilling, thereby promoting cleaner and more maintainable code.
+
+We already know what each of these values are that make up the `WalletProviderContext`, but let's cover the logic behind lines 3 and 4 as they have similar logic, but provide a different value in each case based on `selectedWalletRdns` being null or not:
+
+**selectedWallet:** If `selectedWalletRdns` is null, we set `selectedWallet` to null. Otherwise, we retrieve the wallet details from the wallets state using the `rdns` identifier.
+
+**selectedAccount:** If `selectedWalletRdns` is null, we set `selectedAccount` to null. Otherwise, we retrieve the account address from the `selectedAccountByWalletRdns` state using the `rdns` identifier.
+
+Finally, within the return statement of the component the `contextValue` object is constructed with all necessary state and functions related to wallet management, it is passed to the `WalletProviderContext.Provider`. This makes the wallet-related data and functions available to all descendant components, enabling them to access and interact with the wallet state without prop drilling. 
+
+The return statement effectively wraps the children components with the context provider, ensuring they can consume the context values.
+
+Add the following code to `src/hooks/WalletProvider`:
+
+```tsx title="useWalletProvider.tsx"
+import { useContext } from 'react'
+import { WalletProviderContext } from './WalletProvider'
+
+export const useWalletProvider = () => useContext(WalletProviderContext)
+```
+
+The `useWalletProvider.tsx` file provides a custom hook that simplifies the process of consuming the `WalletProviderContext`.
+
+In the code, we export the `useWalletProvider` hook, which leverages the `useContext` hook to consume the `WalletProviderContext`.
+
+The benefits of having this separate file exporting the hook is that components can directly call `useWalletProvider() ` instead of using `useContext(WalletProviderContext)`, making the code cleaner and more readable.
+As well it encapsulates the context consumption logic, promoting better separation of concerns and potentially allowing for easier updates or changes to the context logic and state for added features and maintenance.
+
+With `WalletProvider.tsx` and `useWalletProvider.tsx` in place, our dapp can now efficiently manage and access wallet-related state and functionality across various components. We can now wrap our entire application (or at least the part that require wallet connection and access) with a `<WalletProvider></WalletProvider>` component. This provides the wallet context to all child components wrapped.
 
 ### 3. Wrap components with the context provider
 
+Next we need to replace all of the code within the file `src/App.tsx`:
+
+```tsx title="App.tsx"
+import './App.css'
+import { WalletProvider } from '~/hooks/WalletProvider'
+// import { SelectedWallet } from './components/SelectedWallet'
+// import { WalletList } from './components/WalletList'
+// import { WalletError } from './components/WalletError'
+
+function App() {
+  return (
+    <WalletProvider>
+    {/* 
+      <WalletList />
+      <hr />
+      <SelectedWallet />
+      <WalletError /> 
+    */}
+    </WalletProvider>
+  )
+}
+
+export default App
+```
+
+This is very simple, our application only discovers injected providers (browser installed wallets), get a list of wallet providers (supplied by our context provider), we will iterate over then and provide a button for each one that uses the `connectWallet` function, and finally display the selected wallet and some basic information like the users wallet address.
+
+We will also have a UI component for showing errors.
+
+We have commented out the child components for now, but as we create each of these components, we will uncomment those specific lines. Let's move to the next step of creating each of the components we have defined here and add the logic and UI needed to accomplish our goals.
 
 ### 4. Create the UI components
 
-These components will iterate over the discovered wallets, list each injected provider as a button that handles connecting to a specific wallet, display the connected wallet and allow for disconnecting from the wallet once selected.
+We want to create them in the order that we have them listed top to bottom in the `App.tsx` file, so let's start with `WalletList.tsx`.
+
+Add the following code to `src/components/WalletList.tsx`:
+
+```tsx title="WalletList.tsx"
+import { useWalletProvider } from '~/hooks/useWalletProvider'
+import styles from './WalletList.module.css'
+
+export const WalletList = () => {
+  const { wallets, connectWallet } = useWalletProvider()
+  return (
+    <>
+      <h2>Wallets Detected:</h2>
+      <div className={styles.walletList}>
+        {
+          Object.keys(wallets).length > 0 ? Object.values(wallets).map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => connectWallet(provider.info.rdns)}>
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          )) :
+            <div>
+              there are no Announced Providers
+            </div>
+        }
+      </div>
+    </>
+  )
+}
+```
+
+In this code we import the `wallets` data and the function `connectWallet` from the `useWalletProvider` hook.
+
+The component first checks if there are any detected wallets using `Object.keys(wallets).length > 0`. This ensures that if no wallets are found, a message "No wallets detected" is displayed instead of an empty list.
+
+
+If wallets are detected, `Object.values(wallets).map(wallet => (...))` is used to iterate over the wallets and render a button for each one.
+
+- `Object.keys(wallets)` returns an array of the wallet keys (rdns values) but is used here just to check the length.
+- `Object.values(wallets)` returns an array of the wallet objects, which is what we need to map over and render.
+- Using `wallet.info.rdns` as the key ensures that each wallet button is uniquely identified.
 
 ### 5. Display MetaMask data
 
+Next, add the following code to `src/components/SelectedWallet.tsx`:
 
-### 6. Show MetaMask errors in the footer
+```tsx title="SelectedWallet.tsx" showLineNumbers
+import { useWalletProvider } from '~/hooks/useWalletProvider'
+import { formatAddress } from '~/utils'
+import styles from './SelectedWallet.module.css'
 
+export const SelectedWallet = () => {
+  const { selectedWallet, selectedAccount, disconnectWallet } = useWalletProvider()
+
+  return (
+    <>
+      <h2 className={styles.userAccount}>{selectedAccount ? '' : 'No '}Wallet Selected</h2>
+      {selectedAccount &&
+        <>
+          <div className={styles.selectedWallet}>
+            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
+            <div>{selectedWallet.info.name}</div>
+            <div>({formatAddress(selectedAccount)})</div>
+            <div><strong>uuid:</strong> {selectedWallet.info.uuid}</div>
+            <div><strong>rdns:</strong> {selectedWallet.info.rdns}</div>
+          </div>
+          <button onClick={disconnectWallet}>Disconnect Wallet</button>
+        </>
+      }
+    </>
+  )
+}
+```
+
+In this code we import the `selectedWallet` and `selectedAccount` and the function `disconnectWallet` from the `useWalletProvider` hook.
+
+The code occupying lines 11 through 22 above have some conditional rendering `{selectedAccount && (...)}`. This means that the content inside will only be rendered if `selectedAccount` is truthy (i.e., the user has selected and connected a wallet account). This ensures that the detailed information about the selected wallet is only displayed when there is an active wallet connected. We then display information about the wallet, but you could conditionally render anything like:
+
+- Wallet Address
+- Wallet Balance
+- Chain ID or Name
+- or render other components that first need a connected wallet to work
+
+### 6. Show wallet connection errors
+
+Add the following code to `src/components/WalletError.tsx`:
+
+```tsx title="WalletError.tsx"
+import { useWalletProvider } from '~/hooks/useWalletProvider'
+import styles from './WalletError.module.css'
+
+export const WalletError = () => {
+  const { errorMessage, clearError  } = useWalletProvider()
+  const isError = !!errorMessage
+
+  return (
+    <div className={styles.walletError} style={isError ? { backgroundColor: 'brown' } : {}}>
+      {isError &&
+        <div onClick={clearError}>
+          <strong>Error:</strong> {errorMessage}
+        </div>
+      }
+    </div>
+  )
+}
+```
+
+This last component is very straight forward, we have some CSS that activates only if an error is present as well as a `div` with the error message that will also only render if the `errorMessage` has data. 
+
+Upon clicking on the `div` we set `errorMessage` back to nothing which then hides the content.
+
+This is a bit of a hacky way, but illustrates that you could have certain content that only shows (like a modal or notification) upon connection errors when connecting to a wallet.
+
+### Run the final state of the dapp
+
+Now that we have all of this in place, let's uncomment the code in `Ap.tsx`
+
+```tsx title="App.tsx"
+import './App.css'
+import { WalletProvider } from '~/hooks/WalletProvider'
+import { SelectedWallet } from './components/SelectedWallet'
+import { WalletList } from './components/WalletList'
+import { WalletError } from './components/WalletError'
+
+function App() {
+  return (
+    <WalletProvider>
+      <WalletList />
+      <hr />
+      <SelectedWallet />
+      <WalletError />
+    </WalletProvider>
+  )
+}
+
+export default App
+```
+
+Now we can run `npm run dev` to view the wallet list and select a wallet to connect to.
+
+A few user tests you can perform to test the various features and functionality we have built:
+
+1. Have more than one wallet installed in your browser, test connecting and disconnecting from each
+2. Once you have a wallet selected, refresh or leave and come back to the page. 
+  - Ensure the selected wallet persists and does not revert back to **"No Wallet Selected"**
+3. Once you have a wallet selected, disable that wallet and refresh the page, then re-enable the wallet and refresh the page again. NOtice how the dapp behaves.
+4. Upon connecting to a wallet, cancel the connection or close the wallet prompt.
+  - This should trigger our WalletError component, then click to dismiss it.
 
 ## Conclusion
 
-You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/global-state-final)
+We have finished taking what we have learned about EIP-6963 and connecting to wallets, specifically Metamask, but it works with all wallets found on that [comply with EIP-6963](https://github.com/WalletConnect/EIP6963/blob/master/src/utils/constants.ts) and the integrate Multi Injected Provider Discovery.
+
+We have also thought of many of edge cases and created a context provider tht facilitates sharing data and functions for connecting and disconnecting from these wallets and handle errors.
+
+I'm hoping that with this tutorial or source code you are able to better understand how you might integrate this functionality and more into your own production dapps!
+
+You can see the [source code](https://github.com/MetaMask/vite-react-global-tutorial)
 for the final state of this dapp tutorial.
