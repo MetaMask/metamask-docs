@@ -52,16 +52,29 @@ Recommended gas price details based of the level of urgency:
 ### Request
 
 Include your [API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
-and [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
+and optional [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
 to authorize your account to use the APIs.
 
+:::tip
+You can call the API with only an API key, and [include it as a path parameter](https://docs.infura.io/api/infura-expansion-apis/gas-api/api-reference#supported-api-request-formats)
+instead of using the cURL authentication option (`-u`).
+:::
+
 <Tabs>
-<TabItem value="cURL">
+<TabItem value="API key only" label="Use an API key only" default>
 
 ```bash
-curl -X "GET"                     \
-    -u <API-KEY>:<API-KEY-SECRET> \
-    "https://gas.api.infura.io/networks/1/suggestedGasFees"
+curl -X 'GET' \ 
+  "https://gas.api.infura.io/v3/<API_KEY>/networks/1/suggestedGasFees"
+```
+
+</TabItem>
+<TabItem value="API key and API key secret" label="Use an API key and API key secret" >
+
+```bash
+curl -X 'GET' \
+  -u <API-KEY>:<API-KEY-SECRET> \
+  "https://gas.api.infura.io/networks/1/suggestedGasFees"
 ```
 
 </TabItem>
@@ -74,26 +87,26 @@ const apiKey = "<API-KEY>"; // Replace with your API key.
 const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
 
 const Auth = Buffer.from(
-    apiKey + ":" + apiKeySecret,
+  apiKey + ":" + apiKeySecret,
 ).toString("base64");
 
 // The chain ID of the supported network.
 const chainId = 1;
 
 (async () => {
-    try {
-        const { data } = await axios.get(
-            `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
-            {
-                headers: {
-                    Authorization: `Basic ${Auth}`,
-                },
-            },
-        );
-        console.log("Suggested gas fees:", data);
-    } catch (error) {
-        console.log("Server responded with:", error);
-    }
+  try {
+    const { data } = await axios.get(
+      `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
+      {
+        headers: {
+          Authorization: `Basic ${Auth}`,
+        },
+      }
+    );
+    console.log("Suggested gas fees:", data);
+  } catch (error) {
+    console.log("Server responded with:", error);
+  }
 })();
 ```
 
@@ -104,30 +117,30 @@ const chainId = 1;
 
 ```json
 {
-    "low": {
-        "suggestedMaxPriorityFeePerGas": "0.05",
-        "suggestedMaxFeePerGas": "16.334026964",
-        "minWaitTimeEstimate": 15000,
-        "maxWaitTimeEstimate": 30000
-    },
-    "medium": {
-        "suggestedMaxPriorityFeePerGas": "0.1",
-        "suggestedMaxFeePerGas": "22.083436402",
-        "minWaitTimeEstimate": 15000,
-        "maxWaitTimeEstimate": 45000
-    },
-    "high":{
-        "suggestedMaxPriorityFeePerGas": "0.3",
-        "suggestedMaxFeePerGas": "27.982845839",
-        "minWaitTimeEstimate": 15000,
-        "maxWaitTimeEstimate": 60000
-    },
-    "estimatedBaseFee": "16.284026964",
-    "networkCongestion" :0.5125,
-    "latestPriorityFeeRange": ["0", "3"],
-    "historicalPriorityFeeRange": ["0.000000001", "89"],
-    "historicalBaseFeeRange": ["13.773088584", "29.912845463"],
-    "priorityFeeTrend": "down",
-    "baseFeeTrend": "up"
+  "low": {
+    "suggestedMaxPriorityFeePerGas": "0.05",
+    "suggestedMaxFeePerGas": "16.334026964",
+    "minWaitTimeEstimate": 15000,
+    "maxWaitTimeEstimate": 30000
+  },
+  "medium": {
+    "suggestedMaxPriorityFeePerGas": "0.1",
+    "suggestedMaxFeePerGas": "22.083436402",
+    "minWaitTimeEstimate": 15000,
+    "maxWaitTimeEstimate": 45000
+  },
+  "high": {
+    "suggestedMaxPriorityFeePerGas": "0.3",
+    "suggestedMaxFeePerGas": "27.982845839",
+    "minWaitTimeEstimate": 15000,
+    "maxWaitTimeEstimate": 60000
+  },
+  "estimatedBaseFee": "16.284026964",
+  "networkCongestion": 0.5125,
+  "latestPriorityFeeRange": ["0", "3"],
+  "historicalPriorityFeeRange": ["0.000000001", "89"],
+  "historicalBaseFeeRange": ["13.773088584", "29.912845463"],
+  "priorityFeeTrend": "down",
+  "baseFeeTrend": "up"
 }
 ```

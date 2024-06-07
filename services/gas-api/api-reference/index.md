@@ -13,7 +13,7 @@ Use the APIs to:
 - [Get the busy threshold for a network.](./busythreshold.md)
 
 :::info note
-You need your [API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
-and [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
+Use your [API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
+and, optionally, an [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
 to authorize your account to use the interactive APIs.
 :::
