@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import ldClient from "launchdarkly";
-
 import Content from "@theme-original/Navbar/Content";
 
 export default function ContentWrapper(props) {
-  const [featureEnabled, setFeatureEnabled] = useState(false);
+  // to avoid flickering
+  const [ldReady, setLdReady] = useState<boolean>(false);
+  const [featureFlag, setFeatureFlag] = useState<boolean>(false);
 
   useEffect(() => {
-    ldClient.on("ready", () => {
+    ldClient.waitUntilReady().then(() => {
       const flagValue = ldClient.variation("siwsrpLogin", false);
-      setFeatureEnabled(flagValue);
+      setFeatureFlag(flagValue);
+      setLdReady(true);
     });
-
-    // Optionally, listen for changes to feature flags
+    
     ldClient.on("change:siwsrpLogin", (current) => {
-      setFeatureEnabled(current);
+      setFeatureFlag(current);
     });
-  }, []);
+  });
+
   
   return (
     <>
       <Content {...props} />
-      <div>{featureEnabled ? "ON" : "OFF"}</div>
+      {ldReady ? <div>{featureFlag ? "ON" : "OFF"}</div> : <div>ld loading</div>}
     </>
   );
 }
