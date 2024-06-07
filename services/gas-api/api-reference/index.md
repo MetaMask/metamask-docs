@@ -2,6 +2,9 @@
 description: Reference content for the Gas API.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # API reference
 
 This section provides reference information for the various Gas REST APIs.
