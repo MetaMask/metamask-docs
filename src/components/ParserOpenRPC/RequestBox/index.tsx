@@ -39,12 +39,14 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
           </CodeBlock>
         </div>
         <div className={styles.cardFooter}>
-          <button
-            className={clsx(global.linkBtn, "margin-right--md")}
-            disabled={!isMetamaskInstalled}
-          >
-            Customize request
-          </button>
+          {params.length > 0 && (
+            <button
+              className={clsx(global.linkBtn, "margin-right--md")}
+              disabled={!isMetamaskInstalled}
+            >
+              Customize request
+            </button>
+          )}
           <button className={global.primaryBtn} disabled={!isMetamaskInstalled}>
             Run request
           </button>

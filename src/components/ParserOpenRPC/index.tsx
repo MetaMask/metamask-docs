@@ -23,30 +23,32 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!currentNetwork && currentNetwork.error) return null;
 
   const currentMethodData = useMemo(() => {
-    const currentMethod = currentNetwork.data.methods?.find((met: { name: string; }) => met.name === method);
-    if (!currentMethod) return null;
-    const preparedErrors = () => {
-      if (!currentMethod.errors || currentMethod.errors.length === 0) return [];
-      const updatedErrors = currentMethod.errors.map(item => {
-        if (item?.code && item?.message) {
-          return item;
-        }
+    const findReferencedItem = (items, refPath, componentType) => {
+      return items?.map(item => {
+        if (item?.name || (item?.code && item?.message)) return item;
         if (item?.$ref) {
-          const ref = item.$ref.replace("#/components/errors/", "");
-          const refErrorItem = currentNetwork.data.components.errors[ref];
-          if (refErrorItem) return refErrorItem;
+          const ref = item.$ref.replace(refPath, "");
+          return currentNetwork.data.components[componentType][ref];
         }
-      });
-      return updatedErrors.filter(Boolean);
+        return null;
+      }).filter(Boolean) || [];
     };
-    return ({
+  
+    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method);
+    if (!currentMethod) return null;
+  
+    const errors = findReferencedItem(currentMethod.errors, "#/components/errors/", "errors");
+    const tags = findReferencedItem(currentMethod.tags, "#/components/tags/", "tags");
+  
+    return {
       description: currentMethod.summary || currentMethod.description || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
-      errors: preparedErrors(),
-    });
-  }, [netData, network]);
+      errors,
+      tags,
+    };
+  }, [currentNetwork, method]);
 
   if (currentMethodData === null) return null;
 
@@ -64,6 +66,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           params={currentMethodData.params}
           components={currentMethodData.components.schemas}
           result={currentMethodData.result}
+          tags={currentMethodData.tags}
         />
         <ErrorsBox errors={currentMethodData.errors} />
       </div>

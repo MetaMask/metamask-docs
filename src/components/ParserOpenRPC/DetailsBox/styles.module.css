@@ -50,3 +50,19 @@
 .secondaryHeading {
   font-size: 24px;
 }
+
+.tagList {
+  display: flex;
+}
+
+.tagItem {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px 8px 0;
+  font-size: 12px;
+  line-height: 1;
+  color: #141618;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #FFCDD2;
+}
