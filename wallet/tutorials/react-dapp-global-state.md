@@ -19,6 +19,8 @@ The [previous tutorial](react-dapp-local-state.md) walks you through creating a 
 
 In real world use cases, a dapp usually shares global state across many components. This tutorial is intentionally complex for what it does, but if you are planning on rolling your own wallet detection and connection solution, this will be a great primer.
 
+ADD IMAGE OF FINAL VIEW OF APPLICATION
+
 In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
 
@@ -653,6 +655,8 @@ If wallets are detected, `Object.values(wallets).map(wallet => (...))` is used t
 - `Object.values(wallets)` returns an array of the wallet objects, which is what we need to map over and render.
 - Using `wallet.info.rdns` as the key ensures that each wallet button is uniquely identified.
 
+ADD IMAGE OF APPLICATION WITH `WalletList` COMPONENT
+
 ### 5. Display MetaMask data
 
 Next, add the following code to `src/components/SelectedWallet.tsx`:
@@ -694,6 +698,8 @@ The code occupying lines 11 through 22 above have some conditional rendering `{s
 - Chain ID or Name
 - or render other components that first need a connected wallet to work
 
+ADD IMAGE OF APPLICATION WITH `SelectedWallet` COMPONENT
+
 ### 6. Show wallet connection errors
 
 Add the following code to `src/components/WalletError.tsx`:
@@ -724,6 +730,8 @@ Upon clicking on the `div` we set `errorMessage` back to nothing which then hide
 
 This is a bit of a hacky way, but illustrates that you could have certain content that only shows (like a modal or notification) upon connection errors when connecting to a wallet.
 
+ADD IMAGE OF APPLICATION WITH `WalletError` COMPONENT SHOWN
+
 ### Run the final state of the dapp
 
 Now that we have all of this in place, let's uncomment the code in `Ap.tsx`
@@ -750,6 +758,8 @@ export default App
 ```
 
 Now we can run `npm run dev` to view the wallet list and select a wallet to connect to.
+
+ADD IMAGE OF FINAL VIEW OF APPLICATION
 
 A few user tests you can perform to test the various features and functionality we have built:
 
