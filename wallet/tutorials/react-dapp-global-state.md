@@ -523,6 +523,27 @@ As well it encapsulates the context consumption logic, promoting better separati
 
 With `WalletProvider.tsx` and `useWalletProvider.tsx` in place, our dapp can now efficiently manage and access wallet-related state and functionality across various components. We can now wrap our entire application (or at least the part that require wallet connection and access) with a `<WalletProvider></WalletProvider>` component. This provides the wallet context to all child components wrapped.
 
+Add the following code to `src/utils/index.ts`:
+
+```tsx title="useWalletProvider.tsx"
+export const formatBalance = (rawBalance: string) => {
+  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2)
+  return balance
+}
+
+export const formatChainAsNum = (chainIdHex: string) => {
+  const chainIdNum = parseInt(chainIdHex)
+  return chainIdNum
+}
+
+export const formatAddress = (addr: string) => {
+  const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+  return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
+}
+```
+
+Although we only use `formatAddress` and not `formatBalance` and `formatChainAsNum`, I have left these utility functions in just in case you find them useful. You can also look into how to do stuff like this with [Viem Formatters](https://viem.sh/docs/chains/formatters) or other libraries.
+
 ### 3. Wrap components with the context provider
 
 Next we need to replace all of the code within the file `src/App.tsx`:
