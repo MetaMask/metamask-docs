@@ -149,7 +149,7 @@ Add the following CSS to `SelectedWallet.module.css`, `WalletError.module.css`, 
   padding: 16px;
   color: #EFEFEF;
   background-color: transparent;
-  user-select: none; /* Standard syntax */
+  user-select: none;
 }
 ```
 
@@ -394,7 +394,6 @@ Add the following code to `src/hooks/WalletProvider`:
           [wallet.info.rdns]: accounts[0],
         }))
         
-        // Save state to local storage for persistence
         localStorage.setItem('selectedWalletRdns', wallet.info.rdns)
         localStorage.setItem('selectedAccountByWalletRdns', JSON.stringify({
           ...selectedAccountByWalletRdns,
@@ -428,13 +427,11 @@ Add the following code to `src/hooks/WalletProvider`:
         ...currentAccounts,
         [selectedWalletRdns]: null,
       }))
+
       const wallet = wallets[selectedWalletRdns];
       setSelectedWalletRdns(null)
-
-      // Clear state from local storage
       localStorage.removeItem('selectedWalletRdns')
 
-      // Revoke permissions
       try {
         await wallet.provider.request({
           method: 'wallet_revokePermissions',
