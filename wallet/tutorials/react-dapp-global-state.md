@@ -19,7 +19,7 @@ The [previous tutorial](react-dapp-local-state.md) walks you through creating a 
 
 In real-world use cases, a dapp shares state across many components. This tutorial is intentionally more complex than the previous as we go a step further to consider that real-world scenario. Below is a look at what we will be creating:
 
-![View of dapp we will be creating](../assets/react-tutorial-02-final-preview.png)
+![View of dapp we will be creating](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
 In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
@@ -624,7 +624,7 @@ If wallets are detected, `Object.values(wallets).map(wallet => (...))` iterates 
 
 If we uncomment the `WalletList` component in `src/App.tsx` and run the dapp, we should see the following:
 
-![View of WalletList component](../assets/react-tutorial-02-wallet-list.png)
+![View of WalletList component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-list.png)
 
 ### 5. Display MetaMask data
 
@@ -669,7 +669,7 @@ The code occupying lines 11 through 22 above has some conditional rendering `{se
 
 If we uncomment the `SelectedWallet` component in `src/App.tsx`, run the dapp and connect to MetaMask, we should see the following:
 
-![View of SelectedWallet component](../assets/react-tutorial-02-selected-wallet.png)
+![View of SelectedWallet component](../assets/tutorials/react-dapp/react-tutorial-02-selected-wallet.png)
 
 ### 6. Show wallet connection errors
 
@@ -703,7 +703,7 @@ Although hacky, it illustrates that you could have specific content that only sh
 
 If we uncomment the `WalletError` component in `src/App.tsx`, run the dapp and disconnect from MetaMask and connect again and reject or hit "cancel", we should see the following:
 
-![View of WalletError component](../assets/react-tutorial-02-wallet-error.png)
+![View of WalletError component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-error.png)
 
 ### Run the final state of the dapp
 
@@ -732,7 +732,7 @@ export default App
 
 Now, we can run `npm run dev` to view the wallet list and select a wallet to connect to. The final state of the dapp when connected to a MetaMask wallet will look like the following:
 
-![Final view of dapp](../assets/react-tutorial-02-final-preview.png)
+![Final view of dapp](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
 A few user tests you can perform to test the various features and functionality we have built:
 
