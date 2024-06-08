@@ -12,7 +12,7 @@ You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and Typ
 the dapp.
 
 :::tip
-We recommend first completing the [creating a React dapp with local state](react-dapp-local-state.md) tutorial, which contains essential information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963. If you skip the first tutorial, ensure you review [wallet interoperability](../concepts/wallet-interoperability.md) documentation to learn about multiple injected wallet providers.
+We recommend first completing the [creating a React dapp with local state](react-dapp-local-state.md) tutorial, which contains essential information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). If you skip the first tutorial, ensure you review [wallet interoperability](../concepts/wallet-interoperability.md) documentation to learn about multiple injected wallet providers.
 :::
 
 The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963. It demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection, all within a single component.
