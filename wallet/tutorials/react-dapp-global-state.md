@@ -12,14 +12,14 @@ You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and Typ
 the dapp.
 
 :::tip
-We recommend first completing the [creating a React dapp with local state](react-dapp-local-state.md) tutorial, which contains essential information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). If you skip the first tutorial, ensure you review [wallet interoperability](../concepts/wallet-interoperability.md) documentation to learn about multiple injected wallet providers.
+We recommend starting with: [creating a React dapp with local state](react-dapp-local-state.md), which covers essential information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963); if you skip it, consider reviewing wallet interoperability to understand multiple injected wallet providers.
 :::
 
 The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963. It demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection, all within a single component.
 
-In real-world use cases, a dapp usually shares a global state across many components. This tutorial is intentionally complex for what it does, but it will be a great primer if you are planning on rolling your own wallet detection and connection solution.
+In real-world use cases, a dapp shares state across many components. This tutorial is intentionally more complex than the previous as we go a step further to consider that real-world scenario. Below is a look at what we will be creating:
 
-ADD IMAGE OF FINAL VIEW OF APPLICATION
+![View of dapp we will be creating](../assets/react-tutorial-02-final-preview.png)
 
 In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
@@ -485,9 +485,9 @@ Add the following code to `src/hooks/WalletProvider`:
  }
 
   return (
- <WalletProviderContext.Provider value={contextValue}>
- {children}
- </WalletProviderContext.Provider>
+   <WalletProviderContext.Provider value={contextValue}>
+     {children}
+   </WalletProviderContext.Provider>
  )
 ```
 
@@ -549,8 +549,8 @@ Next, we need to replace all of the code within the file `src/App.tsx`:
 ```tsx title="App.tsx"
 import './App.css'
 import { WalletProvider } from '~/hooks/WalletProvider'
-// import { SelectedWallet } from './components/SelectedWallet'
 // import { WalletList } from './components/WalletList'
+// import { SelectedWallet } from './components/SelectedWallet'
 // import { WalletError } from './components/WalletError'
 
 function App() {
@@ -568,12 +568,15 @@ function App() {
 
 export default App
 ```
+We have commented out the child components for now, but as we create each of these components, we will uncomment those specific lines. Let's move to the next step of creating each of the components we have defined here and adding the logic and UI needed to accomplish our goals:
 
-This is very simple: Our application only discovers injected providers (browser-installed wallets). We get a list of wallet providers (supplied by our context provider), iterate over them, provide a button for each one that uses the `connectWallet` function, and finally display the selected wallet and some basic information like the user's wallet address.
-
-We will also have a UI component to show errors.
-
-We have commented out the child components for now, but as we create each of these components, we will uncomment those specific lines. Let's move to the next step of creating each of the components we have defined here and adding the logic and UI needed to accomplish our goals.
+- Discover injected providers (browser-installed wallets).
+- Save those providers and selected wallet in global state (context provider) 
+- Supply list of wallet providers to child components.
+- Include a component map the providers to a button with icon and name.
+  - Have a `connectWallet` function for each of those buttons.
+- Include a component that displays the selected wallet and info.
+- Include a UI component to show errors.
 
 ### 4. Create the UI components
 
@@ -619,7 +622,9 @@ If wallets are detected, `Object.values(wallets).map(wallet => (...))` iterates 
 - `Object.values(wallets)` returns an array of the wallet objects, which is what we need to map over and render.
 - Using `wallet.info.rdns` as the key ensures that each wallet button is uniquely identified.
 
-ADD IMAGE OF APPLICATION WITH `WalletList` COMPONENT
+If we uncomment the `WalletList` component in `src/App.tsx` and run the dapp, we should see the following:
+
+![View of WalletList component](../assets/react-tutorial-02-wallet-list.png)
 
 ### 5. Display MetaMask data
 
@@ -662,7 +667,9 @@ The code occupying lines 11 through 22 above has some conditional rendering `{se
 - Chain ID or Name
 - or render other components that first need a connected wallet to work
 
-ADD IMAGE OF APPLICATION WITH `SelectedWallet` COMPONENT
+If we uncomment the `SelectedWallet` component in `src/App.tsx`, run the dapp and connect to MetaMask, we should see the following:
+
+![View of SelectedWallet component](../assets/react-tutorial-02-selected-wallet.png)
 
 ### 6. Show wallet connection errors
 
@@ -694,7 +701,9 @@ Upon clicking on the `div`, we set `errorMessage` back to nothing, which then hi
 
 Although hacky, it illustrates that you could have specific content that only shows (like a modal or notification) upon connection errors when connecting to a wallet.
 
-ADD IMAGE OF APPLICATION WITH `WalletError` COMPONENT SHOWN
+If we uncomment the `WalletError` component in `src/App.tsx`, run the dapp and disconnect from MetaMask and connect again and reject or hit "cancel", we should see the following:
+
+![View of WalletError component](../assets/react-tutorial-02-wallet-error.png)
 
 ### Run the final state of the dapp
 
@@ -703,8 +712,8 @@ Now that we have all of this in place let's uncomment the code in `App.tsx`
 ```tsx title="App.tsx"
 import './App.css'
 import { WalletProvider } from '~/hooks/WalletProvider'
-import { SelectedWallet } from './components/SelectedWallet'
 import { WalletList } from './components/WalletList'
+import { SelectedWallet } from './components/SelectedWallet'
 import { WalletError } from './components/WalletError'
 
 function App() {
@@ -721,9 +730,9 @@ function App() {
 export default App
 ```
 
-Now, we can run `npm run dev` to view the wallet list and select a wallet to connect to.
+Now, we can run `npm run dev` to view the wallet list and select a wallet to connect to. The final state of the dapp when connected to a MetaMask wallet will look like the following:
 
-ADD IMAGE OF FINAL VIEW OF APPLICATION
+![Final view of dapp](../assets/react-tutorial-02-final-preview.png)
 
 A few user tests you can perform to test the various features and functionality we have built:
 
