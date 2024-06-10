@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[6737],{15236:a=>{a.exports=JSON.parse('{"tags":[{"label":"Keyring API","permalink":"/ACT-1379-add-launchdarkly/snaps/tags/keyring-api","count":9}]}')}}]);
