@@ -403,7 +403,7 @@ const config = {
     [
       "./src/plugins/launchdarkly",
       {
-        clientId: process.env.LD_CLIENT_ID,
+        clientId: "6449dfe32c088a1338d69a96",
       },
     ],
   ],
