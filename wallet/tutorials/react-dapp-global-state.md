@@ -4,6 +4,9 @@ toc_max_heading_level: 4
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Create a React dapp with global state
 
 This tutorial walks you through integrating a React dapp with MetaMask.
@@ -98,7 +101,6 @@ Create the following files in `src/components`:
 - `WalletList.tsx`
 
 </TabItem>
-
 <TabItem value="src/hooks">
 
 Create the following files in `src/hooks`:
@@ -107,7 +109,6 @@ Create the following files in `src/hooks`:
 - `useEip6963Provider.tsx`
 
 </TabItem>
-
 <TabItem value="src/utils">
 
 Create the following file in `src/utils`:
@@ -333,7 +334,7 @@ declare global{
 }
 ```
 
-Here, you extend the global `WindowEventMap` interface to include the custom `eip6963:announceProvider` event, ensuring type safety and a better developer experience when working with TypeScript. Since this custom event is not natively recognized by TypeScript, you must declare it explicitly to avoid type errors, provide proper type checking and autocompletion, and help TypeScript understand the new event type.
+You extended the global `WindowEventMap` interface with the custom `eip6963:announceProvider` event to ensure type safety and improve the TypeScript developer experience. Explicitly declaring this event prevents type errors, enables proper type checking, and supports autocompletion in TypeScript.
 
 Add the following code to `src/hooks/WalletProvider`:
 
@@ -375,7 +376,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
  }, [])
 ```
 
-1. On line 1, we create a React Context for the EIP-6963 WalletProvider with the defined interface `WalletProviderContext` with a default of `null`.
+1. On line 1, create a React Context for the EIP-6963 WalletProvider with the defined interface `WalletProviderContext` with a default of `null`.
 2. On line 3, we define the `WalletProvider` component. The WalletProvider component wraps all other components in our dApp, providing them with the necessary data and functions related to wallets. Using `React.FC<PropsWithChildren>` ensures that the component properly types the children it wraps, reducing errors and improving reliability by clearly indicating that WalletProvider will have children components. This approach also simplifies the definition of props, making the code cleaner and more concise.
 3. Lines 4 through 10 are our state Definitions: 
   - `wallets`: State to hold detected wallets. 
@@ -420,9 +421,9 @@ Add the following code to `src/hooks/WalletProvider`:
  }, [wallets, selectedAccountByWalletRdns])
 ```
 
-This function connects a wallet and updates the component's state accordingly. The parameter `walletRdns` is the wallet's Reverse Domain Name System identifier for connecting.
+This function connects a wallet and updates the component's state. It uses the `walletRdns` parameter as the wallet's Reverse Domain Name System identifier for connecting.
 
-Inside the function, an asynchronous operation requests accounts from the wallet provider using the Ethereum JSON-RPC method `eth_requestAccounts`.
+The function performs an asynchronous operation to request accounts from the wallet provider using the Ethereum JSON-RPC method `eth_requestAccounts`.
 
 **State Update:** If the operation is successful (`accounts?.[0]` evaluates to `true`), the selected wallet `rdns` and the corresponding account are updated in the component's state.
 
@@ -555,7 +556,7 @@ Although we only use `formatAddress` and not `formatBalance` and `formatChainAsN
 
 ### 3. Wrap components with the context provider
 
-Next, we need to replace all of the code within the file `src/App.tsx`:
+Next, replace the code in the file `src/App.tsx`:
 
 ```tsx title="App.tsx"
 import './App.css'
@@ -579,7 +580,9 @@ function App() {
 
 export default App
 ```
-We have commented out the child components for now, but as we create each of these components, we will uncomment those specific lines. Let's move to the next step of creating each of the components we have defined here and adding the logic and UI needed to accomplish our goals:
+The child components are currently commented out, but as you create each of these components, you'll uncomment the specific lines. 
+
+Create each of the components you've defined and add the logic and UI needed to accomplish your goals:
 
 - Discover injected providers (browser-installed wallets).
 - Save those providers and selected wallet in global state (context provider) 
@@ -591,7 +594,7 @@ We have commented out the child components for now, but as we create each of the
 
 ### 4. Create the UI components
 
-We want to create them in the order that we have them listed top to bottom in the `App.tsx` file, so let's start with `WalletList.tsx`.
+Create the componenets in the order that you've listed them top to bottom in the `App.tsx` file. Start with `WalletList.tsx`.
 
 Add the following code to `src/components/WalletList.tsx`:
 
@@ -622,7 +625,7 @@ export const WalletList = () => {
 }
 ```
 
-In this code, we import the `wallets` data and the `connectWallet` function from the `useWalletProvider` hook.
+In this code, you've imported the `wallets` data and the `connectWallet` function from the `useWalletProvider` hook.
 
 The component first checks if there are any detected wallets using `Object.keys(wallets).length > 0`. This check ensures that if no wallets are found, a message: "No wallets detected", is displayed instead of an empty list.
 
