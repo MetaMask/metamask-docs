@@ -3,7 +3,10 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"]
+    }
   },
   "include": [
     "./**/*"
