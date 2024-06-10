@@ -1,5 +1,6 @@
 ---
 description: Set quotas for IPFS.
+sidebar_position: 6
 ---
 
 # Set quotas

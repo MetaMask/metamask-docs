@@ -1,5 +1,6 @@
 ---
 description: Learn about the rate limits for IPFS requests.
+sidebar_position: 5
 ---
 
 # IPFS rate limits

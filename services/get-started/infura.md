@@ -199,7 +199,7 @@ Optimize your app and better understand your users by
 
 ## 6. Manage your account
 
-Find additional settings in **Settings** to manage your account. You can:
+Find additional settings in **Settings** to manage your account. You can do the following:
 
 - [Set notifications for daily limits](../network-apis/ethereum/how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
     from the **Account** option.

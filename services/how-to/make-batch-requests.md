@@ -1,5 +1,6 @@
 ---
-description: How to make multiple API requests at the same time. 
+description: Make batch requests
+sidebar_position: 3
 ---
 
 # Make batch requests

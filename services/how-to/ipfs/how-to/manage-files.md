@@ -1,5 +1,6 @@
 ---
 description: Manage files using IPFS.
+sidebar_position: 3
 ---
 
 # Manage files

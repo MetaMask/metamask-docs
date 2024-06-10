@@ -1,5 +1,6 @@
 ---
 description: Tips on how to avoid rate limiting.
+sidebar_position: 1
 ---
 
 # Avoid rate limiting

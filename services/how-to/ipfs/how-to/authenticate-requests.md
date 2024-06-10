@@ -1,5 +1,6 @@
 ---
 description: Authenticate your requests to the IPFS network.
+sidebar_position: 2
 ---
 
 # Authenticate requests

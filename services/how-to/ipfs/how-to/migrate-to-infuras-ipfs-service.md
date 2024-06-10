@@ -1,5 +1,6 @@
 ---
 description: How to migrate to Infura's IPFS service.
+sidebar_position: 4
 ---
 
 # Migrate to Infura's IPFS service
