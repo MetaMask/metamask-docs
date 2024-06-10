@@ -86,10 +86,8 @@ Update `index.html` to include the script:
 ### 3. Detect MetaMask
 
 :::caution
-
 The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes.
 In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md).
-
 :::
 
 Install the `@metamask/detect-provider` module in your project directory:

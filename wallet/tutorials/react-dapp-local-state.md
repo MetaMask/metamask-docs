@@ -26,7 +26,7 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - The [MetaMask extension](https://metamask.io/download) installed
-- Basic knowledge of JavaScript and React
+- Basic knowledge of TypeScript and React
 
 ## Steps
 
@@ -53,9 +53,8 @@ npm run dev
 This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note
-1. If you use VS Code, you can run the command `code .` to open the project.
-2. If the development server has been stopped, you can re-run your project using the `npx vite` or
-`npm run dev` command.
+If you use VS Code, you can open the project by running the command code. 
+If the development server has stopped, restart your project by running either the `npx vite` or `npm run dev` command.
 :::
 
 Open the project in your editor.

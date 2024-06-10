@@ -12,21 +12,22 @@ You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and Typ
 the dapp.
 
 :::tip
-We recommend starting with: [creating a React dapp with local state](react-dapp-local-state.md), which covers essential information and introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963); if you skip it, consider reviewing wallet interoperability to understand multiple injected wallet providers.
+We recommend starting with [creating a React dapp with local state](react-dapp-local-state.md), which introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). The tutorial demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection within a single component. 
+
+If you skip the tutorial, consider reviewing [wallet interoperability](../concepts/wallet-interoperability/) to understand how multiple injected wallet providers work.
 :::
 
-The [previous tutorial](react-dapp-local-state.md) walks you through creating a dapp that uses EIP-6963. It demonstrates how to iterate over all discovered providers, connect to the selected wallet, and remember the selection, all within a single component.
+In real-world use cases, a dapp shares state across many components. This tutorial is more complex than the tutorial to create a dapp in a local state because it addresses real-world scenarios. 
+The dapp you create using this tutorial will look similar to the following:
 
-In real-world use cases, a dapp shares state across many components. This tutorial is intentionally more complex than the previous as we go a step further to consider that real-world scenario. Below is a look at what we will be creating:
-
-![View of dapp we will be creating](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
+![React dapp with global state](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
 In this tutorial, the state is put into a [React Context](https://react.dev/reference/react/useContext) component, creating a [global state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
 
-We will also persist with the selected wallet using `localStorage` to ensure that the last connected wallet state remains intact even after a page refresh.
+You will also use `localStorage` to persist the selected wallet, ensuring the last connected wallet state remains intact even after a page refresh.
 
-Finally, this tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between refreshes or visits to the dapp. A disconnect function is also added to reset the state and use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to disconnect properly from MetaMask.
+This tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between refreshes or visits to the dApp. A disconnect function is added to reset the state and use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
 
 :::info Project source code
 You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-react-global-tutorial).
@@ -38,18 +39,16 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - The [MetaMask extension](https://metamask.io/download) installed
-- Basic knowledge of TypeScript, React, React Context and React Hooks
+- Basic knowledge of TypeScript, React, React Context, and React Hooks
 - You have completed the [Creating a React dapp with local state](react-dapp-local-state.md) tutorial
 
 ## Steps
 
 ### 1. Set up the project
 
-This project takes a fresh approach to its structure. The code or last known state from previous tutorials are not used. Instead, this tutorial walks through steps to break the single-component structure into multiple components.
+This project introduces a new structure, independent of previous tutorials. Instead of reusing code or states, this tutorial guides you through breaking down the single-component structure into multiple components.
 
-The previous tutorial minimized steps to discover and connect to wallets; this tutorial prepares for more advanced, real-world scenarios.
-
-Begin by creating a new ViteJS project and adding the necessary directory structure:
+Create a new ViteJS project and add the necessary directory structure:
 
 ```bash
 npm create vite@latest vite-react-global-state -- --template react-ts
@@ -67,7 +66,7 @@ Launch the development server:
 npm run dev
 ```
 
-The terminal will have a `localhost` URL, from which you can view the dapp in your browser.
+The terminal displays a `localhost` URL, which you can use to view the dapp in your browser.
 
 :::note tip
 If you are using VS Code, you can run the `code .` command to open the project.
@@ -77,14 +76,17 @@ If the development server stops, you can use the `npx vite` or
 :::
 
 After you open the ViteJS React project in your editor of choice, add three directories within the `src` directory. 
+
 Create a `src/components`, `src/hooks` and `src/utils` directory in the root of the project using the following commands:
 
 ```bash
 mkdir src/components && mkdir src/hooks && mkdir src/utils
 ```
 
-Next, create components for listing the installed wallets, displaying the connected wallet information, and handling errors. 
-Additionally, create a CSS module for each component.
+Create components for listing installed wallets, displaying connected wallet information, and handling errors. Additionally, create a CSS module for each component:
+
+<Tabs>
+<TabItem value="src/components">
 
 Create the following files in `src/components`:
 
@@ -95,18 +97,29 @@ Create the following files in `src/components`:
 - `WalletList.module.css`
 - `WalletList.tsx`
 
+</TabItem>
+
+<TabItem value="src/hooks">
+
 Create the following files in `src/hooks`:
 
 - `Eip6963Provider.tsx`
 - `useEip6963Provider.tsx`
 
+</TabItem>
+
+<TabItem value="src/utils">
+
 Create the following file in `src/utils`:
 
 - `index.ts`
 
+</TabItem>
+</Tabs>
+
 #### Styling
 
-Add the following CSS to `SelectedWallet.module.css:
+Add the following CSS to `SelectedWallet.module.css`:
 
 ```css title="SelectedWallet.module.css"
 .selectedWallet {
@@ -204,12 +217,10 @@ button:last-child {
 }
 ```
 
-We can add these changes to the end of an updated CSS file rather than giving you a file with these changes peppered throughout.
-
 #### Project structure
 
 You now have some basic global and component-level styling for your application.
-The directory structure in the dapp's `/src` directory should look like the following:
+The directory structure in the dapp's `/src` directory should look similar to the following:
 
 ```text
 ├── src
@@ -235,7 +246,7 @@ The directory structure in the dapp's `/src` directory should look like the foll
 
 ### 2. Import EIP-6963 interfaces
 
-Your dapp will connect to MetaMask using [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduced in the first tutorial.
+The dapp connects to MetaMask using EIP-6963.
 
 :::info Why EIP-6963?
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
@@ -286,11 +297,11 @@ interface WalletError {
 }
 ```
 
-We also added an interface for our WalletErrors too.
+This also adds an interface for `WalletError`.
 
 ### 2. Build the context provider
 
-This will be the most involved coding section of the tutorial as we understand what types, interfaces, functions, hooks, events, effects, and RPC calls will be needed to create our React Context component. This component will wrap our application, providing all components access to the state and functions required to modify the state and perform connection and disconnection to the discovered wallets. We will add each piece in succession and explain each.
+This section of the tutorial covers the types, interfaces, functions, hooks, events, effects, and RPC calls needed to create the React Context component. This component wraps your application, providing all components access to the state and functions required to modify the state and manage connections to discovered wallets.
 
 Add the following code to `src/hooks/WalletProvider`:
 
@@ -322,7 +333,7 @@ declare global{
 }
 ```
 
-Here, we extend the global `WindowEventMap` interface to include the custom `eip6963:announceProvider` event, ensuring type safety and a better developer experience when working with TypeScript. Since this custom event is not natively recognized by TypeScript, we need to declare it explicitly to avoid type errors, provide proper type checking and autocompletion, and help TypeScript understand the new event type.
+Here, you extend the global `WindowEventMap` interface to include the custom `eip6963:announceProvider` event, ensuring type safety and a better developer experience when working with TypeScript. Since this custom event is not natively recognized by TypeScript, you must declare it explicitly to avoid type errors, provide proper type checking and autocompletion, and help TypeScript understand the new event type.
 
 Add the following code to `src/hooks/WalletProvider`:
 
@@ -461,7 +472,7 @@ Add the following code to `src/hooks/WalletProvider`:
 
 **Error Handling:** Errors that occur during the permission revocation process are caught and logged to the console.
 
-#### The reason for utilizing `useCallback`
+#### The reason for using `useCallback`
 
 Both of the previous functions utilize `useCallback`. It is used to memoize the `connectWallet` function, optimize performance and prevent unnecessary re-renders. It ensures the function instance remains consistent between renders if its dependencies haven't changed. 
 
@@ -695,13 +706,13 @@ export const WalletError = () => {
 }
 ```
 
-This last component is very straightforward. We have some CSS that activates only if an error is present, as well as a `div` with the error message that will also only render if the `errorMessage` has data. 
+Some CSS activates only if an error is present, and a `div` with the error message renders only if `errorMessage` contains data.
 
-Upon clicking on the `div`, we set `errorMessage` back to nothing, which then hides the content.
+After clicking the `div`, reset `errorMessage` to an empty string, which hides the content.
 
-Although hacky, it illustrates that you could have specific content that only shows (like a modal or notification) upon connection errors when connecting to a wallet.
+This method demonstrates how to display specific content, such as a modal or notification, in response to connection errors when connecting to a wallet.
 
-If we uncomment the `WalletError` component in `src/App.tsx`, run the dapp and disconnect from MetaMask and connect again and reject or hit "cancel", we should see the following:
+To see the error handling, uncomment the `WalletError` component in `src/App.tsx`. Then, run the dApp, disconnect from MetaMask, reconnect, and reject or cancel the connection. The following is displayed:
 
 ![View of WalletError component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-error.png)
 
@@ -730,7 +741,7 @@ function App() {
 export default App
 ```
 
-Now, we can run `npm run dev` to view the wallet list and select a wallet to connect to. The final state of the dapp when connected to a MetaMask wallet will look like the following:
+Now, run `npm run dev` to view the wallet list and select a wallet to connect to. The final state of the dapp when connected to a MetaMask wallet will look similar to the following:
 
 ![Final view of dapp](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
@@ -745,9 +756,9 @@ A few user tests you can perform to test the various features and functionality 
 
 ## Conclusion
 
-We have finished taking what we have learned about EIP-6963 and connecting to wallets, specifically Metamask. Still, it works with all wallets found on that [comply with EIP-6963](https://github.com/WalletConnect/EIP6963/blob/master/src/utils/constants.ts) and the integrate Multi Injected Provider Discovery.
+You have now applied your knowledge of EIP-6963 to connect to wallets, specifically MetaMask. This method also works with all wallets that [comply with EIP-6963](https://github.com/WalletConnect/EIP6963/blob/master/src/utils/constants.ts) and support multi-injected provider discovery.
 
-We have also considered many edge cases and created a context provider that facilitates sharing data, functions for connecting and disconnecting from these wallets, and handles errors.
+You have also considered many edge cases and created a context provider that facilitates sharing data, functions for connecting and disconnecting from these wallets, and handles errors.
 
-You can see the [source code](https://github.com/MetaMask/vite-react-global-tutorial)
+You can view the [source code](https://github.com/MetaMask/vite-react-global-tutorial)
 for the final state of this dapp tutorial.
