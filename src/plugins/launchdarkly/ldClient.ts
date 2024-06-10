@@ -6,7 +6,7 @@ if (typeof window !== "undefined") {
   const clientId = window.__LD_CLIENT_ID__;
   console.log(`client, ${clientId}`);
   console.log(`process, ${process.env.LD_CLIENT_ID}`);
-  ldClient = initialize(clientId, {
+  ldClient = initialize("6449dfe32c088a1338d69a96", {
     key: "anonymous-user",
   });
 
