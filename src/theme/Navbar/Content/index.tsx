@@ -20,11 +20,6 @@ export default function ContentWrapper(props: Props): JSX.Element {
     ldClient.on("change:siwsrpLogin", (current) => {
       setFeatureFlag(current);
     });
-
-    // Clean all events listener
-    return () => {
-      ldClient.removeEventListener("change:siwsrpLogin");
-    };
   });
 
   return (
