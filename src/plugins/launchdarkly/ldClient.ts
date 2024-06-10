@@ -4,6 +4,7 @@ let ldClient;
 
 if (typeof window !== "undefined" && window.__LD_CLIENT_ID__) {
   const clientId = window.__LD_CLIENT_ID__;
+  console.log(clientId);
   ldClient = initialize(clientId, {
     key: "anonymous-user",
   });
