@@ -1,10 +1,14 @@
 import { initialize } from "launchdarkly-js-client-sdk";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+import siteConfig from "@generated/docusaurus.config";
+
 
 export default (function () {
   if (!ExecutionEnvironment.canUseDOM) {
     return null;
   }
+
+  const { LD_CLIENT_ID } = siteConfig.customFields;
 
   const context = {
     kind: "user",
@@ -12,7 +16,7 @@ export default (function () {
     key: "ld-anonymous-user-key",
   };
   
-  const ldClient = initialize(process.env.LD_CLIENT_ID, context, {
+  const ldClient = initialize(LD_CLIENT_ID as string, context, {
     allAttributesPrivate: true,
     bootstrap: "localStorage",
   });

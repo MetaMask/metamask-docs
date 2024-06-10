@@ -7517,15 +7517,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-dotenv@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "docusaurus-plugin-dotenv@npm:1.0.1"
-  dependencies:
-    dotenv-webpack: 7.0.2
-  checksum: 0c4b165c5d598a41cdb480a11890ccc53fff6bd2ff1fcff887d819c1e28ce94f9c7e4d633184391591928f1be988f1e29c8c0cf6b4d1cc3ed2534fa88c0cb7a3
-  languageName: node
-  linkType: hard
-
 "docusaurus-plugin-segment@npm:^1.0.4":
   version: 1.0.4
   resolution: "docusaurus-plugin-segment@npm:1.0.4"
@@ -7664,30 +7655,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-defaults@npm:^2.0.1":
-  version: 2.0.2
-  resolution: "dotenv-defaults@npm:2.0.2"
-  dependencies:
-    dotenv: ^8.2.0
-  checksum: c005960bd048e2189c4799e729c41f362e415e6e0b54313d3f31e853a84b049bf770b25cb21c112c2805bb13a8376edc9de451fb514abf8546392d327c27f6e5
-  languageName: node
-  linkType: hard
-
-"dotenv-webpack@npm:7.0.2":
-  version: 7.0.2
-  resolution: "dotenv-webpack@npm:7.0.2"
-  dependencies:
-    dotenv-defaults: ^2.0.1
-  peerDependencies:
-    webpack: ^4 || ^5
-  checksum: b81136db352ebf51548852b8f69bd58c00ce93deab7b5dec3429dd182f669d35c2cb0cefebfab9fce3b66426f784aac308a284b00482c8dd185e3d56dc5b7797
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^8.2.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
+"dotenv@npm:^16.4.5":
+  version: 16.4.5
+  resolution: "dotenv@npm:16.4.5"
+  checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
   languageName: node
   linkType: hard
 
@@ -12445,8 +12416,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.41.0
     "@typescript-eslint/parser": ^5.41.0
     clsx: ^1.2.1
-    docusaurus-plugin-dotenv: ^1.0.1
     docusaurus-plugin-segment: ^1.0.4
+    dotenv: ^16.4.5
     eslint: ^8.26.0
     eslint-plugin-react: ^7.31.10
     eslint-plugin-unused-imports: ^2.0.0
