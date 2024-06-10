@@ -1,7 +1,7 @@
 import React from "react";
 import Heading from "@theme/Heading";
 import { MDContent } from "./MDContent";
-import { parseSchema } from "./RenderParams";
+import { renderParamSchemas, renderResultSchemas } from "./RenderParams";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 import { MethodParam, SchemaComponents } from "@site/src/components/ParserOpenRPC/interfaces";
@@ -38,18 +38,18 @@ export default function DetailsBox({ method, description, params, components, re
         <div>This method does not accept any parameters</div>
       ) : (
         <>
-          {params && parseSchema(params, components)}
+          {params && renderParamSchemas(params, components)}
         </>
       )}
-      <Heading as="h2" className={clsx(styles.secondaryHeading, "padding-vert--md")}>
+      <Heading as="h2" className={clsx(styles.secondaryHeading, styles.borderBottomLine, "padding-vert--md")}>
         Returns
       </Heading>
       {result?.description && (
-        <div className="padding-bottom--md">
+        <div className="padding-vert--md">
           <MDContent content={result.description} />
         </div>
       )}
-      {result && parseSchema(result, components)}
+      {result && renderResultSchemas(result, components)}
     </>
   );
 }

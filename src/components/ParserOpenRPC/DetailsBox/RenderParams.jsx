@@ -2,182 +2,145 @@ import { SchemaProperty, renderEnum } from "./SchemaProperty";
 import { CollapseBox } from "../CollapseBox/CollapseBox";
 import styles from "./styles.module.css";
 
-export const parseSchema = (inputSchema, schemas) => {
-  const renderSchema = (schema, schemas) => {
-    if (!schema) return <div>Invalid schema</div>;
+const getRefSchemaFromComponents = (initRef, components) => {
+  const ref = initRef.replace("#/components/schemas/", "");
+  return components[ref];
+};
 
-    if (schema.$ref) {
-      const ref = schema.$ref.replace("#/components/schemas/", "");
-      const referencedSchema = schemas[ref];
-      return renderSchema(referencedSchema, schemas);
-    }
+const renderSchema = (schemaItem, schemas, name) => {
+  if (!schemaItem) return <div>Invalid schema</div>;
 
-    if (schema.type === "object" && schema.properties) {
-      return (
-        <div key={schema.title} className={styles.paramItemWrapper}>
-          <SchemaProperty
-            title={schema.title}
-            type={schema.type}
-            required={!!schema.required}
-            description={schema.description || ""}
-          />
-          <div className="padding-bottom--md">
-            <CollapseBox>
-              {Object.entries(schema.properties).map(([key, value]) => {
-                const schemaRef = value?.$ref?.replace("#/components/schemas/", "");
-                const newRef = () => {
-                  if (schemaRef) {
-                    return schemas[schemaRef.replace("#/components/schemas/", "")];
-                  }
-                  return undefined;
-                };
-                const updatedSchema = newRef();
-
-                return (
-                  <div key={key}>
-                    {value && value.title && (
-                      <div className={styles.paramItemWrapper}>
-                        <SchemaProperty
-                          title={value.title}
-                          type={updatedSchema ? updatedSchema.type : value.type}
-                          required={schema.required ? schema.required.includes(key) : false}
-                          description={updatedSchema ? updatedSchema.title : value.description}
-                        />
-                        {/* {value.$ref && schemas[value.$ref.replace('#/components/schemas/', '')] && (
-                          <>
-                            {renderSchema(schemas[value.$ref.replace('#/components/schemas/', '')], schemas)}
-                          </>
-                        )} */}
-                      </div>
-                    )}
-                    {value && !value.title && value.description && (
-                      <div className={styles.paramItemWrapper}>
-                        <SchemaProperty
-                          title={key}
-                          type={updatedSchema ? updatedSchema.type : value.type}
-                          required={schema.required ? schema.required.includes(key) : false}
-                          description={updatedSchema ? updatedSchema.title : value.description}
-                        />
-                      </div>
-                    )}
-                  </div>
-                );})}
-            </CollapseBox>
-          </div>
-        </div>
-      );
-    }
-
-    if (schema.type === "array" && schema.items) {
-      const itemSchemaRef = schema.items.$ref;
-      const itemSchemaName = itemSchemaRef ? itemSchemaRef.replace("#/components/schemas/", "") : null;
-      const itemSchema = itemSchemaName ? schemas[itemSchemaName] : null;
-      return (
-        <div key={schema.title} className={styles.paramItemWrapper}>
-          <SchemaProperty
-            title={schema.title}
-            type={schema.type}
-            required={!!schema.required}
-            description={schema.description || ""}
-          />
-          {itemSchema && (
-            <CollapseBox>{renderSchema(itemSchema, schemas)}</CollapseBox>
-          )}
-        </div>
-      );
-    }
-
-    if (schema.oneOf || schema.allOf || schema.anyOf) {
-      const schemaType = () => {
-        if (schema.oneOf) return "oneOf";
-        if (schema.allOf) return "allOf";
-        return "anyOf";
-      };
-      return (
-        <div key={schema.title} className={styles.paramItemWrapper}>
-          <SchemaProperty
-            title={schema.name || schema.title || inputSchema.name}
-            type={schemaType()}
-            required={!!schema.required}
-            description={schema.description || ""}
-          />
-          <div className="padding-bottom--md">
-            <CollapseBox>
-              {schema.oneOf && schema.oneOf.map((option, index) => (
-                <div key={`${index}`}>
-                  {renderSchema(option, schemas)}
-                </div>
-              ))}
-              {schema.allOf && schema.allOf.map((option, index) => (
-                <div key={`${index}`}>
-                  {renderSchema(option, schemas)}
-                </div>
-              ))}
-              {schema.anyOf && schema.anyOf.map((option, index) => (
-                <div key={`${index}`}>
-                  {renderSchema(option, schemas)}
-                </div>
-              ))}
-            </CollapseBox>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <>
-        {schema.title && (
-          <div
-            key={schema.title}
-            className={styles.paramItemWrapper}
-          >
-            <SchemaProperty
-              title={schema.title}
-              type={schema.type}
-              required={!!schema.required}
-              description={schema.description || schema.summary}
-            />
-            {schema.enum && renderEnum(schema.enum)}
-          </div>
-        )}
-      </>
-    );
+  const resolveRef = (ref) => {
+    const newSchema = getRefSchemaFromComponents(ref, schemas);
+    return renderSchema(newSchema, schemas, name);
   };
 
-  return (
-    <>
-      {Array.isArray(inputSchema) ? (
-        <>
-          {inputSchema.map((param, index) => (
-            <div key={`${index}`}>
-              {param.type && (
-                <SchemaProperty
-                  title={param.name}
-                  type={param.type}
-                  required={!!param.required}
-                  description={param.description || param.summary}
-                />
-              )}
-              {!param.type && param.schema.type && (
-                <>
-                  <SchemaProperty
-                    title={param.name}
-                    type={param.schema.type}
-                    required={!!param.required}
-                    description={param.schema.description}
-                  />
-                  {param.schema?.enum && renderEnum(param.schema?.enum)}
-                </>
-              )}
-              {renderSchema(param.schema, schemas)}
+  if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref);
+  if (schemaItem?.$ref) return resolveRef(schemaItem.$ref);
+
+  const renderObject = (item, itemName) => (
+    <div>
+      <SchemaProperty
+        title={itemName || item.title}
+        type="object"
+        required={!!item.required}
+        description={item.description || item.title || ""}
+      />
+      <div className="padding-bottom--md">
+        <CollapseBox>
+          {Object.entries(item.properties).map(([key, value]) => (
+            <div key={key} className={styles.paramItemWrapper}>
+              {renderSchema(value, schemas, value.title)}
             </div>
           ))}
-        </>
-      ) : (
-        <>
-          {renderSchema(inputSchema.schema, schemas)}
-        </>
-      )}
+        </CollapseBox>
+      </div>
+    </div>
+  );
+
+  if (schemaItem?.schema?.type === "object" && schemaItem?.schema?.properties) {
+    return renderObject(schemaItem.schema, name || schemaItem?.schema?.title);
+  }
+
+  if (schemaItem.type === "object" && schemaItem.properties) {
+    return renderObject(schemaItem, name || schemaItem.title);
+  }
+
+  const renderArray = (item, itemName) => (
+    <div>
+      <SchemaProperty
+        title={itemName || item.title}
+        type="array"
+        required={!!item.required}
+        description={item.description || item.title || ""}
+      />
+      <div className="padding-bottom--md">
+        <CollapseBox>
+          <div className={styles.paramItemWrapper}>
+            {renderSchema(item.items, schemas)}
+          </div>
+        </CollapseBox>
+      </div>
+    </div>
+  );
+
+  if (schemaItem.type === "array" && schemaItem.items) {
+    return renderArray(schemaItem, name || schemaItem.title);
+  }
+
+  if (schemaItem?.schema?.type === "array" && schemaItem?.schema?.items) {
+    return renderArray(schemaItem.schema, name || schemaItem.schema.title);
+  }
+
+  const renderCombinations = (item, itemName, type) => (
+    <div>
+      <SchemaProperty
+        title={itemName || item.title}
+        type={type}
+        required={!!item.required}
+        description={item.description || item.title || ""}
+      />
+      <div className="padding-bottom--md">
+        <CollapseBox>
+          {item[type].map((option, index) => (
+            <div key={`${index}`} className={styles.paramItemWrapper}>
+              {renderSchema(option, schemas, option.title)}
+            </div>
+          ))}
+        </CollapseBox>
+      </div>
+    </div>
+  );
+
+  if (schemaItem.oneOf) return renderCombinations(schemaItem, name, "oneOf");
+  if (schemaItem.allOf) return renderCombinations(schemaItem, name, "allOf");
+  if (schemaItem.anyOf) return renderCombinations(schemaItem, name, "anyOf");
+
+  if (schemaItem?.schema) {
+    return (
+      <div>
+        <SchemaProperty
+          title={name || schemaItem.schema.title}
+          type={schemaItem.schema.type}
+          required={!!schemaItem.required}
+          description={schemaItem.schema.description || schemaItem.schema.title || ""}
+        />
+        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <SchemaProperty
+        title={name || schemaItem.title}
+        type={schemaItem.type}
+        required={!!schemaItem.required}
+        description={schemaItem.description || schemaItem.title || ""}
+      />
+      {schemaItem.enum && renderEnum(schemaItem.enum)}
+    </div>
+  );
+};
+
+export const renderParamSchemas = (inputSchema, schemas) => {
+  return (
+    <>
+      {inputSchema.map((item, i) => {
+        return (
+          <div key={`${i}`} className={styles.borderTopLine}>
+            {renderSchema(item, schemas, item.name)}
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export const renderResultSchemas = (inputSchema, schemas) => {
+  return (
+    <>
+      {renderSchema(inputSchema, schemas, inputSchema.name)}
     </>
   );
 };
