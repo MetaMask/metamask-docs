@@ -1,20 +1,10 @@
 import * as path from "path";
 
-interface LaunchDarklyPluginOptions {
-  clientId: string;
-}
-
-module.exports = function (context: unknown, options: LaunchDarklyPluginOptions) {
-  const { clientId } = options;
+module.exports = function () {
   return {
     name: "docusaurus-plugin-launchdarkly",
     getClientModules() {
-      if (typeof window !== "undefined") {
-        // Inject clientId into window object for simplicity
-        window.__LD_CLIENT_ID__ = clientId;
-        return [path.resolve(__dirname, "./ldClient")];
-      }
-      return [];
+      return [path.resolve(__dirname, "./ldClient")];
     },
     configureWebpack() {
       return {

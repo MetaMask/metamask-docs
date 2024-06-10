@@ -12,3 +12,4 @@ jobs:
     uses: ./.github/workflows/publish-docs.yml
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+      LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}

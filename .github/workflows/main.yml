@@ -24,6 +24,7 @@ jobs:
     uses: ./.github/workflows/build-lint.yml
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+      LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
 
   all-jobs-completed:
     name: All jobs completed

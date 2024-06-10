@@ -2,8 +2,10 @@ name: Build and lint
 
 on:
   workflow_call:
-  secrets:
+    secrets:
       SEGMENT_ANALYTICS_KEY:
+        required: true
+      LD_CLIENT_ID:
         required: true
 
 jobs:
@@ -35,7 +37,8 @@ jobs:
       - run: yarn --immutable --immutable-cache
       - run: yarn build
         env:
-            SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+          SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+          LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
       - name: Require clean working directory
         shell: bash
         run: |

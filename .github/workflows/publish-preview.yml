@@ -53,6 +53,7 @@ jobs:
       ref: ${{ needs.get-commit-hash.outputs.COMMIT_SHA }}
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+      LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
 
   post-preview-comment:
     name: Post preview in comment

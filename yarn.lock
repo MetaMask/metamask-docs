@@ -11181,11 +11181,11 @@ __metadata:
   linkType: hard
 
 "jiti@npm:^1.20.0":
-  version: 1.21.3
-  resolution: "jiti@npm:1.21.3"
+  version: 1.21.6
+  resolution: "jiti@npm:1.21.6"
   bin:
     jiti: bin/jiti.js
-  checksum: c9d9d68704d7809d0ce68c86e620e4291b634b06a2623eebbbabe2568a28b2c78132f8621d099286ec0adc3def80a2a8397e9c6c0f978b09ea8d835e50e939ca
+  checksum: 9ea4a70a7bb950794824683ed1c632e2ede26949fbd348e2ba5ec8dc5efa54dc42022d85ae229cadaa60d4b95012e80ea07d625797199b688cc22ab0e8891d32
   languageName: node
   linkType: hard
 

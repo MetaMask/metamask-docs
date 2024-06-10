@@ -391,22 +391,16 @@ const config = {
         },
       },
     ],
-    isProd ? 
-      [
-        "docusaurus-plugin-segment",
-        {
-          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-          load: { cookie: { sameSite: "None", secure: true } },
-          page: true,
-        },
-      ] : null,
-    [
-      "./src/plugins/launchdarkly",
-      {
-        clientId: "6449dfe32c088a1338d69a96", 
-      },
-
-    ],
+    // isProd ? 
+    //   [
+    //     "docusaurus-plugin-segment",
+    //     {
+    //       apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+    //       load: { cookie: { sameSite: "None", secure: true } },
+    //       page: true,
+    //     },
+    //   ] : null,
+    "./src/plugins/launchdarkly",  
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
