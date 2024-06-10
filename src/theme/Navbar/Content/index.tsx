@@ -25,7 +25,7 @@ export default function ContentWrapper(props: Props): JSX.Element {
   return (
     <>
       <Content {...props} />
-      {ldReady ? <div>{featureFlag ? "ON" : "OFF"}</div> : <div>ld loading</div>}
+      {ldReady ? <div>{featureFlag ? "ON" : "OFF"}</div> : <div>...</div>}
     </>
   );
 }
