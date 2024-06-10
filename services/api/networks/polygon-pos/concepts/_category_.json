@@ -1,0 +1,10 @@
+{
+    "label": "Concepts",
+    "collapsible": true,
+    "collapsed": false,
+    "link": {
+      "type": "generated-index",
+      "slug": "networks/polygon-pos/concepts",
+      "description": "This section provides background information and context around various key concepts."
+    }
+}

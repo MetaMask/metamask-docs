@@ -1,0 +1,102 @@
+---
+title: "starknet_estimateFee"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns an estimate of the fee required for the network to process the specified transactions, at
+the specified block.
+
+## Parameters
+
+- `request`: (array) [*Required*] A sequence of
+  [StarkNet transactions](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/)
+  to estimate gas fees for.
+  If multiple transactions are provided, each transaction is simulated on the state resulting from
+  applying the previous transactions.
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+
+## Returns
+
+A sequence of fee estimates corresponding to the sequence of requested transactions.
+Each fee estimate object contains:
+
+- `gas_consumed`: The Ethereum gas consumption of the transaction.
+- `gas_price`: The gas price (in gwei) that was used in the cost estimation.
+- `overall_fee`: The estimated fee for the transaction (in gwei), product of `gas_consumed` and `gas_price`.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_estimateFee",
+    "params": {
+      "request": [{
+        "type": "INVOKE",
+        "max_fee": "0x28ed6103d0000",
+        "version": "0x1",
+        "signature": [
+          "0x42527ffe9912b338983cbed67e139cfcc26a4d8cf1d1c2a85e4125fdf5f59ed", "0x636147d06fefd02ed37984b752556d4b9aefdac1a50b3df0528ec7c201ad84b"
+        ],
+        "sender_address": "0x13e3ca9a377084c37dc7eacbd1d9f8c3e3733935bcbad887c32a0e213cd6fe0",
+        "calldata": [
+          "0x2",
+          "0x57c4b510d66eb1188a7173f31cccee47b9736d40185da8144377b896d5ff3",
+          "0x2f0b3c5710379609eb5495f1ecd348cb28167711b73609fe565a72734550354",
+          "0x0",
+          "0x1",
+          "0x57c4b510d66eb1188a7173f31cccee47b9736d40185da8144377b896d5ff3",
+          "0x2f0b3c5710379609eb5495f1ecd348cb28167711b73609fe565a72734550354",
+          "0x1",
+          "0x1",
+          "0x2",
+          "0x0",
+          "0x1"
+        ],
+        "nonce": "0x1"
+      }],
+      "block_id": {
+        "block_number": 59999
+      }
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": [{
+    "gas_consumed": "0x41de",
+    "gas_price": "0x67edb4f57",
+    "overall_fee": "0x1abd7b153e472"
+  }],
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>

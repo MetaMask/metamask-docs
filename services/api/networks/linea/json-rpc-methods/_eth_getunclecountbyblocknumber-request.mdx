@@ -1,0 +1,23 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+  curl https://linea-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockNumber","params": ["0x5bad55"],"id":1}'
+  ```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+  ```bash
+  wscat -c wss://linea-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockNumber","params": ["0x5bad55"],"id":1}'
+  ```
+
+  </TabItem>
+</Tabs>
+

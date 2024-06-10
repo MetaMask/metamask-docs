@@ -1,0 +1,67 @@
+---
+title: "starknet_getClassHashAt"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the contract class hash of the specified contract class address in the specified block.
+
+## Parameters
+
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+- `contract_address`: (string) [*Required*] The address of the requested
+   [contract class](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-classes/).
+
+## Returns
+
+The [class hash](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/class-hash/)
+of the requested contract class.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getClassHashAt",
+    "params": {
+      "block_id": {
+        "block_hash": "0x041b10c45dc3f39372f7b9409261cac9d880c5d75a5bb077d028db20b1bd76c4"
+      },
+      "contract_address": "0x03b554093fb0a7460913be2d5c011cb5ac4333dfcfe6125851bcd3f926a3b558"
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc":"2.0",
+  "id":0,
+  "result":"0x515dd668a1798214e7ca9ec90c52e267229b8104fb296a90f20b6f70baaef53"
+}
+```
+
+</TabItem>
+</Tabs>

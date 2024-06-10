@@ -1,0 +1,15 @@
+{
+  "name": "docusaurus-plugin-launchdarkly",
+  "version": "1.0.0",
+  "description": "A Docusaurus plugin to initialize the LaunchDarkly SDK",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "docusaurus-plugin",
+    "launchdarkly"
+  ],
+  "author": "Cedric Magne",
+  "license": "MIT"
+}
