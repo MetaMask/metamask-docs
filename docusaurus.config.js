@@ -400,7 +400,12 @@ const config = {
           page: true,
         },
       ] : null,
-    "./src/plugins/launchdarkly",
+    [
+      "./src/plugins/launchdarkly",
+      {
+        clientId: process.env.LD_CLIENT_ID,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
