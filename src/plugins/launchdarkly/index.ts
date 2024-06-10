@@ -4,7 +4,7 @@ interface LaunchDarklyPluginOptions {
   clientId: string;
 }
 
-module.exports = function (context: any, options: LaunchDarklyPluginOptions) {
+module.exports = function (context: unknown, options: LaunchDarklyPluginOptions) {
   const { clientId } = options;
   return {
     name: "docusaurus-plugin-launchdarkly",

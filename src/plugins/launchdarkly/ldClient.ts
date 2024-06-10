@@ -2,9 +2,10 @@ import { initialize } from "launchdarkly-js-client-sdk";
 
 let ldClient;
 
-if (typeof window !== "undefined" && window.__LD_CLIENT_ID__) {
+if (typeof window !== "undefined") {
   const clientId = window.__LD_CLIENT_ID__;
-  console.log(clientId);
+  console.log(`client, ${clientId}`);
+  console.log(`process, ${process.env.LD_CLIENT_ID}`);
   ldClient = initialize(clientId, {
     key: "anonymous-user",
   });
