@@ -391,15 +391,15 @@ const config = {
         },
       },
     ],
-    // isProd ? 
-    //   [
-    //     "docusaurus-plugin-segment",
-    //     {
-    //       apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-    //       load: { cookie: { sameSite: "None", secure: true } },
-    //       page: true,
-    //     },
-    //   ] : null,
+    isProd ?
+      [
+        "docusaurus-plugin-segment",
+        {
+          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+          load: { cookie: { sameSite: "None", secure: true } },
+          page: true,
+        },
+      ] : null,
     "./src/plugins/launchdarkly",  
   ],
   themeConfig:
