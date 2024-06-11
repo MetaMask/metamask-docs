@@ -35,7 +35,7 @@ jobs:
       - name: Run build script
         env:
           SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
-          LD_CLIENT_ID: 6449dfe32c088a1338d69a96
+          LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
         run: DEST="/${{ inputs.destination_dir }}" yarn build
       - name: Deploy to `${{ inputs.destination_dir }}` directory of `gh-pages` branch
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305

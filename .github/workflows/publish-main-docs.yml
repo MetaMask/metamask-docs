@@ -12,4 +12,7 @@ jobs:
     uses: ./.github/workflows/publish-docs.yml
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
-      LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+      # Hardcoded as we can't define different LD_CLIENT_ID based on environment.
+      # Safe to expose, see:
+      # https://docs.launchdarkly.com/sdk/client-side/javascript#initialize-the-client-and-evaluate-a-context
+      LD_CLIENT_ID: 6449dfe32c088a1338d69a98
