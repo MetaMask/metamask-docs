@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[4291],{20884:s=>{s.exports=JSON.parse('{"tags":[{"label":"Keyring API","permalink":"/ACT-1368-siwsrp-flow/snaps/tags/keyring-api","count":9}]}')}}]);
