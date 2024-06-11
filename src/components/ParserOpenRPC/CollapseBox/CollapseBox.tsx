@@ -1,12 +1,17 @@
 import clsx from "clsx";
 import { useCollapsible, Collapsible, useColorMode } from "@docusaurus/theme-common";
 import styles from "./styles.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
-export const CollapseBox = ({ children }) => {
+export const CollapseBox = ({ children, isInitCollapsed }) => {
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const { colorMode } = useColorMode();
+  useEffect(() => {
+    if (isInitCollapsed) {
+      toggleCollapsed();
+    }
+  }, [isInitCollapsed]);
   return (
     <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <button

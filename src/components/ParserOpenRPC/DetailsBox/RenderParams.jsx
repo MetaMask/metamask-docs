@@ -1,5 +1,6 @@
-import { SchemaProperty, renderEnum } from "./SchemaProperty";
+import { SchemaProperty } from "./SchemaProperty";
 import { CollapseBox } from "../CollapseBox/CollapseBox";
+import { MDContent } from "./MDContent";
 import styles from "./styles.module.css";
 
 const getRefSchemaFromComponents = (initRef, components) => {
@@ -27,10 +28,10 @@ const renderSchema = (schemaItem, schemas, name) => {
         description={item.description || item.title || ""}
       />
       <div className="padding-bottom--md">
-        <CollapseBox>
+        <CollapseBox isInitCollapsed={!!name}>
           {Object.entries(item.properties).map(([key, value]) => (
             <div key={key} className={styles.paramItemWrapper}>
-              {renderSchema(value, schemas, value.title)}
+              {renderSchema(value, schemas, key)}
             </div>
           ))}
         </CollapseBox>
@@ -96,16 +97,36 @@ const renderSchema = (schemaItem, schemas, name) => {
   if (schemaItem.allOf) return renderCombinations(schemaItem, name, "allOf");
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, "anyOf");
 
+  const renderEnum = (enumValues, title, description) => {
+    const getDescription = (item) => {
+      const regex = new RegExp(`\`${item}\`: ([^;]+)(;|$)`);
+      const match = description.match(regex);
+      return match ? match[1] : "";
+    };
+    const blockEnum = title && description && title === "Block tag";
+    return (
+      <div className={styles.enumWrapper}>
+        <div className="padding--md">Possible enum values</div>
+        {enumValues.map((value, index) => (
+          <div key={index} className={styles.enumItem}>
+            <div className={styles.enumTitle}>{value}</div>
+            {blockEnum && <div style={{ paddingTop: "10px" }}><MDContent content={getDescription(value)} /></div>}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   if (schemaItem?.schema) {
     return (
       <div>
         <SchemaProperty
           title={name || schemaItem.schema.title}
-          type={schemaItem.schema.type}
+          type={schemaItem.schema.enum ? "enum" : schemaItem.schema.type}
           required={!!schemaItem.required}
           description={schemaItem.schema.description || schemaItem.schema.title || ""}
         />
-        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
+        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum, schemaItem.schema.title, schemaItem.schema.description)}
       </div>
     );
   }
@@ -114,11 +135,11 @@ const renderSchema = (schemaItem, schemas, name) => {
     <div>
       <SchemaProperty
         title={name || schemaItem.title}
-        type={schemaItem.type}
+        type={schemaItem.enum ? "enum" : schemaItem.type}
         required={!!schemaItem.required}
-        description={schemaItem.description || schemaItem.title || ""}
+        description={schemaItem.enum && schemaItem.title === "Block tag" ? "" : schemaItem.description || schemaItem.title}
       />
-      {schemaItem.enum && renderEnum(schemaItem.enum)}
+      {schemaItem.enum && renderEnum(schemaItem.enum, schemaItem.title, schemaItem.description)}
     </div>
   );
 };

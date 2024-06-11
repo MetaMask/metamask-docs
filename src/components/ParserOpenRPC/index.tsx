@@ -59,7 +59,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   return (
     <div className="row">
-      <div className="col col--7" style={{ borderRight: "1px solid #848C96" }}>
+      <div className="col col--8" style={{ borderRight: "1px solid #848C96" }}>
         <DetailsBox
           method={method}
           description={currentMethodData.description}
@@ -70,7 +70,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         />
         <ErrorsBox errors={currentMethodData.errors} />
       </div>
-      <div className="col col--5">
+      <div className="col col--4">
         <div className={global.stickyCol}>
           <AuthBox isMetamaskInstalled={metamaskInstalled} />
           <RequestBox

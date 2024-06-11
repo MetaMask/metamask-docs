@@ -13,17 +13,6 @@ interface TagProps {
   name: string;
 }
 
-export const renderEnum = (enumValues: string[]) => (
-  <div className={styles.enumWrapper}>
-    <div className="padding--md">Possible enum values</div>
-    {enumValues.map((value, index) => (
-      <div key={index} className={styles.enumItem}>
-        <div className={styles.enumTitle}>{value}</div>
-      </div>
-    ))}
-  </div>
-);
-
 export const SchemaProperty = ({ title, type, required, description }: SchemaPropertyProps) => {
   return (
     <div className="padding-vert--md">
