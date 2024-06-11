@@ -1,3 +1,4 @@
+import React from "react";
 import { SchemaProperty } from "./SchemaProperty";
 import { CollapseBox } from "../CollapseBox/CollapseBox";
 import { MDContent } from "./MDContent";
@@ -58,7 +59,7 @@ const renderSchema = (schemaItem, schemas, name) => {
       <div className="padding-bottom--md">
         <CollapseBox>
           <div className={styles.paramItemWrapper}>
-            {renderSchema(item.items, schemas)}
+            {renderSchema(item.items, schemas, "")}
           </div>
         </CollapseBox>
       </div>

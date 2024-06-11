@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import React, { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
-export const CollapseBox = ({ children, isInitCollapsed }) => {
+export const CollapseBox = ({ children, isInitCollapsed = false }) => {
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const { colorMode } = useColorMode();
   useEffect(() => {
