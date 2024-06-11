@@ -265,24 +265,24 @@ needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
 /// <reference types="vite/client" />
 
 interface EIP1193Provider {
-  isStatus?: boolean;
-  host?: string;
-  path?: string;
+  isStatus?: boolean
+  host?: string
+  path?: string
   sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
   send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
   request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 
 interface EIP6963ProviderInfo {
-  rdns: string;
-  uuid: string;
-  name: string;
-  icon: string;
+  rdns: string
+  uuid: string
+  name: string
+  icon: string
 }
 
 interface EIP6963ProviderDetail {
-  info: EIP6963ProviderInfo;
-  provider: EIP1193Provider;
+  info: EIP6963ProviderInfo
+  provider: EIP1193Provider
 }
 
 type EIP6963AnnounceProviderEvent = {
@@ -356,24 +356,24 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     if (savedSelectedAccountByWalletRdns) {
       setSelectedAccountByWalletRdns(JSON.parse(savedSelectedAccountByWalletRdns))
- }
+    }
 
     function onAnnouncement(event: EIP6963AnnounceProviderEvent){
       setWallets(currentWallets => ({
- ...currentWallets,
+        ...currentWallets,
         [event.detail.info.rdns]: event.detail
- }))
+      }))
 
       if (savedSelectedWalletRdns && event.detail.info.rdns === savedSelectedWalletRdns) {
         setSelectedWalletRdns(savedSelectedWalletRdns)
- }
- }
+      }
+    }
 
     window.addEventListener('eip6963:announceProvider', onAnnouncement)
     window.dispatchEvent(new Event('eip6963:requestProvider'))
     
     return () => window.removeEventListener('eip6963:announceProvider', onAnnouncement)
- }, [])
+  }, [])
 ```
 
 1. On line 1, create a React Context for the EIP-6963 WalletProvider with the defined interface `WalletProviderContext` with a default of `null`.
@@ -403,22 +403,22 @@ Add the following code to `src/hooks/WalletProvider`:
       if(accounts?.[0]) {
         setSelectedWalletRdns(wallet.info.rdns)
         setSelectedAccountByWalletRdns((currentAccounts) => ({
- ...currentAccounts,
+          ...currentAccounts,
           [wallet.info.rdns]: accounts[0],
- }))
-        
+        }))
+
         localStorage.setItem('selectedWalletRdns', wallet.info.rdns)
         localStorage.setItem('selectedAccountByWalletRdns', JSON.stringify({
- ...selectedAccountByWalletRdns,
+          ...selectedAccountByWalletRdns,
           [wallet.info.rdns]: accounts[0],
- }))
- }
- } catch (error) {
+        }))
+      }
+    } catch (error) {
       console.error('Failed to connect to provider:', error)
       const walletError: WalletError = error as WalletError
       setError(`Code: ${walletError.code} \nError Message: ${walletError.message}`)
- }
- }, [wallets, selectedAccountByWalletRdns])
+    }
+  }, [wallets, selectedAccountByWalletRdns])
 ```
 
 This function connects a wallet and updates the component's state. It uses the `walletRdns` parameter as the wallet's Reverse Domain Name System identifier for connecting.
@@ -437,9 +437,9 @@ Add the following code to `src/hooks/WalletProvider`:
   const disconnectWallet = useCallback(async () => {
     if (selectedWalletRdns) {
       setSelectedAccountByWalletRdns((currentAccounts) => ({
- ...currentAccounts,
+        ...currentAccounts,
         [selectedWalletRdns]: null,
- }))
+      }))
 
       const wallet = wallets[selectedWalletRdns];
       setSelectedWalletRdns(null)
@@ -449,12 +449,12 @@ Add the following code to `src/hooks/WalletProvider`:
         await wallet.provider.request({
           method: 'wallet_revokePermissions',
           params: [{ 'eth_accounts': {} }]
- });
- } catch (error) {
+        });
+      } catch (error) {
         console.error('Failed to revoke permissions:', error);
- }
- }
- }, [wallets, selectedWalletRdns])
+      }
+    }
+  }, [selectedWalletRdns, wallets])
 ```
 
 **Definition:** This function is responsible for disconnecting the currently selected wallet and performing necessary cleanup tasks.
@@ -569,11 +569,11 @@ function App() {
   return (
     <WalletProvider>
     {/* 
- <WalletList />
- <hr />
- <SelectedWallet />
- <WalletError /> 
- */}
+      <WalletList />
+      <hr />
+      <SelectedWallet />
+      <WalletError /> 
+    */}
     </WalletProvider>
  )
 }
@@ -594,7 +594,7 @@ Create each of the components you've defined and add the logic and UI needed to 
 
 ### 4. Create the UI components
 
-Create the componenets in the order that you've listed them top to bottom in the `App.tsx` file. Start with `WalletList.tsx`.
+Create the components in the order that you've listed them top to bottom in the `App.tsx` file. Start with `WalletList.tsx`.
 
 Add the following code to `src/components/WalletList.tsx`:
 
@@ -609,15 +609,14 @@ export const WalletList = () => {
       <h2>Wallets Detected:</h2>
       <div className={styles.walletList}>
         {
-          Object.keys(wallets).length > 0 ? Object.values(wallets).map((provider: EIP6963ProviderDetail) => (
-            <button key={provider.info.uuid} onClick={() => connectWallet(provider.info.rdns)}>
-              <img src={provider.info.icon} alt={provider.info.name} />
-              <div>{provider.info.name}</div>
-            </button>
- )) :
-            <div>
- there are no Announced Providers
-            </div>
+          Object.keys(wallets).length > 0 
+            ? Object.values(wallets).map((provider: EIP6963ProviderDetail) => (
+              <button key={provider.info.uuid} onClick={() => connectWallet(provider.info.rdns)}>
+                <img src={provider.info.icon} alt={provider.info.name} />
+                <div>{provider.info.name}</div>
+              </button>
+            )) 
+            : <div>there are no Announced Providers</div>
         }
       </div>
     </>
