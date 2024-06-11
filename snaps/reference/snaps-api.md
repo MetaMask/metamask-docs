@@ -48,7 +48,10 @@ Return value depends on the dialog `type`:
 
 #### Example
 
-```javascript title="index.js"
+<Tabs>
+<TabItem value="Functions">
+
+```typescript title="index.ts"
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 const walletAddress = await snap.request({
@@ -65,6 +68,32 @@ const walletAddress = await snap.request({
 
 // walletAddress will be a string containing the address entered by the user.
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+
+const walletAddress = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "prompt",
+    content: (
+      <Box>
+        <Heading>What is the wallet address?</Heading>
+        <Text>Please enter the wallet address to be monitored</Text>
+      </Box>
+    ),
+    placeholder: "0x123...",
+  },
+});
+
+// walletAddress will be a string containing the address entered by the user.
+```
+
+</TabItem>
+</Tabs>
 
 ## `snap_getBip32Entropy`
 
@@ -465,7 +494,10 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 
 #### Example
 
-```javascript title="index.js"
+<Tabs>
+<TabItem value="Functions">
+
+```typescript title="index.ts"
 import { panel, text } from "@metamask/snaps-sdk";
 
 const locale = await snap.request({ method: "snap_getLocale" });
@@ -485,6 +517,35 @@ await snap.request({
   },
 });
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import { Box, Text } from '@metamask/snaps-sdk/jsx';
+
+const locale = await snap.request({ method: "snap_getLocale" });
+
+let greeting = "Hello";
+if(locale === "es") {
+  greeting = "Hola";
+}
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Text>{greeting}</Text>
+      </Box>
+    ),
+  },
+});
+```
+
+</TabItem>
+</Tabs>
 
 ## `snap_manageAccounts`
 

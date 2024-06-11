@@ -100,6 +100,9 @@ You do not need any permissions other than `endowment:transaction-insight` and `
 To calculate and display the gas fees a user would pay as a percentage of their outgoing transaction,
 replace the code in `packages/snap/src/index.ts` with the following:
 
+<Tabs>
+<TabItem value="Functions">
+
 ```typescript title="index.ts"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { heading, panel, text } from "@metamask/snaps-sdk";
@@ -143,6 +146,58 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   };
 };
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx';
+
+// Handle outgoing transactions.
+export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
+
+  // Use the Ethereum provider to fetch the gas price.
+  const currentGasPrice = await ethereum.request({
+    method: "eth_gasPrice",
+  }) as string;
+
+  // Get fields from the transaction object.
+  const transactionGas = parseInt(transaction.gas as string, 16);
+  const currentGasPriceInWei = parseInt(currentGasPrice ?? "", 16);
+  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
+  const maxPriorityFeePerGasInWei = parseInt(
+    transaction.maxPriorityFeePerGas as string,
+    16,
+  );
+
+  // Calculate gas fees the user would pay.
+  const gasFees = Math.min(
+    maxFeePerGasInWei * transactionGas,
+    (currentGasPriceInWei + maxPriorityFeePerGasInWei) * transactionGas,
+  );
+
+  // Calculate gas fees as percentage of transaction.
+  const transactionValueInWei = parseInt(transaction.value as string, 16);
+  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
+
+  // Display percentage of gas fees in the transaction insights UI.
+  return {
+    content: (
+      <Box>
+        <Heading>Transaction insights Snap</Heading>
+        <Text>
+          As set up, you are paying <Bold>{gasFeesPercentage.toFixed(2)}%</Bold>
+          in gas fees for this transaction.
+        </Text>
+      </Box>
+    ),
+  };
+};
+```
+
+</TabItem>
+</Tabs>
 
 :::tip
 If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider using `window.ethereum`.
@@ -190,6 +245,9 @@ To build and test your Snap:
 The Snap should display a gas fee percentage for ETH transfers initiated by the user.
 For contract interactions, add the following code to the beginning of the `onTransaction` entry point:
 
+<Tabs>
+<TabItem value="Functions">
+
 ```typescript title="index.ts"
 if (typeof transaction.data === "string" && transaction.data !== "0x") {
   return {
@@ -202,6 +260,27 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
   };
 }
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+if (typeof transaction.data === "string" && transaction.data !== "0x") {
+  return {
+    content: (
+      <Box>
+        <Heading>Percent Snap</Heading>
+        <Text>
+          This Snap only provides transaction insights for simple ETH transfers.
+        </Text>
+      </Box>
+    ),
+  };
+}
+```
+
+</TabItem>
+</Tabs>
 
 ### 6. Next steps
 

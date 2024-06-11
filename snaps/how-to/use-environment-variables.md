@@ -91,9 +91,12 @@ Snaps CLI:
 3. You can also use environment variables directly in your Snap.
     For example:
 
+    <Tabs>
+    <TabItem value="Functions">
+
     ```typescript title="index.ts"
     import { panel, text, heading } from "@metamask/snaps-sdk";
-    
+
     await snap.request({
       method: "snap_dialog",
       params: {
@@ -105,3 +108,28 @@ Snaps CLI:
       },
     });
     ```
+
+    </TabItem>
+    <TabItem value="JSX" flaskOnly>
+
+    ```tsx title="index.tsx"
+    import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+
+    await snap.request({
+      method: "snap_dialog",
+      params: {
+        type: "alert",
+        content: (
+          <Box>
+            <Heading>This custom alert is just for display purposes.</Heading>
+            <Text>
+              SNAP_ENV is {process.env.SNAP_ENV}, PUBLIC_KEY is {process.env.PUBLIC_KEY}
+            </Text>
+          </Box>
+        ),
+      },
+    });
+    ```
+
+    </TabItem>
+    </Tabs>

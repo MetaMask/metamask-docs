@@ -5,6 +5,11 @@ sidebar_position: 4
 
 # Custom UI
 
+:::caution
+This version of Custom UI is deprecated. If you're building a new Snaps project,
+use [Custom UI with JSX](./with-jsx).
+:::
+
 You can display custom user interface (UI) components using the
 [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) module when
 implementing the following features:
@@ -309,7 +314,7 @@ An object containing:
 #### Example
 
 ```js
-import { input, form } from "@metamask/snaps-sdk";
+import { button, input, form } from "@metamask/snaps-sdk";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",

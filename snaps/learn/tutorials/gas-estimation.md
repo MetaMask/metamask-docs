@@ -175,25 +175,50 @@ only one method, `hello`.
 For the `hello` method, the handler returns a call to MetaMask with the parameters to display a
 dialog, and passes some static strings.
 
-Since `getFees()` returns a promise, you must use `then()` to resolve it in your `hello` method.
 Update the `hello` method with the following code:
+
+<Tabs>
+<TabItem value="Functions">
 
 ```typescript title="index.ts"
 case "hello":
-  return getFees().then(fees => {
-    return snap.request({
-      method: 'snap_dialog',
-      params: {
-        type: "alert",
-        content: panel([
-          text(`Hello, **${origin}**!`),
-          text("Current gas fee estimates:"),
-          copyable(fees),
-        ]),
-      }
-    });
+  const fees = await getFees();
+  return snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: "alert",
+      content: panel([
+        text(`Hello, **${origin}**!`),
+        text("Current gas fee estimates:"),
+        copyable(fees),
+      ]),
+    }
   });
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+case "hello":
+  const fees = await getFees();
+  return snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Text>Hello, <Bold>{origin}</Bold>!</Text>
+          <Text>Current gas fee estimates:</Text>
+          <Copyable>{fees}</Copyable>
+        </Box>
+      ),
+    }
+  });
+```
+
+</TabItem>
+</Tabs>
 
 ### 5. Build and test the Snap
 

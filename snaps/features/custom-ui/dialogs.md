@@ -3,6 +3,9 @@ description: Display custom alert, confirmation, or prompt screens in MetaMask.
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Dialogs
 
 You can display a dialog in the MetaMask UI using the
@@ -35,7 +38,10 @@ To display an alert that can only be acknowledged, call
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "alert"`.
 The following example displays custom UI that alerts the user when something happens in the system:
 
-```javascript title="index.js"
+<Tabs>
+<TabItem value="Functions">
+
+```typescript title="index.ts"
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 await snap.request({
@@ -52,6 +58,32 @@ await snap.request({
 // Code that should execute after the alert has been acknowledged.
 ```
 
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Heading>Something happened in the system</Heading>
+        <Text>The thing that happened is...</Text>
+      </Box>
+    ),
+  },
+});
+
+// Code that should execute after the alert has been acknowledged.
+```
+
+</TabItem>
+</Tabs>
+
+
 <p align="center">
 <img src={require("../../assets/alert-dialog.png").default} alt="Alert dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
 </p>
@@ -63,7 +95,10 @@ To display a confirmation that can be accepted or rejected, call
 The following example displays custom UI that asks the user to confirm whether they would like to
 take an action:
 
-```javascript title="index.js"
+<Tabs>
+<TabItem value="Functions">
+
+```typescript title="index.ts"
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 const result = await snap.request({
@@ -82,6 +117,33 @@ if (result === true) {
 }
 ```
 
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+
+const result = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "confirmation",
+    content: (
+      <Box>
+        <Heading>Would you like to take the action?</Heading>
+        <Text>The action is...</Text>
+      </Box>
+    ),
+  },
+});
+
+if (result === true) {
+  // Do the action.
+}
+```
+
+</TabItem>
+</Tabs>
+
 <p align="center">
 <img src={require("../../assets/confirmation-dialog.png").default} alt="Confirmation dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
 </p>
@@ -94,7 +156,10 @@ Prompt dialogs also accept a `placeholder` value that displays in the input fiel
 
 The following example displays custom UI that prompts the user to enter a wallet address:
 
-```javascript title="index.js"
+<Tabs>
+<TabItem value="Functions">
+
+```typescript title="index.ts"
 import { panel, text, heading } from "@metamask/snaps-sdk";
 
 const walletAddress = await snap.request({
@@ -111,6 +176,32 @@ const walletAddress = await snap.request({
 
 // walletAddress will be a string containing the address entered by the user.
 ```
+
+</TabItem>
+<TabItem value="JSX" flaskOnly>
+
+```tsx title="index.tsx"
+import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+
+const walletAddress = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "prompt",
+    content: (
+      <Box>
+        <Heading>What is the wallet address?</Heading>
+        <Text>Please enter the wallet address to be monitored</Text>
+      </Box>
+    ),
+    placeholder: "0x123...",
+  },
+});
+
+// walletAddress will be a string containing the address entered by the user.
+```
+
+</TabItem>
+</Tabs>
 
 <p align="center">
 <img src={require("../../assets/prompt-dialog.png").default} alt="Prompt dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
