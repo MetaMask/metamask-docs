@@ -3,6 +3,8 @@ description: Get started quickly using the create-snap starter kit.
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
 # Snaps quickstart

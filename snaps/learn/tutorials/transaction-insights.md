@@ -3,6 +3,9 @@ description: Create a Snap that provides transaction insights.
 sidebar_position: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Create a Snap to calculate gas fee percentages
 
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees that
