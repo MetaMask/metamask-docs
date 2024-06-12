@@ -6,7 +6,10 @@ const parseMarkdown = (content: string) => {
     .replace(/`(.*?)`/g, "<code>$1</code>");
 };
 
-// eslint-disable-next-line react/prop-types
-export const MDContent = ({ content = "" }) => (
+interface MDContentProps {
+  content?: string;
+}
+
+export const MDContent = ({ content = "" }: MDContentProps) => (
   <span dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }} />
 );

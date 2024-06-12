@@ -51,3 +51,38 @@
   top: 84px;
   left: 0;
 }
+
+.rowWrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30px;
+}
+
+.colLeft {
+  width: 65%;
+  padding-right: 23px;
+  border-right: 1px solid #444950;
+}
+
+.colRight {
+  width: 35%;
+  padding-left: 23px;
+}
+
+@media (width <= 1200px) {
+  .colLeft {
+    width: 100%;
+    padding: 0;
+    border-right: 0;
+  }
+  .colRight {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (width <= 1024px) {
+  .rowWrap {
+    padding: 0;
+  }
+}

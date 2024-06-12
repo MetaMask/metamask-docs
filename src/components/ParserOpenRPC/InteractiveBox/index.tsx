@@ -12,8 +12,6 @@ export default function InteractiveBox({ method, params, components }: Interacti
   console.log("method_params___", params);
   console.log("method_components___", components);
   return (
-    <div>
-      Request wrapper
-    </div>
+    <div></div>
   );
 }

@@ -3,8 +3,12 @@ import { useCollapsible, Collapsible, useColorMode } from "@docusaurus/theme-com
 import styles from "./styles.module.css";
 import React, { useEffect } from "react";
 
-// eslint-disable-next-line react/prop-types
-export const CollapseBox = ({ children, isInitCollapsed = false }) => {
+interface CollapseBoxProps {
+  children: JSX.Element;
+  isInitCollapsed?: boolean;
+}
+
+export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxProps) => {
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const { colorMode } = useColorMode();
   useEffect(() => {
