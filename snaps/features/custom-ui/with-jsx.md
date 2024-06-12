@@ -28,7 +28,7 @@ Then, whenever you're required to return a custom UI JSX component, import the c
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
 For example, to display a [`Box`](#box) (the [`panel`](./index.md#panel) function equivalent) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -46,7 +46,7 @@ await snap.request({
 ```
 
 :::note
-Note that JSX can only be used in `.tsx` files.
+Note that JSX can only be used in `.jsx` or `.tsx` files.
 :::
 
 ## Components
@@ -61,7 +61,7 @@ Hovering the address shows the full value in a tooltip.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Address } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -93,7 +93,7 @@ Outputs bold text.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -119,7 +119,7 @@ This component takes an array of custom UI JSX components.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Bold, Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
 module.exports.onTransaction = async ({ transaction }) => {
@@ -194,7 +194,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Text, Copyable } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -221,7 +221,7 @@ Outputs a horizontal divider.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Divider, Text } from '@metamask/snaps-sdk/jsx';
 
 module.exports.onHomePage = async () => {
@@ -337,7 +337,7 @@ This is useful for [`Box`](#box) titles.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
 module.exports.onHomePage = async () => {
@@ -381,7 +381,7 @@ The default is `true`.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text, Image } from '@metamask/snaps-sdk/jsx';
 import svgIcon from "./path/to/icon.svg";
 
@@ -458,7 +458,7 @@ Outputs italic text.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text, Italic } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -488,7 +488,7 @@ Outputs a clickable link.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Link, Text } from '@metamask/snaps-sdk/jsx';
 
 module.exports.onHomePage = async () => {
@@ -526,7 +526,7 @@ The label must be a string. The value can be a child component of type
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Row, Text, Address } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -557,7 +557,7 @@ Outputs a loading indicator.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Spinner } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
@@ -584,7 +584,7 @@ Outputs text.
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
 module.exports.onHomePage = async () => {
@@ -609,7 +609,7 @@ Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept
 
 #### Example
 
-```javascript title="index.tsx"
+```javascript title="index.jsx"
 import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
 await snap.request({
