@@ -290,6 +290,48 @@ await snap.request({
     </div>
 </div>
 
+### `Field`
+
+Outputs a form field, wrapping a [`Dropdown`](#dropdown) or [`Input`](#input) to give it a label and optional error.
+
+#### Props
+
+- `label`: `string` - The label for the wrapped element.
+- `error`: `string` - Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
+- `children`: `Dropdown` | `Input` - The input element to be wrapped.
+
+#### Example
+
+```js
+import { Field, Form, Input, Button } from '@metamask/snaps-sdk/jsx';
+
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Form name="form-to-fill">
+        <Field label="First Name">
+          <Input name="firstName" placeholder="Enter your first name" />
+        </Field>
+        <Button type="submit">Submit</Button>
+      </Form>
+    ),
+  },
+});
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "Alert",
+    id: interfaceId,
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-field.png").default} alt="Field example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Form`
 
 Outputs a form for use in [interactive UI](interactive-ui.md).
