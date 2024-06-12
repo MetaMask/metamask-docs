@@ -88,4 +88,4 @@ of the Infura **Settings**. Infura sends emails when your daily requests reach 7
 
 **Example email**:
 
-![](../../../images/emailexample.png)
+![Example email](../../images/emailexample.png)
