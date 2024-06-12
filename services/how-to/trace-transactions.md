@@ -19,7 +19,7 @@ extract information about contract interactions, transactions, and blocks on the
 also use the API to retrieve transaction details that are not recorded on the blockchain. For example, use the
 [`trace_call`](../json-rpc-methods/trace-methods/trace_call.mdx) API to observe contract interactions.
 
-![Example for using the trace_call API](../../../images/trace-call.png)
+![Example for using the trace_call API](../../images/trace-call.png)
 
 :::tip
 
