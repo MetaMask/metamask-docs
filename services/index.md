@@ -48,13 +48,6 @@ include:
 <meta httpEquiv="pragma" content="no-cache" />
 </head>
 
-## Browse by network
-
-Infura provides flexibility and interoperabiity to Web3 applications by allowing access to multiple networks. Click below
-to explore the supported networks.
-
-<SectionNetworks />
-
 ## Try out an Infura endpoint
 
 Interact with the live terminal below and start testing Infura's core capabilities
