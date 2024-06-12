@@ -237,7 +237,56 @@ module.exports.onHomePage = async () => {
 <img src={require("../../assets/custom-ui-divider.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
-### `form`
+### `Dropdown`
+
+Outputs a dropdown for use in [interactive UI](interactive-ui.md).
+
+#### Props
+
+- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+- `children`: `Option[]` - One or more `Option` components with props:
+  - `value`: `string` - The value that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  - `children`: `string` - The text that will be displayed in the dropdown for that option
+
+#### Example
+
+```js
+import { Box, Text, Dropdown } from '@metamask/snaps-sdk/jsx';
+
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Box>
+        <Text>Pick a currency</Text>
+        <Dropdown name="currency">
+          <Option value="ETH">ETH</Option>
+          <Option value="USD">USD</Option>
+        </Dropdown>
+      </Box>
+    ),
+  },
+});
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "Alert",
+    id: interfaceId,
+  },
+});
+```
+
+<div class="row">
+    <div class="column">
+        <img src={require("../../assets/custom-ui-dropdown.png").default} alt="Dropdown UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+    </div>
+    <div class="column">
+        <img src={require("../../assets/custom-ui-dropdown-active.png").default} alt="Active dropdown UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+    </div>
+</div>
+
+### `Form`
 
 Outputs a form for use in [interactive UI](interactive-ui.md).
 
