@@ -475,7 +475,7 @@ await snap.request({
 
 ### `Link`
 
-The [`Text`](#text) component accepts inline links.
+Outputs a clickable link.
 
 #### Props
 
