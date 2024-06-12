@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[6307],{16754:s=>{s.exports=JSON.parse('{"tags":[{"label":"Keyring API","permalink":"/eslint-update/snaps/tags/keyring-api","count":9}]}')}}]);
