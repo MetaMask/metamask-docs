@@ -235,6 +235,16 @@ To build and test your Snap:
 
 You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
+7. If you click the **Send message** button, but got a error like this.
+<p align="center">
+<img src="https://github.com/MetaMask/metamask-docs/assets/5465932/a22481a0-30d5-4efd-8cc5-c42db70f7eb1" alt="An error happened" width="400px" style={{border: '1px solid #DCDCDC'}} />
+</p>
+
+You need to replace line 114 in `packages/site/src/pages/index.tsx` with this:
+```typescript title="index.tsx"
+  await invokeSnap({ method: 'hello', params: {} });
+```
+
 ### 6. Next steps
 
 Next, you can try:
