@@ -36,24 +36,7 @@ MetaMask calls this method when a user selects your Snap name in the Snaps menu.
 The following example displays custom UI that welcomes the user to the Snap's home page:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnHomePageHandler } from "@metamask/snaps-sdk";
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-export const onHomePage: OnHomePageHandler = async () => {
-  return {
-    content: panel([
-      heading("Hello world!"),
-      text("Welcome to my Snap home page!"),
-    ]),
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
@@ -67,6 +50,23 @@ export const onHomePage: OnHomePageHandler = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnHomePageHandler } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
   };
 };
 ```

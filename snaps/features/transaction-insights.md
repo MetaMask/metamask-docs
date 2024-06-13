@@ -47,30 +47,7 @@ handler method.
 The following is an example implementation of `onTransaction`:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
@@ -92,6 +69,29 @@ export const onTransaction: OnTransactionHandler = async ({
         ))}
       </Box>
     ),
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
   };
 };
 ```
@@ -115,32 +115,7 @@ A Snap providing transaction insights can return an optional severity level of `
 MetaMask shows a modal with the warning before the user can confirm the transaction.
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    // highlight-next-line
-    severity: "critical",
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
@@ -162,6 +137,31 @@ export const onTransaction: OnTransactionHandler = async ({
         ))}
       </Box>
     ),
+    // highlight-next-line
+    severity: "critical",
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
     // highlight-next-line
     severity: "critical",
   };

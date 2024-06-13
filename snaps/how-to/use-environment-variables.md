@@ -92,25 +92,7 @@ Snaps CLI:
     For example:
 
     <Tabs>
-    <TabItem value="Functions">
-
-    ```typescript title="index.ts"
-    import { panel, text, heading } from "@metamask/snaps-sdk";
-
-    await snap.request({
-      method: "snap_dialog",
-      params: {
-        type: "alert",
-        content: panel([
-          heading("This custom alert is just for display purposes."),
-          text(`SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`),
-        ]),
-      },
-    });
-    ```
-
-    </TabItem>
-    <TabItem value="JSX" flaskOnly>
+    <TabItem value="JSX">
 
     ```tsx title="index.tsx"
     import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
@@ -127,6 +109,24 @@ Snaps CLI:
             </Text>
           </Box>
         ),
+      },
+    });
+    ```
+
+    </TabItem>
+    <TabItem value="Functions" deprecated>
+
+    ```typescript title="index.ts"
+    import { panel, text, heading } from "@metamask/snaps-sdk";
+
+    await snap.request({
+      method: "snap_dialog",
+      params: {
+        type: "alert",
+        content: panel([
+          heading("This custom alert is just for display purposes."),
+          text(`SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`),
+        ]),
       },
     });
     ```

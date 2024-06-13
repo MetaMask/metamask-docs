@@ -35,30 +35,7 @@ The following example displays an [alert dialog](custom-ui/dialogs.md#display-an
 
 <Tabs>
 
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnInstallHandler } from "@metamask/snaps-sdk";
-import { heading, panel, text } from "@metamask/snaps-sdk";
-
-export const onInstall: OnInstallHandler = async () => {
-  await snap.request({
-    method: "snap_dialog",
-    params: {
-      type: "alert",
-      content: panel([
-        heading("Installation successful"),
-        text(
-          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
-        ),
-      ]),
-    },
-  });
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnInstallHandler } from "@metamask/snaps-sdk";
@@ -83,6 +60,29 @@ export const onInstall: OnInstallHandler = async () => {
 ```
 
 </TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnInstallHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
+
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Installation successful"),
+        text(
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+        ),
+      ]),
+    },
+  });
+};
+```
+
+</TabItem>
 </Tabs>
 
 ### 3. Run an action on update
@@ -95,7 +95,31 @@ The following example displays an [alert dialog](custom-ui/dialogs.md#display-an
 
 <Tabs>
 
-<TabItem value="Functions">
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnUpdateHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+
+export const onUpdate: OnUpdateHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Heading>Update successful</Heading>
+          <Text>New features added in this version:</Text>
+          <Text>Added a dialog that appears when updating.</Text>
+        </Box>
+      ),
+    },
+  });
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
 import type { OnUpdateHandler } from "@metamask/snaps-sdk";
@@ -115,30 +139,6 @@ export const onUpdate: OnUpdateHandler = async () => {
           "Added a dialog that appears when updating."
         ), 
       ]),
-    },
-  });
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
-
-```tsx title="index.tsx"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
-
-export const onUpdate: OnUpdateHandler = async () => {
-  await snap.request({
-    method: "snap_dialog",
-    params: {
-      type: "alert",
-      content: (
-        <Box>
-          <Heading>Update successful</Heading>
-          <Text>New features added in this version:</Text>
-          <Text>Added a dialog that appears when updating.</Text>
-        </Box>
-      ),
     },
   });
 };

@@ -125,30 +125,7 @@ level of `SeverityLevel.Critical`.
 The following is an example implementation of `onSignature`:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onSignature: OnSignatureHandler = async ({
-  signature,
-  signatureOrigin,
-}) => {
-  const insights = /* Get insights based on custom logic */;
-  return {
-    content: panel([
-      heading("My Signature Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    severity: SeverityLevel.Critical,
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
@@ -169,6 +146,29 @@ export const onSignature: OnSignatureHandler = async ({
         ))}
       </Box>
     ),
+    severity: SeverityLevel.Critical,
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onSignature: OnSignatureHandler = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  const insights = /* Get insights based on custom logic */;
+  return {
+    content: panel([
+      heading("My Signature Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
     severity: SeverityLevel.Critical,
   };
 };

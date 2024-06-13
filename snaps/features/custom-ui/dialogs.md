@@ -39,27 +39,7 @@ To display an alert that can only be acknowledged, call
 The following example displays custom UI that alerts the user when something happens in the system:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "alert",
-    content: panel([
-      heading("Something happened in the system"),
-      text("The thing that happened is..."),
-    ]),
-  },
-});
-
-// Code that should execute after the alert has been acknowledged.
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
@@ -74,6 +54,26 @@ await snap.request({
         <Text>The thing that happened is...</Text>
       </Box>
     ),
+  },
+});
+
+// Code that should execute after the alert has been acknowledged.
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      heading("Something happened in the system"),
+      text("The thing that happened is..."),
+    ]),
   },
 });
 
@@ -96,29 +96,7 @@ The following example displays custom UI that asks the user to confirm whether t
 take an action:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-const result = await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "confirmation",
-    content: panel([
-      heading("Would you like to take the action?"),
-      text("The action is..."),
-    ]),
-  },
-});
-
-if (result === true) {
-  // Do the action.
-}
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
@@ -133,6 +111,28 @@ const result = await snap.request({
         <Text>The action is...</Text>
       </Box>
     ),
+  },
+});
+
+if (result === true) {
+  // Do the action.
+}
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+const result = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "confirmation",
+    content: panel([
+      heading("Would you like to take the action?"),
+      text("The action is..."),
+    ]),
   },
 });
 
@@ -157,28 +157,7 @@ Prompt dialogs also accept a `placeholder` value that displays in the input fiel
 The following example displays custom UI that prompts the user to enter a wallet address:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-const walletAddress = await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "prompt",
-    content: panel([
-      heading("What is the wallet address?"),
-      text("Please enter the wallet address to be monitored"),
-    ]),
-    placeholder: "0x123...",
-  },
-});
-
-// walletAddress will be a string containing the address entered by the user.
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
@@ -193,6 +172,27 @@ const walletAddress = await snap.request({
         <Text>Please enter the wallet address to be monitored</Text>
       </Box>
     ),
+    placeholder: "0x123...",
+  },
+});
+
+// walletAddress will be a string containing the address entered by the user.
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+const walletAddress = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "prompt",
+    content: panel([
+      heading("What is the wallet address?"),
+      text("Please enter the wallet address to be monitored"),
+    ]),
     placeholder: "0x123...",
   },
 });

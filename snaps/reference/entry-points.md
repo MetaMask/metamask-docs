@@ -100,24 +100,7 @@ One of the following:
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnHomePageHandler } from "@metamask/snaps-sdk";
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-export const onHomePage: OnHomePageHandler = async () => {
-  return {
-    content: panel([
-      heading("Hello world!"),
-      text("Welcome to my Snap home page!"),
-    ]),
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
@@ -131,6 +114,23 @@ export const onHomePage: OnHomePageHandler = async () => {
         <Text>Welcome to my Snap home page!</Text>
       </Box>
     ),
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnHomePageHandler } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: panel([
+      heading("Hello world!"),
+      text("Welcome to my Snap home page!"),
+    ]),
   };
 };
 ```
@@ -156,30 +156,7 @@ None.
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnInstallHandler } from "@metamask/snaps-sdk";
-import { heading, panel, text } from "@metamask/snaps-sdk";
-
-export const onInstall: OnInstallHandler = async () => {
-  await snap.request({
-    method: "snap_dialog",
-    params: {
-      type: "alert",
-      content: panel([
-        heading("Thank you for installing my Snap"),
-        text(
-          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
-        ),
-      ]),
-    },
-  });
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnInstallHandler } from "@metamask/snaps-sdk";
@@ -198,6 +175,29 @@ export const onInstall: OnInstallHandler = async () => {
           </Text>
         </Box>
       ),
+    },
+  });
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnInstallHandler } from "@metamask/snaps-sdk";
+import { heading, panel, text } from "@metamask/snaps-sdk";
+
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: panel([
+        heading("Thank you for installing my Snap"),
+        text(
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+        ),
+      ]),
     },
   });
 };
@@ -435,30 +435,7 @@ An object containing:
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onSignature: OnSignatureHandler = async ({
-  signature,
-  signatureOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Signature Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-    severity: SeverityLevel.Critical,
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
@@ -479,6 +456,29 @@ export const onSignature: OnSignatureHandler = async ({
         ))}
       </Box>
     ),
+    severity: SeverityLevel.Critical,
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onSignature: OnSignatureHandler = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Signature Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
     severity: SeverityLevel.Critical,
   };
 };
@@ -524,30 +524,7 @@ An object containing:
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onTransaction: OnTransactionHandler = async ({
-  transaction,
-  chainId,
-  transactionOrigin,
-}) => {
-  const insights = /* Get insights */;
-  return {
-    content: panel([
-      heading("My Transaction Insights"),
-      text("Here are the insights:"),
-      ...(insights.map((insight) => text(insight.value))),
-    ]),
-  };
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
@@ -574,6 +551,29 @@ export const onTransaction: OnTransactionHandler = async ({
 ```
 
 </TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: panel([
+      heading("My Transaction Insights"),
+      text("Here are the insights:"),
+      ...(insights.map((insight) => text(insight.value))),
+    ]),
+  };
+};
+```
+
+</TabItem>
 </Tabs>
 
 ## `onUpdate`
@@ -594,7 +594,31 @@ None.
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnUpdateHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+
+export const onUpdate: OnUpdateHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Heading>Thank you for updating my Snap</Heading>
+          <Text>New features added in this version:</Text>
+          <Text>Added a dialog that appears when updating.</Text>
+        </Box>
+      ),
+    },
+  });
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
 import type { OnUpdateHandler } from "@metamask/snaps-sdk";
@@ -614,30 +638,6 @@ export const onUpdate: OnUpdateHandler = async () => {
           "Added a dialog that appears when updating."
         ), 
       ]),
-    },
-  });
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
-
-```tsx title="index.tsx"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
-
-export const onUpdate: OnUpdateHandler = async () => {
-  await snap.request({
-    method: "snap_dialog",
-    params: {
-      type: "alert",
-      content: (
-        <Box>
-          <Heading>Thank you for updating my Snap</Heading>
-          <Text>New features added in this version:</Text>
-          <Text>Added a dialog that appears when updating.</Text>
-        </Box>
-      ),
     },
   });
 };

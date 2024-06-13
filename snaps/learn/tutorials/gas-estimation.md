@@ -181,26 +181,7 @@ dialog, and passes some static strings.
 Update the `hello` method with the following code:
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-case "hello":
-  const fees = await getFees();
-  return snap.request({
-    method: 'snap_dialog',
-    params: {
-      type: "alert",
-      content: panel([
-        text(`Hello, **${origin}**!`),
-        text("Current gas fee estimates:"),
-        copyable(fees),
-      ]),
-    }
-  });
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 case "hello":
@@ -216,6 +197,25 @@ case "hello":
           <Copyable>{fees}</Copyable>
         </Box>
       ),
+    }
+  });
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+case "hello":
+  const fees = await getFees();
+  return snap.request({
+    method: 'snap_dialog',
+    params: {
+      type: "alert",
+      content: panel([
+        text(`Hello, **${origin}**!`),
+        text("Current gas fee estimates:"),
+        copyable(fees),
+      ]),
     }
   });
 ```

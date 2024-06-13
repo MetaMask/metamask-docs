@@ -15,3 +15,13 @@
   padding: 2px 4px;
   font-size: 0.8em;
 }
+
+.deprecated::after {
+  content: "deprecated";
+  margin-left: 0.5em;
+  background-color: var(--ifm-color-warning-contrast-background);
+  color: var(--ifm-color-warning-contrast-foreground);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.8em;
+}

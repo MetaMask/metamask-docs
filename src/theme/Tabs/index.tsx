@@ -148,7 +148,8 @@ function TabsComponent(props: Props): JSX.Element {
         className: clsx(
           tabValue.attributes?.className,
           {
-            [styles.flaskOnly]: props.children[idx]?.props.flaskOnly
+            [styles.flaskOnly]: props.children[idx]?.props.flaskOnly,
+            [styles.deprecated]: props.children[idx]?.props.deprecated
           }
         )
       }

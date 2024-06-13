@@ -45,35 +45,7 @@ The following example handles the `execute` method specified in the previous exa
 
 <Tabs>
 
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk";
-import { panel, heading, text } from "@metamask/snaps-sdk";
-
-export const onCronjob: OnCronjobHandler = async ({ request }) => {
-  switch (request.method) {
-    case "execute":
-      // Cron jobs can execute any method that is available to the Snap.
-      return snap.request({
-        method: "snap_dialog",
-        params: {
-          type: "alert",
-          content: panel([
-            heading("Cron job"),
-            text("This dialog was triggered by a cron job."),
-          ]),
-        },
-      });
-
-    default:
-      throw new Error("Method not found.");
-  }
-};
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import type { OnCronjobHandler } from "@metamask/snaps-sdk";
@@ -93,6 +65,34 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
               <Text>This dialog was triggered by a cron job.</Text>
             </Box>
           ),
+        },
+      });
+
+    default:
+      throw new Error("Method not found.");
+  }
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case "execute":
+      // Cron jobs can execute any method that is available to the Snap.
+      return snap.request({
+        method: "snap_dialog",
+        params: {
+          type: "alert",
+          content: panel([
+            heading("Cron job"),
+            text("This dialog was triggered by a cron job."),
+          ]),
         },
       });
 

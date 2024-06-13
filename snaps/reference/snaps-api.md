@@ -49,28 +49,7 @@ Return value depends on the dialog `type`:
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
-
-const walletAddress = await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "prompt",
-    content: panel([
-      heading("What is the wallet address?"),
-      text("Please enter the wallet address to be monitored"),
-    ]),
-    placeholder: "0x123...",
-  },
-});
-
-// walletAddress will be a string containing the address entered by the user.
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
@@ -85,6 +64,27 @@ const walletAddress = await snap.request({
         <Text>Please enter the wallet address to be monitored</Text>
       </Box>
     ),
+    placeholder: "0x123...",
+  },
+});
+
+// walletAddress will be a string containing the address entered by the user.
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import { panel, text, heading } from "@metamask/snaps-sdk";
+
+const walletAddress = await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "prompt",
+    content: panel([
+      heading("What is the wallet address?"),
+      text("Please enter the wallet address to be monitored"),
+    ]),
     placeholder: "0x123...",
   },
 });
@@ -495,31 +495,7 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 #### Example
 
 <Tabs>
-<TabItem value="Functions">
-
-```typescript title="index.ts"
-import { panel, text } from "@metamask/snaps-sdk";
-
-const locale = await snap.request({ method: "snap_getLocale" });
-
-let greeting = "Hello";
-if(locale === "es") {
-  greeting = "Hola";
-}
-
-await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "alert",
-    content: panel([
-      text(greeting),
-    ]),
-  },
-});
-```
-
-</TabItem>
-<TabItem value="JSX" flaskOnly>
+<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 import { Box, Text } from '@metamask/snaps-sdk/jsx';
@@ -540,6 +516,30 @@ await snap.request({
         <Text>{greeting}</Text>
       </Box>
     ),
+  },
+});
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
+```typescript title="index.ts"
+import { panel, text } from "@metamask/snaps-sdk";
+
+const locale = await snap.request({ method: "snap_getLocale" });
+
+let greeting = "Hello";
+if(locale === "es") {
+  greeting = "Hola";
+}
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: panel([
+      text(greeting),
+    ]),
   },
 });
 ```
