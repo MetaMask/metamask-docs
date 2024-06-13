@@ -6,8 +6,8 @@ sidebar_position: 4
 # Custom UI
 
 :::caution
-This version of Custom UI is deprecated. If you're building a new Snaps project,
-use [Custom UI with JSX](./with-jsx).
+This version of custom UI is deprecated. If you're building a new Snaps project,
+use [custom UI with JSX](./with-jsx).
 :::
 
 You can display custom user interface (UI) components using the

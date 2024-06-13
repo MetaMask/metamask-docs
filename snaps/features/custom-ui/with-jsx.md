@@ -26,7 +26,7 @@ SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
 For example, to display a [`Box`](#box) (the [`panel`](./index.md#panel) function equivalent) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -59,7 +59,7 @@ Hovering the address shows the full value in a tooltip.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Address } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -91,7 +91,7 @@ Outputs bold text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -115,13 +115,17 @@ Outputs a box, which can be used as a container for other components.
 
 #### Props
 
-- `direction`: `"horizontal" | "vertical"` - Optional, defaults to `"vertical"`. The direction in which elements flow inside the box.
-- `alignment`: `"start" | "center" | "end" | "space-between" | "space-around"` - Optional, defaults to `"start"`. The alignment of the elements inside the box.
+- `direction` - (Optional) The direction in which elements flow inside the box.
+  Possible values are `"horizontal"` or `"vertical"`.
+  The default is `"vertical"`. 
+- `alignment` - (Optional) The alignment of the elements inside the box.
+  Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, or `"space-around"`.
+  The default is `"start"`.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 module.exports.onHomePage = async () => {
   return {
@@ -154,18 +158,19 @@ For use in [interactive UI](interactive-ui.md).
 #### Props
 
 - `children`: `string` - The text of the button.
-- `type`: `string` - (Optional) Possible values are `button` or `submit`.
-  The default is `button`.
+- `type` - (Optional) The type of button.
+  Possible values are `"button"` or `"submit"`.
+  The default is `"button"`.
 - `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
   when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
-  Possible values are `primary` or `secondary`.
-  The default is `primary`.
+  Possible values are `"primary"` or `"secondary"`.
+  The default is `"primary"`.
 
 #### Example
 
 ```javascript
-import { Box, Heading, Button } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Button } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -200,7 +205,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Text, Copyable } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -227,7 +232,7 @@ Outputs a horizontal divider.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Divider, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Divider, Text } from "@metamask/snaps-sdk/jsx";
 
 module.exports.onHomePage = async () => {
   return {
@@ -252,15 +257,15 @@ Outputs a dropdown for use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-- `children`: `Option[]` - One or more `Option` components with props:
-  - `value`: `string` - The value that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-  - `children`: `string` - The text that will be displayed in the dropdown for that option
+- `name`: `string` - The name sent to [`onUserInput`](../../reference/entry-points.md#onuserinput).
+- `children`: `Option[]` - One or more `Option` components with the following props:
+  - `value`: `string` - The value sent to [`onUserInput`](../../reference/entry-points.md#onuserinput).
+  - `children`: `string` - The text displayed in the dropdown for that option.
 
 #### Example
 
 ```js
-import { Box, Text, Dropdown } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Dropdown } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -303,12 +308,12 @@ Outputs a form field, wrapping a [`Dropdown`](#dropdown) or [`Input`](#input) to
 
 - `label`: `string` - The label for the wrapped element.
 - `error`: `string` - Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
-- `children`: `Dropdown | Input` - The input element to be wrapped.
+- `children` - The [`Dropdown`](#dropdown) or [`Input`](#input) element to be wrapped.
 
 #### Example
 
 ```js
-import { Field, Form, Input, Button } from '@metamask/snaps-sdk/jsx';
+import { Field, Form, Input, Button } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -350,7 +355,7 @@ Outputs a form for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Form, Input, Button } from '@metamask/snaps-sdk/jsx';
+import { Form, Input, Button } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -385,7 +390,7 @@ This is useful for [`Box`](#box) titles.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 module.exports.onHomePage = async () => {
   return {
@@ -429,7 +434,7 @@ The default is `true`.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Image } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text, Image } from "@metamask/snaps-sdk/jsx";
 import svgIcon from "./path/to/icon.svg";
 
 module.exports.onHomePage = async () => {
@@ -462,17 +467,17 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 
 - `name`: `string` - The name that will be used as a key to the event sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
-- `type`: `string` - (Optional) Type of input.
-  Possible values are `text`, `number`, or `password`.
-  The default is `text`.
+- `type` - (Optional) The type of input.
+  Possible values are `"text"`, `"number"`, or `"password"`.
+  The default is `"text"`.
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
-- `label`: `string` (Optional) The text displayed alongside the input to label it.
-- `value`: `string` (Optional) The default value of the input.
+- `label`: `string` - (Optional) The text displayed alongside the input to label it.
+- `value`: `string` - (Optional) The default value of the input.
 
 #### Example
 
 ```js
-import { Form, Input, Button } from '@metamask/snaps-sdk/jsx';
+import { Form, Input, Button } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -506,7 +511,7 @@ Outputs italic text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text, Italic } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text, Italic } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -531,12 +536,12 @@ Outputs a clickable link.
 #### Props
 
 - `href`: `string` - The URL to point to.
-- `children`: `Array<string | Bold | Italic>` - The text to be clicked.
+- `children`: `Array<string | Bold | Italic>` - The link text.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Link, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Link, Text } from "@metamask/snaps-sdk/jsx";
 
 module.exports.onHomePage = async () => {
   return {
@@ -562,19 +567,19 @@ module.exports.onHomePage = async () => {
 ### `Row`
 
 Outputs a row with a label and value, which can be used for key-value data.
-The label must be a string. The value can be a child component of type
-[`Text`](#text), [`Image`](#image), or [`Address`](#address).
 
 #### Props
 
-- `label`: `string` - The label of the row
-- `variant`: `"default" | "error" | "warning"` - Optional, the variant of the label.
-- `children`: `Address | Image | Text` - The value of the row.
+- `label`: `string` - The label of the row.
+- `variant` - (Optional) The variant of the label.
+  Possible values are `"default"`, `"error"`, or `"warning"`.
+- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), or
+  [`Address`](#address) component.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Row, Text, Address } from '@metamask/snaps-sdk/jsx';
+import { Box, Row, Text, Address } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -605,7 +610,7 @@ Outputs a loading indicator.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Spinner } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Spinner } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -632,7 +637,7 @@ Outputs text.
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 module.exports.onHomePage = async () => {
   return {
@@ -657,7 +662,7 @@ Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept
 #### Example
 
 ```javascript title="index.jsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",

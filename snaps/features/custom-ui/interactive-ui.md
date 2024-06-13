@@ -16,6 +16,14 @@ The following interactive UI components are available:
 - [`form`](index.md#form)
 - [`input`](index.md#input)
 
+The following interactive UI JSX components are available:
+
+- [`Button`](with-jsx.md#button)
+- [`Dropdown`](with-jsx.md#dropdown)
+- [`Field`](with-jsx.md#field)
+- [`Form`](with-jsx.md#form)
+- [`Input`](with-jsx.md#input)
+
 ## Create an interactive interface
 
 Create an interactive interface using the
