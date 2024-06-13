@@ -25,17 +25,17 @@ Select one of the following options to get started with the Arbitrum network:
 <CardList
   items={[
     {
-      href: "./arbitrum/quickstart",
+      href: "quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect to Arbitrum and make calls to the network."
     },
     {
-      href: "./arbitrum/json-rpc-methods",
+      href: "json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Arbitrum network."
     },
     {
-      href: "../../dashboard/create-api",
+      href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
       description: "Learn how to create an API key and secure and share it with your team."
     }

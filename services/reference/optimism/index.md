@@ -21,17 +21,17 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 <CardList
   items={[
     {
-      href: "./optimism/quickstart",
+      href: "quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Optimism network."
     },
     {
-      href: "./optimism/json-rpc-methods",
+      href: "json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Optimism network."
     },
     {
-      href: "../../dashboard/create-api",
+      href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
       description: "Learn how to create an API key and secure and share it with your team."
     }

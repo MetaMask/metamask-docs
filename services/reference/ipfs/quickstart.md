@@ -18,8 +18,8 @@ to the [billing details](how-to/access-ipfs-content/dedicated-gateways.md#stats-
 
 ## Prerequisites
 
-Before you begin, ensure you have a valid [API key](../../../dashboard/create-api.md) and
-    [API key secret](../../../dashboard/secure-an-api/api-key-secret.md).
+Before you begin, ensure you have a valid [API key](../../../developer-tools/dashboard/create-api.md) and
+    [API key secret](../../../developer-tools/dashboard/secure-an-api/api-key-secret.md).
 
 ## Make calls
 
@@ -296,11 +296,11 @@ Now that you have successfully made a call to the IPFS network, you can explore 
 by Infura. Here are some suggestions:
 
 - **Explore other IPFS APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](./http-api-methods/).
+[JSON-RPC API method documentation](../http-api-methods/).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../dashboard/dashboard-stats.md) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

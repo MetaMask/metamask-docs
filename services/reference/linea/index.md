@@ -20,17 +20,17 @@ on Ethereum. For users, this enables the experience and security guarantees of E
 <CardList
   items={[
     {
-      href: "./linea/quickstart",
+      href: "quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Linea network."
     },
     {
-      href: "./linea/json-rpc-methods",
+      href: "json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Linea network."
     },
     {
-      href: "../../dashboard/create-api",
+      href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
       description: "Learn how to create an API key and secure and share it with your team."
     }
