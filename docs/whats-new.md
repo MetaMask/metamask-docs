@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## June 2024
 
+- Documented [Snaps custom UI with JSX](/snaps/features/custom-ui/with-jsx).
+  ([#1348](https://github.com/MetaMask/metamask-docs/pull/1348))
 - Documented that the Gas API can be [called without an API key secret](/services/gas-api/api-reference). ([#1346](https://github.com/MetaMask/metamask-docs/pull/1346))
 - Updated [Snaps resources](/snaps/learn/resources) and added a new section "Snaps for developers." ([#1329](https://github.com/MetaMask/metamask-docs/pull/1329))
 - Documented [how to allow automatic connections to a Snap](/snaps/how-to/allow-automatic-connections).
