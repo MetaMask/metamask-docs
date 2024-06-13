@@ -111,23 +111,31 @@ await snap.request({
 
 ### `Box`
 
-Outputs a box, which can be used as a container for other components. 
-This component takes an array of custom UI JSX components.
+Outputs a box, which can be used as a container for other components.
+
+#### Props
+
+- `direction`: `"horizontal" | "vertical"` - Optional, defaults to `"vertical"`. The direction in which elements flow inside the box.
+- `alignment`: `"start" | "center" | "end" | "space-between" | "space-around"` - Optional, defaults to `"start"`. The alignment of the elements inside the box.
 
 #### Example
 
 ```javascript title="index.jsx"
-import { Bold, Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
 
-module.exports.onTransaction = async ({ transaction }) => {
-  const gasFeesPercentage = /* Calculate gas fees percentage */;
+module.exports.onHomePage = async () => {
   return {
     content: (
       <Box>
-        <Heading>Transaction insights</Heading>
-        <Text>
-          As set up, you are paying <Bold>{gasFeesPercentage.toFixed(2)}%</Bold> in gas fees for this transaction.
-        </Text>
+        <Heading>Features</Heading>
+        <Box
+          direction="horizontal"
+          alignment="space-around"
+        >
+          <Text>Feature 1</Text>
+          <Text>Feature 2</Text>
+          <Text>Feature 3</Text>
+        </Box>
       </Box>
     ),
   };
@@ -135,7 +143,7 @@ module.exports.onTransaction = async ({ transaction }) => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-panel.png").default} alt="Panel UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-box.png").default} alt="Box UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `Button`
@@ -295,7 +303,7 @@ Outputs a form field, wrapping a [`Dropdown`](#dropdown) or [`Input`](#input) to
 
 - `label`: `string` - The label for the wrapped element.
 - `error`: `string` - Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
-- `children`: `Dropdown` | `Input` - The input element to be wrapped.
+- `children`: `Dropdown | Input` - The input element to be wrapped.
 
 #### Example
 
@@ -523,7 +531,7 @@ Outputs a clickable link.
 #### Props
 
 - `href`: `string` - The URL to point to.
-- `children`: Array< `string` | `Bold` | `Italic` > - The text to be clicked.
+- `children`: `Array<string | Bold | Italic>` - The text to be clicked.
 
 #### Example
 
@@ -560,8 +568,8 @@ The label must be a string. The value can be a child component of type
 #### Props
 
 - `label`: `string` - The label of the row
-- `variant`: `string` - Optional, the variant of the label. Can be one of `default`, `error`, or `warning`.
-- `children`: `Address` | `Image` | `Text` - The value of the row.
+- `variant`: `"default" | "error" | "warning"` - Optional, the variant of the label.
+- `children`: `Address | Image | Text` - The value of the row.
 
 #### Example
 
