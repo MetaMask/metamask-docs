@@ -5,8 +5,6 @@ sidebar_position: 7
 
 # WebSockets
 
-## What are WebSockets?
-
 The WebSockets (WSS) communication protocol enables two-way communication between a client and a server over a single TCP
 connection. The communication protocol maintains a network connection between the two parties, allowing for real-time, low-latency
 communication. WebSockets allow for ongoing, bidirectional communication unlike HTTP, which is a request-response protocol.

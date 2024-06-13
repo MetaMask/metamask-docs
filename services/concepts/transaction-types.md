@@ -1,9 +1,9 @@
 ---
-description: Learn about different types of transactions.
+description: Learn about different types of Ethereum transactions.
 sidebar_position: 4
 ---
 
-# Transaction types
+# Ethereum transaction types
 
 You can interact with the [Ethereum JSON-RPC API](../json-rpc-methods/) using different transaction types (specified by the `type` parameter).
 

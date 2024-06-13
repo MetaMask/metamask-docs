@@ -3,7 +3,7 @@ description: Infura API endpoints
 sidebar_position: 2
 ---
 
-# Network endpoints
+# All endpoints
 
 The following lists all the network endpoints supported by Infura.
 
@@ -141,3 +141,89 @@ Sepolia instead.
 |-------------------|---------------------|---------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |
+
+
+## Supported networks
+
+The Gas REST API supports multiple networks.
+
+Specify the chain ID in your request to interact with the relevant network.
+
+### Arbitrum
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 42161    |
+| Nova    | 42170    |
+
+### Avalanche (C-Chain)
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 43114    |
+
+
+### Base
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 8453     |
+
+### BNB Chain
+
+| Network         | Chain ID |
+| --------------- | -------- |
+| Mainnet         | 56       |
+| opBNB (layer 2) | 204      |
+
+### Cronos
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 25       |
+
+### Ethereum
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 1        |
+| Goerli  | 5        |
+| Sepolia | 11155111 |
+
+### Fantom
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 250      |
+
+### Filecoin
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 314      |
+
+### Linea
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 59144    |
+| Testnet | 59140    |
+
+### Optimism
+
+| Network | Chain ID    |
+| ------- | ----------- |
+| Mainnet | 10          |
+
+### Polygon
+
+| Network | Network ID |
+| ------- | ---------- |
+| Mainnet | 137        |
+| Amoy    | 80002      |
+
+### zkSync Era
+
+| Network | Chain ID |
+| ------- | -------- |
+| Mainnet | 324      |

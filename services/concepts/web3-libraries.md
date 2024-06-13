@@ -1,6 +1,7 @@
 ---
 description: Learn about various Web3 libraries.
 showLastUpdateTime: true
+sidebar_position: 8
 ---
 
 # Web3 libraries
@@ -37,7 +38,7 @@ Some popular Ethereum compatible Web3 libraries include (but are not limited to)
 
 :::info How to access the blockchain
 
-Refer to the [Ethereum instructions](../network-apis/ethereum/quickstart.md) for information on how to access the
+Refer to the [Ethereum instructions](../reference/ethereum/quickstart.md) for information on how to access the
 blockchain using some of these libraries.
 
 :::

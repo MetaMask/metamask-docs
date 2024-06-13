@@ -35,7 +35,7 @@ include:
 * **Failover support for APIs** - Currently available on select networks for customers on Growth or Custom plans; if an Infura API
   endpoint becomes unavailable for any reason, requests can be forwarded to a partner to fulfill the request.
   This ensures that your application remains up and running, providing uninterrupted service to your users.
-* **Archive data querying** - [Access historical state data](network-apis/ethereum/concepts/archive-data.md) at any given
+* **Archive data querying** - [Access historical state data](/concepts/archive-data.md) at any given
   block height. This is an invaluable feature for those who need to perform deep analyses of past transactions, contract
   states, or balances. With this feature, developers can build applications that are not only data-rich but also comprehensive.
 * **Expansion APIs** -
