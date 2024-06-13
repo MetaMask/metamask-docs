@@ -5,9 +5,6 @@ sidebar_position: 4
 
 # Custom UI with JSX
 
-:::flaskOnly
-:::
-
 You can display custom user interface (UI) JSX components using the
 [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk) module when
 implementing the following features:
