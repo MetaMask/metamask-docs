@@ -27,7 +27,7 @@ providers work.
 
 In real-world use cases, a dapp shares state across many components.
 This tutorial is more complex than the tutorial to create a dapp in a local state because it
-addresses real-world scenarios. 
+addresses real-world scenarios.
 The dapp you create using this tutorial will look similar to the following:
 
 ![React dapp with global state](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
@@ -313,7 +313,7 @@ interfaces, functions, hooks, events, effects, and RPC calls.
 The React Context component wraps your application, providing all components access to the state and
 functions required to modify the state and manage connections to discovered wallets.
 
-To start, first import the necessary context.
+To do this, you must first import the necessary context.
 Then, define a type alias for a record where the keys are wallet identifiers and the values are
 account addresses or null.
 
@@ -679,14 +679,14 @@ renders a button for each one.
   This is needed to map and render.
 - Using `wallet.info.rdns` as the key ensures that each wallet button is uniquely identified.
 
-If you uncomment the `WalletList` component is in `src/App.tsx` and run the dapp, the following is displayed:
+Uncomment the `WalletList` component in `src/App.tsx` and run the dapp. The following is displayed:
 
 ![View of WalletList component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-list.png)
 
 ### 6. Display MetaMask data
 
-Import the `selectedWallet` and `selectedAccount` functions and the function `disconnectWallet` from
-the `useWalletProvider` hook.
+Import the `selectedWallet` and `selectedAccount` functions, and the `disconnectWallet` function
+from the `useWalletProvider` hook.
 
 Add the following code to `src/components/SelectedWallet.tsx`:
 
@@ -718,10 +718,10 @@ export const SelectedWallet = () => {
 }
 ```
 
-The code in lines 11-22 above have some conditional rendering for `{selectedAccount && (...)}`.
-This conditional rendering means that the content inside is only rendered if `selectedAccount` is true.
+The code in lines 11-22 have conditional rendering for `{selectedAccount && (...)}`. 
+This conditional rendering ensures that the content inside is only displayed if `selectedAccount` is true. 
 This ensures that detailed information about the selected wallet is only displayed when an active
-wallet is connected.
+wallet is connected. 
 You can then display information about the wallet, and conditionally render anything related to the following:
 
 - Wallet address
@@ -758,8 +758,7 @@ export const WalletError = () => {
 }
 ```
 
-Some CSS activates only if an error is present, and a `div` with the error message renders only if
-`errorMessage` contains data.
+A `div` with the error message renders only if `errorMessage` contains data.
 
 After selecting `div`, reset `errorMessage` to an empty string, which hides the content.
 
