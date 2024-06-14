@@ -32,20 +32,25 @@ Array of historical base fees.
 ### Request
 
 Include your [API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
-and [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
+and optional [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
 to authorize your account to use the APIs.
 
+:::tip
+You can call the API with only an API key, and [include it as a path parameter](./index.md#supported-api-request-formats)
+instead of using the cURL authentication option (`-u`).
+:::
+
 <Tabs>
-<TabItem value="cURL">
+  <TabItem value="cURL" label="cURL" default >
 
 ```bash
-curl -X "GET"                     \
-    -u <API-KEY>:<API-KEY-SECRET> \
-    "https://gas.api.infura.io/networks/1/baseFeeHistory"
+curl -X 'GET' \
+  -u <API_KEY>:<API_KEY_SECRET> \
+  "https://gas.api.infura.io/networks/1/baseFeeHistory"
 ```
 
-</TabItem>
-<TabItem value="JavaScript">
+  </TabItem>
+  <TabItem value="JavaScript" label="Javascript">
 
 ```javascript
 const axios = require("axios");
@@ -54,44 +59,44 @@ const apiKey = "<API-KEY>"; // Replace with your API key.
 const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
 
 const Auth = Buffer.from(
-    apiKey + ":" + apiKeySecret,
+  apiKey + ":" + apiKeySecret,
 ).toString("base64");
 
 // The chain ID of the supported network.
 const chainId = 1;
 
 (async () => {
-    try {
-        const { data } = await axios.get(
-            `https://gas.api.infura.io/networks/${chainId}/baseFeeHistory`,
-            {
-                headers: {
-                    Authorization: `Basic ${Auth}`,
-                },
-            },
-        );
-        console.log("Base fee history:", data);
-    } catch (error) {
-        console.log("Server responded with:", error);
-    }
+  try {
+    const { data } = await axios.get(
+      `https://gas.api.infura.io/networks/${chainId}/baseFeeHistory`,
+      {
+        headers: {
+          Authorization: `Basic ${Auth}`,
+        },
+      }
+    );
+    console.log("Base fee history:", data);
+  } catch (error) {
+    console.log("Server responded with:", error);
+  }
 })();
 ```
 
-</TabItem>
+  </TabItem>
 </Tabs>
 
 ### Response
 
 ```json
 [
-    "14.585610312",
-    "16.407222984",
-    "16.687763116",
-    "16.357094117",
-    "15.82929799",
-    "15.21546789",
-    "17.113938208",
-    "16.92324819",
-    ...
+  "14.585610312",
+  "16.407222984",
+  "16.687763116",
+  "16.357094117",
+  "15.82929799",
+  "15.21546789",
+  "17.113938208",
+  "16.92324819",
+  ...
 ]
 ```
