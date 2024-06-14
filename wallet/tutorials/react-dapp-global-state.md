@@ -439,7 +439,7 @@ This code uses the `walletRdns` parameter to identify the wallet's RDNS for conn
 It performs an asynchronous operation to request accounts from the wallet provider using the
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
-Add the following code to `src/hooks/WalletProvider.tsx`:
+Add the following code to `src/hooks/WalletProvider.tsx` to disconnect from a wallet:
 
 ```tsx title="WalletProvider.tsx"
 const disconnectWallet = useCallback(async () => {
