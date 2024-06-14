@@ -10,39 +10,25 @@ import TabItem from '@theme/TabItem';
 # Create a React dapp with global state
 
 This tutorial walks you through integrating a React dapp with MetaMask.
-The dapp has multiple components and requires managing the state globally.
+The dapp has multiple components and requires managing the state globally, which can be helpful for
+real-world use cases.
 You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and TypeScript to create
 the dapp.
 
-:::tip
-We recommend starting with [creating a React dapp with local state](react-dapp-local-state.md),
-which introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
-The tutorial demonstrates how to iterate over all discovered providers, connect to the selected
-wallet, and remember the selection within a single component. 
-
-If you skip the tutorial, consider reviewing [wallet
-interoperability](../concepts/wallet-interoperability.md) to understand how multiple injected wallet
-providers work.
-:::
-
-In real-world use cases, a dapp shares state across many components.
-This tutorial is more complex than the tutorial to create a dapp in a local state because it
-addresses real-world scenarios.
-The dapp you create using this tutorial will look similar to the following:
+The final state of the dapp will look like the following:
 
 ![React dapp with global state](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
-In this tutorial, the state is put into a [React
+In this tutorial, you'll put the state into a [React
 Context](https://react.dev/reference/react/useContext) component, creating a [global
 state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
 that allows other components and UI elements to benefit from its data and functions. 
+You'll use `localStorage` to persist the selected wallet, ensuring the last connected wallet state
+remains intact even after a page refresh.
 
-You'll also use `localStorage` to persist the selected wallet, ensuring the last connected wallet
-state remains intact even after a page refresh.
-
-This tutorial addresses the edge case where a browser wallet may be disabled or uninstalled between
-refreshes or visits to the dapp.
-A disconnect function is added to reset the state and you can use
+This tutorial addresses the edge case where a browser wallet might be disabled or uninstalled
+between refreshes or visits to the dapp.
+You'll add a disconnect function to reset the state, and use
 [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
 
 :::info Project source code
@@ -57,6 +43,17 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 - The [MetaMask extension](https://metamask.io/download) installed
 - Basic knowledge of TypeScript, React, React Context, and React Hooks
 
+:::tip
+We recommend following the [Create a React dapp with local state](react-dapp-local-state.md)
+tutorial first, which introduces [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+The tutorial demonstrates how to iterate over all discovered providers, connect to the selected
+wallet, and remember the selection within a single component.
+
+If you skip the tutorial, consider reviewing [wallet
+interoperability](../concepts/wallet-interoperability.md) to understand how multiple injected wallet
+providers work.
+:::
+
 ## Steps
 
 ### 1. Set up the project
@@ -65,7 +62,7 @@ This project introduces a new structure, independent of previous tutorials.
 Instead of reusing code or states, this tutorial guides you through breaking down the
 single-component structure into multiple components.
 
-Create a new ViteJS project and add the necessary directory structure:
+Set up a new project using Vite, React, and TypeScript by running the following command:
 
 ```bash
 npm create vite@latest vite-react-global-state -- --template react-ts
@@ -83,36 +80,31 @@ Launch the development server:
 npm run dev
 ```
 
-The terminal displays a `localhost` URL, which you can use to view the dapp in your browser.
+This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
-:::note tip
-If you are using VS Code, you can run the `code .` command to open the project.
-
-If the development server stops, you can use the `npx vite` or `npm run dev` command to re-run your project. 
+:::note
+If you use VS Code, you can run the command `code .` to open the project.
+If the development server has stopped, you can run the command `npx vite` or `npm run dev` to
+restart your project.
 :::
 
-After you open the ViteJS React project in your editor of choice, add three directories within the
-`src` directory. 
-
-Create a `src/components`, `src/hooks`, and `src/utils` directory in the root of the project using
-the following commands:
+Open the project in your editor.
+Create three directories, `src/components`, `src/hooks`, and `src/utils`, in the root of the project
+using the following commands:
 
 ```bash
 mkdir src/components && mkdir src/hooks && mkdir src/utils
 ```
 
-Create components for listing installed wallets, displaying connected wallet information, and
-handling errors.
-Additionally, create a CSS module for each component:
+Create the following files in `src/components`, which will be used to create components for listing
+installed wallets, displaying connected wallet information, and handling errors:
 
-Create the following files in `src/components`:
-
-- `SelectedWallet.module.css`
-- `SelectedWallet.tsx`
-- `WalletError.module.css`
-- `WalletError.tsx`
-- `WalletList.module.css`
 - `WalletList.tsx`
+- `WalletList.module.css`
+- `SelectedWallet.tsx`
+- `SelectedWallet.module.css`
+- `WalletError.tsx`
+- `WalletError.module.css`
 
 Create the following files in `src/hooks`:
 
@@ -123,7 +115,7 @@ Create the following file in `src/utils`:
 
 - `index.ts`
 
-#### Styling
+#### 1.1. Style the components
 
 Add the following CSS code to `SelectedWallet.module.css`:
 
@@ -184,7 +176,7 @@ Add the following CSS code to `WalletList.module.css`:
 Append the following code to the end of `src/index.css`:
 
 ```css title="index.css"
-/* added css */
+/* Added CSS */
 :root {
   text-align: left;
 }
@@ -224,10 +216,10 @@ button:last-child {
 }
 ```
 
-#### Project structure
+#### 1.2. Project structure
 
-You now have some basic global and component-level styling for your application.
-The directory structure in the dapp's `/src` directory should look similar to the following:
+You now have some basic global and component-level styling for your dapp.
+The directory structure in the dapp's `/src` directory should look like the following:
 
 ```text
 ├── src
@@ -253,7 +245,8 @@ The directory structure in the dapp's `/src` directory should look similar to th
 
 ### 2. Import EIP-6963 interfaces
 
-The dapp connects to MetaMask using EIP-6963.
+The dapp will connect to MetaMask using the mechanism introduced by
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
 
 :::info Why EIP-6963?
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
@@ -270,6 +263,15 @@ needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
 ```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
+// Describes metadata related to a provider based on EIP-6963.
+interface EIP6963ProviderInfo {
+  rdns: string
+  uuid: string
+  name: string
+  icon: string
+}
+
+// Represents the structure of a provider based on EIP-1193.
 interface EIP1193Provider {
   isStatus?: boolean
   host?: string
@@ -279,18 +281,14 @@ interface EIP1193Provider {
   request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 
-interface EIP6963ProviderInfo {
-  rdns: string
-  uuid: string
-  name: string
-  icon: string
-}
-
+// Combines the provider's metadata with an actual provider object, creating a complete picture of a
+// wallet provider at a glance.
 interface EIP6963ProviderDetail {
   info: EIP6963ProviderInfo
   provider: EIP1193Provider
 }
 
+// Represents the structure of an event dispatched by a wallet to announce its presence based on EIP-6963.
 type EIP6963AnnounceProviderEvent = {
   detail:{
     info: EIP6963ProviderInfo,
@@ -298,53 +296,43 @@ type EIP6963AnnounceProviderEvent = {
  }
 }
 
+// An error object with optional properties, commonly encountered when handling eth_requestAccounts errors.
 interface WalletError {
   code?: string
   message?: string
 }
 ```
 
-This also adds an interface for `WalletError`.
-
 ### 3. Build the context provider
 
-This section of the tutorial explains how to create the React Context component using various types,
-interfaces, functions, hooks, events, effects, and RPC calls. 
-The React Context component wraps your application, providing all components access to the state and
-functions required to modify the state and manage connections to discovered wallets.
+In this step, you'll create the React Context component, which wraps the dapp and provides all
+components access to the state and functions required to modify the state and manage connections to
+discovered wallets.
 
-To do this, you must first import the necessary context.
-Then, define a type alias for a record where the keys are wallet identifiers and the values are
-account addresses or null.
-
-Next, define the context interface for the EIP-6963 provider.
-The interface includes the following:
-
-* A list of wallets, represented as a record of wallets by `runs`.
-* The selected wallet, of type `EIP6963ProviderDetail`.
-* The chosen account address, represented as a string.
-* An error message, also represented as a string.
-* Functions to connect and disconnect wallets.
-
-Add the following code to `src/hooks/WalletProvider.tsx` to import the context, define the type alias,
-and define the interface:
+Add the following code to `src/hooks/WalletProvider.tsx` to import the context, define the
+type alias, and define the context interface for the EIP-6963 provider:
 
 ```tsx title="WalletProvider.tsx"
 import { PropsWithChildren, createContext, useCallback, useEffect, useState } from "react"
+
+// Type alias for a record where the keys are wallet identifiers and the values are account
+// addresses or null.
 type SelectedAccountByWallet = Record<string, string | null>
+
+// Context interface for the EIP-6963 provider.
 interface WalletProviderContext {
-  wallets: Record<string, EIP6963ProviderDetail>
-  selectedWallet: EIP6963ProviderDetail | null
-  selectedAccount: string | null
-  errorMessage: string | null
-  connectWallet: (walletUuid: string) => Promise<void>
-  disconnectWallet: () => void
+  wallets: Record<string, EIP6963ProviderDetail> // A list of wallets.
+  selectedWallet: EIP6963ProviderDetail | null // The selected wallet.
+  selectedAccount: string | null // The selected account address.
+  errorMessage: string | null // An error message.
+  connectWallet: (walletUuid: string) => Promise<void> // Function to connect wallets.
+  disconnectWallet: () => void // Function to disconnect wallets.
   clearError: () => void
 }
 ```
 
-Add the following code to `src/hooks/WalletProvider.tsx` to extend the global `WindowEventMap` interface
-with the custom `eip6963:announceProvider` event:
+Add the following code to `src/hooks/WalletProvider.tsx` to extend the global `WindowEventMap`
+interface with the custom `eip6963:announceProvider` event:
 
 ```tsx title="WalletProvider.tsx"
 declare global{
@@ -357,16 +345,15 @@ declare global{
 Explicitly declaring the custom `eip6963:announceProvider` event prevents type errors, enables
 proper type checking, and supports autocompletion in TypeScript.
 
-Create a React Context for the EIP-6963 `WalletProvider` with the defined interface
-`WalletProviderContext` with a default of `null`, then define the `WalletProvider` component.
-The `WalletProvider` component wraps all other components in the dapp, providing them with the
-necessary data and functions related to wallets.
+Add the following code to `src/hooks/WalletProvider.tsx` to create the React Context for the
+EIP-6963 provider with the defined interface `WalletProviderContext`, and define the
+`WalletProvider` component:
 
-Add the following code to `src/hooks/WalletProvider.tsx` to create the React Context with the defined interface:
-
-```tsx title="WalletProvider.tsx" showLineNumbers
+```tsx title="WalletProvider.tsx" showLineNumbers {6-12,14}
 export const WalletProviderContext = createContext<WalletProviderContext>(null)
 
+// The WalletProvider component wraps all other components in the dapp, providing them with the
+// necessary data and functions related to wallets.
 export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [wallets, setWallets] = useState<Record<string, EIP6963ProviderDetail>>({})
   const [selectedWalletRdns, setSelectedWalletRdns] = useState<string | null>(null)
@@ -402,23 +389,22 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, [])
 ```
 
-In the above code sample, lines 4-10 are state definitions: 
+In this code sample, lines 6–12 are state definitions: 
 
 - `wallets` - State to hold detected wallets. 
-- `selectedWalletRdns` - State to hold the RDNS of the selected wallet. 
+- `selectedWalletRdns` - State to hold the Reverse Domain Name System (RDNS) of the selected wallet. 
 - `selectedAccountByWalletRdns` - State to hold accounts associated with each wallet.
-- `errorMessage` - State to hold the error message when a wallet errors on connection.
+- `errorMessage` - State to hold the error message when a wallet throws an error on connection.
 - `clearError` - Function to clear the state in `errorMessage`.
-- `setError` - Function to set the state in `errorMessage` (with a `string`).
+- `setError` - Function to set the state in `errorMessage`.
 
-In the above code sample, line 12 is the `useEffect` hook and it handles:
+Line 14 is the `useEffect` hook and it handles the following:
 
-- Local storage retrieval - On mount, retrieves the saved selected wallet and accounts from local storage.
-- Event listener - Adds an event listener for the custom `eip6963:announceProvider` event. 
-- `OnAnnouncement` - When the provider announces itself, update the state.
-- Provider request - Dispatches an event to request existing providers.
-- Cleanup - A `return` statement in a `useEffect` is used for cleanup.
-  In this case it removes the event listener on unmount.
+- Local storage retrieval - On mount, it retrieves the saved selected wallet and accounts from local storage.
+- Event listener - It adds an event listener for the custom `eip6963:announceProvider` event. 
+- State update - When the provider announces itself, it updates the state.
+- Provider request - It dispatches an event to request existing providers.
+- Cleanup - It removes the event listener on unmount.
 
 Add the following code to `src/hooks/WalletProvider.tsx` to connect a wallet and update the component's state:
 
@@ -449,11 +435,9 @@ const connectWallet = useCallback(async (walletRdns: string) => {
 }, [wallets, selectedAccountByWalletRdns])
 ```
 
-The code uses the `walletRdns` parameter to identify the wallet's Reverse Domain Name System (RDNS)
-for connecting.
-
-The function performs an asynchronous operation to request accounts from the wallet provider using
-the Ethereum JSON-RPC method `eth_requestAccounts`.
+This code uses the `walletRdns` parameter to identify the wallet's RDNS for connecting.
+It performs an asynchronous operation to request accounts from the wallet provider using the
+[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
 
 Add the following code to `src/hooks/WalletProvider.tsx`:
 
@@ -489,7 +473,9 @@ ensures that if a wallet does not support this feature, the rest of the disconne
 will still execute.
 :::
 
-:::note
+<details>
+<summary><b>Use of `useCallback`</b></summary>
+<p>
 Both of the previous functions use `useCallback`.
 It is used to memoize the `connectWallet` function, optimize performance, and prevent unnecessary re-renders.
 It ensures the function instance remains consistent between renders if its dependencies are changed. 
@@ -504,7 +490,8 @@ re-renders of child components.
 Although `useCallback` is not strictly necessary, it demonstrates best practices.
 Predicting how a context provider will be used or how the dapp might change or scale is difficult.
 Using `useCallback` can improve performance in some cases by reducing unnecessary re-renders.
-:::
+</p>
+</details>
 
 Add the following code to `src/hooks/WalletProvider.tsx` to bundle the state and functions using `contextValue`:
 
@@ -526,24 +513,14 @@ return (
 )
 ```
 
-:::note
-If `selectedWalletRdns` is null, set `selectedWallet` to null.
-Otherwise, retrieve the wallet details from the wallet state using the `runs` identifier.
-
-If `selectedWalletRdns` is null, set `selectedAccount` to null.
-Otherwise, retrieve the account address from the `selectedAccountByWalletRdns` state using the
-`rdns` identifier.
-:::
-
-Within the component's return statement, the `contextValue` object is constructed with all necessary
-state and functions related to wallet management.
+In the return statement, the `contextValue` object is constructed with all necessary state and
+functions related to wallet management.
 It is passed to the `WalletProviderContext.Provider`, making wallet-related data and functions
 available to all descendant components. 
+The context provider wraps the children components, allowing them to access the context values.
 
-The return statement wraps the children components with the context provider, allowing them to
-access the context values.
-
-Add the following code to `src/hooks/useWalletProvider.tsx`:
+Add the following code to `src/hooks/useWalletProvider.tsx` to provide a custom hook that simplifies
+the process of consuming the `WalletProviderContext`:
 
 ```tsx title="useWalletProvider.tsx"
 import { useContext } from "react"
@@ -552,22 +529,13 @@ import { WalletProviderContext } from "./WalletProvider"
 export const useWalletProvider = () => useContext(WalletProviderContext)
 ```
 
-The `useWalletProvider.tsx` file provides a custom hook that simplifies the process of consuming the
-`WalletProviderContext`.
-
-In the code, the `useWalletProvider` hook is exported, which leverages the `useContext` hook to
-consume the `WalletProviderContext`.
-
 The benefit of this separate file exporting the hook is that components can directly call
-`useWalletProvider() ` instead of `useContext(WalletProviderContext)`, making the code cleaner and
+`useWalletProvider()` instead of `useContext(WalletProviderContext)`, making the code cleaner and
 more readable.
 
-With `WalletProvider.tsx` and `useWalletProvider.tsx`, the dapp can manage and access wallet-related
-state and functionality across various components.
-You can now wrap the entire application (the part that requires wallet connection and data) with a
-`<WalletProvider></WalletProvider>` component.
+### 4. Update the utility file
 
-Add the following code to `src/utils/index.ts` to wrap the app in the component:
+Add the following code to `src/utils/index.ts`:
 
 ```ts title="index.ts"
 export const formatBalance = (rawBalance: string) => {
@@ -586,14 +554,18 @@ export const formatAddress = (addr: string) => {
 }
 ```
 
-Although `formatAddress` is the only function used, `formatBalance` and `formatChainAsNum` were
+Although `formatAddress` is the only function used, `formatBalance` and `formatChainAsNum` are
 added as useful utility functions.
-Explore [Viem Formatters](https://viem.sh/docs/chains/formatters) or other libraries for additional
+Explore [Viem formatters](https://viem.sh/docs/chains/formatters) or other libraries for additional
 formatting options.
 
-### 4. Wrap components with the context provider
+### 5. Wrap components with the context provider
 
-Replace the code in the file `src/App.tsx` with the following:
+With `WalletProvider.tsx` and `useWalletProvider.tsx`, the dapp can manage and access wallet-related
+state and functionality across various components.
+You can now wrap the entire dapp (the part that requires wallet connection and data) with a
+`WalletProvider` component.
+Replace the code in `src/App.tsx` with the following:
 
 ```tsx title="App.tsx"
 import "./App.css"
@@ -619,24 +591,11 @@ export default App
 ```
 
 The child components are currently commented out, but as you create each of these components, you'll
-uncomment the specific lines. 
+uncomment the specific lines.
 
-Create each of the components you've defined and add the logic and UI needed to accomplish your goals:
+### 6. Display detected wallets
 
-- Discover injected providers (browser-installed wallets).
-- Save those providers and selected wallet in global state (context provider).
-- Supply a list of wallet providers to child components.
-- Include a component map the providers to a button with icon and name.
-  - Have a `connectWallet` function for each of those buttons.
-- Include a component that displays the selected wallet and info.
-- Include a UI component to show errors.
-
-### 5. Create the UI components
-
-Create the components in the order that you've listed them in the `App.tsx` file. 
-Start with `WalletList.tsx`.
-
-Add the following code to `src/components/WalletList.tsx`:
+Add the following code to `src/components/WalletList.tsx` to display detected wallets:
 
 ```tsx title="WalletList.tsx"
 import { useWalletProvider } from "~/hooks/useWalletProvider"
@@ -664,33 +623,25 @@ export const WalletList = () => {
 }
 ```
 
-You've imported the `wallets` data and the `connectWallet` function from the `useWalletProvider` hook.
-
-The component checks if there are any detected wallets using `Object.keys(wallets).length > 0`.
-This check ensures that if no wallets are found, a message: "No wallets detected", is displayed
-instead of an empty list.
-
-If wallets are detected, `Object.values(wallets).map(wallet => (...))` iterates over them and
-renders a button for each one.
+This component checks if there are any detected wallets.
+If wallets are detected, it iterates over them and renders a button for each one.
 
 - `Object.keys(wallets)` returns an array of the wallet keys (`rdns` values).
-  It is used here to check the length.
+  It is used to check the length.
 - `Object.values(wallets)` returns an array of the wallet objects.
-  This is needed to map and render.
-- Using `wallet.info.rdns` as the key ensures that each wallet button is uniquely identified.
+  It is used to map and render.
+- `wallet.info.rdns` is used as the key to ensure that each wallet button is uniquely identified.
 
-Uncomment the `WalletList` component in `src/App.tsx` and run the dapp. The following is displayed:
+Uncomment the `WalletList` component in `src/App.tsx` and run the dapp.
+Something like the following displays:
 
 ![View of WalletList component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-list.png)
 
-### 6. Display MetaMask data
+### 7. Display wallet data
 
-Import the `selectedWallet` and `selectedAccount` functions, and the `disconnectWallet` function
-from the `useWalletProvider` hook.
+Add the following code to `src/components/SelectedWallet.tsx` to display data for the selected wallet:
 
-Add the following code to `src/components/SelectedWallet.tsx`:
-
-```tsx title="SelectedWallet.tsx" showLineNumbers
+```tsx title="SelectedWallet.tsx" showLineNumbers {11-22}
 import { useWalletProvider } from "~/hooks/useWalletProvider"
 import { formatAddress } from "~/utils"
 import styles from "./SelectedWallet.module.css"
@@ -718,25 +669,25 @@ export const SelectedWallet = () => {
 }
 ```
 
-The code in lines 11-22 have conditional rendering for `{selectedAccount && (...)}`. 
-This conditional rendering ensures that the content inside is only displayed if `selectedAccount` is true. 
+The code in lines 11-22 have conditional rendering, ensuring that the content inside is only
+displayed if `selectedAccount` is true. 
 This ensures that detailed information about the selected wallet is only displayed when an active
 wallet is connected. 
-You can then display information about the wallet, and conditionally render anything related to the following:
+You can display information about the wallet, and conditionally render anything related to the following:
 
 - Wallet address
 - Wallet balance
 - Chain ID or name
 - Other components that first need a connected wallet to work
 
-If you uncomment the `SelectedWallet` component in `src/App.tsx`, run the dapp and connect to
-MetaMask, the following is displayed:
+Uncomment the `SelectedWallet` component in `src/App.tsx` and run the dapp.
+When you connect to MetaMask, something like the following displays:
 
 ![View of SelectedWallet component](../assets/tutorials/react-dapp/react-tutorial-02-selected-wallet.png)
 
-### 7. Show wallet connection errors
+### 8. Display wallet connection errors
 
-Add the following code to `src/components/WalletError.tsx`:
+Add the following code to `src/components/WalletError.tsx` to handle wallet connection errors:
 
 ```tsx title="WalletError.tsx"
 import { useWalletProvider } from "~/hooks/useWalletProvider"
@@ -758,22 +709,21 @@ export const WalletError = () => {
 }
 ```
 
-A `div` with the error message renders only if `errorMessage` contains data.
-
-After selecting `div`, reset `errorMessage` to an empty string, which hides the content.
+An error message renders only if `errorMessage` contains data.
+After the error is selected, `errorMessage` resets to an empty string, which hides the content.
 
 This method demonstrates how to display specific content, such as a modal or notification, in
 response to connection errors when connecting to a wallet.
 
-To see the error handling, uncomment the `WalletError` component in `src/App.tsx`.
-Then, run the dapp, disconnect from MetaMask, reconnect, and reject or cancel the connection.
-The following is displayed:
+Uncomment the `WalletError` component in `src/App.tsx` and run the dapp.
+Disconnect from MetaMask, reconnect, and reject or cancel the connection.
+Something like the following displays:
 
 ![View of WalletError component](../assets/tutorials/react-dapp/react-tutorial-02-wallet-error.png)
 
-### 8. Run the final state of the dapp
+### 9. Run the final state of the dapp
 
-Uncomment the code in `App.tsx`
+Make sure all code in `App.tsx` is uncommented:
 
 ```tsx title="App.tsx"
 import "./App.css"
@@ -796,12 +746,12 @@ function App() {
 export default App
 ```
 
-Run `npm run dev` to view the wallet list and select a wallet to connect to.
-The final state of the dapp when connected to a MetaMask wallet will look similar to the following:
+Run the dapp to view the wallet list and select a wallet to connect to.
+The final state of the dapp when connected to MetaMask looks like the following:
 
 ![Final view of dapp](../assets/tutorials/react-dapp/react-tutorial-02-final-preview.png)
 
-### 9. Test the dapp features
+### 10. Test the dapp features
 
 You can conduct user tests to evaluate the functionality and features demonstrated in this tutorial:
 
@@ -811,16 +761,15 @@ You can conduct user tests to evaluate the functionality and features demonstrat
 3. Select a wallet, disable it, refresh the page, then re-enable the wallet and refresh the page again.
    Observe the behavior of the dapp.
 4. When connecting to a wallet, deliberately cancel the connection or close the wallet prompt.
-   This action should trigger the `WalletError` component, which can be dismissed by selecting it.
+   This action should trigger the `WalletError` component, which you can dismiss by selecting it.
 
 ## Conclusion
 
-This tutorial guided you through applying your knowledge of EIP-6963 to connect to wallets,
-specifically MetaMask.
+This tutorial guided you through applying EIP-6963 to connect to MetaMask.
 This method also works with any wallet that [complies with
 EIP-6963](https://github.com/WalletConnect/EIP6963/blob/master/src/utils/constants.ts) and supports
 multi-injected provider discovery.
+
 In this tutorial, you addressed edge cases and created a context provider that facilitates data
 sharing, manages functions for connecting and disconnecting from wallets, and handles errors.
-You can view the [project source code](https://github.com/MetaMask/vite-react-global-tutorial) for
-the final state of this dapp tutorial on GitHub.
+You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-global-tutorial).

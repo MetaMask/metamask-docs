@@ -53,8 +53,9 @@ npm run dev
 This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note
-If you use VS Code, you can open the project by running the command code. 
-If the development server has stopped, restart your project by running either the `npx vite` or `npm run dev` command.
+If you use VS Code, you can run the command `code .` to open the project.
+If the development server has stopped, you can run the command `npx vite` or `npm run dev` to
+restart your project.
 :::
 
 Open the project in your editor.
@@ -76,7 +77,7 @@ export default App
 
 ### 2. Import EIP-6963 interfaces
 
-Your dapp will connect to MetaMask using the mechanism introduced by
+The dapp will connect to MetaMask using the mechanism introduced by
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
 
 :::info Why EIP-6963?
@@ -94,7 +95,7 @@ needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
 ```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
-// Describes metadata related to a provider according to EIP-6963.
+// Describes metadata related to a provider based on EIP-6963.
 interface EIP6963ProviderInfo {
   walletId: string
   uuid: string
@@ -102,7 +103,7 @@ interface EIP6963ProviderInfo {
   icon: string
 }
 
-// Represents the structure of an Ethereum provider based on the EIP-1193 standard.
+// Represents the structure of a provider based on EIP-1193.
 interface EIP1193Provider {
   isStatus?: boolean
   host?: string
@@ -425,7 +426,7 @@ providers using EIP-6963, and managing the state in React locally.
 You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
-
-This follow-up tutorial walks you through adding more multiple components that use a global state.
-For this we'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
-globally and move away from using the `useSyncExternalStore`. This is a better approach and more realistic for building a real world (but also more complex) dapp. We will also use a new RPC endpoint [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) for disconnecting from MetaMask. This will take everything you have learned to the next level.
+This follow-up tutorial walks you through adding multiple components that use a global state.
+You'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
+globally and move away from using the `useSyncExternalStore`.
+This is a more realistic (but also more complex) approach for building a real-world dapp.
