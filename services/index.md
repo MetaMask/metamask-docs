@@ -16,15 +16,6 @@ optimizing essential development tasks.
 These services streamline development workflows to help developers build robust and successful
 dapps and Snaps.
 
-Infura is a managed service that provides secure and reliable access to a variety of blockchain networks, removing
-the complexities of managing blockchain infrastructure, and allowing developers to focus on building innovative Web3
-applications.
-
-Infura serves as a crucial bridge connecting applications to blockchain networks, providing developers with robust APIs
-to interact with the blockchain, deploy and manage smart contracts, and much more.
-Whether you're building a decentralized application (Dapp), a crypto wallet, or an exchange, Infura provides the essential
-infrastructure and tools to create high-quality, reliable Web3 applications.
-
 ## Features
 
 Infura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
@@ -47,9 +38,3 @@ include:
 <meta httpEquiv="expires" content="0" />
 <meta httpEquiv="pragma" content="no-cache" />
 </head>
-
-## Try out an Infura endpoint
-
-Interact with the live terminal below and start testing Infura's core capabilities
-
-<CodeTerminal />

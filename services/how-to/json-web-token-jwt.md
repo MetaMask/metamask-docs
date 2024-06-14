@@ -6,7 +6,7 @@ sidebar_position: 8
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# JSON Web Token (JWT)
+# Use JSON Web Token (JWT)
 
 JSON Web Token (JWT) is an internet standard ([RFC 7519](https://tools.ietf.org/html/rfc7519)) that defines a process for secure data exchange between two parties.
 

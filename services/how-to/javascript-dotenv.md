@@ -3,7 +3,7 @@ description: Use dotenv to load environment variables from a file.
 sidebar_position: 7
 ---
 
-# JavaScript dotenv
+# Use JavaScript dotenv
 
 [`dotenv`](https://www.npmjs.com/package/dotenv) is an [npm](https://www.npmjs.com/) JavaScript package that loads environment variables from a `.env` file into the `process.env` global variable, storing configuration in the environment separate from the code.
 

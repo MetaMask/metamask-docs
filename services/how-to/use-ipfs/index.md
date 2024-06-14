@@ -4,7 +4,7 @@ description: IPFS network documentation
 
 import CardList from '@site/src/components/CardList'
 
-# IPFS
+# Use IPFS
 
 The [Interplanetary File System (IPFS)](https://ipfs.io/) is a distributed, [peer-to-peer (p2p)](https://en.wikipedia.org/wiki/Peer-to-peer) storage network used for storing and accessing files, websites, applications, and data.
 
