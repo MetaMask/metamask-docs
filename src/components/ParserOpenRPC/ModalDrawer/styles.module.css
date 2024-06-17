@@ -35,7 +35,7 @@
 }
 
 .modalHeaderLight {
-  background-color: #F2F4F6;
+  background-color: #F2F4F6 !important;
 }
 
 .modalTitle {
