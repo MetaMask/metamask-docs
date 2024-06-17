@@ -74,7 +74,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         />
         <ErrorsBox errors={currentMethodData.errors} />
         <ModalDrawer
-          title="Customize Request"
+          title="Customize request"
           isOpen={isModalOpen}
           onClose={closeModal}
         >
