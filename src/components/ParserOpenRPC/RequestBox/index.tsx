@@ -11,9 +11,10 @@ interface RequestBoxProps {
   method: string;
   params: MethodParam[];
   response?: any;
+  openModal: () => void;
 }
 
-export default function RequestBox({ isMetamaskInstalled, method, params, response }: RequestBoxProps) {
+export default function RequestBox({ isMetamaskInstalled, method, params, response, openModal }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
     return `await window.ethereum.request({\n "method": "${method}",\n "params": [${params}],\n});`;
   }, [method, params]);
@@ -39,14 +40,13 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
           </CodeBlock>
         </div>
         <div className={styles.cardFooter}>
-          {params.length > 0 && (
-            <button
-              className={clsx(global.linkBtn, "margin-right--md")}
-              disabled={!isMetamaskInstalled}
-            >
-              Customize request
-            </button>
-          )}
+          <button
+            className={clsx(global.linkBtn, "margin-right--md")}
+            disabled={!isMetamaskInstalled}
+            onClick={openModal}
+          >
+            Customize request
+          </button>
           <button className={global.primaryBtn} disabled={!isMetamaskInstalled}>
             Run request
           </button>
