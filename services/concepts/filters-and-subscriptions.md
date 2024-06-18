@@ -22,8 +22,8 @@ Infura is even faster at this than regular Ethereum nodes as we make use of cust
 
 ### Filters
 
-Check out the documented [HTTP filter method specifications](../../json-rpc-methods/filter-methods/).
+Check out the documented [HTTP filter method specifications](../reference/ethereum/json-rpc-methods/filter-methods/index.md).
 
 ### Subscriptions
 
-Check out the documented [WebSocket subscription specifications](../json-rpc-methods/subscription-methods/).
+Check out the documented [WebSocket subscription specifications](../reference/ethereum/json-rpc-methods/subscription-methods/index.md).

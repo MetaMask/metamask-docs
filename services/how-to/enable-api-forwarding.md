@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Enable API request forwarding
 
-For Arbitrum JSON-RPC methods, you can request failover protection by adding the failover header to
+For JSON-RPC methods, you can request failover protection by adding the failover header to
 your API request using `cURL`, `Web3.js`, `Ethers.js`, or any other language of your choice.
 
 For more information about this feature, including our partner and their privacy information,
@@ -17,7 +17,7 @@ see [Failover protection](../concepts/failover-protection.md).
 
 :::info
 
-Arbitrum failover support is available on Mainnet only.
+Failover support is available on Mainnet only.
 
 :::
 

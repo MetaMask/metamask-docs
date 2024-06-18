@@ -18,9 +18,9 @@ given block execution.
         gas, but this parameter may be needed by some executions.
     - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
     - `maxPriorityFeePerGas`: (string) maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
-        See [EIP-1559 transactions](../../../ethereum/concepts/transaction-types.md#eip-1559-transactions).
+        See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
     - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
-        See [EIP-1559 transactions](../../../ethereum/concepts/transaction-types.md#eip-1559-transactions).
+        See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
     - `value`: (string) hexadecimal of the value sent with this transaction.
     - `data`: (string) hash of the method signature and encoded parameters.
         See [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).

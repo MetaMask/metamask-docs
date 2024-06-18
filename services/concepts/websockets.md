@@ -22,7 +22,7 @@ Stateless HTTP WebSocket calls are also supported.
 :::
 
 You can create stateful subscriptions over WebSockets to subscribe to specific events on the blockchain. The following
-subscription types are available using the [`eth_subscribe`](../network-apis/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) JSON-RPC API:
+subscription types are available using the [`eth_subscribe`](../reference/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) JSON-RPC API:
 
 - The `newHeads` subscription type emits an event when a new header (block) is added to the chain, including during a
   chain reorganization.

@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Blas
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../dashboard/create-api.md) with the Blast networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Blast networked enabled.
 
 ## Make calls
 
@@ -189,11 +189,11 @@ Now that you have successfully made a call to the Blast network, you can explore
 by Infura. Here are some suggestions:
 
 - **Explore other Blast APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](./json-rpc-methods/).
+[JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../dashboard/dashboard-stats.md) to
+- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to
     ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the

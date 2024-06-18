@@ -33,7 +33,7 @@ less than or equal to the provided amount.
 ### Request
 
 Include your [API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
-and optional [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret)
+and optional [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/)
 to authorize your account to use the APIs.
 
 :::tip

@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Ethe
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../dashboard/create-api.md) with the Ethereum networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Ethereum networked enabled.
 
 ## Make calls
 
@@ -235,11 +235,11 @@ Now that you have successfully made a call to the Ethereum network, you can expl
 by Infura. Here are some suggestions:
 
 - **Explore other Ethereum APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](./json-rpc-methods/).
+[JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../dashboard/dashboard-stats.md) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

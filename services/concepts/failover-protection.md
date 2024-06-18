@@ -7,16 +7,16 @@ sidebar_position: 1
 
 :::info
 
-Optimism failover support is available on Mainnet only.
+Failover support is available on Mainnet only.
 
 :::
 
-Failover protection is available on the Optimism Mainnet network for customers on the Growth or Custom plans.
+Failover protection is available on the Mainnet network for customers on the Growth or Custom plans.
 This feature ensures API requests are fulfilled even if Infura experiences a service issue or
 outage. This is achieved by routing requests to a select partner.
 
 Failover protection is enabled on a per-request basis by adding the failover header to your API
-request (see [Enable API request forwarding](../how-to/failover-protection-imp-optimism.md)). This gives
+request (see [Enable API request forwarding](../how-to/enable-api-forwarding.md)). This gives
 you control over which requests you'd like fulfilled by Infura's partner if failover protection should be needed.
 
 ## Partners and privacy policies

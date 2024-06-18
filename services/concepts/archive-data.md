@@ -74,6 +74,6 @@ If you need more archive requests, upgrade to the growth plan.
 
 :::
 
-#### Custom, Team, and Growth plans
+#### Custom, team, and growth plans
 
 No change. Same as a standard request

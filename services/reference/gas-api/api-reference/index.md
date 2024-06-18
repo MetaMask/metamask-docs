@@ -22,7 +22,7 @@ You can call the Gas APIs in two ways:
 - **Using the API key only** - Add your [API key](https://docs.infura.io/dashboard/secure-an-api/api-key)
     as a path option.
 - **Using the API key and API key secret** - Use basic authentication and specify the API key
-    and [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret).
+    and [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
 
 <Tabs>
   <TabItem value="API key only" label="Use an API key only" default>

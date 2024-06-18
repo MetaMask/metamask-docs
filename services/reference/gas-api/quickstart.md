@@ -19,7 +19,7 @@ View the [API reference content](api-reference/index.md) to view the `curl` comm
 ## Prerequisites
 
 - A valid [Web3 API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id)
-  and optional [API key secret](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-secret).
+  and optional [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
 - [Node.js and npm installed](https://nodejs.org/en/download).
 
 ## Initialize a new project directory
