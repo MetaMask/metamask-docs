@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmetamask_docs=self.webpackChunkmetamask_docs||[]).push([[1158],{29005:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"snaps"}')}}]);
