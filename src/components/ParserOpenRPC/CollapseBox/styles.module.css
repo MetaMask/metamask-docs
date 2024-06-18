@@ -23,7 +23,7 @@
   margin-bottom: 1px;
   cursor: pointer;
   transition-property: 'border-color', 'background-color';
-  transition-duration: .4s;
+  transition-duration: .2s;
   transition-timing-function: ease;
 }
 
@@ -34,7 +34,7 @@
   border-top: 2px solid #0376C9;
   border-right: 2px solid #0376C9;
   transform: rotate(45deg);
-  transition: transform .4s ease;
+  transition: transform .2s ease;
 }
 
 .collapseBtn:hover {

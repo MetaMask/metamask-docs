@@ -27,6 +27,10 @@
   border-top: 1px solid #848C96;
 }
 
+.borderBottomLine {
+  border-bottom: 1px solid #848C96;
+}
+
 .enumWrapper {
   border: 1px solid #848C96;
   border-radius: 8px;
@@ -49,4 +53,21 @@
 
 .secondaryHeading {
   font-size: 24px;
+  margin: 0;
+}
+
+.tagList {
+  display: flex;
+}
+
+.tagItem {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px 8px 0;
+  font-size: 12px;
+  line-height: 1;
+  color: #141618;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #FFCDD2;
 }

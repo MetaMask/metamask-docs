@@ -201,6 +201,10 @@ code {
   border-style: none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 pre {
   max-width: 500px;
 }

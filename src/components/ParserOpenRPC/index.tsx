@@ -6,6 +6,7 @@ import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
+import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
 import global from "./global.module.css";
 
 interface ParserProps {
@@ -16,6 +17,9 @@ interface ParserProps {
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [metamaskInstalled, setMetamaskInstalled] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
   const currentNetwork = netData.find(net => net.name === network);
@@ -23,31 +27,32 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!currentNetwork && currentNetwork.error) return null;
 
   const currentMethodData = useMemo(() => {
-    const currentMethod = currentNetwork.data.methods?.find((met: { name: string; }) => met.name === method);
-    if (!currentMethod) return null;
-    const preparedErrors = () => {
-      if (!currentMethod.errors || currentMethod.errors.length === 0) return [];
-      const updatedErrors = currentMethod.errors.map(item => {
-        if (item?.code && item?.message) {
-          return item;
-        }
+    const findReferencedItem = (items, refPath, componentType) => {
+      return items?.map(item => {
+        if (item?.name || (item?.code && item?.message)) return item;
         if (item?.$ref) {
-          const ref = item.$ref.replace("#/components/errors/", "");
-          const refErrorItem = currentNetwork.data.components.errors[ref];
-          if (refErrorItem) return refErrorItem;
+          const ref = item.$ref.replace(refPath, "");
+          return currentNetwork.data.components[componentType][ref];
         }
-      });
-      return updatedErrors.filter(Boolean);
+        return null;
+      }).filter(Boolean) || [];
     };
-    return ({
+
+    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method);
+    if (!currentMethod) return null;
+
+    const errors = findReferencedItem(currentMethod.errors, "#/components/errors/", "errors");
+    const tags = findReferencedItem(currentMethod.tags, "#/components/tags/", "tags");
+
+    return {
       description: currentMethod.summary || currentMethod.description || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
-      errors: preparedErrors(),
-      examples: currentMethod?.examples,
-    });
-  }, [netData, network]);
+      errors,
+      tags,
+    };
+  }, [currentNetwork, method]);
 
   if (currentMethodData === null) return null;
 
@@ -57,18 +62,31 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   }, []);
 
   return (
-    <div className="row">
-      <div className="col col--7" style={{ borderRight: "1px solid #848C96" }}>
+    <div className={global.rowWrap}>
+      <div className={global.colLeft}>
         <DetailsBox
           method={method}
           description={currentMethodData.description}
           params={currentMethodData.params}
           components={currentMethodData.components.schemas}
           result={currentMethodData.result}
+          tags={currentMethodData.tags}
         />
         <ErrorsBox errors={currentMethodData.errors} />
+        <ModalDrawer
+          title="Customize request"
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        >
+          <InteractiveBox
+            method={method}
+            params={currentMethodData.params}
+            components={currentMethodData.components.schemas}
+            examples={currentMethodData.examples}
+          />
+        </ModalDrawer>
       </div>
-      <div className="col col--5">
+      <div className={global.colRight}>
         <div className={global.stickyCol}>
           <AuthBox isMetamaskInstalled={metamaskInstalled} />
           <RequestBox
@@ -76,12 +94,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
             method={method}
             params={[]}
             response={"0x"}
-          />
-          <InteractiveBox
-            method={method}
-            params={currentMethodData.params}
-            components={currentMethodData.components.schemas}
-            examples={currentMethodData.examples}
+            openModal={openModal}
           />
         </div>
       </div>

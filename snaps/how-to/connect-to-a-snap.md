@@ -1,6 +1,6 @@
 ---
 description: Connect your dapp to existing, third-party Snaps.
-sidebar_position: 9
+sidebar_position: 10
 ---
 
 import Tabs from '@theme/Tabs';
@@ -75,6 +75,11 @@ Connect to a Snap by calling the [`wallet_requestSnaps`](../reference/wallet-api
 method from your dapp.
 If a user doesn't have the Snap installed in their MetaMask wallet, MetaMask prompts the user to
 install the Snap.
+
+:::note
+A Snap can grant a dapp an [automatic connection](../how-to/allow-automatic-connections.md),
+skipping the need for users to confirm a connection.
+:::
 
 The following are different possible outcomes from calling `wallet_requestSnaps`.
 

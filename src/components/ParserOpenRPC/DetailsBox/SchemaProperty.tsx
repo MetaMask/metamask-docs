@@ -9,16 +9,9 @@ interface SchemaPropertyProps {
   description?: string;
 }
 
-export const renderEnum = (enumValues: string[]) => (
-  <div className={styles.enumWrapper}>
-    <div className="padding--md">Possible enum values</div>
-    {enumValues.map((value, index) => (
-      <div key={index} className={styles.enumItem}>
-        <div className={styles.enumTitle}>{value}</div>
-      </div>
-    ))}
-  </div>
-);
+interface TagProps {
+  name: string;
+}
 
 export const SchemaProperty = ({ title, type, required, description }: SchemaPropertyProps) => {
   return (
@@ -36,6 +29,22 @@ export const SchemaProperty = ({ title, type, required, description }: SchemaPro
       <p className="margin--none">
         <MDContent content={description} />
       </p>
+    </div>
+  );
+};
+
+export const Tag = ({ name }: TagProps) => {
+  const bgStyle = {
+    "MetaMask": "#4DB6AC",
+    "Restricted": "#FFECB3",
+    "Deprecated": "#7E57C2",
+  };
+  return (
+    <div
+      className={styles.tagItem}
+      style={{ backgroundColor: `${bgStyle[name] ? bgStyle[name] : "#FFCDD2"}` }}
+    >
+      {name}
     </div>
   );
 };
