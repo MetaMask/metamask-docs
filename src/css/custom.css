@@ -200,3 +200,17 @@ p > video {
 code {
   border-style: none;
 }
+
+pre {
+  max-width: 500px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-group {
+  position: relative;
+}

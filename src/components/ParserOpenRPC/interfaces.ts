@@ -36,3 +36,21 @@ export interface MethodParam {
 export interface SchemaComponents {
   [key: string]: Schema;
 }
+
+export interface MethodExampleParam {
+  name: string;
+  value: {
+    [key: string]: any;
+  };
+}
+
+export interface MethodExampleResult {
+  name: string;
+  value: any;
+}
+
+export interface MethodExample {
+  name: string;
+  params: MethodExampleParam[];
+  result: MethodExampleResult;
+}

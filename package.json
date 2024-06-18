@@ -18,6 +18,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^11.6.4",
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/plugin-content-docs": "^3.0.0",
     "@docusaurus/theme-common": "^3.0.0",
@@ -25,14 +26,19 @@
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
+    "@rjsf/core": "^5.18.4",
+    "@rjsf/utils": "^5.18.4",
+    "@rjsf/validator-ajv8": "^5.18.4",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
+    "lodash.debounce": "^4.0.8",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.0",
     "prism-react-renderer": "^2.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-player": "^2.13.0",
+    "react-tippy": "^1.4.0",
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0"
   },

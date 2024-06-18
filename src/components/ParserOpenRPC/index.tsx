@@ -45,6 +45,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
       errors: preparedErrors(),
+      examples: currentMethod?.examples,
     });
   }, [netData, network]);
 
@@ -80,6 +81,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
             method={method}
             params={currentMethodData.params}
             components={currentMethodData.components.schemas}
+            examples={currentMethodData.examples}
           />
         </div>
       </div>
