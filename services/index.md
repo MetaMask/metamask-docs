@@ -30,7 +30,7 @@ include:
   block height. This is an invaluable feature for those who need to perform deep analyses of past transactions, contract
   states, or balances. With this feature, developers can build applications that are not only data-rich but also comprehensive.
 * **Expansion APIs** -
-  [Access Infura's multi-chain Gas API](../api/infura-expansion-apis/gas-api/). Use the Gas API used by the MetaMask wallet to analyze and
+  [Access Infura's multi-chain Gas API](/reference/gas-api/api-reference/index.md). Use the Gas API used by the MetaMask wallet to analyze and
   optimize gas costs on EIP-1559 compatible chains.
 
 <head>

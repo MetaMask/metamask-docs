@@ -17,7 +17,7 @@ Trace API is currently an open beta feature, available to paying Infura customer
 Infura provides access to a trace API that allows you to get detailed transaction processing information. Use the API to
 extract information about contract interactions, transactions, and blocks on the Ethereum network. You can
 also use the API to retrieve transaction details that are not recorded on the blockchain. For example, use the
-[`trace_call`](../json-rpc-methods/trace-methods/trace_call.mdx) API to observe contract interactions.
+[`trace_call`](../reference/ethereum/json-rpc-methods/trace-methods/trace_call.mdx) API to observe contract interactions.
 
 ![Example for using the trace_call API](../images/trace-call.png)
 
@@ -33,8 +33,8 @@ and [transaction-trace filtering APIs](#transaction-trace-filtering-apis).
 
 ## Ad-hoc tracing APIs
 
-These API endpoints allow you to use the [`trace`](../json-rpc-methods/trace-methods#trace) or
-[`stateDiff`](../json-rpc-methods/trace-methods#statediff) diagnostic options when tracing calls or transactions, and are
+These API endpoints allow you to use the [`trace`](../reference/ethereum/json-rpc-methods/trace-methods/index.md#trace) or
+[`stateDiff`](../reference/ethereum/json-rpc-methods/trace-methods/index.md#statediff) diagnostic options when tracing calls or transactions, and are
 helpful for debugging transactions and analyzing state changes.
 
 :::info
@@ -45,17 +45,17 @@ The `vmTrace` diagnostic option is not supported.
 
 The ad-hoc tracing API endpoints are:
 
-- [`trace_call`](../json-rpc-methods/trace-methods/trace_call.mdx)
-- [`trace_callMany`](../json-rpc-methods/trace-methods/trace_callmany.mdx)
+- [`trace_call`](../reference/ethereum/json-rpc-methods/trace-methods/trace_call.mdx)
+- [`trace_callMany`](../reference/ethereum/json-rpc-methods/trace-methods/trace_callmany.mdx)
 
 ## Transaction-trace filtering APIs
 
 These API endpoints allow you to filter and search by specific information such as the block, address, or transaction. The endpoints
-only use the [`trace`](../json-rpc-methods/trace-methods#trace) diagnostic option. The transaction-trace filtering API endpoints are:
+only use the [`trace`](../reference/ethereum/json-rpc-methods/trace-methods.mdx#trace) diagnostic option. The transaction-trace filtering API endpoints are:
 
-- [`trace_block`](../json-rpc-methods/trace-methods/trace_block.mdx)
-- [`trace_transaction`](../json-rpc-methods/trace-methods/trace_transaction.mdx)
-- [`trace_filter`](../json-rpc-methods/trace-methods/trace_filter.mdx)
+- [`trace_block`](../reference/ethereum/json-rpc-methods/trace-methods/trace_block.mdx)
+- [`trace_transaction`](../reference/ethereum/json-rpc-methods/trace-methods/trace_transaction.mdx)
+- [`trace_filter`](../reference/ethereum/json-rpc-methods/trace-methods/trace_filter.mdx)
 
 ## Trace a transaction example
 

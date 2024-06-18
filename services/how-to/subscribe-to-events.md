@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Subscribe to events
 
-Use [WebSockets](../../../learn/websockets.md) to [subscribe](../json-rpc-methods/subscription-methods/index.md) to events
+Use [WebSockets](../concepts/websockets.md) to subscribe to events
 on the blockchain. For example, monitor an NFT smart contract to alert you when a new NFT is minted.
 
 Stateless HTTP WebSockets are supported, however, we recommend using the WSS protocol to set up bidirectional stateful
@@ -19,7 +19,7 @@ You need to be aware of the following when sending HTTP RPC requests:
   retrying failed HTTP requests often is automatic, or easily configured.
 - Status codes - WebSockets use its own set of [status codes](https://pkg.go.dev/github.com/gorilla/websocket#pkg-constants)
   to provide users with a disconnection reason. The service will respond with the standard
-  [EVM response codes](../json-rpc-methods/index.md#error-codes) for each JSON-RPC request.
+  [EVM response codes](../reference/ethereum/json-rpc-methods/index.md#error-codes) for each JSON-RPC request.
 
 ## Example event subscription
 

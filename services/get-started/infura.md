@@ -29,7 +29,7 @@ For more information refer to the [Infura pricing information](https://www.infur
 
 ## 2. Configure your API key
 
-Once verified, you’ll be taken to the [Infura dashboard](https://infura.io/dashboard) where you can configure your
+Once verified, you’ll be taken to the [Infura dashboard](../../../developer-tools/dashboard) where you can configure your
 auto-generated API key.
 
 :::info
@@ -66,7 +66,7 @@ Use the API key when sending requests. The following examples interact with the 
 :::info
 
 - All requests are `POST` requests.
-- Replace`YOUR-API-KEY` with your own unique API key.
+- Replace `YOUR-API-KEY` with your own unique API key.
 
 :::
 
@@ -163,7 +163,7 @@ The decimal conversion of the result is `11392978000069000000000069` Wei, which 
 
 Configure security settings in the **Settings** tab. This is optional.
 
-Force API requests to include the API key secret and/or [JSON Web Tokens (JWTs)](../tutorials/developer-tools/json-web-token-jwt.md).
+Force API requests to include the API key secret and/or [JSON Web Tokens (JWTs)](../how-to/json-web-token-jwt.md).
 
 <div class="left-align-container">
   <div class="img-large">
@@ -173,7 +173,7 @@ Force API requests to include the API key secret and/or [JSON Web Tokens (JWTs)]
   </div>
 </div>
 
-Use an allowlist to restrict API key access. See to the [allowlist documentation](../dashboard/secure-an-api/use-an-allowlist.md) for configuration instructions and best practices.
+Use an allowlist to restrict API key access. See to the [allowlist documentation](../../../developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) for configuration instructions and best practices.
 
 <div class="left-align-container">
   <div class="img-large">
@@ -187,7 +187,7 @@ Use an allowlist to restrict API key access. See to the [allowlist documentation
 
 From the Stats page of the Infura dashboard, you can view real-time statistics about your API usage.
 Optimize your app and better understand your users by
-[reviewing your API request stats](../dashboard/dashboard-stats.md) regularly.
+[reviewing your API request stats](../../../developer-tools/dashboard/how-to/dashboard-stats) regularly.
 
 <div class="left-align-container">
   <div class="img-large">
@@ -201,10 +201,10 @@ Optimize your app and better understand your users by
 
 Find additional settings in **Settings** to manage your account. You can do the following:
 
-- [Set notifications for daily limits](../network-apis/ethereum/how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
+- [Set notifications for daily limits](../how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
     from the **Account** option.
 - Manage your billing information in the **Billing** option.
-- Manage [shared API keys](../dashboard/project-sharing.md) in the **Key Sharing** option.
+- Manage [shared API keys](../../../developer-tools/dashboard/how-to/project-sharing) in the **Key Sharing** option.
 
 <div class="left-align-container">
   <div class="img-large">

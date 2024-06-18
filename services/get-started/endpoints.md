@@ -7,7 +7,7 @@ sidebar_position: 2
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard](../../../developer-tools/dashboard/).
 
 ### Arbitrum
 

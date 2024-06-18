@@ -14,8 +14,8 @@ You can:
 
 - [Send ERC-20 transactions](interact-with-erc-20-tokens.md#sending-transactions) using `eth_sendRawTransaction`.
 - [Observe event logs of mined ERC-20 transactions](interact-with-erc-20-tokens.md#mined-transactions) using `eth_getLogs`.
-- Follow [this tutorial](../../../tutorials/ethereum/retrieve-the-balance-of-an-erc-20-token.md) to retrieve the balance of ERC-20 tokens.
-- Follow [this tutorial](../../../tutorials/ethereum/track-erc-20-token-transfers.md) to track ERC-20 token transfers.
+- Follow [this tutorial](../tutorials/ethereum/retrieve-the-balance-of-an-erc-20-token.md) to retrieve the balance of ERC-20 tokens.
+- Follow [this tutorial](../tutorials/ethereum/track-erc-20-token-transfers.md) to track ERC-20 token transfers.
 
 ## ERC-20 token functions and events
 
@@ -37,7 +37,7 @@ View [EIP-20](https://eips.ethereum.org/EIPS/eip-20) for more details about how 
 
 ## **Send transactions** <a href="#sending-transactions" id="sending-transactions"></a>
 
-Use [`eth_sendRawTransaction`](../json-rpc-methods/eth_sendrawtransaction.mdx) to send ERC-20 token transactions.
+Use [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx) to send ERC-20 token transactions.
 
 The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data field format that requires normalizing the `Transfer` function to a short [function selector](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector). To do this, set the parameters for the function and run it through Ethereum’s [sha3 keccak hash](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector):
 
@@ -89,7 +89,7 @@ curl https://mainnet.infura.io/v3/YOUR-API-KEY \
 
 When a transaction is mined, event logs are published for public viewing.
 
-Once the event logs are published, you can execute [`eth_getLogs`](../json-rpc-methods/eth_getlogs.mdx) to investigate what changed relative to the events that you care about, and react to them.
+Once the event logs are published, you can execute [`eth_getLogs`](../reference/ethereum/json-rpc-methods/eth_getlogs.mdx) to investigate what changed relative to the events that you care about, and react to them.
 
 :::success
 

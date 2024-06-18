@@ -26,17 +26,17 @@ See the [IPFS documentation](https://docs.ipfs.io) for more information. Check o
 <CardList
   items={[
     {
-      href: "./reference/ipfs/quickstart",
+      href: "../../reference/ipfs/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the IPFS network."
     },
     {
-      href: "./reference/ipfs/http-api-methods",
+      href: "../../reference/ipfs/http-api-methods",
       title: "HTTP API methods",
       description: "View the APIs available for communicating with the IPFS network."
     },
     {
-      href: "../../dashboard/create-api",
+      href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
       description: "Learn how to create an API key and secure and share it with your team."
     }
