@@ -34,7 +34,7 @@ auction-style system meant gas prices often fluctuated wildly. After EIP-1559, t
 
 ## Gas API
 
-The [Gas API](../infura-expansion-apis/gas-api/) allows you to get current and historical gas price information.
+The [Gas API](../reference/gas-api/index.md) allows you to get current and historical gas price information.
 The APIs provide recommended gas prices to get your transactions included in a block, based on your priority requirements.
 
 This allows you to optimize your transactions for speed and cost-effectiveness. By using the Gas API, developers
