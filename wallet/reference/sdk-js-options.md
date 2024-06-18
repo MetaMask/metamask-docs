@@ -1,4 +1,4 @@
----
+--checkInstallationImmediately: <boolean>
 description: See the JavaScript SDK options reference.
 sidebar_position: 1
 tags:
