@@ -389,7 +389,8 @@ const config = {
         },
       },
     ],
-    isProd ?
+    "./src/plugins/plugin-json-rpc.ts",
+    isProd ? 
       [
         "docusaurus-plugin-segment",
         {

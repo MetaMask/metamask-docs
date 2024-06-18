@@ -1,6 +1,6 @@
 import * as path from "path";
 
-module.exports = function () {
+const LDPlugin = () => {
   return {
     name: "docusaurus-plugin-launchdarkly",
     getClientModules() {
@@ -17,3 +17,5 @@ module.exports = function () {
     },
   };
 };
+
+export default LDPlugin
