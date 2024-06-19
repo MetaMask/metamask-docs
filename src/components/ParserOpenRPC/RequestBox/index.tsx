@@ -42,7 +42,7 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
         <div className={styles.cardFooter}>
           <button
             className={clsx(global.linkBtn, "margin-right--md")}
-            disabled={!isMetamaskInstalled}
+            // disabled={!isMetamaskInstalled}
             onClick={openModal}
           >
             Customize request

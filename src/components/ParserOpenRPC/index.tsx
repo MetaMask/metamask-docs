@@ -49,6 +49,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
+      examples: currentMethod?.examples,
       errors,
       tags,
     };
@@ -79,7 +80,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           onClose={closeModal}
         >
           <InteractiveBox
-            method={method}
             params={currentMethodData.params}
             components={currentMethodData.components.schemas}
             examples={currentMethodData.examples}

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BaseInputTemplateProps } from "@rjsf/utils";
+import clsx from "clsx";
 import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import debounce from "lodash.debounce";
@@ -21,7 +22,7 @@ export const BaseInputTemplate = ({
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
 
   const { isFormReseted } = formContext;
-  const hasErrors = rawErrors?.length > 0 && !hideError && !isNumber;
+  const hasErrors = rawErrors?.length > 0 && !hideError;
   const debouncedOnChange = useCallback(debounce((e, isInputNumber = false) => {
     onChange(isInputNumber ? e : e?.target?.value);
   }, 300), []);
@@ -45,7 +46,7 @@ export const BaseInputTemplate = ({
   return (
     <div className={styles.tableRow}>
       <div className={styles.tableColumn}>
-        <label className={`${styles.tableColumnParam} ${isFocused ? styles.tableColumnParamFocused : ""}`}>
+        <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused)}>
           {name}{required ? "*" : ""}
         </label>
       </div>
@@ -56,7 +57,7 @@ export const BaseInputTemplate = ({
               id={id}
               value={inputValue}
               disabled={disabled}
-              className={`${styles.formControl} ${hasErrors ? styles.formControlError : ""}`}
+              className={clsx(styles.formControl, hasErrors && styles.formControlError)}
               type={isNumber ? "number" : schema.type as string}
               pattern={schema.pattern}
               onChange={onInputChange}
@@ -65,15 +66,15 @@ export const BaseInputTemplate = ({
             />
             <span className={styles.tableColumnType}>
               {schema.type}
-              {hasErrors ? <span className={styles.tableColumnTypeErrorIcon} /> : null}
+              {hasErrors && !isNumber ? <span className={styles.tableColumnTypeErrorIcon} /> : null}
               {isNumber ? (
                 <>
                   <span
-                    className={`${styles.chevronIcon} ${styles.formControlNumberUp}`}
+                    className={clsx(styles.chevronIcon, styles.formControlNumberUp)}
                     onClick={() => { onInputNumberChange(Number((+inputValue || 0) + 1)); }}
                   />
                   <span
-                    className={`${styles.chevronIcon} ${styles.chevronIconDown} ${styles.formControlNumberDown}`}
+                    className={clsx(styles.chevronIcon, styles.chevronIconDown, styles.formControlNumberDown)}
                     onClick={() => { inputValue >= 1 && onInputNumberChange(Number((+inputValue || 0) - 1)); }}
                   />
                 </>

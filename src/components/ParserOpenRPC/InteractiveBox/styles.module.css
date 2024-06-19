@@ -122,9 +122,17 @@
   border-bottom: 1px solid rgba(132, 140, 150, 1);
 }
 .tableFooterRow {
+  position: fixed;
   display: flex;
   padding: 21px 16px;
-  background-color: rgba(36, 39, 42, 1);
+  width: 100%;
+  bottom: 0;
+}
+.tableFooterRowDark {
+  background-color: #24272A;
+}
+.tableFooterRowLight {
+  background-color: #F2F4F6;
 }
 .formControl {
   width: 100%;

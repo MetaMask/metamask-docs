@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Form from "@rjsf/core";
+import clsx from "clsx";
 import { RJSFSchema, UiSchema, RegistryWidgetsType } from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
@@ -8,23 +9,20 @@ import styles from "./styles.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
-
+import { useColorMode } from "@docusaurus/theme-common";
 
 interface InteractiveBoxProps {
-  method: string;
   params: MethodParam[];
   components: SchemaComponents;
   examples: MethodExample[];
 }
 
-export default function InteractiveBox({ method, params, components, examples }: InteractiveBoxProps) {
-  console.log("method_name___", method);
-  console.log("method_params___", params);
-  console.log("examples", examples);
+export default function InteractiveBox({ params, components, examples }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
   const formRef = useRef(null);
+  const { colorMode } = useColorMode();
 
   const defaultExampleFormData = examples ? Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value])) : {};
   const schema: RJSFSchema = {
@@ -55,12 +53,13 @@ export default function InteractiveBox({ method, params, components, examples }:
       formRef?.current?.reset();
     }
   };
+  const isLightTheme = colorMode === "light"
 
   useEffect(() => {
     const dereferenceSchema = async () => {
       try {
         if (schema) {
-          setParsedSchema(await $RefParser.dereference(schema));
+          setParsedSchema(await $RefParser.dereference(schema) as RJSFSchema);
         }
       } catch (error) {
         console.error("Error of parsing schema:", error);
@@ -101,14 +100,14 @@ export default function InteractiveBox({ method, params, components, examples }:
         widgets={widgets}
         ref={formRef}
       >
-        <div className={styles.tableFooterRow}>
+        <div className={clsx(styles.tableFooterRow, isLightTheme ? styles.tableFooterRowLight : styles.tableFooterRowDark)}>
           <div className={styles.footerButtons}>
-            <Tooltip message="Reset fields">
+            <Tooltip message="Reset fields" theme={isLightTheme ? "dark" : "light"}>
               <button className={styles.footerButton} onClick={handleResetForm}>
                 <img className={styles.footerButtonIcon} src="/img/icons/reset-icon.svg"/>
               </button>
             </Tooltip>
-            <Tooltip message="Clear fields">
+            <Tooltip message="Clear fields" theme={isLightTheme ? "dark" : "light"}>
               <button
                 className={styles.footerButton}
                 onClick={handleClearForm}
