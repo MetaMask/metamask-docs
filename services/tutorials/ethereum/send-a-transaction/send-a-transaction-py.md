@@ -129,4 +129,4 @@ Example output:
 Transaction hash: 0x30c0ef29111ca7aecc78a99149649b5076d104afa7ed2f603ff2d2ec1aa27a8c
 ```
 
-You can search for the transaction on a block explorer like [Sepolia Etherscan](https://sepolia.etherscan.io/tx/0x28e414889b47ba43b00086bc3ae42ea4ea521739f77b78afcaefb1b7fe42e955)
+You can search for the transaction on a block explorer like [Sepolia Etherscan](https://sepolia.etherscan.io/tx/0x28e414889b47ba43b00086bc3ae42ea4ea521739f77b78afcaefb1b7fe42e955).

@@ -151,7 +151,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     python index.py
     ```
 
-## Next Steps
+## Next steps
 
 Now that you have successfully made a call to the Starknet network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:

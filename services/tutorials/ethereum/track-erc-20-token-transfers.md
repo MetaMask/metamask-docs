@@ -1,5 +1,6 @@
 ---
 description: Track ERC-20 token transfers.
+sidebar_position: 8
 ---
 
 import Tabs from '@theme/Tabs';
@@ -7,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Track ERC-20 token transfers
 
-In this tutorial, you'll track [ERC-20 token](../../network-apis/ethereum/how-to/interact-with-erc-20-tokens.md) transfers from a specific address using the Web3 JavaScript library.
+In this tutorial, you'll track [ERC-20 token](../../how-to/interact-with-erc-20-tokens.md) transfers from a specific address using the Web3 JavaScript library.
 
 ## Prerequisites
 

@@ -38,7 +38,7 @@ It requests the latest block number using the method `eth_blockNumber`.
 
 Let's step through each line of the code snippet to understand what's happening.
 
-The first line uses the `curl` command to send a request to the URL `https://mainnet.infura.io/v3/`YOUR-API-KEY.
+The first line uses the `curl` command to send a request to the URL `https://mainnet.infura.io/v3/YOUR-API-KEY`.
 
 #### curl command
 

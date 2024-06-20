@@ -1,5 +1,6 @@
 ---
 description: Monitor transfers to an Ethereum account.
+sidebar_position: 3
 ---
 
 import Tabs from '@theme/Tabs';

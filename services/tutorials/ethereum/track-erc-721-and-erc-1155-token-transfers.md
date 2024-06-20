@@ -1,5 +1,6 @@
 ---
 description: Track ERC-721 and ERC-1155 token transfers.
+sidebar_position: 9
 ---
 
 import Tabs from '@theme/Tabs';
@@ -111,7 +112,7 @@ subscription1155.on("connected", (nr) =>
 
 ### 5. Read ERC-721 transfers
 
-Set the listener for the `subscription721` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4.-subscribe-to-contract-events) by adding the following lines to the script:
+Set the listener for the `subscription721` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
 subscription721.on('data', event => {

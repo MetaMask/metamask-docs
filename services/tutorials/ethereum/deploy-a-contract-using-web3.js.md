@@ -1,5 +1,6 @@
 ---
 description: Create and deploy a smart contract.
+sidebar_position: 1
 ---
 
 # Deploy a contract using web3.js

@@ -44,13 +44,13 @@ The following methods include a parameter for specifying a block number for the 
 
 ### Rate limits
 
-Infura applies [rate limits](../how-to/avoid-rate-limiting.md#infura-rate-limiting) to ensure network efficiency.
+Infura applies [rate limits](../how-to/avoid-rate-limiting.md) to ensure network efficiency.
 
 Requests for Ethereum archive data are more expensive and are therefore subject to different rate limits.
 
 **Free plan**
 
-- 25,000 archive requests per day**.**
+- 25,000 archive requests per day.
 - 100,000 total requests per day.
 
 Rate limits kick in on archive requests after 25,000 per day. 75,000 standard requests are still available after this point.
@@ -63,7 +63,7 @@ If you need more archive requests, upgrade to the developer plan.
 
 **Developer plan**
 
-- 100,000 archive requests per day**.**
+- 100,000 archive requests per day.
 - 200,000 total requests per day.
 
 Rate limits kick in on archive requests after 100,000 per day. 100,000 standard requests are still available after this point.
@@ -76,4 +76,4 @@ If you need more archive requests, upgrade to the growth plan.
 
 #### Custom, team, and growth plans
 
-No change. Same as a standard request
+No change. Same as a standard request.

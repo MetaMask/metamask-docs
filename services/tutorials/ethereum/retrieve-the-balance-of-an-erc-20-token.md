@@ -1,5 +1,6 @@
 ---
 description: Retrieve the balance of an ERC-20 token.
+sidebar_position: 5
 ---
 
 import Tabs from '@theme/Tabs';
@@ -7,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Retrieve the balance of an ERC-20 token
 
-In this tutorial, using Web3.js, you'll retrieve the balance of an [ERC-20 token](../../network-apis/ethereum/how-to/interact-with-erc-20-tokens.md) in an account, using the account address and the token contract.
+In this tutorial, using Web3.js, you'll retrieve the balance of an [ERC-20 token](../../how-to/interact-with-erc-20-tokens.md) in an account, using the account address and the token contract.
 
 ## Prerequisites
 

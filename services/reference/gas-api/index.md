@@ -4,7 +4,7 @@ description: Gas API documentation
 
 import CardList from '@site/src/components/CardList'
 
-# Gas
+# Gas API
 <CardList
   items={[
     {

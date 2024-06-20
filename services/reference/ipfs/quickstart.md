@@ -12,14 +12,14 @@ This quickstart guide will help you set up and make calls on the IPFS network us
 :::info
 
 To access the IPFS network through Infura, you'll need to add a billing card to your account, even if you're using a free account. Refer
-to the [billing details](how-to/access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information. 
+to the [billing details](../../how-to/use-ipfs/access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information. 
 
 :::
 
 ## Prerequisites
 
-Before you begin, ensure you have a valid [API key](../../../developer-tools/dashboard/create-api.md) and
-    [API key secret](../../../developer-tools/dashboard/secure-an-api/api-key-secret.md).
+Before you begin, ensure you have a valid [API key](../../../../developer-tools/dashboard/get-started/create-api) and
+    [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
 
 ## Make calls
 
@@ -290,13 +290,13 @@ Example output:
 ```bash
 Data successfully stored in IPFS: QmTHr95iiwSTA2USxx4g5kKnhqsNRixqohhwxjvdXmSrWn
 ```
-## Next Steps
+## Next steps
 
 Now that you have successfully made a call to the IPFS network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:
 
 - **Explore other IPFS APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](../http-api-methods/).
+[HTTP API methods documentation](../http-api-methods/).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 

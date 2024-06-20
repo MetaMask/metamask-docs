@@ -1,5 +1,6 @@
 ---
 description: Listen for new transactions on the blockchain.
+sidebar_position: 7
 ---
 
 # Subscribe to pending transactions

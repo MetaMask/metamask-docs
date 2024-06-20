@@ -229,7 +229,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     python index.py
     ```
 
-## Next Steps
+## Next steps
 
 Now that you have successfully made a call to the Ethereum network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:

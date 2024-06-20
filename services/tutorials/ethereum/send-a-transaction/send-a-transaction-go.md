@@ -159,5 +159,3 @@ Transaction hash: 0x47ed277bdfee88902f971510a7cd7b4c55722ea06488e697fb05dc99454e
 ```
 
 You can search for the transaction on a block explorer like [Sepolia Etherscan](https://sepolia.etherscan.io/).
-
-\

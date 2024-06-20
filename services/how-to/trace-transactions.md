@@ -51,7 +51,7 @@ The ad-hoc tracing API endpoints are:
 ## Transaction-trace filtering APIs
 
 These API endpoints allow you to filter and search by specific information such as the block, address, or transaction. The endpoints
-only use the [`trace`](../reference/ethereum/json-rpc-methods/trace-methods.mdx#trace) diagnostic option. The transaction-trace filtering API endpoints are:
+only use the [`trace`](../reference/ethereum/json-rpc-methods/trace-methods/index.md) diagnostic option. The transaction-trace filtering API endpoints are:
 
 - [`trace_block`](../reference/ethereum/json-rpc-methods/trace-methods/trace_block.mdx)
 - [`trace_transaction`](../reference/ethereum/json-rpc-methods/trace-methods/trace_transaction.mdx)

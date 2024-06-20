@@ -19,7 +19,7 @@ Use the APIs to:
 
 You can call the Gas APIs in two ways:
 
-- **Using the API key only** - Add your [API key](https://docs.infura.io/dashboard/secure-an-api/api-key)
+- **Using the API key only** - Add your [API key](../../../../developer-tools/dashboard/get-started/create-api)
     as a path option.
 - **Using the API key and API key secret** - Use basic authentication and specify the API key
     and [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).

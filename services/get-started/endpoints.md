@@ -1,6 +1,7 @@
 ---
 description: Infura API endpoints
 sidebar_position: 2
+toc_max_heading_level: 3
 ---
 
 # All endpoints
@@ -9,7 +10,7 @@ The following lists all the network endpoints supported by Infura.
 
 Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard](../../../developer-tools/dashboard/).
 
-### Arbitrum
+## Arbitrum
 
 | Network           | Description             | URL                                                |
 |-------------------|-------------------------|----------------------------------------------------|
@@ -18,7 +19,7 @@ Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard]
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://arbitrum-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://arbitrum-sepolia.infura.io/ws/v3/<API-KEY>` |
 
-### Avalanche (C-Chain)
+## Avalanche (C-Chain)
 
 | Network        | Description             | URL                                                |
 |----------------|-------------------------|----------------------------------------------------|
@@ -27,7 +28,7 @@ Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard]
 | Testnet (Fuji) | JSON-RPC over HTTPS     | `https://avalanche-fuji.infura.io/v3/<API-KEY>`    |
 | Testnet (Fuji) | JSON-RPC over WebSocket | `wss://avalanche-fuji.infura.io/ws/v3/<API-KEY>`   |
 
-### Base
+## Base
 
 :::caution Limited access
 Base is currently only available to a limited number of customers. If you would like access, please submit a
@@ -39,21 +40,21 @@ request to `support@infura.io` and we will assess if your request can be accommo
 | Mainnet           | JSON-RPC over HTTPS | `https://base-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://base-sepolia.infura.io/v3/<API-KEY>` |
 
-### Blast
+## Blast
 
 | Network           | Description         | URL                                           |
 |-------------------|---------------------|-----------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |
 
-### Celo
+## Celo
 
 | Network             | Description         | URL                                             |
 | ------------------- | ------------------- | ----------------------------------------------- |
 | Mainnet             | JSON-RPC over HTTPS | `https://celo-mainnet.infura.io/v3/<API-KEY>`   |
 | Testnet (Alfajores) | JSON-RPC over HTTPS | `https://celo-alfajores.infura.io/v3/<API-KEY>` |
 
-### Ethereum
+## Ethereum
 
 :::note
 The Holesky testnet is supported through the
@@ -69,7 +70,7 @@ service and does not currently support WebSockets.
 | Sepolia | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
 | Sepolia | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
 
-### IPFS
+## IPFS
 
 :::caution Limited access
 Infura is currently limiting IPFS services to customers that already have an active IPFS key.
@@ -82,11 +83,11 @@ New IPFS key creation is disabled for new and existing customers.
 
 :::info
 
-Include your authentication details when [making IPFS requests](../network-apis/ipfs/quickstart.md)
+Include your authentication details when [making IPFS requests](/reference/ipfs/quickstart.md).
 
 :::
 
-### Linea
+## Linea
 
 :::caution deprecation notice
 
@@ -103,14 +104,14 @@ Sepolia instead.
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<API-KEY>`     |
 
-### Mantle
+## Mantle
 
 | Network           | Description             | URL                                              |
 |-------------------|-------------------------|--------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<API-KEY>`  |
 
-### Optimism
+## Optimism
 
 | Network           | Transport type          | URL                                               |
 |-------------------|-------------------------|---------------------------------------------------|
@@ -119,14 +120,14 @@ Sepolia instead.
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://optimism-sepolia.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://optimism-mainnet.infura.io/ws/v3/<API-KEY>`   |
 
-### Palm
+## Palm
 
 | Network | Description         | URL                                           |
 | ------- | ------------------- | --------------------------------------------- |
 | Mainnet | JSON-RPC over HTTPS | `https://palm-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet | JSON-RPC over HTTPS | `https://palm-testnet.infura.io/v3/<API-KEY>` |
 
-### Polygon PoS
+## Polygon PoS
 
 | Network          | Description             | URL                                               |
 |------------------|-------------------------|---------------------------------------------------|
@@ -135,7 +136,7 @@ Sepolia instead.
 | Testnet (Amoy)   | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |
 | Testnet (Amoy)   | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |
 
-### StarkNet
+## StarkNet
 
 | Network           | Description         | URL                                               |
 |-------------------|---------------------|---------------------------------------------------|
@@ -143,46 +144,46 @@ Sepolia instead.
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |
 
 
-## Supported networks
+## Gas API
 
 The Gas REST API supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 
-### Arbitrum
+#### Arbitrum
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 42161    |
 | Nova    | 42170    |
 
-### Avalanche (C-Chain)
+#### Avalanche (C-Chain)
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 43114    |
 
 
-### Base
+#### Base
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 8453     |
 
-### BNB Chain
+#### BNB Chain
 
 | Network         | Chain ID |
 | --------------- | -------- |
 | Mainnet         | 56       |
 | opBNB (layer 2) | 204      |
 
-### Cronos
+#### Cronos
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 25       |
 
-### Ethereum
+#### Ethereum
 
 | Network | Chain ID |
 | ------- | -------- |
@@ -190,39 +191,39 @@ Specify the chain ID in your request to interact with the relevant network.
 | Goerli  | 5        |
 | Sepolia | 11155111 |
 
-### Fantom
+#### Fantom
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 250      |
 
-### Filecoin
+#### Filecoin
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 314      |
 
-### Linea
+#### Linea
 
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 59144    |
 | Testnet | 59140    |
 
-### Optimism
+#### Optimism
 
 | Network | Chain ID    |
 | ------- | ----------- |
 | Mainnet | 10          |
 
-### Polygon
+#### Polygon
 
 | Network | Network ID |
 | ------- | ---------- |
 | Mainnet | 137        |
 | Amoy    | 80002      |
 
-### zkSync Era
+#### zkSync Era
 
 | Network | Chain ID |
 | ------- | -------- |

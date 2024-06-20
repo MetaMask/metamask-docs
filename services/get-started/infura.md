@@ -70,7 +70,7 @@ Use the API key when sending requests. The following examples interact with the 
 
 :::
 
-Use a tool such as the [Client Uniform Resource Locator (curl)](../learn/curl.md) or [Postman](https://www.postman.com/downloads/) to make requests. We recommend using Postman if you're a Windows user.
+Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl.md) or [Postman](https://www.postman.com/downloads/) to make requests. We recommend using Postman if you're a Windows user.
 
 ### 3.1 Get the current block number
 
