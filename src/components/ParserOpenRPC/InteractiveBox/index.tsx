@@ -10,6 +10,7 @@ import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/Interactiv
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
+import {ArrayFieldTemplate} from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 
 interface InteractiveBoxProps {
   params: MethodParam[];
@@ -93,6 +94,7 @@ export default function InteractiveBox({ params, components, examples }: Interac
         onError={log("errors")}
         templates={{
           BaseInputTemplate,
+          ArrayFieldTemplate,
           FieldErrorTemplate: () => null,
           ErrorListTemplate: () => null,
         }}

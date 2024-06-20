@@ -76,6 +76,9 @@
 .chevronIconDown {
   transform: rotate(180deg);
 }
+.chevronIconRight {
+  transform: rotate(90deg);
+}
 .dropdown {
   display: flex;
   align-items: center;
