@@ -1,9 +1,11 @@
 {
   // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@tsconfig/docusaurus/tsconfig.json",
+  "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx": "react"
+    "paths": {
+      "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"]
+    }
   },
   "include": [
     "./**/*"

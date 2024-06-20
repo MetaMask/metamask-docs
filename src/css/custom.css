@@ -200,3 +200,7 @@ p > video {
 code {
   border-style: none;
 }
+
+.hidden {
+  display: none !important;
+}

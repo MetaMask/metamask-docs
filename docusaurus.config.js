@@ -1,6 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+require("dotenv").config();
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
@@ -27,6 +28,10 @@ const config = {
   i18n: {
     defaultLocale: "en",
     locales: ["en"/*, "zh", "ko"*/],
+  },
+
+  customFields: {
+    LD_CLIENT_ID: process.env.LD_CLIENT_ID,
   },
 
   trailingSlash: true,
@@ -384,6 +389,7 @@ const config = {
         },
       },
     ],
+    "./src/plugins/plugin-json-rpc.ts",
     isProd ? 
       [
         "docusaurus-plugin-segment",
@@ -393,6 +399,7 @@ const config = {
           page: true,
         },
       ] : null,
+    "./src/plugins/launchdarkly",
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

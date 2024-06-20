@@ -3,23 +3,16 @@ name: Build and lint
 on:
   workflow_call:
   secrets:
-      SEGMENT_ANALYTICS_KEY:
-        required: true
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
 
 jobs:
-  prepare:
-    name: Prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-      - name: Install Yarn dependencies
-        run: yarn --immutable
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -27,22 +20,12 @@ jobs:
       - prepare
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+
+      - name: Build
+        uses: ConsenSys/docs-gha/build@main
         with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-      - run: yarn --immutable --immutable-cache
-      - run: yarn build
-        env:
-            SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
-      - name: Require clean working directory
-        shell: bash
-        run: |
-          if ! git diff --exit-code; then
-            echo "Working tree dirty at end of job"
-            exit 1
-          fi
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
 
   lint:
     name: Lint
@@ -51,17 +34,9 @@ jobs:
       - prepare
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+
+      - name: Lint
+        uses: ConsenSys/docs-gha/lint@main
         with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-      - run: yarn --immutable --immutable-cache
-      - run: yarn lint
-      - name: Require clean working directory
-        shell: bash
-        run: |
-          if ! git diff --exit-code; then
-            echo "Working tree dirty at end of job"
-            exit 1
-          fi
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
