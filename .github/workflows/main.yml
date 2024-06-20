@@ -24,10 +24,7 @@ jobs:
     uses: ./.github/workflows/build-lint.yml
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
-      # Hardcoded as we can't define different LD_CLIENT_ID based on environment.
-      # Safe to expose, see:
-      # https://docs.launchdarkly.com/sdk/client-side/javascript#initialize-the-client-and-evaluate-a-context
-      LD_CLIENT_ID: 6449dfe32c088a1338d69a98
+      LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
 
   all-jobs-completed:
     name: All jobs completed
