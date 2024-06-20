@@ -37,6 +37,8 @@
     "@metamask/docusaurus-openrpc": "^0.4.1",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
+    "dotenv": "^16.4.5",
+    "launchdarkly-js-client-sdk": "^3.3.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.0",
     "prism-react-renderer": "^2.1.0",
