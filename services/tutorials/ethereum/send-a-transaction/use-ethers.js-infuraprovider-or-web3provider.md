@@ -114,11 +114,11 @@ const [txSent, setTxSent] = useState(null);
 const [txSentInfura, setTxSentInfura] = useState(null);
 ```
 
-#### Create the app frontend.
+#### Create the app frontend
 
 Next, create the app front-end that includes two forms for sending the transactions, and buttons for each provider to fetch the latest block number.
 
-```javascript title="App.js" showLineNumbers
+```javascript title="App.js"
 // Configure the app frontend
 return (
   <div className="App">

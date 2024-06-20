@@ -9,7 +9,7 @@ In this two-part tutorial we'll use Rust and the [ethers-rs library](https://www
 - Send a legacy transaction `("type":"0x0")`
 - Send an EIP-1559 transaction `("type":"0x2")`
 
-This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../network-apis/ethereum/concepts/transaction-types.md). 
+This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../concepts/transaction-types.md). 
 
 ## Prerequisites
 
@@ -117,14 +117,14 @@ async fn main() -> Result<()> {
 Next, make the following updates to the above code:
 
 - On line 16 replace the `INFURA_API_KEY` with you API key from the
-    [Infura dashboard](../../../../developer-tools/dashboard/get-started/create-api/).
+    [Infura dashboard](../../../../../developer-tools/dashboard/get-started/create-api/).
 - On line 26 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account. 
-- On line 29, use a test address, such as [0xAED01C776d98303eE080D25A21f0a42D94a86D9c](https://sepolia.etherscan.io/address/0xaed01c776d98303ee080d25a21f0a42d94a86d9c).
+- On line 29, use a test address, such as [`0xAED01C776d98303eE080D25A21f0a42D94a86D9c`](https://sepolia.etherscan.io/address/0xaed01c776d98303ee080d25a21f0a42d94a86d9c).
 
 :::tip Secure your keys
 To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
 :::
-
+`
 ### 4. Run the code
 
 From the `infura_rs` directory, run the code.
@@ -147,13 +147,13 @@ Sent tx: {"hash":"0x3cb5a5fac18e889457905351c9950108873a8f0789fe83e8a733b8367f49
 Tx receipt: {"transactionHash":"0x3cb5a5fac18e889457905351c9950108873a8f0789fe83e8a733b8367f49a67a","transactionIndex":"0x3d","blockHash":"0xa2787f5ec22d491588a8ffc6e7cec3ed97fccac4845e448650d02fce672a657c","blockNumber":"0x3a7608","from":"0xe33fef60722ba79989aeaa1b6e6daf7f351c0fbb","to":"0xaed01c776d98303ee080d25a21f0a42d94a86d9c","cumulativeGasUsed":"0x406e87","gasUsed":"0x5208","contractAddress":null,"logs":[],"status":"0x1","logsBloom":"0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","type":"0x0","effectiveGasPrice":"0x3cc"}
 ```
 
-In the above transaction receipt, the transaction type shows `"type":"0x0"` indicating that this was a legacy transaction. Next, we will send an EIP-1559 transaction, which is of the type `"type":"0x2"`. See below.
+In the above transaction receipt, the transaction type shows `"type":"0x0"` indicating that this was a legacy transaction. Next, we will send an EIP-1559 transaction, which is of the type `"type":"0x2"`.
 
 ## Send an EIP-1559 transaction
 
 ### 1. Modify the main code
 
-To send an EIP-1559 transaction, i.e., of the `"type":"0x2"` you must use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the below code.
+To send an EIP-1559 transaction, i.e., of the `"type":"0x2"` you must use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the following code.
 
 ```rust showLineNumbers
 use ethers::{
