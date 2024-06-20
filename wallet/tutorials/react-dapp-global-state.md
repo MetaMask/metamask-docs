@@ -565,6 +565,7 @@ With `WalletProvider.tsx` and `useWalletProvider.tsx`, the dapp can manage and a
 state and functionality across various components.
 You can now wrap the entire dapp (the part that requires wallet connection and data) with a
 `WalletProvider` component.
+
 Replace the code in `src/App.tsx` with the following:
 
 ```tsx title="App.tsx"
@@ -670,9 +671,9 @@ export const SelectedWallet = () => {
 ```
 
 The code in lines 11-22 have conditional rendering, ensuring that the content inside is only
-displayed if `selectedAccount` is true. 
-This ensures that detailed information about the selected wallet is only displayed when an active
-wallet is connected. 
+displayed if `selectedAccount` is true. This ensures that detailed information about the selected wallet is only displayed when an active
+wallet is connected.  
+
 You can display information about the wallet, and conditionally render anything related to the following:
 
 - Wallet address
