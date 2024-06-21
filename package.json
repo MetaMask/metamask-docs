@@ -41,6 +41,8 @@
     "@rjsf/validator-ajv8": "^5.18.4",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
+    "dotenv": "^16.4.5",
+    "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.0",

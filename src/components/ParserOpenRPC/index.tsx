@@ -18,6 +18,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [reqResult, setReqResult] = useState(null)
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -62,6 +63,18 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setMetamaskInstalled(installed);
   }, []);
 
+  const onSubmitRequestHandle = async () => {
+    try {
+      const response = await (window as any).ethereum.request({
+        method: method,
+        params: []
+      })
+      setReqResult(response);
+    } catch (e) {
+      setReqResult(e);
+    };
+  };
+
   return (
     <div className={global.rowWrap}>
       <div className={global.colLeft}>
@@ -92,9 +105,10 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           <RequestBox
             isMetamaskInstalled={metamaskInstalled}
             method={method}
-            params={[]}
-            response={"0x"}
+            params={currentMethodData.params}
+            response={reqResult}
             openModal={openModal}
+            submitRequest={onSubmitRequestHandle}
           />
         </div>
       </div>

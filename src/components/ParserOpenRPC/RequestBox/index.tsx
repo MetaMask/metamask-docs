@@ -12,20 +12,17 @@ interface RequestBoxProps {
   params: MethodParam[];
   response?: any;
   openModal: () => void;
+  submitRequest: () => void;
 }
 
-export default function RequestBox({ isMetamaskInstalled, method, params, response, openModal }: RequestBoxProps) {
+export default function RequestBox({ isMetamaskInstalled, method, params, response, openModal, submitRequest }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
     return `await window.ethereum.request({\n "method": "${method}",\n "params": [${params}],\n});`;
   }, [method, params]);
 
   const exampleResponse = useMemo(() => {
-    const ex = {
-      "jsonrpc": "2.0",
-      "id": 1,
-      "result": `${response}`,
-    };
-    return JSON.stringify(ex, null, 2);
+    if (!response || response === null) return false
+    return JSON.stringify(response, null, 2);
   }, [response]);
 
   return (
@@ -40,28 +37,36 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
           </CodeBlock>
         </div>
         <div className={styles.cardFooter}>
+          {params.length > 0 && (
+            <button
+              className={clsx(global.linkBtn, "margin-right--md")}
+              disabled={!isMetamaskInstalled}
+              onClick={openModal}
+            >
+              Customize request
+            </button>
+          )}
           <button
-            className={clsx(global.linkBtn, "margin-right--md")}
+            className={global.primaryBtn}
             disabled={!isMetamaskInstalled}
-            onClick={openModal}
+            onClick={submitRequest}
           >
-            Customize request
-          </button>
-          <button className={global.primaryBtn} disabled={!isMetamaskInstalled}>
             Run request
           </button>
         </div>
       </div>
-      <div className={styles.cardWrapper}>
-        <div className={styles.cardHeader}>
-          <strong className={styles.cardHeading}>Response</strong>
+      {response !== null && (
+        <div className={styles.cardWrapper}>
+          <div className={styles.cardHeader}>
+            <strong className={styles.cardHeading}>Response</strong>
+          </div>
+          <div>
+            <CodeBlock language="javascript" className="margin-bottom--none">
+              {exampleResponse}
+            </CodeBlock>
+          </div>
         </div>
-        <div>
-          <CodeBlock language="javascript" className="margin-bottom--none">
-            {exampleResponse}
-          </CodeBlock>
-        </div>
-      </div>
+      )}
     </>
   );
 }
