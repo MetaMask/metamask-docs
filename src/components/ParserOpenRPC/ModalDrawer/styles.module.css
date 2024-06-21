@@ -54,5 +54,5 @@
 
 .modalContent {
   height: 394px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }

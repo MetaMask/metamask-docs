@@ -15,9 +15,10 @@ interface InteractiveBoxProps {
   params: MethodParam[];
   components: SchemaComponents;
   examples: MethodExample[];
+  onParamChange: (data) => void;
 }
 
-export default function InteractiveBox({ params, components, examples }: InteractiveBoxProps) {
+export default function InteractiveBox({ params, components, examples, onParamChange }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
@@ -68,8 +69,13 @@ export default function InteractiveBox({ params, components, examples }: Interac
     dereferenceSchema();
     if (examples) {
       setDefaultFormData(defaultExampleFormData);
+      onParamChange(defaultExampleFormData);
     }
   }, []);
+
+  const onChangeHandler = (data) => {
+    onParamChange(data);
+  };
 
   return parsedSchema ? (
     <>
@@ -88,7 +94,10 @@ export default function InteractiveBox({ params, components, examples }: Interac
         validator={validator}
         liveValidate
         noHtml5Validate
-        onChange={log("changed")}
+        onChange={(data) => {
+          onChangeHandler(data.formData);
+          setDefaultFormData(data.formData);
+        }}
         onSubmit={() => {log("submitted");}}
         onError={log("errors")}
         templates={{
