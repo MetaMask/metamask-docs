@@ -26,7 +26,7 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - The [MetaMask extension](https://metamask.io/download) installed
-- Basic knowledge of JavaScript and React
+- Basic knowledge of TypeScript and React
 
 ## Steps
 
@@ -35,13 +35,13 @@ You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-r
 Set up a new project using Vite, React, and TypeScript by running the following command:
 
 ```bash
-npm create vite@latest mm-dapp-react -- --template react-ts
+npm create vite@latest vite-react-local-state -- --template react-ts
 ```
 
 Install the node module dependencies:
 
 ```bash
-cd mm-dapp-react && npm install
+cd vite-react-local-state && npm install
 ```
 
 Launch the development server:
@@ -53,8 +53,9 @@ npm run dev
 This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note
-If the development server has been stopped, you can re-run your project using the `npx vite` or
-`npm run dev` command.
+If you use VS Code, you can run the command `code .` to open the project.
+If the development server has stopped, you can run the command `npx vite` or `npm run dev` to
+restart your project.
 :::
 
 Open the project in your editor.
@@ -76,7 +77,7 @@ export default App
 
 ### 2. Import EIP-6963 interfaces
 
-Your dapp will connect to MetaMask using the mechanism introduced by
+The dapp will connect to MetaMask using the mechanism introduced by
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
 
 :::info Why EIP-6963?
@@ -94,7 +95,7 @@ needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
 ```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
-// Describes metadata related to a provider according to EIP-6963.
+// Describes metadata related to a provider based on EIP-6963.
 interface EIP6963ProviderInfo {
   walletId: string
   uuid: string
@@ -102,7 +103,7 @@ interface EIP6963ProviderInfo {
   icon: string
 }
 
-// Represents the structure of an Ethereum provider based on the EIP-1193 standard.
+// Represents the structure of a provider based on EIP-1193.
 interface EIP1193Provider {
   isStatus?: boolean
   host?: string
@@ -425,7 +426,7 @@ providers using EIP-6963, and managing the state in React locally.
 You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
-This follow-up tutorial walks you through adding more than one component and working with global state.
+This follow-up tutorial walks you through adding multiple components that use a global state.
 You'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
-globally and ensure that any component in your dapp can be aware and conditionally render or display
-information about your MetaMask wallet.
+globally and move away from using the `useSyncExternalStore`.
+This is a more realistic (but also more complex) approach for building a real-world dapp.
