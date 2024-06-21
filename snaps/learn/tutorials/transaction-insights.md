@@ -203,7 +203,7 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 }
 ```
 
-### 6. Next steps
+## Next steps
 
 The initial project has generic names in multiple places.
 You can update the fields in `snap.manifest.json` to match your custom Snap:
