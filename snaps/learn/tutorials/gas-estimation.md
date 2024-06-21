@@ -150,7 +150,7 @@ Open `packages/snap/src/index.ts`.
 This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
-If it not already present, add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
+Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
@@ -235,29 +235,12 @@ To build and test your Snap:
 
 You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
-## Troubleshoot
+### 6. Next steps
 
-If you click the **Send message** button and receive an error message similar to the following, update `packages/site/src/pages/index.tsx`:
-
-<p align="center">
-<img src="https://github.com/MetaMask/metamask-docs/assets/5465932/a22481a0-30d5-4efd-8cc5-c42db70f7eb1" alt="An error happened" width="400px" style={{border: '1px solid #DCDCDC'}} />
-</p>
-
-Replace `await invokeSnap({ method: 'hello' })` on line 114 of `packages/site/src/pages/index.tsx` with the following code:
-```typescript title="index.tsx"
-  await invokeSnap({ method: 'hello', params: {} });
-```
-This ensures the `invokeSnap` function calls an additional `params` property.
-
-The **Send message** button on the page should now be enabled.
-
-## Next steps
-
-This tutorial walked you through creating a Snap to estimate gas fees using the `fetch` API and display results in an alert.
-Next, you can try the following:
+Next, you can try:
 
 - Parsing the JSON response from the remote API.
-- Displaying the fees in a clear and well-structured format.
+- Displaying the fees in a nicely formatted way.
 
 You can also update the fields in `snap.manifest.json` to match your custom Snap:
 
