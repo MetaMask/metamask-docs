@@ -240,7 +240,7 @@ You have integrated a public API into MetaMask and displayed real-time gas fee e
 If you click the **Send message** button and receive an error message similar to the following, update `packages/site/src/pages/index.tsx`:
 
 <p align="center">
-<img src={require('../../assets/snaps-error-gas-estimation.png').default}" alt="Button error for gas estimation" width="400px" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/snaps-error-gas-estimation.png').default} alt="Button error for gas estimation" width="800px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 Replace `await invokeSnap({ method: 'hello' })` on line 114 of `packages/site/src/pages/index.tsx` with the following code:
