@@ -8,7 +8,7 @@ In this tutorial, you'll send a regular transaction from one account to another 
 
 ## Prerequisites
 
-- A [Web3 project](../../../get-started/infura.md) on Infura
+- A [Web3 project](../../../../../developer-tools/dashboard/get-started/create-api/) on Infura
 - [Node.js installed](https://nodejs.org/en/download/)
 - An Ethereum account for testing purposes
 
@@ -46,7 +46,7 @@ Install the `web3` and `dotenv` packages in the project directory.
 
 :::info
 
-The [`dotenv`](../../developer-tools/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
+The [`dotenv`](../../../how-to/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
 
 :::
 

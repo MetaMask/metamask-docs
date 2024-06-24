@@ -42,67 +42,67 @@ const LOGO_PATH = "/img/logos";
 export const NETWORK_LINKS = [
   {
     name: "Arbitrum",
-    href: "/api/networks/arbitrum",
+    href: "/services/reference/arbitrum",
     logo: `${LOGO_PATH}/logo-arbitrum.svg`,
   },
   {
     name: "Avalanche",
-    href: "/api/networks/avalanche-c-chain",
+    href: "/services/reference/avalanche-c-chain",
     logo: `${LOGO_PATH}/logo-avalanche.svg`,
   },
   {
     name: "Base",
-    href: "/api/networks/base",
+    href: "/services/reference/base",
     logo: `${LOGO_PATH}/logo-base.svg`,
   },
   {
     name: "Blast",
-    href: "/api/networks/blast",
+    href: "/services/reference/blast",
     logo: `${LOGO_PATH}/logo-blast.svg`,
   },
   {
     name: "Celo",
-    href: "/api/networks/celo",
+    href: "/services/reference/celo",
     logo: `${LOGO_PATH}/logo-celo.svg`,
   },
   {
     name: "IPFS",
-    href: "/api/networks/ipfs",
+    href: "/services/reference/ipfs",
     logo: `${LOGO_PATH}/logo-ipfs.svg`,
   },
   {
     name: "Ethereum",
-    href: "/api/networks/ethereum",
+    href: "/services/reference/ethereum",
     logo: `${LOGO_PATH}/logo-eth.svg`,
   },
   {
     name: "Linea",
-    href: "/api/networks/linea",
+    href: "/services/reference/linea",
     logo: `${LOGO_PATH}/logo-linea.svg`,
   },
   {
     name: "Mantle",
-    href: "/api/networks/mantle",
+    href: "/services/reference/mantle",
     logo: `${LOGO_PATH}/logo-mantle.svg`,
   },
   {
     name: "Optimism",
-    href: "/api/networks/optimism",
+    href: "/services/reference/optimism",
     logo: `${LOGO_PATH}/logo-opt.svg`,
   },
   {
     name: "Palm",
-    href: "/api/networks/palm",
+    href: "/services/reference/palm",
     logo: `${LOGO_PATH}/logo-palm.svg`,
   },
   {
     name: "Polygon",
-    href: "/api/networks/polygon-pos",
+    href: "/services/reference/polygon-pos",
     logo: `${LOGO_PATH}/logo-polygon.svg`,
   },
   {
     name: "Starknet",
-    href: "/api/networks/starknet",
+    href: "/services/reference/starknet",
     logo: `${LOGO_PATH}/logo-starknet.svg`,
   },
 ];

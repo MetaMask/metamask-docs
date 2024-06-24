@@ -4,8 +4,8 @@ sidebar_position: 1
 ---
 
 import CodeTerminal from '@site/src/components/CodeTerminal/CodeTerminal.jsx';
-import SectionAPIs from '@site/src/components/sections/SectionAPIs.jsx';
-import SectionNetworks from '@site/src/components/sections/SectionNetworks.jsx';
+import SectionAPIs from '@site/src/components/Sections/SectionAPIs.jsx';
+import SectionNetworks from '@site/src/components/Sections/SectionNetworks.jsx';
 
 # Power your dapp using services
 
@@ -38,3 +38,10 @@ include:
 <meta httpEquiv="expires" content="0" />
 <meta httpEquiv="pragma" content="no-cache" />
 </head>
+
+## Browse by network
+
+Click below to explore the supported networks.
+
+<SectionNetworks />
+

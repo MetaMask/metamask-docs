@@ -4,6 +4,7 @@ description: Use Caddy to set up a reverse proxy.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import SectionNetworks from '@site/src/components/Sections/SectionNetworks.jsx';
 
 # Set up a simple reverse proxy
 
