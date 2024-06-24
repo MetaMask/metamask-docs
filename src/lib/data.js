@@ -2,33 +2,33 @@ export const API_LINKS = {
   blockchain: [
     {
       name: "Make requests",
-      href: "/api/networks/ethereum/how-to/make-requests",
+      href: "/services/how-to/make-batch-requests",
     },
     {
       name: "Send a transaction",
-      href: "/tutorials/ethereum/send-a-transaction",
+      href: "/services/how-to/send-a-transaction",
     },
     {
       name: "Debug and optimize transactions",
-      href: "/api/networks/ethereum/how-to/trace-transactions",
+      href: "/services/how-to/trace-transactions",
     },
     {
       name: "Subscribe to events",
-      href: "/api/networks/ethereum/how-to/subscribe-to-events",
+      href: "/services/how-to/subscribe-to-events",
     },
     {
       name: "Explore all methods",
-      href: "/api/networks/ethereum/json-rpc-methods",
+      href: "/service/index",
     },
   ],
   storage: [
     {
       name: "Make requests",
-      href: "/api/networks/ipfs/how-to/make-requests",
+      href: "/services/how-to/use-ipfs/how-to/request-rate-limits",
     },
     {
       name: "Manage files",
-      href: "/api/networks/ipfs/how-to/manage-files",
+      href: "/services/how-to/use-ipfs/manage-files",
     },
     {
       name: "Explore all methods",
