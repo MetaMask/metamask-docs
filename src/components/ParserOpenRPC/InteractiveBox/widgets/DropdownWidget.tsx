@@ -18,6 +18,7 @@ export const DropdownWidget = ({ name, value, onChange, schema, options }: Widge
             <span className={styles.dropdown} onClick={() => { setIsOpened(!isOpened); }}>
               {schema.type}
               <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
+              <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
             </span>
             <ul className={clsx(styles.dropdownList, !isOpened && styles.dropdownListClosed)}>
               {options.enumOptions.map(({ value }, index) => (
