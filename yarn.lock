@@ -216,6 +216,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@apidevtools/json-schema-ref-parser@npm:^11.6.4":
+  version: 11.6.4
+  resolution: "@apidevtools/json-schema-ref-parser@npm:11.6.4"
+  dependencies:
+    "@jsdevtools/ono": ^7.1.3
+    "@types/json-schema": ^7.0.15
+    js-yaml: ^4.1.0
+  checksum: ac01bb318dff541ec238322b7cf60210174f0b4ddc540ee7a9bbb997ca3594ba45fb288bb6e4a6bf70f56b26850c904225405f6b9d631838f0c1a5f06ea240f1
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.16.0, @babel/code-frame@npm:^7.24.7, @babel/code-frame@npm:^7.8.3":
   version: 7.24.7
   resolution: "@babel/code-frame@npm:7.24.7"
@@ -2478,6 +2489,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jsdevtools/ono@npm:^7.1.3":
+  version: 7.1.3
+  resolution: "@jsdevtools/ono@npm:7.1.3"
+  checksum: 2297fcd472ba810bffe8519d2249171132844c7174f3a16634f9260761c8c78bc0428a4190b5b6d72d45673c13918ab9844d706c3ed4ef8f62ab11a2627a08ad
+  languageName: node
+  linkType: hard
+
 "@json-schema-spec/json-pointer@npm:^0.1.2":
   version: 0.1.2
   resolution: "@json-schema-spec/json-pointer@npm:0.1.2"
@@ -3042,7 +3060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rjsf/core@npm:^5.6.2":
+"@rjsf/core@npm:^5.18.4, @rjsf/core@npm:^5.6.2":
   version: 5.18.4
   resolution: "@rjsf/core@npm:5.18.4"
   dependencies:
@@ -3058,7 +3076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rjsf/utils@npm:^5.6.2":
+"@rjsf/utils@npm:^5.18.4, @rjsf/utils@npm:^5.6.2":
   version: 5.18.4
   resolution: "@rjsf/utils@npm:5.18.4"
   dependencies:
@@ -3073,7 +3091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rjsf/validator-ajv8@npm:^5.6.2":
+"@rjsf/validator-ajv8@npm:^5.18.4, @rjsf/validator-ajv8@npm:^5.6.2":
   version: 5.18.4
   resolution: "@rjsf/validator-ajv8@npm:5.18.4"
   dependencies:
@@ -3904,7 +3922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.4, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.7, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.15, @types/json-schema@npm:^7.0.4, @types/json-schema@npm:^7.0.5, @types/json-schema@npm:^7.0.7, @types/json-schema@npm:^7.0.8, @types/json-schema@npm:^7.0.9":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 97ed0cb44d4070aecea772b7b2e2ed971e10c81ec87dd4ecc160322ffa55ff330dace1793489540e3e318d90942064bb697cc0f8989391797792d919737b3b98
@@ -12386,6 +12404,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "metamask-docs@workspace:."
   dependencies:
+    "@apidevtools/json-schema-ref-parser": ^11.6.4
     "@docusaurus/core": ^3.0.0
     "@docusaurus/eslint-plugin": ^3.0.0
     "@docusaurus/module-type-aliases": ^3.4.0
@@ -12399,6 +12418,9 @@ __metadata:
     "@mdx-js/react": ^3.0.0
     "@metamask/design-tokens": ^1.11.1
     "@metamask/docusaurus-openrpc": ^0.4.1
+    "@rjsf/core": ^5.18.4
+    "@rjsf/utils": ^5.18.4
+    "@rjsf/validator-ajv8": ^5.18.4
     "@tsconfig/docusaurus": ^1.0.5
     "@typescript-eslint/parser": ^7.12.0
     clsx: ^1.2.1
@@ -12406,12 +12428,14 @@ __metadata:
     dotenv: ^16.4.5
     eslint-plugin-react: ^7.34.2
     launchdarkly-js-client-sdk: ^3.3.0
+    lodash.debounce: ^4.0.8
     node-polyfill-webpack-plugin: ^2.0.1
     prettier: ^3.0.0
     prism-react-renderer: ^2.1.0
     react: ^18.0.0
     react-dom: ^18.0.0
     react-player: ^2.13.0
+    react-tippy: ^1.4.0
     remark-codesandbox: ^0.10.1
     remark-docusaurus-tabs: ^0.2.0
     stylelint: "^15.0.0 "
@@ -14644,6 +14668,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"popper.js@npm:^1.11.1":
+  version: 1.16.1
+  resolution: "popper.js@npm:1.16.1"
+  checksum: c56ae5001ec50a77ee297a8061a0221d99d25c7348d2e6bcd3e45a0d0f32a1fd81bca29d46cb0d4bdf13efb77685bd6a0ce93f9eb3c608311a461f945fffedbe
+  languageName: node
+  linkType: hard
+
 "possible-typed-array-names@npm:^1.0.0":
   version: 1.0.0
   resolution: "possible-typed-array-names@npm:1.0.0"
@@ -15720,6 +15751,15 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: c082b48f30f8ba8d0c55ed1d761910630860077c7ff5793c4c912adcb5760df06436ed0ad62be0de28113aac9ad2af55eccd995f8eee98df53382e4ced2072fb
+  languageName: node
+  linkType: hard
+
+"react-tippy@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "react-tippy@npm:1.4.0"
+  dependencies:
+    popper.js: ^1.11.1
+  checksum: cbe3863ed896601a8dfd8068fb3220e8ffc95b83f63b13c19d1a46fe04e485043f9d2c52f6fcc85d55ab4616ff30e04e1952be8b30f8c70cd75dca68ee6f85ca
   languageName: node
   linkType: hard
 

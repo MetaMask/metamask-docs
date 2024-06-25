@@ -24,7 +24,7 @@ export const ModalDrawer = ({ title, isOpen, onClose, children }: ModalDrawerPro
         <span className={styles.modalTitle}>{title}</span>
         <button className={styles.modalCloseBtn} onClick={onClose}>&times;</button>
       </div>
-      <div>
+      <div className={styles.modalContent}>
         {children}
       </div>
     </div>

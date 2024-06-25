@@ -1,7 +1,6 @@
 .modalContainer {
   max-width: 792px;
   width: 100%;
-  background-color: #24272A;
   border: 1px solid #848C96;
   border-radius: 8px 8px 0 0;
   position: fixed;
@@ -31,7 +30,6 @@
   justify-content: space-between;
   min-height: 56px;
   background-color: #24272A;
-  border-bottom: 1px solid #848C96;
 }
 
 .modalHeaderLight {
@@ -54,3 +52,7 @@
   cursor: pointer;
 }
 
+.modalContent {
+  height: 394px;
+  overflow-y: auto;
+}

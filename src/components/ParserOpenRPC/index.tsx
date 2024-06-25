@@ -18,7 +18,8 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [reqResult, setReqResult] = useState(null)
+  const [reqResult, setReqResult] = useState(null);
+  const [paramsData, setParamsData] = useState([]);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -50,6 +51,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
+      examples: currentMethod?.examples,
       errors,
       tags,
     };
@@ -62,11 +64,18 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setMetamaskInstalled(installed);
   }, []);
 
+  const onParamsChangeHandle = (data) => {
+    if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
+      setParamsData([]);
+    }
+    setParamsData(Object.values(data));
+  }
+
   const onSubmitRequestHandle = async () => {
     try {
       const response = await (window as any).ethereum.request({
         method: method,
-        params: []
+        params: paramsData
       })
       setReqResult(response);
     } catch (e) {
@@ -92,9 +101,10 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           onClose={closeModal}
         >
           <InteractiveBox
-            method={method}
             params={currentMethodData.params}
             components={currentMethodData.components.schemas}
+            examples={currentMethodData.examples}
+            onParamChange={onParamsChangeHandle}
           />
         </ModalDrawer>
       </div>
@@ -104,7 +114,8 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           <RequestBox
             isMetamaskInstalled={metamaskInstalled}
             method={method}
-            params={[]}
+            params={currentMethodData.params}
+            paramsData={paramsData}
             response={reqResult}
             openModal={openModal}
             submitRequest={onSubmitRequestHandle}
