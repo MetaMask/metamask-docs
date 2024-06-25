@@ -26,7 +26,7 @@ Select one of the cards below to learn more about using the Infura dashboard.
       description: "Learn how to create an API key that allows you to make API calls."
     },
     {
-      href: "how-to/secure-an-api",
+      href: "how-to/secure-an-api/api-key",
       title: "Secure your API key",
       description: "Learn how to secure your API key to avoid unwanted costs and unauthorized access."
     },

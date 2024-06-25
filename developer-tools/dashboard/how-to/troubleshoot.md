@@ -28,4 +28,4 @@ a paid tier, which allows you to create ten API keys.
 If you've lost access to your two-factor authentication (2FA) device, you can recover access to your account using the backup
 code provided back when you initially set up 2FA on your Infura account.
 
-For more information, see the [2FA documentation](https://docs.infura.io/dashboard/two-factor-authentication#enable-2fa-on-your-account).
+For more information, see the [2FA documentation](two-factor-authentication.md#enable-2fa-on-your-account).

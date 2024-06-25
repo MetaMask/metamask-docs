@@ -212,7 +212,7 @@ The ERC-1155 contract returns an HTTP URL , which you can directly enter into a 
 
 #### Access IPFS
 
-In your Infura account, create a new IPFS project. [Enable your dedicated gateways](../../network-apis/ipfs/how-to/access-ipfs-content/dedicated-gateways.md), and you can access IPFS using your unique subdomain.
+In your Infura account, create a new IPFS project. [Enable your dedicated gateways](../../how-to/use-ipfs/access-ipfs-content/dedicated-gateways.md), and you can access IPFS using your unique subdomain.
 
 In the script, add a function to combine the IPFS hash and your Infura subdomain endpoint:
 

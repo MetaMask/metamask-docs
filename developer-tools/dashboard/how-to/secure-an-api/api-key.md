@@ -34,7 +34,7 @@ secure your Infura API key:
     forums. This is equivalent to giving away your password.
 
 * **Use environment variables.** When developing locally or deploying your application, store your
-    [API key in environment variables](../../tutorials/developer-tools/javascript-dotenv.md) instead of hardcoding it into
+    [API key in environment variables](../../../../../services/how-to/javascript-dotenv) instead of hardcoding it into
     your application. This prevents the API key from being exposed in your codebase.
 
 * **Limit usage.** Infura allows you to [set daily request limits on your API key](set-rate-limits.md). Setting a limit can
