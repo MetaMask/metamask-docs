@@ -8,8 +8,8 @@ Returns the the current proposer's address.
 :::info For Growth and Custom service plans
 
 This JSON-RPC method allows a request to be forwarded to a partner service provider if Infura should
-experience a service issue or outage. See [Failover protection](../concepts/failover-protection.md)
-and [Enable API request forwarding](../how-to/failover-protection-imp-polygon.md)
+experience a service issue or outage. See [Failover protection](../../../concepts/failover-protection.md)
+and [Enable API request forwarding](../../../how-to/enable-api-forwarding.md)
 for complete details.
 
 If you would like failover protection but don't qualify under your current plan, then either
