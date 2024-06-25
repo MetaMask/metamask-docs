@@ -396,4 +396,16 @@ h4 {
   flex-shrink: 0;
   border: 1px solid #d3d3d3; /* This adds a border */
   margin-bottom: 1em; /* This adds space after the image */
+
+pre {
+  max-width: 500px;
 }
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-group {
+  position: relative;

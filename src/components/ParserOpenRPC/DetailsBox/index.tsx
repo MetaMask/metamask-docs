@@ -31,7 +31,10 @@ export default function DetailsBox({ method, description, params, components, re
       )}
       <Heading as="h1">{method}</Heading>
       <MDContent content={description} />
-      <Heading as="h2" className={clsx(styles.secondaryHeading, "padding-vert--md")}>
+      <Heading
+        as="h2"
+        className={clsx(styles.secondaryHeading, "padding-top--lg padding-bottom--md")}
+      >
         Parameters
       </Heading>
       {params.length === 0 ? (
@@ -41,7 +44,10 @@ export default function DetailsBox({ method, description, params, components, re
           {params && renderParamSchemas(params, components)}
         </>
       )}
-      <Heading as="h2" className={clsx(styles.secondaryHeading, styles.borderBottomLine, "padding-vert--md")}>
+      <Heading
+        as="h2"
+        className={clsx(styles.secondaryHeading, styles.borderBottomLine, "padding-top--lg padding-vert--md")}
+      >
         Returns
       </Heading>
       {result?.description && (

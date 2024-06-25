@@ -1,40 +1,21 @@
-module.exports = function () {
-  const { LD_CLIENT_ID } = process.env;
+import * as path from "path";
+
+const LDPlugin = () => {
   return {
     name: "docusaurus-plugin-launchdarkly",
-    injectHtmlTags() {
+    getClientModules() {
+      return [path.resolve(__dirname, "./ldClient")];
+    },
+    configureWebpack() {
       return {
-        headTags: [
-          {
-            tagName: "script",
-            attributes: {
-              src: "/js/ldclient.min.js",
-            },
+        resolve: {
+          alias: {
+            launchdarkly: path.resolve(__dirname, "./ldClient.ts"),
           },
-          {
-            tagName: "script",
-            innerHTML: `
-              const context = {
-                kind: 'user',
-                anonymous: true,
-                key: "ld-anonymous-user-key"
-              };
-              var options = {
-                allAttributesPrivate: true,
-                bootstrap: "localStorage",
-              };
-              window.ldclient = LDClient.initialize("${LD_CLIENT_ID}", context, options);
-              window.ldclient?.on('ready', function() {
-                var user = {
-                  anonymous: true,
-                  key: "ld-anonymous-user-key"
-                };
-                ldclient.identify(user);
-              });
-            `,
-          },
-        ],
+        },
       };
     },
   };
 };
+
+export default LDPlugin

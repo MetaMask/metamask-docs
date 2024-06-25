@@ -3,11 +3,14 @@ name: Build and lint
 on:
   workflow_call:
   secrets:
-      SEGMENT_ANALYTICS_KEY:
-        required: true
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
 
 jobs:
   build:
@@ -22,6 +25,7 @@ jobs:
         uses: ConsenSys/docs-gha/build@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
 
   lint:
     name: Lint
@@ -30,7 +34,7 @@ jobs:
       - prepare
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Lint
         uses: ConsenSys/docs-gha/lint@main
         with:

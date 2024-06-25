@@ -11,20 +11,20 @@ interface RequestBoxProps {
   method: string;
   params: MethodParam[];
   response?: any;
+  paramsData: any;
+  openModal: () => void;
+  submitRequest: () => void;
 }
 
-export default function RequestBox({ isMetamaskInstalled, method, params, response }: RequestBoxProps) {
+export default function RequestBox({ isMetamaskInstalled, method, params, response, paramsData, openModal, submitRequest }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": [${params}],\n});`;
-  }, [method, params]);
+    const preparedParams = JSON.stringify(paramsData, null, 2);
+    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`;
+  }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    const ex = {
-      "jsonrpc": "2.0",
-      "id": 1,
-      "result": `${response}`,
-    };
-    return JSON.stringify(ex, null, 2);
+    if (!response || response === null) return false
+    return JSON.stringify(response, null, 2);
   }, [response]);
 
   return (
@@ -43,25 +43,32 @@ export default function RequestBox({ isMetamaskInstalled, method, params, respon
             <button
               className={clsx(global.linkBtn, "margin-right--md")}
               disabled={!isMetamaskInstalled}
+              onClick={openModal}
             >
               Customize request
             </button>
           )}
-          <button className={global.primaryBtn} disabled={!isMetamaskInstalled}>
+          <button
+            className={global.primaryBtn}
+            disabled={!isMetamaskInstalled}
+            onClick={submitRequest}
+          >
             Run request
           </button>
         </div>
       </div>
-      <div className={styles.cardWrapper}>
-        <div className={styles.cardHeader}>
-          <strong className={styles.cardHeading}>Response</strong>
+      {response !== null && (
+        <div className={styles.cardWrapper}>
+          <div className={styles.cardHeader}>
+            <strong className={styles.cardHeading}>Response</strong>
+          </div>
+          <div>
+            <CodeBlock language="javascript" className="margin-bottom--none">
+              {exampleResponse}
+            </CodeBlock>
+          </div>
         </div>
-        <div>
-          <CodeBlock language="javascript" className="margin-bottom--none">
-            {exampleResponse}
-          </CodeBlock>
-        </div>
-      </div>
+      )}
     </>
   );
 }

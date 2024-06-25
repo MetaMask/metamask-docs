@@ -11,4 +11,4 @@ tags:
 Use [MetaMask SDK](../../../concepts/sdk/index.md) with the following third-party libraries:
 
 - [Web3-Onboard](web3-onboard.md)
-- Wagmi (coming soon)
+- [Wagmi](wagmi.md)
