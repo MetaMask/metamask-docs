@@ -56,28 +56,29 @@
   line-height: 24px;
   font-size: 14px;
 }
-.tableColumnTypeErrorIcon {
+.tableColumnIcon {
   position: absolute;
   right: 13px;
   width: 11px;
   height: 11px;
+}
+.tableColumnIconError {
   background: url("/img/icons/error-icon.svg") no-repeat 50% 50%;
 }
-.chevronIcon {
-  position: absolute;
-  right: 13px;
-  width: 11px;
-  height: 11px;
-  background: url("/img/icons/chevron-icon.svg") no-repeat 50% 50%;
+.tableColumnIconRemove {
+  background: url("/img/icons/remove-icon.svg") no-repeat 50% 50%;
 }
-.chevronIcon:hover {
-  cursor: pointer;
+.chevronIcon {
+  background: url("/img/icons/chevron-icon.svg") no-repeat 50% 50%;
 }
 .chevronIconDown {
   transform: rotate(180deg);
 }
 .chevronIconRight {
   transform: rotate(90deg);
+}
+.chevronIcon:hover {
+  cursor: pointer;
 }
 .dropdown {
   display: flex;
@@ -136,6 +137,24 @@
 }
 .tableFooterRowLight {
   background-color: #F2F4F6;
+}
+.tableButton {
+  display: flex;
+  background: none;
+  border: none;
+}
+.tableButtonAddArrayItem {
+  margin-left: 16px;
+  padding: 8px 0;
+  color: rgba(16, 152, 252, 1);
+}
+.tableButtonAddArrayItemName {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.tableButton:hover {
+  cursor: pointer;
 }
 .formControl {
   width: 100%;

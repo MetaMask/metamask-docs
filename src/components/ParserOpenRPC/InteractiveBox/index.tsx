@@ -10,7 +10,7 @@ import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/Interactiv
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
-import {ArrayFieldTemplate} from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
+import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 
 interface InteractiveBoxProps {
   params: MethodParam[];
