@@ -16,7 +16,6 @@ interface ErrorsBoxProps {
 
 export default function ErrorsBox ({ errors }: ErrorsBoxProps) {
   const { colorMode } = useColorMode();
-  console.log("colorMode", colorMode);
   if (errors.length === 0) return null;
 
   return (
@@ -25,7 +24,7 @@ export default function ErrorsBox ({ errors }: ErrorsBoxProps) {
         Errors
       </Heading>
       <div className={styles.errWrapper}>
-        <div className={clsx(styles.errRowHeading, colorMode === "light" && styles.errRowHeadingLightView)}>
+        <div className={clsx(styles.errRowHeading, colorMode === "light" ? styles.errRowHeadingLightView : styles.errRowHeadingDarkView)}>
           <div className={styles.errColCode}>Code</div>
           <div className={styles.errColMsg}>Message</div>
         </div>
