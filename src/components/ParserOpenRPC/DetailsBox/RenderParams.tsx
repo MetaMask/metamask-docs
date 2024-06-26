@@ -30,11 +30,13 @@ const renderSchema = (schemaItem, schemas, name) => {
       />
       <div className="padding-bottom--md">
         <CollapseBox isInitCollapsed={!!name}>
-          {Object.entries(item.properties).map(([key, value]) => (
-            <div key={key} className={styles.paramItemWrapper}>
-              {renderSchema(value, schemas, key)}
-            </div>
-          ))}
+          <>
+            {Object.entries(item.properties).map(([key, value]) => (
+              <div key={key} className={styles.paramItemWrapper}>
+                {renderSchema(value, schemas, key)}
+              </div>
+            ))}
+          </>
         </CollapseBox>
       </div>
     </div>
@@ -99,19 +101,22 @@ const renderSchema = (schemaItem, schemas, name) => {
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, "anyOf");
 
   const renderEnum = (enumValues, title, description) => {
-    const getDescription = (item) => {
-      const regex = new RegExp(`\`${item}\`: ([^;]+)(;|$)`);
+    const getDescription = (item, title) => {
+      let regex = new RegExp(`\`${item}\`: ([^;]+)(;|$)`);
+      if (title === "subscriptionType") {
+        regex = new RegExp(`\`${item}\` - ([^.;]+)[.;]?`);
+      }
       const match = description.match(regex);
       return match ? match[1] : "";
     };
-    const blockEnum = title && description && title === "Block tag";
+    const blockEnum = title && description && (title === "Block tag" || title === "subscriptionType");
     return (
       <div className={styles.enumWrapper}>
         <div className="padding--md">Possible enum values</div>
         {enumValues.map((value, index) => (
           <div key={index} className={styles.enumItem}>
             <div className={styles.enumTitle}>{value}</div>
-            {blockEnum && <div style={{ paddingTop: "10px" }}><MDContent content={getDescription(value)} /></div>}
+            {blockEnum && <div style={{ paddingTop: "10px" }}><MDContent content={getDescription(value, title)} /></div>}
           </div>
         ))}
       </div>

@@ -7,6 +7,7 @@ import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { MethodExample, MethodParam, SchemaComponents } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
+import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
@@ -102,6 +103,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
         onError={log("errors")}
         templates={{
           BaseInputTemplate,
+          ArrayFieldTemplate,
           FieldErrorTemplate: () => null,
           ErrorListTemplate: () => null,
         }}
