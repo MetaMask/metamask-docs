@@ -259,11 +259,8 @@
 
 .arrayItemRowWrap {
   position: relative;
-}
-
-.arrayItemRow {
-  border-bottom: 1px dashed #848C96;
   padding-left: 40px;
+  border-bottom: 1px dashed #848C96;
 }
 
 .deleteIcon {

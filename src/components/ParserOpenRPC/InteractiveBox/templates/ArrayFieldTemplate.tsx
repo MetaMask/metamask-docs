@@ -44,9 +44,10 @@ export const ArrayFieldTemplate = ({
               ...el.children.props,
               isArray: true
             }
-            const { index, hasRemove, onDropIndexClick } = el;
+            const { index, hasRemove, onDropIndexClick, schema } = el;
+            const isNumber = schema.type === "number" || schema.type === "integer";
             return (
-              <div key={`${i}`} className={styles.arrayItemRowWrap}>
+              <div key={`${i}`} className={styles.arrayItemRowWrap} style={{ paddingRight: `${isNumber ? "25px" : "0"}` }}>
                 <span className={clsx(styles.addItemIcon, styles.arrayItemIcon)}>{i+1}</span>
                 <BaseInputTemplate {...props} />
                 {hasRemove && (
