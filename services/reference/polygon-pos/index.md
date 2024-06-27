@@ -6,6 +6,13 @@ import CardList from '@site/src/components/CardList'
 
 # Polygon PoS
 
+:::note Failover protection
+
+[Failover protection](../../concepts/failover-protection.md) is available on the Polygon network for customers on the Growth or Custom plans. 
+Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+
+:::
+
 The Polygon PoS network is a hybrid Plasma Proof of Stake side-chain to Ethereum. It's fully compatible with the Ethereum
 virtual machine (EVM) which allows developers to leverage Infura, MetaMask, and other tools they use for Ethereum when
 developing and deploying smart contracts to the Polygon network.
@@ -38,3 +45,21 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
     }
   ]}
 />
+
+## Partners and privacy policies
+
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
+For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
+
+Rivet.Cloud (Terms of Service, Privacy Policy) is Infura's failover-protection partner. While Rivet.Cloud supports most Infura methods, it does not yet support the following methods:
+
+- `eth_accounts`
+- `eth_coinbase`
+- `eth_getRootHash`
+- `eth_getUncleByBlockNumberAndIndex`
+- `eth_getWork`
+- `eth_hashrate`
+- `eth_mining`
+- `eth_sendTransaction`
+- `eth_sign`

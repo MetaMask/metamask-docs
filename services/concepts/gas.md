@@ -23,8 +23,7 @@ The Ethereum London hard fork update changed the blockchain’s transaction fee 
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559). This update changed the way users pay gas fees on the Ethereum
 network and other EVM chains.
 
-Before EIP-1559, users specified a gas price, which was the amount they were willing to pay for a transaction to be mined. The
-auction-style system meant gas prices often fluctuated wildly. After EIP-1559, this has been replaced by two new values:
+Before EIP-1559, users specified a gas price, which was the amount they were willing to pay for a transaction to be mined. The auction-style system meant gas prices often fluctuated wildly. After EIP-1559, this has been replaced by two new values:
 
 - Base fee: The minimum transaction fee for every transaction to be included in a block. This is calculated by the network
   and is affected by the number of transactions included in the previous block. The base fee gets burned, meaning

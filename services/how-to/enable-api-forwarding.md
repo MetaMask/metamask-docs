@@ -13,7 +13,7 @@ For JSON-RPC methods, you can request failover protection by adding the failover
 your API request using `cURL`, `Web3.js`, `Ethers.js`, or any other language of your choice.
 
 For more information about this feature, including our partner and their privacy information,
-see [Failover protection](../../../concepts/failover-protection.md).
+see [Failover protection](../concepts/failover-protection.md).
 
 :::info
 

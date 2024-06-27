@@ -1,9 +1,16 @@
 ---
 description: Avalanche C-Chain
 ---
+import CardList from '@site/src/components/CardList'
+
 # Avalanche (C-Chain)
 
-import CardList from '@site/src/components/CardList'
+:::note Failover protection
+
+Avalanche (C-Chain) [failover support](../../concepts/failover-protection.md) is available on Mainnet only.
+Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+
+:::
 
 Avalanche is a Proof of Stake (PoS), layer 1 platform that features 3 built-in blockchains: [Exchange Chain (X-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#exchange-chain-x-chain), [Platform Chain (P-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#platform-chain-p-chain), and [Contract Chain (C-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#contract-chain-c-chain). Infura provides access to the C-Chain only.
 
@@ -40,3 +47,11 @@ Select one of the following options to get started with the Avalanche C-Chain ne
     }
   ]}
 />
+
+## Partners and privacy policies
+
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
+For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
+
+Liquify (Privacy Policy) is Infura's failover-protection partner and currently offer failover support for all Infura's Avalanche (C-Chain) methods.
