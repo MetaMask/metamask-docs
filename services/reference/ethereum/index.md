@@ -1,5 +1,5 @@
 ---
-description: Ethereum network documentation
+description: Ethereum network information.
 ---
 
 import CardList from '@site/src/components/CardList'

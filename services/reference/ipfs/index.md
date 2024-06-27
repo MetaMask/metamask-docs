@@ -1,5 +1,5 @@
 ---
-description: IPFS documentation
+description: IPFS network information.
 ---
 
 import CardList from '@site/src/components/CardList'

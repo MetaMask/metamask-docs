@@ -1,5 +1,5 @@
 ---
-description: Base network documentation
+description: Base network documentation.
 ---
 
 import CardList from '@site/src/components/CardList'

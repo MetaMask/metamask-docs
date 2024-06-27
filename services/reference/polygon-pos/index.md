@@ -1,5 +1,5 @@
 ---
-description: Polygon network information
+description: Polygon network information.
 ---
 
 import CardList from '@site/src/components/CardList'

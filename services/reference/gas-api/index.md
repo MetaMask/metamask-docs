@@ -1,5 +1,5 @@
 ---
-description: Gas API documentation
+description: Gas API documentation.
 ---
 
 import CardList from '@site/src/components/CardList'

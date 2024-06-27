@@ -1,5 +1,5 @@
 ---
-description: Optimism network information
+description: Optimism network documentation. 
 ---
 
 import CardList from '@site/src/components/CardList'

@@ -1,5 +1,5 @@
 ---
-description: Avalanche C-Chain
+description: Avalanche (C-Chain) network documentation.
 ---
 import CardList from '@site/src/components/CardList'
 

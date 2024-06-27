@@ -1,5 +1,5 @@
 ---
-description: Palm network information
+description: Palm network information.
 ---
 
 import CardList from '@site/src/components/CardList'

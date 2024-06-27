@@ -1,5 +1,5 @@
 ---
-description: Linea network documentation
+description: Linea network documentation.
 ---
 
 import CardList from '@site/src/components/CardList'

@@ -1,5 +1,5 @@
 ---
-description: Starknet network information
+description: Starknet network information.
 ---
 
 import CardList from '@site/src/components/CardList'
