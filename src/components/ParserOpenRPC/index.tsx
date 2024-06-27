@@ -118,6 +118,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               components={currentMethodData.components.schemas}
               examples={currentMethodData.examples}
               onParamChange={onParamsChangeHandle}
+              drawerLabel={drawerLabel}
             />
           </ModalDrawer>
         </div>

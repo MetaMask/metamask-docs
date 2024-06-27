@@ -19,9 +19,10 @@ interface InteractiveBoxProps {
   components: SchemaComponents;
   examples: MethodExample[];
   onParamChange: (data) => void;
+  drawerLabel?: string | null
 }
 
-export default function InteractiveBox({ params, components, examples, onParamChange }: InteractiveBoxProps) {
+export default function InteractiveBox({ params, components, examples, onParamChange, drawerLabel }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
@@ -88,7 +89,28 @@ export default function InteractiveBox({ params, components, examples, onParamCh
     setDrawerLabel(null);
   }
 
+  const cloneAndSetNullIfExists = (obj, key) => {
+    if (typeof obj !== 'object' || obj === null) return obj;
+    const newObj = Array.isArray(obj) ? [] : {};
+    for (let prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        if (prop === key) {
+          newObj[prop] = [];
+        } else if (typeof obj[prop] === 'object' && obj[prop] !== null) {
+          newObj[prop] = cloneAndSetNullIfExists(obj[prop], key);
+        } else {
+          newObj[prop] = obj[prop];
+        }
+      }
+    }
+    return newObj;
+  }
+
   const handleCancelClick = () => {
+    if (drawerLabel && drawerLabel !== null) {
+      const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel);
+      setDefaultFormData(upData)
+    }
     closeComplexTypeView();
   }
 
