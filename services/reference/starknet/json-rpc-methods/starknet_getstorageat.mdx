@@ -1,0 +1,68 @@
+---
+title: "starknet_getStorageAt"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the value of the storage at the specified address and key.
+
+## Parameters
+
+- `contract_address`: (string) [*Required*] The address of the contract to read from.
+- `key`: (string) [*Required*] The key to the storage value for the specified contract.
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+
+## Returns
+
+The value at the specified address and key.
+Zero (0) is returned if no value is found.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getStorageAt",
+    "params": {
+      "contract_address": "0x04D88BeCbd1DC984ae04A96E77828E603c5244e68224903D92CA0a1Ff1C8e807",
+      "key": "0x21",
+      "block_id": {
+        "block_hash": "0x041b10c45dc3f39372f7b9409261cac9d880c5d75a5bb077d028db20b1bd76c4"
+      }
+    },
+    "id": 1
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": "0x0",
+  "id": 1
+}
+```
+
+</TabItem>
+</Tabs>

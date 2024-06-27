@@ -1,0 +1,90 @@
+---
+title: "starknet_addInvokeTransaction"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Submits a new invoke transaction.
+
+## Parameters
+
+`invoke_transaction`: [*Required*] An
+[invoke transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/#invoke_transaction)
+object to invoke an existing contract function on StarkNet.
+
+## Returns
+
+The result of the transaction submission, containing `transaction_hash`, the hash of the invoke transaction.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_addInvokeTransaction",
+    "params": {
+      "invoke_transaction": {
+        "type": "INVOKE",
+        "sender_address": "0x13e3ca9a377084c37dc7eacbd1d9f8c3e3733935bcbad887c32a0e213cd6fe0",
+        "calldata": [
+          "0x1",
+          "0x677bb1cdc050e8d63855e8743ab6e09179138def390676cc03c484daf112ba1",
+          "0x362398bec32bc0ebb411203221a35a0301193a96f317ebe5e40be9f60d15320",
+          "0x0",
+          "0x1",
+          "0x1",
+          "0x2b",
+          "0x0"
+        ],
+        "version": "0x3",
+        "signature": [
+          "3557065757165699682249469970267166698995647077461960906176449260016084767701",
+          "3202126414680946801789588986259466145787792017299869598314522555275920413944"
+        ],
+        "nonce": "0x7",
+        "resource_bounds": {
+          "l1_gas": "0x28ed6103d0000",
+          "l2_gas": "0x28ed6103d0000",
+        },
+        "tip": "0x0",
+        "paymaster_data": [],
+        "account_deployment_data": [],
+        "nonce_data_availability_mode": "L1",
+        "fee_data_availability_mode": "L1"
+      }
+    },
+    "id": 1
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "transaction_hash": "0x1ce0d76c0c085306fd32679b75f9541fab71851da8d3e3898a691b49ed8175c"
+  },
+  "id": 1
+}
+```
+
+</TabItem>
+</Tabs>

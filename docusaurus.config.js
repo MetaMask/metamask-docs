@@ -60,7 +60,6 @@ const config = {
           breadcrumbs: false,
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
-            require("remark-docusaurus-tabs"),
             [remarkCodesandbox, {
               mode: "iframe",
               autoDeploy: process.env.NODE_ENV === "production",
@@ -88,9 +87,6 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./snaps-sidebar.js"),
         breadcrumbs: false,
-        remarkPlugins: [
-          require("remark-docusaurus-tabs"),
-        ],
         admonitions: {
           keywords: [
             "info",
@@ -115,6 +111,17 @@ const config = {
         routeBasePath: "services",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./services-sidebar.js"),
+        breadcrumbs: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "dashboard",
+        path: "developer-tools/dashboard",
+        routeBasePath: "developer-tools/dashboard",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./dashboard-sidebar.js"),
         breadcrumbs: false,
       },
     ],
@@ -167,6 +174,16 @@ const config = {
           {
             to: "services",
             label: "Services",
+          },
+          {
+            type: "dropdown",
+            label: "Developer tools",
+            items: [
+              {
+                label: "Infura dashboard",
+                to: "developer-tools/dashboard",
+              },
+            ],
           },
           {
             to: "whats-new",

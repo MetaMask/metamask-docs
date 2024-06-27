@@ -1,0 +1,23 @@
+A transaction object, or null when no transaction was found. The transaction object will consist of the following keys and their values:
+
+- `accessList`: [_optional_] A list of addresses and storage keys accessed by the transaction. See [access list transactions](../../concepts/transaction-types.md#access-list-transactions).
+- `blockHash`: 32 bytes. A hash of the block including this transaction. `null` when it's pending.
+- `blockNumber`: The number of the block including this transaction. `null` when it's pending.
+- `chainID`: [_optional_] chain ID specifying the network. Returned only for [EIP-1559 transactions](../../concepts/transaction-types.md#eip-1559-transactions).
+- `from`: 20 bytes. The address of the sender.
+- `gas`: Gas provided by the sender.
+- `gasPrice`: Gas price provided by the sender in Wei.
+- `hash`: 32 bytes. The hash of the transaction.
+- `input`: The data sent along with the transaction.
+- `maxPriorityFeePerGas`: [_optional_] Maximum fee, in Wei, the sender is willing to pay per gas above the base fee. See [EIP-1559 transactions](../../concepts/transaction-types.md#eip-1559-transactions).
+- `maxFeePerGas`: [_optional_] Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas. See [EIP-1559 transactions](../../concepts/transaction-types.md#eip-1559-transactions).
+- `nonce`: The number of transactions made by the sender prior to this one.
+- `r`: 32 bytes. The ECDSA signature `r`.
+- `s`: 32 bytes. The ECDSA signature `s`.
+- `to`: 20 bytes. The address of the receiver. `null` when it's a contract creation transaction.
+- `transactionIndex`: The transaction's index position in the block, in hexadecimal. `null` when it's pending.
+- `type`: The [transaction type](../../concepts/transaction-types.md).
+- `v`: The ECDSA recovery ID.
+- `value`: The value transferred in Wei.
+- `yParity`: [_optional_] Parity (`0x0` for even, `0x1` for odd) of the y-value of a
+[`secp256k1`](https://eips.ethereum.org/EIPS/eip-2098#:~:text=A%20secp256k1%20signature%20is%20made%20up%20of%203%20parameters%2C%20r%2C%20s%20and%20yParity.) signature.
