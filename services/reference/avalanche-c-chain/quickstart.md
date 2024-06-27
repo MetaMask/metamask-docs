@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Aval
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Avalanche C-Chain networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Avalanche C-Chain network enabled.
 
 ## Make calls
 

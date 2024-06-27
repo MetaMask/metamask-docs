@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Palm
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Palm networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Palm network enabled.
   
 ## Make calls
 

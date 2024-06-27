@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Mant
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Mantle networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Mantle network enabled.
 
 ## Make calls
 

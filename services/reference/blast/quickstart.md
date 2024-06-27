@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Blas
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Blast networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Blast network enabled.
 
 ## Make calls
 

@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Star
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Starknet networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Starknet network enabled.
 
 ## Make calls
 
@@ -32,7 +32,7 @@ curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
 
 ### Node (JavaScript)
 
-In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
 
 #### Node Fetch
 
