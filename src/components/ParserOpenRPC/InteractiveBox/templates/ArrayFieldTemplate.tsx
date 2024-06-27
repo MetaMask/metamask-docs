@@ -38,7 +38,9 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
                   clsx(
                     styles.tableColumnIcon,
                     styles.chevronIcon,
-                    isSimpleArray && collapsed ? styles.chevronIconDown : styles.chevronIconRight
+                    isSimpleArray ?
+                      collapsed && styles.chevronIconDown :
+                      styles.chevronIconRight
                   )
                 }/>
               </span>
