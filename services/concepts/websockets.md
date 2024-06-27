@@ -33,7 +33,7 @@ subscription types are available using the [`eth_subscribe`](../reference/ethere
 
 :::info
 
-For information about how to use the subscription methods to subscribe to events, see the [`eth_subscribe`](../network-apis/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) JSON-RPC method, or see the following tutorials:
+For information about how to use the subscription methods to subscribe to events, see the [`eth_subscribe`](../reference/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) JSON-RPC method, or see the following tutorials:
 
 - [Track ERC-20 token transfers](../tutorials/ethereum/track-erc-20-token-transfers.md)
 - [Subscribe to pending transactions on Ethereum](../tutorials/ethereum/subscribe-to-pending-transactions.md)

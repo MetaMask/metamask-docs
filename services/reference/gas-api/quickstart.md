@@ -82,7 +82,7 @@ Copy the following code into your script:
 
 :::info note
 If using a network other than Ethereum Mainnet, update the `chainId` value (`1`) in the code to an
-alternate [supported network](supported-networks.md).
+alternate [supported network](../../get-started/endpoints.md#gas-api).
 :::
 
 <Tabs>

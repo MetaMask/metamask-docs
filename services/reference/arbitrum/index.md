@@ -9,7 +9,7 @@ import CardList from '@site/src/components/CardList'
 :::note Failover protection
 
 Arbitrum [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans. 
-It is only available on Mainnet.
+Arbitrum failover support is available on Mainnet only.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 :::

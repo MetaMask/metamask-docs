@@ -4,6 +4,7 @@ import TerminalViewBox from "./TerminalViewBox";
 import ControlPanel from "./ControlPanel";
 import { INFO_MSG } from "./AlertMsg";
 import MessageBox from "@site/src/components/MessageBox/MessageBox";
+import Select from 'react-dropdown-select';
 import { INIT_REQ_SET } from "@site/src/lib/constants";
 import {
   trackClickForSegmentAnalytics
