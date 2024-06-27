@@ -5,18 +5,23 @@ import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.mod
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import debounce from "lodash.debounce";
 
+interface ExtendedInputProps extends BaseInputTemplateProps {
+  isArray?: boolean
+}
+
 export const BaseInputTemplate = ({
-    schema,
-    id,
-    name,
-    value = "",
-    disabled,
-    onChange,
-    rawErrors,
-    hideError,
-    required,
-    formContext,
-  }: BaseInputTemplateProps) => {
+  schema,
+  id,
+  name,
+  value = "",
+  disabled,
+  onChange,
+  rawErrors,
+  hideError,
+  required,
+  formContext,
+  isArray
+}: ExtendedInputProps) => {
   const isNumber = schema.type === "number" || schema.type === "integer";
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
@@ -44,13 +49,15 @@ export const BaseInputTemplate = ({
   }, []);
 
   return (
-    <div className={styles.tableRow}>
-      <div className={styles.tableColumn}>
-        <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused)}>
-          {name}{required ? "*" : ""}
-        </label>
-      </div>
-      <div className={styles.tableColumn}>
+    <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
+      {!isArray && (
+        <div className={styles.tableColumn}>
+          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused)}>
+            {name}{required ? "*" : ""}
+          </label>
+        </div>
+      )}
+      <div className={!isArray ? styles.tableColumn : ""}>
         <Tooltip message={hasErrors ? rawErrors[0] : ""} disabled={!rawErrors}>
           <div className={styles.tableValueRow}>
             <input

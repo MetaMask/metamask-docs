@@ -1,5 +1,7 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { useCollapsible, Collapsible } from "@docusaurus/theme-common";
 import { ArrayFieldTemplateProps } from "@rjsf/utils";
+import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
@@ -7,9 +9,9 @@ import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
   const { items, canAdd, onAddClick, title, schema, formData, formContext } = props;
   const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
+  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const itemsType = schema?.items?.type;
   const isSimpleArray = itemsType === "string" || itemsType === "boolean" || itemsType === "number" || itemsType === "integer";
-
   const { setIsComplexTypeView, isComplexTypeView } = formContext;
   const addComplexArray = () => {
     onAddClick();
@@ -26,11 +28,19 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
         </div>
         <div className={styles.tableColumn}>
           <div className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}>
-            {JSON.stringify(formData, null, " ")}
-            <span className={styles.tableColumnType} onClick={!isSimpleArray ? addComplexArray : null}>
+            <div className={styles.arrayFormDataWrap}>
+              {JSON.stringify(formData, null, " ")}
+            </div>
+            <span className={styles.tableColumnType} onClick={isSimpleArray ? toggleCollapsed : addComplexArray}>
               <span className={styles.dropdown}>
                 {schema.type}
-                <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, isSimpleArray ? styles.chevronIconDown : styles.chevronIconRight)}/>
+                <span className={
+                  clsx(
+                    styles.tableColumnIcon,
+                    styles.chevronIcon,
+                    isSimpleArray && collapsed ? styles.chevronIconDown : styles.chevronIconRight
+                  )
+                }/>
               </span>
             </span>
           </div>
@@ -39,16 +49,16 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
       {isComplexTypeView && !isSimpleArray ?
         <div className={styles.tableComplexType}>
           {items.map(({ children, index, onDropIndexClick, hasRemove }) => (
-              <div className={styles.tableComplexTypeItem} key={index}>
-                {children}
-                {hasRemove && (
-                  <span
-                    onClick={onDropIndexClick(index)}
-                    className={clsx(styles.deleteIcon, styles.deleteIconComplex)}
-                  >
-                      </span>
-                )}
-              </div>
+            <div className={styles.tableComplexTypeItem} key={index}>
+              {children}
+              {hasRemove && (
+                <span
+                  onClick={onDropIndexClick(index)}
+                  className={clsx(styles.deleteIcon, styles.deleteIconComplex)}
+                >
+                </span>
+              )}
+            </div>
           ))}
           {canAdd ?
             <button className={clsx(styles.tableButton, styles.tableButtonAddNewArray)} onClick={onAddClick}>
@@ -58,7 +68,43 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
             null
           }
         </div> :
-        null
+        <Collapsible lazy collapsed={collapsed}>
+          <>
+            {items.map((el, i) => {
+              const props = {
+                ...el.children.props,
+                isArray: true
+              }
+              const { index, hasRemove, onDropIndexClick, schema } = el;
+              const isNumber = schema.type === "number" || schema.type === "integer";
+              return (
+                <div key={`${i}`} className={styles.arrayItemRowWrap} style={{ paddingRight: `${isNumber ? "25px" : "0"}` }}>
+                  <span className={clsx(styles.addItemIcon, styles.arrayItemIcon)}>{i+1}</span>
+                  <BaseInputTemplate {...props} />
+                  {hasRemove && (
+                    <span
+                      onClick={onDropIndexClick(index)}
+                      className={clsx(styles.deleteIcon, styles.deleteIconCentered)}
+                    >
+                  </span>
+                  )}
+                </div>
+              )
+            })}
+            {canAdd && (
+              <div className={styles.addItemBtnWrap}>
+                <button
+                  type="button"
+                  onClick={onAddClick}
+                  className={styles.addItemBtn}
+                >
+                  <span className={styles.addItemIcon}>+</span>
+                  Add array item
+                </button>
+              </div>
+            )}
+          </>
+        </Collapsible>
       }
     </div>
   );

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Form from "@rjsf/core";
 import clsx from "clsx";
 import { RJSFSchema, UiSchema, RegistryWidgetsType } from "@rjsf/utils";
@@ -117,7 +117,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
         onError={log("errors")}
         templates={{
           BaseInputTemplate,
-          ArrayFieldTemplate: ArrayFieldTemplate,
+          ArrayFieldTemplate,
           FieldErrorTemplate: () => null,
           ErrorListTemplate: () => null,
         }}
