@@ -31,13 +31,13 @@ npx @metamask/create-snap gas-estimation-snap
 or
 
 ```bash
-yarn create @metamask/snap gas-estimation-snap
+npm create @metamask/snap gas-estimation-snap
 ```
 
 or
 
 ```bash
-npm create @metamask/snap gas-estimation-snap
+yarn create @metamask/snap gas-estimation-snap
 ```
 
 Next, `cd` into the `gas-estimation-snap` project directory and run:
