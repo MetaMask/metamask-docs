@@ -28,7 +28,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
-  const { setIsDrawerContentFixed } = useContext(ParserOpenRPCContext);
+  const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
 
   const defaultExampleFormData = examples ? Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value])) : {};
   const schema: RJSFSchema = {
@@ -85,6 +85,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
   const closeComplexTypeView = () => {
     setIsComplexTypeView(false);
     setIsDrawerContentFixed(false);
+    setDrawerLabel(null);
   }
 
   const handleCancelClick = () => {
