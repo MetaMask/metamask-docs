@@ -18,7 +18,7 @@ virtual machine (EVM) which allows developers to leverage Infura, MetaMask, and 
 developing and deploying smart contracts to the Polygon network.
 
 The Polygon Bor node API is based on go-ethereum's JSON-RPC implementation, you can also use WebSockets to call JSON-RPCs
-and [create subscriptions](how-to/subscribe-to-events.md).
+and [create subscriptions](../../how-to/subscribe-to-events.md).
 
 :::info see also
 
