@@ -42,6 +42,22 @@
   font-weight: 500;
 }
 
+.modalHeaderLabels {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderLabel {
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid #848C96;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .modalCloseBtn {
   display: block;
   padding: 0;
@@ -54,5 +70,12 @@
 
 .modalContent {
   height: 394px;
-  overflow-y: scroll;
+}
+
+.modalContentScrolled {
+  overflow-y: auto;
+}
+
+.modalContentFixed {
+  overflow-y: hidden;
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -14,12 +14,20 @@ interface ParserProps {
   method?: string;
 }
 
+interface ParserOpenRPCContextProps {
+  setIsDrawerContentFixed?: (isFixed: boolean) => void
+}
+
+export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
+
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(null);
   const [paramsData, setParamsData] = useState([]);
+  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
+  const [drawerLabel, setDrawerLabel] = useState(null);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -80,48 +88,54 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       setReqResult(response);
     } catch (e) {
       setReqResult(e);
-    };
+    }
   };
 
   return (
-    <div className={global.rowWrap}>
-      <div className={global.colLeft}>
-        <DetailsBox
-          method={method}
-          description={currentMethodData.description}
-          params={currentMethodData.params}
-          components={currentMethodData.components.schemas}
-          result={currentMethodData.result}
-          tags={currentMethodData.tags}
-        />
-        <ErrorsBox errors={currentMethodData.errors} />
-        <ModalDrawer
-          title="Customize request"
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        >
-          <InteractiveBox
+    <ParserOpenRPCContext.Provider
+      value={{ setIsDrawerContentFixed, setDrawerLabel }}
+    >
+      <div className={global.rowWrap}>
+        <div className={global.colLeft}>
+          <DetailsBox
+            method={method}
+            description={currentMethodData.description}
             params={currentMethodData.params}
             components={currentMethodData.components.schemas}
-            examples={currentMethodData.examples}
-            onParamChange={onParamsChangeHandle}
+            result={currentMethodData.result}
+            tags={currentMethodData.tags}
           />
-        </ModalDrawer>
-      </div>
-      <div className={global.colRight}>
-        <div className={global.stickyCol}>
-          <AuthBox isMetamaskInstalled={metamaskInstalled} />
-          <RequestBox
-            isMetamaskInstalled={metamaskInstalled}
-            method={method}
-            params={currentMethodData.params}
-            paramsData={paramsData}
-            response={reqResult}
-            openModal={openModal}
-            submitRequest={onSubmitRequestHandle}
-          />
+          <ErrorsBox errors={currentMethodData.errors} />
+          <ModalDrawer
+            title="Customize request"
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            isContentFixed={isDrawerContentFixed}
+            headerLabel={drawerLabel ? `editing ${drawerLabel}` : null}
+          >
+            <InteractiveBox
+              params={currentMethodData.params}
+              components={currentMethodData.components.schemas}
+              examples={currentMethodData.examples}
+              onParamChange={onParamsChangeHandle}
+            />
+          </ModalDrawer>
+        </div>
+        <div className={global.colRight}>
+          <div className={global.stickyCol}>
+            <AuthBox isMetamaskInstalled={metamaskInstalled} />
+            <RequestBox
+              isMetamaskInstalled={metamaskInstalled}
+              method={method}
+              params={currentMethodData.params}
+              paramsData={paramsData}
+              response={reqResult}
+              openModal={openModal}
+              submitRequest={onSubmitRequestHandle}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </ParserOpenRPCContext.Provider>
   );
 }

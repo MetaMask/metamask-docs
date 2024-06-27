@@ -215,6 +215,10 @@ fieldset {
   margin: 0;
 }
 
-.form-group {
+fieldset#root {
   position: relative;
+}
+
+button:hover {
+  cursor: pointer;
 }
