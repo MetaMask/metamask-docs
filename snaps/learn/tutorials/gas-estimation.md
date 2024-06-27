@@ -25,13 +25,13 @@ Create a new Snap project using the
 starter kit by running:
 
 ```bash
-yarn create @metamask/snap gas-estimation-snap
+npx @metamask/create-snap gas-estimation-snap
 ```
 
 or
 
 ```bash
-npx @metamask/create-snap gas-estimation-snap
+yarn create @metamask/snap gas-estimation-snap
 ```
 
 or
