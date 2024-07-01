@@ -1,0 +1,60 @@
+---
+title: "zks_estimateFee"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the fee for the transaction.
+
+## Parameters
+
+- `from`: [_Required_] Address from which the transaction is sent.
+- `to`: [_Required_] Address to which the transaction is addressed.
+- `data`: Data associated with the transaction.
+
+## Returns
+
+The estimated fee which includes:
+
+- `gas_limit`: Maximum amount of gas that the transaction is allowed to use.
+- `gas_per_pubdata_limit`: Amount of gas consumed per public data byte.
+- `max_fee_per_gas`: Maximum fee, in wei that can be paid per gas unit.
+- `max_priority_fee_per_gas`: Maximum priority fee, in wei that can be paid per gas unit.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard). 
+
+### Request
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+   curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateFee", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": {
+        "gas_limit": "0x156c00",
+        "gas_per_pubdata_limit": "0x143b",
+        "max_fee_per_gas": "0xee6b280",
+        "max_priority_fee_per_gas": "0x0"
+    },
+    "id": 2
+  }
+  ```
+  </TabItem>
+</Tabs>

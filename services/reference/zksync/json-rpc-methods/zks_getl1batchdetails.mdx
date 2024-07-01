@@ -1,0 +1,68 @@
+---
+title: "zks_getL1BatchDetails"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns data pertaining to a given L1 batch.
+
+## Parameters
+
+- `batch`: (integer) [_Required_] The layer 1 batch number.
+
+## Response
+
+Detailed information about the specified L1 batch:
+
+- `baseSystemContractsHashes`: An object containing hashes of the base system contracts used in the transaction:
+    - `bootloader`: The hash of the bootloader contract.
+    - `default_aa`: The hash of the default account contract.
+- `commitTxHash`: The hash of the transaction committed to the network.
+- `committedAt`: The timestamp when the transaction was committed to the network.
+- `executeTxHash`: The hash of the transaction executed on the network.
+- `executedAt`: The timestamp when the transaction was executed on the network.
+- `l1BatchNumber`: The batch number of the transaction on the L1 (Ethereum) network.
+- `l1GasPrice`: The gas price used for the transaction on the L1 network.
+- `l1TxCount`: The number of transactions related to this batch on the L1 network.
+- `l2FairGasPrice`: The fair gas price used for the transaction on the L2 (ZKsync) network.
+- `l2TxCount`: The total number of transactions on the L2 network.
+- `number`: The transaction number.
+- `operatorAddress`: The address of the operator who executed the transaction.
+- `proveTxHash`: The hash of the proof transaction on the L1 network.
+- `provenAt`: The timestamp when the proof transaction was done on the L1 network.
+- `rootHash`: The root hash representing the state of the network after the transaction.
+- `status`: The status of the transaction.
+- `timestamp`: The timestamp of the transaction.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchDetails", "params": [12345]}'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": "0x25f64db",
+    "id": 2
+  }
+  ```
+  </TabItem>
+</Tabs>

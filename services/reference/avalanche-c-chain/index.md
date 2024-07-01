@@ -55,4 +55,4 @@ No personal information is sent as part of partner requests, only information ne
 
 For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
 
-Liquify (Privacy Policy) is Infura's failover-protection partner and currently offer failover support for all Infura's Avalanche (C-Chain) methods.
+Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura's failover-protection partner and currently offer failover support for all Infura's Avalanche (C-Chain) methods.

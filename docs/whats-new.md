@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## July 2024
+
+- Documented support for the [ZKsync Era network API service](/services/reference/zksync).
+
 ## June 2024
 
 - Updated [React dapp with global state tutorial](/wallet/tutorials/react-dapp-global-state) with

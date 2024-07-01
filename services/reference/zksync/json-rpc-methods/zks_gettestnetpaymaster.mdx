@@ -1,0 +1,49 @@
+---
+title: "zks_getTestnetPaymaster"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the address of the [testnet paymaster](https://docs.zksync.io/build/developer-reference/account-abstraction.html#testnet-paymaster)
+available on testnets and enables paying fees in ERC-20 compatible tokens.
+
+## Parameters
+
+None.
+
+## Response
+
+The address of the testnet paymaster.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+  curl https://zksync-sepolia.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getTestnetPaymaster", "params": []}'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": "0x8f0ea1312da29f17eabeb2f484fd3c112cccdd63",
+    "id": 1
+  }
+  ```
+  </TabItem>
+</Tabs>
