@@ -24,12 +24,13 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-    curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getAllAccountBalances", "params": [ "0x98E9D288743839e96A8005a6B51C770Bbf7788C0" ]}'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getAllAccountBalances", "params": [ "0x98E9D288743839e96A8005a6B51C770Bbf7788C0" ]}'
+```
+
   </TabItem>
 </Tabs>
 
@@ -37,14 +38,16 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 <Tabs>
   <TabItem value="JSON">
-  ```json
-  {
-    "jsonrpc": "2.0",
-    "result": {
-        "0x0000000000000000000000000000000000000000": "0x2fbd72a1121b3100"
-    },
-    "id": 2
-  }
-  ```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "0x0000000000000000000000000000000000000000": "0x2fbd72a1121b3100"
+  },
+  "id": 2
+}
+```
+
   </TabItem>
 </Tabs>

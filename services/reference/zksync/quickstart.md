@@ -25,9 +25,9 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 
 ```bash
 curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 ```
 
 ### Node (JavaScript)
@@ -91,11 +91,11 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const axios = require('axios');
+    const axios = require("axios");
     
-    axios.post('https://zksync-mainnet.infura.io/v3/YOUR-API-KEY', {
-      jsonrpc: '2.0',
-      method: 'eth_blockNumber',
+    axios.post("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY", {
+      jsonrpc: "2.0",
+      method: "eth_blockNumber",
       params: [],
       id: 1
     })
@@ -126,9 +126,9 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const ethers = require('ethers');
+    const ethers = require("ethers");
 
-    const provider = new ethers.providers.JsonRpcProvider('https://zksync-mainnet.infura.io/v3/YOUR-API-KEY');
+    const provider = new ethers.providers.JsonRpcProvider("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY");
 
     provider.getBlockNumber()
     .then(blockNumber => {
@@ -161,16 +161,16 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     import requests
     import json
 
-    url = 'https://zksync-mainnet.infura.io/v3/YOUR-API-KEY'
+    url = "https://zksync-mainnet.infura.io/v3/YOUR-API-KEY"
 
     payload = {
-        "jsonrpc": "2.0",
-        "method": "eth_blockNumber",
-        "params": [],
-        "id": 1
+      "jsonrpc": "2.0",
+      "method": "eth_blockNumber",
+      "params": [],
+      "id": 1
     }
 
-    headers = {'content-type': 'application/json'}
+    headers = {"content-type": "application/json"}
 
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 

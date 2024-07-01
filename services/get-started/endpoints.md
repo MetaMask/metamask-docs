@@ -143,7 +143,7 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |
 
-## ZkSync Era
+## ZKsync Era
 
 | Network           | Description         | URL                                             |
 |-------------------|---------------------|-------------------------------------------------|
