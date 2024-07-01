@@ -12,6 +12,9 @@ ZKsync Era is supported through the [DIN](https://www.infura.io/solutions/decent
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 Infura provides public beta access to ZKsync Era.   
+
+Currently, historical state data starting from June 19th, 2024 is available. Full historical state information for ZKsync Era will be announced when it is available.
+
 :::
 
 ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethereum.
@@ -47,5 +50,5 @@ ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethe
 The following partners provide access to the ZKsync Era network:
 <!-- markdown-link-check-disable -->
 - Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
-- Bware Labs ([Terms of Service](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
+- Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
 <!-- markdown-link-check-enable -->
