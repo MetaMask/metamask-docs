@@ -38,7 +38,7 @@ To create an API key:
 1. From the pop-up window, provide a name, then click **CREATE**.
 1. Select the networks that you want your API key to access, and select **Save Changes**.
 
-You can [configure additional security](./secure-an-api/) for your API key by requiring an API key secret or JWTs with
+You can [configure additional security](../how-to/secure-an-api/api-key-secret.md) for your API key by requiring an API key secret or JWTs with
 each API request.
 
 ## Best practices for configuring API key endpoints
