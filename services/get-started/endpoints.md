@@ -229,7 +229,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Mainnet | 137        |
 | Amoy    | 80002      |
 
-#### zkSync Era
+#### ZKsync Era
 
 | Network | Chain ID |
 | ------- | -------- |

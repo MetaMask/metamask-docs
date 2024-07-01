@@ -21,7 +21,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ### cURL
 
-Run the following command in your terminal. Replace `YOUR-API-KEY` with your actual Infura API key.
+Run the following command in your terminal, replacing `YOUR-API-KEY` with your actual Infura API key:
 
 ```bash
 curl https://optimism-mainnet.infura.io/v3/YOUR-API-KEY \
@@ -42,7 +42,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     npm i node-fetch
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -86,7 +86,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     npm i axios
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -115,13 +115,13 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
 
 #### Ethers
 
-1. In your project folder, install the ethers package using npm:
+1. In your project folder, install the `ethers` package using npm:
 
     ```bash
     npm install ethers
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -153,7 +153,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     pip install requests
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 

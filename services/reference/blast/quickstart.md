@@ -21,7 +21,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ### cURL
 
-Run the following command in your terminal. Replace `YOUR-API-KEY` with your actual Infura API key.
+Run the following command in your terminal, replacing `YOUR-API-KEY` with your actual Infura API key:
 
 ```bash
 curl https://blast-mainnet.infura.io/v3/YOUR-API-KEY \
@@ -36,7 +36,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
 
 #### Node Fetch
 
-1. In your project folder, install the Node Fetch package using `npm`:
+1. In your project folder, install the `node-fetch package using `npm`:
 
     ```bash
     npm i node-fetch

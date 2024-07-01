@@ -14,7 +14,7 @@ meaning calls to the network are routed to [partner infrastructure providers](#p
 Infura provides public beta access to ZKsync Era.   
 :::
 
-ZKsync Era is a knowledge Ethereum Virtual Machine (zkEVM) that scales the experience of Ethereum.
+ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethereum.
 
 :::info see also
 
@@ -37,7 +37,7 @@ ZKsync Era is a knowledge Ethereum Virtual Machine (zkEVM) that scales the exper
     {
       href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create an API key, secure it, and share it with your team."
     }
   ]}
 />
