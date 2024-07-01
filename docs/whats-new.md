@@ -11,7 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## July 2024
 
-- Documented support for the [ZKsync Era network API service](/services/reference/zksync).
+- Documented support for the [ZKsync Era network API service](/services/reference/zksync). ([#1372](https://github.com/MetaMask/metamask-docs/pull/1372))
+- Added [Services](/services) and [Developer tools](/developer-tools) to MetaMask documentation. ([#1325](https://github.com/MetaMask/metamask-docs/pull/1325))
 
 ## June 2024
 
