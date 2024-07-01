@@ -292,3 +292,8 @@ html[data-theme="light"] .api-card:hover {
 .transition-300 {
   transition: all 0.3s;
 }
+
+fieldset {
+  border: 0;
+  padding: 0;
+}
