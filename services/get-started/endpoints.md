@@ -143,6 +143,12 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |
 
+## ZKsync Era
+
+| Network           | Description         | URL                                             |
+|-------------------|---------------------|-------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://zksync-mainnet.infura.io/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://zksync-sepolia.infura.io/v3/<API-KEY>` |
 
 ## Gas API
 
@@ -223,7 +229,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Mainnet | 137        |
 | Amoy    | 80002      |
 
-#### zkSync Era
+#### ZKsync Era
 
 | Network | Chain ID |
 | ------- | -------- |

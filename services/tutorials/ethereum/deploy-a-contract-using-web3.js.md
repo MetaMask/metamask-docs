@@ -47,7 +47,7 @@ Install the `web3`, `solc`, and `dotenv` packages in the project directory.
 
 :::info
 
-The [`dotenv`](../../tutorials/developer-tools/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
+The [`dotenv`](../../how-to/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
 
 :::
 

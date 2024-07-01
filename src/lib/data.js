@@ -105,4 +105,9 @@ export const NETWORK_LINKS = [
     href: "/services/reference/starknet",
     logo: `${LOGO_PATH}/logo-starknet.svg`,
   },
+  {
+    name: "ZKsync Era",
+    href: "/services/reference/zksync",
+    logo: `${LOGO_PATH}/logo-zksync.svg`,
+  },
 ];

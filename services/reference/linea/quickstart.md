@@ -21,7 +21,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ### cURL
 
-Run the following command in your terminal. Replace `YOUR-API-KEY` with your actual Infura API key.
+Run the following command in your terminal, replacing `YOUR-API-KEY` with your actual Infura API key:
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/YOUR-API-KEY \
@@ -42,7 +42,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i node-fetch
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -86,7 +86,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i axios
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -115,13 +115,13 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Ethers
 
-1. In your project folder, install the ethers package using npm:
+1. In your project folder, install the `ethers` package using npm:
 
     ```bash
     npm install ethers
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
@@ -191,7 +191,7 @@ by Infura. Here are some suggestions:
 - **Explore other Linea APIs**: Infura supports a wide range of APIs. You can find more information in the
 [JSON-RPC API method documentation](json-rpc-methods/index.md).
 
-- **Try out different networks**: Infura supports multiple networks including Arbitrum, Polygon, Optimism, IPFS and more.
+- **Try out different networks**: Infura supports multiple networks including Arbitrum, Polygon, Optimism, IPFS, and more.
 
 - **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
 
