@@ -55,13 +55,20 @@
 .rowWrap {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 30px;
+  padding: 0 30px 0 0;
 }
 
 .colLeft {
+  position: relative;
   width: 65%;
-  padding-right: 23px;
   border-right: 1px solid #444950;
+  overflow: hidden;
+}
+
+.colContentWrap {
+  height: calc(100vh - 84px);
+  padding: 0 30px;
+  overflow-y: auto;
 }
 
 .colRight {
@@ -79,9 +86,10 @@
     width: 100%;
     padding: 0;
   }
-}
-
-@media (width <= 1024px) {
+  .colContentWrap {
+    height: auto;
+    padding: 0;
+  }
   .rowWrap {
     padding: 0;
   }
