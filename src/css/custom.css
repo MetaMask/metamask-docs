@@ -293,7 +293,21 @@ html[data-theme="light"] .api-card:hover {
   transition: all 0.3s;
 }
 
+form {
+  position: relative;
+}
+
 fieldset {
-  border: 0;
+  border: none;
   padding: 0;
+  margin: 0;
+}
+
+fieldset#root {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+button:hover {
+  cursor: pointer;
 }

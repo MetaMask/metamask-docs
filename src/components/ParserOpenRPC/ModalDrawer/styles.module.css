@@ -41,6 +41,40 @@
   font-weight: 500;
 }
 
+.modalTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderIcon {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.modalHeaderIconBack {
+  width: 16px;
+  height: 16px;
+}
+
+.modalHeaderLabels {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderLabel {
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid #848C96;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .modalCloseBtn {
   display: block;
   padding: 0;
@@ -53,10 +87,17 @@
 
 .modalContent {
   height: 394px;
+}
+
+.modalContentScrolled {
   overflow-y: auto;
 }
 
-@media (width <= 1200px) {
+.modalContentFixed {
+  overflow-y: hidden;
+}
+
+@media (width <= 996px) {
   .modalContainer {
     position: fixed;
     left: 0;

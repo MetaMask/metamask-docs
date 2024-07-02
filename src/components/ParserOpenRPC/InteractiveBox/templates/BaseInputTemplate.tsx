@@ -10,18 +10,18 @@ interface ExtendedInputProps extends BaseInputTemplateProps {
 }
 
 export const BaseInputTemplate = ({
-  schema,
-  id,
-  name,
-  value = "",
-  disabled,
-  onChange,
-  rawErrors,
-  hideError,
-  required,
-  formContext,
-  isArray
-}: ExtendedInputProps) => {
+    schema,
+    id,
+    name,
+    value = "",
+    disabled,
+    onChange,
+    rawErrors,
+    hideError,
+    required,
+    formContext,
+    isArray
+  }: ExtendedInputProps) => {
   const isNumber = schema.type === "number" || schema.type === "integer";
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
@@ -52,8 +52,9 @@ export const BaseInputTemplate = ({
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
       {!isArray && (
         <div className={styles.tableColumn}>
-          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused)}>
-            {name}{required ? "*" : ""}
+          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused, hasErrors && styles.tableColumnParamError)}>
+            <span>{name}{required && "*"}</span>
+            {hasErrors && !isNumber ? <span className={styles.tableLabelIconError} /> : null}
           </label>
         </div>
       )}
@@ -73,15 +74,14 @@ export const BaseInputTemplate = ({
             />
             <span className={styles.tableColumnType}>
               {schema.type}
-              {hasErrors && !isNumber ? <span className={styles.tableColumnTypeErrorIcon} /> : null}
               {isNumber ? (
                 <>
                   <span
-                    className={clsx(styles.chevronIcon, styles.formControlNumberUp)}
+                    className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.formControlNumberUp)}
                     onClick={() => { onInputNumberChange(Number((+inputValue || 0) + 1)); }}
                   />
                   <span
-                    className={clsx(styles.chevronIcon, styles.chevronIconDown, styles.formControlNumberDown)}
+                    className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.chevronIconDown, styles.formControlNumberDown)}
                     onClick={() => { inputValue >= 1 && onInputNumberChange(Number((+inputValue || 0) - 1)); }}
                   />
                 </>
