@@ -1,3 +1,4 @@
+[![Crowdin Action](https://github.com/MetaMask/metamask-docs/actions/workflows/crowdin.yml/badge.svg)](https://github.com/MetaMask/metamask-docs/actions/workflows/crowdin.yml)
 # MetaMask developer documentation
 
 This is the MetaMask developer documentation repository.
