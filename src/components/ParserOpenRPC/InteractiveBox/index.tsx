@@ -1,17 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Form from "@rjsf/core";
 import clsx from "clsx";
-import { RJSFSchema, UiSchema, RegistryWidgetsType } from "@rjsf/utils";
+import {RJSFSchema, UiSchema, RegistryWidgetsType, RegistryFieldsType} from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { MethodExample, MethodParam, SchemaComponents } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
+import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
+import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
+import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
-import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
 interface InteractiveBoxProps {
@@ -45,10 +47,20 @@ export default function InteractiveBox({ params, components, examples, onParamCh
     },
     "ui:widget": "checkbox",
   };
+  const templates = {
+    BaseInputTemplate,
+    ArrayFieldTemplate,
+    FieldErrorTemplate: () => null,
+    ErrorListTemplate: () => null,
+  }
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
+    SelectWidget: SelectWidget,
   };
-  const log = (type) => console.log.bind(console, type);
+  const fields: RegistryFieldsType = {
+    AnyOfField: ConditionalField,
+    OneOfField: ConditionalField,
+  };
   const handleResetForm = (e) => {
     e.preventDefault();
     setDefaultFormData(defaultExampleFormData);
@@ -81,6 +93,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
 
   const onChangeHandler = (data) => {
     onParamChange(data);
+    setDefaultFormData(data);
   };
 
   const closeComplexTypeView = () => {
@@ -107,7 +120,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
   }
 
   const handleCancelClick = () => {
-    if (drawerLabel && drawerLabel !== null) {
+    if (drawerLabel) {
       const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel);
       setDefaultFormData(upData)
     }
@@ -131,22 +144,12 @@ export default function InteractiveBox({ params, components, examples, onParamCh
         validator={validator}
         liveValidate
         noHtml5Validate
-        onChange={(data) => {
-          console.log('changed', data);
-          onChangeHandler(data.formData);
-          setDefaultFormData(data.formData);
-        }}
-        onSubmit={() => {log("submitted");}}
-        onError={log("errors")}
-        templates={{
-          BaseInputTemplate,
-          ArrayFieldTemplate,
-          FieldErrorTemplate: () => null,
-          ErrorListTemplate: () => null,
-        }}
+        onChange={(data) => { onChangeHandler(data.formData); }}
+        templates={templates}
         uiSchema={uiSchema}
         widgets={widgets}
         ref={formRef}
+        fields={fields}
       >
         <div className={clsx(styles.tableFooterRow, isLightTheme ? styles.tableFooterRowLight : styles.tableFooterRowDark)}>
           <div className={clsx(styles.footerButtons, styles.footerButtonsLeft)}>

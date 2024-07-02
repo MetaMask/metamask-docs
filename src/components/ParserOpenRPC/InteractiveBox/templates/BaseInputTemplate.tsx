@@ -10,18 +10,18 @@ interface ExtendedInputProps extends BaseInputTemplateProps {
 }
 
 export const BaseInputTemplate = ({
-  schema,
-  id,
-  name,
-  value = "",
-  disabled,
-  onChange,
-  rawErrors,
-  hideError,
-  required,
-  formContext,
-  isArray
-}: ExtendedInputProps) => {
+    schema,
+    id,
+    name,
+    value = "",
+    disabled,
+    onChange,
+    rawErrors,
+    hideError,
+    required,
+    formContext,
+    isArray
+  }: ExtendedInputProps) => {
   const isNumber = schema.type === "number" || schema.type === "integer";
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
@@ -52,8 +52,9 @@ export const BaseInputTemplate = ({
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
       {!isArray && (
         <div className={styles.tableColumn}>
-          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused)}>
-            {name}{required ? "*" : ""}
+          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused, hasErrors && styles.tableColumnParamError)}>
+            <span>{name}{required && "*"}</span>
+            {hasErrors && !isNumber ? <span className={styles.tableLabelIconError} /> : null}
           </label>
         </div>
       )}
@@ -73,7 +74,6 @@ export const BaseInputTemplate = ({
             />
             <span className={styles.tableColumnType}>
               {schema.type}
-              {hasErrors && !isNumber ? <span className={clsx(styles.tableColumnIcon, styles.tableColumnIconError)} /> : null}
               {isNumber ? (
                 <>
                   <span

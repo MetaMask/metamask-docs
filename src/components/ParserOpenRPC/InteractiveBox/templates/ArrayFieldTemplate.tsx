@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useCollapsible, Collapsible } from "@docusaurus/theme-common";
 import { ArrayFieldTemplateProps } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
@@ -6,8 +6,8 @@ import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.mod
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
-export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
-  const { items, canAdd, onAddClick, title, schema, formData, formContext } = props;
+export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData, formContext }: ArrayFieldTemplateProps) => {
+  const [isComplexArrayEditView, setIsComplexArrayEditView] = useState(false);
   const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const itemsType = schema?.items?.type;
@@ -17,6 +17,7 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
     onAddClick();
     setDrawerLabel(title);
     setIsDrawerContentFixed(true);
+    setIsComplexArrayEditView(true);
     setIsComplexTypeView(true);
   }
 
@@ -48,7 +49,7 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
           </div>
         </div>
       </div>
-      {isComplexTypeView && !isSimpleArray ?
+      {isComplexTypeView && isComplexArrayEditView && !isSimpleArray ?
         <div className={styles.tableComplexType}>
           {items.map(({ children, index, onDropIndexClick, hasRemove }) => (
             <div className={styles.tableComplexTypeItem} key={index}>
@@ -73,16 +74,17 @@ export const ArrayFieldTemplate = (props: ArrayFieldTemplateProps) => {
         <Collapsible lazy collapsed={collapsed}>
           <>
             {items.map((el, i) => {
-              const props = {
+              const baseInputTemplateProps = {
                 ...el.children.props,
-                isArray: true
+                isArray: true,
+                value: formData,
               }
               const { index, hasRemove, onDropIndexClick, schema } = el;
               const isNumber = schema.type === "number" || schema.type === "integer";
               return (
                 <div key={`${i}`} className={styles.arrayItemRowWrap} style={{ paddingRight: `${isNumber ? "25px" : "0"}` }}>
                   <span className={clsx(styles.addItemIcon, styles.arrayItemIcon)}>{i+1}</span>
-                  <BaseInputTemplate {...props} />
+                  <BaseInputTemplate {...baseInputTemplateProps} />
                   {hasRemove && (
                     <span
                       onClick={onDropIndexClick(index)}

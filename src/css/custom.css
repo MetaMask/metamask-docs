@@ -209,6 +209,10 @@ pre {
   max-width: 500px;
 }
 
+form {
+  position: relative;
+}
+
 fieldset {
   border: none;
   padding: 0;
@@ -217,6 +221,7 @@ fieldset {
 
 fieldset#root {
   position: relative;
+  padding-bottom: 10px;
 }
 
 button:hover {
