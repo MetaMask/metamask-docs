@@ -141,10 +141,11 @@
   margin-top: 0;
 }
 .dropdownItem {
-  width: 102px;
+  width: 100%;
   padding: 16px;
   background-color: rgba(36, 39, 42, 1);
   color: #FFFFFF;
+  white-space: nowrap;
 }
 .dropdownItem:hover {
   background-color: rgba(20, 22, 24, 1);

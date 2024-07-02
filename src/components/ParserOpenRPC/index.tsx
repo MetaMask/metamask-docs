@@ -103,6 +103,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setDrawerLabel(null);
   }
 
+  const onModalClose = () => {
+    closeModal();
+    closeComplexTypeView();
+  }
+
   return (
     <ParserOpenRPCContext.Provider
       value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
@@ -135,7 +140,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                  :
                 "Customize request"}
             isOpen={isModalOpen}
-            onClose={closeModal}
+            onClose={onModalClose}
             isContentFixed={isDrawerContentFixed}
             headerLabel={drawerLabel ? drawerLabel : null}
           >
