@@ -11,6 +11,9 @@ import CardList from '@site/src/components/CardList'
 Blast is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
+Infura provides public beta access to Blast, and there may be updates made to performance and
+method availability based on user feedback.
+
 :::
 
 Blast is an Ethereum layer 2 (L2) scaling solution that uses an optimistic rollup architecture, providing a
