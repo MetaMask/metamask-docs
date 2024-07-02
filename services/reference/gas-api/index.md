@@ -16,8 +16,8 @@ The Gas API is a tool that delivers real-time [gas prices](../../concepts/gas.md
       description: "Learn how to quickly connect and make calls to the Gas API."
     },
     {
-      href: "json-rpc-methods",
-      title: "JSON-RPC APIs",
+      href: "api-reference",
+      title: "REST APIs",
       description: "View the APIs available for communicating with the Gas API."
     },
     {
