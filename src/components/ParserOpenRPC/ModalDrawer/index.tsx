@@ -4,7 +4,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 import styles from "./styles.module.css";
 
 interface ModalDrawerProps {
-  title: string;
+  title: string | React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;

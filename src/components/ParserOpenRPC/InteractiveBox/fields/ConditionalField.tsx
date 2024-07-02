@@ -10,9 +10,8 @@ export const ConditionalField = (props: FieldTemplateProps) => {
   const [isOpened, setIsOpened] = useState(false);
   const [selectedTypeSchema, setSelectedTypeSchema] = useState(null);
   const [isEditView, setIsEditView] = useState(false);
-  const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
-  const { formData, schema, name, formContext, onChange } = props;
-  const { setIsComplexTypeView, isComplexTypeView } = formContext;
+  const { setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
+  const { formData, schema, name, onChange } = props;
   const listItems = schema?.anyOf ? schema?.anyOf : schema?.oneOf;
   const checkForNullTypeSchema = (type) => type === "null";
   const showComplexTypeView = () => {

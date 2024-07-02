@@ -8,11 +8,10 @@ import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
 export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData, formContext }: ArrayFieldTemplateProps) => {
   const [isComplexArrayEditView, setIsComplexArrayEditView] = useState(false);
-  const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
+  const { setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const itemsType = schema?.items?.type;
   const isSimpleArray = itemsType === "string" || itemsType === "boolean" || itemsType === "number" || itemsType === "integer";
-  const { setIsComplexTypeView, isComplexTypeView } = formContext;
   const addComplexArray = () => {
     onAddClick();
     setDrawerLabel(title);

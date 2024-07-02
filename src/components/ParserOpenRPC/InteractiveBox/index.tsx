@@ -22,16 +22,23 @@ interface InteractiveBoxProps {
   examples: MethodExample[];
   onParamChange: (data) => void;
   drawerLabel?: string | null
+  closeComplexTypeView?: () => void;
 }
 
-export default function InteractiveBox({ params, components, examples, onParamChange, drawerLabel }: InteractiveBoxProps) {
+export default function InteractiveBox({
+   params,
+   components,
+   examples,
+   onParamChange,
+   drawerLabel,
+   closeComplexTypeView
+}:InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
-  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
-  const { setIsDrawerContentFixed, setDrawerLabel } = useContext(ParserOpenRPCContext);
+  const { isComplexTypeView } = useContext(ParserOpenRPCContext);
 
   const defaultExampleFormData = examples ? Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value])) : {};
   const schema: RJSFSchema = {
@@ -96,12 +103,6 @@ export default function InteractiveBox({ params, components, examples, onParamCh
     setDefaultFormData(data);
   };
 
-  const closeComplexTypeView = () => {
-    setIsComplexTypeView(false);
-    setIsDrawerContentFixed(false);
-    setDrawerLabel(null);
-  }
-
   const cloneAndSetNullIfExists = (obj, key) => {
     if (typeof obj !== 'object' || obj === null) return obj;
     const newObj = Array.isArray(obj) ? [] : {};
@@ -140,7 +141,7 @@ export default function InteractiveBox({ params, components, examples, onParamCh
       <Form
         schema={parsedSchema}
         formData={defaultFormData}
-        formContext={{ isFormReseted, setIsComplexTypeView, isComplexTypeView }}
+        formContext={{ isFormReseted }}
         validator={validator}
         liveValidate
         noHtml5Validate

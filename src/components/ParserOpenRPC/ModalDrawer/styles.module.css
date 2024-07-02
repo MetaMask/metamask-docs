@@ -41,6 +41,24 @@
   font-weight: 500;
 }
 
+.modalTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderIcon {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.modalHeaderIconBack {
+  width: 16px;
+  height: 16px;
+}
+
 .modalHeaderLabels {
   display: flex;
   align-items: center;

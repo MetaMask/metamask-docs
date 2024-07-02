@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -8,6 +8,8 @@ import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
 import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
 import global from "./global.module.css";
+import modalDrawerStyles from "./ModalDrawer/styles.module.css";
+import clsx from "clsx";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -16,6 +18,9 @@ interface ParserProps {
 
 interface ParserOpenRPCContextProps {
   setIsDrawerContentFixed?: (isFixed: boolean) => void
+  setDrawerLabel?: (label: string) => void;
+  isComplexTypeView: boolean;
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
 }
 
 export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
@@ -28,6 +33,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [paramsData, setParamsData] = useState([]);
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
+  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -91,9 +97,15 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     }
   };
 
+  const closeComplexTypeView = () => {
+    setIsComplexTypeView(false);
+    setIsDrawerContentFixed(false);
+    setDrawerLabel(null);
+  }
+
   return (
     <ParserOpenRPCContext.Provider
-      value={{ setIsDrawerContentFixed, setDrawerLabel }}
+      value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
     >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
@@ -109,11 +121,23 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
             <ErrorsBox errors={currentMethodData.errors} />
           </div>
           <ModalDrawer
-            title="Customize request"
+            title={
+              isComplexTypeView ?
+                <span className={modalDrawerStyles.modalTitleContainer}>
+                  <button
+                    className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
+                    onClick={closeComplexTypeView}
+                  >
+                    <img src="/img/icons/chevron-left-white-icon.svg"/>
+                  </button>
+                  Editing Param
+                </span>
+                 :
+                "Customize request"}
             isOpen={isModalOpen}
             onClose={closeModal}
             isContentFixed={isDrawerContentFixed}
-            headerLabel={drawerLabel ? `editing ${drawerLabel}` : null}
+            headerLabel={drawerLabel ? drawerLabel : null}
           >
             <InteractiveBox
               params={currentMethodData.params}
@@ -121,6 +145,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               examples={currentMethodData.examples}
               onParamChange={onParamsChangeHandle}
               drawerLabel={drawerLabel}
+              closeComplexTypeView={closeComplexTypeView}
             />
           </ModalDrawer>
         </div>
