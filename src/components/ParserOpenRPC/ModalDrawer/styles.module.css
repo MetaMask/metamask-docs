@@ -1,15 +1,14 @@
 .modalContainer {
-  max-width: 792px;
-  width: 100%;
   border: 1px solid #848C96;
   border-radius: 8px 8px 0 0;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   top: 100%;
-  left: 50%;
+  left: 15px;
+  right: 15px;
   min-height: 512px;
   opacity: 0;
-  transform: translate(-50%, 100%);
+  transform: translate(0, 100%);
   transition-property: 'transform', 'opacity';
   transition-duration: .4s;
   transition-timing-function: ease;
@@ -20,7 +19,7 @@
 
 .modalContainerOpen {
   opacity: 1;
-  transform: translate(-50%, -100%);
+  transform: translate(0, -100%);
 }
 
 .modalHeader {
@@ -78,4 +77,12 @@
 
 .modalContentFixed {
   overflow-y: hidden;
+}
+
+@media (width <= 996px) {
+  .modalContainer {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
 }

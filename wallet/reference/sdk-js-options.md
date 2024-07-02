@@ -232,7 +232,7 @@ infuraAPIKey: process.env.INFURA_API_KEY
 </TabItem>
 </Tabs>
 
-The [Infura API key](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/project-id) to
+The [Infura API key](../../../../developer-tools/dashboard/get-started/create-api) to
 use for RPC requests.
 Configure this option to [make read-only RPC requests from your dapp](../how-to/use-sdk/javascript/make-read-only-requests.md).
 

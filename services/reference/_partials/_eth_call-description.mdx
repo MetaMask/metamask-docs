@@ -1,0 +1,9 @@
+Executes a new message call immediately without creating a transaction on the blockchain.
+
+:::warning Gas parameter is capped
+
+To prevent API abuse, the `gas` parameter in [`eth_estimateGas`](../ethereum/json-rpc-methods/eth_estimategas.mdx) and
+this [`eth_call`](../ethereum/json-rpc-methods/eth_call.mdx) method is capped at 10x (1000%) the current block gas limit.
+
+:::
+

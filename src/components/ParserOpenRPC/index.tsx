@@ -97,15 +97,17 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
-          <DetailsBox
-            method={method}
-            description={currentMethodData.description}
-            params={currentMethodData.params}
-            components={currentMethodData.components.schemas}
-            result={currentMethodData.result}
-            tags={currentMethodData.tags}
-          />
-          <ErrorsBox errors={currentMethodData.errors} />
+          <div className={global.colContentWrap}>
+            <DetailsBox
+              method={method}
+              description={currentMethodData.description}
+              params={currentMethodData.params}
+              components={currentMethodData.components.schemas}
+              result={currentMethodData.result}
+              tags={currentMethodData.tags}
+            />
+            <ErrorsBox errors={currentMethodData.errors} />
+          </div>
           <ModalDrawer
             title="Customize request"
             isOpen={isModalOpen}
