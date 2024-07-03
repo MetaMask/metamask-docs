@@ -135,11 +135,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                     className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
                     onClick={closeComplexTypeView}
                   >
-                    <img src={
-                      colorMode === "light" ?
-                        '/img/icons/chevron-left-dark-icon.svg' :
-                        '/img/icons/chevron-left-light-icon.svg'
-                    } />
+                    <img
+                      src={colorMode === "light" ? '/img/icons/chevron-left-dark-icon.svg' : '/img/icons/chevron-left-light-icon.svg'}
+                    />
                   </button>
                   Editing Param
                 </span>
