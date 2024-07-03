@@ -10,6 +10,7 @@ import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
 import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
+import { useColorMode } from "@docusaurus/theme-common";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -34,6 +35,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { colorMode } = useColorMode();
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -127,13 +129,17 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           </div>
           <ModalDrawer
             title={
-              isComplexTypeView ?
+              isComplexTypeView && colorMode ?
                 <span className={modalDrawerStyles.modalTitleContainer}>
                   <button
                     className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
                     onClick={closeComplexTypeView}
                   >
-                    <img src="/img/icons/chevron-left-white-icon.svg"/>
+                    <img src={
+                      colorMode === "light" ?
+                        '/img/icons/chevron-left-dark-icon.svg' :
+                        '/img/icons/chevron-left-light-icon.svg'
+                    } />
                   </button>
                   Editing Param
                 </span>
