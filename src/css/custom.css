@@ -311,3 +311,20 @@ fieldset#root {
 button:hover {
   cursor: pointer;
 }
+
+[data-theme="light"] .tippy-tooltip {
+  background-color: rgba(20, 22, 24, 1);
+}
+
+[data-theme="light"] .tippy-popper[x-placement^=top] [x-arrow] {
+  border-top-color:  rgba(20, 22, 24, 1);
+}
+
+[data-theme="dark"] .tippy-tooltip {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(20, 22, 24, 1);
+}
+
+[data-theme="dark"] .tippy-popper[x-placement^=top] [x-arrow] {
+  border-top-color: rgba(255, 255, 255, 1);
+}

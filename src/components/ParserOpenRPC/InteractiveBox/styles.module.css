@@ -244,18 +244,10 @@
   border-radius: 0;
 }
 .footerButtonRight {
-  background: none;
-  border-radius: 999px;
   padding: 5px 16px!important;
-  outline: none;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
 }
 .footerButtonRightOutline {
   margin-right: 16px;
-  border: 1px solid rgba(3, 118, 201, 1);
-  color: rgba(3, 118, 201, 1);
 }
 .footerButtonIcon {
   width: 100%;

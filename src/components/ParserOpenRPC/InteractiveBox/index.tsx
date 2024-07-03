@@ -154,12 +154,12 @@ export default function InteractiveBox({
       >
         <div className={clsx(styles.tableFooterRow, isLightTheme ? styles.tableFooterRowLight : styles.tableFooterRowDark)}>
           <div className={clsx(styles.footerButtons, styles.footerButtonsLeft)}>
-            <Tooltip message="Reset fields" theme={isLightTheme ? "dark" : "light"}>
+            <Tooltip message="Reset fields">
               <button className={styles.footerButtonLeft} onClick={handleResetForm}>
                 <img className={styles.footerButtonIcon} src="/img/icons/reset-icon.svg"/>
               </button>
             </Tooltip>
-            <Tooltip message="Clear fields" theme={isLightTheme ? "dark" : "light"}>
+            <Tooltip message="Clear fields">
               <button
                 className={styles.footerButtonLeft}
                 onClick={handleClearForm}
@@ -170,11 +170,11 @@ export default function InteractiveBox({
           </div>
           {isComplexTypeView ?
             <div className={clsx(styles.footerButtons)}>
-              <button className={clsx(styles.footerButtonRight, styles.footerButtonRightOutline)} onClick={handleCancelClick}>
+              <button className={clsx(global.secondaryBtn, styles.footerButtonRight, styles.footerButtonRightOutline)} onClick={handleCancelClick}>
                 Cancel
               </button>
               <button className={clsx(global.primaryBtn, styles.footerButtonRight)} onClick={closeComplexTypeView}>
-                Back
+                Save
               </button>
             </div> :
             null

@@ -7,14 +7,12 @@ interface TooltipProps {
   children: ReactNode;
   message: string;
   disabled?: boolean;
-  theme?: "light" | "dark";
 }
 
-export const Tooltip = ({ children, message, disabled, theme = "light" }: TooltipProps) => (
+export const Tooltip = ({ children, message, disabled }: TooltipProps) => (
   <ReactTippy
     disabled={disabled}
     arrow={true}
-    theme={theme}
     html={(
       <div className={styles.tooltipContainer}>{message}</div>
     )}
@@ -23,4 +21,4 @@ export const Tooltip = ({ children, message, disabled, theme = "light" }: Toolti
   >
     {children}
   </ReactTippy>
-);
+)

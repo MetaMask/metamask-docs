@@ -70,13 +70,13 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                 <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
               </span>
               <ul className={clsx(styles.dropdownList, !isOpened && styles.dropdownListClosed)}>
-                {listItems?.map(({ title }, index) => (
+                {listItems?.map((listItem, index) => (
                   <li
                     className={styles.dropdownItem}
                     key={index}
                     onClick={onDropdownOptionClick}
                   >
-                    {String(title)}
+                    {`${listItem.title}: ${listItem?.enum ? "enum" : listItem.type}`}
                   </li>
                 ))}
               </ul>
