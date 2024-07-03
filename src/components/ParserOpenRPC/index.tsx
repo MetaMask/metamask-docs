@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -8,11 +8,23 @@ import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
 import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
 import global from "./global.module.css";
+import modalDrawerStyles from "./ModalDrawer/styles.module.css";
+import clsx from "clsx";
+import { useColorMode } from "@docusaurus/theme-common";
 
 interface ParserProps {
   network: NETWORK_NAMES;
   method?: string;
 }
+
+interface ParserOpenRPCContextProps {
+  setIsDrawerContentFixed?: (isFixed: boolean) => void
+  setDrawerLabel?: (label: string) => void;
+  isComplexTypeView: boolean;
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
+}
+
+export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
@@ -20,6 +32,10 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(null);
   const [paramsData, setParamsData] = useState([]);
+  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
+  const [drawerLabel, setDrawerLabel] = useState(null);
+  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { colorMode } = useColorMode();
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -80,50 +96,81 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       setReqResult(response);
     } catch (e) {
       setReqResult(e);
-    };
+    }
   };
 
+  const closeComplexTypeView = () => {
+    setIsComplexTypeView(false);
+    setIsDrawerContentFixed(false);
+    setDrawerLabel(null);
+  }
+
+  const onModalClose = () => {
+    closeModal();
+    closeComplexTypeView();
+  }
+
   return (
-    <div className={global.rowWrap}>
-      <div className={global.colLeft}>
-        <div className={global.colContentWrap}>
-          <DetailsBox
-            method={method}
-            description={currentMethodData.description}
-            params={currentMethodData.params}
-            components={currentMethodData.components.schemas}
-            result={currentMethodData.result}
-            tags={currentMethodData.tags}
-          />
-          <ErrorsBox errors={currentMethodData.errors} />
+    <ParserOpenRPCContext.Provider
+      value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
+    >
+      <div className={global.rowWrap}>
+        <div className={global.colLeft}>
+          <div className={global.colContentWrap}>
+            <DetailsBox
+              method={method}
+              description={currentMethodData.description}
+              params={currentMethodData.params}
+              components={currentMethodData.components.schemas}
+              result={currentMethodData.result}
+              tags={currentMethodData.tags}
+            />
+            <ErrorsBox errors={currentMethodData.errors} />
+          </div>
+          <ModalDrawer
+            title={
+              isComplexTypeView && colorMode ?
+                <span className={modalDrawerStyles.modalTitleContainer}>
+                  <button
+                    className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
+                    onClick={closeComplexTypeView}
+                  >
+                    <img src={colorMode === "light" ? '/img/icons/chevron-left-dark-icon.svg' : '/img/icons/chevron-left-light-icon.svg'} />
+                  </button>
+                  Editing Param
+                </span>
+                 :
+                "Customize request"}
+            isOpen={isModalOpen}
+            onClose={onModalClose}
+            isContentFixed={isDrawerContentFixed}
+            headerLabel={drawerLabel ? drawerLabel : null}
+          >
+            <InteractiveBox
+              params={currentMethodData.params}
+              components={currentMethodData.components.schemas}
+              examples={currentMethodData.examples}
+              onParamChange={onParamsChangeHandle}
+              drawerLabel={drawerLabel}
+              closeComplexTypeView={closeComplexTypeView}
+            />
+          </ModalDrawer>
         </div>
-        <ModalDrawer
-          title="Customize request"
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        >
-          <InteractiveBox
-            params={currentMethodData.params}
-            components={currentMethodData.components.schemas}
-            examples={currentMethodData.examples}
-            onParamChange={onParamsChangeHandle}
-          />
-        </ModalDrawer>
-      </div>
-      <div className={global.colRight}>
-        <div className={global.stickyCol}>
-          <AuthBox isMetamaskInstalled={metamaskInstalled} />
-          <RequestBox
-            isMetamaskInstalled={metamaskInstalled}
-            method={method}
-            params={currentMethodData.params}
-            paramsData={paramsData}
-            response={reqResult}
-            openModal={openModal}
-            submitRequest={onSubmitRequestHandle}
-          />
+        <div className={global.colRight}>
+          <div className={global.stickyCol}>
+            <AuthBox isMetamaskInstalled={metamaskInstalled} />
+            <RequestBox
+              isMetamaskInstalled={metamaskInstalled}
+              method={method}
+              params={currentMethodData.params}
+              paramsData={paramsData}
+              response={reqResult}
+              openModal={openModal}
+              submitRequest={onSubmitRequestHandle}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </ParserOpenRPCContext.Provider>
   );
 }

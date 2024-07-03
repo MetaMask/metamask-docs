@@ -24,7 +24,7 @@
   text-decoration: none;
   color: #141618;
   background-color: #26A2FC;
-  box-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.40);
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.40);
 }
 
 .primaryBtn:disabled {
@@ -33,6 +33,31 @@
   color: #141618;
   background-color: #0376C9;
   box-shadow: none;
+}
+
+.secondaryBtn {
+  background: none;
+  border-radius: 999px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  border: 1px solid rgba(3, 118, 201, 1);
+  color: rgba(3, 118, 201, 1);
+}
+
+.secondaryBtn:hover {
+  text-decoration: none;
+  color: #141618;
+  background-color: #26A2FC;
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.40);
+}
+
+.secondaryBtn:disabled {
+  cursor: not-allowed;
+  text-decoration: none;
+  box-shadow: none;
+  opacity: 0.5;
 }
 
 .linkBtn {
