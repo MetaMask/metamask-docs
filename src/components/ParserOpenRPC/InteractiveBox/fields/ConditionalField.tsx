@@ -21,12 +21,12 @@ export const ConditionalField = (props: FieldTemplateProps) => {
     setIsComplexTypeView(true);
   }
   const onDropdownOptionClick = (e) => {
-    const selectedSchema = listItems.find(({ title }) => title === e.target.innerText);
+    const selectedSchema = listItems.find(({ title }) => title === e.target.dataset.value);
     const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type);
     if (isNullTypeSchema) {
       onChange(null);
     } else {
-      setSelectedTypeSchema(listItems.find(({ title }) => title === e.target.innerText));
+      setSelectedTypeSchema(listItems.find(({ title }) => title === e.target.dataset.value));
       showComplexTypeView();
     }
     setIsOpened(false);
@@ -75,6 +75,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     className={styles.dropdownItem}
                     key={index}
                     onClick={onDropdownOptionClick}
+                    data-value={listItem.title}
                   >
                     {`${listItem.title}: ${listItem?.enum ? "enum" : listItem.type}`}
                   </li>
