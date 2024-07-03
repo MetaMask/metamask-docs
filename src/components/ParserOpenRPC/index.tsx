@@ -1,9 +1,10 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { useSDK } from "@metamask/sdk-react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
-import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
+// import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
 import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
@@ -64,6 +65,18 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setMetamaskInstalled(installed);
   }, []);
 
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, provider, chainId } = useSDK();
+
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
+
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
       setParamsData([]);
@@ -73,7 +86,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   const onSubmitRequestHandle = async () => {
     try {
-      const response = await (window as any).ethereum.request({
+      const response = await provider.request({
         method: method,
         params: paramsData
       })
@@ -112,9 +125,23 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       </div>
       <div className={global.colRight}>
         <div className={global.stickyCol}>
-          <AuthBox isMetamaskInstalled={metamaskInstalled} />
+          {/* <AuthBox isMetamaskInstalled={connected} /> */}
+          <>
+            <button style={{ padding: 10, margin: 10 }} onClick={connect}>
+              Connect with MM SDK
+            </button>
+            {connected && (
+              <div>
+                <>
+                  {chainId && `Connected chain: ${chainId}`}
+                  <p></p>
+                  {account && `Connected account: ${account}`}
+                </>
+              </div>
+            )}
+          </>
           <RequestBox
-            isMetamaskInstalled={metamaskInstalled}
+            isMetamaskInstalled={connected}
             method={method}
             params={currentMethodData.params}
             paramsData={paramsData}
