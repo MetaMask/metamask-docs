@@ -105,14 +105,12 @@ An object mapping the IDs of permitted Snaps to their metadata:
 ```js
 await window.ethereum.request({
   "method": "wallet_requestSnaps",
-  "params": [
-    {
-      "npm:@metamask/example-snap": {},
-      "npm:fooSnap": {
-        "version": "^1.0.2"
-      }
+  "params": {
+    "npm:@metamask/example-snap": {},
+    "npm:foo-snap": {
+      "version": "^1.0.2"
     }
-  ]
+  }
 });
 ```
 
@@ -129,7 +127,7 @@ await window.ethereum.request({
   },
   "npm:fooSnap": {
     "version": "1.0.5",
-    "id": "npm:fooSnap",
+    "id": "npm:foo-snap",
     "enabled": true,
     "blocked": false
   }
@@ -168,14 +166,12 @@ The result of the Snap method call.
 ```js
 await window.ethereum.request({
   "method": "wallet_snap",
-  "params": [
-    {
-      "snapId": "npm:@metamask/example-snap",
-      "request": {
-        "method": "hello"
-      }
+  "params": {
+    "snapId": "npm:@metamask/example-snap",
+    "request": {
+      "method": "hello"
     }
-  ]
+  }
 });
 ```
 
@@ -218,14 +214,12 @@ The result of the Snap method call.
 ```js
 await window.ethereum.request({
   "method": "wallet_invokeSnap",
-  "params": [
-    {
-      "snapId": "npm:@metamask/example-snap",
-      "request": {
-        "method": "hello"
-      }
+  "params": {
+    "snapId": "npm:@metamask/example-snap",
+    "request": {
+      "method": "hello"
     }
-  ]
+  }
 });
 ```
 
