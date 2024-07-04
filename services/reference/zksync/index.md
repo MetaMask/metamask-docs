@@ -11,7 +11,7 @@ import CardList from '@site/src/components/CardList'
 ZKsync Era is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Infura provides public beta access to ZKsync Era.   
+Infura provides Open Beta access to the ZKsync Era network. During this period, there might be feature limitations. Performance issues are not expected, but they are possible as we optimize and stabilize the service.
 
 Currently, historical state data starting from June 19th, 2024 is available. Full historical state information for ZKsync Era will be announced when it is available.
 
