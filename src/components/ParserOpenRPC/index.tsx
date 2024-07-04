@@ -11,6 +11,7 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
+import useMetamaskProvider from "@site/src/hooks/useMetamaskProvider";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -28,7 +29,6 @@ export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | nu
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(null);
   const [paramsData, setParamsData] = useState([]);
@@ -38,6 +38,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const { colorMode } = useColorMode();
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+  const { isMetamaskInstalled, metamaskProvider } = useMetamaskProvider();
 
   const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
   const currentNetwork = netData.find(net => net.name === network);
@@ -75,11 +76,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  useEffect(() => {
-    const installed = !!(window as any)?.ethereum;
-    setMetamaskInstalled(installed);
-  }, []);
-
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
       setParamsData([]);
@@ -88,8 +84,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   }
 
   const onSubmitRequestHandle = async () => {
+    if (!metamaskProvider) return
     try {
-      const response = await (window as any).ethereum.request({
+      const response = await metamaskProvider.request({
         method: method,
         params: paramsData
       })
@@ -158,9 +155,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            <AuthBox isMetamaskInstalled={metamaskInstalled} />
+            <AuthBox isMetamaskInstalled={isMetamaskInstalled} />
             <RequestBox
-              isMetamaskInstalled={metamaskInstalled}
+              isMetamaskInstalled={isMetamaskInstalled}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
