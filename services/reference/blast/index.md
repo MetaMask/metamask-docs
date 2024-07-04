@@ -11,7 +11,7 @@ import CardList from '@site/src/components/CardList'
 Blast is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Infura provides Open Beta access to the Blast nwtork. During this period, there might be feature limitations. Performance issues are not expected, but they are possible as we optimize and stabilize the service.
+Infura provides Open Beta access to Blast. During this period, there might be feature limitations. Performance issues are not expected, but they are possible as we optimize and stabilize the service.
 
 :::
 
