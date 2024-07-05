@@ -81,9 +81,9 @@ Retrieve the current block number.
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
 ```
 
   </TabItem>
@@ -94,10 +94,10 @@ URL: https://mainnet.infura.io/v3/YOUR-API-KEY
 Request_Type: POST
 Body:
 {
-    "jsonrpc":"2.0",
-    "method":"eth_blockNumber",
-    "params":[],
-    "id":1
+  "jsonrpc":"2.0",
+  "method":"eth_blockNumber",
+  "params":[],
+  "id":1
 }
 ```
 
@@ -123,9 +123,9 @@ The example code checks the latest balance of the Ethereum Proof of Stake (PoS) 
 
 ```bash
 curl https://mainnet.infura.io/v3/API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_getBalance","params": ["0x00000000219ab540356cBB839Cbe05303d7705Fa", "latest"],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_getBalance","params": ["0x00000000219ab540356cBB839Cbe05303d7705Fa", "latest"],"id":1}'
 ```
 
   </TabItem>

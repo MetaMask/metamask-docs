@@ -25,9 +25,9 @@ Many Infura requests take the form:
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
 ```
 
 The code snippet above is an API call to Infura's Ethereum mainnet endpoint.

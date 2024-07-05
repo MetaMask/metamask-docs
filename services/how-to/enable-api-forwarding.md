@@ -30,17 +30,17 @@ In the code tabs, the `eth_blockNumber` method is used as an example.
 
 ```bash
 curl https://<network>.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Enable-Failover: true" \
-    -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
+  -X POST \
+  -H "Enable-Failover: true" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
 ```
 
   </TabItem>
   <TabItem value="Web3.js">
 
 ```js
-const { Web3 } = require('web3');
-const https = require('https');
+const { Web3 } = require("web3");
+const https = require("https");
 
 const options = {
     headers: {
@@ -50,7 +50,7 @@ const options = {
 
 const provider = new https.Agent(options);
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://<network>.infura.io/v3/YOUR-API-KEY', { agent: provider }));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://<network>.infura.io/v3/YOUR-API-KEY", { agent: provider }));
 
 web3.eth.getBlockNumber().then(console.log);
 ```
@@ -59,19 +59,19 @@ web3.eth.getBlockNumber().then(console.log);
   <TabItem value="Ethers.js">
 
 ```js
-const ethers = require('ethers');
-const fetch = require('node-fetch');
+const ethers = require("ethers");
+const fetch = require("node-fetch");
 
 class InfuraJsonRpcProvider extends ethers.providers.JsonRpcProvider {
     constructor(network, apiKey) {
         super(network, apiKey);
         this.fetchFunc = async (url, json, processFunc) => {
             const response = await fetch(url, {
-                method: 'POST',
+                method: "POST",
                 body: json.body,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Enable-Failover': 'true'
+                    "Content-Type": "application/json",
+                    "Enable-Failover": "true"
                 }
             });
 
@@ -88,7 +88,7 @@ class InfuraJsonRpcProvider extends ethers.providers.JsonRpcProvider {
     }
 }
 
-const provider = new InfuraJsonRpcProvider('https://<network>.infura.io/v3/YOUR-API-KEY');
+const provider = new InfuraJsonRpcProvider("https://<network>.infura.io/v3/YOUR-API-KEY");
 
 provider.getBlockNumber().then((blockNumber) => {
     console.log(blockNumber);

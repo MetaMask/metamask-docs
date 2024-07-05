@@ -126,9 +126,9 @@ If JWTs are required for all requests, the following fails with an `invalid JWT`
 
 ```bash
 curl -X POST \
--H "Content-Type: application/json" \
---data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' \
-"https://optimism-sepolia.infura.io/v3/<API-KEY>"
+  -H "Content-Type: application/json" \
+  --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' \
+  "https://optimism-sepolia.infura.io/v3/<API-KEY>"
 ```
 
 To get the request to pass, generate a JWT, and add it to the request.
@@ -159,10 +159,10 @@ Copy the encoded token as part of the `-H "Authorization: Bearer` entry:
 
 ```bash
 curl -X POST \
--H "Content-Type: application/json" \
--H "Authorization: Bearer  eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQyZjUxODRlMzE1ZTQwZDRiNzkzMjU3Nzg2OTEwOTNhIn0.eyJleHAiOjE4OTM0NTI0MDAsImF1ZCI6ImluZnVyYS5pbyJ9.rIBKHmxDsSEiiqEcbWPWkN6F28R95a0beGdnVgVQnnD7ESOKGosr2t9iQ7QyGvNO8-74gaPy_DqVn4sy1FvnullrWQc8Tmf5PrrX2ULiGfSUATvr-JPOga-KAgS6ftcStoACNmcN7QI-n7Gv7NqZC3zWMGzK_1SvYcSodXzoWwtkWmrMW9uPiu4MvROQH0sK7MJ4WHBIHii-x4wogH4PHEdGi_vFZohq2bRaaDKXBeJK7Tkke2whcydTHGuiAPQvRiHu5_wVptgDbTbKIQ28ZFQ4LpYStXE9Bck4JoVDeRQezWJN8Dx9ThU7j1xhWQqxQFWw3SPHry-cIejAWEfDTQ" \
---data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' \
-"https://mainnet.infura.io/v3/<API-KEY>"
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer  eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQyZjUxODRlMzE1ZTQwZDRiNzkzMjU3Nzg2OTEwOTNhIn0.eyJleHAiOjE4OTM0NTI0MDAsImF1ZCI6ImluZnVyYS5pbyJ9.rIBKHmxDsSEiiqEcbWPWkN6F28R95a0beGdnVgVQnnD7ESOKGosr2t9iQ7QyGvNO8-74gaPy_DqVn4sy1FvnullrWQc8Tmf5PrrX2ULiGfSUATvr-JPOga-KAgS6ftcStoACNmcN7QI-n7Gv7NqZC3zWMGzK_1SvYcSodXzoWwtkWmrMW9uPiu4MvROQH0sK7MJ4WHBIHii-x4wogH4PHEdGi_vFZohq2bRaaDKXBeJK7Tkke2whcydTHGuiAPQvRiHu5_wVptgDbTbKIQ28ZFQ4LpYStXE9Bck4JoVDeRQezWJN8Dx9ThU7j1xhWQqxQFWw3SPHry-cIejAWEfDTQ" \
+  --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' \
+  "https://mainnet.infura.io/v3/<API-KEY>"
 ```
 
 ```bash
@@ -213,10 +213,10 @@ The following example JWT definition allows only `eth_getBalance` requests, on a
 
 ```bash
 curl -X POST \
--H "Content-Type: application/json" \
--H "Authorization: Bearer  eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQyZjUxODRlMzE1ZTQwZDRiNzkzMjU3Nzg2OTEwOTNhIn0.eyJleHAiOjE4OTM0NTI0MDAsImF1ZCI6ImluZnVyYS5pbyIsImFkZHJlc3NlcyI6WyIweDE5MzdjNWM1MTUwNTc1NTNjY2JkNDZkNTg2NjQ1NWNlNjYyOTAyODQiXSwibWV0aG9kcyI6WyJldGhfZ2V0QmFsYW5jZSJdfQ.SwonSCVgybdT_GPQXe5SfhujmyzG-qpgH6zzVEzLZbZpZKsVQzOzFu3X1zHydvITzl3WhKXq5q8acHdMEO8y2TpUeyeLB25A-bnSZj8YlxacQvsnSNzm4ySJrTglmjD9rsr6JzKfgub03RuHuz0AWWO4omD6UrPcfcpxUF9YXEcT98SIsodPP_41WPrRvBuo8kLhmByr2Qs-XQRCDzxHxHb5jXI5RzoxLeEjTU_3GfWqgqgh4XHogcK43_VFGz9gv8QEoUiPnySafV6H80WXo12XwTeF-lr2cy_q79ZOvSp0WC4_j8dQMhNwj2dhZv1VPsViZMeHjBAJwK5mzIxBlQ" \
---data '{"jsonrpc": "2.0", "id": 1, "method": "eth_getBalance", "params": [ "0x1937c5c515057553ccbd46d5866455ce66290284", "latest"]}' \
-"https://mainnet.infura.io/v3/<API-KEY>"
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer  eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQyZjUxODRlMzE1ZTQwZDRiNzkzMjU3Nzg2OTEwOTNhIn0.eyJleHAiOjE4OTM0NTI0MDAsImF1ZCI6ImluZnVyYS5pbyIsImFkZHJlc3NlcyI6WyIweDE5MzdjNWM1MTUwNTc1NTNjY2JkNDZkNTg2NjQ1NWNlNjYyOTAyODQiXSwibWV0aG9kcyI6WyJldGhfZ2V0QmFsYW5jZSJdfQ.SwonSCVgybdT_GPQXe5SfhujmyzG-qpgH6zzVEzLZbZpZKsVQzOzFu3X1zHydvITzl3WhKXq5q8acHdMEO8y2TpUeyeLB25A-bnSZj8YlxacQvsnSNzm4ySJrTglmjD9rsr6JzKfgub03RuHuz0AWWO4omD6UrPcfcpxUF9YXEcT98SIsodPP_41WPrRvBuo8kLhmByr2Qs-XQRCDzxHxHb5jXI5RzoxLeEjTU_3GfWqgqgh4XHogcK43_VFGz9gv8QEoUiPnySafV6H80WXo12XwTeF-lr2cy_q79ZOvSp0WC4_j8dQMhNwj2dhZv1VPsViZMeHjBAJwK5mzIxBlQ" \
+  --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_getBalance", "params": [ "0x1937c5c515057553ccbd46d5866455ce66290284", "latest"]}' \
+  "https://mainnet.infura.io/v3/<API-KEY>"
 ```
 
 ```bash
