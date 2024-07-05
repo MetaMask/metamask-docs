@@ -91,7 +91,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const axios = require('axios');
+    const axios = require("axios");
     
     axios.post("https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY", {
       jsonrpc: "2.0",
@@ -169,7 +169,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
         "params": [],
         "id": 1
     }
-"
+
     headers = {"content-type": "application/json"}
 
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
