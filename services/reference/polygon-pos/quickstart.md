@@ -32,11 +32,11 @@ curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
 
 ### Node (JavaScript)
 
-In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
 
 #### Node Fetch
 
-1. In your project folder, install the Node Fetch package using npm:
+1. In your project folder, install the `node-fetch` package using npm::
 
     ```bash
     npm i node-fetch
@@ -80,7 +80,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
 
 #### Axios
 
-1. In your project folder, install the Axios package using npm:
+1. In your project folder, install the `axios` package using npm:
 
     ```bash
     npm i axios

@@ -96,25 +96,25 @@ endpoint = "https://ipfs.infura.io:5001"
 
 ### CREATE AN ARRAY OF TEST FILES ###
 files = {
-    'file': 'myNFT.png'
+    "file": "myNFT.png"
 }
 
 ### ADD FILE TO IPFS AND SAVE THE HASH ###
-response1 = requests.post(endpoint + '/api/v0/add', files=files, auth=(projectId, projectSecret))
+response1 = requests.post(endpoint + "/api/v0/add", files=files, auth=(projectId, projectSecret))
 print(response1)
 hash = response1.text.split(",")[1].split(":")[1].replace('"','')
-print(hash)
+print(hash
 
 ### READ FILE WITH HASH ###
 params = {
-    'arg': hash
+    "arg": hash
 }
-response2 = requests.post(endpoint + '/api/v0/cat', params=params, auth=(projectId, projectSecret))
+response2 = requests.post(endpoint + "/api/v0/cat", params=params, auth=(projectId, projectSecret))
 print(response2)
 print(response2.text)
 
 ### REMOVE OBJECT WITH PIN/RM ###
-response3 = requests.post(endpoint + '/api/v0/pin/rm', params=params, auth=(projectId, projectSecret))
+response3 = requests.post(endpoint + "api/v0/pin/rm", params=params, auth=(projectId, projectSecret))
 print(response3.json())
 ```
 
@@ -127,7 +127,7 @@ Output something like:
 QmWtBbpKST49AQFLx8HAdwwjUu7HBP2wrtAH1x8df5qrVm
 <Response [200]>
 myNFT.png
-{'Pins': ['QmWtBbpKST49AQFLx8HAdwwjUu7HBP2wrtAH1x8df5qrVm']}
+{"Pins": ["QmWtBbpKST49AQFLx8HAdwwjUu7HBP2wrtAH1x8df5qrVm"]}
 ```
 
 ### `kubo-rpc-client`
@@ -139,11 +139,11 @@ Install the library with `npm install --save kubo-rpc-client`.
 Save the following script to a file, e.g. `index.mjs`.
 
 ```javascript
-import { create } from 'kubo-rpc-client'
+import { create } from "kubo-rpc-client"
 
 const projectId = "<API_KEY>";
 const projectSecret = "<API_KEY_SECRET>";
-const auth =
+const auth 
   "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
 const client = create({

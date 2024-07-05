@@ -14,10 +14,10 @@ Add a DAG node to IPFS.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/put?store-codec=dag-cbor&#x26;input-codec=dag-json&#x26;pin=&#x3C;value>&#x26;hash=sha2-256" \
-    -X POST \
-    -u "&#x3C;API_KEY>:&#x3C;API_KEY_SECRET>" \
-    -H "Content-Type: multipart/form-data" \
-    -F file=@"&#x3C;file>"
+  -X POST \
+  -u "&#x3C;API_KEY>:&#x3C;API_KEY_SECRET>" \
+  -H "Content-Type: multipart/form-data" \
+  -F file=@"&#x3C;file>"
 ```
 
   </TabItem>
@@ -25,10 +25,10 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/put?store-codec=dag-cbor&#x26;input
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/put" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET" \
-    -H "Content-Type: multipart/form-data" \
-    -F file=@"/sample-result.json"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET" \
+  -H "Content-Type: multipart/form-data" \
+  -F file=@"/sample-result.json"
 ```
 
   </TabItem>

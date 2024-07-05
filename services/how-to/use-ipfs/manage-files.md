@@ -24,7 +24,7 @@ curl -X POST -F file=@myfile \
   "Name": "ipfs_file_docs_getting_started_demo.txt",
   "Hash": "QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
   "Size": "44"
-  }
+}
 ```
 
 When you upload a file using the `/api/v0/add` endpoint, the file is automatically pinned, and it isn't necessary to `pin` again.

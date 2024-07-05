@@ -25,14 +25,14 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 
 ```bash
 curl https://celo-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 ```
 
 ### Node (JavaScript)
 
-In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
 
 #### Node Fetch
 
@@ -47,7 +47,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    import fetch from 'node-fetch';
+    import fetch from "node-fetch";
 
     fetch("https://celo-mainnet.infura.io/v3/YOUR-API-KEY", {
       method: "POST",
@@ -80,7 +80,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
 
 #### Axios
 
-1. In your project folder, install the Axios package using npm:
+1. In your project folder, install the `axios` package using npm:
 
     ```bash
     npm i axios
@@ -91,11 +91,11 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const axios = require('axios');
+    const axios = require("axios");
     
-    axios.post('https://celo-mainnet.infura.io/v3/YOUR-API-KEY', {
-      jsonrpc: '2.0',
-      method: 'eth_blockNumber',
+    axios.post("https://celo-mainnet.infura.io/v3/YOUR-API-KEY", {
+      jsonrpc: "2.0",
+      method: "eth_blockNumber",
       params: [],
       id: 1
     })
@@ -126,9 +126,9 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const ethers = require('ethers');
+    const ethers = require("ethers");
 
-    const provider = new ethers.providers.JsonRpcProvider('https://celo-mainnet.infura.io/v3/YOUR-API-KEY');
+    const provider = new ethers.providers.JsonRpcProvider("https://celo-mainnet.infura.io/v3/YOUR-API-KEY");
 
     provider.getBlockNumber()
     .then(blockNumber => {
@@ -161,7 +161,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
     import requests
     import json
 
-    url = 'https://celo-mainnet.infura.io/v3/YOUR-API-KEY'
+    url = "https://celo-mainnet.infura.io/v3/YOUR-API-KEY"
 
     payload = {
         "jsonrpc": "2.0",
@@ -170,7 +170,7 @@ In these examples,you'll use [npm](https://docs.npmjs.com/downloading-and-instal
         "id": 1
     }
 
-    headers = {'content-type': 'application/json'}
+    headers = {"content-type": "application/json"}
 
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 
@@ -197,4 +197,3 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
-

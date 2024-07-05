@@ -14,8 +14,8 @@ Resolve IPLD block.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/resolve?arg=<key>" \
-    -X POST \
-    -u "<API_KEY>:<API_KEY_SECRET>"
+  -X POST \
+  -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,8 +23,8 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/resolve?arg=<key>" \
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/resolve?arg=QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>
@@ -42,10 +42,10 @@ On success, the call to this endpoint will return with 200 and the following bod
 
 ```js
 {
-    Cid: {
-        /: "QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy"
-    },
-    RemPath: ""
+  Cid: {
+      /: "QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy"
+  },
+  RemPath: ""
 }
 ```
 

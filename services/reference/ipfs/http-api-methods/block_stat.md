@@ -14,8 +14,8 @@ Print information of a raw IPFS block.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/stat?arg=<key>" \
-    -X POST \
-    -u "<API_KEY>:<API_KEY_SECRET>"
+  -X POST \
+  -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,8 +23,8 @@ curl "https://ipfs.infura.io:5001/api/v0/block/stat?arg=<key>" \
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/stat?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>
@@ -43,8 +43,8 @@ On success, the call to this endpoint will return with 200 and the following bod
 
 ```js
 {
-    Key: "QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM",
-    Size: 18
+  Key: "QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM",
+  Size: 18
 }
 ```
 

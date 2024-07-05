@@ -47,7 +47,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    import fetch from 'node-fetch';
+    import fetch from "node-fetch";
 
     fetch("https://blast-mainnet.infura.io/v3/YOUR-API-KEY", {
       method: "POST",
@@ -91,11 +91,11 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const axios = require('axios');
+    const axios = require("axios");
     
-    axios.post('https://blast-mainnet.infura.io/v3/YOUR-API-KEY', {
-      jsonrpc: '2.0',
-      method: 'eth_blockNumber',
+    axios.post("https://blast-mainnet.infura.io/v3/YOUR-API-KEY", {
+      jsonrpc: "2.0",
+      method: "eth_blockNumber",
       params: [],
       id: 1
     })
@@ -126,9 +126,9 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const ethers = require('ethers');
+    const ethers = require("ethers");
 
-    const provider = new ethers.providers.JsonRpcProvider('https://blast-mainnet.infura.io/v3/YOUR-API-KEY');
+    const provider = new ethers.providers.JsonRpcProvider("https://blast-mainnet.infura.io/v3/YOUR-API-KEY");
 
     provider.getBlockNumber()
     .then(blockNumber => {
@@ -161,7 +161,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
     import requests
     import json
 
-    url = 'https://blast-mainnet.infura.io/v3/YOUR-API-KEY'
+    url = "https://blast-mainnet.infura.io/v3/YOUR-API-KEY"
 
     payload = {
         "jsonrpc": "2.0",
@@ -170,7 +170,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
         "id": 1
     }
 
-    headers = {'content-type': 'application/json'}
+    headers = {"content-type": "application/json"}
 
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 
@@ -198,4 +198,3 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
-

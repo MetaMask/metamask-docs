@@ -44,7 +44,7 @@ instead of using the cURL authentication option (`-u`).
   <TabItem value="cURL" label="cURL" default >
 
 ```bash
-curl -X 'GET' \
+curl -X "GET" \
   -u <API_KEY>:<API_KEY_SECRET> \
   "https://gas.api.infura.io/networks/1/busyThreshold"
 ```

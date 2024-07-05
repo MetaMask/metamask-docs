@@ -25,9 +25,9 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 
 ```bash
 curl https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 ```
 
 ### Node (JavaScript)
@@ -36,7 +36,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Node Fetch
 
-1. In your project folder, install the Node Fetch package using npm:
+1. In your project folder, install the `node-fetch` package using npm:
 
     ```bash
     npm i node-fetch
@@ -80,7 +80,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Axios
 
-1. In your project folder, install the Axios package using npm:
+1. In your project folder, install the `axios` package using npm:
 
     ```bash
     npm i axios
@@ -93,15 +93,15 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     ```javascript title="index.js"
     const axios = require('axios');
     
-    axios.post('https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY', {
-      jsonrpc: '2.0',
-      method: 'eth_blockNumber',
+    axios.post("https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY", {
+      jsonrpc: "2.0",
+      method: "eth_blockNumber",
       params: [],
       id: 1
     })
     .then(response => {
       console.log(response.data);
-    })
+    }
     .catch(error => {
       console.error(error);
     });
@@ -126,9 +126,9 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     Replace `YOUR-API-KEY` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const ethers = require('ethers');
+    const ethers = require("ethers");
 
-    const provider = new ethers.providers.JsonRpcProvider('https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY');
+    const provider = new ethers.providers.JsonRpcProvider("https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY");
 
     provider.getBlockNumber()
     .then(blockNumber => {
@@ -161,7 +161,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     import requests
     import json
 
-    url = 'https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY'
+    url = "https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY"
 
     payload = {
         "jsonrpc": "2.0",
@@ -169,8 +169,8 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
         "params": [],
         "id": 1
     }
-
-    headers = {'content-type': 'application/json'}
+"
+    headers = {"content-type": "application/json"}
 
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 
