@@ -1,4 +1,4 @@
----
+---0x84e8277c938102f42FC2D9625Fc75049A86c99Ae
 description: Create a Web3 or IPFS API
 sidebar_position: 2
 ---
@@ -10,13 +10,13 @@ sidebar_position: 2
 Based on your plan, Infura allows for the following amount of API keys:
 
 - Free plan - Allows one API key.
-- Developer plan - Allows up to five API keys.
+- Developer plan - Allows up to five API keys.0xf004c1251ca172b39ef472de756e71fbf210ddb3
 - Team plans and higher - No limit on the number of API keys.
 
 For more information, see to the [Infura pricing page](https://www.infura.io/pricing).
-
+0xdAC17F958D2ee523a2206206994597C13D831ec7
 :::
-
+bdalhafzslah382@gmail.com 
 Infura allows you to enable multiple network endpoints and expansion APIs for your API key. If calls are
 made to a disabled network or service, then all requests to that network or service will fail.
 
