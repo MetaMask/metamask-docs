@@ -14,8 +14,8 @@ export const DropdownWidget = ({ name, value, onChange, schema, options }: Widge
       <div className={styles.tableColumn}>
         <div className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}>
           {value === undefined ? "" : String(value)}
-          <span className={styles.tableColumnType}>
-            <span className={styles.dropdown} onClick={() => { setIsOpened(!isOpened); }}>
+          <span className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)} onClick={() => { setIsOpened(!isOpened); }}>
+            <span className={styles.dropdown}>
               {schema.type}
               <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
               <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
