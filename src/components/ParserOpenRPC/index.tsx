@@ -90,7 +90,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   const location = useLocation();
 
-  // const [metamaskProviders, setMetamaskProviders] = useState([]);
   const [selectedWallet, setSelectedWallet] = useState(0);
   const providers = useSyncProviders();
 
@@ -107,7 +106,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   }, []);
 
   const metamaskProviders = useMemo(() => {
-    return providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
+    const isMetamasks = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
+    if (isMetamasks.length > 1) {
+      const indexWallet = isMetamasks.findIndex(item => item.info.name === "MetaMask");
+      setSelectedWallet(indexWallet);
+    }
+    return isMetamasks;
   }, [providers]);
 
   const onParamsChangeHandle = (data) => {

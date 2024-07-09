@@ -23,7 +23,7 @@ export const AuthBox = ({ metamaskProviders = [], selectedProvider, handleConnec
     return <MetamaskInstallMessage />
   }
 
-  if (metamaskProviders.length === 1) {
+  if (metamaskProviders.length > 0) {
     return null
   }
 
