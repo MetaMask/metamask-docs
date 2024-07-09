@@ -190,6 +190,11 @@ const config = {
             label: "What's new?",
             position: "right",
           },
+          {
+            href: "https://support.metamask.io/",
+            label: "User support",
+            position: "right",
+          },
           /* Language drop down
           {
             type: "localeDropdown",
@@ -272,6 +277,10 @@ const config = {
               {
                 label: "Contribute to the docs",
                 href: "https://github.com/MetaMask/metamask-docs/blob/main/CONTRIBUTING.md",
+              },
+              {
+                label: "MetaMask user support",
+                href: "https://support.metamask.io/",
               },
             ],
           },

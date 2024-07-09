@@ -3,8 +3,7 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import WalletSection from "@site/src/components/WalletSection";
-import SnapsSection from "@site/src/components/SnapsSection";
+import CardSection from "@site/src/components/CardSection";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -51,8 +50,7 @@ export default function Home(): JSX.Element {
       title={"Home"}>
       <HomepageHeader />
       <main>
-        <WalletSection />
-        <SnapsSection />
+        <CardSection />
         <DevBanner />
       </main>
     </Layout>
