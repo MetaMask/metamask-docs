@@ -190,6 +190,11 @@ const config = {
             label: "What's new?",
             position: "right",
           },
+          {
+            href: "https://support.metamask.io/",
+            label: "User support",
+            position: "right",
+          },
           /* Language drop down
           {
             type: "localeDropdown",
@@ -216,16 +221,8 @@ const config = {
             title: "Documentation",
             items: [
               {
-                label: "Home",
-                to: "/",
-              },
-              {
-                label: "MetaMask wallet",
+                label: "Wallet",
                 to: "/wallet",
-              },
-              {
-                label: "MetaMask SDK",
-                to: "/wallet/how-to/use-sdk",
               },
               {
                 label: "Snaps",
@@ -234,6 +231,10 @@ const config = {
               {
                 label: "Services",
                 to: "/services",
+              },
+              {
+                label: "Infura dashboard",
+                to: "/developer-tools/dashboard",
               },
             ],
           },
@@ -272,6 +273,10 @@ const config = {
               {
                 label: "Contribute to the docs",
                 href: "https://github.com/MetaMask/metamask-docs/blob/main/CONTRIBUTING.md",
+              },
+              {
+                label: "MetaMask user support",
+                href: "https://support.metamask.io/",
               },
             ],
           },
