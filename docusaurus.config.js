@@ -221,16 +221,8 @@ const config = {
             title: "Documentation",
             items: [
               {
-                label: "Home",
-                to: "/",
-              },
-              {
-                label: "MetaMask wallet",
+                label: "Wallet",
                 to: "/wallet",
-              },
-              {
-                label: "MetaMask SDK",
-                to: "/wallet/how-to/use-sdk",
               },
               {
                 label: "Snaps",
@@ -239,6 +231,10 @@ const config = {
               {
                 label: "Services",
                 to: "/services",
+              },
+              {
+                label: "Infura dashboard",
+                to: "/developer-tools/dashboard",
               },
             ],
           },
