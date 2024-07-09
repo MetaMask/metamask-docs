@@ -328,3 +328,9 @@ button:hover {
 [data-theme="dark"] .tippy-popper[x-placement^=top] [x-arrow] {
   border-top-color: rgba(255, 255, 255, 1);
 }
+
+@media (max-width: 1200px) {
+  .navbar__item {
+    font-size: 14px;
+  }
+}

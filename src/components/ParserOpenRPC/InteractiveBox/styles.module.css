@@ -61,6 +61,13 @@
   line-height: 24px;
   font-size: 14px;
 }
+.tableColumnTypeDropdown {
+  width: 100%;
+  justify-content: flex-end;
+}
+.tableColumnTypeDropdown:hover {
+  cursor: pointer;
+}
 .tableLabelIconError {
   width: 11px;
   height: 11px;
