@@ -11,6 +11,12 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
+import {
+  trackPageViewForSegment,
+  trackClickForSegment,
+  trackInputChangeForSegment
+} from "@site/src/lib/segmentAnalytics";
+import { useLocation } from "@docusaurus/router";
 import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
 
 interface ParserProps {
@@ -36,7 +42,14 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const { colorMode } = useColorMode();
-  const openModal = () => setModalOpen(true);
+  const openModal = () => {
+    setModalOpen(true);
+    trackClickForSegment({
+      eventName: "Customize Request",
+      clickType: "Customize Request",
+      userExperience: "new"
+    })
+  };
   const closeModal = () => setModalOpen(false);
 
   const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
@@ -75,7 +88,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const [metamaskProviders, setMetamaskProviders] = useState([]);
+  const location = useLocation();
+
+  // const [metamaskProviders, setMetamaskProviders] = useState([]);
   const [selectedWallet, setSelectedWallet] = useState(0);
   const providers = useSyncProviders();
 
@@ -84,8 +99,15 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   }
 
   useEffect(() => {
-    const isMetamaskProviders = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
-    setMetamaskProviders([...isMetamaskProviders]);
+    trackPageViewForSegment({
+      name: "Reference page",
+      path: location.pathname,
+      userExperience: "new"
+    })
+  }, []);
+
+  const metamaskProviders = useMemo(() => {
+    return providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
   }, [providers]);
 
   const onParamsChangeHandle = (data) => {
@@ -93,6 +115,10 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       setParamsData([]);
     }
     setParamsData(Object.values(data));
+    trackInputChangeForSegment({
+      eventName: "Request Configuration Started",
+      userExperience: "new"
+    })
   }
 
   const onSubmitRequestHandle = async () => {
@@ -103,6 +129,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         params: paramsData
       })
       setReqResult(response);
+      trackClickForSegment({
+        eventName: "Request Sent",
+        clickType: "Request Sent",
+        userExperience: "new",
+        ...(response?.code && { responseStatus: response.code })
+      })
     } catch (e) {
       setReqResult(e);
     }
