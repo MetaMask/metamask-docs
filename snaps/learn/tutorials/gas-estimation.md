@@ -3,6 +3,9 @@ description: Create a Snap that estimates gas fees.
 sidebar_position: 1
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Create a Snap to estimate gas fees
 
 This tutorial walks you through creating a Snap that estimates gas fees.
@@ -24,21 +27,28 @@ Create a new Snap project using the
 [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
+<Tabs>
+  <TabItem value="yarn" label="yarn" default>
+
 ```bash
 yarn create @metamask/snap gas-estimation-snap
 ```
-
-or
+  </TabItem>
+  <TabItem value="npx" label="npx" >
 
 ```bash
 npx @metamask/create-snap gas-estimation-snap
 ```
 
-or
+  </TabItem>
+    <TabItem value="npm" label="npm" >
 
 ```bash
 npm create @metamask/snap gas-estimation-snap
 ```
+  </TabItem>
+</Tabs>
+
 
 Next, `cd` into the `gas-estimation-snap` project directory and run:
 
@@ -47,18 +57,25 @@ yarn install
 ```
 
 This initializes your development environment with the required dependencies. 
-You may get a warning similar to the following: 
+
+<details>
+  <summary>Did you get a warning?</summary>
+  <div>
+You may get a warning such as: 
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
-You can resolve this error by running the following command: 
+You can resolve this error by running: 
 
 ```bash 
 yarn run allow-scripts auto
 ```
+ </div>
+</details>
+
 
 ### 2. Add a custom icon
 
