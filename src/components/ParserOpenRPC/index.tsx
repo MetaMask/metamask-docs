@@ -17,6 +17,7 @@ import {
   trackInputChangeForSegment
 } from "@site/src/lib/segmentAnalytics";
 import { useLocation } from "@docusaurus/router";
+import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -34,7 +35,6 @@ export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | nu
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(null);
   const [paramsData, setParamsData] = useState([]);
@@ -90,15 +90,29 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   const location = useLocation();
 
+  const [selectedWallet, setSelectedWallet] = useState(0);
+  const providers = useSyncProviders();
+
+  const handleConnect = (i:number) => {
+    setSelectedWallet(i);
+  }
+
   useEffect(() => {
-    const installed = !!(window as any)?.ethereum;
-    setMetamaskInstalled(installed);
     trackPageViewForSegment({
       name: "Reference page",
       path: location.pathname,
       userExperience: "new"
     })
   }, []);
+
+  const metamaskProviders = useMemo(() => {
+    const isMetamasks = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
+    if (isMetamasks.length > 1) {
+      const indexWallet = isMetamasks.findIndex(item => item.info.name === "MetaMask");
+      setSelectedWallet(indexWallet);
+    }
+    return isMetamasks;
+  }, [providers]);
 
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
@@ -112,8 +126,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   }
 
   const onSubmitRequestHandle = async () => {
+    if (metamaskProviders.length === 0) return
     try {
-      const response = await (window as any).ethereum.request({
+      const response = await metamaskProviders[selectedWallet].provider.request({
         method: method,
         params: paramsData
       })
@@ -188,9 +203,13 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            <AuthBox isMetamaskInstalled={metamaskInstalled} />
+            <AuthBox
+              metamaskProviders={metamaskProviders}
+              selectedProvider={selectedWallet}
+              handleConnect={handleConnect}
+            />
             <RequestBox
-              isMetamaskInstalled={metamaskInstalled}
+              isMetamaskInstalled={metamaskProviders.length > 0}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
