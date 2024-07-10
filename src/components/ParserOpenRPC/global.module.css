@@ -85,7 +85,7 @@
 
 .colLeft {
   position: relative;
-  width: 65%;
+  width: calc(100% - 420px);
   border-right: 1px solid #444950;
   overflow: hidden;
 }
@@ -97,7 +97,7 @@
 }
 
 .colRight {
-  width: 35%;
+  width: 420px;
   padding-left: 23px;
 }
 

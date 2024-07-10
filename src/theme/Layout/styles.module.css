@@ -1,0 +1,21 @@
+.pageWrapper {
+  display: flex;
+  width: 100%;
+  flex: 1 0 0%;
+}
+
+.mainContainer {
+  width: 100%;
+  padding: 20px 30px;
+}
+
+.contentWrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (width <= 997px) {
+  .pageWrapper {
+    display: block;
+  }
+}
