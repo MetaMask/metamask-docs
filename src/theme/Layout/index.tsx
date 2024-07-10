@@ -6,7 +6,6 @@ import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
-import { trackPageViewForSegment } from "@site/src/lib/segmentAnalytics";
 import styles from "./styles.module.css";
 
 const REF_FF = "mm-new-reference-enabled";
@@ -31,11 +30,6 @@ export default function LayoutWrapper({ children }) {
     if (currentPath.includes(REF_PATH) && metamaskMethods.length > 0) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(name => name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name));
-      trackPageViewForSegment({
-        name: "Reference page",
-        path: location.pathname,
-        userExperience: page ? "B" : "A"
-      })
       return page;
     }
     return false;
