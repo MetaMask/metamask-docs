@@ -34,19 +34,19 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
--X POST \
--H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"bor_getAuthor","params":["0x1000"], "id":1}'
-  ```
+```bash
+curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "bor_getAuthor", "params": ["0x1000"], "id": 1}'
+```
 
   </TabItem>
   <TabItem value="WSS">
 
-  ```bash
-  wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc":"2.0","method":"bor_getAuthor","params":["0x1000"], "id":1}'
-  ```
+```bash
+wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc": "2.0", "method": "bor_getAuthor", "params": ["0x1000"], "id": 1}'
+```
 
   </TabItem>
 </Tabs>
@@ -54,5 +54,9 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 ### Response
 
 ```json
-{"jsonrpc":"2.0","id":1,"result":"0x42eefcda06ead475cde3731b8eb138e88cd0bac3"}
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x42eefcda06ead475cde3731b8eb138e88cd0bac3"
+}
 ```

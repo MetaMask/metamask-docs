@@ -36,7 +36,7 @@ To display an alert that can only be acknowledged, call
 The following example displays custom UI that alerts the user when something happens in the system:
 
 ```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -47,7 +47,7 @@ await snap.request({
       text("The thing that happened is..."),
     ]),
   },
-});
+})
 
 // Code that should execute after the alert has been acknowledged.
 ```
@@ -64,7 +64,7 @@ The following example displays custom UI that asks the user to confirm whether t
 take an action:
 
 ```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 const result = await snap.request({
   method: "snap_dialog",
@@ -75,7 +75,7 @@ const result = await snap.request({
       text("The action is..."),
     ]),
   },
-});
+})
 
 if (result === true) {
   // Do the action.
@@ -95,7 +95,7 @@ Prompt dialogs also accept a `placeholder` value that displays in the input fiel
 The following example displays custom UI that prompts the user to enter a wallet address:
 
 ```javascript title="index.js"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 const walletAddress = await snap.request({
   method: "snap_dialog",
@@ -107,7 +107,7 @@ const walletAddress = await snap.request({
     ]),
     placeholder: "0x123...",
   },
-});
+})
 
 // walletAddress will be a string containing the address entered by the user.
 ```

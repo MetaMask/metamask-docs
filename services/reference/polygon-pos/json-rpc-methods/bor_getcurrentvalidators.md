@@ -39,19 +39,19 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
--X POST \
--H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"bor_getCurrentValidators","params":[], "id":1}'
-  ```
+```bash
+curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "bor_getCurrentValidators", "params": [], "id": 1}'
+```
 
   </TabItem>
   <TabItem value="WSS">
 
-  ```bash
-  wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc":"2.0","method":"bor_getCurrentValidators","params":[], "id":1}'
-  ```
+```bash
+wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc": "2.0", "method": "bor_getCurrentValidators", "params": [], "id": 1}'
+```
 
   </TabItem>
 </Tabs>
@@ -60,28 +60,28 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": [
-        {
-            "ID": 0,
-            "accum": 14,
-            "power": 1,
-            "signer": "0x055bd801ca712b4ddf67db8bc23fb6c8510d52b9"
-        },
-        {
-            "ID": 0,
-            "accum": 0,
-            "power": 4,
-            "signer": "0x1ca971963bdb4ba2bf337c90660674acff5beb3f"
-        },
-        {
-            "ID": 0,
-            "accum": -15,
-            "power": 1,
-            "signer": "0x26c80cc193b27d73d2c40943acec77f4da2c5bd8"
-        },
- ...
-    ]
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "ID": 0,
+      "accum": 14,
+      "power": 1,
+      "signer": "0x055bd801ca712b4ddf67db8bc23fb6c8510d52b9"
+    },
+    {
+      "ID": 0,
+      "accum": 0,
+      "power": 4,
+      "signer": "0x1ca971963bdb4ba2bf337c90660674acff5beb3f"
+    },
+    {
+      "ID": 0,
+      "accum": -15,
+      "power": 1,
+      "signer": "0x26c80cc193b27d73d2c40943acec77f4da2c5bd8"
+    }
+    // Additional objects here
+  ]
 }
 ```

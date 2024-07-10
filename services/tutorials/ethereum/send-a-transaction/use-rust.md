@@ -2,6 +2,7 @@
 title: "Use Rust"
 description: A tutorial for legacy and EIP-1559 transactions.
 ---
+
 # Use Rust
 
 In this two-part tutorial we'll use Rust and the [ethers-rs library](https://www.gakonst.com/ethers-rs/getting-started/intro.html) to:
@@ -9,19 +10,19 @@ In this two-part tutorial we'll use Rust and the [ethers-rs library](https://www
 - Send a legacy transaction `("type":"0x0")`
 - Send an EIP-1559 transaction `("type":"0x2")`
 
-This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../concepts/transaction-types.md). 
+This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../concepts/transaction-types.md).
 
 ## Prerequisites
 
 - Make sure that you have test ETH in your MetaMask wallet. You can obtain test ETH for the Sepolia network using the
-    [Infura Sepolia faucet](https://www.infura.io/faucet/sepolia).
+  [Infura Sepolia faucet](https://www.infura.io/faucet/sepolia).
 - [Install Rust from The Cargo Book](https://doc.rust-lang.org/cargo/getting-started/installation.html).
 
 ## Send a legacy transaction
 
 ### 1. Create a new project
 
-Open a terminal and create a new project. 
+Open a terminal and create a new project.
 
 ```Rust
 cargo new infura_rs
@@ -41,6 +42,7 @@ infura_rs
 Refer to the [Cargo documentation](https://doc.rust-lang.org/cargo/getting-started/first-steps.html) for more information about getting started with Cargo.
 
 :::
+
 ### 2. Edit the dependencies
 
 Open `Cargo.toml` with your preferred editor and add the following dependencies to it:
@@ -56,7 +58,7 @@ serde_json = "1.0.96"
 
 ### 3. Update the main code
 
-Open the Rust source `src/main.rs` and replace its contents with the following code: 
+Open the Rust source `src/main.rs` and replace its contents with the following code:
 
 ```rust showLineNumbers
 use ethers::{
@@ -79,9 +81,9 @@ async fn main() -> Result<()> {
     let chain_id = provider.get_chainid().await?;
 
     // Define the signer.
-    // Replace the SIGNER_PRIVATE_KEY with 
-    // the private key of your Ethereum account (without the 0x prefix). 
-    // However, we recommended that you load it from 
+    // Replace the SIGNER_PRIVATE_KEY with
+    // the private key of your Ethereum account (without the 0x prefix).
+    // However, we recommended that you load it from
     // an .env file or external vault.
     let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
         .parse::<LocalWallet>()?
@@ -93,8 +95,8 @@ async fn main() -> Result<()> {
     let client = SignerMiddleware::new(provider, wallet);
 
    // Craft the transaction
-   // The below code knows how to figure out the 
-   // default gas value and determine the next nonce 
+   // The below code knows how to figure out the
+   // default gas value and determine the next nonce
    // so you do not need to explicitly add them.
    let tx = TransactionRequest::new()
         .to(to_address)
@@ -117,14 +119,15 @@ async fn main() -> Result<()> {
 Next, make the following updates to the above code:
 
 - On line 16 replace the `INFURA_API_KEY` with you API key from the
-    [Infura dashboard](../../../../../developer-tools/dashboard/get-started/create-api/).
-- On line 26 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account. 
+  [Infura dashboard](../../../../../developer-tools/dashboard/get-started/create-api/).
+- On line 26 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account.
 - On line 29, use a test address, such as [`0xAED01C776d98303eE080D25A21f0a42D94a86D9c`](https://sepolia.etherscan.io/address/0xaed01c776d98303ee080d25a21f0a42d94a86d9c).
 
 :::tip Secure your keys
 To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
 :::
 `
+
 ### 4. Run the code
 
 From the `infura_rs` directory, run the code.
@@ -133,7 +136,7 @@ From the `infura_rs` directory, run the code.
 cargo run
 ```
 
-You will see an output similar to the following. 
+You will see an output similar to the following.
 :::note Use the wrap button
 Use the wrap button on the top right of the below code block window for wrapped display.
 :::
@@ -177,9 +180,9 @@ async fn main() -> Result<()> {
     let chain_id = provider.get_chainid().await?;
 
     // Define the signer.
-    // Replace the SIGNER_PRIVATE_KEY with 
-    // the private key of your Ethereum account (without the 0x prefix). 
-    // However, we recommended that you load it from 
+    // Replace the SIGNER_PRIVATE_KEY with
+    // the private key of your Ethereum account (without the 0x prefix).
+    // However, we recommended that you load it from
     // an .env file or external vault.
     let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
         .parse::<LocalWallet>()?
@@ -219,7 +222,7 @@ From the `infura_rs` directory, run the code.
 cargo run
 ```
 
-You will see an output similar to the following. 
+You will see an output similar to the following.
 
 ```log
 Compiling infura_rs v0.1.0 (/Users/rajkaramchedu/onboarding/traian-tutorials/infura_rs)

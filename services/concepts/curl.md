@@ -27,7 +27,7 @@ Many Infura requests take the form:
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
 The code snippet above is an API call to Infura's Ethereum mainnet endpoint.
@@ -81,7 +81,7 @@ The `method` , `params` , and `id` values are modifiable.
 The `jsonrpc` value is required by the specification.
 
 ```bash
--d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
+-d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
 #### Running curl
@@ -93,5 +93,5 @@ Enter curl code in a terminal window, or a command line tool from your computer'
 curl returns a response object if the request is successful.
 
 ```bash
-{"jsonrpc":"2.0","id":3,"result":"0xe0a763"}
+{"jsonrpc": "2.0", "id": 3, "result": "0xe0a763"}
 ```

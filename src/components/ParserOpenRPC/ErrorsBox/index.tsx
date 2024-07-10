@@ -1,30 +1,40 @@
-import React from "react";
-import { useColorMode } from "@docusaurus/theme-common";
-import clsx from "clsx";
-import Heading from "@theme/Heading";
-import { MDContent } from "@site/src/components/ParserOpenRPC/DetailsBox/MDContent";
-import styles from "./styles.module.css";
+import React from "react"
+import { useColorMode } from "@docusaurus/theme-common"
+import clsx from "clsx"
+import Heading from "@theme/Heading"
+import { MDContent } from "@site/src/components/ParserOpenRPC/DetailsBox/MDContent"
+import styles from "./styles.module.css"
 
 interface ErrorItem {
-  code: number;
-  message: string;
+  code: number
+  message: string
 }
 
 interface ErrorsBoxProps {
-  errors: ErrorItem[];
+  errors: ErrorItem[]
 }
 
-export default function ErrorsBox ({ errors }: ErrorsBoxProps) {
-  const { colorMode } = useColorMode();
-  if (errors.length === 0) return null;
+export default function ErrorsBox({ errors }: ErrorsBoxProps) {
+  const { colorMode } = useColorMode()
+  if (errors.length === 0) return null
 
   return (
     <>
-      <Heading as="h2" className={clsx(styles.secondaryHeading, "padding-vert--md")}>
+      <Heading
+        as="h2"
+        className={clsx(styles.secondaryHeading, "padding-vert--md")}
+      >
         Errors
       </Heading>
       <div className={styles.errWrapper}>
-        <div className={clsx(styles.errRowHeading, colorMode === "light" ? styles.errRowHeadingLightView : styles.errRowHeadingDarkView)}>
+        <div
+          className={clsx(
+            styles.errRowHeading,
+            colorMode === "light"
+              ? styles.errRowHeadingLightView
+              : styles.errRowHeadingDarkView
+          )}
+        >
           <div className={styles.errColCode}>Code</div>
           <div className={styles.errColMsg}>Message</div>
         </div>
@@ -38,5 +48,5 @@ export default function ErrorsBox ({ errors }: ErrorsBoxProps) {
         ))}
       </div>
     </>
-  );
+  )
 }

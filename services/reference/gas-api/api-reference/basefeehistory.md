@@ -53,19 +53,17 @@ curl -X "GET" \
   <TabItem value="JavaScript" label="Javascript">
 
 ```javascript
-const axios = require("axios");
+const axios = require("axios")
 
-const apiKey = "<API-KEY>"; // Replace with your API key.
-const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
+const apiKey = "<API-KEY>" // Replace with your API key.
+const apiKeySecret = "<API-KEY-SECRET>" // Replace with your API key secret.
 
-const Auth = Buffer.from(
-  apiKey + ":" + apiKeySecret,
-).toString("base64");
+const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64")
 
 // The chain ID of the supported network.
-const chainId = 1;
+const chainId = 1
 
-(async () => {
+;(async () => {
   try {
     const { data } = await axios.get(
       `https://gas.api.infura.io/networks/${chainId}/baseFeeHistory`,
@@ -74,12 +72,12 @@ const chainId = 1;
           Authorization: `Basic ${Auth}`,
         },
       }
-    );
-    console.log("Base fee history:", data);
+    )
+    console.log("Base fee history:", data)
   } catch (error) {
-    console.log("Server responded with:", error);
+    console.log("Server responded with:", error)
   }
-})();
+})()
 ```
 
   </TabItem>

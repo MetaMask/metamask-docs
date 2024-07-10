@@ -1,6 +1,7 @@
 ---
 description: debug_traceBlockByHash API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -12,11 +13,11 @@ Returns tracing results by executing all transactions in the block specified by 
 
 - `blockHash`: (string) _[required]_ hash of the block to trace.
 - Optional tracing options object with the following fields:
-    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
-        [`prestateTracer`](../debug/index.md#prestatetracer).
-    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
-        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-            sub-calls. It eliminates the additional processing for each call frame.
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
+    [`prestateTracer`](../debug/index.md#prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 

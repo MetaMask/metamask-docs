@@ -43,6 +43,6 @@ const sidebar = {
       ],
     },
   ],
-};
+}
 
-module.exports = sidebar;
+module.exports = sidebar

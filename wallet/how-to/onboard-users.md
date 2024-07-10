@@ -32,30 +32,30 @@ You don't need to set up the onboarding library if you use the SDK.
 1. Install [@metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
 1. Import the library or include it in your page:
 
-    ```javascript
-    // As an ES6 module
-    import MetaMaskOnboarding from "@metamask/onboarding";
-    // Or as an ES5 module
-    const MetaMaskOnboarding = require("@metamask/onboarding");
-    ```
+   ```javascript
+   // As an ES6 module
+   import MetaMaskOnboarding from "@metamask/onboarding"
+   // Or as an ES5 module
+   const MetaMaskOnboarding = require("@metamask/onboarding")
+   ```
 
-    Alternatively, you can include the prebuilt ES5 bundle that ships with the library:
+   Alternatively, you can include the prebuilt ES5 bundle that ships with the library:
 
-    ```html
-    <script src="./metamask-onboarding.bundle.js"></script>
-    ```
+   ```html
+   <script src="./metamask-onboarding.bundle.js"></script>
+   ```
 
 1. Create a new instance of the onboarding library:
 
-    ```javascript
-    const onboarding = new MetaMaskOnboarding();
-    ```
+   ```javascript
+   const onboarding = new MetaMaskOnboarding()
+   ```
 
 1. Start the onboarding process in response to a user event (for example, a button click):
 
-    ```javascript
-    onboarding.startOnboarding();
-    ```
+   ```javascript
+   onboarding.startOnboarding()
+   ```
 
 ## Example
 
@@ -65,72 +65,69 @@ The following are example ways to use the onboarding library in various framewor
 <TabItem value="React">
 
 ```jsx
-import MetaMaskOnboarding from "@metamask/onboarding";
-import React from "react";
+import MetaMaskOnboarding from "@metamask/onboarding"
+import React from "react"
 
-const ONBOARD_TEXT = "Click here to install MetaMask!";
-const CONNECT_TEXT = "Connect";
-const CONNECTED_TEXT = "Connected";
+const ONBOARD_TEXT = "Click here to install MetaMask!"
+const CONNECT_TEXT = "Connect"
+const CONNECTED_TEXT = "Connected"
 
 export function OnboardingButton() {
-  const [buttonText, setButtonText] = React.useState(ONBOARD_TEXT);
-  const [isDisabled, setDisabled] = React.useState(false);
-  const [accounts, setAccounts] = React.useState([]);
-  const onboarding = React.useRef();
+  const [buttonText, setButtonText] = React.useState(ONBOARD_TEXT)
+  const [isDisabled, setDisabled] = React.useState(false)
+  const [accounts, setAccounts] = React.useState([])
+  const onboarding = React.useRef()
 
   React.useEffect(() => {
     if (!onboarding.current) {
-      onboarding.current = new MetaMaskOnboarding();
+      onboarding.current = new MetaMaskOnboarding()
     }
-  }, []);
+  }, [])
 
   React.useEffect(() => {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
       if (accounts.length > 0) {
-        setButtonText(CONNECTED_TEXT);
-        setDisabled(true);
-        onboarding.current.stopOnboarding();
+        setButtonText(CONNECTED_TEXT)
+        setDisabled(true)
+        onboarding.current.stopOnboarding()
       } else {
-        setButtonText(CONNECT_TEXT);
-        setDisabled(false);
+        setButtonText(CONNECT_TEXT)
+        setDisabled(false)
       }
     }
-  }, [accounts]);
+  }, [accounts])
 
   React.useEffect(() => {
     function handleNewAccounts(newAccounts) {
-      setAccounts(newAccounts);
+      setAccounts(newAccounts)
     }
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
       provider // Or window.ethereum if you don't support EIP-6963.
         .request({ method: "eth_requestAccounts" })
-        .then(handleNewAccounts);
+        .then(handleNewAccounts)
       provider // Or window.ethereum if you don't support EIP-6963.
-        .on("accountsChanged", handleNewAccounts);
+        .on("accountsChanged", handleNewAccounts)
       return () => {
         provider // Or window.ethereum if you don't support EIP-6963.
-          .removeListener(
-            "accountsChanged",
-            handleNewAccounts
-          );
-      };
+          .removeListener("accountsChanged", handleNewAccounts)
+      }
     }
-  }, []);
+  }, [])
 
   const onClick = () => {
     if (MetaMaskOnboarding.isMetaMaskInstalled()) {
       provider // Or window.ethereum if you don't support EIP-6963.
         .request({ method: "eth_requestAccounts" })
-        .then((newAccounts) => setAccounts(newAccounts));
+        .then((newAccounts) => setAccounts(newAccounts))
     } else {
-      onboarding.current.startOnboarding();
+      onboarding.current.startOnboarding()
     }
-  };
+  }
   return (
     <button disabled={isDisabled} onClick={onClick}>
       {buttonText}
     </button>
-  );
+  )
 }
 ```
 
@@ -156,55 +153,54 @@ helpful documentation:
 ```html
 <!doctype html>
 <html lang="en-CA">
-    <head>
-        <title>MetaMask Onboarding Example</title>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <h1>Sample Dapp</h1>
-        <button id="onboard">Loading...</button>
-        <script src="./metamask-onboarding.bundle.js"></script>
-        <script>
-            window.addEventListener("DOMContentLoaded", () => {
-                const onboarding = new MetaMaskOnboarding();
-                const onboardButton = document.getElementById("onboard");
-                let accounts;
+  <head>
+    <title>MetaMask Onboarding Example</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>Sample Dapp</h1>
+    <button id="onboard">Loading...</button>
+    <script src="./metamask-onboarding.bundle.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const onboarding = new MetaMaskOnboarding()
+        const onboardButton = document.getElementById("onboard")
+        let accounts
 
-                const updateButton = () => {
-                    if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
-                        onboardButton.innerText =
-                            "Click here to install MetaMask!";
-                        onboardButton.onclick = () => {
-                            onboardButton.innerText = "Onboarding in progress";
-                            onboardButton.disabled = true;
-                            onboarding.startOnboarding();
-                        };
-                    } else if (accounts && accounts.length > 0) {
-                        onboardButton.innerText = "Connected";
-                        onboardButton.disabled = true;
-                        onboarding.stopOnboarding();
-                    } else {
-                        onboardButton.innerText = "Connect";
-                        onboardButton.onclick = async () => {
-                            await provider // Or window.ethereum if you don't support EIP-6963.
-                                .request({
-                                    method: "eth_requestAccounts",
-                                });
-                        };
-                    }
-                };
+        const updateButton = () => {
+          if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
+            onboardButton.innerText = "Click here to install MetaMask!"
+            onboardButton.onclick = () => {
+              onboardButton.innerText = "Onboarding in progress"
+              onboardButton.disabled = true
+              onboarding.startOnboarding()
+            }
+          } else if (accounts && accounts.length > 0) {
+            onboardButton.innerText = "Connected"
+            onboardButton.disabled = true
+            onboarding.stopOnboarding()
+          } else {
+            onboardButton.innerText = "Connect"
+            onboardButton.onclick = async () => {
+              await provider // Or window.ethereum if you don't support EIP-6963.
+                .request({
+                  method: "eth_requestAccounts",
+                })
+            }
+          }
+        }
 
-                updateButton();
-                if (MetaMaskOnboarding.isMetaMaskInstalled()) {
-                    provider // Or window.ethereum if you don't support EIP-6963.
-                        .on("accountsChanged", (newAccounts) => {
-                            accounts = newAccounts;
-                            updateButton();
-                        });
-                }
-            });
-        </script>
-    </body>
+        updateButton()
+        if (MetaMaskOnboarding.isMetaMaskInstalled()) {
+          provider // Or window.ethereum if you don't support EIP-6963.
+            .on("accountsChanged", (newAccounts) => {
+              accounts = newAccounts
+              updateButton()
+            })
+        }
+      })
+    </script>
+  </body>
 </html>
 ```
 

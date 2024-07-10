@@ -129,7 +129,7 @@ const limit = provider.estimateGas({
   from: signer.address,
   to: "<to_address_goes_here>",
   value: ethers.utils.parseUnits("0.001", "ether"),
-});
+})
 
 // Creating and sending the transaction object
 const tx = await signer.sendTransaction({
@@ -139,5 +139,5 @@ const tx = await signer.sendTransaction({
   nonce: signer.getTransactionCount(),
   maxPriorityFeePerGas: ethers.utils.parseUnits("2", "gwei"),
   chainId: 3,
-});
+})
 ```

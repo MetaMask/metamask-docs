@@ -95,43 +95,43 @@ Never disclose your private key. Anyone with your private keys can steal any ass
 In this example we'll create a JavaScript file (`send.js`) in the project directory which configures and sends the transaction.
 
 ```javascript title="send.js"
-const { Web3 } = require("web3");
+const { Web3 } = require("web3")
 
 async function main() {
   // Configuring the connection to the Polygon node
-  const network = process.env.POLYGON_NETWORK;
+  const network = process.env.POLYGON_NETWORK
   const web3 = new Web3(
     new Web3.providers.HttpProvider(
-      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    ),
-  );
+      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`
+    )
+  )
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
-    process.env.SIGNER_PRIVATE_KEY,
-  );
-  web3.eth.accounts.wallet.add(signer);
+    process.env.SIGNER_PRIVATE_KEY
+  )
+  web3.eth.accounts.wallet.add(signer)
   // Creating the transaction object
   const tx = {
     from: signer.address,
     to: "0xAED01C776d98303eE080D25A21f0a42D94a86D9c",
     value: web3.utils.toWei("0.001", "ether"),
-  };
+  }
   // Assigning the right amount of gas
-  tx.gas = await web3.eth.estimateGas(tx);
+  tx.gas = await web3.eth.estimateGas(tx)
 
   // Sending the transaction to the network
   const receipt = await web3.eth
     .sendTransaction(tx)
     .once("transactionHash", (txhash) => {
-      console.log(`Mining transaction ...`);
-      console.log(`Transaction hash: ${txhash}`);
-    });
+      console.log(`Mining transaction ...`)
+      console.log(`Transaction hash: ${txhash}`)
+    })
   // The transaction is now on chain!
-  console.log(`Mined in block ${receipt.blockNumber}`);
+  console.log(`Mined in block ${receipt.blockNumber}`)
 }
 
-require("dotenv").config();
-main();
+require("dotenv").config()
+main()
 ```
 
 ### 7. Execute the transaction

@@ -5,12 +5,12 @@
 }
 
 .collapsedWrapperView {
-  border-color: #848C96;
+  border-color: #848c96;
 }
 
 .collapseBtn {
   background: none;
-  color: #1098FC;
+  color: #1098fc;
   font-size: 14px;
   line-height: 1;
   display: inline-flex;
@@ -18,12 +18,12 @@
   align-items: center;
   min-width: 190px;
   border-radius: 999px;
-  border: 1px solid #0376C9;
+  border: 1px solid #0376c9;
   padding: 12px 22px;
   margin-bottom: 1px;
   cursor: pointer;
-  transition-property: 'border-color', 'background-color';
-  transition-duration: .2s;
+  transition-property: "border-color", "background-color";
+  transition-duration: 0.2s;
   transition-timing-function: ease;
 }
 
@@ -31,20 +31,20 @@
   width: 10px;
   height: 10px;
   margin: 0 0 0 5px;
-  border-top: 2px solid #0376C9;
-  border-right: 2px solid #0376C9;
+  border-top: 2px solid #0376c9;
+  border-right: 2px solid #0376c9;
   transform: rotate(45deg);
-  transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 
 .collapseBtn:hover {
   color: #141618;
-  background-color: #0376C9;
+  background-color: #0376c9;
 }
 
 .collapsedBtnLightHover:hover {
   color: #fff;
-  background-color: #036AB5;
+  background-color: #036ab5;
 }
 
 .collapseBtn:hover .collapseIcon {
@@ -64,18 +64,18 @@
 }
 
 .collapsedBtnView:hover {
-  color: #0376C9;
+  color: #0376c9;
   text-decoration: underline;
-  background-color: #24272A;
+  background-color: #24272a;
 }
 
 .collapsedBtnView.collapsedBtnLightHover:hover {
-  background-color: #F2F4F6;
+  background-color: #f2f4f6;
 }
 
 .collapsedBtnView:hover .collapseIcon {
-  border-top-color: #0376C9;
-  border-right-color: #0376C9;
+  border-top-color: #0376c9;
+  border-right-color: #0376c9;
 }
 
 .collapsedIconView {

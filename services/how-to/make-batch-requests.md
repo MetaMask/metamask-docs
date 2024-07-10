@@ -6,7 +6,7 @@ sidebar_position: 3
 # Make batch requests
 
 Multiple requests can be sent at the same time in an array. This is called a [batch](https://www.jsonrpc.org/specification#batch)
-request, and conforms to the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/specification). Batch is also commonly 
+request, and conforms to the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/specification). Batch is also commonly
 eferred to as "multi-call."
 
 :::info

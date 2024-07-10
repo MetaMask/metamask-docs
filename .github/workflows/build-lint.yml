@@ -25,7 +25,6 @@ jobs:
         uses: ConsenSys/docs-gha/build@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
 
   lint:
     name: Lint
@@ -39,4 +38,3 @@ jobs:
         uses: ConsenSys/docs-gha/lint@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      

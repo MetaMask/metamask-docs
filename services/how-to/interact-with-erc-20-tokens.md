@@ -51,9 +51,8 @@ web3.sha3('Transfer(address,address,uint256)')[0..4]
   </TabItem>
   <TabItem value="Result" label="Result" >
 
-
 ```javascript
-0x70a08231;
+0x70a08231
 ```
 
   </TabItem>
@@ -161,14 +160,14 @@ To find out which topic (event) it actually was, create the [function selector](
   <TabItem value="Example console request" label="Example console request" default>
 
 ```javascript
-web3.sha3("Approval(address,address,uint256)");
+web3.sha3("Approval(address,address,uint256)")
 ```
 
   </TabItem>
   <TabItem value="JS result" label="JS result" >
 
 ```javascript
-0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925;
+0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
 ```
 
   </TabItem>
@@ -180,13 +179,14 @@ The resulting hash doesn’t match the hash provided in the initial request resp
   <TabItem value="Example node request" label="Example node request" default>
 
 ```javascript
-web3.sha3("Transfer(address,address,uint256)");
+web3.sha3("Transfer(address,address,uint256)")
 ```
+
   </TabItem>
   <TabItem value="Example JS result" label="Example JS result" >
 
 ```javascript
-0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef;
+0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 ```
 
   </TabItem>

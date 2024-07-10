@@ -1,6 +1,7 @@
 ---
 description: debug_traceBlockByNumber API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -11,13 +12,13 @@ Returns tracing results by executing all transactions in the specified block num
 ## Parameters
 
 - `blockNumber`: (string) _[required]_ block number as a hexidecimal string, or one of the string tags `latest`, `earliest`
-    , or `pending`, as [described in the default block parameters](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+  , or `pending`, as [described in the default block parameters](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - Optional tracing options object with the following fields:
-    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-        [`prestateTracer`](index.md##prestatetracer).
-    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
-        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-            sub-calls. It eliminates the additional processing for each call frame.
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
+    [`prestateTracer`](index.md##prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 
@@ -38,6 +39,7 @@ curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
 -d '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
 
 ```
+
   </TabItem>
   <TabItem value="WSS" label="WSS" >
 

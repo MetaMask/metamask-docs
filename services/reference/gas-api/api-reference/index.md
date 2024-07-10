@@ -20,9 +20,9 @@ Use the APIs to:
 You can call the Gas APIs in two ways:
 
 - **Using the API key only** - Add your [API key](../../../../developer-tools/dashboard/get-started/create-api)
-    as a path option.
+  as a path option.
 - **Using the API key and API key secret** - Use basic authentication and specify the API key
-    and [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
+  and [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
 
 <Tabs>
   <TabItem value="API key only" label="Use an API key only" default>
@@ -34,9 +34,9 @@ curl -X "GET" "https://gas.api.infura.io/v3/<API_KEY>/networks/1/suggestedGasFee
   </TabItem>
   <TabItem value="API key and API key secret" label="Use an API key and API key secret" >
 
-  ```bash
+```bash
 curl -X "GET" -u <API_KEY>:<API_KEY_SECRET> "https://gas.api.infura.io/networks/1/suggestedGasFees"
 ```
- 
+
   </TabItem>
 </Tabs>

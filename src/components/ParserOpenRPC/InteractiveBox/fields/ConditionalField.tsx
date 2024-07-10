@@ -1,35 +1,44 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FieldTemplateProps } from "@rjsf/utils";
-import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
-import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
-import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import clsx from "clsx";
+import React, { useContext, useEffect, useState } from "react"
+import { FieldTemplateProps } from "@rjsf/utils"
+import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate"
+import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget"
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css"
+import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC"
+import clsx from "clsx"
 
 export const ConditionalField = (props: FieldTemplateProps) => {
-  const [isOpened, setIsOpened] = useState(false);
-  const [selectedTypeSchema, setSelectedTypeSchema] = useState(null);
-  const [isEditView, setIsEditView] = useState(false);
-  const { setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
-  const { formData, schema, name, onChange } = props;
-  const listItems = schema?.anyOf ? schema?.anyOf : schema?.oneOf;
-  const checkForNullTypeSchema = (type) => type === "null";
+  const [isOpened, setIsOpened] = useState(false)
+  const [selectedTypeSchema, setSelectedTypeSchema] = useState(null)
+  const [isEditView, setIsEditView] = useState(false)
+  const {
+    setIsDrawerContentFixed,
+    setDrawerLabel,
+    isComplexTypeView,
+    setIsComplexTypeView,
+  } = useContext(ParserOpenRPCContext)
+  const { formData, schema, name, onChange } = props
+  const listItems = schema?.anyOf ? schema?.anyOf : schema?.oneOf
+  const checkForNullTypeSchema = (type) => type === "null"
   const showComplexTypeView = () => {
-    setDrawerLabel(name);
-    setIsDrawerContentFixed(true);
-    setIsEditView(true);
-    setIsComplexTypeView(true);
+    setDrawerLabel(name)
+    setIsDrawerContentFixed(true)
+    setIsEditView(true)
+    setIsComplexTypeView(true)
   }
   const onDropdownOptionClick = (e) => {
-    const selectedSchema = listItems.find(({ title }) => title === e.target.dataset.value);
-    const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type);
+    const selectedSchema = listItems.find(
+      ({ title }) => title === e.target.dataset.value
+    )
+    const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type)
     if (isNullTypeSchema) {
-      onChange(null);
+      onChange(null)
     } else {
-      setSelectedTypeSchema(listItems.find(({ title }) => title === e.target.dataset.value));
-      showComplexTypeView();
+      setSelectedTypeSchema(
+        listItems.find(({ title }) => title === e.target.dataset.value)
+      )
+      showComplexTypeView()
     }
-    setIsOpened(false);
+    setIsOpened(false)
   }
   const selectWidgetProps = {
     ...props,
@@ -37,20 +46,23 @@ export const ConditionalField = (props: FieldTemplateProps) => {
     label: name,
     value: formData,
     ...(selectedTypeSchema?.enum && {
-      options:{
-        enumOptions: selectedTypeSchema?.enum.map(item => ({ label: item, value: item }))
-      }
-    })
+      options: {
+        enumOptions: selectedTypeSchema?.enum.map((item) => ({
+          label: item,
+          value: item,
+        })),
+      },
+    }),
   }
   const baseInputProps = {
     ...props,
-    schema: selectedTypeSchema
+    schema: selectedTypeSchema,
   }
 
   useEffect(() => {
-    if(!isComplexTypeView) {
-      setIsEditView(false);
-      setSelectedTypeSchema(null);
+    if (!isComplexTypeView) {
+      setIsEditView(false)
+      setSelectedTypeSchema(null)
     }
   }, [isComplexTypeView])
 
@@ -61,15 +73,40 @@ export const ConditionalField = (props: FieldTemplateProps) => {
           <label className={styles.tableColumnParam}>{name}</label>
         </div>
         <div className={styles.tableColumn}>
-          <div className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}>
+          <div
+            className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}
+          >
             {formData === undefined ? "" : String(formData)}
             <span className={styles.tableColumnType}>
-              <span className={styles.dropdown} onClick={() => { setIsOpened(!isOpened); }}>
+              <span
+                className={styles.dropdown}
+                onClick={() => {
+                  setIsOpened(!isOpened)
+                }}
+              >
                 {schema?.anyOf ? "anyOf" : "oneOf"}
-                <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
-                <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
+                <span
+                  className={clsx(
+                    styles.tableColumnIcon,
+                    styles.chevronIcon,
+                    styles.dropdownChevronIcon,
+                    !isOpened && styles.chevronIconDown
+                  )}
+                />
+                <span
+                  className={clsx(
+                    styles.chevronIcon,
+                    styles.dropdownChevronIcon,
+                    !isOpened && styles.chevronIconDown
+                  )}
+                />
               </span>
-              <ul className={clsx(styles.dropdownList, !isOpened && styles.dropdownListClosed)}>
+              <ul
+                className={clsx(
+                  styles.dropdownList,
+                  !isOpened && styles.dropdownListClosed
+                )}
+              >
                 {listItems?.map((listItem, index) => (
                   <li
                     className={styles.dropdownItem}
@@ -85,12 +122,18 @@ export const ConditionalField = (props: FieldTemplateProps) => {
           </div>
         </div>
       </div>
-      {isComplexTypeView && isEditView && selectedTypeSchema && selectedTypeSchema.type !== "null" ?
+      {isComplexTypeView &&
+      isEditView &&
+      selectedTypeSchema &&
+      selectedTypeSchema.type !== "null" ? (
         <div className={styles.tableComplexType}>
-          {selectedTypeSchema?.enum ? <SelectWidget {...selectWidgetProps} /> : <BaseInputTemplate {...baseInputProps} />}
+          {selectedTypeSchema?.enum ? (
+            <SelectWidget {...selectWidgetProps} />
+          ) : (
+            <BaseInputTemplate {...baseInputProps} />
+          )}
         </div>
-        : null
-      }
+      ) : null}
     </>
-  ) : null;
+  ) : null
 }

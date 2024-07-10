@@ -1,6 +1,7 @@
 ---
 description: rollup_gasPrices API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -42,11 +43,11 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 ```json
 {
-  "jsonrpc":"2.0",
-  "id":1,
-  "result":{
-    "l1GasPrice":"0x254aa66732",
-    "l2GasPrice":"0xf3792"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "l1GasPrice": "0x254aa66732",
+    "l2GasPrice": "0xf3792"
   }
 }
 ```

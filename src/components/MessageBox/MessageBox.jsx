@@ -1,21 +1,21 @@
-import React from "react";
-import Icon from "@site/src/components/Icon/Icon";
-import { MSG_TYPES } from "@site/src/lib/constants";
+import React from "react"
+import Icon from "@site/src/components/Icon/Icon"
+import { MSG_TYPES } from "@site/src/lib/constants"
 
 const MessageBox = ({ opened, type, title, description }) => {
   if (!opened) {
-    return null;
+    return null
   }
   const renderIcon = () => {
     switch (type) {
       case MSG_TYPES.ERROR:
-        return <Icon name="alert-error" />;
+        return <Icon name="alert-error" />
       case MSG_TYPES.SUCCESS:
-        return <Icon name="alert-success" />;
+        return <Icon name="alert-success" />
       default:
-        return <Icon name="alert-info" />;
+        return <Icon name="alert-info" />
     }
-  };
+  }
 
   return (
     <div className={`message-box ${type}`}>
@@ -25,7 +25,7 @@ const MessageBox = ({ opened, type, title, description }) => {
       </div>
       <div className="message-box-body">{description}</div>
     </div>
-  );
-};
+  )
+}
 
-export default MessageBox;
+export default MessageBox

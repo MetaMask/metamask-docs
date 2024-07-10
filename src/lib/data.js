@@ -35,9 +35,9 @@ export const API_LINKS = {
       href: "https://docs.ipfs.tech/reference/http/api/",
     },
   ],
-};
+}
 
-const LOGO_PATH = "/img/logos";
+const LOGO_PATH = "/img/logos"
 
 export const NETWORK_LINKS = [
   {
@@ -110,4 +110,4 @@ export const NETWORK_LINKS = [
     href: "/services/reference/zksync",
     logo: `${LOGO_PATH}/logo-zksync.svg`,
   },
-];
+]

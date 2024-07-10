@@ -27,7 +27,7 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
 ### Node (JavaScript)
@@ -38,150 +38,152 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. In your project folder, install the `node-fetch` package using npm::
 
-    ```bash
-    npm i node-fetch
-    ``````
+   ```bash
+   npm i node-fetch
+   ```
 
 1. Create your JavaScript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    import fetch from 'node-fetch';
+   ```javascript title="index.js"
+   import fetch from "node-fetch"
 
-    fetch("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        method: "eth_blockNumber",
-        params: [],
-        id: 1
-      })
-    })
-    .then(response =>
-      response.json()
-    )
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    ```
+   fetch("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+       jsonrpc: "2.0",
+       method: "eth_blockNumber",
+       params: [],
+       id: 1,
+     }),
+   })
+     .then((response) => response.json())
+     .then((data) => {
+       console.log(data)
+     })
+     .catch((error) => {
+       console.error(error)
+     })
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 #### Axios
 
 1. In your project folder, install the `axios` package using npm:
 
-    ```bash
-    npm i axios
-    ``````
+   ```bash
+   npm i axios
+   ```
 
 1. Create your JavaScript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    const axios = require("axios");
-    
-    axios.post("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY", {
-      jsonrpc: "2.0",
-      method: "eth_blockNumber",
-      params: [],
-      id: 1
-    })
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    ```
+   ```javascript title="index.js"
+   const axios = require("axios")
+
+   axios
+     .post("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY", {
+       jsonrpc: "2.0",
+       method: "eth_blockNumber",
+       params: [],
+       id: 1,
+     })
+     .then((response) => {
+       console.log(response.data)
+     })
+     .catch((error) => {
+       console.error(error)
+     })
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 #### Ethers
 
 1. In your project folder, install the `ethers` package using npm:
 
-    ```bash
-    npm install ethers
-    ``````
+   ```bash
+   npm install ethers
+   ```
 
 1. Create your JavaScript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    const ethers = require("ethers");
+   ```javascript title="index.js"
+   const ethers = require("ethers")
 
-    const provider = new ethers.providers.JsonRpcProvider("https://zksync-mainnet.infura.io/v3/YOUR-API-KEY");
+   const provider = new ethers.providers.JsonRpcProvider(
+     "https://zksync-mainnet.infura.io/v3/YOUR-API-KEY"
+   )
 
-    provider.getBlockNumber()
-    .then(blockNumber => {
-      console.log(blockNumber);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    ```
+   provider
+     .getBlockNumber()
+     .then((blockNumber) => {
+       console.log(blockNumber)
+     })
+     .catch((error) => {
+       console.error(error)
+     })
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 ### Python
 
 1. In your project folder, install the `requests` library:
 
-    ```bash
-    pip install requests
-    ``````
+   ```bash
+   pip install requests
+   ```
 
 1. Create your Python file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```python title="index.py"
-    import requests
-    import json
+   ```python title="index.py"
+   import requests
+   import json
 
-    url = "https://zksync-mainnet.infura.io/v3/YOUR-API-KEY"
+   url = "https://zksync-mainnet.infura.io/v3/YOUR-API-KEY"
 
-    payload = {
-      "jsonrpc": "2.0",
-      "method": "eth_blockNumber",
-      "params": [],
-      "id": 1
-    }
+   payload = {
+     "jsonrpc": "2.0",
+     "method": "eth_blockNumber",
+     "params": [],
+     "id": 1
+   }
 
-    headers = {"content-type": "application/json"}
+   headers = {"content-type": "application/json"}
 
-    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+   response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 
-    print(response)
-    ```
+   print(response)
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    python index.py
-    ```
+   ```bash
+   python index.py
+   ```
 
 ## Next Steps
 
@@ -189,7 +191,7 @@ Now that you have successfully made a call to the ZKsync Era network, you can ex
 by Infura. Here are some suggestions:
 
 - **Explore other ZKsync Era APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](json-rpc-methods/index.md).
+  [JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Polygon, Optimism, IPFS, and more.
 
@@ -197,4 +199,3 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
-

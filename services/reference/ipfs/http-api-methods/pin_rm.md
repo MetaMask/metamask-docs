@@ -26,6 +26,7 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8k
   -X POST \
   -u "PROJECT_ID:PROJECT_SECRET"
 ```
+
   </TabItem>
 </Tabs>
 

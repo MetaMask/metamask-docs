@@ -1,6 +1,7 @@
 ---
 description: debug_traceBlock API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -12,11 +13,11 @@ Returns full trace of all invoked opcodes of all transactions included in the bl
 
 - `block`: (string) RLP of the block
 - Optional tracing options object with the following fields:
-    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-        [`prestateTracer`](index.md##prestatetracer).
-    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
-        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-            sub-calls. It eliminates the additional processing for each call frame.
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
+    [`prestateTracer`](index.md##prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 
@@ -49,18 +50,18 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   "id": 1,
   "jsonrpc": "2.0",
   "result": [
-        {
-            "result": {
-                "from": "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
-                "gas": "0x2d48c",
-                "gasUsed": "0xc7ab",
-                "to": "0x55d398326f99059ff775485246999027b3197955",
-                "input": "0xa9059cbb0000000000000000000000003b9f33b3a9d382fa60283c555bde8f78855957be00000000000000000000000000000000000000000000000d4e7f4f79da7c0000",
-                "output": "0x0000000000000000000000000000000000000000000000000000000000000001",
-                "value": "0x0",
-                "type": "CALL"
-            }
-        }
-    ]
+    {
+      "result": {
+        "from": "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+        "gas": "0x2d48c",
+        "gasUsed": "0xc7ab",
+        "to": "0x55d398326f99059ff775485246999027b3197955",
+        "input": "0xa9059cbb0000000000000000000000003b9f33b3a9d382fa60283c555bde8f78855957be00000000000000000000000000000000000000000000000d4e7f4f79da7c0000",
+        "output": "0x0000000000000000000000000000000000000000000000000000000000000001",
+        "value": "0x0",
+        "type": "CALL"
+      }
+    }
+  ]
 }
 ```

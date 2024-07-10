@@ -6,8 +6,8 @@
   width: 50%;
   padding: 16px;
   line-height: 1.5;
-  background-color: #292A36;
-  color: #FFFFFF;
+  background-color: #292a36;
+  color: #ffffff;
 }
 .tableRow {
   display: flex;
@@ -17,8 +17,8 @@
 .tableColumn {
   width: 50%;
   line-height: 24px;
-  background-color: #292A36;
-  color: #FFFFFF;
+  background-color: #292a36;
+  color: #ffffff;
 }
 .tableColumnParam {
   display: flex;
@@ -144,7 +144,7 @@
   width: 100%;
   padding: 16px;
   background-color: rgba(36, 39, 42, 1);
-  color: #FFFFFF;
+  color: #ffffff;
   white-space: nowrap;
 }
 .dropdownItem:hover {
@@ -163,10 +163,10 @@
   bottom: 0;
 }
 .tableFooterRowDark {
-  background-color: #24272A;
+  background-color: #24272a;
 }
 .tableFooterRowLight {
-  background-color: #F2F4F6;
+  background-color: #f2f4f6;
 }
 .tableButton {
   display: flex;
@@ -188,7 +188,7 @@
   top: 0;
   width: 100%;
   height: 332px;
-  background-color: #292A36;
+  background-color: #292a36;
   overflow-y: scroll;
   z-index: 1;
 }
@@ -200,7 +200,7 @@
   padding: 12px 72px 12px 16px;
   font-size: 14px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 0;
   border: 2px solid transparent;
   text-overflow: ellipsis;
@@ -211,8 +211,8 @@
   border: 2px solid rgba(16, 152, 252, 1);
   outline: none;
 }
-.formControl[type=number]::-webkit-inner-spin-button,
-.formControl[type=number]::-webkit-outer-spin-button {
+.formControl[type="number"]::-webkit-inner-spin-button,
+.formControl[type="number"]::-webkit-outer-spin-button {
   opacity: 0;
 }
 .formControlNumberUp {
@@ -244,7 +244,7 @@
   border-radius: 0;
 }
 .footerButtonRight {
-  padding: 5px 16px!important;
+  padding: 5px 16px !important;
 }
 .footerButtonRightOutline {
   margin-right: 16px;
@@ -292,7 +292,7 @@
   padding: 0;
   border: 0;
   outline: none;
-  color: #BBC0C5;
+  color: #bbc0c5;
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
@@ -304,8 +304,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #BBC0C5;
-  color: #292A36;
+  background-color: #bbc0c5;
+  color: #292a36;
   font-size: 20px;
   line-height: 1;
   margin-right: 10px;
@@ -322,5 +322,5 @@
 .arrayItemRowWrap {
   position: relative;
   padding-left: 40px;
-  border-bottom: 1px dashed #848C96;
+  border-bottom: 1px dashed #848c96;
 }

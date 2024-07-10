@@ -62,7 +62,6 @@ To allow a specific Ethereum address, click **ADD** and input it into the **CONT
   </div>
 </div>
 
-
 Test with a method from the list.
 
 ```bash
@@ -194,14 +193,14 @@ URL isn't on your allowlist, provided they include both the API key and the API 
 This feature provides the following benefits:
 
 - **Principle of least privilege on the client side** - On the client side of your dapp, you may wish
-    to limit the actions possible with your API key to only those necessary for the application's
-    functionality. Allowlists ensure the API key is used solely for authorized locations, smart contract
-    addresses, or methods.
+  to limit the actions possible with your API key to only those necessary for the application's
+  functionality. Allowlists ensure the API key is used solely for authorized locations, smart contract
+  addresses, or methods.
 
 - **No restrictions server side** - On the server side, where the API key secret can be stored
-    securely, you might need to carry out a broader range of actions without the constraints of
-    allowlists. Using the API key secret allows you to circumvent these restrictions, giving your
-    server-side application unrestricted use of the API key.
+  securely, you might need to carry out a broader range of actions without the constraints of
+  allowlists. Using the API key secret allows you to circumvent these restrictions, giving your
+  server-side application unrestricted use of the API key.
 
 ## Best practices
 

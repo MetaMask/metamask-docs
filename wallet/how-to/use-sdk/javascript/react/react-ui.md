@@ -44,7 +44,7 @@ npm i @metamask/sdk-react-ui
 In your project script, add the following to import the SDK:
 
 ```javascript title="index.js"
-import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui"
 ```
 
 ### 3. Wrap your project with `MetaMaskUIProvider`
@@ -103,16 +103,16 @@ connection to MetaMask.
 You can use it as follows:
 
 ```js title="App.js"
-import { MetaMaskButton } from "@metamask/sdk-react-ui";
-import React, { useState } from "react";
+import { MetaMaskButton } from "@metamask/sdk-react-ui"
+import React, { useState } from "react"
 
 export const App = () => {
   return (
     <div className="App">
       <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
     </div>
-  );
-};
+  )
+}
 ```
 
 <details>
@@ -169,8 +169,8 @@ import {
   useAccount,
   useSDK,
   useSignMessage,
-} from "@metamask/sdk-react-ui";
-import "./App.css";
+} from "@metamask/sdk-react-ui"
+import "./App.css"
 
 function AppReady() {
   const {
@@ -181,9 +181,9 @@ function AppReady() {
     signMessage,
   } = useSignMessage({
     message: "gm wagmi frens",
-  });
+  })
 
-  const { isConnected } = useAccount();
+  const { isConnected } = useAccount()
 
   return (
     <div className="App">
@@ -192,10 +192,7 @@ function AppReady() {
         {isConnected && (
           <>
             <div style={{ marginTop: 20 }}>
-              <button
-                disabled={isSignLoading}
-                onClick={() => signMessage()}
-              >
+              <button disabled={isSignLoading} onClick={() => signMessage()}>
                 Sign message
               </button>
               {isSignSuccess && <div>Signature: {signData}</div>}
@@ -205,20 +202,20 @@ function AppReady() {
         )}
       </header>
     </div>
-  );
+  )
 }
 
 function App() {
-  const { ready } = useSDK();
+  const { ready } = useSDK()
 
   if (!ready) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
-  return <AppReady />;
+  return <AppReady />
 }
 
-export default App;
+export default App
 ```
 
 </TabItem>

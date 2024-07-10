@@ -87,20 +87,17 @@ Import the required dependencies and create the providers for communicating with
 In the `src` directory open the `App.js` file. Remove the existing code and add the following code:
 
 ```javascript title="App.js"
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from "react"
+import "./App.css"
 
 function App() {
-  const ethers = require("ethers");
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
-  const provider_Metamask = new ethers.providers.Web3Provider(window.ethereum);
-  const infuraProvider = new ethers.providers.InfuraProvider(
-    "sepolia",
-    API_KEY,
-  );
+  const ethers = require("ethers")
+  const API_KEY = process.env.REACT_APP_API_KEY
+  const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY
+  const provider_Metamask = new ethers.providers.Web3Provider(window.ethereum)
+  const infuraProvider = new ethers.providers.InfuraProvider("sepolia", API_KEY)
 }
-export default App;
+export default App
 ```
 
 #### Maintain the app state
@@ -109,9 +106,9 @@ Next, use the `useState` hook function to maintain the state of the app. Add the
 
 ```javascript title="App.js"
 // Use the useState hook function to add state variables to a functional component.
-const [blockNumber, setBlockNumber] = useState(null);
-const [txSent, setTxSent] = useState(null);
-const [txSentInfura, setTxSentInfura] = useState(null);
+const [blockNumber, setBlockNumber] = useState(null)
+const [txSent, setTxSent] = useState(null)
+const [txSentInfura, setTxSentInfura] = useState(null)
 ```
 
 #### Create the app frontend
@@ -149,7 +146,7 @@ return (
       </div>
     </header>
   </div>
-);
+)
 ```
 
 #### Retrieve the latest block number
@@ -159,14 +156,14 @@ Create the code to retrieve the latest block number. Add the following code abov
 ```javascript
 // Get the latest block using the InfuraProvider or wallet
 const handleButton1 = async () => {
-  const latest_block = await infuraProvider.getBlockNumber("latest");
-  setBlockNumber(latest_block);
-};
+  const latest_block = await infuraProvider.getBlockNumber("latest")
+  setBlockNumber(latest_block)
+}
 
 const handleButton2 = async () => {
-  const latest_block = await provider_Metamask.getBlockNumber("latest");
-  setBlockNumber(latest_block);
-};
+  const latest_block = await provider_Metamask.getBlockNumber("latest")
+  setBlockNumber(latest_block)
+}
 ```
 
 #### Send the transaction
@@ -176,21 +173,21 @@ To send the transaction, you need the target address and the amount to send. Add
 ```javascript
 // Handle the form submissions to send the transactions
 const handleSubmitWeb3 = async (e) => {
-  e.preventDefault();
-  const data = new FormData(e.target);
-  const address = data.get("address");
-  const amount = data.get("amount");
-  sendTransaction(address, amount);
-};
+  e.preventDefault()
+  const data = new FormData(e.target)
+  const address = data.get("address")
+  const amount = data.get("amount")
+  sendTransaction(address, amount)
+}
 
 const handleSubmitInfura = async (e) => {
-  e.preventDefault();
-  const data = new FormData(e.target);
-  const address = data.get("address");
-  const amount = data.get("amount");
-  const signer = new ethers.Wallet(PRIVATE_KEY, infuraProvider);
-  sendTransaction(address, amount, signer);
-};
+  e.preventDefault()
+  const data = new FormData(e.target)
+  const address = data.get("address")
+  const amount = data.get("amount")
+  const signer = new ethers.Wallet(PRIVATE_KEY, infuraProvider)
+  sendTransaction(address, amount, signer)
+}
 ```
 
 Next, create the `sendTransaction()` function that sends the transaction. Place the following code below the two `handleSubmit` methods.
@@ -263,76 +260,76 @@ If you transfer funds using the InfuraProvider, then the funds are transferred d
 The complete code sample looks like this:
 
 ```javascript
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from "react"
+import "./App.css"
 
 function App() {
-  const ethers = require("ethers");
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY;
-  const provider_Metamask = new ethers.providers.Web3Provider(window.ethereum);
-  const infuraProvider = new ethers.providers.InfuraProvider("goerli", API_KEY);
+  const ethers = require("ethers")
+  const API_KEY = process.env.REACT_APP_API_KEY
+  const PRIVATE_KEY = process.env.REACT_APP_PRIVATE_KEY
+  const provider_Metamask = new ethers.providers.Web3Provider(window.ethereum)
+  const infuraProvider = new ethers.providers.InfuraProvider("goerli", API_KEY)
 
   // Use the useState hook function to add state variables to a functional component.
-  const [blockNumber, setBlockNumber] = useState(null);
-  const [txSent, setTxSent] = useState(null);
-  const [txSentInfura, setTxSentInfura] = useState(null);
+  const [blockNumber, setBlockNumber] = useState(null)
+  const [txSent, setTxSent] = useState(null)
+  const [txSentInfura, setTxSentInfura] = useState(null)
 
   // Get the latest block using the InfuraProvider or wallet
   const handleButton1 = async () => {
-    const latest_block = await infuraProvider.getBlockNumber("latest");
-    setBlockNumber(latest_block);
-  };
+    const latest_block = await infuraProvider.getBlockNumber("latest")
+    setBlockNumber(latest_block)
+  }
 
   const handleButton2 = async () => {
-    const latest_block = await provider_Metamask.getBlockNumber("latest");
-    setBlockNumber(latest_block);
-  };
+    const latest_block = await provider_Metamask.getBlockNumber("latest")
+    setBlockNumber(latest_block)
+  }
 
   // Handle the form submissions to send the transactions
   const handleSubmitWeb3 = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const address = data.get("address");
-    const amount = data.get("amount");
-    sendTransaction(address, amount);
-  };
+    e.preventDefault()
+    const data = new FormData(e.target)
+    const address = data.get("address")
+    const amount = data.get("amount")
+    sendTransaction(address, amount)
+  }
 
   const handleSubmitInfura = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const address = data.get("address");
-    const amount = data.get("amount");
-    const signer = new ethers.Wallet(PRIVATE_KEY, infuraProvider);
-    sendTransaction(address, amount, signer);
-  };
+    e.preventDefault()
+    const data = new FormData(e.target)
+    const address = data.get("address")
+    const amount = data.get("amount")
+    const signer = new ethers.Wallet(PRIVATE_KEY, infuraProvider)
+    sendTransaction(address, amount, signer)
+  }
 
   // Send the transaction using either the Web3Provider or InfuraProvider
   const sendTransaction = async (address, amount, signer = null) => {
     if (signer == null) {
       // Web3 Provider
-      if (!window.ethereum) console.error("No wallet found!");
+      if (!window.ethereum) console.error("No wallet found!")
       else {
-        await window.ethereum.send("eth_requestAccounts");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        await window.ethereum.send("eth_requestAccounts")
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer = provider.getSigner()
         const tx = await signer.sendTransaction({
           to: address,
           value: ethers.utils.parseEther(amount),
-        });
-        console.log("tx", tx);
-        setTxSent("Transaction initiated! Tx hash: " + tx.hash);
+        })
+        console.log("tx", tx)
+        setTxSent("Transaction initiated! Tx hash: " + tx.hash)
       }
     } // InfuraProvider
     else {
       const tx = await signer.sendTransaction({
         to: address,
         value: ethers.utils.parseEther(amount),
-      });
-      console.log("tx", tx);
-      setTxSentInfura("Transaction initiated! Tx hash: " + tx.hash);
+      })
+      console.log("tx", tx)
+      setTxSentInfura("Transaction initiated! Tx hash: " + tx.hash)
     }
-  };
+  }
 
   // Configure the app frontend
   return (
@@ -364,8 +361,8 @@ function App() {
         </div>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
 ```

@@ -1,6 +1,7 @@
 ---
 description: debug_traceCall API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -12,27 +13,27 @@ given block execution.
 ## Parameters
 
 - Transaction object with the foloowing fields:
-    - `from`: (string)  address (20 bytes) the transaction is sent from.
-    - `to`: (string) _[required]_ address (20 bytes) the transaction is directed to.
-    - `gas`: (string) hexadecimal value of the gas provided for the transaction execution. `eth_call` consumes zero
-        gas, but this parameter may be needed by some executions.
-    - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
-    - `maxPriorityFeePerGas`: (string) maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
-        See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
-    - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
-        See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
-    - `value`: (string) hexadecimal of the value sent with this transaction.
-    - `data`: (string) hash of the method signature and encoded parameters.
-        See [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+  - `from`: (string) address (20 bytes) the transaction is sent from.
+  - `to`: (string) _[required]_ address (20 bytes) the transaction is directed to.
+  - `gas`: (string) hexadecimal value of the gas provided for the transaction execution. `eth_call` consumes zero
+    gas, but this parameter may be needed by some executions.
+  - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
+  - `maxPriorityFeePerGas`: (string) maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
+    See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
+  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
+    See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
+  - `value`: (string) hexadecimal of the value sent with this transaction.
+  - `data`: (string) hash of the method signature and encoded parameters.
+    See [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
 - `block parameter`: [_Required_] hexadecimal block number, or one of the string tags
-    `latest`, `earliest`, `pending`, `safe`, or `finalized`.
-    See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+  `latest`, `earliest`, `pending`, `safe`, or `finalized`.
+  See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - Optional tracing options object with the following fields:
-    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-        [`prestateTracer`](index.md##prestatetracer).
-    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
-        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-            sub-calls. It eliminates the additional processing for each call frame.
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
+    [`prestateTracer`](index.md##prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 

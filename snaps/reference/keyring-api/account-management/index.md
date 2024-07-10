@@ -183,12 +183,7 @@ An object containing:
   "method": "keyring_filterAccountChains",
   "params": {
     "id": "091bbc2e-6625-44d0-ac5c-658670ca649a",
-    "chains": [
-      "eip155:W", 
-      "eip155:X",
-      "eip155:Y",
-      "eip155:Z"
-    ]
+    "chains": ["eip155:W", "eip155:X", "eip155:Y", "eip155:Z"]
   }
 }
 ```
@@ -198,10 +193,7 @@ An object containing:
 
 ```json
 {
-  "chains": [
-    "eip155:X",
-    "eip155:Y"
-  ]
+  "chains": ["eip155:X", "eip155:Y"]
 }
 ```
 
@@ -279,7 +271,7 @@ An array of [account objects](objects.md#keyringaccount) handled by the Snap.
 
 ```json
 {
-    "method": "keyring_listAccounts"
+  "method": "keyring_listAccounts"
 }
 ```
 
@@ -478,7 +470,7 @@ An array of pending [request objects](objects.md#keyringrequest).
 
 ```json
 {
-    "method": "keyring_listRequests"
+  "method": "keyring_listRequests"
 }
 ```
 

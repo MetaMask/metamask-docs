@@ -1,5 +1,5 @@
 .modalContainer {
-  border: 1px solid #848C96;
+  border: 1px solid #848c96;
   border-radius: 8px 8px 0 0;
   position: absolute;
   z-index: 10;
@@ -9,12 +9,12 @@
   min-height: 512px;
   opacity: 0;
   transform: translate(0, 100%);
-  transition-property: 'transform', 'opacity';
-  transition-duration: .4s;
+  transition-property: "transform", "opacity";
+  transition-duration: 0.4s;
   transition-timing-function: ease;
-  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-color: #292A36;
+  background-color: #292a36;
 }
 
 .modalContainerOpen {
@@ -28,11 +28,11 @@
   align-items: center;
   justify-content: space-between;
   min-height: 56px;
-  background-color: #24272A;
+  background-color: #24272a;
 }
 
 .modalHeaderLight {
-  background-color: #F2F4F6 !important;
+  background-color: #f2f4f6 !important;
 }
 
 .modalTitle {
@@ -69,7 +69,7 @@
   justify-content: center;
   margin-left: 8px;
   padding: 2px 8px;
-  border: 1px solid #848C96;
+  border: 1px solid #848c96;
   border-radius: 999px;
   font-size: 12px;
   line-height: 18px;

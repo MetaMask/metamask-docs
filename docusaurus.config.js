@@ -1,11 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require("dotenv").config();
-const { themes } = require("prism-react-renderer");
-const codeTheme = themes.dracula;
-const remarkCodesandbox = require("remark-codesandbox");
-const isProd = process.env.NODE_ENV === "production";
+require("dotenv").config()
+const { themes } = require("prism-react-renderer")
+const codeTheme = themes.dracula
+const remarkCodesandbox = require("remark-codesandbox")
+const isProd = process.env.NODE_ENV === "production"
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -27,7 +27,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"/*, "zh", "ko"*/],
+    locales: ["en" /*, "zh", "ko"*/],
   },
 
   customFields: {
@@ -37,8 +37,14 @@ const config = {
   trailingSlash: true,
 
   scripts: [
-    { src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js" },
-    { src: "https://plausible.io/js/script.js", defer: true, "data-domain": "docs.metamask.io" },
+    {
+      src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js",
+    },
+    {
+      src: "https://plausible.io/js/script.js",
+      defer: true,
+      "data-domain": "docs.metamask.io",
+    },
     { src: "/js/feedback-script.js", defer: true, async: true },
     { src: "/js/getfeedback.js", defer: true, async: true },
   ],
@@ -60,13 +66,17 @@ const config = {
           breadcrumbs: false,
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
-            [remarkCodesandbox, {
-              mode: "iframe",
-              autoDeploy: process.env.NODE_ENV === "production",
-            }],
+            [
+              remarkCodesandbox,
+              {
+                mode: "iframe",
+                autoDeploy: process.env.NODE_ENV === "production",
+              },
+            ],
           ],
           openrpc: {
-            openrpcDocument: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
+            openrpcDocument:
+              "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
             path: "reference",
             sidebarLabel: "JSON-RPC API",
           },
@@ -80,7 +90,7 @@ const config = {
   plugins: [
     [
       "@docusaurus/plugin-content-docs",
-      ({
+      {
         id: "snaps",
         path: "snaps",
         routeBasePath: "snaps",
@@ -101,7 +111,7 @@ const config = {
             "flaskOnly",
           ],
         },
-      }),
+      },
     ],
     [
       "@docusaurus/plugin-content-docs",
@@ -137,23 +147,22 @@ const config = {
       },
     ],
     "./src/plugins/plugin-json-rpc.ts",
-    isProd ? 
-      [
-        "docusaurus-plugin-segment",
-        {
-          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-          load: { cookie: { sameSite: "None", secure: true } },
-          page: true,
-        },
-      ] : null,
+    isProd
+      ? [
+          "docusaurus-plugin-segment",
+          {
+            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+            load: { cookie: { sameSite: "None", secure: true } },
+            page: true,
+          },
+        ]
+      : null,
     "./src/plugins/launchdarkly",
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [
-        { name: "og:image", content: "/img/metamaskog.jpeg" },
-      ],
+      metadata: [{ name: "og:image", content: "/img/metamaskog.jpeg" }],
       navbar: {
         title: " │ ‎ Documentation",
         logo: {
@@ -300,7 +309,7 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ["csharp","gradle","bash","json"],
+        additionalLanguages: ["csharp", "gradle", "bash", "json"],
       },
       algolia: {
         // The application ID provided by Algolia
@@ -319,7 +328,7 @@ const config = {
 
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         replaceSearchResultPathname: {
-          from:  "/",
+          from: "/",
           to: process.env.DEST || "/",
         },
 
@@ -346,6 +355,6 @@ const config = {
         },
       },
     }),
-};
+}
 
-module.exports = config;
+module.exports = config

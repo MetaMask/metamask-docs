@@ -1,7 +1,5 @@
-
 function DocPaginator() {
-  return null;
+  return null
 }
 
-export default DocPaginator;
-
+export default DocPaginator

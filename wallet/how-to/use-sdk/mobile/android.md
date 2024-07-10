@@ -13,8 +13,9 @@ Import [MetaMask SDK](../../../concepts/sdk/index.md) into your native Android d
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip See also
+
 - [Android SDK architecture](../../../concepts/sdk/android.md)
-:::
+  :::
 
 ## Prerequisites
 
@@ -55,10 +56,10 @@ import io.metamask.androidsdk.Ethereum
 You can connect your dapp to MetaMask in one of two ways:
 
 1. [Use the `ethereum` provider object directly](#31-use-the-provider-object-directly).
-    We recommend using this method in a pure model layer.
+   We recommend using this method in a pure model layer.
 2. [Use a ViewModel](#32-use-a-viewmodel) that injects the `ethereum` provider object.
-    We recommend using this method at the app level, because it provides a single instance that
-    survives configuration changes and can be shared across all views.
+   We recommend using this method at the app level, because it provides a single instance that
+   survives configuration changes and can be shared across all views.
 
 :::note Logging
 By default, MetaMask logs three SDK events: `connection_request`, `connected`, and `disconnected`.

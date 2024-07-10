@@ -13,11 +13,12 @@ import TabItem from '@theme/TabItem';
 Create an account management Snap to connect to custom EVM accounts.
 
 :::tip see also
+
 - [Custom EVM accounts](index.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-:::
+  :::
 
 ## Prerequisites
 
@@ -115,14 +116,14 @@ Your Snap must respond with either a synchronous or asynchronous result:
 <TabItem value="Synchronous">
 
 ```typescript
-return { pending: false, result };
+return { pending: false, result }
 ```
 
 </TabItem>
 <TabItem value="Asynchronous">
 
 ```typescript
-return { pending: true, redirect: { message, url } };
+return { pending: true, redirect: { message, url } }
 ```
 
 The redirect message and URL are displayed to the user to help them continue the transaction flow.
@@ -139,7 +140,7 @@ For example, when an account is created:
 
 ```typescript
 try {
-  emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account });
+  emitSnapKeyringEvent(snap, KeyringEvent.AccountCreated, { account })
   // Update your Snap's state.
 } catch (error) {
   // Handle the error.
@@ -159,8 +160,8 @@ export const onKeyringRequest: OnKeyringRequestHandler = async ({
   request,
 }) => {
   // Add custom logic here.
-  return handleKeyringRequest(keyring, request);
-};
+  return handleKeyringRequest(keyring, request)
+}
 ```
 
 ### 7. Create a companion dapp

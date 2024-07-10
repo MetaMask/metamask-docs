@@ -1,66 +1,83 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react'
-import { usePluginData } from "@docusaurus/useGlobalData";
-import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
-import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
-import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
-import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
-import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
-import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
-import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
-import global from "./global.module.css";
-import modalDrawerStyles from "./ModalDrawer/styles.module.css";
-import clsx from "clsx";
-import { useColorMode } from "@docusaurus/theme-common";
+import React, { createContext, useEffect, useMemo, useState } from "react"
+import { usePluginData } from "@docusaurus/useGlobalData"
+import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
+import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox"
+import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox"
+import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox"
+import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox"
+import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox"
+import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer"
+import global from "./global.module.css"
+import modalDrawerStyles from "./ModalDrawer/styles.module.css"
+import clsx from "clsx"
+import { useColorMode } from "@docusaurus/theme-common"
 
 interface ParserProps {
-  network: NETWORK_NAMES;
-  method?: string;
+  network: NETWORK_NAMES
+  method?: string
 }
 
 interface ParserOpenRPCContextProps {
   setIsDrawerContentFixed?: (isFixed: boolean) => void
-  setDrawerLabel?: (label: string) => void;
-  isComplexTypeView: boolean;
-  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
+  setDrawerLabel?: (label: string) => void
+  isComplexTypeView: boolean
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void
 }
 
-export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
+export const ParserOpenRPCContext =
+  createContext<ParserOpenRPCContextProps | null>(null)
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
-  if (!method || !network) return null;
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [reqResult, setReqResult] = useState(null);
-  const [paramsData, setParamsData] = useState([]);
-  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
-  const [drawerLabel, setDrawerLabel] = useState(null);
-  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { colorMode } = useColorMode();
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  if (!method || !network) return null
+  const [metamaskInstalled, setMetamaskInstalled] = useState(false)
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [reqResult, setReqResult] = useState(null)
+  const [paramsData, setParamsData] = useState([])
+  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false)
+  const [drawerLabel, setDrawerLabel] = useState(null)
+  const [isComplexTypeView, setIsComplexTypeView] = useState(false)
+  const { colorMode } = useColorMode()
+  const openModal = () => setModalOpen(true)
+  const closeModal = () => setModalOpen(false)
 
-  const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
-  const currentNetwork = netData.find(net => net.name === network);
+  const { netData } = usePluginData("plugin-json-rpc") as {
+    netData?: ResponseItem[]
+  }
+  const currentNetwork = netData.find((net) => net.name === network)
 
-  if (!currentNetwork && currentNetwork.error) return null;
+  if (!currentNetwork && currentNetwork.error) return null
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
-      return items?.map(item => {
-        if (item?.name || (item?.code && item?.message)) return item;
-        if (item?.$ref) {
-          const ref = item.$ref.replace(refPath, "");
-          return currentNetwork.data.components[componentType][ref];
-        }
-        return null;
-      }).filter(Boolean) || [];
-    };
+      return (
+        items
+          ?.map((item) => {
+            if (item?.name || (item?.code && item?.message)) return item
+            if (item?.$ref) {
+              const ref = item.$ref.replace(refPath, "")
+              return currentNetwork.data.components[componentType][ref]
+            }
+            return null
+          })
+          .filter(Boolean) || []
+      )
+    }
 
-    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method);
-    if (!currentMethod) return null;
+    const currentMethod = currentNetwork.data.methods?.find(
+      (met) => met.name === method
+    )
+    if (!currentMethod) return null
 
-    const errors = findReferencedItem(currentMethod.errors, "#/components/errors/", "errors");
-    const tags = findReferencedItem(currentMethod.tags, "#/components/tags/", "tags");
+    const errors = findReferencedItem(
+      currentMethod.errors,
+      "#/components/errors/",
+      "errors"
+    )
+    const tags = findReferencedItem(
+      currentMethod.tags,
+      "#/components/tags/",
+      "tags"
+    )
 
     return {
       description: currentMethod.summary || currentMethod.description || null,
@@ -70,49 +87,58 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       examples: currentMethod?.examples,
       errors,
       tags,
-    };
-  }, [currentNetwork, method]);
+    }
+  }, [currentNetwork, method])
 
-  if (currentMethodData === null) return null;
+  if (currentMethodData === null) return null
 
   useEffect(() => {
-    const installed = !!(window as any)?.ethereum;
-    setMetamaskInstalled(installed);
-  }, []);
+    const installed = !!(window as any)?.ethereum
+    setMetamaskInstalled(installed)
+  }, [])
 
   const onParamsChangeHandle = (data) => {
-    if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
-      setParamsData([]);
+    if (
+      typeof data !== "object" ||
+      data === null ||
+      Object.keys(data).length === 0
+    ) {
+      setParamsData([])
     }
-    setParamsData(Object.values(data));
+    setParamsData(Object.values(data))
   }
 
   const onSubmitRequestHandle = async () => {
     try {
       const response = await (window as any).ethereum.request({
         method: method,
-        params: paramsData
+        params: paramsData,
       })
-      setReqResult(response);
+      setReqResult(response)
     } catch (e) {
-      setReqResult(e);
+      setReqResult(e)
     }
-  };
+  }
 
   const closeComplexTypeView = () => {
-    setIsComplexTypeView(false);
-    setIsDrawerContentFixed(false);
-    setDrawerLabel(null);
+    setIsComplexTypeView(false)
+    setIsDrawerContentFixed(false)
+    setDrawerLabel(null)
   }
 
   const onModalClose = () => {
-    closeModal();
-    closeComplexTypeView();
+    closeModal()
+    closeComplexTypeView()
   }
 
   return (
     <ParserOpenRPCContext.Provider
-      value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
+      value={{
+        setIsDrawerContentFixed,
+        setDrawerLabel,
+        isComplexTypeView,
+        setIsComplexTypeView,
+      }}
     >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
@@ -129,18 +155,29 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           </div>
           <ModalDrawer
             title={
-              isComplexTypeView && colorMode ?
+              isComplexTypeView && colorMode ? (
                 <span className={modalDrawerStyles.modalTitleContainer}>
                   <button
-                    className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
+                    className={clsx(
+                      modalDrawerStyles.modalHeaderIcon,
+                      modalDrawerStyles.modalHeaderIconBack
+                    )}
                     onClick={closeComplexTypeView}
                   >
-                    <img src={colorMode === "light" ? '/img/icons/chevron-left-dark-icon.svg' : '/img/icons/chevron-left-light-icon.svg'} />
+                    <img
+                      src={
+                        colorMode === "light"
+                          ? "/img/icons/chevron-left-dark-icon.svg"
+                          : "/img/icons/chevron-left-light-icon.svg"
+                      }
+                    />
                   </button>
                   Editing Param
                 </span>
-                 :
-                "Customize request"}
+              ) : (
+                "Customize request"
+              )
+            }
             isOpen={isModalOpen}
             onClose={onModalClose}
             isContentFixed={isDrawerContentFixed}
@@ -172,5 +209,5 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
       </div>
     </ParserOpenRPCContext.Provider>
-  );
+  )
 }

@@ -1,6 +1,7 @@
 ---
 description: debug_traceTransaction API method
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -12,13 +13,13 @@ Returns tracing results for the specified transaction.
 
 - `transactionHash`: (string) _[required]_ hash of the block to trace.
 - Optional tracing options object with the following fields:
-    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-        [`prestateTracer`](index.md##prestatetracer).
-    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
-        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-            sub-calls. It eliminates the additional processing for each call frame.
-    - `timeout`: (string) _[optional]_ string of decimals numbers to set the timeout. The default is 5 seconds. The maximum
-        timeout is 10 seconds. Valid units are `ns`, `us`, `ms`, `s`. For example, `3s30ms`.
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
+    [`prestateTracer`](index.md##prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.
+  - `timeout`: (string) _[optional]_ string of decimals numbers to set the timeout. The default is 5 seconds. The maximum
+    timeout is 10 seconds. Valid units are `ns`, `us`, `ms`, `s`. For example, `3s30ms`.
 
 # Returns
 

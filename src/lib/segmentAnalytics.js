@@ -11,15 +11,15 @@ export const trackClickForSegmentAnalytics = ({
       ...(clickText && { click_text: clickText }),
       ...(location && { location }),
       ...(userId && { user_id: userId }),
-    });
+    })
   }
-};
+}
 
 export const trackPageForSegmentAnalytics = ({ name, path, userId }) => {
   if (window.analytics) {
     window.analytics.page("Page view", name, {
       ...(path && { path: path }),
       ...(userId && { userId: userId }),
-    });
+    })
   }
-};
+}

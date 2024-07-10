@@ -202,7 +202,7 @@ Optimize your app and better understand your users by
 Find additional settings in **Settings** to manage your account. You can do the following:
 
 - [Set notifications for daily limits](../how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
-    from the **Account** option.
+  from the **Account** option.
 - Manage your billing information in the **Billing** option.
 - Manage [shared API keys](../../../developer-tools/dashboard/how-to/project-sharing) in the **Key Sharing** option.
 

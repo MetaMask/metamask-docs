@@ -13,7 +13,7 @@ You can also use a tool such as [curl](https://curl.se/) or [Postman](https://ww
 call the REST APIs.
 
 :::tip
-View the [API reference content](api-reference/index.md) to view the `curl` command for each API. 
+View the [API reference content](api-reference/index.md) to view the `curl` command for each API.
 :::
 
 ## Prerequisites
@@ -89,39 +89,39 @@ alternate [supported network](../../get-started/endpoints.md#gas-api).
   <TabItem value="Use API key" label="Use an API key only" default>
 
 ```javascript title="index.js"
-const axios = require("axios");
-require("dotenv").config();
+const axios = require("axios")
+require("dotenv").config()
 
 // The chain ID of the supported network
-const chainId = 1;
+const chainId = 1
 
-(async () => {
+;(async () => {
   try {
     const { data } = await axios.get(
       `https://gas.api.infura.io/v3/${process.env.INFURA_API_KEY}/networks/${chainId}/suggestedGasFees`
-    );
-    console.log("Suggested gas fees:", data);
+    )
+    console.log("Suggested gas fees:", data)
   } catch (error) {
-    console.log("Server responded with:", error);
+    console.log("Server responded with:", error)
   }
-})();
+})()
 ```
 
   </TabItem>
   <TabItem value="With basic authentication" label="Use an API key and API key secret" default>
 
 ```javascript title="index.js"
-const axios = require("axios");
-require("dotenv").config();
+const axios = require("axios")
+require("dotenv").config()
 
 const Auth = Buffer.from(
-  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET,
-).toString("base64");
+  process.env.INFURA_API_KEY + ":" + process.env.INFURA_API_KEY_SECRET
+).toString("base64")
 
 // The chain ID of the supported network
-const chainId = 1;
+const chainId = 1
 
-(async () => {
+;(async () => {
   try {
     const { data } = await axios.get(
       `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
@@ -129,14 +129,15 @@ const chainId = 1;
         headers: {
           Authorization: `Basic ${Auth}`,
         },
-      },
-    );
-    console.log("Suggested gas fees:", data);
+      }
+    )
+    console.log("Suggested gas fees:", data)
   } catch (error) {
-    console.log("Server responded with:", error);
+    console.log("Server responded with:", error)
   }
-})();
+})()
 ```
+
   </TabItem>
 </Tabs>
 

@@ -1,4 +1,3 @@
-
 export default function PaginatorWrapper() {
-  return null;
+  return null
 }

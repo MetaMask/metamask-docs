@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 :::note Failover protection
 
-[Failover protection](../../concepts/failover-protection.md) is available on the Polygon network for customers on the Growth or Custom plans. 
+[Failover protection](../../concepts/failover-protection.md) is available on the Polygon network for customers on the Growth or Custom plans.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 :::
@@ -27,23 +27,23 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 :::
 
 <CardList
-  items={[
-    {
-      href: "quickstart",
-      title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to the Polygon network."
-    },
-    {
-      href: "json-rpc-methods",
-      title: "JSON-RPC APIs",
-      description: "View the APIs available for communicating with the Polygon network."
-    },
-    {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
-      title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
-    }
-  ]}
+items={[
+{
+href: "quickstart",
+title: "Quickstart",
+description: "Learn how to quickly connect and make calls to the Polygon network."
+},
+{
+href: "json-rpc-methods",
+title: "JSON-RPC APIs",
+description: "View the APIs available for communicating with the Polygon network."
+},
+{
+href: "../../../developer-tools/dashboard/get-started/create-api/",
+title: "Create an API key",
+description: "Learn how to create an API key and secure and share it with your team."
+}
+]}
 />
 
 ## Partners and privacy policies
@@ -53,8 +53,10 @@ No personal information is sent as part of partner requests, only information ne
 For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
 
 <!-- markdown-link-check-disable -->
+
 Rivet.Cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy)) is Infura's failover-protection partner. While Rivet.Cloud supports most Infura methods,
 it does not yet support the following methods:
+
 <!-- markdown-link-check-enable -->
 
 - `eth_accounts`

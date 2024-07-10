@@ -30,7 +30,6 @@ curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=QmaYL7E4gDTPNfLxrCEEEcNJg
   </TabItem>
 </Tabs>
 
-
 #### REQUEST PARAMS
 
 - `arg` _\[Required]_ - The base58 multihash of an existing block to get.

@@ -12,14 +12,14 @@ This quickstart guide will help you set up and make calls on the IPFS network us
 :::info
 
 To access the IPFS network through Infura, you'll need to add a billing card to your account, even if you're using a free account. Refer
-to the [billing details](../../how-to/use-ipfs/access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information. 
+to the [billing details](../../how-to/use-ipfs/access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information.
 
 :::
 
 ## Prerequisites
 
 Before you begin, ensure you have a valid [API key](../../../../developer-tools/dashboard/get-started/create-api) and
-    [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
+[API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
 
 ## Make calls
 
@@ -48,10 +48,10 @@ Change the `<API_KEY>` and `<API_KEY_SECRET>` in the NodeJS example code below.
 Save the following script to a file, e.g. `index.js`.
 
 ```javascript
-const https = require("https");
+const https = require("https")
 
-const projectId = "<API_KEY>";
-const projectSecret = "<API_KEY_SECRET>";
+const projectId = "<API_KEY>"
+const projectSecret = "<API_KEY_SECRET>"
 
 const options = {
   host: "ipfs.infura.io",
@@ -59,18 +59,18 @@ const options = {
   path: "/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
   method: "POST",
   auth: projectId + ":" + projectSecret,
-};
+}
 
 let req = https.request(options, (res) => {
-  let body = "";
+  let body = ""
   res.on("data", function (chunk) {
-    body += chunk;
-  });
+    body += chunk
+  })
   res.on("end", function () {
-    console.log(body);
-  });
-});
-req.end();
+    console.log(body)
+  })
+})
+req.end()
 ```
 
 In a terminal window, run the script with `node index.js`
@@ -143,7 +143,7 @@ import { create } from "kubo-rpc-client"
 
 const projectId = "<API_KEY>";
 const projectSecret = "<API_KEY_SECRET>";
-const auth 
+const auth
   "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
 const client = create({
@@ -290,13 +290,14 @@ Example output:
 ```bash
 Data successfully stored in IPFS: QmTHr95iiwSTA2USxx4g5kKnhqsNRixqohhwxjvdXmSrWn
 ```
+
 ## Next steps
 
 Now that you have successfully made a call to the IPFS network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:
 
 - **Explore other IPFS APIs**: Infura supports a wide range of APIs. You can find more information in the
-[HTTP API methods documentation](../http-api-methods/).
+  [HTTP API methods documentation](../http-api-methods/).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
@@ -304,4 +305,3 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
-

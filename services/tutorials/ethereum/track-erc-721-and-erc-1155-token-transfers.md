@@ -70,20 +70,20 @@ Add the following filter to the script, which tells the `web3.eth.subscribe` fun
 ```javascript
 let options721 = {
   topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
-};
+}
 
 let options1155 = {
   topics: [
     web3.utils.sha3("TransferSingle(address,address,address,uint256,uint256)"),
   ],
-};
+}
 ```
 
 Then, initiate the subscription by passing along the filter:
 
 ```javascript
-let subscription721 = await web3.eth.subscribe("logs", options721);
-let subscription1155 = await web3.eth.subscribe("logs", options1155);
+let subscription721 = await web3.eth.subscribe("logs", options721)
+let subscription1155 = await web3.eth.subscribe("logs", options1155)
 ```
 
 :::info
@@ -96,18 +96,18 @@ You can also add the following lines to the script to see whether the subscripti
 
 ```javascript
 subscription721.on("error", (err) => {
-  throw err;
-});
+  throw err
+})
 subscription1155.on("error", (err) => {
-  throw err;
-});
+  throw err
+})
 
 subscription721.on("connected", (nr) =>
-  console.log("Subscription on ERC-721 started with ID %s", nr),
-);
+  console.log("Subscription on ERC-721 started with ID %s", nr)
+)
 subscription1155.on("connected", (nr) =>
-  console.log("Subscription on ERC-1155 started with ID %s", nr),
-);
+  console.log("Subscription on ERC-1155 started with ID %s", nr)
+)
 ```
 
 ### 5. Read ERC-721 transfers
@@ -115,10 +115,10 @@ subscription1155.on("connected", (nr) =>
 Set the listener for the `subscription721` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
-subscription721.on('data', event => {
-    if (event.topics.length == 4) {
-        ...
-    }
+subscription721.on("data", (event) => {
+  if (event.topics.length == 4) {
+    // ...
+  }
 });
 ```
 
@@ -150,8 +150,8 @@ let transaction = web3.eth.abi.decodeLog(
     },
   ],
   event.data,
-  [event.topics[1], event.topics[2], event.topics[3]],
-);
+  [event.topics[1], event.topics[2], event.topics[3]]
+)
 ```
 
 In order to directly call `from`, `to`, and `tokenId` on `transaction`, add the following:
@@ -167,8 +167,8 @@ console.log(
     }\n` +
     `To: ${transaction.to}\n` +
     `Token contract: ${event.address}\n` +
-    `Token ID: ${transaction.tokenId}`,
-);
+    `Token ID: ${transaction.tokenId}`
+)
 ```
 
 ### 6. Read ERC-1155 transfers
@@ -211,8 +211,8 @@ let transaction = web3.eth.abi.decodeLog(
     },
   ],
   event.data,
-  [event.topics[1], event.topics[2], event.topics[3]],
-);
+  [event.topics[1], event.topics[2], event.topics[3]]
+)
 ```
 
 In order to directly call `from`, `to`, and `tokenId` on `transaction`, add the following:
@@ -229,8 +229,8 @@ console.log(
     }\n` +
     `To: ${transaction.to}\n` +
     `id: ${transaction.id}\n` +
-    `value: ${transaction.value}`,
-);
+    `value: ${transaction.value}`
+)
 ```
 
 ### 7. Track a specific address
@@ -239,7 +239,7 @@ You can track a specific sender address by reading the `from` value of the decod
 
 ```javascript
 if (transaction.from == "<SENDER_ADDRESS>") {
-  console.log("Specified address sent an NFT!");
+  console.log("Specified address sent an NFT!")
 }
 ```
 
@@ -247,7 +247,7 @@ You can also track a specific recipient address receiving any tokens by tracking
 
 ```javascript
 if (transaction.to == "<RECIPIENT_ADDRESS>") {
-  console.log("Specified address received an NFT");
+  console.log("Specified address received an NFT")
 }
 ```
 
@@ -267,13 +267,12 @@ if (event.address == '<CONTRACT_ADDRESS>' && transaction.tokenId == <TOKEN_ID>) 
 
 ```javascript
 if (event.address == "<CONTRACT_ADDRESS>") {
-  console.log("Specified ERC-1155 NFT was transferred!");
+  console.log("Specified ERC-1155 NFT was transferred!")
 }
 ```
 
   </TabItem>
 </Tabs>
-
 
 ### 9. Run the script
 
@@ -315,16 +314,14 @@ value: 1
 ### Complete code overview
 
 ```javascript
-const { Web3 } = require("web3");
+const { Web3 } = require("web3")
 
 async function main() {
-  const web3 = new Web3(
-    "wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>"
-  );
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>")
 
   let options721 = {
     topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
-  };
+  }
 
   let options1155 = {
     topics: [
@@ -332,10 +329,10 @@ async function main() {
         "TransferSingle(address,address,address,uint256,uint256)"
       ),
     ],
-  };
+  }
 
-  let subscription721 = await web3.eth.subscribe("logs", options721);
-  let subscription1155 = await web3.eth.subscribe("logs", options1155);
+  let subscription721 = await web3.eth.subscribe("logs", options721)
+  let subscription1155 = await web3.eth.subscribe("logs", options1155)
 
   subscription721.on("data", (event) => {
     if (event.topics.length == 4) {
@@ -359,19 +356,19 @@ async function main() {
         ],
         event.data,
         [event.topics[1], event.topics[2], event.topics[3]]
-      );
+      )
 
       if (transaction.from == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-        console.log("Specified address sent an NFT!");
+        console.log("Specified address sent an NFT!")
       }
       if (transaction.to == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-        console.log("Specified address received an NFT!");
+        console.log("Specified address received an NFT!")
       }
       if (
         event.address == "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" &&
         transaction.tokenId == 2500
       ) {
-        console.log("Specified NFT was transferred!");
+        console.log("Specified NFT was transferred!")
       }
 
       console.log(
@@ -385,9 +382,9 @@ async function main() {
           `To: ${transaction.to}\n` +
           `Token contract: ${event.address}\n` +
           `Token ID: ${transaction.tokenId}`
-      );
+      )
     }
-  });
+  })
 
   subscription1155.on("data", (event) => {
     let transaction = web3.eth.abi.decodeLog(
@@ -418,7 +415,7 @@ async function main() {
       ],
       event.data,
       [event.topics[1], event.topics[2], event.topics[3]]
-    );
+    )
 
     console.log(
       `\n` +
@@ -432,23 +429,23 @@ async function main() {
         `To: ${transaction.to}\n` +
         `id: ${transaction.id}\n` +
         `value: ${transaction.value}`
-    );
-  });
+    )
+  })
 
   subscription721.on("error", (err) => {
-    throw err;
-  });
+    throw err
+  })
   subscription1155.on("error", (err) => {
-    throw err;
-  });
+    throw err
+  })
 
   subscription721.on("connected", (nr) =>
     console.log("Subscription on ERC-721 started with ID %s", nr)
-  );
+  )
   subscription1155.on("connected", (nr) =>
     console.log("Subscription on ERC-1155 started with ID %s", nr)
-  );
+  )
 }
 
-main();
+main()
 ```

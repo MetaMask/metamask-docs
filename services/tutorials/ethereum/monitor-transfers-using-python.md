@@ -52,8 +52,8 @@ import time
 Connect to the Infura endpoint and the address of the account:
 
 ```python
-infura_url = 'https://mainnet.infura.io/v3/<YOUR_API_KEY>'
-account = '<YOUR_PUBLIC_ADDRESS>'
+infura_url = "https://mainnet.infura.io/v3/<YOUR_API_KEY"
+account = "<YOUR_PUBLIC_ADDRESS>"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 ```
 
@@ -69,23 +69,23 @@ Create a function to check new transactions for the account defined in [step 3](
 
 ```python
 def watch():
-    while True:
-        block = web3.eth.get_block('latest')
-        print("Searching in block " + str(block.number))
+  while True:
+    block = web3.eth.get_block('latest')
+    print("Searching in block " + str(block.number))
 
-        if block and block.transactions:
-            for transaction in block.transactions:
-                tx_hash = transaction.hex() # the hashes are stored in a hexBytes format
-                tx = web3.eth.get_transaction(tx_hash)
-                if tx.to != None:
-                    if tx.to == account:
-                        print("Transaction found in block {} :".format(block.number))
-                        print({
-                            "hash": tx_hash,
-                            "from": tx["from"],
-                            "value": web3.fromWei(tx["value"], 'ether')
-                            })
-        time.sleep(5)
+    if block and block.transactions:
+      for transaction in block.transactions:
+        tx_hash = transaction.hex()  # the hashes are stored in a hexBytes format
+        tx = web3.eth.get_transaction(tx_hash)
+        if tx.to is not None:
+          if tx.to == account:
+            print("Transaction found in block {} :".format(block.number))
+            print({
+              "hash": tx_hash,
+              "from": tx["from"],
+              "value": web3.fromWei(tx["value"], 'ether')
+            })
+    time.sleep(5)
 
 watch()
 ```
@@ -98,8 +98,8 @@ Create a function to determine the number of confirmations for the transaction:
 
 ```python
 def confirmations(tx_hash):
- tx = web3.eth.get_transaction(tx_hash)
- return web3.eth.block_number - tx.blockNumber
+  tx = web3.eth.get_transaction(tx_hash)
+  return web3.eth.block_number - tx.blockNumber
 ```
 
 You can then call the function using something similar to:
@@ -118,17 +118,18 @@ Run the script using the following command:
 ```python
 python3 monitorTransactions.py
 ```
+
   </TabItem>
   <TabItem value="Example output" label="Example output" >
 
 ```python
 Searching in block 15019035
 Transaction found in block 15019035 :
-{'hash': '0x0f878eb882dfd069c482740df533e0ddef63504d795dcc3c934c3f9a6c159362', 'from': '0x95B564F3B3BaE3f206aa418667bA000AFAFAcc8a', 'value': 0}
+{"hash": "0x0f878eb882dfd069c482740df533e0ddef63504d795dcc3c934c3f9a6c159362", "from": "0x95B564F3B3BaE3f206aa418667bA000AFAFAcc8a", "value": 0}
 Transaction found in block 15019035 :
-{'hash': '0xee75ed766e17fef1cae917686b5b73e7c72b2fcf51e1558629b8fe96a7e5a1bd', 'from': '0x9696f59E4d72E237BE84fFD425DCaD154Bf96976', 'value': 0}
+{"hash": "0xee75ed766e17fef1cae917686b5b73e7c72b2fcf51e1558629b8fe96a7e5a1bd", "from": "0x9696f59E4d72E237BE84fFD425DCaD154Bf96976", "value": 0}
 Transaction found in block 15019035 :
-{'hash': '0x1cddbeff3ac97651f5d7e49e98f4289aeef728e08b05180c75bc04cdc970895d', 'from': '0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549', 'value': 0}
+{"hash": "0x1cddbeff3ac97651f5d7e49e98f4289aeef728e08b05180c75bc04cdc970895d", "from": "0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549", "value": 0}
 ...
 67341
 ```
@@ -142,32 +143,32 @@ Transaction found in block 15019035 :
 from web3 import Web3
 import time
 
-infura_url = 'https://mainnet.infura.io/v3/<YOUR_API_KEY>'
-account = '<YOUR_PUBLIC_ADDRESS>'
+infura_url = "https://mainnet.infura.io/v3/<YOUR_API_KEY>"
+account = "<YOUR_PUBLIC_ADDRESS>"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 def confirmations(tx_hash):
-    tx = web3.eth.get_transaction(tx_hash)
-    return web3.eth.block_number - tx.blockNumber
+  tx = web3.eth.get_transaction(tx_hash)
+  return web3.eth.block_number - tx.blockNumber
 
 def watch():
-    while True:
-        block = web3.eth.get_block('latest')
-        print("Searching in block " + str(block.number))
+  while True:
+    block = web3.eth.get_block("latest")
+    print("Searching in block " + str(block.number))
 
-        if block and block.transactions:
-            for transaction in block.transactions:
-                tx_hash = transaction.hex() # the hashes are stored in a hexBytes format
-                tx = web3.eth.get_transaction(tx_hash)
-                if tx.to != None:
-                    if tx.to == account:
-                        print("Transaction found in block {} :".format(block.number))
-                        print({
-                            "hash": tx_hash,
-                            "from": tx["from"],
-                            "value": web3.from_wei(tx["value"], 'ether')
-                            })
-        time.sleep(5)
+    if block and block.transactions:
+      for transaction in block.transactions:
+        tx_hash = transaction.hex()  # the hashes are stored in a hexBytes format
+        tx = web3.eth.get_transaction(tx_hash)
+        if tx.to is not None:
+          if tx.to == account:
+            print("Transaction found in block {} :".format(block.number))
+            print({
+              "hash": tx_hash,
+              "from": tx["from"],
+              "value": web3.from_wei(tx["value"], "ether")
+            })
+    time.sleep(5)
 
 watch()
 # print(confirmations("0x0d40d60e118e9e1f61c2baa2252cc5f8b8ed491c885ec35db6fd6cfc8589c1a7"))

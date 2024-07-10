@@ -42,7 +42,7 @@ npm i @metamask/sdk-react
 In your project script, add the following to import the SDK:
 
 ```typescript title="index.tsx"
-import { MetaMaskProvider } from "@metamask/sdk-react";
+import { MetaMaskProvider } from "@metamask/sdk-react"
 ```
 
 ### 3. Wrap your project with `MetaMaskProvider`
@@ -155,12 +155,12 @@ const connectAndSign = async () => {
   try {
     const signResult = await sdk?.connectAndSign({
       msg: "Connect + Sign message",
-    });
-    setResponse(signResult);
+    })
+    setResponse(signResult)
   } catch (err) {
-    console.warn("failed to connect..", err);
+    console.warn("failed to connect..", err)
   }
-};
+}
 ```
 
 You can also [batch multiple JSON-RPC requests](../batch-json-rpc-requests.md) using the

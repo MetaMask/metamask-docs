@@ -27,7 +27,7 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"starknet_blockNumber","params":[],"id":1}'
+    -d '{"jsonrpc": "2.0", "method": "starknet_blockNumber", "params": [], "id": 1}'
 ```
 
 ### Node (JavaScript)
@@ -38,126 +38,125 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. In your project folder, install the `node-fetch` package using npm::
 
-    ```bash
-    npm i node-fetch
-    ``````
+   ```bash
+   npm i node-fetch
+   ```
 
 1. Create your JavaScript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    import fetch from 'node-fetch';
+   ```javascript title="index.js"
+   import fetch from "node-fetch"
 
-    fetch("https://starknet-mainnet.infura.io/v3/YOUR-API-KEY", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        method: "starknet_blockNumber",
-        params: [],
-        id: 1
-      })
-    })
-    .then(response =>
-      response.json()
-    )
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    ```
+   fetch("https://starknet-mainnet.infura.io/v3/YOUR-API-KEY", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify({
+       jsonrpc: "2.0",
+       method: "starknet_blockNumber",
+       params: [],
+       id: 1,
+     }),
+   })
+     .then((response) => response.json())
+     .then((data) => {
+       console.log(data)
+     })
+     .catch((error) => {
+       console.error(error)
+     })
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 #### Axios
 
 1. In your project folder, install the `axios` package using npm:
 
-    ```bash
-    npm i axios
-    ``````
+   ```bash
+   npm i axios
+   ```
 
 1. Create your JavaScript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```javascript title="index.js"
-    const axios = require('axios');
-    
-    axios.post('https://starknet-mainnet.infura.io/v3/YOUR-API-KEY', {
-      jsonrpc: '2.0',
-      method: 'starknet_blockNumber',
-      params: [],
-      id: 1
-    })
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-    ```
+   ```javascript title="index.js"
+   const axios = require("axios")
+
+   axios
+     .post("https://starknet-mainnet.infura.io/v3/YOUR-API-KEY", {
+       jsonrpc: "2.0",
+       method: "starknet_blockNumber",
+       params: [],
+       id: 1,
+     })
+     .then((response) => {
+       console.log(response.data)
+     })
+     .catch((error) => {
+       console.error(error)
+     })
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 ### Python
 
 1. In your project folder, install the `requests` library:
 
-    ```bash
-    pip install requests
-    ``````
+   ```bash
+   pip install requests
+   ```
 
 1. Create your Python file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `YOUR-API-KEY` with your actual Infura API key.
 
-    ```python title="index.py"
-    import requests
-    import json
+   ```python title="index.py"
+   import requests
+   import json
 
-    url = 'https://starknet-mainnet.infura.io/v3/YOUR-API-KEY'
+   url = "https://starknet-mainnet.infura.io/v3/YOUR-API-KEY"
 
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "starknet_blockNumber",
-        "params": [],
-        "id": 1
-    }
+   payload = 
+       "jsonrpc": "2.0",
+       "method": "starknet_blockNumber",
+       "params": [],
+       "id": 1
+   }
 
-    headers = {'content-type': 'application/json'}
+   headers = {"content-type": "application/json"}
 
-    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+   response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 
-    print(response)
-    ```
+   print(response)
+   ```
 
 1. Run the code using the following command:
 
-    ```bash
-    python index.py
-    ```
-
+   ```bash
+   python index.py
+   ```
+   
 ## Next steps
 
 Now that you have successfully made a call to the Starknet network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:
 
 - **Explore other Starknet APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](json-rpc-methods/index.md).
+  [JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Ethereum, Optimism, IPFS and more.
 
@@ -165,4 +164,3 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
-
