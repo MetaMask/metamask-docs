@@ -1,0 +1,26 @@
+---
+name: Check file name case
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  case:
+    name: Check for case being inconsistent
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ["docs"]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Case check action
+        uses: ConsenSys/docs-gha/case@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOC_DIR: ${{ matrix.folder }}
+          SKIP_TEST: true

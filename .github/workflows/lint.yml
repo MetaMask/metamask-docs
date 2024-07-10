@@ -1,0 +1,34 @@
+---
+name: Check for lint, spelling and link errors
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint Code Base, Spelling, Link Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint
+        uses: ConsenSys/docs-gha/lint@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  linkCheck:
+    name: Link Checking
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file-extensions: [".md", ".mdx"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: LinkCheck
+        uses: ConsenSys/docs-gha/linkcheck@main
+        with:
+          FILE_EXTENSION: ${{ matrix.file-extensions }}

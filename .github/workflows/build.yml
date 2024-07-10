@@ -1,0 +1,22 @@
+---
+name: Build
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        uses: ConsenSys/docs-gha/build@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
