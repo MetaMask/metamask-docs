@@ -69,9 +69,10 @@
   cursor: pointer;
 }
 .tableLabelIconError {
-  width: 11px;
+  position: absolute;
+  left: 4px;
+  width: 13px;
   height: 11px;
-  margin-left: 8px;
   background: url("/img/icons/error-icon.svg") no-repeat 50% 50%;
 }
 .tableColumnIcon {
@@ -111,9 +112,6 @@
 }
 .deleteIconCentered {
   top: 50%;
-}
-.deleteIconComplex {
-  top: 27px;
 }
 .dropdown {
   display: flex;

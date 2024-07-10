@@ -27,7 +27,7 @@ export const BaseInputTemplate = ({
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
 
   const { isFormReseted } = formContext;
-  const hasErrors = rawErrors?.length > 0 && !hideError;
+  const hasErrors = rawErrors?.length > 0 && !hideError && value !== "";
   const debouncedOnChange = useCallback(debounce((e, isInputNumber = false) => {
     onChange(isInputNumber ? e : e?.target?.value);
   }, 300), []);
@@ -54,13 +54,13 @@ export const BaseInputTemplate = ({
         <div className={styles.tableColumn}>
           <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused, hasErrors && styles.tableColumnParamError)}>
             <span>{name}{required && "*"}</span>
-            {hasErrors && !isNumber ? <span className={styles.tableLabelIconError} /> : null}
           </label>
         </div>
       )}
       <div className={!isArray ? styles.tableColumn : ""}>
-        <Tooltip message={hasErrors ? rawErrors[0] : ""} disabled={!rawErrors}>
+        <Tooltip message={hasErrors ? rawErrors[0] : ""} disabled={!hasErrors}>
           <div className={styles.tableValueRow}>
+            {hasErrors && !isNumber ? <span className={styles.tableLabelIconError} /> : null}
             <input
               id={id}
               value={inputValue}
