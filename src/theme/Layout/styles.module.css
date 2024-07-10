@@ -14,7 +14,7 @@
   margin: 0 auto;
 }
 
-@media (width <= 997px) {
+@media (width <= 996px) {
   .pageWrapper {
     display: block;
   }
