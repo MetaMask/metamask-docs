@@ -41,6 +41,7 @@
     "@rjsf/utils": "^5.18.4",
     "@rjsf/validator-ajv8": "^5.18.4",
     "clsx": "^1.2.1",
+    "docusaurus-plugin-sass": "^0.2.5",
     "docusaurus-plugin-segment": "^1.0.4",
     "dotenv": "^16.4.5",
     "launchdarkly-js-client-sdk": "^3.3.0",
@@ -54,7 +55,8 @@
     "react-player": "^2.13.0",
     "react-tippy": "^1.4.0",
     "remark-codesandbox": "^0.10.1",
-    "remark-docusaurus-tabs": "^0.2.0"
+    "remark-docusaurus-tabs": "^0.2.0",
+    "sass": "^1.77.6"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.0.0",
