@@ -99,12 +99,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null
 
-<<<<<<< HEAD
-  useEffect(() => {
-    const installed = !!(window as any)?.ethereum
-    setMetamaskInstalled(installed)
-  }, [])
-=======
   const location = useLocation();
 
   const [selectedWallet, setSelectedWallet] = useState(0);
@@ -122,7 +116,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     }
     return isMetamasks;
   }, [providers]);
->>>>>>> main
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -132,15 +125,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     ) {
       setParamsData([])
     }
-<<<<<<< HEAD
-    setParamsData(Object.values(data))
-=======
     setParamsData(Object.values(data));
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
       userExperience: "B"
     })
->>>>>>> main
   }
 
   const onSubmitRequestHandle = async () => {
@@ -150,9 +139,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         method: method,
         params: paramsData,
       })
-<<<<<<< HEAD
-      setReqResult(response)
-=======
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -160,7 +146,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         userExperience: "B",
         ...(response?.code && { responseStatus: response.code })
       })
->>>>>>> main
     } catch (e) {
       setReqResult(e)
     }

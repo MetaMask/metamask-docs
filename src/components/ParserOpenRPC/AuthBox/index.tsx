@@ -22,11 +22,6 @@ const MetamaskInstallMessage = () => (
   </div>
 )
 
-<<<<<<< HEAD
-export const AuthBox = ({ isMetamaskInstalled }: AuthBoxProps) => {
-  return <>{!isMetamaskInstalled ? <MetamaskInstallMessage /> : null}</>
-}
-=======
 export const AuthBox = ({ metamaskProviders = [], selectedProvider, handleConnect }: AuthBoxProps) => {
   if (metamaskProviders.length === 0) {
     return <MetamaskInstallMessage />
@@ -57,4 +52,3 @@ export const AuthBox = ({ metamaskProviders = [], selectedProvider, handleConnec
     </div>
   );
 };
->>>>>>> main
