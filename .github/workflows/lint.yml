@@ -2,9 +2,17 @@
 name: Check for lint, spelling and link errors
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+  secrets:
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+
 
 jobs:
   lint:

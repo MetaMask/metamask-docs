@@ -3,9 +3,16 @@ name: Build
 
 on:
   workflow_call:
-  pull_request:
-    branches:
-      - main
+  secrets:
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+
 
 jobs:
   build:
