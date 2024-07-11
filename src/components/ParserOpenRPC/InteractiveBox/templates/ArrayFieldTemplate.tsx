@@ -6,7 +6,7 @@ import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.mod
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
-export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData, formContext }: ArrayFieldTemplateProps) => {
+export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData }: ArrayFieldTemplateProps) => {
   const [isComplexArrayEditView, setIsComplexArrayEditView] = useState(false);
   const { setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
@@ -18,6 +18,12 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
     setIsDrawerContentFixed(true);
     setIsComplexArrayEditView(true);
     setIsComplexTypeView(true);
+  }
+  const addSimpleArray = () => {
+    toggleCollapsed();
+    if(collapsed && formData?.length === 0) {
+      onAddClick();
+    }
   }
 
   return (
@@ -31,7 +37,9 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
             <div className={styles.arrayFormDataWrap}>
               {JSON.stringify(formData, null, " ")}
             </div>
-            <span className={styles.tableColumnType} onClick={isSimpleArray ? toggleCollapsed : addComplexArray}>
+            <span
+              className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)}
+              onClick={isSimpleArray ? addSimpleArray : addComplexArray}>
               <span className={styles.dropdown}>
                 {schema.type}
                 <span className={
