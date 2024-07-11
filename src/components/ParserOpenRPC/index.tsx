@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useMemo, useState } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -11,11 +11,7 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import {
-  trackPageViewForSegment,
-  trackClickForSegment,
-  trackInputChangeForSegment
-} from "@site/src/lib/segmentAnalytics";
+import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
 import { useLocation } from "@docusaurus/router";
 import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
 
@@ -47,13 +43,13 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     trackClickForSegment({
       eventName: "Customize Request",
       clickType: "Customize Request",
-      userExperience: "new"
+      userExperience: "B"
     })
   };
   const closeModal = () => setModalOpen(false);
 
   const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
-  const currentNetwork = netData.find(net => net.name === network);
+  const currentNetwork = netData?.find(net => net.name === network);
 
   if (!currentNetwork && currentNetwork.error) return null;
 
@@ -97,14 +93,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setSelectedWallet(i);
   }
 
-  useEffect(() => {
-    trackPageViewForSegment({
-      name: "Reference page",
-      path: location.pathname,
-      userExperience: "new"
-    })
-  }, []);
-
   const metamaskProviders = useMemo(() => {
     const isMetamasks = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
     if (isMetamasks.length > 1) {
@@ -121,7 +109,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setParamsData(Object.values(data));
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
-      userExperience: "new"
+      userExperience: "B"
     })
   }
 
@@ -136,7 +124,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       trackClickForSegment({
         eventName: "Request Sent",
         clickType: "Request Sent",
-        userExperience: "new",
+        userExperience: "B",
         ...(response?.code && { responseStatus: response.code })
       })
     } catch (e) {
