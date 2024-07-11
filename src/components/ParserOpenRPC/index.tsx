@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from 'react'
+import React, { createContext, useMemo, useState, useEffect } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -12,7 +12,6 @@ import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
 import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
-import { useLocation } from "@docusaurus/router";
 import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
 
 interface ParserProps {
@@ -84,8 +83,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const location = useLocation();
-
   const [selectedWallet, setSelectedWallet] = useState(0);
   const providers = useSyncProviders();
 
@@ -101,6 +98,28 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     }
     return isMetamasks;
   }, [providers]);
+
+  const getAccount = async () => {
+    try {
+      const response = await metamaskProviders[selectedWallet].provider.request({
+        method: "eth_accounts",
+        params: []
+      })
+      return (response.length > 0 ? response[0] : null)
+    } catch (e) {
+      return null
+    }
+  };
+
+  useEffect(() => {
+    let userId = null;
+    if (metamaskProviders[selectedWallet].provider) {
+      userId = getAccount();
+    }
+    if (window && (window as any)?.Sentry) {
+      (window as any).Sentry.setUser({ name: userId })
+    }
+  }, []);
 
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
