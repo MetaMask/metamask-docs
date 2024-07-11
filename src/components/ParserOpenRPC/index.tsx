@@ -119,7 +119,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     if (window && (window as any)?.Sentry) {
       (window as any).Sentry.setUser({ name: userId })
     }
-  }, []);
+  }, [metamaskProviders, selectedWallet]);
 
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
