@@ -77,13 +77,8 @@ export const ConditionalField = (props: FieldTemplateProps) => {
             className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}
           >
             {formData === undefined ? "" : String(formData)}
-            <span className={styles.tableColumnType}>
-              <span
-                className={styles.dropdown}
-                onClick={() => {
-                  setIsOpened(!isOpened)
-                }}
-              >
+            <span className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)} onClick={() => { setIsOpened(!isOpened); }}>
+              <span className={styles.dropdown}>
                 {schema?.anyOf ? "anyOf" : "oneOf"}
                 <span
                   className={clsx(
@@ -114,7 +109,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     onClick={onDropdownOptionClick}
                     data-value={listItem.title}
                   >
-                    {`${listItem.title}: ${listItem?.enum ? "enum" : listItem.type}`}
+                    {listItem.title}
                   </li>
                 ))}
               </ul>

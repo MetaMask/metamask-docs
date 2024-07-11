@@ -46,9 +46,7 @@ export const CollapseBox = ({
           )}
         ></div>
       </button>
-      <Collapsible lazy collapsed={collapsed}>
-        {children}
-      </Collapsible>
+      <Collapsible animation={{ duration: 100, easing: "ease-in" }} lazy={false} collapsed={collapsed}>{children}</Collapsible>
     </div>
   )
 }

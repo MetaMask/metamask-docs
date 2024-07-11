@@ -324,6 +324,10 @@ button:hover {
   border-top-color: rgba(20, 22, 24, 1);
 }
 
+[data-theme="light"] .tippy-popper[x-placement^=bottom] [x-arrow] {
+    border-bottom-color:  rgba(20, 22, 24, 1);
+  }
+
 [data-theme="dark"] .tippy-tooltip {
   background-color: rgba(255, 255, 255, 1);
   color: rgba(20, 22, 24, 1);
@@ -331,4 +335,14 @@ button:hover {
 
 [data-theme="dark"] .tippy-popper[x-placement^="top"] [x-arrow] {
   border-top-color: rgba(255, 255, 255, 1);
+}
+
+[data-theme="dark"] .tippy-popper[x-placement^=bottom] [x-arrow] {
+  border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 1200px) {
+  .navbar__item, .navbar__link {
+    font-size: 14px;
+  }
 }

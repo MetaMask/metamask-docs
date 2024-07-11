@@ -1,13 +1,11 @@
-import React, { useState, useMemo } from "react"
-import useUser from "@site/src/hooks/useUser"
-import TerminalViewBox from "./TerminalViewBox"
-import ControlPanel from "./ControlPanel"
-import { INFO_MSG } from "./AlertMsg"
-import MessageBox from "@site/src/components/MessageBox/MessageBox"
-import Select from "react-dropdown-select"
-import { INIT_REQ_SET } from "@site/src/lib/constants"
-import { trackClickForSegmentAnalytics } from "@site/src/lib/segmentAnalytics"
-import Heading from "@theme/Heading"
+import React, { useState, useMemo } from "react";
+import useUser from "@site/src/hooks/useUser";
+import TerminalViewBox from "./TerminalViewBox";
+import ControlPanel from "./ControlPanel";
+import { INFO_MSG } from "./AlertMsg";
+import MessageBox from "@site/src/components/MessageBox/MessageBox";
+import { INIT_REQ_SET } from "@site/src/lib/constants";
+import Heading from '@theme/Heading'
 
 const CodeTerminal = () => {
   const { user, keys, loading: keysLoading } = useUser()
@@ -98,12 +96,6 @@ const CodeTerminal = () => {
         method: "GET",
       }
     }
-    trackClickForSegmentAnalytics({
-      type: "Submit Button",
-      clickText: "Send Request",
-      location: "https://docs.infura.io/",
-      userId: user.id,
-    })
     try {
       const res = await fetch(URL, params)
       if (res.ok) {

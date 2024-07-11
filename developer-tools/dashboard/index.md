@@ -9,7 +9,7 @@ import Banner from '@site/src/components/Banner'
 
 # Infura dashboard documentation
 
-The Infura dashboard provides users with a comprehensive overview and control of their blockchain infrastructure. It serves
+The Infura dashboard provides developers with a comprehensive overview and control of their blockchain infrastructure. It serves
 as a central hub for managing API keys and access, monitoring usage, and accessing account and billing information.
 
 <Banner>

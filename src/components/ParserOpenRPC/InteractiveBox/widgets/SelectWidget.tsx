@@ -25,29 +25,11 @@ export const SelectWidget = ({
           className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}
         >
           {emptyValue ? "" : String(value)}
-          <span className={styles.tableColumnType}>
-            <span
-              className={styles.dropdown}
-              onClick={() => {
-                setIsOpened(!isOpened)
-              }}
-            >
-              {schema?.enum ? "enum" : schema?.type}
-              <span
-                className={clsx(
-                  styles.tableColumnIcon,
-                  styles.chevronIcon,
-                  styles.dropdownChevronIcon,
-                  !isOpened && styles.chevronIconDown
-                )}
-              />
-              <span
-                className={clsx(
-                  styles.chevronIcon,
-                  styles.dropdownChevronIcon,
-                  !isOpened && styles.chevronIconDown
-                )}
-              />
+          <span className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)} onClick={() => { setIsOpened(!isOpened); }}>
+            <span className={styles.dropdown}>
+              {schema?.enum ? 'enum' : schema?.type}
+              <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
+              <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
             </span>
             <ul
               className={clsx(
