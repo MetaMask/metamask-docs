@@ -7758,6 +7758,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"docusaurus-plugin-sentry@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "docusaurus-plugin-sentry@npm:2.0.0"
+  peerDependencies:
+    "@docusaurus/core": ">=3"
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: c4149b7b3eb65cff1a2e0d06ed887ee642bee97a311cc638b558fee9f4496e07a9a0f93165e7562dd0d8500acc45c3d069e3500a948b53adc1025ec2d1296ab4
+  languageName: node
+  linkType: hard
+
 "dom-converter@npm:^0.2.0":
   version: 0.2.0
   resolution: "dom-converter@npm:0.2.0"
@@ -12609,6 +12620,7 @@ __metadata:
     "@typescript-eslint/parser": ^7.12.0
     clsx: ^1.2.1
     docusaurus-plugin-segment: ^1.0.4
+    docusaurus-plugin-sentry: ^2.0.0
     dotenv: ^16.4.5
     eslint-plugin-react: ^7.34.2
     launchdarkly-js-client-sdk: ^3.3.0
