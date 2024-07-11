@@ -151,7 +151,7 @@ const config = {
       [
         "docusaurus-plugin-sentry",
         {
-          DSN: "https://d3220b0812610810ddb5a911b3d97790@o124216.ingest.us.sentry.io/4507526235095040",
+          DSN: "d3220b0812610810ddb5a911b3d97790",
           replaysOnErrorSampleRate: 1,
           replaysSessionSampleRate: 0.25,
           sampleRate: 0.25
