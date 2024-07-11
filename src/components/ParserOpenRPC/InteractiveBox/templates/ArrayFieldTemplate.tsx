@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useCollapsible, Collapsible } from "@docusaurus/theme-common";
 import { ArrayFieldTemplateProps } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
@@ -13,7 +13,9 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
   const itemsType = schema?.items?.type;
   const isSimpleArray = itemsType === "string" || itemsType === "boolean" || itemsType === "number" || itemsType === "integer";
   const addComplexArray = () => {
-    onAddClick();
+    if(formData?.length === 0) {
+      onAddClick();
+    }
     setDrawerLabel(title);
     setIsDrawerContentFixed(true);
     setIsComplexArrayEditView(true);
@@ -25,6 +27,12 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
       onAddClick();
     }
   }
+
+  useEffect(() => {
+    if (!isComplexTypeView) {
+      setIsComplexArrayEditView(false);
+    }
+  }, [isComplexTypeView])
 
   return (
     <div>
@@ -60,14 +68,14 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
         <div className={styles.tableComplexType}>
           {items.map(({ children, index, onDropIndexClick, hasRemove }) => (
             <div className={styles.tableComplexTypeItem} key={index}>
+              {hasRemove ?
+                <button className={clsx(styles.tableButton, styles.tableButtonAddNewArray)} onClick={onDropIndexClick(index)}>
+                  <img src="/img/icons/minus-icon.svg" alt={`Add ${title}`} width="16px" height="16px" />
+                  <span className={styles.tableButtonAddArrayItemName}>Remove {title}</span>
+                </button> :
+                null
+              }
               {children}
-              {hasRemove && (
-                <span
-                  onClick={onDropIndexClick(index)}
-                  className={clsx(styles.deleteIcon, styles.deleteIconComplex)}
-                >
-                </span>
-              )}
             </div>
           ))}
           {canAdd ?
