@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useCollapsible, Collapsible } from "@docusaurus/theme-common";
 import { ArrayFieldTemplateProps } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
@@ -6,19 +6,33 @@ import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.mod
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
-export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData, formContext }: ArrayFieldTemplateProps) => {
+export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, formData }: ArrayFieldTemplateProps) => {
   const [isComplexArrayEditView, setIsComplexArrayEditView] = useState(false);
   const { setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const itemsType = schema?.items?.type;
   const isSimpleArray = itemsType === "string" || itemsType === "boolean" || itemsType === "number" || itemsType === "integer";
   const addComplexArray = () => {
-    onAddClick();
+    if(formData?.length === 0) {
+      onAddClick();
+    }
     setDrawerLabel(title);
     setIsDrawerContentFixed(true);
     setIsComplexArrayEditView(true);
     setIsComplexTypeView(true);
   }
+  const addSimpleArray = () => {
+    toggleCollapsed();
+    if(collapsed && formData?.length === 0) {
+      onAddClick();
+    }
+  }
+
+  useEffect(() => {
+    if (!isComplexTypeView) {
+      setIsComplexArrayEditView(false);
+    }
+  }, [isComplexTypeView])
 
   return (
     <div>
@@ -31,7 +45,9 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
             <div className={styles.arrayFormDataWrap}>
               {JSON.stringify(formData, null, " ")}
             </div>
-            <span className={styles.tableColumnType} onClick={isSimpleArray ? toggleCollapsed : addComplexArray}>
+            <span
+              className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)}
+              onClick={isSimpleArray ? addSimpleArray : addComplexArray}>
               <span className={styles.dropdown}>
                 {schema.type}
                 <span className={
@@ -52,14 +68,14 @@ export const ArrayFieldTemplate = ({ items, canAdd, onAddClick, title, schema, f
         <div className={styles.tableComplexType}>
           {items.map(({ children, index, onDropIndexClick, hasRemove }) => (
             <div className={styles.tableComplexTypeItem} key={index}>
+              {hasRemove ?
+                <button className={clsx(styles.tableButton, styles.tableButtonAddNewArray)} onClick={onDropIndexClick(index)}>
+                  <img src="/img/icons/minus-icon.svg" alt={`Add ${title}`} width="16px" height="16px" />
+                  <span className={styles.tableButtonAddArrayItemName}>Remove {title}</span>
+                </button> :
+                null
+              }
               {children}
-              {hasRemove && (
-                <span
-                  onClick={onDropIndexClick(index)}
-                  className={clsx(styles.deleteIcon, styles.deleteIconComplex)}
-                >
-                </span>
-              )}
             </div>
           ))}
           {canAdd ?

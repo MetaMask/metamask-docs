@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useMemo, useState } from 'react'
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -11,6 +11,9 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
+import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import { useLocation } from "@docusaurus/router";
+import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -28,7 +31,6 @@ export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | nu
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(null);
   const [paramsData, setParamsData] = useState([]);
@@ -36,11 +38,18 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const { colorMode } = useColorMode();
-  const openModal = () => setModalOpen(true);
+  const openModal = () => {
+    setModalOpen(true);
+    trackClickForSegment({
+      eventName: "Customize Request",
+      clickType: "Customize Request",
+      userExperience: "B"
+    })
+  };
   const closeModal = () => setModalOpen(false);
 
   const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
-  const currentNetwork = netData.find(net => net.name === network);
+  const currentNetwork = netData?.find(net => net.name === network);
 
   if (!currentNetwork && currentNetwork.error) return null;
 
@@ -75,25 +84,49 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  useEffect(() => {
-    const installed = !!(window as any)?.ethereum;
-    setMetamaskInstalled(installed);
-  }, []);
+  const location = useLocation();
+
+  const [selectedWallet, setSelectedWallet] = useState(0);
+  const providers = useSyncProviders();
+
+  const handleConnect = (i:number) => {
+    setSelectedWallet(i);
+  }
+
+  const metamaskProviders = useMemo(() => {
+    const isMetamasks = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
+    if (isMetamasks.length > 1) {
+      const indexWallet = isMetamasks.findIndex(item => item.info.name === "MetaMask");
+      setSelectedWallet(indexWallet);
+    }
+    return isMetamasks;
+  }, [providers]);
 
   const onParamsChangeHandle = (data) => {
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
       setParamsData([]);
     }
     setParamsData(Object.values(data));
+    trackInputChangeForSegment({
+      eventName: "Request Configuration Started",
+      userExperience: "B"
+    })
   }
 
   const onSubmitRequestHandle = async () => {
+    if (metamaskProviders.length === 0) return
     try {
-      const response = await (window as any).ethereum.request({
+      const response = await metamaskProviders[selectedWallet].provider.request({
         method: method,
         params: paramsData
       })
       setReqResult(response);
+      trackClickForSegment({
+        eventName: "Request Sent",
+        clickType: "Request Sent",
+        userExperience: "B",
+        ...(response?.code && { responseStatus: response.code })
+      })
     } catch (e) {
       setReqResult(e);
     }
@@ -158,9 +191,13 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            <AuthBox isMetamaskInstalled={metamaskInstalled} />
+            <AuthBox
+              metamaskProviders={metamaskProviders}
+              selectedProvider={selectedWallet}
+              handleConnect={handleConnect}
+            />
             <RequestBox
-              isMetamaskInstalled={metamaskInstalled}
+              isMetamaskInstalled={metamaskProviders.length > 0}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
