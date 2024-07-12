@@ -83,7 +83,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { sdk, connected, provider, account } = useSDK();
+  const { sdk, ready, connected, provider, account } = useSDK();
+
+  const isConnected = useMemo(() => {
+    return ready && connected && !!account
+  }, [ready, connected, account]);
 
   useEffect(() => {
     if ((window as any)?.Sentry) {
@@ -140,6 +144,8 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     closeComplexTypeView();
   }
 
+  console.log("connected_acc", connected, account);
+
   return (
     <ParserOpenRPCContext.Provider
       value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
@@ -188,7 +194,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!connected && <AuthBox handleConnect={connectSDKHandler} />}
+            {!isConnected && <AuthBox handleConnect={connectSDKHandler} />}
             <RequestBox
               isMetamaskInstalled={connected}
               method={method}
