@@ -7,6 +7,7 @@ import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import styles from "./styles.module.css";
+import { MetaMaskProvider } from '@metamask/sdk-react';
 
 const REF_FF = "mm-new-reference-enabled";
 const REF_PATH = "/wallet/reference/";
@@ -15,6 +16,18 @@ const EXEPT_METHODS = [
   "wallet_revokePermissions",
   "eth_signTypedData_v4"
 ];
+
+const SDK_OPTIONS = {
+  logging:{
+    developerMode: false,
+  },
+  checkInstallationImmediately: false,
+  dappMetadata: {
+    name: "New reference pages",
+    url: "https://docs.metamask.io/",
+  },
+  preferDesktop: true
+}
 
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -56,18 +69,20 @@ export default function LayoutWrapper({ children }) {
           return (
             <>
               {newReferenceEnabled && ldReady && referencePageName ? (
-                <Layout>
-                  <div className={styles.pageWrapper}>
-                    {children?.props?.children[0]?.type === "aside" && (
-                      <>{children.props.children[0]}</>
-                    )}
-                    <div className={styles.mainContainer}>
-                      <div className={styles.contentWrapper}>
-                        <ParserOpenRPC network={NETWORK_NAMES.metamask} method={referencePageName} />
+                <MetaMaskProvider sdkOptions={{...SDK_OPTIONS}}>
+                  <Layout>
+                    <div className={styles.pageWrapper}>
+                      {children?.props?.children[0]?.type === "aside" && (
+                        <>{children.props.children[0]}</>
+                      )}
+                      <div className={styles.mainContainer}>
+                        <div className={styles.contentWrapper}>
+                          <ParserOpenRPC network={NETWORK_NAMES.metamask} method={referencePageName} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Layout>
+                  </Layout>
+                </MetaMaskProvider>
               ) : (
                 <Layout>{children}</Layout>
               )}

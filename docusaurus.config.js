@@ -147,15 +147,14 @@ const config = {
         },
       ] : null,
     "./src/plugins/launchdarkly",
-    isProd ? 
-      [
-        "docusaurus-plugin-sentry",
-        {
-          DSN: "d3220b0812610810ddb5a911b3d97790",
-          replaysOnErrorSampleRate: 1.0,
-          replaysSessionSampleRate: 0.1
-        },
-      ] : null,
+    [
+      "docusaurus-plugin-sentry",
+      {
+        DSN: "d3220b0812610810ddb5a911b3d97790",
+        replaysOnErrorSampleRate: isProd ? 1.0 : 0,
+        replaysSessionSampleRate: isProd ? 0.1 : 0,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
