@@ -28,13 +28,15 @@ following to the manifest file:
 ```
 
 :::note
+
 All Snaps API methods except the following interactive UI methods require requesting permission in
 the manifest file:
 
 - [`snap_createInterface`](../reference/snaps-api.md#snap_createinterface)
 - [`snap_getInterfaceState`](../reference/snaps-api.md#snap_getinterfacestate)
 - [`snap_updateInterface`](../reference/snaps-api.md#snap_updateInterface)
-  :::
+
+:::
 
 ### Endowments
 
