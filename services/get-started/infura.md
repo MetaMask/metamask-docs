@@ -165,11 +165,12 @@ Configure security settings in the **Settings** tab. This is optional.
 
 Force API requests to include the API key secret and/or [JSON Web Tokens (JWTs)](../how-to/json-web-token-jwt.md).
 
-<div class="left-align-container">
-  <div class="img-large">
+<div className="left-align-container">
+  <div className="img-large">
     <img
       src={require("../images/settings-tab.png").default}
-    /
+      alt="Settings Tab"
+    />
   </div>
 </div>
 

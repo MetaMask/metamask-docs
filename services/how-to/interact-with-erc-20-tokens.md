@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem""
+import TabItem from "@theme/TabItem"
 
 # Interact with ERC-20 tokens
 

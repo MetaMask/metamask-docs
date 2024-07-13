@@ -4,7 +4,7 @@ sidebar_position: 4
 ---
 
 import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem;
+import TabItem from "@theme/TabItem";
 
 # Retrieve and display ERC-721 and ERC-1155 tokens
 
