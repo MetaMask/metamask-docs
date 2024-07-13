@@ -1,8 +1,8 @@
-import React, { useMemo } from "react"
-import Icon from "../Icon/Icon"
-import { API_URL } from "../../lib/constants"
-import Link from "@docusaurus/Link"
-import CodeBlock from "@theme/CodeBlock"
+import React, { useMemo } from "react";
+import Icon from "../Icon/Icon";
+import { API_URL } from "../../lib/constants";
+import Link from "@docusaurus/Link";
+import CodeBlock from "@theme/CodeBlock";
 
 const TerminalViewBox = ({
   url = "{network}",
@@ -19,14 +19,14 @@ const TerminalViewBox = ({
       params.length === 0
         ? ""
         : params.map((param) => {
-            if ("boolean" === typeof param) return `${param}`
-            return `"${param}"`
-          })
+            if ("boolean" === typeof param) return `${param}`;
+            return `"${param}"`;
+          });
     if (isExpansionNetwork) {
-      return `curl -X 'GET' \\\n'https://${url}'`
+      return `curl -X 'GET' \\\n'https://${url}'`;
     }
-    return `curl https://${url}/v3/${id} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": [${params.length === 0 ? "" : prepareParams}],\n    "id": 1\n  }'`
-  }, [url, id, method, params, isExpansionNetwork])
+    return `curl https://${url}/v3/${id} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": [${params.length === 0 ? "" : prepareParams}],\n    "id": 1\n  }'`;
+  }, [url, id, method, params, isExpansionNetwork]);
 
   return (
     <div className="terminal-wrapper">
@@ -68,7 +68,7 @@ const TerminalViewBox = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TerminalViewBox
+export default TerminalViewBox;

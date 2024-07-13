@@ -1,7 +1,7 @@
-import React from "react"
-import { API_LINKS } from "@site/src/lib/data"
-import Link from "@docusaurus/Link"
-import Heading from "@theme/Heading"
+import React from "react";
+import { API_LINKS } from "@site/src/lib/data";
+import Link from "@docusaurus/Link";
+import Heading from "@theme/Heading";
 
 const SectionAPIs = () => {
   return (
@@ -31,7 +31,7 @@ const SectionAPIs = () => {
         </ul>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SectionAPIs
+export default SectionAPIs;

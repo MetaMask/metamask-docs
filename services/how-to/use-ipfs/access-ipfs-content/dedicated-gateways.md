@@ -17,7 +17,7 @@ Toggle **DEDICATED GATEWAYS** to enable.
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../../images/image.png').default}
+      src={require("../../../images/image.png").default}
       alt="Dedicated gateways in project settings"
     />
   </div>
@@ -38,9 +38,9 @@ Enter a **UNIQUE SUBDOMAIN NAME** for your dedicated gateway and click **SAVE SU
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../../images/unique-subdomain.png').default}
+      src={require("../../../images/unique-subdomain.png").default}
       alt="Enter unique subdomain"
-    />
+    /
   </div>
 </div>
 

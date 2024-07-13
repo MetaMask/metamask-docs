@@ -1,11 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require("dotenv").config()
-const { themes } = require("prism-react-renderer")
-const codeTheme = themes.dracula
-const remarkCodesandbox = require("remark-codesandbox")
-const isProd = process.env.NODE_ENV === "production"
+require("dotenv").config();
+const { themes } = require("prism-react-renderer");
+const codeTheme = themes.dracula;
+const remarkCodesandbox = require("remark-codesandbox");
+const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -360,6 +360,6 @@ const config = {
         },
       },
     }),
-}
+};
 
-module.exports = config
+module.exports = config;

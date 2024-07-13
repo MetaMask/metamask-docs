@@ -2,8 +2,8 @@
 description: rollup_gasPrices API method
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # rollup_gasPrices
 
@@ -31,9 +31,9 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"rollup_gasPrices","params":[],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "rollup_gasPrices", "params": [], "id": 1}'
 ```
 
   </TabItem>

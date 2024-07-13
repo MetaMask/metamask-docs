@@ -1,37 +1,37 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
-import Form from "@rjsf/core"
-import clsx from "clsx"
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Form from "@rjsf/core";
+import clsx from "clsx";
 import {
   RJSFSchema,
   UiSchema,
   RegistryWidgetsType,
   RegistryFieldsType,
-} from "@rjsf/utils"
-import validator from "@rjsf/validator-ajv8"
-import $RefParser from "@apidevtools/json-schema-ref-parser"
+} from "@rjsf/utils";
+import validator from "@rjsf/validator-ajv8";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 import {
   MethodExample,
   MethodParam,
   SchemaComponents,
-} from "@site/src/components/ParserOpenRPC/interfaces"
-import styles from "./styles.module.css"
-import global from "../global.module.css"
-import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate"
-import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate"
-import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField"
-import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget"
-import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget"
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip"
-import { useColorMode } from "@docusaurus/theme-common"
-import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC"
+} from "@site/src/components/ParserOpenRPC/interfaces";
+import styles from "./styles.module.css";
+import global from "../global.module.css";
+import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
+import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
+import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
+import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
+import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
+import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { useColorMode } from "@docusaurus/theme-common";
+import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
 interface InteractiveBoxProps {
-  params: MethodParam[]
-  components: SchemaComponents
-  examples: MethodExample[]
-  onParamChange: (data) => void
-  drawerLabel?: string | null
-  closeComplexTypeView?: () => void
+  params: MethodParam[];
+  components: SchemaComponents;
+  examples: MethodExample[];
+  onParamChange: (data) => void;
+  drawerLabel?: string | null;
+  closeComplexTypeView?: () => void;
 }
 
 export default function InteractiveBox({
@@ -42,18 +42,18 @@ export default function InteractiveBox({
   drawerLabel,
   closeComplexTypeView,
 }: InteractiveBoxProps) {
-  const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null)
-  const [defaultFormData, setDefaultFormData] = useState<any>({})
-  const [isFormReseted, setIsFormReseted] = useState(false)
-  const formRef = useRef(null)
-  const { colorMode } = useColorMode()
-  const { isComplexTypeView } = useContext(ParserOpenRPCContext)
+  const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
+  const [defaultFormData, setDefaultFormData] = useState<any>({});
+  const [isFormReseted, setIsFormReseted] = useState(false);
+  const formRef = useRef(null);
+  const { colorMode } = useColorMode();
+  const { isComplexTypeView } = useContext(ParserOpenRPCContext);
 
   const defaultExampleFormData = examples
     ? Object.fromEntries(
         examples[0].params.map(({ name, value }) => [name, value])
       )
-    : {}
+    : {};
   const schema: RJSFSchema = {
     components: {
       schemas: components,
@@ -62,86 +62,86 @@ export default function InteractiveBox({
     properties: Object.fromEntries(
       params.map(({ name, schema }) => [name, schema])
     ),
-  }
+  };
   const uiSchema: UiSchema = {
     "ui:globalOptions": {
       label: false,
     },
     "ui:widget": "checkbox",
-  }
+  };
   const templates = {
     BaseInputTemplate,
     ArrayFieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
-  }
+  };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
     SelectWidget: SelectWidget,
-  }
+  };
   const fields: RegistryFieldsType = {
     AnyOfField: ConditionalField,
     OneOfField: ConditionalField,
-  }
+  };
   const handleResetForm = (e) => {
-    e.preventDefault()
-    setDefaultFormData(defaultExampleFormData)
-    setIsFormReseted(true)
-  }
+    e.preventDefault();
+    setDefaultFormData(defaultExampleFormData);
+    setIsFormReseted(true);
+  };
   const handleClearForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (formRef) {
-      formRef?.current?.reset()
+      formRef?.current?.reset();
     }
-  }
-  const isLightTheme = colorMode === "light"
+  };
+  const isLightTheme = colorMode === "light";
 
   useEffect(() => {
     const dereferenceSchema = async () => {
       try {
         if (schema) {
-          setParsedSchema((await $RefParser.dereference(schema)) as RJSFSchema)
+          setParsedSchema((await $RefParser.dereference(schema)) as RJSFSchema);
         }
       } catch (error) {
-        console.error("Error of parsing schema:", error)
+        console.error("Error of parsing schema:", error);
       }
-    }
-    dereferenceSchema()
+    };
+    dereferenceSchema();
     if (examples) {
-      setDefaultFormData(defaultExampleFormData)
-      onParamChange(defaultExampleFormData)
+      setDefaultFormData(defaultExampleFormData);
+      onParamChange(defaultExampleFormData);
     }
-  }, [])
+  }, []);
 
   const onChangeHandler = (data) => {
-    onParamChange(data)
-    setDefaultFormData(data)
-  }
+    onParamChange(data);
+    setDefaultFormData(data);
+  };
 
   const cloneAndSetNullIfExists = (obj, key) => {
-    if (typeof obj !== "object" || obj === null) return obj
-    const newObj = Array.isArray(obj) ? [] : {}
-    for (let prop in obj) {
+    if (typeof obj !== "object" || obj === null) return obj;
+    const newObj = Array.isArray(obj) ? [] : {};
+    for (const prop in obj) {
       if (obj.hasOwnProperty(prop)) {
         if (prop === key) {
-          newObj[prop] = []
+          newObj[prop] = [];
         } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
-          newObj[prop] = cloneAndSetNullIfExists(obj[prop], key)
+          newObj[prop] = cloneAndSetNullIfExists(obj[prop], key);
         } else {
-          newObj[prop] = obj[prop]
+          newObj[prop] = obj[prop];
         }
       }
     }
-    return newObj
-  }
+    return newObj;
+  };
 
   const handleCancelClick = () => {
     if (drawerLabel) {
-      const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel)
-      setDefaultFormData(upData)
+      const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel);
+      setDefaultFormData(upData);
     }
-    closeComplexTypeView()
-  }
+    closeComplexTypeView();
+  };
 
   return parsedSchema ? (
     <>
@@ -157,7 +157,7 @@ export default function InteractiveBox({
         liveValidate
         noHtml5Validate
         onChange={(data) => {
-          onChangeHandler(data.formData)
+          onChangeHandler(data.formData);
         }}
         templates={templates}
         uiSchema={uiSchema}
@@ -220,5 +220,5 @@ export default function InteractiveBox({
         </div>
       </Form>
     </>
-  ) : null
+  ) : null;
 }

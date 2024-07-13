@@ -1,22 +1,22 @@
-import React from "react"
-import { useColorMode } from "@docusaurus/theme-common"
-import clsx from "clsx"
-import Heading from "@theme/Heading"
-import { MDContent } from "@site/src/components/ParserOpenRPC/DetailsBox/MDContent"
-import styles from "./styles.module.css"
+import React from "react";
+import { useColorMode } from "@docusaurus/theme-common";
+import clsx from "clsx";
+import Heading from "@theme/Heading";
+import { MDContent } from "@site/src/components/ParserOpenRPC/DetailsBox/MDContent";
+import styles from "./styles.module.css";
 
 interface ErrorItem {
-  code: number
-  message: string
+  code: number;
+  message: string;
 }
 
 interface ErrorsBoxProps {
-  errors: ErrorItem[]
+  errors: ErrorItem[];
 }
 
 export default function ErrorsBox({ errors }: ErrorsBoxProps) {
-  const { colorMode } = useColorMode()
-  if (errors.length === 0) return null
+  const { colorMode } = useColorMode();
+  if (errors.length === 0) return null;
 
   return (
     <>
@@ -48,5 +48,5 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
         ))}
       </div>
     </>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const Icon = ({ name, classes }) => {
   const renderIcon = () => {
@@ -17,7 +17,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "network":
         return (
           <svg
@@ -32,7 +32,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "method":
         return (
           <svg
@@ -47,7 +47,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "type":
         return (
           <svg
@@ -62,7 +62,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "arrow-right":
         return (
           <svg
@@ -77,7 +77,7 @@ const Icon = ({ name, classes }) => {
               fill="#FF5833"
             />
           </svg>
-        )
+        );
       case "alert-error":
         return (
           <svg
@@ -92,7 +92,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "alert-success":
         return (
           <svg
@@ -107,7 +107,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "alert-info":
         return (
           <svg
@@ -122,7 +122,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "angle-right":
         return (
           <svg
@@ -137,7 +137,7 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       case "angle-line-right":
         return (
           <svg
@@ -152,12 +152,12 @@ const Icon = ({ name, classes }) => {
               fill="currentColor"
             />
           </svg>
-        )
+        );
       default:
-        return null
+        return null;
     }
-  }
-  return <span className={classes}>{renderIcon()}</span>
-}
+  };
+  return <span className={classes}>{renderIcon()}</span>;
+};
 
-export default Icon
+export default Icon;

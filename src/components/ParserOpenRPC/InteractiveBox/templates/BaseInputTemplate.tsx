@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { BaseInputTemplateProps } from "@rjsf/utils"
-import clsx from "clsx"
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css"
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip"
-import debounce from "lodash.debounce"
+import React, { useCallback, useEffect, useState } from "react";
+import { BaseInputTemplateProps } from "@rjsf/utils";
+import clsx from "clsx";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import debounce from "lodash.debounce";
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
-  isArray?: boolean
+  isArray?: boolean;
 }
 
 export const BaseInputTemplate = ({
@@ -22,45 +22,59 @@ export const BaseInputTemplate = ({
   formContext,
   isArray,
 }: ExtendedInputProps) => {
-  const isNumber = schema.type === "number" || schema.type === "integer"
-  const [isFocused, setIsFocused] = useState(false)
-  const [inputValue, setInputValue] = useState(isNumber ? 0 : "")
+  const isNumber = schema.type === "number" || schema.type === "integer";
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
 
   const { isFormReseted } = formContext;
   const hasErrors = rawErrors?.length > 0 && !hideError && value !== "";
-  const debouncedOnChange = useCallback(debounce((e, isInputNumber = false) => {
-    onChange(isInputNumber ? e : e?.target?.value);
-  }, 300), []);
+  const debouncedOnChange = useCallback(
+    debounce((e, isInputNumber = false) => {
+      onChange(isInputNumber ? e : e?.target?.value);
+    }, 300),
+    []
+  );
   const onInputChange = (e) => {
-    setInputValue(e?.target?.value)
-    debouncedOnChange(e)
-  }
+    setInputValue(e?.target?.value);
+    debouncedOnChange(e);
+  };
   const onInputNumberChange = (value) => {
-    setInputValue(value)
-    debouncedOnChange(value, true)
-  }
+    setInputValue(value);
+    debouncedOnChange(value, true);
+  };
 
   useEffect(() => {
-    setInputValue(value)
-  }, [value, isFormReseted])
+    setInputValue(value);
+  }, [value, isFormReseted]);
 
   useEffect(() => {
-    setInputValue(value)
-  }, [])
+    setInputValue(value);
+  }, []);
 
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
       {!isArray && (
         <div className={styles.tableColumn}>
-          <label className={clsx(styles.tableColumnParam, isFocused && styles.tableColumnParamFocused, hasErrors && styles.tableColumnParamError)}>
-            <span>{name}{required && "*"}</span>
+          <label
+            className={clsx(
+              styles.tableColumnParam,
+              isFocused && styles.tableColumnParamFocused,
+              hasErrors && styles.tableColumnParamError
+            )}
+          >
+            <span>
+              {name}
+              {required && "*"}
+            </span>
           </label>
         </div>
       )}
       <div className={!isArray ? styles.tableColumn : ""}>
         <Tooltip message={hasErrors ? rawErrors[0] : ""} disabled={!hasErrors}>
           <div className={styles.tableValueRow}>
-            {hasErrors && !isNumber ? <span className={styles.tableLabelIconError} /> : null}
+            {hasErrors && !isNumber ? (
+              <span className={styles.tableLabelIconError} />
+            ) : null}
             <input
               id={id}
               value={inputValue}
@@ -73,10 +87,10 @@ export const BaseInputTemplate = ({
               pattern={schema.pattern}
               onChange={onInputChange}
               onFocus={() => {
-                setIsFocused(true)
+                setIsFocused(true);
               }}
               onBlur={() => {
-                setIsFocused(false)
+                setIsFocused(false);
               }}
             />
             <span className={styles.tableColumnType}>
@@ -90,7 +104,7 @@ export const BaseInputTemplate = ({
                       styles.formControlNumberUp
                     )}
                     onClick={() => {
-                      onInputNumberChange(Number((+inputValue || 0) + 1))
+                      onInputNumberChange(Number((+inputValue || 0) + 1));
                     }}
                   />
                   <span
@@ -102,7 +116,7 @@ export const BaseInputTemplate = ({
                     )}
                     onClick={() => {
                       inputValue >= 1 &&
-                        onInputNumberChange(Number((+inputValue || 0) - 1))
+                        onInputNumberChange(Number((+inputValue || 0) - 1));
                     }}
                   />
                 </>
@@ -112,5 +126,5 @@ export const BaseInputTemplate = ({
         </Tooltip>
       </div>
     </div>
-  )
-}
+  );
+};

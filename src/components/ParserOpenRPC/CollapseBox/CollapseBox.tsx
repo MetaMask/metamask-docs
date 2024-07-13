@@ -1,28 +1,28 @@
-import clsx from "clsx"
+import clsx from "clsx";
 import {
   useCollapsible,
   Collapsible,
   useColorMode,
-} from "@docusaurus/theme-common"
-import styles from "./styles.module.css"
-import React, { useEffect } from "react"
+} from "@docusaurus/theme-common";
+import styles from "./styles.module.css";
+import React, { useEffect } from "react";
 
 interface CollapseBoxProps {
-  children: JSX.Element
-  isInitCollapsed?: boolean
+  children: JSX.Element;
+  isInitCollapsed?: boolean;
 }
 
 export const CollapseBox = ({
   children,
   isInitCollapsed = false,
 }: CollapseBoxProps) => {
-  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true })
-  const { colorMode } = useColorMode()
+  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
+  const { colorMode } = useColorMode();
   useEffect(() => {
     if (isInitCollapsed) {
-      toggleCollapsed()
+      toggleCollapsed();
     }
-  }, [isInitCollapsed])
+  }, [isInitCollapsed]);
   return (
     <div
       className={clsx(
@@ -46,7 +46,13 @@ export const CollapseBox = ({
           )}
         ></div>
       </button>
-      <Collapsible animation={{ duration: 100, easing: "ease-in" }} lazy={false} collapsed={collapsed}>{children}</Collapsible>
+      <Collapsible
+        animation={{ duration: 100, easing: "ease-in" }}
+        lazy={false}
+        collapsed={collapsed}
+      >
+        {children}
+      </Collapsible>
     </div>
-  )
-}
+  );
+};

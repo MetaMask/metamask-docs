@@ -1,10 +1,10 @@
-import React from "react"
-import clsx from "clsx"
-import { ThemeClassNames } from "@docusaurus/theme-common"
-import { useDoc } from "@docusaurus/theme-common/internal"
-import LastUpdated from "@theme/LastUpdated"
-import EditThisPage from "@theme/EditThisPage"
-import styles from "./styles.module.css"
+import React from "react";
+import clsx from "clsx";
+import { ThemeClassNames } from "@docusaurus/theme-common";
+import { useDoc } from "@docusaurus/theme-common/internal";
+import LastUpdated from "@theme/LastUpdated";
+import EditThisPage from "@theme/EditThisPage";
+import styles from "./styles.module.css";
 
 function EditMetaRow({
   editUrl,
@@ -26,15 +26,15 @@ function EditMetaRow({
         )}
       </div>
     </div>
-  )
+  );
 }
 export default function DocItemFooter() {
-  const { metadata } = useDoc()
+  const { metadata } = useDoc();
   const { editUrl, lastUpdatedAt, formattedLastUpdatedAt, lastUpdatedBy } =
-    metadata
-  const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy)
+    metadata;
+  const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy);
   if (!canDisplayEditMetaRow) {
-    return null
+    return null;
   }
   return (
     <footer
@@ -49,5 +49,5 @@ export default function DocItemFooter() {
         />
       )}
     </footer>
-  )
+  );
 }

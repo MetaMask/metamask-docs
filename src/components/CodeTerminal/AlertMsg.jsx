@@ -1,6 +1,6 @@
-import React from "react"
-import { MSG_TYPES, API_URL } from "@site/src/lib/constants"
-import Link from "@docusaurus/Link"
+import React from "react";
+import { MSG_TYPES, API_URL } from "@site/src/lib/constants";
+import Link from "@docusaurus/Link";
 
 export const INFO_MSG = {
   EMPTY_MSG: {
@@ -69,4 +69,4 @@ export const INFO_MSG = {
       </>
     ),
   },
-}
+};

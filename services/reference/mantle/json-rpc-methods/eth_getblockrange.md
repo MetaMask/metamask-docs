@@ -2,8 +2,8 @@
 description: eth_getBlockRange API method
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # eth_getBlockRange
 
@@ -57,14 +57,14 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
 -X POST \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"eth_getBlockRange","params":["0x1", "0x2", false],"id":1}'
+-d '{"jsonrpc": "2.0", "method": "eth_getBlockRange", "params": ["0x1", "0x2", false], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc":"2.0","method":"eth_getBlockRange","params":["0x1", "0x2", false],"id":1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getBlockRange", "params": ["0x1", "0x2", false], "id": 1}'
 ```
 
   </TabItem>

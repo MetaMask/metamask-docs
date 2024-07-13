@@ -2,8 +2,8 @@
 description: Authenticate all requests to Infura with an API key secret.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # API key secret
 

@@ -3,8 +3,8 @@ description: Connect your dapp to existing, third-party Snaps.
 sidebar_position: 10
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Connect to a Snap
 

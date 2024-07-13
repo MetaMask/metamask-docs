@@ -7,7 +7,7 @@ import CardSection from "@site/src/components/CardSection";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext()
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx(styles.introductionBlock, "margin-bottom--lg")}>
       <div className="container">
@@ -28,7 +28,7 @@ function HomepageHeader() {
         </Link>
       </div>
     </header>
-  )
+  );
 }
 
 function DevBanner() {
@@ -77,7 +77,7 @@ function DevBanner() {
         </Link>
       </div>
     </header>
-  )
+  );
 }
 
 export default function Home(): JSX.Element {
@@ -89,5 +89,5 @@ export default function Home(): JSX.Element {
         <DevBanner />
       </main>
     </Layout>
-  )
+  );
 }

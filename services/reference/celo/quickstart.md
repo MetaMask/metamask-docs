@@ -27,7 +27,7 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 curl https://celo-mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
 ### Node (JavaScript)

@@ -2,8 +2,8 @@
 description: debug_traceTransaction API method
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # debug_traceTransaction
 

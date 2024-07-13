@@ -1,21 +1,21 @@
 // cSpell:words usabilla, getfeedback
 /* eslint-disable react/no-unknown-property */
-import React, { useState, useEffect, useRef } from "react"
-import { useColorMode } from "@docusaurus/theme-common"
+import React, { useState, useEffect, useRef } from "react";
+import { useColorMode } from "@docusaurus/theme-common";
 
 const GetFeedback = (props) => {
-  const feedbackContRef = useRef()
-  const { colorMode } = useColorMode()
-  const [theme, setTheme] = useState()
+  const feedbackContRef = useRef();
+  const { colorMode } = useColorMode();
+  const [theme, setTheme] = useState();
 
   useEffect(() => {
-    setTheme(colorMode)
-  }, [colorMode])
+    setTheme(colorMode);
+  }, [colorMode]);
 
   useEffect(() => {
-    setTheme(window?.localStorage?.getItem("theme") || colorMode)
-    window.usabilla.load("w.usabilla.com", "8485bdb0fb3c")
-  }, [])
+    setTheme(window?.localStorage?.getItem("theme") || colorMode);
+    window.usabilla.load("w.usabilla.com", "8485bdb0fb3c");
+  }, []);
 
   return (
     <div className="getfeedback-container">
@@ -32,7 +32,7 @@ const GetFeedback = (props) => {
         ref={feedbackContRef}
       />
     </div>
-  )
-}
+  );
+};
 
-export default GetFeedback
+export default GetFeedback;

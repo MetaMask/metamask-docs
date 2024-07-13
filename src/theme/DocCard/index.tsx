@@ -1,31 +1,31 @@
-import React, { type ReactNode } from "react"
-import clsx from "clsx"
-import Link from "@docusaurus/Link"
+import React, { type ReactNode } from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
 import {
   useDocById,
   findFirstSidebarItemLink,
-} from "@docusaurus/theme-common/internal"
-import isInternalUrl from "@docusaurus/isInternalUrl"
-import { translate } from "@docusaurus/Translate"
-import type { Props } from "@theme/DocCard"
+} from "@docusaurus/theme-common/internal";
+import isInternalUrl from "@docusaurus/isInternalUrl";
+import { translate } from "@docusaurus/Translate";
+import type { Props } from "@theme/DocCard";
 
-import cardListItemStyles from "@site/src/components/CardList/CardListItem/styles.module.css"
+import cardListItemStyles from "@site/src/components/CardList/CardListItem/styles.module.css";
 
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 import type {
   PropSidebarItemCategory,
   PropSidebarItemLink,
-} from "@docusaurus/plugin-content-docs"
+} from "@docusaurus/plugin-content-docs";
 
 function CardContainer({
   href,
   children,
   flaskOnly,
 }: {
-  href: string
-  children: ReactNode
-  flaskOnly?: boolean
+  href: string;
+  children: ReactNode;
+  flaskOnly?: boolean;
 }): JSX.Element {
   return (
     <Link
@@ -36,7 +36,7 @@ function CardContainer({
     >
       {children}
     </Link>
-  )
+  );
 }
 
 function CardLayout({
@@ -46,11 +46,11 @@ function CardLayout({
   description,
   flaskOnly,
 }: {
-  href: string
-  icon: ReactNode
-  title: string
-  description?: string
-  flaskOnly?: boolean
+  href: string;
+  icon: ReactNode;
+  title: string;
+  description?: string;
+  flaskOnly?: boolean;
 }): JSX.Element {
   return (
     <CardContainer flaskOnly={flaskOnly} href={href}>
@@ -66,19 +66,19 @@ function CardLayout({
         </p>
       )}
     </CardContainer>
-  )
+  );
 }
 
 function CardCategory({
   item,
 }: {
-  item: PropSidebarItemCategory
+  item: PropSidebarItemCategory;
 }): JSX.Element | null {
-  const href = findFirstSidebarItemLink(item)
+  const href = findFirstSidebarItemLink(item);
 
   // Unexpected: categories that don't have a link have been filtered upfront
   if (!href) {
-    return null
+    return null;
   }
 
   return (
@@ -100,12 +100,12 @@ function CardCategory({
         )
       }
     />
-  )
+  );
 }
 
 function CardLink({ item }: { item: PropSidebarItemLink }): JSX.Element {
-  const icon = isInternalUrl(item.href) ? "📄️" : "🔗"
-  const doc = useDocById(item.docId ?? undefined)
+  const icon = isInternalUrl(item.href) ? "📄️" : "🔗";
+  const doc = useDocById(item.docId ?? undefined);
   return (
     <CardLayout
       flaskOnly={!!item.customProps?.flask_only}
@@ -114,16 +114,16 @@ function CardLink({ item }: { item: PropSidebarItemLink }): JSX.Element {
       title={item.label}
       description={item.description ?? doc?.description}
     />
-  )
+  );
 }
 
 export default function DocCard({ item }: Props): JSX.Element {
   switch (item.type) {
     case "link":
-      return <CardLink item={item} />
+      return <CardLink item={item} />;
     case "category":
-      return <CardCategory item={item} />
+      return <CardCategory item={item} />;
     default:
-      throw new Error(`unknown item type ${JSON.stringify(item)}`)
+      throw new Error(`unknown item type ${JSON.stringify(item)}`);
   }
 }

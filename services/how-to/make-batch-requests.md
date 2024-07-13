@@ -24,7 +24,7 @@ Example batch request (containing 30 requests plus the batch request itself):
 ```json
 curl --request POST \
   --url https://mainnet.infura.io/v3/<API-KEY> \
-  --header 'Content-Type: application/json' \
+  --header "Content-Type: application/json" 
   --data '[
 	{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []},
 	{"jsonrpc": "2.0", "id": 2, "method": "eth_blockNumber", "params": []},

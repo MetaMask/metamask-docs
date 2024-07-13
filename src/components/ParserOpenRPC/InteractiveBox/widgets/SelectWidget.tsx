@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { WidgetProps } from "@rjsf/utils"
-import clsx from "clsx"
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css"
+import React, { useState } from "react";
+import { WidgetProps } from "@rjsf/utils";
+import clsx from "clsx";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
 
 export const SelectWidget = ({
   value,
@@ -10,10 +10,10 @@ export const SelectWidget = ({
   options,
   label,
 }: WidgetProps) => {
-  const [isOpened, setIsOpened] = useState(false)
+  const [isOpened, setIsOpened] = useState(false);
   const emptyValue =
     value === undefined ||
-    !options?.enumOptions.some(({ label }) => label === value)
+    !options?.enumOptions.some(({ label }) => label === value);
 
   return (
     <div className={styles.tableRow}>
@@ -25,11 +25,32 @@ export const SelectWidget = ({
           className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}
         >
           {emptyValue ? "" : String(value)}
-          <span className={clsx(styles.tableColumnType, styles.tableColumnTypeDropdown)} onClick={() => { setIsOpened(!isOpened); }}>
+          <span
+            className={clsx(
+              styles.tableColumnType,
+              styles.tableColumnTypeDropdown
+            )}
+            onClick={() => {
+              setIsOpened(!isOpened);
+            }}
+          >
             <span className={styles.dropdown}>
-              {schema?.enum ? 'enum' : schema?.type}
-              <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
-              <span className={clsx(styles.chevronIcon, styles.dropdownChevronIcon, !isOpened && styles.chevronIconDown)}/>
+              {schema?.enum ? "enum" : schema?.type}
+              <span
+                className={clsx(
+                  styles.tableColumnIcon,
+                  styles.chevronIcon,
+                  styles.dropdownChevronIcon,
+                  !isOpened && styles.chevronIconDown
+                )}
+              />
+              <span
+                className={clsx(
+                  styles.chevronIcon,
+                  styles.dropdownChevronIcon,
+                  !isOpened && styles.chevronIconDown
+                )}
+              />
             </span>
             <ul
               className={clsx(
@@ -42,8 +63,8 @@ export const SelectWidget = ({
                   className={styles.dropdownItem}
                   key={index}
                   onClick={() => {
-                    onChange(value)
-                    setIsOpened(false)
+                    onChange(value);
+                    setIsOpened(false);
                   }}
                 >
                   {String(label)}
@@ -54,5 +75,5 @@ export const SelectWidget = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

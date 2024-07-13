@@ -1,18 +1,18 @@
-import React, { useMemo } from "react"
-import clsx from "clsx"
-import CodeBlock from "@theme/CodeBlock"
-import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces"
-import styles from "./styles.module.css"
-import global from "../global.module.css"
+import React, { useMemo } from "react";
+import clsx from "clsx";
+import CodeBlock from "@theme/CodeBlock";
+import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
+import styles from "./styles.module.css";
+import global from "../global.module.css";
 
 interface RequestBoxProps {
-  isMetamaskInstalled: boolean
-  method: string
-  params: MethodParam[]
-  response?: any
-  paramsData: any
-  openModal: () => void
-  submitRequest: () => void
+  isMetamaskInstalled: boolean;
+  method: string;
+  params: MethodParam[];
+  response?: any;
+  paramsData: any;
+  openModal: () => void;
+  submitRequest: () => void;
 }
 
 export default function RequestBox({
@@ -25,14 +25,14 @@ export default function RequestBox({
   submitRequest,
 }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
-    const preparedParams = JSON.stringify(paramsData, null, 2)
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`
-  }, [method, paramsData])
+    const preparedParams = JSON.stringify(paramsData, null, 2);
+    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`;
+  }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    if (!response || response === null) return false
-    return JSON.stringify(response, null, 2)
-  }, [response])
+    if (!response || response === null) return false;
+    return JSON.stringify(response, null, 2);
+  }, [response]);
 
   return (
     <>
@@ -77,5 +77,5 @@ export default function RequestBox({
         </div>
       )}
     </>
-  )
+  );
 }

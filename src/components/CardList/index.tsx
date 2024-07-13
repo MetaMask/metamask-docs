@@ -1,12 +1,12 @@
-import React from "react"
-import CardListItem, { CardItem } from "./CardListItem"
+import React from "react";
+import CardListItem, { CardItem } from "./CardListItem";
 
 interface CardListProps {
-  items: CardItem[]
+  items: CardItem[];
 }
 
 export default function CardList(props: CardListProps): JSX.Element {
-  const { items } = props
+  const { items } = props;
 
   return (
     <section className="row">
@@ -16,5 +16,5 @@ export default function CardList(props: CardListProps): JSX.Element {
         </article>
       ))}
     </section>
-  )
+  );
 }

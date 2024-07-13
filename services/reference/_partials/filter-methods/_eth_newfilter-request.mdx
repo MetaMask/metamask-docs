@@ -2,8 +2,7 @@ import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
 <Tabs>
-
-<TabItem value="cURL">
+  <TabItem value="cURL">
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
@@ -19,6 +18,5 @@ curl https://mainnet.infura.io/v3/YOUR-API-KEY \
 wscat -c wss://mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_newFilter", "params": [{"topics": ["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"]}], "id": 1}'
 ```
 
-  </TabItem>
-  
+  </TabItem> 
 </Tabs>

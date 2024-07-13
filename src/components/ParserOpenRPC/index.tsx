@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from 'react'
+import React, { createContext, useMemo, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -11,24 +11,27 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import {
+  trackClickForSegment,
+  trackInputChangeForSegment,
+} from "@site/src/lib/segmentAnalytics";
 import { useLocation } from "@docusaurus/router";
-import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts"
+import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts";
 
 interface ParserProps {
-  network: NETWORK_NAMES
-  method?: string
+  network: NETWORK_NAMES;
+  method?: string;
 }
 
 interface ParserOpenRPCContextProps {
-  setIsDrawerContentFixed?: (isFixed: boolean) => void
-  setDrawerLabel?: (label: string) => void
-  isComplexTypeView: boolean
-  setIsComplexTypeView: (isComplexTypeView: boolean) => void
+  setIsDrawerContentFixed?: (isFixed: boolean) => void;
+  setDrawerLabel?: (label: string) => void;
+  isComplexTypeView: boolean;
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
 }
 
 export const ParserOpenRPCContext =
-  createContext<ParserOpenRPCContextProps | null>(null)
+  createContext<ParserOpenRPCContextProps | null>(null);
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
@@ -44,47 +47,49 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     trackClickForSegment({
       eventName: "Customize Request",
       clickType: "Customize Request",
-      userExperience: "B"
-    })
+      userExperience: "B",
+    });
   };
   const closeModal = () => setModalOpen(false);
 
-  const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
-  const currentNetwork = netData?.find(net => net.name === network);
+  const { netData } = usePluginData("plugin-json-rpc") as {
+    netData?: ResponseItem[];
+  };
+  const currentNetwork = netData?.find((net) => net.name === network);
 
-  if (!currentNetwork && currentNetwork.error) return null
+  if (!currentNetwork && currentNetwork.error) return null;
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
       return (
         items
           ?.map((item) => {
-            if (item?.name || (item?.code && item?.message)) return item
+            if (item?.name || (item?.code && item?.message)) return item;
             if (item?.$ref) {
-              const ref = item.$ref.replace(refPath, "")
-              return currentNetwork.data.components[componentType][ref]
+              const ref = item.$ref.replace(refPath, "");
+              return currentNetwork.data.components[componentType][ref];
             }
-            return null
+            return null;
           })
           .filter(Boolean) || []
-      )
-    }
+      );
+    };
 
     const currentMethod = currentNetwork.data.methods?.find(
       (met) => met.name === method
-    )
-    if (!currentMethod) return null
+    );
+    if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
       "errors"
-    )
+    );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
       "tags"
-    )
+    );
 
     return {
       description: currentMethod.summary || currentMethod.description || null,
@@ -94,24 +99,28 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       examples: currentMethod?.examples,
       errors,
       tags,
-    }
-  }, [currentNetwork, method])
+    };
+  }, [currentNetwork, method]);
 
-  if (currentMethodData === null) return null
+  if (currentMethodData === null) return null;
 
   const location = useLocation();
 
   const [selectedWallet, setSelectedWallet] = useState(0);
   const providers = useSyncProviders();
 
-  const handleConnect = (i:number) => {
+  const handleConnect = (i: number) => {
     setSelectedWallet(i);
-  }
+  };
 
   const metamaskProviders = useMemo(() => {
-    const isMetamasks = providers.filter(pr => pr?.info?.name?.includes("MetaMask"));
+    const isMetamasks = providers.filter((pr) =>
+      pr?.info?.name?.includes("MetaMask")
+    );
     if (isMetamasks.length > 1) {
-      const indexWallet = isMetamasks.findIndex(item => item.info.name === "MetaMask");
+      const indexWallet = isMetamasks.findIndex(
+        (item) => item.info.name === "MetaMask"
+      );
       setSelectedWallet(indexWallet);
     }
     return isMetamasks;
@@ -123,44 +132,46 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       data === null ||
       Object.keys(data).length === 0
     ) {
-      setParamsData([])
+      setParamsData([]);
     }
     setParamsData(Object.values(data));
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
-      userExperience: "B"
-    })
-  }
+      userExperience: "B",
+    });
+  };
 
   const onSubmitRequestHandle = async () => {
-    if (metamaskProviders.length === 0) return
+    if (metamaskProviders.length === 0) return;
     try {
-      const response = await metamaskProviders[selectedWallet].provider.request({
-        method: method,
-        params: paramsData,
-      })
+      const response = await metamaskProviders[selectedWallet].provider.request(
+        {
+          method: method,
+          params: paramsData,
+        }
+      );
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
         clickType: "Request Sent",
         userExperience: "B",
-        ...(response?.code && { responseStatus: response.code })
-      })
+        ...(response?.code && { responseStatus: response.code }),
+      });
     } catch (e) {
-      setReqResult(e)
+      setReqResult(e);
     }
-  }
+  };
 
   const closeComplexTypeView = () => {
-    setIsComplexTypeView(false)
-    setIsDrawerContentFixed(false)
-    setDrawerLabel(null)
-  }
+    setIsComplexTypeView(false);
+    setIsDrawerContentFixed(false);
+    setDrawerLabel(null);
+  };
 
   const onModalClose = () => {
-    closeModal()
-    closeComplexTypeView()
-  }
+    closeModal();
+    closeComplexTypeView();
+  };
 
   return (
     <ParserOpenRPCContext.Provider
@@ -244,5 +255,5 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
       </div>
     </ParserOpenRPCContext.Provider>
-  )
+  );
 }

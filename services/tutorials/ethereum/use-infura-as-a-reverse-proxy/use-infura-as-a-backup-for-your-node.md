@@ -2,8 +2,8 @@
 description: Use Caddy to set Infura as a backup for your node.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Use Infura as a backup for your node
 
@@ -101,7 +101,7 @@ To create the reverse proxy, create a text file named `Caddyfile` with the follo
 localhost:3000
 
 reverse_proxy https://localhost:9000 https://goerli.infura.io {
-   header_up Host {/v3/<YOUR_API_KEY>}
+  header_up Host {/v3/<YOUR_API_KEY>}
 }
 ```
 
@@ -126,9 +126,9 @@ In a new terminal window, make a curl request to `localhost`. The following exam
 
 ```bash
 curl http://localhost:3000/v3/<YOUR_API_KEY> \
-<strong>  -X POST \
-</strong>  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'</code></pre>
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
 ```
 
   </TabItem>
@@ -150,16 +150,16 @@ If you close the Node.js server and send the request again, you should get the r
 
 ```bash
 curl http://localhost:3000/v3/<YOUR_API_KEY> \
-<strong>  -X POST \
-</strong>  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'</code></pre>
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="Example result" label="Example result" >
 
 ```javascript
-{"jsonrpc":"2.0","id":1,"result":"Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
+{"jsonrpc": "2.0", "id":1, "result": "Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
 ```
 
   </TabItem>

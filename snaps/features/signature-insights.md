@@ -5,8 +5,8 @@ sidebar_custom_props:
   flask_only: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Signature insights
 

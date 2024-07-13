@@ -5,8 +5,8 @@ tags:
   - Keyring API
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create an account management Snap
 

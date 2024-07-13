@@ -28,31 +28,31 @@ Below is a table listing the error codes, their messages, and meanings. The "Sta
 common JSON-RPC errors, while the "Non-standard" category encompasses server errors defined by the
 implementation.
 
-| Code   | Message                        | Meaning                                                                                                                                                                                                                                                    | Category     |
-| ------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| -32700 | Parse error                    | The JSON request is invalid, this can be due to syntax errors.                                                                                                                                                                                             | Standard     |
-| -32600 | Invalid request                | The JSON request is possibly malformed.                                                                                                                                                                                                                    | Standard     |
-| -32601 | Method not found               | The method does not exist, often due to a typo in the method name or the method not being supported.                                                                                                                                                       | Standard     |
-| -32602 | Invalid argument               | Invalid method parameters. For example, `"error":{"code":-32602,"message":"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go value of type common.Hash"}` indicates the `0x` prefix is missing from the hexadecimal address. | Standard     |
-| -32603 | Internal error                 | An internal JSON-RPC error, often caused by a bad or invalid payload.                                                                                                                                                                                      | Standard     |
-| -32000 | Invalid input                  | Missing or invalid parameters, possibly due to server issues or a block not being processed yet.                                                                                                                                                           | Non-standard |
-| -32001 | Resource not found             | The requested resource cannot be found, possibly when calling an unsupported method.                                                                                                                                                                       | Non-standard |
-| -32002 | Resource unavailable           | The requested resource is not available.                                                                                                                                                                                                                   | Non-standard |
-| -32003 | Transaction rejected           | The transaction could not be created.                                                                                                                                                                                                                      | Non-standard |
-| -32004 | Method not supported           | The requested method is not implemented.                                                                                                                                                                                                                   | Non-standard |
-| -32005 | Limit exceeded                 | The request exceeds your request limit. For more information, refer to [Avoid rate limiting](../../../how-to/avoid-rate-limiting).                                                                                                                         | Non-standard |
-| -32006 | JSON-RPC version not supported | The version of the JSON-RPC protocol is not supported.                                                                                                                                                                                                     | Non-standard |
+| Code    | Message                        | Meaning                                                                                                                                                                                                                                                     | Category     |
+|---------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| -32700  | Parse error                    | The JSON request is invalid, this can be due to syntax errors.                                                                                                                                                                                              | Standard     |
+| -32600  | Invalid request                | The JSON request is possibly malformed.                                                                                                                                                                                                                     | Standard     |
+| -32601  | Method not found               | The method does not exist, often due to a typo in the method name or the method not being supported.                                                                                                                                                        | Standard     |
+| -32602  | Invalid argument               | Invalid method parameters. For example, `"error":{"code":-32602,"message":"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go value of type common.Hash"}` indicates the `0x` prefix is missing from the hexadecimal address.  | Standard     |
+| -32603  | Internal error                 | An internal JSON-RPC error, often caused by a bad or invalid payload.                                                                                                                                                                                       | Standard     |
+| -32000  | Invalid input                  | Missing or invalid parameters, possibly due to server issues or a block not being processed yet.                                                                                                                                                            | Non-standard |
+| -32001  | Resource not found             | The requested resource cannot be found, possibly when calling an unsupported method.                                                                                                                                                                        | Non-standard |
+| -32002  | Resource unavailable           | The requested resource is not available.                                                                                                                                                                                                                    | Non-standard |
+| -32003  | Transaction rejected           | The transaction could not be created.                                                                                                                                                                                                                       | Non-standard |
+| -32004  | Method not supported           | The requested method is not implemented.                                                                                                                                                                                                                    | Non-standard |
+| -32005  | Limit exceeded                 | The request exceeds your request limit. For more information, refer to [Avoid rate limiting](../../../how-to/avoid-rate-limiting).                                                                                                                          | Non-standard |
+| -32006  | JSON-RPC version not supported | The version of the JSON-RPC protocol is not supported.                                                                                                                                                                                                      | Non-standard |
 
 Example error response:
 
 ```json
 {
-    "id": 1337
-    "jsonrpc": "2.0",
-    "error": {
-        "code": -32003,
-        "message": "Transaction rejected"
-    }
+  "id": 1337
+  "jsonrpc": "2.0",
+  "error": {
+      "code": -32003,
+      "message": "Transaction rejected"
+  }
 }
 ```
 

@@ -3,8 +3,8 @@ description: Retrieve the balance of an ERC-20 token.
 sidebar_position: 5
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem;
 
 # Retrieve the balance of an ERC-20 token
 

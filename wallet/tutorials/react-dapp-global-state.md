@@ -4,8 +4,8 @@ toc_max_heading_level: 4
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create a React dapp with global state
 

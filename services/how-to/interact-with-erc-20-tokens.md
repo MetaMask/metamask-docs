@@ -3,8 +3,8 @@ description: Interact with ERC 20 tokens
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem""
 
 # Interact with ERC-20 tokens
 
@@ -45,7 +45,7 @@ The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data fie
   <TabItem value="Javascript" label="Javascript" default>
 
 ```javascript
-web3.sha3('Transfer(address,address,uint256)')[0..4]
+web3.sha3("Transfer(address, address, uint256)")[0..4]
 ```
 
   </TabItem>
@@ -67,7 +67,7 @@ The first four bytes of this hash comprise its four-byte signature. Take this fo
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params": ["0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_sendRawTransaction", "params": ["0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"], "id": 1}'
 ```
 
   </TabItem>
@@ -105,7 +105,7 @@ The following example uses `eth_getLogs` on the DAI ERC-20 Solidity contract [`0
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
-  -d {"jsonrpc":"2.0","method":"eth_getLogs","id":1,"params":[{"fromBlock":"Ox91F37C","toBlock":"0x91F37C","topics":[ "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", "0x000000000000000000000000ee25e1ba53c225d250861c8e5a9a3e0fe19c790e", "0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d" ],"address":"0x6B175474E89094C44Da98b954EedeAC495271d0F"}]}
+  -d '{"jsonrpc": "2.0", "method": "eth_getLogs", "id": 1, "params": [{"fromBlock": "0x91F37C", "toBlock": "0x91F37C", "topics": ["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", "0x000000000000000000000000ee25e1ba53c225d250861c8e5a9a3e0fe19c790e", "0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d"], "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F"}]}'
 ```
 
   </TabItem>

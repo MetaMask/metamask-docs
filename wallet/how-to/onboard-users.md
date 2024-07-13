@@ -4,8 +4,8 @@ description: Simplify the MetaMask onboarding experience for your users.
 sidebar_position: 8
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Use the MetaMask onboarding library
 

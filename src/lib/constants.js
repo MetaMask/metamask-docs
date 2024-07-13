@@ -1,9 +1,9 @@
-export const PROD_APP_URL = "https://app.infura.io"
-export const STAGE_APP_URL = "https://infura-app-staging.vercel.app"
-export const DEV_APP_URL = "http://localhost:3000"
+export const PROD_APP_URL = "https://app.infura.io";
+export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
+export const DEV_APP_URL = "http://localhost:3000";
 
 export const API_URL =
-  process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL
+  process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
 
 const TEST_TRANSACTIONS = {
   mainnet: {
@@ -26,19 +26,19 @@ const TEST_TRANSACTIONS = {
     tx: "0x210bdc45a5af5b33e82710b855aad75c1fbb903eaaf8f0c8b664e6709d216ed2",
     addParam: "0xc94770007dda54cF92009BFF0dE90c06F603a09f",
   },
-}
+};
 
 const NETWORK_URL = {
   infura: "infura.io",
   dev: "dev.infura.org",
   expansion: "infura.io",
-}
+};
 
 export const MSG_TYPES = {
   INFO: "info",
   ERROR: "error",
   SUCCESS: "success",
-}
+};
 
 export const NETWORKS_TYPES = {
   mainnet: {
@@ -121,7 +121,7 @@ export const NETWORKS_TYPES = {
     value: "42170",
     urlType: NETWORK_URL.expansion,
   },
-}
+};
 
 export const NETWORKS_METHODS = {
   L1: {
@@ -339,7 +339,7 @@ export const NETWORKS_METHODS = {
       },
     ],
   },
-}
+};
 
 export const NETWORKS = {
   ARBITRUM: "arbitrum",
@@ -350,7 +350,7 @@ export const NETWORKS = {
   POLYGON: "polygon",
   OPTIMISM: "optimism",
   GAS_API: "gas.api",
-}
+};
 
 export const NETWORKS_NAMES = [
   {
@@ -413,34 +413,34 @@ export const NETWORKS_NAMES = [
     complexEndpoint: true,
     networksTypes: [NETWORKS_TYPES.mainnet],
   },
-]
+];
 
 export const INIT_REQ_SET = {
   netName: NETWORKS_NAMES[0],
   netType: NETWORKS_NAMES[0].networksTypes[0],
   netMethod: NETWORKS_METHODS.L1.methods[0],
   apiKey: { label: "", value: "ID", private: "" },
-}
+};
 
 const renderHeaders = () => {
-  let headers = new Headers()
-  headers.append("pragma", "no-cache")
-  headers.append("cache-control", "no-cache")
-  return headers
-}
+  let headers = new Headers();
+  headers.append("pragma", "no-cache");
+  headers.append("cache-control", "no-cache");
+  return headers;
+};
 
-export const NO_CACHE = renderHeaders()
+export const NO_CACHE = renderHeaders();
 
 export const FEATURE_FLAGS = {
   DOCS_TERMINAL_VISIBLE: "docs-code-terminal-visibility",
   GAS_API_ENABLED: "gas-api-enabled",
-}
+};
 
-export const NO_FOUND_PAGE = "/no-found"
+export const NO_FOUND_PAGE = "/no-found";
 
 export const AUTH_ROUTES = {
   GAS_API: "/infura-expansion-apis/gas-api",
-}
+};
 
 export const GET_OPTIONS = {
   credentials: "include",
@@ -448,4 +448,4 @@ export const GET_OPTIONS = {
   mode: "cors",
   cache: "no-cache",
   headers: NO_CACHE,
-}
+};

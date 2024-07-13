@@ -1,16 +1,16 @@
-import React from "react"
-import { MDContent } from "./MDContent"
-import styles from "./styles.module.css"
+import React from "react";
+import { MDContent } from "./MDContent";
+import styles from "./styles.module.css";
 
 interface SchemaPropertyProps {
-  title: string
-  type?: string
-  required?: boolean
-  description?: string
+  title: string;
+  type?: string;
+  required?: boolean;
+  description?: string;
 }
 
 interface TagProps {
-  name: string
+  name: string;
 }
 
 export const SchemaProperty = ({
@@ -35,15 +35,15 @@ export const SchemaProperty = ({
         <MDContent content={description} />
       </p>
     </div>
-  )
-}
+  );
+};
 
 export const Tag = ({ name }: TagProps) => {
   const bgStyle = {
     MetaMask: "#4DB6AC",
     Restricted: "#FFECB3",
     Deprecated: "#7E57C2",
-  }
+  };
   return (
     <div
       className={styles.tagItem}
@@ -53,5 +53,5 @@ export const Tag = ({ name }: TagProps) => {
     >
       {name}
     </div>
-  )
-}
+  );
+};

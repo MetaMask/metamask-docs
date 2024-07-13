@@ -3,8 +3,8 @@ description: Track ERC-721 and ERC-1155 token transfers.
 sidebar_position: 9
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Track ERC-721 and ERC-1155 token transfers
 

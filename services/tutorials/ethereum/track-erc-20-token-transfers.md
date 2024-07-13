@@ -3,8 +3,8 @@ description: Track ERC-20 token transfers.
 sidebar_position: 8
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Track ERC-20 token transfers
 

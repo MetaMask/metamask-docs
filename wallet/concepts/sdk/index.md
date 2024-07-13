@@ -8,8 +8,8 @@ tags:
   - Unity SDK
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # About MetaMask SDK
 

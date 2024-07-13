@@ -1,10 +1,10 @@
-import * as path from "path"
+import * as path from "path";
 
 const LDPlugin = () => {
   return {
     name: "docusaurus-plugin-launchdarkly",
     getClientModules() {
-      return [path.resolve(__dirname, "./ldClient")]
+      return [path.resolve(__dirname, "./ldClient")];
     },
     configureWebpack() {
       return {
@@ -13,9 +13,9 @@ const LDPlugin = () => {
             launchdarkly: path.resolve(__dirname, "./ldClient.ts"),
           },
         },
-      }
+      };
     },
-  }
-}
+  };
+};
 
-export default LDPlugin
+export default LDPlugin;

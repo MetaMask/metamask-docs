@@ -1,13 +1,13 @@
-import React from "react"
-import clsx from "clsx"
-import Link from "@docusaurus/Link"
-import styles from "./Card.module.css"
+import React from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import styles from "./Card.module.css";
 
 export type CardItem = {
-  title: string
-  link: string
-  description: JSX.Element
-}
+  title: string;
+  link: string;
+  description: JSX.Element;
+};
 
 export default function Card({ title, link, description }: CardItem) {
   return (
@@ -19,5 +19,5 @@ export default function Card({ title, link, description }: CardItem) {
         <div className="card__body">{description}</div>
       </Link>
     </div>
-  )
+  );
 }

@@ -1,27 +1,27 @@
-import React from "react"
-import Heading from "@theme/Heading"
-import { MDContent } from "./MDContent"
-import { renderParamSchemas, renderResultSchemas } from "./RenderParams"
-import clsx from "clsx"
-import styles from "./styles.module.css"
+import React from "react";
+import Heading from "@theme/Heading";
+import { MDContent } from "./MDContent";
+import { renderParamSchemas, renderResultSchemas } from "./RenderParams";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 import {
   MethodParam,
   SchemaComponents,
-} from "@site/src/components/ParserOpenRPC/interfaces"
-import { Tag } from "@site/src/components/ParserOpenRPC/DetailsBox/SchemaProperty"
+} from "@site/src/components/ParserOpenRPC/interfaces";
+import { Tag } from "@site/src/components/ParserOpenRPC/DetailsBox/SchemaProperty";
 
 interface TagItem {
-  name: string
-  $ref: string
+  name: string;
+  $ref: string;
 }
 
 interface DetailsBoxProps {
-  method: string
-  description: string | null
-  params: MethodParam[]
-  components: SchemaComponents
-  result: any
-  tags: TagItem[]
+  method: string;
+  description: string | null;
+  params: MethodParam[];
+  components: SchemaComponents;
+  result: any;
+  tags: TagItem[];
 }
 
 export default function DetailsBox({
@@ -76,5 +76,5 @@ export default function DetailsBox({
       )}
       {result && renderResultSchemas(result, components)}
     </>
-  )
+  );
 }

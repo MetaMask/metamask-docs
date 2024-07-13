@@ -2,8 +2,8 @@
 description: debug_traceTransaction API method
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # debug_traceTransaction
 
@@ -37,9 +37,9 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"method":"debug_traceTransaction","params":["0xdcecf3f9fc68c92276d6c4b40c17b185f8a3fcb9d1a959a495d38d480782404b", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"method":"debug_traceTransaction","params":["0xdcecf3f9fc68c92276d6c4b40c17b185f8a3fcb9d1a959a495d38d480782404b", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
 ```
 
   </TabItem>

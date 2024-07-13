@@ -10,7 +10,7 @@ Control monthly quotas from your API key's settings page.
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../images/quotas.png').default}
+      src={require("../../images/quotas.png").default}
     />
   </div>
 </div>

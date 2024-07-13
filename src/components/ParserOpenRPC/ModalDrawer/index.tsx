@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from "react"
-import clsx from "clsx"
-import { useColorMode } from "@docusaurus/theme-common"
-import styles from "./styles.module.css"
+import React, { useState, useEffect, useRef } from "react";
+import clsx from "clsx";
+import { useColorMode } from "@docusaurus/theme-common";
+import styles from "./styles.module.css";
 
 interface ModalDrawerProps {
-  title: string | React.ReactNode
-  isOpen: boolean
-  onClose: () => void
-  children: React.ReactNode
-  isContentFixed?: boolean
-  headerLabel?: string | null
+  title: string | React.ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  isContentFixed?: boolean;
+  headerLabel?: string | null;
 }
 
 export const ModalDrawer = ({
@@ -20,19 +20,19 @@ export const ModalDrawer = ({
   isContentFixed = false,
   headerLabel,
 }: ModalDrawerProps) => {
-  const [showModal, setShowModal] = useState(isOpen)
-  const contentRef = useRef(null)
-  const { colorMode } = useColorMode()
+  const [showModal, setShowModal] = useState(isOpen);
+  const contentRef = useRef(null);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
-    setShowModal(isOpen)
-  }, [isOpen])
+    setShowModal(isOpen);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isContentFixed && contentRef?.current) {
-      contentRef?.current?.scrollTo(0, 0)
+      contentRef?.current?.scrollTo(0, 0);
     }
-  }, [isContentFixed])
+  }, [isContentFixed]);
 
   return (
     <div
@@ -69,5 +69,5 @@ export const ModalDrawer = ({
         {children}
       </div>
     </div>
-  )
-}
+  );
+};

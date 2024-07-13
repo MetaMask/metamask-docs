@@ -3,8 +3,8 @@ description: Enable API forwarding
 sidebar_position: 6
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Enable API request forwarding
 
@@ -31,7 +31,7 @@ In the code tabs, the `eth_blockNumber` method is used as an example.
 curl https://<network>.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Enable-Failover: true" \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
   </TabItem>

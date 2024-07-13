@@ -1,18 +1,18 @@
-import React, { ReactNode } from "react"
-import clsx from "clsx"
-import Link from "@docusaurus/Link"
-import styles from "./styles.module.css"
+import React, { ReactNode } from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import styles from "./styles.module.css";
 
 export interface CardItem {
-  title?: ReactNode
-  description?: ReactNode
-  href?: string
-  icon?: string
-  flaskOnly?: boolean
+  title?: ReactNode;
+  description?: ReactNode;
+  href?: string;
+  icon?: string;
+  flaskOnly?: boolean;
 }
 
 interface CardListItemProps {
-  item: CardItem
+  item: CardItem;
 }
 
 export default function CardListItem({ item }: CardListItemProps): JSX.Element {
@@ -26,19 +26,19 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
       )}
       {item.description && <p>{item.description}</p>}
     </>
-  )
+  );
 
   const rootClassName = clsx("card", "padding--lg", styles.cardContainer, {
     [styles.flaskOnly]: item.flaskOnly,
-  })
+  });
 
   if (item.href) {
     return (
       <Link className={rootClassName} href={item.href}>
         {cardContent}
       </Link>
-    )
+    );
   }
 
-  return <div className={rootClassName}>{cardContent}</div>
+  return <div className={rootClassName}>{cardContent}</div>;
 }

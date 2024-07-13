@@ -2,8 +2,8 @@
 description: debug_traceBlockByNumber API method
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # debug_traceBlockByNumber
 

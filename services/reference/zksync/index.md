@@ -26,23 +26,23 @@ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for mo
 :::
 
 <CardList
-items={[
-{
-href: "quickstart",
-title: "Quickstart",
-description: "Learn how to quickly connect and make calls to the ZKsync Era network."
-},
-{
-href: "json-rpc-methods",
-title: "JSON-RPC APIs",
-description: "View the APIs available for communicating with the ZKsync Era network."
-},
-{
-href: "../../../developer-tools/dashboard/get-started/create-api/",
-title: "Create an API key",
-description: "Learn how to create an API key, secure it, and share it with your team."
-}
-]}
+  items={[
+    {
+      href: "quickstart",
+      title: "Quickstart",
+      description: "Learn how to quickly connect and make calls to the ZKsync Era network."
+    },
+    {
+      href: "json-rpc-methods",
+      title: "JSON-RPC APIs",
+      description: "View the APIs available for communicating with the ZKsync Era network."
+    },
+    {
+      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      title: "Create an API key",
+      description: "Learn how to create an API key, secure it, and share it with your team."
+    }
+  ]}
 />
 
 ## Partners and privacy policies

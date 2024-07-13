@@ -1,28 +1,28 @@
 export interface ResponseItem {
-  name: string
-  data: any | null
-  error: Error | null | boolean
+  name: string;
+  data: any | null;
+  error: Error | null | boolean;
 }
 
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
   try {
-    const response = await fetch(url, { method: "GET" })
-    const data = await response.json()
-    return { name, data, error: false }
+    const response = await fetch(url, { method: "GET" });
+    const data = await response.json();
+    return { name, data, error: false };
   } catch (error) {
-    return { name, data: null, error: true }
+    return { name, data: null, error: true };
   }
 }
 
 async function fetchMultipleData(
   requests: { url: string; name: string }[]
 ): Promise<ResponseItem[]> {
-  const promises = requests.map(({ url, name }) => fetchData(url, name))
-  const responses = await Promise.all(promises)
-  return responses
+  const promises = requests.map(({ url, name }) => fetchData(url, name));
+  const responses = await Promise.all(promises);
+  return responses;
 }
 
-const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs"
+const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
 
 export enum NETWORK_NAMES {
   linea = "linea",
@@ -38,20 +38,20 @@ const requests = [
     url: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
     name: NETWORK_NAMES.metamask,
   },
-]
+];
 
 export default function useNetworksMethodPlugin() {
   return {
     name: "plugin-json-rpc",
     async contentLoaded({ actions }) {
-      const { setGlobalData } = actions
+      const { setGlobalData } = actions;
       await fetchMultipleData(requests)
         .then((responseArray) => {
-          setGlobalData({ netData: responseArray })
+          setGlobalData({ netData: responseArray });
         })
         .catch(() => {
-          setGlobalData({ netData: [] })
-        })
+          setGlobalData({ netData: [] });
+        });
     },
-  }
+  };
 }

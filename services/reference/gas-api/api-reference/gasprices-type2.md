@@ -2,8 +2,8 @@
 description: Get the estimated gas prices for a chain.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Get EIP-1559 gas prices
 
@@ -73,17 +73,17 @@ curl -X "GET" \
   <TabItem value="JavaScript">
 
 ```javascript
-const axios = require("axios")
+const axios = require("axios");
 
-const apiKey = "<API-KEY>" // Replace with your API key.
-const apiKeySecret = "<API-KEY-SECRET>" // Replace with your API key secret.
+const apiKey = "<API-KEY>"; // Replace with your API key.
+const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
 
-const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64")
+const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64");
 
 // The chain ID of the supported network.
-const chainId = 1
+const chainId = 1;
 
-;(async () => {
+(async () => {
   try {
     const { data } = await axios.get(
       `https://gas.api.infura.io/networks/${chainId}/suggestedGasFees`,
@@ -92,12 +92,12 @@ const chainId = 1
           Authorization: `Basic ${Auth}`,
         },
       }
-    )
-    console.log("Suggested gas fees:", data)
+    );
+    console.log("Suggested gas fees:", data);
   } catch (error) {
-    console.log("Server responded with:", error)
+    console.log("Server responded with:", error);
   }
-})()
+})();
 ```
 
   </TabItem>

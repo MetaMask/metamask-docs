@@ -1,5 +1,5 @@
-import React from "react"
-import Card, { type CardItem } from "@site/src/components/Card"
+import React from "react";
+import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
@@ -32,7 +32,7 @@ const CardList: CardItem[] = [
       </>
     ),
   },
-]
+];
 
 export default function SnapsSection(): JSX.Element {
   return (
@@ -50,6 +50,5 @@ export default function SnapsSection(): JSX.Element {
         ))}
       </div>
     </section>
-  )
+  );
 }
-

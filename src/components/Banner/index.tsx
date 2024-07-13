@@ -1,9 +1,9 @@
-import React from "react"
-import Link from "@docusaurus/Link"
-import styles from "./banner.module.css"
+import React from "react";
+import Link from "@docusaurus/Link";
+import styles from "./banner.module.css";
 
 interface BannerProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const Banner: React.FC<BannerProps> = ({ children }) => {
@@ -32,7 +32,7 @@ const Banner: React.FC<BannerProps> = ({ children }) => {
         </div>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

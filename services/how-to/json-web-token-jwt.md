@@ -3,8 +3,8 @@ description: Use JSON Web Tokens to secure data exchange.
 sidebar_position: 8
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Use JSON Web Token (JWT)
 
@@ -166,7 +166,7 @@ curl -X POST \
 ```
 
 ```bash
-{"jsonrpc":"2.0","id":1,"result":"0x1cc23d4"}
+{"jsonrpc": "2.0", "id": 1, "result": "0x1cc23d4"}
 ```
 
 ### Set up allowlists
@@ -220,7 +220,7 @@ curl -X POST \
 ```
 
 ```bash
-{"jsonrpc":"2.0","id":1,"result":"0x1a66d865b7f200"}%
+{"jsonrpc": "2.0", "id": 1, "result": "0x1a66d865b7f200"}%
 ```
 
 ## Verify JWTs
