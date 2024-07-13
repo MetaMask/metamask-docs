@@ -10,9 +10,9 @@ Set rate limits to control access to the API key and to limit costs in case of a
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/rate-limiting-settings.png').default}
+      src={require("../../../images/rate-limiting-settings.png").default}
     />
-  </div>
+  </div
 </div>
 
 - **PER SECOND REQUESTS RATE-LIMITING** restricts requests per second for the API key. Set the maximum number of requests per second in decimals, e.g. 1.2. Whenever the rate of requests exceeds this value, requests are rejected. When the rate of requests drops below the limit again, requests are accepted again.

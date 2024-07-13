@@ -22,7 +22,7 @@ security features such as [JSON Web Tokens (JWTs)](use-jwts.md) and [allowlists]
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../../images/project_page.png').default}
+      src={require("../../../images/project_page.png").default}
     />
   </div>
 </div>

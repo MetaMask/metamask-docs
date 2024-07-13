@@ -31,7 +31,7 @@ To create an API key:
 <div class="left-align-container">
 <div class="img-large">
     <img
-    src={require('../../images/create_key.png').default}
+    src={require("../../images/create_key.png").default}
     />
 </div>
 </div>

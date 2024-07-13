@@ -34,7 +34,7 @@ In the API key's **Settings** tab, select **Require API Key secret for all reque
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require('../../../images/security-page.png').default}
+      src={require("../../../images/security-page.png").default}
     />
   </div>
 </div>
@@ -47,7 +47,7 @@ In the API key's **Settings** tab, select **Require API Key secret for all reque
 ```bash
 curl --user :<YOUR-API-KEY-SECRET> \
   https://mainnet.infura.io/v3/<YOUR-API-KEY> \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
   </TabItem>
@@ -55,7 +55,7 @@ curl --user :<YOUR-API-KEY-SECRET> \
 
 ```bash
 wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> --auth ":<YOUR-API-KEY-SECRET>"
-> {"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}
+> {"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}
 ```
 
   </TabItem>

@@ -140,7 +140,7 @@ Define a live code block by adding a `codesandbox` key to the code block.
 For example:
 
 ````jsx
-;```javascript codesandbox=vanilla
+```javascript codesandbox=vanilla
 // JavaScript live code block
 ```
 ````
