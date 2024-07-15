@@ -11,14 +11,16 @@ interface RequestBoxProps {
   method: string;
   params: MethodParam[];
   response?: any;
+  paramsData: any;
   openModal: () => void;
   submitRequest: () => void;
 }
 
-export default function RequestBox({ isMetamaskInstalled, method, params, response, openModal, submitRequest }: RequestBoxProps) {
+export default function RequestBox({ isMetamaskInstalled, method, params, response, paramsData, openModal, submitRequest }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": [${params}],\n});`;
-  }, [method, params]);
+    const preparedParams = JSON.stringify(paramsData, null, 2);
+    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`;
+  }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
     if (!response || response === null) return false

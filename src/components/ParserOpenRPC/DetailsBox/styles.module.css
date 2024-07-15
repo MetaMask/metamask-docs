@@ -19,8 +19,11 @@
 }
 
 .paramItemWrapper {
-  border-top: 1px solid #848C96;
   padding: 0 1rem;
+}
+
+.paramItemWrapper:not(:first-child) {
+  border-top: 1px solid #848C96;
 }
 
 .borderTopLine {

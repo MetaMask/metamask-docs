@@ -1,0 +1,57 @@
+---
+title: "starknet_blockHashAndNumber"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the block hash and number of the most recent accepted block.
+
+## Parameters
+
+None.
+
+## Returns
+
+An object containing:
+
+- `block_hash`: The latest block hash.
+- `block_number`: The latest block number.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"starknet_blockHashAndNumber","params":[],"id":0}'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "block_hash": "0x1ba5d3910676f8383a1c472f1092a77cbe438b108face7873e0407ceee8da1e",
+    "block_number": 4504
+  },
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>

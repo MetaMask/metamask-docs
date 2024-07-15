@@ -1,0 +1,11 @@
+{
+    "position": 3,
+    "label": "Secure an API",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+      "type": "generated-index",
+      "slug": "dashboard/secure-an-api",
+      "description": "This section provides information about how to secure your API key using Infura's security settings."
+    }
+}

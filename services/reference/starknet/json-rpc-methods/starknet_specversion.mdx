@@ -1,0 +1,51 @@
+---
+title: "starknet_specVersion"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns the version of the StarkNet JSON-RPC specification that the client is using.
+
+## Parameters
+
+None.
+
+## Returns
+
+The current StarkNet JSON-RPC specification version.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"starknet_specVersion","params":[],"id":1}'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": "0.5.1"
+}
+```
+
+</TabItem>
+</Tabs>

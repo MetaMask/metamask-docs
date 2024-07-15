@@ -1,0 +1,11 @@
+{
+  "position": 1,
+  "label": "Access IPFS content",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "use-ipfs/access-ips-content",
+    "description": "This section provides information about how to access IPFS content."
+  }
+}

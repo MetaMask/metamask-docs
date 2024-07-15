@@ -2,9 +2,12 @@ import React from "react";
 import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
+import { EIP6963ProviderDetail } from "@site/src/hooks/store.ts"
 
 interface AuthBoxProps {
-  isMetamaskInstalled: boolean;
+  metamaskProviders: any;
+  handleConnect: (i) => void;
+  selectedProvider?: number;
 }
 
 const MetamaskInstallMessage = () => (
@@ -15,10 +18,33 @@ const MetamaskInstallMessage = () => (
   </div>
 );
 
-export const AuthBox = ({ isMetamaskInstalled }: AuthBoxProps) => {
+export const AuthBox = ({ metamaskProviders = [], selectedProvider, handleConnect }: AuthBoxProps) => {
+  if (metamaskProviders.length === 0) {
+    return <MetamaskInstallMessage />
+  }
+
+  if (metamaskProviders.length > 0) {
+    return null
+  }
+
   return (
-    <>
-      {!isMetamaskInstalled ? <MetamaskInstallMessage /> : null}
-    </>
+    <div className={styles.msgWrapper}>
+      <p>Select a MetaMask provider to use interactive features:</p>
+      <div className={styles.mmBtnRow}>
+        {metamaskProviders.map((provider: EIP6963ProviderDetail, i) => (
+          <div key={provider.info.uuid} className={styles.mmBtnCol}>
+            <button className={styles.mmBtn} onClick={() => handleConnect(i)}>
+              <img
+                src={provider.info.icon}
+                alt={provider.info.name}
+                width="30"
+              />
+              <div className="padding-left--md">{provider.info.name}</div>
+              {selectedProvider === i && <span className={styles.mmBtnCheck}>&#10003;</span>}
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };

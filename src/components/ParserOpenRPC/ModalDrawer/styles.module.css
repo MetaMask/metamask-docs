@@ -1,27 +1,24 @@
 .modalContainer {
-  max-width: 792px;
-  width: 100%;
-  background-color: #24272A;
   border: 1px solid #848C96;
   border-radius: 8px 8px 0 0;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   top: 100%;
-  left: 50%;
+  left: 15px;
+  right: 15px;
   min-height: 512px;
   opacity: 0;
-  transform: translate(-50%, 100%);
+  transform: translate(0, 100%);
   transition-property: 'transform', 'opacity';
   transition-duration: .4s;
   transition-timing-function: ease;
-  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .1);
   overflow: hidden;
   background-color: #292A36;
 }
 
 .modalContainerOpen {
   opacity: 1;
-  transform: translate(-50%, -100%);
+  transform: translate(0, -100%);
 }
 
 .modalHeader {
@@ -31,7 +28,6 @@
   justify-content: space-between;
   min-height: 56px;
   background-color: #24272A;
-  border-bottom: 1px solid #848C96;
 }
 
 .modalHeaderLight {
@@ -44,6 +40,40 @@
   font-weight: 500;
 }
 
+.modalTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderIcon {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.modalHeaderIconBack {
+  width: 16px;
+  height: 16px;
+}
+
+.modalHeaderLabels {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderLabel {
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid #848C96;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 .modalCloseBtn {
   display: block;
   padding: 0;
@@ -54,3 +84,22 @@
   cursor: pointer;
 }
 
+.modalContent {
+  height: 394px;
+}
+
+.modalContentScrolled {
+  overflow-y: auto;
+}
+
+.modalContentFixed {
+  overflow-y: hidden;
+}
+
+@media (width <= 1200px) {
+  .modalContainer {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+}

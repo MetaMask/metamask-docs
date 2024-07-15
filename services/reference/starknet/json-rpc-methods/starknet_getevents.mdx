@@ -1,0 +1,128 @@
+---
+title: "starknet_getEvents"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns all event objects matching the conditions in the specified filter.
+
+## Parameters
+
+`filter`: (object) [*Required*] The conditions used to filter the returned events, including:
+  - `from_block`: [*Required*] Block parameter object containing one of the following:
+    - `block_hash`: (string) Block hash.
+    - `block_number`: (integer) Decimal block number.
+    - One of the string tags `latest` or `pending`.
+  - `to_block`: [*Required*] Block parameter object containing one of the following:
+    - `block_hash`: (string) Block hash.
+    - `block_number`: (integer) Decimal block number.
+    - One of the string tags `latest` or `pending`.
+  - `address`: (string) Sender contract address.
+  - `keys`: (array) The values used to filter the events.
+  - `continuation_token`: (string) The token returned from the previous query.
+    If no token is provided, the first page is returned.
+  - `chunk_size`: (integer) [*Required*] Chunk size.
+
+## Returns
+
+An object containing:
+
+- `continuation_token`: Use this token in a subsequent query to obtain the next page.
+  This is not included if there are no more pages.
+- `events`: An array of all event objects matching the specified filter.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getEvents",
+    "params": {
+      "filter": {
+        "from_block": "latest",
+        "to_block": "latest",
+        "address": "0x04c0a5193d58f74fbace4b74dcf65481e734ed1714121bdc571da345540efa05",
+        "chunk_size": 10
+      }
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "result": {
+    "continuation_token": "637544-10",
+    "events": [
+      {
+        "block_hash": "0x38b2028fb31299733c25f55316721a90497f3300970f4a69b8774fe4d8cb600",
+        "block_number": 637544,
+        "data": [
+          "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          "0x33e67938997ade7b38b7f23",
+          "0x34c84c75bde3dc72f961baa"
+        ],
+        "from_address": "0x4c0a5193d58f74fbace4b74dcf65481e734ed1714121bdc571da345540efa05",
+        "keys": [
+          "0x30c296ae369716818de77cb5b71ce9cda7cc2c0e8456f474e0abb1ae8d017da"
+        ],
+        "transaction_hash": "0x642fcafc5bdaa756c410cc6a968497551e86a783a5f21ea34c0f9214c2240af"
+      },
+      {
+        "block_hash": "0x38b2028fb31299733c25f55316721a90497f3300970f4a69b8774fe4d8cb600",
+        "block_number": 637544,
+        "data": [
+          "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          "0x6db7e61ded25004dc0620",
+          "0x14e3778ef54505dfab26bf"
+        ],
+        "from_address": "0x4c0a5193d58f74fbace4b74dcf65481e734ed1714121bdc571da345540efa05",
+        "keys": [
+          "0xa2fb82b5656725dad81c7112b2c4ef0119096677c3c0fd82632d0a74f07666"
+        ],
+        "transaction_hash": "0x642fcafc5bdaa756c410cc6a968497551e86a783a5f21ea34c0f9214c2240af"
+      },
+      {
+        "block_hash": "0x38b2028fb31299733c25f55316721a90497f3300970f4a69b8774fe4d8cb600",
+        "block_number": 637544,
+        "data": [
+          "0x227fa960f90cd98fff1ddbcddbded55d4793a308b08ff920556408c466c5c64",
+          "0x227fa960f90cd98fff1ddbcddbded55d4793a308b08ff920556408c466c5c64",
+          "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+          "0x616f08fd61feb9",
+          "0x6379da05b60000"
+        ],
+        "from_address": "0x4c0a5193d58f74fbace4b74dcf65481e734ed1714121bdc571da345540efa05",
+        "keys": [
+          "0x7ae0ab7952bbfc33a72035e5eccec7c8816723421c0acb315bd4690a71d46e"
+        ],
+        "transaction_hash": "0x642fcafc5bdaa756c410cc6a968497551e86a783a5f21ea34c0f9214c2240af"
+      }
+    ]
+  }
+}
+```
+
+</TabItem>
+</Tabs>
