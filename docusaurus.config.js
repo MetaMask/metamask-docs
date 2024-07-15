@@ -151,8 +151,15 @@ const config = {
       "docusaurus-plugin-sentry",
       {
         DSN: "d3220b0812610810ddb5a911b3d97790",
-        replaysOnErrorSampleRate: isProd ? 1.0 : 0,
-        replaysSessionSampleRate: isProd ? 0.1 : 0,
+        configuration: {
+          sentry: {
+            init: {
+              replaysOnErrorSampleRate: isProd ? 1.0 : 0,
+              replaysSessionSampleRate: isProd ? 0.25 : 0,
+              sampleRate: isProd ? 0.25 : 0
+            },
+          },
+        },
       },
     ],
   ],

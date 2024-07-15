@@ -91,7 +91,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   useEffect(() => {
     if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({ name: account })
+      (window as any)?.Sentry?.setUser({ name: account, id: account, username: account })
     }
   }, [account]);
 
