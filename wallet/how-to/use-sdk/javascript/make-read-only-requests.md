@@ -119,7 +119,7 @@ sdkOptions={{
   },
   defaultReadOnlyChainId: "0x1",
   // Other options.
-}}
+}
 ```
 
 In this example, read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only
