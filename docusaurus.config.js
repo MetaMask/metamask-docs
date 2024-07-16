@@ -156,7 +156,8 @@ const config = {
             init: {
               replaysOnErrorSampleRate: isProd ? 1.0 : 0,
               replaysSessionSampleRate: isProd ? 0.25 : 0,
-              sampleRate: isProd ? 0.25 : 0
+              sampleRate: isProd ? 0.25 : 0,
+              tracesSampleRate: 0, 
             },
           },
         },
