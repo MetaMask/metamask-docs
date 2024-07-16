@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # pin_add
 
@@ -14,16 +14,16 @@ Pin objects to local storage.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=<ipfs-path>&recursive=true&progress=<value>" \
-  -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+    -X POST \
+    -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
   <TabItem value="Example" label="Example" >
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET"
 ```
   </TabItem>
 </Tabs>

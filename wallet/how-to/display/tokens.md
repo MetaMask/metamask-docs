@@ -39,10 +39,10 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
-const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513"
-const tokenSymbol = "TUT"
-const tokenDecimals = 18
-const tokenImage = "http://placekitten.com/200/300"
+const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513";
+const tokenSymbol = "TUT";
+const tokenDecimals = 18;
+const tokenImage = "http://placekitten.com/200/300";
 
 try {
   // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
@@ -62,15 +62,15 @@ try {
           image: tokenImage,
         },
       },
-    })
+    });
 
   if (wasAdded) {
-    console.log("Thanks for your interest!")
+    console.log("Thanks for your interest!");
   } else {
-    console.log("Your loss!")
+    console.log("Your loss!");
   }
 } catch (error) {
-  console.log(error)
+  console.log(error);
 }
 ```
 
@@ -128,15 +128,15 @@ try {
           tokenId: "1",
         },
       },
-    })
+    });
 
   if (wasAdded) {
-    console.log("User successfully added the token!")
+    console.log("User successfully added the token!");
   } else {
-    console.log("User did not add the token.")
+    console.log("User did not add the token.");
   }
 } catch (error) {
-  console.log(error)
+  console.log(error);
 }
 ```
 

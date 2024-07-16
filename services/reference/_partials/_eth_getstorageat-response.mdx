@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="JSON">
@@ -17,17 +17,17 @@ import TabItem from "@theme/TabItem"
 
 ## Additional notes
 
-Calculating the correct position depends on the storage to retrieve. Consider the following contract deployed at `0x295a70b2de5e3953354a6a8344e616ed314d7251` by address `0x391694e7e0b0cce554cb130d723a9d27458f9298`:
+Calculating the correct position depends on the storage to retrieve. Consider the following contract deployed at `0x295a70b2de5e3953354a6a8344e616ed314d7251` by address `0x391694e7e0b0cce554cb130d723a9d27458f9298`,
 
 ```solidity
 contract Storage {
-  uint pos0;
-  mapping(address => uint) pos1;
+    uint pos0;
+    mapping(address => uint) pos1;
 
-  function Storage() public {
-    pos0 = 1234;
-    pos1[msg.sender] = 5678;
-  }
+    function Storage() {
+        pos0 = 1234;
+        pos1[msg.sender] = 5678;
+    }
 }
 ```
 
@@ -35,9 +35,9 @@ Retrieving the value of pos0 is straight forward:
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x65a8db"], "id": 1}'
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x65a8db"], "id": 1}'
 ```
 
 ```json
@@ -60,9 +60,9 @@ This means to retrieve the storage on `pos1["0x391694e7e0b0cce554cb130d723a9d274
 keccak(
   decodeHex(
     "000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9298" +
-      "0000000000000000000000000000000000000000000000000000000000000001"
-  )
-)
+      "0000000000000000000000000000000000000000000000000000000000000001",
+  ),
+);
 ```
 
 The geth console which comes with the web3 library can be used to make the calculation:
@@ -78,9 +78,9 @@ Now to fetch the storage:
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-PROJECT-ID \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "0x65a8db"], "id": 1}'
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "0x65a8db"], "id": 1}'
 ```
 
 ```json

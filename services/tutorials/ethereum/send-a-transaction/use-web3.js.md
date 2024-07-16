@@ -98,21 +98,21 @@ SIGNER_PRIVATE_KEY = "0x561...x...61df"
 In this example we'll create a JavaScript file (`send.js`) in the project directory which configures and sends the transaction.
 
 ```javascript showLineNumbers
-const { Web3 } = require("web3")
-const { ETH_DATA_FORMAT, DEFAULT_RETURN_FORMAT } = require("web3")
+const { Web3 } = require("web3");
+const { ETH_DATA_FORMAT, DEFAULT_RETURN_FORMAT } = require("web3");
 async function main() {
   // Configuring the connection to an Ethereum node
-  const network = process.env.ETHEREUM_NETWORK
+  const network = process.env.ETHEREUM_NETWORK;
   const web3 = new Web3(
     new Web3.providers.HttpProvider(
-      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`
-    )
-  )
+      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    ),
+  );
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
-    process.env.SIGNER_PRIVATE_KEY
-  )
-  web3.eth.accounts.wallet.add(signer)
+    process.env.SIGNER_PRIVATE_KEY,
+  );
+  web3.eth.accounts.wallet.add(signer);
   await web3.eth
     .estimateGas(
       {
@@ -121,11 +121,11 @@ async function main() {
         value: web3.utils.toWei("0.0001", "ether"),
       },
       "latest",
-      ETH_DATA_FORMAT
+      ETH_DATA_FORMAT,
     )
     .then((value) => {
-      limit = value
-    })
+      limit = value;
+    });
 
   // Creating the transaction object
   const tx = {
@@ -138,21 +138,21 @@ async function main() {
     maxFeePerGas: web3.utils.toWei("3", "gwei"),
     chainId: 11155111,
     type: 0x2,
-  }
-  signedTx = await web3.eth.accounts.signTransaction(tx, signer.privateKey)
-  console.log("Raw transaction data: " + signedTx.rawTransaction)
+  };
+  signedTx = await web3.eth.accounts.signTransaction(tx, signer.privateKey);
+  console.log("Raw transaction data: " + signedTx.rawTransaction);
   // Sending the transaction to the network
   const receipt = await web3.eth
     .sendSignedTransaction(signedTx.rawTransaction)
     .once("transactionHash", (txhash) => {
-      console.log(`Mining transaction ...`)
-      console.log(`https://${network}.etherscan.io/tx/${txhash}`)
-    })
+      console.log(`Mining transaction ...`);
+      console.log(`https://${network}.etherscan.io/tx/${txhash}`);
+    });
   // The transaction is now on chain!
-  console.log(`Mined in block ${receipt.blockNumber}`)
+  console.log(`Mined in block ${receipt.blockNumber}`);
 }
-require("dotenv").config()
-main()
+require("dotenv").config();
+main();
 ```
 
 ### 6. Execute the transaction

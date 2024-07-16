@@ -48,9 +48,9 @@ app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; frame-ancestors 'none'"
-  )
-  next()
-})
+  );
+  next();
+});
 ```
 
 In a header, this looks like the following:

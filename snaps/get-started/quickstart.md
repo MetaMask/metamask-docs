@@ -52,16 +52,16 @@ From the root of the newly created project, install the project dependencies usi
 yarn install
 ```
 
-You may get a warning like the following:
+You may get a warning like the following: 
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
-You can fix this by running the following command:
+You can fix this by running the following command: 
 
-```bash
+```bash 
 yarn run allow-scripts auto
 ```
 
@@ -90,8 +90,8 @@ You can customize your Snap by editing `index.ts` in the `packages/snap/src` fol
 [`snap_dialog`](../reference/snaps-api.md#snapdialog) method to display a custom confirmation screen:
 
 ```ts title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { panel, text } from "@metamask/snaps-sdk"
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { panel, text } from "@metamask/snaps-sdk";
 
 /**
  * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
@@ -116,15 +116,15 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
             text(`Hello, **${origin}**!`),
             text("This custom confirmation is just for display purposes."),
             text(
-              "But you can edit the Snap source code to make it do something, if you want to!"
+              "But you can edit the Snap source code to make it do something, if you want to!",
             ),
           ]),
         },
-      })
+      });
     default:
-      throw new Error("Method not found.")
+      throw new Error("Method not found.");
   }
-}
+};
 ```
 
 Edit the text in any `text()` component and select the **Reconnect** button

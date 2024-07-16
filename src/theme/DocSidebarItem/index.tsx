@@ -18,9 +18,12 @@ export default function DocSidebarItemWrapper(props: Props): JSX.Element {
           {...props}
           item={{
             ...itemProps,
-            className: clsx(className, {
-              [styles.flaskOnly]: itemProps.customProps?.flask_only,
-            }),
+            className: clsx(
+              className,
+              {
+                [styles.flaskOnly]: itemProps.customProps?.flask_only,
+              },
+            ),
           }}
         />
       </>

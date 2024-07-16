@@ -1,5 +1,5 @@
 ---
-description: Use dotenv to load environment variables from a file.
+description: Use dotenv to load environment variables from a file. 
 sidebar_position: 7
 ---
 
@@ -52,24 +52,24 @@ Never disclose your private keys or secret recovery phrases. Anyone with your pr
 Give your project access to the `.env` information by including the following line at the top of your project script:
 
 ```javascript
-require("dotenv").config()
+require("dotenv").config();
 ```
 
 Access the environment variables using `process.env.<Your-Environment-Variable-Name>`. For example, the following is a `hardhat.config.js` file for a Hardhat project:
 
 ```javascript
-require("@nomiclabs/hardhat-waffle")
-require("dotenv").config()
+require('@nomiclabs/hardhat-waffle');
+require('dotenv').config();
 
 module.exports = {
-  solidity: "0.8.0",
+  solidity: '0.8.0',
   networks: {
     rinkeby: {
       url: process.env.INFURA_API_KEY,
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: [process.env.PRIVATE_KEY]
     },
   },
-}
+};
 ```
 
 ### Create a `.gitignore` file

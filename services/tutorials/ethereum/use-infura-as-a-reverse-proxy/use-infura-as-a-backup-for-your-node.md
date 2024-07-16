@@ -2,8 +2,8 @@
 description: Use Caddy to set Infura as a backup for your node.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Use Infura as a backup for your node
 
@@ -44,27 +44,27 @@ brew install caddy
 You may be running your own Ethereum node, but for the sake of this tutorial, you can substitute a node with a Node.js stub. Create a file named `main.js` in the project directory with the following content:
 
 ```javascript
-const https = require("https")
-const fs = require("fs")
+const https = require("https");
+const fs = require("fs");
 const options = {
   key: fs.readFileSync("<PATH_TO_CERTIFICATE_KEY_FILE>.pem"),
   cert: fs.readFileSync("<PATH_TO_CERTIFICATE_FILE>.pem"),
-}
+};
 
-const hostname = "127.0.0.1"
-const port = 9000
+const hostname = "127.0.0.1";
+const port = 9000;
 
 const server = https.createServer(options, function (req, res) {
-  res.statusCode = 200
-  res.setHeader("Content-Type", "text/plain")
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/plain");
   setTimeout(() => {
-    res.end("Reverse proxy success!\n")
-  }, 1000)
-})
+    res.end("Reverse proxy success!\n");
+  }, 1000);
+});
 
 server.listen(port, hostname, () => {
-  console.log(`Server running at https://${hostname}:${port}/`)
-})
+  console.log(`Server running at https://${hostname}:${port}/`);
+});
 ```
 
 This sets up a backend HTTPS service running on `127.0.0.1:9000` (`localhost:9000`) and displays a success message if the proxy works.
@@ -101,7 +101,7 @@ To create the reverse proxy, create a text file named `Caddyfile` with the follo
 localhost:3000
 
 reverse_proxy https://localhost:9000 https://goerli.infura.io {
-  header_up Host {/v3/<YOUR_API_KEY>}
+   header_up Host {/v3/<YOUR_API_KEY>}
 }
 ```
 
@@ -126,9 +126,9 @@ In a new terminal window, make a curl request to `localhost`. The following exam
 
 ```bash
 curl http://localhost:3000/v3/<YOUR_API_KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
+<strong>  -X POST \
+</strong>  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'</code></pre>
 ```
 
   </TabItem>
@@ -150,16 +150,16 @@ If you close the Node.js server and send the request again, you should get the r
 
 ```bash
 curl http://localhost:3000/v3/<YOUR_API_KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
+<strong>  -X POST \
+</strong>  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'</code></pre>
 ```
 
   </TabItem>
   <TabItem value="Example result" label="Example result" >
 
 ```javascript
-{"jsonrpc": "2.0", "id":1, "result": "Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
+{"jsonrpc":"2.0","id":1,"result":"Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
 ```
 
   </TabItem>

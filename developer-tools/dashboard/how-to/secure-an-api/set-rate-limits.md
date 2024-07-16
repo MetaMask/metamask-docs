@@ -10,7 +10,7 @@ Set rate limits to control access to the API key and to limit costs in case of a
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require("../../../images/rate-limiting-settings.png").default}
+      src={require('../../../images/rate-limiting-settings.png').default}
     />
   </div>
 </div>

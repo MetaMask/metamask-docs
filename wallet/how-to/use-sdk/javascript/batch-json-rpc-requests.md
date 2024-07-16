@@ -50,7 +50,7 @@ The following is an example of using `metamask_batch` to batch
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in React, Next.js, or React Native/Expo:
 
 ```javascript title="index.js"
-import { metamask_batch } from "metamask-sdk"
+import { metamask_batch } from "metamask-sdk";
 
 function MyComponent() {
   const handleBatchRequest = async () => {
@@ -64,17 +64,17 @@ function MyComponent() {
           },
         ],
       },
-    ]
+    ];
 
     try {
-      const results = await metamask_batch(batchRequests)
-      console.log(results) // Process results.
+      const results = await metamask_batch(batchRequests);
+      console.log(results); // Process results.
     } catch (error) {
-      console.error("Batch request failed", error)
+      console.error("Batch request failed", error);
     }
-  }
+  };
 
-  return <button onClick={handleBatchRequest}>Send Batch Request</button>
+  return <button onClick={handleBatchRequest}>Send Batch Request</button>;
 }
 ```
 

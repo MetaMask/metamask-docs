@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # bor_getRootHash
 
@@ -41,29 +41,25 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-```bash
-curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "bor_getRootHash", "params": [1000, 1032], "id": 1}'
-```
+  ```bash
+  curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"bor_getRootHash","params":[1000, 1032], "id":1}'
+  ```
 
   </TabItem>
   <TabItem value="WSS">
 
-```bash
-wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc": "2.0", "method": "bor_getRootHash", "params": [1000, 1032], "id": 1}'
-```
+  ```bash
+  wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x {"jsonrpc":"2.0","method":"bor_getRootHash","params":[1000, 1032], "id":1}'
+  ```
 
   </TabItem>
 </Tabs>
 
 ### Response
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": "67518d9fc6bf9ff886ba1a4e932a0d0a8a1318b3f300518773aaf2210410cf73"
-}
+```
+{"jsonrpc":"2.0","id":1,"result":"67518d9fc6bf9ff886ba1a4e932a0d0a8a1318b3f300518773aaf2210410cf73"}
 ```

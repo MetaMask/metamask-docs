@@ -44,7 +44,7 @@ await snap.request({
     type: "inApp",
     message: "Hello, world!",
   },
-})
+});
 ```
 
 <div class="row">
@@ -61,7 +61,7 @@ Each Snap can trigger up to:
 
 - Five in-app notifications per minute.
 - Two native notifications per five minutes.
-  :::
+:::
 
 ## Example
 

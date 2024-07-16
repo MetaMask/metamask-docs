@@ -357,7 +357,10 @@ export const NETWORKS_NAMES = [
     label: "Ethereum",
     value: NETWORKS.ETHEREUM,
     complexEndpoint: false,
-    networksTypes: [NETWORKS_TYPES.mainnet, NETWORKS_TYPES.sepolia],
+    networksTypes: [
+      NETWORKS_TYPES.mainnet,
+      NETWORKS_TYPES.sepolia,
+    ],
   },
   {
     label: "Linea",
@@ -448,4 +451,4 @@ export const GET_OPTIONS = {
   mode: "cors",
   cache: "no-cache",
   headers: NO_CACHE,
-};
+}

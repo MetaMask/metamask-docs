@@ -2,8 +2,8 @@
 title: "starknet_call"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Calls the specified contract function at the specified block, and returns the value of the function,
 without creating a StarkNet transaction.
@@ -12,9 +12,9 @@ This method does not change the network state.
 ## Parameters
 
 - `request`: [*Required*] The function call object containing:
-  - `contract_address`: (string) [*Required*] Address the transaction is sent from.
-  - `entry_point_selector`: (string) [*Required*] Smart contract entry point selector.
-  - `calldata`: (array of strings)[*Required*] The parameters passed to the function.
+   - `contract_address`: (string) [*Required*] Address the transaction is sent from.
+   - `entry_point_selector`: (string) [*Required*] Smart contract entry point selector.
+   - `calldata`: (array of strings)[*Required*] The parameters passed to the function.
 - `block_id`: [*Required*] The block parameter object containing one of the following:
   - `block_hash`: (string) Block hash.
   - `block_number`: (integer) Decimal block number.

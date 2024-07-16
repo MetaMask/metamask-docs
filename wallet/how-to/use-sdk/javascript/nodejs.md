@@ -33,7 +33,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript title="index.js"
-import { MetaMaskSDK } from "@metamask/sdk"
+import { MetaMaskSDK } from "@metamask/sdk";
 ```
 
 ### 3. Instantiate the SDK
@@ -48,10 +48,10 @@ const MMSDK = new MetaMaskSDK({
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.
-})
+});
 
 // You can also access via window.ethereum
-const ethereum = MMSDK.getProvider()
+const ethereum = MMSDK.getProvider();
 ```
 
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
@@ -69,7 +69,7 @@ Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 prompts the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
 
 You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
@@ -80,7 +80,7 @@ You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
 You can copy the full Node.js example to get started:
 
 ```javascript title="index.js"
-import { MetaMaskSDK } from "@metamask/sdk"
+import { MetaMaskSDK } from "@metamask/sdk";
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
@@ -89,12 +89,12 @@ const MMSDK = new MetaMaskSDK({
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.
-})
+});
 
 // You can also access via window.ethereum
-const ethereum = MMSDK.getProvider()
+const ethereum = MMSDK.getProvider();
 
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
 
 See the [example Node.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)

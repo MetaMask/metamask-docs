@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # dag_get
 
@@ -14,8 +14,8 @@ Get a DAG node from IPFS.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/get?arg=<key>&output-codec=dag-json" \
-  -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+    -X POST \
+    -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,8 +23,8 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/get?arg=<key>&output-codec=dag-json
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/get?arg=QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>

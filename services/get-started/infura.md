@@ -3,8 +3,8 @@ description: Get started with Infura; create your Infura API key and send reques
 sidebar_position: 1
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Get started with Infura
 
@@ -81,9 +81,9 @@ Retrieve the current block number.
 
 ```bash
 curl https://mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
+    -X POST \
+    -H "Content-Type: application/json" \
+    --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
 ```
 
   </TabItem>
@@ -94,10 +94,10 @@ URL: https://mainnet.infura.io/v3/YOUR-API-KEY
 Request_Type: POST
 Body:
 {
-  "jsonrpc": "2.0",
-  "method": "eth_blockNumber",
-  "params": [],
-  "id": 1
+    "jsonrpc":"2.0",
+    "method":"eth_blockNumber",
+    "params":[],
+    "id":1
 }
 ```
 
@@ -107,7 +107,7 @@ Body:
 You'll receive a response similar to:
 
 ```bash
-{"jsonrpc": "2.0", "id": 1, "result": "0xde5fba"}
+{"jsonrpc":"2.0","id":1,"result":"0xde5fba"}
 ```
 
 The data returned is in hexadecimal, prefixed with `0x`. If you [convert](https://www.rapidtables.com/convert/number/hex-to-decimal.html) `de5fba` to decimal, the resulting number is 14573498, representing the current block number at the time the query was made.
@@ -123,9 +123,9 @@ The example code checks the latest balance of the Ethereum Proof of Stake (PoS) 
 
 ```bash
 curl https://mainnet.infura.io/v3/API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "eth_getBalance", "params": ["0x00000000219ab540356cBB839Cbe05303d7705Fa", "latest"], "id": 1}'
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","method":"eth_getBalance","params": ["0x00000000219ab540356cBB839Cbe05303d7705Fa", "latest"],"id":1}'
 ```
 
   </TabItem>
@@ -136,13 +136,13 @@ URL: https://mainnet.infura.io/v3/YOUR-PROJECT-ID
 Request_Type: POST
 Body:
 {
-  "jsonrpc": "2.0",
-  "method": "eth_getBalance",
+  "jsonrpc":"2.0",
+  "method":"eth_getBalance",
   "params": [
-    "0x00000000219ab540356cBB839Cbe05303d7705Fa",
-    "latest"
+      "0x00000000219ab540356cBB839Cbe05303d7705Fa",
+      "latest"
   ],
-  "id": 1
+  "id":1
 }
 ```
 
@@ -152,7 +152,7 @@ Body:
 You'll receive a result similar to:
 
 ```bash
-{"jsonrpc": "2.0", "id": 1, "result": "0x96c8e932f1e499c855045"}
+{"jsonrpc":"2.0","id":1,"result":"0x96c8e932f1e499c855045"}
 ```
 
 This result is the hexadecimal value of the contract in Wei (the smallest denomination of Ether).
@@ -165,11 +165,10 @@ Configure security settings in the **Settings** tab. This is optional.
 
 Force API requests to include the API key secret and/or [JSON Web Tokens (JWTs)](../how-to/json-web-token-jwt.md).
 
-<div className="left-align-container">
-  <div className="img-large">
+<div class="left-align-container">
+  <div class="img-large">
     <img
-      src={require("../images/settings-tab.png").default}
-      alt="Settings Tab"
+      src={require('../images/settings-tab.png').default}
     />
   </div>
 </div>
@@ -179,7 +178,7 @@ Use an allowlist to restrict API key access. See to the [allowlist documentation
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../images/allowlist.png").default}
+      src={require('../images/allowlist.png').default}
     />
   </div>
 </div>
@@ -193,7 +192,7 @@ Optimize your app and better understand your users by
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../images/dashboard_stats.png").default}
+      src={require('../images/dashboard_stats.png').default}
     />
   </div>
 </div>
@@ -203,14 +202,14 @@ Optimize your app and better understand your users by
 Find additional settings in **Settings** to manage your account. You can do the following:
 
 - [Set notifications for daily limits](../how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
-  from the **Account** option.
+    from the **Account** option.
 - Manage your billing information in the **Billing** option.
 - Manage [shared API keys](../../../developer-tools/dashboard/how-to/project-sharing) in the **Key Sharing** option.
 
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../images/settings.png").default}
+      src={require('../images/settings.png').default}
     />
   </div>
 </div>

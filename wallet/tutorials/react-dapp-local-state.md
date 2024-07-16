@@ -108,18 +108,9 @@ interface EIP1193Provider {
   isStatus?: boolean
   host?: string
   path?: string
-  sendAsync?: (
-    request: { method: string; params?: Array<unknown> },
-    callback: (error: Error | null, response: unknown) => void
-  ) => void
-  send?: (
-    request: { method: string; params?: Array<unknown> },
-    callback: (error: Error | null, response: unknown) => void
-  ) => void
-  request: (request: {
-    method: string
-    params?: Array<unknown>
-  }) => Promise<unknown>
+  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 
 // Combines the provider's metadata with an actual provider object, creating a complete picture of a
@@ -131,7 +122,7 @@ interface EIP6963ProviderDetail {
 
 // Represents the structure of an event dispatched by a wallet to announce its presence based on EIP-6963.
 type EIP6963AnnounceProviderEvent = {
-  detail: {
+  detail:{
     info: EIP6963ProviderInfo
     provider: EIP1193Provider
   }
@@ -154,7 +145,7 @@ Create a `src/hooks` directory, and create a file `store.ts` in that directory w
 
 ```ts title="store.ts"
 // Extends WindowEventMap interface, including a custom event eip6963:announceProvider.
-declare global {
+declare global{
   interface WindowEventMap {
     "eip6963:announceProvider": CustomEvent
   }
@@ -168,23 +159,21 @@ let providers: EIP6963ProviderDetail[] = []
 // across the dapp.
 export const store = {
   // Returns the current state of providers.
-  value: () => providers,
+  value: ()=> providers,
   // Subscribes to provider announcements and updates the store accordingly.
   // Takes a callback function to be invoked on each store update, returning a function to
   // unsubscribe from the event.
-  subscribe: (callback: () => void) => {
-    function onAnnouncement(event: EIP6963AnnounceProviderEvent) {
-      if (providers.map((p) => p.info.uuid).includes(event.detail.info.uuid))
-        return
+  subscribe: (callback: ()=> void) => {
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
+      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
       providers = [...providers, event.detail]
       callback()
     }
-    window.addEventListener("eip6963:announceProvider", onAnnouncement)
-    window.dispatchEvent(new Event("eip6963:requestProvider"))
+    window.addEventListener("eip6963:announceProvider", onAnnouncement);
+    window.dispatchEvent(new Event("eip6963:requestProvider"));
 
-    return () =>
-      window.removeEventListener("eip6963:announceProvider", onAnnouncement)
-  },
+    return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  }
 }
 ```
 
@@ -198,11 +187,10 @@ the store updates.
 Create a file `useSyncProviders.ts` in the `hooks` directory with the following code:
 
 ```tsx title="useSyncProviders.ts"
-import { useSyncExternalStore } from "react"
-import { store } from "./store"
+import { useSyncExternalStore } from "react";
+import { store } from "./store";
 
-export const useSyncProviders = () =>
-  useSyncExternalStore(store.subscribe, store.value, store.value)
+export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
 ```
 
 `useSyncExternalStore` takes three arguments:
@@ -222,7 +210,7 @@ when the component unmounts.
 ### 5. Create connect buttons
 
 Create an array of buttons that the user can select to connect to the EIP-6963 wallet providers that
-you detect.
+you detect.  
 
 Update `src/App.tsx` to the following:
 
@@ -235,11 +223,12 @@ const App = () => {
 
   const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
     try {
-      const accounts = (await providerWithInfo.provider.request({
-        method: "eth_requestAccounts",
-      })) as string[]
+      const accounts = await providerWithInfo.provider.request({
+        method: "eth_requestAccounts"
+      }) as string[]
+
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
@@ -247,19 +236,17 @@ const App = () => {
     <div className="App">
       <h2>Wallets Detected:</h2>
       <div className="providers">
-        {providers.length > 0 ? (
-          providers?.map((provider: EIP6963ProviderDetail) => (
-            <button
-              key={provider.info.uuid}
-              onClick={() => handleConnect(provider)}
-            >
+        {
+          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
               <img src={provider.info.icon} alt={provider.info.name} />
               <div>{provider.info.name}</div>
             </button>
-          ))
-        ) : (
-          <div>No Announced Wallet Providers</div>
-        )}
+          )) :
+            <div>
+              No Announced Wallet Providers
+            </div>
+        }
       </div>
     </div>
   )
@@ -399,7 +386,7 @@ Add the following CSS to `src/App.css` to style the error message:
 .mmError {
   height: 36px;
   padding: 16px;
-  color: #efefef;
+  color: #EFEFEF;
   background-color: transparent;
 }
 ```

@@ -21,7 +21,7 @@ ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethe
 
 :::info see also
 
-See the [official ZKsync Era documentation](https://docs.zksync.io/build) for more information.
+ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for more information.
 
 :::
 
@@ -48,9 +48,7 @@ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for mo
 ## Partners and privacy policies
 
 The following partners provide access to the ZKsync Era network:
-
 <!-- markdown-link-check-disable -->
-
 - Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 - Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
 <!-- markdown-link-check-enable -->

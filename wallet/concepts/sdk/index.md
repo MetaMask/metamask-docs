@@ -8,8 +8,8 @@ tags:
   - Unity SDK
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # About MetaMask SDK
 
@@ -33,15 +33,15 @@ MetaMask using the SDK.
 Most of these features are not available if you only integrate your dapp directly using the
 [Wallet API](../wallet-api.md).
 
-| Feature                                                                                                    | Wallet API only | MetaMask SDK |
-| ---------------------------------------------------------------------------------------------------------- | :-------------: | :----------: |
-| Connect from a web dapp to the MetaMask extension                                                          |       ✅        |      ✅      |
-| Connect from a web dapp to MetaMask Mobile                                                                 |       ❌        |      ✅      |
-| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                                          |       ❌        |      ✅      |
-| Use custom RPC methods such as [`connectAndSign`](../../how-to/use-sdk/javascript/connect-and-sign.md)     |       ❌        |      ✅      |
-| [Display custom modals](../../how-to/use-sdk/javascript/display-custom-modals.md) in MetaMask              |       ❌        |      ✅      |
-| [Make read-only requests](../../how-to/use-sdk/javascript/make-read-only-requests.md) using the Infura API |       ❌        |      ✅      |
-| [Batch multiple RPC requests](../../how-to/use-sdk/javascript/batch-json-rpc-requests.md)                  |       ❌        |      ✅      |
+| Feature                                                                                       | Wallet API only | MetaMask SDK |
+|-----------------------------------------------------------------------------------------------|:---------------:|:------------:|
+| Connect from a web dapp to the MetaMask extension                                             |        ✅        |      ✅       |
+| Connect from a web dapp to MetaMask Mobile                                                    |        ❌        |      ✅       |
+| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                             |        ❌        |      ✅       |
+| Use custom RPC methods such as [`connectAndSign`](../../how-to/use-sdk/javascript/connect-and-sign.md) |        ❌        |      ✅       |
+| [Display custom modals](../../how-to/use-sdk/javascript/display-custom-modals.md) in MetaMask                    |        ❌        |      ✅       |
+| [Make read-only requests](../../how-to/use-sdk/javascript/make-read-only-requests.md) using the Infura API                 |        ❌        |      ✅       |
+| [Batch multiple RPC requests](../../how-to/use-sdk/javascript/batch-json-rpc-requests.md)                        |        ❌        |      ✅       |
 
 ## User experience
 
@@ -61,11 +61,10 @@ to MetaMask Mobile using a QR code.
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your web dapp](../../how-to/use-sdk/javascript/index.md).
 - See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
   in the JavaScript SDK GitHub repository for advanced use cases.
-  :::
+:::
 
 </TabItem>
 <TabItem value="Mobile browser">
@@ -82,11 +81,10 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your web dapp](../../how-to/use-sdk/javascript/index.md).
 - See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
   in the JavaScript SDK GitHub repository for advanced use cases.
-  :::
+:::
 
 </TabItem>
 <TabItem value="iOS">
@@ -103,11 +101,10 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your iOS dapp](../../how-to/use-sdk/mobile/ios.md).
 - See the [example iOS dapp](https://github.com/MetaMask/metamask-ios-sdk) in the iOS SDK GitHub
   repository for advanced use cases.
-  :::
+:::
 
 </TabItem>
 <TabItem value="Android">
@@ -124,11 +121,10 @@ This happens for all actions that need user approval.
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository and the [Android SDK architecture](android.md) for more information.
-  :::
+:::
 
 </TabItem>
 <TabItem value="Node.js">
@@ -143,11 +139,10 @@ scan with their MetaMask Mobile app.
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your Node.js dapp](../../how-to/use-sdk/javascript/nodejs.md).
 - See the [example Node.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nodejs)
   in the Node.js SDK GitHub repository for advanced use cases.
-  :::
+:::
 
 </TabItem>
 <TabItem value="Unity">
@@ -163,11 +158,10 @@ It also supports deeplinking on mobile platforms, as demonstrated in the followi
 </p>
 
 :::tip Get started
-
 - Get started by [setting up the SDK in your Unity game](../../how-to/use-sdk/gaming/unity/index.md).
 - See the [Unity demo game with the SDK installed](https://assetstore.unity.com/packages/decentralization/demo-game-dragon-crasher-with-metamask-sdk-infura-and-truffle-249789)
   for advanced use cases.
-  :::
+:::
 
 </TabItem>
 </Tabs>

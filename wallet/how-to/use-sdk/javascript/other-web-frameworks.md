@@ -34,7 +34,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript title="index.js"
-import { MetaMaskSDK } from "@metamask/sdk"
+import { MetaMaskSDK } from "@metamask/sdk";
 ```
 
 ### 3. Instantiate the SDK
@@ -70,7 +70,7 @@ Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 prompts the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+ethereum.request({ method: "eth_requestAccounts", params: [] });
 ```
 
 You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and

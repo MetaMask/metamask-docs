@@ -7,9 +7,9 @@ description: Linea debug methods.
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug methods on the
 Linea network:
 
-- [`debug_traceBlockByHash`](debug_traceblockbyhash.md)
-- [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
-- [`debug_traceTransaction`](debug_tracetransaction.md)
+ - [`debug_traceBlockByHash`](debug_traceblockbyhash.md)
+ - [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
+ - [`debug_traceTransaction`](debug_tracetransaction.md)
 
 ## Debug tracing types
 
@@ -24,7 +24,7 @@ and sub-calls as children of the higher levels.
 The `callTracer` type returns an object with the following results:
 
 | Field          | Type   | Description                                                                                                          |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+|----------------|--------|----------------------------------------------------------------------------------------------------------------------|
 | `type`         | string | The type of call.                                                                                                    |
 | `from`         | string | The address the transaction is sent from.                                                                            |
 | `to`           | string | The address the transaction is directed to.                                                                          |
@@ -37,14 +37,14 @@ The `callTracer` type returns an object with the following results:
 | `revertReason` | string | If the contract execution was reverted, this field will contain the reason for the revert (if provided by Solidity). |
 | `calls`        | array  | Sub-calls made by the contract during the execution of the transaction.                                              |
 
-### `prestateTracer`
+ ### `prestateTracer`
 
 The `prestateTracer` tracing type records and tracks every change made to the state during the execution of transactions. It
 generates an object that contains keys representing the addresses of the accounts involved in the transactions. The
 corresponding values are objects that include specific fields related to the state changes made during the transaction:
 
 | Field     | Type   | Description                          |
-| --------- | ------ | ------------------------------------ |
+|-----------|--------|--------------------------------------|
 | `balance` | string | The account balance.                 |
 | `nonce`   | uint64 | The nonce value for the transaction. |
 | `code`    | string | The hex-encoded bytecode.            |

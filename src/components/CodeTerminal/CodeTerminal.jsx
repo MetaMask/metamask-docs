@@ -5,7 +5,7 @@ import ControlPanel from "./ControlPanel";
 import { INFO_MSG } from "./AlertMsg";
 import MessageBox from "@site/src/components/MessageBox/MessageBox";
 import { INIT_REQ_SET } from "@site/src/lib/constants";
-import Heading from "@theme/Heading";
+import Heading from '@theme/Heading'
 
 const CodeTerminal = () => {
   const { user, keys, loading: keysLoading } = useUser();
@@ -24,12 +24,8 @@ const CodeTerminal = () => {
   const keysOptions = useMemo(() => {
     if (keys.length > 0) {
       changeSelectHandler(
-        {
-          label: keys[0].name,
-          value: keys[0].id,
-          private: keys[0].private || "",
-        },
-        "apiKey"
+        { label: keys[0].name, value: keys[0].id, private: keys[0].private || "" },
+        "apiKey",
       );
       return keys.map((item) => ({
         label: item.name,
@@ -93,7 +89,7 @@ const CodeTerminal = () => {
     if (endpointUrl.isExpansionNetwork) {
       URL = `https://${endpointUrl.url}`;
       params = {
-        method: "GET",
+        method: "GET"
       };
     }
     try {
@@ -103,9 +99,7 @@ const CodeTerminal = () => {
         setMsgParams({ ...INFO_MSG.REQ_SUCCESS });
         setResponseReg(JSON.stringify(response, null, 2));
       } else {
-        res.status === 401
-          ? setMsgParams({ ...INFO_MSG.NO_ACCESS })
-          : setMsgParams({ ...INFO_MSG.REQ_ERROR });
+        res.status === 401 ? setMsgParams({ ...INFO_MSG.NO_ACCESS }) : setMsgParams({ ...INFO_MSG.REQ_ERROR });
         setResponseReg(undefined);
       }
     } catch {
@@ -123,9 +117,7 @@ const CodeTerminal = () => {
           title={msgParams.title}
           description={msgParams.description}
         />
-        <Heading as="h3" className="code-terminal-heading">
-          Connect to a network
-        </Heading>
+        <Heading as='h3' className="code-terminal-heading">Connect to a network</Heading>
         {keysOptions.length > 0 && (
           <ControlPanel
             keysOptions={keysOptions}

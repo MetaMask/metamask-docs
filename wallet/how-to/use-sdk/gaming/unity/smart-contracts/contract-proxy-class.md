@@ -29,5 +29,5 @@ You should never need to inherit the `Contract` class, unless you're using the
 However, the [contract code generator](index.md#generate-contract-code) already generates these
 classes for you.
 
-You only need to use `Contract.Attach<T>(string address, IProvider provider)`.
+You only  need to use `Contract.Attach<T>(string address, IProvider provider)`.
 :::

@@ -28,8 +28,8 @@ The following example fetches a JSON file from the provided URL.
 
 ```ts title="index.ts"
 async function getJson(url: string) {
-  const response = await fetch(url)
-  return await response.json()
+  const response = await fetch(url);
+  return await response.json();
 }
 ```
 
@@ -40,7 +40,7 @@ Since Snap code is executed in an iframe with the `sandbox` property, the browse
 header with the value `null` with outgoing requests.
 For the Snap to be able to read the response, the server must send an
 [`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
-with the value `*` or `null` in the response.
+with the value `*` or `null` in the response. 
 Otherwise, you might need to
 [set up a proxy](https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141).
 :::

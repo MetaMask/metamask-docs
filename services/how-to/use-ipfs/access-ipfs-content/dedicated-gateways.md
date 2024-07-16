@@ -17,7 +17,7 @@ Toggle **DEDICATED GATEWAYS** to enable.
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../../../images/image.png").default}
+      src={require('../../../images/image.png').default}
       alt="Dedicated gateways in project settings"
     />
   </div>
@@ -35,10 +35,10 @@ For example, `https://meme-nft.infura-ipfs.io/ipfs/QmW5sPVbZDueZwvSuibteAwDFwFXh
 
 Enter a **UNIQUE SUBDOMAIN NAME** for your dedicated gateway and click **SAVE SUBDOMAIN**.
 
-<div className="left-align-container">
-  <div className="img-large">
+<div class="left-align-container">
+  <div class="img-large">
     <img
-      src={require("../../../images/unique-subdomain.png").default}
+      src={require('../../../images/unique-subdomain.png').default}
       alt="Enter unique subdomain"
     />
   </div>

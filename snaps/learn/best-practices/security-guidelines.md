@@ -52,7 +52,6 @@ The following are guidelines for user notifications, dialogs, and authorizations
 - **Transparent and consentful actions** - Before performing any of the following actions, display a
   [confirmation dialog](../../features/custom-ui/dialogs.md#display-a-confirmation-dialog) that
   contains detailed information about the action and asks the user to reject or accept it:
-
   - **Modifying or reading state.** (In general, notify the user about any state changes.)
   - **Switching networks or accounts.**
   - **Deriving or generating key pairs, accounts, or smart contracts.**
@@ -67,33 +66,33 @@ The following are guidelines for user notifications, dialogs, and authorizations
 - **Limit access to sensitive methods** - When building a Snap with sensitive RPC methods,
   use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
   There are two ways to do this:
-
+  
   1. Restrict the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission to specific
      URLs using the `allowedOrigins` caveat.
+  
   2. Filter specific methods to specific URLs using the built-in [URL
-     library](https://developer.mozilla.org/en-US/docs/Web/API/URL):
+     library](https://developer.mozilla.org/en-US/docs/Web/API/URL): 
 
-  ```javascript
-  const referrer = new URL(origin)
+    ```javascript
+    const referrer = new URL(origin);
 
-  if (
-    referrer.protocol === "https:" &&
-    (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")
-  ) {
-    console.log("URL is valid")
-  } else {
-    console.log("URL is NOT valid")
-  }
-  ```
+    if(referrer.protocol === "https:" && 
+      (referrer.host.endsWith(".metamask.io") || referrer.host === "metamask.io")) { 
+        console.log("URL is valid"); 
+    }
+    else { 
+      console.log("URL is NOT valid"); 
+    }
+    ```
+    
+    In this example, the RPC method can be restricted when the origin matches `https://metamask.io`
+    or any subdomain.
+    This check can be used on any RPC method that should not be callable by all sites.
 
-  In this example, the RPC method can be restricted when the origin matches `https://metamask.io`
-  or any subdomain.
-  This check can be used on any RPC method that should not be callable by all sites.
-
-  :::note
-  Avoid using regular expressions or string matching to filter URLs.
-  The URL library provides a much more reliable interface for matching URLs.
-  :::
+    :::note
+    Avoid using regular expressions or string matching to filter URLs.
+    The URL library provides a much more reliable interface for matching URLs.
+    :::
 
 ## Secure sensitive information
 
@@ -147,7 +146,7 @@ The following are guidelines for validating RPC parameters and handling values:
   interface component instead of `text`.
   When using dialogs, the input may contain special characters that render as Markdown and can
   mislead the user.
-  For example:
+  For example: 
 
   <img src={require("../../assets/copyable-example-1.png").default} alt="Example not using copyable with Markdown rendering" style={{border: "1px solid #DCDCDC"}} />
 

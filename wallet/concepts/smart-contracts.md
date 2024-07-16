@@ -31,7 +31,7 @@ the user to add a chain that you suggest, and switch to it using a confirmation 
 ## Contract address
 
 Every account in Ethereum has an address, whether it's an external key-pair account or a smart contract.
-For any smart contract library to communicate with your contracts, a smart contract must know the exact address.
+For any smart contract library to communicate with your contracts, a smart contract  must know the exact address.
 
 Read about
 [how to find a token contact address](https://metamask.zendesk.com/hc/en-us/articles/360059683451-How-to-view-or-add-custom-token-contract-address).

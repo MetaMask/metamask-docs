@@ -2,14 +2,15 @@
 title: "zks_getMainContract"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns the address of the ZKsync Era contract.
 
 ## Parameters
 
 None.
+
 
 ## Response
 
@@ -24,13 +25,12 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getMainContract", "params": []}'
-```
-
+  ```bash
+    curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getMainContract", "params": []}'
+  ```
   </TabItem>
 </Tabs>
 

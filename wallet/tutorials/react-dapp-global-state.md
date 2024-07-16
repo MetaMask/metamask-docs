@@ -4,8 +4,8 @@ toc_max_heading_level: 4
 sidebar_position: 2
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Create a React dapp with global state
 
@@ -22,7 +22,7 @@ The final state of the dapp will look like the following:
 In this tutorial, you'll put the state into a [React
 Context](https://react.dev/reference/react/useContext) component, creating a [global
 state](https://react.dev/learn/reusing-logic-with-custom-hooks#custom-hooks-sharing-logic-between-components)
-that allows other components and UI elements to benefit from its data and functions.
+that allows other components and UI elements to benefit from its data and functions. 
 You'll use `localStorage` to persist the selected wallet, ensuring the last connected wallet state
 remains intact even after a page refresh.
 
@@ -157,7 +157,7 @@ Add the following CSS code to `WalletError.module.css`:
   border-radius: 0.5em;
   height: 36px;
   padding: 16px;
-  color: #efefef;
+  color: #EFEFEF;
   background-color: transparent;
   user-select: none;
 }
@@ -276,18 +276,9 @@ interface EIP1193Provider {
   isStatus?: boolean
   host?: string
   path?: string
-  sendAsync?: (
-    request: { method: string; params?: Array<unknown> },
-    callback: (error: Error | null, response: unknown) => void
-  ) => void
-  send?: (
-    request: { method: string; params?: Array<unknown> },
-    callback: (error: Error | null, response: unknown) => void
-  ) => void
-  request: (request: {
-    method: string
-    params?: Array<unknown>
-  }) => Promise<unknown>
+  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
+  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
 }
 
 // Combines the provider's metadata with an actual provider object, creating a complete picture of a
@@ -299,10 +290,10 @@ interface EIP6963ProviderDetail {
 
 // Represents the structure of an event dispatched by a wallet to announce its presence based on EIP-6963.
 type EIP6963AnnounceProviderEvent = {
-  detail: {
-    info: EIP6963ProviderInfo
+  detail:{
+    info: EIP6963ProviderInfo,
     provider: Readonly<EIP1193Provider>
-  }
+ }
 }
 
 // An error object with optional properties, commonly encountered when handling eth_requestAccounts errors.
@@ -322,13 +313,7 @@ Add the following code to `src/hooks/WalletProvider.tsx` to import the context, 
 type alias, and define the context interface for the EIP-6963 provider:
 
 ```tsx title="WalletProvider.tsx"
-import {
-  PropsWithChildren,
-  createContext,
-  useCallback,
-  useEffect,
-  useState,
-} from "react"
+import { PropsWithChildren, createContext, useCallback, useEffect, useState } from "react"
 
 // Type alias for a record where the keys are wallet identifiers and the values are account
 // addresses or null.
@@ -350,7 +335,7 @@ Add the following code to `src/hooks/WalletProvider.tsx` to extend the global `W
 interface with the custom `eip6963:announceProvider` event:
 
 ```tsx title="WalletProvider.tsx"
-declare global {
+declare global{
   interface WindowEventMap {
     "eip6963:announceProvider": CustomEvent
   }
@@ -399,15 +384,15 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     window.addEventListener("eip6963:announceProvider", onAnnouncement)
     window.dispatchEvent(new Event("eip6963:requestProvider"))
-
+    
     return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
   }, [])
 ```
 
-In this code sample, lines 6–12 are state definitions:
+In this code sample, lines 6–12 are state definitions: 
 
-- `wallets` - State to hold detected wallets.
-- `selectedWalletRdns` - State to hold the Reverse Domain Name System (RDNS) of the selected wallet.
+- `wallets` - State to hold detected wallets. 
+- `selectedWalletRdns` - State to hold the Reverse Domain Name System (RDNS) of the selected wallet. 
 - `selectedAccountByWalletRdns` - State to hold accounts associated with each wallet.
 - `errorMessage` - State to hold the error message when a wallet throws an error on connection.
 - `clearError` - Function to clear the state in `errorMessage`.
@@ -416,7 +401,7 @@ In this code sample, lines 6–12 are state definitions:
 Line 14 is the `useEffect` hook and it handles the following:
 
 - Local storage retrieval - On mount, it retrieves the saved selected wallet and accounts from local storage.
-- Event listener - It adds an event listener for the custom `eip6963:announceProvider` event.
+- Event listener - It adds an event listener for the custom `eip6963:announceProvider` event. 
 - State update - When the provider announces itself, it updates the state.
 - Provider request - It dispatches an event to request existing providers.
 - Cleanup - It removes the event listener on unmount.
@@ -424,40 +409,30 @@ Line 14 is the `useEffect` hook and it handles the following:
 Add the following code to `src/hooks/WalletProvider.tsx` to connect a wallet and update the component's state:
 
 ```tsx title="WalletProvider.tsx"
-const connectWallet = useCallback(
-  async (walletRdns: string) => {
-    try {
-      const wallet = wallets[walletRdns]
-      const accounts = (await wallet.provider.request({
-        method: "eth_requestAccounts",
-      })) as string[]
+const connectWallet = useCallback(async (walletRdns: string) => {
+  try {
+    const wallet = wallets[walletRdns]
+    const accounts = await wallet.provider.request({method:"eth_requestAccounts"}) as string[]
 
-      if (accounts?.[0]) {
-        setSelectedWalletRdns(wallet.info.rdns)
-        setSelectedAccountByWalletRdns((currentAccounts) => ({
-          ...currentAccounts,
-          [wallet.info.rdns]: accounts[0],
-        }))
+    if(accounts?.[0]) {
+      setSelectedWalletRdns(wallet.info.rdns)
+      setSelectedAccountByWalletRdns((currentAccounts) => ({
+        ...currentAccounts,
+        [wallet.info.rdns]: accounts[0],
+      }))
 
-        localStorage.setItem("selectedWalletRdns", wallet.info.rdns)
-        localStorage.setItem(
-          "selectedAccountByWalletRdns",
-          JSON.stringify({
-            ...selectedAccountByWalletRdns,
-            [wallet.info.rdns]: accounts[0],
-          })
-        )
-      }
-    } catch (error) {
-      console.error("Failed to connect to provider:", error)
-      const walletError: WalletError = error as WalletError
-      setError(
-        `Code: ${walletError.code} \nError Message: ${walletError.message}`
-      )
+      localStorage.setItem("selectedWalletRdns", wallet.info.rdns)
+      localStorage.setItem("selectedAccountByWalletRdns", JSON.stringify({
+        ...selectedAccountByWalletRdns,
+        [wallet.info.rdns]: accounts[0],
+      }))
     }
-  },
-  [wallets, selectedAccountByWalletRdns]
-)
+  } catch (error) {
+    console.error("Failed to connect to provider:", error)
+    const walletError: WalletError = error as WalletError
+    setError(`Code: ${walletError.code} \nError Message: ${walletError.message}`)
+  }
+}, [wallets, selectedAccountByWalletRdns])
 ```
 
 This code uses the `walletRdns` parameter to identify the wallet's RDNS for connecting.
@@ -474,17 +449,17 @@ const disconnectWallet = useCallback(async () => {
       [selectedWalletRdns]: null,
     }))
 
-    const wallet = wallets[selectedWalletRdns]
+    const wallet = wallets[selectedWalletRdns];
     setSelectedWalletRdns(null)
     localStorage.removeItem("selectedWalletRdns")
 
     try {
       await wallet.provider.request({
         method: "wallet_revokePermissions",
-        params: [{ eth_accounts: {} }],
-      })
+        params: [{ "eth_accounts": {} }]
+      });
     } catch (error) {
-      console.error("Failed to revoke permissions:", error)
+      console.error("Failed to revoke permissions:", error);
     }
   }
 }, [selectedWalletRdns, wallets])
@@ -503,7 +478,7 @@ will still execute.
 <p>
 Both of the previous functions use `useCallback`.
 It is used to memoize the `connectWallet` function, optimize performance, and prevent unnecessary re-renders.
-It ensures the function instance remains consistent between renders if its dependencies are changed.
+It ensures the function instance remains consistent between renders if its dependencies are changed. 
 
 For example, when using `disconnectWallet`, each time the `WalletProvider` component re-renders
 without `useCallback`, a new instance of `disconnectWallet` is created.
@@ -515,7 +490,6 @@ re-renders of child components.
 Although `useCallback` is not strictly necessary, it demonstrates best practices.
 Predicting how a context provider will be used or how the dapp might change or scale is difficult.
 Using `useCallback` can improve performance in some cases by reducing unnecessary re-renders.
-
 </p>
 </details>
 
@@ -524,12 +498,8 @@ Add the following code to `src/hooks/WalletProvider.tsx` to bundle the state and
 ```tsx title="WalletProvider.tsx"
 const contextValue: WalletProviderContext = {
   wallets,
-  selectedWallet:
-    selectedWalletRdns === null ? null : wallets[selectedWalletRdns],
-  selectedAccount:
-    selectedWalletRdns === null
-      ? null
-      : selectedAccountByWalletRdns[selectedWalletRdns],
+  selectedWallet: selectedWalletRdns === null ? null : wallets[selectedWalletRdns],
+  selectedAccount: selectedWalletRdns === null ? null : selectedAccountByWalletRdns[selectedWalletRdns],
   errorMessage,
   connectWallet,
   disconnectWallet,
@@ -537,16 +507,16 @@ const contextValue: WalletProviderContext = {
 }
 
 return (
-  <WalletProviderContext.Provider value={contextValue}>
-    {children}
-  </WalletProviderContext.Provider>
+ <WalletProviderContext.Provider value={contextValue}>
+   {children}
+ </WalletProviderContext.Provider>
 )
 ```
 
 In the return statement, the `contextValue` object is constructed with all necessary state and
 functions related to wallet management.
 It is passed to the `WalletProviderContext.Provider`, making wallet-related data and functions
-available to all descendant components.
+available to all descendant components. 
 The context provider wraps the children components, allowing them to access the context values.
 
 Add the following code to `src/hooks/useWalletProvider.tsx` to provide a custom hook that simplifies
@@ -579,7 +549,7 @@ export const formatChainAsNum = (chainIdHex: string) => {
 }
 
 export const formatAddress = (addr: string) => {
-  const upperAfterLastTwo = addr.slice(0, 2) + addr.slice(2)
+  const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
   return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
 }
 ```
@@ -608,14 +578,14 @@ import { WalletProvider } from "~/hooks/WalletProvider"
 function App() {
   return (
     <WalletProvider>
-      {/* 
+    {/* 
       <WalletList />
       <hr />
       <SelectedWallet />
       <WalletError /> 
     */}
     </WalletProvider>
-  )
+ )
 }
 
 export default App
@@ -638,22 +608,19 @@ export const WalletList = () => {
     <>
       <h2>Wallets Detected:</h2>
       <div className={styles.walletList}>
-        {Object.keys(wallets).length > 0 ? (
-          Object.values(wallets).map((provider: EIP6963ProviderDetail) => (
-            <button
-              key={provider.info.uuid}
-              onClick={() => connectWallet(provider.info.rdns)}
-            >
-              <img src={provider.info.icon} alt={provider.info.name} />
-              <div>{provider.info.name}</div>
-            </button>
-          ))
-        ) : (
-          <div>there are no Announced Providers</div>
-        )}
+        {
+          Object.keys(wallets).length > 0 
+            ? Object.values(wallets).map((provider: EIP6963ProviderDetail) => (
+              <button key={provider.info.uuid} onClick={() => connectWallet(provider.info.rdns)}>
+                <img src={provider.info.icon} alt={provider.info.name} />
+                <div>{provider.info.name}</div>
+              </button>
+            )) 
+            : <div>there are no Announced Providers</div>
+        }
       </div>
     </>
-  )
+ )
 }
 ```
 
@@ -681,41 +648,31 @@ import { formatAddress } from "~/utils"
 import styles from "./SelectedWallet.module.css"
 
 export const SelectedWallet = () => {
-  const { selectedWallet, selectedAccount, disconnectWallet } =
-    useWalletProvider()
+  const { selectedWallet, selectedAccount, disconnectWallet } = useWalletProvider()
 
   return (
     <>
-      <h2 className={styles.userAccount}>
-        {selectedAccount ? "" : "No "}Wallet Selected
-      </h2>
-      {selectedAccount && (
+      <h2 className={styles.userAccount}>{selectedAccount ? "" : "No "}Wallet Selected</h2>
+      {selectedAccount &&
         <>
           <div className={styles.selectedWallet}>
-            <img
-              src={selectedWallet.info.icon}
-              alt={selectedWallet.info.name}
-            />
+            <img src={selectedWallet.info.icon} alt={selectedWallet.info.name} />
             <div>{selectedWallet.info.name}</div>
             <div>({formatAddress(selectedAccount)})</div>
-            <div>
-              <strong>uuid:</strong> {selectedWallet.info.uuid}
-            </div>
-            <div>
-              <strong>rdns:</strong> {selectedWallet.info.rdns}
-            </div>
+            <div><strong>uuid:</strong> {selectedWallet.info.uuid}</div>
+            <div><strong>rdns:</strong> {selectedWallet.info.rdns}</div>
           </div>
           <button onClick={disconnectWallet}>Disconnect Wallet</button>
         </>
-      )}
+      }
     </>
-  )
+ )
 }
 ```
 
 The code in lines 11-22 have conditional rendering, ensuring that the content inside is only
 displayed if `selectedAccount` is true. This ensures that detailed information about the selected wallet is only displayed when an active
-wallet is connected.
+wallet is connected.  
 
 You can display information about the wallet, and conditionally render anything related to the following:
 
@@ -742,17 +699,14 @@ export const WalletError = () => {
   const isError = !!errorMessage
 
   return (
-    <div
-      className={styles.walletError}
-      style={isError ? { backgroundColor: "brown" } : {}}
-    >
-      {isError && (
+    <div className={styles.walletError} style={isError ? { backgroundColor: "brown" } : {}}>
+      {isError &&
         <div onClick={clearError}>
           <strong>Error:</strong> {errorMessage}
         </div>
-      )}
+      }
     </div>
-  )
+ )
 }
 ```
 
@@ -787,7 +741,7 @@ function App() {
       <SelectedWallet />
       <WalletError />
     </WalletProvider>
-  )
+ )
 }
 
 export default App

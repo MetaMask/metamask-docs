@@ -40,16 +40,17 @@ The path first depends on whether the dapp is on a desktop or mobile platform:
 - If the dapp is on a desktop platform (for example, a desktop web dapp), the dapp shows a modal
   asking the user to select if they want to connect to MetaMask using the browser extension or
   MetaMask Mobile.
-
+  
   - If the user selects extension:
     - If the extension is not installed, the user is taken to the Chrome extension store to
-      install it.
+    install it.
     - If the extension is installed, the user connects to their MetaMask extension.
+ 
   - If the user selects MetaMask Mobile:
     - If MetaMask Mobile is not installed, the user is taken to the app store to install it.
     - If MetaMask Mobile is installed, [an encrypted connection from the dapp to MetaMask
       Mobile](#metamask-mobile-connection) is established.
-
+   
   :::note
   The choice between the extension and MetaMask Mobile persists until the user or dapp disconnects.
   At that point, the dapp displays the modal again.
@@ -103,11 +104,11 @@ The flow is as follows:
 1. The dapp generates a UUID v4 ([Socket.io](https://socket.io/) room ID) and ECIES key pair.
 2. The dapp connects to the Socket.io server using the room ID.
 3. The dapp sends a deeplink to MetaMask Mobile (either directly, if on mobile, or through a QR
-   code, if on desktop) containing its ECIES public key and the Socket.io room ID.
+    code, if on desktop) containing its ECIES public key and the Socket.io room ID.
 4. MetaMask Mobile opens the QR code or deeplink and connects to the Socket.io server using the room ID.
 5. MetaMask Mobile generates an ECIES key pair.
 6. MetaMask Mobile sends its ECIES public key to the dapp using the Socket.io channel, and the two
-   parties generate a shared secret.
+    parties generate a shared secret.
 7. The dapp and MetaMask Mobile establish an encrypted connection to send JSON-RPC API methods.
 
 :::note

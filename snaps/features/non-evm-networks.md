@@ -45,15 +45,15 @@ The general rule is: **Don't create a situation where your users can lose assets
 To derive a user's private keys:
 
 1. Choose between the BIP-32 or BIP-44 specifications to derive the user's private keys.
-   If the keys you want to derive conform to the
-   [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) structure, use
-   [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy) to derive them.
-   Otherwise, use [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy).
+    If the keys you want to derive conform to the
+    [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) structure, use
+    [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy) to derive them.
+    Otherwise, use [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy).
 2. Add the required permission to your manifest file.
 3. Find out the derivation path to use.
-   This is dependent on the application you're building.
+    This is dependent on the application you're building.
 4. Use the [`@metamask/key-tree`](https://github.com/MetaMask/key-tree) module to derive the keys.
-   Any additional code, for example, to derive addresses from keys, is application-specific.
+    Any additional code, for example, to derive addresses from keys, is application-specific.
 
 ### Dogecoin example
 
@@ -82,7 +82,7 @@ For example, to derive Dogecoin keys:
    To get the second Dogecoin account, add the following code to your Snap:
 
    ```javascript title="index.js"
-   import { getBIP44AddressKeyDeriver } from "@metamask/key-tree"
+   import { getBIP44AddressKeyDeriver } from "@metamask/key-tree";
 
    // Get the Dogecoin node, corresponding to the path m/44'/3'.
    const dogecoinNode = await snap.request({
@@ -90,18 +90,18 @@ For example, to derive Dogecoin keys:
      params: {
        coinType: 3,
      },
-   })
+   });
 
    /**
     * Create a function that takes an index and returns an extended private key for m/44'/3'/0'/0/address_index.
     * The second parameter to getBIP44AddressKeyDeriver isn't passed. This sets account and changes to 0.
     */
-   const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode)
+   const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
 
    // Derive the second Dogecoin address, which has index 1.
-   const secondAccount = deriveDogecoinAddress(1)
+   const secondAccount = deriveDogecoinAddress(1);
    ```
-
+   
 ## Examples
 
 The following are examples of existing Snaps that manage accounts and keys:

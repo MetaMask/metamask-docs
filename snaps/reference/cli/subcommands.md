@@ -5,8 +5,8 @@ toc_max_heading_level: 4
 description: See the Snaps CLI subcommands reference.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Snaps subcommands
 

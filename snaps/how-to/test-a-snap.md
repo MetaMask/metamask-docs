@@ -37,7 +37,7 @@ In the `jest.config.js` file, add the following:
 ```js title="jest.config.js"
 module.exports = {
   preset: "@metamask/snaps-jest",
-}
+};
 ```
 
 This automatically configures Jest to use the `@metamask/snaps-jest` environment, and to use the
@@ -58,7 +58,7 @@ environment and matchers to your Jest configuration manually:
 module.exports = {
   testEnvironment: "@metamask/snaps-jest",
   setupFilesAfterEnv: ["@metamask/snaps-jest/dist/cjs/setup.js"],
-}
+};
 ```
 
 You can pass any [Jest options](../reference/jest.md#options) to the test environment by adding a
@@ -71,7 +71,7 @@ module.exports = {
   testEnvironmentOptions: {
     // Options go here.
   },
-}
+};
 ```
 
 All options are optional.

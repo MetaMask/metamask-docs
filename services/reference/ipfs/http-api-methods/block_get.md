@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # block_get
 
@@ -14,8 +14,8 @@ Get a raw IPFS block.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=<key>" \
-  -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+    -X POST \
+    -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,12 +23,13 @@ curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=<key>" \
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=QmaYL7E4gDTPNfLxrCEEEcNJgcHBJ55NxxTnxpDKWqMtJ3" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>
 </Tabs>
+
 
 #### REQUEST PARAMS
 

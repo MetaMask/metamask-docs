@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # add
 
@@ -14,10 +14,10 @@ Add a file or directory to IPFS.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/add?recursive=false&quiet=<value>&quieter=<value>&silent=<value>&progress=<value>&trickle=<value>&only-hash=<value>&wrap-with-directory=<value>&hidden=<value>&chunker=<value>&pin=true&raw-leaves=<value>&nocopy=<value>&fscache=<value>&cid-version=0&hash=sha2-256" \
-  -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>" \
-  -H "Content-Type: multipart/form-data" \
-  -F file=@"<file>"
+    -X POST \
+    -u "<API_KEY>:<API_KEY_SECRET>" \
+    -H "Content-Type: multipart/form-data" \
+    -F file=@"<file>"
 ```
 
   </TabItem>
@@ -25,10 +25,10 @@ curl "https://ipfs.infura.io:5001/api/v0/add?recursive=false&quiet=<value>&quiet
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/add?pin=false" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
-  -H "Content-Type: multipart/form-data" \
-  -F file=@"/sample-result.json"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET" \
+    -H "Content-Type: multipart/form-data" \
+    -F file=@"/sample-result.json"
 ```
 
   </TabItem>

@@ -3,8 +3,8 @@ description: Retrieve and display ERC-721 and ERC-1155 tokens.
 sidebar_position: 4
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Retrieve and display ERC-721 and ERC-1155 tokens
 
@@ -45,16 +45,19 @@ This example has been written for web3js v4.x. It may not work for earlier versi
 
 :::
 
+
 ### 3. Set up the script
 
 Create a file called `retrieveBalance.js`. At the top of file, add the following lines to import the web3.js library and connect to the Infura HTTPS endpoint:
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require("web3");
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR_API_KEY>")
-)
+  new Web3.providers.HttpProvider(
+    "https://mainnet.infura.io/v3/<YOUR_API_KEY>"
+  )
+);
 ```
 
 Replace `<YOUR_API_KEY>` with your Infura API key.
@@ -91,7 +94,7 @@ const tokenURIABI = [
     stateMutability: "view",
     type: "function",
   },
-]
+];
 ```
 
   </TabItem>
@@ -120,7 +123,7 @@ const uriABI = [
     stateMutability: "view",
     type: "function",
   },
-]
+];
 ```
 
   </TabItem>
@@ -134,16 +137,16 @@ Define the ABI for the respective method by adding the following to the script:
   <TabItem value="ERC-721" label="ERC-721" default>
 
 ```javascript
-const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
-const tokenId = 101
+const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d";
+const tokenId = 101;
 ```
 
   </TabItem>
   <TabItem value="ERC-1155" label="ERC-1155" >
 
 ```javascript
-const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77"
-const tokenId = 10570
+const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77";
+const tokenId = 10570;
 ```
 
   </TabItem>
@@ -157,14 +160,14 @@ Define the contract using `web3.eth.Contract()`, passing the ABI and contract ad
   <TabItem value="ERC-721" label="ERC-721" default>
 
 ```javascript
-const contract = new web3.eth.Contract(tokenURIABI, tokenContract)
+const contract = new web3.eth.Contract(tokenURIABI, tokenContract);
 ```
 
   </TabItem>
   <TabItem value="ERC-1155" label="ERC-1155" >
 
 ```javascript
-const contract = new web3.eth.Contract(uriABI, tokenContract)
+const contract = new web3.eth.Contract(uriABI, tokenContract);
 ```
 
   </TabItem>
@@ -179,12 +182,12 @@ This calls the ABI function defined in [step 4](retrieve-and-display-erc-721-and
 
 ```javascript
 async function getNFTMetadata() {
-  const result = await contract.methods.tokenURI(tokenId).call()
+  const result = await contract.methods.tokenURI(tokenId).call();
 
-  console.log(result) // ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/101
+  console.log(result); // ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/101
 }
 
-getNFTMetadata()
+getNFTMetadata();
 ```
 
   </TabItem>
@@ -192,12 +195,12 @@ getNFTMetadata()
 
 ```javascript
 async function getNFTMetadata() {
-  const result = await contract.methods.uri(tokenId).call()
+  const result = await contract.methods.uri(tokenId).call();
 
-  console.log(result) // https://nftdata.parallelnft.com/api/parallel-alpha/ipfs/QmSwnqTmpwvZH51Uv47opPUxGYx2nknYmGoKoRJQRMDcLL
+  console.log(result); // https://nftdata.parallelnft.com/api/parallel-alpha/ipfs/QmSwnqTmpwvZH51Uv47opPUxGYx2nknYmGoKoRJQRMDcLL
 }
 
-getNFTMetadata()
+getNFTMetadata();
 ```
 
   </TabItem>
@@ -218,12 +221,12 @@ In the script, add a function to combine the IPFS hash and your Infura subdomain
 
 ```javascript
 function addIPFSProxy(ipfsHash) {
-  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/"
-  const hash = ipfsHash.replace(/^ipfs?:\/\//, "")
-  const ipfsURL = URL + hash
+  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/";
+  const hash = ipfsHash.replace(/^ipfs?:\/\//, "");
+  const ipfsURL = URL + hash;
 
-  console.log(ipfsURL) // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
-  return ipfsURL
+  console.log(ipfsURL); // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
+  return ipfsURL;
 }
 ```
 
@@ -237,13 +240,13 @@ Replace `<YOUR_SUBDOMAIN>` with your Infura IPFS subdomain.
 Update the request for metadata to allow access to the IPFS hash through your Infura endpoint. In the `getNFTMetadata` function defined in [step 5](retrieve-and-display-erc-721-and-erc-1155-tokens.md#5-request-the-metadata), add the following:
 
 ```javascript
-const ipfsURL = addIPFSProxy(result)
+  const ipfsURL = addIPFSProxy(result);
 
-const response = await fetch(ipfsURL)
-const metadata = await response.json()
-console.log(metadata) // Metadata in JSON
+  const response = await fetch(ipfsURL);
+  const metadata = await response.json();
+  console.log(metadata); // Metadata in JSON
 
-const image = addIPFSProxy(metadata.image)
+  const image = addIPFSProxy(metadata.image);
 ```
 
 Also add this line to the top of the file:
@@ -270,12 +273,14 @@ Note some ERC-721 contracts return a regular HTTP URL, while some ERC-1155 contr
   <TabItem value="ERC-721 with IPFS" label="ERC-721 with IPFS" default>
 
 ```js
-const fetch = require("node-fetch")
-const { Web3 } = require("web3")
+const fetch = require("node-fetch");
+const { Web3 } = require("web3");
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR_API_KEY>")
-)
+  new Web3.providers.HttpProvider(
+    "https://mainnet.infura.io/v3/<YOUR_API_KEY>"
+  )
+);
 
 const tokenURIABI = [
   {
@@ -297,36 +302,36 @@ const tokenURIABI = [
     stateMutability: "view",
     type: "function",
   },
-]
+];
 
-const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d" // BAYC contract address
-const tokenId = 101 // A token we'd like to retrieve its metadata of
+const tokenContract = "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"; // BAYC contract address
+const tokenId = 101; // A token we'd like to retrieve its metadata of
 
-const contract = new web3.eth.Contract(tokenURIABI, tokenContract)
+const contract = new web3.eth.Contract(tokenURIABI, tokenContract);
 
 async function getNFTMetadata() {
-  const result = await contract.methods.tokenURI(tokenId).call()
+  const result = await contract.methods.tokenURI(tokenId).call();
 
-  console.log(result) // ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/101
+  console.log(result); // ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/101
 
-  const ipfsURL = addIPFSProxy(result)
+  const ipfsURL = addIPFSProxy(result);
 
-  const response = await fetch(ipfsURL)
-  const metadata = await response.json()
-  console.log(metadata) // Metadata in JSON
+  const response = await fetch(ipfsURL);
+  const metadata = await response.json();
+  console.log(metadata); // Metadata in JSON
 
-  const image = addIPFSProxy(metadata.image)
+  const image = addIPFSProxy(metadata.image);
 }
 
-getNFTMetadata()
+getNFTMetadata();
 
 function addIPFSProxy(ipfsHash) {
-  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/"
-  const hash = ipfsHash.replace(/^ipfs?:\/\//, "")
-  const ipfsURL = URL + hash
+  const URL = "https://<YOUR_SUBDOMAIN>.infura-ipfs.io/ipfs/";
+  const hash = ipfsHash.replace(/^ipfs?:\/\//, "");
+  const ipfsURL = URL + hash;
 
-  console.log(ipfsURL) // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
-  return ipfsURL
+  console.log(ipfsURL); // https://<subdomain>.infura-ipfs.io/ipfs/<ipfsHash>
+  return ipfsURL;
 }
 ```
 
@@ -334,11 +339,13 @@ function addIPFSProxy(ipfsHash) {
   <TabItem value="ERC-1155 without IPFS" label="ERC-1155 without IPFS" >
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require("web3");
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR_API_KEY>")
-)
+  new Web3.providers.HttpProvider(
+    "https://mainnet.infura.io/v3/<YOUR_API_KEY>"
+  )
+);
 
 const uriABI = [
   {
@@ -362,20 +369,20 @@ const uriABI = [
     stateMutability: "view",
     type: "function",
   },
-]
+];
 
-const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77" // Parallel contract address
-const tokenId = 10570 // A token we'd like to retrieve its metadata of
+const tokenContract = "0x76be3b62873462d2142405439777e971754e8e77"; // Parallel contract address
+const tokenId = 10570; // A token we'd like to retrieve its metadata of
 
-const contract = new web3.eth.Contract(uriABI, tokenContract)
+const contract = new web3.eth.Contract(uriABI, tokenContract);
 
 async function getNFTMetadata() {
-  const result = await contract.methods.uri(tokenId).call()
+  const result = await contract.methods.uri(tokenId).call();
 
-  console.log(result) // https://nftdata.parallelnft.com/api/parallel-alpha/ipfs/QmSwnqTmpwvZH51Uv47opPUxGYx2nknYmGoKoRJQRMDcLL
+  console.log(result); // https://nftdata.parallelnft.com/api/parallel-alpha/ipfs/QmSwnqTmpwvZH51Uv47opPUxGYx2nknYmGoKoRJQRMDcLL
 }
 
-getNFTMetadata()
+getNFTMetadata();
 ```
 
   </TabItem>

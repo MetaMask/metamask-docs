@@ -1,10 +1,10 @@
 {
-  "label": "Ethereum",
-  "collapsible": true,
-  "collapsed": true,
-  "link": {
-    "type": "generated-index",
-    "slug": "tutorials/ethereum",
-    "description": "This section provides tutorials for using the Infura API to perform various tasks on the Ethereum blockchain."
-  }
+    "label": "Ethereum",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+      "type": "generated-index",
+      "slug": "tutorials/ethereum",
+      "description": "This section provides tutorials for using the Infura API to perform various tasks on the Ethereum blockchain."
+    }
 }

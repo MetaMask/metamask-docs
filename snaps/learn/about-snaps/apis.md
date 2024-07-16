@@ -35,7 +35,7 @@ await snap.request({
     type: "inApp",
     message: "Hello, world!",
   },
-})
+});
 ```
 
 ## Wallet API
@@ -66,20 +66,20 @@ await window.ethereum.request({
   params: {
     "npm:hello-snap": {},
   },
-})
+});
 
 // Call the "hello" method of the Snap using wallet_snap.
 const response = await window.ethereum.request({
   method: "wallet_snap",
   params: {
     snapId: "npm:hello-snap",
-    request: {
+    request: { 
       method: "hello",
     },
   },
-})
+});
 
-console.log(response) // "world!"
+console.log(response); // "world!"
 ```
 
 ### Snap requests
@@ -101,7 +101,7 @@ the required permission:
 Your Snap can then call `eth_requestAccounts` in its source code:
 
 ```typescript title="index.ts"
-await ethereum.request({ method: "eth_requestAccounts" })
+await ethereum.request({ "method": "eth_requestAccounts" });
 ```
 
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
@@ -157,12 +157,12 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
   switch (request.method) {
     // Expose a "hello" JSON-RPC method to dapps.
     case "hello":
-      return "world!"
+      return "world!";
 
     default:
-      throw new Error("Method not found.")
+      throw new Error("Method not found.");
   }
-}
+};
 ```
 
 A dapp can then install the Snap and call the exposed method:
@@ -176,7 +176,7 @@ await window.ethereum.request({
     // Assuming the Snap is published to npm using the package name "hello-snap".
     "npm:hello-snap": {},
   },
-})
+});
 
 // Invoke the "hello" JSON-RPC method exposed by the Snap.
 const response = await window.ethereum.request({
@@ -187,7 +187,7 @@ const response = await window.ethereum.request({
       method: "hello",
     },
   },
-})
+});
 
-console.log(response) // "world!"
+console.log(response); // "world!"
 ```

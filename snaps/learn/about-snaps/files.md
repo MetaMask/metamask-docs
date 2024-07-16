@@ -3,8 +3,8 @@ description: Learn about the Snap project files.
 sidebar_position: 2
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Snaps files
 
@@ -65,8 +65,8 @@ The manifest file of `Hello World` would look something like this:
       }
     }
   },
-  "initialPermissions": {},
-  "manifestVersion": "0.1"
+"initialPermissions": {},
+"manifestVersion": "0.1"
 }
 ```
 
@@ -121,14 +121,14 @@ module.exports = {
   server: {
     port: 9000,
   },
-}
+};
 ```
 
 </TabItem>
 <TabItem value="TypeScript">
 
 ```typescript title="snap.config.ts"
-import type { SnapConfig } from "@metamask/snaps-cli"
+import type { SnapConfig } from "@metamask/snaps-cli";
 
 const config: SnapConfig = {
   input: "src/index.js",
@@ -138,9 +138,9 @@ const config: SnapConfig = {
   server: {
     port: 9000,
   },
-}
+};
 
-export default config
+export default config;
 ```
 
 </TabItem>

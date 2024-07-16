@@ -4,8 +4,8 @@ sidebar_position: 2
 toc_max_heading_level: 2
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Wallet API for Snaps
 
@@ -40,9 +40,9 @@ An object mapping the IDs of permitted Snaps to their metadata:
 
 ```js
 await window.ethereum.request({
-  method: "wallet_getSnaps",
-  params: [],
-})
+  "method": "wallet_getSnaps",
+  "params": []
+});
 ```
 
 </TabItem>
@@ -104,14 +104,14 @@ An object mapping the IDs of permitted Snaps to their metadata:
 
 ```js
 await window.ethereum.request({
-  method: "wallet_requestSnaps",
-  params: {
+  "method": "wallet_requestSnaps",
+  "params": {
     "npm:@metamask/example-snap": {},
     "npm:foo-snap": {
-      version: "^1.0.2",
-    },
-  },
-})
+      "version": "^1.0.2"
+    }
+  }
+});
 ```
 
 </TabItem>
@@ -165,14 +165,14 @@ The result of the Snap method call.
 
 ```js
 await window.ethereum.request({
-  method: "wallet_snap",
-  params: {
-    snapId: "npm:@metamask/example-snap",
-    request: {
-      method: "hello",
-    },
-  },
-})
+  "method": "wallet_snap",
+  "params": {
+    "snapId": "npm:@metamask/example-snap",
+    "request": {
+      "method": "hello"
+    }
+  }
+});
 ```
 
 </TabItem>
@@ -213,14 +213,14 @@ The result of the Snap method call.
 
 ```js
 await window.ethereum.request({
-  method: "wallet_invokeSnap",
-  params: {
-    snapId: "npm:@metamask/example-snap",
-    request: {
-      method: "hello",
-    },
-  },
-})
+  "method": "wallet_invokeSnap",
+  "params": {
+    "snapId": "npm:@metamask/example-snap",
+    "request": {
+      "method": "hello"
+    }
+  }
+});
 ```
 
 </TabItem>

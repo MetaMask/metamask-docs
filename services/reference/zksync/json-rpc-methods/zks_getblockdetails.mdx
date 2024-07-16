@@ -2,8 +2,8 @@
 title: "zks_getBlockDetails"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns additional ZKsync-specific information about the L2 block.
 
@@ -16,8 +16,8 @@ Returns additional ZKsync-specific information about the L2 block.
 Object containing the details of the L2 block:
 
 - `baseSystemContractsHashes`: An object containing hashes of the base system contracts used in the transaction:
-  - `bootloader`: The hash of the bootloader contract.
-  - `default_aa`: The hash of the default account contract.
+    - `bootloader`: The hash of the bootloader contract.
+    - `default_aa`: The hash of the default account contract.
 - `commitTxHash`: The hash of the transaction committed to the network.
 - `committedAt`: The timestamp when the transaction was committed to the network.
 - `executeTxHash`: The hash of the transaction executed on the network.
@@ -35,6 +35,7 @@ Object containing the details of the L2 block:
 - `status`: The status of the transaction.
 - `timestamp`: The timestamp of the transaction.
 
+
 ## Example
 
 Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
@@ -44,13 +45,12 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBlockDetails", "params": [ 140599 ]}'
-```
-
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBlockDetails", "params": [ 140599 ]}'
+  ```
   </TabItem>
 </Tabs>
 

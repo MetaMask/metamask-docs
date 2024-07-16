@@ -1,10 +1,10 @@
 {
-  "label": "Use Infura as a reverse proxy",
-  "collapsible": true,
-  "collapsed": true,
-  "link": {
-    "type": "generated-index",
-    "slug": "tutorials/ethereum/use-infura-as-a-reverse-proxy",
-    "description": "A reverse proxy is a server that typically sits on the edge of your infrastructure. It receives requests from web clients and routes them to one or more backend web servers. You can set up Infura as a reverse proxy to ensure the flow of traffic between your clients and servers remains smooth."
-  }
+    "label": "Use Infura as a reverse proxy",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+      "type": "generated-index",
+      "slug": "tutorials/ethereum/use-infura-as-a-reverse-proxy",
+      "description": "A reverse proxy is a server that typically sits on the edge of your infrastructure. It receives requests from web clients and routes them to one or more backend web servers. You can set up Infura as a reverse proxy to ensure the flow of traffic between your clients and servers remains smooth."
+    }
 }

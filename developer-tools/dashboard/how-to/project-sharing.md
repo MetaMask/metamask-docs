@@ -18,7 +18,7 @@ To share an API key:
    <div class="left-align-container">
      <div class="img-large">
        <img
-         src={require("../../images/invite-member-button.png").default}
+         src={require('../../images/invite-member-button.png').default}
        />
      </div>
    </div>
@@ -82,7 +82,7 @@ You can view all keys that you own, and all keys shared with you, by selecting *
      <div class="left-align-container">
        <div class="img-large">
          <img
-           src={require("../../images/update-role.png").default}
+           src={require('../../images/update-role.png').default}
          />
        </div>
      </div>

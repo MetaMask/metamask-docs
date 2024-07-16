@@ -47,7 +47,7 @@ try {
     .request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: "0xf00" }],
-    })
+    });
 } catch (switchError) {
   // This error code indicates that the chain has not been added to MetaMask.
   if (switchError.code === 4902) {
@@ -62,7 +62,7 @@ try {
               rpcUrls: ["https://..."] /* ... */,
             },
           ],
-        })
+        });
     } catch (addError) {
       // Handle "add" error.
     }

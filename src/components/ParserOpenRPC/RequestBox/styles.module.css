@@ -1,13 +1,13 @@
 .cardWrapper {
   border-radius: 8px;
-  border: 1px solid #848c96;
-  background-color: #292a36;
+  border: 1px solid #848C96;
+  background-color: #292A36;
   margin-bottom: 24px;
   overflow: hidden;
 }
 
 .cardHeader {
-  border-bottom: 1px solid #848c96;
+  border-bottom: 1px solid #848C96;
   padding: 16px;
 }
 
@@ -18,6 +18,6 @@
 .cardFooter {
   display: flex;
   justify-content: flex-end;
-  border-top: 1px solid #848c96;
+  border-top: 1px solid #848C96;
   padding: 16px;
 }

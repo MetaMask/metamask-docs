@@ -12,27 +12,26 @@ This data is crucial for optimizing your applications and ensuring they run smoo
 ## Specify stats to view
 
 1. In the top menu of the [Infura dashboard](https://app.infura.io/), select **Stats**.
-   The stats page displays the total volume of requests sent to Infura over the specified time period.
-   By default, data is shown from the last 24 hours from all Web3 API keys.
+    The stats page displays the total volume of requests sent to Infura over the specified time period.
+    By default, data is shown from the last 24 hours from all Web3 API keys.
 
 2. To change the API key, make a selection from the API keys dropdown.
 
 3. To change the stats time range, make a selection from the time dropdown.
-   Time values are given in Coordinated Universal Time (UTC).
-   For Web3 API usage, you can choose from the following options:
-
-   - **Last 15 Minutes** - The last completed 15 minutes.
-     This updates once a minute.
-   - **Last 1 Hour** - The last fully completed hour, from 0 to 59 minutes and 59 seconds.
-   - **Last 24 Hours** - The last fully completed 24 consecutive hours.
-     This is the default.
-   - **Last 7 Days** - The last fully completed seven consecutive days.
-     A day appears once it has completed.
-   - **Last 30 Days** - The last fully completed 30 days.
-     A day appears once it has completed.
+    Time values are given in Coordinated Universal Time (UTC).
+    For Web3 API usage, you can choose from the following options:
+    - **Last 15 Minutes** - The last completed 15 minutes.
+      This updates once a minute.
+    - **Last 1 Hour** - The last fully completed hour, from 0 to 59 minutes and 59 seconds.
+    - **Last 24 Hours** - The last fully completed 24 consecutive hours.
+      This is the default.
+    - **Last 7 Days** - The last fully completed seven consecutive days.
+      A day appears once it has completed.
+    - **Last 30 Days** - The last fully completed 30 days.
+      A day appears once it has completed.
 
 4. To view your IPFS usage, select **IPFS Usage** in the toggle in the top-right corner.
-   You can choose to show data from the **Last 24 Hours** (default) or the **Last 7 Days**.
+    You can choose to show data from the **Last 24 Hours** (default) or the **Last 7 Days**.
 
 ## Web3 stats charts
 

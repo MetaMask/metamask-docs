@@ -2,8 +2,8 @@
 title: "zks_estimateFee"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns the fee for the transaction.
 
@@ -24,7 +24,7 @@ The estimated fee which includes:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard). 
 
 ### Request
 
@@ -37,7 +37,6 @@ curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateFee", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
 ```
-
   </TabItem>
 </Tabs>
 

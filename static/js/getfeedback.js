@@ -46,7 +46,7 @@ window.usabilla ||
                 "<!DOCTYPE html><html><head></head><body onload=\"var d = document;d.getElementsByTagName('head')[0].appendChild(d.createElement('script')).src='",
                 e.url,
                 "'\"></body></html>",
-              ].join("")
+              ].join(""),
             );
             l.close();
           } catch (m) {

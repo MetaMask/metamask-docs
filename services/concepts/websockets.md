@@ -44,12 +44,12 @@ For information about how to use the subscription methods to subscribe to events
 
 Infura support subscriptions over WebSockets for the following networks:
 
-- [Ethereum](../reference/ethereum/index.md)
-- [Arbitrum](../reference/arbitrum/index.md)
-- [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
-- [Linea](../reference/linea/index.md)
-- [Optimism](../reference/optimism/index.md)
-- [Polygon](../reference/polygon/index.md)
+- Ethereum
+- Arbitrum
+- Avalanche (C-Chain)
+- Linea
+- Optimism
+- Polygon
 
 :::info
 

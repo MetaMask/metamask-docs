@@ -1,9 +1,5 @@
 import clsx from "clsx";
-import {
-  useCollapsible,
-  Collapsible,
-  useColorMode,
-} from "@docusaurus/theme-common";
+import { useCollapsible, Collapsible, useColorMode } from "@docusaurus/theme-common";
 import styles from "./styles.module.css";
 import React, { useEffect } from "react";
 
@@ -12,10 +8,7 @@ interface CollapseBoxProps {
   isInitCollapsed?: boolean;
 }
 
-export const CollapseBox = ({
-  children,
-  isInitCollapsed = false,
-}: CollapseBoxProps) => {
+export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxProps) => {
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
   const { colorMode } = useColorMode();
   useEffect(() => {
@@ -24,35 +17,15 @@ export const CollapseBox = ({
     }
   }, [isInitCollapsed]);
   return (
-    <div
-      className={clsx(
-        styles.collapseWrapper,
-        !collapsed && styles.collapsedWrapperView
-      )}
-    >
+    <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <button
-        className={clsx(
-          styles.collapseBtn,
-          !collapsed && styles.collapsedBtnView,
-          colorMode === "light" && styles.collapsedBtnLightHover
-        )}
+        className={clsx(styles.collapseBtn, !collapsed && styles.collapsedBtnView, colorMode === "light" && styles.collapsedBtnLightHover)}
         onClick={toggleCollapsed}
       >
         {collapsed ? "Show child attributes" : "Hide child attributes"}
-        <div
-          className={clsx(
-            styles.collapseIcon,
-            !collapsed && styles.collapsedIconView
-          )}
-        ></div>
+        <div className={clsx(styles.collapseIcon, !collapsed && styles.collapsedIconView)}></div>
       </button>
-      <Collapsible
-        animation={{ duration: 100, easing: "ease-in" }}
-        lazy={false}
-        collapsed={collapsed}
-      >
-        {children}
-      </Collapsible>
+      <Collapsible animation={{ duration: 100, easing: "ease-in" }} lazy={false} collapsed={collapsed}>{children}</Collapsible>
     </div>
   );
 };

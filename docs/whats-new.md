@@ -5,7 +5,7 @@ description: Summary of the latest updates to this documentation.
 
 # What's new in the documentation?
 
-The latest major MetaMask documentation updates are listed by the month they were added to the documentation.
+The latest major MetaMask documentation updates are listed by the month they were added to the documentation. 
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
@@ -26,8 +26,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2024
 
-- Added a beginner tutorial for [creating a simple dapp](/wallet/tutorials/javascript-dapp-simple) using vanilla JavaScript.
-  ([#1276](https://github.com/MetaMask/metamask-docs/pull/1276))
+- Added a beginner tutorial for [creating a simple dapp](/wallet/tutorials/javascript-dapp-simple) using vanilla JavaScript. 
+  ([#1276](https://github.com/MetaMask/metamask-docs/pull/1276)) 
 - Discontinued support for [`eth_sign`](/wallet/concepts/signing-methods/#eth_sign).
   ([#1319](https://github.com/MetaMask/metamask-docs/pull/1319/))
 - Updated [React dapp with local state tutorial](/wallet/tutorials/react-dapp-local-state) with

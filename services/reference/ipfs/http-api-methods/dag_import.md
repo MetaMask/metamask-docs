@@ -1,5 +1,5 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # dag_import
 
@@ -20,10 +20,10 @@ You can't pin multiple DAG roots using this endpoint. For example, if supplying 
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=false&#x26;allow-big-block=false" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
-  -H "Content-Type: multipart/form-data" \
-  -F file=@"<file>"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET" \
+    -H "Content-Type: multipart/form-data" \
+    -F file=@"<file>"
 ```
 
   </TabItem>
@@ -31,10 +31,10 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=false&#x26;allow-b
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=true&silent=<value>&stats=<value>&allow-big-block=false" \
-  -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
-  -H "Content-Type: multipart/form-data" \
-  -F file=@"/sample.car"
+    -X POST \
+    -u "PROJECT_ID:PROJECT_SECRET" \
+    -H "Content-Type: multipart/form-data" \
+    -F file=@"/sample.car"
 ```
 
   </TabItem>

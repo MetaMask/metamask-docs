@@ -2,8 +2,8 @@
 title: "starknet_estimateFee"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns an estimate of the fee required for the network to process the specified transactions, at
 the specified block.
@@ -89,13 +89,11 @@ curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
 ```json
 {
   "jsonrpc": "2.0",
-  "result": [
-    {
-      "gas_consumed": "0x41de",
-      "gas_price": "0x67edb4f57",
-      "overall_fee": "0x1abd7b153e472"
-    }
-  ],
+  "result": [{
+    "gas_consumed": "0x41de",
+    "gas_price": "0x67edb4f57",
+    "overall_fee": "0x1abd7b153e472"
+  }],
   "id": 0
 }
 ```

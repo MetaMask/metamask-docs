@@ -57,8 +57,8 @@ Connect to Infura’s WebSockets endpoint to subscribe to new pending transactio
 Define the following endpoints in your file:
 
 ```python
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = 'wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>'
+infura_http_url = 'https://goerli.infura.io/v3/<YOUR_API_KEY>'
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 ```
 
@@ -74,10 +74,10 @@ Create an `async` method that connects to Infura’s WebSocket endpoint:
 
 ```python
 async def get_event():
-  async with connect(infura_ws_url) as ws:
-    await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
-    subscription_response = await ws.recv()
-    print(subscription_response)  # {"jsonrpc": "2.0", "id": 1, "result": "0xd67da23f62a01f58042bc73d3f1c8936"}
+    async with connect(infura_ws_url) as ws:
+        await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
+        subscription_response = await ws.recv()
+        print(subscription_response) # {"jsonrpc":"2.0","id":1,"result":"0xd67da23f62a01f58042bc73d3f1c8936"}
 ```
 
 In the method we use `ws.send()` to start a new subscription for new pending transactions, after which we get a confirmation back from the node with our subscription ID.
@@ -86,23 +86,23 @@ Next, we can await any new messages from the Infura node and print the transacti
 
 ```python
 while True:
-  try:
-    message = await asyncio.wait_for(ws.recv(), timeout=15)
-    response = json.loads(message)
-    txHash = response["params"]["result"]
-    print(txHash)
-  except Exception as e:
-    print(f"An error occurred: {e}")
-    pass
+    try:
+        message = await asyncio.wait_for(ws.recv(), timeout=15)
+        response = json.loads(message)
+        txHash = response['params']['result']
+        print(txHash)
+        pass
+    except:
+        passy
 ```
 
 Finally, we'll add an `if __name__ == "__main__"` statement, so that our program runs when we execute it from a command line.
 
 ```python
 if __name__ == "__main__":
-  loop = asyncio.get_event_loop()
-  while True:
-    loop.run_until_complete(get_event())
+    loop = asyncio.get_event_loop()
+    while True:
+        loop.run_until_complete(get_event())
 ```
 
 The complete code sample should now look as follows:
@@ -114,30 +114,30 @@ import requests
 from web3 import Web3
 from websockets import connect
 
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = 'wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>'
+infura_http_url = 'https://goerli.infura.io/v3/<YOUR_API_KEY>'
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 
 async def get_event():
-  async with connect(infura_ws_url) as ws:
-    await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
-    subscription_response = await ws.recv()
-    print(subscription_response)
+    async with connect(infura_ws_url) as ws:
+        await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
+        subscription_response = await ws.recv()
+        print(subscription_response)
 
-    while True:
-      try:
-        message = await asyncio.wait_for(ws.recv(), timeout=15)
-        response = json.loads(message)
-        txHash = response["params"]["result"]
-        print(txHash)
-      except Exception as e:
-        print(f"An error occurred: {e}")
-        pass
+        while True:
+            try:
+                message = await asyncio.wait_for(ws.recv(), timeout=15)
+                response = json.loads(message)
+                txHash = response['params']['result']
+                print(txHash)
+                pass
+            except:
+                pass
 
 if __name__ == "__main__":
-  loop = asyncio.get_event_loop()
-  while True:
-    loop.run_until_complete(get_event())
+    loop = asyncio.get_event_loop()
+    while True:
+        loop.run_until_complete(get_event())
 ```
 
 ### 5. Execute the program
@@ -151,7 +151,7 @@ Python python3 subscribe.py
 You should now see the terminal fill up with Ethereum transfers:
 
 ```
-{"jsonrpc": "2.0", "id": 1, "result": "0xf1c8df0cb54ea89828976b86f2325930"}
+{"jsonrpc":"2.0","id":1,"result":"0xf1c8df0cb54ea89828976b86f2325930"}
 0x9831d16f46bfe723514594e990cb3c66824a584fd849984f28adac8fb5523702
 0x1c3837ceffdd48325e19754f7b84fda4effd32c0c141b7dafa90d741cdc2c8f9
 0x4f8e5706c60be6482f810af9a5d9191447d55c7441f68f4019a124d04d2a40d4
@@ -164,7 +164,7 @@ You should now see the terminal fill up with Ethereum transfers:
 You can update the program to monitor incoming transactions to a specific Ethereum address. Let’s define an account we’d like to monitor first, outside of the `get_event()` function:
 
 ```python
-account = "<YOUR_PUBLIC_ADDRESS>"
+account = '<YOUR_PUBLIC_ADDRESS>'
 ```
 
 Then, inside the function and `try` block, append the following to check whether the recipient is the address we specified, after which it will print the transaction hash, sender address, and the value sent in Ether.
@@ -172,11 +172,11 @@ Then, inside the function and `try` block, append the following to check whether
 ```python
 tx = web3.eth.get_transaction(txHash)
 if tx.to == account:
-  print("Pending transaction found with the following details:")
-  print({
-    "hash": txHash,
-    "from": tx["from"],
-    "value": web3.fromWei(tx["value"], "ether")
+	print("Pending transaction found with the following details:")
+	print({
+            "hash": txHash,
+            "from": tx["from"],
+            "value": web3.fromWei(tx["value"], 'ether')
   })
 ```
 
@@ -189,40 +189,40 @@ import requests
 from web3 import Web3
 from websockets import connect
 
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = 'wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>'
+infura_http_url = 'https://goerli.infura.io/v3/<YOUR_API_KEY>'
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 
 # Used if you want to monitor ETH transactions to a specific address
-account = "<YOUR_PUBLIC_ADDRESS>"
+account = '<YOUR_PUBLIC_ADDRESS>'
 
 async def get_event():
-  async with connect(infura_ws_url) as ws:
-    await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
-    subscription_response = await ws.recv()
-    print(subscription_response)
+    async with connect(infura_ws_url) as ws:
+        await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
+        subscription_response = await ws.recv()
+        print(subscription_response)
 
-    while True:
-      try:
-        message = await asyncio.wait_for(ws.recv(), timeout=15)
-        response = json.loads(message)
-        txHash = response["params"]["result"]
-        print(txHash)
-        # Monitor transactions to a specific address
-        tx = web3.eth.get_transaction(txHash)
-        if tx.to == account:
-          print("Pending transaction found with the following details:")
-          print({
-            "hash": txHash,
-            "from": tx["from"],
-            "value": web3.fromWei(tx["value"], "ether")
-          })
-      except Exception as e:
-        print(f"An error occurred: {e}")
-        pass
+        while True:
+            try:
+                message = await asyncio.wait_for(ws.recv(), timeout=15)
+                response = json.loads(message)
+                txHash = response['params']['result']
+                print(txHash)
+                # Monitor transactions to a specific address
+                tx = web3.eth.get_transaction(txHash)
+                if tx.to == account:
+                    print("Pending transaction found with the following details:")
+                    print({
+                        "hash": txHash,
+                        "from": tx["from"],
+                        "value": web3.fromWei(tx["value"], 'ether')
+                    })
+                pass
+            except:
+                pass
 
 if __name__ == "__main__":
-  loop = asyncio.get_event_loop()
-  while True:
-    loop.run_until_complete(get_event())
+    loop = asyncio.get_event_loop()
+    while True:
+        loop.run_until_complete(get_event())
 ```

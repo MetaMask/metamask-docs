@@ -11,12 +11,11 @@ tags:
 Refer to the following security guidelines when [creating an account management Snap](create-account-snap.md).
 
 :::tip see also
-
 - [Custom EVM accounts](index.md)
 - [Create an account management Snap](create-account-snap.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-  :::
+:::
 
 ## Do not add secret information to account objects
 
@@ -27,41 +26,41 @@ For example:
 
 - ❌ **Do NOT do this:**
 
-  ```ts
-  const account: KeyringAccount = {
-    id: uuid(),
-    options: {
-      privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
-    },
-    address,
-    methods: [
-      EthMethod.PersonalSign,
-      EthMethod.Sign,
-      EthMethod.SignTransaction,
-      EthMethod.SignTypedDataV1,
-      EthMethod.SignTypedDataV3,
-      EthMethod.SignTypedDataV4,
-    ],
-    type: EthAccountType.Eoa,
-  }
-  ```
+    ```ts
+    const account: KeyringAccount = {
+      id: uuid(),
+      options: {
+        privateKey: "0x01234...78", // !!! DO NOT DO THIS !!!
+      },
+      address,
+      methods: [
+        EthMethod.PersonalSign,
+        EthMethod.Sign,
+        EthMethod.SignTransaction,
+        EthMethod.SignTypedDataV1,
+        EthMethod.SignTypedDataV3,
+        EthMethod.SignTypedDataV4,
+      ],
+      type: EthAccountType.Eoa,
+    };
+    ```
 
 - ✅ **Do this instead:**
 
-  _Store any secret information that you need in the Snap's state:_
-
-  ```ts
-  await snap.request({
-    method: "snap_manageState",
-    params: {
-      operation: "update",
-      newState: {
-        // Your Snap's state here.
-        privateKey: "0x01234...78",
+    *Store any secret information that you need in the Snap's state:*
+    
+    ```ts
+    await snap.request({
+      method: "snap_manageState",
+      params: {
+        operation: "update",
+        newState: {
+          // Your Snap's state here.
+          privateKey: "0x01234...78",
+        },
       },
-    },
-  })
-  ```
+    });
+    ```
 
 ## Limit the methods exposed to dapps
 
@@ -70,7 +69,7 @@ By default, MetaMask enforces the following restrictions on calling
 the caller origin:
 
 | Method                                                                                                               |  MetaMask origin   |    Dapp origin     |
-| :------------------------------------------------------------------------------------------------------------------- | :----------------: | :----------------: |
+|:---------------------------------------------------------------------------------------------------------------------|:------------------:|:------------------:|
 | [`keyring_listAccounts`](../../reference/keyring-api/account-management/index.md#keyring_listaccounts)               | :white_check_mark: | :white_check_mark: |
 | [`keyring_getAccount`](../../reference/keyring-api/account-management/index.md#keyring_getaccount)                   | :white_check_mark: | :white_check_mark: |
 | [`keyring_createAccount`](../../reference/keyring-api/account-management/index.md#keyring_createaccount)             |        :x:         | :white_check_mark: |
@@ -108,7 +107,7 @@ const permissions: Record<string, string[]> = {
   "https://<Dapp 2 domain>": [
     // List of allowed methods for Dapp 2.
   ],
-}
+};
 
 if (origin !== "metamask" && !permissions[origin]?.includes(request.method)) {
   // Reject the request.
@@ -163,7 +162,7 @@ For example:
   ```ts
   // If inputSecretValue contains invalid hexadecimal characters, its value
   // will be added to the error thrown by toBuffer.
-  const privateKey = toBuffer(inputSecretValue)
+  const privateKey = toBuffer(inputSecretValue);
   // Use privateKey here.
   ```
 
@@ -171,10 +170,10 @@ For example:
 
   ```ts
   try {
-    const privateKey = toBuffer(inputSecretValue)
+    const privateKey = toBuffer(inputSecretValue);
     // Use privateKey here.
   } catch (error) {
-    throw new Error("Invalid private key")
+    throw new Error("Invalid private key");
   }
   ```
 
@@ -196,8 +195,8 @@ For example:
     origin,
     request,
   }) => {
-    return handleKeyringRequest(keyring, request)
-  }
+    return handleKeyringRequest(keyring, request);
+  };
   ```
 
 - ✅ **Do this instead:**
@@ -209,8 +208,8 @@ For example:
     request,
   }) => {
     // Any custom logic or extra security checks here.
-    return handleKeyringRequest(keyring, request)
-  }
+    return handleKeyringRequest(keyring, request);
+  };
   ```
 
 ## Do not fetch remote code from inside your Snap

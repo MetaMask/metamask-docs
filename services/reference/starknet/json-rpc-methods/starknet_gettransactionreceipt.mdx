@@ -2,8 +2,8 @@
 title: "starknet_getTransactionReceipt"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns the receipt of the specified transaction.
 
@@ -57,30 +57,15 @@ curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
     "block_hash": "0x18ec1a3931bb5a286f801a950e1153bd427d6d3811591cc01e6f074615a1f76",
     "block_number": 4503,
     "messages_sent": [],
-    "events": [
-      {
-        "from_address": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
-        "keys": [
-          "0x99cd8bde557814842a3121e8ddfd433a539b8c9f14bf31ebf108d12e6196e9"
-        ],
-        "data": [
-          "0x206cd6b8b25de0ca44b944d13c2608b355e9a9224a887e2e9447cf5ae3cb2a8",
-          "0x7c57808b9cea7130c44aab2f8ca6147b04408943b48c6d8c3c83eb8cfdd8c0b",
-          "0xd6f06df0e9632b",
-          "0x0"
-        ]
-      },
-      {
-        "from_address": "0x206cd6b8b25de0ca44b944d13c2608b355e9a9224a887e2e9447cf5ae3cb2a8",
-        "keys": [
-          "0x5ad857f66a5b55f1301ff1ed7e098ac6d4433148f0b72ebc4a2945ab85ad53"
-        ],
-        "data": [
-          "0x121aaba2894a63cce81acabb559eb2c114f4859dc5803e0b91349ec398d2eb0",
-          "0x0"
-        ]
-      }
-    ]
+    "events": [{
+      "from_address": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+      "keys": ["0x99cd8bde557814842a3121e8ddfd433a539b8c9f14bf31ebf108d12e6196e9"],
+      "data": ["0x206cd6b8b25de0ca44b944d13c2608b355e9a9224a887e2e9447cf5ae3cb2a8", "0x7c57808b9cea7130c44aab2f8ca6147b04408943b48c6d8c3c83eb8cfdd8c0b", "0xd6f06df0e9632b", "0x0"]
+    }, {
+      "from_address": "0x206cd6b8b25de0ca44b944d13c2608b355e9a9224a887e2e9447cf5ae3cb2a8",
+      "keys": ["0x5ad857f66a5b55f1301ff1ed7e098ac6d4433148f0b72ebc4a2945ab85ad53"],
+      "data": ["0x121aaba2894a63cce81acabb559eb2c114f4859dc5803e0b91349ec398d2eb0", "0x0"]
+    }]
   },
   "id": 1
 }

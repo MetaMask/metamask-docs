@@ -5,8 +5,8 @@ toc_max_heading_level: 4
 description: See the Snaps CLI options reference.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Snaps configuration options
 
@@ -167,7 +167,7 @@ When set to `true`, WebAssembly files can be imported in the Snap.
 For example:
 
 ```typescript
-import program from "./program.wasm"
+import program from "./program.wasm";
 
 // Program is initialized synchronously.
 // ...

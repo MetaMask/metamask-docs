@@ -18,4 +18,4 @@ const LDPlugin = () => {
   };
 };
 
-export default LDPlugin;
+export default LDPlugin

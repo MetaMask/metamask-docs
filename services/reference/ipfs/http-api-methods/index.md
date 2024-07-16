@@ -70,11 +70,8 @@ A `405`error may mean that you are using the wrong HTTP method (i.e. GET instead
 ## NDJSON responses
 
 <!-- markdown-link-check-disable -->
-
 When a bunch of objects are requested, IPFS returns them in the Newline Delimited JSON, [NDJSON](http://ndjson.org/), format.
-
 <!-- markdown-link-check-enable-->
-
 This is because the calls are asynchronous and the responses are processed one object at a time.
 
 :::warning

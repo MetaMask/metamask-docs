@@ -1,9 +1,8 @@
 ---
 description: debug_traceBlockByHash API method
 ---
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # debug_traceBlockByHash
 
@@ -13,11 +12,11 @@ Returns tracing results by executing all transactions in the block specified by 
 
 - `blockHash`: (string) _[required]_ hash of the block to trace.
 - Optional tracing options object with the following fields:
-  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-    [`prestateTracer`](index.md##prestatetracer).
-  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
-    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-      sub-calls. It eliminates the additional processing for each call frame.
+    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
+        [`prestateTracer`](index.md##prestatetracer).
+    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
+        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+            sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 
@@ -35,11 +34,10 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xec8cb29209d9170b31008738ec9e80acc22257249cfd0f4bce19590cd09834c8", {"tracer": "callTracer"}], "id": 1}'
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"method":"debug_traceBlockByHash","params":["0xec8cb29209d9170b31008738ec9e80acc22257249cfd0f4bce19590cd09834c8", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
 ```
-
   </TabItem>
 </Tabs>
 

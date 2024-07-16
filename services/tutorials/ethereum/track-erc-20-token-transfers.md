@@ -3,8 +3,8 @@ description: Track ERC-20 token transfers.
 sidebar_position: 8
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Track ERC-20 token transfers
 
@@ -66,36 +66,36 @@ Make sure to replace `<YOUR_API_KEY>` with your Infura API key.
 Define the ERC-20 ABI by adding the following to the script:
 
 ```json
-const abi = [
-  {
-    constant: true,
-    inputs: [],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        name: "",
-        type: "uint8",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-];
+  const abi = [
+    {
+      constant: true,
+      inputs: [],
+      name: "symbol",
+      outputs: [
+        {
+          name: "",
+          type: "string",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "decimals",
+      outputs: [
+        {
+          name: "",
+          type: "uint8",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
 ```
 
 ### 5. Subscribe to contract events
@@ -105,15 +105,15 @@ You can subscribe to the events that token contracts emit, allowing you to track
 Add the following filter to the script, which tells the `web3.eth.subscribe` function in web3.js which events to track:
 
 ```javascript
-let options = {
-  topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
-}
+  let options = {
+    topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
+  };
 ```
 
 Then, initiate the subscription by passing along the filter:
 
 ```javascript
-let subscription = await web3.eth.subscribe("logs", options)
+  let subscription = await web3.eth.subscribe("logs", options);
 ```
 
 :::info
@@ -125,12 +125,12 @@ In [step 3](#3-set-up-the-script), you wrap the whole script in an async functio
 You can also add the following lines to the script to see whether the subscription started successfully or if any errors occurred:
 
 ```javascript
-subscription.on("error", (err) => {
-  throw err
-})
-subscription.on("connected", (nr) =>
-  console.log("Subscription on ERC-20 started with ID %s", nr)
-)
+  subscription.on("error", (err) => {
+    throw err;
+  });
+  subscription.on("connected", (nr) =>
+    console.log("Subscription on ERC-20 started with ID %s", nr),
+  );
 ```
 
 ### 6. Read ERC-20 transfers
@@ -138,10 +138,10 @@ subscription.on("connected", (nr) =>
 You can set the listener for the `subscription` created in [step 5](track-erc-20-token-transfers.md#5-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
-subscription.on("data", (event) => {
-  if (event.topics.length == 3) {
-    // ...
-  }
+  subscription.on("data", (event) => {
+    if (event.topics.length == 3) {
+  	...
+    }
 });
 ```
 
@@ -154,31 +154,29 @@ To verify that the `Transfer` event you catch is an ERC-20 transfer, these lines
 Because you can't read the event topics on their own, you must decode them using the ERC-20 ABI. Edit the listener as follows:
 
 ```javascript
-subscription.on("data", (event) => {
-  if (event.topics.length == 3) {
-    let transaction = web3.eth.abi.decodeLog(
-      [
-        {
-          type: "address",
-          name: "from",
-          indexed: true,
-        },
-        {
-          type: "address",
-          name: "to",
-          indexed: true,
-        },
-        {
-          type: "uint256",
-          name: "value",
-          indexed: false,
-        },
-      ],
-      event.data,
-      [event.topics[0], event.topics[1], event.topics[2]],
-    );
-  }
-});
+  subscription.on("data", (event) => {
+    if (event.topics.length == 3) {
+      let transaction = web3.eth.abi.decodeLog(
+        [
+          {
+            type: "address",
+            name: "from",
+            indexed: true,
+          },
+          {
+            type: "address",
+            name: "to",
+            indexed: true,
+          },
+          {
+            type: "uint256",
+            name: "value",
+            indexed: false,
+          },
+        ],
+        event.data,
+        [event.topics[0], event.topics[1], event.topics[2]],
+      );
 ```
 
 You can now retrieve the sender address (`from`), receiving address (`to`), and the number of tokens transferred (`value`, though yet to be converted, see [step 7](track-erc-20-token-transfers.md#7-read-contract-data)) from the `transaction` object.
@@ -194,19 +192,21 @@ It is optional for ERC-20 contracts to implement these methods (see [EIP-20: ERC
 Outside the `subscription.on()` listener created in [step 6](track-erc-20-token-transfers.md#6-read-erc-20-transfers), define a new method that allows you to collect more information from the smart contract:
 
 ```javascript
-async function collectData(contract) {
-  try {
-    var decimals = await contract.methods.decimals().call()
-  } catch {
-    decimals = 18n
+  async function collectData(contract) {
+    try {
+      var decimals = await contract.methods.decimals().call();
+    }
+    catch {
+      decimals = 18n;
+    }
+    try {
+      var symbol = await contract.methods.symbol().call();
+    }
+    catch {
+      symbol = '???';
+    }
+    return { decimals, symbol };
   }
-  try {
-    var symbol = await contract.methods.symbol().call()
-  } catch {
-    symbol = "???"
-  }
-  return { decimals, symbol }
-}
 ```
 
 :::info
@@ -218,29 +218,11 @@ Since you’re already requesting the `decimals` value from the contract, you ca
 Inside the listener, call the `collectData` function every time a new ERC-20 transaction is found. You can also calculate the correct decimal value:
 
 ```javascript
-subscription.on("data", (event) => {
-  if (event.topics.length == 3) {
-    let transaction = web3.eth.abi.decodeLog(
-      [
-        {
-          type: "address",
-          name: "from",
-          indexed: true,
-        },
-        {
-          type: "address",
-          name: "to",
-          indexed: true,
-        },
-        {
-          type: "uint256",
-          name: "value",
-          indexed: false,
-        },
-      ],
-      event.data,
-      [event.topics[0], event.topics[1], event.topics[2]],
-    );
+  subscription.on("data", (event) => {
+    if (event.topics.length == 3) {
+      let transaction = web3.eth.abi.decodeLog(
+	    ...
+	    );
 
     const contract = new web3.eth.Contract(abi, event.address);
     collectData(contract).then((contractData) => {
@@ -249,17 +231,14 @@ subscription.on("data", (event) => {
       );
       if (!unit) {
         // Simplification for contracts that use "non-standard" units, e.g. REDDIT contract returns decimals==8
-        unit = "wei";
+        unit = "wei"
       }
       const value = web3.utils.fromWei(transaction.value, unit);
       console.log(
-        `Transfer of ${value + " ".repeat(Math.max(0, 30 - value.length))} ${
-          contractData.symbol + " ".repeat(Math.max(0, 10 - contractData.symbol.length))
-        } from ${transaction.from} to ${transaction.to}`
+        `Transfer of ${value+' '.repeat(Math.max(0,30-value.length))} ${
+          contractData.symbol+' '.repeat(Math.max(0,10-contractData.symbol.length))
+        } from ${transaction.from} to ${transaction.to}`,
       );
-    });
-  }
-});
 ```
 
 ### 8. Track a specific address
@@ -267,17 +246,17 @@ subscription.on("data", (event) => {
 You can track a specific sender address by reading the `from` value of the decoded `transaction` object. Add the following line to the listener created in [step 6](track-erc-20-token-transfers.md#6-read-erc-20-transfers), replacing `<SENDER_ADDRESS>` with the Ethereum address to track:
 
 ```javascript
-if (transaction.from == "<SENDER_ADDRESS>") {
-  console.log("Specified address sent an ERC-20 token!")
-}
+        if (transaction.from == "<SENDER_ADDRESS>") {
+          console.log("Specified address sent an ERC-20 token!");
+        }
 ```
 
 You can also track a specific recipient address receiving any tokens by tracking the `transaction.to` value:
 
 ```javascript
-if (transaction.to == "<RECIEVING_ADDRESS>") {
-  console.log("Specified address received an ERC-20 token!")
-}
+        if (transaction.to == "<RECIEVING_ADDRESS>") {
+          console.log("Specified address received an ERC-20 token!");
+        }
 ```
 
 ### 9. Track a specific token
@@ -285,20 +264,20 @@ if (transaction.to == "<RECIEVING_ADDRESS>") {
 You can track a specific address sending a specific ERC-20 token, by checking for both `transaction.from` (the token sender) and `event.address` (the ERC-20 smart contract). Add the following line to the listener created in [step 6](track-erc-20-token-transfers.md#6-read-erc-20-transfers), replacing `<SENDER_ADDRESS>` with the Ethereum address to track, and `<CONTRACT_ADDRESS>` with the smart contract address to track:
 
 ```javascript
-if (
-  transaction.from == "<SENDER_ADDRESS>" &&
-  event.address == "<CONTRACT_ADDRESS>"
-) {
-  console.log("Specified address transferred specified token!")
-}
+        if (
+          transaction.from == "<SENDER_ADDRESS>" &&
+          event.address == "<CONTRACT_ADDRESS>"
+        ) {
+          console.log("Specified address transferred specified token!");
+        }
 ```
 
 You can also track any transactions for a specific ERC-20 token, regardless of the sender or recipient:
 
 ```javascript
-if (event.address == "<CONTRACT_ADDRESS>") {
-  console.log("Specified ERC-20 transfer!")
-}
+        if (event.address == "<CONTRACT_ADDRESS>") {
+          console.log("Specified ERC-20 transfer!");
+        }
 ```
 
 ### 10. Run the script
@@ -311,7 +290,6 @@ Run the script using the following command:
 ```bash
 node trackERC20.js
 ```
-
   </TabItem>
   <TabItem value="Example output" label="Example output" >
 
@@ -326,17 +304,18 @@ Transfer of 9964.083347473883463154        RIO        from 0x5b7E3E37a1aa6369386
   </TabItem>
 </Tabs>
 
+
 ### Complete code overview
 
 ```javascript
-const { Web3 } = require("web3")
+const { Web3 } = require("web3");
 
-async function main() {
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>")
+async function main(){
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>");
 
   let options = {
     topics: [web3.utils.sha3("Transfer(address,address,uint256)")],
-  }
+  };
 
   const abi = [
     {
@@ -367,22 +346,24 @@ async function main() {
       stateMutability: "view",
       type: "function",
     },
-  ]
+  ];
 
-  let subscription = await web3.eth.subscribe("logs", options)
+  let subscription = await web3.eth.subscribe("logs", options);
 
   async function collectData(contract) {
     try {
-      var decimals = await contract.methods.decimals().call()
-    } catch {
-      decimals = 18n
+      var decimals = await contract.methods.decimals().call();
+    }
+    catch {
+      decimals = 18n;
     }
     try {
-      var symbol = await contract.methods.symbol().call()
-    } catch {
-      symbol = "???"
+      var symbol = await contract.methods.symbol().call();
     }
-    return { decimals, symbol }
+    catch {
+      symbol = '???';
+    }
+    return { decimals, symbol };
   }
 
   subscription.on("data", (event) => {
@@ -406,54 +387,53 @@ async function main() {
           },
         ],
         event.data,
-        [event.topics[0], event.topics[1], event.topics[2]]
-      )
+        [event.topics[0], event.topics[1], event.topics[2]],
+      );
 
-      const contract = new web3.eth.Contract(abi, event.address)
+      const contract = new web3.eth.Contract(abi, event.address);
       collectData(contract).then((contractData) => {
         var unit = Object.keys(web3.utils.ethUnitMap).find(
-          (key) =>
-            web3.utils.ethUnitMap[key] == BigInt(10) ** contractData.decimals
-        )
+          (key) => web3.utils.ethUnitMap[key] == (BigInt(10) ** contractData.decimals)
+        );
         if (!unit) {
           // Simplification for contracts that use "non-standard" units, e.g. REDDIT contract returns decimals==8
           unit = "wei"
         }
         // This is logging each transfer event found:
-        const value = web3.utils.fromWei(transaction.value, unit)
+        const value = web3.utils.fromWei(transaction.value, unit);
         console.log(
-          `Transfer of ${value + " ".repeat(Math.max(0, 30 - value.length))} ${
-            contractData.symbol +
-            " ".repeat(Math.max(0, 10 - contractData.symbol.length))
-          } from ${transaction.from} to ${transaction.to}`
-        )
+          `Transfer of ${value+' '.repeat(Math.max(0,30-value.length))} ${
+            contractData.symbol+' '.repeat(Math.max(0,10-contractData.symbol.length))
+          } from ${transaction.from} to ${transaction.to}`,
+        );
 
         // Below are examples of testing for transactions involving particular EOA or contract addresses
         if (transaction.from == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-          console.log("Specified address sent an ERC-20 token!")
+          console.log("Specified address sent an ERC-20 token!");
         }
         if (transaction.to == "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-          console.log("Specified address received an ERC-20 token!")
+          console.log("Specified address received an ERC-20 token!");
         }
         if (
           transaction.from == "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D" &&
           event.address == "0x6b175474e89094c44da98b954eedeac495271d0f"
         ) {
-          console.log("Specified address transferred specified token!")
+          console.log("Specified address transferred specified token!");
         } // event.address contains the contract address
         if (event.address == "0x6b175474e89094c44da98b954eedeac495271d0f") {
-          console.log("Specified ERC-20 transfer!")
+          console.log("Specified ERC-20 transfer!");
         }
-      })
+      });
     }
-  })
+  });
 
   subscription.on("error", (err) => {
-    throw err
-  })
+    throw err;
+  });
   subscription.on("connected", (nr) =>
-    console.log("Subscription on ERC-20 started with ID %s", nr)
-  )
+    console.log("Subscription on ERC-20 started with ID %s", nr),
+  );
+
 }
-main()
+main();
 ```

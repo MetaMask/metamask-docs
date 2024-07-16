@@ -31,9 +31,9 @@ the restricted method [`eth_accounts`](/wallet/reference/eth_accounts):
 :::info note
 To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
-internally.
+internally. 
 See [how to access a user's accounts](../connect/access-accounts) for more information.
-Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4).
+Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4). 
 :::
 
 ## Request permissions example
@@ -41,7 +41,7 @@ Granting permission for `eth_accounts` also grants access to [`eth_sendTransacti
 The following example uses `wallet_requestPermissions` to request permission from the user to call `eth_accounts`:
 
 ```javascript
-document.getElementById("requestPermissionsButton", requestPermissions)
+document.getElementById("requestPermissionsButton", requestPermissions);
 
 function requestPermissions() {
   provider // Or window.ethereum if you don't support EIP-6963.
@@ -52,19 +52,19 @@ function requestPermissions() {
     .then((permissions) => {
       const accountsPermission = permissions.find(
         (permission) => permission.parentCapability === "eth_accounts"
-      )
+      );
       if (accountsPermission) {
-        console.log("eth_accounts permission successfully requested!")
+        console.log("eth_accounts permission successfully requested!");
       }
     })
     .catch((error) => {
       if (error.code === 4001) {
         // EIP-1193 userRejectedRequest error
-        console.log("Permissions needed to continue.")
+        console.log("Permissions needed to continue.");
       } else {
-        console.error(error)
+        console.error(error);
       }
-    })
+    });
 }
 ```
 
@@ -81,5 +81,5 @@ await provider // Or window.ethereum if you don't support EIP-6963.
         eth_accounts: {},
       },
     ],
-  })
+  });
 ```

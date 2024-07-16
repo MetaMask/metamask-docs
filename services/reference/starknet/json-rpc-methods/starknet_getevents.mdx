@@ -2,28 +2,27 @@
 title: "starknet_getEvents"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns all event objects matching the conditions in the specified filter.
 
 ## Parameters
 
 `filter`: (object) [*Required*] The conditions used to filter the returned events, including:
-
-- `from_block`: [*Required*] Block parameter object containing one of the following:
-  - `block_hash`: (string) Block hash.
-  - `block_number`: (integer) Decimal block number.
-  - One of the string tags `latest` or `pending`.
-- `to_block`: [*Required*] Block parameter object containing one of the following:
-  - `block_hash`: (string) Block hash.
-  - `block_number`: (integer) Decimal block number.
-  - One of the string tags `latest` or `pending`.
-- `address`: (string) Sender contract address.
-- `keys`: (array) The values used to filter the events.
-- `continuation_token`: (string) The token returned from the previous query.
-  If no token is provided, the first page is returned.
-- `chunk_size`: (integer) [*Required*] Chunk size.
+  - `from_block`: [*Required*] Block parameter object containing one of the following:
+    - `block_hash`: (string) Block hash.
+    - `block_number`: (integer) Decimal block number.
+    - One of the string tags `latest` or `pending`.
+  - `to_block`: [*Required*] Block parameter object containing one of the following:
+    - `block_hash`: (string) Block hash.
+    - `block_number`: (integer) Decimal block number.
+    - One of the string tags `latest` or `pending`.
+  - `address`: (string) Sender contract address.
+  - `keys`: (array) The values used to filter the events.
+  - `continuation_token`: (string) The token returned from the previous query.
+    If no token is provided, the first page is returned.
+  - `chunk_size`: (integer) [*Required*] Chunk size.
 
 ## Returns
 

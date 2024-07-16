@@ -43,10 +43,10 @@ const contents = await snap.request({
     path: "./files/myfile.bin",
     encoding: "hex",
   },
-})
+});
 
 // "0x..."
-console.log(contents)
+console.log(contents);
 ```
 
 ## Example

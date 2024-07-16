@@ -28,14 +28,14 @@ An object with functions that can be used to interact with the Snap.
 #### Example
 
 ```javascript
-import { installSnap } from "@metamask/snaps-jest"
+import { installSnap } from "@metamask/snaps-jest";
 
 describe("MySnap", () => {
   it("should do something", async () => {
-    await installSnap(/* optional Snap ID */)
+    await installSnap(/* optional Snap ID */);
     // ...
-  })
-})
+  });
+});
 ```
 
 ### `request`
@@ -54,24 +54,24 @@ which can be checked using [Jest matchers](#jest-matchers).
 #### Example
 
 ```javascript
-import { installSnap } from "@metamask/snaps-jest"
+import { installSnap } from "@metamask/snaps-jest";
 
 describe("MySnap", () => {
   it("should respond to foo with bar", async () => {
-    const { request } = await installSnap(/* Optional snap ID */)
+    const { request } = await installSnap(/* Optional snap ID */);
     const response = await request({
       origin: "http://localhost:8080",
       method: "foo",
       params: [],
-    })
+    });
 
     /* Check the response using Jest matchers. Since the response is a standard JSON-RPC response,
      * you can use any standard Jest matchers to check it, including snapshot matchers. */
-    expect(response).toRespondWith("bar")
-    expect(response).not.toRespondWithError("baz")
-    expect(response).toMatchSnapshot()
-  })
-})
+    expect(response).toRespondWith("bar");
+    expect(response).not.toRespondWithError("baz");
+    expect(response).toMatchSnapshot();
+  });
+});
 ```
 
 ### `onTransaction`
@@ -105,12 +105,12 @@ An object with the user interface that was shown by the Snap, in the
 #### Example
 
 ```javascript
-import { installSnap } from "@metamask/snaps-jest"
-import { panel, text } from "@metamask/snaps-sdk"
+import { installSnap } from "@metamask/snaps-jest";
+import { panel, text } from "@metamask/snaps-sdk";
 
 describe("MySnap", () => {
   it("should return insights", async () => {
-    const { onTransaction } = await installSnap(/* Optional Snap ID */)
+    const { onTransaction } = await installSnap(/* Optional Snap ID */);
     const response = await onTransaction({
       value: "0x0",
       data: "0x",
@@ -118,11 +118,11 @@ describe("MySnap", () => {
       maxFeePerGas: "0x5208",
       maxPriorityFeePerGas: "0x5208",
       nonce: "0x0",
-    })
-
-    expect(response).toRender(panel([text("Hello, world!")]))
-  })
-})
+    });
+  
+    expect(response).toRender(panel([text("Hello, world!")]));
+  });
+});
 ```
 
 ### `onCronjob`
@@ -144,21 +144,21 @@ which can be checked using [Jest matchers](#jest-matchers).
 #### Example
 
 ```javascript
-import { installSnap } from "@metamask/snaps-jest"
+import { installSnap } from "@metamask/snaps-jest";
 
 describe("MySnap", () => {
   it("should end foo cronjobs with response bar", async () => {
-    const { onCronjob } = await installSnap(/* Optional snap ID */)
+    const { onCronjob } = await installSnap(/* Optional snap ID */);
     const response = await onCronjob({
       method: "foo",
       params: [],
-    })
+    });
 
     // Check the response using Jest matchers.
-    expect(response).toRespondWith("bar")
-    expect(response).not.toRespondWithError("baz")
-  })
-})
+    expect(response).toRespondWith("bar");
+    expect(response).not.toRespondWithError("baz");
+  });
+});
 ```
 
 ### `onHomePage`
@@ -169,17 +169,17 @@ takes no arguments, and returns a promise that resolves to the response from the
 entry point.
 
 ```js
-import { installSnap } from "@metamask/snaps-jest"
-import { panel, text } from "@metamask/snaps-sdk"
+import { installSnap } from "@metamask/snaps-jest";
+import { panel, text } from "@metamask/snaps-sdk";
 
 describe("MySnap", () => {
   it("should render the home page", async () => {
-    const { onHomePage } = await installSnap(/* Optional snap ID */)
-    const response = await onHomePage()
+    const { onHomePage } = await installSnap(/* Optional snap ID */);
+    const response = await onHomePage();
 
-    expect(response).toRender(panel([text("Hello, world!")]))
-  })
-})
+    expect(response).toRender(panel([text("Hello, world!")]));
+  });
+});
 ```
 
 ### `getInterface`
@@ -196,33 +196,33 @@ be used to interact with the user interface.
 #### Example
 
 ```javascript
-import { installSnap } from "@metamask/snaps-jest"
-import { text } from "@metamask/snaps-sdk"
-import { assert } from "@metamask/utils"
+import { installSnap } from "@metamask/snaps-jest";
+import { text } from "@metamask/snaps-sdk";
+import { assert } from "@metamask/utils";
 
 describe("MySnap", () => {
   it("should render an alert with hello world", async () => {
-    const { request } = await installSnap(/* Optional Snap ID */)
+    const { request } = await installSnap(/* Optional Snap ID */);
 
     // Note: You cannot resolve the promise yet!
     const response = request({
       method: "foo",
-    })
+    });
 
-    const ui = await response.getInterface()
+    const ui = await response.getInterface();
 
     // This is useful if you're using TypeScript, since it infers the type of the user interface.
-    assert(ui.type === "alert")
-    expect(ui).toRender(text("Hello, world!"))
+    assert(ui.type === "alert");
+    expect(ui).toRender(text("Hello, world!"));
 
     // Select the OK button.
-    await ui.ok()
+    await ui.ok();
 
     // Now you can resolve the promise.
-    const result = await response
-    expect(result).toRespondWith("bar")
-  })
-})
+    const result = await response;
+    expect(result).toRespondWith("bar");
+  });
+});
 ```
 
 ## Jest matchers
@@ -274,5 +274,5 @@ module.exports = {
       root: "/path/to/snap/files",
     },
   },
-}
+};
 ```
