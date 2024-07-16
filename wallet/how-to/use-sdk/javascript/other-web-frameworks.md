@@ -42,14 +42,14 @@ import { MetaMaskSDK } from "@metamask/sdk"
 Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 
 ```javascript title="index.js"
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example JavaScript Dapp",
     url: window.location.href,
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options
-);
+});
 
 // You can also access via window.ethereum
 const ethereum = MMSDK.getProvider();
@@ -83,14 +83,14 @@ You can copy the full JavaScript example to get started:
 ```javascript title="index.js"
 import { MetaMaskSDK } from "@metamask/sdk";
 
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example JavaScript Dapp",
     url: window.location.href,
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options
-);
+});
 
 // You can also access via window.ethereum
 const ethereum = MMSDK.getProvider();
