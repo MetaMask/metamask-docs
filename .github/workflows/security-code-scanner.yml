@@ -1,10 +1,12 @@
-name: "MetaMask Security Code Scanner"
+name: 'MetaMask Security Code Scanner'
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - 'main'
   pull_request:
-    branches: ["main"]
+    branches:
+      - 'main'
 
 jobs:
   run-security-scan:
@@ -14,30 +16,11 @@ jobs:
       contents: read
       security-events: write
     steps:
+      - uses: actions/checkout@v4
       - name: MetaMask Security Code Scanner
-        uses: MetaMask/Security-Code-Scanner@main
+        uses: ConsenSys/docs-gha/mm-security-scanner@main
         with:
           repo: ${{ github.repository }}
-          paths_ignored: |
-            .storybook/
-            '**/__snapshots__/'
-            '**/*.snap'
-            '**/*.stories.js'
-            '**/*.stories.tsx'
-            '**/*.test.browser.ts*'
-            '**/*.test.js*'
-            '**/*.test.ts*'
-            '**/fixtures/'
-            '**/jest.config.js'
-            '**/jest.environment.js'
-            '**/mocks/'
-            '**/test*/'
-            docs/
-            e2e/
-            merged-packages/
-            node_modules
-            storybook/
-            test*/
-          rules_excluded: example
-          project_metrics_token: ${{ secrets.SECURITY_SCAN_METRICS_TOKEN }}
-          slack_webhook: ${{ secrets.APPSEC_BOT_SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SECURITY_SCAN_METRICS_TOKEN: ${{ secrets.SECURITY_SCAN_METRICS_TOKEN }}
+          APPSEC_BOT_SLACK_WEBHOOK: ${{ secrets.APPSEC_BOT_SLACK_WEBHOOK }}

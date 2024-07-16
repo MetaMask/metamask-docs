@@ -1,0 +1,29 @@
+---
+name: Build
+
+on:
+  workflow_call:
+  secrets:
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        uses: ConsenSys/docs-gha/build@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

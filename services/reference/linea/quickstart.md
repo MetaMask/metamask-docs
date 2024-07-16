@@ -166,10 +166,10 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    url = "https://linea-mainnet.infura.io/v3/YOUR-API-KEY"
 
    payload = {
-       "jsonrpc": "2.0",
-       "method": "eth_blockNumber",
-       "params": [],
-       "id": 1
+     "jsonrpc": "2.0",
+     "method": "eth_blockNumber",
+     "params": [],
+     "id": 1
    }
 
    headers = {"content-type": "application/json"}
