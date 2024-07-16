@@ -22,7 +22,6 @@ export const BaseInputTemplate = ({
   formContext,
   isArray,
 }: ExtendedInputProps) => {
-  console.log("value", value);
   const isNumber = schema.type === "number" || schema.type === "integer";
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
