@@ -33,17 +33,16 @@ Depending on the specified tracer type, returns a [`callTracer`](../debug/index.
 
 ```bash
 curl https://linea-goerli.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"method":"debug_traceBlockByHash","params":["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="WSS" label="WSS">
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> \
--x '{"method":"debug_traceBlockByHash","params":["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash","params": ["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

@@ -50,8 +50,8 @@ Example error response:
   "id": 1337
   "jsonrpc": "2.0",
   "error": {
-      "code": -32003,
-      "message": "Transaction rejected"
+    "code": -32003,
+    "message": "Transaction rejected"
   }
 }
 ```

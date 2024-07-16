@@ -96,7 +96,7 @@ endpoint = "https://ipfs.infura.io:5001"
 
 ### CREATE AN ARRAY OF TEST FILES ###
 files = {
-    "file": "myNFT.png"
+  "file": "myNFT.png"
 }
 
 ### ADD FILE TO IPFS AND SAVE THE HASH ###
@@ -107,7 +107,7 @@ print(hash
 
 ### READ FILE WITH HASH ###
 params = {
-    "arg": hash
+  "arg": hash
 }
 response2 = requests.post(endpoint + "/api/v0/cat", params=params, auth=(projectId, projectSecret))
 print(response2)
@@ -179,49 +179,49 @@ CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"os"
-	"strings"
+  "fmt"
+  "net/http"
+  "os"
+  "strings"
 
-	ipfsApi "github.com/ipfs/go-ipfs-api" // v0.2.0
+  ipfsApi "github.com/ipfs/go-ipfs-api" // v0.2.0
 )
 
 func main() {
-	projectId := "<API_KEY>"
-	projectSecret := "<API_KEY_SECRET>"
+  projectId := "<API_KEY>"
+  projectSecret := "<API_KEY_SECRET>"
 
-	shell := ipfsApi.NewShellWithClient("https://ipfs.infura.io:5001", NewClient(projectId, projectSecret))
-	cid, err := shell.Add(strings.NewReader("Infura IPFS - Getting started demo."))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+  shell := ipfsApi.NewShellWithClient("https://ipfs.infura.io:5001", NewClient(projectId, projectSecret))
+  cid, err := shell.Add(strings.NewReader("Infura IPFS - Getting started demo."))
+  if err != nil {
+    fmt.Println(err)
+    os.Exit(1)
+  }
 
-	fmt.Printf("Data successfully stored in IPFS: %v\n", cid)
+  fmt.Printf("Data successfully stored in IPFS: %v\n", cid)
 }
 
-// NewClient creates an http.Client that automatically perform basic auth on each request.
+// NewClient creates an http.Client that automatically performs basic auth on each request.
 func NewClient(projectId, projectSecret string) *http.Client {
-	return &http.Client{
-		Transport: authTransport{
-			RoundTripper:  http.DefaultTransport,
-			ProjectId:     projectId,
-			ProjectSecret: projectSecret,
-		},
-	}
+  return &http.Client{
+    Transport: authTransport{
+      RoundTripper:  http.DefaultTransport,
+      ProjectId:     projectId,
+      ProjectSecret: projectSecret,
+    },
+  }
 }
 
 // authTransport decorates each request with a basic auth header.
 type authTransport struct {
-	http.RoundTripper
-	ProjectId     string
-	ProjectSecret string
+  http.RoundTripper
+  ProjectId     string
+  ProjectSecret string
 }
 
 func (t authTransport) RoundTrip(r *http.Request) (*http.Response, error) {
-	r.SetBasicAuth(t.ProjectId, t.ProjectSecret)
-	return t.RoundTripper.RoundTrip(r)
+  r.SetBasicAuth(t.ProjectId, t.ProjectSecret)
+  return t.RoundTripper.RoundTrip(r)
 }
 ```
 
@@ -244,42 +244,42 @@ CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
 package main
 
 import (
-	"context"
-	"encoding/base64"
-	"fmt"
-	"net/http"
-	"os"
-	"strings"
+  "context"
+  "encoding/base64"
+  "fmt"
+  "net/http"
+  "os"
+  "strings"
 
-	ipfsFiles "github.com/ipfs/go-ipfs-files" // v0.0.8
-	ipfsApi "github.com/ipfs/go-ipfs-http-client" // v0.1.0
+  ipfsFiles "github.com/ipfs/go-ipfs-files" // v0.0.8
+  ipfsApi "github.com/ipfs/go-ipfs-http-client" // v0.1.0
 )
 
 func main() {
-	projectId := "<API_KEY>"
-	projectSecret := "<API_KEY_SECRET>"
+  projectId := "<API_KEY>"
+  projectSecret := "<API_KEY_SECRET>"
 
-	httpClient := &http.Client{}
-	httpApi, err := ipfsApi.NewURLApiWithClient("https://ipfs.infura.io:5001", httpClient)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	httpApi.Headers.Add("Authorization", "Basic " + basicAuth(projectId, projectSecret))
+  httpClient := &http.Client{}
+  httpApi, err := ipfsApi.NewURLApiWithClient("https://ipfs.infura.io:5001", httpClient)
+  if err != nil {
+    fmt.Println(err)
+    os.Exit(1)
+  }
+  httpApi.Headers.Add("Authorization", "Basic " + basicAuth(projectId, projectSecret))
 
-	content := strings.NewReader("Infura IPFS - Getting started demo.")
-	p, err := httpApi.Unixfs().Add(context.Background(), ipfsFiles.NewReaderFile(content))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+  content := strings.NewReader("Infura IPFS - Getting started demo.")
+  p, err := httpApi.Unixfs().Add(context.Background(), ipfsFiles.NewReaderFile(content))
+  if err != nil {
+    fmt.Println(err)
+    os.Exit(1)
+  }
 
-	fmt.Printf("Data successfully stored in IPFS: %v\n", p.Cid().String())
+  fmt.Printf("Data successfully stored in IPFS: %v\n", p.Cid().String())
 }
 
 func basicAuth(projectId, projectSecret string) string {
-	auth := projectId + ":" + projectSecret
-	return base64.StdEncoding.EncodeToString([]byte(auth))
+  auth := projectId + ":" + projectSecret
+  return base64.StdEncoding.EncodeToString([]byte(auth))
 }
 ```
 

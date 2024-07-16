@@ -60,16 +60,16 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/YOUR-API-KEY \
-        -X POST \
-        -H "Content-Type: application/json" \
-        -d '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "linea_estimateGas", "params": [{"from": "0x42c27251C710864Cf76f1b9918Ace3E585e6E21b", "value": "0x1", "gasPrice": "0x100000000", "gas": "0x21000"}], "id": 53}'
 ```
 
   </TabItem>
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://linea-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
+wscat -c wss://linea-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "linea_estimateGas", "params": [{"from": "0x42c27251C710864Cf76f1b9918Ace3E585e6E21b", "value": "0x1", "gasPrice": "0x100000000", "gas": "0x21000"}], "id": 53}'
 ```
 
   </TabItem>

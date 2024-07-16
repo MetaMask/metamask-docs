@@ -172,7 +172,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
        "id": 1
    }
 
-   headers = {"content-typ": "application/json"}
+   headers = {"content-type": "application/json"}
 
    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 

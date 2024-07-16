@@ -14,8 +14,8 @@ Show IPFS version information.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/version?number=<value>&commit=<value>&repo=<value>&all=<value>" \
-    -X POST \
-    -u "<API_KEY>:<API_KEY_SECRET>"
+  -X POST \
+  -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,8 +23,8 @@ curl "https://ipfs.infura.io:5001/api/v0/version?number=<value>&commit=<value>&r
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/version" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>
@@ -32,10 +32,10 @@ curl "https://ipfs.infura.io:5001/api/v0/version" \
 
 #### REQUEST PARAMS
 
-- `number` _\[Optional]_ - Only show the version number.
-- `commit` _\[Optional]_ - Show the commit hash.
-- `repo` _\[Optional] -_ Show repo version.
-- `all` _\[Optional]_ - Show all version information.
+- `number` _[Optional]_ - Only show the version number.
+- `commit` _[Optional]_ - Show the commit hash.
+- `repo` _[Optional]_ - Show repo version.
+- `all` _[Optional]_ - Show all version information.
 
 ### RESPONSE
 

@@ -34,18 +34,16 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
-
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "debug_traceBlockByNumber", "params": ["0x4d0c", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="WSS" label="WSS" >
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> \
--x '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceBlockByNumber", "params": ["0x4d0c", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
@@ -55,32 +53,32 @@ wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> \
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": [
-        {
-            "result": {
-                "from": "0xa5ba45f484bc67fe293cf01f7d92d5ba3514dd42",
-                "gas": "0x5208",
-                "gasUsed": "0x5208",
-                "input": "0x",
-                "to": "0x45a318273749d6eb00f5f6ca3bc7cd3de26d642a",
-                "type": "CALL",
-                "value": "0x2ca186f5fda8004"
-            }
-        },
-        {
-            "result": {
-                "from": "0x25f2650cc9e8ad863bf5da6a7598e24271574e29",
-                "gas": "0xfe0e",
-                "gasUsed": "0xafee",
-                "input": "0xd0e30db0",
-                "to": "0xe5d7c2a44ffddf6b295a15c148167daaaf5cf34f",
-                "type": "CALL",
-                "value": "0x2386f26fc10000"
-            }
-        },
-        ...
-    ]
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "result": {
+        "from": "0xa5ba45f484bc67fe293cf01f7d92d5ba3514dd42",
+        "gas": "0x5208",
+        "gasUsed": "0x5208",
+        "input": "0x",
+        "to": "0x45a318273749d6eb00f5f6ca3bc7cd3de26d642a",
+        "type": "CALL",
+        "value": "0x2ca186f5fda8004"
+      }
+    },
+    {
+      "result": {
+        "from": "0x25f2650cc9e8ad863bf5da6a7598e24271574e29",
+        "gas": "0xfe0e",
+        "gasUsed": "0xafee",
+        "input": "0xd0e30db0",
+        "to": "0xe5d7c2a44ffddf6b295a15c148167daaaf5cf34f",
+        "type": "CALL",
+        "value": "0x2386f26fc10000"
+      }
+    }
+    ...
+  ]
 }
 ```

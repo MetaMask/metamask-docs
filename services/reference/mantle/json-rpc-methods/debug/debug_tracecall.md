@@ -53,7 +53,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"method":"debug_traceCall","params":[{"to":"0x6b175474e89094c44da98b954eedeac495271d0f","data":"0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+  -d '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

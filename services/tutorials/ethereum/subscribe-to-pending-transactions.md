@@ -57,8 +57,8 @@ Connect to Infura’s WebSockets endpoint to subscribe to new pending transactio
 Define the following endpoints in your file:
 
 ```python
-infura_ws_url = 'wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>'
-infura_http_url = 'https://goerli.infura.io/v3/<YOUR_API_KEY>'
+infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
+infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 ```
 
@@ -77,7 +77,7 @@ async def get_event():
   async with connect(infura_ws_url) as ws:
     await ws.send('{"jsonrpc": "2.0", "id": 1, "method": "eth_subscribe", "params": ["newPendingTransactions"]}')
     subscription_response = await ws.recv()
-    print(subscription_response)  # {"jsonrpc":"2.0","id":1,"result":"0xd67da23f62a01f58042bc73d3f1c8936"}
+    print(subscription_response)  # {"jsonrpc": "2.0", "id": 1, "result": "0xd67da23f62a01f58042bc73d3f1c8936"}
 ```
 
 In the method we use `ws.send()` to start a new subscription for new pending transactions, after which we get a confirmation back from the node with our subscription ID.
@@ -100,9 +100,9 @@ Finally, we'll add an `if __name__ == "__main__"` statement, so that our program
 
 ```python
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    while True:
-        loop.run_until_complete(get_event())
+  loop = asyncio.get_event_loop()
+  while True:
+    loop.run_until_complete(get_event())
 ```
 
 The complete code sample should now look as follows:
@@ -164,7 +164,7 @@ You should now see the terminal fill up with Ethereum transfers:
 You can update the program to monitor incoming transactions to a specific Ethereum address. Let’s define an account we’d like to monitor first, outside of the `get_event()` function:
 
 ```python
-account = '<YOUR_PUBLIC_ADDRESS>'
+account = "<YOUR_PUBLIC_ADDRESS>"
 ```
 
 Then, inside the function and `try` block, append the following to check whether the recipient is the address we specified, after which it will print the transaction hash, sender address, and the value sent in Ether.

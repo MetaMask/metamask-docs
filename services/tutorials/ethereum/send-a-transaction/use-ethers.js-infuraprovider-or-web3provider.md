@@ -207,7 +207,7 @@ Next, create the `sendTransaction()` function that sends the transaction. Place 
           value: ethers.utils.parseEther(amount)
         });
         console.log("tx", tx);
-        setTxSent('Transaction initiated! Tx hash: ' + tx.hash);
+        setTxSent("Transaction initiated! Tx hash: " + tx.hash);
       }
     }
     else // InfuraProvider
@@ -217,9 +217,9 @@ Next, create the `sendTransaction()` function that sends the transaction. Place 
         value: ethers.utils.parseEther(amount)
       });
       console.log("tx", tx);
-      setTxSentInfura('Transaction initiated! Tx hash: ' + tx.hash);
+      setTxSentInfura("Transaction initiated! Tx hash: " + tx.hash);
     }
-  }Ja
+  }
 ```
 
 ### 5. Run the app

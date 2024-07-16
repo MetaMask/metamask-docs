@@ -25,9 +25,9 @@ Run the following command in your terminal, replacing `YOUR-API-KEY` with your a
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
 ```
 
 ### Node (JavaScript)
@@ -166,10 +166,10 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    url = "https://polygon-mainnet.infura.io/v3/YOUR-API-KEY"
 
    payload = {
-       "jsonrpc": "2.0",
-       "method": "eth_blockNumber",
-       "params": [],
-       "id": 1
+     "jsonrpc": "2.0",
+     "method": "eth_blockNumber",
+     "params": [],
+     "id": 1
    }
 
    headers = {"content-type": "application/json"}

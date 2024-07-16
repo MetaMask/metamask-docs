@@ -32,7 +32,7 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/resolve?arg=QmZtmD2qt6fJot32nabSP3C
 
 #### REQUEST PARAMS
 
-- `arg` _\[Required]_ - The IPFS object hash; the path to resolve.
+- `arg` _[Required]_ - The IPFS object hash; the path to resolve.
 
 ### RESPONSE
 
@@ -42,10 +42,10 @@ On success, the call to this endpoint will return with 200 and the following bod
 
 ```js
 {
-  Cid: {
-      /: "QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy"
+  "Cid": {
+    "/": "QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy"
   },
-  RemPath: ""
+  "RemPath": ""
 }
 ```
 

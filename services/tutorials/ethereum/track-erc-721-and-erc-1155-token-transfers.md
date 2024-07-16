@@ -176,9 +176,9 @@ console.log(
 You can set the listener for the `subscription1155` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4.-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
-subscription1155.on('data', event => {
-    ...
-});
+subscription1155.on("data", event => {
+  // ...
+})
 ```
 
 As with ERC-721 in [Step 5](track-erc-721-and-erc-1155-token-transfers.md#5.-read-erc-721-transfers), add the ERC-1155 ABI to the listener:
@@ -259,7 +259,7 @@ You can track a specific address sending a specific token, by checking for both 
   <TabItem value="ERC-721" label="ERC-721" default>
 
 ```javascript
-if (event.address == '<CONTRACT_ADDRESS>' && transaction.tokenId == <TOKEN_ID>) { ('console.log('Specified ERC-721 NFT was transferred!') };
+if (event.address == "<CONTRACT_ADDRESS>" && transaction.tokenId == <TOKEN_ID>) { console.log("Specified ERC-721 NFT was transferred!"); }
 ```
 
   </TabItem>

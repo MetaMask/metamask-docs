@@ -35,17 +35,16 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"method":"debug_traceTransaction","params":["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="WSS" label="WSS" >
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> \
--x '{"method":"debug_traceTransaction","params":["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
