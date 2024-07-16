@@ -165,8 +165,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     closeComplexTypeView();
   };
 
-  console.log("connected_acc", connected, account);
-
   return (
     <ParserOpenRPCContext.Provider
       value={{
