@@ -22,6 +22,7 @@ export const BaseInputTemplate = ({
   formContext,
   isArray,
 }: ExtendedInputProps) => {
+  console.log("value", value);
   const isNumber = schema.type === "number" || schema.type === "integer";
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
@@ -44,12 +45,10 @@ export const BaseInputTemplate = ({
   };
 
   useEffect(() => {
-    setInputValue(value);
+    if (!isArray) {
+      setInputValue(value);
+    }
   }, [value, isFormReseted]);
-
-  useEffect(() => {
-    setInputValue(value);
-  }, []);
 
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
