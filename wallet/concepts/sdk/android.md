@@ -13,10 +13,11 @@ The [architecture](#architecture) and [connection flow](#connection-flow) of
 the Android SDK differs from the other SDK platforms.
 
 :::tip Get started
+
 - Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository for advanced use cases.
-:::
+  :::
 
 ## Architecture
 
@@ -52,8 +53,7 @@ The following diagram outlines the communication flow between the Android client
 The flow is as follows:
 
 1. The dapp, with the SDK installed, initiates communication when a user connects to MetaMask.
-    The dapp deeplinks to MetaMask, and MetaMask sets up the Android Native Module to receive client requests.
+   The dapp deeplinks to MetaMask, and MetaMask sets up the Android Native Module to receive client requests.
 2. The dapp generates an ECIES public/private key pair.
-    The dapp and MetaMask exchange public keys over IPC.
+   The dapp and MetaMask exchange public keys over IPC.
 3. The dapp and MetaMask perform end-to-end encrypted JSON-RPC calls.
-    

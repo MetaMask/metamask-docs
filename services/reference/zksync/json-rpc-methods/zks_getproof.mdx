@@ -2,8 +2,8 @@
 title: "zks_getProof"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns Merkle proofs for one or more storage values for the specified account along with a Merkle proof
 of their authenticity. This allows you to verify that the values have not been tampered with.
@@ -14,16 +14,15 @@ of their authenticity. This allows you to verify that the values have not been t
 - `keys`: [_Required_] Vector of storage keys in the account.
 - `l1BatchNumber`: [_Required_] Number of the L1 batch specifying the point in time at which the requested values are returned.
 
-
 ## Response
 
 - `address`: The account address.
 - `storageProof`: Proof for each of the requested keys in the order at which they were requested:
-    - `key`	- The requested storage key.
-    - `value` - The storage value.
-    - `index` -	Index of the tree entry.
-    - `proof`	-	Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
-        Hashes are listed using the root-to-leaf ordering. The root hash is excluded; it is published on L1 as a part of L1 batch commit data. 
+  - `key` - The requested storage key.
+  - `value` - The storage value.
+  - `index` - Index of the tree entry.
+  - `proof` - Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
+    Hashes are listed using the root-to-leaf ordering. The root hash is excluded; it is published on L1 as a part of L1 batch commit data.
 
 ## Example
 
@@ -34,12 +33,13 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getProof", "params": ["0x0000000000000000000000000000000000008003", ["0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12"], 354895]}'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getProof", "params": ["0x0000000000000000000000000000000000008003", ["0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12"], 354895]}'
+```
+
   </TabItem>
 </Tabs>
 
@@ -70,6 +70,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
     "id": 1
   }
 
-  ```
-  </TabItem>
+```
+</TabItem>
 </Tabs>
+```

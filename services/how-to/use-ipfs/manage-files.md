@@ -17,14 +17,14 @@ Infura doesn't currently support remote pinning services on IPFS Desktop.
 
 ```bash
 curl -X POST -F file=@myfile \
--u "<API_KEY>:<API_KEY_SECRET>" \
-"https://ipfs.infura.io:5001/api/v0/add"
+  -u "<API_KEY>:<API_KEY_SECRET>" \
+  "https://ipfs.infura.io:5001/api/v0/add"
 
 > {
-      "Name":"ipfs_file_docs_getting_started_demo.txt",
-      "Hash":"QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
-      "Size":"44"
-  }
+  "Name": "ipfs_file_docs_getting_started_demo.txt",
+  "Hash": "QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
+  "Size": "44"
+}
 ```
 
 When you upload a file using the `/api/v0/add` endpoint, the file is automatically pinned, and it isn't necessary to `pin` again.
@@ -86,7 +86,7 @@ not removed during the [IPFS garbage collection process](https://docs.ipfs.io/co
 
 ```bash
 curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
-"https://ipfs.infura.io:5001/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
+  "https://ipfs.infura.io:5001/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
 A pinned file will appear in your project's dashboard explorer. You can [unpin](manage-files.md#unpin-a-file) it at any
@@ -102,14 +102,14 @@ Alternatively, use the IPFS API to unpin content.
 
 ```bash
 curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
-"https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
+  "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
 ### Read a file
 
 ```bash
 curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
-"https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
+  "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 
 > Infura IPFS - Getting started demo.
 ```

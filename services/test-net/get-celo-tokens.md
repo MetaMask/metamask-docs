@@ -1,5 +1,5 @@
 ---
-description: Get Celo test tokens 
+description: Get Celo test tokens
 ---
 
 # Get Celo tokens

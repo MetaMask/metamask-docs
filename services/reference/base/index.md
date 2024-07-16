@@ -23,7 +23,7 @@ See the [official Base documentation ](https://docs.base.org/)for more informati
 
 :::
 
-Select an option below to get started with the Base network. 
+Select an option below to get started with the Base network.
 
 <CardList
   items={[

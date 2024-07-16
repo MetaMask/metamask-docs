@@ -3,8 +3,8 @@ description: See the Snaps permissions reference.
 sidebar_position: 5
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Snaps permissions
 
@@ -85,17 +85,17 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-:::note 
-The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
+:::note
+The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
 See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
 :::
 
 ### `endowment:page-home`
 
 To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must request
-the `endowment:page-home` permission. 
+the `endowment:page-home` permission.
 This permission allows the Snap to present a dedicated UI by exposing the
-[`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
+[`onHomePage`](../reference/entry-points.md#onhomepage) entry point.
 
 Specify this permission in the manifest file as follows:
 
@@ -134,9 +134,9 @@ Specify this permission in the manifest file as follows:
 
 To implement a [lifecycle hook](../features/lifecycle-hooks.md) that runs an action when a user
 installs or updates a Snap, the Snap must request the `endowment:lifecycle-hooks` permission.
-This permission allows the Snap to expose the 
-[`onInstall`](../reference/entry-points.md#oninstall) and 
-[`onUpdate`](../reference/entry-points.md#onupdate) 
+This permission allows the Snap to expose the
+[`onInstall`](../reference/entry-points.md#oninstall) and
+[`onUpdate`](../reference/entry-points.md#onupdate)
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
 :::tip
@@ -221,7 +221,6 @@ The default for both properties is `false`.
 You can modify the RPC API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
-
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -235,29 +234,29 @@ Specify this permission in the manifest file as follows:
 
 #### Allowed origins
 
-Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs. 
-Calls from any other origins are rejected. 
+Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs.
+Calls from any other origins are rejected.
 
-Specify this caveat in the manifest file as follows: 
+Specify this caveat in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": { 
+  "endowment:rpc": {
     "allowedOrigins": [
-      "https://metamask.io", 
+      "https://metamask.io",
       "https://consensys.io",
       "npm:@metamask/example-snap"
-    ] 
+    ]
   }
 }
 ```
 
 :::note
-If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
+If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 :::
 
 If you want to grant a dapp or Snap an automatic connection to your Snap, skipping the need for
-users to confirm a connection, you can use [`initialConnections`](#initial-connections). 
+users to confirm a connection, you can use [`initialConnections`](#initial-connections).
 
 ### `endowment:transaction-insight`
 
@@ -373,7 +372,7 @@ Calling `eth_requestAccounts` requires the
 <TabItem value="JavaScript">
 
 ```js title="index.js"
-await ethereum.request({ "method": "eth_requestAccounts" });
+await ethereum.request({ method: "eth_requestAccounts" })
 ```
 
 </TabItem>
@@ -394,9 +393,7 @@ The following is an example `eth_accounts` permission:
   "caveats": [
     {
       "type": "restrictReturnedAccounts",
-      "value": [
-        "0xc403b37bf1e700cb214ea1be9de066824b420de6"
-      ]
+      "value": ["0xc403b37bf1e700cb214ea1be9de066824b420de6"]
     }
   ],
   "date": 1692616452846
@@ -407,7 +404,7 @@ The user can revoke this permission by going to the Snap's settings under **Snap
 
 ## Initial connections
 
-A Snap can authorize specific dapps or Snaps to automatically connect, 
+A Snap can authorize specific dapps or Snaps to automatically connect,
 skipping the need for users to manually confirm a connection when the dapp or Snap calls
 [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
 

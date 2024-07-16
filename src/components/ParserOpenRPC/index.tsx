@@ -20,13 +20,14 @@ interface ParserProps {
 }
 
 interface ParserOpenRPCContextProps {
-  setIsDrawerContentFixed?: (isFixed: boolean) => void
+  setIsDrawerContentFixed?: (isFixed: boolean) => void;
   setDrawerLabel?: (label: string) => void;
   isComplexTypeView: boolean;
   setIsComplexTypeView: (isComplexTypeView: boolean) => void;
 }
 
-export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
+export const ParserOpenRPCContext =
+  createContext<ParserOpenRPCContextProps | null>(null);
 
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
@@ -42,33 +43,49 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     trackClickForSegment({
       eventName: "Customize Request",
       clickType: "Customize Request",
-      userExperience: "B"
-    })
+      userExperience: "B",
+    });
   };
   const closeModal = () => setModalOpen(false);
 
-  const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
-  const currentNetwork = netData?.find(net => net.name === network);
+  const { netData } = usePluginData("plugin-json-rpc") as {
+    netData?: ResponseItem[];
+  };
+  const currentNetwork = netData?.find((net) => net.name === network);
 
   if (!currentNetwork && currentNetwork.error) return null;
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
-      return items?.map(item => {
-        if (item?.name || (item?.code && item?.message)) return item;
-        if (item?.$ref) {
-          const ref = item.$ref.replace(refPath, "");
-          return currentNetwork.data.components[componentType][ref];
-        }
-        return null;
-      }).filter(Boolean) || [];
+      return (
+        items
+          ?.map((item) => {
+            if (item?.name || (item?.code && item?.message)) return item;
+            if (item?.$ref) {
+              const ref = item.$ref.replace(refPath, "");
+              return currentNetwork.data.components[componentType][ref];
+            }
+            return null;
+          })
+          .filter(Boolean) || []
+      );
     };
 
-    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method);
+    const currentMethod = currentNetwork.data.methods?.find(
+      (met) => met.name === method
+    );
     if (!currentMethod) return null;
 
-    const errors = findReferencedItem(currentMethod.errors, "#/components/errors/", "errors");
-    const tags = findReferencedItem(currentMethod.tags, "#/components/tags/", "tags");
+    const errors = findReferencedItem(
+      currentMethod.errors,
+      "#/components/errors/",
+      "errors"
+    );
+    const tags = findReferencedItem(
+      currentMethod.tags,
+      "#/components/tags/",
+      "tags"
+    );
 
     return {
       description: currentMethod.summary || currentMethod.description || null,
@@ -104,15 +121,19 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onParamsChangeHandle = (data) => {
-    if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
+    if (
+      typeof data !== "object" ||
+      data === null ||
+      Object.keys(data).length === 0
+    ) {
       setParamsData([]);
     }
     setParamsData(Object.values(data));
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
-      userExperience: "B"
-    })
-  }
+      userExperience: "B",
+    });
+  };
 
   const onSubmitRequestHandle = async () => {
     if (!provider || !connected) return
@@ -126,8 +147,8 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         eventName: "Request Sent",
         clickType: "Request Sent",
         userExperience: "B",
-        ...(response?.code && { responseStatus: response.code })
-      })
+        ...(response?.code && { responseStatus: response.code }),
+      });
     } catch (e) {
       setReqResult(e);
     }
@@ -137,18 +158,23 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     setIsComplexTypeView(false);
     setIsDrawerContentFixed(false);
     setDrawerLabel(null);
-  }
+  };
 
   const onModalClose = () => {
     closeModal();
     closeComplexTypeView();
-  }
+  };
 
   console.log("connected_acc", connected, account);
 
   return (
     <ParserOpenRPCContext.Provider
-      value={{ setIsDrawerContentFixed, setDrawerLabel, isComplexTypeView, setIsComplexTypeView }}
+      value={{
+        setIsDrawerContentFixed,
+        setDrawerLabel,
+        isComplexTypeView,
+        setIsComplexTypeView,
+      }}
     >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
@@ -165,18 +191,29 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           </div>
           <ModalDrawer
             title={
-              isComplexTypeView && colorMode ?
+              isComplexTypeView && colorMode ? (
                 <span className={modalDrawerStyles.modalTitleContainer}>
                   <button
-                    className={clsx(modalDrawerStyles.modalHeaderIcon, modalDrawerStyles.modalHeaderIconBack)}
+                    className={clsx(
+                      modalDrawerStyles.modalHeaderIcon,
+                      modalDrawerStyles.modalHeaderIconBack
+                    )}
                     onClick={closeComplexTypeView}
                   >
-                    <img src={colorMode === "light" ? '/img/icons/chevron-left-dark-icon.svg' : '/img/icons/chevron-left-light-icon.svg'} />
+                    <img
+                      src={
+                        colorMode === "light"
+                          ? "/img/icons/chevron-left-dark-icon.svg"
+                          : "/img/icons/chevron-left-light-icon.svg"
+                      }
+                    />
                   </button>
                   Editing Param
                 </span>
-                 :
-                "Customize request"}
+              ) : (
+                "Customize request"
+              )
+            }
             isOpen={isModalOpen}
             onClose={onModalClose}
             isContentFixed={isDrawerContentFixed}

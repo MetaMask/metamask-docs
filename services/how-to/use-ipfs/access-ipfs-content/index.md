@@ -15,7 +15,7 @@ A solution is to use a custom-built private gateway or an Infura project-specifi
 :::info
 
 - [Content identifiers](https://docs.ipfs.io/concepts/content-addressing/) must use CIDv1 (not CIDv0) because some browsers
-    and user agents force lowercase for the authority part of URLs.
-- The Infura IPFS public gateway was deprecated on August 10, 2022.    
+  and user agents force lowercase for the authority part of URLs.
+- The Infura IPFS public gateway was deprecated on August 10, 2022.
 
 :::

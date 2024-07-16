@@ -33,8 +33,8 @@ MetaMask calls this method when a user selects your Snap name in the Snaps menu.
 The following example displays custom UI that welcomes the user to the Snap's home page:
 
 ```typescript title="index.ts"
-import type { OnHomePageHandler } from "@metamask/snaps-sdk";
-import { panel, text, heading } from "@metamask/snaps-sdk";
+import type { OnHomePageHandler } from "@metamask/snaps-sdk"
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 export const onHomePage: OnHomePageHandler = async () => {
   return {
@@ -42,8 +42,8 @@ export const onHomePage: OnHomePageHandler = async () => {
       heading("Hello world!"),
       text("Welcome to my Snap home page!"),
     ]),
-  };
-};
+  }
+}
 ```
 
 <p align="center">

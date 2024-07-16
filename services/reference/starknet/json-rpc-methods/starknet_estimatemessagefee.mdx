@@ -2,8 +2,8 @@
 title: "starknet_estimateMessageFee"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns an estimate of the L2 fee required for the network to process the specified L1 message, at
 the specified block.
@@ -13,7 +13,7 @@ the specified block.
 - `message`: [*Required*] The message to estimate, which includes the following fields:
   - `from_address`: (string) [*Required*] The address of the L1 contract sending the message.
   - `to_address`: (string) [*Required*] The L2 address the message is sent to.
-  - `entry_point_selector`:  (string) [*Required*] The entry point selector.
+  - `entry_point_selector`: (string) [*Required*] The entry point selector.
   - `payload`: (array) [*Required*] The payload of the message.
 - `block_id`: [*Required*] The block parameter object containing one of the following:
   - `block_hash`: (string) Block hash.
@@ -27,7 +27,6 @@ A fee estimate object containing:
 - `gas_consumed`: The Ethereum gas consumption of the transaction.
 - `gas_price`: The gas price (in gwei) that was used in the cost estimation.
 - `overall_fee`: The estimated fee for the transaction (in gwei), product of `gas_consumed` and `gas_price`.
-
 
 ## Example
 

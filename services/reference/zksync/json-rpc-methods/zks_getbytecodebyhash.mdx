@@ -2,15 +2,14 @@
 title: "zks_getBytecodeByHash"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns the bytecode of a transaction for the provided hash.
 
 ## Parameters
 
 - `hash`: (string) [_Required_] The hash of the transaction.
-
 
 ## Response
 
@@ -25,12 +24,13 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBytecodeByHash", "params": ["0x0100067d861e2f5717a12c3e869cfb657793b86bbb0caa05cc1421f16c5217bc"]}'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBytecodeByHash", "params": ["0x0100067d861e2f5717a12c3e869cfb657793b86bbb0caa05cc1421f16c5217bc"]}'
+```
+
   </TabItem>
 </Tabs>
 

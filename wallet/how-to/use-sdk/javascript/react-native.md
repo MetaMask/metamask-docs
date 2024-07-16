@@ -6,8 +6,8 @@ tags:
   - JavaScript SDK
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Use MetaMask SDK with React Native and Expo
 
@@ -28,16 +28,16 @@ Create a new React Native or Expo project using the following commands:
 <Tabs>
   <TabItem value="React Native">
 
-  ```bash
-  npx react-native@latest init MyProject
-  ```
+```bash
+npx react-native@latest init MyProject
+```
 
   </TabItem>
   <TabItem value="Expo">
 
-  ```bash
-  npx create-expo-app devexpo --template
-  ```
+```bash
+npx create-expo-app devexpo --template
+```
 
   </TabItem>
 </Tabs>
@@ -49,16 +49,16 @@ Install the SDK and its dependencies using the following commands:
 <Tabs>
   <TabItem value="React Native">
 
-  ```bash
-  npm install eciesjs @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-react-native react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values
-  ```
+```bash
+npm install eciesjs @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-react-native react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values
+```
 
   </TabItem>
   <TabItem value="Expo">
 
-  ```bash
-  npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
-  ```
+```bash
+npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
+```
 
   </TabItem>
 </Tabs>
@@ -76,49 +76,49 @@ In React Native or Expo, update the default Metro configuration file to the foll
 <Tabs>
   <TabItem value="React Native">
 
-  ```javascript title="metro.config.js"
-  const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+```javascript title="metro.config.js"
+const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
 
-  const defaultConfig = getDefaultConfig(__dirname);
+const defaultConfig = getDefaultConfig(__dirname)
 
-  const config = {
-    transformer: {
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
-    },
-    resolver: {
-      extraNodeModules: {
-        ...require("node-libs-react-native"),
+const config = {
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
       },
+    }),
+  },
+  resolver: {
+    extraNodeModules: {
+      ...require("node-libs-react-native"),
     },
-  };
+  },
+}
 
-  module.exports = mergeConfig(defaultConfig, config);
-  ```
+module.exports = mergeConfig(defaultConfig, config)
+```
 
   </TabItem>
   <TabItem value="Expo">
 
-  ```javascript title="metro.config.js"
-  const config = getDefaultConfig(__dirname);
+```javascript title="metro.config.js"
+const config = getDefaultConfig(__dirname)
 
-  config.resolver.extraNodeModules = {
-    ...require("node-libs-expo"),
-  };
+config.resolver.extraNodeModules = {
+  ...require("node-libs-expo"),
+}
 
-  config.transformer.getTransformOptions = async () => ({
-    transform: {
-      experimentalImportSupport: false,
-      inlineRequires: true,
-    },
-  });
+config.transformer.getTransformOptions = async () => ({
+  transform: {
+    experimentalImportSupport: false,
+    inlineRequires: true,
+  },
+})
 
-  module.exports = config;
-  ```
+module.exports = config
+```
 
   </TabItem>
 </Tabs>
@@ -130,20 +130,20 @@ Add the following import statements to the React Native or Expo entry file:
 <Tabs>
   <TabItem value="React Native">
 
-  ```javascript title="index.js or App.tsx"
-  import "node-libs-react-native/globals";
-  import "react-native-url-polyfill/auto";
-  import "react-native-get-random-values";
-  ```
+```javascript title="index.js or App.tsx"
+import "node-libs-react-native/globals"
+import "react-native-url-polyfill/auto"
+import "react-native-get-random-values"
+```
 
   </TabItem>
   <TabItem value="Expo">
 
-  ```javascript title="App.tsx"
-  import "node-libs-expo/globals";
-  import "react-native-url-polyfill/auto";
-  import "react-native-get-random-values";
-  ```
+```javascript title="App.tsx"
+import "node-libs-expo/globals"
+import "react-native-url-polyfill/auto"
+import "react-native-get-random-values"
+```
 
   </TabItem>
 </Tabs>
@@ -165,18 +165,18 @@ Run the React Native or Expo project on Android or iOS using the following comma
 <Tabs>
   <TabItem value="React Native">
 
-  ```bash
-  npx react-native run-android
-  npx react-native run-ios
-  ```
+```bash
+npx react-native run-android
+npx react-native run-ios
+```
 
   </TabItem>
   <TabItem value="Expo">
 
-  ```bash
-  npx expo run:android
-  npx expo run:ios
-  ```
+```bash
+npx expo run:android
+npx expo run:ios
+```
 
   </TabItem>
 </Tabs>
@@ -189,13 +189,13 @@ The following code snippets demonstrate how to use the hook.
 Import the hook:
 
 ```javascript
-import { useSDK } from "@metamask/sdk-react";
+import { useSDK } from "@metamask/sdk-react"
 ```
 
 Initialize the SDK in your main component:
 
 ```javascript
-const { connect, disconnect, account, chainId, ethereum } = useSDK();
+const { connect, disconnect, account, chainId, ethereum } = useSDK()
 ```
 
 Connect to MetaMask:
@@ -203,11 +203,11 @@ Connect to MetaMask:
 ```javascript
 const connectWallet = async () => {
   try {
-    await connect();
+    await connect()
   } catch (error) {
-    console.error("Failed to connect wallet:", error);
+    console.error("Failed to connect wallet:", error)
   }
-};
+}
 ```
 
 Handle your dapp's state:
@@ -218,15 +218,15 @@ useEffect(() => {
   if (account && chainId) {
     // Handle account and network changes.
   }
-}, [account, chainId]);
+}, [account, chainId])
 ```
 
 Disconnect from MetaMask:
 
 ```javascript
 const disconnectWallet = async () => {
-  await disconnect();
-};
+  await disconnect()
+}
 ```
 
 ## Examples

@@ -42,7 +42,7 @@ asynchronous process.
 The following is an example flow:
 
 1. The user activates an interactive interface to send Bitcoin funds to an address.
-    The initial interface contains an address input, an amount input, and a **Send funds** button.
+   The initial interface contains an address input, an amount input, and a **Send funds** button.
 2. The user fills the fields, and selects the **Send funds** button.
 3. `onUserInput` is called, and the logic detects that the **Send funds** button was selected.
 4. `snap_updateInterface` is called, replacing the **Send funds** button with a [`spinner`](index.md#spinner).

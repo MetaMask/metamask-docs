@@ -62,7 +62,7 @@ If you don't have TextMeshPro installed, the Unity editor automatically prompts 
 <p>
 
 | File or directory        | Contents                                                                                                                         |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | `Documentation`          | Documentation and link to online documentation                                                                                   |
 | `Editor`                 | Editor-only code such as Setup GUI windows, data persistence for SDK settings                                                    |
 | `Plugins`                | Plugins needed by the package (the ECIES Platform runtime libraries and core SDK Codebase)                                       |
@@ -70,7 +70,6 @@ If you don't have TextMeshPro installed, the Unity editor automatically prompts 
 | `Samples`                | Test application scene that can be used as a referral for your project, including modal popups and dynamic UI scaling            |
 | `LICENSE.md`             | Package license                                                                                                                  |
 | `Third Party Notices.md` | Third party notices                                                                                                              |
-
 
 </p>
 
@@ -91,9 +90,9 @@ You first must initialize by doing one of the following:
 
 - Manually call `Initialize()`:
 
-    ```csharp
-    MetaMaskUnity.Instance.Initialize();
-    ```
+  ```csharp
+  MetaMaskUnity.Instance.Initialize();
+  ```
 
 - Check **Initialize On Start** on the component within the editor.
 
@@ -207,7 +206,7 @@ To update the SDK to the latest version available on the Unity Asset Store:
 1. Update and import the latest package using the Unity Package Manager.
 2. Go to **Tools > MetaMask > Install in Unity**.
 3. Select the **Already Installed** button.
-    This updates the SDK in your project.
+   This updates the SDK in your project.
 
 Alternatively, you can delete the existing MetaMask folder in your project and re-import it from the
 Package Manager or Asset Store.

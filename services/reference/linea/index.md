@@ -13,7 +13,7 @@ on Ethereum. For users, this enables the experience and security guarantees of E
 
 :::info see also
 
- See the [official Linea documentation](https://docs.linea.build/) for more information.
+See the [official Linea documentation](https://docs.linea.build/) for more information.
 
 :::
 

@@ -19,10 +19,10 @@ To manually create a new contract interface, define a new interface that inherit
 Optionally, declare the [`BackedType` attribute](contract-factory.md#backed-type-contract-factory).
 
 ```csharp
-#if UNITY_EDITOR || !ENABLE_MONO  
-[BackedType(typeof(ERC20Backing))]  
-#endif  
-public interface ERC20 : IContract  
+#if UNITY_EDITOR || !ENABLE_MONO
+[BackedType(typeof(ERC20Backing))]
+#endif
+public interface ERC20 : IContract
 {
   // Declare functions.
 }
@@ -34,10 +34,10 @@ To declare a `view` or `pure` function of the contract, first set the return typ
 (may differ from the actual name), and all parameters the function takes in a Task:
 
 ```csharp
-#if UNITY_EDITOR || !ENABLE_MONO  
-[BackedType(typeof(ERC20Backing))]  
-#endif  
-public interface ERC20 : IContract  
+#if UNITY_EDITOR || !ENABLE_MONO
+[BackedType(typeof(ERC20Backing))]
+#endif
+public interface ERC20 : IContract
 {
   Task<BigInteger> BalanceOf(EvmAddress account);
 }
@@ -48,10 +48,10 @@ declare the metadata about the contract function.
 This includes the `Name` and whether it's a `View` function:
 
 ```csharp
-#if UNITY_EDITOR || !ENABLE_MONO  
-[BackedType(typeof(ERC20Backing))]  
-#endif  
-public interface ERC20 : IContract  
+#if UNITY_EDITOR || !ENABLE_MONO
+[BackedType(typeof(ERC20Backing))]
+#endif
+public interface ERC20 : IContract
 {
   [EvmMethodInfo(Name = "balanceOf", View = true)]
   Task<BigInteger> BalanceOf(EvmAddress account);
@@ -63,10 +63,10 @@ However, this usually isn't needed, because the `Contract` class automatically i
 types, such as `EvmAddress` to be `address` and `string` to be `string`.
 
 ```csharp
-#if UNITY_EDITOR || !ENABLE_MONO  
-[BackedType(typeof(ERC20Backing))]  
-#endif  
-public interface ERC20 : IContract  
+#if UNITY_EDITOR || !ENABLE_MONO
+[BackedType(typeof(ERC20Backing))]
+#endif
+public interface ERC20 : IContract
 {
   [EvmMethodInfo(Name = "balanceOf", View = true)]
   Task<BigInteger> BalanceOf([EvmParameterInfo(Type = "address")] string account);
@@ -76,16 +76,16 @@ public interface ERC20 : IContract
 To define the EVM return type for the function, you can use `EvmParamterInfo` on the return type:
 
 ```csharp
-#if UNITY_EDITOR || !ENABLE_MONO  
-[BackedType(typeof(ERC20Backing))]  
-#endif  
-public interface ERC20 : IContract  
+#if UNITY_EDITOR || !ENABLE_MONO
+[BackedType(typeof(ERC20Backing))]
+#endif
+public interface ERC20 : IContract
 {
   [EvmMethodInfo(Name = "balanceOf", View = true)]
   Task<BigInteger> BalanceOf(EvmAddress account);
-  
-  [EvmMethodInfo(Name = "decimals", View = true)]  
-  [return: EvmParameterInfo(Type = "uint8")]  
+
+  [EvmMethodInfo(Name = "decimals", View = true)]
+  [return: EvmParameterInfo(Type = "uint8")]
   Task<BigInteger> Decimals();
 }
 ```
@@ -110,44 +110,44 @@ Also, do one of the following:
 
 - Declare a `static readonly string Bytecode` in the interface that has the bytecode.
 
-    ```csharp
-    #if UNITY_EDITOR || !ENABLE_MONO  
-    [BackedType(typeof(ERC20Backing))]  
-    #endif  
-    public interface ERC20 : IContract  
-    {
-      public static readonly string Bytecode = "0x6080604052348015620000115760008....";  
-        
-      [EvmConstructorMethod]  
-      Task<ERC20> DeployNew(String name_, String symbol_);
-  
-      [EvmMethodInfo(Name = "balanceOf", View = true)]
-      Task<BigInteger> BalanceOf(EvmAddress account);
-      
-      [EvmMethodInfo(Name = "decimals", View = true)]  
-      [return: EvmParameterInfo(Type = "uint8")]  
-      Task<BigInteger> Decimals();
-    }
-    ```
+  ```csharp
+  #if UNITY_EDITOR || !ENABLE_MONO
+  [BackedType(typeof(ERC20Backing))]
+  #endif
+  public interface ERC20 : IContract
+  {
+    public static readonly string Bytecode = "0x6080604052348015620000115760008....";
+
+    [EvmConstructorMethod]
+    Task<ERC20> DeployNew(String name_, String symbol_);
+
+    [EvmMethodInfo(Name = "balanceOf", View = true)]
+    Task<BigInteger> BalanceOf(EvmAddress account);
+
+    [EvmMethodInfo(Name = "decimals", View = true)]
+    [return: EvmParameterInfo(Type = "uint8")]
+    Task<BigInteger> Decimals();
+  }
+  ```
 
 - Set the `Bytecode` field in the `EvmConstructorMethod` attribute.
 
-    ```csharp
-    #if UNITY_EDITOR || !ENABLE_MONO  
-    [BackedType(typeof(ERC20Backing))]  
-    #endif  
-    public interface ERC20 : IContract  
-    {
-      [EvmConstructorMethod(Bytecode = "0x608060405238....")]  
-      Task<ERC20> DeployNew(String name_, String symbol_);
-  
-      [EvmMethodInfo(Name = "balanceOf", View = true)]
-      Task<BigInteger> BalanceOf(EvmAddress account);
-      
-      [EvmMethodInfo(Name = "decimals", View = true)]  
-      [return: EvmParameterInfo(Type = "uint8")]  
-      Task<BigInteger> Decimals();
-    }
-    ```
+  ```csharp
+  #if UNITY_EDITOR || !ENABLE_MONO
+  [BackedType(typeof(ERC20Backing))]
+  #endif
+  public interface ERC20 : IContract
+  {
+    [EvmConstructorMethod(Bytecode = "0x608060405238....")]
+    Task<ERC20> DeployNew(String name_, String symbol_);
+
+    [EvmMethodInfo(Name = "balanceOf", View = true)]
+    Task<BigInteger> BalanceOf(EvmAddress account);
+
+    [EvmMethodInfo(Name = "decimals", View = true)]
+    [return: EvmParameterInfo(Type = "uint8")]
+    Task<BigInteger> Decimals();
+  }
+  ```
 
 By default, the [contract code generator](index.md#generate-contract-code) uses the second option.

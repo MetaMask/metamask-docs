@@ -1,8 +1,9 @@
 ---
 description: debug_storageRangeAt API method
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # debug_storageRangeAt
 
@@ -31,9 +32,9 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
--X POST \
--H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"debug_storageRangeAt","params":["0x7aaff18735842066baee6a2eb53961a69e67f5e012072c81c05a0fd793069a6c",0,"0x371c7ec6D8039ff7933a2AA28EB827Ffe1F52f07","0x0000000000000000000000000000000000000000000000000000000000000000",1], "id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "debug_storageRangeAt", "params": ["0x7aaff18735842066baee6a2eb53961a69e67f5e012072c81c05a0fd793069a6c", 0, "0x371c7ec6D8039ff7933a2AA28EB827Ffe1F52f07", "0x0000000000000000000000000000000000000000000000000000000000000000", 1], "id": 1}'
 ```
 
   </TabItem>
