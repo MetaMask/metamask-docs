@@ -1,0 +1,24 @@
+---
+name: Check file name case
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  case:
+    name: Check for licences not being allowed
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ["docs"]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Dependency review
+        uses: ConsenSys/docs-gha/dependency-review@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
