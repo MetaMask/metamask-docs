@@ -1,5 +1,5 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # pin_rm
 
@@ -14,8 +14,8 @@ Remove pinned objects from local storage.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=<ipfs-path>" \
-    -X POST \
-    -u "<API_KEY>:<API_KEY_SECRET>"
+  -X POST \
+  -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,9 +23,10 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=<ipfs-path>" \
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET"
 ```
+
   </TabItem>
 </Tabs>
 

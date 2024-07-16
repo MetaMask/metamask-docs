@@ -5,8 +5,8 @@ sidebar_custom_props:
   flask_only: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Signature insights
 
@@ -55,9 +55,9 @@ shapes, depending on the signing method used:
 
 ```typescript
 interface EthSignature {
-  from: string;
-  data: string;
-  signatureMethod: "eth_sign";
+  from: string
+  data: string
+  signatureMethod: "eth_sign"
 }
 ```
 
@@ -66,9 +66,9 @@ interface EthSignature {
 
 ```typescript
 interface PersonalSignature {
-  from: string;
-  data: string;
-  signatureMethod: "personal_sign";
+  from: string
+  data: string
+  signatureMethod: "personal_sign"
 }
 ```
 
@@ -77,9 +77,9 @@ interface PersonalSignature {
 
 ```typescript
 interface SignTypedDataSignature {
-  from: string;
-  data: Record<string, any>[];
-  signatureMethod: "eth_signTypedData";
+  from: string
+  data: Record<string, any>[]
+  signatureMethod: "eth_signTypedData"
 }
 ```
 
@@ -88,9 +88,9 @@ interface SignTypedDataSignature {
 
 ```typescript
 interface SignTypedDataV3Signature {
-  from: string;
-  data: Record<string, any>;
-  signatureMethod: "eth_signTypedData_v3";
+  from: string
+  data: Record<string, any>
+  signatureMethod: "eth_signTypedData_v3"
 }
 ```
 
@@ -99,9 +99,9 @@ interface SignTypedDataV3Signature {
 
 ```typescript
 interface SignTypedDataV4Signature {
-  from: string;
-  data: Record<string, any>;
-  signatureMethod: "eth_signTypedData_v4";
+  from: string
+  data: Record<string, any>
+  signatureMethod: "eth_signTypedData_v4"
 }
 ```
 

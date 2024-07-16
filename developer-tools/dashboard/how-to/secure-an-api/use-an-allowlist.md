@@ -21,7 +21,7 @@ Add the restriction details in the **ALLOWLISTS** section of your API key's **Se
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/allowlist.png').default}
+      src={require("../../../images/allowlist.png").default}
     />
   </div>
 </div>
@@ -57,25 +57,28 @@ To allow a specific Ethereum address, click **ADD** and input it into the **CONT
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/address-allowlist.png').default}
+      src={require("../../../images/address-allowlist.png").default}
     />
   </div>
 </div>
-
 
 Test with a method from the list.
 
 ```bash
 curl https://mainnet.infura.io/v3/<PROJECT_ID> \
-    -H 'Content-Type: application/json' \
-    -X POST \
-    -d '{"id":1, "jsonrpc": "2.0", "method": "eth_getBalance","params":["0xfe05a3e72235c9f92fd9f2282f41a8154d6d342b", "latest"]}'
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{"jsonrpc": "2.0", "method": "eth_getBalance", "params": ["0xfe05a3e72235c9f92fd9f2282f41a8154d6d342b", "latest"], "id": 1}'
 ```
 
 Result:
 
 ```bash
-{"jsonrpc":"2.0","id":1,"result":"0x0"}
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x0"
+}
 ```
 
 ## User agents
@@ -105,7 +108,7 @@ the **USER AGENTS** allowlist.
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/user-agents.png').default}
+      src={require("../../../images/user-agents.png").default}
     />
   </div>
 </div>
@@ -114,15 +117,21 @@ Test with a simple call from a desktop terminal.
 
 ```bash
 curl https://mainnet.infura.io/v3/<PROJECT_ID> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_accounts", "params": [], "id": 1}'
 ```
 
 Result:
 
 ```bash
-{"jsonrpc":"2.0","error":{"code":-32002,"message":"rejected due to project ID settings"}}ash
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32002,
+    "message": "rejected due to project ID settings"
+  }
+}
 ```
 
 ## Origins
@@ -167,7 +176,7 @@ Use the dropdown list to select a method.
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/api-request-method.png').default}
+      src={require("../../../images/api-request-method.png").default}
     />
   </div>
 </div>
@@ -186,7 +195,7 @@ URL isn't on your allowlist, provided they include both the API key and the API 
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/allowlist-toggle.png').default}
+      src={require("../../../images/allowlist-toggle.png").default}
     />
   </div>
 </div>
@@ -194,14 +203,14 @@ URL isn't on your allowlist, provided they include both the API key and the API 
 This feature provides the following benefits:
 
 - **Principle of least privilege on the client side** - On the client side of your dapp, you may wish
-    to limit the actions possible with your API key to only those necessary for the application's
-    functionality. Allowlists ensure the API key is used solely for authorized locations, smart contract
-    addresses, or methods.
+  to limit the actions possible with your API key to only those necessary for the application's
+  functionality. Allowlists ensure the API key is used solely for authorized locations, smart contract
+  addresses, or methods.
 
 - **No restrictions server side** - On the server side, where the API key secret can be stored
-    securely, you might need to carry out a broader range of actions without the constraints of
-    allowlists. Using the API key secret allows you to circumvent these restrictions, giving your
-    server-side application unrestricted use of the API key.
+  securely, you might need to carry out a broader range of actions without the constraints of
+  allowlists. Using the API key secret allows you to circumvent these restrictions, giving your
+  server-side application unrestricted use of the API key.
 
 ## Best practices
 

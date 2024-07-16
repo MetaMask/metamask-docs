@@ -3,8 +3,8 @@ description: Connect your dapp to existing, third-party Snaps.
 sidebar_position: 10
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Connect to a Snap
 
@@ -20,13 +20,13 @@ See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/conn
 ### Detect MetaMask Flask
 
 When developing your Snap, you might need to require
-[MetaMask Flask](../get-started/install-flask.md) in your dapp. 
+[MetaMask Flask](../get-started/install-flask.md) in your dapp.
 We recommend detecting MetaMask Flask using the
-[multi-wallet detection mechanism](/wallet/concepts/wallet-interoperability) specified by EIP-6963. 
+[multi-wallet detection mechanism](/wallet/concepts/wallet-interoperability) specified by EIP-6963.
 Alternatively, you can use the `window.ethereum` injected provider, but this might fail if the user
-is running multiple wallet extensions simultaneously. 
+is running multiple wallet extensions simultaneously.
 
-To detect MetaMask Flask, you can add the following to `window.onload`: 
+To detect MetaMask Flask, you can add the following to `window.onload`:
 
 <Tabs>
 <TabItem value="EIP-6963 example">
@@ -34,35 +34,35 @@ To detect MetaMask Flask, you can add the following to `window.onload`:
 ```js title="index.js"
 window.addEventListener("eip6963:announceProvider", (event) => {
   /* event.detail contains the discovered provider interface. */
-  const providerDetail = event.detail;
+  const providerDetail = event.detail
 
   /* providerDetail.info.rdns is the best way to distinguish a wallet extension. */
   if (providerDetail.info.rdns === "io.metamask.flask") {
-    console.log("MetaMask Flask successfully detected!");
+    console.log("MetaMask Flask successfully detected!")
     // Now you can use Snaps!
-  } else { 
-    console.error("Please install MetaMask Flask!");
+  } else {
+    console.error("Please install MetaMask Flask!")
   }
-});
+})
 
-window.dispatchEvent(new Event("eip6963:requestProvider"));
+window.dispatchEvent(new Event("eip6963:requestProvider"))
 ```
 
 </TabItem>
 <TabItem value="Injected provider example">
 
 ```js title="index.js"
-const provider = window.ethereum; 
+const provider = window.ethereum
 
-const isFlask = ( 
+const isFlask = (
   await provider?.request({ method: "web3_clientVersion" })
-)?.includes("flask"); 
+)?.includes("flask")
 
 if (provider && isFlask) {
-  console.log("MetaMask Flask successfully detected!");
+  console.log("MetaMask Flask successfully detected!")
   // Now you can use Snaps!
 } else {
-  console.error("Please install MetaMask Flask!", error);
+  console.error("Please install MetaMask Flask!", error)
 }
 ```
 
@@ -126,17 +126,17 @@ Each value is a nested object with additional information, such as the version o
 
 :::note
 `wallet_getSnaps` only returns the Snaps that are connected to your dapp.
-The user may have other Snaps installed that your dapp is not aware of. 
+The user may have other Snaps installed that your dapp is not aware of.
 :::
 
 The following example verifies whether a Snap with ID `npm:super-snap` is installed:
 
 ```ts title="index.ts"
 const snaps = await ethereum.request({
-    method: "wallet_getSnaps"
-});
+  method: "wallet_getSnaps",
+})
 
-const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap");
+const isMySnapInstalled = Object.keys(snaps).includes("npm:super-snap")
 ```
 
 If you need to work with a specific version of a Snap, you can instead iterate over

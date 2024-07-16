@@ -60,7 +60,7 @@ To log in without a 2FA device, log in to Infura with your username and password
 <div class="left-align-container">
   <div class="img-small">
     <img
-      src={require('../../images/login2FA.png').default}
+      src={require("../../images/login2FA.png").default}
     />
   </div>
 </div>

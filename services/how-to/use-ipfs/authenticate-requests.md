@@ -12,7 +12,7 @@ involves sending a base64-encoded string that contains your username and passwor
 :::info
 
 To access the IPFS network through Infura, you'll need to add a billing card to your account, even if you're using a free account. Refer
-to the [billing details](access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information. 
+to the [billing details](access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information.
 
 :::
 

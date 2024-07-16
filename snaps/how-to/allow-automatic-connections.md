@@ -33,7 +33,7 @@ For example:
 When testing, you can specify the local site.
 For example:
 
-```json title="snap.manifest.json" 
+```json title="snap.manifest.json"
 "initialConnections": {
   "http://localhost:8000": {}
 }
@@ -69,20 +69,20 @@ explicitly connected to it by calling
 [`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
 
 ```js title="script.js"
-const snapId = "npm:@myorg/mysnap";
+const snapId = "npm:@myorg/mysnap"
 
 // This function is called when the EIP-6963 process of finding MetaMask is successful.
 const MetaMaskFound = async (providerDetail) => {
-  const { provider } = providerDetail;
+  const { provider } = providerDetail
 
   // This call returns the Snap ID if it is already installed.
   const snaps = await provider.request({
     method: "wallet_getSnaps",
-  });
+  })
 
   if (Object.keys(snaps).includes(snapId)) {
     // If we're here, the Snap is installed. We're good to go.
-    return;
+    return
   }
 
   // If we're here, the Snap is not installed. Let's install it.
@@ -93,14 +93,14 @@ const MetaMaskFound = async (providerDetail) => {
       params: {
         [snapId]: {},
       },
-    });
+    })
 
     // If we're here, the Snap is installed, and the dapp is successfully connected to it.
   } catch (err) {
     // If we're here, something went wrong. For example, the user might have declined the Snap
     // installation confirmation.
   }
-};
+}
 ```
 
 ## When to use initial connections

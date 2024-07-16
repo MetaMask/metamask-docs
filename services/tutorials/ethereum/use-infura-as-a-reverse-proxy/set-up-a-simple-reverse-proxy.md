@@ -2,9 +2,9 @@
 description: Use Caddy to set up a reverse proxy.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import SectionNetworks from '@site/src/components/Sections/SectionNetworks.jsx';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 
 # Set up a simple reverse proxy
 
@@ -75,14 +75,14 @@ In a new terminal window, make a curl request to `localhost`. The following exam
 curl https://localhost/v3/<YOUR_API_KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="Example JS result" label="Example JS result" >
 
 ```javascript
-{"jsonrpc":"2.0","id":1,"result":"Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
+{"jsonrpc": "2.0", "id": 1, "result": "Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
 ```
 
   </TabItem>
@@ -97,14 +97,14 @@ To ensure that the reverse proxy is working, execute the same request, replacing
 curl https://goerli.infura.io/v3/<YOUR_API_KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params": [],"id":1}'
+  -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
 ```
 
   </TabItem>
   <TabItem value="Example JS result" label="Example JS result" >
 
 ```javascript
-{"jsonrpc":"2.0","id":1,"result":"Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
+{"jsonrpc": "2.0", "id": 1, "result": "Geth/v1.10.8-omnibus-aef5bfb3/linux-amd64/go1.16.7"}
 ```
 
   </TabItem>

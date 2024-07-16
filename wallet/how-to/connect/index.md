@@ -17,7 +17,7 @@ Learn more about EIP-6963 in [Wallet interoperability](../../concepts/wallet-int
 :::
 
 :::tip
-To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../../tutorials/javascript-dapp-simple.md) tutorial. 
+To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../../tutorials/javascript-dapp-simple.md) tutorial.
 :::
 
 You can connect to MetaMask [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
@@ -74,8 +74,8 @@ interface EIP6963ProviderDetail {
 
 type EIP6963AnnounceProviderEvent = {
   detail: {
-    info: EIP6963ProviderInfo,
-    provider: Readonly<EIP1193Provider>,
+    info: EIP6963ProviderInfo
+    provider: Readonly<EIP1193Provider>
   }
 }
 
@@ -83,9 +83,18 @@ interface EIP1193Provider {
   isStatus?: boolean
   host?: string
   path?: string
-  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+  sendAsync?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  send?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  request: (request: {
+    method: string
+    params?: Array<unknown>
+  }) => Promise<unknown>
 }
 ```
 
@@ -104,7 +113,7 @@ Update `src/main.ts` with the following code:
 import "./style.css"
 import { listProviders } from "./providers.ts"
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <div id="providerButtons"></div>
   </div>
@@ -133,10 +142,11 @@ declare global {
 }
 
 // Connect to the selected provider using eth_requestAccounts.
-const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent["detail"]) => {
+const connectWithProvider = async (
+  wallet: EIP6963AnnounceProviderEvent["detail"]
+) => {
   try {
-    await wallet.provider
-      .request({ method: "eth_requestAccounts" })
+    await wallet.provider.request({ method: "eth_requestAccounts" })
   } catch (error) {
     console.error("Failed to connect to provider:", error)
   }
@@ -144,15 +154,16 @@ const connectWithProvider = async (wallet: EIP6963AnnounceProviderEvent["detail"
 
 // Display detected providers as connect buttons.
 export function listProviders(element: HTMLDivElement) {
-  window.addEventListener("eip6963:announceProvider",
+  window.addEventListener(
+    "eip6963:announceProvider",
     (event: EIP6963AnnounceProviderEvent) => {
       const button = document.createElement("button")
-    
+
       button.innerHTML = `
         <img src="${event.detail.info.icon}" alt="${event.detail.info.name}" />
         <div>${event.detail.info.name}</div>
       `
-    
+
       // Call connectWithProvider when a user selects the button.
       button.onclick = () => connectWithProvider(event.detail)
       element.appendChild(button)
@@ -220,8 +231,8 @@ interface EIP6963ProviderDetail {
 
 type EIP6963AnnounceProviderEvent = {
   detail: {
-    info: EIP6963ProviderInfo,
-    provider: Readonly<EIP1193Provider>,
+    info: EIP6963ProviderInfo
+    provider: Readonly<EIP1193Provider>
   }
 }
 
@@ -229,9 +240,18 @@ interface EIP1193Provider {
   isStatus?: boolean
   host?: string
   path?: string
-  sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-  request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+  sendAsync?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  send?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  request: (request: {
+    method: string
+    params?: Array<unknown>
+  }) => Promise<unknown>
 }
 ```
 
@@ -280,7 +300,7 @@ export const DiscoverWalletProviders = () => {
   // Connect to the selected provider using eth_requestAccounts.
   const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
     try {
-      const accounts = await providerWithInfo.provider.request({ 
+      const accounts = await providerWithInfo.provider.request({
         method: "eth_requestAccounts"
       })
 
@@ -329,7 +349,7 @@ In this code:
 - `selectedWallet` is a state variable that holds the user's most recently selected wallet.
 - `userAccount` is a state variable that holds the user's connected wallet's address.
 - `useSyncProviders` is a custom hook that returns the providers array (wallets installed in the browser).
-  
+
 The `handleConnect` function takes a `providerWithInfo`, which is an `EIP6963ProviderDetail` object.
 That object is used to request the user's accounts from the provider using
 [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
@@ -356,23 +376,25 @@ declare global {
 let providers: EIP6963ProviderDetail[] = []
 
 export const store = {
-  value: ()=> providers,
-  subscribe: (callback: ()=> void) => {
-    function onAnnouncement(event: EIP6963AnnounceProviderEvent){
-      if(providers.map(p => p.info.uuid).includes(event.detail.info.uuid)) return
+  value: () => providers,
+  subscribe: (callback: () => void) => {
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent) {
+      if (providers.map((p) => p.info.uuid).includes(event.detail.info.uuid))
+        return
       providers = [...providers, event.detail]
       callback()
     }
 
     // Listen for eip6963:announceProvider and call onAnnouncement when the event is triggered.
     window.addEventListener("eip6963:announceProvider", onAnnouncement)
-    
+
     // Dispatch the event, which triggers the event listener in the MetaMask wallet.
     window.dispatchEvent(new Event("eip6963:requestProvider"))
-    
+
     // Return a function that removes the event listern.
-    return () => window.removeEventListener("eip6963:announceProvider", onAnnouncement)
-  }
+    return () =>
+      window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  },
 }
 ```
 
@@ -382,7 +404,8 @@ Also, add a file `useSyncProviders.ts` with the following code to the `hooks` di
 import { useSyncExternalStore } from "react"
 import { store } from "./store"
 
-export const useSyncProviders = ()=> useSyncExternalStore(store.subscribe, store.value, store.value)
+export const useSyncProviders = () =>
+  useSyncExternalStore(store.subscribe, store.value, store.value)
 ```
 
 This hook allows you to subscribe to MetaMask events, read updated values, and update components.
@@ -404,7 +427,7 @@ export const formatChainAsNum = (chainIdHex: string) => {
 }
 
 export const formatAddress = (addr: string) => {
-  const upperAfterLastTwo = addr.slice(0,2) + addr.slice(2)
+  const upperAfterLastTwo = addr.slice(0, 2) + addr.slice(2)
   return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
 }
 ```

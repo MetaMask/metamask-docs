@@ -64,7 +64,7 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask:
 
 ```javascript title="index.js"
 signTypedDataV4Button.addEventListener("click", async function (event) {
-  event.preventDefault();
+  event.preventDefault()
 
   // eth_signTypedData_v4 parameters. All of these parameters affect the resulting signature.
   const msgParams = JSON.stringify({
@@ -130,12 +130,12 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
         { name: "wallets", type: "address[]" },
       ],
     },
-  });
+  })
 
-  var from = await web3.eth.getAccounts();
+  var from = await web3.eth.getAccounts()
 
-  var params = [from[0], msgParams];
-  var method = "eth_signTypedData_v4";
+  var params = [from[0], msgParams]
+  var method = "eth_signTypedData_v4"
 
   provider // Or window.ethereum if you don't support EIP-6963.
     .sendAsync(
@@ -145,26 +145,31 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
         from: from[0],
       },
       function (err, result) {
-        if (err) return console.dir(err);
+        if (err) return console.dir(err)
         if (result.error) {
-          alert(result.error.message);
+          alert(result.error.message)
         }
-        if (result.error) return console.error("ERROR", result);
-        console.log("TYPED SIGNED:" + JSON.stringify(result.result));
+        if (result.error) return console.error("ERROR", result)
+        console.log("TYPED SIGNED:" + JSON.stringify(result.result))
 
         const recovered = sigUtil.recoverTypedSignature_v4({
           data: JSON.parse(msgParams),
           sig: result.result,
-        });
+        })
 
-        if (ethUtil.toChecksumAddress(recovered) === ethUtil.toChecksumAddress(from)) {
-          alert("Successfully recovered signer as " + from);
+        if (
+          ethUtil.toChecksumAddress(recovered) ===
+          ethUtil.toChecksumAddress(from)
+        ) {
+          alert("Successfully recovered signer as " + from)
         } else {
-          alert("Failed to verify signer when comparing " + result + " to " + from);
+          alert(
+            "Failed to verify signer when comparing " + result + " to " + from
+          )
         }
       }
-    );
-});
+    )
+})
 ```
 
 The following HTML displays a sign button:
@@ -196,13 +201,14 @@ Because MetaMask supports existing applications, MetaMask implements both `perso
 You might need to check what method your supported signers use for a given implementation.
 
 :::caution important
+
 - Don't use this method to display binary data, because the user wouldn't be able to understand what
   they're agreeing to.
 - If using this method for a signature challenge, think about what would prevent a phisher from
   reusing the same challenge and impersonating your site.
   Add text referring to your domain, or the current time, so the user can easily verify if this
   challenge is legitimate.
-:::
+  :::
 
 ### Example
 
@@ -210,24 +216,24 @@ The following is an example of using `personal_sign` with MetaMask:
 
 ```javascript title="index.js"
 personalSignButton.addEventListener("click", async function (event) {
-  event.preventDefault();
-  const exampleMessage = "Example `personal_sign` message.";
+  event.preventDefault()
+  const exampleMessage = "Example `personal_sign` message."
   try {
-    const from = accounts[0];
+    const from = accounts[0]
     // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
     // This uses a Node.js-style buffer shim in the browser.
-    const msg = `0x${Buffer.from(exampleMessage, "utf8").toString("hex")}`;
+    const msg = `0x${Buffer.from(exampleMessage, "utf8").toString("hex")}`
     const sign = await ethereum.request({
       method: "personal_sign",
       params: [msg, from],
-    });
-    personalSignResult.innerHTML = sign;
-    personalSignVerify.disabled = false;
+    })
+    personalSignResult.innerHTML = sign
+    personalSignVerify.disabled = false
   } catch (err) {
-    console.error(err);
-    personalSign.innerHTML = `Error: ${err.message}`;
+    console.error(err)
+    personalSign.innerHTML = `Error: ${err.message}`
   }
-});
+})
 ```
 
 The following HTML displays a sign button:

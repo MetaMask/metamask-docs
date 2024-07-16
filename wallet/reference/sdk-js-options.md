@@ -5,8 +5,8 @@ tags:
   - JavaScript SDK
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # JavaScript SDK options
 

@@ -2,8 +2,8 @@
 title: "zks_estimateGasL1ToL2"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns an estimate of the gas required for a layer 1 (L1) to layer 2 (L2) transaction.
 
@@ -26,12 +26,13 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateGasL1ToL2", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
-  ```
+```bash
+curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateGasL1ToL2", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+```
+
   </TabItem>
 </Tabs>
 
