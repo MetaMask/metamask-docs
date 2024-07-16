@@ -60,14 +60,20 @@
         background: none;
       }
     }
-
-    @media screen and (max-width: 996px) {
-      // top: -10px;
-    }
   }
 
   .content {
     width: 100%;
     padding: 0 var(--ifm-navbar-padding-horizontal);
+
+    .faq {
+      margin: 0 auto;
+      width: 75%;
+      max-width: 1000px;
+
+      @media screen and (max-width: 996px) {
+        width: 100%;
+      }
+    }
   }
 }

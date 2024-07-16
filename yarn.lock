@@ -4252,7 +4252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react@npm:*, @types/react@npm:^18.3.3":
   version: 18.3.3
   resolution: "@types/react@npm:18.3.3"
   dependencies:
@@ -12633,6 +12633,7 @@ __metadata:
     "@rjsf/utils": ^5.18.4
     "@rjsf/validator-ajv8": ^5.18.4
     "@tsconfig/docusaurus": ^1.0.5
+    "@types/react": ^18.3.3
     "@typescript-eslint/parser": ^7.12.0
     clsx: ^1.2.1
     docusaurus-plugin-sass: ^0.2.5
