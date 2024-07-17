@@ -4,6 +4,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from './faucet.module.scss'
 import Button from '@site/src/components/Button'
+import {Faq} from '@site/src/components/Faucet'
 
 export default function Faucet() {
     return (
@@ -16,9 +17,11 @@ export default function Faucet() {
                 <Tabs className={styles.header}>
                     <TabItem className={styles.content} value="apple" label="Ethereum Sepolia" default>
                         <div>Ethereum Sepolia</div>
+                        <Faq network='sepolia' className={styles.faq}></Faq>
                     </TabItem>
                     <TabItem className={styles.content} value="orange" label="Linea Sepolia">
                         <div>Linea Sepolia</div>
+                        <Faq network='linea' className={styles.faq}></Faq>
                     </TabItem>
                 </Tabs>
             </div>
