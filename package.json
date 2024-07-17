@@ -33,14 +33,17 @@
     "@docusaurus/plugin-content-docs": "^3.0.0",
     "@docusaurus/theme-common": "^3.0.0",
     "@docusaurus/theme-mermaid": "^3.0.0",
+    "@intercom/messenger-js-sdk": "^0.0.11",
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
+    "@metamask/sdk-react": "^0.26.5",
     "@rjsf/core": "^5.18.4",
     "@rjsf/utils": "^5.18.4",
     "@rjsf/validator-ajv8": "^5.18.4",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
+    "docusaurus-plugin-sentry": "^2.0.0",
     "dotenv": "^16.4.5",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
@@ -102,7 +105,8 @@
       "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
       "@docusaurus/core>webpack-dev-server>ws>bufferutil": false,
       "@docusaurus/core>webpack-dev-server>ws>utf-8-validate": false,
-      "$root$": false
+      "$root$": false,
+      "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false
     }
   }
 }

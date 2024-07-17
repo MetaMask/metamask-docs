@@ -1,4 +1,5 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo, useState, useEffect } from "react";
+import { useSDK } from "@metamask/sdk-react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -11,12 +12,7 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import {
-  trackClickForSegment,
-  trackInputChangeForSegment,
-} from "@site/src/lib/segmentAnalytics";
-import { useLocation } from "@docusaurus/router";
-import { useSyncProviders } from "@site/src/hooks/useSyncProviders.ts";
+import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -104,27 +100,25 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const location = useLocation();
+  const { sdk, ready, connected, provider, account } = useSDK();
 
-  const [selectedWallet, setSelectedWallet] = useState(0);
-  const providers = useSyncProviders();
+  const isConnected = useMemo(() => {
+    return ready && connected && !!account
+  }, [ready, connected, account]);
 
-  const handleConnect = (i: number) => {
-    setSelectedWallet(i);
-  };
-
-  const metamaskProviders = useMemo(() => {
-    const isMetamasks = providers.filter((pr) =>
-      pr?.info?.name?.includes("MetaMask")
-    );
-    if (isMetamasks.length > 1) {
-      const indexWallet = isMetamasks.findIndex(
-        (item) => item.info.name === "MetaMask"
-      );
-      setSelectedWallet(indexWallet);
+  useEffect(() => {
+    if ((window as any)?.Sentry) {
+      (window as any)?.Sentry?.setUser({ name: account, id: account, username: account })
     }
-    return isMetamasks;
-  }, [providers]);
+  }, [account]);
+
+  const connectSDKHandler = async () => {
+    try {
+      const accounts = await sdk?.connect();
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -142,14 +136,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (metamaskProviders.length === 0) return;
+    if (!provider || !connected) return
     try {
-      const response = await metamaskProviders[selectedWallet].provider.request(
-        {
-          method: method,
-          params: paramsData,
-        }
-      );
+      const response = await provider?.request({
+        method: method,
+        params: paramsData
+      })
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -237,13 +229,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            <AuthBox
-              metamaskProviders={metamaskProviders}
-              selectedProvider={selectedWallet}
-              handleConnect={handleConnect}
-            />
+            {!isConnected && <AuthBox handleConnect={connectSDKHandler} />}
             <RequestBox
-              isMetamaskInstalled={metamaskProviders.length > 0}
+              isMetamaskInstalled={connected}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}

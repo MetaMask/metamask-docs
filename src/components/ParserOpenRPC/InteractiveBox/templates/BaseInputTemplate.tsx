@@ -44,12 +44,10 @@ export const BaseInputTemplate = ({
   };
 
   useEffect(() => {
-    setInputValue(value);
+    if (!isArray) {
+      setInputValue(value);
+    }
   }, [value, isFormReseted]);
-
-  useEffect(() => {
-    setInputValue(value);
-  }, []);
 
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>

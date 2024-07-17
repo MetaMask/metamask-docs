@@ -60,6 +60,9 @@ export default function LayoutWrapper({ children }) {
   return (
     <BrowserOnly>
       {() => {
+        if (!ldReady) {
+          return null
+        }
         return (
           <>
             {newReferenceEnabled && ldReady && referencePageName ? (
