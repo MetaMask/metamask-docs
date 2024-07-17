@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import clsx from "clsx";
 import styles from "./accordion.module.scss";
 import CloseImg from './close.svg'
-import Text from '@site/src/components/text'
+import Text from '@site/src/components/Text'
 
 interface IAccordion {
     children: string | React.ReactElement;
