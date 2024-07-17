@@ -159,10 +159,6 @@
       "destination": "/wallet/how-to/use-sdk"
     },
     {
-      "source": "/sdk",
-      "destination": "/wallet/how-to/use-sdk"
-    },
-    {
       "source": "/wallet/how-to/sign-data/connect-and-sign",
       "destination": "/wallet/how-to/use-sdk/javascript/connect-and-sign"
     },

@@ -3,12 +3,22 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
+    title: "SDK",
+    link: "/sdk",
+    description: (
+      <>
+        Integrate your dapp with MetaMask using MetaMask SDK. You can interact
+        with your users&apos; Ethereum accounts from multiple dapp platforms.
+      </>
+    ),
+  },
+  {
     title: "Wallet",
     link: "/wallet",
     description: (
       <>
-        Integrate your dapp with MetaMask using the Wallet API. You can interact
-        with your users&apos; Ethereum accounts from multiple dapp platforms.
+        Integrate your dapp with MetaMask using the Wallet API. You can request
+        signatures from users, send transactions, display tokens, and more.
       </>
     ),
   },
