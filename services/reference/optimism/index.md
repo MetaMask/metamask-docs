@@ -1,5 +1,5 @@
 ---
-description: Optimism network documentation. 
+description: Optimism network documentation.
 ---
 
 import CardList from '@site/src/components/CardList'
@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 :::note Failover protection
 
-Optimism [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans. 
+Optimism [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans.
 Optimism failover support is available on Mainnet only.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
@@ -20,9 +20,9 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 :::info see also
 
 - For more information on the Optimism network, please see the
-    [official Optimism developer documentation](https://community.optimism.io/docs/developers/).
+  [official Optimism developer documentation](https://community.optimism.io/docs/developers/).
 - Developers should be aware of some
-    [important differences between the behavior of Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/).
+  [important differences between the behavior of Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/).
 
 :::
 
@@ -62,4 +62,4 @@ Bware Labs ([Terms of Service](https://bwarelabs.com/terms), [Privacy Policy](ht
 - `eth_sendTransaction`
 - `eth_sign`
 - `eth_syncing`
-- `eth_submitWork` 
+- `eth_submitWork`

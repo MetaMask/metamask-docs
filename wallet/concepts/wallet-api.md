@@ -13,7 +13,7 @@ The API methods are documented in the following references:
 
 - [Ethereum provider API reference](../reference/provider-api.md)
 - [JSON-RPC API reference](/wallet/reference/json-rpc-api)
-:::
+  :::
 
 ## Ethereum provider API
 
@@ -63,13 +63,13 @@ Make sure to handle errors for every call to
 
 The RPC methods are divided into the following:
 
-- [Restricted methods](#restricted-methods) -  Require user consent for actions that impact assets or data (for example, initiating a transaction).
+- [Restricted methods](#restricted-methods) - Require user consent for actions that impact assets or data (for example, initiating a transaction).
 - [Unrestricted methods](#unrestricted-methods) - Allow dapps to perform basic actions without permission (for example, retrieving a public address).
 
 ### Restricted methods
 
-MetaMask implements permissions based on [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) to enhance security for when users interact with dapps. 
-This requires that dapps obtain user consent before accessing certain features. 
+MetaMask implements permissions based on [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) to enhance security for when users interact with dapps.
+This requires that dapps obtain user consent before accessing certain features.
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
@@ -79,7 +79,7 @@ Restricted methods are methods that cannot be called unless you have permission 
 
 The following methods are restricted:
 
-- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`. 
+- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`.
   Granting permission for `eth_accounts` also grants permissions for the following methods:
 
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)

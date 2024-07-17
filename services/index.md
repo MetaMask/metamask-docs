@@ -21,15 +21,15 @@ dapps and Snaps.
 Infura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
 include:
 
-* **Broad access to major networks** - Infura supports the major networks, allowing you to take advantage of Ethereums's smart
+- **Broad access to major networks** - Infura supports the major networks, allowing you to take advantage of Ethereums's smart
   contracts, IPFS's distributed file system, or high performing layer 2 networks.
-* **Failover support for APIs** - Currently available on select networks for customers on Growth or Custom plans; if an Infura API
+- **Failover support for APIs** - Currently available on select networks for customers on Growth or Custom plans; if an Infura API
   endpoint becomes unavailable for any reason, requests can be forwarded to a partner to fulfill the request.
   This ensures that your application remains up and running, providing uninterrupted service to your users.
-* **Archive data querying** - [Access historical state data](concepts/archive-data.md) at any given
+- **Archive data querying** - [Access historical state data](concepts/archive-data.md) at any given
   block height. This is an invaluable feature for those who need to perform deep analyses of past transactions, contract
   states, or balances. With this feature, developers can build applications that are not only data-rich but also comprehensive.
-* **Expansion APIs** -
+- **Expansion APIs** -
   [Access Infura's multi-chain Gas API](reference/gas-api/api-reference/index.md). Use the Gas API used by the MetaMask wallet to analyze and
   optimize gas costs on EIP-1559 compatible chains.
 
@@ -44,4 +44,3 @@ include:
 Click below to explore the supported networks.
 
 <SectionNetworks />
-

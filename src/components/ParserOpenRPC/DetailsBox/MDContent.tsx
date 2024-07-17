@@ -2,7 +2,7 @@ import React from "react";
 
 const parseMarkdown = (content: string) => {
   return content
-    .replace(/\[(.*?)\]\((.*?)\)/g, "<a href=\"$2\">$1</a>")
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
     .replace(/`(.*?)`/g, "<code>$1</code>");
 };
 

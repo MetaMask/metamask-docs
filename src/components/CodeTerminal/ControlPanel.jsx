@@ -24,7 +24,7 @@ const ControlPanel = ({ keysOptions = [], initValues, onChange }) => {
     }
     if (initValues?.netName?.value === NETWORKS.PALM) {
       const noEthMethods = initMethods.filter(
-        (method) => method.value !== "eth_maxPriorityFeePerGas",
+        (method) => method.value !== "eth_maxPriorityFeePerGas"
       );
       updatedOptions.methods = [...noEthMethods];
     }

@@ -2,8 +2,8 @@
 title: "eth_getBalanceValues"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns the parameters that control an accounts rebasing ETH balance.
 
@@ -18,8 +18,7 @@ To facilitate rebasing ETH balances, accounts on Mantle store more fields than j
 - `address`: [_Required_] A string representing the address (20 bytes) to check for balance.
 - `block parameter`: [_Required_] A hexadecimal block number, or one of the string tags `latest`,
   `earliest`, `pending`, `safe`, or `finalized`.
-    See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
-
+  See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 
 ## Returns
 
@@ -32,19 +31,19 @@ Object with the following fields:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard). 
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
 <Tabs>
   <TabItem value="cURL">
 
-  ```bash
-  curl https://mantle-mainnet.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_getBalanceValues","params":["0xd071acb641553a2e205181a42aa3a8ace97dae6d","latest"],"id":1}'
-  ```
+```bash
+curl https://mantle-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_getBalanceValues","params":["0xd071acb641553a2e205181a42aa3a8ace97dae6d","latest"],"id":1}'
+```
 
   </TabItem>
   </Tabs>

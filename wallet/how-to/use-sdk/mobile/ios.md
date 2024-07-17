@@ -7,8 +7,8 @@ tags:
   - iOS SDK
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Use MetaMask SDK with iOS
 

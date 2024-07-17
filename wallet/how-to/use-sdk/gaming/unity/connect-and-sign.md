@@ -23,28 +23,28 @@ You can [connect and sign](../../javascript/connect-and-sign.md) in a single int
 
 2. In your script, create a new function named `ConnectAndSign`:
 
-    ```csharp
-    public void ConnectAndSign()
-    {
-      MetaMaskUnity.Instance.ConnectAndSign("This is a test message");
-    }
-    ```
+   ```csharp
+   public void ConnectAndSign()
+   {
+     MetaMaskUnity.Instance.ConnectAndSign("This is a test message");
+   }
+   ```
 
-    Replace the test message with any string message you want to sign.
+   Replace the test message with any string message you want to sign.
 
-    :::caution important
-    Make sure you initialize [`MetaMaskUnity.Instance`](../../../../reference/sdk-unity-api.md#instance)
-    before using this function.
-    To do so, enable **Initialize On Awake** in the **MetaMask Unity** script inspector, or run
-    [`MetaMask.Instance.Initialize()`](../../../../reference/sdk-unity-api.md#initialize).
-    :::
+   :::caution important
+   Make sure you initialize [`MetaMaskUnity.Instance`](../../../../reference/sdk-unity-api.md#instance)
+   before using this function.
+   To do so, enable **Initialize On Awake** in the **MetaMask Unity** script inspector, or run
+   [`MetaMask.Instance.Initialize()`](../../../../reference/sdk-unity-api.md#initialize).
+   :::
 
 3. Call the `ConnectAndSign` function whenever you want to establish a connection and sign a message.
-    For example, you can call this function when a button is clicked:
+   For example, you can call this function when a button is clicked:
 
-    ```csharp
-    public void OnButtonClick()
-    {
-      ConnectAndSign();
-    }
-    ```
+   ```csharp
+   public void OnButtonClick()
+   {
+     ConnectAndSign();
+   }
+   ```

@@ -20,32 +20,23 @@ export default function CardListItem({ item }: CardListItemProps): JSX.Element {
     <>
       {item.title && (
         <h2 className={clsx(styles.cardTitle)}>
-          {item.icon && (
-            <img src={item.icon} className={styles.cardIcon} />
-          )}
+          {item.icon && <img src={item.icon} className={styles.cardIcon} />}
           <span>{item.title}</span>
         </h2>
       )}
-      {item.description && (
-        <p>
-          {item.description}
-        </p>
-      )}
+      {item.description && <p>{item.description}</p>}
     </>
   );
-  
-  const rootClassName = clsx(
-    "card",
-    "padding--lg",
-    styles.cardContainer,
-    {
-      [styles.flaskOnly]: item.flaskOnly,
-    },
-  );
+
+  const rootClassName = clsx("card", "padding--lg", styles.cardContainer, {
+    [styles.flaskOnly]: item.flaskOnly,
+  });
 
   if (item.href) {
     return (
-      <Link className={rootClassName} href={item.href}>{cardContent}</Link>
+      <Link className={rootClassName} href={item.href}>
+        {cardContent}
+      </Link>
     );
   }
 

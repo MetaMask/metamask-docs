@@ -11,11 +11,11 @@ mechanism to the [`window.ethereum`](wallet-api.md#ethereum-provider-api) inject
 This mechanism is enabled by using the standardized interfaces defined by EIP-6963.
 
 :::info Why EIP-6963?
-[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) standardizes the interface for wallet providers, 
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) standardizes the interface for wallet providers,
 but it results in conflicts when users have multiple wallets installed, due to how the provider
-object is injected. 
-This can cause issues with wallet discovery, user onboarding, and connecting. 
-The wallet discovery mechanism introduced by EIP-6963 solves these issues. 
+object is injected.
+This can cause issues with wallet discovery, user onboarding, and connecting.
+The wallet discovery mechanism introduced by EIP-6963 solves these issues.
 :::
 
 The following is a demo of the user experience of detecting multiple wallets, showing the data
@@ -62,8 +62,8 @@ interface announces an event dispatched by the wallet:
 
 ```typescript
 interface EIP6963AnnounceProviderEvent extends CustomEvent {
-  type: "eip6963:announceProvider";
-  detail: EIP6963ProviderDetail;
+  type: "eip6963:announceProvider"
+  detail: EIP6963ProviderDetail
 }
 ```
 
@@ -72,7 +72,7 @@ interface requests an event dispatched by a dapp:
 
 ```typescript
 interface EIP6963RequestProviderEvent extends Event {
-  type: "eip6963:requestProvider";
+  type: "eip6963:requestProvider"
 }
 ```
 
@@ -112,7 +112,7 @@ MetaMask, resolving potential conflicts that might arise with other wallet exten
 more stable and reliable interaction for users.
 
 The SDK is also being integrated into [Wagmi 2+](https://wagmi.sh/), which supports EIP-6963.
-The SDK on its own supports connecting *only* to MetaMask via EIP-6963, so if you intend to support
+The SDK on its own supports connecting _only_ to MetaMask via EIP-6963, so if you intend to support
 discovery of other wallets, we recommend using other methods of adding EIP-6963 support, such as
 Wagmi 2+.
 

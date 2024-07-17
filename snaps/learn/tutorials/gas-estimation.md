@@ -20,7 +20,7 @@ information in an alert dialog.
 
 ### 1. Set up the project
 
-Create a new Snap project using the 
+Create a new Snap project using the
 [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
@@ -46,36 +46,36 @@ Next, `cd` into the `gas-estimation-snap` project directory and run:
 yarn install
 ```
 
-This initializes your development environment with the required dependencies. 
-You may get a warning similar to the following: 
+This initializes your development environment with the required dependencies.
+You may get a warning similar to the following:
 
 ```bash
 @lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
-You can resolve this error by running the following command: 
+You can resolve this error by running the following command:
 
-```bash 
+```bash
 yarn run allow-scripts auto
 ```
 
 ### 2. Add a custom icon
 
-Your Snap must [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask. 
-To add an icon, create a new folder `images` in the Snap package `packages/snap/`: 
+Your Snap must [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
+To add an icon, create a new folder `images` in the Snap package `packages/snap/`:
 
-```bash 
+```bash
 mkdir packages/snap/images
 ```
 
-Download 
-[this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg) 
+Download
+[this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
 into the `ìmages` folder you just created.  
 This is a free icon, "Gas" by Mello from
 [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
 
-Your file structure should look like this: 
+Your file structure should look like this:
 
 ```text
 gas-estimation-snap/
@@ -99,10 +99,10 @@ gas-estimation-snap/
 ├─ ... (other stuff)
 ```
 
-Open `packages/snap/snap.manifest.json` in a text editor. 
-This file contains the main configuration details for your Snap. 
+Open `packages/snap/snap.manifest.json` in a text editor.
+This file contains the main configuration details for your Snap.
 Edit the `npm` object, within the `location` object,
-and add `iconPath` with the value `"images/gas.svg"` to point to your new icon: 
+and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
@@ -116,7 +116,7 @@ and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 ```
 
 Open `packages/snap/package.json` in a text editor.
-Edit the `files` array and add the `images/` folder: 
+Edit the `files` array and add the `images/` folder:
 
 ```json title="package.json"
 "files": [
@@ -129,7 +129,7 @@ Edit the `files` array and add the `images/` folder:
 ### 3. Enable network access
 
 To enable your Snap to [access the internet using the `fetch` API](../../features/network-access.md),
-request the [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access) 
+request the [`endowment:network-access`](../../reference/permissions.md#endowmentnetwork-access)
 permission in `packages/snap/snap.manifest.json`:
 
 ```json title="snap.manifest.json"
@@ -138,7 +138,7 @@ permission in `packages/snap/snap.manifest.json`:
   "endowment:rpc": {
     "dapps": true,
     "snaps": false
-  }, 
+  },
   "endowment:network-access": {}
 },
 "manifestVersion": "0.1"
@@ -153,20 +153,20 @@ To get a gas fee estimate, use the public API endpoint provided by
 Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
-import { panel, text } from "@metamask/snaps-sdk";
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
+import { panel, text } from "@metamask/snaps-sdk"
 
 async function getFees() {
-  const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow"); 
-  return response.text();
+  const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow")
+  return response.text()
 }
 ```
 
-Next, add the `copyable` component to the second import of the file: 
+Next, add the `copyable` component to the second import of the file:
 
 ```typescript title="index.ts"
-import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
-import { panel, text, copyable } from "@metamask/snaps-sdk";
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
+import { panel, text, copyable } from "@metamask/snaps-sdk"
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
@@ -200,30 +200,30 @@ case "hello":
 To build and test your Snap:
 
 1. Open `package.json` in the root directory of the project, and increment the `"version"` (if the `"version"` is
-    `0.1.0`, increase it to `0.2.0`).
+   `0.1.0`, increase it to `0.2.0`).
 
 2. From the command line, run `yarn start`.
-    In the terminal, at the bottom of the message log, you see the browser URL:
+   In the terminal, at the bottom of the message log, you see the browser URL:
 
-    ```bash
-    You can now view site in the browser.
-    
-      http://localhost:8000/
-    ```
+   ```bash
+   You can now view site in the browser.
+
+     http://localhost:8000/
+   ```
 
 3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
-    A page like the following displays:
+   A page like the following displays:
 
-    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
+   <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
-    This is a boilerplate test dapp for installing and testing your Snap.
+   This is a boilerplate test dapp for installing and testing your Snap.
 
 4. Select **Connect** to connect Flask to the dapp.
-    After connecting, you're prompted to install the Snap with the following permissions:
+   After connecting, you're prompted to install the Snap with the following permissions:
 
-    - **Allow dapps to communicate directly with this Snap.**
-    - **Access the internet.**
-    - **Display dialog windows in MetaMask.**
+   - **Allow dapps to communicate directly with this Snap.**
+   - **Access the internet.**
+   - **Display dialog windows in MetaMask.**
 
 5. Select **Approve** > **Install**.
 

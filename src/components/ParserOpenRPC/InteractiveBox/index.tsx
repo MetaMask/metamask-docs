@@ -1,10 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Form from "@rjsf/core";
 import clsx from "clsx";
-import {RJSFSchema, UiSchema, RegistryWidgetsType, RegistryFieldsType} from "@rjsf/utils";
+import {
+  RJSFSchema,
+  UiSchema,
+  RegistryWidgetsType,
+  RegistryFieldsType,
+} from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { MethodExample, MethodParam, SchemaComponents } from "@site/src/components/ParserOpenRPC/interfaces";
+import {
+  MethodExample,
+  MethodParam,
+  SchemaComponents,
+} from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
@@ -21,18 +30,18 @@ interface InteractiveBoxProps {
   components: SchemaComponents;
   examples: MethodExample[];
   onParamChange: (data) => void;
-  drawerLabel?: string | null
+  drawerLabel?: string | null;
   closeComplexTypeView?: () => void;
 }
 
 export default function InteractiveBox({
-   params,
-   components,
-   examples,
-   onParamChange,
-   drawerLabel,
-   closeComplexTypeView
-}:InteractiveBoxProps) {
+  params,
+  components,
+  examples,
+  onParamChange,
+  drawerLabel,
+  closeComplexTypeView,
+}: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
@@ -40,13 +49,19 @@ export default function InteractiveBox({
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
 
-  const defaultExampleFormData = examples ? Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value])) : {};
+  const defaultExampleFormData = examples
+    ? Object.fromEntries(
+        examples[0].params.map(({ name, value }) => [name, value])
+      )
+    : {};
   const schema: RJSFSchema = {
-    "components": {
-      "schemas": components,
+    components: {
+      schemas: components,
     },
-    "type": "object",
-    "properties": Object.fromEntries(params.map(({ name, schema }) => [name, schema])),
+    type: "object",
+    properties: Object.fromEntries(
+      params.map(({ name, schema }) => [name, schema])
+    ),
   };
   const uiSchema: UiSchema = {
     "ui:globalOptions": {
@@ -59,7 +74,7 @@ export default function InteractiveBox({
     ArrayFieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
-  }
+  };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
     SelectWidget: SelectWidget,
@@ -79,13 +94,13 @@ export default function InteractiveBox({
       formRef?.current?.reset();
     }
   };
-  const isLightTheme = colorMode === "light"
+  const isLightTheme = colorMode === "light";
 
   useEffect(() => {
     const dereferenceSchema = async () => {
       try {
         if (schema) {
-          setParsedSchema(await $RefParser.dereference(schema) as RJSFSchema);
+          setParsedSchema((await $RefParser.dereference(schema)) as RJSFSchema);
         }
       } catch (error) {
         console.error("Error of parsing schema:", error);
@@ -104,13 +119,13 @@ export default function InteractiveBox({
   };
 
   const cloneAndSetNullIfExists = (obj, key) => {
-    if (typeof obj !== 'object' || obj === null) return obj;
+    if (typeof obj !== "object" || obj === null) return obj;
     const newObj = Array.isArray(obj) ? [] : {};
-    for (let prop in obj) {
+    for (const prop in obj) {
       if (obj.hasOwnProperty(prop)) {
         if (prop === key) {
           newObj[prop] = [];
-        } else if (typeof obj[prop] === 'object' && obj[prop] !== null) {
+        } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
           newObj[prop] = cloneAndSetNullIfExists(obj[prop], key);
         } else {
           newObj[prop] = obj[prop];
@@ -118,25 +133,21 @@ export default function InteractiveBox({
       }
     }
     return newObj;
-  }
+  };
 
   const handleCancelClick = () => {
     if (drawerLabel) {
       const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel);
-      setDefaultFormData(upData)
+      setDefaultFormData(upData);
     }
     closeComplexTypeView();
-  }
+  };
 
   return parsedSchema ? (
     <>
       <div className={styles.tableHeadingRow}>
-        <div className={styles.tableHeadingColumn}>
-          Parameter
-        </div>
-        <div className={styles.tableHeadingColumn}>
-          Value
-        </div>
+        <div className={styles.tableHeadingColumn}>Parameter</div>
+        <div className={styles.tableHeadingColumn}>Value</div>
       </div>
       <Form
         schema={parsedSchema}
@@ -145,18 +156,33 @@ export default function InteractiveBox({
         validator={validator}
         liveValidate
         noHtml5Validate
-        onChange={(data) => { onChangeHandler(data.formData); }}
+        onChange={(data) => {
+          onChangeHandler(data.formData);
+        }}
         templates={templates}
         uiSchema={uiSchema}
         widgets={widgets}
         ref={formRef}
         fields={fields}
       >
-        <div className={clsx(styles.tableFooterRow, isLightTheme ? styles.tableFooterRowLight : styles.tableFooterRowDark)}>
+        <div
+          className={clsx(
+            styles.tableFooterRow,
+            isLightTheme
+              ? styles.tableFooterRowLight
+              : styles.tableFooterRowDark
+          )}
+        >
           <div className={clsx(styles.footerButtons, styles.footerButtonsLeft)}>
             <Tooltip message="Reset fields">
-              <button className={styles.footerButtonLeft} onClick={handleResetForm}>
-                <img className={styles.footerButtonIcon} src="/img/icons/reset-icon.svg"/>
+              <button
+                className={styles.footerButtonLeft}
+                onClick={handleResetForm}
+              >
+                <img
+                  className={styles.footerButtonIcon}
+                  src="/img/icons/reset-icon.svg"
+                />
               </button>
             </Tooltip>
             <Tooltip message="Clear fields">
@@ -164,21 +190,33 @@ export default function InteractiveBox({
                 className={styles.footerButtonLeft}
                 onClick={handleClearForm}
               >
-                <img className={styles.footerButtonIcon} src="/img/icons/clear-icon.svg"/>
+                <img
+                  className={styles.footerButtonIcon}
+                  src="/img/icons/clear-icon.svg"
+                />
               </button>
             </Tooltip>
           </div>
-          {isComplexTypeView ?
+          {isComplexTypeView ? (
             <div className={clsx(styles.footerButtons)}>
-              <button className={clsx(global.secondaryBtn, styles.footerButtonRight, styles.footerButtonRightOutline)} onClick={handleCancelClick}>
+              <button
+                className={clsx(
+                  global.secondaryBtn,
+                  styles.footerButtonRight,
+                  styles.footerButtonRightOutline
+                )}
+                onClick={handleCancelClick}
+              >
                 Cancel
               </button>
-              <button className={clsx(global.primaryBtn, styles.footerButtonRight)} onClick={closeComplexTypeView}>
+              <button
+                className={clsx(global.primaryBtn, styles.footerButtonRight)}
+                onClick={closeComplexTypeView}
+              >
                 Save
               </button>
-            </div> :
-            null
-          }
+            </div>
+          ) : null}
         </div>
       </Form>
     </>

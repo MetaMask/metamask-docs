@@ -2,8 +2,8 @@
 title: "starknet_traceBlockTransactions"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns the execution trace of all transactions in the specified block.
 This provides the exact sequence of operations that were performed during the execution of each
@@ -12,9 +12,10 @@ transaction, and can be useful for debugging.
 ## Parameters
 
 `block_id`: [*Required*] The block parameter object containing one of the following:
-  - `block_hash`: (string) Block hash.
-  - `block_number`: (integer) Decimal block number.
-  - One of the string tags `latest` or `pending`.
+
+- `block_hash`: (string) Block hash.
+- `block_number`: (integer) Decimal block number.
+- One of the string tags `latest` or `pending`.
 
 ## Returns
 

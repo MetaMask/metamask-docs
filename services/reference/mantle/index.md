@@ -23,13 +23,11 @@ availability solutions.
 This approach not only ensures cheaper and more accessible data but also maintains the robust security
 inherent to Ethereum, making it an efficient and secure choice for scaling Ethereum applications.
 
-
 :::info See also
 
 See also the [official Mantle documentation](https://docs-v2.mantle.xyz/) for more information.
 
 :::
-
 
 Select one of the following options to get started with the Mantle network:
 
