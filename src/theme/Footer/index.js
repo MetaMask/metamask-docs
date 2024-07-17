@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import Footer from "@theme-original/Footer";
+import { Intercom } from "@intercom/messenger-js-sdk";
+import useIsBrowser from "@docusaurus/useIsBrowser";
 
 export default function FooterWrapper(props) {
   useEffect(() => {
@@ -14,6 +16,14 @@ export default function FooterWrapper(props) {
       cookieBtn.removeEventListener("click", handleManageCookie);
     };
   }, []);
+
+  const isBrowser = useIsBrowser();
+  if (isBrowser) {
+    Intercom({
+      app_id: 'txttgas6'
+    });
+  }
+
   return (
     <>
       <Footer {...props} />
