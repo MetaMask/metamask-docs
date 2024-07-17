@@ -7,6 +7,11 @@ export default function Root({ children }: { children: ReactChild}) {
     <BrowserOnly fallback={<div>Loading...</div>}>
       {
         () => {
+          if ((window as any)?.Sentry) {
+            (window as any)?.Sentry?.replayIntegration({
+              maskAllText: false
+            })
+          }
           return (
             <MetaMaskProvider debug={false} sdkOptions={{
               logging:{
