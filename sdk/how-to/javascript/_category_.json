@@ -3,6 +3,8 @@
   "position": 1,
   "link": {
     "type": "generated-index",
-    "slug": "how-to/javascript"
+    "slug": "how-to/javascript",
+    "title": "JavaScript how-to guides",
+    "description": "With MetaMask SDK installed in your JavaScript dapp, you can do the following:"
   }
 }

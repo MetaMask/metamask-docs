@@ -2,15 +2,15 @@
 sidebar_label: iOS
 sidebar_position: 1
 toc_max_heading_level: 4
-description: Set up the SDK in your iOS dapp.
+description: Get started with MetaMask SDK using iOS.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Use MetaMask SDK with iOS
+# Get started using iOS
 
-Import [MetaMask SDK](../../../concepts/sdk/index.md) into your native iOS dapp to enable your
+Import MetaMask SDK into your native iOS dapp to enable your
 users to easily connect with their MetaMask Mobile wallet.
 
 ## Prerequisites

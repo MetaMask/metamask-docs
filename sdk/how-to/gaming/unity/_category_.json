@@ -3,6 +3,8 @@
   "position": 1,
   "link": {
     "type": "generated-index",
-    "slug": "how-to/gaming/unity"
+    "slug": "how-to/gaming/unity",
+    "title": "Unity how-to guides",
+    "description": "With MetaMask SDK installed in your Unity game, you can do the following:"
   }
 }

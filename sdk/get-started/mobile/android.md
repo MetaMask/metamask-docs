@@ -2,18 +2,17 @@
 sidebar_label: Android
 sidebar_position: 2
 toc_max_heading_level: 4
-description: Set up the SDK in your Android dapp.
+description: Get started with MetaMask SDK using Android.
 ---
 
-# Use MetaMask SDK with Android
+# Get started using Android
 
-Import [MetaMask SDK](../../../concepts/sdk/index.md) into your native Android dapp to enable
+Import MetaMask SDK into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip See also
-
-- [Android SDK architecture](../../../concepts/sdk/android.md)
-  :::
+- [Android SDK architecture](../../reference/android-architecture.md)
+:::
 
 ## Prerequisites
 

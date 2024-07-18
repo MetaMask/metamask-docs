@@ -6,29 +6,29 @@ sidebar_label: Set up Infura
 
 # Set up Infura in Unity
 
-You can set up [MetaMask SDK](../../../../concepts/sdk/index.md) with [Infura](https://docs.infura.io/) in
+You can set up MetaMask SDK with [Infura](/services) in
 your Unity game.
 
 ## Prerequisites
 
 - An Infura API key.
   Create one by following the first two steps in the
-  [Infura getting started guide](https://docs.infura.io/getting-started).
+  [Infura getting started guide](/services/get-started/infura).
 
-- [An allowlist configured for your API key.](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+- [An allowlist configured for your API key.](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
 
   :::caution important
   Your API key, when used with the SDK, is vulnerable to exposure.
   If someone inspects your dapp's code, they can potentially retrieve your API key and submit
   requests to Infura, impersonating your account.
 
-  Use [allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+  Use [allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
   to protect against this vulnerability.
   You can restrict interactions with your API key to specific addresses, origins, user agents, and request methods.
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](index.md) in your Unity game.
+- [MetaMask SDK set up](../../../get-started/gaming/unity.md) in your Unity game.
 
 ## Steps
 

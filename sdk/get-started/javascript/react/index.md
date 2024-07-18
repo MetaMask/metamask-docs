@@ -1,15 +1,15 @@
 ---
 sidebar_label: React
 sidebar_position: 1
-description: Set up the SDK in your React dapp.
+description: Get started with MetaMask SDK using React.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Use MetaMask SDK with React
+# Get started using React
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React dapp to enable your users to
+Import MetaMask SDK into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
@@ -79,15 +79,15 @@ root.render(
 
 When initializing `MetaMaskProvider`, set `debug` to `true` to activate debug mode.
 For the full list of options you can set for `sdkOptions`, see the
-[JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
+[JavaScript SDK options reference](../../../reference/js-options.md).
 Important options include:
 
-- [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
+- [`dappMetadata`](../../../reference/js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
-- [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
-  [make read-only RPC requests](../make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
-  the displayed modals](../display-custom-modals.md).
+- [`infuraAPIKey`](../../../reference/js-options.md#infuraapikey) - Use this to
+  [make read-only RPC requests](../../../how-to/javascript/make-read-only-requests.md) from your dapp.
+- [`modals`](../../../reference/js-options.md#modals) - Use this to [customize the logic and UI of
+  the displayed modals](../../../how-to/javascript/display-custom-modals.md).
 
 ### 4. Use the SDK
 
@@ -145,7 +145,7 @@ export const App = () => {
 
 The `connect` method initiates a connection to MetaMask and returns an array of connected accounts.
 
-You can also [use the `connectAndSign` method](../connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../how-to/javascript/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction:
 
 ```js
@@ -161,7 +161,7 @@ const connectAndSign = async () => {
 }
 ```
 
-You can also [batch multiple JSON-RPC requests](../batch-json-rpc-requests.md) using the
+You can also [batch multiple JSON-RPC requests](../../../how-to/javascript/batch-json-rpc-requests.md) using the
 `metamask_batch` method.
 
 ## Example

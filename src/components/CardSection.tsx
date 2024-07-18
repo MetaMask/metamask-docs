@@ -13,12 +13,12 @@ const CardList: CardItem[] = [
     ),
   },
   {
-    title: "Wallet",
+    title: "Wallet API",
     link: "/wallet",
     description: (
       <>
         Integrate your dapp with MetaMask using the Wallet API. You can request
-        signatures from users, send transactions, display tokens, and more.
+        signatures from users, manage networks, display tokens, and more.
       </>
     ),
   },

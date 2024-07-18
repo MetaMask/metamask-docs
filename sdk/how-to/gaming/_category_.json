@@ -1,8 +1,10 @@
 {
   "label": "Gaming",
-  "position": 3,
+  "position": 2,
   "link": {
     "type": "generated-index",
-    "slug": "how-to/gaming"
+    "slug": "how-to/gaming",
+    "title": "Gaming how-to guides",
+    "description": "See how-to guides for the following gaming platforms:"
   }
 }

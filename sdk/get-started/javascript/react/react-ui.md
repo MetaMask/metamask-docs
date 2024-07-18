@@ -1,15 +1,15 @@
 ---
 sidebar_label: React UI
 sidebar_position: 1
-description: Set up the SDK in your React dapp using the React UI package.
+description: Get started with MetaMask SDK using React UI.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Use MetaMask SDK with React UI
+# Get started using React UI
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React dapp to enable your
+Import MetaMask SDK into your React dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The `@metamask/sdk-react-ui` package not only exports hooks from [`@metamask/sdk-react`](index.md),
 but also provides wrappers around [wagmi](https://wagmi.sh/) hooks and a basic UI button component
@@ -79,15 +79,15 @@ root.render(
 ```
 
 For the full list of options you can set for `sdkOptions`, see the
-[JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
+[JavaScript SDK options reference](../../../reference/js-options.md).
 Important options include:
 
-- [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
+- [`dappMetadata`](../../../reference/js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
-- [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
-  [make read-only RPC requests](../make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
-  the displayed modals](../display-custom-modals.md).
+- [`infuraAPIKey`](../../../reference/js-options.md#infuraapikey) - Use this to
+  [make read-only RPC requests](../../../how-to/javascript/make-read-only-requests.md) from your dapp.
+- [`modals`](../../../reference/js-options.md#modals) - Use this to [customize the logic and UI of
+  the displayed modals](../../../how-to/javascript/display-custom-modals.md).
 
 ### 4. Use the SDK
 

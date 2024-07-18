@@ -1,14 +1,14 @@
 ---
 sidebar_label: Unity
 sidebar_position: 1
-description: Set up the SDK in your Unity game.
+description: Get started with MetaMask SDK using Unity.
 ---
 
 import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
 
-# Use MetaMask SDK with Unity
+# Get started using Unity
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your
+Import MetaMask SDK into your
 [Unity](https://assetstore.unity.com/packages/decentralization/infrastructure/metamask-246786) game
 to enable users to easily connect to their MetaMask Mobile wallet.
 The MetaMask Unity SDK supports macOS, Windows, Linux, iOS, Android, and WebGL.
@@ -95,7 +95,7 @@ You first must initialize by doing one of the following:
 - Check **Initialize On Start** on the component within the editor.
 
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
-You can now make calls to the user's wallet using [provider API methods](../../../../reference/provider-api.md).
+You can now make calls to the user's wallet using [provider API methods](/wallet/reference/provider-api).
 
 ### 4. Connect to MetaMask
 
@@ -137,7 +137,7 @@ The transport field is also required if you want to use it isolated from the can
 by the transport, then it generates the QR code for you.
 
 :::info Connect and sign
-You can also [use the `connectAndSign` method](connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../how-to/gaming/unity/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction.
 :::
 
@@ -176,7 +176,7 @@ await wallet.Request(request);
 ```
 
 :::note
-See the [Unity SDK API reference](../../../../reference/sdk-unity-api.md) for an overview of the
+See the [Unity SDK API reference](../../reference/unity-api.md) for an overview of the
 API methods from the most important classes.
 :::
 
@@ -215,7 +215,7 @@ Package Manager or Asset Store.
 
 <summary>I can't find the SDK installation option.</summary>
 
-If you don't see the option to [install the SDK](#2-install-the-sdk-for-unity) in your Unity menu,
+If you don't see the option to [install the SDK](#2-install-the-unity-sdk) in your Unity menu,
 ensure you're on the latest Unity version and that you have no red errors printed in your console.
 This option not appearing is typically due to incorrect editor initialization, which you can
 usually resolve by restarting the editor or updating your Unity version.
@@ -261,7 +261,7 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
-- [Connect and sign in Unity.](connect-and-sign.md)
-- [Set up Infura in Unity.](infura.md)
-- [Interact with smart contracts in Unity.](smart-contracts/index.md)
-- [Enable human-readable addresses in Unity using Decentraweb.](dweb.md)
+- [Connect and sign in Unity.](../../how-to/gaming/unity/connect-and-sign.md)
+- [Set up Infura in Unity.](../../how-to/gaming/unity/infura.md)
+- [Interact with smart contracts in Unity.](../../how-to/gaming/unity/smart-contracts/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../how-to/gaming/unity/dweb.md)

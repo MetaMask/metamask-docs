@@ -5,17 +5,16 @@ description: Learn about the Android SDK architecture.
 
 # Android SDK architecture
 
-The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
+The Android version of MetaMask SDK enables your users to easily connect with their
 MetaMask Mobile wallet.
 The [architecture](#architecture) and [connection flow](#connection-flow) of
 the Android SDK differs from the other SDK platforms.
 
 :::tip Get started
-
-- Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
+- Get started by [setting up the SDK in your Android dapp](../get-started/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository for advanced use cases.
-  :::
+:::
 
 ## Architecture
 

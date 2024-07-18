@@ -6,7 +6,7 @@ sidebar_position: 1
 # Connect and sign
 
 You can connect to MetaMask and sign data in a single interaction from your JavaScript, iOS,
-Android, or Unity dapp using [MetaMask SDK](../../../concepts/sdk/index.md).
+Android, or Unity dapp using MetaMask SDK.
 
 The SDK's `connectAndSign` method provides a streamlined approach for dapps to interact with MetaMask.
 This method combines the [`eth_requestAccounts`] and [`personal_sign`] RPC methods, executing them sequentially.
@@ -29,7 +29,7 @@ You can also see the [Unity instructions](../gaming/unity/connect-and-sign.md).
 
 ## Prerequisites
 
-- [MetaMask SDK set up](index.md) in your JavaScript dapp.
+- [MetaMask SDK set up](../../get-started/javascript/index.md) in your JavaScript dapp.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.

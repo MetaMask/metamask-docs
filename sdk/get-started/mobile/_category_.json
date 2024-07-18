@@ -1,0 +1,10 @@
+{
+  "label": "Mobile",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "slug": "get-started/mobile",
+    "title": "Get started using mobile platforms",
+    "description": "You can get started with MetaMask SDK using the following mobile platforms:"
+  }
+}

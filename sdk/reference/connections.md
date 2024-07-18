@@ -6,7 +6,7 @@ description: Learn about how a dapp with the SDK installed connects to MetaMask.
 
 # MetaMask SDK connections
 
-This page provides details on how a dapp with [MetaMask SDK](index.md) installed connects to a
+This page provides details on how a dapp with MetaMask SDK installed connects to a
 user's MetaMask wallet.
 
 ## Initial connection flow
@@ -107,7 +107,7 @@ The flow is as follows:
 
 :::note
 For all platforms except Android, the SDK uses a Socket.io server to help establish the encrypted connection.
-The [Android SDK](android.md) uses direct local communication.
+The [Android SDK](android-architecture.md) uses direct local communication.
 :::
 
 ## Connection status

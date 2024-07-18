@@ -9,7 +9,7 @@ You can [connect and sign](../../javascript/connect-and-sign.md) in a single int
 
 ## Prerequisites
 
-- [MetaMask SDK set up](index.md) in your Unity game.
+- [MetaMask SDK set up](../../../get-started/gaming/unity.md) in your Unity game.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
@@ -31,10 +31,10 @@ You can [connect and sign](../../javascript/connect-and-sign.md) in a single int
    Replace the test message with any string message you want to sign.
 
    :::caution important
-   Make sure you initialize [`MetaMaskUnity.Instance`](../../../../reference/sdk-unity-api.md#instance)
+   Make sure you initialize [`MetaMaskUnity.Instance`](../../../reference/unity-api.md#instance)
    before using this function.
    To do so, enable **Initialize On Awake** in the **MetaMask Unity** script inspector, or run
-   [`MetaMask.Instance.Initialize()`](../../../../reference/sdk-unity-api.md#initialize).
+   [`MetaMask.Instance.Initialize()`](../../../reference/unity-api.md#initialize).
    :::
 
 3. Call the `ConnectAndSign` function whenever you want to establish a connection and sign a message.

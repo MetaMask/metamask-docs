@@ -1,12 +1,12 @@
 ---
 sidebar_label: Pure JavaScript
 sidebar_position: 2
-description: Set up the SDK in your Pure JavaScript dapp.
+description: Get started with MetaMask SDK using pure JavaScript.
 ---
 
-# Use MetaMask SDK with pure JavaScript
+# Get started using pure JavaScript
 
-Import [MetaMask SDK](../../../concepts/sdk/index.md) into your pure JavaScript dapp to enable
+Import MetaMask SDK into your pure JavaScript dapp to enable
 your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for pure JavaScript has the [same prerequisites](index.md#prerequisites) as for standard JavaScript.
 
@@ -37,22 +37,22 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
 </head>
 ```
 
-You can configure the SDK using any [options](../../../reference/sdk-js-options.md):
+You can configure the SDK using any [options](../../reference/js-options.md):
 
-- Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
+- Use [`dappMetadata`](../../reference/js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
-- Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](make-read-only-requests.md) from your dapp.
-- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](display-custom-modals.md).
+- Use [`infuraAPIKey`](../../reference/js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../how-to/javascript/make-read-only-requests.md) from your dapp.
+- Use [`modals`](../../reference/js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../how-to/javascript/display-custom-modals.md).
 
-You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
+You can call any [provider API methods](/wallet/reference/provider-api) using the SDK.
 Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
-[`request()`](../../../reference/provider-api.md#request) first, since it prompts the installation
+[`request()`](/wallet/reference/provider-api/#request) first, since it prompts the installation
 or connection popup to appear.
 
-You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
-[batch multiple JSON-RPC requests](batch-json-rpc-requests.md) using the `metamask_batch` method.
+You can also call the SDK's [`connectAndSign`](../../how-to/javascript/connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](../../how-to/javascript/batch-json-rpc-requests.md) using the `metamask_batch` method.
 
 ## Example
 

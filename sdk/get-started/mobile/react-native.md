@@ -1,15 +1,15 @@
 ---
-sidebar_label: React Native and Expo
+sidebar_label: React Native
 sidebar_position: 3
-description: Set up the SDK in your React Native dapp.
+description: Get started with MetaMask SDK using React Native.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Use MetaMask SDK with React Native and Expo
+# Get started using React Native
 
-Import [MetaMask SDK](../../../concepts/sdk/index.md) into your React Native or Expo dapp to
+Import MetaMask SDK into your React Native or Expo dapp to
 enable your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites

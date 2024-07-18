@@ -6,7 +6,7 @@ toc_max_heading_level: 4
 
 # Unity SDK API
 
-The following is an overview of the API methods used in the [Unity SDK](../how-to/use-sdk/gaming/unity/index.md).
+The following is an overview of the API methods used in the [MetaMask Unity SDK](../get-started/gaming/unity.md).
 
 ### `MetaMaskUnity`
 
@@ -69,4 +69,4 @@ This method disconnects the user from the MetaMask session.
 #### `Request`
 
 This method sends a request to MetaMask.
-You can use it to call any [provider API method](provider-api.md).
+You can use it to call any [provider API method](/wallet/reference/provider-api).
