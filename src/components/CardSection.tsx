@@ -4,7 +4,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 const CardList: CardItem[] = [
   {
     title: "SDK",
-    link: "/sdk",
+    link: "/sdk/javascript",
     description: (
       <>
         Integrate your dapp with MetaMask using MetaMask SDK. You can interact

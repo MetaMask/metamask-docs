@@ -20,6 +20,14 @@
   --mm-flask-background-color: hsl(280, 45%, 85%);
   --mm-flask-color: hsl(280, 45%, 30%);
   --mm-flask-border-color: hsl(280, 45%, 45%);
+
+  /* PlatformSelect */
+  --docs-color-border: #dadde1;
+  --docs-color-text: #000;
+  --docs-color-background-100: #f8f8f8;
+  --docs-color-background-200: #efefef;
+  --docusaurus-announcement-bar-height: auto !important;
+  --ifm-hr-background-color: var(--ifm-toc-border-color);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -35,6 +43,12 @@
   --mm-flask-background-color: hsl(280, 45%, 30%);
   --mm-flask-color: hsl(280, 45%, 85%);
   --mm-flask-border-color: hsl(280, 45%, 45%);
+
+  /* PlatformSelect */
+  --docs-color-border: #2e2e2e;
+  --docs-color-text: #fff;
+  --docs-color-background-100: #1c1c1c;
+  --docs-color-background-200: #2a2a2a;
 }
 
 [data-theme="light"] .DocSearch {
@@ -346,3 +360,101 @@ button:hover {
     font-size: 14px;
   }
 }
+
+.sections-menu-trigger {
+  align-items: center;
+  background-color: var(--docs-color-background-100);
+  border: 1px solid var(--docs-color-background-200);
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: var(--docs-color-text);
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: space-between;
+  outline: 0;
+  text-align: left;
+}
+
+.sections-menu-item,
+.sections-menu-trigger {
+  padding: 0 15px 0 10px;
+}
+
+.sections-menu-scrollButton {
+  align-items: center;
+  color: var(--docs-color-text);
+  cursor: default;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  width: 16px;
+}
+
+.sections-menu-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 48px;
+  justify-content: space-between;
+  min-width: 200px;
+  outline: 0;
+}
+
+.sections-menu-item:hover {
+  background-color: var(--docs-color-background-200);
+}
+
+.sections-menu-item[data-disabled] {
+  background-color: var(--docs-color-border);
+  cursor: not-allowed;
+}
+
+.sections-menu-content {
+  background-color: var(--docs-color-background-100);
+  z-index: 300;
+}
+
+.sections-menu-item .item-indicator,
+.sections-menu-trigger .item-indicator {
+  color: rgb(var(--docs-color-primary-100, 26 144 255) / 1);
+  height: 20px;
+  width: 20px;
+}
+
+.sections-menu-item .item-text,
+.sections-menu-trigger .item-text {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.sections-menu-item .item-text > svg,
+.sections-menu-trigger .item-text > svg {
+  height: 32px;
+  margin-right: 8px;
+  width: 32px;
+}
+
+.sections-menu-content {
+  border-radius: 6px;
+  padding: 6px 0;
+}
+
+.sections-menu-trigger.compact {
+  height: 2.5rem;
+  min-width: 5rem;
+}
+
+.sections-menu-content.compact {
+  min-width: 5rem;
+  width: 5rem;
+}
+
+.compact .sections-menu-item {
+  height: 2.5rem;
+  min-width: auto;
+  width: auto;
+}
+

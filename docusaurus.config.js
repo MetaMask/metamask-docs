@@ -200,7 +200,7 @@ const config = {
         },
         items: [
           {
-            to: "sdk",
+            to: "sdk/javascript",
             label: "SDK",
           },
           {
@@ -262,7 +262,7 @@ const config = {
             items: [
               {
                 label: "SDK",
-                to: "/sdk",
+                to: "/sdk/javascript",
               },
               {
                 label: "Wallet",
