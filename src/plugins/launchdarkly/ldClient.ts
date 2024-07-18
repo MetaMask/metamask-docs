@@ -9,10 +9,18 @@ export default (function () {
 
   const { LD_CLIENT_ID } = siteConfig.customFields;
 
+  const getCookie = (name: string) => {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([.$?*|{}()[]\/+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+
   const context = {
     kind: "user",
     anonymous: true,
     key: "ld-anonymous-user-key",
+    feature_preview: getCookie("feature_preview"),
   };
 
   const ldClient = initialize(LD_CLIENT_ID as string, context, {
