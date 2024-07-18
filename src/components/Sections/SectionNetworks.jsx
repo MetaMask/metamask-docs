@@ -54,7 +54,7 @@ const SectionNetworks = () => {
       <div className="grid-row-wrap">
         {NETWORK_LINKS.map((item, index) =>
           isMobile
-            ? index <= 4 || !isNetworksListCollapsed
+            ? index <= 3 || !isNetworksListCollapsed
               ? renderNetworkCard(item, index)
               : null
             : renderNetworkCard(item, index)
