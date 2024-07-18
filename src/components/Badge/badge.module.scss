@@ -1,21 +1,21 @@
 :root {
-  --default-badge-color: #6A737D;
-  --default-badge-bg-color: #F2F4F6;
-  --default-border-color: transparent;
-  --success-badge-color: #1C8234;
-  --success-badge-bg-color: rgba(28, 130, 52, 0.1);
-  --error-badge-color: #D73847;
-  --error-badge-bg-color: rgba(215, 56, 71, 0.1);
+  --badge-default-color: #6A737D;
+  --badge-default-bg-color: #F2F4F6;
+  --badge-default-border-color: transparent;
+  --badge-success-color: #1C8234;
+  --badge-success-bg-color: rgba(28, 130, 52, 0.1);
+  --badge-error-color: #D73847;
+  --badge-error-bg-color: rgba(215, 56, 71, 0.1);
 }
 
 :root[data-theme='dark'] {
-  --default-badge-color: #BBC0C5;
-  --default-badge-bg-color: #24272A;
-  --default-border-color: #BBC0C5;
-  --success-badge-color: #28A745;
-  --success-badge-bg-color: rgba(40, 167, 69, 0.15);
-  --error-badge-color: #E06470;
-  --error-badge-bg-color: rgba(224, 100, 112, 0.15);
+  --badge-default-color: #BBC0C5;
+  --badge-default-bg-color: #24272A;
+  --badge-default-border-color: #BBC0C5;
+  --badge-success-color: #28A745;
+  --badge-success-bg-color: rgba(40, 167, 69, 0.15);
+  --badge-error-color: #E06470;
+  --badge-error-bg-color: rgba(224, 100, 112, 0.15);
 }
 
 .badge {
@@ -26,20 +26,20 @@
   font-weight: 500;
   letter-spacing: 0.25px;
   border-radius: 999px;
-  border: 1px solid var(--default-border-color);
+  border: 1px solid var(--badge-default-border-color);
   padding: 2px 8px;
-  color: var(--default-badge-color);
-  background-color: var(--default-badge-bg-color);
+  color: var(--badge-default-color);
+  background-color: var(--badge-default-bg-color);
 
   &.success {
-    color: var(--success-badge-color);
-    background-color: var(--success-badge-bg-color);
+    color: var(--badge-success-color);
+    background-color: var(--badge-success-bg-color);
     border-color: transparent;
   }
 
   &.error {
-    color: var(--error-badge-color);
-    background-color: var(--error-badge-bg-color);
+    color: var(--badge-error-color);
+    background-color: var(--badge-error-bg-color);
     border-color: transparent;
   }
 }
