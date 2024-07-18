@@ -6,21 +6,10 @@ import styles from "./faucet.module.scss";
 import Button from "@site/src/components/Button";
 import { Faq } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
-import { AlertTitle, AlertText } from "@site/src/components/Alert";
-import { types } from "react-alert";
+import { AlertCommonIssue, AlertCooldown, AlertSuccess } from "@site/src/components/Faucet";
 
 export default function Faucet() {
   const alert = useAlert();
-
-  const alertMessage = ({ type, title, text }) => {
-    alert.show(
-      <div>
-        <AlertTitle>{title}</AlertTitle>
-        <AlertText>{text}</AlertText>
-      </div>,
-      { type: type },
-    );
-  };
 
   return (
     <Layout title="Faucet" description="Faucet">
@@ -28,21 +17,9 @@ export default function Faucet() {
         <span className={styles.title}>MetaMask Faucet</span>
         <Button
           onClick={() => {
-            alertMessage({
-              type: types.ERROR,
-              title: "error title",
-              text: "text text",
-            });
-            alertMessage({
-              type: types.SUCCESS,
-              title: "success title",
-              text: "text text",
-            });
-            alertMessage({
-              type: types.INFO,
-              title: "info title",
-              text: "text text",
-            });
+            alert.error(<AlertCommonIssue />);
+            alert.info(<AlertCooldown />);
+            alert.success(<AlertSuccess url='https://www.infura.io' />);
           }}
         >
           Sign in

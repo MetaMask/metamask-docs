@@ -22,6 +22,7 @@
   border-left: 4px solid;
   position: relative;
   width: 80vw;
+  box-shadow: var(--ifm-alert-shadow);
 
   &.info {
     border-color: var(--alert-info-border);
