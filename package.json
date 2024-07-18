@@ -1,11 +1,11 @@
 {
   "name": "metamask-docs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
-  "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start-with-app": "docusaurus start -p 3003",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -28,51 +28,45 @@
     "**/*.{md,mdx,ts,js,tsx,jsx,json}": "npm run format"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^11.6.4",
-    "@docusaurus/core": "^3.0.0",
-    "@docusaurus/plugin-content-docs": "^3.0.0",
-    "@docusaurus/theme-common": "^3.0.0",
-    "@docusaurus/theme-mermaid": "^3.0.0",
-    "@intercom/messenger-js-sdk": "^0.0.11",
+    "@docusaurus/core": "^3.0.1",
+    "@docusaurus/plugin-client-redirects": "^3.0.1",
+    "@docusaurus/plugin-google-gtag": "^3.0.1",
+    "@docusaurus/plugin-google-tag-manager": "^3.0.1",
+    "@docusaurus/preset-classic": "^3.0.1",
+    "@docusaurus/theme-common": "^3.0.1",
+    "@easyops-cn/docusaurus-search-local": "^0.38.1",
     "@mdx-js/react": "^3.0.0",
-    "@metamask/design-tokens": "^1.11.1",
-    "@metamask/docusaurus-openrpc": "^0.4.1",
-    "@metamask/sdk-react": "^0.26.5",
-    "@rjsf/core": "^5.18.4",
-    "@rjsf/utils": "^5.18.4",
-    "@rjsf/validator-ajv8": "^5.18.4",
     "clsx": "^1.2.1",
     "docusaurus-plugin-segment": "^1.0.4",
-    "docusaurus-plugin-sentry": "^2.0.0",
-    "dotenv": "^16.4.5",
-    "js-cookie": "^3.0.5",
-    "launchdarkly-js-client-sdk": "^3.3.0",
-    "lodash.debounce": "^4.0.8",
-    "node-polyfill-webpack-plugin": "^2.0.1",
-    "prettier": "^3.0.0",
+    "dotenv": "^16.3.1",
     "prism-react-renderer": "^2.1.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-dropdown-select": "^4.11.2",
-    "react-player": "^2.13.0",
-    "react-tippy": "^1.4.0",
-    "remark-codesandbox": "^0.10.1",
-    "remark-docusaurus-tabs": "^0.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropdown-select": "^4.11.0",
+    "redocusaurus": "^2.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
     "@docusaurus/eslint-plugin": "^3.0.0",
-    "@docusaurus/module-type-aliases": "^3.4.0",
-    "@docusaurus/plugin-client-redirects": "^3.0.0",
-    "@docusaurus/tsconfig": "^3.4.0",
-    "@docusaurus/types": "^3.4.0",
-    "@lavamoat/allow-scripts": "^3.0.4",
-    "@tsconfig/docusaurus": "^1.0.5",
-    "@typescript-eslint/parser": "^7.12.0",
-    "eslint-plugin-react": "^7.34.2",
+    "@docusaurus/module-type-aliases": "^3.0.0",
+    "@docusaurus/tsconfig": "^3.0.0",
+    "@docusaurus/types": "^3.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^10.0.4",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.7",
+    "@semantic-release/npm": "^10.0.2",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "@typescript-eslint/parser": "^6.13.1",
+    "commitizen": "^4.3.0",
+    "cspell": "^6.31.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "semantic-release": "^21.0.0",
     "stylelint": "^15.0.0 ",
     "stylelint-config-standard": "^34.0.0",
     "tsc-files": "^1.1.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.2.2"
   },
   "browserslist": {
     "production": [
@@ -87,27 +81,16 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=16.14"
   },
-  "packageManager": "yarn@3.4.1",
-  "lavamoat": {
-    "allowScripts": {
-      "@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/plugin-content-docs>@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/plugin-content-docs>@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>@open-rpc/docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>@open-rpc/docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@docusaurus/core>webpack-dev-server>ws>bufferutil": false,
-      "@docusaurus/core>webpack-dev-server>ws>utf-8-validate": false,
-      "$root$": false,
-      "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
