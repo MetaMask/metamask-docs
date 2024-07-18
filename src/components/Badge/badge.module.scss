@@ -1,0 +1,45 @@
+:root {
+  --default-badge-color: #6A737D;
+  --default-badge-bg-color: #F2F4F6;
+  --default-border-color: transparent;
+  --success-badge-color: #1C8234;
+  --success-badge-bg-color: rgba(28, 130, 52, 0.1);
+  --error-badge-color: #D73847;
+  --error-badge-bg-color: rgba(215, 56, 71, 0.1);
+}
+
+:root[data-theme='dark'] {
+  --default-badge-color: #BBC0C5;
+  --default-badge-bg-color: #24272A;
+  --default-border-color: #BBC0C5;
+  --success-badge-color: #28A745;
+  --success-badge-bg-color: rgba(40, 167, 69, 0.15);
+  --error-badge-color: #E06470;
+  --error-badge-bg-color: rgba(224, 100, 112, 0.15);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  border-radius: 999px;
+  border: 1px solid var(--default-border-color);
+  padding: 2px 8px;
+  color: var(--default-badge-color);
+  background-color: var(--default-badge-bg-color);
+
+  &.success {
+    color: var(--success-badge-color);
+    background-color: var(--success-badge-bg-color);
+    border-color: transparent;
+  }
+
+  &.error {
+    color: var(--error-badge-color);
+    background-color: var(--error-badge-bg-color);
+    border-color: transparent;
+  }
+}
