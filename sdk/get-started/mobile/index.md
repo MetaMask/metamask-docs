@@ -1,6 +1,6 @@
 ---
 sidebar_label: Mobile
-sidebar_position: 3
+sidebar_position: 4
 description: Set up the SDK in your mobile dapp.
 ---
 

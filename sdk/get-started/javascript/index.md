@@ -1,6 +1,6 @@
 ---
 sidebar_label: JavaScript
-sidebar_position: 2
+sidebar_position: 3
 description: Set up the SDK in your JavaScript dapp.
 ---
 

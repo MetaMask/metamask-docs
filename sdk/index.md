@@ -5,63 +5,33 @@ description: Use the SDK in your dapp.
 
 # MetaMask SDK documentation
 
-[MetaMask SDK](concepts/about-sdk.md) is a library that provides a reliable, secure, and seamless
-connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
+MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
+to the MetaMask browser extension and MetaMask Mobile.
+You can install the SDK in existing dapps, and call any [Wallet API](/wallet) methods from your dapp.
+
+## Why MetaMask SDK?
+
+MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
+multiple dapp platforms, without relying on third-party libraries.
 By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
 preferred MetaMask client.
-The SDK supports the following dapp platforms:
+The SDK uses the [MetaMask Ethereum provider](/wallet/concepts/wallet-api/#ethereum-provider-api),
+so existing dapps work out of the box with the SDK.
 
-<div class="cards">
-  <div class="card">
-    <div class="card__header">
-      <h3>💻 <a href="get-started/javascript">JavaScript</a></h3>
-    </div>
-    <div class="card__body">
-      <ul>
-        <li><a href="get-started/javascript/react">React</a></li>
-        <li><a href="get-started/javascript/pure-js">Pure JavaScript</a></li>
-        <li><a href="get-started/javascript/other-web-frameworks">Other web frameworks</a></li>
-        <li><a href="get-started/javascript/react-native">React Native</a></li>
-        <li><a href="get-started/javascript/nodejs">Node.js</a></li>
-        <li><a href="get-started/javascript/electron">Electron</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card__header">
-      <h3>📱 <a href="get-started/mobile">Mobile</a></h3>
-    </div>
-    <div class="card__body">
-      <ul>
-        <li><a href="get-started/javascript/react-native">React Native</a></li>
-        <li><a href="get-started/mobile/ios">iOS</a></li>
-        <li><a href="get-started/mobile/android">Android</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card__header">
-      <h3>🎮 <a href="get-started/gaming">Gaming</a></h3>
-    </div>
-    <div class="card__body">
-      <ul>
-        <li><a href="get-started/gaming/unity">Unity</a></li>
-        <li>Unreal Engine (coming soon)</li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="card margin-bottom--lg">
-  <div class="card__header">
-    <h3>↔️ <a href="get-started/3rd-party-libraries">Third-party libraries</a></h3>
-  </div>
-  <div class="card__body">
-    <ul>
-      <li><a href="get-started/3rd-party-libraries/web3-onboard">Web3-Onboard</a></li>
-      <li><a href="get-started/3rd-party-libraries/wagmi">Wagmi</a></li>
-    </ul>
-  </div>
-</div>
+The following table outlines some of the features available when you integrate your dapp with
+MetaMask using the SDK.
+Most of these features are not available if you only integrate your dapp directly using the
+[Wallet API](/wallet).
+
+| Feature                                                                                       | Wallet API only | MetaMask SDK |
+|-----------------------------------------------------------------------------------------------| :-------------: | :----------: |
+| Connect from a web dapp to the MetaMask extension                                             |       ✅        |      ✅      |
+| Connect from a web dapp to MetaMask Mobile                                                    |       ❌        |      ✅      |
+| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                             |       ❌        |      ✅      |
+| Use custom RPC methods such as [`connectAndSign`](how-to/javascript/connect-and-sign.md)      |       ❌        |      ✅      |
+| [Display custom modals](how-to/javascript/display-custom-modals.md) in MetaMask               |       ❌        |      ✅      |
+| [Make read-only requests](how-to/javascript/make-read-only-requests.md) using the Infura API  |       ❌        |      ✅      |
+| [Batch multiple RPC requests](how-to/javascript/batch-json-rpc-requests.md)                   |       ❌        |      ✅      |
 
 ## Questions?
 

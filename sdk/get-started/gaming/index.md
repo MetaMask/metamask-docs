@@ -1,6 +1,6 @@
 ---
 sidebar_label: Gaming
-sidebar_position: 4
+sidebar_position: 5
 description: Set up the SDK in your gaming dapp.
 ---
 

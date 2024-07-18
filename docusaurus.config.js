@@ -205,7 +205,7 @@ const config = {
           },
           {
             to: "wallet",
-            label: "Wallet",
+            label: "Wallet API",
           },
           {
             to: "snaps",
@@ -265,7 +265,7 @@ const config = {
                 to: "/sdk",
               },
               {
-                label: "Wallet",
+                label: "Wallet API",
                 to: "/wallet",
               },
               {

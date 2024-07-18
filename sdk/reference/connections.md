@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 sidebar_label: SDK connections
 description: Learn about how a dapp with the SDK installed connects to MetaMask.
 ---

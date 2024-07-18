@@ -1,6 +1,6 @@
 ---
 sidebar_label: React Native and Expo
-sidebar_position: 4
+sidebar_position: 3
 description: Set up the SDK in your React Native dapp.
 ---
 
