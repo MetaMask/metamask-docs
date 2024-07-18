@@ -2597,6 +2597,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intercom/messenger-js-sdk@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@intercom/messenger-js-sdk@npm:0.0.11"
+  checksum: 1b89cdfab5d332900101d9d9439fbbf654777c4d17027a654aa0a31d53bf6e9e3c08c7faa7939eed8c1b75a8b36ee6a93d05bf7bddd81edb4aae91a8f1939162
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -13397,6 +13404,7 @@ __metadata:
     "@docusaurus/theme-mermaid": ^3.0.0
     "@docusaurus/tsconfig": ^3.4.0
     "@docusaurus/types": ^3.4.0
+    "@intercom/messenger-js-sdk": ^0.0.11
     "@lavamoat/allow-scripts": ^3.0.4
     "@mdx-js/react": ^3.0.0
     "@metamask/design-tokens": ^1.11.1
