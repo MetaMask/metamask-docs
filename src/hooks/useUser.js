@@ -15,7 +15,7 @@ export default function useUser() {
         const userId = response.data.id;
         const upData = await fetch(
           `${API_URL}/api/v1/users/${userId}/projects`,
-          GET_OPTIONS
+          GET_OPTIONS,
         );
         if (upData.ok) {
           const upProjects = await upData.json();

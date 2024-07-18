@@ -25,7 +25,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask
+    (net) => net.name === NETWORK_NAMES.metamask,
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -36,7 +36,7 @@ export default function LayoutWrapper({ children }) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
         (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
       );
       return page;
     }
@@ -61,7 +61,7 @@ export default function LayoutWrapper({ children }) {
     <BrowserOnly>
       {() => {
         if (!ldReady) {
-          return null
+          return null;
         }
         return (
           <>

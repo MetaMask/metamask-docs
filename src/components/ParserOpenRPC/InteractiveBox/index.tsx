@@ -51,7 +51,7 @@ export default function InteractiveBox({
 
   const defaultExampleFormData = examples
     ? Object.fromEntries(
-        examples[0].params.map(({ name, value }) => [name, value])
+        examples[0].params.map(({ name, value }) => [name, value]),
       )
     : {};
   const schema: RJSFSchema = {
@@ -60,7 +60,7 @@ export default function InteractiveBox({
     },
     type: "object",
     properties: Object.fromEntries(
-      params.map(({ name, schema }) => [name, schema])
+      params.map(({ name, schema }) => [name, schema]),
     ),
   };
   const uiSchema: UiSchema = {
@@ -170,7 +170,7 @@ export default function InteractiveBox({
             styles.tableFooterRow,
             isLightTheme
               ? styles.tableFooterRowLight
-              : styles.tableFooterRowDark
+              : styles.tableFooterRowDark,
           )}
         >
           <div className={clsx(styles.footerButtons, styles.footerButtonsLeft)}>
@@ -203,7 +203,7 @@ export default function InteractiveBox({
                 className={clsx(
                   global.secondaryBtn,
                   styles.footerButtonRight,
-                  styles.footerButtonRightOutline
+                  styles.footerButtonRightOutline,
                 )}
                 onClick={handleCancelClick}
               >

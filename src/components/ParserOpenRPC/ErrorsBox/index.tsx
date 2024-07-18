@@ -32,7 +32,7 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
             styles.errRowHeading,
             colorMode === "light"
               ? styles.errRowHeadingLightView
-              : styles.errRowHeadingDarkView
+              : styles.errRowHeadingDarkView,
           )}
         >
           <div className={styles.errColCode}>Code</div>
