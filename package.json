@@ -45,6 +45,7 @@
     "docusaurus-plugin-segment": "^1.0.4",
     "docusaurus-plugin-sentry": "^2.0.0",
     "dotenv": "^16.4.5",
+    "js-cookie": "^3.0.5",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
     "node-polyfill-webpack-plugin": "^2.0.1",
