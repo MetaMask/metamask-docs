@@ -1,6 +1,6 @@
-import React from 'react';
-import {Redirect} from '@docusaurus/router';
+import React from "react";
+import { Redirect } from "@docusaurus/router";
 
 export default function DeveloperTools() {
-    return <Redirect to="/developer-tools/dashboard"/>;
+  return <Redirect to="/developer-tools/dashboard" />;
 }

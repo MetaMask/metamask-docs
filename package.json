@@ -19,7 +19,7 @@
     "lint:js": "eslint . --ext js,jsx,ts,tsx --max-warnings=5",
     "lint:style": "stylelint \"**/*.css\" --fix",
     "lint:fix": "npm run lint:js -- --fix",
-    "format": "prettier --write '{blog,docs,src,static}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
+    "format": "prettier --write '{blog,docs,src}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
   },
   "lint-staged": {
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
@@ -50,9 +50,10 @@
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "prettier": "^3.0.0",
+    "prettier": "^3.3.3",
     "prism-react-renderer": "^2.1.0",
     "react": "^18.0.0",
+    "react-alert": "^7.0.3",
     "react-dom": "^18.0.0",
     "react-dropdown-select": "^4.11.2",
     "react-player": "^2.13.0",

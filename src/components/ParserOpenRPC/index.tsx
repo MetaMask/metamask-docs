@@ -12,7 +12,10 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import {
+  trackClickForSegment,
+  trackInputChangeForSegment,
+} from "@site/src/lib/segmentAnalytics";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -72,19 +75,19 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     };
 
     const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method
+      (met) => met.name === method,
     );
     if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
-      "errors"
+      "errors",
     );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
-      "tags"
+      "tags",
     );
 
     return {
@@ -103,12 +106,16 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const { sdk, ready, connected, provider, account } = useSDK();
 
   const isConnected = useMemo(() => {
-    return ready && connected && !!account
+    return ready && connected && !!account;
   }, [ready, connected, account]);
 
   useEffect(() => {
     if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({ name: account, id: account, username: account })
+      (window as any)?.Sentry?.setUser({
+        name: account,
+        id: account,
+        username: account,
+      });
     }
   }, [account]);
 
@@ -136,12 +143,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!provider || !connected) return
+    if (!provider || !connected) return;
     try {
       const response = await provider?.request({
         method: method,
-        params: paramsData
-      })
+        params: paramsData,
+      });
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -194,7 +201,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack
+                      modalDrawerStyles.modalHeaderIconBack,
                     )}
                     onClick={closeComplexTypeView}
                   >

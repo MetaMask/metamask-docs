@@ -9,7 +9,7 @@ function TagsRow(props) {
     <div
       className={clsx(
         ThemeClassNames.docs.docFooterTagsRow,
-        "row margin-bottom--sm"
+        "row margin-bottom--sm",
       )}
     >
       <div className="col">
@@ -28,7 +28,7 @@ export default function DocItemTags() {
       className={clsx(
         ThemeClassNames.docs.docFooter,
         "docusaurus-mt-lg",
-        "margin-top--sm"
+        "margin-top--sm",
       )}
     >
       {canDisplayTagsRow && <TagsRow tags={tags} />}

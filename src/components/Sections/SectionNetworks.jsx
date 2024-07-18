@@ -57,7 +57,7 @@ const SectionNetworks = () => {
             ? index <= 4 || !isNetworksListCollapsed
               ? renderNetworkCard(item, index)
               : null
-            : renderNetworkCard(item, index)
+            : renderNetworkCard(item, index),
         )}
       </div>
       {isMobile && (
