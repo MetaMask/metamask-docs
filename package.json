@@ -33,7 +33,6 @@
     "@docusaurus/plugin-content-docs": "^3.0.0",
     "@docusaurus/theme-common": "^3.0.0",
     "@docusaurus/theme-mermaid": "^3.0.0",
-    "@intercom/messenger-js-sdk": "^0.0.11",
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
