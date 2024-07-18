@@ -1,0 +1,10 @@
+{
+  "label": "Gaming ",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "slug": "get-started/gaming",
+    "title": "Get started using gaming platforms",
+    "description": "You can get started with MetaMask SDK using the following gaming platforms:"
+  }
+}

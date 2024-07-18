@@ -100,8 +100,8 @@ and select **Reset account**.
 ## Next steps
 
 Once you have your development environment set up and development network running, you can
-[connect your dapp to MetaMask](/wallet/how-to/connect) by setting up MetaMask SDK, detecting
-MetaMask, detecting a user's network, and accessing a user's accounts.
+[connect your dapp to MetaMask](../how-to/connect/index.md) by detecting MetaMask in the user's
+browser and accessing their accounts.
 
 For an end-to-end example, you can also follow the
 [Create a simple React dapp](../tutorials/react-dapp-local-state.md) tutorial.

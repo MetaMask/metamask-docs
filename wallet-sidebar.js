@@ -30,14 +30,6 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          id: "reference/sdk-js-options",
-        },
-        {
-          type: "doc",
-          id: "reference/sdk-unity-api",
-        },
-        {
-          type: "doc",
           id: "reference/provider-api",
         },
       ],

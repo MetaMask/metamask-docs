@@ -1,0 +1,10 @@
+{
+  "label": "Third-party libraries",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "slug": "get-started/3rd-party-libraries",
+    "title": "Get started using third-party libraries",
+    "description": "You can get started with MetaMask SDK using the following third-party libraries:"
+  }
+}

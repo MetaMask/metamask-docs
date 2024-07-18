@@ -116,6 +116,17 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
+        id: "sdk",
+        path: "sdk",
+        routeBasePath: "sdk",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./sdk-sidebar.js"),
+        breadcrumbs: false,
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
         id: "services",
         path: "services",
         routeBasePath: "services",
@@ -189,8 +200,12 @@ const config = {
         },
         items: [
           {
+            to: "sdk",
+            label: "SDK",
+          },
+          {
             to: "wallet",
-            label: "Wallet",
+            label: "Wallet API",
           },
           {
             to: "snaps",
@@ -246,7 +261,11 @@ const config = {
             title: "Documentation",
             items: [
               {
-                label: "Wallet",
+                label: "SDK",
+                to: "/sdk",
+              },
+              {
+                label: "Wallet API",
                 to: "/wallet",
               },
               {

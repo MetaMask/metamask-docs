@@ -1,0 +1,100 @@
+---
+sidebar_label: Other web frameworks
+sidebar_position: 3
+description: Get started with MetaMask SDK using other web frameworks.
+---
+
+# Get started using other web frameworks
+
+Import MetaMask SDK into your web dapp to enable your users to
+easily connect to the MetaMask browser extension and MetaMask Mobile.
+The SDK for other web frameworks has the [same prerequisites](index.md#prerequisites) as for
+standard JavaScript.
+
+## Steps
+
+### 1. Install the SDK
+
+In your project directory, install the SDK using Yarn or npm:
+
+```bash
+yarn add @metamask/sdk
+```
+
+or
+
+```bash
+npm i @metamask/sdk
+```
+
+### 2. Import the SDK
+
+In your project script, add the following to import the SDK:
+
+```javascript title="index.js"
+import { MetaMaskSDK } from "@metamask/sdk"
+```
+
+### 3. Instantiate the SDK
+
+Instantiate the SDK using any [options](../../reference/js-options.md):
+
+```javascript title="index.js"
+const MMSDK = new MetaMaskSDK({
+  dappMetadata: {
+    name: "Example JavaScript Dapp",
+    url: window.location.href,
+  },
+  infuraAPIKey: process.env.INFURA_API_KEY,
+  // Other options
+});
+
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
+```
+
+- Use [`dappMetadata`](../../reference/js-options.md#dappmetadata) to display information
+  about your dapp in the MetaMask connection modal.
+- Use [`infuraAPIKey`](../../reference/js-options.md#infuraapikey) to
+  [make read-only RPC requests](../../how-to/javascript/make-read-only-requests.md) from your dapp.
+- Use [`modals`](../../reference/js-options.md#modals) to [customize the logic and UI of
+  the displayed modals](../../how-to/javascript/display-custom-modals.md).
+
+### 4. Use the SDK
+
+Use the SDK by calling any [provider API methods](/wallet/reference/provider-api).
+Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
+[`request()`](/wallet/reference/provider-api/#request) first, since it
+prompts the installation or connection popup to appear.
+
+```javascript
+ethereum.request({ method: "eth_requestAccounts", params: [] })
+```
+
+You can also call the SDK's [`connectAndSign`](../../how-to/javascript/connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](../../how-to/javascript/batch-json-rpc-requests.md) using the `metamask_batch` method.
+
+## Example
+
+You can copy the full JavaScript example to get started:
+
+```javascript title="index.js"
+import { MetaMaskSDK } from "@metamask/sdk";
+
+const MMSDK = new MetaMaskSDK({
+  dappMetadata: {
+    name: "Example JavaScript Dapp",
+    url: window.location.href,
+  },
+  infuraAPIKey: process.env.INFURA_API_KEY,
+  // Other options
+});
+
+// You can also access via window.ethereum
+const ethereum = MMSDK.getProvider();
+
+ethereum.request({ method: "eth_requestAccounts", params: [] });
+```
+
+See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)
+in the JavaScript SDK GitHub repository for more information.

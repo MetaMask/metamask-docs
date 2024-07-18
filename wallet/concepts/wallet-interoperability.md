@@ -102,7 +102,7 @@ If you intend to support discovery of other wallets, we recommend using other me
 EIP-6963 support such as [Wagmi 2+](https://wagmi.sh).
 :::
 
-The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks
+The [MetaMask JavaScript SDK](/sdk) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
 This eliminates the need for manual configuration or detection methods, simplifying the initial
 setup process for both developers and users.
@@ -125,6 +125,6 @@ See the [list of wallets that support EIP-6963](https://github.com/WalletConnect
 ## Backwards compatibility
 
 Dapps that do not support EIP-6963 can still
-[detect MetaMask using the `window.ethereum` provider](/wallet/tutorials/javascript-dapp-simple).
+[detect MetaMask using the `window.ethereum` provider](../tutorials/javascript-dapp-simple.md).
 However, we recommend adding support to improve the user experience for multiple installed wallets.
 Read more about [EIP-6963 backwards compatibility](https://eips.ethereum.org/EIPS/eip-6963#backwards-compatibility).
