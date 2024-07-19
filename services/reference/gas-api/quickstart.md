@@ -152,20 +152,20 @@ The result should look similar to:
 ```json
 Suggested gas fees: {
   low: {
-    suggestedMaxPriorityFeePerGas: "0.05",
-    suggestedMaxFeePerGas: "24.086058416",
+    suggestedMaxPriorityFeePerGas: "0.05", // The gas price in gwei
+    suggestedMaxFeePerGas: "24.086058416", // The gas price in gwei
     minWaitTimeEstimate: 15000,
     maxWaitTimeEstimate: 30000
   },
   medium: {
-    suggestedMaxPriorityFeePerGas: "0.1",
-    suggestedMaxFeePerGas: "32.548678862",
+    suggestedMaxPriorityFeePerGas: "0.1", // The gas price in gwei
+    suggestedMaxFeePerGas: "32.548678862", // The gas price in gwei
     minWaitTimeEstimate: 15000,
     maxWaitTimeEstimate: 45000
   },
   high: {
-    suggestedMaxPriorityFeePerGas: "0.3",
-    suggestedMaxFeePerGas: "41.161299308",
+    suggestedMaxPriorityFeePerGas: "0.3", // The gas price in gwei
+    suggestedMaxFeePerGas: "41.161299308", // The gas price in gwei
     minWaitTimeEstimate: 15000,
     maxWaitTimeEstimate: 60000
   },

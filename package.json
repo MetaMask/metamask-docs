@@ -37,6 +37,7 @@
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
+    "@metamask/sdk": "^0.26.5",
     "@metamask/sdk-react": "^0.26.5",
     "@rjsf/core": "^5.18.4",
     "@rjsf/utils": "^5.18.4",
@@ -107,7 +108,10 @@
       "@docusaurus/core>webpack-dev-server>ws>bufferutil": false,
       "@docusaurus/core>webpack-dev-server>ws>utf-8-validate": false,
       "$root$": false,
-      "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false
+      "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false,
+      "@metamask/sdk>@metamask/sdk-communication-layer>bufferutil": false,
+      "@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false,
+      "@metamask/sdk>eciesjs>secp256k1": false
     }
   }
 }
