@@ -1,5 +1,4 @@
-import React, { createContext, useMemo, useState, useEffect } from "react";
-import { useSDK } from "@metamask/sdk-react";
+import React, { createContext, useMemo, useState, useEffect, useContext } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -13,6 +12,7 @@ import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
 import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -100,25 +100,14 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { sdk, ready, connected, provider, account } = useSDK();
-
-  const isConnected = useMemo(() => {
-    return ready && connected && !!account
-  }, [ready, connected, account]);
+  const { metaMaskProvider, metaMaskAccount, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   useEffect(() => {
     if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({ name: account, id: account, username: account })
+      (window as any)?.Sentry?.setUser({ name: metaMaskAccount, id: metaMaskAccount, username: metaMaskAccount })
     }
-  }, [account]);
+  }, [metaMaskAccount]);
 
-  const connectSDKHandler = async () => {
-    try {
-      const accounts = await sdk?.connect();
-    } catch (err) {
-      console.warn("failed to connect..", err);
-    }
-  };
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -136,9 +125,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!provider || !connected) return
+    if (!metaMaskProvider) return
     try {
-      const response = await provider?.request({
+      const response = await metaMaskProvider?.request({
         method: method,
         params: paramsData
       })
@@ -229,9 +218,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!isConnected && <AuthBox handleConnect={connectSDKHandler} />}
+            {!metaMaskProvider && <AuthBox handleConnect={metaMaskConnectHandler} />}
             <RequestBox
-              isMetamaskInstalled={connected}
+              isMetamaskInstalled={!!metaMaskProvider}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}

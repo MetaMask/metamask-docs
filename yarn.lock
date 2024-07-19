@@ -13379,6 +13379,7 @@ __metadata:
     "@mdx-js/react": ^3.0.0
     "@metamask/design-tokens": ^1.11.1
     "@metamask/docusaurus-openrpc": ^0.4.1
+    "@metamask/sdk": ^0.26.5
     "@metamask/sdk-react": ^0.26.5
     "@rjsf/core": ^5.18.4
     "@rjsf/utils": ^5.18.4
