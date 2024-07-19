@@ -10,8 +10,7 @@ The [Interplanetary File System (IPFS)](../../how-to/use-ipfs/migrate-to-infuras
 
 :::caution Limited access
 
-Infura is currently limiting IPFS services to customers that already have an active IPFS key.
-New IPFS key creation is disabled for new and existing customers.
+Infura restricts its IPFS service to a select set of qualified customers. Please [contact the Infura support team](https://support.infura.io/ipfs) for next steps. New IPFS key creation is disabled for all users, but existing IPFS customers can continue to use the IPFS service with their existing keys.
 
 :::
 
