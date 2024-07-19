@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import ldClient from "launchdarkly";
 import { useLocation } from "@docusaurus/router";
@@ -57,18 +56,22 @@ export default function LayoutWrapper({ children }) {
     };
   }, []);
 
+  if (!referencePageName) {
+    return (
+      <Layout>{children}</Layout>
+    )
+  }
+
   return (
-    <BrowserOnly>
-      {() => {
-        if (!ldReady) {
-          return null
-        }
-        return (
+    <>
+      {
+        !ldReady ? null : (
           <>
-            {newReferenceEnabled && ldReady && referencePageName ? (
-              <Layout>
-                <div className={styles.pageWrapper}>
-                  {children?.props?.children[0]?.type === "aside" && (
+            {
+              newReferenceEnabled ? (
+                <Layout>
+                  <div className={styles.pageWrapper}>
+                    {children?.props?.children[0]?.type === "aside" && (
                     <>{children.props.children[0]}</>
                   )}
                   <div className={styles.mainContainer}>
@@ -81,12 +84,13 @@ export default function LayoutWrapper({ children }) {
                   </div>
                 </div>
               </Layout>
-            ) : (
-              <Layout>{children}</Layout>
-            )}
+              ) : (
+                <Layout>{children}</Layout>
+              )
+            }
           </>
-        );
-      }}
-    </BrowserOnly>
-  );
+        )
+      }
+    </>
+  )
 }

@@ -1,29 +1,43 @@
-import React, { ReactChild } from "react";
-import { MetaMaskProvider } from '@metamask/sdk-react';
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import React, { useState, createContext, ReactChild } from "react";
+import { MetaMaskSDK } from "@metamask/sdk";
+
+export const MetamaskProviderContext = createContext(null);
 
 export default function Root({ children }: { children: ReactChild}) {
-  return (
-    <BrowserOnly fallback={<div>Loading...</div>}>
-      {
-        () => {
-          return (
-            <MetaMaskProvider debug={false} sdkOptions={{
-              logging:{
-                  developerMode: false,
-                },
-                checkInstallationImmediately: false,
-                dappMetadata: {
-                  name: "New mm app",
-                  url: "https://docs.metamask.io/",
-                },
-                preferDesktop: true
-            }}>
-              {children}
-            </MetaMaskProvider>
-          )
-        }
+  const [metaMaskProvider, setMetaMaskProvider] = useState(undefined);
+  const [metaMaskAccount, setMetaMaskAccount] = useState(undefined);
+  const sdk = new MetaMaskSDK({
+    dappMetadata: {
+      name: "Reference pages",
+      url: "https://docs.metamask.io/",
+    },
+    preferDesktop: true,
+    logging: {
+      sdk: false,
+    }
+  });
+
+  const metaMaskConnectHandler = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setMetaMaskAccount(accounts)
+      if (accounts && accounts.length > 0) {
+        setMetaMaskAccount(accounts[0])
+        const provider = sdk?.getProvider();
+        setMetaMaskProvider(provider);
       }
-    </BrowserOnly>
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  }
+
+  return (
+    <MetamaskProviderContext.Provider value={{
+      metaMaskProvider,
+      metaMaskAccount,
+      metaMaskConnectHandler
+    }}>
+      {children}
+    </MetamaskProviderContext.Provider>
   );
 }
