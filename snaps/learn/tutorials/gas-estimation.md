@@ -28,7 +28,7 @@ Create a new Snap project using the
 starter kit by running:
 
 <Tabs>
-  <TabItem value="yarn" label="yarn" default>
+  <TabItem value="Yarn" label="Yarn" default>
 
 ```bash
 yarn create @metamask/snap gas-estimation-snap
