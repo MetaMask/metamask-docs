@@ -47,7 +47,7 @@ const config = {
     },
     { src: "/js/feedback-script.js", defer: true, async: true },
     { src: "/js/getfeedback.js", defer: true, async: true },
-    { src: '/js/trailingSlash.js', defer: true, async: true},
+    { src: "/js/trailingSlash.js", defer: true, async: true},
   ],
 
   markdown: {
