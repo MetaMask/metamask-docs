@@ -49,7 +49,7 @@ Infura support subscriptions over WebSockets for the following networks:
 - [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
 - [Linea](../reference/linea/index.md)
 - [Optimism](../reference/optimism/index.md)
-- [Polygon](../reference/polygon/index.md)
+- [Polygon](../reference/polygon-pos/index.md)
 
 :::info
 

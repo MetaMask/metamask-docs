@@ -214,7 +214,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Network | Chain ID |
 | ------- | -------- |
 | Mainnet | 59144    |
-| Testnet | 59140    |
+| Sepolia | 59141    |
 
 #### Optimism
 
