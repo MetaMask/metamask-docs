@@ -77,8 +77,6 @@ yarn run allow-scripts auto
 ``` 
  </div>
 </details>
- 
-
 
 ### 2. Enable transaction insights and the Ethereum provider
 
