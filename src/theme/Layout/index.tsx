@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import BrowserOnly from '@docusaurus/BrowserOnly';
 import { usePluginData } from "@docusaurus/useGlobalData";
 import ldClient from "launchdarkly";
 import { useLocation } from "@docusaurus/router";
@@ -13,23 +12,31 @@ const REF_PATH = "/wallet/reference/";
 const EXEPT_METHODS = [
   "wallet_requestPermissions",
   "wallet_revokePermissions",
-  "eth_signTypedData_v4"
+  "eth_signTypedData_v4",
 ];
 
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
-  const { netData } = usePluginData("plugin-json-rpc") as { netData?: ResponseItem[] };
+  const { netData } = usePluginData("plugin-json-rpc") as {
+    netData?: ResponseItem[];
+  };
   const [ldReady, setLdReady] = useState(false);
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
-  const metamaskNetwork = netData?.find(net => net.name === NETWORK_NAMES.metamask);
-  const metamaskMethods = metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
+  const metamaskNetwork = netData?.find(
+    (net) => net.name === NETWORK_NAMES.metamask
+  );
+  const metamaskMethods =
+    metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
 
   const referencePageName = useMemo(() => {
     const currentPath = location.pathname;
     if (currentPath.includes(REF_PATH) && metamaskMethods.length > 0) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
-      const page = metamaskMethods.find(name => name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name));
+      const page = metamaskMethods.find(
+        (name) =>
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
+      );
       return page;
     }
     return false;
@@ -49,32 +56,41 @@ export default function LayoutWrapper({ children }) {
     };
   }, []);
 
+  if (!referencePageName) {
+    return (
+      <Layout>{children}</Layout>
+    )
+  }
+
   return (
-    <BrowserOnly>
+    <>
       {
-        () => {
-          return (
-            <>
-              {newReferenceEnabled && ldReady && referencePageName ? (
+        !ldReady ? null : (
+          <>
+            {
+              newReferenceEnabled ? (
                 <Layout>
                   <div className={styles.pageWrapper}>
                     {children?.props?.children[0]?.type === "aside" && (
-                      <>{children.props.children[0]}</>
-                    )}
-                    <div className={styles.mainContainer}>
-                      <div className={styles.contentWrapper}>
-                        <ParserOpenRPC network={NETWORK_NAMES.metamask} method={referencePageName} />
-                      </div>
+                    <>{children.props.children[0]}</>
+                  )}
+                  <div className={styles.mainContainer}>
+                    <div className={styles.contentWrapper}>
+                      <ParserOpenRPC
+                        network={NETWORK_NAMES.metamask}
+                        method={referencePageName}
+                      />
                     </div>
                   </div>
-                </Layout>
+                </div>
+              </Layout>
               ) : (
                 <Layout>{children}</Layout>
-              )}
-            </>
-          )
-        }
+              )
+            }
+          </>
+        )
       }
-    </BrowserOnly>
-  );
+    </>
+  )
 }

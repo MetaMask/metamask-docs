@@ -27,7 +27,7 @@ Your dapp cannot directly call the following RPC methods, which require user wal
 - `wallet_watchAsset`
 - `wallet_addEthereumChain`
 - `wallet_switchEthereumChain`
-:::
+  :::
 
 Configure your dapp to make read-only requests using the [Infura API](#use-the-infura-api),
 [custom nodes](#use-custom-nodes), or [both](#use-the-infura-api-and-custom-nodes).
@@ -119,7 +119,7 @@ sdkOptions={{
   },
   defaultReadOnlyChainId: "0x1",
   // Other options.
-}
+}}
 ```
 
 In this example, read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only

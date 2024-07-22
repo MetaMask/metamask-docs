@@ -1,0 +1,34 @@
+---
+name: Check file name case
+
+on:
+  workflow_call:
+  secrets:
+    SEGMENT_ANALYTICS_KEY:
+      required: true
+    LD_CLIENT_ID:
+      required: true
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+
+
+jobs:
+  case:
+    name: Check for case being inconsistent
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ["docs"]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Case check action
+        uses: ConsenSys/docs-gha/case@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOC_DIR: ${{ matrix.folder }}
+          SKIP_TEST: true

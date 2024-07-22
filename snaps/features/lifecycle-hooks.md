@@ -63,8 +63,8 @@ export const onInstall: OnInstallHandler = async () => {
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnInstallHandler } from "@metamask/snaps-sdk";
-import { heading, panel, text } from "@metamask/snaps-sdk";
+import type { OnInstallHandler } from "@metamask/snaps-sdk"
+import { heading, panel, text } from "@metamask/snaps-sdk"
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
@@ -74,12 +74,12 @@ export const onInstall: OnInstallHandler = async () => {
       content: panel([
         heading("Installation successful"),
         text(
-          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io).",
+          "To use this Snap, visit the companion dapp at [metamask.io](https://metamask.io)."
         ),
       ]),
     },
-  });
-};
+  })
+}
 ```
 
 </TabItem>
@@ -122,8 +122,8 @@ export const onUpdate: OnUpdateHandler = async () => {
 <TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
-import type { OnUpdateHandler } from "@metamask/snaps-sdk";
-import { heading, panel, text } from "@metamask/snaps-sdk";
+import type { OnUpdateHandler } from "@metamask/snaps-sdk"
+import { heading, panel, text } from "@metamask/snaps-sdk"
 
 export const onUpdate: OnUpdateHandler = async () => {
   await snap.request({
@@ -132,16 +132,12 @@ export const onUpdate: OnUpdateHandler = async () => {
       type: "alert",
       content: panel([
         heading("Update successful"),
-        text(
-          "New features added in this version:",
-        ),
-        text(
-          "Added a dialog that appears when updating."
-        ), 
+        text("New features added in this version:"),
+        text("Added a dialog that appears when updating."),
       ]),
     },
-  });
-};
+  })
+}
 ```
 
 </TabItem>

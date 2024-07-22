@@ -63,8 +63,8 @@ await snap.request({
 </TabItem>
 <TabItem value="Functions" deprecated>
 
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+```javascript title="index.js"
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -75,7 +75,7 @@ await snap.request({
       text("The thing that happened is..."),
     ]),
   },
-});
+})
 
 // Code that should execute after the alert has been acknowledged.
 ```
@@ -122,8 +122,8 @@ if (result === true) {
 </TabItem>
 <TabItem value="Functions" deprecated>
 
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+```javascript title="index.js"
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 const result = await snap.request({
   method: "snap_dialog",
@@ -134,7 +134,7 @@ const result = await snap.request({
       text("The action is..."),
     ]),
   },
-});
+})
 
 if (result === true) {
   // Do the action.
@@ -182,8 +182,8 @@ const walletAddress = await snap.request({
 </TabItem>
 <TabItem value="Functions" deprecated>
 
-```typescript title="index.ts"
-import { panel, text, heading } from "@metamask/snaps-sdk";
+```javascript title="index.js"
+import { panel, text, heading } from "@metamask/snaps-sdk"
 
 const walletAddress = await snap.request({
   method: "snap_dialog",
@@ -195,7 +195,7 @@ const walletAddress = await snap.request({
     ]),
     placeholder: "0x123...",
   },
-});
+})
 
 // walletAddress will be a string containing the address entered by the user.
 ```

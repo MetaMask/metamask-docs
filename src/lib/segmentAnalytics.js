@@ -1,12 +1,8 @@
-export const trackPageViewForSegment = ({
-  name,
-  path,
-  userExperience
-}) => {
+export const trackPageViewForSegment = ({ name, path, userExperience }) => {
   if (window.analytics) {
     window.analytics.page("Page viewed", name, {
       ...(path && { path: path }),
-      ...(userExperience && { user_experience: userExperience })
+      ...(userExperience && { user_experience: userExperience }),
     });
   }
 };
@@ -36,7 +32,7 @@ export const trackInputChangeForSegment = ({
   timestamp,
 }) => {
   if (window.analytics) {
-    window.analytics.track(`Input changed`, {
+    window.analytics.track("Input changed", {
       ...(eventName && { event_name: eventName }),
       ...(userExperience && { user_experience: userExperience }),
       ...(timestamp && { timestamp: timestamp }),

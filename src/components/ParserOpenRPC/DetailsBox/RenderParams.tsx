@@ -109,14 +109,21 @@ const renderSchema = (schemaItem, schemas, name) => {
       const match = description.match(regex);
       return match ? match[1] : "";
     };
-    const blockEnum = title && description && (title === "Block tag" || title === "subscriptionType");
+    const blockEnum =
+      title &&
+      description &&
+      (title === "Block tag" || title === "subscriptionType");
     return (
       <div className={styles.enumWrapper}>
         <div className="padding--md">Possible enum values</div>
         {enumValues.map((value, index) => (
           <div key={index} className={styles.enumItem}>
             <div className={styles.enumTitle}>{value}</div>
-            {blockEnum && <div style={{ paddingTop: "10px" }}><MDContent content={getDescription(value, title)} /></div>}
+            {blockEnum && (
+              <div style={{ paddingTop: "10px" }}>
+                <MDContent content={getDescription(value, title)} />
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -130,9 +137,16 @@ const renderSchema = (schemaItem, schemas, name) => {
           title={name || schemaItem.schema.title}
           type={schemaItem.schema.enum ? "enum" : schemaItem.schema.type}
           required={!!schemaItem.required}
-          description={schemaItem.schema.description || schemaItem.schema.title || ""}
+          description={
+            schemaItem.schema.description || schemaItem.schema.title || ""
+          }
         />
-        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum, schemaItem.schema.title, schemaItem.schema.description)}
+        {schemaItem.schema.enum &&
+          renderEnum(
+            schemaItem.schema.enum,
+            schemaItem.schema.title,
+            schemaItem.schema.description
+          )}
       </div>
     );
   }
@@ -143,9 +157,14 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={name || schemaItem.title}
         type={schemaItem.enum ? "enum" : schemaItem.type}
         required={!!schemaItem.required}
-        description={schemaItem.enum && schemaItem.title === "Block tag" ? "" : schemaItem.description || schemaItem.title}
+        description={
+          schemaItem.enum && schemaItem.title === "Block tag"
+            ? ""
+            : schemaItem.description || schemaItem.title
+        }
       />
-      {schemaItem.enum && renderEnum(schemaItem.enum, schemaItem.title, schemaItem.description)}
+      {schemaItem.enum &&
+        renderEnum(schemaItem.enum, schemaItem.title, schemaItem.description)}
     </div>
   );
 };
@@ -165,9 +184,5 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 };
 
 export const renderResultSchemas = (inputSchema, schemas) => {
-  return (
-    <>
-      {renderSchema(inputSchema, schemas, inputSchema.name)}
-    </>
-  );
+  return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>;
 };

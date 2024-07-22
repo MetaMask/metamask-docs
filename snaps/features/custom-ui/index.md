@@ -31,7 +31,7 @@ SDK and build your UI with them.
 For example, to display a [`panel`](#panel) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.js"
-import { panel, heading, text } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -42,7 +42,7 @@ await snap.request({
       text("Something happened in the system."),
     ]),
   },
-});
+})
 ```
 
 ## Components
@@ -51,14 +51,14 @@ The following custom UI components are available:
 
 ### `address`
 
-Outputs a formatted text field for an Ethereum address. 
-The address is automatically displayed with a jazzicon and truncated value. 
+Outputs a formatted text field for an Ethereum address.
+The address is automatically displayed with a jazzicon and truncated value.
 Hovering the address shows the full value in a tooltip.
 
 #### Example
 
 ```javascript title="index.js"
-import { panel, heading, address } from "@metamask/snaps-sdk";
+import { panel, heading, address } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -69,7 +69,7 @@ await snap.request({
       address("0x000000000000000000000000000000000000dEaD"),
     ]),
   },
-});
+})
 ```
 
 <div class="row">
@@ -102,7 +102,7 @@ An object containing:
 #### Example
 
 ```javascript
-import { button, panel, heading } from "@metamask/snaps-sdk";
+import { button, panel, heading } from "@metamask/snaps-sdk"
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -115,7 +115,7 @@ const interfaceId = await snap.request({
       }),
     ]),
   },
-});
+})
 
 await snap.request({
   method: "snap_dialog",
@@ -123,7 +123,7 @@ await snap.request({
     type: "Alert",
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -137,7 +137,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Example
 
 ```javascript title="index.js"
-import { text, copyable } from "@metamask/snaps-sdk";
+import { text, copyable } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -148,7 +148,7 @@ await snap.request({
       copyable("0x000000000000000000000000000000000000dEaD"),
     ]),
   },
-});
+})
 ```
 
 <p align="center">
@@ -195,7 +195,7 @@ An object containing:
 #### Example
 
 ```js
-import { input, button, form } from "@metamask/snaps-sdk";
+import { input, button, form } from "@metamask/snaps-sdk"
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
@@ -214,7 +214,7 @@ const interfaceId = await snap.request({
       ],
     }),
   },
-});
+})
 
 await snap.request({
   method: "snap_dialog",
@@ -222,7 +222,7 @@ await snap.request({
     type: "Alert",
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -256,7 +256,7 @@ module.exports.onHomePage = async () => {
 
 ### `image`
 
-Outputs an image. 
+Outputs an image.
 This component takes an inline SVG.
 It does not support remote URLs.
 
@@ -333,7 +333,7 @@ const interfaceId = await snap.request({
       ],
     }),
   },
-});
+})
 
 await snap.request({
   method: "snap_dialog",
@@ -341,7 +341,7 @@ await snap.request({
     type: "Alert",
     id: interfaceId,
   },
-});
+})
 ```
 
 <p align="center">
@@ -355,7 +355,7 @@ package for a full example of implementing images.
 
 ### `panel`
 
-Outputs a panel, which can be used as a container for other components. 
+Outputs a panel, which can be used as a container for other components.
 This component takes an array of custom UI components.
 
 #### Example
@@ -385,14 +385,14 @@ module.exports.onTransaction = async ({ transaction }) => {
 
 ### `row`
 
-Outputs a row with a label and value, which can be used for key-value data. 
-The label must be a string. The value can be a child component of type 
+Outputs a row with a label and value, which can be used for key-value data.
+The label must be a string. The value can be a child component of type
 [`text`](#text) or [`address`](#address).
 
 #### Example
 
 ```javascript title="index.js"
-import { panel, row, text, address } from "@metamask/snaps-sdk";
+import { panel, row, text, address } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -403,7 +403,7 @@ await snap.request({
       row("Balance", text("1.78 ETH")),
     ]),
   },
-});
+})
 ```
 
 <p align="center">
@@ -417,18 +417,15 @@ Outputs a loading indicator.
 #### Example
 
 ```javascript title="index.js"
-import { panel, heading, spinner } from "@metamask/snaps-sdk";
+import { panel, heading, spinner } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
   params: {
     type: "alert",
-    content: panel([
-      heading("Please wait..."),
-      spinner(),
-    ]),
+    content: panel([heading("Please wait..."), spinner()]),
   },
-});
+})
 ```
 
 <p align="center">
@@ -437,7 +434,7 @@ await snap.request({
 
 ### `text`
 
-Outputs text. 
+Outputs text.
 
 #### Example
 
@@ -466,7 +463,7 @@ module.exports.onHomePage = async () => {
 #### Example
 
 ```javascript title="index.js"
-import { panel, heading, text } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -477,7 +474,7 @@ await snap.request({
       text("This is **bold** and this is _italic_."),
     ]),
   },
-});
+})
 ```
 
 <p align="center">
@@ -516,7 +513,7 @@ Text-based components (such as [`heading`](#heading) and [`text`](#text)) accept
 #### Example
 
 ```javascript title="index.js"
-import { panel, heading, text } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk"
 
 await snap.request({
   method: "snap_dialog",
@@ -527,7 +524,7 @@ await snap.request({
       text("This is an apple 🍎 and this is an orange 🍊."),
     ]),
   },
-});
+})
 ```
 
 <p align="center">

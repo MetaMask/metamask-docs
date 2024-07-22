@@ -1,0 +1,11 @@
+name: 'Dependency Review'
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    assignees:
+      - "protocol-galileo"      

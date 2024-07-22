@@ -2,17 +2,18 @@
 title: "starknet_getStateUpdate"
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
 Returns information about the result of executing the specified block.
 
 ## Parameters
 
 `block_id`: [*Required*] The block parameter object containing one of the following:
-  - `block_hash`: (string) Block hash.
-  - `block_number`: (integer) Decimal block number.
-  - One of the string tags `latest` or `pending`.
+
+- `block_hash`: (string) Block hash.
+- `block_number`: (integer) Decimal block number.
+- One of the string tags `latest` or `pending`.
 
 ## Returns
 
@@ -67,27 +68,33 @@ curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
     "new_root": "0xc95a878188acf408e285027bd5e7674a88529b8c65ef6c1999b3569aea8bc8",
     "old_root": "0x7dd643fa7f254c8932c01558f538292304266c00728eeaf4b32b361b5d0d2dd",
     "state_diff": {
-      "storage_diffs": [{
-        "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
-        "key": "0xf920571b9f85bdd92a867cfdc73319d0f8836f0e69e06e4c5566b6203f75cc",
-        "value": "0x69577e6756a99b584b5d1ce8e60650ae33b6e2b13541783458268f07da6b38a"
-      }, {
-        "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
-        "key": "0x1379ac0624b939ceb9dede92211d7db5ee174fe28be72245b0a1a2abd81c98f",
-        "value": "0x36dbe3ef0a6ef13fc20e65315840832c0595986d54eba528e22483c7746c005"
-      }, {
-        "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
-        "key": "0x1813aac5f5e7799684c6dc33e51f44d3627fd748c800724a184ed5be09b713e",
-        "value": "0x4"
-      }, {
-        "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
-        "key": "0x321bace1036eaff095582583849a03598bd5764a6265edac86916b830a29d55",
-        "value": "0x1"
-      }, {
-        "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
-        "key": "0x37501df619c4fc4e96f6c0243f55e3abe7d1aca7db9af8f3740ba3696b3fdac",
-        "value": "0x3"
-      }]
+      "storage_diffs": [
+        {
+          "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
+          "key": "0xf920571b9f85bdd92a867cfdc73319d0f8836f0e69e06e4c5566b6203f75cc",
+          "value": "0x69577e6756a99b584b5d1ce8e60650ae33b6e2b13541783458268f07da6b38a"
+        },
+        {
+          "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
+          "key": "0x1379ac0624b939ceb9dede92211d7db5ee174fe28be72245b0a1a2abd81c98f",
+          "value": "0x36dbe3ef0a6ef13fc20e65315840832c0595986d54eba528e22483c7746c005"
+        },
+        {
+          "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
+          "key": "0x1813aac5f5e7799684c6dc33e51f44d3627fd748c800724a184ed5be09b713e",
+          "value": "0x4"
+        },
+        {
+          "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
+          "key": "0x321bace1036eaff095582583849a03598bd5764a6265edac86916b830a29d55",
+          "value": "0x1"
+        },
+        {
+          "address": "0x653d92ffdf2b532003d5e989f763fdedc16dc389e0b3889398a6eb1dac0d849",
+          "key": "0x37501df619c4fc4e96f6c0243f55e3abe7d1aca7db9af8f3740ba3696b3fdac",
+          "value": "0x3"
+        }
+      ]
     }
   }
 }

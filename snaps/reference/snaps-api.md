@@ -87,7 +87,7 @@ const walletAddress = await snap.request({
     ]),
     placeholder: "0x123...",
   },
-});
+})
 
 // walletAddress will be a string containing the address entered by the user.
 ```
@@ -157,7 +157,7 @@ its corresponding key material:
 <TabItem value="JavaScript">
 
 ```javascript title="index.js"
-import { SLIP10Node } from "@metamask/key-tree";
+import { SLIP10Node } from "@metamask/key-tree"
 
 // This example uses Dogecoin, which has a derivation path starting with m/44'/3'.
 const dogecoinNode = await snap.request({
@@ -167,16 +167,16 @@ const dogecoinNode = await snap.request({
     path: ["m", "44'", "3'"],
     curve: "secp256k1",
   },
-});
+})
 
 // Next, create an instance of a SLIP-10 node for the Dogecoin node.
-const dogecoinSlip10Node = await SLIP10Node.fromJSON(dogecoinNode);
+const dogecoinSlip10Node = await SLIP10Node.fromJSON(dogecoinNode)
 
 // m/44'/3'/0'
-const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"]);
+const accountKey0 = await dogecoinSlip10Node.derive(["bip32:0'"])
 
 // m/44'/3'/1'
-const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"]);
+const accountKey1 = await dogecoinSlip10Node.derive(["bip32:1'"])
 
 // Now, you can ask the user to sign transactions, etc.
 ```
@@ -235,10 +235,10 @@ const dogecoinPublicKey = await snap.request({
     curve: "secp256k1",
     compressed: false,
   },
-});
+})
 
 // "0x..."
-console.log(dogecoinPublicKey);
+console.log(dogecoinPublicKey)
 ```
 
 </TabItem>
@@ -310,7 +310,7 @@ and containing its corresponding key material:
 <TabItem value="JavaScript">
 
 ```javascript title="index.js"
-import { getBIP44AddressKeyDeriver } from "@metamask/key-tree";
+import { getBIP44AddressKeyDeriver } from "@metamask/key-tree"
 
 // This example uses Dogecoin, which has coin_type 3.
 const dogecoinNode = await snap.request({
@@ -318,19 +318,19 @@ const dogecoinNode = await snap.request({
   params: {
     coinType: 3,
   },
-});
+})
 
 // Next, create an address key deriver function for the Dogecoin coin_type node.
 // In this case, its path is: m/44'/3'/0'/0/address_index
-const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode);
+const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode)
 
 // These are BIP-44 nodes containing the extended private keys for the respective derivation paths.
 
 // m/44'/3'/0'/0/0
-const addressKey0 = await deriveDogecoinAddress(0);
+const addressKey0 = await deriveDogecoinAddress(0)
 
 // m/44'/3'/0'/0/1
-const addressKey1 = await deriveDogecoinAddress(1);
+const addressKey1 = await deriveDogecoinAddress(1)
 
 // Now, you can ask the user to sign transactions, etc.
 ```
@@ -356,25 +356,25 @@ It is useful to check if MetaMask is locked in the following situations:
 #### Example
 
 ```typescript title="index.js"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk";
-import { MethodNotFoundError } from "@metamask/snaps-sdk";
+import type { OnCronjobHandler } from "@metamask/snaps-sdk"
+import { MethodNotFoundError } from "@metamask/snaps-sdk"
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
     case "execute":
       // Find out if MetaMask is locked.
       const { locked } = await snap.request({
-        method: "snap_getClientStatus"
-      });
+        method: "snap_getClientStatus",
+      })
 
       if (!locked) {
         // Do something that requires MetaMask to be unlocked, such as access encrypted state.
       }
 
     default:
-      throw new MethodNotFoundError();
+      throw new MethodNotFoundError()
   }
-};
+}
 ```
 
 ## `snap_getEntropy`
@@ -423,10 +423,10 @@ const entropy = await snap.request({
     version: 1,
     salt: "foo", // Optional.
   },
-});
+})
 
 // "0x..."
-console.log(entropy);
+console.log(entropy)
 ```
 
 </TabItem>
@@ -475,10 +475,10 @@ const contents = await snap.request({
     path: "./files/myfile.bin",
     encoding: "hex",
   },
-});
+})
 
 // "0x..."
-console.log(contents);
+console.log(contents)
 ```
 
 </TabItem>
@@ -526,22 +526,20 @@ await snap.request({
 ```typescript title="index.ts"
 import { panel, text } from "@metamask/snaps-sdk";
 
-const locale = await snap.request({ method: "snap_getLocale" });
+const locale = await snap.request({ method: "snap_getLocale" })
 
-let greeting = "Hello";
-if(locale === "es") {
-  greeting = "Hola";
+let greeting = "Hello"
+if (locale === "es") {
+  greeting = "Hola"
 }
 
 await snap.request({
   method: "snap_dialog",
   params: {
     type: "alert",
-    content: panel([
-      text(greeting),
-    ]),
+    content: panel([text(greeting)]),
   },
-});
+})
 ```
 
 </TabItem>
@@ -578,16 +576,15 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript title="index.ts"
-import { Keyring, KeyringAccount } from "@metamask/keyring-api";
+import { Keyring, KeyringAccount } from "@metamask/keyring-api"
 
 class MyKeyring implements Keyring {
   // Other methods.
 
   async createAccount(
     name: string,
-    options: Record<string, Json> | null = null,
+    options: Record<string, Json> | null = null
   ): Promise<KeyringAccount> {
-
     const account: KeyringAccount = {
       id: uuid(),
       name,
@@ -605,7 +602,7 @@ class MyKeyring implements Keyring {
         "personal_sign",
       ],
       type: "eip155:eoa",
-    };
+    }
 
     // Store the account in state.
 
@@ -615,9 +612,9 @@ class MyKeyring implements Keyring {
         method: "createAccount",
         params: { account },
       },
-    });
+    })
 
-    return account;
+    return account
   }
 }
 ```
@@ -642,7 +639,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript title="index.ts"
-import { Keyring, KeyringAccount } from "@metamask/keyring-api";
+import { Keyring, KeyringAccount } from "@metamask/keyring-api"
 
 class MyKeyring implements Keyring {
   // Other methods.
@@ -656,7 +653,7 @@ class MyKeyring implements Keyring {
         method: "updateAccount",
         params: { account },
       },
-    });
+    })
   }
 }
 ```
@@ -681,7 +678,7 @@ This can be done using [`snap_manageState`](#snap_managestate).
 #### Example
 
 ```typescript title="index.ts"
-import { Keyring } from "@metamask/keyring-api";
+import { Keyring } from "@metamask/keyring-api"
 
 class MyKeyring implements Keyring {
   // Other methods.
@@ -695,7 +692,7 @@ class MyKeyring implements Keyring {
         method: "deleteAccount",
         params: { id },
       },
-    });
+    })
   }
 }
 ```
@@ -753,8 +750,8 @@ This is usually called as part of the
 #### Example
 
 ```typescript title="index.ts"
-import { Keyring } from "@metamask/keyring-api";
-import { Json } from "@metamask/utils";
+import { Keyring } from "@metamask/keyring-api"
+import { Json } from "@metamask/utils"
 
 class MyKeyring implements Keyring {
   // Other methods.
@@ -768,7 +765,7 @@ class MyKeyring implements Keyring {
         method: "submitResponse",
         params: { id, result },
       },
-    });
+    })
   }
 }
 ```
@@ -799,28 +796,28 @@ The value stored in state if the operation is `get`, and `null` otherwise.
 // Persist some data.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "update",
     newState: { hello: "world" },
   },
-});
+})
 
 // At a later time, get the stored data.
 const persistedData = await snap.request({
   method: "snap_manageState",
   params: { operation: "get" },
-});
+})
 
-console.log(persistedData);
+console.log(persistedData)
 // { hello: "world" }
 
 // If there's no need to store data anymore, clear it out.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "clear",
   },
-});
+})
 ```
 
 ## `snap_notify`
@@ -846,7 +843,7 @@ await snap.request({
     type: "inApp",
     message: "Hello, world!",
   },
-});
+})
 ```
 
 ## Interactive UI methods
@@ -881,17 +878,17 @@ const interfaceId = await snap.request({
         value: "Click me",
         name: "interactive-button",
       }),
-    ])
+    ]),
   },
-});
+})
 
 await snap.request({
   method: "snap_dialog",
   params: {
     type: "Alert",
-    id: interfaceId
-  }
-});
+    id: interfaceId,
+  },
+})
 ```
 
 ### `snap_getInterfaceState`
@@ -938,16 +935,16 @@ const interfaceId = await snap.request({
       }),
     ]),
   },
-});
+})
 
 const state = await snap.request({
   method: "snap_getInterfaceState",
   params: {
     id: interfaceId,
   },
-});
+})
 
-console.log(state);
+console.log(state)
 /*
 {
   "top-level-input": "What the user typed in that field",

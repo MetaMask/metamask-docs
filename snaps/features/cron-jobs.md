@@ -94,12 +94,12 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
             text("This dialog was triggered by a cron job."),
           ]),
         },
-      });
+      })
 
     default:
-      throw new Error("Method not found.");
+      throw new Error("Method not found.")
   }
-};
+}
 ```
 
 </TabItem>

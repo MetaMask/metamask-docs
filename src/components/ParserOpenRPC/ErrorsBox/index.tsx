@@ -14,17 +14,27 @@ interface ErrorsBoxProps {
   errors: ErrorItem[];
 }
 
-export default function ErrorsBox ({ errors }: ErrorsBoxProps) {
+export default function ErrorsBox({ errors }: ErrorsBoxProps) {
   const { colorMode } = useColorMode();
   if (errors.length === 0) return null;
 
   return (
     <>
-      <Heading as="h2" className={clsx(styles.secondaryHeading, "padding-vert--md")}>
+      <Heading
+        as="h2"
+        className={clsx(styles.secondaryHeading, "padding-vert--md")}
+      >
         Errors
       </Heading>
       <div className={styles.errWrapper}>
-        <div className={clsx(styles.errRowHeading, colorMode === "light" ? styles.errRowHeadingLightView : styles.errRowHeadingDarkView)}>
+        <div
+          className={clsx(
+            styles.errRowHeading,
+            colorMode === "light"
+              ? styles.errRowHeadingLightView
+              : styles.errRowHeadingDarkView
+          )}
+        >
           <div className={styles.errColCode}>Code</div>
           <div className={styles.errColMsg}>Message</div>
         </div>

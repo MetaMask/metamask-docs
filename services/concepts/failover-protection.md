@@ -10,7 +10,7 @@ Failover protection is available on the following networks for customers on the 
 - [Arbitrum](../reference/arbitrum/index.md)
 - [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
 - [Optimism](../reference/optimism/index.md)
-- [Polygon](../reference/polygon-pos/index.md) 
+- [Polygon](../reference/polygon-pos/index.md)
 
 The failover protection feature ensures API requests are fulfilled even if Infura experiences a service issue or
 outage. This is achieved by routing requests to a select partner.

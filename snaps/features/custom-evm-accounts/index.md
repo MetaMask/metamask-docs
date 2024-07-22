@@ -22,11 +22,12 @@ You can then [call Keyring API methods from a companion dapp](create-companion-d
 to enable users to create and interact with the custom accounts.
 
 :::tip see also
+
 - [Create an account management Snap](create-account-snap.md)
 - [Create an account management companion dapp](create-companion-dapp.md)
 - [Account management Snap security guidelines](security.md)
 - [Keyring API reference](../../reference/keyring-api/index.md)
-:::
+  :::
 
 ## System context diagram
 
@@ -290,7 +291,7 @@ externally owned accounts (EOAs):
 :::
 
 Account abstraction, specified by [EIP-4337](https://eips.ethereum.org/EIPS/eip-4337), introduces
-*user operations* and enables users to manage smart contract accounts containing arbitrary
+_user operations_ and enables users to manage smart contract accounts containing arbitrary
 verification logic.
 Users can use these ERC-4337 accounts instead of externally owned accounts as primary accounts.
 

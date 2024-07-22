@@ -10,11 +10,11 @@ sidebar_position: 9
 If you receive a "Suspicious activity detected" message during registration, it might be for of one of the following
 reasons:
 
-* You have another account: Infura does not allow users to create multiple accounts, so if
-    you have already registered, you will not be able to create another account with the same information.
-* You have an ad blocker running: Our system requires users to turn off their ad blockers during registration
-    to allow us to perform the necessary checks required for registration. Disable your ad blocker and try again.
-* You're using a VPN: Try turning it off temporarily during registration.
+- You have another account: Infura does not allow users to create multiple accounts, so if
+  you have already registered, you will not be able to create another account with the same information.
+- You have an ad blocker running: Our system requires users to turn off their ad blockers during registration
+  to allow us to perform the necessary checks required for registration. Disable your ad blocker and try again.
+- You're using a VPN: Try turning it off temporarily during registration.
 
 ### Over API key allotment error
 

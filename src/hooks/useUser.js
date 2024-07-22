@@ -13,7 +13,10 @@ export default function useUser() {
       if (response?.data) {
         setUser(response.data);
         const userId = response.data.id;
-        const upData = await fetch(`${API_URL}/api/v1/users/${userId}/projects`, GET_OPTIONS);
+        const upData = await fetch(
+          `${API_URL}/api/v1/users/${userId}/projects`,
+          GET_OPTIONS
+        );
         if (upData.ok) {
           const upProjects = await upData.json();
           const keysArr = upProjects?.result?.projects;
@@ -29,16 +32,16 @@ export default function useUser() {
       if (response?.error) {
         setUser(undefined);
         setKeys([]);
-      } 
+      }
     } catch (e) {
       setUser(undefined);
       setKeys([]);
     } finally {
       setLoading(false);
     }
-  }
+  };
   useEffect(() => {
-    getUserInfo()
+    getUserInfo();
   }, []);
   return {
     user,

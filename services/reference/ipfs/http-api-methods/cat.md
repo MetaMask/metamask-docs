@@ -1,5 +1,5 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # cat
 
@@ -14,8 +14,8 @@ Show IPFS object data.
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/cat?arg=<key>" \
-    -X POST \
-    -u "<API_KEY>:<API_KEY_SECRET>"
+  -X POST \
+  -u "<API_KEY>:<API_KEY_SECRET>"
 ```
 
   </TabItem>
@@ -23,8 +23,8 @@ curl "https://ipfs.infura.io:5001/api/v0/cat?arg=<key>" \
 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/cat?arg=QmZtmD2qt6fJot32nabSP3CUjicnypEBz7bHVDhPQt9aAy" \
-    -X POST \
-    -u "PROJECT_ID:PROJECT_SECRET"
+  -X POST \
+  -u "PROJECT_ID:PROJECT_SECRET"
 ```
 
   </TabItem>
