@@ -37,11 +37,23 @@ starter kit by running:
 ```bash
 yarn create @metamask/snap transaction-insights-snap
 ```
+
+Next, `cd` into the `transaction-insights-snap` project directory and run:
+
+```bash
+yarn install
+```
   </TabItem>
   <TabItem value="npx" label="npx" >
 
 ```bash
 npx @metamask/create-snap transaction-insights-snap
+```
+
+Next, `cd` into the `transaction-insights-snap` project directory and run:
+
+```bash
+npm install
 ```
 
   </TabItem>
@@ -50,14 +62,14 @@ npx @metamask/create-snap transaction-insights-snap
 ```bash
 npm create @metamask/snap transaction-insights-snap
 ```
-  </TabItem>
-</Tabs>
-
 Next, `cd` into the `transaction-insights-snap` project directory and run:
 
 ```bash
-yarn install
+npm install
 ```
+  </TabItem>
+</Tabs>
+
 
 This initializes your development environment with the required dependencies. 
 

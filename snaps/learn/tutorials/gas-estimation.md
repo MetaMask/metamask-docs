@@ -33,11 +33,22 @@ starter kit by running:
 ```bash
 yarn create @metamask/snap gas-estimation-snap
 ```
+
+Next, `cd` into the `gas-estimation-snap` project directory and run:
+
+```bash
+yarn install
+```
   </TabItem>
   <TabItem value="npx" label="npx" >
 
 ```bash
 npx @metamask/create-snap gas-estimation-snap
+```
+Next, `cd` into the `gas-estimation-snap` project directory and run:
+
+```bash
+npm install
 ```
 
   </TabItem>
@@ -46,15 +57,15 @@ npx @metamask/create-snap gas-estimation-snap
 ```bash
 npm create @metamask/snap gas-estimation-snap
 ```
-  </TabItem>
-</Tabs>
-
 
 Next, `cd` into the `gas-estimation-snap` project directory and run:
 
 ```bash
-yarn install
+npm install
 ```
+  </TabItem>
+</Tabs>
+
 
 This initializes your development environment with the required dependencies. 
 
