@@ -55,7 +55,24 @@ smart contract transaction. Excludes precompiled contracts.
 ]
 ```
 
-<table><thead><tr><th width="242">Key</th><th>Value</th></tr></thead><tbody><tr><td><code>action</code> </td><td>Transaction details.</td></tr><tr><td><code>callType</code></td><td> Whether the transaction is <code>call</code> or <code>create</code>.</td></tr><tr><td><code>from</code></td><td>Address of the transaction sender.</td></tr><tr><td><code>gas</code></td><td>Gas provided by sender.</td></tr><tr><td><code>input</code></td><td>Transaction data.</td></tr><tr><td><code>to</code></td><td>Target of the transaction.</td></tr><tr><td><code>value</code></td><td>Value transferred in the transaction.</td></tr><tr><td><code>result</code></td><td>Transaction result.</td></tr><tr><td><code>gasUsed</code></td><td>Gas used by the transaction. Includes any refunds of unused gas.</td></tr><tr><td><code>output</code></td><td>Return value of the contract call. Contains only the actual value sent by a <code>RETURN</code> operation. If a <code>RETURN</code> was not executed, the output is empty bytes.</td></tr><tr><td><code>subTraces</code></td><td>Traces of contract calls made by the transaction.</td></tr><tr><td><code>traceAddress</code></td><td>Tree list address of where the call occurred, address of the parents, and order of the current sub call.</td></tr><tr><td><code>transactionHash</code></td><td>Hash of the transaction.</td></tr><tr><td><code>transactionPosition</code></td><td>Transaction position.</td></tr><tr><td><code>type</code></td><td>Whether the transaction is a <code>CALL</code> or <code>CREATE</code> series operation.</td></tr></tbody></table>
+| Key                   | Value                                                                                                           |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------|
+| `action`              | Transaction details.                                                                                            |
+| `callType`            | Whether the transaction is `call` or `create`.                                                                  |
+| `from`                | Address of the transaction sender.                                                                              |
+| `gas`                 | Gas provided by sender.                                                                                         |
+| `input`               | Transaction data.                                                                                               |
+| `to`                  | Target of the transaction.                                                                                      |
+| `value`               | Value transferred in the transaction.                                                                           |
+| `result`              | Transaction result.                                                                                             |
+| `gasUsed`             | Gas used by the transaction. Includes any refunds of unused gas.                                                |
+| `output`              | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes. |
+| `subTraces`           | Traces of contract calls made by the transaction.                                                               |
+| `traceAddress`        | Tree list address of where the call occurred, address of the parents, and order of the current sub call.        |
+| `transactionHash`     | Hash of the transaction.                                                                                        |
+| `transactionPosition` | Transaction position.                                                                                           |
+| `type`                | Whether the transaction is a `CALL` or `CREATE` series operation.                                               |
+
 
 ## `stateDiff`
 
@@ -90,4 +107,13 @@ An absent value is distinct from zero when creating accounts or clearing storage
 }
 ```
 
-<table><thead><tr><th width="242">Key</th><th>Value</th></tr></thead><tbody><tr><td><code>balance</code></td><td>Change of balance event</td></tr><tr><td><code>balance</code>.<code>from</code></td><td>Balance before the transaction</td></tr><tr><td><code>balance</code>.<code>to</code></td><td>Balance after the transaction</td></tr><tr><td><code>code</code></td><td>Changes to code. None in this example</td></tr><tr><td><code>nonce</code></td><td>Change of nonce.</td></tr><tr><td><code>nonce</code>.<code>from</code></td><td>Nonce before the transaction.</td></tr><tr><td><code>nonce</code>.<code>to</code></td><td>Nonce after the transaction.</td></tr><tr><td><code>storage</code></td><td>Changes to storage. None in this example.</td></tr></tbody></table>
+| Key                     | Value                                    |
+|-------------------------|------------------------------------------|
+| `balance`               | Change of balance event.                 |
+| `balance.from`          | Balance before the transaction.          |
+| `balance.to`            | Balance after the transaction.           |
+| `code`                  | Changes to code. None in this example.   |
+| `nonce`                 | Change of nonce.                         |
+| `nonce.from`            | Nonce before the transaction.            |
+| `nonce.to`              | Nonce after the transaction.             |
+| `storage`               | Changes to storage. None in this example.|

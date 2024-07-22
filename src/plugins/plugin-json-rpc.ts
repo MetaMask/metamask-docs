@@ -14,7 +14,9 @@ async function fetchData(url: string, name: string): Promise<ResponseItem> {
   }
 }
 
-async function fetchMultipleData(requests: {url: string; name: string}[]): Promise<ResponseItem[]> {
+async function fetchMultipleData(
+  requests: { url: string; name: string }[]
+): Promise<ResponseItem[]> {
   const promises = requests.map(({ url, name }) => fetchData(url, name));
   const responses = await Promise.all(promises);
   return responses;
@@ -24,12 +26,18 @@ const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
 
 export enum NETWORK_NAMES {
   linea = "linea",
-  metamask = "metamask"
+  metamask = "metamask",
 }
 
 const requests = [
-  { url: `${RPC_NETWORK_URL}/${NETWORK_NAMES.linea}`, name: NETWORK_NAMES.linea },
-  { url: "https://metamask.github.io/api-specs/0.9.3/openrpc.json", name: NETWORK_NAMES.metamask },
+  {
+    url: `${RPC_NETWORK_URL}/${NETWORK_NAMES.linea}`,
+    name: NETWORK_NAMES.linea,
+  },
+  {
+    url: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
+    name: NETWORK_NAMES.metamask,
+  },
 ];
 
 export default function useNetworksMethodPlugin() {
@@ -38,7 +46,7 @@ export default function useNetworksMethodPlugin() {
     async contentLoaded({ actions }) {
       const { setGlobalData } = actions;
       await fetchMultipleData(requests)
-        .then(responseArray => {
+        .then((responseArray) => {
           setGlobalData({ netData: responseArray });
         })
         .catch(() => {

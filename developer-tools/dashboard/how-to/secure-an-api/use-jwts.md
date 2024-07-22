@@ -11,7 +11,7 @@ Input the **JWT PUBLIC KEY NAME** and the key and select **ADD**.
 <div class="left-align-container">
   <div class="img-medium">
     <img
-      src={require('../../../images/jwt-token-settings.png').default}
+      src={require("../../../images/jwt-token-settings.png").default}
     />
   </div>
 </div>

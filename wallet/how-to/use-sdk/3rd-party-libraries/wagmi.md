@@ -34,7 +34,7 @@ const MetaMaskOptions = {
   },
   infuraAPIKey: "YOUR-API-KEY",
   // Other options.
-};
+}
 ```
 
 #### Dapp metadata
@@ -63,9 +63,9 @@ Use the `MetaMaskOptions` you created in the previous step when adding the `meta
 For example:
 
 ```javascript
-import { createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
-import { metaMask } from "wagmi/connectors";
+import { createConfig, http } from "wagmi"
+import { mainnet, sepolia } from "wagmi/chains"
+import { metaMask } from "wagmi/connectors"
 
 const MetaMaskOptions = {
   dappMetadata: {
@@ -73,7 +73,7 @@ const MetaMaskOptions = {
   },
   infuraAPIKey: "YOUR-API-KEY",
   // Other options.
-};
+}
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
@@ -85,7 +85,7 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [sepolia.id]: http(),
   },
-});
+})
 ```
 
 ### 3. Implement contract interaction using `usePrepareContractWrite`
@@ -97,18 +97,18 @@ This approach ensures smooth transactions by preparing the contract write operat
 actual execution.
 
 ```javascript
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import { usePrepareContractWrite, useContractWrite } from "wagmi"
 
 const { config } = usePrepareContractWrite({
   address: "0xContractAddress",
   abi: contractABI,
   functionName: "functionToCall",
   args: [arg1, arg2],
-});
+})
 
-const { write } = useContractWrite(config);
+const { write } = useContractWrite(config)
 
-write();
+write()
 ```
 
 ## Benefits of using the Infura API with Wagmi

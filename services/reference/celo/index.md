@@ -19,7 +19,7 @@ native, ERC20-like stable tokens like [cUSD, cEUR, and cREAL](https://celoreserv
 
 :::
 
-Select an option below to get started with the Celo network. 
+Select an option below to get started with the Celo network.
 
 <CardList
   items={[

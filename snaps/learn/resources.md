@@ -23,7 +23,7 @@ View the following Snaps resources in addition to this documentation site.
 - [Simple Keyring Snap](https://github.com/MetaMask/snap-simple-keyring) - An example account management Snap using the [Keyring API](../reference/keyring-api/index.md).
 - [Mystery Fox](https://github.com/Montoya/mystery-fox) - Provides random answers to questions and showcases interactive UI and images.
 - [Farcaster Insights](https://github.com/Montoya/farcaster-insights) - Shows if the recipient in a transaction request has a Farcaster account and their stats.
-- [Smart Account Template](https://github.com/bcnmy/smart-account-keyring-template) - Template for integrating the Biconomy Smart Account with the [Keyring API](../reference/keyring-api/index.md). 
+- [Smart Account Template](https://github.com/bcnmy/smart-account-keyring-template) - Template for integrating the Biconomy Smart Account with the [Keyring API](../reference/keyring-api/index.md).
 
 ## Developer tools
 

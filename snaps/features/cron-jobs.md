@@ -41,7 +41,7 @@ the specified schedule with the requests defined in the `endowment:cronjob` perm
 The following example handles the `execute` method specified in the previous example:
 
 ```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+import type { OnCronjobHandler } from "@metamask/snaps-sdk"
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
@@ -56,12 +56,12 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
             text("This dialog was triggered by a cron job."),
           ]),
         },
-      });
+      })
 
     default:
-      throw new Error("Method not found.");
+      throw new Error("Method not found.")
   }
-};
+}
 ```
 
 :::tip Access data from cron jobs

@@ -4,8 +4,8 @@ tags:
   - Keyring API
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Chain Methods API
 
@@ -68,21 +68,21 @@ Signs a transaction that can be submitted to the network later using
 An array containing:
 
 1. Transaction object to sign, which contains:
-    - `type`: `string` - [Transaction type.](https://docs.infura.io/api/networks/ethereum/concepts/transaction-types)
-    - `nonce`: `string` - Anti-replay parameter.
-    - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
-    - `from`: `string` - Sender address.
-    - `value`: `string` - Value to be transferred, in wei.
-    - `data`: `string` - Compiled code of a contract OR hash of the invoked method signature and
-      encoded parameters.
-    - `gasLimit`: `string` - Gas provided by the sender.
-    - `gasPrice`: `string` - (Optional) Gas price, in wei, provided by the sender.
-    - `maxPriorityFeePerGas`: `string` - (Optional) Maximum fee, in wei, the sender is willing to
-      pay per gas above the base fee.
-    - `maxFeePerGas`:`string` - (Optional) Maximum total fee (base fee + priority fee), in wei, the
-      sender is willing to pay per gas.
-    - `accessList`: `object[]` - (Optional) List of addresses and storage keys the transaction plans to access.
-    - `chainId`: `string` - Chain ID.
+   - `type`: `string` - [Transaction type.](https://docs.infura.io/api/networks/ethereum/concepts/transaction-types)
+   - `nonce`: `string` - Anti-replay parameter.
+   - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
+   - `from`: `string` - Sender address.
+   - `value`: `string` - Value to be transferred, in wei.
+   - `data`: `string` - Compiled code of a contract OR hash of the invoked method signature and
+     encoded parameters.
+   - `gasLimit`: `string` - Gas provided by the sender.
+   - `gasPrice`: `string` - (Optional) Gas price, in wei, provided by the sender.
+   - `maxPriorityFeePerGas`: `string` - (Optional) Maximum fee, in wei, the sender is willing to
+     pay per gas above the base fee.
+   - `maxFeePerGas`:`string` - (Optional) Maximum total fee (base fee + priority fee), in wei, the
+     sender is willing to pay per gas.
+   - `accessList`: `object[]` - (Optional) List of addresses and storage keys the transaction plans to access.
+   - `chainId`: `string` - Chain ID.
 
 #### Returns
 
@@ -166,16 +166,16 @@ An array containing:
 
 1. Address: `string` - Address of the requested signing account.
 2. Typed data: `object` - Typed data object containing:
-    - `types`: `object` - Types object containing:
-      - `EIP712Domain`: `array` - Array specifying one or more of the following domain separator values:
-        - `name` - User-readable name of the signing domain, i.e., name of the dapp or the protocol.
-        - `version` - Current major version of the signing domain.
-        - `chainId` - Chain ID of the network.
-        - `verifyingContract` - Address of the contract that will verify the signature.
-        - `salt` - Disambiguating salt for the protocol.
-    - `primaryType`: `string` - Primary type.
-    - `domain`: `object` - Domain separator values specified in the `EIP712Domain` type.
-    - `message`: `object` - Message to present to the user.
+   - `types`: `object` - Types object containing:
+     - `EIP712Domain`: `array` - Array specifying one or more of the following domain separator values:
+       - `name` - User-readable name of the signing domain, i.e., name of the dapp or the protocol.
+       - `version` - Current major version of the signing domain.
+       - `chainId` - Chain ID of the network.
+       - `verifyingContract` - Address of the contract that will verify the signature.
+       - `salt` - Disambiguating salt for the protocol.
+   - `primaryType`: `string` - Primary type.
+   - `domain`: `object` - Domain separator values specified in the `EIP712Domain` type.
+   - `message`: `object` - Message to present to the user.
 
 #### Returns
 
@@ -263,10 +263,10 @@ Prepares a new user operation from transaction data.
 An array containing:
 
 1. Transaction intents object, which contains:
-    - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
-    - `value`: `string` - Value to be transferred, in wei.
-    - `data`: `string` - Compiled code of a contract OR hash of the invoked method signature and
-      encoded parameters.
+   - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
+   - `value`: `string` - Value to be transferred, in wei.
+   - `data`: `string` - Compiled code of a contract OR hash of the invoked method signature and
+     encoded parameters.
 
 #### Returns
 
@@ -339,22 +339,22 @@ Patches some allowed properties of a user operation.
 An array containing:
 
 1. User operation object, which contains:
-    - `sender`: `string` - Account making the operation.
-    - `callData`: `string` - Data to pass to the sender during the main execution call.
-    - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
-      and needs to be created).
-    - `nonce`: `string` - Anti-replay parameter.
-    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
-    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
-    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-      execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
-    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
-    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
-      base fee.
-    - `paymasterAndData`: `string` - Address of the paymaster sponsoring the transaction, followed
-      by extra data to send to the paymaster (empty for self-sponsored transactions).
-    - `signature`: `string` - Data passed into the account along with the nonce during the
-      verification step.
+   - `sender`: `string` - Account making the operation.
+   - `callData`: `string` - Data to pass to the sender during the main execution call.
+   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
+     and needs to be created).
+   - `nonce`: `string` - Anti-replay parameter.
+   - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
+   - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
+   - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
+     execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+   - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
+   - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
+     base fee.
+   - `paymasterAndData`: `string` - Address of the paymaster sponsoring the transaction, followed
+     by extra data to send to the paymaster (empty for self-sponsored transactions).
+   - `signature`: `string` - Data passed into the account along with the nonce during the
+     verification step.
 
 #### Returns
 
@@ -417,22 +417,22 @@ Signs a user operation.
 An array containing:
 
 1. User operation object, which contains:
-    - `sender`: `string` - Account making the operation.
-    - `callData`: `string` - Data to pass to the sender during the main execution call.
-    - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
-      and needs to be created).
-    - `nonce`: `string` - Anti-replay parameter.
-    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
-    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
-    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-      execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
-    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
-    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
-      base fee.
-    - `paymasterAndData`: `string` - Address of the paymaster sponsoring the transaction, followed
-      by extra data to send to the paymaster (empty for self-sponsored transactions).
-    - `signature`: `string` - Data passed into the account along with the nonce during the
-      verification step.
+   - `sender`: `string` - Account making the operation.
+   - `callData`: `string` - Data to pass to the sender during the main execution call.
+   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
+     and needs to be created).
+   - `nonce`: `string` - Anti-replay parameter.
+   - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
+   - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
+   - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
+     execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+   - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
+   - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
+     base fee.
+   - `paymasterAndData`: `string` - Address of the paymaster sponsoring the transaction, followed
+     by extra data to send to the paymaster (empty for self-sponsored transactions).
+   - `signature`: `string` - Data passed into the account along with the nonce during the
+     verification step.
 2. Entry point: `string` - Hash of the entry point contract.
 
 #### Returns

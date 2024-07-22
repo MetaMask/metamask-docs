@@ -12,7 +12,7 @@ guide in some places.
 - [Style guide](#style-guide)
 - [Add images](#add-images)
 - [Format Markdown and MDX](#format-markdown-and-mdx)
-    - [Live code blocks](#live-code-blocks)
+  - [Live code blocks](#live-code-blocks)
 
 ## Contribution workflow
 
@@ -34,10 +34,10 @@ To contribute changes:
 2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
    this repository to your computer and navigate into it.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-docs.git
-    cd metamask-docs
-    ```
+   ```bash
+   git clone https://github.com/MetaMask/metamask-docs.git
+   cd metamask-docs
+   ```
 
    > **Note**: If you don't have write access to this repository, you must [fork the
    > repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository)
@@ -56,9 +56,9 @@ To contribute changes:
    We recommend including the issue number and a short description in the branch name (for example,
    `183-doc-cli-option`), which is a reminder to fix only one issue in a PR.
 
-    ```bash
-    git checkout -b <ISSUE-NUM>-<ISSUE-DESC>
-    ```
+   ```bash
+   git checkout -b <ISSUE-NUM>-<ISSUE-DESC>
+   ```
 
    > **Tip:** You can use a Git client such as [Fork](https://fork.dev/) instead of the command line.
 
@@ -68,6 +68,7 @@ To contribute changes:
    and [format your Markdown correctly](https://docs-template.consensys.net/contribute/format-markdown).
 
    > **Notes:**
+   >
    > - All documentation content is located in the `wallet` and `snaps` directories.
    > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
    >   `snaps-sidebar.js` to add the page to the
@@ -81,11 +82,11 @@ To contribute changes:
 6. Add and commit your changes, briefly describing your changes in the commit message.
    Push your changes to the remote origin.
 
-    ```bash
-    git add .
-    git commit -m "<COMMIT-MESSAGE>"
-    git push origin
-    ```
+   ```bash
+   git add .
+   git commit -m "<COMMIT-MESSAGE>"
+   git push origin
+   ```
 
 7. On [this repository on GitHub](https://github.com/MetaMask/metamask-docs), you’ll see a banner
    prompting you to create a PR with your recent changes.
@@ -93,15 +94,15 @@ To contribute changes:
    [Link the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
    that your PR fixes by adding `fixes #<ISSUE-NUM>` to the PR description.
 
-9. Specific reviewers are automatically requested when you submit a PR.
+8. Specific reviewers are automatically requested when you submit a PR.
    You can request additional reviewers in the right sidebar of your PR – for example, the original
    issue raiser.
    Make any required changes to your PR based on reviewer feedback, repeating steps 5–7.
 
 9. After your PR is approved by two reviewers, all checks have passed, and your branch has no
-    conflicts with the main branch, you can merge your PR.
-    If you don't have merge access, a maintainer will merge your PR for you.
-    You can delete the topic branch after your PR is merged.
+   conflicts with the main branch, you can merge your PR.
+   If you don't have merge access, a maintainer will merge your PR for you.
+   You can delete the topic branch after your PR is merged.
 
 ## Preview locally
 
@@ -160,6 +161,7 @@ If you need to test analytics events in your local development environment be su
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"
 ```
+
 Then build the project in production mode using the following command:
 
 ```bash

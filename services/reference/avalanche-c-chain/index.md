@@ -1,13 +1,14 @@
 ---
 description: Avalanche (C-Chain) network documentation.
 ---
+
 import CardList from '@site/src/components/CardList'
 
 # Avalanche (C-Chain)
 
 :::note Failover protection
 
-Avalanche (C-Chain) [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans. 
+Avalanche (C-Chain) [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans.
 Avalanche (C-Chain) failover support is available on Mainnet only.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
@@ -17,13 +18,13 @@ Avalanche is a Proof of Stake (PoS), layer 1 platform that features 3 built-in b
 
 The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy Solidity smart contract
 dapps onto the C-Chain. Dapps can run on both Avalanche and Ethereum. Avalanche Platform's C-Chain is EVM-compatible, but
-it is not identical. 
+it is not identical.
 
 :::info See also
 
 - View the [official Avalanche C-Chain documentation](https://docs.avax.network/build/dapp/c-chain-evm) for more information about building on
-    the Avalanche C-Chain.
-- View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/build/dapp/launch-dapp#gotchas-and-things-to-look-out-for). 
+  the Avalanche C-Chain.
+- View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/build/dapp/launch-dapp#gotchas-and-things-to-look-out-for).
 
 :::
 

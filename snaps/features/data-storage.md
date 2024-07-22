@@ -14,7 +14,7 @@ We recommend using this method for storing data in a Snap long term.
 :::caution important
 Snaps are installed in each user's MetaMask instance.
 If a Snap stores data, that data is specific to that user's MetaMask instance.
-However, this data can be shared across multiple dapps. 
+However, this data can be shared across multiple dapps.
 Do not assume that the data a Snap stores is unique to a single dapp unless it is specifically designed to be that way.
 :::
 
@@ -45,28 +45,28 @@ When the data is no longer required, the Snap's state is cleared using the `clea
 // Persist some data.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "update",
     newState: { hello: "world" },
   },
-});
+})
 
 // At a later time, get the stored data.
 const persistedData = await snap.request({
   method: "snap_manageState",
   params: { operation: "get" },
-});
+})
 
-console.log(persistedData);
+console.log(persistedData)
 // { hello: "world" }
 
 // If data storage is no longer necessary, clear it.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "clear",
   },
-});
+})
 ```
 
 :::tip
@@ -89,33 +89,33 @@ MetaMask is locked.
 // Persist some data.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "update",
     newState: { hello: "world" },
     encrypted: false,
   },
-});
+})
 
 // At a later time, get the stored data.
 const persistedData = await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "get",
     encrypted: false,
   },
-});
+})
 
-console.log(persistedData);
+console.log(persistedData)
 // { hello: "world" }
 
 // If data storage is no longer necessary, clear it.
 await snap.request({
   method: "snap_manageState",
-  params: { 
+  params: {
     operation: "clear",
     encrypted: false,
   },
-});
+})
 ```
 
 ## Example

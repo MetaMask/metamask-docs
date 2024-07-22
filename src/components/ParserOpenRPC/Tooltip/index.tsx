@@ -13,12 +13,10 @@ export const Tooltip = ({ children, message, disabled }: TooltipProps) => (
   <ReactTippy
     disabled={disabled}
     arrow={true}
-    html={(
-      <div className={styles.tooltipContainer}>{message}</div>
-    )}
+    html={<div className={styles.tooltipContainer}>{message}</div>}
     position="top"
     interactive={true}
   >
     {children}
   </ReactTippy>
-)
+);

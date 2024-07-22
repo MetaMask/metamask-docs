@@ -1,9 +1,9 @@
 .root {
-  --font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
+  --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
 }
 
 .primaryBtn {
-  background: #1098FC;
+  background: #1098fc;
   color: #141618;
   font-size: 14px;
   line-height: 1;
@@ -15,23 +15,23 @@
   padding: 12px 16px;
   cursor: pointer;
   font-family: var(--font-family-sans);
-  transition-property: 'box-shadow', 'background-color';
-  transition-duration: .2s;
+  transition-property: "box-shadow", "background-color";
+  transition-duration: 0.2s;
   transition-timing-function: ease;
 }
 
 .primaryBtn:hover {
   text-decoration: none;
   color: #141618;
-  background-color: #26A2FC;
-  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.40);
+  background-color: #26a2fc;
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
 }
 
 .primaryBtn:disabled {
   cursor: not-allowed;
   text-decoration: none;
   color: #141618;
-  background-color: #0376C9;
+  background-color: #0376c9;
   box-shadow: none;
 }
 
@@ -49,8 +49,8 @@
 .secondaryBtn:hover {
   text-decoration: none;
   color: #141618;
-  background-color: #26A2FC;
-  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.40);
+  background-color: #26a2fc;
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
 }
 
 .secondaryBtn:disabled {
@@ -63,7 +63,7 @@
 .linkBtn {
   background: none;
   border: 0;
-  color: #1098FC;
+  color: #1098fc;
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
@@ -85,7 +85,7 @@
 
 .colLeft {
   position: relative;
-  width: 65%;
+  width: calc(100% - 420px);
   border-right: 1px solid #444950;
   overflow: hidden;
 }
@@ -97,7 +97,7 @@
 }
 
 .colRight {
-  width: 35%;
+  width: 420px;
   padding-left: 23px;
 }
 
