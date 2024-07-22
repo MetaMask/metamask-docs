@@ -129,7 +129,7 @@ The following is an example implementation of `onSignature`:
 
 ```tsx title="index.tsx"
 import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 export const onSignature: OnSignatureHandler = async ({
   signature,

@@ -3,8 +3,8 @@ description: Display a dedicated UI page in MetaMask for your Snap.
 sidebar_position: 3
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Home pages
 
@@ -40,7 +40,7 @@ The following example displays custom UI that welcomes the user to the Snap's ho
 
 ```tsx title="index.tsx"
 import type { OnHomePageHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 export const onHomePage: OnHomePageHandler = async () => {
   return {

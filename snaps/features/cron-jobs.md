@@ -3,8 +3,8 @@ description: Schedule periodic actions for your users.
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Cron jobs
 
@@ -49,7 +49,7 @@ The following example handles the `execute` method specified in the previous exa
 
 ```tsx title="index.tsx"
 import type { OnCronjobHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {

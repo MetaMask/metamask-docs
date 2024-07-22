@@ -3,8 +3,8 @@ description: Display custom alert, confirmation, or prompt screens in MetaMask.
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Dialogs
 
@@ -42,7 +42,7 @@ The following example displays custom UI that alerts the user when something hap
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
 
 await snap.request({
   method: "snap_dialog",
@@ -99,7 +99,7 @@ take an action:
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
 
 const result = await snap.request({
   method: "snap_dialog",
@@ -160,7 +160,7 @@ The following example displays custom UI that prompts the user to enter a wallet
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
 
 const walletAddress = await snap.request({
   method: "snap_dialog",

@@ -3,8 +3,8 @@ description: Create a Snap that estimates gas fees.
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create a Snap to estimate gas fees
 

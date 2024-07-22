@@ -3,9 +3,9 @@ description: Get started quickly using the create-snap starter kit.
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # Snaps quickstart
 
@@ -96,7 +96,7 @@ You can customize your Snap by editing `index.ts` in the `packages/snap/src` fol
 
 ```tsx title="index.tsx"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
-import { Box, Text, Bold } from '@metamask/snaps-sdk/jsx';
+import { Box, Text, Bold } from "@metamask/snaps-sdk/jsx";
 
 /**
  * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.

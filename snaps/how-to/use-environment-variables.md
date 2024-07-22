@@ -95,7 +95,7 @@ Snaps CLI:
     <TabItem value="JSX">
 
     ```tsx title="index.tsx"
-    import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx';
+    import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
 
     await snap.request({
       method: "snap_dialog",

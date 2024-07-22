@@ -52,7 +52,7 @@ Return value depends on the dialog `type`:
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 const walletAddress = await snap.request({
   method: "snap_dialog",
@@ -498,7 +498,7 @@ The user's locale setting as a [language code](https://github.com/MetaMask/metam
 <TabItem value="JSX">
 
 ```tsx title="index.tsx"
-import { Box, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Text } from "@metamask/snaps-sdk/jsx";
 
 const locale = await snap.request({ method: "snap_getLocale" });
 

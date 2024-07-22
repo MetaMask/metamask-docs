@@ -3,8 +3,8 @@ description: Create a Snap that provides transaction insights.
 sidebar_position: 2
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create a Snap to calculate gas fee percentages
 
@@ -108,7 +108,7 @@ replace the code in `packages/snap/src/index.ts` with the following:
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text, Bold } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
 
 // Handle outgoing transactions.
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {

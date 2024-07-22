@@ -4,8 +4,8 @@ toc_max_heading_level: 4
 sidebar_position: 13
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Transaction insights
 
@@ -51,7 +51,7 @@ The following is an example implementation of `onTransaction`:
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
@@ -119,7 +119,7 @@ MetaMask shows a modal with the warning before the user can confirm the transact
 
 ```tsx title="index.tsx"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
-import { Box, Heading, Text } from '@metamask/snaps-sdk/jsx';
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
 
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
