@@ -34,6 +34,8 @@ const config = {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
   },
 
+  trailingSlash: true,
+
   scripts: [
     {
       src: "https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js",
