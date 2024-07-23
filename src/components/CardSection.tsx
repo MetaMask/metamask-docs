@@ -23,12 +23,12 @@ const CardList: CardItem[] = [
     ),
   },
   {
-    title: "🔌 Power your dapp using services",
+    title: "📐 Build and scale your dapp using services",
     link: "/services",
     description: (
       <>
-        Power your dapp or Snap using services provided by MetaMask and Infura.
-        This includes APIs aimed at optimizing essential development tasks.
+        Build and scale your dapp or Snap using services provided by MetaMask and Infura.
+        This includes APIs that optimize essential development tasks.
       </>
     ),
   },
