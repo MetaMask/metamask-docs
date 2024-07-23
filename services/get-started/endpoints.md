@@ -146,10 +146,17 @@ Sepolia instead.
 
 ## ZKsync Era
 
-| Network           | Description         | URL                                             |
-| ----------------- | ------------------- | ----------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://zksync-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://zksync-sepolia.infura.io/v3/<API-KEY>` |
+:::info
+
+ZKsync Era WebSockets are supported on Mainnet only.
+ 
+:::
+
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://zksync-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://zksync-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://zksync-sepolia.infura.io/v3/<API-KEY>`  |
 
 ## Gas API
 
