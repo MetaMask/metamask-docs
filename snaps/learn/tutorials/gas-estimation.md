@@ -27,9 +27,6 @@ Create a new Snap project using the
 [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
-<Tabs>
-  <TabItem value="Yarn" label="Yarn" default>
-
 ```bash
 yarn create @metamask/snap gas-estimation-snap
 ```
@@ -39,33 +36,6 @@ Next, `cd` into the `gas-estimation-snap` project directory and run:
 ```bash
 yarn install
 ```
-  </TabItem>
-  <TabItem value="npx" label="npx" >
-
-```bash
-npx @metamask/create-snap gas-estimation-snap
-```
-Next, `cd` into the `gas-estimation-snap` project directory and run:
-
-```bash
-npm install
-```
-
-  </TabItem>
-    <TabItem value="npm" label="npm" >
-
-```bash
-npm create @metamask/snap gas-estimation-snap
-```
-
-Next, `cd` into the `gas-estimation-snap` project directory and run:
-
-```bash
-npm install
-```
-  </TabItem>
-</Tabs>
-
 
 This initializes your development environment with the required dependencies. 
 
