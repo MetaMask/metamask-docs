@@ -33,10 +33,20 @@ export default function Root({ children }: { children: ReactChild}) {
   }
 
   useEffect(() => {
-    if (sdk && !metaMaskProvider) {
+    if (sdk && sdk.extension) {
       metaMaskConnectHandler();
     }
-  }, [metaMaskProvider]);
+  }, []);
+
+  useEffect(() => {
+    const loggedUserName = metaMaskAccount ? "logged-in-user" : "anonymous-user";
+    if ((window as any)?.Sentry) {
+      (window as any)?.Sentry?.setUser({
+        name: loggedUserName,
+        username: loggedUserName
+      })
+    }
+  }, [metaMaskAccount]);
 
   return (
     <MetamaskProviderContext.Provider value={{
