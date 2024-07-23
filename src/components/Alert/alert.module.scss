@@ -1,19 +1,19 @@
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --alert-error-background: rgb(53, 40, 41);
-  --alert-error-border: #E06470;
+  --alert-error-border: #e06470;
   --alert-success-background: rgb(34, 48, 36);
-  --alert-success-border: #28A745;
+  --alert-success-border: #28a745;
   --alert-info-background: rgb(61, 57, 43);
-  --alert-info-border: #FFDF70;
+  --alert-info-border: #ffdf70;
 }
 
-:root[data-theme='light'] {
+:root[data-theme="light"] {
   --alert-error-background: rgb(248, 235, 237);
-  --alert-error-border: #D73847;
+  --alert-error-border: #d73847;
   --alert-success-background: rgb(234, 242, 235);
-  --alert-success-border: #1C8234;
+  --alert-success-border: #1c8234;
   --alert-info-background: rgb(247, 238, 231);
-  --alert-info-border: #BF5208;
+  --alert-info-border: #bf5208;
 }
 
 .alert {
@@ -29,7 +29,7 @@
     background-color: var(--alert-info-background);
 
     .icon {
-      color: var(--alert-info-border)
+      color: var(--alert-info-border);
     }
   }
 
@@ -38,7 +38,7 @@
     background-color: var(--alert-success-background);
 
     .icon {
-      color: var(--alert-success-border)
+      color: var(--alert-success-border);
     }
   }
 
@@ -47,7 +47,7 @@
     background-color: var(--alert-error-background);
 
     .icon {
-      color: var(--alert-error-border)
+      color: var(--alert-error-border);
     }
   }
 

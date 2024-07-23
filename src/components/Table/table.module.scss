@@ -1,13 +1,13 @@
 :root {
   --table-border-color: rgba(132, 140, 150, 0.16);
-  --table-bg-color: #FFF;
-  --table-bg-thead-color: #F2F4F6;
+  --table-bg-color: #fff;
+  --table-bg-thead-color: #f2f4f6;
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --table-border-color: rgba(132, 140, 150, 0.16);
-  --table-bg-color: #24272A;
-  --table-bg-thead-color: #24272A;
+  --table-bg-color: #24272a;
+  --table-bg-thead-color: #24272a;
 }
 
 .tableWrapper {

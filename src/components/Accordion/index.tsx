@@ -6,10 +6,11 @@ import Text from "@site/src/components/Text";
 
 interface IAccordion {
   children: string | React.ReactElement;
+  opened?: boolean;
 }
 
-export default function Accordion({ children }: IAccordion) {
-  const [isOpened, setIsOpened] = useState(true);
+export default function Accordion({ children, opened = false }: IAccordion) {
+  const [isOpened, setIsOpened] = useState(opened);
 
   const handleClose = () => {
     setIsOpened((value) => !value);

@@ -1,10 +1,10 @@
-:root[data-theme='dark'] {
-  --accordion-background: #24272A;
+:root[data-theme="dark"] {
+  --accordion-background: #24272a;
   --accordion-border: rgba(132, 140, 150, 0.16);
 }
 
-:root[data-theme='light'] {
-  --accordion-background: #FFFFFF;
+:root[data-theme="light"] {
+  --accordion-background: #ffffff;
   --accordion-border: rgba(187, 192, 197, 0.4);
 }
 
@@ -49,7 +49,7 @@
 
     &.opened {
       visibility: visible;
-      display: block
+      display: block;
     }
   }
 }
