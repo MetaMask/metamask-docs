@@ -473,6 +473,34 @@
     {
       "source": "/snaps/reference/exports/",
       "destination": "/snaps/reference/entry-points/"
+    },
+    {
+      "source": "/services/gas-api/",
+      "destination": "/services/reference/gas-api/"
+    },
+    {
+      "source": "/services/gas-api/quickstart/",
+      "destination": "/services/reference/gas-api/quickstart/"
+    },
+    {
+      "source": "/services/gas-api/supported-networks",
+      "destination": "/services/get-started/endpoints/#gas-api"
+    },
+    {
+      "source": "/services/gas-api/api-reference/",
+      "destination": "/services/reference/gas-api/api-reference/"
+    },
+    {
+      "source": "/services/gas-api/api-reference/basefeehistory/",
+      "destination": "/services/reference/gas-api/api-reference/basefeehistory/"
+    },
+    {
+      "source": "/services/gas-api/api-reference/basefeepercentile/",
+      "destination": "/services/reference/gas-api/api-reference/basefeepercentile/"
+    },
+    {
+      "source": "/services/gas-api/api-reference/busythreshold/",
+      "destination": "/services/reference/gas-api/api-reference/busythreshold/"
     }
   ]
 }
