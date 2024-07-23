@@ -7,21 +7,24 @@ const TABLE_DATA = [
   {
     id: "01",
     createdAt: "2024-06-05T13:24:49.207Z",
-    txnHash: "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    txnHash:
+      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
     value: "0.0001",
     status: "success",
   },
   {
     id: "02",
     createdAt: "2024-05-05T13:24:49.207Z",
-    txnHash: "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    txnHash:
+      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
     value: "0.0002",
     status: "failed",
   },
   {
     id: "03",
     createdAt: "2024-07-05T13:24:49.207Z",
-    txnHash: "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    txnHash:
+      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
     value: "0.0003",
     status: "pending",
   },
@@ -47,7 +50,8 @@ const getDiffTime = (time) => {
   const deltaTimeInDays = deltaTimeInHours / 24;
 
   if (deltaTimeInMin < 1) return transformWordEnding(deltaTimeInSec, "second");
-  if (deltaTimeInHours < 1) return transformWordEnding(deltaTimeInMin, "minute");
+  if (deltaTimeInHours < 1)
+    return transformWordEnding(deltaTimeInMin, "minute");
   if (deltaTimeInDays < 1) return transformWordEnding(deltaTimeInHours, "hour");
   return transformWordEnding(deltaTimeInDays, "day");
 };
@@ -70,13 +74,27 @@ export default function TransactionTable() {
         hideCenterLetters(item.txnHash),
         getDiffTime(item.createdAt),
         `${item.value} ETH`,
-        <Badge key={item.id} label={item.status} variant={renderStatus(item.status)} />,
-        <Link key={`link-${item.id}`} to="/" target="_blank" rel="noopener noreferrer">
+        <Badge
+          key={item.id}
+          label={item.status}
+          variant={renderStatus(item.status)}
+        />,
+        <Link
+          key={`link-${item.id}`}
+          to="/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           View on Etherscan
         </Link>,
       ],
     }));
   }, []);
 
-  return <Table thCells={["Your Transactions", "Age", "Value", "Status", ""]} trRows={dataRows} />;
+  return (
+    <Table
+      thCells={["Your Transactions", "Age", "Value", "Status", ""]}
+      trRows={dataRows}
+    />
+  );
 }

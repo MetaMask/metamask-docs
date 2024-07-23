@@ -4,10 +4,13 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import styles from "./faucet.module.scss";
 import Button from "@site/src/components/Button";
-import Badge from "@site/src/components/Badge";
 import { Faq } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
-import { AlertCommonIssue, AlertCooldown, AlertSuccess } from "@site/src/components/Faucet";
+import {
+  AlertCommonIssue,
+  AlertCooldown,
+  AlertSuccess,
+} from "@site/src/components/Faucet";
 import TransactionTable from "@site/src/components/Faucet/TransactionTable";
 
 export default function Faucet() {
@@ -21,7 +24,7 @@ export default function Faucet() {
           onClick={() => {
             alert.error(<AlertCommonIssue />);
             alert.info(<AlertCooldown />);
-            alert.success(<AlertSuccess url='https://www.infura.io' />);
+            alert.success(<AlertSuccess url="https://www.infura.io" />);
           }}
         >
           Sign in

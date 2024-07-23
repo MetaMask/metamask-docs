@@ -1,10 +1,10 @@
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --faucet-bg-color-primary: #252526;
   --faucet-box-shadow: none;
 }
 
-:root[data-theme='light'] {
-  --faucet-bg-color-primary: #FFFFFF;
+:root[data-theme="light"] {
+  --faucet-bg-color-primary: #ffffff;
   --faucet-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
@@ -13,7 +13,8 @@
 }
 
 .authCont {
-  padding: var(--ifm-navbar-padding-vertical) var(--ifm-navbar-padding-horizontal);
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
   height: 80px;
   display: flex;
   justify-content: space-between;

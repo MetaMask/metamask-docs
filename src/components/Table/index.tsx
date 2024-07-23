@@ -22,14 +22,20 @@ export default function Table({ classes, thCells = [], trRows = [] }: ITable) {
           <thead className={styles.thead}>
             <tr className={styles.throw}>
               {thCells.map((cell, i) => (
-                <th className={styles.thcell} key={`th-${i}`}>{cell}</th>
+                <th className={styles.thcell} key={`th-${i}`}>
+                  {cell}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {trRows.map((row, i) => (
               <tr key={`tr-${i}`} className={styles.trow}>
-                {row.cells.map((cell, y) => <td className={styles.tdcell} key={`td-${i}-${y}`}>{cell}</td>)}
+                {row.cells.map((cell, y) => (
+                  <td className={styles.tdcell} key={`td-${i}-${y}`}>
+                    {cell}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -37,4 +43,4 @@ export default function Table({ classes, thCells = [], trRows = [] }: ITable) {
       </div>
     </div>
   );
-};
+}

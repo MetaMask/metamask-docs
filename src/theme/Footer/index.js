@@ -20,7 +20,7 @@ export default function FooterWrapper(props) {
   const isBrowser = useIsBrowser();
   if (isBrowser) {
     Intercom({
-      app_id: 'txttgas6'
+      app_id: "txttgas6",
     });
   }
 

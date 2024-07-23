@@ -1,17 +1,19 @@
-:root[data-theme='dark'] {
-  --button-background-color: #1098FC;
+:root[data-theme="dark"] {
+  --button-background-color: #1098fc;
   --button-color: #141618;
-  --button-hover-background-color: #26A2FC;
-  --button-hover-shadow: 0px 2px 8px 0px var(--shadow-primary, rgba(16, 152, 252, 0.40));
-  --button-active-background-color: #3BAAFD;
+  --button-hover-background-color: #26a2fc;
+  --button-hover-shadow: 0px 2px 8px 0px
+    var(--shadow-primary, rgba(16, 152, 252, 0.4));
+  --button-active-background-color: #3baafd;
 }
 
-:root[data-theme='light'] {
-  --button-background-color: #0376C9;
-  --button-color: #FFFFFF;
-  --button-hover-background-color: #036AB5;
-  --button-hover-shadow: 0px 2px 8px 0px var(--shadow-primary, rgba(3, 118, 201, 0.20));
-  --button-active-background-color: #025EA1;
+:root[data-theme="light"] {
+  --button-background-color: #0376c9;
+  --button-color: #ffffff;
+  --button-hover-background-color: #036ab5;
+  --button-hover-shadow: 0px 2px 8px 0px
+    var(--shadow-primary, rgba(3, 118, 201, 0.2));
+  --button-active-background-color: #025ea1;
 }
 
 .button {

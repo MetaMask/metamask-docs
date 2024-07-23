@@ -1,20 +1,20 @@
 :root {
-  --badge-default-color: #6A737D;
-  --badge-default-bg-color: #F2F4F6;
+  --badge-default-color: #6a737d;
+  --badge-default-bg-color: #f2f4f6;
   --badge-default-border-color: transparent;
-  --badge-success-color: #1C8234;
+  --badge-success-color: #1c8234;
   --badge-success-bg-color: rgba(28, 130, 52, 0.1);
-  --badge-error-color: #D73847;
+  --badge-error-color: #d73847;
   --badge-error-bg-color: rgba(215, 56, 71, 0.1);
 }
 
-:root[data-theme='dark'] {
-  --badge-default-color: #BBC0C5;
-  --badge-default-bg-color: #24272A;
-  --badge-default-border-color: #BBC0C5;
-  --badge-success-color: #28A745;
+:root[data-theme="dark"] {
+  --badge-default-color: #bbc0c5;
+  --badge-default-bg-color: #24272a;
+  --badge-default-border-color: #bbc0c5;
+  --badge-success-color: #28a745;
   --badge-success-bg-color: rgba(40, 167, 69, 0.15);
-  --badge-error-color: #E06470;
+  --badge-error-color: #e06470;
   --badge-error-bg-color: rgba(224, 100, 112, 0.15);
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./badge.module.scss";
 import clsx from "clsx";
 
-type variant = "error" | "success" | "default"
+type variant = "error" | "success" | "default";
 
 interface IBadge {
   variant?: variant;
@@ -10,9 +10,5 @@ interface IBadge {
 }
 
 export default function Badge({ variant = "default", label }: IBadge) {
-  return (
-    <span className={clsx(styles.badge, styles[variant])}>
-      {label}
-    </span>
-  );
+  return <span className={clsx(styles.badge, styles[variant])}>{label}</span>;
 }
