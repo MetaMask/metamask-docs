@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactChild } from "react";
+import React, { useState, createContext, ReactChild, useEffect } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
 
 export const MetamaskProviderContext = createContext(null);
@@ -12,6 +12,7 @@ export default function Root({ children }: { children: ReactChild}) {
       url: "https://docs.metamask.io/",
     },
     preferDesktop: true,
+    extensionOnly: true,
     logging: {
       sdk: false,
     }
@@ -30,6 +31,12 @@ export default function Root({ children }: { children: ReactChild}) {
       console.warn("failed to connect..", err);
     }
   }
+
+  useEffect(() => {
+    if (sdk && !metaMaskProvider) {
+      metaMaskConnectHandler();
+    }
+  }, [metaMaskProvider]);
 
   return (
     <MetamaskProviderContext.Provider value={{
