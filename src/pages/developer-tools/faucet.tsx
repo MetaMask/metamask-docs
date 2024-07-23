@@ -8,6 +8,7 @@ import Badge from "@site/src/components/Badge";
 import { Faq } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
 import { AlertCommonIssue, AlertCooldown, AlertSuccess } from "@site/src/components/Faucet";
+import TransactionTable from "@site/src/components/Faucet/TransactionTable";
 
 export default function Faucet() {
   const alert = useAlert();
@@ -35,11 +36,7 @@ export default function Faucet() {
             default
           >
             <div>Ethereum Sepolia</div>
-            <ul>
-              <li><Badge variant="success" label="Successful" /></li>
-              <li><Badge variant="error" label="Failed" /></li>
-              <li><Badge label="Pending" /></li>
-            </ul>
+            <TransactionTable />
             <Faq network="sepolia" className={styles.faq}></Faq>
           </TabItem>
           <TabItem
