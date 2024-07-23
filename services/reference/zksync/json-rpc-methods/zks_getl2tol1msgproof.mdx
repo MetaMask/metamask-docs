@@ -2,11 +2,11 @@
 title: "zks_getL2ToL1MsgProof"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns the proof for a message sent through the L1Messenger system contract, given a
-block, sender, message, and an optional message log index containing the L1 to L2 message.
+block, sender, message, and an optional message log index containing the L1 to L2 message. 
 
 ## Parameters
 
@@ -14,7 +14,7 @@ block, sender, message, and an optional message log index containing the L1 to L
 - `sender`: (string) [_Required_] The sender (account) of the message.
 - `msg`: [_Required_] The keccak256 hash of the sent message.
 - `l2_log_position`: The index in the block of the event that was emitted by the L1Messenger
-  when submitting this message. If it is omitted, the proof for the first message is returned.
+    when submitting this message. If it is omitted, the proof for the first message is returned.
 
 ## Response
 
@@ -31,11 +31,17 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1MsgProof", "params": [5187, "0x87869cb87c4Fa78ca278dF358E890FF73B42a39E", "0x22de7debaa98758afdaee89f447ff43bab5da3de6acca7528b281cc2f1be2ee9"]}'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
 ```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1MsgProof", "params": [5187, "0x87869cb87c4Fa78ca278dF358E890FF73B42a39E", "0x22de7debaa98758afdaee89f447ff43bab5da3de6acca7528b281cc2f1be2ee9"]}'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1MsgProof", "params": [5187, "0x87869cb87c4Fa78ca278dF358E890FF73B42a39E", "0x22de7debaa98758afdaee89f447ff43bab5da3de6acca7528b281cc2f1be2ee9"]}'
 ```
 
   </TabItem>

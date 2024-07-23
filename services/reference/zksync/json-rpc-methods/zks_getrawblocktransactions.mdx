@@ -2,8 +2,8 @@
 title: "zks_getRawBlockTransactions"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Returns data about the transactions in the specified block.
 
@@ -16,26 +16,26 @@ Returns data about the transactions in the specified block.
 Object containing the data about the executed transaction:
 
 - `L1`: Object containing information about the corresponding transaction on the L1 network:
-  - `canonicalTxHash`: The canonical hash of the transaction on the L1 network.
-  - `deadlineBlock`: The deadline block for the transaction on the L1 network.
-  - `ethBlock`: The Ethereum block number for the transaction.
-  - `ethHash`: The Ethereum transaction hash for the transaction.
-  - `fullFee`: The full fee for the transaction in hexadecimal format.
-  - `gasLimit`: The gas limit for the transaction in hexadecimal format.
-  - `gasPerPubdataLimit`: The gas per public data limit for the transaction in hexadecimal format.
-  - `layer2TipFee`: The tip fee for the transaction on the L2 network in hexadecimal format.
-  - `maxFeePerGas`: The maximum fee per gas for the transaction in hexadecimal format.
-  - `opProcessingType`: The type of operation processing used for the transaction.
-  - `priorityQueueType`: The type of priority queue used for the transaction.
-  - `refundRecipient`: The recipient address for any potential refund for the transaction.
-  - `sender`: The sender address of the transaction.
-  - `serialId`: The serial ID of the transaction.
-  - `toMint`: The address to mint tokens for the transaction.
+    - `canonicalTxHash`: The canonical hash of the transaction on the L1 network.
+    - `deadlineBlock`: The deadline block for the transaction on the L1 network.
+    - `ethBlock`: The Ethereum block number for the transaction.
+    - `ethHash`: The Ethereum transaction hash for the transaction.
+    - `fullFee`: The full fee for the transaction in hexadecimal format.
+    - `gasLimit`: The gas limit for the transaction in hexadecimal format.
+    - `gasPerPubdataLimit`: The gas per public data limit for the transaction in hexadecimal format.
+    - `layer2TipFee`: The tip fee for the transaction on the L2 network in hexadecimal format.
+    - `maxFeePerGas`: The maximum fee per gas for the transaction in hexadecimal format.
+    - `opProcessingType`: The type of operation processing used for the transaction.
+    - `priorityQueueType`: The type of priority queue used for the transaction.
+    - `refundRecipient`: The recipient address for any potential refund for the transaction.
+    - `sender`: The sender address of the transaction.
+    - `serialId`: The serial ID of the transaction.
+    - `toMint`: The address to mint tokens for the transaction.
 - `execute`: Object that contains information about the transaction execution:
-  - `calldata`: The calldata for the execution in hexadecimal format.
-  - `contractAddress`: The contract address for the execution.
-  - `factoryDeps`: An array containing factory dependencies for the execution.
-  - `value`: The value for the execution in hexadecimal format.
+    - `calldata`: The calldata for the execution in hexadecimal format.
+    - `contractAddress`: The contract address for the execution.
+    - `factoryDeps`: An array containing factory dependencies for the execution.
+    - `value`: The value for the execution in hexadecimal format.
 - `received_timestamp_ms`: The transaction timestamp.
 
 ## Example
@@ -47,11 +47,17 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
+  ```bash
+    curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+   -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getRawBlockTransactions", "params": [5817]}'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
 ```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getRawBlockTransactions", "params": [5817]}'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getRawBlockTransactions", "params": [5817]}'
 ```
 
   </TabItem>
