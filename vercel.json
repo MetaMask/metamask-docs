@@ -483,8 +483,8 @@
       "destination": "/services/reference/gas-api/quickstart/"
     },
     {
-      "source": "/services/gas-api/supported-networks",
-      "destination": "/services/get-started/endpoints/#gas-api"
+      "source": "/services/gas-api/supported-networks/",
+      "destination": "/services/get-started/endpoints/#gas-api/"
     },
     {
       "source": "/services/gas-api/api-reference/",
