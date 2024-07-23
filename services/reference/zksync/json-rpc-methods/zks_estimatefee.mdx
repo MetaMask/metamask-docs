@@ -2,8 +2,8 @@
 title: "zks_estimateFee"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Returns the fee for the transaction.
 
@@ -24,18 +24,24 @@ The estimated fee which includes:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard). 
 
 ### Request
 
 <Tabs>
   <TabItem value="cURL">
 
+  ```bash
+   curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateFee", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
 ```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateFee", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateFee", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
 ```
 
   </TabItem>
@@ -45,19 +51,17 @@ curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
 
 <Tabs>
   <TabItem value="JSON">
-
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "gas_limit": "0x156c00",
-    "gas_per_pubdata_limit": "0x143b",
-    "max_fee_per_gas": "0xee6b280",
-    "max_priority_fee_per_gas": "0x0"
-  },
-  "id": 2
-}
-```
-
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": {
+        "gas_limit": "0x156c00",
+        "gas_per_pubdata_limit": "0x143b",
+        "max_fee_per_gas": "0xee6b280",
+        "max_priority_fee_per_gas": "0x0"
+    },
+    "id": 2
+  }
+  ```
   </TabItem>
 </Tabs>

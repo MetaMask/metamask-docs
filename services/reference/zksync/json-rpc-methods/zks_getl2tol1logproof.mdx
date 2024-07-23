@@ -2,8 +2,8 @@
 title: "zks_getL2ToL1LogProof"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Returns the proof for the corresponding L2 to L1 log. The index of the log that can be obtained
 from the transaction receipt.
@@ -12,6 +12,7 @@ from the transaction receipt.
 
 - `tx_hash`: [_Required_] Hash of the L2 transaction the L2 to L1 log was produced in.
 - `l2_to_l1_log_index`: [_Optional_] The index of the L2 to L1 log in the transaction.
+
 
 ## Response
 
@@ -28,11 +29,17 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
 ```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
 ```
 
   </TabItem>
