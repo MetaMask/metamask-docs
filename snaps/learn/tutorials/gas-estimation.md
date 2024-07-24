@@ -3,9 +3,6 @@ description: Create a Snap that estimates gas fees.
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Create a Snap to estimate gas fees
 
 This tutorial walks you through creating a Snap that estimates gas fees.
@@ -57,10 +54,13 @@ yarn run allow-scripts auto
 </details>
 
 
-### 2. Add a custom icon
+### 2. (Optional) customize your Snap
 
-Your Snap must [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
-To add an icon, create a new folder `images` in the Snap package `packages/snap/`:
+This Snap is generated from a boilerplate Typescript example Snap. While this step is optional, it significantly improves the UX if you customize your Snap to align with its function.
+
+2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
+
+Create a new folder `images` in the Snap package `packages/snap/`:
 
 ```bash
 mkdir packages/snap/images
@@ -68,9 +68,15 @@ mkdir packages/snap/images
 
 Download
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into the `ìmages` folder you just created.  
-This is a free icon, "Gas" by Mello from
-[Noun Project](https://thenounproject.com/browse/icons/term/gas/).
+into that `ìmages` folder.  
+
+<details>
+  <summary>Icon attribution</summary>
+  <div>
+This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
+ </div>
+</details>
+
 
 Your file structure should look like this:
 
@@ -96,10 +102,9 @@ gas-estimation-snap/
 ├─ ... (other stuff)
 ```
 
-Open `packages/snap/snap.manifest.json` in a text editor.
-This file contains the main configuration details for your Snap.
-Edit the `npm` object, within the `location` object,
-and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
+Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
+details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+the value `"images/gas.svg"` to point to your new icon:
 
 ```json title="snap.manifest.json"
 "location": {
@@ -112,8 +117,8 @@ and add `iconPath` with the value `"images/gas.svg"` to point to your new icon:
 }
 ```
 
-Open `packages/snap/package.json` in a text editor.
-Edit the `files` array and add the `images/` folder:
+Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+`images/` folder:
 
 ```json title="package.json"
 "files": [
@@ -122,6 +127,39 @@ Edit the `files` array and add the `images/` folder:
   "snap.manifest.json"
 ],
 ```
+
+2.2 Update your Snap's wallet prompt
+
+It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
+prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
+
+Open `packages/snap/snap.manifest.json` in a text editor.
+Edit the `"proposedName"` property within the metadata to provide a functional name such as "Gas Estimate Snap":
+
+```json title="snap.manifest.json"
+{
+  "version": "0.1.0",
+  "description": "An example Snap written in TypeScript.",
+  "proposedName": "Gas Estimate Snap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  ```
+
+2.3 Update the Snap's button
+
+Open `packages/site/src/components/Buttons.tsx` in a text editor.
+Edit the Button property to provide a functional name such as "Estimate Gas ":
+
+```typescript title="Buttons.tsx"
+export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>Estimate Gas</Button>;
+};
+````
+
+These three updates are the minimum required to ensure that each user interaction with the Snap is well 
+informed, however, your Snap will function without these tweaks.
 
 ### 3. Enable network access
 
