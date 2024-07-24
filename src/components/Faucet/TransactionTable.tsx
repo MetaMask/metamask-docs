@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import Link from "@docusaurus/Link";
 import Badge from "@site/src/components/Badge";
 import Table from "@site/src/components/Table";
+import Text from "@site/src/components/Text";
+import styles from "../../pages/developer-tools/faucet.module.scss";
 
 const TABLE_DATA = [
   {
@@ -67,7 +69,15 @@ const renderStatus = (status) => {
   }
 };
 
-export default function TransactionTable() {
+interface ITransactionTable {
+  className?: string;
+  classNameHeading?: string;
+}
+
+export default function TransactionTable({
+  className,
+  classNameHeading,
+}: ITransactionTable) {
   const dataRows = useMemo(() => {
     return TABLE_DATA.map((item) => ({
       cells: [
@@ -92,9 +102,18 @@ export default function TransactionTable() {
   }, []);
 
   return (
-    <Table
-      thCells={["Your Transactions", "Age", "Value", "Status", ""]}
-      trRows={dataRows}
-    />
+    <div className={className}>
+      <div className={classNameHeading}>
+        <Text as="h2">Transaction History</Text>
+        <Text as="p">
+          Here is a list of your requests from our faucet. You can get more
+          information about your transaction by clicking on the link.
+        </Text>
+      </div>
+      <Table
+        thCells={["Your Transactions", "Age", "Value", "Status", ""]}
+        trRows={dataRows}
+      />
+    </div>
   );
 }

@@ -3,17 +3,25 @@ import Accordion, {
   AccordionHeader,
   AccordionBody,
 } from "@site/src/components/Accordion";
+import Text from "@site/src/components/Text";
 
 interface IFaq {
   network: "linea" | "sepolia";
   className: string;
+  classNameHeading: string;
 }
 
-export default function Faq({ network, className }: IFaq) {
+export default function Faq({ network, className, classNameHeading }: IFaq) {
   switch (network) {
     case "linea":
       return (
         <div className={className}>
+          <div className={classNameHeading}>
+            <Text as="h2">Frequently Asked Questions</Text>
+            <Text as="p">
+              Answers to commonly asked questions about our faucet.
+            </Text>
+          </div>
           <Accordion>
             <AccordionHeader>
               Why must my address have Ethereum Mainnet activity to claim Linea
@@ -107,6 +115,12 @@ export default function Faq({ network, className }: IFaq) {
     case "sepolia":
       return (
         <div className={className}>
+          <div className={classNameHeading}>
+            <Text as="h2">Frequently Asked Questions</Text>
+            <Text as="p">
+              Answers to commonly asked questions about our faucet.
+            </Text>
+          </div>
           <Accordion>
             <AccordionHeader>
               Why must my address have Ethereum Mainnet activity to claim
