@@ -100,7 +100,14 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+  const { metaMaskProvider, metaMaskAccount, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+
+  useEffect(() => {
+    if ((window as any)?.Sentry) {
+      (window as any)?.Sentry?.setUser({ name: metaMaskAccount, id: metaMaskAccount, username: metaMaskAccount })
+    }
+  }, [metaMaskAccount]);
+
 
   const onParamsChangeHandle = (data) => {
     if (
