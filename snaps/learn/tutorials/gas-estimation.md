@@ -234,10 +234,10 @@ case "hello":
 
 To build and test your Snap:
 
-1. Open `package.json` in the root directory of the project, and increment the `"version"` (if the `"version"` is
+5.1 Open `package.json` in the root directory of the project, and increment the `"version"` (if the `"version"` is
    `0.1.0`, increase it to `0.2.0`).
 
-2. From the command line, run `yarn start`.
+5.2 From the command line, run `yarn start`.
    In the terminal, at the bottom of the message log, you see the browser URL:
 
    ```bash
@@ -246,43 +246,44 @@ To build and test your Snap:
      http://localhost:8000/
    ```
 
-3. Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
+5.3 Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
    A page like the following displays:
 
    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
    This is a boilerplate test dapp for installing and testing your Snap.
 
-4. Select **Connect** to connect Flask to the dapp.
+5.4 Select **Connect** to connect Flask to the dapp.
    After connecting, you're prompted to install the Snap with the following permissions:
 
    - **Allow dapps to communicate directly with this Snap.**
    - **Access the internet.**
    - **Display dialog windows in MetaMask.**
 
-5. Select **Approve** > **Install**.
+5.5 Select **Approve** > **Install**.
 
-6. After installing, the **Send message** button on the page is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
+5.6 After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
-You have integrated a public API into MetaMask and displayed real-time gas fee estimates.
+Congratulations, you have integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
-### 6. Next steps
+### What next?
 
 Next, you can try:
 
+- Completing the optional [Step 2](#2-optional-customize-your-snap).
 - Parsing the JSON response from the remote API.
 - Displaying the fees in a nicely formatted way.
 
 You can also update the fields in `snap.manifest.json` to match your custom Snap:
 
-- `proposedName` - The name of your Snap.
-- `description` - The description of your Snap.
-- `source` - The `shasum` is set automatically when you build from the command line.
-  If you decided to publish your Snap to `npm`, update the `location` to its published location.
+- `description`: the description of your Snap.
+- `source`: the `shasum` is set automatically when you build from the command line.
+
+If you decided to publish your Snap to `npm`, update the `location` to its published location.
 
 Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
@@ -295,7 +296,7 @@ We recommend updating `version` and `repository` in `package.json` first, then b
 
 You can update the content of `/packages/site/src/pages/index.tsx` by changing the
 name of the method for showing gas fee estimates.
-If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method name in `/packages/snap/src/index.ts` to match.
+If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method 
+name in `/packages/snap/src/index.ts` to match.
 
-After you have made all necessary changes, you can
-[publish your Snap to npm](../../how-to/publish-a-snap.md).
+After you have made all necessary changes, you can [publish your Snap to npm](../../how-to/publish-a-snap.md).
