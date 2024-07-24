@@ -49,10 +49,12 @@ request to `support@infura.io` and we will assess if your request can be accommo
 
 ## Celo
 
-| Network             | Description         | URL                                             |
-| ------------------- | ------------------- | ----------------------------------------------- |
-| Mainnet             | JSON-RPC over HTTPS | `https://celo-mainnet.infura.io/v3/<API-KEY>`   |
-| Testnet (Alfajores) | JSON-RPC over HTTPS | `https://celo-alfajores.infura.io/v3/<API-KEY>` |
+| Network             | Description             | URL                                              |
+|---------------------|-------------------------|--------------------------------------------------|
+| Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<API-KEY>`    |
+| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<API-KEY>`   |
+| Testnet (Alfajores) | JSON-RPC over HTTPS     | `https://celo-alfajores.infura.io/v3/<API-KEY>`  |
+| Testnet (Alfajores) | JSON-RPC over WebSocket | `wss://celo-alfajores.infura.io/ws/v3/<API-KEY>` |
 
 ## Ethereum
 

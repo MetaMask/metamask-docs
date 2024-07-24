@@ -47,6 +47,7 @@ Infura support subscriptions over WebSockets for the following networks:
 - [Ethereum](../reference/ethereum/index.md)
 - [Arbitrum](../reference/arbitrum/index.md)
 - [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
+- [Celo](../reference/celo/index.md)
 - [Linea](../reference/linea/index.md)
 - [Optimism](../reference/optimism/index.md)
 - [Polygon](../reference/polygon-pos/index.md)
