@@ -51,6 +51,7 @@ export default function RequestBox({
               className={clsx(global.linkBtn, "margin-right--md")}
               disabled={!isMetamaskInstalled}
               onClick={openModal}
+              data-test-id="customize-request"
             >
               Customize request
             </button>
@@ -59,6 +60,7 @@ export default function RequestBox({
             className={global.primaryBtn}
             disabled={!isMetamaskInstalled}
             onClick={submitRequest}
+            data-test-id="run-request"
           >
             Run request
           </button>
