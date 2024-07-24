@@ -64,13 +64,13 @@ The Holesky testnet is supported through the
 service and does not currently support WebSockets.
 :::
 
-| Network | Description             | URL                                       |
-| ------- | ----------------------- | ----------------------------------------- |
-| Mainnet | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<API-KEY>`  |
-| Mainnet | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<API-KEY>` |
-| Holesky | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<API-KEY>`  |
-| Sepolia | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
-| Sepolia | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
+| Network           | Description             | URL                                       |
+| ----------------- | ----------------------- | ----------------------------------------- |
+| Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## IPFS
 
@@ -98,13 +98,13 @@ Linea Goerli is being deprecated. We discourage new development with this testne
 Sepolia instead.
 
 :::
-| Network | Description | URL |
+| Network           | Description             | URL                                             |
 |-------------------|-------------------------|-------------------------------------------------|
-| Mainnet | JSON-RPC over HTTPS | `https://linea-mainnet.infura.io/v3/<API-KEY>` |
-| Mainnet | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Goerli) | JSON-RPC over HTTPS | `https://linea-goerli.infura.io/v3/<API-KEY>` |
-| Testnet (Goerli) | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://linea-sepolia.infura.io/v3/<API-KEY>` |
+| Mainnet           | JSON-RPC over HTTPS     | `https://linea-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Goerli)  | JSON-RPC over HTTPS     | `https://linea-goerli.infura.io/v3/<API-KEY>`   |
+| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## Mantle
