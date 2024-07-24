@@ -1,0 +1,49 @@
+:root[data-theme="dark"] {
+  --hero-text-color: #fff;
+}
+
+:root[data-theme="light"] {
+  --hero-text-color: #141618;
+}
+
+.hero {
+  color: var(--hero-text-color);
+
+  .actions {
+    display: flex;
+
+    @media screen and (max-width: 996px) {
+      flex-direction: column;
+    }
+
+    > *:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    .inputCont {
+      max-width: 600px;
+      width: 100%;
+
+      @media screen and (max-width: 996px) {
+        max-width: 100%;
+      }
+
+      .caption {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      }
+    }
+
+    .button {
+      height: 48px;
+      margin-top: 22px;
+
+      @media screen and (max-width: 996px) {
+        width: 100%;
+      }
+    }
+  }
+}

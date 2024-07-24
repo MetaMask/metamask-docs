@@ -1,12 +1,12 @@
 import React from "react";
 import { positions, types } from "react-alert";
-import styles from "./alert.module.scss";
 import clsx from "clsx";
 import CloseImg from "./close.svg";
 import InfoImg from "./info.svg";
 import SuccessImg from "./success.svg";
 import ErrorImg from "./error.svg";
 import Text from "@site/src/components/Text";
+import styles from "./alert.module.scss";
 
 export const options = {
   position: positions.TOP_CENTER,
@@ -14,7 +14,7 @@ export const options = {
   offset: "5px",
   containerStyle: {
     zIndex: 1000,
-    marginTop: 60,
+    marginTop: 64,
   },
 };
 

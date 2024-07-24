@@ -16,6 +16,17 @@
   --button-active-background-color: #025ea1;
 }
 
+:root {
+  @keyframes spinner-infinite {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 .button {
   color: var(--button-color);
   background-color: var(--button-background-color);
@@ -43,5 +54,10 @@
 
   &:disabled {
     opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .isLoading {
+    animation: spinner-infinite 1.2s linear infinite;
   }
 }
