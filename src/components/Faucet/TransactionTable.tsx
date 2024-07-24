@@ -3,7 +3,6 @@ import Link from "@docusaurus/Link";
 import Badge from "@site/src/components/Badge";
 import Table from "@site/src/components/Table";
 import Text from "@site/src/components/Text";
-import styles from "../../pages/developer-tools/faucet.module.scss";
 
 const TABLE_DATA = [
   {
