@@ -338,10 +338,10 @@ Consider:
 
 - Improving the Snap's UX:
   - Complete [Step 2](#2-optional-customize-your-snap): consider updating `packages/site/src/pages/index.tsx` 
-  to remove, rather than update, the text of the non-functional template **Send message** button.
+  to remove, rather than update the text of the non-functional template **Send message** button.
   - Update `description`: the description of your Snap.
 - Update the `location` to its published location before publishing your Snap to `npm`, 
-- Update the `name`, `version`, `description`, and `repository` fields of
+- Update the `name`, `version`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 
 :::note

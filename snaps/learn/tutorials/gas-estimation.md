@@ -289,7 +289,7 @@ Consider:
   - Parse the JSON response from the remote API.
   - Format the fees for better readability.
 - Update the `location` to its published location before publishing your Snap to `npm`, 
-- Update the `name`, `version`, `description`, and `repository` fields of
+- Update the `name`, `version`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 - Update the content of `/packages/site/src/pages/index.tsx` by changing the
 name of the method for showing gas fee estimates.
