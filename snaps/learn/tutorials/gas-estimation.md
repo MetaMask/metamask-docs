@@ -288,13 +288,13 @@ Consider:
   - Update `description`: the description of your Snap.
   - Parse the JSON response from the remote API.
   - Format the fees for better readability.
-- Update the `location` to its published location before publishing your Snap to `npm`, 
-- Update the `name`, `version`, and `repository` fields of
+- Updating the `location` to its published location before publishing your Snap to `npm`, 
+- Updating the `name`, `version`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
-- Update the content of `/packages/site/src/pages/index.tsx` by changing the
-name of the method for showing gas fee estimates.
-> If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method 
-name in `/packages/snap/src/index.ts` to match.
+- Updating the content of `/packages/site/src/pages/index.tsx` by changing the
+name of the method for showing gas fee estimates. If you change the method name in 
+`/packages/site/src/pages/index.tsx`, ensure you change the method name in 
+`/packages/snap/src/index.ts` to match.
 
 :::note
 When editing `source`, the `shasum` is set automatically when you build from the command line.
