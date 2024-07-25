@@ -8,9 +8,12 @@ import TabItem from '@theme/TabItem';
 
 # Create a Snap to calculate gas fee percentages
 
-This tutorial walks you through creating a Snap that calculates the percentage of gas fees that
-a user pays when creating a transaction.
-The Snap provides transaction insights in MetaMask's transaction confirmation window.
+This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would 
+pay for their transaction.
+
+It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/eth_gasPrice) RPC
+method using the global Ethereum provider made available to Snaps, and displays this as a percentage 
+of gas fees in a tab in MetaMask's transaction confirmation window.
 
 ## Prerequisites
 
@@ -62,18 +65,121 @@ yarn run allow-scripts auto
  </div>
 </details>
 
-### 2. Enable transaction insights and the Ethereum provider
+### 2. (Optional) customize your Snap
 
-The default template Snap, such as the one in
-[Create a gas estimation Snap](gas-estimation.md),
-is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
-In contrast, the Snap you're creating in this tutorial doesn't expose any API.
-Instead, it provides transaction insights directly in MetaMask's transaction confirmation window.
+This Snap is generated from a boilerplate typescript example Snap. While the following steps in the drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
 
-In particular, the Snap shows the user the percentage of gas fees they would pay for their transaction.
-It gets the current gas price by calling the
-[`eth_gasPrice`](/wallet/reference/eth_gasPrice) RPC
-method using the global Ethereum provider made available to Snaps.
+<details>
+  <summary>Customize the Snap's UX</summary>
+  <div>
+    2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
+
+    Create a new folder `images` in the Snap package `packages/snap/`:
+
+    ```bash
+    mkdir packages/snap/images
+    ```
+
+    Download
+    [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
+    into that `ìmages` folder.  
+
+    <details>
+      <summary>Icon attribution</summary>
+      <div>
+    This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
+     </div>
+    </details>
+
+
+    Your file structure should look like this:
+
+    ```text
+    gas-estimation-snap/
+    ├─ packages/
+    │  ├─ site/
+    |  |  |- src/
+    |  |  |  |- App.tsx
+    |  |  ├─ package.json
+    |  |  |- ...(react app content)
+    |  |
+    │  ├─ snap/
+    |  |  ├─ images/
+    |  |  |  |- gas.svg
+    |  |  ├─ src/
+    |  |  |  |- index.test.ts
+    |  |  |  |- index.ts
+    |  |  ├─ snap.manifest.json
+    |  |  ├─ package.json
+    |  |  |- ... (Snap content)
+    ├─ package.json
+    ├─ ... (other stuff)
+    ```
+
+    Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
+    details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+    the value `"images/gas.svg"` to point to your new icon:
+
+    ```json title="snap.manifest.json"
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/gas.svg",
+        "packageName": "snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+    ```
+
+    Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+    `images/` folder:
+
+    ```json title="package.json"
+    "files": [
+      "dist/",
+      "images/",
+      "snap.manifest.json"
+    ],
+    ```
+
+    2.2 Update your Snap's wallet prompt
+
+    It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
+    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
+
+    Open `packages/snap/snap.manifest.json` in a text editor.
+    Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Gas Fees":
+
+    ```json title="snap.manifest.json"
+    {
+      "version": "0.1.0",
+      "description": "An example Snap written in TypeScript.",
+      "proposedName": "Gas Estimate Snap",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+      },
+      ```
+
+    2.3 Update the Snap's button
+
+    Open `packages/site/src/components/Buttons.tsx` in a text editor.
+    Edit the Button property to provide a functional name such as "Estimate Gas ":
+
+    ```typescript title="Buttons.tsx"
+    export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+      return <Button {...props}>Inoperable</Button>;
+    };
+    ````
+
+    These three updates are the minimum required to ensure that each user interaction with the Snap is well 
+    informed, however, your Snap will function without these tweaks.
+
+   </div>
+</details>
+
+
+### 3. Enable transaction insights and the Ethereum provider
 
 To enable your Snap to provide [transaction insights](../../features/transaction-insights.md) and
 use the global Ethereum provider, request the
@@ -93,7 +199,7 @@ In this tutorial, you can replace what was previously in `initialPermissions`.
 You do not need any permissions other than `endowment:transaction-insight` and `endowment:ethereum-provider`.
 :::
 
-### 3. Calculate and display the percentage of gas fees
+### 4. Calculate and display the percentage of gas fees
 
 To calculate and display the gas fees a user would pay as a percentage of their outgoing transaction,
 replace the code in `packages/snap/src/index.ts` with the following:
@@ -142,20 +248,24 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 ```
 
 :::tip
-If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider using `window.ethereum`.
-In a Snap, the `window` object is not available.
-Instead, when you request the `endowment:ethereum-provider` permission, your Snap is granted access to the [`ethereum` global object](../about-snaps/apis.md#snap-requests).
+If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
+using `window.ethereum`. In a Snap, the `window` object is not available. Instead, when you request 
+the `endowment:ethereum-provider` permission, your Snap is granted access to the 
+[`ethereum` global object](../about-snaps/apis.md#snap-requests).
 :::
 
-### 4. Build and test the Snap
+### 5. Build and test the Snap
 
 To build and test your Snap:
 
-1. From the command line, run `yarn start` in the root of your project.
-   This starts two development servers: one for watching and compiling the Snap, and another for the
-   React site.
-   The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
-   You should get a message that includes:
+5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
+  the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
+
+5.2 From the command line, run `yarn start` in the root of your project. This starts two development 
+  servers: one for watching and compiling the Snap, and another for the React site.
+  The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
+
+  You should get a message that includes:
 
    ```bash
    You can now view site in the browser.
@@ -163,18 +273,20 @@ To build and test your Snap:
      http://localhost:8000/
    ```
 
-2. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
+5.3. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
 
-3. Select **Connect** and accept the permission request.
+5.4. Select **Connect** and accept the permission request.
 
-4. After connecting, you're prompted to install the Snap with the **Fetch and display transaction
-   insights** and **Access the Ethereum provider** permissions.
-   Select **Approve** > **Install**.
+After connecting, you're prompted to install the Snap with the following permissions:
+- **Access the Ethereum provider** 
+- **Fetch and display transaction insights***
 
-5. From MetaMask Flask, create a new testnet ETH transfer.
+Select **Confirm** > **OK**.
+
+5.5 From MetaMask Flask, create a new testnet ETH transfer.
    You can set up multiple accounts to transfer between your accounts.
 
-6. In the transaction confirmation window, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+5.6 In the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
    Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
    entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
@@ -182,9 +294,24 @@ To build and test your Snap:
 <img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
-### 5. Display a different UI for contract interactions
+:::warning
 
-The Snap should display a gas fee percentage for ETH transfers initiated by the user.
+The activated "Send Message" button is inoperable as we didn't assign it the permissions required in the 
+`snap.manifest.json`. The default template Snap used in [Create a gas estimation Snap](gas-estimation.md),
+is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
+In contrast, the Snap you're creating in this tutorial doesn't expose an API.
+Instead, it provides transaction insights directly in a tab in MetaMask's transaction confirmation window.
+
+:::
+
+
+### What next?
+
+Consider improving the Snap functionality further.
+
+#### Display a different UI for contract interactions
+
+The Snap displays a gas fee percentage for ETH transfers initiated by the user.
 For contract interactions, add the following code to the beginning of the `onTransaction` entry point:
 
 ```typescript title="index.ts"
@@ -200,19 +327,22 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 }
 ```
 
-### 6. Next steps
+#### Customize the Snap
 
-The initial project has generic names in multiple places.
-You can update the fields in `snap.manifest.json` to match your custom Snap:
+Consider:
 
-- `proposedName` - The name of your Snap.
-  This replaces **TYPESCRIPT EXAMPLE SNAP** in the transaction insights UI.
-- `description` - The description of your Snap.
-- `source` - The `shasum` is set automatically when you build from the command line.
-  If you decided to publish your Snap to npm, update the `location` to its published location.
+- Improving the Snap's UX:
+  - Complete [Step 2](#2-optional-customize-your-snap): consider updating `packages/site/src/pages/index.tsx` 
+  to remove rather than update the text of the non-functional template **Send message** button.
+  - Update `description`: the description of your Snap.
+- Update the `location` to its published location before publishing your Snap to `npm`, 
+- Update the `name`, `version`, `description`, and `repository` fields of
+`/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 
-Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
-`packages/snap/package.json` even if you don't plan to publish your Snap to npm.
+:::note
+When editing `source`, the `shasum` is set automatically when you build from the command line.
+:::
+
 
 :::caution important
 The `version` and `repository` fields in `snap.manifest.json` inherit the values from
@@ -220,11 +350,6 @@ The `version` and `repository` fields in `snap.manifest.json` inherit the values
 We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
-You should also add an icon by following the steps outlined in the
-[gas estimation Snap tutorial](../tutorials/gas-estimation.md#2-add-a-custom-icon).
-
-Lastly, you can update the content of `packages/site/src/pages/index.tsx`, such as removing the
-template **Send Hello** button.
-
-After you've made all necessary changes, you can
+After you've made all necessary changes, you can 
 [publish your Snap to npm](../../how-to/publish-a-snap.md).
+

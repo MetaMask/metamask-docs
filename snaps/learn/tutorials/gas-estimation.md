@@ -56,110 +56,118 @@ yarn run allow-scripts auto
 
 ### 2. (Optional) customize your Snap
 
-This Snap is generated from a boilerplate Typescript example Snap. While this step is optional, it significantly improves the UX if you customize your Snap to align with its function.
-
-2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
-
-Create a new folder `images` in the Snap package `packages/snap/`:
-
-```bash
-mkdir packages/snap/images
-```
-
-Download
-[this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into that `ìmages` folder.  
+This Snap is generated from a boilerplate typescript example Snap. While the following steps in the 
+drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
 
 <details>
-  <summary>Icon attribution</summary>
+  <summary>Customize the Snap's UX</summary>
   <div>
-This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
- </div>
+    2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
+
+    Create a new folder `images` in the Snap package `packages/snap/`:
+
+    ```bash
+    mkdir packages/snap/images
+    ```
+
+    Download
+    [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
+    into that `ìmages` folder.  
+
+    <details>
+      <summary>Icon attribution</summary>
+      <div>
+    This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
+     </div>
+    </details>
+
+
+    Your file structure should look like this:
+
+    ```text
+    gas-estimation-snap/
+    ├─ packages/
+    │  ├─ site/
+    |  |  |- src/
+    |  |  |  |- App.tsx
+    |  |  ├─ package.json
+    |  |  |- ...(react app content)
+    |  |
+    │  ├─ snap/
+    |  |  ├─ images/
+    |  |  |  |- gas.svg
+    |  |  ├─ src/
+    |  |  |  |- index.test.ts
+    |  |  |  |- index.ts
+    |  |  ├─ snap.manifest.json
+    |  |  ├─ package.json
+    |  |  |- ... (Snap content)
+    ├─ package.json
+    ├─ ... (other stuff)
+    ```
+
+    Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
+    details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+    the value `"images/gas.svg"` to point to your new icon:
+
+    ```json title="snap.manifest.json"
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/gas.svg",
+        "packageName": "snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+    ```
+
+    Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+    `images/` folder:
+
+    ```json title="package.json"
+    "files": [
+      "dist/",
+      "images/",
+      "snap.manifest.json"
+    ],
+    ```
+
+    2.2 Update your Snap's wallet prompt
+
+    It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
+    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
+
+    Open `packages/snap/snap.manifest.json` in a text editor.
+    Edit the `"proposedName"` property within the metadata to provide a functional name such as 
+    "Gas Estimate Snap":
+
+    ```json title="snap.manifest.json"
+    {
+      "version": "0.1.0",
+      "description": "An example Snap written in TypeScript.",
+      "proposedName": "Gas Estimate Snap",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+      },
+      ```
+
+    2.3 Update the Snap's button
+
+    Open `packages/site/src/components/Buttons.tsx` in a text editor.
+    Edit the Button property to provide a functional name such as "Estimate Gas ":
+
+    ```typescript title="Buttons.tsx"
+    export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+      return <Button {...props}>Estimate Gas</Button>;
+    };
+    ````
+
+    These three updates are the minimum required to ensure that each user interaction with the Snap is well 
+    informed, however, your Snap will function without these tweaks.
+   </div>
 </details>
 
-
-Your file structure should look like this:
-
-```text
-gas-estimation-snap/
-├─ packages/
-│  ├─ site/
-|  |  |- src/
-|  |  |  |- App.tsx
-|  |  ├─ package.json
-|  |  |- ...(react app content)
-|  |
-│  ├─ snap/
-|  |  ├─ images/
-|  |  |  |- gas.svg
-|  |  ├─ src/
-|  |  |  |- index.test.ts
-|  |  |  |- index.ts
-|  |  ├─ snap.manifest.json
-|  |  ├─ package.json
-|  |  |- ... (Snap content)
-├─ package.json
-├─ ... (other stuff)
-```
-
-Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
-details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
-the value `"images/gas.svg"` to point to your new icon:
-
-```json title="snap.manifest.json"
-"location": {
-  "npm": {
-    "filePath": "dist/bundle.js",
-    "iconPath": "images/gas.svg",
-    "packageName": "snap",
-    "registry": "https://registry.npmjs.org/"
-  }
-}
-```
-
-Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
-`images/` folder:
-
-```json title="package.json"
-"files": [
-  "dist/",
-  "images/",
-  "snap.manifest.json"
-],
-```
-
-2.2 Update your Snap's wallet prompt
-
-It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
-prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
-
-Open `packages/snap/snap.manifest.json` in a text editor.
-Edit the `"proposedName"` property within the metadata to provide a functional name such as "Gas Estimate Snap":
-
-```json title="snap.manifest.json"
-{
-  "version": "0.1.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "Gas Estimate Snap",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
-  },
-  ```
-
-2.3 Update the Snap's button
-
-Open `packages/site/src/components/Buttons.tsx` in a text editor.
-Edit the Button property to provide a functional name such as "Estimate Gas ":
-
-```typescript title="Buttons.tsx"
-export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Estimate Gas</Button>;
-};
-````
-
-These three updates are the minimum required to ensure that each user interaction with the Snap is well 
-informed, however, your Snap will function without these tweaks.
 
 ### 3. Enable network access
 
@@ -234,8 +242,8 @@ case "hello":
 
 To build and test your Snap:
 
-5.1 Open `package.json` in the root directory of the project, and increment the `"version"` (if the `"version"` is
-   `0.1.0`, increase it to `0.2.0`).
+5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
+  the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
 5.2 From the command line, run `yarn start`.
    In the terminal, at the bottom of the message log, you see the browser URL:
@@ -256,13 +264,14 @@ To build and test your Snap:
 5.4 Select **Connect** to connect Flask to the dapp.
    After connecting, you're prompted to install the Snap with the following permissions:
 
-   - **Allow dapps to communicate directly with this Snap.**
+   - **Allow websites to communicate directly with this Snap.**
    - **Access the internet.**
    - **Display dialog windows in MetaMask.**
 
-5.5 Select **Approve** > **Install**.
+5.5 Select **Confirm** > **OK**.
 
-5.6 After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
+5.6 After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) 
+  is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
@@ -272,21 +281,24 @@ Congratulations, you have integrated a public API into MetaMask and displayed re
 
 ### What next?
 
-Next, you can try:
+Consider:
 
-- Completing the optional [Step 2](#2-optional-customize-your-snap).
-- Parsing the JSON response from the remote API.
-- Displaying the fees in a nicely formatted way.
-
-You can also update the fields in `snap.manifest.json` to match your custom Snap:
-
-- `description`: the description of your Snap.
-- `source`: the `shasum` is set automatically when you build from the command line.
-
-If you decided to publish your Snap to `npm`, update the `location` to its published location.
-
-Similarly, you should update the `name`, `version`, `description`, and `repository` fields of
+- Improving the Snap's UX:
+  - Complete [Step 2](#2-optional-customize-your-snap).
+  - Update `description`: the description of your Snap.
+  - Parse the JSON response from the remote API.
+  - Format the fees for better readability.
+- Update the `location` to its published location before publishing your Snap to `npm`, 
+- Update the `name`, `version`, `description`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
+- Update the content of `/packages/site/src/pages/index.tsx` by changing the
+name of the method for showing gas fee estimates.
+> If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method 
+name in `/packages/snap/src/index.ts` to match.
+
+:::note
+When editing `source`, the `shasum` is set automatically when you build from the command line.
+:::
 
 :::caution important
 The `version` and `repository` fields in `snap.manifest.json` inherit the values from
@@ -294,9 +306,5 @@ The `version` and `repository` fields in `snap.manifest.json` inherit the values
 We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
-You can update the content of `/packages/site/src/pages/index.tsx` by changing the
-name of the method for showing gas fee estimates.
-If you change the method name in `/packages/site/src/pages/index.tsx`, ensure you change the method 
-name in `/packages/snap/src/index.ts` to match.
-
-After you have made all necessary changes, you can [publish your Snap to npm](../../how-to/publish-a-snap.md).
+After you have made all necessary changes, you can 
+[publish your Snap to npm](../../how-to/publish-a-snap.md).
