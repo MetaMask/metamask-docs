@@ -279,7 +279,7 @@ To build and test your Snap:
 
 After connecting, you're prompted to install the Snap with the following permissions:
 - **Access the Ethereum provider** 
-- **Fetch and display transaction insights***
+- **Fetch and display transaction insights**
 
 Select **Confirm** > **OK**.
 
