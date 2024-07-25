@@ -1,10 +1,10 @@
 ---
-description: Get testnet ETH.
+description: Get testnet ETH for Optimism networks
 ---
 
-# Get some testnet ETH
+# Get Optimisim ETH
 
-To use the Sepolia testnet, you need some test ETH which is the native token for the network.
+To use the Sepolia testnet, you need test ETH which is the native token for the network.
 
 Optimism recommends the [Optimism Sepolia faucet](https://faucet.quicknode.com/optimism/sepolia) for this.
 

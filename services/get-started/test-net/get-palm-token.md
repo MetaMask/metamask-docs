@@ -2,7 +2,7 @@
 description: Get Palm tokens.
 ---
 
-# Get PALM token
+# Get PALM tokens
 
 PALM is the native token for the PALM ecosystem and is required to cover transaction costs on the network. Visit
 [Get PALM Tokens](https://docs.palm.io/get-started/tokens) page on PALM networks documentation site to learn how to

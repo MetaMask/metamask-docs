@@ -8,7 +8,7 @@ You can obtain test tokens for the Amoy testnet by using the [official Polygon f
 
 :::info
 
-You will need to be a member of the Polygon Discord community to obtain tokens.
+You must be a member of the Polygon Discord community to obtain tokens.
 
 :::
 
