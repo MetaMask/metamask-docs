@@ -15,18 +15,13 @@
   position: relative;
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
-}
-
-.flaskOnly::after {
-  content: "Flask";
-  border-bottom-left-radius: var(--ifm-card-border-radius);
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.1rem 0.75rem;
-  font-weight: 500;
-  background-color: var(--mm-flask-background-color);
-  color: var(--mm-flask-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 0.5rem;
+  padding: 1rem;
 }
 
 .cardContainer:hover {
@@ -48,4 +43,51 @@
   width: 24px;
   height: 24px;
   margin-right: 8px;
+}
+
+.flaskOnly::after {
+  content: "Flask";
+  border-bottom-left-radius: var(--ifm-card-border-radius);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.1rem 0.75rem;
+  font-weight: 500;
+  background-color: var(--mm-flask-background-color);
+  color: var(--mm-flask-color);
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+
+@media (max-width: 1200px) {
+  .cardContainer {
+    flex: 1 1 calc(33.333% - 1rem); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 900px) {
+  .cardContainer {
+    flex: 1 1 calc(50% - 1rem); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .cardContainer {
+    flex: 1 1 calc(100% - 1rem); /* 1 card per row */
+  }
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardBody {
+  flex-grow: 1;
 }

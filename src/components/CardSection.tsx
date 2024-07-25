@@ -34,14 +34,12 @@ const CardList: CardItem[] = [
   },
 ];
 
-export default function CardSection(): JSX.Element {
+export default function CardList(): JSX.Element {
   return (
-    <section className="container margin-top--sm margin-bottom--lg">
-      <div className="row">
-        {CardList.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
-      </div>
-    </section>
+    <div className={clsx(styles.cardList)}>
+      {cardItems.map((item, index) => (
+        <CardListItem key={index} item={item} />
+      ))}
+    </div>
   );
 }
