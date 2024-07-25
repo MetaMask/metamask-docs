@@ -148,13 +148,13 @@ This Snap is generated from a boilerplate typescript example Snap. While the fol
     prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
 
     Open `packages/snap/snap.manifest.json` in a text editor.
-    Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Gas Fees":
+    Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
 
     ```json title="snap.manifest.json"
     {
       "version": "0.1.0",
       "description": "An example Snap written in TypeScript.",
-      "proposedName": "Gas Estimate Snap",
+      "proposedName": "Get Fee %",
       "repository": {
         "type": "git",
         "url": "https://github.com/MetaMask/template-snap-monorepo.git"
@@ -283,8 +283,13 @@ After connecting, you're prompted to install the Snap with the following permiss
 
 Select **Confirm** > **OK**.
 
-5.5 From MetaMask Flask, create a new testnet ETH transfer.
-   You can set up multiple accounts to transfer between your accounts.
+5.5 From MetaMask Flask, create a new testnet ETH transfer. 
+
+  :::tip
+
+   You can set up [multiple accounts](https://support.metamask.io/managing-my-wallet/accounts-and-addresses/how-to-add-accounts-in-your-wallet/) to transfer between your accounts.
+
+   :::
 
 5.6 In the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
    Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
@@ -333,7 +338,7 @@ Consider:
 
 - Improving the Snap's UX:
   - Complete [Step 2](#2-optional-customize-your-snap): consider updating `packages/site/src/pages/index.tsx` 
-  to remove rather than update the text of the non-functional template **Send message** button.
+  to remove, rather than update, the text of the non-functional template **Send message** button.
   - Update `description`: the description of your Snap.
 - Update the `location` to its published location before publishing your Snap to `npm`, 
 - Update the `name`, `version`, `description`, and `repository` fields of
