@@ -37,9 +37,12 @@
       }
     }
 
+    .alignedButtons {
+      margin-top: 22px;
+    }
+
     .button {
       height: 48px;
-      margin-top: 22px;
 
       @media screen and (max-width: 996px) {
         width: 100%;

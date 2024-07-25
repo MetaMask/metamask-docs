@@ -4,33 +4,6 @@ import Badge from "@site/src/components/Badge";
 import Table from "@site/src/components/Table";
 import Text from "@site/src/components/Text";
 
-const TABLE_DATA = [
-  {
-    id: "01",
-    createdAt: "2024-06-05T13:24:49.207Z",
-    txnHash:
-      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0001",
-    status: "success",
-  },
-  {
-    id: "02",
-    createdAt: "2024-05-05T13:24:49.207Z",
-    txnHash:
-      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0002",
-    status: "failed",
-  },
-  {
-    id: "03",
-    createdAt: "2024-07-05T13:24:49.207Z",
-    txnHash:
-      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0003",
-    status: "pending",
-  },
-];
-
 const hideCenterLetters = (word) => {
   if (word.length < 10) return word;
   return `${word.substring(0, 5)}...${word.substring(word.length - 4)}`;
@@ -71,14 +44,22 @@ const renderStatus = (status) => {
 interface ITransactionTable {
   className?: string;
   classNameHeading?: string;
+  data: {
+    id: string;
+    createdAt: string;
+    txnHash: string;
+    value: string;
+    status: string;
+  }[];
 }
 
 export default function TransactionTable({
   className,
   classNameHeading,
+  data,
 }: ITransactionTable) {
   const dataRows = useMemo(() => {
-    return TABLE_DATA.map((item) => ({
+    return data.map((item) => ({
       cells: [
         hideCenterLetters(item.txnHash),
         getDiffTime(item.createdAt),

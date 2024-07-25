@@ -15,17 +15,71 @@ import { useAlert } from "react-alert";
 import { useSDK } from "@metamask/sdk-react";
 
 import styles from "./faucet.module.scss";
-import { useTimeout } from "react-use";
+
+const LINEA = [
+  {
+    id: "01",
+    createdAt: "2024-06-05T13:24:49.207Z",
+    txnHash:
+      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0001",
+    status: "success",
+  },
+  {
+    id: "02",
+    createdAt: "2024-05-05T13:24:49.207Z",
+    txnHash:
+      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0002",
+    status: "failed",
+  },
+  {
+    id: "03",
+    createdAt: "2024-07-05T13:24:49.207Z",
+    txnHash:
+      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0003",
+    status: "pending",
+  },
+];
+
+const SEPOLIA = [
+  {
+    id: "03",
+    createdAt: "2024-07-05T13:24:49.207Z",
+    txnHash:
+      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0003",
+    status: "pending",
+  },
+  {
+    id: "01",
+    createdAt: "2024-06-05T13:24:49.207Z",
+    txnHash:
+      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0001",
+    status: "success",
+  },
+  {
+    id: "02",
+    createdAt: "2024-05-05T13:24:49.207Z",
+    txnHash:
+      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
+    value: "0.0002",
+    status: "failed",
+  },
+];
 
 export default function Faucet() {
+  const { sdk, ready, connected, provider, account } = useSDK();
   const alert = useAlert();
   const [isUserConnected, setIsUserConnected] = useState(false);
-  const [walletAddress, setWalletAddress] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const { sdk, ready, connected, provider, account } = useSDK();
+  const [isMMConnected, setIsMMConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState("");
 
   const isWalletConnected = useMemo(() => {
-    return true; // ready && connected && !!account;
+    return ready && connected && !!account;
   }, [ready, connected, account]);
 
   const handleLogin = () => {
@@ -38,10 +92,13 @@ export default function Faucet() {
   };
 
   const connectSDKHandler = async () => {
-    // @TODO remove later
-    alert.error(<AlertCommonIssue />);
-
     try {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsMMConnected(true);
+        alert.error(<AlertCommonIssue />);
+      }, 2000);
       const accounts = await sdk?.connect();
     } catch (err) {
       console.warn("failed to connect..", err);
@@ -53,6 +110,7 @@ export default function Faucet() {
     setTimeout(() => {
       setIsLoading(false);
       alert.success(<AlertSuccess url="https://www.infura.io" />);
+      setWalletAddress("");
     }, 2000);
   };
 
@@ -70,14 +128,19 @@ export default function Faucet() {
             className={styles.hero}
             handleLogin={handleLogin}
             handleC
-            isWalletConnected={isWalletConnected}
+            isWalletConnected={isMMConnected || isWalletConnected}
             handleConnectWallet={connectSDKHandler}
             handleRequest={handleRequest}
             handleOnInputChange={handleOnInputChange}
             inputValue={walletAddress}
             isLoading={isLoading}
           />
-          <TransactionTable classNameHeading={styles.sectionHeading} />
+          {isUserConnected && (
+            <TransactionTable
+              data={network === "linea" ? LINEA : SEPOLIA}
+              classNameHeading={styles.sectionHeading}
+            />
+          )}
         </div>
         <div className={styles.bottomContent}>
           <Faq
@@ -95,9 +158,13 @@ export default function Faucet() {
       <div className={styles.authCont}>
         <span className={styles.title}>MetaMask Faucet</span>
         {!isUserConnected ? (
-          <Button onClick={handleLogin}>Sign in</Button>
-        ) : !isWalletConnected ? (
-          <Button onClick={connectSDKHandler}>Install MetaMask</Button>
+          <Button isLoading={isLoading} onClick={handleLogin}>
+            Sign in
+          </Button>
+        ) : !(isMMConnected || isWalletConnected) ? (
+          <Button isLoading={isLoading} onClick={connectSDKHandler}>
+            Install MetaMask
+          </Button>
         ) : (
           <div>walletId</div>
         )}
