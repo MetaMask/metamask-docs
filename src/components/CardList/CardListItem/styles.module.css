@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-.cardContainer {
+ .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
   --ifm-link-hover-decoration: none;
@@ -20,8 +20,11 @@
   justify-content: space-between;
   background-color: #fff;
   border-radius: 8px;
-  margin: 0.5rem;
-  padding: 1rem;
+  margin: 1rem;
+  padding: 2rem;
+  width: 300px;
+  color: #000;
+  height: 100%;
 }
 
 .cardContainer:hover {
@@ -60,34 +63,6 @@
 .cardList {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-
-@media (max-width: 1200px) {
-  .cardContainer {
-    flex: 1 1 calc(33.333% - 1rem); /* 3 cards per row */
-  }
-}
-
-@media (max-width: 900px) {
-  .cardContainer {
-    flex: 1 1 calc(50% - 1rem); /* 2 cards per row */
-  }
-}
-
-@media (max-width: 600px) {
-  .cardContainer {
-    flex: 1 1 calc(100% - 1rem); /* 1 card per row */
-  }
-}
-
-.cardContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.cardBody {
-  flex-grow: 1;
+  gap: 2rem;
+  justify-content: center;
 }

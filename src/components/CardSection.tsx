@@ -1,5 +1,6 @@
 import React from "react";
 import Card, { type CardItem } from "@site/src/components/Card";
+import "./CardList/CardListItem/styles.module.css";
 
 const CardList: CardItem[] = [
   {
@@ -34,12 +35,14 @@ const CardList: CardItem[] = [
   },
 ];
 
-export default function CardList(): JSX.Element {
+export default function CardSection(): JSX.Element {
   return (
-    <div className={clsx(styles.cardList)}>
-      {cardItems.map((item, index) => (
-        <CardListItem key={index} item={item} />
-      ))}
-    </div>
+    <section className="container margin-top--sm margin-bottom--lg">
+      <div className="row">
+        {CardList.map((props, idx) => (
+          <Card key={idx} {...props} />
+        ))}
+      </div>
+    </section>
   );
 }
