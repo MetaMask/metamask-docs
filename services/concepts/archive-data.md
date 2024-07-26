@@ -7,16 +7,24 @@ sidebar_position: 2
 
 Archive data is data on the blockchain that is older than 128 blocks.
 
-Infura provides free access to archive data on Ethereum and most networks. Infura provides access to [full nodes](#full-nodes)
-and [archive nodes](#archive-nodes).
+Infura provides free access to archive data on Ethereum and most networks. 
 
-:::success
+## Infura-supported archive data
 
-Archive data is automatically enabled and no further action is required by the user.
+Access to archive data is automatically enabled on the following supported networks:
 
-:::
+ |Mainnet |Testnet|
+ |--------|-------|
+ |Ethereum|Sepolia|
+ |Optimism|Sepolia|
+ |Polygon |Amoy   |
+ |Arbitrum|       |
+ |Celo    |       |
 
-### Full nodes
+Infura provides access to [full nodes](#full-nodes)
+and [archive nodes](#archive-nodes). 
+
+## Full nodes
 
 Full nodes maintain the current state of the blockchain and are responsible for providing data on request and executing smart contract transactions.
 
@@ -24,13 +32,13 @@ Full nodes store enough data to recalculate the chain in the event of a chain re
 
 Pruning conserves disk space and helps with node sync time, thus reducing storage and computation costs. However, a pruned node cannot serve API requests for certain RPC methods older than 128 blocks.
 
-### Archive nodes
+## Archive nodes
 
 Data older than 128 blocks are stored on archive nodes on the blockchain. These are full nodes running in archive mode.
 
 Only an archive node can serve API requests for certain RPC methods older than 128 blocks. The Ethereum JSON-RPC and Websocket APIs include several methods which require access to an archive node.
 
-### Methods requiring archive data
+## Methods requiring archive data
 
 Requests for data older than the most recent 128 blocks require access to archive data.
 
@@ -42,7 +50,7 @@ The following methods include a parameter for specifying a block number for the 
 - `eth_getStorageAt`
 - `eth_call`
 
-### Rate limits
+## Rate limits
 
 Infura applies [rate limits](../how-to/avoid-rate-limiting.md) to ensure network efficiency.
 
@@ -57,7 +65,7 @@ Rate limits kick in on archive requests after 25,000 per day. 75,000 standard re
 
 :::info
 
-If you need more archive requests, upgrade to the developer plan.
+If you need more archive requests, upgrade to the Developer plan.
 
 :::
 
@@ -74,6 +82,6 @@ If you need more archive requests, upgrade to the growth plan.
 
 :::
 
-#### Custom, team, and growth plans
+### Custom, team, and growth plans
 
-No change. Same as a standard request.
+There is no change. The process remains the same as a standard request.

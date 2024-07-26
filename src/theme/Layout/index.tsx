@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import ldClient from "launchdarkly";
 import { useLocation } from "@docusaurus/router";
@@ -25,7 +24,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask,
+    (net) => net.name === NETWORK_NAMES.metamask
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -36,7 +35,7 @@ export default function LayoutWrapper({ children }) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
         (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
       );
       return page;
     }
@@ -57,18 +56,22 @@ export default function LayoutWrapper({ children }) {
     };
   }, []);
 
+  if (!referencePageName) {
+    return (
+      <Layout>{children}</Layout>
+    )
+  }
+
   return (
-    <BrowserOnly>
-      {() => {
-        if (!ldReady) {
-          return null;
-        }
-        return (
+    <>
+      {
+        !ldReady ? null : (
           <>
-            {newReferenceEnabled && ldReady && referencePageName ? (
-              <Layout>
-                <div className={styles.pageWrapper}>
-                  {children?.props?.children[0]?.type === "aside" && (
+            {
+              newReferenceEnabled ? (
+                <Layout>
+                  <div className={styles.pageWrapper}>
+                    {children?.props?.children[0]?.type === "aside" && (
                     <>{children.props.children[0]}</>
                   )}
                   <div className={styles.mainContainer}>
@@ -81,12 +84,13 @@ export default function LayoutWrapper({ children }) {
                   </div>
                 </div>
               </Layout>
-            ) : (
-              <Layout>{children}</Layout>
-            )}
+              ) : (
+                <Layout>{children}</Layout>
+              )
+            }
           </>
-        );
-      }}
-    </BrowserOnly>
-  );
+        )
+      }
+    </>
+  )
 }

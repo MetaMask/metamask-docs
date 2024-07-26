@@ -12049,6 +12049,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "js-cookie@npm:3.0.5"
+  checksum: 2dbd2809c6180fbcf060c6957cb82dbb47edae0ead6bd71cbeedf448aa6b6923115003b995f7d3e3077bfe2cb76295ea6b584eb7196cca8ba0a09f389f64967a
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -13409,6 +13416,7 @@ __metadata:
     "@mdx-js/react": ^3.0.0
     "@metamask/design-tokens": ^1.11.1
     "@metamask/docusaurus-openrpc": ^0.4.1
+    "@metamask/sdk": ^0.26.5
     "@metamask/sdk-react": ^0.26.5
     "@rjsf/core": ^5.18.4
     "@rjsf/utils": ^5.18.4
@@ -13422,6 +13430,7 @@ __metadata:
     docusaurus-plugin-sentry: ^2.0.0
     dotenv: ^16.4.5
     eslint-plugin-react: ^7.34.2
+    js-cookie: ^3.0.5
     launchdarkly-js-client-sdk: ^3.3.0
     lodash.debounce: ^4.0.8
     node-polyfill-webpack-plugin: ^2.0.1

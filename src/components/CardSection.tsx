@@ -3,7 +3,7 @@ import Card, { type CardItem } from "@site/src/components/Card";
 
 const CardList: CardItem[] = [
   {
-    title: "Wallet",
+    title: "📱 Integrate your dapp with the MetaMask wallet",
     link: "/wallet",
     description: (
       <>
@@ -13,7 +13,7 @@ const CardList: CardItem[] = [
     ),
   },
   {
-    title: "Snaps",
+    title: "🛠️ Extend the functionality of MetaMask using Snaps",
     link: "/snaps",
     description: (
       <>
@@ -23,22 +23,12 @@ const CardList: CardItem[] = [
     ),
   },
   {
-    title: "Services",
+    title: "📐 Build and scale your dapp using services",
     link: "/services",
     description: (
       <>
-        Power your dapp or Snap using services provided by MetaMask and Infura.
-        This includes APIs aimed at optimizing essential development tasks.
-      </>
-    ),
-  },
-  {
-    title: "Infura dashboard",
-    link: "/developer-tools/dashboard",
-    description: (
-      <>
-        Use the Infura dashboard as a central hub for managing your Infura API
-        keys, monitoring usage, and accessing account and billing information.
+        Build and scale your dapp or Snap using services provided by MetaMask and Infura.
+        This includes APIs that optimize essential development tasks.
       </>
     ),
   },

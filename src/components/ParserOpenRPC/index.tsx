@@ -1,5 +1,4 @@
-import React, { createContext, useMemo, useState, useEffect } from "react";
-import { useSDK } from "@metamask/sdk-react";
+import React, { createContext, useMemo, useState, useContext } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -12,10 +11,8 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import {
-  trackClickForSegment,
-  trackInputChangeForSegment,
-} from "@site/src/lib/segmentAnalytics";
+import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -75,19 +72,19 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     };
 
     const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method,
+      (met) => met.name === method
     );
     if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
-      "errors",
+      "errors"
     );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
-      "tags",
+      "tags"
     );
 
     return {
@@ -103,29 +100,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { sdk, ready, connected, provider, account } = useSDK();
-
-  const isConnected = useMemo(() => {
-    return ready && connected && !!account;
-  }, [ready, connected, account]);
-
-  useEffect(() => {
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({
-        name: account,
-        id: account,
-        username: account,
-      });
-    }
-  }, [account]);
-
-  const connectSDKHandler = async () => {
-    try {
-      const accounts = await sdk?.connect();
-    } catch (err) {
-      console.warn("failed to connect..", err);
-    }
-  };
+  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -143,12 +118,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!provider || !connected) return;
+    if (!metaMaskProvider) return
     try {
-      const response = await provider?.request({
+      const response = await metaMaskProvider?.request({
         method: method,
-        params: paramsData,
-      });
+        params: paramsData
+      })
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -201,7 +176,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack,
+                      modalDrawerStyles.modalHeaderIconBack
                     )}
                     onClick={closeComplexTypeView}
                   >
@@ -236,9 +211,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!isConnected && <AuthBox handleConnect={connectSDKHandler} />}
+            {!metaMaskProvider && <AuthBox handleConnect={metaMaskConnectHandler} />}
             <RequestBox
-              isMetamaskInstalled={connected}
+              isMetamaskInstalled={!!metaMaskProvider}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
