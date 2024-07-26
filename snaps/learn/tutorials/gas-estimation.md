@@ -61,7 +61,7 @@ This Snap is generated from a boilerplate TypeScript example Snap. We recommend 
 Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
 skip to [Step 3](#3-enable-network-access).
 
-#### 2.1 Provide an icon
+#### 2.1. Provide an icon
 
 Follow [best practice](../best-practices/design-guidelines.md#optimize-your-metadata) and display an icon for your Snap in MetaMask.
 
@@ -240,7 +240,7 @@ case "hello":
 
 Complete the following steps to build and test your Snap:
 
-#### 5.1 Increment version
+#### 5.1. Increment version
 
 This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
