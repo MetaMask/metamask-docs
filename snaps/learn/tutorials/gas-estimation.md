@@ -149,8 +149,8 @@ drop-down are optional for testing, they significantly improve the UX by alignin
       "repository": {
         "type": "git",
         "url": "https://github.com/MetaMask/template-snap-monorepo.git"
-      },
-      ```
+    },
+    ```
 
     2.3 Update the Snap's button
 
