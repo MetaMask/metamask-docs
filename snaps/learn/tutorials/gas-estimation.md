@@ -132,7 +132,7 @@ drop-down are optional for testing, they significantly improve the UX by alignin
     ],
     ```
 
-    2.2 Update your Snap's wallet prompt
+#### 2.2. Update your Snap's wallet prompt
 
     It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
     prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
