@@ -263,7 +263,9 @@ Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask F
 
    This is a boilerplate test dapp for installing and testing your Snap.
 
-5.4 Select **Connect** to connect Flask to the dapp.
+#### 5.3. Test your Snap
+
+Select **Connect** to connect Flask to the dapp.
    After connecting, you're prompted to install the Snap with the following permissions:
 
    - **Allow websites to communicate directly with this Snap.**
