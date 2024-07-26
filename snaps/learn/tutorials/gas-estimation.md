@@ -279,7 +279,7 @@ Complete the following steps to build and test your Snap:
 
 Congratulations, you have integrated a public API into MetaMask and displayed real-time gas fee estimates.
 
-### What next?
+### Next steps
 
 Consider:
 
