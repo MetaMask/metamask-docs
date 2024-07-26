@@ -272,7 +272,7 @@ Select **Connect** to connect Flask to the dapp.
    - **Access the internet.**
    - **Display dialog windows in MetaMask.**
 
-5.5 Select **Confirm** > **OK**.
+Next, select **Confirm** > **OK**.
 
 5.6 After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) 
   is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
