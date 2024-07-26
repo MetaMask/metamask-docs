@@ -162,7 +162,7 @@ Edit the `"proposedName"` property within the metadata to provide a functional n
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
-  ```
+```
 
 #### 2.3. Update your Snap's button
 
@@ -260,15 +260,15 @@ Complete the following steps to build and test your Snap:
 #### 5.1. Increment version
 
 This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
-  the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
+the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
 #### 5.2. Build your Snap
 
 From the command line, run `yarn start` in the root of your project. This starts two development 
-  servers: one for watching and compiling the Snap, and another for the React site.
-  The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
+servers: one for watching and compiling the Snap, and another for the React site.
+The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
 
-  You should get a message that includes:
+You should get a message that includes:
 
    ```bash
    You can now view site in the browser.
@@ -359,6 +359,5 @@ The `version` and `repository` fields in `snap.manifest.json` inherit the values
 We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
 :::
 
-After you've made all necessary changes, you can 
-[publish your Snap to npm](../../how-to/publish-a-snap.md).
+After you've made all necessary changes, you can [publish your Snap to npm](../../how-to/publish-a-snap.md).
 

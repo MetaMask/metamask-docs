@@ -257,7 +257,7 @@ From the command line, run `yarn start`.
    ```
 
 Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
-   A page like the following displays:
+A page like the following displays:
 
    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
@@ -275,7 +275,7 @@ Select **Connect** to connect Flask to the dapp.
 Next, select **Confirm** > **OK**.
 
 After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) 
-  is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
+is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
@@ -311,5 +311,4 @@ The `version` and `repository` fields in `snap.manifest.json` inherit the values
 We recommend updating `version` and `repository` in `package.json` first, then building your Snap project.
 :::
 
-After you have made all necessary changes, you can 
-[publish your Snap to npm](../../how-to/publish-a-snap.md).
+After you have made all necessary changes, you can [publish your Snap to npm](../../how-to/publish-a-snap.md).
