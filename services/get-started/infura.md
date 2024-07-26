@@ -29,14 +29,11 @@ For more information refer to the [Infura pricing information](https://www.infur
 
 ## 2. Configure your API key
 
-Once verified, you’ll be taken to the [Infura dashboard](../../../developer-tools/dashboard) where you can configure your
+After verification, you'll be directed to the [Infura dashboard](../../../developer-tools/dashboard) to configure your
 auto-generated API key.
 
-:::info
+Infura will automatically generate the **My First Key** API key.
 
-Infura will automatically generate the **My First Key** API key for you.
-
-:::
 
 <div class="left-align-container">
   <div class="img-large">
@@ -46,10 +43,10 @@ Infura will automatically generate the **My First Key** API key for you.
   </div>
 </div>
 
-In the API key page that appears, select **My First Key** to access your API key settings. In the **All Endpoints** tab, select
-the networks that you wish to connect to, and select **Save Changes**.
+In the API key page that displays, select **My First Key** to access your API key settings. In the **All Endpoints** tab, select
+the networks that you want to connect to, and select **Save Changes**.
 
-In this example, we've selected the Ethereum mainnet and Linea mainnet networks.
+In the following example, Ethereum mainnet and Linea mainnet networks are selected.
 
 <div class="left-align-container">
   <div class="img-large">
@@ -61,7 +58,7 @@ In this example, we've selected the Ethereum mainnet and Linea mainnet networks.
 
 ## 3. Send requests
 
-Use the API key when sending requests. The following examples interact with the Ethereum network by sending requests using HTTP.
+Use the API key when sending requests. The following examples interact with the Ethereum network by sending requests using HTTP:
 
 :::info
 
@@ -70,7 +67,13 @@ Use the API key when sending requests. The following examples interact with the 
 
 :::
 
-Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl.md) or [Postman](https://www.postman.com/downloads/) to make requests. We recommend using Postman if you're a Windows user.
+Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl.md) or [Postman](https://www.postman.com/downloads/) to make requests. 
+
+:::info
+
+We recommend using Postman if you're a Windows user.
+
+:::
 
 ### 3.1 Get the current block number
 

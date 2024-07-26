@@ -22,7 +22,7 @@ This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../co
 
 ### 1. Create a new project
 
-Open a terminal and create a new project.
+Open a terminal and create a new project:
 
 ```Rust
 cargo new infura_rs
@@ -251,13 +251,13 @@ async fn main() -> Result<()> {
 
 ### 2. Run the modified code
 
-From the `infura_rs` directory, run the code.
+From the `infura_rs` directory, run the code:
 
 ```rust
 cargo run
 ```
 
-You will see an output similar to the following.
+An output similar to the following is displayed:
 
 ```log
 Compiling infura_rs v0.1.0 (/Users/rajkaramchedu/onboarding/traian-tutorials/infura_rs)
