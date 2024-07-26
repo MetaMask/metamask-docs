@@ -240,7 +240,7 @@ case "hello":
 
 ### 5. Build and test the Snap
 
-To build and test your Snap:
+Complete the following steps to build and test your Snap:
 
 5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
