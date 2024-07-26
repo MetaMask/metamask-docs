@@ -155,7 +155,7 @@ drop-down are optional for testing, they significantly improve the UX by alignin
 #### 2.3. Update your Snap's button
 
     Open `packages/site/src/components/Buttons.tsx` in a text editor.
-    Edit the Button property to provide a functional name such as "Estimate Gas ":
+    Edit the `Button` property to provide a functional name such as "Estimate Gas":
 
     ```typescript title="Buttons.tsx"
     export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
