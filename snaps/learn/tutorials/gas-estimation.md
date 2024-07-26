@@ -245,7 +245,9 @@ Complete the following steps to build and test your Snap:
 5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
-5.2 From the command line, run `yarn start`.
+#### 5.2. Build your Snap
+
+From the command line, run `yarn start`.
    In the terminal, at the bottom of the message log, you see the browser URL:
 
    ```bash
