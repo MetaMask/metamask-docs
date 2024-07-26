@@ -54,7 +54,7 @@ yarn run allow-scripts auto
 </details>
 
 
-### 2. (Optional) customize your Snap
+### 2. (Optional) Customize your Snap
 
 This Snap is generated from a boilerplate typescript example Snap. While the following steps in the 
 drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
