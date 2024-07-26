@@ -256,7 +256,7 @@ From the command line, run `yarn start`.
      http://localhost:8000/
    ```
 
-5.3 Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
+Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
    A page like the following displays:
 
    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
