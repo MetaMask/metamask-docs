@@ -11,7 +11,10 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import {
+  trackClickForSegment,
+  trackInputChangeForSegment,
+} from "@site/src/lib/segmentAnalytics";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface ParserProps {
@@ -72,19 +75,19 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     };
 
     const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method
+      (met) => met.name === method,
     );
     if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
-      "errors"
+      "errors",
     );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
-      "tags"
+      "tags",
     );
 
     return {
@@ -100,7 +103,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+  const { metaMaskProvider, metaMaskConnectHandler } = useContext(
+    MetamaskProviderContext,
+  );
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -118,12 +123,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return
+    if (!metaMaskProvider) return;
     try {
       const response = await metaMaskProvider?.request({
         method: method,
-        params: paramsData
-      })
+        params: paramsData,
+      });
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -176,7 +181,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack
+                      modalDrawerStyles.modalHeaderIconBack,
                     )}
                     onClick={closeComplexTypeView}
                   >
@@ -211,7 +216,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskProvider && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {!metaMaskProvider && (
+              <AuthBox handleConnect={metaMaskConnectHandler} />
+            )}
             <RequestBox
               isMetamaskInstalled={!!metaMaskProvider}
               method={method}
