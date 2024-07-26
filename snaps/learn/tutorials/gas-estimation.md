@@ -56,11 +56,11 @@ yarn run allow-scripts auto
 
 ### 2. (Optional) Customize your Snap
 
-This Snap is generated from a boilerplate typescript example Snap. While the following steps in the 
-drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
+This Snap is generated from a template typescript example Snap. While the following steps in the 
+drop-down are optional for testing, they significantly improve the UX by aligning your Snap with its function.
 
 <details>
-  <summary>Customize the Snap's UX</summary>
+  <summary>Customize your Snap's UX</summary>
   <div>
     2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
 
@@ -135,7 +135,7 @@ drop-down are optional for testing, they significantly improve the UX by alignin
 #### 2.2. Update your Snap's wallet prompt
 
     It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
-    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
+    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our template.
 
     Open `packages/snap/snap.manifest.json` in a text editor.
     Edit the `"proposedName"` property within the metadata to provide a functional name such as 
@@ -163,7 +163,7 @@ drop-down are optional for testing, they significantly improve the UX by alignin
     };
     ````
 
-    These three updates are the minimum required to ensure that each user interaction with the Snap is well 
+    These three updates are the minimum required to ensure that each user interaction with your Snap is well 
     informed, however, your Snap will function without these tweaks.
    </div>
 </details>
@@ -238,11 +238,13 @@ case "hello":
   });
 ```
 
-### 5. Build and test the Snap
+### 5. Build and test your Snap
 
 Complete the following steps to build and test your Snap:
 
-5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
+#### 5.1 Increment version
+
+This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
 #### 5.2. Build your Snap
@@ -261,7 +263,7 @@ Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask F
 
    <img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
 
-   This is a boilerplate test dapp for installing and testing your Snap.
+   This is a template test dapp for installing and testing your Snap.
 
 #### 5.3. Test your Snap
 
@@ -285,17 +287,18 @@ Congratulations, you have integrated a public API into MetaMask and displayed re
 
 ### Next steps
 
-Consider:
+You can improve your Snap's UX by:
+- Completing [Step 2](#2-optional-customize-your-snap).
+- Parsing the JSON response from the remote API.
+- Formatting the fees for better readability.
 
-- Improving the Snap's UX:
-  - Complete [Step 2](#2-optional-customize-your-snap).
-  - Update `description`: the description of your Snap.
-  - Parse the JSON response from the remote API.
-  - Format the fees for better readability.
-- Updating the `location` in `snap.manifest.json` to its published location before publishing your Snap to `npm`, 
-- Updating the `name`, `version`, and `repository` fields of
+Before publishing a Snap, it's also important to customize the metadata and properties of your app, 
+for example:
+- Update the `location` in `snap.manifest.json` to its published location before publishing your 
+Snap to `npm`. 
+- Update the `name`, `version`, `description`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
-- Updating the content of `/packages/site/src/pages/index.tsx` by changing the
+- Update the content of `/packages/site/src/pages/index.tsx` by changing the
 name of the method for showing gas fee estimates. If you change the method name in 
 `/packages/site/src/pages/index.tsx`, ensure you change the method name in 
 `/packages/snap/src/index.ts` to match.
@@ -307,7 +310,7 @@ When editing `source`, the `shasum` is set automatically when you build from the
 :::caution important
 The `version` and `repository` fields in `snap.manifest.json` inherit the values from
 `package.json` and overwrite them in `snap.manifest.json`.
-We recommend updating `version` and `repository` in `package.json` first, then building the Snap project.
+We recommend updating `version` and `repository` in `package.json` first, then building your Snap project.
 :::
 
 After you have made all necessary changes, you can 

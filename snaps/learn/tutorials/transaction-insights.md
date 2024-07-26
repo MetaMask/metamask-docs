@@ -67,10 +67,10 @@ yarn run allow-scripts auto
 
 ### 2. (Optional) customize your Snap
 
-This Snap is generated from a boilerplate typescript example Snap. While the following steps in the drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
+This Snap is generated from a template typescript example Snap. While the following steps in the drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
 
 <details>
-  <summary>Customize the Snap's UX</summary>
+  <summary>Customize your Snap's UX</summary>
   <div>
     2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
 
@@ -145,7 +145,7 @@ This Snap is generated from a boilerplate typescript example Snap. While the fol
     2.2 Update your Snap's wallet prompt
 
     It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
-    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our boilerplate.
+    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our template.
 
     Open `packages/snap/snap.manifest.json` in a text editor.
     Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
@@ -161,7 +161,7 @@ This Snap is generated from a boilerplate typescript example Snap. While the fol
       },
       ```
 
-    2.3 Update the Snap's button
+    2.3 Update your Snap's button
 
     Open `packages/site/src/components/Buttons.tsx` in a text editor.
     Edit the Button property to provide a functional name such as "Estimate Gas ":
@@ -172,7 +172,7 @@ This Snap is generated from a boilerplate typescript example Snap. While the fol
     };
     ````
 
-    These three updates are the minimum required to ensure that each user interaction with the Snap is well 
+    These three updates are the minimum required to ensure that each user interaction with your Snap is well 
     informed, however, your Snap will function without these tweaks.
 
    </div>
@@ -254,14 +254,18 @@ the `endowment:ethereum-provider` permission, your Snap is granted access to the
 [`ethereum` global object](../about-snaps/apis.md#snap-requests).
 :::
 
-### 5. Build and test the Snap
+### 5. Build and test your Snap
 
-To build and test your Snap:
+Complete the following steps to build and test your Snap:
 
-5.1 (Optional for testing) open `package.json` in the root directory of the project, and increment 
+#### 5.1 Increment version
+
+This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
-5.2 From the command line, run `yarn start` in the root of your project. This starts two development 
+#### 5.2. Build your Snap
+
+From the command line, run `yarn start` in the root of your project. This starts two development 
   servers: one for watching and compiling the Snap, and another for the React site.
   The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
 
@@ -273,17 +277,19 @@ To build and test your Snap:
      http://localhost:8000/
    ```
 
-5.3. Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
+Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
 
-5.4. Select **Connect** and accept the permission request.
+### 5.3. Test your Snap
+
+Select **Connect** and accept the permission request.
 
 After connecting, you're prompted to install the Snap with the following permissions:
 - **Access the Ethereum provider** 
 - **Fetch and display transaction insights**
 
-Select **Confirm** > **OK**.
+Next, select **Confirm** > **OK**.
 
-5.5 From MetaMask Flask, create a new testnet ETH transfer. 
+From MetaMask Flask, create a new testnet ETH transfer. 
 
   :::tip
 
@@ -291,9 +297,9 @@ Select **Confirm** > **OK**.
 
    :::
 
-5.6 In the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
-   Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
-   entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
+Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
+entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
 <img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" style={{border: '1px solid #DCDCDC'}} />
@@ -310,13 +316,13 @@ Instead, it provides transaction insights directly in a tab in MetaMask's transa
 :::
 
 
-### What next?
+### Next steps
 
-Consider improving the Snap functionality further.
+Consider improving your Snap's functionality further.
 
 #### Display a different UI for contract interactions
 
-The Snap displays a gas fee percentage for ETH transfers initiated by the user.
+Your Snap displays a gas fee percentage for ETH transfers initiated by the user.
 For contract interactions, add the following code to the beginning of the `onTransaction` entry point:
 
 ```typescript title="index.ts"
@@ -332,22 +338,21 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 }
 ```
 
-#### Customize the Snap
+#### Customize your Snap
 
-Consider:
+You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snap). Consider 
+updating `packages/site/src/pages/index.tsx` to remove, rather than updating the text of the 
+non-functional template **Send message** button.
 
-- Improving the Snap's UX:
-  - Complete [Step 2](#2-optional-customize-your-snap): consider updating `packages/site/src/pages/index.tsx` 
-  to remove, rather than update the text of the non-functional template **Send message** button.
-  - Update `description`: the description of your Snap.
-- Updating the `location` to its published location before publishing your Snap to `npm`, 
-- Updating the `name`, `version`, and `repository` fields of
-`/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
+Before publishing a Snap, it's also important to customize the metadata and properties of your app, 
+for example:
+- Update the `location` to its published location before publishing your Snap to `npm`, 
+- Update the `name`, `version`, `description`, and `repository` fields of
+`/packages/snap/package.json`, even if you do not plan to publish your Snap to npm.
 
 :::note
 When editing `source`, the `shasum` is set automatically when you build from the command line.
 :::
-
 
 :::caution important
 The `version` and `repository` fields in `snap.manifest.json` inherit the values from
