@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState, useEffect, useContext } from "react";
+import React, { createContext, useMemo, useState, useContext } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -100,14 +100,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskAccount, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
-
-  useEffect(() => {
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({ name: metaMaskAccount, id: metaMaskAccount, username: metaMaskAccount })
-    }
-  }, [metaMaskAccount]);
-
+  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
     if (
