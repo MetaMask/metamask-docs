@@ -288,7 +288,7 @@ Consider:
   - Update `description`: the description of your Snap.
   - Parse the JSON response from the remote API.
   - Format the fees for better readability.
-- Updating the `location` to its published location before publishing your Snap to `npm`, 
+- Updating the `location` in `snap.manifest.json` to its published location before publishing your Snap to `npm`, 
 - Updating the `name`, `version`, and `repository` fields of
 `/packages/snap/package.json` even if you do not plan to publish your Snap to npm.
 - Updating the content of `/packages/site/src/pages/index.tsx` by changing the
