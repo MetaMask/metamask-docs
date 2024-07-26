@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useState } from "react";
 import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -12,7 +12,7 @@ import {
   Hero,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
-import { useSDK } from "@metamask/sdk-react";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
 
@@ -71,22 +71,20 @@ const SEPOLIA = [
 ];
 
 export default function Faucet() {
-  const { sdk, ready, connected, provider, account } = useSDK();
+  const { metaMaskConnectHandler, metaMaskAccount } = useContext(
+    MetamaskProviderContext,
+  );
   const alert = useAlert();
   const [isUserConnected, setIsUserConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMMConnected, setIsMMConnected] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
-
-  const isWalletConnected = useMemo(() => {
-    return ready && connected && !!account;
-  }, [ready, connected, account]);
+  const [alertType, setAlertType] = useState(1);
 
   const handleLogin = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      alert.info(<AlertCooldown />);
       setIsUserConnected((value) => !value);
     }, 2000);
   };
@@ -96,10 +94,9 @@ export default function Faucet() {
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
-        setIsMMConnected(true);
-        alert.error(<AlertCommonIssue />);
+        setIsWalletConnected(true);
       }, 2000);
-      const accounts = await sdk?.connect();
+      metaMaskConnectHandler();
     } catch (err) {
       console.warn("failed to connect..", err);
     }
@@ -109,7 +106,17 @@ export default function Faucet() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      alert.success(<AlertSuccess url="https://www.infura.io" />);
+      switch (alertType) {
+        case 1:
+          alert.success(<AlertSuccess url="https://www.infura.io" />);
+          break;
+        case 2:
+          alert.error(<AlertCommonIssue />);
+          break;
+        default:
+          alert.info(<AlertCooldown />);
+      }
+      setAlertType((value) => value + 1);
       setWalletAddress("");
     }, 2000);
   };
@@ -127,8 +134,7 @@ export default function Faucet() {
             network={network}
             className={styles.hero}
             handleLogin={handleLogin}
-            handleC
-            isWalletConnected={isMMConnected || isWalletConnected}
+            isWalletConnected={isWalletConnected || metaMaskAccount}
             handleConnectWallet={connectSDKHandler}
             handleRequest={handleRequest}
             handleOnInputChange={handleOnInputChange}
@@ -161,7 +167,7 @@ export default function Faucet() {
           <Button isLoading={isLoading} onClick={handleLogin}>
             Sign in
           </Button>
-        ) : !(isMMConnected || isWalletConnected) ? (
+        ) : !(isWalletConnected || metaMaskAccount) ? (
           <Button isLoading={isLoading} onClick={connectSDKHandler}>
             Install MetaMask
           </Button>

@@ -4,9 +4,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "launchdarkly": [
-        "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
-      ]
+      "@site/*": ["./*"],
+      "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"]
     },
     "types": [
       "docusaurus-plugin-sass"

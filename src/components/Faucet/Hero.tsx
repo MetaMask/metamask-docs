@@ -15,7 +15,7 @@ interface IHero {
   handleConnectWallet: VoidFunction;
   handleLogin: VoidFunction;
   handleRequest: VoidFunction;
-  handleOnInputChange: VoidFunction;
+  handleOnInputChange: (valiue: string) => void;
   inputValue?: string;
   isLoading?: boolean;
 }
