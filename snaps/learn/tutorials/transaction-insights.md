@@ -1,6 +1,7 @@
 ---
 description: Create a Snap that provides transaction insights.
 sidebar_position: 2
+toc_max_heading_level: 4
 ---
 
 import Tabs from '@theme/Tabs';
@@ -65,119 +66,117 @@ yarn run allow-scripts auto
  </div>
 </details>
 
-### 2. (Optional) customize your Snap
+### 2. (Optional) customize your Snap's UX
 
-This Snap is generated from a template typescript example Snap. While the following steps in the drop-down are optional for testing, they significantly improve the UX by aligning the Snap with its function.
+This Snap is generated from a boilerplate TypeScript example Snap. We recommend customizing your 
+Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
+skip to [Step 3](#3-enable-transaction-insights-and-the-ethereum-provider).
+
+ #### 2.1. Provide an icon 
+
+Follow [best practice](../best-practices/design-guidelines.md#optimize-your-metadata) and display an 
+icon for your Snap in MetaMask.
+
+Create a new folder `images` in the Snap package `packages/snap/`:
+
+```bash
+mkdir packages/snap/images
+```
+
+Download
+[this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
+into that `ìmages` folder.  
 
 <details>
-  <summary>Customize your Snap's UX</summary>
+  <summary>Icon attribution</summary>
   <div>
-    2.1 Update your Snap to [display an icon](../best-practices/design-guidelines.md#optimize-your-metadata) in MetaMask.
-
-    Create a new folder `images` in the Snap package `packages/snap/`:
-
-    ```bash
-    mkdir packages/snap/images
-    ```
-
-    Download
-    [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-    into that `ìmages` folder.  
-
-    <details>
-      <summary>Icon attribution</summary>
-      <div>
-    This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
-     </div>
-    </details>
-
-
-    Your file structure should look like this:
-
-    ```text
-    gas-estimation-snap/
-    ├─ packages/
-    │  ├─ site/
-    |  |  |- src/
-    |  |  |  |- App.tsx
-    |  |  ├─ package.json
-    |  |  |- ...(react app content)
-    |  |
-    │  ├─ snap/
-    |  |  ├─ images/
-    |  |  |  |- gas.svg
-    |  |  ├─ src/
-    |  |  |  |- index.test.ts
-    |  |  |  |- index.ts
-    |  |  ├─ snap.manifest.json
-    |  |  ├─ package.json
-    |  |  |- ... (Snap content)
-    ├─ package.json
-    ├─ ... (other stuff)
-    ```
-
-    Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
-    details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
-    the value `"images/gas.svg"` to point to your new icon:
-
-    ```json title="snap.manifest.json"
-    "location": {
-      "npm": {
-        "filePath": "dist/bundle.js",
-        "iconPath": "images/gas.svg",
-        "packageName": "snap",
-        "registry": "https://registry.npmjs.org/"
-      }
-    }
-    ```
-
-    Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
-    `images/` folder:
-
-    ```json title="package.json"
-    "files": [
-      "dist/",
-      "images/",
-      "snap.manifest.json"
-    ],
-    ```
-
-    2.2 Update your Snap's wallet prompt
-
-    It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
-    prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our template.
-
-    Open `packages/snap/snap.manifest.json` in a text editor.
-    Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
-
-    ```json title="snap.manifest.json"
-    {
-      "version": "0.1.0",
-      "description": "An example Snap written in TypeScript.",
-      "proposedName": "Get Fee %",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/MetaMask/template-snap-monorepo.git"
-      },
-      ```
-
-    2.3 Update your Snap's button
-
-    Open `packages/site/src/components/Buttons.tsx` in a text editor.
-    Edit the Button property to provide a functional name such as "Estimate Gas ":
-
-    ```typescript title="Buttons.tsx"
-    export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-      return <Button {...props}>Inoperable</Button>;
-    };
-    ````
-
-    These three updates are the minimum required to ensure that each user interaction with your Snap is well 
-    informed, however, your Snap will function without these tweaks.
-
-   </div>
+This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
+ </div>
 </details>
 
+
+Your file structure should look like this:
+
+```text
+gas-estimation-snap/
+├─ packages/
+│  ├─ site/
+|  |  |- src/
+|  |  |  |- App.tsx
+|  |  ├─ package.json
+|  |  |- ...(react app content)
+|  |
+│  ├─ snap/
+|  |  ├─ images/
+|  |  |  |- gas.svg
+|  |  ├─ src/
+|  |  |  |- index.test.ts
+|  |  |  |- index.ts
+|  |  ├─ snap.manifest.json
+|  |  ├─ package.json
+|  |  |- ... (Snap content)
+├─ package.json
+├─ ... (other stuff)
+```
+
+Open `packages/snap/snap.manifest.json` in a text editor. This file contains the main configuration 
+details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
+the value `"images/gas.svg"` to point to your new icon:
+
+```json title="snap.manifest.json"
+"location": {
+  "npm": {
+    "filePath": "dist/bundle.js",
+    "iconPath": "images/gas.svg",
+    "packageName": "snap",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
+```
+
+Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
+`images/` folder:
+
+```json title="package.json"
+"files": [
+  "dist/",
+  "images/",
+  "snap.manifest.json"
+],
+```
+
+#### 2.2. Update your Snap's wallet prompt
+
+It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
+prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our template.
+
+Open `packages/snap/snap.manifest.json` in a text editor.
+Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
+
+```json title="snap.manifest.json"
+{
+  "version": "0.1.0",
+  "description": "An example Snap written in TypeScript.",
+  "proposedName": "Get Fee %",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  ```
+
+#### 2.3. Update your Snap's button
+
+Open `packages/site/src/components/Buttons.tsx` in a text editor.
+Edit the Button property to provide a functional name such as "Estimate Gas ":
+
+```typescript title="Buttons.tsx"
+export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>Inoperable</Button>;
+};
+````
+
+These three updates are the minimum required to ensure that each user interaction with your Snap is well 
+informed, however, your Snap will function without these tweaks.
 
 ### 3. Enable transaction insights and the Ethereum provider
 
@@ -258,7 +257,7 @@ the `endowment:ethereum-provider` permission, your Snap is granted access to the
 
 Complete the following steps to build and test your Snap:
 
-#### 5.1 Increment version
+#### 5.1. Increment version
 
 This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
@@ -279,7 +278,7 @@ From the command line, run `yarn start` in the root of your project. This starts
 
 Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
 
-### 5.3. Test your Snap
+#### 5.3. Test your Snap
 
 Select **Connect** and accept the permission request.
 
@@ -291,11 +290,11 @@ Next, select **Confirm** > **OK**.
 
 From MetaMask Flask, create a new testnet ETH transfer. 
 
-  :::tip
+:::tip
 
-   You can set up [multiple accounts](https://support.metamask.io/managing-my-wallet/accounts-and-addresses/how-to-add-accounts-in-your-wallet/) to transfer between your accounts.
+You can set up [multiple accounts](https://support.metamask.io/managing-my-wallet/accounts-and-addresses/how-to-add-accounts-in-your-wallet/) to transfer between your accounts.
 
-   :::
+:::
 
 Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
 Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
@@ -340,7 +339,7 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 
 #### Customize your Snap
 
-You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snap). Consider 
+You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider 
 updating `packages/site/src/pages/index.tsx` to remove, rather than updating the text of the 
 non-functional template **Send message** button.
 
