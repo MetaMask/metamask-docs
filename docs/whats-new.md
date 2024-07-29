@@ -11,9 +11,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## July 2024
 
-- Documented [Binance Smart Chain support](/services/reference/bnb-smart-chain/). ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
-- Documented [Celo WebSocket support](/services/reference/celo/). ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
-- Documented [ZKsync Era WebSocket support](/services/reference/zksync). ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))
+- Documented [Binance Smart Chain](/services/reference/bnb-smart-chain/) support. ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
+- Documented [Celo WebSocket](/services/reference/celo/) support. ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
+- Documented [ZKsync Era WebSocket](/services/reference/zksync) support. ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))
 - Documented support for the [ZKsync Era network API service](/services/reference/zksync). ([#1372](https://github.com/MetaMask/metamask-docs/pull/1372))
 - Added [Services](/services) and [Developer tools](/developer-tools) to MetaMask documentation. ([#1325](https://github.com/MetaMask/metamask-docs/pull/1325))
 
