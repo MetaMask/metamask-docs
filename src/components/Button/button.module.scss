@@ -27,12 +27,16 @@
   }
 }
 
+a.button {
+  display: inline-flex;
+}
+
 .button {
   color: var(--button-color);
   background-color: var(--button-background-color);
   border: none;
   padding: 0 16px;
-  height: 40px;
+  height: 48px;
   border-radius: 24px;
   font-size: 14px;
   font-style: normal;
@@ -46,6 +50,8 @@
   &:hover {
     background-color: var(--button-hover-background-color);
     box-shadow: var(--button-hover-shadow);
+    text-decoration: none;
+    color: var(--button-color);
   }
 
   &:active {

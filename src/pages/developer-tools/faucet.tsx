@@ -10,6 +10,7 @@ import {
   AlertSuccess,
   TransactionTable,
   Hero,
+  Maintenance,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
@@ -128,6 +129,7 @@ export default function Faucet() {
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (
       <>
+        {network === "linea" && <Maintenance network={network} />}
         <div className={styles.topContent}>
           <Hero
             isUserConnected={isUserConnected}
