@@ -188,7 +188,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 Now that you have successfully made a call to the BNB Smart Chain network, you can explore more functionalities and APIs. Here are some suggestions:
 
 - **Explore other BNB Smart Chain APIs**: Infura supports a wide range of APIs. You can find more information in the
-[JSON-RPC API method documentation](./json-rpc-methods/).
+[JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 

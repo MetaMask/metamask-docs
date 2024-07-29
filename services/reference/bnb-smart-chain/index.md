@@ -22,7 +22,7 @@ to API calls to methods such as [`eth_getStorageAt`](./json-rpc-methods/eth_gets
 
 :::
 
-BBNB Smart Chain is a self-sovereign blockchain with elected validators running a Proof of Staked
+BNB Smart Chain is a self-sovereign blockchain with elected validators running a Proof of Staked
 Authority (PoSA) consensus protocol. It is EVM-compatible and supports existing Ethereum tooling.
 
 :::info See also
