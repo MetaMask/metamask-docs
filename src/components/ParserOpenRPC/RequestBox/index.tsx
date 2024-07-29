@@ -26,11 +26,10 @@ export default function RequestBox({
 }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`;
+    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    if (!response || response === null) return false;
     return JSON.stringify(response, null, 2);
   }, [response]);
 
