@@ -7,7 +7,6 @@ BSC service. Archive requests are not currently supported.
 
 :::info
 
-- WebSockets are also supported on the BSC network and can be used to set up bidirectional
-  stateful [subscriptions](../../ethereum/json-rpc-methods/subscription-methods/index.md).
+WebSockets are also supported on the BSC network and can be used to set up bidirectional stateful [subscriptions](../../ethereum/json-rpc-methods/subscription-methods/index.md).
 
 :::
