@@ -12,21 +12,22 @@ Ensure that you replace `<API-KEY>` with an API key from your [Infura dashboard]
 
 ## Arbitrum
 
-| Network           | Description             | URL                                                |
-| ----------------- | ----------------------- | -------------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS     | `https://arbitrum-mainnet.infura.io/v3/<API-KEY>`  |
-| Mainnet           | JSON-RPC over Websocket | `wss://arbitrum-mainnet.io/ws/v3/<API-KEY>`        |
-| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://arbitrum-sepolia.infura.io/v3/<API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://arbitrum-sepolia.infura.io/ws/v3/<API-KEY>` |
+| Network           | Description             | URL                                                | Setup resources                                         |
+| ----------------- | ----------------------- | -------------------------------------------------- |---------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://arbitrum-mainnet.infura.io/v3/<API-KEY>`  |[Add Arbitrum mainnet to MetaMask](https://support.arbitrum.io/hc/en-gb/articles/19479729907483-How-can-I-add-Arbitrum-network-to-my-wallet)|
+| Mainnet           | JSON-RPC over Websocket | `wss://arbitrum-mainnet.io/ws/v3/<API-KEY>`        |[Add Arbitrum mainnet to MetaMask](https://support.arbitrum.io/hc/en-gb/articles/19479729907483-How-can-I-add-Arbitrum-network-to-my-wallet)|
+| Testnet           | JSON-RPC over HTTPS     | `https://arbitrum-sepolia.infura.io/v3/<API-KEY>`  |[Get testnet ETH from Arbitrum Sepolia](https://faucet.quicknode.com/arbitrum/sepolia)|
+| Testnet           | JSON-RPC over WebSocket | `wss://arbitrum-sepolia.infura.io/ws/v3/<API-KEY>` |[Get testnet ETH from Arbitrum Sepolia](https://faucet.quicknode.com/arbitrum/sepolia)|       
 
 ## Avalanche (C-Chain)
 
-| Network        | Description             | URL                                                |
-| -------------- | ----------------------- | -------------------------------------------------- |
-| Mainnet        | JSON-RPC over HTTPS     | `https://avalanche-mainnet.infura.io/v3/<API-KEY>` |
-| Mainnet        | JSON-RPC over Websocket | `wss://avalanche-mainnet.io/ws/v3/<API-KEY>`       |
-| Testnet (Fuji) | JSON-RPC over HTTPS     | `https://avalanche-fuji.infura.io/v3/<API-KEY>`    |
-| Testnet (Fuji) | JSON-RPC over WebSocket | `wss://avalanche-fuji.infura.io/ws/v3/<API-KEY>`   |
+| Network        | Description             | URL                                                | Setup resources                           |
+| -------------- | ----------------------- | -------------------------------------------------- |-------------------------------------------|
+| Mainnet        | JSON-RPC over HTTPS     | `https://avalanche-mainnet.infura.io/v3/<API-KEY>` |[Add C-Chain mainnet to MetaMask](https://support.avax.network/en/articles/4626956-how-to-connect-metamask-to-avalanche)|
+| Mainnet        | JSON-RPC over Websocket | `wss://avalanche-mainnet.io/ws/v3/<API-KEY>`       |[Add C-Chain mainnet to MetaMask](https://support.avax.network/en/articles/4626956-how-to-connect-metamask-to-avalanche)|           
+| Testnet        | JSON-RPC over HTTPS     | `https://avalanche-fuji.infura.io/v3/<API-KEY>`    |[Get testnet AVAX from the Fuji network](https://faucet.avax-test.network/)|
+| Testnet        | JSON-RPC over WebSocket | `wss://avalanche-fuji.infura.io/ws/v3/<API-KEY>`   |[Get testnet AVAX from the Fuji network](https://faucet.avax-test.network/)|
+
 
 ## Base
 
@@ -35,34 +36,43 @@ Base is currently only available to a limited number of customers. If you would 
 request to `support@infura.io` and we will assess if your request can be accommodated at this time.
 :::
 
-| Network           | Description         | URL                                           |
-| ----------------- | ------------------- | --------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://base-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://base-sepolia.infura.io/v3/<API-KEY>` |
+| Network           | Description         | URL                                           | Setup resources                                                                      |
+| ----------------- | ------------------- | --------------------------------------------- |--------------------------------------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://base-mainnet.infura.io/v3/<API-KEY>` |[Add Base mainnet to MetaMask](https://docs.base.org/docs/using-base/#metamask)      |
+| Testnet           | JSON-RPC over HTTPS | `https://base-sepolia.infura.io/v3/<API-KEY>` |[Get testnet ETH from Base Sepolia](https://docs.base.org/docs/using-base/#metamask-1)|
 
 ## Blast
 
-| Network           | Description         | URL                                            |
-| ----------------- | ------------------- | ---------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |
+| Network           | Description         | URL                                            | Setup resources                                                                                     |          
+| ----------------- | ------------------- | ---------------------------------------------- |-----------------------------------------------------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |[Add Blast mainnet to MetaMask](https://docs.blast.io/using-blast#metamask-quick-instructions)       |
+| Testnet           | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |[Get testnet ETH from Blast Sepolia](https://docs.blast.io/using-blast#metamask-quick-instructions-2)|
+
+:::info
+
+You can get Sepolia ETH for the Blast network from the [Quicknode Blast faucet](https://faucet.quicknode.com/blast/sepolia).
+
+Alternatively, obtain Sepolia ETH from [the Infura faucet](https://www.infura.io/faucet/sepolia) and
+[bridge](https://docs.blast.io/building/bridges/testnet) your funds to the Blast network.
+
+:::
 
 ## Binance Smart Chain
 
-| Network           | Transport type          | URL                                           |
-|-------------------|-------------------------|-----------------------------------------------|
-| Mainnet           | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<API-KEY>`  |
-| Mainnet           | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |
+| Network           | Transport type          | URL                                           |Setup resources                                                                                                          |
+|-------------------|-------------------------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<API-KEY>`  |[Connect MetaMask to BNB Smart Chain](https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)|
+| Mainnet           | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<API-KEY>` |[Connect MetaMask to BNB Smart Chain](https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)|
+| Testnet           | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |[Get testnet ETH BSC Sepolia](https://www.binance.com/en/square/post/227018)                                             |
 
 ## Celo
 
-| Network             | Description             | URL                                              |
-|---------------------|-------------------------|--------------------------------------------------|
-| Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<API-KEY>`    |
-| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<API-KEY>`   |
-| Testnet (Alfajores) | JSON-RPC over HTTPS     | `https://celo-alfajores.infura.io/v3/<API-KEY>`  |
-| Testnet (Alfajores) | JSON-RPC over WebSocket | `wss://celo-alfajores.infura.io/ws/v3/<API-KEY>` |
+| Network             | Description             | URL                                              | Setup resources                                                                 |
+|---------------------|-------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|
+| Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<API-KEY>`    |[Connect MetaMask to Celo](https://docs.celo.org/wallet/metamask/use)            |
+| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<API-KEY>`   |[Connect MetaMask to Celo](https://docs.celo.org/wallet/metamask/use)            |
+| Testnet             | JSON-RPC over HTTPS     | `https://celo-alfajores.infura.io/v3/<API-KEY>`  |[Get testnet CELO from the Alfajores network](https://celo.org/developers/faucet)|
+| Testnet             | JSON-RPC over WebSocket | `wss://celo-alfajores.infura.io/ws/v3/<API-KEY>` |[Get testnet CELO from the Alfajores network](https://celo.org/developers/faucet)|
 
 ## Ethereum
 
@@ -133,26 +143,26 @@ Sepolia instead.
 
 ## Palm
 
-| Network | Description         | URL                                           |
-| ------- | ------------------- | --------------------------------------------- |
-| Mainnet | JSON-RPC over HTTPS | `https://palm-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet | JSON-RPC over HTTPS | `https://palm-testnet.infura.io/v3/<API-KEY>` |
+| Network | Description         | URL                                           |Setup resources                                                   |
+| ------- | ------------------- | --------------------------------------------- |------------------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS | `https://palm-mainnet.infura.io/v3/<API-KEY>` |[Get mainnet PAlM tokens](https://docs.palm.io/get-started/tokens)|
+| Testnet | JSON-RPC over HTTPS | `https://palm-testnet.infura.io/v3/<API-KEY>` |[Get testnet PALM tokens](https://docs.palm.io/get-started/tokens)|
 
 ## Polygon PoS
 
-| Network        | Description             | URL                                               |
-| -------------- | ----------------------- | ------------------------------------------------- |
-| Mainnet        | JSON-RPC over HTTPS     | `https://polygon-mainnet.infura.io/v3/<API-KEY>`  |
-| Mainnet        | JSON-RPC over WebSocket | `wss://polygon-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |
-| Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |
+| Network        | Description             | URL                                               | Setup Resources                                                                                       |
+| -------------- | ----------------------- | ------------------------------------------------- |-------------------------------------------------------------------------------------------------------|
+| Mainnet        | JSON-RPC over HTTPS     | `https://polygon-mainnet.infura.io/v3/<API-KEY>`  |[Connect MetaMask to Polygon](https://polygon.technology/blog/getting-started-with-metamask-on-polygon)|
+| Mainnet        | JSON-RPC over WebSocket | `wss://polygon-mainnet.infura.io/ws/v3/<API-KEY>` |[Connect MetaMask to Polygon](https://polygon.technology/blog/getting-started-with-metamask-on-polygon)|
+| Testnet        | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |[Get testnet Polygon Amoy](https://faucet.polygon.technology/)                                                 |
+| Testnet        | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |[Get testnet Polygon Amoy](https://faucet.polygon.technology/)                                                 |
 
-## StarkNet
+## Starknet
 
-| Network           | Description         | URL                                               |
-| ----------------- | ------------------- | ------------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |
+| Network           | Description         | URL                                               |Setup resources                                                                                                         |
+| ----------------- | ------------------- | ------------------------------------------------- |------------------------------------------------------------------------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<API-KEY>` |[Connect MetaMask to Starknet mainnet](https://www.starknet.io/blog/getting-started-using-starknet-setting-up-a-starknet-wallet/)|
+| Testnet           | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<API-KEY>` |[Get testnet ETH from Starknet Sepolia](https://book.starknet.io/ch02-05-01-start-with-sepolia.html)                    |
 
 ## ZKsync Era
 
@@ -163,10 +173,10 @@ ZKsync Era WebSockets are supported on Mainnet only.
 :::
 
 | Network           | Description             | URL                                              |
-|-------------------|-------------------------|--------------------------------------------------|
+|-------------------|-------------------------|--------------------------------------------------|----------------------------------------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://zksync-mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://zksync-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://zksync-sepolia.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://zksync-sepolia.infura.io/v3/<API-KEY>`  |[Get testnet ETH from ZKsync Sepolia](https://faucet.quicknode.com/zksync/sepolia)|
 
 ## Gas API
 
