@@ -106,9 +106,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
   -----END PUBLIC KEY-----
   ```
 
-5. Click **ADD** to add the key to the settings.
-
-6. The key is added to security settings.
+5. Click **ADD** to add the key to the settings. After the key is added, the security settings look like the following:
 
   ![JWT set up](../images/jwt-set-up.png)
 
