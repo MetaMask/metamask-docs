@@ -56,11 +56,6 @@ Infura applies [rate limits](../how-to/avoid-rate-limiting.md) to ensure network
 
 Requests for Ethereum archive data are more expensive and are therefore subject to different rate limits.
 
-| Plan               | Archive Requests per Day | Total Requests per Day | Rate Limits                                                            |
-|--------------------|--------------------------|------------------------|------------------------------------------------------------------------|
-| **Free plan**      | 25,000                   | 100,000                | 75,000 standard requests available after 25,000 archive requests.      |
-| **Developer plan** | 100,000                  | 200,000                | 100,000 standard requests available after 100,000 archive requests.    |
-
 ### Free plan
 
 You can make up to 25,000 archive requests and 100,000 total requests per day.

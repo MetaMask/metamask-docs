@@ -82,7 +82,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
   :::
 
-2. Check the **Require JWT for all requests** box to enforce JWT on all requests. This is optional.
+2. (Optional) Check the **Require JWT for all requests** box to enforce JWT on all requests.
 
   :::info
 
@@ -112,7 +112,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
   ![JWT set up](../images/jwt-set-up.png)
 
-7. The key has a **NAME**, **ID**, **FINGERPRINT**. These are used for creating and verifying JWTs. You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
+6. The key has a **NAME**, **ID**, **FINGERPRINT**. These are used for creating and verifying JWTs. You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
 
   :::info
 
