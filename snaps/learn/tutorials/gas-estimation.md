@@ -159,9 +159,9 @@ Open `packages/site/src/components/Buttons.tsx` in a text editor.
 Edit the `Button` property to provide a functional name such as "Estimate Gas":
 
 ```typescript title="Buttons.tsx"
-    export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-      return <Button {...props}>Estimate Gas</Button>;
-    };
+export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>Estimate Gas</Button>;
+};
 ````
 
 These three updates are the minimum required to ensure that each user interaction with your Snap is well 
