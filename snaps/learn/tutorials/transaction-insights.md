@@ -121,6 +121,9 @@ Open `packages/snap/snap.manifest.json` in a text editor. This file contains the
 details for your Snap. Edit the `npm` object, within the `location` object, and add `iconPath` with 
 the value `"images/gas.svg"` to point to your new icon:
 
+<Tabs>
+  <TabItem value="Line updates" label="Update snap.manifest.json" default>
+
 ```json title="snap.manifest.json"
 "location": {
   "npm": {
@@ -129,11 +132,49 @@ the value `"images/gas.svg"` to point to your new icon:
     "packageName": "snap",
     "registry": "https://registry.npmjs.org/"
   }
+```
+</TabItem>
+<TabItem value="Full page" label="Example" default>
+
+```json title="snap.manifest.json"
+{
+  "version": "0.1.0",
+  "description": "An example Snap written in TypeScript.",
+  "proposedName": "TypeScript Example",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  "source": {
+    "shasum": "TwVBeJ/PL4uARBEFZmgJukYd3XWyTbilkOPhtdg+GvU=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/gas.svg",
+        "packageName": "snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+   "initialPermissions": {
+    "snap_dialog": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    },
+    "endowment:network-access": {}
+  },
+  "manifestVersion": "0.1"
 }
 ```
+</TabItem>
+</Tabs>
 
 Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
 `images/` folder:
+
+<Tabs>
+  <TabItem value="Line updates" label="Update package.json" default>
 
 ```json title="package.json"
 "files": [
@@ -143,38 +184,291 @@ Open `packages/snap/package.json` in a text editor. Edit the `files` array and r
 ],
 ```
 
+</TabItem>
+<TabItem value="Full page" label="Example" default>
+
+```json title="package.json"
+{
+  "name": "snap",
+  "version": "0.1.0",
+  "description": "The 'Hello, world!' of MetaMask Snaps, now written in TypeScript.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  "license": "(MIT-0 OR Apache-2.0)",
+  "main": "./dist/bundle.js",
+  "files": [
+    "dist/",
+    "images/",
+    "snap.manifest.json"
+  ],
+  "scripts": {
+    "allow-scripts": "yarn workspace root allow-scripts",
+    "build": "mm-snap build",
+    "build:clean": "yarn clean && yarn build",
+    "clean": "rimraf dist",
+    "lint": "yarn lint:eslint && yarn lint:misc --check",
+    "lint:eslint": "eslint . --cache --ext js,ts",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
+    "prepublishOnly": "mm-snap manifest",
+    "serve": "mm-snap serve",
+    "start": "mm-snap watch",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@metamask/snaps-sdk": "^4.0.0",
+    "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@metamask/auto-changelog": "^3.4.4",
+    "@metamask/eslint-config": "^12.2.0",
+    "@metamask/eslint-config-jest": "^12.1.0",
+    "@metamask/eslint-config-nodejs": "^12.1.0",
+    "@metamask/eslint-config-typescript": "^12.1.0",
+    "@metamask/snaps-cli": "^6.1.0",
+    "@metamask/snaps-jest": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "~2.26.0",
+    "eslint-plugin-jest": "^27.1.5",
+    "eslint-plugin-jsdoc": "^41.1.2",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.5.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-packagejson": "^2.2.11",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^29.1.0",
+    "typescript": "^4.7.4"
+  },
+  "packageManager": "yarn@3.2.1",
+  "engines": {
+    "node": ">=18.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
+
+```
+</TabItem>
+</Tabs>
+
+
 #### 2.2. Update your Snap's name
 
 Update your Snap's name in MetaMask.
 MetaMask uses the `proposedName` of the Snap, currently "TypeScript Example" in the template.
 
 Open `packages/snap/snap.manifest.json` in a text editor.
-Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
+Edit the `"proposedName"` property within the metadata to provide a functional name such as "Transaction insights":
+
+<Tabs>
+  <TabItem value="Line updates" label="Update snap.manifest.json" default>
 
 ```json title="snap.manifest.json"
 {
   "version": "0.1.0",
   "description": "An example Snap written in TypeScript.",
-  "proposedName": "Get Fee %",
+  "proposedName": "Transaction insights",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
 ```
 
+</TabItem>
+<TabItem value="Full page" label="Example" default>
+
+```json title="snap.manifest.json"
+{
+  "version": "0.1.0",
+  "description": "An example Snap written in TypeScript.",
+  "proposedName": "Transaction insights",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  "source": {
+    "shasum": "9UBmDB7B0fFYh9tYoj8+NEN85MfqhkQQRc1MujXdq8w=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "snap",
+        "iconPath": "images/gas.svg",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+   "initialPermissions": {
+    "snap_dialog": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    },
+    "endowment:network-access": {}
+  },
+  "manifestVersion": "0.1"
+}
+```
+</TabItem>
+</Tabs>
+
 #### 2.3. Update your Snap's button
 
 Open `packages/site/src/components/Buttons.tsx` in a text editor.
 Edit the Button property to provide a functional name such as "Estimate Gas ":
+
+<Tabs>
+  <TabItem value="Line updates" label="Update Buttons.tsx" default>
 
 ```typescript title="Buttons.tsx"
 export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
   return <Button {...props}>Inoperable</Button>;
 };
 ````
+</TabItem>
+<TabItem value="Full page" label="Example" default>
 
-These three updates are the minimum required to ensure that each user interaction with your Snap is well 
-informed, however, your Snap will function without these tweaks.
+```typescript title="Buttons.tsx"
+import type { ComponentProps } from 'react';
+import styled from 'styled-components';
+
+import { ReactComponent as FlaskFox } from '../assets/flask_fox.svg';
+import { useMetaMask, useRequestSnap } from '../hooks';
+import { shouldDisplayReconnectButton } from '../utils';
+
+const Link = styled.a`
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  font-size: ${(props) => props.theme.fontSizes.small};
+  border-radius: ${(props) => props.theme.radii.button};
+  border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+  background-color: ${(props) => props.theme.colors.background?.inverse};
+  color: ${(props) => props.theme.colors.text?.inverse};
+  text-decoration: none;
+  font-weight: bold;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+    color: ${(props) => props.theme.colors.text?.default};
+  }
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    width: 100%;
+    box-sizing: border-box;
+  }
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  ${({ theme }) => theme.mediaQueries.small} {
+    width: 100%;
+  }
+`;
+
+const ButtonText = styled.span`
+  margin-left: 1rem;
+`;
+
+const ConnectedContainer = styled.div`
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  font-size: ${(props) => props.theme.fontSizes.small};
+  border-radius: ${(props) => props.theme.radii.button};
+  border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+  background-color: ${(props) => props.theme.colors.background?.inverse};
+  color: ${(props) => props.theme.colors.text?.inverse};
+  font-weight: bold;
+  padding: 1.2rem;
+`;
+
+const ConnectedIndicator = styled.div`
+  content: ' ';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+`;
+
+export const InstallFlaskButton = () => (
+  <Link href="https://metamask.io/flask/" target="_blank">
+    <FlaskFox />
+    <ButtonText>Install MetaMask Flask</ButtonText>
+  </Link>
+);
+
+export const ConnectButton = (props: ComponentProps<typeof Button>) => {
+  return (
+    <Button {...props}>
+      <FlaskFox />
+      <ButtonText>Connect</ButtonText>
+    </Button>
+  );
+};
+
+export const ReconnectButton = (props: ComponentProps<typeof Button>) => {
+  return (
+    <Button {...props}>
+      <FlaskFox />
+      <ButtonText>Reconnect</ButtonText>
+    </Button>
+  );
+};
+
+export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
+  return <Button {...props}>Inoperable</Button>;
+};
+
+export const HeaderButtons = () => {
+  const requestSnap = useRequestSnap();
+  const { isFlask, installedSnap } = useMetaMask();
+
+  if (!isFlask && !installedSnap) {
+    return <InstallFlaskButton />;
+  }
+
+  if (!installedSnap) {
+    return <ConnectButton onClick={requestSnap} />;
+  }
+
+  if (shouldDisplayReconnectButton(installedSnap)) {
+    return <ReconnectButton onClick={requestSnap} />;
+  }
+
+  return (
+    <ConnectedContainer>
+      <ConnectedIndicator />
+      <ButtonText>Connected</ButtonText>
+    </ConnectedContainer>
+  );
+};
+
+````
+</TabItem>
+</Tabs>
+
+
+These three updates are the minimum required to ensure that each user interaction with your Snap is well informed, however, your Snap will function without these tweaks.
 
 ### 3. Enable transaction insights and the Ethereum provider
 
@@ -184,12 +478,46 @@ use the global Ethereum provider, request the
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider)
 permissions in `packages/snap/snap.manifest.json`:
 
+<Tabs>
+  <TabItem value="Line updates" label="Update snap.manifest.json" default>
+
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:transaction-insight": {},
   "endowment:ethereum-provider": {}
 }
 ```
+</TabItem>
+<TabItem value="Full page" label="Example" default>
+```json title="snap.manifest.json"
+{
+  "version": "0.1.0",
+  "description": "An example Snap written in TypeScript.",
+  "proposedName": "Transaction insights",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+  },
+  "source": {
+    "shasum": "sUky14kwNIdZt4z0py+xQSMT12WXHQFelekRaUSL3tE=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "snap",
+        "iconPath": "images/gas.svg",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:transaction-insight": {},
+    "endowment:ethereum-provider": {}
+  },
+  "manifestVersion": "0.1"
+}
+```
+</TabItem>
+</Tabs>
 
 :::tip
 In this tutorial, you can replace what was previously in `initialPermissions`.
@@ -294,7 +622,7 @@ You can set up [multiple accounts](https://support.metamask.io/managing-my-walle
 
 :::
 
-Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP**.
+Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP** (or **Transaction insights** if you followed Step 2).
 Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
 entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
