@@ -149,7 +149,8 @@ Edit the `"proposedName"` property within the metadata to provide a functional n
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
-},
+  },
+}
 ```
 
 #### 2.3. Update your Snap's button
