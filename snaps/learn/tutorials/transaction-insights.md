@@ -1,7 +1,6 @@
 ---
 description: Create a Snap that provides transaction insights.
 sidebar_position: 2
-toc_max_heading_level: 4
 ---
 
 import Tabs from '@theme/Tabs';
