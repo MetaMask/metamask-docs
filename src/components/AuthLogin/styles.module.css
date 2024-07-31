@@ -1,0 +1,113 @@
+.modalOverlay {
+  z-index: 300;
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modalWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  outline: none;
+  background: var(--background-default, #24272A);
+  width: 360px;
+  padding: 16px;
+  border-radius: 8px;
+  margin: auto;
+  text-align: center;
+}
+
+.modalContent {
+  --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+}
+
+.spinnerContainer {
+  display: flex; 
+  align-items: center;
+  position: relative; 
+  width: 60px;
+  height: 60px;
+  margin: auto;
+}
+
+.spinner {
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+
+  -webkit-animation: rotating 3s linear infinite;
+  -moz-animation: rotating 3s linear infinite;
+  -ms-animation: rotating 3s linear infinite;
+  -o-animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+}
+
+@-webkit-keyframes spinner /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  to {
+    -ms-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+
+.metamask {
+  display: block;
+  margin: auto;
+  width: 30px;
+  height: 28px;
+}
+
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 12px 0 0 0;
+}
+
+.content {
+  margin: 12px 0;
+}
+
+.flexButton {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}

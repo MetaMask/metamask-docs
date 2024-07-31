@@ -1,4 +1,10 @@
-import React, { createContext, useMemo, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useMemo,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -11,8 +17,24 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
+import {
+  trackClickForSegment,
+  trackInputChangeForSegment,
+} from "@site/src/lib/segmentAnalytics";
+import {
+  saveTokenString,
+  getUserIdFromSessionStorage,
+  AUTH_WALLET_PROJECTS,
+} from "@site/src/lib/siwsrp/auth";
+import {
+  REF_SERVICES_PATH,
+  REF_WALLET_PATH,
+  REQUEST_PARAMS,
+  DASHBOARD_URL,
+} from "@site/src/lib/constants";
+import { useSDK } from "@metamask/sdk-react";
+import AuthModal from "@site/src/components/AuthLogin/AuthModal";
+import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -37,6 +59,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const [projects, setProjects] = useState(
+    JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
+  );
+  const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
+  const { extensionActive, provider, account, sdk, connected } = useSDK();
   const { colorMode } = useColorMode();
   const openModal = () => {
     setModalOpen(true);
@@ -100,14 +127,47 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskAccount, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (url.pathname.startsWith(REF_SERVICES_PATH)) {
+      const token = url.searchParams.get("token");
+      if (token) {
+        saveTokenString(token);
+        const userId = getUserIdFromSessionStorage();
+        (async () => {
+          const projectsResponse = await fetch(
+            `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
+            {
+              ...REQUEST_PARAMS("GET"),
+              headers: {
+                ...REQUEST_PARAMS("GET").headers,
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const {
+            result: { projects },
+          } = await projectsResponse.json();
+          sessionStorage.setItem(
+            AUTH_WALLET_PROJECTS,
+            JSON.stringify(projects)
+          );
+          setProjects(projects);
+          window.location.replace(`${url.origin}${url.pathname}`);
+        })();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({ name: metaMaskAccount, id: metaMaskAccount, username: metaMaskAccount })
+      (window as any)?.Sentry?.setUser({
+        name: account,
+        id: account,
+        username: account,
+      });
     }
-  }, [metaMaskAccount]);
-
+  }, [account]);
 
   const onParamsChangeHandle = (data) => {
     if (
@@ -125,12 +185,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return
+    if (!provider) return;
     try {
-      const response = await metaMaskProvider?.request({
+      const response = await provider?.request({
         method: method,
-        params: paramsData
-      })
+        params: paramsData,
+      });
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -152,6 +212,18 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const onModalClose = () => {
     closeModal();
     closeComplexTypeView();
+  };
+
+  const metaMaskConnectHandler = async () => {
+    try {
+      if (extensionActive && location.pathname.startsWith(REF_SERVICES_PATH)) {
+        setOpenAuthModal(true);
+      } else {
+        await sdk?.connect();
+      }
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
   };
 
   return (
@@ -218,9 +290,16 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskProvider && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {connected &&
+            location.pathname.startsWith(REF_SERVICES_PATH) &&
+            Object.keys(projects).length ? (
+              <ProjectsBox projects={projects} />
+            ) : connected &&
+              location.pathname.startsWith(REF_WALLET_PATH) ? null : (
+              <AuthBox handleConnect={metaMaskConnectHandler} />
+            )}
             <RequestBox
-              isMetamaskInstalled={!!metaMaskProvider}
+              isMetamaskInstalled={!!provider}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
@@ -231,6 +310,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           </div>
         </div>
       </div>
+      <AuthModal open={openAuthModal} setOpen={setOpenAuthModal} setProjects={setProjects}/>
     </ParserOpenRPCContext.Provider>
   );
 }

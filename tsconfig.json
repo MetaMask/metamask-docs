@@ -6,7 +6,8 @@
     "paths": {
       "launchdarkly": [
         "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
-      ]
+      ],
+      "@site/*": ["./*"],
     }
   },
   "include": ["./**/*"],
