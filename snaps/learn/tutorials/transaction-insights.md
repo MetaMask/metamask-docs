@@ -96,7 +96,7 @@ This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproje
 Your file structure should look like this:
 
 ```text
-gas-estimation-snap/
+transaction-insights-snap/
 ├─ packages/
 │  ├─ site/
 |  |  |- src/
