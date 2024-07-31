@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactChild, useEffect } from "react";
+import React, { useState, createContext, ReactChild } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
 
 export const MetamaskProviderContext = createContext(null);
@@ -32,16 +32,6 @@ export default function Root({ children }: { children: ReactChild}) {
       console.warn("failed to connect..", err);
     }
   }
-
-  useEffect(() => {
-    const loggedUserName = metaMaskAccount ? "logged-in-user" : "anonymous-user";
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({
-        name: loggedUserName,
-        username: loggedUserName
-      })
-    }
-  }, [metaMaskAccount]);
 
   return (
     <MetamaskProviderContext.Provider value={{
