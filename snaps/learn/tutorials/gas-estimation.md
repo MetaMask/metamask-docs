@@ -1,7 +1,6 @@
 ---
 description: Create a Snap that estimates gas fees.
 sidebar_position: 1
-toc_max_heading_level: 4
 ---
 
 # Create a Snap to estimate gas fees
