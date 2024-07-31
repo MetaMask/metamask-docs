@@ -3,6 +3,9 @@ sidebar_position: 6
 description: Call an action when your Snap is installed or updated.
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Lifecycle hooks
 
 You can implement lifecycle hooks to automatically run an action, such as displaying a dialog or
@@ -30,6 +33,35 @@ For example, you can use `onInstall` to perform any initialization that is requi
 
 The following example displays an [alert dialog](custom-ui/dialogs.md#display-an-alert-dialog) upon installation:
 
+<Tabs>
+
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnInstallHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Heading>Installation successful</Heading>
+          <Text>
+            To use this Snap, visit the companion dapp at <a href="https://metamask.io">metamask.io</a>.
+          </Text>
+        </Box>
+      ),
+    },
+  });
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
 ```typescript title="index.ts"
 import type { OnInstallHandler } from "@metamask/snaps-sdk"
 import { heading, panel, text } from "@metamask/snaps-sdk"
@@ -50,6 +82,9 @@ export const onInstall: OnInstallHandler = async () => {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ### 3. Run an action on update
 
 To run an action when a user updates your Snap, expose the
@@ -57,6 +92,34 @@ To run an action when a user updates your Snap, expose the
 For example, you can use `onUpdate` to perform any migrations that are required upon update.
 
 The following example displays an [alert dialog](custom-ui/dialogs.md#display-an-alert-dialog) upon update:
+
+<Tabs>
+
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnUpdateHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onUpdate: OnUpdateHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Heading>Update successful</Heading>
+          <Text>New features added in this version:</Text>
+          <Text>Added a dialog that appears when updating.</Text>
+        </Box>
+      ),
+    },
+  });
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
 import type { OnUpdateHandler } from "@metamask/snaps-sdk"
@@ -76,6 +139,9 @@ export const onUpdate: OnUpdateHandler = async () => {
   })
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Example
 
