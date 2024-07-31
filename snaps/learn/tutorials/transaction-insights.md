@@ -64,9 +64,9 @@ yarn run allow-scripts auto
  </div>
 </details>
 
-### 2. (Optional) customize your Snap's UX
+### 2. (Optional) Customize your Snap's UX
 
-This Snap is generated from a boilerplate TypeScript example Snap. We recommend customizing your 
+This Snap is generated from a TypeScript template Snap. We recommend customizing your 
 Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
 skip to [Step 3](#3-enable-transaction-insights-and-the-ethereum-provider).
 
