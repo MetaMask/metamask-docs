@@ -143,10 +143,10 @@ Open `packages/snap/package.json` in a text editor. Edit the `files` array and r
 ],
 ```
 
-#### 2.2. Update your Snap's wallet prompt
+#### 2.2. Update your Snap's name
 
-It's important that user's understand what they're agreeing to when responding to wallet prompts. The 
-prompt uses the `proposedName` of the Snap, currently "Typescript Example" in our template.
+Update your Snap's name in MetaMask.
+MetaMask uses the `proposedName` of the Snap, currently "TypeScript Example" in the template.
 
 Open `packages/snap/snap.manifest.json` in a text editor.
 Edit the `"proposedName"` property within the metadata to provide a functional name such as "Get Fee %":
