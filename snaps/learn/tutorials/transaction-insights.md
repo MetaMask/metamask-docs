@@ -34,7 +34,6 @@ Create a new Snap project using the
 [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 starter kit by running:
 
-
 ```bash
 yarn create @metamask/snap transaction-insights-snap
 ```
