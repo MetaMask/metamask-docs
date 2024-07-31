@@ -338,8 +338,8 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 #### Customize your Snap
 
 You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider 
-updating `packages/site/src/pages/index.tsx` to remove, rather than updating the text of the 
-non-functional template **Send message** button.
+updating `packages/site/src/pages/index.tsx` to remove the 
+non-functional **Send message** button.
 
 Before publishing a Snap, it's also important to customize the metadata and properties of your app, 
 for example:
