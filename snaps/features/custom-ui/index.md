@@ -7,7 +7,7 @@ sidebar_position: 4
 
 :::caution
 This version of custom UI is deprecated. If you're building a new Snaps project,
-use [custom UI with JSX](./with-jsx).
+use [custom UI with JSX](./with-jsx). JSX is supported in MetaMask Extension and Flask version 12+.
 :::
 
 You can display custom user interface (UI) components using the
@@ -16,7 +16,7 @@ implementing the following features:
 
 - [Dialogs](dialogs.md)
 - [Home pages](home-pages.md)
-- [Transaction insights](../../reference/entry-points.md#ontransaction)
+- [Transaction insights](../transaction-insights.md)
 - [Signature insights](../signature-insights.md)
 
 To use custom UI, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)

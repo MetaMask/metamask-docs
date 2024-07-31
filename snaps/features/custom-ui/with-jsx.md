@@ -11,8 +11,12 @@ implementing the following features:
 
 - [Dialogs](dialogs.md)
 - [Home pages](home-pages.md)
-- [Transaction insights](../../reference/entry-points.md#ontransaction)
+- [Transaction insights](../transaction-insights.md)
 - [Signature insights](../signature-insights.md)
+
+:::note
+JSX is supported in MetaMask Extension and Flask version 12+. New UI components will be added as JSX components. The previous function-based library is deprecated.
+:::
 
 To use custom UI with JSX, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)
 using the following command:
