@@ -1,3 +1,7 @@
+Co-Authored/created by Nathaniel Hooker
+#@deuces9ers
+
+
 ---
 sidebar_position: 2
 description: Learn about the Android SDK architecture.
