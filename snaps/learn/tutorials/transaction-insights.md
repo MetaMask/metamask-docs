@@ -341,7 +341,7 @@ You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your
 updating `packages/site/src/pages/index.tsx` to remove the 
 non-functional **Send message** button.
 
-Before publishing a Snap, it's also important to customize the metadata and properties of your app, 
+Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
 for example:
 - Update the `location` to its published location before publishing your Snap to `npm`, 
 - Update the `name`, `version`, `description`, and `repository` fields of
