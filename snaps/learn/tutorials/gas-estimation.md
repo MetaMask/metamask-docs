@@ -290,7 +290,7 @@ You can improve your Snap's UX by:
 - Parsing the JSON response from the remote API.
 - Formatting the fees for better readability.
 
-Before publishing a Snap, it's also important to customize the metadata and properties of your app, 
+Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
 for example:
 - Update the `location` in `snap.manifest.json` to its published location before publishing your 
 Snap to `npm`. 
