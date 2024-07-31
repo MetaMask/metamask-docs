@@ -343,7 +343,8 @@ non-functional **Send message** button.
 
 Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
 for example:
-- Update the `location` to its published location before publishing your Snap to `npm`, 
+- Update the `location` in `snap.manifest.json` to your Snap's published location.
+- Update the `description` in `snap.manifest.json` to a description of your Snap.
 - Update the `name`, `version`, `description`, and `repository` fields of
 `/packages/snap/package.json`, even if you do not plan to publish your Snap to npm.
 
