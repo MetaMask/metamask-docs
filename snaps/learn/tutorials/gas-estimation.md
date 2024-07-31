@@ -242,7 +242,7 @@ Complete the following steps to build and test your Snap:
 
 #### 5.1. Increment version
 
-This is optional for testing purposes, open `package.json` in the root directory of the project, and increment 
+This is optional for testing purposes. Open `package.json` in the root directory of the project, and increment 
   the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
 
 #### 5.2. Build your Snap
