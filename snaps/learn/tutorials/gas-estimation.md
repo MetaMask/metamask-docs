@@ -63,7 +63,7 @@ skip to [Step 3](#3-enable-network-access).
 
 #### 2.1. Provide an icon
 
-Follow [best practice](../best-practices/design-guidelines.md#optimize-your-metadata) and display an icon for your Snap in MetaMask.
+[Optimize your metadata](../best-practices/design-guidelines.md#optimize-your-metadata) and display an icon for your Snap in MetaMask.
 
 Create a new folder `images` in the Snap package `packages/snap/`:
 
