@@ -102,7 +102,7 @@ gas-estimation-snap/
 |  |  |- src/
 |  |  |  |- App.tsx
 |  |  ├─ package.json
-|  |  |- ...(react app content)
+|  |  |- ...(React app content)
 |  |
 │  ├─ snap/
 |  |  ├─ images/
