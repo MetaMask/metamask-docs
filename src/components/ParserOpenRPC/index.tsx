@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useMemo,
-  useState,
-  useEffect,
-  useContext,
-} from "react";
+import React, { createContext, useMemo, useState, useEffect } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -310,7 +304,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
           </div>
         </div>
       </div>
-      <AuthModal open={openAuthModal} setOpen={setOpenAuthModal} setProjects={setProjects}/>
+      <AuthModal
+        open={openAuthModal}
+        setOpen={setOpenAuthModal}
+        setProjects={setProjects}
+      />
     </ParserOpenRPCContext.Provider>
   );
 }

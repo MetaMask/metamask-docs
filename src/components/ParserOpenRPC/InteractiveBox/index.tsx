@@ -44,16 +44,21 @@ export default function InteractiveBox({
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
+  const [currentFormData, setCurrentFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
 
-  const defaultExampleFormData = examples
-    ? Object.fromEntries(
-        examples[0].params.map(({ name, value }) => [name, value])
-      )
-    : {};
+  useEffect(() => {
+    if (examples && examples.length > 0 && examples[0].params) {
+      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value]));
+      setDefaultFormData({...defaultValues});
+      setCurrentFormData({...defaultValues});
+      onParamChange({...defaultValues});
+    }
+  }, [examples]);
+
   const schema: RJSFSchema = {
     components: {
       schemas: components,
@@ -85,7 +90,8 @@ export default function InteractiveBox({
   };
   const handleResetForm = (e) => {
     e.preventDefault();
-    setDefaultFormData(defaultExampleFormData);
+    setCurrentFormData({...defaultFormData});
+    onParamChange({...defaultFormData});
     setIsFormReseted(true);
   };
   const handleClearForm = (e) => {
@@ -107,15 +113,11 @@ export default function InteractiveBox({
       }
     };
     dereferenceSchema();
-    if (examples) {
-      setDefaultFormData(defaultExampleFormData);
-      onParamChange(defaultExampleFormData);
-    }
   }, []);
 
   const onChangeHandler = (data) => {
-    onParamChange(data);
-    setDefaultFormData(data);
+    setCurrentFormData({...data});
+    onParamChange({...data});
   };
 
   const cloneAndSetNullIfExists = (obj, key) => {
@@ -137,8 +139,8 @@ export default function InteractiveBox({
 
   const handleCancelClick = () => {
     if (drawerLabel) {
-      const upData = cloneAndSetNullIfExists(defaultFormData, drawerLabel);
-      setDefaultFormData(upData);
+      const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
+      setCurrentFormData(upData);
     }
     closeComplexTypeView();
   };
@@ -151,7 +153,7 @@ export default function InteractiveBox({
       </div>
       <Form
         schema={parsedSchema}
-        formData={defaultFormData}
+        formData={currentFormData}
         formContext={{ isFormReseted }}
         validator={validator}
         liveValidate

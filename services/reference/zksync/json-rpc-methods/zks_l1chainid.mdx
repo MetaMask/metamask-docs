@@ -2,14 +2,15 @@
 title: "zks_L1ChainId"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Returns the chain ID of the underlying L1.
 
 ## Parameters
 
 None.
+
 
 ## Response
 
@@ -29,6 +30,13 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
     -H "Content-Type: application/json" \
     -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_L1ChainId", "params": []}'
   ```
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_L1ChainId", "params": []}'
+```
+
   </TabItem>
 </Tabs>
 
