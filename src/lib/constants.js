@@ -1,3 +1,4 @@
+import siteConfig from "@generated/docusaurus.config";
 export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
