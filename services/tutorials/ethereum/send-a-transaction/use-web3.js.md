@@ -2,29 +2,43 @@
 description: Send a transaction using Web3.js.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Use web3.js
 
-In this tutorial, you'll send a regular transaction from one account to another using the Web3 JavaScript library.
+In this tutorial, you'll send a regular transaction of 0.001 ETH from one account to another using the Web3 JavaScript library.
 
 ## Prerequisites
 
-- A [Web3 project](../../../../../developer-tools/dashboard/get-started/create-api/) on Infura
+- A [Web3 project](../../../api/getting-started.md) on Infura
 - [Node.js installed](https://nodejs.org/en/download/)
-- An Ethereum account for testing purposes
+- An Ethereum account
 
 :::info
 
-You can use [MetaMask](https://metamask.io) or similar to create an Ethereum account for testing purposes.
+Use [MetaMask](https://metamask.io) or similar to create an Ethereum account for testing.
 
 :::
 
 ## Steps
 
-### 1. Fund your Ethereum account
+### 1. Select your network and verify funds
 
-[Use the Infura faucet to load testnet ETH](https://www.infura.io/faucet) on your Ethereum account for the Sepolia network.
+<Tabs>
+  <TabItem value="View" label="Sepolia" default>
 
-If using a network other than Sepolia, ensure you [update your environment file](#4-create-the-env-file) with the network name.
+Verify that your wallet has testnet ETH for the Sepolia network. You may use the [Infura faucet](https://www.infura.io/faucet) to top up. 
+
+</TabItem>
+<TabItem value="Retrieve" label="Alternative network" default>
+
+To use an alternative network:
+- Update your [environment file](#4-create-the-env-file) with the alternative network name 
+- Update the [`chainId`](#5-create-sendjs-file) to match your network
+- Have testnet ETH for that network
+</TabItem>
+</Tabs>
 
 ### 2. Create a project directory
 
@@ -46,7 +60,7 @@ Install the `web3` and `dotenv` packages in the project directory.
 
 :::info
 
-The [`dotenv`](../../../how-to/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
+The [`dotenv`](../../developer-tools/javascript-dotenv.md) package allows you to use a `.env` file to securely store private environment variables on your local machine.
 
 :::
 
@@ -66,66 +80,78 @@ npm install dotenv --save
 
 Create a `.env` file in your project directory to store the project and Ethereum account details.
 
-```text
-ETHEREUM_NETWORK = "sepolia"
-INFURA_API_KEY = "<Your-API-Key>"
-SIGNER_PRIVATE_KEY = "<Your-Private-Key>"
+<Tabs>
+  <TabItem value="View" label="Syntax" default>
+
+Replace the following values in the `.env` file:
+
+```bash
+ETHEREUM_NETWORK = "<network>"
+INFURA_API_KEY = "<API-KEY>"
+SIGNER_PRIVATE_KEY = "<PRIVATE-KEY>"
 ```
 
-Ensure you replace the following values in the `.env` file:
+- `<NETWORK>` with "sepolia" or the network you are using.
+- `<API-KEY>` with your API key of the web3 project.
+- `<PRIVATE-KEY>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key). A transaction must be signed with the sender's private key. Make sure that you prefix the `SIGNER_PRIVATE_KEY` value with `0x`. The private key you export from MetaMask isn't prefixed with `0x`.
 
-- `<Your-API-Key>` with the API key of the Web3 project.
-- `<Your-Private-Key>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key). A transaction must be signed with the sender's private key. Make sure that you prefix the `SIGNER_PRIVATE_KEY` value with `0x`. The private key you export from MetaMask will not be prefixed with `0x`.
-
-If using a network other than Sepolia, ensure you update `ETHEREUM_NETWORK` with the network name.
-
-:::danger
-
-Never disclose your private key. Anyone with your private keys can steal any assets held in your account.
-
-:::
-
-Here is an example `.env` file showing the valid prefix `0x` for the `SIGNER_PRIVATE_KEY`:
+</TabItem>
+<TabItem value="Retrieve" label="Example" default>
 
 ```text
 ETHEREUM_NETWORK = "sepolia"
 INFURA_API_KEY = "d23...x...6e"
 SIGNER_PRIVATE_KEY = "0x561...x...61df"
 ```
+</TabItem>
+</Tabs>
+
+:::danger
+
+Never disclose your private key. Anyone with your private keys can steal the assets controlled by those keys.
+
+:::
+
 
 ### 5. Create `send.js` file
 
-In this example we'll create a JavaScript file (`send.js`) in the project directory which configures and sends the transaction.
+In this example, we'll create a JavaScript file (`send.js`) in the project directory which configures and sends the transaction.
+
+:::info
+
+Optional: to send test ETH to an account of your choice, update line 20 with your selected account.
+
+:::
 
 ```javascript showLineNumbers
-const { Web3 } = require("web3")
-const { ETH_DATA_FORMAT, DEFAULT_RETURN_FORMAT } = require("web3")
+const { Web3 } = require("web3");
+const { ETH_DATA_FORMAT, DEFAULT_RETURN_FORMAT } = require("web3");
 async function main() {
   // Configuring the connection to an Ethereum node
-  const network = process.env.ETHEREUM_NETWORK
+  const network = process.env.ETHEREUM_NETWORK;
   const web3 = new Web3(
     new Web3.providers.HttpProvider(
-      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`
-    )
-  )
+      `https://${network}.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    ),
+  );
   // Creating a signing account from a private key
   const signer = web3.eth.accounts.privateKeyToAccount(
-    process.env.SIGNER_PRIVATE_KEY
-  )
-  web3.eth.accounts.wallet.add(signer)
+    process.env.SIGNER_PRIVATE_KEY,
+  );
+  web3.eth.accounts.wallet.add(signer);
   await web3.eth
     .estimateGas(
       {
         from: signer.address,
-        to: "0xAED01C776d98303eE080D25A21f0a42D94a86D9c",
+        to: "0xAED01C776d98303eE080D25A21f0a42D94a86D9c", // Replace with your selected account
         value: web3.utils.toWei("0.0001", "ether"),
       },
       "latest",
-      ETH_DATA_FORMAT
+      ETH_DATA_FORMAT,
     )
     .then((value) => {
-      limit = value
-    })
+      limit = value;
+    });
 
   // Creating the transaction object
   const tx = {
@@ -135,24 +161,24 @@ async function main() {
     gas: limit,
     nonce: await web3.eth.getTransactionCount(signer.address),
     maxPriorityFeePerGas: web3.utils.toWei("3", "gwei"),
-    maxFeePerGas: web3.utils.toWei("3", "gwei"),
-    chainId: 11155111,
+    maxFeePerGas: web3.utils.toWei("90", "gwei"),
+    chainId: 11155111, // If not Sepolia, update to match network applied
     type: 0x2,
-  }
-  signedTx = await web3.eth.accounts.signTransaction(tx, signer.privateKey)
-  console.log("Raw transaction data: " + signedTx.rawTransaction)
+  };
+  signedTx = await web3.eth.accounts.signTransaction(tx, signer.privateKey);
+  console.log("Raw transaction data: " + signedTx.rawTransaction);
   // Sending the transaction to the network
   const receipt = await web3.eth
     .sendSignedTransaction(signedTx.rawTransaction)
     .once("transactionHash", (txhash) => {
-      console.log(`Mining transaction ...`)
-      console.log(`https://${network}.etherscan.io/tx/${txhash}`)
-    })
+      console.log(`Mining transaction ...`);
+      console.log(`https://${network}.etherscan.io/tx/${txhash}`);
+    });
   // The transaction is now on chain!
-  console.log(`Mined in block ${receipt.blockNumber}`)
+  console.log(`Mined in block ${receipt.blockNumber}`);
 }
-require("dotenv").config()
-main()
+require("dotenv").config();
+main();
 ```
 
 ### 6. Execute the transaction
