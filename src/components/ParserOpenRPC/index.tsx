@@ -32,7 +32,7 @@ export const ParserOpenRPCContext =
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [isModalOpen, setModalOpen] = useState(false);
-  const [reqResult, setReqResult] = useState(null);
+  const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
@@ -88,7 +88,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     );
 
     return {
-      description: currentMethod.summary || currentMethod.description || null,
+      description: currentMethod.description || currentMethod.summary || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
