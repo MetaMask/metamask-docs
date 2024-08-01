@@ -187,8 +187,7 @@ In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-insta
 
 ## Next steps
 
-Now that you have successfully made a call to the Blast network, you can explore more functionalities and APIs provided
-by Infura. Here are some suggestions:
+Now that you have successfully made a call to the Blast network, you can explore more functionalities and APIs. Here are some suggestions:
 
 - **Explore other Blast APIs**: Infura supports a wide range of APIs. You can find more information in the
   [JSON-RPC API method documentation](json-rpc-methods/index.md).

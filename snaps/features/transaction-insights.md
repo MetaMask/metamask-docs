@@ -4,6 +4,9 @@ toc_max_heading_level: 4
 sidebar_position: 13
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Transaction insights
 
 You can provide transaction insights in MetaMask's transaction confirmation window before a user
@@ -43,6 +46,36 @@ handler method.
 
 The following is an example implementation of `onTransaction`:
 
+<Tabs>
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: (
+      <Box>
+        <Heading>My Transaction Insights</Heading>
+        <Text>Here are the insights:</Text>
+        {insights.map((insight) => (
+          <Text>{insight.value}</Text>
+        ))}
+      </Box>
+    ),
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
 ```typescript title="index.ts"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
@@ -63,6 +96,10 @@ export const onTransaction: OnTransactionHandler = async ({
 };
 ```
 
+</TabItem>
+</Tabs>
+
+
 The Snap tab in the transaction confirmation window displays the transaction insights:
 
 <p align="center">
@@ -76,6 +113,38 @@ The Snap tab in the transaction confirmation window displays the transaction ins
 
 A Snap providing transaction insights can return an optional severity level of `"critical"`.
 MetaMask shows a modal with the warning before the user can confirm the transaction.
+
+<Tabs>
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnTransactionHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onTransaction: OnTransactionHandler = async ({
+  transaction,
+  chainId,
+  transactionOrigin,
+}) => {
+  const insights = /* Get insights */;
+  return {
+    content: (
+      <Box>
+        <Heading>My Transaction Insights</Heading>
+        <Text>Here are the insights:</Text>
+        {insights.map((insight) => (
+          <Text>{insight.value}</Text>
+        ))}
+      </Box>
+    ),
+    // highlight-next-line
+    severity: "critical",
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
 
 ```typescript title="index.ts"
 import type { OnTransactionHandler } from "@metamask/snaps-sdk";
@@ -98,6 +167,9 @@ export const onTransaction: OnTransactionHandler = async ({
   };
 };
 ```
+
+</TabItem>
+</Tabs>
 
 <p align="center">
 <img src={require("../assets/transaction-insights-warning.png").default} alt="Transaction insights warning" width="360px" />
