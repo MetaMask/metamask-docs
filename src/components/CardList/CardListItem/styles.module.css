@@ -15,16 +15,18 @@
   position: relative;
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #fff;
-  border-radius: 8px;
-  margin: 1rem;
-  padding: 2rem;
-  width: 300px;
-  color: #000;
-  height: 100%;
+}
+
+.flaskOnly::after {
+  content: "Flask";
+  border-bottom-left-radius: var(--ifm-card-border-radius);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.1rem 0.75rem;
+  font-weight: 500;
+  background-color: var(--mm-flask-background-color);
+  color: var(--mm-flask-color);
 }
 
 .cardContainer:hover {
@@ -46,23 +48,4 @@
   width: 24px;
   height: 24px;
   margin-right: 8px;
-}
-
-.flaskOnly::after {
-  content: "Flask";
-  border-bottom-left-radius: var(--ifm-card-border-radius);
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.1rem 0.75rem;
-  font-weight: 500;
-  background-color: var(--mm-flask-background-color);
-  color: var(--mm-flask-color);
-}
-
-.cardList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
 }
