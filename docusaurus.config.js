@@ -32,6 +32,7 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
   },
 
   trailingSlash: true,
@@ -168,7 +169,7 @@ const config = {
               replaysOnErrorSampleRate: isProd ? 1.0 : 0,
               replaysSessionSampleRate: isProd ? 1.0 : 0,
               sampleRate: isProd ? 0.25 : 0,
-              tracesSampleRate: 0, 
+              tracesSampleRate: 0,
             },
           },
         },

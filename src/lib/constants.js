@@ -1,9 +1,9 @@
 export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
-
+export const { DASHBOARD_PREVIEW_URL } = siteConfig.customFields;
 export const DASHBOARD_URL =
-  process.env.DASHBOARD_PREVIEW_URL ?? process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
+  DASHBOARD_PREVIEW_URL ?? process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
 
 const TEST_TRANSACTIONS = {
   mainnet: {
