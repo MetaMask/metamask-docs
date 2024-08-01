@@ -260,6 +260,7 @@ case "hello":
     }
   });
 ```
+</Tabs>
 
 ### 5. Build and test your Snap
 
