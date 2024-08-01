@@ -156,15 +156,18 @@ Edit the `"proposedName"` property within the metadata to provide a functional n
   },
 ```
 
-#### 2.3. Update your Snap's button
+#### 2.3. Disable the non-functional button
 
-Open `packages/site/src/components/Buttons.tsx` in a text editor.
-Edit the Button property to provide a functional name such as "Estimate Gas ":
+Open `packages/site/src/index.tsx` in a text editor.
+Disable the `SendHelloButton` by resetting `disabled={!installedSnap}` to prevent a user triggering errors by using it:
 
-```typescript title="Buttons.tsx"
-export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Inoperable</Button>;
-};
+```typescript title="index.tsx"
+          button: (
+              <SendHelloButton
+                onClick={handleSendHelloClick}
+                disabled={true}
+              />
+            ),
 ````
 
 These three updates are the minimum required to ensure that each user interaction with your Snap is well informed, however, your Snap will function without these tweaks.
@@ -181,7 +184,7 @@ permissions in `packages/snap/snap.manifest.json`:
 "initialPermissions": {
   "endowment:transaction-insight": {},
   "endowment:ethereum-provider": {}
-}
+},
 ```
 
 :::tip
