@@ -147,7 +147,7 @@ Sepolia instead.
 | Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |
 | Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |
 
-## StarkNet
+## Starknet
 
 | Network           | Description         | URL                                               |
 | ----------------- | ------------------- | ------------------------------------------------- |

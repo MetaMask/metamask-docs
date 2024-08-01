@@ -19,6 +19,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## June 2024
 
+- Documented [Snaps custom UI with JSX](/snaps/features/custom-ui/with-jsx).
+  ([#1348](https://github.com/MetaMask/metamask-docs/pull/1348))
 - Updated [React dapp with global state tutorial](/wallet/tutorials/react-dapp-global-state) with
   instructions for EIP-6963.
   ([#1330](https://github.com/MetaMask/metamask-docs/pull/1330))

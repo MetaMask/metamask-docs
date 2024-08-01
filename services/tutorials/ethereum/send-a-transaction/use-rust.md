@@ -22,7 +22,7 @@ This tutorial uses the Sepolia testnet. Also see [Transaction types](../../../co
 
 ### 1. Create a new project
 
-Open a terminal and create a new project.
+Open a terminal and create a new project:
 
 ```Rust
 cargo new infura_rs
@@ -123,9 +123,10 @@ Next, make the following updates to the above code:
 - On line 29, use a test address, such as [`0xAED01C776d98303eE080D25A21f0a42D94a86D9c`](https://sepolia.etherscan.io/address/0xaed01c776d98303ee080d25a21f0a42d94a86d9c).
 
 :::tip Secure your keys
+
 To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
+
 :::
-`
 
 ### 4. Run the code
 
@@ -251,13 +252,13 @@ async fn main() -> Result<()> {
 
 ### 2. Run the modified code
 
-From the `infura_rs` directory, run the code.
+From the `infura_rs` directory, run the code:
 
 ```rust
 cargo run
 ```
 
-You will see an output similar to the following.
+An output similar to the following is displayed:
 
 ```log
 Compiling infura_rs v0.1.0 (/Users/rajkaramchedu/onboarding/traian-tutorials/infura_rs)
