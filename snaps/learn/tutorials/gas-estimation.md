@@ -240,12 +240,7 @@ case "hello":
 
 Complete the following steps to build and test your Snap:
 
-#### 5.1. Increment version
-
-This is optional for testing purposes. Open `package.json` in the root directory of the project, and increment 
-  the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
-
-#### 5.2. Build your Snap
+#### 5.1. Build your Snap
 
 From the command line, run `yarn start`.
    In the terminal, at the bottom of the message log, you see the browser URL:
@@ -263,7 +258,7 @@ A page like the following displays:
 
    This is a template test dapp for installing and testing your Snap.
 
-#### 5.3. Test your Snap
+#### 5.2. Test your Snap
 
 Select **Connect** to connect Flask to the dapp.
    After connecting, you're prompted to install the Snap with the following permissions:
@@ -274,8 +269,7 @@ Select **Connect** to connect Flask to the dapp.
 
 Next, select **Confirm** > **OK**.
 
-After installing, the **Send message** button (or **Estimate gas** button, if you followed Step 2) 
-is enabled. Select this button. A dialog prompt displays with the response from the gas fee API:
+Click the **Send message** button (or **Estimate gas** button, if you followed Step 2). A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
 <img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
