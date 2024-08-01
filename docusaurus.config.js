@@ -32,7 +32,6 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
-    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
   },
 
   trailingSlash: true,
