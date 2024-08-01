@@ -93,20 +93,19 @@ const AuthModal = ({ open, setOpen, setProjects }: AuthModalProps) => {
     const { data } = usersPairing
     // Saving of paired Infura accounts in local storage 
     localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }))
-    if (!data.length) {
-      // No paired wallet so redirect Infura to link a wallet
+    
+    // Handling no wallet pairing or multiple pairing
+    if (data.length !== 1) {
       const mm_auth = Buffer.from(JSON.stringify({
         token: true,
-        step: AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
-        mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME)
-      })).toString('base64')
+        step: data.length > 1 ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
+        mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
+        walletPairing: data
+      })).toString('base64')  
       window.location.href = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`
       return
-    } else if (data.length > 1) {
-      window.location.href = `${DASHBOARD_URL}/login?token=true&step=${AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER}`
-      return
     }
-
+    
     // We have one wallet paired with one Infura account
     // Use this Infura email account and this ProfileId to login to Infura
     // Pass token in request params to generate and recieve an Infura access Token
