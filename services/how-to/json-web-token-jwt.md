@@ -1,6 +1,6 @@
 ---
 description: Use JSON Web Tokens to secure data exchange.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 import Tabs from "@theme/Tabs";

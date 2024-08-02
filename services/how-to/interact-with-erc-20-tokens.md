@@ -1,6 +1,6 @@
 ---
 description: Interact with ERC 20 tokens
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs";
