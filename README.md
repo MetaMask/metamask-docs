@@ -1,3 +1,10 @@
+> :warning: **Temporary pause on contributions to the MetaMask docs repository**
+> 
+> Contributions to this repository will be paused from August 5 to August 30, 2024.
+> Pull requests and new issues submitted during this period will not be reviewed or addressed until after the pause.
+> We'll resume normal operations on August 31.
+> Thank you for your understanding.
+
 # MetaMask developer documentation
 
 This is the MetaMask developer documentation repository.
