@@ -25,7 +25,7 @@ Requests for archive data are more expensive and are therefore subject to differ
 
 :::
 
-### Notice rate limiting behavior?
+### Notice rate limiting behavior
 
 When you're rate limited, your JSON-RPC responses have HTTP status code `429.`
 
