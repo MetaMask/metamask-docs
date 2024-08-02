@@ -17,26 +17,13 @@ For example, the following code detects a user's network and when the user chang
 
 ```javascript title="index.js"
 const chainId = await provider // Or window.ethereum if you don't support EIP-6963.
-  .request({ method: "eth_chainId" });
+  .request({ method: "eth_chainId" })
 
 provider // Or window.ethereum if you don't support EIP-6963.
-  .on("chainChanged", handleChainChanged);
+  .on("chainChanged", handleChainChanged)
 
 function handleChainChanged(chainId) {
   // We recommend reloading the page, unless you must do otherwise.
-  window.location.reload();
+  window.location.reload()
 }
 ```
-
-## Chain IDs
-
-These are the chain IDs of the Ethereum networks that MetaMask supports by default.
-Consult [chainid.network](https://chainid.network) for more.
-
-| Hex      | Decimal  | Network                                                |
-|----------|----------|--------------------------------------------------------|
-| 0x1      | 1        | Ethereum main network (Mainnet)                        |
-| 0x5      | 5        | Goerli test network                                    |
-| 0xaa36a7 | 11155111 | Sepolia test network                                   |
-| 0xe704   | 59140    | [Linea Goerli test network](https://docs.linea.build/) |
-| 0x539    | 1337     | Localhost test networks                                |

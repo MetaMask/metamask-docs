@@ -38,7 +38,8 @@ export default function DocItemFooter() {
   }
   return (
     <footer
-      className={clsx(ThemeClassNames.docs.docFooter, "docusaurus-mt-lg")}>
+      className={clsx(ThemeClassNames.docs.docFooter, "docusaurus-mt-lg")}
+    >
       {canDisplayEditMetaRow && (
         <EditMetaRow
           editUrl={editUrl}

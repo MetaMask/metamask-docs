@@ -34,7 +34,7 @@ npm i @metamask/sdk
 In your project script, add the following to import the SDK:
 
 ```javascript title="index.js"
-import { MetaMaskSDK } from "@metamask/sdk";
+import { MetaMaskSDK } from "@metamask/sdk"
 ```
 
 ### 3. Instantiate the SDK
@@ -42,14 +42,14 @@ import { MetaMaskSDK } from "@metamask/sdk";
 Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 
 ```javascript title="index.js"
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example JavaScript Dapp",
     url: window.location.href,
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options
-);
+});
 
 // You can also access via window.ethereum
 const ethereum = MMSDK.getProvider();
@@ -70,7 +70,7 @@ Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
 prompts the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: "eth_requestAccounts", params: [] });
+ethereum.request({ method: "eth_requestAccounts", params: [] })
 ```
 
 You can also call the SDK's [`connectAndSign`](connect-and-sign.md) method, and
@@ -83,14 +83,14 @@ You can copy the full JavaScript example to get started:
 ```javascript title="index.js"
 import { MetaMaskSDK } from "@metamask/sdk";
 
-const MMSDK = new MetaMaskSDK(
+const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "Example JavaScript Dapp",
     url: window.location.href,
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options
-);
+});
 
 // You can also access via window.ethereum
 const ethereum = MMSDK.getProvider();

@@ -3,8 +3,8 @@ description: Solve common issues.
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Troubleshoot common issues
 
@@ -96,7 +96,7 @@ Now you can make changes to your dependencies inside `node_modules` and run
 This creates a `.patch` file containing your dependency patch.
 These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
 
-### Patch the use of XMLHttpRequest
+### Patch the use of `XMLHttpRequest`
 
 The `XMLHttpRequest` API is not exposed in the Snaps execution environment and won't be in the future.
 Because of this, you may run into issues with dependencies in your dependency tree attempting to
@@ -119,7 +119,7 @@ the file:
 ```javascript title="browser-ponyfill.js"
 // Choose between native implementation (global) or custom implementation (__self__)
 // var ctx = global.fetch ? global : __self__;
-var ctx = __self__; // this line disable service worker support temporarily
+var ctx = __self__ // this line disable service worker support temporarily
 ```
 
 You can replace that with the following snippet:
@@ -128,7 +128,7 @@ You can replace that with the following snippet:
 // Choose between native implementation (global) or custom implementation (__self__)
 var ctx = global.fetch
   ? { ...global, fetch: global.fetch.bind(global) }
-  : __self__;
+  : __self__
 // var ctx = __self__; // this line disable service worker support temporarily
 ```
 
@@ -178,22 +178,22 @@ In a production environment this may be a large task depending on the usage of `
 ```javascript
 const instance = axios.create({
   baseURL: "https://api.github.com/",
-});
+})
 
 instance
   .get("users/MetaMask")
   .then((res) => {
     if (res.status >= 400) {
-      throw new Error("Bad response from server");
+      throw new Error("Bad response from server")
     }
-    return res.data;
+    return res.data
   })
   .then((user) => {
-    console.log(user);
+    console.log(user)
   })
   .catch((err) => {
-    console.error(err);
-  });
+    console.error(err)
+  })
 ```
 
 </TabItem>
@@ -203,12 +203,12 @@ instance
 fetch("https://api.github.com/users/MetaMask")
   .then((res) => {
     if (!res.ok) {
-        throw new Error("Bad response from server");
+      throw new Error("Bad response from server")
     }
-    return res.json();
+    return res.json()
   })
   .then((json) => console.log(json))
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 ```
 
 </TabItem>

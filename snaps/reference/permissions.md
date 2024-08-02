@@ -1,10 +1,10 @@
 ---
 description: See the Snaps permissions reference.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Snaps permissions
 
@@ -85,17 +85,17 @@ Specify this permission in the manifest file as follows:
 }
 ```
 
-:::note 
-The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps. 
+:::note
+The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
 See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
 :::
 
 ### `endowment:page-home`
 
-To present a dedicated UI within MetaMask, a Snap must request the `endowment:page-home` permission. 
-This permission allows the Snap to specify a "home page" by exposing the
-[`onHomePage`](../reference/entry-points.md#onhomepage) entry point. 
-You can use any [custom UI components](../features/custom-ui/index.md) to build an embedded home page accessible through the Snaps menu.
+To display a [home page](../features/custom-ui/home-pages.md) within MetaMask, a Snap must request
+the `endowment:page-home` permission.
+This permission allows the Snap to present a dedicated UI by exposing the
+[`onHomePage`](../reference/entry-points.md#onhomepage) entry point.
 
 Specify this permission in the manifest file as follows:
 
@@ -107,13 +107,17 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:keyring`
 
-For a dapp to call [Keyring API](../features/custom-evm-accounts/index.md) methods on an account management Snap,
-the Snap must configure a list of allowed dapp URLs using the `endowment:keyring` permission.
+For a dapp to call [Account Management API](keyring-api/account-management/index.md) methods on an
+account management Snap to integrate [custom EVM accounts](../features/custom-evm-accounts/index.md),
+the Snap must configure a list of allowed dapp URLs using the `allowedOrigins` field of the `endowment:keyring` permission.
+This permission grants a Snap access to Account Management API requests sent to the Snap, using the
+[`onKeyringRequest`](entry-points.md#onkeyringrequest) entry point.
+
 If a dapp hosted on a domain not listed in the `allowedOrigins` attempts to call a Keyring API method,
 MetaMask rejects the request.
 
 :::tip
-You can modify the Keyring API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
+You can modify the Account Management API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
 Specify this permission in the manifest file as follows:
@@ -130,9 +134,9 @@ Specify this permission in the manifest file as follows:
 
 To implement a [lifecycle hook](../features/lifecycle-hooks.md) that runs an action when a user
 installs or updates a Snap, the Snap must request the `endowment:lifecycle-hooks` permission.
-This permission allows the Snap to expose the 
-[`onInstall`](../reference/entry-points.md#oninstall) and 
-[`onUpdate`](../reference/entry-points.md#onupdate) 
+This permission allows the Snap to expose the
+[`onInstall`](../reference/entry-points.md#oninstall) and
+[`onUpdate`](../reference/entry-points.md#onupdate)
 entry points, which MetaMask calls after a successful installation or update, respectively.
 
 :::tip
@@ -195,12 +199,6 @@ domain resolution is happening on Ethereum Mainnet.
 To access the internet, a Snap must request the `endowment:network-access` permission.
 This permission exposes the global `fetch` API to the Snaps execution environment.
 
-:::caution
-`XMLHttpRequest` isn't available in Snaps, and you should replace it with `fetch`.
-If your dependencies use `XMLHttpRequest`, you can
-[patch it away](../how-to/debug-a-snap/common-issues.md#patch-the-use-of-xmlhttprequest).
-:::
-
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -208,15 +206,6 @@ Specify this permission in the manifest file as follows:
   "endowment:network-access": {}
 }
 ```
-
-#### Same-origin policy and CORS
-
-`fetch()` requests in a Snap are bound by the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#cross-origin_network_access).
-Since Snap code is executed in an iframe with the `sandbox` property, the browser sends an `Origin`
-header with the value `null` with outgoing requests.
-For the Snap to be able to read the response, the server must send an
-[`Access-Control-Allow-Origin`](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) CORS header
-with the value `*` or `null` in the response.
 
 ### `endowment:rpc`
 
@@ -232,7 +221,6 @@ The default for both properties is `false`.
 You can modify the RPC API's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
 
-
 Specify this permission in the manifest file as follows:
 
 ```json title="snap.manifest.json"
@@ -246,30 +234,34 @@ Specify this permission in the manifest file as follows:
 
 #### Allowed origins
 
-Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs. 
-Calls from any other origins are rejected. 
+Alternatively, you can specify the caveat `allowedOrigins` to restrict all requests to specific domains or Snap IDs.
+Calls from any other origins are rejected.
 
-Specify this caveat in the manifest file as follows: 
+Specify this caveat in the manifest file as follows:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:rpc": { 
+  "endowment:rpc": {
     "allowedOrigins": [
-      "https://metamask.io", 
+      "https://metamask.io",
       "https://consensys.io",
       "npm:@metamask/example-snap"
-    ] 
+    ]
   }
 }
 ```
 
 :::note
-If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`. 
+If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 :::
+
+If you want to grant a dapp or Snap an automatic connection to your Snap, skipping the need for
+users to confirm a connection, you can use [`initialConnections`](#initial-connections).
 
 ### `endowment:transaction-insight`
 
-To provide transaction insights, a Snap must request the `endowment:transaction-insight` permission.
+To provide [transaction insights](../features/transaction-insights.md) before a user signs a
+transaction, a Snap must request the `endowment:transaction-insight` permission.
 This permission grants a Snap read-only access to raw transaction payloads, before they're accepted
 for signing by the user, by exposing the [`onTransaction`](../reference/entry-points.md#ontransaction)
 entry point.
@@ -282,7 +274,6 @@ The default is `false`.
 :::tip
 You can modify the transaction insight logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).
 :::
-
 
 Specify this permission in the manifest file as follows:
 
@@ -381,7 +372,7 @@ Calling `eth_requestAccounts` requires the
 <TabItem value="JavaScript">
 
 ```js title="index.js"
-await ethereum.request({ "method": "eth_requestAccounts" });
+await ethereum.request({ method: "eth_requestAccounts" })
 ```
 
 </TabItem>
@@ -402,9 +393,7 @@ The following is an example `eth_accounts` permission:
   "caveats": [
     {
       "type": "restrictReturnedAccounts",
-      "value": [
-        "0xc403b37bf1e700cb214ea1be9de066824b420de6"
-      ]
+      "value": ["0xc403b37bf1e700cb214ea1be9de066824b420de6"]
     }
   ],
   "date": 1692616452846
@@ -412,3 +401,28 @@ The following is an example `eth_accounts` permission:
 ```
 
 The user can revoke this permission by going to the Snap's settings under **Snap permissions**.
+
+## Initial connections
+
+A Snap can authorize specific dapps or Snaps to automatically connect,
+skipping the need for users to manually confirm a connection when the dapp or Snap calls
+[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+
+The following is an example of specifying `initialConnections` for a dapp:
+
+```json title="snap.manifest.json"
+"initialConnections": {
+  "https://voyager-snap.linea.build": {}
+}
+```
+
+When a user visits the dapp and the dapp calls `wallet_requestSnaps`, if the Snap is already
+installed, the dapp connects immediately and can make further calls to the Snap.
+If the Snap is not installed, the user sees a confirmation to install the Snap.
+
+Learn more about [allowing automatic connections](../how-to/allow-automatic-connections.md).
+
+:::caution important
+`initialConnections` is not a replacement for [`endowment:rpc`](#endowmentrpc).
+`endowment:rpc` is still required to allow dapps or Snaps to call RPC methods of your Snap.
+:::

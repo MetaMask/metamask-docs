@@ -1,0 +1,7 @@
+.tooltipContainer {
+  max-width: 180px;
+  font-size: 16px;
+}
+.tooltipContainer:first-letter {
+  text-transform: capitalize;
+}

@@ -1,0 +1,10 @@
+{
+  "label": "Concepts",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "services/concepts/",
+    "description": "This section provides background information and context around various key concepts."
+  }
+}

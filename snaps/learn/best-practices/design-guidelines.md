@@ -26,7 +26,7 @@ Ensure your Snap metadata follows these guidelines:
 - Keep your Snap's name to **21 characters or fewer** (including spaces).
 - Use a descriptive name&mdash;don't use "Snap" in the name.
 - Use short and simple copy.
-- Your avatar should fit in a **32px circular frame, SVG format**.
+- Your Snap's icon should fit in a **32px circular frame, SVG format**.
 
 **Before** asking for permission to install, provide users with clear and concise information about:
 
@@ -79,8 +79,8 @@ Use conversational language when describing your Snap.
 If you need to use a technical term, briefly define it first.
 For example:
 
-| Don't do this                                                                                                                                                              | Do this instead                                                                  |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Don't do this                                                                                                                                                               | Do this instead                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | ❌ _Allow the Snap to perform actions that run periodically at fixed times, dates, or intervals. This can be used to trigger time-sensitive interactions or notifications._ | ✅ _Let this Snap schedule and run recurring tasks or notifications._             |
 | ❌ _Allow this Snap to display notifications regarding your ENS expiration._                                                                                                | ✅ _Let this Snap notify you when your Ethereum Name Service is about to expire._ |
 
@@ -99,18 +99,18 @@ In the following example, a key management Snap is suggested when the user is pr
 
 ## Optimize your metadata
 
-Your Snap's avatar and name are among the first things a user sees when deciding whether to install
+Your Snap's icon and name are among the first things a user sees when deciding whether to install
 your Snap.
 These are also a key part of your Snap's identity, so it's worth spending time on this step.
 
-**Avatar**
+**Icon**
 
-Your Snap's avatar should fit in a **32px circular frame in SVG format**.
+Your Snap's icon should fit in a **32px circular frame in SVG format**.
 Avoid using images with small details, as they won't be impactful in the allotted space.
 Use something bold, simple, and easily understood.
 
-The avatar must be a valid SVG. 
-It should be clearly visible on both light and dark backgrounds. 
+The icon must be a valid SVG.
+It should be clearly visible on both light and dark backgrounds.
 It should also be square, or else it will be stretched or cropped.
 
 You can use [SVGviewer.dev](https://www.svgviewer.dev/) to validate and optimize your SVG.
@@ -129,8 +129,8 @@ For example:
 
 <p>
 
-| Don't do this                | Do this instead     |
-|------------------------------|---------------------|
+| Don't do this                 | Do this instead      |
+| ----------------------------- | -------------------- |
 | ❌ _Solana Snap_              | ✅ _Solana Manager_  |
 | ❌ _Snap for Filecoin_        | ✅ _Filecoin Wallet_ |
 | ❌ _Best manager for Bitcoin_ | ✅ _Bitcoin Helper_  |
@@ -139,12 +139,12 @@ For example:
 
 **How metadata is displayed**
 
-The following images demonstrate how your Snap's avatar and name are displayed during installation,
+The following images demonstrate how your Snap's icon and name are displayed during installation,
 transaction insights, and custom dialogs:
 
-![How your Snap's avatar and name are displayed during installation](../../assets/install.png)
+![How your Snap's icon and name are displayed during installation](../../assets/install.png)
 ![How your Snap's name is displayed during transaction insights](../../assets/insights.png)
-![How your Snap's avatar and name are displayed during a custom dialog screen](../../assets/dialog.png)
+![How your Snap's icon and name are displayed during a custom dialog screen](../../assets/dialog.png)
 
 ## Enhance your copy
 
@@ -163,8 +163,8 @@ There might be certain situations where passive voice is the better option, but 
 active voice.
 For example:
 
-| Don't do this                         | Do this instead                     |
-|---------------------------------------|-------------------------------------|
+| Don't do this                          | Do this instead                      |
+| -------------------------------------- | ------------------------------------ |
 | ❌ _The problem is being investigated_ | ✅ _We're investigating the problem_ |
 
 ## Design for all users

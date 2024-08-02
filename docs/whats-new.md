@@ -5,12 +5,66 @@ description: Summary of the latest updates to this documentation.
 
 # What's new in the documentation?
 
-The latest major MetaMask documentation updates are listed by the month they were added to the documentation. 
+The latest major MetaMask documentation updates are listed by the month they were added to the documentation.
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## July 2024
+
+- Documented [Binance Smart Chain](/services/reference/bnb-smart-chain/) support. ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
+- Documented [Celo WebSocket](/services/reference/celo/) support. ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
+- Documented [ZKsync Era WebSocket](/services/reference/zksync) support. ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))
+- Documented support for the [ZKsync Era network API service](/services/reference/zksync). ([#1372](https://github.com/MetaMask/metamask-docs/pull/1372))
+- Added [Services](/services) and [Developer tools](/developer-tools) to MetaMask documentation. ([#1325](https://github.com/MetaMask/metamask-docs/pull/1325))
+
+## June 2024
+
+- Documented [Snaps custom UI with JSX](/snaps/features/custom-ui/with-jsx).
+  ([#1348](https://github.com/MetaMask/metamask-docs/pull/1348))
+- Updated [React dapp with global state tutorial](/wallet/tutorials/react-dapp-global-state) with
+  instructions for EIP-6963.
+  ([#1330](https://github.com/MetaMask/metamask-docs/pull/1330))
+- Documented that the Gas API can be [called without an API key secret](/services/gas-api/api-reference). ([#1346](https://github.com/MetaMask/metamask-docs/pull/1346))
+- Updated [Snaps resources](/snaps/learn/resources) and added a new section "Snaps for developers." ([#1329](https://github.com/MetaMask/metamask-docs/pull/1329))
+- Documented [how to allow automatic connections to a Snap](/snaps/how-to/allow-automatic-connections).
+  ([#1322](https://github.com/MetaMask/metamask-docs/pull/1322))
+
+## May 2024
+
+- Added a beginner tutorial for [creating a simple dapp](/wallet/tutorials/javascript-dapp-simple) using vanilla JavaScript.
+  ([#1276](https://github.com/MetaMask/metamask-docs/pull/1276))
+- Discontinued support for [`eth_sign`](/wallet/concepts/signing-methods/#eth_sign).
+  ([#1319](https://github.com/MetaMask/metamask-docs/pull/1319/))
+- Updated [React dapp with local state tutorial](/wallet/tutorials/react-dapp-local-state) with
+  instructions for EIP-6963.
+  ([#1299](https://github.com/MetaMask/metamask-docs/pull/1299))
+- Documented [Snaps initial connections](/snaps/reference/permissions/#initial-connections).
+  ([#1318](https://github.com/MetaMask/metamask-docs/pull/1318/))
+- Updated [Snaps allowlisting guide](/snaps/how-to/get-allowlisted) with open permissions.
+  ([#1310](https://github.com/MetaMask/metamask-docs/pull/1310/))
+- Documented [Snaps transaction insights](/snaps/features/transaction-insights).
+  ([#1304](https://github.com/MetaMask/metamask-docs/pull/1304))
+- Documented [Snaps home pages](/snaps/features/custom-ui/home-pages).
+  ([#1302](https://github.com/MetaMask/metamask-docs/pull/1302))
+- Documented [Snaps dialogs](/snaps/features/custom-ui/dialogs).
+  ([#1302](https://github.com/MetaMask/metamask-docs/pull/1302))
+- Documented [Snaps network access](/snaps/features/network-access).
+  ([#1301](https://github.com/MetaMask/metamask-docs/pull/1301))
+- Documented [provider API methods for removing event listeners](/wallet/reference/provider-api/#remove-event-listeners).
+  ([#1288](https://github.com/MetaMask/metamask-docs/pull/1288))
+
 ## April 2024
 
+- Documented [Snaps notifications](/snaps/features/notifications).
+  ([#1292](https://github.com/MetaMask/metamask-docs/pull/1292))
+- Moved Snaps-specific Wallet API methods from the
+  [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
+  [Snaps reference](/snaps/reference/wallet-api-for-snaps).
+  ([#1286](https://github.com/MetaMask/metamask-docs/pull/1286))
+- Documented [Snaps `onKeyringRequest` entry point](/snaps/reference/entry-points/#onkeyringrequest).
+  ([#1258](https://github.com/MetaMask/metamask-docs/pull/1258))
+- Documented [Snaps data storage](/snaps/features/data-storage).
+  ([#1278](https://github.com/MetaMask/metamask-docs/pull/1278))
 - Documented [how to get your Snap allowlisted](/snaps/how-to/get-allowlisted).
   ([#1222](https://github.com/MetaMask/metamask-docs/pull/1222))
 - Documented [Snaps lifecycle hooks](/snaps/features/lifecycle-hooks).

@@ -1,29 +1,23 @@
 ---
-description: Create a single component React dapp with local state.
-toc_max_heading_level: 4
+description: Create a single component React dapp with local state using EIP-6963.
 sidebar_position: 1
 ---
 
 # Create a React dapp with local state
 
 This tutorial walks you through integrating a simple React dapp with MetaMask.
-The dapp has a single component, so only requires managing local state.
+The dapp has a single JSX component, which is used for managing local state.
 You'll use the [Vite](https://v3.vitejs.dev/guide) build tool with React and TypeScript to create
 the dapp.
 
-This tutorial builds up your knowledge of working with MetaMask incrementally; this means you won't
-implement the best solution at first, but you'll experiment with the MetaMask API and continually
-work towards better solutions.
-
 :::tip Why React?
-React is familiar to most web developers, and it makes it easy to work with state management and
-build with components that need updating.
+React is familiar to most web developers and is standard in web3.
+It makes it easy to work with state management, build components that use a one-way data flow, and
+re-render those components upon state changes.
 :::
 
 :::info Project source code
-You can see the source code for the
-[starting point](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-start) and
-[final state](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final) of this dapp.
+You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 :::
 
 ## Prerequisites
@@ -32,22 +26,22 @@ You can see the source code for the
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 9+
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - The [MetaMask extension](https://metamask.io/download) installed
-- Basic knowledge of JavaScript and React
+- Basic knowledge of TypeScript and React
 
 ## Steps
 
 ### 1. Set up the project
 
-Set up a new project using Vite, React, and TypeScript, by running the following command:
+Set up a new project using Vite, React, and TypeScript by running the following command:
 
 ```bash
-npm create vite@latest mm-dapp-react -- --template react-ts
+npm create vite@latest vite-react-local-state -- --template react-ts
 ```
 
 Install the node module dependencies:
 
 ```bash
-cd mm-dapp-react && npm install
+cd vite-react-local-state && npm install
 ```
 
 Launch the development server:
@@ -56,669 +50,396 @@ Launch the development server:
 npm run dev
 ```
 
-This displays a `localhost` URL on your terminal. Copy this URL into your browser and open it.
+This displays a `localhost` URL in your terminal, where you can view the dapp in your browser.
 
 :::note
-You can use the `npx vite` or `npm run dev` command to run your project at any time if the
-development server has been stopped.
+If you use VS Code, you can run the command `code .` to open the project.
+If the development server has stopped, you can run the command `npx vite` or `npm run dev` to
+restart your project.
 :::
 
-Open the project in a text editor.
+Open the project in your editor.
 To start with a blank slate, replace the code in `src/App.tsx` with the following:
 
 ```tsx title="App.tsx"
-import "./App.css";
+import "./App.css"
 
 const App = () => {
   return (
     <div className="App">
-      <button>Connect MetaMask</button>
+      <h2>Wallets Detected:</h2>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
 ```
 
-You'll need to get around type-checking by defining the `window.ethereum` object as `any`.
-Update `src/vite-env.d.ts` to the following:
+### 2. Import EIP-6963 interfaces
+
+The dapp will connect to MetaMask using the mechanism introduced by
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+
+:::info Why EIP-6963?
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection
+mechanism to the `window.ethereum` injected provider.
+This alternative mechanism enables dapps to support
+[wallet interoperability](../concepts/wallet-interoperability.md) by discovering multiple injected
+wallet providers in a user's browser.
+:::
+
+Update the Vite environment variable file, `src/vite-env.d.ts`, with the types and interfaces
+needed for [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193):
 
 ```tsx title="vite-env.d.ts"
 /// <reference types="vite/client" />
 
-interface Window {
-  ethereum: any;
+// Describes metadata related to a provider based on EIP-6963.
+interface EIP6963ProviderInfo {
+  walletId: string
+  uuid: string
+  name: string
+  icon: string
+}
+
+// Represents the structure of a provider based on EIP-1193.
+interface EIP1193Provider {
+  isStatus?: boolean
+  host?: string
+  path?: string
+  sendAsync?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  send?: (
+    request: { method: string; params?: Array<unknown> },
+    callback: (error: Error | null, response: unknown) => void
+  ) => void
+  request: (request: {
+    method: string
+    params?: Array<unknown>
+  }) => Promise<unknown>
+}
+
+// Combines the provider's metadata with an actual provider object, creating a complete picture of a
+// wallet provider at a glance.
+interface EIP6963ProviderDetail {
+  info: EIP6963ProviderInfo
+  provider: EIP1193Provider
+}
+
+// Represents the structure of an event dispatched by a wallet to announce its presence based on EIP-6963.
+type EIP6963AnnounceProviderEvent = {
+  detail: {
+    info: EIP6963ProviderInfo
+    provider: EIP1193Provider
+  }
+}
+
+// An error object with optional properties, commonly encountered when handling eth_requestAccounts errors.
+interface MMError {
+  code?: string
+  message?: string
 }
 ```
 
-Also, update `src/App.css` to the following:
+### 3. Create store file
+
+Create a store file to manage the state of the detected wallet providers.
+This file provides a centralized place to store and synchronize the detected wallet providers,
+ensuring that your dapp always has access to the latest provider information.
+
+Create a `src/hooks` directory, and create a file `store.ts` in that directory with the following code:
+
+```ts title="store.ts"
+// Extends WindowEventMap interface, including a custom event eip6963:announceProvider.
+declare global {
+  interface WindowEventMap {
+    "eip6963:announceProvider": CustomEvent
+  }
+}
+
+// Array that stores detected wallet providers and their details.
+let providers: EIP6963ProviderDetail[] = []
+
+// Object containing two methods. The store holds the state of detected Ethereum wallet providers.
+// It's implemented as an external store, making it available for subscription and synchronization
+// across the dapp.
+export const store = {
+  // Returns the current state of providers.
+  value: () => providers,
+  // Subscribes to provider announcements and updates the store accordingly.
+  // Takes a callback function to be invoked on each store update, returning a function to
+  // unsubscribe from the event.
+  subscribe: (callback: () => void) => {
+    function onAnnouncement(event: EIP6963AnnounceProviderEvent) {
+      if (providers.map((p) => p.info.uuid).includes(event.detail.info.uuid))
+        return
+      providers = [...providers, event.detail]
+      callback()
+    }
+    window.addEventListener("eip6963:announceProvider", onAnnouncement)
+    window.dispatchEvent(new Event("eip6963:requestProvider"))
+
+    return () =>
+      window.removeEventListener("eip6963:announceProvider", onAnnouncement)
+  },
+}
+```
+
+### 4. Sync provider state with React component
+
+With the store in place, create a custom hook that synchronizes the provider state with the React component.
+Use the [`useSyncExternalStore`](https://react.dev/reference/react/useSyncExternalStore) React hook
+to subscribe to changes in the provider store, and to ensure the component re-renders whenever
+the store updates.
+
+Create a file `useSyncProviders.ts` in the `hooks` directory with the following code:
+
+```tsx title="useSyncProviders.ts"
+import { useSyncExternalStore } from "react"
+import { store } from "./store"
+
+export const useSyncProviders = () =>
+  useSyncExternalStore(store.subscribe, store.value, store.value)
+```
+
+`useSyncExternalStore` takes three arguments:
+
+- A subscription function to listen for changes in the external store (`store.subscribe`).
+- A function to get the current value of the store (`store.value`).
+- An initial value for the store (`store.value`).
+
+:::note
+As an alternative to `useSyncExternalStore`, you can use the `useState` React hook to manage the
+provider state, and the `useEffect` React hook to subscribe to changes in the store.
+When the React component mounts, you can subscribe to changes in the store, set the initial state
+using the current value from the store, and return a cleanup function to unsubscribe from the store
+when the component unmounts.
+:::
+
+### 5. Create connect buttons
+
+Create an array of buttons that the user can select to connect to the EIP-6963 wallet providers that
+you detect.
+
+Update `src/App.tsx` to the following:
+
+```tsx title="App.tsx"
+import { useSyncProviders } from "./hooks/useSyncProviders"
+import "./App.css"
+
+const App = () => {
+  const providers = useSyncProviders()
+
+  const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
+    try {
+      const accounts = (await providerWithInfo.provider.request({
+        method: "eth_requestAccounts",
+      })) as string[]
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return (
+    <div className="App">
+      <h2>Wallets Detected:</h2>
+      <div className="providers">
+        {providers.length > 0 ? (
+          providers?.map((provider: EIP6963ProviderDetail) => (
+            <button
+              key={provider.info.uuid}
+              onClick={() => handleConnect(provider)}
+            >
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          ))
+        ) : (
+          <div>No Announced Wallet Providers</div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+To style the buttons, update `src/App.css` to the following:
 
 ```css title="App.css"
 .App {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
   min-width: 100vw;
   min-height: 100vh;
+  text-align: center;
 }
-button {
-  margin-top: 0.5em;
+
+.providers {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  gap: 1em;
+
+  padding: 0.6em 1.2em;
+}
+
+.providers button {
+  width: 12em;
+}
+
+.providers button img {
+  width: 2em;
 }
 ```
 
-At this point, you have a working React app with some basic styling and a button that you'll use to
-connect to MetaMask.
+Run `npm run dev` to test the dapp.
+Make sure you're signed in to MetaMask and that it's not currently connected to your dapp.
+If you have multiple EIP-6963 wallets installed in your browser, something like the following should display:
 
-![Initial App State with Button](../assets/tutorials/react-dapp/pt1-01.png)
+<p align="center">
 
-### 2. Detect MetaMask
+![View of Dapp - Wallets Detected](../assets/react-tutorial-01-start.png)
 
-Next, detect the injected provider that browser extension wallets use. MetaMask injects a JavaScript Ethereum provider into the browser at `window.ethereum`. You will use this provider in your dapp to request user information from Metamask.
+</p>
 
-Add code to conditionally render a **Connect MetaMask** button in your component by updating
-`src/App.tsx` to the following:
+### 6. Show connected wallet address
+
+Indicate when a wallet has been connected to by displaying the user's address on the page.
+
+Update everything above the `return` statement in `src/App.tsx` to the following, which
+adds code to format and display user addresses, and handle errors:
 
 ```tsx title="App.tsx"
-import "./App.css";
-let injectedProvider = false;
-
-if (typeof window.ethereum !== "undefined") {
-  injectedProvider = true;
-  console.log(window.ethereum);
-}
-
-const isMetaMask = injectedProvider ? window.ethereum.isMetaMask : false;
+import { useState } from "react"
+import { useSyncProviders } from "./hooks/useSyncProviders"
+import "./App.css"
 
 const App = () => {
-  return (
-    <div className="App">
-      <h2>
-        Injected Provider {injectedProvider ? "DOES" : "DOES NOT"} Exist
-      </h2>
-      {isMetaMask && <button>Connect MetaMask</button>}
-    </div>
-  );
-};
+  const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
+  const [userAccount, setUserAccount] = useState<string>("")
+  const providers = useSyncProviders()
 
-export default App;
+  const [errorMessage, setErrorMessage] = useState("")
+  const clearError = () => setErrorMessage("")
+  const setError = (error: string) => setErrorMessage(error)
+  const isError = !!errorMessage
+
+  // Display a readable user address.
+  const formatAddress = (addr: string) => {
+    const upperAfterLastTwo = addr.slice(0, 2) + addr.slice(2)
+    return `${upperAfterLastTwo.substring(0, 5)}...${upperAfterLastTwo.substring(39)}`
+  }
+
+  const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
+    try {
+      const accounts = await providerWithInfo.provider.request({
+        method: "eth_requestAccounts"
+      }) as string[]
+
+      setSelectedWallet(providerWithInfo)
+      setUserAccount(accounts?.[0])
+    } catch (error) {
+      console.error(error)
+      const mmError: MMError = error as MMError
+      setError(`Code: ${mmError.code} \nError Message: ${mmError.message}`)
+    }
+  }
+  ...
 ```
 
-If you don't have the [MetaMask browser extension](https://metamask.io/download/) installed or
-enabled, you won't see a **Connect MetaMask** button, and the text displays
-**Injected Provider DOES NOT Exist**.
-
-![Injected Provider DOES NOT Exist](../assets/tutorials/react-dapp/pt1-02.png)
-
-If you have the extension installed and enabled, you'll see the **Connect MetaMask** button and the
-text displays **Injected Provider DOES Exist**.
-
-You'll also see the `ethereum` provider printed to the console.
-
-![Injected Provider DOES Exist](../assets/tutorials/react-dapp/pt1-03.png)
-
-You can switch between these two states by enabling or disabling the MetaMask extension through your browser's **Manage Extensions** menu.
-
-#### Use `@metamask/detect-provider`
-
-Developers often use the previous approach when tasked with detecting an injected provider (wallet extension).
-
-However, MetaMask provides the
-[@metamask/detect-provider](https://github.com/MetaMask/detect-provider) module to detect the
-MetaMask Ethereum provider or any provider injected at `window.ethereum` on any platform or browser.
-
-We recommend [using `@metamask/detect-provider`](../how-to/connect/detect-metamask.md)
-instead of manually detecting the provider yourself.
-
-In your project directory (the `mm-dapp-react` directory), install the module using the following command:
-
-```bash
-npm install @metamask/detect-provider
-```
-
-Update `src/App.tsx` to the following:
+Below the `return` statement in `src/App.tsx`, update the `div` with the class of `.App` to the
+following:
 
 ```tsx title="App.tsx"
-import "./App.css";
-import { useState, useEffect } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
-
-const App = () => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      console.log(provider);
-      // Transform provider to true or false.
-      setHasProvider(Boolean(provider));
-    };
-
-    getProvider();
-  }, []);
-
+  ...
   return (
     <div className="App">
-      <div>
-        Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist
+      <h2>Wallets Detected:</h2>
+      <div className="providers">
+        {
+          providers.length > 0 ? providers?.map((provider: EIP6963ProviderDetail) => (
+            <button key={provider.info.uuid} onClick={() => handleConnect(provider)} >
+              <img src={provider.info.icon} alt={provider.info.name} />
+              <div>{provider.info.name}</div>
+            </button>
+          )) :
+            <div>
+              No Announced Wallet Providers
+            </div>
+        }
       </div>
-      {hasProvider && <button>Connect MetaMask</button>}
-    </div>
-  );
-};
-
-export default App;
-```
-
-This code creates a piece of local state called `hasProvider` of type `boolean` or `null` value,
-initialized with a `null` value.
-
-Next, it creates a `useEffect` with zero dependencies (it only runs once in your component lifecycle).
-React's `useEffect` hook allows components to run code when a component is mounted or when some
-property's state changes.
-This hook also allows cleaning up when the component is unmounted.
-
-If you explicitly declare no dependencies by passing in an empty array, then `useEffect` only runs
-once before the component mounts.
-
-Inside `useEffect`, there's an `async` function called `getProvider`.
-This function awaits the `detectEthereumProvider` and uses an option (`silent: true`) to silence any
-console errors related to the provider not being available.
-You can choose not to use that option if you prefer.
-
-The setter function within `useEffect` transforms the provider's detection to a `boolean` value.
-
-If you run the code now, you'll see the same result in your dapp, but you're using
-`@metamask/detect-provider` instead of your own code.
-
-### 3. Connect to MetaMask
-
-To connect your dapp to MetaMask, you'll create another `useState` named `wallet`, which keeps your
-dapp up to date with various MetaMask wallet properties such as `accounts`, `balance`, and `chainId`.
-These are essential properties to sync with your dapp constantly.
-
-You'll first add a state for `accounts` and slowly build up your state over the following few
-tutorial sections.
-
-You'll also set up a button to connect to the MetaMask wallet.
-
-Update the `src/App.tsx` to the following:
-
-```tsx title="App.tsx" {7-8,19-21,23-28,36-38,40-42} showLineNumbers
-import "./App.css";
-import { useState, useEffect } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
-
-const App = () => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [] };              /* New */
-  const [wallet, setWallet] = useState(initialState); /* New */
-
-  useEffect(() => {
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      setHasProvider(Boolean(provider));
-    };
-
-    getProvider();
-  }, []);
-
-  const updateWallet = async (accounts: any) => {     /* New */
-    setWallet({ accounts });                          /* New */
-  };                                                  /* New */
-
-  const handleConnect = async () => {                 /* New */
-    let accounts = await window.ethereum.request({    /* New */
-      method: "eth_requestAccounts",                  /* New */
-    });                                               /* New */
-    updateWallet(accounts);                           /* New */
-  };                                                  /* New */
-
-  return (
-    <div className="App">
-      <div>
-        Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist
-      </div>
-
-      {hasProvider && (                              /* Updated */
-        <button onClick={handleConnect}>Connect MetaMask</button>
-      )}
-
-      {wallet.accounts.length > 0 && (                /* New */
-        <div>Wallet Accounts: {wallet.accounts[0]}</div>
-      )}
-    </div>
-  );
-};
-
-export default App;
-```
-
-The comments in the code snippet indicate any new or updated lines of code.
-The changes include:
-
-- **Lines 7-8:** Create an object representing the initial empty state and a new `useState` hook to
-  reflect your MetaMask wallet state.
-
-- **Lines 19-21:** Add an `updateWallet` function that sets your new wallet state when you connect.
-  This will also be called when you add code later that refreshes our wallet state.
-  This function will be helpful as you start syncing the `balance` and `chainId`.
-
-- **Lines 23-28:** Add a `handleConnect` function that the UI calls to connect to MetaMask using
-  `window.ethereum.request` and the `eth_requestAccounts` RPC method.
-  Your dapp stores the result from this RPC call in a variable named `accounts` and passes it to
-  the `updateWallet` function.
-
-- **Lines 36-38:** On click, the **Connect MetaMask** button calls `handleConnect`, from which an RPC
-  call of `eth_requestAccounts` is awaited, and the user is prompted to connect to MetaMask:
-
-  ![Choose which MetaMask connects](../assets/tutorials/react-dapp/pt1-04.png)
-
-  ![Grant permissions over MetaMask](../assets/tutorials/react-dapp/pt1-05.png)
-
-- **Lines 40-42:** Once connected, you'll see your account address displayed in your dapp:
-
-  ![MetaMask Account Address](../assets/tutorials/react-dapp/pt1-06.png)
-
-### 4. Handle state change
-
-With the current code, your dapp loses the account data if you refresh the page.
-When you connect using the button, the dapp sets `accounts` in its state, but in the case of a
-browser refresh, you need something in `useEffect` to check if you've already connected and update
-the wallet state.
-
-Thinking ahead, once you track more than just `accounts`, you also need a mechanism to get the
-`balance` and `chainId` and update their state.
-
-Update `src/App.tsx` with some added logic to `useEffect`:
-
-```tsx title="App.tsx" {11-18,24-33,37-39,59-60} showLineNumbers
-import "./App.css";
-import { useState, useEffect } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
-
-const App = () => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [] };
-  const [wallet, setWallet] = useState(initialState);
-
-  useEffect(() => {
-    const refreshAccounts = (accounts: any) => {         /* New */
-      if (accounts.length > 0) {                         /* New */
-        updateWallet(accounts);                          /* New */
-      } else {                                           /* New */
-        // If length 0, user is disconnected.            /* New */
-        setWallet(initialState);                         /* New */
-      }                                                  /* New */
-    };                                                   /* New */
-
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      setHasProvider(Boolean(provider));
-
-      if (provider) {                                    /* New */
-        const accounts = await window.ethereum.request(  /* New */
-          { method: "eth_accounts" }                     /* New */
-        );                                               /* New */
-        refreshAccounts(accounts);                       /* New */
-        window.ethereum.on(                              /* New */
-          "accountsChanged",                             /* New */
-          refreshAccounts                                /* New */
-        );                                               /* New */
-      }                                                  /* New */
-    };
-
-    getProvider();
-    return () => {                                       /* New */
-      window.ethereum?.removeListener("accountsChanged", refreshAccounts);
-    };                                                   /* New */
-  }, []);
-
-  const updateWallet = async (accounts: any) => {
-    setWallet({ accounts });
-  };
-
-  const handleConnect = async () => {
-    let accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    updateWallet(accounts);
-  };
-
-  return (
-    <div className="App">
-      <div>
-        Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist
-      </div>
-
-      {window.ethereum?.isMetaMask &&                  /* Updated */
-        wallet.accounts.length < 1 && (                       
-          <button onClick={handleConnect}>Connect MetaMask</button>
-        )}
-
-      {wallet.accounts.length > 0 && (
-        <div>Wallet Accounts: {wallet.accounts[0]}</div>
-      )}
-    </div>
-  );
-};
-
-export default App;
-```
-
-Note that `useEffect` is a side effect; you use the hooks for fetching data, reading and writing to
-local storage, and setting up event listeners or subscriptions.
-
-The side effect occurs on the first render only since you have nothing in your dependency array.
-You also need to clean up those listeners upon unmount of your component.
-
-You can now test your dapp and see that when you refresh the page, you retain the display of the
-user's address. You can also disable the Metamask browser extension, enable it again, and reconnect to it. You will see that the React dapp has retained the user address.
-
-You've synced with a source outside your dapp and managed the state in a single component.
-
-:::info Connection summary
-In learning how to connect to MetaMask from a React application, you've learned how to track some
-essential state of your wallet, precisely, which account is selected and active in the MetaMask wallet.
-
-Your dapp syncs this state locally using React's `useState` and the React `useEffect` hooks.
-The dapp ensures that if a user manually disconnects or changes the account, or refreshes the page,
-the component is aware of any state change.
-:::
-
-### 5. Manage more MetaMask state
-
-Next, you'll add `balance` and `chainId` to your state.
-
-Before editing `src/App.tsx`, you need a few utility functions to format `balance` and `chainId`.
-Create a new file at `src/utils/index.tsx` with the following code:
-
-```tsx title="index.tsx"
-export const formatBalance = (rawBalance: string) => {
-  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
-  return balance;
-};
-
-export const formatChainAsNum = (chainIdHex: string) => {
-  const chainIdNum = parseInt(chainIdHex);
-  return chainIdNum;
-};
-```
-
-With those functions exported, you can import them into your component and use them to get
-human-readable balance and chain information.
-
-#### Watch user balance and chain
-
-To display the connected address's balance and the current chain ID, you need to update the
-`initialState` object in your component.
-
-Since your dapp already uses `eth_requestAccounts` to determine the accounts, you need to add a
-dependent call to `eth_getBalance` once you have that account information.
-
-Finally, you need to parse the returned value of the balance and format it into a human-readable string.
-You'll also create a function called `formatBalance`.
-
-Update `src/App.tsx` to the following:
-
-```tsx title="App.tsx" {3,8,21-23,35,43,48-55,74,76-79} showLineNumbers
-import "./App.css";
-import { useState, useEffect } from "react";
-import { formatBalance, formatChainAsNum } from "./utils";            /* New */
-import detectEthereumProvider from "@metamask/detect-provider";
-
-const App = () => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [], balance: "", chainId: "", }; /* Updated */
-  const [wallet, setWallet] = useState(initialState);
-
-  useEffect(() => {
-    const refreshAccounts = (accounts: any) => {
-      if (accounts.length > 0) {
-        updateWallet(accounts);
-      } else {
-        // If length 0, user is disconnected.
-        setWallet(initialState);
-      }
-    };
-
-    const refreshChain = (chainId: any) => {                          /* New */
-      setWallet((wallet) => ({ ...wallet, chainId }));                /* New */
-    };                                                                /* New */
-
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      setHasProvider(Boolean(provider));
-
-      if (provider) {
-        const accounts = await window.ethereum.request({
-          method: "eth_accounts",
-        });
-        refreshAccounts(accounts);
-        window.ethereum.on("accountsChanged", refreshAccounts);
-        window.ethereum.on("chainChanged", refreshChain);            /* New */
-      }
-    };
-
-    getProvider();
-
-    return () => {
-      window.ethereum?.removeListener("accountsChanged", refreshAccounts);
-      window.ethereum?.removeListener("chainChanged", refreshChain); /* New */
-    };
-  }, []);
-
-  const updateWallet = async (accounts: any) => {
-    const balance = formatBalance(await window.ethereum!.request({   /* New */
-      method: "eth_getBalance",                                      /* New */
-      params: [accounts[0], "latest"],                               /* New */
-    }));                                                             /* New */
-    const chainId = await window.ethereum!.request({                 /* New */
-      method: "eth_chainId",                                         /* New */
-    });                                                              /* New */
-    setWallet({ accounts, balance, chainId });                     /* Updated */
-  };
-
-  const handleConnect = async () => {
-    let accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    updateWallet(accounts);
-  };
-
-  return (
-    <div className="App">
-      <div>Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist</div>
-
-      {window.ethereum?.isMetaMask && wallet.accounts.length < 1 && (
-        <button onClick={handleConnect}>Connect MetaMask</button>
-      )}
-
-      {wallet.accounts.length > 0 && (
-        <>                                                               {/* New */}
-          <div>Wallet Accounts: {wallet.accounts[0]}</div>
-          <div>Wallet Balance: {wallet.balance}</div>                    {/* New */}
-          <div>Hex ChainId: {wallet.chainId}</div>                       {/* New */}
-          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div> {/* New */}                                            {/* New */}
-        </>                                                              {/* New */}
-      )}
-    </div>
-  );
-};
-
-export default App;
-```
-
-The changes here are minimal because you only need to update or duplicate existing functionality and
-add a few utility functions.
-
-Your dapp now displays `account`, `balance`, and `chainId`. The `chainId` is represented in both hex and decimal formats. The values on your display reflect your MetaMask wallet contents and may not be the same as in the following example.
-
-![MetaMask address, balance, and chain](../assets/tutorials/react-dapp/pt1-07.png)
-
-Your dapp detects any changes to `balance` or `chainId`. For the `chainId`, the utility functions convert the hex strings into a human-readable decimal value for display.
-
-For chain IDs, you use the hex version in RPC calls and the decimal version for display.
-To get the human-readable number of the chain, you use `parseInt`.
-
-:::caution important
-For this tutorial, your dapp only needs to display information about your wallet.
-For a real web3 dapp, you might add more functionality for switching chains programmatically or
-initiating transactions.
-
-You might need to:
-
-- Have a list of chain IDs that your dapp supports.
-- Create UI that shows information on the supported networks.
-- Present a button that allows users to connect to a supported network.
-
-[Detecting a user's network](../how-to/manage-networks/detect-network.md) is crucial in almost every web3 dapp.
-:::
-
-### 6. Handle errors
-
-Now that you have a working dapp, you should set up error handling.
-You can approach this in several ways; the following is a basic suggestion for handling an error or
-rejection when the user connects their wallet using the `handleConnect` function.
-
-You'll add `useState` to track `isConnecting`, `error`, and `errorMessage`.
-
-When a user is in the middle of connecting, you'll disable the **Connect MetaMask** button.
-If you receive an error, you'll update `error` to `true` and set the `errorMessage` for display.
-You'll also set `isConnecting` back to `false` once either the user has connected or you've caught
-the error, and set `error` back to `false` once the message is resolved.
-
-Update `src/App.tsx` to the following:
-
-```tsx title="App.tsx" {11-13,62-64,67-75,84,96-100} showLineNumbers
-import "./App.css";
-import { useState, useEffect } from "react";
-import { formatBalance, formatChainAsNum } from "./utils";
-import detectEthereumProvider from "@metamask/detect-provider";
-
-const App = () => {
-  const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [], balance: "", chainId: "" };
-  const [wallet, setWallet] = useState(initialState);
-
-  const [isConnecting, setIsConnecting] = useState(false);  /* New */
-  const [error, setError] = useState(false);                /* New */
-  const [errorMessage, setErrorMessage] = useState("");     /* New */
-
-  useEffect(() => {
-    const refreshAccounts = (accounts: any) => {
-      if (accounts.length > 0) {
-        updateWallet(accounts);
-      } else {
-        // If length 0, user is disconnected.
-        setWallet(initialState);
-      }
-    };
-
-    const refreshChain = (chainId: any) => {
-      setWallet((wallet) => ({ ...wallet, chainId }));
-    };
-
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      setHasProvider(Boolean(provider));
-
-      if (provider) {
-        const accounts = await window.ethereum.request({method: "eth_accounts"});
-        refreshAccounts(accounts);
-        window.ethereum.on("accountsChanged", refreshAccounts);
-        window.ethereum.on("chainChanged", refreshChain);
-      }
-    };
-
-    getProvider();
-
-    return () => {
-      window.ethereum?.removeListener("accountsChanged", refreshAccounts);
-      window.ethereum?.removeListener("chainChanged", refreshChain);
-    };
-  }, []);
-
-  const updateWallet = async (accounts: any) => {
-    const balance = formatBalance(
-      await window.ethereum!.request({
-        method: "eth_getBalance",
-        params: [accounts[0], "latest"],
-      })
-    );
-    const chainId = await window.ethereum!.request({
-      method: "eth_chainId",
-    });
-    setWallet({ accounts, balance, chainId });
-  };
-
-  const handleConnect = async () => {                    /* Updated */
-    setIsConnecting(true);                                 /* New */
-    await window.ethereum.request({                      /* Updated */
-        method: "eth_requestAccounts",
-      })
-      .then((accounts: []) => {                           /* New */
-        setError(false);                                  /* New */
-        updateWallet(accounts);                           /* New */
-      })                                                  /* New */
-      .catch((err: any) => {                              /* New */
-        setError(true);                                   /* New */
-        setErrorMessage(err.message);                     /* New */
-      });                                                 /* New */
-    setIsConnecting(false);                               /* New */
-  };
-
-  const disableConnect = Boolean(wallet) && isConnecting;
-
-  return (
-    <div className="App">
-      <div>Injected Provider {hasProvider ? "DOES" : "DOES NOT"} Exist</div>
-
-      {window.ethereum?.isMetaMask && wallet.accounts.length < 1 && (  /* Updated */
-        <button disabled={disableConnect} onClick={handleConnect}>Connect MetaMask</button>
-      )}
-
-      {wallet.accounts.length > 0 && (
-        <>
-          <div>Wallet Accounts: {wallet.accounts[0]}</div>
-          <div>Wallet Balance: {wallet.balance}</div>
-          <div>Hex ChainId: {wallet.chainId}</div>
-          <div>Numeric ChainId: {formatChainAsNum(wallet.chainId)}</div>
-        </>
-      )}
-      {error && (  /* New code block */
-        <div onClick={() => setError(false)}>
-          <strong>Error:</strong> {errorMessage}
+      <hr />
+      <h2>{userAccount ? "" : "No"} Wallet Selected</h2>
+      {userAccount &&
+        <div className="selectedWallet">
+          <img src={selectedWallet?.info.icon} alt={selectedWallet?.info.name} />
+          <div>{selectedWallet?.info.name}</div>
+          <div>({formatAddress(userAccount)})</div>
         </div>
-      )}
+      }
+      <div className="mmError" style={isError ? { backgroundColor: "brown" } : {}}>
+        {isError &&
+          <div onClick={clearError}>
+            <strong>Error:</strong> {errorMessage}
+          </div>
+        }
+      </div>
     </div>
-  );
-};
-
-export default App;
+  )
 ```
 
-To test the error handling, disconnect from your accounts in MetaMask:
+Add the following CSS to `src/App.css` to style the error message:
 
-![Disconnect from selected Account](../assets/tutorials/react-dapp/pt1-08.png)
+```css title="App.css"
+.mmError {
+  height: 36px;
+  padding: 16px;
+  color: #efefef;
+  background-color: transparent;
+}
+```
 
-Attempt to connect again and choose to cancel the connection:
+Your dapp should look similar to the following:
 
-![Cancel request to connect](../assets/tutorials/react-dapp/pt1-09.png)
+<p align="center">
 
-You'll see the error message displayed on the dapp and in the console:
+![Final View of Dapp](../assets/react-tutorial-01-final.png)
 
-![MetaMask User Reject Request Error](../assets/tutorials/react-dapp/pt1-10.png)
+</p>
 
-## Conclusion
+## Troubleshoot
 
-This tutorial walked you through creating a single component dapp using Vite, some basics of
-interacting with MetaMask and its API, and managing state locally.
+#### Doesn't look right?
 
-You can see the [source code](https://github.com/MetaMask/react-dapp-tutorial/tree/local-state-final)
-for the final state of this dapp tutorial.
+This tutorial creates `className`s for each section's parent `div` in the JSX (HTML).
+If your dapp does not look the same but functions properly, check the naming of your classes and
+their corresponding CSS.
+
+#### Doesn't function properly?
+
+Try the following:
+
+- Check the code examples against your own.
+- Place `console` statements in key areas such as `handleConnect` and `store`.
+- Clone the
+  [GitHub repository containing the project source code](https://github.com/MetaMask/vite-react-local-tutorial)
+  and run it.
+
+If you find inconsistencies or erroneous code, feel free to create an issue on the repository.
+
+## Next steps
+
+This tutorial walked you through creating a single component dapp using Vite, detecting wallet
+providers using EIP-6963, and managing the state in React locally.
+You can view the [project source code on GitHub](https://github.com/MetaMask/vite-react-local-tutorial).
 
 As a next step, you can [create a React dapp with global state](react-dapp-global-state.md).
-This follow-up tutorial walks you through adding more than one component and working with global state.
+This follow-up tutorial walks you through adding multiple components that use a global state.
 You'll use [React's Context API](https://react.dev/reference/react/useContext) to manage the state
-globally and ensure that any component in your dapp can be aware and conditionally render or display
-information about your MetaMask wallet.
+globally and move away from using the `useSyncExternalStore`.
+This is a more realistic (but also more complex) approach for building a real-world dapp.

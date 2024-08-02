@@ -6,24 +6,27 @@ sidebar_position: 1
 # Display tokens
 
 When a user opens MetaMask, they're shown some major tokens by default.
-However, to display most custom ERC-20 tokens, the user must [add the token
-manually](https://support.metamask.io/hc/en-us/articles/360015489031-How-to-display-tokens-in-MetaMask#h_01FWH492CHY60HWPC28RW0872H).
-To display a user's NFTs, the user must [explicitly turn on NFT autodetection or add their NFTs
-manually](https://support.metamask.io/hc/en-us/articles/360058238591-NFT-tokens-in-your-MetaMask-wallet).
+However, to display most custom ERC-20 tokens, the user must [turn on token autodetection or add the token
+manually](https://support.metamask.io/managing-my-tokens/custom-tokens/how-to-display-tokens-in-metamask/).
+To display a user's NFTs, the user must [turn on NFT autodetection or add their NFTs
+manually](https://support.metamask.io/nfts/nft-tokens-in-your-metamask-wallet/).
 
 Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
 
 You can improve the security and experience of displaying your
-[ERC-20 token](#register-an-erc-20-token) or users' [NFTs](#register-nfts) in MetaMask by using the
+[ERC-20 token](#display-an-erc-20-token) or users' [NFTs](#display-nfts) in MetaMask by using the
 [`wallet_watchAsset`](/wallet/reference/wallet_watchasset) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
 
-:::tip Displaying NFTs
-With `wallet_watchAsset`, you can prompt users to add their NFTs even when they have NFT
-autodetection disabled.
-Moreover, NFT autodetection only detects NFTs on Ethereum Mainnet.
-With `wallet_watchAsset`, users can add NFTs from other networks.
+:::tip
+With `wallet_watchAsset`, you can prompt users to add their ERC-20 tokens and NFTs even when they
+have token autodetection or NFT autodetection disabled.
+
+Also, token autodetection only detects ERC-20 tokens on
+[certain networks](https://support.metamask.io/managing-my-tokens/custom-tokens/how-to-display-tokens-in-metamask/#enhanced-token-detection),
+and NFT autodetection only detects NFTs on Ethereum Mainnet.
+With `wallet_watchAsset`, users can add tokens from other networks.
 :::
 
 :::caution Experimental feature
@@ -36,10 +39,10 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
-const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513";
-const tokenSymbol = "TUT";
-const tokenDecimals = 18;
-const tokenImage = "http://placekitten.com/200/300";
+const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513"
+const tokenSymbol = "TUT"
+const tokenDecimals = 18
+const tokenImage = "http://placekitten.com/200/300"
 
 try {
   // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
@@ -59,15 +62,15 @@ try {
           image: tokenImage,
         },
       },
-    });
+    })
 
   if (wasAdded) {
-    console.log("Thanks for your interest!");
+    console.log("Thanks for your interest!")
   } else {
-    console.log("Your loss!");
+    console.log("Your loss!")
   }
 } catch (error) {
-  console.log(error);
+  console.log(error)
 }
 ```
 
@@ -98,10 +101,10 @@ The add NFT interfaces look like the following:
 
 <div class="row">
     <div class="column">
-        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid black'}} />
+        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
 
@@ -125,15 +128,15 @@ try {
           tokenId: "1",
         },
       },
-    });
+    })
 
   if (wasAdded) {
-    console.log("User successfully added the token!");
+    console.log("User successfully added the token!")
   } else {
-    console.log("User did not add the token.");
+    console.log("User did not add the token.")
   }
 } catch (error) {
-  console.log(error);
+  console.log(error)
 }
 ```
 

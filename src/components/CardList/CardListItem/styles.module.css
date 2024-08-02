@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-.cardContainer {
+ .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
   --ifm-link-hover-decoration: none;
@@ -21,8 +21,8 @@
   content: "Flask";
   border-bottom-left-radius: var(--ifm-card-border-radius);
   position: absolute;
-  top:0;
-  right:0;
+  top: 0;
+  right: 0;
   padding: 0.1rem 0.75rem;
   font-weight: 500;
   background-color: var(--mm-flask-background-color);

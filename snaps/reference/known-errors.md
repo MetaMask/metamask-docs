@@ -1,6 +1,6 @@
 ---
 description: See the Snaps known errors reference
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Snaps known errors
@@ -8,7 +8,7 @@ sidebar_position: 5
 Snaps can [communicate the following errors](../how-to/communicate-errors.md) without crashing the Snap:
 
 | Error                      | What the error indicates                                    | Error code |
-|----------------------------|-------------------------------------------------------------|:----------:|
+| -------------------------- | ----------------------------------------------------------- | :--------: |
 | `ChainDisconnectedError`   | The provider is disconnected from the requested chain.      |   `4901`   |
 | `DisconnectedError`        | The provider is disconnected.                               |   `4900`   |
 | `InternalError`            | An internal error has occurred.                             |  `-32603`  |

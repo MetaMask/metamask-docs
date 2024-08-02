@@ -1,0 +1,23 @@
+:::note
+While Infura will allow this method, `eth_getWork` will not actually return mining work.
+:::
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32000,
+    "message": "no mining work available yet"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>

@@ -37,13 +37,13 @@ your Unity game.
 1. Open your Unity project with the SDK installed.
 
 2. Navigate to the game object in your scene (or the Prefab instance) that currently stores the
-    `MetaMask Unity` script.
-    In the `Demo` scene, this is the `MetaMaskUnitySDK` game object.
+   `MetaMask Unity` script.
+   In the `Demo` scene, this is the `MetaMaskUnitySDK` game object.
 
-3. Select the `MetaMaskUnitySDK` Prefab to view its properties in the **Inspector** window. 
+3. Select the `MetaMaskUnitySDK` Prefab to view its properties in the **Inspector** window.
 
 4. In the **MetaMask Unity (Script)** section, enter your Infura API key into the **Infura Project
-    Id** field.
+   Id** field.
 
 <p align="center">
 
@@ -52,4 +52,4 @@ your Unity game.
 </p>
 
 5. Save your changes.
-    This automatically configures all RPC URLs that Infura supports.
+   This automatically configures all RPC URLs that Infura supports.

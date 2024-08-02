@@ -1,6 +1,6 @@
 ---
 description: Include and retrieve static files in the Snap bundle.
-sidebar_position: 9
+sidebar_position: 12
 ---
 
 # Static files
@@ -43,10 +43,10 @@ const contents = await snap.request({
     path: "./files/myfile.bin",
     encoding: "hex",
   },
-});
+})
 
 // "0x..."
-console.log(contents);
+console.log(contents)
 ```
 
 ## Example

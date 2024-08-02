@@ -1,0 +1,32 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="JSON">
+
+```json
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## Error response
+
+On Mainnet and Goerli, if this call causes the EVM to execute a `REVERT` operation, an error response of the following form is returned, with the revert reason pre-decoded as a string:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": 3,
+    "message": "execution reverted: Dai/insufficient-balance",
+    "data": "0x08c379a0000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000184461692f696e73756666696369656e742d62616c616e63650000000000000000"
+  }
+}
+```

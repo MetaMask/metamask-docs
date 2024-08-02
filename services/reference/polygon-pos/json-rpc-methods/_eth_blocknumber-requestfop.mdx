@@ -1,0 +1,57 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="cURL">
+
+```bash
+curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "X-INFURA-FAILOVER: true" \
+  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="Web3.js">
+
+```bash
+const provider = new Web3.providers.HttpProvider(
+  "https://polygon-mainnet.infura.io/v3/YOUR-API-KEY"
+);
+
+const options = {
+  headers: [
+    {
+        name: "X-INFURA-FAILOVER",
+        value: "true",
+    },
+],
+};
+
+const web3 = new Web3(provider, options);
+```
+
+  </TabItem>
+  <TabItem value="Ethers.js">
+
+```bash
+class InfuraJsonRpcProvider extends JsonRpcProvider {
+  constructor(url) {
+    super(url);
+    this.preflightFunc = async (req) => {
+      if (req.hasBody()) {
+        req.setHeader("X-INFURA-FAILOVER", true);
+      }
+      return req;
+    };
+  }
+}
+```
+
+provider = new InfuraJsonRpcProvider(
+  "https://polygon-mainnet.infura.io/v3/YOUR-API-KEY"
+);
+```
+
+  </TabItem>  
+</Tabs>

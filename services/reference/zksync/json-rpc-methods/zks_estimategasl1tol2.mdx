@@ -1,0 +1,57 @@
+---
+title: "zks_estimateGasL1ToL2"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Returns an estimate of the gas required for a layer 1 (L1) to layer 2 (L2) transaction.
+
+## Parameters
+
+- `from`: [_Required_] Address from which the transaction is sent.
+- `to`: [_Required_] Address to which the transaction is addressed.
+- `data`: Data associated with the transaction.
+
+## Response
+
+The estimate of the gas required for a L1 to L2 transaction.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateGasL1ToL2", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateGasL1ToL2", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": "0x25f64db",
+    "id": 2
+  }
+  ```
+  </TabItem>
+</Tabs>

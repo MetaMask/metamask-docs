@@ -1,0 +1,262 @@
+---
+title: "starknet_simulateTransactions"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Simulates the execution of the specified transactions at the specified block.
+
+## Parameters
+
+- `transactions`: (array) [*Required*] A sequence of
+  [Starknet transactions](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/)
+  to simulate.
+  If multiple transactions are provided, each transaction is simulated on the state resulting from
+  applying the previous transactions..
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+- `simulation_flags`: (array) [*Required*] A set of flags used for simulation.
+  Available options are `SKIP_VALIDATE` and `SKIP_FEE_CHARGE`.
+
+## Returns
+
+A sequence of transaction results, corresponding to the sequence of requested transactions.
+Each transaction result object contains:
+
+- `transaction_trace`: An execution trace of the transaction.
+- `fee_estimation`: An estimate of the fee required for the network to process the transaction.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_simulateTransactions",
+    "params": {
+      "transactions": [{
+        "type": "INVOKE",
+        "max_fee": "0xb3a2f1ab6d632",
+        "version": "0x1",
+        "signature": [
+          "0x54c2201c7b9021777389e208e28eafc67e4ba1f1aa7016a1123b61c6ff79c29",
+          "0x58c2d97614e5abfd9668b314f344c945d16ea154cb32a7b08b4445204f1f1d3"
+        ],
+        "sender_address": "0x0569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+        "calldata": ["0x3","0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7","0x219209e083275171774dab1df80982e9df2096516f06319c5c6d71ae0a8480c","0x3","0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff","0x984e103a8acd6","0x0","0x68f5c6a61780768455de69077e07e89787839bf8166decfbf92b645209c0fb8","0x219209e083275171774dab1df80982e9df2096516f06319c5c6d71ae0a8480c","0x3","0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff","0x4c4b40","0x0","0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff","0x2f0b3c5710379609eb5495f1ecd348cb28167711b73609fe565a72734550354","0xe","0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10","0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7","0x68f5c6a61780768455de69077e07e89787839bf8166decfbf92b645209c0fb8","0x1f4","0xa76cc","0xa7b5e","0x984e103a8acd6","0x0","0x4c4b40","0x0","0x9542431aa6bf1","0x0","0x4ac4a0","0x0"],
+        "nonce": "0x51"
+      }],
+      "block_id": {
+        "block_number": 385940
+      },
+      "simulation_flags": [
+        "SKIP_VALIDATE",
+        "SKIP_FEE_CHARGE"
+      ]
+    },
+    "id": 1
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "fee_estimation": {
+        "gas_consumed": "0x9ad6",
+        "gas_price": "0x5569d8d85",
+        "overall_fee": "0x33a912ed64f2e"
+      },
+      "transaction_trace": {
+        "execute_invocation": {
+          "call_type": "CALL",
+          "calldata": [
+            "0x3",
+            "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+            "0x219209e083275171774dab1df80982e9df2096516f06319c5c6d71ae0a8480c",
+            ...
+          ],
+          "caller_address": "0x0",
+          "calls": [
+            {
+              "call_type": "CALL",
+              "calldata": [
+                "0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff",
+                "0x984e103a8acd6",
+                "0x0"
+              ],
+              "caller_address": "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+              "calls": [
+                {
+                  "call_type": "DELEGATE",
+                  "calldata": [
+                    "0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff",
+                    "0x984e103a8acd6",
+                    "0x0"
+                  ],
+                  "caller_address": "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+                  "calls": [],
+                  "class_hash": "0x2760f25d5a4fb2bdde5f561fd0b44a3dee78c28903577d37d669939d97036a0",
+                  "contract_address": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+                  "entry_point_selector": "0x219209e083275171774dab1df80982e9df2096516f06319c5c6d71ae0a8480c",
+                  "entry_point_type": "EXTERNAL",
+                  "events": [
+                    {
+                      "data": [
+                        "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+                        "0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff",
+                        "0x984e103a8acd6",
+                        "0x0"
+                      ],
+                      "keys": [
+                        "0x134692b230b9e1ffa39098904722134159652b09c5bc41d88d6698779d228ff"
+                      ],
+                      "order": 0
+                    }
+                  ],
+                  "messages": [],
+                  "result": [
+                    "0x1"
+                  ]
+                }
+              ],
+              "class_hash": "0xd0e183745e9dae3e4e78a8ffedcce0903fc4900beace4e0abf192d4c202da3",
+              "contract_address": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+              "entry_point_selector": "0x219209e083275171774dab1df80982e9df2096516f06319c5c6d71ae0a8480c",
+              "entry_point_type": "EXTERNAL",
+              "events": [],
+              "messages": [],
+              "result": [
+                "0x1"
+              ]
+            },
+            ...
+          ],
+          "class_hash": "0x1a736d6ed154502257f02b1ccdf4d9d1089f80811cd6acad48e6b6a9d1f2003",
+          "contract_address": "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+          "entry_point_selector": "0x15d40a3d6ca2ac30f4031e42be28da9b056fef9bb7357ac5e85627ee876e5ad",
+          "entry_point_type": "EXTERNAL",
+          "events": [
+            {
+              "data": [
+                "0x3",
+                "0x1",
+                "0x1",
+                ...
+              ],
+              "keys": [
+                "0x1dcde06aabdbca2f80aa51392b345d7549d7757aa855f7e37f5d335ac8243b1",
+                "0x24cfba646f79dd32c47a61d6de300f2ab1c9e2aff2e92f790c1368cd177d69c"
+              ],
+              "order": 10
+            }
+          ],
+          "messages": [],
+          "result": [
+            "0x3",
+            "0x1",
+            "0x1",
+            ...
+          ]
+        },
+        "state_diff": {
+          "declared_classes": [],
+          "deployed_contracts": [],
+          "deprecated_declared_classes": [],
+          "nonces": [
+            {
+              "contract_address": "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10",
+              "nonce": "0x52"
+            }
+          ],
+          "replaced_classes": [],
+          "storage_diffs": [
+            {
+              "address": "0xfff107e2403123c7df78d91728a7ee5cfd557aec0fa2d2bdc5891c286bbfff",
+              "storage_entries": [
+                {
+                  "key": "0x2bc92130481261ac8ebf05490c8f1799f651a4ebd2d64f0101f2a3f41bb441",
+                  "value": "0x569b13e8164bc8000c0bbcf4887856516643af123c5bc3b01e229e92f9cfd10"
+                },
+                {
+                  "key": "0x180cda4fd6c0599dc8ed498cc36eb9cab3ecad0efb3ccfd59043fbdd692374b",
+                  "value": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7"
+                },
+                ...
+              ]
+            },
+            {
+              "address": "0x1114c7103e12c2b2ecbd3a2472ba9c48ddcbf702b1c242dd570057e26212111",
+              "storage_entries": [
+                {
+                  "key": "0x3fa65d6912e7d8d82b149d0cc034a285d8c33ae49e659642a4fd2e380937b7",
+                  "value": "0x74272944c439"
+                },
+                {
+                  "key": "0x3fa65d6912e7d8d82b149d0cc034a285d8c33ae49e659642a4fd2e380937b8",
+                  "value": "0x648be4d87207"
+                },
+                ...
+              ]
+            },
+            {
+              "address": "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+              "storage_entries": [
+                {
+                  "key": "0x14b36f2f827c4728ecac41e90cf996e64c4b20c345087b6be56bbe680051a1f",
+                  "value": "0x70e0d9aa29d9c159a"
+                },
+                {
+                  "key": "0x367c2ac2e63b88cb4382f26a49c62b1dfecb966e92138c574cfbec611723cce",
+                  "value": "0x11ba205d123d0fb"
+                },
+                ...
+              ]
+            },
+            {
+              "address": "0x68f5c6a61780768455de69077e07e89787839bf8166decfbf92b645209c0fb8",
+              "storage_entries": [
+                {
+                  "key": "0x14b36f2f827c4728ecac41e90cf996e64c4b20c345087b6be56bbe680051a1f",
+                  "value": "0x1860959920"
+                },
+                {
+                  "key": "0x367c2ac2e63b88cb4382f26a49c62b1dfecb966e92138c574cfbec611723cce",
+                  "value": "0x11b0dac6"
+                },
+                ...
+              ]
+            }
+          ]
+        },
+        "type": "INVOKE"
+      }
+    }
+  ]
+}
+```
+
+</TabItem>
+</Tabs>

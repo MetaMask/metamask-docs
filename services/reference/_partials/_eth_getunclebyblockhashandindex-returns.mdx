@@ -1,0 +1,20 @@
+A block object, or null when no block was found. The block object returned will consist of the following keys and their values:
+
+- `number`: The block number. `Null` when the returned block is the pending block.
+- `hash`: 32 bytes. Hash of the block. `Null` when its pending block.
+- `parentHash`: 32 bytes. Hash of the parent block.
+- `nonce`: 8 bytes. Hash of the generated proof-of-work. `Null` when the returned block is the pending block.
+- `sha3Uncles`: 32 bytes. The SHA3 of the uncles data in the block.
+- `logsBloom`: 256 bytes. The Bloom filter for the logs of the block. `Null` when the returned block is the pending block.
+- `transactionsRoot`: 32 bytes. The root of the transaction trie of the block.
+- `stateRoot`: 32 bytes. The root of the final state trie of the block.
+- `receiptsRoot`: 32 bytes. The root of the receipts trie of the block.
+- `miner`: 20 bytes. The address of the beneficiary to whom the mining rewards were given.
+- `difficulty`: The hexadecimal of the difficulty for this block.
+- `totalDifficulty`: The hexadecimal of the total difficulty of the chain until this block.
+- `extraData`: The "extra data" field of this block.
+- `size`: The hexadecimal of the size of this block in bytes.
+- `gasLimit`: Maximum gas allowed in this block.
+- `gasUsed`: Total used gas by all transactions in this block.
+- `timestamp`: The unix timestamp for when the block was collated.
+- `uncles`: (Array). An array of uncle hashes.

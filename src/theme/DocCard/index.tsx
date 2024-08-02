@@ -2,8 +2,8 @@ import React, { type ReactNode } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import {
-  findFirstCategoryLink,
   useDocById,
+  findFirstSidebarItemLink,
 } from "@docusaurus/theme-common/internal";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
@@ -12,7 +12,6 @@ import type { Props } from "@theme/DocCard";
 import cardListItemStyles from "@site/src/components/CardList/CardListItem/styles.module.css";
 
 import styles from "./styles.module.css";
-
 
 import type {
   PropSidebarItemCategory,
@@ -31,13 +30,9 @@ function CardContainer({
   return (
     <Link
       href={href}
-      className={clsx(
-        "card padding--lg",
-        styles.cardContainer,
-        {
-          [cardListItemStyles.flaskOnly]: flaskOnly,
-        },
-      )}
+      className={clsx("card padding--lg", styles.cardContainer, {
+        [cardListItemStyles.flaskOnly]: flaskOnly,
+      })}
     >
       {children}
     </Link>
@@ -65,7 +60,8 @@ function CardLayout({
       {description && (
         <p
           className={clsx("text--truncate", styles.cardDescription)}
-          title={description}>
+          title={description}
+        >
           {description}
         </p>
       )}
@@ -78,7 +74,7 @@ function CardCategory({
 }: {
   item: PropSidebarItemCategory;
 }): JSX.Element | null {
-  const href = findFirstCategoryLink(item);
+  const href = findFirstSidebarItemLink(item);
 
   // Unexpected: categories that don't have a link have been filtered upfront
   if (!href) {
@@ -100,14 +96,14 @@ function CardCategory({
             description:
               "The default description for a category card in the generated index about how many items this category includes",
           },
-          { count: item.items.length },
+          { count: item.items.length }
         )
       }
     />
   );
 }
 
-function CardLink({ item }: {item: PropSidebarItemLink}): JSX.Element {
+function CardLink({ item }: { item: PropSidebarItemLink }): JSX.Element {
   const icon = isInternalUrl(item.href) ? "📄️" : "🔗";
   const doc = useDocById(item.docId ?? undefined);
   return (
@@ -123,11 +119,11 @@ function CardLink({ item }: {item: PropSidebarItemLink}): JSX.Element {
 
 export default function DocCard({ item }: Props): JSX.Element {
   switch (item.type) {
-  case "link":
-    return <CardLink item={item} />;
-  case "category":
-    return <CardCategory item={item} />;
-  default:
-    throw new Error(`unknown item type ${JSON.stringify(item)}`);
+    case "link":
+      return <CardLink item={item} />;
+    case "category":
+      return <CardCategory item={item} />;
+    default:
+      throw new Error(`unknown item type ${JSON.stringify(item)}`);
   }
 }

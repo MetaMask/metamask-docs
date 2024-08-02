@@ -1,0 +1,65 @@
+---
+title: "starknet_getNonce"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Returns the nonce associated with the specified contract address in the specified block.
+
+## Parameters
+
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+- `contract_address`: (string) [*Required*] The address of the request contract.
+
+## Returns
+
+The last nonce used for the requested contract.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getNonce",
+    "params": {
+      "block_id": {
+        "block_number": 470207
+      },
+      "contract_address": "0x0555ec3ba8aea37915c4cf850b4f9d33e4a0a1caa0ad3953d725860e38fa6e17"
+    },
+  "id": 0
+}'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": "0x1c",
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>

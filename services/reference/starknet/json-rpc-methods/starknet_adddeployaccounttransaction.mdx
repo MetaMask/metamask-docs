@@ -1,0 +1,94 @@
+---
+title: "starknet_addDeployAccountTransaction"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Submits a new deploy account transaction.
+
+## Parameters
+
+`deploy_account_transaction`: [*Required*] A
+[deploy account transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/#deploy_account_transaction)
+object to deploy a new account contract on Starknet.
+
+## Returns
+
+The result of the transaction submission, including:
+
+- `transaction_hash`: The hash of the deploy account transaction.
+- `contract_address`: The address of the new contract.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_addDeployAccountTransaction",
+    "params": {
+      "deploy_account_transaction": {
+        "type": "DEPLOY_ACCOUNT",
+        "version": "0x3",
+        "signature": [
+          "3557065757165699682249469970267166698995647077461960906176449260016084767701",
+          "3202126414680946801789588986259466145787792017299869598314522555275920413944"
+        ],
+        "nonce": "0x7",
+        "contract_address_salt": "0x23371b227eaecd8e8920cd429d2cd0f3fee6abaacca08d3ab82a7cdd",
+        "class_hash": "0x23371b227eaecd8e8920cd429d2cd0f3fee6abaacca08d3ab82a7cdd",
+        "constructor_calldata": [
+          "0x1",
+          "0x677bb1cdc050e8d63855e8743ab6e09179138def390676cc03c484daf112ba1",
+          "0x362398bec32bc0ebb411203221a35a0301193a96f317ebe5e40be9f60d15320",
+          "0x0",
+          "0x1",
+          "0x1",
+          "0x2b",
+          "0x0"
+        ],
+        "resource_bounds": {
+          "l1_gas": "0x28ed6103d0000",
+          "l2_gas": "0x28ed6103d0000",
+        },
+        "tip": "0x0",
+        "paymaster_data": [],
+        "nonce_data_availability_mode": "L1",
+        "fee_data_availability_mode": "L1"
+      }
+    },
+    "id": 1
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "transaction_hash": "0x1ce0d76c0c085306fd32679b75f9541fab71851da8d3e3898a691b49ed8175c",
+    "contract_address": "0x03b554093fb0a7460913be2d5c011cb5ac4333dfcfe6125851bcd3f926a3b558"
+  },
+  "id": 1
+}
+```
+
+</TabItem>
+</Tabs>

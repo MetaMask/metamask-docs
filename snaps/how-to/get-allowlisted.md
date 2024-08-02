@@ -1,26 +1,28 @@
 ---
 description: Submit your Snap for allowlisting on the MetaMask extension.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 # Get allowlisted
 
-Once you have built your Snap, tested it, and published it to npm, you can make it available to
-MetaMask users.
+Once you have built your Snap, tested it, and published it to npm, you can make it available to MetaMask users.
 
-As part of the MetaMask Snaps Open Beta launch, individual Snaps must be put on an allowlist before users can install them.
-This means that at this time, only selected, reviewed Snaps can be installed. 
+If your Snap only uses [open permissions](#open-permissions), anyone can install it on the MetaMask extension.
+However, third-party Snaps that use
+[protected permissions](#open-permissions)
+must be put on an allowlist before users can install them.
+This means that at this time, for Snaps that use protected permissions, only those that are reviewed by MetaMask can be installed.
 In the future, this system will be opened up.
 
 :::caution Important
-By including a Snap on the allowlist, Consensys is not endorsing, recommending, or guaranteeing the 
-safety of a Snap for your use or use for any reason. 
+By including a Snap on the allowlist, Consensys is not endorsing, recommending, or guaranteeing the
+safety of a Snap for your use or use for any reason.
 Always do your own research before installing a Snap.
 :::
 
 ## Prerequisites
 
-To be added to the allowlist, a Snap must: 
+To be added to the allowlist, a Snap must:
 
 - Have publicly available source code.
   You don't need to publish your code with an open source license, but users should be able to read
@@ -29,21 +31,21 @@ To be added to the allowlist, a Snap must:
 - Not impair our compliance with laws or regulations.
 
 Furthermore, if your Snap uses any of the following API methods related to key management, you must provide
-  evidence of a third-party audit from an approved auditor:
+evidence of a third-party audit from an approved auditor:
 
-  - [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
-  - [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
-  - [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy)
-  - [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
-  - [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
+- [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
+- [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
+- [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy)
+- [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
+- [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
 
-The audit must cover the Snap source code that is to run within the Snaps system, and any modules 
-used for key management. 
-You must provide the commit that was audited and the commit that has any fixes documented in the 
+The audit must cover the Snap source code that is to run within the Snaps system, and any modules
+used for key management.
+You must provide the commit that was audited and the commit that has any fixes documented in the
 audit report.
 
 :::info
-A list of approved third-party auditors and details about the audit process are available on the 
+A list of approved third-party auditors and details about the audit process are available on the
 [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
 :::
 
@@ -109,39 +111,59 @@ The form requests information about your Snap, including the following:
 
 ### 2. Allowlist review
 
-Your Snap will be reviewed by the MetaMask Snaps team to ensure it is functional and well-designed. 
+Your Snap will be reviewed by the MetaMask Snaps team to ensure it is functional and well-designed.
 If the Snap requires an audit, the team will review the audit report to ensure that all
-vulnerabilities with medium or higher risk have been addressed. 
+vulnerabilities with medium or higher risk have been addressed.
 All Snaps require at least two approvals to be allowlisted.
 
 ### 3. Directory listing
 
-Once your Snap is on the allowlist, it will appear in the [MetaMask Snaps Directory](https://snaps.metamask.io). 
-You can direct users to the directory to find and install your Snap. 
+Once your Snap is on the allowlist, it will appear in the [MetaMask Snaps Directory](https://snaps.metamask.io).
+You can direct users to the directory to find and install your Snap.
 
 ### 4. Distribute your Snap
 
 You can deploy a companion dapp where users can learn about your Snap and install it, or you can
-integrate your Snap with your existing dapp. 
+integrate your Snap with your existing dapp.
 
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
 [connect to your Snap](connect-to-a-snap.md).
 
 :::note
-While testing your Snap, you might have designed your dapp to require MetaMask Flask. 
-Once your Snap is allowlisted, you should update your dapp to support any flavor of MetaMask, 
-and show the orange MetaMask logo instead of the purple Flask logo. 
+While testing your Snap, you might have designed your dapp to require MetaMask Flask.
+Once your Snap is allowlisted, you should update your dapp to support any flavor of MetaMask,
+and show the orange MetaMask logo instead of the purple Flask logo.
 :::
 
-### 5. Update your Snap 
+### 5. Update your Snap
 
 The allowlist uses strict versioning for all Snaps.
 After publishing a new version of your Snap to npm, you must re-submit it for allowlisting by
 filling out the
 [MetaMask Snaps Directory Information Update form](https://go.metamask.io/snaps-directory-update-request).
-Users will not be able to install a new version until it is allowlisted. 
+Users will not be able to install a new version until it is allowlisted.
 
 You can also update any information about your Snap using the form.
 For fields that you don't need to update, you can leave them blank or enter "N/A."
 When providing the new version to be allowlisted, you should also note whether previous versions of
-your Snap should be removed from the allowlist (effectively, replaced with the new version). 
+your Snap should be removed from the allowlist (effectively, replaced with the new version).
+
+## Open permissions
+
+The following is a list of permissions that do not require allowlisting:
+
+- [`endowment:cronjob`](../reference/permissions.md#endowmentcronjob)
+- [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider)
+- [`endowment:lifecycle-hooks`](../reference/permissions.md#endowmentlifecycle-hooks)
+- [`endowment:page-home`](../reference/permissions.md#endowmentpage-home)
+- [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
+- [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
+- [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
+- [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale)
+- [`snap_manageState`](../reference/snaps-api.md#snap_managestate)
+- [`snap_notify`](../reference/snaps-api.md#snap_notify)
+
+If your Snap only uses permissions from this list,
+it can be installed in the MetaMask extension without inclusion on the allowlist.
+
+Any permissions not on this list are _protected permissions_ and require allowlisting.

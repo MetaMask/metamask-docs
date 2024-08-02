@@ -1,0 +1,121 @@
+.root {
+  --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
+}
+
+.primaryBtn {
+  background: #1098fc;
+  color: #141618;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 0;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  transition-property: "box-shadow", "background-color";
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+.primaryBtn:hover {
+  text-decoration: none;
+  color: #141618;
+  background-color: #26a2fc;
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
+}
+
+.primaryBtn:disabled {
+  cursor: not-allowed;
+  text-decoration: none;
+  color: #141618;
+  background-color: #0376c9;
+  box-shadow: none;
+}
+
+.secondaryBtn {
+  background: none;
+  border-radius: 999px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  border: 1px solid rgba(3, 118, 201, 1);
+  color: rgba(3, 118, 201, 1);
+}
+
+.secondaryBtn:hover {
+  text-decoration: none;
+  color: #141618;
+  background-color: #26a2fc;
+  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
+}
+
+.secondaryBtn:disabled {
+  cursor: not-allowed;
+  text-decoration: none;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.linkBtn {
+  background: none;
+  border: 0;
+  color: #1098fc;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+}
+
+.stickyCol {
+  position: sticky;
+  top: 84px;
+  left: 0;
+}
+
+.rowWrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30px 0 0;
+}
+
+.colLeft {
+  position: relative;
+  width: calc(100% - 420px);
+  border-right: 1px solid #444950;
+  overflow: hidden;
+}
+
+.colContentWrap {
+  height: calc(100vh - 84px);
+  padding: 0 30px;
+  overflow-y: auto;
+}
+
+.colRight {
+  width: 420px;
+  padding-left: 23px;
+}
+
+@media (width <= 1200px) {
+  .colLeft {
+    width: 100%;
+    padding: 0;
+    border-right: 0;
+  }
+  .colRight {
+    width: 100%;
+    padding: 0;
+  }
+  .colContentWrap {
+    height: auto;
+    padding: 0;
+  }
+  .rowWrap {
+    padding: 0;
+  }
+}

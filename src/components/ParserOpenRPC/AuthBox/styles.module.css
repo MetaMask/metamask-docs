@@ -1,0 +1,53 @@
+.msgWrapper {
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #848c96;
+  margin-bottom: 24px;
+}
+
+.msgHeading {
+  display: block;
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.msgText {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.mmBtnRow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mmBtnCol {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.mmBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 30px 16px 20px;
+  width: 100%;
+  background: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  border: 1px solid rgba(3, 118, 201, 1);
+  color: rgba(3, 118, 201, 1);
+}
+
+.mmBtnCheck {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  font-size: 16px;
+}

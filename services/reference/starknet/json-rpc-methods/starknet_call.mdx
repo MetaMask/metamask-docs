@@ -1,0 +1,74 @@
+---
+title: "starknet_call"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Calls the specified contract function at the specified block, and returns the value of the function,
+without creating a Starknet transaction.
+This method does not change the network state.
+
+## Parameters
+
+- `request`: [*Required*] The function call object containing:
+  - `contract_address`: (string) [*Required*] Address the transaction is sent from.
+  - `entry_point_selector`: (string) [*Required*] Smart contract entry point selector.
+  - `calldata`: (array of strings)[*Required*] The parameters passed to the function.
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+
+## Returns
+
+The function's return value.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_call",
+    "params": {
+      "request": {
+        "contract_address": "0x049E0cCb70e1F1684F43116e9E42e60D0f64d3D254Be8D8A1143dba43dEad733",
+        "calldata": ["0xbfc2ea1a458d7cac752a4a688dbb8e0cff399e1b"],
+        "entry_point_selector": "0x12ead94ae9d3f9d2bdb6b847cf255f1f398193a1f88884a0ae8e18f24a037b6"
+      },
+      "block_id": {
+        "block_number": 470207
+      }
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": [],
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>

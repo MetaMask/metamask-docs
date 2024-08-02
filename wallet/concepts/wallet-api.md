@@ -13,7 +13,7 @@ The API methods are documented in the following references:
 
 - [Ethereum provider API reference](../reference/provider-api.md)
 - [JSON-RPC API reference](/wallet/reference/json-rpc-api)
-:::
+  :::
 
 ## Ethereum provider API
 
@@ -63,37 +63,42 @@ Make sure to handle errors for every call to
 
 The RPC methods are divided into the following:
 
-- [Restricted methods](#restricted-methods) -  Require user consent for actions that impact assets or data (for example, initiating a transaction).
+- [Restricted methods](#restricted-methods) - Require user consent for actions that impact assets or data (for example, initiating a transaction).
 - [Unrestricted methods](#unrestricted-methods) - Allow dapps to perform basic actions without permission (for example, retrieving a public address).
 
 ### Restricted methods
 
-MetaMask implements permissions based on [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) to enhance security for when users interact with dapps. 
-This requires that dapps obtain user consent before accessing certain features. 
+MetaMask implements permissions based on [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) to enhance security for when users interact with dapps.
+This requires that dapps obtain user consent before accessing certain features.
 Under the hood, permissions are plain, JSON-compatible objects, with fields that are mostly used
 internally by MetaMask.
 
-Restricted methods are methods that cannot be called unless you have permission to do so using [`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or [`wallet_requestSnaps`](/wallet/reference/wallet_requestSnaps).
+Restricted methods are methods that cannot be called unless you have permission to do so using
+[`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or
+[`wallet_requestSnaps`](/snaps/reference/wallet-api-for-snaps/#wallet_requestsnaps).
 
 The following methods are restricted:
 
-- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`. 
-Granting permission for `eth_accounts` also grants permissions for the following methods:
+- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`.
+  Granting permission for `eth_accounts` also grants permissions for the following methods:
+
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
+
   - [`personal_sign`](/wallet/reference/personal_sign)
+
   - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
 
-:::caution important
-To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts), which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
-See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
-:::
+  :::caution important
+  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
+  which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
+  See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
+  :::
 
-- [`wallet_snap`](/wallet/reference/wallet_snap) - Gaining permission requires calling `wallet_requestSnap`.
-- [`wallet_invokeSnap`](/wallet/reference/wallet_invokeSnap) - Gaining permission requires calling `wallet_requestSnap`.
-  
-:::info note
-For more information on using `wallet_snap` and `wallet_invokeSnap`, see the [how to request Snap permissions from a dapp](/snaps/how-to/request-permissions/#request-permissions-from-a-dapp).
-:::
+- [`wallet_snap`](/snaps/reference/wallet-api-for-snaps/#wallet_snap) - Gaining permission requires
+  calling `wallet_requestSnap`.
+
+- [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) - Gaining
+  permission requires calling `wallet_requestSnap`.
 
 ### Unrestricted methods
 

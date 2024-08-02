@@ -1,3 +1,8 @@
 /build
+.eslintrc.js
+./node_modules/*
 /.yarn
+*.md
+*.mdx
 /static/js/feedback-script.js
+LICENSE

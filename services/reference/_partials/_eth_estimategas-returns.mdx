@@ -1,0 +1,15 @@
+A hexadecimal of the estimate of the gas for the given transaction.
+
+If this call causes the EVM to execute a `REVERT` operation, an error response of the following form is returned, with the revert reason pre-decoded as a string:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": 3,
+    "message": "execution reverted: Dai/insufficient-balance",
+    "data": "0x08c379a0000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000184461692f696e73756666696369656e742d62616c616e63650000000000000000"
+  }
+}
+```

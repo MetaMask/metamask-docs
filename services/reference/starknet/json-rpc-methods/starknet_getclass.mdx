@@ -1,0 +1,105 @@
+---
+title: "starknet_getClass"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Returns the contract class definition of the specified contract class hash in the specified block.
+
+## Parameters
+
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+- `class_hash`: (string) [*Required*] The
+  [class hash](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/class-hash/)
+  of the requested contract class.
+
+## Returns
+
+A [contract class](https://docs.starknet.io/documentation/architecture_and_concepts/Smart_Contracts/contract-classes/)
+object containing:
+
+- `abi`: The class ABI, as supplied by the user declaring the class.
+- `contract_class_version`: The version of the contract class object.
+- `entry_points_by_type`: Entry points by type.
+- `sierra_program`: The list of Sierra instructions of which the program consists.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getClass",
+    "params": {
+      "block_id": {
+        "block_hash": "0x041b10c45dc3f39372f7b9409261cac9d880c5d75a5bb077d028db20b1bd76c4"
+      },
+      "class_hash": "0x515dd668a1798214e7ca9ec90c52e267229b8104fb296a90f20b6f70baaef53"
+    },
+    "id": 0
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 0,
+  "result": {
+    "abi": "[{\"type\": \"impl\", \"name\": \"ISTARKSImpl\", \"interface_name\": \"ins::ins::ISTARKS\"}, {\"type\": \"interface\", \"name\": \"ins::ins::ISTARKS\", \"items\": [{\"type\": \"function\", \"name\": \"get_total_supply\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"get_max_supply\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"balance_of\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"account\", \"type\": \"core::starknet::contract_address::ContractAddress\"}], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"allowance\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"owner\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"spender\", \"type\": \"core::starknet::contract_address::ContractAddress\"}], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"get_holders\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"transfer\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"recipient\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"amount\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"transfer_from\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"sender\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"recipient\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"amount\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"approve\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"spender\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"amount\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"increase_allowance\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"spender\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"added_value\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"decrease_allowance\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"spender\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"subtracted_value\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"Inscribe\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"Deploy\", \"inputs\": [{\"name\": \"tick\", \"type\": \"core::felt252\"}, {\"name\": \"maxSupply\", \"type\": \"core::integer::u128\"}, {\"name\": \"maxPerMint\", \"type\": \"core::integer::u128\"}], \"outputs\": [], \"state_mutability\": \"external\"}, {\"type\": \"function\", \"name\": \"get_tick_counter\", \"inputs\": [], \"outputs\": [{\"type\": \"core::integer::u128\"}], \"state_mutability\": \"view\"}, {\"type\": \"function\", \"name\": \"get_ticks\", \"inputs\": [], \"outputs\": [{\"type\": \"core::array::Array::\u003ccore::integer::u128\u003e\"}], \"state_mutability\": \"view\"}]}, {\"type\": \"constructor\", \"name\": \"constructor\", \"inputs\": [{\"name\": \"_admin\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"_ff\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"_eth\", \"type\": \"core::starknet::contract_address::ContractAddress\"}, {\"name\": \"_firstTick\", \"type\": \"core::felt252\"}, {\"name\": \"_firstTickSupply\", \"type\": \"core::integer::u128\"}, {\"name\": \"_firstTickPerMint\", \"type\": \"core::integer::u128\"}]}, {\"type\": \"event\", \"name\": \"ins::ins::STARKS::Transfer\", \"kind\": \"struct\", \"members\": [{\"name\": \"tick\", \"type\": \"core::felt252\", \"kind\": \"data\"}, {\"name\": \"from\", \"type\": \"core::starknet::contract_address::ContractAddress\", \"kind\": \"data\"}, {\"name\": \"to\", \"type\": \"core::starknet::contract_address::ContractAddress\", \"kind\": \"data\"}, {\"name\": \"value\", \"type\": \"core::integer::u128\", \"kind\": \"data\"}]}, {\"type\": \"event\", \"name\": \"ins::ins::STARKS::Approval\", \"kind\": \"struct\", \"members\": [{\"name\": \"tick\", \"type\": \"core::felt252\", \"kind\": \"data\"}, {\"name\": \"owner\", \"type\": \"core::starknet::contract_address::ContractAddress\", \"kind\": \"data\"}, {\"name\": \"spender\", \"type\": \"core::starknet::contract_address::ContractAddress\", \"kind\": \"data\"}, {\"name\": \"value\", \"type\": \"core::integer::u128\", \"kind\": \"data\"}]}, {\"type\": \"event\", \"name\": \"ins::ins::STARKS::Deploy\", \"kind\": \"struct\", \"members\": [{\"name\": \"tick\", \"type\": \"core::felt252\", \"kind\": \"data\"}, {\"name\": \"maxSupply\", \"type\": \"core::integer::u128\", \"kind\": \"data\"}, {\"name\": \"maxPerMint\", \"type\": \"core::integer::u128\", \"kind\": \"data\"}]}, {\"type\": \"event\", \"name\": \"ins::ins::STARKS::Event\", \"kind\": \"enum\", \"variants\": [{\"name\": \"Transfer\", \"type\": \"ins::ins::STARKS::Transfer\", \"kind\": \"nested\"}, {\"name\": \"Approval\", \"type\": \"ins::ins::STARKS::Approval\", \"kind\": \"nested\"}, {\"name\": \"Deploy\", \"type\": \"ins::ins::STARKS::Deploy\", \"kind\": \"nested\"}]}]",
+    "contract_class_version": "0.1.0",
+    "entry_points_by_type": {
+      "CONSTRUCTOR": [
+        {
+          "function_idx": 14,
+          "selector": "0x28ffe4ff0f226a9107253e17a904099aa4f63a02a5621de0576e5aa71bc5194"
+        }
+      ],
+      "EXTERNAL": [
+        {
+          "function_idx": 11,
+          "selector": "0x14dfa38c36b389189b8be0b1d3f9434ffcca49bf1a88f3658579d23d16368f"
+        },
+        {
+          "function_idx": 10,
+          "selector": "0x1fd12fd4580400368d8953eca1bf472ee233e7e06245d1ef8c176ff12bd3c4"
+        },
+        ...
+      ],
+      "L1_HANDLER": []
+    },
+    "sierra_program": [
+      "0x1",
+      "0x3",
+      "0x0",
+      "0x361",
+      "0x800000000000000700000000000000000000000000000000",
+      "0x537472756374",
+      ...
+    ]
+  }
+}
+```
+
+</TabItem>
+</Tabs>

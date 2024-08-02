@@ -1,26 +1,28 @@
 ---
 description: Display and update interactive user interfaces.
 sidebar_position: 1
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Interactive UI
 
-:::flaskOnly
-:::
-
 You can display interactive user interface (UI) components.
 Interactive UI is an extension of [custom UI](index.md).
-It allows interfaces returned from [`snap_dialog`](../../reference/snaps-api.md#snap_dialog),
-[`onTransaction`](../../reference/entry-points.md#ontransaction), and
-[`onHomePage`](../../reference/entry-points.md#onhomepage) to respond to user input.
+It allows interfaces returned from [dialogs](dialogs.md), [home pages](home-pages.md), and
+[transaction insights](../../reference/entry-points.md#ontransaction) to respond to user input.
 
 The following interactive UI components are available:
 
 - [`button`](index.md#button)
 - [`form`](index.md#form)
 - [`input`](index.md#input)
+
+The following interactive UI JSX components are available:
+
+- [`Button`](with-jsx.md#button)
+- [`Dropdown`](with-jsx.md#dropdown)
+- [`Field`](with-jsx.md#field)
+- [`Form`](with-jsx.md#form)
+- [`Input`](with-jsx.md#input)
 
 ## Create an interactive interface
 
@@ -48,7 +50,7 @@ asynchronous process.
 The following is an example flow:
 
 1. The user activates an interactive interface to send Bitcoin funds to an address.
-    The initial interface contains an address input, an amount input, and a **Send funds** button.
+   The initial interface contains an address input, an amount input, and a **Send funds** button.
 2. The user fills the fields, and selects the **Send funds** button.
 3. `onUserInput` is called, and the logic detects that the **Send funds** button was selected.
 4. `snap_updateInterface` is called, replacing the **Send funds** button with a [`spinner`](index.md#spinner).

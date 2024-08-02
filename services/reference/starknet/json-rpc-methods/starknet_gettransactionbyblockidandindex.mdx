@@ -1,0 +1,90 @@
+---
+title: "starknet_getTransactionByBlockIdAndIndex"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+Returns the details of the specified transaction.
+
+## Parameters
+
+- `block_id`: [*Required*] The block parameter object containing one of the following:
+  - `block_hash`: (string) Block hash.
+  - `block_number`: (integer) Decimal block number.
+  - One of the string tags `latest` or `pending`.
+- `index`: (integer) [*Required*] The index in the block to search for the transaction.
+
+## Returns
+
+A [Starknet transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/)
+object.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "starknet_getTransactionByBlockIdAndIndex",
+    "params": {
+      "block_id": {
+        "block_hash": "0x041b10c45dc3f39372f7b9409261cac9d880c5d75a5bb077d028db20b1bd76c4"
+      },
+      "index": 1
+    },
+    "id": 1
+  }'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "type": "INVOKE",
+    "transaction_hash": "0x5fb5b63f0226ef426c81168d0235269398b63aa145ca6a3c47294caa691cfdc",
+    "max_fee": "0x1ff973cafa7fff",
+    "version": "0x0",
+    "signature": [
+      "0x5a1c0af2b96c461a9753e383107e2bba1849cdf6029ffaa2b97533ada03789f",
+      "0x7261a61b45dcfe48d85fb6a687ed6a888816ba601871679dd32dcb99652de84"
+    ],
+    "nonce": "0x0",
+    "contract_address": "0x7c57808b9cea7130c44aab2f8ca6147b04408943b48c6d8c3c83eb8cfdd8c0b",
+    "entry_point_selector": "0x15d40a3d6ca2ac30f4031e42be28da9b056fef9bb7357ac5e85627ee876e5ad",
+    "calldata": [
+      "0x1",
+      "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+      "0x83afd3f4caedc6eebf44246fe54e38c95e3179a5ec9ea81740eca5b482d12e",
+      "0x0",
+      "0x3",
+      "0x3",
+      "0x20b55314a52c19b78626a26d48ffd4a9b3e21b45cf3bc7bdf01ea52c4088860",
+      "0x20f7338adef002",
+      "0x0",
+      "0x1457"
+    ]
+  },
+  "id": 1
+}
+```
+
+</TabItem>
+</Tabs>

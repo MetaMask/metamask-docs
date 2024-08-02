@@ -1,0 +1,51 @@
+.errWrapper {
+  border: 1px solid #848c96;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.errRow {
+  display: flex;
+  border-bottom: 1px solid #848c96;
+}
+
+.errRowHeading {
+  display: flex;
+  border-bottom: 1px solid #848c96;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.errRowHeadingDarkView {
+  background-color: #24272a;
+}
+
+.errRowHeadingLightView {
+  background-color: #f2f4f6;
+}
+
+.secondaryHeading {
+  font-size: 24px;
+}
+
+.errRow:last-child {
+  display: flex;
+  border-bottom: 0;
+}
+
+.errColCode {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  min-height: 48px;
+  border-right: 1px solid #848c96;
+}
+
+.errColMsg {
+  display: inline-flex;
+  align-items: center;
+  width: calc(100% - 80px);
+  padding: 12px;
+  min-height: 48px;
+}

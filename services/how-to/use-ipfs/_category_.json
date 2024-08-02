@@ -1,0 +1,11 @@
+{
+  "position": 6,
+  "label": "Use IPFS",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "services/how-to/",
+    "description": "This section has information on using the Interplanetary File System (IPFS)."
+  }
+}

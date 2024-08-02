@@ -1,6 +1,6 @@
 ---
 description: See the Keyring API reference.
-sidebar_position: 6
+sidebar_position: 7
 tags:
   - Keyring API
 ---
@@ -18,8 +18,9 @@ The Keyring API consists of:
   account management Snaps can choose to implement to support dapp requests from custom accounts.
 
 :::tip See also
+
 - [Create an account management Snap](../../features/custom-evm-accounts/create-account-snap.md)
   - [Account management Snap security guidelines](../../features/custom-evm-accounts/security.md)
 - [Create an account management companion dapp](../../features/custom-evm-accounts/create-companion-dapp.md)
 - [Custom EVM accounts](../../features/custom-evm-accounts/index.md)
-:::
+  :::

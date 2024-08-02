@@ -1,0 +1,6 @@
+Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
+
+:::warning Gas parameter is capped
+
+To prevent abuse of the API, the `gas` parameter in this `eth_estimateGas` method and in [`eth_call`](../ethereum/json-rpc-methods/eth_call.mdx) is capped at 10x (1000%) the current block gas limit. You can recreate this behavior in your local test environment (besu, geth, or other client) via the [`rpc.gascap`](https://geth.ethereum.org/docs/fundamentals/command-line-options#commands) command-line option.
+:::

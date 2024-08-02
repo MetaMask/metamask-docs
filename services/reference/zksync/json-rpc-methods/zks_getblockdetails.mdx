@@ -1,0 +1,97 @@
+---
+title: "zks_getBlockDetails"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+Returns additional ZKsync-specific information about the L2 block.
+
+## Parameters
+
+- `block`: (string) [_Required_] The number of the block.
+
+## Returns
+
+Object containing the details of the L2 block:
+
+- `baseSystemContractsHashes`: An object containing hashes of the base system contracts used in the transaction:
+    - `bootloader`: The hash of the bootloader contract.
+    - `default_aa`: The hash of the default account contract.
+- `commitTxHash`: The hash of the transaction committed to the network.
+- `committedAt`: The timestamp when the transaction was committed to the network.
+- `executeTxHash`: The hash of the transaction executed on the network.
+- `executedAt`: The timestamp when the transaction was executed on the network.
+- `l1BatchNumber`: The batch number of the transaction on the L1 (Ethereum) network.
+- `l1GasPrice`: The gas price used for the transaction on the L1 network.
+- `l1TxCount`: The number of transactions related to this batch on the L1 network.
+- `l2FairGasPrice`: The fair gas price used for the transaction on the L2 (ZKsync) network.
+- `l2TxCount`: The total number of transactions on the L2 network.
+- `number`: The transaction number.
+- `operatorAddress`: The address of the operator who executed the transaction.
+- `proveTxHash`: The hash of the proof transaction on the L1 network.
+- `provenAt`: The timestamp when the proof transaction was done on the L1 network.
+- `rootHash`: The root hash representing the state of the network after the transaction.
+- `status`: The status of the transaction.
+- `timestamp`: The timestamp of the transaction.
+
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="cURL">
+
+  ```bash
+  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBlockDetails", "params": [ 140599 ]}'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBlockDetails", "params": [ 140599 ]}'
+```
+
+  </TabItem>
+</Tabs>
+
+## Response
+
+<Tabs>
+  <TabItem value="JSON">
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "baseSystemContractsHashes": {
+        "bootloader": "0x010007793a328ef16cc7086708f7f3292ff9b5eed9e7e539c184228f461bf4ef",
+        "default_aa": "0x0100067d861e2f5717a12c3e869cfb657793b86bbb0caa05cc1421f16c5217bc"
+      },
+      "commitTxHash": "0xd045e3698f018cb233c3817eb53a41a4c5b28784ffe659da246aa33bda34350c",
+      "committedAt": "2023-03-26T07:21:21.046817Z",
+      "executeTxHash": "0xbb66aa75f437bb4255cf751badfc6b142e8d4d3a4e531c7b2e737a22870ff19e",
+      "executedAt": "2023-03-27T07:44:52.187764Z",
+      "l1BatchNumber": 1617,
+      "l1GasPrice": 20690385511,
+      "l1TxCount": 0,
+      "l2FairGasPrice": 250000000,
+      "l2TxCount": 20,
+      "number": 140599,
+      "operatorAddress": "0xfeee860e7aae671124e9a4e61139f3a5085dfeee",
+      "proveTxHash": "0x1591e9b16ff6eb029cc865614094b2e6dd872c8be40b15cc56164941ed723a1a",
+      "provenAt": "2023-03-26T19:48:35.200565Z",
+      "rootHash": "0xf1adac176fc939313eea4b72055db0622a10bbd9b7a83097286e84e471d2e7df",
+      "status": "verified",
+      "timestamp": 1679815038
+    },
+    "id": 1
+  }
+  ```
+  </TabItem>
+</Tabs>

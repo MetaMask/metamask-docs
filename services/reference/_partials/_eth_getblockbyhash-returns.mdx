@@ -1,0 +1,21 @@
+A block object matching the hash in the request, or null when no block was found. The matched block contains the following keys and their values:
+
+- `difficulty`: A hexadecimal of the difficulty for this block.
+- `extraData`: The "extra data" field of this block.
+- `gasLimit`: Maximum gas allowed in this block.
+- `gasUsed`: Total used gas by all transactions in this block.
+- `hash`: 32 bytes. The hash of the block. Null when the returned block is the pending block.
+- `logsBloom`: 256 bytes. The bloom filter for the logs of the block. Null when the returned block is the pending block.
+- `miner`: 20 bytes. The address of the beneficiary to whom the mining rewards were given.
+- `nonce`: 8 bytes. The hash of the generated proof-of-work. Null when the returned block is the pending block.
+- `number`: The block number. Null when the returned block is the pending block.
+- `parentHash`: 32 bytes. The hash of the parent block.
+- `receiptsRoot`: 32 bytes. The root of the receipts trie of the block.
+- `sha3Uncles`: 32 bytes. The SHA3 of the uncles data in the block.
+- `size`: A hexadecimal of the size of this block in bytes.
+- `stateRoot`: 32 bytes. The root of the final state trie of the block.
+- `timestamp`: Unix timestamp for when the block was collated.
+- `totalDifficulty`: A hexadecimal of the total difficulty of the chain until this block.
+- `transactions`: [Array] An array of transaction objects, or 32 bytes transaction hashes depending on the last given parameter.
+- `transactionsRoot`: 32 bytes. The root of the transaction trie of the block.
+- `uncles`: [Array] An Array of uncle hashes.
