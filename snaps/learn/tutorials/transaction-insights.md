@@ -61,7 +61,7 @@ You can resolve the issue by running:
 ```bash
 yarn run allow-scripts auto
 ``` 
- </div>
+  </div>
 </details>
 
 ### 2. (Optional) Customize your Snap's UX
@@ -70,7 +70,7 @@ This Snap is generated from a TypeScript template Snap. We recommend customizing
 Snap to improve its UX, but this is optional for testing. If you don't wish to customize your Snap, 
 skip to [Step 3](#3-enable-transaction-insights-and-the-ethereum-provider).
 
- #### 2.1. Provide an icon 
+#### 2.1. Provide an icon 
 
 [Optimize your metadata](../best-practices/design-guidelines.md#optimize-your-metadata) and display an 
 icon for your Snap in MetaMask.
@@ -89,9 +89,8 @@ into that `ìmages` folder.
   <summary>Icon attribution</summary>
   <div>
 This is a free icon, "Gas" by Mello from the [Noun Project](https://thenounproject.com/browse/icons/term/gas/).
- </div>
+  </div>
 </details>
-
 
 Your file structure should look like this:
 
@@ -127,8 +126,9 @@ the value `"images/gas.svg"` to point to your new icon:
     "filePath": "dist/bundle.js",
     "iconPath": "images/gas.svg",
     "packageName": "snap",
-    ...
+    "registry": "https://registry.npmjs.org/"
   }
+}
 ```
 
 Open `packages/snap/package.json` in a text editor. Edit the `files` array and reference the 
@@ -138,42 +138,45 @@ Open `packages/snap/package.json` in a text editor. Edit the `files` array and r
 "files": [
   "dist/",
   "images/",
-  ...
+  "snap.manifest.json"
 ],
 ```
 
 #### 2.2. Update your Snap's name
 
-Update your Snap's name in MetaMask.
+[Optimize your metadata](../best-practices/design-guidelines.md#optimize-your-metadata) and update
+your Snap's name in MetaMask.
 MetaMask uses the `proposedName` of the Snap, currently "TypeScript Example" in the template.
 
 Open `packages/snap/snap.manifest.json` in a text editor.
-Edit the `"proposedName"` property within the metadata to provide a functional name such as "Transaction insights":
+Edit the `"proposedName"` property within the metadata to provide a functional name such as "Gas Percentage Calculator":
 
 ```json title="snap.manifest.json"
 {
   "version": "0.1.0",
   "description": "An example Snap written in TypeScript.",
-  "proposedName": "Transaction insights",
+  "proposedName": "Gas Percentage Calculator",
   ...
-  },
+}
 ```
 
 #### 2.3. Disable the non-functional button
 
-Open `packages/site/src/index.tsx` in a text editor.
-Disable the `SendHelloButton` by resetting `disabled={!installedSnap}` to prevent a user triggering errors by using it:
+Open `packages/site/src/pages/index.tsx` in a text editor.
+The template comes with a button, `SendHelloButton`, that is non-functional for this example.
+To prevent a user triggering errors, disable `SendHelloButton` by updating `disabled={!installedSnap}` as follows:
 
 ```typescript title="index.tsx"
-          button: (
-              <SendHelloButton
-                onClick={handleSendHelloClick}
-                disabled={true}
-              />
-            ),
+button: (
+  <SendHelloButton
+    onClick={handleSendHelloClick}
+    disabled={true}
+  />
+),
 ````
 
-These three updates are the minimum required to ensure that each user interaction with your Snap is well informed, however, your Snap will function without these tweaks.
+These three updates are the minimum required to ensure that each user interaction with your Snap is well-informed.
+However, your Snap will function without these tweaks.
 
 ### 3. Enable transaction insights and the Ethereum provider
 
@@ -309,28 +312,21 @@ the `endowment:ethereum-provider` permission, your Snap is granted access to the
 
 Complete the following steps to build and test your Snap:
 
-#### 5.1. Increment version
+#### 5.1. Build your Snap
 
-This is optional for testing purposes. Open `package.json` in the root directory of the project, and increment 
-the `"version"` (if the `"version"` is `0.1.0`, increase it to `0.2.0`).
+From the command line, run `yarn start`.
+The following displays:
 
-#### 5.2. Build your Snap
+```bash
+You can now view site in the browser.
 
-From the command line, run `yarn start` in the root of your project. This starts two development 
-servers: one for watching and compiling the Snap, and another for the React site.
-The Snap bundle is served from `localhost:8080`, and the site is served from `localhost:8000`.
-
-You should get a message that includes:
-
-   ```bash
-   You can now view site in the browser.
-
-     http://localhost:8000/
-   ```
+ http://localhost:8000/
+```
 
 Open [`localhost:8000`](http://localhost:8000) in your browser (with MetaMask Flask installed).
+A template test dapp displays, for installing and testing your Snap.
 
-#### 5.3. Test your Snap
+#### 5.2. Test your Snap
 
 Select **Connect** and accept the permission request.
 
@@ -348,7 +344,7 @@ You can set up [multiple accounts](https://support.metamask.io/managing-my-walle
 
 :::
 
-Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP** (or **Transaction insights** if you followed Step 2).
+Next, from the transaction confirmation window in MetaMask, switch to the tab named **TYPESCRIPT EXAMPLE SNAP** (or **Gas Percentage Calculator** if you followed Step 2).
 Switching to the tab activates the [`onTransaction`](../../reference/entry-points.md#ontransaction)
 entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
@@ -358,14 +354,13 @@ entry point of your Snap and displays the percentage of gas fees in the transact
 
 :::warning
 
-The activated "Send Message" button is inoperable as we didn't assign it the permissions required in the 
-`snap.manifest.json`. The default template Snap used in [Create a gas estimation Snap](gas-estimation.md),
+If you skipped Step 2, the activated **Send Hello message** button is inoperable.
+The default template Snap used in [Create a gas estimation Snap](gas-estimation.md)
 is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose an API.
 Instead, it provides transaction insights directly in a tab in MetaMask's transaction confirmation window.
 
 :::
-
 
 ### Next steps
 
@@ -384,7 +379,7 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
   return {
     content: (
       <Box>
-        <Heading>Percent Snap</Heading>
+        <Heading>Gas Percentage Calculator</Heading>
         <Text>
           This Snap only provides transaction insights for simple ETH transfers.
         </Text>
@@ -401,7 +396,7 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 if (typeof transaction.data === "string" && transaction.data !== "0x") {
   return {
     content: panel([
-      heading("Percent Snap"),
+      heading("Gas Percentage Calculator"),
       text(
         "This Snap only provides transaction insights for simple ETH transfers."
       ),
@@ -410,18 +405,21 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 #### Customize your Snap
 
 You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider 
 updating `packages/site/src/pages/index.tsx` to remove the 
-non-functional **Send message** button.
+non-functional button.
 
 Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
 for example:
 - Update the `location` in `snap.manifest.json` to your Snap's published location.
 - Update the `description` in `snap.manifest.json` to a description of your Snap.
 - Update the `name`, `version`, `description`, and `repository` fields of
-`/packages/snap/package.json`, even if you do not plan to publish your Snap to npm.
+`/packages/snap/package.json` (even if you do not plan to publish your Snap to npm).
 
 :::note
 When editing `source`, the `shasum` is set automatically when you build from the command line.
@@ -434,4 +432,3 @@ We recommend updating `version` and `repository` in `package.json` first, then b
 :::
 
 After you've made all necessary changes, you can [publish your Snap to npm](../../how-to/publish-a-snap.md).
-
