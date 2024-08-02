@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Button from "@site/src/components/Button";
+import ldClient from "launchdarkly";
 import {
   Faq,
   AlertCommonIssue,
@@ -10,11 +11,15 @@ import {
   AlertSuccess,
   TransactionTable,
   Hero,
+  Maintenance,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
+
+const lineaMaintenanceFlag = "linea-maintenance-mode";
+const sepoliaMaintenanceFlag = "sepolia-maintenance-mode";
 
 const LINEA = [
   {
@@ -80,6 +85,31 @@ export default function Faucet() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [alertType, setAlertType] = useState(1);
+  const [ldReady, setLdReady] = useState(false);
+  const [isLineaMaintenance, setIsLineaMaintenance] = useState(false);
+  const [isSepoliaMaintenance, setIsSepoliaMaintenance] = useState(false);
+
+  useEffect(() => {
+    ldClient.waitUntilReady().then(() => {
+      setIsLineaMaintenance(ldClient.variation(lineaMaintenanceFlag, false));
+      setIsSepoliaMaintenance(
+        ldClient.variation(sepoliaMaintenanceFlag, false),
+      );
+      setLdReady(true);
+    });
+    const handleChangeLinea = (current) => {
+      setIsLineaMaintenance(current);
+    };
+    const handleChangeSepolia = (current) => {
+      setIsSepoliaMaintenance(current);
+    };
+    ldClient.on(`change:${lineaMaintenanceFlag}`, handleChangeLinea);
+    ldClient.on(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia);
+    return () => {
+      ldClient.off(`change:${lineaMaintenanceFlag}`, handleChangeLinea);
+      ldClient.off(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia);
+    };
+  }, []);
 
   const handleLogin = () => {
     setIsLoading(true);
@@ -183,14 +213,16 @@ export default function Faucet() {
             label="Ethereum Sepolia"
             default
           >
-            {tabItemContent("sepolia")}
+            {isSepoliaMaintenance && <Maintenance network="sepolia" />}
+            {ldReady ? tabItemContent("sepolia") : null}
           </TabItem>
           <TabItem
             className={styles.content}
             value="linea"
             label="Linea Sepolia"
           >
-            {tabItemContent("linea")}
+            {isLineaMaintenance && <Maintenance network="linea" />}
+            {ldReady ? tabItemContent("linea") : null}
           </TabItem>
         </Tabs>
       </div>

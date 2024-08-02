@@ -5,21 +5,25 @@ import clsx from "clsx";
 import styles from "./button.module.scss";
 
 interface IButton {
-  onClick: VoidFunction;
+  onClick?: VoidFunction;
   children: string | React.ReactElement;
   disabled?: boolean;
   isLoading?: boolean;
   className?: string;
+  href?: string;
+  target?: string;
 }
 
 export default function Button({
   className,
-  onClick,
+  onClick = () => {},
   children,
   disabled = false,
   isLoading,
+  href,
+  target = "_blank",
 }: IButton) {
-  return (
+  return !href ? (
     <button
       className={clsx(styles.button, className)}
       onClick={onClick}
@@ -27,5 +31,9 @@ export default function Button({
     >
       {!isLoading ? children : <LoadingImg className={styles.isLoading} />}
     </button>
+  ) : (
+    <a className={clsx(styles.button, className)} href={href} target={target}>
+      {!isLoading ? children : <LoadingImg className={styles.isLoading} />}
+    </a>
   );
 }
