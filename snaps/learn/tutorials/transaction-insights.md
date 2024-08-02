@@ -354,7 +354,7 @@ entry point of your Snap and displays the percentage of gas fees in the transact
 
 :::warning
 
-If you skipped Step 2, the activated **Send Hello message** button is inoperable.
+If you skipped Step 2, the activated **Send message** button is inoperable.
 The default template Snap used in [Create a gas estimation Snap](gas-estimation.md)
 is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose an API.
