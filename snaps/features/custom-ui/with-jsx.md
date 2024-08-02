@@ -50,44 +50,53 @@ await snap.request({
 Note that JSX can only be used in `.jsx` or `.tsx` files.
 :::
 
-## Upgrade an existing Snaps project to use JSX
+## Upgrade an existing Snap to use JSX
 
-Follow these steps to upgrade an existing Snaps project to use JSX:
+Follow these steps to upgrade an existing Snap to use JSX:
 
-1. Update dependencies in `packages/snap/package.json`:
-  - Update `@metamask/snaps-sdk` to at least `^6.1.1`
-  - Update `@metamask/snaps-cli` to at least `^6.2.1`
-  - Update `@metamask/snaps-jest` to at least `^8.2.0`
-  - Run `yarn install` to install the new versions
-2. Modify `packages/snap/.eslintrc.js`:
-  - Add a new section in `overrides` with the following configuration:
-    ```json
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "extends": ["@metamask/eslint-config-typescript"],
-      "rules": {
-        // This allows importing the `Text` JSX component.
-        "@typescript-eslint/no-shadow": [
-          "error",
-          {
-            "allow": ["Text"],
-          },
-        ],
-      },
-    }
-    ```
-  - Replace `['*.test.ts']` with `['*.test.ts', '*.test.tsx']`
-3. If `packages/snap/src/index.ts` will have JSX:
-  - Rename the file to `index.tsx`
-  - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`
+1. Upgrade dependencies in `packages/snap/package.json`:
+
+    - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
+    - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
+    - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
+   
+   Run `yarn install` to install the new versions.
+
+2. Update `packages/snap/.eslintrc.js`:
+
+    - Add a new section in `overrides` with the following configuration:
+      ```json
+      {
+        "files": ["**/*.ts", "**/*.tsx"],
+        "extends": ["@metamask/eslint-config-typescript"],
+        "rules": {
+          // This allows importing the `Text` JSX component.
+          "@typescript-eslint/no-shadow": [
+            "error",
+            {
+              "allow": ["Text"],
+            },
+          ],
+        },
+      }
+      ```
+    - Replace `["*.test.ts"]` with `["*.test.ts", "*.test.tsx"]`.
+
+3. Update `packages/snap/src/index.ts`, if it will have JSX:
+
+    - Rename the file to `index.tsx`.
+    - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`.
+
 4. Update `packages/snap/tsconfig.json`:
-  - Under `compileOptions`, add:
-    ```json
-    "jsx": "react-jsx",
-    "jsxImportSource": "@metamask/snaps-sdk"
-    ```
-  - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`
-5. Replace all Custom UI in your code with JSX components, renaming the target files to `.tsx`
+
+    - Under `compileOptions`, add:
+      ```json
+      "jsx": "react-jsx",
+      "jsxImportSource": "@metamask/snaps-sdk"
+      ```
+    - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`.
+
+5. Replace all Custom UI in your code with JSX components, renaming the target files with the `.tsx` extension.
 
 ## Components
 
