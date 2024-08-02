@@ -21,7 +21,7 @@ Use [testnet endpoints](../get-started/endpoints.md) during development and init
 | [Avalanche Fuji](https://docs.avax.network/build/tutorials/platform/fuji-workflow)| [Avalanche Fuji faucet](https://faucet.avax.network)| [Avalanche bridge](https://bridge.avax.network/)|
 | [Base Sepolia](https://docs.base.org/docs/using-base/)| [Base Sepolia faucet](https://faucet.quicknode.com/base/sepolia)| [Base bridge](https://bridge.base.org/deposit)|
 | [Blast Sepolia](https://docs.blast.io/using-blast)| [Blast Sepolia faucet](https://faucet.quicknode.com/blast/sepolia)|     |
-| [Binance Smart Chain Sepolia (BSC)]https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)| [BSC Sepolia faucet](https://www.bnbchain.org/en/testnet-faucet)| [BSC bridge](https://testnet.bscscan.com/bridge)|
+| [Binance Smart Chain Sepolia (BSC)](https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)| [BSC Sepolia faucet](https://www.bnbchain.org/en/testnet-faucet)| [BSC bridge](https://testnet.bscscan.com/bridge)|
 | [Celo Alfajores](https://docs.celo.org/getting-started/alfajores-testnet)| [Celo Alfajores faucet](https://faucet.celo.org/alfajores)| [Celo bridge](https://docs.celo.org/protocol/bridge#token-bridges)|
 | [Ethereum Sepolia](https://docs.blast.io/building/bridges/testnet)| [Ethereum Sepolia faucet](https://faucet.quicknode.com/ethereum/sepolia)| [Sepolia bridge](https://docs.blast.io/building/bridges/testnet)|
 | [Linea Sepolia](https://support.linea.build/getting-started/how-to-get-linea-goerli-testnet-eth)| [Linea Sepolia faucet](https://www.infura.io/faucet/linea) or [Covalent faucet](https://goldrush.dev/faucet/)| [Linea bridge](https://bridge.linea.build)|
