@@ -87,7 +87,7 @@ export default function Faucet() {
   const [alertType, setAlertType] = useState(1);
   const [ldReady, setLdReady] = useState(false);
   const [isLineaMaintenance, setIsLineaMaintenance] = useState(false);
-  const [isSepoliaMaintenanceMode, setIsSepoliaMaintenance] = useState(false);
+  const [isSepoliaMaintenance, setIsSepoliaMaintenance] = useState(false);
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
@@ -213,7 +213,7 @@ export default function Faucet() {
             label="Ethereum Sepolia"
             default
           >
-            {isLineaMaintenance && <Maintenance network="sepolia" />}
+            {isSepoliaMaintenance && <Maintenance network="sepolia" />}
             {ldReady ? tabItemContent("sepolia") : null}
           </TabItem>
           <TabItem
@@ -221,7 +221,7 @@ export default function Faucet() {
             value="linea"
             label="Linea Sepolia"
           >
-            {isSepoliaMaintenanceMode && <Maintenance network="linea" />}
+            {isLineaMaintenance && <Maintenance network="linea" />}
             {ldReady ? tabItemContent("linea") : null}
           </TabItem>
         </Tabs>
