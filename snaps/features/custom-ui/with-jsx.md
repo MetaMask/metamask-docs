@@ -89,7 +89,7 @@ Follow these steps to upgrade an existing Snap to use JSX:
 
 4. Update `packages/snap/tsconfig.json`:
 
-    - Under `compileOptions`, add:
+    - Under `compilerOptions`, add:
       ```json
       "jsx": "react-jsx",
       "jsxImportSource": "@metamask/snaps-sdk"
