@@ -354,7 +354,7 @@ entry point of your Snap and displays the percentage of gas fees in the transact
 
 :::warning
 
-The activated **Send message** button is inoperable.
+The template **Send message** button is inoperable.
 The default template Snap used in [Create a gas estimation Snap](gas-estimation.md)
 is configured to expose a JSON-RPC API with a simple hello command, which brings up a dialog box.
 In contrast, the Snap you're creating in this tutorial doesn't expose an API.
@@ -412,7 +412,7 @@ if (typeof transaction.data === "string" && transaction.data !== "0x") {
 
 You can improve your Snap's UX by completing [Step 2](#2-optional-customize-your-snaps-ux). Consider 
 updating `packages/site/src/pages/index.tsx` to remove the 
-non-functional button.
+non-functional **Send message** button.
 
 Before publishing a Snap, it's also important to customize the metadata and properties of your Snap, 
 for example:
