@@ -1,5 +1,5 @@
 import React from "react";
-import { MSG_TYPES, API_URL } from "@site/src/lib/constants";
+import { MSG_TYPES, DASHBOARD_URL } from "@site/src/lib/constants";
 import Link from "@docusaurus/Link";
 
 export const INFO_MSG = {
@@ -28,7 +28,7 @@ export const INFO_MSG = {
       <>
         Your request has been sent to the network endpoint you selected which
         returned a response with the requested information. Let’s see how it
-        performed in <Link to={`${API_URL}/dashboard/stats`}>stats</Link> or
+        performed in <Link to={`${DASHBOARD_URL}/dashboard/stats`}>stats</Link> or
         dive into{" "}
         <Link to="https://docs.infura.io/dashboard-stats">stats docs</Link>.
       </>
@@ -52,7 +52,7 @@ export const INFO_MSG = {
     description: (
       <>
         You don’t have any API Keys yet.{" "}
-        <Link to={`${API_URL}/dashboard`}>Create an API key</Link> to access
+        <Link to={`${DASHBOARD_URL}/dashboard`}>Create an API key</Link> to access
         your keys and send requests.
       </>
     ),
@@ -65,7 +65,7 @@ export const INFO_MSG = {
       <>
         The API key selected is not authorized for this specific product. To
         enable access, please add this product to your API key through the{" "}
-        <Link to={`${API_URL}/dashboard`}>Infura Dashboard</Link>
+        <Link to={`${DASHBOARD_URL}/dashboard`}>Infura Dashboard</Link>
       </>
     ),
   },

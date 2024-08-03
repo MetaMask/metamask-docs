@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import ldClient from "launchdarkly";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
@@ -14,6 +16,32 @@ const EXEPT_METHODS = [
   "wallet_revokePermissions",
   "eth_signTypedData_v4",
 ];
+
+const MetaMaskWrapper = ({ children }) => {
+  return (
+    <BrowserOnly>
+      {() => (
+        <MetaMaskProvider
+          debug={false}
+          sdkOptions={{
+            checkInstallationOnAllCalls: true,
+            extensionOnly: true,
+            preferDesktop: true,
+            logging: {
+              sdk: false,
+            },
+            dappMetadata: {
+              name: "Reference pages",
+              url: window.location.href,
+            },
+          }}
+        >
+          {children}
+        </MetaMaskProvider>
+      )}
+    </BrowserOnly>
+  );
+};
 
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -58,20 +86,21 @@ export default function LayoutWrapper({ children }) {
 
   if (!referencePageName) {
     return (
-      <Layout>{children}</Layout>
-    )
+      <MetaMaskWrapper>
+        <Layout>{children}</Layout>
+      </MetaMaskWrapper>
+    );
   }
 
   return (
     <>
-      {
-        !ldReady ? null : (
-          <>
-            {
-              newReferenceEnabled ? (
-                <Layout>
-                  <div className={styles.pageWrapper}>
-                    {children?.props?.children[0]?.type === "aside" && (
+      {!ldReady ? null : (
+        <>
+          {newReferenceEnabled ? (
+            <MetaMaskWrapper>
+              <Layout>
+                <div className={styles.pageWrapper}>
+                  {children?.props?.children[0]?.type === "aside" && (
                     <>{children.props.children[0]}</>
                   )}
                   <div className={styles.mainContainer}>
@@ -84,13 +113,12 @@ export default function LayoutWrapper({ children }) {
                   </div>
                 </div>
               </Layout>
-              ) : (
-                <Layout>{children}</Layout>
-              )
-            }
-          </>
-        )
-      }
+            </MetaMaskWrapper>
+          ) : (
+            <Layout>{children}</Layout>
+          )}
+        </>
+      )}
     </>
-  )
+  );
 }
