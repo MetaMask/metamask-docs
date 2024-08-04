@@ -2,8 +2,8 @@
 title: "zks_getBridgeContracts"
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 Returns the L1 and L2 address of the default bridges.
 
@@ -16,9 +16,9 @@ None.
 The default bridges used in the ZKsync network:
 
 - `1Erc20DefaultBridge` - The address of the default bridge contract responsible for handling ERC-20 token
-  transfers from the L1 network to the L2 network
+    transfers from the L1 network to the L2 network
 - `l2Erc20DefaultBridge` - The address of the default bridge contract responsible for handling ERC-20 token
-  transfers from the L2 network to the L1 network
+    transfers from the L2 network to the L1 network
 
 ## Example
 
@@ -29,11 +29,17 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
 <Tabs>
   <TabItem value="cURL">
 
+  ```bash
+    curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBridgeContracts", "params": []}'
+  ```
+  </TabItem>
+  <TabItem value="WSS">
+
 ```bash
-curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBridgeContracts", "params": []}' \
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBridgeContracts", "params": []}'
 ```
 
   </TabItem>

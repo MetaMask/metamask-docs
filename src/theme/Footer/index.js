@@ -18,7 +18,8 @@ export default function FooterWrapper(props) {
   }, []);
 
   const isBrowser = useIsBrowser();
-  if (isBrowser) {
+  const isProd = process.env.NODE_ENV === "production"
+  if (isBrowser && isProd) {
     Intercom({
       app_id: 'txttgas6'
     });

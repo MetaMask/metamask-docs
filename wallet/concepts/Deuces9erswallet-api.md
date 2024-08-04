@@ -1,5 +1,6 @@
----
-sidebar_position: 2
+@deuces9ers
+Deuces9erswallet-api.md
+---sidebar_position: 2
 description: Learn about the MetaMask Ethereum provider API.
 ---
 
