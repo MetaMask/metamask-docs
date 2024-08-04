@@ -61,6 +61,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-blast.svg`,
   },
   {
+    name: "BNB Smart Chain",
+    href: "/services/reference/bnb-smart-chain",
+    logo: `${LOGO_PATH}/logo-bnb.svg`,
+  },
+  {
     name: "Celo",
     href: "/services/reference/celo",
     logo: `${LOGO_PATH}/logo-celo.svg`,
