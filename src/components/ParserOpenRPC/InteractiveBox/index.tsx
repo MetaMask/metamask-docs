@@ -18,6 +18,9 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
+import { ObjectFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate";
+import { FieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/FieldTemplate";
+import { WrapIfAdditionalTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate";
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
@@ -42,6 +45,7 @@ export default function InteractiveBox({
   drawerLabel,
   closeComplexTypeView,
 }: InteractiveBoxProps) {
+  // console.log('examples', examples)
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
@@ -68,10 +72,14 @@ export default function InteractiveBox({
       label: false,
     },
     "ui:widget": "checkbox",
+    // 'ui:ObjectFieldTemplate': ObjectFieldTemplate
   };
   const templates = {
     BaseInputTemplate,
     ArrayFieldTemplate,
+    // WrapIfAdditionalTemplate,
+    ObjectFieldTemplate,
+    // FieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
   };
@@ -81,7 +89,7 @@ export default function InteractiveBox({
   };
   const fields: RegistryFieldsType = {
     AnyOfField: ConditionalField,
-    OneOfField: ConditionalField,
+    OneOfField: ConditionalField
   };
   const handleResetForm = (e) => {
     e.preventDefault();
@@ -143,6 +151,8 @@ export default function InteractiveBox({
     closeComplexTypeView();
   };
 
+  // console.log('parsedSchema', parsedSchema)
+
   return parsedSchema ? (
     <>
       <div className={styles.tableHeadingRow}>
@@ -157,6 +167,7 @@ export default function InteractiveBox({
         liveValidate
         noHtml5Validate
         onChange={(data) => {
+          // console.log('data', data)
           onChangeHandler(data.formData);
         }}
         templates={templates}

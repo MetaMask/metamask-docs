@@ -10,7 +10,6 @@ import styles from "./styles.module.css";
 const REF_FF = "mm-new-reference-enabled";
 const REF_PATH = "/wallet/reference/";
 const EXEPT_METHODS = [
-  "wallet_requestPermissions",
   "wallet_revokePermissions",
   "eth_signTypedData_v4",
 ];
