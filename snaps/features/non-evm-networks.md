@@ -107,7 +107,7 @@ For example, to derive Dogecoin keys:
 The following are examples of existing Snaps that manage accounts and keys:
 
 - [Dogecoin Snap tutorial](https://github.com/ziad-saab/dogecoin-snap)
-- [Consensys StarkNet Snap](https://github.com/Consensys/starknet-snap)
+- [Consensys Starknet Snap](https://github.com/Consensys/starknet-snap)
 - [Account Labs Bitcoin Snap](https://github.com/snapdao/btcsnap)
 - [`@metamask/bip32-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/bip32)
 - [`@metamask/bip44-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/bip44)

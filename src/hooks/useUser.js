@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_URL, GET_OPTIONS } from "../lib/constants";
+import { DASHBOARD_URL, GET_OPTIONS } from "../lib/constants";
 
 export default function useUser() {
   const [user, setUser] = useState(undefined);
@@ -8,14 +8,14 @@ export default function useUser() {
   const getUserInfo = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/me`, GET_OPTIONS);
+      const res = await fetch(`${DASHBOARD_URL}/api/me`, GET_OPTIONS);
       const response = await res.json();
       if (response?.data) {
         setUser(response.data);
         const userId = response.data.id;
         const upData = await fetch(
-          `${API_URL}/api/v1/users/${userId}/projects`,
-          GET_OPTIONS,
+          `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
+          GET_OPTIONS
         );
         if (upData.ok) {
           const upProjects = await upData.json();

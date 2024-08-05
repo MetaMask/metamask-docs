@@ -91,19 +91,47 @@ Snaps CLI:
 3. You can also use environment variables directly in your Snap.
    For example:
 
-   ```typescript title="index.ts"
-   import { panel, text, heading } from "@metamask/snaps-sdk"
+    <Tabs>
+    <TabItem value="JSX">
 
-   await snap.request({
-     method: "snap_dialog",
-     params: {
-       type: "alert",
-       content: panel([
-         heading("This custom alert is just for display purposes."),
-         text(
-           `SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`
-         ),
-       ]),
-     },
-   })
-   ```
+    ```tsx title="index.tsx"
+    import { Box, Text, Heading } from "@metamask/snaps-sdk/jsx";
+
+    await snap.request({
+      method: "snap_dialog",
+      params: {
+        type: "alert",
+        content: (
+          <Box>
+            <Heading>This custom alert is just for display purposes.</Heading>
+            <Text>
+              SNAP_ENV is {process.env.SNAP_ENV}, PUBLIC_KEY is {process.env.PUBLIC_KEY}
+            </Text>
+          </Box>
+        ),
+      },
+    });
+    ```
+
+    </TabItem>
+    <TabItem value="Functions" deprecated>
+
+    ```typescript title="index.ts"
+    import { panel, text, heading } from "@metamask/snaps-sdk"
+
+    await snap.request({
+      method: "snap_dialog",
+      params: {
+        type: "alert",
+        content: panel([
+          heading("This custom alert is just for display purposes."),
+          text(
+            `SNAP_ENV is ${process.env.SNAP_ENV}, PUBLIC_KEY is ${process.env.PUBLIC_KEY}`
+          ),
+        ]),
+      },
+    })
+    ```
+
+    </TabItem>
+    </Tabs>

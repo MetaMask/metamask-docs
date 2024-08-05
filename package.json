@@ -5,7 +5,7 @@
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
+    "start": "docusaurus start -p 3003",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -36,10 +36,10 @@
     "@docusaurus/theme-mermaid": "^3.0.0",
     "@intercom/messenger-js-sdk": "^0.0.11",
     "@mdx-js/react": "^3.0.0",
+    "@metamask-previews/profile-sync-controller": "0.1.4-preview-16e6df4",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
-    "@metamask/sdk": "^0.26.5",
-    "@metamask/sdk-react": "^0.26.5",
+    "@metamask/sdk-react": "^0.27.0",
     "@rjsf/core": "^5.18.4",
     "@rjsf/utils": "^5.18.4",
     "@rjsf/validator-ajv8": "^5.18.4",
@@ -49,6 +49,7 @@
     "docusaurus-plugin-segment": "^1.0.4",
     "docusaurus-plugin-sentry": "^2.0.0",
     "dotenv": "^16.4.5",
+    "ethers": "^6.13.2",
     "js-cookie": "^3.0.5",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
@@ -59,6 +60,7 @@
     "react-alert": "^7.0.3",
     "react-dom": "^18.0.0",
     "react-dropdown-select": "^4.11.2",
+    "react-modal": "^3.16.1",
     "react-player": "^2.13.0",
     "react-tippy": "^1.4.0",
     "remark-codesandbox": "^0.10.1",
@@ -72,7 +74,9 @@
     "@docusaurus/tsconfig": "^3.4.0",
     "@docusaurus/types": "^3.4.0",
     "@lavamoat/allow-scripts": "^3.0.4",
+    "@tsconfig/docusaurus": "^1.0.5",
     "@types/react-alert": "^7.0.6",
+    "@types/react-modal": "^3.16.3",
     "@typescript-eslint/parser": "^7.12.0",
     "eslint-plugin-react": "^7.34.2",
     "stylelint": "^15.0.0 ",
@@ -116,7 +120,9 @@
       "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false,
       "@metamask/sdk>@metamask/sdk-communication-layer>bufferutil": false,
       "@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false,
-      "@metamask/sdk>eciesjs>secp256k1": false
+      "@metamask/sdk>eciesjs>secp256k1": false,
+      "ethers>ws>bufferutil": false,
+      "ethers>ws>utf-8-validate": false
     }
   }
 }

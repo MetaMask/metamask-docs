@@ -47,6 +47,14 @@ request to `support@infura.io` and we will assess if your request can be accommo
 | Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |
 
+## Binance Smart Chain
+
+| Network           | Transport type          | URL                                           |
+|-------------------|-------------------------|-----------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |
+
 ## Celo
 
 | Network             | Description             | URL                                              |
@@ -139,7 +147,7 @@ Sepolia instead.
 | Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |
 | Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |
 
-## StarkNet
+## Starknet
 
 | Network           | Description         | URL                                               |
 | ----------------- | ------------------- | ------------------------------------------------- |

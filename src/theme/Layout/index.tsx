@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import ldClient from "launchdarkly";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
@@ -15,6 +17,32 @@ const EXEPT_METHODS = [
   "eth_signTypedData_v4",
 ];
 
+const MetaMaskWrapper = ({ children }) => {
+  return (
+    <BrowserOnly>
+      {() => (
+        <MetaMaskProvider
+          debug={false}
+          sdkOptions={{
+            checkInstallationOnAllCalls: true,
+            extensionOnly: true,
+            preferDesktop: true,
+            logging: {
+              sdk: false,
+            },
+            dappMetadata: {
+              name: "Reference pages",
+              url: window.location.href,
+            },
+          }}
+        >
+          {children}
+        </MetaMaskProvider>
+      )}
+    </BrowserOnly>
+  );
+};
+
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
   const { netData } = usePluginData("plugin-json-rpc") as {
@@ -24,7 +52,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask,
+    (net) => net.name === NETWORK_NAMES.metamask
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -35,7 +63,7 @@ export default function LayoutWrapper({ children }) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
         (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
       );
       return page;
     }
@@ -57,7 +85,11 @@ export default function LayoutWrapper({ children }) {
   }, []);
 
   if (!referencePageName) {
-    return <Layout>{children}</Layout>;
+    return (
+      <MetaMaskWrapper>
+        <Layout>{children}</Layout>
+      </MetaMaskWrapper>
+    );
   }
 
   return (
@@ -65,21 +97,23 @@ export default function LayoutWrapper({ children }) {
       {!ldReady ? null : (
         <>
           {newReferenceEnabled ? (
-            <Layout>
-              <div className={styles.pageWrapper}>
-                {children?.props?.children[0]?.type === "aside" && (
-                  <>{children.props.children[0]}</>
-                )}
-                <div className={styles.mainContainer}>
-                  <div className={styles.contentWrapper}>
-                    <ParserOpenRPC
-                      network={NETWORK_NAMES.metamask}
-                      method={referencePageName}
-                    />
+            <MetaMaskWrapper>
+              <Layout>
+                <div className={styles.pageWrapper}>
+                  {children?.props?.children[0]?.type === "aside" && (
+                    <>{children.props.children[0]}</>
+                  )}
+                  <div className={styles.mainContainer}>
+                    <div className={styles.contentWrapper}>
+                      <ParserOpenRPC
+                        network={NETWORK_NAMES.metamask}
+                        method={referencePageName}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Layout>
+              </Layout>
+            </MetaMaskWrapper>
           ) : (
             <Layout>{children}</Layout>
           )}
