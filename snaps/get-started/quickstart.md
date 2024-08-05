@@ -3,7 +3,9 @@ description: Get started quickly using the create-snap starter kit.
 sidebar_position: 2
 ---
 
-import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # Snaps quickstart
 
@@ -89,6 +91,50 @@ You can customize your Snap by editing `index.ts` in the `packages/snap/src` fol
 `index.ts` contains an example request that uses the
 [`snap_dialog`](../reference/snaps-api.md#snapdialog) method to display a custom confirmation screen:
 
+<Tabs>
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnRpcRequestHandler } from "@metamask/snaps-sdk";
+import { Box, Text, Bold } from "@metamask/snaps-sdk/jsx";
+
+/**
+ * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
+ *
+ * @param args - The request handler arguments as an object.
+ * @param args.origin - The origin of the request, e.g., the website that invoked the Snap.
+ * @param args.request - A validated JSON-RPC request object.
+ * @returns The result of snap_dialog.
+ * @throws If the request method is not valid for this Snap.
+ */
+export const onRpcRequest: OnRpcRequestHandler = async ({
+  origin,
+  request,
+}) => {
+  switch (request.method) {
+    case "hello":
+      return snap.request({
+        method: "snap_dialog",
+        params: {
+          type: "confirmation",
+          content: (
+            <Box>
+              <Text>Hello, <Bold>{origin}</Bold>!</Text>
+              <Text>This custom confirmation is just for display purposes.</Text>
+              <Text>But you can edit the Snap source code to make it do something, if you want to!</Text>
+            </Box>
+          ),
+        },
+      });
+    default:
+      throw new Error("Method not found.");
+  }
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
 ```ts title="index.ts"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
 import { panel, text } from "@metamask/snaps-sdk"
@@ -126,6 +172,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Edit the text in any `text()` component and select the **Reconnect** button
 on the front-end to re-install the Snap.
