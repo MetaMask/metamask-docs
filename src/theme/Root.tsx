@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactChild } from "react";
+import React, { useState, createContext, ReactChild, useEffect } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
 
 export const MetamaskProviderContext = createContext(null);
@@ -18,6 +18,12 @@ export default function Root({ children }: { children: ReactChild}) {
       sdk: false,
     }
   });
+
+  useEffect(() => {
+    if ((window as any)?.usabilla && window?.innerWidth > 1720) {
+      (window as any)?.usabilla?.load("w.usabilla.com", "7a27ead270ba");
+    }
+  }, []);
 
   const metaMaskConnectHandler = async () => {
     try {
