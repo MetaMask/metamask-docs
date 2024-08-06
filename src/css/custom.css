@@ -164,6 +164,10 @@ svg {
   margin-bottom: -2rem;
 }
 
+.usabilla_live_button_container {
+  display: none !important;
+}
+
 .getfeedback-hidden {
   display: none !important;
 }
