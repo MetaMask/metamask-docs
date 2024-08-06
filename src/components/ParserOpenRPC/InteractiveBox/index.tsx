@@ -32,6 +32,7 @@ interface InteractiveBoxProps {
   onParamChange: (data) => void;
   drawerLabel?: string | null;
   closeComplexTypeView?: () => void;
+  isOpen?: boolean;
 }
 
 export default function InteractiveBox({
@@ -41,6 +42,7 @@ export default function InteractiveBox({
   onParamChange,
   drawerLabel,
   closeComplexTypeView,
+  isOpen = false
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
@@ -116,8 +118,10 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
-    setCurrentFormData({...data});
-    onParamChange({...data});
+    if (isOpen) {
+      setCurrentFormData({...data});
+      onParamChange({...data});
+    }
   };
 
   const cloneAndSetNullIfExists = (obj, key) => {

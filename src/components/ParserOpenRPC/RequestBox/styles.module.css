@@ -21,3 +21,8 @@
   border-top: 1px solid #848c96;
   padding: 16px;
 }
+
+.responseBlock {
+  max-height: 400px;
+  overflow-y: auto;
+}
