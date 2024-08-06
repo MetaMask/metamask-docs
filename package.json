@@ -49,6 +49,7 @@
     "js-cookie": "^3.0.5",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
+    "lodash.isobject": "^3.0.2",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.0.0",
     "prism-react-renderer": "^2.1.0",
