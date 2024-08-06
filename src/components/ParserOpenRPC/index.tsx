@@ -93,6 +93,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
       examples: currentMethod?.examples,
+      paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
     };
@@ -103,18 +104,27 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
+    trackInputChangeForSegment({
+      eventName: "Request Configuration Started",
+      userExperience: "B",
+    });
+
     if (
       typeof data !== "object" ||
       data === null ||
       Object.keys(data).length === 0
     ) {
       setParamsData([]);
+      return
     }
+
+    if (typeof data === "object" && currentMethodData.paramStructure === "by-name") {
+      setParamsData({...data});
+      return
+    }
+
     setParamsData(Object.values(data));
-    trackInputChangeForSegment({
-      eventName: "Request Configuration Started",
-      userExperience: "B",
-    });
+    
   };
 
   const onSubmitRequestHandle = async () => {
