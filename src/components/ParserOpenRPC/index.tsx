@@ -206,6 +206,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               onParamChange={onParamsChangeHandle}
               drawerLabel={drawerLabel}
               closeComplexTypeView={closeComplexTypeView}
+              isOpen={isModalOpen}
             />
           </ModalDrawer>
         </div>
