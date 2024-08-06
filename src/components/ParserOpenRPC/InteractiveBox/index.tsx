@@ -54,16 +54,18 @@ export default function InteractiveBox({
   const { metaMaskAccount } = useContext(MetamaskProviderContext);
   const addWalletId = (propName) => ({[propName]: metaMaskAccount})
   const getObjectWithAddress = (value) => {
-    if (Object.keys(value).includes('address')) {
+    const addressField = "address"
+    const fromField = "from"
+    if (Object.keys(value).includes(addressField)) {
       return {
         ...value,
-        ...addWalletId('address')
+        ...addWalletId(addressField)
       }
     }
-    if (Object.keys(value).includes('from')) {
+    if (Object.keys(value).includes(fromField)) {
       return {
         ...value,
-        ...addWalletId('from')
+        ...addWalletId(fromField)
       }
     }
     return value
@@ -73,7 +75,7 @@ export default function InteractiveBox({
     if (examples && examples.length > 0 && examples[0].params) {
       const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
         if (metaMaskAccount) {
-          if (name === 'Address' || name === 'From') {
+          if (name === "Address" || name === "From") {
             return [name, metaMaskAccount]
           }
           if (isObject(value)) {
