@@ -2,18 +2,18 @@
   --button-background-color: #1098fc;
   --button-color: #141618;
   --button-hover-background-color: #26a2fc;
-  --button-hover-shadow: 0px 2px 8px 0px
-    var(--shadow-primary, rgba(16, 152, 252, 0.4));
+  --button-hover-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.4);
   --button-active-background-color: #3baafd;
+  --button-danger: #e88f97
 }
 
 :root[data-theme="light"] {
   --button-background-color: #0376c9;
   --button-color: #ffffff;
   --button-hover-background-color: #036ab5;
-  --button-hover-shadow: 0px 2px 8px 0px
-    var(--shadow-primary, rgba(3, 118, 201, 0.2));
+  --button-hover-shadow: 0px 2px 8px 0px rgba(3, 118, 201, 0.2);
   --button-active-background-color: #025ea1;
+  --button-danger: #D73847
 }
 
 :root {
@@ -56,6 +56,21 @@ a.button {
 
   &:active {
     background-color: var(--button-active-background-color);
+  }
+
+  &.thin {
+    height: 40px;
+  }
+
+  &.danger {
+    color: var(--button-danger);
+    background-color: transparent;
+    border: 1px solid var(--button-danger);
+
+    &:hover {
+      background-color: var(--button-danger);
+      color: var(--button-color);
+    }
   }
 
   &:disabled {

@@ -50,7 +50,7 @@ const ConnectingModal = () => {
   );
 };
 
-const ConnectionErrorModal = () => {
+const ConnectionErrorModal = ({onClose, onRetry}: {onClose: VoidFunction, onRetry: VoidFunction}) => {
   return (
     <>
       <div className={styles.spinnerContainer}>
@@ -62,8 +62,8 @@ const ConnectionErrorModal = () => {
         Please try again or <a href="#">contact us</a>.
       </div>
       <div className={styles.flexButton}>
-        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.secondaryBtn}>Cancel</button>
-        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.primaryBtn}>Retry</button>
+        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.secondaryBtn} onClick={onClose}>Cancel</button>
+        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.primaryBtn} onClick={onRetry}>Retry</button>
       </div>
     </>
   );
@@ -143,15 +143,20 @@ const AuthModal = ({ open, setOpen, setProjects }: AuthModalProps) => {
 
   useEffect(() => {
     if (open) {
-      (async () => {
-        try {
-          await login();
-        } catch (e: any) {
-          setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
-        }
-      })();
+      handleLogin();
     }
   }, [open]);
+
+  const handleLogin = () => {
+    (async () => {
+      try {
+        setStep(AUTH_LOGIN_STEP.CONNECTING)
+        await login();
+      } catch (e: any) {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
+      }
+    })()
+  }
 
   return (
     <Modal
@@ -170,7 +175,12 @@ const AuthModal = ({ open, setOpen, setProjects }: AuthModalProps) => {
           <Icon name="close" classes={styles.modalClose} />
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
-        {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? <ConnectionErrorModal /> : null}
+        {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
+          <ConnectionErrorModal
+            onClose={() => setOpen(false)}
+            onRetry={handleLogin}
+          />
+        ) : null}
       </div>
     </Modal>
   );

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import Button from "@site/src/components/Button";
 import ldClient from "launchdarkly";
 import {
   Faq,
@@ -14,7 +13,7 @@ import {
   Maintenance,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
+import { LoginContext } from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
 
@@ -47,7 +46,6 @@ const LINEA = [
     status: "pending",
   },
 ];
-
 const SEPOLIA = [
   {
     id: "03",
@@ -76,13 +74,10 @@ const SEPOLIA = [
 ];
 
 export default function Faucet() {
-  const { metaMaskConnectHandler, metaMaskAccount } = useContext(
-    MetamaskProviderContext,
-  );
+  const { userId } = useContext(LoginContext);
   const alert = useAlert();
-  const [isUserConnected, setIsUserConnected] = useState(false);
+  const [transactions, setTransactions] = useState({ linea: [], sepolia: [] });
   const [isLoading, setIsLoading] = useState(false);
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [alertType, setAlertType] = useState(1);
   const [ldReady, setLdReady] = useState(false);
@@ -111,26 +106,11 @@ export default function Faucet() {
     };
   }, []);
 
-  const handleLogin = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsUserConnected((value) => !value);
-    }, 2000);
-  };
-
-  const connectSDKHandler = async () => {
-    try {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsWalletConnected(true);
-      }, 2000);
-      metaMaskConnectHandler();
-    } catch (err) {
-      console.warn("failed to connect..", err);
+  useEffect(() => {
+    if (userId) {
+      setTransactions;
     }
-  };
+  }, [userId]);
 
   const handleRequest = () => {
     setIsLoading(true);
@@ -160,18 +140,14 @@ export default function Faucet() {
       <>
         <div className={styles.topContent}>
           <Hero
-            isUserConnected={isUserConnected}
             network={network}
             className={styles.hero}
-            handleLogin={handleLogin}
-            isWalletConnected={isWalletConnected || metaMaskAccount}
-            handleConnectWallet={connectSDKHandler}
             handleRequest={handleRequest}
             handleOnInputChange={handleOnInputChange}
             inputValue={walletAddress}
             isLoading={isLoading}
           />
-          {isUserConnected && (
+          {transactions && (
             <TransactionTable
               data={network === "linea" ? LINEA : SEPOLIA}
               classNameHeading={styles.sectionHeading}
@@ -193,17 +169,6 @@ export default function Faucet() {
     <Layout title="Faucet" description="Faucet">
       <div className={styles.authCont}>
         <span className={styles.title}>MetaMask Faucet</span>
-        {!isUserConnected ? (
-          <Button isLoading={isLoading} onClick={handleLogin}>
-            Sign in
-          </Button>
-        ) : !(isWalletConnected || metaMaskAccount) ? (
-          <Button isLoading={isLoading} onClick={connectSDKHandler}>
-            Install MetaMask
-          </Button>
-        ) : (
-          <div>walletId</div>
-        )}
       </div>
       <div className={styles.tabs}>
         <Tabs className={styles.header}>

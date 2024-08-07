@@ -225,6 +225,11 @@ const config = {
             label: "User support",
             position: "right",
           },
+          {
+            type: 'custom-navbarWallet',
+            position: "right",
+            includeUrl: ['/developer-tools/faucet/'],
+          },
           /* Language drop down
           {
             type: "localeDropdown",

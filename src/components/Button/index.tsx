@@ -12,9 +12,11 @@ interface IButton {
   className?: string;
   href?: string;
   target?: string;
+  thin?: boolean;
+  type?: "default" | "danger";
 }
 
-export default function Button({
+export const Button = ({
   className,
   onClick = () => {},
   children,
@@ -22,18 +24,34 @@ export default function Button({
   isLoading,
   href,
   target = "_blank",
-}: IButton) {
+  thin = false,
+  type = "default",
+}: IButton) => {
+  const buttonRootClass = clsx(
+    styles.button,
+    thin && styles.thin,
+    type === "danger" && styles.danger,
+    className,
+  );
+  const isLoadingChild = !isLoading ? (
+    children
+  ) : (
+    <LoadingImg className={styles.isLoading} />
+  );
+
   return !href ? (
     <button
-      className={clsx(styles.button, className)}
+      className={buttonRootClass}
       onClick={onClick}
       disabled={isLoading || disabled}
     >
-      {!isLoading ? children : <LoadingImg className={styles.isLoading} />}
+      {isLoadingChild}
     </button>
   ) : (
-    <a className={clsx(styles.button, className)} href={href} target={target}>
-      {!isLoading ? children : <LoadingImg className={styles.isLoading} />}
+    <a className={buttonRootClass} href={href} target={target}>
+      {isLoadingChild}
     </a>
   );
-}
+};
+
+export default Button;

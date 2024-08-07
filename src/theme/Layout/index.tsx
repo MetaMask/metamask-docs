@@ -17,32 +17,6 @@ const EXEPT_METHODS = [
   "eth_signTypedData_v4",
 ];
 
-const MetaMaskWrapper = ({ children }) => {
-  return (
-    <BrowserOnly>
-      {() => (
-        <MetaMaskProvider
-          debug={false}
-          sdkOptions={{
-            checkInstallationOnAllCalls: true,
-            extensionOnly: true,
-            preferDesktop: true,
-            logging: {
-              sdk: false,
-            },
-            dappMetadata: {
-              name: "Reference pages",
-              url: window.location.href,
-            },
-          }}
-        >
-          {children}
-        </MetaMaskProvider>
-      )}
-    </BrowserOnly>
-  );
-};
-
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
   const { netData } = usePluginData("plugin-json-rpc") as {
@@ -52,7 +26,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask
+    (net) => net.name === NETWORK_NAMES.metamask,
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -63,7 +37,7 @@ export default function LayoutWrapper({ children }) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
         (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
       );
       return page;
     }
@@ -85,11 +59,7 @@ export default function LayoutWrapper({ children }) {
   }, []);
 
   if (!referencePageName) {
-    return (
-      <MetaMaskWrapper>
-        <Layout>{children}</Layout>
-      </MetaMaskWrapper>
-    );
+    return <Layout>{children}</Layout>;
   }
 
   return (
@@ -97,23 +67,21 @@ export default function LayoutWrapper({ children }) {
       {!ldReady ? null : (
         <>
           {newReferenceEnabled ? (
-            <MetaMaskWrapper>
-              <Layout>
-                <div className={styles.pageWrapper}>
-                  {children?.props?.children[0]?.type === "aside" && (
-                    <>{children.props.children[0]}</>
-                  )}
-                  <div className={styles.mainContainer}>
-                    <div className={styles.contentWrapper}>
-                      <ParserOpenRPC
-                        network={NETWORK_NAMES.metamask}
-                        method={referencePageName}
-                      />
-                    </div>
+            <Layout>
+              <div className={styles.pageWrapper}>
+                {children?.props?.children[0]?.type === "aside" && (
+                  <>{children.props.children[0]}</>
+                )}
+                <div className={styles.mainContainer}>
+                  <div className={styles.contentWrapper}>
+                    <ParserOpenRPC
+                      network={NETWORK_NAMES.metamask}
+                      method={referencePageName}
+                    />
                   </div>
                 </div>
-              </Layout>
-            </MetaMaskWrapper>
+              </div>
+            </Layout>
           ) : (
             <Layout>{children}</Layout>
           )}
