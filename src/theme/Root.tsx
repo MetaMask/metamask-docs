@@ -121,6 +121,9 @@ export const LoginProvider = ({ children }) => {
 
   const metaMaskConnectHandler = useCallback(async () => {
     try {
+      if (sdk.isExtensionActive()) {
+        setOpenAuthModal(true);
+      }
       const accounts = await sdk.connect();
       setAccount(accounts);
       if (accounts && accounts.length > 0) {
@@ -144,6 +147,16 @@ export const LoginProvider = ({ children }) => {
       console.warn("failed to disconnect..", err);
     }
   }, [sdk, setOpenAuthModal, setUserId, setAccount, setProjects]);
+
+  console.log({
+    projects,
+    metaMaskConnectHandler,
+    metaMaskDisconnect,
+    userId,
+    account,
+    provider,
+    sdk,
+  });
 
   return (
     <LoginContext.Provider
