@@ -15,13 +15,17 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
     return null;
   }
 
-  const { account, connected, metaMaskConnectHandler } =
-    useContext(LoginContext);
+  const { account, sdk, metaMaskConnectHandler, metaMaskDisconnect } = useContext(LoginContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const isExtensionActive = sdk.isExtensionActive();
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
   };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(account);
+  }
 
   return !account ? (
     <Button
@@ -29,7 +33,7 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
       onClick={metaMaskConnectHandler}
       className={styles.navbarButton}
     >
-      Connect MetaMask
+      {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
@@ -48,8 +52,10 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
               className={styles.avatar}
               alt="avatar"
             />{" "}
-            <span className={styles.walletId}>0xcBf60...a2B44</span>
-            <button className={styles.copyButton}>
+            <span
+              className={styles.walletId}
+            >{`${account.slice(0, 7)}...${account.slice(-5)}`}</span>
+            <button className={styles.copyButton} onClick={handleCopy}>
               <CopyIcon />
             </button>
           </li>
@@ -57,7 +63,7 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
             <Button
               thin
               type="danger"
-              onClick={() => {}}
+              onClick={metaMaskDisconnect}
               className={styles.disconnect}
             >
               <DisconnectIcon className={styles.icon} />{" "}

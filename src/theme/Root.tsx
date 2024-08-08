@@ -1,8 +1,13 @@
-import React, { ReactChild, createContext, useEffect, useState } from "react";
+import React, {
+  ReactElement,
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { Provider as AlertProvider } from "react-alert";
 import { AlertTemplate, options } from "@site/src/components/Alert";
-import { MetaMaskProvider, useSDK } from "@metamask/sdk-react";
-import BrowserOnly from "@docusaurus/BrowserOnly";
+import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
   DASHBOARD_URL,
   REF_FAUCET_PATH,
@@ -14,33 +19,61 @@ import {
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal from "@site/src/components/AuthLogin/AuthModal";
-import { SDKState } from "@metamask/sdk-react";
 
-interface ILoginContext extends SDKState {
-  projects: any;
-  metaMaskConnectHandler: () => Promise<void>;
-  userId: string;
-}
-const LoginContext = createContext<
-  Omit<ILoginContext, "connecting" | "readOnlyCalls" | "ready">
->({
-  projects: {},
-  metaMaskConnectHandler: () => new Promise(() => {}),
-  userId: "",
-  extensionActive: false,
-  provider: undefined,
-  account: "",
-  sdk: undefined,
-  connected: false,
+const sdk = new MetaMaskSDK({
+  dappMetadata: {
+    name: "Reference pages",
+    url: "https://docs.metamask.io/",
+  },
+  preferDesktop: true,
+  extensionOnly: true,
+  checkInstallationImmediately: false,
+  logging: {
+    sdk: false,
+  },
 });
 
-const LoginProvider = ({ children }) => {
-  const { extensionActive, provider, account, sdk, connected } = useSDK();
+interface ILoginContext {
+  projects: { [key: string]: { name: string } };
+  metaMaskConnectHandler: () => Promise<void>;
+  userId: string;
+  account: string;
+  provider: SDKProvider;
+  sdk: MetaMaskSDK;
+  disconnect: () => Promise<void>;
+}
+
+export const LoginContext = createContext<ILoginContext>({
+  projects: {},
+  metaMaskConnectHandler: () => new Promise(() => {}),
+  userId: undefined,
+  account: undefined,
+  provider: undefined,
+  sdk: undefined,
+  disconnect: () => new Promise(() => {}),
+});
+
+export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState(
     JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
   );
-  const [userId, setUserId] = useState<string>("");
+  const [userId, setUserId] = useState<string>(undefined);
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
+  const [provider, setProvider] = useState(undefined);
+  const [account, setAccount] = useState(undefined);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+
+  if (sdk.isInitialized() && !isInitialized) {
+    setIsInitialized(true);
+  }
+
+  useEffect(() => {
+    if (isInitialized && sdk.isExtensionActive()) {
+      const provider = sdk.getProvider();
+      sdk.resume();
+      setProvider(provider);
+    }
+  }, [isInitialized]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -86,30 +119,45 @@ const LoginProvider = ({ children }) => {
     }
   }, [account]);
 
-  const metaMaskConnectHandler = async () => {
+  const metaMaskConnectHandler = useCallback(async () => {
     try {
-      if (extensionActive && location.pathname.includes(REF_FAUCET_PATH)) {
-        setOpenAuthModal(true);
-      } else {
-        await sdk?.connect();
+      const accounts = await sdk.connect();
+      setAccount(accounts);
+      if (accounts && accounts.length > 0) {
+        setAccount(accounts[0]);
+        const provider = sdk.getProvider();
+        setProvider(provider);
       }
     } catch (err) {
       console.warn("failed to connect..", err);
     }
-  };
+  }, [sdk, setAccount, setProvider]);
+
+  const metaMaskDisconnect = useCallback(async () => {
+    try {
+      await sdk?.terminate();
+      setOpenAuthModal(false);
+      setUserId(undefined);
+      setAccount(undefined);
+      setProjects({});
+    } catch (err) {
+      console.warn("failed to disconnect..", err);
+    }
+  }, [sdk, setOpenAuthModal, setUserId, setAccount, setProjects]);
 
   return (
     <LoginContext.Provider
-      value={{
-        metaMaskConnectHandler,
-        projects,
-        extensionActive,
-        userId,
-        provider,
-        account,
-        sdk,
-        connected,
-      }}
+      value={
+        {
+          projects,
+          metaMaskConnectHandler,
+          metaMaskDisconnect,
+          userId,
+          account,
+          provider,
+          sdk,
+        } as ILoginContext
+      }
     >
       {children}
       <AuthModal
@@ -121,40 +169,12 @@ const LoginProvider = ({ children }) => {
   );
 };
 
-export { LoginContext, LoginProvider };
-
-export default function Root({ children }: { children: ReactChild }) {
-  const MetaMaskWrapper = ({ children }) => {
-    return (
-      <BrowserOnly>
-        {() => (
-          <MetaMaskProvider
-            debug={false}
-            sdkOptions={{
-              checkInstallationOnAllCalls: true,
-              extensionOnly: true,
-              preferDesktop: true,
-              logging: {
-                sdk: false,
-              },
-              dappMetadata: {
-                name: "Reference pages",
-                url: window.location.href,
-              },
-            }}
-          >
-            {children}
-          </MetaMaskProvider>
-        )}
-      </BrowserOnly>
-    );
-  };
-
+export default function Root({ children }: { children: ReactElement }) {
   return (
-    <MetaMaskWrapper>
+    <LoginProvider>
       <AlertProvider template={AlertTemplate} {...options}>
-        <LoginProvider>{children}</LoginProvider>
+        {children}
       </AlertProvider>
-    </MetaMaskWrapper>
+    </LoginProvider>
   );
 }

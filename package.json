@@ -39,6 +39,7 @@
     "@metamask-previews/profile-sync-controller": "0.1.4-preview-16e6df4",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
+    "@metamask/sdk": "^0.27.0",
     "@metamask/sdk-react": "^0.27.0",
     "@rjsf/core": "^5.18.4",
     "@rjsf/utils": "^5.18.4",

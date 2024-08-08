@@ -25,27 +25,26 @@ export default function Hero({
   handleOnInputChange,
   isLoading,
 }: IHero) {
-  const { account, connected, metaMaskConnectHandler } =
-    useContext(LoginContext);
+  const { account, sdk, metaMaskConnectHandler } = useContext(LoginContext);
+  const isExtensionActive = sdk.isExtensionActive();
 
   return (
     <div className={clsx(styles.hero, className)}>
-      {!(connected && account) && <EthIcon />}
+      {!(isExtensionActive && account) && <EthIcon />}
       <Text as="h1">
         {network === "linea" && "Linea Sepolia"}
         {network === "sepolia" && "Sepolia"} ETH delivered straight to your
         wallet.
       </Text>
-      {connected && account && (
-        <Text as="p">Enter your MetaMask wallet address and request ETH.</Text>
-      )}
-      {!(connected && account) && (
-        <Text as="p">
-          Sign in with MetaMask to get started and request ETH.
-        </Text>
-      )}
+      <Text as="p">
+        {!isExtensionActive
+          ? "Install MetaMask for your browser to get started and request ETH."
+          : !account
+            ? "Connect your MetaMask wallet to get started and request ETH."
+            : "Enter your MetaMask wallet address and request ETH."}
+      </Text>
       <div className={styles.actions}>
-        {connected && account && (
+        {isExtensionActive && account && (
           <div className={styles.inputCont}>
             <Input
               label="Wallet address"
@@ -61,13 +60,14 @@ export default function Hero({
             </p>
           </div>
         )}
-        <div className={clsx(connected && account && styles.alignedButtons)}>
+        <div
+          className={clsx(
+            isExtensionActive && account && styles.alignedButtons,
+          )}
+        >
           {!account ? (
-            <Button
-              className={styles.button}
-              onClick={metaMaskConnectHandler}
-            >
-              Connect MetaMask
+            <Button className={styles.button} onClick={metaMaskConnectHandler}>
+              {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
             </Button>
           ) : (
             <Button
