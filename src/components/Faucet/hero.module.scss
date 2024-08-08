@@ -1,13 +1,19 @@
 :root[data-theme="dark"] {
   --hero-text-color: #fff;
+  --hero-image: url("/img/faucet-hero-dark.png");
 }
 
 :root[data-theme="light"] {
   --hero-text-color: #141618;
+  --hero-image: url("/img/faucet-hero-light.png");
 }
 
 .hero {
   color: var(--hero-text-color);
+  background-image: var(--hero-image);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: contain;
 
   .actions {
     display: flex;
