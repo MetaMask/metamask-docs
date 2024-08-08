@@ -27,6 +27,7 @@ import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
+import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 
 interface InteractiveBoxProps {
   params: MethodParam[];
@@ -87,6 +88,7 @@ export default function InteractiveBox({
     // FieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
+    ButtonTemplates: { RemoveButton }
   };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
@@ -94,7 +96,8 @@ export default function InteractiveBox({
   };
   const fields: RegistryFieldsType = {
     AnyOfField: ConditionalField,
-    OneOfField: ConditionalField
+    OneOfField: ConditionalField,
+    // ObjectField: ObjectFieldTemplate
   };
   const handleResetForm = (e) => {
     e.preventDefault();
@@ -154,6 +157,29 @@ export default function InteractiveBox({
   };
 
   // console.log('parsedSchema', parsedSchema)
+
+  const parsedSchema1 = {
+    "title": "A customizable registration form",
+    "description": "A simple form with additional properties example.",
+    "type": "object",
+    "required": [
+      "firstName",
+      "lastName"
+    ],
+    "additionalProperties": {
+      "type": "string"
+    },
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "title": "First name"
+      },
+      "lastName": {
+        "type": "string",
+        "title": "Last name"
+      }
+    }
+  }
 
   return parsedSchema ? (
     <>

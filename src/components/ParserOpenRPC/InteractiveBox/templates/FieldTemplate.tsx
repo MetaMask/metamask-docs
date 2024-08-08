@@ -63,14 +63,14 @@ export const FieldTemplate = (props: FieldTemplateProps) => {
   //           </label>
   //         </div>
   //         <div className={styles.tableColumn}>
-  //           {/*<div className={styles.tableValueRow}>*/}
-  //           {/*<span className={styles.tableColumnType} onClick={addObject}>*/}
-  //           {/*  <span className={styles.dropdown}>*/}
-  //           {/*    {schema.type}*/}
-  //           {/*    <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.chevronIconRight)} />*/}
-  //           {/*  </span>*/}
-  //           {/*</span>*/}
-  //           {/*</div>*/}
+  //           <div className={styles.tableValueRow}>
+  //           <span className={styles.tableColumnType} onClick={addObject}>
+  //             <span className={styles.dropdown}>
+  //               {schema.type}
+  //               <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.chevronIconRight)} />
+  //             </span>
+  //           </span>
+  //           </div>
   //         </div>
   //       </div>
   //       {/*{isComplexTypeView && isEditView ?*/}
