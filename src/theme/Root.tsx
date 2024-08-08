@@ -54,9 +54,7 @@ export const LoginContext = createContext<ILoginContext>({
 });
 
 export const LoginProvider = ({ children }) => {
-  const [projects, setProjects] = useState(
-    JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
-  );
+  const [projects, setProjects] = useState({});
   const [userId, setUserId] = useState<string>(undefined);
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const [provider, setProvider] = useState(undefined);
@@ -76,6 +74,9 @@ export const LoginProvider = ({ children }) => {
   }, [isInitialized]);
 
   useEffect(() => {
+    setProjects(
+      JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+    );
     const url = new URL(window.location.href);
     if (url.pathname.includes(REF_FAUCET_PATH)) {
       const token = url.searchParams.get("token");

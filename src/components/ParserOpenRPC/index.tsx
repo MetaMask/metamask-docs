@@ -53,9 +53,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const [projects, setProjects] = useState(
-    JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
-  );
+  const [projects, setProjects] = useState({});
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const { extensionActive, provider, account, sdk, connected } = useSDK();
   const { colorMode } = useColorMode();
@@ -122,6 +120,10 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (currentMethodData === null) return null;
 
   useEffect(() => {
+    setProjects(
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+    );
+    
     const url = new URL(window.location.href);
     if (url.pathname.startsWith(REF_SERVICES_PATH)) {
       const token = url.searchParams.get("token");

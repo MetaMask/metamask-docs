@@ -3,19 +3,23 @@ import clsx from "clsx";
 import Button from "@site/src/components/Button";
 import CopyIcon from "./copy.svg";
 import DisconnectIcon from "./disconnect.svg";
-import styles from "./navbarWallet.module.scss";
 import { LoginContext } from "@site/src/theme/Root";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import styles from "./navbarWallet.module.scss";
 
-interface INavbarWallet {
+interface INavbarWalletComponent {
   includeUrl: string[];
 }
 
-const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
-  if (!includeUrl.includes(location.pathname)) {
+const NavbarWalletComponent: FC = ({
+  includeUrl = [],
+}: INavbarWalletComponent) => {
+  if (!includeUrl.includes(location?.pathname)) {
     return null;
   }
 
-  const { account, sdk, metaMaskConnectHandler, metaMaskDisconnect } = useContext(LoginContext);
+  const { account, sdk, metaMaskConnectHandler, metaMaskDisconnect } =
+    useContext(LoginContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isExtensionActive = sdk.isExtensionActive();
 
@@ -25,7 +29,7 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(account);
-  }
+  };
 
   return !account ? (
     <Button
@@ -73,6 +77,14 @@ const NavbarWallet: FC = ({ includeUrl = [] }: INavbarWallet) => {
         </ul>
       )}
     </div>
+  );
+};
+
+const NavbarWallet = (props) => {
+  return (
+    <BrowserOnly>
+      <NavbarWalletComponent {...props} />
+    </BrowserOnly>
   );
 };
 
