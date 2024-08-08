@@ -83,7 +83,7 @@ const NavbarWalletComponent: FC = ({
 const NavbarWallet = (props) => {
   return (
     <BrowserOnly>
-      <NavbarWalletComponent {...props} />
+      {() => <NavbarWalletComponent {...props} />}
     </BrowserOnly>
   );
 };
