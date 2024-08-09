@@ -20,34 +20,18 @@ export const ObjectFieldTemplate = (props) => {
   // const schema = oldSchema.properties.requestPermissionsObject
   return (
     <>
-      {properties.map((prop) => prop.content)}
-      {/*{properties.map(({ content }) => (*/}
-      {/*  <div className={styles.tableRow}>*/}
-      {/*    <div className={styles.tableColumn}>*/}
-      {/*      <label className={styles.tableColumnParam}>*/}
-      {/*        <span>{content.props.name}</span>*/}
-      {/*      </label>*/}
-      {/*    </div>*/}
-      {/*    <div className={styles.tableColumn}>*/}
-      {/*      <div className={styles.tableValueRow}>*/}
-      {/*      <span className={styles.tableColumnType}>*/}
-      {/*        <span className={styles.dropdown}>*/}
-      {/*          {schema.type}*/}
-      {/*          <span className={clsx(styles.tableColumnIcon, styles.chevronIcon, styles.chevronIconRight)} />*/}
-      {/*        </span>*/}
-      {/*      </span>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*))}*/}
+      {properties.map((prop, i) => {
+        return (
+          <div key={`${i}`}>
+            {prop.name}
+            {prop.content}
+          </div>
+        )
+      })}
       {canExpand(schema, uiSchema, formData) && (
-        <AddButton
-          className='object-property-expand'
-          onClick={onAddClick(schema)}
-          disabled={disabled || readonly}
-          uiSchema={uiSchema}
-          registry={registry}
-        />
+        <button type="button" onClick={onAddClick(schema)}>
+          Add prop
+        </button>
       )}
     </>
   );

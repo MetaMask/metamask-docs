@@ -36,6 +36,7 @@ interface InteractiveBoxProps {
   onParamChange: (data) => void;
   drawerLabel?: string | null;
   closeComplexTypeView?: () => void;
+  isOpen?: boolean;
 }
 
 export default function InteractiveBox({
@@ -45,6 +46,7 @@ export default function InteractiveBox({
   onParamChange,
   drawerLabel,
   closeComplexTypeView,
+  isOpen = false
 }: InteractiveBoxProps) {
   // console.log('examples', examples)
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
@@ -55,9 +57,14 @@ export default function InteractiveBox({
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
 
+  const checkName = (name: string) => {
+    if (name === "requestPermissionObject") return "requestPermissionsObject"
+    return name
+  }
+
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value]));
+      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => [checkName(name), value]));
       setDefaultFormData({...defaultValues});
       setCurrentFormData({...defaultValues});
       onParamChange({...defaultValues});
@@ -127,8 +134,10 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
-    setCurrentFormData({...data});
-    onParamChange({...data});
+    if (isOpen) {
+      setCurrentFormData({...data});
+      onParamChange({...data});
+    }
   };
 
   const cloneAndSetNullIfExists = (obj, key) => {
