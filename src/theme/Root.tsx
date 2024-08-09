@@ -192,6 +192,7 @@ export const LoginProvider = ({ children }) => {
         open={openAuthModal}
         setOpen={setOpenAuthModal}
         setProjects={setProjects}
+        setUser={setUserId}
       />
     </LoginContext.Provider>
   );

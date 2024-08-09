@@ -16,6 +16,7 @@ import { useAlert } from "react-alert";
 import { LoginContext } from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
+import { DASHBOARD_URL, GET_OPTIONS } from "@site/src/lib/constants";
 
 const lineaMaintenanceFlag = "linea-maintenance-mode";
 const sepoliaMaintenanceFlag = "sepolia-maintenance-mode";
@@ -106,9 +107,17 @@ export default function Faucet() {
     };
   }, []);
 
+  const getTransactions = async () => {
+    const transactions = await fetch(
+      `${DASHBOARD_URL}/api/v1/faucets/linea/transactions?take=10&skip=0`,
+      GET_OPTIONS,
+    );
+    console.log(transactions)
+  };
+
   useEffect(() => {
     if (userId) {
-      setTransactions;
+      getTransactions();
     }
   }, [userId]);
 
