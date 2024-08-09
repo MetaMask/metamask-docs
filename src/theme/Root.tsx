@@ -65,6 +65,22 @@ export const LoginProvider = ({ children }) => {
     setIsInitialized(true);
   }
 
+  const getStaleDate = async () => {
+    try {
+      setProjects(
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+      );
+      setUserId(getUserIdFromSessionStorage());
+      const accounts = await sdk.connect();
+      setAccount(accounts);
+      if (accounts && accounts.length > 0) {
+        setAccount(accounts[0]);
+        const provider = sdk.getProvider();
+        setProvider(provider);
+      }
+    } catch (e) {}
+  };
+
   useEffect(() => {
     if (isInitialized && sdk.isExtensionActive()) {
       const provider = sdk.getProvider();
@@ -74,10 +90,8 @@ export const LoginProvider = ({ children }) => {
   }, [isInitialized]);
 
   useEffect(() => {
-    setProjects(
-      JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
-    );
     const url = new URL(window.location.href);
+    getStaleDate();
     if (url.pathname.includes(REF_FAUCET_PATH)) {
       const token = url.searchParams.get("token");
       if (token) {
