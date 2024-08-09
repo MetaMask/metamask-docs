@@ -1,0 +1,42 @@
+:root[data-theme="dark"] {
+  --maintenance-modal-shadow: rgba(0, 0, 0, 0.4);
+  --maintenance-modal-background: #24272a;
+}
+
+:root[data-theme="light"] {
+  --maintenance-modal-shadow: rgba(44, 59, 88, 0.1);
+  --maintenance-modal-background: #fff;
+}
+
+.maintenance {
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: -55px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 25px 0;
+
+  .modal {
+    position: sticky;
+    top: 80px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px;
+    text-align: center;
+    border-radius: 8px;
+    background: var(--maintenance-modal-background);
+    box-shadow:
+      0px 0px 16px 0px var(--maintenance-modal-shadow),
+      0px 32px 32px 0px var(--maintenance-modal-shadow),
+      0px 16px 16px 0px var(--maintenance-modal-shadow),
+      0px 8px 8px 0px var(--maintenance-modal-shadow),
+      0px 4px 4px 0px var(--maintenance-modal-shadow),
+      0px 2px 2px 0px var(--maintenance-modal-shadow);
+
+    .button {
+      padding: 0 36px;
+    }
+  }
+}

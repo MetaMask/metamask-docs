@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import ldClient from "launchdarkly";
+import { MetaMaskProvider } from "@metamask/sdk-react";
 import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
@@ -24,7 +26,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask
+    (net) => net.name === NETWORK_NAMES.metamask,
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -35,7 +37,7 @@ export default function LayoutWrapper({ children }) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
         (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name)
+          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
       );
       return page;
     }
@@ -57,40 +59,34 @@ export default function LayoutWrapper({ children }) {
   }, []);
 
   if (!referencePageName) {
-    return (
-      <Layout>{children}</Layout>
-    )
+    return <Layout>{children}</Layout>;
   }
 
   return (
     <>
-      {
-        !ldReady ? null : (
-          <>
-            {
-              newReferenceEnabled ? (
-                <Layout>
-                  <div className={styles.pageWrapper}>
-                    {children?.props?.children[0]?.type === "aside" && (
-                    <>{children.props.children[0]}</>
-                  )}
-                  <div className={styles.mainContainer}>
-                    <div className={styles.contentWrapper}>
-                      <ParserOpenRPC
-                        network={NETWORK_NAMES.metamask}
-                        method={referencePageName}
-                      />
-                    </div>
+      {!ldReady ? null : (
+        <>
+          {newReferenceEnabled ? (
+            <Layout>
+              <div className={styles.pageWrapper}>
+                {children?.props?.children[0]?.type === "aside" && (
+                  <>{children.props.children[0]}</>
+                )}
+                <div className={styles.mainContainer}>
+                  <div className={styles.contentWrapper}>
+                    <ParserOpenRPC
+                      network={NETWORK_NAMES.metamask}
+                      method={referencePageName}
+                    />
                   </div>
                 </div>
-              </Layout>
-              ) : (
-                <Layout>{children}</Layout>
-              )
-            }
-          </>
-        )
-      }
+              </div>
+            </Layout>
+          ) : (
+            <Layout>{children}</Layout>
+          )}
+        </>
+      )}
     </>
-  )
+  );
 }

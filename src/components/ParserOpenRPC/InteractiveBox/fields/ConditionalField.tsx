@@ -27,14 +27,14 @@ export const ConditionalField = (props: FieldTemplateProps) => {
   };
   const onDropdownOptionClick = (e) => {
     const selectedSchema = listItems.find(
-      ({ title }) => title === e.target.dataset.value
+      ({ title }) => title === e.target.dataset.value,
     );
     const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type);
     if (isNullTypeSchema) {
       onChange(null);
     } else {
       setSelectedTypeSchema(
-        listItems.find(({ title }) => title === e.target.dataset.value)
+        listItems.find(({ title }) => title === e.target.dataset.value),
       );
       showComplexTypeView();
     }
@@ -80,7 +80,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
             <span
               className={clsx(
                 styles.tableColumnType,
-                styles.tableColumnTypeDropdown
+                styles.tableColumnTypeDropdown,
               )}
               onClick={() => {
                 setIsOpened(!isOpened);
@@ -93,21 +93,21 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     styles.tableColumnIcon,
                     styles.chevronIcon,
                     styles.dropdownChevronIcon,
-                    !isOpened && styles.chevronIconDown
+                    !isOpened && styles.chevronIconDown,
                   )}
                 />
                 <span
                   className={clsx(
                     styles.chevronIcon,
                     styles.dropdownChevronIcon,
-                    !isOpened && styles.chevronIconDown
+                    !isOpened && styles.chevronIconDown,
                   )}
                 />
               </span>
               <ul
                 className={clsx(
                   styles.dropdownList,
-                  !isOpened && styles.dropdownListClosed
+                  !isOpened && styles.dropdownListClosed,
                 )}
               >
                 {listItems?.map((listItem, index) => (

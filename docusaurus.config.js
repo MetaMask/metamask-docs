@@ -88,6 +88,7 @@ const config = {
     ],
   ],
   plugins: [
+    'docusaurus-plugin-sass',
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -168,7 +169,7 @@ const config = {
               replaysOnErrorSampleRate: isProd ? 1.0 : 0,
               replaysSessionSampleRate: isProd ? 1.0 : 0,
               sampleRate: isProd ? 0.25 : 0,
-              tracesSampleRate: 0, 
+              tracesSampleRate: 0,
             },
           },
         },
@@ -208,6 +209,10 @@ const config = {
                 label: "Infura dashboard",
                 to: "developer-tools/dashboard",
               },
+              {
+                label: "Faucet",
+                to: "developer-tools/faucet",
+              },
             ],
           },
           {
@@ -219,6 +224,11 @@ const config = {
             href: "https://support.metamask.io/",
             label: "User support",
             position: "right",
+          },
+          {
+            type: 'custom-navbarWallet',
+            position: "right",
+            includeUrl: ['/developer-tools/faucet/'],
           },
           /* Language drop down
           {

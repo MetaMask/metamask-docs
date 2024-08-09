@@ -27,14 +27,14 @@ export const CollapseBox = ({
     <div
       className={clsx(
         styles.collapseWrapper,
-        !collapsed && styles.collapsedWrapperView
+        !collapsed && styles.collapsedWrapperView,
       )}
     >
       <button
         className={clsx(
           styles.collapseBtn,
           !collapsed && styles.collapsedBtnView,
-          colorMode === "light" && styles.collapsedBtnLightHover
+          colorMode === "light" && styles.collapsedBtnLightHover,
         )}
         onClick={toggleCollapsed}
       >
@@ -42,7 +42,7 @@ export const CollapseBox = ({
         <div
           className={clsx(
             styles.collapseIcon,
-            !collapsed && styles.collapsedIconView
+            !collapsed && styles.collapsedIconView,
           )}
         ></div>
       </button>

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import Icon from "../Icon/Icon";
-import { API_URL } from "../../lib/constants";
+import { DASHBOARD_URL } from "../../lib/constants";
 import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
 
@@ -48,13 +48,13 @@ const TerminalViewBox = ({
               </div>
             ) : (
               <p className="description-row">
-                <Link target="_blank" to={`${API_URL}/login`} rel="noreferrer">
+                <Link target="_blank" to={`${DASHBOARD_URL}/login`} rel="noreferrer">
                   Sign in
                 </Link>{" "}
                 or{" "}
                 <Link
                   target="_blank"
-                  to={`${API_URL}/register`}
+                  to={`${DASHBOARD_URL}/register`}
                   rel="noreferrer">
                   create an account
                 </Link>{" "}

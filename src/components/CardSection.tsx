@@ -28,8 +28,9 @@ const CardList: CardItem[] = [
     link: "/services",
     description: (
       <>
-        Build and scale your dapp or Snap using services provided by MetaMask and Infura.
-        This includes APIs that optimize essential development tasks.
+        Build and scale your dapp or Snap using services provided by MetaMask
+        and Infura. This includes APIs that optimize essential development
+        tasks.
       </>
     ),
   },

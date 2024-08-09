@@ -15,7 +15,7 @@ async function fetchData(url: string, name: string): Promise<ResponseItem> {
 }
 
 async function fetchMultipleData(
-  requests: { url: string; name: string }[]
+  requests: { url: string; name: string }[],
 ): Promise<ResponseItem[]> {
   const promises = requests.map(({ url, name }) => fetchData(url, name));
   const responses = await Promise.all(promises);

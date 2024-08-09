@@ -38,13 +38,13 @@ export const ModalDrawer = ({
     <div
       className={clsx(
         styles.modalContainer,
-        showModal && styles.modalContainerOpen
+        showModal && styles.modalContainerOpen,
       )}
     >
       <div
         className={clsx(
           styles.modalHeader,
-          colorMode === "light" && styles.modalHeaderLight
+          colorMode === "light" && styles.modalHeaderLight,
         )}
       >
         <div className={styles.modalHeaderLabels}>
@@ -62,7 +62,7 @@ export const ModalDrawer = ({
           styles.modalContent,
           isContentFixed
             ? styles.modalContentFixed
-            : styles.modalContentScrolled
+            : styles.modalContentScrolled,
         )}
         ref={contentRef}
       >
