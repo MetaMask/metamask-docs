@@ -1,6 +1,6 @@
 ---
 description: Use JSON Web Tokens to secure data exchange.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 import Tabs from "@theme/Tabs";
@@ -74,51 +74,49 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
 1. Go to the **SECURITY** section in your project settings.
 
-![Security settings](../images/security-page.png)
+  ![Security settings](../images/security-page.png)
 
-:::info
+  :::info
 
-You must implement separate security settings for each project.
+  You must implement separate security settings for each project.
 
-:::
+  :::
 
-2. Check the **Require JWT for all requests** box to enforce JWT on all requests. This is optional.
+2. (Optional) Check the **Require JWT for all requests** box to enforce JWT on all requests.
 
-:::info
+  :::info
 
-Use allowlists to specify a subset of requests that must use JWTs.
+  Use allowlists to specify a subset of requests that must use JWTs.
 
-:::
+  :::
 
 3. Give the public key a name.
 
 4. Paste the public key into the **JWT PUBLIC KEY** input box. It looks something like this:
 
-```
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
-L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
-jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
-w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
-PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
-MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
-4wIDAQAB
------END PUBLIC KEY-----
-```
+  ```
+  -----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
+  L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
+  jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
+  w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
+  PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
+  MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
+  4wIDAQAB
+  -----END PUBLIC KEY-----
+  ```
 
-5. Click **ADD** to add the key to the settings.
+5. Click **ADD** to add the key to the settings. After the key is added, the security settings look like the following:
 
-6. The key is added to security settings.
+  ![JWT set up](../images/jwt-set-up.png)
 
-![JWT set up](../images/jwt-set-up.png)
+6. The key has a **NAME**, **ID**, **FINGERPRINT**. These are used for creating and verifying JWTs. You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
 
-7. The key has a **NAME**, **ID**, **FINGERPRINT**. These are used for creating and verifying JWTs. You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
+  :::info
 
-:::info
+  For key rotation, upload up to three keys for each project.
 
-For key rotation, upload up to three keys for each project.
-
-:::
+  :::
 
 ## Send requests with JWTs
 

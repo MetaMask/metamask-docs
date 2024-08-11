@@ -47,12 +47,22 @@ request to `support@infura.io` and we will assess if your request can be accommo
 | Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |
 
+## Binance Smart Chain
+
+| Network           | Transport type          | URL                                           |
+|-------------------|-------------------------|-----------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |
+
 ## Celo
 
-| Network             | Description         | URL                                             |
-| ------------------- | ------------------- | ----------------------------------------------- |
-| Mainnet             | JSON-RPC over HTTPS | `https://celo-mainnet.infura.io/v3/<API-KEY>`   |
-| Testnet (Alfajores) | JSON-RPC over HTTPS | `https://celo-alfajores.infura.io/v3/<API-KEY>` |
+| Network             | Description             | URL                                              |
+|---------------------|-------------------------|--------------------------------------------------|
+| Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<API-KEY>`    |
+| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<API-KEY>`   |
+| Testnet (Alfajores) | JSON-RPC over HTTPS     | `https://celo-alfajores.infura.io/v3/<API-KEY>`  |
+| Testnet (Alfajores) | JSON-RPC over WebSocket | `wss://celo-alfajores.infura.io/ws/v3/<API-KEY>` |
 
 ## Ethereum
 
@@ -62,13 +72,13 @@ The Holesky testnet is supported through the
 service and does not currently support WebSockets.
 :::
 
-| Network | Description             | URL                                       |
-| ------- | ----------------------- | ----------------------------------------- |
-| Mainnet | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<API-KEY>`  |
-| Mainnet | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<API-KEY>` |
-| Holesky | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<API-KEY>`  |
-| Sepolia | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
-| Sepolia | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
+| Network           | Description             | URL                                       |
+| ----------------- | ----------------------- | ----------------------------------------- |
+| Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## IPFS
 
@@ -96,13 +106,13 @@ Linea Goerli is being deprecated. We discourage new development with this testne
 Sepolia instead.
 
 :::
-| Network | Description | URL |
+| Network           | Description             | URL                                             |
 |-------------------|-------------------------|-------------------------------------------------|
-| Mainnet | JSON-RPC over HTTPS | `https://linea-mainnet.infura.io/v3/<API-KEY>` |
-| Mainnet | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Goerli) | JSON-RPC over HTTPS | `https://linea-goerli.infura.io/v3/<API-KEY>` |
-| Testnet (Goerli) | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://linea-sepolia.infura.io/v3/<API-KEY>` |
+| Mainnet           | JSON-RPC over HTTPS     | `https://linea-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Goerli)  | JSON-RPC over HTTPS     | `https://linea-goerli.infura.io/v3/<API-KEY>`   |
+| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## Mantle
@@ -137,7 +147,7 @@ Sepolia instead.
 | Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<API-KEY>`     |
 | Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<API-KEY>`    |
 
-## StarkNet
+## Starknet
 
 | Network           | Description         | URL                                               |
 | ----------------- | ------------------- | ------------------------------------------------- |

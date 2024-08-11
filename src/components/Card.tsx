@@ -11,8 +11,8 @@ export type CardItem = {
 
 export default function Card({ title, link, description }: CardItem) {
   return (
-    <div className="col col--6 margin-bottom--lg">
-      <Link className={clsx(styles.root, "card")} href={link}>
+    <div className={clsx("col col--4 margin-bottom--lg", styles.cardContainer)}>
+      <Link className={clsx(styles.root, "card")} to={link}>
         <div className="card__header">
           <h3>{title}</h3>
         </div>

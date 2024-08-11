@@ -12,6 +12,8 @@ export default function Root({ children }: { children: ReactChild}) {
       url: "https://docs.metamask.io/",
     },
     preferDesktop: true,
+    extensionOnly: true,
+    checkInstallationImmediately: false,
     logging: {
       sdk: false,
     }

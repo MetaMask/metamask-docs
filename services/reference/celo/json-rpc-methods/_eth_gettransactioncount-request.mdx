@@ -5,10 +5,17 @@ import TabItem from "@theme/TabItem"
   <TabItem value="cURL">
 
 ```bash
-curl https://celo-alfajores.infura.io/v3/YOUR-API-KEY \
+curl https://celo-mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_getTransactionCount", "params": ["0xc94770007dda54cF92009BFF0dE90c06F603a09f", "0x5bad55"], "id": 1}'
+```
+
+  </TabItem>
+    <TabItem value="WSS">
+
+```bash
+wscat -c wss://celo-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getTransactionCount", "params": ["0xc94770007dda54cF92009BFF0dE90c06F603a09f", "0x5bad55"], "id": 1}'
 ```
 
   </TabItem>

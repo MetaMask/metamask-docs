@@ -35,7 +35,7 @@ const requests = [
     name: NETWORK_NAMES.linea,
   },
   {
-    url: "https://metamask.github.io/api-specs/0.9.3/openrpc.json",
+    url: "https://metamask.github.io/api-specs/latest/openrpc.json",
     name: NETWORK_NAMES.metamask,
   },
 ];

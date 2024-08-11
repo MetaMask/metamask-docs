@@ -26,11 +26,10 @@ export default function RequestBox({
 }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams},\n});`;
+    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    if (!response || response === null) return false;
     return JSON.stringify(response, null, 2);
   }, [response]);
 
@@ -51,6 +50,7 @@ export default function RequestBox({
               className={clsx(global.linkBtn, "margin-right--md")}
               disabled={!isMetamaskInstalled}
               onClick={openModal}
+              data-test-id="customize-request"
             >
               Customize request
             </button>
@@ -59,6 +59,7 @@ export default function RequestBox({
             className={global.primaryBtn}
             disabled={!isMetamaskInstalled}
             onClick={submitRequest}
+            data-test-id="run-request"
           >
             Run request
           </button>

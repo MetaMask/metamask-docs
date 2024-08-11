@@ -6,7 +6,7 @@ tags:
   - Unity SDK
 ---
 
-import YoutubeEmbed from '@site/src/components/YoutubeEmbed';
+import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # Use MetaMask SDK with Unity
 

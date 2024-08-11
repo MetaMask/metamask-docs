@@ -124,6 +124,36 @@ level of `SeverityLevel.Critical`.
 
 The following is an example implementation of `onSignature`:
 
+<Tabs>
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onSignature: OnSignatureHandler = async ({
+  signature,
+  signatureOrigin,
+}) => {
+  const insights = /* Get insights based on custom logic */;
+  return {
+    content: (
+      <Box>
+        <Heading>My Signature Insights</Heading>
+        <Text>Here are the insights:</Text>
+        {insights.map((insight) => (
+          <Text>{insight.value}</Text>
+        ))}
+      </Box>
+    ),
+    severity: SeverityLevel.Critical,
+  };
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
 ```typescript title="index.ts"
 import type { OnSignatureHandler, SeverityLevel } from "@metamask/snaps-sdk";
 import { panel, heading, text } from "@metamask/snaps-sdk";
@@ -143,6 +173,9 @@ export const onSignature: OnSignatureHandler = async ({
   };
 };
 ```
+
+</TabItem>
+</Tabs>
 
 When your Snap returns a signature insight with a `severity` of `SeverityLevel.Critical`, the custom
 UI displays in a modal after the user selects the **Sign** button.

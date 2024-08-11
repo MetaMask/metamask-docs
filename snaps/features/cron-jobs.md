@@ -3,6 +3,9 @@ description: Schedule periodic actions for your users.
 sidebar_position: 1
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Cron jobs
 
 You can schedule actions to run periodically at fixed times or intervals, also known as "cron jobs."
@@ -40,8 +43,43 @@ Expose an [`onCronjob`](../reference/entry-points.md#oncronjob) entry point, whi
 the specified schedule with the requests defined in the `endowment:cronjob` permission.
 The following example handles the `execute` method specified in the previous example:
 
+<Tabs>
+
+<TabItem value="JSX">
+
+```tsx title="index.tsx"
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
+
+export const onCronjob: OnCronjobHandler = async ({ request }) => {
+  switch (request.method) {
+    case "execute":
+      // Cron jobs can execute any method that is available to the Snap.
+      return snap.request({
+        method: "snap_dialog",
+        params: {
+          type: "alert",
+          content: (
+            <Box>
+              <Heading>Cron job</Heading>
+              <Text>This dialog was triggered by a cron job.</Text>
+            </Box>
+          ),
+        },
+      });
+
+    default:
+      throw new Error("Method not found.");
+  }
+};
+```
+
+</TabItem>
+<TabItem value="Functions" deprecated>
+
 ```typescript title="index.ts"
-import type { OnCronjobHandler } from "@metamask/snaps-sdk"
+import type { OnCronjobHandler } from "@metamask/snaps-sdk";
+import { panel, heading, text } from "@metamask/snaps-sdk";
 
 export const onCronjob: OnCronjobHandler = async ({ request }) => {
   switch (request.method) {
@@ -63,6 +101,9 @@ export const onCronjob: OnCronjobHandler = async ({ request }) => {
   }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 :::tip Access data from cron jobs
 When accessing [encrypted data](data-storage.md#2-use-encrypted-storage) from cron jobs, MetaMask
