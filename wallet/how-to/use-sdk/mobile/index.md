@@ -1,3 +1,14 @@
+Title-Deuces9ersmask
+Co-Authored/Co-created by Nathaniel Hooker
+@deuces9ers/@DeuceHooker
+https://deuces9ers.io
+
+
+
+
+
+
+
 ---
 sidebar_label: Mobile
 sidebar_position: 3
