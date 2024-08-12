@@ -1,0 +1,76 @@
+---
+title: "starknet_pendingTransactions"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Returns a list of pending transactions.
+
+## Parameters
+
+None.
+
+## Returns
+
+An array of pending
+[Starknet transaction](https://docs.starknet.io/documentation/architecture_and_concepts/Network_Architecture/transactions/)
+objects.
+
+## Example
+
+Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+
+### Request
+
+<Tabs>
+<TabItem value="cURL">
+
+```bash
+curl https://starknet-mainnet.infura.io/v3/6e46ee5c0df54fb48c0fb2a94502c42a \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"starknet_pendingTransactions", "params":[], "id":0}'
+```
+
+</TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "type": "INVOKE",
+      "transaction_hash": "0x51b20a0fc4372f88251e85b273b3fdd1840abde65cd65861691abd8eae8ae24",
+      "max_fee": "0x173ef69c85ddc",
+      "version": "0x0",
+      "signature": ["0x30f5c0835f649d07e0335bcfe9a2844ff644ba5ae746853ac607b304f4ef551", "0x87428cbd6d283c49652003effa075d1479f6ca24e7e6dae5da5e16a587875"],
+      "nonce": "0x0",
+      "contract_address": "0x8451e87f44cdadbe0e235804753194d24939603a025324ca380e73806e39a6",
+      "entry_point_selector": "0x15d40a3d6ca2ac30f4031e42be28da9b056fef9bb7357ac5e85627ee876e5ad",
+      "calldata": ["0x1", "0x7861c4e276294a7e859ff0ae2eec0c68300ad9cbb43219db907da9bad786488", "0x2f0b3c5710379609eb5495f1ecd348cb28167711b73609fe565a72734550354", "0x0", "0x3", "0x3", "0x697066733a2f2f516d543577517453516e4a4173423550377a76436e787574", "0x6d70424b515a756a624e666444734b664c515a363933", "0x0", "0x5"]
+    }, {
+      "type": "INVOKE",
+      "transaction_hash": "0x4a79fbaa6c898a9823ae7d58aa30f70f0cd76da83fcc796b0e8f686d714837a",
+      "max_fee": "0x5fb93c8e0320",
+      "version": "0x0",
+      "signature": ["0x40b94d079352f30849cb1fd11d7e6b7ddb9bf82c0af6a6e59821a1c72607592", "0x7d25b96e4e2664ae0a9aaecf523242a5769773b4a1d2753db97711782fea1c9"],
+      "nonce": "0x0",
+      "contract_address": "0x1e3415180f65313145bb0c6afa3ea73600f5275fbd22c526bbff5de7f9532ee",
+      "entry_point_selector": "0x15d40a3d6ca2ac30f4031e42be28da9b056fef9bb7357ac5e85627ee876e5ad",
+      "calldata": ["0x1", "0x3090623ea32d932ca1236595076b00702e7d860696faf300ca9eb13bfe0a78c", "0x2d4c8ea4c8fb9f571d1f6f9b7692fff8e5ceaf73b1df98e7da8c1109b39ae9a", "0x0", "0x2", "0x2", "0x2a92f0f860bf7c63fb9ef42cff4137006b309e0e6e1484e42d0b5511959414d", "0x1", "0x3"]
+    },
+    ...
+  ],
+  "id": 0
+}
+```
+
+</TabItem>
+</Tabs>
