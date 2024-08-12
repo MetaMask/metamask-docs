@@ -209,7 +209,11 @@ const config = {
               {
                 label: "Infura dashboard",
                 to: "developer-tools/dashboard",
-              }
+              },
+              {
+                label: "Faucet",
+                to: "developer-tools/faucet",
+              },
             ],
           },
           {
