@@ -1,5 +1,6 @@
 import React from "react";
 import Card, { type CardItem } from "@site/src/components/Card";
+import styles from "./CardSection.module.css";
 
 const CardList: CardItem[] = [
   {
@@ -37,7 +38,7 @@ const CardList: CardItem[] = [
 export default function CardSection(): JSX.Element {
   return (
     <section className="container margin-top--sm margin-bottom--lg">
-      <div className="row">
+      <div className={styles.row}>
         {CardList.map((props, idx) => (
           <Card key={idx} {...props} />
         ))}

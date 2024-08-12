@@ -1,6 +1,6 @@
 ---
 description: Use dotenv to load environment variables from a file.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Use JavaScript dotenv

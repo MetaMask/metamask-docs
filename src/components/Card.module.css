@@ -6,9 +6,17 @@
   border: 1px solid var(--ifm-color-emphasis-200);
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .root:hover {
   border-color: #1098fc;
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
 }
