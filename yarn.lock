@@ -12527,6 +12527,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isobject@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "lodash.isobject@npm:3.0.2"
+  checksum: 6c1667cbc4494d0a13a3617a4b23278d6d02dac520311f2bbb43f16f2cf71d2e6eb9dec8057315b77459df4890c756a256a087d3f4baa44a79ab5d6c968b060e
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -13394,6 +13401,7 @@ __metadata:
     js-cookie: ^3.0.5
     launchdarkly-js-client-sdk: ^3.3.0
     lodash.debounce: ^4.0.8
+    lodash.isobject: ^3.0.2
     node-polyfill-webpack-plugin: ^2.0.1
     prettier: ^3.0.0
     prism-react-renderer: ^2.1.0
