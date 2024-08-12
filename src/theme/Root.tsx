@@ -158,6 +158,7 @@ export const LoginProvider = ({ children }) => {
       setUserId(undefined);
       setAccount(undefined);
       setProjects({});
+      sessionStorage.clear()
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
