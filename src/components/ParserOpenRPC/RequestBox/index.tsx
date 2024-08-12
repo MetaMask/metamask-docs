@@ -65,13 +65,13 @@ export default function RequestBox({
           </button>
         </div>
       </div>
-      {response !== null && (
+      {response !== undefined && (
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
             <strong className={styles.cardHeading}>Response</strong>
           </div>
           <div>
-            <CodeBlock language="javascript" className="margin-bottom--none">
+            <CodeBlock language="javascript" className={clsx(styles.responseBlock, "margin-bottom--none")}>
               {exampleResponse}
             </CodeBlock>
           </div>
