@@ -92,7 +92,7 @@ export const LoginProvider = ({ children }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     getStaleDate();
-    if (REF_ALLOW_LOGIN_PATH.includes(url.pathname)) {
+    if (REF_ALLOW_LOGIN_PATH.some((item) => url.pathname.includes(item))) {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);

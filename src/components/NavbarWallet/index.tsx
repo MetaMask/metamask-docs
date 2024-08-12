@@ -14,7 +14,7 @@ interface INavbarWalletComponent {
 const NavbarWalletComponent: FC = ({
   includeUrl = [],
 }: INavbarWalletComponent) => {
-  if (!includeUrl.includes(location?.pathname)) {
+  if (!includeUrl.some(item => location?.pathname.includes(item))) {
     return null;
   }
 
