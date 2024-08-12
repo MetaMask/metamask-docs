@@ -216,7 +216,7 @@ For use in [interactive UI](interactive-ui.md).
 - `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
   when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
-  Possible values are `"primary"` or `"secondary"`.
+  Possible values are `"primary"` or `"destructive"`.
   The default is `"primary"`.
 
 #### Example
