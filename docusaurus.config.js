@@ -3,6 +3,7 @@
 
 require("dotenv").config();
 const { themes } = require("prism-react-renderer");
+const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
@@ -224,7 +225,7 @@ const config = {
           {
             type: 'custom-navbarWallet',
             position: "right",
-            includeUrl: ['/developer-tools/faucet/'],
+            includeUrl: REF_ALLOW_LOGIN_PATH,
           },
           /* Language drop down
           {
