@@ -6,6 +6,13 @@ import CardList from '@site/src/components/CardList'
 
 # Starknet
 
+:::note Decentralized Infrastructure Network (DIN)
+
+Starknet is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
+meaning calls to the network are routed to a [partner infrastructure provider](#partner-and-privacy-policy).
+
+:::
+
 Starknet is a decentralized, permissionless and scalable Layer-2 network protocol developed by StarkWare for the Ethereum
 network. It leverages zk-STARKs technology for scalability and privacy, allowing developers to build and deploy smart contracts
 that can perform more computations than on Ethereum's base layer, while maintaining a high level of security and decentralization.
@@ -36,3 +43,12 @@ See the [Starknet documentation](https://docs.starknet.io/documentation/) to fin
     }
   ]}
 />
+
+## Partner and privacy policy
+
+The following partners provide access to Starknet:
+
+<!-- markdown-link-check-disable -->
+- Bware Labs ([Terms of Service](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
+- Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
+<!-- markdown-link-check-enable -->
