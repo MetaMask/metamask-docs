@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 import ldClient from "launchdarkly";
-import { MetaMaskProvider } from "@metamask/sdk-react";
 import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";

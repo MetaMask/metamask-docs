@@ -1,9 +1,12 @@
-export const PROD_APP_URL = "https://app-git-act-1382-siwsrp-full-flow-infura-web.vercel.app" //"https://app.infura.io";
+export const PROD_APP_URL =
+  "https://app-git-act-1382-siwsrp-full-flow-infura-web.vercel.app"; //"https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
 export const DASHBOARD_URL =
-  process.env.DASHBOARD_PREVIEW_URL ?? process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
+  (process.env.DASHBOARD_PREVIEW_URL ?? process.env.NODE_ENV === "production")
+    ? PROD_APP_URL
+    : DEV_APP_URL;
 
 const TEST_TRANSACTIONS = {
   mainnet: {
@@ -451,10 +454,11 @@ export const GET_OPTIONS = {
 };
 
 export const REF_SERVICES_PATH = "/services/reference/";
-export const REF_FAUCET_PATH = "/developer-tools/faucet/";
 export const REF_WALLET_PATH = "/wallet/reference/";
 
-export const REQUEST_PARAMS = (method = 'POST') => ({
+export const REF_ALLOW_LOGIN_PATH = [REF_SERVICES_PATH, REF_WALLET_PATH];
+
+export const REQUEST_PARAMS = (method = "POST") => ({
   method,
   headers: {
     Accept: "application/json",

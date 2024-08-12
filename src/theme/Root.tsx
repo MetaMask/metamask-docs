@@ -10,7 +10,7 @@ import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
   DASHBOARD_URL,
-  REF_FAUCET_PATH,
+  REF_ALLOW_LOGIN_PATH,
   REQUEST_PARAMS,
 } from "@site/src/lib/constants";
 import {
@@ -92,7 +92,7 @@ export const LoginProvider = ({ children }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     getStaleDate();
-    if (url.pathname.includes(REF_FAUCET_PATH)) {
+    if (REF_ALLOW_LOGIN_PATH.includes(url.pathname)) {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);
@@ -162,16 +162,6 @@ export const LoginProvider = ({ children }) => {
       console.warn("failed to disconnect..", err);
     }
   }, [sdk, setOpenAuthModal, setUserId, setAccount, setProjects]);
-
-  console.log({
-    projects,
-    metaMaskConnectHandler,
-    metaMaskDisconnect,
-    userId,
-    account,
-    provider,
-    sdk,
-  });
 
   return (
     <LoginContext.Provider
