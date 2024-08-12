@@ -9,9 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
-## July 2024
+## August 2024
 
-- Updated documentation on [Starknet API methods](/services/reference/starknet/json-rpc-methods) supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
+- Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
+
+## July 2024
 - Documented [Binance Smart Chain](/services/reference/bnb-smart-chain/) support. ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
 - Documented [Celo WebSocket](/services/reference/celo/) support. ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
 - Documented [ZKsync Era WebSocket](/services/reference/zksync) support. ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))
