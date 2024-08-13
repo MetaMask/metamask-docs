@@ -26,6 +26,8 @@ import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import  * as isObject  from "lodash.isobject"
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
@@ -56,6 +58,25 @@ export default function InteractiveBox({
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
+  const { metaMaskAccount } = useContext(MetamaskProviderContext);
+  const addWalletId = (propName) => ({[propName]: metaMaskAccount})
+  const getObjectWithAddress = (value) => {
+    const addressField = "address"
+    const fromField = "from"
+    if (Object.keys(value).includes(addressField)) {
+      return {
+        ...value,
+        ...addWalletId(addressField)
+      }
+    }
+    if (Object.keys(value).includes(fromField)) {
+      return {
+        ...value,
+        ...addWalletId(fromField)
+      }
+    }
+    return value
+  }
 
   const checkName = (name: string) => {
     if (name === "requestPermissionObject") return "requestPermissionsObject"
@@ -64,12 +85,22 @@ export default function InteractiveBox({
 
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => [checkName(name), value]));
+      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
+        if (metaMaskAccount) {
+          if (name === "Address" || name === "From") {
+            return [name, metaMaskAccount]
+          }
+          if (isObject(value)) {
+            return [name, getObjectWithAddress(value)]
+          }
+        }
+        return [name, value]
+      }));
       setDefaultFormData({...defaultValues});
       setCurrentFormData({...defaultValues});
       onParamChange({...defaultValues});
     }
-  }, [examples]);
+  }, [examples, metaMaskAccount]);
 
   const schema: RJSFSchema = {
     components: {
