@@ -11,7 +11,7 @@ In this tutorial, you'll send a regular transaction of 0.001 ETH from one accoun
 
 ## Prerequisites
 
-- A [Web3 project](../../../api/getting-started.md) on Infura
+- A [Web3 project](../../../get-started/infura.md) on Infura
 - [Node.js installed](https://nodejs.org/en/download/)
 - An Ethereum account
 
