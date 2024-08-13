@@ -32,7 +32,7 @@ export const ParserOpenRPCContext =
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [isModalOpen, setModalOpen] = useState(false);
-  const [reqResult, setReqResult] = useState(null);
+  const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
@@ -88,11 +88,12 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
     );
 
     return {
-      description: currentMethod.summary || currentMethod.description || null,
+      description: currentMethod.description || currentMethod.summary || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
       examples: currentMethod?.examples,
+      paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
     };
@@ -103,18 +104,27 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
+    trackInputChangeForSegment({
+      eventName: "Request Configuration Started",
+      userExperience: "B",
+    });
+
     if (
       typeof data !== "object" ||
       data === null ||
       Object.keys(data).length === 0
     ) {
       setParamsData([]);
+      return
     }
+
+    if (typeof data === "object" && currentMethodData.paramStructure === "by-name") {
+      setParamsData({...data});
+      return
+    }
+
     setParamsData(Object.values(data));
-    trackInputChangeForSegment({
-      eventName: "Request Configuration Started",
-      userExperience: "B",
-    });
+    
   };
 
   const onSubmitRequestHandle = async () => {
@@ -206,6 +216,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               onParamChange={onParamsChangeHandle}
               drawerLabel={drawerLabel}
               closeComplexTypeView={closeComplexTypeView}
+              isOpen={isModalOpen}
             />
           </ModalDrawer>
         </div>
