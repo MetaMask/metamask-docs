@@ -15,7 +15,7 @@ import {
 } from "@site/src/lib/constants";
 import {
   AUTH_WALLET_PROJECTS,
-  getUserIdFromSessionStorage,
+  getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal from "@site/src/components/AuthLogin/AuthModal";
@@ -70,7 +70,7 @@ export const LoginProvider = ({ children }) => {
       setProjects(
         JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
       );
-      setUserId(getUserIdFromSessionStorage());
+      setUserId(getUserIdFromJwtToken());
       const accounts = await sdk.connect();
       setAccount(accounts);
       if (accounts && accounts.length > 0) {
@@ -96,8 +96,8 @@ export const LoginProvider = ({ children }) => {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);
-        const userIdFromSession = getUserIdFromSessionStorage();
-        setUserId(userIdFromSession);
+        const userIdFromjwtToken = getUserIdFromJwtToken();
+        setUserId(userIdFromjwtToken);
 
         (async () => {
           const projectsResponse = await fetch(
@@ -136,10 +136,10 @@ export const LoginProvider = ({ children }) => {
 
   const metaMaskConnectHandler = useCallback(async () => {
     try {
+      const accounts = await sdk.connect();
       if (sdk.isExtensionActive()) {
         setOpenAuthModal(true);
       }
-      const accounts = await sdk.connect();
       setAccount(accounts);
       if (accounts && accounts.length > 0) {
         setAccount(accounts[0]);

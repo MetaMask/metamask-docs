@@ -17,7 +17,7 @@ import {
 } from "@site/src/lib/segmentAnalytics";
 import {
   saveTokenString,
-  getUserIdFromSessionStorage,
+  getUserIdFromJwtToken,
   AUTH_WALLET_PROJECTS,
 } from "@site/src/lib/siwsrp/auth";
 import {
@@ -130,7 +130,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);
-        const userId = getUserIdFromSessionStorage();
+        const userId = getUserIdFromJwtToken();
         (async () => {
           const projectsResponse = await fetch(
             `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
@@ -222,11 +222,8 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
 
   const metaMaskConnectHandler = async () => {
     try {
-      if (extensionActive && location.pathname.startsWith(REF_SERVICES_PATH)) {
-        setOpenAuthModal(true);
-      } else {
-        await sdk?.connect();
-      }
+      await sdk?.connect();
+      setOpenAuthModal(true);
     } catch (err) {
       console.warn("failed to connect..", err);
     }
