@@ -18,7 +18,10 @@ import {
   getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
-import AuthModal from "@site/src/components/AuthLogin/AuthModal";
+import AuthModal, {
+  AUTH_LOGIN_STEP,
+} from "@site/src/components/AuthLogin/AuthModal";
+import { Project } from "@site/src/components/ParserOpenRPC/ProjectsBox";
 
 const sdk = new MetaMaskSDK({
   dappMetadata: {
@@ -34,8 +37,9 @@ const sdk = new MetaMaskSDK({
 });
 
 interface ILoginContext {
-  projects: { [key: string]: { name: string } };
+  projects: { [key: string]: Project };
   metaMaskConnectHandler: () => Promise<void>;
+  metaMaskDisconnect: () => Promise<void>;
   userId: string;
   account: string;
   provider: SDKProvider;
@@ -46,6 +50,7 @@ interface ILoginContext {
 export const LoginContext = createContext<ILoginContext>({
   projects: {},
   metaMaskConnectHandler: () => new Promise(() => {}),
+  metaMaskDisconnect: () => new Promise(() => {}),
   userId: undefined,
   account: undefined,
   provider: undefined,
@@ -60,6 +65,7 @@ export const LoginProvider = ({ children }) => {
   const [provider, setProvider] = useState(undefined);
   const [account, setAccount] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -68,7 +74,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
       );
       setUserId(getUserIdFromJwtToken());
       const accounts = await sdk.connect();
@@ -100,25 +106,33 @@ export const LoginProvider = ({ children }) => {
         setUserId(userIdFromjwtToken);
 
         (async () => {
-          const projectsResponse = await fetch(
-            `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
-            {
-              ...REQUEST_PARAMS("GET"),
-              headers: {
-                ...REQUEST_PARAMS("GET").headers,
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          );
-          const {
-            result: { projects },
-          } = await projectsResponse.json();
-          sessionStorage.setItem(
-            AUTH_WALLET_PROJECTS,
-            JSON.stringify(projects),
-          );
-          setProjects(projects);
-          window.location.replace(`${url.origin}${url.pathname}`);
+          try {
+            const projectsResponse = await fetch(
+              `${DASHBOARD_URL}/api/v1/users/${userIdFromjwtToken}/projects`,
+              {
+                ...REQUEST_PARAMS("GET"),
+                headers: {
+                  ...REQUEST_PARAMS("GET").headers,
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            const res = await projectsResponse.json();
+            if (res.error) throw new Error(res.error.message);
+
+            const {
+              result: { projects },
+            } = res;
+            sessionStorage.setItem(
+              AUTH_WALLET_PROJECTS,
+              JSON.stringify(projects)
+            );
+            setProjects(projects);
+            window.location.replace(`${url.origin}${url.pathname}`);
+          } catch (e: any) {
+            setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+            setOpenAuthModal(true);
+          }
         })();
       }
     }
@@ -158,7 +172,7 @@ export const LoginProvider = ({ children }) => {
       setUserId(undefined);
       setAccount(undefined);
       setProjects({});
-      sessionStorage.clear()
+      sessionStorage.clear();
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -184,6 +198,8 @@ export const LoginProvider = ({ children }) => {
         setOpen={setOpenAuthModal}
         setProjects={setProjects}
         setUser={setUserId}
+        setStep={setStep}
+        step={step}
       />
     </LoginContext.Provider>
   );

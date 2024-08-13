@@ -24,7 +24,7 @@ import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
+import { LoginContext } from "@site/src/theme/Root";
 import  * as isObject  from "lodash.isobject"
 
 interface InteractiveBoxProps {
@@ -53,7 +53,7 @@ export default function InteractiveBox({
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
-  const { metaMaskAccount } = useContext(MetamaskProviderContext);
+  const { account: metaMaskAccount } = useContext(LoginContext);
   const addWalletId = (propName) => ({[propName]: metaMaskAccount})
   const getObjectWithAddress = (value) => {
     const addressField = "address"
