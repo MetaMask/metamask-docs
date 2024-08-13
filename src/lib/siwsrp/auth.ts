@@ -1,4 +1,5 @@
 import { SDK } from '@metamask-previews/profile-sync-controller'
+import jwt from 'jsonwebtoken'
 
 type HydraEnv = {
   authApiUrl: string
@@ -73,6 +74,9 @@ export const saveTokenString = (token: string) => {
   sessionStorage.setItem(AUTH_WALLET_TOKEN, token)
 }
 
-export const getUserIdFromSessionStorage = () => {
-  return sessionStorage.getItem(AUTH_WALLET_TOKEN).split('=')[0].split('::')[2]
+export const getUserIdFromJwtToken = () => {
+  const token = sessionStorage.getItem(AUTH_WALLET_TOKEN)
+  const decoded = jwt.decode(token as string, { complete: true }) as jwt.Jwt
+  const { id } = decoded.payload as jwt.Payload
+  return id
 }
