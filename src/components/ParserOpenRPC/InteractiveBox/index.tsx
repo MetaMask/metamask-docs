@@ -79,8 +79,8 @@ export default function InteractiveBox({
   }
 
   const checkName = (name: string) => {
-    if (name === "requestPermissionObject") return "requestPermissionsObject"
-    return name
+    if (name === "requestPermissionObject") return "requestPermissionsObject";
+    return name;
   }
 
   useEffect(() => {
@@ -88,13 +88,13 @@ export default function InteractiveBox({
       const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
         if (metaMaskAccount) {
           if (name === "Address" || name === "From") {
-            return [name, metaMaskAccount]
+            return [checkName(name), metaMaskAccount]
           }
           if (isObject(value)) {
-            return [name, getObjectWithAddress(value)]
+            return [checkName(name), getObjectWithAddress(value)]
           }
         }
-        return [name, value]
+        return [checkName(name), value]
       }));
       setDefaultFormData({...defaultValues});
       setCurrentFormData({...defaultValues});
