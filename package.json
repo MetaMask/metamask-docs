@@ -48,6 +48,7 @@
     "dotenv": "^16.4.5",
     "ethers": "^6.13.2",
     "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
     "node-polyfill-webpack-plugin": "^2.0.1",

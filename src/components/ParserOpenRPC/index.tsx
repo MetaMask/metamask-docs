@@ -17,7 +17,7 @@ import {
 } from "@site/src/lib/segmentAnalytics";
 import {
   saveTokenString,
-  getUserIdFromSessionStorage,
+  getUserIdFromJwtToken,
   AUTH_WALLET_PROJECTS,
 } from "@site/src/lib/siwsrp/auth";
 import {
@@ -127,7 +127,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);
-        const userId = getUserIdFromSessionStorage();
+        const userId = getUserIdFromJwtToken();
         (async () => {
           const projectsResponse = await fetch(
             `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,

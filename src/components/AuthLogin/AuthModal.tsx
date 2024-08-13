@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
-import { authenticateAndAuthorize, AUTH_WALLET_PAIRING, AUTH_WALLET_SESSION_NAME, AUTH_WALLET_PROJECTS, saveTokenString, getUserIdFromSessionStorage } from "../../lib/siwsrp/auth";
+import { authenticateAndAuthorize, AUTH_WALLET_PAIRING, AUTH_WALLET_SESSION_NAME, AUTH_WALLET_PROJECTS, saveTokenString, getUserIdFromJwtToken } from "../../lib/siwsrp/auth";
 import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
 
 Modal.setAppElement("#__docusaurus");
@@ -125,7 +125,7 @@ const AuthModal = ({ open, setOpen, setProjects }: AuthModalProps) => {
 
     const { token } = await userWithTokenResponse.json();
     saveTokenString(token)
-    const userId = getUserIdFromSessionStorage()
+    const userId = getUserIdFromJwtToken()
 
     // You can use Infura Access Token to fetch any Infura API endpoint
     const projectsResponse = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}/projects`, {
