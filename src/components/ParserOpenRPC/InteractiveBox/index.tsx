@@ -19,7 +19,6 @@ import global from "../global.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 import { ObjectFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate";
-import { FieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/FieldTemplate";
 import { WrapIfAdditionalTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate";
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
@@ -28,6 +27,7 @@ import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
+import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
 interface InteractiveBoxProps {
   params: MethodParam[];
@@ -48,11 +48,11 @@ export default function InteractiveBox({
   closeComplexTypeView,
   isOpen = false
 }: InteractiveBoxProps) {
-  // console.log('examples', examples)
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [currentFormData, setCurrentFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
+  const [currentSchemaId, setCurrentSchemaId] = useState("");
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
@@ -84,18 +84,16 @@ export default function InteractiveBox({
     "ui:globalOptions": {
       label: false,
     },
-    "ui:widget": "checkbox",
-    // 'ui:ObjectFieldTemplate': ObjectFieldTemplate
+    "ui:widget": "checkbox"
   };
   const templates = {
     BaseInputTemplate,
     ArrayFieldTemplate,
-    // WrapIfAdditionalTemplate,
+    WrapIfAdditionalTemplate,
     ObjectFieldTemplate,
-    // FieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
-    ButtonTemplates: { RemoveButton }
+    ButtonTemplates: { AddButton, RemoveButton }
   };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
@@ -104,7 +102,6 @@ export default function InteractiveBox({
   const fields: RegistryFieldsType = {
     AnyOfField: ConditionalField,
     OneOfField: ConditionalField,
-    // ObjectField: ObjectFieldTemplate
   };
   const handleResetForm = (e) => {
     e.preventDefault();
@@ -165,31 +162,6 @@ export default function InteractiveBox({
     closeComplexTypeView();
   };
 
-  // console.log('parsedSchema', parsedSchema)
-
-  const parsedSchema1 = {
-    "title": "A customizable registration form",
-    "description": "A simple form with additional properties example.",
-    "type": "object",
-    "required": [
-      "firstName",
-      "lastName"
-    ],
-    "additionalProperties": {
-      "type": "string"
-    },
-    "properties": {
-      "firstName": {
-        "type": "string",
-        "title": "First name"
-      },
-      "lastName": {
-        "type": "string",
-        "title": "Last name"
-      }
-    }
-  }
-
   return parsedSchema ? (
     <>
       <div className={styles.tableHeadingRow}>
@@ -199,12 +171,11 @@ export default function InteractiveBox({
       <Form
         schema={parsedSchema}
         formData={currentFormData}
-        formContext={{ isFormReseted }}
+        formContext={{ currentSchemaId, isFormReseted, setCurrentSchemaId }}
         validator={validator}
         liveValidate
         noHtml5Validate
         onChange={(data) => {
-          // console.log('data', data)
           onChangeHandler(data.formData);
         }}
         templates={templates}

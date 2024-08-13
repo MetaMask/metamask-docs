@@ -1,10 +1,23 @@
 import React from "react";
+import clsx from "clsx";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
 
-export const RemoveButton = (props) => {
-  const { icon, iconType, ...btnProps } = props;
-  return (
-    <button {...btnProps}>
-      Remove
-    </button>
-  );
-}
+export const RemoveButton = (props) => (
+  <button
+    className={clsx(
+      styles.tableButton,
+      styles.tableButtonAddNewArray
+    )}
+    {...props}
+  >
+    <img
+      src="/img/icons/minus-icon.svg"
+      alt="Remove"
+      width="16px"
+      height="16px"
+    />
+    <span className={styles.tableButtonAddArrayItemName}>
+        Remove
+    </span>
+  </button>
+);
