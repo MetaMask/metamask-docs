@@ -21,6 +21,7 @@
 }
 
 .modalContent {
+  color: #FFF;
   --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
   position: relative;
 }

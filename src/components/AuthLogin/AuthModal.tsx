@@ -3,7 +3,14 @@ import Modal from "react-modal";
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
-import { authenticateAndAuthorize, AUTH_WALLET_PAIRING, AUTH_WALLET_SESSION_NAME, AUTH_WALLET_PROJECTS, saveTokenString, getUserIdFromJwtToken } from "../../lib/siwsrp/auth";
+import {
+  authenticateAndAuthorize,
+  AUTH_WALLET_PAIRING,
+  AUTH_WALLET_SESSION_NAME,
+  AUTH_WALLET_PROJECTS,
+  saveTokenString,
+  getUserIdFromJwtToken,
+} from "../../lib/siwsrp/auth";
 import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
 
 Modal.setAppElement("#__docusaurus");
@@ -12,9 +19,11 @@ type AuthModalProps = {
   setOpen: (arg: boolean) => void;
   setProjects: (arg: any[]) => void;
   setUser: (arg: string) => void;
+  step: AUTH_LOGIN_STEP;
+  setStep: (arg: AUTH_LOGIN_STEP) => void;
 };
 
-enum AUTH_LOGIN_STEP {
+export enum AUTH_LOGIN_STEP {
   CONNECTING = "connecting",
   WALLET_LOGIN_MULTI_USER = "wallet-login-multi-user",
   WALLET_LOGIN_EMAIL_PASSWORD = "wallet-login-email-password",
@@ -51,30 +60,57 @@ const ConnectingModal = () => {
   );
 };
 
-const ConnectionErrorModal = () => {
+const ConnectionErrorModal = ({
+  setOpen,
+  login,
+}: {
+  setOpen: (arg: boolean) => void;
+  login: () => void;
+}) => {
   return (
     <>
       <div className={styles.spinnerContainer}>
         <Icon name="spinner-error" classes={styles.spinner} />
         <Icon name="metamask" classes={styles.metamask} />
       </div>
-      <div className={styles.heading}>There was an issue connecting your wallet</div>
+      <div className={styles.heading}>
+        There was an issue connecting your wallet
+      </div>
       <div className={styles.content}>
         Please try again or <a href="#">contact us</a>.
       </div>
       <div className={styles.flexButton}>
-        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.secondaryBtn}>Cancel</button>
-        <button style={{ flex: "1", display: "block", margin: "0 5px" }} className={global.primaryBtn}>Retry</button>
+        <button
+          style={{ flex: "1", display: "block", margin: "0 5px" }}
+          className={global.secondaryBtn}
+          onClick={() => setOpen(false)}
+        >
+          Cancel
+        </button>
+        <button
+          style={{ flex: "1", display: "block", margin: "0 5px" }}
+          className={global.primaryBtn}
+          onClick={login}
+        >
+          Retry
+        </button>
       </div>
     </>
   );
 };
 
-const AuthModal = ({ open, setOpen, setProjects, setUser }: AuthModalProps) => {
-  const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
-
+const AuthModal = ({
+  open,
+  setOpen,
+  setProjects,
+  setUser,
+  step,
+  setStep,
+}: AuthModalProps) => {
   const login = async () => {
-    // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
+    setStep(AUTH_LOGIN_STEP.CONNECTING)
+    try {
+      // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
     // Hydra Access Token will be used to fetch Infura API
     const { accessToken, userProfile } = await authenticateAndAuthorize();
 
@@ -91,64 +127,82 @@ const AuthModal = ({ open, setOpen, setProjects, setUser }: AuthModalProps) => {
     });
 
     const usersPairing = await pairingResponse.json();
-    const { data } = usersPairing
-    // Saving of paired Infura accounts in local storage 
-    localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }))
-    
+    const { data } = usersPairing;
+    // Saving of paired Infura accounts in local storage
+    localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
+
     // Handling no wallet pairing or multiple pairing
     if (data.length !== 1) {
-      const mm_auth = Buffer.from(JSON.stringify({
-        token: true,
-        step: data.length > 1 ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
-        mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
-        walletPairing: data
-      })).toString('base64')  
-      window.location.href = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`
-      return
+      const mm_auth = Buffer.from(
+        JSON.stringify({
+          token: true,
+          step:
+            data.length > 1
+              ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER
+              : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
+          mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
+          walletPairing: data,
+        })
+      ).toString("base64");
+      window.location.href = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
+      return;
     }
-    
+
     // We have one wallet paired with one Infura account
     // Use this Infura email account and this ProfileId to login to Infura
     // Pass token in request params to generate and recieve an Infura access Token
-    const email = data[0].email as string
-    const userWithTokenResponse = await fetch(`${DASHBOARD_URL}/api/wallet/login?token=true`, {
-      ...REQUEST_PARAMS(),
-      headers: {
-        ...REQUEST_PARAMS().headers,
-        hydra_token: accessToken,
-        recaptcha_bypass: "84450394",
-      },
-      body: JSON.stringify({
-        email,
-        profileId: userProfile.profileId
-      })
-    });
+    const email = data[0].email as string;
+    const userWithTokenResponse = await fetch(
+      `${DASHBOARD_URL}/api/wallet/login?token=true`,
+      {
+        ...REQUEST_PARAMS(),
+        headers: {
+          ...REQUEST_PARAMS().headers,
+          hydra_token: accessToken,
+          recaptcha_bypass: "84450394",
+        },
+        body: JSON.stringify({
+          email,
+          profileId: userProfile.profileId,
+        }),
+      }
+    );
 
     const { token } = await userWithTokenResponse.json();
-    saveTokenString(token)
-    const userId = getUserIdFromJwtToken()
+    saveTokenString(token);
+    const userId = getUserIdFromJwtToken();
 
     // You can use Infura Access Token to fetch any Infura API endpoint
-    const projectsResponse = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}/projects`, {
-      ...REQUEST_PARAMS('GET'),
-      headers: {
-        ...REQUEST_PARAMS('GET').headers,
-        Authorization: `Bearer ${token}`
+    const projectsResponse = await fetch(
+      `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
+      {
+        ...REQUEST_PARAMS("GET"),
+        headers: {
+          ...REQUEST_PARAMS("GET").headers,
+          Authorization: `Bearer ${token}`,
+        },
       }
-    });
-    const { result: { projects }} = await projectsResponse.json()
-    sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects))
-    setProjects(projects)
-    setOpen(false)
+    );
+    const {
+      result: { projects },
+    } = await projectsResponse.json();
+    sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects));
+    setProjects(projects);
+    setOpen(false);
+
+    } catch (e: any) {
+      setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
+      setOpen(true)
+    }
   };
 
   useEffect(() => {
-    if (open) {
+    if (open && step == AUTH_LOGIN_STEP.CONNECTING) {
       (async () => {
         try {
           await login();
         } catch (e: any) {
-          setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
+          setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
         }
       })();
     }
@@ -171,7 +225,9 @@ const AuthModal = ({ open, setOpen, setProjects, setUser }: AuthModalProps) => {
           <Icon name="close" classes={styles.modalClose} />
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
-        {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? <ConnectionErrorModal /> : null}
+        {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
+          <ConnectionErrorModal setOpen={setOpen} login={login} />
+        ) : null}
       </div>
     </Modal>
   );
