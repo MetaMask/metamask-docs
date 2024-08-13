@@ -24,6 +24,8 @@ import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import  * as isObject  from "lodash.isobject"
 
 interface InteractiveBoxProps {
   params: MethodParam[];
@@ -32,6 +34,7 @@ interface InteractiveBoxProps {
   onParamChange: (data) => void;
   drawerLabel?: string | null;
   closeComplexTypeView?: () => void;
+  isOpen?: boolean;
 }
 
 export default function InteractiveBox({
@@ -41,6 +44,7 @@ export default function InteractiveBox({
   onParamChange,
   drawerLabel,
   closeComplexTypeView,
+  isOpen = false
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
@@ -49,15 +53,44 @@ export default function InteractiveBox({
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
+  const { metaMaskAccount } = useContext(MetamaskProviderContext);
+  const addWalletId = (propName) => ({[propName]: metaMaskAccount})
+  const getObjectWithAddress = (value) => {
+    const addressField = "address"
+    const fromField = "from"
+    if (Object.keys(value).includes(addressField)) {
+      return {
+        ...value,
+        ...addWalletId(addressField)
+      }
+    }
+    if (Object.keys(value).includes(fromField)) {
+      return {
+        ...value,
+        ...addWalletId(fromField)
+      }
+    }
+    return value
+  }
 
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => [name, value]));
+      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
+        if (metaMaskAccount) {
+          if (name === "Address" || name === "From") {
+            return [name, metaMaskAccount]
+          }
+          if (isObject(value)) {
+            return [name, getObjectWithAddress(value)]
+          }
+        }
+        return [name, value]
+      }));
       setDefaultFormData({...defaultValues});
       setCurrentFormData({...defaultValues});
       onParamChange({...defaultValues});
     }
-  }, [examples]);
+  }, [examples, metaMaskAccount]);
 
   const schema: RJSFSchema = {
     components: {
@@ -116,8 +149,10 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
-    setCurrentFormData({...data});
-    onParamChange({...data});
+    if (isOpen) {
+      setCurrentFormData({...data});
+      onParamChange({...data});
+    }
   };
 
   const cloneAndSetNullIfExists = (obj, key) => {
