@@ -30,11 +30,10 @@
   --mm-flask-color: hsl(280, 45%, 30%);
   --mm-flask-border-color: hsl(280, 45%, 45%);
 
-  --ifm-heading-font-family: var(--font-mm-sans);
+  --ifm-font-family-monospace: var(--font-mm-sans-mono);
+  --ifm-heading-font-family: var(--ifm-font-family-monospace);
   --ifm-font-family-base: var(--font-mm-centra);
   --font-family-sans: var(--font-mm-sans);
-  --ifm-font-family-monospace: var(--font-mm-sans-mono);
-  
 
   --ifm-color-success: var(--consumer-green);
   --ifm-color-info: var(--consumer-blue);
