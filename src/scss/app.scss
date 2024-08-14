@@ -188,10 +188,6 @@ body {
   color: var(--general-black);
 
   background: var(--general-white);
-
-  @include bp('tablet') {
-    font-size: 2.4rem;
-  }
 }
 
 // Main WebGL Container
