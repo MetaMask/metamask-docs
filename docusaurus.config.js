@@ -89,6 +89,7 @@ const config = {
   ],
   plugins: [
     'docusaurus-plugin-sass',
+    "./src/plugins/mm-scss-utils",
     [
       "@docusaurus/plugin-content-docs",
       {
