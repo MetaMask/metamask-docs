@@ -1,3 +1,4 @@
+@import "./app.scss";
 @import "../../node_modules/@metamask/design-tokens/src/css/design-tokens";
 
 /**
@@ -20,6 +21,11 @@
   --mm-flask-background-color: hsl(280, 45%, 85%);
   --mm-flask-color: hsl(280, 45%, 30%);
   --mm-flask-border-color: hsl(280, 45%, 45%);
+
+  --ifm-heading-font-family: var(--font-mm-sans);
+  --ifm-font-family-base: var(--font-mm-centra);
+  --font-family-sans: var(--font-mm-sans);
+  --ifm-font-family-monospace: var(--font-mm-sans-mono);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -75,6 +81,10 @@
     var(--ifm-color-emphasis-200) 0%,
     var(--ifm-color-emphasis-100) 100%
   );
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
 }
 
 h1 {
