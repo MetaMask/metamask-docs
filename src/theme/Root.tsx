@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Provider as AlertProvider } from "react-alert";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
@@ -191,29 +192,34 @@ export const LoginProvider = ({ children }) => {
   }, [sdk, setOpenAuthModal, setUserId, setAccount, setProjects]);
 
   return (
-    <LoginContext.Provider
-      value={
-        {
-          projects,
-          metaMaskConnectHandler,
-          metaMaskDisconnect,
-          userId,
-          account,
-          provider,
-          sdk,
-        } as ILoginContext
-      }
-    >
-      {children}
-      <AuthModal
-        open={openAuthModal}
-        setOpen={setOpenAuthModal}
-        setProjects={setProjects}
-        setUser={setUserId}
-        setStep={setStep}
-        step={step}
-      />
-    </LoginContext.Provider>
+    <BrowserOnly>
+      {() => (
+        <LoginContext.Provider
+          value={
+            {
+              projects,
+              metaMaskConnectHandler,
+              metaMaskDisconnect,
+              userId,
+              account,
+              provider,
+              sdk,
+            } as ILoginContext
+          }
+        >
+          {children}
+
+          <AuthModal
+            open={openAuthModal}
+            setOpen={setOpenAuthModal}
+            setProjects={setProjects}
+            setUser={setUserId}
+            setStep={setStep}
+            step={step}
+          />
+        </LoginContext.Provider>
+      )}
+    </BrowserOnly>
   );
 };
 
