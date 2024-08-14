@@ -21,7 +21,6 @@ import {
 import AuthModal, {
   AUTH_LOGIN_STEP,
 } from "@site/src/components/AuthLogin/AuthModal";
-import { Project } from "@site/src/components/ParserOpenRPC/ProjectsBox";
 
 const sdk = new MetaMaskSDK({
   dappMetadata: {
@@ -35,6 +34,19 @@ const sdk = new MetaMaskSDK({
     sdk: false,
   },
 });
+interface Project {
+  id: string;
+  userId: string;
+  name: string;
+  created: number;
+  updated: number;
+  deleted: boolean;
+  settings: any;
+  networks: {
+    [key: string]: { subnets: number[] };
+  };
+  role: string;
+}
 
 interface ILoginContext {
   projects: { [key: string]: Project };

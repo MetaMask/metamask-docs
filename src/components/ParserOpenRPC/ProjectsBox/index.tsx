@@ -1,26 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { LoginContext } from "@site/src/theme/Root";
 import Select from "react-dropdown-select";
 import styles from "./styles.module.css";
 
-export interface Project {
-  id: string;
-  userId: string;
-  name: string;
-  created: number;
-  updated: number;
-  deleted: boolean;
-  settings: any;
-  networks: {
-    [key: string]: { subnets: number[] };
-  };
-  role: string;
-}
-
-export interface ProjectsBoxProps {
-  projects: { [key: string]: Project };
-}
-
-const ProjectsBox = ({ projects }: ProjectsBoxProps) => {
+const ProjectsBox = () => {
+  const { projects, account } = useContext(LoginContext);
   const options = Object.keys(projects).map((v) => ({
     value: v,
     label: projects[v].name,
@@ -30,6 +14,7 @@ const ProjectsBox = ({ projects }: ProjectsBoxProps) => {
   return (
     <div className={styles.selectWrapper}>
       <div className={styles.selectTitle}>Infura API Key</div>
+      {account && !!Object.keys(projects).length ? 
       <Select
         className={styles.selectProjects}
         multi={false}
@@ -66,7 +51,7 @@ const ProjectsBox = ({ projects }: ProjectsBoxProps) => {
             </div>
           );
         }}
-      />
+      /> : <div className={styles.selectProjects}>Connect your MetaMask wallet to start sending requests to your Infura API keys.</div>}
     </div>
   );
 };

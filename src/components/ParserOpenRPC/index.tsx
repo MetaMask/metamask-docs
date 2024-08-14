@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -14,9 +20,7 @@ import {
   trackClickForSegment,
   trackInputChangeForSegment,
 } from "@site/src/lib/segmentAnalytics";
-import {
-  REF_SERVICES_PATH,
-} from "@site/src/lib/constants";
+import { REF_SERVICES_PATH } from "@site/src/lib/constants";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 import { LoginContext } from "@site/src/theme/Root";
 
@@ -239,11 +243,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {account &&
-              location.pathname.startsWith(REF_SERVICES_PATH) &&
-              !!Object.keys(projects).length && (
-                <ProjectsBox projects={projects} />
-              )}
+            {location.pathname.startsWith(REF_SERVICES_PATH) && (
+              <ProjectsBox />
+            )}
             <RequestBox
               isMetamaskInstalled={!!provider}
               method={method}
