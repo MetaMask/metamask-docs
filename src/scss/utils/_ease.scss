@@ -1,0 +1,69 @@
+// Cubic
+$cubic-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$cubic-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+$cubic-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+// Circ
+$circ-in: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+$circ-out: cubic-bezier(0.075, 0.82, 0.165, 1);
+$circ-in-out: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+// Expo
+$expo-in: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$expo-out: cubic-bezier(0.19, 1, 0.22, 1);
+$expo-in-out: cubic-bezier(1, 0, 0, 1);
+
+// Quad
+$quad-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$quad-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$quad-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+// Quart
+$quart-in: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+$quart-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+$quart-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+// Quint
+$quint-in: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$quint-out: cubic-bezier(0.23, 1, 0.32, 1);
+$quint-in-out: cubic-bezier(0.86, 0, 0.07, 1);
+
+// Sine
+$sine-in: cubic-bezier(0.47, 0, 0.745, 0.715);
+$sine-out: cubic-bezier(0.39, 0.575, 0.565, 1);
+$sine-in-out: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+// Back
+$back-in: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+$back-out: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$back-in-out: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Figma Gentle
+$gentle-ease: cubic-bezier(0.4, 1.35, 0.5, 0.97);
+
+// Linear Spring
+$spring-ease: linear(
+  0,
+  0.007,
+  0.03 2.1%,
+  0.122 4.6%,
+  0.243 6.9%,
+  0.645 13.7%,
+  0.85 18.1%,
+  0.926,
+  0.987,
+  1.032 24.7%,
+  1.064 27.1%,
+  1.077 28.7%,
+  1.085,
+  1.088 32.3%,
+  1.086 34.3%,
+  1.074 37.8%,
+  1.033 45.8%,
+  1.015 50%,
+  1.002 54.7%,
+  0.994 59.6%,
+  0.992 66.4%,
+  0.999 85%,
+  1.001
+);

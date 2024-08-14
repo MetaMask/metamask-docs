@@ -1,0 +1,325 @@
+/*
+* Font Families
+*/
+
+.font-mm-sans {
+  font-family: var(--font-mm-sans);
+}
+
+.font-mm-sans-mono {
+  font-family: var(--font-mm-sans-mono);
+}
+
+.font-mm-sans-variable {
+  font-family: var(--font-mm-sans-variable);
+  font-variation-settings: 'wdth' var(--variable-font-wdth);
+}
+
+.font-mm-poly-variable {
+  --variable-font-wdth: 20;
+  --variable-font-reso: 5;
+
+  font-family: var(--font-mm-poly-variable);
+  font-variation-settings:
+    'wdth' var(--variable-font-wdth),
+    'RESO' var(--variable-font-reso);
+}
+
+.font-primary {
+  font-family: var(--font-mm-centra);
+}
+
+/*
+* Font Weights
+*/
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+/*
+* Links
+*/
+
+a:not(.text-decoration-none) {
+  text-decoration: none;
+
+  @include hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+  }
+}
+
+.text-decoration-underline,
+a.text-decoration-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.4rem;
+}
+
+/*
+* Utils
+*/
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+/*
+* Display
+*/
+
+.type-display-xxl {
+  font-size: 6.4rem;
+  line-height: 100%;
+  letter-spacing: -0.06rem;
+
+  @include bp('desktop') {
+    font-size: 16rem;
+    letter-spacing: -0.096rem;
+  }
+}
+
+.type-display-xl {
+  font-size: 5.6rem;
+  line-height: 100%;
+  letter-spacing: -0.048rem;
+
+  @include bp('desktop') {
+    font-size: 12.8rem;
+    letter-spacing: -0.076rem;
+  }
+}
+
+.type-display-l {
+  font-size: 4.8rem;
+  line-height: 100%;
+
+  @include bp('desktop') {
+    font-size: 10.4rem;
+  }
+}
+
+.type-display-ml {
+  font-size: 4rem;
+  line-height: 100%;
+
+  @include bp('desktop') {
+    font-size: 8rem;
+  }
+}
+
+.type-display-m {
+  font-size: 3.2rem;
+  line-height: 100%;
+
+  @include bp('desktop') {
+    font-size: 6.4rem;
+  }
+}
+
+.type-display-s {
+  font-size: 2.4rem;
+  line-height: 100%;
+
+  @include bp('desktop') {
+    font-size: 5.6rem;
+  }
+}
+
+/*
+* Heading
+*/
+
+.type-heading-xxl {
+  font-size: 6rem;
+  line-height: 113.333%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 9.6rem;
+    line-height: 108.333%;
+  }
+}
+
+.type-heading-xl {
+  font-size: 4.8rem;
+  line-height: 116.667%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 7.6rem;
+    line-height: 110.526%;
+  }
+}
+
+.type-heading-l {
+  font-size: 3.8rem;
+  line-height: 126.316%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 6rem;
+    line-height: 113.333%;
+  }
+}
+
+.type-heading-ml {
+  font-size: 3.2rem;
+  line-height: 125%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 4.8rem;
+    line-height: 116.667%;
+  }
+}
+
+.type-heading-m {
+  font-size: 2.4rem;
+  line-height: 133.333%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 4rem;
+    line-height: 120%;
+  }
+}
+
+.type-heading-sm {
+  font-size: 2rem;
+  line-height: 140%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 3.2rem;
+    line-height: 125%;
+  }
+}
+
+.type-heading-s {
+  font-size: 1.8rem;
+  line-height: 150%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 2.4rem;
+    line-height: 133.333%;
+  }
+}
+
+.type-heading-xs {
+  font-size: 1.6rem;
+  line-height: 166.667%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 2rem;
+    line-height: 140%;
+  }
+}
+
+.type-heading-xxs {
+  font-size: 1.4rem;
+  line-height: 157%;
+
+  &.uppercase {
+    line-height: 100%;
+  }
+
+  @include bp('desktop') {
+    font-size: 1.6rem;
+    line-height: 150%;
+  }
+}
+
+/*
+* Paragraph
+*/
+
+.type-paragraph-l {
+  font-size: 1.8rem;
+  line-height: 144.444%;
+
+  @include bp('desktop') {
+    font-size: 2rem;
+    line-height: 140%;
+  }
+}
+
+.type-paragraph-m {
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.type-paragraph-s {
+  font-size: 1.2rem;
+  line-height: 166.667%;
+
+  @include bp('desktop') {
+    line-height: 150%;
+  }
+}
+
+/*
+* Labels
+*/
+
+.type-label {
+  font-size: 1.2rem;
+
+  @include bp('desktop') {
+    font-size: 1.6rem;
+  }
+}
+
+.type-label-eyebrow {
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.type-label-caption {
+  font-size: 1.2rem;
+  line-height: 166.667%;
+
+  @include bp('desktop') {
+    line-height: 150%;
+  }
+}

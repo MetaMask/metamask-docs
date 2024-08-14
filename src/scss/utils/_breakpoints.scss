@@ -1,0 +1,43 @@
+/*
+* Breakpoints
+*/
+$tablet: 768px;
+$desktop: 1025px;
+$tablet-max: calc(#{$tablet} - 1px);
+$desktop-max: calc(#{$desktop} - 1px);
+
+@mixin bp($class) {
+  @if $class == tablet {
+    @media screen and (min-width: $tablet) {
+      @content;
+    }
+  }
+
+ @else if $class == desktop {
+    @media screen and (min-width: $desktop) {
+      @content;
+    }
+  }
+
+ @else {
+    @warn "responsive mixin supports: tablet, desktop";
+  }
+}
+
+@mixin bp-max($class) {
+  @if $class == tablet {
+    @media screen and (max-width: $tablet-max) {
+      @content;
+    }
+  }
+
+ @else if $class == desktop {
+    @media screen and (max-width: $desktop-max) {
+      @content;
+    }
+  }
+
+ @else {
+    @warn "responsive mixin supports: tablet, desktop";
+  }
+}
