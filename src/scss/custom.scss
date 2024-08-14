@@ -15,6 +15,14 @@
   --ifm-color-primary-light: var(--brand-colors-blue-blue400);
   --ifm-color-primary-lighter: var(--brand-colors-blue-blue300);
   --ifm-color-primary-lightest: var(--brand-colors-blue-blue200);
+
+  --ifm-heading-color: var(--general-black);
+  --color-text-heading: var(--ifm-heading-color);
+  --color-text: var(--general-black);
+  --color-text-paragraph: var(--color-text);
+  --ifm-button-color: var(--general-white);
+  --ifm-button-background-color: var(--general-black);
+
   --ifm-menu-color: var(--ifm-heading-color);
   --ifm-code-font-size: 90%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
@@ -26,6 +34,38 @@
   --ifm-font-family-base: var(--font-mm-centra);
   --font-family-sans: var(--font-mm-sans);
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
+  
+
+  --ifm-color-success: var(--consumer-green);
+  --ifm-color-info: var(--consumer-blue);
+  --ifm-color-warning: var(--consumer-orange);
+  --ifm-color-danger: var(--error);
+  --ifm-color-primary-darkest: var(--consumer-blue-dark);
+  --ifm-color-primary-lightest: var(--consumer-blue-light);
+  --ifm-color-primary-contrast-background: var(--general-white-off);
+  --ifm-color-primary-contrast-foreground: var(--consumer-blue-dark);
+  --ifm-color-success-darker: var(--consumer-green-dark);
+  --ifm-color-success-darkest: var(--institution-green-dark-2);
+  --ifm-color-success-light: var(--consumer-green);
+  --ifm-color-success-lighter: var(--consumer-green-light);
+  --ifm-color-success-lightest: var(--consumer-green-tint);
+  --ifm-color-success-contrast-foreground: var(--institution-green-dark-2);
+  --ifm-color-info-darkest: var(--consumer-blue-dark);
+  --ifm-color-info-light: var(--consumer-blue);
+  --ifm-color-info-lightest: var(--consumer-blue-light);
+  --ifm-color-white: var(--general-white);
+  --ifm-color-black: var(--general-black);
+  --ifm-color-gray-100: var(--general-white-off);
+  --ifm-color-gray-200: var(--general-gray-light);
+  --ifm-color-gray-500: var(--general-gray);
+  --ifm-color-gray-600: var(--general-gray-mid);
+  --ifm-color-gray-700: var(--general-gray-dark);
+  --ifm-color-gray-800: var(--general-black-light);
+  --ifm-color-gray-900: var(--general-black-mid);
+  --ifm-color-gray-1000: var(--ifm-color-black);
+  --ifm-color-content-secondary: var(--general-gray-dark);
+
+  --ifm-container-width-xl: var(--site-container-max-width);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -41,6 +81,9 @@
   --mm-flask-background-color: hsl(280, 45%, 30%);
   --mm-flask-color: hsl(280, 45%, 85%);
   --mm-flask-border-color: hsl(280, 45%, 45%);
+
+  --general-black: #fff;
+  --general-white: #0a0a0a;
 }
 
 [data-theme="light"] .DocSearch {
