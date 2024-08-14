@@ -243,9 +243,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {location.pathname.startsWith(REF_SERVICES_PATH) && (
-              <ProjectsBox />
-            )}
+            {location.pathname.startsWith(REF_SERVICES_PATH) && <ProjectsBox />}
             <RequestBox
               isMetamaskInstalled={!!provider}
               method={method}
