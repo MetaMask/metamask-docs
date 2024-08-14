@@ -1,11 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require("dotenv").config();
-const { themes } = require("prism-react-renderer");
-const codeTheme = themes.dracula;
-const remarkCodesandbox = require("remark-codesandbox");
-const isProd = process.env.NODE_ENV === "production";
+require("dotenv").config()
+const { themes } = require("prism-react-renderer")
+const codeTheme = themes.dracula
+const remarkCodesandbox = require("remark-codesandbox")
+const isProd = process.env.NODE_ENV === "production"
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -82,12 +82,13 @@ const config = {
           },
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: require.resolve("./src/scss/custom.scss"),
         },
       }),
     ],
   ],
   plugins: [
+    'docusaurus-plugin-sass',
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -149,13 +150,13 @@ const config = {
     "./src/plugins/plugin-json-rpc.ts",
     isProd
       ? [
-          "docusaurus-plugin-segment",
-          {
-            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-            load: { cookie: { sameSite: "None", secure: true } },
-            page: true,
-          },
-        ]
+        "docusaurus-plugin-segment",
+        {
+          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+          load: { cookie: { sameSite: "None", secure: true } },
+          page: true,
+        },
+      ]
       : null,
     "./src/plugins/launchdarkly",
     [
@@ -168,7 +169,7 @@ const config = {
               replaysOnErrorSampleRate: isProd ? 1.0 : 0,
               replaysSessionSampleRate: isProd ? 1.0 : 0,
               sampleRate: isProd ? 0.25 : 0,
-              tracesSampleRate: 0, 
+              tracesSampleRate: 0,
             },
           },
         },
@@ -376,6 +377,6 @@ const config = {
         },
       },
     }),
-};
+}
 
-module.exports = config;
+module.exports = config
