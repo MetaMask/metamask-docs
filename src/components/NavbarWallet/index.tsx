@@ -1,4 +1,5 @@
-import React, { useState, FC, useContext } from "react";
+import React, { useEffect, useState, FC, useContext } from "react";
+import ldClient from "launchdarkly";
 import clsx from "clsx";
 import Button from "@site/src/components/Button";
 import CopyIcon from "./copy.svg";
@@ -11,10 +12,12 @@ interface INavbarWalletComponent {
   includeUrl: string[];
 }
 
+const LOGIN_FF = "mm-unified-login";
+
 const NavbarWalletComponent: FC = ({
   includeUrl = [],
 }: INavbarWalletComponent) => {
-  if (!includeUrl.some(item => location?.pathname.includes(item))) {
+  if (!includeUrl.some((item) => location?.pathname.includes(item))) {
     return null;
   }
 
@@ -81,10 +84,28 @@ const NavbarWalletComponent: FC = ({
 };
 
 const NavbarWallet = (props) => {
+  const [ldReady, setLdReady] = useState(false);
+  const [loginEnabled, setLoginEnabled] = useState(false);
+
+  useEffect(() => {
+    ldClient.waitUntilReady().then(() => {
+      setLoginEnabled(ldClient.variation(LOGIN_FF, false));
+      setLdReady(true);
+    });
+    const handleChange = (current) => {
+      setLoginEnabled(current);
+    };
+    ldClient.on(`change:${LOGIN_FF}`, handleChange);
+    return () => {
+      ldClient.off(`change:${LOGIN_FF}`, handleChange);
+    };
+  }, []);
+
   return (
-    <BrowserOnly>
-      {() => <NavbarWalletComponent {...props} />}
-    </BrowserOnly>
+    ldReady &&
+    loginEnabled && (
+      <BrowserOnly>{() => <NavbarWalletComponent {...props} />}</BrowserOnly>
+    )
   );
 };
 
