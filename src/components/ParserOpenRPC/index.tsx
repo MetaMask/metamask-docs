@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import ldClient from "launchdarkly";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
@@ -40,8 +39,6 @@ interface ParserOpenRPCContextProps {
 export const ParserOpenRPCContext =
   createContext<ParserOpenRPCContextProps | null>(null);
 
-const LOGIN_FF = "mm-unified-login";
-
 export default function ParserOpenRPC({ network, method }: ParserProps) {
   if (!method || !network) return null;
   const [isModalOpen, setModalOpen] = useState(false);
@@ -50,9 +47,6 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const [ldReady, setLdReady] = useState(false);
-  const [loginEnabled, setLoginEnabled] = useState(false);
-
   const { account, provider } = useContext(LoginContext);
   const { colorMode } = useColorMode();
   const openModal = () => {
@@ -65,20 +59,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   };
   const closeModal = () => setModalOpen(false);
 
-  useEffect(() => {
-    ldClient.waitUntilReady().then(() => {
-      setLoginEnabled(ldClient.variation(LOGIN_FF, false));
-      setLdReady(true);
-    });
-    const handleChange = (current) => {
-      setLoginEnabled(current);
-    };
-    ldClient.on(`change:${LOGIN_FF}`, handleChange);
-    return () => {
-      ldClient.off(`change:${LOGIN_FF}`, handleChange);
-    };
-  }, []);
-
+  
   const { netData } = usePluginData("plugin-json-rpc") as {
     netData?: ResponseItem[];
   };
@@ -263,9 +244,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {ldReady &&
-              loginEnabled &&
-              location.pathname.startsWith(REF_SERVICES_PATH) && (
+            {location.pathname.startsWith(REF_SERVICES_PATH) && (
                 <ProjectsBox />
               )}
             <RequestBox
