@@ -34,6 +34,7 @@ const config = {
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     VERCEL_ENV: process.env.VERCEL_ENV,
+    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
   },
 
   trailingSlash: true,
