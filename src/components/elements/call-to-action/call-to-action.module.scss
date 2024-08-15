@@ -1,9 +1,10 @@
 .call-to-action {
   position: relative;
-  padding: 2.5rem 0 3rem;
+  padding: 4.8rem 0 6.4rem;
+  overflow: hidden;
 
   @include bp(desktop) {
-    padding: 4.8rem 0 16rem;
+    padding: 8rem 0 16rem;
   }
 }
 
@@ -31,26 +32,46 @@
   }
 }
 
-.inner-container {
+.grid-inner {
   display: flex;
-  flex-direction: column;
-  gap: 2.85rem;
-  justify-content: space-between;
-
   background-color: var(--general-black-light);
   color: var(--general-white);
 
+  @include bp-max(tablet) {
+    flex-direction: column;
+  }
+
   @include bp('tablet') {
-    flex-direction: row;
-    gap: 0;
+    gap: 4rem;
+  }
+
+  @include bp('desktop') {
+    gap: 2.85rem;
   }
 }
 
-.head {
-  z-index: 1;
-  flex-shrink: 0;
+.grid-col-left {
+  padding: 3.2rem;
+  flex: 0 0 auto;
 
-  padding: 6.4rem 4.4rem 0;
+  @include bp('tablet') {
+    position: relative;
+    width: calc(50% - $grid-gutter-width-desktop / 2);
+    padding: 8rem 0 7.1rem 5.2rem;
+  }
+
+  @include bp('desktop') {
+    padding: 10rem 8.8rem;
+  }
+}
+
+.grid-col-right {
+  position: relative;
+
+  @include bp-max(tablet) {
+    height: 18.7rem;
+    order: -1;
+  }
 
   @include bp('tablet') {
     position: relative;
@@ -63,31 +84,52 @@
   }
 }
 
+.shape {
+  position: absolute;
+  left: 11rem;
+  bottom: -1.8rem;
+  width: 34.3rem;
+  height: 39.8rem;
+
+  @include bp(tablet) {
+    width: 51.2rem;
+    height: 59.5rem;
+    left: -1.6rem;
+    bottom: 0;
+  }
+
+  @include bp(desktop) {
+    left: 10.2rem;
+    bottom: -8.5rem;
+    width: 65.5rem;
+    height: 76.1rem;
+  }
+}
+
 .title {
   color: var(--developer-purple-light);
 }
 
 .description {
-  margin-top: 2rem;
+  margin-top: 1.8rem;
 
   @include bp('tablet') {
-    margin-top: 0;
+    margin-top: 2.2rem;
   }
 
   @include bp('desktop') {
     max-width: 33.6rem;
-    margin-top: 2.2rem;
   }
 }
 
 .button {
-  margin-top: 1.6rem;
+  margin-top: 2.2rem;
 
   @include bp('tablet') {
-    margin-top: 1.4rem;
+    margin-top: 3rem;
   }
 
   @include bp('desktop') {
-    margin-top: 2.4rem;
+    margin-top: 3.2rem;
   }
 }
