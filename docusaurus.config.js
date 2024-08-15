@@ -33,6 +33,7 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    VERCEL_ENV: process.env.VERCEL_ENV,
   },
 
   trailingSlash: true,
@@ -89,7 +90,7 @@ const config = {
     ],
   ],
   plugins: [
-    'docusaurus-plugin-sass',
+    "docusaurus-plugin-sass",
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -209,7 +210,7 @@ const config = {
               {
                 label: "Infura dashboard",
                 to: "developer-tools/dashboard",
-              }
+              },
             ],
           },
           {
@@ -223,7 +224,7 @@ const config = {
             position: "right",
           },
           {
-            type: 'custom-navbarWallet',
+            type: "custom-navbarWallet",
             position: "right",
             includeUrl: REF_ALLOW_LOGIN_PATH,
           },

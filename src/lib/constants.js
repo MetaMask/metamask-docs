@@ -1,12 +1,16 @@
+import siteConfig from "@generated/docusaurus.config";
+
+const { VERCEL_ENV } = siteConfig.customFields;
+
 export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
 export const DASHBOARD_URL = process.env.DASHBOARD_PREVIEW_URL
   ? process.env.DASHBOARD_PREVIEW_URL
-  : process.env.VERCEL_ENV === "production"
+  : VERCEL_ENV === "production"
     ? PROD_APP_URL
-    : process.env.VERCEL_ENV === "preview"
+    : VERCEL_ENV === "preview"
       ? STAGE_APP_URL
       : DEV_APP_URL;
 
