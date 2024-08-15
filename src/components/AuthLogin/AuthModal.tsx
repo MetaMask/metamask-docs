@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from "./styles.module.css";
@@ -104,7 +104,6 @@ const AuthModal = ({
   open,
   setOpen,
   setProjects,
-  setUser,
   step,
   setStep,
 }: AuthModalProps) => {
