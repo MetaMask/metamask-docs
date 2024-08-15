@@ -8,7 +8,7 @@ export const DASHBOARD_URL = process.env.DASHBOARD_PREVIEW_URL
     ? PROD_APP_URL
     : process.env.VERCEL_ENV === "preview"
       ? STAGE_APP_URL
-      : "https://app-git-act-1382-siwsrp-full-flow-infura-web.vercel.app"; //DEV_APP_URL;
+      : DEV_APP_URL;
 
 const TEST_TRANSACTIONS = {
   mainnet: {
