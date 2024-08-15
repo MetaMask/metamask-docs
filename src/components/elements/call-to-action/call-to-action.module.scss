@@ -1,0 +1,93 @@
+.call-to-action {
+  position: relative;
+  padding: 2.5rem 0 3rem;
+
+  @include bp(desktop) {
+    padding: 4.8rem 0 16rem;
+  }
+}
+
+.container {
+  position: relative;
+  color: var(--color-secondary);
+}
+
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+  }
+}
+
+.grid-col-center {
+  position: relative;
+
+  @include bp('tablet') {
+    @include grid-column-span(8);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(14);
+    @include grid-column-start(2);
+  }
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.85rem;
+  justify-content: space-between;
+
+  background-color: var(--general-black-light);
+  color: var(--general-white);
+
+  @include bp('tablet') {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.head {
+  z-index: 1;
+  flex-shrink: 0;
+
+  padding: 6.4rem 4.4rem 0;
+
+  @include bp('tablet') {
+    position: relative;
+    width: calc(50% - $grid-gutter-width-desktop / 2);
+    padding: 10rem 0 7.1rem 10.2rem;
+  }
+
+  @include bp('desktop') {
+    padding: 10rem 8.8rem;
+  }
+}
+
+.title {
+  color: var(--developer-purple-light);
+}
+
+.description {
+  margin-top: 2rem;
+
+  @include bp('tablet') {
+    margin-top: 0;
+  }
+
+  @include bp('desktop') {
+    max-width: 33.6rem;
+    margin-top: 2.2rem;
+  }
+}
+
+.button {
+  margin-top: 1.6rem;
+
+  @include bp('tablet') {
+    margin-top: 1.4rem;
+  }
+
+  @include bp('desktop') {
+    margin-top: 2.4rem;
+  }
+}
