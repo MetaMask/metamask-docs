@@ -13,9 +13,10 @@ export default function Home(): JSX.Element {
         description={
           "Integrate with and extend upon the world's leading self-custodial crypto wallet."
         }
-        link={{
-          to: '/wallet',
+        button={{
           label: 'Get Started',
+          href: '/wallet',
+          icon: 'arrow-right',
         }}
       />
       <CardSection />
@@ -24,9 +25,11 @@ export default function Home(): JSX.Element {
         description={
           'Join the MetaMask developer community and learn how to contribute to the MetaMask project itself.'
         }
-        link={{
-          to: '/wallet',
+        button={{
           label: 'Contribute',
+          href: 'https://github.com',
+          icon: 'github',
+          external: true,
         }}
       />
     </Layout>
