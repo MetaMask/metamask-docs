@@ -2,6 +2,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.8rem;
   height: 4.2rem;
   line-height: 1;
+  text-transform: uppercase;
+
+  &--light {
+    background-color: var(--general-white);
+    color: var(--general-black);
+
+    &:hover {
+      color: var(--general-black);
+    }
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
 }
