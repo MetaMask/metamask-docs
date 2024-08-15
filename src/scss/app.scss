@@ -1,4 +1,3 @@
-@use 'sass:math';
 @import 'commons/fonts';
 @import 'commons/reset';
 @import 'commons/typescale';
@@ -6,6 +5,7 @@
 @import 'commons/animations';
 @import 'elements/form';
 @import 'elements/contentful-rich-text';
+@import 'elements/buttons';
 
 :root {
   // Defines a CSS variable to reduce motion for all CSS animations & transitions
@@ -187,6 +187,10 @@ body {
   color: var(--general-black);
 
   background: var(--general-white);
+  
+  [data-theme="dark"] & {
+    background: var(--general-gray-dark);
+  }
 }
 
 // Main WebGL Container
@@ -210,6 +214,7 @@ body {
   width: calc(100% - var(--page-padding-x) * 2);
   max-width: none;
   margin: 0 auto;
+  padding: 0;
 
   @include bp('tablet') {
     max-width: none;

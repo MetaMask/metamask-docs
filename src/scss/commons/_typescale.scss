@@ -41,7 +41,7 @@
 * Links
 */
 
-a:not(.text-decoration-none) {
+a:not(.text-decoration-none, .button) {
   text-decoration: none;
 
   @include hover {
