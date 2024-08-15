@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Provider as AlertProvider } from "react-alert";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
@@ -79,6 +80,8 @@ export const LoginProvider = ({ children }) => {
   const [account, setAccount] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
+  const { siteConfig } = useDocusaurusContext();
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -121,7 +124,7 @@ export const LoginProvider = ({ children }) => {
         (async () => {
           try {
             const projectsResponse = await fetch(
-              `${DASHBOARD_URL}/api/v1/users/${userIdFromjwtToken}/projects`,
+              `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
                 ...REQUEST_PARAMS("GET"),
                 headers: {
