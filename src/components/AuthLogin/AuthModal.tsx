@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
@@ -107,6 +108,9 @@ const AuthModal = ({
   step,
   setStep,
 }: AuthModalProps) => {
+  const { siteConfig } = useDocusaurusContext();
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING)
     try {
@@ -115,7 +119,7 @@ const AuthModal = ({
     const { accessToken, userProfile } = await authenticateAndAuthorize();
 
     // Check on Infura API if this wallet is paired with one or multiple Infura account
-    const pairingResponse = await fetch(`${DASHBOARD_URL}/api/wallet/pairing`, {
+    const pairingResponse = await fetch(`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/pairing`, {
       ...REQUEST_PARAMS(),
       headers: {
         ...REQUEST_PARAMS().headers,
@@ -144,7 +148,7 @@ const AuthModal = ({
           walletPairing: data,
         })
       ).toString("base64");
-      window.location.href = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
+      window.location.href = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
       return;
     }
 
@@ -153,7 +157,7 @@ const AuthModal = ({
     // Pass token in request params to generate and recieve an Infura access Token
     const email = data[0].email as string;
     const userWithTokenResponse = await fetch(
-      `${DASHBOARD_URL}/api/wallet/login?token=true`,
+      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login?token=true`,
       {
         ...REQUEST_PARAMS(),
         headers: {
@@ -174,7 +178,7 @@ const AuthModal = ({
 
     // You can use Infura Access Token to fetch any Infura API endpoint
     const projectsResponse = await fetch(
-      `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
+      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
       {
         ...REQUEST_PARAMS("GET"),
         headers: {
