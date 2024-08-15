@@ -1,0 +1,68 @@
+.wrapper {
+  padding-top: 3.2rem;
+  padding-bottom: 1.8rem;
+
+  background-color: var(--general-black-light);
+  color: var(--general-white);
+
+  @include bp('tablet') {
+    padding-top: 4.8rem;
+    padding-bottom: 8rem;
+  }
+
+  @include bp('desktop') {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.grid-col-left {
+  @include bp('tablet') {
+    @include grid-column-span(4);
+    @include grid-column-start(2);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(7);
+    @include grid-column-start(2);
+    padding-top: 9rem;
+    padding-bottom: 9.4rem;
+  }
+}
+
+.title {
+  color: var(--developer-purple-light);
+}
+
+.description {
+  margin-top: 2rem;
+
+  @include bp('tablet') {
+    margin-top: 0;
+  }
+
+  @include bp('desktop') {
+    max-width: 42.4rem;
+    margin-top: 2.2rem;
+  }
+}
+
+.button {
+  margin-top: 1.6rem;
+
+  @include bp('tablet') {
+    margin-top: 1.4rem;
+  }
+
+  @include bp('desktop') {
+    margin-top: 2.4rem;
+  }
+}

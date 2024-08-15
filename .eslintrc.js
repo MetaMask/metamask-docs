@@ -1,6 +1,7 @@
 module.exports = {
   extends: [
     "plugin:@docusaurus/recommended",
+    "plugin:prettier/recommended"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -10,11 +11,12 @@ module.exports = {
       "jsx": true
     },
     project: ["./tsconfig.json"],
-    
+
   },
   plugins: ["react"],
   rules: {
+    "no-unused-vars": "warn",
     '@docusaurus/no-untranslated-text': 0,
     "react/no-unknown-property": ["error", { ignore: ["*"] }],
   },
-};
+}
