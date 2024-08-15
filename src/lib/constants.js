@@ -1,6 +1,7 @@
-import siteConfig from "@generated/docusaurus.config";
+const siteConfig = require("../../docusaurus.config");
 
-const { VERCEL_ENV } = siteConfig.customFields;
+let customFields = siteConfig?.customFields || {}
+const { VERCEL_ENV } = customFields
 
 export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
