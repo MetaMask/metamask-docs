@@ -1,48 +1,56 @@
-import React from "react";
-import Card, { type CardItem } from "@site/src/components/Card";
-import styles from "./CardSection.module.css";
+import clsx from 'clsx'
+import { CSSProperties, JSX } from 'react'
+import Heading from '@theme/Heading'
+import Card, { CardItem } from '@site/src/components/Card'
 
-const CardList: CardItem[] = [
-  {
-    title: "📱 Integrate your dapp with the MetaMask wallet",
-    link: "/wallet",
-    description: (
-      <>
-        Integrate your dapp with MetaMask using the Wallet API. You can interact
-        with your users&apos; Ethereum accounts from multiple dapp platforms.
-      </>
-    ),
-  },
-  {
-    title: "🛠️ Extend the functionality of MetaMask using Snaps",
-    link: "/snaps",
-    description: (
-      <>
-        Extend the functionality of MetaMask using Snaps. You can create a Snap
-        to add support for custom networks, account types, APIs, and more.
-      </>
-    ),
-  },
-  {
-    title: "📐 Build and scale your dapp using services",
-    link: "/services",
-    description: (
-      <>
-        Build and scale your dapp or Snap using services provided by MetaMask and Infura.
-        This includes APIs that optimize essential development tasks.
-      </>
-    ),
-  },
-];
+import styles from './CardSection.module.scss'
 
-export default function CardSection(): JSX.Element {
+type CardSectionItem = {
+  colorPalette: string
+  title: string
+  description: string
+  cards: CardItem[]
+}
+
+type CardSectionProps = {
+  items: CardSectionItem[]
+}
+
+export default function CardSection({ items }: CardSectionProps): JSX.Element {
   return (
-    <section className="container margin-top--sm margin-bottom--lg">
-      <div className={styles.row}>
-        {CardList.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
+    <section className={styles['wrapper']}>
+      <div className="container">
+        {items?.length > 0 &&
+          items.map(
+            ({ colorPalette, title, description, cards }: CardSectionItem, groupIndex: number) => (
+              <div
+                key={groupIndex}
+                className={clsx(styles['grid-wrapper'], groupIndex % 2 !== 0 && styles['reverse'])}
+                style={
+                  colorPalette
+                    ? ({
+                        '--color-palette': `var(--developer-${colorPalette})`,
+                      } as CSSProperties)
+                    : {}
+                }>
+                <div className={styles['grid-col-left']}>
+                  <div className={styles['sticky-col']}>
+                    <Heading as="h2" className={clsx(styles['title'], 'type-heading-m')}>
+                      {title}
+                    </Heading>
+                    <p className={clsx(styles['description'], 'type-paragraph-l')}>{description}</p>
+                  </div>
+                </div>
+                <ul className={styles['grid-col-right']}>
+                  {cards?.length > 0 &&
+                    cards.map(({ title, description, href }: CardItem, cardIndex: number) => (
+                      <Card key={cardIndex} title={title} description={description} href={href} />
+                    ))}
+                </ul>
+              </div>
+            )
+          )}
       </div>
     </section>
-  );
+  )
 }
