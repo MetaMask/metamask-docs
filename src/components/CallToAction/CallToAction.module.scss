@@ -3,6 +3,10 @@
   padding: 4.8rem 0 6.4rem;
   overflow: hidden;
 
+  @include bp(tablet) {
+    padding-top: 6.4rem;
+  }
+
   @include bp(desktop) {
     padding: 8rem 0 16rem;
   }
