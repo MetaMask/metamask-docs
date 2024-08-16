@@ -1,6 +1,6 @@
 import Layout from '@theme/Layout'
-import CardSection from '@site/src/components/CardSection'
 import Hero from '@site/src/components/Hero/Hero'
+import IntroCards from '@site/src/components/IntroCards/IntroCards'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
@@ -19,7 +19,62 @@ export default function Home(): JSX.Element {
           icon: 'arrow-right',
         }}
       />
-      <CardSection />
+      <IntroCards
+        items={[
+          {
+            colorPalette: 'purple',
+            title: 'Integrate your dapp with the MetaMask wallet',
+            description:
+              "Your dapp can use the Wallet API and MetaMask SDK to request users' Ethereum accounts, read data from connected blockchains, suggest that the user sign messages and transactions, and perform other functions on MetaMask from multiple dapp platforms.",
+            cards: [
+              {
+                title: 'Wallet quickstart',
+                description:
+                  'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
+                href: '/wallet',
+              },
+              {
+                title: 'Wallet tutorials',
+                description:
+                  'Follow the step-by-step tutorials to create a simple React dapp and integrate it with MetaMask.',
+                href: '/wallet',
+              },
+              {
+                title: 'Wallet API',
+                description:
+                  "Use the JSON-RPC methods of MetaMask's Wallet API to interact with your users' Ethereum accounts.",
+                href: '/wallet',
+              },
+            ],
+          },
+          {
+            colorPalette: 'green',
+            title: 'Extend the functionality of MetaMask using Snaps',
+            description:
+              'A Snap is a JavaScript program run in an isolated environment that customizes the MetaMask wallet experience. You can create a Snap that adds new API methods, adds support for different blockchain protocols, or modifies existing functionalities.',
+            cards: [
+              {
+                title: 'Snaps quickstart',
+                description:
+                  'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
+                href: '/snaps',
+              },
+              {
+                title: 'Snaps tutorials',
+                description:
+                  'Follow the step-by-step tutorials to create Snaps that estimate gas fees, provide transaction insights with custom UI, and more.',
+                href: '/snaps',
+              },
+              {
+                title: 'Snaps API',
+                description:
+                  'Use the Snaps API to modify the functionality of MetaMask and communicate between dapps and Snaps.',
+                href: '/snaps',
+              },
+            ],
+          },
+        ]}
+      />
       <CallToAction
         title={'Contribute to MetaMask on Github'}
         description={
