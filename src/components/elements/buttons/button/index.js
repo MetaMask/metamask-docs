@@ -74,7 +74,8 @@ const Button = forwardRef(
           styles['icon'],
           extraClass === 'icon-hover' && styles[extraClass],
           iconDirection && styles[`${extraClass}-${iconDirection}`],
-          icon === 'transcript' && styles['icon--stroke']
+          icon === 'transcript' && styles['icon--stroke'],
+          icon === 'github' && styles['icon--adjust']
         )}>
         <IconComponent />
       </span>
