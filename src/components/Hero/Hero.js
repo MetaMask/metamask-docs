@@ -4,7 +4,7 @@ import Button from '@site/src/components/elements/buttons/button'
 
 import Shape from '@site/static/img/shapes/hero/shape.svg'
 
-import styles from './hero.module.scss'
+import styles from './Hero.module.scss'
 
 export default function Hero({ title, description, button }) {
   return (
