@@ -45,7 +45,12 @@ export default function Card({ title, href, description }: CardItem) {
             </div>
 
             <div className={styles['footer']}>
-              <p className={clsx(styles['item-description'], 'type-paragraph-m')}>{description}</p>
+              {description && (
+                <p className={clsx(styles['item-description'], 'type-paragraph-m')}>
+                  {description}
+                </p>
+              )}
+
               {href && (
                 <Button
                   as="div"

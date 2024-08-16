@@ -33,6 +33,7 @@
 .holder {
   position: relative;
   z-index: 1;
+  height: 100%;
 }
 
 .inner {
@@ -44,6 +45,7 @@
   min-height: 34.7rem;
   padding: 3.2rem;
   position: relative;
+  height: 100%;
 
   @include bp('tablet') {
     padding-bottom: 3rem;
