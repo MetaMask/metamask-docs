@@ -187,9 +187,10 @@ body {
   color: var(--general-black);
 
   background: var(--general-white);
-  
-  [data-theme="dark"] & {
+
+  [data-theme='dark'] & {
     background: var(--general-gray-dark);
+    color: var(--general-white);
   }
 }
 

@@ -81,6 +81,11 @@
   --ifm-button-padding-vertical: 0.875rem;
   --ifm-button-padding-horizontal: 1.5rem;
 
+  --ifm-link-hover-color: var(--color-text);
+
+  /* Header */
+  --ifm-navbar-height: var(--header-height);
+
   @include bp('tablet') {
     --ifm-global-spacing: #{$grid-gutter-width-tablet};
   }
@@ -135,9 +140,10 @@
   --ifm-color-danger-contrast-background: var(--consumer-orange-dark) !important;
   --ifm-color-danger-contrast-foreground: var(--consumer-orange-light) !important;
 
-  --general-black: #fff;
-  --general-white: var(--general-gray-dark);
   --ifm-background-color: var(--general-gray-dark);
+
+  --ifm-heading-color: var(--general-white);
+  --color-text: var(--general-white);
 }
 
 [data-theme='light'] .DocSearch {
