@@ -1,0 +1,114 @@
+.item {
+  margin-bottom: 1.6rem;
+  transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+  min-height: 22.2rem;
+  width: 100%;
+  margin-top: 0;
+
+  @include bp('tablet') {
+    min-height: 22.3rem;
+  }
+
+  @include bp(tablet) {
+    width: 50%;
+    padding: 0 0.8rem;
+  }
+
+  > div {
+    background-color: var(--general-gray-light);
+    position: relative;
+    transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+  }
+
+  &.active {
+    filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
+
+    > div {
+      background-color: var(--general-white);
+    }
+  }
+}
+
+.holder {
+  height: 100%;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2.4rem;
+  gap: 1.6rem;
+  padding: 3.2rem;
+  position: relative;
+  height: 100%;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 100%;
+    opacity: 0;
+    transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+    background-color: var(--developer-purple);
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  @include bp(desktop) {
+    gap: 1.2rem;
+  }
+}
+
+.icon {
+  height: 2.4rem;
+}
+
+.description {
+  @include bp(tablet) {
+    max-width: 33.6rem;
+  }
+  @include bp(desktop) {
+    max-width: 29.4rem;
+  }
+}
+
+html[data-theme='dark'] {
+  .item {
+    > div {
+      background-color: var(--general-black-light);
+    }
+
+    &.active {
+      > div {
+        background-color: var(--general-black);
+      }
+    }
+  }
+
+  .inner::before {
+    background-color: var(--developer-green);
+  }
+}

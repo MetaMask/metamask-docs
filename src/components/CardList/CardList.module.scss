@@ -1,0 +1,34 @@
+.wrapper {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--general-gray-light);
+  margin-bottom: 3.2rem;
+
+  @include bp('tablet') {
+    padding-top: 3.2rem;
+    padding-bottom: 4.2rem;
+    margin-bottom: 4.2rem;
+  }
+
+  @include bp('desktop') {
+    padding-top: 6.2rem;
+    padding-bottom: 4.8rem;
+    margin-bottom: 4.8rem;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include bp('tablet') {
+    margin-left: -0.8rem;
+    margin-right: -0.8rem;
+  }
+}
+
+html[data-theme='dark'] {
+  .wrapper {
+    border-color: var(--general-black-light);
+  }
+}
