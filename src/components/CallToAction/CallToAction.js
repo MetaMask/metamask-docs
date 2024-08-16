@@ -5,7 +5,7 @@ import Heading from '@theme/Heading'
 
 import Shape from '@site/static/img/shapes/hero/shape.svg'
 
-import styles from './call-to-action.module.scss'
+import styles from './CallToAction.module.scss'
 
 const CallToAction = ({ title, description, button }) => {
   return (
