@@ -1,7 +1,7 @@
 import Layout from '@theme/Layout'
 import CardSection from '@site/src/components/CardSection'
-import Hero from '@site/src/components/elements/hero'
-import CallToAction from '@site/src/components/elements/call-to-action'
+import Hero from '@site/src/components/Hero/Hero'
+import CallToAction from '@site/src/components/CallToAction/CallToAction'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
