@@ -1,6 +1,6 @@
 import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
-import IntroCards from '@site/src/components/IntroCards/IntroCards'
+import CardSection from '@site/src/components/CardSection'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
           icon: 'arrow-right',
         }}
       />
-      <IntroCards
+      <CardSection
         items={[
           {
             colorPalette: 'purple',
