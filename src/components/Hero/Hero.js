@@ -21,7 +21,16 @@ export default function Hero({ title, description, button }) {
             )}
 
             {button && (
-              <Button className={styles['button']} as="link" type="secondary" {...button} />
+              <Button
+                className={styles['button']}
+                as="link"
+                type="secondary"
+                {...button}
+                style={{
+                  '--button-color-hover': 'var(--general-white)',
+                  '--button-text-color-hover': 'var(--general-black)',
+                }}
+              />
             )}
           </div>
           <div className={styles['grid-col-right']}>
