@@ -1,4 +1,5 @@
 .item {
+  --color-palette: var(--developer-purple);
   margin-bottom: 1.6rem;
   transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
   min-height: 22.2rem;
@@ -53,7 +54,7 @@
     height: 100%;
     opacity: 0;
     transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
-    background-color: var(--developer-purple);
+    background-color: var(--color-palette);
   }
 
   &:hover {
@@ -95,8 +96,52 @@
   }
 }
 
+.tag-holder {
+  position: absolute;
+  z-index: 1;
+  top: 0.8rem;
+  right: 0.8rem;
+
+  .extra-small & {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+
+  @include bp('tablet') {
+    top: 1.6rem;
+    right: 1.6rem;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  height: 2.6rem;
+  font-weight: 500;
+  line-height: 1.1;
+  padding: 0.7rem 0.9rem;
+
+  line-height: 0.8;
+  color: var(--general-black);
+
+  background: var(--color-palette);
+
+  @include bp('tablet') {
+    height: 2.6rem;
+    line-height: 1.15;
+  }
+
+  @include bp('desktop') {
+    height: 2.3rem;
+    line-height: 0.85;
+  }
+}
+
 html[data-theme='dark'] {
   .item {
+    --color-palette: var(--developer-green);
     > div {
       background-color: var(--general-black-light);
     }
@@ -106,9 +151,5 @@ html[data-theme='dark'] {
         background-color: var(--general-black);
       }
     }
-  }
-
-  .inner::before {
-    background-color: var(--developer-green);
   }
 }
