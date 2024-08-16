@@ -26,3 +26,15 @@
 .cardDescription {
   font-size: 0.8rem;
 }
+
+.flaskOnly::after {
+  content: 'Flask';
+  border-bottom-left-radius: var(--ifm-card-border-radius);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.1rem 0.75rem;
+  font-weight: 500;
+  background-color: var(--mm-flask-background-color);
+  color: var(--mm-flask-color);
+}

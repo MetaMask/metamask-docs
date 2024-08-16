@@ -9,8 +9,6 @@ import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
 import type { Props } from "@theme/DocCard";
 
-import cardListItemStyles from "@site/src/components/CardList/CardListItem/styles.module.css";
-
 import styles from "./styles.module.css";
 
 import type {
@@ -31,7 +29,7 @@ function CardContainer({
     <Link
       href={href}
       className={clsx("card padding--lg", styles.cardContainer, {
-        [cardListItemStyles.flaskOnly]: flaskOnly,
+        [styles.flaskOnly]: flaskOnly,
       })}
     >
       {children}
