@@ -33,7 +33,8 @@ export default function CardListItem({ item }: CardListItemProps) {
   }, [colorMode])
 
   return (
-    <li className={clsx(styles['item'], isHovered && styles['active'])}>
+    <li
+      className={clsx(styles['item'], isHovered && styles['active'], flaskOnly && styles['flask'])}>
       <CutOffCorners size="s">
         <div
           className={styles['holder']}
@@ -72,13 +73,13 @@ export default function CardListItem({ item }: CardListItemProps) {
                 style={
                   theme === 'dark'
                     ? {
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
                     : {
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
                 }
               />
             )}

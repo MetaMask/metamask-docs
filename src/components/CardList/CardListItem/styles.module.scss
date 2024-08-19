@@ -81,6 +81,10 @@
   @include bp(desktop) {
     gap: 1.2rem;
   }
+
+  .flask & {
+    max-width: 26.4rem;
+  }
 }
 
 .icon {
