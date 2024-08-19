@@ -43,11 +43,11 @@
 
 a:not(.text-decoration-none, .button) {
   text-decoration: none;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.4rem;
 
   @include hover {
     text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-    text-underline-offset: 0.4rem;
   }
 }
 
