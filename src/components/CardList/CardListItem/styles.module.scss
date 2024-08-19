@@ -74,21 +74,9 @@
 }
 
 .title {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-
-  @include bp(desktop) {
-    gap: 1.2rem;
-  }
-
   .flask & {
     max-width: 26.4rem;
   }
-}
-
-.icon {
-  height: 2.4rem;
 }
 
 .description {
