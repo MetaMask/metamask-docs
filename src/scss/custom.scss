@@ -14,10 +14,10 @@
 :root {
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
-  --ifm-color-primary-darker: var(--institution-purple-dark);
+  --ifm-color-primary-darker: var(--institution-purple-dark-2);
   --ifm-color-primary-darkest: var(--institution-purple-dark-2);
   --ifm-color-primary-light: var(--developer-purple-light);
-  --ifm-color-primary-lighter: var(--developer-purple-light);
+  --ifm-color-primary-lighter: var(--developer-purple-tint);
   --ifm-color-primary-lightest: var(--institution-purple-tint);
 
   --ifm-heading-color: var(--general-black);
@@ -111,10 +111,10 @@
 [data-theme='dark'] {
   --ifm-color-primary: var(--developer-green);
   --ifm-color-primary-dark: var(--institution-green-dark);
-  --ifm-color-primary-darker: var(--institution-green-dark);
+  --ifm-color-primary-darker: var(--institution-green-dark-2);
   --ifm-color-primary-darkest: var(--institution-green-dark-2);
   --ifm-color-primary-light: var(--developer-green-light);
-  --ifm-color-primary-lighter: var(--developer-green-light);
+  --ifm-color-primary-lighter: var(--developer-green-tint);
   --ifm-color-primary-lightest: var(--institution-green-tint);
 
   /* Sidebar */
