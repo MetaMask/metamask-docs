@@ -6,6 +6,35 @@
 
   --ifm-h1-vertical-rhythm-bottom: 2.35;
   --ifm-heading-vertical-rhythm-bottom: 1;
+
+  padding: 2.4rem 0 0 0;
+
+  @include bp('desktop') {
+    padding: 0;
+  }
+
+  /* Links */
+
+  a {
+    color: var(--ifm-link-color);
+    /* autoprefixer: ignore next */
+    text-decoration: underline var(--ifm-link-color) 0.1rem !important;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: var(--ifm-link-hover-color);
+    /* autoprefixer: ignore next */
+    text-decoration: underline var(--ifm-link-hover-color) 0.1rem !important;
+  }
+
+  ol,
+  ul {
+    list-style: initial;
+    padding-left: 2.4rem;
+  }
 }
 
 .markdown:before {

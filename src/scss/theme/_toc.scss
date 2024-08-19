@@ -39,6 +39,7 @@
 .theme-doc-toc-mobile {
   background-color: transparent !important;
   border: 1px solid var(--general-gray);
+  margin: 2rem 0 1rem 0 !important;
 
   [data-theme='dark'] & {
     border: 1px solid var(--ifm-toc-border-color) !important;

@@ -34,6 +34,10 @@
   --ifm-code-font-size: 90%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
+  /* Links */
+  --ifm-link-color: var(--ifm-color-primary-dark);
+  --ifm-link-hover-color: var(--ifm-color-primary);
+
   /* Sidebar */
   --doc-sidebar-width: 35.8rem !important;
   --ifm-hover-overlay: var(--general-gray-light);
@@ -100,8 +104,6 @@
   --ifm-button-padding-vertical: 0.875rem;
   --ifm-button-padding-horizontal: 1.5rem;
 
-  --ifm-link-hover-color: var(--color-text);
-
   /* Header */
   --ifm-navbar-height: var(--header-height);
 
@@ -122,6 +124,10 @@
   --ifm-color-primary-light: var(--developer-green-light);
   --ifm-color-primary-lighter: var(--developer-green-tint);
   --ifm-color-primary-lightest: var(--institution-green-tint);
+
+  /* Links */
+  --ifm-link-color: var(--ifm-color-primary);
+  --ifm-link-hover-color: var(--ifm-color-primary-light);
 
   /* Sidebar */
   --ifm-hover-overlay: var(--general-black-light) !important;
@@ -261,4 +267,10 @@ h6 {
 
 .container {
   padding: 0;
+}
+
+.docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocRoot-Layout-Main-styles-module {
+  @include bp('desktop') {
+    padding: 5.5rem 0 0 3.5rem;
+  }
 }
