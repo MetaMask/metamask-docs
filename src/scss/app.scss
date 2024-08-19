@@ -1,23 +1,15 @@
-@import 'commons/fonts';
 @import 'commons/reset';
 @import 'commons/typescale';
 @import 'commons/utils';
 @import 'commons/animations';
 @import 'elements/form';
 @import 'elements/contentful-rich-text';
-@import 'elements/buttons';
 
 :root {
   // Defines a CSS variable to reduce motion for all CSS animations & transitions
   // You can use it as such:
   // animation: name calc(var(--motion) * 1s) linear forwards;
   // transition: name calc(var(--motion) * 1s) ease;
-  --font-mm-poly-variable: 'MM Poly Variable', 'Arial Bold', 'Gadget', sans-serif;
-  --font-mm-sans: 'MM Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
-  --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-
   --motion: 1;
   --motion-speed: 0.55s;
   --spring-ease: #{$gentle-ease};
@@ -188,9 +180,8 @@ body {
 
   background: var(--general-white);
 
-  [data-theme='dark'] & {
-    background: var(--general-gray-dark);
-    color: var(--general-white);
+  @include bp('tablet') {
+    font-size: 2.4rem;
   }
 }
 
@@ -215,7 +206,6 @@ body {
   width: calc(100% - var(--page-padding-x) * 2);
   max-width: none;
   margin: 0 auto;
-  padding: 0;
 
   @include bp('tablet') {
     max-width: none;

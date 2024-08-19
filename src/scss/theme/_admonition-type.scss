@@ -37,6 +37,11 @@
     color: var(--ifm-alert-foreground-color);
     text-decoration: underline;
     text-underline-offset: 0.2rem;
+    text-decoration-thickness: 0.1rem;
+
+    &:hover {
+      text-underline-offset: 0.2rem;
+    }
   }
 
   code {
