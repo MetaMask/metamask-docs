@@ -2,6 +2,8 @@
 @import './theme/markdown';
 @import 'theme/admonition-type';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
+@import 'theme/sidebar';
+@import 'theme/toc';
 
 /**
  * Any CSS included here will be global. The classic template
@@ -26,19 +28,23 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   /* Sidebar */
-  --doc-sidebar-width: 36.5rem !important;
+  --doc-sidebar-width: 35.8rem !important;
   --ifm-hover-overlay: var(--general-gray-light);
   --ifm-menu-color-active: var(--general-black);
   --ifm-menu-color: var(--general-gray-dark);
-  --ifm-menu-link-padding-horizontal: 3rem;
+  --ifm-menu-link-padding-horizontal: 2.8rem;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 11 7"><path fill="currentColor" d="M2e-7 3.75 2e-8 5.87 5 2.13l5.25 3.93V3.94L5-.00000284 2e-7 3.75Z"/></svg>');
 
   /* TOC */
   --ifm-toc-border-color: var(--general-gray-light);
+  --ifm-toc-padding-vertical: 1.6em;
+  --ifm-toc-padding-vertical: 1.6em;
+  --ifm-code-background: #e6e6e6;
+  --ifm-toc-link-color: var(--general-gray-dark);
 
   /* Flask */
-  --mm-flask-background-color: var(--ifm-color-primary-lighter);
-  --mm-flask-color: var(--ifm-color-primary-dark);
+  --mm-flask-background-color: var(--ifm-color-primary);
+  --mm-flask-color: var(--general-black);
 
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
@@ -118,12 +124,14 @@
 
   /* TOC */
   --ifm-toc-border-color: var(--general-black-light) !important;
+  --ifm-code-background: #4d5059;
+  --ifm-toc-link-color: var(--general-gray);
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
   /* Flask */
-  --mm-flask-background-color: var(--ifm-color-primary-lightest);
-  --mm-flask-color: var(--ifm-color-primary-dark);
+  --mm-flask-background-color: var(--ifm-color-primary);
+  --mm-flask-color: var(--general-black);
 
   --ifm-color-success: var(--developer-green);
   --ifm-color-info: var(--developer-blue);
