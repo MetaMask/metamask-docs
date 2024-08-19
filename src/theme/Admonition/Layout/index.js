@@ -1,12 +1,12 @@
 import React from 'react'
-import Info from '@theme-original/Admonition/Type/Info'
+import Layout from '@theme-original/Admonition/Layout'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 
-export default function InfoWrapper(props) {
+export default function LayoutWrapper(props) {
   return (
     <>
       <CutOffCorners size="m">
-        <Info {...props} />
+        <Layout {...props} />
       </CutOffCorners>
     </>
   )
