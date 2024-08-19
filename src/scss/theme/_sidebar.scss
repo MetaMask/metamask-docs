@@ -5,11 +5,17 @@
 
   .navbar-sidebar__back {
     background-color: transparent;
+    margin-top: 1.4rem;
   }
 
   &__list {
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    @include bp('tablet') {
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
 
     .theme-doc-sidebar-item-category-level-1 & {
       padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
@@ -63,6 +69,16 @@
         .theme-doc-sidebar-item-link-level-6
       ) {
       margin-top: 0.8rem;
+    }
+  }
+
+  &__link--sublist-caret {
+    &::after {
+      background: var(--ifm-menu-link-sublist-icon);
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 0.7rem;
+      width: 0.9rem;
     }
   }
 

@@ -12,10 +12,12 @@
     line-height: 124%;
     text-decoration: none !important;
     color: var(--ifm-toc-link-color);
+    opacity: 0.9;
 
     &:hover,
     &--active {
       color: var(--ifm-menu-color-active);
+      opacity: 1;
 
       code {
         color: var(--ifm-menu-color-active);
@@ -29,20 +31,24 @@
       line-height: 1rem;
       border-radius: 0.4rem;
       background: var(--ifm-code-background);
-      padding: 0.2rem;
+      padding: 0.2rem 0.5rem;
     }
   }
 }
 
 .theme-doc-toc-mobile {
   background-color: transparent !important;
-  border: 1px solid var(--ifm-toc-border-color);
+  border: 1px solid var(--general-gray);
+
+  [data-theme='dark'] & {
+    border: 1px solid var(--ifm-toc-border-color) !important;
+  }
 
   button {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 124%;
-    padding: 1.6rem;
+    padding: 1rem 1.6rem;
 
     &:after {
       background: var(--ifm-menu-link-sublist-icon) 50% 50% / 1rem 1rem no-repeat;
@@ -51,8 +57,12 @@
     }
 
     & + div {
-      border-top: 1px solid var(--ifm-toc-border-color);
-      padding: 0.4rem 0.8rem 0rem;
+      border-top: 1px solid var(--general-gray);
+      padding: 0 0.8rem 0;
+
+      [data-theme='dark'] & {
+        border-top: 1px solid var(--ifm-toc-border-color) !important;
+      }
     }
   }
 
