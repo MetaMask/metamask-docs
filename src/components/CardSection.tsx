@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { CSSProperties, JSX } from 'react'
+import { CSSProperties, JSX, useState, useEffect } from 'react'
+import { useColorMode } from '@docusaurus/theme-common'
 import Heading from '@theme/Heading'
 import Card, { CardItem } from '@site/src/components/Card'
 
@@ -17,6 +18,13 @@ type CardSectionProps = {
 }
 
 export default function CardSection({ items }: CardSectionProps): JSX.Element {
+  const { colorMode } = useColorMode()
+  const [theme, setTheme] = useState('')
+
+  useEffect(() => {
+    setTheme(colorMode)
+  }, [colorMode])
+
   return (
     <section className={styles['wrapper']}>
       <div className="container">
@@ -44,7 +52,13 @@ export default function CardSection({ items }: CardSectionProps): JSX.Element {
                 <ul className={styles['grid-col-right']}>
                   {cards?.length > 0 &&
                     cards.map(({ title, description, href }: CardItem, cardIndex: number) => (
-                      <Card key={cardIndex} title={title} description={description} href={href} />
+                      <Card
+                        key={cardIndex}
+                        title={title}
+                        description={description}
+                        href={href}
+                        theme={theme}
+                      />
                     ))}
                 </ul>
               </div>

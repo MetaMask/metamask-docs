@@ -1,6 +1,5 @@
 import clsx from 'clsx'
-import { useState, useEffect } from 'react'
-import { useColorMode } from '@docusaurus/theme-common'
+import { useState } from 'react'
 import Link from '@docusaurus/Link'
 import Heading from '@theme/Heading'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
@@ -15,16 +14,11 @@ export type CardItem = {
   title: string
   href: string
   description: string
+  theme: string
 }
 
-export default function Card({ title, href, description }: CardItem) {
+export default function Card({ title, href, description, theme }: CardItem) {
   const [isHovered, setIsHovered] = useState(false)
-  const { colorMode } = useColorMode()
-  const [theme, setTheme] = useState('')
-
-  useEffect(() => {
-    setTheme(colorMode)
-  }, [colorMode])
 
   return (
     <li className={clsx(styles['item'], isHovered && styles['active'])}>
