@@ -16,18 +16,23 @@
   --ifm-color-primary-lighter: var(--developer-purple-light);
   --ifm-color-primary-lightest: var(--institution-purple-tint);
 
-  /* Sidebar */
-  --ifm-hover-overlay: var(--general-gray-light);
-  --ifm-menu-color-active: var(--general-black);
-
   --ifm-heading-color: var(--general-black);
   --color-text-heading: var(--ifm-heading-color);
   --color-text: var(--general-black);
   --color-text-paragraph: var(--color-text);
-
-  --ifm-menu-color: var(--ifm-heading-color);
   --ifm-code-font-size: 90%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Sidebar */
+  --doc-sidebar-width: 36.5rem !important;
+  --ifm-hover-overlay: var(--general-gray-light);
+  --ifm-menu-color-active: var(--general-black);
+  --ifm-menu-color: var(--general-gray-dark);
+  --ifm-menu-link-padding-horizontal: 3rem;
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 11 7"><path fill="currentColor" d="M2e-7 3.75 2e-8 5.87 5 2.13l5.25 3.93V3.94L5-.00000284 2e-7 3.75Z"/></svg>');
+
+  /* TOC */
+  --ifm-toc-border-color: var(--general-gray-light);
 
   /* Flask */
   --mm-flask-background-color: var(--ifm-color-primary-lighter);
@@ -106,9 +111,12 @@
 
   /* Sidebar */
   --ifm-hover-overlay: var(--general-black-light) !important;
-  --ifm-menu-color-active: var(--general-black) !important;
+  --ifm-menu-color-active: var(--general-white) !important;
+  --ifm-menu-color: var(--general-white) !important;
 
-  --ifm-menu-color: #fff;
+  /* TOC */
+  --ifm-toc-border-color: var(--general-black-light) !important;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
   /* Flask */
