@@ -2,6 +2,7 @@ import Layout from '@theme/Layout'
 import Heading from '@theme/Heading'
 import Pill from '@site/src/components/Pill'
 import SnapsSection from '@site/src/components/SnapsSection'
+import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
 
 export default function Test() {
   return (
@@ -72,6 +73,8 @@ export default function Test() {
             },
           ]}
         />
+
+        <YoutubeEmbed url="https://www.youtube.com/embed/qZRAryYwgdg?si=CeImIULgH3iD-FF0" />
       </div>
     </Layout>
   )
