@@ -14,7 +14,6 @@ export interface CardItem {
   title?: ReactNode
   description?: ReactNode
   href?: string
-  icon?: string
   flaskOnly?: boolean
 }
 
@@ -23,7 +22,7 @@ interface CardListItemProps {
 }
 
 export default function CardListItem({ item }: CardListItemProps) {
-  const { title, description, href, icon, flaskOnly } = item
+  const { title, description, href, flaskOnly } = item
   const [isHovered, setIsHovered] = useState(false)
   const { colorMode } = useColorMode()
   const [theme, setTheme] = useState('')
@@ -33,7 +32,8 @@ export default function CardListItem({ item }: CardListItemProps) {
   }, [colorMode])
 
   return (
-    <li className={clsx(styles['item'], isHovered && styles['active'])}>
+    <li
+      className={clsx(styles['item'], isHovered && styles['active'], flaskOnly && styles['flask'])}>
       <CutOffCorners size="s">
         <div
           className={styles['holder']}
@@ -56,8 +56,7 @@ export default function CardListItem({ item }: CardListItemProps) {
 
             <div className={styles['header']}>
               <Heading as="h3" className={clsx(styles['title'], 'type-heading-xs')}>
-                {icon && <img src={icon} className={styles.icon} />}
-                <span>{title}</span>
+                {title}
               </Heading>
 
               <p className={clsx(styles['description'], 'type-paragraph-s')}>{description}</p>
@@ -72,13 +71,13 @@ export default function CardListItem({ item }: CardListItemProps) {
                 style={
                   theme === 'dark'
                     ? {
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
                     : {
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
                 }
               />
             )}
