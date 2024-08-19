@@ -11,12 +11,7 @@ This document outlines the components that have been swizzled in this project. T
 
 The following components have been swizzled by wrapping:
 
-- `Admonition/Type/Caution` (Safe)
-- `Admonition/Type/Danger` (Safe)
-- `Admonition/Type/Info` (Safe)
-- `Admonition/Type/Note` (Safe)
-- `Admonition/Type/Tip` (Safe)
-- `Admonition/Type/Warning` (Safe)
+- `Admonition/Type/Layout` (Safe)
 
 ## Ejecting
 
