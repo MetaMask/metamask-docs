@@ -1,4 +1,6 @@
 @import './app.scss';
+@import 'theme/fonts';
+@import 'theme/button';
 @import './theme/markdown';
 @import 'theme/admonition-type';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
@@ -12,6 +14,11 @@
  */
 /* You can override the default Infima variables here. */
 :root {
+  --font-mm-poly-variable: 'MM Poly Variable', 'Arial Bold', 'Gadget', sans-serif;
+  --font-mm-sans: 'MM Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
+  --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark);
@@ -202,8 +209,18 @@
     var(--ifm-color-emphasis-100) 100%
   );
 }
+
 body {
   height: auto !important; /* Fix for Dark Theme */
+
+  [data-theme='dark'] & {
+    background: var(--general-gray-dark);
+    color: var(--general-white);
+  }
+
+  @include bp('tablet') {
+    font-size: 2rem;
+  }
 }
 
 h1,
@@ -241,4 +258,8 @@ h6 {
 
 .alert {
   border: none;
+}
+
+.container {
+  padding: 0;
 }
