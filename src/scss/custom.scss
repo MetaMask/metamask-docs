@@ -5,10 +5,8 @@
 @import './theme/admonition-type';
 @import './theme/sidebar';
 @import './theme/toc';
+@import './theme/interactive-box';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
-@import 'theme/sidebar';
-@import 'theme/toc';
-@import 'theme/interactive-box';
 
 /**
  * Any CSS included here will be global. The classic template
