@@ -1,4 +1,6 @@
 @import './app.scss';
+@import './theme/markdown';
+@import 'theme/admonition-type';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
@@ -54,19 +56,19 @@
 
   /* Info */
   --ifm-color-info-contrast-background: var(--developer-blue-light);
-  --ifm-color-info-contrast-foreground: var(--general-black);
+  --ifm-color-info-contrast-foreground: var(--consumer-blue-dark);
 
   /* Success */
   --ifm-color-success-contrast-background: var(--developer-green-light);
-  --ifm-color-success-contrast-foreground: var(--general-black);
+  --ifm-color-success-contrast-foreground: var(--consumer-green-dark);
 
   /* Warning */
   --ifm-color-warning-contrast-background: var(--developer-purple-light);
-  --ifm-color-warning-contrast-foreground: var(--general-black);
+  --ifm-color-warning-contrast-foreground: var(--consumer-purple-dark);
 
   /* Danger */
   --ifm-color-danger-contrast-background: var(--developer-orange-light);
-  --ifm-color-danger-contrast-foreground: var(--general-black);
+  --ifm-color-danger-contrast-foreground: var(--consumer-orange-dark);
 
   --ifm-color-white: var(--general-white);
   --ifm-color-black: var(--general-black);
@@ -130,7 +132,6 @@
 
   /* Note */
   --ifm-color-secondary-contrast-background: var(--general-black-light) !important;
-  --ifm-color-secondary-contrast-foreground: var(--general-black) !important;
 
   /* Info */
   --ifm-color-info-contrast-background: var(--consumer-blue-dark) !important;
@@ -207,23 +208,23 @@ h6 {
 }
 
 h1 {
-  @extend .type-heading-xl;
-}
-
-h2 {
-  @extend .type-heading-l;
-}
-
-h3 {
   @extend .type-heading-m;
 }
 
-h4 {
+h2 {
+  @extend .type-heading-sm;
+}
+
+h3 {
   @extend .type-heading-s;
 }
 
-h5 {
+h4 {
   @extend .type-heading-xs;
+}
+
+h5 {
+  @extend .type-heading-xxs;
 }
 
 h6 {
