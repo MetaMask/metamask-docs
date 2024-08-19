@@ -3,6 +3,8 @@ import Heading from '@theme/Heading'
 import Pill from '@site/src/components/Pill'
 import SnapsSection from '@site/src/components/SnapsSection'
 import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
+import SectionAPIs from '@site/src/components/Sections/SectionAPIs'
+import SectionNetworks from '@site/src/components/Sections/SectionNetworks'
 
 export default function Test() {
   return (
@@ -75,6 +77,9 @@ export default function Test() {
         />
 
         <YoutubeEmbed url="https://www.youtube.com/embed/qZRAryYwgdg?si=CeImIULgH3iD-FF0" />
+
+        <SectionAPIs />
+        <SectionNetworks />
       </div>
     </Layout>
   )
