@@ -1,0 +1,72 @@
+[class*='admonition'].alert {
+  margin-top: 2.8rem;
+  margin-bottom: 4rem;
+
+  @include bp(desktop) {
+    margin-top: 4.8rem;
+    margin-bottom: 6rem;
+  }
+}
+
+.alert {
+  padding: 4rem;
+  border-radius: 0;
+  color: var(--general-black);
+
+  [class*='admonitionHeading'] {
+    @extend .type-heading-xxs;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    color: var(--ifm-alert-foreground-color);
+
+    [class*='admonitionIcon'] {
+      display: flex;
+      font-size: 1rem;
+      margin-right: 0.8rem;
+    }
+  }
+
+  [class*='admonitionContent'] {
+    @extend .type-paragraph-m;
+    margin-top: 1.7rem;
+  }
+
+  a {
+    font-weight: 500;
+    color: var(--ifm-alert-foreground-color);
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  code {
+    @extend .type-heading-xxs;
+    font-family: var(--ifm-heading-font-family);
+    color: var(--ifm-alert-foreground-color);
+    padding: 0.2rem 0.7rem;
+  }
+
+  &--secondary {
+    --ifm-alert-background-color-highlight: #0a0a0a1a;
+
+    a {
+      color: var(--consumer-orange-dark);
+    }
+  }
+
+  &--info {
+    --ifm-alert-background-color-highlight: #1900661a;
+  }
+
+  &--success {
+    --ifm-alert-background-color-highlight: #0133301a;
+  }
+
+  &--warning {
+    --ifm-alert-background-color-highlight: #3d065f1a;
+  }
+
+  &--danger {
+    --ifm-alert-background-color-highlight: #6618001a;
+  }
+}
