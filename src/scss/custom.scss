@@ -1,4 +1,5 @@
 @import './app.scss';
+@import './theme/markdown';
 @import 'theme/admonition-type';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
@@ -199,23 +200,23 @@ h6 {
 }
 
 h1 {
-  @extend .type-heading-xl;
-}
-
-h2 {
-  @extend .type-heading-l;
-}
-
-h3 {
   @extend .type-heading-m;
 }
 
-h4 {
+h2 {
+  @extend .type-heading-sm;
+}
+
+h3 {
   @extend .type-heading-s;
 }
 
-h5 {
+h4 {
   @extend .type-heading-xs;
+}
+
+h5 {
+  @extend .type-heading-xxs;
 }
 
 h6 {
