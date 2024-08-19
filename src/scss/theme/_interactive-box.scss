@@ -1,0 +1,58 @@
+.interactive-right-sidebar {
+  .container {
+    margin: 0;
+    max-width: none;
+    width: 100% !important;
+
+    .row,
+    .col {
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+  }
+
+  .control-label {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+  }
+
+  legend {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+  }
+
+  h3,
+  h4 {
+    margin: 2rem 0;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  &#method select,
+  &#method input,
+  &#interactive-box select,
+  &#interactive-box input {
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--ifm-toc-border-color);
+    font-size: 1.6rem;
+    padding: 0.8rem;
+    background: var(--docsearch-searchbox-focus-background);
+    color: var(--docsearch-text-color);
+    transition: border var(--ifm-transition-fast) ease;
+  }
+
+  .alert {
+    padding: 1.6rem;
+    font-size: 1.6rem;
+  }
+
+  .form-group {
+    padding-bottom: 2rem;
+    > fieldset {
+      display: block;
+    }
+  }
+}
