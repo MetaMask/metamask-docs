@@ -1,8 +1,10 @@
 @import './app.scss';
-@import 'theme/fonts';
-@import 'theme/button';
+@import './theme/fonts';
+@import './theme/button';
 @import './theme/markdown';
-@import 'theme/admonition-type';
+@import './theme/admonition-type';
+@import './theme/sidebar';
+@import './theme/toc';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 @import 'theme/sidebar';
 @import 'theme/toc';
