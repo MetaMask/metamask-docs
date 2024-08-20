@@ -8,7 +8,7 @@ tags:
 
 # Set up Infura in Unity
 
-You can set up [MetaMask SDK](../../../../concepts/sdk/index.md) with [Infura](https://docs.infura.io/) in
+You can set up MetaMask SDK with [Infura](https://docs.infura.io/) in
 your Unity game.
 
 ## Prerequisites

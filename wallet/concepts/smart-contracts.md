@@ -1,6 +1,6 @@
 ---
 description: Learn about interacting with smart contracts.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Smart contracts

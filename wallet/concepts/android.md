@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 description: Learn about the Android SDK architecture.
 tags:
   - Android SDK
@@ -7,23 +7,22 @@ tags:
 
 # Android SDK architecture
 
-The Android version of [MetaMask SDK](index.md) enables your users to easily connect with their
+The Android version of [MetaMask SDK](../how-to/use-sdk/index.md) enables your users to easily connect with their
 MetaMask Mobile wallet.
 The [architecture](#architecture) and [connection flow](#connection-flow) of
 the Android SDK differs from the other SDK platforms.
 
 :::tip Get started
-
-- Get started by [setting up the SDK in your Android dapp](../../how-to/use-sdk/mobile/android.md).
+- Get started by [setting up the SDK in your Android dapp](../how-to/use-sdk/mobile/android.md).
 - See the [example Android dapp](https://github.com/MetaMask/metamask-android-sdk/tree/main/app) in
   the Android SDK GitHub repository for advanced use cases.
-  :::
+:::
 
 ## Architecture
 
 The following diagram outlines the high-level architecture of the Android SDK:
 
-![Android SDK architecture diagram](../../assets/sdk-android-architecture.png)
+![Android SDK architecture diagram](../assets/sdk-android-architecture.png)
 
 The MetaMask Android SDK consists of two components:
 
@@ -48,7 +47,7 @@ in Kotlin) using different mechanisms depending on the direction of communicatio
 
 The following diagram outlines the communication flow between the Android client SDK and server SDK:
 
-![Android SDK communication diagram](../../assets/sdk-android-communication.png)
+![Android SDK communication diagram](../assets/sdk-android-communication.png)
 
 The flow is as follows:
 

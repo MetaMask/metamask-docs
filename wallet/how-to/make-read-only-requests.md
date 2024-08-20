@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 6
 description: Use Infura and custom nodes to make direct, read-only requests in your JavaScript dapp.
 tags:
   - JavaScript SDK
@@ -8,7 +8,7 @@ tags:
 # Make read-only requests
 
 You can use the [Infura API](https://docs.infura.io/) from your dapp with
-[MetaMask SDK](../../../concepts/sdk/index.md) installed to make direct, read-only JSON-RPC requests.
+[MetaMask SDK](use-sdk/index.md) installed to make direct, read-only JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
 Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-rpc-api), bypassing
@@ -51,12 +51,12 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](index.md) in your JavaScript dapp.
+- [MetaMask SDK set up](use-sdk/javascript/index.md) in your JavaScript dapp.
 
 ## Use the Infura API
 
 To use the Infura API to make read-only requests, specify your Infura API key using the
-[`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) option when instantiating the SDK
+[`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey) option when instantiating the SDK
 in your dapp.
 
 ```javascript
@@ -81,8 +81,8 @@ In this example, chain ID `0x539` maps to the custom node's RPC URL.
 ## Use the Infura API and custom nodes
 
 You can use both the Infura API and custom nodes to make read-only requests by specifying both the
-[`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) and
-[`readonlyRPCMap`](../../../reference/sdk-js-options.md#readonlyrpcmap) options when instantiating the
+[`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey) and
+[`readonlyRPCMap`](../reference/sdk-js-options.md#readonlyrpcmap) options when instantiating the
 SDK in your dapp.
 
 ```javascript
@@ -124,5 +124,5 @@ sdkOptions={{
 
 In this example, read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only
 requests to the local testnet (chain ID `0x539`) use the custom node.
-[`defaultReadOnlyChainId`](../../../reference/sdk-js-options.md#defaultreadonlychainid) enables making
+[`defaultReadOnlyChainId`](../reference/sdk-js-options.md#defaultreadonlychainid) enables making
 read-only requests before the user connects to MetaMask, and specifies to make those requests to Mainnet.

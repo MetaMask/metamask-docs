@@ -7,7 +7,7 @@ tags:
 
 # Connect and sign in Unity
 
-You can [connect and sign](../../javascript/connect-and-sign.md) in a single interaction from your Unity game.
+You can [connect and sign](../../../sign-data/connect-and-sign.md) in a single interaction from your Unity game.
 
 ## Prerequisites
 

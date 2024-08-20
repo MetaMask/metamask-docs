@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 # Enable human-readable addresses in Unity
 
 You can integrate the [Decentraweb](https://decentraweb.org/) name resolver into your Unity game
-with [MetaMask SDK](index.md) installed.
+with MetaMask SDK installed.
 Decentraweb maps human-readable names to machine-readable identifiers, such as Ethereum addresses.
 Integrating Decentraweb into your game allows users to interact with addresses in a more user-friendly way.
 

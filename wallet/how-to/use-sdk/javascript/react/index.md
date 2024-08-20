@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 
 # Use MetaMask SDK with React
 
-Import [MetaMask SDK](../../../../concepts/sdk/index.md) into your React dapp to enable your users to
+Import MetaMask SDK into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
@@ -87,9 +87,9 @@ Important options include:
 - [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
-  [make read-only RPC requests](../make-read-only-requests.md) from your dapp.
+  [make read-only RPC requests](../../../make-read-only-requests.md) from your dapp.
 - [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
-  the displayed modals](../display-custom-modals.md).
+  the displayed modals](../../../display/display-custom-modals.md).
 
 ### 4. Use the SDK
 
@@ -147,7 +147,7 @@ export const App = () => {
 
 The `connect` method initiates a connection to MetaMask and returns an array of connected accounts.
 
-You can also [use the `connectAndSign` method](../connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../sign-data/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction:
 
 ```js
@@ -163,7 +163,7 @@ const connectAndSign = async () => {
 }
 ```
 
-You can also [batch multiple JSON-RPC requests](../batch-json-rpc-requests.md) using the
+You can also [batch multiple JSON-RPC requests](../../../batch-json-rpc-requests.md) using the
 `metamask_batch` method.
 
 ## Example

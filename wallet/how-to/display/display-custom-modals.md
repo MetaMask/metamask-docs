@@ -1,6 +1,6 @@
 ---
 description: Display custom modals using the JavaScript SDK.
-sidebar_position: 10
+sidebar_position: 4
 tags:
   - JavaScript SDK
 ---
@@ -97,7 +97,7 @@ MetaMask isn't installed.
 
 <p align="center">
 
-![Custom modal gif](../../../assets/custom-modal.gif)
+![Custom modal gif](../../assets/custom-modal.gif)
 
 </p>
 
