@@ -14,8 +14,8 @@ import {
   MethodParam,
   SchemaComponents,
 } from "@site/src/components/ParserOpenRPC/interfaces";
-import styles from "./styles.module.css";
-import global from "../global.module.css";
+import styles from "./styles.module.scss";
+import global from "../global.module.scss";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";

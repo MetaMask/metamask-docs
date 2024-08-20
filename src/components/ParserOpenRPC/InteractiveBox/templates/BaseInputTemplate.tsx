@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { BaseInputTemplateProps } from "@rjsf/utils";
 import clsx from "clsx";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import debounce from "lodash.debounce";
 

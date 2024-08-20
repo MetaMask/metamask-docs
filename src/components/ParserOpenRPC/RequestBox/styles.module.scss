@@ -1,0 +1,35 @@
+.cardWrapper {
+  border-radius: 0.4rem;
+  border: 1px solid var(--general-gray-light);
+  background-color: #292a36;
+  margin-bottom: 2.4rem;
+  overflow: hidden;
+}
+
+.cardHeader {
+  border-bottom: 1px solid var(--general-gray-light);
+  padding: 1.6rem;
+}
+
+.cardHeading {
+  color: #fff;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--general-gray-light);
+  padding: 1.6rem;
+}
+
+.responseBlock {
+  max-height: 40rem;
+  overflow-y: auto;
+}
+
+html[data-theme='dark'] {
+  .cardWrapper,
+  .cardHeader {
+    border-color: var(--general-black-light);
+  }
+}

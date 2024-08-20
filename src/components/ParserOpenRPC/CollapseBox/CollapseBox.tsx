@@ -1,58 +1,48 @@
-import clsx from "clsx";
-import {
-  useCollapsible,
-  Collapsible,
-  useColorMode,
-} from "@docusaurus/theme-common";
-import styles from "./styles.module.css";
-import React, { useEffect } from "react";
+import clsx from 'clsx'
+import { useEffect } from 'react'
+import { useCollapsible, Collapsible, useColorMode } from '@docusaurus/theme-common'
+import Button from '@site/src/components/elements/buttons/button'
+
+import styles from './styles.module.css'
 
 interface CollapseBoxProps {
-  children: JSX.Element;
-  isInitCollapsed?: boolean;
+  children: JSX.Element
+  isInitCollapsed?: boolean
 }
 
-export const CollapseBox = ({
-  children,
-  isInitCollapsed = false,
-}: CollapseBoxProps) => {
-  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
-  const { colorMode } = useColorMode();
+export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxProps) => {
+  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true })
+  const { colorMode } = useColorMode()
   useEffect(() => {
     if (isInitCollapsed) {
-      toggleCollapsed();
+      toggleCollapsed()
     }
-  }, [isInitCollapsed]);
+  }, [isInitCollapsed])
   return (
-    <div
-      className={clsx(
-        styles.collapseWrapper,
-        !collapsed && styles.collapsedWrapperView
-      )}
-    >
-      <button
-        className={clsx(
-          styles.collapseBtn,
-          !collapsed && styles.collapsedBtnView,
-          colorMode === "light" && styles.collapsedBtnLightHover
-        )}
-        onClick={toggleCollapsed}
-      >
-        {collapsed ? "Show child attributes" : "Hide child attributes"}
-        <div
-          className={clsx(
-            styles.collapseIcon,
-            !collapsed && styles.collapsedIconView
-          )}
-        ></div>
-      </button>
+    <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
+      <Button
+        as="button"
+        label={collapsed ? 'Show child attributes' : 'Hide child attributes'}
+        icon={collapsed ? 'arrow-right' : 'arrow-down'}
+        onClick={() => toggleCollapsed()}
+        style={
+          colorMode === 'dark'
+            ? {
+              '--button-color-hover': 'var(--general-white)',
+              '--button-text-color-hover': 'var(--general-black)',
+            }
+            : {
+              '--button-color-hover': 'var(--general-black)',
+              '--button-text-color-hover': 'var(--general-white)',
+            }
+        }
+      />
       <Collapsible
-        animation={{ duration: 100, easing: "ease-in" }}
+        animation={{ duration: 100, easing: 'ease-in' }}
         lazy={false}
-        collapsed={collapsed}
-      >
+        collapsed={collapsed}>
         {children}
       </Collapsible>
     </div>
-  );
-};
+  )
+}

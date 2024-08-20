@@ -2,7 +2,7 @@ import React from "react";
 import { SchemaProperty } from "./SchemaProperty";
 import { CollapseBox } from "../CollapseBox/CollapseBox";
 import { MDContent } from "./MDContent";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 const getRefSchemaFromComponents = (initRef, components) => {
   const ref = initRef.replace("#/components/schemas/", "");

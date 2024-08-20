@@ -1,0 +1,111 @@
+.paramWrapper {
+  border-bottom: 1px solid var(--general-gray-light);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.borderWrapper {
+  border-bottom: 1px solid var(--general-gray-light);
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.schemaHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.textAltColor {
+  color: var(--general-gray-mid);
+}
+
+.textErrorColor {
+  color: var(--error);
+}
+
+.paramItemWrapper {
+  padding: 0 1rem;
+}
+
+.paramItemWrapper:not(:first-child) {
+  border-top: 1px solid var(--general-gray-light);
+}
+
+.borderTopLine {
+  border-top: 1px solid var(--general-gray-light);
+}
+
+.borderBottomLine {
+  border-bottom: 1px solid var(--general-gray-light);
+}
+
+.enumWrapper {
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.enumItem {
+  border-top: 1px solid var(--general-gray-light);
+  padding: 1.6rem;
+}
+
+.enumTitle {
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0.4rem;
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.4rem;
+}
+
+.secondaryHeading {
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+.tagList {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  height: 2.6rem;
+  font-weight: 500;
+  line-height: 1.1;
+  padding: 0.7rem 0.9rem;
+
+  line-height: 0.8;
+  color: var(--general-black);
+
+  background: var(--color-palette);
+
+  @include bp('tablet') {
+    height: 2.6rem;
+    line-height: 1.15;
+  }
+
+  @include bp('desktop') {
+    height: 2.3rem;
+    line-height: 0.85;
+  }
+}
+
+html[data-theme='dark'] {
+  .paramWrapper,
+  .borderWrapper,
+  .enumWrapper,
+  .enumItem,
+  .enumTitle,
+  .borderTopLine,
+  .borderBottomLine,
+  .paramItemWrapper:not(:first-child) {
+    border-color: var(--general-black-light);
+  }
+}

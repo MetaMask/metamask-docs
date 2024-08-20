@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useCollapsible, Collapsible } from "@docusaurus/theme-common";
 import { ArrayFieldTemplateProps } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 

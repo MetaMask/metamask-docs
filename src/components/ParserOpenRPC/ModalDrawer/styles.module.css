@@ -9,7 +9,7 @@
   min-height: 512px;
   opacity: 0;
   transform: translate(0, 100%);
-  transition-property: "transform", "opacity";
+  transition-property: 'transform', 'opacity';
   transition-duration: 0.4s;
   transition-timing-function: ease;
   overflow: hidden;
@@ -78,14 +78,14 @@
   display: block;
   padding: 0;
   background: none;
-  font-size: 24px;
+  font-size: 2.4rem;
   line-height: 1;
   border: 0;
   cursor: pointer;
 }
 
 .modalContent {
-  height: 394px;
+  height: 39.4rem;
 }
 
 .modalContentScrolled {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { WidgetProps } from "@rjsf/utils";
 import clsx from "clsx";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 
 export const DropdownWidget = ({
   name,
