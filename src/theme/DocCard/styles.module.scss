@@ -1,0 +1,142 @@
+.holder {
+  height: 100%;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2.4rem;
+  gap: 1.6rem;
+  padding: 3.2rem;
+  position: relative;
+  height: 100%;
+  text-decoration: none;
+  color: var(--general-black);
+  background-color: var(--general-gray-light);
+  transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 100%;
+    opacity: 0;
+    transition: opacity calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+    background-color: var(--consumer-purple);
+    z-index: 2;
+  }
+
+  &:hover {
+    color: var(--general-white);
+    text-decoration: none;
+    background-color: var(--consumer-purple-dark);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.title {
+  color: inherit;
+  .flask & {
+    max-width: 26.4rem;
+  }
+}
+
+.description {
+  @include bp(tablet) {
+    max-width: 33.6rem;
+  }
+  @include bp(desktop) {
+    max-width: 29.4rem;
+  }
+}
+
+.tag-holder {
+  position: absolute;
+  z-index: 1;
+  top: 0.8rem;
+  right: 0.8rem;
+
+  .extra-small & {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+
+  @include bp('tablet') {
+    top: 1.6rem;
+    right: 1.6rem;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  height: 2.6rem;
+  font-weight: 500;
+  line-height: 1.1;
+  padding: 0.7rem 0.9rem;
+
+  line-height: 0.8;
+  color: var(--general-black);
+
+  background: var(--color-palette);
+
+  @include bp('tablet') {
+    height: 2.6rem;
+    line-height: 1.15;
+  }
+
+  @include bp('desktop') {
+    height: 2.3rem;
+    line-height: 0.85;
+  }
+}
+
+html[data-theme='dark'] {
+  .item {
+    --color-palette: var(--consumer-green);
+    > div {
+      background-color: var(--general-black-light);
+    }
+
+    &.active {
+      > div {
+        background-color: var(--general-black);
+      }
+    }
+  }
+
+  .inner {
+    color: var(--general-white);
+  }
+}
+
+html[data-theme='dark'] {
+  .inner {
+    color: var(--general-white);
+    background-color: var(--general-black-light);
+
+    &::before {
+      background-color: var(--consumer-green);
+    }
+
+    &:hover {
+      background-color: var(--consumer-green-dark);
+    }
+  }
+}

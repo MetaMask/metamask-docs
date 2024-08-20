@@ -28,10 +28,6 @@
     padding-right: 0.8rem;
     margin-bottom: 1.6rem;
   }
-
-  @include bp('desktop') {
-    width: 25%;
-  }
 }
 
 .inner {

@@ -1,39 +1,33 @@
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
-import { useDocById, findFirstSidebarItemLink } from '@docusaurus/theme-common/internal'
-import Heading from '@theme/Heading'
+import { findFirstSidebarItemLink, useDocById } from '@docusaurus/theme-common/internal'
+import { usePluralForm } from '@docusaurus/theme-common'
 import { translate } from '@docusaurus/Translate'
-import type { Props } from '@theme/DocCard'
+import Heading from '@theme/Heading'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import Button from '@site/src/components/elements/buttons/button'
 
 import styles from './styles.module.scss'
 
-import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
-import { ReactNode } from 'react'
-
-function CardContainer({
-  href,
-  children,
-  flaskOnly,
-}: {
-  href: string
-  children: ReactNode
-  flaskOnly?: boolean
-}): JSX.Element {
+function useCategoryItemsPlural() {
+  const { selectMessage } = usePluralForm()
+  return count =>
+    selectMessage(
+      count,
+      translate(
+        {
+          message: '1 item|{count} items',
+          id: 'theme.docs.DocCard.categoryDescription.plurals',
+          description:
+            'The default description for a category card in the generated index about how many items this category includes',
+        },
+        { count }
+      )
+    )
+}
+function CardContainer({ href, children }) {
   return (
     <Link href={href} className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
-      {flaskOnly && (
-        <div className={styles['tag-holder']}>
-          <CutOffCorners size={'xxs'}>
-            <span
-              className={clsx(styles['tag'], 'type-label-caption uppercase font-weight-medium')}>
-              Flask
-            </span>
-          </CutOffCorners>
-        </div>
-      )}
-
       {children}
 
       {href && (
@@ -52,21 +46,10 @@ function CardContainer({
     </Link>
   )
 }
-
-function CardLayout({
-  href,
-  title,
-  description,
-  flaskOnly,
-}: {
-  href: string
-  title: string
-  description?: string
-  flaskOnly?: boolean
-}): JSX.Element {
+function CardLayout({ href, title, description }) {
   return (
     <CutOffCorners size="s">
-      <div className={clsx(styles['holder'], flaskOnly && styles['flask'])}>
+      <div className={styles['holder']}>
         <CardContainer href={href}>
           <div className={styles['header']}>
             <Heading as="h2" className={clsx(styles['title'], 'type-heading-xs')} title={title}>
@@ -84,49 +67,32 @@ function CardLayout({
     </CutOffCorners>
   )
 }
-
-function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element | null {
+function CardCategory({ item }) {
   const href = findFirstSidebarItemLink(item)
-
+  const categoryItemsPlural = useCategoryItemsPlural()
   // Unexpected: categories that don't have a link have been filtered upfront
   if (!href) {
     return null
   }
-
   return (
     <CardLayout
-      flaskOnly={!!item.customProps?.flask_only}
       href={href}
       title={item.label}
-      description={
-        item.description ??
-        translate(
-          {
-            message: '{count} items',
-            id: 'theme.docs.DocCard.categoryDescription',
-            description:
-              'The default description for a category card in the generated index about how many items this category includes',
-          },
-          { count: item.items.length }
-        )
-      }
+      description={item.description ?? categoryItemsPlural(item.items.length)}
     />
   )
 }
-
-function CardLink({ item }: { item: PropSidebarItemLink }): JSX.Element {
+function CardLink({ item }) {
   const doc = useDocById(item.docId ?? undefined)
   return (
     <CardLayout
-      flaskOnly={!!item.customProps?.flask_only}
       href={item.href}
       title={item.label}
       description={item.description ?? doc?.description}
     />
   )
 }
-
-export default function DocCard({ item }: Props): JSX.Element {
+export default function DocCard({ item }) {
   switch (item.type) {
     case 'link':
       return <CardLink item={item} />

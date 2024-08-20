@@ -278,3 +278,7 @@ h6 {
     padding: 5.5rem 0 0 3.5rem;
   }
 }
+
+.col {
+  padding: 0 calc(var(--ifm-spacing-horizontal) / 2);
+}
