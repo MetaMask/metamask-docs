@@ -1,0 +1,30 @@
+.holder {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include bp('tablet') {
+    margin-left: -0.8rem;
+    margin-right: -0.8rem;
+  }
+}
+
+.item {
+  width: 100%;
+  margin-bottom: 1.2rem;
+
+  @include bp('tablet') {
+    width: 25%;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.custom-select {
+  height: 4.2rem;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
