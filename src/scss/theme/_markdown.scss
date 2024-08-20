@@ -15,7 +15,7 @@
 
   /* Links */
 
-  a:not(.link-styles-none) {
+  a:not(.link-styles-none, [class*='button_src']) {
     color: var(--ifm-link-color);
     /* autoprefixer: ignore next */
     text-decoration: underline currentColor 0.1rem !important;
@@ -24,7 +24,7 @@
     font-weight: 500;
   }
 
-  a:not(.link-styles-none):hover {
+  a:not(.link-styles-none, [class*='button_src']):hover {
     color: var(--ifm-link-hover-color);
     /* autoprefixer: ignore next */
     text-decoration: underline currentColor 0.1rem !important;

@@ -102,7 +102,6 @@ const Button = forwardRef(
       [styles['is-extra-large']]: isExtraLarge,
       [styles['no-label']]: !label,
       [styles['disabled']]: disabled,
-      ['link-styles-none']: asValue !== 'button',
     })
 
     const labelClassNames = clsx(
