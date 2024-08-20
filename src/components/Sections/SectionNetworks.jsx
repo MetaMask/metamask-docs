@@ -34,7 +34,7 @@ const SectionNetworks = () => {
 
   const renderNetworkCard = ({ name, href, logo }, index) => (
     <li key={index} className={styles['item']}>
-      <Link to={href} className={clsx(styles['inner'], 'text-decoration-none')}>
+      <Link to={href} className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
         <div className={styles['logo-wrap']}>
           <img src={logo} alt={`${name} logo`} />
         </div>
@@ -45,7 +45,7 @@ const SectionNetworks = () => {
 
   return (
     <section className={styles['wrapper']}>
-      <ul className={styles['list']}>
+      <ul className={clsx(styles['list'], 'list-styles-none')}>
         {NETWORK_LINKS.map((item, index) =>
           isMobile && isNetworksListCollapsed && index > 4 ? null : renderNetworkCard(item, index)
         )}
