@@ -68,15 +68,25 @@
     color: var(--docsearch-text-color);
     transition: border var(--ifm-transition-fast) ease;
 
-    [data-theme='dark'] & {
-      background: transparent;
-    }
+    background-color: transparent;
   }
 
   &#method select,
   &#interactive-box select {
+    position: relative;
     padding: 1.4rem;
     margin-bottom: 1.6rem;
+    background: var(--select-arrow);
+    background-repeat: no-repeat;
+    background-size: 1rem 0.7rem;
+    background-position: 96% center;
+  }
+
+  &#method input[type='checkbox'],
+  &#interactive-box input[type='checkbox'] {
+    appearance: auto;
+    width: 1.6rem;
+    height: 1.6rem;
   }
 
   &#interactive-box .form-group {
