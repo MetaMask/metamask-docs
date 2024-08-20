@@ -1,24 +1,23 @@
 ---
-sidebar_label: JavaScript
-sidebar_position: 1
-description: Set up the SDK in your JavaScript dapp.
+sidebar_label: MetaMask SDK
+description: Connect to MetaMask using MetaMask SDK.
 tags:
   - JavaScript SDK
 ---
 
-# Use MetaMask SDK with JavaScript
+# Connect to MetaMask using the SDK
 
 Import MetaMask SDK into your JavaScript dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
 The following instructions work for web dapps based on standard JavaScript.
 You can also see instructions for the following JavaScript-based platforms:
 
-- [React](react/index.md)
-  - [React UI](react/react-ui.md)
-- [Pure JavaScript](pure-js.md)
-- [Other web frameworks](other-web-frameworks.md)
-- [Node.js](nodejs.md)
-- [Electron](electron.md)
+- [React](../how-to/use-sdk/javascript/react/index.md)
+  - [React UI](../how-to/use-sdk/javascript/react/react-ui.md)
+- [Pure JavaScript](../how-to/use-sdk/javascript/pure-js.md)
+- [Other web frameworks](../how-to/use-sdk/javascript/other-web-frameworks.md)
+- [Node.js](../how-to/use-sdk/javascript/nodejs.md)
+- [Electron](../how-to/use-sdk/javascript/electron.md)
 
 ## Prerequisites
 

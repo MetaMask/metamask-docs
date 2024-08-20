@@ -1,19 +1,19 @@
 ---
 description: Integrate MetaMask SDK with Web3-Onboard in your JavaScript dapp.
-sidebar_position: 1
+sidebar_position: 2
 sidebar_label: Web3-Onboard
 tags:
   - JavaScript SDK
 ---
 
-# Use Web3-Onboard with MetaMask SDK
+# Connect to MetaMask using Web3-Onboard
 
 [Web3-Onboard](https://onboard.blocknative.com/) is a JavaScript library that simplifies the process
 of onboarding users into dapps.
 It provides a smooth user interface, a variety of wallet integrations, and is highly customizable to
 meet the needs of your dapp.
 
-You can integrate [MetaMask SDK](../../../concepts/sdk/index.md) into your dapp alongside Web3-Onboard,
+You can integrate MetaMask SDK into your dapp alongside Web3-Onboard,
 using the Web3-Onboard MetaMask module, to enable your users to seamlessly and securely connect to
 the MetaMask browser extension and MetaMask Mobile.
 
@@ -41,8 +41,8 @@ import metamaskSDK from "@web3-onboard/metamask"
 
 ### 3. Instantiate the module
 
-Instantiate the module using any [JavaScript SDK options](../../../reference/sdk-js-options.md), for
-example, [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata):
+Instantiate the module using any [JavaScript SDK options](../../reference/sdk-js-options.md), for
+example, [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata):
 
 ```javascript
 const metamaskSDKWallet = metamaskSDK({

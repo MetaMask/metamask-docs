@@ -1,10 +1,10 @@
 ---
-description: Connect to MetaMask via EIP-6963.
-sidebar_position: 2
+description: Connect to MetaMask using the Wallet API and EIP-6963.
+sidebar_label: Wallet API
 toc_max_heading_level: 4
 ---
 
-# Connect to MetaMask
+# Connect to MetaMask using the Wallet API
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.
@@ -13,11 +13,11 @@ introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
 This approach allows you to detect multiple installed wallets and connect to them without conflicts.
 
 :::info
-Learn more about EIP-6963 in [Wallet interoperability](../../concepts/wallet-interoperability.md).
+Learn more about EIP-6963 in [Wallet interoperability](../concepts/wallet-interoperability.md).
 :::
 
 :::tip
-To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../../tutorials/javascript-dapp-simple.md) tutorial.
+To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../tutorials/javascript-dapp-simple.md) tutorial.
 :::
 
 You can connect to MetaMask [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
@@ -56,7 +56,7 @@ npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
 #### 2. Set up the project
 
 In your Vite project, update `src/vite-env.d.ts` with the
-[EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces):
+[EIP-6963 interfaces](../concepts/wallet-interoperability.md#eip-6963-interfaces):
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -213,7 +213,7 @@ npm create vite@latest react-ts-6963 -- --template react-ts
 #### 2. Set up the project
 
 In your Vite project, update `src/vite-env.d.ts` with the
-[EIP-6963 interfaces](../../concepts/wallet-interoperability.md#eip-6963-interfaces):
+[EIP-6963 interfaces](../concepts/wallet-interoperability.md#eip-6963-interfaces):
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -445,7 +445,7 @@ You can clone the repository and run the example locally using `npm i && npm run
 
 After connecting to MetaMask directly, you can:
 
-- [Detect, add, and switch networks](../manage-networks).
-- [Send transactions](../send-transactions.md).
-- [Sign data](../sign-data/index.md).
-- [Display tokens, contract methods, and icons in MetaMask](../display).
+- [Detect, add, and switch networks](../how-to/manage-networks).
+- [Send transactions](../how-to/send-transactions.md).
+- [Sign data](../how-to/sign-data/index.md).
+- [Display tokens, contract methods, and icons in MetaMask](../how-to/display).
