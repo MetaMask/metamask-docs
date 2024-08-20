@@ -44,6 +44,7 @@
   transition:
     filter calc(var(--motion) * var(--motion-speed)) $gentle-ease,
     background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+  color: var(--general-black);
 
   &::before {
     content: '';
@@ -59,7 +60,8 @@
 
   &:hover {
     text-decoration: none;
-    filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
+    color: currentColor;
+    filter: drop-shadow(0 0.2rem 0.3rem rgba(0, 0, 0, 0.1));
     &::before {
       opacity: 0;
     }
@@ -84,9 +86,14 @@
   }
 }
 
+.button {
+  margin-top: 2.4rem;
+}
+
 html[data-theme='dark'] {
   .inner {
     background-color: var(--general-black-light);
+    color: var(--general-white);
 
     &::before {
       display: none;
