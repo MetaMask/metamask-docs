@@ -15,23 +15,23 @@
 
   /* Links */
 
-  a {
+  a:not(.link-styles-none) {
     color: var(--ifm-link-color);
     /* autoprefixer: ignore next */
-    text-decoration: underline var(--ifm-link-color) 0.1rem !important;
+    text-decoration: underline currentColor 0.1rem !important;
     text-underline-offset: 0.4rem;
     transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
     font-weight: 500;
   }
 
-  a:hover {
+  a:not(.link-styles-none):hover {
     color: var(--ifm-link-hover-color);
     /* autoprefixer: ignore next */
-    text-decoration: underline var(--ifm-link-hover-color) 0.1rem !important;
+    text-decoration: underline currentColor 0.1rem !important;
   }
 
-  ol,
-  ul {
+  ol:not(.list-styles-none),
+  ul:not(.list-styles-none) {
     list-style: initial;
     padding-left: 2.4rem;
   }

@@ -35,13 +35,6 @@
   a {
     font-weight: 500;
     color: var(--ifm-alert-foreground-color);
-    text-decoration: underline;
-    text-underline-offset: 0.2rem;
-    text-decoration-thickness: 0.1rem;
-
-    &:hover {
-      text-underline-offset: 0.2rem;
-    }
   }
 
   code {
@@ -56,24 +49,52 @@
     --ifm-alert-background-color-highlight: #0a0a0a1a;
 
     a {
-      color: var(--consumer-orange-dark);
+      color: var(--consumer-orange-dark) !important;
+
+      &:hover {
+        color: var(--consumer-orange) !important;
+      }
     }
   }
 
   &--info {
     --ifm-alert-background-color-highlight: #1900661a;
+
+    a {
+      &:hover {
+        color: var(--consumer-blue) !important;
+      }
+    }
   }
 
   &--success {
     --ifm-alert-background-color-highlight: #0133301a;
+
+    a {
+      &:hover {
+        color: var(--consumer-green) !important;
+      }
+    }
   }
 
   &--warning {
     --ifm-alert-background-color-highlight: #3d065f1a;
+
+    a {
+      &:hover {
+        color: var(--consumer-purple) !important;
+      }
+    }
   }
 
   &--danger {
     --ifm-alert-background-color-highlight: #6618001a;
+
+    a {
+      &:hover {
+        color: var(--consumer-orange) !important;
+      }
+    }
   }
 
   [data-theme='dark'] & {
@@ -87,7 +108,11 @@
       --ifm-alert-background-color-highlight: #ffffff1a;
 
       a {
-        color: var(--consumer-green);
+        color: var(--consumer-green) !important;
+
+        &:hover {
+          color: var(--consumer-green-light) !important;
+        }
       }
     }
 
