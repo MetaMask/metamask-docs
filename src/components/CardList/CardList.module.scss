@@ -20,6 +20,8 @@
 .list {
   display: flex;
   flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
 
   @include bp('tablet') {
     margin-left: -0.8rem;

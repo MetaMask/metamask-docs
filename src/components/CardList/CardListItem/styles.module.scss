@@ -44,6 +44,8 @@
   padding: 3.2rem;
   position: relative;
   height: 100%;
+  text-decoration: none;
+  color: var(--general-black);
 
   &::before {
     position: absolute;
@@ -58,6 +60,7 @@
   }
 
   &:hover {
+    color: currentColor;
     text-decoration: none;
 
     &::before {
@@ -143,5 +146,9 @@ html[data-theme='dark'] {
         background-color: var(--general-black);
       }
     }
+  }
+
+  .inner {
+    color: var(--general-white);
   }
 }

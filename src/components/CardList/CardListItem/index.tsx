@@ -39,7 +39,9 @@ export default function CardListItem({ item }: CardListItemProps) {
           className={styles['holder']}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
-          <Link to={href} className={clsx(styles['inner'], 'text-decoration-none')}>
+          <Link
+            to={href}
+            className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
             {flaskOnly && (
               <div className={styles['tag-holder']}>
                 <CutOffCorners size={'xxs'}>

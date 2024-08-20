@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import CardListItem, { CardItem } from './CardListItem'
 
 import styles from './CardList.module.scss'
@@ -11,7 +12,7 @@ export default function CardList(props: CardListProps): JSX.Element {
 
   return (
     <section className={styles['wrapper']}>
-      <ul className={styles['list']}>
+      <ul className={clsx(styles['list'], 'list-styles-none')}>
         {items.map((item, index) => (
           <CardListItem key={index} item={item} />
         ))}
