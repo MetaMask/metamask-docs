@@ -4,6 +4,16 @@
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 2rem;
+
+    &.interactive-right-sidebar {
+      border-left: none;
+      padding: 3rem 0.8rem 4.6rem;
+
+      @include bp('tablet') {
+        border-left: 1px solid var(--ifm-toc-border-color);
+        padding: 0 2.4rem;
+      }
+    }
   }
 
   &__link {
