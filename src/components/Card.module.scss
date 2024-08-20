@@ -46,6 +46,7 @@
   padding: 3.2rem;
   position: relative;
   height: 100%;
+  color: var(--general-black);
 
   @include bp('tablet') {
     padding-bottom: 3rem;
@@ -71,6 +72,7 @@
 
   &:hover {
     text-decoration: none;
+    color: currentColor;
 
     &::before {
       opacity: 1;
@@ -158,7 +160,12 @@ html[data-theme='dark'] {
     }
   }
 
+  .inner {
+    color: var(--general-white);
+  }
+
   .shape {
     color: var(--general-black);
+    transition: color calc(var(--motion) * var(--motion-speed)) $gentle-ease;
   }
 }
