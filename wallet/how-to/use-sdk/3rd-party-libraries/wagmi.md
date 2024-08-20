@@ -11,7 +11,7 @@ tags:
 [Wagmi](https://wagmi.sh/) is a powerful and efficient React Hooks library designed to streamline
 dapp development by simplifying Ethereum interactions.
 
-You can integrate [MetaMask SDK](../../../concepts/sdk/index.md) into your dapp alongside Wagmi,
+You can integrate [MetaMask SDK](../index.md) into your dapp alongside Wagmi,
 using the MetaMask connector with Wagmi, to enable your users to seamlessly and securely connect to
 the MetaMask browser extension and MetaMask Mobile.
 
@@ -19,7 +19,7 @@ the MetaMask browser extension and MetaMask Mobile.
 
 - Ensure you have a basic understanding of Ethereum smart contracts and React Hooks.
 - Set up a project with [Wagmi](https://wagmi.sh/react/getting-started).
-- Create an Infura API key and allowlist to [make read-only requests](../javascript/make-read-only-requests.md).
+- Create an Infura API key and allowlist to [make read-only requests](../../make-read-only-requests.md).
 
 ## Steps
 
@@ -46,7 +46,7 @@ This option is required when configuring the MetaMask connector with Wagmi.
 #### Infura API key
 
 We recommend specifying the [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey)
-option to [make read-only requests](../javascript/make-read-only-requests.md) using the Infura API.
+option to [make read-only requests](../../make-read-only-requests.md) using the Infura API.
 Read more about the [benefits of using the Infura API with Wagmi](#benefits-of-using-the-infura-api-with-wagmi).
 
 #### Universal links
@@ -122,7 +122,7 @@ These are some errors that might occur in mobile environments:
 
 To overcome this limitation in mobile dapps that rely on a continuous connection with MetaMask,
 use the Infura API to make read-only requests.
-You can do this by [configuring the SDK with an Infura API key](#2-configure-the-sdk).
+You can do this by [configuring the SDK with an Infura API key](#2-configure-wagmi-with-the-metamask-connector).
 This approach offloads the read operations to Infura's nodes, reducing the load on your own
 infrastructure and ensuring high availability and reliability, independent of the user's wallet connection.
 

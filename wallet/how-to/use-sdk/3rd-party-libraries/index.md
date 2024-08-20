@@ -8,7 +8,7 @@ tags:
 
 # Use MetaMask SDK with third-party libraries
 
-Use [MetaMask SDK](../../../concepts/sdk/index.md) with the following third-party libraries:
+Use MetaMask SDK with the following third-party libraries:
 
 - [Web3-Onboard](web3-onboard.md)
 - [Wagmi](wagmi.md)
