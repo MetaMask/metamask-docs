@@ -279,6 +279,10 @@ h6 {
   }
 }
 
+.row {
+  margin: 0 calc(var(--ifm-spacing-horizontal) * -1 / 2);
+}
+
 .col {
   padding: 0 calc(var(--ifm-spacing-horizontal) / 2);
 }
