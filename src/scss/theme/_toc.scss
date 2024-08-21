@@ -1,3 +1,8 @@
+.tableOfContents_node_modules-\@docusaurus-theme-classic-lib-theme-TOC-styles-module {
+  margin-top: -3rem;
+  top: calc(var(--ifm-navbar-height) + 2rem) !important;
+}
+
 .table-of-contents {
   &__left-border {
     border-left: 0.8rem solid var(--ifm-color-primary);
