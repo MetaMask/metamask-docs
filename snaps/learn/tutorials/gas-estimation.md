@@ -100,7 +100,7 @@ gas-estimation-snap/
 |  |  |  |- gas.svg
 |  |  ├─ src/
 |  |  |  |- index.test.ts
-|  |  |  |- index.ts
+|  |  |  |- index.tsx
 |  |  ├─ snap.manifest.json
 |  |  ├─ package.json
 |  |  |- ... (Snap content)
@@ -186,15 +186,15 @@ permission in `packages/snap/snap.manifest.json`:
 
 ### 4. Fetch gas fee estimates
 
-Open `packages/snap/src/index.ts`.
+Open `packages/snap/src/index.tsx`.
 This is the main code file for your Snap.
 To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
-Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.ts` file:
+Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.tsx` file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { panel, text } from "@metamask/snaps-sdk"
+import { Box, Text } from "@metamask/snaps-sdk/jsx"
 
 async function getFees() {
   const response = await fetch("https://beaconcha.in/api/v1/execution/gasnow")
@@ -202,11 +202,11 @@ async function getFees() {
 }
 ```
 
-Next, add the `copyable` component to the second import of the file:
+Next, add the `Copyable` component to the second import of the file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { panel, text, copyable } from "@metamask/snaps-sdk"
+import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx"
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
@@ -216,9 +216,6 @@ For the `hello` method, the handler returns a call to MetaMask with the paramete
 dialog, and passes some static strings.
 
 Update the `hello` method with the following code:
-
-<Tabs>
-<TabItem value="JSX">
 
 ```tsx title="index.tsx"
 case "hello":
@@ -231,36 +228,14 @@ case "hello":
         <Box>
           <Text>Hello, <Bold>{origin}</Bold>!</Text>
           <Text>Current gas fee estimates:</Text>
-          <Copyable>{fees}</Copyable>
+          <Copyable value={fees} />
         </Box>
       ),
     }
   });
 ```
 
-</TabItem>
-<TabItem value="Functions" deprecated>
-
-```typescript title="index.ts"
-case "hello":
-  const fees = await getFees();
-  return snap.request({
-    method: "snap_dialog",
-    params: {
-      type: "alert",
-      content: panel([
-        text(`Hello, **${origin}**!`),
-        text("Current gas fee estimates:"),
-        copyable(fees),
-      ]),
-    }
-  });
-```
-
-</TabItem>
-</Tabs>
-
-### 5. Build and test your Snap
+### 5. Build and test the Snap
 
 Complete the following steps to build and test your Snap:
 

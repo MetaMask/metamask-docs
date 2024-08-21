@@ -120,7 +120,7 @@ await snap.request({
     content: (
       <Box>
         <Heading>Are you sure you want to send tokens to this address?</Heading>
-        <Address>0x000000000000000000000000000000000000dEaD</Address>
+        <Address address="0x000000000000000000000000000000000000dEaD" />
       </Box>
     ),
   },
@@ -254,6 +254,11 @@ await snap.request({
 
 Outputs a read-only text field with a copy-to-clipboard shortcut.
 
+#### Props
+
+- `value`: `string` - The value to copy when the user clicks on the copyable element.
+- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the value will be hidden when the user is not interacting with the copyable element.
+
 #### Example
 
 ```javascript title="index.jsx"
@@ -266,7 +271,7 @@ await snap.request({
     content: (
       <Box>
         <Text>Your address:</Text>
-        <Copyable>0x000000000000000000000000000000000000dEaD</Copyable>
+        <Copyable value="0x000000000000000000000000000000000000dEaD" />
       </Box>
     ),
   },
@@ -587,7 +592,7 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to.
+- `href`: `string` - The URL to point to. This must be an HTTPS URL.
 - `children`: `Array<string | Bold | Italic>` - The link text.
 
 #### Example
@@ -640,7 +645,7 @@ await snap.request({
     content: (
       <Box>
         <Row label="Address">
-          <Address>0x000000000000000000000000000000000000dEaD</Address>
+          <Address address="0x000000000000000000000000000000000000dEaD" />
         </Row>
         <Row label="Balance">
           <Text>1.78 ETH</Text>
