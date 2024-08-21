@@ -42,7 +42,7 @@ Key features of MetaMask SDK include:
 - **Multiple supported dapp platforms** - You can connect from web, desktop, mobile, and gaming dapps
   to MetaMask Mobile.
 
-- **EIP-6963 detection** - The SDK detects MetaMask SDK using the
+- **EIP-6963 detection** - The SDK detects MetaMask using the
   [EIP-6963 multi-wallet detection mechanism](../concepts/wallet-interoperability.md).
   Note that the SDK discovers *only* the MetaMask wallet.
   You can use the SDK on its own, or integrated with [third-party libraries](#third-party-libraries)
@@ -50,7 +50,7 @@ Key features of MetaMask SDK include:
 
 ## Third-party libraries
 
-You can use MetaMask SDK on its own, or integrated with third-party libraries such as
+You can use MetaMask SDK integrated with third-party libraries such as
 [Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-party-libraries/web3-onboard.md).
 
 *Paragraph explaining use cases for connecting via third-party libraries.*
