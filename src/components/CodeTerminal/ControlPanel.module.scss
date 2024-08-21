@@ -23,7 +23,7 @@
 .custom-select {
   height: 4.2rem;
 
-  > div {
+  > div:first-child {
     display: flex;
     align-items: center;
   }
