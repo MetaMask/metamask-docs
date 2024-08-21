@@ -7,17 +7,15 @@ tags:
 
 # Connect to MetaMask using the SDK
 
-Import MetaMask SDK into your JavaScript dapp to enable your
+Import MetaMask SDK into your dapp to enable your
 users to easily connect to the MetaMask browser extension and MetaMask Mobile.
-The following instructions work for web dapps based on standard JavaScript.
-You can also see instructions for the following JavaScript-based platforms:
 
-- [React](../how-to/use-sdk/javascript/react/index.md)
-  - [React UI](../how-to/use-sdk/javascript/react/react-ui.md)
-- [Pure JavaScript](../how-to/use-sdk/javascript/pure-js.md)
-- [Other web frameworks](../how-to/use-sdk/javascript/other-web-frameworks.md)
-- [Node.js](../how-to/use-sdk/javascript/nodejs.md)
-- [Electron](../how-to/use-sdk/javascript/electron.md)
+The following instructions work for web dapps based on standard JavaScript.
+You can also see instructions for other dapp platforms supported by the SDK:
+
+- [JavaScript](../how-to/use-sdk/javascript/index.md)
+- [Mobile](../how-to/use-sdk/mobile/index.md)
+- [Gaming](../how-to/use-sdk/gaming/index.md)
 
 ## Prerequisites
 

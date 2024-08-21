@@ -21,10 +21,6 @@ const sidebar = {
         },
         {
           type: "doc",
-          id: "connect/multi-wallet-connectors",
-        },
-        {
-          type: "doc",
           id: "connect/wallet-api",
         },
       ],

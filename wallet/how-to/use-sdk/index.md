@@ -15,32 +15,6 @@ to the MetaMask browser extension and MetaMask Mobile.
 You can install the SDK in existing dapps, and call any [Wallet API](../../concepts/wallet-api.md) methods from
 your dapp.
 
-## Benefits of MetaMask SDK
-
-MetaMask SDK enables your dapp to provide a seamless user experience for MetaMask users, from
-multiple dapp platforms, without relying on third-party libraries.
-By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
-preferred MetaMask client.
-The SDK uses the [MetaMask Ethereum provider](../../concepts/wallet-api.md#ethereum-provider-api), so existing
-dapps work out of the box with the SDK.
-
-The following table outlines some of the features available when you integrate your dapp with
-MetaMask using the SDK.
-Most of these features are not available if you only integrate your dapp directly using the
-[Wallet API](../../concepts/wallet-api.md).
-
-| Feature                                                                             | Wallet API only | MetaMask SDK |
-|-------------------------------------------------------------------------------------| :-------------: | :----------: |
-| Connect from a web dapp to the MetaMask extension                                   |       ✅        |      ✅      |
-| Connect from a web dapp to MetaMask Mobile                                          |       ❌        |      ✅      |
-| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                   |       ❌        |      ✅      |
-| Use custom RPC methods such as [`connectAndSign`](../sign-data/connect-and-sign.md) |       ❌        |      ✅      |
-| [Display custom modals](../display/display-custom-modals.md) in MetaMask            |       ❌        |      ✅      |
-| [Make read-only requests](../make-read-only-requests.md) using the Infura API       |       ❌        |      ✅      |
-| [Batch multiple RPC requests](../batch-json-rpc-requests.md)                        |       ❌        |      ✅      |
-
-## Supported platforms
-
 The SDK supports the following dapp platforms:
 
 <div class="cards">
