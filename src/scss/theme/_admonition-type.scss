@@ -97,6 +97,14 @@
     }
   }
 
+  &.theme-admonition-flaskOnly {
+    a {
+      &:hover {
+        color: var(--consumer-purple-light) !important;
+      }
+    }
+  }
+
   [data-theme='dark'] & {
     color: var(--general-white);
 
@@ -134,6 +142,15 @@
     &--danger {
       --ifm-alert-background-color-highlight: #ffa6801a;
       color: var(--consumer-orange-light);
+    }
+
+    &.theme-admonition-flaskOnly {
+      color: var(--general-black);
+      a {
+        &:hover {
+          color: var(--consumer-green-light) !important;
+        }
+      }
     }
   }
 }
