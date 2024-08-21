@@ -1,8 +1,10 @@
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
+import { useState, useEffect } from 'react'
 import { useDocById, findFirstSidebarItemLink } from '@docusaurus/theme-common/internal'
 import Heading from '@theme/Heading'
 import { translate } from '@docusaurus/Translate'
+import { useColorMode } from '@docusaurus/theme-common'
 import type { Props } from '@theme/DocCard'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import Button from '@site/src/components/elements/buttons/button'
@@ -11,47 +13,6 @@ import styles from './styles.module.scss'
 
 import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
 import { ReactNode } from 'react'
-
-function CardContainer({
-  href,
-  children,
-  flaskOnly,
-}: {
-  href: string
-  children: ReactNode
-  flaskOnly?: boolean
-}): JSX.Element {
-  return (
-    <Link href={href} className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
-      {flaskOnly && (
-        <div className={styles['tag-holder']}>
-          <CutOffCorners size={'xxs'}>
-            <span
-              className={clsx(styles['tag'], 'type-label-caption uppercase font-weight-medium')}>
-              Flask
-            </span>
-          </CutOffCorners>
-        </div>
-      )}
-
-      {children}
-
-      {href && (
-        <Button
-          as="div"
-          label={false}
-          type={'secondary'}
-          icon="arrow-right"
-          className={styles['button']}
-          style={{
-            '--button-color-hover': 'var(--general-white)',
-            '--button-text-color-hover': 'var(--general-black)',
-          }}
-        />
-      )}
-    </Link>
-  )
-}
 
 function CardLayout({
   href,
@@ -64,24 +25,75 @@ function CardLayout({
   description?: string
   flaskOnly?: boolean
 }): JSX.Element {
-  return (
-    <CutOffCorners size="s">
-      <div className={clsx(styles['holder'], flaskOnly && styles['flask'])}>
-        <CardContainer href={href}>
-          <div className={styles['header']}>
-            <Heading as="h2" className={clsx(styles['title'], 'type-heading-xs')} title={title}>
-              {title}
-            </Heading>
+  const { colorMode } = useColorMode()
+  const [theme, setTheme] = useState('')
+  const [isHovered, setIsHovered] = useState(false)
 
-            {description && (
-              <p className={clsx(styles['description'], 'type-paragraph-s')} title={description}>
-                {description}
-              </p>
+  useEffect(() => {
+    setTheme(colorMode)
+  }, [colorMode])
+
+  return (
+    <article
+      className={clsx(styles['item'], isHovered && styles['active'], flaskOnly && styles['flask'])}>
+      <CutOffCorners size="s">
+        <div
+          className={styles['holder']}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}>
+          <Link
+            href={href}
+            className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
+            {flaskOnly && (
+              <div className={styles['tag-holder']}>
+                <CutOffCorners size={'xxs'}>
+                  <span
+                    className={clsx(
+                      styles['tag'],
+                      'type-label-caption uppercase font-weight-medium'
+                    )}>
+                    Flask
+                  </span>
+                </CutOffCorners>
+              </div>
             )}
-          </div>
-        </CardContainer>
-      </div>
-    </CutOffCorners>
+
+            <div className={styles['header']}>
+              <Heading as="h2" className={clsx(styles['title'], 'type-heading-xs')} title={title}>
+                {title}
+              </Heading>
+
+              {description && (
+                <p className={clsx(styles['description'], 'type-paragraph-s')} title={description}>
+                  {description}
+                </p>
+              )}
+            </div>
+
+            {href && (
+              <Button
+                as="div"
+                label={false}
+                type={theme === 'dark' ? 'secondary' : 'primary'}
+                icon="arrow-right"
+                className={styles['button']}
+                style={
+                  theme === 'dark'
+                    ? {
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
+                    : {
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
+                }
+              />
+            )}
+          </Link>
+        </div>
+      </CutOffCorners>
+    </article>
   )
 }
 

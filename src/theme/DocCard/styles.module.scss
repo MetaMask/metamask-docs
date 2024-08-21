@@ -1,3 +1,35 @@
+.item {
+  --color-palette: var(--developer-purple);
+  margin-bottom: 1.6rem;
+  transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+  min-height: 22.2rem;
+  width: 100%;
+  margin-top: 0;
+
+  @include bp('tablet') {
+    min-height: 22.3rem;
+  }
+
+  @include bp(tablet) {
+    width: 50%;
+    padding: 0 0.8rem;
+  }
+
+  > div {
+    background-color: var(--general-gray-light);
+    position: relative;
+    transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+  }
+
+  &.active {
+    filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
+
+    > div {
+      background-color: var(--general-white);
+    }
+  }
+}
+
 .holder {
   height: 100%;
 }
@@ -14,8 +46,6 @@
   height: 100%;
   text-decoration: none;
   color: var(--general-black);
-  background-color: var(--general-gray-light);
-  transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
 
   &::before {
     position: absolute;
@@ -25,15 +55,13 @@
     width: 1rem;
     height: 100%;
     opacity: 0;
-    transition: opacity calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
-    background-color: var(--consumer-purple);
-    z-index: 2;
+    transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+    background-color: var(--color-palette);
   }
 
   &:hover {
-    color: var(--general-white);
+    color: currentColor;
     text-decoration: none;
-    background-color: var(--consumer-purple-dark);
 
     &::before {
       opacity: 1;
@@ -49,7 +77,6 @@
 }
 
 .title {
-  color: inherit;
   .flask & {
     max-width: 26.4rem;
   }
@@ -109,7 +136,7 @@
 
 html[data-theme='dark'] {
   .item {
-    --color-palette: var(--consumer-green);
+    --color-palette: var(--developer-green);
     > div {
       background-color: var(--general-black-light);
     }
@@ -123,20 +150,5 @@ html[data-theme='dark'] {
 
   .inner {
     color: var(--general-white);
-  }
-}
-
-html[data-theme='dark'] {
-  .inner {
-    color: var(--general-white);
-    background-color: var(--general-black-light);
-
-    &::before {
-      background-color: var(--consumer-green);
-    }
-
-    &:hover {
-      background-color: var(--consumer-green-dark);
-    }
   }
 }
