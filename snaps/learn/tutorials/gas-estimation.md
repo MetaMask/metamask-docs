@@ -206,7 +206,7 @@ Next, add the `Copyable` component to the second import of the file:
 
 ```typescript title="index.ts"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
-import { Box, Text, Copyable } from "@metamask/snaps-sdk"
+import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx"
 ```
 
 Modify the Snap RPC message handler that displays the dialog.
