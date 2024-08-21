@@ -7,6 +7,7 @@
 @import './theme/toc';
 @import './theme/interactive-box';
 @import './theme/prism-code';
+@import './theme/react-dropdown';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
@@ -285,4 +286,12 @@ h6 {
 
 .col {
   padding: 0 calc(var(--ifm-spacing-horizontal) / 2);
+}
+
+.getfeedback-hidden {
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
 }
