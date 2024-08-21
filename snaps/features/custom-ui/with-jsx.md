@@ -257,8 +257,7 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Props
 
 - `value`: `string` - The value to copy when the user clicks on the copyable element.
-- `sensitive`: `boolean` - Optional. Whether the value is sensitive. If `true`, the value will be hidden when the user is not interacting with the copyable element.
-
+- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the value will be hidden when the user is not interacting with the copyable element.
 
 #### Example
 
