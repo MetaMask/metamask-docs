@@ -1,0 +1,17 @@
+.tableOfContents_node_modules-\@docusaurus-theme-classic-lib-theme-TOC-styles-module {
+  margin-top: -3rem;
+  top: calc(var(--ifm-navbar-height) + 2rem) !important;
+
+  &::before {
+    content: 'Table of Content:';
+    display: block;
+    margin-bottom: 1.8rem;
+    @extend .type-label-eyebrow;
+  }
+
+  [data-theme='dark'] & {
+    &::before {
+      color: var(--general-gray);
+    }
+  }
+}

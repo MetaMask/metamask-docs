@@ -1,5 +1,6 @@
 @import './app.scss';
 @import './theme/fonts';
+@import './theme/mobile-breakpoint-expand';
 @import './theme/button';
 @import './theme/markdown';
 @import './theme/admonition-type';
@@ -8,6 +9,7 @@
 @import './theme/interactive-box';
 @import './theme/prism-code';
 @import './theme/react-dropdown';
+@import './theme/table-of-contents';
 @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
