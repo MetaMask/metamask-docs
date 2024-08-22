@@ -53,7 +53,7 @@ A list of approved third-party auditors and details about the audit process are 
 
 ### 1. Submit your Snap
 
-Fill out the [MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
+Fill out both the [Metamask Snaps onboarding form](https://feedback.metamask.io/snaps-onboarding) and the [MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
 The form requests information about your Snap, including the following:
 
 - **Snap name** - The name of your Snap.
