@@ -17,5 +17,4 @@ The following components have been swizzled by wrapping:
 
 The following components have been swizzled by ejecting:
 
-- `DocCard` (Unsafe)
 - `DocCardList` (Safe)
