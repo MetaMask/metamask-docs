@@ -56,6 +56,7 @@ export default function InteractiveBox({
   const [isFormReseted, setIsFormReseted] = useState(false);
   const [currentSchemaId, setCurrentSchemaId] = useState("");
   const [objectPropertyBeforeEdit, setObjectPropertyBeforeEdit] = useState(null);
+  const [objectValueBeforeEdit, setObjectValueBeforeEdit] = useState(null);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
@@ -186,11 +187,41 @@ export default function InteractiveBox({
     return newObj;
   };
 
+  const cloneObjectAndSetNullIfExists = (obj, key) => {
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    }
+    let newObj = {};
+    if (Object.keys(obj).length >= 1) {
+      newObj = objectValueBeforeEdit;
+    } else {
+      for (const prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+          if (Object.keys(obj).length === 0) {
+            newObj[prop] = {};
+          } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
+            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(obj[prop], key);
+          } else {
+            newObj[prop] = obj[prop];
+          }
+        }
+      }
+    }
+    return newObj;
+  };
+
   const handleCancelClick = () => {
     if (drawerLabel) {
-      const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
-      console.log("upData", upData);
-      setCurrentFormData(upData);
+      const currentKey = Object.keys(currentFormData)[0];
+      if (objectPropertyBeforeEdit && currentKey) {
+        const upData = cloneObjectAndSetNullIfExists(currentFormData[currentKey], objectPropertyBeforeEdit);
+        setCurrentFormData({[currentKey]: upData});
+        setObjectPropertyBeforeEdit(null);
+        setObjectValueBeforeEdit(null);
+      } else {
+        const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
+        setCurrentFormData(upData);
+      }
     }
     closeComplexTypeView();
   };
@@ -204,7 +235,14 @@ export default function InteractiveBox({
       <Form
         schema={parsedSchema}
         formData={currentFormData}
-        formContext={{ currentSchemaId, isFormReseted, setCurrentSchemaId, objectPropertyBeforeEdit, setObjectPropertyBeforeEdit }}
+        formContext={{ 
+          currentSchemaId,
+          isFormReseted,
+          setCurrentSchemaId,
+          objectPropertyBeforeEdit,
+          setObjectPropertyBeforeEdit,
+          setObjectValueBeforeEdit
+        }}
         validator={validator}
         liveValidate
         noHtml5Validate
