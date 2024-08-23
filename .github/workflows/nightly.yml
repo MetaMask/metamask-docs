@@ -39,6 +39,6 @@
             SLACK_CHANNEL: doc-ci-alerts
             SLACK_COLOR: danger
             SLACK_USERNAME: ci
-            SLACK_TITLE: Infura docs nightly build - Failure
+            SLACK_TITLE: MetaMask docs nightly build - Failure
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
             MSG_MINIMAL: true
