@@ -65,15 +65,6 @@
         transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
         background-color: var(--color-palette);
       }
-
-      &:hover {
-        color: currentColor;
-        text-decoration: none !important;
-
-        &::before {
-          opacity: 1;
-        }
-      }
     }
 
     h2 {
@@ -101,6 +92,17 @@
 
 .holder {
   height: 100%;
+
+  &:hover {
+    a:not(.button) {
+      color: currentColor;
+      text-decoration: none !important;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .button {
