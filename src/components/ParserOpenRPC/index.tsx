@@ -151,7 +151,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       }}>
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
-          <div className={global.colContentWrap}>
+          <div className={clsx(global.colContentWrap, 'padding-top--md', 'padding-bottom--lg')}>
             <DetailsBox
               method={method}
               description={currentMethodData.description}
