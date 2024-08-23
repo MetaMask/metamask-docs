@@ -14,21 +14,20 @@
     linkCheck:
       name: Run link check
       runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          file-extensions: [".md", ".mdx"]
+          check-modified-files-only: [no]
       permissions:
         contents: read
       steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v3
         - name: LinkCheck
-          id: linkcheck
-          uses: gaurav-nelson/github-action-markdown-link-check@v1
+          uses: ConsenSys/docs-gha/linkcheck@main
           with:
-            use-quiet-mode: 'yes'
-            use-verbose-mode: 'yes'
-            folder-path: './docs'
-            check-modified-files-only: 'no'
-            base-branch: main
-            config-file: './.github/workflows/link-check.json'
-  
+              FILE_EXTENSION: ${{ matrix.file-extensions }}
+              MODIFIED_FILES_ONLY: ${{ matrix.check-modified-files-only }}
+
     slackNotification:
       needs: linkCheck
       if: ${{ failure() }}
@@ -40,6 +39,6 @@
             SLACK_CHANNEL: doc-ci-alerts
             SLACK_COLOR: danger
             SLACK_USERNAME: ci
-            SLACK_TITLE: MetaMask docs nightly build - Failure
+            SLACK_TITLE: Infura docs nightly build - Failure
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
             MSG_MINIMAL: true
