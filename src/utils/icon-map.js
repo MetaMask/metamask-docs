@@ -19,7 +19,6 @@ import ControlsIcon from '@site/static/img/icons/controls.svg'
 import CopyIcon from '@site/static/img/icons/copy.svg'
 import CrossIcon from '@site/static/img/icons/cross.svg'
 import DarkModeIcon from '@site/static/img/icons/dark-mode.svg'
-import GithubIcon from '@site/static/img/icons/github.svg'
 import IconDiscord from '@site/static/img/icons/discord.svg'
 import DocumentIcon from '@site/static/img/icons/document.svg'
 import DownloadIcon from '@site/static/img/icons/download.svg'
@@ -84,7 +83,7 @@ export const buttonIconMap = {
   ['dropdown']: { component: DropdownIcon, direction: 'down' },
   ['external-arrow']: { component: ExternalArrowIcon, direction: 'oblique' },
   ['gas']: { component: GasIcon },
-  ['github']: { component: GithubIcon },
+  ['github']: { component: IconGitHub },
   ['globe']: { component: GlobeIcon },
   ['home']: { component: HomeIcon },
   ['info']: { component: InfoIcon },
