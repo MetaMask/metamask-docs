@@ -114,6 +114,7 @@
 
   /* Header */
   --ifm-navbar-height: var(--header-height);
+  --ifm-navbar-link-hover-color: var(--developer-purple-dark);
 
   /* Footer */
   --ifm-footer-background-color: var(--general-white);
@@ -191,6 +192,8 @@
   --color-text: var(--general-white);
   --select-arrow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 7"><path fill="rgb(233, 237, 246)" fill-rule="evenodd" d="M11.9038 1.82478 5.24975 6.80979-1.4043 1.82478-.385019.464234 5.24975 4.68564 10.8845.464233l1.0193 1.360547Z" clip-rule="evenodd"/></svg>');
 
+  /* Header */
+  --ifm-navbar-link-hover-color: var(--developer-green);
   /* Footer */
   --ifm-footer-background-color: var(--general-black-light);
 }
@@ -301,7 +304,7 @@ h6 {
   }
 
   &__item {
-    line-height: 1;
+    line-height: 0;
     padding: 0;
   }
 
@@ -309,7 +312,7 @@ h6 {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 124%;
-    padding: 0 2.2rem;
+    padding: 2rem 2.2rem;
 
     &:hover {
       text-decoration: none !important;
@@ -321,12 +324,36 @@ h6 {
     border: 1px solid var(--docsearch-searchbox-background);
   }
 
+  .toggleButton_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {
+    &:hover {
+      background-color: transparent !important;
+
+      svg path {
+        fill: var(--ifm-link-color);
+      }
+    }
+  }
+
   .toggle_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {
     margin: 0 1rem;
   }
   .dropdown__menu {
     left: 2rem;
+    left: 2rem;
+    padding: 1.6rem 1.2rem;
+    box-shadow: none;
   }
+
+  .dropdown--hoverable:hover .dropdown__menu,
+  .dropdown--show .dropdown__menu {
+    transform: translateY(1rem) !important;
+    background-color: var(--ifm-hover-overlay) !important;
+
+    [data-theme='dark'] & {
+      border: 1px solid var(--general-gray-dark);
+    }
+  }
+
   .dropdown {
     &__link {
       font-size: 1.4rem;
@@ -410,6 +437,7 @@ h6 {
 
     &:hover {
       text-decoration: none !important;
+      color: var(--ifm-navbar-link-hover-color);
     }
   }
 
