@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import CodeBlock from '@theme/CodeBlock'
 import { MethodParam } from '@site/src/components/ParserOpenRPC/interfaces'
+import Heading from '@theme/Heading'
 import Button from '@site/src/components/elements/buttons/button'
 
 import styles from './styles.module.scss'
@@ -14,6 +15,7 @@ interface RequestBoxProps {
   paramsData: any
   openModal: () => void
   submitRequest: () => void
+  colorMode: string
 }
 
 export default function RequestBox({
@@ -24,6 +26,7 @@ export default function RequestBox({
   paramsData,
   openModal,
   submitRequest,
+  colorMode,
 }: RequestBoxProps) {
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2)
@@ -37,9 +40,9 @@ export default function RequestBox({
   return (
     <>
       <div className={styles.cardWrapper}>
-        <div className={styles.cardHeader}>
-          <strong className={styles.cardHeading}>Request</strong>
-        </div>
+        <Heading as="h3" className={clsx(styles.cardHeader, 'type-heading-xs')}>
+          Request
+        </Heading>
         <div>
           <CodeBlock language="javascript" className="margin-bottom--none">
             {exampleRequest}
@@ -53,36 +56,48 @@ export default function RequestBox({
               type={'tertiary'}
               label={'Customize request'}
               disabled={!isMetamaskInstalled}
-              icon={false}
               onClick={openModal}
               data-test-id="customize-request"
-              style={{
-                '--button-color': 'var(--general-white)',
-                '--button-text-color': 'var(--general-white)',
-                '--button-color-hover': 'transparent',
-              }}
+              style={
+                colorMode === 'dark'
+                  ? {
+                      '--button-color': 'var(--general-white)',
+                      '--button-text-color': 'var(--general-white)',
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
+                  : {
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
+              }
             />
           )}
           <Button
             as="button"
-            type={'secondary'}
+            type={'primary'}
             icon={'arrow-right'}
             label={'Run request'}
             disabled={!isMetamaskInstalled}
             onClick={submitRequest}
             data-test-id="run-request"
-            style={{
-              '--button-color-hover': 'var(--general-white)',
-              '--button-text-color-hover': 'var(--general-black)',
-            }}
+            style={
+              colorMode !== 'dark'
+                ? {
+                    '--button-color-hover': 'var(--general-black)',
+                    '--button-text-color-hover': 'var(--general-white)',
+                  }
+                : {}
+            }
           />
         </div>
       </div>
       {response !== undefined && (
         <div className={styles.cardWrapper}>
-          <div className={styles.cardHeader}>
-            <strong className={styles.cardHeading}>Response</strong>
-          </div>
+          <Heading as="h3" className={clsx(styles.cardHeader, 'type-heading-xs')}>
+            Response
+          </Heading>
+
           <div>
             <CodeBlock
               language="javascript"

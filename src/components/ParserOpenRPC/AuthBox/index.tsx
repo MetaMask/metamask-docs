@@ -17,19 +17,22 @@ export const AuthBox = ({ handleConnect, theme }: AuthBoxProps) => {
       <Button
         as="button"
         label={'Connect MetaMask'}
-        icon={'arrow-right'}
         onClick={() => handleConnect()}
         data-test-id="connect-metamask"
         style={
           theme === 'dark'
             ? {
-                '--button-color-hover': 'var(--general-white)',
-                '--button-text-color-hover': 'var(--general-black)',
-              }
+              '--button-color': 'var(--consumer-orange)',
+              '--button-text-color': 'var(--general-black)',
+              '--button-color-hover': 'var(--general-white)',
+              '--button-text-color-hover': 'var(--general-black)',
+            }
             : {
-                '--button-color-hover': 'var(--general-black)',
-                '--button-text-color-hover': 'var(--general-white)',
-              }
+              '--button-color': 'var(--consumer-orange)',
+              '--button-text-color': 'var(--general-black)',
+              '--button-color-hover': 'var(--general-black)',
+              '--button-text-color-hover': 'var(--general-white)',
+            }
         }
       />
     </div>

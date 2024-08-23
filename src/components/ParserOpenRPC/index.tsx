@@ -8,7 +8,7 @@ import RequestBox from '@site/src/components/ParserOpenRPC/RequestBox'
 import ErrorsBox from '@site/src/components/ParserOpenRPC/ErrorsBox'
 import { ModalDrawer } from '@site/src/components/ParserOpenRPC/ModalDrawer'
 import global from './global.module.scss'
-import modalDrawerStyles from './ModalDrawer/styles.module.css'
+import modalDrawerStyles from './ModalDrawer/styles.module.scss'
 import clsx from 'clsx'
 import { useColorMode } from '@docusaurus/theme-common'
 import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/segmentAnalytics'
@@ -214,6 +214,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               response={reqResult}
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
+              colorMode={colorMode}
             />
           </div>
         </div>
