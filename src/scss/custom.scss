@@ -9,7 +9,7 @@
 @import './theme/prism-code';
 @import './theme/react-dropdown';
 @import './theme/edit-page-link';
-@import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
+// @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
  * Any CSS included here will be global. The classic template
@@ -297,4 +297,12 @@ h6 {
 
 .hidden {
   display: none !important;
+}
+
+/**
+ * Temporary style - to be deleted
+ */
+
+.getfeedback-container {
+  margin-top: 5rem;
 }
