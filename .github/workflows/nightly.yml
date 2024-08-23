@@ -21,7 +21,6 @@
       permissions:
         contents: read
       steps:
-        - uses: actions/checkout@v4
         - name: LinkCheck
           uses: ConsenSys/docs-gha/linkcheck@main
           with:
