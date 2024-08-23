@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 export default function TreeWrapper(props) {
   return (
     <>
-      <span className={clsx(styles['subtitle'], 'type-label-eyebrow')}>Table of Content</span>
+      <span className={clsx(styles['subtitle'], 'type-label-eyebrow')}>Table of content:</span>
       <Tree {...props} />
     </>
   )
