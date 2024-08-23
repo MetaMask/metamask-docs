@@ -28,7 +28,7 @@ export default function Card({ title, href, description, theme }: CardItem) {
           className={styles['holder']}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
-          <Link to={href} className={clsx(styles['inner'], 'text-decoration-none')}>
+          <Link to={href} className={clsx(styles['inner'], 'link-styles-none')}>
             <Shape className={styles['shape']} />
 
             <div className={styles['header']}>
@@ -55,13 +55,13 @@ export default function Card({ title, href, description, theme }: CardItem) {
                   style={
                     theme === 'dark'
                       ? {
-                          '--button-color-hover': 'var(--general-white)',
-                          '--button-text-color-hover': 'var(--general-black)',
-                        }
+                        '--button-color-hover': 'var(--general-white)',
+                        '--button-text-color-hover': 'var(--general-black)',
+                      }
                       : {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
+                        '--button-color-hover': 'var(--general-black)',
+                        '--button-text-color-hover': 'var(--general-white)',
+                      }
                   }
                 />
               )}
