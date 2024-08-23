@@ -30,10 +30,30 @@
     text-decoration: underline currentColor 0.1rem !important;
   }
 
-  ol:not(.list-styles-none),
+  ol:not(.list-styles-none) {
+    list-style: decimal;
+    list-style-position: inside;
+
+    li {
+      margin-left: 0;
+    }
+  }
+
   ul:not(.list-styles-none) {
-    list-style: initial;
-    padding-left: 2.4rem;
+    margin-left: 2.5rem;
+    list-style: outside;
+
+    li {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      line-height: 150%;
+      color: var(--general-gray-dark);
+
+      ol,
+      ul {
+        margin-top: 1rem;
+      }
+    }
   }
 }
 
@@ -94,6 +114,7 @@
 
 .markdown li > p {
   margin-top: var(--ifm-list-paragraph-margin);
+  display: inline;
 }
 
 .markdown li + li {

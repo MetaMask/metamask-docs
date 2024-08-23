@@ -32,7 +32,7 @@
   --ifm-color-primary-lighter: var(--developer-purple-tint);
   --ifm-color-primary-lightest: var(--institution-purple-tint);
 
-  --ifm-color-secondary-lighter: var(--general-white-off);
+  --ifm-color-secondary-lighter: var(--general-gray-light);
 
   --ifm-heading-color: var(--general-black);
   --color-text-heading: var(--ifm-heading-color);
@@ -121,6 +121,11 @@
   @include bp('desktop') {
     --ifm-global-spacing: #{$grid-gutter-width-desktop};
   }
+
+  /* Code Block */
+  --ifm-code-border-radius: 0;
+  --prism-background-color: var(--general-black-light);
+  --ifm-code-font-size: 1.6rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

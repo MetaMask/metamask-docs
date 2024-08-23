@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 interface ModalDrawerProps {
   title: string | React.ReactNode;
