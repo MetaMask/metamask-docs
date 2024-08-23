@@ -71,7 +71,7 @@
       font-size: 1.6rem;
       line-height: 166.667%;
       white-space: wrap;
-      text-indent: -1.1rem;
+      text-indent: -1.2rem;
       overflow: visible;
 
       &::first-letter {
@@ -81,6 +81,12 @@
 
       @include bp('tablet') {
         text-indent: -1.1rem;
+      }
+
+      @include bp('desktop') {
+        font-size: 2rem;
+        line-height: 140%;
+        text-indent: -1.3rem;
       }
     }
 

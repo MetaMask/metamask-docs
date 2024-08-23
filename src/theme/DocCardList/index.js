@@ -4,6 +4,7 @@ import { useCurrentSidebarCategory, filterDocCardListItems } from '@docusaurus/t
 import { useColorMode } from '@docusaurus/theme-common'
 import DocCard from '@theme/DocCard'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
+import isInternalUrl from '@docusaurus/isInternalUrl'
 import Button from '@site/src/components/elements/buttons/button'
 
 import styles from './styles.module.scss'
@@ -46,18 +47,18 @@ export default function DocCardList(props) {
                   href={item.href}
                   label={false}
                   type={theme === 'dark' ? 'secondary' : 'primary'}
-                  icon="arrow-right"
+                  icon={isInternalUrl(item.href) ? 'arrow-right' : 'external-arrow'}
                   className={styles['button']}
                   style={
                     theme === 'dark'
                       ? {
-                          '--button-color-hover': 'var(--general-white)',
-                          '--button-text-color-hover': 'var(--general-black)',
-                        }
+                        '--button-color-hover': 'var(--general-white)',
+                        '--button-text-color-hover': 'var(--general-black)',
+                      }
                       : {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
+                        '--button-color-hover': 'var(--general-black)',
+                        '--button-text-color-hover': 'var(--general-white)',
+                      }
                   }
                 />
               )}
