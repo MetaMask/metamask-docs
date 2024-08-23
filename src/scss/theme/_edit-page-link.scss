@@ -1,0 +1,10 @@
+a.theme-edit-this-page {
+  @extend .type-paragraph-m;
+  text-decoration: underline currentColor 0.1rem !important;
+  text-underline-offset: 0.4rem;
+  font-weight: 500;
+
+  svg {
+    margin-right: 0.8rem;
+  }
+}
