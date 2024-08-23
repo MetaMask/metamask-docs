@@ -138,6 +138,8 @@
   --ifm-color-primary-lighter: var(--developer-green-tint);
   --ifm-color-primary-lightest: var(--institution-green-tint);
 
+  --ifm-background-surface-color: var(--general-black-light) !important;
+
   /* Links */
   --ifm-link-color: var(--ifm-color-primary);
   --ifm-link-hover-color: var(--ifm-color-primary-light);
@@ -273,4 +275,48 @@ h6 {
 
 .getfeedback-container {
   margin-top: 5rem;
+}
+
+.navbar {
+  --ifm-navbar-padding-horizontal: 3rem;
+  box-shadow: none;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+
+  &__brand {
+    margin-right: 7.2rem;
+  }
+
+  &__logo {
+    height: 3.2rem;
+    width: 6.5rem;
+  }
+
+  &__title {
+    display: none;
+  }
+
+  &__item {
+    line-height: 1;
+    padding: 0;
+  }
+
+  &__link {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 124%;
+    padding: 0 2.2rem;
+
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+
+  .DocSearch-Button {
+    background-color: var(--docsearch-searchbox-focus-background);
+    border: 1px solid var(--docsearch-searchbox-background);
+  }
+
+  .toggle_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {
+    margin: 0 1rem;
+  }
 }
