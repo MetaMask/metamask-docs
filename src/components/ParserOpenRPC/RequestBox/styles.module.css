@@ -15,6 +15,11 @@
   color: #fff;
 }
 
+.codeWrapper {
+  max-height: 328px;
+  overflow-y: scroll;
+}
+
 .cardFooter {
   display: flex;
   justify-content: flex-end;

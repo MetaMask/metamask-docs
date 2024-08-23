@@ -18,11 +18,12 @@ export const ObjectFieldTemplate = (props) => {
   } = props;
   const objectSchemaIds = ["root_requestPermissionsObject", "root_revokePermissionObject", "eth_signTypedData_v4"]
   const { isComplexTypeView, setDrawerLabel, setIsComplexTypeView } = useContext(ParserOpenRPCContext);
-  const { currentSchemaId, setCurrentSchemaId } = formContext;
+  const { currentSchemaId, setCurrentSchemaId, setObjectPropertyBeforeEdit } = formContext;
   const addNewObject = (name, schemaId) => {
     setIsComplexTypeView(true);
     setDrawerLabel(name);
     setCurrentSchemaId(schemaId);
+    setObjectPropertyBeforeEdit(name);
   };
 
   return (
@@ -64,10 +65,7 @@ export const ObjectFieldTemplate = (props) => {
             </div>
           )
         }
-        if (!isComplexTypeView) {
-          return content;
-        }
-        return isComplexTypeView && idSchema?.$id === currentSchemaId ? content : null;
+        return content;
       })}
       {
         (

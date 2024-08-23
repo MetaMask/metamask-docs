@@ -55,6 +55,7 @@ export default function InteractiveBox({
   const [currentFormData, setCurrentFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
   const [currentSchemaId, setCurrentSchemaId] = useState("");
+  const [objectPropertyBeforeEdit, setObjectPropertyBeforeEdit] = useState(null);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
@@ -188,6 +189,7 @@ export default function InteractiveBox({
   const handleCancelClick = () => {
     if (drawerLabel) {
       const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
+      console.log("upData", upData);
       setCurrentFormData(upData);
     }
     closeComplexTypeView();
@@ -202,7 +204,7 @@ export default function InteractiveBox({
       <Form
         schema={parsedSchema}
         formData={currentFormData}
-        formContext={{ currentSchemaId, isFormReseted, setCurrentSchemaId }}
+        formContext={{ currentSchemaId, isFormReseted, setCurrentSchemaId, objectPropertyBeforeEdit, setObjectPropertyBeforeEdit }}
         validator={validator}
         liveValidate
         noHtml5Validate

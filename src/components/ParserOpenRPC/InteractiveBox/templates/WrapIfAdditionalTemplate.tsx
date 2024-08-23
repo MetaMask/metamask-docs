@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils';
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
+import  * as isObject  from "lodash.isobject"
 
 export const WrapIfAdditionalTemplate = (props) => {
   const {
@@ -16,13 +17,20 @@ export const WrapIfAdditionalTemplate = (props) => {
     schema,
     children,
     registry,
-    formContext
+    formContext,
+    formData
   } = props;
   const { templates } = registry;
   const { RemoveButton } = templates.ButtonTemplates;
   const additional = ADDITIONAL_PROPERTY_FLAG in schema;
-  const { drawerLabel, isComplexTypeView, setDrawerLabel } = useContext(ParserOpenRPCContext);
+  const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } = useContext(ParserOpenRPCContext);
   const { setCurrentSchemaId } = formContext;
+  const onRemoveButtonClick = () => {
+    if (isObject(formData) && Object.keys(formData).length === 0) {
+      setIsComplexTypeView(false);
+      setDrawerLabel(null);
+    }
+  }
 
   if (!additional) {
     return (
@@ -36,17 +44,19 @@ export const WrapIfAdditionalTemplate = (props) => {
     if (!id.includes("_newKey")) {
       setCurrentSchemaId(id);
     }
-  }, [])
+  }, []);
 
   return (
     isComplexTypeView ? <div className={classNames} style={style}>
       {drawerLabel === label && (
         <div>
-          <RemoveButton
-            disabled={disabled || readonly}
-            onClick={onDropPropertyClick(label)}
-            registry={registry}
-          />
+          <div onClick={onRemoveButtonClick}>
+            <RemoveButton
+              disabled={disabled || readonly}
+              onClick={onDropPropertyClick(label)}
+              registry={registry}
+            />
+          </div>
           <BaseInputTemplate
             name='key'
             onChange={(target) => {
