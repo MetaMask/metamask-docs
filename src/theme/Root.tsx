@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Provider as AlertProvider } from "react-alert";
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
@@ -17,6 +17,8 @@ import {
 } from "@site/src/lib/constants";
 import {
   AUTH_WALLET_PROJECTS,
+  getTokenString,
+  getUksTier,
   getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
@@ -55,7 +57,9 @@ interface ILoginContext {
   metaMaskConnectHandler: () => Promise<void>;
   metaMaskDisconnect: () => Promise<void>;
   userId: string;
+  token: string;
   account: string;
+  uksTier: string;
   provider: SDKProvider;
   sdk: MetaMaskSDK;
   disconnect: () => Promise<void>;
@@ -66,7 +70,9 @@ export const LoginContext = createContext<ILoginContext>({
   metaMaskConnectHandler: () => new Promise(() => {}),
   metaMaskDisconnect: () => new Promise(() => {}),
   userId: undefined,
+  token: undefined,
   account: undefined,
+  uksTier: undefined,
   provider: undefined,
   sdk: undefined,
   disconnect: () => new Promise(() => {}),
@@ -75,13 +81,15 @@ export const LoginContext = createContext<ILoginContext>({
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({});
   const [userId, setUserId] = useState<string>(undefined);
+  const [token, setToken] = useState<string>(undefined);
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const [provider, setProvider] = useState(undefined);
   const [account, setAccount] = useState(undefined);
+  const [uksTier, setUksTier] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -90,9 +98,11 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
       );
       setUserId(getUserIdFromJwtToken());
+      setToken(getTokenString());
+      setUksTier(getUksTier());
       const accounts = await sdk.connect();
       setAccount(accounts);
       if (accounts && accounts.length > 0) {
@@ -118,6 +128,7 @@ export const LoginProvider = ({ children }) => {
       const token = url.searchParams.get("token");
       if (token) {
         saveTokenString(token);
+        setToken(token);
         const userIdFromjwtToken = getUserIdFromJwtToken();
         setUserId(userIdFromjwtToken);
 
@@ -126,12 +137,8 @@ export const LoginProvider = ({ children }) => {
             const projectsResponse = await fetch(
               `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
-                ...REQUEST_PARAMS("GET"),
-                headers: {
-                  ...REQUEST_PARAMS("GET").headers,
-                  Authorization: `Bearer ${token}`,
-                },
-              }
+                ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+              },
             );
             const res = await projectsResponse.json();
             if (res.error) throw new Error(res.error.message);
@@ -141,7 +148,7 @@ export const LoginProvider = ({ children }) => {
             } = res;
             sessionStorage.setItem(
               AUTH_WALLET_PROJECTS,
-              JSON.stringify(projects)
+              JSON.stringify(projects),
             );
             setProjects(projects);
             window.location.replace(`${url.origin}${url.pathname}`);
@@ -186,13 +193,23 @@ export const LoginProvider = ({ children }) => {
       await sdk?.terminate();
       setOpenAuthModal(false);
       setUserId(undefined);
+      setToken(undefined);
       setAccount(undefined);
+      setUksTier(undefined);
       setProjects({});
       sessionStorage.clear();
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
-  }, [sdk, setOpenAuthModal, setUserId, setAccount, setProjects]);
+  }, [
+    sdk,
+    setOpenAuthModal,
+    setUserId,
+    setToken,
+    setAccount,
+    setUksTier,
+    setProjects,
+  ]);
 
   return (
     <BrowserOnly>
@@ -204,7 +221,9 @@ export const LoginProvider = ({ children }) => {
               metaMaskConnectHandler,
               metaMaskDisconnect,
               userId,
+              token,
               account,
+              uksTier,
               provider,
               sdk,
             } as ILoginContext
@@ -217,6 +236,8 @@ export const LoginProvider = ({ children }) => {
             setOpen={setOpenAuthModal}
             setProjects={setProjects}
             setUser={setUserId}
+            setToken={setToken}
+            setUksTier={setUksTier}
             setStep={setStep}
             step={step}
           />

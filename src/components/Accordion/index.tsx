@@ -40,7 +40,7 @@ export default function Accordion({ children, opened = false }: IAccordion) {
 export function AccordionHeader({
   children,
 }: {
-  children: React.ReactElement;
+  children: string | React.ReactElement;
 }) {
   return (
     <Text as="h3" className={styles.accordionHeader}>
@@ -49,7 +49,11 @@ export function AccordionHeader({
   );
 }
 
-export function AccordionBody({ children }: { children: React.ReactElement }) {
+export function AccordionBody({
+  children,
+}: {
+  children: string | React.ReactElement;
+}) {
   return (
     <Text as="p" className={styles.accordionContainer}>
       {children}

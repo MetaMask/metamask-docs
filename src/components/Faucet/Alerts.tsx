@@ -5,12 +5,14 @@ export const AlertCommonIssue = () => (
   <div>
     <AlertTitle>Issue starting transaction</AlertTitle>
     <AlertText>
-      There was an issue starting your transaction. Try again in a few minutes.
-      If the problem persists please{" "}
-      <a target="_blank" href="https://www.infura.io/contact">
-        contact us
-      </a>
-      .
+      <span>
+        There was an issue starting your transaction. Try again in a few
+        minutes. If the problem persists please{" "}
+        <a target="_blank" href="https://www.infura.io/contact">
+          contact us
+        </a>
+        .
+      </span>
     </AlertText>
   </div>
 );
@@ -26,15 +28,33 @@ export const AlertPastActivity = () => (
   </div>
 );
 
+export const AlertBalanceTooLow = () => (
+  <div>
+    <AlertTitle>Balance Too Low</AlertTitle>
+    <AlertText>
+      <span>
+        Your current Ethereum address does not contain enough Ether on the
+        Ethereum Mainnet. Please ensure you have at least 0.001 ETH before
+        proceeding. You can easily add funds to your address using{" "}
+        <a className="underline" href="https://metamask.io/buy-crypto/">
+          MetaMask
+        </a>
+      </span>
+    </AlertText>
+  </div>
+);
+
 export const AlertCooldown = () => (
   <div>
     <AlertTitle>Cooldown period</AlertTitle>
     <AlertText>
-      You already got ETH from the faucet today. Try again in 24 hours.{" "}
-      <a target="_blank" href="https://www.infura.io/contact">
-        Contact us
-      </a>
-      .
+      <span>
+        You already got ETH from the faucet today. Try again in 24 hours.{" "}
+        <a target="_blank" href="https://www.infura.io/contact">
+          Contact us
+        </a>
+        .
+      </span>
     </AlertText>
   </div>
 );
@@ -43,12 +63,14 @@ export const AlertSuccess = ({ url }: { url: string }) => (
   <div>
     <AlertTitle>Transaction successfull!</AlertTitle>
     <AlertText>
-      Your transaction has been sent to the Ethereum/Sepolia network. You should
-      be receiving your ETH shortly.{" "}
-      <a target="_blank" href={url}>
-        View on Etherscan
-      </a>
-      .
+      <span>
+        Your transaction has been sent to the Ethereum/Sepolia network. You
+        should be receiving your ETH shortly.{" "}
+        <a target="_blank" href={url}>
+          View on Etherscan
+        </a>
+        .
+      </span>
     </AlertText>
   </div>
 );

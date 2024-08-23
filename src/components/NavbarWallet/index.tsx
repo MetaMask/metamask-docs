@@ -34,6 +34,11 @@ const NavbarWalletComponent: FC = ({
     navigator.clipboard.writeText(account);
   };
 
+  const handleDisconnect = () => {
+    metaMaskDisconnect()
+    setDropdownOpen(false)
+  }
+
   return !account ? (
     <Button
       thin
@@ -70,11 +75,13 @@ const NavbarWalletComponent: FC = ({
             <Button
               thin
               type="danger"
-              onClick={metaMaskDisconnect}
+              onClick={handleDisconnect}
               className={styles.disconnect}
             >
-              <DisconnectIcon className={styles.icon} />{" "}
-              <span>Disconnect Wallet</span>
+              <span>
+                <DisconnectIcon className={styles.icon} />{" "}
+                <span>Disconnect Wallet</span>
+              </span>
             </Button>
           </li>
         </ul>

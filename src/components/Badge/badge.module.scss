@@ -30,6 +30,7 @@
   padding: 2px 8px;
   color: var(--badge-default-color);
   background-color: var(--badge-default-bg-color);
+  text-transform: capitalize;
 
   &.success {
     color: var(--badge-success-color);

@@ -3,6 +3,7 @@ import Link from "@docusaurus/Link";
 import Badge from "@site/src/components/Badge";
 import Table from "@site/src/components/Table";
 import Text from "@site/src/components/Text";
+import { LINEA_URL, SEPOLIA_URL } from "@site/src/pages/developer-tools/faucet";
 
 const hideCenterLetters = (word) => {
   if (word.length < 10) return word;
@@ -34,8 +35,19 @@ const renderStatus = (status) => {
   switch (status) {
     case "success":
       return "success";
-    case "failed":
+    case "failure":
       return "error";
+    default:
+      return "default";
+  }
+};
+
+const renderValue = (status) => {
+  switch (status) {
+    case "success":
+      return "successful";
+    case "failure":
+      return "failed";
     default:
       return "pending";
   }
@@ -49,15 +61,20 @@ interface ITransactionTable {
     createdAt: string;
     txnHash: string;
     value: string;
-    status: string;
+    status: "pending" | "success" | "failure";
+    hash: string;
   }[];
+  network: "sepolia" | "linea";
 }
 
 export default function TransactionTable({
   className,
   classNameHeading,
-  data,
+  data = [],
+  network,
 }: ITransactionTable) {
+  if (data?.length === 0) return null;
+
   const dataRows = useMemo(() => {
     return data.map((item) => ({
       cells: [
@@ -66,12 +83,12 @@ export default function TransactionTable({
         `${item.value} ETH`,
         <Badge
           key={item.id}
-          label={item.status}
+          label={renderValue(item.status)}
           variant={renderStatus(item.status)}
         />,
         <Link
           key={`link-${item.id}`}
-          to="/"
+          to={`${network === "linea" ? LINEA_URL : SEPOLIA_URL}/${item.txnHash}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -79,7 +96,7 @@ export default function TransactionTable({
         </Link>,
       ],
     }));
-  }, []);
+  }, [data]);
 
   return (
     <div className={className}>

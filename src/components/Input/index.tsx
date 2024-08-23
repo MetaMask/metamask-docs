@@ -6,7 +6,7 @@ import styles from "./input.module.scss";
 interface IInput {
   onChange?: (string) => void;
   disabled?: boolean;
-  label?: boolean;
+  label?: string;
   className?: string;
   error?: string;
   placeholder?: string;

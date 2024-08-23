@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import ldClient from "launchdarkly";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   Faq,
   AlertCommonIssue,
@@ -11,85 +12,123 @@ import {
   TransactionTable,
   Hero,
   Maintenance,
+  AlertPastActivity,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
 import { LoginContext } from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
-import { DASHBOARD_URL, GET_OPTIONS } from "@site/src/lib/constants";
+import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
+import { AlertBalanceTooLow } from "@site/src/components/Faucet/Alerts";
+import jwt from "jsonwebtoken";
 
 const lineaMaintenanceFlag = "linea-maintenance-mode";
 const sepoliaMaintenanceFlag = "sepolia-maintenance-mode";
+const faucetBypassDomainFlag = "faucet-bypass-domains";
+const DEFAULT_TRANSACTIONS_LIST = { linea: [], sepolia: [] };
 
-const LINEA = [
-  {
-    id: "01",
-    createdAt: "2024-06-05T13:24:49.207Z",
-    txnHash:
-      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0001",
-    status: "success",
-  },
-  {
-    id: "02",
-    createdAt: "2024-05-05T13:24:49.207Z",
-    txnHash:
-      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0002",
-    status: "failed",
-  },
-  {
-    id: "03",
-    createdAt: "2024-07-05T13:24:49.207Z",
-    txnHash:
-      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0003",
-    status: "pending",
-  },
-];
-const SEPOLIA = [
-  {
-    id: "03",
-    createdAt: "2024-07-05T13:24:49.207Z",
-    txnHash:
-      "0x58412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0003",
-    status: "pending",
-  },
-  {
-    id: "01",
-    createdAt: "2024-06-05T13:24:49.207Z",
-    txnHash:
-      "0x38412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0001",
-    status: "success",
-  },
-  {
-    id: "02",
-    createdAt: "2024-05-05T13:24:49.207Z",
-    txnHash:
-      "0x48412083eb28fdf332d4ca7e1955cbb40a94adfae14ef7a3e9856f95c32b2ef2",
-    value: "0.0002",
-    status: "failed",
-  },
-];
+export const SEPOLIA_URL = "https://sepolia.etherscan.io/tx/";
+export const LINEA_URL = "https://sepolia.lineascan.build/tx/";
 
 export default function Faucet() {
-  const { userId } = useContext(LoginContext);
+  const { siteConfig } = useDocusaurusContext();
+  const { userId, token, uksTier } = useContext(LoginContext);
   const alert = useAlert();
-  const [transactions, setTransactions] = useState({ linea: [], sepolia: [] });
+  const [transactions, setTransactions] = useState(DEFAULT_TRANSACTIONS_LIST);
   const [isLoading, setIsLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
-  const [alertType, setAlertType] = useState(1);
   const [ldReady, setLdReady] = useState(false);
   const [isLineaMaintenance, setIsLineaMaintenance] = useState(false);
   const [isSepoliaMaintenance, setIsSepoliaMaintenance] = useState(false);
+  const [faucetBypassDomain, setFaucetBypassDomain] = useState(false);
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+
+  console.log(uksTier)
+  const isLimitedUserPlan = uksTier === 'core' && !faucetBypassDomain
+
+  const setTransactionsForNetwork = (network: "linea" | "sepolia", data) => {
+    setTransactions((transactions) => ({ ...transactions, [network]: data }));
+  };
+
+  const mutateTransactionsForNetwork = (network: "linea" | "sepolia", data) => {
+    setTransactions((transactions) => ({
+      ...transactions,
+      [network]: [data, ...transactions[network]],
+    }));
+  };
+
+  const getTransactions = async () => {
+    const sepolia = await fetch(
+      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/sepolia/transactions`,
+      {
+        ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+      },
+    );
+    const { data: sepoliaData } = await sepolia.json();
+    setTransactionsForNetwork("sepolia", sepoliaData);
+
+    const linea = await fetch(
+      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/linea/transactions`,
+      {
+        ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+      },
+    );
+    const { data: lineaData } = await linea.json();
+    setTransactionsForNetwork("linea", lineaData);
+  };
+
+  const handleRequest = (network: "linea" | "sepolia") => async () => {
+    setIsLoading(true);
+    const address = walletAddress.trim();
+    try {
+      const faucetRawResponse = await fetch(
+        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/${network}?address=${address}`,
+        {
+          ...REQUEST_PARAMS("POST", { Authorization: `Bearer ${token}` }),
+          body: JSON.stringify({ dstAddress: address }),
+        },
+      );
+
+      const faucetResponse = await faucetRawResponse.json();
+      const error = faucetResponse.error;
+
+      if (error) {
+        if (error.code === "balance_too_low") {
+          alert.error(<AlertBalanceTooLow />);
+        } else if (error.code === "transaction_count_too_low") {
+          alert.error(<AlertPastActivity />);
+        } else if (error.name === "COOLDOWN PERIOD") {
+          alert.info(<AlertCooldown />);
+        } else {
+          alert.error(<AlertCommonIssue />);
+        }
+      } else {
+        mutateTransactionsForNetwork(network, faucetResponse);
+        alert.success(
+          <AlertSuccess
+            url={`${network === "linea" ? LINEA_URL : SEPOLIA_URL}/${faucetResponse.txnHash}`}
+          />,
+        );
+      }
+    } catch (e) {
+      alert.error(<AlertCommonIssue />);
+    }
+    setWalletAddress("");
+    setIsLoading(false);
+  };
+
+  const handleOnInputChange = (value) => {
+    setWalletAddress(value);
+  };
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
       setIsLineaMaintenance(ldClient.variation(lineaMaintenanceFlag, false));
       setIsSepoliaMaintenance(
         ldClient.variation(sepoliaMaintenanceFlag, false),
+      );
+      setFaucetBypassDomain(
+        ldClient.variation(faucetBypassDomainFlag, false),
       );
       setLdReady(true);
     });
@@ -99,50 +138,26 @@ export default function Faucet() {
     const handleChangeSepolia = (current) => {
       setIsSepoliaMaintenance(current);
     };
+    const handleFaucetBypassDomain = (current) => {
+      setFaucetBypassDomain(current);
+    };
     ldClient.on(`change:${lineaMaintenanceFlag}`, handleChangeLinea);
     ldClient.on(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia);
+    ldClient.on(`change:${faucetBypassDomainFlag}`, handleFaucetBypassDomain);
     return () => {
       ldClient.off(`change:${lineaMaintenanceFlag}`, handleChangeLinea);
       ldClient.off(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia);
+      ldClient.off(`change:${faucetBypassDomainFlag}`, handleFaucetBypassDomain);
     };
   }, []);
 
-  const getTransactions = async () => {
-    const transactions = await fetch(
-      `${DASHBOARD_URL}/api/v1/faucets/linea/transactions?take=10&skip=0`,
-      GET_OPTIONS,
-    );
-    console.log(transactions)
-  };
-
   useEffect(() => {
-    if (userId) {
+    if (userId && token) {
       getTransactions();
+    } else {
+      setTransactions(DEFAULT_TRANSACTIONS_LIST);
     }
-  }, [userId]);
-
-  const handleRequest = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      switch (alertType) {
-        case 1:
-          alert.success(<AlertSuccess url="https://www.infura.io" />);
-          break;
-        case 2:
-          alert.error(<AlertCommonIssue />);
-          break;
-        default:
-          alert.info(<AlertCooldown />);
-      }
-      setAlertType((value) => value + 1);
-      setWalletAddress("");
-    }, 2000);
-  };
-
-  const handleOnInputChange = (value) => {
-    setWalletAddress(value);
-  };
+  }, [userId, token]);
 
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (
@@ -151,14 +166,18 @@ export default function Faucet() {
           <Hero
             network={network}
             className={styles.hero}
-            handleRequest={handleRequest}
+            handleRequest={handleRequest(network)}
             handleOnInputChange={handleOnInputChange}
             inputValue={walletAddress}
             isLoading={isLoading}
+            isLimitedUserPlan={isLimitedUserPlan}
           />
           {transactions && (
             <TransactionTable
-              data={network === "linea" ? LINEA : SEPOLIA}
+              data={
+                network === "linea" ? transactions.linea : transactions.sepolia
+              }
+              network={network}
               classNameHeading={styles.sectionHeading}
             />
           )}
@@ -168,6 +187,7 @@ export default function Faucet() {
             network={network}
             className={styles.faq}
             classNameHeading={styles.sectionHeading}
+            isLimitedUserPlan={isLimitedUserPlan}
           ></Faq>
         </div>
       </>

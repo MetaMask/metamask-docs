@@ -15,6 +15,7 @@ interface IHero {
   handleOnInputChange: (valiue: string) => void;
   inputValue?: string;
   isLoading?: boolean;
+  isLimitedUserPlan?: boolean;
 }
 
 export default function Hero({
@@ -24,6 +25,7 @@ export default function Hero({
   inputValue,
   handleOnInputChange,
   isLoading,
+  isLimitedUserPlan,
 }: IHero) {
   const { account, sdk, metaMaskConnectHandler } = useContext(LoginContext);
   const isExtensionActive = sdk.isExtensionActive();
@@ -32,9 +34,11 @@ export default function Hero({
     <div className={clsx(styles.hero, className)}>
       {!(isExtensionActive && account) && <EthIcon />}
       <Text as="h1">
-        {network === "linea" && "Linea Sepolia"}
-        {network === "sepolia" && "Sepolia"} ETH delivered straight to your
-        wallet.
+        <span>
+          {network === "linea" && "Linea Sepolia"}
+          {network === "sepolia" && "Sepolia"} ETH delivered straight to your
+          wallet.
+        </span>
       </Text>
       <Text as="p">
         {!isExtensionActive
@@ -48,16 +52,19 @@ export default function Hero({
           <div className={styles.inputCont}>
             <Input
               label="Wallet address"
+              disabled={isLoading}
               value={inputValue}
               placeholder="ex. 0x"
               onChange={handleOnInputChange}
             />
-            <p className={styles.caption}>
-              The amount of {network === "linea" && "Linea Sepolia"}
-              {network === "sepolia" && "Sepolia"} ETH you’ll get is determined
-              by your addresses Ethereum Mainnet activity to ensure fair and
-              bot-free distribution
-            </p>
+            {isLimitedUserPlan && (
+              <p className={styles.caption}>
+                The amount of {network === "linea" && "Linea Sepolia"}
+                {network === "sepolia" && "Sepolia"} ETH you’ll get is
+                determined by your addresses Ethereum Mainnet activity to ensure
+                fair and bot-free distribution
+              </p>
+            )}
           </div>
         )}
         <div

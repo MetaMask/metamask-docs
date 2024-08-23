@@ -465,12 +465,13 @@ export const REF_ALLOW_LOGIN_PATH = [
   REF_FAUCET_PATH,
 ];
 
-export const REQUEST_PARAMS = (method = "POST") => ({
+export const REQUEST_PARAMS = (method = "POST", headers = {}) => ({
   method,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
+    ...headers
   },
 });

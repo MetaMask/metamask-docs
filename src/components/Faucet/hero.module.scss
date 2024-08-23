@@ -15,6 +15,10 @@
   background-position: 100% 0;
   background-size: contain;
 
+  @media screen and (max-width: 996px) {
+    background-image: none;
+  }
+
   .actions {
     display: flex;
 

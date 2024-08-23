@@ -9,9 +9,15 @@ interface IFaq {
   network: "linea" | "sepolia";
   className: string;
   classNameHeading: string;
+  isLimitedUserPlan?: boolean;
 }
 
-export default function Faq({ network, className, classNameHeading }: IFaq) {
+export default function Faq({
+  network,
+  className,
+  classNameHeading,
+  isLimitedUserPlan,
+}: IFaq) {
   switch (network) {
     case "linea":
       return (
@@ -22,23 +28,25 @@ export default function Faq({ network, className, classNameHeading }: IFaq) {
               Answers to commonly asked questions about our faucet.
             </Text>
           </div>
-          <Accordion>
-            <AccordionHeader>
-              Why must my address have Ethereum Mainnet activity to claim Linea
-              ETH?
-            </AccordionHeader>
-            <AccordionBody>
-              We require an address with Ethereum Mainnet activity to safeguard
-              the faucet from automated bots, ensuring equitable Linea ETH
-              distribution. The amount of Linea ETH you can receive ranges from
-              0 to 0.5, depending on your address’s level of activity. No
-              activity results in no Linea ETH. while a higher number of
-              transactions can earn you up to 0.5. We maintain confidentiality
-              over the exact criteria used to determine the amount issued to
-              prevent any exploitation of the system, aiming to distribute
-              testnet ETH fairly among genuine, active users.
-            </AccordionBody>
-          </Accordion>
+          {isLimitedUserPlan && (
+            <Accordion>
+              <AccordionHeader>
+                Why must my address have Ethereum Mainnet activity to claim
+                Linea ETH?x
+              </AccordionHeader>
+              <AccordionBody>
+                We require an address with Ethereum Mainnet activity to
+                safeguard the faucet from automated bots, ensuring equitable
+                Linea ETH distribution. The amount of Linea ETH you can receive
+                ranges from 0 to 0.5, depending on your address’s level of
+                activity. No activity results in no Linea ETH. while a higher
+                number of transactions can earn you up to 0.5. We maintain
+                confidentiality over the exact criteria used to determine the
+                amount issued to prevent any exploitation of the system, aiming
+                to distribute testnet ETH fairly among genuine, active users.
+              </AccordionBody>
+            </Accordion>
+          )}
           <Accordion>
             <AccordionHeader>
               I’m new to Web3. What is a faucet?
@@ -121,23 +129,26 @@ export default function Faq({ network, className, classNameHeading }: IFaq) {
               Answers to commonly asked questions about our faucet.
             </Text>
           </div>
-          <Accordion>
-            <AccordionHeader>
-              Why must my address have Ethereum Mainnet activity to claim
-              Sepolia ETH?
-            </AccordionHeader>
-            <AccordionBody>
-              We require an address with Ethereum Mainnet activity to safeguard
-              the faucet from automated bots, ensuring equitable Sepolia ETH
-              distribution. The amount of Sepolia ETH you can receive ranges
-              from 0 to 0.5, depending on your address’s level of activity. No
-              activity results in no Sepolia ETH. while a higher number of
-              transactions can earn you up to 0.5. We maintain confidentiality
-              over the exact criteria used to determine the amount issued to
-              prevent any exploitation of the system, aiming to distribute
-              testnet ETH fairly among genuine, active users.
-            </AccordionBody>
-          </Accordion>
+          {isLimitedUserPlan && (
+            <Accordion>
+              <AccordionHeader>
+                Why must my address have Ethereum Mainnet activity to claim
+                Sepolia ETH?
+              </AccordionHeader>
+              <AccordionBody>
+                We require an address with Ethereum Mainnet activity to
+                safeguard the faucet from automated bots, ensuring equitable
+                Sepolia ETH distribution. The amount of Sepolia ETH you can
+                receive ranges from 0 to 0.5, depending on your address’s level
+                of activity. No activity results in no Sepolia ETH. while a
+                higher number of transactions can earn you up to 0.5. We
+                maintain confidentiality over the exact criteria used to
+                determine the amount issued to prevent any exploitation of the
+                system, aiming to distribute testnet ETH fairly among genuine,
+                active users.
+              </AccordionBody>
+            </Accordion>
+          )}
           <Accordion>
             <AccordionHeader>
               I’m new to Web3. What is a faucet?
