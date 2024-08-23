@@ -48,11 +48,10 @@ export default function RequestBox({
             {exampleRequest}
           </CodeBlock>
         </div>
-        <div className={styles.cardFooter}>
+        <div className={clsx(styles.cardFooter, params.length > 0 && styles['cardFooter-btns'])}>
           {params.length > 0 && (
             <Button
               as="button"
-              className="margin-right--md"
               type={'tertiary'}
               label={'Customize request'}
               disabled={!isMetamaskInstalled}
