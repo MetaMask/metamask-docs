@@ -39,7 +39,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2.4rem;
   gap: 1.6rem;
   padding: 3.2rem;
   position: relative;
@@ -61,7 +60,7 @@
 
   &:hover {
     color: currentColor;
-    text-decoration: none;
+    text-decoration: none !important;
 
     &::before {
       opacity: 1;

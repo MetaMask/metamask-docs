@@ -39,9 +39,7 @@ export default function CardListItem({ item }: CardListItemProps) {
           className={styles['holder']}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
-          <Link
-            to={href}
-            className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
+          <Link to={href} className={clsx(styles['inner'], 'link-styles-none')}>
             {flaskOnly && (
               <div className={styles['tag-holder']}>
                 <CutOffCorners size={'xxs'}>
@@ -69,17 +67,16 @@ export default function CardListItem({ item }: CardListItemProps) {
                 label={false}
                 type={theme === 'dark' ? 'secondary' : 'primary'}
                 icon="arrow-right"
-                className={styles['button']}
                 style={
                   theme === 'dark'
                     ? {
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
                     : {
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
                 }
               />
             )}
