@@ -1,38 +1,76 @@
 .tableHeadingRow {
   display: flex;
   border-top: 1px solid var(--general-gray-light);
+
+  html[data-theme='dark'] & {
+    border-color: var(--general-black-light);
+  }
 }
 .tableHeadingColumn {
   width: 50%;
-  padding: 1.6rem;
+  padding: 1.2rem;
   line-height: 1.5;
-  background-color: var(--general-black-mid);
-  color: var(--general-white);
+  background-color: var(--general-white-off);
+  font-weight: 500;
+
+  &:first-child {
+    border-right: 1px solid var(--general-gray-light);
+  }
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black);
+
+    &:first-child {
+      border-color: var(--general-black-light);
+    }
+  }
 }
 .tableRow {
   display: flex;
   border-top: 1px solid var(--general-gray-light);
   border-bottom: 1px solid var(--general-gray-light);
+
+  html[data-theme='dark'] & {
+    border-color: var(--general-black-light);
+  }
 }
 .tableColumn {
   width: 50%;
   line-height: 2.4rem;
-  background-color: var(--general-black-mid);
-  color: var(--general-white);
 }
 .tableColumnParam {
   display: flex;
   align-items: center;
   height: 100%;
   padding: 1.2rem 1.6rem 1.2rem 1.2rem;
-  border-left: 0.4rem solid transparent;
   line-height: 2.8rem;
+  position: relative;
 }
 .tableColumnParamFocused {
-  border-left: 0.4rem solid var(--consumer-blue);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4rem;
+    height: 100%;
+    background-color: var(--consumer-purple);
+
+    html[data-theme='dark'] & {
+      background-color: var(--consumer-green);
+    }
+  }
 }
 .tableColumnParamError {
-  border-left: 0.4rem solid var(--error);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4rem;
+    height: 100%;
+    background-color: var(--error);
+  }
 }
 .tableColumn:first-child {
   border-right: 1px solid var(--general-gray-light);
@@ -57,7 +95,7 @@
   right: 0;
   padding-right: 2.8rem;
   padding-bottom: 0.2rem;
-  color: var(--general-gray-light);
+  color: var(--general-gray-mid);
   line-height: 2.4rem;
   font-size: 1.4rem;
 }
@@ -168,10 +206,10 @@
   bottom: 0;
 }
 .tableFooterRowDark {
-  background-color: #24272a;
+  background-color: var(--general-black-light);
 }
 .tableFooterRowLight {
-  background-color: #f2f4f6;
+  background-color: var(--general-gray-light);
 }
 .tableButton {
   display: flex;
@@ -205,15 +243,18 @@
   padding: 1.2rem 7.2rem 1.2rem 1.6rem;
   font-size: 1.4rem;
   line-height: 2.4rem;
-  color: var(--general-white);
+  color: var(--general-black);
   border-radius: 0;
   border: 0.2rem solid transparent;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+  }
 }
 .formControl:focus {
-  border: 0.2rem solid var(--consumer-blue);
   outline: none;
 }
 .formControl[type='number']::-webkit-inner-spin-button,
@@ -247,6 +288,7 @@
   background: none;
   border: none;
   border-radius: 0;
+  cursor: pointer;
 }
 .footerButtonRight {
   padding: 0.5rem 1.6rem !important;
@@ -327,7 +369,7 @@
 .arrayItemRowWrap {
   position: relative;
   padding-left: 4rem;
-  border-bottom: 1px dashed #848c96;
+  border-bottom: 1px dashed var(--general-gray-light);
 }
 
 html[data-theme='dark'] {

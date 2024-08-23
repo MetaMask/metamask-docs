@@ -1,19 +1,24 @@
 .modalContainer {
-  border: 1px solid #848c96;
-  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.4rem 0.4rem 0 0;
   position: absolute;
   z-index: 10;
   top: 100%;
-  left: 15px;
-  right: 15px;
-  min-height: 512px;
+  left: 1.5rem;
+  right: 1.5rem;
+  min-height: 51.2rem;
   opacity: 0;
   transform: translate(0, 100%);
   transition-property: 'transform', 'opacity';
   transition-duration: 0.4s;
   transition-timing-function: ease;
   overflow: hidden;
-  background-color: #292a36;
+  background-color: var(--general-white);
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-gray-dark);
+    border-color: var(--general-black-light);
+  }
 }
 
 .modalContainerOpen {
@@ -22,20 +27,24 @@
 }
 
 .modalHeader {
-  padding: 16px;
+  padding: 1.6rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 56px;
-  background-color: #24272a;
+  min-height: 5.6rem;
+  background-color: var(--general-white-off);
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black-light);
+  }
 }
 
 .modalHeaderLight {
-  background-color: #f2f4f6 !important;
+  background-color: var(--general-gray-light);
 }
 
 .modalTitle {
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 1;
   font-weight: 500;
 }
@@ -50,28 +59,29 @@
   background: none;
   border: none;
   padding: 0;
-  margin-right: 8px;
+  margin-right: 0.8rem;
 }
 
 .modalHeaderIconBack {
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 .modalHeaderLabels {
   display: flex;
   align-items: center;
+  font-family: var(--ifm-heading-font-family);
 }
 
 .modalHeaderLabel {
   display: flex;
   justify-content: center;
-  margin-left: 8px;
-  padding: 2px 8px;
-  border: 1px solid #848c96;
+  margin-left: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--general-gray-light);
   border-radius: 999px;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
 }
 
 .modalCloseBtn {
