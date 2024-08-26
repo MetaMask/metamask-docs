@@ -41,6 +41,22 @@ pre[class*='language-'] {
     padding: 0.8rem 2rem !important;
   }
 }
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module
+  + .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    padding-top: 1.2rem;
+  }
+}
+
+.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module {
+  .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+    code[class*='language-'],
+    pre[class*='language-'] {
+      padding-top: 1.6rem;
+    }
+  }
+}
 
 code {
   padding: 0 !important;

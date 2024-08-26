@@ -1,0 +1,53 @@
+.tabList {
+  margin-bottom: var(--ifm-leading);
+  background-color: var(--prism-background-color);
+  padding: 0;
+
+  ul {
+    gap: 0.8rem;
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--general-gray-dark);
+  }
+
+  li {
+    border: none;
+    border-radius: 0.4rem;
+
+    &[aria-selected='true'] {
+      background: var(--general-black);
+    }
+
+    &:hover {
+      background-color: var(--general-gray-dark);
+    }
+  }
+}
+
+.tabItem {
+  margin-top: 0 !important;
+
+  color: var(--general-white);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.flaskOnly::after {
+  content: 'Flask';
+  margin-left: 0.5em;
+  background-color: var(--mm-flask-background-color);
+  color: var(--mm-flask-color);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.8em;
+}
+
+.deprecated::after {
+  content: 'deprecated';
+  margin-left: 0.5em;
+  background-color: var(--ifm-color-warning-contrast-background);
+  color: var(--ifm-color-warning-contrast-foreground);
+  padding: 2px 4px;
+  font-size: 0.8em;
+  clip-path: polygon(0% 20%, 10% 0%, 100% 0, 100% 80%, 90% 100%, 0 100%);
+}
