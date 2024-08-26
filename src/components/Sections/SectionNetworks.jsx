@@ -45,7 +45,7 @@ const SectionNetworks = () => {
 
   return (
     <section className={styles['wrapper']}>
-      <ul className={clsx(styles['list'], 'list-styles-none')}>
+      <ul className={styles['list']}>
         {NETWORK_LINKS.map((item, index) =>
           isMobile && isNetworksListCollapsed && index > 4 ? null : renderNetworkCard(item, index)
         )}
