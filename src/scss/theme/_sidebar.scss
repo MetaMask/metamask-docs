@@ -6,6 +6,10 @@
   .navbar-sidebar__back {
     background-color: transparent;
     margin-top: 1.4rem;
+
+    @include bp-max('tablet') {
+      padding-left: 2.1rem;
+    }
   }
 
   &__list {
@@ -110,6 +114,14 @@
       background-size: contain;
       height: 0.7rem;
       width: 0.9rem;
+    }
+  }
+}
+
+.navbar-sidebar {
+  @include bp-max('tablet') {
+    &__brand {
+      padding: 0 var(--page-padding-x);
     }
   }
 }
