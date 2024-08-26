@@ -11,10 +11,8 @@ This document outlines the components that have been swizzled in this project. T
 
 The following components have been swizzled by wrapping:
 
-- `Admonition/Type/Layout` (Safe)
+- `Admonition/Type/Layout` (Safe) Used to add the cut-off-corners style to the Info boxes
 
-## Ejecting
+- `DocCardList` (Safe) Used to add styles to the overview page cards + the arrow button
 
-The following components have been swizzled by ejecting:
-
-- `DocCardList` (Safe)
+- `TOCItems` (Safe) Used to add the label "Table of contents:" on top of the right sidebar
