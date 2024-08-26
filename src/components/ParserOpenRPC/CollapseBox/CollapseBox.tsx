@@ -21,6 +21,7 @@ export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxPr
   return (
     <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <Button
+        type="tertiary"
         as="button"
         label={collapsed ? 'Show child attributes' : 'Hide child attributes'}
         icon={collapsed ? 'arrow-right' : 'arrow-down'}
@@ -28,13 +29,15 @@ export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxPr
         style={
           colorMode === 'dark'
             ? {
-              '--button-color-hover': 'var(--general-white)',
-              '--button-text-color-hover': 'var(--general-black)',
-            }
+                '--button-color': 'var(--general-white)',
+                '--button-text-color': 'var(--general-white)',
+                '--button-color-hover': 'var(--general-white)',
+                '--button-text-color-hover': 'var(--general-black)',
+              }
             : {
-              '--button-color-hover': 'var(--general-black)',
-              '--button-text-color-hover': 'var(--general-white)',
-            }
+                '--button-color-hover': 'var(--general-black)',
+                '--button-text-color-hover': 'var(--general-white)',
+              }
         }
       />
       <Collapsible

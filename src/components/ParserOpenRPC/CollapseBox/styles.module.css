@@ -1,5 +1,6 @@
 .collapseWrapper {
   overflow: hidden;
+  margin: 1.6rem 0;
 }
 
 .collapsedWrapperView {
@@ -7,6 +8,7 @@
     border: 1px solid var(--general-gray-light);
     border-radius: 0.4rem;
     margin-top: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 

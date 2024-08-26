@@ -44,7 +44,7 @@
   }
   .colContentWrap {
     height: auto;
-    padding: 0;
+    padding: var(--page-padding-x);
   }
   .rowWrap {
     padding: 0;

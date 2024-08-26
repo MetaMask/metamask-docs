@@ -29,7 +29,7 @@
   display: flex;
   border-top: 1px solid var(--general-gray-light);
   border-bottom: 1px solid var(--general-gray-light);
-
+  margin-bottom: -1px;
   html[data-theme='dark'] & {
     border-color: var(--general-black-light);
   }
@@ -82,7 +82,6 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  font-size: 1.4rem;
 }
 .tableValueRowPadding {
   padding: 1.2rem 7.2rem 1.2rem 1.6rem;
