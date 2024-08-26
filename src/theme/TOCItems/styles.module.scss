@@ -1,6 +1,10 @@
 .subtitle {
-  display: block;
-  margin-bottom: 1.8rem;
+  display: none;
+
+  @include bp('tablet') {
+    display: block;
+    margin-bottom: 1.8rem;
+  }
 
   [data-theme='dark'] & {
     color: var(--general-gray);

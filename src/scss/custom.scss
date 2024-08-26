@@ -311,13 +311,19 @@ h6 {
 }
 
 /* Header */
+
 .navbar {
   --ifm-navbar-padding-horizontal: 3rem;
   box-shadow: none;
   border-bottom: 1px solid var(--ifm-toc-border-color);
+  padding: var(--ifm-navbar-padding-vertical) var(--page-padding-x);
 
   &__brand {
     margin-right: 7.2rem;
+  }
+
+  &__toggle {
+    margin-right: 1.6rem;
   }
 
   &__logo {
@@ -332,6 +338,10 @@ h6 {
   &__item {
     line-height: 0;
     padding: 0;
+  }
+
+  &__items--right > :last-child {
+    right: var(--page-padding-x);
   }
 
   &__link {
@@ -402,7 +412,7 @@ h6 {
 
 /* Footer */
 .footer {
-  padding: 3rem 0 3rem;
+  padding: 4.6rem 0 3rem;
   border-top: 1px solid var(--general-gray-light);
 
   @include bp('tablet') {
@@ -418,7 +428,7 @@ h6 {
   }
 
   &__item {
-    margin-bottom: 1.8rem;
+    margin-bottom: 2rem;
 
     @include bp('tablet') {
       margin-bottom: 0;
@@ -437,13 +447,13 @@ h6 {
 
   &__title {
     font-size: 1.6rem;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 124%;
     color: var(--general-gray-dark);
     margin-bottom: 1rem;
 
-    @include bp('tablet') {
-      font-weight: 400;
+    @include bp-max('tablet') {
+      margin-bottom: 1.8rem;
     }
 
     [data-theme='dark'] & {
