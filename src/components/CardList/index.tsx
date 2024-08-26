@@ -12,7 +12,7 @@ export default function CardList(props: CardListProps): JSX.Element {
 
   return (
     <section className={styles['wrapper']}>
-      <ul className={clsx(styles['list'], 'list-styles-none')}>
+      <ul className={styles['list']}>
         {items.map((item, index) => (
           <CardListItem key={index} item={item} />
         ))}

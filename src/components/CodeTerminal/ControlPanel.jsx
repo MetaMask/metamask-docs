@@ -38,7 +38,7 @@ const ControlPanel = ({ keysOptions = [], initValues, onChange }) => {
   }, [methodValue, typesOptions])
 
   return (
-    <ul className={clsx(styles['holder'], 'list-styles-none')}>
+    <ul className={styles['holder']}>
       <li className={styles['item']}>
         <Icon name="key" />
         <Select

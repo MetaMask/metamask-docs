@@ -14,23 +14,31 @@
   }
 
   /* Links */
+  > p,
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
+  > ul {
+    a {
+      color: var(--ifm-link-color);
+      /* autoprefixer: ignore next */
+      text-decoration: underline currentColor 0.1rem !important;
+      text-underline-offset: 0.4rem;
+      transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+      font-weight: 500;
 
-  a:not(.link-styles-none, [class*='button_src']) {
-    color: var(--ifm-link-color);
-    /* autoprefixer: ignore next */
-    text-decoration: underline currentColor 0.1rem !important;
-    text-underline-offset: 0.4rem;
-    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
-    font-weight: 500;
+      &:hover {
+        color: var(--ifm-link-hover-color);
+        /* autoprefixer: ignore next */
+        text-decoration: underline currentColor 0.1rem !important;
+      }
+    }
   }
 
-  a:not(.link-styles-none, [class*='button_src']):hover {
-    color: var(--ifm-link-hover-color);
-    /* autoprefixer: ignore next */
-    text-decoration: underline currentColor 0.1rem !important;
-  }
-
-  ol:not(.list-styles-none) {
+  > ol {
     list-style: decimal;
     list-style-position: inside;
 
@@ -39,7 +47,7 @@
     }
   }
 
-  ul:not(.list-styles-none) {
+  > ul {
     margin-left: 2.5rem;
     list-style: outside;
 

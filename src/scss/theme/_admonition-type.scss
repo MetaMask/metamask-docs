@@ -35,6 +35,10 @@
   a {
     font-weight: 500;
     color: var(--ifm-alert-foreground-color);
+    text-decoration-color: var(--ifm-alert-foreground-color);
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
   }
 
   code {
