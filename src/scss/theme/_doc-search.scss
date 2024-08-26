@@ -152,15 +152,21 @@
 }
 
 .main-wrapper {
-  .container {
-    margin: 0 auto;
-  }
   .search-page-wrapper & {
     margin: auto;
 
+    .container {
+      width: calc(100% - var(--page-padding-x) * 2);
+
+      @include bp('tablet') {
+        margin: 0 !important;
+        width: 100%;
+      }
+    }
+
     @include bp('tablet') {
-      max-width: 108rem;
-      min-width: 108rem;
+      max-width: 103rem;
+      min-width: 103rem;
     }
 
     .col--8 {
@@ -223,11 +229,6 @@
 
     .search-result-match {
       background-color: var(--ifm-code-background);
-    }
-
-    .breadcrumbs {
-      .search-result-match {
-      }
     }
   }
 }
