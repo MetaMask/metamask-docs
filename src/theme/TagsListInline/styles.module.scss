@@ -1,0 +1,49 @@
+.tags {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 2rem;
+
+  @include bp('desktop') {
+    align-items: center;
+  }
+
+  b {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0;
+    margin-top: 0.5rem;
+    margin-right: 0.4rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.4rem;
+  }
+
+  li {
+    margin: 0;
+
+    a {
+      font-size: 1.2rem;
+      line-height: 0;
+      font-weight: 500;
+      color: var(--tag-text-color);
+      padding: 0.5rem 0.9rem;
+      margin: 0;
+      border: 1px solid var(--tag-border-color);
+      background-color: var(--tag-background-color);
+      transition:
+        border var(--ifm-transition-fast),
+        color var(--ifm-transition-fast),
+        background var(--ifm-transition-fast);
+
+      &:hover {
+        text-decoration: none;
+        color: var(--tag-text-color-hover);
+        background-color: var(--tag-background-color-hover);
+        border: 1px solid var(--tag-background-color-hover);
+      }
+    }
+  }
+}

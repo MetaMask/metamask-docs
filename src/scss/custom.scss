@@ -65,6 +65,13 @@
   --mm-flask-background-color: var(--ifm-color-primary);
   --mm-flask-color: var(--general-black);
 
+  /* Tags */
+  --tag-text-color: var(--general-black);
+  --tag-border-color: var(--general-gray);
+  --tag-background-color: var(--general-white);
+  --tag-background-color-hover: var(--general-black);
+  --tag-text-color-hover: var(--general-white);
+
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
   --ifm-font-family-base: var(--font-mm-centra);
@@ -162,6 +169,13 @@
   /* Flask */
   --mm-flask-background-color: var(--ifm-color-primary);
   --mm-flask-color: var(--general-black);
+
+  /* Tags */
+  --tag-text-color: var(--general-white);
+  --tag-border-color: var(--general-black-light);
+  --tag-background-color: var(--general-gray-dark);
+  --tag-background-color-hover: var(--general-white);
+  --tag-text-color-hover: var(--general-black);
 
   --ifm-color-success: var(--developer-green);
   --ifm-color-info: var(--developer-blue);
