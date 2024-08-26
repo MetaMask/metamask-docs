@@ -127,6 +127,11 @@
   /* Footer */
   --ifm-footer-background-color: var(--general-white);
 
+  /* Search */
+  --search-item-link: var(--general-black);
+  --search-item-link-hover: var(--ifm-color-primary-dark);
+  --search-input-focus: var(--general-black);
+
   @include bp('tablet') {
     --ifm-global-spacing: #{$grid-gutter-width-tablet};
   }
@@ -209,8 +214,14 @@
 
   /* Header */
   --ifm-navbar-link-hover-color: var(--developer-green);
+
   /* Footer */
   --ifm-footer-background-color: var(--general-black-light);
+
+  /* Search */
+  --search-item-link: var(--general-white);
+  --search-item-link-hover: var(--ifm-color-primary);
+  --search-input-focus: var(--general-gray);
 }
 
 body {
