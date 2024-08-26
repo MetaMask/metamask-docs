@@ -152,14 +152,24 @@
 }
 
 .main-wrapper {
+  .container {
+    margin: 0 auto;
+  }
   .search-page-wrapper & {
-    max-width: 122rem;
-    min-width: 122rem;
     margin: auto;
 
+    @include bp('tablet') {
+      max-width: 108rem;
+      min-width: 108rem;
+    }
+
     .col--8 {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 400;
+
+      @include bp('tablet') {
+        font-size: 1.6rem;
+      }
     }
 
     .margin-vert--lg {
@@ -169,7 +179,21 @@
     }
 
     form input {
+      font-size: 1.6rem;
       border: 1px solid var(--ifm-toc-border-color);
+      background: transparent;
+
+      html[data-theme='dark'] & {
+        background-color: var(--general-gray-dark);
+      }
+
+      &::placeholder {
+        font-size: 1.6rem;
+      }
+
+      &:focus {
+        border: 1px solid var(--search-input-focus);
+      }
     }
 
     main {
@@ -177,16 +201,15 @@
     }
 
     article {
-      padding: 2rem 1rem;
+      padding: 2rem 0;
     }
 
     h2 {
-      font-size: 2.8rem;
       a {
-        color: var(--ifm-heading-color);
+        color: var(--search-item-link);
 
         &:hover {
-          color: var(--ifm-color-primary);
+          color: var(--search-item-link-hover);
           text-decoration: none;
         }
       }
@@ -195,6 +218,16 @@
     .breadcrumbs,
     p {
       font-size: 1.6rem;
+      margin-top: 1rem;
+    }
+
+    .search-result-match {
+      background-color: var(--ifm-code-background);
+    }
+
+    .breadcrumbs {
+      .search-result-match {
+      }
     }
   }
 }
