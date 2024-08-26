@@ -44,8 +44,8 @@
   --select-arrow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 7"><path fill="currentColor" fill-rule="evenodd" d="M11.9038 1.82478 5.24975 6.80979-1.4043 1.82478-.385019.464234 5.24975 4.68564 10.8845.464233l1.0193 1.360547Z" clip-rule="evenodd"/></svg>');
 
   /* Links */
-  --ifm-link-color: var(--ifm-color-primary-dark);
-  --ifm-link-hover-color: var(--ifm-color-primary);
+  --ifm-link-color: var(--general-black);
+  --ifm-link-hover-color: var(--ifm-color-primary-dark);
 
   /* Sidebar */
   --doc-sidebar-width: 35.8rem !important;
@@ -156,8 +156,8 @@
   --ifm-background-surface-color: var(--general-black-light) !important;
 
   /* Links */
-  --ifm-link-color: var(--ifm-color-primary);
-  --ifm-link-hover-color: var(--ifm-color-primary-light);
+  --ifm-link-color: var(--general-white);
+  --ifm-link-hover-color: var(--ifm-color-primary);
 
   /* Sidebar */
   --ifm-hover-overlay: var(--general-black-light) !important;
@@ -177,7 +177,7 @@
 
   /* Tags */
   --tag-text-color: var(--general-white);
-  --tag-border-color: var(--general-black-light);
+  --tag-border-color: var(--general-white);
   --tag-background-color: var(--general-gray-dark);
   --tag-background-color-hover: var(--general-white);
   --tag-text-color-hover: var(--general-black);
