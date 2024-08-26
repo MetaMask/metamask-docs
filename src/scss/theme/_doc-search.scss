@@ -150,3 +150,51 @@
     }
   }
 }
+
+.main-wrapper {
+  .search-page-wrapper & {
+    max-width: 122rem;
+    min-width: 122rem;
+    margin: auto;
+
+    .col--8 {
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+
+    .margin-vert--lg {
+      h1 {
+        padding: 3rem 0 4rem;
+      }
+    }
+
+    form input {
+      border: 1px solid var(--ifm-toc-border-color);
+    }
+
+    main {
+      margin-top: 4rem;
+    }
+
+    article {
+      padding: 2rem 1rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      a {
+        color: var(--ifm-heading-color);
+
+        &:hover {
+          color: var(--ifm-color-primary);
+          text-decoration: none;
+        }
+      }
+    }
+
+    .breadcrumbs,
+    p {
+      font-size: 1.6rem;
+    }
+  }
+}
