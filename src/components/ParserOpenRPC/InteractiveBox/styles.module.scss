@@ -2,6 +2,10 @@
   display: flex;
   border-top: 1px solid var(--general-gray-light);
 
+  @include bp-max('tablet') {
+    width: calc(100vw - 3.2rem);
+  }
+
   html[data-theme='dark'] & {
     border-color: var(--general-black-light);
   }
@@ -32,6 +36,10 @@
   margin-bottom: -1px;
   html[data-theme='dark'] & {
     border-color: var(--general-black-light);
+  }
+
+  @include bp-max('tablet') {
+    width: calc(100vw - 3.2rem);
   }
 }
 .tableColumn {

@@ -1,6 +1,12 @@
 .cardWrapper {
   margin-bottom: 2.4rem;
   overflow: hidden;
+  width: 100%;
+  margin: 0 auto 2.4rem;
+
+  @include bp-max(tablet) {
+    width: calc(100% - var(--page-padding-x) * 2);
+  }
 }
 
 .cardHeader {

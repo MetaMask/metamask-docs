@@ -22,7 +22,8 @@
 }
 
 .colContentWrap {
-  height: calc(100vh - 84px);
+  // height: calc(100vh - 84px);
+  height: 100%;
   padding: 0 2.5rem;
   overflow-y: auto;
 }

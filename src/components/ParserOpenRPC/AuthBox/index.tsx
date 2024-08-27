@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Button from '@site/src/components/elements/buttons/button'
 
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 interface AuthBoxProps {
   handleConnect: () => void
@@ -22,17 +22,17 @@ export const AuthBox = ({ handleConnect, theme }: AuthBoxProps) => {
         style={
           theme === 'dark'
             ? {
-              '--button-color': 'var(--consumer-orange)',
-              '--button-text-color': 'var(--general-black)',
-              '--button-color-hover': 'var(--general-white)',
-              '--button-text-color-hover': 'var(--general-black)',
-            }
+                '--button-color': 'var(--consumer-orange)',
+                '--button-text-color': 'var(--general-black)',
+                '--button-color-hover': 'var(--general-white)',
+                '--button-text-color-hover': 'var(--general-black)',
+              }
             : {
-              '--button-color': 'var(--consumer-orange)',
-              '--button-text-color': 'var(--general-black)',
-              '--button-color-hover': 'var(--general-black)',
-              '--button-text-color-hover': 'var(--general-white)',
-            }
+                '--button-color': 'var(--consumer-orange)',
+                '--button-text-color': 'var(--general-black)',
+                '--button-color-hover': 'var(--general-black)',
+                '--button-text-color-hover': 'var(--general-white)',
+              }
         }
       />
     </div>
