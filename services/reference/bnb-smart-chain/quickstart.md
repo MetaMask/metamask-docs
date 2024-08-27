@@ -17,14 +17,6 @@ Don't have an Infura account? Sign up for our free plan and start using the BNB 
 
 - Ensure you have an [API key](../../../developer-tools/dashboard/get-started/create-api) with the BNB Smart Chain networked enabled.
 
-- For calls that require gas, topup your funds.
-
-:::note Get testnet ETH
-
-To topup your [MetaMask](https://metamask.io/) wallet, refer to the [official BNB Smart Chain documentation](https://docs.bnbchain.org/bnb-smart-chain/developers/faucet/)
-and learn about faucets for BNB Smart Chain.
-:::
-
 ## Make calls
 
 ### cURL
