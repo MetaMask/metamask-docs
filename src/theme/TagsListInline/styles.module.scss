@@ -1,7 +1,8 @@
 .tags {
   display: flex;
   align-items: baseline;
-  margin-bottom: 2rem;
+  padding-top: 0.35rem;
+  margin-bottom: 1.2rem;
 
   @include bp('desktop') {
     align-items: center;
