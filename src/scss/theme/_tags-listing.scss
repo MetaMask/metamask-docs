@@ -1,53 +1,23 @@
 .main-wrapper {
-  /* Tags Listing */
   .docs-tags-doc-list-page & {
-    .margin-vert--lg {
-      &.container {
-        width: calc(100% - var(--page-padding-x) * 2);
-
-        @include bp('tablet') {
-          margin: 0 !important;
-          width: 100%;
-        }
-      }
-    }
-
-    .row {
-      margin: 0 auto;
-      @include bp('tablet') {
-        max-width: 103rem;
-        min-width: 103rem;
-      }
-    }
-
-    .col {
-      --ifm-col-width: 100%;
-      flex: 1;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-
-      &.col--8 {
-        width: 100%;
-      }
-    }
-
     h1 {
       padding: 3rem 0 2rem;
 
       @include bp('tablet') {
-        padding: 5rem 0 2rem;
+        padding: 4.5rem 0 3rem;
       }
     }
 
     header {
       a {
         color: var(--search-item-link);
-        @extend p;
+        text-decoration: underline;
+        text-decoration-thickness: 0.1rem;
+        text-underline-offset: 0.4rem;
+        text-decoration-color: currentColor;
 
         &:hover {
           color: var(--search-item-link-hover);
-          text-decoration: none;
         }
       }
     }
@@ -74,6 +44,65 @@
         font-size: 1.6rem;
         margin-top: 0.5rem;
       }
+    }
+  }
+
+  .docs-tags-list-page & {
+    h1 {
+      padding: 3rem 0 2rem;
+
+      @include bp('tablet') {
+        padding: 4.5rem 0 3rem;
+      }
+    }
+
+    h2 {
+      color: inherit;
+      @extend h3;
+    }
+
+    ul {
+      li {
+        margin: 0;
+      }
+
+      a {
+        font-size: 1.2rem;
+        line-height: 0;
+        font-weight: 500;
+        color: var(--tag-text-color);
+        padding: 0.5rem 0.9rem;
+        margin: 0;
+        border: 1px solid var(--tag-border-color);
+        background-color: var(--tag-background-color);
+        transition:
+          border var(--ifm-transition-fast),
+          color var(--ifm-transition-fast),
+          background var(--ifm-transition-fast);
+        border-radius: var(--ifm-global-radius);
+
+        &::before,
+        &::after {
+          content: none !important;
+        }
+
+        &:hover {
+          text-decoration: none !important;
+          text-decoration: none;
+          color: var(--tag-text-color-hover);
+          background-color: var(--tag-background-color-hover);
+          border: 1px solid var(--tag-background-color-hover);
+        }
+
+        span {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    hr {
+      background-color: var(--ifm-toc-border-color);
+      margin: 2.6rem 0;
     }
   }
 }
