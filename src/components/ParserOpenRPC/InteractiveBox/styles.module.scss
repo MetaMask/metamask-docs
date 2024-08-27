@@ -1,9 +1,10 @@
 .tableHeadingRow {
   display: flex;
   border-top: 1px solid var(--general-gray-light);
+  width: 100%;
 
   @include bp-max('tablet') {
-    width: calc(100vw - 3.2rem);
+    width: 100vw;
   }
 
   html[data-theme='dark'] & {
@@ -12,10 +13,10 @@
 }
 .tableHeadingColumn {
   width: 50%;
-  padding: 1.2rem;
+  padding: 1.1rem;
   line-height: 1.5;
   background-color: var(--general-white-off);
-  font-weight: 500;
+  font-size: 1.5rem;
 
   &:first-child {
     border-right: 1px solid var(--general-gray-light);
@@ -31,7 +32,7 @@
 }
 .tableRow {
   display: flex;
-  border-top: 1px solid var(--general-gray-light);
+  width: calc(100%);
   border-bottom: 1px solid var(--general-gray-light);
   margin-bottom: -1px;
   html[data-theme='dark'] & {
@@ -39,7 +40,7 @@
   }
 
   @include bp-max('tablet') {
-    width: calc(100vw - 3.2rem);
+    width: 100vw;
   }
 }
 .tableColumn {
@@ -50,7 +51,7 @@
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 1.2rem 1.6rem 1.2rem 1.2rem;
+  padding: 1.1rem;
   line-height: 2.8rem;
   position: relative;
 }
@@ -369,9 +370,9 @@
   top: 50%;
   left: 1.2rem;
   transform: translateY(-50%);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   line-height: 1;
-  font-weight: bold;
+  font-weight: 400;
 }
 .arrayItemRowWrap {
   position: relative;

@@ -12,8 +12,6 @@
 .errRowHeading {
   display: flex;
   border-bottom: 1px solid var(--general-gray-light);
-  font-size: 1.8rem;
-  font-weight: 500;
 }
 
 .errRowHeadingDarkView {
@@ -40,7 +38,6 @@
   width: 8rem;
   min-height: 4.8rem;
   border-right: 1px solid var(--general-gray-light);
-  font-size: 1.4rem;
 }
 
 .errColMsg {
@@ -49,7 +46,6 @@
   width: calc(100% - 8rem);
   padding: 1.2rem;
   min-height: 4.8rem;
-  font-size: 1.4rem;
 }
 
 html[data-theme='dark'] {

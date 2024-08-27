@@ -33,15 +33,16 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
         <div
           className={clsx(
             styles.errRowHeading,
-            colorMode === 'light' ? styles.errRowHeadingLightView : styles.errRowHeadingDarkView
+            colorMode === 'light' ? styles.errRowHeadingLightView : styles.errRowHeadingDarkView,
+            'type-paragraph-m font-primary font-weight-medium'
           )}>
           <div className={styles.errColCode}>Code</div>
           <div className={styles.errColMsg}>Message</div>
         </div>
         {errors.map((err, i) => (
           <div key={`${err.code}-${i}`} className={styles.errRow}>
-            <div className={styles.errColCode}>{err.code}</div>
-            <div className={styles.errColMsg}>
+            <div className={clsx(styles.errColCode, 'type-paragraph-m')}>{err.code}</div>
+            <div className={clsx(styles.errColMsg, 'type-paragraph-m')}>
               <MDContent content={err.message} />
             </div>
           </div>

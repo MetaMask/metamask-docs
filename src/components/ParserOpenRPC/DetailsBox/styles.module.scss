@@ -10,6 +10,10 @@
   padding-bottom: 1rem;
 }
 
+.schemaWrapper {
+  padding: 1.6rem 0;
+}
+
 .schemaHeader {
   display: flex;
   align-items: baseline;
@@ -17,15 +21,19 @@
 }
 
 .textAltColor {
-  color: var(--general-gray-mid);
+  color: var(--general-gray-dark);
 }
 
 .textErrorColor {
   color: var(--error);
 }
 
+.description {
+  color: var(--general-gray-dark);
+}
+
 .paramItemWrapper {
-  padding: 0 1rem;
+  padding: 0 2.3rem;
 }
 
 .paramItemWrapper:not(:first-child) {
@@ -42,7 +50,6 @@
 
 .enumWrapper {
   border: 1px solid var(--general-gray-light);
-  border-radius: 0.8rem;
   margin-bottom: 2rem;
 }
 

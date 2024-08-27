@@ -18,17 +18,17 @@ interface TagProps {
 
 export const SchemaProperty = ({ title, type, required, description }: SchemaPropertyProps) => {
   return (
-    <div className="padding-vert--md">
+    <div className={styles.schemaWrapper}>
       <div className={styles.schemaHeader} style={{ justifyContent: 'space-between' }}>
         <div className={styles.schemaHeader}>
-          <Heading as="h5" className={'type-heading-xxs'}>
+          <Heading as="h5" className={'type-paragraph-m font-primary font-weight-medium'}>
             {title}
           </Heading>
-          <span className={styles.textAltColor}>{type}</span>
+          <span className={clsx(styles.textAltColor, 'type-paragraph-m')}>{type}</span>
         </div>
         {required && <span className={styles.textErrorColor}>required</span>}
       </div>
-      <p className="margin--none">
+      <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
         <MDContent content={description} />
       </p>
     </div>

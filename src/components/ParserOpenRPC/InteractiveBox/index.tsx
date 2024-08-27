@@ -181,8 +181,8 @@ export default function InteractiveBox({
   return parsedSchema ? (
     <>
       <div className={styles.tableHeadingRow}>
-        <div className={styles.tableHeadingColumn}>Parameter</div>
-        <div className={styles.tableHeadingColumn}>Value</div>
+        <div className={clsx(styles.tableHeadingColumn, 'font-weight-medium')}>Parameter</div>
+        <div className={clsx(styles.tableHeadingColumn, 'font-weight-medium')}>Value</div>
       </div>
       <Form
         schema={parsedSchema}

@@ -1,14 +1,13 @@
 .collapseWrapper {
   overflow: hidden;
-  margin: 1.6rem 0;
+  margin: 0.5rem 0 1.6rem;
 }
 
 .collapsedWrapperView {
   > div {
     border: 1px solid var(--general-gray-light);
-    border-radius: 0.4rem;
+    border-radius: 0;
     margin-top: 1.2rem;
-    font-size: 1.4rem;
   }
 }
 
