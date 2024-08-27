@@ -16,22 +16,6 @@ Don't have an Infura account? Sign up for our free plan and start using the Line
 ## Prerequisites
 
 - Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Linea network enabled.
-- For calls that require gas, topup your funds.
-
-:::note Get testnet ETH
-
-Topup your [MetaMask](https://metamask.io/) wallet from one of the following faucets to obtain Linea Sepolia ETH:
-
-- [Infura faucet](https://www.infura.io/faucet/linea)
-- [Covalent faucet](https://www.covalenthq.com/faucet/)
-
-Alternatively, you can obtain [Sepolia ETH](https://www.infura.io/faucet/sepolia) and
-[bridge](https://bridge.linea.build/) to the Linea Sepolia testnet.
-
-See the [official Linea documentation](https://docs.linea.build/developers/guides/bridge) for
-information about additional faucets and bridging funds.
-
-:::
 
 ## Make calls
 

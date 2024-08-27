@@ -17,17 +17,6 @@ Don't have an Infura account? Sign up for our free plan and start using the Opti
 
 - Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Optimism network enabled.
 
-- For calls that require gas, topup your funds.
-
-:::note Get testnet ETH
-
-Topup your [MetaMask](https://metamask.io/) wallet from the [Optimism Sepolia faucet](https://faucet.quicknode.com/optimism/sepolia).
-
-Alternatively, you can obtain [Sepolia ETH](https://www.infura.io/faucet/sepolia) and
-[bridge](https://docs.optimism.io/builders/tools/build/faucets#bridge-from-sepolia) to the Optimism Sepolia testnet.
-
-:::
-
 ## Make calls
 
 ### cURL
