@@ -20,13 +20,10 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
   if (errors.length === 0) return null
 
   return (
-    <>
+    <div className="markdown padding-bottom--xl">
       <Heading
         as="h2"
-        className={clsx(
-          styles.secondaryHeading,
-          'padding-top--lg padding-bottom--md type-heading-s'
-        )}>
+        className={clsx(styles.heading2, styles.borderBottomLine, 'padding-vert--md')}>
         Errors
       </Heading>
       <div className={styles.errWrapper}>
@@ -48,6 +45,6 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   )
 }

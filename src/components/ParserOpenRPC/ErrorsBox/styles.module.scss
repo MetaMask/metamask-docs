@@ -21,8 +21,13 @@
   background-color: var(--general-white-off);
 }
 
-.secondaryHeading {
-  font-size: 2.4rem;
+.heading2 {
+  font-size: 2rem;
+  line-height: 140%;
+}
+
+.borderBottomLine {
+  border-bottom: 1px solid var(--general-gray-light);
 }
 
 .errRow:last-child {

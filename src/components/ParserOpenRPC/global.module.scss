@@ -11,25 +11,25 @@
 .rowWrap {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 3rem 0 0;
+  padding: 1.8rem 2.6rem 0 0;
 }
 
 .colLeft {
   position: relative;
-  width: calc(100% - 42rem);
+  width: calc(100% - 41rem);
   border-right: 1px solid var(--general-gray-light);
   overflow: hidden;
 }
 
 .colContentWrap {
-  height: calc(100vh - 84px);
+  height: calc(100vh - 15rem);
   padding: 0 2.5rem;
   overflow-y: auto;
 }
 
 .colRight {
-  width: 42rem;
-  padding-left: 2.3rem;
+  width: 41rem;
+  padding-left: 4rem;
 }
 
 @media (width <= 1200px) {

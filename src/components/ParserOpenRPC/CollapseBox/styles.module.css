@@ -1,6 +1,13 @@
 .collapseWrapper {
   overflow: hidden;
-  margin: 0.5rem 0 1.6rem;
+  margin: 0.5rem 0 0;
+
+  > button {
+    > span {
+      height: 3.2rem;
+      padding: 1.6rem 1.8rem 1.5rem;
+    }
+  }
 }
 
 .collapsedWrapperView {

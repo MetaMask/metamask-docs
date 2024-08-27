@@ -1,11 +1,10 @@
 .msgWrapper {
   text-align: center;
-  padding: 1.6rem;
-  border-radius: 0.4rem;
+  padding: 2.6rem;
   border: 1px solid var(--general-gray-light);
   margin-bottom: 2.4rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 2.4rem;
 
   @include bp-max(tablet) {
     width: calc(100% - var(--page-padding-x) * 2);

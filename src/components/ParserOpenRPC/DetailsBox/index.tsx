@@ -38,38 +38,31 @@ export default function DetailsBox({
           ))}
         </div>
       )}
-      <Heading as="h1" className={'margin-bottom--md type-heading-m'}>
-        {method}
-      </Heading>
-      <MDContent content={description} />
-      <Heading
-        as="h2"
-        className={clsx(
-          styles.secondaryHeading,
-          'padding-top--lg padding-bottom--md type-heading-s'
-        )}>
-        Parameters
-      </Heading>
-      {params.length === 0 ? (
-        <div>This method does not accept any parameters</div>
-      ) : (
-        <>{params && renderParamSchemas(params, components)}</>
-      )}
-      <Heading
-        as="h2"
-        className={clsx(
-          styles.secondaryHeading,
-          styles.borderBottomLine,
-          'padding-top--lg padding-vert--md type-heading-s'
-        )}>
-        Returns
-      </Heading>
-      {result?.description && (
-        <div className="padding-vert--md">
-          <MDContent content={result.description} />
-        </div>
-      )}
-      {result && renderResultSchemas(result, components)}
+      <div className="markdown">
+        <Heading as="h1" className={styles.heading1}>
+          {method}
+        </Heading>
+        <MDContent content={description} />
+        <Heading as="h2" className={styles.heading2}>
+          Parameters
+        </Heading>
+        {params.length === 0 ? (
+          <div>This method does not accept any parameters</div>
+        ) : (
+          <>{params && renderParamSchemas(params, components)}</>
+        )}
+        <Heading
+          as="h2"
+          className={clsx(styles.heading2, styles.borderBottomLine, 'padding-vert--md')}>
+          Returns
+        </Heading>
+        {result?.description && (
+          <div className="padding-vert--md">
+            <MDContent content={result.description} />
+          </div>
+        )}
+        {result && renderResultSchemas(result, components)}
+      </div>
     </>
   )
 }
