@@ -213,6 +213,7 @@
     h2 {
       a {
         color: var(--search-item-link);
+        @extend h3;
 
         &:hover {
           color: var(--search-item-link-hover);
@@ -224,7 +225,7 @@
     .breadcrumbs,
     p {
       font-size: 1.6rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
 
     .search-result-match {
