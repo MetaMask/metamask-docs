@@ -19,10 +19,10 @@ The Base network provides seamless Coinbase integrations, easy fiat onramps, and
 
 :::info See also
 
-- The [official Base documentation ](https://docs.base.org/)for more information. 
+- The [official Base documentation](https://docs.base.org/) for more information. 
 - The official 
 [Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc) 
-(Bedrock release) custom Base methods.
+(Bedrock release) for custom Base methods.
 
 :::
 
