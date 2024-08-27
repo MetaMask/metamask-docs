@@ -165,8 +165,8 @@
     }
 
     @include bp('tablet') {
-      max-width: 103rem;
-      min-width: 103rem;
+      max-width: 92.5rem;
+      min-width: 91.5rem;
     }
 
     .col--8 {
@@ -180,7 +180,11 @@
 
     .margin-vert--lg {
       h1 {
-        padding: 3rem 0 4rem;
+        padding: 3rem 0 2rem;
+
+        @include bp('tablet') {
+          padding: 6.5rem 0 3rem;
+        }
       }
     }
 
@@ -219,6 +223,16 @@
           color: var(--search-item-link-hover);
           text-decoration: none;
         }
+      }
+    }
+
+    .breadcrumbs {
+      &__item:not(:last-child):after {
+        opacity: 1;
+        height: 1rem;
+        width: 0.7rem;
+        background-repeat: no-repeat;
+        background-size: 100%;
       }
     }
 
