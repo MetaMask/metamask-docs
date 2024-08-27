@@ -14,11 +14,12 @@
     border-radius: 0.4rem;
 
     &[aria-selected='true'] {
-      background: var(--general-black);
+      background: var(--general-gray-dark);
     }
 
     &:hover {
-      background-color: var(--general-gray-dark);
+      background-color: var(--prism-background-color);
+      color: var(--general-gray);
     }
   }
 }
