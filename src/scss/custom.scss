@@ -12,7 +12,6 @@
 @import './theme/edit-page-link';
 @import './theme/doc-search';
 @import './theme/tags-listing';
-//@import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
  * Any CSS included here will be global. The classic template
@@ -136,9 +135,12 @@
   @include bp('tablet') {
     --ifm-global-spacing: #{$grid-gutter-width-tablet};
   }
+
   @include bp('desktop') {
     --ifm-global-spacing: #{$grid-gutter-width-desktop};
-  } /* Code Block */
+  }
+
+  /* Code Block */
   --ifm-code-border-radius: 0;
   --prism-background-color: var(--general-black-light);
   --ifm-code-font-size: 1.6rem;

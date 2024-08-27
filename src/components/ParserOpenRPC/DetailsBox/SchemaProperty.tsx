@@ -26,7 +26,9 @@ export const SchemaProperty = ({ title, type, required, description }: SchemaPro
           </Heading>
           <span className={clsx(styles.textAltColor, 'type-paragraph-m')}>{type}</span>
         </div>
-        {required && <span className={styles.textErrorColor}>required</span>}
+        {required && (
+          <span className={clsx(styles.textErrorColor, 'type-paragraph-m')}>required</span>
+        )}
       </div>
       <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
         <MDContent content={description} />
