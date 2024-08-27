@@ -11,7 +11,8 @@
 @import './theme/react-tippy';
 @import './theme/edit-page-link';
 @import './theme/doc-search';
-// @import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
+@import './theme/tags-listing';
+//@import '../../node_modules/@metamask/design-tokens/src/css/design-tokens';
 
 /**
  * Any CSS included here will be global. The classic template
@@ -513,84 +514,6 @@ h6 {
 
     [data-theme='dark'] & {
       color: var(--general-gray);
-    }
-  }
-}
-
-.main-wrapper {
-  /* Tags Listing */
-  .docs-tags-doc-list-page & {
-    .margin-vert--lg {
-      &.container {
-        width: calc(100% - var(--page-padding-x) * 2);
-
-        @include bp('tablet') {
-          margin: 0 !important;
-          width: 100%;
-        }
-      }
-    }
-
-    .row {
-      margin: 0 auto;
-      @include bp('tablet') {
-        max-width: 103rem;
-        min-width: 103rem;
-      }
-    }
-
-    .col {
-      --ifm-col-width: 100%;
-      flex: 1;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-
-      &.col--8 {
-        width: 100%;
-      }
-    }
-
-    h1 {
-      padding: 3rem 0 2rem;
-
-      @include bp('tablet') {
-        padding: 5rem 0 2rem;
-      }
-    }
-
-    header {
-      a {
-        color: var(--search-item-link);
-
-        &:hover {
-          color: var(--search-item-link-hover);
-          text-decoration: none;
-        }
-      }
-    }
-
-    article {
-      padding: 2rem 0;
-      margin: 0 !important;
-      border-bottom: 1px solid var(--ifm-toc-border-color);
-
-      h2 {
-        color: inherit;
-      }
-
-      a {
-        &:hover {
-          text-decoration: none !important;
-
-          color: var(--search-item-link-hover);
-        }
-      }
-
-      p {
-        font-size: 1.6rem;
-        margin-top: 1rem;
-      }
     }
   }
 }
