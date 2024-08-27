@@ -43,6 +43,7 @@
     header {
       a {
         color: var(--search-item-link);
+        @extend p;
 
         &:hover {
           color: var(--search-item-link-hover);
@@ -58,6 +59,7 @@
 
       h2 {
         color: inherit;
+        @extend h3;
       }
 
       a {
@@ -70,7 +72,7 @@
 
       p {
         font-size: 1.6rem;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
       }
     }
   }
