@@ -67,7 +67,7 @@ function TabList({
       role="tablist"
       aria-orientation="horizontal"
       className={clsx(
-        'tabs',
+        styles.tabs,
         {
           'tabs--block': block,
         },
