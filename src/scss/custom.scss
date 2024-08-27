@@ -133,6 +133,11 @@
   --search-item-link-hover: var(--ifm-color-primary-dark);
   --search-input-focus: var(--general-black);
 
+  /* Code Block */
+  --ifm-code-border-radius: 0;
+  --prism-background-color: var(--general-black-light);
+  --ifm-code-font-size: 1.6rem;
+
   @include bp('tablet') {
     --ifm-global-spacing: #{$grid-gutter-width-tablet};
   }
@@ -140,11 +145,6 @@
   @include bp('desktop') {
     --ifm-global-spacing: #{$grid-gutter-width-desktop};
   }
-
-  /* Code Block */
-  --ifm-code-border-radius: 0;
-  --prism-background-color: var(--general-black-light);
-  --ifm-code-font-size: 1.6rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
