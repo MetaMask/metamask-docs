@@ -10,11 +10,7 @@ tags:
 
 # Use MetaMask SDK
 
-[MetaMask SDK](../../concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless
-connection from your dapp to the MetaMask browser extension and MetaMask Mobile.
-By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their
-preferred MetaMask client.
-The SDK supports the following dapp platforms:
+[MetaMask SDK](../../concepts/sdk/index.md) is a library that provides a reliable, secure, and seamless connection from your dapp to the MetaMask browser extension and MetaMask Mobile. By integrating your dapp using the SDK, millions of MetaMask Mobile users can connect to their preferred MetaMask client. The SDK supports the following dapp platforms:
 
 <div class="cards">
   <div class="card">
@@ -55,8 +51,7 @@ The SDK supports the following dapp platforms:
       </ul>
     </div>
   </div>
-</div>
-<div class="card margin-bottom--lg">
+  <div class="card">
   <div class="card__header">
     <h3>↔️ <a href="/wallet/how-to/use-sdk/3rd-party-libraries">Third-party libraries</a></h3>
   </div>
@@ -66,4 +61,5 @@ The SDK supports the following dapp platforms:
       <li><a href="/wallet/how-to/use-sdk/3rd-party-libraries/wagmi">Wagmi</a></li>
     </ul>
   </div>
+</div>
 </div>
