@@ -48,13 +48,20 @@
   }
 
   > ul {
-    margin-left: 2.5rem;
-    list-style: outside;
+    margin-left: 1rem;
+    list-style-type: none;
 
     li {
       margin-bottom: 1rem;
-      font-size: 1.6rem;
-      line-height: 150%;
+
+      &::before {
+        color: var(--general-gray-dark);
+        content: '\2022';
+        font-size: 3rem;
+        padding-right: 0.6rem;
+        position: relative;
+        top: 0.1rem;
+      }
 
       ol,
       ul {
