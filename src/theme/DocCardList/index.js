@@ -29,7 +29,7 @@ export default function DocCardList(props) {
   }
   const filteredItems = filterDocCardListItems(items)
   return (
-    <section className={clsx(styles['row'], 'row', className)}>
+    <section className={clsx(styles['row'], 'row', className, 'padding-top--lg')}>
       {filteredItems.map((item, index) => (
         <article
           key={index}
@@ -52,13 +52,13 @@ export default function DocCardList(props) {
                   style={
                     theme === 'dark'
                       ? {
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
+                          '--button-color-hover': 'var(--general-white)',
+                          '--button-text-color-hover': 'var(--general-black)',
+                        }
                       : {
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
+                          '--button-color-hover': 'var(--general-black)',
+                          '--button-text-color-hover': 'var(--general-white)',
+                        }
                   }
                 />
               )}
