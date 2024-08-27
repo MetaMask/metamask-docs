@@ -24,7 +24,7 @@ export const WrapIfAdditionalTemplate = (props) => {
   const { RemoveButton } = templates.ButtonTemplates;
   const additional = ADDITIONAL_PROPERTY_FLAG in schema;
   const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } = useContext(ParserOpenRPCContext);
-  const { setCurrentSchemaId } = formContext;
+  const { currentSchemaId, setCurrentSchemaId } = formContext;
   const onRemoveButtonClick = () => {
     if (isObject(formData) && Object.keys(formData).length === 0) {
       setIsComplexTypeView(false);
@@ -45,6 +45,10 @@ export const WrapIfAdditionalTemplate = (props) => {
       setCurrentSchemaId(id);
     }
   }, []);
+
+  if (!id.includes(currentSchemaId)) {
+    return null;
+  }
 
   return (
     isComplexTypeView ? <div className={classNames} style={style}>
