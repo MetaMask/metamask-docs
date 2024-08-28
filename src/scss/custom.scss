@@ -138,6 +138,11 @@
   --prism-background-color: var(--general-black-light);
   --ifm-code-font-size: 1.6rem;
 
+  /* Markdown: Tables */
+  --ifm-table-border-color: var(--general-gray-light);
+  --ifm-table-head-background: var(--general-white-off);
+  --ifm-table-stripe-background: var(--general-white-off);
+
   @include bp('tablet') {
     --ifm-global-spacing: #{$grid-gutter-width-tablet};
   }
@@ -226,6 +231,10 @@
   --search-item-link: var(--general-white);
   --search-item-link-hover: var(--ifm-color-primary);
   --search-input-focus: var(--general-gray);
+
+  /* Markdown: Tables */
+  --ifm-table-border-color: var(--general-black-light);
+  --ifm-table-head-background: var(--general-black-mid);
 }
 
 body {

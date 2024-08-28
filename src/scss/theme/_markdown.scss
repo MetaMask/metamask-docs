@@ -76,6 +76,23 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
+  table {
+    font-size: 1.6rem;
+    line-height: 150%;
+    border-collapse: collapse;
+
+    thead tr {
+      border-bottom: 1px solid;
+    }
+
+    th,
+    td {
+      vertical-align: middle;
+      text-align: left;
+      padding: 1.2rem;
+    }
+  }
 }
 
 /* To be deleted */
