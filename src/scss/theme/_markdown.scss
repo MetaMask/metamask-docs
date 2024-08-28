@@ -46,6 +46,17 @@
 
     li {
       margin-left: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  > ol ol {
+    list-style-position: inside;
+    margin-top: 1rem;
+
+    li {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
     }
   }
 
@@ -162,4 +173,8 @@
 
 .markdown li + li {
   margin-top: var(--ifm-list-item-margin);
+}
+
+.markdown p + div {
+  margin-top: var(--ifm-leading);
 }
