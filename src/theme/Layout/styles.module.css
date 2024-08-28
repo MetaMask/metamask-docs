@@ -13,8 +13,10 @@
   margin: 0 auto;
 }
 
+/*
 @media (width <= 996px) {
   .pageWrapper {
-    display: block;
+    display: block; 
   }
 }
+*/

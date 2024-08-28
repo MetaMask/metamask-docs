@@ -293,6 +293,8 @@ h6 {
 .docMainContainer,
 .docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocRoot-Layout-Main-styles-module,
 .mainContainer_src-theme-Layout-styles-module {
+  padding: 3rem 0 0;
+
   @include bp('desktop') {
     padding: 5.5rem 0 0 3.5rem;
   }
