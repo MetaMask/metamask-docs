@@ -1,11 +1,6 @@
 [class*='admonition'].alert {
-  margin-top: 2.8rem;
-  margin-bottom: 4rem;
-
-  @include bp(desktop) {
-    margin-top: 4.8rem;
-    margin-bottom: 6rem;
-  }
+  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
 }
 
 .alert {
@@ -15,6 +10,7 @@
 
   [class*='admonitionHeading'] {
     @extend .type-heading-xxs;
+    @extend .font-weight-medium;
     display: flex;
     align-items: center;
     text-transform: capitalize;
