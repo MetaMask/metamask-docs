@@ -1,0 +1,9 @@
+{
+  "label": "Non-EVM provider API",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "slug": "reference"/non-evm-providers",
+    "description": "You can add non-EVM networks in MetaMask."
+  }
+}
