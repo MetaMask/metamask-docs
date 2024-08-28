@@ -1,6 +1,5 @@
 .tabList {
   margin-bottom: var(--ifm-leading);
-  background-color: var(--prism-background-color);
   padding: 0;
 }
 
@@ -9,6 +8,7 @@
   gap: 0.8rem;
   padding: 1.2rem;
   border-bottom: 1px solid var(--general-gray-dark);
+  background-color: var(--prism-background-color);
 }
 
 .tabItem {
@@ -27,6 +27,12 @@
 
   &:hover {
     background-color: var(--general-gray-dark);
+  }
+}
+
+[role='tabpanel'] {
+  p {
+    padding: 1.6rem;
   }
 }
 
