@@ -22,7 +22,8 @@
   > h4,
   > h5,
   > h6,
-  > ul {
+  > ul,
+  .cards {
     a {
       color: var(--ifm-link-color);
       /* autoprefixer: ignore next */
@@ -81,6 +82,7 @@
     font-size: 1.6rem;
     line-height: 150%;
     border-collapse: collapse;
+    margin-top: calc(var(--ifm-heading-vertical-rhythm-top) * var(--ifm-leading));
 
     thead tr {
       border-bottom: 1px solid;
