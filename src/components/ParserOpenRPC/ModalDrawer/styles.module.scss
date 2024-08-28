@@ -7,13 +7,10 @@
   right: 1.5rem;
   width: 100%;
   min-height: 51.2rem;
-  opacity: 0;
   transform: translate(0, 100%);
-  transition-property: 'transform', 'opacity';
-  transition-duration: 0.4s;
-  transition-timing-function: ease;
   overflow: hidden;
   background-color: var(--general-white);
+  transition: transform 0.4s ease;
 
   html[data-theme='dark'] & {
     background-color: var(--general-gray-dark);
@@ -22,7 +19,7 @@
 }
 
 .modalContainerOpen {
-  opacity: 1;
+  transition: transform 0.4s ease;
   transform: translate(0, -100%);
 }
 
@@ -78,7 +75,7 @@
   justify-content: center;
   margin-left: 0.8rem;
   padding: 0.2rem 0.8rem;
-  border: 1px solid var(--general-gray-light);
+  border: 1px solid var(--general-gray);
   border-radius: 999px;
   font-size: 1.2rem;
   line-height: 1.8rem;
@@ -100,6 +97,7 @@
 
 .modalContentScrolled {
   overflow-y: auto;
+  transition: none;
 }
 
 .modalContentFixed {

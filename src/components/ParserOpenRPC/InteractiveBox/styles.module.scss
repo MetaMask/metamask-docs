@@ -196,10 +196,19 @@
   background-color: var(--general-white);
   color: var(--general-black);
   white-space: nowrap;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+    background-color: var(--general-gray-dark);
+  }
 }
 .dropdownItem:hover {
   background-color: var(--general-white-off);
   cursor: pointer;
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black-light);
+  }
 }
 .dropdownItem:not(:last-child) {
   border-bottom: 1px solid var(--general-gray-light);
@@ -242,6 +251,10 @@
   overflow-y: auto;
   z-index: 1;
   overflow-x: hidden;
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-gray-dark);
+  }
 }
 .tableComplexTypeItem {
   position: relative;
