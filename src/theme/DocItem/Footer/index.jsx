@@ -6,12 +6,7 @@ import LastUpdated from '@theme/LastUpdated'
 import EditThisPage from '@theme/EditThisPage'
 import styles from './styles.module.css'
 
-function EditMetaRow({
-  editUrl,
-  lastUpdatedAt = '2024-08-20',
-  lastUpdatedBy = 'Test User',
-  formattedLastUpdatedAt,
-}) {
+function EditMetaRow({ editUrl, lastUpdatedAt, lastUpdatedBy, formattedLastUpdatedAt }) {
   return (
     <div className={clsx(ThemeClassNames.docs.docFooterEditMetaRow, 'row')}>
       <div className="col">{editUrl && <EditThisPage editUrl={editUrl} />}</div>
