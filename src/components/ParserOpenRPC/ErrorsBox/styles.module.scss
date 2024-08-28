@@ -28,6 +28,10 @@
 
 .borderBottomLine {
   border-bottom: 1px solid var(--general-gray-light);
+
+  html[data-theme='dark'] & {
+    border-bottom: 1px solid var(--general-black-light);
+  }
 }
 
 .errRow:last-child {
