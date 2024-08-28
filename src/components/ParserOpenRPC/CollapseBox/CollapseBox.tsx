@@ -22,7 +22,7 @@ export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxPr
     <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <button
         onClick={() => toggleCollapsed()}
-        className={clsx(styles.buttonToggle, 'type-paragraph-m font-primary font-weight-medium')}>
+        className={clsx(styles.buttonToggle, 'type-paragraph-m font-primary font-weight-medium-')}>
         {collapsed ? 'Show child attributes' : 'Hide child attributes'}
 
         {collapsed ? (
