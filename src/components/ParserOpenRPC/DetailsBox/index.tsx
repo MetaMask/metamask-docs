@@ -39,7 +39,9 @@ export default function DetailsBox({
         </div>
       )}
       <div className="markdown">
-        <Heading as="h1" className={styles.heading1}>
+        <Heading
+          as="h1"
+          className={clsx(styles.heading1, method.length > 33 && styles.headingSmall)}>
           {method}
         </Heading>
         <MDContent content={description} />
