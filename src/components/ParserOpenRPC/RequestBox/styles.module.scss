@@ -10,7 +10,10 @@
 }
 
 .cardHeader {
-  margin-bottom: 1.6rem;
+  background-color: var(--general-black-light);
+  border-bottom: 1px solid var(--general-gray-dark);
+  padding: 1.2rem 2rem;
+  color: var(--general-white);
 }
 
 .cardFooter {
@@ -39,6 +42,6 @@
 html[data-theme='dark'] {
   .cardWrapper,
   .cardHeader {
-    border-color: var(--general-black-light);
+    border-color: var(--general-gray-dark);
   }
 }

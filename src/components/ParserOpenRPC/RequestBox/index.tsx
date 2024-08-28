@@ -40,7 +40,9 @@ export default function RequestBox({
   return (
     <>
       <div className={styles.cardWrapper}>
-        <Heading as="h3" className={clsx(styles.cardHeader, 'type-heading-xs')}>
+        <Heading
+          as="h3"
+          className={clsx(styles.cardHeader, 'type-paragraph-m font-primary font-weight-medium')}>
           Request
         </Heading>
         <div>
@@ -93,7 +95,9 @@ export default function RequestBox({
       </div>
       {response !== undefined && (
         <div className={styles.cardWrapper}>
-          <Heading as="h3" className={clsx(styles.cardHeader, 'type-heading-xs')}>
+          <Heading
+            as="h3"
+            className={clsx(styles.cardHeader, 'type-paragraph-m font-primary font-weight-medium')}>
             Response
           </Heading>
 

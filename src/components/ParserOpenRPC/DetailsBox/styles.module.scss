@@ -22,6 +22,10 @@
 
 .textAltColor {
   color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
 }
 
 .textErrorColor {
@@ -30,6 +34,10 @@
 
 .description {
   color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
 }
 
 .paramItemWrapper {
