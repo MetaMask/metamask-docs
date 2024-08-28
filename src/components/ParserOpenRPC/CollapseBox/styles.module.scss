@@ -3,6 +3,10 @@
   margin: 0.5rem 0 0.6rem;
   border-radius: 0;
   border: 1px solid var(--general-gray-light);
+
+  html[data-theme='dark'] & {
+    border: 1px solid var(--general-black-light);
+  }
 }
 
 .buttonToggle {
