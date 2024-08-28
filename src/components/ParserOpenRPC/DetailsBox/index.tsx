@@ -53,9 +53,7 @@ export default function DetailsBox({
         ) : (
           <>{params && renderParamSchemas(params, components)}</>
         )}
-        <Heading
-          as="h2"
-          className={clsx(styles.heading2, styles.borderBottomLine, 'padding-vert--md')}>
+        <Heading as="h2" className={styles.heading2}>
           Returns
         </Heading>
         {result?.description && (
