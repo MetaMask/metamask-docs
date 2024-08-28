@@ -5,6 +5,12 @@ sidebar_position: 3
 
 # Access a user's accounts
 
+:::note
+
+You can access a non-EVM network ... (point to docs section)
+
+:::
+
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
 [signing transactions](../sign-data/index.md).
 To request a signature from a user or have a user approve a transaction, your dapp can

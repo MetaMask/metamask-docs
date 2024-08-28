@@ -5,6 +5,12 @@ sidebar_position: 2
 
 # Add a network
 
+:::note
+
+You can add a non-EVM network ... (point to docs section)
+
+:::
+
 In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
