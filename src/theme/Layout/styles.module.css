@@ -9,7 +9,7 @@
 }
 
 .contentWrapper {
-  max-width: 1440px;
+  max-width: var(--site-container-max-width);
   margin: 0 auto;
 }
 
