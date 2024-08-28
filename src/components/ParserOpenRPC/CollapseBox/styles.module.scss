@@ -1,15 +1,18 @@
 .collapseWrapper {
   overflow: hidden;
-  margin: 0.5rem 0 0;
-
+  margin: 0.5rem 0 0.6rem;
   border-radius: 0;
+  border: 1px solid var(--general-gray-light);
 }
 
 .buttonToggle {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
+  width: 100%;
+  padding: 1.6rem;
 
   &:hover {
     text-decoration: underline;
@@ -31,16 +34,9 @@
 }
 
 .collapsedWrapperView {
-  border: 1px solid var(--general-gray-light);
   > div {
     border-top: 1px solid var(--general-gray-light);
-
     border-radius: 0;
-    margin-top: 1.2rem;
-  }
-
-  .buttonToggle {
-    padding: 1.6rem 2.3rem 0;
   }
 
   html[data-theme='dark'] & {

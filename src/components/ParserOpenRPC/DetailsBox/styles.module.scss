@@ -18,6 +18,7 @@
   display: flex;
   align-items: baseline;
   gap: 0.8rem;
+  margin-bottom: 0.3rem;
 }
 
 .textAltColor {
@@ -41,7 +42,7 @@
 }
 
 .paramItemWrapper {
-  padding: 0 2.3rem;
+  padding: 0 1.6rem;
 }
 
 .paramItemWrapper:not(:first-child) {
