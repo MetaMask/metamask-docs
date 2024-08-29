@@ -26,16 +26,19 @@
   .cards {
     a {
       color: var(--ifm-link-color);
-      /* autoprefixer: ignore next */
-      text-decoration: underline currentColor 0.1rem !important;
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-color);
+      text-decoration-thickness: 0.1rem;
       text-underline-offset: 0.4rem;
       transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
       font-weight: 500;
 
       &:hover {
         color: var(--ifm-link-hover-color);
-        /* autoprefixer: ignore next */
-        text-decoration: underline currentColor 0.1rem !important;
+        text-decoration: underline;
+        text-decoration-color: var(--ifm-link-hover-color);
+        text-decoration-thickness: 0.1rem;
+        text-underline-offset: 0.4rem;
       }
     }
   }
@@ -176,72 +179,4 @@
       border-color: transparent transparent transparent var(--ifm-heading-color);
     }
   }
-}
-
-/* To be deleted */
-
-.markdown:before {
-  content: '';
-  display: table;
-}
-
-.markdown:after {
-  clear: both;
-  content: '';
-  display: table;
-}
-
-.markdown > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.markdown h1:first-child {
-  --ifm-h1-font-size: 3rem;
-  margin-bottom: calc(var(--ifm-h1-vertical-rhythm-bottom) * var(--ifm-leading));
-}
-
-.markdown > h2 {
-  --ifm-h2-font-size: 2rem;
-
-  margin-bottom: calc(var(--ifm-heading-vertical-rhythm-bottom) * var(--ifm-leading));
-  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
-}
-
-.markdown > h3 {
-  --ifm-h3-font-size: 1.5rem;
-
-  margin-bottom: calc(var(--ifm-heading-vertical-rhythm-bottom) * var(--ifm-leading));
-  margin-top: calc(var(--ifm-h3-vertical-rhythm-top) * var(--ifm-leading));
-}
-
-.markdown > h4,
-.markdown > h5,
-.markdown > h6 {
-  margin-bottom: calc(var(--ifm-heading-vertical-rhythm-bottom) * var(--ifm-leading));
-  margin-top: calc(var(--ifm-heading-vertical-rhythm-top) * var(--ifm-leading));
-}
-
-/* Consistent spacing between content paragraphs. */
-
-.markdown > pre,
-.markdown > ul,
-.markdown > p {
-  margin-bottom: var(--ifm-leading);
-}
-
-.markdown li {
-  word-wrap: break-word;
-}
-
-.markdown li > p {
-  margin-top: var(--ifm-list-paragraph-margin);
-  display: inline;
-}
-
-.markdown li + li {
-  margin-top: var(--ifm-list-item-margin);
-}
-
-.markdown p + div {
-  margin-top: var(--ifm-leading);
 }
