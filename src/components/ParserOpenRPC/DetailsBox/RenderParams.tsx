@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import { SchemaProperty } from './SchemaProperty'
 import { CollapseBox } from '../CollapseBox/CollapseBox'
 import { MDContent } from './MDContent'
@@ -111,12 +112,14 @@ const renderSchema = (schemaItem, schemas, name) => {
       title && description && (title === 'Block tag' || title === 'subscriptionType')
     return (
       <div className={styles.enumWrapper}>
-        <div className="padding--md type-paragraph-m font-weight-medium">Possible enum values</div>
+        <div className={clsx(styles.enumHeader, 'type-paragraph-m font-weight-medium')}>
+          Possible enum values
+        </div>
         {enumValues.map((value, index) => (
           <div key={index} className={styles.enumItem}>
             <div className={styles.enumTitle}>{value}</div>
             {blockEnum && (
-              <div className="type-paragraph-m" style={{ paddingTop: '10px' }}>
+              <div className="type-paragraph-m">
                 <MDContent content={getDescription(value, title)} />
               </div>
             )}

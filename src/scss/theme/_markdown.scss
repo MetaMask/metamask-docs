@@ -113,18 +113,51 @@
   details {
     @extend .type-paragraph-m;
     box-shadow: none;
-    padding: 1.2rem;
-    background-color: var(--ifm-table-head-background);
-    border: 1px solid var(--ifm-table-border-color);
+    padding: 2rem;
+    background-color: var(--ifm-color-secondary-contrast-background);
+    border: none;
     color: var(--ifm-heading-color) !important;
+    margin: calc(var(--ifm-leading) * 2) 0;
+    font-weight: 500;
+
+    ul {
+      margin-left: 0;
+      list-style-type: none;
+
+      li {
+        margin-bottom: 1rem;
+
+        &::before {
+          content: '\2022';
+          font-size: 3rem;
+          padding-right: 0.6rem;
+          position: relative;
+          top: 0.1rem;
+          line-height: 0;
+        }
+
+        ol,
+        ul {
+          margin-top: 1rem;
+        }
+      }
+    }
 
     .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
-      border-top: 1px solid var(--ifm-table-border-color);
+      border-top: 1px solid var(--ifm-code-background);
+      margin-top: 2rem;
+      padding-top: 2rem;
+      font-weight: 400 !important;
     }
 
     code {
       @extend .type-paragraph-s;
       color: var(--ifm-heading-color) !important;
+      background: var(--ifm-code-background);
+
+      [data-theme='dark'] & {
+        background-color: var(--general-gray-dark);
+      }
     }
 
     table tr:nth-child(2n) {
@@ -132,12 +165,16 @@
     }
   }
 
-  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module
-    > summary::before {
-    top: 0.7rem;
-    border-width: 0.5rem;
-    border-style: solid;
-    border-color: transparent transparent transparent var(--ifm-heading-color);
+  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary {
+    padding-left: 1.6rem;
+    font-family: var(--ifm-heading-font-family);
+    &::before {
+      left: 0;
+      top: 0.7rem;
+      border-width: 0.5rem;
+      border-style: solid;
+      border-color: transparent transparent transparent var(--ifm-heading-color);
+    }
   }
 }
 
