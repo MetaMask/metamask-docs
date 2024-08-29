@@ -1,11 +1,29 @@
 :root[data-theme="dark"] {
   --hero-text-color: #fff;
-  --hero-image: url("/img/faucet-hero-dark.png");
+
+  .hero {
+    &.sepolia {
+      --hero-image: url("/img/faucet-sepolia-hero-dark.png");
+    }
+
+    &.linea {
+      --hero-image: url("/img/faucet-linea-hero-dark.png");
+    }
+  }
 }
 
 :root[data-theme="light"] {
   --hero-text-color: #141618;
-  --hero-image: url("/img/faucet-hero-light.png");
+
+  .hero {
+    &.sepolia {
+      --hero-image: url("/img/faucet-sepolia-hero-light.png");
+    }
+
+    &.linea {
+      --hero-image: url("/img/faucet-linea-hero-light.png");
+    }
+  }
 }
 
 .hero {
@@ -13,7 +31,7 @@
   background-image: var(--hero-image);
   background-repeat: no-repeat;
   background-position: 100% 0;
-  background-size: contain;
+  background-size: auto 100%;;
 
   @media screen and (max-width: 996px) {
     background-image: none;

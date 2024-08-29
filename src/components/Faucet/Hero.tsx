@@ -31,7 +31,14 @@ export default function Hero({
   const isExtensionActive = sdk.isExtensionActive();
 
   return (
-    <div className={clsx(styles.hero, className)}>
+    <div
+      className={clsx(
+        styles.hero,
+        network === "linea" && styles.linea,
+        network === "sepolia" && styles.sepolia,
+        className,
+      )}
+    >
       {!(isExtensionActive && account) && <EthIcon />}
       <Text as="h1">
         <span>
@@ -74,7 +81,7 @@ export default function Hero({
         >
           {!account ? (
             <Button className={styles.button} onClick={metaMaskConnectHandler}>
-              {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
+              {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
             </Button>
           ) : (
             <Button

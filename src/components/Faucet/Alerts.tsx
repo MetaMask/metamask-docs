@@ -8,7 +8,7 @@ export const AlertCommonIssue = () => (
       <span>
         There was an issue starting your transaction. Try again in a few
         minutes. If the problem persists please{" "}
-        <a target="_blank" href="https://www.infura.io/contact">
+        <a target="_blank" href="https://support.metamask.io/">
           contact us
         </a>
         .
@@ -50,7 +50,7 @@ export const AlertCooldown = () => (
     <AlertText>
       <span>
         You already got ETH from the faucet today. Try again in 24 hours.{" "}
-        <a target="_blank" href="https://www.infura.io/contact">
+        <a target="_blank" href="https://support.metamask.io/">
           Contact us
         </a>
         .

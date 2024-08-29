@@ -32,7 +32,7 @@ export const LINEA_URL = "https://sepolia.lineascan.build/tx/";
 
 export default function Faucet() {
   const { siteConfig } = useDocusaurusContext();
-  const { userId, token, uksTier } = useContext(LoginContext);
+  const { userId, token, uksTier, account } = useContext(LoginContext);
   const alert = useAlert();
   const [transactions, setTransactions] = useState(DEFAULT_TRANSACTIONS_LIST);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +43,7 @@ export default function Faucet() {
   const [faucetBypassDomain, setFaucetBypassDomain] = useState(false);
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
-  console.log(uksTier)
-  const isLimitedUserPlan = uksTier === 'core' && !faucetBypassDomain
+  const isLimitedUserPlan = uksTier === "core" && !faucetBypassDomain;
 
   const setTransactionsForNetwork = (network: "linea" | "sepolia", data) => {
     setTransactions((transactions) => ({ ...transactions, [network]: data }));
@@ -127,9 +126,7 @@ export default function Faucet() {
       setIsSepoliaMaintenance(
         ldClient.variation(sepoliaMaintenanceFlag, false),
       );
-      setFaucetBypassDomain(
-        ldClient.variation(faucetBypassDomainFlag, false),
-      );
+      setFaucetBypassDomain(ldClient.variation(faucetBypassDomainFlag, false));
       setLdReady(true);
     });
     const handleChangeLinea = (current) => {
@@ -158,6 +155,12 @@ export default function Faucet() {
       setTransactions(DEFAULT_TRANSACTIONS_LIST);
     }
   }, [userId, token]);
+
+  useEffect(() => {
+    if (account && !walletAddress) {
+      setWalletAddress(account);
+    }
+  }, [account]);
 
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (

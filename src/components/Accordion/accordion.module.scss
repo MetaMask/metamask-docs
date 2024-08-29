@@ -12,17 +12,18 @@
   background: var(--accordion-background);
   border: 1px solid var(--accordion-border);
   border-radius: 8px;
-  padding: 24px;
   margin-bottom: 24px;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 
     .closeButton {
       cursor: pointer;
       margin-left: 24px;
+      margin-right: 24px;
       display: block;
       height: 16px;
       line-height: 1;
@@ -43,7 +44,6 @@
   }
 
   .content {
-    margin-top: 20px;
     visibility: hidden;
     display: none;
 
@@ -52,12 +52,4 @@
       display: block;
     }
   }
-}
-
-.accordionHeader {
-  margin: 0;
-}
-
-.accordionContainer {
-  margin: 0;
 }

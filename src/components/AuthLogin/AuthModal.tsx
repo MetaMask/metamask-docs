@@ -81,7 +81,8 @@ const ConnectionErrorModal = ({
         There was an issue connecting your wallet
       </div>
       <div className={styles.content}>
-        Please try again or <a href="#">contact us</a>.
+        Please try again or{" "}
+        <a href="https://support.metamask.io/">contact us</a>.
       </div>
       <div className={styles.flexButton}>
         <button

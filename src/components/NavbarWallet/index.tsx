@@ -45,7 +45,7 @@ const NavbarWalletComponent: FC = ({
       onClick={metaMaskConnectHandler}
       className={styles.navbarButton}
     >
-      {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
+      {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
