@@ -19,9 +19,11 @@
   padding: 1.6rem;
 
   &:hover {
-    // text-decoration: underline;
-    // text-underline-offset: 0.4rem;
     background-color: var(--general-white-off);
+
+    html[data-theme='dark'] & {
+      background-color: var(--general-black-light);
+    }
   }
 }
 
@@ -46,6 +48,10 @@
 
   > button {
     background-color: var(--general-white-off);
+
+    html[data-theme='dark'] & {
+      background-color: var(--general-black-light);
+    }
   }
 
   html[data-theme='dark'] & {

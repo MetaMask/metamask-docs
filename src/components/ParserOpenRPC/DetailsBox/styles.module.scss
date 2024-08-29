@@ -60,6 +60,10 @@
 
 .borderTopLine:first-child {
   border-top: 1px solid transparent;
+
+  html[data-theme='dark'] & {
+    border-top: 1px solid transparent !important;
+  }
 }
 
 .borderBottomLine {

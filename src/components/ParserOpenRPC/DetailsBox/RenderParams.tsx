@@ -111,12 +111,12 @@ const renderSchema = (schemaItem, schemas, name) => {
       title && description && (title === 'Block tag' || title === 'subscriptionType')
     return (
       <div className={styles.enumWrapper}>
-        <div className="padding--md">Possible enum values</div>
+        <div className="padding--md type-paragraph-m font-weight-medium">Possible enum values</div>
         {enumValues.map((value, index) => (
           <div key={index} className={styles.enumItem}>
             <div className={styles.enumTitle}>{value}</div>
             {blockEnum && (
-              <div style={{ paddingTop: '10px' }}>
+              <div className="type-paragraph-m" style={{ paddingTop: '10px' }}>
                 <MDContent content={getDescription(value, title)} />
               </div>
             )}

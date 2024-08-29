@@ -235,7 +235,16 @@
 .tableButtonAddNewArray {
   margin: 0.8rem 0 0.8rem 1.6rem;
   padding: 0.8rem 0;
-  color: var(--consumer-blue);
+  color: var(--general-black-light);
+  align-items: center;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+
+    img {
+      filter: invert(1);
+    }
+  }
 }
 .tableButtonAddArrayItemName {
   margin-left: 0.8rem;
