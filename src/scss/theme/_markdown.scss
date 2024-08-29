@@ -245,3 +245,7 @@
 .markdown p + div {
   margin-top: var(--ifm-leading);
 }
+
+.markdown p + .cards {
+  margin-top: calc(var(--ifm-leading) * 2);
+}

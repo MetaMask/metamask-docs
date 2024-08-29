@@ -239,6 +239,7 @@
 
 body {
   height: auto !important; /* Fix for Dark Theme */
+  -webkit-text-size-adjust: 100%; /* Fix for iOS */
 
   [data-theme='dark'] & {
     background: var(--general-gray-dark);

@@ -16,7 +16,7 @@ const CallToAction = ({ title, description, button }) => {
             <CutOffCorners>
               <div className={styles['grid-inner']}>
                 <div className={styles['grid-col-left']}>
-                  <Heading as="h2" className={clsx(styles['title'], 'type-heading-sm')}>
+                  <Heading as="h2" className={clsx(styles['title'])}>
                     {title}
                   </Heading>
 

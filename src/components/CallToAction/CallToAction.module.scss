@@ -112,13 +112,22 @@
 
 .title {
   color: var(--developer-purple-light);
+  font-size: 2.4rem;
+  line-height: 133.333%;
+
+  @include bp('tablet') {
+    font-size: 3.2rem;
+    line-height: 125%;
+  }
 }
 
 .description {
   margin-top: 1.8rem;
+  padding-right: 2rem;
 
   @include bp('tablet') {
     margin-top: 2.2rem;
+    padding-right: 0;
   }
 
   @include bp('desktop') {

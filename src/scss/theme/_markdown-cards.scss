@@ -2,7 +2,6 @@
   display: grid;
   grid-auto-rows: auto;
   grid-gap: 2rem;
-  margin-top: calc(var(--ifm-h1-vertical-rhythm-top) * var(--ifm-leading));
 
   @include bp('tablet') {
     grid-template-columns: repeat(2, 1fr);

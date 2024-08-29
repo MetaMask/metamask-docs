@@ -89,9 +89,11 @@
 
 .description {
   margin-top: 2rem;
+  padding-right: 2rem;
 
   @include bp('tablet') {
     margin-top: 2.2rem;
+    padding-right: 0;
   }
 
   @include bp('desktop') {
