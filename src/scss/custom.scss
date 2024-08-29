@@ -531,3 +531,10 @@ h6 {
     }
   }
 }
+
+.docusaurus-openrpc {
+  article {
+    @extend .markdown;
+    max-width: 80rem;
+  }
+}
