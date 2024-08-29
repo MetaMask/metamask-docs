@@ -44,6 +44,10 @@
 
 .paramItemWrapper {
   padding: 0 1.6rem;
+
+  .borderTopLine {
+    border-top: 1px solid transparent;
+  }
 }
 
 .paramItemWrapper:not(:first-child) {
@@ -52,6 +56,10 @@
 
 .borderTopLine {
   border-top: 1px solid var(--general-gray-light);
+}
+
+.borderTopLine:first-child {
+  border-top: 1px solid transparent;
 }
 
 .borderBottomLine {

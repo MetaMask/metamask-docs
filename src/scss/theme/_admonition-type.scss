@@ -37,12 +37,15 @@
     text-underline-offset: 0.4rem;
   }
 
-  code {
-    @extend .type-heading-xxs;
-    font-family: var(--ifm-heading-font-family);
-    color: var(--ifm-alert-foreground-color);
-    padding: 0.2rem 0.7rem;
-    border-radius: 0.4rem;
+  p,
+  ul {
+    code {
+      @extend .type-heading-xxs;
+      font-family: var(--ifm-heading-font-family);
+      color: var(--ifm-alert-foreground-color);
+      padding: 0.2rem 0.7rem;
+      border-radius: 0.4rem;
+    }
   }
 
   &--secondary {
