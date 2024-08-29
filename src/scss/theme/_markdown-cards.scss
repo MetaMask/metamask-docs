@@ -35,8 +35,14 @@ svg {
     height: 100%;
     text-decoration: none;
     color: var(--general-black);
-    clip-path: polygon(0% 7%, 5.5% 0%, 100% 0, 100% 93.5%, 95% 100%, 0 100%);
-    aspect-ratio: 1;
+    clip-path: polygon(
+      0 2.2rem,
+      2.2rem 0,
+      100% 0,
+      100% calc(100% - 2.2rem),
+      calc(100% - 2.2rem) 100%,
+      0 100%
+    );
 
     &::before {
       position: absolute;
