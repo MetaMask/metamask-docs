@@ -1,12 +1,12 @@
 [class*='admonition'].alert {
-  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
-  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
+  margin: 0;
 }
 
 .alert {
   padding: 4rem;
   border-radius: 0;
   color: var(--general-black);
+  box-shadow: none;
 
   [class*='admonitionHeading'] {
     @extend .type-heading-xxs;

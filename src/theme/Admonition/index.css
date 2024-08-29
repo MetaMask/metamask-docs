@@ -4,3 +4,8 @@
   --ifm-alert-foreground-color: var(--mm-flask-color);
   --ifm-alert-border-color: var(--mm-flask-border-color);
 }
+
+.alert-wrapper {
+  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
+}
