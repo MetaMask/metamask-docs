@@ -234,6 +234,7 @@
   /* Markdown: Tables */
   --ifm-table-border-color: var(--general-black-light);
   --ifm-table-head-background: var(--general-black-mid);
+  --ifm-table-stripe-background: var(--general-black-light) !important;
 }
 
 body {

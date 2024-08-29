@@ -109,6 +109,36 @@
       padding: 1.2rem;
     }
   }
+
+  details {
+    @extend .type-paragraph-m;
+    box-shadow: none;
+    padding: 1.2rem;
+    background-color: var(--ifm-table-head-background);
+    border: 1px solid var(--ifm-table-border-color);
+    color: var(--ifm-heading-color) !important;
+
+    .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+      border-top: 1px solid var(--ifm-table-border-color);
+    }
+
+    code {
+      @extend .type-paragraph-s;
+      color: var(--ifm-heading-color) !important;
+    }
+
+    table tr:nth-child(2n) {
+      background-color: var(--ifm-table-stripe-background);
+    }
+  }
+
+  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module
+    > summary::before {
+    top: 0.7rem;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--ifm-heading-color);
+  }
 }
 
 /* To be deleted */
