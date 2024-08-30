@@ -21,7 +21,7 @@ import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/Interacti
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { LoginContext } from "@site/src/theme/Root";

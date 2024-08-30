@@ -6,10 +6,10 @@
   --navbarWallet-color: #141618;
 }
 
-:global([class*="navbarSearchContainer"]){
+:global([class*="navbarSearchContainer"]) {
   @media (max-width: 996px) {
-      position: relative !important;
-      right: 0 !important;
+    position: relative !important;
+    right: 0 !important;
   }
 }
 
@@ -96,9 +96,13 @@
         width: 100%;
 
         .icon {
-          margin-right: 8px
+          margin-right: 8px;
         }
       }
     }
   }
+}
+
+.tooltip {
+  font-size: 14px !important;
 }
