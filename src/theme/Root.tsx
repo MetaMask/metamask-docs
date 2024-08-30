@@ -19,6 +19,7 @@ import {
   AUTH_WALLET_PROJECTS,
   getTokenString,
   getUksTier,
+  clearStorage,
   getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
@@ -98,7 +99,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
       );
       setUserId(getUserIdFromJwtToken());
       setToken(getTokenString());
@@ -197,7 +198,7 @@ export const LoginProvider = ({ children }) => {
       setAccount(undefined);
       setUksTier(undefined);
       setProjects({});
-      sessionStorage.clear();
+      clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -233,6 +234,7 @@ export const LoginProvider = ({ children }) => {
 
           <AuthModal
             open={openAuthModal}
+            metaMaskDisconnect={metaMaskDisconnect}
             setOpen={setOpenAuthModal}
             setProjects={setProjects}
             setUser={setUserId}

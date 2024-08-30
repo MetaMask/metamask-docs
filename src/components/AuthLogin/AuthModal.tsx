@@ -25,6 +25,7 @@ type AuthModalProps = {
   step: AUTH_LOGIN_STEP;
   setStep: (arg: AUTH_LOGIN_STEP) => void;
   setUksTier: (arg: string) => void;
+  metaMaskDisconnect: () => void;
 };
 
 export enum AUTH_LOGIN_STEP {
@@ -67,10 +68,16 @@ const ConnectingModal = () => {
 const ConnectionErrorModal = ({
   setOpen,
   login,
+  metaMaskDisconnect,
 }: {
   setOpen: (arg: boolean) => void;
   login: () => void;
+  metaMaskDisconnect: () => void;
 }) => {
+  const handleCancel = () => {
+    metaMaskDisconnect();
+    setOpen(false);
+  };
   return (
     <>
       <div className={styles.spinnerContainer}>
@@ -88,7 +95,7 @@ const ConnectionErrorModal = ({
         <button
           style={{ flex: "1", display: "block", margin: "0 5px" }}
           className={global.secondaryBtn}
-          onClick={() => setOpen(false)}
+          onClick={handleCancel}
         >
           Cancel
         </button>
@@ -113,6 +120,7 @@ const AuthModal = ({
   setUser,
   setToken,
   setUksTier,
+  metaMaskDisconnect,
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
@@ -236,7 +244,7 @@ const AuthModal = ({
     <Modal
       isOpen={open}
       onRequestClose={() => setOpen(false)}
-      contentLabel="Example Modal"
+      contentLabel="Connect Wallet"
       className={styles.modalWrapper}
       overlayClassName={styles.modalOverlay}
     >
@@ -250,7 +258,11 @@ const AuthModal = ({
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
         {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
-          <ConnectionErrorModal setOpen={setOpen} login={login} />
+          <ConnectionErrorModal
+            setOpen={setOpen}
+            login={login}
+            metaMaskDisconnect={metaMaskDisconnect}
+          />
         ) : null}
       </div>
     </Modal>
