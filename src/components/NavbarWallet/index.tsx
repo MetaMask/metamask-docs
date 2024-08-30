@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, useContext } from "react";
+import React, { useEffect, useState, useRef, FC, useContext } from "react";
 import ldClient from "launchdarkly";
 import clsx from "clsx";
 import Button from "@site/src/components/Button";
@@ -7,6 +7,7 @@ import DisconnectIcon from "./disconnect.svg";
 import { LoginContext } from "@site/src/theme/Root";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
+import { Tooltip } from "@site/src/components/Tooltip";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
@@ -21,10 +22,15 @@ const NavbarWalletComponent: FC = ({
     return null;
   }
 
+  const COPY_TEXT = "Copy to clipboard";
+  const COPIED_TEXT = "Copied!";
   const { account, sdk, metaMaskConnectHandler, metaMaskDisconnect } =
     useContext(LoginContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
   const isExtensionActive = sdk.isExtensionActive();
+  const dialogRef = useRef<HTMLUListElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
@@ -32,7 +38,31 @@ const NavbarWalletComponent: FC = ({
 
   const handleCopy = () => {
     navigator.clipboard.writeText(account);
+    setCopyMessage(COPIED_TEXT);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dialogRef.current &&
+      !dialogRef.current.contains(event.target as HTMLElement) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as HTMLElement)
+    ) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (dropdownOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   const handleDisconnect = () => {
     metaMaskDisconnect()
@@ -49,7 +79,7 @@ const NavbarWalletComponent: FC = ({
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
-      <button className={styles.cta} onClick={toggleDropdown}>
+      <button ref={buttonRef} className={styles.cta} onClick={toggleDropdown}>
         <img
           src="/img/icons/jazzicon.png"
           className={clsx(styles.avatar, dropdownOpen && styles.active)}
@@ -57,7 +87,7 @@ const NavbarWalletComponent: FC = ({
         />
       </button>
       {dropdownOpen && (
-        <ul className={styles.dropdown}>
+        <ul ref={dialogRef} className={styles.dropdown}>
           <li className={styles.item}>
             <img
               src="/img/icons/jazzicon.png"
@@ -68,7 +98,15 @@ const NavbarWalletComponent: FC = ({
               className={styles.walletId}
             >{`${account.slice(0, 7)}...${account.slice(-5)}`}</span>
             <button className={styles.copyButton} onClick={handleCopy}>
-              <CopyIcon />
+              <Tooltip
+                message={copyMessage}
+                className={styles.tooltip}
+                onHidden={() => {
+                  setCopyMessage(COPY_TEXT);
+                }}
+              >
+                <CopyIcon />
+              </Tooltip>
             </button>
           </li>
           <li className={styles.item}>

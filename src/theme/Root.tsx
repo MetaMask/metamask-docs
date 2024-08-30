@@ -98,7 +98,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
       );
       setUserId(getUserIdFromJwtToken());
       setToken(getTokenString());
