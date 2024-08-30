@@ -116,7 +116,7 @@ const NavbarWalletComponent: FC = ({
               onClick={handleDisconnect}
               className={styles.disconnect}
             >
-              <span>
+              <span className={styles.content}>
                 <DisconnectIcon className={styles.icon} />{" "}
                 <span>Disconnect Wallet</span>
               </span>

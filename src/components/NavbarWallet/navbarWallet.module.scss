@@ -95,8 +95,13 @@
       .disconnect {
         width: 100%;
 
-        .icon {
-          margin-right: 8px;
+        .content {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            margin-right: 8px;
+          }
         }
       }
     }
