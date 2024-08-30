@@ -85,7 +85,7 @@ const ConnectionErrorModal = ({
         There was an issue connecting your wallet
       </div>
       <div className={styles.content}>
-        Please try again or <a href="#">contact us</a>.
+        Please try again or <a href="https://support.metamask.io/">contact us</a>.
       </div>
       <div className={styles.flexButton}>
         <button
@@ -221,10 +221,17 @@ const AuthModal = ({
     }
   }, [open]);
 
+  const handleClose = () => {
+    if (step === AUTH_LOGIN_STEP.CONNECTION_ERROR) {
+      metaMaskDisconnect();
+    }
+    setOpen(false);
+  };
+
   return (
     <Modal
       isOpen={open}
-      onRequestClose={() => setOpen(false)}
+      onRequestClose={handleClose}
       contentLabel="Connect Wallet"
       className={styles.modalWrapper}
       overlayClassName={styles.modalOverlay}
@@ -233,7 +240,7 @@ const AuthModal = ({
         <button
           type="button"
           className={styles.modalClose}
-          onClick={() => setOpen(false)}
+          onClick={handleClose}
         >
           <Icon name="close" classes={styles.modalClose} />
         </button>
