@@ -45,16 +45,14 @@
 
   > ol {
     list-style: decimal;
-    list-style-position: inside;
+    margin-left: 2rem;
 
     li {
-      margin-left: 0;
       margin-bottom: 1rem;
     }
   }
 
   > ol ol {
-    list-style-position: inside;
     margin-top: 1rem;
 
     li {
@@ -64,21 +62,12 @@
   }
 
   > ul {
-    margin-left: 1rem;
-    list-style-type: none;
+    margin-left: 2rem;
+    list-style-type: disc;
+    list-style-position: outside;
 
     li {
       margin-bottom: 1rem;
-
-      &::before {
-        content: '\2022';
-        font-size: 3rem;
-        padding-right: 0.6rem;
-        position: relative;
-        top: 0.1rem;
-        line-height: 0;
-      }
-
       ol,
       ul {
         margin-top: 1rem;
@@ -86,9 +75,23 @@
     }
   }
 
+  ul ul {
+    list-style-type: circle;
+    margin-left: 1.6rem;
+  }
+
+  ul ul ul {
+    list-style-type: square;
+  }
+
   code {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  p
+    + .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module {
+    margin-top: 1rem;
   }
 
   p > code,
