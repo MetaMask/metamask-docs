@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Modal from "react-modal";
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
@@ -22,6 +22,7 @@ type AuthModalProps = {
   setUser: (arg: string) => void;
   step: AUTH_LOGIN_STEP;
   setStep: (arg: AUTH_LOGIN_STEP) => void;
+  metaMaskDisconnect: () => void;
 };
 
 export enum AUTH_LOGIN_STEP {
@@ -64,10 +65,16 @@ const ConnectingModal = () => {
 const ConnectionErrorModal = ({
   setOpen,
   login,
+  metaMaskDisconnect,
 }: {
   setOpen: (arg: boolean) => void;
   login: () => void;
+  metaMaskDisconnect: () => void;
 }) => {
+  const handleCancel = () => {
+    metaMaskDisconnect();
+    setOpen(false);
+  };
   return (
     <>
       <div className={styles.spinnerContainer}>
@@ -84,7 +91,7 @@ const ConnectionErrorModal = ({
         <button
           style={{ flex: "1", display: "block", margin: "0 5px" }}
           className={global.secondaryBtn}
-          onClick={() => setOpen(false)}
+          onClick={handleCancel}
         >
           Cancel
         </button>
@@ -106,96 +113,99 @@ const AuthModal = ({
   setProjects,
   step,
   setStep,
+  metaMaskDisconnect,
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
   const login = async () => {
-    setStep(AUTH_LOGIN_STEP.CONNECTING)
+    setStep(AUTH_LOGIN_STEP.CONNECTING);
     try {
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
-    // Hydra Access Token will be used to fetch Infura API
-    const { accessToken, userProfile } = await authenticateAndAuthorize();
+      // Hydra Access Token will be used to fetch Infura API
+      const { accessToken, userProfile } = await authenticateAndAuthorize();
 
-    // Check on Infura API if this wallet is paired with one or multiple Infura account
-    const pairingResponse = await fetch(`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/pairing`, {
-      ...REQUEST_PARAMS(),
-      headers: {
-        ...REQUEST_PARAMS().headers,
-        hydra_token: accessToken,
-      },
-      body: JSON.stringify({
-        profileId: userProfile.profileId,
-      }),
-    });
-
-    const usersPairing = await pairingResponse.json();
-    const { data } = usersPairing;
-    // Saving of paired Infura accounts in local storage
-    localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
-
-    // Handling no wallet pairing or multiple pairing
-    if (data.length !== 1) {
-      const mm_auth = Buffer.from(
-        JSON.stringify({
-          token: true,
-          step:
-            data.length > 1
-              ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER
-              : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
-          mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
-          walletPairing: data,
-        })
-      ).toString("base64");
-      window.location.href = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
-      return;
-    }
-
-    // We have one wallet paired with one Infura account
-    // Use this Infura email account and this ProfileId to login to Infura
-    // Pass token in request params to generate and recieve an Infura access Token
-    const email = data[0].email as string;
-    const userWithTokenResponse = await fetch(
-      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login?token=true`,
-      {
-        ...REQUEST_PARAMS(),
-        headers: {
-          ...REQUEST_PARAMS().headers,
-          hydra_token: accessToken,
-          recaptcha_bypass: "84450394",
+      // Check on Infura API if this wallet is paired with one or multiple Infura account
+      const pairingResponse = await fetch(
+        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/pairing`,
+        {
+          ...REQUEST_PARAMS(),
+          headers: {
+            ...REQUEST_PARAMS().headers,
+            hydra_token: accessToken,
+          },
+          body: JSON.stringify({
+            profileId: userProfile.profileId,
+          }),
         },
-        body: JSON.stringify({
-          email,
-          profileId: userProfile.profileId,
-        }),
+      );
+
+      const usersPairing = await pairingResponse.json();
+      const { data } = usersPairing;
+      // Saving of paired Infura accounts in local storage
+      localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
+
+      // Handling no wallet pairing or multiple pairing
+      if (data.length !== 1) {
+        const mm_auth = Buffer.from(
+          JSON.stringify({
+            token: true,
+            step:
+              data.length > 1
+                ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER
+                : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
+            mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
+            walletPairing: data,
+          }),
+        ).toString("base64");
+        window.location.href = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
+        return;
       }
-    );
 
-    const { token } = await userWithTokenResponse.json();
-    saveTokenString(token);
-    const userId = getUserIdFromJwtToken();
-
-    // You can use Infura Access Token to fetch any Infura API endpoint
-    const projectsResponse = await fetch(
-      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
-      {
-        ...REQUEST_PARAMS("GET"),
-        headers: {
-          ...REQUEST_PARAMS("GET").headers,
-          Authorization: `Bearer ${token}`,
+      // We have one wallet paired with one Infura account
+      // Use this Infura email account and this ProfileId to login to Infura
+      // Pass token in request params to generate and recieve an Infura access Token
+      const email = data[0].email as string;
+      const userWithTokenResponse = await fetch(
+        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login?token=true`,
+        {
+          ...REQUEST_PARAMS(),
+          headers: {
+            ...REQUEST_PARAMS().headers,
+            hydra_token: accessToken,
+            recaptcha_bypass: "84450394",
+          },
+          body: JSON.stringify({
+            email,
+            profileId: userProfile.profileId,
+          }),
         },
-      }
-    );
-    const {
-      result: { projects },
-    } = await projectsResponse.json();
-    sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects));
-    setProjects(projects);
-    setOpen(false);
+      );
 
+      const { token } = await userWithTokenResponse.json();
+      saveTokenString(token);
+      const userId = getUserIdFromJwtToken();
+
+      // You can use Infura Access Token to fetch any Infura API endpoint
+      const projectsResponse = await fetch(
+        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
+        {
+          ...REQUEST_PARAMS("GET"),
+          headers: {
+            ...REQUEST_PARAMS("GET").headers,
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      const {
+        result: { projects },
+      } = await projectsResponse.json();
+      sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects));
+      setProjects(projects);
+      setOpen(false);
     } catch (e: any) {
-      setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
-      setOpen(true)
+      setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+      setOpen(true);
     }
   };
 
@@ -215,7 +225,7 @@ const AuthModal = ({
     <Modal
       isOpen={open}
       onRequestClose={() => setOpen(false)}
-      contentLabel="Example Modal"
+      contentLabel="Connect Wallet"
       className={styles.modalWrapper}
       overlayClassName={styles.modalOverlay}
     >
@@ -229,7 +239,11 @@ const AuthModal = ({
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
         {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
-          <ConnectionErrorModal setOpen={setOpen} login={login} />
+          <ConnectionErrorModal
+            setOpen={setOpen}
+            login={login}
+            metaMaskDisconnect={metaMaskDisconnect}
+          />
         ) : null}
       </div>
     </Modal>

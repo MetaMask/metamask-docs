@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Provider as AlertProvider } from "react-alert";
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
@@ -17,6 +17,7 @@ import {
 } from "@site/src/lib/constants";
 import {
   AUTH_WALLET_PROJECTS,
+  clearStorage,
   getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
@@ -81,7 +82,7 @@ export const LoginProvider = ({ children }) => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -90,7 +91,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
       );
       setUserId(getUserIdFromJwtToken());
       const accounts = await sdk.connect();
@@ -131,7 +132,7 @@ export const LoginProvider = ({ children }) => {
                   ...REQUEST_PARAMS("GET").headers,
                   Authorization: `Bearer ${token}`,
                 },
-              }
+              },
             );
             const res = await projectsResponse.json();
             if (res.error) throw new Error(res.error.message);
@@ -141,7 +142,7 @@ export const LoginProvider = ({ children }) => {
             } = res;
             sessionStorage.setItem(
               AUTH_WALLET_PROJECTS,
-              JSON.stringify(projects)
+              JSON.stringify(projects),
             );
             setProjects(projects);
             window.location.replace(`${url.origin}${url.pathname}`);
@@ -188,7 +189,7 @@ export const LoginProvider = ({ children }) => {
       setUserId(undefined);
       setAccount(undefined);
       setProjects({});
-      sessionStorage.clear();
+      clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -214,6 +215,7 @@ export const LoginProvider = ({ children }) => {
 
           <AuthModal
             open={openAuthModal}
+            metaMaskDisconnect={metaMaskDisconnect}
             setOpen={setOpenAuthModal}
             setProjects={setProjects}
             setUser={setUserId}
