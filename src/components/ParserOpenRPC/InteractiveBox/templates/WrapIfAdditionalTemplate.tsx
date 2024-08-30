@@ -3,6 +3,7 @@ import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils';
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import  * as isObject  from "lodash.isobject"
+import { ObjectFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate";
 
 export const WrapIfAdditionalTemplate = (props) => {
   const {

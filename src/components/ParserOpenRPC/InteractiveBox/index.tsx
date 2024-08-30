@@ -241,7 +241,10 @@ export default function InteractiveBox({
           setCurrentSchemaId,
           objectPropertyBeforeEdit,
           setObjectPropertyBeforeEdit,
-          setObjectValueBeforeEdit
+          setObjectValueBeforeEdit,
+          currentFormData,
+          setCurrentFormData,
+          onParamChange
         }}
         validator={validator}
         liveValidate
