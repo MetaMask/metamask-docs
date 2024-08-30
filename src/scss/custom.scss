@@ -48,7 +48,7 @@
   --ifm-link-hover-color: var(--ifm-color-primary-dark);
 
   /* Sidebar */
-  --doc-sidebar-width: 35.8rem !important;
+  --doc-sidebar-width: auto !important;
   --ifm-hover-overlay: var(--general-gray-light);
   --ifm-menu-color-active: var(--general-black);
   --ifm-menu-color: var(--general-gray-dark);
@@ -148,6 +148,7 @@
 
   @include bp('desktop') {
     --ifm-global-spacing: #{$grid-gutter-width-desktop};
+    --doc-sidebar-width: 35.8rem !important;
   }
 }
 

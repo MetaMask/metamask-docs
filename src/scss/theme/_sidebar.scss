@@ -118,6 +118,12 @@
   }
 }
 
+.theme-doc-sidebar-container {
+  @include bp-max('desktop') {
+    border-right: none !important;
+  }
+}
+
 .navbar-sidebar {
   @include bp-max('tablet') {
     &__brand {
