@@ -91,6 +91,16 @@
     padding-right: 0.5rem;
   }
 
+  p > code,
+  ul li > code,
+  ol li > code,
+  a > code,
+  table > code,
+  span > code {
+    @extend .font-mm-sans-mono;
+    font-size: 80%;
+  }
+
   table {
     font-size: 1.6rem;
     line-height: 150%;
