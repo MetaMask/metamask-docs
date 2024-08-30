@@ -41,6 +41,33 @@ interface InteractiveBoxProps {
   isOpen?: boolean;
 }
 
+type ObjectType = { [key: string]: any };
+type KeyOrderType = { name: string };
+
+function sortObjectKeysByArray(obj: ObjectType, orderArray: KeyOrderType[]): ObjectType {
+  const result: ObjectType = {};
+  for (const { name } of orderArray) {
+      if (name in obj) {
+          result[name] = obj[name];
+      }
+  }
+  return result;
+}
+
+function removeEmptyArrays<T extends Record<string, any>>(obj: T): T {
+  const newObj = JSON.parse(JSON.stringify(obj));
+  for (const key in newObj) {
+      if (newObj.hasOwnProperty(key)) {
+          if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
+              delete newObj[key];
+          } else if (newObj[key] !== null && typeof newObj[key] === "object") {
+              newObj[key] = removeEmptyArrays(newObj[key]);
+          }
+      }
+  }
+  return newObj;
+}
+
 export default function InteractiveBox({
   params,
   components,
@@ -164,9 +191,10 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
+    const validData = removeEmptyArrays(data);
     if (isOpen) {
-      setCurrentFormData({...data});
-      onParamChange({...data});
+      setCurrentFormData(validData);
+      onParamChange(validData);
     }
   };
 
@@ -250,7 +278,8 @@ export default function InteractiveBox({
         liveValidate
         noHtml5Validate
         onChange={(data) => {
-          onChangeHandler(data.formData);
+          const orderData = sortObjectKeysByArray(data.formData, params);
+          onChangeHandler(orderData);
         }}
         templates={templates}
         uiSchema={uiSchema}
