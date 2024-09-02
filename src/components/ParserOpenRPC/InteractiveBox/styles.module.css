@@ -6,7 +6,7 @@
   --modal-footer-bg: #24272a;
 }
 
-[data-theme="light"] {
+:root[data-theme="light"] {
   --param-item-bg: #F2F4F6;
   --param-item-color: #141618;
   --param-item-border-color: #BBC0C5;
