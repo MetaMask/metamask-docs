@@ -177,6 +177,7 @@ const config = {
       },
     ],
   ],
+  clientModules: [require.resolve("./src/client/scroll-fix.js")],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
