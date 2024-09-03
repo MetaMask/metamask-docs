@@ -30,6 +30,7 @@ export enum AUTH_LOGIN_STEP {
   WALLET_LOGIN_MULTI_USER = "wallet-login-multi-user",
   WALLET_LOGIN_EMAIL_PASSWORD = "wallet-login-email-password",
   CONNECTION_ERROR = "connection-error",
+  CONNECTION_SUCCESS = "connection-success",
 }
 
 const ConnectingModal = () => {
@@ -58,6 +59,19 @@ const ConnectingModal = () => {
       >
         Connecting...
       </button>
+    </>
+  );
+};
+
+const ConnectionSuccessModal = () => {
+  return (
+    <>
+      <div className={styles.spinnerContainer}>
+        <Icon name="spinner-success" classes={styles.spinner} />
+        <Icon name="metamask" classes={styles.metamask} />
+      </div>
+      <div className={styles.heading}>Wallet Connected!</div>
+      <div className={styles.content}>Your wallet is successfully connected.<br/>You’re all set!</div>
     </>
   );
 };
@@ -184,6 +198,7 @@ const AuthModal = ({
 
       const { token } = await userWithTokenResponse.json();
       saveTokenString(token);
+      setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
       const userId = getUserIdFromJwtToken();
 
       // You can use Infura Access Token to fetch any Infura API endpoint
@@ -219,6 +234,8 @@ const AuthModal = ({
         }
       })();
     }
+
+    if(!open) setStep(AUTH_LOGIN_STEP.CONNECTING)
   }, [open]);
 
   const handleClose = () => {
@@ -245,6 +262,7 @@ const AuthModal = ({
           <Icon name="close" classes={styles.modalClose} />
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
+        {step === AUTH_LOGIN_STEP.CONNECTION_SUCCESS ? <ConnectionSuccessModal /> : null}
         {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
           <ConnectionErrorModal
             setOpen={setOpen}
