@@ -1,6 +1,5 @@
 export function onRouteDidUpdate({ location, previousLocation }) {
   function handleScroll() {
-    console.log('handleScroll')
     const items = document.querySelectorAll('.menu__link--active')
     if (items?.length === 0) return
 
@@ -10,7 +9,6 @@ export function onRouteDidUpdate({ location, previousLocation }) {
       bounding.top >= 0 &&
       bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     if (!isVisible) {
-      console.log('!isVisible')
       item.scrollIntoView({ block: 'start', inline: 'nearest' })
       window.scrollTo(0, 0)
     }
