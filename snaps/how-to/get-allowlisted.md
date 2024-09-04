@@ -22,38 +22,40 @@ Always do your own research before installing a Snap.
 
 ## Prerequisites
 
-To be added to the allowlist, a Snap must:
+- Ensure you have filled out the [Snap Builders Onboarding Form](https://feedback.metamask.io/snaps-onboarding).
 
-- Have publicly available source code.
-  You don't need to publish your code with an open source license, but users should be able to read
-  the source code of the Snap package.
-- Be [published](publish-a-snap.md) to npm.
-- Not impair our compliance with laws or regulations.
+- Ensure that your Snap:
 
-Furthermore, if your Snap uses any of the following API methods related to key management, you must provide
-evidence of a third-party audit from an approved auditor:
+  - Has publicly available source code.
+    You don't need to publish your code with an open source license, but users should be able to read
+    the source code of the Snap package.
+  - Is [published](publish-a-snap.md) to npm.
+  - Does not impair MetaMask's compliance with laws or regulations.
 
-- [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
-- [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
-- [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy)
-- [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
-- [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
+- If your Snap uses any of the following API methods related to key management, you must provide
+  evidence of a third-party audit from an approved auditor:
 
-The audit must cover the Snap source code that is to run within the Snaps system, and any modules
-used for key management.
-You must provide the commit that was audited and the commit that has any fixes documented in the
-audit report.
+  - [`snap_getBip32Entropy`](../reference/snaps-api.md#snap_getbip32entropy)
+  - [`snap_getBip32PublicKey`](../reference/snaps-api.md#snap_getbip32publickey)
+  - [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy)
+  - [`snap_getEntropy`](../reference/snaps-api.md#snap_getentropy)
+  - [`snap_manageAccounts`](../reference/snaps-api.md#snap_manageaccounts)
 
-:::info
-A list of approved third-party auditors and details about the audit process are available on the
-[MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
-:::
+  The audit must cover the Snap source code that is to run within the Snaps system, and any modules
+  used for key management.
+  You must provide the commit that was audited and the commit that has any fixes documented in the
+  audit report.
+
+  :::info
+  A list of approved third-party auditors and details about the audit process are available on the
+  [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
+  :::
 
 ## Steps
 
 ### 1. Submit your Snap
 
-Fill out both the [Metamask Snaps onboarding form](https://feedback.metamask.io/snaps-onboarding) and the [MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
+Fill out the [MetaMask Snaps Directory Information form](https://go.metamask.io/snaps-directory-request).
 The form requests information about your Snap, including the following:
 
 - **Snap name** - The name of your Snap.
