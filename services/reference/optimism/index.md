@@ -20,9 +20,9 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 :::info see also
 
 - For more information on the Optimism network, please see the
-  [official Optimism developer documentation](https://community.optimism.io/docs/developers/).
-- Developers should be aware of some
-  [important differences between the behavior of Ethereum and Optimism](https://community.optimism.io/docs/developers/build/differences/).
+  [official Optimism developer documentation](https://docs.optimism.io/).
+- See the [differences between the behavior of Ethereum and Optimism](https://docs.optimism.io/stack/differences).
+- See the [JSON-RPC methods specific to Optimism Bedrock](https://docs.optimism.io/builders/node-operators/json-rpc).
 
 :::
 
