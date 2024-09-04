@@ -14,5 +14,5 @@ Avalanche C-Chain uses the Go Ethereum (Geth) API and supports the standard [Eth
 
 :::
 
-Refer to the [Avalanche documentation](https://docs.avax.network/apis/avalanchego/apis/c-chain#methods) for more
+Refer to the [Avalanche documentation](https://docs.avax.network/api-reference/c-chain/api) for more
 information about supported methods.
