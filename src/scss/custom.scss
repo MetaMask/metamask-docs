@@ -148,7 +148,7 @@
 
   @include bp('desktop') {
     --ifm-global-spacing: #{$grid-gutter-width-desktop};
-    --doc-sidebar-width: 35.8rem !important;
+    --doc-sidebar-width: 30rem !important;
   }
 }
 
