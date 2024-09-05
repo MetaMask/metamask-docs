@@ -12,6 +12,5 @@ The following Starknet methods are not supported:
 - `starknet_estimateMessageFee`
 - `starknet_getBlockWithReceipts`
 - `starknet_getTransactionStatus`
-- `starknet_specVersion`
 - `starknet_traceBlockTransactions`
 - `starknet_traceTransaction`

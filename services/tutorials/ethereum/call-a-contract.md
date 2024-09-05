@@ -1,6 +1,6 @@
 ---
 description: Use Web3.js to execute a smart contract function.
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Call a contract

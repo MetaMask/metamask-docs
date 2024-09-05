@@ -1,6 +1,6 @@
 ---
 description: A tutorial for sending ERC-20 tokens.
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Send an ERC-20 token
