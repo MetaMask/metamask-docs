@@ -2,6 +2,14 @@
   margin: 0;
 }
 
+[class*='admonition'] {
+  ul {
+    list-style-position: inside;
+    list-style-type: disc;
+    margin: 1rem 0;
+  }
+}
+
 .alert {
   padding: 4rem;
   border-radius: 0;
