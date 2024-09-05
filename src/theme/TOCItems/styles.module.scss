@@ -1,7 +1,7 @@
 .subtitle {
   display: none;
 
-  @include bp('tablet') {
+  @include bp('desktop') {
     display: block;
     margin-bottom: 1.3rem;
   }
