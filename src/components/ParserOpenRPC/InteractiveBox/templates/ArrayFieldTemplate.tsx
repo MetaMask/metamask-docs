@@ -100,7 +100,7 @@ export const ArrayFieldTemplate = ({
                 >
                   <img
                     src="/img/icons/minus-icon.svg"
-                    alt={`Add ${title}`}
+                    alt={`Remove ${title}`}
                     width="16px"
                     height="16px"
                   />

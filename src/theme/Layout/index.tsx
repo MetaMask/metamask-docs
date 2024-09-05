@@ -9,11 +9,6 @@ import styles from "./styles.module.css";
 
 const REF_FF = "mm-new-reference-enabled";
 const REF_PATH = "/wallet/reference/";
-const EXEPT_METHODS = [
-  "wallet_requestPermissions",
-  "wallet_revokePermissions",
-  "eth_signTypedData_v4",
-];
 
 export default function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -24,7 +19,7 @@ export default function LayoutWrapper({ children }) {
   const [newReferenceEnabled, setNewReferenceEnabled] = useState(false);
 
   const metamaskNetwork = netData?.find(
-    (net) => net.name === NETWORK_NAMES.metamask,
+    (net) => net.name === NETWORK_NAMES.metamask
   );
   const metamaskMethods =
     metamaskNetwork?.data?.methods?.map((item) => item.name) || [];
@@ -34,8 +29,7 @@ export default function LayoutWrapper({ children }) {
     if (currentPath.includes(REF_PATH) && metamaskMethods.length > 0) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
-        (name) =>
-          name.toLowerCase() === methodPath && !EXEPT_METHODS.includes(name),
+        (name) => name.toLowerCase() === methodPath
       );
       return page;
     }

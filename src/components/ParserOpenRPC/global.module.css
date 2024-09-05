@@ -85,7 +85,7 @@
 
 .colLeft {
   position: relative;
-  width: calc(100% - 420px);
+  width: calc(100% - 490px);
   border-right: 1px solid #444950;
   overflow: hidden;
 }
@@ -97,8 +97,17 @@
 }
 
 .colRight {
-  width: 420px;
+  width: 490px;
   padding-left: 23px;
+}
+
+@media (width <= 1440px) {
+  .colLeft {
+    width: calc(100% - 420px);
+  }
+  .colRight {
+    width: 420px;
+  }
 }
 
 @media (width <= 1200px) {
@@ -117,5 +126,14 @@
   }
   .rowWrap {
     padding: 0;
+  }
+}
+
+@media (width <= 996px) {
+  .colLeft {
+    padding-top: 60px;
+  }
+  .colRight {
+    padding-top: 30px;
   }
 }

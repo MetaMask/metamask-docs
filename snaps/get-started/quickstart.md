@@ -189,6 +189,8 @@ You've now successfully connected, installed, interacted with, and customized yo
 
 ## Next steps
 
+- Fill out the [Snap Builders Onboarding Form](https://feedback.metamask.io/snaps-onboarding) to
+  allow the MetaMask Snaps team to engage with you and provide support as you begin to develop your Snap.
 - To learn more about the Snaps system, review [fundamental Snaps concepts](/snaps/learn/about-snaps)
   and try the [Snaps tutorials](/snaps/learn/tutorials).
 - To implement specific features and use cases, see the [Snaps feature guides](/snaps/features).
