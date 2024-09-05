@@ -128,3 +128,12 @@
     padding: 0;
   }
 }
+
+@media (width <= 996px) {
+  .colLeft {
+    padding-top: 60px;
+  }
+  .colRight {
+    padding-top: 30px;
+  }
+}
