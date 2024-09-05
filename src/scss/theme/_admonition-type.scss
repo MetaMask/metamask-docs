@@ -88,16 +88,7 @@
     }
   }
 
-  &--warning {
-    --ifm-alert-background-color-highlight: #3d065f1a;
-
-    a {
-      &:hover {
-        color: var(--consumer-purple) !important;
-      }
-    }
-  }
-
+  &--warning,
   &--danger {
     --ifm-alert-background-color-highlight: #6618001a;
 
@@ -111,7 +102,7 @@
   &.theme-admonition-flaskOnly {
     a {
       &:hover {
-        color: var(--consumer-purple-light) !important;
+        color: var(--consumer-purple-dark) !important;
       }
     }
   }
@@ -145,11 +136,7 @@
       color: var(--consumer-green-light);
     }
 
-    &--warning {
-      --ifm-alert-background-color-highlight: #eac2ff1a;
-      color: var(--consumer-purple-light);
-    }
-
+    &--warning,
     &--danger {
       --ifm-alert-background-color-highlight: #ffa6801a;
       color: var(--consumer-orange-light);

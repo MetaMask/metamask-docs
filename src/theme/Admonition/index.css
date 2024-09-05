@@ -1,5 +1,5 @@
 .alert.theme-admonition-flaskOnly {
-  --ifm-alert-background-color: var(--mm-flask-background-color);
+  --ifm-alert-background-color: var(--ifm-color-warning-contrast-background);
   --ifm-alert-background-color-highlight: var(--mm-flask-color);
   --ifm-alert-foreground-color: var(--mm-flask-color);
   --ifm-alert-border-color: var(--mm-flask-border-color);
