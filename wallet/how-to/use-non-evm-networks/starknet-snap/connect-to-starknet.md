@@ -19,11 +19,11 @@ After set up, the Snap enables secure and efficient interaction with the Starkne
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
 - [Yarn](https://yarnpkg.com/)
+- A JavaScript or TypeScript project set up 
 
-## Create the project
+## Add `get-starknet` to your project
 
-Create a new Snap project using the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
-library by running:
+Add both the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) library and the latest version of the `starknet.js`  library to your project's dependencies:
 
 <Tabs>
   <TabItem value="yarn" label="Yarn" default>
@@ -43,7 +43,6 @@ library by running:
   </TabItem> 
 
 </Tabs>
-
 
 ## Start the Snap
 
