@@ -9,49 +9,68 @@ import YoutubeEmbed from "@site/src/components/YoutubeEmbed";
 
 # Connect your Starknet account to MetaMask
 
-Use `get-starknet` to connect your dapp to a user's Starknetwallet.
-Use the connect function. If a user connects their MetaMask wallet, you can then display their wallet address and other details in your dapp.
+To connect a dapp to MetaMask for StarkNet, you can use `get-starknet`. 
+This tool simplifies the process of integrating Starknet with MetaMask and allows you to connect your wallets and install the necessary Snap.
+After set up, the Snap enables secure and efficient interaction with the Starknet ecosystem.
 
 ## Prerequisites
 
-- [MetaMask Flask installed](install-flask.md)
+- [MetaMask installed](https://metamask.io/download/)
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
-- [Yarn](https://yarnpkg.com/) or [npm]()
+- [Yarn](https://yarnpkg.com/)
 
 ## Create the project
 
 Create a new Snap project using the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap)
 library by running:
 
-```bash
-yarn add get-starknet starknet@next
-```
+<Tabs>
+  <TabItem value="yarn" label="Yarn" default>
 
-or
+  ```bash
+  yarn add get-starknet starknet@next
+  ```
 
-```bash
-npm install get-starknet starknet@next
-```
+  </TabItem>
+
+  <TabItem value="npm" label="npm">
+
+  ```bash
+  npm install get-starknet starknet@next
+  ```
+
+  </TabItem> 
+
+</Tabs>
+
 
 ## Start the Snap
 
-From the root of the newly created project, install the project dependencies using Yarn:
+From the root of the created project, install the project dependencies:
 
-```shell
-yarn start
-```
+<Tabs>
+  <TabItem value="yarn" label="Yarn" default>
 
-or 
+  ```bash
+  yarn start
+  ```
 
-```shell
-yarn start
-```
+  </TabItem>
+
+  <TabItem value="npm" label="npm">
+
+  ```bash
+  npm start
+  ```
+
+  </TabItem> 
+
+</Tabs>
 
 ## Connect to the Snap
 
-On the front-end dapp, select the **Connect** button and the MetaMask Flask extension pops up and
-requires you to approve the Snap's permissions.
+On the  dapp, click **Connect** and the MetaMask extension is displayed and prompts you to approve the Snap's permissions.
 
-Once connected, select the **Send message** button to display a custom message within a confirmation
+Once connected, select **Send message** to display a custom message within a confirmation
 dialog in MetaMask Flask.
