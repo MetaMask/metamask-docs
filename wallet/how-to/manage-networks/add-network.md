@@ -5,12 +5,6 @@ sidebar_position: 2
 
 # Add a network
 
-:::note
-
-You can add a non-EVM network ... (point to docs section)
-
-:::
-
 In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
@@ -36,10 +30,10 @@ The confirmations look like the following:
     </div>
 </div>
 
-:::note
-
-To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
-
+:::info Development and non-EVM networks
+- To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
+- To add a non-EVM network such as [Starknet](../use-non-evm-networks/starknet/index.md) to MetaMask,
+  see [Use non-EVM networks](/wallet/how-to/use-non-evm-networks).
 :::
 
 ## Example

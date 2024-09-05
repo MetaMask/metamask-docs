@@ -5,12 +5,6 @@ sidebar_position: 3
 
 # Access a user's accounts
 
-:::note
-
-You can access a non-EVM network ... (point to docs section)
-
-:::
-
 User accounts are used in a variety of contexts in Ethereum, including as identifiers and for
 [signing transactions](../sign-data/index.md).
 To request a signature from a user or have a user approve a transaction, your dapp can
@@ -29,6 +23,10 @@ When accessing a user's accounts:
   selecting a [connect button](#create-a-connect-button).
 - **Always** disable the connect button while the connection request is pending.
 - **Never** initiate a connection request on page load.
+
+:::note
+You can also access users' accounts on some [non-EVM networks](/wallet/how-to/use-non-evm-networks).
+:::
 
 ## Create a connect button
 

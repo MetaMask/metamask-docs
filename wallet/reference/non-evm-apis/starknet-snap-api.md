@@ -9,8 +9,8 @@ import TabItem from "@theme/TabItem";
 
 # Starknet Snap API
 
-With the [Starknet Snap] installed, dapps can use the Starknet Snap API to interact with users'
-Starknet accounts.
+With the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md) installed, dapps can
+use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
 
 :::note
 You can also communicate with the Starknet network using the
