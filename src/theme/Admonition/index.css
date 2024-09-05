@@ -6,6 +6,11 @@
 }
 
 .alert-wrapper {
-  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
-  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading));
+  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+}
+
+.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module
+  > *:last-child.alert-wrapper {
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
 }
