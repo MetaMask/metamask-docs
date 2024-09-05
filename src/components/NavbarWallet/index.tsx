@@ -8,6 +8,7 @@ import { LoginContext } from "@site/src/theme/Root";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
@@ -34,11 +35,27 @@ const NavbarWalletComponent: FC = ({
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
+    trackClickForSegment({
+      eventName: "Account dropdown",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(account);
     setCopyMessage(COPIED_TEXT);
+    trackClickForSegment({
+      eventName: "Copy wallet address",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -65,21 +82,51 @@ const NavbarWalletComponent: FC = ({
   }, [dropdownOpen]);
 
   const handleDisconnect = () => {
-    metaMaskDisconnect()
-    setDropdownOpen(false)
-  }
+    trackClickForSegment({
+      eventName: "Disconnect account",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    metaMaskDisconnect();
+    setDropdownOpen(false);
+  };
+
+  const handleConnectWallet = () => {
+    trackClickForSegment({
+      eventName: !isExtensionActive ? "Install MetaMask" : "Connect Wallet",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    metaMaskConnectHandler();
+  };
 
   return !account ? (
     <Button
+      testId={
+        !isExtensionActive
+          ? "navbar-cta-install-metamask"
+          : "navbar-cta-connect-wallet"
+      }
       thin
-      onClick={metaMaskConnectHandler}
+      onClick={handleConnectWallet}
       className={styles.navbarButton}
     >
       {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
-      <button ref={buttonRef} className={styles.cta} onClick={toggleDropdown}>
+      <button
+        data-testid="navbar-account-toggle"
+        ref={buttonRef}
+        className={styles.cta}
+        onClick={toggleDropdown}
+      >
         <img
           src="/img/icons/jazzicon.png"
           className={clsx(styles.avatar, dropdownOpen && styles.active)}
@@ -97,7 +144,11 @@ const NavbarWalletComponent: FC = ({
             <span
               className={styles.walletId}
             >{`${account.slice(0, 7)}...${account.slice(-5)}`}</span>
-            <button className={styles.copyButton} onClick={handleCopy}>
+            <button
+              data-testid="navbar-account-copy"
+              className={styles.copyButton}
+              onClick={handleCopy}
+            >
               <Tooltip
                 message={copyMessage}
                 className={styles.tooltip}
@@ -113,6 +164,7 @@ const NavbarWalletComponent: FC = ({
             <Button
               thin
               type="danger"
+              testId="navbar-account-disconnect"
               onClick={handleDisconnect}
               className={styles.disconnect}
             >

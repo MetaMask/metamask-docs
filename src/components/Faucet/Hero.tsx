@@ -7,6 +7,7 @@ import { LoginContext } from "@site/src/theme/Root";
 import EthIcon from "./eth.svg";
 
 import styles from "./hero.module.scss";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface IHero {
   className: string;
@@ -29,6 +30,30 @@ export default function Hero({
 }: IHero) {
   const { account, sdk, metaMaskConnectHandler } = useContext(LoginContext);
   const isExtensionActive = sdk.isExtensionActive();
+
+  const handleConnectWallet = () => {
+    trackClickForSegment({
+      eventName: !isExtensionActive ? "Install MetaMask" : "Connect Wallet",
+      clickType: "Hero",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    metaMaskConnectHandler();
+  };
+
+  const handleRequestEth = () => {
+    trackClickForSegment({
+      eventName: "Request ETH",
+      clickType: "Hero",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    handleRequest();
+  };
 
   return (
     <div
@@ -80,15 +105,24 @@ export default function Hero({
           )}
         >
           {!account ? (
-            <Button className={styles.button} onClick={metaMaskConnectHandler}>
+            <Button
+              testId={
+                !isExtensionActive
+                  ? "hero-cta-install-metamask"
+                  : "hero-cta-connect-wallet"
+              }
+              className={styles.button}
+              onClick={handleConnectWallet}
+            >
               {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
             </Button>
           ) : (
             <Button
+              testId="hero-cta-request-eth"
               isLoading={isLoading}
               disabled={!inputValue}
               className={styles.button}
-              onClick={handleRequest}
+              onClick={handleRequestEth}
             >
               Request ETH
             </Button>

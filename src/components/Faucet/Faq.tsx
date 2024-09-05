@@ -2,6 +2,7 @@ import React from "react";
 import Accordion from "@site/src/components/Accordion";
 import Text from "@site/src/components/Text";
 import styles from "./faq.module.scss";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface IFaq {
   network: "linea" | "sepolia";
@@ -16,6 +17,50 @@ export default function Faq({
   classNameHeading,
   isLimitedUserPlan,
 }: IFaq) {
+  const handleClickContactUs = () => {
+    trackClickForSegment({
+      eventName: "Contact us",
+      clickType: `Link in ${network} FAQ`,
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  };
+
+  const handleClickLinea = () => {
+    trackClickForSegment({
+      eventName: "What is Linea",
+      clickType: `Link in ${network} FAQ`,
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  };
+
+  const handleClickDiscord = () => {
+    trackClickForSegment({
+      eventName: "Consensys Discord",
+      clickType: `Link in ${network} FAQ`,
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  };
+
+  const handleClickBridge = () => {
+    trackClickForSegment({
+      eventName: "Bridge",
+      clickType: `Link in ${network} FAQ`,
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  };
+
   switch (network) {
     case "linea":
       return (
@@ -62,7 +107,12 @@ export default function Faq({
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                <a target="_blank" href="https://linea.build">
+                <a
+                  data-testid="faq-linea-what-is-linea"
+                  onClick={handleClickLinea}
+                  target="_blank"
+                  href="https://linea.build"
+                >
                   Linea
                 </a>{" "}
                 is a type 2 zero knowledge Ethereum Virtual Machine (zkEVM). A
@@ -81,7 +131,12 @@ export default function Faq({
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                <a target="_blank" href="https://support.metamask.io/">
+                <a
+                  data-testid="faq-linea-contact-us"
+                  onClick={handleClickContactUs}
+                  target="_blank"
+                  href="https://support.metamask.io/"
+                >
                   Contact us
                 </a>{" "}
                 with any issues or questions you have relating the faucet.
@@ -96,7 +151,12 @@ export default function Faq({
               <span>
                 Have ideas on how to improve the faucet? Awesome! We’d love to
                 hear them. Submit them{" "}
-                <a target="_blank" href="https://discord.com/invite/consensys">
+                <a
+                  data-testid="faq-linea-discord"
+                  onClick={handleClickDiscord}
+                  target="_blank"
+                  href="https://discord.com/invite/consensys"
+                >
                   here.
                 </a>
               </span>
@@ -111,6 +171,8 @@ export default function Faq({
                 Linea ETH were intially Goerli ETH that were bridged to Linea
                 using the canonical{" "}
                 <a
+                  data-testid="faq-linea-bridge"
+                  onClick={handleClickBridge}
                   target="_blank"
                   href="https://docs.linea.build/use-linea/bridge-funds"
                 >
@@ -167,7 +229,12 @@ export default function Faq({
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                <a target="_blank" href="https://support.metamask.io/">
+                <a
+                  data-testid="faq-sepolia-contact-us"
+                  onClick={handleClickContactUs}
+                  target="_blank"
+                  href="https://support.metamask.io/"
+                >
                   Contact us
                 </a>{" "}
                 with any issues or questions you have relating the faucet.
@@ -182,7 +249,12 @@ export default function Faq({
               <span>
                 Have ideas on how to improve the faucet? Awesome! We’d love to
                 hear them. Submit them{" "}
-                <a target="_blank" href="https://discord.com/invite/consensys">
+                <a
+                  data-testid="faq-sepolia-discord"
+                  onClick={handleClickDiscord}
+                  target="_blank"
+                  href="https://discord.com/invite/consensys"
+                >
                   here.
                 </a>
               </span>

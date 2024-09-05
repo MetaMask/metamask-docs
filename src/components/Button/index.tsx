@@ -5,6 +5,7 @@ import clsx from "clsx";
 import styles from "./button.module.scss";
 
 interface IButton {
+  testId?: string;
   onClick?: VoidFunction;
   children: string | React.ReactElement;
   disabled?: boolean;
@@ -17,6 +18,7 @@ interface IButton {
 }
 
 export const Button = ({
+  testId,
   className,
   onClick = () => {},
   children,
@@ -41,6 +43,7 @@ export const Button = ({
 
   return !href ? (
     <button
+      data-testid={testId}
       className={buttonRootClass}
       onClick={onClick}
       disabled={isLoading || disabled}
@@ -48,7 +51,12 @@ export const Button = ({
       {isLoadingChild}
     </button>
   ) : (
-    <a className={buttonRootClass} href={href} target={target}>
+    <a
+      data-testid={testId}
+      className={buttonRootClass}
+      href={href}
+      target={target}
+    >
       {isLoadingChild}
     </a>
   );

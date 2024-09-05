@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import styles from "./accordion.module.scss";
 import CloseImg from "./close.svg";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface IAccordion {
   children: [React.ReactElement, React.ReactElement];
@@ -14,15 +15,32 @@ export default function Accordion({
 }: IAccordion) {
   const [isOpened, setIsOpened] = useState(opened);
 
-  const handleClose = () => {
+  const handleToggle = () => {
+    trackClickForSegment({
+      eventName: `${isOpened ? "Expanded" : "Collapsed"} - ${title}`,
+      clickType: "Accordion",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
     setIsOpened((value) => !value);
   };
 
   return (
     <div className={styles.accordion}>
-      <div onClick={handleClose} className={styles.header}>
+      <div
+        role="button"
+        data-testid="accordion-title"
+        onClick={handleToggle}
+        className={styles.header}
+      >
         {title}
-        <span role="button" className={styles.closeButton}>
+        <span
+          role="button"
+          data-testid="accordion-button-x"
+          className={styles.closeButton}
+        >
           <CloseImg className={clsx(styles.image, isOpened && styles.opened)} />
         </span>
       </div>

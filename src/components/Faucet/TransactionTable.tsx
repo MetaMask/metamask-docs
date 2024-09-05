@@ -4,6 +4,7 @@ import Badge from "@site/src/components/Badge";
 import Table from "@site/src/components/Table";
 import Text from "@site/src/components/Text";
 import { LINEA_URL, SEPOLIA_URL } from "@site/src/pages/developer-tools/faucet";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 const hideCenterLetters = (word) => {
   if (word.length < 10) return word;
@@ -75,6 +76,17 @@ export default function TransactionTable({
 }: ITransactionTable) {
   if (data?.length === 0) return null;
 
+  const handleClickViewTransaction = () => {
+    trackClickForSegment({
+      eventName: "View on Etherscan",
+      clickType: `Transactions Table`,
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  };
+
   const dataRows = useMemo(() => {
     return data.map((item) => ({
       cells: [
@@ -87,6 +99,8 @@ export default function TransactionTable({
           variant={renderStatus(item.status)}
         />,
         <Link
+          data-testid={`table-transactions-${network}-etherscan`}
+          onClick={handleClickViewTransaction}
           key={`link-${item.id}`}
           to={`${network === "linea" ? LINEA_URL : SEPOLIA_URL}/${item.txnHash}`}
           target="_blank"
