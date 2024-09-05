@@ -2,6 +2,8 @@
   display: grid;
   grid-auto-rows: auto;
   grid-gap: 2rem;
+  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
 
   @include bp('tablet') {
     grid-template-columns: repeat(2, 1fr);
@@ -21,6 +23,7 @@ svg {
   border-radius: 0;
   box-shadow: none;
   background: none;
+  aspect-ratio: 1 / 1;
 
   &__wrapper {
     background-color: var(--ifm-hover-overlay);
