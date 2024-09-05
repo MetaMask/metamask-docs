@@ -1,20 +1,8 @@
 .wrapper {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+  padding-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
   border-bottom: 1px solid var(--general-gray-light);
-  margin-bottom: 3.2rem;
-
-  @include bp('tablet') {
-    padding-top: 3.2rem;
-    padding-bottom: 4.2rem;
-    margin-bottom: 4.2rem;
-  }
-
-  @include bp('desktop') {
-    padding-top: 6.2rem;
-    padding-bottom: 4.8rem;
-    margin-bottom: 4.8rem;
-  }
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
 }
 
 .list {
