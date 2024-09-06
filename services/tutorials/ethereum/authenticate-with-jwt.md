@@ -313,16 +313,16 @@ async function printCurlRequest() {
   const jwtToken = generateJWT();
   console.log("Generated JWT:", jwtToken);
   const curlRequest = `
-curl -X POST ${process.env.INFURA_NETWORK_URL}${process.env.INFURA_API_KEY} \\
--H "Authorization: Bearer ${jwtToken}" \\
--H "Content-Type: application/json" \\
--d '{
-  "jsonrpc": "2.0",
-  "method": "eth_blockNumber",
-  "params": [],
-  "id": 1
-}'
-  `;
+    curl -X POST ${process.env.INFURA_NETWORK_URL}${process.env.INFURA_API_KEY} \\
+    -H "Authorization: Bearer ${jwtToken}" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "eth_blockNumber",
+      "params": [],
+      "id": 1
+    }'
+      `;
   console.log("Equivalent curl request:");
   console.log(curlRequest);
 }
