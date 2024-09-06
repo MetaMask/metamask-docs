@@ -10,7 +10,7 @@ specific network and method being used.
 
 :::caution important
 
-Requests for [archive data](../../networks/ethereum/concepts/archive-data.md) (older than 128 blocks)
+Requests for [archive data](../../concepts/archive-data.md) (older than 128 blocks)
 currently cost the same as non-archive data, but this might change in the near future.
 :::
 

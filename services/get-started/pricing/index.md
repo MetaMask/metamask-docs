@@ -31,15 +31,15 @@ View the [credit cost table](./credit-cost.md) for a breakdown of the cost for e
 Depending on the type of requests, the credit pricing model might have unique ways of counting
 credits toward your daily credit quota:
 
-- [**WebSocket streaming**](../websockets.md#pricing): Subscribing and unsubscribing to events consume credits from your
+- [**WebSocket streaming**](../../concepts/websockets.md#pricing): Subscribing and unsubscribing to events consume credits from your
     daily quota. Each event received through a WebSocket connection also
     [consumes credits based on the event type](./credit-cost.md#subscription-events).
     WebSocket connections are severed once you reach your daily credit limit.
 
-- [**Batch requests**](../../networks/ethereum/how-to/make-batch-requests.md): Each individual RPC call
+- [**Batch requests**](../../how-to/make-batch-requests.md): Each individual RPC call
     within a batch call consumes credits (including the batch call itself).
 
-- [**Archive requests**](../../networks/ethereum/concepts/archive-data.md): Accessing archive data (older than 128 blocks)
+- [**Archive requests**](../../concepts/archive-data.md): Accessing archive data (older than 128 blocks)
     currently consumes the same amount of credits as non-archive data, however, this might change in the future.
 
 ## Infura plans

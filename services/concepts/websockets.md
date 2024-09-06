@@ -71,7 +71,7 @@ Create stateful subscriptions over WebSockets to listen to specific events. Exam
 
 ## Pricing
 
-For users on [Infura's credit pricing plan](./pricing/), subscribing and unsubscribing to
+For users on [Infura's credit pricing plan](../get-started/pricing/index.md), subscribing and unsubscribing to
 events using the `eth_subscribe` and `eth_unsubscribe` methods consume credits from your daily quota.
 Credits are consumed for these actions to prevent spamming, even if no valuable data is sent.
 

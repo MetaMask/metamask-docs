@@ -202,7 +202,7 @@ Select **View Stats** or **stats** to monitor your project request stats.
 
 From the Stats page of the Infura dashboard, you can view real-time statistics about your API usage.
 Optimize your app and better understand your users by
-[reviewing your API request stats](../dashboard/dashboard-stats.md) regularly.
+[reviewing your API request stats](/developer-tools/dashboard/how-to/dashboard-stats) regularly.
 
 <div class="left-align-container">
   <div class="img-large">
@@ -215,7 +215,7 @@ Optimize your app and better understand your users by
 ## 6. View your credit usage
 
 The Infura dashboard provides an overview of your daily credit usage. Select **View Usage**
-for a [wider view of your credit usage](../dashboard/credit-usage.md).
+for a [wider view of your credit usage](/developer-tools/dashboard/how-to/credit-usage).
 
 :::info
 
