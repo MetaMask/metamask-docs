@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## September 2024
+
+- Documented [Infura's credit pricing model](/services/get-started/pricing). ([#1530](https://github.com/MetaMask/metamask-docs/pull/1530))
+
 ## August 2024
 
 - Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
