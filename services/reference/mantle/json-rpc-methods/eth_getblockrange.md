@@ -46,7 +46,7 @@ Array of block objects:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -64,7 +64,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getBlockRange", "params": ["0x1", "0x2", false], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBlockRange", "params": ["0x1", "0x2", false], "id": 1}'
 ```
 
   </TabItem>

@@ -44,7 +44,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Javascript file and copy the following code:
 
-   Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     import fetch from 'node-fetch';
@@ -86,7 +86,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     ```
 
 1. Create your Javascript file and copy the following code:
-   Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     const axios = require("axios);
@@ -121,7 +121,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    
 1. Create your Javascript file and copy the following code:
 
-   Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     const ethers = require("ethers");
@@ -151,7 +151,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Python file and copy the following code:
 
-   Replace `YOUR-API-KEY` with your actual Infura API key.
+   Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```python title="index.py"
     import requests
