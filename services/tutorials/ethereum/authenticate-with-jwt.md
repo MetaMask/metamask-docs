@@ -56,7 +56,7 @@ npm install axios jsonwebtoken dotenv
 Generate your private key using the RSA (PKCS #8) or ES256 algorithm:
 
 <Tabs>
-	<TabItem value="RSA" default>
+  <TabItem value="RSA" default>
 
 ```bash
 openssl genpkey                 \
@@ -85,7 +85,7 @@ openssl ecparam    \
 Generate your public key from your RSA or ES256 private key:
 
 <Tabs>
-	<TabItem value="RSA" default>
+  <TabItem value="RSA" default>
 
 ```bash
 openssl rsa           \
@@ -117,7 +117,9 @@ In the [Infura dashboard](https://app.infura.io/), under **API Keys**, select th
 - **JWT PUBLIC KEY** - Paste the entire contents of the `public_key.pem` file.
 
 :::note
+
 Optionally, you can check **REQUIRE JWT FOR ALL REQUESTS**. If this option is not checked, you can make calls using your key without a JWT in the request header, however, invalid or expired tokens will result in the call being rejected.
+
 :::
 
 #### 3.2. Create your `.env` file
@@ -131,7 +133,7 @@ touch .env
 Add the following details to `.env`:
 
 <Tabs>
-	<TabItem value="Syntax" default>
+  <TabItem value="Syntax" default>
 
 ```text title=".env"
 INFURA_API_KEY=<YOUR-API-KEY>
@@ -357,13 +359,12 @@ You can run this request yourself to make the call. Your console outputs the res
 
 ## Next steps
 
-Consider:
+Consider following these next steps:
 
-- Further reading:
-  - [Configure your JWT](../developer-tools/json-web-token-jwt.md) to control its scope.
-  <!-- - Keeping your [Infura secrets safe]({when blog is up}) -->
-- Decoding your JWT: Copy the JWT provided in the console by the [optional curl equivalent step](#optional-examine-the-curl-equivalent), and paste it into the **Encoded** field in [jwt.io](https://jwt.io/).
-- Adding a layer of verification to your call by applying the JWT's **FINGERPRINT** provided in the Infura dashboard. 
+- [Configure your JWT](../../how-to/json-web-token-jwt.md) to control its scope.
+<!-- - Read this blog post about [keeping your Infura secrets safe]({when blog is up}) -->
+- Decode your JWT: Copy the JWT provided in the console by the [optional curl equivalent step](#optional-examine-the-curl-equivalent), and paste it into the **Encoded** field in [jwt.io](https://jwt.io/).
+- Add a layer of verification to your call by applying the JWT's **FINGERPRINT** provided in the Infura dashboard. 
 
   :::note
 
