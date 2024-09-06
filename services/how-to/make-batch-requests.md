@@ -11,7 +11,7 @@ referred to as "multi-call."
 
 :::info
 
-All requests wAll requests in the array are counted as individual requests against the [daily credit limit](../get-started/pricing/index.md)
+All requests in the array are counted as individual requests against the [daily credit limit](../get-started/pricing/index.md)
 and batch itself is counted as a request.
 
 For example, if the array contains 30 requests, then those 30 requests count against the
