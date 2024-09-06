@@ -12,9 +12,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 ## September 2024
 
 - Added tutorial for [authenticating with JWT](/services/tutorials/ethereum/authenticate-with-jwt.md).
-  ([#])
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
 - Documented [opBNB](/services/reference/opbnb) support.
-  ([#])
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
 
 ## August 2024
 
