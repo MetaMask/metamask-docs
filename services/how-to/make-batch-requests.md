@@ -7,17 +7,20 @@ sidebar_position: 4
 
 Multiple requests can be sent at the same time in an array. This is called a [batch](https://www.jsonrpc.org/specification#batch)
 request, and conforms to the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/specification). Batch is also commonly
-eferred to as "multi-call."
+referred to as "multi-call."
 
 :::info
 
-All requests within the array are counted as individual requests against the daily request limit and batch itself is counted as a request.
+All requests wAll requests in the array are counted as individual requests against the [daily credit limit](../get-started/pricing/index.md)
+and batch itself is counted as a request.
 
-For example, if the array of request contains 30 requests, then those 30 requests count against the daily request limit, as well as the batch of requests, so this would be 31 total requests.
+For example, if the array contains 30 requests, then those 30 requests count against the
+daily credit request limit, as well as the batch of requests, so this would be 31 total requests.
 
 :::
 
-Each request contained within the array is processed before all the requests are returned. Therefore, when requests are sent in a batch, they will be returned only after every request is processed.
+Each request in the array is processed before all the requests are returned. Therefore, when
+requests are sent in a batch, they will be returned only after each request is processed.
 
 Example batch request (containing 30 requests plus the batch request itself):
 

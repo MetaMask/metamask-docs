@@ -11,6 +11,14 @@ on the blockchain. For example, monitor an NFT smart contract to alert you when 
 Stateless HTTP WebSockets are supported, however, we recommend using the WSS protocol to set up bidirectional stateful
 subscriptions.
 
+:::info
+For users on [Infura's credit pricing plan](../get-started/pricing/index.md), subscribing and unsubscribing to
+events using the `eth_subscribe` and `eth_unsubscribe` methods consume credits from your daily quota.
+Credits are consumed for these actions to prevent spamming, even if no valuable data is sent.
+
+View the [WebSocket pricing information](../concepts/websockets.md#pricing) for a breakdown of the costs.
+:::
+
 You need to be aware of the following when sending HTTP RPC requests:
 
 - Silent failures - [Users need to manage client-side silent failures](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers#pings_and_pongs_the_heartbeat_of_websockets).
