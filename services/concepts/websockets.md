@@ -55,7 +55,7 @@ Infura support subscriptions over WebSockets for the following networks:
 
 :::info
 
-WebSocket support is currently in public beta for Arbitrum, Avalanche (C-Chain) and Optimism.
+WebSocket support is currently in public beta for Arbitrum, Avalanche (C-Chain), BNB, opBNB, and Optimism.
 
 :::
 
