@@ -45,7 +45,7 @@ The dapp can subscribe to these events to update its state accordingly.
 
 ```mermaid
 sequenceDiagram
-    participant dapp as app
+    participant dapp as dapp
     participant get as get-starknet
     participant mm as MetaMask
     participant Snap as Starknet Snap
