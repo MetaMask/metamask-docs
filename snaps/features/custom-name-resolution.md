@@ -24,13 +24,15 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 ```
 
 If you're only targetting specific TLDs or schemes, you can use the `matchers` property to reduce
-overhead by specifying the TLDs and schemes you support. For example:
+overhead by specifying the TLDs and schemes you support. To target specific TLDs e.g. `my-domain.crypto`,
+use the `tlds` property. To target specific schemes e.g. `farcaster:my-user`, use the `schemes` property.
+At least one of these properties must be specified if `matchers` is specified.
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
   "endowment:name-lookup": {
     "chains": ["eip155:1"],
-    "matchers": { "tlds": ["crypto"] }
+    "matchers": { "tlds": ["crypto"], "schemes": ["farcaster"] }
   }
 }
 ```
