@@ -209,7 +209,7 @@ For use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `children`: `string` - The text of the button.
+- `children`: `string | Image | Icon` - The contents of the button.
 - `type` - (Optional) The type of button.
   Possible values are `"button"` or `"submit"`.
   The default is `"button"`.
@@ -463,6 +463,39 @@ module.exports.onHomePage = async () => {
 
 <p align="center">
 <img src={require("../../assets/custom-ui-heading.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+### `Icon`
+
+Outputs an icon.
+
+#### Props
+
+- `name`: `"confirmation" | "search" | "bold" | "link" | "data" | "menu" | "filter" | "key" | "warning" | "add-square" | "add" | "arrow-2-down" | "arrow-2-left" | "arrow-2-right" | "arrow-2-up" | "arrow-2-up-right" | "arrow-double-left" | "arrow-double-right" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "bank-token" | "bank" | "book" | "bookmark" | "bridge" | "calculator" | "card-pos" | "card-token" | "card" | "category" | "chart" | "check-bold" | "check" | "clock" | "close" | "code-circle" | "coin" | "connect" | "copy-success" | "copy" | "customize" | "danger" | "dark" | "diagram" | "document-code" | "drag-drop" | "dragging-animation" | "pinning-animation" | "edit" | "eraser" | "ethereum" | "expand" | "explore" | "export" | "eye-slash" | "eye" | "flag" | "flash-slash" | "flash" | "full-circle" | "gas" | "global-search" | "global" | "graph" | "hardware" | "heart" | "hierarchy" | "home" | "import" | "info" | "light" | "loading" | "lock-circle" | "lock-slash" | "lock" | "login" | "logout" | "message-question" | "messages" | "minus-bold" | "minus-square" | "minus" | "mobile" | "money" | "monitor" | "more-horizontal" | "more-vertical" | "notification-circle" | "notification" | "password-check" | "people" | "pin" | "programming-arrows" | "custody" | "question" | "received" | "refresh" | "save" | "scan-barcode" | "scan-focus" | "scan" | "scroll" | "security-card" | "security-cross" | "security-key" | "security-search" | "security-slash" | "security-tick" | "security-time" | "security-user" | "security" | "send-1" | "send-2" | "setting" | "slash" | "snaps-mobile" | "snaps-plus" | "snaps" | "speedometer" | "star" | "stake" | "student" | "swap-horizontal" | "swap-vertical" | "tag" | "tilde" | "timer" | "trash" | "trend-down" | "trend-up" | "user-circle-add" | "user-circle-link" | "user-circle-remove" | "user-circle" | "user" | "wallet-card" | "wallet-money" | "wallet" | "warning" | "twitter" | "qr-code" | "user-check" | "unpin" | "ban" | "bold" | "circle-x" | "download" | "file" | "flask" | "plug" | "share" | "square" | "tint" | "upload" | "usb" | "wifi" | "plus-minus"` - The name of the icon.
+- `color`: `'default' | 'primary' | 'muted'` - (Optional) The color of the icon.
+- `size`: `'md' | 'inherit'` - (Optional) The size of the icon.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Icon } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box direction="horizontal">
+        <Icon name="warning" size="md" />
+        <Text>Double-check the "to" address before proceeding.</Text>
+      </Box>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-icon.png").default} alt="Icon UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `Image`
