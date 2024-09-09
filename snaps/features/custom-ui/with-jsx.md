@@ -359,13 +359,13 @@ await snap.request({
 
 ### `Field`
 
-Outputs a form field, wrapping a [`Dropdown`](#dropdown) or [`Input`](#input) to give it a label and optional error.
+Outputs a form field, wrapping a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or [`RadioGroup`](#radiogroup) to give it a label and optional error.
 
 #### Props
 
 - `label`: `string` - The label for the wrapped element.
-- `error`: `string` - Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
-- `children` - The [`Dropdown`](#dropdown) or [`Input`](#input) element to be wrapped.
+- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
+- `children` - The input element to be wrapped.
 
 #### Example
 
@@ -619,6 +619,42 @@ module.exports.onHomePage = async () => {
 
 <p align="center">
 <img src={require("../../assets/custom-ui-links.png").default} alt="Links UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+### `RadioGroup`
+
+Outputs a radio group component for use in [interactive UI](interactive-ui.md).
+
+#### Props
+
+- `name`: `string` - The name that will be used as a key to the event sent to
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+- `children`: `Radio[]` - One or more `Radio` components, each with a `value` and text child (see example).
+
+#### Example
+
+```js
+import { RadioGroup, Radio } from "@metamask/snaps-sdk/jsx";
+
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Form name="form-example">
+        <Field label="Select an option">
+          <RadioGroup name="radio-group-example">
+            <Radio value="option-1">Option 1</Radio>
+            <Radio value="option-2">Option 2</Radio>
+          </RadioGroup>
+        </Field>
+      </Form>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-radio-group.png").default} alt="RadioGroup UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `Row`
