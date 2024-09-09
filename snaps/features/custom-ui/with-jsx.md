@@ -250,6 +250,39 @@ await snap.request({
 <img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Checkbox`
+
+Outputs a checkbox for use in [interactive UI](interactive-ui.md).
+
+#### Props
+
+- `name`: `string` - The name sent to [`onUserInput`](../../reference/entry-points.md#onuserinput).
+- `checked`: `boolean` - (Optional) Whether the checkbox is checked.
+- `label`: `string` - (Optional) The label for the checkbox.
+- `variant`: `"default" | "toggle"` - (Optional) The variant of the checkbox.
+
+#### Example
+
+```js
+import { Checkbox } from "@metamask/snaps-sdk/jsx";
+
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Box>
+        <Checkbox name="accept-terms" label="I understand the terms" />
+        <Checkbox name="dark-mode" label="Dark mode" variant="toggle" />
+      </Box>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-checkbox.png").default} alt="Checkbox UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Copyable`
 
 Outputs a read-only text field with a copy-to-clipboard shortcut.
