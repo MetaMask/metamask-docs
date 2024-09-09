@@ -1,14 +1,9 @@
 ---
 description: Resolve names to addresses and vice versa.
 sidebar_position: 3
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Custom name resolution
-
-:::flaskOnly
-:::
 
 You can implement custom domain resolution and reverse resolution using the following steps.
 
