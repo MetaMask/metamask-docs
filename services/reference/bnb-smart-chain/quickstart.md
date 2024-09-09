@@ -21,10 +21,10 @@ Don't have an Infura account? Sign up for our free plan and start using the BNB 
 
 ### cURL
 
-Run the following command in your terminal. Replace `YOUR-API-KEY` with your actual Infura API key.
+Run the following command in your terminal. Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
 ```bash
-curl https://bsc-mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -44,12 +44,12 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Javascript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     import fetch from "node-fetch";
 
-    fetch("https://bsc-mainnet.infura.io/v3/YOUR-API-KEY", {
+    fetch("https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -88,12 +88,12 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Javascript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     const axios = require("axios");
     
-    axios.post("https://bsc-mainnet.infura.io/v3/YOUR-API-KEY", {
+    axios.post("https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>", {
       jsonrpc: "2.0",
       method: "eth_blockNumber",
       params: [],
@@ -123,12 +123,12 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Javascript file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
     const ethers = require("ethers");
 
-    const provider = new ethers.providers.JsonRpcProvider("https://bsc-mainnet.infura.io/v3/YOUR-API-KEY");
+    const provider = new ethers.providers.JsonRpcProvider("https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>");
 
     provider.getBlockNumber()
     .then(blockNumber => {
@@ -155,13 +155,13 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Python file and copy the following code:
 
-    Replace `YOUR-API-KEY` with your actual Infura API key.
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```python title="index.py"
     import requests
     import json
 
-    url = "https://bsc-mainnet.infura.io/v3/YOUR-API-KEY"
+    url = "https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>"
 
     payload = {
         "jsonrpc": "2.0",

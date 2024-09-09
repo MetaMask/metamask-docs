@@ -26,6 +26,6 @@ You need to be aware of the following when sending HTTP RPC requests:
 The following WebSocket subscription example fires a notification each time a new header is appended to the chain:
 
 ```bash
-$ wscat -c wss://mainnet.infura.io/ws/v3/YOUR-API-KEY
+$ wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>
 > {"jsonrpc":  "2.0",  "id":  1,  "method":  "eth_subscribe",  "params":  ["newHeads"]}
 ```
