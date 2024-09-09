@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 sidebar_label: Connect to MetaMask
-description: Learn about how a Starknet Snap connects to MetaMask using `get-starknet`.
+description: Learn about how Starknet Snap connects to MetaMask using `get-starknet`.
 tags:
   - Snaps
   - Starknet
@@ -9,112 +9,138 @@ tags:
 
 # Overview
 
-`get-starknet` is a toolkit for building dapps on Starknet. It uses wallet connections and allows users to interact with Starknet-compatible wallets  through a user-friendly interface. 
-The toolkit manages accounts securely and enables blockchain interactions without exposing private keys. 
-It supports both reading from and writing to the blockchain, including smart contract interactions. `get-starknet` also offers event listening capabilities for account and network changes, network management functions, and token display requests. Connection to Metamask includes the following:
+`get-starknet` simplifies Starknet network interactions by extending MetaMask functionality. It eliminates the need for custom wallet logic and allows you to easily connect to Starknet and perform transactions through the MetaMask interface.
+The `get-starknet` toolkit works with the Starknet Snap to enable interaction between dapps and the Starknet network through MetaMask. 
+Starknet Snap is a MetaMask extension designed specifically to allow users to manage Starknet accounts and perform transactions on the Starknet network. 
+When you integrate `get-starknet` into your dapp, it creates a `WalletAccount` object. `WalletAccount` acts as a bridge between dapps and MetaMask and provides a structured way to manage Starknet-specific interactions. 
+This allows users to send transactions, sign messages, and manage accounts within the MetaMask interface and it can be extended to multiple wallets, with Starknet capabilities added on.
 
+## How it works
 
-- Snaps: Extensions that add new features to MetaMask, allowing it to interact with various blockchain networks beyond Ethereum.
-- Starknet Snap: A specific Snap that enables MetaMask to interact with the StarkNet blockchain.
-- WalletAccount: A `get-starknet` class that interfaces with the wallet (for instance, MetaMask with Starknet snap) to manage accounts and transactions.
+The dApp uses `get-starknet` to request a connection to MetaMask. If the Starknet Snap isn't installed, MetaMask prompts the user to connect and approve the installation. 
+After it is approved, `get-starknet` receives a Starknet Windows Object (SWO), which represents the MetaMask wallet with Starknet functionality.
+After receiving the SWO, `get-starknet` creates a WalletAccount instance. 
+This instance manages the Starknet account within MetaMask. With this setup, `get-starknet` enables the dApp to use Starknet features through MetaMask with the following capabilities:
 
-## How it Works
-
-The dapp uses `get-starknet` to initiate a connection request to MetaMask.
-MetaMask prompts the user to connect and dapprove the Starknet snap if not already installed.
-Upon dapproval, `get-starknet` receives a Starknet Windows Object (SWO) representing the MetaMask wallet with Starknet capabilities.
-
-get-starknet creates a WalletAccount instance using the SWO.
-This instance manages the user's StarkNet account within MetaMask, handling address retrieval and transaction signing. The get-starkent capabilities include:
-
-- Reading: The WalletAccount uses a specified provider to read data from the StarkNet blockchain.
-- Writing: For transactions, get-starknet prepares the transaction data and sends it to MetaMask for signing via the Starknet snap.
-- Smart Contract Interactions: get-starknet allows the dapp to create Contract instances connected to the WalletAccount.
-These instances can invoke smart contract functions, with MetaMask handling the necessary signatures.
-- Event Handling - get-starknet sets up listeners for account and network changes within MetaMask.
+- `WalletAccount` uses a specified provider to read data from the Starknet network.
+- For transactions, `get-starknet` prepares the transaction data and sends it to MetaMask for signing through the Starknet snap.
+- `get-starknet` allows the dapp to create contract instances connected to the `WalletAccount`. These instances can invoke smart contract functions, with MetaMask handling the necessary signatures.
+- `get-starknet` sets up listeners for account and network changes within MetaMask.
 The dapp can subscribe to these events to update its state accordingly.
-- Network Management - The toolkit can request network changes through MetaMask, allowing users to switch between different StarkNet networks (e.g., mainnet, testnet).
-- Token Display- `get-starknet` can request MetaMask to display specific tokens in its interface, enhancing user experience.
+- `get-starknet` can request network changes through MetaMask, and allows users to switch between different StarkNet networks (for example Mainnet, testnet).
+- `get-starknet` can request MetaMask to display specific tokens in its interface, enhancing user experience.
 
 
 ```mermaid
 sequenceDiagram
-    participant dapp
-    participant getStarknet as get-starknet
-    participant MetaMask
-    participant Starknet Snap
-    participant Starknet Network
+    participant dapp as dApp
+    participant get as get-starknet
+    participant mm as MetaMask
+    participant snap as Starknet Snap
+    participant network as Starknet Network
 
-    dapp->>getStarknet: Initialize connection
-    getStarknet->>MetaMask: Request connection
-    MetaMask->>StarknetSnap: Activate
-    StarknetSnap-->>MetaMask: Activated
-    MetaMask-->>getStarknet: Return SWO
-    getStarknet->>getStarknet: Create WalletAccount
-    getStarknet-->>dapp: Connection established
-
-    dapp->>getStarknet: Read blockchain data
-    getStarknet->>StarknetBlockchain: Query data
-    StarknetBlockchain-->>getStarknet: Return data
-    getStarknet-->>dapp: Processed data
-
-    dapp->>getStarknet: Write transaction
-    getStarknet->>MetaMask: Request signature
-    MetaMask->>StarknetSnap: Sign transaction
-    StarknetSnap-->>MetaMask: Signed transaction
-    MetaMask-->>getStarknet: Return signature
-    getStarknet->>StarknetBlockchain: Submit transaction
-    StarknetBlockchain-->>getStarknet: Transaction result
-    getStarknet-->>dapp: Transaction confirmation
-
-    MetaMask->>getStarknet: Account/Network changed
-    getStarknet->>dapp: Notify change
+    dapp->>get: Initialize connection
+    get->>mm: Request connection
+    mm->>snap: Activate (if needed)
+    snap-->>mm: Activated
+    mm-->>get: Return SWO
+    get->>get: Create WalletAccount
+    get-->>dapp: Connection established
+    dapp->>get: Read blockchain data
+    get->>network: Query data
+    network-->>get: Return data
+    get-->>dapp: Processed data
+    dapp->>get: Write transaction
+    get->>mm: Request signature
+    mm->>snap: Sign transaction
+    snap-->>mm: Signed transaction
+    mm-->>get: Return signature
+    get->>network: Submit transaction
+    network-->>get: Transaction result
+    get-->>dapp: Transaction confirmation
+    mm->>get: Account/Network changed
+    get->>dapp: Notify change
 ```
 
 
 ## Comparison
 
 | Feature | `wallet_invokeSnap` | `get-starknet` |
-|---------|-------------------|--------------|
-| API level abstraction| Low-level | High-level  |
-| Wallet Support | MetaMask only | Multiple wallets |
-| Functionality | Limited to snap methods | Comprehensive toolkit |
+|---------|---------------------|----------------|
+| API Level | Low-level access to Starknet snap methods | High-level abstractions for Starknet operations |
+| Wallet Support | MetaMask only | Multiple Starknet-compatible wallets |
+| Functionality | Limited to snap-implemented methods | Comprehensive toolkit for Starknet dapp development |
 | Multi-wallet Sync | No | Yes |
-| Standardization | Non-standard | Enforces standards |
-| Flexibility | High | Moderate |
-| Code Portability | Low | High |
+| Standardization | Might lead to non-standard implementations | Enforces standardized wallet interactions |
+| Flexibility | High, with direct access to all snap features | Moderate, within implemented features |
+| Code Portability | Low, tied to MetaMask | High, works across multiple wallet implementations |
 
-### API level abstraction
 
-- `wallet_invokeSnap`: Provides low-level access, requiring you to work directly with underlying Starknet snap methods.
-- `get-starknet`: Offers high-level abstractions, simplifying common Starknet operations for you.
+### Using `wallet_invokeSnap` directly
 
-### Wallet Support
+When using `wallet_invokeSnap` directly to interact with the Starknet Snap, you typically follow the following steps:
 
-- `wallet_invokeSnap`: Works only with MetaMask and its Starknet snap.
-- `get-starknet`: Supports multiple Starknet-compatible wallets, giving your users more choices.
+1. Ensure the Starknet Snap is installed.
+2. Construct the appropriate parameters for the Starknet operation you want to perform.
+3. Call `wallet_invokeSnap` with the following parameters.
 
-### Functionality
+Example for sending a transaction:
 
-- `wallet_invokeSnap`: Limited to methods implemented in the Starknet snap.
-- `get-starknet`: Provides a comprehensive toolkit for Starknet dapp development, including account management and contract interactions.
+```javascript
+const snapId = 'npm:@starknet/snap';
 
-### Multi-wallet Sync
+async function sendTransaction() {
+  try {
+    const result = await window.ethereum.request({
+      method: 'wallet_invokeSnap',
+      params: [snapId, {
+        method: 'starknet_signAndSubmitTransaction',
+        params: {
+          type: 'INVOKE_FUNCTION',
+          contract_address: '0x123...', // The contract address
+          entry_point_selector: 'transfer',
+          calldata: ['0x456...', '1000'], // Recipient and amount
+        }
+      }]
+    });
+    console.log('Transaction hash:', result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+```
 
-- `wallet_invokeSnap`: Doesn't support connecting to multiple wallets simultaneously.
-- `get-starknet`: Allows you to sync and interact with multiple Starknet-compatible wallets at once.
+With `wallet_invokeSnap`, you must know the exact method names and parameter structures for interacting with the Starknet Snap. Additionally, you must handle both MetaMask-specific and Starknet-specific errors. Since `wallet_invokeSnap` is designed specifically for MetaMask, it operates within the framework of MetaMask interactions.
 
-### Standardization
 
-- `wallet_invokeSnap`: May lead to non-standard implementations across different dapps.
-- `get-starknet`: Enforces standardized wallet interactions for consistency in a Starknet dapp.
+### Using get-starknet
 
-### Flexibility
+With `get-starknet`, the process is simplified:
 
-- `wallet_invokeSnap`: Highly flexible, allowing custom implementations with direct access to all snap features.
-- `get-starknet`: Moderately flexible within its implemented features, which may limit some specific custom interactions.
+1. Connect to a wallet using `get-starknet`.
+2. Use the provided high-level methods to perform Starknet operations.
 
-### Code portability
+Example for sending the same transaction:
 
-- `wallet_invokeSnap`: Low portability, as your code is tied specifically to MetaMask and its Starknet snap.
-- `get-starknet`: High portability, allowing your code to work across multiple Starknet-compatible wallet implementations with minimal changes.
+```javascript
+import { connect } from 'get-starknet';
+
+async function sendTransaction() {
+  try {
+    const starknet = await connect();
+    if (!starknet) throw new Error('Failed to connect to wallet');
+
+    const result = await starknet.account.execute({
+      contractAddress: '0x123...',
+      entrypoint: 'transfer',
+      calldata: ['0x456...', '1000']
+    });
+    console.log('Transaction hash:', result.transaction_hash);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+```
+
+`get-starknet` provides a high-level, intuitive API that abstracts complex operations and manages wallet connections. 
+It offers multi-wallet support, standardized error handling, and more readable code compared to direct Snap invocation so you are not required to manage lower-level Starknet interactions.
