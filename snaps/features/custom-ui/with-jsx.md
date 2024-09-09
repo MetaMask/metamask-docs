@@ -791,6 +791,45 @@ module.exports.onHomePage = async () => {
 <img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Tooltip`
+
+Outputs a tooltip when the wrapped child is hovered over.
+
+#### Props
+
+- `content`: - The content of the tooltip.
+- `children`: - The child element to wrap.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Tooltip, Text } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Tooltip
+          content={
+            <Text>
+              Tooltip <Bold>text</Bold>
+            </Text>
+          }
+        >
+          <Text>Hello world!</Text>
+        </Tooltip>
+      </Box>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ## Emojis
 
 Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept emojis.
