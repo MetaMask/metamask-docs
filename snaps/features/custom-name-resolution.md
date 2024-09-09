@@ -58,7 +58,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
     if (address) {
       return {
         resolvedAddresses: [
-          { resolvedAddress, protocol: "Unstoppable Domains" },
+          { resolvedAddress, protocol: "Unstoppable Domains", domainName: domain },
         ],
       }
     }
@@ -67,6 +67,12 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   return null
 }
 ```
+
+:::note
+Note that the response from the `onNameLookup` handler includes a `domainName` property. This can
+be used to do fuzzy matching on domain names, by returning the domain that was resolved rather than
+the one that was passed in.
+:::
 
 ## Example
 
