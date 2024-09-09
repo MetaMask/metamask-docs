@@ -23,9 +23,9 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 }
 ```
 
-If you're only targetting specific TLDs or schemes, you can use the `matchers` property to reduce
-overhead by specifying the TLDs and schemes you support. To target specific TLDs e.g. `my-domain.crypto`,
-use the `tlds` property. To target specific schemes e.g. `farcaster:my-user`, use the `schemes` property.
+If you're only targeting specific TLDs or schemes, you can use the `matchers` property to reduce
+overhead by specifying the TLDs and schemes you support. To target specific TLDs (for example, `my-domain.crypto`),
+use the `tlds` property. To target specific schemes (for example, `farcaster:my-user`), use the `schemes` property.
 At least one of these properties must be specified if `matchers` is specified.
 
 ```json title="snap.manifest.json"
@@ -78,7 +78,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 ```
 
 :::note
-Note that the response from the `onNameLookup` handler includes a `domainName` property. This can
+The response from the `onNameLookup` handler includes a `domainName` property. This can
 be used to do fuzzy matching on domain names, by returning the domain that was resolved rather than
 the one that was passed in.
 :::
