@@ -38,36 +38,37 @@ The dapp can subscribe to these events to update its state accordingly.
 
 
 ```mermaid
+sequenceDiagram
     participant dapp
-    participant get-starknet
+    participant getStarknet as get-starknet
     participant MetaMask
-    participant StarknetSnap
-    participant StarknetBlockchain
+    participant Starknet Snap
+    participant Starknet Network
 
-    dapp->>get-starknet: Initialize connection
-    get-starknet->>MetaMask: Request connection
-    MetaMask->>StarknetSnap: Activate (if needed)
+    dapp->>getStarknet: Initialize connection
+    getStarknet->>MetaMask: Request connection
+    MetaMask->>StarknetSnap: Activate
     StarknetSnap-->>MetaMask: Activated
-    MetaMask-->>get-starknet: Return SWO
-    get-starknet->>get-starknet: Create WalletAccount
-    get-starknet-->>dapp: Connection established
+    MetaMask-->>getStarknet: Return SWO
+    getStarknet->>getStarknet: Create WalletAccount
+    getStarknet-->>dapp: Connection established
 
-    dapp->>get-starknet: Read blockchain data
-    get-starknet->>StarknetBlockchain: Query data
-    StarknetBlockchain-->>get-starknet: Return data
-    get-starknet-->>dapp: Processed data
+    dapp->>getStarknet: Read blockchain data
+    getStarknet->>StarknetBlockchain: Query data
+    StarknetBlockchain-->>getStarknet: Return data
+    getStarknet-->>dapp: Processed data
 
-    dapp->>get-starknet: Write transaction
-    get-starknet->>MetaMask: Request signature
+    dapp->>getStarknet: Write transaction
+    getStarknet->>MetaMask: Request signature
     MetaMask->>StarknetSnap: Sign transaction
     StarknetSnap-->>MetaMask: Signed transaction
-    MetaMask-->>get-starknet: Return signature
-    get-starknet->>StarknetBlockchain: Submit transaction
-    StarknetBlockchain-->>get-starknet: Transaction result
-    get-starknet-->>dapp: Transaction confirmation
+    MetaMask-->>getStarknet: Return signature
+    getStarknet->>StarknetBlockchain: Submit transaction
+    StarknetBlockchain-->>getStarknet: Transaction result
+    getStarknet-->>dapp: Transaction confirmation
 
-    MetaMask->>get-starknet: Account/Network changed
-    get-starknet->>dapp: Notify change
+    MetaMask->>getStarknet: Account/Network changed
+    getStarknet->>dapp: Notify change
 ```
 
 
