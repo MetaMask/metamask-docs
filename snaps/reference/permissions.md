@@ -153,9 +153,6 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:name-lookup`
 
-:::flaskOnly
-:::
-
 To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must request the
 `endowment:name-lookup` permission.
 This permission grants the Snap read-only access to user input or an address by exporting the

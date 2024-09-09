@@ -23,6 +23,18 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 }
 ```
 
+If you're only targetting specific TLDs or schemes, you can use the `matchers` property to reduce
+overhead by specifying the TLDs and schemes you support. For example:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"],
+    "matchers": { "tlds": ["crypto"] }
+  }
+}
+```
+
 ### 2. Implement custom name resolution
 
 Expose an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
