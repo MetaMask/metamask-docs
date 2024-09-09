@@ -689,7 +689,13 @@ await snap.request({
 
 ### `Text`
 
-Outputs text. 
+Outputs text.
+
+#### Props
+
+- `color`:  `'default' | 'alternative' | 'muted' | 'error' | 'success' | 'warning'` - (Optional) The color of the text.
+- `alignment`: `'start' | 'center' | 'end'` - (Optional) The alignment of the text.
+
 
 #### Example
 
