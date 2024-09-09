@@ -660,6 +660,43 @@ await snap.request({
 <img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Selector`
+
+Outputs a selector component for use in [interactive UI](interactive-ui.md).
+
+#### Props
+
+- `name`: `string` - The name that will be used as a key to the event sent to 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+- `title`: `string` - The title of the selector, displayed when the selector is opened.
+- `children`: `SelectorOption[]` - One or more `SelectorOption` components, each with a `Card` child (see example).
+
+#### Example
+
+```js
+import { Selector, SelectorOption, Card } from "@metamask/snaps-sdk/jsx";
+
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Selector name="selector-example" title="Select an option">
+        <SelectorOption value="option-1">
+          <Card title="Option 1" value="First option" />
+        </SelectorOption>
+        <SelectorOption value="option-2">
+          <Card title="Option 2" value="Second option" />
+        </SelectorOption>
+      </Selector>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-selector.png").default} alt="Selector UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Spinner`
 
 Outputs a loading indicator.
