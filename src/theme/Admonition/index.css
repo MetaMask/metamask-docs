@@ -5,6 +5,10 @@
   --ifm-alert-border-color: var(--mm-flask-border-color);
 }
 
+[data-theme='dark'] .alert.theme-admonition-flaskOnly {
+  --ifm-alert-background-color: var(--developer-purple-dark);
+}
+
 .alert-wrapper {
   margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
   margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);

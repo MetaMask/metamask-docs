@@ -143,8 +143,16 @@
     }
 
     &.theme-admonition-flaskOnly {
-      color: var(--general-black);
+      --ifm-alert-background-color: var(--developer-purple-dark);
+      color: var(--developer-purple-light);
+
+      [class*='admonitionHeading'] {
+        color: var(--developer-purple-light);
+      }
+
       a {
+        color: var(--developer-purple-light);
+
         &:hover {
           color: var(--consumer-green-light) !important;
         }

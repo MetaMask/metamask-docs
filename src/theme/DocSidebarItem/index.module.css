@@ -13,3 +13,12 @@
   clip-path: polygon(0% 30%, 15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%);
   transform: none;
 }
+
+[data-theme='dark'] .flaskOnly > :global(a.menu__link::after),
+[data-theme='dark']
+  .flaskOnly
+  > :global(.menu__list-item-collapsible)
+  > :global(a.menu__link::after) {
+  background: var(--developer-purple-dark);
+  color: var(--developer-purple-light);
+}
