@@ -11,8 +11,10 @@ guide in some places.
 - [Preview locally](#preview-locally)
 - [Style guide](#style-guide)
 - [Add images](#add-images)
-- [Format Markdown and MDX](#format-markdown-and-mdx)
-  - [Live code blocks](#live-code-blocks)
+- [Update the interactive API reference](#update-the-interactive-api-reference)
+  - [Update `MetaMask/api-specs`](#update-metamaskapi-specs)
+  - [Update `ethereum/execution-apis`](#update-ethereumexecution-apis)
+- [Test analytics](#test-analytics)
 
 ## Contribution workflow
 
@@ -35,7 +37,7 @@ To contribute changes:
    this repository to your computer and navigate into it.
 
    ```bash
-   git clone https://github.com/MetaMask/metamask-docs.git
+   git clone git@github.com:MetaMask/metamask-docs.git
    cd metamask-docs
    ```
 
@@ -46,9 +48,9 @@ To contribute changes:
    > to be able to pull from and push to the original repository.
    >
    > ```bash
-   > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
+   > git clone git@github.com:<YOUR-USERNAME>/metamask-docs.git
    > cd metamask-docs
-   > git remote add upstream https://github.com/MetaMask/metamask-docs.git
+   > git remote add upstream git@github.com:MetaMask/metamask-docs.git
    > ```
 
 3. [Create and checkout a topic branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging),
@@ -69,12 +71,16 @@ To contribute changes:
 
    > **Notes:**
    >
-   > - All documentation content is located in the `wallet` and `snaps` directories.
-   > - If you add a new documentation page, make sure to edit `wallet-sidebar.js` or
-   >   `snaps-sidebar.js` to add the page to the
+   > - All documentation content is located in the `wallet`, `snaps`, `services`, and
+   >   `developer-tools` directories.
+   > - If you add a new documentation page, edit `wallet-sidebar.js`, `snaps-sidebar.js`,
+   >   `services-sidebar.js`, or `dashboard-sidebar.js` to add the page to the
    >   [sidebar](https://docs-template.consensys.net/contribute/configure-docusaurus#sidebar).
-   > - If you delete, rename, or move a documentation file, make sure to add a
-   >   [redirect](https://docs-template.consensys.net/contribute/configure-docusaurus#redirects).
+   > - If you delete, rename, or move a documentation file, add a
+   >   [redirect](https://vercel.com/docs/edge-network/redirects#configuration-redirects).
+   > - See additional instructions for [updating the interactive API reference](#update-the-interactive-api-reference).
+   > - If the PR contains a major change to the documentation content, add an entry to the top of
+   >   the ["What's new?"](docs/whats-new.md) page.
 
 5. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
    that the changes render correctly.
@@ -114,49 +120,129 @@ Refer to the [Consensys documentation style guide](https://docs-template.consens
 
 ## Add images
 
-All images are located in the `wallet/assets` and `snaps/assets` directories.
+All images are located in the `wallet/assets`, `snaps/assets`, `services/images`, and
+`developer-tools/images` directories.
 When adding a new image, such as a screenshot or diagram, make sure the image has a white or
 `#1b1b1d` color background in order for it to be compatible with the site's light and dark modes.
 
 Additionally, follow the [Consensys guidelines on adding images](https://docs-template.consensys.net/contribute/add-images).
 
-## Format Markdown and MDX
+## Update the interactive API reference
 
-The documentation is built using [Docusaurus](https://docusaurus.io/), which is powered by
-[MDX](https://mdxjs.com/), an extension to [Markdown](https://www.markdownguide.org/) that allows
-you to use [React JSX](https://www.w3schools.com/react/react_jsx.asp) in your Markdown content.
+The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/json-rpc-api/) uses the
+[`docusaurus-openrpc`](https://github.com/MetaMask/docusaurus-openrpc) plugin to import OpenRPC
+specifications from [`MetaMask/api-specs`](https://github.com/MetaMask/api-specs) (MetaMask-specific
+methods) and [`ethereum/execution-apis`](https://github.com/ethereum/execution-apis) (standard
+Ethereum methods).
+The site renders documentation for each of these methods based on the specification, and displays
+an interactive module to test the methods in your browser.
 
-Follow the [Consensys guidelines on formatting Markdown](https://docs-template.consensys.net/contribute/format-markdown).
-The MetaMask docs also use a plugin to implement [live code blocks](#live-code-blocks).
+### Update `MetaMask/api-specs`
 
-### Live code blocks
+To update documentation for MetaMask-specific JSON-RPC API methods:
 
-The [`remark-codesandbox`](https://github.com/kevin940726/remark-codesandbox/) plugin allows you to
-define a code block to be loaded live in a CodeSandbox iframe.
-This enhances the documentation by keeping the code blocks versioned and in the codebase, while
-using CodeSandbox to showcase any example with any dependency.
+1. Fork [`MetaMask/api-specs`](https://github.com/MetaMask/api-specs), clone the forked repository
+   to your computer, and navigate into it:
 
-Define a live code block by adding a `codesandbox` key to the code block.
-For example:
+   ```bash
+   git clone git@github.com:<YOUR-USERNAME>/api-specs.git
+   cd api-specs
+   ```
+   
+2. Follow the repository's [`README.md`](https://github.com/MetaMask/api-specs/blob/main/README.md)
+   instructions to edit the OpenRPC specification and generate the output file, `openrpc.json`.
 
-````jsx
-```javascript codesandbox=vanilla
-// JavaScript live code block
-```
-````
+3. To test the API updates in the MetaMask doc site's interactive reference, make the following
+   temporary changes on a local branch of the doc site, `metamask-docs`:
 
-`remark-codesandbox` allows for simple code blocks where the content of the block replaces the
-CodeSandbox entry point, and more complex code blocks that can be loaded directly from the
-filesystem.
-See the
-[`remark-codesandbox` documentation](https://github.com/kevin940726/remark-codesandbox/#documentation)
-for more information.
+   1. Copy and paste the output file `openrpc.json` into the root directory of `metamask-docs`.
+   2. In `docusaurus.config.js`, update the following line to point to your local output file:
+      ```diff
+      openrpcDocument:
+      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
+      +  "./openrpc.json",
+      ```
+   3. Preview the doc site locally, navigate to the API reference, and view your updates.
 
-## Analytics
+4. Add and commit your changes to `api-specs`, and create a PR.
 
-The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables simple usage analytics to inform documentation improvements that may be needed.
+5. Once your PR is approved and merged, the following must happen to publish the changes to the
+   MetaMask doc site:
 
-If you need to test analytics events in your local development environment be sure to export the appropriate key for the environment you are testing against before building and running the project:
+   1. A new version of `api-specs` must be released by a user with write access to the repository.
+      To release, go to the [Create Release Pull Request](https://github.com/MetaMask/api-specs/actions/workflows/create-release-pr.yml)
+      action, select **Run workflow**, and enter a specific version to bump to in the last text box
+      (for example, `0.10.6`). This creates a PR releasing a version of `api-specs`.
+   2. Once the release PR is merged, the [Publish Release](https://github.com/MetaMask/api-specs/actions/workflows/publish-release.yml)
+      action must be approved by an npm publisher.
+      You can request an approval in the **#metamask-dev** Slack channel tagging
+      **@metamask-npm-publishers**.
+      For example:
+      > @metamask-npm-publishers `@metamask/api-specs@0.10.6` is awaiting deployment :rocketship:
+      https://github.com/MetaMask/api-specs/actions/runs/10615788573
+   3. Once the release is published on npm, `docusaurus.config.js` in `metamask-docs` must be
+      updated with the new `api-specs` version to publish.
+      For example:
+      ```diff
+      openrpcDocument:
+      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
+      +  "https://metamask.github.io/api-specs/0.10.6/openrpc.json",
+      ```
+
+### Update `ethereum/execution-apis`
+
+To update documentation for standard Ethereum JSON-RPC API methods:
+
+1. Fork [`ethereum/execution-apis`](https://github.com/ethereum/execution-apis), clone the forked
+   repository to your computer, and navigate into it:
+
+   ```bash
+   git clone git@github.com:<YOUR-USERNAME>/execution-apis.git
+   cd execution-apis
+   ```
+
+2. Follow the repository's [`README.md`](https://github.com/ethereum/execution-apis/blob/main/README.md)
+   instructions to edit the OpenRPC specification and generate the output file, `openrpc.json`.
+
+3. To test the API updates in the MetaMask doc site's interactive reference, make the following
+   temporary changes on a local branch of the doc site, `metamask-docs`:
+
+   1. Copy and paste the output file `openrpc.json` into the root directory of `metamask-docs`.
+   2. In `docusaurus.config.js`, update the following line to point to your local output file:
+      ```diff
+      openrpcDocument:
+      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
+      +  "./openrpc.json",
+      ```
+   3. Preview the doc site locally, navigate to the API reference, and view your updates.
+
+4. Add and commit your changes to `execution-apis`, and create a PR.
+
+5. Once your PR is approved and merged, the following must happen to publish the changes to the
+   MetaMask doc site:
+
+   1. `api-specs` must import the updated Ethereum API specification.
+      Go to the [commit history](https://github.com/ethereum/execution-apis/commits/assembled-spec/)
+      of the `assembled-spec` branch of `execution-apis`.
+      Copy the full commit hash of the latest commit titled "assemble openrpc.json."
+      Update the following line in `merge-openrpc.js` of `api-specs` with the updated commit hash,
+      and create a PR:
+      ```diff
+      const getFilteredExecutionAPIs = () => {
+      -  return fetch("https://raw.githubusercontent.com/ethereum/execution-apis/ac19b518a2596221cd7cd6421ee3dc654d7ff3b7/refs-openrpc.json")
+      +  return fetch("https://raw.githubusercontent.com/ethereum/execution-apis/f75d4cc8eeb5d1952bd69f901954686b74c34c9b/refs-openrpc.json")
+      ```
+   2. Once the change to `merge-openrpc.js` is approved and merged, Step 5 in
+      [Update `MetaMask/api-specs`](#update-metamaskapi-specs) must be completed to publish the
+      changes to the MetaMask doc site.
+
+## Test analytics
+
+The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables
+simple usage analytics to inform documentation improvements that may be needed.
+
+If you need to test analytics events in your local development environment, export the appropriate
+key for the environment you are testing against before building and running the project:
 
 ```bash
 export SEGMENT_ANALYTICS_KEY="<your key>"
