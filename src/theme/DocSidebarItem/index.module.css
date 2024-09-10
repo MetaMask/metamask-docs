@@ -9,7 +9,7 @@
   border-radius: 0;
   margin-left: 1rem;
   padding: 0.6rem 0.9rem;
-  background-color: var(--mm-flask-background-color);
+  background-color: var(--ifm-color-primary-light);
   clip-path: polygon(0% 30%, 15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%);
   transform: none;
 }

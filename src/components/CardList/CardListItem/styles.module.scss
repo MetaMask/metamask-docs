@@ -114,13 +114,12 @@
   width: auto;
   height: 2.6rem;
   font-weight: 500;
-  line-height: 1.1;
   padding: 0.7rem 0.9rem;
 
   line-height: 0.8;
   color: var(--general-black);
 
-  background: var(--color-palette);
+  background: var(--ifm-color-primary-light);
 
   @include bp('tablet') {
     height: 2.6rem;
