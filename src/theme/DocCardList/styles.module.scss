@@ -16,6 +16,7 @@
   width: 100%;
   margin-top: 0;
   position: relative;
+  aspect-ratio: 1 / 0.5;
 
   @include bp('tablet') {
     min-height: 22.3rem;
@@ -48,6 +49,7 @@
       padding: 3.2rem 3.2rem 8rem !important;
       position: relative;
       height: 100%;
+      width: 100%;
       text-decoration: none;
       color: var(--general-black);
       background-color: transparent;
