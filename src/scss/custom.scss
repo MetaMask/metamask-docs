@@ -252,13 +252,17 @@ body {
   }
 }
 
-h1,
+h1 {
+  font-family: var(--ifm-heading-font-family);
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--ifm-heading-font-family);
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
 }
 
 h1 {
@@ -283,6 +287,12 @@ h5 {
 
 h6 {
   @extend .type-heading-xxs;
+}
+
+p,
+ul {
+  font-size: 1.6rem;
+  margin: 2rem 0;
 }
 
 .alert {
