@@ -3,11 +3,6 @@
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   margin-top: 2.8rem;
   margin-bottom: 4rem;
-
-  @include bp(desktop) {
-    margin-top: 4.8rem;
-    margin-bottom: 6rem;
-  }
 }
 
 .wrapper iframe {
