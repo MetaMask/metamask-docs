@@ -134,8 +134,8 @@ The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/js
 specifications from [`MetaMask/api-specs`](https://github.com/MetaMask/api-specs) (MetaMask-specific
 methods) and [`ethereum/execution-apis`](https://github.com/ethereum/execution-apis) (standard
 Ethereum methods).
-The site renders documentation for each of these methods based on the specification, and displays
-an interactive module to test the methods in your browser.
+The site renders documentation for each method based on the specification, and displays an
+interactive module to test the methods in your browser.
 
 ### Update `MetaMask/api-specs`
 
@@ -232,14 +232,14 @@ To update documentation for standard Ethereum JSON-RPC API methods:
       -  return fetch("https://raw.githubusercontent.com/ethereum/execution-apis/ac19b518a2596221cd7cd6421ee3dc654d7ff3b7/refs-openrpc.json")
       +  return fetch("https://raw.githubusercontent.com/ethereum/execution-apis/f75d4cc8eeb5d1952bd69f901954686b74c34c9b/refs-openrpc.json")
       ```
-   2. Once the change to `merge-openrpc.js` is approved and merged, Step 5 in
+   2. Once the change to `merge-openrpc.js` is merged, Step 5 in
       [Update `MetaMask/api-specs`](#update-metamaskapi-specs) must be completed to publish the
       changes to the MetaMask doc site.
 
 ## Test analytics
 
 The [`docusaurus-plugin-segment`](https://github.com/xer0x/docusaurus-plugin-segment) plugin enables
-simple usage analytics to inform documentation improvements that may be needed.
+simple usage analytics to inform documentation improvements.
 
 If you need to test analytics events in your local development environment, export the appropriate
 key for the environment you are testing against before building and running the project:
