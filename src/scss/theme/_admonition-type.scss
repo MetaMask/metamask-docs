@@ -19,6 +19,7 @@
   [class*='admonitionHeading'] {
     @extend .type-heading-xxs;
     @extend .font-weight-medium;
+    font-family: var(--ifm-font-family-base);
     display: flex;
     align-items: center;
     text-transform: capitalize;
