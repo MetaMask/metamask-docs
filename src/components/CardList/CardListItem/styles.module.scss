@@ -132,6 +132,12 @@
   }
 }
 
+[data-theme='dark'] .tag {
+  color: var(--developer-purple-light);
+
+  background: var(--developer-purple-dark);
+}
+
 html[data-theme='dark'] {
   .item {
     --color-palette: var(--developer-green);
