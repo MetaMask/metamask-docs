@@ -5,6 +5,7 @@
   margin-bottom: 1.2rem;
 
   @include bp('desktop') {
+    margin-top: -5rem;
     align-items: center;
   }
 
