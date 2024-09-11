@@ -27,7 +27,7 @@ None
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -35,7 +35,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="cURL">
 
 ```bash
-curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "bor_getCurrentProposer", "params": [], "id": 1}'
@@ -45,7 +45,7 @@ curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://polygon-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "bor_getCurrentProposer", "params": [], "id": 1}'
+wscat -c wss://polygon-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "bor_getCurrentProposer", "params": [], "id": 1}'
 ```
 
   </TabItem>

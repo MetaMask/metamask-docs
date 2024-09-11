@@ -2,12 +2,21 @@ import React from "react";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import clsx from "clsx";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface AuthBoxProps {
   handleConnect: () => void;
 }
 
 export const AuthBox = ({ handleConnect }: AuthBoxProps) => {
+  const connectHandler = () => {
+    trackClickForSegment({
+      eventName: "Connect wallet",
+      clickType: "Connect wallet",
+      userExperience: "B",
+    });
+    handleConnect();
+  }
   return (
     <div className={styles.msgWrapper}>
       <div className={styles.msgText}>
@@ -16,7 +25,7 @@ export const AuthBox = ({ handleConnect }: AuthBoxProps) => {
       <div>
         <button
           className={clsx(global.primaryBtn, styles.msgButton)}
-          onClick={() => handleConnect()}
+          onClick={connectHandler}
           data-test-id="connect-wallet"
         >
           Connect Wallet

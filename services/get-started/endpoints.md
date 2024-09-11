@@ -111,7 +111,7 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS     | `https://linea-mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Goerli)  | JSON-RPC over HTTPS     | `https://linea-goerli.infura.io/v3/<API-KEY>`   |
-| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
+| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<API-KEY>` |
 
@@ -121,6 +121,14 @@ Sepolia instead.
 | ----------------- | ------------------- | ----------------------------------------------- |
 | Mainnet           | JSON-RPC over HTTPS | `https://mantle-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://mantle-sepolia.infura.io/v3/<API-KEY>` |
+
+### opBNB
+
+| Network           | Transport type          | URL                                             |
+|-------------------|-------------------------|-------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://opbnb-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://opbnb-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet           | JSON-RPC over HTTPS     | `https://opbnb-testnet.infura.io/v3/<API-KEY>`  |
 
 ## Optimism
 
