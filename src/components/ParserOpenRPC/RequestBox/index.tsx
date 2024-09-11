@@ -74,7 +74,7 @@ export default function RequestBox({
           )}
           {
             isRunAndCustomizeRequestDisabled ?
-              (<Tooltip message="Before you can run or customize requests, please connect your MetaMask wallet first.">
+              (<Tooltip message="Before you can run or customize this request, please connect your MetaMask wallet first.">
                 {runRequestButton}
               </Tooltip>) :
               runRequestButton
