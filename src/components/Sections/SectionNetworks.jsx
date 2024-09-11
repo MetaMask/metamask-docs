@@ -9,7 +9,7 @@ import styles from './SectionNetworks.module.scss'
 
 const SectionNetworks = () => {
   const [isNetworksListCollapsed, setIsNetworksListCollapsed] = useState(true)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const [isMobile, setIsMobile] = useState(false)
   const { colorMode } = useColorMode()
   const [theme, setTheme] = useState('')
 
@@ -26,6 +26,7 @@ const SectionNetworks = () => {
   }
 
   useEffect(() => {
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
