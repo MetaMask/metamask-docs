@@ -25,11 +25,7 @@ export default function DocItemTags() {
   const canDisplayTagsRow = tags.length > 0;
   return (
     <footer
-      className={clsx(
-        ThemeClassNames.docs.docFooter,
-        "docusaurus-mt-lg",
-        "margin-top--sm"
-      )}
+      className={ThemeClassNames.docs.docFooter}
     >
       {canDisplayTagsRow && <TagsRow tags={tags} />}
     </footer>

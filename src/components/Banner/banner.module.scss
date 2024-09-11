@@ -1,0 +1,25 @@
+.banner {
+  padding-top: 2.8rem;
+  padding-bottom: 4rem;
+
+  @include bp(desktop) {
+    padding-top: 4.8rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.inner {
+  background-color: var(--general-gray-light);
+  padding: 4rem;
+  text-align: center;
+}
+
+.button {
+  margin-top: 2.4rem;
+}
+
+html[data-theme='dark'] {
+  .inner {
+    background-color: var(--general-black-light);
+  }
+}

@@ -1,0 +1,46 @@
+.cardWrapper {
+  margin-bottom: 2.4rem;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto 2.4rem;
+
+  @include bp-max(tablet) {
+    width: calc(100% - var(--page-padding-x) * 2);
+  }
+}
+
+.cardHeader {
+  background-color: var(--general-black-light);
+  border-bottom: 1px solid var(--general-gray-dark);
+  padding: 1.2rem 2rem;
+  color: var(--general-white);
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+
+  &-btns {
+    justify-content: center;
+    gap: 1.6rem;
+
+    @include bp-max(tablet) {
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+  }
+}
+
+.responseBlock {
+  max-height: 40rem;
+  overflow-y: auto;
+}
+
+html[data-theme='dark'] {
+  .cardWrapper,
+  .cardHeader {
+    border-color: var(--general-gray-dark);
+  }
+}

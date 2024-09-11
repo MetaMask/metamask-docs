@@ -1,14 +1,14 @@
-import React, {cloneElement, type ReactElement} from 'react';
-import clsx from 'clsx';
+import React, { cloneElement, type ReactElement } from 'react'
+import clsx from 'clsx'
 import {
   useScrollPositionBlocker,
   useTabs,
   sanitizeTabsChildren,
   type TabItemProps,
-} from '@docusaurus/theme-common/internal';
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import type {Props} from '@theme/Tabs';
-import styles from './styles.module.css';
+} from '@docusaurus/theme-common/internal'
+import useIsBrowser from '@docusaurus/useIsBrowser'
+import type { Props } from '@theme/Tabs'
+import styles from './styles.module.scss'
 
 function TabList({
   className,
@@ -17,121 +17,109 @@ function TabList({
   selectValue,
   tabValues,
 }: Props & ReturnType<typeof useTabs>) {
-  console.log(tabValues);
-  const tabRefs: (HTMLLIElement | null)[] = [];
-  const {blockElementScrollPositionUntilNextRender} =
-    useScrollPositionBlocker();
+  console.log(tabValues)
+  const tabRefs: (HTMLLIElement | null)[] = []
+  const { blockElementScrollPositionUntilNextRender } = useScrollPositionBlocker()
 
   const handleTabChange = (
     event:
       | React.FocusEvent<HTMLLIElement>
       | React.MouseEvent<HTMLLIElement>
-      | React.KeyboardEvent<HTMLLIElement>,
+      | React.KeyboardEvent<HTMLLIElement>
   ) => {
-    const newTab = event.currentTarget;
-    const newTabIndex = tabRefs.indexOf(newTab);
-    const newTabValue = tabValues[newTabIndex]!.value;
+    const newTab = event.currentTarget
+    const newTabIndex = tabRefs.indexOf(newTab)
+    const newTabValue = tabValues[newTabIndex]!.value
 
     if (newTabValue !== selectedValue) {
-      blockElementScrollPositionUntilNextRender(newTab);
-      selectValue(newTabValue);
+      blockElementScrollPositionUntilNextRender(newTab)
+      selectValue(newTabValue)
     }
-  };
+  }
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLLIElement>) => {
-    let focusElement: HTMLLIElement | null = null;
+    let focusElement: HTMLLIElement | null = null
 
     switch (event.key) {
       case 'Enter': {
-        handleTabChange(event);
-        break;
+        handleTabChange(event)
+        break
       }
       case 'ArrowRight': {
-        const nextTab = tabRefs.indexOf(event.currentTarget) + 1;
-        focusElement = tabRefs[nextTab] ?? tabRefs[0]!;
-        break;
+        const nextTab = tabRefs.indexOf(event.currentTarget) + 1
+        focusElement = tabRefs[nextTab] ?? tabRefs[0]!
+        break
       }
       case 'ArrowLeft': {
-        const prevTab = tabRefs.indexOf(event.currentTarget) - 1;
-        focusElement = tabRefs[prevTab] ?? tabRefs[tabRefs.length - 1]!;
-        break;
+        const prevTab = tabRefs.indexOf(event.currentTarget) - 1
+        focusElement = tabRefs[prevTab] ?? tabRefs[tabRefs.length - 1]!
+        break
       }
       default:
-        break;
+        break
     }
 
-    focusElement?.focus();
-  };
+    focusElement?.focus()
+  }
 
   return (
     <ul
       role="tablist"
       aria-orientation="horizontal"
       className={clsx(
-        'tabs',
+        styles.tabs,
         {
           'tabs--block': block,
         },
-        className,
+        className
       )}>
-      {tabValues.map(({value, label, attributes}) => (
+      {tabValues.map(({ value, label, attributes }) => (
         <li
           // TODO extract TabListItem
           role="tab"
           tabIndex={selectedValue === value ? 0 : -1}
           aria-selected={selectedValue === value}
           key={value}
-          ref={(tabControl) => tabRefs.push(tabControl)}
+          ref={tabControl => tabRefs.push(tabControl)}
           onKeyDown={handleKeydown}
           onClick={handleTabChange}
           {...attributes}
-          className={clsx(
-            'tabs__item',
-            styles.tabItem,
-            attributes?.className as string,
-            {
-              'tabs__item--active': selectedValue === value,
-            },
-          )}>
+          className={clsx('tabs__item', styles.tabItem, attributes?.className as string, {
+            'tabs__item--active': selectedValue === value,
+          })}>
           {label ?? value}
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
-function TabContent({
-  lazy,
-  children,
-  selectedValue,
-}: Props & ReturnType<typeof useTabs>) {
+function TabContent({ lazy, children, selectedValue }: Props & ReturnType<typeof useTabs>) {
   const childTabs = (Array.isArray(children) ? children : [children]).filter(
-    Boolean,
-  ) as ReactElement<TabItemProps>[];
+    Boolean
+  ) as ReactElement<TabItemProps>[]
   if (lazy) {
-    const selectedTabItem = childTabs.find(
-      (tabItem) => tabItem.props.value === selectedValue,
-    );
+    const selectedTabItem = childTabs.find(tabItem => tabItem.props.value === selectedValue)
     if (!selectedTabItem) {
       // fail-safe or fail-fast? not sure what's best here
-      return null;
+      return null
     }
-    return cloneElement(selectedTabItem, {className: 'margin-top--md'});
+    return cloneElement(selectedTabItem, { className: 'margin-top--md' })
   }
   return (
-    <div className="margin-top--md">
+    <div>
       {childTabs.map((tabItem, i) =>
         cloneElement(tabItem, {
           key: i,
           hidden: tabItem.props.value !== selectedValue,
-        }),
+        })
       )}
     </div>
-  );
+  )
 }
 
 function TabsComponent(props: Props): JSX.Element {
-  const tabs = useTabs(props);
+  const tabs = useTabs(props)
   /**
    * Tabs and TabItems aren't rendered in a straightforward manner.
    * Swizzling the TabItem component has no effect: the TabItem is used only for its data.
@@ -145,26 +133,23 @@ function TabsComponent(props: Props): JSX.Element {
       ...tabValue,
       attributes: {
         ...tabValue.attributes,
-        className: clsx(
-          tabValue.attributes?.className,
-          {
-            [styles.flaskOnly]: props.children[idx]?.props.flaskOnly,
-            [styles.deprecated]: props.children[idx]?.props.deprecated
-          }
-        )
-      }
-    }))
+        className: clsx(tabValue.attributes?.className, {
+          [styles.flaskOnly]: props.children[idx]?.props.flaskOnly,
+          [styles.deprecated]: props.children[idx]?.props.deprecated,
+        }),
+      },
+    })),
   }
   return (
     <div className={clsx('tabs-container', styles.tabList)}>
-      <TabList {...finalTabs} {...props} />
+      <TabList {...finalTabs} {...props} className={styles.tabs} />
       <TabContent {...finalTabs} {...props} />
     </div>
-  );
+  )
 }
 
 export default function Tabs(props: Props): JSX.Element {
-  const isBrowser = useIsBrowser();
+  const isBrowser = useIsBrowser()
   return (
     <TabsComponent
       // Remount tabs after hydration
@@ -173,5 +158,5 @@ export default function Tabs(props: Props): JSX.Element {
       {...props}>
       {sanitizeTabsChildren(props.children)}
     </TabsComponent>
-  );
+  )
 }

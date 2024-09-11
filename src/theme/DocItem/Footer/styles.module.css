@@ -1,7 +1,11 @@
 .lastUpdated {
   margin-top: 0.2rem;
-  font-style: italic;
-  font-size: smaller;
+  margin-bottom: 2rem;
+  color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
 }
 
 @media (min-width: 997px) {

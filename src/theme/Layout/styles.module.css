@@ -6,16 +6,17 @@
 
 .mainContainer {
   width: 100%;
-  padding: 20px 30px;
 }
 
 .contentWrapper {
-  max-width: 1440px;
+  max-width: var(--site-container-max-width);
   margin: 0 auto;
 }
 
+/*
 @media (width <= 996px) {
   .pageWrapper {
-    display: block;
+    display: block; 
   }
 }
+*/

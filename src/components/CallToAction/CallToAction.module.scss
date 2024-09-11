@@ -1,0 +1,148 @@
+.call-to-action {
+  position: relative;
+  padding: 4.8rem 0 6.4rem;
+  overflow: hidden;
+
+  @include bp(tablet) {
+    padding-top: 6.4rem;
+  }
+
+  @include bp(desktop) {
+    padding: 8rem 0 16rem;
+  }
+}
+
+.container {
+  position: relative;
+  color: var(--color-secondary);
+}
+
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+  }
+}
+
+.grid-col-center {
+  position: relative;
+
+  @include bp('tablet') {
+    @include grid-column-span(8);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(14);
+    @include grid-column-start(2);
+  }
+}
+
+.grid-inner {
+  display: flex;
+  background-color: var(--general-black-light);
+  color: var(--general-white);
+
+  @include bp-max(tablet) {
+    flex-direction: column;
+  }
+
+  @include bp('tablet') {
+    gap: 4rem;
+  }
+
+  @include bp('desktop') {
+    gap: 2.85rem;
+  }
+}
+
+.grid-col-left {
+  padding: 3.2rem;
+  flex: 0 0 auto;
+
+  @include bp('tablet') {
+    position: relative;
+    width: calc(50% - $grid-gutter-width-desktop / 2);
+    padding: 8rem 0 7.1rem 5.2rem;
+  }
+
+  @include bp('desktop') {
+    padding: 10rem 8.8rem;
+  }
+}
+
+.grid-col-right {
+  position: relative;
+
+  @include bp-max(tablet) {
+    height: 18.7rem;
+    order: -1;
+  }
+
+  @include bp('tablet') {
+    position: relative;
+    width: calc(50% - $grid-gutter-width-desktop / 2);
+    padding: 10rem 0 7.1rem 10.2rem;
+  }
+
+  @include bp('desktop') {
+    padding: 10rem 8.8rem;
+  }
+}
+
+.shape {
+  position: absolute;
+  left: 11rem;
+  bottom: -1.8rem;
+  width: 34.3rem;
+  height: 39.8rem;
+
+  @include bp(tablet) {
+    width: 51.2rem;
+    height: 59.5rem;
+    left: -1.6rem;
+    bottom: 0;
+  }
+
+  @include bp(desktop) {
+    left: 10.2rem;
+    bottom: -8.5rem;
+    width: 65.5rem;
+    height: 76.1rem;
+  }
+}
+
+.title {
+  color: var(--developer-purple-light);
+  font-size: 2.4rem;
+  line-height: 133.333%;
+
+  @include bp('tablet') {
+    font-size: 3.2rem;
+    line-height: 125%;
+  }
+}
+
+.description {
+  margin-top: 1.8rem;
+  padding-right: 2rem;
+
+  @include bp('tablet') {
+    margin-top: 2.2rem;
+    padding-right: 0;
+  }
+
+  @include bp('desktop') {
+    max-width: 33.6rem;
+  }
+}
+
+.button {
+  margin-top: 2.2rem;
+
+  @include bp('tablet') {
+    margin-top: 3rem;
+  }
+
+  @include bp('desktop') {
+    margin-top: 3.2rem;
+  }
+}

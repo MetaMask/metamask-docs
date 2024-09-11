@@ -1,0 +1,414 @@
+.tableHeadingRow {
+  display: flex;
+  border-top: 1px solid var(--general-gray-light);
+  width: 100%;
+
+  @include bp-max('tablet') {
+    width: 100vw;
+  }
+
+  html[data-theme='dark'] & {
+    border-color: var(--general-black-light);
+  }
+}
+.tableHeadingColumn {
+  width: 50%;
+  padding: 1.1rem;
+  line-height: 1.5;
+  background-color: var(--general-white-off);
+  font-size: 1.5rem;
+
+  &:first-child {
+    border-right: 1px solid var(--general-gray-light);
+  }
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black);
+
+    &:first-child {
+      border-color: var(--general-black-light);
+    }
+  }
+}
+.tableRow {
+  display: flex;
+  width: calc(100%);
+  border-bottom: 1px solid var(--general-gray-light);
+  margin-bottom: -1px;
+  html[data-theme='dark'] & {
+    border-color: var(--general-black-light);
+  }
+
+  @include bp-max('tablet') {
+    width: 100vw;
+  }
+}
+.tableColumn {
+  width: 50%;
+  line-height: 2.4rem;
+}
+.tableColumnParam {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 1.1rem;
+  line-height: 2.8rem;
+  position: relative;
+}
+.tableColumnParamFocused {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4rem;
+    height: 100%;
+    background-color: var(--consumer-purple);
+
+    html[data-theme='dark'] & {
+      background-color: var(--consumer-green);
+    }
+  }
+}
+.tableColumnParamError {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4rem;
+    height: 100%;
+    background-color: var(--error);
+  }
+}
+.tableColumn:first-child {
+  border-right: 1px solid var(--general-gray-light);
+}
+.tableValueRow {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.tableValueRowPadding {
+  padding: 1.2rem 7.2rem 1.2rem 1.6rem;
+}
+.tableColumnType {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  padding-right: 2.8rem;
+  padding-bottom: 0.2rem;
+  color: var(--general-gray-mid);
+  line-height: 2.4rem;
+  font-size: 1.4rem;
+}
+.tableColumnTypeDropdown {
+  width: 100%;
+  justify-content: flex-end;
+}
+.tableColumnTypeDropdown:hover {
+  cursor: pointer;
+}
+.tableLabelIconError {
+  position: absolute;
+  left: 0.4rem;
+  width: 1.3rem;
+  height: 1.1rem;
+  background: url('/img/icons/error-icon.svg') no-repeat 50% 50%;
+}
+.tableColumnIcon {
+  position: absolute;
+  right: 1.3rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.tableColumnIcon:hover {
+  cursor: pointer;
+}
+.tableColumnIconRemove {
+  background: url('/img/icons/remove-icon.svg') no-repeat 50% 50%;
+}
+.chevronIcon {
+  background: url('/img/icons/chevron-icon.svg') no-repeat 50% 50%;
+  transition: 0.2s transform;
+}
+.chevronIconDown {
+  transform: rotate(180deg);
+}
+.chevronIconRight {
+  transform: rotate(90deg);
+}
+.chevronIcon:hover {
+  cursor: pointer;
+}
+.deleteIcon {
+  position: absolute;
+  transform: translateY(-50%);
+  right: 1.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: -1px;
+  cursor: pointer;
+  background: url('/img/icons/delete-icon.svg') no-repeat 50% 50%;
+}
+.deleteIconCentered {
+  top: 50%;
+}
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+.dropdown:hover {
+  cursor: pointer;
+}
+.dropdownChevronIcon {
+  transition: 0.2s transform;
+}
+.dropdownChevronButtonUp {
+  transform: rotate(180deg);
+}
+.dropdownList {
+  position: absolute;
+  right: 1rem;
+  visibility: visible;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top: 3.5rem;
+  overflow: hidden;
+  border: 1px solid var(--general-gray-light);
+  z-index: 2;
+}
+.dropdownListClosed {
+  visibility: hidden;
+}
+.dropdownList li + li {
+  margin-top: 0;
+}
+.dropdownItem {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--general-white);
+  color: var(--general-black);
+  white-space: nowrap;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+    background-color: var(--general-gray-dark);
+  }
+}
+.dropdownItem:hover {
+  background-color: var(--general-white-off);
+  cursor: pointer;
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black-light);
+  }
+}
+.dropdownItem:not(:last-child) {
+  border-bottom: 1px solid var(--general-gray-light);
+}
+.tableFooterRow {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.6rem;
+  width: 100%;
+  bottom: 0;
+}
+.tableFooterRowDark {
+  background-color: var(--general-black-light);
+}
+.tableFooterRowLight {
+  background-color: var(--general-gray-light);
+}
+.tableButton {
+  display: flex;
+  background: none;
+  border: none;
+}
+.tableButtonAddNewArray {
+  margin: 0.8rem 0 0.8rem 1.6rem;
+  padding: 0.8rem 0;
+  color: var(--general-black-light);
+  align-items: center;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+
+    img {
+      filter: invert(1);
+    }
+  }
+}
+.tableButtonAddArrayItemName {
+  margin-left: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.tableComplexType {
+  position: absolute;
+  bottom: 6.5rem;
+  width: 100%;
+  height: 76.5%;
+  background-color: var(--general-white);
+  overflow-y: auto;
+  z-index: 1;
+  overflow-x: hidden;
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-gray-dark);
+  }
+}
+.tableComplexTypeItem {
+  position: relative;
+}
+.formControl {
+  width: 100%;
+  padding: 1.2rem 7.2rem 1.2rem 1.6rem;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: var(--general-black);
+  border-radius: 0;
+  border: 0.2rem solid transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  html[data-theme='dark'] & {
+    color: var(--general-white);
+  }
+}
+.formControl:focus {
+  outline: none;
+}
+.formControl[type='number']::-webkit-inner-spin-button,
+.formControl[type='number']::-webkit-outer-spin-button {
+  opacity: 0;
+}
+.formControlNumberUp {
+  top: 1.3rem;
+}
+.formControlNumberDown {
+  bottom: 1.5rem;
+}
+.formControlError {
+  border: 0.2rem solid var(--error);
+}
+.footerButtons {
+  display: flex;
+}
+.footerButtonsLeft {
+  width: 4.8rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+}
+.footerButtonLeft {
+  display: flex;
+  width: 1.6rem;
+  height: 2.2rem;
+  padding: 0;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.footerButtonRight {
+  padding: 0.5rem 1.6rem !important;
+}
+.footerButtonRightOutline {
+  margin-right: 1.6rem;
+}
+.footerButtonIcon {
+  width: 100%;
+  border-radius: 0;
+}
+.arrayParentRow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1.2rem 7.2rem 1.2rem 1.6rem;
+}
+.arrayColumnType {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-right: 2.8rem;
+  display: flex;
+  align-items: center;
+  color: var(--general-gray-light);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.arrayFormDataWrap {
+  display: block;
+  max-width: 39.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.addItemBtnWrap {
+  min-height: 5.2rem;
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--general-gray-light);
+}
+.addItemBtn {
+  display: flex;
+  align-items: center;
+  background: none;
+  padding: 0;
+  border: 0;
+  outline: none;
+  color: var(--general-gray-mid);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.addItemIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--general-gray-mid);
+  color: var(--general-black-mid);
+  font-size: 2rem;
+  line-height: 1;
+  margin-right: 1rem;
+}
+.arrayItemIcon {
+  position: absolute;
+  top: 50%;
+  left: 1.2rem;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+  line-height: 1;
+  font-weight: 400;
+}
+.arrayItemRowWrap {
+  position: relative;
+  padding-left: 4rem;
+  border-bottom: 1px dashed var(--general-gray-light);
+}
+
+html[data-theme='dark'] {
+  .tableHeadingRow,
+  .tableRow,
+  .tableColumn:first-child,
+  .dropdownList,
+  .addItemBtnWrap,
+  .dropdownItem:not(:last-child) {
+    border-color: var(--general-black-light);
+  }
+}

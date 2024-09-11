@@ -1,0 +1,155 @@
+/**
+ * prism.js Dark theme for JavaScript, CSS and HTML
+ * Based on the slides of the talk “/Reg(exp){2}lained/”
+ * @author Lea Verou
+ */
+code[class*='language-'],
+pre[class*='language-'] {
+  font-family:
+    'Andale Mono',
+    AndaleMono,
+    Menlo,
+    Consolas,
+    Monaco,
+    Courier New,
+    monospace;
+  line-height: 1.5;
+  hyphens: none;
+  color: var(--general-gray) !important;
+  text-align: left;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  tab-size: 4;
+  white-space: pre;
+  font-size: 1.4rem;
+  padding: 2rem;
+  background: none;
+
+  @media (width <= 768px) {
+    padding: 2rem;
+  }
+}
+
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  background-color: var(--general-black-light);
+  border-bottom: 1px solid var(--general-gray-dark) !important;
+  padding: 1.2rem 2rem !important;
+
+  @media (width <= 768px) {
+    padding: 0.8rem 2rem !important;
+  }
+}
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module
+  + .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    padding-top: 1.2rem;
+  }
+}
+
+.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module {
+  .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+    code[class*='language-'],
+    pre[class*='language-'] {
+      padding-top: 1.6rem;
+    }
+  }
+}
+
+pre code {
+  padding: 0 !important;
+}
+
+.prism-code {
+  background-color: var(--general-black-light) !important;
+}
+
+.buttonGroup_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  top: 0.8rem !important;
+  right: 0.8rem !important;
+
+  button {
+    border-radius: 0 !important;
+  }
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6f6f6f !important;
+}
+
+.token.punctuation {
+  color: var(--general-gray) !important;
+}
+
+.token.property,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: var(--developer-blue) !important;
+}
+
+.token.function {
+  color: var(--developer-green) !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.tag,
+.token.builtin,
+.token.inserted {
+  color: var(--developer-purple) !important;
+}
+
+.token.entity,
+.token.url,
+.language-css .token.string,
+.token.attr-value,
+.style .token.string,
+.token.variable {
+  color: var(--developer-purple) !important;
+}
+
+.token.atrule,
+.token.keyword {
+  color: var(--developer-blue) !important;
+}
+
+.token.regex,
+.token.important {
+  color: var(--developer-purple) !important;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.deleted {
+  color: var(--error) !important;
+}
+
+.token.plain {
+  color: var(--general-gray) !important;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}

@@ -1,0 +1,320 @@
+@import 'commons/reset';
+@import 'commons/typescale';
+@import 'commons/utils';
+@import 'commons/animations';
+@import 'elements/form';
+@import 'elements/contentful-rich-text';
+
+:root {
+  // Defines a CSS variable to reduce motion for all CSS animations & transitions
+  // You can use it as such:
+  // animation: name calc(var(--motion) * 1s) linear forwards;
+  // transition: name calc(var(--motion) * 1s) ease;
+  --motion: 1;
+  --motion-speed: 0.55s;
+  --spring-ease: #{$gentle-ease};
+  --general-white: #fff;
+  --general-white-off: #f7f9fc;
+  --general-gray-light: #e9edf6;
+  --general-gray: #c8ceda;
+  --general-gray-mid: #a1a8b7;
+  --general-gray-dark: #393d46;
+  --general-black-light: #242628;
+  --general-black-mid: #1b1b1b;
+  --general-black-mid-opacity-100: #1b1b1b00;
+  --general-black: #0a0a0a;
+  --consumer-orange-light: #ffa680;
+  --consumer-orange: #ff5c16;
+  --consumer-orange-dark: #661800;
+  --consumer-purple-light: #eac2ff;
+  --consumer-purple: #d075ff;
+  --consumer-purple-dark: #3d065f;
+  --consumer-green-light: #e5ffc3;
+  --consumer-green: #baf24a;
+  --consumer-green-dark: #013330;
+  --consumer-blue-light: #cce7ff;
+  --consumer-blue: #89b0ff;
+  --consumer-blue-dark: #190066;
+  --developer-orange-light: #ffa680;
+  --developer-orange: #ff5c16;
+  --developer-orange-dark: #661800;
+  --developer-purple-light: #eac2ff;
+  --developer-purple: #d075ff;
+  --developer-purple-dark: #3d065f;
+  --developer-green-light: #e5ffc3;
+  --developer-green: #baf24a;
+  --developer-blue-light: #cce7ff;
+  --developer-blue: #89b0ff;
+  --institution-purple-tint: #eac2ff;
+  --institution-purple-light: #dd9bff;
+  --institution-purple: #d075ff;
+  --institution-purple-dark: #3d065f;
+  --institution-purple-dark-2: #25043a;
+  --institution-green-tint: #e5ffc3;
+  --institution-green-light: #d0f987;
+  --institution-green: #baf24a;
+  --institution-green-dark: #013330;
+  --institution-green-dark-2: #012321;
+  --institution-blue-tint: #cce7ff;
+  --institution-blue-light: #abccff;
+  --institution-blue: #89b0ff;
+  --institution-blue-dark: #190066;
+  --institution-blue-dark-2: #0c0033;
+  --error: #dc2626;
+  --site-container-max-width: #{$site-container-max-width};
+
+  // Page Padding Variables
+  --page-padding-x: #{$page-padding-x-mobile};
+
+  // Header Height Variables
+  --header-desktop: #{$header-desktop-height};
+  --header-mobile: #{$header-mobile-height};
+  --header-toast-bar-enabled: 1;
+  --header-toast-bar-height: 4.1rem;
+  --header-height: var(--header-mobile);
+  --header-has-sub-nav: 0;
+  --header-dynamic-height: calc(
+    var(--header-height) + (var(--header-height) * var(--header-has-sub-nav)) +
+      var(--header-toast-bar-height) * var(--header-toast-bar-enabled)
+  );
+
+  // CSS Grid Columns Variables
+  --columns-count: #{$grid-column-count};
+
+  @include bp('tablet') {
+    --page-padding-x: #{$page-padding-x-tablet};
+  }
+
+  @include bp('desktop') {
+    --page-padding-x: #{$page-padding-x-desktop};
+  }
+
+  @include bp('tablet') {
+    --header-height: var(--header-desktop);
+  }
+
+  @include bp('tablet') {
+    --columns-count: #{$grid-column-count-tablet};
+  }
+
+  @include bp('desktop') {
+    --columns-count: #{$grid-column-count-desktop};
+  }
+
+  // Fallback from linear() function is not supported
+  @supports (animation-timing-function: linear(0, 1)) {
+    --spring-ease: #{$spring-ease};
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    --motion: 0;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: rgb(var(--general-black) 0);
+  -webkit-tap-highlight-color: transparent;
+
+  &::selection {
+    color: var(--color-selection, var(--general-white));
+    background: var(--background-selection, var(--general-black));
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+
+  font-family: var(--font-mm-centra);
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  &.progress {
+    cursor: progress;
+
+    * {
+      cursor: progress;
+    }
+  }
+
+  @include bp('tablet') {
+    font-size: math.div(1000vw, $tablet-mockup-width);
+  }
+
+  @include bp('desktop') {
+    font-size: math.div(1000vw, $desktop-mockup-width);
+  }
+
+  @media screen and (min-width: $site-container-max-width) {
+    font-size: 10px;
+  }
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  width: 100%;
+}
+
+body {
+  position: relative;
+
+  font-size: 2rem;
+  line-height: 1.5;
+  color: var(--general-black);
+
+  background: var(--general-white);
+
+  @include bp('tablet') {
+    font-size: 2.4rem;
+  }
+}
+
+// Main WebGL Container
+.webgl {
+  pointer-events: none;
+
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+}
+
+/* stylelint-disable declaration-no-important */
+.stats {
+  top: initial !important;
+  bottom: 0;
+}
+
+// Main Container
+.container {
+  width: calc(100% - var(--page-padding-x) * 2);
+  max-width: none;
+  margin: 0 auto;
+
+  @include bp('tablet') {
+    max-width: none;
+  }
+
+  @include bp('desktop') {
+    max-width: var(--site-container-max-width);
+  }
+}
+
+// Page Padding (Header Height)
+.page {
+  padding-top: calc(
+    var(--header-height) + (var(--header-height) * var(--header-has-sub-nav)) +
+      (calc(var(--header-toast-bar-height) * var(--header-toast-bar-enabled)))
+  );
+  padding-bottom: 9rem;
+
+  > section:has(+ .has-flap-top),
+  > section:has(+ .has-cut-off-corner-top) {
+    position: relative;
+
+    &:after {
+      content: '';
+
+      position: absolute;
+      bottom: calc(-15rem + 1px);
+      left: 0;
+
+      width: 100%;
+      height: 15rem;
+
+      background-color: var(--color-primary);
+    }
+  }
+
+  > section.has-cut-off-corner-bottom + section {
+    position: relative;
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+      top: calc(-15rem + 1px);
+      left: 0;
+
+      width: 100%;
+      height: 15rem;
+
+      background-color: var(--color-primary);
+    }
+  }
+
+  // Fix background color of last element when footer is dark mode
+  main:has(+ footer.is-dark-mode) & {
+    > section:nth-last-child(1) {
+      &:after {
+        content: '';
+
+        position: absolute;
+        bottom: calc(-10rem + 1px);
+
+        width: 100%;
+        height: 10rem;
+
+        background-color: var(--color-primary);
+      }
+    }
+  }
+
+  @include bp('desktop') {
+    padding-top: calc(
+      var(--header-height) + (var(--header-height) * var(--header-has-sub-nav)) +
+        (calc(var(--header-toast-bar-height) * var(--header-toast-bar-enabled))) - 1px
+    );
+    padding-bottom: 6rem;
+  }
+}
+
+.subgrid-container {
+  @include subgrid;
+}
+
+.page-section {
+  padding: 3.2rem 0;
+
+  & + section {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: -2.6rem;
+    padding-bottom: 0;
+  }
+
+  @include bp('tablet') {
+    padding: 8rem 0;
+  }
+
+  @include bp('desktop') {
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 5rem;
+    }
+  }
+}
+
+.fox-mascot-fallback-image {
+  position: relative;
+  padding: 2rem;
+}

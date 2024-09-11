@@ -1,0 +1,109 @@
+.cards {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-gap: 2rem;
+  margin-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+
+  @include bp('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sl-inline,
+.sl-prose li p,
+.sl-prose p > a > img,
+.tags_jXut,
+svg {
+  display: inline;
+}
+
+.card {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  aspect-ratio: 1 / 1;
+
+  &__wrapper {
+    background-color: var(--ifm-hover-overlay);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.6rem;
+    padding: 3.2rem;
+    position: relative;
+    height: 100%;
+    text-decoration: none;
+    color: var(--general-black);
+    clip-path: polygon(
+      0 2.2rem,
+      2.2rem 0,
+      100% 0,
+      100% calc(100% - 2.2rem),
+      calc(100% - 2.2rem) 100%,
+      0 100%
+    );
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 1rem;
+      height: 100%;
+      opacity: 0;
+      transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+      background-color: var(--ifm-color-primary);
+    }
+
+    h3 {
+      @extend h4;
+    }
+
+    a,
+    li {
+      color: var(--ifm-heading-color);
+      font-size: 1.6rem;
+    }
+  }
+  &__header {
+    padding: 0;
+  }
+
+  &__body {
+    padding: 0;
+
+    ul {
+      list-style: none;
+
+      li {
+        &::before {
+          content: '\2022';
+          font-size: 3rem;
+          padding-right: 0.6rem;
+          position: relative;
+          top: 0.1rem;
+          line-height: 0;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
+
+    .card__wrapper {
+      background-color: var(--general-white);
+
+      &::before {
+        opacity: 1;
+      }
+
+      html[data-theme='dark'] & {
+        background-color: var(--general-black);
+      }
+    }
+  }
+}
