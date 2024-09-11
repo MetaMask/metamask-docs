@@ -304,9 +304,7 @@ ul {
 }
 
 [class*='docMainContainer'],
-.docMainContainer,
-.docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocRoot-Layout-Main-styles-module,
-.mainContainer_src-theme-Layout-styles-module {
+[class*='mainContainer'] {
   padding: 3rem 0 0;
 
   @include bp('desktop') {
