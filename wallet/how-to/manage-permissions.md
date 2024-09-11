@@ -1,6 +1,6 @@
 ---
 description: Request and revoke permissions to call restricted methods.
-sidebar_position: 9
+sidebar_position: 6
 ---
 
 # Manage permissions
@@ -32,7 +32,7 @@ the restricted method [`eth_accounts`](/wallet/reference/eth_accounts):
 To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
 internally.
-See [how to access a user's accounts](connect/access-accounts.md) for more information.
+See [how to access a user's accounts](access-accounts.md) for more information.
 Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction), [`personal_sign`](/wallet/reference/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4).
 :::
 

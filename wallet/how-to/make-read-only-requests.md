@@ -67,7 +67,7 @@ infuraAPIKey: "YOUR-API-KEY"
 
 To use your own node (for example, with [Hardhat](https://hardhat.org/)) to make read-only requests,
 specify your node's chain ID and RPC URL using the
-[`readonlyRPCMap`](../../../reference/sdk-js-options.md#readonlyrpcmap) option when instantiating the
+[`readonlyRPCMap`](../reference/sdk-js-options.md#readonlyrpcmap) option when instantiating the
 SDK in your dapp.
 
 ```javascript
