@@ -9,7 +9,7 @@ import styles from './SectionNetworks.module.scss'
 
 const SectionNetworks = () => {
   const [isNetworksListCollapsed, setIsNetworksListCollapsed] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768)
   const { colorMode } = useColorMode()
   const [theme, setTheme] = useState('')
 
