@@ -161,7 +161,7 @@ html {
   }
 
   @media screen and (min-width: $site-container-max-width) {
-    font-size: calc($site-container-max-width / ($desktop-mockup-width * 0.1));
+    font-size: 10px;
   }
 }
 
