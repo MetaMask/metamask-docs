@@ -53,7 +53,7 @@ request to `support@infura.io` and we will assess if your request can be accommo
 |-------------------|-------------------------|-----------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |
+| Testnet 			| JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<API-KEY>`  |
 
 ## Celo
 
@@ -111,7 +111,7 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS     | `https://linea-mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Goerli)  | JSON-RPC over HTTPS     | `https://linea-goerli.infura.io/v3/<API-KEY>`   |
-| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3//<API-KEY>` |
+| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<API-KEY>` |
 
@@ -122,6 +122,14 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS | `https://mantle-mainnet.infura.io/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://mantle-sepolia.infura.io/v3/<API-KEY>` |
 
+### opBNB
+
+| Network           | Transport type          | URL                                             |
+|-------------------|-------------------------|-------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://opbnb-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://opbnb-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet           | JSON-RPC over HTTPS     | `https://opbnb-testnet.infura.io/v3/<API-KEY>`  |
+
 ## Optimism
 
 | Network           | Transport type          | URL                                                |
@@ -129,7 +137,7 @@ Sepolia instead.
 | Mainnet           | JSON-RPC over HTTPS     | `https://optimism-mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://optimism-mainnet.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://optimism-sepolia.infura.io/v3/<API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://optimism-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://optimism-sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## Palm
 

@@ -22,7 +22,7 @@ from the transaction receipt.
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -30,7 +30,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="cURL">
 
   ```bash
-  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
@@ -39,7 +39,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
 ```
 
   </TabItem>

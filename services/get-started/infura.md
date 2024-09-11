@@ -63,7 +63,7 @@ Use the API key when sending requests. The following examples interact with the 
 :::info
 
 - All requests are `POST` requests.
-- Replace `YOUR-API-KEY` with your own unique API key.
+- Replace `<YOUR-API-KEY>` with your own unique API key.
 
 :::
 
@@ -83,7 +83,7 @@ Retrieve the current block number.
   <TabItem value="cURL" label="cURL" default>
 
 ```bash
-curl https://mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   --data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
@@ -93,7 +93,7 @@ curl https://mainnet.infura.io/v3/YOUR-API-KEY \
   <TabItem value="Postman" label="Postman" >
 
 ```bash
-URL: https://mainnet.infura.io/v3/YOUR-API-KEY
+URL: https://mainnet.infura.io/v3/<YOUR-API-KEY>
 Request_Type: POST
 Body:
 {
@@ -125,7 +125,7 @@ The example code checks the latest balance of the Ethereum Proof of Stake (PoS) 
   <TabItem value="cURL" label="cURL" default>
 
 ```bash
-curl https://mainnet.infura.io/v3/API-KEY \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_getBalance", "params": ["0x00000000219ab540356cBB839Cbe05303d7705Fa", "latest"], "id": 1}'
@@ -135,7 +135,7 @@ curl https://mainnet.infura.io/v3/API-KEY \
   <TabItem value="Postman" label="Postman" >
 
 ```bash
-URL: https://mainnet.infura.io/v3/YOUR-PROJECT-ID
+URL: https://mainnet.infura.io/v3/<YOUR-API-KEY>
 Request_Type: POST
 Body:
 {

@@ -24,7 +24,7 @@ Your operating system may include curl, or you may need to [download and install
 Many Infura requests take the form:
 
 ```bash
-curl https://mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -38,17 +38,17 @@ It requests the latest block number using the method `eth_blockNumber`.
 
 Let's step through each line of the code snippet to understand what's happening.
 
-The first line uses the `curl` command to send a request to the URL `https://mainnet.infura.io/v3/YOUR-API-KEY`.
+The first line uses the `curl` command to send a request to the URL `https://mainnet.infura.io/v3/<YOUR-API-KEY>`.
 
 #### curl command
 
 ```bash
-curl https://mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
 :::info
 
-Replace `YOUR-API-KEY` with a specific [API key](../../../developer-tools/dashboard/get-started/create-api/).
+Replace `<YOUR-API-KEY>` with a specific [API key](../../../developer-tools/dashboard/get-started/create-api/).
 
 :::
 
