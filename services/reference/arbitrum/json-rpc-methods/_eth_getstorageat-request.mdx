@@ -5,7 +5,7 @@ import TabItem from "@theme/TabItem"
   <TabItem value="cURL">
 
 ```bash
-curl https://arbitrum-mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://arbitrum-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "0x65a8db"], "id": 1}'
@@ -15,7 +15,7 @@ curl https://arbitrum-mainnet.infura.io/v3/YOUR-API-KEY \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://arbitrum-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "0x65a8db"], "id": 1}'
+wscat -c wss://arbitrum-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "0x65a8db"], "id": 1}'
 ```
 
   </TabItem>

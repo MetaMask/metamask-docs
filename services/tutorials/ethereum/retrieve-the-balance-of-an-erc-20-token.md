@@ -1,6 +1,6 @@
 ---
 description: Retrieve the balance of an ERC-20 token.
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 import Tabs from "@theme/Tabs";

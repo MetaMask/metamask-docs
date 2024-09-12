@@ -1,14 +1,9 @@
 ---
 description: Resolve names to addresses and vice versa.
 sidebar_position: 3
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Custom name resolution
-
-:::flaskOnly
-:::
 
 You can implement custom domain resolution and reverse resolution using the following steps.
 
@@ -24,6 +19,20 @@ For example, to resolve Ethereum Mainnet domains, add the following to your Snap
 "initialPermissions": {
   "endowment:name-lookup": {
     "chains": ["eip155:1"]
+  }
+}
+```
+
+If you're only targeting specific TLDs or schemes, you can use the `matchers` property to reduce
+overhead by specifying the TLDs and schemes you support. To target specific TLDs (for example, `my-domain.crypto`),
+use the `tlds` property. To target specific schemes (for example, `farcaster:my-user`), use the `schemes` property.
+At least one of these properties must be specified if `matchers` is specified.
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:name-lookup": {
+    "chains": ["eip155:1"],
+    "matchers": { "tlds": ["crypto"], "schemes": ["farcaster"] }
   }
 }
 ```
@@ -58,7 +67,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
     if (address) {
       return {
         resolvedAddresses: [
-          { resolvedAddress, protocol: "Unstoppable Domains" },
+          { resolvedAddress, protocol: "Unstoppable Domains", domainName: domain },
         ],
       }
     }
@@ -67,6 +76,12 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   return null
 }
 ```
+
+:::note
+The response from the `onNameLookup` handler includes a `domainName` property. This can
+be used to do fuzzy matching on domain names, by returning the domain that was resolved rather than
+the one that was passed in.
+:::
 
 ## Example
 

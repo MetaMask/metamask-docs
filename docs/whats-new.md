@@ -9,11 +9,19 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## September 2024
+
+- Added tutorial for [authenticating with JWT](/services/tutorials/ethereum/authenticate-with-jwt.md).
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
+- Documented [opBNB](/services/reference/opbnb) support.
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
+
 ## August 2024
 
 - Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
 
 ## July 2024
+
 - Documented [Binance Smart Chain](/services/reference/bnb-smart-chain/) support. ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
 - Documented [Celo WebSocket](/services/reference/celo/) support. ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
 - Documented [ZKsync Era WebSocket](/services/reference/zksync) support. ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))
@@ -74,7 +82,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1274](https://github.com/MetaMask/metamask-docs/pull/1274))
 - Documented [Snaps cron jobs](/snaps/features/cron-jobs).
   ([#1271](https://github.com/MetaMask/metamask-docs/pull/1271))
-- Updated [how to connect to MetaMask](/wallet/how-to/connect) with vanilla TypeScript and React
+- Updated [how to connect to MetaMask](/wallet/connect/wallet-api) with vanilla TypeScript and React
   TypeScript instructions.
   ([#1247](https://github.com/MetaMask/metamask-docs/pull/1247))
 
@@ -93,7 +101,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snap-defined timeouts](/snaps/reference/permissions/#snap-defined-timeouts).
   ([#1224](https://github.com/MetaMask/metamask-docs/pull/1224) and
   [#1227](https://github.com/MetaMask/metamask-docs/pull/1227))
-- Restructured Wallet documentation to emphasize [connecting using EIP-6963](/wallet/how-to/connect).
+- Restructured Wallet documentation to emphasize [connecting using EIP-6963](/wallet/connect/wallet-api).
   ([#1214](https://github.com/MetaMask/metamask-docs/pull/1214))
 - Documented [Snaps custom name resolution](/snaps/features/custom-name-resolution).
   ([#924](https://github.com/MetaMask/metamask-docs/pull/924))
@@ -144,7 +152,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Restructured and improved [Wallet documentation](/wallet) and introduced "Wallet API" terminology.
   ([#1114](https://github.com/MetaMask/metamask-docs/pull/1114) and
   [#1125](https://github.com/MetaMask/metamask-docs/pull/1125))
-- Documented [how to detect multiple wallets using EIP-6963](/wallet/how-to/connect).
+- Documented [how to detect multiple wallets using EIP-6963](/wallet/connect/wallet-api).
   ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
 - Documented [how to communicate errors in Snaps](/snaps/how-to/communicate-errors).
   ([#1117](https://github.com/MetaMask/metamask-docs/pull/1117))

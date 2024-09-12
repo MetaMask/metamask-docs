@@ -39,7 +39,7 @@ export default function RequestBox({
         <div className={styles.cardHeader}>
           <strong className={styles.cardHeading}>Request</strong>
         </div>
-        <div>
+        <div className={styles.codeWrapper}>
           <CodeBlock language="javascript" className="margin-bottom--none">
             {exampleRequest}
           </CodeBlock>
