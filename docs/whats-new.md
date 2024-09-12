@@ -14,6 +14,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Updated [Android SDK documentation](/wallet/how-to/use-sdk/mobile/android) with convenience
   methods and examples using coroutines.
   ([#1546](https://github.com/MetaMask/metamask-docs/pull/1546))
+- Documented [Infura's credit pricing model](/services/get-started/pricing).
+  ([#1530](https://github.com/MetaMask/metamask-docs/pull/1530))
 - Added tutorial for [authenticating with JWT](/services/tutorials/ethereum/authenticate-with-jwt).
   ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
 - Documented [opBNB](/services/reference/opbnb) support.
@@ -21,6 +23,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## August 2024
 
+- *The repository underwent a temporary code freeze in August.*
 - Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
 
 ## July 2024
