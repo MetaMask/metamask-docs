@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Line
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Linea network enabled.
+- Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Linea network enabled.
 
 ## Make calls
 
@@ -199,3 +199,4 @@ by Infura. Here are some suggestions:
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
+

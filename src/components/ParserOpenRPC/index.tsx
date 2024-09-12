@@ -20,6 +20,7 @@ interface ParserProps {
 }
 
 interface ParserOpenRPCContextProps {
+  drawerLabel?: string
   setIsDrawerContentFixed?: (isFixed: boolean) => void;
   setDrawerLabel?: (label: string) => void;
   isComplexTypeView: boolean;
@@ -160,6 +161,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
   return (
     <ParserOpenRPCContext.Provider
       value={{
+        drawerLabel,
         setIsDrawerContentFixed,
         setDrawerLabel,
         isComplexTypeView,

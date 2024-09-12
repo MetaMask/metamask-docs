@@ -1,5 +1,5 @@
 ---
-description: Manage
+description: Manage Starknet networks in MetaMask.
 sidebar_position: 3
 ---
 
