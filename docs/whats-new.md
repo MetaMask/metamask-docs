@@ -23,7 +23,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## August 2024
 
-- *The repository underwent a temporary code freeze in August.*
+- *The documentation site underwent a temporary freeze in August.*
 - Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
 
 ## July 2024

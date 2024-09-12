@@ -288,8 +288,9 @@ when (val result = ethereum.ethSignTypedDataV4(message, address)) {
 
 #### Example: Batch requests
 
-The following example requests the user to sign a batch of messages by calling
-[`personal_sign`](/wallet/reference/personal_sign) and `sendRequestBatch`.
+The following example requests the user to sign multiple messages at once by
+[batching multiple requests](../javascript/batch-json-rpc-requests.md) that call
+[`personal_sign`](/wallet/reference/personal_sign).
 
 ```kotlin
 val ethereumRequest1 = EthereumRequest(
