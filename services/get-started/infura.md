@@ -189,19 +189,51 @@ Use an allowlist to restrict API key access. See to the [allowlist documentation
 
 ## 5. View your project stats
 
-From the Stats page of the Infura dashboard, you can view real-time statistics about your API usage.
-Optimize your app and better understand your users by
-[reviewing your API request stats](../../../developer-tools/dashboard/how-to/dashboard-stats) regularly.
+The Infura dashboard displays an overview of your daily request health and daily credit usage.
+Select **View Stats** or **stats** to monitor your project request stats.
 
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../images/dashboard_stats.png").default}
+      src={require('../images/analytics.png').default}
     />
   </div>
 </div>
 
-## 6. Manage your account
+From the Stats page of the Infura dashboard, you can view real-time statistics about your API usage.
+Optimize your app and better understand your users by
+[reviewing your API request stats](/developer-tools/dashboard/how-to/dashboard-stats) regularly.
+
+<div class="left-align-container">
+  <div class="img-large">
+    <img
+      src={require('../images/dashboard_stats.png').default}
+    />
+  </div>
+</div>
+
+## 6. View your credit usage
+
+The Infura dashboard provides an overview of your daily credit usage. Select **View Usage**
+for a [wider view of your credit usage](/developer-tools/dashboard/how-to/credit-usage).
+
+:::info
+
+The credit pricing model replaces request-based billing for free-tier (Core) customers. Customers on
+Developer and Team plans will be transitioned to the credit model on September 30, 2024.
+**Existing customers on Growth and Custom plans will remain on request-based billing**.
+
+:::
+
+<div class="left-align-container">
+  <div class="img-large">
+    <img
+      src={require('../images/view-usage.png').default}
+    />
+  </div>
+</div>
+
+## 7. Manage your account
 
 Find additional settings in **Settings** to manage your account. You can do the following:
 
