@@ -1,5 +1,6 @@
-import React, { useState, createContext, ReactChild } from "react";
+import React, { useEffect, useState, createContext, ReactChild } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 export const MetamaskProviderContext = createContext(null);
 
@@ -19,6 +20,11 @@ export default function Root({ children }: { children: ReactChild}) {
     }
   });
 
+  useEffect(() => {
+    const provider = sdk?.getProvider();
+    setMetaMaskProvider(provider);
+  }, []);
+
   const metaMaskConnectHandler = async () => {
     try {
       const accounts = await sdk?.connect();
@@ -34,12 +40,18 @@ export default function Root({ children }: { children: ReactChild}) {
   }
 
   return (
-    <MetamaskProviderContext.Provider value={{
-      metaMaskProvider,
-      metaMaskAccount,
-      metaMaskConnectHandler
-    }}>
-      {children}
-    </MetamaskProviderContext.Provider>
+    <BrowserOnly>
+      {
+        () => (
+          <MetamaskProviderContext.Provider value={{
+            metaMaskProvider,
+            metaMaskAccount,
+            metaMaskConnectHandler
+          }}>
+            {children}
+          </MetamaskProviderContext.Provider>
+        )
+      }
+    </BrowserOnly>
   );
 }
