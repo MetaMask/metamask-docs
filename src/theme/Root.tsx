@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactChild } from "react";
+import React, { useEffect, useState, createContext, ReactChild } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
@@ -19,6 +19,11 @@ export default function Root({ children }: { children: ReactChild}) {
       sdk: false,
     }
   });
+
+  useEffect(() => {
+    const provider = sdk?.getProvider();
+    setMetaMaskProvider(provider);
+  }, []);
 
   const metaMaskConnectHandler = async () => {
     try {

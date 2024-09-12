@@ -103,7 +103,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
 
   if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
@@ -226,9 +226,9 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskProvider && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
             <RequestBox
-              isMetamaskInstalled={!!metaMaskProvider}
+              isMetamaskInstalled={!!metaMaskAccount}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}

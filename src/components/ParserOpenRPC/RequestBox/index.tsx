@@ -4,6 +4,7 @@ import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
+import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -33,6 +34,22 @@ export default function RequestBox({
     return JSON.stringify(response, null, 2);
   }, [response]);
 
+  const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
+  const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
+    !isMetamaskInstalled :
+    false;
+
+  const runRequestButton = (
+    <button
+      className={global.primaryBtn}
+      disabled={isRunAndCustomizeRequestDisabled}
+      onClick={submitRequest}
+      data-test-id="run-request"
+    >
+      Run request
+    </button>
+  );
+
   return (
     <>
       <div className={styles.cardWrapper}>
@@ -48,21 +65,20 @@ export default function RequestBox({
           {params.length > 0 && (
             <button
               className={clsx(global.linkBtn, "margin-right--md")}
-              disabled={!isMetamaskInstalled}
+              disabled={isRunAndCustomizeRequestDisabled}
               onClick={openModal}
               data-test-id="customize-request"
             >
               Customize request
             </button>
           )}
-          <button
-            className={global.primaryBtn}
-            disabled={!isMetamaskInstalled}
-            onClick={submitRequest}
-            data-test-id="run-request"
-          >
-            Run request
-          </button>
+          {
+            isRunAndCustomizeRequestDisabled ?
+              (<Tooltip message="Before you can run or customize this request, please connect your MetaMask wallet first.">
+                {runRequestButton}
+              </Tooltip>) :
+              runRequestButton
+          }
         </div>
       </div>
       {response !== undefined && (
