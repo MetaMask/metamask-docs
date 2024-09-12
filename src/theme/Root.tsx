@@ -1,6 +1,7 @@
 import React, { useState, createContext, ReactChild } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+// import Sentry from "sentry-plugin";
 
 export const MetamaskProviderContext = createContext(null);
 
@@ -29,6 +30,7 @@ export default function Root({ children }: { children: ReactChild}) {
         const provider = sdk?.getProvider();
         setMetaMaskProvider(provider);
       }
+      // Sentry.setUser({ email: "" })
     } catch (err) {
       console.warn("failed to connect..", err);
     }
