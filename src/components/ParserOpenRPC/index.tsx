@@ -103,6 +103,8 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
 
   if (currentMethodData === null) return null;
 
+  const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
+
   const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
 
   const onParamsChangeHandle = (data) => {
@@ -235,6 +237,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
               response={reqResult}
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
+              isMetamaskNetwork={isMetamaskNetwork}
             />
           </div>
         </div>

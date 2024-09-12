@@ -14,6 +14,7 @@ interface RequestBoxProps {
   paramsData: any;
   openModal: () => void;
   submitRequest: () => void;
+  isMetamaskNetwork?: boolean;
 }
 
 export default function RequestBox({
@@ -24,10 +25,18 @@ export default function RequestBox({
   paramsData,
   openModal,
   submitRequest,
+  isMetamaskNetwork = false,
 }: RequestBoxProps) {
+
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
+    const preparedShellParams = JSON.stringify(paramsData);
+    const NETWORK_URL = "https://linea-mainnet.infura.io";
+    const API_KEY = "<YOUR-API-KEY>";
+    if (isMetamaskNetwork) {
+      return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
+    }
+    return `curl ${NETWORK_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
@@ -57,7 +66,10 @@ export default function RequestBox({
           <strong className={styles.cardHeading}>Request</strong>
         </div>
         <div className={styles.codeWrapper}>
-          <CodeBlock language="javascript" className="margin-bottom--none">
+          <CodeBlock
+            language={isMetamaskNetwork ? "javascript" : "shell"}
+            className="margin-bottom--none"
+          >
             {exampleRequest}
           </CodeBlock>
         </div>
