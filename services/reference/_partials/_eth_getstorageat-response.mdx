@@ -34,7 +34,7 @@ contract Storage {
 Retrieving the value of pos0 is straight forward:
 
 ```bash
-curl https://mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x65a8db"], "id": 1}'

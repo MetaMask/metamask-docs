@@ -55,7 +55,7 @@ Infura support subscriptions over WebSockets for the following networks:
 
 :::info
 
-WebSocket support is currently in public beta for Arbitrum, Avalanche (C-Chain) and Optimism.
+WebSocket support is currently in public beta for Arbitrum, Avalanche (C-Chain), BNB, opBNB, and Optimism.
 
 :::
 
@@ -71,12 +71,26 @@ Create stateful subscriptions over WebSockets to listen to specific events. Exam
 
 ## Pricing
 
-WebSocket activity is counted toward your daily request limits. View the [Infura pricing](https://www.infura.io/pricing)
-for more information about your request limits.
+For users on [Infura's credit pricing plan](../get-started/pricing/index.md), subscribing and unsubscribing to
+events using the `eth_subscribe` and `eth_unsubscribe` methods consume credits from your daily quota.
+Credits are consumed for these actions to prevent spamming, even if no valuable data is sent.
 
-:::info Pricing model may change
+:::tip
 
-Infura might change the pricing model and implement some limitations on subscriptions over WebSockets in the future. Before
-implementing any changes, customers will receive advanced notification, so they can consider the best option for their needs.
+Refer to the [credit cost table](../get-started/pricing/credit-cost.md) for more information about the
+credit costs associated with the relevant method calls.
+
+For users on the existing request-based billing system, WebSocket activity is counted toward your daily request
+limits. View the [Infura pricing website](https://www.infura.io/pricing) for more information about your
+request limits.
 
 :::
+
+Additional credit-based charges are applied for the events returned:
+
+- `newHeads`: Each new block event consumes 50 credits from your daily quota. This event is triggered
+  once per announced block.
+- `logs`: Depending on the filters applied, this event can consume 300 credits per block from your
+  daily quota. At most, one event per announced block is charged, and potentially none if filter constraints are not met.
+- `newPendingTransaction`: An event is generated every 700-800ms, aggregating the total amount of
+  pending transactions collected during that period. Each event consumes 200 credits from your daily quota.

@@ -57,13 +57,13 @@ npm install --save ethers
 Create a `.env` file in your project directory to store the project and Ethereum account details.
 
 ```
-REACT_APP_API_KEY="<Your-API-Key>"
+REACT_APP_API_KEY="<<YOUR-API-KEY>>"
 REACT_APP_PRIVATE_KEY="<Private-Key>"
 ```
 
 Ensure you replace the following values in the `.env` file:
 
-- `<Your-API-Key>` with the API key of the Ethereum project.
+- `<<YOUR-API-KEY>>` with the API key of the Ethereum project.
 - `<Private-Key>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
 :::danger

@@ -8,23 +8,31 @@ import CardList from '@site/src/components/CardList'
 
 :::note Failover protection
 
-Avalanche (C-Chain) [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans.
+Avalanche (C-Chain) [failover support](../../concepts/failover-protection.md) is available for
+customers on the Growth or Custom plans.
 Avalanche (C-Chain) failover support is available on Mainnet only.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 :::
 
-Avalanche is a Proof of Stake (PoS), layer 1 platform that features 3 built-in blockchains: [Exchange Chain (X-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#exchange-chain-x-chain), [Platform Chain (P-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#platform-chain-p-chain), and [Contract Chain (C-Chain)](https://docs.avax.network/overview/getting-started/avalanche-platform-overview#contract-chain-c-chain). Infura provides access to the C-Chain only.
+Avalanche is a Proof of Stake (PoS), layer 1 platform that features three built-in blockchains:
 
-The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy Solidity smart contract
-dapps onto the C-Chain. Dapps can run on both Avalanche and Ethereum. Avalanche Platform's C-Chain is EVM-compatible, but
-it is not identical.
+- [Contract Chain (C-Chain)](https://docs.avax.network/learn/primary-network#c-chain)
+- [Exchange Chain (X-Chain)](https://docs.avax.network/learn/primary-network#x-chain)
+- [Platform Chain (P-Chain)](https://docs.avax.network/learn/primary-network#p-chain)
+
+Infura provides access to the C-Chain only.
+
+The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy
+Solidity smart contract dapps onto the C-Chain.
+Dapps can run on both Avalanche and Ethereum.
+Avalanche's C-Chain is EVM-compatible, but it is not identical.
 
 :::info See also
 
-- View the [official Avalanche C-Chain documentation](https://docs.avax.network/build/dapp/c-chain-evm) for more information about building on
-  the Avalanche C-Chain.
-- View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/build/dapp/launch-dapp#gotchas-and-things-to-look-out-for).
+- View the [official Avalanche C-Chain documentation](https://docs.avax.network/dapps)
+  for more information about building on the Avalanche C-Chain.
+- View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/dapps/end-to-end/launch-ethereum-dapp#gotchas-and-things-to-look-out-for).
 
 :::
 

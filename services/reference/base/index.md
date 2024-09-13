@@ -6,7 +6,9 @@ import CardList from '@site/src/components/CardList'
 
 # Base
 
-Base is an optimistic layer 2 rollup chain built by Coinbase on the MIT-licensed [OP Stack](https://optimism.mirror.xyz/fLk5UGjZDiXFuvQh6R_HscMQuuY9ABYNF7PI76-qJYs), in collaboration with [Optimism](../optimism/index.md).
+Base is an optimistic layer 2 rollup chain built by Coinbase on the MIT-licensed
+[OP Stack](https://docs.optimism.io/stack/getting-started#the-op-stack-today), in collaboration with
+[Optimism](../optimism/index.md).
 
 :::caution Limited access
 Base is currently only available to a limited number of customers. Production
@@ -19,7 +21,10 @@ in the Coinbase ecosystem.
 
 :::info See also
 
-See the [official Base documentation ](https://docs.base.org/)for more information.
+- See the [official Base documentation](https://docs.base.org/) for more information.
+- See the official
+  [Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc)
+  (Bedrock release) for custom Base methods.
 
 :::
 

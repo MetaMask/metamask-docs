@@ -1,6 +1,6 @@
 ---
 description: Track ERC-721 and ERC-1155 token transfers.
-sidebar_position: 9
+sidebar_position: 10
 ---
 
 import Tabs from "@theme/Tabs";

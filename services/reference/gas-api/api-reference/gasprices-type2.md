@@ -54,7 +54,7 @@ instead of using the cURL authentication option (`-u`).
 
 ```bash
 curl -X "GET" \
-  -u <API-KEY>:<API-KEY-SECRET> \
+  -u <YOUR-API-KEY>:<API-KEY-SECRET> \
   "https://gas.api.infura.io/networks/1/suggestedGasFees"
 ```
 
@@ -64,7 +64,7 @@ curl -X "GET" \
 ```javascript
 const axios = require("axios");
 
-const apiKey = "<API-KEY>"; // Replace with your API key.
+const apiKey = "<YOUR-API-KEY>"; // Replace with your API key.
 const apiKeySecret = "<API-KEY-SECRET>"; // Replace with your API key secret.
 
 const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64");
