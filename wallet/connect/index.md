@@ -48,12 +48,20 @@ Key features of MetaMask SDK include:
   You can use the SDK on its own, or integrated with [third-party libraries](#third-party-libraries)
   where its only job is to detect and connect to MetaMask, as the libraries handle other wallets separately.
 
-## Third-party libraries
 
-You can use MetaMask SDK integrated with third-party libraries such as
-[Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-party-libraries/web3-onboard.md).
+## Connecting via Third-Party Libraries
+MetaMask SDK is fully integrated with third-party libraries like [Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-party-libraries/web3-onboard.md), which enable multi-wallet support in your dapp. These libraries provide pre-built tools for managing wallet connections, making it easier to offer users flexibility in how they connect to your dapp.
 
-*Paragraph explaining use cases for connecting via third-party libraries.*
+### Benefits of Using Third-Party Libraries
+
+- **Simplified Connection Logic:** Third-party libraries handle much of the complexity of wallet integrations, saving development time and reducing the need to manage multiple connection states manually.
+- **Feature-Rich Ecosystem:** Many libraries come with additional features like hooks (Wagmi) or connection management tools (Web3-Onboard), providing a more structured way to implement wallet connections in dapps.
+
+### Considerations of Using Third-Party Libraries
+- **Reduced Control:** Might limit direct access to certain MetaMask-specific features or custom integrations, as the library abstracts some connection logic.
+- **Cross-Wallet Compatibility:** Since these libraries support multiple wallets, not all wallet-specific features are available or guaranteed to behave consistently across different wallets.
+
+By integrating MetaMask SDK with a third-party library, developers can get the best of both worlds: broad wallet support and the reliability of MetaMask’s advanced features.
 
 ## Wallet API
 
