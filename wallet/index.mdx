@@ -2,120 +2,46 @@
 title: Introduction
 ---
 
-import CardList from "@site/src/components/CardList"
+# MetaMask Integration Overview
 
-# Interact with MetaMask Wallet directly through our Wallet API
+MetaMask provides developers with a versatile set of tools to integrate their dapps across all platforms, including mobile and desktop. This guide highlights the capabilities of the **MetaMask SDK** and how it wraps the **MetaMask API** (JSON-RPC), giving developers the power to build seamless, cross-platform experiences.
 
-Integrate your dapp with [MetaMask](https://metamask.io/) using the [Wallet API](reference/json-rpc-api).
-You can interact with your users' Ethereum accounts, performing tasks such as the following:
+## Why Use the MetaMask SDK?
 
-<CardList
-  items={[
-    {
-      href: "connect",
-      title: "↔️ Connect to MetaMask",
-      description:
-        "Connect to MetaMask and other wallets in your users' browsers.",
-    },
-    {
-      href: "how-to/sign-data",
-      title: "🖊️ Sign data",
-      description:
-        "Request signatures from users, and allow them to sign in with Ethereum.",
-    },
-    {
-      href: "how-to/make-read-only-requests",
-      title: "📄 Make read-only requests",
-      description:
-        "Bypass user wallet authentication to make read-only JSON-RPC requests.",
-    },
-    {
-      href: "how-to/display",
-      title: "📱 Display in MetaMask",
-      description:
-        "Display tokens, contract methods, icons, and custom modals in MetaMask.",
-    },
-  ]}
-/>
+The **MetaMask SDK** is your all-in-one toolkit for connecting dapps to the MetaMask ecosystem, covering both desktop and mobile platforms. It wraps the MetaMask API, providing everything you need for reliable wallet connectivity with additional mobile protocol support.
 
-### Want to get started quickly?
+### Key Benefits of the MetaMask SDK
 
-Check out the [Create a simple dapp](/wallet/tutorials/javascript-dapp-simple.md) tutorial.
+- **Cross-Platform Compatibility:** Seamlessly connect to MetaMask on iOS, Android, React Native, and more.
+- **Persistent Connections:** Maintain stable, long-term connections (up to 30+ days) to enhance user experience.
+- **Mobile-First Focus:** Enjoy instant connections via deep linking, eliminating delays and retries for a faster user experience.
+- **Advanced Features:** Batch transactions, RPC access, and EIP-6963 integration for wallet discovery and secure connections.
+- **Ideal for Advanced Use Cases:** Perfect for developers building complex dapps for web3 ecosystems such as DeFi, NFTs, gaming, and beyond.
 
-For a step-by-step guide on integrating MetaMask into your dapp in just a few minutes, you can check out our React tutorials:
+For more details on how the SDK can enhance your dapp, check out the [MetaMask SDK Product Overview](/wallet/connect/sdk/).
 
- - [Create a React dapp with Local State](/tutorials/react-dapp-local-state.md)
- - [Create a React Dapp with Global State](/tutorials/react-dapp-global-state.md)
+## The MetaMask API (JSON-RPC API)
 
-# Connect to MetaMask Extension or Mobile using the MetaMask SDK
+For developers who need direct access to MetaMask’s core wallet functions, the **MetaMask API** allows you to:
 
-Integrate your dapp with [MetaMask SDK](https://metamask.io/) to MetaMask Extension and MetaMask Mobile seamlessly through third party libraries like Web3Onboard or directly using Wagmi or with basic JS/TS.
+- Interact with users' Ethereum accounts
+- Perform actions like signing data, executing transactions, and listening for wallet events
+- Build dapp logic directly within MetaMask or other Ethereum-compatible environments
 
-<CardList
-  items={[
-    {
-      href: "how-to/use-sdk",
-      title: "↔️ Use MetaMask SDK",
-      description:
-        "MetaMask SDK provides a reliable, secure, and seamless connection from your dapp to MetaMask Extension and MetaMask Mobile.",
-    },
-    {
-      href: "how-to/use-sdk",
-      title: "🖊️ Use MetaMask SDK with JavaScript",
-      description:
-        "Import MetaMask SDK into your dapp to enable users to connect to MetaMask Extension and MetaMask Mobile.",
-    },
-    {
-      href: "how-to/use-sdk",
-      title: "📄 Use MetaMask SDK with React",
-      description:
-        "Import MetaMask SDK into your React dapp to enable users to connect to MetaMask Extension and MetaMask Mobile.",
-    },
-    {
-      href: "how-to/use-sdk",
-      title: "📱 Use MetaMask SDK with mobile dapps",
-      description:
-        "Import MetaMask SDK into your mobile dapp to enable users to connect with MetaMask Mobile.",
-    },
-  ]}
-/>
+The MetaMask API is wrapped within the SDK, but if you're looking for a simpler integration with fewer features, visit our [API Reference](/wallet/reference/json-rpc-api/) for more information on using the JSON-RPC API directly.
 
-## New to developing on MetaMask?
+## Resources
 
-If you're new to integrating dapps with MetaMask, check out the following topics:
-
-<CardList
-  items={[
-    {
-      href: "concepts/architecture",
-      title: "📐 Architecture",
-      description: "Learn about the high-level MetaMask architecture.",
-    },
-    {
-      href: "concepts/wallet-api",
-      title: "🌐 About the Wallet API",
-      description: "Learn about MetaMask's Wallet API and its components.",
-    },
-    {
-      href: "tutorials/react-dapp-local-state",
-      title: "🛠️ Create a React dapp tutorial",
-      description:
-        "Follow the tutorial to create a React dapp and integrate it with MetaMask.",
-    },
-    {
-      href: "tutorials/javascript-dapp-simple",
-      title: "🛠️ Create a simple dapp tutorial",
-      description:
-        "Follow the tutorial to create a simple dapp and integrate it with MetaMask.",
-    },
-  ]}
-/>
+- **[🏁 Get Started with the SDK](/wallet/connect/sdk/#steps):** Learn how to integrate the SDK into your dapp.
+- **[🛠️ API How-to Guides](/wallet/connect/wallet-api/):** For specific dapp functions like signing data or interacting with the blockchain.
+- **[Create a simple dapp](/wallet/tutorials/javascript-dapp-simple.md):** Tutorial on integrating the SDK into a basic JS/TS dapp.
+- **[Create a React dapp with Local State](/tutorials/react-dapp-local-state.md):** Integrate the SDK into a React component.
+- **[Create a React Dapp with Global State](/tutorials/react-dapp-global-state.md):** Use the SDK within an existing React dapp using the React Context API.
 
 ## Questions?
 
-If you have questions about integrating your dapp with MetaMask, you can interact with the MetaMask
-team and community on the MetaMask channels on [Consensys Discord](https://discord.gg/consensys).
+For more support, connect with the MetaMask team and community on [Consensys Discord](https://discord.gg/consensys).
 
 :::info MetaMask user support
-If you need MetaMask user support, visit the [MetaMask Help Center](https://support.metamask.io/).
+For MetaMask user support, visit the [MetaMask Help Center](https://support.metamask.io/).
 :::
