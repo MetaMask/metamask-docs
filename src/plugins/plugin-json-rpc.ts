@@ -40,14 +40,38 @@ const requests = [
   },
 ];
 
+
+
 export default function useNetworksMethodPlugin() {
   return {
     name: "plugin-json-rpc",
     async contentLoaded({ actions }) {
-      const { setGlobalData } = actions;
+      const { setGlobalData, createData, addRoute } = actions;
+
       await fetchMultipleData(requests)
         .then((responseArray) => {
+
           setGlobalData({ netData: responseArray });
+
+          return Promise.all(responseArray[0].data.methods.map(async (page) => {
+
+            const methodMDXContent = generateMethodMDX(page);
+
+            const filePath = await createData(
+              `services/reference/linea/json-rpc-methods-new/${page.name}.mdx`,
+              methodMDXContent
+            );
+
+            return addRoute({
+              path: `/services/reference/linea/json-rpc-methods-new/${page.name}`,
+              component: require.resolve("../CustomPage.tsx"),
+              exact: true,
+              modules: {
+                methodFile: filePath,
+              },
+              customData: { ...page }
+            });
+          }));
         })
         .catch(() => {
           setGlobalData({ netData: [] });
@@ -55,3 +79,20 @@ export default function useNetworksMethodPlugin() {
     },
   };
 }
+
+
+function generateMethodMDX(page) {
+  return `---
+title: '${page.name}'
+---
+
+
+
+# ${page.name}
+
+
+  `;
+}
+
+
+
