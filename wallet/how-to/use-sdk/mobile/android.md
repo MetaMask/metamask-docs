@@ -251,7 +251,7 @@ The following example gets the user's account balance by calling
 [`eth_getBalance`](/wallet/reference/eth_getBalance).
 This is a [read-only request](../javascript/make-read-only-requests.md), which uses the Infura API
 if an `infuraAPIKey` is provided in the `SDKOptions`.
-We highly recommend using the Infura API to provide a seamless user experience.
+We recommend using the Infura API to provide a seamless user experience.
 
 ```kotlin
 val balance = ethereum.getEthBalance(ethereum.selectedAddress, "latest")
