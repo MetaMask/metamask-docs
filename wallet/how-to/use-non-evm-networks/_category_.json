@@ -2,8 +2,7 @@
   "label": "Use non-EVM networks",
   "position": 9,
   "link": {
-    "type": "generated-index",
-    "slug": "how-to/use-non-evm-networks",
-    "description": "You can interact with users' accounts on non-EVM networks in MetaMask."
+    "type": "doc",
+    "id": "how-to/use-non-evm-networks/index"
   }
 }
