@@ -1,3 +1,5 @@
+import LINEA_JSON from "./linea-openrpc.json";
+
 export interface ResponseItem {
   name: string;
   data: any | null;
@@ -5,6 +7,9 @@ export interface ResponseItem {
 }
 
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
+  if (name === NETWORK_NAMES.linea) {
+    return { name, data: LINEA_JSON, error: false }
+  }
   try {
     const response = await fetch(url, { method: "GET" });
     const data = await response.json();
