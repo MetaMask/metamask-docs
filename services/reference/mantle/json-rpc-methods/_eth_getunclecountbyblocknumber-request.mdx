@@ -12,4 +12,11 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getUncleCountByBlockNumber", "params": ["0x5bad55"], "id": 1}'
+```
+
+  </TabItem>
 </Tabs>
