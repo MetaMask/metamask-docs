@@ -11,11 +11,11 @@ const LOGIN_FF = "mm-unified-login";
 const ProjectsBox = () => {
   const {
     projects,
-    account,
+    metaMaskAccount,
     walletLinked,
     metaMaskConnectHandler,
     walletLinkUrl,
-  } = useContext(LoginContext);
+  } = useContext(MetamaskProviderContext);
   const options = Object.keys(projects).map((v) => ({
     value: v,
     label: projects[v].name,
@@ -49,7 +49,7 @@ const ProjectsBox = () => {
     loginEnabled && (
       <div className={styles.selectWrapper}>
         <div className={styles.selectTitle}>Infura API Key</div>
-        {account && !!Object.keys(projects).length ? (
+        {metaMaskAccount && !!Object.keys(projects).length ? (
           <Select
             className={styles.selectProjects}
             multi={false}
@@ -89,7 +89,7 @@ const ProjectsBox = () => {
           />
         ) : (
           <div className={styles.selectProjects}>
-            {(walletLinked === undefined) && (
+            {walletLinked === undefined && (
               <>
                 <div>
                   Connect your MetaMask wallet to start sending requests to your

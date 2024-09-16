@@ -12,4 +12,11 @@ curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://blast-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getUncleByBlockNumberAndIndex", "params": ["0x29c", "0x0"], "id": 1}'
+```
+
+  </TabItem>
 </Tabs>

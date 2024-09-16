@@ -19,9 +19,7 @@ export const AuthBox = ({ handleConnect }: AuthBoxProps) => {
   }
   return (
     <div className={styles.msgWrapper}>
-      <div className={styles.msgText}>
-        Connect your MetaMask wallet to send requests to your Infura API keys.
-      </div>
+      <div className={styles.msgText}>Connect your MetaMask wallet to run requests successfully.</div>
       <div>
         <button
           className={clsx(global.primaryBtn, styles.msgButton)}

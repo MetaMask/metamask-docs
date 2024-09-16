@@ -42,10 +42,12 @@ request to `support@infura.io` and we will assess if your request can be accommo
 
 ## Blast
 
-| Network           | Description         | URL                                            |
-| ----------------- | ------------------- | ---------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://blast-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://blast-sepolia.infura.io/v3/<API-KEY>` |
+| Network           | Description         | URL                                                |
+|-------------------|-------------------------|----------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://blast-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://blast-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://blast-sepolia.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://blast-sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ## Binance Smart Chain
 
@@ -66,17 +68,12 @@ request to `support@infura.io` and we will assess if your request can be accommo
 
 ## Ethereum
 
-:::note
-The Holesky testnet is supported through the
-[Decentralized Infrastructure Network (DIN)](https://www.infura.io/solutions/decentralized-infrastructure-service)
-service and does not currently support WebSockets.
-:::
-
 | Network           | Description             | URL                                       |
 | ----------------- | ----------------------- | ----------------------------------------- |
 | Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<API-KEY>`  |
+| Holesky           | JSON-RPC over WebSocket | `wss://holesky.infura.io/ws/v3/<API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<API-KEY>` |
 
@@ -117,10 +114,12 @@ Sepolia instead.
 
 ## Mantle
 
-| Network           | Description         | URL                                             |
-| ----------------- | ------------------- | ----------------------------------------------- |
-| Mainnet           | JSON-RPC over HTTPS | `https://mantle-mainnet.infura.io/v3/<API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://mantle-sepolia.infura.io/v3/<API-KEY>` |
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://mantle-sepolia.infura.io/ws/v3/<API-KEY>` |
 
 ### opBNB
 

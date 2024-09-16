@@ -3,7 +3,6 @@ import React, {
   useContext,
   useMemo,
   useState,
-  useEffect,
 } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
@@ -20,9 +19,8 @@ import {
   trackClickForSegment,
   trackInputChangeForSegment,
 } from "@site/src/lib/segmentAnalytics";
-import { REF_SERVICES_PATH } from "@site/src/lib/constants";
-import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { LoginContext } from "@site/src/theme/Root";
+import AuthBox from "@site/src/components/ParserOpenRPC/AuthBox";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -49,7 +47,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { account, provider } = useContext(LoginContext);
+  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
   const { colorMode } = useColorMode();
   const openModal = () => {
     setModalOpen(true);
@@ -115,15 +113,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
 
   if (currentMethodData === null) return null;
 
-  useEffect(() => {
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({
-        name: account,
-        id: account,
-        username: account,
-      });
-    }
-  }, [account]);
+  const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
 
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
@@ -248,17 +238,16 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {location.pathname.startsWith(REF_SERVICES_PATH) && (
-                <ProjectsBox />
-              )}
+            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
             <RequestBox
-              isMetamaskInstalled={!!provider}
+              isMetamaskInstalled={!!metaMaskAccount}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
               response={reqResult}
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
+              isMetamaskNetwork={isMetamaskNetwork}
             />
           </div>
         </div>

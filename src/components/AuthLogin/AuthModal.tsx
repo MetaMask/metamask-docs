@@ -12,7 +12,7 @@ import {
   getUserIdFromJwtToken,
 } from "../../lib/siwsrp/auth";
 import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
-import { LoginContext } from "@site/src/theme/Root";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
 type AuthModalProps = {
@@ -138,7 +138,7 @@ const AuthModal = ({
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
-  const { sdk, setWalletLinked, setWalletLinkUrl, metaMaskDisconnect, setProjects, setAccount, setProvider } = useContext(LoginContext);
+  const { sdk, setWalletLinked, setWalletLinkUrl, metaMaskDisconnect, setProjects, setMetaMaskAccount, setMetaMaskProvider } = useContext(MetamaskProviderContext);
 
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING);
@@ -149,11 +149,11 @@ const AuthModal = ({
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
-      setAccount(accounts);
+      setMetaMaskAccount(accounts);
       if (accounts && accounts.length > 0) {
-        setAccount(accounts[0]);
+        setMetaMaskAccount(accounts[0]);
         const provider = sdk.getProvider();
-        setProvider(provider);
+        setMetaMaskProvider(provider);
       }
       
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
