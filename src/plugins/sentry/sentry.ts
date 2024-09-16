@@ -24,7 +24,5 @@ export default (function () {
     maskAllText: false,
   });
 
-  console.log("Sentry client ready");
-
   return Sentry;
 })();
