@@ -7,6 +7,32 @@ const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
 
+const fetch = require('node-fetch');
+
+async function fetchAndGenerateSidebarItems() {
+  try {
+    const response = await fetch("https://sot-network-methods.vercel.app/specs/linea");
+    const data = await response.json();
+    const dynamicItems = data.methods.map((method) => ({
+      type: "link",
+      label: method.name,
+      href: `/services/reference/linea/json-rpc-methods-new/${method.name}`,
+    }));
+    return [
+      {
+        type: "category",
+        label: "JSON-RPC Methods NEW",
+        collapsed: false,
+        items: dynamicItems,
+      },
+    ];
+  } catch (error) {
+    console.error("Error fetching methods:", error);
+    return [];
+  }
+}
+
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "MetaMask developer documentation",
@@ -122,6 +148,17 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
+        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          let sidebarItems = await defaultSidebarItemsGenerator(args);
+          const dynamicSidebarItems = await fetchAndGenerateSidebarItems();
+          const updatedItems = sidebarItems.map(item => {
+            if (item?.label === "Linea" && item?.items) {
+              item.items = [...item.items, ...dynamicSidebarItems]
+            }
+            return item;
+          })
+          return [...updatedItems];
+        },
       },
     ],
     [
