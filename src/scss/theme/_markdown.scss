@@ -13,6 +13,16 @@
     padding: 0;
   }
 
+  strong,
+  b {
+    font-weight: 500;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
   /* Links */
   > p,
   > span,
