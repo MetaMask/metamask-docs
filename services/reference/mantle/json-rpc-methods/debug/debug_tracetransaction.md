@@ -43,6 +43,13 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
+  <TabItem value="WSS" label="WSS" default>
+
+```bash
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0xdcecf3f9fc68c92276d6c4b40c17b185f8a3fcb9d1a959a495d38d480782404b", {"tracer": "callTracer"}], "id": 1}'
+```
+
+  </TabItem>
 </Tabs>
 
 ### Result

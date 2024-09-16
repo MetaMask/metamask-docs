@@ -42,11 +42,18 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_getBalanceValues","params":["0xd071acb641553a2e205181a42aa3a8ace97dae6d","latest"],"id":1}'
+  -d '{"jsonrpc": "2.0","method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
 ```
 
   </TabItem>
-  </Tabs>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://blast-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
 
 ### Response
 
