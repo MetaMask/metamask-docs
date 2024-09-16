@@ -16,7 +16,13 @@ padding: 0 0 8px 0;
   border-radius: 8px !important;
   padding: 12px 16px 12px 16px !important;
   font-size: 16px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: grid;
+  justify-content: center;
+  align-items: center;
 }
+
 .selectDropdown {
   background: #141618 !important;
   border: 1px solid #848C96 !important;
@@ -27,4 +33,10 @@ padding: 0 0 8px 0;
 
 .selectDropdown {
   padding: 4px 0 !important;
+}
+
+.connectButton {
+  order: 100;
+  margin-left: 12px;
+  text-wrap: nowrap;
 }

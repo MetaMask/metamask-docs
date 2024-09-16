@@ -2,17 +2,27 @@ import React, { useContext, useEffect, useState } from "react";
 import ldClient from "launchdarkly";
 import { LoginContext } from "@site/src/theme/Root";
 import Select from "react-dropdown-select";
+import Button from "@site/src/components/Button";
 import styles from "./styles.module.css";
+import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
 
 const LOGIN_FF = "mm-unified-login";
 
 const ProjectsBox = () => {
-  const { projects, account } = useContext(LoginContext);
+  const {
+    projects,
+    account,
+    walletLinked,
+    metaMaskConnectHandler,
+    walletLinkUrl,
+  } = useContext(LoginContext);
   const options = Object.keys(projects).map((v) => ({
     value: v,
     label: projects[v].name,
   }));
-  const [currentProject, setCurrentProject] = useState([options[0]].filter(Boolean));
+  const [currentProject, setCurrentProject] = useState(
+    [options[0]].filter(Boolean)
+  );
   const [ldReady, setLdReady] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(false);
 
@@ -31,9 +41,8 @@ const ProjectsBox = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentProject.length && options[0])
-        setCurrentProject([options[0]])
-  }, [projects])
+    if (!currentProject.length && options[0]) setCurrentProject([options[0]]);
+  }, [projects]);
 
   return (
     ldReady &&
@@ -53,11 +62,11 @@ const ProjectsBox = () => {
               return (
                 <div>
                   {state.values.map((item) => (
-                      <div key={item.value}>
-                        <div>{item.label}</div>
-                        <div>{item.value}</div>
-                      </div>
-                    ))}
+                    <div key={item.value}>
+                      <div>{item.label}</div>
+                      <div>{item.value}</div>
+                    </div>
+                  ))}
                 </div>
               );
             }}
@@ -80,8 +89,50 @@ const ProjectsBox = () => {
           />
         ) : (
           <div className={styles.selectProjects}>
-            Connect your MetaMask wallet to start sending requests to your
-            Infura API keys.
+            {(walletLinked === undefined) && (
+              <>
+                <div>
+                  Connect your MetaMask wallet to start sending requests to your
+                  Infura API keys.
+                </div>
+                <Button
+                  thin
+                  className={styles.connectButton}
+                  onClick={metaMaskConnectHandler}
+                >
+                  Connect Wallet
+                </Button>
+              </>
+            )}
+            {walletLinked === WALLET_LINK_TYPE.NO && (
+              <>
+                <div>
+                  Link your Infura account to send requests to your Infura API
+                  keys.
+                </div>
+                <Button
+                  thin
+                  className={styles.connectButton}
+                  onClick={() => (window.location.href = walletLinkUrl)}
+                >
+                  Link Infura Account
+                </Button>
+              </>
+            )}
+            {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
+              <>
+                <div>
+                  Select Infura account linked with your current wallet.
+                </div>
+                <Button
+                  thin
+                  className={styles.connectButton}
+                  onClick={() => (window.location.href = walletLinkUrl)}
+                >
+                  Select Infura Account
+                </Button>
+              </>
+            )}
           </div>
         )}
       </div>

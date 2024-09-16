@@ -23,6 +23,7 @@ import {
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal, {
   AUTH_LOGIN_STEP,
+  WALLET_LINK_TYPE
 } from "@site/src/components/AuthLogin/AuthModal";
 
 const sdk = new MetaMaskSDK({
@@ -53,34 +54,50 @@ interface Project {
 
 interface ILoginContext {
   projects: { [key: string]: Project };
+  setProjects: (arg: { [key: string]: Project }) => void;
   metaMaskConnectHandler: () => Promise<void>;
   metaMaskDisconnect: () => Promise<void>;
-  userId: string;
+  userId: string | undefined;
   account: string;
+  setAccount: (arg: string[] | string) => void;
   provider: SDKProvider;
+  setProvider: (arg: SDKProvider) => void;
   sdk: MetaMaskSDK;
   disconnect: () => Promise<void>;
+  setWalletLinked: (arg: WALLET_LINK_TYPE) => void
+  walletLinked: WALLET_LINK_TYPE | undefined
+  setWalletLinkUrl: (arg: string) => void
+  walletLinkUrl: string
 }
 
 export const LoginContext = createContext<ILoginContext>({
   projects: {},
+  setProjects: () => {},
   metaMaskConnectHandler: () => new Promise(() => {}),
   metaMaskDisconnect: () => new Promise(() => {}),
   userId: undefined,
   account: undefined,
+  setAccount: () => {},
   provider: undefined,
+  setProvider: () => {},
   sdk: undefined,
   disconnect: () => new Promise(() => {}),
+  setWalletLinked: () => {},
+  walletLinked: undefined,
+  setWalletLinkUrl: () => {},
+  walletLinkUrl: ''
 });
 
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({});
-  const [userId, setUserId] = useState<string>(undefined);
+  const [userId, setUserId] = useState<string>('');
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const [provider, setProvider] = useState(undefined);
   const [account, setAccount] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
+  const [walletLinked, setWalletLinked] = useState<WALLET_LINK_TYPE | undefined>(undefined);
+  const [walletLinkUrl, setWalletLinkUrl] = useState<string>('');
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
@@ -117,6 +134,7 @@ export const LoginProvider = ({ children }) => {
     getStaleDate();
     if (REF_ALLOW_LOGIN_PATH.some((item) => url.pathname.includes(item))) {
       const token = url.searchParams.get("token");
+      
       if (token) {
         saveTokenString(token);
         const userIdFromjwtToken = getUserIdFromJwtToken();
@@ -167,16 +185,7 @@ export const LoginProvider = ({ children }) => {
 
   const metaMaskConnectHandler = useCallback(async () => {
     try {
-      const accounts = await sdk.connect();
-      if (sdk.isExtensionActive()) {
-        setOpenAuthModal(true);
-      }
-      setAccount(accounts);
-      if (accounts && accounts.length > 0) {
-        setAccount(accounts[0]);
-        const provider = sdk.getProvider();
-        setProvider(provider);
-      }
+      setOpenAuthModal(true);
     } catch (err) {
       console.warn("failed to connect..", err);
     }
@@ -189,6 +198,7 @@ export const LoginProvider = ({ children }) => {
       setUserId(undefined);
       setAccount(undefined);
       setProjects({});
+      setWalletLinked(undefined)
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
@@ -201,13 +211,20 @@ export const LoginProvider = ({ children }) => {
         <LoginContext.Provider
           value={
             {
+              account,
+              setAccount,
               projects,
+              setProjects,
               metaMaskConnectHandler,
               metaMaskDisconnect,
               userId,
-              account,
               provider,
+              setProvider,
               sdk,
+              walletLinked,
+              setWalletLinked,
+              walletLinkUrl,
+              setWalletLinkUrl
             } as ILoginContext
           }
         >
@@ -215,9 +232,7 @@ export const LoginProvider = ({ children }) => {
 
           <AuthModal
             open={openAuthModal}
-            metaMaskDisconnect={metaMaskDisconnect}
             setOpen={setOpenAuthModal}
-            setProjects={setProjects}
             setUser={setUserId}
             setStep={setStep}
             step={step}
