@@ -712,6 +712,10 @@ module.exports.onHomePage = async () => {
 <img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+## User-defined components
+
+In addition to the components provided by the SDK, you can also [define your own components](user-defined-components.md).
+
 ## Emojis
 
 Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept emojis.
