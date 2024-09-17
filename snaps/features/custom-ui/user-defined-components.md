@@ -133,7 +133,17 @@ To use the `Accounts` component, you can pass an array of accounts as props:
 import { Accounts } from "./Accounts";
 
 export const onHomepage = () => {
-  return <Accounts accounts={[{ name: "Account 1", address: "0x123" }, { name: "Account 2", address: "0x456" }]} />;
+  const accounts = [
+    {
+      name: "Account 1",
+      address: "0x6827b8f6cc60497d9bf5210d602C0EcaFDF7C405"
+    },
+    {
+      name: "Account 2",
+      address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F"
+    }
+  ];
+  return <Accounts accounts={accounts} />;
 };
 ```
 
