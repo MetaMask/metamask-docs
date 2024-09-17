@@ -64,8 +64,8 @@ To use the `Insight` component, you can pass the `from` and `to` addresses as pr
 ```jsx title="index.jsx"
 import { Insight } from "./Insight";
 
-export const onTransaction = () => {
-  return { content: <Insight from="0x123" to="0x456" /> };
+export const onTransaction = ({ transaction }) => {
+  return { content: <Insight from={transaction.from} to={transaction.to} /> };
 };
 ```
 
