@@ -159,7 +159,6 @@ export const Insight: SnapComponent<InsightProps> = ({ from, to }) => {
       <Row label="To">
         {to ? <Address address={from as `0x${string}`} /> : <Text>None</Text>}
       </Row>
-      <Button name="transaction-type">See transaction type</Button>
     </Box>
   );
 };
