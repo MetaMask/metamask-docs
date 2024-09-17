@@ -11,7 +11,7 @@ In this tutorial, you'll send a regular transaction of 0.001 ETH from one accoun
 
 ## Prerequisites
 
-- A [Web3 project](../../../api/getting-started.md) on Infura
+- A [Web3 project](../../../get-started/infura.md) on Infura
 - [Node.js installed](https://nodejs.org/en/download/)
 - An Ethereum account
 
@@ -91,7 +91,7 @@ Create a `.env` file in your project directory to store the project and Ethereum
 
 ```text title=".env"
 ETHEREUM_NETWORK = "<NETWORK>"
-INFURA_API_KEY = "<API-KEY>"
+INFURA_API_KEY = "<YOUR-API-KEY>"
 SIGNER_PRIVATE_KEY = "<PRIVATE-KEY>"
 ```
 
@@ -110,7 +110,7 @@ SIGNER_PRIVATE_KEY = "0x561...x...61df"
 Replace the following values in the `.env` file:
 
 - `<NETWORK>` with `sepolia` or the alternative network you are using.
-- `<API-KEY>` with your API key of the web3 project.
+- `<YOUR-API-KEY>` with your API key of the web3 project.
 - `<PRIVATE-KEY>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key). A transaction must be signed with the sender's private key. Make sure that you prefix the `SIGNER_PRIVATE_KEY` value with `0x`. The private key you export from MetaMask isn't prefixed with `0x`.
 
 :::danger

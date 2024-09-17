@@ -31,7 +31,7 @@ Object with the following fields:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -39,7 +39,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="cURL">
 
 ```bash
-curl https://mantle-mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"eth_getBalanceValues","params":["0xd071acb641553a2e205181a42aa3a8ace97dae6d","latest"],"id":1}'

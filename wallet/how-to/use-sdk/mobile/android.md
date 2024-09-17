@@ -7,15 +7,17 @@ tags:
   - Android SDK
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Use MetaMask SDK with Android
 
-Import [MetaMask SDK](../../../concepts/sdk/index.md) into your native Android dapp to enable
+Import MetaMask SDK into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip See also
-
-- [Android SDK architecture](../../../concepts/sdk/android.md)
-  :::
+- [Android SDK architecture](../../../concepts/android.md)
+:::
 
 ## Prerequisites
 
@@ -36,7 +38,7 @@ add the following entry to the `dependencies` block:
 
 ```gradle title="build.gradle"
 dependencies {
-  implementation "io.metamask.androidsdk:metamask-android-sdk:0.2.1"
+  implementation "io.metamask.androidsdk:metamask-android-sdk"
 }
 ```
 
@@ -53,11 +55,13 @@ import io.metamask.androidsdk.Ethereum
 
 ### 3. Connect your dapp
 
+The SDK supports callbacks using the `Ethereum` provider object, and coroutines using the
+`EthereumFlow` provider object.
 You can connect your dapp to MetaMask in one of two ways:
 
-1. [Use the `ethereum` provider object directly](#31-use-the-provider-object-directly).
+1. [Use the `Ethereum` or `EthereumFlow` provider object directly](#31-use-the-provider-object-directly).
    We recommend using this method in a pure model layer.
-2. [Use a ViewModel](#32-use-a-viewmodel) that injects the `ethereum` provider object.
+2. [Use a ViewModel](#32-use-a-viewmodel) that injects the `Ethereum` or `EthereumFlow` provider object.
    We recommend using this method at the app level, because it provides a single instance that
    survives configuration changes and can be shared across all views.
 
@@ -69,35 +73,97 @@ To disable this, set `ethereum.enableDebug = false`.
 
 #### 3.1. Use the provider object directly
 
-Use the `ethereum` provider object directly to connect your dapp to MetaMask by adding the following
-code to your project file:
+Use the `Ethereum` provider object (for callbacks) or the `EthereumFlow` provider object (for
+coroutines) to connect your dapp to MetaMask.
+Add the following code to your project file:
+
+<Tabs>
+<TabItem value="Callbacks">
 
 ```kotlin
 @AndroidEntryPoint
-class SomeModel(private val repository: ApplicationRepository) {
-  val ethereum = Ethereum(context)
+class SomeModel(context: Context) {
 
-  val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
+  val dappMetadata = DappMetadata("Droid Dapp", "https://www.droiddapp.io")
+
+  // To use the Infura API to make read-only requests, specify your Infura API key using the
+  // infuraAPIKey option in SDKOptions.
+  val infuraAPIKey = "1234567890"
+
+  // To use your own node (for example, with Hardhat) to make read-only requests, specify your
+  // node's chain ID and RPC URL using the readonlyRPCMap option in SDKOptions.
+  val readonlyRPCMap = mapOf("0x1" to "hptts://www.testrpc.com")
+
+  // Use callbacks.
+  val ethereum = Ethereum(context, dappMetadata, SDKOptions(infuraAPIKey, readonlyRPCMap))
 
   // This is the same as calling eth_requestAccounts.
-  ethereum.connect(dapp) { result ->
-    if (result is RequestError) {
-      Log.e(TAG, "Ethereum connection error: ${result.message}")
-    } else {
-      Log.d(TAG, "Ethereum connection result: $result")
+  ethereum.connect() { result ->
+    when (result) {
+      is Result.Error -> {
+        Logger.log("Ethereum connection error: ${result.error.message}")
+      }
+      is Result.Success.Item -> {
+        Logger.log("Ethereum connection result: ${result.value}")
+      }
     }
   }
 }
 ```
 
+</TabItem>
+<TabItem value="Coroutines">
+
+```kotlin
+@AndroidEntryPoint
+class SomeModel(context: Context) {
+
+  val dappMetadata = DappMetadata("Droid Dapp", "https://www.droiddapp.io")
+
+  // To use the Infura API to make read-only requests, specify your Infura API key using the
+  // infuraAPIKey option in SDKOptions.
+  val infuraAPIKey = "1234567890"
+
+  // To use your own node (for example, with Hardhat) to make read-only requests, specify your
+  // node's chain ID and RPC URL using the readonlyRPCMap option in SDKOptions.
+  val readonlyRPCMap = mapOf("0x1" to "hptts://www.testrpc.com")
+
+  // Use coroutines.
+  val coroutineScope = rememberCoroutineScope()
+
+  // This is the same as calling eth_requestAccounts.
+  coroutineScope.launch {
+    when (val result = ethereum.connect()) {
+      is Result.Error -> {
+        Logger.log("Ethereum connection error: ${result.error.message}")
+      }
+      is Result.Success.Item -> {
+        Logger.log("Ethereum connection result: ${result.value}")
+      }
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+As an alternative to calling the `connect()` method, you can
+[call convenience methods](#5-optional-call-convenience-methods) to connect to MetaMask and make a
+request in a single RPC request.
+
 #### 3.2. Use a ViewModel
 
 To connect your dapp to MetaMask using a ViewModel, create a ViewModel that injects the
-`ethereum` provider object, then add wrapper functions for each Ethereum method you wish to call.
+`Ethereum` provider object (for callbacks) or the `EthereumFlow` provider object (for coroutines).
+Add wrapper functions for each Ethereum method you wish to call.
 
 You can use a dependency manager such as [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 to initialize the ViewModel and maintain its state across configuration changes.
 If you use Hilt, your setup might look like the following:
+
+<Tabs>
+<TabItem value="Callbacks">
 
 ```kotlin title="EthereumViewModel.kt"
 @HiltViewModel
@@ -112,70 +178,91 @@ class EthereumViewModel @Inject constructor(
   }
 
   // Wrapper function to connect the dapp.
-  fun connect(dapp: Dapp, callback: ((Any?) -> Unit)?) {
-    ethereum.connect(dapp, callback)
+  fun connect(callback: ((Result) -> Unit)?) {
+    ethereum.connect(callback)
   }
 
   // Wrapper function call all RPC methods.
-  fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
+  fun sendRequest(request: EthereumRequest, callback: ((Result) -> Unit)?) {
     ethereum.sendRequest(request, callback)
   }
 }
 ```
 
-To use the ViewModel, add the following code to your project file:
+</TabItem>
+<TabItem value="Coroutines">
 
-```kotlin
-val ethereumViewModel: EthereumViewModel by viewModels()
+```kotlin title="EthereumFlowViewModel.kt"
+@HiltViewModel
+class EthereumFlowViewModel @Inject constructor(
+  private val ethereum: EthereumFlowWrapper
+): ViewModel() {
 
-val dapp = Dapp("Droid Dapp", "https://droiddapp.com")
+  val ethereumFlow: Flow<EthereumState> get() = ethereum.ethereumState
+    
+  // Wrapper function to connect the dapp.  
+  suspend fun connect(): Result {
+    return ethereum.connect()
+  }
 
-// This is the same as calling eth_requestAccounts.
-ethereum.connect(dapp) { result ->
-  if (result is RequestError) {
-    Log.e(TAG, "Ethereum connection error: ${result.message}")
-  } else {
-    Log.d(TAG, "Ethereum connection result: $result")
+  // Wrapper function call all RPC methods.
+  suspend fun sendRequest(request: EthereumRequest): Result {
+    return ethereum.sendRequest(request)
   }
 }
 ```
 
+</TabItem>
+</Tabs>
+
+To use the ViewModel, add the following code to your project file:
+
+```kotlin
+val ethereumViewModel: EthereumFlowViewModel by viewModels()
+
+// This is the same as calling eth_requestAccounts.
+ethereumViewModel.connect()
+```
+
+As an alternative to calling the `connect()` method, you can
+[call convenience methods](#5-optional-call-convenience-methods) to connect to MetaMask and make a
+request in a single RPC request.
+
+:::info
 See the example dapp's
 [`EthereumViewModel.kt`](https://github.com/MetaMask/metamask-android-sdk/blob/main/app/src/main/java/com/metamask/dapp/EthereumViewModel.kt)
-file for more information.
+and
+[`EthereumFlowViewModel.kt`](https://github.com/MetaMask/metamask-android-sdk/blob/main/app/src/main/java/com/metamask/dapp/EthereumFlowViewModel.kt)
+files for more information.
+:::
 
 ### 4. Call methods
 
 You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using
 `ethereum.sendRequest()`.
+The SDK also provides [convenience methods](#5-optional-call-convenience-methods) for common RPC
+requests so you don't have to manually construct requests.
+
+The following examples use coroutines.
 
 #### Example: Get account balance
 
 The following example gets the user's account balance by calling
 [`eth_getBalance`](/wallet/reference/eth_getBalance).
+This is a [read-only request](../javascript/make-read-only-requests.md), which uses the Infura API
+if an `infuraAPIKey` is provided in the `SDKOptions`.
+We recommend using the Infura API to provide a seamless user experience.
 
 ```kotlin
-var balance: String? = null
+val balance = ethereum.getEthBalance(ethereum.selectedAddress, "latest")
 
-// Create parameters.
-val params: List<String> = listOf(
-  ethereum.selectedAddress,
-  // "latest", "earliest", or "pending" (optional)
-  "latest"
-)
-
-// Create request.
-val getBalanceRequest = EthereumRequest(
-  method = EthereumMethod.ETHGETBALANCE.value,
-  params = params
-)
-
-// Make request.
-ethereum.sendRequest(getBalanceRequest) { result ->
-  if (result is RequestError) {
-    // Handle error.
-  } else {
-    balance = result
+when (balance) {
+  is Result.Success.Item -> {
+    Logger.log("Ethereum account balance: ${result.value}")
+    balance = result.value
+  }
+  is Result.Error -> {
+    Logger.log("Ethereum request balance error: ${result.error.message}")
   }
 }
 ```
@@ -187,20 +274,41 @@ The following example requests the user sign a message by calling
 
 ```kotlin
 val message = "{\"domain\":{\"chainId\":\"${ethereum.chainId}\",\"name\":\"Ether Mail\",\"verifyingContract\":\"0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC\",\"version\":\"1\"},\"message\":{\"contents\":\"Hello, Busa!\",\"from\":{\"name\":\"Kinno\",\"wallets\":[\"0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826\",\"0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF\"]},\"to\":[{\"name\":\"Busa\",\"wallets\":[\"0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB\",\"0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57\",\"0xB0B0b0b0b0b0B000000000000000000000000000\"]}]},\"primaryType\":\"Mail\",\"types\":{\"EIP712Domain\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"chainId\",\"type\":\"uint256\"},{\"name\":\"verifyingContract\",\"type\":\"address\"}],\"Group\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"members\",\"type\":\"Person[]\"}],\"Mail\":[{\"name\":\"from\",\"type\":\"Person\"},{\"name\":\"to\",\"type\":\"Person[]\"},{\"name\":\"contents\",\"type\":\"string\"}],\"Person\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"wallets\",\"type\":\"address[]\"}]}}"
+val address = ethereum.selectedAddress
 
-val from = ethereum.selectedAddress
-val params: List<String> = listOf(from, message)
+when (val result = ethereum.ethSignTypedDataV4(message, address)) {
+  is Result.Error -> {
+    Logger.log("Ethereum sign error: ${result.error.message}")
+  }
+  is Result.Success.Item -> {
+    Logger.log("Ethereum sign result: ${result.value}")
+  }
+}
+```
 
-val signRequest = EthereumRequest(
-  method = EthereumMethod.ETH_SIGN_TYPED_DATA_V4.value,
-  params = params
+#### Example: Batch requests
+
+The following example requests the user to sign multiple messages at once by
+[batching multiple requests](../javascript/batch-json-rpc-requests.md) that call
+[`personal_sign`](/wallet/reference/personal_sign).
+
+```kotlin
+val ethereumRequest1 = EthereumRequest(
+  method = EthereumMethod.PERSONAL_SIGN.value,
+  params = listOf(address, "hello world")
 )
 
-ethereum.sendRequest(signRequest) { result ->
-  if (result is RequestError) {
-    Log.e(TAG, "Ethereum sign error: ${result.message}")
-  } else {
-    Log.d(TAG, "Ethereum sign result: $result")
+val ethereumRequest2 = EthereumRequest(
+  method = EthereumMethod.PERSONAL_SIGN.value,
+  params = listOf(address, "second message")
+)
+
+when (val result = ethereum.sendRequestBatch(listOf(ethereumRequest1, ethereumRequest2))) {
+  is Result.Error -> {
+    Logger.log("Ethereum batch sign error: ${result.error.message}")
+  }
+  is Result.Success.Items -> {
+    Logger.log("Ethereum batch sign result: ${result.value}")
   }
 }
 ```
@@ -211,28 +319,17 @@ The following example sends a transaction by calling
 [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
 
 ```kotlin
-// Create parameters.
 val from = ethereum.selectedAddress
 val to = "0x0000000000000000000000000000000000000000"
-val amount = "0x01"
-val params: Map<String, Any> = mapOf(
-  "from" to from,
-  "to" to to,
-  "amount" to amount
-)
+val value = "0x8ac7230489e80000"
 
-// Create request.
-val transactionRequest = EthereumRequest(
-  method = EthereumMethod.ETH_SEND_TRANSACTION.value,
-  params = listOf(params)
-)
-
-// Make a transaction request.
-ethereum.sendRequest(transactionRequest) { result ->
-  if (result is RequestError) {
+when (val result = ethereum.sendTransaction(from, to, value)) {
+  is Result.Success.Item -> {
+    Logger.log("Ethereum transaction result: ${result.value}")
+    balance = result.value
+  }
+  is Result.Error -> {
     // Handle error.
-  } else {
-    Log.d(TAG, "Ethereum transaction result: $result")
   }
 }
 ```
@@ -240,70 +337,67 @@ ethereum.sendRequest(transactionRequest) { result ->
 #### Example: Switch chain
 
 The following example switches to a new Ethereum chain by calling
-[`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain) and
-[`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain).
+[`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain).
 
 ```kotlin
-fun switchChain(
-  chainId: String,
-  onSuccess: (message: String) -> Unit,
-  onError: (message: String, action: (() -> Unit)?) -> Unit
-) {
-  val switchChainParams: Map<String, String> = mapOf("chainId" to chainId)
-  val switchChainRequest = EthereumRequest(
-    method = EthereumMethod.SWITCH_ETHEREUM_CHAIN.value,
-    params = listOf(switchChainParams)
-  )
-
-  ethereum.sendRequest(switchChainRequest) { result ->
-    if (result is RequestError) {
-      if (result.code == ErrorType.UNRECOGNIZED_CHAIN_ID.code || result.code == ErrorType.SERVER_ERROR.code) {
-        val message = "${Network.chainNameFor(chainId)} ($chainId) has not been added to your MetaMask wallet. Add chain?"
-
-        val action: () -> Unit = {
-          addEthereumChain(
-            chainId,
-            onSuccess = { result -> onSuccess(result) },
-            onError = { error -> onError(error, null) }
-          )
-        }
-        onError(message, action)
-      } else {
-        onError("Switch chain error: ${result.message}", null)
-      }
-    } else {
-      onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
-    }
+when(val result = ethereum.switchEthereumChain(chainId)) {
+  is Result.Success.Item -> {
+    // Successfully switched to chainId.
+  }
+  is Result.Error -> {
+    // Handle error.
   }
 }
+```
 
-private fun addEthereumChain(
-  chainId: String,
-  onSuccess: (message: String) -> Unit,
-  onError: (message: String) -> Unit
-) {
-  Logger.log("Adding chainId: $chainId")
+### 5. (Optional) Call convenience methods
 
-  val addChainParams: Map<String, Any> = mapOf(
-    "chainId" to chainId,
-    "chainName" to Network.chainNameFor(chainId),
-    "rpcUrls" to Network.rpcUrls(Network.fromChainId(chainId))
-  )
-  val addChainRequest = EthereumRequest(
-    method = EthereumMethod.ADD_ETHEREUM_CHAIN.value,
-    params = listOf(addChainParams)
-  )
+The SDK provides the following convenience methods to simplify connecting to MetaMask and calling
+common RPC methods.
+These examples use coroutines.
 
-  ethereum.sendRequest(addChainRequest) { result ->
-    if (result is RequestError) {
-      onError("Add chain error: ${result.message}")
-    } else {
-      if (chainId == ethereum.chainId) {
-        onSuccess("Successfully switched to ${Network.chainNameFor(chainId)} ($chainId)")
-      } else {
-        onSuccess("Successfully added ${Network.chainNameFor(chainId)} ($chainId)")
-      }
-    }
+#### Example: Connect and request
+
+The following example uses the `connectWith` convenience method to connect to MetaMask and call
+[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction) in one RPC request.
+
+```kotlin
+val params: Map<String, Any> = mutableMapOf(
+  "from" to "", // This will be populated with the selected address once connected.
+  "to" to "0x0000000000000000000000000000000000000000",
+  "value" to "0x8ac7230489e80000"
+)
+
+val sendTransactionRequest = EthereumRequest(
+  method = EthereumMethod.ETH_SEND_TRANSACTION.value,
+  params = listOf(params)
+)
+
+when (val result = ethereum.connectWith(sendTransactionRequest)) {
+  is Result.Error -> {
+    // Handle error.
+  }
+  is Result.Success.Item -> {
+    // Transaction hash ${result.value}
+  }
+}
+```
+
+#### Example: Connect and sign
+
+The following example uses the `connectSign` convenience method to connect to MetaMask and call
+[`personal_sign`](/wallet/reference/personal_sign) in one RPC request.
+You do not need to construct the `personal_sign` request, you only need to provide the message to sign.
+
+```kotlin
+val message = "This is the message to sign."
+
+when (val result = ethereum.connectSign(message)) {
+  is Result.Error -> {
+    Logger.log("Ethereum connectSign error: ${result.error.message}")
+  }
+  is Result.Success.Item -> {
+    Logger.log("Ethereum connectSign result: ${result.value}")
   }
 }
 ```

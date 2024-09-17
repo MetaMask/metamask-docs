@@ -37,7 +37,7 @@ You can create a `package.json` file by running a CLI questionnaire, or by creat
 At the root of your project directory, create a file named `.env` containing environment variables for sensitive information that shouldn't be shared, such as an Infura API key, Ethereum private key, or MetaMask secret recovery phrase:
 
 ```bash
-INFURA_API_KEY = "https://goerli.infura.io/v3/<Your-API-Key>"
+INFURA_API_KEY = "https://goerli.infura.io/v3/<<YOUR-API-KEY>>"
 PRIVATE_KEY = "<Your-private-key>"
 ```
 

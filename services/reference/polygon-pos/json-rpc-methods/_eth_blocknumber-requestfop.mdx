@@ -5,7 +5,7 @@ import TabItem from "@theme/TabItem"
   <TabItem value="cURL">
 
 ```bash
-curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
+curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "X-INFURA-FAILOVER: true" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -16,7 +16,7 @@ curl https://polygon-mainnet.infura.io/v3/YOUR-API-KEY \
 
 ```bash
 const provider = new Web3.providers.HttpProvider(
-  "https://polygon-mainnet.infura.io/v3/YOUR-API-KEY"
+  "https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY>"
 );
 
 const options = {
@@ -49,7 +49,7 @@ class InfuraJsonRpcProvider extends JsonRpcProvider {
 ```
 
 provider = new InfuraJsonRpcProvider(
-  "https://polygon-mainnet.infura.io/v3/YOUR-API-KEY"
+  "https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY>"
 );
 ```
 
