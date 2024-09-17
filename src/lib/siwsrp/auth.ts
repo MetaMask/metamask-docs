@@ -1,4 +1,4 @@
-import { SDK } from "@metamask-previews/profile-sync-controller";
+import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
 
 type HydraEnv = {

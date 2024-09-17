@@ -2823,24 +2823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask-previews/profile-sync-controller@npm:0.1.4-preview-16e6df4":
-  version: 0.1.4-preview-16e6df4
-  resolution: "@metamask-previews/profile-sync-controller@npm:0.1.4-preview-16e6df4"
-  dependencies:
-    "@metamask/base-controller": ^6.0.2
-    "@metamask/snaps-sdk": ^6.1.1
-    "@metamask/snaps-utils": ^7.8.1
-    "@noble/ciphers": ^0.5.2
-    "@noble/hashes": ^1.4.0
-    immer: ^9.0.6
-    loglevel: ^1.8.1
-    siwe: ^2.3.2
-  peerDependencies:
-    "@metamask/snaps-controllers": ^9.3.0
-  checksum: 39348963213e5e6e67e4c0c93d1146d6e28bb692aca1198d321cd73ce76f0f187ba8797594b14099f1596aa78600e1012a4c4858fd2dcb8b5ecf883fb3e6061e
-  languageName: node
-  linkType: hard
-
 "@metamask/base-controller@npm:^6.0.2":
   version: 6.0.3
   resolution: "@metamask/base-controller@npm:6.0.3"
@@ -3069,6 +3051,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/profile-sync-controller@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@metamask/profile-sync-controller@npm:0.6.0"
+  dependencies:
+    "@metamask/base-controller": ^7.0.1
+    "@metamask/snaps-sdk": ^6.5.0
+    "@metamask/snaps-utils": ^8.1.1
+    "@noble/ciphers": ^0.5.2
+    "@noble/hashes": ^1.4.0
+    immer: ^9.0.6
+    loglevel: ^1.8.1
+    siwe: ^2.3.2
+  peerDependencies:
+    "@metamask/accounts-controller": ^18.1.1
+    "@metamask/keyring-controller": ^17.2.0
+    "@metamask/snaps-controllers": ^9.7.0
+  checksum: 3b46d6fac21696a4699c0b8027c05411ca94c7b5b7e7c2bcf05966533d21f79796f3fbfff7c37367d4826f166a2fba61f2a4fd9bd1ec1b491bf882114f242762
+  languageName: node
+  linkType: hard
+
 "@metamask/providers@npm:16.1.0":
   version: 16.1.0
   resolution: "@metamask/providers@npm:16.1.0"
@@ -3216,10 +3218,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/slip44@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@metamask/slip44@npm:3.1.0"
-  checksum: 63de4b85448990bde7760704d2f646ff33b34b22799b570c0bb1f7f08b1ebea9784495759611979ca4a5872094b093b63c28c6f6d94aa614cbd692576fcb134f
+"@metamask/slip44@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@metamask/slip44@npm:4.0.0"
+  checksum: 48d8ccf84eefe7e3e5caeafed3bb2b624a27f6c633a571a249c617aac0dcc006742f45cc4d9594c3d7b5980cbabf91b685b0477ffd0c65d591d217480e78c746
   languageName: node
   linkType: hard
 
@@ -3235,7 +3237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-sdk@npm:^6.1.0, @metamask/snaps-sdk@npm:^6.1.1":
+"@metamask/snaps-sdk@npm:^6.5.0":
   version: 6.5.0
   resolution: "@metamask/snaps-sdk@npm:6.5.0"
   dependencies:
@@ -3248,9 +3250,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-utils@npm:^7.8.1":
-  version: 7.8.1
-  resolution: "@metamask/snaps-utils@npm:7.8.1"
+"@metamask/snaps-utils@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "@metamask/snaps-utils@npm:8.1.1"
   dependencies:
     "@babel/core": ^7.23.2
     "@babel/types": ^7.23.0
@@ -3258,24 +3260,24 @@ __metadata:
     "@metamask/key-tree": ^9.1.2
     "@metamask/permission-controller": ^11.0.0
     "@metamask/rpc-errors": ^6.3.1
-    "@metamask/slip44": ^3.1.0
+    "@metamask/slip44": ^4.0.0
     "@metamask/snaps-registry": ^3.2.1
-    "@metamask/snaps-sdk": ^6.1.0
+    "@metamask/snaps-sdk": ^6.5.0
     "@metamask/superstruct": ^3.1.0
-    "@metamask/utils": ^9.1.0
+    "@metamask/utils": ^9.2.1
     "@noble/hashes": ^1.3.1
     "@scure/base": ^1.1.1
     chalk: ^4.1.2
     cron-parser: ^4.5.0
     fast-deep-equal: ^3.1.3
     fast-json-stable-stringify: ^2.1.0
-    fast-xml-parser: ^4.3.4
+    fast-xml-parser: ^4.4.1
     marked: ^12.0.1
     rfdc: ^1.3.0
     semver: ^7.5.4
     ses: ^1.1.0
     validate-npm-package-name: ^5.0.0
-  checksum: 707c0012af870bd5793ac7cec88fd7f3d90cda4249a756cf725d7026bed3874959fb43682cfee06995a92751ca1dadc5f3eaf7ab497c94413fb790cbbc02d394
+  checksum: f1562cd2f17edd0058c5ec24376478692a71b8597c7baf0af4710e2f12d7dce42aeff06813062033cbf61f721476ed79b6bdaa82adfde039cddb902115a0c96d
   languageName: node
   linkType: hard
 
@@ -9621,7 +9623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.3.4":
+"fast-xml-parser@npm:^4.4.1":
   version: 4.5.0
   resolution: "fast-xml-parser@npm:4.5.0"
   dependencies:
@@ -13746,9 +13748,9 @@ __metadata:
     "@intercom/messenger-js-sdk": ^0.0.11
     "@lavamoat/allow-scripts": ^3.0.4
     "@mdx-js/react": ^3.0.0
-    "@metamask-previews/profile-sync-controller": 0.1.4-preview-16e6df4
     "@metamask/design-tokens": ^1.11.1
     "@metamask/docusaurus-openrpc": ^0.4.1
+    "@metamask/profile-sync-controller": ^0.6.0
     "@metamask/sdk": ^0.28.1
     "@rjsf/core": ^5.18.4
     "@rjsf/utils": ^5.18.4
