@@ -58,6 +58,7 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    sidebarData: {}
   },
 
   trailingSlash: true,
@@ -149,6 +150,7 @@ const config = {
         sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          config.customFields.sidebarData = args
           let sidebarItems = await defaultSidebarItemsGenerator(args);
           const dynamicSidebarItems = await fetchAndGenerateSidebarItems();
           const updatedItems = sidebarItems.map(item => {
