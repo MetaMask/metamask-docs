@@ -157,7 +157,7 @@ export const Insight: SnapComponent<InsightProps> = ({ from, to }) => {
         <Address address={from as `0x${string}`} />
       </Row>
       <Row label="To">
-        {to ? <Address address={from as `0x${string}`} /> : <Text>None</Text>}
+        {to ? <Address address={to as `0x${string}`} /> : <Text>None</Text>}
       </Row>
     </Box>
   );
