@@ -147,6 +147,37 @@ export const onHomepage = () => {
 };
 ```
 
+## Spread props
+
+If an object has the same keys and value types as the props of a component, you can spread the
+object's properties as props for the component. For example, given the following component:
+
+```jsx title="Account.jsx"
+export const Account = ({ name, address }) => {
+  return <Row label={name}>
+    <Address address={address} />
+  </Row>
+};
+```
+
+Instead of writing:
+
+```jsx title="index.jsx"
+const myAccount = {
+  name: "Account 1",
+  address: "0x6827b8f6cc60497d9bf5210d602C0EcaFDF7C405"
+};
+
+// ...
+return <Account name={myAccount.name} address={myAccount.address} />
+```
+
+You can simply write:
+
+```jsx
+return <Account {...myAccount} />
+```
+
 ## Usage with TypeScript
 
 The `@metamask/snaps-sdk/jsx` package exports a `SnapComponent` type that can be used to define components that are compatible with TypeScript. The `SnapComponent` type is generic: it accepts a `Props` type parameter that will define the shape of the props object. For example:
