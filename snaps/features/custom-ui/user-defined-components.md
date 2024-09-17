@@ -168,23 +168,22 @@ export const Insight: SnapComponent<InsightProps> = ({ from, to }) => {
 Here are the steps to create user-defined components with TypeScript:
 
 1. Import the `SnapComponent` type:
-  ```tsx
-  import type { SnapComponent } from '@metamask/snaps-sdk/jsx';
-  ```
+   ```tsx
+   import type { SnapComponent } from '@metamask/snaps-sdk/jsx';
+   ```
 2. Define a type for the props of your component:
-  ```tsx
-  type InsightProps = {
-    from: string;
-    to?: string;
-  };
-  ``
-
+   ```tsx
+   type InsightProps = {
+     from: string;
+     to?: string;
+   };
+   ```
 3. Annotate the type of your component:
-  ```tsx
-  export const Insight: SnapComponent<InsightProps> = ({ from, to }) => {
-    // ...
-  };
-  ```
+   ```tsx
+   export const Insight: SnapComponent<InsightProps> = ({ from, to }) => {
+     // ...
+   };
+   ```
 
 This will have two effects:
 
