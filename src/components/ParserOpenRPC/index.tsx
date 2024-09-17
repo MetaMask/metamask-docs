@@ -19,7 +19,7 @@ import {
   trackClickForSegment,
   trackInputChangeForSegment,
 } from "@site/src/lib/segmentAnalytics";
-import AuthBox from "@site/src/components/ParserOpenRPC/AuthBox";
+import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface ParserProps {
