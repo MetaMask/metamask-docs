@@ -47,7 +47,7 @@ your Unity game.
 
 <p align="center">
 
-![MetaMask Unity script](../../../../assets/unity-infura.png)
+![MetaMask Unity script](../../assets/unity-infura.png)
 
 </p>
 

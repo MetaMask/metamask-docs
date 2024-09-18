@@ -29,7 +29,7 @@ A new dialog box opens:
 
 <p align="center">
 
-![dialog](../../../../../assets/contract-abi-converter-dialog.png)
+![dialog](../../../assets/contract-abi-converter-dialog.png)
 
 </p>
 
@@ -99,7 +99,7 @@ Before using the contract template, configure the contract address to use for ea
 
 <p align="center">
 
-![empty template](../../../../../assets/unity-empty-template.png)
+![empty template](../../../assets/unity-empty-template.png)
 
 </p>
 
@@ -109,7 +109,7 @@ When adding a new address, if you don't see your desired blockchain listed, you 
 
 <p align="center">
 
-![full template](../../../../../assets/unity-example-template.png)
+![full template](../../../assets/unity-example-template.png)
 
 </p>
 

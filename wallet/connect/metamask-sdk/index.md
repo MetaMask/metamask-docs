@@ -8,7 +8,7 @@ tags:
   - Unity SDK
 ---
 
-# Use MetaMask SDK
+# MetaMask SDK
 
 MetaMask SDK is a library that provides a reliable, secure, and seamless connection from your dapp
 to the MetaMask browser extension and MetaMask Mobile.
