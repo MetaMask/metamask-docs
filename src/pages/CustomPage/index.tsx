@@ -85,6 +85,8 @@ const CustomPage = (props) => {
 
   useEffect(() => {
     fetchAndGenerateSidebarItems(NETWORK_NAMES.linea).then(generatedItems => {
+      console.log("generatedItems", generatedItems);
+      console.log("generatedSidebarItems)", generateSidebarItems(siteConfig.customFields.sidebarData.docs));
       setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
         if (item?.label === "Reference" && item?.items) {
           return {
