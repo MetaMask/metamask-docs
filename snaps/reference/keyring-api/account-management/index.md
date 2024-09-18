@@ -113,8 +113,16 @@ null
 
 ### `keyring_exportAccount`
 
-Exports the private key of an account managed by the Snap.
-A Snap might choose to not support this method.
+Exports account data managed by the Snap.
+This might include the public key, address, or derivation path.
+The exact data exported depends on the Snap's implementation and security considerations.
+A Snap might choose to not support this method or limit the data it exports.
+
+:::warning
+
+This method can export private keys or any other sensitive data.
+
+:::
 
 #### Parameters
 
@@ -124,9 +132,7 @@ An object containing:
 
 #### Returns
 
-An object containing:
-
-- `privateKey`: `string` - The account's private key.
+An object containing the account data.
 
 #### Example
 
