@@ -67,14 +67,17 @@ export default function RequestBox({
 
   return (
     <>
-      <div style={{ marginBottom: "20px" }}>
-        <label htmlFor="custom_key">Your API Key:</label>
-        <input
-          name="custom_key"
-          value={customAPIKey}
-          onChange={(e) => setCustomAPIKey(e.target.value)}
-          style={{ marginLeft: "10px", padding: "8px", border: "1px solid #fff", borderRadius: "8px", width: "360px" }} />
-      </div>
+      {!isWalletReferencePage ?
+        <div style={{ marginBottom: "20px" }}>
+          <label htmlFor="custom_key">Your API Key:</label>
+          <input
+            name="custom_key"
+            value={customAPIKey}
+            onChange={(e) => setCustomAPIKey(e.target.value)}
+            style={{ marginLeft: "10px", padding: "8px", border: "1px solid #fff", borderRadius: "8px", width: "360px" }} />
+        </div> :
+        null
+      }
       <div className={styles.cardWrapper}>
         <div className={styles.cardHeader}>
           <strong className={styles.cardHeading}>Request</strong>
