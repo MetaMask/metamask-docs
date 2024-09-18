@@ -119,7 +119,9 @@ The exact data exported depends on the Snap's implementation and security consid
 A Snap might choose to not support this method or limit the data it exports.
 
 :::warning
+
 This method can export private keys or any other sensitive data.
+
 :::
 
 #### Parameters
