@@ -47,7 +47,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+  const { metaMaskAccount, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
   const { colorMode } = useColorMode();
   const openModal = () => {
     setModalOpen(true);

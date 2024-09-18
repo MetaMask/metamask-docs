@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ldClient from "launchdarkly";
-import { LoginContext } from "@site/src/theme/Root";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 import Select from "react-dropdown-select";
 import Button from "@site/src/components/Button";
 import styles from "./styles.module.css";

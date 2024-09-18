@@ -41,7 +41,7 @@ interface Project {
   role: string;
 }
 
-interface ILoginContext {
+interface IMetamaskProviderContext {
   projects: { [key: string]: Project };
   setProjects: (arg: { [key: string]: Project }) => void;
   metaMaskConnectHandler: () => Promise<void>;
@@ -59,7 +59,7 @@ interface ILoginContext {
   walletLinkUrl: string
 }
 
-export const MetamaskProviderContext = createContext<ILoginContext>({
+export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   projects: {},
   setProjects: () => {},
   metaMaskConnectHandler: () => new Promise(() => {}),
@@ -232,7 +232,7 @@ export const LoginProvider = ({ children }) => {
               setWalletLinked,
               walletLinkUrl,
               setWalletLinkUrl
-            } as ILoginContext
+            } as IMetamaskProviderContext
           }
         >
           {children}
