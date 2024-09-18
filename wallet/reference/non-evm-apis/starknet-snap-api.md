@@ -13,8 +13,25 @@ With the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md) in
 use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
 
 :::note
+
 You can also communicate with the Starknet network using the
 [Starknet API](/services/reference/starknet).
+
+:::
+
+Starknet currently operates two public networks. Each network is identified by a unique chain ID. Use these chain IDs when configuring your dapp or interacting with the Starknet networks.
+
+| Network | Chain ID (Hexadecimal) |
+|---------|------------------------|
+| Mainnet | `0x534e5f4d41494e`     |
+| Sepolia testnet | `0x534e5f5345504f4c4941` |
+
+Use these constants when specifying the network in your Starknet transactions or when configuring your development environment.
+
+:::note
+
+Always verify you're using the correct chain ID for your intended network to avoid unintended transactions on the wrong network.
+
 :::
 
 ## `starkNet_createAccount`
@@ -29,7 +46,7 @@ Deploys an account contract.
   account contract.
   The default is `false`.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -50,7 +67,7 @@ await window.ethereum.request({
       "params": {
         "addressIndex": 1,
         "deploy": true,
-        "chainId": "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -78,7 +95,7 @@ Extracts the private key from the deployed Starknet account and displays it in M
 
 - `userAddress`: `string` - Address of the account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -99,7 +116,7 @@ await window.ethereum.request({
       method: "starkNet_displayPrivateKey",
       params: {
         userAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -125,7 +142,7 @@ Gets the estimated gas fee for deploying an account contract.
 - `addressIndex`: `integer` - (Optional) Specific address index of the derived key in
   [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -145,7 +162,7 @@ await window.ethereum.request({
       method: "starkNet_estimateAccountDeployFee",
       params: {
         addressIndex: 0,
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -180,7 +197,7 @@ Gets the estimated gas fee for calling a method on any contract.
 - `contractCallData`: `string` - (Optional) Call data for the target function with `,` as a separator.
 - `senderAddress`: `string` - Address of the sender.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -203,7 +220,7 @@ await window.ethereum.request({
         contractFuncName: "transfer",
         contractCallData: "0x456...,0x789...,100",
         senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -230,7 +247,9 @@ await window.ethereum.request({
 ## `starkNet_extractPublicKey`
 
 :::note
+
 This method is integrated into `get-starknet`.
+
 :::
 
 Extracts the public key from a Starknet account address.
@@ -239,7 +258,7 @@ Extracts the public key from a Starknet account address.
 
 - `userAddress`: `string` - Address of the account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -259,7 +278,7 @@ await window.ethereum.request({
       method: "starkNet_extractPublicKey",
       params: {
         userAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -285,11 +304,18 @@ Gets the user's current balance of an ERC-20 token.
 - `tokenAddress`: `string` - Address of the ERC-20 token contract.
 - `userAddress`: `string` - Address of the user account.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
 The token balance in hexadecimal.
+
+```js
+{ 
+  balancePending: "0x0", 
+  balanceLatest: "0x0", 
+}
+```
 
 ### Example
 
@@ -306,7 +332,7 @@ await window.ethereum.request({
       params: {
         tokenAddress: "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
         userAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -317,7 +343,10 @@ await window.ethereum.request({
 <TabItem value="Result">
 
 ```json
-"0x3e8"
+{ 
+  "balancePending": "0x3e8", 
+  "balanceLatest": "0x3e8", 
+}
 ```
 
 </TabItem>
@@ -330,7 +359,7 @@ Gets a list of stored user accounts that are either initialized or initializing.
 ### Parameters
 
 `chainId`: `string` - (Optional) ID of the target Starknet network.
-The default is the Starknet Goerli testnet.
+The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -349,7 +378,7 @@ await window.ethereum.request({
     request: {
       method: "starkNet_getStoredUserAccounts",
       params: {
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -368,7 +397,7 @@ await window.ethereum.request({
     "addressSalt": "0x789...",
     "deployTxnHash": "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
     "derivationPath": "m/44'/9004'/0'/0/0",
-    "chainId": "0x1"
+    "chainId": "0x534e5f5345504f4c4941"
   },
   // ... more accounts
 ]
@@ -399,7 +428,7 @@ Gets the transaction records from a sender address.
   `REJECTED` state.
   The default is `false`.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -424,7 +453,7 @@ await window.ethereum.request({
         txnsInLastNumOfDays: 7,
         withDeployTxn: true,
         onlyFromState: false,
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -447,7 +476,7 @@ await window.ethereum.request({
     "failureReason": null,
     "eventIds": ["0xdef..."],
     "timestamp": 1234567890,
-    "chainId": "0x1"
+    "chainId": "0x534e5f5345504f4c4941"
   },
   // ... more transactions
 ]
@@ -464,7 +493,7 @@ Gets the status of a transaction.
 
 - `transactionHash`: `string` - Hash of the target transaction.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -485,7 +514,7 @@ await window.ethereum.request({
       method: "starkNet_getTransactionStatus",
       params: {
         transactionHash: "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -512,7 +541,7 @@ Calls a `VIEW` method on any contract.
 - `contractFuncName`: `string` - Target function name of the contract.
 - `contractCallData`: `string` - (Optional) Call data for the target function with `,` as a separator.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -534,7 +563,7 @@ await window.ethereum.request({
         contractAddress: "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
         contractFuncName: "balanceOf",
         contractCallData: "0x456...",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -573,7 +602,7 @@ Recovers deployed user accounts from the seed phrase of MetaMask based on
   recovery process.
   The default is `1`.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -595,7 +624,7 @@ await window.ethereum.request({
         startScanIndex: 0,
         maxScanned: 5,
         maxMissed: 2,
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -614,7 +643,7 @@ await window.ethereum.request({
     "addressSalt": "0x789...",
     "deployTxnHash": "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
     "derivationPath": "m/44'/9004'/0'/0/0",
-    "chainId": "0x1"
+    "chainId": "0x534e5f5345504f4c4941"
   },
   // ... more accounts
 ]
@@ -636,7 +665,7 @@ Signs and sends a transaction.
 - `maxFee`: `string` - (Optional) Maximum gas fee allowed from the sender.
   If not specified, the maximum fee is automatically calculated.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -660,7 +689,7 @@ await window.ethereum.request({
         contractCallData: "0x456...,0x789...,100",
         senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         maxFee: "1000000000000000",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -692,7 +721,7 @@ Signs a typed data message.
 - `typedDataMessage`: `string` - JSON representation of the typed data to be signed.
 - `signerAddress`: `string` - Address of the signer.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -713,7 +742,7 @@ await window.ethereum.request({
       params: {
         typedDataMessage: "{ ... }",
         signerAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -740,7 +769,7 @@ Upgrades an account contract.
 - `maxFee`: `string` - (Optional) Maximum gas fee allowed from the sender.
   If not specified, the maximum fee is automatically calculated.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -761,7 +790,7 @@ await window.ethereum.request({
       params: {
         contractAddress: "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
         maxFee: "1000000000000000",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },
@@ -790,7 +819,7 @@ Verifies a signed typed data message.
 - `signerAddress`: `string` - Address of the signer.
 - `signature`: `string` - Signature of the typed data message.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Goerli testnet.
+  The default is the Starknet Sepolia testnet.
 
 ### Returns
 
@@ -812,7 +841,7 @@ await window.ethereum.request({
         typedDataMessage: "{ ... }",
         signerAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         signature: "1234567890,9876543210",
-        chainId: "0x1"
+        "chainId": "0x534e5f5345504f4c4941"
       },
     },
   },

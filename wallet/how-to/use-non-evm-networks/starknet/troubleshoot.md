@@ -1,9 +1,14 @@
 ---
 description: Troubleshoot common Starknet issues.
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Troubleshoot
+
+<!--For the dapp, the primary action to initiate interacting with Starknet accounts is to connect to the Snap, just like a dapp connects with MetaMask to interact with Ethereum accounts. Whether the user has the Starknet Snap installed already is not important. If the user needs to install the Snap, they will be prompted to do so.
+Despite this, we do need to explain that the user can reject the prompt to add the Snap to MetaMask and document what to expect (the response that the dapp will receive if the user rejects the request) and encourage the dapp to do something in that instance, like display a message to the user that they need to add the Snap to MetaMask in order to proceed.
+Also, in terms of working with Starknet specifically, we may need to explain that a user will need to take some steps to set up a Starknet account before they can actually use it with the dapp, so the dapp should thoughtfully design that onboarding flow. Whether the user needs to add the Snap (and thus they will be completely new to Starknet) or they already have it but their account is not funded or deployed, the dapp should handle those scenarios.-->
+
 
 ## 1. Connection issues
 

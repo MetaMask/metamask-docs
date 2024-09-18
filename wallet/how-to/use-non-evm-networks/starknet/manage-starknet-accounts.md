@@ -5,6 +5,16 @@ sidebar_position: 2
 
 # Manage Starknet accounts
 
+## Account creation
+
+Account creation in Starknet is handled by the wallet provider. As a dapp developer, you do not create accounts directly. Instead, you guide users to create an account with their preferred wallet provider.
+
+:::note
+
+Currently, multiple Starknet accounts are not supported in the Starknet Snap.
+
+:::
+
 ## View account information
 
 After a user connects, you can display the account details, such as the account address: 
@@ -18,61 +28,11 @@ const showAccountInfo = async () => {
 };
 ```
 
-## Switch between accounts
+## Retrieve connected Starknet accounts
 
-With the `get-starknet` library, you can allow users to switch accounts by re-enabling the wallet. 
-MetaMask will prompt the user to select a different account if multiple accounts are available.
-
-```javascript
-const switchStarknetAccount = async () => {
-  try {
-    const starknet = getStarknet();
-    await starknet.enable();  // Prompts the user to select an account
-    const account = starknet.selectedAddress;
-    console.log('Switched to Starknet Account:', account);
-    
-    return account;
-  } catch (error) {
-    console.error('Error switching Starknet account:', error);
-  }
-};
-```
-
-## Manage account transactions
-
-You can manage transactions with `get-starknet`:
+To retrieve and display connected Starknet accounts, use the `get-starknet` library in combination with React hooks:
 
 ```javascript
-
-const invokeStarknetContract = async () => {
-  try {
-    const starknet = getStarknet();
-    await starknet.enable();  // Make sure the wallet is enabled
-
-    const contractAddress = '0xYourContractAddress';  // Replace with your contract address
-    const entrypoint = 'function_name';  // The function you want to call
-    const calldata = [/* your function arguments */];  // Replace with calldata
-
-    const result = await starknet.invoke({
-      contractAddress: contractAddress,
-      entrypoint: entrypoint,
-      calldata: calldata
-    });
-
-    console.log('Transaction result:', result);
-  } catch (error) {
-    console.error('Error invoking contract:', error);
-  }
-};
-```
-
-# Comprehensive Guide to Managing Starknet Accounts
-
-## 1. Retrieving and Displaying Connected Starknet Accounts
-
-To retrieve and display connected Starknet accounts, you'll typically use the `get-starknet` library in combination with React hooks for state management.
-
-```typescript
 import { useStarknet, useConnectors } from '@starknet-react/core';
 import { useState, useEffect } from 'react';
 
@@ -105,78 +65,42 @@ function AccountDisplay() {
 }
 ```
 
-This component will display the connected account address if available, and provide buttons to connect or disconnect accounts.
+This component displays the connected account address if available, and provides buttons to connect or disconnect accounts.
 
-## 2. Switching Between Multiple Starknet Accounts
+## Manage account transactions
 
-Starknet doesn't natively support account switching like Ethereum. Instead, users typically have to disconnect and reconnect with a different account. However, you can implement a user-friendly interface to manage this process:
+You can manage transactions with `get-starknet`:
 
-```typescript
-import { useStarknet, useConnectors } from '@starknet-react/core';
-import { useState, useEffect } from 'react';
+```javascript
 
-function AccountSwitcher() {
-  const { account } = useStarknet();
-  const { available, connect, disconnect } = useConnectors();
-  const [connectedAccounts, setConnectedAccounts] = useState<string[]>([]);
+const invokeStarknetContract = async () => {
+  try {
+    const starknet = getStarknet();
+    await starknet.enable();  // Make sure the wallet is enabled
 
-  useEffect(() => {
-    if (account?.address && !connectedAccounts.includes(account.address)) {
-      setConnectedAccounts([...connectedAccounts, account.address]);
-    }
-  }, [account]);
+    const contractAddress = '0xYourContractAddress';  // Replace with your contract address
+    const entrypoint = 'function_name';  // The function you want to call
+    const calldata = [/* your function arguments */];  // Replace with calldata
 
-  const switchAccount = async (connector: any) => {
-    await disconnect();
-    await connect(connector);
-  };
+    const result = await starknet.invoke({
+      contractAddress: contractAddress,
+      entrypoint: entrypoint,
+      calldata: calldata
+    });
 
-  return (
-    <div>
-      <h2>Connected Accounts:</h2>
-      <ul>
-        {connectedAccounts.map((address) => (
-          <li key={address}>{address}</li>
-        ))}
-      </ul>
-      <h2>Available Connectors:</h2>
-      {available.map((connector) => (
-        <button key={connector.id()} onClick={() => switchAccount(connector)}>
-          Switch to {connector.name()}
-        </button>
-      ))}
-    </div>
-  );
-}
+    console.log('Transaction result:', result);
+  } catch (error) {
+    console.error('Error invoking contract:', error);
+  }
+};
 ```
+This invokes a specific function on a Starknet smart contract, handling wallet connection and transaction submission, and logs the result or any errors.
 
-This component keeps track of all connected accounts and allows switching between available connectors.
+## Handle account changes and disconnections
 
-## 3. Account Creation Process
+To handle account changes and disconnections, you can use event listeners provided by `get-starknet`:
 
-Account creation in Starknet is typically handled by the wallet provider (e.g., ArgentX, Braavos). As a dApp developer, you don't create accounts directly. Instead, you guide users to create an account with their preferred wallet provider. Here's how you might implement a guide for users:
-
-```typescript
-function AccountCreationGuide() {
-  return (
-    <div>
-      <h2>Create a Starknet Account</h2>
-      <ol>
-        <li>Install a Starknet-compatible wallet (e.g., ArgentX, Braavos)</li>
-        <li>Open the wallet and follow its account creation process</li>
-        <li>Once created, return to this dApp and connect your new account</li>
-      </ol>
-      <p>After creating your account, you can connect it to this dApp.</p>
-    </div>
-  );
-}
-```
-
-## Handling Account Changes and Disconnections
-
-To handle account changes and disconnections, you can use event listeners provided by get-start. Here's an example using `@starknet-react/core`:
-
-```
+```javascript
 import { getStarknet } from 'get-starknet';
 import { useEffect, useState } from 'react';
 
@@ -228,11 +152,4 @@ function AccountChangeHandler() {
 export default AccountChangeHandler;
 ```
 
-You would typically use this component at the top level of your app to handle account changes globally.
-
-## Best Practices
-
-- Always check for account connection status before performing operations.
-- Provide clear feedback to users about their connection status.
-- Handle disconnections gracefully, resetting relevant app state.
-- Use try-catch blocks when interacting with wallet methods to handle potential errors.
+Use this component at the top level of your app to handle account changes globally.

@@ -7,26 +7,23 @@ sidebar_position: 3
  
 ## Switch between networks
 
-Allow users to switch between different Starknet networks, such as mainnet and testnet. This function enables switching by setting the appropriate network RPC URL.
+Allow users to switch between different Starknet networks, such as mainnet and testnet. This function enables switching by setting the 
+appropriate chain Id. Starknet network has two official networks: 
+
+- Ssepolia testnet chain ID -  `0x534e5f5345504f4c4941`
+- Mainnet chain ID -  `0x534e5f4d41494e`
 
 ```javascript
-const switchNetwork = async (network) => {
-  try {
-    const starknet = getStarknet();
-
-    // Example network URLs
-    const networks = {
-      mainnet: 'https://mainnet.starknet.io',
-      testnet: 'https://sepolia.starknet.io'
-    };
-
-    // Set the provider based on the selected network
-    starknet.setProvider({ rpcUrl: networks[network] });
-
-    console.log(`Switched to ${network}:`, starknet.provider);
-  } catch (error) {
-    console.error('Error switching network:', error);
-  }
+const switchChain = async (chainId: string) => {
+    try {
+        await wallet?.request({
+            type: 'wallet_switchStarknetChain',
+            params: { chainId: chainId },
+        });
+        console.log(`Switched to chainId: ${chainId}`);
+    } catch (e) {
+        console.error("Failed to switch chain:", e);
+    }
 };
 ```
 

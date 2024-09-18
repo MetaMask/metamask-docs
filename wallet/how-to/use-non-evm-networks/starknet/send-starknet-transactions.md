@@ -5,20 +5,21 @@ sidebar_position: 4
 
 # Send Starknet transactions
 
-After the account is connected, you can send a transaction using the `starknet.invoke()` function:
+After the account is connected, you can send a transaction using the `starknet.account.execute()` function:
 
 ```javascript
-const sendStarknetTransaction = async (contractAddress, entrypoint, calldata) => {
+const sendStarknetTransaction = async (wallet, contractAddress, entrypoint, calldata) => {
   try {
-    const starknet = await connectStarknetAccount();  // Ensure the account is connected
-
+    if(wallet?.isConnected !== true){
+      throw('Wallet not connected');
+    } 
+  
     // Send the transaction
-    const result = await starknet.invoke({
+    const result = await wallet?.account?.execute({
       contractAddress: contractAddress,  // The address of the contract
       entrypoint: entrypoint,            // The function to call in the contract
       calldata: calldata                 // The parameters to pass to the function
     });
-
     console.log('Transaction successful:', result);
     return result;
   } catch (error) {
@@ -27,15 +28,16 @@ const sendStarknetTransaction = async (contractAddress, entrypoint, calldata) =>
 };
 ```
 
-## Simplified Example
+## Simplified example
+
+The following is a simplified example of how to connect to a Starknet account and send a transaction using the `get-starknet` library:
 
 ```javascript
-
-import { getStarknet } from 'get-starknet';
+import { connect } from 'get-starknet';
 
 const connectStarknetAccount = async () => {
-  const starknet = getStarknet();
-  await starknet.enable();  // Prompts the user to connect their Starknet account via MetaMask
+  const starknet = await connect();
+  await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask
   return starknet;
 };
 
@@ -44,7 +46,7 @@ const sendStarknetTransaction = async (contractAddress, entrypoint, calldata) =>
     const starknet = await connectStarknetAccount();  // Ensure the account is connected
 
     // Send the transaction
-    const result = await starknet.invoke({
+    const result = await starknet.account.execute({
       contractAddress: contractAddress, 
       entrypoint: entrypoint,            
       calldata: calldata                 

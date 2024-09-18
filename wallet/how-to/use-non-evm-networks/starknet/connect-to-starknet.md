@@ -18,19 +18,19 @@ This library simplifies the process of connecting to the Starknet Snap, allowing
  - A text editor (for example, [VS Code](https://code.visualstudio.com/))
  - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
  - [Yarn](https://yarnpkg.com/)
- - A JavaScript or TypeScript project set up 
+ - A JavaScript or TypeScript React project set up 
 
 ## Connect using `get-starknet`
 
 ### 1. Add `get-starknet` to your project
 
-Add the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) library and the latest version of the `starknet.js` library to your project's dependencies:
+Add the [`get-starknet`](https://github.com/starknet-io/get-starknet) `version 3.3.0` library and the version `6.11.0` of the `starknet.js` library to your project's dependencies:
 
 <Tabs>
   <TabItem value="yarn" label="Yarn" default>
 
   ```bash
-  yarn add get-starknet starknet@next
+  yarn add get-starknet@3.3.0 starknet@6.11.0
   ```
 
   </TabItem>
@@ -38,7 +38,7 @@ Add the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/cr
   <TabItem value="npm" label="npm">
 
   ```bash
-  npm install get-starknet starknet@next
+  npm install get-starknet@3.3.0 starknet@6.11.0
   ```
 
   </TabItem> 
@@ -46,47 +46,61 @@ Add the [`get-starknet`](https://github.com/MetaMask/snaps/tree/main/packages/cr
 
 ### 2. Connect to the Snap
 
-In the src/components folder of your project, add the code to connect to Starknet Snap using the `get-starknet` library, and include a button for users to initiate the wallet connection.
+Create a new file named `WalletConnectButton.js` in your project's `src/components` folder. Create this folder if it doesn't exist. Add the following code to the file:.
 
 ```javascript
 import React, { useState } from 'react';
-import { connect } from 'get-starknet';
-
+import { connect, disconnect } from 'get-starknet';
+import { encode } from "starknet";
 function WalletConnectButton() {
   const [walletAddress, setWalletAddress] = useState("");
   const [walletName, setWalletName] = useState("");
-
+  const [wallet, setWallet] = useState("");
+  const handleDisconnect = async () => {
+    await disconnect({clearLastWallet: true});
+    setWallet("");
+    setWalletAddress("");
+    setWalletName("")
+  }
   const handleConnect = async () => {
-    const wallet = await connect({
-      include: ['snap'],  // Ensure the Snap is included for connection
-    });
-
-    if (wallet) {
-      setWalletAddress(wallet.account.address);
-      setWalletName(wallet.name);
-    } else {
-      console.log("No wallet connected");
+    try{
+      const getWallet = await connect({ modalMode: "alwaysAsk", modalTheme: "light" });
+      await getWallet?.enable({ starknetVersion: "v5" });
+      setWallet(getWallet);
+      const addr = encode.addHexPrefix(encode.removeHexPrefix(getWallet?.selectedAddress ?? "0x").padStart(64, "0"));
+      setWalletAddress(addr);
+      setWalletName(getWallet?.name || "")
+    }
+    catch(e){
+      // handle user rejection to install metamask / snaps here.
+      console.log(e)
     }
   };
-
   return (
     <div>
+      {!walletAddress && (
       <button onClick={handleConnect}>
         Connect Wallet
       </button>
-
+      )}
       {walletAddress && (
+        <div>
+        <button onClick={handleDisconnect}>
+            Disconnect Wallet
+        </button>
         <div>
           <p>Wallet Name: {walletName}</p>
           <p>Wallet Address: {walletAddress}</p>
+        </div>
         </div>
       )}
     </div>
   );
 }
-
 export default WalletConnectButton;
 ```
+
+This code handles the connection to Starknet Snap using the `get-starknet` library and includes a button for users to initiate the wallet connection.
 
 :::note
 
@@ -118,29 +132,9 @@ Start the dapp, which allow users to click **Connect Wallet** and interact with 
 
 ## Connect using `wallet_invokeSnap`
 
-### 1. Install dependencies
+### 1. Connect to the Snap
 
-Alternatively, you can manage the Snap invocation manually.
-For the Starknet network use the `Starknet.js` library in your project. 
-Navigate to your project directory and run the following command to add the latest Starknet library:
-
-<Tabs>
-  <TabItem value="yarn" label="Yarn" default>
-
-  ```bash
-  yarn add get starknet@next
-  ```
-
-  </TabItem>
-
-  <TabItem value="npm" label="npm">
-
-  ```bash
-  npm install starknet@next
-  ```
-
-  </TabItem> 
-</Tabs>
+Alternatively, you can manage the Snap invocation manually. Use the `wallet_invokeSnap` method to directly interact with the Starknet Snap. This method does not requires additional dependencies.
 
 :::note
 
@@ -148,47 +142,58 @@ Navigate to your project directory and run the following command to add the late
 
  :::
 
-### 2. Connect to Starknet using `wallet_invokeSnap`
+In the `src/utils/snapHelper.js` file add the `connect` function and the `callSnap` helper function. This file handles the interactions with the Starknet Snap.
 
-Use the `wallet_invokeSnap` method to directly interact with the Starknet Snap. Add the following code to your project:
+```javascript title="src/utils/snapHelper.js"
+const snapId = 'npm:starknet-snap';
 
-```javascript title="app.js"
-// Function to request Starknet account
-const connectStarknetSnap = async () => {
+export async function connect() {
+  await ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      [snapId]: {},
+    },
+  });
+}
+
+export async function callSnap(method, params) {
   try {
-    const snapId = 'npm:starknet-snap';
-    
-    const requestParams = {
+    const response = await ethereum.request({
       method: 'wallet_invokeSnap',
       params: {
-        snapId: snapId,
+        snapId,
         request: {
-          method: 'starknet_getAccount',  // Method to get the Starknet account
-          params: {}
-        }
-      }
-    };
-
-    // Request the Starknet account from MetaMask using Snap
-    const account = await ethereum.request(requestParams);
-    console.log('Starknet Account:', account);
-    
-    return account;
-  } catch (error) {
-    console.error('Error connecting to Starknet Snap:', error);
+          method,
+          params,
+        },
+      },
+    });
+    console.log(`${method} response:`, response);
+    return response;
+  } catch (err) {
+    console.error(`${method} error:`, err);
+    alert(`${method} error: ${err.message || err}`);
+    throw err;
   }
-};
+}
 ```
 
-### 3. Trigger the connection from the dapp
+### 2. Call a specific Snap method
 
-To allow users to connect their Starknet accounts to MetaMask, assign the `connectStarknetSnap` function to a button or event. 
-Create a button that, when clicked, connects the Starknet Snap.
+To call a specific Snap method, for example `createAccount` use the following:
+
+```javascript
+const deploy = false; // Set to true to deploy the actual account
+const addressIndex = 0; // Specify which address to derive
+const chainId = "0x534e5f5345504f4c4941"; // Specify which chain to use (Sepolia testnet)
+// For mainnet, use: "0x534e5f4d41494e"
+
+const accountInfo = await callSnap('starkNet_createAccount', { addressIndex, deploy, chainId });
+```
 
 #### Example in HTML and JavaScript (Vanilla JS)
 
 ```html
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -198,24 +203,43 @@ Create a button that, when clicked, connects the Starknet Snap.
 <body>
   <button id="connectButton">Connect Starknet Wallet</button>
   <p id="accountInfo"></p>
-
   <script>
-    document.getElementById('connectButton').addEventListener('click', async () => {
+    async function connect(snapId) {
+        await ethereum.request({
+            method: 'wallet_requestSnaps',
+            params: {
+            [snapId]: {},
+            },
+        });
+    }
+    async function callSnap(snapId, method, params) {
       try {
-        const snapId = 'npm:starknet-snap';  // Snap ID
-        const requestParams = {
+        const response = await ethereum.request({
           method: 'wallet_invokeSnap',
           params: {
-            snapId: snapId,
+            snapId,
             request: {
-              method: 'starknet_getAccount',
-              params: {}
-            }
-          }
-        };
-        
-        const account = await ethereum.request(requestParams);
-        document.getElementById('accountInfo').innerText = `Connected Account: ${account}`;
+              method,
+              params,
+            },
+          },
+        });
+        return response;
+      } catch (err) {
+        console.error(`${method} problem happened:`, err);
+        alert(`${method} problem happened: ${err.message || err}`);
+      }
+    }
+    document.getElementById('connectButton').addEventListener('click', async () => {
+      try {
+        const snapId = 'npm:@consensys/starknet-snap';  // Snap ID
+        await connect(snapId);
+        const deploy = false; // whether to deploy the actual account
+        const addressIndex = 0; // which address to derive
+        const chainId = "0x534e5f5345504f4c4941"; // which chain to use  mainnet id  "0x534e5f4d41494e", sepolia id "0x534e5f5345504f4c4941"
+        const account = await callSnap(snapId, 'starkNet_createAccount', { addressIndex, deploy, chainId });
+        console.log(account)
+        document.getElementById('accountInfo').innerText = `Connected Starknet Account: ${account.address}`;
       } catch (error) {
         console.error('Error connecting to Starknet Snap:', error);
       }
@@ -229,38 +253,58 @@ Create a button that, when clicked, connects the Starknet Snap.
 
 ```javascript
 import React, { useState } from 'react';
-
 const ConnectWallet = () => {
-  const [account, setAccount] = useState(null);
-
-  const connectStarknetSnap = async () => {
+  const [accountInfo, setAccountInfo] = useState('');
+  const connect = async (snapId) => {
     try {
-      const snapId = 'npm:starknet-snap';  // Snap ID
-      const requestParams = {
+      await window.ethereum.request({
+        method: 'wallet_requestSnaps',
+        params: {
+          [snapId]: {},
+        },
+      });
+    } catch (err) {
+      console.error('Snap connection error:', err);
+      alert(`Error connecting to Snap: ${err.message || err}`);
+    }
+  };
+  const callSnap = async (snapId, method, params) => {
+    try {
+      const response = await window.ethereum.request({
         method: 'wallet_invokeSnap',
         params: {
-          snapId: snapId,
+          snapId,
           request: {
-            method: 'starknet_getAccount',
-            params: {}
-          }
-        }
-      };
-      
-      const account = await window.ethereum.request(requestParams);
-      setAccount(account);
+            method,
+            params,
+          },
+        },
+      });
+      return response;
+    } catch (err) {
+      console.error(`${method} problem happened:`, err);
+      alert(`${method} problem happened: ${err.message || err}`);
+    }
+  };
+  const handleConnectClick = async () => {
+    try {
+      const snapId = 'npm:@consensys/starknet-snap'; // Snap ID
+      await connect(snapId);
+      const deploy = false; // whether to deploy the actual account
+      const addressIndex = 0; // which address to derive
+      const chainId = '0x534e5f5345504f4c4941'; // chain (sepolia)
+      const account = await callSnap(snapId, 'starkNet_createAccount', { addressIndex, deploy, chainId });
+      setAccountInfo(`Connected Starknet Account: ${account.address}`);
     } catch (error) {
       console.error('Error connecting to Starknet Snap:', error);
     }
   };
-
   return (
     <div>
-      <button onClick={connectStarknetSnap}>Connect Starknet Wallet</button>
-      {account && <p>Connected Account: {account}</p>}
+      <button onClick={handleConnectClick}>Connect Starknet Wallet</button>
+      <p>{accountInfo}</p>
     </div>
   );
 };
-
 export default ConnectWallet;
 ```
