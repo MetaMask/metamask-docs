@@ -16,14 +16,10 @@ Compares the supported features of each connection option:
 | Feature                                                                                        | MetaMask SDK only | Third-party libraries with SDK | Wallet API only |
 |------------------------------------------------------------------------------------------------|:-----------------:|:------------------------------:|:---------------:|
 | Connect from a web dapp to the MetaMask extension                                              |         ✅         |               ✅                |        ✅        |
-| Connect from a web dapp to MetaMask Mobile                                                     |         ✅         |               ✅                |        ❌        |
-| Connect from desktop, mobile, and gaming dapps to MetaMask Mobile                              |         ✅         |               ✅                |        ❌        |
+| Connect from a web dapp, desktop, mobile, and gaming dapps to MetaMask Mobile     |         ✅         |               ✅                |        ❌        |
 | Connect to MetaMask using the [EIP-6963 provider](../concepts/wallet-interoperability.md)      |         ✅         |               ✅                |        ✅        |
 | Connect to other wallets using the [EIP-6963 provider](../concepts/wallet-interoperability.md) |         ❌         |               ✅                |        ✅        |
-| Use custom RPC methods such as [`connectAndSign`](../how-to/sign-data/connect-and-sign.md)     |         ✅         |               ✅                |        ❌        |
-| [Display custom modals](../how-to/display/display-custom-modals.md) in MetaMask                |         ✅         |               ✅                |        ❌        |
-| [Make read-only requests](../how-to/make-read-only-requests.md) using the Infura API           |         ✅         |               ✅                |        ❌        |
-| [Batch multiple RPC requests](../how-to/batch-json-rpc-requests.md)                            |         ✅         |               ✅                |        ❌        |
+| Custom RPC methods such as [`connectAndSign`](../how-to/sign-data/connect-and-sign.md), [display custom modals](../how-to/display/display-custom-modals.md), [read-only requests](../how-to/make-read-only-requests.md) using Infura API, and [batch RPC requests](../how-to/batch-json-rpc-requests.md)                         |         ✅         |               ✅                |        ❌        |
 
 ## MetaMask SDK
 
