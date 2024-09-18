@@ -35,8 +35,8 @@ export default function RequestBox({
 }: RequestBoxProps) {
   const location = useLocation();
   const { colorMode } = useColorMode();
-  console.log("colorMode", colorMode);
   const isWalletReferencePage = location.pathname.includes("/wallet/reference");
+  const isLineaReferencePage = location.pathname.includes("/services/reference/linea");
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
@@ -45,7 +45,7 @@ export default function RequestBox({
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${NETWORK_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+    return `curl ${NETWORK_URL}/v3/${isLineaReferencePage ? customAPIKey : API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {

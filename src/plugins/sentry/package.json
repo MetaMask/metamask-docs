@@ -1,0 +1,16 @@
+{
+  "name": "docusaurus-plugin-sentry",
+  "version": "1.0.0",
+  "description": "A Sentry plugin to initialize the Sentry SDK",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "docusaurus-plugin",
+    "sentry-plugin",
+    "sentry"
+  ],
+  "author": "Vlad Lo.",
+  "license": "MIT"
+}
