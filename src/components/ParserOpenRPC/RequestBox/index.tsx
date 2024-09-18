@@ -46,7 +46,7 @@ export default function RequestBox({
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
     return `curl ${NETWORK_URL}/v3/${isLineaReferencePage ? customAPIKey : API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
-  }, [method, paramsData]);
+  }, [customAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
     return JSON.stringify(response, null, 2);
