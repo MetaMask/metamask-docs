@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
 import { useLocation } from "@docusaurus/router";
+import { useColorMode } from "@docusaurus/theme-common";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -33,6 +34,8 @@ export default function RequestBox({
   setCustomAPIKey,
 }: RequestBoxProps) {
   const location = useLocation();
+  const { colorMode } = useColorMode();
+  console.log("colorMode", colorMode);
   const isWalletReferencePage = location.pathname.includes("/wallet/reference");
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
@@ -74,7 +77,13 @@ export default function RequestBox({
             name="custom_key"
             value={customAPIKey}
             onChange={(e) => setCustomAPIKey(e.target.value)}
-            style={{ marginLeft: "10px", padding: "8px", border: "1px solid #fff", borderRadius: "8px", width: "360px" }} />
+            style={{
+              marginLeft: "10px",
+              padding: "8px",
+              border: `1px solid ${colorMode === "dark" ? "#fff" : "#848c96"}`,
+              borderRadius: "8px",
+              width: "360px"
+            }} />
         </div> :
         null
       }
