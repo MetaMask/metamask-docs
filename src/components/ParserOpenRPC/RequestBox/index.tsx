@@ -42,10 +42,11 @@ export default function RequestBox({
     const preparedShellParams = JSON.stringify(paramsData);
     const NETWORK_URL = "https://linea-mainnet.infura.io";
     const API_KEY = "<YOUR-API-KEY>";
+    const lineaAPIKey = customAPIKey ? customAPIKey : API_KEY;
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${NETWORK_URL}/v3/${isLineaReferencePage ? customAPIKey : API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+    return `curl ${NETWORK_URL}/v3/${isLineaReferencePage ? lineaAPIKey : API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [customAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
