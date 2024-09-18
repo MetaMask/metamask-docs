@@ -35,6 +35,7 @@ const config = {
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     sidebarData: {},
+    dynamicData: []
   },
 
   trailingSlash: true,
@@ -130,6 +131,7 @@ const config = {
           let sidebarItems = await defaultSidebarItemsGenerator(args);
           const networkName = "linea";
           const dynamicSidebarItems = await fetchAndGenerateSidebarItems(networkName);
+          config.customFields.dynamicData = dynamicSidebarItems;
           const updatedItems = sidebarItems.map(item => {
             if (item?.label === capitalize(networkName) && item?.items) {
               item.items = [...item.items, ...dynamicSidebarItems]

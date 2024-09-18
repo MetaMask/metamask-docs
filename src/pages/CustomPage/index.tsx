@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import DocSidebar from '@theme/DocSidebar';
 import styles from "@site/src/theme/Layout/styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { fetchAndGenerateSidebarItems } from "@site/src/helpers";
 import * as capitalize  from "lodash.capitalize"
 
 function generateSidebarItems(docs) {
@@ -84,24 +83,20 @@ const CustomPage = (props) => {
   const [formattedData, setFormattedData] = useState([]);
 
   useEffect(() => {
-    fetchAndGenerateSidebarItems(NETWORK_NAMES.linea).then(generatedItems => {
-      console.log("generatedItems", generatedItems);
-      console.log("generatedSidebarItems)", generateSidebarItems(siteConfig.customFields.sidebarData.docs));
-      setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
-        if (item?.label === "Reference" && item?.items) {
-          return {
-            ...item,
-            items: item.items.map(referenceItem => {
-              if (referenceItem?.label === capitalize(NETWORK_NAMES.linea) && referenceItem?.items) {
-                return { ...referenceItem, items: [...referenceItem.items, ...generatedItems] };
-              }
-              return referenceItem;
-            })
-          }
+    setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
+      if (item?.label === "Reference" && item?.items) {
+        return {
+          ...item,
+          items: item.items.map(referenceItem => {
+            if (referenceItem?.label === capitalize(NETWORK_NAMES.linea) && referenceItem?.items) {
+              return { ...referenceItem, items: [...referenceItem.items, ...siteConfig.customFields.dynamicData] };
+            }
+            return referenceItem;
+          })
         }
-        return item;
-      }));
-    });
+      }
+      return item;
+    }));
   }, []);
 
   return formattedData ? (
