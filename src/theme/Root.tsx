@@ -77,6 +77,19 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   walletLinkUrl: ''
 });
 
+const sdk = new MetaMaskSDK({
+  dappMetadata: {
+    name: "Reference pages",
+    url: "https://docs.metamask.io/",
+  },
+  preferDesktop: true,
+  extensionOnly: true,
+  checkInstallationImmediately: false,
+  logging: {
+    sdk: false,
+  },
+});
+
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({});
   const [userId, setUserId] = useState<string>('');
@@ -89,19 +102,6 @@ export const LoginProvider = ({ children }) => {
   const [walletLinkUrl, setWalletLinkUrl] = useState<string>('');
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
-
-  const sdk = new MetaMaskSDK({
-    dappMetadata: {
-      name: "Reference pages",
-      url: "https://docs.metamask.io/",
-    },
-    preferDesktop: true,
-    extensionOnly: true,
-    checkInstallationImmediately: false,
-    logging: {
-      sdk: false,
-    },
-  });
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
