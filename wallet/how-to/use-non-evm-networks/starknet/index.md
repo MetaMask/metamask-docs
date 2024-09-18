@@ -5,19 +5,10 @@ sidebar_position: 1
 
 # Use Starknet
 
-Starknet is a Layer 2 network built on Ethereum. To interact with Starknet accounts in MetaMask, which is a non-EVM network, you need to use the Starknet Snap.
+Starknet is a non-EVM Layer 2 network. To interact with Starknet accounts in MetaMask, you need to use the Starknet Snap.
 
-You can use `wallet_invokeSnap` or `get-starknet` to integrate with Starknet dapps.
+You can use the `get-starknet` library or the `wallet_invokeSnap` JSON-RPC method to connect to the Starknet Snap.
 The choice depends on your specific use case and development preferences. 
-
-Both methods enable developers to connect Starknet dapps with wallet solutions. 
-
-`wallet_invokeSnap`:
-- Requires precise method names and parameter structures.
-- Handles both MetaMask-specific and Starknet-specific errors.
-- Designed for operating within the MetaMask framework.
-- Manages lower-level StarkNet interactions directly.
-- Results are in more detailed, lower-level code.
 
 `get-starknet`:
 - Provides a high-level API that abstracts complex operations.
@@ -26,9 +17,17 @@ Both methods enable developers to connect Starknet dapps with wallet solutions.
 - Manages wallet connections and Starknet interactions.
 - Results are in more readable code.
 
+`wallet_invokeSnap`:
+- Requires precise method names and parameter structures.
+- Handles both MetaMask-specific and Starknet-specific errors.
+- Is designed for operating within the MetaMask framework.
+- Manages lower-level Starknet interactions directly.
+- Provides results in more detailed, lower-level code.
+
+
 :::note
 
-The `get-starknet` method is recommended for simplified integration with the non-EVM Starknet network.
+We recommend using the `get-starknet` library for a most use cases.
 
 :::
 
@@ -48,7 +47,7 @@ This allows users to send Starknet transactions, sign Starknet messages, and man
 
 A dapp with `get-starknet` installed interacts with MetaMask as follows:
 
-1. The dapp uses `get-starknet` to request the user connect to MetaMask. If the user doesn't have the Starknet Snap installed, MetaMask prompts the user to connect and approve the installation.
+1. The dapp uses `get-starknet` to request the user connect to MetaMask. If the user doesn't have the Starknet Snap installed, MetaMask automatically prompts the user to connect and approve the addition.
 
 1. After the dapp is connected to MetaMask and the Starknet Snap, `get-starknet` receives a Starknet Windows Object (SWO), which represents the MetaMask wallet with Starknet functionality.
 
@@ -88,7 +87,7 @@ sequenceDiagram
     get->>dapp: Notify change
 ```
 
-The `get-starknet` library offers several key features that streamline how dapps interact with the StarkNet network through MetaMask."
+The `get-starknet` library offers several key features that improve how dapps interact with the StarkNet network through MetaMask."
 
 - The `WalletAccount` uses a specified provider to access data from the StarkNet network.
 - For transactions, `get-starknet` prepares the data and sends it to MetaMask for signing via StarkNet Snap.
