@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import clsx from "clsx";
 import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { useLocation } from "@docusaurus/router";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -15,6 +16,8 @@ interface RequestBoxProps {
   openModal: () => void;
   submitRequest: () => void;
   isMetamaskNetwork?: boolean;
+  customAPIKey?: string;
+  setCustomAPIKey?: (key: string) => void;
 }
 
 export default function RequestBox({
@@ -26,8 +29,11 @@ export default function RequestBox({
   openModal,
   submitRequest,
   isMetamaskNetwork = false,
+  customAPIKey,
+  setCustomAPIKey,
 }: RequestBoxProps) {
-
+  const location = useLocation();
+  const isWalletReferencePage = location.pathname.includes("/wallet/reference");
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
@@ -44,7 +50,7 @@ export default function RequestBox({
   }, [response]);
 
   const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
-  const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
+  const isRunAndCustomizeRequestDisabled = isWalletReferencePage && methodsWithRequiredWalletConnection.includes(method) ?
     !isMetamaskInstalled :
     false;
 
@@ -61,6 +67,14 @@ export default function RequestBox({
 
   return (
     <>
+      <div style={{ marginBottom: "20px" }}>
+        <label htmlFor="custom_key">Your API Key:</label>
+        <input
+          name="custom_key"
+          value={customAPIKey}
+          onChange={(e) => setCustomAPIKey(e.target.value)}
+          style={{ marginLeft: "10px", padding: "8px", border: "1px solid #fff", borderRadius: "8px", width: "360px" }} />
+      </div>
       <div className={styles.cardWrapper}>
         <div className={styles.cardHeader}>
           <strong className={styles.cardHeading}>Request</strong>

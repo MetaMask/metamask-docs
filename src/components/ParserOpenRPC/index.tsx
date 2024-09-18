@@ -1,6 +1,7 @@
 import React, { createContext, useMemo, useState, useContext } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
+import { ResponseItem } from "@site/src/plugins/plugin-json-rpc";
+import { NETWORK_NAMES } from "@site/src/lib/constants";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
@@ -40,6 +41,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const [customAPIKey, setCustomAPIKey] = useState("");
   const { colorMode } = useColorMode();
   const location = useLocation();
   const isWalletReferencePage = location.pathname.includes("/wallet/reference");
@@ -157,8 +159,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       }
     } else {
       const NETWORK_URL = "https://linea-mainnet.infura.io";
-      const API_KEY = "366ba274ec6f4cf1810de6003cbb9a5e";
-      const URL = `${NETWORK_URL}/v3/${API_KEY}`;
+      const URL = `${NETWORK_URL}/v3/${customAPIKey}`;
       let params = {
         method: "POST",
         "Content-Type": "application/json",
@@ -268,6 +269,8 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
               isMetamaskNetwork={isMetamaskNetwork}
+              customAPIKey={customAPIKey}
+              setCustomAPIKey={setCustomAPIKey}
             />
           </div>
         </div>

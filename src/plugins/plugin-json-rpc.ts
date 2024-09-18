@@ -1,3 +1,10 @@
+export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
+
+export enum NETWORK_NAMES {
+  linea = "linea",
+  metamask = "metamask",
+}
+
 export interface ResponseItem {
   name: string;
   data: any | null;
@@ -20,13 +27,6 @@ async function fetchMultipleData(
   const promises = requests.map(({ url, name }) => fetchData(url, name));
   const responses = await Promise.all(promises);
   return responses;
-}
-
-const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
-
-export enum NETWORK_NAMES {
-  linea = "linea",
-  metamask = "metamask",
 }
 
 const requests = [
@@ -55,9 +55,8 @@ export default function useNetworksMethodPlugin() {
       const { setGlobalData, createData, addRoute } = actions;
       await fetchMultipleData(requests)
         .then((responseArray) => {
-          const networkName = "linea";
           setGlobalData({ netData: responseArray });
-          return Promise.all(responseArray[responseArray.findIndex(item => item.name === networkName) || 0].data.methods.map(async (page) => {
+          return Promise.all(responseArray[responseArray.findIndex(item => item.name === NETWORK_NAMES.linea) || 0].data.methods.map(async (page) => {
 
             const methodMDXContent = generateMethodMDX(page);
 

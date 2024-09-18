@@ -1,8 +1,8 @@
-import * as capitalize  from "lodash.capitalize"
+import { RPC_NETWORK_URL } from "../lib/constants";
 
 export const fetchAndGenerateSidebarItems = async (networkName) => {
   try {
-    const response = await fetch(`https://sot-network-methods.vercel.app/specs/${networkName}`);
+    const response = await fetch(`${RPC_NETWORK_URL}/${networkName}`);
     const data = await response.json();
     const dynamicItems = data.methods.map((method) => ({
       type: "link",

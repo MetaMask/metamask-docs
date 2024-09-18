@@ -449,3 +449,10 @@ export const GET_OPTIONS = {
   cache: "no-cache",
   headers: NO_CACHE,
 };
+
+export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
+
+export enum NETWORK_NAMES {
+  linea = "linea",
+  metamask = "metamask",
+}

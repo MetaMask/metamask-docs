@@ -82,16 +82,15 @@ const CustomPage = (props) => {
   const customData = props.route.customData;
   const { siteConfig } = useDocusaurusContext();
   const [formattedData, setFormattedData] = useState([]);
-  const networkName = "linea";
 
   useEffect(() => {
-    fetchAndGenerateSidebarItems(networkName).then(generatedItems => {
+    fetchAndGenerateSidebarItems(NETWORK_NAMES.linea).then(generatedItems => {
       setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
         if (item?.label === "Reference" && item?.items) {
           return {
             ...item,
             items: item.items.map(referenceItem => {
-              if (referenceItem?.label === capitalize(networkName) && referenceItem?.items) {
+              if (referenceItem?.label === capitalize(NETWORK_NAMES.linea) && referenceItem?.items) {
                 return { ...referenceItem, items: [...referenceItem.items, ...generatedItems] };
               }
               return referenceItem;
