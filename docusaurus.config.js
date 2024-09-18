@@ -2,6 +2,8 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 require("dotenv").config();
+const { fetchAndGenerateSidebarItems } = require("./src/helpers/index.ts");
+const capitalize = require("lodash.capitalize");
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
@@ -32,6 +34,7 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    sidebarData: {},
   },
 
   trailingSlash: true,
@@ -122,6 +125,19 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
+        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          config.customFields.sidebarData = args;
+          let sidebarItems = await defaultSidebarItemsGenerator(args);
+          const networkName = "linea";
+          const dynamicSidebarItems = await fetchAndGenerateSidebarItems(networkName);
+          const updatedItems = sidebarItems.map(item => {
+            if (item?.label === capitalize(networkName) && item?.items) {
+              item.items = [...item.items, ...dynamicSidebarItems]
+            }
+            return item;
+          })
+          return [...updatedItems];
+        },
       },
     ],
     [

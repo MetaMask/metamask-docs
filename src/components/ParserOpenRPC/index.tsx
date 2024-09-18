@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
 import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
+import { useLocation } from "@docusaurus/router";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -40,6 +41,16 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const { colorMode } = useColorMode();
+  const location = useLocation();
+  const isWalletReferencePage = location.pathname.includes("/wallet/reference");
+  const trackAnalyticsForRequest = (response) => {
+    trackClickForSegment({
+      eventName: "Request Sent",
+      clickType: "Request Sent",
+      userExperience: "B",
+      ...(response?.code && { responseStatus: response.code }),
+    });
+  }
   const openModal = () => {
     setModalOpen(true);
     trackClickForSegment({
@@ -132,21 +143,40 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return
-    try {
-      const response = await metaMaskProvider?.request({
-        method: method,
-        params: paramsData
-      })
-      setReqResult(response);
-      trackClickForSegment({
-        eventName: "Request Sent",
-        clickType: "Request Sent",
-        userExperience: "B",
-        ...(response?.code && { responseStatus: response.code }),
-      });
-    } catch (e) {
-      setReqResult(e);
+    if (isMetamaskNetwork) {
+      if (!metaMaskProvider) return
+      try {
+        const response = await metaMaskProvider?.request({
+          method: method,
+          params: paramsData
+        })
+        setReqResult(response);
+        trackAnalyticsForRequest(response);
+      } catch (e) {
+        setReqResult(e);
+      }
+    } else {
+      const NETWORK_URL = "https://linea-mainnet.infura.io";
+      const API_KEY = "366ba274ec6f4cf1810de6003cbb9a5e";
+      const URL = `${NETWORK_URL}/v3/${API_KEY}`;
+      let params = {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method,
+          params: paramsData,
+          id: 1,
+        }),
+      };
+      const res = await fetch(URL, params);
+      if (res.ok) {
+        const response = await res.json();
+        setReqResult(response.result);
+        trackAnalyticsForRequest(response.result);
+      } else {
+        console.error("error");
+      }
     }
   };
 
@@ -228,7 +258,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {isWalletReferencePage && !metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}

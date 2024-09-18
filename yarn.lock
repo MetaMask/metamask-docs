@@ -12493,6 +12493,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.capitalize@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "lodash.capitalize@npm:4.2.1"
+  checksum: d9195f31d48c105206f1099946d8bbc8ab71435bc1c8708296992a31a992bb901baf120fdcadd773098ac96e62a79e6b023ee7d26a2deb0d6c6aada930e6ad0a
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -13380,6 +13387,7 @@ __metadata:
     eslint-plugin-react: ^7.34.2
     js-cookie: ^3.0.5
     launchdarkly-js-client-sdk: ^3.3.0
+    lodash.capitalize: ^4.2.1
     lodash.debounce: ^4.0.8
     lodash.isobject: ^3.0.2
     node-polyfill-webpack-plugin: ^2.0.1
