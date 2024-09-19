@@ -1,5 +1,6 @@
 declare global {
   interface WindowEventMap {
+    // @ts-ignore
     "eip6963:announceProvider": CustomEvent;
   }
 }
