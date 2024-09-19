@@ -456,3 +456,70 @@ export enum NETWORK_NAMES {
   linea = "linea",
   metamask = "metamask",
 }
+
+export const lineaSidebarNames = [
+  {
+    old: "get-started",
+    new: "Get Started"
+  },
+  {
+    old: "how-to",
+    new: "How to"
+  },
+  {
+    old: "use-ipfs",
+    new: "Use IPFS"
+  },
+  {
+    old: "access-ipfs-content",
+    new: "Access IPFS content"
+  },
+  {
+    old: "send-a-transaction",
+    new: "Send transactions"
+  },
+  {
+    old: "use-infura-as-a-reverse-proxy",
+    new: "Use Infura as a reverse proxy"
+  },
+  {
+    old: "layer-2-networks",
+    new: "Layer 2 networks"
+  },
+  {
+    old: "json-rpc-methods",
+    new: "JSON-RPC APIs"
+  },
+  {
+    old: "avalanche-c-chain",
+    new: "Avalanche (C-Chain)"
+  },
+  {
+    old: "bnb-smart-chain",
+    new: "BNB Smart Chain"
+  },
+  {
+    old: "gas-api",
+    new: "Gas API"
+  },
+  {
+    old: "ipfs",
+    new: "IPFS"
+  },
+  {
+    old: "opbnb",
+    new: "opBNB"
+  },
+  {
+    old: "polygon-pos",
+    new: "Polygon PoS"
+  },
+  {
+    old: "zksync",
+    new: "ZKsync Era"
+  },
+  {
+    old: "http-api-methods",
+    new: "HTTP API methods"
+  },
+]

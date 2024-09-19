@@ -3,7 +3,7 @@
 
 require("dotenv").config();
 const { fetchAndGenerateSidebarItems } = require("./src/helpers/index.ts");
-const capitalize = require("lodash.capitalize");
+const upperFirst = require("lodash.upperfirst");
 const { themes } = require("prism-react-renderer");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
@@ -134,7 +134,7 @@ const config = {
           const dynamicSidebarItems = await fetchAndGenerateSidebarItems(networkName);
           config.customFields.dynamicData = dynamicSidebarItems;
           const updatedItems = sidebarItems.map(item => {
-            if (item?.label === capitalize(networkName) && item?.items) {
+            if (item?.label === upperFirst(networkName) && item?.items) {
               item.items = [...item.items, ...dynamicSidebarItems]
             }
             return item;
