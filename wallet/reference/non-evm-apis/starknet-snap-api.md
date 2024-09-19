@@ -24,13 +24,20 @@ Starknet currently operates two public networks. Each network is identified by a
 | Network | Chain ID (Hexadecimal) |
 |---------|------------------------|
 | Mainnet | `0x534e5f4d41494e`     |
-| Sepolia testnet | `0x534e5f5345504f4c4941` |
+| Testnet (Sepolia) | `0x534e5f5345504f4c4941` |
 
-Use these constants when specifying the network in your Starknet transactions or when configuring your development environment.
+Use these IDs when specifying the network in your Starknet transactions or when configuring your development environment.
+
+Ensure you're using the correct chain ID for your intended network to avoid unintended transactions on the wrong network.
 
 :::note
 
-Always verify you're using the correct chain ID for your intended network to avoid unintended transactions on the wrong network.
+Currently, `get-starknet` only works with the following methods: 
+
+- [`starkNet_extractPublicKey`](#starknet_extractpublickey)
+- [`starkNet_signMessage`](#starknet_signmessage)
+- [`starkNet_upgradeAccContract`](#starknet_upgradeacccontract)
+- [`starkNet_verifyMessage`](#starknet_verifymessage)
 
 :::
 

@@ -1,11 +1,11 @@
 ---
-description: Starknet integration tutorial
+description: Create a basic dapp using `get-starknet` and React TypeScript
 sidebar_position: 6
 ---
 
-# Create a basic dapp with `get-starknet` and React TypeScript
+# Create a basic dapp with `get-starknet`
 
-In this tutorial, you'll learn how to set up a basic dapp that uses get-starknet to connect to MetaMask and display the user's wallet address.
+In this tutorial, you'll learn how to set up a basic dapp that uses `get-starknet` to connect to MetaMask and display the user's wallet address.
 
 ## 1. Project Setup
 
@@ -203,7 +203,7 @@ Now that you have set up the basics, let's go a step further and show how to dis
 
 ### 3.1. Setting Up the Contract
 
-To interact with an ERC-20 contract, you'll need to create a Contract instance from starknet.js using the WalletAccount instance. Assuming the ABI is loaded from a JSON file, here's how you would do it:
+To interact with an ERC-20 contract, you'll need to create a contract instance from `starknet.js` using the `WalletAccount` instance. Assuming the ABI is loaded from a JSON file, here's how you would do it:
 
 ```typescript
 import { Contract } from "starknet";

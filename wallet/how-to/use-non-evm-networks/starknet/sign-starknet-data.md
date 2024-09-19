@@ -5,7 +5,8 @@ sidebar_position: 5
 
 # Sign Starknet transactions
 
-After the account is connected, you can sign a transaction using the `wallet.account.signer.signTransaction` function:
+After an account is connected, you can sign a transaction using the `wallet.account.signer.signTransaction` function:
+
 ```typescript
 const signStarknetTransaction = async (wallet, contractAddress, entrypoint, calldata) => {
   try {

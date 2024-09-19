@@ -61,7 +61,7 @@ This component displays the connected account address if available, and provides
 
 ## Account creation
 
-Account creation in Starknet is handled by the wallet provider. As a dapp developer, you do not create accounts directly. Instead, you guide users to create an account with their preferred wallet provider.
+Account creation in Starknet is handled by the wallet provider. As a dapp developer, you do not create accounts directly. Instead, you guide users to [create an account](../connect-to-starknet) with their preferred wallet provider.
 
 :::note
 

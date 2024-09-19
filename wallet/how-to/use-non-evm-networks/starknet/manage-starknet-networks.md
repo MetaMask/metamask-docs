@@ -26,6 +26,7 @@ const checkCurrentNetwork = () => {
 Starknet currently operates two public networks. Each network is identified by a unique chain ID. Use these chain IDs when configuring your dapp or interacting with the Starknet networks.
 
 You can allow users to switch between different Starknet networks by setting the appropriate chain ID. 
+
 Starknet has two official networks: 
 
 | Network | Chain ID (Hexadecimal) |
