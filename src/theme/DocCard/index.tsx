@@ -4,7 +4,7 @@ import Link from "@docusaurus/Link";
 import {
   useDocById,
   findFirstSidebarItemLink,
-} from "@docusaurus/theme-common/internal";
+} from "@docusaurus/plugin-content-docs/client";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
 import Heading from "@theme/Heading";
@@ -35,6 +35,7 @@ function CardContainer({
         [cardListItemStyles.flaskOnly]: flaskOnly,
       })}
     >
+      {/* @ts-ignore */}
       {children}
     </Link>
   );

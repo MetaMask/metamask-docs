@@ -14,6 +14,9 @@ export const AuthBox = ({ handleConnect }: AuthBoxProps) => {
       eventName: "Connect wallet",
       clickType: "Connect wallet",
       userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
     });
     handleConnect();
   }

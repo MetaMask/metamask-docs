@@ -22,6 +22,7 @@ export const ArrayFieldTemplate = ({
     setIsComplexTypeView,
   } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
+  // @ts-ignore
   const itemsType = schema?.items?.type;
   const isSimpleArray =
     itemsType === "string" ||

@@ -17,7 +17,7 @@
     "typecheck-staged": "tsc-files --noEmit",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint . --ext js,jsx,ts,tsx --max-warnings=5",
-    "lint:style": "stylelint \"src/**/*.css\" --fix",
+    "lint:style": "stylelint 'src/**/*.css' --fix",
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write '{blog,docs,src,static}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
   },

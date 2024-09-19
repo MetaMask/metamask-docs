@@ -46,6 +46,9 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       eventName: "Customize Request",
       clickType: "Customize Request",
       userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
     });
   };
   const closeModal = () => setModalOpen(false);
@@ -111,6 +114,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
       userExperience: "B",
+      timestamp: Date.now(),
     });
 
     if (
@@ -144,6 +148,8 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         clickType: "Request Sent",
         userExperience: "B",
         ...(response?.code && { responseStatus: response.code }),
+        responseMsg: null,
+        timestamp: Date.now(),
       });
     } catch (e) {
       setReqResult(e);

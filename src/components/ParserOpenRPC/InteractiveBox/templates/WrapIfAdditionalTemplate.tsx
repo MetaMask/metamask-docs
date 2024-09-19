@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils';
+import { ADDITIONAL_PROPERTY_FLAG } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import  * as isObject  from "lodash.isobject"
+import * as isObject from "lodash.isobject";
 
 export const WrapIfAdditionalTemplate = (props) => {
   const {
@@ -18,19 +18,24 @@ export const WrapIfAdditionalTemplate = (props) => {
     children,
     registry,
     formContext,
-    formData
+    formData,
   } = props;
   const { templates } = registry;
   const { RemoveButton } = templates.ButtonTemplates;
   const additional = ADDITIONAL_PROPERTY_FLAG in schema;
-  const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } = useContext(ParserOpenRPCContext);
+  const {
+    drawerLabel,
+    isComplexTypeView,
+    setIsComplexTypeView,
+    setDrawerLabel,
+  } = useContext(ParserOpenRPCContext);
   const { currentSchemaId, setCurrentSchemaId } = formContext;
   const onRemoveButtonClick = () => {
     if (isObject(formData) && Object.keys(formData).length === 0) {
       setIsComplexTypeView(false);
       setDrawerLabel(null);
     }
-  }
+  };
 
   if (!additional) {
     return (
@@ -50,8 +55,8 @@ export const WrapIfAdditionalTemplate = (props) => {
     return null;
   }
 
-  return (
-    isComplexTypeView ? <div className={classNames} style={style}>
+  return isComplexTypeView ? (
+    <div className={classNames} style={style}>
       {drawerLabel === label && (
         <div>
           <div onClick={onRemoveButtonClick}>
@@ -61,19 +66,20 @@ export const WrapIfAdditionalTemplate = (props) => {
               registry={registry}
             />
           </div>
+          {/* @ts-ignore */}
           <BaseInputTemplate
-            name='key'
+            name="key"
             onChange={(target) => {
               onKeyChange(target);
               setDrawerLabel(target);
             }}
-            schema={{...schema, ...{ type: "string" }}}
+            schema={{ ...schema, ...{ type: "string" } }}
             formContext={formContext}
             value={label}
           />
         </div>
       )}
       <div>{children}</div>
-    </div> : null
-  );
-}
+    </div>
+  ) : null;
+};

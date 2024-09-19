@@ -16,6 +16,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
     isComplexTypeView,
     setIsComplexTypeView,
   } = useContext(ParserOpenRPCContext);
+  // @ts-ignore
   const { formData, schema, name, onChange } = props;
   const listItems = schema?.anyOf ? schema?.anyOf : schema?.oneOf;
   const checkForNullTypeSchema = (type) => type === "null";
@@ -27,14 +28,17 @@ export const ConditionalField = (props: FieldTemplateProps) => {
   };
   const onDropdownOptionClick = (e) => {
     const selectedSchema = listItems.find(
-      ({ title }) => title === e.target.dataset.value
+      // @ts-ignore
+      ({ title }) => title === e.target.dataset.value,
     );
+    // @ts-ignore
     const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type);
     if (isNullTypeSchema) {
       onChange(null);
     } else {
       setSelectedTypeSchema(
-        listItems.find(({ title }) => title === e.target.dataset.value)
+        // @ts-ignore
+        listItems.find(({ title }) => title === e.target.dataset.value),
       );
       showComplexTypeView();
     }
@@ -80,7 +84,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
             <span
               className={clsx(
                 styles.tableColumnType,
-                styles.tableColumnTypeDropdown
+                styles.tableColumnTypeDropdown,
               )}
               onClick={() => {
                 setIsOpened(!isOpened);
@@ -93,21 +97,21 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     styles.tableColumnIcon,
                     styles.chevronIcon,
                     styles.dropdownChevronIcon,
-                    !isOpened && styles.chevronIconDown
+                    !isOpened && styles.chevronIconDown,
                   )}
                 />
                 <span
                   className={clsx(
                     styles.chevronIcon,
                     styles.dropdownChevronIcon,
-                    !isOpened && styles.chevronIconDown
+                    !isOpened && styles.chevronIconDown,
                   )}
                 />
               </span>
               <ul
                 className={clsx(
                   styles.dropdownList,
-                  !isOpened && styles.dropdownListClosed
+                  !isOpened && styles.dropdownListClosed,
                 )}
               >
                 {listItems?.map((listItem, index) => (
@@ -115,8 +119,10 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     className={styles.dropdownItem}
                     key={index}
                     onClick={onDropdownOptionClick}
+                    // @ts-ignore
                     data-value={listItem.title}
                   >
+                    {/* @ts-ignore */}
                     {listItem.title}
                   </li>
                 ))}
@@ -131,8 +137,10 @@ export const ConditionalField = (props: FieldTemplateProps) => {
       selectedTypeSchema.type !== "null" ? (
         <div className={styles.tableComplexType}>
           {selectedTypeSchema?.enum ? (
+            // @ts-ignore
             <SelectWidget {...selectWidgetProps} />
           ) : (
+            // @ts-ignore
             <BaseInputTemplate {...baseInputProps} />
           )}
         </div>

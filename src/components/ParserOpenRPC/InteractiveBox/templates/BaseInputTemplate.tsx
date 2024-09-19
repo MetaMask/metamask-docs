@@ -113,6 +113,7 @@ export const BaseInputTemplate = ({
                       styles.formControlNumberDown
                     )}
                     onClick={() => {
+                      // @ts-ignore
                       inputValue >= 1 &&
                         onInputNumberChange(Number((+inputValue || 0) - 1));
                     }}

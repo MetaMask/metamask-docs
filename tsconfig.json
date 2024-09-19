@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@site/*": ["./*"],
       "launchdarkly": [
         "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
       ],
@@ -12,6 +13,6 @@
       ]
     }
   },
-  "include": ["./**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }
