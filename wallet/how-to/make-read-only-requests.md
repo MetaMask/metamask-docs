@@ -8,7 +8,7 @@ tags:
 # Make read-only requests
 
 You can use the [Infura API](https://docs.infura.io/) from your dapp with
-[MetaMask SDK](use-sdk/index.md) installed to make direct, read-only JSON-RPC requests.
+[MetaMask SDK](../connect/metamask-sdk/index.md) installed to make direct, read-only JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
 Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-rpc-api), bypassing
@@ -51,7 +51,7 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
   We recommend using all allowlist options to maximize the security of your API key and dapp.
   :::
 
-- [MetaMask SDK set up](use-sdk/javascript/index.md) in your JavaScript dapp.
+- [MetaMask SDK set up](../connect/metamask-sdk/javascript/index.md) in your JavaScript dapp.
 
 ## Use the Infura API
 

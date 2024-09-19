@@ -11,7 +11,7 @@ tags:
 
 # MetaMask SDK connections
 
-This page provides details on how a dapp with [MetaMask SDK](../how-to/use-sdk/index.md) installed connects to a
+This page provides details on how a dapp with [MetaMask SDK](../connect/metamask-sdk/index.md) installed connects to a
 user's MetaMask wallet.
 
 ## Initial connection flow

@@ -102,7 +102,7 @@ If you intend to support discovery of other wallets, we recommend using other me
 EIP-6963 support such as [Wagmi 2+](https://wagmi.sh).
 :::
 
-The [MetaMask JavaScript SDK](../how-to/use-sdk/javascript/index.md) automatically checks
+The [MetaMask JavaScript SDK](../connect/metamask-sdk/javascript/index.md) automatically checks
 for the presence of the MetaMask extension via EIP-6963.
 This eliminates the need for manual configuration or detection methods, simplifying the initial
 setup process for both developers and users.

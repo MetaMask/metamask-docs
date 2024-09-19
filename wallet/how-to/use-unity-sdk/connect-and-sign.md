@@ -7,11 +7,11 @@ tags:
 
 # Connect and sign in Unity
 
-You can [connect and sign](../../../sign-data/connect-and-sign.md) in a single interaction from your Unity game.
+You can [connect and sign](../sign-data/connect-and-sign.md) in a single interaction from your Unity game.
 
 ## Prerequisites
 
-- [MetaMask SDK set up](index.md) in your Unity game.
+- [MetaMask SDK set up](../../connect/metamask-sdk/gaming/unity.md) in your Unity game.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.

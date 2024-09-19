@@ -18,7 +18,7 @@ Integrating Decentraweb into your game allows users to interact with addresses i
 
 ## Prerequisites
 
-[MetaMask SDK set up](index.md) in your Unity game.
+[MetaMask SDK set up](../../connect/metamask-sdk/gaming/unity.md) in your Unity game.
 
 ## Initialize the integration wrapper
 

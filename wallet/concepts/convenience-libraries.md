@@ -17,7 +17,7 @@ some developers use a convenience library for interacting with the provider, suc
 [Embark](https://framework.embarklabs.io/).
 You can refer to those tools' documentation to use them.
 
-You can [use MetaMask SDK](../how-to/use-sdk/index.md), which provides a reliable, secure, and
+You can [use MetaMask SDK](../connect/metamask-sdk/index.md), which provides a reliable, secure, and
 seamless connection from your dapp to MetaMask.
 It onboards users smoothly from multiple dapp platforms using the MetaMask browser extension or
 MetaMask Mobile, and your dapp can call any [Wallet API](wallet-api.md) methods with the SDK installed.
