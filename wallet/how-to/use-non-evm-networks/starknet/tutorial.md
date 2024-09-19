@@ -3,13 +3,13 @@ description: Starknet integration tutorial
 sidebar_position: 6
 ---
 
-# Build a Basic dApp with get-starknet and React TypeScript
+# Create a basic dapp with `get-starknet` and React TypeScript
 
-In this tutorial, you'll learn how to set up a basic dApp that uses get-starknet to connect to MetaMask and display the user's wallet address.
+In this tutorial, you'll learn how to set up a basic dapp that uses get-starknet to connect to MetaMask and display the user's wallet address.
 
 ## 1. Project Setup
 
-First, create a new React project with TypeScript and add the necessary dependencies:
+Create a new React project with TypeScript and add the necessary dependencies
 
 ```bash
 # Create a new React project with TypeScript
@@ -22,21 +22,17 @@ cd get-starknet-tutorial
 yarn add get-starknet starknet@next
 ```
 
-Note: We use the @next version of starknet to ensure compatibility with get-starknet.
+## 2. 
 
-## 2. Key Elements to Understand Before Coding
+### 2.1. Connecting to a wallet
 
-Before we dive into the implementation, it's important to understand a few key concepts when using get-starknet to connect to a wallet in a React application.
-
-### 2.1. Connecting to a Wallet
-
-The `connect` function from get-starknet is the primary way to connect your dApp to a user's wallet. When called, it opens a connection to a wallet (like MetaMask) and returns an object containing important details about the wallet, such as:
+The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's wallet. When called, it opens a connection to the MetaMask wallet and returns an object containing important details about the wallet, such as following:
 
 - `name`: The name of the wallet.
 - `icon`: The wallet's icon, which can be used to display the wallet's logo.
-- `account`: The account object from starknet.js, which contains the wallet's address and provides access to account-specific operations.
+- `account`: The account object from `starknet.js`, which contains the wallet's address and provides access to account-specific operations.
 
-Here's how you would import the necessary functions and connect to a wallet:
+To import the necessary functions and connect to a wallet, add the following code:
 
 ```typescript
 import { connect, type ConnectOptions } from "get-starknet";
@@ -48,14 +44,14 @@ async function handleConnect(options?: ConnectOptions) {
 }
 ```
 
-### 2.2. Handling Connection Options
+### 2.2. Configure connection options
 
 `connect` accepts an optional `ConnectOptions` object. This object can control how the connection process behaves, including:
 
-- `modalMode`: Determines how the connection modal behaves (e.g., always ask, never ask).
-- `modalTheme`: Allows setting the theme of the connection modal (e.g., dark, light).
+- `modalMode`: Determines how the connection modal behaves. The options include "always ask" or "never ask".
+- `modalTheme`: Allows setting the theme of the connection modal. The options includes dark or light theme.
 
-Here's an example of how to pass these options:
+The following code is an example of how to set these options:
 
 ```typescript
 handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
@@ -63,10 +59,10 @@ handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 
 ### 2.3. Create a `WalletAccount`
 
-Once connected, you can create a new `WalletAccount` instance using the starknet.js library. This allows you to interact with the StarkNet network using the connected wallet, leveraging all the features of a standard Account object.
+After it is connected, you can create a new `WalletAccount` instance using the `starknet.js` library. This allows interaction with the Starknet network using the connected wallet.
 
 ```typescript
-import { WalletAccount } from 'starknet'; // v6.10.0 min
+import { WalletAccount } from 'starknet'; 
 
 async function handleConnect(options?: ConnectOptions) {
   const res = await connect(options);
@@ -78,7 +74,7 @@ async function handleConnect(options?: ConnectOptions) {
 
 ### 2.4. Display wallet information
 
-Once connected, the wallet's name, address, and icon can be displayed in your dApp. This provides visual feedback to the user, confirming which wallet they are using.
+The wallet's name, address, and icon can be displayed in your dapp. This provides visual feedback to the user, confirming which wallet they are using.
 
 Here's a basic example of how to update the UI with the connected wallet's details:
 
@@ -107,7 +103,7 @@ function App() {
 }
 ```
 
-### 2.5. The full code example
+### 2.5. Example implementation
 
 Now that you understand the key elements and have seen snippets of the most important parts, here's the full implementation in `App.tsx`:
 
@@ -316,7 +312,7 @@ The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D365
 
 ## Next steps
 
-In this section, we've shown how to extend your dApp by displaying the balance of an ERC-20 token like ETH and performing a token transfer. By creating a Contract instance with the WalletAccount, you can easily interact with smart contracts, fetch token balances, and execute transactions, enabling more complex functionality in your dApp.
+In this section, we've shown how to extend your dapp by displaying the balance of an ERC-20 token like ETH and performing a token transfer. By creating a Contract instance with the WalletAccount, you can easily interact with smart contracts, fetch token balances, and execute transactions, enabling more complex functionality in your dapp.
 
 ## Additional resources
 

@@ -1,5 +1,6 @@
 ---
-description: Interact with users' accounts on non-EVM networks
+description: Interact with users' accounts on non-EVM networks.
+sidebar_position: 9
 ---
 
 import CardList from "@site/src/components/CardList"

@@ -8,7 +8,7 @@ sidebar_position: 1
 Starknet is a non-EVM Layer 2 network. To interact with Starknet accounts in MetaMask, you need to use the Starknet Snap.
 
 You can use the `get-starknet` library or the `wallet_invokeSnap` JSON-RPC method to connect to the Starknet Snap.
-The choice depends on your specific use case and development preferences. 
+
 
 `get-starknet`:
 - Provides a high-level API that abstracts complex operations.
@@ -27,7 +27,7 @@ The choice depends on your specific use case and development preferences.
 
 :::note
 
-We recommend using the `get-starknet` library for a most use cases.
+We recommend using the `get-starknet` library for most use cases.
 
 :::
 
@@ -59,7 +59,7 @@ sequenceDiagram
     participant get as get-starknet
     participant mm as MetaMask
     participant Snap as Starknet Snap
-    participant network as Starknet Network
+    participant network as Starknet network
     
     dapp->>get: Initialize connection
     get->>mm: Request connection
@@ -87,11 +87,11 @@ sequenceDiagram
     get->>dapp: Notify change
 ```
 
-The `get-starknet` library offers several key features that improve how dapps interact with the StarkNet network through MetaMask."
+The `get-starknet` library offers several key features that improve how dapps interact with the Starknet network through MetaMask:
 
-- The `WalletAccount` uses a specified provider to access data from the StarkNet network.
-- For transactions, `get-starknet` prepares the data and sends it to MetaMask for signing via StarkNet Snap.
+- The `WalletAccount` uses a specified provider to access data from the Starknet network.
+- For transactions, `get-starknet` prepares the data and sends it to MetaMask for signing through the Starknet Snap.
 - `get-starknet` enables the dapp to create contract instances connected to the `WalletAccount`, allowing smart contract functions to be invoked, with MetaMask handling the signatures.
-- It sets up listeners for account and network changes in MetaMask, so the dapp can subscribe and update its state accordingly.
-- `get-starknet` can request network changes through MetaMask, allowing users to switch between StarkNet networks, such as Mainnet or Sepolia testnet.
-- It can also request MetaMask to display specific tokens, improving the user experience.
+- `get-starknet` sets up listeners for account and network changes in MetaMask, so the dapp can subscribe and update its state accordingly.
+- `get-starknet` can request network changes through MetaMask, allowing users to switch between Starknet networks, such as Mainnet or Sepolia testnet.
+- `get-starknet` can also request MetaMask to display specific tokens, improving the user experience.
