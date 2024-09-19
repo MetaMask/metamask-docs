@@ -16,7 +16,7 @@ jobs:
         run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/7fdc9630cc360ea1a469eed64ac6d78caeda1234/scripts/download-actionlint.bash) 1.6.22
         shell: bash
       - name: Check workflow files
-        run: ${{ steps.download-actionlint.outputs.executable }} -color -ignore '.github/workflows/dependabot\.yml'
+        run: ${{ steps.download-actionlint.outputs.executable }} -color -ignore '\.github/workflows/dependabot\.yml'
         shell: bash
 
   build:
