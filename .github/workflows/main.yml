@@ -25,6 +25,7 @@ jobs:
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+      SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
   lint:
     name: Lint
@@ -32,6 +33,7 @@ jobs:
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+      SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
   case:
     name: Case
@@ -39,6 +41,7 @@ jobs:
     secrets:
       SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+      SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
 
   all-jobs-completed:
