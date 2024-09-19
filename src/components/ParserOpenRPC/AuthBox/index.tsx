@@ -5,10 +5,6 @@ import clsx from "clsx";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
-interface AuthBoxProps {
-  handleConnect: () => void;
-}
-
 export const AuthBox = () => {
   const { metaMaskConnectHandler } = useContext(MetamaskProviderContext);
   const connectHandler = () => {
