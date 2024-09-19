@@ -97,7 +97,16 @@ const CustomReferencePage = (props) => {
           ...item,
           items: item.items.map(referenceItem => {
             if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items) {
-              return { ...referenceItem, items: [...referenceItem.items, ...siteConfig.customFields.dynamicData] };
+              return { ...referenceItem, items: [...referenceItem.items, ...siteConfig.customFields.dynamicData.map(dynamicItem => {
+                  const jsonRpcCategory = referenceItem.items.find(({ label }) => label === 'JSON-RPC APIs');
+                  if (jsonRpcCategory) {
+                    return {
+                      ...dynamicItem,
+                      ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
+                    };
+                  }
+                  return dynamicItem;
+                })] };
             }
             return referenceItem;
           })

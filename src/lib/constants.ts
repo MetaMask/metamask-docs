@@ -526,4 +526,12 @@ export const lineaSidebarNames = [
     old: "api-reference",
     new: "API reference"
   },
+  {
+    old: "subscription-methods",
+    new: "Subscription methods"
+  },
+  {
+    old: "trace-methods",
+    new: "Trace methods"
+  },
 ]
