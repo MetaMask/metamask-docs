@@ -1,6 +1,7 @@
 import React from "react";
 import Admonition from "@theme-original/Admonition";
 import { Props as AdmonitionPropsRaw } from "@theme/Admonition";
+import Link from "@docusaurus/Link";
 import type { WrapperProps } from "@docusaurus/types";
 
 import FlaskIcon from "./flask-icon.svg";
@@ -19,9 +20,9 @@ export default function AdmonitionWrapper(props: Props): JSX.Element {
     return (
       <Admonition {...props} icon={<FlaskIcon />} title="Flask Only">
         This feature is experimental and only available in{" "}
-        <a href="https://docs.metamask.io/snaps/get-started/install-flask/">
+        <Link href="https://docs.metamask.io/snaps/get-started/install-flask/">
           MetaMask Flask
-        </a>
+        </Link>
         , the canary distribution of MetaMask.
       </Admonition>
     );
