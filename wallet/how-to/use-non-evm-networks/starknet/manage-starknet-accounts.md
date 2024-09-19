@@ -71,17 +71,17 @@ Currently, multiple Starknet accounts are not supported in the Starknet Snap.
 
 ## Manage account transactions
 
-You can manage transactions with `get-starknet`:
+You can manage transactions using `get-starknet` as follows:
 
 ```javascript
 
 const invokeStarknetContract = async () => {
   try {
     const starknet = getStarknet();
-    await starknet.enable();  // Make sure the wallet is enabled
+    await starknet.enable();  // Make sure the wallet is enabled.
 
-    const contractAddress = "0xYourContractAddress";  // Replace with your contract address
-    const entrypoint = "function_name";  // The function you want to call
+    const contractAddress = "0xYourContractAddress";  // Replace with your contract address.
+    const entrypoint = "function_name";  // The function you want to call.
     const calldata = [/* your function arguments */];  // Replace with calldata
 
     const result = await starknet.invoke({
@@ -116,13 +116,13 @@ function AccountChangeHandler() {
     const handleAccountsChanged = (accounts: string[]) => {
       console.log("Accounts changed:", accounts);
       setAccount(accounts[0] || null);
-      // Update your app"s state here
+      // Update your dapp's state.
     };
 
     const handleDisconnect = () => {
       console.log("Disconnected from wallet");
       setAccount(null);
-      // Handle disconnection (e.g., reset app state, show connect button)
+      // Handle disconnection (for example reset dapp state, show connect button).
     };
 
     if (starknet) {
