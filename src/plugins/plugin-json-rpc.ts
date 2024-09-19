@@ -67,7 +67,7 @@ export default function useNetworksMethodPlugin() {
 
             return addRoute({
               path: `/services/reference/linea/json-rpc-methods-new/${page.name}`,
-              component: require.resolve("../pages/CustomPage/index.tsx"),
+              component: require.resolve("../components/CustomReferencePage/index.tsx"),
               exact: true,
               modules: {
                 methodFile: filePath,

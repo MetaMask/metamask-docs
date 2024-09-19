@@ -50,7 +50,7 @@ function generateSidebarItems(docs) {
           currentCategory[part] = {
             type: 'category',
             label: upperFirst(part),
-            collapsed: part !== "get-started",
+            collapsed: part !== "Get started",
             collapsible: true,
             items: []
           };
@@ -85,7 +85,7 @@ function generateSidebarItems(docs) {
 
 const sidebar_wrapper_classes = "theme-doc-sidebar-container docSidebarContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocRoot-Layout-Sidebar-styles-module"
 
-const CustomPage = (props) => {
+const CustomReferencePage = (props) => {
   const customData = props.route.customData;
   const { siteConfig } = useDocusaurusContext();
   const [formattedData, setFormattedData] = useState([]);
@@ -126,4 +126,4 @@ const CustomPage = (props) => {
   ) : null;
 };
 
-export default CustomPage;
+export default CustomReferencePage;

@@ -460,7 +460,7 @@ export enum NETWORK_NAMES {
 export const lineaSidebarNames = [
   {
     old: "get-started",
-    new: "Get Started"
+    new: "Get started"
   },
   {
     old: "how-to",
@@ -521,5 +521,9 @@ export const lineaSidebarNames = [
   {
     old: "http-api-methods",
     new: "HTTP API methods"
+  },
+  {
+    old: "api-reference",
+    new: "API reference"
   },
 ]

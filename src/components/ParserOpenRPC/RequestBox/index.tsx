@@ -5,7 +5,6 @@ import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
-import { useLocation } from "@docusaurus/router";
 import { useColorMode } from "@docusaurus/theme-common";
 
 interface RequestBoxProps {
@@ -33,20 +32,17 @@ export default function RequestBox({
   customAPIKey,
   setCustomAPIKey,
 }: RequestBoxProps) {
-  const location = useLocation();
   const { colorMode } = useColorMode();
-  const isWalletReferencePage = location.pathname.includes("/wallet/reference");
-  const isLineaReferencePage = location.pathname.includes("/services/reference/linea");
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
     const NETWORK_URL = "https://linea-mainnet.infura.io";
     const API_KEY = "<YOUR-API-KEY>";
-    const lineaAPIKey = customAPIKey ? customAPIKey : API_KEY;
+    const networkAPIKey = customAPIKey ? customAPIKey : API_KEY;
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${NETWORK_URL}/v3/${isLineaReferencePage ? lineaAPIKey : API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+    return `curl ${NETWORK_URL}/v3/${networkAPIKey} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [customAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
@@ -54,7 +50,7 @@ export default function RequestBox({
   }, [response]);
 
   const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
-  const isRunAndCustomizeRequestDisabled = isWalletReferencePage && methodsWithRequiredWalletConnection.includes(method) ?
+  const isRunAndCustomizeRequestDisabled = isMetamaskNetwork && methodsWithRequiredWalletConnection.includes(method) ?
     !isMetamaskInstalled :
     false;
 
@@ -71,7 +67,7 @@ export default function RequestBox({
 
   return (
     <>
-      {!isWalletReferencePage ?
+      {!isMetamaskNetwork ?
         <div style={{ marginBottom: "20px" }}>
           <label htmlFor="custom_key">Your API Key:</label>
           <input
