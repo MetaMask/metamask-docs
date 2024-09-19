@@ -42,7 +42,7 @@ export default [{
             },
 
             project: ["./tsconfig.json"],
-            tsconfigRootDir: "/Users/voltmod/Projects/infura/metamask-docs",
+            tsconfigRootDir: "./",
         },
     },
 
