@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import Heading from "@theme/Heading";
-import styles from "./Card.module.css";
+import styles from "./card.module.css";
 
 export type CardItem = {
   title: string;
