@@ -1,6 +1,6 @@
 import React from "react";
 import Card, { type CardItem } from "@site/src/components/Card";
-import styles from "./CardSection.module.css";
+import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
