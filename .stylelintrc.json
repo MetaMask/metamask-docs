@@ -1,6 +1,6 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "color-no-invalid-hex": true
+    "selector-class-pattern": null
   }
 }

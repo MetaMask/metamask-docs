@@ -22,9 +22,12 @@
   padding: 12px 22px;
   margin-bottom: 1px;
   cursor: pointer;
-  /*transition-property: 'border-color', 'background-color';*/
-  /*transition-duration: .2s;*/
-  /*transition-timing-function: ease;*/
+
+  /* transition-property: 'border-color', 'background-color'; */
+
+  /* transition-duration: .2s; */
+
+  /* transition-timing-function: ease; */
 }
 
 .collapseIcon {
@@ -34,7 +37,8 @@
   border-top: 2px solid #0376c9;
   border-right: 2px solid #0376c9;
   transform: rotate(45deg);
-  /*transition: transform .2s ease;*/
+
+  /* transition: transform .2s ease; */
 }
 
 .collapseBtn:hover {
