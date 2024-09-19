@@ -176,9 +176,6 @@ export default function ParserOpenRPC({
     closeComplexTypeView();
   };
 
-  console.log(pathname)
-  console.log(pathname === REF_PATH)
-
   return (
     <ParserOpenRPCContext.Provider
       value={{
@@ -246,8 +243,8 @@ export default function ParserOpenRPC({
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {pathname === REF_PATH && <ProjectsBox />}
-            {pathname !== REF_PATH && !metaMaskAccount && <AuthBox />}
+            {pathname.startsWith(REF_PATH) && <ProjectsBox />}
+            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}
