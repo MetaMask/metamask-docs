@@ -20,45 +20,45 @@ The SDK supports the following dapp platforms:
 <div class="cards">
   <div class="card">
     <div class="card__header">
-      <h3>💻 <a href="/wallet/how-to/use-sdk/javascript">JavaScript</a></h3>
+      <h3>💻 <a href="/wallet/connect/metamask-sdk/javascript">JavaScript</a></h3>
     </div>
     <div class="card__body">
       <ul>
-        <li><a href="/wallet/how-to/use-sdk/javascript/react">React</a></li>
-        <li><a href="/wallet/how-to/use-sdk/javascript/pure-js">Pure JavaScript</a></li>
-        <li><a href="/wallet/how-to/use-sdk/javascript/other-web-frameworks">Other web frameworks</a></li>
-        <li><a href="/wallet/how-to/use-sdk/javascript/nodejs">Node.js</a></li>
-        <li><a href="/wallet/how-to/use-sdk/javascript/electron">Electron</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/javascript/react">React</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/javascript/pure-js">Pure JavaScript</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/javascript/other-web-frameworks">Other web frameworks</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/javascript/nodejs">Node.js</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/javascript/electron">Electron</a></li>
       </ul>
     </div>
   </div>
   <div class="card">
     <div class="card__header">
-      <h3>📱 <a href="/wallet/how-to/use-sdk/mobile">Mobile</a></h3>
+      <h3>📱 <a href="/wallet/connect/metamask-sdk/mobile">Mobile</a></h3>
     </div>
     <div class="card__body">
       <ul>
-        <li><a href="/wallet/how-to/use-sdk/mobile/ios">iOS</a></li>
-        <li><a href="/wallet/how-to/use-sdk/mobile/android">Android</a></li>
-        <li><a href="/wallet/how-to/use-sdk/mobile/react-native">React Native</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/mobile/ios">iOS</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/mobile/android">Android</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/mobile/react-native">React Native</a></li>
       </ul>
     </div>
   </div>
   <div class="card">
     <div class="card__header">
-      <h3>🎮 <a href="/wallet/how-to/use-sdk/gaming">Gaming</a></h3>
+      <h3>🎮 <a href="/wallet/connect/metamask-sdk/gaming">Gaming</a></h3>
     </div>
     <div class="card__body">
       <ul>
-        <li><a href="/wallet/how-to/use-sdk/gaming/unity">Unity</a></li>
-        <li><a href="/wallet/how-to/use-sdk/gaming/unreal-engine">Unreal Engine</a> (coming soon)</li>
+        <li><a href="/wallet/connect/metamask-sdk/gaming/unity">Unity</a></li>
+        <li><a href="/wallet/connect/metamask-sdk/gaming/unreal-engine">Unreal Engine</a> (coming soon)</li>
       </ul>
     </div>
   </div>
 </div>
 <div class="card margin-bottom--lg">
   <div class="card__header">
-    <h3>↔️ <a href="/wallet/how-to/use-sdk/3rd-party-libraries">Third-party libraries</a></h3>
+    <h3>↔️ <a href="/wallet/connect/metamask-sdk/3rd-party-libraries">Third-party libraries</a></h3>
   </div>
   <div class="card__body">
     <ul>
