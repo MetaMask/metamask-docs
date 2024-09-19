@@ -176,6 +176,9 @@ export default function ParserOpenRPC({
     closeComplexTypeView();
   };
 
+  console.log(pathname)
+  console.log(pathname === REF_PATH)
+
   return (
     <ParserOpenRPCContext.Provider
       value={{
