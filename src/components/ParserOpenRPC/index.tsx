@@ -1,10 +1,6 @@
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
@@ -21,6 +17,7 @@ import {
 } from "@site/src/lib/segmentAnalytics";
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
+import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -29,7 +26,7 @@ interface ParserProps {
 }
 
 interface ParserOpenRPCContextProps {
-  drawerLabel?: string
+  drawerLabel?: string;
   setIsDrawerContentFixed?: (isFixed: boolean) => void;
   setDrawerLabel?: (label: string) => void;
   isComplexTypeView: boolean;
@@ -39,15 +36,23 @@ interface ParserOpenRPCContextProps {
 export const ParserOpenRPCContext =
   createContext<ParserOpenRPCContextProps | null>(null);
 
-export default function ParserOpenRPC({ network, method, extraContent }: ParserProps) {
+const REF_PATH = "/wallet/reference/new-reference";
+
+export default function ParserOpenRPC({
+  network,
+  method,
+  extraContent,
+}: ParserProps) {
   if (!method || !network) return null;
+  const location = useLocation();
+  const { pathname } = location;
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } =
+  const { metaMaskAccount, metaMaskProvider } =
     useContext(MetamaskProviderContext);
   const { colorMode } = useColorMode();
   const openModal = () => {
@@ -60,7 +65,6 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   };
   const closeModal = () => setModalOpen(false);
 
-  
   const { netData } = usePluginData("plugin-json-rpc") as {
     netData?: ResponseItem[];
   };
@@ -239,7 +243,8 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {pathname === REF_PATH && <ProjectsBox />}
+            {pathname !== REF_PATH && !metaMaskAccount && <AuthBox />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}
