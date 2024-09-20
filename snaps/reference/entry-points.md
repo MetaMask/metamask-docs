@@ -259,9 +259,6 @@ module.exports.onKeyringRequest = async ({ origin, request }) => {
 
 ## `onNameLookup`
 
-:::flaskOnly
-:::
-
 To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must export `onNameLookup`.
 Whenever a user types in the send field, MetaMask calls this method.
 MetaMask passes the user input to the `onNameLookup` handler method.
@@ -300,7 +297,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
   if (domain) {
     const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979"
     return {
-      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol", domainName: domain }],
     }
   }
 
@@ -325,7 +322,7 @@ module.exports.onNameLookup = async ({ request }) => {
   if (domain) {
     const resolvedAddress = "0xc0ffee254729296a45a3885639AC7E10F9d54979"
     return {
-      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol" }],
+      resolvedAddresses: [{ resolvedAddress, protocol: "test protocol", domainName: domain }],
     }
   }
 

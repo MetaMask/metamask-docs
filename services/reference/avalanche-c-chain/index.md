@@ -19,7 +19,7 @@ Avalanche is a Proof of Stake (PoS), layer 1 platform that features 3 built-in b
 - [Exchange Chain (X-Chain)](https://docs.avax.network/learn/primary-network#x-chain)
 - [Platform Chain (P-Chain)](https://docs.avax.network/learn/primary-network#p-chain)
 
-Infura provides access to the C-Chain.
+Infura provides access to the C-Chain only.
 
 The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy Solidity 
 smart contract dapps onto the C-Chain. Dapps can run on both Avalanche and Ethereum. Avalanche 

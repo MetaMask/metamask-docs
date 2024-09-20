@@ -37,7 +37,7 @@ Detailed information about the specified L1 batch:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -45,7 +45,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="cURL">
 
   ```bash
-  curl https://zksync-mainnet.infura.io/v3/YOUR-API-KEY \
+  curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchDetails", "params": [12345]}'
@@ -54,7 +54,7 @@ Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infu
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://zksync-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchDetails", "params": [12345]}'
+wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL1BatchDetails", "params": [12345]}'
 ```
 
   </TabItem>

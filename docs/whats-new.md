@@ -9,11 +9,27 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## September 2024
+
+- Documented [Snaps user-defined components](/snaps/features/custom-ui/user-defined-components).
+  ([#1557](https://github.com/MetaMask/metamask-docs/pull/1557))
+- Updated [Android SDK documentation](/wallet/how-to/use-sdk/mobile/android) with convenience
+  methods and examples using coroutines.
+  ([#1546](https://github.com/MetaMask/metamask-docs/pull/1546))
+- Documented [Infura's credit pricing model](/services/get-started/pricing).
+  ([#1530](https://github.com/MetaMask/metamask-docs/pull/1530))
+- Added tutorial for [authenticating with JWT](/services/tutorials/ethereum/authenticate-with-jwt).
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
+- Documented [opBNB](/services/reference/opbnb) support.
+  ([#1528](https://github.com/MetaMask/metamask-docs/pull/1528))
+
 ## August 2024
 
+- *The documentation site underwent a temporary freeze in August.*
 - Updated [Starknet documentation](/services/reference/starknet) with API methods supported by new partners, Bware and Chainstack. ([#1483](https://github.com/MetaMask/metamask-docs/pull/1483))
 
 ## July 2024
+
 - Documented [Binance Smart Chain](/services/reference/bnb-smart-chain/) support. ([#1458](https://github.com/MetaMask/metamask-docs/pull/1458))
 - Documented [Celo WebSocket](/services/reference/celo/) support. ([#1446](https://github.com/MetaMask/metamask-docs/pull/1446))
 - Documented [ZKsync Era WebSocket](/services/reference/zksync) support. ([#1438](https://github.com/MetaMask/metamask-docs/pull/1438))

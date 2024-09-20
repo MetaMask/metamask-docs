@@ -6,7 +6,7 @@ Linea supports the standard [Ethereum JSON-RPC-APIs](../../ethereum/json-rpc-met
 :::info
 
 - WebSockets are also supported on the Linea network and can be used to set up bidirectional
-  stateful [subscriptions](../../ethereum/json-rpc-methods/subscription-methods/index.md).
+  stateful [subscriptions](subscription-methods/index.md).
 - `eth_newFilter` and `eth_newBlockFilter` methods are not supported.
 
 :::

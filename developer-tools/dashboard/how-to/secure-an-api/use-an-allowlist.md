@@ -65,7 +65,7 @@ To allow a specific Ethereum address, click **ADD** and input it into the **CONT
 Test with a method from the list.
 
 ```bash
-curl https://mainnet.infura.io/v3/<PROJECT_ID> \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -H 'Content-Type: application/json' \
   -X POST \
   -d '{"jsonrpc": "2.0", "method": "eth_getBalance", "params": ["0xfe05a3e72235c9f92fd9f2282f41a8154d6d342b", "latest"], "id": 1}'
@@ -116,7 +116,7 @@ the **USER AGENTS** allowlist.
 Test with a simple call from a desktop terminal.
 
 ```bash
-curl https://mainnet.infura.io/v3/<PROJECT_ID> \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_accounts", "params": [], "id": 1}'
@@ -214,7 +214,7 @@ This feature provides the following benefits:
 
 ## Best practices
 
-- Ensure the `API-KEY-SECRET` is not exposed publicly, and include it in your requests.
+- Ensure the API key secret is not exposed publicly, and include it in your requests.
 - Use all allowlist options wherever possible.
 - Create a new API key for each application. This allows you to allowlist the contract addresses relevant to that application.
 - Avoid committing your project keys to a repo by using a package like [dotenv](https://www.npmjs.com/package/dotenv).

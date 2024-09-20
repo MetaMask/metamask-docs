@@ -28,7 +28,7 @@ In the code tabs, the `eth_blockNumber` method is used as an example.
   <TabItem value="cURL">
 
 ```bash
-curl https://<network>.infura.io/v3/YOUR-API-KEY \
+curl https://<network>.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Enable-Failover: true" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -51,7 +51,7 @@ const provider = new https.Agent(options)
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    "https://<network>.infura.io/v3/YOUR-API-KEY",
+    "https://<network>.infura.io/v3/<YOUR-API-KEY>",
     { agent: provider }
   )
 )
@@ -93,7 +93,7 @@ class InfuraJsonRpcProvider extends ethers.providers.JsonRpcProvider {
 }
 
 const provider = new InfuraJsonRpcProvider(
-  "https://<network>.infura.io/v3/YOUR-API-KEY"
+  "https://<network>.infura.io/v3/<YOUR-API-KEY>"
 )
 
 provider.getBlockNumber().then((blockNumber) => {
