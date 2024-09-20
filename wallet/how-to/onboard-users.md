@@ -23,7 +23,7 @@ If it finds an origin, the final confirmation button of the MetaMask onboarding 
 the user will be redirected back to your dapp.
 
 :::tip
-[MetaMask SDK](../how-to/use-sdk/index.md) incorporates the functionality of the MetaMask onboarding library.
+[MetaMask SDK](../connect/metamask-sdk/index.md) incorporates the functionality of the MetaMask onboarding library.
 You don't need to set up the onboarding library if you use the SDK.
 :::
 

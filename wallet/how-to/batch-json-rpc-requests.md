@@ -1,6 +1,6 @@
 ---
 description: Batch multiple JSON-RPC requests using MetaMask SDK.
-sidebar_position: 7
+sidebar_position: 6
 tags:
   - JavaScript SDK
 ---

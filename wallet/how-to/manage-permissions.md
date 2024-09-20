@@ -1,6 +1,6 @@
 ---
 description: Request and revoke permissions to call restricted methods.
-sidebar_position: 6
+sidebar_position: 8
 ---
 
 # Manage permissions

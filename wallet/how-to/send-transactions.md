@@ -1,6 +1,6 @@
 ---
 description: Send transactions using eth_sendTransaction.
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Send transactions

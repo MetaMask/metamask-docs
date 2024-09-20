@@ -1,6 +1,6 @@
 ---
 description: Access a user's accounts and handle changed accounts.
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Access a user's accounts
