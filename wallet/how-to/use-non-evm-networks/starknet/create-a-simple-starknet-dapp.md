@@ -1,9 +1,9 @@
 ---
-description: Create a basic dapp using `get-starknet` and React TypeScript
+description: Create a simple dapp using `get-starknet` and React TypeScript.
 sidebar_position: 6
 ---
 
-# Create a basic dapp with `get-starknet`
+# Create a simple Starknet dapp
 
 In this tutorial, you'll learn how to set up a basic dapp that uses `get-starknet` to connect to MetaMask and display the user's wallet address.
 

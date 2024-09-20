@@ -5,12 +5,12 @@ sidebar_position: 3
 
 # Manage Starknet networks
 
-You can manage network interactions in your Starknet dapp.
+You can detect a user's Starknet network and prompt them to switch Starknet networks in MetaMask.
+The following examples use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library.
 
+## Detect a user's network
 
-## Detect the user's network
-
-You can detect the network a user is currently connected to using the following:
+Detect the Starknet network a user is currently connected to using the following:
 
 ```javascript
 const checkCurrentNetwork = () => {
@@ -21,31 +21,22 @@ const checkCurrentNetwork = () => {
 };
 ```
  
-## Switch between networks
+## Switch networks
 
-Starknet currently operates two public networks. Each network is identified by a unique chain ID. Use these chain IDs when configuring your dapp or interacting with the Starknet networks.
-
-You can allow users to switch between different Starknet networks by setting the appropriate chain ID. 
-
-Starknet has two official networks: 
-
-| Network | Chain ID (Hexadecimal) |
-|---------|------------------------|
-| Mainnet | `0x534e5f4d41494e`     |
-| Sepolia testnet | `0x534e5f5345504f4c4941` |
-
-The following code example enables switching by setting the appropriate chain ID. 
+Starknet currently supports two public networks, Mainnet and Sepolia testnet.
+Prompt users to switch between networks by setting the
+[chain ID](../../../reference/non-evm-apis/starknet-snap-api.md#supported-networks) of the target network:
 
 ```javascript
 const switchChain = async (chainId: string) => {
-    try {
-        await wallet?.request({
-            type: "wallet_switchStarknetChain",
-            params: { chainId: chainId },
-        });
-        console.log(`Switched to chainId: ${chainId}`);
-    } catch (e) {
-        console.error("Failed to switch chain:", e);
-    }
+  try {
+    await wallet?.request({
+      type: "wallet_switchStarknetChain",
+      params: { chainId: chainId },
+    });
+      console.log(`Switched to chainId: ${chainId}`);
+  } catch (e) {
+    console.error("Failed to switch chain:", e);
+  }
 };
 ```

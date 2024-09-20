@@ -1,7 +1,6 @@
 ---
 description: See the Starknet Snap API reference.
 sidebar_position: 1
-toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,8 +8,20 @@ import TabItem from "@theme/TabItem";
 
 # Starknet Snap API
 
-With the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md) installed, dapps can
-use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
+When connected to the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md), dapps
+can use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
+
+Currently, the [`get-starknet`](https://github.com/starknet-io/get-starknet) library only supports the
+following Starknet Snap API methods:
+
+- [`starkNet_extractPublicKey`](#starknet_extractpublickey)
+- [`starkNet_signMessage`](#starknet_signmessage)
+- [`starkNet_upgradeAccContract`](#starknet_upgradeacccontract)
+- [`starkNet_verifyMessage`](#starknet_verifymessage)
+
+The examples on this page use the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method,
+which supports all Starknet Snap API methods.
 
 :::note
 
@@ -19,33 +30,23 @@ You can also communicate with the Starknet network using the
 
 :::
 
-Starknet currently operates two public networks. Each network is identified by a unique chain ID. Use these chain IDs when configuring your dapp or interacting with the Starknet networks.
+## Supported networks
 
-| Network | Chain ID (Hexadecimal) |
-|---------|------------------------|
-| Mainnet | `0x534e5f4d41494e`     |
+Starknet currently supports two public networks.
+Use these networks' chain IDs with the Starknet Snap API methods.
+
+| Network           | Chain ID (Hexadecimal)   |
+|-------------------|--------------------------|
+| Mainnet           | `0x534e5f4d41494e`       |
 | Testnet (Sepolia) | `0x534e5f5345504f4c4941` |
 
-Use these IDs when specifying the network in your Starknet transactions or when configuring your development environment.
+## API methods
 
-Ensure you're using the correct chain ID for your intended network to avoid unintended transactions on the wrong network.
-
-:::note
-
-Currently, `get-starknet` only works with the following methods: 
-
-- [`starkNet_extractPublicKey`](#starknet_extractpublickey)
-- [`starkNet_signMessage`](#starknet_signmessage)
-- [`starkNet_upgradeAccContract`](#starknet_upgradeacccontract)
-- [`starkNet_verifyMessage`](#starknet_verifymessage)
-
-:::
-
-## `starkNet_createAccount`
+### `starkNet_createAccount`
 
 Deploys an account contract.
 
-### Parameters
+#### Parameters
 
 - `addressIndex`: `integer` - (Optional) Specific address index of the derived key in
   [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
@@ -55,11 +56,11 @@ Deploys an account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `gateway/add_transaction` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -94,22 +95,22 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_displayPrivateKey`
+### `starkNet_displayPrivateKey`
 
 Extracts the private key from the deployed Starknet account and displays it in MetaMask.
 
-### Parameters
+#### Parameters
 
 - `userAddress`: `string` - Address of the account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 Always returns `null` for security reasons.
 The private key is only shown in the MetaMask pop-up window.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -140,22 +141,22 @@ null
 </TabItem>
 </Tabs>
 
-## `starkNet_estimateAccountDeployFee`
+### `starkNet_estimateAccountDeployFee`
 
 Gets the estimated gas fee for deploying an account contract.
 
-### Parameters
+#### Parameters
 
 - `addressIndex`: `integer` - (Optional) Specific address index of the derived key in
   [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -193,11 +194,11 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_estimateFee`
+### `starkNet_estimateFee`
 
 Gets the estimated gas fee for calling a method on any contract.
 
-### Parameters
+#### Parameters
 
 - `contractAddress`: `string` - Address of the target contract.
 - `contractFuncName`: `string` - Target function name of the contract.
@@ -206,11 +207,11 @@ Gets the estimated gas fee for calling a method on any contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -251,27 +252,27 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_extractPublicKey`
+### `starkNet_extractPublicKey`
 
 :::note
 
-This method is integrated into `get-starknet`.
+This method is supported by the `get-starknet` library.
 
 :::
 
 Extracts the public key from a Starknet account address.
 
-### Parameters
+#### Parameters
 
 - `userAddress`: `string` - Address of the account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The public key of the given account address (can be different from the actual signer).
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -302,29 +303,22 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_getErc20TokenBalance`
+### `starkNet_getErc20TokenBalance`
 
 Gets the user's current balance of an ERC-20 token.
 
-### Parameters
+#### Parameters
 
 - `tokenAddress`: `string` - Address of the ERC-20 token contract.
 - `userAddress`: `string` - Address of the user account.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
-The token balance in hexadecimal.
+The latest and pending token balance in hexadecimal.
 
-```js
-{ 
-  balancePending: "0x0", 
-  balanceLatest: "0x0", 
-}
-```
-
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -359,20 +353,20 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_getStoredUserAccounts`
+### `starkNet_getStoredUserAccounts`
 
 Gets a list of stored user accounts that are either initialized or initializing.
 
-### Parameters
+#### Parameters
 
 `chainId`: `string` - (Optional) ID of the target Starknet network.
 The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The list of the stored user accounts.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -413,11 +407,11 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_getTransactions`
+### `starkNet_getTransactions`
 
 Gets the transaction records from a sender address.
 
-### Parameters
+#### Parameters
 
 - `senderAddress`: `string` - Address of the sender.
 - `contractAddress`: `string` - (Optional) Address of the called contract.
@@ -437,11 +431,11 @@ Gets the transaction records from a sender address.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The list of the transaction records.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -492,22 +486,22 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_getTransactionStatus`
+### `starkNet_getTransactionStatus`
 
 Gets the status of a transaction.
 
-### Parameters
+#### Parameters
 
 - `transactionHash`: `string` - Hash of the target transaction.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The [status](https://docs.starknet.io/architecture-and-concepts/network-architecture/transaction-life-cycle/)
 of the transaction.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -538,11 +532,11 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_getValue`
+### `starkNet_getValue`
 
 Calls a `VIEW` method on any contract.
 
-### Parameters
+#### Parameters
 
 - `contractAddress`: `string` - Address of the target contract.
 - `contractFuncName`: `string` - Target function name of the contract.
@@ -550,11 +544,11 @@ Calls a `VIEW` method on any contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `feeder_gateway/call_contract` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -589,16 +583,12 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_recoverAccounts`
-
-:::note
-This method is integrated into `get-starknet`.
-:::
+### `starkNet_recoverAccounts`
 
 Recovers deployed user accounts from the seed phrase of MetaMask based on
 [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 
-### Parameters
+#### Parameters
 
 - `startScanIndex`: `integer` - (Optional) Starting address index of the derived key in
   [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
@@ -611,11 +601,11 @@ Recovers deployed user accounts from the seed phrase of MetaMask based on
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The list of the scanned user accounts during the recovery process.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -659,11 +649,11 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_sendTransaction`
+### `starkNet_sendTransaction`
 
 Signs and sends a transaction.
 
-### Parameters
+#### Parameters
 
 - `contractAddress`: `string` - Address of the target contract.
 - `contractFuncName`: `string` - Target function name of the contract.
@@ -674,11 +664,11 @@ Signs and sends a transaction.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `gateway/add_transaction` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -715,26 +705,26 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_signMessage`
+### `starkNet_signMessage`
 
 :::note
-This method is integrated into `get-starknet`.
+This method is supported by the `get-starknet` library.
 :::
 
 Signs a typed data message.
 
-### Parameters
+#### Parameters
 
 - `typedDataMessage`: `string` - JSON representation of the typed data to be signed.
 - `signerAddress`: `string` - Address of the signer.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The signed hash of typed data.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -766,11 +756,17 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_upgradeAccContract`
+### `starkNet_upgradeAccContract`
+
+:::note
+
+This method is supported by the `get-starknet` library.
+
+:::
 
 Upgrades an account contract.
 
-### Parameters
+#### Parameters
 
 - `contractAddress`: `string` - Address of the target contract.
 - `maxFee`: `string` - (Optional) Maximum gas fee allowed from the sender.
@@ -778,11 +774,11 @@ Upgrades an account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 The response from Starknet's `gateway/call_contract` API endpoint.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">
@@ -816,11 +812,17 @@ await window.ethereum.request({
 </TabItem>
 </Tabs>
 
-## `starkNet_verifyMessage`
+### `starkNet_verifyMessage`
+
+:::note
+
+This method is supported by the `get-starknet` library.
+
+:::
 
 Verifies a signed typed data message.
 
-### Parameters
+#### Parameters
 
 - `typedDataMessage`: `string` - JSON representation of the original typed data message to be verified.
 - `signerAddress`: `string` - Address of the signer.
@@ -828,11 +830,11 @@ Verifies a signed typed data message.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
+#### Returns
 
 `true` if the signature is verified, `false` otherwise.
 
-### Example
+#### Example
 
 <Tabs>
 <TabItem value="Request">

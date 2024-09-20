@@ -11,7 +11,7 @@ After an account is connected, you can sign a transaction using the `wallet.acco
 const signStarknetTransaction = async (wallet, contractAddress, entrypoint, calldata) => {
   try {
     if(wallet?.isConnected !== true){
-      throw('Wallet not connected');
+      throw("Wallet not connected");
     } 
   
     // Send the transaction
@@ -20,9 +20,9 @@ const signStarknetTransaction = async (wallet, contractAddress, entrypoint, call
       entrypoint: entrypoint,            // The function to call in the contract
       calldata: calldata                 // The parameters to pass to the function
     });
-    console.log('Transaction signed successfully:', result);
+    console.log("Transaction signed successfully:", result);
     return result;
   } catch (error) {
-    console.error('Error signing transaction:', error);
+    console.error("Error signing transaction:", error);
   }
 };
