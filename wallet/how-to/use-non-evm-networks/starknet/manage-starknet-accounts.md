@@ -5,11 +5,26 @@ sidebar_position: 2
 
 # Manage Starknet accounts
 
-You can manage Starknet accounts to display account information, handle transactions, and respond to account changes in your dapp. 
+You can manage Starknet accounts in MetaMask.
+The following examples use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library.
 
-## View account information
+:::note Notes
 
-After a user connects, you can display the account details, such as the account address: 
+- Account creation in Starknet is handled by the wallet provider.
+  As a dapp developer, you do not create accounts directly.
+  Instead, you can guide users to [create an account](connect-to-starknet.md) with MetaMask.
+- Currently, the Starknet Snap doesn't support multiple Starknet accounts.
+
+:::
+
+## Prerequisites
+
+[Connect to Starknet](connect-to-starknet.md) from your dapp.
+
+## Display account information
+
+After a user connects to their Starknet account in MetaMask, you can display the account details.
+The following example displays the account address: 
 
 ```javascript
 const showAccountInfo = async () => {
@@ -20,9 +35,12 @@ const showAccountInfo = async () => {
 };
 ```
 
-## Retrieve connected Starknet accounts
+## Retrieve the connected account
 
-To retrieve and display connected Starknet accounts, use the `get-starknet` library in combination with React hooks:
+To retrieve and display a user's connected Starknet account, use the `get-starknet` library in
+combination with React hooks.
+The following example displays the connected account address if available, and displays buttons to
+connect or disconnect the account.
 
 ```javascript
 import { useStarknet, useConnectors } from "@starknet-react/core";
@@ -57,24 +75,13 @@ function AccountDisplay() {
 }
 ```
 
-This component displays the connected account address if available, and provides buttons to connect or disconnect accounts.
-
-## Account creation
-
-Account creation in Starknet is handled by the wallet provider. As a dapp developer, you do not create accounts directly. Instead, you guide users to [create an account](../connect-to-starknet) with their preferred wallet provider.
-
-:::note
-
-Currently, multiple Starknet accounts are not supported in the Starknet Snap.
-
-:::
-
 ## Manage account transactions
 
-You can manage transactions using `get-starknet` as follows:
+You can manage a user's Starknet account transactions using `get-starknet`.
+The following example invokes a specific function on a Starknet smart contract, handles wallet
+connection and transaction submission, and logs the result or any errors:
 
 ```javascript
-
 const invokeStarknetContract = async () => {
   try {
     const starknet = getStarknet();
@@ -96,8 +103,6 @@ const invokeStarknetContract = async () => {
   }
 };
 ```
-This invokes a specific function on a Starknet smart contract, handling wallet connection and transaction submission, and logs the result or any errors.
-
 
 ## Handle account changes and disconnections
 
@@ -155,4 +160,4 @@ function AccountChangeHandler() {
 export default AccountChangeHandler;
 ```
 
-Use this component at the top level of your app to handle account changes globally.
+Use this component at the top level of your dapp to handle account changes globally.
