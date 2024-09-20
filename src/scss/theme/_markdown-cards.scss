@@ -23,15 +23,12 @@ svg {
   border-radius: 0;
   box-shadow: none;
   background: none;
-  aspect-ratio: 1 / 1;
 
   &__wrapper {
     background-color: var(--ifm-hover-overlay);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
-    gap: 1.6rem;
     padding: 3.2rem;
     position: relative;
     height: 100%;
@@ -45,6 +42,11 @@ svg {
       calc(100% - 2.2rem) 100%,
       0 100%
     );
+    min-height: 26.7rem;
+
+    @include bp(desktop) {
+      min-height: 27rem;
+    }
 
     &::before {
       position: absolute;
