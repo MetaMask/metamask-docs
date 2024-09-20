@@ -21,7 +21,7 @@ The [`get-starknet`](architecture) library:
 - Provides a high-level API that abstracts complex operations.
 - Supports [a subset of the Starknet Snap API methods](#supported-methods).
 - Standardizes error handling.
-- Supports multiple wallets, not limited to MetaMask.
+- Supports connecting to multiple Starknet wallets, not limited to MetaMask.
 - Manages wallet connections and Starknet interactions.
 - Provides results in more readable code.
 

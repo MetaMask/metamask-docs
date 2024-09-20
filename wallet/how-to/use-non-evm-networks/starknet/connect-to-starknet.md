@@ -1,36 +1,67 @@
 ---
-description: Connect your Starknet account to MetaMask
+description: Connect your dapp to Starknet in MetaMask.
 sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Connect your Starknet account to MetaMask
+# Connect to Starknet
 
-To connect your dapp to the Starknet network in MetaMask, you can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library.
-This library simplifies the process of connecting to the Starknet Snap, allowing you to interact with users' Starknet accounts in MetaMask.
-`get-starknet` also enables dapps to interact with other wallets in the Starknet ecosystem.
+Connect your dapp to Starknet in MetaMask by using the
+[`get-starknet`](#connect-using-get-starknet) library or the
+[`wallet_invokeSnap`](#connect-using-wallet_invokesnap) JSON-RPC method.
 
-## Prerequisites
+:::warning Important
 
- - [MetaMask installed](https://metamask.io/download/)
- - A text editor (for example, [VS Code](https://code.visualstudio.com/))
- - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
- - [Yarn](https://yarnpkg.com/)
- - A JavaScript or TypeScript React project set up 
-
-## Connect using `get-starknet`
-
-:::note
-
-We recommend using the `get-starknet method for most uses.
+We recommend using the `get-starknet` library for most use cases due to its ease of configuration
+and multi-wallet support.
+See [a comparison of the connection options](index.md#connection-options).
 
 :::
 
-### 1. Add `get-starknet` to your project
+## Prerequisites
 
-Add the [`get-starknet`](https://github.com/starknet-io/get-starknet) `version 3.3.0` library and the version `6.11.0` of the `starknet.js` library to your project's dependencies:
+- [MetaMask installed](https://metamask.io/download/)
+- A text editor (for example, [VS Code](https://code.visualstudio.com/))
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
+- [Yarn](https://yarnpkg.com/)
+- (Optional) A JavaScript or TypeScript React project set up
+
+## Connect using `get-starknet`
+
+### 1. Set up the project
+
+If you don't have an existing React project set up, you can create a new one using
+[Create React App](https://create-react-app.dev/):
+
+<Tabs>
+<TabItem value="yarn" label="Yarn" default>
+
+```bash
+yarn create react-app get-starknet-dapp
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```bash
+npm create react-app get-starknet-dapp
+```
+
+</TabItem>
+</Tabs>
+
+Navigate into the project:
+
+```bash
+cd get-starknet-dapp
+```
+
+### 2. Install `get-starknet`
+
+Add [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js`
+version `6.11.0` to your project's dependencies:
 
 <Tabs>
   <TabItem value="yarn" label="Yarn" default>
@@ -50,9 +81,11 @@ Add the [`get-starknet`](https://github.com/starknet-io/get-starknet) `version 3
   </TabItem> 
 </Tabs>
 
-### 2. Connect to the Snap
+### 3. Connect to the Snap
 
-Create a `src/components` directory, and add a new file named `WalletConnectButton.js` to the directory. Add the following code to the file:
+Create a `src/components` directory, and add a new file named `WalletConnectButton.js` to the directory.
+Add the following code to the file, which handles the connection to the Snap and displays a button
+for users to initiate the wallet connection:
 
 ```javascript title="WalletConnectButton.js"
 import React, { useState } from "react";
@@ -78,7 +111,7 @@ function WalletConnectButton() {
       setWalletName(getWallet?.name || "")
     }
     catch(e){
-      // Handle user rejection to install MetaMask / Snaps.
+      // Handle user rejection to install MetaMask / the Starknet Snap.
       console.log(e)
     }
   };
@@ -106,17 +139,39 @@ function WalletConnectButton() {
 export default WalletConnectButton;
 ```
 
-This code handles the connection to Starknet Snap using the `get-starknet` library and includes a button for users to initiate the wallet connection.
-
 :::note
 
-To connect to Starknet, the dapp user must ensure the [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) is added to MetaMask.
+This code automatically requests the user to add the
+[Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) to MetaMask, if it's
+not already present.
+Handle the error if the user rejects the connection request in the `try` / `catch` block of the
+`handleConnect` function.
 
 :::
 
-### 3. Start the dapp
+Add a new file named `App.js` to the `src` directory, and add the following code to the file to use
+the `WalletConnectButton` component:
 
-Start the dapp, which allows users to select **Connect Wallet** and interact with the Starknet network using MetaMask:
+```js title="App.js"
+import WalletConnectButton from "./components/WalletConnectButton.js"
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <WalletConnectButton />
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### 4. Start the dapp
+
+Start the dapp and navigate to it in your browser.
+A **Connect Wallet** button displays, which allows users to connect to MetaMask and interact with Starknet.
 
 <Tabs>
   <TabItem value="yarn" label="Yarn" default>
@@ -138,18 +193,15 @@ Start the dapp, which allows users to select **Connect Wallet** and interact wit
 
 ## Connect using `wallet_invokeSnap`
 
+Alternatively, you can manage the Snap invocation manually.
+Use the [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC
+method to directly interact with the Starknet Snap.
+
 ### 1. Connect to the Snap
 
-Alternatively, you can manage the Snap invocation manually. Use the `wallet_invokeSnap` method to directly interact with the Starknet Snap. This method does not requires additional dependencies.
-
-:::note
-
-To connect to Starknet, the dapp user must ensure the [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) is added to MetaMask.
-
- :::
-
 Create a `src/utils` directory, and add a new file named `snapHelper.js` to the directory.
-In `snapHelper.js`, add a `connect` function and a `callSnap` helper function as follows. This file handles the interactions with the Starknet Snap:
+In `snapHelper.js`, add a `connect` function and a `callSnap` helper function as follows.
+This file handles the interactions with the Starknet Snap:
 
 ```javascript title="snapHelper.js"
 const snapId = "npm:starknet-snap";
@@ -185,6 +237,13 @@ export async function callSnap(method, params) {
 }
 ```
 
+:::note
+
+To connect to Starknet, the dapp user must add the
+[Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) to MetaMask.
+
+:::
+
 ### 2. Call a specific Snap method
 
 Use the `callSnap` function to call a specific Snap method.
@@ -198,9 +257,17 @@ const chainId = "0x534e5f5345504f4c4941"; // Chain ID of the network to use.
 const accountInfo = await callSnap("starkNet_createAccount", { addressIndex, deploy, chainId });
 ```
 
-#### Example in HTML and Vanilla JS
+### Examples
 
-The following is a full example of a dapp with a button that, when clicked, connects to a Starknet wallet using a MetaMask Snap, creates a Starknet account, and displays the account address:
+#### HTML and Vanilla JS
+
+The following is a full example of a simple HTML and Vanilla JavaScript dapp that connects to the
+Starknet Snap using `wallet_invokeSnap`.
+It displays a button that, when selected:
+
+- Connects to Starknet in MetaMask.
+- Creates a Starknet account.
+- Displays the account address.
 
 ```html
 <html lang="en">
@@ -214,12 +281,12 @@ The following is a full example of a dapp with a button that, when clicked, conn
   <p id="accountInfo"></p>
   <script>
     async function connect(snapId) {
-        await ethereum.request({
-            method: "wallet_requestSnaps",
-            params: {
-            [snapId]: {},
-            },
-        });
+      await ethereum.request({
+        method: "wallet_requestSnaps",
+        params: {
+          [snapId]: {},
+        },
+      });
     }
     async function callSnap(snapId, method, params) {
       try {
@@ -258,9 +325,10 @@ The following is a full example of a dapp with a button that, when clicked, conn
 </html>
 ```
 
-#### Example in a React component
+#### React
 
-The following is a full example of connecting to the Starknet Snap using `wallet_invokeSnap` in a React component:
+The following is a full example of a simple React component that connects to the Starknet Snap using
+`wallet_invokeSnap`.
 
 ```javascript
 import React, { useState } from "react";
