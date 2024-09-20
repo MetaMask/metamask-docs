@@ -5,51 +5,65 @@ sidebar_position: 1
 
 # Use Starknet
 
-Starknet is a non-EVM Layer 2 network. To interact with Starknet accounts in MetaMask, you need to use the Starknet Snap.
+[Starknet](https://www.starknet.io/) is a non-EVM Layer 2 network.
+You can interact with users' Starknet accounts in MetaMask by connecting to the
+[Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/).
 
-You can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the `wallet_invokeSnap` JSON-RPC method to connect to the Starknet Snap.
+You can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method from
+your dapp to connect to the Starknet Snap.
+See [Connect to Starknet](connect-to-starknet.md) to get started.
 
-[`get-starknet`](architecture):
+## Connection options
+
+The [`get-starknet`](architecture) library:
+
 - Provides a high-level API that abstracts complex operations.
-- Offers standardized error handling.
+- Supports [a subset of the Starknet Snap API methods](#supported-methods).
+- Standardizes error handling.
 - Supports multiple wallets, not limited to MetaMask.
 - Manages wallet connections and Starknet interactions.
-- Results are in more readable code.
+- Provides results in more readable code.
 
-[`wallet_invokeSnap`](../../../../snaps/reference/wallet-api-for-snaps/#wallet_invokesnap):
+The [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) method:
+
 - Requires precise method names and parameter structures.
+- Supports [all Starknet Snap API methods](#supported-methods).
 - Handles both MetaMask-specific and Starknet-specific errors.
 - Is designed for operating within the MetaMask framework.
 - Manages lower-level Starknet interactions directly.
 - Provides results in more detailed, lower-level code.
 
-:::note
+:::warning Important
 
-We recommend using the `get-starknet` library for most use cases due to its ease of configuration. 
-
-There are [limitations](#limitations) on the methods that are avilabile when using `get-starknet`. For more information on the methods you can use when interacting with users' Starknet accounts, see the [Starknet Snap API documentation](../../../reference/non-evm-apis/starknet-snap-api.md).
+We recommend using the `get-starknet` library for most use cases due to its ease of configuration
+and multi-wallet support. 
 
 :::
 
 
-## Limitations
+## Supported methods
 
-Not all methods are supported by both `get-starknet` and `wallet_invokeSnap`. The following table lists which methods are availabile for the two implemnatations. 
+Once connected to the Starknet Snap, your dapp can call
+[Starknet Snap API](../../../reference/non-evm-apis/starknet-snap-api.md) methods to interact with
+users' Starknet accounts.
+Not all methods are supported by both `get-starknet` and `wallet_invokeSnap`.
+The following table lists the supported methods for each connection option: 
 
-| Method | `wallet_invokeSnap` | `get-starknet` |
-|--------|:---:|:---:|
-| [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount) | ✓ | |
-| [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey) | ✓ | |
-| [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateAccountDeployFee) | ✓ | |
-| [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee) | ✓ | |
-| [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey) | ✓ | ✓ |
-| [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance) | ✓ | |
-| [`starkNet_getStoredUserAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getStoredUserAccounts) | ✓ | |
-| [`starkNet_getTransactions`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactions) | ✓ | |
-| [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus) | ✓ | |
-| [`starkNet_getValue`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getValue) | ✓ | |
-| [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts) | ✓ | |
-| [`starkNet_sendTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_sendTransaction) | ✓ | |
-| [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage) | ✓ | ✓ |
-| [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_upgradeAccContract) | ✓ | ✓ |
-| [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_verifyMessage) | ✓ | ✓ |
+| Method                                                                                                                        | `get-starknet` |           `wallet_invokeSnap`            |
+|-------------------------------------------------------------------------------------------------------------------------------|:--------------:|:----------------------------------------:|
+| [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount)                       |                |                    ✓                     |
+| [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey)               |                |                    ✓                     |
+| [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateAccountDeployFee) |                |                    ✓                     |
+| [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee)                           |                |                    ✓                     |
+| [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey)                 |       ✓        |                    ✓                     |
+| [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance)         |                |                    ✓                     |
+| [`starkNet_getStoredUserAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getStoredUserAccounts)       |                |                    ✓                     |
+| [`starkNet_getTransactions`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactions)                   |                |                    ✓                     |
+| [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus)         |                |                    ✓                     |
+| [`starkNet_getValue`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getValue)                                 |                |                    ✓                     |
+| [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts)                   |                |                    ✓                     |
+| [`starkNet_sendTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_sendTransaction)                   |                |                    ✓                     |
+| [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage)                           |       ✓        |                    ✓                     |
+| [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_upgradeAccContract)             |       ✓        |                    ✓                     |
+| [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_verifyMessage)                       |       ✓        |                    ✓                     |
