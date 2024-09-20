@@ -16,7 +16,7 @@ See [Connect to Starknet](connect-to-starknet.md) to get started.
 
 ## Connection options
 
-The [`get-starknet`](architecture) library:
+The [`get-starknet`](about-get-starknet) library:
 
 - Provides a high-level API that abstracts complex operations.
 - Supports [a subset of the Starknet Snap API methods](#supported-methods).
@@ -50,7 +50,7 @@ users' Starknet accounts.
 Not all methods are supported by both `get-starknet` and `wallet_invokeSnap`.
 The following table lists the supported methods for each connection option: 
 
-| Method                                                                                                                        | `get-starknet` |           `wallet_invokeSnap`            |
+| Method                                                                                                        `get-starknet` |           `wallet_invokeSnap`            |
 |-------------------------------------------------------------------------------------------------------------------------------|:--------------:|:----------------------------------------:|
 | [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount)                       |                |                    ✓                     |
 | [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey)               |                |                    ✓                     |
