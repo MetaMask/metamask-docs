@@ -4,27 +4,20 @@ title: Introduction
 
 # Integrate your dapp with the MetaMask wallet
 
-Integrate your dapp with MetaMask using **MetaMask SDK**, a comprehensive toolkit that simplifies
-wallet connectivity across desktop and mobile platforms, and MetaMask's **Wallet API**, which offers
-a flexible way to interact with wallets and blockchain networks through standardized JSON-RPC calls.
+MetaMask provides powerful tools for connecting dapps to wallets. With **MetaMask SDK**, developers can easily create seamless wallet connections across desktop and mobile platforms. The **Wallet API** offers flexibility in interacting with wallets and blockchain networks via standardized JSON-RPC calls, enabling direct access to key functionalities.
 
 Get started by [connecting to MetaMask](connect/index.md).
 
 ## Why use MetaMask SDK?
 
-**MetaMask SDK** enables a reliable connection from your dapp to the MetaMask browser extension and
-MetaMask Mobile, and seamlessly integrates from the platform of your choice, ensuring a
-secure and consistent user experience.
-Key benefits include:
+The **MetaMask SDK** allows you to establish a reliable connection between your dapp and MetaMask browser extension or MetaMask Mobile, providing cross-platform compatibility with a consistent user experience. Key benefits include:
 
-- **Cross-platform compatibility** – Connect to MetaMask from desktop, iOS, Android, React Native, and other platforms.
-- **Persistent and seamless connections** – Reduce reconnections and offer a smoother user experience, especially on mobile.
-- **Mobile-first** – Use instant deep links and advanced features for faster wallet interactions.
-- **Enhanced functionality** – Batch transactions, RPC access, and [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) integration for wallet discovery and security.
+- **Cross-platform compatibility** – Integrate with MetaMask from desktop, iOS, Android, React Native, and more.
+- **Seamless connections** – Minimize reconnections and improve user experience, especially on mobile.
+- **Mobile-first optimization** – Enable faster wallet interactions with instant deep links and advanced features.
+- **Enhanced functionality** – Use features like RPC batching, [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for wallet discovery, and wallet security enhancements.
 
-For dapps that need direct control, the **Wallet API** provides access to Ethereum accounts, signing
-data, and other core wallet functions.
-Dapps can call Wallet API methods with or without the SDK installed.
+For more control, the **Wallet API** allows developers to interact with wallets, manage Ethereum accounts, and call JSON-RPC methods, with or without the SDK.
 
 ## Where do I start?
 
