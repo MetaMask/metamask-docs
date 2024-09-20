@@ -28,12 +28,12 @@ Dapps can call Wallet API methods with or without the SDK installed.
 
 ## Where do I start?
 
-- [**Connect to MetaMask**](connect/index.md) – Learn more about and get started with the different
-  connection options.
+- [**Connect to MetaMask**](connect/index.md) – Learn more about the different connection options,
+  and get started quickly.
 - [**Wallet API reference**](/wallet/reference/json-rpc-api) – See the full list of JSON-RPC methods.
 - If you're new to integrating dapps with MetaMask, see the following topics:
   - [**About the Wallet API**](concepts/wallet-api.md)
-  - [**Create a simple dapp tutorial**](tutorials/javascript-dapp-simple.md)
+  - [**Create a React dapp tutorial**](tutorials/react-dapp-local-state.md)
 
 ## Questions?
 
