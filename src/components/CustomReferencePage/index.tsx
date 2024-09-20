@@ -1,12 +1,11 @@
 import Layout from "@theme/Layout";
-import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import React, { useEffect, useState } from "react";
 import DocSidebar from '@theme/DocSidebar';
 import styles from "@site/src/theme/Layout/styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import * as upperFirst  from "lodash.upperfirst"
-import { lineaSidebarNames } from "@site/src/lib/constants";
+import upperFirst  from "lodash.upperfirst"
+import { lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
 
 const formatMenuLabel = (label) => {
   const menuItem = lineaSidebarNames.find(name => name.old === label);

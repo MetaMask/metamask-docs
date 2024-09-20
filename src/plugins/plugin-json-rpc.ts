@@ -1,9 +1,4 @@
-export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
-
-export enum NETWORK_NAMES {
-  linea = "linea",
-  metamask = "metamask",
-}
+import { NETWORK_NAMES, RPC_NETWORK_URL } from "../lib/constants.ts";
 
 export interface ResponseItem {
   name: string;
