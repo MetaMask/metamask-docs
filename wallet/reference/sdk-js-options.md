@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # JavaScript SDK options
 
-The [JavaScript version of MetaMask SDK](../how-to/use-sdk/javascript/index.md) takes the
+The [JavaScript version of MetaMask SDK](../connect/metamask-sdk/javascript/index.md) takes the
 following options.
 
 ### `checkInstallationImmediately`
@@ -232,7 +232,7 @@ infuraAPIKey: process.env.INFURA_API_KEY
 </TabItem>
 </Tabs>
 
-The [Infura API key](../../../../developer-tools/dashboard/get-started/create-api) to
+The [Infura API key](/developer-tools/dashboard/get-started/create-api) to
 use for RPC requests.
 Configure this option to [make read-only RPC requests from your dapp](../how-to/make-read-only-requests.md).
 

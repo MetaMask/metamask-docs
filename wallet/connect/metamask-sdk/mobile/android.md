@@ -249,7 +249,7 @@ The following examples use coroutines.
 
 The following example gets the user's account balance by calling
 [`eth_getBalance`](/wallet/reference/eth_getBalance).
-This is a [read-only request](../javascript/make-read-only-requests.md), which uses the Infura API
+This is a [read-only request](../../../how-to/make-read-only-requests.md), which uses the Infura API
 if an `infuraAPIKey` is provided in the `SDKOptions`.
 We recommend using the Infura API to provide a seamless user experience.
 
@@ -289,7 +289,7 @@ when (val result = ethereum.ethSignTypedDataV4(message, address)) {
 #### Example: Batch requests
 
 The following example requests the user to sign multiple messages at once by
-[batching multiple requests](../javascript/batch-json-rpc-requests.md) that call
+[batching multiple requests](../../../how-to/batch-json-rpc-requests.md) that call
 [`personal_sign`](/wallet/reference/personal_sign).
 
 ```kotlin

@@ -97,7 +97,7 @@ You first must initialize by doing one of the following:
 - Check **Initialize On Start** on the component within the editor.
 
 This initializes the wallet instance, making it accessible from `MetaMaskUnity.Instance.Wallet`.
-You can now make calls to the user's wallet using [provider API methods](../../../../reference/provider-api.md).
+You can now make calls to the user's wallet using [provider API methods](../../../reference/provider-api.md).
 
 ### 4. Connect to MetaMask
 
@@ -139,7 +139,7 @@ The transport field is also required if you want to use it isolated from the can
 by the transport, then it generates the QR code for you.
 
 :::info Connect and sign
-You can also [use the `connectAndSign` method](connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../how-to/use-unity-sdk/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction.
 :::
 
@@ -178,7 +178,7 @@ await wallet.Request(request);
 ```
 
 :::note
-See the [Unity SDK API reference](../../../../reference/sdk-unity-api.md) for an overview of the
+See the [Unity SDK API reference](../../../reference/sdk-unity-api.md) for an overview of the
 API methods from the most important classes.
 :::
 
@@ -263,7 +263,7 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
-- [Connect and sign in Unity.](connect-and-sign.md)
-- [Set up Infura in Unity.](infura.md)
-- [Interact with smart contracts in Unity.](smart-contracts/index.md)
-- [Enable human-readable addresses in Unity using Decentraweb.](dweb.md)
+- [Connect and sign in Unity.](../../../how-to/use-unity-sdk/connect-and-sign.md)
+- [Set up Infura in Unity.](../../../how-to/use-unity-sdk/infura.md)
+- [Interact with smart contracts in Unity.](../../../how-to/use-unity-sdk/smart-contracts/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../../how-to/use-unity-sdk/dweb.md)
