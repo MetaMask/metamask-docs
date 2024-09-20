@@ -6,6 +6,9 @@
     "paths": {
       "launchdarkly": [
         "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
+      ],
+      "sentry-plugin": [
+        "./node_modules/@sentry/browser/build/npm/esm/index.js"
       ]
     }
   },

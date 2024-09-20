@@ -1,2 +1,5 @@
-- `block parameter`: _[Required]_ The hexadecimal block number, or the string `latest`, `earliest`, or `pending`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
-- `options`: A list of tracing options. Tracing options are [`trace`](../../ethereum/json-rpc-methods/trace-methods/index.md#trace) and [`stateDiff`](../../ethereum/json-rpc-methods/trace-methods/index.md#statediff). Specify both options or none.
+- `trace call parameters`: _[Required]_ Array of trace call parameters.
+  Each trace call parameter itself is an array containing the following:
+    - `transaction call object`: _[Required]_ Transaction call object containing the same data as in the [`trace_call`](../../ethereum/json-rpc-methods/trace-methods/trace_call.mdx#parameters) parameter.
+    - `options`:_[Optional]_ An array of tracing options. Tracing options are [`trace`](../../ethereum/json-rpc-methods/trace-methods/index.md#trace) and [`stateDiff`](../../ethereum/json-rpc-methods/trace-methods/index.md#statediff). Specify both options or none.
+- `block parameter`: _[Required]_ The hexadecimal block number, or the string `latest`, `earliest`, or `pending`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block). The block parameter is applied uniformly to all trace calls in the `trace call parameters` array.
