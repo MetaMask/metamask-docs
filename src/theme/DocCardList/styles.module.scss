@@ -82,9 +82,10 @@
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       line-height: 166.667%;
       white-space: wrap;
+      margin: 0;
 
       @include bp('desktop') {
         line-height: 150%;

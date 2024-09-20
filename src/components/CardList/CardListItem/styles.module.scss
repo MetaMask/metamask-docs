@@ -82,6 +82,7 @@
 }
 
 .description {
+  margin: 0;
   @include bp(tablet) {
     max-width: 33.6rem;
   }
