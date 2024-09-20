@@ -37,10 +37,10 @@ The [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesn
 :::warning Important
 
 We recommend using the `get-starknet` library for most use cases due to its ease of configuration
-and multi-wallet support. 
+and multi-wallet support.
+Learn more [about how `get-starknet` interacts with MetaMask](about-get-starknet.md).
 
 :::
-
 
 ## Supported methods
 
