@@ -15,12 +15,12 @@ Get started by [connecting to MetaMask](connect/index.md).
 **MetaMask SDK** enables a reliable connection from your dapp to the MetaMask browser extension and
 MetaMask Mobile, and seamlessly integrates from the platform of your choice, ensuring a
 secure and consistent user experience.
-It offers the following features:
+Key benefits include:
 
-- **Cross-platform compatibility.** Connect to MetaMask across desktop, iOS, Android, React Native, and other platforms.
-- **Persistent and seamless connections.** Reduce reconnections and offer a smoother user experience, especially on mobile.
-- **Mobile-first.** Use instant deep links and advanced features for faster wallet interactions.
-- **Enhanced functionality.** Batch transactions, RPC access, and [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) integration for wallet discovery and security.
+- **Cross-platform compatibility** – Connect to MetaMask from desktop, iOS, Android, React Native, and other platforms.
+- **Persistent and seamless connections** – Reduce reconnections and offer a smoother user experience, especially on mobile.
+- **Mobile-first** – Use instant deep links and advanced features for faster wallet interactions.
+- **Enhanced functionality** – Batch transactions, RPC access, and [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) integration for wallet discovery and security.
 
 For dapps that need direct control, the **Wallet API** provides access to Ethereum accounts, signing
 data, and other core wallet functions.
