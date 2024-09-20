@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint
-        uses: ConsenSys/docs-gha/lint@main
+        uses: ConsenSys/docs-gha/lint@cc8b9d9065f5f20b105954f8e806f55c1e235ecd
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
