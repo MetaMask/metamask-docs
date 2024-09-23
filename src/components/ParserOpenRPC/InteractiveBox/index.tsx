@@ -129,7 +129,10 @@ export default function InteractiveBox({
             }
           }
           if (isObject(value)) {
-            return [checkName(name), value?.value];
+            return [
+              checkName(name),
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isObject(val) ? val.value : val]))
+            ];
           }
           return [checkName(name), value];
         })
