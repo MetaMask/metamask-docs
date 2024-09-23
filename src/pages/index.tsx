@@ -39,7 +39,7 @@ function DevBanner() {
           className={clsx(
             "hero__title",
             styles.devBannerTitle,
-            styles.devBannerForceColor
+            styles.devBannerForceColor,
           )}
         >
           {"Contribute to MetaMask"}
@@ -48,7 +48,7 @@ function DevBanner() {
           className={clsx(
             "hero__subtitle",
             styles.devBannerSubtitle,
-            styles.devBannerForceColor
+            styles.devBannerForceColor,
           )}
         >
           Join the MetaMask developer community and learn how to contribute to
@@ -57,7 +57,7 @@ function DevBanner() {
         <Link
           className={clsx(
             styles.devBannerButton,
-            "button button--outline button--secondary button--md"
+            "button button--outline button--secondary button--md",
           )}
           href="https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md"
         >

@@ -2,8 +2,13 @@ export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
-export const API_URL =
-  process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
+export const DASHBOARD_URL = (DASHBOARD_PREVIEW_URL, VERCEL_ENV) => DASHBOARD_PREVIEW_URL
+  ? DASHBOARD_PREVIEW_URL
+  : VERCEL_ENV === "production"
+    ? PROD_APP_URL
+    : VERCEL_ENV === "preview"
+      ? STAGE_APP_URL
+      : DEV_APP_URL;
 
 const TEST_TRANSACTIONS = {
   mainnet: {
@@ -449,3 +454,18 @@ export const GET_OPTIONS = {
   cache: "no-cache",
   headers: NO_CACHE,
 };
+
+export const REF_SERVICES_PATH = "/services/reference/";
+export const REF_WALLET_PATH = "/wallet/reference/";
+
+export const REF_ALLOW_LOGIN_PATH = [REF_SERVICES_PATH, REF_WALLET_PATH];
+
+export const REQUEST_PARAMS = (method = "POST") => ({
+  method,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+  },
+});

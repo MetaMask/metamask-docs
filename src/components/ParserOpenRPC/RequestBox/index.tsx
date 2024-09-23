@@ -4,7 +4,7 @@ import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;

@@ -1,0 +1,40 @@
+.selectWrapper {
+  padding: 0 0 24px 0;
+}
+
+.selectTitle {
+font-size: 16px;
+font-weight: 500;
+line-height: 24px;
+text-align: left;
+padding: 0 0 8px 0;
+}
+
+.selectProjects {
+  border: 1px solid #848C96 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px 12px 16px !important;
+  font-size: 16px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectDropdown {
+  border: 1px solid #848C96 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px 12px 16px !important;
+  font-size: 16px !important;
+}
+
+.selectDropdown {
+  padding: 4px 0 !important;
+}
+
+.connectButton {
+  order: 100;
+  margin-left: 12px;
+  text-wrap: nowrap;
+}

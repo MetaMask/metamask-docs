@@ -4,14 +4,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@site/*": ["./*"],
       "launchdarkly": [
         "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
       ],
-      "sentry-plugin": [
-        "./node_modules/@sentry/browser/build/npm/esm/index.js"
-      ]
-    }
+      "sentry-plugin": ["./node_modules/@sentry/browser/build/npm/esm/index.js"]
+    },
+    "types": ["docusaurus-plugin-sass"]
   },
-  "include": ["./**/*"],
+  "include": ["src/globals.d.ts", "./**/*"],
   "exclude": ["node_modules"]
 }
