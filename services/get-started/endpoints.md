@@ -121,7 +121,7 @@ Sepolia instead.
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://mantle-sepolia.infura.io/ws/v3/<API-KEY>` |
 
-### opBNB
+## opBNB
 
 | Network           | Transport type          | URL                                             |
 |-------------------|-------------------------|-------------------------------------------------|
