@@ -128,6 +128,9 @@ export default function InteractiveBox({
               return [checkName(name), getObjectWithAddress(value)];
             }
           }
+          if (isObject(value)) {
+            return [checkName(name), value?.value];
+          }
           return [checkName(name), value];
         })
       );
