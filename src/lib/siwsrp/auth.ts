@@ -18,19 +18,19 @@ export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
 export const getHydraEnv = (): HydraEnv => {
   const platform = Platform.INFURA;
 
-  if (VERCEL_ENV === "production") {
+  // if (VERCEL_ENV === "production") {
     return {
       ...getEnvUrls(Env.PRD),
       env: Env.PRD,
       platform,
     };
-  } else {
-    return {
-      ...getEnvUrls(Env.DEV),
-      env: Env.DEV,
-      platform,
-    };
-  }
+  // } else {
+  //   return {
+  //     ...getEnvUrls(Env.DEV),
+  //     env: Env.DEV,
+  //     platform,
+  //   };
+  // }
 };
 
 const storage: SDK.AuthStorageOptions = {
