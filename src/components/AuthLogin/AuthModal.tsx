@@ -158,7 +158,7 @@ const AuthModal = ({
       
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
-      const { accessToken, userProfile } = await authenticateAndAuthorize();
+      const { accessToken, userProfile } = await authenticateAndAuthorize(VERCEL_ENV as string);
 
       const loginResponse = await (
         await fetch(
