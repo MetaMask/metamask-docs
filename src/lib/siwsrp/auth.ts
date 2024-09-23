@@ -1,10 +1,6 @@
 import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
 
-export const customFields = {
-  VERCEL_ENV: process.env.VERCEL_ENV,
-};
-
 type HydraEnv = {
   authApiUrl: string;
   oidcApiUrl: string;
@@ -14,8 +10,7 @@ type HydraEnv = {
 };
 
 const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
-const { VERCEL_ENV } = customFields;
-console.log(VERCEL_ENV)
+let VERCEL_ENV = 'development'
 export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
 export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
@@ -59,8 +54,9 @@ export const auth = new JwtBearerAuth(
   }
 );
 
-export const authenticateAndAuthorize = async () => {
+export const authenticateAndAuthorize = async (env: string) => {
   let accessToken: string, userProfile: SDK.UserProfile;
+  VERCEL_ENV = env;
   try {
     await auth.connectSnap();
     accessToken = await auth.getAccessToken();
