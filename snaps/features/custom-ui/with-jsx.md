@@ -419,7 +419,9 @@ const interfaceId = await snap.request({
   params: {
     ui: (
       <Form name="form-to-fill">
-        <Input name="user-name" placeholder="Your name" />
+        <Field label="First Name">
+          <Input name="firstName" placeholder="Enter your first name" />
+        </Field>
         <Button type="submit">Submit</Button>
       </Form>
     ),
@@ -541,7 +543,9 @@ const interfaceId = await snap.request({
   params: {
     ui: (
       <Form name="form-to-fill">
-        <Input name="user-name" placeholder="Your name" />
+        <Field label="First Name">
+          <Input name="firstName" placeholder="Enter your first name" />
+        </Field>
         <Button type="submit">Submit</Button>
       </Form>
     ),
