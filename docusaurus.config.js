@@ -2,7 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 require("dotenv").config();
-const { fetchAndGenerateSidebarItems } = require("./src/helpers");
+const { fetchAndGenerateDynamicSidebarItems } = require("./src/helpers");
 import { NETWORK_NAMES } from "./src/lib/constants.ts";
 const upperFirst = require("lodash.upperfirst");
 const { themes } = require("prism-react-renderer");
@@ -131,7 +131,7 @@ const config = {
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           config.customFields.sidebarData = args;
           let sidebarItems = await defaultSidebarItemsGenerator(args);
-          const dynamicSidebarItems = await fetchAndGenerateSidebarItems(NETWORK_NAMES.linea);
+          const dynamicSidebarItems = await fetchAndGenerateDynamicSidebarItems(NETWORK_NAMES.linea);
           config.customFields.dynamicData = dynamicSidebarItems;
           const updatedItems = sidebarItems.map(item => {
             if (item?.label === upperFirst(NETWORK_NAMES.linea) && item?.items) {

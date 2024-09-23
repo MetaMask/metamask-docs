@@ -1,6 +1,6 @@
 import { RPC_NETWORK_URL } from "../lib/constants";
 
-export const fetchAndGenerateSidebarItems = async (networkName) => {
+export const fetchAndGenerateDynamicSidebarItems = async (networkName) => {
   try {
     const response = await fetch(`${RPC_NETWORK_URL}/${networkName}`);
     const data = await response.json();
@@ -13,6 +13,10 @@ export const fetchAndGenerateSidebarItems = async (networkName) => {
       {
         type: "category",
         label: "JSON-RPC Methods NEW",
+        link: {
+          type: 'generated-index',
+          slug: "/services/reference/linea/json-rpc-methods-new/"
+        },
         collapsed: true,
         collapsible: true,
         items: dynamicItems,

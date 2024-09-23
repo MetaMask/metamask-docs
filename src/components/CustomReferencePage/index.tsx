@@ -39,16 +39,14 @@ function generateSidebarItems(docs) {
             label: upperFirst(doc.frontMatter?.sidebar_label || doc.frontMatter?.title || part),
             collapsed: false,
             collapsible: true,
-            link: {
-              type: 'generated-index',
-              slug: pathParts.slice(0, index + 1).join('/')
-            },
+            href: `/services/reference`,
             items: []
           };
         } else {
           currentCategory[part] = {
             type: 'category',
             label: upperFirst(part),
+            href: `/services/${doc.sourceDirName}`,
             collapsed: part !== "Get started",
             collapsible: true,
             items: []
