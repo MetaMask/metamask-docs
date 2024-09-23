@@ -1,12 +1,12 @@
 import React, { useEffect, useState, createContext, ReactChild } from "react";
 import { MetaMaskSDK } from "@metamask/sdk";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 
 export const MetamaskProviderContext = createContext(null);
 
 export default function Root({ children }: { children: ReactChild}) {
   const [metaMaskProvider, setMetaMaskProvider] = useState(undefined);
   const [metaMaskAccount, setMetaMaskAccount] = useState(undefined);
+  const [isClient, setIsClient] = useState(false);
   const sdk = new MetaMaskSDK({
     dappMetadata: {
       name: "Reference pages",
@@ -39,19 +39,21 @@ export default function Root({ children }: { children: ReactChild}) {
     }
   }
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
-    <BrowserOnly>
-      {
-        () => (
-          <MetamaskProviderContext.Provider value={{
-            metaMaskProvider,
-            metaMaskAccount,
-            metaMaskConnectHandler
-          }}>
-            {children}
-          </MetamaskProviderContext.Provider>
-        )
-      }
-    </BrowserOnly>
+    <MetamaskProviderContext.Provider value={{
+      metaMaskProvider,
+      metaMaskAccount,
+      metaMaskConnectHandler
+    }}>
+      {children}
+    </MetamaskProviderContext.Provider>
   );
 }
