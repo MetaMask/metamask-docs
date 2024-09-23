@@ -1,3 +1,4 @@
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
 
@@ -10,6 +11,8 @@ type HydraEnv = {
 };
 
 const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
+const { siteConfig } = useDocusaurusContext();
+const { VERCEL_ENV } = siteConfig?.customFields || {};
 export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
 export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
@@ -17,7 +20,7 @@ export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
 export const getHydraEnv = (): HydraEnv => {
   const platform = Platform.INFURA;
 
-  if (process.env.VERCEL_ENV === "production") {
+  if (VERCEL_ENV === "production") {
     return {
       ...getEnvUrls(Env.PRD),
       env: Env.PRD,
