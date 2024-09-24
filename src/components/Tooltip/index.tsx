@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./Tooltip.module.css";
+import styles from "./tooltip.module.css";
 import { Tooltip as ReactTippy } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import clsx from "clsx";
