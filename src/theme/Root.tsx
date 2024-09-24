@@ -46,6 +46,7 @@ interface IMetamaskProviderContext {
   setProjects: (arg: { [key: string]: Project }) => void;
   metaMaskConnectHandler: () => Promise<void>;
   metaMaskDisconnect: () => Promise<void>;
+  metaMaskWalletIdConnectHandler: () => Promise<void>;
   userId: string | undefined;
   metaMaskAccount: string;
   setMetaMaskAccount: (arg: string[] | string) => void;
@@ -64,6 +65,7 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   setProjects: () => {},
   metaMaskConnectHandler: () => new Promise(() => {}),
   metaMaskDisconnect: () => new Promise(() => {}),
+  metaMaskWalletIdConnectHandler: () => new Promise(() => {}),
   userId: undefined,
   metaMaskAccount: undefined,
   setMetaMaskAccount: () => {},
@@ -119,6 +121,16 @@ export const LoginProvider = ({ children }) => {
         setMetaMaskAccount(accounts[0]);
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
+      }
+    } catch (e) {}
+  };
+
+  const metaMaskConnectHandler = async () => {
+    try {
+      const accounts = await sdk.connect();
+      setMetaMaskAccount(accounts);
+      if (accounts && accounts.length > 0) {
+        setMetaMaskAccount(accounts[0]);
       }
     } catch (e) {}
   };
@@ -180,17 +192,7 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({
-        name: metaMaskAccount,
-        id: metaMaskAccount,
-        username: metaMaskAccount,
-      });
-    }
-  }, [metaMaskAccount]);
-
-  const metaMaskConnectHandler = useCallback(async () => {
+  const metaMaskWalletIdConnectHandler = useCallback(async () => {
     try {
       setOpenAuthModal(true);
     } catch (err) {
@@ -224,6 +226,7 @@ export const LoginProvider = ({ children }) => {
               setProjects,
               metaMaskConnectHandler,
               metaMaskDisconnect,
+              metaMaskWalletIdConnectHandler,
               userId,
               metaMaskProvider,
               setMetaMaskProvider,

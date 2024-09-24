@@ -244,7 +244,7 @@ export default function ParserOpenRPC({
         <div className={global.colRight}>
           <div className={global.stickyCol}>
             {pathname.startsWith(REF_PATH) && <ProjectsBox />}
-            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox />}
+            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox isMetamaskNetwork={isMetamaskNetwork} />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}
