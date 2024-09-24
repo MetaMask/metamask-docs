@@ -44,22 +44,10 @@ try {
 
 Guide users through the process of approving the Snap in MetaMask. If they deny the connection, provide a retry option.
 
-### Stale wallet data
-
-If the wallet address or account information doesn't update after reconnection, always listen for account or network changes and handle them appropriately. Use event listeners:
-
-```javascript
-ethereum.on('accountsChanged', (accounts) => {
-  // Handle account change
-});
-ethereum.on('chainChanged', (chainId) => {
-  // Handle network change
-});
-```
-
 ### Snap ID error
 
 Ensure you're using the correct Snap ID for the StarkNet Snap. Incorrect IDs will result in failed connections.
+The Starknet Snap ID is the name of the npm package of the snap: `@consensys/starknet-snap`.
 
 
 ## Best practices
