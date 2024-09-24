@@ -128,6 +128,12 @@ export default function InteractiveBox({
               return [checkName(name), getObjectWithAddress(value)];
             }
           }
+          if (isObject(value)) {
+            return [
+              checkName(name),
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isObject(val) ? val.value : val]))
+            ];
+          }
           return [checkName(name), value];
         })
       );
