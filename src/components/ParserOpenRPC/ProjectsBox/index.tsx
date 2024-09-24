@@ -13,7 +13,7 @@ const ProjectsBox = () => {
     projects,
     metaMaskAccount,
     walletLinked,
-    metaMaskConnectHandler,
+    metaMaskWalletIdConnectHandler,
     walletLinkUrl,
   } = useContext(MetamaskProviderContext);
   const options = Object.keys(projects).map((v) => ({
@@ -98,7 +98,7 @@ const ProjectsBox = () => {
                 <Button
                   thin
                   className={styles.connectButton}
-                  onClick={metaMaskConnectHandler}
+                  onClick={metaMaskWalletIdConnectHandler}
                 >
                   Connect Wallet
                 </Button>
