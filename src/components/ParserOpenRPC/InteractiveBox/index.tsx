@@ -23,7 +23,7 @@ import { WrapIfAdditionalTemplate } from "@site/src/components/ParserOpenRPC/Int
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { MetamaskProviderContext } from "@site/src/theme/Root";

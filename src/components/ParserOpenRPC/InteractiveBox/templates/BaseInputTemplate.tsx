@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BaseInputTemplateProps } from "@rjsf/utils";
 import clsx from "clsx";
 import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 import debounce from "lodash.debounce";
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
