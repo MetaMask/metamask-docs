@@ -1,9 +1,9 @@
-import React, { createContext, useMemo, useState, useContext } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
-import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
 import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
 import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
@@ -11,8 +11,13 @@ import global from "./global.module.css";
 import modalDrawerStyles from "./ModalDrawer/styles.module.css";
 import clsx from "clsx";
 import { useColorMode } from "@docusaurus/theme-common";
-import { trackClickForSegment, trackInputChangeForSegment } from "@site/src/lib/segmentAnalytics";
+import {
+  trackClickForSegment,
+  trackInputChangeForSegment,
+} from "@site/src/lib/segmentAnalytics";
+import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
+import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -21,7 +26,7 @@ interface ParserProps {
 }
 
 interface ParserOpenRPCContextProps {
-  drawerLabel?: string
+  drawerLabel?: string;
   setIsDrawerContentFixed?: (isFixed: boolean) => void;
   setDrawerLabel?: (label: string) => void;
   isComplexTypeView: boolean;
@@ -31,14 +36,24 @@ interface ParserOpenRPCContextProps {
 export const ParserOpenRPCContext =
   createContext<ParserOpenRPCContextProps | null>(null);
 
-export default function ParserOpenRPC({ network, method, extraContent }: ParserProps) {
+const REF_PATH = "/wallet/reference/new-reference";
+
+export default function ParserOpenRPC({
+  network,
+  method,
+  extraContent,
+}: ParserProps) {
   if (!method || !network) return null;
+  const location = useLocation();
+  const { pathname } = location;
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { metaMaskAccount, metaMaskProvider } =
+    useContext(MetamaskProviderContext);
   const { colorMode } = useColorMode();
   const openModal = () => {
     setModalOpen(true);
@@ -105,8 +120,6 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
 
   const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
 
-  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
-
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
@@ -119,25 +132,27 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       Object.keys(data).length === 0
     ) {
       setParamsData([]);
-      return
+      return;
     }
 
-    if (typeof data === "object" && currentMethodData.paramStructure === "by-name") {
-      setParamsData({...data});
-      return
+    if (
+      typeof data === "object" &&
+      currentMethodData.paramStructure === "by-name"
+    ) {
+      setParamsData({ ...data });
+      return;
     }
 
     setParamsData(Object.values(data));
-    
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return
+    if (!metaMaskProvider) return;
     try {
       const response = await metaMaskProvider?.request({
         method: method,
-        params: paramsData
-      })
+        params: paramsData,
+      });
       setReqResult(response);
       trackClickForSegment({
         eventName: "Request Sent",
@@ -228,7 +243,8 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} />}
+            {pathname.startsWith(REF_PATH) && <ProjectsBox />}
+            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox isMetamaskNetwork={isMetamaskNetwork} />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}

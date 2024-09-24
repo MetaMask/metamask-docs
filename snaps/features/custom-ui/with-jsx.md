@@ -452,7 +452,9 @@ const interfaceId = await snap.request({
   params: {
     ui: (
       <Form name="form-to-fill">
-        <Input name="user-name" placeholder="Your name" />
+        <Field label="First Name">
+          <Input name="firstName" placeholder="Enter your first name" />
+        </Field>
         <Button type="submit">Submit</Button>
       </Form>
     ),
@@ -607,7 +609,9 @@ const interfaceId = await snap.request({
   params: {
     ui: (
       <Form name="form-to-fill">
-        <Input name="user-name" placeholder="Your name" />
+        <Field label="First Name">
+          <Input name="firstName" placeholder="Enter your first name" />
+        </Field>
         <Button type="submit">Submit</Button>
       </Form>
     ),
@@ -857,6 +861,7 @@ module.exports.onHomePage = async () => {
 <img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+<<<<<<< HEAD
 ### `Tooltip`
 
 Outputs a tooltip when the wrapped child is hovered over.
@@ -896,7 +901,7 @@ await snap.request({
 <img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
-## Emojis
+### Emojis
 
 Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept emojis.
 
@@ -922,3 +927,7 @@ await snap.request({
 <p align="center">
 <img src={require("../../assets/custom-ui-emojis.png").default} alt="Emojis UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
+
+## User-defined components
+
+In addition to the components provided by the SDK, you can [define your own components](user-defined-components.md).

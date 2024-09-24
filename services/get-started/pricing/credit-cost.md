@@ -126,7 +126,7 @@ a specific network, then use the default Ethereum method's credit cost.
 
 ### Subscription events
 
-You can subscribe and unsubscribe to events using [`eth_subscribe`](../../networks/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) and [`eth_unsubscribe`](../../networks/ethereum/json-rpc-methods/subscription-methods/eth_unsubscribe.mdx).
+You can subscribe and unsubscribe to events using [`eth_subscribe`](../../reference/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) and [`eth_unsubscribe`](../../reference/ethereum/json-rpc-methods/subscription-methods/eth_unsubscribe.mdx).
 
 The credit costs for the `logs` and `newHeads` events are charged per block, whereas `newPendingTransaction` events
 are charged at approximately one second intervals.

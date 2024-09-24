@@ -52,7 +52,7 @@ export default function DetailsBox({
         as="h2"
         className={clsx(
           styles.secondaryHeading,
-          "padding-top--lg padding-bottom--md"
+          "padding-top--lg padding-bottom--md",
         )}
       >
         Parameters
@@ -67,7 +67,7 @@ export default function DetailsBox({
         className={clsx(
           styles.secondaryHeading,
           styles.borderBottomLine,
-          "padding-top--lg padding-vert--md"
+          "padding-top--lg padding-vert--md",
         )}
       >
         Returns

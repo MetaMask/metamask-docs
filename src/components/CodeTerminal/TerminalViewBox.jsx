@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from "../Icon/Icon";
-import { API_URL } from "../../lib/constants";
+import { DASHBOARD_URL } from "../../lib/constants";
 import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
 
@@ -14,6 +15,9 @@ const TerminalViewBox = ({
   response,
   isExpansionNetwork = false,
 }) => {
+
+  const { siteConfig } = useDocusaurusContext();
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
 
   const exampleRequest = useMemo(() => {
     const prepareParams = params.length === 0 ? "" : params.map(param => {
@@ -48,13 +52,13 @@ const TerminalViewBox = ({
               </div>
             ) : (
               <p className="description-row">
-                <Link target="_blank" to={`${API_URL}/login`} rel="noreferrer">
+                <Link target="_blank" to={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login`} rel="noreferrer">
                   Sign in
                 </Link>{" "}
                 or{" "}
                 <Link
                   target="_blank"
-                  to={`${API_URL}/register`}
+                  to={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/register`}
                   rel="noreferrer">
                   create an account
                 </Link>{" "}
