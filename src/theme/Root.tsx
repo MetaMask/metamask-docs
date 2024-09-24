@@ -125,7 +125,7 @@ export const LoginProvider = ({ children }) => {
     } catch (e) {}
   };
 
-  const metaMaskWalletIdConnectHandler = async () => {
+  const metaMaskConnectHandler = async () => {
     try {
       const accounts = await sdk.connect();
       setMetaMaskAccount(accounts);
@@ -192,7 +192,7 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
-  const metaMaskConnectHandler = useCallback(async () => {
+  const metaMaskWalletIdConnectHandler = useCallback(async () => {
     try {
       setOpenAuthModal(true);
     } catch (err) {

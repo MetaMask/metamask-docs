@@ -17,7 +17,7 @@ export const AuthBox = ({ isMetamaskNetwork = false }: AuthBoxProps) => {
       clickType: "Connect wallet",
       userExperience: "B",
     });
-    isMetamaskNetwork ? metaMaskWalletIdConnectHandler() : metaMaskConnectHandler();
+    isMetamaskNetwork ? metaMaskConnectHandler() : metaMaskWalletIdConnectHandler();
   };
   return (
     <div className={styles.msgWrapper}>

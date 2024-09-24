@@ -24,7 +24,7 @@ const NavbarWalletComponent: FC = ({
 
   const COPY_TEXT = "Copy to clipboard";
   const COPIED_TEXT = "Copied!";
-  const { metaMaskAccount, sdk, metaMaskConnectHandler, metaMaskDisconnect } =
+  const { metaMaskAccount, sdk, metaMaskWalletIdConnectHandler, metaMaskDisconnect } =
     useContext(MetamaskProviderContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
@@ -67,7 +67,7 @@ const NavbarWalletComponent: FC = ({
   return !metaMaskAccount ? (
     <Button
       thin
-      onClick={metaMaskConnectHandler}
+      onClick={metaMaskWalletIdConnectHandler}
       className={styles.navbarButton}
     >
       {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
