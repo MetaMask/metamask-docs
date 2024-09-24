@@ -432,6 +432,60 @@ await snap.request({
 <img src={require("../../assets/custom-ui-field.png").default} alt="Field example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `FileInput`
+
+Outputs a file input component for use in [interactive UI](interactive-ui.md).
+
+#### Props
+
+- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
+  when a user interacts with the form.
+- `accept`: `string[]` - (Optional) The file types that the file input field accepts. If not 
+specified, the file input field accepts all file types. For examples of
+valid values, see the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept).
+- `compact`: `boolean` - (Optional) Whether the file input field is compact.
+
+#### Example
+
+```js
+import { FileInput } from "@metamask/snaps-sdk/jsx";
+
+export const onHomePage = async () => {
+  const interfaceId = await snap.request({
+    method: "snap_createInterface",
+    params: {
+      ui: (
+        <Box>
+          <Heading>File Upload</Heading>
+        <Form name="file-upload-form">
+          <Field>
+            <FileInput name="file-input" />
+          </Field>
+          <Button name="submit-file-upload-form" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Box>
+      ),
+    },
+  });
+
+  return {
+    id: interfaceId,
+  }
+};
+
+export const onUserInput = async ({ id, event }) => {
+ if (event.type === UserInputEventType.FileUploadEvent && event.file !== null) {
+    console.log(event.file);
+  }
+};
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-file-input.png").default} alt="File input UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Form`
 
 Outputs a form for use in [interactive UI](interactive-ui.md).
@@ -861,7 +915,6 @@ module.exports.onHomePage = async () => {
 <img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
-<<<<<<< HEAD
 ### `Tooltip`
 
 Outputs a tooltip when the wrapped child is hovered over.
