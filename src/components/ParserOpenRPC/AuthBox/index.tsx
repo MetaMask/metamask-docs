@@ -5,15 +5,19 @@ import clsx from "clsx";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
-export const AuthBox = () => {
-  const { metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+interface AuthBoxProps {
+  isMetamaskNetwork?: boolean;
+}
+
+export const AuthBox = ({ isMetamaskNetwork = false }: AuthBoxProps) => {
+  const { metaMaskConnectHandler, metaMaskWalletIdConnectHandler } = useContext(MetamaskProviderContext);
   const connectHandler = () => {
     trackClickForSegment({
       eventName: "Connect wallet",
       clickType: "Connect wallet",
       userExperience: "B",
     });
-    metaMaskConnectHandler();
+    isMetamaskNetwork ? metaMaskWalletIdConnectHandler() : metaMaskConnectHandler();
   };
   return (
     <div className={styles.msgWrapper}>
