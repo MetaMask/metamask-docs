@@ -3,6 +3,7 @@
 
 require("dotenv").config();
 const { themes } = require("prism-react-renderer");
+const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
@@ -32,6 +33,8 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
     SENTRY_KEY: process.env.SENTRY_KEY,
   },
 
@@ -89,6 +92,7 @@ const config = {
     ],
   ],
   plugins: [
+    "docusaurus-plugin-sass",
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -205,6 +209,11 @@ const config = {
             href: "https://support.metamask.io/",
             label: "User support",
             position: "right",
+          },
+          {
+            type: "custom-navbarWallet",
+            position: "right",
+            includeUrl: REF_ALLOW_LOGIN_PATH,
           },
           /* Language drop down
           {

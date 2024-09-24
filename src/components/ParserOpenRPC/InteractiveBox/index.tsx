@@ -27,7 +27,7 @@ import { Tooltip } from "@site/src/components/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
-import  * as isObject  from "lodash.isobject"
+import * as isObject from "lodash.isobject";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
@@ -44,12 +44,15 @@ interface InteractiveBoxProps {
 type ObjectType = { [key: string]: any };
 type KeyOrderType = { name: string };
 
-function sortObjectKeysByArray(obj: ObjectType, orderArray: KeyOrderType[]): ObjectType {
+function sortObjectKeysByArray(
+  obj: ObjectType,
+  orderArray: KeyOrderType[]
+): ObjectType {
   const result: ObjectType = {};
   for (const { name } of orderArray) {
-      if (name in obj) {
-          result[name] = obj[name];
-      }
+    if (name in obj) {
+      result[name] = obj[name];
+    }
   }
   return result;
 }
@@ -57,13 +60,13 @@ function sortObjectKeysByArray(obj: ObjectType, orderArray: KeyOrderType[]): Obj
 function removeEmptyArrays<T extends Record<string, any>>(obj: T): T {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
-      if (newObj.hasOwnProperty(key)) {
-          if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
-              delete newObj[key];
-          } else if (newObj[key] !== null && typeof newObj[key] === "object") {
-              newObj[key] = removeEmptyArrays(newObj[key]);
-          }
+    if (newObj.hasOwnProperty(key)) {
+      if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
+        delete newObj[key];
+      } else if (newObj[key] !== null && typeof newObj[key] === "object") {
+        newObj[key] = removeEmptyArrays(newObj[key]);
       }
+    }
   }
   return newObj;
 }
@@ -75,59 +78,68 @@ export default function InteractiveBox({
   onParamChange,
   drawerLabel,
   closeComplexTypeView,
-  isOpen = false
+  isOpen = false,
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [currentFormData, setCurrentFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
   const [currentSchemaId, setCurrentSchemaId] = useState("");
-  const [objectPropertyBeforeEdit, setObjectPropertyBeforeEdit] = useState(null);
+  const [objectPropertyBeforeEdit, setObjectPropertyBeforeEdit] =
+    useState(null);
   const [objectValueBeforeEdit, setObjectValueBeforeEdit] = useState(null);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
   const { metaMaskAccount } = useContext(MetamaskProviderContext);
-  const addWalletId = (propName) => ({[propName]: metaMaskAccount})
+  const addWalletId = (propName) => ({ [propName]: metaMaskAccount });
   const getObjectWithAddress = (value) => {
-    const addressField = "address"
-    const fromField = "from"
+    const addressField = "address";
+    const fromField = "from";
     if (Object.keys(value).includes(addressField)) {
       return {
         ...value,
-        ...addWalletId(addressField)
-      }
+        ...addWalletId(addressField),
+      };
     }
     if (Object.keys(value).includes(fromField)) {
       return {
         ...value,
-        ...addWalletId(fromField)
-      }
+        ...addWalletId(fromField),
+      };
     }
-    return value
-  }
+    return value;
+  };
 
   const checkName = (name: string) => {
     if (name === "requestPermissionObject") return "requestPermissionsObject";
     return name;
-  }
+  };
 
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
-        if (metaMaskAccount) {
-          if (name === "Address" || name === "From") {
-            return [checkName(name), metaMaskAccount]
+      const defaultValues = Object.fromEntries(
+        examples[0].params.map(({ name, value }) => {
+          if (metaMaskAccount) {
+            if (name === "Address" || name === "From") {
+              return [checkName(name), metaMaskAccount];
+            }
+            if (isObject(value)) {
+              return [checkName(name), getObjectWithAddress(value)];
+            }
           }
           if (isObject(value)) {
-            return [checkName(name), getObjectWithAddress(value)]
+            return [
+              checkName(name),
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isObject(val) && val?.description ? val.value : val]))
+            ];
           }
-        }
-        return [checkName(name), value]
-      }));
-      setDefaultFormData({...defaultValues});
-      setCurrentFormData({...defaultValues});
-      onParamChange({...defaultValues});
+          return [checkName(name), value];
+        })
+      );
+      setDefaultFormData({ ...defaultValues });
+      setCurrentFormData({ ...defaultValues });
+      onParamChange({ ...defaultValues });
     }
   }, [examples, metaMaskAccount]);
 
@@ -145,7 +157,7 @@ export default function InteractiveBox({
     "ui:globalOptions": {
       label: false,
     },
-    "ui:widget": "checkbox"
+    "ui:widget": "checkbox",
   };
   const templates = {
     BaseInputTemplate,
@@ -154,7 +166,7 @@ export default function InteractiveBox({
     ObjectFieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
-    ButtonTemplates: { AddButton, RemoveButton }
+    ButtonTemplates: { AddButton, RemoveButton },
   };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
@@ -168,8 +180,8 @@ export default function InteractiveBox({
   };
   const handleResetForm = (e) => {
     e.preventDefault();
-    setCurrentFormData({...defaultFormData});
-    onParamChange({...defaultFormData});
+    setCurrentFormData({ ...defaultFormData });
+    onParamChange({ ...defaultFormData });
     setIsFormReseted(true);
   };
   const handleClearForm = (e) => {
@@ -231,7 +243,10 @@ export default function InteractiveBox({
           if (Object.keys(obj).length === 0) {
             newObj[prop] = {};
           } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
-            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(obj[prop], key);
+            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(
+              obj[prop],
+              key
+            );
           } else {
             newObj[prop] = obj[prop];
           }
@@ -245,8 +260,11 @@ export default function InteractiveBox({
     if (drawerLabel) {
       const currentKey = Object.keys(currentFormData)[0];
       if (objectPropertyBeforeEdit && currentKey) {
-        const upData = cloneObjectAndSetNullIfExists(currentFormData[currentKey], objectPropertyBeforeEdit);
-        setCurrentFormData({[currentKey]: upData});
+        const upData = cloneObjectAndSetNullIfExists(
+          currentFormData[currentKey],
+          objectPropertyBeforeEdit
+        );
+        setCurrentFormData({ [currentKey]: upData });
         setObjectPropertyBeforeEdit(null);
         setObjectValueBeforeEdit(null);
       } else {
@@ -266,7 +284,7 @@ export default function InteractiveBox({
       <Form
         schema={parsedSchema}
         formData={currentFormData}
-        formContext={{ 
+        formContext={{
           currentSchemaId,
           isFormReseted,
           setCurrentSchemaId,
@@ -275,7 +293,7 @@ export default function InteractiveBox({
           setObjectValueBeforeEdit,
           currentFormData,
           setCurrentFormData,
-          onParamChange
+          onParamChange,
         }}
         validator={validator}
         liveValidate
