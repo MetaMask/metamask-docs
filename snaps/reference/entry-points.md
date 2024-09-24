@@ -654,6 +654,7 @@ To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, 
   - `name` - The name of the component that fired the event.
     Optional when the event type is `ButtonClickEvent`.
   - `value` - When the event type is `FormSubmitEvent`, the values in the form as an object.
+- `context` - The context object passed to the interface when calling [`snap_createInterface`](./snaps-api.md#snap_createinterface), or `null`.
 
 #### Example
 
