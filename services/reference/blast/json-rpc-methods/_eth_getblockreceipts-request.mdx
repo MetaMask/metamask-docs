@@ -1,8 +1,8 @@
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
-<Tabs>
-  <TabItem value="cURL">
+ <Tabs>
+   <TabItem value="cURL">
 
 ```bash
 curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -11,5 +11,12 @@ curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -d '{"jsonrpc": "2.0", "method": "eth_getBlockReceipts", "params": ["latest"], "id": 1}'
 ```
 
-  </TabItem>
-</Tabs>
+   </TabItem>
+   <TabItem value="WSS">
+
+```bash
+wscat -c wss://blast-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBlockReceipts", "params": ["latest"], "id": 1}'
+```
+
+   </TabItem>
+ </Tabs>

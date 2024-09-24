@@ -1,0 +1,27 @@
+# This is a codeowners file. The last matching pattern takes precedence,
+# so the listed codeowners apply only if there is no later match.
+
+# Default owner for all other files
+* @MetaMask/activation
+
+# Docusaurus configuration
+docusaurus.config.js @MetaMask/activation @MetaMask/tech-writers
+
+# Vercel configuration
+vercel.json @MetaMask/activation @MetaMask/tech-writers
+
+# Sidebar files
+*-sidebar.js @MetaMask/activation @MetaMask/tech-writers
+
+# All other Markdown files
+*.md @MetaMask/tech-writers
+*.mdx @MetaMask/tech-writers
+
+# Services documentation
+/services/ @MetaMask/tech-writers
+
+# Snaps documentation
+/snaps/ @MetaMask/tech-writers @MetaMask/snaps
+
+# Wallet and SDK documentation
+/wallet/ @MetaMask/tech-writers @MetaMask/wallet-api-platform-engineers @MetaMask/sdk-devs
