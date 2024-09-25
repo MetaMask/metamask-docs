@@ -33,7 +33,7 @@ See [a comparison of the connection options](index.md#connection-options).
 ### 1. Set up the project
 
 If you don't have an existing React project set up, you can create a new one using
-[Create React App](https://create-react-app.dev/):
+[Create React App](https://create-react-app.dev/) or follow the [Create a simple Starknet dapp tutorial](tutorial):
 
 <Tabs>
 <TabItem value="yarn" label="Yarn" default>

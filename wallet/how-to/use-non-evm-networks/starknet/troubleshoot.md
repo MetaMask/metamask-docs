@@ -1,6 +1,7 @@
 ---
 description: Troubleshoot common Starknet issues.
 sidebar_position: 7
+toc_max_heading_level: 4
 ---
 
 # Troubleshoot
@@ -9,7 +10,7 @@ This guide addresses issues that might occur when configuring the MetaMask conne
 
 ## Connection issues
 
-When using `get-starknet`, the library automatically handles MetaMask detection, connection, and Starknet Snap installation. 
+When using `get-starknet`, the library automatically handles MetaMask detection, connection, and the Starknet Snap addition. 
 If you're using `wallet_invokeSnaps` directly, you might need to manage these processes manually.
 
 ### Detect MetaMask
@@ -25,7 +26,7 @@ async function detectMetamaskSupport(windowObject: Window & typeof globalThis): 
 
 This function uses the `waitForMetaMaskProvider` helper function, which attempts to detect the MetaMask provider three times.
 
-In the event MetaMask is not installed, for example `isMetaMaskInstallRequired=true`, you can prompt the user to install MetaMask. 
+In the event MetaMask is not installed, for example `isMetaMaskInstallRequired=true`, you can prompt the user to install MetaMask: 
 
 ```typescript
 function checkAndPromptForMetaMask() {
@@ -38,7 +39,7 @@ function checkAndPromptForMetaMask() {
         const messageElement = document.getElementById('metamask-message') || document.createElement('div');
         messageElement.id = 'metamask-message';
         messageElement.innerHTML = `
-            <p>MetaMask is required to use this application. Please install MetaMask to continue.</p>
+            <p>MetaMask is required to use this dapp. Please install MetaMask to continue.</p>
             <button id="install-metamask">Install MetaMask</button>
         `;
         document.body.appendChild(messageElement);
@@ -48,11 +49,11 @@ function checkAndPromptForMetaMask() {
             window.open('https://metamask.io/download.html', '_blank');
         });
     } else {
-        console.log("MetaMask is installed. Proceeding with application.");
+        console.log("MetaMask is installed. Proceeding with this dapp.");
     }
 }
 
-// Call this function when your application initializes.
+// Call this function when your dapp initializes.
 checkAndPromptForMetaMask();
 ```
 
@@ -135,7 +136,7 @@ function isMetaMaskProvider(obj: unknown): obj is MetaMaskProvider {
 }
 ```
 
-### `detectMetaMaskProvider`
+#### `detectMetaMaskProvider`
 
 The following function detects a MetaMask provider by listening for the `eip6963:announceProvider` event:
 
@@ -147,9 +148,9 @@ function detectMetaMaskProvider(
 }
 ```
 
-### `waitForMetaMaskProvider`
+#### `waitForMetaMaskProvider`
 
-The following function waits for a MetaMask provider to be detected and retrys the operation if needed:
+The following function waits for a MetaMask provider to be detected and retries the operation if needed:
 
 ```typescript
 async function waitForMetaMaskProvider(

@@ -52,20 +52,20 @@ The following table lists the supported methods for each connection option:
 
 Here's the fixed table with proper formatting:
 
-| Method | `get-starknet` | `wallet_invokeSnap` |
-|--------|:--------------:|:-------------------:|
-| [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount) | | ✓ |
-| [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey) | | ✓ |
-| [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateAccountDeployFee) | | ✓ |
-| [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee) | | ✓ |
-| [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey) | ✓ | ✓ |
-| [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance) | | ✓ |
-| [`starkNet_getStoredUserAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getStoredUserAccounts) | | ✓ |
-| [`starkNet_getTransactions`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactions) | | ✓ |
-| [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus) | | ✓ |
-| [`starkNet_getValue`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getValue) | | ✓ |
-| [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts) | | ✓ |
-| [`starkNet_sendTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_sendTransaction) | | ✓ |
-| [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage) | ✓ | ✓ |
-| [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_upgradeAccContract) | ✓ | ✓ |
-| [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_verifyMessage) | ✓ | ✓ |
+| Method                                                                                                                        | `get-starknet` | `wallet_invokeSnap` |
+|:-----------------------------------------------------------------------------------------------------------------------------:|:--------------:|:-------------------:|
+| [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount)                       | ❌             | ✅                  |
+| [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey)               | ❌             | ✅                  |
+| [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateAccountDeployFee) | ❌             | ✅                  |
+| [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee)                           | ❌             | ✅                  |
+| [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey)                 | ✅             | ✅                  |
+| [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance)         | ❌             | ✅                  |
+| [`starkNet_getStoredUserAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getStoredUserAccounts)       | ❌             | ✅                  |
+| [`starkNet_getTransactions`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactions)                   | ❌             | ✅                  |
+| [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus)         | ❌             | ✅                  |
+| [`starkNet_getValue`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getValue)                                 | ❌             | ✅                  |
+| [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts)                   | ❌             | ✅                  |
+| [`starkNet_sendTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_sendTransaction)                   | ❌             | ✅                  |
+| [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage)                           | ✅             | ✅                  |
+| [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_upgradeAccContract)             | ✅             | ✅                  |
+| [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_verifyMessage)                       | ✅             | ✅                  |

@@ -7,9 +7,16 @@ sidebar_position: 6
 
 In this tutorial, you'll learn how to set up a basic dapp that uses `get-starknet` to connect to MetaMask and display the user's wallet address.
 
+## Prerequisites
+
+- [MetaMask installed](https://metamask.io/download/)
+- A text editor (for example, [VS Code](https://code.visualstudio.com/))
+- [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
+- [Yarn](https://yarnpkg.com/)
+
 ## 1. Project Setup
 
-Create a new React project with TypeScript and add the necessary dependencies
+Create a new React project with TypeScript and add the necessary dependencies:
 
 ```bash
 # Create a new React project with TypeScript
@@ -18,18 +25,40 @@ yarn create react-app get-starknet-tutorial --template typescript
 # Change into the project directory
 cd get-starknet-tutorial
 
-# Add get-starknet and the latest starknet.js version
-yarn add get-starknet starknet@next
+# Add get-starknet and starknet.js
+yarn add get-starknet@3.3.0 starknet@6.11.0
 ```
 
-## 2. 
+Your file structure should look similar to the following:
 
-### 2.1. Connecting to a wallet
+```bash
+get-starknet-tutorial/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│   ├── components/
+│   │   ├── WalletConnect.tsx
+│   │   └── TokenInteractions.tsx
+│   │
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── App.css
+│
+├── package.json
+└── tsconfig.json
+```
 
-The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's wallet. When called, it opens a connection to the MetaMask wallet and returns an object containing important details about the wallet, such as following:
+## 2.Confingure wallet connection
+
+### 2.1. Connect to the MetaMask wallet
+
+The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's wallet. 
+It opens a connection to the MetaMask wallet and returns an object containing important details about the wallet, such as the following:
 
 - `name`: The name of the wallet.
-- `icon`: The wallet's icon, which can be used to display the wallet's logo.
+- `icon`: The wallet's icon, which displays the wallet's logo.
 - `account`: The account object from `starknet.js`, which contains the wallet's address and provides access to account-specific operations.
 
 To import the necessary functions and connect to a wallet, add the following code:
@@ -46,10 +75,16 @@ async function handleConnect(options?: ConnectOptions) {
 
 ### 2.2. Configure connection options
 
-`connect` accepts an optional `ConnectOptions` object. This object can control how the connection process behaves, including:
+`connect` accepts an optional `ConnectOptions` object. 
+This object can control the connection process, including:
 
-- `modalMode`: Determines how the connection modal behaves. The options include "always ask" or "never ask".
-- `modalTheme`: Allows setting the theme of the connection modal. The options includes dark or light theme.
+- `modalMode`: Determines how the connection modal behaves. The options include:
+  - `"alwaysAsk"`: Prompts the user every time a connection is initiated.
+  - `"neverAsk"`: Attempts to connect without showing the modal.
+
+- `modalTheme`: Sets the visual theme of the connection modal. The options are:
+  - `"dark"`: Uses a dark color scheme.
+  - `"light"`: Uses a light color scheme.
 
 The following code is an example of how to set these options:
 
@@ -59,7 +94,8 @@ handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 
 ### 2.3. Create a `WalletAccount`
 
-After it is connected, you can create a new `WalletAccount` instance using the `starknet.js` library. This allows interaction with the Starknet network using the connected wallet.
+After it is connected, you can create a new `WalletAccount` instance using the `starknet.js` library.
+ This allows interaction with the Starknet network using the connected wallet.
 
 ```typescript
 import { WalletAccount } from 'starknet'; 
@@ -316,6 +352,6 @@ In this section, we've shown how to extend your dapp by displaying the balance o
 
 ## Additional resources
 
-- [Use get-starknet to connect to a wallet and create an account instance](https://starknetjs.com/docs/guides/walletAccount)
+- [Use `get-starknet` to connect to a wallet and create an account instance](https://starknetjs.com/docs/guides/walletAccount)
 - [Use account instance to show ERC20 balance and transfer](https://starknetjs.com/docs/guides/use_ERC20)
 - [get-starknet official GitHub](https://github.com/starknet-io/get-starknet)
