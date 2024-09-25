@@ -12,7 +12,7 @@ import {
   saveTokenString,
   getUserIdFromJwtToken,
 } from "../../lib/siwsrp/auth";
-import { DASHBOARD_URL, REQUEST_PARAMS, REF_PATH } from "@site/src/lib/constants";
+import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
