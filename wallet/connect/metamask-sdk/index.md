@@ -10,16 +10,16 @@ tags:
 
 # MetaMask SDK
 
-The **MetaMask SDK** provides a reliable, secure, and seamless connection between your dapp and MetaMask (Extension and Mobile). It supports multiple platforms, ensuring flexibility for your integration needs.
+MetaMask SDK provides a reliable, secure, and seamless connection between your dapp and MetaMask (extension and Mobile). It supports multiple platforms, ensuring flexibility for your integration needs.
 
 Key features include:
 
 - **Multi-platform support** – Connect from web, desktop, mobile, or gaming platforms.
-- **Seamless mobile integration** – Use QR codes or deep links to create persistent connections with MetaMask Mobile.
+- **Seamless mobile integration** – Use QR codes or deeplinks to create persistent connections with MetaMask Mobile.
 - **RPC request batching** – Enhance efficiency by batching multiple requests into a single call.
 - **EIP-6963 detection** – Automatically detect MetaMask wallets with or without third-party libraries.
 
-Explore detailed guides for each platform:
+Get started with the SDK on the following platforms:
 
 <div class="cards">
   <div class="card">
