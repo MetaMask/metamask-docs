@@ -5,12 +5,20 @@ import Select from "react-dropdown-select";
 import Button from "@site/src/components/Button";
 import styles from "./styles.module.css";
 import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
+import global from "@site/src/components/ParserOpenRPC/global.module.css";
 
 const LOGIN_FF = "mm-unified-login";
 
 const ProjectsBox = () => {
+  const projects = [
+    {
+      123: {
+        name: "test key",
+      }
+    }
+  ];
   const {
-    projects,
+    // projects,
     metaMaskAccount,
     walletLinked,
     metaMaskWalletIdConnectHandler,
@@ -112,7 +120,8 @@ const ProjectsBox = () => {
                 </div>
                 <Button
                   thin
-                  className={styles.connectButton}
+                  variant="secondary"
+                  wrapText={false}
                   onClick={() => (window.location.href = walletLinkUrl)}
                 >
                   Link Infura Account

@@ -14,6 +14,8 @@ interface IButton {
   target?: string;
   thin?: boolean;
   type?: "default" | "danger";
+  variant?: "primary" | "secondary";
+  wrapText?: boolean;
 }
 
 export const Button = ({
@@ -26,11 +28,15 @@ export const Button = ({
   target = "_blank",
   thin = false,
   type = "default",
+  variant="primary",
+  wrapText = true,
 }: IButton) => {
   const buttonRootClass = clsx(
     styles.button,
     thin && styles.thin,
     type === "danger" && styles.danger,
+    variant === "primary" ? styles.primary : styles.secondary,
+    !wrapText && styles.nowrap,
     className,
   );
   const isLoadingChild = !isLoading ? (
