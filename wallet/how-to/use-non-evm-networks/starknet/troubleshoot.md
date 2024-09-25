@@ -5,9 +5,9 @@ sidebar_position: 7
 
 # Troubleshoot
 
-Use this guide to resolve common issues when connecting to MetaMask and using the Starknet Snap.
+This guide addresses issues that might occur when configuring the MetaMask connection or implementing the Starknet Snap.
 
-## Connection issus
+## Connection issues
 
 When using `get-starknet`, the library automatically handles MetaMask detection, connection, and Starknet Snap installation. 
 If you're using `wallet_invokeSnaps` directly, you might need to manage these processes manually.
@@ -23,7 +23,38 @@ async function detectMetamaskSupport(windowObject: Window & typeof globalThis): 
 }
 ```
 
-This function uses the `waitForMetaMaskProvider` helper function, which attempts to detect the MetaMask provider up to three times.
+This function uses the `waitForMetaMaskProvider` helper function, which attempts to detect the MetaMask provider three times.
+
+In the event MetaMask is not installed, for example `isMetaMaskInstallRequired=true`, you can prompt the user to install MetaMask. 
+
+```typescript
+function checkAndPromptForMetaMask() {
+    const isMetaMaskInstalled = typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask;
+    
+    if (!isMetaMaskInstalled) {
+        console.log("MetaMask is not installed. Prompting user to install.");
+        
+        // Update UI to inform the user.
+        const messageElement = document.getElementById('metamask-message') || document.createElement('div');
+        messageElement.id = 'metamask-message';
+        messageElement.innerHTML = `
+            <p>MetaMask is required to use this application. Please install MetaMask to continue.</p>
+            <button id="install-metamask">Install MetaMask</button>
+        `;
+        document.body.appendChild(messageElement);
+
+        // Add click event to the install button.
+        document.getElementById('install-metamask').addEventListener('click', () => {
+            window.open('https://metamask.io/download.html', '_blank');
+        });
+    } else {
+        console.log("MetaMask is installed. Proceeding with application.");
+    }
+}
+
+// Call this function when your application initializes.
+checkAndPromptForMetaMask();
+```
 
 ### Verify Snap support
 
@@ -42,13 +73,56 @@ const isSupportSnap = async (provider: any): Promise<boolean> => {
 };
 ```
 
-### Helper Functions
+If MetaMask is installed but the Snap is not, use the following code to prompt the user to install the Snap:
 
-The following helper functions support the detection process:
+```typescript
+async function installSnap(provider: MetaMaskProvider, snapId: string, snapVersion: string) {
+    try {
+        await provider.request({
+            method: 'wallet_requestSnaps',
+            params: {
+                [snapId]: { version: snapVersion },
+            },
+        });
+        console.log('Snap installed successfully');
+    } catch (error) {
+        console.error('Failed to install Snap:', error);
+        // Handle the error (for example, user rejected installation).
+    }
+}
+```
+
+### Handle user rejection
+
+Users can reject the prompt to add the Snap, resulting in a 4001 error. 
+You can provide an error message to ensure users have clear guidance on next steps.
+
+```javascript
+function handleConnectionError(error) {
+    if (error.code === 4001) {
+        console.log('User rejected the request to add the Starknet Snap');
+        displayUserMessage("To proceed, you need to add the Starknet Snap to MetaMask. Please try connecting again.");
+    } else {
+        console.error('An error occurred while connecting to Starknet Snap:', error);
+        displayUserMessage("An error occurred. Please ensure MetaMask is installed and try again.");
+    }
+}
+
+function displayUserMessage(message) {
+    // Update your UI to display the message to the user
+    // For example:
+    // document.getElementById('status-message').textContent = message;
+}
+```
+
+### Helper functions
+
+The following helper functions support the detection process. 
+This is useful for troubleshooting issues that might occur when using the 'wallet_invokeSnap` method.
 
 #### `isMetaMaskProvider`
 
-This type guard function checks if a given object is a valid MetaMaskProvider:
+The following function checks if a given object is a valid `MetaMaskProvider`:
 
 ```typescript
 function isMetaMaskProvider(obj: unknown): obj is MetaMaskProvider {
@@ -63,151 +137,24 @@ function isMetaMaskProvider(obj: unknown): obj is MetaMaskProvider {
 
 ### `detectMetaMaskProvider`
 
-This function detects a MetaMask provider by listening for the `eip6963:announceProvider` event:
+The following function detects a MetaMask provider by listening for the `eip6963:announceProvider` event:
 
-```typescrip
+```typescript
 function detectMetaMaskProvider(
     windowObject: Window & typeof globalThis,
     { timeout = 3000 } = {},
 ): Promise<MetaMaskProvider | null> {
-    // ... (function implementation)
 }
 ```
 
 ### `waitForMetaMaskProvider`
 
-This function waits for a MetaMask provider to be detected and retrys if necessary:
+The following function waits for a MetaMask provider to be detected and retrys the operation if needed:
 
 ```typescript
 async function waitForMetaMaskProvider(
     windowObject: Window & typeof globalThis,
     { timeout = 1000, retries = 0 } = {},
 ): Promise<MetaMaskProvider | null> {
-    // ... (function implementation)
 }
-```
-
-## Types and Interfaces
-
-```typescript
-interface MetaMaskProvider {
-    isMetaMask: boolean;
-    request(options: { method: string }): Promise<void>;
-}
-
-declare global {
-    interface Window {
-        ethereum?: MetaMaskProvider;
-    }
-}
-```
-
-## Best Practices
-
-1. Always check for MetaMask installation before attempting to use Snap functionality.
-2. Handle cases where MetaMask is not installed or doesn't support Snaps gracefully.
-3. Provide clear feedback to users if MetaMask or Snap support is missing.
-4. Consider implementing a retry mechanism for provider detection to account for potential timing issues.
-
-By following these steps and using the provided functions, you can reliably detect MetaMask and verify Snap support in your application.
-
-
-This can be used as follow to check for Metamask Snap Support. This will check for MetaMask presence, and the support of Snap in the installed MetaMask version if any. If there is no MetaMask installed or the version of MetaMask does not support snap 
-
-    ```typescript
-    let isMetaMaskInstallRequired = false;
-    let provider = null;
-    try {
-      provider = await detectMetamaskSupport(window);
-      // Use the new detection method
-    
-      if (provider && (await isSupportSnap(provider))) {
-        isMetaMaskInstallRequired = provider === null;
-      } else {
-        isMetaMaskInstallRequired = true;
-      }
-    } catch (err) {
-      isMetaMaskInstallRequired = true;
-    }
-    ```
-
-In case MetaMask is not installed (e.g. `isMetaMaskInstallRequired=true` we can prompt the user to install MetaMask. 
-
-In case MetaMask is installed, we can prompt the user to install the Snap 
-
-    ```typescript
-    provider
-      .request({
-        method: 'wallet_requestSnaps',
-        params: {
-          [snapId]: { version: snapVersion },
-        },
-      })
-      .then(() => {
-        // The snap has been installed proceed accordingly.
-      })
-      .catch(() => {
-        // The snap has not been installed (user rejected the installation) 
-      });
-    ```
-## Snap permissions
-
-### Snap is not properly approved.
-
-Guide users through the process of approving the Snap in MetaMask. If they deny the connection, provide a retry option.
-
-### Snap ID error
-
-Ensure you're using the correct Snap ID for the StarkNet Snap. Incorrect IDs will result in failed connections.
-The Starknet Snap ID is the name of the npm package of the snap: `@consensys/starknet-snap`.
-
-
-## Best practices
-
-### 1. Graceful error handling
-
-Provide clear feedback to the user, such as offering a retry option or showing a message that StarkNet Snap needs to be installed.
-
-```javascript
-const handleConnect = async () => {
-  try {
-    const res = await connect();
-    if (!res) {
-      console.log('No wallet connected');
-    }
-  } catch (error) {
-    console.error('Failed to connect to wallet:', error);
-    alert('An error occurred while connecting to the wallet. Please try again.');
-  }
-};
-```
-
-### 2. Detect and Handle account changes
-
-Ensure that you detect when the user switches accounts or changes networks. MetaMask emits events like `accountsChanged` and `chainChanged` that you can listen for and handle appropriately.
-
-```javascript
-window.ethereum.on('accountsChanged', (accounts) => {
-  console.log('Accounts changed:', accounts);
-  // Update the UI or re-fetch account data
-});
-
-window.ethereum.on('chainChanged', (chainId) => {
-  console.log('Network changed:', chainId);
-  // Handle network change
-});
-```
-
-### 3. Support for multiple wallets
-
-`get-starknet` supports connecting to multiple wallets. Provide users with options to select the wallet they want to connect, if applicable. You can specify wallet options when calling connect().
-
-```javascript
-const handleConnect = async () => {
-  const options = {
-    modalMode: 'alwaysAsk',  // Force the wallet selection modal to appear
-  };
-  const res = await connect(options);
-  console.log('Connected to wallet:', res?.name);
-};
 ```
