@@ -57,6 +57,7 @@ export const auth = new JwtBearerAuth(
 export const authenticateAndAuthorize = async (env: string) => {
   let accessToken: string, userProfile: SDK.UserProfile;
   VERCEL_ENV = env;
+  console.log(VERCEL_ENV)
   try {
     await auth.connectSnap();
     accessToken = await auth.getAccessToken();
