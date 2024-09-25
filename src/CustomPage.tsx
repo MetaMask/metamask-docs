@@ -3,7 +3,6 @@ import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import React from "react";
 import DocSidebar from '@theme/DocSidebar';
-import styles from "../src/theme/Layout/styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 function generateSidebarItems(docs) {
@@ -83,12 +82,12 @@ const CustomPage = (props) => {
 
   return (
     <Layout>
-      <div className={styles.pageWrapper}>
+      <div>
         <aside className={sidebar_wrapper_classes}>
           <DocSidebar sidebar={formattedData} path="" onCollapse={() => {}} isHidden={false} />
         </aside>
-        <div className={styles.mainContainer}>
-          <div className={styles.contentWrapper}>
+        <div>
+          <div>
           <ParserOpenRPC
             network={NETWORK_NAMES.linea}
             method={customData.name}
