@@ -23,19 +23,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout tools repo
-        uses: actions/checkout@v4
-      - name: Read .nvmrc
-        shell: bash
-        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-        id: nvm
-      - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+
+      - name: Build
+        uses: ConsenSys/docs-gha/build@main
         with:
-          registry-url: https://registry.npmjs.org/
-          node-version-file: ".nvmrc"
-      - name: yarn build
-        shell: bash
-        run: |
-          yarn install --frozen-lockfile
-          yarn run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
