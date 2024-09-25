@@ -153,9 +153,6 @@ Specify this permission in the manifest file as follows:
 
 ### `endowment:name-lookup`
 
-:::flaskOnly
-:::
-
 To provide [custom name resolution](../features/custom-name-resolution.md), a Snap must request the
 `endowment:name-lookup` permission.
 This permission grants the Snap read-only access to user input or an address by exporting the
@@ -169,8 +166,8 @@ This permission takes an object with two optional properties:
   chains it can resolve.
 - `matchers` - An object that helps reduce overhead by filtering the domains passed to your Snap.
   This must contain at least one of the following properties:
-  - `tlds` - An array of strings for top-level domains that the Snap supports.
-  - `schemes` - An array of strings for schemes that the Snap supports.
+  - `tlds` - An array of strings for top-level domains that the Snap supports. For example, to support domains of the form `my-domain.crypto`, specify `["crypto"]`.
+  - `schemes` - An array of strings for schemes that the Snap supports. For example, to support schemes of the form `farcaster:my-user`, specify `["farcaster"]`.
 
 :::tip
 You can modify the name lookup logic's execution limit using [Snap-defined timeouts](#snap-defined-timeouts).

@@ -12,11 +12,11 @@ import TabItem from "@theme/TabItem";
 
 # Use MetaMask SDK with Android
 
-Import MetaMask SDK into your native Android dapp to enable
+Import [MetaMask SDK](../../../concepts/sdk/index.md) into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip See also
-- [Android SDK architecture](../../../concepts/android.md)
+- [Android SDK architecture](../../../concepts/sdk/android.md)
 :::
 
 ## Prerequisites

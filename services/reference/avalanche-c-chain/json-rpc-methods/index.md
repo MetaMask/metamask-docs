@@ -14,5 +14,5 @@ Avalanche-specific methods (`avax.*`) that have a dependency on the P-Chain and 
 
 :::
 
-Refer to the [Avalanche documentation](https://docs.avax.network/apis/avalanchego/apis/c-chain#methods) for more
+Refer to the [Avalanche documentation](https://docs.avax.network/api-reference/c-chain/api) for more
 information about supported methods.

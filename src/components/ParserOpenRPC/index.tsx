@@ -15,66 +15,78 @@ import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 
 interface ParserProps {
-  network: NETWORK_NAMES
-  method?: string
+  network: NETWORK_NAMES;
+  method?: string;
+  extraContent?: JSX.Element;
 }
 
 interface ParserOpenRPCContextProps {
-  setIsDrawerContentFixed?: (isFixed: boolean) => void
-  setDrawerLabel?: (label: string) => void
-  isComplexTypeView: boolean
-  setIsComplexTypeView: (isComplexTypeView: boolean) => void
+  drawerLabel?: string
+  setIsDrawerContentFixed?: (isFixed: boolean) => void;
+  setDrawerLabel?: (label: string) => void;
+  isComplexTypeView: boolean;
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
 }
 
 export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
 
-export default function ParserOpenRPC({ network, method }: ParserProps) {
-  if (!method || !network) return null
-  const [isModalOpen, setModalOpen] = useState(false)
-  const [reqResult, setReqResult] = useState(undefined)
-  const [paramsData, setParamsData] = useState([])
-  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false)
-  const [drawerLabel, setDrawerLabel] = useState(null)
-  const [isComplexTypeView, setIsComplexTypeView] = useState(false)
-  const { colorMode } = useColorMode()
+export default function ParserOpenRPC({ network, method, extraContent }: ParserProps) {
+  if (!method || !network) return null;
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [reqResult, setReqResult] = useState(undefined);
+  const [paramsData, setParamsData] = useState([]);
+  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
+  const [drawerLabel, setDrawerLabel] = useState(null);
+  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { colorMode } = useColorMode();
   const openModal = () => {
-    setModalOpen(true)
+    setModalOpen(true);
     trackClickForSegment({
-      eventName: 'Customize Request',
-      clickType: 'Customize Request',
-      userExperience: 'B',
-    })
-  }
-  const closeModal = () => setModalOpen(false)
+      eventName: "Customize Request",
+      clickType: "Customize Request",
+      userExperience: "B",
+    });
+  };
+  const closeModal = () => setModalOpen(false);
 
-  const { netData } = usePluginData('plugin-json-rpc') as {
-    netData?: ResponseItem[]
-  }
-  const currentNetwork = netData?.find(net => net.name === network)
+  const { netData } = usePluginData("plugin-json-rpc") as {
+    netData?: ResponseItem[];
+  };
+  const currentNetwork = netData?.find((net) => net.name === network);
 
-  if (!currentNetwork && currentNetwork.error) return null
+  if (!currentNetwork && currentNetwork.error) return null;
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
       return (
         items
-          ?.map(item => {
-            if (item?.name || (item?.code && item?.message)) return item
+          ?.map((item) => {
+            if (item?.name || (item?.code && item?.message)) return item;
             if (item?.$ref) {
-              const ref = item.$ref.replace(refPath, '')
-              return currentNetwork.data.components[componentType][ref]
+              const ref = item.$ref.replace(refPath, "");
+              return currentNetwork.data.components[componentType][ref];
             }
-            return null
+            return null;
           })
           .filter(Boolean) || []
-      )
-    }
+      );
+    };
 
-    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method)
-    if (!currentMethod) return null
+    const currentMethod = currentNetwork.data.methods?.find(
+      (met) => met.name === method
+    );
+    if (!currentMethod) return null;
 
-    const errors = findReferencedItem(currentMethod.errors, '#/components/errors/', 'errors')
-    const tags = findReferencedItem(currentMethod.tags, '#/components/tags/', 'tags')
+    const errors = findReferencedItem(
+      currentMethod.errors,
+      "#/components/errors/",
+      "errors"
+    );
+    const tags = findReferencedItem(
+      currentMethod.tags,
+      "#/components/tags/",
+      "tags"
+    );
 
     return {
       description: currentMethod.description || currentMethod.summary || null,
@@ -85,70 +97,79 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
       paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
-    }
-  }, [currentNetwork, method])
+    };
+  }, [currentNetwork, method]);
 
-  if (currentMethodData === null) return null
+  if (currentMethodData === null) return null;
 
-  const { metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext)
+  const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
 
-  const onParamsChangeHandle = data => {
+  const { metaMaskAccount, metaMaskProvider, metaMaskConnectHandler } = useContext(MetamaskProviderContext);
+
+  const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
-      eventName: 'Request Configuration Started',
-      userExperience: 'B',
-    })
+      eventName: "Request Configuration Started",
+      userExperience: "B",
+    });
 
-    if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
-      setParamsData([])
+    if (
+      typeof data !== "object" ||
+      data === null ||
+      Object.keys(data).length === 0
+    ) {
+      setParamsData([]);
       return
     }
 
-    if (typeof data === 'object' && currentMethodData.paramStructure === 'by-name') {
-      setParamsData({ ...data })
+    if (typeof data === "object" && currentMethodData.paramStructure === "by-name") {
+      setParamsData({...data});
       return
     }
 
-    setParamsData(Object.values(data))
-  }
+    setParamsData(Object.values(data));
+    
+  };
 
   const onSubmitRequestHandle = async () => {
     if (!metaMaskProvider) return
     try {
       const response = await metaMaskProvider?.request({
         method: method,
-        params: paramsData,
+        params: paramsData
       })
-      setReqResult(response)
+      setReqResult(response);
       trackClickForSegment({
-        eventName: 'Request Sent',
-        clickType: 'Request Sent',
-        userExperience: 'B',
+        eventName: "Request Sent",
+        clickType: "Request Sent",
+        userExperience: "B",
         ...(response?.code && { responseStatus: response.code }),
-      })
+      });
     } catch (e) {
-      setReqResult(e)
+      setReqResult(e);
     }
   }
 
   const closeComplexTypeView = () => {
-    setIsComplexTypeView(false)
-    setIsDrawerContentFixed(false)
-    setDrawerLabel(null)
-  }
+    setIsComplexTypeView(false);
+    setIsDrawerContentFixed(false);
+    setDrawerLabel(null);
+  };
 
   const onModalClose = () => {
-    closeModal()
-    closeComplexTypeView()
-  }
+    closeModal();
+    closeComplexTypeView();
+  };
 
   return (
     <ParserOpenRPCContext.Provider
       value={{
+        drawerLabel,
         setIsDrawerContentFixed,
         setDrawerLabel,
         isComplexTypeView,
         setIsComplexTypeView,
-      }}>
+      }}
+    >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
           <div className={clsx(global.colContentWrap, 'padding-bottom--lg')}>
@@ -159,6 +180,7 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               components={currentMethodData.components.schemas}
               result={currentMethodData.result}
               tags={currentMethodData.tags}
+              extraContent={extraContent}
             />
             <ErrorsBox errors={currentMethodData.errors} />
           </div>
@@ -171,25 +193,27 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
                       modalDrawerStyles.modalHeaderIcon,
                       modalDrawerStyles.modalHeaderIconBack
                     )}
-                    onClick={closeComplexTypeView}>
+                    onClick={closeComplexTypeView}
+                  >
                     <img
                       src={
-                        colorMode === 'light'
-                          ? '/img/icons/chevron-left-dark-icon.svg'
-                          : '/img/icons/chevron-left-light-icon.svg'
+                        colorMode === "light"
+                          ? "/img/icons/chevron-left-dark-icon.svg"
+                          : "/img/icons/chevron-left-light-icon.svg"
                       }
                     />
                   </button>
                   Editing Param
                 </span>
               ) : (
-                'Customize request'
+                "Customize request"
               )
             }
             isOpen={isModalOpen}
             onClose={onModalClose}
             isContentFixed={isDrawerContentFixed}
-            headerLabel={drawerLabel ? drawerLabel : null}>
+            headerLabel={drawerLabel ? drawerLabel : null}
+          >
             <InteractiveBox
               params={currentMethodData.params}
               components={currentMethodData.components.schemas}
@@ -203,11 +227,9 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!metaMaskProvider && (
-              <AuthBox handleConnect={metaMaskConnectHandler} theme={colorMode} />
-            )}
+            {!metaMaskAccount && <AuthBox handleConnect={metaMaskConnectHandler} theme={colorMode}/>}
             <RequestBox
-              isMetamaskInstalled={!!metaMaskProvider}
+              isMetamaskInstalled={!!metaMaskAccount}
               method={method}
               params={currentMethodData.params}
               paramsData={paramsData}
@@ -215,10 +237,11 @@ export default function ParserOpenRPC({ network, method }: ParserProps) {
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
               colorMode={colorMode}
+              isMetamaskNetwork={isMetamaskNetwork}
             />
           </div>
         </div>
       </div>
     </ParserOpenRPCContext.Provider>
-  )
+  );
 }

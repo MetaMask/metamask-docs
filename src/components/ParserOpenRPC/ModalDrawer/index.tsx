@@ -4,12 +4,12 @@ import { useColorMode } from '@docusaurus/theme-common'
 import styles from './styles.module.scss'
 
 interface ModalDrawerProps {
-  title: string | React.ReactNode
-  isOpen: boolean
-  onClose: () => void
-  children: React.ReactNode
-  isContentFixed?: boolean
-  headerLabel?: string | null
+  title: string | React.ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  isContentFixed?: boolean;
+  headerLabel?: string | null;
 }
 
 export const ModalDrawer = ({
@@ -25,14 +25,14 @@ export const ModalDrawer = ({
   const { colorMode } = useColorMode()
 
   useEffect(() => {
-    setShowModal(isOpen)
-  }, [isOpen])
+    setShowModal(isOpen);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isContentFixed && contentRef?.current) {
-      contentRef?.current?.scrollTo(0, 0)
+      contentRef?.current?.scrollTo(0, 0);
     }
-  }, [isContentFixed])
+  }, [isContentFixed]);
 
   return (
     <div className={clsx(styles.modalContainer, showModal && styles.modalContainerOpen)}>
@@ -51,9 +51,10 @@ export const ModalDrawer = ({
           isContentFixed ? styles.modalContentFixed : styles.modalContentScrolled,
           'type-paragraph-m'
         )}
-        ref={contentRef}>
+        ref={contentRef}
+      >
         {children}
       </div>
     </div>
-  )
-}
+  );
+};

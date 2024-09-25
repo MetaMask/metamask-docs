@@ -15,12 +15,16 @@ Calls to the network are routed to [partner infrastructure providers](#partners-
 
 :::
 
-Avalanche is a Proof of Stake (PoS), layer 1 platform that features three built-in blockchains:
-
+Avalanche is a Proof of Stake (PoS), layer 1 platform that features three built-in blockchains: 
 - [Contract Chain (C-Chain)](https://docs.avax.network/learn/primary-network#c-chain)
 - [Exchange Chain (X-Chain)](https://docs.avax.network/learn/primary-network#x-chain)
 - [Platform Chain (P-Chain)](https://docs.avax.network/learn/primary-network#p-chain)
 
+Infura provides access to the C-Chain only.
+
+The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy Solidity 
+smart contract dapps onto the C-Chain. Dapps can run on both Avalanche and Ethereum. Avalanche 
+Platform's C-Chain is EVM-compatible, but it is not identical. 
 Infura provides access to the C-Chain only.
 
 The C-Chain supports the Ethereum Virtual Machine (EVM), allowing Ethereum developers to deploy
@@ -30,6 +34,9 @@ Avalanche's C-Chain is EVM-compatible, but it is not identical.
 
 :::info See also
 
+- View the [official Avalanche C-Chain documentation](https://docs.avax.network/dapps) 
+for more information about building on the Avalanche C-Chain.
+- View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/dapps/end-to-end/launch-ethereum-dapp#gotchas-and-things-to-look-out-for). 
 - View the [official Avalanche C-Chain documentation](https://docs.avax.network/dapps)
   for more information about building on the Avalanche C-Chain.
 - View the [differences between developing on Ethereum versus Avalanche C-Chain](https://docs.avax.network/dapps/end-to-end/launch-ethereum-dapp#gotchas-and-things-to-look-out-for).

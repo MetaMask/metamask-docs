@@ -228,7 +228,7 @@ case "hello":
         <Box>
           <Text>Hello, <Bold>{origin}</Bold>!</Text>
           <Text>Current gas fee estimates:</Text>
-          <Copyable>{fees}</Copyable>
+          <Copyable value={fees} />
         </Box>
       ),
     }

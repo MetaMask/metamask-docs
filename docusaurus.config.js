@@ -1,11 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-require("dotenv").config()
-const { themes } = require("prism-react-renderer")
-const codeTheme = themes.dracula
-const remarkCodesandbox = require("remark-codesandbox")
-const isProd = process.env.NODE_ENV === "production"
+require("dotenv").config();
+const { themes } = require("prism-react-renderer");
+const codeTheme = themes.dracula;
+const remarkCodesandbox = require("remark-codesandbox");
+const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -32,6 +32,7 @@ const config = {
 
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
+    SENTRY_KEY: process.env.SENTRY_KEY,
   },
 
   trailingSlash: true,
@@ -76,7 +77,7 @@ const config = {
           ],
           openrpc: {
             openrpcDocument:
-              "https://metamask.github.io/api-specs/0.10.10/openrpc.json",
+              "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
             path: "reference",
             sidebarLabel: "JSON-RPC API",
           },
@@ -160,22 +161,7 @@ const config = {
       ]
       : null,
     "./src/plugins/launchdarkly",
-    [
-      "docusaurus-plugin-sentry",
-      {
-        DSN: "d3220b0812610810ddb5a911b3d97790",
-        configuration: {
-          sentry: {
-            init: {
-              replaysOnErrorSampleRate: isProd ? 1.0 : 0,
-              replaysSessionSampleRate: isProd ? 1.0 : 0,
-              sampleRate: isProd ? 0.25 : 0,
-              tracesSampleRate: 0,
-            },
-          },
-        },
-      },
-    ],
+    "./src/plugins/sentry",
   ],
   clientModules: [require.resolve("./src/client/scroll-fix.js")],
   themeConfig:
@@ -379,6 +365,6 @@ const config = {
         },
       },
     }),
-}
+};
 
-module.exports = config
+module.exports = config;

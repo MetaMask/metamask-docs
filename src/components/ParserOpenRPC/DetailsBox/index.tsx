@@ -8,17 +8,18 @@ import { MethodParam, SchemaComponents } from '@site/src/components/ParserOpenRP
 import { Tag } from '@site/src/components/ParserOpenRPC/DetailsBox/SchemaProperty'
 
 interface TagItem {
-  name: string
-  $ref: string
+  name: string;
+  $ref: string;
 }
 
 interface DetailsBoxProps {
-  method: string
-  description: string | null
-  params: MethodParam[]
-  components: SchemaComponents
-  result: any
-  tags: TagItem[]
+  method: string;
+  description: string | null;
+  params: MethodParam[];
+  components: SchemaComponents;
+  result: any;
+  tags: TagItem[];
+  extraContent?: JSX.Element;
 }
 
 export default function DetailsBox({
@@ -28,6 +29,7 @@ export default function DetailsBox({
   components,
   result,
   tags,
+  extraContent,
 }: DetailsBoxProps) {
   return (
     <>
@@ -45,6 +47,7 @@ export default function DetailsBox({
           {method}
         </Heading>
         <MDContent content={description} />
+          {extraContent && <div className="padding-top--lg">{extraContent}</div>}
         <Heading as="h2" className={styles.heading2}>
           Parameters
         </Heading>

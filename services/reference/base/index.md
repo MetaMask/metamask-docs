@@ -16,8 +16,8 @@ support is also limited. If you would like access, please submit a request to `s
 we will assess if your request can be accommodated at this time.
 :::
 
-The Base network provides seamless Coinbase integrations, easy fiat onramps, and access to more than 100 million users and $100 billion in assets
-in the Coinbase ecosystem.
+The Base network provides seamless Coinbase integrations, easy fiat onramps, and access to more than 
+100 million users and $100 billion in assets in the Coinbase ecosystem.
 
 :::info See also
 
