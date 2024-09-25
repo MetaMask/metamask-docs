@@ -21,12 +21,8 @@ For more control, the **Wallet API** allows developers to interact with wallets,
 
 ## Where do I start?
 
-- [**Connect to MetaMask**](connect/index.md) – Learn more about the different connection options,
-  and get started quickly.
-- [**Wallet API reference**](/wallet/reference/json-rpc-api) – See the full list of JSON-RPC methods.
-- If you're new to integrating dapps with MetaMask, see the following topics:
-  - [**About the Wallet API**](concepts/wallet-api.md)
-  - [**Create a React dapp tutorial**](tutorials/react-dapp-local-state.md)
+See [**Connect to MetaMask**](connect/index.md) to learn about the different connection options,
+and get started quickly.
 
 ## Questions?
 
