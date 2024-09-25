@@ -16,9 +16,9 @@ const signStarknetTransaction = async (wallet, contractAddress, entrypoint, call
   
     // Send the transaction
     const result = await wallet?.account?.signer.signTransaction({
-      contractAddress: contractAddress,  // The address of the contract
-      entrypoint: entrypoint,            // The function to call in the contract
-      calldata: calldata                 // The parameters to pass to the function
+      contractAddress: contractAddress,  // The address of the contract.
+      entrypoint: entrypoint,            // The function to call in the contract.
+      calldata: calldata                 // The parameters to pass to the function.
     });
     console.log("Transaction signed successfully:", result);
     return result;

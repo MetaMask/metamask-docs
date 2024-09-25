@@ -5,148 +5,111 @@ sidebar_position: 7
 
 # Troubleshoot
 
-<!--For the dapp, the primary action to initiate interacting with Starknet accounts is to connect to the Snap, just like a dapp connects with MetaMask to interact with Ethereum accounts. Whether the user has the Starknet Snap installed already is not important. If the user needs to install the Snap, they will be prompted to do so.
-Despite this, we do need to explain that the user can reject the prompt to add the Snap to MetaMask and document what to expect (the response that the dapp will receive if the user rejects the request) and encourage the dapp to do something in that instance, like display a message to the user that they need to add the Snap to MetaMask in order to proceed.
-Also, in terms of working with Starknet specifically, we may need to explain that a user will need to take some steps to set up a Starknet account before they can actually use it with the dapp, so the dapp should thoughtfully design that onboarding flow. Whether the user needs to add the Snap (and thus they will be completely new to Starknet) or they already have it but their account is not funded or deployed, the dapp should handle those scenarios.-->
+Use this guide to resolve common issues when connecting to MetaMask and using the Starknet Snap.
 
+## Connection issus
 
-When using get-starknet MetaMask detection, connection and starknet snap installation is handled automatically. 
+When using `get-starknet`, the library automatically handles MetaMask detection, connection, and Starknet Snap installation. 
+If you're using `wallet_invokeSnaps` directly, you might need to manage these processes manually.
 
-In case you are using `invokeSnaps` directly then this needs to be handled manually. 
+### Detect MetaMask
 
-You need to check first that MetaMask is installed : 
+Use the following function to detect if MetaMask is installed when using `wallet_ìnvokeSnap`:
 
+```typescript
+async function detectMetamaskSupport(windowObject: Window & typeof globalThis): Promise<MetaMaskProvider | null> {
+    const provider = await waitForMetaMaskProvider(windowObject, { retries: 3 });
+    return provider;
+}
+```
 
-    ```typescript
-    interface MetaMaskProvider {
-      isMetaMask: boolean;
-      request(options: { method: string }): Promise<void>;
-    }
-    
-    declare global {
-      interface Window {
-        ethereum?: MetaMaskProvider;
-      }
-    }
-    
-    /**
-     * Detects if MetaMask is installed and supports Snaps by invoking the 'wallet_getSnaps' method.
-     * 
-     * @param {any} provider - The provider object, typically obtained from MetaMask.
-     * @returns {Promise<boolean>} - A promise that resolves to `true` if the provider supports Snaps, and `false` otherwise.
-     */
-    const isSupportSnap = async (provider: any): Promise<boolean> => {
-      try {
+This function uses the `waitForMetaMaskProvider` helper function, which attempts to detect the MetaMask provider up to three times.
+
+### Verify Snap support
+
+After detecting MetaMask, verify if it supports Snaps:
+
+```typescript
+const isSupportSnap = async (provider: any): Promise<boolean> => {
+    try {
         await provider.request({
-          method: 'wallet_getSnaps',
+            method: 'wallet_getSnaps',
         });
         return true;
-      } catch {
+    } catch {
         return false;
-      }
-    };
-    
-    /**
-     * Type guard function to check if a given object is a valid MetaMaskProvider.
-     * 
-     * @param {unknown} obj - The object to check.
-     * @returns {boolean} - `true` if the object is a MetaMask provider, `false` otherwise.
-     */
-    function isMetaMaskProvider(obj: unknown): obj is MetaMaskProvider {
-      return (
+    }
+};
+```
+
+### Helper Functions
+
+The following helper functions support the detection process:
+
+#### `isMetaMaskProvider`
+
+This type guard function checks if a given object is a valid MetaMaskProvider:
+
+```typescript
+function isMetaMaskProvider(obj: unknown): obj is MetaMaskProvider {
+    return (
         obj !== null &&
         typeof obj === 'object' &&
         obj.hasOwnProperty('isMetaMask') &&
         obj.hasOwnProperty('request')
-      );
+    );
+}
+```
+
+### `detectMetaMaskProvider`
+
+This function detects a MetaMask provider by listening for the `eip6963:announceProvider` event:
+
+```typescrip
+function detectMetaMaskProvider(
+    windowObject: Window & typeof globalThis,
+    { timeout = 3000 } = {},
+): Promise<MetaMaskProvider | null> {
+    // ... (function implementation)
+}
+```
+
+### `waitForMetaMaskProvider`
+
+This function waits for a MetaMask provider to be detected and retrys if necessary:
+
+```typescript
+async function waitForMetaMaskProvider(
+    windowObject: Window & typeof globalThis,
+    { timeout = 1000, retries = 0 } = {},
+): Promise<MetaMaskProvider | null> {
+    // ... (function implementation)
+}
+```
+
+## Types and Interfaces
+
+```typescript
+interface MetaMaskProvider {
+    isMetaMask: boolean;
+    request(options: { method: string }): Promise<void>;
+}
+
+declare global {
+    interface Window {
+        ethereum?: MetaMaskProvider;
     }
-    
-    /**
-     * Detects a MetaMask provider by listening for the 'eip6963:announceProvider' event.
-     * 
-     * @param {Window & typeof globalThis} windowObject - The window object used to access global browser features.
-     * @param {Object} options - Optional parameters, including a timeout for the detection process.
-     * @param {number} [options.timeout=3000] - The time to wait (in milliseconds) for the provider to announce itself.
-     * @returns {Promise<MetaMaskProvider | null>} - A promise that resolves to a MetaMaskProvider object if detected, or `null` if no provider is found.
-     */
-    function detectMetaMaskProvider(
-      windowObject: Window & typeof globalThis,
-      { timeout = 3000 } = {},
-    ): Promise<MetaMaskProvider | null> {
-      let handled = false;
-      return new Promise<MetaMaskProvider | null>((resolve) => {
-        const handleEIP6963Provider = (event: CustomEvent) => {
-          const { info, provider } = event.detail;
-          if (
-            ['io.metamask', 'io.metamask.flask'].includes(info.rdns) &&
-            isMetaMaskProvider(provider)
-          ) {
-            resolve(provider);
-            handled = true;
-          }
-        };
-    
-        if (typeof windowObject.addEventListener === 'function') {
-          windowObject.addEventListener(
-            'eip6963:announceProvider',
-            (event: Event) => {
-              handleEIP6963Provider(event as CustomEvent);
-            },
-          );
-        }
-    
-        setTimeout(() => {
-          if (!handled) {
-            resolve(null);
-          }
-        }, timeout);
-    
-        if (typeof windowObject.dispatchEvent === 'function') {
-          windowObject.dispatchEvent(new Event('eip6963:requestProvider'));
-        }
-      });
-    }
-    
-    /**
-     * Waits for a MetaMask provider to be detected, retrying if necessary.
-     * 
-     * @param {Window & typeof globalThis} windowObject - The window object used to access global browser features.
-     * @param {Object} options - Optional parameters, including timeout and retries.
-     * @param {number} [options.timeout=1000] - The time (in milliseconds) to wait for each detection attempt.
-     * @param {number} [options.retries=0] - The number of retry attempts if no provider is detected.
-     * @returns {Promise<MetaMaskProvider | null>} - A promise that resolves to a MetaMaskProvider object if detected, or `null` if no provider is found.
-     */
-    async function waitForMetaMaskProvider(
-      windowObject: Window & typeof globalThis,
-      { timeout = 1000, retries = 0 } = {},
-    ): Promise<MetaMaskProvider | null> {
-      return detectMetaMaskProvider(windowObject, { timeout })
-        .catch(function () {
-          return null;
-        })
-        .then(function (provider) {
-          if (provider || retries === 0) {
-            return provider;
-          }
-          return waitForMetaMaskProvider(windowObject, {
-            timeout,
-            retries: retries - 1,
-          });
-        });
-    }
-    
-    /**
-     * Detects if MetaMask is installed by calling the waitForMetaMaskProvider function with retries.
-     * 
-     * @param {Window & typeof globalThis} windowObject - The window object used to access global browser features.
-     * @returns {Promise<MetaMaskProvider | null>} - A promise that resolves to a MetaMaskProvider object if MetaMask is detected, or `null` otherwise.
-     */
-    async function detectMetamaskSupport(windowObject: Window & typeof globalThis): Promise<MetaMaskProvider | null> {
-      const provider = await waitForMetaMaskProvider(windowObject, { retries: 3 });
-      return provider;
-    }
-    
-    ```
+}
+```
+
+## Best Practices
+
+1. Always check for MetaMask installation before attempting to use Snap functionality.
+2. Handle cases where MetaMask is not installed or doesn't support Snaps gracefully.
+3. Provide clear feedback to users if MetaMask or Snap support is missing.
+4. Consider implementing a retry mechanism for provider detection to account for potential timing issues.
+
+By following these steps and using the provided functions, you can reliably detect MetaMask and verify Snap support in your application.
 
 
 This can be used as follow to check for Metamask Snap Support. This will check for MetaMask presence, and the support of Snap in the installed MetaMask version if any. If there is no MetaMask installed or the version of MetaMask does not support snap 
@@ -187,7 +150,7 @@ In case MetaMask is installed, we can prompt the user to install the Snap
         // The snap has not been installed (user rejected the installation) 
       });
     ```
-## 2. Snap permissions
+## Snap permissions
 
 ### Snap is not properly approved.
 
