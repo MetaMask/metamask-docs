@@ -37,11 +37,11 @@ If you need to [update the interface](#update-an-interactive-interface) or
 [get its state](#get-an-interactive-interfaces-state) at a future time, you should store its ID in
 the Snap's storage.
 
-### Optionally add context to an interface
+### Add context to an interface
 
 You can optionally add context to an interface by passing a `context` object to the
 [`snap_createInterface`](../../reference/snaps-api.md#snap_createinterface) method.
-This object is optional and can contain any data you want to pass to the interface.
+This object can contain any data you want to pass to the interface.
 This context will be passed to [`onUserInput`](../../reference/entry-points.md#onuserinput) when the user interacts with the interface.
 
 ## Update an interactive interface

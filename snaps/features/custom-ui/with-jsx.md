@@ -168,10 +168,10 @@ Outputs a box, which can be used as a container for other components.
 #### Props
 
 - `direction` - (Optional) The direction in which elements flow inside the box.
-  Possible values are `"horizontal"` or `"vertical"`.
+  Possible values are `"horizontal"` and `"vertical"`.
   The default is `"vertical"`. 
 - `alignment` - (Optional) The alignment of the elements inside the box.
-  Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, or `"space-around"`.
+  Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
   The default is `"start"`.
 
 #### Example
@@ -209,14 +209,15 @@ For use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `children`: `string | Image | Icon` - The contents of the button.
+- `children` - The contents of the button.
+  This can be text, an [`Image`](#image) component, or an [`Icon`](#icon) component.
 - `type` - (Optional) The type of button.
-  Possible values are `"button"` or `"submit"`.
+  Possible values are `"button"` and `"submit"`.
   The default is `"button"`.
 - `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
   when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
-  Possible values are `"primary"` or `"destructive"`.
+  Possible values are `"primary"` and `"destructive"`.
   The default is `"primary"`.
 
 #### Example
@@ -259,7 +260,8 @@ Outputs a checkbox for use in [interactive UI](interactive-ui.md).
 - `name`: `string` - The name sent to [`onUserInput`](../../reference/entry-points.md#onuserinput).
 - `checked`: `boolean` - (Optional) Whether the checkbox is checked.
 - `label`: `string` - (Optional) The label for the checkbox.
-- `variant`: `"default" | "toggle"` - (Optional) The variant of the checkbox.
+- `variant` - (Optional) The variant of the checkbox.
+  Possible values are `"default"` and `"toggle"`.
 
 #### Example
 
@@ -392,13 +394,14 @@ await snap.request({
 
 ### `Field`
 
-Outputs a form field, wrapping a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or [`RadioGroup`](#radiogroup) to give it a label and optional error.
+Outputs a form field, wrapping an element to give it a label and optional error.
 
 #### Props
 
 - `label`: `string` - The label for the wrapped element.
-- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the styling of the wrapped element to show that there is an error.
-- `children` - The input element to be wrapped.
+- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style of the wrapped element to show that there is an error.
+- `children` - The element to be wrapped.
+  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or [`RadioGroup`](#radiogroup) component.
 
 #### Example
 
@@ -560,9 +563,13 @@ Outputs an icon.
 
 #### Props
 
-- `name`: `"confirmation" | "search" | "bold" | "link" | "data" | "menu" | "filter" | "key" | "warning" | "add-square" | "add" | "arrow-2-down" | "arrow-2-left" | "arrow-2-right" | "arrow-2-up" | "arrow-2-up-right" | "arrow-double-left" | "arrow-double-right" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "bank-token" | "bank" | "book" | "bookmark" | "bridge" | "calculator" | "card-pos" | "card-token" | "card" | "category" | "chart" | "check-bold" | "check" | "clock" | "close" | "code-circle" | "coin" | "connect" | "copy-success" | "copy" | "customize" | "danger" | "dark" | "diagram" | "document-code" | "drag-drop" | "dragging-animation" | "pinning-animation" | "edit" | "eraser" | "ethereum" | "expand" | "explore" | "export" | "eye-slash" | "eye" | "flag" | "flash-slash" | "flash" | "full-circle" | "gas" | "global-search" | "global" | "graph" | "hardware" | "heart" | "hierarchy" | "home" | "import" | "info" | "light" | "loading" | "lock-circle" | "lock-slash" | "lock" | "login" | "logout" | "message-question" | "messages" | "minus-bold" | "minus-square" | "minus" | "mobile" | "money" | "monitor" | "more-horizontal" | "more-vertical" | "notification-circle" | "notification" | "password-check" | "people" | "pin" | "programming-arrows" | "custody" | "question" | "received" | "refresh" | "save" | "scan-barcode" | "scan-focus" | "scan" | "scroll" | "security-card" | "security-cross" | "security-key" | "security-search" | "security-slash" | "security-tick" | "security-time" | "security-user" | "security" | "send-1" | "send-2" | "setting" | "slash" | "snaps-mobile" | "snaps-plus" | "snaps" | "speedometer" | "star" | "stake" | "student" | "swap-horizontal" | "swap-vertical" | "tag" | "tilde" | "timer" | "trash" | "trend-down" | "trend-up" | "user-circle-add" | "user-circle-link" | "user-circle-remove" | "user-circle" | "user" | "wallet-card" | "wallet-money" | "wallet" | "warning" | "twitter" | "qr-code" | "user-check" | "unpin" | "ban" | "bold" | "circle-x" | "download" | "file" | "flask" | "plug" | "share" | "square" | "tint" | "upload" | "usb" | "wifi" | "plus-minus"` - The name of the icon.
-- `color`: `'default' | 'primary' | 'muted'` - (Optional) The color of the icon.
-- `size`: `'md' | 'inherit'` - (Optional) The size of the icon.
+- `name` - The name of the icon.
+  Possible values include `"confirmation"`, `"search"`, "`warning`", and `"menu"`.
+  See the [full list of possible `name` values](https://github.com/MetaMask/snaps/blob/0014ff6d7566dbc2945600db740d0a90f818b2d8/packages/snaps-sdk/src/jsx/components/Icon.ts#L5-L163).
+- `color` - (Optional) The color of the icon.
+  Possible values are `"default"`, `"primary"`, and `"muted"`.
+- `size` - (Optional) The size of the icon.
+  Possible values are `"md"` and `"inherit"`.
 
 #### Example
 
@@ -647,7 +654,7 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 - `name`: `string` - The name that will be used as a key to the event sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
 - `type` - (Optional) The type of input.
-  Possible values are `"text"`, `"number"`, or `"password"`.
+  Possible values are `"text"`, `"number"`, and `"password"`.
   The default is `"text"`.
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
 - `label`: `string` - (Optional) The text displayed alongside the input to label it.
@@ -753,7 +760,7 @@ Outputs a radio group component for use in [interactive UI](interactive-ui.md).
 
 - `name`: `string` - The name that will be used as a key to the event sent to
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
-- `children`: `Radio[]` - One or more `Radio` components, each with a `value` and text child (see example).
+- `children`: `Radio[]` - One or more `Radio` components, each with a `value` and text child.
 
 #### Example
 
@@ -789,7 +796,7 @@ Outputs a row with a label and value, which can be used for key-value data.
 
 - `label`: `string` - The label of the row.
 - `variant` - (Optional) The variant of the label.
-  Possible values are `"default"`, `"error"`, or `"warning"`.
+  Possible values are `"default"`, `"error"`, and `"warning"`.
 - `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), or
   [`Address`](#address) component.
 
@@ -829,7 +836,7 @@ Outputs a selector component for use in [interactive UI](interactive-ui.md).
 - `name`: `string` - The name that will be used as a key to the event sent to 
   [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
 - `title`: `string` - The title of the selector, displayed when the selector is opened.
-- `children`: `SelectorOption[]` - One or more `SelectorOption` components, each with a `Card` child (see example).
+- `children`: `SelectorOption[]` - One or more `SelectorOption` components, each with a `Card` child.
 
 #### Example
 
@@ -854,7 +861,7 @@ const interfaceId = await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-selector.png").default} alt="Selector UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-selector.png").default} alt="Selector UI example" width="450px" />
 </p>
 
 ### `Spinner`
@@ -890,8 +897,10 @@ Outputs text.
 
 #### Props
 
-- `color`:  `'default' | 'alternative' | 'muted' | 'error' | 'success' | 'warning'` - (Optional) The color of the text.
-- `alignment`: `'start' | 'center' | 'end'` - (Optional) The alignment of the text.
+- `color` - (Optional) The color of the text.
+  Possible values are `"default"`, "`alternative`", `"muted"`, `"error"`, `"success"`, and `"warning"`.
+- `alignment` - (Optional) The alignment of the text.
+  Possible values are `"start"`, `"center"`, and `"end"`.
 
 
 #### Example
@@ -917,12 +926,12 @@ module.exports.onHomePage = async () => {
 
 ### `Tooltip`
 
-Outputs a tooltip when the wrapped child is hovered over.
+Outputs a tooltip when the wrapped element is hovered over.
 
 #### Props
 
 - `content`: - The content of the tooltip.
-- `children`: - The child element to wrap.
+- `children`: - The element to wrap.
 
 #### Example
 
@@ -954,7 +963,7 @@ await snap.request({
 <img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
-### Emojis
+## Emojis
 
 Text-based components (such as [`Heading`](#heading) and [`Text`](#text)) accept emojis.
 
