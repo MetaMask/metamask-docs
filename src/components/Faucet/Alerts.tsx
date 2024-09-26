@@ -84,8 +84,7 @@ export const AlertBalanceTooLow = () => (
     <AlertText>
       <span>
         Your current Ethereum address does not contain enough Ether on the
-        Ethereum Mainnet. Please ensure you have at least 0.001 ETH before
-        proceeding. You can easily add funds to your address using{" "}
+        Ethereum Mainnet. You can easily add funds to your address using{" "}
         <a
           data-testid="alert-balance-add-funds"
           onClick={handleClickBalanceLow}
