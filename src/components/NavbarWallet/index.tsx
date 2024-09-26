@@ -24,8 +24,12 @@ const NavbarWalletComponent: FC = ({
 
   const COPY_TEXT = "Copy to clipboard";
   const COPIED_TEXT = "Copied!";
-  const { metaMaskAccount, sdk, metaMaskWalletIdConnectHandler, metaMaskDisconnect } =
-    useContext(MetamaskProviderContext);
+  const {
+    metaMaskAccount,
+    sdk,
+    metaMaskWalletIdConnectHandler,
+    metaMaskDisconnect,
+  } = useContext(MetamaskProviderContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
   const isExtensionActive = sdk.isExtensionActive;
@@ -111,8 +115,10 @@ const NavbarWalletComponent: FC = ({
               onClick={metaMaskDisconnect}
               className={styles.disconnect}
             >
-              <DisconnectIcon className={styles.icon} />{" "}
-              <span>Disconnect Wallet</span>
+              <>
+                <DisconnectIcon className={styles.icon} />{" "}
+                <span>Disconnect Wallet</span>
+              </>
             </Button>
           </li>
         </ul>

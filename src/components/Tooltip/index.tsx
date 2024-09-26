@@ -9,7 +9,7 @@ interface TooltipProps {
   message: string;
   disabled?: boolean;
   className?: string;
-  onHidden: VoidFunction;
+  onHidden?: VoidFunction;
 }
 
 export const Tooltip = ({
@@ -17,7 +17,7 @@ export const Tooltip = ({
   message,
   disabled,
   className,
-  onHidden,
+  onHidden = () => {},
 }: TooltipProps) => (
   <>
     {/* @ts-ignore */}
