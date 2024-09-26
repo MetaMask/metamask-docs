@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # User-defined components
 
-When using [Custom UI with JSX](with-jsx.md), you can create your own components by composing
+When using [Custom UI with JSX](index.md), you can create your own components by composing
 existing components or other user-defined components.
 
 ## Basic example
