@@ -27,7 +27,7 @@ import { Tooltip } from "@site/src/components/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
-import * as isObject from "lodash.isobject";
+import * as isPlainObject from "lodash.isplainobject";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
@@ -124,14 +124,14 @@ export default function InteractiveBox({
             if (name === "Address" || name === "From") {
               return [checkName(name), metaMaskAccount];
             }
-            if (isObject(value)) {
+            if (isPlainObject(value)) {
               return [checkName(name), getObjectWithAddress(value)];
             }
           }
-          if (isObject(value)) {
+          if (isPlainObject(value)) {
             return [
               checkName(name),
-              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isObject(val) && val?.description ? val.value : val]))
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isPlainObject(val) && val?.description ? val.value : val]))
             ];
           }
           return [checkName(name), value];
