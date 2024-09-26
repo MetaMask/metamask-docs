@@ -11,7 +11,7 @@ This guide addresses issues that might occur when connecting your dapp to the St
 ## Connection issues
 
 When using `get-starknet`, the library automatically handles detecting and connecting to MetaMask,
-and adding the Starknet Snap. 
+and adding the Starknet Snap.
 If you're using `wallet_invokeSnap` directly, you might need to manage these processes manually.
 
 ### Detect MetaMask

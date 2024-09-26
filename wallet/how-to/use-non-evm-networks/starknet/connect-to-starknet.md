@@ -196,6 +196,8 @@ A **Connect Wallet** button displays, which allows users to connect to MetaMask 
   </TabItem> 
 </Tabs>
 
+The `get-starknet` library automatically handles detecting and connecting to MetaMask, and adding the Starknet Snap.
+
 ## Connect using `wallet_invokeSnap`
 
 Alternatively, you can manage the Snap invocation manually.
@@ -392,3 +394,7 @@ const ConnectWallet = () => {
 };
 export default ConnectWallet;
 ```
+
+:::note
+See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using `wallet_invokeSnap`.
+:::

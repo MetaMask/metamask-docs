@@ -42,7 +42,7 @@ sequenceDiagram
     mm->>Snap: Activate
     Snap-->>mm: Activated
     mm-->>get: Return SWO
-    get->>get: Create WalletAccount
+    get->>network: Create WalletAccount
     get-->>dapp: Connection established
     
     dapp->>get: Read blockchain data
@@ -58,9 +58,6 @@ sequenceDiagram
     get->>network: Submit transaction
     network-->>get: Transaction result
     get-->>dapp: Transaction confirmation
-    
-    mm->>get: Account/Network changed
-    get->>dapp: Notify change
 ```
 
 The `get-starknet` library offers several features that improve how dapps interact with the Starknet
