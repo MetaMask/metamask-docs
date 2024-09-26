@@ -118,9 +118,6 @@ const walletAddress = await snap.request({
 // walletAddress will be a string containing the address entered by the user.
 ```
 
-</TabItem>
-</Tabs>
-
 <p align="center">
 <img src={require("../../assets/prompt-dialog.png").default} alt="Prompt dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
 </p>
