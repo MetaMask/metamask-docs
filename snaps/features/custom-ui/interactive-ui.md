@@ -12,17 +12,11 @@ It allows interfaces returned from [dialogs](dialogs.md), [home pages](home-page
 
 The following interactive UI components are available:
 
-- [`button`](index.md#button)
-- [`form`](index.md#form)
-- [`input`](index.md#input)
-
-The following interactive UI JSX components are available:
-
-- [`Button`](with-jsx.md#button)
-- [`Dropdown`](with-jsx.md#dropdown)
-- [`Field`](with-jsx.md#field)
-- [`Form`](with-jsx.md#form)
-- [`Input`](with-jsx.md#input)
+- [`Button`](index.md#button)
+- [`Dropdown`](index.md#dropdown)
+- [`Field`](index.md#field)
+- [`Form`](index.md#form)
+- [`Input`](index.md#input)
 
 ## Create an interactive interface
 

@@ -11,8 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## September 2024
 
-- Documented new [Snaps custom UI with JSX components](/snaps/features/custom-ui/with-jsx) for Flask
-  version 12.4.
+- Documented new [Snaps custom UI JSX components](/snaps/features/custom-ui) for Flask
+  version 12.4, and removed documentation for deprecated function-based library.
   ([#1540](https://github.com/MetaMask/metamask-docs/pull/1540))
 - Documented [Snaps user-defined components](/snaps/features/custom-ui/user-defined-components).
   ([#1557](https://github.com/MetaMask/metamask-docs/pull/1557))
