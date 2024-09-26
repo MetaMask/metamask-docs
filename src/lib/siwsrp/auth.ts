@@ -18,7 +18,6 @@ const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
-  console.log(env);
 
   if (env === "production") {
     return {
