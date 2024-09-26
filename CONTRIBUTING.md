@@ -251,5 +251,5 @@ export SEGMENT_ANALYTICS_KEY="<your key>"
 Then build the project in production mode using the following command:
 
 ```bash
-yarn build && yarn serve
+npm run build && npm run serve
 ```

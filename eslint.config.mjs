@@ -19,7 +19,6 @@ export default [{
         "**/.eslintrc.js",
         "node_modules/*",
         ".docusaurus/*",
-        ".yarn",
         "**/*.md",
         "**/*.mdx",
         "static/*",
