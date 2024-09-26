@@ -108,7 +108,7 @@ reverse_proxy https://localhost:9000 https://sepolia.infura.io {
 Ensure you replace `<YOUR-API-KEY>` with the API key for your Ethereum project.
 
 In this example, the reverse proxy retrieves information from `localhost:9000`, and redirects it to `localhost:3000`.
-If `localhost:9000` stops responding, Caddy will move on to retrieve information from the Infura Sepolia endpoint.
+If `localhost:9000` stops responding, Caddy will move on to retrieve information from the Sepolia endpoint.
 Using `header_up Host` allows you to include your API key to both the Sepolia and localhost endpoints.
 
 ### 6. Run the reverse proxy
@@ -145,7 +145,7 @@ Reverse proxy success!
 
 The success message from `main.js` should display, because you've asked the reverse proxy to go to `localhost:9000` first.
 
-If you close the Node.js server and send the request again, you should get the result from the Infura Sepolia node:
+If you close the Node.js server and send the request again, you should get the result from the Sepolia node:
 
 <Tabs>
   <TabItem value="Example CURL request" label="Example CURL request" default>
@@ -167,4 +167,4 @@ curl http://localhost:3000/v3/<YOUR-API-KEY> \
   </TabItem>
 </Tabs>
 
-The reverse proxy ignores the localhost node, since it's not functioning, and falls back to the Infura Sepolia node.
+The reverse proxy ignores the localhost node, since it's not functioning, and falls back to the Sepolia node.
