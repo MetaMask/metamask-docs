@@ -15,6 +15,8 @@ interface RequestBoxProps {
   openModal: () => void;
   submitRequest: () => void;
   isMetamaskNetwork?: boolean;
+  defExampleResponse?: any;
+  resetResponseHandle: () => void;
 }
 
 export default function RequestBox({
@@ -26,6 +28,8 @@ export default function RequestBox({
   openModal,
   submitRequest,
   isMetamaskNetwork = false,
+  defExampleResponse,
+  resetResponseHandle,
 }: RequestBoxProps) {
 
   const exampleRequest = useMemo(() => {
@@ -40,8 +44,18 @@ export default function RequestBox({
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    return JSON.stringify(response, null, 2);
-  }, [response]);
+    if (defExampleResponse && response === undefined) {
+      return JSON.stringify(
+        defExampleResponse === "null" ? null : defExampleResponse,
+        null,
+        2
+      );
+    }
+    if (response !== undefined) {
+      return JSON.stringify(response, null, 2);
+    }
+    return false
+  }, [response, defExampleResponse]);
 
   const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
   const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
@@ -93,10 +107,22 @@ export default function RequestBox({
           }
         </div>
       </div>
-      {response !== undefined && (
+      {exampleResponse && (
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
-            <strong className={styles.cardHeading}>Response</strong>
+            <strong className={styles.cardHeading}>
+              {defExampleResponse && response === undefined ? "Example response" : "Response"}
+            </strong>
+            {defExampleResponse && response !== undefined && (
+              <Tooltip message="Reset response">
+                <button
+                  className={styles.resetResponseBtn}
+                  onClick={resetResponseHandle}
+                >
+                  <img src="/img/icons/reset-icon.svg" />
+                </button>
+              </Tooltip>
+            )}
           </div>
           <div>
             <CodeBlock language="javascript" className={clsx(styles.responseBlock, "margin-bottom--none")}>

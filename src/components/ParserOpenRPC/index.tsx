@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
@@ -51,6 +51,7 @@ export default function ParserOpenRPC({
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const [defExampleResponse, setDefExampleResponse] = useState(undefined);
   const { metaMaskAccount, metaMaskProvider } = useContext(
     MetamaskProviderContext
   );
@@ -119,6 +120,27 @@ export default function ParserOpenRPC({
   if (currentMethodData === null) return null;
 
   const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
+
+  useEffect(() => {
+    const example = currentMethodData?.examples?.[0];
+    if (example?.result) {
+      if (example.id && example.jsonrpc) {
+        setDefExampleResponse({
+          id: example.id,
+          jsonrpc: example.jsonrpc,
+          result: example.result.value,
+        });
+      } else {
+        setDefExampleResponse(example.result.value);
+      }
+    } else {
+      setDefExampleResponse(undefined);
+    }
+  }, [currentMethodData]);
+
+  const resetResponseHandle = () => {
+    setReqResult(undefined);
+  }
 
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
@@ -254,6 +276,8 @@ export default function ParserOpenRPC({
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
               isMetamaskNetwork={isMetamaskNetwork}
+              defExampleResponse={defExampleResponse}
+              resetResponseHandle={resetResponseHandle}
             />
           </div>
         </div>
