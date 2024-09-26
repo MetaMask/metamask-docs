@@ -309,7 +309,6 @@ To handle account changes and disconnections, you can use event listeners provid
       const handleAccountsChanged = (accounts: string[]) => {
         console.log("Accounts changed:", accounts);
         setAccount(accounts[0] || null);
-        // Update your dapp's state.
       };
 
       const handleDisconnect = () => {
@@ -321,7 +320,7 @@ To handle account changes and disconnections, you can use event listeners provid
         starknet.on("accountsChanged", handleAccountsChanged);
         starknet.on("networkChanged", handleDisconnect);
 
-        // Initial account setup
+        // Initial account setup.
         starknet.enable().then((accounts: string[]) => {
           setAccount(accounts[0] || null);
         });
@@ -388,7 +387,7 @@ To handle account changes and disconnections, you can use event listeners provid
     useEffect(() => {
       fetchAccount();
 
-      // Poll for account changes every 5 seconds
+      // Retrieve account changes every 5 seconds.
       const intervalId = setInterval(fetchAccount, 5000);
 
       return () => clearInterval(intervalId);

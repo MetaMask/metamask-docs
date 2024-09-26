@@ -76,10 +76,10 @@ After an account is connected, you can sign a transaction using the `wallet.acco
     }
   };
 
-  // Example usage
+  // Example usage:
   const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
   const entrypoint = "transfer";
-  const calldata = ["0xRecipientAddress", "1000"]; // Example parameters
+  const calldata = ["0xRecipientAddress", "1000"];
 
   signStarknetTransactionWithSnap(contractAddress, entrypoint, calldata)
     .then(result => console.log("Signed transaction result:", result))

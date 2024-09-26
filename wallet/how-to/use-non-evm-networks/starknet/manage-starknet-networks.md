@@ -128,10 +128,6 @@ Prompt users to switch between networks by setting the
       throw new Error("MetaMask not detected or Snaps not supported");
     }
   };
-
-  // Usage example:
-  // switchStarknetNetwork("0x534e5f5345504f4c4941")  // Switch to Sepolia testnet
-  // switchStarknetNetwork("0x534e5f4d41494e")        // Switch to Mainnet
   ```
 
   </TabItem> 

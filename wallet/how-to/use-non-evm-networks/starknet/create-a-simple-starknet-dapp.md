@@ -40,14 +40,11 @@ get-starknet-tutorial/
 ├── src/
 │   ├── components/
 │   │   ├── WalletConnect.tsx
-│   │   └── TokenInteractions.tsx
+│   │ 
 │   │
 │   ├── App.tsx
 │   ├── index.tsx
 │   └── App.css
-│
-├── package.json
-└── tsconfig.json
 ```
 
 ## 2.Confingure wallet connection
@@ -94,8 +91,8 @@ handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 
 ### 2.3. Create a `WalletAccount`
 
-After it is connected, you can create a new `WalletAccount` instance using the `starknet.js` library.
- This allows interaction with the Starknet network using the connected wallet.
+After the wallet is successfully connected to the dapp, you can create a new `WalletAccoun` instance using the `starknet.js` library.
+This allows interaction with the Starknet network using the connected wallet.
 
 ```typescript
 import { WalletAccount } from "starknet"; 
@@ -104,15 +101,15 @@ async function handleConnect(options?: ConnectOptions) {
   const res = await connect(options);
   const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
   const newWalletAccount = new WalletAccount({ nodeUrl: myFrontendProviderUrl }, res);
-  // You can now use newWalletAccount to interact with Starknet
 }
 ```
 
 ### 2.4. Display wallet information
 
-The wallet's name, address, and icon can be displayed in your dapp. This provides visual feedback to the user, confirming which wallet they are using.
+The wallet's name, address, and icon can be displayed in the dapp. 
+This provides visual feedback to the user, confirming which wallet they are using.
 
-Here's a basic example of how to update the UI with the connected wallet's details:
+The following code is an example of how to update the interface with the connected wallet's details:
 
 ```typescript
 import { useState } from "react";
@@ -141,7 +138,7 @@ function App() {
 
 ### 2.5. Example implementation
 
-Now that you understand the key elements and have seen snippets of the most important parts, here's the full implementation in `App.tsx`:
+The following code is the full implementation in `App.tsx`:
 
 ```typescript
 import "./App.css"
@@ -151,7 +148,7 @@ import {
   connect,
   disconnect,
 } from "get-starknet"
-import { WalletAccount } from "starknet"; // v6.10.0 min
+import { WalletAccount } from "starknet";
 import { useState } from "react"
 
 function App() {
@@ -228,7 +225,7 @@ function App() {
       )}
     </div>
   )
-}
+};
 
 export default App
 ```
@@ -261,12 +258,12 @@ const formattedBalance = balance / Math.pow(10, 18);
 
 ### 3.3. Transfer tokens
 
-To transfer tokens, you will populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here"s how you can do that:
+To transfer tokens, populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here"s how you can do that:
 
 ```typescript
 import { Call } from "starknet";
 
-// Define the transfer parameters
+// Define the transfer parameters.
 const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
 const amountToTransfer = 1n * 10n ** 18n; // 1 token (assuming 18 decimals).
 
@@ -275,16 +272,16 @@ const transferCall: Call = erc20.populate("transfer", {
   amount: amountToTransfer,
 });
 
-// Execute the transfer
+// Execute the transfer.
 const { transaction_hash: transferTxHash } = await walletAccount.execute(transferCall);
 
-// Wait for the transaction to be accepted on Starknet
+// Wait for the transaction to be accepted on Starknet.
 await walletAccount.waitForTransaction(transferTxHash);
 ```
 
 ### 3.4. Full implementation
 
-Here"s how you can integrate both balance checking and transferring into your component:
+The following code example demonstrates how to you integrate both balance checking and transferring into your component:
 
 ```typescript
 import { useEffect, useState } from "react";

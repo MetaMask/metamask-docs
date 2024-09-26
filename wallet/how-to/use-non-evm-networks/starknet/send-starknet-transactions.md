@@ -171,6 +171,7 @@ The following is a simplified example of how to connect to a Starknet account an
     }
   };
 
+  // Example usage
   const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
   const contractFuncName = "transfer";
   const contractCallData = ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"];
