@@ -860,6 +860,7 @@ Creates an interactive interface for use in [interactive UI](../features/custom-
 An object containing:
 
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+- `context` (optional) - A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface.
 
 #### Returns
 

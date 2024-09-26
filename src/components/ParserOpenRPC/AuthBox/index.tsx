@@ -10,7 +10,7 @@ interface AuthBoxProps {
 }
 
 export const AuthBox = ({ isMetamaskNetwork = false }: AuthBoxProps) => {
-  const { metaMaskConnectHandler, metaMaskWalletIdConnectHandler } = useContext(MetamaskProviderContext);
+  const { metaMaskWalletIdConnectHandler } = useContext(MetamaskProviderContext);
   const connectHandler = () => {
     trackClickForSegment({
       eventName: "Connect wallet",
@@ -20,7 +20,7 @@ export const AuthBox = ({ isMetamaskNetwork = false }: AuthBoxProps) => {
       responseMsg: null,
       timestamp: Date.now(),
     });
-    isMetamaskNetwork ? metaMaskConnectHandler() : metaMaskWalletIdConnectHandler();
+    metaMaskWalletIdConnectHandler();
   };
   return (
     <div className={styles.msgWrapper}>
