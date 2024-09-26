@@ -75,13 +75,13 @@ Create a `.env` file in your project directory to store the project and account 
 
 ```
 POLYGON_NETWORK = "polygon-amoy"
-INFURA_API_KEY = "<API-Key>"
+INFURA_API_KEY = "<YOUR-API-KEY>"
 SIGNER_PRIVATE_KEY = "<Private-Key>"
 ```
 
 Ensure you replace the following values in the `.env` file:
 
-- `<API-Key>` with the API key from your [Infura dashboard](https://infura.io/dashboard).
+- `<YOUR-API-KEY>` with the API key from your [Infura dashboard](https://infura.io/dashboard).
 - `<Private-Key>` with the [private key of your account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
 :::danger

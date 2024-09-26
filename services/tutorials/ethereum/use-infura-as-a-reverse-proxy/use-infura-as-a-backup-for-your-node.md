@@ -100,14 +100,16 @@ To create the reverse proxy, create a text file named `Caddyfile` with the follo
 ```
 localhost:3000
 
-reverse_proxy https://localhost:9000 https://goerli.infura.io {
-  header_up Host {/v3/<YOUR_API_KEY>}
+reverse_proxy https://localhost:9000 https://sepolia.infura.io {
+  header_up Host {/v3/<YOUR-API-KEY>}
 }
 ```
 
-Ensure you replace `<YOUR_API_KEY>` with the API key for your Ethereum project.
+Ensure you replace `<YOUR-API-KEY>` with the API key for your Ethereum project.
 
-In this example, the reverse proxy retrieves information from `localhost:9000`, and redirects it to `localhost:3000`. If `localhost:9000` stops responding, Caddy will move on to retrieve information from the Infura Goerli endpoint. Using `header_up Host` allows you to include your API key to both the Goerli and localhost endpoints.
+In this example, the reverse proxy retrieves information from `localhost:9000`, and redirects it to `localhost:3000`.
+If `localhost:9000` stops responding, Caddy will move on to retrieve information from the Infura Sepolia endpoint.
+Using `header_up Host` allows you to include your API key to both the Sepolia and localhost endpoints.
 
 ### 6. Run the reverse proxy
 
@@ -125,7 +127,7 @@ In a new terminal window, make a curl request to `localhost`. The following exam
   <TabItem value="Example CURL request" label="Example CURL request" default>
 
 ```bash
-curl http://localhost:3000/v3/<YOUR_API_KEY> \
+curl http://localhost:3000/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
@@ -143,13 +145,13 @@ Reverse proxy success!
 
 The success message from `main.js` should display, because you've asked the reverse proxy to go to `localhost:9000` first.
 
-If you close the Node.js server and send the request again, you should get the result from the Infura Goerli node:
+If you close the Node.js server and send the request again, you should get the result from the Infura Sepolia node:
 
 <Tabs>
   <TabItem value="Example CURL request" label="Example CURL request" default>
 
 ```bash
-curl http://localhost:3000/v3/<YOUR_API_KEY> \
+curl http://localhost:3000/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
@@ -165,4 +167,4 @@ curl http://localhost:3000/v3/<YOUR_API_KEY> \
   </TabItem>
 </Tabs>
 
-The reverse proxy ignores the localhost node, since it's not functioning, and defaults to the backup Infura Goerli node!
+The reverse proxy ignores the localhost node, since it's not functioning, and falls back to the Infura Sepolia node.

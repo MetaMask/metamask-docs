@@ -46,11 +46,11 @@ Create a file called `retrieveBalance.js`. At the top of file, add the following
 ```javascript
 const { Web3 } = require("web3")
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR_API_KEY>")
+  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR-API-KEY>")
 )
 ```
 
-Make sure to replace `<YOUR_API_KEY>` with your Infura API key.
+Make sure to replace `<YOUR-API-KEY>` with your Infura API key.
 
 ### 4. Set the ABI
 
@@ -136,12 +136,12 @@ console.log(formattedResult)
 
 #### Complete code
 
-Here is the complete code for `retrieveBalance.js`. Before running it make sure you replace `<YOUR_API_KEY>` with your Infura API key.
+Here is the complete code for `retrieveBalance.js`. Before running it make sure you replace `<YOUR-API-KEY>` with your Infura API key.
 
 ```javascript
 const { Web3 } = require("web3")
 const web3 = new Web3(
-  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR_API_KEY>")
+  new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/<YOUR-API-KEY>")
 )
 
 const balanceOfABI = [
