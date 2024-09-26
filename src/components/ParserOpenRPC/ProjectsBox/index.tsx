@@ -5,20 +5,12 @@ import Select from "react-dropdown-select";
 import Button from "@site/src/components/Button";
 import styles from "./styles.module.css";
 import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
-import global from "@site/src/components/ParserOpenRPC/global.module.css";
 
 const LOGIN_FF = "mm-unified-login";
 
 const ProjectsBox = () => {
-  const projects = [
-    {
-      123: {
-        name: "test key",
-      }
-    }
-  ];
   const {
-    // projects,
+    projects,
     metaMaskAccount,
     walletLinked,
     metaMaskWalletIdConnectHandler,
@@ -72,7 +64,7 @@ const ProjectsBox = () => {
                   {state.values.map((item) => (
                     <div key={item.value}>
                       <div>{item.label}</div>
-                      <div>{item.value}</div>
+                      <div className={styles.selectDropdownValue}>{item.value}</div>
                     </div>
                   ))}
                 </div>
@@ -83,12 +75,12 @@ const ProjectsBox = () => {
                 <div className={styles.selectDropdown}>
                   {options.map((option) => (
                     <div
+                      className={styles.selectDropdownOption}
                       key={option.value}
-                      style={{ padding: "8px 16px" }}
                       onClick={() => methods.addItem(option)}
                     >
                       <div>{option.label}</div>
-                      <div>{option.value}</div>
+                      <div className={styles.selectDropdownValue}>{option.value}</div>
                     </div>
                   ))}
                 </div>
