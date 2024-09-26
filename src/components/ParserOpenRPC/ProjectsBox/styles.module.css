@@ -24,11 +24,7 @@ padding: 0 0 8px 0;
 .selectDropdown {
   border: 1px solid #848C96 !important;
   border-radius: 8px !important;
-  padding: 12px 16px 12px 16px !important;
   font-size: 16px !important;
-}
-
-.selectDropdown {
   padding: 4px 0 !important;
 }
 
