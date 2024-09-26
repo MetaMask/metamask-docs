@@ -54,7 +54,7 @@
     "jsonwebtoken": "^9.0.2",
     "launchdarkly-js-client-sdk": "^3.3.0",
     "lodash.debounce": "^4.0.8",
-    "lodash.isobject": "^3.0.2",
+    "lodash.isplainobject": "^4.0.6",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prettier": "^3.3.3",
     "prism-react-renderer": "^2.1.0",
