@@ -1,19 +1,10 @@
-:root[data-theme="dark"] {
+:root {
   --select-bg: #24272A;
   --select-value-color: #BBC0C5;
 }
 
-:root[data-theme="light"] {
-  --select-bg: #fff;
-  --select-value-color: #6a737d;
-}
-
 .selectWrapper {
   padding: 0 0 24px 0;
-}
-
-.selectWrapper .react-dropdown-select-dropdown {
-  border-radius: 8px !important;
 }
 
 .selectTitle {
@@ -33,6 +24,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--select-bg);
+  color: #ffffff;
 }
 
 .selectDropdown {
@@ -43,6 +35,9 @@
 .selectDropdownOption {
   background-color: var(--select-bg);
   padding: 8px 16px;
+  &:hover {
+    background-color: #000000;
+  }
 }
 
 .selectDropdownValue {
@@ -50,9 +45,12 @@
   color: var(--select-value-color);
 }
 
+.selectDropdownLabel {
+  color: #ffffff;
+}
+
 .connectButton {
   order: 100;
   margin-left: 12px;
-  text-wrap: nowrap;
   font-weight: 500;
 }

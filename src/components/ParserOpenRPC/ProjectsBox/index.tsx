@@ -3,7 +3,7 @@ import ldClient from "launchdarkly";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import Select from "react-dropdown-select";
 import Button from "@site/src/components/Button";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
 
 const LOGIN_FF = "mm-unified-login";
@@ -15,6 +15,7 @@ const ProjectsBox = () => {
     walletLinked,
     metaMaskWalletIdConnectHandler,
     walletLinkUrl,
+    setUserAPIKey,
   } = useContext(MetamaskProviderContext);
   const options = Object.keys(projects).map((v) => ({
     value: v,
@@ -25,6 +26,12 @@ const ProjectsBox = () => {
   );
   const [ldReady, setLdReady] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(false);
+  const [isWalletLinking, setIsWalletLinking] = useState(false);
+
+  const metaMaskWalletConnectionHandler = () => {
+    setIsWalletLinking(true);
+    metaMaskWalletIdConnectHandler();
+  }
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
@@ -41,8 +48,26 @@ const ProjectsBox = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentProject.length && options[0]) setCurrentProject([options[0]]);
+    if (!currentProject.length && options[0]) {
+      setCurrentProject([options[0]]);
+      setUserAPIKey(options[0].value);
+    }
   }, [projects]);
+
+  useEffect(() => {
+    if (options?.length > 0) {
+      setUserAPIKey(options[0].value);
+    }
+    if (!walletLinked) {
+      setUserAPIKey("");
+    }
+  }, [options.length, walletLinked]);
+
+  useEffect(() => {
+    if (walletLinked) {
+      setIsWalletLinking(false);
+    }
+  }, [walletLinked])
 
   return (
     ldReady &&
@@ -57,13 +82,16 @@ const ProjectsBox = () => {
             searchable={false}
             options={options}
             values={currentProject}
-            onChange={(value) => setCurrentProject(value)}
+            onChange={(value) => {
+              setCurrentProject(value);
+              setUserAPIKey(value[0].value);
+            }}
             contentRenderer={({ state }) => {
               return (
                 <div>
                   {state.values.map((item) => (
                     <div key={item.value}>
-                      <div>{item.label}</div>
+                      <div className={styles.selectDropdownLabel}>{item.label}</div>
                       <div className={styles.selectDropdownValue}>{item.value}</div>
                     </div>
                   ))}
@@ -79,7 +107,7 @@ const ProjectsBox = () => {
                       key={option.value}
                       onClick={() => methods.addItem(option)}
                     >
-                      <div>{option.label}</div>
+                      <div className={styles.selectDropdownLabel}>{option.label}</div>
                       <div className={styles.selectDropdownValue}>{option.value}</div>
                     </div>
                   ))}
@@ -92,13 +120,17 @@ const ProjectsBox = () => {
             {walletLinked === undefined && (
               <>
                 <div>
-                  Connect your MetaMask wallet to start sending requests to your
-                  Infura API keys.
+                  {isWalletLinking ?
+                    "Don’t close or exit this page. Please continue connecting on your extension." :
+                    "Connect your MetaMask wallet to start sending requests to your Infura API keys."
+                  }
                 </div>
                 <Button
                   thin
                   className={styles.connectButton}
-                  onClick={metaMaskWalletIdConnectHandler}
+                  onClick={metaMaskWalletConnectionHandler}
+                  textColor="light"
+                  isLoading={isWalletLinking}
                 >
                   Connect Wallet
                 </Button>

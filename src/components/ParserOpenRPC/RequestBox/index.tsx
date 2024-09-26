@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React, {useContext, useMemo} from "react";
 import clsx from "clsx";
 import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
+import {MetamaskProviderContext} from "@site/src/theme/Root";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -27,17 +28,17 @@ export default function RequestBox({
   submitRequest,
   isMetamaskNetwork = false,
 }: RequestBoxProps) {
-
+  const { userAPIKey } = useContext(MetamaskProviderContext);
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
     const NETWORK_URL = "https://linea-mainnet.infura.io";
-    const API_KEY = "<YOUR-API-KEY>";
+    const API_KEY = userAPIKey ? userAPIKey : "<YOUR-API-KEY>";
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
     return `curl ${NETWORK_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
-  }, [method, paramsData]);
+  }, [userAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
     return JSON.stringify(response, null, 2);

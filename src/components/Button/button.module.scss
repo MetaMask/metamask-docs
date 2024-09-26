@@ -96,6 +96,10 @@ a.button {
     white-space: nowrap;
   }
 
+  &.textLight {
+    color: #ffffff;
+  }
+
   .isLoading {
     animation: spinner-infinite 1.2s linear infinite;
   }
