@@ -232,15 +232,15 @@ export default App
 
 ## 3. Display the balance and transfer an ERC-20 token
 
-Now that you have set up the basics, let's go a step further and show how to display the balance of a specific ERC-20 token, such as STRK, and perform a transfer using the `WalletAccount` instance.
+After completing the basic setup, you can demonstrate how to display the balance of a specific ERC-20 token, for example STRK, and perform a transfer using the `WalletAccount` instance.
 
-### 3.1. Setting Up the Contract
+### 3.1. Set up the contract
 
-To interact with an ERC-20 contract, you'll need to create a contract instance from `starknet.js` using the `WalletAccount` instance. Assuming the ABI is loaded from a JSON file, here's how you would do it:
+To interact with an ERC-20 contract, you'll need to create a contract instance from `starknet.js` using the `WalletAccount` instance. Assuming the ABI (application binary interface) is loaded from a JSON file, the following code example demonstrates how to implement it:
 
 ```typescript
 import { Contract } from "starknet";
-import erc20Abi from "./erc20Abi.json"; // Assuming ABI is stored in this JSON file
+import erc20Abi from "./erc20Abi.json";
 
 const tokenAddress = "0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7";
 
@@ -249,7 +249,7 @@ const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
 
 ### 3.2. Fetch the token balance
 
-Once the contract is set up, you can call the `balanceOf` method to fetch the balance of the connected account:
+After the contract is set up, you can call the `balanceOf` method to fetch the balance of the connected account:
 
 ```typescript
 const balance = await erc20.balanceOf(walletAddress);
@@ -258,7 +258,7 @@ const formattedBalance = balance / Math.pow(10, 18);
 
 ### 3.3. Transfer tokens
 
-To transfer tokens, populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here"s how you can do that:
+To transfer tokens, us the `transfer` method call and then execute the transaction using the `WalletAccount`:
 
 ```typescript
 import { Call } from "starknet";
@@ -335,18 +335,14 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
 }
 ```
 
-### 3.5. ABI and contract address
-
-The ABI (Application Binary Interface) for the ERC-20 contract can be found on the Voyager Explorer.
-
-The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
-
 ## Next steps
 
-In this section, we've shown how to extend your dapp by displaying the balance of an ERC-20 token like ETH and performing a token transfer. By creating a Contract instance with the WalletAccount, you can easily interact with smart contracts, fetch token balances, and execute transactions, enabling more complex functionality in your dapp.
+You've set up a basic Starknet dApp and successfully added features to display an ERC-20 token balance and perform token transfers. Creating a contract instance using `WalletAccount` allows you to interact with smart contracts, retrieve token balances, and execute transactions, enabling more advanced functionality in your dapp.
+
+Now that you have configured your dapp, you can now manage your [accounts](../manage-starknet-accounts) and networks(../manage-starknet-networks), and explore interaction methods in the [API documentation](../../../reference/non-evm-apis/starknet-snap-api.md).
 
 ## Additional resources
 
+- [`get-starknet` official GitHub](https://github.com/starknet-io/get-starknet)
 - [Use `get-starknet` to connect to a wallet and create an account instance](https://starknetjs.com/docs/guides/walletAccount)
 - [Use account instance to show ERC20 balance and transfer](https://starknetjs.com/docs/guides/use_ERC20)
-- [get-starknet official GitHub](https://github.com/starknet-io/get-starknet)
