@@ -27,7 +27,7 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
-For example, to display a [`Box`](#box) (the [`panel`](./index.md#panel) function equivalent) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
+For example, to display a [`Box`](#box) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.jsx"
 import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
@@ -49,55 +49,6 @@ await snap.request({
 :::note
 JSX can only be used in `.jsx` or `.tsx` files.
 :::
-
-## Upgrade an existing Snap to use JSX
-
-If you have an existing Snap that uses the deprecated function-based custom UI library, follow these
-steps to upgrade it to use JSX:
-
-1. Upgrade dependencies in `packages/snap/package.json`:
-
-    - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
-    - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
-    - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
-   
-   Run `yarn install` to install the new versions.
-
-2. Update `packages/snap/.eslintrc.js`:
-
-    - Add a new section in `overrides` with the following configuration:
-      ```json
-      {
-        "files": ["**/*.ts", "**/*.tsx"],
-        "extends": ["@metamask/eslint-config-typescript"],
-        "rules": {
-          // This allows importing the `Text` JSX component.
-          "@typescript-eslint/no-shadow": [
-            "error",
-            {
-              "allow": ["Text"],
-            },
-          ],
-        },
-      }
-      ```
-    - Replace `["*.test.ts"]` with `["*.test.ts", "*.test.tsx"]`.
-
-3. Update `packages/snap/src/index.ts`, if it will have JSX:
-
-    - Rename the file to `index.tsx`.
-    - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`.
-
-4. Update `packages/snap/tsconfig.json`:
-
-    - Under `compilerOptions`, add:
-      ```json
-      "jsx": "react-jsx",
-      "jsxImportSource": "@metamask/snaps-sdk"
-      ```
-    - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`.
-
-5. Replace all custom UI in your code with JSX components, renaming the target files with the `.tsx` extension.
 
 ## Components
 
@@ -1000,3 +951,52 @@ await snap.request({
 ## User-defined components
 
 In addition to the components provided by the SDK, you can [define your own components](user-defined-components.md).
+
+## Upgrade a Snap to use JSX
+
+If you have a Snap that uses the deprecated function-based custom UI library, follow these
+steps to upgrade it to use JSX:
+
+1. Upgrade dependencies in `packages/snap/package.json`:
+
+    - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
+    - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
+    - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
+   
+   Run `yarn install` to install the new versions.
+
+2. Update `packages/snap/.eslintrc.js`:
+
+    - Add a new section in `overrides` with the following configuration:
+      ```json
+      {
+        "files": ["**/*.ts", "**/*.tsx"],
+        "extends": ["@metamask/eslint-config-typescript"],
+        "rules": {
+          // This allows importing the `Text` JSX component.
+          "@typescript-eslint/no-shadow": [
+            "error",
+            {
+              "allow": ["Text"],
+            },
+          ],
+        },
+      }
+      ```
+    - Replace `["*.test.ts"]` with `["*.test.ts", "*.test.tsx"]`.
+
+3. Update `packages/snap/src/index.ts`, if it will have JSX:
+
+    - Rename the file to `index.tsx`.
+    - Modify the `input` field in `packages/snap/snap.config.ts` to `src/index.tsx`.
+
+4. Update `packages/snap/tsconfig.json`:
+
+    - Under `compilerOptions`, add:
+      ```json
+      "jsx": "react-jsx",
+      "jsxImportSource": "@metamask/snaps-sdk"
+      ```
+    - Change the `include` property from `["**/*.ts"]` to `["**/*.ts", "**/*.tsx"]`.
+
+5. Replace all custom UI in your code with JSX components, renaming the target files with the `.tsx` extension.
