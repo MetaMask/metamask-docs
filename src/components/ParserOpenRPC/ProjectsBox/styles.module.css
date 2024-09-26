@@ -17,8 +17,7 @@ padding: 0 0 8px 0;
   font-size: 16px !important;
   display: flex;
   justify-content: center;
-  flex-direction: grid;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
 }
 

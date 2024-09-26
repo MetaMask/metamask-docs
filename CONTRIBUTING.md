@@ -75,7 +75,7 @@ To contribute changes:
    >   `developer-tools` directories.
    > - If you add a new documentation page, edit `wallet-sidebar.js`, `snaps-sidebar.js`,
    >   `services-sidebar.js`, or `dashboard-sidebar.js` to add the page to the
-   >   [sidebar](https://docs-template.consensys.net/contribute/configure-docusaurus#sidebar).
+   >   [sidebar](https://docs-template.consensys.io/create/configure-docusaurus#sidebar).
    > - If you delete, rename, or move a documentation file, add a
    >   [redirect](https://vercel.com/docs/edge-network/redirects#configuration-redirects).
    > - See additional instructions for [updating the interactive API reference](#update-the-interactive-api-reference).
