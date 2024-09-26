@@ -98,13 +98,13 @@ After it is connected, you can create a new `WalletAccount` instance using the `
  This allows interaction with the Starknet network using the connected wallet.
 
 ```typescript
-import { WalletAccount } from 'starknet'; 
+import { WalletAccount } from "starknet"; 
 
 async function handleConnect(options?: ConnectOptions) {
   const res = await connect(options);
-  const myFrontendProviderUrl = 'https://free-rpc.nethermind.io/sepolia-juno/v0_7';
+  const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
   const newWalletAccount = new WalletAccount({ nodeUrl: myFrontendProviderUrl }, res);
-  // You can now use newWalletAccount to interact with StarkNet
+  // You can now use newWalletAccount to interact with Starknet
 }
 ```
 
@@ -151,7 +151,7 @@ import {
   connect,
   disconnect,
 } from "get-starknet"
-import { WalletAccount } from 'starknet'; // v6.10.0 min
+import { WalletAccount } from "starknet"; // v6.10.0 min
 import { useState } from "react"
 
 function App() {
@@ -166,7 +166,7 @@ function App() {
     setWalletAddress(res?.account?.address || "")
     setWalletIcon(res?.icon || "")
     if (res) {
-      const myFrontendProviderUrl = 'https://free-rpc.nethermind.io/sepolia-juno/v0_7';
+      const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
       const newWalletAccount = new WalletAccount({ nodeUrl: myFrontendProviderUrl }, res)
       setWalletAccount(newWalletAccount)
     }
@@ -243,10 +243,9 @@ To interact with an ERC-20 contract, you'll need to create a contract instance f
 
 ```typescript
 import { Contract } from "starknet";
-import erc20Abi from './erc20Abi.json'; // Assuming ABI is stored in this JSON file
+import erc20Abi from "./erc20Abi.json"; // Assuming ABI is stored in this JSON file
 
-// Assuming you have already created `walletAccount`
-const tokenAddress = "0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7"; // STRK contract address
+const tokenAddress = "0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7";
 
 const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
 ```
@@ -257,22 +256,21 @@ Once the contract is set up, you can call the `balanceOf` method to fetch the ba
 
 ```typescript
 const balance = await erc20.balanceOf(walletAddress);
-const formattedBalance = balance / Math.pow(10, 18); // Adjust for decimals
+const formattedBalance = balance / Math.pow(10, 18);
 ```
 
 ### 3.3. Transfer tokens
 
-To transfer tokens, you will populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here's how you can do that:
+To transfer tokens, you will populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here"s how you can do that:
 
 ```typescript
 import { Call } from "starknet";
 
 // Define the transfer parameters
-const recipientAddress = '0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1';
-const amountToTransfer = 1n * 10n ** 18n; // 1 token (assuming 18 decimals)
+const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
+const amountToTransfer = 1n * 10n ** 18n; // 1 token (assuming 18 decimals).
 
-// Populate the transfer call
-const transferCall: Call = erc20.populate('transfer', {
+const transferCall: Call = erc20.populate("transfer", {
   recipient: recipientAddress,
   amount: amountToTransfer,
 });
@@ -280,18 +278,18 @@ const transferCall: Call = erc20.populate('transfer', {
 // Execute the transfer
 const { transaction_hash: transferTxHash } = await walletAccount.execute(transferCall);
 
-// Wait for the transaction to be accepted on StarkNet
+// Wait for the transaction to be accepted on Starknet
 await walletAccount.waitForTransaction(transferTxHash);
 ```
 
 ### 3.4. Full implementation
 
-Here's how you can integrate both balance checking and transferring into your component:
+Here"s how you can integrate both balance checking and transferring into your component:
 
 ```typescript
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { Contract } from "starknet";
-import erc20Abi from './erc20Abi.json'; // Assuming ABI is stored in this JSON file
+import erc20Abi from "./erc20Abi.json"; // Assuming ABI is stored in this JSON file
 
 function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
   const [balance, setBalance] = useState(null);
@@ -312,11 +310,11 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
   async function handleTransfer() {
     if (walletAccount) {
       const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
-      const recipientAddress = '0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1';
+      const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
       const amountToTransfer = 1n * 10n ** 18n; // 1 token
 
       // Populate and execute transfer
-      const transferCall: Call = erc20.populate('transfer', {
+      const transferCall: Call = erc20.populate("transfer", {
         recipient: recipientAddress,
         amount: amountToTransfer,
       });

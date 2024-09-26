@@ -32,39 +32,39 @@ Detect the Starknet network a user is currently connected to using the following
 
   ```javascript
   const checkCurrentNetwork = async () => {
-    if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+    if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
       try {
         const response = await window.ethereum.request({
-          method: 'wallet_invokeSnap',
+          method: "wallet_invokeSnap",
           params: {
-            snapId: 'npm:@consensys/starknet-snap',
+            snapId: "npm:@consensys/starknet-snap",
             request: {
-              method: 'starknet_getChainId'
+              method: "starknet_getChainId"
             }
           }
         });
         
         let networkName;
         switch (response) {
-          case '0x534e5f4d41494e':
-            networkName = 'Mainnet';
+          case "0x534e5f4d41494e":
+            networkName = "Mainnet";
             break;
-          case '0x534e5f5345504f4c4941':
-            networkName = 'Sepolia Testnet';
+          case "0x534e5f5345504f4c4941":
+            networkName = "Sepolia Testnet";
             break;
           default:
-            networkName = 'Unknown Network';
+            networkName = "Unknown Network";
         }
         
         console.log("Currently connected to:", networkName);
         return response;  // Returns the chain ID.
       } catch (error) {
-        console.error('Error getting current Starknet network:', error);
+        console.error("Error getting current Starknet network:", error);
         throw error;
       }
     } else {
-      console.error('MetaMask not detected or Snaps not supported');
-      throw new Error('MetaMask not detected or Snaps not supported');
+      console.error("MetaMask not detected or Snaps not supported");
+      throw new Error("MetaMask not detected or Snaps not supported");
     }
   };
 
@@ -106,32 +106,32 @@ Prompt users to switch between networks by setting the
 
   ```javascript
   const switchStarknetNetwork = async (chainId) => {
-    if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+    if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
       try {
         await window.ethereum.request({
-          method: 'wallet_invokeSnap',
+          method: "wallet_invokeSnap",
           params: {
-            snapId: 'npm:@consensys/starknet-snap',
+            snapId: "npm:@consensys/starknet-snap",
             request: {
-              method: 'wallet_switchStarknetChain',
+              method: "wallet_switchStarknetChain",
               params: { chainId: chainId }
             }
           }
         });
         console.log(`Switched to Starknet network with chainId: ${chainId}`);
       } catch (error) {
-        console.error('Error switching Starknet network:', error);
+        console.error("Error switching Starknet network:", error);
         throw error;
       }
     } else {
-      console.error('MetaMask not detected or Snaps not supported');
-      throw new Error('MetaMask not detected or Snaps not supported');
+      console.error("MetaMask not detected or Snaps not supported");
+      throw new Error("MetaMask not detected or Snaps not supported");
     }
   };
 
   // Usage example:
-  // switchStarknetNetwork('0x534e5f5345504f4c4941')  // Switch to Sepolia testnet
-  // switchStarknetNetwork('0x534e5f4d41494e')        // Switch to Mainnet
+  // switchStarknetNetwork("0x534e5f5345504f4c4941")  // Switch to Sepolia testnet
+  // switchStarknetNetwork("0x534e5f4d41494e")        // Switch to Mainnet
   ```
 
   </TabItem> 

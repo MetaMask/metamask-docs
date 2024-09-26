@@ -39,26 +39,26 @@ After an account is connected, you can sign a transaction using the `wallet.acco
   ```typescript
   const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata) => {
     try {
-      if (typeof window.ethereum === 'undefined' || !window.ethereum.isMetaMask) {
-        throw new Error('MetaMask not detected or Snaps not supported');
+      if (typeof window.ethereum === "undefined" || !window.ethereum.isMetaMask) {
+        throw new Error("MetaMask not detected or Snaps not supported");
       }
 
       // Connect to the Starknet Snap if it's not already connected.
       await window.ethereum.request({
-        method: 'wallet_requestSnaps',
+        method: "wallet_requestSnaps",
         params: {
-          'npm:@consensys/starknet-snap': {}
+          "npm:@consensys/starknet-snap": {}
         }
       });
-      console.log('Starknet Snap connected');
+      console.log("Starknet Snap connected");
 
       // Use the wallet_invokeSnap method to sign the transaction.
       const response = await window.ethereum.request({
-        method: 'wallet_invokeSnap',
+        method: "wallet_invokeSnap",
         params: {
-          snapId: 'npm:@consensys/starknet-snap',
+          snapId: "npm:@consensys/starknet-snap",
           request: {
-            method: 'starkNet_signTransaction',
+            method: "starkNet_signTransaction",
             params: {
               contractAddress,  // The address of the contract.
               entrypoint,       // The function to call in the contract.
@@ -77,13 +77,13 @@ After an account is connected, you can sign a transaction using the `wallet.acco
   };
 
   // Example usage
-  const contractAddress = '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4';
-  const entrypoint = 'transfer';
-  const calldata = ['0xRecipientAddress', '1000']; // Example parameters
+  const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
+  const entrypoint = "transfer";
+  const calldata = ["0xRecipientAddress", "1000"]; // Example parameters
 
   signStarknetTransactionWithSnap(contractAddress, entrypoint, calldata)
-    .then(result => console.log('Signed transaction result:', result))
-    .catch(error => console.error('Transaction error:', error));
+    .then(result => console.log("Signed transaction result:", result))
+    .catch(error => console.error("Transaction error:", error));
   ```
  
   </TabItem> 

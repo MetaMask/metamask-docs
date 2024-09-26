@@ -46,15 +46,15 @@ The following example displays the account address:
   
   ```javascript
   const showAccountInfo = async () => {
-    if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+    if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
       try {
         // Invoke the Starknet Snap to get account information.
         const response = await window.ethereum.request({
-          method: 'wallet_invokeSnap',
+          method: "wallet_invokeSnap",
           params: {
-            snapId: 'npm:@starknet-snap/snap', 
+            snapId: "npm:@starknet-snap/snap", 
             request: {
-              method: 'starknet_getAccounts'
+              method: "starknet_getAccounts"
             }
           }
         });
@@ -204,7 +204,7 @@ connect or disconnect the account.
         ) : (
           <button onClick={disconnectFromSnap}>Disconnect</button>
         )}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     );
   }
@@ -253,7 +253,7 @@ const invokeStarknetContract = async () => {
 
   ```javascript
   const invokeStarknetContract = async () => {
-  if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+  if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
     try {
       const contractAddress = "0xYourContractAddress";  // Replace with your contract address.
       const entrypoint = "function_name";  // The function you want to call.
@@ -352,20 +352,20 @@ To handle account changes and disconnections, you can use event listeners provid
   ```javascript
   import React, { useEffect, useState } from "react";
 
-  const STARKNET_SNAP_ID = 'npm:@starknet-snap/snap';
+  const STARKNET_SNAP_ID = "npm:@starknet-snap/snap";
 
   function AccountChangeHandler() {
     const [account, setAccount] = useState<string | null>(null);
 
     const fetchAccount = async () => {
-      if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+      if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
         try {
           const response = await window.ethereum.request({
-            method: 'wallet_invokeSnap',
+            method: "wallet_invokeSnap",
             params: {
               snapId: STARKNET_SNAP_ID,
               request: {
-                method: 'starknet_getAccounts'
+                method: "starknet_getAccounts"
               }
             }
           });
