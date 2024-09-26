@@ -22,6 +22,7 @@ interface DetailsBoxProps {
   components: SchemaComponents;
   result: any;
   tags: TagItem[];
+  extraContent?: JSX.Element;
 }
 
 export default function DetailsBox({
@@ -31,6 +32,7 @@ export default function DetailsBox({
   components,
   result,
   tags,
+  extraContent,
 }: DetailsBoxProps) {
   return (
     <>
@@ -45,11 +47,12 @@ export default function DetailsBox({
       )}
       <Heading as="h1">{method}</Heading>
       <MDContent content={description} />
+      {extraContent && <div className="padding-top--lg">{extraContent}</div>}
       <Heading
         as="h2"
         className={clsx(
           styles.secondaryHeading,
-          "padding-top--lg padding-bottom--md"
+          "padding-top--lg padding-bottom--md",
         )}
       >
         Parameters
@@ -64,7 +67,7 @@ export default function DetailsBox({
         className={clsx(
           styles.secondaryHeading,
           styles.borderBottomLine,
-          "padding-top--lg padding-vert--md"
+          "padding-top--lg padding-vert--md",
         )}
       >
         Returns

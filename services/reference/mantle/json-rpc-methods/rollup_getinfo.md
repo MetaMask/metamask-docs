@@ -28,7 +28,7 @@ Node information object:
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -40,6 +40,13 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "rollup_getInfo", "params": [], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS" label="WSS" default>
+
+```bash
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "rollup_getInfo", "params": [], "id": 1}'
 ```
 
   </TabItem>

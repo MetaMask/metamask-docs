@@ -39,9 +39,7 @@ export const ModalDrawer = ({
         showModal && styles.modalContainerOpen
       )}
     >
-      <div
-        className={styles.modalHeader}
-      >
+      <div className={styles.modalHeader}>
         <div className={styles.modalHeaderLabels}>
           <span className={styles.modalTitle}>{title}</span>
           {headerLabel ? (

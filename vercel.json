@@ -403,6 +403,10 @@
       "destination": "/snaps/features/custom-ui/"
     },
     {
+      "source": "/snaps/features/custom-ui/with-jsx/",
+      "destination": "/snaps/features/custom-ui/"
+    },
+    {
       "source": "/snaps/how-to/localize-a-snap/",
       "destination": "/snaps/features/localization/"
     },

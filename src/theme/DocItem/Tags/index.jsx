@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { ThemeClassNames } from "@docusaurus/theme-common";
-import { useDoc } from "@docusaurus/theme-common/internal";
+import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import TagsListInline from "@theme/TagsListInline";
 
 function TagsRow(props) {
@@ -9,7 +9,7 @@ function TagsRow(props) {
     <div
       className={clsx(
         ThemeClassNames.docs.docFooterTagsRow,
-        "row margin-bottom--sm"
+        "row margin-bottom--sm",
       )}
     >
       <div className="col">
@@ -28,7 +28,7 @@ export default function DocItemTags() {
       className={clsx(
         ThemeClassNames.docs.docFooter,
         "docusaurus-mt-lg",
-        "margin-top--sm"
+        "margin-top--sm",
       )}
     >
       {canDisplayTagsRow && <TagsRow tags={tags} />}

@@ -4,6 +4,7 @@ import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
+import { Tooltip } from "@site/src/components/Tooltip";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -13,6 +14,9 @@ interface RequestBoxProps {
   paramsData: any;
   openModal: () => void;
   submitRequest: () => void;
+  isMetamaskNetwork?: boolean;
+  defExampleResponse?: any;
+  resetResponseHandle: () => void;
 }
 
 export default function RequestBox({
@@ -23,15 +27,51 @@ export default function RequestBox({
   paramsData,
   openModal,
   submitRequest,
+  isMetamaskNetwork = false,
+  defExampleResponse,
+  resetResponseHandle,
 }: RequestBoxProps) {
+
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
-    return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
+    const preparedShellParams = JSON.stringify(paramsData);
+    const NETWORK_URL = "https://linea-mainnet.infura.io";
+    const API_KEY = "<YOUR-API-KEY>";
+    if (isMetamaskNetwork) {
+      return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
+    }
+    return `curl ${NETWORK_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    return JSON.stringify(response, null, 2);
-  }, [response]);
+    if (defExampleResponse && response === undefined) {
+      return JSON.stringify(
+        defExampleResponse === "null" ? null : defExampleResponse,
+        null,
+        2
+      );
+    }
+    if (response !== undefined) {
+      return JSON.stringify(response, null, 2);
+    }
+    return false
+  }, [response, defExampleResponse]);
+
+  const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
+  const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
+    !isMetamaskInstalled :
+    false;
+
+  const runRequestButton = (
+    <button
+      className={global.primaryBtn}
+      disabled={isRunAndCustomizeRequestDisabled}
+      onClick={submitRequest}
+      data-test-id="run-request"
+    >
+      Run request
+    </button>
+  );
 
   return (
     <>
@@ -40,7 +80,10 @@ export default function RequestBox({
           <strong className={styles.cardHeading}>Request</strong>
         </div>
         <div className={styles.codeWrapper}>
-          <CodeBlock language="javascript" className="margin-bottom--none">
+          <CodeBlock
+            language={isMetamaskNetwork ? "javascript" : "shell"}
+            className="margin-bottom--none"
+          >
             {exampleRequest}
           </CodeBlock>
         </div>
@@ -48,27 +91,38 @@ export default function RequestBox({
           {params.length > 0 && (
             <button
               className={clsx(global.linkBtn, "margin-right--md")}
-              disabled={!isMetamaskInstalled}
+              disabled={isRunAndCustomizeRequestDisabled}
               onClick={openModal}
               data-test-id="customize-request"
             >
               Customize request
             </button>
           )}
-          <button
-            className={global.primaryBtn}
-            disabled={!isMetamaskInstalled}
-            onClick={submitRequest}
-            data-test-id="run-request"
-          >
-            Run request
-          </button>
+          {
+            isRunAndCustomizeRequestDisabled ?
+              (<Tooltip message="Before you can run or customize this request, please connect your MetaMask wallet first.">
+                {runRequestButton}
+              </Tooltip>) :
+              runRequestButton
+          }
         </div>
       </div>
-      {response !== undefined && (
+      {exampleResponse && (
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
-            <strong className={styles.cardHeading}>Response</strong>
+            <strong className={styles.cardHeading}>
+              {defExampleResponse && response === undefined ? "Example response" : "Response"}
+            </strong>
+            {defExampleResponse && response !== undefined && (
+              <Tooltip message="Reset response">
+                <button
+                  className={styles.resetResponseBtn}
+                  onClick={resetResponseHandle}
+                >
+                  <img src="/img/icons/reset-icon.svg" />
+                </button>
+              </Tooltip>
+            )}
           </div>
           <div>
             <CodeBlock language="javascript" className={clsx(styles.responseBlock, "margin-bottom--none")}>

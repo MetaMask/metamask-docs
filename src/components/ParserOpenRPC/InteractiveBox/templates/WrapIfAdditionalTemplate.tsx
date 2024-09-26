@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils';
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import  * as isObject  from "lodash.isobject"
+import  * as isPlainObject  from "lodash.isplainobject"
 
 export const WrapIfAdditionalTemplate = (props) => {
   const {
@@ -26,7 +26,7 @@ export const WrapIfAdditionalTemplate = (props) => {
   const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } = useContext(ParserOpenRPCContext);
   const { currentSchemaId, setCurrentSchemaId } = formContext;
   const onRemoveButtonClick = () => {
-    if (isObject(formData) && Object.keys(formData).length === 0) {
+    if (isPlainObject(formData) && Object.keys(formData).length === 0) {
       setIsComplexTypeView(false);
       setDrawerLabel(null);
     }

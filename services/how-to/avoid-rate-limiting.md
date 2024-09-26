@@ -5,31 +5,34 @@ sidebar_position: 1
 
 # Avoid rate limiting
 
-Infura applies rate limiting account-wide after exceeding the daily request limit or the number of requests per second.
-
-For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
-
-- Source IP address.
-- JSON-RPC method.
-- API key.
-
-Infura is constantly adjusting rate limits based on overall usage and possible abuse.
-
-Typically only aggressive use should experience rate limiting.
-
-Customers running into rate limits are encouraged to [contact us](https://www.infura.io/contact). We'll work with you to determine how best to avoid rate limits.
+Infura applies rate limiting account-wide after exceeding the [daily credit limit](../get-started/pricing/index.md)
+or the number of credits per second (throughput).
 
 :::info
 
-Requests for archive data are more expensive and are therefore subject to different rate limits. [Find out more](../concepts/archive-data.md#rate-limits).
+The credit pricing model replaces request-based billing for free-tier (Core) customers. Customers on
+Developer and Team plans will be transitioned to the credit model on September 30, 2024.
+
+**Existing customers on Growth and Custom plans will remain on request-based billing**.
 
 :::
 
+For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
+
+The throughput of an an account will be throttled once the daily credit limit is reached. Credit
+quota limits will be reset everyday at 00:00 UTC for all customers.
+
+## Rate limit implications
+
+Daily credit quota limits apply after reaching your daily credit allowance:
+
+- Once you reach your daily request limit, you can still make further requests, but throughput
+    will be throttled.
+- The WebSocket service will sever connections.
+
 ### Notice rate limiting behavior?
 
-When you're rate limited, your JSON-RPC responses have HTTP status code `429.`
-
-They also contain a JSON-RPC error response with the reason for the rate limit. For example, if you use all the allowed daily requests:
+You'll receive a JSON response with an HTTP status code `429` if you reach your credits per second limits:
 
 ```json
 {
@@ -42,7 +45,8 @@ They also contain a JSON-RPC error response with the reason for the rate limit. 
 }
 ```
 
-Or if you submit a higher number of requests per second than the maximum allowed limit:
+Or if you submit a request with a higher number of credits per second throughput than the maximum
+allowed limit:
 
 ```json
 {
@@ -69,7 +73,8 @@ The `data` array contains three fields related to rate limits:
 
 :::info
 
-The value for `allowed_rps` changes depending on overall network conditions; therefore consider the value for `current_rps` valid and up-to-date.
+The value for `allowed_rps` changes depending on overall network conditions; therefore consider the value
+for `current_rps` valid and up-to-date.
 
 :::
 
@@ -79,13 +84,16 @@ We recommend pausing JSON-RPC activity for the time value in `backoff_seconds`.
 
 If you're consistently rate limited, consider these workarounds:
 
-- **Cache Ethereum data locally.** Barring rare deep reorganizations of the chain, blocks more than a couple of blocks below the head of the chain can be cached indefinitely. Ask for the data once then keep it locally.
-- **Limit RPCs at dapp startup.** Likewise, limit the number of RPCs your dapp calls immediately at startup. Only request data as the user accesses that portion of the dapp, and cache anything from older blocks for next time.
-- **Don't poll Infura in a tight loop.** New blocks come roughly every 15 seconds, so requesting new data at a faster rate usually doesn't make sense. Consider using `eth_subscribe` to be notified when new blocks are available.
+- **Cache Ethereum data locally.** Barring rare deep reorganizations of the chain, blocks more than a
+    couple of blocks below the head of the chain can be cached indefinitely. Ask for the data once then
+    keep it locally.
+- **Limit RPCs at dapp startup.** Likewise, limit the number of RPCs your dapp calls immediately
+    at startup. Only request data as the user accesses that portion of the dapp, and cache anything
+    from older blocks for next time.
+- **Don't poll Infura in a tight loop.** New blocks come roughly every 15 seconds, so requesting new
+    data at a faster rate usually doesn't make sense. Consider using `eth_subscribe` to be notified
+    when new blocks are available.
 
-You can have Infura notify you when you're near your daily limit by selecting **Email Notifications** the **Accounts** tab
-of the Infura **Settings**. Infura sends emails when your daily requests reach 75%, 85%, and 100% of the allowed limit.
-
-**Example email**:
-
-![Example email](../images/emailexample.png)
+You can have Infura notify you when you're near your daily daily credit limit by selecting
+**Email Notifications** in the **Accounts** page of the Infura **Settings**. Infura sends emails
+when your daily credits reach 75%, 85%, and 100% of the allowed limit.

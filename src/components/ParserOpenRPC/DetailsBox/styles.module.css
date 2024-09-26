@@ -23,7 +23,7 @@
 }
 
 .paramItemWrapper:not(:first-child) {
-  border-top: 1px solid #848C96;
+  border-top: 1px solid #848c96;
 }
 
 .borderTopLine {
