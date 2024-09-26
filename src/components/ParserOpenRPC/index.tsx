@@ -18,7 +18,7 @@ import {
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { REF_PATH } from "@site/src/lib/constants";
+import { LINEA_REQUEST_URL, REF_PATH } from "@site/src/lib/constants";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -168,8 +168,7 @@ export default function ParserOpenRPC({
         setReqResult(e);
       }
     } else {
-      const NETWORK_URL = "https://linea-mainnet.infura.io";
-      const URL = `${NETWORK_URL}/v3/${userAPIKey}`;
+      const URL = `${LINEA_REQUEST_URL}/v3/${userAPIKey}`;
       let params = {
         method: "POST",
         "Content-Type": "application/json",
