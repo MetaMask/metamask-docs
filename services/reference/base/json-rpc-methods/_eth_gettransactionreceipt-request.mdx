@@ -12,4 +12,11 @@ curl https://base-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://base-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getTransactionReceipt", "params": ["0xbb3a336e3f823ec18197f1e13ee875700f08f03e2cab75f0d0b118dabb44cba0"], "id": 1}'
+```
+
+  </TabItem>
 </Tabs>

@@ -52,14 +52,14 @@ import time
 Connect to the Infura endpoint and the address of the account:
 
 ```python
-infura_url = "https://mainnet.infura.io/v3/<YOUR_API_KEY"
-account = "<YOUR_PUBLIC_ADDRESS>"
+infura_url = "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
+account = "<YOUR-PUBLIC-ADDRESS>"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 ```
 
 :::warning
 
-Replace `<YOUR_API_KEY>` with your Infura API key and `<YOUR_PUBLIC_ADDRESS>` with the Ethereum account you want to monitor.
+Replace `<YOUR-API-KEY>` with your Infura API key and `<YOUR-PUBLIC-ADDRESS>` with the Ethereum account you want to monitor.
 
 :::
 
@@ -70,7 +70,7 @@ Create a function to check new transactions for the account defined in [step 3](
 ```python
 def watch():
   while True:
-    block = web3.eth.get_block('latest')
+    block = web3.eth.get_block("latest")
     print("Searching in block " + str(block.number))
 
     if block and block.transactions:
@@ -83,7 +83,7 @@ def watch():
             print({
               "hash": tx_hash,
               "from": tx["from"],
-              "value": web3.fromWei(tx["value"], 'ether')
+              "value": web3.fromWei(tx["value"], "ether")
             })
     time.sleep(5)
 
@@ -143,8 +143,8 @@ Transaction found in block 15019035 :
 from web3 import Web3
 import time
 
-infura_url = "https://mainnet.infura.io/v3/<YOUR_API_KEY>"
-account = "<YOUR_PUBLIC_ADDRESS>"
+infura_url = "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
+account = "<YOUR-PUBLIC-ADDRESS>"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 def confirmations(tx_hash):

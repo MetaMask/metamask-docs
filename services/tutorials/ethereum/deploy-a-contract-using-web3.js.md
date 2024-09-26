@@ -81,13 +81,13 @@ Create a `.env` file in your project directory to store the project and Ethereum
 
 ```
 ETHEREUM_NETWORK = "sepolia"
-INFURA_API_KEY = "<Your-API-Key>"
-SIGNER_PRIVATE_KEY = "<Your-Private-Key>"
+INFURA_API_KEY = "<YOUR-API-KEY>"
+SIGNER_PRIVATE_KEY = "<YOUR-PRIVATE-KEY>"
 ```
 
 Ensure you replace the following values in the `.env` file:
 
-- `<Your-API-Key>` with the API key of the Ethereum project.
+- `<YOUR-API-KEY>` with the API key of the Ethereum project.
 - `<Private-Key>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 - If using a network other than Sepolia, ensure you update `ETHEREUM_NETWORK` with the network name.
 
@@ -238,8 +238,8 @@ Update the .`env` file in the working directory to include the contract address.
 
 ```
 ETHEREUM_NETWORK = "sepolia"
-INFURA_API_KEY = "<Your-API-Key>"
-SIGNER_PRIVATE_KEY = "<Your-Private-Key>"
+INFURA_API_KEY = "<YOUR-API-KEY>"
+SIGNER_PRIVATE_KEY = "<YOUR-PRIVATE-KEY>"
 DEMO_CONTRACT = "<Contract_Address>"
 ```
 
