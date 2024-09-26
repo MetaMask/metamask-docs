@@ -11,19 +11,29 @@
     cancel-in-progress: true
   
   jobs:
-    linkCheck:
-      name: Run link check
+    linkCheckMdx:
+      name: Run link check on .mdx files
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          file-extensions: [".md", ".mdx"]
-          check-modified-files-only: [no]
       permissions:
         contents: read
       steps:
         - uses: actions/checkout@v4
-        - name: LinkCheck
+        - name: LinkCheck mdx files
           uses: ConsenSys/docs-gha/linkcheck@main
           with:
-              FILE_EXTENSION: ${{ matrix.file-extensions }}
-              MODIFIED_FILES_ONLY: ${{ matrix.check-modified-files-only }}
+              FILE_EXTENSION: mdx
+              MODIFIED_FILES_ONLY: no
+    linkCheckMd:
+      needs: linkCheckMdx
+      name: Run link check on .md files
+      if: always()
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+      steps:
+        - uses: actions/checkout@v4
+        - name: LinkCheck md files
+          uses: ConsenSys/docs-gha/linkcheck@main
+          with:
+              FILE_EXTENSION: md
+              MODIFIED_FILES_ONLY: no
