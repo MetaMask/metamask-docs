@@ -18,6 +18,7 @@ import {
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
+import { REF_PATH } from "@site/src/lib/constants";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -36,8 +37,6 @@ interface ParserOpenRPCContextProps {
 export const ParserOpenRPCContext =
   createContext<ParserOpenRPCContextProps | null>(null);
 
-const REF_PATH = "/wallet/reference/new-reference";
-
 export default function ParserOpenRPC({
   network,
   method,
@@ -52,8 +51,9 @@ export default function ParserOpenRPC({
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { metaMaskAccount, metaMaskProvider } =
-    useContext(MetamaskProviderContext);
+  const { metaMaskAccount, metaMaskProvider } = useContext(
+    MetamaskProviderContext
+  );
   const { colorMode } = useColorMode();
   const openModal = () => {
     setModalOpen(true);

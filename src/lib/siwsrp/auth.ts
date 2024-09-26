@@ -10,7 +10,7 @@ type HydraEnv = {
 };
 
 const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
-let VERCEL_ENV = 'development'
+let VERCEL_ENV: string
 export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
 export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
@@ -18,19 +18,19 @@ export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
 export const getHydraEnv = (): HydraEnv => {
   const platform = Platform.INFURA;
 
-  // if (VERCEL_ENV === "production") {
+  if (VERCEL_ENV === "production") {
     return {
       ...getEnvUrls(Env.PRD),
       env: Env.PRD,
       platform,
     };
-  // } else {
-  //   return {
-  //     ...getEnvUrls(Env.DEV),
-  //     env: Env.DEV,
-  //     platform,
-  //   };
-  // }
+  } else {
+    return {
+      ...getEnvUrls(Env.DEV),
+      env: Env.DEV,
+      platform,
+    };
+  }
 };
 
 const storage: SDK.AuthStorageOptions = {
@@ -57,6 +57,7 @@ export const auth = new JwtBearerAuth(
 export const authenticateAndAuthorize = async (env: string) => {
   let accessToken: string, userProfile: SDK.UserProfile;
   VERCEL_ENV = env;
+  console.log(VERCEL_ENV)
   try {
     await auth.connectSnap();
     accessToken = await auth.getAccessToken();

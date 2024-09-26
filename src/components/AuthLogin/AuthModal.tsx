@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Modal from "react-modal";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
@@ -130,15 +131,20 @@ const ConnectionErrorModal = ({
   );
 };
 
-const AuthModal = ({
-  open,
-  setOpen,
-  step,
-  setStep,
-}: AuthModalProps) => {
+const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
-  const { sdk, setWalletLinked, setWalletLinkUrl, metaMaskDisconnect, setProjects, setMetaMaskAccount, setMetaMaskProvider } = useContext(MetamaskProviderContext);
+  const {
+    sdk,
+    setWalletLinked,
+    setWalletLinkUrl,
+    metaMaskDisconnect,
+    setProjects,
+    setMetaMaskAccount,
+    setMetaMaskProvider,
+  } = useContext(MetamaskProviderContext);
+  const location = useLocation();
+  const { pathname } = location;
 
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING);
@@ -155,10 +161,12 @@ const AuthModal = ({
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
       }
-      
+
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
-      const { accessToken, userProfile } = await authenticateAndAuthorize(VERCEL_ENV as string);
+      const { accessToken, userProfile } = await authenticateAndAuthorize(
+        VERCEL_ENV as string
+      );
 
       const loginResponse = await (
         await fetch(
@@ -168,7 +176,7 @@ const AuthModal = ({
             headers: {
               ...REQUEST_PARAMS().headers,
               hydra_token: accessToken,
-              token: 'true',
+              token: "true",
             },
             body: JSON.stringify({
               profileId: userProfile.profileId,
@@ -189,7 +197,7 @@ const AuthModal = ({
             step: data.step,
             mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
-            token: true
+            token: true,
           })
         ).toString("base64");
 
@@ -239,8 +247,13 @@ const AuthModal = ({
       setProjects(projects);
       setOpen(false);
     } catch (e: any) {
-      setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
-      setOpen(true);
+      if (pathname.startsWith('/wallet/reference')) {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
+        setOpen(true);
+      } else {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+        setOpen(true);
+      }
     }
   };
 

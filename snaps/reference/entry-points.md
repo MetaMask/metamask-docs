@@ -649,11 +649,12 @@ To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, 
 - `id` - The ID of the interface being acted on.
 - `event` - An event object containing:
   - `type` - The type of the event.
-    Possible values are `ButtonClickEvent`, `FormSubmitEvent`, or `InputChangeEvent`.
+    Possible values are `ButtonClickEvent`, `FormSubmitEvent`, `InputChangeEvent`, and `FileInputEvent`.
     These enums are exported from the `@metamask/snaps-sdk` module.
   - `name` - The name of the component that fired the event.
     Optional when the event type is `ButtonClickEvent`.
   - `value` - When the event type is `FormSubmitEvent`, the values in the form as an object.
+- `context` - The context object passed to the interface when calling [`snap_createInterface`](./snaps-api.md#snap_createinterface), or `null`.
 
 #### Example
 

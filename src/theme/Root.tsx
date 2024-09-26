@@ -44,7 +44,6 @@ interface Project {
 interface IMetamaskProviderContext {
   projects: { [key: string]: Project };
   setProjects: (arg: { [key: string]: Project }) => void;
-  metaMaskConnectHandler: () => Promise<void>;
   metaMaskDisconnect: () => Promise<void>;
   metaMaskWalletIdConnectHandler: () => Promise<void>;
   userId: string | undefined;
@@ -63,7 +62,6 @@ interface IMetamaskProviderContext {
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   projects: {},
   setProjects: () => {},
-  metaMaskConnectHandler: () => new Promise(() => {}),
   metaMaskDisconnect: () => new Promise(() => {}),
   metaMaskWalletIdConnectHandler: () => new Promise(() => {}),
   userId: undefined,
@@ -121,16 +119,6 @@ export const LoginProvider = ({ children }) => {
         setMetaMaskAccount(accounts[0]);
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
-      }
-    } catch (e) {}
-  };
-
-  const metaMaskConnectHandler = async () => {
-    try {
-      const accounts = await sdk.connect();
-      setMetaMaskAccount(accounts);
-      if (accounts && accounts.length > 0) {
-        setMetaMaskAccount(accounts[0]);
       }
     } catch (e) {}
   };
@@ -224,7 +212,6 @@ export const LoginProvider = ({ children }) => {
               setMetaMaskAccount,
               projects,
               setProjects,
-              metaMaskConnectHandler,
               metaMaskDisconnect,
               metaMaskWalletIdConnectHandler,
               userId,
