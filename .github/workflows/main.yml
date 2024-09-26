@@ -16,7 +16,7 @@ jobs:
         run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/7fdc9630cc360ea1a469eed64ac6d78caeda1234/scripts/download-actionlint.bash) 1.6.22
         shell: bash
       - name: Check workflow files
-        run: ${{ steps.download-actionlint.outputs.executable }} -color .github/workflows/build.yml .github/workflows/case.yml .github/workflows/crowdin.yml .github/workflows/dependency_review.yml .github/workflows/lint.yml .github/workflows/main.yml .github/workflows/nightly.yml .github/workflows/security-code-scanner.yml .github/workflows/trivy.yml
+        run: ${{ steps.download-actionlint.outputs.executable }} -color
         shell: bash
 
   build:
