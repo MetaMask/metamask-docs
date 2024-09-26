@@ -14,18 +14,17 @@ import {
   DASHBOARD_URL,
   REF_ALLOW_LOGIN_PATH,
   REQUEST_PARAMS,
+  AUTH_WALLET_PROJECTS,
 } from "@site/src/lib/constants";
 import {
-  AUTH_WALLET_PROJECTS,
   clearStorage,
   getUserIdFromJwtToken,
   saveTokenString,
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal, {
   AUTH_LOGIN_STEP,
-  WALLET_LINK_TYPE
+  WALLET_LINK_TYPE,
 } from "@site/src/components/AuthLogin/AuthModal";
-
 
 interface Project {
   id: string;
@@ -53,10 +52,10 @@ interface IMetamaskProviderContext {
   setMetaMaskProvider: (arg: SDKProvider) => void;
   sdk: MetaMaskSDK;
   disconnect: () => Promise<void>;
-  setWalletLinked: (arg: WALLET_LINK_TYPE) => void
-  walletLinked: WALLET_LINK_TYPE | undefined
-  setWalletLinkUrl: (arg: string) => void
-  walletLinkUrl: string
+  setWalletLinked: (arg: WALLET_LINK_TYPE) => void;
+  walletLinked: WALLET_LINK_TYPE | undefined;
+  setWalletLinkUrl: (arg: string) => void;
+  walletLinkUrl: string;
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
@@ -74,7 +73,7 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   setWalletLinked: () => {},
   walletLinked: undefined,
   setWalletLinkUrl: () => {},
-  walletLinkUrl: ''
+  walletLinkUrl: "",
 });
 
 const sdk = new MetaMaskSDK({
@@ -92,14 +91,16 @@ const sdk = new MetaMaskSDK({
 
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({});
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string>("");
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const [metaMaskProvider, setMetaMaskProvider] = useState(undefined);
   const [metaMaskAccount, setMetaMaskAccount] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
-  const [walletLinked, setWalletLinked] = useState<WALLET_LINK_TYPE | undefined>(undefined);
-  const [walletLinkUrl, setWalletLinkUrl] = useState<string>('');
+  const [walletLinked, setWalletLinked] = useState<
+    WALLET_LINK_TYPE | undefined
+  >(undefined);
+  const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
@@ -110,7 +111,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
       );
       setUserId(getUserIdFromJwtToken());
       const accounts = await sdk.connect();
@@ -127,7 +128,7 @@ export const LoginProvider = ({ children }) => {
     const provider = sdk?.getProvider();
     setMetaMaskProvider(provider);
   }, []);
-  
+
   useEffect(() => {
     if (isInitialized && sdk.isExtensionActive()) {
       const provider = sdk.getProvider();
@@ -141,7 +142,7 @@ export const LoginProvider = ({ children }) => {
     getStaleDate();
     if (REF_ALLOW_LOGIN_PATH.some((item) => url.pathname.includes(item))) {
       const token = url.searchParams.get("token");
-      
+
       if (token) {
         saveTokenString(token);
         const userIdFromjwtToken = getUserIdFromJwtToken();
@@ -157,7 +158,7 @@ export const LoginProvider = ({ children }) => {
                   ...REQUEST_PARAMS("GET").headers,
                   Authorization: `Bearer ${token}`,
                 },
-              },
+              }
             );
             const res = await projectsResponse.json();
             if (res.error) throw new Error(res.error.message);
@@ -167,7 +168,7 @@ export const LoginProvider = ({ children }) => {
             } = res;
             sessionStorage.setItem(
               AUTH_WALLET_PROJECTS,
-              JSON.stringify(projects),
+              JSON.stringify(projects)
             );
             setProjects(projects);
             window.location.replace(`${url.origin}${url.pathname}`);
@@ -195,7 +196,7 @@ export const LoginProvider = ({ children }) => {
       setUserId(undefined);
       setMetaMaskAccount(undefined);
       setProjects({});
-      setWalletLinked(undefined)
+      setWalletLinked(undefined);
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
@@ -221,7 +222,7 @@ export const LoginProvider = ({ children }) => {
               walletLinked,
               setWalletLinked,
               walletLinkUrl,
-              setWalletLinkUrl
+              setWalletLinkUrl,
             } as IMetamaskProviderContext
           }
         >

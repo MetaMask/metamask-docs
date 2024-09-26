@@ -2,11 +2,12 @@ export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
-export const DASHBOARD_URL = (DASHBOARD_PREVIEW_URL, VERCEL_ENV) => DASHBOARD_PREVIEW_URL
-  ? DASHBOARD_PREVIEW_URL
-  : VERCEL_ENV === "production"
-    ? PROD_APP_URL
-    : STAGE_APP_URL;
+export const DASHBOARD_URL = (DASHBOARD_PREVIEW_URL, VERCEL_ENV) =>
+  DASHBOARD_PREVIEW_URL
+    ? DASHBOARD_PREVIEW_URL
+    : VERCEL_ENV === "production"
+      ? PROD_APP_URL
+      : STAGE_APP_URL;
 
 export const REF_PATH = "/wallet/reference/new-reference";
 
@@ -469,3 +470,7 @@ export const REQUEST_PARAMS = (method = "POST") => ({
     Pragma: "no-cache",
   },
 });
+
+export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
+export const AUTH_WALLET_TOKEN = "auth.wallet.token";
+export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";

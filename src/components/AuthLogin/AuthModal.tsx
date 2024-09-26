@@ -7,12 +7,15 @@ import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
 import {
   authenticateAndAuthorize,
-  AUTH_WALLET_SESSION_NAME,
-  AUTH_WALLET_PROJECTS,
   saveTokenString,
   getUserIdFromJwtToken,
 } from "../../lib/siwsrp/auth";
-import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
+import {
+  DASHBOARD_URL,
+  REQUEST_PARAMS,
+  AUTH_WALLET_SESSION_NAME,
+  AUTH_WALLET_PROJECTS,
+} from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -247,7 +250,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
       setProjects(projects);
       setOpen(false);
     } catch (e: any) {
-      if (pathname.startsWith('/wallet/reference')) {
+      if (pathname.startsWith("/wallet/reference")) {
         setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
         setOpen(true);
       } else {
