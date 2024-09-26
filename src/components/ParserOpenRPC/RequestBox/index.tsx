@@ -1,11 +1,11 @@
-import React, {useContext, useMemo} from "react";
+import React, { useContext, useMemo } from "react";
 import clsx from "clsx";
 import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
-import {MetamaskProviderContext} from "@site/src/theme/Root";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;

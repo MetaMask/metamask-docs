@@ -202,6 +202,7 @@ export const LoginProvider = ({ children }) => {
       setMetaMaskAccount(undefined);
       setProjects({});
       setWalletLinked(undefined);
+      setUserAPIKey("");
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);

@@ -58,10 +58,7 @@ const ProjectsBox = () => {
     if (options?.length > 0) {
       setUserAPIKey(options[0].value);
     }
-    if (!walletLinked) {
-      setUserAPIKey("");
-    }
-  }, [options.length, walletLinked]);
+  }, [options.length]);
 
   useEffect(() => {
     if (walletLinked) {
