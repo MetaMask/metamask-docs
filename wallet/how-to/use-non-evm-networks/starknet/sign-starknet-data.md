@@ -8,7 +8,17 @@ import TabItem from "@theme/TabItem";
 
 # Sign Starknet transactions
 
-After an account is connected, you can sign a transaction using the `wallet.account.signer.signTransaction` function:
+You can sign Starknet transactions using the
+[`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method.
+
+## Prerequisites
+
+[Connect to Starknet](connect-to-starknet.md) from your dapp.
+
+## Sign a transaction
+
+You can sign a transaction using the `wallet.account.signer.signTransaction` function:
 
 <Tabs>
   <TabItem value="get-starknet" default>

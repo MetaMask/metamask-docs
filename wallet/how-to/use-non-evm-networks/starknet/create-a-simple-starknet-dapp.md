@@ -5,7 +5,8 @@ sidebar_position: 6
 
 # Create a simple Starknet dapp
 
-In this tutorial, you'll learn how to set up a basic dapp that uses `get-starknet` to connect to MetaMask and display the user's wallet address.
+In this tutorial, you'll learn how to set up a React TypeScript dapp that uses the `get-starknet` library to connect to MetaMask and display the user's wallet address.
+You'll also display the balance of an ERC-20 token and perform a token transfer.
 
 ## Prerequisites
 
@@ -14,53 +15,39 @@ In this tutorial, you'll learn how to set up a basic dapp that uses `get-starkne
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20.11 or later
 - [Yarn](https://yarnpkg.com/)
 
-## 1. Project Setup
+## 1. Set up the project
 
-Create a new React project with TypeScript and add the necessary dependencies:
-
-```bash
-# Create a new React project with TypeScript
-yarn create react-app get-starknet-tutorial --template typescript
-
-# Change into the project directory
-cd get-starknet-tutorial
-
-# Add get-starknet and starknet.js
-yarn add get-starknet@3.3.0 starknet@6.11.0
-```
+Follow steps 1 and 2 of [Connect to Starknet](connect-to-starknet.md#1-set-up-the-project) to set up
+your React TypeScript project and install the `get-starknet` library. 
 
 Your file structure should look similar to the following:
 
-```bash
-get-starknet-tutorial/
-│
+```text
+get-starknet-dapp/
 ├── public/
 │   └── index.html
-│
-├── src/
-│   ├── components/
-│   │   ├── WalletConnect.tsx
-│   │ 
-│   │
-│   ├── App.tsx
-│   ├── index.tsx
-│   └── App.css
+└── src/
+    ├── components/
+    │   ├── WalletConnect.tsx
+    ├── App.tsx
+    ├── index.tsx
+    └── App.css
 ```
 
-## 2.Confingure wallet connection
+## 2. Configure the wallet connection
 
-### 2.1. Connect to the MetaMask wallet
+### 2.1. Connect to MetaMask
 
-The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's wallet. 
-It opens a connection to the MetaMask wallet and returns an object containing important details about the wallet, such as the following:
+The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's MetaMask wallet. 
+It opens a connection to MetaMask and returns an object containing important details about the wallet, such as the following:
 
 - `name`: The name of the wallet.
 - `icon`: The wallet's icon, which displays the wallet's logo.
 - `account`: The account object from `starknet.js`, which contains the wallet's address and provides access to account-specific operations.
 
-To import the necessary functions and connect to a wallet, add the following code:
+To import the necessary functions and connect to a wallet, add the following code to `src/App.tsx`:
 
-```typescript
+```typescript title="App.tsx"
 import { connect, type ConnectOptions } from "get-starknet";
 
 async function handleConnect(options?: ConnectOptions) {
@@ -75,15 +62,12 @@ async function handleConnect(options?: ConnectOptions) {
 `connect` accepts an optional `ConnectOptions` object. 
 This object can control the connection process, including:
 
-- `modalMode`: Determines how the connection modal behaves. The options include:
+- `modalMode`: Determines how the connection modal behaves. The options are:
   - `"alwaysAsk"`: Prompts the user every time a connection is initiated.
   - `"neverAsk"`: Attempts to connect without showing the modal.
+- `modalTheme`: Sets the visual theme of the connection modal. The options are `"dark"` and `"light"`.
 
-- `modalTheme`: Sets the visual theme of the connection modal. The options are:
-  - `"dark"`: Uses a dark color scheme.
-  - `"light"`: Uses a light color scheme.
-
-The following code is an example of how to set these options:
+You can configure these options as follows:
 
 ```typescript
 handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
@@ -91,10 +75,10 @@ handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 
 ### 2.3. Create a `WalletAccount`
 
-After the wallet is successfully connected to the dapp, you can create a new `WalletAccoun` instance using the `starknet.js` library.
+After connecting to MetaMask, create a new `WalletAccount` instance using the `starknet.js` library.
 This allows interaction with the Starknet network using the connected wallet.
 
-```typescript
+```typescript title="App.tsx"
 import { WalletAccount } from "starknet"; 
 
 async function handleConnect(options?: ConnectOptions) {
@@ -106,12 +90,12 @@ async function handleConnect(options?: ConnectOptions) {
 
 ### 2.4. Display wallet information
 
-The wallet's name, address, and icon can be displayed in the dapp. 
+You can display the wallet's name, address, and icon in your dapp. 
 This provides visual feedback to the user, confirming which wallet they are using.
 
 The following code is an example of how to update the interface with the connected wallet's details:
 
-```typescript
+```typescript title="App.tsx"
 import { useState } from "react";
 
 function App() {
@@ -136,11 +120,11 @@ function App() {
 }
 ```
 
-### 2.5. Example implementation
+### 2.5. Full example
 
-The following code is the full implementation in `App.tsx`:
+The following a full example of configuring the wallet connection:
 
-```typescript
+```typescript title="App.tsx"
 import "./App.css"
 import {
   type ConnectOptions,
@@ -230,26 +214,34 @@ function App() {
 export default App
 ```
 
-## 3. Display the balance and transfer an ERC-20 token
+## 3. Display the balance of and transfer an ERC-20 token
 
-Now that you have set up the basics, let's go a step further and show how to display the balance of a specific ERC-20 token, such as STRK, and perform a transfer using the `WalletAccount` instance.
+Now that you have set up the basics, you can display the balance of a specific ERC-20 token, such as
+STRK, and perform a transfer using the `WalletAccount` instance.
 
-### 3.1. Setting Up the Contract
+### 3.1. Set up the contract
 
-To interact with an ERC-20 contract, you'll need to create a contract instance from `starknet.js` using the `WalletAccount` instance. Assuming the ABI is loaded from a JSON file, here's how you would do it:
+To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `WalletAccount` instance.
+The following example assumes the ABI (application binary interface) is loaded from a JSON file:
 
 ```typescript
 import { Contract } from "starknet";
-import erc20Abi from "./erc20Abi.json"; // Assuming ABI is stored in this JSON file
+import erc20Abi from "./erc20Abi.json";
 
 const tokenAddress = "0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7";
 
 const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
 ```
 
+:::note ABI and contract address
+You can find the ABI of the ERC-20 contract on [Voyager](https://voyager.online/).
+
+The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
+:::
+
 ### 3.2. Fetch the token balance
 
-Once the contract is set up, you can call the `balanceOf` method to fetch the balance of the connected account:
+Call the `balanceOf` method to fetch the balance of the connected account:
 
 ```typescript
 const balance = await erc20.balanceOf(walletAddress);
@@ -258,7 +250,8 @@ const formattedBalance = balance / Math.pow(10, 18);
 
 ### 3.3. Transfer tokens
 
-To transfer tokens, populate the `transfer` method call and then execute the transaction using the `WalletAccount`. Here"s how you can do that:
+To transfer tokens, fill out the `transfer` method call and execute the transaction using the `WalletAccount`.
+For example:
 
 ```typescript
 import { Call } from "starknet";
@@ -279,14 +272,14 @@ const { transaction_hash: transferTxHash } = await walletAccount.execute(transfe
 await walletAccount.waitForTransaction(transferTxHash);
 ```
 
-### 3.4. Full implementation
+### 3.4. Full example
 
-The following code example demonstrates how to you integrate both balance checking and transferring into your component:
+The following a full example of displaying the balance of an ERC-20 token and performing a transfer:
 
 ```typescript
 import { useEffect, useState } from "react";
 import { Contract } from "starknet";
-import erc20Abi from "./erc20Abi.json"; // Assuming ABI is stored in this JSON file
+import erc20Abi from "./erc20Abi.json";
 
 function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
   const [balance, setBalance] = useState(null);
@@ -310,7 +303,7 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
       const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
       const amountToTransfer = 1n * 10n ** 18n; // 1 token
 
-      // Populate and execute transfer
+      // Fill out and execute transfer
       const transferCall: Call = erc20.populate("transfer", {
         recipient: recipientAddress,
         amount: amountToTransfer,
@@ -335,18 +328,12 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
 }
 ```
 
-### 3.5. ABI and contract address
-
-The ABI (Application Binary Interface) for the ERC-20 contract can be found on the Voyager Explorer.
-
-The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
-
 ## Next steps
 
-In this section, we've shown how to extend your dapp by displaying the balance of an ERC-20 token like ETH and performing a token transfer. By creating a Contract instance with the WalletAccount, you can easily interact with smart contracts, fetch token balances, and execute transactions, enabling more complex functionality in your dapp.
+You've set up a simple React dapp that connects to MetaMask, displays an ERC-20 token balance, and performs token transfers. Creating a contract instance using `WalletAccount` allows you to interact with smart contracts, retrieve token balances, and execute transactions, enabling more advanced functionality in your dapp.
 
-## Additional resources
+You can follow these next steps:
 
-- [Use `get-starknet` to connect to a wallet and create an account instance](https://starknetjs.com/docs/guides/walletAccount)
-- [Use account instance to show ERC20 balance and transfer](https://starknetjs.com/docs/guides/use_ERC20)
-- [get-starknet official GitHub](https://github.com/starknet-io/get-starknet)
+- [Manage Starknet accounts](manage-starknet-accounts.md).
+- [Manage Starknet networks](manage-starknet-networks.md).
+- Explore the [Starknet Snap API reference](../../../reference/non-evm-apis/starknet-snap-api.md).

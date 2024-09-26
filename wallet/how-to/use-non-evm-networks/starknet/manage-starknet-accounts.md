@@ -8,8 +8,9 @@ import TabItem from "@theme/TabItem";
 
 # Manage Starknet accounts
 
-You can manage Starknet accounts in MetaMask.
-The following examples use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library.
+You can manage Starknet accounts in MetaMask using the
+[`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method.
 
 :::note Notes
 
@@ -83,8 +84,7 @@ The following example displays the account address:
 
 ## Retrieve the connected account
 
-To retrieve and display a user's connected Starknet account, use the `get-starknet` library in
-combination with React hooks.
+You can retrieve and display a user's connected Starknet account.
 The following example displays the connected account address if available, and displays buttons to
 connect or disconnect the account.
 
@@ -218,7 +218,7 @@ connect or disconnect the account.
 
 ## Manage account transactions
 
-You can manage a user's Starknet account transactions using `get-starknet`.
+You can manage a user's Starknet account transactions.
 The following example invokes a specific function on a Starknet smart contract, handles wallet
 connection and transaction submission, and logs the result or any errors:
 
@@ -291,7 +291,8 @@ const invokeStarknetContract = async () => {
 
 ## Handle account changes and disconnections
 
-To handle account changes and disconnections, you can use event listeners provided by `get-starknet`:
+You can handle account changes and disconnections.
+Use the following component at the top level of your dapp to handle account changes globally:
 
 <Tabs>
   <TabItem value="get-starknet" default>
@@ -409,5 +410,3 @@ To handle account changes and disconnections, you can use event listeners provid
   
   </TabItem> 
 </Tabs>
-
-Use this component at the top level of your dapp to handle account changes globally.

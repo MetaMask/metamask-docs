@@ -8,7 +8,17 @@ import TabItem from "@theme/TabItem";
 
 # Send Starknet transactions
 
-After the account is connected, you can send a transaction using the `starknet.account.execute()` function:
+You can send Starknet transactions using the
+[`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method.
+
+## Prerequisites
+
+[Connect to Starknet](connect-to-starknet.md) from your dapp.
+
+## Send a transaction
+
+Send a transaction using the `starknet.account.execute()` function:
 
 <Tabs>
   <TabItem value="get-starknet" default>
@@ -75,7 +85,7 @@ After the account is connected, you can send a transaction using the `starknet.a
 
 ## Simplified example
 
-The following is a simplified example of how to connect to a Starknet account and send a transaction using the `get-starknet` library:
+The following is a full, simplified example of connecting to a Starknet account and sending a transaction:
 
 <Tabs>
   <TabItem value="get-starknet" default>

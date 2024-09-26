@@ -8,8 +8,14 @@ import TabItem from "@theme/TabItem";
 
 # Manage Starknet networks
 
-You can detect a user's Starknet network and prompt them to switch Starknet networks in MetaMask.
-The following examples use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library.
+You can detect a user's Starknet network and prompt them to switch Starknet networks in MetaMask,
+using the
+[`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
+[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method.
+
+## Prerequisites
+
+[Connect to Starknet](connect-to-starknet.md) from your dapp.
 
 ## Detect a user's network
 
