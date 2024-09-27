@@ -16,6 +16,9 @@ export const AuthBox = ({ isMetamaskNetwork = false }: AuthBoxProps) => {
       eventName: "Connect wallet",
       clickType: "Connect wallet",
       userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
     });
     metaMaskWalletIdConnectHandler();
   };

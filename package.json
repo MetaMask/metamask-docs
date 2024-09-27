@@ -1,6 +1,6 @@
 {
   "name": "metamask-docs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
@@ -16,8 +16,8 @@
     "typecheck": "tsc",
     "typecheck-staged": "tsc-files --noEmit",
     "lint": "npm run lint:js && npm run lint:style",
-    "lint:js": "eslint . --ext js,jsx,ts,tsx --max-warnings=5",
-    "lint:style": "stylelint \"**/*.css\" --fix",
+    "lint:js": "eslint . --max-warnings=5",
+    "lint:style": "stylelint 'src/**/*.css' --fix",
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write '{blog,docs,src}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
   },
@@ -70,21 +70,28 @@
     "sass": "^1.77.6"
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "^3.0.0",
+    "@docusaurus/eslint-plugin": "^3.5.2",
     "@docusaurus/module-type-aliases": "^3.4.0",
     "@docusaurus/plugin-client-redirects": "^3.0.0",
     "@docusaurus/tsconfig": "^3.4.0",
     "@docusaurus/types": "^3.4.0",
-    "@lavamoat/allow-scripts": "^3.0.4",
+    "@eslint/js": "^8.57.1",
     "@tsconfig/docusaurus": "^1.0.5",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
-    "@typescript-eslint/parser": "^7.12.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.34.2",
     "stylelint": "^15.0.0 ",
     "stylelint-config-standard": "^34.0.0",
     "tsc-files": "^1.1.4",
     "typescript": "^5.5.4"
+  },
+  "overrides": {
+    "react-alert": {
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0"
+    }
   },
   "browserslist": {
     "production": [
@@ -99,32 +106,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
-  },
-  "packageManager": "yarn@3.4.1",
-  "lavamoat": {
-    "allowScripts": {
-      "@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/plugin-content-docs>@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/plugin-content-docs>@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>@open-rpc/docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>@open-rpc/docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/core>@babel/runtime-corejs3>core-js-pure": false,
-      "@metamask/docusaurus-openrpc>@docusaurus/core>core-js": false,
-      "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>docusaurus-open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core": false,
-      "@metamask/docusaurus-openrpc>@metamask/open-rpc-docs-react>@stoplight/mosaic>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
-      "@docusaurus/core>webpack-dev-server>ws>bufferutil": false,
-      "@docusaurus/core>webpack-dev-server>ws>utf-8-validate": false,
-      "$root$": false,
-      "@metamask/sdk-react>@metamask/sdk>eciesjs>secp256k1": false,
-      "@metamask/sdk>@metamask/sdk-communication-layer>bufferutil": false,
-      "@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false,
-      "@metamask/sdk>eciesjs>secp256k1": false,
-      "ethers>ws>bufferutil": false,
-      "ethers>ws>utf-8-validate": false
-    }
+    "node": ">=18"
   }
 }
