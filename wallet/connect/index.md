@@ -6,10 +6,10 @@ description: Connect to MetaMask using various options.
 
 You can connect your dapp to MetaMask using one of the following methods:
 
-- [MetaMask SDK](metamask-sdk/index.md)
-- Third-party libraries that support the SDK, such as [Wagmi](3rd-party-libraries/wagmi.md) or
+- The [MetaMask SDK](metamask-sdk/index.md)
+- Third-party libraries with SDK support, e.g., [Wagmi](3rd-party-libraries/wagmi.md) or
   [Web3-Onboard](3rd-party-libraries/web3-onboard.md)
-- The [Wallet API](wallet-api.md) directly
+- The MetaMask [Wallet API](wallet-api.md) directly
 
 The following table compares the supported features of each connection option:
 
@@ -23,32 +23,33 @@ The following table compares the supported features of each connection option:
 
 ## MetaMask SDK
 
-MetaMask SDK provides a reliable and secure connection to MetaMask Mobile from any platform. From a web dapp, you can also give your users the option of connecting to the MetaMask browser extension. You can integrate the SDK into existing projects without altering the underlying calls to the Wallet API.
+The MetaMask SDK ensures a reliable and secure connection to MetaMask Mobile across various platforms. For web dapps, it also enables users to connect via the MetaMask browser extension. The MetaMask SDK can be seamlessly integrated into existing projects without modifying underlying Wallet API calls.
 
 Key features include:
 
-- **Multi-platform support** – Connect from web, desktop, mobile, or gaming platforms.
-- **Seamless mobile integration** – Use QR codes or deeplinks to create persistent connections with MetaMask Mobile.
-- **EIP-6963 detection** – Automatically detect MetaMask wallets with or without third-party libraries.
-- **RPC request batching** – Enhance efficiency by batching multiple requests into a single call.
+- **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
+- **Seamless mobile integration** – Leverage QR codes or deeplinks to establish persistent connections with MetaMask Mobile.
+- **EIP-6963 detection** – Automatically detect MetaMask wallets, with or without third-party libraries.
+- **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
+
 
 Get started using [MetaMask SDK](metamask-sdk/index.md).
 
 ## Third-party libraries
 
-MetaMask SDK integrates smoothly with libraries such as Wagmi and Web3-Onboard, which simplify wallet connections and support multiple wallets. These libraries offer tools to streamline connection logic and provide additional features for managing wallets.
+The MetaMask SDK integrates seamlessly with libraries like Wagmi and Web3-Onboard, simplifying wallet connections and supporting multiple wallets. These libraries streamline connection logic and offer additional features for managing wallets.
 
 :::note
-Using third-party libraries might come with trade-offs:
+Trade-offs when using third-party libraries:
 
-- Less control over specific MetaMask features.
-- Inconsistent behavior across different wallets due to multi-wallet support.
+- Reduced control over specific MetaMask features.
+- Potential inconsistencies across different wallets due to multi-wallet support.
 :::
 
-Get started using [Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-party-libraries/web3-onboard.md).
+Get started with [Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-party-libraries/web3-onboard.md).
 
 ## Wallet API
 
-You can integrate your dapp with MetaMask directly using the Wallet API, which allows you to manage Ethereum accounts, sign data, and send transactions without requiring the SDK.
+For direct integration, you can use the Wallet API to manage Ethereum accounts, sign data, and send transactions without the need for the SDK.
 
-Get started using the [Wallet API](wallet-api.md).
+Get started with the [Wallet API](wallet-api.md).
