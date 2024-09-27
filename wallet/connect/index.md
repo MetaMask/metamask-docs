@@ -37,7 +37,7 @@ Get started using [MetaMask SDK](metamask-sdk/index.md).
 
 ## Third-party libraries
 
-The MetaMask SDK integrates seamlessly with libraries like Wagmi and Web3-Onboard, simplifying wallet connections and supporting multiple wallets. These libraries streamline connection logic and offer additional features for managing wallets.
+MetaMask SDK integrates seamlessly with libraries like Wagmi and Web3-Onboard, simplifying wallet connections and supporting multiple wallets. These libraries streamline connection logic and offer additional features for managing wallets.
 
 :::note
 Trade-offs when using third-party libraries:
