@@ -1,6 +1,6 @@
 ---
 description: Track ERC-20 token transfers.
-sidebar_position: 8
+sidebar_position: 9
 ---
 
 import Tabs from "@theme/Tabs";
@@ -53,13 +53,13 @@ Create a file called `trackERC20.js`. At the top of file, add the following line
 const { Web3 } = require("web3");
 
 async function main(){
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>");
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>");
   ...
 }
 main();
 ```
 
-Make sure to replace `<YOUR_API_KEY>` with your Infura API key.
+Make sure to replace `<YOUR-API-KEY>` with your Infura API key.
 
 ### 4. Set the ABI
 
@@ -332,7 +332,7 @@ Transfer of 9964.083347473883463154        RIO        from 0x5b7E3E37a1aa6369386
 const { Web3 } = require("web3")
 
 async function main() {
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>")
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>")
 
   let options = {
     topics: [web3.utils.sha3("Transfer(address,address,uint256)")],

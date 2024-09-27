@@ -3,16 +3,18 @@ name: Check file name case
 
 on:
   workflow_call:
-  secrets:
-    SEGMENT_ANALYTICS_KEY:
-      required: true
-    LD_CLIENT_ID:
-      required: true
+    secrets:
+      SEGMENT_ANALYTICS_KEY:
+        required: true
+      LD_CLIENT_ID:
+        required: true
+      SENTRY_KEY:
+        required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
-
+  SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
 jobs:
   case:

@@ -9,10 +9,18 @@
 .cardHeader {
   border-bottom: 1px solid #848c96;
   padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cardHeading {
   color: #fff;
+}
+
+.codeWrapper {
+  max-height: 328px;
+  overflow-y: auto;
 }
 
 .cardFooter {
@@ -20,4 +28,15 @@
   justify-content: flex-end;
   border-top: 1px solid #848c96;
   padding: 16px;
+}
+
+.responseBlock {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.resetResponseBtn {
+  display: block;
+  background: none;
+  border: 0;
 }

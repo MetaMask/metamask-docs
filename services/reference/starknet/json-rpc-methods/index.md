@@ -9,7 +9,8 @@ Infura supports a subset of the [Starknet API methods](https://github.com/starkw
 
 The following Starknet methods are not supported:
 
-- `starknet_pendingTransactions`
-- `starknet_addDeployTransaction`
+- `starknet_estimateMessageFee`
 - `starknet_getBlockWithReceipts`
-- `pathfinder_getTransactionStatus`
+- `starknet_getTransactionStatus`
+- `starknet_traceBlockTransactions`
+- `starknet_traceTransaction`

@@ -7,7 +7,10 @@ sidebar_position: 2
 
 Archive data is data on the blockchain that is older than 128 blocks.
 
-Infura provides free access to archive data on Ethereum and most networks. 
+:::caution important
+For users on [Infura's credit pricing plan](../get-started/pricing/index.md), requests for
+archive data currently cost the same as non-archive data, but this might change in the future.
+:::
 
 ## Infura-supported archive data
 
@@ -49,35 +52,3 @@ The following methods include a parameter for specifying a block number for the 
 - `eth_getTransactionCount`
 - `eth_getStorageAt`
 - `eth_call`
-
-## Rate limits
-
-Infura applies [rate limits](../how-to/avoid-rate-limiting.md) to ensure network efficiency.
-
-Requests for Ethereum archive data are more expensive and are therefore subject to different rate limits.
-
-### Free plan
-
-You can make up to 25,000 archive requests and 100,000 total requests per day.
-After reaching 25,000 archive requests, you can still make 75,000 additional standard requests.
-
-:::info
-
-If you need more archive requests, upgrade to the Developer plan.
-
-:::
-
-### Developer plan
-
-You can make up to 100,000 archive requests and 200,000 total requests per day. 
-After reaching 100,000 archive requests, you can still make 100,000 additional standard requests.
-
-:::info
-
-If you need more archive requests, upgrade to the growth plan.
-
-:::
-
-### Custom, team, and growth plans
-
-There is no change. The process remains the same as a standard request.

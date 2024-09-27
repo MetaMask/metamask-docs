@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
-import { useColorMode } from "@docusaurus/theme-common";
 import styles from "./styles.module.css";
 
 interface ModalDrawerProps {
@@ -22,7 +21,6 @@ export const ModalDrawer = ({
 }: ModalDrawerProps) => {
   const [showModal, setShowModal] = useState(isOpen);
   const contentRef = useRef(null);
-  const { colorMode } = useColorMode();
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -41,12 +39,7 @@ export const ModalDrawer = ({
         showModal && styles.modalContainerOpen
       )}
     >
-      <div
-        className={clsx(
-          styles.modalHeader,
-          colorMode === "light" && styles.modalHeaderLight
-        )}
-      >
+      <div className={styles.modalHeader}>
         <div className={styles.modalHeaderLabels}>
           <span className={styles.modalTitle}>{title}</span>
           {headerLabel ? (

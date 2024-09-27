@@ -1,5 +1,6 @@
 .msgWrapper {
-  text-align: center;
+  display: flex;
+  align-items: center;
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #848c96;
@@ -14,8 +15,14 @@
 }
 
 .msgText {
+  padding-right: 16px;
   font-size: 14px;
   line-height: 22px;
+}
+
+.msgButton {
+  justify-content: center;
+  width: 162px;
 }
 
 .mmBtnRow {
@@ -40,8 +47,8 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
-  border: 1px solid rgba(3, 118, 201, 1);
-  color: rgba(3, 118, 201, 1);
+  border: 1px solid rgb(3 118 201 / 100%);
+  color: rgb(3 118 201 / 100%);
 }
 
 .mmBtnCheck {

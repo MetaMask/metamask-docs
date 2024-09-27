@@ -1,6 +1,6 @@
 ---
 description: Use dotenv to load environment variables from a file.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Use JavaScript dotenv
@@ -37,8 +37,8 @@ You can create a `package.json` file by running a CLI questionnaire, or by creat
 At the root of your project directory, create a file named `.env` containing environment variables for sensitive information that shouldn't be shared, such as an Infura API key, Ethereum private key, or MetaMask secret recovery phrase:
 
 ```bash
-INFURA_API_KEY = "https://goerli.infura.io/v3/<Your-API-Key>"
-PRIVATE_KEY = "<Your-private-key>"
+INFURA_API_KEY = "<YOUR-API-KEY>"
+PRIVATE_KEY = "<YOUR-PRIVATE-KEY>"
 ```
 
 :::danger
@@ -55,7 +55,7 @@ Give your project access to the `.env` information by including the following li
 require("dotenv").config()
 ```
 
-Access the environment variables using `process.env.<Your-Environment-Variable-Name>`. For example, the following is a `hardhat.config.js` file for a Hardhat project:
+Access the environment variables using `process.env.<YOUR-ENV-VAR-NAME>`. For example, the following is a `hardhat.config.js` file for a Hardhat project:
 
 ```javascript
 require("@nomiclabs/hardhat-waffle")

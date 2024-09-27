@@ -27,6 +27,6 @@ view its console:
 1. Go to `chrome://extensions`.
 2. Toggle **Developer mode** on in the top right corner.
 3. Find MetaMask Flask, and select **Details**.
-4. Under **Inspect views**, select `background.html`.
+4. Under **Inspect views**, select `offscreen.html`.
 
 The log output displays in the console that pops up.

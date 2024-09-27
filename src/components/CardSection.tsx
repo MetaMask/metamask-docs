@@ -1,5 +1,6 @@
 import React from "react";
 import Card, { type CardItem } from "@site/src/components/Card";
+import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
@@ -27,8 +28,9 @@ const CardList: CardItem[] = [
     link: "/services",
     description: (
       <>
-        Build and scale your dapp or Snap using services provided by MetaMask and Infura.
-        This includes APIs that optimize essential development tasks.
+        Build and scale your dapp or Snap using services provided by MetaMask
+        and Infura. This includes APIs that optimize essential development
+        tasks.
       </>
     ),
   },
@@ -37,7 +39,7 @@ const CardList: CardItem[] = [
 export default function CardSection(): JSX.Element {
   return (
     <section className="container margin-top--sm margin-bottom--lg">
-      <div className="row">
+      <div className={styles.row}>
         {CardList.map((props, idx) => (
           <Card key={idx} {...props} />
         ))}

@@ -1,6 +1,6 @@
 ---
 description: Trace transactions
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 import Tabs from "@theme/Tabs";
@@ -67,7 +67,7 @@ This example represents a call to the `transfer` function of an ERC-20 token con
   <TabItem value="cURL" label="cURL" default>
 
 ```bash
-curl https://mainnet.infura.io/v3/<API-KEY> \
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "trace_transaction", "params": ["0x1e404c4bf580688c5527df2ce5aceb3db5de49479ab7dd321dd4615e4f5a7a5c"], "id": 1}'

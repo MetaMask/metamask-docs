@@ -22,6 +22,7 @@ export const ArrayFieldTemplate = ({
     setIsComplexTypeView,
   } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
+  // @ts-ignore
   const itemsType = schema?.items?.type;
   const isSimpleArray =
     itemsType === "string" ||
@@ -66,7 +67,7 @@ export const ArrayFieldTemplate = ({
             <span
               className={clsx(
                 styles.tableColumnType,
-                styles.tableColumnTypeDropdown
+                styles.tableColumnTypeDropdown,
               )}
               onClick={isSimpleArray ? addSimpleArray : addComplexArray}
             >
@@ -78,7 +79,7 @@ export const ArrayFieldTemplate = ({
                     styles.chevronIcon,
                     isSimpleArray
                       ? collapsed && styles.chevronIconDown
-                      : styles.chevronIconRight
+                      : styles.chevronIconRight,
                   )}
                 />
               </span>
@@ -94,13 +95,13 @@ export const ArrayFieldTemplate = ({
                 <button
                   className={clsx(
                     styles.tableButton,
-                    styles.tableButtonAddNewArray
+                    styles.tableButtonAddNewArray,
                   )}
                   onClick={onDropIndexClick(index)}
                 >
                   <img
                     src="/img/icons/minus-icon.svg"
-                    alt={`Add ${title}`}
+                    alt={`Remove ${title}`}
                     width="16px"
                     height="16px"
                   />
@@ -116,7 +117,7 @@ export const ArrayFieldTemplate = ({
             <button
               className={clsx(
                 styles.tableButton,
-                styles.tableButtonAddNewArray
+                styles.tableButtonAddNewArray,
               )}
               onClick={onAddClick}
             >
@@ -161,7 +162,7 @@ export const ArrayFieldTemplate = ({
                       onClick={onDropIndexClick(index)}
                       className={clsx(
                         styles.deleteIcon,
-                        styles.deleteIconCentered
+                        styles.deleteIconCentered,
                       )}
                     ></span>
                   )}

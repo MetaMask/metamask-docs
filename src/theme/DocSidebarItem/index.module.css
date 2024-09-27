@@ -1,7 +1,5 @@
-.flaskOnly > :global(a.menu__link::after),
-.flaskOnly
-  > :global(.menu__list-item-collapsible)
-  > :global(a.menu__link::after) {
+.flaskOnly > a.menu__link::after,
+.flaskOnly > .menu__list-item-collapsible > a.menu__link::after {
   content: "Flask";
   margin-left: 0.5em;
   background-color: var(--mm-flask-background-color);
