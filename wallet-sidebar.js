@@ -49,7 +49,6 @@ const sidebar = {
               link: { type: "doc", id: "connect/metamask-sdk/gaming/index" },
               items: [
                 "connect/metamask-sdk/gaming/unity",
-                "connect/metamask-sdk/gaming/unreal-engine",
               ],
             },
           ],
