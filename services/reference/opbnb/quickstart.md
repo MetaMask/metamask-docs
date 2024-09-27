@@ -48,7 +48,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
     ```javascript title="index.js"
     import fetch from 'node-fetch';
-    fetch("https://opbnb-mainnet.infura.io/v3/<API-KEY>", {
+    fetch("https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -91,7 +91,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     ```javascript title="index.js"
     const axios = require("axios);
     
-    axios.post("https://opbnb-mainnet.infura.io/v3/<API-KEY>", {
+    axios.post("https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>", {
       jsonrpc: "2.0",
       method: "eth_blockNumber",
       params: [],
@@ -125,7 +125,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
     ```javascript title="index.js"
     const ethers = require("ethers");
-    const provider = new ethers.providers.JsonRpcProvider("https://opbnb-mainnet.infura.io/v3/<API-KEY>");
+    const provider = new ethers.providers.JsonRpcProvider("https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>");
     provider.getBlockNumber()
     .then(blockNumber => {
       console.log(blockNumber);
@@ -156,7 +156,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     ```python title="index.py"
     import requests
     import json
-    url = "https://opbnb-mainnet.infura.io/v3/<API-KEY>"
+    url = "https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>"
     payload = {
         "jsonrpc": "2.0",
         "method": "eth_blockNumber",

@@ -11,6 +11,12 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## September 2024
 
+- Updated [credit cost](/services/get-started/pricing/credit-cost/#ethereum) for `eth_sendRawTransaction`.
+  ([#1581](https://github.com/MetaMask/metamask-docs/pull/1581))
+- Documented WebSocket support for [Base](/services/reference/base),
+  [Blast](/services/reference/blast), [Celo](/services/reference/celo),
+  [Ethereum Holesky](/services/reference/ethereum), and [Mantle](/services/reference/mantle).
+  ([#1552](https://github.com/MetaMask/metamask-docs/pull/1552))
 - Documented new [Snaps custom UI JSX components](/snaps/features/custom-ui) for Flask
   version 12.4, and removed documentation for deprecated function-based library.
   ([#1540](https://github.com/MetaMask/metamask-docs/pull/1540))
