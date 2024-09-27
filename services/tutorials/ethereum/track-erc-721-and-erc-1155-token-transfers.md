@@ -53,13 +53,13 @@ Create a file called `trackERC721.js`. At the top of file, add the following lin
 const { Web3 } = require("web3");
 
 async function main(){
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>");
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>");
   ...
 }
 main();
 ```
 
-Make sure to replace `<YOUR_API_KEY>` with your Infura API key.
+Make sure to replace `<YOUR-API-KEY>` with your Infura API key.
 
 ### 4. Subscribe to contract events
 
@@ -317,7 +317,7 @@ value: 1
 const { Web3 } = require("web3")
 
 async function main() {
-  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR_API_KEY>")
+  const web3 = new Web3("wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>")
 
   let options721 = {
     topics: [web3.utils.sha3("Transfer(address,address,uint256)")],

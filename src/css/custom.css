@@ -346,8 +346,18 @@ button:hover {
   border-bottom-color: rgb(255 255 255 / 100%);
 }
 
+.react-dropdown-select-dropdown {
+  border-radius: 8px !important;
+  border: 1px solid #848C96 !important;
+}
+
+.react-dropdown-select-dropdown-handle {
+  color: #ffffff;
+}
+
 @media (width <= 1200px) {
-  .navbar__item, .navbar__link {
+  .navbar__item,
+  .navbar__link {
     font-size: 14px;
   }
 }

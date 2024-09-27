@@ -1,0 +1,6 @@
+- `blockParameter`: (string) [_required_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+  :::warning
+  `safe` isn't supported, use `finalized`.
+  Learn more about [Linea's layer 2 finalization](https://docs.linea.build/developers/guides/finalized-block).
+  :::
+- `show transaction details flag`: [_required_] If set to `true`, returns the full transaction objects. If `false` returns only the hashes of the transactions.

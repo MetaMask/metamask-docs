@@ -56,6 +56,8 @@ interface IMetamaskProviderContext {
   walletLinked: WALLET_LINK_TYPE | undefined;
   setWalletLinkUrl: (arg: string) => void;
   walletLinkUrl: string;
+  userAPIKey?: string;
+  setUserAPIKey?: (key: string) => void;
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
@@ -74,6 +76,8 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   walletLinked: undefined,
   setWalletLinkUrl: () => {},
   walletLinkUrl: "",
+  userAPIKey: "",
+  setUserAPIKey: () => {},
 });
 
 const sdk = new MetaMaskSDK({
@@ -101,6 +105,7 @@ export const LoginProvider = ({ children }) => {
     WALLET_LINK_TYPE | undefined
   >(undefined);
   const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
+  const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
@@ -197,6 +202,7 @@ export const LoginProvider = ({ children }) => {
       setMetaMaskAccount(undefined);
       setProjects({});
       setWalletLinked(undefined);
+      setUserAPIKey("");
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
@@ -223,6 +229,8 @@ export const LoginProvider = ({ children }) => {
               setWalletLinked,
               walletLinkUrl,
               setWalletLinkUrl,
+              userAPIKey,
+              setUserAPIKey,
             } as IMetamaskProviderContext
           }
         >
