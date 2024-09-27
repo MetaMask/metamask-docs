@@ -132,6 +132,9 @@ export const LoginProvider = ({ children }) => {
   useEffect(() => {
     const provider = sdk?.getProvider();
     setMetaMaskProvider(provider);
+    if ((window as any)?.usabilla && window?.innerWidth > 1720) {
+      (window as any)?.usabilla?.load("w.usabilla.com", "7a27ead270ba");
+    }
   }, []);
 
   useEffect(() => {
