@@ -1,14 +1,16 @@
 :root[data-theme="dark"] {
-  --button-background-color: #1098fc;
+  --button-primary-background-color: #1098fc;
+  --button-secondary-background-color: transparent;
   --button-color: #141618;
-  --button-hover-background-color: #26a2fc;
+  --button-hover-background-color: #036ab5;
   --button-hover-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.4);
   --button-active-background-color: #3baafd;
   --button-danger: #e88f97
 }
 
 :root[data-theme="light"] {
-  --button-background-color: #0376c9;
+  --button-primary-background-color: #0376c9;
+  --button-secondary-background-color: transparent;
   --button-color: #ffffff;
   --button-hover-background-color: #036ab5;
   --button-hover-shadow: 0px 2px 8px 0px rgba(3, 118, 201, 0.2);
@@ -33,7 +35,6 @@ a.button {
 
 .button {
   color: var(--button-color);
-  background-color: var(--button-background-color);
   border: none;
   padding: 0 16px;
   height: 48px;
@@ -46,6 +47,19 @@ a.button {
   justify-content: center;
   align-items: center;
   min-width: 145px;
+
+  &.primary {
+    background-color: var(--button-primary-background-color);
+  }
+
+  &.secondary {
+    border: 1px solid rgba(3, 118, 201, 1);
+    --button-color: rgba(3, 118, 201, 1);
+    background-color: var(--button-secondary-background-color);
+    &:hover {
+      --button-color: #141618
+    }
+  }
 
   &:hover {
     background-color: var(--button-hover-background-color);
@@ -76,6 +90,14 @@ a.button {
   &:disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  &.nowrap {
+    white-space: nowrap;
+  }
+
+  &.textLight {
+    color: #ffffff;
   }
 
   .isLoading {

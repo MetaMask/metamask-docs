@@ -18,7 +18,7 @@ import {
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { REF_PATH } from "@site/src/lib/constants";
+import { LINEA_REQUEST_URL, REF_PATH } from "@site/src/lib/constants";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -51,11 +51,17 @@ export default function ParserOpenRPC({
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext);
   const [defExampleResponse, setDefExampleResponse] = useState(undefined);
-  const { metaMaskAccount, metaMaskProvider } = useContext(
-    MetamaskProviderContext
-  );
   const { colorMode } = useColorMode();
+  const trackAnalyticsForRequest = (response) => {
+    trackClickForSegment({
+      eventName: "Request Sent",
+      clickType: "Request Sent",
+      userExperience: "B",
+      ...(response?.code && { responseStatus: response.code }),
+    });
+  }
   const openModal = () => {
     setModalOpen(true);
     trackClickForSegment({
@@ -169,21 +175,38 @@ export default function ParserOpenRPC({
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return;
-    try {
-      const response = await metaMaskProvider?.request({
-        method: method,
-        params: paramsData,
-      });
-      setReqResult(response);
-      trackClickForSegment({
-        eventName: "Request Sent",
-        clickType: "Request Sent",
-        userExperience: "B",
-        ...(response?.code && { responseStatus: response.code }),
-      });
-    } catch (e) {
-      setReqResult(e);
+    if (isMetamaskNetwork) {
+      if (!metaMaskProvider) return
+      try {
+        const response = await metaMaskProvider?.request({
+          method: method,
+          params: paramsData
+        })
+        setReqResult(response);
+        trackAnalyticsForRequest(response);
+      } catch (e) {
+        setReqResult(e);
+      }
+    } else {
+      const URL = `${LINEA_REQUEST_URL}/v3/${userAPIKey}`;
+      let params = {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method,
+          params: paramsData,
+          id: 1,
+        }),
+      };
+      const res = await fetch(URL, params);
+      if (res.ok) {
+        const response = await res.json();
+        setReqResult(response.result);
+        trackAnalyticsForRequest(response.result);
+      } else {
+        console.error("error");
+      }
     }
   };
 
