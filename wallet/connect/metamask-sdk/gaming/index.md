@@ -13,4 +13,3 @@ to easily connect with their MetaMask Mobile wallet.
 See the instructions for the following gaming platforms:
 
 - [Unity](unity.md)
-- [Unreal Engine](unreal-engine.md) (coming soon)

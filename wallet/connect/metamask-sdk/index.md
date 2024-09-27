@@ -55,7 +55,6 @@ Get started with the SDK on the following platforms:
     <div class="card__body">
       <ul>
         <li><a href="/wallet/connect/metamask-sdk/gaming/unity">Unity</a></li>
-        <li><a href="/wallet/connect/metamask-sdk/gaming/unreal-engine">Unreal Engine</a> (coming soon)</li>
       </ul>
     </div>
   </div>
