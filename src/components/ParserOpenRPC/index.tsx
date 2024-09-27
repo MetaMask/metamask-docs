@@ -65,7 +65,10 @@ export default function ParserOpenRPC({
       eventName: "Request Sent",
       clickType: "Request Sent",
       userExperience: "B",
+      // @ts-ignore
       ...(response?.code && { responseStatus: response.code }),
+      responseMsg: null,
+      timestamp: Date.now(),
     });
   }
   const openModal = () => {
