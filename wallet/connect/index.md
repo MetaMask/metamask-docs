@@ -7,7 +7,7 @@ description: Connect to MetaMask using various options.
 You can connect your dapp to MetaMask using one of the following methods:
 
 - [MetaMask SDK](metamask-sdk/index.md)
-- Third-party libraries with SDK support, e.g., [Wagmi](3rd-party-libraries/wagmi.md) or
+- Third-party libraries with SDK support, such as [Wagmi](3rd-party-libraries/wagmi.md) or
   [Web3-Onboard](3rd-party-libraries/web3-onboard.md)
 - The MetaMask [Wallet API](wallet-api.md) directly
 
