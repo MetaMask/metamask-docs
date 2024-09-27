@@ -50,6 +50,6 @@ Get started with [Wagmi](3rd-party-libraries/wagmi.md) or [Web3-Onboard](3rd-par
 
 ## Wallet API
 
-For direct integration, you can use the Wallet API to manage Ethereum accounts, sign data, and send transactions without the need for the SDK.
+For direct integration, you can use the Wallet API to manage Ethereum accounts, sign data, and send transactions without the SDK.
 
 Get started with the [Wallet API](wallet-api.md).
