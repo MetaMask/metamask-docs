@@ -31,12 +31,13 @@ const SectionNetworks = () => {
           ? index === 4
             ? "opacity-30"
             : index === 3
-            ? "opacity-60"
-            : ""
+              ? "opacity-60"
+              : ""
           : ""
       }`}
       key={name}
-      to={href}>
+      to={href}
+    >
       <div className="logo-wrap">
         <img src={logo} alt={`${name} logo`} />
       </div>

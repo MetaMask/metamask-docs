@@ -1,4 +1,4 @@
-@media screen and (max-width: 996px) {
+@media screen and (width <= 996px) {
   .introductionBlock {
     padding: 2rem;
     word-wrap: normal;

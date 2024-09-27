@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BaseInputTemplateProps } from "@rjsf/utils";
 import clsx from "clsx";
 import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 import debounce from "lodash.debounce";
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
@@ -32,7 +32,7 @@ export const BaseInputTemplate = ({
     debounce((e, isInputNumber = false) => {
       onChange(isInputNumber ? e : e?.target?.value);
     }, 300),
-    []
+    [],
   );
   const onInputChange = (e) => {
     setInputValue(e?.target?.value);
@@ -57,7 +57,7 @@ export const BaseInputTemplate = ({
             className={clsx(
               styles.tableColumnParam,
               isFocused && styles.tableColumnParamFocused,
-              hasErrors && styles.tableColumnParamError
+              hasErrors && styles.tableColumnParamError,
             )}
           >
             <span>
@@ -79,7 +79,7 @@ export const BaseInputTemplate = ({
               disabled={disabled}
               className={clsx(
                 styles.formControl,
-                hasErrors && styles.formControlError
+                hasErrors && styles.formControlError,
               )}
               type={isNumber ? "number" : (schema.type as string)}
               pattern={schema.pattern}
@@ -99,7 +99,7 @@ export const BaseInputTemplate = ({
                     className={clsx(
                       styles.tableColumnIcon,
                       styles.chevronIcon,
-                      styles.formControlNumberUp
+                      styles.formControlNumberUp,
                     )}
                     onClick={() => {
                       onInputNumberChange(Number((+inputValue || 0) + 1));
@@ -110,9 +110,10 @@ export const BaseInputTemplate = ({
                       styles.tableColumnIcon,
                       styles.chevronIcon,
                       styles.chevronIconDown,
-                      styles.formControlNumberDown
+                      styles.formControlNumberDown,
                     )}
                     onClick={() => {
+                      // @ts-ignore
                       inputValue >= 1 &&
                         onInputNumberChange(Number((+inputValue || 0) - 1));
                     }}

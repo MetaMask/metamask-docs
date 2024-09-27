@@ -12,17 +12,11 @@ It allows interfaces returned from [dialogs](dialogs.md), [home pages](home-page
 
 The following interactive UI components are available:
 
-- [`button`](index.md#button)
-- [`form`](index.md#form)
-- [`input`](index.md#input)
-
-The following interactive UI JSX components are available:
-
-- [`Button`](with-jsx.md#button)
-- [`Dropdown`](with-jsx.md#dropdown)
-- [`Field`](with-jsx.md#field)
-- [`Form`](with-jsx.md#form)
-- [`Input`](with-jsx.md#input)
+- [`Button`](index.md#button)
+- [`Dropdown`](index.md#dropdown)
+- [`Field`](index.md#field)
+- [`Form`](index.md#form)
+- [`Input`](index.md#input)
 
 ## Create an interactive interface
 
@@ -36,6 +30,13 @@ You can pass this ID to [`snap_dialog`](../../reference/snaps-api.md#snap_dialog
 If you need to [update the interface](#update-an-interactive-interface) or
 [get its state](#get-an-interactive-interfaces-state) at a future time, you should store its ID in
 the Snap's storage.
+
+### Add context to an interface
+
+You can optionally add context to an interface by passing a `context` object to the
+[`snap_createInterface`](../../reference/snaps-api.md#snap_createinterface) method.
+This object can contain any data you want to pass to the interface.
+This context will be passed to [`onUserInput`](../../reference/entry-points.md#onuserinput) when the user interacts with the interface.
 
 ## Update an interactive interface
 

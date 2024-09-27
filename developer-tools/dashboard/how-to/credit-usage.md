@@ -6,7 +6,7 @@ description: View your Infura credit usage stats.
 
 :::info
 
-The [credit pricing model](../api/learn/pricing/) replaces request-based billing for free-tier (Core)
+The [credit pricing model](/services/get-started/pricing) replaces request-based billing for free-tier (Core)
 customers. Customers on Developer and Team plans will be transitioned to the credit model on
 September 30, 2024.
 

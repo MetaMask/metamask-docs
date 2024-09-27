@@ -2,8 +2,14 @@ export const PROD_APP_URL = "https://app.infura.io";
 export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
-export const API_URL =
-  process.env.NODE_ENV === "production" ? PROD_APP_URL : DEV_APP_URL;
+export const DASHBOARD_URL = (DASHBOARD_PREVIEW_URL, VERCEL_ENV) =>
+  DASHBOARD_PREVIEW_URL
+    ? DASHBOARD_PREVIEW_URL
+    : VERCEL_ENV === "production"
+      ? PROD_APP_URL
+      : STAGE_APP_URL;
+
+export const REF_PATH = "/wallet/reference/new-reference";
 
 const TEST_TRANSACTIONS = {
   mainnet: {
@@ -450,6 +456,30 @@ export const GET_OPTIONS = {
   headers: NO_CACHE,
 };
 
+export const REF_SERVICES_PATH = "/services/reference/";
+export const REF_WALLET_PATH = "/wallet/reference/";
+
+export const REF_ALLOW_LOGIN_PATH = [REF_SERVICES_PATH, REF_WALLET_PATH];
+
+export const REQUEST_PARAMS = (method = "POST") => ({
+  method,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+  },
+});
+
+export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
+export const AUTH_WALLET_TOKEN = "auth.wallet.token";
+export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
+export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
+export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
+export const LINEA_REQUEST_URL = process.env.VERCEL_ENV === "production"
+    ? LINEA_PROD_URL
+    : LINEA_DEV_URL;
+
 export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
 
 export enum NETWORK_NAMES {
@@ -534,4 +564,4 @@ export const lineaSidebarNames = [
     old: "trace-methods",
     new: "Trace methods"
   },
-]
+];

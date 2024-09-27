@@ -145,7 +145,7 @@ const renderSchema = (schemaItem, schemas, name) => {
           renderEnum(
             schemaItem.schema.enum,
             schemaItem.schema.title,
-            schemaItem.schema.description
+            schemaItem.schema.description,
           )}
       </div>
     );
