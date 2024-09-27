@@ -15,7 +15,7 @@ Get started by [connecting to MetaMask](connect/index.md).
 - **Cross-platform compatibility** – Integrate with MetaMask from desktop, iOS, Android, React Native, and more.
 - **Seamless connections** – Minimize reconnections and improve user experience, especially on mobile.
 - **Mobile-first optimization** – Enable faster wallet interactions with instant deeplinks and advanced features.
-- **Enhanced functionality** – Use features such as [RPC request batching](how-to/batch-json-rpc-requests.md), [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for wallet discovery, and wallet security enhancements.
+- **Enhanced functionality** – Use [RPC request batching](how-to/batch-json-rpc-requests.md), [EIP-6963](/wallet/concepts/wallet-interoperability.md) for wallet discovery, and wallet security enhancements.
 
 For more control, the **Wallet API** allows developers to interact with wallets, manage Ethereum accounts, and call JSON-RPC methods, with or without the SDK.
 
