@@ -14,10 +14,10 @@ MetaMask SDK provides a reliable, secure, and seamless connection between your d
 
 Key features include:
 
-- **Multi-platform support** – Connect from web, desktop, mobile, or gaming platforms.
-- **Seamless mobile integration** – Use QR codes or deeplinks to create persistent connections with MetaMask Mobile.
-- **RPC request batching** – Enhance efficiency by batching multiple requests into a single call.
-- **EIP-6963 detection** – Automatically detect MetaMask wallets with or without third-party libraries.
+- **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
+- **Seamless mobile integration** – Leverage QR codes or deeplinks to establish persistent connections with MetaMask Mobile.
+- **EIP-6963 detection** – Automatically detect MetaMask wallets, with or without third-party libraries.
+- **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
 Get started with the SDK on the following platforms:
 
