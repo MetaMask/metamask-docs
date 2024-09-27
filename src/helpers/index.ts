@@ -7,15 +7,15 @@ export const fetchAndGenerateDynamicSidebarItems = async (networkName) => {
     const dynamicItems = data.methods.map((method) => ({
       type: "link",
       label: method.name,
-      href: `/services/reference/linea/json-rpc-methods-new/${method.name}`,
+      href: `/services/reference/linea/json-rpc-methods/${method.name}`,
     })).sort((a, b) => a.label.localeCompare(b.label));
     return [
       {
         type: "category",
-        label: "JSON-RPC Methods NEW",
+        label: "JSON-RPC methods",
         link: {
           type: 'generated-index',
-          slug: "/services/reference/linea/json-rpc-methods-new/"
+          slug: "/services/reference/linea/json-rpc-methods/"
         },
         collapsed: true,
         collapsible: true,

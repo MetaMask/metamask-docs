@@ -4,7 +4,7 @@ import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
-mport { Tooltip } from "@site/src/components/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 
@@ -77,23 +77,6 @@ export default function RequestBox({
 
   return (
     <>
-      {!isMetamaskNetwork ?
-        <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="custom_key">Your API Key:</label>
-          <input
-            name="custom_key"
-            value={customAPIKey}
-            onChange={(e) => setCustomAPIKey(e.target.value)}
-            style={{
-              marginLeft: "10px",
-              padding: "8px",
-              border: `1px solid ${colorMode === "dark" ? "#fff" : "#848c96"}`,
-              borderRadius: "8px",
-              width: "360px"
-            }} />
-        </div> :
-        null
-      }
       <div className={styles.cardWrapper}>
         <div className={styles.cardHeader}>
           <strong className={styles.cardHeading}>Request</strong>

@@ -5,7 +5,7 @@ import DocSidebar from '@theme/DocSidebar';
 import styles from "@site/src/theme/Layout/styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import upperFirst  from "lodash.upperfirst"
-import { lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
+import { JSON_RPC_METHODS_LABEL, lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
 
 const formatMenuLabel = (label) => {
   const menuItem = lineaSidebarNames.find(name => name.old === label);
@@ -94,16 +94,23 @@ const CustomReferencePage = (props) => {
           ...item,
           items: item.items.map(referenceItem => {
             if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items) {
-              return { ...referenceItem, items: [...referenceItem.items, ...siteConfig.customFields.dynamicData.map(dynamicItem => {
-                  const jsonRpcCategory = referenceItem.items.find(({ label }) => label === 'JSON-RPC APIs');
-                  if (jsonRpcCategory) {
-                    return {
-                      ...dynamicItem,
-                      ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
-                    };
-                  }
-                  return dynamicItem;
-                })] };
+              return { 
+                ...referenceItem,
+                items: [
+                  ...referenceItem.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
+                  ...siteConfig.customFields.dynamicData.map(dynamicItem => {
+                    const jsonRpcCategory = referenceItem.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
+                    if (jsonRpcCategory) {
+                      return {
+                        ...dynamicItem,
+                        ...{ href: "/services/reference/linea/json-rpc-methods/" },
+                        ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
+                      };
+                    }
+                    return dynamicItem;
+                  })
+                ] 
+              };
             }
             return referenceItem;
           })

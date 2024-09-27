@@ -56,12 +56,12 @@ export default function useNetworksMethodPlugin() {
             const methodMDXContent = generateMethodMDX(page);
 
             const filePath = await createData(
-              `services/reference/linea/json-rpc-methods-new/${page.name}.mdx`,
+              `services/reference/linea/json-rpc-methods/${page.name}.mdx`,
               methodMDXContent
             );
 
             return addRoute({
-              path: `/services/reference/linea/json-rpc-methods-new/${page.name}`,
+              path: `/services/reference/linea/json-rpc-methods/${page.name}`,
               component: require.resolve("../components/CustomReferencePage/index.tsx"),
               exact: true,
               modules: {

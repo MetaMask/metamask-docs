@@ -518,7 +518,7 @@ export const lineaSidebarNames = [
   },
   {
     old: "json-rpc-methods",
-    new: "JSON-RPC APIs"
+    new: "JSON-RPC methods"
   },
   {
     old: "avalanche-c-chain",
@@ -565,3 +565,5 @@ export const lineaSidebarNames = [
     new: "Trace methods"
   },
 ];
+
+export const JSON_RPC_METHODS_LABEL = "JSON-RPC methods";

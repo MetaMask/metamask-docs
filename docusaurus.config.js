@@ -3,7 +3,7 @@
 
 require("dotenv").config();
 const { fetchAndGenerateDynamicSidebarItems } = require("./src/helpers");
-import { NETWORK_NAMES } from "./src/lib/constants.ts";
+import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES } from "./src/lib/constants.ts";
 const upperFirst = require("lodash.upperfirst");
 const { themes } = require("prism-react-renderer");
 const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
@@ -139,16 +139,23 @@ const config = {
           config.customFields.dynamicData = dynamicSidebarItems;
           const updatedItems = sidebarItems.map(item => {
             if (item?.label === upperFirst(NETWORK_NAMES.linea) && item?.items) {
-              return { ...item, items: [...item.items, ...dynamicSidebarItems.map(dynamicItem => {
-                  const jsonRpcCategory = item.items.find(({ label }) => label === 'JSON-RPC methods');
-                  if (jsonRpcCategory) {
-                    return {
-                      ...dynamicItem,
-                      ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
-                    };
-                  }
-                  return dynamicItem;
-                })]};
+              return { 
+                ...item,
+                items: 
+                  [
+                    ...item.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
+                    ...dynamicSidebarItems.map(dynamicItem => {
+                      const jsonRpcCategory = item.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
+                      if (jsonRpcCategory) {
+                        return {
+                          ...dynamicItem,
+                          ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
+                        };
+                      }
+                      return dynamicItem;
+                    })
+                  ]
+              };
             }
             return item;
           });

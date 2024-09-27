@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { useLocation } from "@docusaurus/router";
 import { ResponseItem } from "@site/src/plugins/plugin-json-rpc";
 import { NETWORK_NAMES } from "@site/src/lib/constants";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
@@ -50,8 +49,6 @@ export default function ParserOpenRPC({
   extraContent,
 }: ParserProps) {
   if (!method || !network) return null;
-  const location = useLocation();
-  const { pathname } = location;
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
@@ -302,8 +299,8 @@ export default function ParserOpenRPC({
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {pathname.startsWith(REF_PATH) && <ProjectsBox />}
-            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && (
+            {!isMetamaskNetwork && <ProjectsBox />}
+            {isMetamaskNetwork && !metaMaskAccount && (
               <AuthBox isMetamaskNetwork={isMetamaskNetwork} />
             )}
             <RequestBox
