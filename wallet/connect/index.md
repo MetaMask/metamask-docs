@@ -23,7 +23,7 @@ The following table compares the supported features of each connection option:
 
 ## MetaMask SDK
 
-The MetaMask SDK ensures a reliable and secure connection to MetaMask Mobile across various platforms. For web dapps, it also enables users to connect via the MetaMask browser extension. The MetaMask SDK can be seamlessly integrated into existing projects without modifying underlying Wallet API calls.
+MetaMask SDK ensures a reliable and secure connection to MetaMask Mobile across various platforms. For web dapps, it also enables users to connect via the MetaMask browser extension. You can seamlessly integrate MetaMask SDK into existing projects without modifying underlying Wallet API calls.
 
 Key features include:
 
