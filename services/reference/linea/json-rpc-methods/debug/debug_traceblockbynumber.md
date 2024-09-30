@@ -1,9 +1,8 @@
 ---
 description: debug_traceBlockByNumber API method
 ---
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # debug_traceBlockByNumber
 
@@ -11,19 +10,24 @@ Returns tracing results by executing all transactions in the specified block num
 
 ## Parameters
 
-- `blockNumber`: (string) _[required]_ block number as a hexidecimal string, or one of the string tags `latest`, `earliest`
-  , or `pending`, as [described in the default block parameters](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+- `blockParameter`: (string) [_required_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+
+    :::warning
+    `safe` isn't supported, use `finalized`.
+    Learn more about [Linea's layer 2 finalization](https://docs.linea.build/developers/guides/finalized-block). 
+    :::
+    
 - Optional tracing options object with the following fields:
-  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-    [`prestateTracer`](index.md##prestatetracer).
-  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
-    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
-      sub-calls. It eliminates the additional processing for each call frame.
+    - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
+        [`prestateTracer`](../debug/index.md##prestatetracer).
+    - `tracerConfig`: (object) _[optional]_  tracer configuration options:
+        - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+            sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 
-Depending on the specified tracer type, returns a [`callTracer`](index.md##calltracer) object or
-[`prestateTracer`](index.md#prestatetracer) object.
+Depending on the specified tracer type, returns a [`callTracer`](../debug/index.md##calltracer) object or
+[`prestateTracer`](../debug/index.md#prestatetracer) object.
 
 ## Example
 
@@ -36,14 +40,14 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "debug_traceBlockByNumber", "params": ["0x4d0c", {"tracer": "callTracer"}], "id": 1}'
+  -d '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
 ```
-
   </TabItem>
   <TabItem value="WSS" label="WSS" >
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceBlockByNumber", "params": ["0x4d0c", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> \
+-x '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
 ```
 
   </TabItem>
@@ -77,7 +81,7 @@ wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0"
         "type": "CALL",
         "value": "0x2386f26fc10000"
       }
-    }
+    },
     ...
   ]
 }

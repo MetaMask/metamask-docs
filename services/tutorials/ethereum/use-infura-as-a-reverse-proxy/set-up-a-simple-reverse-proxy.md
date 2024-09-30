@@ -47,14 +47,15 @@ To create the reverse proxy, create a text file named `Caddyfile` with the follo
 ```
 localhost
 
-reverse_proxy https://goerli.infura.io {
+reverse_proxy https://mainnet.infura.io {
 header_up Host
 }
 ```
 
-Ensure you replace `<YOUR_API_KEY>` with the API key for your Ethereum project.
+Ensure you replace `<YOUR-API-KEY>` with the API key for your Ethereum project.
 
-In this example, the reverse proxy retrieves information from the Infura Goerli endpoint, and redirects it to `localhost`. Using `header_up Host` allows you to include your API key to both the Goerli and localhost endpoints.
+In this example, the reverse proxy retrieves information from the Infura endpoint, and redirects it to `localhost`.
+Using `header_up Host` allows you to include your API key to both the Sepolia and localhost endpoints.
 
 ### 4. Run the reverse proxy
 
@@ -72,7 +73,7 @@ In a new terminal window, make a curl request to `localhost`. The following exam
   <TabItem value="Example curl HTTPS request" label="Example curl HTTPS request" default>
 
 ```bash
-curl https://localhost/v3/<YOUR_API_KEY> \
+curl https://localhost/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'
@@ -88,13 +89,13 @@ curl https://localhost/v3/<YOUR_API_KEY> \
   </TabItem>
 </Tabs>
 
-To ensure that the reverse proxy is working, execute the same request, replacing `localhost` with `goerli.infura.io`. You should get the same result:
+To ensure that the reverse proxy is working, execute the same request, replacing `localhost` with `sepolia.infura.io`. You should get the same result:
 
 <Tabs>
   <TabItem value="Example curl HTTPS request" label="Example curl HTTPS request" default>
 
 ```bash
-curl https://goerli.infura.io/v3/<YOUR_API_KEY> \
+curl https://sepolia.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "web3_clientVersion", "params": [], "id": 1}'

@@ -80,7 +80,7 @@ a specific network, then use the default Ethereum method's credit cost.
 | `eth_maxPriorityFeePerGas`                | 80          |
 | `eth_mining`                              | 5           |
 | `eth_protocolVersion`                     | 5           |
-| `eth_sendRawTransaction`                  | 720         |
+| `eth_sendRawTransaction`                  | 80          |
 | `eth_sign`                                | 80          |
 | `eth_submitWork`                          | 80          |
 | `eth_subscribe`                           | 5           |

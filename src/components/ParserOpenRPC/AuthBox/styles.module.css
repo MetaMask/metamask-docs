@@ -47,8 +47,8 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
-  border: 1px solid rgba(3, 118, 201, 1);
-  color: rgba(3, 118, 201, 1);
+  border: 1px solid rgb(3 118 201 / 100%);
+  color: rgb(3 118 201 / 100%);
 }
 
 .mmBtnCheck {

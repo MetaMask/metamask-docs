@@ -24,7 +24,7 @@
   text-decoration: none;
   color: #141618;
   background-color: #26a2fc;
-  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
+  box-shadow: 0 2px 8px 0 rgb(16 152 252 / 40%);
 }
 
 .primaryBtn:disabled {
@@ -42,15 +42,15 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
-  border: 1px solid rgba(3, 118, 201, 1);
-  color: rgba(3, 118, 201, 1);
+  border: 1px solid rgb(3 118 201 / 100%);
+  color: rgb(3 118 201 / 100%);
 }
 
 .secondaryBtn:hover {
   text-decoration: none;
   color: #141618;
   background-color: #26a2fc;
-  box-shadow: 0 2px 8px 0 rgba(16, 152, 252, 0.4);
+  box-shadow: 0 2px 8px 0 rgb(16 152 252 / 40%);
 }
 
 .secondaryBtn:disabled {
@@ -105,6 +105,7 @@
   .colLeft {
     width: calc(100% - 420px);
   }
+
   .colRight {
     width: 420px;
   }
@@ -116,14 +117,17 @@
     padding: 0;
     border-right: 0;
   }
+
   .colRight {
     width: 100%;
     padding: 0;
   }
+
   .colContentWrap {
     height: auto;
     padding: 0;
   }
+
   .rowWrap {
     padding: 0;
   }
@@ -133,6 +137,7 @@
   .colLeft {
     padding-top: 60px;
   }
+
   .colRight {
     padding-top: 30px;
   }

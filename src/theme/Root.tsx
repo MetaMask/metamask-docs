@@ -8,6 +8,7 @@ import React, {
 import { Provider as AlertProvider } from "react-alert";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import siteConfig from "@generated/docusaurus.config";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
@@ -56,6 +57,8 @@ interface IMetamaskProviderContext {
   walletLinked: WALLET_LINK_TYPE | undefined;
   setWalletLinkUrl: (arg: string) => void;
   walletLinkUrl: string;
+  userAPIKey?: string;
+  setUserAPIKey?: (key: string) => void;
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
@@ -74,6 +77,8 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   walletLinked: undefined,
   setWalletLinkUrl: () => {},
   walletLinkUrl: "",
+  userAPIKey: "",
+  setUserAPIKey: () => {},
 });
 
 const sdk = new MetaMaskSDK({
@@ -101,6 +106,7 @@ export const LoginProvider = ({ children }) => {
     WALLET_LINK_TYPE | undefined
   >(undefined);
   const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
+  const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
@@ -124,9 +130,14 @@ export const LoginProvider = ({ children }) => {
     } catch (e) {}
   };
 
+  const { GF_SURVEY_KEY } = siteConfig.customFields;
+
   useEffect(() => {
     const provider = sdk?.getProvider();
     setMetaMaskProvider(provider);
+    if ((window as any)?.usabilla && window?.innerWidth > 1720) {
+      (window as any)?.usabilla?.load("w.usabilla.com", GF_SURVEY_KEY);
+    }
   }, []);
 
   useEffect(() => {
@@ -197,6 +208,7 @@ export const LoginProvider = ({ children }) => {
       setMetaMaskAccount(undefined);
       setProjects({});
       setWalletLinked(undefined);
+      setUserAPIKey("");
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
@@ -223,6 +235,8 @@ export const LoginProvider = ({ children }) => {
               setWalletLinked,
               walletLinkUrl,
               setWalletLinkUrl,
+              userAPIKey,
+              setUserAPIKey,
             } as IMetamaskProviderContext
           }
         >

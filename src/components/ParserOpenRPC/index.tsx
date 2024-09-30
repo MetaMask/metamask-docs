@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
@@ -18,7 +24,7 @@ import {
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { REF_PATH } from "@site/src/lib/constants";
+import { LINEA_REQUEST_URL, REF_PATH } from "@site/src/lib/constants";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -51,17 +57,29 @@ export default function ParserOpenRPC({
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
+  const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext);
   const [defExampleResponse, setDefExampleResponse] = useState(undefined);
-  const { metaMaskAccount, metaMaskProvider } = useContext(
-    MetamaskProviderContext
-  );
   const { colorMode } = useColorMode();
+  const trackAnalyticsForRequest = (response) => {
+    trackClickForSegment({
+      eventName: "Request Sent",
+      clickType: "Request Sent",
+      userExperience: "B",
+      // @ts-ignore
+      ...(response?.code && { responseStatus: response.code }),
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+  }
   const openModal = () => {
     setModalOpen(true);
     trackClickForSegment({
       eventName: "Customize Request",
       clickType: "Customize Request",
       userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
     });
   };
   const closeModal = () => setModalOpen(false);
@@ -90,19 +108,19 @@ export default function ParserOpenRPC({
     };
 
     const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method
+      (met) => met.name === method,
     );
     if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
-      "errors"
+      "errors",
     );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
-      "tags"
+      "tags",
     );
 
     return {
@@ -140,12 +158,13 @@ export default function ParserOpenRPC({
 
   const resetResponseHandle = () => {
     setReqResult(undefined);
-  }
+  };
 
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
       userExperience: "B",
+      timestamp: Date.now(),
     });
 
     if (
@@ -169,21 +188,38 @@ export default function ParserOpenRPC({
   };
 
   const onSubmitRequestHandle = async () => {
-    if (!metaMaskProvider) return;
-    try {
-      const response = await metaMaskProvider?.request({
-        method: method,
-        params: paramsData,
-      });
-      setReqResult(response);
-      trackClickForSegment({
-        eventName: "Request Sent",
-        clickType: "Request Sent",
-        userExperience: "B",
-        ...(response?.code && { responseStatus: response.code }),
-      });
-    } catch (e) {
-      setReqResult(e);
+    if (isMetamaskNetwork) {
+      if (!metaMaskProvider) return
+      try {
+        const response = await metaMaskProvider?.request({
+          method: method,
+          params: paramsData
+        })
+        setReqResult(response);
+        trackAnalyticsForRequest(response);
+      } catch (e) {
+        setReqResult(e);
+      }
+    } else {
+      const URL = `${LINEA_REQUEST_URL}/v3/${userAPIKey}`;
+      let params = {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method,
+          params: paramsData,
+          id: 1,
+        }),
+      };
+      const res = await fetch(URL, params);
+      if (res.ok) {
+        const response = await res.json();
+        setReqResult(response.result);
+        trackAnalyticsForRequest(response.result);
+      } else {
+        console.error("error");
+      }
     }
   };
 
@@ -229,7 +265,7 @@ export default function ParserOpenRPC({
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack
+                      modalDrawerStyles.modalHeaderIconBack,
                     )}
                     onClick={closeComplexTypeView}
                   >
@@ -266,7 +302,9 @@ export default function ParserOpenRPC({
         <div className={global.colRight}>
           <div className={global.stickyCol}>
             {pathname.startsWith(REF_PATH) && <ProjectsBox />}
-            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox isMetamaskNetwork={isMetamaskNetwork} />}
+            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && (
+              <AuthBox isMetamaskNetwork={isMetamaskNetwork} />
+            )}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}

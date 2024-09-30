@@ -148,6 +148,7 @@ export default function InteractiveBox({
       schemas: components,
     },
     type: "object",
+    // @ts-ignore
     properties: Object.fromEntries(
       params.map(({ name, schema }) => [name, schema])
     ),
@@ -172,7 +173,9 @@ export default function InteractiveBox({
     SelectWidget: SelectWidget,
   };
   const fields: RegistryFieldsType = {
+    // @ts-ignore
     AnyOfField: ConditionalField,
+    // @ts-ignore
     OneOfField: ConditionalField,
   };
   const handleResetForm = (e) => {
