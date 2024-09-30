@@ -33,6 +33,8 @@ export default function LayoutWrapper({ children }) {
     return false;
   }, [location.pathname, metamaskMethods]);
 
+  console.log("children?.props?.children[0]", children?.props?.children[0]);
+
   return (
     <>
       {referencePageName ? (

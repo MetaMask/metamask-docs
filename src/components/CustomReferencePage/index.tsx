@@ -3,10 +3,12 @@ import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import React, { useEffect, useState } from "react";
 import DocSidebar from '@theme/DocSidebar';
 import styles from "@site/src/theme/Layout/styles.module.css"
+import customStyles from "./styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import upperFirst  from "lodash.upperfirst"
 import { JSON_RPC_METHODS_LABEL, lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
 import { useLocation } from "@docusaurus/router";
+import clsx from "clsx";
 
 const formatMenuLabel = (label) => {
   const menuItem = lineaSidebarNames.find(name => name.old === label);
@@ -126,7 +128,7 @@ const CustomReferencePage = (props) => {
   return formattedData ? (
     <Layout>
       <div className={styles.pageWrapper}>
-        <aside className={sidebar_wrapper_classes}>
+        <aside className={clsx(sidebar_wrapper_classes, customStyles.sidebar)}>
           <DocSidebar sidebar={formattedData} path={pathname} onCollapse={() => {}} isHidden={false} />
         </aside>
         <div className={styles.mainContainer}>
