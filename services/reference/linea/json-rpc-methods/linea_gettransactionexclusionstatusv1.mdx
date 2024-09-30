@@ -89,8 +89,8 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
     </TabItem>
 </Tabs>
 
-If the transaction was not rejected for exceeding line limits, or is older than seven days, it will not be
-found in the database, and a `null` result is returned. For example:
+The API returns a `null` result if the transaction does not exceed line limits or is older than seven days. 
+In these cases, the database does not contain the transaction. For example:
 
 ```json
 {
