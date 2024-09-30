@@ -12,7 +12,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 ## September 2024
 
 - Documented [`linea_getTransactionExclusionStatusV1`](/services/reference/linea/json-rpc-methods/linea_gettransactionexclusionstatusv1).
-
+  ([#1590](https://github.com/MetaMask/metamask-docs/pull/1590))
 - Updated [credit cost](/services/get-started/pricing/credit-cost/#ethereum) for `eth_sendRawTransaction`.
   ([#1581](https://github.com/MetaMask/metamask-docs/pull/1581))
 - Documented WebSocket support for [Base](/services/reference/base),
