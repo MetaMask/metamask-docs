@@ -567,3 +567,39 @@ export const lineaSidebarNames = [
 ];
 
 export const JSON_RPC_METHODS_LABEL = "JSON-RPC methods";
+
+type SidebarItemType = "link" | "category";
+
+export type SidebarItem = {
+  type: SidebarItemType;
+  label: string;
+  href: string;
+  sidebar_position: number;
+  items?: SidebarItem[];
+}
+
+export type SidebarDocs = {
+  docs: SidebarItem[];
+}
+
+export type DynamicData = {
+  type: SidebarItemType;
+  label: string;
+  link: {
+      type: string;
+      slug: string;
+  };
+  collapsed: boolean;
+  collapsible: boolean;
+  items?: SidebarItem[]; 
+}
+
+export type CustomFields = {
+  LD_CLIENT_ID: string;
+  VERCEL_ENV: string;
+  DASHBOARD_PREVIEW_URL: string;
+  SENTRY_KEY: string;
+  GF_SURVEY_KEY: string;
+  sidebarData: SidebarDocs;
+  dynamicData: DynamicData[],
+}

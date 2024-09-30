@@ -6,7 +6,7 @@ import styles from "@site/src/theme/Layout/styles.module.css"
 import customStyles from "./styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import upperFirst  from "lodash.upperfirst"
-import { JSON_RPC_METHODS_LABEL, lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
+import { JSON_RPC_METHODS_LABEL, lineaSidebarNames, NETWORK_NAMES, SidebarItem, CustomFields } from "@site/src/lib/constants";
 import { useLocation } from "@docusaurus/router";
 
 const formatMenuLabel = (label) => {
@@ -69,7 +69,7 @@ function generateSidebarItems(docs) {
   });
 
   const convertToArray = (categoryObj) => {
-    return Object.values(categoryObj).map((category) => {
+    return Object.values(categoryObj).map((category: SidebarItem) => {
       if (category.items && typeof category.items === 'object') {
         category.items = convertToArray(category.items);
         if (category.items.every(item => item.sidebar_position !== undefined)) {
@@ -89,20 +89,21 @@ const CustomReferencePage = (props) => {
   const { siteConfig } = useDocusaurusContext();
   const [formattedData, setFormattedData] = useState([]);
   const { pathname } = useLocation();
+  const customSiteConfig = siteConfig.customFields as CustomFields;
 
   useEffect(() => {
-    if (siteConfig.customFields && siteConfig.customFields?.dynamicData && siteConfig.customFields?.sidebarData?.docs) {
-      setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
+    if (customSiteConfig && customSiteConfig?.dynamicData && customSiteConfig?.sidebarData.docs) {
+      setFormattedData(generateSidebarItems(customSiteConfig.sidebarData.docs).map(item => {
         if (item?.label === "Reference" && item?.items) {
           return {
             ...item,
             items: item.items.map(referenceItem => {
-              if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items) {
+              if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items && customSiteConfig.dynamicData) {
                 return { 
                   ...referenceItem,
                   items: [
                     ...referenceItem.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
-                    ...siteConfig.customFields.dynamicData.map(dynamicItem => {
+                    ...customSiteConfig.dynamicData.map(dynamicItem => {
                       const jsonRpcCategory = referenceItem.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
                       if (jsonRpcCategory) {
                         return {

@@ -1,4 +1,4 @@
-import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES, RPC_NETWORK_URL } from "../lib/constants.ts";
+import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES, RPC_NETWORK_URL } from "../lib/constants";
 
 export interface ResponseItem {
   name: string;

@@ -3,7 +3,7 @@
 
 require("dotenv").config();
 const { fetchAndGenerateDynamicSidebarItems } = require("./src/helpers");
-import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES } from "./src/lib/constants.ts";
+import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES, CustomFields } from "./src/lib/constants";
 const upperFirst = require("lodash.upperfirst");
 const { themes } = require("prism-react-renderer");
 const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
@@ -42,7 +42,7 @@ const config = {
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
     sidebarData: { docs: []},
     dynamicData: [],
-  },
+  } as CustomFields,
 
   trailingSlash: true,
 
