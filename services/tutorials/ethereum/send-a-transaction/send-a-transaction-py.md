@@ -73,7 +73,7 @@ from web3 import Web3, exceptions
 
 load_dotenv()
 
-infura_url = "https://sepolia.infura.io/v3/<API-KEY>"
+infura_url = "https://sepolia.infura.io/v3/<YOUR-API-KEY>"
 private_key = os.getenv("PRIVATE_KEY")
 from_account = "<PUBLIC-KEY>"
 to_account = "<RECIPIENT-PUBLIC-KEY>"
@@ -109,7 +109,7 @@ print("Transaction hash: " + str(web3.to_hex(tx_hash)))
 
 Ensure you replace the following values in the code:
 
-- `<API-KEY>` with the API key of the Web3 project.
+- `<YOUR-API-KEY>` with the API key of the Web3 project.
 - `<PUBLIC-KEY>` with the public key associated with the private key you added in the `.env` file.
 - `<RECIPIENT-PUBLIC-KEY>` With the public key of the recipient of the transfer.
 
