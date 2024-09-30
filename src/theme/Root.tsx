@@ -8,6 +8,7 @@ import React, {
 import { Provider as AlertProvider } from "react-alert";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import siteConfig from "@generated/docusaurus.config";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
@@ -129,11 +130,13 @@ export const LoginProvider = ({ children }) => {
     } catch (e) {}
   };
 
+  const { GF_SURVEY_KEY } = siteConfig.customFields;
+
   useEffect(() => {
     const provider = sdk?.getProvider();
     setMetaMaskProvider(provider);
     if ((window as any)?.usabilla && window?.innerWidth > 1720) {
-      (window as any)?.usabilla?.load("w.usabilla.com", "7a27ead270ba");
+      (window as any)?.usabilla?.load("w.usabilla.com", GF_SURVEY_KEY);
     }
   }, []);
 
