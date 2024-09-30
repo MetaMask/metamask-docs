@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Modal from "react-modal";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.css";
 import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
@@ -13,7 +14,13 @@ import {
   getUserIdFromJwtToken,
   AUTH_WALLET_USER_PLAN,
 } from "../../lib/siwsrp/auth";
-import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
+import {
+  DASHBOARD_URL,
+  REQUEST_PARAMS,
+  AUTH_WALLET_SESSION_NAME,
+  AUTH_WALLET_PROJECTS,
+} from "@site/src/lib/constants";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
 type AuthModalProps = {
@@ -33,6 +40,13 @@ export enum AUTH_LOGIN_STEP {
   WALLET_LOGIN_MULTI_USER = "wallet-login-multi-user",
   WALLET_LOGIN_EMAIL_PASSWORD = "wallet-login-email-password",
   CONNECTION_ERROR = "connection-error",
+  CONNECTION_SUCCESS = "connection-success",
+}
+
+export enum WALLET_LINK_TYPE {
+  NO = "NO",
+  ONE = "ONE",
+  MULTIPLE = "MULTIPLE",
 }
 
 const ConnectingModal = () => {
@@ -61,6 +75,23 @@ const ConnectingModal = () => {
       >
         Connecting...
       </button>
+    </>
+  );
+};
+
+const ConnectionSuccessModal = () => {
+  return (
+    <>
+      <div className={styles.spinnerContainer}>
+        <Icon name="spinner-success" classes={styles.spinner} />
+        <Icon name="metamask" classes={styles.metamask} />
+      </div>
+      <div className={styles.heading}>Wallet Connected!</div>
+      <div className={styles.content}>
+        Your wallet is successfully connected.
+        <br />
+        You’re all set!
+      </div>
     </>
   );
 };
@@ -124,70 +155,103 @@ const AuthModal = ({
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+  const {
+    sdk,
+    setWalletLinked,
+    setWalletLinkUrl,
+    metaMaskDisconnect,
+    setProjects,
+    setMetaMaskAccount,
+    setMetaMaskProvider,
+  } = useContext(MetamaskProviderContext);
+  const location = useLocation();
+  const { pathname } = location;
 
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING);
     try {
+      if (!sdk.isExtensionActive()) {
+        setOpen(false);
+      }
+
+      // Try to connect wallet first
+      const accounts = await sdk.connect();
+      setMetaMaskAccount(accounts);
+      if (accounts && accounts.length > 0) {
+        setMetaMaskAccount(accounts[0]);
+        const provider = sdk.getProvider();
+        setMetaMaskProvider(provider);
+      }
+
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
-      const { accessToken, userProfile } = await authenticateAndAuthorize();
-
-      // Check on Infura API if this wallet is paired with one or multiple Infura account
-      const pairingResponse = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/pairing`,
-        {
-          ...REQUEST_PARAMS("POST", { hydra_token: accessToken }),
-          body: JSON.stringify({
-            profileId: userProfile.profileId,
-          }),
-        },
+      const { accessToken, userProfile } = await authenticateAndAuthorize(
+        VERCEL_ENV as string
       );
 
-      const usersPairing = await pairingResponse.json();
-      const { data } = usersPairing;
-      // Saving of paired Infura accounts in local storage
+      const loginResponse = await (
+        await fetch(
+          `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
+          {
+            ...REQUEST_PARAMS(),
+            headers: {
+              ...REQUEST_PARAMS().headers,
+              hydra_token: accessToken,
+              token: "true",
+            },
+            body: JSON.stringify({
+              profileId: userProfile.profileId,
+              redirect_to: window.location.href,
+            }),
+          }
+        )
+      ).json();
+
+      if (!loginResponse) throw new Error("Something went wrong");
+
+      const { data, session, token } = loginResponse;
       localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
 
-      // Handling no wallet pairing or multiple pairing
-      if (data.length !== 1) {
+      if (data.step) {
+        // Handling no wallet pairing or multiple pairing
         const mm_auth = Buffer.from(
           JSON.stringify({
-            token: true,
-            step:
-              data.length > 1
-                ? AUTH_LOGIN_STEP.WALLET_LOGIN_MULTI_USER
-                : AUTH_LOGIN_STEP.WALLET_LOGIN_EMAIL_PASSWORD,
+            step: data.step,
             mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
-            walletPairing: data,
-          }),
+            walletPairing: data.pairing,
+            token: true,
+          })
         ).toString("base64");
-        window.location.href = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&token=true&redirect_to=${window.location.href}`;
+
+        const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
+
+        setWalletLinkUrl(walletLinkUrl);
+
+        if (data.pairing && !data.pairing.length) {
+          setWalletLinked(WALLET_LINK_TYPE.NO);
+        }
+
+        if (data.pairing && data.pairing.length > 1) {
+          setWalletLinked(WALLET_LINK_TYPE.MULTIPLE);
+        }
+
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
+        setOpen(false);
         return;
       }
 
-      // We have one wallet paired with one Infura account
-      // Use this Infura email account and this ProfileId to login to Infura
-      // Pass token in request params to generate and recieve an Infura access Token
-      const email = data[0].email as string;
-      const userWithTokenResponse = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login?token=true`,
-        {
-          ...REQUEST_PARAMS("POST", {
-            hydra_token: accessToken,
-            recaptcha_bypass: "84450394",
-          }),
-          body: JSON.stringify({
-            email,
-            profileId: userProfile.profileId,
-          }),
-        },
-      );
+      setWalletLinked(WALLET_LINK_TYPE.ONE);
 
-      const { token } = await userWithTokenResponse.json();
-      saveTokenString(token);
-      if (setToken) {
-        setToken(token);
+      if (!token) {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+        return;
       }
+
+      saveTokenString(token);
+        if (setToken) {
+            setToken(token);
+        }
+      setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
       const userId = getUserIdFromJwtToken();
       if (setUser) {
         setUser(userId);
@@ -197,7 +261,7 @@ const AuthModal = ({
       const projectsResponse = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
         {
-          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+            ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
         },
       );
       const {
@@ -223,8 +287,13 @@ const AuthModal = ({
       }
       setOpen(false);
     } catch (e: any) {
-      setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
-      setOpen(true);
+      if (pathname.startsWith("/wallet/reference")) {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
+        setOpen(true);
+      } else {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+        setOpen(true);
+      }
     }
   };
 
@@ -238,6 +307,8 @@ const AuthModal = ({
         }
       })();
     }
+
+    if (!open) setStep(AUTH_LOGIN_STEP.CONNECTING);
   }, [open]);
 
   const handleClose = () => {
@@ -264,6 +335,9 @@ const AuthModal = ({
           <Icon name="close" classes={styles.modalClose} />
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
+        {step === AUTH_LOGIN_STEP.CONNECTION_SUCCESS ? (
+          <ConnectionSuccessModal />
+        ) : null}
         {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
           <ConnectionErrorModal
             setOpen={setOpen}

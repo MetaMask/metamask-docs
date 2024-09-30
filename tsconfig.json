@@ -2,20 +2,18 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
+    "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
       "@site/*": ["./*"],
-      "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"]
+      "@theme/*": ["./node_modules/@docusaurus/theme-classic"],
+      "launchdarkly": [
+        "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
+      ],
+      "sentry-plugin": ["./node_modules/@sentry/browser/build/npm/esm/index.js"]
     },
-    "types": [
-      "docusaurus-plugin-sass"
-    ]
+    "types": ["docusaurus-plugin-sass"]
   },
-  "include": [
-    "src/globals.d.ts",
-    "./**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/globals.d.ts", "./src/**/*"],
+  "exclude": ["node_modules"]
 }

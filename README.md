@@ -1,9 +1,3 @@
-> :warning: **Temporary pause on contributions to the MetaMask docs repository**
-> 
-> Starting August 13, 2024, contributions to this repository will be temporarily paused.
-> Pull requests submitted during this period will not be reviewed or merged until after the pause.
-> Thank you for your understanding.
-
 # MetaMask developer documentation
 
 This is the MetaMask developer documentation repository.
@@ -41,13 +35,13 @@ Build the documentation site locally using the following steps.
 2. Install dependencies.
 
    ```bash
-   yarn install
+   npm install
    ```
 
 3. Start the development server.
 
    ```bash
-   yarn start
+   npm start
    ```
 
    Once the server starts, you can view the documentation at `http://localhost:3000`.

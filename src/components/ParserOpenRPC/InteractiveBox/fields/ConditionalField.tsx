@@ -16,6 +16,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
     isComplexTypeView,
     setIsComplexTypeView,
   } = useContext(ParserOpenRPCContext);
+  // @ts-ignore
   const { formData, schema, name, onChange } = props;
   const listItems = schema?.anyOf ? schema?.anyOf : schema?.oneOf;
   const checkForNullTypeSchema = (type) => type === "null";
@@ -27,13 +28,16 @@ export const ConditionalField = (props: FieldTemplateProps) => {
   };
   const onDropdownOptionClick = (e) => {
     const selectedSchema = listItems.find(
+      // @ts-ignore
       ({ title }) => title === e.target.dataset.value,
     );
+    // @ts-ignore
     const isNullTypeSchema = checkForNullTypeSchema(selectedSchema?.type);
     if (isNullTypeSchema) {
       onChange(null);
     } else {
       setSelectedTypeSchema(
+        // @ts-ignore
         listItems.find(({ title }) => title === e.target.dataset.value),
       );
       showComplexTypeView();
@@ -115,8 +119,10 @@ export const ConditionalField = (props: FieldTemplateProps) => {
                     className={styles.dropdownItem}
                     key={index}
                     onClick={onDropdownOptionClick}
+                    // @ts-ignore
                     data-value={listItem.title}
                   >
+                    {/* @ts-ignore */}
                     {listItem.title}
                   </li>
                 ))}
@@ -131,8 +137,10 @@ export const ConditionalField = (props: FieldTemplateProps) => {
       selectedTypeSchema.type !== "null" ? (
         <div className={styles.tableComplexType}>
           {selectedTypeSchema?.enum ? (
+            // @ts-ignore
             <SelectWidget {...selectWidgetProps} />
           ) : (
+            // @ts-ignore
             <BaseInputTemplate {...baseInputProps} />
           )}
         </div>

@@ -18,14 +18,18 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
+import { ObjectFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate";
+import { WrapIfAdditionalTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate";
 import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
 import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
 import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import { LoginContext } from "@site/src/theme/Root";
-import  * as isObject  from "lodash.isobject"
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import * as isPlainObject from "lodash.isplainobject";
+import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
+import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
 interface InteractiveBoxProps {
   params: MethodParam[];
@@ -37,6 +41,36 @@ interface InteractiveBoxProps {
   isOpen?: boolean;
 }
 
+type ObjectType = { [key: string]: any };
+type KeyOrderType = { name: string };
+
+function sortObjectKeysByArray(
+  obj: ObjectType,
+  orderArray: KeyOrderType[]
+): ObjectType {
+  const result: ObjectType = {};
+  for (const { name } of orderArray) {
+    if (name in obj) {
+      result[name] = obj[name];
+    }
+  }
+  return result;
+}
+
+function removeEmptyArrays<T extends Record<string, any>>(obj: T): T {
+  const newObj = JSON.parse(JSON.stringify(obj));
+  for (const key in newObj) {
+    if (newObj.hasOwnProperty(key)) {
+      if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
+        delete newObj[key];
+      } else if (newObj[key] !== null && typeof newObj[key] === "object") {
+        newObj[key] = removeEmptyArrays(newObj[key]);
+      }
+    }
+  }
+  return newObj;
+}
+
 export default function InteractiveBox({
   params,
   components,
@@ -44,51 +78,68 @@ export default function InteractiveBox({
   onParamChange,
   drawerLabel,
   closeComplexTypeView,
-  isOpen = false
+  isOpen = false,
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null);
   const [defaultFormData, setDefaultFormData] = useState<any>({});
   const [currentFormData, setCurrentFormData] = useState<any>({});
   const [isFormReseted, setIsFormReseted] = useState(false);
+  const [currentSchemaId, setCurrentSchemaId] = useState("");
+  const [objectPropertyBeforeEdit, setObjectPropertyBeforeEdit] =
+    useState(null);
+  const [objectValueBeforeEdit, setObjectValueBeforeEdit] = useState(null);
   const formRef = useRef(null);
   const { colorMode } = useColorMode();
   const { isComplexTypeView } = useContext(ParserOpenRPCContext);
-  const { account: metaMaskAccount } = useContext(LoginContext);
-  const addWalletId = (propName) => ({[propName]: metaMaskAccount})
+  const { metaMaskAccount } = useContext(MetamaskProviderContext);
+  const addWalletId = (propName) => ({ [propName]: metaMaskAccount });
   const getObjectWithAddress = (value) => {
-    const addressField = "address"
-    const fromField = "from"
+    const addressField = "address";
+    const fromField = "from";
     if (Object.keys(value).includes(addressField)) {
       return {
         ...value,
-        ...addWalletId(addressField)
-      }
+        ...addWalletId(addressField),
+      };
     }
     if (Object.keys(value).includes(fromField)) {
       return {
         ...value,
-        ...addWalletId(fromField)
-      }
+        ...addWalletId(fromField),
+      };
     }
-    return value
-  }
+    return value;
+  };
+
+  const checkName = (name: string) => {
+    if (name === "requestPermissionObject") return "requestPermissionsObject";
+    return name;
+  };
 
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
-        if (metaMaskAccount) {
-          if (name === "Address" || name === "From") {
-            return [name, metaMaskAccount]
+      const defaultValues = Object.fromEntries(
+        examples[0].params.map(({ name, value }) => {
+          if (metaMaskAccount) {
+            if (name === "Address" || name === "From") {
+              return [checkName(name), metaMaskAccount];
+            }
+            if (isPlainObject(value)) {
+              return [checkName(name), getObjectWithAddress(value)];
+            }
           }
-          if (isObject(value)) {
-            return [name, getObjectWithAddress(value)]
+          if (isPlainObject(value)) {
+            return [
+              checkName(name),
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isPlainObject(val) && val?.description ? val.value : val]))
+            ];
           }
-        }
-        return [name, value]
-      }));
-      setDefaultFormData({...defaultValues});
-      setCurrentFormData({...defaultValues});
-      onParamChange({...defaultValues});
+          return [checkName(name), value];
+        })
+      );
+      setDefaultFormData({ ...defaultValues });
+      setCurrentFormData({ ...defaultValues });
+      onParamChange({ ...defaultValues });
     }
   }, [examples, metaMaskAccount]);
 
@@ -97,6 +148,7 @@ export default function InteractiveBox({
       schemas: components,
     },
     type: "object",
+    // @ts-ignore
     properties: Object.fromEntries(
       params.map(({ name, schema }) => [name, schema])
     ),
@@ -110,21 +162,26 @@ export default function InteractiveBox({
   const templates = {
     BaseInputTemplate,
     ArrayFieldTemplate,
+    WrapIfAdditionalTemplate,
+    ObjectFieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
+    ButtonTemplates: { AddButton, RemoveButton },
   };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
     SelectWidget: SelectWidget,
   };
   const fields: RegistryFieldsType = {
+    // @ts-ignore
     AnyOfField: ConditionalField,
+    // @ts-ignore
     OneOfField: ConditionalField,
   };
   const handleResetForm = (e) => {
     e.preventDefault();
-    setCurrentFormData({...defaultFormData});
-    onParamChange({...defaultFormData});
+    setCurrentFormData({ ...defaultFormData });
+    onParamChange({ ...defaultFormData });
     setIsFormReseted(true);
   };
   const handleClearForm = (e) => {
@@ -149,9 +206,10 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
+    const validData = removeEmptyArrays(data);
     if (isOpen) {
-      setCurrentFormData({...data});
-      onParamChange({...data});
+      setCurrentFormData(validData);
+      onParamChange(validData);
     }
   };
 
@@ -172,10 +230,47 @@ export default function InteractiveBox({
     return newObj;
   };
 
+  const cloneObjectAndSetNullIfExists = (obj, key) => {
+    if (typeof obj !== "object" || obj === null) {
+      return obj;
+    }
+    let newObj = {};
+    if (Object.keys(obj).length >= 1) {
+      newObj = objectValueBeforeEdit;
+    } else {
+      for (const prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+          if (Object.keys(obj).length === 0) {
+            newObj[prop] = {};
+          } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
+            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(
+              obj[prop],
+              key
+            );
+          } else {
+            newObj[prop] = obj[prop];
+          }
+        }
+      }
+    }
+    return newObj;
+  };
+
   const handleCancelClick = () => {
     if (drawerLabel) {
-      const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
-      setCurrentFormData(upData);
+      const currentKey = Object.keys(currentFormData)[0];
+      if (objectPropertyBeforeEdit && currentKey) {
+        const upData = cloneObjectAndSetNullIfExists(
+          currentFormData[currentKey],
+          objectPropertyBeforeEdit
+        );
+        setCurrentFormData({ [currentKey]: upData });
+        setObjectPropertyBeforeEdit(null);
+        setObjectValueBeforeEdit(null);
+      } else {
+        const upData = cloneAndSetNullIfExists(currentFormData, drawerLabel);
+        setCurrentFormData(upData);
+      }
     }
     closeComplexTypeView();
   };
@@ -189,12 +284,23 @@ export default function InteractiveBox({
       <Form
         schema={parsedSchema}
         formData={currentFormData}
-        formContext={{ isFormReseted }}
+        formContext={{
+          currentSchemaId,
+          isFormReseted,
+          setCurrentSchemaId,
+          objectPropertyBeforeEdit,
+          setObjectPropertyBeforeEdit,
+          setObjectValueBeforeEdit,
+          currentFormData,
+          setCurrentFormData,
+          onParamChange,
+        }}
         validator={validator}
         liveValidate
         noHtml5Validate
         onChange={(data) => {
-          onChangeHandler(data.formData);
+          const orderData = sortObjectKeysByArray(data.formData, params);
+          onChangeHandler(orderData);
         }}
         templates={templates}
         uiSchema={uiSchema}

@@ -1,6 +1,6 @@
 ---
 description: Listen for new transactions on the blockchain.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Subscribe to pending transactions
@@ -57,14 +57,14 @@ Connect to Infura’s WebSockets endpoint to subscribe to new pending transactio
 Define the following endpoints in your file:
 
 ```python
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = "wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>"
+infura_http_url = "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 ```
 
 :::warning
 
-Replace `<YOUR_API_KEY>` with your Infura API key, you can use the same for both endpoints.
+Replace `<YOUR-API-KEY>` with your Infura API key, you can use the same for both endpoints.
 
 :::
 
@@ -114,8 +114,8 @@ import requests
 from web3 import Web3
 from websockets import connect
 
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = "wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>"
+infura_http_url = "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 
 async def get_event():
@@ -189,8 +189,8 @@ import requests
 from web3 import Web3
 from websockets import connect
 
-infura_ws_url = "wss://goerli.infura.io/ws/v3/<YOUR_API_KEY>"
-infura_http_url = "https://goerli.infura.io/v3/<YOUR_API_KEY>"
+infura_ws_url = "wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>"
+infura_http_url = "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
 web3 = Web3(Web3.HTTPProvider(infura_http_url))
 
 # Used if you want to monitor ETH transactions to a specific address

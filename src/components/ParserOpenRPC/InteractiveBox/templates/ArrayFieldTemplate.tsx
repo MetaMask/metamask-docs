@@ -22,6 +22,7 @@ export const ArrayFieldTemplate = ({
     setIsComplexTypeView,
   } = useContext(ParserOpenRPCContext);
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true });
+  // @ts-ignore
   const itemsType = schema?.items?.type;
   const isSimpleArray =
     itemsType === "string" ||
@@ -100,7 +101,7 @@ export const ArrayFieldTemplate = ({
                 >
                   <img
                     src="/img/icons/minus-icon.svg"
-                    alt={`Add ${title}`}
+                    alt={`Remove ${title}`}
                     width="16px"
                     height="16px"
                   />

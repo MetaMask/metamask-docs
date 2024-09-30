@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Button from "@site/src/components/Button";
 import CopyIcon from "./copy.svg";
 import DisconnectIcon from "./disconnect.svg";
-import { LoginContext } from "@site/src/theme/Root";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
@@ -25,11 +25,15 @@ const NavbarWalletComponent: FC = ({
 
   const COPY_TEXT = "Copy to clipboard";
   const COPIED_TEXT = "Copied!";
-  const { account, sdk, metaMaskConnectHandler, metaMaskDisconnect } =
-    useContext(LoginContext);
+  const {
+    metaMaskAccount,
+    sdk,
+    metaMaskWalletIdConnectHandler,
+    metaMaskDisconnect,
+  } = useContext(MetamaskProviderContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
-  const isExtensionActive = sdk.isExtensionActive();
+  const isExtensionActive = sdk.isExtensionActive;
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -46,7 +50,7 @@ const NavbarWalletComponent: FC = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(account);
+    navigator.clipboard.writeText(metaMaskAccount);
     setCopyMessage(COPIED_TEXT);
     trackClickForSegment({
       eventName: "Copy wallet address",
@@ -103,10 +107,10 @@ const NavbarWalletComponent: FC = ({
       responseMsg: null,
       timestamp: Date.now(),
     });
-    metaMaskConnectHandler();
+    metaMaskWalletIdConnectHandler();
   };
 
-  return !account ? (
+  return !metaMaskAccount ? (
     <Button
       testId={
         !isExtensionActive
@@ -116,8 +120,9 @@ const NavbarWalletComponent: FC = ({
       thin
       onClick={handleConnectWallet}
       className={styles.navbarButton}
+      textColor="light"
     >
-      {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
+      {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
@@ -143,7 +148,7 @@ const NavbarWalletComponent: FC = ({
             />{" "}
             <span
               className={styles.walletId}
-            >{`${account.slice(0, 7)}...${account.slice(-5)}`}</span>
+            >{`${metaMaskAccount.slice(0, 7)}...${metaMaskAccount.slice(-5)}`}</span>
             <button
               data-testid="navbar-account-copy"
               className={styles.copyButton}

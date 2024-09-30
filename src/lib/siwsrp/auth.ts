@@ -1,5 +1,10 @@
-import { SDK } from "@metamask-previews/profile-sync-controller";
+import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
+import {
+  AUTH_WALLET_PROJECTS,
+  AUTH_WALLET_SESSION_NAME,
+  AUTH_WALLET_TOKEN,
+} from "@site/src/lib/constants";
 
 type HydraEnv = {
   authApiUrl: string;
@@ -16,10 +21,10 @@ export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
 export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
 export const AUTH_WALLET_USER_PLAN = 'auth.wallet.uksTier'
 
-export const getHydraEnv = (): HydraEnv => {
+const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
 
-  if (process.env.VERCEL_ENV === "production") {
+  if (env === "production") {
     return {
       ...getEnvUrls(Env.PRD),
       env: Env.PRD,
@@ -44,23 +49,24 @@ const storage: SDK.AuthStorageOptions = {
   },
 };
 
-export const auth = new JwtBearerAuth(
-  {
-    env: getHydraEnv().env,
-    platform: getHydraEnv().platform,
-    type: AuthType.SRP,
-  },
-  {
-    storage,
-  },
-);
+const auth = (env: string) =>
+  new JwtBearerAuth(
+    {
+      env: getHydraEnv(env).env,
+      platform: getHydraEnv(env).platform,
+      type: AuthType.SRP,
+    },
+    {
+      storage,
+    }
+  );
 
-export const authenticateAndAuthorize = async () => {
+export const authenticateAndAuthorize = async (env: string) => {
   let accessToken: string, userProfile: SDK.UserProfile;
   try {
-    await auth.connectSnap();
-    accessToken = await auth.getAccessToken();
-    userProfile = await auth.getUserProfile();
+    await auth(env).connectSnap();
+    accessToken = await auth(env).getAccessToken();
+    userProfile = await auth(env).getUserProfile();
   } catch (e: any) {
     throw new Error(e.message);
   }

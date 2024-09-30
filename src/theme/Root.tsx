@@ -14,31 +14,20 @@ import {
   DASHBOARD_URL,
   REF_ALLOW_LOGIN_PATH,
   REQUEST_PARAMS,
+  AUTH_WALLET_PROJECTS,
 } from "@site/src/lib/constants";
 import {
-  AUTH_WALLET_PROJECTS,
-  getTokenString,
-  getUksTier,
   clearStorage,
   getUserIdFromJwtToken,
   saveTokenString,
+  getTokenString,
+  getUksTier
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal, {
   AUTH_LOGIN_STEP,
+  WALLET_LINK_TYPE,
 } from "@site/src/components/AuthLogin/AuthModal";
 
-const sdk = new MetaMaskSDK({
-  dappMetadata: {
-    name: "Reference pages",
-    url: "https://docs.metamask.io/",
-  },
-  preferDesktop: true,
-  extensionOnly: true,
-  checkInstallationImmediately: false,
-  logging: {
-    sdk: false,
-  },
-});
 interface Project {
   id: string;
   userId: string;
@@ -53,42 +42,76 @@ interface Project {
   role: string;
 }
 
-interface ILoginContext {
+interface IMetamaskProviderContext {
   projects: { [key: string]: Project };
-  metaMaskConnectHandler: () => Promise<void>;
+  setProjects: (arg: { [key: string]: Project }) => void;
   metaMaskDisconnect: () => Promise<void>;
-  userId: string;
-  token: string;
-  account: string;
+  metaMaskWalletIdConnectHandler: () => Promise<void>;
+  userId: string | undefined;
+  metaMaskAccount: string;
+  setMetaMaskAccount: (arg: string[] | string) => void;
+  metaMaskProvider: SDKProvider;
+  setMetaMaskProvider: (arg: SDKProvider) => void;
   uksTier: string;
-  provider: SDKProvider;
   sdk: MetaMaskSDK;
   disconnect: () => Promise<void>;
+  setWalletLinked: (arg: WALLET_LINK_TYPE) => void;
+  walletLinked: WALLET_LINK_TYPE | undefined;
+  setWalletLinkUrl: (arg: string) => void;
+  walletLinkUrl: string;
+  userAPIKey?: string;
+  setUserAPIKey?: (key: string) => void;
 }
 
-export const LoginContext = createContext<ILoginContext>({
+export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   projects: {},
-  metaMaskConnectHandler: () => new Promise(() => {}),
+  setProjects: () => {},
   metaMaskDisconnect: () => new Promise(() => {}),
+  metaMaskWalletIdConnectHandler: () => new Promise(() => {}),
   userId: undefined,
-  token: undefined,
-  account: undefined,
+  metaMaskAccount: undefined,
+  setMetaMaskAccount: () => {},
   uksTier: undefined,
-  provider: undefined,
+  metaMaskProvider: undefined,
+  setMetaMaskProvider: () => {},
   sdk: undefined,
   disconnect: () => new Promise(() => {}),
+  setWalletLinked: () => {},
+  walletLinked: undefined,
+  setWalletLinkUrl: () => {},
+  walletLinkUrl: "",
+  userAPIKey: "",
+  setUserAPIKey: () => {},
+});
+
+const sdk = new MetaMaskSDK({
+  dappMetadata: {
+    name: "Reference pages",
+    url: "https://docs.metamask.io/",
+  },
+  preferDesktop: true,
+  extensionOnly: true,
+  checkInstallationImmediately: false,
+  logging: {
+    sdk: false,
+  },
 });
 
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({});
-  const [userId, setUserId] = useState<string>(undefined);
+  const [userId, setUserId] = useState<string>("");
   const [token, setToken] = useState<string>(undefined);
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
-  const [provider, setProvider] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
+  const [metaMaskProvider, setMetaMaskProvider] = useState(undefined);
+  const [metaMaskAccount, setMetaMaskAccount] = useState(undefined);
   const [uksTier, setUksTier] = useState(undefined);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING);
+  const [walletLinked, setWalletLinked] = useState<
+    WALLET_LINK_TYPE | undefined
+  >(undefined);
+  const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
+  const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
 
@@ -99,26 +122,31 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
       );
       setUserId(getUserIdFromJwtToken());
       setToken(getTokenString());
       setUksTier(getUksTier());
       const accounts = await sdk.connect();
-      setAccount(accounts);
+      setMetaMaskAccount(accounts);
       if (accounts && accounts.length > 0) {
-        setAccount(accounts[0]);
+        setMetaMaskAccount(accounts[0]);
         const provider = sdk.getProvider();
-        setProvider(provider);
+        setMetaMaskProvider(provider);
       }
     } catch (e) {}
   };
 
   useEffect(() => {
+    const provider = sdk?.getProvider();
+    setMetaMaskProvider(provider);
+  }, []);
+
+  useEffect(() => {
     if (isInitialized && sdk.isExtensionActive()) {
       const provider = sdk.getProvider();
       sdk.resume();
-      setProvider(provider);
+      setMetaMaskProvider(provider);
     }
   }, [isInitialized]);
 
@@ -127,6 +155,7 @@ export const LoginProvider = ({ children }) => {
     getStaleDate();
     if (REF_ALLOW_LOGIN_PATH.some((item) => url.pathname.includes(item))) {
       const token = url.searchParams.get("token");
+
       if (token) {
         saveTokenString(token);
         setToken(token);
@@ -138,8 +167,12 @@ export const LoginProvider = ({ children }) => {
             const projectsResponse = await fetch(
               `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
-                ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-              },
+                ...REQUEST_PARAMS("GET"),
+                headers: {
+                  ...REQUEST_PARAMS("GET").headers,
+                  Authorization: `Bearer ${token}`,
+                },
+              }
             );
             const res = await projectsResponse.json();
             if (res.error) throw new Error(res.error.message);
@@ -149,7 +182,7 @@ export const LoginProvider = ({ children }) => {
             } = res;
             sessionStorage.setItem(
               AUTH_WALLET_PROJECTS,
-              JSON.stringify(projects),
+              JSON.stringify(projects)
             );
             setProjects(projects);
             window.location.replace(`${url.origin}${url.pathname}`);
@@ -162,32 +195,13 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if ((window as any)?.Sentry) {
-      (window as any)?.Sentry?.setUser({
-        name: account,
-        id: account,
-        username: account,
-      });
-    }
-  }, [account]);
-
-  const metaMaskConnectHandler = useCallback(async () => {
+  const metaMaskWalletIdConnectHandler = useCallback(async () => {
     try {
-      const accounts = await sdk.connect();
-      if (sdk.isExtensionActive()) {
-        setOpenAuthModal(true);
-      }
-      setAccount(accounts);
-      if (accounts && accounts.length > 0) {
-        setAccount(accounts[0]);
-        const provider = sdk.getProvider();
-        setProvider(provider);
-      }
+      setOpenAuthModal(true);
     } catch (err) {
       console.warn("failed to connect..", err);
     }
-  }, [sdk, setAccount, setProvider]);
+  }, [setOpenAuthModal]);
 
   const metaMaskDisconnect = useCallback(async () => {
     try {
@@ -195,39 +209,41 @@ export const LoginProvider = ({ children }) => {
       setOpenAuthModal(false);
       setUserId(undefined);
       setToken(undefined);
-      setAccount(undefined);
+      setMetaMaskAccount(undefined);
       setUksTier(undefined);
       setProjects({});
+      setWalletLinked(undefined);
+      setUserAPIKey("");
       clearStorage();
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
-  }, [
-    sdk,
-    setOpenAuthModal,
-    setUserId,
-    setToken,
-    setAccount,
-    setUksTier,
-    setProjects,
-  ]);
+  }, [sdk, setOpenAuthModal, setUserId, setToken, setMetaMaskAccount, setUksTier, setProjects]);
 
   return (
     <BrowserOnly>
       {() => (
-        <LoginContext.Provider
+        <MetamaskProviderContext.Provider
           value={
             {
+              metaMaskAccount,
+              setMetaMaskAccount,
               projects,
-              metaMaskConnectHandler,
+              setProjects,
               metaMaskDisconnect,
+              metaMaskWalletIdConnectHandler,
               userId,
-              token,
-              account,
+              metaMaskProvider,
               uksTier,
-              provider,
+              setMetaMaskProvider,
               sdk,
-            } as ILoginContext
+              walletLinked,
+              setWalletLinked,
+              walletLinkUrl,
+              setWalletLinkUrl,
+              userAPIKey,
+              setUserAPIKey,
+            } as IMetamaskProviderContext
           }
         >
           {children}
@@ -243,7 +259,7 @@ export const LoginProvider = ({ children }) => {
             setStep={setStep}
             step={step}
           />
-        </LoginContext.Provider>
+        </MetamaskProviderContext.Provider>
       )}
     </BrowserOnly>
   );

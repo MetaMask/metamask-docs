@@ -13,7 +13,6 @@ methods on the Mantle network:
 - [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
 - [`debug_traceTransaction`](debug_tracetransaction.md)
 - [`debug_traceCall`](debug_tracecall.md)
-- [`debug_traceTransaction`](debug_tracetransaction.md)
 
 ## Debug tracing types
 

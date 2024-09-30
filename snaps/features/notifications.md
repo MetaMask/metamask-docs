@@ -49,10 +49,10 @@ await snap.request({
 
 <div class="row">
     <div class="column">
-        <img src={require("../assets/notifications-1.png").default} width="250px" alt="Notification alert" style={{border: '1px solid #DCDCDC'}} />
+        <img src={require("../assets/notifications-1.png").default} width="225px" alt="Notification alert" style={{border: '1px solid #DCDCDC'}} />
     </div>
     <div class="column">
-        <img src={require("../assets/notifications-2.png").default} width="300px" alt="Notification message" style={{border: '1px solid #DCDCDC'}} />
+        <img src={require("../assets/notifications-2.png").default} width="356px" alt="Notification message" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
 

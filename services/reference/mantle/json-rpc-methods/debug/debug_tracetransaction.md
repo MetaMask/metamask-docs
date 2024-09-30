@@ -28,7 +28,7 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ## Example
 
-Replace `YOUR-API-KEY` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
 
 ### Request
 
@@ -40,6 +40,13 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0xdcecf3f9fc68c92276d6c4b40c17b185f8a3fcb9d1a959a495d38d480782404b", {"tracer": "callTracer"}], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS" label="WSS" default>
+
+```bash
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0xdcecf3f9fc68c92276d6c4b40c17b185f8a3fcb9d1a959a495d38d480782404b", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

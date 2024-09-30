@@ -1,20 +1,37 @@
 import React, { useContext, useEffect, useState } from "react";
 import ldClient from "launchdarkly";
-import { LoginContext } from "@site/src/theme/Root";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 import Select from "react-dropdown-select";
-import styles from "./styles.module.css";
+import Button from "@site/src/components/Button";
+import styles from "./styles.module.scss";
+import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
 
 const LOGIN_FF = "mm-unified-login";
 
 const ProjectsBox = () => {
-  const { projects, account } = useContext(LoginContext);
+  const {
+    projects,
+    metaMaskAccount,
+    walletLinked,
+    metaMaskWalletIdConnectHandler,
+    walletLinkUrl,
+    setUserAPIKey,
+  } = useContext(MetamaskProviderContext);
   const options = Object.keys(projects).map((v) => ({
     value: v,
     label: projects[v].name,
   }));
-  const [currentProject, setCurrentProject] = useState([options[0]].filter(Boolean));
+  const [currentProject, setCurrentProject] = useState(
+    [options[0]].filter(Boolean)
+  );
   const [ldReady, setLdReady] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(false);
+  const [isWalletLinking, setIsWalletLinking] = useState(false);
+
+  const metaMaskWalletConnectionHandler = () => {
+    setIsWalletLinking(true);
+    metaMaskWalletIdConnectHandler();
+  }
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
@@ -31,16 +48,30 @@ const ProjectsBox = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentProject.length && options[0])
-        setCurrentProject([options[0]])
-  }, [projects])
+    if (!currentProject.length && options[0]) {
+      setCurrentProject([options[0]]);
+      setUserAPIKey(options[0].value);
+    }
+  }, [projects]);
+
+  useEffect(() => {
+    if (options?.length > 0) {
+      setUserAPIKey(options[0].value);
+    }
+  }, [options.length]);
+
+  useEffect(() => {
+    if (walletLinked) {
+      setIsWalletLinking(false);
+    }
+  }, [walletLinked])
 
   return (
     ldReady &&
     loginEnabled && (
       <div className={styles.selectWrapper}>
         <div className={styles.selectTitle}>Infura API Key</div>
-        {account && !!Object.keys(projects).length ? (
+        {metaMaskAccount && !!Object.keys(projects).length ? (
           <Select
             className={styles.selectProjects}
             multi={false}
@@ -48,16 +79,19 @@ const ProjectsBox = () => {
             searchable={false}
             options={options}
             values={currentProject}
-            onChange={(value) => setCurrentProject(value)}
+            onChange={(value) => {
+              setCurrentProject(value);
+              setUserAPIKey(value[0].value);
+            }}
             contentRenderer={({ state }) => {
               return (
                 <div>
                   {state.values.map((item) => (
-                      <div key={item.value}>
-                        <div>{item.label}</div>
-                        <div>{item.value}</div>
-                      </div>
-                    ))}
+                    <div key={item.value}>
+                      <div className={styles.selectDropdownLabel}>{item.label}</div>
+                      <div className={styles.selectDropdownValue}>{item.value}</div>
+                    </div>
+                  ))}
                 </div>
               );
             }}
@@ -66,12 +100,12 @@ const ProjectsBox = () => {
                 <div className={styles.selectDropdown}>
                   {options.map((option) => (
                     <div
+                      className={styles.selectDropdownOption}
                       key={option.value}
-                      style={{ padding: "8px 16px" }}
                       onClick={() => methods.addItem(option)}
                     >
-                      <div>{option.label}</div>
-                      <div>{option.value}</div>
+                      <div className={styles.selectDropdownLabel}>{option.label}</div>
+                      <div className={styles.selectDropdownValue}>{option.value}</div>
                     </div>
                   ))}
                 </div>
@@ -80,8 +114,55 @@ const ProjectsBox = () => {
           />
         ) : (
           <div className={styles.selectProjects}>
-            Connect your MetaMask wallet to start sending requests to your
-            Infura API keys.
+            {walletLinked === undefined && (
+              <>
+                <div>
+                  {isWalletLinking ?
+                    "Don’t close or exit this page. Please continue connecting on your extension." :
+                    "Connect your MetaMask wallet to start sending requests to your Infura API keys."
+                  }
+                </div>
+                <Button
+                  thin
+                  className={styles.connectButton}
+                  onClick={metaMaskWalletConnectionHandler}
+                  textColor="light"
+                  isLoading={isWalletLinking}
+                >
+                  Connect Wallet
+                </Button>
+              </>
+            )}
+            {walletLinked === WALLET_LINK_TYPE.NO && (
+              <>
+                <div>
+                  Link your Infura account to send requests to your Infura API
+                  keys.
+                </div>
+                <Button
+                  thin
+                  variant="secondary"
+                  wrapText={false}
+                  onClick={() => (window.location.href = walletLinkUrl)}
+                >
+                  Link Infura Account
+                </Button>
+              </>
+            )}
+            {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
+              <>
+                <div>
+                  Select Infura account linked with your current wallet.
+                </div>
+                <Button
+                  thin
+                  className={styles.connectButton}
+                  onClick={() => (window.location.href = walletLinkUrl)}
+                >
+                  Select Infura Account
+                </Button>
+              </>
+            )}
           </div>
         )}
       </div>

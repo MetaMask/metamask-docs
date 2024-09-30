@@ -35,6 +35,7 @@ const config = {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     VERCEL_ENV: process.env.VERCEL_ENV,
     DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
+    SENTRY_KEY: process.env.SENTRY_KEY,
   },
 
   trailingSlash: true,
@@ -162,22 +163,7 @@ const config = {
         ]
       : null,
     "./src/plugins/launchdarkly",
-    [
-      "docusaurus-plugin-sentry",
-      {
-        DSN: "d3220b0812610810ddb5a911b3d97790",
-        configuration: {
-          sentry: {
-            init: {
-              replaysOnErrorSampleRate: isProd ? 1.0 : 0,
-              replaysSessionSampleRate: isProd ? 1.0 : 0,
-              sampleRate: isProd ? 0.25 : 0,
-              tracesSampleRate: 0,
-            },
-          },
-        },
-      },
-    ],
+    "./src/plugins/sentry",
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
