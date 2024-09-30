@@ -91,36 +91,38 @@ const CustomReferencePage = (props) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
-      if (item?.label === "Reference" && item?.items) {
-        return {
-          ...item,
-          items: item.items.map(referenceItem => {
-            if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items) {
-              return { 
-                ...referenceItem,
-                items: [
-                  ...referenceItem.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
-                  ...siteConfig.customFields.dynamicData.map(dynamicItem => {
-                    const jsonRpcCategory = referenceItem.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
-                    if (jsonRpcCategory) {
-                      return {
-                        ...dynamicItem,
-                        ...{ href: "/services/reference/linea/json-rpc-methods/" },
-                        ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
-                      };
-                    }
-                    return dynamicItem;
-                  })
-                ] 
-              };
-            }
-            return referenceItem;
-          })
+    if (siteConfig.customFields && siteConfig.customFields?.dynamicData && siteConfig.customFields?.sidebarData?.docs) {
+      setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
+        if (item?.label === "Reference" && item?.items) {
+          return {
+            ...item,
+            items: item.items.map(referenceItem => {
+              if (referenceItem?.label === upperFirst(NETWORK_NAMES.linea) && referenceItem?.items) {
+                return { 
+                  ...referenceItem,
+                  items: [
+                    ...referenceItem.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
+                    ...siteConfig.customFields.dynamicData.map(dynamicItem => {
+                      const jsonRpcCategory = referenceItem.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
+                      if (jsonRpcCategory) {
+                        return {
+                          ...dynamicItem,
+                          ...{ href: "/services/reference/linea/json-rpc-methods/" },
+                          ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
+                        };
+                      }
+                      return dynamicItem;
+                    })
+                  ] 
+                };
+              }
+              return referenceItem;
+            })
+          }
         }
-      }
-      return item;
-    }));
+        return item;
+      }));
+    }
   }, []);
 
   return formattedData ? (
