@@ -6,6 +6,7 @@ import styles from "@site/src/theme/Layout/styles.module.css"
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import upperFirst  from "lodash.upperfirst"
 import { JSON_RPC_METHODS_LABEL, lineaSidebarNames, NETWORK_NAMES } from "@site/src/lib/constants";
+import { useLocation } from "@docusaurus/router";
 
 const formatMenuLabel = (label) => {
   const menuItem = lineaSidebarNames.find(name => name.old === label);
@@ -86,6 +87,8 @@ const CustomReferencePage = (props) => {
   const customData = props.route.customData;
   const { siteConfig } = useDocusaurusContext();
   const [formattedData, setFormattedData] = useState([]);
+  const { pathname } = useLocation();
+  console.log("pathname", pathname);
 
   useEffect(() => {
     setFormattedData(generateSidebarItems(siteConfig.customFields.sidebarData.docs).map(item => {
@@ -124,7 +127,7 @@ const CustomReferencePage = (props) => {
     <Layout>
       <div className={styles.pageWrapper}>
         <aside className={sidebar_wrapper_classes}>
-          <DocSidebar sidebar={formattedData} path="" onCollapse={() => {}} isHidden={false} />
+          <DocSidebar sidebar={formattedData} path={pathname} onCollapse={() => {}} isHidden={false} />
         </aside>
         <div className={styles.mainContainer}>
           <div className={styles.contentWrapper}>

@@ -15,7 +15,7 @@ export const fetchAndGenerateDynamicSidebarItems = async (networkName) => {
         label: "JSON-RPC methods",
         link: {
           type: 'generated-index',
-          slug: "/services/reference/linea/json-rpc-methods/"
+          slug: "/reference/linea/json-rpc-methods/"
         },
         collapsed: true,
         collapsible: true,
