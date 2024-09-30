@@ -36,6 +36,7 @@ const config = {
     VERCEL_ENV: process.env.VERCEL_ENV,
     DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
     SENTRY_KEY: process.env.SENTRY_KEY,
+    GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
   },
 
   trailingSlash: true,
