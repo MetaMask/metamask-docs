@@ -21,7 +21,7 @@ import {
   getUserIdFromJwtToken,
   saveTokenString,
   getTokenString,
-  getUksTier
+  getUksTier,
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal, {
   AUTH_LOGIN_STEP,
@@ -43,6 +43,7 @@ interface Project {
 }
 
 interface IMetamaskProviderContext {
+  token: string;
   projects: { [key: string]: Project };
   setProjects: (arg: { [key: string]: Project }) => void;
   metaMaskDisconnect: () => Promise<void>;
@@ -54,7 +55,6 @@ interface IMetamaskProviderContext {
   setMetaMaskProvider: (arg: SDKProvider) => void;
   uksTier: string;
   sdk: MetaMaskSDK;
-  disconnect: () => Promise<void>;
   setWalletLinked: (arg: WALLET_LINK_TYPE) => void;
   walletLinked: WALLET_LINK_TYPE | undefined;
   setWalletLinkUrl: (arg: string) => void;
@@ -64,6 +64,7 @@ interface IMetamaskProviderContext {
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
+  token: undefined,
   projects: {},
   setProjects: () => {},
   metaMaskDisconnect: () => new Promise(() => {}),
@@ -75,7 +76,6 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   metaMaskProvider: undefined,
   setMetaMaskProvider: () => {},
   sdk: undefined,
-  disconnect: () => new Promise(() => {}),
   setWalletLinked: () => {},
   walletLinked: undefined,
   setWalletLinkUrl: () => {},
@@ -122,7 +122,7 @@ export const LoginProvider = ({ children }) => {
   const getStaleDate = async () => {
     try {
       setProjects(
-        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}")
+        JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || "{}"),
       );
       setUserId(getUserIdFromJwtToken());
       setToken(getTokenString());
@@ -167,12 +167,8 @@ export const LoginProvider = ({ children }) => {
             const projectsResponse = await fetch(
               `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
-                ...REQUEST_PARAMS("GET"),
-                headers: {
-                  ...REQUEST_PARAMS("GET").headers,
-                  Authorization: `Bearer ${token}`,
-                },
-              }
+                ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+              },
             );
             const res = await projectsResponse.json();
             if (res.error) throw new Error(res.error.message);
@@ -182,7 +178,7 @@ export const LoginProvider = ({ children }) => {
             } = res;
             sessionStorage.setItem(
               AUTH_WALLET_PROJECTS,
-              JSON.stringify(projects)
+              JSON.stringify(projects),
             );
             setProjects(projects);
             window.location.replace(`${url.origin}${url.pathname}`);
@@ -218,7 +214,15 @@ export const LoginProvider = ({ children }) => {
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
-  }, [sdk, setOpenAuthModal, setUserId, setToken, setMetaMaskAccount, setUksTier, setProjects]);
+  }, [
+    sdk,
+    setOpenAuthModal,
+    setUserId,
+    setToken,
+    setMetaMaskAccount,
+    setUksTier,
+    setProjects,
+  ]);
 
   return (
     <BrowserOnly>
@@ -226,6 +230,7 @@ export const LoginProvider = ({ children }) => {
         <MetamaskProviderContext.Provider
           value={
             {
+              token,
               metaMaskAccount,
               setMetaMaskAccount,
               projects,
@@ -250,9 +255,7 @@ export const LoginProvider = ({ children }) => {
 
           <AuthModal
             open={openAuthModal}
-            metaMaskDisconnect={metaMaskDisconnect}
             setOpen={setOpenAuthModal}
-            setProjects={setProjects}
             setUser={setUserId}
             setToken={setToken}
             setUksTier={setUksTier}

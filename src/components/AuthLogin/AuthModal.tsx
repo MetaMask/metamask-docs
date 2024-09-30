@@ -14,25 +14,18 @@ import {
   getUserIdFromJwtToken,
   AUTH_WALLET_USER_PLAN,
 } from "../../lib/siwsrp/auth";
-import {
-  DASHBOARD_URL,
-  REQUEST_PARAMS,
-  AUTH_WALLET_SESSION_NAME,
-  AUTH_WALLET_PROJECTS,
-} from "@site/src/lib/constants";
+import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
 type AuthModalProps = {
   open: boolean;
   setOpen: (arg: boolean) => void;
-  setProjects: (arg: any[]) => void;
   setUser: (arg: string) => void;
   setToken: (arg: string) => void;
   step: AUTH_LOGIN_STEP;
   setStep: (arg: AUTH_LOGIN_STEP) => void;
   setUksTier: (arg: string) => void;
-  metaMaskDisconnect: () => void;
 };
 
 export enum AUTH_LOGIN_STEP {
@@ -145,13 +138,11 @@ const ConnectionErrorModal = ({
 const AuthModal = ({
   open,
   setOpen,
-  setProjects,
   step,
   setStep,
   setUser,
   setToken,
   setUksTier,
-  metaMaskDisconnect,
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
@@ -186,24 +177,22 @@ const AuthModal = ({
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
       const { accessToken, userProfile } = await authenticateAndAuthorize(
-        VERCEL_ENV as string
+        VERCEL_ENV as string,
       );
 
       const loginResponse = await (
         await fetch(
           `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
           {
-            ...REQUEST_PARAMS(),
-            headers: {
-              ...REQUEST_PARAMS().headers,
+            ...REQUEST_PARAMS("POST", {
               hydra_token: accessToken,
               token: "true",
-            },
+            }),
             body: JSON.stringify({
               profileId: userProfile.profileId,
               redirect_to: window.location.href,
             }),
-          }
+          },
         )
       ).json();
 
@@ -220,7 +209,7 @@ const AuthModal = ({
             mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
-          })
+          }),
         ).toString("base64");
 
         const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -248,9 +237,9 @@ const AuthModal = ({
       }
 
       saveTokenString(token);
-        if (setToken) {
-            setToken(token);
-        }
+      if (setToken) {
+        setToken(token);
+      }
       setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
       const userId = getUserIdFromJwtToken();
       if (setUser) {
@@ -261,7 +250,7 @@ const AuthModal = ({
       const projectsResponse = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
         {
-            ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
         },
       );
       const {

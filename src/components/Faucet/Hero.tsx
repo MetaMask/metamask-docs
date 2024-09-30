@@ -3,7 +3,7 @@ import Text from "@site/src/components/Text";
 import Button from "@site/src/components/Button";
 import Input from "@site/src/components/Input";
 import clsx from "clsx";
-import { LoginContext } from "@site/src/theme/Root";
+import {MetamaskProviderContext} from "@site/src/theme/Root";
 import EthIcon from "./eth.svg";
 
 import styles from "./hero.module.scss";
@@ -28,7 +28,7 @@ export default function Hero({
   isLoading,
   isLimitedUserPlan,
 }: IHero) {
-  const { account, sdk, metaMaskConnectHandler } = useContext(LoginContext);
+  const { metaMaskAccount, sdk, metaMaskWalletIdConnectHandler } = useContext(MetamaskProviderContext);
   const isExtensionActive = sdk.isExtensionActive();
 
   const handleConnectWallet = () => {
@@ -40,7 +40,7 @@ export default function Hero({
       responseMsg: null,
       timestamp: Date.now(),
     });
-    metaMaskConnectHandler();
+    metaMaskWalletIdConnectHandler();
   };
 
   const handleRequestEth = () => {
@@ -64,7 +64,7 @@ export default function Hero({
         className,
       )}
     >
-      {!(isExtensionActive && account) && <EthIcon />}
+      {!(isExtensionActive && metaMaskAccount) && <EthIcon />}
       <Text as="h1">
         <span>
           {network === "linea" && "Linea Sepolia"}
@@ -75,12 +75,12 @@ export default function Hero({
       <Text as="p">
         {!isExtensionActive
           ? "Install MetaMask for your browser to get started and request ETH."
-          : !account
+          : !metaMaskAccount
             ? "Connect your MetaMask wallet to get started and request ETH."
             : "Enter your MetaMask wallet address and request ETH."}
       </Text>
       <div className={styles.actions}>
-        {isExtensionActive && account && (
+        {isExtensionActive && metaMaskAccount && (
           <div className={styles.inputCont}>
             <Input
               label="Wallet address"
@@ -101,10 +101,10 @@ export default function Hero({
         )}
         <div
           className={clsx(
-            isExtensionActive && account && styles.alignedButtons,
+            isExtensionActive && metaMaskAccount && styles.alignedButtons,
           )}
         >
-          {!account ? (
+          {!metaMaskAccount ? (
             <Button
               testId={
                 !isExtensionActive

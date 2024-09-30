@@ -1,10 +1,5 @@
 import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
-import {
-  AUTH_WALLET_PROJECTS,
-  AUTH_WALLET_SESSION_NAME,
-  AUTH_WALLET_TOKEN,
-} from "@site/src/lib/constants";
 
 type HydraEnv = {
   authApiUrl: string;
