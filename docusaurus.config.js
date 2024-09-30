@@ -143,17 +143,12 @@ const config = {
                 ...item,
                 items: 
                   [
-                    ...item.items.filter(({ label }) => label !== JSON_RPC_METHODS_LABEL),
-                    ...dynamicSidebarItems.map(dynamicItem => {
-                      const jsonRpcCategory = item.items.find(({ label }) => label === JSON_RPC_METHODS_LABEL);
-                      if (jsonRpcCategory) {
-                        return {
-                          ...dynamicItem,
-                          ...{ items: [...dynamicItem.items, ...jsonRpcCategory.items.filter(refItem => refItem.type === "category")] }
-                        };
+                    ...item.items.map(mappedItem => {
+                      if (mappedItem.label === JSON_RPC_METHODS_LABEL) {
+                        return {...mappedItem, items: [...dynamicSidebarItems[0].items]};
                       }
-                      return dynamicItem;
-                    })
+                      return mappedItem
+                    }),
                   ]
               };
             }
