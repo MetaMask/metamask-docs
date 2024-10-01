@@ -14,7 +14,7 @@ The [MetaMask Ethereum provider API](wallet-api.md#ethereum-provider-api) is ver
 [Ethereum JSON-RPC](wallet-api.md#json-rpc-api) formatted messages, which is why
 some developers use a convenience library for interacting with the provider, such as
 [Ethers](https://www.npmjs.com/package/ethers), [web3.js](https://www.npmjs.com/package/web3), and
-[Embark](https://framework.embarklabs.io/).
+[Embark](https://github.com/embarklabs/embark).
 You can refer to those tools' documentation to use them.
 
 You can [use MetaMask SDK](../how-to/use-sdk/index.md), which provides a reliable, secure, and
