@@ -37,3 +37,19 @@
           with:
               FILE_EXTENSION: md
               MODIFIED_FILES_ONLY: no
+
+    slackNotification:
+      needs: [linkCheckMdx, linkCheckMd]
+      if: ${{ failure() }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Slack Notification
+          uses: slackapi/slack-github-action@2a8087d4af6f83146a87539a70defe909fe6dbe6
+          with:
+            payload: |
+              {
+                "channel": "#doc-ci-alerts",
+                "text": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} workflow failed> on ${{ github.ref }} branch in the ${{ github.repository }} repository!"
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
