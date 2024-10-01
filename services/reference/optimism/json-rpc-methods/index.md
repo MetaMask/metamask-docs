@@ -6,11 +6,11 @@ description: Supported standard Ethereum methods on Optimism network.
 # JSON-RPC methods
 
 The standard Ethereum methods documented here are supported by Infura on the Optimism network. For custom Optimism
-methods, please see [Optimism Ethereum JSON-RPC API documentation](https://community.optimism.io/docs/developers/build/json-rpc/) (Bedrock release).
+methods, see [Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc) (Bedrock release).
 
 :::info
 
-The Optimism Bedrock migration supports different JSON-RPC methods. Refer to the [Optimism Bedrock documentation](https://docs.optimism.io/builders/node-operators/json-rpc) for more information.
+The Optimism Bedrock migration supports different JSON-RPC methods. Refer to the [Optimism Bedrock documentation](https://docs.optimism.io/stack/getting-started#the-op-stack-today) for more information.
 
 :::
 
