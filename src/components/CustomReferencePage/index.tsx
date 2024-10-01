@@ -82,8 +82,6 @@ function generateSidebarItems(docs) {
   return convertToArray(categories);
 }
 
-const sidebar_wrapper_classes = "theme-doc-sidebar-container docSidebarContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocRoot-Layout-Sidebar-styles-module"
-
 const CustomReferencePage = (props) => {
   const customData = props.route.customData;
   const { siteConfig } = useDocusaurusContext();
@@ -129,7 +127,7 @@ const CustomReferencePage = (props) => {
   return formattedData ? (
     <Layout>
       <div className={styles.pageWrapper}>
-        <aside className={sidebar_wrapper_classes}>
+        <aside>
           <div className={customStyles.sidebarViewport}>
             <div className={ customStyles.sidebar}>
               <DocSidebar sidebar={formattedData} path={pathname} onCollapse={() => {}} isHidden={false} />

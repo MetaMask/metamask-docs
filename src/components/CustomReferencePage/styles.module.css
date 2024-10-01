@@ -15,5 +15,10 @@
     flex-direction: column;
     height: 100%;
     width: var(--doc-sidebar-width);
+    padding-top: 0 !important;
+  }
+
+  .sidebar>div {
+    padding-top: 0 !important;
   }
 }

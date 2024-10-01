@@ -233,8 +233,8 @@ export default function ParserOpenRPC({
       const res = await fetch(URL, params);
       if (res.ok) {
         const response = await res.json();
-        setReqResult(response.result);
-        trackAnalyticsForRequest(response.result);
+        setReqResult(response);
+        trackAnalyticsForRequest(response);
       } else {
         const errorText = await res.text();
         const errorState = JSON.parse(errorText);
