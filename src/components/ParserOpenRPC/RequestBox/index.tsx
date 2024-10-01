@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
-import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -19,6 +18,8 @@ interface RequestBoxProps {
   isMetamaskNetwork?: boolean;
   defExampleResponse?: any;
   resetResponseHandle: () => void;
+  requestURL: string;
+  isLoading: boolean;
 }
 
 export default function RequestBox({
@@ -32,17 +33,18 @@ export default function RequestBox({
   isMetamaskNetwork = false,
   defExampleResponse,
   resetResponseHandle,
+  requestURL = "",
+  isLoading,
 }: RequestBoxProps) {
   const { userAPIKey } = useContext(MetamaskProviderContext);
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
-    const NETWORK_URL = "https://linea-mainnet.infura.io";
     const API_KEY = userAPIKey ? userAPIKey : "<YOUR-API-KEY>";
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${LINEA_REQUEST_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+    return `curl ${requestURL}${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [userAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
@@ -66,12 +68,12 @@ export default function RequestBox({
 
   const runRequestButton = (
     <button
-      className={global.primaryBtn}
-      disabled={isRunAndCustomizeRequestDisabled}
+      className={clsx(global.primaryBtn, styles.runBtnWrap)}
+      disabled={isRunAndCustomizeRequestDisabled || isLoading}
       onClick={submitRequest}
       data-test-id="run-request"
     >
-      Run request
+      {isLoading ? <span className={styles.loader}></span> : "Run request"}
     </button>
   );
 
