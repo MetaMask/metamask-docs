@@ -198,7 +198,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
         const mm_auth = Buffer.from(
           JSON.stringify({
             step: data.step,
-            mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
+            mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
           })
