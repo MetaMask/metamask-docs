@@ -10,11 +10,14 @@ on:
         required: true
       SENTRY_KEY:
         required: true
+      GF_SURVEY_KEY:
+        required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
   SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
+  GF_SURVEY_KEY: ${{ secrets.GF_SURVEY_KEY }}
 
 jobs:
   build:
