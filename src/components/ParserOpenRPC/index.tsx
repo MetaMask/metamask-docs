@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
@@ -59,7 +65,10 @@ export default function ParserOpenRPC({
       eventName: "Request Sent",
       clickType: "Request Sent",
       userExperience: "B",
+      // @ts-ignore
       ...(response?.code && { responseStatus: response.code }),
+      responseMsg: null,
+      timestamp: Date.now(),
     });
   }
   const openModal = () => {
@@ -68,6 +77,9 @@ export default function ParserOpenRPC({
       eventName: "Customize Request",
       clickType: "Customize Request",
       userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
     });
   };
   const closeModal = () => setModalOpen(false);
@@ -96,19 +108,19 @@ export default function ParserOpenRPC({
     };
 
     const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method
+      (met) => met.name === method,
     );
     if (!currentMethod) return null;
 
     const errors = findReferencedItem(
       currentMethod.errors,
       "#/components/errors/",
-      "errors"
+      "errors",
     );
     const tags = findReferencedItem(
       currentMethod.tags,
       "#/components/tags/",
-      "tags"
+      "tags",
     );
 
     return {
@@ -146,12 +158,13 @@ export default function ParserOpenRPC({
 
   const resetResponseHandle = () => {
     setReqResult(undefined);
-  }
+  };
 
   const onParamsChangeHandle = (data) => {
     trackInputChangeForSegment({
       eventName: "Request Configuration Started",
       userExperience: "B",
+      timestamp: Date.now(),
     });
 
     if (
@@ -252,7 +265,7 @@ export default function ParserOpenRPC({
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack
+                      modalDrawerStyles.modalHeaderIconBack,
                     )}
                     onClick={closeComplexTypeView}
                   >
@@ -289,7 +302,9 @@ export default function ParserOpenRPC({
         <div className={global.colRight}>
           <div className={global.stickyCol}>
             {pathname.startsWith(REF_PATH) && <ProjectsBox />}
-            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && <AuthBox isMetamaskNetwork={isMetamaskNetwork} />}
+            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && (
+              <AuthBox isMetamaskNetwork={isMetamaskNetwork} />
+            )}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}

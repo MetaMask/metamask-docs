@@ -1,5 +1,6 @@
 import React from "react";
 import Card, { type CardItem } from "@site/src/components/Card";
+import Heading from "@theme/Heading";
 
 const CardList: CardItem[] = [
   {
@@ -37,7 +38,9 @@ const CardList: CardItem[] = [
 export default function SnapsSection(): JSX.Element {
   return (
     <section className="container margin-top--lg margin-bottom--lg">
-      <h1>Extend the functionality of MetaMask using Snaps</h1>
+      <Heading as="h1">
+        Extend the functionality of MetaMask using Snaps
+      </Heading>
       <p>
         A Snap is a JavaScript program run in an isolated environment that
         customizes the MetaMask wallet experience. You can create a Snap that
