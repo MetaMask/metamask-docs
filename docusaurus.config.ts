@@ -2,6 +2,9 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 require("dotenv").config();
+const { fetchAndGenerateDynamicSidebarItems } = require("./src/helpers");
+import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES, CustomFields } from "./src/lib/constants";
+const upperFirst = require("lodash.upperfirst");
 const { themes } = require("prism-react-renderer");
 const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
 const codeTheme = themes.dracula;
@@ -37,7 +40,9 @@ const config = {
     DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
     SENTRY_KEY: process.env.SENTRY_KEY,
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
-  },
+    sidebarData: { docs: []},
+    dynamicData: [],
+  } as CustomFields,
 
   trailingSlash: true,
 
@@ -128,6 +133,30 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./services-sidebar.js"),
         breadcrumbs: false,
+        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          config.customFields.sidebarData = args;
+          let sidebarItems = await defaultSidebarItemsGenerator(args);
+          const dynamicSidebarItems = await fetchAndGenerateDynamicSidebarItems(NETWORK_NAMES.linea);
+          config.customFields.dynamicData = dynamicSidebarItems;
+          const updatedItems = sidebarItems.map(item => {
+            if (item?.label === upperFirst(NETWORK_NAMES.linea) && item?.items) {
+              return { 
+                ...item,
+                items: 
+                  [
+                    ...item.items.map(mappedItem => {
+                      if (mappedItem.label === JSON_RPC_METHODS_LABEL) {
+                        return {...mappedItem, items: [...dynamicSidebarItems[0].items]};
+                      }
+                      return mappedItem
+                    }),
+                  ]
+              };
+            }
+            return item;
+          });
+          return [...updatedItems];
+        },
       },
     ],
     [

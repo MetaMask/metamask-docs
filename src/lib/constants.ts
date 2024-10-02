@@ -474,8 +474,132 @@ export const REQUEST_PARAMS = (method = "POST") => ({
 export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
 export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
-export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
-export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
+export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org/v3/";
+export const LINEA_PROD_URL = "https://linea-mainnet.infura.io/v3/";
 export const LINEA_REQUEST_URL = process.env.VERCEL_ENV === "production"
     ? LINEA_PROD_URL
     : LINEA_DEV_URL;
+
+export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
+
+export enum NETWORK_NAMES {
+  linea = "linea",
+  metamask = "metamask",
+}
+
+export const lineaSidebarNames = [
+  {
+    old: "get-started",
+    new: "Get started"
+  },
+  {
+    old: "how-to",
+    new: "How to"
+  },
+  {
+    old: "use-ipfs",
+    new: "Use IPFS"
+  },
+  {
+    old: "access-ipfs-content",
+    new: "Access IPFS content"
+  },
+  {
+    old: "send-a-transaction",
+    new: "Send transactions"
+  },
+  {
+    old: "use-infura-as-a-reverse-proxy",
+    new: "Use Infura as a reverse proxy"
+  },
+  {
+    old: "layer-2-networks",
+    new: "Layer 2 networks"
+  },
+  {
+    old: "json-rpc-methods",
+    new: "JSON-RPC methods"
+  },
+  {
+    old: "avalanche-c-chain",
+    new: "Avalanche (C-Chain)"
+  },
+  {
+    old: "bnb-smart-chain",
+    new: "BNB Smart Chain"
+  },
+  {
+    old: "gas-api",
+    new: "Gas API"
+  },
+  {
+    old: "ipfs",
+    new: "IPFS"
+  },
+  {
+    old: "opbnb",
+    new: "opBNB"
+  },
+  {
+    old: "polygon-pos",
+    new: "Polygon PoS"
+  },
+  {
+    old: "zksync",
+    new: "ZKsync Era"
+  },
+  {
+    old: "http-api-methods",
+    new: "HTTP API methods"
+  },
+  {
+    old: "api-reference",
+    new: "API reference"
+  },
+  {
+    old: "subscription-methods",
+    new: "Subscription methods"
+  },
+  {
+    old: "trace-methods",
+    new: "Trace methods"
+  },
+];
+
+export const JSON_RPC_METHODS_LABEL = "JSON-RPC methods";
+
+type SidebarItemType = "link" | "category";
+
+export type SidebarItem = {
+  type: SidebarItemType;
+  label: string;
+  href: string;
+  sidebar_position: number;
+  items?: SidebarItem[];
+}
+
+export type SidebarDocs = {
+  docs: SidebarItem[];
+}
+
+export type DynamicData = {
+  type: SidebarItemType;
+  label: string;
+  link: {
+      type: string;
+      slug: string;
+  };
+  collapsed: boolean;
+  collapsible: boolean;
+  items?: SidebarItem[]; 
+}
+
+export type CustomFields = {
+  LD_CLIENT_ID: string;
+  VERCEL_ENV: string;
+  DASHBOARD_PREVIEW_URL: string;
+  SENTRY_KEY: string;
+  GF_SURVEY_KEY: string;
+  sidebarData: SidebarDocs;
+  dynamicData: DynamicData[],
+}

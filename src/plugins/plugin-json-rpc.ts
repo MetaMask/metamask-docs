@@ -1,3 +1,5 @@
+import { JSON_RPC_METHODS_LABEL, NETWORK_NAMES, RPC_NETWORK_URL } from "../lib/constants";
+
 export interface ResponseItem {
   name: string;
   data: any | null;
@@ -22,13 +24,6 @@ async function fetchMultipleData(
   return responses;
 }
 
-const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
-
-export enum NETWORK_NAMES {
-  linea = "linea",
-  metamask = "metamask",
-}
-
 const requests = [
   {
     url: `${RPC_NETWORK_URL}/${NETWORK_NAMES.linea}`,
@@ -40,14 +35,41 @@ const requests = [
   },
 ];
 
+function generateMethodMDX(page) {
+  return `---
+title: '${page.name}'
+---
+# ${page.name}
+  `;
+}
+
 export default function useNetworksMethodPlugin() {
   return {
     name: "plugin-json-rpc",
     async contentLoaded({ actions }) {
-      const { setGlobalData } = actions;
+      const { setGlobalData, createData, addRoute } = actions;
       await fetchMultipleData(requests)
         .then((responseArray) => {
           setGlobalData({ netData: responseArray });
+          return Promise.all(responseArray[responseArray.findIndex(item => item.name === NETWORK_NAMES.linea) || 0].data.methods.map(async (page) => {
+
+            const methodMDXContent = generateMethodMDX(page);
+
+            const filePath = await createData(
+              `services/reference/linea/json-rpc-methods/${page.name}.mdx`,
+              methodMDXContent
+            );
+
+            return addRoute({
+              path: `/services/reference/linea/json-rpc-methods/${page.name}`,
+              component: require.resolve("../components/CustomReferencePage/index.tsx"),
+              exact: true,
+              modules: {
+                methodFile: filePath,
+              },
+              customData: { ...page }
+            });
+          }));
         })
         .catch(() => {
           setGlobalData({ netData: [] });

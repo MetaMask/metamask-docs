@@ -96,6 +96,10 @@ const renderSchema = (schemaItem, schemas, name) => {
     </div>
   );
 
+  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, "oneOf");
+  if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, "allOf");
+  if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, "anyOf");
+
   if (schemaItem.oneOf) return renderCombinations(schemaItem, name, "oneOf");
   if (schemaItem.allOf) return renderCombinations(schemaItem, name, "allOf");
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, "anyOf");
@@ -184,5 +188,9 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 };
 
 export const renderResultSchemas = (inputSchema, schemas) => {
+  const customResult = inputSchema?.schema?.maxPriorityFeePerGas;
+  if (customResult) {
+    return <>{renderSchema(customResult, schemas, inputSchema.name)}</>
+  }
   return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>;
 };

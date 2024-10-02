@@ -3,7 +3,8 @@ import { usePluginData } from "@docusaurus/useGlobalData";
 import { useLocation } from "@docusaurus/router";
 import Layout from "@theme-original/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
-import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
+import { ResponseItem } from "@site/src/plugins/plugin-json-rpc";
+import { NETWORK_NAMES } from "@site/src/lib/constants";
 import styles from "./styles.module.css";
 
 const REF_PATH = "/wallet/reference/";
