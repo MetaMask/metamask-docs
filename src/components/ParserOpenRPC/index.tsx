@@ -123,7 +123,8 @@ export default function ParserOpenRPC({
     );
 
     return {
-      description: currentMethod.description || currentMethod.summary || null,
+      description: currentMethod.description || null,
+      summary: currentMethod.summary || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
@@ -282,6 +283,7 @@ export default function ParserOpenRPC({
             <DetailsBox
               method={method}
               description={currentMethodData.description}
+              summary={currentMethodData.summary}
               params={currentMethodData.params}
               components={currentMethodData.components.schemas}
               result={currentMethodData.result}
