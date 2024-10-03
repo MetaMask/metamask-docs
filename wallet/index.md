@@ -20,7 +20,7 @@ Get started by [connecting to MetaMask](connect/index.md).
 - **Enhanced functionality** – Use [RPC request batching](how-to/batch-json-rpc-requests.md), [EIP-6963](/wallet/concepts/wallet-interoperability.md) for wallet discovery, and wallet security enhancements.
 
 The **Wallet API** allows you to interact with users' Ethereum accounts using standardized JSON-RPC calls.
-While you can connect to MetaMask directly using just the Wallet API, we recommend using the SDK with the Wallet API to take advantage of the SDK's benefits.
+While you can connect to the MetaMask extension directly using just the Wallet API, we recommend using the SDK with the Wallet API to take advantage of the SDK's benefits.
 
 ## Where do I start?
 

@@ -52,6 +52,6 @@ The Wallet API consists of an [Ethereum Provider API](../reference/provider-api.
 which allow you to interact with users' Ethereum accounts in MetaMask.
 For most dapps, we recommend integrating with MetaMask using the SDK or third-party libraries in
 conjunction with the Wallet API, to take advantage of the SDK's benefits.
-However, you can also connect to MetaMask directly using the Wallet API.
+However, you can also connect to the MetaMask extension directly using the Wallet API.
 
 Get started with the [Wallet API](wallet-api.md).
