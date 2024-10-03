@@ -19,8 +19,6 @@ You'll also display the balance of an ERC-20 token and perform a token transfer.
 
 Create a new React project with TypeScript and set up the necessary dependencies for working with Starknet.
 
-### 1.1 Create a new React project with TypeScript
-
 Create a new directory called `get-starknet-tutorial` with a basic React app using TypeScript:
 
 ```bash
@@ -33,9 +31,10 @@ Change into the project directory:
 cd get-starknet-tutorial
 ```
 
-### 1.2 Add `get-starknet` and `starknet.js`
+## 2. Add `get-starknet` and `starknet.js`
 
-Add the required libraries for interacting with Starknet:
+Add [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js`
+version `6.11.0` to your project's dependencies:
 
 ```bash
 yarn add get-starknet@3.3.0 starknet@6.11.0
@@ -46,9 +45,6 @@ yarn add get-starknet@3.3.0 starknet@6.11.0
   <div>
 
 See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp.
-
-Alternatively, you can review [Connect to Starknet](connect-to-starknet.md#1-set-up-the-project) to set up
-your React TypeScript project and install the `get-starknet` library.
 
   </div>
 </details>

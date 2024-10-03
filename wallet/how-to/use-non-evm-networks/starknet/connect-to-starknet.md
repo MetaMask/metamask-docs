@@ -37,8 +37,10 @@ If you're new to Starknet, you can also follow the
 
 ### 1. Set up the project
 
-If you don't have an existing React project set up, you can create a new one using
-[Create React App](https://create-react-app.dev/):
+If you don't have an existing React project set up, you can create a new 
+[React project](https://create-react-app.dev/) project with TypeScript and set up the necessary dependencies for working with Starknet.
+
+Create a new directory called `get-starknet-dapp` with a basic React app using TypeScript:
 
 <Tabs>
 <TabItem value="yarn" label="Yarn" default>
@@ -57,13 +59,13 @@ npm create react-app get-starknet-dapp
 </TabItem>
 </Tabs>
 
-Navigate into the project:
+Change into the project directory:
 
 ```bash
 cd get-starknet-dapp
 ```
 
-### 2. Install `get-starknet`
+### 2. Add `get-starknet` and `starknet.js`
 
 Add [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js`
 version `6.11.0` to your project's dependencies:

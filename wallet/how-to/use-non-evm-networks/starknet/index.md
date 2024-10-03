@@ -42,30 +42,33 @@ Learn more [about how `get-starknet` interacts with MetaMask](about-get-starknet
 
 :::
 
-## Supported methods
+## Interaction with Starknet Snap
 
-Once connected to the Starknet Snap, your dapp can call
-[Starknet Snap API](../../../reference/non-evm-apis/starknet-snap-api.md) methods to interact with
-users' Starknet accounts.
-Not all methods are supported by both `get-starknet` and `wallet_invokeSnap`.
-The following table lists the supported methods for each connection option: 
+After it is connected to the Starknet Snap, your dapp can interact with the Starknet network through two main integration options: `get-starknet` and `wallet_invokeSnap`. 
+Both options provide access to similar functionalities, but offer different ways of interacting with users' Starknet accounts.
 
-Here's the fixed table with proper formatting:
+- `wallet_invokeSnap: Manages direct interactions between the dApp and the Starknet Snap. It facilitates network communication for account creation, transaction signing, fee estimation, and other Starknet-related actions.
 
-|                                                            Method                                                             | `get-starknet` | `wallet_invokeSnap` |
-|:-----------------------------------------------------------------------------------------------------------------------------:|:--------------:|:-------------------:|
-|            [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount)            |                |          ✓          |
-|        [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_displayPrivateKey)        |                |          ✓          |
-| [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateAccountDeployFee) |                |          ✓          |
-|              [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee)              |                |          ✓          |
-|         [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey)         |       ✓        |          ✓          |
-|     [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance)     |                |          ✓          |
-|    [`starkNet_getStoredUserAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getStoredUserAccounts)    |                |          ✓          |
-|          [`starkNet_getTransactions`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactions)          |                |          ✓          |
-|     [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus)     |                |          ✓          |
-|                 [`starkNet_getValue`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getValue)                 |                |          ✓          |
-|          [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts)          |                |          ✓          |
-|          [`starkNet_sendTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_sendTransaction)          |                |          ✓          |
-|              [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage)              |       ✓        |          ✓          |
-|       [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_upgradeAccContract)       |       ✓        |          ✓          |
-|            [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_verifyMessage)            |       ✓        |          ✓          |
+- `get-starknet`: Provides the same functionalities as `wallet_invokeSnap` and integrates a Starknet Window Object (SWO). 
+The SWO simplifies account management and signing, and enhances the  experience of handling account states and transactions. 
+You interact with the [Account object](https://starknetjs.com/docs/API/classes/Account) in the SWO for operations.
+
+The following table lists the core functionalities that each integration option supports:
+
+| Functionality | `get-starknet` | `wallet_invokeSnap` |
+|---------------|----------------|---------------------|
+| Create an account |  | [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_createAccount) |
+| Estimate a fee | [`estimateFeeBulk`](https://starknetjs.com/docs/API/classes/Account/#estimatefeebulk) | [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_estimateFee) |
+| Estimate the account deploy fee | [`estimateAccountDeployFee`](https://starknetjs.com/docs/API/classes/Account/#estimateaccountdeployfee) | [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_estimateaccountdeployfee) |
+| Extract the public key | [`getPublicKey`](https://starknetjs.com/docs/api/classes/Signer/#getpubkey) | [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_extractPublicKey) |
+| Get an ERC20 token balance | [`callContract`](http://starknetjs.com/docs/API/classes/Provider/#callcontract) | [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getErc20TokenBalance) |
+| Recover an account address | [`getAddress`](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L95) | [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_recoverAccounts) |
+| Get transaction status | [`getTransactionStatus`](https://starknetjs.com/docs/API/classes/Account/#gettransactionstatus) | [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getTransactionStatus) |
+| Sign a message | [`signMessage`](https://starknetjs.com/docs/API/classes/Signer#signmessage) | [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signMessage) |
+| Sign a transaction | [`signTransaction`](https://starknetjs.com/docs/API/classes/Signer#signtransaction) | [`starkNet_signTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signTransaction) |
+| Sign eclare Transaction | [`signDeclareTransaction`](https://starknetjs.com/docs/API/classes/Signer#signdeclaretransaction) | [`starkNet_signDeclareTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_signDeclareTransaction) |
+| Execute a transaction | [`execute`](https://starknetjs.com/docs/API/classes/Account/#execute) | [`starkNet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_executeTxn) |
+| Add an ERC20 token | [`watchAsset`](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58) | [`starkNet_addErc20Token`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_addErc20Token) |
+| Switch networks | [`switchNetwork`](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58) | [`starkNet_switchNetwork`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_switchNetwork) |
+| Get the current network | [`getChainId`](https://starknetjs.com/docs/API/classes/Provider#getchainid) | [`starkNet_getCurrentNetwork`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_getCurrentNetwork) |
+| Declare a contract | [`declareContract`](https://starknetjs.com/docs/API/classes/Account/#declarecontract) | [`starkNet_declareContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starkNet_declareContract) |

@@ -10,7 +10,8 @@ network interactions.
 It works with the [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) to
 enable dapps to interact with users' Starknet accounts in MetaMask.
 
-When you integrate `get-starknet` into your dapp, it creates a `WalletAccount` object, which acts as
+When you integrate `get-starknet` into your dapp, it creates a [Starknet
+Windows Object (SWO)](https://github.com/starknet-io/get-starknet/blob/get-starknet-core%403.3.0/packages/core/src/StarknetWindowObject.ts), which acts as
 the connection between the dapp and MetaMask, and manages Starknet interactions.
 This allows users to send Starknet transactions, sign Starknet messages, and manage Starknet
 accounts within MetaMask, and this functionality can be extended to multiple wallets in the Starknet
@@ -26,11 +27,13 @@ A dapp with `get-starknet` installed interacts with MetaMask as follows:
 1. After the dapp is connected to MetaMask and the Starknet Snap, `get-starknet` receives a Starknet
    Windows Object (SWO), which represents the MetaMask wallet with Starknet functionality.
 
-1. `get-starknet` creates a [`WalletAccount`](http://starknetjs.com/docs/guides/walletAccount/) instance.
+1. You can retrieve an [Account Object](https://starknetjs.com/docs/API/#account) from the Starknet Windows Object (SWO) when you access `swo.account`.
+   This Account Object enables you to manage Starknet interactions.
    This instance manages the Starknet account within MetaMask.
 
 ```mermaid
 sequenceDiagram
+    participant user as End User
     participant dapp as Dapp
     participant get as get-starknet
     participant mm as MetaMask
@@ -41,9 +44,10 @@ sequenceDiagram
     get->>mm: Request connection
     mm->>Snap: Activate
     Snap-->>mm: Activated
-    mm-->>get: Return SWO
-    get->>network: Create WalletAccount
-    get-->>dapp: Connection established
+    get->>Snap: Request Starknet account address
+    Snap-->>mm: Recover account and return Starknet account address
+    mm-->>get: Return Starknet account address
+    get-->>dapp: Connection established with SWO return
     
     dapp->>get: Read blockchain data
     get->>network: Query data
@@ -51,13 +55,21 @@ sequenceDiagram
     get-->>dapp: Processed data
     
     dapp->>get: Write transaction
-    get->>mm: Request signature
-    mm->>Snap: Sign transaction
-    Snap-->>mm: Signed transaction
-    mm-->>get: Return signature
-    get->>network: Submit transaction
-    network-->>get: Transaction result
-    get-->>dapp: Transaction confirmation
+    get->>mm: Request write transaction 
+    mm->>Snap: write transaction
+    Snap-->>mm: Request confirmation to write transaction
+    mm-->>user: Request confirmation
+    user-->>mm: Confirm transaction
+    mm-->>Snap: Confirm transaction
+    
+    alt If the Account has deployed
+      Snap-->>network: deploying account transaction
+    end
+    Snap-->>network: Submit transaction
+    network-->>Snap: Transaction result
+    Snap-->>mm: Return Transaction result
+    mm-->>get: Return Transaction result
+    get-->>dapp: Return Transaction result
 ```
 
 The `get-starknet` library offers several features that improve how dapps interact with the Starknet
