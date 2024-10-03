@@ -10,7 +10,7 @@ tags:
 
 # MetaMask SDK
 
-MetaMask SDK enables a reliable, secure, and seamless connection between your dapp and the MetaMask browser extension or MetaMask Mobile. It provides cross-platform compatibility with a consistent user experience.
+MetaMask SDK enables a reliable, secure, and seamless connection between your dapp and the MetaMask browser extension or MetaMask Mobile, providing cross-platform compatibility with a consistent user experience.
 Key features include:
 
 - **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
