@@ -29,7 +29,7 @@ const CodeTerminal = () => {
           value: keys[0].id,
           private: keys[0].private || "",
         },
-        "apiKey"
+        "apiKey",
       );
       return keys.map((item) => ({
         label: item.name,

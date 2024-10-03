@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import clsx from "clsx";
 import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
 import styles from "./styles.module.css";
 import global from "../global.module.css";
-import { Tooltip } from "@site/src/components/ParserOpenRPC/Tooltip";
+import { Tooltip } from "@site/src/components/Tooltip";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -15,6 +17,8 @@ interface RequestBoxProps {
   openModal: () => void;
   submitRequest: () => void;
   isMetamaskNetwork?: boolean;
+  defExampleResponse?: any;
+  resetResponseHandle: () => void;
 }
 
 export default function RequestBox({
@@ -26,22 +30,33 @@ export default function RequestBox({
   openModal,
   submitRequest,
   isMetamaskNetwork = false,
+  defExampleResponse,
+  resetResponseHandle,
 }: RequestBoxProps) {
-
+  const { userAPIKey } = useContext(MetamaskProviderContext);
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
-    const NETWORK_URL = "https://linea-mainnet.infura.io";
-    const API_KEY = "<YOUR-API-KEY>";
+    const API_KEY = userAPIKey ? userAPIKey : "<YOUR-API-KEY>";
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${NETWORK_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
-  }, [method, paramsData]);
+    return `curl ${LINEA_REQUEST_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+  }, [userAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
-    return JSON.stringify(response, null, 2);
-  }, [response]);
+    if (defExampleResponse && response === undefined) {
+      return JSON.stringify(
+        defExampleResponse === "null" ? null : defExampleResponse,
+        null,
+        2
+      );
+    }
+    if (response !== undefined) {
+      return JSON.stringify(response, null, 2);
+    }
+    return false
+  }, [response, defExampleResponse]);
 
   const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
   const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
@@ -93,10 +108,22 @@ export default function RequestBox({
           }
         </div>
       </div>
-      {response !== undefined && (
+      {exampleResponse && (
         <div className={styles.cardWrapper}>
           <div className={styles.cardHeader}>
-            <strong className={styles.cardHeading}>Response</strong>
+            <strong className={styles.cardHeading}>
+              {defExampleResponse && response === undefined ? "Example response" : "Response"}
+            </strong>
+            {defExampleResponse && response !== undefined && (
+              <Tooltip message="Reset response">
+                <button
+                  className={styles.resetResponseBtn}
+                  onClick={resetResponseHandle}
+                >
+                  <img src="/img/icons/reset-icon.svg" />
+                </button>
+              </Tooltip>
+            )}
           </div>
           <div>
             <CodeBlock language="javascript" className={clsx(styles.responseBlock, "margin-bottom--none")}>

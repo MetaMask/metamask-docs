@@ -4,6 +4,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import CardSection from "@site/src/components/CardSection";
+import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
@@ -11,9 +12,12 @@ function HomepageHeader() {
   return (
     <header className={clsx(styles.introductionBlock, "margin-bottom--lg")}>
       <div className="container">
-        <h1 className={clsx("hero__title", styles.title, styles.forceColor)}>
+        <Heading
+          as="h1"
+          className={clsx("hero__title", styles.title, styles.forceColor)}
+        >
           {siteConfig.title}
-        </h1>
+        </Heading>
         <p
           className={clsx("hero__subtitle", styles.subtitle, styles.forceColor)}
         >
@@ -35,20 +39,21 @@ function DevBanner() {
   return (
     <header className={clsx(styles.devBannerBlock)}>
       <div className="container">
-        <h1
+        <Heading
+          as="h1"
           className={clsx(
             "hero__title",
             styles.devBannerTitle,
-            styles.devBannerForceColor
+            styles.devBannerForceColor,
           )}
         >
           {"Contribute to MetaMask"}
-        </h1>
+        </Heading>
         <p
           className={clsx(
             "hero__subtitle",
             styles.devBannerSubtitle,
-            styles.devBannerForceColor
+            styles.devBannerForceColor,
           )}
         >
           Join the MetaMask developer community and learn how to contribute to
@@ -57,7 +62,7 @@ function DevBanner() {
         <Link
           className={clsx(
             styles.devBannerButton,
-            "button button--outline button--secondary button--md"
+            "button button--outline button--secondary button--md",
           )}
           href="https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md"
         >
