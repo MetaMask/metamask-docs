@@ -3,6 +3,7 @@
   --select-value-color: #BBC0C5;
   --select-label-color: #fff;
   --select-item-hover: #000;
+  --select-color-title: #fff;
 }
 
 :root[data-theme="light"] {
@@ -10,6 +11,7 @@
   --select-value-color: #24272A;
   --select-label-color: #24272A;
   --select-item-hover: #BBC0C5;
+  --select-color-title: #24272A;
 }
 
 .selectWrapper {
@@ -33,7 +35,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--select-bg);
-  color: #ffffff;
+  color: var(--select-color-title);
 }
 
 .selectDropdown {
