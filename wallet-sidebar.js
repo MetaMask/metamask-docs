@@ -101,6 +101,7 @@ const sidebar = {
           id: "reference/provider-api",
         },
       ],
+      collapsed: false,
     },
   ],
 };

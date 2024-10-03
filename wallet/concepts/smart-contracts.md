@@ -48,7 +48,6 @@ Example libraries include the following:
 
 - [Ethers](https://www.npmjs.com/package/ethers)
 - [web3.js](https://www.npmjs.com/package/web3)
-- [Embark](https://framework.embarklabs.io/)
 - [ethjs](https://www.npmjs.com/package/ethjs)
 - [Hardhat](https://hardhat.org/)
 
