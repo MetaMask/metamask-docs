@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import { useLocation } from "@docusaurus/router";
 import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
 import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
 import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
@@ -24,7 +23,7 @@ import {
 import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { LINEA_REQUEST_URL, REF_PATH } from "@site/src/lib/constants";
+import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -49,8 +48,6 @@ export default function ParserOpenRPC({
   extraContent,
 }: ParserProps) {
   if (!method || !network) return null;
-  const location = useLocation();
-  const { pathname } = location;
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(undefined);
   const [paramsData, setParamsData] = useState([]);
@@ -59,6 +56,7 @@ export default function ParserOpenRPC({
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
   const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext);
   const [defExampleResponse, setDefExampleResponse] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
   const { colorMode } = useColorMode();
   const trackAnalyticsForRequest = (response) => {
     trackClickForSegment({
@@ -124,7 +122,8 @@ export default function ParserOpenRPC({
     );
 
     return {
-      description: currentMethod.description || currentMethod.summary || null,
+      description: currentMethod.description || null,
+      summary: currentMethod.summary || null,
       params: currentMethod.params || [],
       result: currentMethod.result || null,
       components: currentNetwork.data.components || null,
@@ -132,6 +131,7 @@ export default function ParserOpenRPC({
       paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
+      servers: currentNetwork.data?.servers?.[0]?.url || null
     };
   }, [currentNetwork, method]);
 
@@ -187,39 +187,71 @@ export default function ParserOpenRPC({
     setParamsData(Object.values(data));
   };
 
-  const onSubmitRequestHandle = async () => {
-    if (isMetamaskNetwork) {
-      if (!metaMaskProvider) return
-      try {
-        const response = await metaMaskProvider?.request({
-          method: method,
-          params: paramsData
-        })
-        setReqResult(response);
-        trackAnalyticsForRequest(response);
-      } catch (e) {
-        setReqResult(e);
-      }
+  const handleMetaMaskRequest = async () => {
+    if (!metaMaskProvider) return;
+    setIsLoading(true);
+    try {
+      const response = await metaMaskProvider.request({
+        method,
+        params: paramsData,
+      });
+      setReqResult(response);
+      trackAnalyticsForRequest(response);
+    } catch (e) {
+      setReqResult(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getInfuraUrl = (url: string) => {
+    if (process.env.VERCEL_ENV === "production") {
+      return url;
     } else {
-      const URL = `${LINEA_REQUEST_URL}/v3/${userAPIKey}`;
-      let params = {
-        method: "POST",
+      return url.replace("infura.io", "dev.infura.org");
+    }
+  }
+
+  const INIT_URL = currentMethodData.servers !== null ? getInfuraUrl(currentMethodData.servers) : `${LINEA_REQUEST_URL}/v3/`;
+
+  const handleServiceRequest = async () => {
+    const URL = `${INIT_URL}${userAPIKey}`;
+    const params = {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-        body: JSON.stringify({
-          jsonrpc: "2.0",
-          method,
-          params: paramsData,
-          id: 1,
-        }),
-      };
+      },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        method,
+        params: paramsData,
+        id: 1,
+      }),
+    };
+    setIsLoading(true);
+    try {
       const res = await fetch(URL, params);
       if (res.ok) {
         const response = await res.json();
-        setReqResult(response.result);
-        trackAnalyticsForRequest(response.result);
+        setReqResult(response);
+        trackAnalyticsForRequest(response);
       } else {
-        console.error("error");
+        const errorText = await res.text();
+        const errorState = JSON.parse(errorText);
+        setReqResult(`Request failed. Status: ${res.status}. ${errorState}`);
       }
+    } catch (e) {
+      setReqResult(`${e}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onSubmitRequestHandle = async () => {
+    if (isMetamaskNetwork) {
+      await handleMetaMaskRequest();
+    } else {
+      await handleServiceRequest();
     }
   };
 
@@ -250,6 +282,7 @@ export default function ParserOpenRPC({
             <DetailsBox
               method={method}
               description={currentMethodData.description}
+              summary={currentMethodData.summary}
               params={currentMethodData.params}
               components={currentMethodData.components.schemas}
               result={currentMethodData.result}
@@ -301,8 +334,8 @@ export default function ParserOpenRPC({
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {pathname.startsWith(REF_PATH) && <ProjectsBox />}
-            {!pathname.startsWith(REF_PATH) && !metaMaskAccount && (
+            {!isMetamaskNetwork && <ProjectsBox />}
+            {isMetamaskNetwork && !metaMaskAccount && (
               <AuthBox isMetamaskNetwork={isMetamaskNetwork} />
             )}
             <RequestBox
@@ -316,6 +349,8 @@ export default function ParserOpenRPC({
               isMetamaskNetwork={isMetamaskNetwork}
               defExampleResponse={defExampleResponse}
               resetResponseHandle={resetResponseHandle}
+              requestURL={INIT_URL}
+              isLoading={isLoading}
             />
           </div>
         </div>

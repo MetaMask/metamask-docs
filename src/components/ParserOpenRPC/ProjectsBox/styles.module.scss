@@ -1,6 +1,15 @@
 :root {
   --select-bg: #24272A;
   --select-value-color: #BBC0C5;
+  --select-label-color: #fff;
+  --select-item-hover: #000;
+}
+
+:root[data-theme="light"] {
+  --select-bg: #fff;
+  --select-value-color: #24272A;
+  --select-label-color: #24272A;
+  --select-item-hover: #BBC0C5;
 }
 
 .selectWrapper {
@@ -36,7 +45,7 @@
   background-color: var(--select-bg);
   padding: 8px 16px;
   &:hover {
-    background-color: #000000;
+    background-color: var(--select-item-hover);
   }
 }
 
@@ -46,7 +55,7 @@
 }
 
 .selectDropdownLabel {
-  color: #ffffff;
+  color: var(--select-label-color);
 }
 
 .connectButton {
