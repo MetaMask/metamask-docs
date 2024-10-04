@@ -29,7 +29,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         description={item.description || item.title || ""}
       />
       <div className="padding-bottom--md">
-        <CollapseBox isInitCollapsed={!!name}>
+        <CollapseBox>
           <>
             {Object.entries(item.properties).map(([key, value]) => (
               <div key={key} className={styles.paramItemWrapper}>
