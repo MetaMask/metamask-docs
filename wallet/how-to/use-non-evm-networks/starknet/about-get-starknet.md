@@ -75,10 +75,10 @@ sequenceDiagram
 The `get-starknet` library offers several features that improve how dapps interact with the Starknet
 network through MetaMask:
 
-- The `WalletAccount` uses a specified provider to access data from the Starknet network.
+- The `AccountInterface` uses a specified provider to access data from the Starknet network.
 - For transactions, `get-starknet` prepares the data and sends it to MetaMask for signing through
   the Starknet Snap.
-- `get-starknet` enables the dapp to create contract instances connected to the `WalletAccount`,
+- `get-starknet` enables the dapp to create contract instances connected to the `AccountInterface`,
   allowing smart contract functions to be invoked, with MetaMask handling the signatures.
 - `get-starknet` sets up listeners for account and network changes in MetaMask, so the dapp can
   subscribe and update its state accordingly.

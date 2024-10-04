@@ -104,18 +104,18 @@ You can configure these options as follows:
 handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 ```
 
-### 2.3. Create a `WalletAccount`
+### 2.3. Create an `AccountInterface`
 
-After connecting to MetaMask, create a new `WalletAccount` instance using the `starknet.js` library.
+After connecting to MetaMask, create a new `AccountInterface` instance using the `starknet.js` library.
 This allows interaction with the Starknet network using the connected wallet.
 
 ```typescript title="App.tsx"
-import { WalletAccount } from "starknet"; 
+import { AccountInterface } from "starknet"; 
 
 async function handleConnect(options?: ConnectOptions) {
   const res = await connect(options);
   const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
-  const newWalletAccount = new WalletAccount({ nodeUrl: myFrontendProviderUrl }, res);
+  const newAccountInterface = new AccountInterface({ nodeUrl: myFrontendProviderUrl }, res);
 }
 ```
 
@@ -163,14 +163,14 @@ import {
   connect,
   disconnect,
 } from "get-starknet"
-import { WalletAccount } from "starknet";
+import { AccountInterface } from "starknet";
 import { useState } from "react"
 
 function App() {
   const [walletName, setWalletName] = useState("")
   const [walletAddress, setWalletAddress] = useState("")
   const [walletIcon, setWalletIcon] = useState("")
-  const [walletAccount, setWalletAccount] = useState<WalletAccount | null>(null)
+  const [AccountInterface, setAccountInterface] = useState<AccountInterface | null>(null)
 
   async function handleConnect(options?: ConnectOptions) {
     const res = await connect(options)
@@ -179,8 +179,8 @@ function App() {
     setWalletIcon(res?.icon || "")
     if (res) {
       const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
-      const newWalletAccount = new WalletAccount({ nodeUrl: myFrontendProviderUrl }, res)
-      setWalletAccount(newWalletAccount)
+      const newAccountInterface = new AccountInterface({ nodeUrl: myFrontendProviderUrl }, res)
+      setAccountInterface(newAccountInterface)
     }
   }
 
@@ -188,7 +188,7 @@ function App() {
     await disconnect(options)
     setWalletName("")
     setWalletAddress("")
-    setWalletAccount(null)
+    setAccountInterface(null)
   }
 
   return (
@@ -247,11 +247,11 @@ export default App
 
 ## 3. Display the balance of and transfer an ERC-20 token
 
-Now that you have set up the basic interaction, you can display the balance of a specific ERC-20 token, such as STRK, and perform a transfer using the `WalletAccount` instance.
+Now that you have set up the basic interaction, you can display the balance of a specific ERC-20 token, such as STRK, and perform a transfer using the `AccountInterface` instance.
 
 ### 3.1. Set up the contract
 
-To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `WalletAccount` instance.
+To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `AccountInterface` instance.
 The following example assumes the ABI (application binary interface) is loaded from a JSON file:
 
 ```typescript
@@ -260,7 +260,7 @@ import erc20Abi from "./erc20Abi.json";
 
 const tokenAddress = "0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7";
 
-const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
+const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
 ```
 
 :::note ABI and contract address
@@ -280,7 +280,7 @@ const formattedBalance = balance / Math.pow(10, 18);
 
 ### 3.3. Transfer tokens
 
-To transfer tokens, fill out the `transfer` method call and execute the transaction using the `WalletAccount`.
+To transfer tokens, fill out the `transfer` method call and execute the transaction using the `AccountInterface`.
 For example:
 
 ```typescript
@@ -296,10 +296,10 @@ const transferCall: Call = erc20.populate("transfer", {
 });
 
 // Execute the transfer.
-const { transaction_hash: transferTxHash } = await walletAccount.execute(transferCall);
+const { transaction_hash: transferTxHash } = await AccountInterface.execute(transferCall);
 
 // Wait for the transaction to be accepted on Starknet.
-await walletAccount.waitForTransaction(transferTxHash);
+await AccountInterface.waitForTransaction(transferTxHash);
 ```
 
 ### 3.4. Full example
@@ -311,25 +311,25 @@ import { useEffect, useState } from "react";
 import { Contract } from "starknet";
 import erc20Abi from "./erc20Abi.json";
 
-function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
+function TokenBalanceAndTransfer({ AccountInterface, tokenAddress }) {
   const [balance, setBalance] = useState(null);
 
   useEffect(() => {
-    if (walletAccount) {
-      const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
+    if (AccountInterface) {
+      const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
       // Fetch balance
-      erc20.balanceOf(walletAccount.address)
+      erc20.balanceOf(AccountInterface.address)
         .then((result) => {
           const formattedBalance = result / Math.pow(10, 18); // Adjust for decimals
           setBalance(formattedBalance);
         })
         .catch(console.error);
     }
-  }, [walletAccount, tokenAddress]);
+  }, [AccountInterface, tokenAddress]);
 
   async function handleTransfer() {
-    if (walletAccount) {
-      const erc20 = new Contract(erc20Abi, tokenAddress, walletAccount);
+    if (AccountInterface) {
+      const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
       const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
       const amountToTransfer = 1n * 10n ** 18n; // 1 token
 
@@ -338,13 +338,13 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
         recipient: recipientAddress,
         amount: amountToTransfer,
       });
-      const { transaction_hash: transferTxHash } = await walletAccount.execute(transferCall);
+      const { transaction_hash: transferTxHash } = await AccountInterface.execute(transferCall);
 
       // Wait for the transaction to be accepted
-      await walletAccount.provider.waitForTransaction(transferTxHash);
+      await AccountInterface.provider.waitForTransaction(transferTxHash);
 
       // Refresh balance
-      const newBalance = await erc20.balanceOf(walletAccount.address);
+      const newBalance = await erc20.balanceOf(AccountInterface.address);
       setBalance(newBalance / Math.pow(10, 18)); // Adjust for decimals
     }
   }
@@ -360,7 +360,7 @@ function TokenBalanceAndTransfer({ walletAccount, tokenAddress }) {
 
 ## Next steps
 
-You've set up a simple React dapp that connects to MetaMask, displays an ERC-20 token balance, and performs token transfers. Creating a contract instance using `WalletAccount` allows you to interact with smart contracts, retrieve token balances, and execute transactions, enabling more advanced functionality in your dapp.
+You've set up a simple React dapp that connects to MetaMask, displays an ERC-20 token balance, and performs token transfers. Creating a contract instance using `AccountInterface` allows you to interact with smart contracts, retrieve token balances, and execute transactions, enabling more advanced functionality in your dapp.
 
 You can follow these next steps:
 
