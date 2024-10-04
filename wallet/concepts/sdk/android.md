@@ -33,7 +33,7 @@ The MetaMask Android SDK consists of two components:
 The client SDK communicates with the server SDK using
 [Interprocess communication (IPC)](https://developer.android.com/guide/components/processes-and-threads#IPC).
 The JSON-RPC calls are implemented using the
-[Android Interface Definition Language (AIDL)](https://developer.android.com/guide/components/aidl).
+[Android Interface Definition Language (AIDL)](https://developer.android.com/develop/background-work/services/aidl).
 Communication over IPC is encrypted using elliptic curve integrated encryption scheme (ECIES).
 
 Within MetaMask, the wallet (written in React Native) communicates with the Native Module (written
