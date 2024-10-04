@@ -117,8 +117,7 @@ export default function TransactionTable({
       <div className={classNameHeading}>
         <Text as="h2">Transaction History</Text>
         <Text as="p">
-          Here is a list of your requests from our faucet. You can get more
-          information about your transaction by clicking on the link.
+          Here is a list of your requests from the MetaMask faucet. View your transaction on Etherscan for more information.
         </Text>
       </div>
       <Table

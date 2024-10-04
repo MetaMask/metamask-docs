@@ -127,9 +127,9 @@ export default function Hero({
             {isLimitedUserPlan && (
               <p className={styles.caption}>
                 The amount of {network === "linea" && "Linea Sepolia"}
-                {network === "sepolia" && "Sepolia"} ETH you’ll get is
-                determined by your addresses Ethereum Mainnet activity to ensure
-                fair and bot-free distribution
+                {network === "sepolia" && "Sepolia"} ETH you'll get is
+                determined by your address's Ethereum Mainnet activity to ensure
+                fair and bot-free distribution.
               </p>
             )}
           </div>

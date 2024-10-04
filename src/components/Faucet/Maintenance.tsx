@@ -26,10 +26,10 @@ const Maintenance = ({ network }: { network: "linea" | "sepolia" }) => {
     <div className={styles.maintenance}>
       <div className={styles.modal}>
         <MaintenanceIco />
-        <Text as="h3">Our faucet is at full capacity due to high demand</Text>
+        <Text as="h3">The faucet is at full capacity due to high demand.</Text>
         <Text as="p">
-          We’re thrilled by the enthusiasm and are working hard to scale up. Try
-          checking back later. Thanks for your patience. Need ETH urgently?
+          Try
+          checking back later. Thank you for your patience. Need ETH urgently?
         </Text>
         <Button
           testId="maintenance-cta-alternative"

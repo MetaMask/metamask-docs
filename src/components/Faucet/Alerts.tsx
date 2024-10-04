@@ -59,7 +59,7 @@ export const AlertCommonIssue = () => (
           target="_blank"
           href="https://support.metamask.io/"
         >
-          contact us
+          contact support
         </a>
         .
       </span>
@@ -71,20 +71,20 @@ export const AlertPastActivity = () => (
   <div>
     <AlertTitle>No past activity</AlertTitle>
     <AlertText>
-      The address used hasn’t been active on Ethereum Mainnet yet. To proceed,
-      please use an address that has activity on Ethereum Mainnet. For further
-      details, refer to our FAQ below.
+      The address used hasn't been active on Ethereum Mainnet yet. To proceed,
+      please use an address that has activity on Ethereum Mainnet. For more
+      details, refer to the following FAQ.
     </AlertText>
   </div>
 );
 
 export const AlertBalanceTooLow = () => (
   <div>
-    <AlertTitle>Balance Too Low</AlertTitle>
+    <AlertTitle>Balance too low</AlertTitle>
     <AlertText>
       <span>
-        Your current Ethereum address does not contain enough Ether on the
-        Ethereum Mainnet. You can easily add funds to your address using{" "}
+        Your current Ethereum address does not contain enough ETH on
+        Ethereum Mainnet. You can add funds to your address using{" "}
         <a
           data-testid="alert-balance-add-funds"
           onClick={handleClickBalanceLow}
@@ -93,6 +93,7 @@ export const AlertBalanceTooLow = () => (
         >
           MetaMask
         </a>
+        .
       </span>
     </AlertText>
   </div>
@@ -124,7 +125,7 @@ export const AlertSuccess = ({ url }: { url: string }) => (
     <AlertText>
       <span>
         Your transaction has been sent to the Ethereum/Sepolia network. You
-        should be receiving your ETH shortly.{" "}
+        will receive your ETH shortly.{" "}
         <a
           data-testid="alert-success-etherscan"
           onClick={handleClickViewTransaction}
