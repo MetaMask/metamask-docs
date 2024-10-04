@@ -36,7 +36,7 @@ const renderStatus = (status) => {
   switch (status) {
     case "success":
       return "success";
-    case "failure":
+    case "failed":
       return "error";
     default:
       return "default";
@@ -47,7 +47,7 @@ const renderValue = (status) => {
   switch (status) {
     case "success":
       return "successful";
-    case "failure":
+    case "failed":
       return "failed";
     default:
       return "pending";

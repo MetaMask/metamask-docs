@@ -270,7 +270,7 @@ const AuthModal = ({
           servicePlan: { tier },
         },
       } = await uksUserRawResp.json();
-      localStorage.setItem(AUTH_WALLET_USER_PLAN, JSON.stringify(tier));
+      sessionStorage.setItem(AUTH_WALLET_USER_PLAN, JSON.stringify(tier));
       if (setUser) {
         setUksTier(tier);
       }

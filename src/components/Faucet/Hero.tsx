@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Text from "@site/src/components/Text";
 import Button from "@site/src/components/Button";
 import Input from "@site/src/components/Input";
 import clsx from "clsx";
-import {MetamaskProviderContext} from "@site/src/theme/Root";
-import EthIcon from "./eth.svg";
-
-import styles from "./hero.module.scss";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
+import { WALLET_LINK_TYPE } from "@site/src/components/AuthLogin/AuthModal";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import EthIcon from "./eth.svg";
+import styles from "./hero.module.scss";
 
 interface IHero {
   className: string;
@@ -28,12 +28,21 @@ export default function Hero({
   isLoading,
   isLimitedUserPlan,
 }: IHero) {
-  const { metaMaskAccount, sdk, metaMaskWalletIdConnectHandler } = useContext(MetamaskProviderContext);
+  const {
+    metaMaskAccount,
+    sdk,
+    metaMaskWalletIdConnectHandler,
+    walletLinked,
+    projects,
+    walletLinkUrl,
+  } = useContext(MetamaskProviderContext);
   const isExtensionActive = sdk.isExtensionActive();
+  const [isWalletLinking, setIsWalletLinking] = useState(false);
 
   const handleConnectWallet = () => {
+    setIsWalletLinking(true);
     trackClickForSegment({
-      eventName: !isExtensionActive ? "Install MetaMask" : "Connect Wallet",
+      eventName: !isExtensionActive ? "Install MetaMask" : "Connect MetaMask",
       clickType: "Hero",
       userExperience: "B",
       responseStatus: null,
@@ -41,6 +50,22 @@ export default function Hero({
       timestamp: Date.now(),
     });
     metaMaskWalletIdConnectHandler();
+  };
+
+  const handleLinkWallet = () => {
+    setIsWalletLinking(true);
+    trackClickForSegment({
+      eventName:
+        walletLinked === WALLET_LINK_TYPE.NO
+          ? "Link Infura Account"
+          : "Select Infura Account",
+      clickType: "Hero",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    window.location.href = walletLinkUrl;
   };
 
   const handleRequestEth = () => {
@@ -54,6 +79,12 @@ export default function Hero({
     });
     handleRequest();
   };
+
+  useEffect(() => {
+    if (walletLinked) {
+      setIsWalletLinking(false);
+    }
+  }, [walletLinked]);
 
   return (
     <div
@@ -75,12 +106,16 @@ export default function Hero({
       <Text as="p">
         {!isExtensionActive
           ? "Install MetaMask for your browser to get started and request ETH."
-          : !metaMaskAccount
-            ? "Connect your MetaMask wallet to get started and request ETH."
+          : !Object.keys(projects).length
+            ? walletLinked === undefined
+              ? "Connect your MetaMask wallet to get started and request ETH."
+              : walletLinked === WALLET_LINK_TYPE.NO
+                ? "Link your Infura account to get started and request ETH."
+                : "Select your Infura account to get started and request ETH."
             : "Enter your MetaMask wallet address and request ETH."}
       </Text>
       <div className={styles.actions}>
-        {isExtensionActive && metaMaskAccount && (
+        {!!Object.keys(projects).length && (
           <div className={styles.inputCont}>
             <Input
               label="Wallet address"
@@ -101,21 +136,54 @@ export default function Hero({
         )}
         <div
           className={clsx(
-            isExtensionActive && metaMaskAccount && styles.alignedButtons,
+            !!Object.keys(projects).length && styles.alignedButtons,
           )}
         >
-          {!metaMaskAccount ? (
+          {!isExtensionActive ? (
             <Button
-              testId={
-                !isExtensionActive
-                  ? "hero-cta-install-metamask"
-                  : "hero-cta-connect-wallet"
-              }
+              testId="hero-cta-install-metamask"
               className={styles.button}
               onClick={handleConnectWallet}
+              textColor="light"
             >
-              {!isExtensionActive ? "Install MetaMask" : "Connect Wallet"}
+              Install MetaMask
             </Button>
+          ) : !Object.keys(projects).length ? (
+            <>
+              {walletLinked === undefined && (
+                <Button
+                  testId="hero-cta-connect-metamask"
+                  className={styles.button}
+                  onClick={handleConnectWallet}
+                  isLoading={isWalletLinking}
+                  textColor="light"
+                >
+                  Connect MetaMask
+                </Button>
+              )}
+              {walletLinked === WALLET_LINK_TYPE.NO && (
+                <Button
+                  testId="hero-cta-link-infura-account"
+                  className={styles.button}
+                  onClick={handleLinkWallet}
+                  isLoading={isWalletLinking}
+                  textColor="light"
+                >
+                  Link Infura Account
+                </Button>
+              )}
+              {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
+                <Button
+                  testId="hero-cta-select-infura-account"
+                  className={styles.button}
+                  onClick={handleLinkWallet}
+                  isLoading={isWalletLinking}
+                  textColor="light"
+                >
+                  Select Infura Account
+                </Button>
+              )}
+            </>
           ) : (
             <Button
               testId="hero-cta-request-eth"
@@ -123,6 +191,7 @@ export default function Hero({
               disabled={!inputValue}
               className={styles.button}
               onClick={handleRequestEth}
+              textColor="light"
             >
               Request ETH
             </Button>

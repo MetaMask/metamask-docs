@@ -33,7 +33,7 @@ const NavbarWalletComponent: FC = ({
   } = useContext(MetamaskProviderContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
-  const isExtensionActive = sdk.isExtensionActive;
+  const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -175,7 +175,7 @@ const NavbarWalletComponent: FC = ({
             >
               <span className={styles.content}>
                 <DisconnectIcon className={styles.icon} />{" "}
-                <span>Disconnect Wallet</span>
+                <span>Disconnect MetaMask</span>
               </span>
             </Button>
           </li>
