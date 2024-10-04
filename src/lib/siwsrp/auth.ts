@@ -1,6 +1,7 @@
 import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
 import {
+  AUTH_WALLET_PAIRING,
   AUTH_WALLET_PROJECTS,
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_TOKEN,
@@ -85,7 +86,4 @@ export const getUserIdFromJwtToken = () => {
 
 export const clearStorage = () => {
   sessionStorage.clear();
-  sessionStorage.removeItem(AUTH_WALLET_SESSION_NAME);
-  sessionStorage.removeItem(AUTH_WALLET_TOKEN);
-  sessionStorage.removeItem(AUTH_WALLET_PROJECTS);
 };

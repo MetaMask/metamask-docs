@@ -8,7 +8,6 @@ import React, {
 import { Provider as AlertProvider } from "react-alert";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import siteConfig from "@generated/docusaurus.config";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
@@ -164,11 +163,7 @@ export const LoginProvider = ({ children }) => {
             const projectsResponse = await fetch(
               `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
-                ...REQUEST_PARAMS("GET"),
-                headers: {
-                  ...REQUEST_PARAMS("GET").headers,
-                  Authorization: `Bearer ${token}`,
-                },
+                ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
               }
             );
             const res = await projectsResponse.json();

@@ -9,10 +9,11 @@ import {
   authenticateAndAuthorize,
   saveTokenString,
   getUserIdFromJwtToken,
-} from "../../lib/siwsrp/auth";
+} from "@site/src/lib/siwsrp/auth";
 import {
   DASHBOARD_URL,
   REQUEST_PARAMS,
+  AUTH_WALLET_PAIRING,
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_PROJECTS,
 } from "@site/src/lib/constants";
@@ -175,12 +176,10 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
         await fetch(
           `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
           {
-            ...REQUEST_PARAMS(),
-            headers: {
-              ...REQUEST_PARAMS().headers,
+            ...REQUEST_PARAMS("POST", {
               hydra_token: accessToken,
               token: "true",
-            },
+            }),
             body: JSON.stringify({
               profileId: userProfile.profileId,
               redirect_to: window.location.href,
@@ -192,6 +191,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
       if (!loginResponse) throw new Error("Something went wrong");
 
       const { data, session, token } = loginResponse;
+      sessionStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
 
       if (data.step) {
         // Handling no wallet pairing or multiple pairing
@@ -201,6 +201,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
             mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
+            redirect_to: session.redirect_to,
           })
         ).toString("base64");
 
@@ -236,11 +237,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
       const projectsResponse = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
         {
-          ...REQUEST_PARAMS("GET"),
-          headers: {
-            ...REQUEST_PARAMS("GET").headers,
-            Authorization: `Bearer ${token}`,
-          },
+          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
         }
       );
       const {

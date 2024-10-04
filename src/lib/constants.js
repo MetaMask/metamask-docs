@@ -459,23 +459,30 @@ export const GET_OPTIONS = {
 export const REF_SERVICES_PATH = "/services/reference/";
 export const REF_WALLET_PATH = "/wallet/reference/";
 
-export const REF_ALLOW_LOGIN_PATH = [REF_SERVICES_PATH, REF_WALLET_PATH];
+export const REF_ALLOW_LOGIN_PATH = [
+  REF_SERVICES_PATH,
+  REF_WALLET_PATH,
+  REF_FAUCET_PATH,
+];
 
-export const REQUEST_PARAMS = (method = "POST") => ({
+export const REQUEST_PARAMS = (method = "GET", headers) => ({
   method,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
+    ...headers,
   },
 });
 
 export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
 export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
+export const AUTH_WALLET_PAIRING = "auth.wallet.pairing";
+export const AUTH_WALLET_USER_PLAN = "auth.wallet.uksTier";
+
 export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
 export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
-export const LINEA_REQUEST_URL = process.env.VERCEL_ENV === "production"
-    ? LINEA_PROD_URL
-    : LINEA_DEV_URL;
+export const LINEA_REQUEST_URL =
+  process.env.VERCEL_ENV === "production" ? LINEA_PROD_URL : LINEA_DEV_URL;
