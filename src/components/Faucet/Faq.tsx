@@ -205,7 +205,7 @@ export default function Faq({
                 receive ranges from 0 to 0.5, depending on your address's level
                 of activity. No activity results in no Sepolia ETH, while a
                 higher number of transactions can earn you up to 0.5. MetaMask
-                maintain confidentiality over the exact criteria used to
+                maintains confidentiality over the exact criteria used to
                 determine the amount issued to prevent any exploitation of the
                 system, aiming to distribute testnet ETH fairly among genuine,
                 active users.
