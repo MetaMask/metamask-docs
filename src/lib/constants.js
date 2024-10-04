@@ -462,10 +462,9 @@ export const REF_WALLET_PATH = "/wallet/reference/";
 export const REF_ALLOW_LOGIN_PATH = [
   REF_SERVICES_PATH,
   REF_WALLET_PATH,
-  REF_FAUCET_PATH,
 ];
 
-export const REQUEST_PARAMS = (method = "GET", headers) => ({
+export const REQUEST_PARAMS = (method = "GET", headers = {}) => ({
   method,
   headers: {
     Accept: "application/json",
