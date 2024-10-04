@@ -44,7 +44,6 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [Infura dashb
 | Mainnet           | JSON-RPC over HTTPS     | `https://blast-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://blast-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://blast-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://blast-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
 ## Binance Smart Chain
 
@@ -108,7 +107,6 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://mantle-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
 ## opBNB
 
