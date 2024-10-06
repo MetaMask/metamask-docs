@@ -63,7 +63,7 @@ You can sign a transaction using the `wallet.account.signer.signTransaction` fun
       console.log("Starknet Snap connected");
 
       // Use the wallet_invokeSnap method to sign the transaction.
-      const response = await window.ethereum.request({
+      const response = await provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",

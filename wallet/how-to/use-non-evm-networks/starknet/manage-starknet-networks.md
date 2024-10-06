@@ -38,32 +38,22 @@ Detect the Starknet network a user is currently connected to using the following
 
   ```javascript
   const checkCurrentNetwork = async () => {
-    if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
+    const provider = await getEip6963Provider()
+
+    if (provider) {
       try {
-        const response = await window.ethereum.request({
+        const response = await provider.request({
           method: "wallet_invokeSnap",
           params: {
             snapId: "npm:@consensys/starknet-snap",
             request: {
-              method: "starknet_getChainId"
+              method: "starkNet_getCurrentNetwork"
             }
           }
         });
         
-        let networkName;
-        switch (response) {
-          case "0x534e5f4d41494e":
-            networkName = "Mainnet";
-            break;
-          case "0x534e5f5345504f4c4941":
-            networkName = "Sepolia Testnet";
-            break;
-          default:
-            networkName = "Unknown Network";
-        }
-        
-        console.log("Currently connected to:", networkName);
-        return response;  // Returns the chain ID.
+        console.log("Currently connected to:", response.name);
+        return response.chainId;  // Returns the chain ID.
       } catch (error) {
         console.error("Error getting current Starknet network:", error);
         throw error;
