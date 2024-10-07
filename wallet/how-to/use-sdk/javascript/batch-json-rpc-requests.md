@@ -9,7 +9,7 @@ tags:
 
 You can batch multiple JSON-RPC requests using [MetaMask SDK](../../../concepts/sdk/index.md).
 
-The SDK's `metamask_batch` method enables you to batch multiple JSON-RPC requests in a single call,
+The SDK's enables you to batch multiple JSON-RPC requests in a single RPC call,
 providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
 sequences of actions.
 This method enhances performance, usability, and efficiency by reducing the number of network calls
@@ -50,7 +50,7 @@ The following is an example of using `metamask_batch` to batch
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in React, Next.js, or React Native/Expo:
 
 ```javascript title="index.js"
-import { metamask_batch } from "metamask-sdk"
+import { MetaMaskSDK } from "@metamask/sdk";
 
 function MyComponent() {
   const handleBatchRequest = async () => {
@@ -67,7 +67,10 @@ function MyComponent() {
     ]
 
     try {
-      const results = await metamask_batch(batchRequests)
+      const results = await provider.request({ 
+        method: "metamask_batch", 
+        params: batchRequests 
+      });
       console.log(results) // Process results.
     } catch (error) {
       console.error("Batch request failed", error)
@@ -84,9 +87,9 @@ The following is an example of using `metamask_batch` to batch
 [`personal_sign`](/wallet/reference/personal_sign) and
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in Vue.js:
 
-```javascript title="App.vue"
+```javascript title="index.vue"
 <script>
-import { metamask_batch } from "metamask-sdk";
+import { MetaMaskSDK } from "@metamask/sdk";
 
 export default {
   methods: {
@@ -104,7 +107,10 @@ export default {
       ];
 
       try {
-        const results = await metamask_batch(batchRequests);
+        const results = await provider.request({ 
+          method: "metamask_batch", 
+          params: batchRequests 
+        });
         console.log(results);
       } catch (error) {
         console.error("Error in batch request", error);
