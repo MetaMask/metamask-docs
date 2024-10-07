@@ -365,6 +365,7 @@ const config = {
         options: {
           fontFamily: "arial, verdana, sans-serif;",
           wrap: true,
+          securityLevel: "loose",
           sequence: {
             diagramMarginX: 25,
             diagramMarginY: 25,
