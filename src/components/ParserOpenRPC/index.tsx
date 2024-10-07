@@ -204,15 +204,7 @@ export default function ParserOpenRPC({
     }
   };
 
-  const getInfuraUrl = (url: string) => {
-    if (process.env.VERCEL_ENV === "production") {
-      return url;
-    } else {
-      return url.replace("infura.io", "dev.infura.org");
-    }
-  }
-
-  const INIT_URL = currentMethodData.servers !== null ? getInfuraUrl(currentMethodData.servers) : `${LINEA_REQUEST_URL}/v3/`;
+  const INIT_URL = currentMethodData.servers !== null ? currentMethodData.servers : `${LINEA_REQUEST_URL}/v3/`;
 
   const handleServiceRequest = async () => {
     const URL = `${INIT_URL}${userAPIKey}`;
