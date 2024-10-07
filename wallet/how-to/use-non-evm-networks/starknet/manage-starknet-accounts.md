@@ -34,10 +34,17 @@ The following example displays the account address:
   <TabItem value="get-starknet" default>
 
   ```javascript
+  const connectStarknetAccount = async () => {
+    const starknet = await connect();
+    await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask
+    return starknet;
+  };
+
   const showAccountInfo = async () => {
-    const account = await connectStarknetAccount();
+    const starknet = await connectStarknetAccount();
+    
     if (account) {
-      document.getElementById("accountAddress").innerText = `Account Address: ${account}`;
+      document.getElementById("accountAddress").innerText = `Account Address: ${starknet.selectedAddress}`;
     }
   };
   ```
