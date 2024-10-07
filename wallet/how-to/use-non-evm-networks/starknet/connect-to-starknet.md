@@ -342,7 +342,7 @@ const ConnectWallet = () => {
   const [accountInfo, setAccountInfo] = useState('');
   const connect = async (snapId) => {
     try {
-      await window.ethereum.request({
+      await getEip6963Provider.request({
         method: "wallet_requestSnaps",
         params: {
           [snapId]: {},
@@ -355,7 +355,7 @@ const ConnectWallet = () => {
   };
   const callSnap = async (snapId, method, params) => {
     try {
-      const response = await window.ethereum.request({
+      const response = await getEip6963Provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId,

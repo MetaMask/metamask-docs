@@ -16,6 +16,18 @@ Both options support similar functionalities, but offer different ways of intera
 Starknet accounts.
 See [Connect to Starknet](connect-to-starknet.md) to get started.
 
+```mermaid
+graph
+    dapp[Dapp] -- wallet_invokeSnapp --> snap[Starknet Snap]
+    dapp[Dapp] -- get-starknet --> swo[Starknet Window Object]
+    swo -- wallet_invokeSnap --> snap
+    swo --> acc[Account Object]
+    acc --> signer[Signer Object] -- wallet_invokeSnap --> snap
+    acc -- wallet_invokeSnap --> snap
+    acc --> sp[Starknet Network]
+    snap --> sp
+```
+
 The following sections compare the two connection options.
 
 ## `get-starknet`

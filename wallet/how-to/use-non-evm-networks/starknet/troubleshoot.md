@@ -33,7 +33,7 @@ the user to install MetaMask using the following:
 
 ```typescript
 function checkAndPromptForMetaMask() {
-  const isMetaMaskInstalled = typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask;
+  const isMetaMaskInstalled = typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask;
   
   if (!isMetaMaskInstalled) {
     console.log("MetaMask is not installed. Prompting user to install.");

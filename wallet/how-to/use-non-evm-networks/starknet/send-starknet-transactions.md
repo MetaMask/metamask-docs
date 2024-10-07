@@ -49,12 +49,12 @@ Send a Starknet transaction using the following:
 
   ```javascript
   const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, senderAddress, maxFee = null) => {
-    if (typeof window.ethereum === "undefined" || !window.ethereum.isMetaMask) {
+    if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
 
     try {
-      const response = await window.ethereum.request({
+      const response = await getEip6963Provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
@@ -129,12 +129,12 @@ The following is a full, simplified example of connecting to a Starknet account 
 
   ```javascript
   const connectStarknetAccount = async () => {
-    if (typeof window.ethereum === "undefined" || !window.ethereum.isMetaMask) {
+    if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
 
     try {
-      await window.ethereum.request({
+      await getEip6963Provider.request({
         method: "wallet_requestSnaps",
         params: {
           "npm:@consensys/starknet-snap": {}
@@ -162,7 +162,7 @@ The following is a full, simplified example of connecting to a Starknet account 
         requestParams.maxFee = maxFee; // Include maxFee only if it's provided.
       }
 
-      const response = await window.ethereum.request({
+      const response = await getEip6963Provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",

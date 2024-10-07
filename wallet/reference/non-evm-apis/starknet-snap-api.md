@@ -66,7 +66,7 @@ The response from Starknet's `gateway/add_transaction` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -116,7 +116,7 @@ The private key is only shown in the MetaMask pop-up window.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -162,7 +162,7 @@ The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -216,7 +216,7 @@ The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -277,7 +277,7 @@ The public key of the given account address (can be different from the actual si
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -323,7 +323,7 @@ The latest and pending token balance in hexadecimal.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -371,7 +371,7 @@ The list of the stored user accounts.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -440,7 +440,7 @@ The list of the transaction records.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -506,7 +506,7 @@ of the transaction.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -553,7 +553,7 @@ The response from Starknet's `feeder_gateway/call_contract` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -610,7 +610,7 @@ The list of the scanned user accounts during the recovery process.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -673,7 +673,7 @@ The response from Starknet's `gateway/add_transaction` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -729,7 +729,7 @@ The signed hash of typed data.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -783,7 +783,7 @@ The response from Starknet's `gateway/call_contract` API endpoint.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -839,7 +839,7 @@ Verifies a signed typed data message.
 <TabItem value="Request">
 
 ```js
-await window.ethereum.request({
+await getEip6963Provider.request({
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",

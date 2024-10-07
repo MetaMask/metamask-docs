@@ -102,9 +102,9 @@ Prompt users to switch between networks by setting the
 
   ```javascript
   const switchStarknetNetwork = async (chainId) => {
-    if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
+    if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
       try {
-        await window.ethereum.request({
+        await getEip6963Provider.request({
           method: "wallet_invokeSnap",
           params: {
             snapId: "npm:@consensys/starknet-snap",
