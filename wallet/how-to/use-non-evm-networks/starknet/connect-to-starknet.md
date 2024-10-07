@@ -37,10 +37,9 @@ If you're new to Starknet, you can also follow the
 
 ### 1. Set up the project
 
-If you don't have an existing React project set up, you can create a new 
-[React project](https://create-react-app.dev/) project with TypeScript and set up the necessary dependencies for working with Starknet.
-
-Create a new directory called `get-starknet-dapp` with a basic React app using TypeScript:
+If you don't have an existing React project set up, you can use
+[Create React App](https://create-react-app.dev/) to set up a new React project with TypeScript.
+Create a new project named `get-starknet-dapp`:
 
 <Tabs>
 <TabItem value="yarn" label="Yarn" default>
@@ -91,7 +90,7 @@ version `6.11.0` to your project's dependencies:
 ### 3. Connect to the Snap
 
 Create a `src/components` directory, and add a new file named `WalletConnectButton.js` to the directory.
-Add the following code to the file, which handles the connection to the Snap and displays a button
+Add the following code to the file, which handles the connection to the Starknet Snap and displays a button
 for users to initiate the wallet connection:
 
 ```javascript title="WalletConnectButton.js"
@@ -148,9 +147,7 @@ export default WalletConnectButton;
 
 :::note
 
-This code automatically requests the user to add the
-[Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) to MetaMask, if it's
-not already present.
+This code automatically requests the user to add the Starknet Snap to MetaMask, if it's not already present.
 Handle the error if the user rejects the connection request in the `try` / `catch` block of the
 `handleConnect` function.
 
@@ -248,15 +245,15 @@ export async function callSnap(method, params) {
 
 :::note
 
-To connect to Starknet, the dapp user must add the
-[Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/) to MetaMask.
+To connect to Starknet, the dapp user must add the Starknet Snap to MetaMask.
+Make sure to [handle user rejections](troubleshoot.md#handle-user-rejection).
 
 :::
 
 ### 2. Call a specific Snap method
 
 Use the `callSnap` function to call a specific Snap method.
-The following example calls `starkNet_createAccount`:
+The following example calls [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount):
 
 ```javascript
 const deploy = false; // Set to true to deploy the actual account.

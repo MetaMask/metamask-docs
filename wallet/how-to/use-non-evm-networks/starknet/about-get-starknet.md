@@ -27,9 +27,8 @@ A dapp with `get-starknet` installed interacts with MetaMask as follows:
 1. After the dapp is connected to MetaMask and the Starknet Snap, `get-starknet` receives a Starknet
    Windows Object (SWO), which represents the MetaMask wallet with Starknet functionality.
 
-1. You can retrieve an [Account Object](https://starknetjs.com/docs/API/#account) from the Starknet Windows Object (SWO) when you access `swo.account`.
-   This Account Object enables you to manage Starknet interactions.
-   This instance manages the Starknet account within MetaMask.
+1. The dapp uses `swo.account` to retrieve an [Account object](https://starknetjs.com/docs/API/#account) from the SWO.
+   This Account object enables the dapp to manage Starknet interactions within MetaMask.
 
 ```mermaid
 sequenceDiagram

@@ -17,9 +17,8 @@ You'll also display the balance of an ERC-20 token and perform a token transfer.
 
 ## 1. Set up the project
 
-Create a new React project with TypeScript and set up the necessary dependencies for working with Starknet.
-
-Create a new directory called `get-starknet-tutorial` with a basic React app using TypeScript:
+Use [Create React App](https://create-react-app.dev/) to set up a new React project with TypeScript.
+Create a new project named `get-starknet-tutorial`:
 
 ```bash
 yarn create react-app get-starknet-tutorial --template typescript
@@ -40,19 +39,10 @@ version `6.11.0` to your project's dependencies:
 yarn add get-starknet@3.3.0 starknet@6.11.0
 ```
 
-<details>
-  <summary>Did you get an error?</summary>
-  <div>
-
-See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp.
-
-  </div>
-</details>
-
 Your file structure should look similar to the following:
 
 ```text
-get-starknet-dapp/
+get-starknet-tutorial/
 ├── public/
 │   └── index.html
 └── src/
@@ -65,12 +55,10 @@ get-starknet-dapp/
 
 ## 2. Configure the wallet connection
 
-Use the `connect` function to link your dapp with a user’s MetaMask wallet.
-
 ### 2.1. Connect to MetaMask
 
 The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's MetaMask wallet. 
-It opens a connection to MetaMask and returns an object containing important details about the wallet, such as the following:
+It opens a connection to MetaMask and returns an object containing important details about the wallet, including:
 
 - `name`: The name of the wallet.
 - `icon`: The wallet's icon, which displays the wallet's logo.

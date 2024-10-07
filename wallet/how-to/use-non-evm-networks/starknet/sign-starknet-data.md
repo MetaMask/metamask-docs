@@ -18,7 +18,7 @@ You can sign Starknet transactions using the
 
 ## Sign a transaction
 
-You can sign a transaction using the `wallet.account.signer.signTransaction` function:
+Sign a Starknet transaction using the following:
 
 <Tabs>
   <TabItem value="get-starknet" default>
@@ -30,7 +30,7 @@ You can sign a transaction using the `wallet.account.signer.signTransaction` fun
         throw("Wallet not connected");
       } 
     
-      // Send the transaction.
+      // Sign the transaction.
       const result = await wallet?.account?.signer.signTransaction({
         contractAddress: contractAddress,  // The address of the contract.
         entrypoint: entrypoint,            // The function to call in the contract.

@@ -18,7 +18,7 @@ You can send Starknet transactions using the
 
 ## Send a transaction
 
-Send a transaction using the `starknet.account.execute()` function:
+Send a Starknet transaction using the following:
 
 <Tabs>
   <TabItem value="get-starknet" default>
