@@ -6,7 +6,6 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
-import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -19,6 +18,8 @@ interface RequestBoxProps {
   isMetamaskNetwork?: boolean;
   defExampleResponse?: any;
   resetResponseHandle: () => void;
+  requestURL: string;
+  isLoading: boolean;
 }
 
 export default function RequestBox({
@@ -32,6 +33,8 @@ export default function RequestBox({
   isMetamaskNetwork = false,
   defExampleResponse,
   resetResponseHandle,
+  requestURL = "",
+  isLoading,
 }: RequestBoxProps) {
   const { userAPIKey } = useContext(MetamaskProviderContext);
   const exampleRequest = useMemo(() => {
@@ -41,7 +44,7 @@ export default function RequestBox({
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
-    return `curl ${LINEA_REQUEST_URL}/v3/${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
+    return `curl ${requestURL}${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
   }, [userAPIKey, method, paramsData]);
 
   const exampleResponse = useMemo(() => {
@@ -59,18 +62,18 @@ export default function RequestBox({
   }, [response, defExampleResponse]);
 
   const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4"];
-  const isRunAndCustomizeRequestDisabled = methodsWithRequiredWalletConnection.includes(method) ?
+  const isRunAndCustomizeRequestDisabled = isMetamaskNetwork && methodsWithRequiredWalletConnection.includes(method) ?
     !isMetamaskInstalled :
     false;
 
   const runRequestButton = (
     <button
-      className={global.primaryBtn}
-      disabled={isRunAndCustomizeRequestDisabled}
+      className={clsx(global.primaryBtn, styles.runBtnWrap)}
+      disabled={isRunAndCustomizeRequestDisabled || isLoading}
       onClick={submitRequest}
       data-test-id="run-request"
     >
-      Run request
+      {isLoading ? <span className={styles.loader}></span> : "Run request"}
     </button>
   );
 
