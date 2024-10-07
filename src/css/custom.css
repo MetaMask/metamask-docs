@@ -359,6 +359,10 @@ button:hover {
   color: #ffffff;
 }
 
+[data-theme="light"] .react-dropdown-select-dropdown-handle {
+  color: #24272A;
+}
+
 @media (width <= 1200px) {
   .navbar__item,
   .navbar__link {
