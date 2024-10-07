@@ -7,24 +7,19 @@ tags:
 
 # Batch JSON-RPC requests
 
-You can batch multiple JSON-RPC requests using [MetaMask SDK](../../../concepts/sdk/index.md).
-
-The SDK's enables you to batch multiple JSON-RPC requests in a single RPC call,
-providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
+You can batch multiple JSON-RPC requests in a single RPC call using MetaMask SDK.
+This feature enables dapps to interact with EVM networks in a streamlined way, and enables complex
 sequences of actions.
-This method enhances performance, usability, and efficiency by reducing the number of network calls
-made to MetaMask.
+It enhances performance, usability, and efficiency by reducing the number of network calls made to MetaMask.
 
-Use cases include:
+Use cases for batching requests include:
 
 - **Batching multiple signatures** - Send multiple signing requests in one batch.
-
 - **Switching networks** - Switch the EVM network, perform an action such as sending a transaction,
   and switch back, all in one batch.
-
 - **Mixed transactions and signatures** - Combine transaction sending and signing requests in one batch.
 
-`metamask_batch` opens up additional possibilities for sophisticated transaction flows in dapps,
+This feature opens up additional possibilities for sophisticated transaction flows in dapps,
 enhancing the user experience and operational efficiency.
 
 ## Prerequisites
@@ -33,7 +28,7 @@ enhancing the user experience and operational efficiency.
 
 ## Use the `metamask_batch` method
 
-`metamask_batch` takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
+The SDK provides the `metamask_batch` method, which takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
 
 Each request in the batch is independent.
 The user receives a prompt for each action within the batch, allowing them to approve or reject
