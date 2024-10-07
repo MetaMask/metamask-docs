@@ -16,17 +16,6 @@ Both options support similar functionalities, but offer different ways of intera
 Starknet accounts.
 See [Connect to Starknet](connect-to-starknet.md) to get started.
 
-```mermaid
-graph
-    dapp[Dapp] -- wallet_invokeSnapp --> snap[Starknet Snap]
-    dapp[Dapp] -- get-starknet --> swo[Starknet Window Object]
-    swo -- wallet_invokeSnap --> snap
-    swo --> acc[Account Object]
-    acc --> signer[Signer Object] -- wallet_invokeSnap --> snap
-    acc -- wallet_invokeSnap --> snap
-    acc --> sp[Starknet Network]
-    snap --> sp
-```
 
 The following sections compare the two connection options.
 
@@ -67,6 +56,20 @@ The `wallet_invokeSnap` method:
 `wallet_invokeSnap` manages direct interactions between the dapp and the Starknet Snap.
 It facilitates network communication for account creation, transaction signing, fee estimation, and
 other Starknet-related actions.
+
+The diagram shows how a dapp interacts with Starknet, emphasizing the distinct roles of wallet_invokeSnap and get-starknet.
+
+```mermaid
+graph
+    dapp[Dapp] -- wallet_invokeSnapp --> snap[Starknet Snap]
+    dapp[Dapp] -- get-starknet --> swo[Starknet Window Object]
+    swo -- wallet_invokeSnap --> snap
+    swo --> acc[Account Object]
+    acc --> signer[Signer Object] -- wallet_invokeSnap --> snap
+    acc -- wallet_invokeSnap --> snap
+    acc --> sp[Starknet Network]
+    snap --> sp
+```
 
 ## Supported functionalities
 
