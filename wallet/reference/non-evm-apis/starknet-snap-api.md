@@ -186,8 +186,7 @@ await window.ethereum.request({
   "overallFee": "900000000000000",
   "gasConsumed": "1000000",
   "gasPrice": "1000000000",
-  "unit": "wei",
-  "includeDeploy": true
+  "unit": "wei"
 }
 ```
 
