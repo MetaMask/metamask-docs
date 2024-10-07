@@ -62,7 +62,7 @@ The following example displays the account address:
           params: {
             snapId: "npm:@starknet-snap/snap", 
             request: {
-              method: "starknet_getAccounts"
+              method: "starknet_recoverAccounts"
             }
           }
         });
@@ -176,7 +176,7 @@ connect or disconnect the account.
             params: {
               snapId: STARKNET_SNAP_ID,
               request: {
-                method: "starknet_getAccounts"
+                method: "starknet_recoverAccounts"
               }
             }
           });
@@ -372,7 +372,7 @@ Use the following component at the top level of your dapp to handle account chan
             params: {
               snapId: STARKNET_SNAP_ID,
               request: {
-                method: "starknet_getAccounts"
+                method: "starknet_recoverAccounts"
               }
             }
           });

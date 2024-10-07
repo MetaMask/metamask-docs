@@ -26,12 +26,13 @@ If you're new to Starknet, you can also follow the
 :::
 
 <p align="center">
-<img src={require('../../assets/non-evm/connect-starknet-agree.png').default} alt="Starknet update request" width="360" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../../assets/non-evm/connect-starknet-agree.png').default} alt="Starknet update request" width="360" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 <p align="center">
-<img src={require('../../assets/non-evm/connect-starknet.png').default} alt="Connect to Starknet UI" width="360" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../../assets/non-evm/connect-starknet.png').default} alt="Connect to Starknet UI" width="360" style={{border: '1px solid #DCDCDC'}} />
 </p>
+
 ## Prerequisites
 
 - [MetaMask installed](https://metamask.io/download/)

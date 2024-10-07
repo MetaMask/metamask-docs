@@ -57,7 +57,7 @@ The `wallet_invokeSnap` method:
 It facilitates network communication for account creation, transaction signing, fee estimation, and
 other Starknet-related actions.
 
-The diagram shows how a dapp interacts with Starknet, emphasizing the distinct roles of wallet_invokeSnap and get-starknet.
+The following diagram displays how a dapp interacts with Starknet, emphasizing the distinct roles of `wallet_invokeSnap` and `get-starknet`:
 
 ```mermaid
 graph
