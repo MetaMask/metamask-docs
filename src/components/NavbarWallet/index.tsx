@@ -73,7 +73,6 @@ const NavbarWalletComponent: FC = ({
       thin
       onClick={metaMaskWalletIdConnectHandler}
       className={styles.navbarButton}
-      textColor="light"
     >
       {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
     </Button>
