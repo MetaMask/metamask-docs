@@ -103,16 +103,6 @@
 
 @media (width <= 1440px) {
   .colLeft {
-    width: calc(100% - 420px);
-  }
-
-  .colRight {
-    width: 420px;
-  }
-}
-
-@media (width <= 1200px) {
-  .colLeft {
     width: 100%;
     padding: 0;
     border-right: 0;
