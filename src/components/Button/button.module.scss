@@ -47,9 +47,15 @@ a.button {
   justify-content: center;
   align-items: center;
   min-width: 145px;
+  transition-property: "box-shadow", "background-color";
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
 
   &.primary {
     background-color: var(--button-primary-background-color);
+    --button-color: #141618;
+    --button-primary-background-color: #1098fc;
+    --button-hover-background-color: #26a2fc;
   }
 
   &.secondary {
