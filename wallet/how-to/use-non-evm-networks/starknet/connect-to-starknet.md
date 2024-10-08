@@ -25,14 +25,6 @@ If you're new to Starknet, you can also follow the
 [Create a simple Starknet dapp tutorial](create-a-simple-starknet-dapp.md).
 :::
 
-<p align="center">
-<img src={require('../../../assets/non-evm/connect-starknet-agree.png').default} alt="Starknet update request" width="360" style={{border: '1px solid #DCDCDC'}} />
-</p>
-
-<p align="center">
-<img src={require('../../../assets/non-evm/connect-starknet.png').default} alt="Connect to Starknet UI" width="360" style={{border: '1px solid #DCDCDC'}} />
-</p>
-
 ## Prerequisites
 
 - [MetaMask installed](https://metamask.io/download/)
@@ -183,7 +175,6 @@ export default App;
 ### 4. Start the dapp
 
 Start the dapp and navigate to it in your browser.
-A **Connect Wallet** button displays, which allows users to connect to MetaMask and interact with Starknet.
 
 <Tabs>
   <TabItem value="yarn" label="Yarn" default>
@@ -203,7 +194,25 @@ A **Connect Wallet** button displays, which allows users to connect to MetaMask 
   </TabItem> 
 </Tabs>
 
-The `get-starknet` library automatically handles detecting and connecting to MetaMask, and adding the Starknet Snap.
+A **Connect Wallet** button displays.
+When a user selects it, `get-starknet` displays a modal that detects MetaMask and allows users to
+choose which Starknet wallet to connect to.
+When a user connects to MetaMask, `get-starknet` requests the user to connect to the Starknet Snap in MetaMask.
+
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-wallet-modal.png").default} alt="Starknet wallet modal" width="360" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+  <div class="column">
+    <img src={require("../../../assets/starknet-metamask-connection.png").default} alt="Starknet MetaMask connection request" width="360" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+</div>
+
+After the user connects to Starknet, the dapp displays the user's connected wallet and wallet address:
+
+<p align="center">
+  <img src={require("../../../assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" style={{border: "1px solid #DCDCDC"}} />
+</p>
 
 ## Connect using `wallet_invokeSnap`
 

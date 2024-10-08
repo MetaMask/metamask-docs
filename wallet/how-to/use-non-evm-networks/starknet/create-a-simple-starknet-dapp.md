@@ -44,18 +44,19 @@ Your file structure should look similar to the following:
 ```text
 get-starknet-tutorial/
 ├── public/
-│   └── index.html
-└── src/
-    ├── components/
-    │   ├── WalletConnect.tsx
-    ├── App.tsx
-    ├── index.tsx
-    └── App.css
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── App.css
+│   └── ...
+└── ...
 ```
 
-## 2. Configure the wallet connection
+## 3. Configure the wallet connection
 
-### 2.1. Connect to MetaMask
+### 3.1. Connect to MetaMask
 
 The `connect` function from `get-starknet` is the primary way to connect your dapp to a user's MetaMask wallet. 
 It opens a connection to MetaMask and returns an object containing important details about the wallet, including:
@@ -76,7 +77,7 @@ async function handleConnect(options?: ConnectOptions) {
 }
 ```
 
-### 2.2. Configure connection options
+### 3.2. Configure connection options
 
 `connect` accepts an optional `ConnectOptions` object. 
 This object can control the connection process, including:
@@ -92,7 +93,7 @@ You can configure these options as follows:
 handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 ```
 
-### 2.3. Create an `AccountInterface`
+### 3.3. Create an `AccountInterface`
 
 After connecting to MetaMask, create a new `AccountInterface` instance using the `starknet.js` library.
 This allows interaction with the Starknet network using the connected wallet.
@@ -107,7 +108,7 @@ async function handleConnect(options?: ConnectOptions) {
 }
 ```
 
-### 2.4. Display wallet information
+### 3.4. Display wallet information
 
 You can display the wallet's name, address, and icon in your dapp. 
 This provides visual feedback to the user, confirming which wallet they are using.
@@ -139,7 +140,7 @@ function App() {
 }
 ```
 
-### 2.5. Full example
+### 3.5. Full example
 
 The following is a full example of configuring the wallet connection:
 
@@ -233,11 +234,11 @@ function App() {
 export default App
 ```
 
-## 3. Display the balance of and transfer an ERC-20 token
+## 4. Display the balance of and transfer an ERC-20 token
 
 Now that you have set up the basic interaction, you can display the balance of a specific ERC-20 token, such as STRK, and perform a transfer using the `AccountInterface` instance.
 
-### 3.1. Set up the contract
+### 4.1. Set up the contract
 
 To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `AccountInterface` instance.
 The following example assumes the ABI (application binary interface) is loaded from a JSON file:
@@ -257,7 +258,7 @@ You can find the ABI of the ERC-20 contract on [Voyager](https://voyager.online/
 The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
 :::
 
-### 3.2. Fetch the token balance
+### 4.2. Fetch the token balance
 
 Call the `balanceOf` method to fetch the balance of the connected account:
 
@@ -266,7 +267,7 @@ const balance = await erc20.balanceOf(walletAddress);
 const formattedBalance = balance / Math.pow(10, 18);
 ```
 
-### 3.3. Transfer tokens
+### 4.3. Transfer tokens
 
 To transfer tokens, fill out the `transfer` method call and execute the transaction using the `AccountInterface`.
 For example:
@@ -290,7 +291,7 @@ const { transaction_hash: transferTxHash } = await AccountInterface.execute(tran
 await AccountInterface.waitForTransaction(transferTxHash);
 ```
 
-### 3.4. Full example
+### 4.4. Full example
 
 The following a full example of displaying the balance of an ERC-20 token and performing a transfer:
 
