@@ -126,10 +126,9 @@ const ProjectsBox = () => {
                   thin
                   className={styles.connectButton}
                   onClick={metaMaskWalletConnectionHandler}
-                  textColor="light"
                   isLoading={isWalletLinking}
                 >
-                  Connect Wallet
+                  Connect MetaMask
                 </Button>
               </>
             )}
