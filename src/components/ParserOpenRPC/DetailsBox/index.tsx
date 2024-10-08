@@ -49,9 +49,17 @@ export default function DetailsBox({
       )}
       <Heading as="h1">{method}</Heading>
       {summary !== null && (
-        <p style={{ marginBottom: "0.5rem" }}>
+        <p
+          style={{ marginBottom: "0.5rem" }}
+          className={clsx(
+            styles.borderBottomLine,
+            "padding-bottom--md"
+          )}
+        >
+          <strong>Summary: </strong>
           <MDContent content={summary} />
         </p>
+
       )}
       {description !== null && (
         <MDContent content={description} />
@@ -61,13 +69,16 @@ export default function DetailsBox({
         as="h2"
         className={clsx(
           styles.secondaryHeading,
+          styles.borderBottomLine,
           "padding-top--lg padding-bottom--md",
         )}
       >
         Parameters
       </Heading>
       {params.length === 0 ? (
-        <div>This method does not accept any parameters</div>
+        <div className="padding-vert--md">
+          This method does not accept any parameters.
+        </div>
       ) : (
         <>{params && renderParamSchemas(params, components)}</>
       )}
