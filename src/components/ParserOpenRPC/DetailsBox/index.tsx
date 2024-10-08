@@ -77,7 +77,7 @@ export default function DetailsBox({
       </Heading>
       {params.length === 0 ? (
         <div className="padding-vert--md">
-          This method does not accept any parameters.
+          This method doesn't accept any parameters.
         </div>
       ) : (
         <>{params && renderParamSchemas(params, components)}</>
