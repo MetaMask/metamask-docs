@@ -270,7 +270,7 @@ export default function ParserOpenRPC({
     >
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
-          <div className={global.colContentWrap}>
+          <div className={global.colContentWrap} id="centerContent">
             <DetailsBox
               method={method}
               description={currentMethodData.description}

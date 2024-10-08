@@ -7,24 +7,19 @@ tags:
 
 # Batch JSON-RPC requests
 
-You can batch multiple JSON-RPC requests using [MetaMask SDK](../../../concepts/sdk/index.md).
-
-The SDK's `metamask_batch` method enables you to batch multiple JSON-RPC requests in a single call,
-providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
+You can batch multiple JSON-RPC requests in a single RPC call using MetaMask SDK.
+This feature enables dapps to interact with EVM networks in a streamlined way, and enables complex
 sequences of actions.
-This method enhances performance, usability, and efficiency by reducing the number of network calls
-made to MetaMask.
+It enhances performance, usability, and efficiency by reducing the number of network calls made to MetaMask.
 
-Use cases include:
+Use cases for batching requests include:
 
 - **Batching multiple signatures** - Send multiple signing requests in one batch.
-
 - **Switching networks** - Switch the EVM network, perform an action such as sending a transaction,
   and switch back, all in one batch.
-
 - **Mixed transactions and signatures** - Combine transaction sending and signing requests in one batch.
 
-`metamask_batch` opens up additional possibilities for sophisticated transaction flows in dapps,
+This feature opens up additional possibilities for sophisticated transaction flows in dapps,
 enhancing the user experience and operational efficiency.
 
 ## Prerequisites
@@ -33,7 +28,7 @@ enhancing the user experience and operational efficiency.
 
 ## Use the `metamask_batch` method
 
-`metamask_batch` takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
+The SDK provides the `metamask_batch` method, which takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
 
 Each request in the batch is independent.
 The user receives a prompt for each action within the batch, allowing them to approve or reject
@@ -50,7 +45,7 @@ The following is an example of using `metamask_batch` to batch
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in React, Next.js, or React Native/Expo:
 
 ```javascript title="index.js"
-import { metamask_batch } from "metamask-sdk"
+import { MetaMaskSDK } from "@metamask/sdk";
 
 function MyComponent() {
   const handleBatchRequest = async () => {
@@ -67,7 +62,10 @@ function MyComponent() {
     ]
 
     try {
-      const results = await metamask_batch(batchRequests)
+      const results = await provider.request({ 
+        method: "metamask_batch", 
+        params: batchRequests 
+      });
       console.log(results) // Process results.
     } catch (error) {
       console.error("Batch request failed", error)
@@ -84,9 +82,9 @@ The following is an example of using `metamask_batch` to batch
 [`personal_sign`](/wallet/reference/personal_sign) and
 [`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in Vue.js:
 
-```javascript title="App.vue"
+```javascript title="index.vue"
 <script>
-import { metamask_batch } from "metamask-sdk";
+import { MetaMaskSDK } from "@metamask/sdk";
 
 export default {
   methods: {
@@ -104,7 +102,10 @@ export default {
       ];
 
       try {
-        const results = await metamask_batch(batchRequests);
+        const results = await provider.request({ 
+          method: "metamask_batch", 
+          params: batchRequests 
+        });
         console.log(results);
       } catch (error) {
         console.error("Error in batch request", error);
