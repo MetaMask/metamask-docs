@@ -19,6 +19,8 @@ ecosystem.
 
 The following diagram displays how a dapp interacts with Starknet, emphasizing the distinct roles of `wallet_invokeSnap` and `get-starknet`:
 
+<p align="center">
+
 ```mermaid
 graph
     dapp[Dapp] -- wallet_invokeSnapp --> snap[Starknet Snap]
@@ -30,6 +32,8 @@ graph
     acc --> sp[Starknet Network]
     snap --> sp
 ```
+
+</p>
 
 ## How `get-starknet` and MetaMask interact
 
