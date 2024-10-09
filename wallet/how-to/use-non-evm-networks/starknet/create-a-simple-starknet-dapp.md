@@ -154,32 +154,24 @@ import {
 } from "get-starknet"
 import { AccountInterface } from "starknet";
 import { useState } from "react"
-
 function App() {
   const [walletName, setWalletName] = useState("")
   const [walletAddress, setWalletAddress] = useState("")
   const [walletIcon, setWalletIcon] = useState("")
-  const [AccountInterface, setAccountInterface] = useState<AccountInterface | null>(null)
-
+  const [walletAccount, setWalletAccount] = useState<AccountInterface | null>(null)
   async function handleConnect(options?: ConnectOptions) {
     const res = await connect(options)
     setWalletName(res?.name || "")
     setWalletAddress(res?.account?.address || "")
     setWalletIcon(res?.icon || "")
-    if (res) {
-      const myFrontendProviderUrl = "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
-      const newAccountInterface = new AccountInterface({ nodeUrl: myFrontendProviderUrl }, res)
-      setAccountInterface(newAccountInterface)
-    }
+    setWalletAccount(res?.account)
   }
-
   async function handleDisconnect(options?: DisconnectOptions) {
     await disconnect(options)
     setWalletName("")
     setWalletAddress("")
-    setAccountInterface(null)
+    setWalletAccount(null)
   }
-
   return (
     <div className="App">
       <h1>get-starknet</h1>
@@ -240,10 +232,23 @@ Now that you have set up the basic interaction, you can display the balance of a
 
 ### 4.1. Set up the contract
 
-To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `AccountInterface` instance.
+To interact with an ERC-20 contract, create a contract instance from the `starknet.js` library using the `AccountInterface` instance, and add the following files:
+
+- `erc20Abi.json`: Contains the ERC-20 token contract's Application Binary Interface (ABI).
+- `TokenBalanceAndTransfer.tsx`: A React component file for handling token balance display and transfer operations.
+
+The file structure should look similar to the following:
+
+```text
+/src
+  /components
+    ├── erc20Abi.json
+    └── TokenBalanceAndTransfer.tsx
+```
+  
 The following example assumes the ABI (application binary interface) is loaded from a JSON file:
 
-```typescript
+```typescript title="TokenBalanceAndTransfer.tsx"
 import { Contract } from "starknet";
 import erc20Abi from "./erc20Abi.json";
 
@@ -295,7 +300,7 @@ await AccountInterface.waitForTransaction(transferTxHash);
 
 The following a full example of displaying the balance of an ERC-20 token and performing a transfer:
 
-```typescript
+```typescript title="TokenBalanceAndTransfer.tsx"
 import { useEffect, useState } from "react";
 import { Contract } from "starknet";
 import erc20Abi from "./erc20Abi.json";
