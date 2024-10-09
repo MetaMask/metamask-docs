@@ -20,3 +20,4 @@ npm-debug.log*
 .vercel
 .envrc
 .env
+.yarn*
