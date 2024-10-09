@@ -19,7 +19,7 @@ The following table compares the supported features of each connection option:
 | Connect from a web dapp, desktop, mobile, and gaming dapps to MetaMask Mobile                                                                                                                                                                                                                      |      ✓       |               ✓                |                 |
 | Connect to MetaMask using the [EIP-6963 provider](../concepts/wallet-interoperability.md)                                                                                                                                                                                                          |      ✓       |               ✓                |        ✓        |
 | Compatible with other [EIP-6963](../concepts/wallet-interoperability.md) wallets                                                                                                                                                                                                                   |              |               ✓                |        ✓        |
-| Custom RPC methods such as [`connectAndSign`](../how-to/sign-data/connect-and-sign.md), [custom modals](../how-to/display/display-custom-modals.md), [read-only requests](../how-to/make-read-only-requests.md) using Infura API, and [RPC request batching](../how-to/batch-json-rpc-requests.md) |      ✓       |               ✓                |                 |
+| Custom RPC methods such as [`connectAndSign`](../how-to/sign-data/connect-and-sign.md), [custom modals](../how-to/display/custom-modals.md), [read-only requests](../how-to/make-read-only-requests.md) using Infura API, and [RPC request batching](../how-to/batch-json-rpc-requests.md) |      ✓       |               ✓                |                 |
 
 ## MetaMask SDK
 
@@ -29,7 +29,7 @@ Key features include:
 
 - **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
 - **Seamless mobile integration** – Use QR codes or deeplinks to establish persistent connections with MetaMask Mobile.
-- **EIP-6963 detection** – Automatically detect MetaMask wallets, with or without third-party libraries.
+- **EIP-6963 detection** – Automatically detect MetaMask, with or without third-party libraries.
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
 Get started using [MetaMask SDK](metamask-sdk/index.md).

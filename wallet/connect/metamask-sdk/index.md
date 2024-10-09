@@ -15,7 +15,7 @@ Key features include:
 
 - **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
 - **Seamless mobile integration** – Use QR codes or deeplinks to establish persistent connections with MetaMask Mobile.
-- **EIP-6963 detection** – Automatically detect MetaMask wallets, with or without third-party libraries.
+- **EIP-6963 detection** – Automatically detect MetaMask, with or without third-party libraries.
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
 Get started with the SDK on the following platforms:
@@ -60,7 +60,7 @@ Get started with the SDK on the following platforms:
 </div>
 <div class="card margin-bottom--lg">
   <div class="card__header">
-    <h3>↔️ <a href="/wallet/connect/metamask-sdk/3rd-party-libraries">Third-party libraries</a></h3>
+    <h3>↔️ Third-party libraries</h3>
   </div>
   <div class="card__body">
     <ul>

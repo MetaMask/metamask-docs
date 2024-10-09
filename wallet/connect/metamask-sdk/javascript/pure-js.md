@@ -46,7 +46,7 @@ You can configure the SDK using any [options](../../../reference/sdk-js-options.
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
 - Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../how-to/display/display-custom-modals.md).
+  the displayed modals](../../../how-to/display/custom-modals.md).
 
 You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
 Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using

@@ -7,7 +7,7 @@ tags:
 
 # Make read-only requests
 
-You can use the [Infura API](https://docs.infura.io/) from your dapp with
+You can use the [Infura API](/services) from your dapp with
 [MetaMask SDK](../connect/metamask-sdk/index.md) installed to make direct, read-only JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
@@ -36,16 +36,16 @@ Configure your dapp to make read-only requests using the [Infura API](#use-the-i
 
 - An Infura API key.
   Create one by following the first two steps in the
-  [Infura getting started guide](https://docs.infura.io/getting-started).
+  [Infura getting started guide](/services/get-started/infura).
 
-- [An allowlist configured for your API key.](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+- [An allowlist configured for your API key.](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
 
   :::caution important
   Your API key, when used with the SDK, is vulnerable to exposure.
   If someone inspects your dapp's code, they can potentially retrieve your API key and submit
   requests to Infura, impersonating your account.
 
-  Use [allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+  Use [allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
   to protect against this vulnerability.
   You can restrict interactions with your API key to specific addresses, origins, user agents, and request methods.
   We recommend using all allowlist options to maximize the security of your API key and dapp.

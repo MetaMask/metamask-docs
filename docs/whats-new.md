@@ -9,6 +9,12 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## October 2024
+
+- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
+  with SDK, third-party libraries, and Wallet API connection options.
+  ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
+
 ## September 2024
 
 - Documented [`linea_getTransactionExclusionStatusV1`](/services/reference/linea/json-rpc-methods/linea_gettransactionexclusionstatusv1).

@@ -74,7 +74,7 @@ const ethereum = MMSDK.getProvider()
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
 - Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../how-to/display/display-custom-modals.md).
+  the displayed modals](../../../how-to/display/custom-modals.md).
 
 ### 4. Use the SDK
 

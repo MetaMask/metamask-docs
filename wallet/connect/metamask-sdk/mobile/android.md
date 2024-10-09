@@ -16,7 +16,7 @@ Import MetaMask SDK into your native Android dapp to enable
 your users to easily connect with their MetaMask Mobile wallet.
 
 :::tip See also
-- [Android SDK architecture](../../../concepts/android.md)
+- [Android SDK architecture](../../../concepts/android-sdk.md)
 :::
 
 ## Prerequisites
