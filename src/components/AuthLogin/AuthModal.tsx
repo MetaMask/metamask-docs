@@ -7,15 +7,14 @@ import global from "../ParserOpenRPC/global.module.css";
 import Icon from "../Icon/Icon";
 import {
   authenticateAndAuthorize,
-  saveTokenString,
-  getUserIdFromJwtToken,
-} from "../../lib/siwsrp/auth";
-import {
-  DASHBOARD_URL,
-  REQUEST_PARAMS,
+  AUTH_WALLET_PAIRING,
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_PROJECTS,
-} from "@site/src/lib/constants";
+  saveTokenString,
+  getUserIdFromJwtToken,
+  AUTH_WALLET_USER_PLAN,
+} from "../../lib/siwsrp/auth";
+import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -23,8 +22,10 @@ type AuthModalProps = {
   open: boolean;
   setOpen: (arg: boolean) => void;
   setUser: (arg: string) => void;
+  setToken: (arg: string) => void;
   step: AUTH_LOGIN_STEP;
   setStep: (arg: AUTH_LOGIN_STEP) => void;
+  setUksTier: (arg: string) => void;
 };
 
 export enum AUTH_LOGIN_STEP {
@@ -134,7 +135,15 @@ const ConnectionErrorModal = ({
   );
 };
 
-const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
+const AuthModal = ({
+  open,
+  setOpen,
+  step,
+  setStep,
+  setUser,
+  setToken,
+  setUksTier,
+}: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
   const {
@@ -168,30 +177,29 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
       const { accessToken, userProfile } = await authenticateAndAuthorize(
-        VERCEL_ENV as string
+        VERCEL_ENV as string,
       );
 
       const loginResponse = await (
         await fetch(
           `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
           {
-            ...REQUEST_PARAMS(),
-            headers: {
-              ...REQUEST_PARAMS().headers,
+            ...REQUEST_PARAMS("POST", {
               hydra_token: accessToken,
               token: "true",
-            },
+            }),
             body: JSON.stringify({
               profileId: userProfile.profileId,
               redirect_to: window.location.href,
             }),
-          }
+          },
         )
       ).json();
 
       if (!loginResponse) throw new Error("Something went wrong");
 
       const { data, session, token } = loginResponse;
+      localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
 
       if (data.step) {
         // Handling no wallet pairing or multiple pairing
@@ -201,7 +209,7 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
             mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
-          })
+          }),
         ).toString("base64");
 
         const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -229,25 +237,43 @@ const AuthModal = ({ open, setOpen, step, setStep }: AuthModalProps) => {
       }
 
       saveTokenString(token);
+      if (setToken) {
+        setToken(token);
+      }
       setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
       const userId = getUserIdFromJwtToken();
+      if (setUser) {
+        setUser(userId);
+      }
 
       // You can use Infura Access Token to fetch any Infura API endpoint
       const projectsResponse = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
         {
-          ...REQUEST_PARAMS("GET"),
-          headers: {
-            ...REQUEST_PARAMS("GET").headers,
-            Authorization: `Bearer ${token}`,
-          },
-        }
+          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+        },
       );
       const {
         result: { projects },
       } = await projectsResponse.json();
       sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects));
       setProjects(projects);
+
+      const uksUserRawResp = await fetch(
+        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}`,
+        {
+          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
+        },
+      );
+      const {
+        result: {
+          servicePlan: { tier },
+        },
+      } = await uksUserRawResp.json();
+      sessionStorage.setItem(AUTH_WALLET_USER_PLAN, JSON.stringify(tier));
+      if (setUser) {
+        setUksTier(tier);
+      }
       setOpen(false);
     } catch (e: any) {
       if (pathname.startsWith("/wallet/reference")) {

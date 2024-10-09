@@ -7,6 +7,7 @@ import SuccessImg from "./success.svg";
 import ErrorImg from "./error.svg";
 import Text from "@site/src/components/Text";
 import styles from "./alert.module.scss";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 export const options = {
   position: positions.TOP_CENTER,
@@ -18,25 +19,44 @@ export const options = {
   },
 };
 
-export const AlertTemplate = ({ style, options, message, close }) => (
-  <div
-    style={style}
-    className={clsx(
-      styles.alert,
-      options.type === types.INFO && styles.info,
-      options.type === types.SUCCESS && styles.success,
-      options.type === types.ERROR && styles.error,
-    )}
-  >
-    {options.type === types.INFO && <InfoImg className={styles.icon} />}
-    {options.type === types.SUCCESS && <SuccessImg className={styles.icon} />}
-    {options.type === types.ERROR && <ErrorImg className={styles.icon} />}
-    {message}
-    <span role="button" onClick={close} className={styles.closeButton}>
-      <CloseImg className={styles.closeIcon} />
-    </span>
-  </div>
-);
+export const AlertTemplate = ({ style, options, message, close }) => {
+  const handleCloseAlert = () => {
+    trackClickForSegment({
+      eventName: "Close",
+      clickType: "Alert",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    close();
+  };
+
+  return (
+    <div
+      style={style}
+      className={clsx(
+        styles.alert,
+        options.type === types.INFO && styles.info,
+        options.type === types.SUCCESS && styles.success,
+        options.type === types.ERROR && styles.error,
+      )}
+    >
+      {options.type === types.INFO && <InfoImg className={styles.icon} />}
+      {options.type === types.SUCCESS && <SuccessImg className={styles.icon} />}
+      {options.type === types.ERROR && <ErrorImg className={styles.icon} />}
+      {message}
+      <span
+        role="button"
+        data-testid="alert-close"
+        onClick={handleCloseAlert}
+        className={styles.closeButton}
+      >
+        <CloseImg className={styles.closeIcon} />
+      </span>
+    </div>
+  );
+};
 
 export const AlertTitle = ({
   children,
