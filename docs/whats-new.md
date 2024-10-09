@@ -30,7 +30,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1540](https://github.com/MetaMask/metamask-docs/pull/1540))
 - Documented [Snaps user-defined components](/snaps/features/custom-ui/user-defined-components).
   ([#1557](https://github.com/MetaMask/metamask-docs/pull/1557))
-- Updated [Android SDK documentation](/wallet/how-to/use-sdk/mobile/android) with convenience
+- Updated [Android SDK documentation](/wallet/connect/metamask-sdk/mobile/android) with convenience
   methods and examples using coroutines.
   ([#1546](https://github.com/MetaMask/metamask-docs/pull/1546))
 - Documented [Infura's credit pricing model](/services/get-started/pricing).

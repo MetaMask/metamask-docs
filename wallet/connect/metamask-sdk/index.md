@@ -8,7 +8,7 @@ tags:
   - Unity SDK
 ---
 
-# MetaMask SDK
+# Connect using MetaMask SDK
 
 MetaMask SDK enables a reliable, secure, and seamless connection between your dapp and the MetaMask browser extension or MetaMask Mobile, providing cross-platform compatibility with a consistent user experience.
 Key features include:
