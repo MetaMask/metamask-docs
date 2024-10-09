@@ -1,43 +1,48 @@
 import React from "react";
 
-const parseLists = (content: string) => {
-  const lines = content.split('\n');
+const parseLists = (text: string) => {
+  const lines = text.split('\n');
   let result = '';
-  let isFirstLevelOpen = false;
-  let isSecondLevelOpen = false;
+  let inList = false;
+  let inSubList = false;
+
   lines.forEach((line) => {
-    if (line.match(/^ {2}-\s+/)) {
-      if (!isSecondLevelOpen) {
-        result += '<ul>';
-        isSecondLevelOpen = true;
+    const trimmed = line.trim();
+    const isListItem = trimmed.startsWith('- ');
+    const isSubListItem = line.startsWith('  - ');
+
+    if (isListItem && !isSubListItem) {
+      if (!inList) {
+        result += '<ul>\n';
+        inList = true;
+      } else if (inSubList) {
+        result += '</ul>\n';
+        inSubList = false;
       }
-      result += `<li>${line.trim().substring(4)}</li>`;
-    } else if (line.match(/^ -\s+/)) {
-      if (isSecondLevelOpen) {
-        result += '</ul>';
-        isSecondLevelOpen = false;
+      result += `<li>${trimmed.slice(2).trim()}</li>\n`;
+    } else if (isSubListItem) {
+      if (!inSubList) {
+        result = result.replace(/<\/li>\n$/, '');
+        result += '<ul>\n';
+        inSubList = true;
       }
-      if (!isFirstLevelOpen) {
-        result += '<ul>';
-        isFirstLevelOpen = true;
-      }
-      result += `<li>${line.trim().substring(2)}</li>`;
+      result += `<li>${trimmed.slice(4).trim()}</li>\n`;
     } else {
-      if (isSecondLevelOpen) {
-        result += '</ul>';
-        isSecondLevelOpen = false;
+      if (inSubList) {
+        result += '</ul>\n';
+        inSubList = false;
       }
-      if (isFirstLevelOpen) {
-        result += '</ul>';
-        isFirstLevelOpen = false;
+      if (inList) {
+        result += '</ul>\n';
+        inList = false;
       }
-      result += line;
+      result += `${line}\n`;
     }
   });
-  if (isSecondLevelOpen) result += '</ul>';
-  if (isFirstLevelOpen) result += '</ul>';
+  if (inSubList) result += '</ul>\n';
+  if (inList) result += '</ul>\n';
   return result;
-};
+}
 
 const parseMarkdown = (content: string) => {
   return parseLists(
@@ -45,6 +50,7 @@ const parseMarkdown = (content: string) => {
       .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
       .replace(/`(.*?)`/g, '<code>$1</code>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
   );
 };
 
