@@ -20,7 +20,7 @@ The API methods are documented in the following references:
 MetaMask injects a global JavaScript API into websites visited by its users using the
 `window.ethereum` provider object.
 This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), and it allows dapps to
-request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
+request users' EVM accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
 :::info Note
