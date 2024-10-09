@@ -35,6 +35,12 @@ If you're new to Starknet, you can also follow the
 
 ## Connect using `get-starknet`
 
+:::note Important
+
+This connection guide uses [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js` version `6.11.0`.
+
+:::
+
 ### 1. Set up the project
 
 If you don't have an existing React project set up, you can use
@@ -218,7 +224,13 @@ After the user connects to Starknet, the dapp displays the user's connected wall
 
 Alternatively, you can manage the Snap invocation manually.
 Use the [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC
-method to directly interact with the Starknet Snap.
+method to directly interact with the Starknet Snap. 
+
+::: note
+
+This option can include the incorporation of the [Starknet Snap](https://github.com/Consensys/starknet-snap?tab=readme-ov-file) companion dapp, which is available for users on the [MetaMask Snaps directory](https://snaps.consensys.io/starknet).
+
+:::
 
 ### 1. Connect to the Snap
 

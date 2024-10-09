@@ -8,6 +8,12 @@ sidebar_position: 6
 In this tutorial, you'll learn how to set up a React TypeScript dapp that uses the [`get-starknet`](https://github.com/starknet-io/get-starknet) library to connect to MetaMask and display the user's wallet address.
 You'll also display the balance of an ERC-20 token and perform a token transfer.
 
+:::note
+
+This tutorial uses [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js` version `6.11.0`.
+
+:::
+
 ## Prerequisites
 
 - [MetaMask installed](https://metamask.io/download/)
