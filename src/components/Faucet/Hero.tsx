@@ -144,7 +144,6 @@ export default function Hero({
               testId="hero-cta-install-metamask"
               className={styles.button}
               onClick={handleConnectWallet}
-              textColor="light"
             >
               Install MetaMask
             </Button>
@@ -156,7 +155,6 @@ export default function Hero({
                   className={styles.button}
                   onClick={handleConnectWallet}
                   isLoading={isWalletLinking}
-                  textColor="light"
                 >
                   Connect MetaMask
                 </Button>
@@ -167,7 +165,6 @@ export default function Hero({
                   className={styles.button}
                   onClick={handleLinkWallet}
                   isLoading={isWalletLinking}
-                  textColor="light"
                 >
                   Link Infura Account
                 </Button>
@@ -178,7 +175,6 @@ export default function Hero({
                   className={styles.button}
                   onClick={handleLinkWallet}
                   isLoading={isWalletLinking}
-                  textColor="light"
                 >
                   Select Infura Account
                 </Button>
@@ -191,7 +187,6 @@ export default function Hero({
               disabled={!inputValue}
               className={styles.button}
               onClick={handleRequestEth}
-              textColor="light"
             >
               Request ETH
             </Button>
