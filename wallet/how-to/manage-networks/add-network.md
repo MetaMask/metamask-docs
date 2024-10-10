@@ -30,10 +30,10 @@ The confirmations look like the following:
     </div>
 </div>
 
-:::note
-
-To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
-
+:::info Development and non-EVM networks
+- To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
+- To add a non-EVM network such as [Starknet](../use-non-evm-networks/starknet/index.md) to MetaMask,
+  see [Use non-EVM networks](/wallet/how-to/use-non-evm-networks).
 :::
 
 ## Example
