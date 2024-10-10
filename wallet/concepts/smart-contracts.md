@@ -1,13 +1,13 @@
 ---
 description: Learn about interacting with smart contracts.
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 # Smart contracts
 
 This is a high-level overview of interacting with smart contracts.
 You can also see how to
-[interact with smart contracts from your Unity game](../how-to/use-sdk/gaming/unity/smart-contracts/index.md).
+[interact with smart contracts from your Unity game](../how-to/use-unity-sdk/smart-contracts/index.md).
 
 To interact with a smart contract, your dapp needs the following information:
 
@@ -48,7 +48,6 @@ Example libraries include the following:
 
 - [Ethers](https://www.npmjs.com/package/ethers)
 - [web3.js](https://www.npmjs.com/package/web3)
-- [Embark](https://framework.embarklabs.io/)
 - [ethjs](https://www.npmjs.com/package/ethjs)
 - [Hardhat](https://hardhat.org/)
 
