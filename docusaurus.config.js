@@ -199,6 +199,10 @@ const config = {
                 label: "Infura dashboard",
                 to: "developer-tools/dashboard",
               },
+              {
+                label: "Faucet",
+                to: "developer-tools/faucet",
+              },
             ],
           },
           {
@@ -361,6 +365,7 @@ const config = {
         options: {
           fontFamily: "arial, verdana, sans-serif;",
           wrap: true,
+          securityLevel: "loose",
           sequence: {
             diagramMarginX: 25,
             diagramMarginY: 25,

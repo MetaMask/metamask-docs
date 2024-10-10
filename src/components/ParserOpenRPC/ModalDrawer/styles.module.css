@@ -18,7 +18,6 @@
   max-width: 972px;
   width: 100%;
   min-height: 512px;
-  margin-left: calc(((100% - 300px) - 1440px) / 2);
   opacity: 0;
   transform: translate(0, 100%);
   transition-property: "transform", "opacity";
@@ -106,9 +105,8 @@
 
 @media (width <= 1760px) {
   .modalContainer {
-    max-width: 792px;
+    max-width: 100%;
     margin-left: 0;
-    left: calc(50% - 396px);
   }
 }
 
