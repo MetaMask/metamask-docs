@@ -209,8 +209,8 @@ const Icon = ({ name, classes }) => {
           <svg
             width="30"
             height="28"
-            viewBox="0 0 30 28" 
-            fill="none" 
+            viewBox="0 0 30 28"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect x="0.000488281" y="0.0438232" width="29.999" height="27.6615" fill="url(#pattern0_712_369)"/>
@@ -224,10 +224,10 @@ const Icon = ({ name, classes }) => {
         );
         case "close":
           return (
-            <svg 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >

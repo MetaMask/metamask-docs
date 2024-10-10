@@ -1,0 +1,80 @@
+:root[data-theme="dark"] {
+  --hero-text-color: #fff;
+
+  .hero {
+    &.sepolia {
+      --hero-image: url("/img/faucet-sepolia-hero-dark.png");
+    }
+
+    &.linea {
+      --hero-image: url("/img/faucet-linea-hero-dark.png");
+    }
+  }
+}
+
+:root[data-theme="light"] {
+  --hero-text-color: #141618;
+
+  .hero {
+    &.sepolia {
+      --hero-image: url("/img/faucet-sepolia-hero-light.png");
+    }
+
+    &.linea {
+      --hero-image: url("/img/faucet-linea-hero-light.png");
+    }
+  }
+}
+
+.hero {
+  color: var(--hero-text-color);
+  background-image: var(--hero-image);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: auto 100%;;
+
+  @media screen and (max-width: 996px) {
+    background-image: none;
+  }
+
+  .actions {
+    display: flex;
+
+    @media screen and (max-width: 996px) {
+      flex-direction: column;
+    }
+
+    > *:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    .inputCont {
+      max-width: 600px;
+      width: 100%;
+
+      @media screen and (max-width: 996px) {
+        max-width: 100%;
+      }
+
+      .caption {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      }
+    }
+
+    .alignedButtons {
+      margin-top: 22px;
+    }
+
+    .button {
+      height: 48px;
+
+      @media screen and (max-width: 996px) {
+        width: 100%;
+      }
+    }
+  }
+}

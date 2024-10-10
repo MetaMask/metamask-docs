@@ -1,6 +1,7 @@
 :root[data-theme="dark"] {
   --button-primary-background-color: #1098fc;
   --button-secondary-background-color: transparent;
+  --button-background-color: #1098fc;
   --button-color: #141618;
   --button-hover-background-color: #036ab5;
   --button-hover-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.4);
@@ -11,6 +12,7 @@
 :root[data-theme="light"] {
   --button-primary-background-color: #0376c9;
   --button-secondary-background-color: transparent;
+  --button-background-color: #0376c9;
   --button-color: #ffffff;
   --button-hover-background-color: #036ab5;
   --button-hover-shadow: 0px 2px 8px 0px rgba(3, 118, 201, 0.2);
@@ -35,6 +37,7 @@ a.button {
 
 .button {
   color: var(--button-color);
+  background-color: var(--button-background-color);
   border: none;
   padding: 0 16px;
   height: 48px;
