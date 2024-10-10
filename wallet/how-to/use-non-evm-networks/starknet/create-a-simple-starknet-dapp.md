@@ -264,7 +264,7 @@ src/
 │   └── TokenBalanceAndTransfer.tsx
 └── ...
 ```
-  
+
 The following `TokenBalanceAndTransfer.tsx` example loads the ABI from `erc20Abi.json`:
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
@@ -293,7 +293,8 @@ const formattedBalance = balance / Math.pow(10, 18);
 ### 4.3. Transfer tokens
 
 To transfer tokens, fill out the `transfer` method call and execute the transaction using the `AccountInterface`.
-For example:
+
+Use the following example for reference:
 
 ```typescript
 import { Call } from "starknet";
@@ -323,51 +324,64 @@ The following a full example of displaying the balance of an ERC-20 token and pe
 
 ```typescript
 import { useEffect, useState } from "react";
-import { Contract } from "starknet";
+import { AccountInterface, Call, Contract } from "starknet";
 import erc20Abi from "./erc20Abi.json";
 
-function TokenBalanceAndTransfer({ AccountInterface, tokenAddress }) {
-  const [balance, setBalance] = useState(null);
+interface TokenBalanceAndTransferProps {
+    account: AccountInterface;
+    tokenAddress: string;
+}
+
+export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceAndTransferProps) {
+  const [balance, setBalance] = useState<number | null>(null)
 
   useEffect(() => {
-    if (AccountInterface) {
-      const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
-      // Fetch balance
-      erc20.balanceOf(AccountInterface.address)
-        .then((result) => {
-          const formattedBalance = result / Math.pow(10, 18); // Adjust for decimals
-          setBalance(formattedBalance);
+    if (account) {
+      const erc20 = new Contract(erc20Abi, tokenAddress, account);
+      // Fetch the balance.
+      erc20.balanceOf(account.address)
+        .then((result: bigint) => {
+          const decimals = 18n;
+          const formattedBalance = result / 10n ** decimals; 
+          console.log(formattedBalance);
+          setBalance(Number(formattedBalance));
         })
         .catch(console.error);
     }
-  }, [AccountInterface, tokenAddress]);
+  }, [account, tokenAddress]);
 
   async function handleTransfer() {
-    if (AccountInterface) {
-      const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
-      const recipientAddress = "0x78662e7352d062084b0010068b99288486c2d8b914f6e2a55ce945f8792c8b1";
-      const amountToTransfer = 1n * 10n ** 18n; // 1 token
+    try{
+      if (account) {
+        const erc20 = new Contract(erc20Abi, tokenAddress, account);
+        const recipientAddress = "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5";
+        const amountToTransfer = 1n * 10n ** 18n; // 1 token
 
-      // Fill out and execute transfer
-      const transferCall: Call = erc20.populate("transfer", {
-        recipient: recipientAddress,
-        amount: amountToTransfer,
-      });
-      const { transaction_hash: transferTxHash } = await AccountInterface.execute(transferCall);
+        // Fill out and execute transfer
+        const transferCall: Call = erc20.populate("transfer", {
+          recipient: recipientAddress,
+          amount: amountToTransfer,
+        });
+        //transferCall.calldata = [ "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5", "1000000000000000000", "0" ];
+        const { transaction_hash: transferTxHash } = await account.execute([transferCall]);
 
-      // Wait for the transaction to be accepted
-      await AccountInterface.provider.waitForTransaction(transferTxHash);
+        // Wait for the transaction to be accepted.
+        await account.waitForTransaction(transferTxHash);
 
-      // Refresh balance
-      const newBalance = await erc20.balanceOf(AccountInterface.address);
-      setBalance(newBalance / Math.pow(10, 18)); // Adjust for decimals
+        // Refresh the balance.
+        const newBalance = await erc20.balanceOf(account.address);
+        setBalance(newBalance / Math.pow(10, 18)); // Adjust for decimals
+      }
+    }
+    catch(e){
+      console.log(e)
     }
   }
 
   return (
     <div>
       <h3>Token Balance: {balance !== null ? `${balance} STRK` : "Loading..."}</h3>
-      <button onClick={handleTransfer}>Transfer 1 STRK</button>
+      <button onClick={handleTransfer}>Transfer 1 STRK to yourself</button>
     </div>
   );
 }

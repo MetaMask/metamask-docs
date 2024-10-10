@@ -228,8 +228,7 @@ method to directly interact with the Starknet Snap.
 
 ::: note
 
-This option can include the incorporation of the [Starknet Snap](https://github.com/Consensys/starknet-snap?tab=readme-ov-file) companion dapp, which is available for users on the [MetaMask Snaps directory](https://snaps.consensys.io/starknet).
-
+This option can include the use of the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet), which demonstrates how to use `wallet_invokeSnap` through its [UI example](https://github.com/Consensys/starknet-snap?tab=readme-ov-file).
 :::
 
 ### 1. Connect to the Snap
@@ -426,3 +425,11 @@ export default ConnectWallet;
 :::note
 See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using `wallet_invokeSnap`.
 :::
+
+## Next steps
+
+After connecting your dapp to Starknet in MetaMask, you can follow these next steps:
+
+- [Manage Starknet accounts](manage-starknet-accounts.md).
+- [Manage Starknet networks](manage-starknet-networks.md).
+- Explore the [Starknet Snap API reference](../../../reference/non-evm-apis/starknet-snap-api.md).
