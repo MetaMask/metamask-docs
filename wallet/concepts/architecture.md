@@ -9,7 +9,7 @@ The following diagram outlines the high-level architecture of the MetaMask web3 
 
 ![Architecture diagram](../assets/web3-architecture.png)
 
-Using [MetaMask SDK](sdk/index.md), dapps built on multiple platforms can connect to their users' Ethereum
+Using [MetaMask SDK](../connect//metamask-sdk/index.md), dapps built on multiple platforms can connect to their users' Ethereum
 accounts through the MetaMask browser extension and MetaMask Mobile.
 Dapps can send [Wallet API](wallet-api.md) requests to the users' MetaMask wallet clients.
 MetaMask then responds to these requests directly or uses [Infura](https://www.infura.io/) (or
