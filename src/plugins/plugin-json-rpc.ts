@@ -64,6 +64,9 @@ export default function useNetworksMethodPlugin() {
         resolve: {
           alias: {
             rpc: path.resolve(__dirname, "node_modules"),
+            fs: false,
+            'child_process': false,
+            'worker_threads': false,
           },
         },
       }
