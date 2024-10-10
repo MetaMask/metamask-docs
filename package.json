@@ -38,7 +38,7 @@
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/docusaurus-openrpc": "^0.4.1",
-    "@metamask/profile-sync-controller": "^0.6.0",
+    "@metamask/profile-sync-controller": "^0.9.6",
     "@metamask/sdk": "^0.29.0",
     "@rjsf/core": "^5.18.4",
     "@rjsf/utils": "^5.18.4",
