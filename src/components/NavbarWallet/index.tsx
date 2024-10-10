@@ -8,6 +8,7 @@ import { MetamaskProviderContext } from "@site/src/theme/Root";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
+import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
@@ -32,17 +33,33 @@ const NavbarWalletComponent: FC = ({
   } = useContext(MetamaskProviderContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT);
-  const isExtensionActive = sdk.isExtensionActive;
+  const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
+    trackClickForSegment({
+      eventName: "Account dropdown",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(metaMaskAccount);
     setCopyMessage(COPIED_TEXT);
+    trackClickForSegment({
+      eventName: "Copy wallet address",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -68,17 +85,52 @@ const NavbarWalletComponent: FC = ({
     };
   }, [dropdownOpen]);
 
+  const handleDisconnect = () => {
+    trackClickForSegment({
+      eventName: "Disconnect account",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    metaMaskDisconnect();
+    setDropdownOpen(false);
+  };
+
+  const handleConnectWallet = () => {
+    trackClickForSegment({
+      eventName: !isExtensionActive ? "Install MetaMask" : "Connect Wallet",
+      clickType: "Navbar",
+      userExperience: "B",
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    });
+    metaMaskWalletIdConnectHandler();
+  };
+
   return !metaMaskAccount ? (
     <Button
+      testId={
+        !isExtensionActive
+          ? "navbar-cta-install-metamask"
+          : "navbar-cta-connect-wallet"
+      }
       thin
-      onClick={metaMaskWalletIdConnectHandler}
+      onClick={handleConnectWallet}
       className={styles.navbarButton}
     >
       {!isExtensionActive ? "Install MetaMask" : "Connect MetaMask"}
     </Button>
   ) : (
     <div className={styles.navbarWallet}>
-      <button ref={buttonRef} className={styles.cta} onClick={toggleDropdown}>
+      <button
+        data-testid="navbar-account-toggle"
+        ref={buttonRef}
+        className={styles.cta}
+        onClick={toggleDropdown}
+      >
         <img
           src="/img/icons/jazzicon.png"
           className={clsx(styles.avatar, dropdownOpen && styles.active)}
@@ -96,7 +148,11 @@ const NavbarWalletComponent: FC = ({
             <span
               className={styles.walletId}
             >{`${metaMaskAccount.slice(0, 7)}...${metaMaskAccount.slice(-5)}`}</span>
-            <button className={styles.copyButton} onClick={handleCopy}>
+            <button
+              data-testid="navbar-account-copy"
+              className={styles.copyButton}
+              onClick={handleCopy}
+            >
               <Tooltip
                 message={copyMessage}
                 className={styles.tooltip}
@@ -112,13 +168,14 @@ const NavbarWalletComponent: FC = ({
             <Button
               thin
               type="danger"
-              onClick={metaMaskDisconnect}
+              testId="navbar-account-disconnect"
+              onClick={handleDisconnect}
               className={styles.disconnect}
             >
-              <>
+              <span className={styles.content}>
                 <DisconnectIcon className={styles.icon} />{" "}
-                <span>Disconnect Wallet</span>
-              </>
+                <span>Disconnect MetaMask</span>
+              </span>
             </Button>
           </li>
         </ul>

@@ -20,7 +20,7 @@ The API methods are documented in the following references:
 MetaMask injects a global JavaScript API into websites visited by its users using the
 `window.ethereum` provider object.
 This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), and it allows dapps to
-request users' Ethereum accounts, read data from blockchains the user is connected to, suggest
+request users' EVM accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
 :::info Note
@@ -28,7 +28,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperability.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../how-to/connect/index.md).
+We recommend [using this mechanism to connect to MetaMask](../connect/index.md).
 
 You can access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
@@ -83,15 +83,12 @@ The following methods are restricted:
   Granting permission for `eth_accounts` also grants permissions for the following methods:
 
   - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
-
   - [`personal_sign`](/wallet/reference/personal_sign)
-
   - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
-
   :::caution important
   To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
   which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
-  See [how to access a user's accounts](../how-to/connect/access-accounts.md) for more information.
+  See [how to access a user's accounts](../how-to/access-accounts.md) for more information.
   :::
 
 - [`wallet_snap`](/snaps/reference/wallet-api-for-snaps/#wallet_snap) - Gaining permission requires

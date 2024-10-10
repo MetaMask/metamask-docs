@@ -1,6 +1,6 @@
 ---
 description: Learn about the RPC methods for signing transactions in MetaMask.
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Signing methods

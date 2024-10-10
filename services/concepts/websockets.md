@@ -33,7 +33,10 @@ subscription types are available using the [`eth_subscribe`](../reference/ethere
 
 :::info
 
-For information about how to use the subscription methods to subscribe to events, see the [`eth_subscribe`](../reference/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) JSON-RPC method, or see the following tutorials:
+The `newPendingTransactions` subscription type is not available for all networks.
+
+For information about how to use the available subscription methods to subscribe to events, see the `eth_subscribe`
+JSON-RPC method for the relevant network. You can also see the following tutorials for more information:
 
 - [Track ERC-20 token transfers](../tutorials/ethereum/track-erc-20-token-transfers.md)
 - [Subscribe to pending transactions on Ethereum](../tutorials/ethereum/subscribe-to-pending-transactions.md)
@@ -44,11 +47,16 @@ For information about how to use the subscription methods to subscribe to events
 
 Infura support subscriptions over WebSockets for the following networks:
 
-- [Ethereum](../reference/ethereum/index.md)
 - [Arbitrum](../reference/arbitrum/index.md)
 - [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
+- [Base](../reference/base/index.md)
+- [Binance Smart Chain](../reference/bnb-smart-chain/index.md)
+- [Blast](../reference/blast/index.md)
 - [Celo](../reference/celo/index.md)
+- [Ethereum](../reference/ethereum/index.md)
 - [Linea](../reference/linea/index.md)
+- [Mantle](../reference/mantle/index.md)
+- [opBNB](../reference/opbnb/index.md)
 - [Optimism](../reference/optimism/index.md)
 - [Polygon](../reference/polygon-pos/index.md)
 - [ZKsync Era](../reference/zksync/index.md)

@@ -80,7 +80,7 @@ export const ConditionalField = (props: FieldTemplateProps) => {
           <div
             className={clsx(styles.tableValueRow, styles.tableValueRowPadding)}
           >
-            {formData === undefined ? "" : String(formData)}
+            <div className={styles.tableValueConditionalField}>{formData === undefined ? "" : String(formData)}</div>
             <span
               className={clsx(
                 styles.tableColumnType,
