@@ -67,7 +67,7 @@ export default function DetailsBox({
         Parameters
       </Heading>
       {params.length === 0 ? (
-        <div>This method does not accept any parameters</div>
+        <div>This method doesn't accept parameters.</div>
       ) : (
         <>{params && renderParamSchemas(params, components)}</>
       )}
