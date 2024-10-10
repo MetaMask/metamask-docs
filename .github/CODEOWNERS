@@ -20,6 +20,9 @@ vercel.json @MetaMask/activation @MetaMask/tech-writers
 *.md @MetaMask/tech-writers
 *.mdx @MetaMask/tech-writers
 
+# Developer tools documentation
+/developer-tools/ @MetaMask/tech-writers
+
 # Services documentation
 /services/ @MetaMask/tech-writers
 
