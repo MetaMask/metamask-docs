@@ -65,8 +65,12 @@ export default function useNetworksMethodPlugin() {
           alias: {
             rpc: path.resolve(__dirname, "node_modules"),
             fs: false,
-            'child_process': false,
-            'worker_threads': false,
+            module: false,
+            "child_process": false,
+            "worker_threads": false,
+            "uglify-js": false,
+            "@swc/core": false,
+            "esbuild": false,
           },
         },
       }
