@@ -12,7 +12,6 @@ Build the documentation site locally using the following steps.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) version 18+
-- [Yarn](https://yarnpkg.com/) version 3
 - [Git](https://git-scm.com/)
 
 ### Steps
