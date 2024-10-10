@@ -1,10 +1,5 @@
 import { SDK } from "@metamask/profile-sync-controller";
 import jwt from "jsonwebtoken";
-import {
-  AUTH_WALLET_PROJECTS,
-  AUTH_WALLET_SESSION_NAME,
-  AUTH_WALLET_TOKEN,
-} from "@site/src/lib/constants";
 
 type HydraEnv = {
   authApiUrl: string;
@@ -14,7 +9,12 @@ type HydraEnv = {
   platform: SDK.Platform;
 };
 
-const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
+const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK
+export const AUTH_WALLET_PAIRING = 'auth.wallet.pairing'
+export const AUTH_WALLET_SESSION_NAME = 'auth.wallet.session'
+export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
+export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
+export const AUTH_WALLET_USER_PLAN = 'auth.wallet.uksTier'
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
@@ -76,6 +76,14 @@ export const saveTokenString = (token: string) => {
   sessionStorage.setItem(AUTH_WALLET_TOKEN, token);
 };
 
+export const getTokenString = (): string => {
+  return sessionStorage.getItem(AUTH_WALLET_TOKEN)
+}
+
+export const getUksTier = (): string => {
+  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN)
+}
+
 export const getUserIdFromJwtToken = () => {
   const token = sessionStorage.getItem(AUTH_WALLET_TOKEN);
   const decoded = jwt.decode(token as string, { complete: true }) as jwt.Jwt;
@@ -85,6 +93,7 @@ export const getUserIdFromJwtToken = () => {
 
 export const clearStorage = () => {
   sessionStorage.clear();
+  localStorage.removeItem(AUTH_WALLET_PAIRING);
   localStorage.removeItem(AUTH_WALLET_SESSION_NAME);
   localStorage.removeItem(AUTH_WALLET_TOKEN);
   localStorage.removeItem(AUTH_WALLET_PROJECTS);

@@ -1,0 +1,120 @@
+:root[data-theme="dark"] {
+  --faucet-bg-color-primary: #252526;
+  --faucet-box-shadow: none;
+  --faucet-faq-bg: rgb(20, 22, 24);
+  --faucet-hero-border: rgba(132, 140, 150, 0.16);
+  --faucet-hero-background: #24272a;
+}
+
+:root[data-theme="light"] {
+  --faucet-bg-color-primary: #ffffff;
+  --faucet-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --faucet-faq-bg: rgb(242, 244, 246);
+  --faucet-hero-border: rgba(187, 192, 197, 0.4);
+  --faucet-hero-background: #f2f4f6;
+}
+
+:global(.navbar) {
+  box-shadow: none;
+}
+
+.authCont {
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--faucet-bg-color-primary);
+  box-shadow: var(--ifm-navbar-shadow);
+
+  @media screen and (max-width: 996px) {
+    box-shadow: none;
+    height: 110px;
+    padding-bottom: 70px;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+.tabs {
+  :global(.tabs-container) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+
+    > *:last-child {
+      width: 100%;
+      position: relative;
+    }
+  }
+
+  .header {
+    font-weight: 400;
+    white-space: nowrap;
+    position: relative;
+    top: -60px;
+    display: inline-flex;
+
+    > li {
+      padding: 6px 8px;
+      border-bottom-width: 2px;
+
+      &:hover {
+        background: none;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 0;
+
+    .sectionHeading {
+      text-align: center;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .topContent {
+      margin-bottom: 60px;
+      padding: 0 var(--ifm-navbar-padding-horizontal);
+
+      .hero {
+        max-width: 1420px;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 8px;
+        border: 1px solid var(--faucet-hero-border);
+        background-color: var(--faucet-hero-background);
+        padding: 32px;
+        margin-bottom: 60px;
+      }
+    }
+
+    .bottomContent {
+      background: var(--faucet-faq-bg);
+      padding: 60px var(--ifm-navbar-padding-horizontal);
+
+      .faq {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1014px;
+
+        > *:last-child {
+          margin-bottom: 0;
+        }
+
+        @media screen and (max-width: 996px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
