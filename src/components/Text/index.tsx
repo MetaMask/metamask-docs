@@ -8,7 +8,11 @@ interface IText {
   className?: string;
 }
 
-export default function Text({ as = "p", children, className }: IText) {
+export default function Text({
+  as = "p",
+  children,
+  className,
+}: IText): React.JSX.Element {
   switch (as) {
     case "h1":
       return <h1 className={clsx(styles.h1, className)}>{children}</h1>;
