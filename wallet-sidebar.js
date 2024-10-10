@@ -100,6 +100,10 @@ const sidebar = {
           type: "doc",
           id: "reference/provider-api",
         },
+        {
+          type: "doc",
+          id: "reference/multichain-api",
+        },
       ],
       collapsed: false,
     },
