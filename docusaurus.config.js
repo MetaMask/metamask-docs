@@ -61,35 +61,20 @@ const config = {
 
   presets: [
     [
-      "@metamask/docusaurus-openrpc/dist/preset",
-      /** @type {import('@metamask/docusaurus-openrpc/dist/preset').Options} */
-      ({
+      "classic",
+      {
         docs: {
-          path: "wallet",
-          routeBasePath: "wallet",
-          sidebarPath: require.resolve("./wallet-sidebar.js"),
-          breadcrumbs: false,
+          id: "docs",
+          path: "docs",
+          routeBasePath: "/",
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-          remarkPlugins: [
-            [
-              remarkCodesandbox,
-              {
-                mode: "iframe",
-                autoDeploy: process.env.NODE_ENV === "production",
-              },
-            ],
-          ],
-          openrpc: {
-            openrpcDocument:
-              "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-            path: "reference",
-            sidebarLabel: "JSON-RPC API",
-          },
+          sidebarPath: false,
+          breadcrumbs: false,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-      }),
+      }
     ],
   ],
   plugins: [
@@ -144,11 +129,11 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "docs",
-        path: "docs",
-        routeBasePath: "/",
+        id: "wallet",
+        path: "wallet",
+        routeBasePath: "wallet",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-        sidebarPath: false,
+        sidebarPath: require.resolve("./wallet-sidebar.js"),
         breadcrumbs: false,
       },
     ],
