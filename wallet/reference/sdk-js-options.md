@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # JavaScript SDK options
 
-The [JavaScript version of MetaMask SDK](../how-to/use-sdk/javascript/index.md) takes the
+The [JavaScript version of MetaMask SDK](../connect/metamask-sdk/javascript/index.md) takes the
 following options.
 
 ### `checkInstallationImmediately`
@@ -165,7 +165,7 @@ defaultReadOnlyChainId: "0x1"
 </TabItem>
 </Tabs>
 
-Enables sending [read-only RPC requests](../how-to/use-sdk/javascript/make-read-only-requests.md) to
+Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) to
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
@@ -232,9 +232,9 @@ infuraAPIKey: process.env.INFURA_API_KEY
 </TabItem>
 </Tabs>
 
-The [Infura API key](../../../../developer-tools/dashboard/get-started/create-api) to
+The [Infura API key](/developer-tools/dashboard/get-started/create-api) to
 use for RPC requests.
-Configure this option to [make read-only RPC requests from your dapp](../how-to/use-sdk/javascript/make-read-only-requests.md).
+Configure this option to [make read-only RPC requests from your dapp](../how-to/make-read-only-requests.md).
 
 :::caution important
 Use [Infura allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
@@ -282,7 +282,7 @@ modals: {
 </TabItem>
 </Tabs>
 
-An object that allows you to [customize the logic and UI of the displayed modals](../how-to/use-sdk/javascript/display-custom-modals.md).
+An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/display-custom-modals.md).
 This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
 
 ### `openDeeplink`
@@ -353,7 +353,7 @@ readonlyRPCMap: {
 </TabItem>
 </Tabs>
 
-A map of RPC URLs to use for [read-only RPC requests](../how-to/use-sdk/javascript/make-read-only-requests.md).
+A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
 
 ### `shouldShimWeb3`
 

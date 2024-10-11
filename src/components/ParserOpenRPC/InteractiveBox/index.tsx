@@ -296,7 +296,7 @@ export default function InteractiveBox({
           onParamChange,
         }}
         validator={validator}
-        liveValidate
+        liveValidate={isOpen}
         noHtml5Validate
         onChange={(data) => {
           const orderData = sortObjectKeysByArray(data.formData, params);
