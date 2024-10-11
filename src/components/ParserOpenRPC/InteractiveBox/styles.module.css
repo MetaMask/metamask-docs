@@ -79,6 +79,15 @@
   padding: 12px 72px 12px 16px;
 }
 
+.tableValueConditionalField {
+  max-width: 100%;
+  padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .tableColumnType {
   display: flex;
   align-items: center;
