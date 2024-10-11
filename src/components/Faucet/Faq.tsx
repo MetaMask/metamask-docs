@@ -189,7 +189,7 @@ export default function Faq({
           <div className={classNameHeading}>
             <Text as="h2">Frequently Asked Questions</Text>
             <Text as="p">
-              Answers to commonly asked questions about our faucet.
+              Answers to commonly asked questions about the MetaMask faucet.
             </Text>
           </div>
           {isLimitedUserPlan && (

@@ -8,8 +8,8 @@ const CardList: CardItem[] = [
     link: "/wallet",
     description: (
       <>
-        Integrate your dapp with MetaMask using the Wallet API. You can interact
-        with your users&apos; Ethereum accounts from multiple dapp platforms.
+        Integrate your dapp with MetaMask using MetaMask SDK and the Wallet API.
+        You can interact with your users&apos; EVM accounts from multiple dapp platforms.
       </>
     ),
   },
