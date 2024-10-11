@@ -33,13 +33,13 @@ If you're new to Starknet, you can also follow the
 - [Yarn](https://yarnpkg.com/)
 - (Optional) A JavaScript or TypeScript React project set up
 
-## Connect using `get-starknet`
-
-:::note Important
+:::note
 
 This connection guide uses [`get-starknet`](https://github.com/starknet-io/get-starknet) version `3.3.0` and `starknet.js` version `6.11.0`.
 
 :::
+
+## Connect using `get-starknet`
 
 ### 1. Set up the project
 
@@ -226,9 +226,10 @@ Alternatively, you can manage the Snap invocation manually.
 Use the [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC
 method to directly interact with the Starknet Snap. 
 
-::: note
+:::note
 
 This option can include the use of the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet), which demonstrates how to use `wallet_invokeSnap` through its [UI example](https://github.com/Consensys/starknet-snap?tab=readme-ov-file).
+
 :::
 
 ### 1. Connect to the Snap
