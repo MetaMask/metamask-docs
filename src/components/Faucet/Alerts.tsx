@@ -71,9 +71,8 @@ export const AlertPastActivity = () => (
   <div>
     <AlertTitle>No past activity</AlertTitle>
     <AlertText>
-      The address used hasn't been active on Ethereum Mainnet yet. To proceed,
-      please use an address that has activity on Ethereum Mainnet. For more
-      details, refer to the following FAQ.
+      The address provided does not have sufficient historical activity or balance on the Ethereum Mainnet. Please use a
+      different address to proceed. Read the FAQ below for more information.
     </AlertText>
   </div>
 );
