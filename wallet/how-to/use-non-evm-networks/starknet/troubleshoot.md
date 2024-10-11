@@ -100,6 +100,7 @@ async function installSnap(provider: MetaMaskProvider, snapId: string, snapVersi
 
 Users can reject the prompt to add the Snap, resulting in a 4001 error. 
 Provide an error message to ensure users have clear guidance on next steps.
+
 For example:
 
 ```javascript

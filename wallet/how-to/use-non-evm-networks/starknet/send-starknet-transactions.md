@@ -61,12 +61,16 @@ Send a Starknet transaction using the following:
           request: {
             method: "starkNet_sendTransaction",
             params: {
-              contractAddress,
-              contractFuncName,
-              contractCallData,
-              senderAddress,
-              maxFee,
-              // chainId is optional, defaults to Starknet Sepolia testnet
+                address,              // The address of the account.
+                chainId,              // The chain ID of the request.
+                calls: {
+                    contractAddress,  // The address of the contract.
+                    entrypoint,       // The function to call in the contract.
+                    calldata          // Arguments to the contract.
+                },
+                details: {
+                    maxFee,           // This is optional. It will re-estimate in the snap if not provided.
+                }
             }
           }
         }

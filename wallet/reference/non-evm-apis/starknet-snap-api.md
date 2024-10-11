@@ -17,7 +17,7 @@ following Starknet Snap API methods:
 - [`starkNet_extractPublicKey`](#starknet_extractpublickey)
 - [`starkNet_signMessage`](#starknet_signmessage)
 - [`starkNet_upgradeAccContract`](#starknet_upgradeacccontract)
-- [`starkNet_verifyMessage`](#starknet_verifymessage)
+- [`starkNet_verifySignedMessage`](#starkNet_verifySignedMessage)
 
 The examples on this page use the
 [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method,
@@ -152,9 +152,13 @@ Gets the estimated gas fee for deploying an account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-#### Returns
-
-The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
+### Returns
+An object with the following properties (where values are originally `bigint` but converted to base-10 `string` format using `.toString(10)`):
+- `suggestedMaxFee`: `string` - The maximum suggested fee for deploying the contract in wei. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`, which ensures the number is expressed in decimal format.
+- `overallFee`: `string` - The overall fee for the deployment transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`, ensuring it is in decimal format.
+- `gasConsumed`: `string` - The amount of gas consumed during the transaction. If not available, the default value is `'0'`. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`.
+- `gasPrice`: `string` - The gas price used for the transaction in wei. If not available, the default value is `'0'`. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`.
+- `unit`: `string` - The unit of the fees and gas values, which is `'wei'`.
 
 #### Example
 
@@ -197,18 +201,20 @@ await getEip6963Provider.request({
 
 Gets the estimated gas fee for calling a method on any contract.
 
-#### Parameters
+### Parameters
 
-- `contractAddress`: `string` - Address of the target contract.
-- `contractFuncName`: `string` - Target function name of the contract.
-- `contractCallData`: `string` - (Optional) Call data for the target function with `,` as a separator.
-- `senderAddress`: `string` - Address of the sender.
-- `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Sepolia testnet.
+- `address`: `string` - The account address from which the transaction is being made.
+- `invocations`: `array` - The invocations to estimate the fee for. Each invocation represents a contract call. Reference: [Invocations](https://starknetjs.com/docs/API/namespaces/types#invocations).
+- `chainId`: `string` - The chain ID of the target Starknet network. If not provided, the default is the Starknet Goerli testnet.
+- `details`: `object` - (Optional) The universal details associated with the invocations, such as nonce and version. See [EstimateFeeDetails](https://starknetjs.com/docs/API/interfaces/types.EstimateFeeDetails) for more information. 
 
-#### Returns
+### Returns
 
-The response from Starknet's `feeder_gateway/estimate_fee` API endpoint.
+A promise that resolves to an `EstimateFeeResponse` object, which contains the following properties:
+- `suggestedMaxFee`: `string` - The maximum suggested fee for the transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string`.
+- `overallFee`: `string` - The overall fee for the transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string`.
+- `unit`: `string` - The unit of the fees, typically `'wei'`.
+- `includeDeploy`: `boolean` - Whether the transaction includes an account deployment step.
 
 #### Example
 
@@ -347,60 +353,6 @@ await getEip6963Provider.request({
   "balancePending": "0x3e8", 
   "balanceLatest": "0x3e8", 
 }
-```
-
-</TabItem>
-</Tabs>
-
-### `starkNet_getStoredUserAccounts`
-
-Gets a list of stored user accounts that are either initialized or initializing.
-
-#### Parameters
-
-`chainId`: `string` - (Optional) ID of the target Starknet network.
-The default is the Starknet Sepolia testnet.
-
-#### Returns
-
-The list of the stored user accounts.
-
-#### Example
-
-<Tabs>
-<TabItem value="Request">
-
-```js
-await getEip6963Provider.request({
-  method: "wallet_invokeSnap",
-  params: {
-    snapId: "npm:@consensys/starknet-snap",
-    request: {
-      method: "starkNet_getStoredUserAccounts",
-      params: {
-        "chainId": "0x534e5f5345504f4c4941"
-      },
-    },
-  },
-})
-```
-
-</TabItem>
-<TabItem value="Result">
-
-```json
-[
-  {
-    "address": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-    "addressIndex": 0,
-    "publicKey": "0x04bfcab3b7ca7e8b3f3b62b2f7f77e9e4b68080bbf8f0f4a1c8f890864d2c7c1d3c45d8b2e3f5f1c27dfeea4c2f5733e90bfc7484e2a690aa9b8ac4559d2e6a8d7",
-    "addressSalt": "0x789...",
-    "deployTxnHash": "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
-    "derivationPath": "m/44'/9004'/0'/0/0",
-    "chainId": "0x534e5f5345504f4c4941"
-  },
-  // ... more accounts
-]
 ```
 
 </TabItem>
@@ -648,24 +600,32 @@ await getEip6963Provider.request({
 </TabItem>
 </Tabs>
 
-### `starkNet_sendTransaction`
+### `starkNet_executeTxn`
 
-Signs and sends a transaction.
+Signs and executes a transaction.
 
 #### Parameters
 
-- `contractAddress`: `string` - Address of the target contract.
-- `contractFuncName`: `string` - Target function name of the contract.
-- `contractCallData`: `string` - (Optional) Call data for the target function with `,` as a separator.
-- `senderAddress`: `string` - Address of the sender.
-- `maxFee`: `string` - (Optional) Maximum gas fee allowed from the sender.
-  If not specified, the maximum fee is automatically calculated.
-- `chainId`: `string` - (Optional) ID of the target Starknet network.
-  The default is the Starknet Sepolia testnet.
+- `address`: `string` - The address of the sender.
+- `calls`: An array of call objects to be executed. Each call contains the target contract address, function name, and call data.
+- `details`: `object` - (Optional) Transaction details as received by `starknet.js`, including:
+  - `nonce`: (Optional) Nonce for the transaction.
+  - `blockIdentifier`: (Optional) Block identifier for the transaction.
+  - `maxFee`: (Optional) Maximum gas fee allowed for the transaction. If not specified, the fee is automatically calculated.
+  - `tip`: (Optional) Additional fee to incentivize miners.
+  - `paymasterData`: (Optional) Paymaster-related data for the transaction.
+  - `accountDeploymentData`: (Optional) Data for account deployment.
+  - `nonceDataAvailabilityMode`: (Optional) Mode for nonce data availability.
+  - `feeDataAvailabilityMode`: (Optional) Mode for fee data availability.
+  - `version`: (Optional) The transaction version.
+  - `resourceBounds`: (Optional) The boundaries on resource consumption during the transaction.
+  - `skipValidate`: `boolean` - (Optional) Skip validation of the transaction.
+- `abis`: `any` - (Optional) Contract ABI for decoding the call data.
+- `chainId`: `string` - The Starknet chain ID. Default is Starknet Sepolia testnet.
 
 #### Returns
 
-The response from Starknet's `gateway/add_transaction` API endpoint.
+The hash of the transaction.
 
 #### Example
 
@@ -736,7 +696,7 @@ await getEip6963Provider.request({
     request: {
       method: "starkNet_signMessage",
       params: {
-        typedDataMessage: "{ ... }",
+        typedDataMessage,
         signerAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         "chainId": "0x534e5f5345504f4c4941"
       },
@@ -811,7 +771,7 @@ await getEip6963Provider.request({
 </TabItem>
 </Tabs>
 
-### `starkNet_verifyMessage`
+### `starkNet_verifySignedMessage`
 
 :::note
 
@@ -844,10 +804,10 @@ await getEip6963Provider.request({
   params: {
     snapId: "npm:@consensys/starknet-snap",
     request: {
-      method: "starkNet_verifyMessage",
+      method: "starkNet_verifySignedMessage",
       params: {
         typedDataMessage: "{ ... }",
-        signerAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+        address: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         signature: "1234567890,9876543210",
         "chainId": "0x534e5f5345504f4c4941"
       },

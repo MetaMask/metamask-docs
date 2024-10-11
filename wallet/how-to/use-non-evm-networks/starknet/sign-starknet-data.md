@@ -47,7 +47,7 @@ Sign a Starknet transaction using the following:
   <TabItem value="wallet_invokeSnap">
 
   ```typescript
-  const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata) => {
+  const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata, chainId, address) => {
     try {
       if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
         throw new Error("MetaMask not detected or Snaps not supported");
@@ -70,9 +70,13 @@ Sign a Starknet transaction using the following:
           request: {
             method: "starkNet_signTransaction",
             params: {
-              contractAddress,  // The address of the contract.
-              entrypoint,       // The function to call in the contract.
-              calldata          // The parameters to pass to the function (as an array).
+              address,              // The address of the account.
+              chainId,              // The chain ID of the request.
+              transactions: {
+                  contractAddress,  // The address of the contract.
+                  entrypoint,       // The function to call in the contract.
+                  calldata          // The parameters to pass to the function (as an array).
+              }
             }
           }
         }

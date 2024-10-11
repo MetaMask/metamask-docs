@@ -104,8 +104,9 @@ handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" });
 
 ### 3.3. Create an `AccountInterface`
 
-After connecting to MetaMask, create a new `AccountInterface` instance using the `starknet.js` library.
-This allows interaction with the Starknet network using the connected wallet.
+After connecting to MetaMask, the account instance is present in the returned object from the `connect` function.
+
+This object allows interaction with the Starknet network using the connected wallet.
 
 ```typescript title="App.tsx"
 import { AccountInterface } from "starknet"; 
