@@ -102,7 +102,7 @@ const sidebar = {
         },
         {
           type: "doc",
-          id: "reference/multichain-api",
+          id: "reference/multichain-api-events",
         },
       ],
       collapsed: false,
