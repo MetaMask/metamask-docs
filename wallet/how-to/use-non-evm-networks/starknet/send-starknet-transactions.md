@@ -18,7 +18,7 @@ You can send Starknet transactions using the
 
 ## Send a transaction
 
-Send a Starknet transaction using the following:
+Send a transaction using the [`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute) function:
 
 <Tabs>
   <TabItem value="get-starknet" default>
@@ -48,7 +48,7 @@ Send a Starknet transaction using the following:
   <TabItem value="wallet_invokeSnap">
 
   ```javascript
-  const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, senderAddress, maxFee = null) => {
+  const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
     if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
@@ -151,7 +151,7 @@ The following is a full, simplified example of connecting to a Starknet account 
     }
   };
 
-  const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, senderAddress, maxFee = null) => {
+   const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
     try {
       await connectStarknetAccount();
       
@@ -163,15 +163,16 @@ The following is a full, simplified example of connecting to a Starknet account 
       };
 
       if (maxFee) {
-        requestParams.maxFee = maxFee; // Include maxFee only if it's provided.
-      }
+        requestParams.details = {
+            maxFee
+        };// Include maxFee only if it's provided.
 
       const response = await getEip6963Provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
           request: {
-            method: "starkNet_sendTransaction"
+            method: "starkNet_executeTxn"
             params: requestParams
           }
         }
@@ -191,8 +192,9 @@ The following is a full, simplified example of connecting to a Starknet account 
   const contractCallData = ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"];
   const senderAddress = "0xb60e8dd61c5d32be8058bb8eb970870f07233155";
   const maxFee = "1000000000000000"; // Optional
+  const chainId = "0x534e5f5345504f4c4941";
 
-  sendStarknetTransaction(contractAddress, contractFuncName, contractCallData, senderAddress, maxFee)
+  sendStarknetTransaction(contractAddress, contractFuncName, contractCallData, senderAddress, chainId, maxFee)
     .then(result => console.log("Transaction result:", result))
     .catch(error => console.error("Transaction error:", error));
   ```
