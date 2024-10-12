@@ -49,12 +49,13 @@ Sign a Starknet transaction using the following:
   ```typescript
   const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata, chainId, address) => {
     try {
-      if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
+           const provider = await getEip6963Provider();
+      
+      if (!provider) {
         throw new Error("MetaMask not detected or Snaps not supported");
       }
-
       // Connect to the Starknet Snap if it's not already connected.
-      await getEip6963Provider.request({
+      await provider.request({
         method: "wallet_requestSnaps",
         params: {
           "npm:@consensys/starknet-snap": {}

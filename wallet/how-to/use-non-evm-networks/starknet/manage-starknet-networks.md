@@ -90,13 +90,17 @@ Prompt users to switch between networks by setting the
   <TabItem value="get-starknet" default>
 
   ```javascript
-  const switchChain = async (chainId: string) => {
+  const switchChain = async (wallet, chainId) => {
     try {
+      if(wallet?.isConnected !== true){
+          throw("Wallet not connected");
+      }
+       
       await wallet?.request({
         type: "wallet_switchStarknetChain",
         params: { chainId: chainId },
       });
-        console.log(`Switched to chainId: ${chainId}`);
+      console.log(`Switched to chainId: ${chainId}`);
     } catch (e) {
       console.error("Failed to switch chain:", e);
     }
@@ -108,14 +112,15 @@ Prompt users to switch between networks by setting the
 
   ```javascript
   const switchStarknetNetwork = async (chainId) => {
-    if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+    const provider = await getEip6963Provider()
+    if (provider) {
       try {
-        await getEip6963Provider.request({
+        await provider.request({
           method: "wallet_invokeSnap",
           params: {
             snapId: "npm:@consensys/starknet-snap",
             request: {
-              method: "wallet_switchStarknetChain",
+              method: "starkNet_switchNetwork",
               params: { chainId: chainId }
             }
           }

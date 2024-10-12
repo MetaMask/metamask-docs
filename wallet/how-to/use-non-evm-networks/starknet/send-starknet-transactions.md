@@ -49,12 +49,12 @@ Send a transaction using the [`starknet.account.execute()`](https://starknetjs.c
 
   ```javascript
   const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
-    if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
+    const provider = await getEip6963Provider();
+    if (!provider) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
-
     try {
-      const response = await getEip6963Provider.request({
+      const response = await provider.request({
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
@@ -132,13 +132,9 @@ The following is a full, simplified example of connecting to a Starknet account 
   <TabItem value="wallet_invokeSnap">
 
   ```javascript
-  const connectStarknetAccount = async () => {
-    if (typeof getEip6963Provider === "undefined" || !getEip6963Provider.isMetaMask) {
-      throw new Error("MetaMask not detected or Snaps not supported");
-    }
-
+  const connectStarknetAccount = async (provider) => {
     try {
-      await getEip6963Provider.request({
+      await provider.request({
         method: "wallet_requestSnaps",
         params: {
           "npm:@consensys/starknet-snap": {}
@@ -153,8 +149,14 @@ The following is a full, simplified example of connecting to a Starknet account 
 
    const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
     try {
-      await connectStarknetAccount();
+        const provider = await getEip6963Provider();
       
+      if (!provider) {
+        throw new Error("MetaMask not detected or Snaps not supported");
+      }
+      
+      await connectStarknetAccount(provider);
+
       const requestParams = {
         contractAddress,
         contractFuncName,
