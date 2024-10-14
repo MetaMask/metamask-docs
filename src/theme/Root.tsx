@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import { Provider as AlertProvider } from "react-alert";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import BrowserOnly from "@docusaurus/BrowserOnly";
-import siteConfig from "@generated/docusaurus.config";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
@@ -231,9 +229,7 @@ export const LoginProvider = ({ children }) => {
   ]);
 
   return (
-    <BrowserOnly>
-      {() => (
-        <MetamaskProviderContext.Provider
+      <MetamaskProviderContext.Provider
           value={
             {
               token,
@@ -256,10 +252,10 @@ export const LoginProvider = ({ children }) => {
               setUserAPIKey,
             } as IMetamaskProviderContext
           }
-        >
-          {children}
+      >
+        {children}
 
-          <AuthModal
+        <AuthModal
             open={openAuthModal}
             setOpen={setOpenAuthModal}
             setUser={setUserId}
@@ -267,10 +263,8 @@ export const LoginProvider = ({ children }) => {
             setUksTier={setUksTier}
             setStep={setStep}
             step={step}
-          />
-        </MetamaskProviderContext.Provider>
-      )}
-    </BrowserOnly>
+        />
+      </MetamaskProviderContext.Provider>
   );
 };
 
