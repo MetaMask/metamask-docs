@@ -216,42 +216,38 @@ export const LoginProvider = ({ children }) => {
   }, [sdk, setOpenAuthModal, setUserId, setMetaMaskAccount, setProjects]);
 
   return (
-    <BrowserOnly>
-      {() => (
-        <MetamaskProviderContext.Provider
-          value={
-            {
-              metaMaskAccount,
-              setMetaMaskAccount,
-              projects,
-              setProjects,
-              metaMaskDisconnect,
-              metaMaskWalletIdConnectHandler,
-              userId,
-              metaMaskProvider,
-              setMetaMaskProvider,
-              sdk,
-              walletLinked,
-              setWalletLinked,
-              walletLinkUrl,
-              setWalletLinkUrl,
-              userAPIKey,
-              setUserAPIKey,
-            } as IMetamaskProviderContext
-          }
-        >
-          {children}
+    <MetamaskProviderContext.Provider
+      value={
+        {
+          metaMaskAccount,
+          setMetaMaskAccount,
+          projects,
+          setProjects,
+          metaMaskDisconnect,
+          metaMaskWalletIdConnectHandler,
+          userId,
+          metaMaskProvider,
+          setMetaMaskProvider,
+          sdk,
+          walletLinked,
+          setWalletLinked,
+          walletLinkUrl,
+          setWalletLinkUrl,
+          userAPIKey,
+          setUserAPIKey,
+        } as IMetamaskProviderContext
+      }
+    >
+      {children}
 
-          <AuthModal
-            open={openAuthModal}
-            setOpen={setOpenAuthModal}
-            setUser={setUserId}
-            setStep={setStep}
-            step={step}
-          />
-        </MetamaskProviderContext.Provider>
-      )}
-    </BrowserOnly>
+      <AuthModal
+        open={openAuthModal}
+        setOpen={setOpenAuthModal}
+        setUser={setUserId}
+        setStep={setStep}
+        step={step}
+      />
+    </MetamaskProviderContext.Provider>
   );
 };
 
