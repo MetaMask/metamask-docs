@@ -57,7 +57,7 @@ function sortObjectKeysByArray(
   return result;
 }
 
-function removeEmptyArrays(obj, params) {
+function removeEmptyArrays(obj: any, params: any[]) {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
     const currentParam = params.find(item => item.name === key)
