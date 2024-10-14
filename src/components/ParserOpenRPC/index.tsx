@@ -24,6 +24,7 @@ import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
+import useIsBrowser from '@docusaurus/useIsBrowser';
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -47,6 +48,10 @@ export default function ParserOpenRPC({
   method,
   extraContent,
 }: ParserProps) {
+  const isBrowser = useIsBrowser();
+  if (!isBrowser) {
+    return null;
+  }
   if (!method || !network) return null;
   const [isModalOpen, setModalOpen] = useState(false);
   const [reqResult, setReqResult] = useState(undefined);
