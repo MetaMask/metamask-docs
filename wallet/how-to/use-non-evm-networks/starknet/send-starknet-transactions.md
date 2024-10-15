@@ -59,7 +59,7 @@ Send a transaction using the [`starknet.account.execute()`](https://starknetjs.c
         params: {
           snapId: "npm:@consensys/starknet-snap",
           request: {
-            method: "starkNet_sendTransaction",
+            method: "starkNet_executeTxn",
             params: {
                 address,              // The address of the account.
                 chainId,              // The chain ID of the request.

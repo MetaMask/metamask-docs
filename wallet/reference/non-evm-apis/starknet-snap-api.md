@@ -11,14 +11,6 @@ import TabItem from "@theme/TabItem";
 When connected to the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md), dapps
 can use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
 
-Currently, the [`get-starknet`](https://github.com/starknet-io/get-starknet) library only supports the
-following Starknet Snap API methods:
-
-- [`starkNet_extractPublicKey`](#starknet_extractpublickey)
-- [`starkNet_signMessage`](#starknet_signmessage)
-- [`starkNet_upgradeAccContract`](#starknet_upgradeacccontract)
-- [`starkNet_verifySignedMessage`](#starkNet_verifySignedMessage)
-
 The examples on this page use the
 [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method,
 which supports all Starknet Snap API methods.
@@ -638,7 +630,7 @@ await getEip6963Provider.request({
   params: {
     snapId: "npm:@consensys/starknet-snap",
     request: {
-      method: "starkNet_sendTransaction",
+      method: "starkNet_executeTxn",
       params: {
         contractAddress: "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
         contractFuncName: "transfer",

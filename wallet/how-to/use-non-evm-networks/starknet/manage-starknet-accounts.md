@@ -242,7 +242,7 @@ const invokeStarknetContract = async () => {
     const entrypoint = "function_name";  // The function you want to call.
     const calldata = [/* your function arguments */];  // Replace with calldata
 
-    const result = await starknet.invoke({
+    const result = await starknet.account.execute({
       contractAddress: contractAddress,
       entrypoint: entrypoint,
       calldata: calldata
@@ -271,7 +271,7 @@ const invokeStarknetContract = async () => {
         params: {
           snapId: "npm:@starknet-snap/snap",
           request: {
-            method: "starkNet_sendTransaction",
+            method: "starkNet_executeTxn",
             params: {
               contractAddress: contractAddress,
               contractFuncName: entrypoint

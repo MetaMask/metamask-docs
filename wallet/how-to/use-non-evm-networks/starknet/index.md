@@ -62,20 +62,6 @@ other Starknet-related actions.
 
 The following table lists the core functionalities and API methods that each connection option supports:
 
-:::note
-
-The [`get-starknet`](https://github.com/starknet-io/get-starknet) library also supports the
-following Starknet Snap API methods, in addition to its native methods:
-
-- [`starkNet_extractPublicKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_extractpublickey)
-- [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signmessage)
-- [`starkNet_upgradeAccContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_upgradeacccontract)
-- [`starkNet_verifyMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_verifymessage)
-
-These methods are marked with an asterisk (*) in the table.
-
-:::
-
 | Functionality                   | `get-starknet`                                                                                                                                                                                      | `wallet_invokeSnap`                                                                                                           |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Deploy an account               | [`deployAccount` ↗](https://starknetjs.com/docs/API/classes/Account/#deployaccount)                                                                                                                 | [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount)                       |
