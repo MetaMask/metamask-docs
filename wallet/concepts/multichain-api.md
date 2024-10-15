@@ -22,7 +22,7 @@ Key benefits include:
 
 - **Scaling usage of non-EVM networks** - The Multichain API integrates with
   [interoperability Snaps](https://snaps.metamask.io/explore/), providing a standardized interface
-  to encouraging broader adoption of non-EVM networks.
+  to encourage broader adoption of non-EVM networks.
 
 - **Simplified integrations** - The Multichain API reduces the complexity associated with navigating
   different wallet APIs and SDKs, making it easier for dapps to integrate with wallets, discover
