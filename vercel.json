@@ -71,6 +71,10 @@
       "destination": "/wallet/connect/"
     },
     {
+      "source": "/wallet/how-to/connect/",
+      "destination": "/wallet/connect/"
+    },
+    {
       "source": "/wallet/how-to/connect/set-up-sdk/:path*/",
       "destination": "/wallet/connect/metamask-sdk/:path*/"
     },
