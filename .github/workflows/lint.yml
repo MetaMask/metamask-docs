@@ -3,16 +3,21 @@ name: Check for lint, spelling and link errors
 
 on:
   workflow_call:
-  secrets:
-    SEGMENT_ANALYTICS_KEY:
-      required: true
-    LD_CLIENT_ID:
-      required: true
+    secrets:
+      SEGMENT_ANALYTICS_KEY:
+        required: true
+      LD_CLIENT_ID:
+        required: true
+      SENTRY_KEY:
+        required: true
+      GF_SURVEY_KEY:
+        required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
-
+  SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
+  GF_SURVEY_KEY: ${{ secrets.GF_SURVEY_KEY }}
 
 jobs:
   lint:
@@ -24,7 +29,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint
-        uses: ConsenSys/docs-gha/lint@main
+        uses: ConsenSys/docs-gha/lint@cc8b9d9065f5f20b105954f8e806f55c1e235ecd
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

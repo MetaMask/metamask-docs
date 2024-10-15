@@ -1,0 +1,115 @@
+:root[data-theme="dark"] {
+  --button-primary-background-color: #1098fc;
+  --button-secondary-background-color: transparent;
+  --button-background-color: #1098fc;
+  --button-color: #141618;
+  --button-hover-background-color: #036ab5;
+  --button-hover-shadow: 0px 2px 8px 0px rgba(16, 152, 252, 0.4);
+  --button-active-background-color: #3baafd;
+  --button-danger: #e88f97
+}
+
+:root[data-theme="light"] {
+  --button-primary-background-color: #0376c9;
+  --button-secondary-background-color: transparent;
+  --button-background-color: #0376c9;
+  --button-color: #ffffff;
+  --button-hover-background-color: #036ab5;
+  --button-hover-shadow: 0px 2px 8px 0px rgba(3, 118, 201, 0.2);
+  --button-active-background-color: #025ea1;
+  --button-danger: #D73847
+}
+
+:root {
+  @keyframes spinner-infinite {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+a.button {
+  display: inline-flex;
+}
+
+.button {
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+  border: none;
+  padding: 0 16px;
+  height: 48px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 145px;
+  transition-property: "box-shadow", "background-color";
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+
+  &.primary {
+    background-color: var(--button-primary-background-color);
+    --button-color: #141618;
+    --button-primary-background-color: #1098fc;
+    --button-hover-background-color: #26a2fc;
+  }
+
+  &.secondary {
+    border: 1px solid rgba(3, 118, 201, 1);
+    --button-color: rgba(3, 118, 201, 1);
+    background-color: var(--button-secondary-background-color);
+    &:hover {
+      --button-color: #141618
+    }
+  }
+
+  &:hover {
+    background-color: var(--button-hover-background-color);
+    box-shadow: var(--button-hover-shadow);
+    text-decoration: none;
+    color: var(--button-color);
+  }
+
+  &:active {
+    background-color: var(--button-active-background-color);
+  }
+
+  &.thin {
+    height: 40px;
+  }
+
+  &.danger {
+    color: var(--button-danger);
+    background-color: transparent;
+    border: 1px solid var(--button-danger);
+
+    &:hover {
+      background-color: var(--button-danger);
+      color: var(--button-color);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.nowrap {
+    white-space: nowrap;
+  }
+
+  &.textLight {
+    color: #ffffff;
+  }
+
+  .isLoading {
+    animation: spinner-infinite 1.2s linear infinite;
+  }
+}

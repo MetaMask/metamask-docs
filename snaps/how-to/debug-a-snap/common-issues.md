@@ -57,8 +57,8 @@ plugins for several other build systems:
 - [Rollup](https://www.npmjs.com/package/@metamask/rollup-plugin-snaps)
 - [Browserify](https://www.npmjs.com/package/@metamask/snaps-browserify-plugin)
 
-For examples on how to set up these build systems yourself, please see the
-[examples](https://github.com/MetaMask/snaps-monorepo/tree/main/packages/examples/examples).
+For examples on how to set up these build systems yourself, see the
+[examples](https://github.com/MetaMask/snaps/tree/main/packages/examples).
 
 We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest)
 after creating your bundle to make sure your manifest `shasum` value is correct.

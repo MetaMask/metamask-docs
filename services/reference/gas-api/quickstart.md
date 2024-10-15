@@ -57,7 +57,7 @@ to prevent accidentally committing the file.
 
 ```bash title=".env"
 INFURA_API_KEY=<YOUR-API-KEY>
-INFURA_API_KEY_SECRET=<API-KEY-SECRET>
+INFURA_API_KEY_SECRET=<YOUR-API-KEY-SECRET>
 ```
 
 Replace the Infura project credential placeholders with your own.

@@ -28,7 +28,7 @@ export const SelectWidget = ({
           <span
             className={clsx(
               styles.tableColumnType,
-              styles.tableColumnTypeDropdown
+              styles.tableColumnTypeDropdown,
             )}
             onClick={() => {
               setIsOpened(!isOpened);
@@ -41,21 +41,21 @@ export const SelectWidget = ({
                   styles.tableColumnIcon,
                   styles.chevronIcon,
                   styles.dropdownChevronIcon,
-                  !isOpened && styles.chevronIconDown
+                  !isOpened && styles.chevronIconDown,
                 )}
               />
               <span
                 className={clsx(
                   styles.chevronIcon,
                   styles.dropdownChevronIcon,
-                  !isOpened && styles.chevronIconDown
+                  !isOpened && styles.chevronIconDown,
                 )}
               />
             </span>
             <ul
               className={clsx(
                 styles.dropdownList,
-                !isOpened && styles.dropdownListClosed
+                !isOpened && styles.dropdownListClosed,
               )}
             >
               {options?.enumOptions?.map(({ label, value }, index) => (

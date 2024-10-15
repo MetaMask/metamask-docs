@@ -11,33 +11,29 @@
     cancel-in-progress: true
   
   jobs:
-    linkCheck:
-      name: Run link check
+    linkCheckMdx:
+      name: Run link check on .mdx files
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          file-extensions: [".md", ".mdx"]
-          check-modified-files-only: [no]
       permissions:
         contents: read
       steps:
-        - name: LinkCheck
+        - uses: actions/checkout@v4
+        - name: LinkCheck mdx files
           uses: ConsenSys/docs-gha/linkcheck@main
           with:
-              FILE_EXTENSION: ${{ matrix.file-extensions }}
-              MODIFIED_FILES_ONLY: ${{ matrix.check-modified-files-only }}
-
-    slackNotification:
-      needs: linkCheck
-      if: ${{ failure() }}
+              FILE_EXTENSION: mdx
+              MODIFIED_FILES_ONLY: no
+    linkCheckMd:
+      needs: linkCheckMdx
+      name: Run link check on .md files
+      if: always()
       runs-on: ubuntu-latest
+      permissions:
+        contents: read
       steps:
-        - name: Slack Notification
-          uses: rtCamp/action-slack-notify@v2
-          env:
-            SLACK_CHANNEL: doc-ci-alerts
-            SLACK_COLOR: danger
-            SLACK_USERNAME: ci
-            SLACK_TITLE: MetaMask docs nightly build - Failure
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            MSG_MINIMAL: true
+        - uses: actions/checkout@v4
+        - name: LinkCheck md files
+          uses: ConsenSys/docs-gha/linkcheck@main
+          with:
+              FILE_EXTENSION: md
+              MODIFIED_FILES_ONLY: no

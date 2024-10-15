@@ -30,32 +30,28 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [Infura dashb
 
 ## Base
 
-:::caution Limited access
-Base is currently only available to a limited number of customers. If you would like access, please submit a
-request to `support@infura.io` and we will assess if your request can be accommodated at this time.
-:::
-
-| Network           | Description         | URL                                                |
-|-------------------|---------------------|----------------------------------------------------|
-| Mainnet           | JSON-RPC over HTTPS | `https://base-mainnet.infura.io/v3/<YOUR-API-KEY>` |
-| Testnet (Sepolia) | JSON-RPC over HTTPS | `https://base-sepolia.infura.io/v3/<YOUR-API-KEY>` |
+| Network           | Transport type          | URL                                                 |
+|-------------------|-------------------------|-----------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://base-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet           | JSON-RPC over WebSocket | `wss://base-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://base-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://base-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
 ## Blast
 
-| Network           | Description             | URL                                                  |
-|-------------------|-------------------------|------------------------------------------------------|
+| Network           | Description         | URL                                                |
+|-------------------|-------------------------|----------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://blast-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://blast-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://blast-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://blast-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
 ## Binance Smart Chain
 
-| Network   | Transport type          | URL                                                |
-|-----------|-------------------------|----------------------------------------------------|
-| Mainnet   | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
-| Mainnet   | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
-| Testnet 	 | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Network | Transport type          | URL                                                |
+|---------|-------------------------|----------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://bsc-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over WebSocket | `wss://bsc-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet | JSON-RPC over HTTPS     | `https://bsc-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## Celo
 
@@ -97,35 +93,25 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 
 ## Linea
 
-:::caution deprecation notice
-
-Linea Goerli is being deprecated. We discourage new development with this testnet and recommend using
-Sepolia instead.
-
-:::
-
-| Network           | Description             | URL                                                  |
-|-------------------|-------------------------|------------------------------------------------------|
+| Network           | Description             | URL                                             |
+|-------------------|-------------------------|-------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://linea-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
-| Testnet (Goerli)  | JSON-RPC over HTTPS     | `https://linea-goerli.infura.io/v3/<YOUR-API-KEY>`   |
-| Testnet (Goerli)  | JSON-RPC over WebSocket | `wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
 ## Mantle
 
-| Network           | Description             | URL                                                   |
-|-------------------|-------------------------|-------------------------------------------------------|
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://mantle-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
-### opBNB
+## opBNB
 
-| Network           | Transport type          | URL                                                  |
-|-------------------|-------------------------|------------------------------------------------------|
+| Network           | Transport type          | URL                                             |
+|-------------------|-------------------------|-------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://opbnb-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet           | JSON-RPC over HTTPS     | `https://opbnb-testnet.infura.io/v3/<YOUR-API-KEY>`  |
@@ -219,7 +205,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 1        |
-| Goerli  | 5        |
+| Holeksy | 17000    |
 | Sepolia | 11155111 |
 
 #### Fantom

@@ -32,7 +32,7 @@ Depending on the specified tracer type, returns a [`callTracer`](../debug/index.
   <TabItem value="cURL" label="cURL" default>
 
 ```bash
-curl https://linea-goerli.infura.io/v3/<YOUR-API-KEY> \
+curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}], "id": 1}'
@@ -42,7 +42,7 @@ curl https://linea-goerli.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS">
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash","params": ["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceBlockByHash","params": ["0xcc4e47e5f5e82c12ccd511e97f6994b4c4f95808778323ed5cf0a56640b0a815", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

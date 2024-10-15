@@ -8,7 +8,7 @@
   }
 }
 
-@media (min-width: 997px) {
+@media (width >= 997px) {
   .lastUpdated {
     text-align: right;
   }

@@ -7,6 +7,9 @@
 # Docusaurus configuration
 docusaurus.config.js @MetaMask/activation @MetaMask/tech-writers
 
+# GitHub workflows and templates
+/.github/ @MetaMask/activation @MetaMask/tech-writers
+
 # Vercel configuration
 vercel.json @MetaMask/activation @MetaMask/tech-writers
 
@@ -17,11 +20,12 @@ vercel.json @MetaMask/activation @MetaMask/tech-writers
 *.md @MetaMask/tech-writers
 *.mdx @MetaMask/tech-writers
 
+# Developer tools documentation
+/developer-tools/ @MetaMask/tech-writers
+
 # Services documentation
 /services/ @MetaMask/tech-writers
 
 # Snaps documentation
 /snaps/ @MetaMask/tech-writers @MetaMask/snaps
-
-# Wallet and SDK documentation
-/wallet/ @MetaMask/tech-writers @MetaMask/wallet-api-platform-engineers @MetaMask/sdk-devs
+/wallet/ @MetaMask/tech-writers @MetaMask/dev-ex

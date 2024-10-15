@@ -12,7 +12,6 @@ Build the documentation site locally using the following steps.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) version 18+
-- [Yarn](https://yarnpkg.com/) version 3
 - [Git](https://git-scm.com/)
 
 ### Steps
@@ -35,13 +34,13 @@ Build the documentation site locally using the following steps.
 2. Install dependencies.
 
    ```bash
-   yarn install
+   npm install
    ```
 
 3. Start the development server.
 
    ```bash
-   yarn start
+   npm start
    ```
 
    Once the server starts, you can view the documentation at `http://localhost:3000`.
