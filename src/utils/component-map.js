@@ -16,9 +16,9 @@ export const linkComponentMap = {
   )),
   // eslint-disable-next-line react/display-name
   ['a']: forwardRef(({ children, href, target, className, ...props }, ref) => (
-    <a href={href} target={target} className={className} ref={ref} {...props}>
+    <Link href={href} target={target} className={className} ref={ref} {...props}>
       {children}
-    </a>
+    </Link>
   )),
   // eslint-disable-next-line react/display-name
   ['div']: forwardRef(({ children, onClick, className, ...props }, ref) => (
