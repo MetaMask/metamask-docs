@@ -1,11 +1,13 @@
 :root {
   --param-item-bg: #292a36;
   --modal-header-bg: #24272a;
+  --param-item-border-color: rgb(132 140 150 / 100%);
 }
 
 :root[data-theme="light"] {
   --param-item-bg: #F2F4F6;
   --modal-header-bg: #fff;
+  --param-item-border-color: #BBC0C5;
 }
 
 .modalContainer {
@@ -17,7 +19,7 @@
   left: 300px;
   max-width: 972px;
   width: 100%;
-  min-height: 512px;
+  height: 512px;
   opacity: 0;
   transform: translate(0, 100%);
   transition-property: "transform", "opacity";
@@ -37,8 +39,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 56px;
+  height: 56px;
   background-color: var(--modal-header-bg);
+  border-bottom: 1px solid var(--param-item-border-color);
 }
 
 .modalTitle {
@@ -92,7 +95,7 @@
 }
 
 .modalContent {
-  height: 394px;
+  height: 100%;
 }
 
 .modalContentScrolled {
