@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useMemo, useState, useEffect } from 'react'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { DASHBOARD_URL } from "../../lib/constants";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { DASHBOARD_URL } from '../../lib/constants'
 import { useColorMode } from '@docusaurus/theme-common'
 import CodeBlock from '@theme/CodeBlock'
 import Button from '@site/src/components/elements/buttons/button'
@@ -25,7 +25,7 @@ const TerminalViewBox = ({
     setTheme(colorMode)
   }, [colorMode])
 
-  const { siteConfig } = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext()
   const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
 
   const exampleRequest = useMemo(() => {
@@ -72,47 +72,47 @@ const TerminalViewBox = ({
                 }
               />
             ) : (
-                <p className="type-paragraph-m">
-                    <Button
-                        as="link"
-                        target="_blank"
-                        href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login`}
-                        rel="noreferrer"
-                        label={'Sign in'}
-                        style={
-                            theme === 'dark'
-                                ? {
-                                    '--button-color-hover': 'var(--general-white)',
-                                    '--button-text-color-hover': 'var(--general-black)',
-                                }
-                                : {
-                                    '--button-color-hover': 'var(--general-black)',
-                                    '--button-text-color-hover': 'var(--general-white)',
-                                }
+              <p className="type-paragraph-m">
+                <Button
+                  as="link"
+                  target="_blank"
+                  href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login`}
+                  rel="noreferrer"
+                  label={'Sign in'}
+                  style={
+                    theme === 'dark'
+                      ? {
+                          '--button-color-hover': 'var(--general-white)',
+                          '--button-text-color-hover': 'var(--general-black)',
                         }
-                    />{' '}
-                    or{' '}
-                    <Button
-                        as="link"
-                        target="_blank"
-                        rel="noreferrer">
-                        href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/register`}
-                        label={'Create an account'}
-                        style={
-                        theme === 'dark'
-                            ? {
-                                '--button-color-hover': 'var(--general-white)',
-                                '--button-text-color-hover': 'var(--general-black)',
-                            }
-                            : {
-                                '--button-color-hover': 'var(--general-black)',
-                                '--button-text-color-hover': 'var(--general-white)',
-                            }
-                    }
-                        />{' '}
-                        and reload the page to edit real requests
-                </p>
-                )}
+                      : {
+                          '--button-color-hover': 'var(--general-black)',
+                          '--button-text-color-hover': 'var(--general-white)',
+                        }
+                  }
+                />{' '}
+                or{' '}
+                <Button
+                  as="link"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/register`}
+                  label={'Create an account'}
+                  style={
+                    theme === 'dark'
+                      ? {
+                          '--button-color-hover': 'var(--general-white)',
+                          '--button-text-color-hover': 'var(--general-black)',
+                        }
+                      : {
+                          '--button-color-hover': 'var(--general-black)',
+                          '--button-text-color-hover': 'var(--general-white)',
+                        }
+                  }
+                />{' '}
+                and reload the page to edit real requests
+              </p>
+            )}
           </div>
         </div>
       )}

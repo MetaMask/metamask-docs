@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.css";
-import global from "../ParserOpenRPC/global.module.css";
+import global from "../ParserOpenRPC/global.module.scss";
 import Icon from "../Icon/Icon";
 import {
   authenticateAndAuthorize,
