@@ -140,7 +140,7 @@ export const ArrayFieldTemplate = ({
               const baseInputTemplateProps = {
                 ...el.children.props,
                 isArray: true,
-                value: formData,
+                value: formData[i] || null,
               };
               const { index, hasRemove, onDropIndexClick, schema } = el;
               const isNumber =

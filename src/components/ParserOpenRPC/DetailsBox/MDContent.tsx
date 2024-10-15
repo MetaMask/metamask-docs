@@ -47,7 +47,11 @@ const parseLists = (text: string) => {
 const parseMarkdown = (content: string) => {
   return parseLists(
     content
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+        const isExternal = /^(https?:\/\/)/.test(url);
+        const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+        return `<a href="${url}"${targetAttr}>${text}</a>`;
+      })
       .replace(/`(.*?)`/g, '<code>$1</code>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
