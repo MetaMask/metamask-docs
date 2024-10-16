@@ -50,7 +50,7 @@ Deploys an account contract.
 
 #### Returns
 
-The response from Starknet's `gateway/add_transaction` API endpoint.
+The address of the account and the transaction hash if the account has been created.
 
 #### Example
 
@@ -727,7 +727,7 @@ Upgrades an account contract.
 
 #### Returns
 
-The response from Starknet's `gateway/call_contract` API endpoint.
+The hash of the transaction.
 
 #### Example
 
@@ -776,7 +776,7 @@ Verifies a signed typed data message.
 #### Parameters
 
 - `typedDataMessage`: `string` - JSON representation of the original typed data message to be verified.
-- `signerAddress`: `string` - Address of the signer.
+- `address`: `string` - Address of the signer.
 - `signature`: `string` - Signature of the typed data message.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
