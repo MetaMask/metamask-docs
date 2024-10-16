@@ -21,7 +21,7 @@ You can send Starknet transactions using the
 Send a transaction using the
 [`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute)
 function (with `get-starknet`) or the
-[`starknet_ExecuteTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)
+[`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)
 method (with `wallet_invokeSnap`):
 
 <Tabs>
