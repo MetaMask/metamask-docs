@@ -26,6 +26,8 @@ This tutorial uses [`get-starknet`](https://github.com/starknet-io/get-starknet)
 
 ## 1. Set up the project
 
+### 1.1 Create a new project
+
 Use [Create React App](https://create-react-app.dev/) to set up a new React project with TypeScript.
 Create a new project named `get-starknet-tutorial`:
 
@@ -37,6 +39,14 @@ Change into the project directory:
  
 ```bash
 cd get-starknet-tutorial
+```
+
+### 1.2 Configure Yarn
+
+Use the following command to configure Yarn to use the `node-module` linker instead of its default linking strategy:
+
+```bash
+yarn config set nodeLinker node-modules
 ```
 
 ## 2. Add `get-starknet` and `starknet.js`
@@ -290,6 +300,12 @@ Call the `balanceOf` method to fetch the balance of the connected account:
 const balance = await erc20.balanceOf(walletAddress);
 const formattedBalance = balance / Math.pow(10, 18);
 ```
+
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-token-update.png").default} alt="Starknet wallet modal" width="360" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+
 
 ### 4.3. Transfer tokens
 
