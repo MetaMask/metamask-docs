@@ -228,7 +228,7 @@ method to directly interact with the Starknet Snap.
 
 :::note
 
-This option can include the use of the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet), which demonstrates how to use `wallet_invokeSnap` through its [UI example](https://github.com/Consensys/starknet-snap?tab=readme-ov-file).
+The [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) serves as a reference implementation and example dapp. It demonstrates how to manually invoke the snap using `wallet_invokeSnap`, showcasing potential use cases and UI integration. For more details, see the [source code of the companion dapp's UI](https://github.com/Consensys/starknet-snap/tree/main/packages/wallet-ui).
 
 :::
 
