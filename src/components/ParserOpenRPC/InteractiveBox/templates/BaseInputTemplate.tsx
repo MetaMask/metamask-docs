@@ -35,8 +35,9 @@ export const BaseInputTemplate = ({
     [],
   );
   const onInputChange = (e) => {
-    setInputValue(e?.target?.value);
-    debouncedOnChange(e);
+    const value = isNumber ? Number((+e?.target?.value || 0)) : e?.target?.value;
+    setInputValue(value);
+    isNumber ? debouncedOnChange(value, true) : debouncedOnChange(e);
   };
   const onInputNumberChange = (value) => {
     setInputValue(value);
@@ -44,9 +45,7 @@ export const BaseInputTemplate = ({
   };
 
   useEffect(() => {
-    if (!isArray) {
-      setInputValue(value);
-    }
+    setInputValue(value);
   }, [value, isFormReseted]);
 
   return (
