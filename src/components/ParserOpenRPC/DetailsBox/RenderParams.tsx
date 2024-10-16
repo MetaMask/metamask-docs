@@ -152,6 +152,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
         return (
           <div key={`${i}`} className={styles.borderTopLine}>
             {renderSchema(item, schemas, item.name)}
+            {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         );
       })}

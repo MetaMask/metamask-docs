@@ -74,3 +74,23 @@
   border-radius: 6px;
   background-color: #ffcdd2;
 }
+
+.summaryText {
+  font-style: italic;
+  color: #6a737d;
+  font-weight: 400;
+}
+
+.paramContainer {
+  border: 1px solid #848c96;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.paramSeparator {
+  border: 0;
+  border-top: 1px solid #848c96;
+  margin: 1rem 0;
+  width: 100%;
+}
