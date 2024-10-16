@@ -203,6 +203,53 @@ await snap.request({
 <img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Card`
+
+Outputs a card, a layout component.
+
+:::info
+Unlike many `Card` components from other UI libraries, the Custom UI card does not have any shape.
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) component.
+:::
+
+#### Props
+
+- `title` - The title of the card.
+- `value` - The value of the card, displayed to the right of the title, right-aligned.
+- `description` - (Optional) The card's description, displayed below the title.
+- `extra` - (Optional) An additional string, displayed below the value.
+- `image` - (Optional) The image to show as part of the card, to the left of the title. Must be an SVG string. The `<svg>` tag must contain the `xmlns="http://www.w3.org/2000/svg"` attribute for the image to display properly.
+
+#### Example
+
+```jsx
+snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'alert',
+    content: (
+      <Box>
+        <Card
+          title="Card without background"
+          description="Card description"
+          value="Card value"
+          extra="Card extra"
+          image='<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#f00" /></svg>'
+        />
+        <Section>
+          <Card
+            title="Card with background"
+            description="This card is wrapped in a Section, giving it a background"
+            value="Card value"
+            extra="Card extra"
+          />
+        </Section>
+      </Box>
+    ),
+  },
+})
+```
+
 ### `Checkbox`
 
 Outputs a checkbox for use in [interactive UI](interactive-ui.md).
@@ -781,6 +828,46 @@ await snap.request({
 
 <p align="center">
 <img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+### `Section`
+
+Outputs a section component. The section is padded, has a default background color, and an 8px border radius.
+
+#### Props
+
+- `children` - One or more components to be displayed inside the section.
+- `direction` - (Optional) `'vertical' | 'horizontal'` - The direction in which the children are laid out. Defaults to `vertical`.
+- `alignment` - (Optional) `'start' | 'center' | 'end' | 'space-between' | 'space-around'` - The alignment of the children. This prop works like `justify-content` in the Flexbox model. Defaults to `start`.
+
+#### Example
+
+```jsx
+snap.request({
+  method: 'snap_dialog',
+  params: {
+    type: 'alert',
+    content: (
+      <Box>
+        <Section>
+          <Text>First text</Text>
+          <Text>Second text</Text>
+        </Section>
+        <Section
+          direction="horizontal"
+          alignment="space-around"
+        >
+          <Text>First text</Text>
+          <Text>Second text</Text>
+        </Section>
+      </Box>
+    ),
+  },
+});
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-section.png").default} alt="Section UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `Selector`
