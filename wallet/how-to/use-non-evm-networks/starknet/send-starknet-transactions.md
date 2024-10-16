@@ -18,7 +18,11 @@ You can send Starknet transactions using the
 
 ## Send a transaction
 
-Send a transaction using the [`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute) function:
+Send a transaction using the
+[`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute)
+function (with `get-starknet`) or the
+[`starknet_ExecuteTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)
+method (with `wallet_invokeSnap`):
 
 <Tabs>
   <TabItem value="get-starknet" default>
@@ -61,16 +65,16 @@ Send a transaction using the [`starknet.account.execute()`](https://starknetjs.c
           request: {
             method: "starkNet_executeTxn",
             params: {
-                address,              // The address of the account.
-                chainId,              // The chain ID of the request.
-                calls: {
-                    contractAddress,  // The address of the contract.
-                    entrypoint,       // The function to call in the contract.
-                    calldata          // Arguments to the contract.
-                },
-                details: {
-                    maxFee,           // This is optional. It will re-estimate in the snap if not provided.
-                }
+              address,            // The address of the account.
+              chainId,            // The chain ID of the request.
+              calls: {
+                contractAddress,  // The address of the contract.
+                entrypoint,       // The function to call in the contract.
+                calldata          // Arguments to the contract.
+              },
+              details: {
+                maxFee,           // This is optional. It will re-estimate in the snap if not provided.
+              }
             }
           }
         }
@@ -167,7 +171,7 @@ The following is a full, simplified example of connecting to a Starknet account 
       if (maxFee) {
         requestParams.details = {
             maxFee
-        };// Include maxFee only if it's provided.
+        }; // Include maxFee only if it's provided.
 
       const response = await getEip6963Provider.request({
         method: "wallet_invokeSnap",

@@ -26,16 +26,16 @@ Detect the Starknet network a user is currently connected to using the following
 
   ```javascript
   const checkCurrentNetwork = (wallet) => {
-      try {
-        if(wallet?.isConnected !== true){
-          throw("Wallet not connected");
-        } 
-        const currentNetwork = wallet?.chainId
-        console.log("Currently connected to:", currentNetwork);
-        return currentNetwork;
-      } catch (error) {
-        console.error("Error of detect current connected network:", error);
-      }
+    try {
+      if(wallet?.isConnected !== true){
+        throw("Wallet not connected");
+      } 
+      const currentNetwork = wallet?.chainId
+      console.log("Currently connected to:", currentNetwork);
+      return currentNetwork;
+    } catch (error) {
+      console.error("Error of detect current connected network:", error);
+    }
   };
   ```
   

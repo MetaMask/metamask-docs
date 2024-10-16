@@ -144,13 +144,18 @@ Gets the estimated gas fee for deploying an account contract.
 - `chainId`: `string` - (Optional) ID of the target Starknet network.
   The default is the Starknet Sepolia testnet.
 
-### Returns
-An object with the following properties (where values are originally `bigint` but converted to base-10 `string` format using `.toString(10)`):
-- `suggestedMaxFee`: `string` - The maximum suggested fee for deploying the contract in wei. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`, which ensures the number is expressed in decimal format.
-- `overallFee`: `string` - The overall fee for the deployment transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`, ensuring it is in decimal format.
-- `gasConsumed`: `string` - The amount of gas consumed during the transaction. If not available, the default value is `'0'`. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`.
-- `gasPrice`: `string` - The gas price used for the transaction in wei. If not available, the default value is `'0'`. This value is originally a `bigint` and is converted to a base-10 `string` using `.toString(10)`.
-- `unit`: `string` - The unit of the fees and gas values, which is `'wei'`.
+#### Returns
+
+An object with the following properties (where values are originally `bigint` but converted to
+base-10 `string` format using `.toString(10)`):
+
+- `suggestedMaxFee`: `string` - The maximum suggested fee for deploying the contract, in wei.
+- `overallFee`: `string` - The overall fee for the deployment transaction, in wei.
+- `gasConsumed`: `string` - The amount of gas consumed during the transaction.
+  The default is `0`.
+- `gasPrice`: `string` - The gas price used for the transaction, in wei.
+  The default is `0`.
+- `unit`: `string` - The unit of the fees and gas values, which is `wei`.
 
 #### Example
 
@@ -193,19 +198,26 @@ await getEip6963Provider.request({
 
 Gets the estimated gas fee for calling a method on any contract.
 
-### Parameters
+#### Parameters
 
 - `address`: `string` - The account address from which the transaction is being made.
-- `invocations`: `array` - The invocations to estimate the fee for. Each invocation represents a contract call. Reference: [Invocations](https://starknetjs.com/docs/API/namespaces/types#invocations).
-- `chainId`: `string` - The chain ID of the target Starknet network. If not provided, the default is the Starknet Goerli testnet.
-- `details`: `object` - (Optional) The universal details associated with the invocations, such as nonce and version. See [EstimateFeeDetails](https://starknetjs.com/docs/API/interfaces/types.EstimateFeeDetails) for more information. 
+- `invocations`: `array` - The [invocations](https://starknetjs.com/docs/API/namespaces/types#invocations)
+  to estimate the fee for.
+  Each invocation represents a contract call.
+- `chainId`: `string` - The chain ID of the target Starknet network.
+  If not provided, the default is the Starknet Goerli testnet.
+- `details`: `object` - (Optional) The [universal details](https://starknetjs.com/docs/API/interfaces/types.EstimateFeeDetails)
+  associated with the invocations, such as nonce and version.
 
-### Returns
+#### Returns
 
 A promise that resolves to an `EstimateFeeResponse` object, which contains the following properties:
-- `suggestedMaxFee`: `string` - The maximum suggested fee for the transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string`.
-- `overallFee`: `string` - The overall fee for the transaction in wei. This value is originally a `bigint` and is converted to a base-10 `string`.
-- `unit`: `string` - The unit of the fees, typically `'wei'`.
+
+- `suggestedMaxFee`: `string` - The maximum suggested fee for the transaction, in wei.
+  This value is originally a `bigint` and is converted to a base-10 `string`.
+- `overallFee`: `string` - The overall fee for the transaction, in wei.
+  This value is originally a `bigint` and is converted to a base-10 `string`.
+- `unit`: `string` - The unit of the fees, typically `wei`.
 - `includeDeploy`: `boolean` - Whether the transaction includes an account deployment step.
 
 #### Example
@@ -489,7 +501,8 @@ Calls a `VIEW` method on any contract.
 
 #### Returns
 
-The response from Starknet's `feeder_gateway/call_contract` API endpoint.
+The response from the [`starknet_call`](/services/reference/starknet/json-rpc-methods/starknet_call)
+API method.
 
 #### Example
 
@@ -599,11 +612,13 @@ Signs and executes a transaction.
 #### Parameters
 
 - `address`: `string` - The address of the sender.
-- `calls`: An array of call objects to be executed. Each call contains the target contract address, function name, and call data.
+- `calls`: An array of call objects to be executed.
+  Each call contains the target contract address, function name, and call data.
 - `details`: `object` - (Optional) Transaction details as received by `starknet.js`, including:
   - `nonce`: (Optional) Nonce for the transaction.
   - `blockIdentifier`: (Optional) Block identifier for the transaction.
-  - `maxFee`: (Optional) Maximum gas fee allowed for the transaction. If not specified, the fee is automatically calculated.
+  - `maxFee`: (Optional) Maximum gas fee allowed for the transaction.
+    If not specified, the fee is automatically calculated.
   - `tip`: (Optional) Additional fee to incentivize miners.
   - `paymasterData`: (Optional) Paymaster-related data for the transaction.
   - `accountDeploymentData`: (Optional) Data for account deployment.

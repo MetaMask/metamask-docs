@@ -49,7 +49,7 @@ Sign a Starknet transaction using the following:
   ```typescript
   const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata, chainId, address) => {
     try {
-           const provider = await getEip6963Provider();
+      const provider = await getEip6963Provider();
       
       if (!provider) {
         throw new Error("MetaMask not detected or Snaps not supported");
