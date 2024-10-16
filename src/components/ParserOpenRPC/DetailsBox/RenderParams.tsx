@@ -150,7 +150,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
     <>
       {inputSchema.map((item, i) => {
         return (
-          <div key={`${i}`} className={styles.borderTopLine}>
+          <div key={`${i}`}>
             {renderSchema(item, schemas, item.name)}
             {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
