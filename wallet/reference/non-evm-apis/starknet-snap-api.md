@@ -465,7 +465,7 @@ await getEip6963Provider.request({
 
 ### `starkNet_getCurrentNetwork`
 
-Retrieves the current StarkNet Snap's network.
+Retrieves the current Starknet Snap's network.
 
 #### Parameters
 
@@ -746,13 +746,13 @@ await getEip6963Provider.request({
 
 ### `starkNet_signDeclareTransaction`
 
-Signs a `DECLARE` transaction using the private key, returns the signature, and uses it to declare the contract class on StarkNet.
+Signs a [`DECLARE` transaction](https://docs.starknet.io/architecture-and-concepts/network-architecture/transactions/#declare-transaction) using the private key, returns the signature, and uses it to declare the contract class on Starknet.
 
 #### Parameters
 
 - `address`: `string` - Address of the sender.
 - `chainId`: `string` - ID of the target Starknet network. 
-- `details`: `object` - The declare transaction detail to be signed
+- `details`: `object` - The declare transaction details to be signed, including:
   - `nonce`: (Optional) Nonce for the transaction.
   - `blockIdentifier`: (Optional) Block identifier for the transaction.
   - `maxFee`: (Optional) Maximum gas fee allowed for the transaction. If not specified, the fee is automatically calculated.
@@ -789,10 +789,10 @@ await getEip6963Provider.request({
         senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         chainId: "0x534e5f5345504f4c4941",
         details: {
-            version: '0x2',
+            version: "0x2",
             chainId:  "0x534e5f5345504f4c4941",
-            senderAddress: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
-            classHash: '0x5f3614e8671257aff9ac38e929c74d65b02d460ae966cd826c9f04a7fa8e0d4'
+            senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+            classHash: "0x5f3614e8671257aff9ac38e929c74d65b02d460ae966cd826c9f04a7fa8e0d4"
         }
       },
     },
@@ -862,7 +862,7 @@ await getEip6963Provider.request({
 </TabItem>
 </Tabs>
 
-### starkNet_signTransaction
+### `starkNet_signTransaction`
 
 Signs a transaction using the private key and returns the resulting signature.
 
@@ -871,7 +871,7 @@ Signs a transaction using the private key and returns the resulting signature.
 - `address`: `string` - Address of the sender.
 - `chainId`: `string` - ID of the target Starknet network. 
 - `transactions`: `object` - An array of call objects to be executed. Each call contains the target contract address, function name, and call data.
-- `transactionsDetail`: `object` - (Optional) The transaction detail to be signed
+- `transactionsDetail`: `object` - (Optional) The transaction details to be signed, including:
   - `nonce`: (Optional) Nonce for the transaction.
   - `blockIdentifier`: (Optional) Block identifier for the transaction.
   - `maxFee`: (Optional) Maximum gas fee allowed for the transaction. If not specified, the fee is automatically calculated.
@@ -884,7 +884,7 @@ Signs a transaction using the private key and returns the resulting signature.
   - `resourceBounds`: (Optional) The boundaries on resource consumption during the transaction.
   - `skipValidate`: `boolean` - (Optional) Skip validation of the transaction.
 
-#### Results
+#### Returns
 
 The signature of the transaction.
 
@@ -939,9 +939,9 @@ Switch the current Starknet Snap's network to a different Starknet network.
 
 - `chainId`: `string` - ID of the target Starknet network. 
 
-#### Results
+#### Returns
 
-- A boolean flag to indicate if the network switch was successful.
+`true` if the network switch was successful, `false` otherwise.
 
 #### Example
 
@@ -988,7 +988,7 @@ Verifies a signed typed data message.
 
 #### Returns
 
-`true` if the signature is successfully verified; otherwise, it returns `false`.
+`true` if the signature verification was successful, `false` otherwise.
 
 #### Example
 
