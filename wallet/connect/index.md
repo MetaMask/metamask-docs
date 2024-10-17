@@ -36,17 +36,25 @@ Key features include:
 - **EIP-6963 detection** – Automatically detect MetaMask without conflicting with other installed wallets.
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
+:::note
+The SDK only connects to MetaMask.
+We recommend using [third-party libraries](#third-party-libraries) with SDK support if you need to
+connect to multiple wallets.
+:::
+
 Get started using [MetaMask SDK](metamask-sdk/index.md).
 
 ## Third-party libraries
 
 MetaMask SDK integrates seamlessly with libraries like Wagmi and Web3-Onboard, simplifying wallet
 connections and supporting multiple wallets.
-These libraries streamline connection logic and offer additional features for managing wallets.
+These libraries include all [key features of the SDK](#metamask-sdk), streamline connection logic,
+and offer additional features for managing multiple wallets.
+We recommend using third-party libraries if you need to connect to multiple wallets.
 
-:::note Trade-offs when using third-party libraries:
-- Reduced control over specific MetaMask features.
-- Potential inconsistencies across different wallets due to multi-wallet support.
+:::note
+Due to their multi-wallet support, third-party libraries might reduce control over specific MetaMask
+features, and introduce potential inconsistencies across different wallets.
 :::
 
 Get started with [Wagmi](3rd-party-libraries/wagmi.md) or

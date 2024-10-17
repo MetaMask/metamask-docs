@@ -20,7 +20,13 @@ Key features include:
 - **EIP-6963 detection** – Automatically detect MetaMask without conflicting with other installed wallets.
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
-Get started with the SDK on the following platforms:
+The SDK is integrated with the following third-party libraries.
+We recommend using these libraries if you need to connect to multiple wallets:
+
+- [Wagmi](../3rd-party-libraries/wagmi.md)
+- [Web3-Onboard](../3rd-party-libraries/web3-onboard.md)
+
+You can also get started with the SDK directly on the following platforms:
 
 <div class="cards">
   <div class="card">
@@ -58,16 +64,5 @@ Get started with the SDK on the following platforms:
         <li><a href="/wallet/connect/metamask-sdk/gaming/unity">Unity</a></li>
       </ul>
     </div>
-  </div>
-</div>
-<div class="card margin-bottom--lg">
-  <div class="card__header">
-    <h3>↔️ Third-party libraries</h3>
-  </div>
-  <div class="card__body">
-    <ul>
-      <li><a href="/wallet/connect/3rd-party-libraries/wagmi">Wagmi</a></li>
-      <li><a href="/wallet/connect/3rd-party-libraries/web3-onboard">Web3-Onboard</a></li>
-    </ul>
   </div>
 </div>
