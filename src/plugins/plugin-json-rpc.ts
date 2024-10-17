@@ -1,3 +1,6 @@
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
+import * as path from "path";
+
 export interface ResponseItem {
   name: string;
   data: any | null;
@@ -52,6 +55,25 @@ export default function useNetworksMethodPlugin() {
         .catch(() => {
           setGlobalData({ netData: [] });
         });
+    },
+    configureWebpack() {
+      return {
+        plugins: [
+          new NodePolyfillPlugin()
+        ],
+        resolve: {
+          alias: {
+            rpc: path.resolve(__dirname, "node_modules"),
+            fs: false,
+            module: false,
+            "child_process": false,
+            "worker_threads": false,
+            "uglify-js": false,
+            "@swc/core": false,
+            "esbuild": false,
+          },
+        },
+      }
     },
   };
 }
