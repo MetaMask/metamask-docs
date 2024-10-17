@@ -16,7 +16,6 @@
 
 .tableHeadingRow {
   display: flex;
-  border-top: 1px solid var(--param-item-border-color);
 }
 
 .tableHeadingColumn {
@@ -26,13 +25,12 @@
   font-weight: 500;
   background-color: var(--param-item-bg);
   color: var(--param-item-color);
+  border-bottom: 1px solid var(--param-item-border-color);
 }
 
 .tableRow {
   display: flex;
-  border-top: 1px solid var(--param-item-border-color);
   border-bottom: 1px solid var(--param-item-border-color);
-  margin-top: -1px;
 }
 
 .tableColumn {
@@ -255,8 +253,8 @@
   top: 0;
   width: 100%;
   height: 332px;
-  background-color: #292a36;
-  overflow-y: scroll;
+  background-color: var(--param-item-bg);
+  overflow-y: auto;
   z-index: 1;
 }
 
