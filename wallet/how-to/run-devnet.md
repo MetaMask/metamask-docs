@@ -21,7 +21,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 1. [Set up a Hardhat project.](https://hardhat.org/hardhat-runner/docs/guides/project-setup)
 
 2. Create a new
-   [MetaMask seed phrase](<https://support.metamask.io/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure#:~:text=Your%20Secret%20Recovery%20Phrase%20(SRP,are%20connected%20to%20that%20phrase.)>)
+   [MetaMask seed phrase](https://support.metamask.io/privacy-and-security/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/)
    specifically for development.
 
    :::caution important
