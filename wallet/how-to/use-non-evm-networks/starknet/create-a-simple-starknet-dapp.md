@@ -305,7 +305,7 @@ const formattedBalance = balance / Math.pow(10, 18);
   <div class="column">
     <img src={require("../../../assets/starknet-token-update.png").default} alt="Starknet wallet modal" width="360" style={{border: "1px solid #DCDCDC"}} />
   </div>
-
+</div>
 
 ### 4.3. Transfer tokens
 
