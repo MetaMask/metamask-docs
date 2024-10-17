@@ -23,7 +23,7 @@ The following diagram displays how a dapp interacts with Starknet, emphasizing t
 
 ```mermaid
 graph
-    dapp[Dapp] -- wallet_invokeSnapp --> snap[Starknet Snap]
+    dapp[Dapp] -- wallet_invokeSnap --> snap[Starknet Snap]
     dapp[Dapp] -- get-starknet --> swo[Starknet Window Object]
     swo -- wallet_invokeSnap --> snap
     swo --> acc[Account object]
@@ -92,7 +92,7 @@ sequenceDiagram
 The `get-starknet` library offers several features that improve how dapps interact with the Starknet
 network through MetaMask:
 
-- The `AccountInterface` uses a specified provider to access data from the Starknet network.
+- The `Account` object uses a specified provider to access data from the Starknet network.
 - For transactions, `get-starknet` prepares the data and sends it to MetaMask for signing through
   the Starknet Snap.
 - `get-starknet` enables the dapp to create contract instances connected to the `AccountInterface`,

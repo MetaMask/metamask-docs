@@ -270,13 +270,13 @@ You are directed to the default dapp display.
 - ***Disconnect**: Disconnects the wallet from Starknet.
 - **Disconnect and reset**: Disconnects the wallet and resets the app’s wallet connection settings.
 
-### 3.7 Connect to the MetaMask wallet
+### 3.7 Connect your dapp to a wallet
 
-Select your preferred connection option and follow the on-screen prompts to connect MetaMask to the Starknet network.
+Select your preferred connection option and follow the on-screen prompts to connect your MetaMask wallet to the Starknet network.
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-select.png").default} alt="Starknet dapp start" width="400" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../assets/starknet-tutorial-select.png").default} alt="Starknet dapp select wallet" width="400" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
@@ -284,16 +284,27 @@ After you accept the terms in the prompts, your wallet will be successfully conn
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp start" width="400" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp connected" width="400" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
 ## 4. Display the balance of and transfer an ERC-20 token
 
 Now that you have set up the basic interaction, you can display the balance of a specific ERC-20
-token,such as STRK, and perform a transfer using the `AccountInterface` instance.
+token, such as STRK, and perform a transfer using the `AccountInterface` instance.
 
-### 5.1. Set up the contract
+:::note 
+
+To complete the transfer, you'll need ETH for gas and at least 1 STRK token.
+
+To complete this tutorial, you'll use the Starknet testnet. By default, the Snap operates on the Mainnet. To switch to the testnet:
+
+1. Obtain testnet ETH and STRK tokens from the [Starknet faucet]( https://starknet-faucet.vercel.app/).
+1. Use the [StarkNet Snap Companion dapp](https://snaps.consensys.io/starknet) to switch to the testnet.
+
+:::
+
+### 4.1. Set up the contract
 
 Create a `src/components/` directory and add the following files to it:
 
@@ -326,7 +337,28 @@ The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D365
 You can find the ABI of the ERC-20 contract on the **Code** tab in [Voyager](https://voyager.online/).
 :::
 
-### 4.2. Fetch the token balance
+Ensure you call the token address in the `TokenBalanceAndTransfer` component.
+
+```typescript title="TokenBalanceAndTransfer.tsx
+{walletAccount && 
+    <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
+}
+```
+
+### 4.2. Update `App.tsx`
+
+Call the `TokenBalanceAndTransfer` component in `App.tsx`.
+Add `import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";` to `App.tsx` to import the component. 
+
+Ensure that the following code is added to `App.tsx`, where the `TokenBalanceAndTransfer` component is called with the token address:
+
+```typescript title="TokenBalanceAndTransfer.tsx
+{walletAccount && 
+    <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
+}
+```
+
+### 4.3. Fetch the token balance
 
 Call the `balanceOf` method to fetch the balance of the connected account:
 
@@ -335,13 +367,7 @@ const balance = await erc20.balanceOf(walletAddress);
 const formattedBalance = balance / Math.pow(10, 18);
 ```
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-token-update.png").default} alt="Starknet wallet modal" width="400" style={{border: "1px solid #DCDCDC"}} />
-  </div>
-</div>
-
-### 4.3. Transfer tokens
+### 4.4. Transfer tokens
 
 To transfer tokens, fill out the `transfer` method call and execute the transaction using the `AccountInterface`.
 
@@ -366,7 +392,13 @@ const { transaction_hash: transferTxHash } = await AccountInterface.execute(tran
 await AccountInterface.waitForTransaction(transferTxHash);
 ```
 
-### 4.4. Full example
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="400" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+</div>
+
+### 4.5. Full example
 
 The following a full example of displaying the balance of an ERC-20 token and performing a transfer:
 
@@ -389,13 +421,13 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
   useEffect(() => {
     if (account) {
       const erc20 = new Contract(erc20Abi, tokenAddress, account);
-      // Fetch the balance.
+      // Fetch balance
       erc20.balanceOf(account.address)
         .then((result: bigint) => {
           const decimals = 18n;
-          const formattedBalance = result / 10n ** decimals; 
+          const formattedBalance = result / 10n ** decimals; // Adjust for decimals using BigInt arithmetic
           console.log(formattedBalance);
-          setBalance(Number(formattedBalance));
+          setBalance(Number(formattedBalance)); // Convert to a number if needed for UI display
         })
         .catch(console.error);
     }
@@ -416,10 +448,10 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
         //transferCall.calldata = [ "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5", "1000000000000000000", "0" ];
         const { transaction_hash: transferTxHash } = await account.execute([transferCall]);
 
-        // Wait for the transaction to be accepted.
+        // Wait for the transaction to be accepted
         await account.waitForTransaction(transferTxHash);
 
-        // Refresh the balance.
+        // Refresh balance
         const newBalance = await erc20.balanceOf(account.address);
         setBalance(newBalance / Math.pow(10, 18)); // Adjust for decimals
       }
