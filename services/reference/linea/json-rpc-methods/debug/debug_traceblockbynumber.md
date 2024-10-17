@@ -13,7 +13,7 @@ Returns tracing results by executing all transactions in the specified block num
 - `blockParameter`: (string) [_required_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 
     :::warning
-    `safe` isn't supported, use `finalized`.
+    `safe` isn't supported. Use `finalized` instead.
     Learn more about [Linea's layer 2 finalization](https://docs.linea.build/developers/guides/finalized-block). 
     :::
     

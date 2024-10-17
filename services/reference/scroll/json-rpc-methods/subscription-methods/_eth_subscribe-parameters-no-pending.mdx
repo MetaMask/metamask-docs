@@ -1,0 +1,9 @@
+Specify one of the following subscription events:
+
+- `newHeads`: Subscribing to this returns a notification each time a new header is appended to the chain, including chain reorganizations. In a chain reorganization, the subscription emits all new headers for the new chain. Therefore the subscription can emit multiple headers at the same height.
+- `logs`: Returns logs that are included in new imported blocks and match the given filter criteria. In case of a chain reorganization, previously sent logs that are on the old chain are resent with the removed property set to `true`. Logs from transactions that ended up in the new chain are emitted. Therefore a subscription can emit logs for the same transaction multiple times. This parameter has the following fields:
+  - `address`: (_optional_) Either an address or an array of addresses. Only logs that are created from these addresses are returned.
+  - `topics`: (_optional_) Only logs that match these specified topics are returned.
+  :::tip Infura Recommendation
+  We strongly recommend specifying a filter (`address` or `topics` or both) when subscribing to the `logs` event.
+  :::

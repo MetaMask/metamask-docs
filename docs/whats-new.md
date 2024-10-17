@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## October 2024
 
+- Documented [Scroll](/services/reference/scroll) support.
+  ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
 - Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))

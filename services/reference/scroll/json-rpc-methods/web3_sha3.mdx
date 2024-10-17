@@ -1,0 +1,66 @@
+---
+title: "web3_sha3"
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+
+### `web3_sha3`
+
+Returns a [SHA3](https://en.wikipedia.org/wiki/SHA-3) hash of the specified data. The result value is a [Keccak-256](https://keccak.team/keccak.html) hash, not the standardized SHA3-256.
+
+## Parameters
+
+`data`: [Required] _string_ - data to convert to a SHA3 hash.
+
+## Returns
+
+`result`: _string_ - SHA3 result of the input data.
+
+## Example
+
+import Example from "/services/reference/_partials/_web3_clientversion-example.mdx"
+
+<Example />
+
+### Request
+
+<Tabs>
+
+<TabItem value="cURL">
+
+```bash
+curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
+```
+
+</TabItem>
+<TabItem value="WSS">
+
+```bash
+  wscat -c wss://scroll-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method":web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
+```
+  </TabItem>
+
+</Tabs>
+
+
+### Response
+
+<Tabs>
+<TabItem value="JSON">
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x5e39a0a66544c0668bde22d61c47a8710000ece931f13b84d3b2feb44ec96d3f"
+}
+```
+
+</TabItem>
+
+</Tabs>

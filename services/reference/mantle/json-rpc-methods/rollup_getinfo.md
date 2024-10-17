@@ -46,7 +46,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS" default>
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "rollup_getInfo", "params": [], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "rollup_getInfo", "params": [], "id": 1}'
 ```
 
   </TabItem>

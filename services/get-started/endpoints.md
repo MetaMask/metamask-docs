@@ -141,6 +141,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<YOUR-API-KEY>`     |
 | Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<YOUR-API-KEY>`    |
 
+## Scroll
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Sepolia | JSON-RPC over HTTPS     | `https://scroll-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## Starknet
 
 | Network           | Description         | URL                                               |

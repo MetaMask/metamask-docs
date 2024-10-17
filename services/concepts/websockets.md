@@ -59,6 +59,7 @@ Infura support subscriptions over WebSockets for the following networks:
 - [opBNB](../reference/opbnb/index.md)
 - [Optimism](../reference/optimism/index.md)
 - [Polygon](../reference/polygon-pos/index.md)
+- [Scroll](../reference/scroll/index.md)
 - [ZKsync Era](../reference/zksync/index.md)
 
 :::info

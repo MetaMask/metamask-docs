@@ -1,0 +1,12 @@
+A filter object containing the following:
+
+- `address`: [_optional_] Contract address (20 bytes) or a list of addresses from which logs should originate.
+- `fromBlock`: _[optional, default is `latest`]_ A hexadecimal block number, or one of the string tags `latest`, `earliest`, `pending`, or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+	:::warning
+	`safe` isn't supported. Use `finalized` instead. 
+	:::
+- `toBlock`: _[optional, default is `latest`]_ A hexadecimal block number, or one of the string tags `latest`, `earliest`, `pending`, or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+- `topics`: _[optional]_ Array of 32 bytes DATA topics. Topics are order-dependent.
+- `blockhash`: _[optional]_ Restricts the logs returned to the single block referenced in the 32-byte hash `blockHash`. Using `blockHash` is equivalent to setting `fromBlock` and  `toBlock` to the block number referenced in the `blockHash`. If `blockHash` is present in in the filter criteria, then neither `fromBlock` nor `toBlock` are allowed.
+
+

@@ -111,6 +111,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-polygon.svg`,
   },
   {
+    name: "Scroll",
+    href: "/services/reference/scroll",
+    logo: `${LOGO_PATH}/logo-scroll.svg`,
+  },
+  {
     name: "Starknet",
     href: "/services/reference/starknet",
     logo: `${LOGO_PATH}/logo-starknet.svg`,
