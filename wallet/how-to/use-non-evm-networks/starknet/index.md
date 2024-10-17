@@ -61,44 +61,110 @@ other Starknet-related actions.
 
 The following section lists the core functionalities and API methods that each connection option supports:
 
-### Account management
-
-| **Functionality**               | `get-starknet`                                                                                                                                                         | `wallet_invokeSnap`                                                                                                           |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Deploy an account               | [`deployAccount` ↗](https://starknetjs.com/docs/API/classes/Account/#deployaccount)                                                                                    | [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount)                       |
-| Recover an account address      | [`getAddress` ↗](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L95)              | [`starkNet_recoverAccounts`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_recoveraccounts)                   |
-| Display a private key           |                                                                                                                                                                        | [`starkNet_displayPrivateKey`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_displayprivatekey)               |
-
-### Gas and fees
-
-| **Functionality**               | `get-starknet`                                                                                                                                                         | `wallet_invokeSnap`                                                                                                           |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Estimate the gas fee            | [`estimateFeeBulk` ↗](https://starknetjs.com/docs/API/classes/Account/#estimatefeebulk)                                                                                | [`starkNet_estimateFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_estimatefee)                           |
-| Estimate the account deploy fee | [`estimateAccountDeployFee` ↗](https://starknetjs.com/docs/API/classes/Account/#estimateaccountdeployfee)                                                              | [`starkNet_estimateAccountDeployFee`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_estimateaccountdeployfee) |
-
-### Token management
-
-| **Functionality**               | `get-starknet`                                                                                                                                                         | `wallet_invokeSnap`                                                                                                           |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Add an ERC-20 token             | [`watchAsset` ↗](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58)              | [`starkNet_addErc20Token`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_adderc20token)                       |
-| Get the ERC-20 token balance    | [`callContract` ↗](http://starknetjs.com/docs/API/classes/Provider/#callcontract)                                                                                      | [`starkNet_getErc20TokenBalance`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_geterc20tokenbalance)         |
-
-### Signing and transactions
-
-| **Functionality**               | `get-starknet`                                                                                                                                                         | `wallet_invokeSnap`                                                                                                           |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Sign a message                  | [`signMessage` ↗](https://starknetjs.com/docs/API/classes/Signer#signmessage)                                                                                          | [`starkNet_signMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signmessage)                           |
-| Sign a transaction              | [`signTransaction` ↗](https://starknetjs.com/docs/API/classes/Signer#signtransaction)                                                                                  | [`starkNet_signTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signtransaction)                   |
-| Sign a declare transaction      | [`signDeclareTransaction` ↗](https://starknetjs.com/docs/API/classes/Signer#signdeclaretransaction)                                                                    | [`starkNet_signDeclareTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signdeclaretransaction)     |
-| Verify a signed message         |                                                                                                                                                                        | [`starkNet_verifySignedMessage`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_verifysignedmessage)           |
-| Execute a transaction           | [`execute` ↗](https://starknetjs.com/docs/API/classes/Account/#execute)                                                                                                | [`starkNet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)                             |
-| Declare a contract              | [`declareContract` ↗](https://starknetjs.com/docs/API/classes/Account/#declarecontract)                                                                                | [`starkNet_declareContract`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_declarecontract)                   |
-
-### Network management
-
-| **Functionality**               | `get-starknet`                                                                                                                                                         | `wallet_invokeSnap`                                                                                                           |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Switch networks                 | [`switchNetwork` ↗](https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58)           | [`starkNet_switchNetwork`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_switchnetwork)                       |
-| Get the current network         | [`getChainId` ↗](https://starknetjs.com/docs/API/classes/Provider#getchainid)                                                                                          | [`starkNet_getCurrentNetwork`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_getcurrentnetwork)               |
-| Get transactions                | [`getTransaction` ↗](https://starknetjs.com/docs/API/classes/Account/#gettransaction)                                                                                   | [`starkNet_getTransaction`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_gettransaction)                     |
-| Get the transaction status      | [`getTransactionStatus` ↗](https://starknetjs.com/docs/API/classes/Account/#gettransactionstatus)                                                                      | [`starkNet_getTransactionStatus`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_gettransactionstatus)         |
+<table>
+    <tr>
+        <td class="section-header merged-cell" colspan="3">Account management</td>
+    </tr>
+    <tr>
+        <th>Functionality</th>
+        <th>get-starknet</th>
+        <th>wallet_invokeSnap</th>
+    </tr>
+    <tr>
+        <td>Deploy an account</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#deployaccount">deployAccount ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount">starkNet_createAccount</a></td>
+    </tr>
+    <tr>
+        <td>Recover an account address</td>
+        <td><a href="https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L95">getAddress ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_recoveraccounts">starkNet_recoverAccounts</a></td>
+    </tr>
+    <tr>
+        <td>Display a private key</td>
+        <td></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_displayprivatekey">starkNet_displayPrivateKey</a></td>
+    </tr>
+    <tr>
+        <td class="section-header merged-cell" colspan="3">Gas and fees</td>
+    </tr>
+    <tr>
+        <td>Estimate the gas fee</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#estimatefeebulk">estimateFeeBulk ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_estimatefee">starkNet_estimateFee</a></td>
+    </tr>
+    <tr>
+        <td>Estimate the account deploy fee</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#estimateaccountdeployfee">estimateAccountDeployFee ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_estimateaccountdeployfee">starkNet_estimateAccountDeployFee</a></td>
+    </tr>
+    <tr>
+        <td class="section-header merged-cell" colspan="3">Token management</td>
+    </tr>
+    <tr>
+        <td>Add an ERC-20 token</td>
+        <td><a href="https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58">watchAsset ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_adderc20token">starkNet_addErc20Token</a></td>
+    </tr>
+    <tr>
+        <td>Get the ERC-20 token balance</td>
+        <td><a href="http://starknetjs.com/docs/API/classes/Provider/#callcontract">callContract ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_geterc20tokenbalance">starkNet_getErc20TokenBalance</a></td>
+    </tr>
+    <tr>
+        <td class="section-header merged-cell" colspan="3">Signing and transactions</td>
+    </tr>
+    <tr>
+        <td>Sign a message</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Signer#signmessage">signMessage ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signmessage">starkNet_signMessage</a></td>
+    </tr>
+    <tr>
+        <td>Sign a transaction</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Signer#signtransaction">signTransaction ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signtransaction">starkNet_signTransaction</a></td>
+    </tr>
+    <tr>
+        <td>Sign a declare transaction</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Signer#signdeclaretransaction">signDeclareTransaction ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_signdeclaretransaction">starkNet_signDeclareTransaction</a></td>
+    </tr>
+    <tr>
+        <td>Verify a signed message</td>
+        <td></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_verifysignedmessage">starkNet_verifySignedMessage</a></td>
+    </tr>
+    <tr>
+        <td>Execute a transaction</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#execute">execute ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn">starkNet_executeTxn</a></td>
+    </tr>
+    <tr>
+        <td>Declare a contract</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#declarecontract">declareContract ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_declarecontract">starkNet_declareContract</a></td>
+    </tr>
+    <tr>
+        <td class="section-header merged-cell" colspan="3">Network management</td>
+    </tr>
+    <tr>
+        <td>Switch networks</td>
+        <td><a href="https://github.com/starknet-io/get-starknet/blob/ff37390b25b8368ebeb5f2323e2d8826964b41ae/packages/core/src/StarknetWindowObject.ts#L58">switchNetwork ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_switchnetwork">starkNet_switchNetwork</a></td>
+    </tr>
+    <tr>
+        <td>Get the current network</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Provider#getchainid">getChainId ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_getcurrentnetwork">starkNet_getCurrentNetwork</a></td>
+    </tr>
+    <tr>
+        <td>Get transactions</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#gettransaction">getTransaction ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_gettransaction">starkNet_getTransaction</a></td>
+    </tr>
+    <tr>
+        <td>Get the transaction status</td>
+        <td><a href="https://starknetjs.com/docs/API/classes/Account/#gettransactionstatus">getTransactionStatus ↗</a></td>
+        <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_gettransactionstatus">starkNet_getTransactionStatus</a></td>
+    </tr>
+</table>

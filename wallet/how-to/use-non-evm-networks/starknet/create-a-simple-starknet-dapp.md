@@ -267,7 +267,7 @@ You are directed to the default dapp display.
 - **Never ask**: Suppresses confirmation prompts, automatically connecting the wallet to Starknet.
 - **Always ask with dark theme**: Prompts for wallet connection confirmation with a dark-themed user interface.
 - **Always ask with light theme**: Prompts for wallet connection confirmation with a light-themed user interface.
-- ***Disconnect**: Disconnects the wallet from Starknet.
+- **Disconnect**: Disconnects the wallet from Starknet.
 - **Disconnect and reset**: Disconnects the wallet and resets the app’s wallet connection settings.
 
 ### 3.7 Connect your dapp to a wallet
@@ -333,13 +333,15 @@ const erc20 = new Contract(erc20Abi, tokenAddress, AccountInterface);
 ```
 
 :::note ABI and contract address
-The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
+
+The contract address for STRK (an ERC-20 toke") on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
 You can find the ABI of the ERC-20 contract on the **Code** tab in [Voyager](https://voyager.online/).
+
 :::
 
 Ensure you call the token address in the `TokenBalanceAndTransfer` component.
 
-```typescript title="TokenBalanceAndTransfer.tsx
+```typescript title="TokenBalanceAndTransfer.tsx"
 {walletAccount && 
     <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
 }
@@ -348,12 +350,16 @@ Ensure you call the token address in the `TokenBalanceAndTransfer` component.
 ### 4.2. Update `App.tsx`
 
 Call the `TokenBalanceAndTransfer` component in `App.tsx`.
-Add `import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";` to `App.tsx` to import the component. 
+Add the followinwg to the header of `App.tsx` to import the component:
+
+```typescript title="App.tsx"
+import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";
+```
 
 Ensure that the following code is added to `App.tsx`, where the `TokenBalanceAndTransfer` component is called with the token address:
 
-```typescript title="TokenBalanceAndTransfer.tsx
-{walletAccount && 
+```typescript title="App.tsx"
+{walletAccount &&
     <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
 }
 ```
@@ -362,7 +368,7 @@ Ensure that the following code is added to `App.tsx`, where the `TokenBalanceAnd
 
 Call the `balanceOf` method to fetch the balance of the connected account:
 
-```typescript
+```typescript title="TokenBalanceAndTransfer.tsx"
 const balance = await erc20.balanceOf(walletAddress);
 const formattedBalance = balance / Math.pow(10, 18);
 ```
@@ -373,7 +379,7 @@ To transfer tokens, fill out the `transfer` method call and execute the transact
 
 Use the following example for reference:
 
-```typescript
+```typescript title="TokenBalanceAndTransfer.tsx"
 import { Call } from "starknet";
 
 // Define the transfer parameters.
@@ -411,60 +417,61 @@ import { AccountInterface, Call, Contract } from "starknet";
 import erc20Abi from "./erc20Abi.json";
 
 interface TokenBalanceAndTransferProps {
-    account: AccountInterface;
-    tokenAddress: string;
+  account: AccountInterface;
+  tokenAddress: string;
 }
 
 export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceAndTransferProps) {
-  const [balance, setBalance] = useState<number | null>(null)
+  const [balance, setBalance] = useState<number | null>(null);
 
   useEffect(() => {
-    if (account) {
-      const erc20 = new Contract(erc20Abi, tokenAddress, account);
-      // Fetch balance
-      erc20.balanceOf(account.address)
-        .then((result: bigint) => {
+    async function fetchBalance() {
+      try {
+        if (account) {
+          const erc20 = new Contract(erc20Abi, tokenAddress, account);
+          const result = await erc20.balanceOf(account.address) as bigint;
+
           const decimals = 18n;
           const formattedBalance = result / 10n ** decimals; // Adjust for decimals using BigInt arithmetic
-          console.log(formattedBalance);
-          setBalance(Number(formattedBalance)); // Convert to a number if needed for UI display
-        })
-        .catch(console.error);
+          setBalance(Number(formattedBalance)); // Convert to a number for UI display
+        }
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+      }
     }
+
+    fetchBalance();
   }, [account, tokenAddress]);
 
   async function handleTransfer() {
-    try{
+    try {
       if (account) {
         const erc20 = new Contract(erc20Abi, tokenAddress, account);
         const recipientAddress = "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5";
-        const amountToTransfer = 1n * 10n ** 18n; // 1 token
+        const amountToTransfer = 1n * 10n ** 18n; // 1 token (in smallest units)
 
-        // Fill out and execute transfer
-        const transferCall: Call = erc20.populate("transfer", {
-          recipient: recipientAddress,
-          amount: amountToTransfer,
-        });
-        //transferCall.calldata = [ "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5", "1000000000000000000", "0" ];
+        // Populate transfer call
+        const transferCall: Call = erc20.populate("transfer", [recipientAddress, amountToTransfer]);
+
+        // Execute transfer
         const { transaction_hash: transferTxHash } = await account.execute([transferCall]);
 
         // Wait for the transaction to be accepted
         await account.waitForTransaction(transferTxHash);
 
-        // Refresh balance
-        const newBalance = await erc20.balanceOf(account.address);
-        setBalance(newBalance / Math.pow(10, 18)); // Adjust for decimals
+        // Refresh balance after transfer
+        const newBalance = await erc20.balanceOf(account.address) as bigint;
+        setBalance(Number(newBalance / 10n ** 18n)); // Adjust for decimals
       }
-    }
-    catch(e){
-      console.log(e)
+    } catch (error) {
+      console.error("Error during transfer:", error);
     }
   }
 
   return (
     <div>
       <h3>Token Balance: {balance !== null ? `${balance} STRK` : "Loading..."}</h3>
-      <button onClick={handleTransfer}>Transfer 1 STRK to yourself</button>
+      <button onClick={handleTransfer}>Transfer 1 STRK</button>
     </div>
   );
 }
@@ -1508,7 +1515,7 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
 </TabItem>
 </Tabs>
 
-### 4.5. Start the dapp
+### 4.6. Start the dapp
 
 Start the dapp and navigate to it in your browser.
 
