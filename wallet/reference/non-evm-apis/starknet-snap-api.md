@@ -113,7 +113,7 @@ Registers a contract's class on the Starknet blockchain without deploying it.
   - `resourceBounds`: (Optional) The boundaries on resource consumption during the transaction.
   - `skipValidate`: `boolean` - (Optional) Skip validation of the transaction.
 
-### Returns
+#### Returns
 
 The confirmation of sending a transaction on the starknet contract
   
