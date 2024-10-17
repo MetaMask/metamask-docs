@@ -258,26 +258,34 @@ const invokeStarknetContract = async () => {
   </TabItem>
   <TabItem value="wallet_invokeSnap">
 
-  ```javascript
-  const invokeStarknetContract = async () => {
+```javascript
+const invokeStarknetContract = async () => {
   if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
     try {
-      const contractAddress = "0xYourContractAddress";  // Replace with your contract address.
-      const entrypoint = "function_name";  // The function you want to call.
-      const calldata = [/* your function arguments */];
+      const calls = [
+        {
+          entrypoint: "transfer", // The function name to call on the contract.
+          calldata: [
+            "0x1234567890abcdef1234567890abcdef12345678", // Recipient's address.
+            "1000000000000000000" // Amount to transfer in wei (1 token, assuming 18 decimals).
+          ]
+        }
+      ];
 
       const result = await getEip6963Provider.request({
         method: "wallet_invokeSnap",
         params: {
-          snapId: "npm:@starknet-snap/snap",
+          snapId: "npm:@consensys/starknet-snap",
           request: {
             method: "starkNet_executeTxn",
             params: {
-              contractAddress: contractAddress,
-              contractFuncName: entrypoint
-              contractCallData: calldata.join(","),
-              senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155", 
-              maxFee: "1000000000000000", //
+              address: "0xb60e8dd61c5d32be8058bb8eb970870f07233155", // The sender's address.
+              calls: calls, // The array of calls with entrypoint and calldata.
+              details: {
+                nonce: 1, // Optional nonce.
+                maxFee: "1000000000000000", // Maximum gas fee allowed.
+              },
+              chainId: "0x534e5f5345504f4c4941" // Starknet Sepolia testnet chain ID
             }
           }
         }
@@ -287,11 +295,11 @@ const invokeStarknetContract = async () => {
     } catch (error) {
       console.error("Error invoking contract:", error);
     }
-    } else {
+  } else {
     console.error("MetaMask not detected or Snaps not supported");
-    }
-  };
-  ```
+  }
+};
+```
 
   </TabItem> 
 </Tabs>

@@ -555,6 +555,63 @@ await getEip6963Provider.request({
 </TabItem>
 </Tabs>
 
+### `starkNet_addErc20Token`
+
+Add an ERC-20 token to the watch list.
+
+#### Parameters
+
+- `address`: `string` - Address of the sender.
+- `chainId`: `string` - ID of the target Starknet network. 
+- `tokenAddress`: `string` - The contract address of the token. 
+- `tokenName`: `string` - The name of the token. 
+- `tokenSymbol`: `string` - The string symbol of the token. 
+- `tokenDecimals?`: `string` | `number` - The decimals of the token. 
+
+#### Returns
+
+The token object that was added to the watch list.
+
+#### Example
+
+<Tabs>
+<TabItem value="Request">
+
+```js
+await getEip6963Provider.request({
+  method: "wallet_invokeSnap",
+  params: {
+    snapId: "npm:@consensys/starknet-snap",
+    request: {
+      method: "starkNet_addErc20Token",
+      params: {
+        address: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+        chainId: "0x534e5f5345504f4c4941",
+        tokenAddress: "0x1234567890123456789012345678901234567890",
+        tokenName: "Ether",
+        tokenSymbol: "ETH",
+        tokenDecimals: 18
+      },
+    },
+  },
+})
+```
+
+</TabItem>
+<TabItem value="Result">
+
+```json
+{
+  "address": "0x1c4c12F3dfDAEa0D9a2b981A5a5DDE1a3c11dD54", 
+  "symbol": "SNK", 
+  "decimals": 18, 
+  "logo": "https://starknet-logo.com/snk-logo.png"
+}
+```
+
+</TabItem>
+</Tabs>
+
 ### `starkNet_getTransaction`
 
 Gets the transaction records from a sender address.
