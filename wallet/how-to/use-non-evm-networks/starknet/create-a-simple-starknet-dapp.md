@@ -43,7 +43,7 @@ cd get-starknet-tutorial
 
 ### 1.2 Configure Yarn
 
-Use the following command to configure Yarn to use the `node-module` linker instead of its default linking strategy:
+Configure Yarn to use the `node-module` linker instead of its default linking strategy:
 
 ```bash
 yarn config set nodeLinker node-modules
@@ -254,12 +254,46 @@ Start the dapp and navigate to it in your browser.
 yarn start
 ```
 
+You are directed to the default dapp display. 
+
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-tutorial-start-dapp.png").default} alt="Starknet dapp start" width="400" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+</div>
+
+- **Default**: Resets the app's handling to the default behavior for connecting the wallet to Starknet.
+- **Always ask**: Always prompts the user for confirmation when the wallet is connecting to Starknet.
+- **Never ask**: Suppresses confirmation prompts, automatically connecting the wallet to Starknet.
+- **Always ask with dark theme**: Prompts for wallet connection confirmation with a dark-themed user interface.
+- **Always ask with light theme**: Prompts for wallet connection confirmation with a light-themed user interface.
+- ***Disconnect**: Disconnects the wallet from Starknet.
+- **Disconnect and reset**: Disconnects the wallet and resets the app’s wallet connection settings.
+
+### 3.7 Connect to the MetaMask wallet
+
+Select your preferred connection option and follow the on-screen prompts to connect MetaMask to the Starknet network.
+
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-tutorial-select.png").default} alt="Starknet dapp start" width="400" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+</div>
+
+After you accept the terms in the prompts, your wallet will be successfully connected.
+
+<div class="row">
+  <div class="column">
+    <img src={require("../../../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp start" width="400" style={{border: "1px solid #DCDCDC"}} />
+  </div>
+</div>
+
 ## 4. Display the balance of and transfer an ERC-20 token
 
 Now that you have set up the basic interaction, you can display the balance of a specific ERC-20
 token,such as STRK, and perform a transfer using the `AccountInterface` instance.
 
-### 4.1. Set up the contract
+### 5.1. Set up the contract
 
 Create a `src/components/` directory and add the following files to it:
 
@@ -303,7 +337,7 @@ const formattedBalance = balance / Math.pow(10, 18);
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../assets/starknet-token-update.png").default} alt="Starknet wallet modal" width="360" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../assets/starknet-token-update.png").default} alt="Starknet wallet modal" width="400" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
