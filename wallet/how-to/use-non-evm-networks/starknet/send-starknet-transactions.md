@@ -53,7 +53,8 @@ method (with `wallet_invokeSnap`):
 
   ```javascript
   const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
-    const provider = await getEip6963Provider();
+    const provider = await getEip6963Provider()        
+    // Or window.ethereum.isMetaMask if you don't support EIP-6963.
     if (!provider) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
@@ -98,7 +99,7 @@ The following is a full, simplified example of connecting to a Starknet account 
 <Tabs>
   <TabItem value="get-starknet" default>
 
-  ```javascript
+```javascript
   import { connect } from "get-starknet";
 
   const connectStarknetAccount = async () => {
@@ -151,29 +152,19 @@ The following is a full, simplified example of connecting to a Starknet account 
     }
   };
 
-   const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
+  const sendStarknetTransaction = async (provider, address, calls, maxFee = null) => {
     try {
-        const provider = await getEip6963Provider();
-      
-      if (!provider) {
-        throw new Error("MetaMask not detected or Snaps not supported");
-      }
-      
       await connectStarknetAccount(provider);
-
       const requestParams = {
-        contractAddress,
-        contractFuncName,
-        contractCallData,
-        senderAddress
+        address,
+        calls,
+        details,
       };
-
       if (maxFee) {
         requestParams.details = {
-            maxFee
+          maxFee
         }; // Include maxFee only if it's provided.
-
-      const response = await getEip6963Provider.request({
+      const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
@@ -183,27 +174,29 @@ The following is a full, simplified example of connecting to a Starknet account 
           }
         }
       });
-
       console.log("Transaction sent:", response);
       return response;
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error sending transaction:", error);
       throw error;
     }
   };
 
   // Example usage
-  const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
-  const contractFuncName = "transfer";
-  const contractCallData = ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"];
-  const senderAddress = "0xb60e8dd61c5d32be8058bb8eb970870f07233155";
+  const calls = [
+    "entrypoint": "transfer",
+    "calldata": ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"],
+    "contractAddress": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+  ]
+  const address = "0xb60e8dd61c5d32be8058bb8eb970870f07233155";
   const maxFee = "1000000000000000"; // Optional
-  const chainId = "0x534e5f5345504f4c4941";
 
-  sendStarknetTransaction(contractAddress, contractFuncName, contractCallData, senderAddress, chainId, maxFee)
+  sendStarknetTransaction(address, calls, maxFee)
     .then(result => console.log("Transaction result:", result))
     .catch(error => console.error("Transaction error:", error));
-  ```
+}
+```
 
   </TabItem> 
 </Tabs>

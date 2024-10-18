@@ -49,8 +49,8 @@ Sign a Starknet transaction using the following:
   ```typescript
   const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata, chainId, address) => {
     try {
-      const provider = await getEip6963Provider();
-      
+      const provider = await getEip6963Provider();       
+      // Or window.ethereum.isMetaMask if you don't support EIP-6963.
       if (!provider) {
         throw new Error("MetaMask not detected or Snaps not supported");
       }

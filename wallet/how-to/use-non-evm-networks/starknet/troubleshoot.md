@@ -14,7 +14,7 @@ When using `get-starknet`, the library automatically handles detecting and conne
 and adding the Starknet Snap.
 If you're using `wallet_invokeSnap` directly, you might need to manage these processes manually.
 
-### Detect MetaMask
+### Cannot connect to MetaMask
 
 When using `wallet_invokeSnap`, use the following function to detect if MetaMask is installed:
 
@@ -33,7 +33,7 @@ the user to install MetaMask using the following:
 
 ```typescript
 function checkAndPromptForMetaMask() {
-  const isMetaMaskInstalled = typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask;
+  const isMetaMaskInstalled = typeof provider !== "undefined" && provider.isMetaMask; 
   
   if (!isMetaMaskInstalled) {
     console.log("MetaMask is not installed. Prompting user to install.");
@@ -60,7 +60,7 @@ function checkAndPromptForMetaMask() {
 checkAndPromptForMetaMask();
 ```
 
-### Verify Snap support
+### Snap is not connected
 
 After detecting MetaMask, verify if it supports Snaps:
 
@@ -77,7 +77,7 @@ const isSupportSnap = async (provider: any): Promise<boolean> => {
 };
 ```
 
-If MetaMask is installed but the Snap is not, use the following code to prompt the user to install the Snap:
+If MetaMask is installed but the Snap is not added, use the following code to prompt the user to install the Snap:
 
 ```typescript
 async function installSnap(provider: MetaMaskProvider, snapId: string, snapVersion: string) {
@@ -96,6 +96,8 @@ async function installSnap(provider: MetaMaskProvider, snapId: string, snapVersi
 }
 ```
 
+
+<!--- FOR BEST PRACTICES SECTION IN FOLLOW UP PR
 ### Handle user rejection
 
 Users can reject the prompt to add the Snap, resulting in a 4001 error. 
@@ -120,3 +122,4 @@ function displayUserMessage(message) {
   // document.getElementById("status-message").textContent = message;
 }
 ```
+--->
