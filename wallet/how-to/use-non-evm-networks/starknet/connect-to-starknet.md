@@ -234,7 +234,13 @@ method to directly interact with the Starknet Snap.
 
 :::note
 
-The [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) serves as a reference implementation and example dapp. It demonstrates how to manually invoke the snap using `wallet_invokeSnap`, showcasing potential use cases and UI integration. For more details, see the [source code of the companion dapp's UI](https://github.com/Consensys/starknet-snap/tree/main/packages/wallet-ui).
+We recommend using [EIP-6963](../../../concepts/wallet-interoperability.md) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+
+:::
+
+:::note
+
+The [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) serves as a reference implementation and example dapp. It demonstrates how to manually invoke the snap using `wallet_invokeSnap`, and presents potential use cases and UI integration. For more details, see the [source code of the companion dapp's UI](https://github.com/Consensys/starknet-snap/tree/main/packages/wallet-ui).
 
 :::
 
@@ -281,7 +287,6 @@ export async function callSnap(method, params) {
 :::note
 
 To connect to Starknet, the dapp user must add the Starknet Snap to MetaMask.
-Make sure to [handle user rejections](troubleshoot.md#handle-user-rejection).
 
 :::
 
@@ -303,12 +308,21 @@ const accountInfo = await callSnap("starkNet_createAccount", { addressIndex, dep
 #### HTML and Vanilla JS
 
 The following is a full example of a simple HTML and Vanilla JavaScript dapp that connects to the
-Starknet Snap using `wallet_invokeSnap`.
+Starknet Snap using `wallet_invokeSnap`. 
+
 It displays a button that, when selected:
 
 - Connects to Starknet in MetaMask.
 - Creates a Starknet account.
 - Displays the account address.
+
+:::note
+  
+An account can submit transactions only after it's deployed. 
+It does not deploy immediately upon creation. Deployment happens during the first [transaction](index.md#supported-functionalities).
+such as when calling `execute`(https://starknetjs.com/docs/API/classes/Account/#execute) through `get-starknet` or using [`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executeTxn) from `wallet_invokeSnap`.
+
+:::
 
 ```html
 <html lang="en">
@@ -377,7 +391,7 @@ const ConnectWallet = () => {
   const [accountInfo, setAccountInfo] = useState('');
   const connect = async (snapId) => {
     try {
-      await getEip6963Provider.request({
+      await provider.request({           // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_requestSnaps",
         params: {
           [snapId]: {},
@@ -390,7 +404,7 @@ const ConnectWallet = () => {
   };
   const callSnap = async (snapId, method, params) => {
     try {
-      const response = await getEip6963Provider.request({
+      const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_invokeSnap",
         params: {
           snapId,
@@ -430,7 +444,10 @@ export default ConnectWallet;
 ```
 
 :::note
-See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using `wallet_invokeSnap`.
+
+See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using 
+`wallet_invokeSnap`.
+
 :::
 
 ## Next steps

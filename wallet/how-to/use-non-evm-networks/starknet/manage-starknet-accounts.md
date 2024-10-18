@@ -54,10 +54,10 @@ The following example displays the account address:
   
   ```javascript
   const showAccountInfo = async () => {
-    if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+    if (typeof provider !== "undefined" && provider.isMetaMask) {
       try {
         // Invoke the Starknet Snap to get account information.
-        const response = await getEip6963Provider.request({
+        const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
           method: "wallet_invokeSnap",
           params: {
             snapId: "npm:@starknet-snap/snap", 
@@ -145,10 +145,10 @@ connect or disconnect the account.
     const [error, setError] = useState<string | null>(null);
 
     const connectToSnap = async () => {
-      if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+      if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
           // Request permission to access the Snap
-          await getEip6963Provider.request({
+          await provider.request({           // Or window.ethereum if you don't support EIP-6963.
             method: "wallet_requestSnaps",
             params: { [STARKNET_SNAP_ID]: {} }
           });
@@ -169,9 +169,9 @@ connect or disconnect the account.
     };
 
     const fetchAccount = async () => {
-      if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+      if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
-          const response = await getEip6963Provider.request({
+          const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
             method: "wallet_invokeSnap",
             params: {
               snapId: STARKNET_SNAP_ID,
@@ -260,7 +260,7 @@ const invokeStarknetContract = async () => {
 
 ```javascript
 const invokeStarknetContract = async () => {
-  if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+  if (typeof provider !== "undefined" && provider.isMetaMask) {
     try {
       const calls = [
         {
@@ -272,7 +272,7 @@ const invokeStarknetContract = async () => {
         }
       ];
 
-      const result = await getEip6963Provider.request({
+      const result = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
@@ -373,9 +373,9 @@ Use the following component at the top level of your dapp to handle account chan
     const [account, setAccount] = useState<string | null>(null);
 
     const fetchAccount = async () => {
-      if (typeof getEip6963Provider !== "undefined" && getEip6963Provider.isMetaMask) {
+      if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
-          const response = await getEip6963Provider.request({
+          const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
             method: "wallet_invokeSnap",
             params: {
               snapId: STARKNET_SNAP_ID,

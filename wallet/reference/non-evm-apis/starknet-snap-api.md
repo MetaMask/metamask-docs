@@ -17,6 +17,11 @@ which supports all Starknet Snap API methods.
 
 :::note
 
+We recommend using [EIP-6963](../../concepts/wallet-interoperability.md/#eip-6963-interfaces) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+:::
+
+:::note
+
 You can also communicate with the Starknet network using the
 [Starknet API](/services/reference/starknet).
 
@@ -58,7 +63,7 @@ The address of the account and the transaction hash if the account has been crea
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -126,7 +131,7 @@ The confirmation of sending a transaction on the Starknet contract, which contai
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -181,7 +186,7 @@ The private key is only shown in the MetaMask pop-up window.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -236,7 +241,7 @@ base-10 `string` format using `.toString(10)`):
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -301,7 +306,7 @@ A promise that resolves to an `EstimateFeeResponse` object, which contains the f
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -381,7 +386,7 @@ The hash of the transaction.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -440,7 +445,7 @@ The public key associated with the specified account address (which may differ f
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -483,7 +488,7 @@ A network object containing the name and chain ID of the network.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -528,7 +533,7 @@ The latest and pending token balance, represented in hexadecimal.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -580,7 +585,7 @@ The token object that was added to the watch list.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -647,7 +652,7 @@ The list of the transaction records.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -715,7 +720,7 @@ of the transaction.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -768,7 +773,7 @@ The list of the scanned user accounts during the recovery process.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -841,7 +846,7 @@ The signature of the transaction that declares a contract class.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -898,7 +903,7 @@ The signed hash of typed data.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -956,7 +961,7 @@ The signature of the transaction.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -1011,7 +1016,7 @@ Switch the current Starknet Snap's network to a different Starknet network.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
@@ -1058,7 +1063,7 @@ Verifies a signed typed data message.
 <TabItem value="Request">
 
 ```js
-await getEip6963Provider.request({
+await provider.request({           // Or window.ethereum if you don't support EIP-6963.
   method: "wallet_invokeSnap",
   params: {
     snapId: "npm:@consensys/starknet-snap",
