@@ -8,13 +8,11 @@ toc_max_heading_level: 4
 
 This guide addresses issues that might occur when connecting your dapp to the Starknet Snap in MetaMask.
 
-## Connection issues
-
 When using `get-starknet`, the library automatically handles detecting and connecting to MetaMask,
 and adding the Starknet Snap.
 If you're using `wallet_invokeSnap` directly, you might need to manage these processes manually.
 
-### Cannot connect to MetaMask
+## MetaMask is not connected
 
 When using `wallet_invokeSnap`, use the following function to detect if MetaMask is installed:
 
@@ -60,9 +58,9 @@ function checkAndPromptForMetaMask() {
 checkAndPromptForMetaMask();
 ```
 
-### Snap is not connected
+## Snap is not connected
 
-After detecting MetaMask, verify if it supports Snaps:
+After connecting to MetaMask, verify that it supports Snaps:
 
 ```typescript
 const isSupportSnap = async (provider: any): Promise<boolean> => {

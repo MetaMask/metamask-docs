@@ -226,15 +226,24 @@ After the user connects to Starknet, the dapp displays the user's connected wall
   <img src={require("../../../assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+:::note
+
+An account can submit transactions only after it's deployed.
+It does not deploy immediately upon creation. 
+Deployment happens during the first [transaction](send-starknet-transactions.md).
+
+:::
+
 ## Connect using `wallet_invokeSnap`
 
 Alternatively, you can manage the Snap invocation manually.
 Use the [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC
 method to directly interact with the Starknet Snap. 
 
-:::note
+:::warning Important
 
-We recommend using [EIP-6963](../../../concepts/wallet-interoperability.md) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+We recommend using [EIP-6963](../../../concepts/wallet-interoperability.md) for detecting MetaMask when using the `wallet_invokeSnap` approach.
+This ensures you can connect to MetaMask and other installed wallets without conflict.
 
 :::
 
@@ -254,26 +263,28 @@ This file handles the interactions with the Starknet Snap:
 const snapId = "npm:starknet-snap";
 
 export async function connect() {
-  await ethereum.request({
-    method: "wallet_requestSnaps",
-    params: {
-      [snapId]: {},
-    },
-  });
+  await provider // Or window.ethereum if you don't support EIP-6963.
+    .request({
+      method: "wallet_requestSnaps",
+      params: {
+        [snapId]: {},
+      },
+    });
 }
 
 export async function callSnap(method, params) {
   try {
-    const response = await ethereum.request({
-      method: "wallet_invokeSnap",
-      params: {
-        snapId,
-        request: {
-          method,
-          params,
+    const response = await provider // Or window.ethereum if you don't support EIP-6963.
+      .request({
+        method: "wallet_invokeSnap",
+        params: {
+          snapId,
+          request: {
+            method,
+            params,
+          },
         },
-      },
-    });
+      });
     console.log(`${method} response:`, response);
     return response;
   } catch (err) {
@@ -303,6 +314,14 @@ const chainId = "0x534e5f5345504f4c4941"; // Chain ID of the network to use.
 const accountInfo = await callSnap("starkNet_createAccount", { addressIndex, deploy, chainId });
 ```
 
+:::note
+
+An account can submit transactions only after it's deployed.
+It does not deploy immediately upon creation.
+Deployment happens during the first [transaction](send-starknet-transactions.md).
+
+:::
+
 ### Examples
 
 #### HTML and Vanilla JS
@@ -316,14 +335,6 @@ It displays a button that, when selected:
 - Creates a Starknet account.
 - Displays the account address.
 
-:::note
-  
-An account can submit transactions only after it's deployed. 
-It does not deploy immediately upon creation. Deployment happens during the first [transaction](index.md#supported-functionalities).
-such as when calling `execute`(https://starknetjs.com/docs/API/classes/Account/#execute) through `get-starknet` or using [`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executeTxn) from `wallet_invokeSnap`.
-
-:::
-
 ```html
 <html lang="en">
 <head>
@@ -336,24 +347,26 @@ such as when calling `execute`(https://starknetjs.com/docs/API/classes/Account/#
   <p id="accountInfo"></p>
   <script>
     async function connect(snapId) {
-      await ethereum.request({
-        method: "wallet_requestSnaps",
-        params: {
-          [snapId]: {},
-        },
-      });
+      await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_requestSnaps",
+          params: {
+            [snapId]: {},
+          },
+        });
     }
     async function callSnap(snapId, method, params) {
       try {
-        const response = await ethereum.request({
-          method: "wallet_invokeSnap",
-          params: {
-            snapId,
-            request: {
-              method,
-              params,
+        const response = await provider // Or window.ethereum if you don't support EIP-6963.
+          .request({
+            method: "wallet_invokeSnap",
+            params: {
+              snapId,
+              request: {
+                method,
+                params,
+              },
             },
-          },
         });
         return response;
       } catch (err) {
@@ -391,12 +404,13 @@ const ConnectWallet = () => {
   const [accountInfo, setAccountInfo] = useState('');
   const connect = async (snapId) => {
     try {
-      await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-        method: "wallet_requestSnaps",
-        params: {
-          [snapId]: {},
-        },
-      });
+      await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_requestSnaps",
+          params: {
+            [snapId]: {},
+          },
+        });
     } catch (err) {
       console.error("Snap connection error:", err);
       alert(`Error connecting to Snap: ${err.message || err}`);
@@ -404,16 +418,17 @@ const ConnectWallet = () => {
   };
   const callSnap = async (snapId, method, params) => {
     try {
-      const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-        method: "wallet_invokeSnap",
-        params: {
-          snapId,
-          request: {
-            method,
-            params,
+      const response = await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_invokeSnap",
+          params: {
+            snapId,
+            request: {
+              method,
+              params,
+            },
           },
-        },
-      });
+        });
       return response;
     } catch (err) {
       console.error(`${method} problem happened:`, err);
@@ -422,7 +437,7 @@ const ConnectWallet = () => {
   };
   const handleConnectClick = async () => {
     try {
-      const snapId = "npm:@consensys/starknet-snap"; // Snap ID
+      const snapId = "npm:@consensys/starknet-snap"; // Snap ID.
       await connect(snapId);
       const deploy = false; // Whether to deploy the actual account.
       const addressIndex = 0; // The address to derive.

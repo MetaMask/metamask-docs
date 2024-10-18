@@ -49,8 +49,7 @@ Sign a Starknet transaction using the following:
   ```typescript
   const signStarknetTransactionWithSnap = async (contractAddress, entrypoint, calldata, chainId, address) => {
     try {
-      const provider = await getEip6963Provider();       
-      // Or window.ethereum.isMetaMask if you don't support EIP-6963.
+      const provider = await getEip6963Provider(); // Or window.ethereum if you don't support EIP-6963.
       if (!provider) {
         throw new Error("MetaMask not detected or Snaps not supported");
       }
@@ -71,12 +70,12 @@ Sign a Starknet transaction using the following:
           request: {
             method: "starkNet_signTransaction",
             params: {
-              address,              // The address of the account.
-              chainId,              // The chain ID of the request.
+              address,            // The address of the account.
+              chainId,            // The chain ID of the request.
               transactions: {
-                  contractAddress,  // The address of the contract.
-                  entrypoint,       // The function to call in the contract.
-                  calldata          // The parameters to pass to the function (as an array).
+                contractAddress,  // The address of the contract.
+                entrypoint,       // The function to call in the contract.
+                calldata          // The parameters to pass to the function (as an array).
               }
             }
           }
@@ -91,7 +90,7 @@ Sign a Starknet transaction using the following:
     }
   };
 
-  // Example usage:
+  // Example usage.
   const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
   const entrypoint = "transfer";
   const calldata = ["0xRecipientAddress", "1000"];

@@ -52,9 +52,8 @@ method (with `wallet_invokeSnap`):
   <TabItem value="wallet_invokeSnap">
 
   ```javascript
-  const sendStarknetTransaction = async (contractAddress, contractFuncName, contractCallData, address, chainId, maxFee = null) => {
-    const provider = await getEip6963Provider()        
-    // Or window.ethereum.isMetaMask if you don't support EIP-6963.
+  const sendStarknetTransaction = async (address, chainId, contractAddress, entrypoint, calldata, maxFee = null) => {
+    const provider = await getEip6963Provider() // Or window.ethereum if you don't support EIP-6963.
     if (!provider) {
       throw new Error("MetaMask not detected or Snaps not supported");
     }
@@ -104,15 +103,15 @@ The following is a full, simplified example of connecting to a Starknet account 
 
   const connectStarknetAccount = async () => {
     const starknet = await connect();
-    await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask
+    await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask.
     return starknet;
   };
 
   const sendStarknetTransaction = async (contractAddress, entrypoint, calldata) => {
     try {
-      const starknet = await connectStarknetAccount();  // Ensure the account is connected
+      const starknet = await connectStarknetAccount();  // Ensure the account is connected.
 
-      // Send the transaction
+      // Send the transaction.
       const result = await starknet.account.execute({
         contractAddress: contractAddress, 
         entrypoint: entrypoint,            
@@ -139,12 +138,13 @@ The following is a full, simplified example of connecting to a Starknet account 
   ```javascript
   const connectStarknetAccount = async (provider) => {
     try {
-      await provider.request({
-        method: "wallet_requestSnaps",
-        params: {
-          "npm:@consensys/starknet-snap": {}
-        }
-      });
+      await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_requestSnaps",
+          params: {
+            "npm:@consensys/starknet-snap": {}
+          }
+        });
       console.log("Starknet Snap connected");
     } catch (error) {
       console.error("Error connecting to Starknet Snap:", error);
@@ -164,7 +164,7 @@ The following is a full, simplified example of connecting to a Starknet account 
         requestParams.details = {
           maxFee
         }; // Include maxFee only if it's provided.
-      const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
+      const response = await provider.request({ // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_invokeSnap",
         params: {
           snapId: "npm:@consensys/starknet-snap",
@@ -183,14 +183,14 @@ The following is a full, simplified example of connecting to a Starknet account 
     }
   };
 
-  // Example usage
+  // Example usage.
   const calls = [
     "entrypoint": "transfer",
     "calldata": ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"],
     "contractAddress": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
   ]
   const address = "0xb60e8dd61c5d32be8058bb8eb970870f07233155";
-  const maxFee = "1000000000000000"; // Optional
+  const maxFee = "1000000000000000"; // Optional.
 
   sendStarknetTransaction(address, calls, maxFee)
     .then(result => console.log("Transaction result:", result))

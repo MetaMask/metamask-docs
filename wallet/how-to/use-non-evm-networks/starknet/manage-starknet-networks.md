@@ -44,8 +44,7 @@ Detect the Starknet network a user is currently connected to using the following
 
   ```javascript
   const checkCurrentNetwork = async () => {
-    const provider = await provider()        // Or window.ethereum.isMetaMask if you don't support EIP-6963.
-
+    const provider = await getEip6963Provider(); // Or window.ethereum if you don't support EIP-6963.
     if (provider) {
       try {
         const response = await provider.request({
@@ -112,8 +111,7 @@ Prompt users to switch between networks by setting the
 
   ```javascript
   const switchStarknetNetwork = async (chainId) => {
-    const provider = await getEip6963Provider();
-    // Or window.ethereum.isMetaMask if you don't support EIP-6963.
+    const provider = await getEip6963Provider(); // Or window.ethereum if you don't support EIP-6963.
     if (provider) {
       try {
         await provider.request({

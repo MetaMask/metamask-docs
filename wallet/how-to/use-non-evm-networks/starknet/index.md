@@ -8,14 +8,13 @@ sidebar_position: 1
 [Starknet](https://www.starknet.io/) is a non-EVM Layer 2 network.
 You can interact with users' Starknet accounts in MetaMask by connecting to the
 [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/).
-
 You can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
 [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method from
 your dapp to connect to the Starknet Snap.
 Both options support similar functionalities, but offer different ways of interacting with users'
 Starknet accounts.
-See [Connect to Starknet](connect-to-starknet.md) to get started.
 
+See [**Connect to Starknet**](connect-to-starknet.md) to get started.
 
 The following sections compare the two connection options.
 
@@ -164,13 +163,11 @@ The following section lists the core functionalities and API methods that each c
   </tbody>
 </table>
 
-## Next steps
-
-To get started, learn how to [connect your dapp to Starknet in MetaMask](connect-to-starknet.md).
-
 ## Resources
 
-The following resources provide additional information for learning about and interacting with Starknet:
+To get started, [connect your dapp to Starknet in MetaMask](connect-to-starknet.md).
+
+The following external resources provide additional information for learning about and interacting with Starknet:
 
 - [Official Starknet documentation](https://www.starknet.io/developers/)
 - [Starknet companion dapp](https://snaps.consensys.io/starknet)

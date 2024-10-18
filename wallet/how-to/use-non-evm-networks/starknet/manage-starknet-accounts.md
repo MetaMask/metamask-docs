@@ -36,7 +36,7 @@ The following example displays the account address:
   ```javascript
   const connectStarknetAccount = async () => {
     const starknet = await connect();
-    await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask
+    await starknet.enable();  // Prompts the user to connect their Starknet account using MetaMask.
     return starknet;
   };
 
@@ -57,15 +57,16 @@ The following example displays the account address:
     if (typeof provider !== "undefined" && provider.isMetaMask) {
       try {
         // Invoke the Starknet Snap to get account information.
-        const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-          method: "wallet_invokeSnap",
-          params: {
-            snapId: "npm:@starknet-snap/snap", 
-            request: {
-              method: "starknet_recoverAccounts"
+        const response = await provider // Or window.ethereum if you don't support EIP-6963.
+          .request({
+            method: "wallet_invokeSnap",
+            params: {
+              snapId: "npm:@starknet-snap/snap", 
+              request: {
+                method: "starknet_recoverAccounts"
+              }
             }
-          }
-        });
+          });
 
         if (response && response.length > 0) {
           const account = response[0]; // Get the first account.
@@ -82,7 +83,7 @@ The following example displays the account address:
     }
   };
 
-  // Call the function when needed
+  // Call the function when needed.
   showAccountInfo();
   ```
 
@@ -147,11 +148,12 @@ connect or disconnect the account.
     const connectToSnap = async () => {
       if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
-          // Request permission to access the Snap
-          await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-            method: "wallet_requestSnaps",
-            params: { [STARKNET_SNAP_ID]: {} }
-          });
+          // Request permission to access the Snap.
+          await provider // Or window.ethereum if you don't support EIP-6963.
+            .request({
+              method: "wallet_requestSnaps",
+              params: { [STARKNET_SNAP_ID]: {} }
+            });
           setIsConnected(true);
           fetchAccount();
         } catch (err) {
@@ -171,15 +173,16 @@ connect or disconnect the account.
     const fetchAccount = async () => {
       if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
-          const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-            method: "wallet_invokeSnap",
-            params: {
-              snapId: STARKNET_SNAP_ID,
-              request: {
-                method: "starknet_recoverAccounts"
+          const response = await provider // Or window.ethereum if you don't support EIP-6963.
+            .request({
+              method: "wallet_invokeSnap",
+              params: {
+                snapId: STARKNET_SNAP_ID,
+                request: {
+                  method: "starknet_recoverAccounts"
+                }
               }
-            }
-          });
+            });
 
           if (response && response.length > 0) {
             setAccountAddress(response[0].address);
@@ -240,7 +243,7 @@ const invokeStarknetContract = async () => {
 
     const contractAddress = "0xYourContractAddress";  // Replace with your contract address.
     const entrypoint = "function_name";  // The function you want to call.
-    const calldata = [/* your function arguments */];  // Replace with calldata
+    const calldata = [/* your function arguments */];  // Replace with calldata.
 
     const result = await starknet.account.execute({
       contractAddress: contractAddress,
@@ -272,24 +275,25 @@ const invokeStarknetContract = async () => {
         }
       ];
 
-      const result = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-        method: "wallet_invokeSnap",
-        params: {
-          snapId: "npm:@consensys/starknet-snap",
-          request: {
-            method: "starkNet_executeTxn",
-            params: {
-              address: "0xb60e8dd61c5d32be8058bb8eb970870f07233155", // The sender's address.
-              calls: calls, // The array of calls with entrypoint and calldata.
-              details: {
-                nonce: 1, // Optional nonce.
-                maxFee: "1000000000000000", // Maximum gas fee allowed.
-              },
-              chainId: "0x534e5f5345504f4c4941" // Starknet Sepolia testnet chain ID
+      const result = await provider // Or window.ethereum if you don't support EIP-6963.
+        .request({
+          method: "wallet_invokeSnap",
+          params: {
+            snapId: "npm:@consensys/starknet-snap",
+            request: {
+              method: "starkNet_executeTxn",
+              params: {
+                address: "0xb60e8dd61c5d32be8058bb8eb970870f07233155", // The sender's address.
+                calls: calls, // The array of calls with entrypoint and calldata.
+                details: {
+                  nonce: 1, // Optional nonce.
+                  maxFee: "1000000000000000", // Maximum gas fee allowed.
+                },
+                chainId: "0x534e5f5345504f4c4941" // Starknet Sepolia testnet chain ID.
+              }
             }
           }
-        }
-      });
+        });
 
       console.log("Transaction result: ", result);
     } catch (error) {
@@ -375,15 +379,16 @@ Use the following component at the top level of your dapp to handle account chan
     const fetchAccount = async () => {
       if (typeof provider !== "undefined" && provider.isMetaMask) {
         try {
-          const response = await provider.request({           // Or window.ethereum if you don't support EIP-6963.
-            method: "wallet_invokeSnap",
-            params: {
-              snapId: STARKNET_SNAP_ID,
-              request: {
-                method: "starknet_recoverAccounts"
+          const response = await provider // Or window.ethereum if you don't support EIP-6963.
+            .request({
+              method: "wallet_invokeSnap",
+              params: {
+                snapId: STARKNET_SNAP_ID,
+                request: {
+                  method: "starknet_recoverAccounts"
+                }
               }
-            }
-          });
+            });
 
           if (response && response.length > 0) {
             setAccount(response[0].address);
