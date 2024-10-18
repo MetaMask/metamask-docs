@@ -98,7 +98,7 @@ Registers a contract's class on the Starknet blockchain without deploying it.
 - `contractPayload`: `object` - Transaction payload to be deployed.
   - `contract`: `CompiledContract` | `string` - The compiled contract code ([in Cairo](https://book.cairo-lang.org/ch13-00-introduction-to-starknet-smart-contracts.html)).
   - `classHash?`: `string` - (Optional) The computed class hash of compiled contract.
-  - `casm?`: CompiledContract | `string` - (Optional) - The compiled [casm](https://docs.starknet.io/architecture-and-concepts/smart-contracts/cairo-and-sierra/).
+  - `casm?`: `CompiledContract` | `string` - (Optional) - The compiled [casm](https://docs.starknet.io/architecture-and-concepts/smart-contracts/cairo-and-sierra/).
   - `compiledClassHash?`: `string` - (Optional) The compiled class hash from casm.
 - `invocationsDetails`: `object` - (Optional) Transaction details object containing:
   - `nonce`: (Optional) Nonce for the transaction.
@@ -115,10 +115,10 @@ Registers a contract's class on the Starknet blockchain without deploying it.
 
 #### Returns
 
-The confirmation of sending a transaction on the starknet contract
+The confirmation of sending a transaction on the Starknet contract, which contains:
   
-  - `transaction_hash`: `string` - The transaction hash.
-  - `class_hash`: `string` - The computed class hash of compiled contract.
+- `transaction_hash`: `string` - The transaction hash.
+- `class_hash`: `string` - The computed class hash of compiled contract.
 
 #### Example
 
@@ -144,6 +144,8 @@ await getEip6963Provider.request({
     },
   },
 })
+
+```
 
 </TabItem>
 <TabItem value="Result">
@@ -787,15 +789,18 @@ await getEip6963Provider.request({
 <TabItem value="Result">
 
 ```json
-{
-  "address": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-  "addressIndex": 0,
-  "publicKey": "0x04bfcab3b7ca7e8b3f3b62b2f7f77e9e4b68080bbf8f0f4a1c8f890864d2c7c1d3c45d8b2e3f5f1c27dfeea4c2f5733e90bfc7484e2a690aa9b8ac4559d2e6a8d7",
-  "addressSalt": "0x789abc123456789abc123456789abc123456789abc123456789abc1234567890",
-  "deployTxnHash": "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
-  "derivationPath": "m/44'/9004'/0'/0/0",
-  "chainId": "0x534e5f5345504f4c4941"
-}
+[
+  {
+    "address": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+    "addressIndex": 0,
+    "publicKey": "0x04bfcab3b7ca7e8b3f3b62b2f7f77e9e4b68080bbf8f0f4a1c8f890864d2c7c1d3c45d8b2e3f5f1c27dfeea4c2f5733e90bfc7484e2a690aa9b8ac4559d2e6a8d7",
+    "addressSalt": "0x789abc123456789abc123456789abc123456789abc123456789abc1234567890",
+    "deployTxnHash": "0x05a56e2d52c817161883f50c441c3228cfe54d9f84b5b5b8b1c8b8e0e6f7e6d8",
+    "derivationPath": "m/44'/9004'/0'/0/0",
+    "chainId": "0x534e5f5345504f4c4941"
+  },
+  ...
+]
 ```
 
 </TabItem>
@@ -846,10 +851,10 @@ await getEip6963Provider.request({
         senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
         chainId: "0x534e5f5345504f4c4941",
         details: {
-            version: "0x2",
-            chainId:  "0x534e5f5345504f4c4941",
-            senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-            classHash: "0x5f3614e8671257aff9ac38e929c74d65b02d460ae966cd826c9f04a7fa8e0d4"
+          version: "0x2",
+          chainId:  "0x534e5f5345504f4c4941",
+          senderAddress: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+          classHash: "0x5f3614e8671257aff9ac38e929c74d65b02d460ae966cd826c9f04a7fa8e0d4"
         }
       },
     },
@@ -994,7 +999,7 @@ Switch the current Starknet Snap's network to a different Starknet network.
 
 #### Parameters
 
-- `chainId`: `string` - ID of the target Starknet network. 
+`chainId`: `string` - ID of the target Starknet network. 
 
 #### Returns
 
