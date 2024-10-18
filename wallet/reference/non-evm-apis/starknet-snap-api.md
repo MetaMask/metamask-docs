@@ -17,6 +17,11 @@ which supports all Starknet Snap API methods.
 
 :::note
 
+We recommend using [EIP-6963](../../concepts/wallet-interoperability.md/#eip-6963-interfaces) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+:::
+
+:::note
+
 You can also communicate with the Starknet network using the
 [Starknet API](/services/reference/starknet).
 

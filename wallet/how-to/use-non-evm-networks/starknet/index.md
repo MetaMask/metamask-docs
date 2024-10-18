@@ -163,3 +163,16 @@ The following section lists the core functionalities and API methods that each c
     </tr>
   </tbody>
 </table>
+
+## Next steps
+
+To get started, learn how to [connect your dapp to Starknet in MetaMask](connect-to-starknet.md).
+
+## Resources
+
+The following resources provide additional information for learning about and interacting with Starknet:
+
+- [Official Starknet documentation](https://www.starknet.io/developers/)
+- [Starknet companion dapp](https://snaps.consensys.io/starknet)
+- [Voyager block explorer](https://voyager.online/)
+- [Cairo language for Starkware](https://book.cairo-lang.org/)

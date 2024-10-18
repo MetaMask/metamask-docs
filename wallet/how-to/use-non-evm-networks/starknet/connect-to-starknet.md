@@ -234,7 +234,13 @@ method to directly interact with the Starknet Snap.
 
 :::note
 
-The [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) serves as a reference implementation and example dapp. It demonstrates how to manually invoke the snap using `wallet_invokeSnap`, showcasing potential use cases and UI integration. For more details, see the [source code of the companion dapp's UI](https://github.com/Consensys/starknet-snap/tree/main/packages/wallet-ui).
+We recommend using [EIP-6963](../../../concepts/wallet-interoperability.md) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+
+:::
+
+:::note
+
+The [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) serves as a reference implementation and example dapp. It demonstrates how to manually invoke the snap using `wallet_invokeSnap`, and presents potential use cases and UI integration. For more details, see the [source code of the companion dapp's UI](https://github.com/Consensys/starknet-snap/tree/main/packages/wallet-ui).
 
 :::
 
@@ -281,7 +287,6 @@ export async function callSnap(method, params) {
 :::note
 
 To connect to Starknet, the dapp user must add the Starknet Snap to MetaMask.
-Make sure to [handle user rejections](troubleshoot.md#handle-user-rejection).
 
 :::
 
@@ -430,7 +435,10 @@ export default ConnectWallet;
 ```
 
 :::note
-See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using `wallet_invokeSnap`.
+
+See how to [troubleshoot](troubleshoot.md) connection issues when configuring your dapp using 
+`wallet_invokeSnap`.
+
 :::
 
 ## Next steps
