@@ -308,12 +308,21 @@ const accountInfo = await callSnap("starkNet_createAccount", { addressIndex, dep
 #### HTML and Vanilla JS
 
 The following is a full example of a simple HTML and Vanilla JavaScript dapp that connects to the
-Starknet Snap using `wallet_invokeSnap`.
+Starknet Snap using `wallet_invokeSnap`. 
+
 It displays a button that, when selected:
 
 - Connects to Starknet in MetaMask.
 - Creates a Starknet account.
 - Displays the account address.
+
+:::note
+  
+An account can submit transactions only after it's deployed. 
+It does not deploy immediately upon creation. Deployment happens during the first [transaction](index.md#supported-functionalities).
+such as when calling `execute`(https://starknetjs.com/docs/API/classes/Account/#execute) through `get-starknet` or using [`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executeTxn) from `wallet_invokeSnap`.
+
+:::
 
 ```html
 <html lang="en">

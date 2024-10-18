@@ -175,4 +175,4 @@ The following resources provide additional information for learning about and in
 - [Official Starknet documentation](https://www.starknet.io/developers/)
 - [Starknet companion dapp](https://snaps.consensys.io/starknet)
 - [Voyager block explorer](https://voyager.online/)
-- [Cairo language for Starkware](https://book.cairo-lang.org/)
+- [Cairo language for Starknet](https://book.cairo-lang.org/)
