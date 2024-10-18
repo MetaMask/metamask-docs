@@ -75,7 +75,7 @@ The following section lists the core functionalities and API methods that each c
       <td rowspan="3"><b>Account management</b></td>
       <td>Deploy an account</td>
       <td><a href="https://starknetjs.com/docs/API/classes/Account/#deployaccount">`deployAccount` ↗</a></td>
-      <td><a href="../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount">`starkNet_createAccount`</a></td>
+      <td><a href=" /wallet/reference/non-evm-apis/starknet-snap-api/#starknet_createaccount">`starkNet_createAccount`</a></td>
     </tr>
     <tr>
       <td>Recover an account address</td>
