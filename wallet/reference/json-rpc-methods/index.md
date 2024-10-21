@@ -1,3 +1,7 @@
+---
+sidebar_class_name: "hidden"
+---
+
 # JSON-RPC API
 
 This section provides an interactive reference for the JSON-RPC API of MetaMask's [Wallet API](../../concepts/wallet-api.md). The API builds on a set of standard Ethereum methods with MetaMask-specific enhancements, and is designed for seamless integration into dapps.
