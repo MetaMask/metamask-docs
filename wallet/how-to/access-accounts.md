@@ -24,6 +24,10 @@ When accessing a user's accounts:
 - **Always** disable the connect button while the connection request is pending.
 - **Never** initiate a connection request on page load.
 
+:::note
+You can also access users' accounts on some [non-EVM networks](/wallet/how-to/use-non-evm-networks).
+:::
+
 ## Create a connect button
 
 :::caution Important
