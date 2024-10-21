@@ -45,7 +45,7 @@ The following example implements a very basic resolution from Unstoppable Domain
 Ethereum addresses in `onNameLookup`:
 
 ```typescript title="index.ts"
-import type { OnNameLookupHandler } from "@metamask/snaps-types"
+import type { OnNameLookupHandler } from "@metamask/snaps-sdk"
 
 const UNSTOPPABLE_API_KEY = "xxx"
 
@@ -64,7 +64,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
     )
     const data = await response.json()
     const resolvedAddress = data.records["crypto.ETH.address"]
-    if (address) {
+    if (resolvedAddress) {
       return {
         resolvedAddresses: [
           { resolvedAddress, protocol: "Unstoppable Domains", domainName: domain },
@@ -78,9 +78,10 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 ```
 
 :::note
-The response from the `onNameLookup` handler includes a `domainName` property. This can
-be used to do fuzzy matching on domain names, by returning the domain that was resolved rather than
-the one that was passed in.
+
+The `onNameLookup` handler response includes a `domainName` property.
+You can use this property to perform fuzzy matching on domain names by returning the resolved domain rather than the one provided in the request.
+
 :::
 
 ## Example
