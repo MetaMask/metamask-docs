@@ -4,8 +4,8 @@ import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
 import DocSidebar from '@theme/DocSidebar';
 import { useLocation } from "@docusaurus/router";
 import { prepareLinkItems, MM_REF_PATH } from '@site/src/plugins/plugin-json-rpc';
-import sidebar from "@site/wallet-sidebar.js";
 import styles from "./styles.module.css";
+const sidebar = require("../../../wallet-sidebar.js");
 
 function transformItems(items, dynamicItems) {
   return items.map(item => {
