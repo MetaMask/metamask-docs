@@ -445,7 +445,7 @@ You can clone the repository and run the example locally using `npm i && npm run
 
 After connecting to MetaMask directly, you can:
 
-- [Detect, add, and switch networks](../how-to/manage-networks).
+- [Detect, add, and switch networks](../how-to/manage-networks/).
 - [Send transactions](../how-to/send-transactions.md).
 - [Sign data](../how-to/sign-data/index.md).
-- [Display tokens, contract methods, and icons in MetaMask](../how-to/display).
+- [Display tokens, contract methods, and icons in MetaMask](../how-to/display/).
