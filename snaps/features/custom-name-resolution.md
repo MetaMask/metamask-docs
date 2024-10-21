@@ -80,7 +80,7 @@ export const onNameLookup: OnNameLookupHandler = async (request) => {
 :::note
 
 The `onNameLookup` handler response includes a `domainName` property.
-You can use this property to perform fuzzy matching on domain names by returning the resolved domain rather than the one provided in the request.
+You can use this property to perform fuzzy matching on domain names, by having the handler return the resolved domain rather than the one provided in the request.
 
 :::
 
