@@ -37,9 +37,11 @@ Key features include:
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
 
 :::note
+
 The SDK only connects to MetaMask.
 We recommend using [third-party libraries](#third-party-libraries) with SDK support if you need to
 connect to multiple wallets.
+
 :::
 
 Get started using [MetaMask SDK](metamask-sdk/index.md).
@@ -53,8 +55,10 @@ and offer additional features for managing multiple wallets.
 We recommend using third-party libraries if you need to connect to multiple wallets.
 
 :::note
+
 Due to their multi-wallet support, third-party libraries might reduce control over specific MetaMask
 features, and introduce potential inconsistencies across different wallets.
+
 :::
 
 Get started with [Wagmi](3rd-party-libraries/wagmi.md) or
