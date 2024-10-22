@@ -1,0 +1,19 @@
+name: Sonarcloud
+
+on:
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:    
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v2.1.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
