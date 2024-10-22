@@ -69,6 +69,20 @@ const config = {
           routeBasePath: "wallet",
           sidebarPath: require.resolve("./wallet-sidebar.js"),
           breadcrumbs: false,
+          admonitions: {
+            keywords: [
+              "info",
+              "success",
+              "danger",
+              "note",
+              "tip",
+              "warning",
+              "important",
+              "caution",
+              "security",
+              "flaskOnly",
+            ],
+          },
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
           remarkPlugins: [
             [

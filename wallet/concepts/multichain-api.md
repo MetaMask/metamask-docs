@@ -1,13 +1,13 @@
 ---
 description: Learn about the MetaMask Multichain API.
 sidebar_position: 4
+sidebar_custom_props:
+  flask_only: true
 ---
 
 # About the Multichain API
 
-:::warning Developer preview
-This is a developer preview of the Multichain API.
-It is only available in [MetaMask Flask](/snaps/get-started/install-flask).
+:::flaskOnly
 :::
 
 The Multichain API is a scalable, generalized web3 wallet API that supports simultaneous
@@ -32,24 +32,25 @@ Key benefits include:
 
 The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
 standard for dapps to interface with multichain wallets.
-The API includes a method [`wallet_createSession`](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
+The API includes a method [`wallet_createSession`](../reference/multichain-api.md#wallet_createsession)
 that dapps can call to create a multichain session with a wallet, with specified properties and
 authorization scopes.
-The session can be created with or without a `sessionId`, and can be updated using the same method
-`wallet_createSession`.
+Dapps can update the session using the same method `wallet_createSession`.
 
-Dapps can use the method [`wallet_invokeMethod`](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-27.md)
-to call a subset of the [Wallet JSON-RPC API methods](/wallet/reference/json-rpc-api) on a specified chain.
-Dapps can use [`wallet_getSession`](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-312.md)
-to get the scope of the current session, and
-[`wallet_revokeSession`](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-285.md) to
-revoke the current session.
-The API also supports [events](../reference/multichain-api-events.md), allowing wallets to notify
-dapps of changes to a session.
+Dapps can use [`wallet_invokeMethod`](../reference/multichain-api.md#wallet_invokemethod) to call a
+subset of the [Wallet JSON-RPC API methods](/wallet/reference/json-rpc-api) on a specified chain.
+Dapps can use [`wallet_getSession`](../reference/multichain-api.md#wallet_getsession) to get the
+scopes and properties of the active session, and use [`wallet_revokeSession`](../reference/multichain-api.md#wallet_revokesession)
+to revoke the session.
+The API also supports the [`wallet_notify`](../reference/multichain-api.md#wallet_notify) and
+[`wallet_sessionChanged`](../reference/multichain-api.md#wallet_sessionchanged) events, allowing
+wallets to notify dapps of changes to the session.
 
-The following sequence diagrams illustrate the multichain session lifecycle without and with a `sessionId`.
+See the [Multichain API reference](../reference/multichain-api.md) for full details.
 
-### Lifecycle without a `sessionId`
+### Lifecycle diagram
+
+The following sequence diagram illustrates the multichain session lifecycle.
 
 ```mermaid
 %%{
@@ -94,58 +95,5 @@ sequenceDiagram
   Dapp->>Wallet: wallet_revokeSession
   Wallet->>WalletDataStore: Update session data
   Wallet-->>Dapp: {"result": "true"}
-  end
-```
-
-### Lifecycle with a `sessionId`
-
-```mermaid
-%%{
-  init: {
-    'sequence': {
-      'actorMargin': 75,
-      'width': 200
-    }
-  }
-}%%
-
-sequenceDiagram
-  participant DappDataStore as Dapp data store
-  participant Dapp
-  participant Wallet
-  participant WalletDataStore as Wallet data store
-  
-  opt Create session
-  Dapp->>Wallet: wallet_createSession
-  Wallet->>WalletDataStore: Persist session data
-  Wallet-->>Dapp: {"sessionId": "0xdeadbeef", "sessionScopes": {...}}
-  Dapp->>DappDataStore: Persist session data
-  end
-  
-  opt Update session
-  Dapp->>Wallet: wallet_createSession (sessionId: 0xdeadbeef, {updatedScopes...})
-  Wallet->>WalletDataStore: Update session data
-  Wallet-->>Dapp: {"sessionId": "0xdeadbeef", "sessionScopes": {(updated)sessionScopes...}}
-  Dapp->>DappDataStore: Persist session data
-  end
-  
-  opt User initiated session change
-  Wallet->>WalletDataStore: User initiated session change
-  Wallet-->>Dapp: wallet_sessionChanged (sessionId: 0xdeadbeef)
-  Dapp->>DappDataStore: Update session data
-  end
-  
-  opt Revoke session
-  Dapp->>Wallet: wallet_createSession (sessionId: 0xnewbeef, no scopes)
-  Wallet->>WalletDataStore: Create new, empty session 0xnewbeef, clear all older sessions with the same dapp
-  Wallet-->>Dapp: {"result": "true"} (session is revoked)
-  Dapp->>DappDataStore: Clear session data
-  end
-  
-  alt Revoke session (alternate)
-  Dapp->>Wallet: wallet_revokeSession (sessionId: 0xdeadbeef)
-  Wallet->>WalletDataStore: Update session data
-  Wallet-->>Dapp: {"result": "true"} (session is revoked)
-  Dapp->>DappDataStore: Update session data
   end
 ```
