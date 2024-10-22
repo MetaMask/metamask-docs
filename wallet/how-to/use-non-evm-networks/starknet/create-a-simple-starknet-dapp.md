@@ -288,8 +288,6 @@ After you accept the terms in the prompts, your wallet is connected and its info
   </div>
 </div>
 
-<!--
-
 ## 4. Display the balance of and transfer an ERC-20 token
 
 Now that you have configured the wallet connection, you can display the balance of a specific ERC-20
@@ -345,7 +343,30 @@ Ensure you call the token address in the `TokenBalanceAndTransfer` component.
 }
 ```
 
-### 4.3. Update `App.tsx`
+### 4.3. Configure the TypeScript compiler 
+
+Update the `tsconfig.json` file to set the `target` version to `es2022`, ensuring compatibility with ECMAScript 2022 (ES2022):
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "es2022",                
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  }
+}
+```
+
+### 4.4. Update `App.tsx`
 
 Call the `TokenBalanceAndTransfer` component in `App.tsx`.
 Add the followinwg to the header of `App.tsx` to import the component:
@@ -362,7 +383,7 @@ Ensure that the following code is added to `App.tsx`, where the `TokenBalanceAnd
 }
 ```
 
-### 4.4. Fetch the token balance
+### 4.5. Fetch the token balance
 
 Call the `balanceOf` method to fetch the balance of the connected account:
 
@@ -371,7 +392,7 @@ const balance = await erc20.balanceOf(walletAddress);
 const formattedBalance = balance / Math.pow(10, 18);
 ```
 
-### 4.5. Transfer tokens
+### 4.6. Transfer tokens
 
 To transfer tokens, fill out the `transfer` method call and execute the transaction using the `AccountInterface`.
 
@@ -402,7 +423,7 @@ await AccountInterface.waitForTransaction(transferTxHash);
   </div>
 </div>
 
-### 4.6. Full example
+### 4.7. Full example
 
 The following a full example of displaying the balance of an ERC-20 token and performing a transfer:
 
@@ -1520,8 +1541,6 @@ Start the dapp and navigate to it in your browser.
 ```bash
 yarn start
 ```
-
--->
 
 ## Next steps
 
