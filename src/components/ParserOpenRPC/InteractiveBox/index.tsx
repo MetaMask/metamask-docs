@@ -57,14 +57,18 @@ function sortObjectKeysByArray(
   return result;
 }
 
-function removeEmptyArrays<T extends Record<string, any>>(obj: T): T {
+function removeEmptyArrays(obj: any, params: any[]) {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
+    const currentParam = params.find(item => item.name === key)
     if (newObj.hasOwnProperty(key)) {
+      if (currentParam && currentParam.required) {
+        return newObj
+      }
       if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
         delete newObj[key];
       } else if (newObj[key] !== null && typeof newObj[key] === "object") {
-        newObj[key] = removeEmptyArrays(newObj[key]);
+        newObj[key] = removeEmptyArrays(newObj[key], params);
       }
     }
   }
@@ -206,7 +210,7 @@ export default function InteractiveBox({
   }, []);
 
   const onChangeHandler = (data) => {
-    const validData = removeEmptyArrays(data);
+    const validData = removeEmptyArrays(data, params);
     if (isOpen) {
       setCurrentFormData(validData);
       onParamChange(validData);

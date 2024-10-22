@@ -482,6 +482,4 @@ export const AUTH_WALLET_TOKEN = "auth.wallet.token";
 export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
 export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
 export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
-export const LINEA_REQUEST_URL = process.env.VERCEL_ENV === "production"
-    ? LINEA_PROD_URL
-    : LINEA_DEV_URL;
+export const LINEA_REQUEST_URL = LINEA_PROD_URL;

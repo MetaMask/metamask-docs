@@ -50,6 +50,7 @@ export default function DetailsBox({
       <Heading as="h1">{method}</Heading>
       {summary !== null && (
         <p style={{ marginBottom: "0.5rem" }}>
+          <strong>Summary: </strong>
           <MDContent content={summary} />
         </p>
       )}

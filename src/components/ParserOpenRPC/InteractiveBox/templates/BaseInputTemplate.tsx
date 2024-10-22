@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { BaseInputTemplateProps } from "@rjsf/utils";
 import clsx from "clsx";
 import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
 import debounce from "lodash.debounce";
+import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
   isArray?: boolean;
@@ -26,7 +27,8 @@ export const BaseInputTemplate = ({
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(isNumber ? 0 : "");
 
-  const { isFormReseted } = formContext;
+  const { isFormReseted, currentFormData } = formContext;
+  const { isComplexTypeView } = useContext(ParserOpenRPCContext);
   const hasErrors = rawErrors?.length > 0 && !hideError && value !== "";
   const debouncedOnChange = useCallback(
     debounce((e, isInputNumber = false) => {
@@ -35,8 +37,9 @@ export const BaseInputTemplate = ({
     [],
   );
   const onInputChange = (e) => {
-    setInputValue(e?.target?.value);
-    debouncedOnChange(e);
+    const value = isNumber ? Number((+e?.target?.value || 0)) : e?.target?.value;
+    setInputValue(value);
+    isNumber ? debouncedOnChange(value, true) : debouncedOnChange(e);
   };
   const onInputNumberChange = (value) => {
     setInputValue(value);
@@ -44,10 +47,12 @@ export const BaseInputTemplate = ({
   };
 
   useEffect(() => {
-    if (!isArray) {
+    if (isComplexTypeView && Object.keys(currentFormData).includes(name)) {
+      setInputValue(currentFormData[name]);
+    } else {
       setInputValue(value);
     }
-  }, [value, isFormReseted]);
+  }, [value, isFormReseted, currentFormData]);
 
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
