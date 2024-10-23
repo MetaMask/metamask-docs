@@ -347,28 +347,32 @@
       "destination": "/wallet/reference/provider-api/"
     },
     {
+      "source": "/wallet/reference/json-rpc-api/",
+      "destination": "/wallet/reference/json-rpc-methods/"
+    },
+    {
       "source": "/guide/rpc-api/",
-      "destination": "/wallet/reference/json-rpc-api/"
+      "destination": "/wallet/reference/json-rpc-methods/"
     },
     {
       "source": "/wallet/reference/rpc-api/",
-      "destination": "/wallet/reference/json-rpc-api/"
+      "destination": "/wallet/reference/json-rpc-methods/"
     },
     {
       "source": "/wallet/reference/(eth_.*)",
-      "destination": "/wallet/reference/json-rpc-api/$1"
+      "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
       "source": "/wallet/reference/(wallet_.*)",
-      "destination": "/wallet/reference/json-rpc-api/$1"
+      "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
       "source": "/wallet/reference/(personal_.*)",
-      "destination": "/wallet/reference/json-rpc-api/$1"
+      "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
       "source": "/wallet/reference/(web3_.*)",
-      "destination": "/wallet/reference/json-rpc-api/$1"
+      "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
       "source": "/guide/snaps/",

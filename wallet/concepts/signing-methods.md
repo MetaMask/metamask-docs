@@ -10,7 +10,7 @@ Learn how to [use the recommended signing methods](../how-to/sign-data/index.md)
 
 ### `eth_signTypedData_v4`
 
-[`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4)
+[`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 is:
 
 - Cheap to verify on chain.
@@ -22,7 +22,7 @@ If onchain verifiability cost is a high priority,
 
 ### `personal_sign`
 
-[`personal_sign`](/wallet/reference/personal_sign):
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign):
 
 - Displays human-readable text when UTF-8 encoded, making it a popular choice for site logins
   (for example, [Sign-In with Ethereum](../how-to/sign-data/siwe.md)).
