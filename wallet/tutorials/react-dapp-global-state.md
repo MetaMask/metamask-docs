@@ -29,7 +29,7 @@ remains intact even after a page refresh.
 This tutorial addresses the edge case where a browser wallet might be disabled or uninstalled
 between refreshes or visits to the dapp.
 You'll add a disconnect function to reset the state, and use
-[`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions) to properly disconnect from MetaMask.
+[`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions) to properly disconnect from MetaMask.
 
 :::info Project source code
 You can view the [dapp source code on GitHub](https://github.com/MetaMask/vite-react-global-tutorial).
@@ -462,7 +462,7 @@ const connectWallet = useCallback(
 
 This code uses the `walletRdns` parameter to identify the wallet's RDNS for connecting.
 It performs an asynchronous operation to request accounts from the wallet provider using the
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method.
 
 Add the following code to `src/hooks/WalletProvider.tsx` to disconnect from a wallet:
 
@@ -491,7 +491,7 @@ const disconnectWallet = useCallback(async () => {
 ```
 
 :::caution important
-[`wallet_revokePermission`](/wallet/reference/wallet_revokePermissions) is an experimental RPC
+[`wallet_revokePermission`](/wallet/reference/json-rpc-methods/wallet_revokePermissions) is an experimental RPC
 method that might only work with MetaMask.
 Configuring the revocation in a try/catch block and separating it from the rest of the cleanup
 ensures that if a wallet does not support this feature, the rest of the disconnect functionality
