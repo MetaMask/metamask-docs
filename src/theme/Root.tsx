@@ -25,6 +25,9 @@ import AuthModal, {
   AUTH_LOGIN_STEP,
   WALLET_LINK_TYPE,
 } from "@site/src/components/AuthLogin/AuthModal";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { config } from "@site/src/lib/wagmiConfig";
 
 interface Project {
   id: string;
@@ -81,6 +84,8 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   userAPIKey: "",
   setUserAPIKey: () => {},
 });
+
+const queryClient = new QueryClient();
 
 const sdk = new MetaMaskSDK({
   dappMetadata: {
@@ -228,42 +233,45 @@ export const LoginProvider = ({ children }) => {
   ]);
 
   return (
-      <MetamaskProviderContext.Provider
-          value={
-            {
-              token,
-              metaMaskAccount,
-              setMetaMaskAccount,
-              projects,
-              setProjects,
-              metaMaskDisconnect,
-              metaMaskWalletIdConnectHandler,
-              userId,
-              metaMaskProvider,
-              uksTier,
-              setMetaMaskProvider,
-              sdk,
-              walletLinked,
-              setWalletLinked,
-              walletLinkUrl,
-              setWalletLinkUrl,
-              userAPIKey,
-              setUserAPIKey,
-            } as IMetamaskProviderContext
-          }
-      >
-        {children}
-
-        <AuthModal
-            open={openAuthModal}
-            setOpen={setOpenAuthModal}
-            setUser={setUserId}
-            setToken={setToken}
-            setUksTier={setUksTier}
-            setStep={setStep}
-            step={step}
-        />
-      </MetamaskProviderContext.Provider>
+    <MetamaskProviderContext.Provider
+      value={
+        {
+          token,
+          metaMaskAccount,
+          setMetaMaskAccount,
+          projects,
+          setProjects,
+          metaMaskDisconnect,
+          metaMaskWalletIdConnectHandler,
+          userId,
+          metaMaskProvider,
+          uksTier,
+          setMetaMaskProvider,
+          sdk,
+          walletLinked,
+          setWalletLinked,
+          walletLinkUrl,
+          setWalletLinkUrl,
+          userAPIKey,
+          setUserAPIKey,
+        } as IMetamaskProviderContext
+      }
+    >
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </WagmiProvider>
+      <AuthModal
+        open={openAuthModal}
+        setOpen={setOpenAuthModal}
+        setUser={setUserId}
+        setToken={setToken}
+        setUksTier={setUksTier}
+        setStep={setStep}
+        step={step}
+      />
+    </MetamaskProviderContext.Provider>
   );
 };
 
