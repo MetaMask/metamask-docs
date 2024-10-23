@@ -211,7 +211,7 @@ With this code in place our application should run and both connect and disconne
 
 <p align="center">
   <video width="100%" controls>
-    <source src="/connectWallet.mp4" />
+    <source src="/sdk-connect-extension.mp4" />
   </video>
 </p>
 
@@ -220,3 +220,11 @@ Currently the MetaMask SDK automatically connects to the MetaMask browser extens
 
 This functionality ensures the user is in control and has the option of connecting to either if they have both a MetaMask Mobile wallet and a browser extension version of MetaMask.
 :::
+
+To test the functionality for connecting to MetaMask Mobile, we need to disconnect from our browser extension and disable our MetaMask wallet in the browser. We will also simulate a new session with a hard refresh. Then we will see the QR code that can be used to connect to MetaMask Mobile when calling the `connect()` method from our button.
+
+<p align="center">
+  <video width="100%" controls>
+    <source src="/sdk-connect-mobile.mp4" />
+  </video>
+</p>
