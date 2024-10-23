@@ -209,6 +209,12 @@ We do however need to get an Infura ID if we plan on utilizing the Infura networ
 
 With this code in place our application should run and both connect and disconnect from MetaMask. Let's try it out and assume that you have [MetaMask](https://metamask.io/download/) or [MetaMask Flask](https://docs.metamask.io/snaps/get-started/install-flask/) installed as a browser extension. Your experience will be similar to using the injected provider as most web3 users are experienced with.
 
+<p align="center">
+  <video width="100%" controls>
+    <source src="../assets/tutorials/sdk-wagmi/connectWallet.mp4" />
+  </video>
+</p>
+
 :::note
 Currently the MetaMask SDK automatically connects to the MetaMask browser extension if it exists and does not show a QR code for connecting to Metamask Mobile unless the MetaMask browser extension is disabled or simply does not exist. In future versions of the SDK the user will get a modal that can be enabled that in one screen and one click can either connect to their browser extension if found or the MetaMask Mobile wallet if desired.
 
