@@ -203,7 +203,7 @@ This configuration sets up the wagmi library to connect to the Linea Sepolia tes
 
 This setup simplifies wallet integration and focuses on providing a smooth user experience while working with Linea Sepolia.
 
-We do however need to get an Infura ID if we plan on utilizing the Infura network. While it is possible to develop without an Infura account, you would need to use a different provider or test with local networks like hardhat which is beyond the scope and this solution is used so that we can hit a real testnet and considering the ease of setting up an Infura account and getting an API key from your project dashboard.
+We do however need to get an Infura ID if we plan on utilizing the Infura network. While it is possible to develop without an Infura account, you would need to use a different provider or test with local networks like hardhat which is beyond the scope and this solution is used so that we can hit a real testnet and considering the ease of [setting up an Infura account and getting an API key](https://docs.metamask.io/developer-tools/dashboard/get-started/create-api/) from your project dashboard.
 
 ### 3. Connecting to MetaMask Extension or Mobile
 
@@ -228,3 +228,33 @@ To test the functionality for connecting to MetaMask Mobile, we need to disconne
     <source src="/sdk-connect-mobile.mp4" />
   </video>
 </p>
+
+### 3. MetaMask JavaScript SDK Options
+
+The MetaMask JavaScript SDK Options reference can be used within the Wagmi config in the `wagmi.ts`.
+
+In our `wagmi.ts` we can create a variable named `sdkOptions`:
+
+```typescript
+const metaMaskSDKOptions = {
+  infuraAPIKey: import.meta.env.VITE_INFURA_PROJECT_ID,
+};
+```
+
+and then pass that variable into the `metaMask()` function in `connectors` and spread it's values using the `...` operator:
+
+```typescript
+  connectors: [
+    metaMask({
+      dappMetadata: {
+        name: "MetaMask SDK + Wagmi Tutorial",
+        url: "https://wagmi.io",
+        iconUrl: "https://wagmi.io/favicon.ico",
+      },
+      ...metaMaskSDKOptions,
+    }),
+```
+
+This first option [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey) should be used to make [read-only RPC requests from your dapp](/wallet/how-to/make-read-only-requests).
+
+Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for read-only operations.
