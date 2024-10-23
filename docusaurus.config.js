@@ -4,6 +4,7 @@
 require("dotenv").config();
 const { themes } = require("prism-react-renderer");
 const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
+const { fetchAndGenerateDynamicSidebarItems, NETWORK_NAMES, MM_REF_PATH, MM_RPC_URL } = require("./src/plugins/plugin-json-rpc");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
@@ -61,35 +62,20 @@ const config = {
 
   presets: [
     [
-      "@metamask/docusaurus-openrpc/dist/preset",
-      /** @type {import('@metamask/docusaurus-openrpc/dist/preset').Options} */
-      ({
+      "classic",
+      {
         docs: {
-          path: "wallet",
-          routeBasePath: "wallet",
-          sidebarPath: require.resolve("./wallet-sidebar.js"),
-          breadcrumbs: false,
+          id: "docs",
+          path: "docs",
+          routeBasePath: "/",
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-          remarkPlugins: [
-            [
-              remarkCodesandbox,
-              {
-                mode: "iframe",
-                autoDeploy: process.env.NODE_ENV === "production",
-              },
-            ],
-          ],
-          openrpc: {
-            openrpcDocument:
-              "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-            path: "reference",
-            sidebarLabel: "JSON-RPC API",
-          },
+          sidebarPath: false,
+          breadcrumbs: false,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
-      }),
+      }
     ],
   ],
   plugins: [
@@ -144,12 +130,24 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "docs",
-        path: "docs",
-        routeBasePath: "/",
+        id: "wallet",
+        path: "wallet",
+        routeBasePath: "wallet",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-        sidebarPath: false,
+        sidebarPath: require.resolve("./wallet-sidebar.js"),
         breadcrumbs: false,
+        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          const sidebarItems = await defaultSidebarItemsGenerator(args);
+          const dymanicItems = await fetchAndGenerateDynamicSidebarItems(
+            MM_RPC_URL,
+            MM_REF_PATH,
+            NETWORK_NAMES.metamask
+          )
+          if (args.item.dirName === "reference/json-rpc-methods") {
+            return [...sidebarItems, ...dymanicItems]
+          }
+          return sidebarItems;
+        }
       },
     ],
     "./src/plugins/plugin-json-rpc.ts",
