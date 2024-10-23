@@ -211,7 +211,7 @@ With this code in place our application should run and both connect and disconne
 
 <p align="center">
   <video width="100%" controls>
-    <source src="../assets/tutorials/sdk-wagmi/connectWallet.mp4" />
+    <source src="/connectWallet.mp4" />
   </video>
 </p>
 
