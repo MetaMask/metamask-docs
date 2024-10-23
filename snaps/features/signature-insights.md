@@ -1,17 +1,12 @@
 ---
 description: Provide insights to your users in MetaMask's signature confirmation flow.
 sidebar_position: 11
-sidebar_custom_props:
-  flask_only: true
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Signature insights
-
-:::flaskOnly
-:::
 
 You can provide signature insights before a user signs a message.
 For example, you can warn the user about potentially dangerous signature requests.
@@ -115,12 +110,6 @@ Once you've identified the signature object, your Snap can run any logic, includ
 Then, your Snap must either return `null` if it has no insights to provide, or an object with a
 `content` property and an optional `severity` property as specified in the
 [`onSignature`](../reference/entry-points.md#onsignature) entry point.
-
-:::caution
-Due to current MetaMask UI limitations, signature insights will only be displayed if your Snap's
-logic deems the signature to be one that a user shouldn't sign, that is, if you return a severity
-level of `SeverityLevel.Critical`.
-:::
 
 The following is an example implementation of `onSignature`:
 

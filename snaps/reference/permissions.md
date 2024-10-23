@@ -255,6 +255,28 @@ If you specify `allowedOrigins`, you should not specify `dapps` or `snaps`.
 If you want to grant a dapp or Snap an automatic connection to your Snap, skipping the need for
 users to confirm a connection, you can use [`initialConnections`](#initial-connections).
 
+### `endowment:signature-insight`
+
+To provide [signature insights](../features/signature-insights.md), a Snap must request the
+`endowment:signature-insight` permission.
+This permission grants a Snap read-only access to raw signature payloads, before they're accepted
+for signing by the user, by exposing the [`onSignature`](./entry-points.md#onsignature) entry point.
+
+This permission requires an object with an `allowSignatureOrigin` property to signal if the Snap
+should pass the `signatureOrigin` property as part of the `onSignature` parameters.
+This property represents the signature initiator origin.
+The default is `false`.
+
+Specify this permission in the manifest file as follows:
+
+```json title="snap.manifest.json"
+"initialPermissions": {
+  "endowment:signature-insight": {
+    "allowSignatureOrigin": true
+  }
+},
+```
+
 ### `endowment:transaction-insight`
 
 To provide [transaction insights](../features/transaction-insights.md) before a user signs a
@@ -280,31 +302,6 @@ Specify this permission in the manifest file as follows:
     "allowTransactionOrigin": true
   }
 }
-```
-
-### `endowment:signature-insight`
-
-:::flaskOnly
-:::
-
-To provide [signature insights](../features/signature-insights.md), a Snap must request the
-`endowment:signature-insight` permission.
-This permission grants a Snap read-only access to raw signature payloads, before they're accepted
-for signing by the user, by exposing the [`onSignature`](./entry-points.md#onsignature) entry point.
-
-This permission requires an object with an `allowSignatureOrigin` property to signal if the Snap
-should pass the `signatureOrigin` property as part of the `onSignature` parameters.
-This property represents the signature initiator origin.
-The default is `false`.
-
-Specify this permission in the manifest file as follows:
-
-```json title="snap.manifest.json"
-"initialPermissions": {
-  "endowment:signature-insight": {
-    "allowSignatureOrigin": true
-  }
-},
 ```
 
 ### `endowment:webassembly`

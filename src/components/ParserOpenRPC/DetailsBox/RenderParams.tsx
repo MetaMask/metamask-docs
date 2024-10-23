@@ -124,7 +124,7 @@ const renderSchema = (schemaItem, schemas, name) => {
           type={schemaItem.schema.enum ? "enum" : schemaItem.schema.type}
           required={!!schemaItem.required}
           description={
-            schemaItem.schema.description || schemaItem.schema.title || ""
+            schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ""
           }
         />
         {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}

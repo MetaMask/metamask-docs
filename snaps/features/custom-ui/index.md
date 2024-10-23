@@ -957,13 +957,16 @@ In addition to the components provided by the SDK, you can [define your own comp
 If you have a Snap that uses the deprecated function-based custom UI library, follow these
 steps to upgrade it to use JSX:
 
-1. Upgrade dependencies in `packages/snap/package.json`:
+1. Update dependencies in `packages/snap/package.json`:
 
     - Upgrade `@metamask/snaps-sdk` to `^6.1.1` or later.
     - Upgrade `@metamask/snaps-cli` to `^6.2.1` or later.
     - Upgrade `@metamask/snaps-jest` to `^8.2.0` or later.
+    - Add `@types/react` with version `18.2.4` (without caret range) under `devDependencies`.
+    - Add `@types/react-dom` with version `18.2.4` (without caret range) under `devDependencies`.
    
    Run `yarn install` to install the new versions.
+
 
 2. Update `packages/snap/.eslintrc.js`:
 
