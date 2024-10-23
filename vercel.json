@@ -355,7 +355,19 @@
       "destination": "/wallet/reference/json-rpc-api/"
     },
     {
-      "source": "/wallet/reference/([^/]*_[^/]*)",
+      "source": "/wallet/reference/(eth_.*)",
+      "destination": "/wallet/reference/json-rpc-api/$1"
+    },
+    {
+      "source": "/wallet/reference/(wallet_.*)",
+      "destination": "/wallet/reference/json-rpc-api/$1"
+    },
+    {
+      "source": "/wallet/reference/(personal_.*)",
+      "destination": "/wallet/reference/json-rpc-api/$1"
+    },
+    {
+      "source": "/wallet/reference/(web3_.*)",
       "destination": "/wallet/reference/json-rpc-api/$1"
     },
     {

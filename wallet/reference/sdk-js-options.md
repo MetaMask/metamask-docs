@@ -282,7 +282,7 @@ modals: {
 </TabItem>
 </Tabs>
 
-An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/display-custom-modals.md).
+An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
 This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
 
 ### `openDeeplink`
