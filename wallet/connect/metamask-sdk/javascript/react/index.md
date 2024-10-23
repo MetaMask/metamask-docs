@@ -15,10 +15,9 @@ Import MetaMask SDK into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
-:::info React UI
+:::info MetaMask SDK + Wagmi
 This page provides instructions for using the standard `@metamask/sdk-react` package.
-Alternatively, you can use the [`@metamask/sdk-react-ui`](react-ui.md) package to easily use
-[wagmi](https://wagmi.sh/) hooks and a pre-styled UI button component for connecting to MetaMask.
+Alternatively, you can use [wagmi](https://wagmi.sh/) hooks and follow our tutorial on setting up MetaMask SDK using Create Wagmi or our Consensys Create Web3 CLI to scaffold a project that comes configured with Viem, Wagmi and MetaMask SDK.
 :::
 
 ## Steps
