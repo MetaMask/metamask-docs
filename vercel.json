@@ -356,15 +356,15 @@
     },
     {
       "source": "/wallet/reference/(eth_.*)",
-      "destination": "/wallet/reference/json-rpc-api/eth_$1",
+      "destination": "/wallet/reference/json-rpc-api/eth_$1"
     },
     {
       "source": "/wallet/reference/(wallet_.*)",
-      "destination": "/wallet/reference/json-rpc-api/wallet_$1",
+      "destination": "/wallet/reference/json-rpc-api/wallet_$1"
     },
     {
       "source": "/wallet/reference/(personal_.*)",
-      "destination": "/wallet/reference/json-rpc-api/personal_$1",
+      "destination": "/wallet/reference/json-rpc-api/personal_$1"
     },
     {
       "source": "/guide/snaps/",
