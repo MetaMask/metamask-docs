@@ -6,7 +6,7 @@ sidebar_position: 4
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Using the MetaMask SDK with React and Wagmi
+# Create a React dapp with MetaMask SDK and Wagmi
 
 This tutorial walks you through creating a simple JavaScript dapp and integrating it with our MetaMask SDK.
 
