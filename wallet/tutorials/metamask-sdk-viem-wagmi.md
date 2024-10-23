@@ -53,11 +53,7 @@ npm create wagmi@latest  --template vite-react
   </TabItem>
 </Tabs>
 
-This command will prompt you for a project name, we can use something simple to describe our demo: `mmsdk-wagmi-tutorial`.
-
-Once we run this command we will need to give our project a name and change directories into that project and install dependencies.
-
-install the node module dependencies:
+This command will prompt you for a project name, we can use something simple to describe our demo: `mmsdk-wagmi-tutorial`. Once the CLI is finished, we can change directories into that project and install the node module dependencies:
 
 <Tabs>
   <TabItem value="pnpm" label="pnpm" default>
