@@ -266,7 +266,7 @@ In this section, to wrap up our basic understanding of the MetaMask JavaScript S
 
 Let's update the `metaMaskSDKOptions` object bringing each option in one-by-one in order to test and see how each option affects the Metamask SDK behavior.
 
-#### Prefer the MetaMask Extension Over MetaMask Mobile
+<!-- #### Prefer the MetaMask Extension Over MetaMask Mobile
 
 Since the default value is `false`, let's set this value to `true` and run our application again.
 
@@ -278,7 +278,7 @@ const metaMaskSDKOptions = {
 
 By enabling this feature with a `true` value, when the MetaMask SDK displays a modal for connecting to MetaMask Mobile this option would prioritize installing MetaMask Extension while still having the option for connecting via QR code to Mobile. It is set to `false` as default as usually if the user does not have MetaMask extension we want to give them the option to connect via Metamask Mobile with the least amount of clicks.
 
-<!-- #### Enable or Disable Automatic use of MetaMask Extension if Detected
+#### Enable or Disable Automatic use of MetaMask Extension if Detected
 
 The default value is ``
 
