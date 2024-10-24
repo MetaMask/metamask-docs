@@ -49,7 +49,7 @@ You can configure the SDK using any [options](../../../reference/sdk-js-options.
   the displayed modals](../../../how-to/display/custom-modals.md).
 
 You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
-Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
+Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
 [`request()`](../../../reference/provider-api.md#request) first, since it prompts the installation
 or connection popup to appear.
 
