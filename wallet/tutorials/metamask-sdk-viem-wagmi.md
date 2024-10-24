@@ -256,4 +256,97 @@ and then pass that variable into the `metaMask()` function in `connectors` and s
   ],
 ```
 
-This first option [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey) should be used so that when you make [read-only RPC requests from your dapp](/wallet/how-to/make-read-only-requests) that user does not need to confirm any modals or have any wallet interactions. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for read-only operations.
+This first option, the [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey), can be used with the MetaMask SDK installed to make direct, read-only JSON-RPC requests, These are blockchain requests that do not require user wallet interaction. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for [read-only operations](/wallet/how-to/make-read-only-requests).
+
+### 3. Additional JavaScript SDK Options
+
+We have already looked at the `infuraAPIKey` option and at a high level understand how it can be used to improve the user experience when making read only calls, but we can add additional options to our `metaMaskSDKOptions` object to get desired effects around how the SDK checks the installation of MetaMask in the Browser, which communication layer preference or server URL is used, enabling or disabling debug mode, or even an option that could enable or disable using the MetaMask extension only or preferring the extension over MetaMask Mobile as well as many others. 
+
+In this section, to wrap up our basic understanding of the MetaMask JavaScript SDK we will preview what we think are the main options that developers can easily plug in to get desired behaviors. For a full list of MetaMask JavaScript.
+
+Let's update the `metaMaskSDKOptions` object bringing each option in one-by-one in order to test and see how each option affects the Metamask SDK behavior.
+
+#### Prefer the MetaMask Extension Over MetaMask Mobile
+
+Since the default value is `false`, let's set this value to `true` and run our application again.
+
+```typescript
+const metaMaskSDKOptions = {
+  preferDesktop: true
+};
+```
+
+By enabling this feature with a `true` value, when the MetaMask SDK displays a modal for connecting to MetaMask Mobile this option would prioritize installing MetaMask Extension while still having the option for connecting via QR code to Mobile. It is set to `false` as default as usually if the user does not have MetaMask extension we want to give them the option to connect via Metamask Mobile with the least amount of clicks.
+
+<!-- #### Enable or Disable Automatic use of MetaMask Extension if Detected
+
+The default value is ``
+
+```typescript
+const metaMaskSDKOptions = {
+  extensionOnly: true
+};
+```
+
+By enabling this feature with a `true` value, there appears to be no change in how the MetaMask SDK behaves.............  -->
+
+#### Enables or disables immediately checking if MetaMask is installed on the user's browser
+
+The default value is `false`. We can set this to `true` and check the MetaMask SDK's behavior.
+
+```typescript
+const metaMaskSDKOptions = {
+  checkInstallationImmediately: true,
+};
+```
+
+The easiest way to check this changed behavior is to disable the MetaMask extension and re-load your dapp and see that when this option is set to true that the SDK immediately checks and notifies the user with a modal that they can either install the MetaMask extension or connect with mobile QR code to MetaMask Mobile.
+
+#### Enables or disables checking if MetaMask is installed on the user's browser before each RPC request
+
+The default value is `false`.
+
+```typescript
+const metaMaskSDKOptions = {
+  checkInstallationOnAllCalls: true
+};
+```
+The easiest way to check this changed behavior is to disable the MetaMask extension and re-load your dapp and try to make a read-only RPC request without the InfuraAPIKey in place. yu will see similar modal as the previous test we did but it will notify the user upon the RPC request being made.
+
+#### Enable or Disable using Deeplink to Connect MetaMask Mobile
+
+The default value is `false`, by setting this to true the MetaMask SDK will use universal linking instead.
+
+```typescript
+const metaMaskSDKOptions = {
+  useDeeplink: true
+};
+```
+
+If you are using this feature you will need to test your dapp on a mobile device using it's native browser.
+
+#### Map RPC URLs for Read-only RPC Requests
+
+The default value is `{ }`. This option should be used in conjunction with the `infuraAPIKey` and `defaultReadOnlyChainId`. Imagine that we want to make read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only requests to the local testnet (chain ID 0x539) uses a custom node.
+
+The `infuraAPIKey` provides access to various networks supported by Infura
+The `readonlyRPCMap` provides access to custom nodes and override Infura networks in case of a conflict.
+
+You can configure your dapp to make read-only requests using the Infura API, custom nodes, or both. We have already seen an example of configuring our dapp to use the `infuraAPIKey`.
+
+You can use both the Infura API and custom nodes to make read-only requests by specifying both the infuraAPIKey and readonlyRPCMap options when instantiating the SDK in your dapp:
+
+```typescript
+const metaMaskSDKOptions = {
+  infuraAPIKey: import.meta.env.VITE_INFURA_PROJECT_ID,
+  readonlyRPCMap: {
+    "0x539": "http://localhost:8545",
+  }
+};
+```
+
+To see more detailed information on [how to make read-only requests](https://docs.metamask.io/wallet/how-to/make-read-only-requests/#use-the-infura-api), this page is useful for understanding how to use `infuraAPIKey`, `readonlyRPCMap`, and/or `defaultReadOnlyChainId` together.
+
+### Conclusion
+
+We have walked through generating a dapp using Create Wagmi and configuration of the MetaMask SDK. Explored how the MetaMask SDK works within a React application, how it behaves out of the box as well how we can use various options to customize it's behavior and briefly touched on other options that help you as a developer to use Infura API keys and override things like RPC mappings and default read-only chain.
