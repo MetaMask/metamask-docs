@@ -131,7 +131,7 @@ window.addEventListener("load", setup)
 
 [Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests
 are submitted to the currently connected network.
-Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/eth_chainId)
+Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainId)
 RPC method to detect the chain ID of the user's current network, and listens to the
 [`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event to detect when the
 user changes networks:
@@ -151,7 +151,7 @@ function handleChainChanged(chainId) {
 
 To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances,
 your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 
 Add the following code to `src/detect.js`, which creates a button to allow users to connect to
 MetaMask from your dapp.

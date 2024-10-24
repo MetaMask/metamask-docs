@@ -26,6 +26,8 @@ const renderSchema = (schemaItem, schemas, name) => {
         type="object"
         required={schemaItem.required || !!item.required}
         description={item.description || item.title || ""}
+        pattern={item.pattern}
+        defaultVal={item.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -56,6 +58,8 @@ const renderSchema = (schemaItem, schemas, name) => {
         type="array"
         required={schemaItem.required || !!item.required}
         description={schemaItem.description || item.description || item.title || ""}
+        pattern={schemaItem.pattern}
+        defaultVal={schemaItem.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -82,6 +86,8 @@ const renderSchema = (schemaItem, schemas, name) => {
         type={type}
         required={schemaItem.required || !!item.required}
         description={item.description || item.title || ""}
+        pattern={item.pattern}
+        defaultVal={item.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -106,10 +112,10 @@ const renderSchema = (schemaItem, schemas, name) => {
   const renderEnum = (enumValues) => {
     return (
       <div className={styles.enumWrapper}>
-        <div className="padding--md">Possible enum values</div>
+        <span className={styles.propItemLabel}>Enum:</span>
         {enumValues.map((value, index) => (
-          <div key={index} className={styles.enumItem}>
-            <div className={styles.enumTitle}>{value}</div>
+          <div key={index} className={styles.propItemValue}>
+            {`"${value}"`}
           </div>
         ))}
       </div>
@@ -126,6 +132,8 @@ const renderSchema = (schemaItem, schemas, name) => {
           description={
             schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ""
           }
+          pattern={schemaItem.schema.pattern || schemaItem.pattern}
+          defaultVal={schemaItem.schema.default || schemaItem.default}
         />
         {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
@@ -139,6 +147,8 @@ const renderSchema = (schemaItem, schemas, name) => {
         type={schemaItem.enum ? "enum" : schemaItem.type}
         required={!!schemaItem.required}
         description={schemaItem.description || schemaItem.title}
+        pattern={schemaItem.pattern}
+        defaultVal={schemaItem.default}
       />
       {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
@@ -150,8 +160,9 @@ export const renderParamSchemas = (inputSchema, schemas) => {
     <>
       {inputSchema.map((item, i) => {
         return (
-          <div key={`${i}`} className={styles.borderTopLine}>
+          <div key={`${i}`}>
             {renderSchema(item, schemas, item.name)}
+            {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         );
       })}

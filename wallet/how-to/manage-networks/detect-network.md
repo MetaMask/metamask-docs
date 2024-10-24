@@ -8,7 +8,7 @@ sidebar_position: 1
 It's important to keep track of the user's network chain ID because all RPC requests are submitted
 to the currently connected network.
 
-Use the [`eth_chainId`](/wallet/reference/eth_chainId)
+Use the [`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainId)
 RPC method to detect the chain ID of the user's current network.
 Listen to the [`chainChanged`](../../reference/provider-api.md#chainchanged) provider event to
 detect when the user changes networks.

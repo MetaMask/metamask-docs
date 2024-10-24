@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would 
 pay for their transaction.
 
-It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/eth_gasPrice) RPC
+It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/json-rpc-methods/eth_gasPrice) RPC
 method using the global Ethereum provider made available to Snaps, and displays this as a percentage 
 of gas fees in a tab in MetaMask's transaction confirmation window.
 

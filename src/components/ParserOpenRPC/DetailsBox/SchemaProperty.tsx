@@ -7,6 +7,8 @@ interface SchemaPropertyProps {
   type?: string;
   required?: boolean;
   description?: string;
+  pattern?: string;
+  defaultVal?: string;
 }
 
 interface TagProps {
@@ -18,6 +20,8 @@ export const SchemaProperty = ({
   type,
   required,
   description,
+  pattern,
+  defaultVal
 }: SchemaPropertyProps) => {
   return (
     <div className="padding-vert--md">
@@ -33,6 +37,18 @@ export const SchemaProperty = ({
       </div>
       <p className="margin--none">
         <MDContent content={description} />
+        {pattern && (
+          <div className={styles.propItemWrapper}>
+            <span className={styles.propItemLabel}>Pattern: </span>
+            <span className={styles.propItemValue}>{pattern}</span>
+          </div>
+        )}
+        {defaultVal && (
+          <div className={styles.propItemWrapper}>
+            <span className={styles.propItemLabel}>Default: </span>
+            <span className={styles.propItemValue}>{defaultVal}</span>
+          </div>
+        )}
       </p>
     </div>
   );

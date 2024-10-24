@@ -29,7 +29,7 @@ function transformItems(items, dynamicItems) {
       }
     }
     if (newItem.href) {
-      if (newItem.href.endsWith("index")) {
+      if (newItem.href.endsWith("/index")) {
         newItem.href = newItem.href.slice(0, -5);
       }
       if (!newItem.href.startsWith("/")) {

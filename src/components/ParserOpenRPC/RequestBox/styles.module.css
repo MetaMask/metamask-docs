@@ -18,9 +18,16 @@
   color: #fff;
 }
 
-.codeWrapper {
+.codeWrapper pre {
   max-height: 328px;
   overflow-y: auto;
+}
+
+.codeWrapper button {
+  opacity: 1 !important;
+  position: relative;
+  top: -55px;
+  right: 5px;
 }
 
 .cardFooter {

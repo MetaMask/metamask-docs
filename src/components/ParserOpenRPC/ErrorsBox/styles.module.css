@@ -2,6 +2,7 @@
   border: 1px solid #848c96;
   border-radius: 8px;
   overflow: hidden;
+  margin-bottom: 1.5rem;
 }
 
 .errRow {

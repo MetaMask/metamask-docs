@@ -12,7 +12,7 @@ a [JSON-RPC API](#json-rpc-api).
 The API methods are documented in the following references:
 
 - [Ethereum provider API reference](../reference/provider-api.md)
-- [JSON-RPC API reference](/wallet/reference/json-rpc-api)
+- [JSON-RPC API reference](/wallet/reference/json-rpc-methods)
   :::
 
 ## Ethereum provider API
@@ -53,7 +53,7 @@ MetaMask uses the [`request()`](../reference/provider-api.md#request)
 method of the [provider API](#ethereum-provider-api) to wrap a JSON-RPC API.
 The JSON-RPC API contains standard Ethereum JSON-RPC API methods and MetaMask-specific methods.
 
-The RPC methods are documented in the interactive [JSON-RPC API reference](/wallet/reference/json-rpc-api).
+The RPC methods are documented in the interactive [JSON-RPC API reference](/wallet/reference/json-rpc-methods).
 
 :::note
 All RPC method requests can return errors.
@@ -74,19 +74,19 @@ Under the hood, permissions are plain, JSON-compatible objects, with fields that
 internally by MetaMask.
 
 Restricted methods are methods that cannot be called unless you have permission to do so using
-[`wallet_requestPermissions`](/wallet/reference/wallet_requestpermissions) or
+[`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions) or
 [`wallet_requestSnaps`](/snaps/reference/wallet-api-for-snaps/#wallet_requestsnaps).
 
 The following methods are restricted:
 
-- [`eth_accounts`](/wallet/reference/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`.
+- [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`.
   Granting permission for `eth_accounts` also grants permissions for the following methods:
 
-  - [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
-  - [`personal_sign`](/wallet/reference/personal_sign)
-  - [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
+  - [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction)
+  - [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign)
+  - [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
   :::caution important
-  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/eth_requestAccounts),
+  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts),
   which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
   See [how to access a user's accounts](../how-to/access-accounts.md) for more information.
   :::
@@ -100,4 +100,4 @@ The following methods are restricted:
 ### Unrestricted methods
 
 Unrestricted methods do not require requesting permission to call them, but they might require confirmation by the
-user (for example, [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain)).
+user (for example, [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)).

@@ -1,13 +1,60 @@
-.paramWrapper {
-  border-bottom: 1px solid #848c96;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1rem;
+:root {
+  --prop-item-bg: #24272A;
+  --prop-item-color: #BBC0C5;
+  --prop-item-border-color: #848C96;
 }
 
-.borderWrapper {
-  border-bottom: 1px solid #848c96;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+:root[data-theme="light"] {
+  --prop-item-bg: #fff;
+  --prop-item-color: #6A737D;
+  --prop-item-border-color: #BBC0C5;
+}
+
+.propItemWrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0;
+}
+
+.propItemLabel {
+  padding-right: 4px;
+}
+
+.propItemValue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 24px;
+  padding: 2px 8px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--prop-item-color);
+  background-color: var(--prop-item-bg);
+  border-radius: 999px;
+  border: 1px solid var(--prop-item-border-color);
+  margin: 2px 4px;
+}
+
+.summaryText {
+  font-style: italic;
+  color: #6a737d;
+  font-weight: 400;
+}
+
+.paramContainer {
+  border: 1px solid #848c96;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+}
+
+.paramSeparator {
+  border: 0;
+  border-top: 1px solid #848c96;
+  margin: 1rem 0 .5rem;
+  width: 100%;
 }
 
 .textAltColor {
@@ -35,23 +82,9 @@
 }
 
 .enumWrapper {
-  border: 1px solid #848c96;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-}
-
-.enumItem {
-  border-top: 1px solid #848c96;
-  padding: 16px;
-}
-
-.enumTitle {
-  display: inline-block;
-  font-size: 12px;
-  line-height: 1;
-  padding: 4px;
-  border: 1px solid #bbc0c5;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
 }
 
 .secondaryHeading {

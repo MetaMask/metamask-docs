@@ -157,7 +157,7 @@ void OnWalletAuthorized(object sender, EventArgs e) {
 }
 ```
 
-You can call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using `wallet.Request(myRequest)`.
+You can call any [JSON-RPC API method](/wallet/reference/json-rpc-methods) using `wallet.Request(myRequest)`.
 The following is a sample transaction request:
 
 ```csharp

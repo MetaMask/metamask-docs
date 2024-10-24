@@ -14,7 +14,7 @@ Dapps can install and communicate with Snaps using a subset of the
 This page is a reference for those Snaps-specific methods.
 
 :::note
-See the [Wallet JSON-RPC API interactive reference](/wallet/reference/json-rpc-api) for the other
+See the [Wallet JSON-RPC API interactive reference](/wallet/reference/json-rpc-methods) for the other
 methods dapps can call.
 :::
 

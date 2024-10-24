@@ -49,13 +49,20 @@ export default function DetailsBox({
       )}
       <Heading as="h1">{method}</Heading>
       {summary !== null && (
-        <p style={{ marginBottom: "0.5rem" }}>
+        <p
+          style={{ marginBottom: "0.5rem" }}
+          className={clsx("padding-bottom--md", styles.borderBottomLine)}
+        >
           <strong>Summary: </strong>
-          <MDContent content={summary} />
+          <span className={styles.summaryText}>
+            <MDContent content={summary} />
+          </span>
         </p>
       )}
       {description !== null && (
-        <MDContent content={description} />
+        <div className="padding-top--md">
+          <MDContent content={description} />
+        </div>
       )}
       {extraContent && <div className="padding-top--lg">{extraContent}</div>}
       <Heading
@@ -67,27 +74,29 @@ export default function DetailsBox({
       >
         Parameters
       </Heading>
-      {params.length === 0 ? (
-        <div>This method does not accept any parameters</div>
-      ) : (
-        <>{params && renderParamSchemas(params, components)}</>
-      )}
+      <div className={styles.paramContainer}>
+        {params.length === 0 ? (
+          <div className="padding-vert--md">
+            This method doesn't accept any parameters.
+          </div>
+        ) : (
+          params && renderParamSchemas(params, components)
+        )}
+      </div>
       <Heading
         as="h2"
-        className={clsx(
-          styles.secondaryHeading,
-          styles.borderBottomLine,
-          "padding-top--lg padding-vert--md",
-        )}
+        className={clsx(styles.secondaryHeading, "padding-top--lg padding-vert--md")}
       >
         Returns
       </Heading>
-      {result?.description && (
-        <div className="padding-vert--md">
-          <MDContent content={result.description} />
-        </div>
-      )}
-      {result && renderResultSchemas(result, components)}
+      <div className={styles.paramContainer}>
+        {result?.description && (
+          <div className="padding-vert--md">
+            <MDContent content={result.description} />
+          </div>
+        )}
+        {result && renderResultSchemas(result, components)}
+      </div>
     </>
   );
 }

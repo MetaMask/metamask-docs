@@ -64,7 +64,7 @@ const ethereum = MMSDK.getProvider()
 ### 4. Use the SDK
 
 Use the SDK by calling any [provider API methods](../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) using
+Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
 [`request()`](../../../reference/provider-api.md#request) first, since it
 prompts the installation or connection popup to appear.
 
