@@ -67,7 +67,7 @@
     "react-tippy": "^1.4.0",
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0",
-    "sass": "^1.77.6"
+    "sass": "^1.80.3"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.5.2",
