@@ -40,15 +40,10 @@ const NavbarWalletComponent: FC = ({
   const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [userAccount, setUserAccount] = useState(
-    reformatMetamaskAccount(metaMaskAccount),
-  );
+  const [userAccount, setUserAccount] = useState(metaMaskAccount);
 
-  const {
-    data: ensName,
-    status: ensNameStatus,
-  } = useEnsName({
-    address:  metaMaskAccount as `0x${string}`,
+  const { data: ensName, status: ensNameStatus } = useEnsName({
+    address: metaMaskAccount as `0x${string}`,
   });
 
   const toggleDropdown = () => {
@@ -128,9 +123,9 @@ const NavbarWalletComponent: FC = ({
     if (ensNameStatus === "success" && ensName) {
       setUserAccount(ensName);
     } else if (metaMaskAccount) {
-      setUserAccount(reformatMetamaskAccount(metaMaskAccount));
+      setUserAccount(metaMaskAccount);
     } else {
-      setUserAccount(null)
+      setUserAccount(null);
     }
   }, [metaMaskAccount, ensNameStatus, ensName]);
 
@@ -169,7 +164,9 @@ const NavbarWalletComponent: FC = ({
               className={styles.avatar}
               alt="avatar"
             />{" "}
-            <span className={styles.walletId}>{userAccount}</span>
+            <span className={styles.walletId}>
+              {ensName || reformatMetamaskAccount(userAccount)}
+            </span>
             <button
               data-testid="navbar-account-copy"
               className={styles.copyButton}
