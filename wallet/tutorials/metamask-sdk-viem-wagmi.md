@@ -207,7 +207,7 @@ We will use an InfuraAPIKey to utilize the Infura network for this tutorial, as 
 
 ### 3. Connecting to MetaMask Extension or Mobile
 
-With this code in place our application should run and both connect and disconnect from MetaMask. Let's try it out and assume that you have [MetaMask](https://metamask.io/download/) or [MetaMask Flask](https://docs.metamask.io/snaps/get-started/install-flask/) installed as a browser extension. Your experience will be similar to using the injected provider as most web3 users are experienced with.
+With this code in place our application should run and both connect and disconnect from MetaMask. Let's try it out and assume that you have [MetaMask](https://metamask.io/download/) or [MetaMask Flask](https://docs.metamask.io/snaps/get-started/install-flask/) installed as a browser extension. Your connection experience will be similar to that of using the injected provider, as most web3 users are experienced with.
 
 <p align="center">
   <video width="100%" controls>
@@ -216,9 +216,9 @@ With this code in place our application should run and both connect and disconne
 </p>
 
 :::note
-Currently the MetaMask SDK automatically connects to the MetaMask browser extension if it exists and does not show a QR code for connecting to Metamask Mobile unless the MetaMask browser extension is disabled or simply does not exist. In future versions of the SDK the user will get a modal that can be enabled that in one screen and one click can either connect to their browser extension if found or the MetaMask Mobile wallet if desired.
+Currently, the MetaMask SDK automatically connects to the MetaMask browser extension if it exists. It does not show a QR code for linking to Metamask Mobile unless the MetaMask browser extension is disabled or does not exist.
 
-This functionality ensures the user is in control and has the option of connecting to either if they have both a MetaMask Mobile wallet and a browser extension version of MetaMask.
+This functionality ensures the user is in control and can connect to either if they have both a MetaMask Mobile and MetaMask wallet extension.
 :::
 
 To test the functionality for connecting to MetaMask Mobile, we need to disconnect from our browser extension and disable our MetaMask wallet in the browser. We will also simulate a new session with a hard refresh. Then we will see the QR code that can be used to connect to MetaMask Mobile when calling the `connect()` method from our button.
@@ -231,7 +231,7 @@ To test the functionality for connecting to MetaMask Mobile, we need to disconne
 
 ### 3. MetaMask JavaScript SDK Options
 
-The MetaMask JavaScript SDK Options reference can be used within the Wagmi config in the `wagmi.ts`.
+The MetaMask JavaScript SDK Options reference can be used within the Wagmi config in: `wagmi.ts`.
 
 In our `wagmi.ts` we can create a variable named `sdkOptions`:
 
@@ -241,7 +241,7 @@ const metaMaskSDKOptions = {
 };
 ```
 
-and then pass that variable into the `metaMask()` function in `connectors` and spread it's values using the `...` operator:
+And then pass that variable into the `metaMask()` function in `connectors` and spread it's values using the `...` operator:
 
 ```typescript
   connectors: [
@@ -250,33 +250,33 @@ and then pass that variable into the `metaMask()` function in `connectors` and s
         name: "MetaMask SDK + Wagmi Tutorial",
         url: "https://wagmi.io",
         iconUrl: "https://wagmi.io/favicon.ico",
-      },
-      ...metaMaskSDKOptions,
-    }),
-  ],
+ },
+ ...metaMaskSDKOptions,
+ }),
+ ],
 ```
 
-This first option, the [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey), can be used with the MetaMask SDK installed to make direct, read-only JSON-RPC requests, These are blockchain requests that do not require user wallet interaction. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for [read-only operations](/wallet/how-to/make-read-only-requests).
+This first option, the [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey), can be used with the MetaMask SDK installed to make direct, read-only JSON-RPC requests, These are blockchain requests that do not require user wallet interaction. Your dapp can call most JSON-RPC API methods directly, bypassing user wallet authentication for [read-only operations](/wallet/how-to/make-read-only-requests).
 
-### 3. Additional JavaScript SDK Options
+### 4. Additional JavaScript SDK Options
 
-We have already looked at the `infuraAPIKey` option and at a high level understand how it can be used to improve the user experience when making read only calls, but we can add additional options to our `metaMaskSDKOptions` object to get desired effects around how the SDK checks the installation of MetaMask in the Browser, which communication layer preference or server URL is used, enabling or disabling debug mode, or even an option that could enable or disable using the MetaMask extension only or preferring the extension over MetaMask Mobile as well as many others. 
+We have already looked at the `infuraAPIKey` option and at a high level understand how it can be used to improve the user experience when making read-only calls. Still, we can add additional options to our `metaMaskSDKOptions` object to get desired effects around how the SDK checks the installation of MetaMask in the browser, which communication layer preference or server URL is used, enabling or disabling debug mode, or even an option that could enable or disable using the MetaMask extension only or preferring the extension over MetaMask Mobile as well as many others. 
 
-In this section, to wrap up our basic understanding of the MetaMask JavaScript SDK we will preview what we think are the main options that developers can easily plug in to get desired behaviors. For a full list of MetaMask JavaScript.
+In this section, to wrap up our basic understanding of the MetaMask JavaScript SDK we will preview what we think are the main options that developers can easily plug in to get desired behaviors. For a complete list of MetaMask JavaScript.
 
-Let's update the `metaMaskSDKOptions` object bringing each option in one-by-one in order to test and see how each option affects the Metamask SDK behavior.
+Let's update the `metaMaskSDKOptions` object, bringing various options in one by one to test and see how each option affects the Metamask SDK behavior.
 
 <!-- #### Prefer the MetaMask Extension Over MetaMask Mobile
 
-Since the default value is `false`, let's set this value to `true` and run our application again.
+Since the default value is `false`, let's set this value to `true` and rerun our application.
 
 ```typescript
 const metaMaskSDKOptions = {
-  preferDesktop: true
+ preferDesktop: true
 };
 ```
 
-By enabling this feature with a `true` value, when the MetaMask SDK displays a modal for connecting to MetaMask Mobile this option would prioritize installing MetaMask Extension while still having the option for connecting via QR code to Mobile. It is set to `false` as default as usually if the user does not have MetaMask extension we want to give them the option to connect via Metamask Mobile with the least amount of clicks.
+By enabling this feature with a `true` value, when the MetaMask SDK displays a modal for connecting to MetaMask Mobile this option would prioritize installing MetaMask Extension while still having the option for connecting via QR code to Mobile. It is set to `false` as the default. If the user does not have a MetaMask extension, we want to give them the option to connect via Metamask Mobile with the least amount of clicks.
 
 #### Enable or Disable Automatic use of MetaMask Extension if Detected
 
@@ -284,13 +284,13 @@ The default value is ``
 
 ```typescript
 const metaMaskSDKOptions = {
-  extensionOnly: true
+ extensionOnly: true
 };
 ```
 
 By enabling this feature with a `true` value, there appears to be no change in how the MetaMask SDK behaves.............  -->
 
-#### Enables or disables immediately checking if MetaMask is installed on the user's browser
+#### Enable or disable immediately checking if MetaMask is installed in the browser
 
 The default value is `false`. We can set this to `true` and check the MetaMask SDK's behavior.
 
@@ -302,7 +302,7 @@ const metaMaskSDKOptions = {
 
 The easiest way to check this changed behavior is to disable the MetaMask extension and re-load your dapp and see that when this option is set to true that the SDK immediately checks and notifies the user with a modal that they can either install the MetaMask extension or connect with mobile QR code to MetaMask Mobile.
 
-#### Enables or disables checking if MetaMask is installed on the user's browser before each RPC request
+#### Enable or disable checking if MetaMask is installed before RPC requests
 
 The default value is `false`.
 
@@ -311,11 +311,11 @@ const metaMaskSDKOptions = {
   checkInstallationOnAllCalls: true
 };
 ```
-The easiest way to check this changed behavior is to disable the MetaMask extension and re-load your dapp and try to make a read-only RPC request without the InfuraAPIKey in place. yu will see similar modal as the previous test we did but it will notify the user upon the RPC request being made.
+The easiest way to check this changed behavior is to disable the MetaMask extension, re-load your dapp, and make a read-only RPC request without the InfuraAPIKey in place. You will see a similar modal as the previous test we did, but it will notify the user upon the RPC request being made.
 
 #### Enable or Disable using Deeplink to Connect MetaMask Mobile
 
-The default value is `false`, by setting this to true the MetaMask SDK will use universal linking instead.
+The default value is `false`; by setting this to true, the MetaMask SDK will use universal linking instead.
 
 ```typescript
 const metaMaskSDKOptions = {
@@ -323,14 +323,14 @@ const metaMaskSDKOptions = {
 };
 ```
 
-If you are using this feature you will need to test your dapp on a mobile device using it's native browser.
+If you are using this feature, you will need to test your dapp on a mobile device using its native browser.
 
 #### Map RPC URLs for Read-only RPC Requests
 
-The default value is `{ }`. This option should be used in conjunction with the `infuraAPIKey` and `defaultReadOnlyChainId`. Imagine that we want to make read-only requests to Mainnet (chain ID `0x1`) use the Infura API, while read-only requests to the local testnet (chain ID 0x539) uses a custom node.
+This option should be used in conjunction with the `infuraAPIKey` and `defaultReadOnlyChainId`. Imagine that we want to make read-only requests to Mainnet (chain ID `0x1`) using the Infura API, while read-only requests to the local testnet (chain ID 0x539) use a custom node.
 
 The `infuraAPIKey` provides access to various networks supported by Infura
-The `readonlyRPCMap` provides access to custom nodes and override Infura networks in case of a conflict.
+The `readonlyRPCMap` allows access to custom nodes and overrides Infura networks in case of a conflict.
 
 You can configure your dapp to make read-only requests using the Infura API, custom nodes, or both. We have already seen an example of configuring our dapp to use the `infuraAPIKey`.
 
@@ -341,12 +341,12 @@ const metaMaskSDKOptions = {
   infuraAPIKey: import.meta.env.VITE_INFURA_PROJECT_ID,
   readonlyRPCMap: {
     "0x539": "http://localhost:8545",
-  }
+ }
 };
 ```
 
-To see more detailed information on [how to make read-only requests](https://docs.metamask.io/wallet/how-to/make-read-only-requests/#use-the-infura-api), this page is useful for understanding how to use `infuraAPIKey`, `readonlyRPCMap`, and/or `defaultReadOnlyChainId` together.
+To see more detailed information on [how to make read-only requests](https://docs.metamask.io/wallet/how-to/make-read-only-requests/#use-the-infura-api), this page helps understand how to use `infuraAPIKey`, `readonlyRPCMap`, and `defaultReadOnlyChainId` together.
 
 ### Conclusion
 
-We have walked through generating a dapp using Create Wagmi and configuration of the MetaMask SDK. Explored how the MetaMask SDK works within a React application, how it behaves out of the box as well how we can use various options to customize it's behavior and briefly touched on other options that help you as a developer to use Infura API keys and override things like RPC mappings and default read-only chain.
+We have walked through generating a dapp using Create Wagmi and the configuration of the MetaMask SDK. Explored how the MetaMask SDK works within a React application with Viem and Wagmi, how it behaves out of the box, and how we can use various options to customize its behavior. We also discussed other options the average developer should know about when using our MetaMask JavaScript SDK.
