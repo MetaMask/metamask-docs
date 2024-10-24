@@ -188,7 +188,7 @@ export default function Faucet() {
         setWalletAddress(metaMaskAccount);
       }
     }
-  }, [metaMaskAccount, ensNameStatus]);
+  }, [metaMaskAccount, ensNameStatus, ensName]);
 
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (
