@@ -12,16 +12,16 @@ This tutorial walks you through creating and integrating a simple React dapp wit
 
 We will focus on configuring the MetaMask SDK with Wagmi, a popular way developers are adopting the use of the MetaMask SDK. So why [Wagmi](https://wagmi.sh/cli/why)?
 
-Wagmi provides simple React hooks for Ethereum developers, making managing wallet connections, transactions, and network interactions easier. By using Wagmi in conjunction with the MetaMask SDK, developers can enjoy a streamlined setup without needing to manage additional dependencies, since our SDK is already integrated. This setup accelerates your ability to start building web3 applications with React, letting you focus on writing code quickly and efficiently with minimal friction.
+Wagmi offers React hooks that simplify wallet connections, transactions, and network interactions for Ethereum developers. With the integrated MetaMask SDK, the setup is streamlined, eliminating extra dependencies. The Metamask SDK connector in Wagmi allows developers to quickly build web3 apps that connect to MetaMask in React with minimal friction.
 
 ## Scaffolding out a ViteJS plus React Application
 
-You can start with either [Create Wagmi](https://wagmi.sh/cli/create-wagmi) (the path we will take in this tutorial) or use our Consensys [Create Web3 CLI](https://github.com/Consensys/create-web3-template?tab=readme-ov-file#create-web3-template-cli) to scaffold out a basic ViteJS with React application, both of which will ensure that Viem and Wagmi are configured properly allowing you to start previewing your web application immediately.
+You can start with either [Create Wagmi](https://wagmi.sh/cli/create-wagmi) (the path we will take in this tutorial) or use our Consensys [Create Web3 CLI](https://github.com/Consensys/create-web3-template?tab=readme-ov-file#create-web3-template-cli) to scaffold out a basic ViteJS with React application, both of which will ensure that Viem and Wagmi are adequately configured.
 
-Create Wagmi is just going to configure a frontend app for you, which is great for us because then we can practice setting up the MetaMask SDK and starting to work out how it fits into the picture.
+For the tutorial, we will use Create Wagmi to configure a front-end app for you. This is great because we can practice setting up the MetaMask SDK and work out how it fits into the picture.
 
 :::note
-Using the Consensys Create Web3 CLI is an option that I would suggest for future web3 greenfield development as it not only generates a nearly identical frontend as Create Wagmi, but it creates a mono repo (single repository containing both a blockchain and a React web client) with the MetaMask SDK already wired up with a custom connect button.
+Using the Consensys Create Web3 CLI is an option that I would suggest for future web3 greenfield development as it not only generates a nearly identical front-end as Create Wagmi, but it creates a mono repo (single repository containing both a blockchain and a React web client) with the MetaMask SDK already wired up with a custom connect button.
 :::
 
 ## Prerequisites
