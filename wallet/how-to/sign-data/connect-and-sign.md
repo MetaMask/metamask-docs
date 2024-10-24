@@ -104,5 +104,5 @@ in the JavaScript SDK GitHub repository.
 
 <!--links-->
 
-[`eth_requestAccounts`]: /wallet/reference/eth_requestAccounts
-[`personal_sign`]: /wallet/reference/personal_sign
+[`eth_requestAccounts`]: /wallet/reference/json-rpc-methods/eth_requestAccounts
+[`personal_sign`]: /wallet/reference/json-rpc-methods/personal_sign

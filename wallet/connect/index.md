@@ -55,7 +55,7 @@ Get started with [Wagmi](3rd-party-libraries/wagmi.md) or
 ## Wallet API
 
 The Wallet API consists of an [Ethereum Provider API](../reference/provider-api.md) and a
-[JSON-RPC API](/wallet/reference/json-rpc-api), which allow you to interact with users' EVM accounts
+[JSON-RPC API](/wallet/reference/json-rpc-methods), which allow you to interact with users' EVM accounts
 in MetaMask.
 For most dapps, we recommend integrating with MetaMask using the SDK or third-party libraries in
 conjunction with the Wallet API, to take advantage of the SDK's benefits.
