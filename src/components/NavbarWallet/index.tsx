@@ -48,7 +48,7 @@ const NavbarWalletComponent: FC = ({
     data: ensName,
     status: ensNameStatus,
   } = useEnsName({
-    address: '0x6ecfd8252c19ac2bf4bd1cbdc026c001c93e179d',
+    address:  metaMaskAccount as `0x${string}`,
   });
 
   const toggleDropdown = () => {
