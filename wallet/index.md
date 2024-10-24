@@ -23,10 +23,13 @@ Key benefits include:
 - **Mobile-first optimization** – Enable faster wallet interactions with instant deeplinks and advanced features.
 - **Enhanced functionality** – Use [RPC request batching](how-to/batch-json-rpc-requests.md),
   [EIP-6963](/wallet/concepts/wallet-interoperability.md) for wallet discovery, and wallet security enhancements.
+- **Third-party library integration** - Use libraries like [Wagmi](connect/3rd-party-libraries/wagmi.md)
+  or [Web3-Onboard](connect/3rd-party-libraries/web3-onboard.md) that integrate SDK support.
 
 The **Wallet API** allows you to interact with users' EVM accounts using standardized JSON-RPC calls.
 While you can connect to the MetaMask extension directly using just the Wallet API, we recommend
-using the SDK with the Wallet API to take advantage of the SDK's benefits.
+using the SDK or third-party libraries in conjunction with the Wallet API, to take advantage of the
+SDK's benefits.
 
 ## Where do I start?
 

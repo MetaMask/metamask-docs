@@ -22,7 +22,7 @@ export default function ErrorsBox({ errors }: ErrorsBoxProps) {
     <>
       <Heading
         as="h2"
-        className={clsx(styles.secondaryHeading, "padding-vert--md")}
+        className={clsx(styles.secondaryHeading, "padding-bottom--md padding-top--lg")}
       >
         Errors
       </Heading>
