@@ -8,11 +8,11 @@ import TabItem from "@theme/TabItem";
 
 # Create a React dapp with SDK and Wagmi
 
-This tutorial walks you through creating a simple JavaScript dapp and integrating it with our MetaMask SDK.
+This tutorial walks you through creating and integrating a simple React dapp with our MetaMask JavaScript SDK.
 
-This tutorial focuses on the happy path of utilizing the MetaMask SDK which is the most widely way that developers are adopting use of the MetaMask SDK. So why [Wagmi](https://wagmi.sh/cli/why)?
+We will focus on configuring the MetaMask SDK with Wagmi, a popular way developers are adopting the use of the MetaMask SDK. So why [Wagmi](https://wagmi.sh/cli/why)?
 
-Wagmi provides simple React hooks for Ethereum developers, making it easier to manage wallet connections, transactions, and network interactions. By using Wagmi in conjunction with the MetaMask SDK, developers can enjoy a streamlined setup without needing to manage additional dependencies, since our SDK is already integrated. This setup accelerates your ability to start building web3 applications with React, letting you focus on writing code quickly and efficiently with minimal friction.
+Wagmi provides simple React hooks for Ethereum developers, making managing wallet connections, transactions, and network interactions easier. By using Wagmi in conjunction with the MetaMask SDK, developers can enjoy a streamlined setup without needing to manage additional dependencies, since our SDK is already integrated. This setup accelerates your ability to start building web3 applications with React, letting you focus on writing code quickly and efficiently with minimal friction.
 
 ## Scaffolding out a ViteJS plus React Application
 
@@ -133,7 +133,7 @@ Focusing on the `WagmiProvider`, we get it's config from:
 import { config } from './wagmi.ts'
 ```
 
-A look at `wgmi.ts`:
+A look at `wagmi.ts`:
 
 ```typescript
 import { http, createConfig } from 'wagmi'
@@ -253,8 +253,7 @@ and then pass that variable into the `metaMask()` function in `connectors` and s
       },
       ...metaMaskSDKOptions,
     }),
+  ],
 ```
 
-This first option [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey) should be used to make [read-only RPC requests from your dapp](/wallet/how-to/make-read-only-requests).
-
-Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for read-only operations.
+This first option [infuraAPIKey](/wallet/reference/sdk-js-options/#infuraapikey) should be used so that when you make [read-only RPC requests from your dapp](/wallet/how-to/make-read-only-requests) that user does not need to confirm any modals or have any wallet interactions. Your dapp can directly call most JSON-RPC API methods, bypassing user wallet authentication for read-only operations.
