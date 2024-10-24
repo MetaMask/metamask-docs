@@ -211,7 +211,7 @@ extensionOnly: true
 </Tabs>
 
 Enables or disables automatically using the MetaMask browser extension if it's detected.
-The default is `false`.
+The default is `true`.
 
 ### `infuraAPIKey`
 
@@ -329,7 +329,8 @@ preferDesktop: true
 </TabItem>
 </Tabs>
 
-Enables or disables preferring the MetaMask browser extension over MetaMask Mobile.
+When set to `true`, the MetaMask browser extension is displayed as the default option in the SDK connection modal.
+When set to `false`, MetaMask Mobile is displayed as the default option.
 The default is `false`.
 
 ### `readonlyRPCMap`
