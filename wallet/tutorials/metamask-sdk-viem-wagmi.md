@@ -53,7 +53,7 @@ npm create wagmi@latest  --template vite-react
   </TabItem>
 </Tabs>
 
-This command will prompt you for a project name, we can use something simple to describe our demo: `mmsdk-wagmi-tutorial`. Once the CLI is finished, we can change directories into that project and install the node module dependencies:
+This command will prompt you for a project name, we can use something simple to describe our demo like: `mmsdk-wagmi-tutorial`. Once the CLI is complete, we can change directories into that project and install the node module dependencies:
 
 <Tabs>
   <TabItem value="pnpm" label="pnpm" default>
@@ -117,13 +117,13 @@ globalThis.Buffer = Buffer
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </WagmiProvider>
-  </React.StrictMode>,
+ <React.StrictMode>
+ <WagmiProvider config={config}>
+ <QueryClientProvider client={queryClient}>
+ <App />
+ </QueryClientProvider>
+ </WagmiProvider>
+ </React.StrictMode>,
 )
 ```
 
@@ -146,27 +146,27 @@ export const config = createConfig({
     injected(),
     coinbaseWallet(),
     walletConnect({ projectId: import.meta.env.VITE_WC_PROJECT_ID }),
-  ],
+ ],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),
-  },
+ },
 })
 
 declare module 'wagmi' {
   interface Register {
     config: typeof config
-  }
+ }
 }
 ```
 
-As we can see Wagmi's default uses `mainnet` and `sepolia` defined in the `chain`'s array. As well out of the box they have set up the `injected` wallet provider, `coinbaseWallet`, and `walletConnect`. 
+As we can see, Wagmi's default uses `mainnet` and `sepolia`, which are defined in the `chains` array. Out of the box, they have also set up the `injected` wallet provider, `coinbaseWallet, ' and `walletConnect. ' 
 
-The MetaMask SDK is our suggested alternative to using `walletConnect` and although we support builders deploying dapps that connect to a multitude of wallets
+We will replace these with the use of the MetaMask Connector for the purpose of this tutorial and testing the MetaMask SDK.
 
 ### 2. Update the Wagmi Config
 
-Let's modify this configuration to focus on the Linea testnet and use the Metamask Connector which is their built-in support for the MetaMask SDK:
+Let's modify this configuration to focus on the Linea testnet and use the Metamask Connector, which is their built-in support for the MetaMask SDK:
 
 ```typescript
 import { http, createConfig } from "wagmi";
@@ -182,14 +182,14 @@ export const config = createConfig({
         name: "MetaMask SDK + Wagmi Tutorial",
         url: "https://wagmi.io",
         iconUrl: "https://wagmi.io/favicon.ico",
-      },
-    }),
-  ],
+ },
+ }),
+ ],
   transports: {
     [lineaSepolia.id]: http(
       `https://linea-sepolia.infura.io/v3/${import.meta.env.VITE_INFURA_PROJECT_ID}`
-    ),
-  },
+ ),
+ },
 });
 ```
 
@@ -198,12 +198,12 @@ This configuration sets up the wagmi library to connect to the Linea Sepolia tes
 - `multiInjectedProviderDiscovery: false` disables automatic discovery of multiple injected wallets, streamlining the wallet selection process.
 - `chains:` specifies that the app will connect to the Linea Sepolia network.
 - `connectors:` uses MetaMask as the primary wallet, and we include some dapp metadata in(name, URL, and icon) for a branded user experience.
-- `dappMetadata: { name: }` ensures that when connecting to MetaMask Mobile that our managed connection will have a name that we recognize.
+- `dappMetadata: { name: }` ensures that when connecting to MetaMask Mobile, our managed connection will have a name we recognize.
 - `transports:` configures HTTP transport to connect to the Linea Sepolia network using an Infura project ID for reliable access to blockchain data.
 
 This setup simplifies wallet integration and focuses on providing a smooth user experience while working with Linea Sepolia.
 
-We do however need to get an Infura ID if we plan on utilizing the Infura network. While it is possible to develop without an Infura account, you would need to use a different provider or test with local networks like hardhat which is beyond the scope and this solution is used so that we can hit a real testnet and considering the ease of [setting up an Infura account and getting an API key](https://docs.metamask.io/developer-tools/dashboard/get-started/create-api/) from your project dashboard.
+We will use an InfuraAPIKey to utilize the Infura network for this tutorial, as getting an account and key is easy. If you need help, please see: [Setting up an Infura account and getting an API key](https://docs.metamask.io/developer-tools/dashboard/get-started/create-api/).
 
 ### 3. Connecting to MetaMask Extension or Mobile
 
