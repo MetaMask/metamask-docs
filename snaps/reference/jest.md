@@ -127,10 +127,10 @@ describe("MySnap", () => {
 
 ### `onCronjob`
 
-Runs a cronjob in the Snap.
+Runs a cron job in the Snap.
 The request is normally specified in the Snap manifest file under the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission, but this method allows you to
-run cronjobs that aren't specified in the manifest as well.
+run cron jobs that aren't specified in the manifest as well.
 
 #### Parameters
 
@@ -147,7 +147,7 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from "@metamask/snaps-jest"
 
 describe("MySnap", () => {
-  it("should end foo cronjobs with response bar", async () => {
+  it("should end foo cron jobs with response bar", async () => {
     const { onCronjob } = await installSnap(/* Optional snap ID */)
     const response = await onCronjob({
       method: "foo",
