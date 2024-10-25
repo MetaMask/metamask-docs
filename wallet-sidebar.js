@@ -423,6 +423,11 @@ const sidebar = {
           label: "Create a simple dapp",
           id: "tutorials/javascript-dapp-simple",
         },
+        {
+          type: "doc",
+          label: "Create a dapp with the SDK and Wagmi",
+          id: "tutorials/react-dapp-sdk-wagmi",
+        },
       ],
     },
     {
