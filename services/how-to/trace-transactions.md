@@ -16,7 +16,7 @@ Trace API is currently an open beta feature, available to paying Infura customer
 
 Infura provides access to a trace API that allows you to get detailed transaction processing information. Use the API to
 extract information about contract interactions, transactions, and blocks on the Ethereum network. You can
-also use the API to retrieve transaction details that are not recorded on the blockchain. For example, use the
+also use the API to retrieve transaction details that aren't recorded on the blockchain. For example, use the
 [`trace_call`](../reference/ethereum/json-rpc-methods/trace-methods/trace_call.mdx) API to observe contract interactions.
 
 ![Example for using the trace_call API](../images/trace-call.png)

@@ -7,7 +7,7 @@ description: Starknet JSON RPC API methods.
 
 Infura supports a subset of the [Starknet API methods](https://github.com/starkware-libs/starknet-specs/).
 
-The following Starknet methods are not supported:
+The following Starknet methods aren't supported:
 
 - `starknet_estimateMessageFee`
 - `starknet_getBlockWithReceipts`

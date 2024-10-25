@@ -16,7 +16,7 @@ Running multiple instances of MetaMask in the same browser profile can break dap
 
 :::caution Developers only
 MetaMask Flask is an experimental tool only for developers.
-If you are not a developer, you should not install MetaMask Flask.
+If you aren't a developer, you should not install MetaMask Flask.
 :::
 
 :::danger Do not import accounts with funds to Flask

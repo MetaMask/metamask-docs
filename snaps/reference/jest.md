@@ -130,7 +130,7 @@ describe("MySnap", () => {
 Runs a cronjob in the Snap.
 The request is normally specified in the Snap manifest file under the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission, but this method allows you to
-run cronjobs that are not specified in the manifest as well.
+run cronjobs that aren't specified in the manifest as well.
 
 #### Parameters
 

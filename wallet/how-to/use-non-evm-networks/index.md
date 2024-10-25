@@ -10,7 +10,7 @@ import CardList from "@site/src/components/CardList"
 You can interact with users' accounts on non-EVM networks by connecting to existing
 [MetaMask Snaps](https://metamask.io/snaps/).
 
-Non-EVM networks are blockchain networks that are not compatible with the Ethereum Virtual Machine (EVM).
+Non-EVM networks are blockchain networks that aren't compatible with the Ethereum Virtual Machine (EVM).
 Non-EVM dapps and MetaMask can't directly interact with each other.
 By connecting to dedicated non-EVM Snaps, you can extend the functionality of MetaMask and integrate non-EVM networks into your existing MetaMask workflow.
 

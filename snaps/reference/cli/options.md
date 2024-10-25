@@ -136,7 +136,7 @@ If there are any issues, the CLI exits with an error.
 Experimental features.
 
 :::caution
-These features are not stable, and might change in the future.
+These features aren't stable, and might change in the future.
 :::
 
 #### `experimental.wasm`

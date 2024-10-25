@@ -22,7 +22,7 @@ View the [WebSocket pricing information](../concepts/websockets.md#pricing) for 
 You need to be aware of the following when sending HTTP RPC requests:
 
 - Silent failures - [Users need to manage client-side silent failures](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers#pings_and_pongs_the_heartbeat_of_websockets).
-- Load balancing - Unlike HTTP requests, WSS requests are not load-balanced to the fastest possible server.
+- Load balancing - Unlike HTTP requests, WSS requests aren't load-balanced to the fastest possible server.
 - Retries - Retrying failed WebSocket requests typically requires custom JSON-RPC ID-based tracking, whereas support for
   retrying failed HTTP requests often is automatic, or easily configured.
 - Status codes - WebSockets use its own set of [status codes](https://pkg.go.dev/github.com/gorilla/websocket#pkg-constants)

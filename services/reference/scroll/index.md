@@ -12,7 +12,7 @@ Scroll is supported through the [DIN](https://www.infura.io/solutions/decentrali
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 Infura provides Open Beta access to Scroll. During this period, there might be feature limitations. 
-Performance issues are not expected, but they are possible as we optimize and stabilize the service. 
+Performance issues aren't expected, but they are possible as we optimize and stabilize the service. 
 
 :::
 

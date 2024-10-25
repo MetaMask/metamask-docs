@@ -100,6 +100,6 @@ Additional credit-based charges are applied for the events returned:
 - `newHeads`: Each new block event consumes 50 credits from your daily quota. This event is triggered
     once per announced block.
 - `logs`: Depending on the filters applied, this event can consume 300 credits per block from your
-    daily quota. At most, one event per announced block is charged, and potentially none if filter constraints are not met.
+    daily quota. At most, one event per announced block is charged, and potentially none if filter constraints aren't met.
 - `newPendingTransaction`: An event is generated every 700-800ms, aggregating the total amount of
     pending transactions collected during that period. Each event consumes 200 credits from your daily quota.

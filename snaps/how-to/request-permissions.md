@@ -56,7 +56,7 @@ permission, add the following to the manifest file:
 
 ### Dynamic permissions
 
-Dynamic permissions are not requested in the manifest file.
+Dynamic permissions aren't requested in the manifest file.
 Instead, your Snap can acquire dynamic permissions during its lifecycle.
 
 For example, request permission to call the [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts)

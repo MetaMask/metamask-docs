@@ -1,8 +1,8 @@
 # JSON-RPC methods
 
-Celo supports a subset [Ethereum JSON-RPC methods](../../ethereum/json-rpc-methods/index.md). WebSocket calls are not supported when using the Celo endpoints.
+Celo supports a subset [Ethereum JSON-RPC methods](../../ethereum/json-rpc-methods/index.md). WebSocket calls aren't supported when using the Celo endpoints.
 
-The following methods are not supported with Celo:
+The following methods aren't supported with Celo:
 
 - `eth_feeHistory`
 - `eth_getUncleCountByBlockHash`

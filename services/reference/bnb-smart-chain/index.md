@@ -12,10 +12,10 @@ BNB Smart Chain (BSC) is supported through the [DIN](https://www.infura.io/solut
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 Infura provides Open Beta access to BSC. During this period, there might be feature limitations. 
-Performance issues are not expected, but they are possible as we optimize and stabilize the service.
+Performance issues aren't expected, but they are possible as we optimize and stabilize the service.
 
 Currently, only near head requests (the last 128 blocks) are supported in the
-BSC service. Archive requests are not currently supported. Be aware of this limitation when making calls
+BSC service. Archive requests aren't currently supported. Be aware of this limitation when making calls
 to API calls to methods such as [`eth_getStorageAt`](./json-rpc-methods/eth_getstorageat.mdx),
 [`eth_getTransactionReceipt`](./json-rpc-methods/eth_gettransactionreceipt.mdx), and
 [`eth_getTransactionByHash`](./json-rpc-methods/eth_gettransactionbyhash.mdx).

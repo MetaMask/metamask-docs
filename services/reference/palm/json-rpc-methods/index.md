@@ -10,6 +10,6 @@ The standard Ethereum methods documented in this section are supported by Infura
 
 :::info WebSocket calls not supported
 
-WebSocket calls are not supported when using the Palm network endpoints.
+WebSocket calls aren't supported when using the Palm network endpoints.
 
 :::

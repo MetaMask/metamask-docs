@@ -24,7 +24,7 @@ The following image shows how a Web3 library can connect to your node (in this e
   </div>
 </div>
 
-Some popular Ethereum compatible Web3 libraries include (but are not limited to) the following.
+Some popular Ethereum compatible Web3 libraries include (but aren't limited to) the following.
 
 | Language   | Library                                                                                             |
 | :--------- | :-------------------------------------------------------------------------------------------------- |

@@ -77,7 +77,7 @@ The [contract code generator](index.md#generate-contract-code) automatically gen
 
 This contract factory is useful for when you need more concrete definitions of the contract
 interface type `T`.
-This can be useful in runtimes where `dynamic` or `DynamicObject` are not available (IL2CPP).
+This can be useful in runtimes where `dynamic` or `DynamicObject` aren't available (IL2CPP).
 
 ## Set the contract factory
 

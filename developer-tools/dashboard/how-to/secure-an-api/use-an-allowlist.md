@@ -38,7 +38,7 @@ Add the restriction details in the **ALLOWLISTS** section of your API key's **Se
 
 If your application only queries data from specific Ethereum smart contracts or addresses, add those addresses to the **CONTRACT ADDRESSES** allowlist.
 
-Any requests which query addresses that are not in the allowlist are rejected.
+Any requests which query addresses that aren't in the allowlist are rejected.
 
 The following RPC methods take an Ethereum address parameter and are compatible with this type of allowlisting.
 

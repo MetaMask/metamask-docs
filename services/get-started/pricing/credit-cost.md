@@ -29,7 +29,7 @@ The process used to determine the credit cost for each request is as follows:
 
 When making requests that return status code errors, some errors count towards your credit usage.
 
-- **`429` errors**: These are not charged and can occur for the following reasons:
+- **`429` errors**: These aren't charged and can occur for the following reasons:
     - **Key settings credit limit caps**: These are limits set per API key.
     - **Credit quota limit caps**: These are overall credit usage limits.
     - **Credit throughput limit caps**: These are limits on the rate or throughput of requests.
