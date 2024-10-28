@@ -250,6 +250,11 @@ const sidebar = {
                 },
                 {
                   type: "doc",
+                  label: "Create a simple Starknet dapp",
+                  id: "how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp"
+                }
+                {
+                  type: "doc",
                   label: "Manage Starknet accounts",
                   id: "how-to/use-non-evm-networks/starknet/manage-starknet-accounts"
                 },
