@@ -42,7 +42,7 @@ jobs:
       - name: Vale
         uses: Consensys/docs-gha/spelling@main
         with:
-          FILEPATHS: "snaps,services,wallet,developer-tools"
+          FILEPATHS: "snaps,services,wallet,developer-tools,docs"
 
   linkCheck:
     name: Link Checking
