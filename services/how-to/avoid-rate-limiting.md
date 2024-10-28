@@ -10,7 +10,7 @@ or the number of credits per second (throughput).
 
 :::info
 
-The credit pricing model replaces request-based billing for free-tier (Core) customers. Customers on
+The credit pricing model replaces request-based billing for Core (free-tier) customers. Customers on
 Developer and Team plans will be transitioned to the credit model on September 30, 2024.
 
 **Existing customers on Growth and Custom plans will remain on request-based billing**.
@@ -18,8 +18,11 @@ Developer and Team plans will be transitioned to the credit model on September 3
 :::
 
 For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
+- Source IP address.
+- JSON-RPC method.
+- API key.
 
-The throughput of an an account will be throttled once the daily credit limit is reached. Credit
+The throughput of an account will be throttled once the daily credit limit is reached. Credit
 quota limits will be reset everyday at 00:00 UTC for all customers.
 
 ## Rate limit implications
@@ -87,13 +90,13 @@ If you're consistently rate limited, consider these workarounds:
 - **Cache Ethereum data locally.** Barring rare deep reorganizations of the chain, blocks more than a
     couple of blocks below the head of the chain can be cached indefinitely. Ask for the data once then
     keep it locally.
-- **Limit RPCs at dapp startup.** Likewise, limit the number of RPCs your dapp calls immediately
+- **Limit RPCs at dapp startup.** Likewise, limit the number of RPCs your dapp calls
     at startup. Only request data as the user accesses that portion of the dapp, and cache anything
     from older blocks for next time.
 - **Don't poll Infura in a tight loop.** New blocks come roughly every 15 seconds, so requesting new
-    data at a faster rate usually doesn't make sense. Consider using `eth_subscribe` to be notified
+    data at a faster rate often doesn't make sense. Consider using `eth_subscribe` to be notified
     when new blocks are available.
 
-You can have Infura notify you when you're near your daily daily credit limit by selecting
+You can have Infura notify you when you're near your daily credit limit by selecting
 **Email Notifications** in the **Accounts** page of the Infura **Settings**. Infura sends emails
 when your daily credits reach 75%, 85%, and 100% of the allowed limit.
