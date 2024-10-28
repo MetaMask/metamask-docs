@@ -133,7 +133,7 @@ import {
   UserInputEventType,
   type OnRpcRequestHandler,
   type OnUserInputHandler,
-} from '@metamask/snaps-sdk';
+} from "@metamask/snaps-sdk";
 import {
   Box,
   Text,
@@ -141,21 +141,21 @@ import {
   Container,
   Footer,
   Button,
-} from '@metamask/snaps-sdk/jsx';
+} from "@metamask/snaps-sdk/jsx";
 
 /**
- * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
+ * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
  *
  * @param args - The request handler args as object.
  * @param args.origin - The origin of the request, e.g., the website that
  * invoked the snap.
  * @param args.request - A validated JSON-RPC request object.
- * @returns The result of `snap_dialog`.
+ * @returns The result of snap_dialog.
  * @throws If the request method is not valid for this snap.
  */
 export const onRpcRequest: OnRpcRequestHandler = async () => {
   const result = await snap.request({
-    method: 'snap_dialog',
+    method: "snap_dialog",
     params: {
       content: (
         <Container>
@@ -176,7 +176,7 @@ export const onRpcRequest: OnRpcRequestHandler = async () => {
     },
   });
 
-  console.log('result', result); // Result will be true or false
+  console.log("result", result); // Result will be true or false.
 
   return result;
 };
@@ -184,9 +184,9 @@ export const onRpcRequest: OnRpcRequestHandler = async () => {
 export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
   if (event.type === UserInputEventType.ButtonClickEvent) {
     switch (event.name) {
-      case 'no': // User pressed "No" in the footer
+      case "no": // User selected "No" in the footer.
         await snap.request({
-          method: 'snap_resolveInterface',
+          method: "snap_resolveInterface",
           params: {
             id,
             value: false,
@@ -194,10 +194,10 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
         });
         break;
 
-      case 'yes': {
-        // User pressed "Yes" in the footer
+      case "yes": {
+        // User selected "Yes" in the footer
         await snap.request({
-          method: 'snap_resolveInterface',
+          method: "snap_resolveInterface",
           params: {
             id,
             value: true,
@@ -213,9 +213,8 @@ export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
 };
 ```
 
-The code above outputs a custom dialog with two buttons: "Yes" and "No". The code awaits a response from the dialog.
-
-When the user presses one of the buttons, `onUserInput` is called with the button's name. From there, `snap_resolveInterface` is called. This will resolve the dialog, and return the value passed to `snap_resolveInterface` as the result of the dialog.
+This code outputs a custom dialog with two buttons: **Yes** and **No**. 
+When the user selects one of the buttons, `onUserInput` is called with the button's name. From there, `snap_resolveInterface` is called. This resolves the dialog, and returns the value passed to `snap_resolveInterface` as the result of the dialog.
 
 <p align="center">
 <img src={require("../../assets/custom-dialog.png").default} alt="Custom dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
