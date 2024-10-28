@@ -17,7 +17,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
-- Added [Snaps custom UI dialogs](/snaps/features/custom-ui/dialogs) documentation.
+- Documented [Snaps custom UI dialogs](/snaps/features/custom-ui/dialogs).
   ([#1682](https://github.com/MetaMask/metamask-docs/pull/1682))
 
 ## September 2024
