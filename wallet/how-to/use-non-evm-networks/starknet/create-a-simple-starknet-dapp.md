@@ -451,7 +451,7 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
 
 ### 4.4. Fetch the token balance
 
-Add the balance fetching logic to your component. Call the `balanceOf` method to fetch the balance of the connected account:
+In the `TokenBalanceAndTransfer` function, add the balance fetching logic. Call the `balanceOf` method to fetch the balance of the connected account:
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
   useEffect(() => {
@@ -475,9 +475,7 @@ Add the balance fetching logic to your component. Call the `balanceOf` method to
 
 ### 4.5. Transfer tokens
 
-To transfer tokens, call the `transfer` method and execute the transaction using the `AccountInterface`.
-
-Use the following example for reference:
+In the `TokenBalanceAndTransfer` function, add the transfer logic. Call the `transfer` method and execute the transaction using the `AccountInterface`:
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
   async function handleTransfer() {
@@ -515,7 +513,7 @@ You can find the ABI of the ERC-20 contract on the **Code** tab in [Voyager](htt
 ### 4.6. Update `App.tsx`
 
 Call the `TokenBalanceAndTransfer` component in `App.tsx`.
-Add the followinwg to the header of `App.tsx` to import the component:
+Add the following to the header of `App.tsx` to import the component:
 
 ```typescript title="App.tsx"
 import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";
@@ -1653,7 +1651,7 @@ Your dapp should look similar to the following:
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="400" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
