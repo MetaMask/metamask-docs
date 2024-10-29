@@ -1,0 +1,321 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "MetaMask MultiChain API",
+    "version": "1.0.0",
+    "description": "This provides the specs for the MultiChain API Layer for the MetaMask API"
+  },
+  "methods": [
+    {
+      "name": "wallet_invokeMethod",
+      "paramStructure": "by-name",
+      "params": [
+        {
+          "name": "scope",
+          "description": "a valid `scope` string that has been previously authorized via `provider_authorize`",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ScopeString"
+          }
+        },
+        {
+          "name": "request",
+          "description": "an object containing a JSON-RPC request with `method` and `params`",
+          "deprecated": false,
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "params": true
+            }
+          }
+        },
+        {
+          "name": "sessionId",
+          "description": "[CAIP-171](https://chainagnostic.org/CAIPs/caip-171) `SessionId` referencing a known, open session",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "wallet_invokeMethodResult",
+        "schema": true
+      },
+      "examples": [
+        {
+          "name": "wallet_invokeMethodExample",
+          "params": [
+            {
+              "name": "scope",
+              "value": "eip155:1"
+            },
+            {
+              "name": "request",
+              "value": {
+                "method": "eth_getBalance",
+                "params": []
+              }
+            },
+            {
+              "name": "sessionId",
+              "value": "0xdeadbeef"
+            }
+          ],
+          "result": {
+            "name": "wallet_invokeMethodResult",
+            "value": "0x1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wallet_createSession",
+      "paramStructure": "by-name",
+      "params": [
+        {
+          "name": "requiredScopes",
+          "description": "Scopes that the wallet must support in order to be used with this provider.",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/schemas/Scope"
+          }
+        },
+        {
+          "name": "optionalScopes",
+          "description": "Scopes that the wallet may support in order to be used with this provider.",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/schemas/Scope"
+          }
+        },
+        {
+          "name": "sessionProperties",
+          "description": "Properties that the wallet may use to determine if the session is valid.",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "expiry": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "provider_authorizeResult",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "sessionId": {
+              "description": "A unique identifier for the session. Defined by [CAIP-171](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-171.md)",
+              "type": "string"
+            },
+            "sessionScopes": {
+              "type": "object",
+              "$ref": "#/components/schemas/Scope"
+            },
+            "sessionProperties": {
+              "type": "object",
+              "properties": {
+                "expiry": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "wallet_createSessionExample",
+          "description": "Example of a createSession request.",
+          "params": [
+            {
+              "name": "requiredScopes",
+              "value": {
+                "eip155": {
+                  "scopes": [
+                    "eip155:1",
+                    "eip155:1337"
+                  ],
+                  "methods": [
+                    "eth_sendTransaction",
+                    "eth_getBalance",
+                    "personal_sign"
+                  ],
+                  "notifications": [
+                    "accountsChanged",
+                    "chainChanged"
+                  ]
+                },
+                "eip155:10": {
+                  "methods": [
+                    "eth_getBalance"
+                  ],
+                  "notifications": [
+                    "accountsChanged",
+                    "chainChanged"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "optionalScopes",
+              "value": {
+                "eip155:11155111": {
+                  "methods": [
+                    "eth_sendTransaction",
+                    "eth_getBalance",
+                    "personal_sign"
+                  ],
+                  "notifications": [
+                    "accountsChanged",
+                    "chainChanged"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "sessionProperties",
+              "value": {
+                "expiry": "2022-12-24T17:07:31+00:00"
+              }
+            }
+          ],
+          "result": {
+            "name": "provider_authorizationResultExample",
+            "value": {
+              "sessionId": "0xdeadbeef",
+              "sessionScopes": {
+                "eip155:1": {
+                  "methods": [
+                    "eth_getBalance"
+                  ],
+                  "notifications": [],
+                  "accounts": []
+                },
+                "eip155:1337": {
+                  "methods": [
+                    "eth_sendTransaction",
+                    "eth_getBalance",
+                    "personal_sign"
+                  ],
+                  "notifications": [],
+                  "accounts": [
+                    "eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"
+                  ]
+                },
+                "eip155:11155111": {
+                  "methods": [
+                    "eth_sendTransaction",
+                    "eth_getBalance",
+                    "personal_sign"
+                  ],
+                  "notifications": [],
+                  "accounts": [
+                    "eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"
+                  ]
+                },
+                "sessionProperties": {
+                  "expiry": "2022-11-31T17:07:31+00:00"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "errors": [
+        {
+          "code": 5000,
+          "message": "Unknown error with request"
+        },
+        {
+          "code": 5100,
+          "message": "Requested networks are not supported"
+        },
+        {
+          "code": 5101,
+          "message": "Requested methods are not supported"
+        },
+        {
+          "code": 5102,
+          "message": "Requested notifications are not supported"
+        },
+        {
+          "code": 5300,
+          "message": "Invalid scopedProperties requested"
+        },
+        {
+          "code": 5301,
+          "message": "scopedProperties can only be outside of sessionScopes"
+        },
+        {
+          "code": 5302,
+          "message": "Invalid sessionProperties requested"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "ScopeString": {
+        "type": "string",
+        "pattern": "[-a-z0-9]{3,8}(:[-_a-zA-Z0-9]{1,32})?"
+      },
+      "Scope": {
+        "type": "object",
+        "title": "Scope",
+        "description": "Scope for a multi-chain connection",
+        "additionalProperties": true,
+        "required": [
+          "notifications",
+          "methods"
+        ],
+        "properties": {
+          "scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScopeString"
+            }
+          },
+          "methods": {
+            "description": "Methods that the wallet must support in order to be used with this provider.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notifications": {
+            "description": "Notifications that the wallet must support in order to be used with this provider.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rpcEndpoints": {
+            "description": "JSON-RPC endpoints for this namespace.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "rpcDocuments": {
+            "type": "array",
+            "description": "OpenRPC documents that define RPC methods in which to anchor the methods authorized in a CAIP-25 interaction.",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}

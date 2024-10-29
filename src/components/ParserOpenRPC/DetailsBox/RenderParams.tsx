@@ -8,12 +8,13 @@ const getRefSchemaFromComponents = (initRef, components) => {
   return components[ref];
 };
 
-const renderSchema = (schemaItem, schemas, name) => {
+const renderSchema = (schemaItem, schemas, name, mainDescr = "") => {
   if (!schemaItem) return <div>Invalid schema</div>;
 
   const resolveRef = (ref) => {
+    const mainDescr = schemaItem.description;
     const newSchema = getRefSchemaFromComponents(ref, schemas);
-    return renderSchema(newSchema, schemas, name);
+    return renderSchema(newSchema, schemas, name, mainDescr);
   };
 
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref);
@@ -25,7 +26,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={itemName || item.title}
         type="object"
         required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ""}
+        description={mainDescr || schemaItem.description || item.description || item.title || ""}
         pattern={item.pattern}
         defaultVal={item.default}
       />
@@ -130,7 +131,7 @@ const renderSchema = (schemaItem, schemas, name) => {
           type={schemaItem.schema.enum ? "enum" : schemaItem.schema.type}
           required={!!schemaItem.required}
           description={
-            schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ""
+            mainDescr || schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ""
           }
           pattern={schemaItem.schema.pattern || schemaItem.pattern}
           defaultVal={schemaItem.schema.default || schemaItem.default}
@@ -146,7 +147,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={name || schemaItem.title}
         type={schemaItem.enum ? "enum" : schemaItem.type}
         required={!!schemaItem.required}
-        description={schemaItem.description || schemaItem.title}
+        description={mainDescr || schemaItem.description || schemaItem.title}
         pattern={schemaItem.pattern}
         defaultVal={schemaItem.default}
       />
