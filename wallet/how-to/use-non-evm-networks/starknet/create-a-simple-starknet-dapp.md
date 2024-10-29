@@ -160,7 +160,7 @@ handleDisconnect()
 handleDisconnect({ clearLastWallet: true })
 ```
 
-### 3.4. Display wallet information
+### 3.3. Display wallet information
 
 You can display the wallet's name, address, and icon in your dapp. 
 This provides visual feedback to the user, confirming which wallet they are using.
@@ -204,7 +204,7 @@ async function handleDisconnect(options?: DisconnectOptions) {
 )}
 ```
 
-### 3.5. Full example
+### 3.4. Full example
 
 The following is a full example of configuring the wallet connection:
 
@@ -290,7 +290,7 @@ function App() {
 export default App
 ```
 
-### 3.6. Start the dapp
+### 3.5. Start the dapp
 
 Start the dapp and navigate to it in your browser.
 
@@ -316,7 +316,7 @@ The following buttons are displayed:
 - **Disconnect**: Disconnects the wallet from Starknet.
 - **Disconnect and reset**: Disconnects the wallet and resets the app's wallet connection settings.
 
-### 3.7. Connect your dapp to a wallet
+### 3.6. Connect your dapp to a wallet
 
 Select your preferred connection option.
 `get-starknet` displays a modal that detects MetaMask and allows you to choose which Starknet wallet to connect to.
@@ -475,7 +475,7 @@ import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";
 ```
 
 Ensure you call the token address in the `TokenBalanceAndTransfer` component.
-Add the following code to `App.tsx`, where the `TokenBalanceAndTransfer` component is called with the token address:
+Add the `TokenBalanceAndTransfer` component with the token address after the wallet info display, inside the main `return` of `App.tsx`:
 
 ```typescript title="App.tsx"
 {walletAccount &&
@@ -1590,9 +1590,10 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
   }
 ]
 ```
-</TabItem>
 
+</TabItem>
 <TabItem value="App.tsx">
+
 ```typescript
 import "./App.css"
 import {
