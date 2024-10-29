@@ -115,7 +115,7 @@ function App() {
 }
 ```
 
-### 3.2. Configure connection options
+### 3.2. Display connection options
 
 `connect` accepts an optional `ConnectOptions` object. 
 This object can control the connection process, including:
@@ -150,8 +150,6 @@ handleConnect({
 })
 ```
 
-### 3.3. Handle disconnection
-
 The `disconnect` function allows users to disconnect their wallet. You can also clear the last connected wallet information:
 
 ```typescript title="App.tsx"
@@ -170,83 +168,40 @@ This provides visual feedback to the user, confirming which wallet they are usin
 The following code is an example of how to update the interface with the connected wallet's details:
 
 ```typescript title="App.tsx"
-function App() {
-  const [walletName, setWalletName] = useState("")
-  const [walletAddress, setWalletAddress] = useState("")
-  const [walletIcon, setWalletIcon] = useState("")
-  const [walletAccount, setWalletAccount] = useState<AccountInterface | null>(null)
+const [walletName, setWalletName] = useState("")
+const [walletAddress, setWalletAddress] = useState("")
+const [walletIcon, setWalletIcon] = useState("")
+const [walletAccount, setWalletAccount] = useState<AccountInterface | null>(null)
 
-  // Connect the handler.
-  async function handleConnect(options?: ConnectOptions) {
-    const res = await connect(options)
-    setWalletName(res?.name || "")
-    setWalletAddress(res?.account?.address || "")
-    setWalletIcon(res?.icon || "")
-    setWalletAccount(res?.account)
-  }
-
-  // Disconnect the handler.
-  async function handleDisconnect(options?: DisconnectOptions) {
-    await disconnect(options)
-    setWalletName("")
-    setWalletAddress("")
-    setWalletAccount(null)
-  }
-
-  return (
-    <div className="App">
-      <h1>get-starknet</h1>
-      <div className="card">
-        <button onClick={() => handleConnect()}>
-          Default
-        </button>
-        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>
-          Always ask
-        </button>
-        <button onClick={() => handleConnect({ modalMode: "neverAsk" })}>
-          Never ask
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "dark",
-            })
-          }
-        >
-          Always ask with dark theme
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "light",
-            })
-          }
-        >
-          Always ask with light theme
-        </button>
-        <button onClick={() => handleDisconnect()}>
-          Disconnect
-        </button>
-        <button onClick={() => handleDisconnect({ clearLastWallet: true })}>
-          Disconnect and reset
-        </button>
-      </div>
-      {walletName && (
-        <div>
-          <h2>
-            Selected Wallet: <pre>{walletName}</pre>
-            <img src={walletIcon} alt="Wallet icon"/>
-          </h2>
-          <ul>
-            <li>Wallet address: <pre>{walletAddress}</pre></li>
-          </ul>
-        </div>
-      )}
-    </div>
-  )
+// Connect handler updates wallet info
+async function handleConnect(options?: ConnectOptions) {
+  const res = await connect(options)
+  setWalletName(res?.name || "")
+  setWalletAddress(res?.account?.address || "") 
+  setWalletIcon(res?.icon || "")
+  setWalletAccount(res?.account)
 }
+
+// Disconnect handler clears wallet info
+async function handleDisconnect(options?: DisconnectOptions) {
+  await disconnect(options)
+  setWalletName("")
+  setWalletAddress("")
+  setWalletAccount(null)
+}
+
+// Display wallet information
+{walletName && (
+  <div>
+    <h2>
+       Selected Wallet: <pre>{walletName}</pre>  
+       <img src={walletIcon} alt="Wallet icon"/>
+    </h2>
+    <ul>
+      <li>Wallet address: <pre>{walletAddress}</pre></li>
+    </ul>
+  </div>
+)}
 ```
 
 ### 3.5. Full example
@@ -1635,11 +1590,103 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
   }
 ]
 ```
+</TabItem>
+
+<TabItem value="App.tsx">
+```typescript
+import "./App.css"
+import {
+  type ConnectOptions,
+  type DisconnectOptions,
+  connect,
+  disconnect,
+} from "get-starknet"
+import { AccountInterface, wallet } from "starknet";
+import { useState } from "react"
+import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";
+
+function App() {
+  const [walletName, setWalletName] = useState("")
+  const [walletAddress, setWalletAddress] = useState("")
+  const [walletIcon, setWalletIcon] = useState("")
+  const [walletAccount, setWalletAccount] = useState<AccountInterface | null>(null)
+
+  async function handleConnect(options?: ConnectOptions) {
+    const res = await connect(options)
+    setWalletName(res?.name || "")
+    setWalletAddress(res?.account?.address || "")
+    setWalletIcon(res?.icon || "")
+    setWalletAccount(res?.account as unknown as AccountInterface)
+  }
+
+  async function handleDisconnect(options?: DisconnectOptions) {
+    await disconnect(options)
+    setWalletName("")
+    setWalletAddress("")
+    setWalletAccount(null)
+  }
+
+  return (
+    <div className="App">
+      <h1>get-starknet</h1>
+      <div className="card">
+        <button onClick={() => handleConnect()}>Default</button>
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>
+          Always ask
+        </button>
+        <button onClick={() => handleConnect({ modalMode: "neverAsk" })}>
+          Never ask
+        </button>
+        <button
+          onClick={() =>
+            handleConnect({
+              modalMode: "alwaysAsk",
+              modalTheme: "dark",
+            })
+          }
+        >
+          Always ask with dark theme
+        </button>
+        <button
+          onClick={() =>
+            handleConnect({
+              modalMode: "alwaysAsk",
+              modalTheme: "light",
+            })
+          }
+        >
+          Always ask with light theme
+        </button>
+        <button onClick={() => handleDisconnect()}>Disconnect</button>
+        <button onClick={() => handleDisconnect({ clearLastWallet: true })}>
+          Disconnect and reset
+        </button>
+      </div>
+      {walletName && (
+        <div>
+          <h2>
+            Selected Wallet: <pre>{walletName}</pre>
+            <img src={walletIcon} alt="Wallet icon"/>
+          </h2>
+          <ul>
+            <li>Wallet address: <pre>{walletAddress}</pre></li>
+          </ul>
+        </div>
+      )}
+      {walletAccount && 
+        <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
+      }
+    </div>
+  )
+};
+
+export default App
+```
 
 </TabItem>
 </Tabs>
 
-### 4.7. Start the dapp
+### 4.8. Start the dapp
 
 Start the dapp and navigate to it in your browser.
 
