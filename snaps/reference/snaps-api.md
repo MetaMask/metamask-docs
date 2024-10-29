@@ -484,9 +484,14 @@ console.log(contents)
 </TabItem>
 </Tabs>
 
-## `snap_getLocale`
+## `snap_getLocale` (deprecated)
 
 Gets the user's locale setting. You can use this method to localize text in your snap.
+
+:::warning
+This method is deprecated.
+Use [`snap_getPreferences`](#snap_getpreferences) instead.
+:::
 
 #### Returns
 
@@ -544,6 +549,42 @@ await snap.request({
 
 </TabItem>
 </Tabs>
+
+## `snap_getPreferences`
+
+Gets the user's preferences.
+
+#### Returns
+
+An object containing the user's preferences:
+
+- `locale` - The user's locale setting as a language code.
+- `currency` - The user's preferred fiat currency code.
+
+#### Example
+
+```tsx title="index.tsx"
+import { Box, Text } from "@metamask/snaps-sdk/jsx";
+
+const { locale } = await snap.request({ method: "snap_getPreferences" });
+
+let greeting = "Hello";
+if(locale === "es") {
+  greeting = "Hola";
+}
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Text>{greeting}</Text>
+      </Box>
+    ),
+  },
+});
+```
 
 ## `snap_manageAccounts`
 

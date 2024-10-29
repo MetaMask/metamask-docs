@@ -13,17 +13,17 @@ title and description) in the user's language.
 ### 1. Get the user's language
 
 In your Snap's code, determine the user's language by using the
-[`snap_getLocale`](../reference/snaps-api.md#snap_getlocale) API method.
-To call `snap_getLocale`, first request the required permission by adding it to the
+[`snap_getPreferences`](../reference/snaps-api.md#snap_getpreferences) API method.
+To call `snap_getPreferences`, first request the required permission by adding it to the
 `initialPermissions` field in your manifest file:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "snap_getLocale": {}
+  "snap_getPreferences": {}
 }
 ```
 
-Your Snap can then call `snap_getLocale` to get the user's language code (for example, `en` or `es`).
+Your Snap can then call `snap_getPreferences` to get the user's language code (for example, `en` or `es`).
 
 ### 2. Localize the Snap's UI
 
@@ -65,7 +65,9 @@ export const locales = {
 export type Locale = keyof typeof locales
 
 export async function getMessage(id: keyof (typeof locales)[Locale]) {
-  const locale = (await snap.request({ method: "snap_getLocale" })) as Locale
+  const { locale } = (await snap.request({ method: "snap_getPreferences" })) as {
+    locale: Locale
+  }
   const { message } = locales[locale]?.[id] ?? locales[FALLBACK_LANGUAGE][id]
 
   return message
@@ -113,7 +115,7 @@ The following is an example of a localized manifest file:
     "locales": ["locales/da.json", "locales/en.json", "locales/nl.json"]
   },
   "initialPermissions": {
-    "snap_getLocale": {}
+    "snap_getPreferences": {}
   },
   "manifestVersion": "0.1"
 }
