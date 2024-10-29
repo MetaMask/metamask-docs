@@ -1,0 +1,9 @@
+{
+  "label": "Multichain",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "how-to/manage-networks/multichain",
+    "description": "You can detect, add, and switch networks in MetaMask Multichain."
+  }
+}
