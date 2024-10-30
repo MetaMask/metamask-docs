@@ -357,7 +357,7 @@ Disable the MetaMask extension and re-load your dapp.
 Make a read-only RPC request without the `InfuraAPIKey`.
 You'll see a similar modal as in the previous test, but it will notify the user upon making the RPC request.
 
-#### Use deeplinks to connect to MetaMask Mobile
+<!-- #### Use deeplinks to connect to MetaMask Mobile
 
 Use [`useDeeplink`](../reference/sdk-js-options.md#usedeeplink) to enable or disable using deeplinks
 to connect to MetaMask Mobile.
@@ -370,7 +370,20 @@ const metaMaskSDKOptions = {
 };
 ```
 
-Test your dapp on a mobile device using its native browser.
+Test your dapp on a mobile device using its native browser. -->
+
+#### Use enableDebug to send anonymous analytics to MetaMask helping to improve the SDK
+
+The default value is `true`.
+Set this to `true` to use universal links instead:
+
+```typescript
+const metaMaskSDKOptions = {
+  enableDebug: true
+};
+```
+
+This setting will not transmit any sensitive data. Only information that allows our team to analyze and improve the behavior and core functionality of the MetaMask SDK.
 
 #### Map RPC URLs for read-only requests
 
@@ -402,4 +415,4 @@ const metaMaskSDKOptions = {
 
 This tutorial walked you through generating a dapp using Create Wagmi, and configuring MetaMask SDK.
 You explored how the SDK works within a React application with Viem and Wagmi, how it behaves out of
-the box, and how to use various options to customize its behavior.
+the box, and how to use a few key options to customize its behavior.
