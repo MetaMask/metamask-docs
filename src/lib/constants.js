@@ -1,5 +1,5 @@
-export const PROD_APP_URL = "https://app.infura.io";
-export const STAGE_APP_URL = "https://infura-app-staging.vercel.app";
+export const PROD_APP_URL = "https://developer.metamask.io";
+export const STAGE_APP_URL = "https://metamask-developer-dashboard-web-staging.vercel.app";
 export const DEV_APP_URL = "http://localhost:3000";
 
 export const DASHBOARD_URL = (DASHBOARD_PREVIEW_URL, VERCEL_ENV) =>
