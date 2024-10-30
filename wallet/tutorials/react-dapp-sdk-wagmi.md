@@ -19,19 +19,16 @@ MetaMask in React with minimal friction.
 
 ## Scaffolding tools
 
-You can start with either [Create Wagmi](https://wagmi.sh/cli/create-wagmi) (the path used in this
-tutorial) or the Consensys [Create Web3 CLI](https://github.com/Consensys/create-web3-template?tab=readme-ov-file#create-web3-template-cli)
+You can use [Create Wagmi](https://wagmi.sh/cli/create-wagmi) or the Consensys [Create Web3 CLI](https://github.com/Consensys/create-web3-template?tab=readme-ov-file#create-web3-template-cli)
 to scaffold out a basic ViteJS with React application, both of which will ensure that Viem and Wagmi
 are adequately configured.
-
-In this tutorial, you'll use Create Wagmi to configure a front-end app.
-You can practice setting up MetaMask SDK and work out how it fits into the picture.
+This tutorial uses Create Wagmi.
 
 :::note Consensys Create Web3 CLI
-The Consensys Create Web3 CLI might be useful for future web3 greenfield development, as it not only
-generates a nearly identical front-end as Create Wagmi, but it also creates a monorepo (single
-repository containing both a blockchain and a React web client) with MetaMask SDK already wired up
-with a custom connect button.
+The Consensys Create Web3 CLI might be useful for future web3 development, as it not only generates
+a nearly identical front-end as Create Wagmi, but it also creates a monorepo (single repository
+containing both a blockchain and a React web client) with MetaMask SDK already wired up with a
+custom connect button.
 :::
 
 ## Prerequisites
@@ -64,7 +61,8 @@ npm create wagmi@latest  --template vite-react
   </TabItem>
 </Tabs>
 
-This command will prompt you for a project name, you can use something simple like: `mmsdk-wagmi-tutorial`.
+This command prompts you for a project name.
+For example, use `mmsdk-wagmi-tutorial`.
 Once the CLI is complete, change directories into that project and install the node module dependencies:
 
 <Tabs>
@@ -104,15 +102,14 @@ This displays a localhost URL in your terminal for easy access to launch in your
   ➜  press h + enter to show help
 ```
 
-#### Review the Viem, Wagmi and MetaMask SDK configuration
+#### 1.1. Review the Viem, Wagmi, and MetaMask SDK configuration
 
-In `src/main.tsx`, you can find the following `<WagmiProvider >` which takes a `config` and
-`<QueryClientProvider >`, which even web2 developers will be familiar with.
+In `src/main.tsx`, you can find the following `WagmiProvider` which takes a `config` and `QueryClientProvider`.
 
 `QueryClientProvider` comes from the `@tanstack/react-query` package, and wraps the application to
 manage server-side data fetching, caching, and synchronization.
-It helps you handle async data by providing a consistent way to fetch, cache, and update your data
-across the app.
+It helps you handle asynchronous data by providing a consistent way to fetch, cache, and update your
+data across the app.
 For web3 developers, this means your dapp can smoothly manage blockchain data or API calls without
 needing to write custom state management logic.
 
@@ -143,13 +140,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 )
 ```
 
-Focusing on the `WagmiProvider`, you get its config from the following import statement:
+You get `WagmiProvider` configuration from the following import statement:
 
 ```typescript title="main.tsx"
 import { config } from "./wagmi.ts"
 ```
 
-`wagmi.ts` looks like the following:
+And `wagmi.ts` looks like the following:
 
 ```typescript title="wagmi.ts"
 import { http, createConfig } from "wagmi"
@@ -169,7 +166,7 @@ export const config = createConfig({
   },
 })
 
-declare module 'wagmi' {
+declare module "wagmi" {
   interface Register {
     config: typeof config
  }
@@ -183,8 +180,8 @@ You'll replace these with the MetaMask connector for the purpose of this tutoria
 
 ### 2. Update the Wagmi configuration
 
-Modify this configuration to focus on the Linea testnet and use the Metamask connector, which is
-their built-in support for MetaMask SDK:
+Modify this configuration to target the Linea testnet and use the Metamask connector, which is
+Wagmi's built-in support for MetaMask SDK:
 
 ```typescript title="wagmi.ts"
 import { http, createConfig } from "wagmi";
@@ -205,33 +202,28 @@ export const config = createConfig({
   ],
   transports: {
     [lineaSepolia.id]: http(
-      `https://linea-sepolia.infura.io/v3/${import.meta.env.VITE_INFURA_PROJECT_ID}`
+      `https://linea-sepolia.infura.io/v3/<YOUR-API-KEY>`
     ),
   },
 });
 ```
 
-This configuration sets up the Wagmi library to connect to the Linea Sepolia testnet.
+This configures Wagmi with the following options:
 
-- `multiInjectedProviderDiscovery: false` disables automatic discovery of multiple injected wallets,
+- `multiInjectedProviderDiscovery` disables automatic discovery of multiple injected wallets,
   streamlining the wallet selection process.
-- `chains:` specifies that the dapp will connect to the Linea Sepolia network.
-- `connectors:` uses MetaMask as the primary wallet, and includes some dapp metadata (name, URL, and
+- `chains` specifies that the dapp will connect to the Linea Sepolia network.
+- `connectors` uses MetaMask as the primary wallet, and includes some dapp metadata (name, URL, and
   icon) for a branded user experience.
-- `dappMetadata: { name: }` ensures that when connecting to MetaMask Mobile, the managed connection
-  will have a recognizable name.
-- `transports:` configures HTTP transport to connect to the Linea Sepolia network using an Infura
+- `transports` configures HTTP transport to connect to the Linea Sepolia network using an Infura
   API key for reliable access to blockchain data.
+  [Create an API key](/developer-tools/dashboard/get-started/create-api) if you don't already have one.
 
-This setup simplifies wallet integration and focuses on providing a smooth user experience while
-working with Linea Sepolia.
-
-You'll use an `InfuraAPIKey` to use the Infura network for this tutorial.
-You can [create an API key](/developer-tools/dashboard/get-started/create-api) if you don't already have one.
+This setup simplifies wallet integration and provides a smooth user experience while working with Linea Sepolia.
 
 ### 3. Connect to MetaMask extension or Mobile
 
-At this point, your dapp should run and both connect and disconnect from MetaMask.
+At this point, your dapp displays, and you can connect to and disconnect from MetaMask.
 Your connection experience will be similar to that of using the injected provider, as most web3
 users are experienced with.
 
@@ -242,19 +234,18 @@ users are experienced with.
 </p>
 
 :::note
-Currently, MetaMask SDK automatically connects to the MetaMask browser extension if it exists.
+By default, MetaMask SDK automatically connects to the MetaMask browser extension if it exists.
 It does not show a QR code for linking to Metamask Mobile unless the MetaMask browser extension is
 disabled or does not exist.
-
-This functionality ensures the user is in control and can connect to either if they have both a
-MetaMask Mobile and the MetaMask browser extension.
+You can change this behavior by setting
+[`extensionOnly`](../reference/sdk-js-options.md#extensiononly) to `false`.
 :::
 
-To test the functionality for connecting to MetaMask Mobile, disconnect from the MetaMask browser
-extension and disable MetaMask in your browser.
-Simulate a new session with a hard refresh.
-You'll see the QR code that can be used to connect to MetaMask Mobile when calling the `connect()`
-method from the button.
+To test connecting to MetaMask Mobile, disconnect from the MetaMask browser extension and disable
+MetaMask in your browser.
+Refresh your browser to simulate a new session.
+Now, when you select **Connect Wallet**, you'll see the QR code that you can use to connect to
+MetaMask Mobile.
 
 <p align="center">
   <video width="100%" controls>
@@ -267,15 +258,21 @@ method from the button.
 You can configure any [MetaMask JavaScript SDK options](../reference/sdk-js-options.md) within the
 Wagmi configuration.
 
-In `wagmi.ts`, create a variable named `sdkOptions`:
+In `wagmi.ts`, create a variable named `metaMaskSDKOptions`:
 
 ```typescript title="wagmi.ts"
 const metaMaskSDKOptions = {
-  infuraAPIKey: import.meta.env.VITE_INFURA_PROJECT_ID,
+  infuraAPIKey: "<YOUR-API-KEY>",
 };
 ```
 
-Pass that variable into the `metaMask()` function in `connectors` and spread its values using the `...` operator:
+:::note
+You can use the [`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey) option to
+[make direct, read-only JSON-RPC requests](../how-to/make-read-only-requests.md).
+:::
+
+Pass `metaMaskSDKOptions` into the `metaMask()` function in `connectors` and spread its values using
+the `...` operator:
 
 ```typescript title="wagmi.ts"
 connectors: [
@@ -290,38 +287,11 @@ connectors: [
 ],
 ```
 
-You can use the [`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey) option with MetaMask
-SDK installed to [make direct, read-only JSON-RPC requests](../how-to/make-read-only-requests.md).
-
 ### 4. Use additional SDK options
 
 You can configure any number of [SDK options](../reference/sdk-js-options.md) in the
 `metaMaskSDKOptions` object to customize the behavior of the SDK.
 In this section, you'll plug in options one by one to see how it affects the SDK.
-
-<!-- #### Prefer the MetaMask Extension Over MetaMask Mobile
-
-Since the default value is `false`, let's set this value to `true` and rerun our application.
-
-```typescript
-const metaMaskSDKOptions = {
- preferDesktop: true
-};
-```
-
-By enabling this feature with a `true` value, when the MetaMask SDK displays a modal for connecting to MetaMask Mobile this option would prioritize installing MetaMask Extension while still having the option for connecting via QR code to Mobile. It is set to `false` as the default. If the user does not have a MetaMask extension, we want to give them the option to connect via Metamask Mobile with the least amount of clicks.
-
-#### Enable or Disable Automatic use of MetaMask Extension if Detected
-
-The default value is ``
-
-```typescript
-const metaMaskSDKOptions = {
- extensionOnly: true
-};
-```
-
-By enabling this feature with a `true` value, there appears to be no change in how the MetaMask SDK behaves.............  -->
 
 #### Immediately check if MetaMask is installed
 
@@ -357,25 +327,11 @@ Disable the MetaMask extension and re-load your dapp.
 Make a read-only RPC request without the `InfuraAPIKey`.
 You'll see a similar modal as in the previous test, but it will notify the user upon making the RPC request.
 
-<!-- #### Use deeplinks to connect to MetaMask Mobile
+#### Send anonymous analytics to MetaMask
 
-Use [`useDeeplink`](../reference/sdk-js-options.md#usedeeplink) to enable or disable using deeplinks
-to connect to MetaMask Mobile.
-The default value is `false`.
-Set this to `true` to use universal links instead:
-
-```typescript
-const metaMaskSDKOptions = {
-  useDeeplink: true
-};
-```
-
-Test your dapp on a mobile device using its native browser. -->
-
-#### Use enableDebug to send anonymous analytics to MetaMask helping to improve the SDK
-
+Use [`enableDebug`](../reference/sdk-js-options.md#enabledebug) to enable or disable sending
+anonymous analytics to MetaMask to help improve the SDK.
 The default value is `true`.
-Set this to `true` to use universal links instead:
 
 ```typescript
 const metaMaskSDKOptions = {
@@ -383,31 +339,30 @@ const metaMaskSDKOptions = {
 };
 ```
 
-This setting will not transmit any sensitive data. Only information that allows our team to analyze and improve the behavior and core functionality of the MetaMask SDK.
+This setting does not transmit any sensitive data.
+It only sends information that allows MetaMask to analyze and improve the behavior and core
+functionality of the SDK.
 
 #### Map RPC URLs for read-only requests
 
 Use [`readonlyRPCMap`](../reference/sdk-js-options.md#readonlyrpcmap) to map RPC URLS for
 [read-only RPC requests](../how-to/make-read-only-requests.md).
-This option should be used in conjunction with `infuraAPIKey` and `defaultReadOnlyChainId`.
-Imagine that you want to make read-only requests to Mainnet (chain ID `0x1`) using the Infura API,
-and read-only requests to the local testnet (chain ID 0x539) use a custom node.
+You can use this option in conjunction with [`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey)
+and [`defaultReadOnlyChainId`](../reference/sdk-js-options.md#defaultreadonlychainid).
+
+For example, you want to make read-only requests to Mainnet (chain ID `0x1`) using the Infura API,
+and read-only requests to the local testnet (chain ID `0x539`) use a custom node.
 
 `infuraAPIKey` provides access to various networks supported by Infura.
 `readonlyRPCMap` allows access to custom nodes and overrides Infura networks in case of a conflict.
-
-You can configure your dapp to make read-only requests using the Infura API, custom nodes, or both.
-You've already seen an example of configuring your dapp to use the `infuraAPIKey`.
-
-You can use both the Infura API and custom nodes to make read-only requests by specifying both
-`infuraAPIKey` and `readonlyRPCMap` when instantiating the SDK in your dapp:
+You can use both the Infura API and custom nodes to make read-only requests by specifying both options:
 
 ```typescript
 const metaMaskSDKOptions = {
-  infuraAPIKey: import.meta.env.VITE_INFURA_PROJECT_ID,
+  infuraAPIKey: "<YOUR-API-KEY>",
   readonlyRPCMap: {
     "0x539": "http://localhost:8545",
- }
+  }
 };
 ```
 
