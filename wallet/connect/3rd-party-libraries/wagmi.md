@@ -19,7 +19,6 @@ the MetaMask browser extension and MetaMask Mobile.
 
 - Ensure you have a basic understanding of Ethereum smart contracts and React Hooks.
 - Set up a project with [Wagmi](https://wagmi.sh/react/getting-started).
-- Create an Infura API key and allowlist to [make read-only requests](../../how-to/make-read-only-requests.md).
 
 ## Steps
 
