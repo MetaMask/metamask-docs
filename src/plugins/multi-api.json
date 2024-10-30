@@ -1,321 +1,613 @@
 {
   "openrpc": "1.2.4",
   "info": {
-    "title": "MetaMask MultiChain API",
-    "version": "1.0.0",
-    "description": "This provides the specs for the MultiChain API Layer for the MetaMask API"
+      "title": "MetaMask MultiChain API",
+      "version": "1.0.0",
+      "description": "This provides the specs for the MultiChain API Layer for the MetaMask API"
   },
   "methods": [
-    {
-      "name": "wallet_invokeMethod",
-      "paramStructure": "by-name",
-      "params": [
-        {
-          "name": "scope",
-          "description": "a valid `scope` string that has been previously authorized via `provider_authorize`",
-          "required": true,
-          "schema": {
-            "$ref": "#/components/schemas/ScopeString"
-          }
-        },
-        {
-          "name": "request",
-          "description": "an object containing a JSON-RPC request with `method` and `params`",
-          "deprecated": false,
-          "required": true,
-          "schema": {
-            "type": "object",
-            "properties": {
-              "method": {
-                "type": "string"
+      {
+          "name": "wallet_notify",
+          "paramStructure": "by-name",
+          "params": [
+              {
+                  "name": "scope",
+                  "description": "a valid `scope` string that has been previously authorized via `provider_authorize`",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/components/schemas/ScopeString"
+                  }
               },
-              "params": true
-            }
-          }
-        },
-        {
-          "name": "sessionId",
-          "description": "[CAIP-171](https://chainagnostic.org/CAIPs/caip-171) `SessionId` referencing a known, open session",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "name": "wallet_invokeMethodResult",
-        "schema": true
-      },
-      "examples": [
-        {
-          "name": "wallet_invokeMethodExample",
-          "params": [
-            {
-              "name": "scope",
-              "value": "eip155:1"
-            },
-            {
-              "name": "request",
-              "value": {
-                "method": "eth_getBalance",
-                "params": []
+              {
+                  "name": "notification",
+                  "description": "an object containing a JSON-RPC notification with `method` and `params`",
+                  "deprecated": false,
+                  "required": true,
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "method": {
+                              "type": "string"
+                          },
+                          "params": true
+                      }
+                  }
               }
-            },
-            {
-              "name": "sessionId",
-              "value": "0xdeadbeef"
-            }
+          ]
+      },
+      {
+          "name": "wallet_invokeMethod",
+          "paramStructure": "by-name",
+          "params": [
+              {
+                  "name": "scope",
+                  "description": "a valid `scope` string that has been previously authorized via `provider_authorize`",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/components/schemas/ScopeString"
+                  }
+              },
+              {
+                  "name": "request",
+                  "description": "an object containing a JSON-RPC request with `method` and `params`",
+                  "deprecated": false,
+                  "required": true,
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "method": {
+                              "type": "string"
+                          },
+                          "params": true
+                      }
+                  }
+              }
           ],
           "result": {
-            "name": "wallet_invokeMethodResult",
-            "value": "0x1"
-          }
-        }
-      ]
-    },
-    {
-      "name": "wallet_createSession",
-      "paramStructure": "by-name",
-      "params": [
-        {
-          "name": "requiredScopes",
-          "description": "Scopes that the wallet must support in order to be used with this provider.",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/schemas/Scope"
-          }
-        },
-        {
-          "name": "optionalScopes",
-          "description": "Scopes that the wallet may support in order to be used with this provider.",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/schemas/Scope"
-          }
-        },
-        {
-          "name": "sessionProperties",
-          "description": "Properties that the wallet may use to determine if the session is valid.",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "expiry": {
-                "type": "string",
-                "format": "date-time"
+              "name": "wallet_invokeMethodResult",
+              "schema": true
+          },
+          "examples": [
+              {
+                  "name": "wallet_invokeMethodExample",
+                  "params": [
+                      {
+                          "name": "scope",
+                          "value": "eip155:1"
+                      },
+                      {
+                          "name": "request",
+                          "value": {
+                              "method": "eth_getBalance",
+                              "params": []
+                          }
+                      }
+                  ],
+                  "result": {
+                      "name": "wallet_invokeMethodResult",
+                      "value": "0x1"
+                  }
               }
-            }
-          }
-        }
-      ],
-      "result": {
-        "name": "provider_authorizeResult",
-        "schema": {
-          "type": "object",
-          "properties": {
-            "sessionId": {
-              "description": "A unique identifier for the session. Defined by [CAIP-171](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-171.md)",
-              "type": "string"
-            },
-            "sessionScopes": {
-              "type": "object",
-              "$ref": "#/components/schemas/Scope"
-            },
-            "sessionProperties": {
-              "type": "object",
-              "properties": {
-                "expiry": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
-            }
-          }
-        }
+          ]
       },
-      "examples": [
-        {
-          "name": "wallet_createSessionExample",
-          "description": "Example of a createSession request.",
+      {
+          "name": "wallet_revokeSession",
+          "description": "The `wallet_revokeSession` method revokes the entire active session.",
+          "params": [],
+          "result": {
+              "name": "wallet_revokeSessionResult",
+              "schema": {
+                  "type": "boolean"
+              }
+          },
+          "examples": [
+              {
+                  "name": "wallet_revokeSessionExample",
+                  "params": [],
+                  "result": {
+                      "name": "wallet_revokeSessionExampleResult",
+                      "value": true
+                  }
+              }
+          ],
+          "errors": [
+              {
+                  "$ref": "#/components/errors/UnknownError"
+              }
+          ]
+      },
+      {
+          "name": "wallet_sessionChanged",
+          "paramStructure": "by-name",
+          "description": "This notification is published by the wallet to notify the callers of updates to a shared session's authorization scopes. The event payload contains the new `sessionScopes`.",
           "params": [
-            {
-              "name": "requiredScopes",
-              "value": {
-                "eip155": {
-                  "scopes": [
-                    "eip155:1",
-                    "eip155:1337"
-                  ],
-                  "methods": [
-                    "eth_sendTransaction",
-                    "eth_getBalance",
-                    "personal_sign"
-                  ],
-                  "notifications": [
-                    "accountsChanged",
-                    "chainChanged"
-                  ]
-                },
-                "eip155:10": {
-                  "methods": [
-                    "eth_getBalance"
-                  ],
-                  "notifications": [
-                    "accountsChanged",
-                    "chainChanged"
-                  ]
-                }
+              {
+                  "name": "sessionScopes",
+                  "schema": {
+                      "$ref": "#/components/schemas/SessionScopes"
+                  }
               }
-            },
-            {
-              "name": "optionalScopes",
-              "value": {
-                "eip155:11155111": {
-                  "methods": [
-                    "eth_sendTransaction",
-                    "eth_getBalance",
-                    "personal_sign"
-                  ],
-                  "notifications": [
-                    "accountsChanged",
-                    "chainChanged"
+          ],
+          "examples": [
+              {
+                  "name": "wallet_sessionChangedExample",
+                  "description": "Example of a wallet_sessionChanged notification.",
+                  "params": [
+                      {
+                          "name": "sessionScopes",
+                          "value": {
+                              "eip155:1337": {
+                                  "accounts": [
+                                      "eip155:1337:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_watchAsset",
+                                      "eth_sendTransaction",
+                                      "eth_decrypt",
+                                      "eth_getEncryptionPublicKey",
+                                      "web3_clientVersion",
+                                      "eth_subscribe",
+                                      "eth_unsubscribe",
+                                      "eth_blockNumber",
+                                      "eth_call",
+                                      "eth_chainId",
+                                      "eth_estimateGas",
+                                      "eth_feeHistory",
+                                      "eth_gasPrice",
+                                      "eth_getBalance",
+                                      "eth_getBlockByHash",
+                                      "eth_getBlockByNumber",
+                                      "eth_getBlockTransactionCountByHash",
+                                      "eth_getBlockTransactionCountByNumber",
+                                      "eth_getCode",
+                                      "eth_getFilterChanges",
+                                      "eth_getFilterLogs",
+                                      "eth_getLogs",
+                                      "eth_getProof",
+                                      "eth_getStorageAt",
+                                      "eth_getTransactionByBlockHashAndIndex",
+                                      "eth_getTransactionByBlockNumberAndIndex",
+                                      "eth_getTransactionByHash",
+                                      "eth_getTransactionCount",
+                                      "eth_getTransactionReceipt",
+                                      "eth_getUncleCountByBlockHash",
+                                      "eth_getUncleCountByBlockNumber",
+                                      "eth_newBlockFilter",
+                                      "eth_newFilter",
+                                      "eth_newPendingTransactionFilter",
+                                      "eth_sendRawTransaction",
+                                      "eth_syncing",
+                                      "eth_uninstallFilter"
+                                  ],
+                                  "notifications": [
+                                      "eth_subscription"
+                                  ]
+                              },
+                              "wallet": {
+                                  "accounts": [],
+                                  "methods": [
+                                      "wallet_registerOnboarding",
+                                      "wallet_scanQRCode"
+                                  ],
+                                  "notifications": []
+                              },
+                              "wallet:eip155": {
+                                  "accounts": [
+                                      "wallet:eip155:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_addEthereumChain",
+                                      "personal_sign",
+                                      "eth_signTypedData_v4"
+                                  ],
+                                  "notifications": []
+                              }
+                          }
+                      }
                   ]
-                }
               }
-            },
-            {
-              "name": "sessionProperties",
-              "value": {
-                "expiry": "2022-12-24T17:07:31+00:00"
+          ]
+      },
+      {
+          "name": "wallet_getSession",
+          "description": "The `wallet_getSession` method returns an active session.",
+          "params": [],
+          "result": {
+              "name": "wallet_getSessionResult",
+              "schema": {
+                  "type": "object",
+                  "properties": {
+                      "sessionScopes": {
+                          "$ref": "#/components/schemas/SessionScopes"
+                      }
+                  }
               }
-            }
+          },
+          "examples": [
+              {
+                  "name": "wallet_getSessionExample",
+                  "description": "Example of a getSession request.",
+                  "params": [],
+                  "result": {
+                      "name": "wallet_getSessionResultExample",
+                      "value": {
+                          "sessionScopes": {
+                              "eip155:1337": {
+                                  "accounts": [
+                                      "eip155:1337:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_watchAsset",
+                                      "eth_sendTransaction",
+                                      "eth_decrypt",
+                                      "eth_getEncryptionPublicKey",
+                                      "web3_clientVersion",
+                                      "eth_subscribe",
+                                      "eth_unsubscribe",
+                                      "eth_blockNumber",
+                                      "eth_call",
+                                      "eth_chainId",
+                                      "eth_estimateGas",
+                                      "eth_feeHistory",
+                                      "eth_gasPrice",
+                                      "eth_getBalance",
+                                      "eth_getBlockByHash",
+                                      "eth_getBlockByNumber",
+                                      "eth_getBlockTransactionCountByHash",
+                                      "eth_getBlockTransactionCountByNumber",
+                                      "eth_getCode",
+                                      "eth_getFilterChanges",
+                                      "eth_getFilterLogs",
+                                      "eth_getLogs",
+                                      "eth_getProof",
+                                      "eth_getStorageAt",
+                                      "eth_getTransactionByBlockHashAndIndex",
+                                      "eth_getTransactionByBlockNumberAndIndex",
+                                      "eth_getTransactionByHash",
+                                      "eth_getTransactionCount",
+                                      "eth_getTransactionReceipt",
+                                      "eth_getUncleCountByBlockHash",
+                                      "eth_getUncleCountByBlockNumber",
+                                      "eth_newBlockFilter",
+                                      "eth_newFilter",
+                                      "eth_newPendingTransactionFilter",
+                                      "eth_sendRawTransaction",
+                                      "eth_syncing",
+                                      "eth_uninstallFilter"
+                                  ],
+                                  "notifications": [
+                                      "eth_subscription"
+                                  ]
+                              },
+                              "wallet": {
+                                  "accounts": [],
+                                  "methods": [
+                                      "wallet_registerOnboarding",
+                                      "wallet_scanQRCode"
+                                  ],
+                                  "notifications": []
+                              },
+                              "wallet:eip155": {
+                                  "accounts": [
+                                      "wallet:eip155:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_addEthereumChain",
+                                      "personal_sign",
+                                      "eth_signTypedData_v4"
+                                  ],
+                                  "notifications": []
+                              }
+                          }
+                      }
+                  }
+              }
+          ]
+      },
+      {
+          "name": "wallet_createSession",
+          "paramStructure": "by-name",
+          "params": [
+              {
+                  "name": "requiredScopes",
+                  "description": "Scopes that the wallet must support in order to be used with this provider.",
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Scope"
+                  }
+              },
+              {
+                  "name": "optionalScopes",
+                  "description": "Scopes that the wallet may support in order to be used with this provider.",
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Scope"
+                  }
+              },
+              {
+                  "name": "sessionProperties",
+                  "description": "Properties that the wallet may use to determine if the session is valid.",
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "expiry": {
+                              "type": "string",
+                              "format": "date-time"
+                          }
+                      }
+                  }
+              }
           ],
           "result": {
-            "name": "provider_authorizationResultExample",
-            "value": {
-              "sessionId": "0xdeadbeef",
-              "sessionScopes": {
-                "eip155:1": {
-                  "methods": [
-                    "eth_getBalance"
-                  ],
-                  "notifications": [],
-                  "accounts": []
-                },
-                "eip155:1337": {
-                  "methods": [
-                    "eth_sendTransaction",
-                    "eth_getBalance",
-                    "personal_sign"
-                  ],
-                  "notifications": [],
-                  "accounts": [
-                    "eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"
-                  ]
-                },
-                "eip155:11155111": {
-                  "methods": [
-                    "eth_sendTransaction",
-                    "eth_getBalance",
-                    "personal_sign"
-                  ],
-                  "notifications": [],
-                  "accounts": [
-                    "eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"
-                  ]
-                },
-                "sessionProperties": {
-                  "expiry": "2022-11-31T17:07:31+00:00"
-                }
+              "name": "wallet_createSessionResult",
+              "schema": {
+                  "type": "object",
+                  "properties": {
+                      "sessionScopes": {
+                          "$ref": "#/components/schemas/SessionScopes"
+                      },
+                      "sessionProperties": {
+                          "type": "object",
+                          "properties": {
+                              "expiry": {
+                                  "type": "string",
+                                  "format": "date-time"
+                              }
+                          }
+                      }
+                  }
               }
-            }
-          }
-        }
-      ],
-      "errors": [
-        {
-          "code": 5000,
-          "message": "Unknown error with request"
-        },
-        {
-          "code": 5100,
-          "message": "Requested networks are not supported"
-        },
-        {
-          "code": 5101,
-          "message": "Requested methods are not supported"
-        },
-        {
-          "code": 5102,
-          "message": "Requested notifications are not supported"
-        },
-        {
-          "code": 5300,
-          "message": "Invalid scopedProperties requested"
-        },
-        {
-          "code": 5301,
-          "message": "scopedProperties can only be outside of sessionScopes"
-        },
-        {
-          "code": 5302,
-          "message": "Invalid sessionProperties requested"
-        }
-      ]
-    }
+          },
+          "examples": [
+              {
+                  "name": "wallet_createSessionExample",
+                  "description": "Example of a createSession request.",
+                  "params": [
+                      {
+                          "name": "requiredScopes",
+                          "value": {
+                              "eip155:1337": {
+                                  "methods": [
+                                      "wallet_watchAsset",
+                                      "eth_sendTransaction",
+                                      "eth_decrypt",
+                                      "eth_getEncryptionPublicKey",
+                                      "web3_clientVersion",
+                                      "eth_subscribe",
+                                      "eth_unsubscribe",
+                                      "eth_blockNumber",
+                                      "eth_call",
+                                      "eth_chainId",
+                                      "eth_estimateGas",
+                                      "eth_feeHistory",
+                                      "eth_gasPrice",
+                                      "eth_getBalance",
+                                      "eth_getBlockByHash",
+                                      "eth_getBlockByNumber",
+                                      "eth_getBlockTransactionCountByHash",
+                                      "eth_getBlockTransactionCountByNumber",
+                                      "eth_getCode",
+                                      "eth_getFilterChanges",
+                                      "eth_getFilterLogs",
+                                      "eth_getLogs",
+                                      "eth_getProof",
+                                      "eth_getStorageAt",
+                                      "eth_getTransactionByBlockHashAndIndex",
+                                      "eth_getTransactionByBlockNumberAndIndex",
+                                      "eth_getTransactionByHash",
+                                      "eth_getTransactionCount",
+                                      "eth_getTransactionReceipt",
+                                      "eth_getUncleCountByBlockHash",
+                                      "eth_getUncleCountByBlockNumber",
+                                      "eth_newBlockFilter",
+                                      "eth_newFilter",
+                                      "eth_newPendingTransactionFilter",
+                                      "eth_sendRawTransaction",
+                                      "eth_syncing",
+                                      "eth_uninstallFilter"
+                                  ],
+                                  "notifications": [
+                                      "eth_subscription"
+                                  ]
+                              },
+                              "wallet": {
+                                  "methods": [
+                                      "wallet_registerOnboarding",
+                                      "wallet_scanQRCode"
+                                  ],
+                                  "notifications": []
+                              },
+                              "wallet:eip155": {
+                                  "methods": [
+                                      "wallet_addEthereumChain",
+                                      "personal_sign",
+                                      "eth_signTypedData_v4"
+                                  ],
+                                  "notifications": []
+                              }
+                          }
+                      },
+                      {
+                          "name": "sessionProperties",
+                          "value": {
+                              "expiry": "2022-12-24T17:07:31+00:00"
+                          }
+                      }
+                  ],
+                  "result": {
+                      "name": "wallet_createSessionResultExample",
+                      "value": {
+                          "sessionScopes": {
+                              "eip155:1337": {
+                                  "accounts": [
+                                      "eip155:1337:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_watchAsset",
+                                      "eth_sendTransaction",
+                                      "eth_decrypt",
+                                      "eth_getEncryptionPublicKey",
+                                      "web3_clientVersion",
+                                      "eth_subscribe",
+                                      "eth_unsubscribe",
+                                      "eth_blockNumber",
+                                      "eth_call",
+                                      "eth_chainId",
+                                      "eth_estimateGas",
+                                      "eth_feeHistory",
+                                      "eth_gasPrice",
+                                      "eth_getBalance",
+                                      "eth_getBlockByHash",
+                                      "eth_getBlockByNumber",
+                                      "eth_getBlockTransactionCountByHash",
+                                      "eth_getBlockTransactionCountByNumber",
+                                      "eth_getCode",
+                                      "eth_getFilterChanges",
+                                      "eth_getFilterLogs",
+                                      "eth_getLogs",
+                                      "eth_getProof",
+                                      "eth_getStorageAt",
+                                      "eth_getTransactionByBlockHashAndIndex",
+                                      "eth_getTransactionByBlockNumberAndIndex",
+                                      "eth_getTransactionByHash",
+                                      "eth_getTransactionCount",
+                                      "eth_getTransactionReceipt",
+                                      "eth_getUncleCountByBlockHash",
+                                      "eth_getUncleCountByBlockNumber",
+                                      "eth_newBlockFilter",
+                                      "eth_newFilter",
+                                      "eth_newPendingTransactionFilter",
+                                      "eth_sendRawTransaction",
+                                      "eth_syncing",
+                                      "eth_uninstallFilter"
+                                  ],
+                                  "notifications": [
+                                      "eth_subscription"
+                                  ]
+                              },
+                              "wallet": {
+                                  "accounts": [],
+                                  "methods": [
+                                      "wallet_registerOnboarding",
+                                      "wallet_scanQRCode"
+                                  ],
+                                  "notifications": []
+                              },
+                              "wallet:eip155": {
+                                  "accounts": [
+                                      "wallet:eip155:0x5cfe73b6021e818b776b421b1c4db2474086a7e1"
+                                  ],
+                                  "methods": [
+                                      "wallet_addEthereumChain",
+                                      "personal_sign",
+                                      "eth_signTypedData_v4"
+                                  ],
+                                  "notifications": []
+                              },
+                              "sessionProperties": {
+                                  "expiry": "2022-11-31T17:07:31+00:00"
+                              }
+                          }
+                      }
+                  }
+              }
+          ],
+          "errors": [
+              {
+                  "$ref": "#/components/errors/UnknownError"
+              },
+              {
+                  "code": 5100,
+                  "message": "Requested networks are not supported"
+              },
+              {
+                  "code": 5101,
+                  "message": "Requested methods are not supported"
+              },
+              {
+                  "code": 5102,
+                  "message": "Requested notifications are not supported"
+              },
+              {
+                  "code": 5300,
+                  "message": "Invalid scopedProperties requested"
+              },
+              {
+                  "code": 5301,
+                  "message": "scopedProperties can only be outside of sessionScopes"
+              },
+              {
+                  "code": 5302,
+                  "message": "Invalid sessionProperties requested"
+              }
+          ]
+      }
   ],
   "components": {
-    "schemas": {
-      "ScopeString": {
-        "type": "string",
-        "pattern": "[-a-z0-9]{3,8}(:[-_a-zA-Z0-9]{1,32})?"
-      },
-      "Scope": {
-        "type": "object",
-        "title": "Scope",
-        "description": "Scope for a multi-chain connection",
-        "additionalProperties": true,
-        "required": [
-          "notifications",
-          "methods"
-        ],
-        "properties": {
-          "scopes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ScopeString"
-            }
-          },
-          "methods": {
-            "description": "Methods that the wallet must support in order to be used with this provider.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "notifications": {
-            "description": "Notifications that the wallet must support in order to be used with this provider.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "rpcEndpoints": {
-            "description": "JSON-RPC endpoints for this namespace.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uri"
-            }
-          },
-          "rpcDocuments": {
-            "type": "array",
-            "description": "OpenRPC documents that define RPC methods in which to anchor the methods authorized in a CAIP-25 interaction.",
-            "items": {
-              "type": "string",
-              "format": "uri"
-            }
+      "errors": {
+          "UnknownError": {
+              "code": 5000,
+              "message": "Unknown error with request"
           }
-        }
+      },
+      "schemas": {
+          "SessionScopes": {
+              "type": "object",
+              "$ref": "#/components/schemas/Scope"
+
+          },
+          "ScopeString": {
+              "type": "string",
+              "pattern": "[-a-z0-9]{3,8}(:[-_a-zA-Z0-9]{1,32})?"
+          },
+          "Scope": {
+              "type": "object",
+              "title": "Scope",
+              "description": "Scope for a multi-chain connection",
+              "additionalProperties": true,
+              "required": [
+                  "notifications",
+                  "methods"
+              ],
+              "properties": {
+                  "scopes": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/ScopeString"
+                      }
+                  },
+                  "methods": {
+                      "description": "Methods that the wallet must support in order to be used with this provider.",
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  },
+                  "notifications": {
+                      "description": "Notifications that the wallet must support in order to be used with this provider.",
+                      "type": "array",
+                      "items": {
+                          "type": "string"
+                      }
+                  },
+                  "rpcEndpoints": {
+                      "description": "JSON-RPC endpoints for this namespace.",
+                      "type": "array",
+                      "items": {
+                          "type": "string",
+                          "format": "uri"
+                      }
+                  },
+                  "rpcDocuments": {
+                      "type": "array",
+                      "description": "OpenRPC documents that define RPC methods in which to anchor the methods authorized in a CAIP-25 interaction.",
+                      "items": {
+                          "type": "string",
+                          "format": "uri"
+                      }
+                  }
+              }
+          }
       }
-    }
   }
 }
