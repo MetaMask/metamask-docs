@@ -129,7 +129,7 @@ window.addEventListener("load", setup)
 
 ### 4. Detect a user's network
 
-[Detect the user's network](../how-to/manage-networks/detect-network.md) to ensure all RPC requests
+[Detect the user's network](../how-to/javascript/manage-networks/detect-network.md) to ensure all RPC requests
 are submitted to the currently connected network.
 Add the following code to `src/detect.js`, which uses the [`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainId)
 RPC method to detect the chain ID of the user's current network, and listens to the

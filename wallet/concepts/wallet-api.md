@@ -88,7 +88,7 @@ The following methods are restricted:
   :::caution important
   To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts),
   which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
-  See [how to access a user's accounts](../how-to/access-accounts.md) for more information.
+  See [how to access a user's accounts](../how-to/javascript/access-accounts.md) for more information.
   :::
 
 - [`wallet_snap`](/snaps/reference/wallet-api-for-snaps/#wallet_snap) - Gaining permission requires

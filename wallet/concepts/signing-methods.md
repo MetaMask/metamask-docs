@@ -6,7 +6,7 @@ sidebar_position: 6
 # Signing methods
 
 This page describes the signing RPC methods in MetaMask.
-Learn how to [use the recommended signing methods](../how-to/sign-data/index.md).
+Learn how to [use the recommended signing methods](../how-to/javascript/sign-data/index.md).
 
 ### `eth_signTypedData_v4`
 
@@ -18,19 +18,19 @@ is:
 - Protected against phishing signatures.
 
 If onchain verifiability cost is a high priority,
-[use `eth_signTypedData_v4`](../how-to/sign-data/index.md#use-eth_signtypeddata_v4).
+[use `eth_signTypedData_v4`](../how-to/javascript/sign-data/index.md#use-eth_signtypeddata_v4).
 
 ### `personal_sign`
 
 [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign):
 
 - Displays human-readable text when UTF-8 encoded, making it a popular choice for site logins
-  (for example, [Sign-In with Ethereum](../how-to/sign-data/siwe.md)).
+  (for example, [Sign-In with Ethereum](../how-to/javascript/sign-data/siwe.md)).
 - Is protected against phishing signatures.
 
 The text prefix of `personal_sign` makes signatures expensive to verify on-chain.
 If onchain verifiability cost is not a priority, you can
-[use `personal_sign`](../how-to/sign-data/index.md#use-personal_sign).
+[use `personal_sign`](../how-to/javascript/sign-data/index.md#use-personal_sign).
 
 ## Deprecated signing methods
 

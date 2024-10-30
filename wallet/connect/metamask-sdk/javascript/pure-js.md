@@ -44,17 +44,17 @@ You can configure the SDK using any [options](../../../reference/sdk-js-options.
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
+  [make read-only RPC requests](../../../how-to/javascript/make-read-only-requests.md) from your dapp.
 - Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
-  the displayed modals](../../../how-to/display/custom-modals.md).
+  the displayed modals](../../../how-to/javascript/display/custom-modals.md).
 
 You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
 Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
 [`request()`](../../../reference/provider-api.md#request) first, since it prompts the installation
 or connection popup to appear.
 
-You can also call the SDK's [`connectAndSign`](../../../how-to/sign-data/connect-and-sign.md) method, and
-[batch multiple JSON-RPC requests](../../../how-to/batch-json-rpc-requests.md) using the `metamask_batch` method.
+You can also call the SDK's [`connectAndSign`](../../../how-to/javascript/sign-data/connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](../../../how-to/javascript/batch-json-rpc-requests.md) using the `metamask_batch` method.
 
 ## Example
 

@@ -139,7 +139,7 @@ The transport field is also required if you want to use it isolated from the can
 by the transport, then it generates the QR code for you.
 
 :::info Connect and sign
-You can also [use the `connectAndSign` method](../../../how-to/use-unity-sdk/connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../how-to/gaming/unity/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction.
 :::
 
@@ -263,7 +263,7 @@ The SDK is filled with precompiled libraries to save on runtime compilation.
 
 Once you have the MetaMask Unity SDK set up, you can:
 
-- [Connect and sign in Unity.](../../../how-to/use-unity-sdk/connect-and-sign.md)
-- [Set up Infura in Unity.](../../../how-to/use-unity-sdk/infura.md)
-- [Interact with smart contracts in Unity.](../../../how-to/use-unity-sdk/smart-contracts/index.md)
-- [Enable human-readable addresses in Unity using Decentraweb.](../../../how-to/use-unity-sdk/dweb.md)
+- [Connect and sign in Unity.](../../../how-to/gaming/unity/connect-and-sign.md)
+- [Set up Infura in Unity.](../../../how-to/gaming/unity/infura.md)
+- [Interact with smart contracts in Unity.](../../../how-to/gaming/unity/smart-contracts/index.md)
+- [Enable human-readable addresses in Unity using Decentraweb.](../../../how-to/gaming/unity/dweb.md)
