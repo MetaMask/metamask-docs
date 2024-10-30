@@ -25,7 +25,7 @@ Displays a [dialog](../features/custom-ui/dialogs.md) in the MetaMask UI.
 
 An object containing the contents of the dialog:
 
-- `type` - The type of dialog.
+- `type` - (Optional) The type of dialog. Not providing a type will create a fully [custom dialog](../features/custom-ui/dialogs.md#display-a-custom-dialog).
   Possible values are:
   - `"alert"` - An alert that can only be acknowledged.
   - `"confirmation"` - A confirmation that can be accepted or rejected.
@@ -996,6 +996,22 @@ console.log(state)
 }
 */
 ```
+
+### `snap_resolveInterface`
+
+Resolves an interactive interface.
+For use in [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog).
+
+#### Parameters
+
+An object containing:
+
+- `id` - The ID of the interface to be resolved.
+- `result` - The result to return to the interface's caller.
+
+#### Example
+
+For a full example of how to use `snap_resolveInterface`, see the [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog) documentation.
 
 ### `snap_updateInterface`
 
