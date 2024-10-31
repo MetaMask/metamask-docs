@@ -46,8 +46,8 @@ The method returns an array of results corresponding to each request.
 ### React / Next.js / React Native example
 
 The following is an example of using `metamask_batch` to batch
-[`personal_sign`](/wallet/reference/personal_sign) and
-[`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in React, Next.js, or React Native/Expo:
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) and
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction) in React, Next.js, or React Native/Expo:
 
 ```javascript title="index.js"
 import { metamask_batch } from "metamask-sdk"
@@ -81,8 +81,8 @@ function MyComponent() {
 ### Vue.js example
 
 The following is an example of using `metamask_batch` to batch
-[`personal_sign`](/wallet/reference/personal_sign) and
-[`eth_sendTransaction`](/wallet/reference/eth_sendtransaction) in Vue.js:
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) and
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction) in Vue.js:
 
 ```javascript title="App.vue"
 <script>
@@ -128,8 +128,8 @@ Follow these guidelines when using `metamask_batch`:
 - **Be aware of the dependencies between chained requests.**
   Avoid creating a dependency where the outcome of one request directly influences the context or
   validity of a subsequent request within the same batch.
-  For example, avoid chaining a [`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain)
-  request with [`eth_signTypedData_v4`](/wallet/reference/eth_signtypeddata_v4), because
+  For example, avoid chaining a [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
+  request with [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4), because
   `eth_signTypedData_v4` relies on the current chain ID, which would be altered by `wallet_switchEthereumChain`.
   This approach ensures that each request in the batch operates independently and maintains its
   integrity, regardless of changes introduced by preceding requests in the batch.
