@@ -35,7 +35,7 @@ const config = {
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     VERCEL_ENV: process.env.VERCEL_ENV,
-    DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3003',
+    DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
   },
