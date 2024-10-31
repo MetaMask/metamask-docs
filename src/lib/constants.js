@@ -462,6 +462,7 @@ export const REQUEST_PARAMS = (method = "POST", headers = {}) => ({
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
+    mode: 'cors',
     ...headers
   },
 });
