@@ -371,6 +371,11 @@ const sidebar = {
         },
         {
           type: "doc",
+          label: "About the Multichain API",
+          id: "concepts/multichain-api"
+        },
+        {
+          type: "doc",
           label: "SDK connections",
           id: "concepts/sdk-connections"
         },

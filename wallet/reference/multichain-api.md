@@ -331,7 +331,6 @@ MetaMask doesn't support session IDs.
   "jsonrpc": "2.0",
   "method": "wallet_notify",
   "params": {
-    "sessionId": "0xdeadbeef",
     "scope": "eip155:1",
     "notification": {
       "method": "eth_subscription",
@@ -372,7 +371,7 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
     "sessionScopes": {
       "eip155:1": {
         "methods": ["eth_signTransaction", "eth_sendTransaction"],
-        "notifications": ["accountsChanged"],
+        "notifications": ["message"],
         "accounts": ["eip155:1:0xabc123"]
       },
       "eip155:137": {
