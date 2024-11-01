@@ -6,7 +6,7 @@ sidebar_position: 4
 # Send transactions
 
 You can send a transaction in MetaMask using the
-[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction)
 RPC method.
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
@@ -139,7 +139,7 @@ MetaMask ignores this field.
 :::
 
 The chain ID is derived from the user's current selected network.
-Use [`eth_chainId`](/wallet/reference/eth_chainid) to get the user's chain ID.
+Use [`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainid) to get the user's chain ID.
 If you need the network version, use [`net_version`](https://ethereum.org/en/developers/docs/apis/json-rpc/#net_version).
 
 In the future, MetaMask might allow connecting to multiple networks at the same time, at which point

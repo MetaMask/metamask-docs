@@ -211,7 +211,7 @@ extensionOnly: true
 </Tabs>
 
 Enables or disables automatically using the MetaMask browser extension if it's detected.
-The default is `false`.
+The default is `true`.
 
 ### `infuraAPIKey`
 
@@ -282,7 +282,7 @@ modals: {
 </TabItem>
 </Tabs>
 
-An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/display-custom-modals.md).
+An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
 This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
 
 ### `openDeeplink`
@@ -329,7 +329,8 @@ preferDesktop: true
 </TabItem>
 </Tabs>
 
-Enables or disables preferring the MetaMask browser extension over MetaMask Mobile.
+When set to `true`, the MetaMask browser extension is displayed as the default option in the SDK connection modal.
+When set to `false`, MetaMask Mobile is displayed as the default option.
 The default is `false`.
 
 ### `readonlyRPCMap`
