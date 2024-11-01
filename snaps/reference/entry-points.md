@@ -397,9 +397,6 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 ## `onSignature`
 
-:::flaskOnly
-:::
-
 To provide [signature insights](../features/signature-insights.md) before a user signs a message, a
 Snap must expose the `onSignature` entry point.
 Whenever a [signing method](/wallet/concepts/signing-methods) is called, such as `personal_sign` or
