@@ -57,11 +57,23 @@ function sortObjectKeysByArray(
   return result;
 }
 
+function removeEmptyStrings(obj) {
+  for (const key in obj) {
+    if (obj[key] === "") {
+      delete obj[key];
+    }
+  }
+  return obj;
+}
+
 function removeEmptyArrays(obj: any, params: any[]) {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
     const currentParam = params.find(item => item.name === key)
     if (newObj.hasOwnProperty(key)) {
+      if (!Array.isArray(newObj[key]) && typeof newObj[key] === "object") {
+        newObj[key] = removeEmptyStrings(newObj[key]);
+      }
       if (currentParam && currentParam.required) {
         return newObj
       }
