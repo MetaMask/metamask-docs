@@ -89,7 +89,7 @@ Snaps can also call some Wallet JSON-RPC API methods using the `ethereum` global
 
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
-For example, to call [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts), first request
+For example, to call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts), first request
 the required permission:
 
 ```json title="snap.manifest.json"
@@ -109,18 +109,18 @@ Snaps can only use it to make read requests, not to write to the blockchain or i
 Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
 - [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps)
-- [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
-- [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
-- [`wallet_addEthereumChain`](/wallet/reference/wallet_addEthereumChain)
-- [`wallet_switchEthereumChain`](/wallet/reference/wallet_switchEthereumChain)
-- [`wallet_watchAsset`](/wallet/reference/wallet_watchAsset)
-- [`wallet_registerOnboarding`](/wallet/reference/wallet_registerOnboarding)
-- [`wallet_scanQRCode`](/wallet/reference/wallet_scanQRCode)
-- [`eth_sendRawTransaction`](/wallet/reference/eth_sendRawTransaction)
-- [`eth_sendTransaction`](/wallet/reference/eth_sendTransaction)
-- [`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
-- [`eth_decrypt`](/wallet/reference/eth_decrypt)
-- [`eth_getEncryptionPublicKey`](/wallet/reference/eth_getEncryptionPublicKey)
+- [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestPermissions)
+- [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions)
+- [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addEthereumChain)
+- [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchEthereumChain)
+- [`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchAsset)
+- [`wallet_registerOnboarding`](/wallet/reference/json-rpc-methods/wallet_registerOnboarding)
+- [`wallet_scanQRCode`](/wallet/reference/json-rpc-methods/wallet_scanQRCode)
+- [`eth_sendRawTransaction`](/wallet/reference/json-rpc-methods/eth_sendRawTransaction)
+- [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction)
+- [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
+- [`eth_decrypt`](/wallet/reference/json-rpc-methods/eth_decrypt)
+- [`eth_getEncryptionPublicKey`](/wallet/reference/json-rpc-methods/eth_getEncryptionPublicKey)
 
 ## Custom JSON-RPC APIs
 
