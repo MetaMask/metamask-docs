@@ -9,8 +9,9 @@ You can display a dialog in the MetaMask UI using the
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) API method.
 Dialogs can contain [custom UI](index.md) and [interactive UI](interactive-ui.md) components.
 
-There are three types of dialogs: [alerts](#display-an-alert-dialog),
-[confirmations](#display-a-confirmation-dialog), and [prompts](#display-a-prompt-dialog).
+There are four types of dialogs: [alerts](#display-an-alert-dialog),
+[confirmations](#display-a-confirmation-dialog), [prompts](#display-a-prompt-dialog), and
+[custom dialogs](#display-a-custom-dialog).
 
 :::caution
 Dialogs do not work when MetaMask is locked.
@@ -120,6 +121,103 @@ const walletAddress = await snap.request({
 
 <p align="center">
 <img src={require("../../assets/prompt-dialog.png").default} alt="Prompt dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
+## Display a custom dialog
+
+To display a custom dialog, call [`snap_dialog`](../../reference/snaps-api.md#snap_dialog)
+without providing a `type`. Custom dialogs can be resolved by calling [`snap_resolveInterface`](../../reference/snaps-api.md#snap_resolveinterface). The UI passed to a custom dialog should contain a `Footer` element. Its buttons will be displayed at the bottom of the dialog. Here is a complete example:
+
+```tsx title="index.tsx"
+import {
+  UserInputEventType,
+  type OnRpcRequestHandler,
+  type OnUserInputHandler,
+} from "@metamask/snaps-sdk";
+import {
+  Box,
+  Text,
+  Heading,
+  Container,
+  Footer,
+  Button,
+} from "@metamask/snaps-sdk/jsx";
+
+/**
+ * Handle incoming JSON-RPC requests, sent through wallet_invokeSnap.
+ *
+ * @param args - The request handler args as object.
+ * @param args.origin - The origin of the request, e.g., the website that
+ * invoked the snap.
+ * @param args.request - A validated JSON-RPC request object.
+ * @returns The result of snap_dialog.
+ * @throws If the request method is not valid for this snap.
+ */
+export const onRpcRequest: OnRpcRequestHandler = async () => {
+  const result = await snap.request({
+    method: "snap_dialog",
+    params: {
+      content: (
+        <Container>
+          <Box>
+            <Heading>Custom Dialog</Heading>
+            <Text>
+              This is a custom dialog reproducing a confirmation dialog.
+              <br />
+              Do you accept?
+            </Text>
+          </Box>
+          <Footer>
+            <Button name="no">No</Button>
+            <Button name="yes">Yes</Button>
+          </Footer>
+        </Container>
+      ),
+    },
+  });
+
+  console.log("result", result); // Result will be true or false.
+
+  return result;
+};
+
+export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
+  if (event.type === UserInputEventType.ButtonClickEvent) {
+    switch (event.name) {
+      case "no": // User selected "No" in the footer.
+        await snap.request({
+          method: "snap_resolveInterface",
+          params: {
+            id,
+            value: false,
+          },
+        });
+        break;
+
+      case "yes": {
+        // User selected "Yes" in the footer
+        await snap.request({
+          method: "snap_resolveInterface",
+          params: {
+            id,
+            value: true,
+          },
+        });
+        break;
+      }
+
+      default:
+        break;
+    }
+  }
+};
+```
+
+This code outputs a custom dialog with two buttons: **Yes** and **No**. 
+When the user selects one of the buttons, `onUserInput` is called with the button's name. From there, `snap_resolveInterface` is called. This resolves the dialog, and returns the value passed to `snap_resolveInterface` as the result of the dialog.
+
+<p align="center">
+<img src={require("../../assets/custom-dialog.png").default} alt="Custom dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ## Example
