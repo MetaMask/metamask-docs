@@ -25,7 +25,7 @@ Displays a [dialog](../features/custom-ui/dialogs.md) in the MetaMask UI.
 
 An object containing the contents of the dialog:
 
-- `type` - The type of dialog.
+- `type` - (Optional) The type of dialog. Not providing a type will create a fully [custom dialog](../features/custom-ui/dialogs.md#display-a-custom-dialog).
   Possible values are:
   - `"alert"` - An alert that can only be acknowledged.
   - `"confirmation"` - A confirmation that can be accepted or rejected.
@@ -272,7 +272,7 @@ An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 If you wish to connect to MetaMask accounts in a Snap, use
 [`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
-[`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts).
 :::
 
 #### Returns
@@ -484,9 +484,14 @@ console.log(contents)
 </TabItem>
 </Tabs>
 
-## `snap_getLocale`
+## `snap_getLocale` (deprecated)
 
 Gets the user's locale setting. You can use this method to localize text in your snap.
+
+:::warning
+This method is deprecated.
+Use [`snap_getPreferences`](#snap_getpreferences) instead.
+:::
 
 #### Returns
 
@@ -544,6 +549,42 @@ await snap.request({
 
 </TabItem>
 </Tabs>
+
+## `snap_getPreferences`
+
+Gets the user's preferences.
+
+#### Returns
+
+An object containing the user's preferences:
+
+- `locale` - The user's locale setting as a language code.
+- `currency` - The user's preferred fiat currency code.
+
+#### Example
+
+```tsx title="index.tsx"
+import { Box, Text } from "@metamask/snaps-sdk/jsx";
+
+const { locale } = await snap.request({ method: "snap_getPreferences" });
+
+let greeting = "Hello";
+if(locale === "es") {
+  greeting = "Hola";
+}
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Text>{greeting}</Text>
+      </Box>
+    ),
+  },
+});
+```
 
 ## `snap_manageAccounts`
 
@@ -955,6 +996,22 @@ console.log(state)
 }
 */
 ```
+
+### `snap_resolveInterface`
+
+Resolves an interactive interface.
+For use in [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog).
+
+#### Parameters
+
+An object containing:
+
+- `id` - The ID of the interface to be resolved.
+- `result` - The result to return to the interface's caller.
+
+#### Example
+
+For a full example of how to use `snap_resolveInterface`, see the [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog) documentation.
 
 ### `snap_updateInterface`
 

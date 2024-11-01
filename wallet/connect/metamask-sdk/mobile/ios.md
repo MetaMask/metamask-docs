@@ -93,12 +93,12 @@ To disable this, set `MetaMaskSDK.shared.enableDebug = false` or `ethereum.enabl
 
 ### 4. Call methods
 
-You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using `metamaskSDK.request()`.
+You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-methods) using `metamaskSDK.request()`.
 
 #### Example: Get chain ID
 
 The following example gets the user's chain ID by calling
-[`eth_chainId`](/wallet/reference/eth_chainId).
+[`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainId).
 
 ```swift
 let chainIdRequest = EthereumRequest(method: .ethChainId)
@@ -108,7 +108,7 @@ let chainId = await metamaskSDK.request(chainIdRequest)
 #### Example: Get account balance
 
 The following example gets the user's account balance by calling
-[`eth_getBalance`](/wallet/reference/eth_getBalance).
+[`eth_getBalance`](/wallet/reference/json-rpc-methods/eth_getBalance).
 
 ```swift
 // Create parameters.
@@ -134,7 +134,7 @@ let accountBalance = await metamaskSDK.request(getBalanceRequest)
 #### Example: Send transaction
 
 The following example sends a transaction by calling
-[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction).
 
 <Tabs>
 <TabItem value="Use a dictionary">

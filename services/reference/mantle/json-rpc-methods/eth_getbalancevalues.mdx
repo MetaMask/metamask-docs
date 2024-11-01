@@ -49,7 +49,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
 ```
 
   </TabItem>

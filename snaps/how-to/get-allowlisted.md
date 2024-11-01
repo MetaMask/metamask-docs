@@ -162,6 +162,7 @@ The following is a list of permissions that do not require allowlisting:
 - [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
 - [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
 - [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale)
+- [`snap_getPreferences`](../reference/snaps-api.md#snap_getpreferences)
 - [`snap_manageState`](../reference/snaps-api.md#snap_managestate)
 - [`snap_notify`](../reference/snaps-api.md#snap_notify)
 
