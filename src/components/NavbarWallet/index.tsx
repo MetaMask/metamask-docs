@@ -9,7 +9,6 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
-import { useEnsName } from "wagmi";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
@@ -31,6 +30,7 @@ const NavbarWalletComponent: FC = ({
   const COPIED_TEXT = "Copied!";
   const {
     metaMaskAccount,
+    metaMaskAccountEns,
     sdk,
     metaMaskWalletIdConnectHandler,
     metaMaskDisconnect,
@@ -40,11 +40,9 @@ const NavbarWalletComponent: FC = ({
   const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [userAccount, setUserAccount] = useState(metaMaskAccount);
-
-  const { data: ensName, status: ensNameStatus } = useEnsName({
-    address: metaMaskAccount as `0x${string}`,
-  });
+  const [userAccount, setUserAccount] = useState(
+    metaMaskAccountEns || metaMaskAccount,
+  );
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
@@ -120,14 +118,14 @@ const NavbarWalletComponent: FC = ({
   };
 
   useEffect(() => {
-    if (ensNameStatus === "success" && ensName) {
-      setUserAccount(ensName);
+    if (metaMaskAccountEns) {
+      setUserAccount(metaMaskAccountEns);
     } else if (metaMaskAccount) {
       setUserAccount(metaMaskAccount);
     } else {
       setUserAccount(null);
     }
-  }, [metaMaskAccount, ensNameStatus, ensName]);
+  }, [metaMaskAccount, metaMaskAccountEns]);
 
   return !userAccount ? (
     <Button
@@ -165,7 +163,7 @@ const NavbarWalletComponent: FC = ({
               alt="avatar"
             />{" "}
             <span className={styles.walletId}>
-              {ensName || reformatMetamaskAccount(userAccount)}
+              {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
             </span>
             <button
               data-testid="navbar-account-copy"

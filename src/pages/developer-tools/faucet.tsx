@@ -16,7 +16,6 @@ import {
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
-import { useEnsName } from "wagmi";
 import styles from "./faucet.module.scss";
 import { REQUEST_PARAMS } from "@site/src/lib/constants";
 import { AlertBalanceTooLow } from "@site/src/components/Faucet/Alerts";
@@ -35,9 +34,8 @@ export const LINEA_URL = "https://sepolia.lineascan.build/tx/";
 
 export default function Faucet() {
   const { siteConfig } = useDocusaurusContext();
-  const { userId, token, uksTier, metaMaskAccount } = useContext(
-    MetamaskProviderContext,
-  );
+  const { userId, token, uksTier, metaMaskAccount, metaMaskAccountEns } =
+    useContext(MetamaskProviderContext);
   const alert = useAlert();
   const [transactions, setTransactions] = useState(DEFAULT_TRANSACTIONS_LIST);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,10 +45,6 @@ export default function Faucet() {
   const [isSepoliaMaintenance, setIsSepoliaMaintenance] = useState(false);
   const [faucetBypassDomain, setFaucetBypassDomain] = useState(false);
   const { DASHBOARD_URL } = siteConfig?.customFields || {};
-
-  const { data: ensName, status: ensNameStatus } = useEnsName({
-    address: metaMaskAccount as `0x${string}`,
-  });
 
   const isLimitedUserPlan = uksTier === "core" && !faucetBypassDomain;
 
@@ -181,14 +175,12 @@ export default function Faucet() {
   }, [userId, token]);
 
   useEffect(() => {
-    if (metaMaskAccount && !walletAddress) {
-      if (ensNameStatus === "success" && ensName) {
-        setWalletAddress(ensName);
-      } else if (metaMaskAccount) {
-        setWalletAddress(metaMaskAccount);
-      }
+    if (metaMaskAccountEns) {
+      setWalletAddress(metaMaskAccountEns);
+    } else if (metaMaskAccount) {
+      setWalletAddress(metaMaskAccount);
     }
-  }, [metaMaskAccount, ensNameStatus, ensName]);
+  }, [metaMaskAccount, metaMaskAccountEns]);
 
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (
