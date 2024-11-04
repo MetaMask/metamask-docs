@@ -783,6 +783,40 @@ await snap.request({
 <img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Section` 
+
+Outputs a styled container for use in [dialogs](dialogs.md) and [home pages](home-pages.md). 
+
+#### Props
+
+- `direction` - (Optional) The direction in which elements flow inside the box.
+  Possible values are `"horizontal"` and `"vertical"`.
+  The default is `"vertical"`. 
+- `alignment` - (Optional) The alignment of the elements inside the box.
+  Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
+  The default is `"start"`.
+
+#### Example
+
+```js
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: (
+      <Box>
+        <Section>
+          <Heading>Hello world!</Heading>
+          <Text>This text appears in a container with rounded corners.</Text>
+        </Section>
+      </Box>
+    ),
+  };
+};
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-section.png").default} alt="Section UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Selector`
 
 Outputs a selector component for use in [interactive UI](interactive-ui.md).
