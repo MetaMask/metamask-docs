@@ -18,7 +18,7 @@ import { useAlert } from "react-alert";
 import {MetamaskProviderContext} from "@site/src/theme/Root";
 
 import styles from "./faucet.module.scss";
-import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
+import { REQUEST_PARAMS } from "@site/src/lib/constants";
 import { AlertBalanceTooLow } from "@site/src/components/Faucet/Alerts";
 import {
   trackInputChangeForSegment,
@@ -44,7 +44,7 @@ export default function Faucet() {
   const [isLineaMaintenance, setIsLineaMaintenance] = useState(false);
   const [isSepoliaMaintenance, setIsSepoliaMaintenance] = useState(false);
   const [faucetBypassDomain, setFaucetBypassDomain] = useState(false);
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+  const { DASHBOARD_URL } = siteConfig?.customFields || {};
 
   const isLimitedUserPlan = uksTier === "core" && !faucetBypassDomain;
 
@@ -61,7 +61,7 @@ export default function Faucet() {
 
   const getTransactions = async () => {
     const sepolia = await fetch(
-      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/sepolia/transactions`,
+      `${DASHBOARD_URL}/api/faucets/sepolia/transactions`,
       {
         ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
       },
@@ -70,7 +70,7 @@ export default function Faucet() {
     setTransactionsForNetwork("sepolia", sepoliaData);
 
     const linea = await fetch(
-      `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/linea/transactions`,
+      `${DASHBOARD_URL}/api/faucets/linea/transactions`,
       {
         ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
       },
@@ -84,7 +84,7 @@ export default function Faucet() {
     const address = walletAddress.trim();
     try {
       const faucetRawResponse = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/faucets/${network}?address=${address}`,
+        `${DASHBOARD_URL}/api/faucets/${network}?address=${address}`,
         {
           ...REQUEST_PARAMS("POST", { Authorization: `Bearer ${token}` }),
           body: JSON.stringify({ dstAddress: address }),
