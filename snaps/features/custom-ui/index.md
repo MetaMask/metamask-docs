@@ -207,13 +207,18 @@ await snap.request({
 
 Outputs a card component which is used to display values in a card structure. 
 
+:::info
+Unlike many `Card` components from other UI libraries, the Snaps `Card` does not have any shape.
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) component.
+:::
+
 #### Props
 
-- `image`: `string` - An optional image shown on the left side. Accepts inline SVG.
 - `title`: `string` - The title of the card.
-- `description`: `string` - An optional description, shown below the title.
 - `value`: `string` - The value, shown on the right side. 
-- `extra`: `string` - An additional optional text shown below the value.
+- `image`: `string` - (Optional) An image shown on the left side. Accepts inline SVG.
+- `description`: `string` - (Optional) A description, shown below the title.
+- `extra`: `string` - (Optional) Additional text shown below the value.
 
 #### Example
 
