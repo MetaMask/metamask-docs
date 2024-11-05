@@ -36,7 +36,7 @@ View the following Snaps resources in addition to this documentation site.
   Template for integrating the Biconomy Smart Account with the 
   [Keyring API](../reference/keyring-api/index.md).
 - [Text Transformer](https://github.com/Montoya/transformer-snap) - Transforms 
-  strings into unicode bold, italic, and strikethrough characters for use on social 
+  strings into Unicode bold, italic, and strikethrough characters for use on social 
   media. Demonstrates [interactive JSX UI](../features/custom-ui/index.md) in a home page.
 - [Social Names](https://github.com/Montoya/social-names-snap) - Adds Farcaster and 
   Lens handles to the send flow and petnames using 
@@ -53,7 +53,7 @@ View the following Snaps resources in addition to this documentation site.
   testing MetaMask Snaps, including a Jest environment, and a set of Jest matchers.
   See [how to test a Snap](../how-to/test-a-snap.md) using `snaps-jest`.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A tool for simulating
-  Snaps in the browser, streamlining the development process. It does not support all Snaps features 
+  Snaps in the browser, streamlining the development process. It doesn't support all Snaps features 
   but can be useful for testing certain features.
 - [MetaMask Testing Tools](https://hugomrdias.github.io/metamask/) - A collection of tools for 
   testing MetaMask, MetaMask Flask, and MetaMask Snaps with [Playwright](https://playwright.dev/), 
