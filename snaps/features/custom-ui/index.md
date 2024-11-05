@@ -738,7 +738,7 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. This must be an HTTPS URL.
+- `href`: `string` - The URL to point to. Supported schemes are `https:` and `mailto:`. `http:` is not allowed.
 - `children`: `Array<string | Bold | Italic>` - The link text.
 
 #### Example
