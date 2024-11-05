@@ -4,13 +4,6 @@ description: Set rate limits to control access to the API key.
 
 # Rate limits
 
-:::info
-
-The credit pricing model replaces the request-based billing for free-tier (Core) customers.
-**Existing paid customers will not be immediately affected and will continue to limit the number of requests per second**.
-
-:::
-
 Set credit rate limits to control access to the API key and to limit costs in case of a leaked API key.
 Set rate limiting in the API key's **Settings** tab **Key Credit Limits** section.
 
