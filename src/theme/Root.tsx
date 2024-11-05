@@ -10,7 +10,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { AlertTemplate, options } from "@site/src/components/Alert";
 import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
-  DASHBOARD_URL,
   REF_ALLOW_LOGIN_PATH,
   REQUEST_PARAMS,
   AUTH_WALLET_PROJECTS,
@@ -112,7 +111,7 @@ export const LoginProvider = ({ children }) => {
   const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
   const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+  const { DASHBOARD_URL } = siteConfig?.customFields || {};
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -169,7 +168,7 @@ export const LoginProvider = ({ children }) => {
         (async () => {
           try {
             const projectsResponse = await fetch(
-              `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userIdFromjwtToken}/projects`,
+              `${DASHBOARD_URL}/api/v1/users/${userIdFromjwtToken}/projects`,
               {
                 ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
               },
