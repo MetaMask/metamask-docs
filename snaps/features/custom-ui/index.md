@@ -255,7 +255,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-card.png").default} alt="Card UI example" width="354px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-card.png").default} alt="Card UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
 ### `Checkbox`
