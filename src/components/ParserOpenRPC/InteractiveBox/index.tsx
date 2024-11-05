@@ -28,6 +28,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import * as isPlainObject from "lodash.isplainobject";
+import * as camelCase from "lodash.camelcase";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
@@ -129,7 +130,7 @@ export default function InteractiveBox({
 
   const checkName = (name: string) => {
     if (name === "requestPermissionObject") return "requestPermissionsObject";
-    return name;
+    return camelCase(name);
   };
 
   useEffect(() => {
