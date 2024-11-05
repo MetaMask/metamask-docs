@@ -49,9 +49,9 @@ View the following Snaps resources in addition to this documentation site.
   deploying your Snap, and a companion dapp UI you can build on.
 - [Test Snaps](https://github.com/MetaMask/snaps/tree/main/packages/test-snaps) - A collection of
   test Snaps and [a dapp for evaluating them](https://metamask.github.io/snaps/test-snaps/latest/).
-- [snaps-jest](https://www.npmjs.com/package/@metamask/snaps-jest) - A Jest preset for end-to-end 
-  testing MetaMask Snaps, including a Jest environment, and a set of Jest matchers. 
-  [How to use snaps-jest](../how-to/test-a-snap.md). 
+- [`snaps-jest`](https://www.npmjs.com/package/@metamask/snaps-jest) - A Jest preset for end-to-end 
+  testing MetaMask Snaps, including a Jest environment, and a set of Jest matchers.
+  See [how to test a Snap](../how-to/test-a-snap.md) using `snaps-jest`.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A tool for simulating
   Snaps in the browser, streamlining the development process. It does not support all Snaps features 
   but can be useful for testing certain features.
