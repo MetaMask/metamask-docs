@@ -117,96 +117,82 @@ function App() {
 
 ### 3.2. Display connection options
 
-`connect` accepts an optional `ConnectOptions` object. 
+The `connect` function accepts an optional `ConnectOptions` object. 
 This object can control the connection process, including:
 
 - `modalMode`: Determines how the connection modal behaves. The options are:
-  - `"alwaysAsk"`: Prompts the user every time a connection is initiated.
-  - `"neverAsk"`: Attempts to connect without showing the modal.
+  - `alwaysAsk`: Prompts the user every time a connection is initiated.
+  - `neverAsk`: Attempts to connect without showing the modal.
 - `modalTheme`: Sets the visual theme of the connection modal. The options are `"dark"` and `"light"`.
 
-You can configure these options as follows:
+The `disconnect` function allows users to disconnect their wallet.
+You can enable `clearLastWallet` to clear the last connected wallet information.
+
+In `App.tsx`, you can display connect and disconnect buttons with various options as follows:
 
 ```typescript title="App.tsx"
-// Default connection.
-handleConnect()
-
-// Always show modal.
-handleConnect({ modalMode: "alwaysAsk" })
-
-// Never show modal.
-handleConnect({ modalMode: "neverAsk" })
-
-// Dark theme modal.
-handleConnect({
-  modalMode: "alwaysAsk",
-  modalTheme: "dark",
-})
-
-// Light theme modal.
-handleConnect({
-  modalMode: "alwaysAsk",
-  modalTheme: "light",
-})
-```
-
-The `disconnect` function allows users to disconnect their wallet. You can also clear the last connected wallet information:
-
-```typescript title="App.tsx"
-// Basic disconnect.
-handleDisconnect()
-
-// Disconnect and clear last wallet.
-handleDisconnect({ clearLastWallet: true })
+function App() {
+  // ...
+  return (
+    <div className="App">
+      <h1>get-starknet</h1>
+      <div className="card">
+        // Default connection:
+        <button onClick={() => handleConnect()}>Connect</button>
+        // Always show modal:
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>Connect (always ask)</button>
+        // Never show modal:
+        <button onClick={() => handleConnect({ modalMode: "neverAsk" })}>Connect (never ask)</button>
+        // Dark theme modal:
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk", modalTheme: "dark" })}>
+          Connect (dark theme)
+        </button>
+        // Light theme modal:
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk", modalTheme: "light" })}>
+          Connect (light theme)
+        </button>
+        // Default disconnect:
+        <button onClick={() => handleDisconnect()}>Disconnect</button>
+        // Disconnect and clear last wallet:
+        <button onClick={() => handleDisconnect({ clearLastWallet: true })}>Disconnect and reset</button>
+      </div>
+    </div>
+  )
+};
 ```
 
 ### 3.3. Display wallet information
 
-You can display the wallet's name, address, and icon in your dapp. 
-This provides visual feedback to the user, confirming which wallet they are using.
-
-The following code is an example of how to update the interface with the connected wallet's details:
+Update `App.tsx` with the following code to display the name and icon of the connected wallet, and
+the connected address.
+This provides visual feedback to the user, confirming which wallet and account they are using.
 
 ```typescript title="App.tsx"
-const [walletName, setWalletName] = useState("")
-const [walletAddress, setWalletAddress] = useState("")
-const [walletIcon, setWalletIcon] = useState("")
-const [walletAccount, setWalletAccount] = useState<AccountInterface | null>(null)
-
-// Connect handler updates wallet info
-async function handleConnect(options?: ConnectOptions) {
-  const res = await connect(options)
-  setWalletName(res?.name || "")
-  setWalletAddress(res?.account?.address || "") 
-  setWalletIcon(res?.icon || "")
-  setWalletAccount(res?.account)
-}
-
-// Disconnect handler clears wallet info
-async function handleDisconnect(options?: DisconnectOptions) {
-  await disconnect(options)
-  setWalletName("")
-  setWalletAddress("")
-  setWalletAccount(null)
-}
-
-// Display wallet information
-{walletName && (
-  <div>
-    <h2>
-       Selected Wallet: <pre>{walletName}</pre>  
-       <img src={walletIcon} alt="Wallet icon"/>
-    </h2>
-    <ul>
-      <li>Wallet address: <pre>{walletAddress}</pre></li>
-    </ul>
-  </div>
-)}
+function App() {
+  // ...
+  return (
+    <div className="App">
+      // ...
+      {walletName && (
+        <div>
+          <h2>
+             Selected Wallet: <pre>{walletName}</pre>  
+             <img src={walletIcon} alt="Wallet icon"/>
+          </h2>
+          <ul>
+            <li>Wallet address: <pre>{walletAddress}</pre></li>
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+};  
 ```
 
 ### 3.4. Full example
 
-The following is a full example of configuring the wallet connection:
+The following is a full example of configuring the wallet connection.
+It displays basic connect and disconnect buttons, and the connected wallet's information.
 
 ```typescript title="App.tsx"
 import "./App.css"
@@ -240,37 +226,8 @@ function App() {
     <div className="App">
       <h1>get-starknet</h1>
       <div className="card">
-        <button onClick={() => handleConnect()}>Default</button>
-        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>
-          Always ask
-        </button>
-        <button onClick={() => handleConnect({ modalMode: "neverAsk" })}>
-          Never ask
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "dark",
-            })
-          }
-        >
-          Always ask with dark theme
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "light",
-            })
-          }
-        >
-          Always ask with light theme
-        </button>
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>Connect</button>
         <button onClick={() => handleDisconnect()}>Disconnect</button>
-        <button onClick={() => handleDisconnect({ clearLastWallet: true })}>
-          Disconnect and reset
-        </button>
       </div>
       {walletName && (
         <div>
@@ -306,25 +263,13 @@ You are directed to the default dapp display.
   </div>
 </div>
 
-The following buttons are displayed:
-
-- **Default**: Resets the app's handling to the default behavior for connecting the wallet to Starknet.
-- **Always ask**: Always prompts the user for confirmation when the wallet is connecting to Starknet.
-- **Never ask**: Suppresses confirmation prompts, automatically connecting the wallet to Starknet.
-- **Always ask with dark theme**: Prompts for wallet connection confirmation with a dark-themed user interface.
-- **Always ask with light theme**: Prompts for wallet connection confirmation with a light-themed user interface.
-- **Disconnect**: Disconnects the wallet from Starknet.
-- **Disconnect and reset**: Disconnects the wallet and resets the app's wallet connection settings.
-
-### 3.6. Connect your dapp to a wallet
-
-Select your preferred connection option.
-`get-starknet` displays a modal that detects MetaMask and allows you to choose which Starknet wallet to connect to.
+When you select **Connect**, `get-starknet` displays a modal that detects MetaMask and allows you to
+choose which Starknet wallet to connect to.
 Follow the on-screen prompts to connect your MetaMask wallet to Starknet.
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-select.png").default} alt="Starknet dapp select wallet" width="750" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../assets/starknet-tutorial-modal.png").default} alt="Starknet dapp select wallet" width="750" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
@@ -343,19 +288,21 @@ token, such as STRK, and perform a transfer using the `AccountInterface` instanc
 
 ### 4.1. Obtain tokens and switch to testnet
 
-To complete this tutorial, you'll use the Starknet testnet. By default, the Snap operates on the Mainnet. To switch to the testnet:
+Use the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) to generate a Starknet address and switch to the
+Starknet Sepolia testnet.
 
-1. Obtain testnet ETH (for gas) and at least 1 STRK token from the [Starknet faucet]( https://starknet-faucet.vercel.app/).
-1. Use the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) to switch to the testnet.
+Obtain testnet ETH (for gas) and at least 1 STRK token from the [Starknet faucet]( https://starknet-faucet.vercel.app/).
 
 ### 4.2. Configure the TypeScript compiler 
 
-Update the `tsconfig.json` file in the root directory of your project by setting the `target` version to `es2022`. This ensures compatibility with ECMAScript 2022 (ES2022):
+In the `tsconfig.json` file in the root directory of your project, update the `compilerOptions` with
+the `target` version set to `es2022`, and `jsx` set to `react-jsx`:
 
 ```json title="tsconfig.json"
 {
   "compilerOptions": {
-    "target": "es2022",                
+    "target": "es2022",
+    "jsx": "react-jsx",                
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -375,20 +322,15 @@ Update the `tsconfig.json` file in the root directory of your project by setting
 
 Create a `src/components/` directory and add the following files to it:
 
-- `erc20Abi.json`: A JSON file containing the ERC-20 token contract's Application Binary Interface (ABI).
+- `erc20Abi.json`: A JSON file containing the ERC-20 token contract's application binary interface (ABI).
 - `TokenBalanceAndTransfer.tsx`: A React component file for handling token balance display and transfer operations.
 
-The file structure of the `src/` directory should look similar to the following:
+:::note ABI and contract address
+The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
+You can find the ABI of the ERC-20 contract on the **Code** tab in [Voyager](https://voyager.online/).
+:::
 
-```text
-src/
-├── components/
-│   ├── erc20Abi.json
-│   └── TokenBalanceAndTransfer.tsx
-└── ...
-```
-
-The following `TokenBalanceAndTransfer.tsx` example loads the ABI from `erc20Abi.json`:
+Add the following code to `TokenBalanceAndTransfer.tsx` to load the ABI from `erc20Abi.json`:
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
 import { useEffect, useState } from "react";
@@ -401,14 +343,19 @@ interface TokenBalanceAndTransferProps {
 }
 
 export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceAndTransferProps) {
-  const [balance, setBalance] = useState(null);
+  const [balance, setBalance] = useState<number | null>(null);
+}
 ```
 
 ### 4.4. Fetch the token balance
 
-In the `TokenBalanceAndTransfer` function, add the balance fetching logic. Call the `balanceOf` method to fetch the balance of the connected account:
+In the `TokenBalanceAndTransfer` function, add the following balance fetching logic.
+Call the `balanceOf` method to fetch the balance of the connected account:
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
+export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceAndTransferProps) {
+  const [balance, setBalance] = useState<number | null>(null);
+  
   useEffect(() => {
     async function fetchBalance() {
       try {
@@ -426,17 +373,23 @@ In the `TokenBalanceAndTransfer` function, add the balance fetching logic. Call 
 
     fetchBalance();
   }, [account, tokenAddress]);
+}
 ```
 
 ### 4.5. Transfer tokens
 
-In the `TokenBalanceAndTransfer` function, add the transfer logic. Call the `transfer` method and execute the transaction using the `AccountInterface`:
+In the `TokenBalanceAndTransfer` function, add the following transfer logic.
+Call the `transfer` method and execute the transaction using the `AccountInterface`.
+Make sure to update `recipientAddress` with a Starknet address of your choice.
 
 ```typescript title="TokenBalanceAndTransfer.tsx"
+export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceAndTransferProps) {
+  // ...
   async function handleTransfer() {
     try {
       if (account) {
         const erc20 = new Contract(erc20Abi, tokenAddress, account);
+        // Update this example recipient address.
         const recipientAddress = "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5";
         const amountToTransfer = 1n * 10n ** 18n;
         
@@ -456,14 +409,8 @@ In the `TokenBalanceAndTransfer` function, add the transfer logic. Call the `tra
       console.error("Error during transfer:", error);
     }
   }
+}
 ```
-
-:::note ABI and contract address
-
-The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
-You can find the ABI of the ERC-20 contract on the **Code** tab in [Voyager](https://voyager.online/).
-
-:::
 
 ### 4.6. Update `App.tsx`
 
@@ -474,14 +421,17 @@ Add the following to the header of `App.tsx` to import the component:
 import { TokenBalanceAndTransfer } from "./components/TokenBalanceAndTransfer";
 ```
 
-Ensure you call the token address in the `TokenBalanceAndTransfer` component.
-Add the `TokenBalanceAndTransfer` component with the token address after the wallet info display, inside the main `return` of `App.tsx`:
+After the displayed wallet information, add the `TokenBalanceAndTransfer` component with the contract address:
 
 ```typescript title="App.tsx"
 {walletAccount &&
-    <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
+  <TokenBalanceAndTransfer account={walletAccount} tokenAddress="0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d" />
 }
 ```
+
+:::note
+The contract address for STRK (an ERC-20 token) on Sepolia testnet is `0x049D36570D4e46f48e99674bd3fcc84644DdD6b96F7C741B1562B82f9e004dC7`.
+:::
 
 ### 4.7. Full example
 
@@ -511,8 +461,8 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
           const result = await erc20.balanceOf(account.address) as bigint;
 
           const decimals = 18n;
-          const formattedBalance = result / 10n ** decimals; // Adjust for decimals using BigInt arithmetic
-          setBalance(Number(formattedBalance)); // Convert to a number for UI display
+          const formattedBalance = result / 10n ** decimals; // Adjust for decimals using BigInt arithmetic.
+          setBalance(Number(formattedBalance)); // Convert to a number for UI display.
         }
       } catch (error) {
         console.error("Error fetching balance:", error);
@@ -526,19 +476,20 @@ export function TokenBalanceAndTransfer({ account, tokenAddress }: TokenBalanceA
     try {
       if (account) {
         const erc20 = new Contract(erc20Abi, tokenAddress, account);
+        // Replace this example recipient address.
         const recipientAddress = "0x01aef74c082e1d6a0ec786696a12a0a5147e2dd8da11eae2d9e0f86e5fdb84b5";
-        const amountToTransfer = 1n * 10n ** 18n; // 1 token (in smallest units)
+        const amountToTransfer = 1n * 10n ** 18n; // 1 token (in smallest units).
 
-        // Populate transfer call
+        // Populate transfer call.
         const transferCall: Call = erc20.populate("transfer", [recipientAddress, amountToTransfer]);
 
-        // Execute transfer
+        // Execute transfer.
         const { transaction_hash: transferTxHash } = await account.execute([transferCall]);
 
-        // Wait for the transaction to be accepted
+        // Wait for the transaction to be accepted.
         await account.waitForTransaction(transferTxHash);
 
-        // Refresh balance after transfer
+        // Refresh balance after transfer.
         const newBalance = await erc20.balanceOf(account.address) as bigint;
         setBalance(Number(newBalance / 10n ** 18n)); // Adjust for decimals
       }
@@ -1631,37 +1582,8 @@ function App() {
     <div className="App">
       <h1>get-starknet</h1>
       <div className="card">
-        <button onClick={() => handleConnect()}>Default</button>
-        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>
-          Always ask
-        </button>
-        <button onClick={() => handleConnect({ modalMode: "neverAsk" })}>
-          Never ask
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "dark",
-            })
-          }
-        >
-          Always ask with dark theme
-        </button>
-        <button
-          onClick={() =>
-            handleConnect({
-              modalMode: "alwaysAsk",
-              modalTheme: "light",
-            })
-          }
-        >
-          Always ask with light theme
-        </button>
+        <button onClick={() => handleConnect({ modalMode: "alwaysAsk" })}>Connect</button>
         <button onClick={() => handleDisconnect()}>Disconnect</button>
-        <button onClick={() => handleDisconnect({ clearLastWallet: true })}>
-          Disconnect and reset
-        </button>
       </div>
       {walletName && (
         <div>
@@ -1695,13 +1617,15 @@ Start the dapp and navigate to it in your browser.
 yarn start
 ```
 
-Your dapp should look similar to the following:
+After connecting to MetaMask, the dapp should display your STRK token balance:
 
 <div class="row">
   <div class="column">
     <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
+
+You can select **Transfer 1 STRK** to make a transfer to the recipient address specified in [Step 4.5](#45-transfer-tokens).
 
 ## Next steps
 
