@@ -11,7 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## November 2024
 
-- Documented Snaps [Card](/snaps/features/custom-ui/index.md#card) and [Section](/snaps/features/custom-ui/index.md#section) UI Components.
+- Documented Snaps [Card](/snaps/features/custom-ui/#card) and [Section](/snaps/features/custom-ui/#section) UI Components.
+([#1707](https://github.com/MetaMask/metamask-docs/pull/1707)) ([#1700](https://github.com/MetaMask/metamask-docs/pull/1700))
 
 ## October 2024
 
