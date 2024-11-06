@@ -215,8 +215,8 @@
       "destination": "/wallet/how-to/display/icon/"
     },
     {
-      "source": "/wallet/how-to/use-sdk/javascript/display-custom-modals/",
-      "destination": "/wallet/how-to/display/custom-modals/"
+      "source": "/wallet/how-to/use-sdk/javascript/display-headless/",
+      "destination": "/wallet/how-to/display/headless/"
     },
     {
       "source": "/wallet/how-to/request-permissions/",

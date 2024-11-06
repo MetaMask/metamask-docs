@@ -55,7 +55,7 @@ export const config = createConfig({
 
 #### Infura API key
 
-In order to provide a better mobile user experience, you must specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
+In order to provide a better mobile user experience, you should specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
  option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
 
 ## Benefits of using the Infura API with Wagmi

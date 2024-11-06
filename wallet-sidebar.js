@@ -220,7 +220,7 @@ const sidebar = {
             {
               type: "doc",
               label: "Display custom modals",
-              id: "how-to/display/custom-modals"
+              id: "how-to/display/headless"
             }
           ]
         },

@@ -61,28 +61,6 @@ checkInstallationOnAllCalls: true
 Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
 The default is `false`.
 
-### `communicationLayerPreference`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-communicationLayerPreference: <type>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-communicationLayerPreference: SOCKET
-```
-
-</TabItem>
-</Tabs>
-
-The preferred communication layer to use.
-The default and only option is `SOCKET` for [Socket.IO](https://socket.io/docs/v4/).
-
 ### `communicationServerUrl`
 
 <Tabs>
@@ -169,20 +147,20 @@ Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) t
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
-### `enableDebug`
+### `enableAnalytics`
 
 <Tabs>
 <TabItem value="Syntax">
 
 ```javascript
-enableDebug: <boolean>
+enableAnalytics: <boolean>
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```javascript
-enableDebug: false
+enableAnalytics: true
 ```
 
 </TabItem>
@@ -243,47 +221,27 @@ You can restrict interactions to specific addresses, origins, user agents, and r
 We recommend using all allowlist options to maximize the security of your API key and dapp.
 :::
 
-### `modals`
+### `headless`
 
 <Tabs>
 <TabItem value="Syntax">
 
 ```javascript
-modals: <object>
+headless: <boolean>
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```javascript
-modals: {
-  onPendingModalDisconnect: () => {
-    // Custom logic for pending modal disconnect.
-  },
-  install: (params) => {
-    // Custom install modal logic.
-    const { link, debug, installer, terminate, connectWithExtension } = params;
-    return {
-      mount: (link) => { /* Custom mount logic */ },
-      unmount: (shouldTerminate) => { /* Custom unmount logic */ },
-    };
-  },
-  otp: ({ debug, onDisconnect }) => {
-    // Custom OTP modal logic.
-    return {
-      mount: () => { /* Custom mount logic */ },
-      updateOTPValue: (otpValue) => { /* Custom OTP value update logic */ },
-      unmount: () => { /* Custom unmount logic */ },
-    };
-  },
-}
+headless: true
 ```
 
 </TabItem>
 </Tabs>
 
-An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
-This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
+Enables or disables headless mode. See [headless mode](../how-to/display/headless.md) for more information.
+The default is `false`.
 
 ### `openDeeplink`
 
