@@ -130,7 +130,7 @@ export default function InteractiveBox({
 
   const checkName = (name: string) => {
     if (name === "requestPermissionObject") return "requestPermissionsObject";
-    return camelCase(name);
+    return name.trim().split(/\s+/).length > 1 ? camelCase(name) : name;
   };
 
   useEffect(() => {
