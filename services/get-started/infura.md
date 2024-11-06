@@ -217,14 +217,6 @@ Optimize your app and better understand your users by
 The Infura dashboard provides an overview of your daily credit usage. Select **View Usage**
 for a [wider view of your credit usage](/developer-tools/dashboard/how-to/credit-usage).
 
-:::info
-
-The credit pricing model replaces request-based billing for free-tier (Core) customers. Customers on
-Developer and Team plans will be transitioned to the credit model on September 30, 2024.
-**Existing customers on Growth and Custom plans will remain on request-based billing**.
-
-:::
-
 <div class="left-align-container">
   <div class="img-large">
     <img
