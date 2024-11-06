@@ -725,6 +725,9 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
 - `label`: `string` - (Optional) The text displayed alongside the input to label it.
 - `value`: `string` - (Optional) The default value of the input.
+- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the type `"number"` input.
+- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the type `"number"` input.
+- `step`: `string` - (Optional) The step value of the input field. Only applicable to the type `"number"` input.
 
 #### Example
 
