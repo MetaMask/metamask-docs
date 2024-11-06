@@ -122,7 +122,7 @@ EVM addresses (eip155:) are automatically checksummed by MetaMask. Addresses for
 
 #### Props
 
-- `address`: `string` - A [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+- `address`: `string` - A valid [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
 
 #### Example
 
