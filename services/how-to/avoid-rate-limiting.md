@@ -8,15 +8,6 @@ sidebar_position: 1
 Infura applies rate limiting account-wide after exceeding the [daily credit limit](../get-started/pricing/index.md)
 or the number of credits per second (throughput).
 
-:::info
-
-The credit pricing model replaces request-based billing for Core (free-tier) customers. Customers on
-Developer and Team plans will be transitioned to the credit model on September 30, 2024.
-
-**Existing customers on Growth and Custom plans will remain on request-based billing**.
-
-:::
-
 For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
 - Source IP address.
 - JSON-RPC method.
