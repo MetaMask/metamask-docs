@@ -38,6 +38,7 @@ const config = {
     DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
+    LINEA_ENS_URL: process.env.LINEA_ENS_URL,
   },
 
   trailingSlash: true,

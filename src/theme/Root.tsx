@@ -118,8 +118,7 @@ export const LoginProvider = ({ children }) => {
   const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
   const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_URL } = siteConfig?.customFields || {};
-  const { GF_SURVEY_KEY } = siteConfig.customFields;
+  const { DASHBOARD_URL, GF_SURVEY_KEY, LINEA_ENS_URL } = siteConfig?.customFields || {};
 
   if (sdk.isInitialized() && !isInitialized) {
     setIsInitialized(true);
@@ -132,15 +131,12 @@ export const LoginProvider = ({ children }) => {
       const address = String(rawAddress).toLowerCase();
       try {
         const res = await (
-          await fetch(
-            `https://api.studio.thegraph.com/query/69290/ens-linea-mainnet/version/latest`,
-            {
-              ...REQUEST_PARAMS("POST"),
-              body: JSON.stringify({
-                query: `query getNamesForAddress {domains(first: 1, where: {and: [{or: [{owner: \"${address}\"}, {registrant: \"${address}\"}, {wrappedOwner: \"${address}\"}]}, {parent_not: \"0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2\"}, {or: [{expiryDate_gt: \"1721033912\"}, {expiryDate: null}]}, {or: [{owner_not: \"0x0000000000000000000000000000000000000000\"}, {resolver_not: null}, {and: [{registrant_not: \"0x0000000000000000000000000000000000000000\"}, {registrant_not: null}]}]}]}) {...DomainDetailsWithoutParent}} fragment DomainDetailsWithoutParent on Domain {name}`,
-              }),
-            },
-          )
+          await fetch(LINEA_ENS_URL as string, {
+            ...REQUEST_PARAMS("POST"),
+            body: JSON.stringify({
+              query: `query getNamesForAddress {domains(first: 1, where: {and: [{or: [{owner: \"${address}\"}, {registrant: \"${address}\"}, {wrappedOwner: \"${address}\"}]}, {parent_not: \"0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2\"}, {or: [{expiryDate_gt: \"1721033912\"}, {expiryDate: null}]}, {or: [{owner_not: \"0x0000000000000000000000000000000000000000\"}, {resolver_not: null}, {and: [{registrant_not: \"0x0000000000000000000000000000000000000000\"}, {registrant_not: null}]}]}]}) {...DomainDetailsWithoutParent}} fragment DomainDetailsWithoutParent on Domain {name}`,
+            }),
+          })
         ).json();
         const walletEns = res.data.domains[0].name;
         setMetaMaskAccountEns(walletEns);
