@@ -19,6 +19,7 @@ Key features include:
   with MetaMask Mobile.
 - **EIP-6963 detection** – Automatically detect MetaMask without conflicting with other installed wallets.
 - **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
+- **One-step Connection and Signing** – Simplify the connection and signing process with a single function call.
 
 The SDK is integrated with the following third-party libraries.
 We recommend using these libraries if you need to connect to multiple wallets:

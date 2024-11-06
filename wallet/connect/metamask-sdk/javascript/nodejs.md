@@ -43,8 +43,7 @@ Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 ```javascript title="index.js"
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: "Example Node.js Dapp",
-    url: window.location.href,
+    name: "Node.js dapp",
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.
@@ -69,8 +68,8 @@ const accounts = await sdk.connect();
 console.log('connect request accounts', accounts);
 
 // You can also access the ethereum provider object.
-const ethereum = MMSDK.getProvider()
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+const provider = MMSDK.getProvider()
+provider.request({ method: "eth_requestAccounts", params: [] })
 
 ```
 
@@ -86,8 +85,7 @@ import { MetaMaskSDK } from "@metamask/sdk"
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: "Example Node.js Dapp",
-    url: window.location.href,
+    name: "Node.js dapp",
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.

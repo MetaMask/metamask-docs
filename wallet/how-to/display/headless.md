@@ -107,9 +107,7 @@ const DappView = () => {
     return (
       <div>
         <button onClick={async () => {
-          console.log(`sdk`, sdk)
           const accounts = await sdk?.connect()
-          console.log(`connected with `, accounts)
         }}>Connect</button>
         {qrUri && <QRModal uri={qrUri} onClose={() => setQrUri('')} />}
       </div>
