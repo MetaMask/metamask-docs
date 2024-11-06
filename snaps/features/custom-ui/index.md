@@ -600,6 +600,10 @@ await snap.request({
 Outputs a heading.
 This is useful for [`Box`](#box) titles.
 
+#### Props
+
+- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and `"lg"`. Defaults to `"sm"`.
+
 #### Example
 
 ```javascript title="index.jsx"
