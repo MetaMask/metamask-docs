@@ -11,12 +11,15 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## November 2024
 
+- Documented multiple updates to Snaps [Custom UI](/snaps/features/custom-ui/) for MetaMask Extension 12.6. 
+  ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
 - Documented Snaps [`Card`](/snaps/features/custom-ui/#card) and [`Section`](/snaps/features/custom-ui/#section) UI components.
-([#1707](https://github.com/MetaMask/metamask-docs/pull/1707)) ([#1700](https://github.com/MetaMask/metamask-docs/pull/1700))
+  ([#1707](https://github.com/MetaMask/metamask-docs/pull/1707)) ([#1700](https://github.com/MetaMask/metamask-docs/pull/1700))
 
 ## October 2024
 
-- Documented support for [non-EVM networks](/wallet/how-to/use-non-evm-networks), starting with [Starknet](/wallet/how-to/use-non-evm-networks/starknet). ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
+- Documented support for [non-EVM networks](/wallet/how-to/use-non-evm-networks), starting with [Starknet](/wallet/how-to/use-non-evm-networks/starknet). 
+  ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
 - Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
