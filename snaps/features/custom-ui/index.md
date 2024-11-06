@@ -798,7 +798,8 @@ Outputs a clickable link.
 
 - `href`: `string` - The URL to point to. Supported schemes are 
   `https:`, `mailto:`, and `metamask:`. `http:` is not allowed.
-- `children`: `Array<string | Bold | Italic>` - The link text.
+- `children`: `Array<string | Bold | Italic | Address>` - The link text, 
+  or an [`Address`](#address).
 
 #### `metamask:` URLs
 
