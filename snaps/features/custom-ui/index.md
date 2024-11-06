@@ -88,6 +88,33 @@ await snap.request({
     </div>
 </div>
 
+### `Avatar`
+
+Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an address.
+
+:::note
+EVM addresses (eip155:) are automatically checksummed by MetaMask. Addresses for other namespaces are not validated; you should validate them in your Snap.
+:::
+
+#### Props
+
+- `address`: `string` - A [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+
+#### Example
+
+```js
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: (
+      <Box>
+        <Avatar address="eip155:1:0x1234567890123456789012345678901234567890" />
+        <Avatar address="bip122:000000000019d6689c085ae165831e93:128Lkh3S7CkDTBZ8W7BbpsN3YYizJMp8p6" />
+      </Box>
+    ),
+  };
+};
+```
+
 ### `Bold`
 
 Outputs bold text.
