@@ -81,10 +81,10 @@ If you're consistently rate limited, consider these workarounds:
 - **Cache Ethereum data locally.** Barring rare deep reorganizations of the chain, blocks more than a
     couple of blocks below the head of the chain can be cached indefinitely. Ask for the data once then
     keep it locally.
-- **Limit RPCs at dapp startup.** Likewise, limit the number of RPCs your dapp calls
+- **Limit RPC requests at dapp startup.** Likewise, limit the number of RPC methods your dapp calls
     at startup. Only request data as the user accesses that portion of the dapp, and cache anything
     from older blocks for next time.
-- **Don't poll Infura in a tight loop.** New blocks come roughly every 15 seconds, so requesting new
+- **Don't poll Infura in a tight loop.** New blocks come approximately every 15 seconds, so requesting new
     data at a faster rate often doesn't make sense. Consider using `eth_subscribe` to be notified
     when new blocks are available.
 

@@ -23,9 +23,9 @@ Before you begin, ensure you have a valid [API key](../../../../developer-tools/
 
 ## Make calls
 
-### cURL
+### curl
 
-cURL generates the auth header and encodes your credentials behind the scenes.
+curl generates the auth header and encodes your credentials behind the scenes.
 
 Include the `-u` flag with the authentication information.
 

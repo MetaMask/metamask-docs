@@ -118,7 +118,7 @@ getTokenBalance();
 
 ### 7. Convert the token units
 
-By default, calling `balanceOf` returns the balance value in `wei`, which is the smallest unit in Ethereum, equal to 0.000000000000000001 Ether (10<sup>-18</sup>).
+By default, calling `balanceOf` returns the balance value in wei, which is the smallest unit in Ethereum, equal to 0.000000000000000001 Ether (10<sup>–18</sup>).
 
 Use `web3.utils.fromWei(result, "ether")` to get the actual number of DAI tokens, by adding the following line to the `async` function:
 

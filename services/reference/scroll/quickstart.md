@@ -19,7 +19,7 @@ Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api/)
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
