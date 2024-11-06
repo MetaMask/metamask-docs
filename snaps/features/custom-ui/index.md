@@ -60,7 +60,12 @@ Outputs a formatted text field for an Ethereum address.
 The address is automatically displayed with a jazzicon and truncated value. 
 Hovering the address shows the full value in a tooltip.
 
-#### Example
+#### Props 
+
+- `address`: `string` - A valid Ethereum address, starting with 0x, or a valid 
+  [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+
+#### Examples
 
 ```javascript title="index.jsx"
 import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
@@ -87,6 +92,25 @@ await snap.request({
         <img src={require("../../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
+
+```javascript title="index.jsx"
+import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Heading>The following is an Ethereum address</Heading>
+        <Address address="eip155:1:0x1234567890123456789012345678901234567890" />
+        <Heading>The following is a Bitcoin address</Heading>
+        <Address address="bip122:000000000019d6689c085ae165831e93:128Lkh3S7CkDTBZ8W7BbpsN3YYizJMp8p6" />
+      </Box>
+    ),
+  },
+});
+```
 
 ### `Avatar`
 
