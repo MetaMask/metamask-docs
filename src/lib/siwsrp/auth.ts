@@ -14,7 +14,6 @@ export const AUTH_WALLET_PAIRING = 'auth.wallet.pairing'
 export const AUTH_WALLET_SESSION_NAME = 'auth.wallet.session'
 export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
 export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
-export const AUTH_WALLET_USER_PLAN = 'auth.wallet.uksTier'
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
@@ -80,10 +79,6 @@ export const getTokenString = (): string => {
   return sessionStorage.getItem(AUTH_WALLET_TOKEN)
 }
 
-export const getUksTier = (): string => {
-  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN)
-}
-
 export const getUserIdFromJwtToken = () => {
   const token = sessionStorage.getItem(AUTH_WALLET_TOKEN);
   const decoded = jwt.decode(token as string, { complete: true }) as jwt.Jwt;
@@ -93,8 +88,6 @@ export const getUserIdFromJwtToken = () => {
 
 export const clearStorage = () => {
   sessionStorage.clear();
-  localStorage.removeItem(AUTH_WALLET_PAIRING);
   localStorage.removeItem(AUTH_WALLET_SESSION_NAME);
-  localStorage.removeItem(AUTH_WALLET_TOKEN);
-  localStorage.removeItem(AUTH_WALLET_PROJECTS);
+  localStorage.removeItem(AUTH_WALLET_PAIRING);
 };
