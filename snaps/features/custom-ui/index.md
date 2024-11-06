@@ -879,8 +879,8 @@ Outputs a row with a label and value, which can be used for key-value data.
 - `variant` - (Optional) The variant of the label.
   Possible values are `"default"`, `"error"`, and `"warning"`.
   The default is `"default"`.
-- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), or
-  [`Address`](#address) component.
+- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), 
+  [`Address`](#address), or [`Link`](#link) component.
 
 #### Example
 
