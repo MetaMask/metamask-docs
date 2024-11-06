@@ -14,7 +14,7 @@ import {
   getUserIdFromJwtToken,
   AUTH_WALLET_USER_PLAN,
 } from "../../lib/siwsrp/auth";
-import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
+import { REQUEST_PARAMS } from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -145,7 +145,7 @@ const AuthModal = ({
   setUksTier,
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+  const { DASHBOARD_URL, VERCEL_ENV } = siteConfig?.customFields || {};
   const {
     sdk,
     setWalletLinked,
@@ -182,7 +182,7 @@ const AuthModal = ({
 
       const loginResponse = await (
         await fetch(
-          `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
+          `${DASHBOARD_URL}/api/wallet/login`,
           {
             ...REQUEST_PARAMS("POST", {
               hydra_token: accessToken,
@@ -212,7 +212,7 @@ const AuthModal = ({
           }),
         ).toString("base64");
 
-        const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
+        const walletLinkUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
 
         setWalletLinkUrl(walletLinkUrl);
 
@@ -248,7 +248,7 @@ const AuthModal = ({
 
       // You can use Infura Access Token to fetch any Infura API endpoint
       const projectsResponse = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
+        `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
         },
@@ -260,7 +260,7 @@ const AuthModal = ({
       setProjects(projects);
 
       const uksUserRawResp = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}`,
+        `${DASHBOARD_URL}/api/v1/users/${userId}`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
         },
