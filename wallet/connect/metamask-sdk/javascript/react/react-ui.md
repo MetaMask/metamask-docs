@@ -68,7 +68,6 @@ root.render(
       sdkOptions={{
         dappMetadata: {
           name: "Example React UI Dapp",
-          url: window.location.href,
         },
         infuraAPIKey: process.env.INFURA_API_KEY,
         // Other options.
@@ -88,8 +87,8 @@ Important options include:
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
   [make read-only RPC requests](../../../../how-to/make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
-  the displayed modals](../../../../how-to/display/custom-modals.md).
+- Use [`headless`](../../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
+  the displayed modals](../../../../how-to/display/headless.md).
 
 ### 4. Use the SDK
 

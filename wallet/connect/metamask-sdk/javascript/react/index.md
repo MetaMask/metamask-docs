@@ -63,7 +63,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MetaMaskProvider
-      debug={false}
       sdkOptions={{
         dappMetadata: {
           name: "Example React Dapp",
@@ -79,7 +78,6 @@ root.render(
 );
 ```
 
-When initializing `MetaMaskProvider`, set `debug` to `true` to activate debug mode.
 For the full list of options you can set for `sdkOptions`, see the
 [JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
 Important options include:
@@ -88,8 +86,6 @@ Important options include:
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
   [make read-only RPC requests](../../../../how-to/make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
-  the displayed modals](../../../../how-to/display/custom-modals.md).
 
 ### 4. Use the SDK
 

@@ -27,96 +27,43 @@ the MetaMask browser extension and MetaMask Mobile.
 
 In your Wagmi project, configure MetaMask SDK with the proper [SDK options](../../reference/sdk-js-options.md).
 
-```javascript
-const MetaMaskOptions = {
-  dappMetadata: {
-    name: "Example Wagmi dapp",
-  },
-  infuraAPIKey: "YOUR-API-KEY",
-  // Other options.
-}
+- Set your API key in environment variables.
+```env
+VITE_INFURA_API_KEY=YOUR-API-KEY
 ```
 
-#### Dapp metadata
-
-Specify the [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata) option to help
-identify your dapp within the MetaMask ecosystem.
-This option is required when configuring the MetaMask connector with Wagmi.
-
-#### Infura API key
-
-We recommend specifying the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
-option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
-Read more about the [benefits of using the Infura API with Wagmi](#benefits-of-using-the-infura-api-with-wagmi).
-
-#### Universal links
-
-We recommend using universal links instead of deeplinks to avoid issues on iOS.
-Thus, do not enable the [`useDeeplink`](../../reference/sdk-js-options.md#usedeeplink) option.
-Using universal links ensures a smoother transition for users accessing your dapp from mobile
-devices, providing a better user experience compared to traditional deeplinking methods.
-
-### 2. Configure Wagmi with the MetaMask connector
-
-Configure Wagmi to include MetaMask as a connector and specify the Ethereum chains your dapp will support.
-Use the `MetaMaskOptions` you created in the previous step when adding the `metaMask` connector.
-For example:
+- Configure the MetaMask connector with Wagmi.
 
 ```javascript
-import { createConfig, http } from "wagmi"
-import { mainnet, sepolia } from "wagmi/chains"
-import { metaMask } from "wagmi/connectors"
-
-const MetaMaskOptions = {
-  dappMetadata: {
-    name: "Example Wagmi dapp",
-  },
-  infuraAPIKey: "YOUR-API-KEY",
-  // Other options.
-}
+import { metaMask } from 'wagmi/connectors'
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
   connectors: [
-    metaMask(MetaMaskOptions),
-    // Other connectors
+    metaMask({
+      infuraAPIKey: import.meta.env.VITE_INFURA_API_KEY,
+    }),
   ],
   transports: {
     [mainnet.id]: http(),
+    // You can also configure the transcripts to use INFURA_API_KEY directly into wagmi config to share with other providers.
+    // [mainnet.id]: http('https://mainnet.infura.io/v3/...')
     [sepolia.id]: http(),
   },
 })
 ```
 
-### 3. Implement contract interaction using `usePrepareContractWrite`
+#### Infura API key
 
-Due to a known issue in Safari where a 500ms timeout can interrupt smart contract interactions, we
-recommend using the [`usePrepareContractWrite`](https://1.x.wagmi.sh/react/prepare-hooks/usePrepareContractWrite)
-hook from Wagmi.
-This approach ensures smooth transactions by preparing the contract write operation ahead of the
-actual execution.
-
-```javascript
-import { usePrepareContractWrite, useContractWrite } from "wagmi"
-
-const { config } = usePrepareContractWrite({
-  address: "0xContractAddress",
-  abi: contractABI,
-  functionName: "functionToCall",
-  args: [arg1, arg2],
-})
-
-const { write } = useContractWrite(config)
-
-write()
-```
+In order to provide a better mobile user experience, you must specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
+ option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
 
 ## Benefits of using the Infura API with Wagmi
 
-Read-only requests are blockchain requests that do not require user wallet interaction.
-Mobile dapps can lose their continuous connection with MetaMask, causing read-only requests to fail.
+Mobile dApps can lose their continuous connection with MetaMask, causing read-only requests to fail. 
+When the mobile wallet is disconnected, the dapp will need to deeplink into the wallet to "wake up" the connection.
 
-These are some errors that might occur in mobile environments:
+Read-only requests are blockchain requests that do not require user wallet interaction. Without setting the `infuraAPIKey`, the dApp may experience issues on mobile environment:
 
 ![Wagmi errors](../../assets/wagmi-errors.png)
 
