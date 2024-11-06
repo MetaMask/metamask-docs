@@ -796,8 +796,16 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. Supported schemes are `https:` and `mailto:`. `http:` is not allowed.
+- `href`: `string` - The URL to point to. Supported schemes are 
+  `https:`, `mailto:`, and `metamask:`. `http:` is not allowed.
 - `children`: `Array<string | Bold | Italic>` - The link text.
+
+#### `metamask:` URLs
+
+A Snap can link to the following screens using the `metamask:` scheme: 
+
+- `metamask://client/` - Leads to the main screen of MetaMask 
+- `metamask://snap/home/` - Leads to the Snap's [home page](../custom-ui/home-pages.md)
 
 #### Example
 
