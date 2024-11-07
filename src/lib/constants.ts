@@ -450,9 +450,9 @@ export const REF_WALLET_PATH = "/wallet/reference/";
 export const REF_FAUCET_PATH = "/developer-tools/faucet/";
 
 export const REF_ALLOW_LOGIN_PATH = [
-    REF_SERVICES_PATH,
-    REF_WALLET_PATH,
-    REF_FAUCET_PATH,
+  REF_SERVICES_PATH,
+  REF_WALLET_PATH,
+  REF_FAUCET_PATH,
 ];
 
 export const REQUEST_PARAMS = (method = "POST", headers = {}) => ({
@@ -467,6 +467,6 @@ export const REQUEST_PARAMS = (method = "POST", headers = {}) => ({
   },
 });
 
-export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
 export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
+export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
 export const LINEA_REQUEST_URL = LINEA_PROD_URL;

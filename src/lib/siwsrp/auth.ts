@@ -14,7 +14,17 @@ export const AUTH_WALLET_PAIRING = 'auth.wallet.pairing'
 export const AUTH_WALLET_SESSION_NAME = 'auth.wallet.session'
 export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
 export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
-export const AUTH_WALLET_USER_PLAN = 'auth.wallet.uksTier'
+export const AUTH_WALLET_USER_PLAN = "auth.wallet.uksTier";
+export const AUTH_WALLET_ENS = "auth.wallet.ens";
+
+export const getWalletEns = () => {
+  return sessionStorage.getItem(AUTH_WALLET_ENS);
+};
+
+export const getUksTier = (): string => {
+  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN);
+};
+
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
@@ -78,10 +88,6 @@ export const saveTokenString = (token: string) => {
 
 export const getTokenString = (): string => {
   return sessionStorage.getItem(AUTH_WALLET_TOKEN)
-}
-
-export const getUksTier = (): string => {
-  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN)
 }
 
 export const getUserIdFromJwtToken = () => {

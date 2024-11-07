@@ -15,8 +15,7 @@ import {
   AlertPastActivity,
 } from "@site/src/components/Faucet";
 import { useAlert } from "react-alert";
-import {MetamaskProviderContext} from "@site/src/theme/Root";
-
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 import styles from "./faucet.module.scss";
 import { REQUEST_PARAMS } from "@site/src/lib/constants";
 import { AlertBalanceTooLow } from "@site/src/components/Faucet/Alerts";
@@ -35,7 +34,8 @@ export const LINEA_URL = "https://sepolia.lineascan.build/tx/";
 
 export default function Faucet() {
   const { siteConfig } = useDocusaurusContext();
-  const { userId, token, uksTier, metaMaskAccount } = useContext(MetamaskProviderContext);
+  const { userId, token, uksTier, metaMaskAccount, metaMaskAccountEns } =
+    useContext(MetamaskProviderContext);
   const alert = useAlert();
   const [transactions, setTransactions] = useState(DEFAULT_TRANSACTIONS_LIST);
   const [isLoading, setIsLoading] = useState(false);
@@ -175,10 +175,12 @@ export default function Faucet() {
   }, [userId, token]);
 
   useEffect(() => {
-    if (metaMaskAccount && !walletAddress) {
+    if (metaMaskAccountEns) {
+      setWalletAddress(metaMaskAccountEns);
+    } else if (metaMaskAccount) {
       setWalletAddress(metaMaskAccount);
     }
-  }, [metaMaskAccount]);
+  }, [metaMaskAccount, metaMaskAccountEns]);
 
   const tabItemContent = (network: "linea" | "sepolia") => {
     return (

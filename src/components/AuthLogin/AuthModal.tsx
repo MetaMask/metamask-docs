@@ -13,8 +13,10 @@ import {
   AUTH_WALLET_PROJECTS,
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_USER_PLAN,
-} from "../../lib/siwsrp/auth";
-import { REQUEST_PARAMS } from "@site/src/lib/constants";
+} from "@site/src/lib/siwsrp/auth";
+import {
+  REQUEST_PARAMS,
+} from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -153,6 +155,7 @@ const AuthModal = ({
     setProjects,
     setMetaMaskAccount,
     setMetaMaskProvider,
+    fetchLineaEns,
   } = useContext(MetamaskProviderContext);
   const location = useLocation();
   const { pathname } = location;
@@ -166,9 +169,10 @@ const AuthModal = ({
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
-      setMetaMaskAccount(accounts);
+
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0]);
+        fetchLineaEns(accounts[0]);
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
       }
