@@ -19,7 +19,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Opti
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 

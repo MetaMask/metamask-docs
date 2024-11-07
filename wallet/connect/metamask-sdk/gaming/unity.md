@@ -211,7 +211,7 @@ To update the SDK to the latest version available on the Unity Asset Store:
 Alternatively, you can delete the existing MetaMask folder in your project and re-import it from the
 Package Manager or Asset Store.
 
-## FAQS
+## FAQs
 
 <details>
 
@@ -250,7 +250,7 @@ libraries to facilitate deeplinking and the persistent socket connection.
 
 <details>
 
-<summary>Does the SDK increase my compilation time?</summary>
+<summary>Does the SDK increase compilation time?</summary>
 
 No.
 If you notice an increased compilation time, it might be related to the ILL2CP pipeline, which can

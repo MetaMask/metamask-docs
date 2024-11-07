@@ -238,7 +238,7 @@ CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
 - Use the official IPFS [`go-ipfs-http-client`](https://github.com/ipfs/go-ipfs-http-client) GoLang API.
 - Install with `go get github.com/ipfs/go-ipfs-http-client`.
 - Create a go module with `go mod init infura`.
-- Save the following script to a file, e.g. `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
+- Save the following script to a file, for example, `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
 
 ```go
 package main

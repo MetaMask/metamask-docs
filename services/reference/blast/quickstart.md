@@ -19,7 +19,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
@@ -32,7 +32,7 @@ curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 ### Node (JavaScript)
 
-In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
 
 #### Node Fetch
 

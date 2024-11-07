@@ -34,7 +34,7 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/put" \
   </TabItem>
 </Tabs>
 
-#### Reqest parameters
+#### Request parameters
 
 - `store-codec` _\[Optional]_: Codec that the stored object will be encoded with. The default is `dag-cbor`.
 - `input-codec` _\[Optional]_: Codec that the input object is encoded in. The default is `dag-json`.

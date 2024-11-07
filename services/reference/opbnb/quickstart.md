@@ -19,7 +19,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal. Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
@@ -42,7 +42,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i node-fetch
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
@@ -85,7 +85,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i axios
     ```
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
@@ -119,7 +119,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm install ethers
     ```
    
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
