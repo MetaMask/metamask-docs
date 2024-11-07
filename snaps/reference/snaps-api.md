@@ -130,8 +130,8 @@ An object representing the
 its corresponding key material:
 
 - `depth` - The 0-indexed path depth of the node.
-- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a master node.
-- `index` - The index of the node, or 0 if this is a master node.
+- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a root node.
+- `index` - The index of the node, or 0 if this is a root node.
 - `privateKey` - The private key of the node.
 - `publicKey` - The public key of the node.
 - `chainCode` - The chain code of the node.
@@ -597,7 +597,7 @@ This method is organized into multiple sub-methods which each take their own par
 - [`listAccounts`](#listaccounts)
 - [`submitResponse`](#submitresponse)
 
-### createAccount
+### `createAccount`
 
 Creates a new Snap account.
 
@@ -660,7 +660,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### updateAccount
+### `updateAccount`
 
 Updates an existing Snap account.
 
@@ -699,7 +699,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### deleteAccount
+### `deleteAccount`
 
 Deletes a Snap account.
 
@@ -738,7 +738,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### listAccounts
+### `listAccounts`
 
 Lists the calling Snap's accounts that are known to MetaMask.
 This method does not call back to the Snap.
@@ -773,7 +773,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### submitResponse
+### `submitResponse`
 
 Finalizes a signing request.
 This is usually called as part of the

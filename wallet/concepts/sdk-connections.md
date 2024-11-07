@@ -135,7 +135,7 @@ paused and resumes when the user opens it again.
 Because of this, polling data from MetaMask Mobile may not work for long periods of time.
 
 :::info known issue
-When MetaMask Mobile is running in the background, the connection may pause and fail to resume properly when the user reopens MetaMask.
+When MetaMask Mobile is running in the background, the connection may pause and fail to resume when the user reopens MetaMask.
 The user must return to your dapp so the request is re-sent.
 The SDK team is working on this issue, and is researching decentralized communication solutions that
 hold state such as [Waku](https://waku.org/).

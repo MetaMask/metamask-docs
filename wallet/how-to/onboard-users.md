@@ -142,7 +142,7 @@ Modify the React example as follows to get type safety:
 +const onboarding = React.useRef<MetaMaskOnboarding>();
 ```
 
-This gives you editor auto-completion for the methods exposed by the library, and
+This gives you editor autocomplete for the methods exposed by the library, and
 helpful documentation:
 
 ![Editor Highlighting](https://user-images.githubusercontent.com/4448075/85584481-ccc7ec00-b604-11ea-9b74-49c76ee0bf22.png)

@@ -121,9 +121,9 @@ Follow these guidelines when using `metamask_batch`:
 
 - **Ensure each request in the batch is properly formatted** according to the JSON-RPC specifications.
 
-- **Handle errors gracefully**, especially when a batch request is partially approved.
+- **Handle errors appropriately**, especially when a batch request is partially approved.
 
-- **Test batch operations thoroughly** to ensure consistent behavior across different networks and accounts.
+- **Test batch operations** to ensure consistent behavior across different networks and accounts.
 
 - **Be aware of the dependencies between chained requests.**
   Avoid creating a dependency where the outcome of one request directly influences the context or

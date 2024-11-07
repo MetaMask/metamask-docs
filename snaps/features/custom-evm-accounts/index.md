@@ -13,7 +13,7 @@ accounts and [ERC-4337 accounts](#account-abstraction-erc-4337), alongside regul
 in the user interface:
 
 <p align="center">
-<img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in Metamask UI" width="360" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/keyring/accounts-ui.png').default} alt="Account management Snap accounts in MetaMask UI" width="360" style={{border: '1px solid #DCDCDC'}} />
 </p>
 
 To use the Keyring API, you first [implement the API in an account management Snap](create-account-snap.md)

@@ -22,7 +22,7 @@ If your dapp operates solely on the client side without a server, use only the A
 The API key is exposed in client-side code, so you should secure it using [allowlists](use-an-allowlist.md).
 
 :::tip
-For customers on the Developer tier or higher, Infura supports [overriding your allowlist](use-an-allowlist.md#overide-your-allowlist-settings)
+For customers on the Developer tier or higher, Infura supports [overriding your allowlist](use-an-allowlist.md#override-your-allowlist-settings)
 when you specify an API key secret. This allows you to apply the principle of least privilege on the
 client side while allowing unrestricted access on the server side.
 :::
