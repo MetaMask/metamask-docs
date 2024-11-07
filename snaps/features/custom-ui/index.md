@@ -796,17 +796,27 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. Supported schemes are 
-  `https:`, `mailto:`, and `metamask:`. `http:` is not allowed.
-- `children`: `Array<string | Bold | Italic | Address>` - The link text, 
-  or an [`Address`](#address).
+- `href`: `string` - The URL to point to. Supported schemes are `https:`, `mailto:`, and 
+  `metamask:`. `http:` is not allowed.
+- `children`: `Array<string | Bold | Italic | Address>` - The link text, or an 
+  [`Address`](#address).
 
-#### `metamask:` URLs
+#### About `metamask:` URLs
 
 A Snap can link to the following screens using the `metamask:` scheme: 
 
 - `metamask://client/` - Leads to the main screen of MetaMask 
-- `metamask://snap/home/` - Leads to the Snap's [home page](../custom-ui/home-pages.md)
+- `metamask://snap/[Snap ID]/home/` - Leads to the Snap's 
+  [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home 
+  page. Valid Snap IDs are npm IDs beginning with `npm:`, such as 
+  `metamask://snap/npm:@consensys/starknet-snap/home`.
+
+:::caution
+MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
+installed. This can make local testing difficult. One way to mitigate this is to publish your 
+Snap to npm, install it to [MetaMask Flask](../../get-started/install-flask.md), and then use the 
+published Snap ID in your local version.
+:::
 
 #### Example
 
