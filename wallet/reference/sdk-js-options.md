@@ -92,7 +92,7 @@ This option is mainly used for debugging and testing the SDK.
 dappMetadata: {
   name: <string>,
   url: <string>,
-  base64Icon: <string>,
+  iconUrl: <string>,
 }
 ```
 
@@ -103,7 +103,7 @@ dappMetadata: {
 dappMetadata: {
   name: "My Dapp",
   url: "https://mydapp.com",
-  base64Icon: "data:image/png;base64,...",
+  iconUrl: "https://mydapp.com/icon.png",
 }
 ```
 
@@ -115,7 +115,7 @@ The metadata options are:
 
 - `name` - Name of the dapp
 - `url` - URL of the dapp
-- `base64Icon` - A base64-encoded icon
+- `iconUrl` - URL of the dapp's icon
 
 :::tip important
 Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
@@ -267,29 +267,6 @@ openDeeplink: (link: string) => {
 </Tabs>
 
 A function that is called to open a deeplink to the MetaMask Mobile app.
-
-### `preferDesktop`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-preferDesktop: <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-preferDesktop: true
-```
-
-</TabItem>
-</Tabs>
-
-When set to `true`, the MetaMask browser extension is displayed as the default option in the SDK connection modal.
-When set to `false`, MetaMask Mobile is displayed as the default option.
-The default is `false`.
 
 ### `readonlyRPCMap`
 
