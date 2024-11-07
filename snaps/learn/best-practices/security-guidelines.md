@@ -119,7 +119,7 @@ user IPs, emails, passwords, and private keys:
   For example, you might have a method that intends to return sensitive information only in specific
   cases, but due to a typo or bad logic, it returns the information incorrectly, leaking data.
   Even if you have a legitimate reason for allowing a user to export sensitive information, you
-  should prevent that information from being revealed carelessly (similar to how MetaMask makes it
+  should make that information difficult to reveal (similar to how MetaMask makes it
   difficult to reveal a Secret Recovery Phrase and for an observer looking over a user's shoulder to
   see it).
 
@@ -214,7 +214,7 @@ The following are guidelines for securing your supply chain:
   to exact versions.
   If you don't, a supply chain attacker can trick you into including a malicious version of a
   package instead of the original, legitimate one.
-  You can quickly check the status of your dependencies by running `npm audit` in your Snap directory.
+  You can check the status of your dependencies by running `npm audit` in your Snap directory.
 
 - **Secure your stack** - Your Snap companion dapp and any remote servers are part of your security model.
   We recommend using [LavaMoat](https://github.com/LavaMoat/LavaMoat) to secure relevant parts of

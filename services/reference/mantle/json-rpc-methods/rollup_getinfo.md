@@ -5,7 +5,7 @@ description: rollup_getInfo API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# rollup_getInfo
+# `rollup_getInfo`
 
 Returns the information about a node.
 
@@ -33,7 +33,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
