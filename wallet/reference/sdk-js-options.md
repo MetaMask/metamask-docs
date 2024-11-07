@@ -61,28 +61,6 @@ checkInstallationOnAllCalls: true
 Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
 The default is `false`.
 
-### `communicationLayerPreference`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-communicationLayerPreference: <type>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-communicationLayerPreference: SOCKET
-```
-
-</TabItem>
-</Tabs>
-
-The preferred communication layer to use.
-The default and only option is `SOCKET` for [Socket.IO](https://socket.io/docs/v4/).
-
 ### `communicationServerUrl`
 
 <Tabs>
@@ -114,7 +92,7 @@ This option is mainly used for debugging and testing the SDK.
 dappMetadata: {
   name: <string>,
   url: <string>,
-  base64Icon: <string>,
+  iconUrl: <string>,
 }
 ```
 
@@ -125,7 +103,7 @@ dappMetadata: {
 dappMetadata: {
   name: "My Dapp",
   url: "https://mydapp.com",
-  base64Icon: "data:image/png;base64,...",
+  iconUrl: "https://mydapp.com/icon.png",
 }
 ```
 
@@ -137,7 +115,7 @@ The metadata options are:
 
 - `name` - Name of the dapp
 - `url` - URL of the dapp
-- `base64Icon` - A base64-encoded icon
+- `iconUrl` - URL of the dapp's icon
 
 :::tip important
 Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
@@ -169,20 +147,20 @@ Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) t
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
-### `enableDebug`
+### `enableAnalytics`
 
 <Tabs>
 <TabItem value="Syntax">
 
 ```javascript
-enableDebug: <boolean>
+enableAnalytics: <boolean>
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```javascript
-enableDebug: false
+enableAnalytics: true
 ```
 
 </TabItem>
@@ -243,47 +221,28 @@ You can restrict interactions to specific addresses, origins, user agents, and r
 We recommend using all allowlist options to maximize the security of your API key and dapp.
 :::
 
-### `modals`
+### `headless`
 
 <Tabs>
 <TabItem value="Syntax">
 
 ```javascript
-modals: <object>
+headless: <boolean>
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```javascript
-modals: {
-  onPendingModalDisconnect: () => {
-    // Custom logic for pending modal disconnect.
-  },
-  install: (params) => {
-    // Custom install modal logic.
-    const { link, debug, installer, terminate, connectWithExtension } = params;
-    return {
-      mount: (link) => { /* Custom mount logic */ },
-      unmount: (shouldTerminate) => { /* Custom unmount logic */ },
-    };
-  },
-  otp: ({ debug, onDisconnect }) => {
-    // Custom OTP modal logic.
-    return {
-      mount: () => { /* Custom mount logic */ },
-      updateOTPValue: (otpValue) => { /* Custom OTP value update logic */ },
-      unmount: () => { /* Custom unmount logic */ },
-    };
-  },
-}
+headless: true
 ```
 
 </TabItem>
 </Tabs>
 
-An object that allows you to [customize the logic and UI of the displayed modals](../how-to/display/custom-modals.md).
-This is useful if your dapp requires a custom way to handle connection and reconnection scenarios.
+Enables or disables headless mode.
+Setting this to `true` allows you to [display custom modals](../how-to/display/custom-modals.md).
+The default is `false`.
 
 ### `openDeeplink`
 
@@ -309,29 +268,6 @@ openDeeplink: (link: string) => {
 </Tabs>
 
 A function that is called to open a deeplink to the MetaMask Mobile app.
-
-### `preferDesktop`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-preferDesktop: <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-preferDesktop: true
-```
-
-</TabItem>
-</Tabs>
-
-When set to `true`, the MetaMask browser extension is displayed as the default option in the SDK connection modal.
-When set to `false`, MetaMask Mobile is displayed as the default option.
-The default is `false`.
 
 ### `readonlyRPCMap`
 
@@ -378,101 +314,3 @@ shouldShimWeb3: false
 Enables or disables shimming the `window.web3` object with the Ethereum provider returned by the SDK
 (useful for compatibility with older browsers).
 The default is `true`.
-
-### `timer`
-
-<Tabs>
-<TabItem value="Example">
-
-```javascript
-timer: BackgroundTimer
-```
-
-</TabItem>
-</Tabs>
-
-Used by React Native dapps to keep the dapp alive while using
-[`react-native-background-timer`](https://github.com/ocetnik/react-native-background-timer).
-
-### `transports`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-transports: <array of strings>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-transports: ["websocket", "polling"]
-```
-
-</TabItem>
-</Tabs>
-
-Sets the preference on [Socket.IO](https://socket.io/docs/v4/) transports.
-
-### `ui`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-ui: {
-  installer: <function>,
-  confirm: <function>,
-}
-```
-
-</TabItem>
-</Tabs>
-
-Options for customizing the SDK UI.
-
-### `useDeeplink`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-useDeeplink: <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-useDeeplink: true
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables using deeplinks to connect with MetaMask Mobile.
-If `false`, the SDK uses universal links instead.
-The default is `false`.
-
-### `wakeLockType`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-wakeLockType: <type>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-wakeLockType: Temporary
-```
-
-</TabItem>
-</Tabs>
-
-The type of wake lock to use when the SDK is running in the background.
-Options are `Disabled`, `Temporary`, and `UntilResponse`.
