@@ -15,7 +15,9 @@ implementing the following features:
 - [Signature insights](../signature-insights.md)
 
 :::note
-JSX is supported in the MetaMask extension and Flask version 12 and later. New UI components will be added as JSX components. The previous function-based library is deprecated.
+JSX is supported in the MetaMask extension and Flask version 12 and later. 
+New UI components will be added as JSX components. 
+The previous function-based library is deprecated.
 :::
 
 To use custom UI, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)
@@ -27,7 +29,8 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
-For example, to display a [`Box`](#box) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
+For example, to display a [`Box`](#box) using 
+[`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.jsx"
 import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
@@ -117,7 +120,8 @@ await snap.request({
 Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an address.
 
 :::note
-EVM addresses (eip155:) are automatically checksummed by MetaMask. Addresses for other namespaces are not validated; you should validate them in your Snap.
+EVM addresses (eip155:) are automatically checksummed by MetaMask. 
+Addresses for other namespaces are not validated; you should validate them in your Snap.
 :::
 
 #### Props
@@ -217,8 +221,8 @@ For use in [interactive UI](interactive-ui.md).
 - `type` - (Optional) The type of button.
   Possible values are `"button"` and `"submit"`.
   The default is `"button"`.
-- `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-  when a user selects the button.
+- `name`: `string` - (Optional) The name that will be sent to 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
   Possible values are `"primary"` and `"destructive"`.
   The default is `"primary"`.
@@ -260,7 +264,8 @@ Outputs a card component which is used to display values in a card structure.
 
 :::info
 Unlike many `Card` components from other UI libraries, the Snaps `Card` does not have any shape.
-It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) component.
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) 
+component.
 :::
 
 #### Props
@@ -356,7 +361,8 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Props
 
 - `value`: `string` - The value to copy when the user clicks on the copyable element.
-- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the value will be hidden when the user is not interacting with the copyable element.
+- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the 
+  value will be hidden when the user is not interacting with the copyable element.
 
 #### Example
 
@@ -463,9 +469,11 @@ Outputs a form field, wrapping an element to give it a label and optional error.
 #### Props
 
 - `label`: `string` - The label for the wrapped element.
-- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style of the wrapped element to show that there is an error.
+- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style 
+  of the wrapped element to show that there is an error.
 - `children` - The element to be wrapped.
-  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or [`RadioGroup`](#radiogroup) component.
+  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or 
+  [`RadioGroup`](#radiogroup) component.
 
 #### Example
 
@@ -559,8 +567,8 @@ Outputs a form for use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-  when a user interacts with the form.
+- `name`: `string` - The name that will be sent to 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user interacts with the form.
 - `children`: `array` - An array of [`Input`](#input) or [`Button`](#button) components.
 
 #### Example
@@ -602,7 +610,8 @@ This is useful for [`Box`](#box) titles.
 
 #### Props
 
-- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and `"lg"`. Defaults to `"sm"`.
+- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and 
+  `"lg"`. Defaults to `"sm"`.
 
 #### Example
 
@@ -671,7 +680,8 @@ This component takes an inline SVG.
 It does not support remote URLs.
 
 You can import SVG, PNG, and JPEG files using an import statement.
-These files are automatically imported as SVG strings, so you can pass them directly to the `Image` component.
+These files are automatically imported as SVG strings, so you can pass them directly to the 
+`Image` component.
 
 The SVG is rendered within an `<img>` tag, which prevents JavaScript or interaction events from
 being supported.
@@ -722,16 +732,20 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 #### Props
 
 - `name`: `string` - The name that will be used as a key to the event sent to
-  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is 
+  submitted.
 - `type` - (Optional) The type of input.
   Possible values are `"text"`, `"number"`, and `"password"`.
   The default is `"text"`.
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
 - `label`: `string` - (Optional) The text displayed alongside the input to label it.
 - `value`: `string` - (Optional) The default value of the input.
-- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the type `"number"` input.
-- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the type `"number"` input.
-- `step`: `string` - (Optional) The step value of the input field. Only applicable to the type `"number"` input.
+- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the type 
+  `"number"` input.
+- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the type 
+  `"number"` input.
+- `step`: `string` - (Optional) The step value of the input field. Only applicable to the type 
+  `"number"` input.
 
 #### Example
 
@@ -813,9 +827,11 @@ A Snap can link to the following screens using the `metamask:` scheme:
 
 :::caution
 MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
-installed. This can make local testing difficult. One way to mitigate this is to publish your 
-Snap to npm, install it to [MetaMask Flask](../../get-started/install-flask.md), and then use the 
-published Snap ID in your local version.
+installed. 
+This can make local testing difficult. 
+One way to mitigate this is to publish your Snap to npm, install it to 
+[MetaMask Flask](../../get-started/install-flask.md), and then use the published Snap ID in your 
+local version.
 :::
 
 #### Example
