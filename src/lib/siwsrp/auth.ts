@@ -36,11 +36,11 @@ const getHydraEnv = (env: string): HydraEnv => {
 
 const storage: SDK.AuthStorageOptions = {
   getLoginResponse: async () => {
-    const storedResponse = localStorage.getItem(AUTH_WALLET_SESSION_NAME);
+    const storedResponse = sessionStorage.getItem(AUTH_WALLET_SESSION_NAME);
     return storedResponse ? JSON.parse(storedResponse) : null;
   },
   setLoginResponse: async (val: SDK.LoginResponse) => {
-    localStorage.setItem(AUTH_WALLET_SESSION_NAME, JSON.stringify(val));
+    sessionStorage.setItem(AUTH_WALLET_SESSION_NAME, JSON.stringify(val));
   },
 };
 
@@ -93,8 +93,4 @@ export const getUserIdFromJwtToken = () => {
 
 export const clearStorage = () => {
   sessionStorage.clear();
-  localStorage.removeItem(AUTH_WALLET_PAIRING);
-  localStorage.removeItem(AUTH_WALLET_SESSION_NAME);
-  localStorage.removeItem(AUTH_WALLET_TOKEN);
-  localStorage.removeItem(AUTH_WALLET_PROJECTS);
 };
