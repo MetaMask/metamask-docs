@@ -34,7 +34,7 @@ If the problem is in a dependency, you can try a different version or to fix the
 using tools such as [`patch-package`](https://npmjs.com/package/patch-package) (see how to
 [patch dependencies](#patch-dependencies)) or by modifying the bundle file directly.
 
-To give you an idea of a common error and how to fix it, "sloppily" declared variables (i.e.
+To give you an idea of a common error and how to fix it, "sloppily" declared variables (that is,
 assigning to a new variable without an explicit variable declaration) are forbidden in strict mode,
 and therefore in SES as well.
 If you get an error during the `eval` step that says something like `variableName is not defined`,
@@ -45,7 +45,7 @@ simply prepending `var variableName;` to your Snap bundle may solve the problem.
 :::caution
 Run [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) if you modified
 your Snap bundle after building.
-Otherwise your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
+Otherwise, your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::
 
 ### Use other build tools
@@ -106,13 +106,13 @@ The following are examples of popular libraries that use `XMLHttpRequest` and ar
 compatible with the Snaps execution environment.
 This section also describes patching strategies for fixing dependencies that try to use these libraries.
 
-#### cross-fetch
+#### `cross-fetch`
 
 `cross-fetch` is a popular library used for cross-platform access to the `fetch` API across multiple
 environments.
 Under the hood, however, the library uses `XMLHttpRequest` and thus causes issues when used in a Snap.
 
-You can easily patch this issue using `patch-package`.
+You can patch this issue using `patch-package`.
 Open `node_modules/cross-fetch/browser-ponyfill.js` and find the following lines near the bottom of
 the file:
 
@@ -158,7 +158,7 @@ index f216aa3..6b3263b 100644
 Using either of these methods allows your dependencies to access the `fetch` API correctly and
 `cross-fetch` compatible with the Snaps execution environment.
 
-#### axios
+#### `axios`
 
 `axios` is a popular networking library that uses `XMLHttpRequest` under the hood.
 

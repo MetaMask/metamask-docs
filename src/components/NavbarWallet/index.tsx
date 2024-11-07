@@ -16,6 +16,9 @@ interface INavbarWalletComponent {
 
 const LOGIN_FF = "mm-unified-login";
 
+const reformatMetamaskAccount = (account) =>
+  account ? `${account.slice(0, 7)}...${account.slice(-5)}` : null;
+
 const NavbarWalletComponent: FC = ({
   includeUrl = [],
 }: INavbarWalletComponent) => {
@@ -27,6 +30,7 @@ const NavbarWalletComponent: FC = ({
   const COPIED_TEXT = "Copied!";
   const {
     metaMaskAccount,
+    metaMaskAccountEns,
     sdk,
     metaMaskWalletIdConnectHandler,
     metaMaskDisconnect,
@@ -36,6 +40,9 @@ const NavbarWalletComponent: FC = ({
   const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [userAccount, setUserAccount] = useState(
+    metaMaskAccountEns || metaMaskAccount,
+  );
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
@@ -50,7 +57,7 @@ const NavbarWalletComponent: FC = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(metaMaskAccount);
+    navigator.clipboard.writeText(userAccount);
     setCopyMessage(COPIED_TEXT);
     trackClickForSegment({
       eventName: "Copy wallet address",
@@ -110,7 +117,17 @@ const NavbarWalletComponent: FC = ({
     metaMaskWalletIdConnectHandler();
   };
 
-  return !metaMaskAccount ? (
+  useEffect(() => {
+    if (metaMaskAccountEns) {
+      setUserAccount(metaMaskAccountEns);
+    } else if (metaMaskAccount) {
+      setUserAccount(metaMaskAccount);
+    } else {
+      setUserAccount(null);
+    }
+  }, [metaMaskAccount, metaMaskAccountEns]);
+
+  return !userAccount ? (
     <Button
       testId={
         !isExtensionActive
@@ -145,9 +162,9 @@ const NavbarWalletComponent: FC = ({
               className={styles.avatar}
               alt="avatar"
             />{" "}
-            <span
-              className={styles.walletId}
-            >{`${metaMaskAccount.slice(0, 7)}...${metaMaskAccount.slice(-5)}`}</span>
+            <span className={styles.walletId}>
+              {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
+            </span>
             <button
               data-testid="navbar-account-copy"
               className={styles.copyButton}

@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# dag_get
+# `dag_get`
 
-## /api/v0/dag/get
+## `/api/v0/dag/get`
 
 Get a DAG node from IPFS.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -30,12 +30,12 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/get?arg=QmZtmD2qt6fJot32nabSP3CUjic
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `arg` _\[Required]_: The object to get.
 - `output-codec` _\[Optional]_: Format the object will be decoded in. The default is `dag-json`.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint will return with 200 and the following body:
 

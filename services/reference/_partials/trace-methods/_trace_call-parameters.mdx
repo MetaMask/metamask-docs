@@ -1,13 +1,13 @@
 - `transaction call object` _[Required]_ with the following keys and their values:
   - `from`: 20 bytes. The address the transaction is sent from.
   - `to`: 20 bytes. The address the transaction is directed to.
-  - `gas`: _[optional]_ The hexadecimal value of the gas provided for the transaction execution. <!-- (Did not quite get what this means. Commenting out to avoid confusion for now.) `eth_call` consumes zero gas, but this parameter may be needed by some executions. -->
-  - `gasPrice`: _[optional]_ The hexadecimal value of the gasPrice used for each paid gas.
-  - `maxPriorityFeePerGas`: _[optional]_ Maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
+  - `gas`: _[optional]_ The gas provided for the transaction execution, in hexadecimal.
+  - `gasPrice`: _[optional]_ The gas price used for each paid gas, in hexadecimal.
+  - `maxPriorityFeePerGas`: _[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
     See [EIP-1559 transactions](../../../concepts/transaction-types.md#eip-1559-transactions).
-  - `maxFeePerGas`: _[optional]_ Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
+  - `maxFeePerGas`: _[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
     See [EIP-1559 transactions](../../../concepts/transaction-types.md#eip-1559-transactions).
-  - `value`: _[optional]_ The hexadecimal equivalent of the value sent with this transaction.
+  - `value`: _[optional]_ The value sent with this transaction, in hexadecimal.
   - `data`: _[optional]_ The hash of the method signature and encoded parameters. See the
     [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
 - `block parameter` : _[Required]_ The hexadecimal block number, or the string `latest`, `earliest`, or `pending`. See the
