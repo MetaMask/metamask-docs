@@ -124,7 +124,7 @@ interact with your Snap.
 
 This flow is as follows:
 
-1. You build a Snap that is only really useful for one dapp, its companion dapp.
+1. You build a Snap that is only useful for one dapp, its companion dapp.
    You authorize an automatic connection to the companion dapp by listing it in `initialConnections`.
 2. A user finds your Snap through the [Snaps directory](https://snaps.metamask.io) and installs it.
 3. The user lands on your Snap's companion dapp.

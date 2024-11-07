@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Signature insights
 
 You can provide signature insights before a user signs a message.
-For example, you can warn the user about potentially dangerous signature requests.
+For example, you can warn the user about risky signature requests.
 
 ## Steps
 
