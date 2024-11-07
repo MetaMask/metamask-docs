@@ -23,9 +23,9 @@ Before you begin, ensure you have a valid [API key](../../../../developer-tools/
 
 ## Make calls
 
-### cURL
+### curl
 
-cURL generates the auth header and encodes your credentials behind the scenes.
+curl generates the auth header and encodes your credentials behind the scenes.
 
 Include the `-u` flag with the authentication information.
 
@@ -45,7 +45,7 @@ xhr.setRequestHeader("Authorization", "Basic " + btoa(<API_KEY> + ":" + <API_KEY
 
 Change the `<API_KEY>` and `<API_KEY_SECRET>` in the NodeJS example code below.
 
-Save the following script to a file, e.g. `index.js`.
+Save the following script to a file, for example, `index.js`.
 
 ```javascript
 const https = require("https")
@@ -85,7 +85,7 @@ Output something like:
 
 Change the `projectId` and `projectSecret` in the Python example code below.
 
-Save the following script to a file, e.g. `index.py`.
+Save the following script to a file, for example, `index.py`.
 
 ```python
 import requests
@@ -136,7 +136,7 @@ Use the official [`kubo-rpc-client`](https://github.com/ipfs/js-kubo-rpc-client)
 
 Install the library with `npm install --save kubo-rpc-client`.
 
-Save the following script to a file, e.g. `index.mjs`.
+Save the following script to a file, for example, `index.mjs`.
 
 ```javascript
 import { create } from "kubo-rpc-client"
@@ -173,7 +173,7 @@ CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
 - Use the official IPFS [`go-ipfs-api`](https://github.com/ipfs/go-ipfs-api) GoLang API.
 - Install with `go get -u github.com/ipfs/go-ipfs-api`.
 - Create a go module with `go mod init infura`.
-- Save the following script to a file, e.g. `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
+- Save the following script to a file, for example, `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
 
 ```go
 package main
@@ -238,7 +238,7 @@ CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
 - Use the official IPFS [`go-ipfs-http-client`](https://github.com/ipfs/go-ipfs-http-client) GoLang API.
 - Install with `go get github.com/ipfs/go-ipfs-http-client`.
 - Create a go module with `go mod init infura`.
-- Save the following script to a file, e.g. `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
+- Save the following script to a file, for example, `index.go`, and include the Infura `auth` header with the `http.RoundTripper` wrapper.
 
 ```go
 package main
@@ -301,7 +301,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

@@ -8,4 +8,4 @@
 - `blockNumber`: Block number where this log was in. `Null` when it is a pending log.
 - `address`: 20 bytes. Address from which this log originated.
 - `data`: Contains one or more 32-bytes non-indexed arguments of the log.
-- `topics`: An array of 0 to 4 indexed log arguments, each 32 bytes. In solidity the first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), except when you declared the event with the anonymous specifier.
+- `topics`: An array of 0 to 4 indexed log arguments, each 32 bytes. In solidity the first topic is the hash of the signature of the event (for example, `Deposit(address,bytes32,uint256)`), except when you declared the event with the anonymous specifier.

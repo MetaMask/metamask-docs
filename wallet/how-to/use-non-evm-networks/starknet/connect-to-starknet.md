@@ -20,16 +20,12 @@ See [a comparison of the connection options](index.md#connection-options).
 
 :::
 
-<!--
-
 :::tip
 
 If you're new to Starknet, you can also follow the
 [Create a simple Starknet dapp tutorial](create-a-simple-starknet-dapp.md).
 
 :::
-
--->
 
 ## Prerequisites
 

@@ -33,7 +33,7 @@ mkdir infura
 cd infura
 ```
 
-### 2. install the dependencies
+### 2. Install the dependencies
 
 ```bash
 pip install web3
