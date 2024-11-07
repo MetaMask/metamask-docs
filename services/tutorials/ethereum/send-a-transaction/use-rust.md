@@ -192,7 +192,7 @@ In the above transaction receipt, the transaction type shows `"type":"0x0"` indi
 
 ### 1. Modify the main code
 
-To send an EIP-1559 transaction, i.e., of the `"type":"0x2"` you must use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the following code.
+To send an EIP-1559 transaction, use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the following code.
 
 ```rust showLineNumbers
 use ethers::{

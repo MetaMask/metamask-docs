@@ -203,6 +203,66 @@ await snap.request({
 <img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
 
+### `Card`
+
+Outputs a card component which is used to display values in a card structure. 
+
+:::info
+Unlike many `Card` components from other UI libraries, the Snaps `Card` does not have any shape.
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) component.
+:::
+
+#### Props
+
+- `title`: `string` - The title of the card.
+- `value`: `string` - The value, shown on the right side. 
+- `image`: `string` - (Optional) An image shown on the left side. Accepts inline SVG.
+- `description`: `string` - (Optional) A description, shown below the title.
+- `extra`: `string` - (Optional) Additional text shown below the value.
+
+#### Example
+
+```js
+import icon from "./../img/icon.svg"
+
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: (
+      <Box>
+        <Card 
+          image={icon} 
+          title="Card title" 
+          description="Card description" 
+          value="Card value" 
+          extra="Extra value"
+        />
+        <Card 
+          title="Minimal card" 
+          value="Example value" 
+        />
+        <Section>
+          <Card 
+            image={icon} 
+            title="Card title" 
+            description="Card description" 
+            value="Card value" 
+            extra="Extra value"
+          />
+          <Card 
+            title="Minimal card" 
+            value="Example value" 
+          />
+        </Section>
+      </Box>
+    ),
+  };
+};
+```
+
+<p align="center">
+<img src={require("../../assets/custom-ui-card.png").default} alt="Card UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+</p>
+
 ### `Checkbox`
 
 Outputs a checkbox for use in [interactive UI](interactive-ui.md).
@@ -678,7 +738,7 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. This must be an HTTPS URL.
+- `href`: `string` - The URL to point to. Supported schemes are `https:` and `mailto:`. `http:` is not allowed.
 - `children`: `Array<string | Bold | Italic>` - The link text.
 
 #### Example

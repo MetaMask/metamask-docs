@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# dag_put
+# `dag_put`
 
-## /api/v0/dag/put
+## `/api/v0/dag/put`
 
 Add a DAG node to IPFS.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -34,18 +34,18 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/put" \
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `store-codec` _\[Optional]_: Codec that the stored object will be encoded with. The default is `dag-cbor`.
 - `input-codec` _\[Optional]_: Codec that the input object is encoded in. The default is `dag-json`.
 - `pin` _\[Optional]_: Set to `true` to pin this object when adding.
 - `hash` _\[Optional]_: Hash function to use. The default is `sha2-256`.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint will return with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```json
 {
@@ -55,6 +55,6 @@ On success, the call to this endpoint will return with 200 and the following bod
 }
 ```
 
-#### RESULT FIELDS
+#### Result fields
 
 - `Cid` - [Content ID](https://github.com/multiformats/cid).

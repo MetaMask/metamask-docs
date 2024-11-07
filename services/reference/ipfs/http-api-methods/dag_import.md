@@ -1,9 +1,9 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# dag_import
+# `dag_import`
 
-## /api/v0/dag/import
+## `/api/v0/dag/import`
 
 Imports all blocks present in supplied [Content Address aRchive (CAR) files](https://ipld.io/specs/transport/car/). The command recursively pins the root specified in the `.car` file headers, unless `pin-roots` is set to `false`.
 
@@ -13,7 +13,7 @@ You can't pin multiple DAG roots using this endpoint. For example, if supplying 
 
 :::
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -40,7 +40,7 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=true&silent=<value
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `file` : _string_ - path to the `.car` file.
 - `pin-roots:` _boolean_ - pin the root listed in the .car headers after importing. The default is `true`. Only one DAG root can be pinned per request.
@@ -48,11 +48,11 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=true&silent=<value
 - `stats`: _boolean -_ output statistics.
 - `allow-big-block`: _boolean_ - disable the block size check and allow the creation of blocks bigger than 1 MiB. The default is `false`. Bigger blocks won't be transferable over the standard bitswap.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint returns a `200` response with the following body:
 
-#### BODY
+#### Body
 
 ```json
 {

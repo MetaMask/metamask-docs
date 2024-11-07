@@ -29,11 +29,11 @@ into existing projects without modifying existing Wallet API calls.
 
 Key features include:
 
-- **Multi-platform support** – Connect from web, desktop, mobile, and gaming platforms.
-- **Seamless mobile integration** – Use QR codes or deeplinks to establish persistent connections
+- **Multi-platform support** - Connect from web, desktop, mobile, and gaming platforms.
+- **Seamless mobile integration** - Use QR codes or deeplinks to establish persistent connections
   with MetaMask Mobile.
-- **EIP-6963 detection** – Automatically detect MetaMask without conflicting with other installed wallets.
-- **RPC request batching** – Improve efficiency by batching multiple requests into a single call.
+- **EIP-6963 detection** - Automatically detect MetaMask without conflicting with other installed wallets.
+- **RPC request batching** - Improve efficiency by batching multiple requests into a single call.
 
 :::note
 

@@ -40,13 +40,13 @@ You can view your Web3 API usage stats in the following charts and tables.
 
 ### Requests Volume chart
 
-This chart displays the total volume of requests sent to Infura using the selected API key(s) over
+This chart displays the total volume of requests sent to Infura using the selected API keys over
 the selected time period.
 
 ### Product Request Volumes
 
 This chart displays the aggregate request volumes for the top five API methods called using the
-selected API key(s) over the selected time period.
+selected API keys over the selected time period.
 To view stats for a particular product (network) instead of the default of all products, make a
 selection from the products dropdown.
 This change will impact what API methods are displayed in the
@@ -55,14 +55,14 @@ This change will impact what API methods are displayed in the
 ### Method Request Volumes
 
 This chart displays the aggregate request volumes for requests made on the top five networks using
-the selected API key(s) over the selected time period.
+the selected API keys over the selected time period.
 To view stats for a particular method instead of the default of all methods, make a selection from
 the methods dropdown.
 
 ### Requests Activity
 
 This table displays the total request volumes and successful and failed requests, based on each
-product (network) and method called using the selected API key(s) over the selected time period.
+product (network) and method called using the selected API keys over the selected time period.
 
 For more details about the failure status codes, select the two diagonal arrows to the right of the
 **FAILED REQUESTS (%)** values.
@@ -72,7 +72,7 @@ requests, grouped by the returned status codes.
 ### Eth_call activity
 
 This table displays the activities made on the `eth_call` method, including contract addresses that
-interacted with the selected API key(s).
+interacted with the selected API keys.
 This table only shows the `eth_call` activity for the last 30 minutes, and is not impacted by any
 time period selection.
 
@@ -85,15 +85,15 @@ You can view your IPFS usage stats in the following charts.
 
 ### Data Transfer Up
 
-This chart displays the amount of data sent to the IPFS service using the selected API key(s) over
+This chart displays the amount of data sent to the IPFS service using the selected API keys over
 the selected time period.
 
 ### Data Transfer Down
 
-This chart displays the amount of data retrieved from the IPFS service using the selected API key(s)
+This chart displays the amount of data retrieved from the IPFS service using the selected API keys
 over the selected time period.
 
 ### Total Storage
 
-This chart displays the total amount of data stored by the selected API key(s) over the selected
+This chart displays the total amount of data stored by the selected API keys over the selected
 time period.
