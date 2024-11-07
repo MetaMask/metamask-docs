@@ -21,21 +21,12 @@ the MetaMask browser extension and MetaMask Mobile.
 - Set up a project with [Wagmi](https://wagmi.sh/react/getting-started).
 - Create an Infura API key and allowlist to [make read-only requests](../../how-to/make-read-only-requests.md).
 
-## Steps
+## Configure the MetaMask connector
 
-### 1. Configure MetaMask SDK
-
-In your Wagmi project, configure MetaMask SDK with the proper [SDK options](../../reference/sdk-js-options.md).
-
-- Set your API key in environment variables.
-```env
-VITE_INFURA_API_KEY=YOUR-API-KEY
-```
-
-- Configure the MetaMask connector with Wagmi.
+In your Wagmi project, configure the MetaMask connector:
 
 ```javascript
-import { metaMask } from 'wagmi/connectors'
+import { metaMask } from "wagmi/connectors"
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
@@ -46,39 +37,41 @@ export const config = createConfig({
   ],
   transports: {
     [mainnet.id]: http(),
-    // You can also configure the transcripts to use INFURA_API_KEY directly into wagmi config to share with other providers.
-    // [mainnet.id]: http('https://mainnet.infura.io/v3/...')
+    // You can also configure the transcripts to use INFURA_API_KEY directly into the Wagmi config
+    // to share with other providers.
+    // [mainnet.id]: http("https://mainnet.infura.io/v3/...")
     [sepolia.id]: http(),
   },
 })
 ```
 
-#### Infura API key
+Make sure to configure the MetaMask connector with the proper [SDK options](../../reference/sdk-js-options.md).
 
-In order to provide a better mobile user experience, you should specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
- option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
+To provide a better mobile user experience, specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
+option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
+You can set your Infura API key in environment variables:
+
+```env
+VITE_INFURA_API_KEY=<YOUR-API-KEY>
+```
 
 ## Benefits of using the Infura API with Wagmi
 
-Mobile dApps can lose their continuous connection with MetaMask, causing read-only requests to fail. 
-When the mobile wallet is disconnected, the dapp will need to deeplink into the wallet to "wake up" the connection.
+Read-only requests are blockchain requests that do not require user wallet interaction.
+Mobile dapps can lose their continuous connection with MetaMask, causing read-only requests to fail. 
+When the mobile wallet is disconnected, the dapp must deeplink into the wallet to "wake up" the connection.
 
-Read-only requests are blockchain requests that do not require user wallet interaction. Without setting the `infuraAPIKey`, the dApp may experience issues on mobile environment:
+Without setting the `infuraAPIKey`, the dapp might experience issues in mobile environments:
 
 ![Wagmi errors](../../assets/wagmi-errors.png)
 
 To overcome this limitation in mobile dapps that rely on a continuous connection with MetaMask,
 use the Infura API to make read-only requests.
-You can do this by [configuring the SDK with an Infura API key](#2-configure-wagmi-with-the-metamask-connector).
 This approach offloads the read operations to Infura's nodes, reducing the load on your own
 infrastructure and ensuring high availability and reliability, independent of the user's wallet connection.
 
 By using the Infura API, you can ensure:
 
-- **Uninterrupted access:** Continuous network access for read-only requests, regardless of MetaMask's state.
-
-- **Enhanced stability:** Stabilized dapp functionality by relying on Infura's robust infrastructure
+- **Uninterrupted access** - Continuous network access for read-only requests, regardless of MetaMask's state.
+- **Enhanced stability** - Stabilized dapp functionality by relying on Infura's robust infrastructure
   rather than the mobile environment's variable connectivity and background processing constraints.
-
-In summary, using the Infura API compensates for Wagmi's lack of mobile optimization by providing a
-stable network backend for read-only operations.

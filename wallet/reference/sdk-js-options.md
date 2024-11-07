@@ -240,7 +240,8 @@ headless: true
 </TabItem>
 </Tabs>
 
-Enables or disables headless mode. See [headless mode](../how-to/display/headless.md) for more information.
+Enables or disables headless mode.
+Setting this to `true` allows you to [display custom modals](../how-to/display/custom-modals.md).
 The default is `false`.
 
 ### `openDeeplink`

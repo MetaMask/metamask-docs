@@ -63,14 +63,12 @@ Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_reque
 prompts the installation or connection popup to appear.
 
 ```javascript
-
 const accounts = await sdk.connect();
-console.log('connect request accounts', accounts);
+console.log("connect request accounts", accounts);
 
-// You can also access the ethereum provider object.
+// You can also access the Ethereum provider object.
 const provider = MMSDK.getProvider()
 provider.request({ method: "eth_requestAccounts", params: [] })
-
 ```
 
 You can also call the SDK's [`connectAndSign`](../../../how-to/sign-data/connect-and-sign.md) method, and
@@ -85,7 +83,7 @@ import { MetaMaskSDK } from "@metamask/sdk"
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: "Node.js dapp",
+    name: "Example Node.js Dapp",
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.

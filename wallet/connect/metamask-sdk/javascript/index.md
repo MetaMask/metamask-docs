@@ -70,7 +70,7 @@ const MMSDK = new MetaMaskSDK({
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
 - Use [`headless`](../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
-  the displayed modals](../../../how-to/display/headless.md).
+  the displayed modals](../../../how-to/display/custom-modals.md).
 
 ### 4. Use the SDK
 
@@ -103,7 +103,7 @@ const MMSDK = new MetaMaskSDK({
 })
 
 const accounts = await MMSDK.connect()
-// You can also access the ethereum provider object but we recommend using the SDK's methods.
+// You can also access the Ethereum provider object but we recommend using the SDK's methods.
 const ethereum = MMSDK.getProvider()
 ethereum.request({ method: "eth_accounts", params: [] })
 ```
