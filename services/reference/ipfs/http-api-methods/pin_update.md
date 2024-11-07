@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# pin_update
+# `pin_update`
 
-## /api/v0/pin/update
+## `/api/v0/pin/update`
 
 Update a recursive pin.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -30,17 +30,17 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/update?arg=QmfQ5QAjvg4GtA3wg3adpnDJ
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `arg` _\[Required]_ - Path to old object.
 - `arg` _\[Required]_ - Path to a new object to be pinned.
 - `unpin` _\[Optional]_ - Remove the old pin. The default is `true.`
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint returns with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```
 {

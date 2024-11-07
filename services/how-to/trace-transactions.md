@@ -19,7 +19,7 @@ extract information about contract interactions, transactions, and blocks on the
 also use the API to retrieve transaction details that are not recorded on the blockchain. For example, use the
 [`trace_call`](../reference/ethereum/json-rpc-methods/trace-methods/trace_call.mdx) API to observe contract interactions.
 
-![Example for using the `trace_call` API](../images/trace-call.png)
+![Trace API example](../images/trace-call.png)
 
 :::tip
 
@@ -134,6 +134,19 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 Use cases for the trace API include:
 
-- **Debugging transactions** - The trace API allows you to analyze and debug Ethereum transactions. Trace the execution of a transaction to identify issues or bugs in smart contracts or dapps. Track the sequence of operations, inspect the input and output data, and pinpoint potential errors or unexpected behavior.&#x20;
-- **Optimizing gas usage** - The trace API allows you to analyze the gas consumption of transactions and identify areas where gas usage can be optimized. By examining the execution trace, you can spot expensive operations, inefficient code patterns, or unnecessary computations that consume excessive gas. You can use this information to refactor smart contracts and reduce transaction costs for users.
-- **Security auditing** - Conduct security audits of smart contracts and dapps by tracing the execution flow. This allows you to identify potential vulnerabilities or attack vectors in the code. You can analyze contract interactions, track data modifications, and validate that the smart contract behaves as intended. This helps uncover security loopholes and ensures that the smart contracts are robust against various types of attacks, such as reentrancy or unauthorized access.
+- **Debugging transactions** - The trace API allows you to analyze and debug Ethereum transactions.
+  Trace the execution of a transaction to identify issues or bugs in smart contracts or dapps.
+  Track the sequence of operations, inspect the input and output data, and pinpoint potential errors
+  or unexpected behavior.
+- **Optimizing gas usage** - The trace API allows you to analyze the gas consumption of transactions
+  and identify areas where gas usage can be optimized.
+  By examining the execution trace, you can spot expensive operations, inefficient code patterns, or
+  unnecessary computations that consume excessive gas.
+  You can use this information to refactor smart contracts and reduce transaction costs for users.
+- **Security auditing** - Conduct security audits of smart contracts and dapps by tracing the
+  execution flow.
+  This allows you to identify potential vulnerabilities or attack vectors in the code.
+  You can analyze contract interactions, track data modifications, and validate that the smart
+  contract behaves as intended.
+  This helps uncover security loopholes and ensures that the smart contracts are robust against
+  various types of attacks, such as reentrancy or unauthorized access.
