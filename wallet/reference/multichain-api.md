@@ -17,7 +17,10 @@ Dapps can call Multichain API [methods](#methods) to create and manage
 The API also provides [events](#events) that wallets can send to dapps to notify them of changes to
 a session.
 
-Learn more [about the Multichain API](../concepts/multichain-api.md).
+:::note See also
+- [About the Multichain API](../concepts/multichain-api.md)
+- [Interact with multiple networks](../how-to/manage-networks/use-multichain.md)
+:::
 
 ## Methods
 
@@ -186,7 +189,7 @@ The scopes and properties of the session.
 
 ### `wallet_invokeMethod`
 
-Invokes the specified [JSON-RPC API](/wallet/reference/json-rpc-api) method on the specified network
+Invokes the specified [JSON-RPC API](json-rpc-methods/index.md) method on the specified network
 previously authorized to the dapp within a session.
 This method is defined in [CAIP-27](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-27.md).
 
@@ -199,7 +202,7 @@ MetaMask doesn't support session IDs.
 - `scope`: `string` - A [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
   chain ID previously authorized to the dapp within a session.
 - `request`: `object` - A request object containing:
-  - `method`: `string` - The [JSON-RPC API](/wallet/reference/json-rpc-api) method to invoke,
+  - `method`: `string` - The [JSON-RPC API](json-rpc-methods/index.md) method to invoke,
     previously authorized to the dapp within a session.
   - `params`: `object` - The RPC method parameters (can be empty).
 
@@ -320,7 +323,7 @@ MetaMask doesn't support session IDs.
 - `scope`: `string` - A [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
   chain ID previously authorized to the dapp within a session.
 - `notification`: `object` - A notification object containing:
-  - `method`: `string` - A [JSON-RPC API](/wallet/reference/json-rpc-api) notification method name
+  - `method`: `string` - A [JSON-RPC API](json-rpc-methods/index.md) notification method name
     previously authorized to the dapp within a session.
   - `params`: `object` - The RPC notification method parameters.
 

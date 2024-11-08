@@ -1,6 +1,5 @@
 ---
-description: Learn about the MetaMask Multichain API.
-sidebar_position: 4
+description: Learn about the Multichain API.
 sidebar_custom_props:
   flask_only: true
 ---
@@ -28,6 +27,8 @@ Key benefits include:
   different wallet APIs and SDKs, making it easier for dapps to integrate with wallets, discover
   capabilities, and negotiate interfaces.
 
+[**Get started using the Multichain API.**](../how-to/manage-networks/use-multichain.md)
+
 ## Technical overview
 
 The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
@@ -37,14 +38,15 @@ that dapps can call to create a multichain session with a wallet, with specified
 authorization scopes.
 Dapps can update the session using the same method `wallet_createSession`.
 
-Dapps can use [`wallet_invokeMethod`](../reference/multichain-api.md#wallet_invokemethod) to call a
-subset of the [Wallet JSON-RPC API methods](/wallet/reference/json-rpc-api) on a specified chain.
-Dapps can use [`wallet_getSession`](../reference/multichain-api.md#wallet_getsession) to get the
-scopes and properties of the active session, and use [`wallet_revokeSession`](../reference/multichain-api.md#wallet_revokesession)
-to revoke the session.
+Dapps can use [`wallet_invokeMethod`](../reference/multichain-api.md#wallet_invokemethod) to
+call a subset of the [Wallet JSON-RPC API methods](../reference/json-rpc-methods/index.md) on
+a specified chain.
+Dapps can use [`wallet_getSession`](../reference/multichain-api.md#wallet_getsession) to get
+the scopes and properties of the active session, and use
+[`wallet_revokeSession`](../reference/multichain-api.md#wallet_revokesession) to revoke the session.
 The API also supports the [`wallet_notify`](../reference/multichain-api.md#wallet_notify) and
-[`wallet_sessionChanged`](../reference/multichain-api.md#wallet_sessionchanged) events, allowing
-wallets to notify dapps of changes to the session.
+[`wallet_sessionChanged`](../reference/multichain-api.md#wallet_sessionchanged) events,
+allowing wallets to notify dapps of changes to the session.
 
 See the [Multichain API reference](../reference/multichain-api.md) for full details.
 
@@ -97,3 +99,19 @@ sequenceDiagram
   Wallet-->>Dapp: {"result": "true"}
   end
 ```
+
+## Backwards compatibility
+
+When using the Multichain API, your dapp can still interact with the existing
+[Wallet Provider API](wallet-api.md#ethereum-provider-api).
+However, the Provider API is not optimized for multichain, and we recommend
+[starting directly with the Multichain API](../how-to/manage-networks/use-multichain.md) if possible.
+The Multichain API is backwards compatible mainly to support dapps that use third-party libraries
+with dependencies on the legacy provider.
+
+## Get started
+
+Get started with the Multichain API:
+
+- Learn how to [use the Multichain API](../how-to/manage-networks/use-multichain.md).
+- See the [Multichain API reference](../reference/multichain-api.md) for more details.

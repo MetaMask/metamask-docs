@@ -158,6 +158,11 @@ const sidebar = {
               type: "doc",
               label: "Add a network",
               id: "how-to/manage-networks/add-network"
+            },
+            {
+              type: "doc",
+              label: "Interact with multiple networks",
+              id: "how-to/manage-networks/use-multichain"
             }
           ]
         },
