@@ -7,7 +7,7 @@ tags:
 
 # Display custom modals
 
-You can use [MetaMask SDK](../../connect/metamask-sdk/index.md) to display custom MetaMask modals.
+You can use [MetaMask SDK](../../connect/metamask-sdk/index.md) to design and display custom MetaMask modals, by enabling headless mode.
 
 When integrating a web dapp with MetaMask, you can enhance the user experience by customizing the
 logic and user interface of the displayed modals, which initiate user interactions such as prompting
@@ -25,65 +25,133 @@ This example uses the [MetaMask React SDK](../../connect/metamask-sdk/javascript
 ### 1. Create a custom modal component
 
 Create a custom modal component that aligns with your dapp's design and functionality requirements.
+For example:
 
 ```javascript title="App.js"
-import React from "react"
+import { useEffect, useState } from "react";
+import encodeQR from "@paulmillr/qr";
 
-const CustomModal = ({ onClose }) => (
-  <div className="modal">
-    <button onClick={onClose}>Close</button>
-  </div>
-)
+interface QRModalProps {
+  readonly uri: string;
+  readonly onClose: () => void;
+}
 
-export default CustomModal
+function QRModal({ uri, onClose }: QRModalProps) {
+  const [imgSrc, setImgSrc] = useState<string>("");
+
+  useEffect(() => {
+    if (!uri) return;
+
+    const svgString = encodeQR(uri, "svg");
+    const blob = new Blob([svgString], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    setImgSrc(url);
+
+    return () => {
+      URL.revokeObjectURL(url);
+      setImgSrc("");
+    };
+  }, [uri]);
+
+  if (!uri || !imgSrc) {
+    return null;
+  }
+
+  return (
+    <div style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <div style={{
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        textAlign: "center"
+      }}>
+        <img src={imgSrc} alt="QR Code" />
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+}
 ```
 
 ### 2. Implement custom modal logic
 
 When initializing [`MetaMaskProvider`](../../connect/metamask-sdk/javascript/react/index.md#3-wrap-your-project-with-metamaskprovider),
-use the [`modals`](../../reference/sdk-js-options.md#modals) SDK option to set up custom behavior
-for scenarios such as when MetaMask isn't installed.
-For example:
+set the [`headless`](../../reference/sdk-js-options.md#headless) SDK option to `true` to enable headless mode.
+Set up custom modal logic, for example:
 
 ```javascript title="index.js"
-import { MetaMaskProvider } from "@metamask/sdk-react"
-import CustomModal from "./CustomModal"
-import ReactDOM from "react-dom"
+import { MetaMaskProvider, useSDK } from "@metamask/sdk-react"
+
+const DappView = () => {
+  const { connected, account, provider, sdk } = useSDK()
+  const [qrUri, setQrUri] = useState<string>("")
+
+  useEffect(() => {
+    if (sdk) {
+      sdk.on("display_uri", setQrUri)
+    }
+
+    return () => {
+      if (sdk) {
+        sdk.off("display_uri", setQrUri)
+      }
+    }
+  }, [connected, sdk])
+
+  if (!connected) {
+    return (
+      <div>
+        <button onClick={async () => {
+          const accounts = await sdk?.connect()
+        }}>Connect</button>
+        {qrUri && <QRModal uri={qrUri} onClose={() => setQrUri("")} />}
+      </div>
+    )
+  }
+
+  if(!sdk) {
+    return <div>No SDK</div>
+  }
+
+  return (
+    <>
+      <div>
+        Signed in as: {account}
+      </div>
+      <div>
+        <p>Display URI: {qrUri}</p>
+      </div>
+      <div>
+        <p>Personal Sign:</p>
+        <button onClick={() => provider?.request({ method: "personal_sign", params: ["Hello, world!", account] })}>
+          Sign
+        </button>
+      </div>
+      <button onClick={() => sdk?.disconnect()}>Disconnect</button>
+    </>
+  )
+}
 
 const App = () => (
   <MetaMaskProvider
     sdkOptions={{
-      modals: {
-        install: ({ link }) => {
-          let modalContainer = null
-
-          return {
-            mount: () => {
-              modalContainer = document.createElement("div")
-              document.body.appendChild(modalContainer)
-
-              ReactDOM.render(
-                <CustomModal
-                  onClose={() => {
-                    ReactDOM.unmountComponentAtNode(modalContainer)
-                    modalContainer.remove()
-                  }}
-                />,
-                modalContainer
-              )
-            },
-            unmount: () => {
-              if (modalContainer) {
-                ReactDOM.unmountComponentAtNode(modalContainer)
-                modalContainer.remove()
-              }
-            },
-          }
-        },
+      dappMetadata: {
+        name: "Headless React Dapp",
       },
+      headless: true,
     }}
   >
-    {/* Other components */}
+    <DappView />
   </MetaMaskProvider>
 )
 
@@ -92,7 +160,7 @@ export default App
 
 ### 3. Test your custom modal
 
-Test your dapp to ensure the custom modal operates as intended, especially in scenarios such as when
+Test your dapp to ensure the custom modal operates as intended in multiple scenarios, such as when
 MetaMask isn't installed.
 
 <p align="center">
