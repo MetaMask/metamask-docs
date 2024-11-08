@@ -1,7 +1,7 @@
-A `filter object` with the fillowing keys and their values:
+A `filter object` with the following keys and their values:
 
 - `fromBlock`: _[optional, default: `latest`]_ A hexadecimal block number, or `latest` for the last mined block. The `pending` option is not currently supported. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - `toBlock`: _[optional, default: `latest`]_ A hexadecimal block number, or `latest` for the last mined block. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - `address`: _[optional]_ (20 bytes). Contract address or a list of addresses from which logs should originate.
 - `topics`: _[optional]_ An array of 32 bytes DATA topics. Topics are order-dependent. Each topic can also be an array of DATA with `or` options.
-- blockHash: _[optional]_ With the addition of EIP-234, `blockHash` restricts the logs returned to the single block with the 32-byte hash `blockHash`. Using `blockHash` is equivalent to `fromBlock` = `toBlock` = the block number with hash `blockHash`. If `blockHash` is present in the filter criteria, then neither `fromBlock` nor `toBlock` are allowed.
+- `blockHash`: _[optional]_ With the addition of EIP-234, `blockHash` restricts the logs returned to the single block with the 32-byte hash `blockHash`. Using `blockHash` is equivalent to `fromBlock` = `toBlock` = the block number with hash `blockHash`. If `blockHash` is present in the filter criteria, then neither `fromBlock` nor `toBlock` are allowed.

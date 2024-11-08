@@ -14,7 +14,7 @@ and [options](#options).
 ### `installSnap`
 
 Installs a Snap in the execution environment.
-We recommend using this function in each test to ensure that it starts with a clean slate.
+We recommend using this function in each test to ensure that it starts with a new Snap installation.
 
 #### Parameters
 
@@ -127,10 +127,10 @@ describe("MySnap", () => {
 
 ### `onCronjob`
 
-Runs a cronjob in the Snap.
+Runs a cron job in the Snap.
 The request is normally specified in the Snap manifest file under the
 [`endowment:cronjob`](permissions.md#endowmentcronjob) permission, but this method allows you to
-run cronjobs that are not specified in the manifest as well.
+run cron jobs that are not specified in the manifest as well.
 
 #### Parameters
 
@@ -147,7 +147,7 @@ which can be checked using [Jest matchers](#jest-matchers).
 import { installSnap } from "@metamask/snaps-jest"
 
 describe("MySnap", () => {
-  it("should end foo cronjobs with response bar", async () => {
+  it("should end foo cron jobs with response bar", async () => {
     const { onCronjob } = await installSnap(/* Optional snap ID */)
     const response = await onCronjob({
       method: "foo",
@@ -254,7 +254,8 @@ This server serves the execution environment, simulator, and the Snap bundle dur
 The server options are:
 
 - `enabled` - Enables or disables the built-in HTTP server.
-  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap), e.g. `installSnap("local:http://my-server")`.
+  Set to `false` to use your own HTTP server, which you can specify when calling [`installSnap`](#installsnap),
+  for example, `installSnap("local:http://my-server")`.
   The default is `true`.
 - `port` - The port to use for the built-in HTTP server.
   The default is a random available (unprivileged) port.

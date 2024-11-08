@@ -33,7 +33,7 @@ The general rule is: **Don't create a situation where your users can lose assets
 - Allowing extraction of private keys outside the Snap in any way, especially through RPC or
   network connections.
 - Executing arbitrary or untrusted code with access to private keys.
-- Not getting properly informed consent before performing irreversible operations.
+- Not getting informed consent before performing irreversible operations.
 - Asking for consent but ignoring the decision.
 - Exposing key material in clear-text.
 - Producing a bug that leads to any of the above.

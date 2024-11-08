@@ -91,21 +91,21 @@ Specific types of values passed to and returned from Ethereum RPC methods requir
 A `Quantity` (integer, number) must:
 
 - Be hex-encoded.
-- Be "0x"-prefixed.
+- Be `0x`-prefixed.
 - Be expressed using the fewest possible hex digits per byte.
-- Express zero as "0x0".
+- Express zero as `0x0`.
 
 Examples `Quantity` values:
 
-| Value  | Validity  | Reason                            |
-| ------ | --------- | --------------------------------- |
-| 0x     | `invalid` | empty not a valid quantity        |
-| 0x0    | `valid`   | interpreted as a quantity of zero |
-| 0x00   | `invalid` | leading zeroes not allowed        |
-| 0x41   | `valid`   | interpreted as a quantity of 65   |
-| 0x400  | `valid`   | interpreted as a quantity of 1024 |
-| 0x0400 | `invalid` | leading zeroes not allowed        |
-| ff     | `invalid` | values must be prefixed           |
+| Value    | Validity  | Reason                            |
+|----------|-----------|-----------------------------------|
+| `0x`     | `invalid` | empty not a valid quantity        |
+| `0x0`    | `valid`   | interpreted as a quantity of zero |
+| `0x00`   | `invalid` | leading zeroes not allowed        |
+| `0x41`   | `valid`   | interpreted as a quantity of 65   |
+| `0x400`  | `valid`   | interpreted as a quantity of 1024 |
+| `0x0400` | `invalid` | leading zeroes not allowed        |
+| `ff`     | `invalid` | values must be prefixed           |
 
 ### Block identifier
 
@@ -136,12 +136,12 @@ A `Data` value (for example, byte arrays, account addresses, hashes, and bytecod
 
 Examples `Data` values:
 
-| Value    | Valid     | Reason                                             |
-| -------- | --------- | -------------------------------------------------- |
-| 0x       | `valid`   | interpreted as empty data                          |
-| 0x0      | `invalid` | each byte must be represented using two hex digits |
-| 0x00     | `valid`   | interpreted as a single zero byte                  |
-| 0x41     | `true`    | interpreted as a data value of 65                  |
-| 0x004200 | `true`    | interpreted as a data value of 16896               |
-| 0xf0f0f  | `false`   | bytes require two hex digits                       |
-| 004200   | `false`   | values must be prefixed                            |
+| Value      | Valid     | Reason                                             |
+|------------|-----------|----------------------------------------------------|
+| `0x`       | `valid`   | interpreted as empty data                          |
+| `0x0`      | `invalid` | each byte must be represented using two hex digits |
+| `0x00`     | `valid`   | interpreted as a single zero byte                  |
+| `0x41`     | `true`    | interpreted as a data value of 65                  |
+| `0x004200` | `true`    | interpreted as a data value of 16896               |
+| `0xf0f0f`  | `false`   | bytes require two hex digits                       |
+| `004200`   | `false`   | values must be prefixed                            |

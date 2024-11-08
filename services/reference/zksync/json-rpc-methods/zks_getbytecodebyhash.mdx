@@ -22,7 +22,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -30,6 +30,7 @@ curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getBytecodeByHash", "params": ["0x0100067d861e2f5717a12c3e869cfb657793b86bbb0caa05cc1421f16c5217bc"]}'
 ```
+
   </TabItem>
   <TabItem value="WSS">
 
@@ -44,6 +45,7 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
 
 <Tabs>
   <TabItem value="JSON">
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -64,5 +66,6 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
   "id": 1
 }
 ```
+
   </TabItem>
 </Tabs>

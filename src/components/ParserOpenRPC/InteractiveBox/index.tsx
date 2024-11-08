@@ -28,6 +28,7 @@ import { useColorMode } from "@docusaurus/theme-common";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 import * as isPlainObject from "lodash.isplainobject";
+import * as camelCase from "lodash.camelcase";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 
@@ -57,11 +58,23 @@ function sortObjectKeysByArray(
   return result;
 }
 
+function removeEmptyStrings(obj) {
+  for (const key in obj) {
+    if (obj[key] === "") {
+      delete obj[key];
+    }
+  }
+  return obj;
+}
+
 function removeEmptyArrays(obj: any, params: any[]) {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
     const currentParam = params.find(item => item.name === key)
     if (newObj.hasOwnProperty(key)) {
+      if (!Array.isArray(newObj[key]) && typeof newObj[key] === "object") {
+        newObj[key] = removeEmptyStrings(newObj[key]);
+      }
       if (currentParam && currentParam.required) {
         return newObj
       }
@@ -117,7 +130,7 @@ export default function InteractiveBox({
 
   const checkName = (name: string) => {
     if (name === "requestPermissionObject") return "requestPermissionsObject";
-    return name;
+    return name.trim().split(/\s+/).length > 1 ? camelCase(name) : name;
   };
 
   useEffect(() => {

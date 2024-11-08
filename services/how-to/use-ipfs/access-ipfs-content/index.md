@@ -2,7 +2,7 @@
 
 Access files on the IPFS network with gateways.
 
-[IPFS Gateways](https://docs.ipfs.io/concepts/ipfs-gateway/#overview) are HTTP-based services that access content residing on the IPFS network. They provide workarounds for applications - such as browsers, curl, and wget - that have no native support for IPFS.
+[IPFS Gateways](https://docs.ipfs.io/concepts/ipfs-gateway/#overview) are HTTP-based services that access content residing on the IPFS network. They provide workarounds for applications—such as browsers, curl, and wget—that have no native support for IPFS.
 
 For example, errors may occur when an application that does not support IPFS attempts to access content in the canonical form:
 

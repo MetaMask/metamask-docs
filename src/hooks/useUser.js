@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { DASHBOARD_URL, GET_OPTIONS } from "../lib/constants";
+import { GET_OPTIONS } from "../lib/constants";
 
 export default function useUser() {
   const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+  const { DASHBOARD_URL } = siteConfig?.customFields || {}
   const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [keys, setKeys] = useState([]);
@@ -12,13 +12,13 @@ export default function useUser() {
   const getUserInfo = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/me`, GET_OPTIONS);
+      const res = await fetch(`${DASHBOARD_URL}/api/me`, GET_OPTIONS);
       const response = await res.json();
       if (response?.data) {
         setUser(response.data);
         const userId = response.data.id;
         const upData = await fetch(
-          `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
+          `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
           GET_OPTIONS
         );
         if (upData.ok) {

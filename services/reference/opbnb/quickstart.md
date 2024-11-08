@@ -19,7 +19,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal. Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
@@ -42,7 +42,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i node-fetch
     ``````
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
@@ -85,7 +85,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm i axios
     ```
 
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
@@ -119,7 +119,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
     npm install ethers
     ```
    
-1. Create your Javascript file and copy the following code:
+1. Create your JavaScript file and copy the following code:
 
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
@@ -183,7 +183,7 @@ Now that you have successfully made a call to the opBNB network, you can explore
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
   
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

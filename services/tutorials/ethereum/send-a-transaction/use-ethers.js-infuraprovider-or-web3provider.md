@@ -2,11 +2,13 @@
 description: Use the Ethers InfuraProvider and Web3Provider methods.
 ---
 
-# Use ethers.js InfuraProvider or Web3Provider
+# Use Ethers.js `InfuraProvider` or `Web3Provider`
 
-In this tutorial, we'll create a simple React app to show the differences between using the ethers.js library's `InfuraProvider` and `Web3Provider` methods to send a transaction.
+In this tutorial, you'll create a simple React app to show the differences between using the
+Ethers.js library's `InfuraProvider` and `Web3Provider` methods to send a transaction.
 
-The key difference we'll highlight is that with Web3Provider you can load the private key from a Web3 wallet (MetaMask in this example), while InfuraProvider needs a wallet created locally with a stored private key.
+The key difference is that with `Web3Provider`, you can load the private key from a web3 wallet
+(for example, MetaMask), while `InfuraProvider` needs a wallet created locally with a stored private key.
 
 This tutorial uses the Sepolia testnet.
 
@@ -14,9 +16,9 @@ This tutorial uses the Sepolia testnet.
 
 - Install [MetaMask](https://metamask.io) and create an Ethereum account for testing purposes.
 - Load Sepolia ETH into your wallet from the [Infura faucet](https://www.infura.io/faucet).
-- [Node.js and NPM installed](https://nodejs.org/en/download/).
+- [Node.js and npm installed](https://nodejs.org/en/download/).
 
-You can run the following to confirm that Node and NPM are installed:
+You can run the following to confirm that Node and npm are installed:
 
 ```bash
 node -v && npm -v
@@ -32,7 +34,7 @@ This tutorial was tested using ethers v5.7.2 and Node.js v16.17.0.
 
 ### 1. Create the React app
 
-In the terminal, run the following command to create an app called my-app:
+In the terminal, run the following command to create an app called `my-app`:
 
 ```bash
 npx create-react-app my-app

@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# block_stat
+# `block_stat`
 
-## /api/v0/block/stat
+## `/api/v0/block/stat`
 
 Print information of a raw IPFS block.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -30,15 +30,15 @@ curl "https://ipfs.infura.io:5001/api/v0/block/stat?arg=QmfQ5QAjvg4GtA3wg3adpnDJ
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `arg` _\[Required]_ - The base58 multihash of an existing block to stat.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint will return with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```js
 {
@@ -47,7 +47,7 @@ On success, the call to this endpoint will return with 200 and the following bod
 }
 ```
 
-#### RESULT FIELDS
+#### Result fields
 
 - `Key` - The base58 multihash string of the block.
 - `Size` - An integer representing the size in bytes.

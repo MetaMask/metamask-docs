@@ -5,7 +5,7 @@ description: debug_traceBlockByNumber API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlockByNumber
+# `debug_traceBlockByNumber`
 
 Returns tracing results by executing all transactions in the specified block number.
 
@@ -32,7 +32,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \

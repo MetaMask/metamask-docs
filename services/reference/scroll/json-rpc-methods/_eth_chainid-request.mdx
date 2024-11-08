@@ -2,7 +2,7 @@ import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -13,7 +13,8 @@ curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
 
   </TabItem>
   <TabItem value="WSS">
-  ```bash
+
+```bash
 wscat -c wss://scroll-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_chainId", "params": [], "id": 1}'
 ```
 

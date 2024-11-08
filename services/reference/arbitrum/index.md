@@ -15,7 +15,7 @@ Calls to the network are routed to [partner infrastructure providers](#partners-
 :::
 
 Arbitrum is an Ethereum scaling solution that provides high throughput and low-cost smart contract execution. Arbitrum's design
-allows it to be fully compatible with Ethereum. Developers will find that building with Arbitrum is nearly identical to
+allows it to be fully compatible with Ethereum. Building on Arbitrum is almost identical to
 building on Ethereum.
 
 Arbitrum is compatible with Ethereum's JSON-RPC API implementation, which allows using tools such as Infura, Hardhat, and

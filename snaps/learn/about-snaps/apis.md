@@ -131,7 +131,7 @@ point and request the [`endowment:rpc`](../../reference/permissions.md#endowment
 The Snap's custom API is entirely up to you, as long as it's a valid
 [JSON-RPC](https://www.jsonrpc.org/specification) API.
 
-:::note Does my Snap need a custom API?
+:::note
 If your Snap can do something useful without receiving and responding to JSON-RPC requests, such as
 providing [transaction insights](../../reference/entry-points.md#ontransaction), you do not need to
 implement a custom API.

@@ -168,7 +168,7 @@ An array containing:
 2. Typed data: `object` - Typed data object containing:
    - `types`: `object` - Types object containing:
      - `EIP712Domain`: `array` - Array specifying one or more of the following domain separator values:
-       - `name` - User-readable name of the signing domain, i.e., name of the dapp or the protocol.
+       - `name` - User-readable name of the signing domain, that is, name of the dapp or the protocol.
        - `version` - Current major version of the signing domain.
        - `chainId` - Chain ID of the network.
        - `verifyingContract` - Address of the contract that will verify the signature.
@@ -273,14 +273,14 @@ An array containing:
 A user operation details object containing:
 
 - `callData`: `string` - Data to pass to the sender during the main execution call.
-- `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain and
+- `initCode`: `string` - Account bytecode (needed if and only if the account is not yet onchain and
   needs to be created).
 - `nonce`: `string` - Anti-replay parameter.
 - `gasLimits` - (Optional) Gas limits object containing:
   - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
   - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
   - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-    execution, to pay for `callData`, and to account for overhead that can't be tracked on-chain.
+    execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
 - `dummySignature`: `string` - Dummy `signature`.
 - `dummyPaymasterAndData`: `string` - Dummy `paymasterAndData`.
 - `bundlerUrl`: `string` - Bundler URL.
@@ -341,13 +341,13 @@ An array containing:
 1. User operation object, which contains:
    - `sender`: `string` - Account making the operation.
    - `callData`: `string` - Data to pass to the sender during the main execution call.
-   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
+   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet onchain
      and needs to be created).
    - `nonce`: `string` - Anti-replay parameter.
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.
@@ -365,7 +365,7 @@ A partial user operation object containing:
 - `callGasLimit`: `string` - (Optional) Amount of gas to allocate to the main execution call.
 - `verificationGasLimit`: `string` - (Optional) Amount of gas to allocate to the verification step.
 - `preVerificationGas`: `string` - (Optional) Amount of gas to compensate the bundler for
-  pre-verification execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+  pre-verification execution, to pay for callData, and to account for overhead that can't be tracked onchain.
 
 #### Example
 
@@ -419,13 +419,13 @@ An array containing:
 1. User operation object, which contains:
    - `sender`: `string` - Account making the operation.
    - `callData`: `string` - Data to pass to the sender during the main execution call.
-   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet on-chain
+   - `initCode`: `string` - Account bytecode (needed if and only if the account is not yet onchain
      and needs to be created).
    - `nonce`: `string` - Anti-replay parameter.
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked on-chain.
+     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.

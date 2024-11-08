@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# bor_getSignersAtHash
+# `bor_getSignersAtHash`
 
 Returns all the signers of the block matching the specified block hash.
 
@@ -32,7 +32,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \

@@ -121,7 +121,7 @@ export default function Hero({
               label="Wallet address"
               disabled={isLoading}
               value={inputValue}
-              placeholder="ex. 0x"
+              placeholder="ex. 0x or ENS"
               onChange={handleOnInputChange}
             />
             {isLimitedUserPlan && (

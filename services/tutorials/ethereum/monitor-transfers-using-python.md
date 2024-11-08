@@ -92,7 +92,7 @@ watch()
 
 ### 6. Check for confirmations
 
-Exchanges often wait until a deposit has reached a certain number of confirmations before processing the new transaction. The number of confirmations is the number of blocks that have passed since the transaction was included on-chain. By checking that a transaction has reached the specified number of confirmations, the exchange can be confident that this transaction is final and they can process the deposit.
+Exchanges often wait until a deposit has reached a certain number of confirmations before processing the new transaction. The number of confirmations is the number of blocks that have passed since the transaction was included onchain. By checking that a transaction has reached the specified number of confirmations, the exchange can be confident that this transaction is final and they can process the deposit.
 
 Create a function to determine the number of confirmations for the transaction:
 

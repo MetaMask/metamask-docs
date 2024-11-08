@@ -11,7 +11,7 @@ This section provides a detailed reference on the Keyring API methods, objects, 
 enable [custom EVM accounts](../../features/custom-evm-accounts/index.md).
 The Keyring API consists of:
 
-- [**Account Management API**](account-management/index.md) – An API for dapps to communicate with
+- [**Account Management API**](account-management/index.md) - An API for dapps to communicate with
   account management Snaps.
   Dapps can manage accounts and signature requests using this API.
 - [**Chain Methods API**](chain-methods.md) - An API that contains chain-specific EVM methods that

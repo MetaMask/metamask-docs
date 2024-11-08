@@ -59,32 +59,28 @@ Instantiate the SDK using any [options](../../../reference/sdk-js-options.md):
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
     name: "JavaScript example dapp",
-    url: window.location.href,
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
   // Other options.
 })
-
-// You can also access via window.ethereum.
-const ethereum = MMSDK.getProvider()
 ```
 
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
-- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+- Use [`headless`](../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
   the displayed modals](../../../how-to/display/custom-modals.md).
 
 ### 4. Use the SDK
 
-Use the SDK by calling any [provider API methods](../../../reference/provider-api.md).
-Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
-[`request()`](../../../reference/provider-api.md#request) first, since it
-prompts the installation or connection popup to appear.
+We recommend calling `connect()` first. You can also call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
+[`request()`](../../../reference/provider-api.md#request) first, which will prompt the installation or connection popup to appear.
 
 ```javascript
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+const accounts = await MMSDK.connect()
+const provider = MMSDK.getProvider()
+provider.request({ method: "eth_accounts", params: [] })
 ```
 
 You can also call the SDK's [`connectAndSign`](../../../how-to/sign-data/connect-and-sign.md) method, and
@@ -106,10 +102,10 @@ const MMSDK = new MetaMaskSDK({
   // Other options.
 })
 
-// You can also access via window.ethereum.
+const accounts = await MMSDK.connect()
+// You can also access the Ethereum provider object but we recommend using the SDK's methods.
 const ethereum = MMSDK.getProvider()
-
-ethereum.request({ method: "eth_requestAccounts", params: [] })
+ethereum.request({ method: "eth_accounts", params: [] })
 ```
 
 See the [example JavaScript dapps](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples)

@@ -188,7 +188,7 @@ This functionality is only available to customers on the Developer tier or highe
 [upgrade your plan](../upgrade-your-plan.md) if you're currently on the free Core tier.
 :::
 
-The **OVERIDE ALLOWLIST** switch lets you overide your allowlist settings when a request includes an
+The **OVERRIDE ALLOWLIST** switch lets you override your allowlist settings when a request includes an
 [API key secret](api-key-secret.md). This means requests will be accepted even if an IP address or
 URL isn't on your allowlist, provided they include both the API key and the API key secret.
 

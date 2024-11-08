@@ -31,7 +31,7 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \

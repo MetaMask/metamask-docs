@@ -26,10 +26,10 @@ Username is the `API_KEY` and password is the `API_KEY_SECRET.` Find your author
 page after you [register your Infura account](https://infura.io/register) and
 [create an API key](../../../../developer-tools/dashboard/get-started/create-api/) that includes the IPFS network.
 
-For example, to authenticate and upload a file to IPFS using cURL, you would use the following command:
+For example, to authenticate and upload a file to IPFS using curl, you would use the following command:
 
 ```bash
 curl -X POST -F file=@myfile -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/add"
 ```
 
-cURL automatically generates the authorization header and encodes your credentials.
+curl automatically generates the authorization header and encodes your credentials.
