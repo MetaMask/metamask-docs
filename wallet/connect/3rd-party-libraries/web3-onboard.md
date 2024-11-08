@@ -47,7 +47,6 @@ example, [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata):
 ```javascript
 const metamaskSDKWallet = metamaskSDK({
   options: {
-    extensionOnly: false,
     dappMetadata: {
       name: "Example Web3-Onboard Dapp",
     },

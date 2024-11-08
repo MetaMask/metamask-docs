@@ -22,18 +22,11 @@ To import, instantiate, and use the SDK, you can insert a script in the head sec
     const MMSDK = new MetaMaskSDK.MetaMaskSDK({
       dappMetadata: {
         name: "Example Pure JS Dapp",
-        url: window.location.href,
       },
       infuraAPIKey: process.env.INFURA_API_KEY,
       // Other options.
     });
-    // Because the init process of MetaMask SDK is async.
-    setTimeout(() => {
-      // You can also access via window.ethereum.
-      const ethereum = MMSDK.getProvider();
-
-      ethereum.request({ method: 'eth_requestAccounts' });
-    }, 0);
+    MMSDK.connect()
   </script>
   ...
 </head>
@@ -45,9 +38,9 @@ You can configure the SDK using any [options](../../../reference/sdk-js-options.
   about your dapp in the MetaMask connection modal.
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
   [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
-- Use [`modals`](../../../reference/sdk-js-options.md#modals) to [customize the logic and UI of
+- Use [`headless`](../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
   the displayed modals](../../../how-to/display/custom-modals.md).
-
+  
 You can call any [provider API methods](../../../reference/provider-api.md) using the SDK.
 Always call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) using
 [`request()`](../../../reference/provider-api.md#request) first, since it prompts the installation

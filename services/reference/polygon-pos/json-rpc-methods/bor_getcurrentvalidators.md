@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# bor_getCurrentValidators
+# `bor_getCurrentValidators`
 
 Returns the current list of validators. The [Bor documentation](https://wiki.polygon.technology/docs/pos/design/bor/overview) contains more information about Polygon Bor architecture and how validators participate in the consensus process.
 
@@ -37,7 +37,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \
