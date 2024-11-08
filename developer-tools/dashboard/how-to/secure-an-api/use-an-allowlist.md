@@ -29,16 +29,17 @@ Add the restriction details in the **ALLOWLISTS** section of your API key's **Se
 #### Allowlist behavior
 
 - If an API key has no allowlists, all requests are accepted.
-- As soon as an API key has an allowlist definition, all requests must pass it.
+- When an API key has an allowlist definition, all requests must pass the definition.
 - Each API key has a maximum of 30 allowlist entries per type.
 - Each allowlist type is "AND"ed together.
 - Multiple entries of the same type are "OR"ed.
 
 ## Contract addresses
 
-If your application only queries data from specific Ethereum smart contracts or addresses, add those addresses to the **CONTRACT ADDRESSES** allowlist.
+If your application only queries data from specific Ethereum smart contracts or addresses, add those
+addresses to the **Contract Addresses** allowlist.
 
-Any requests which query addresses that are not in the allowlist are rejected.
+Any requests which query addresses that aren't in the allowlist are rejected.
 
 The following RPC methods take an Ethereum address parameter and are compatible with this type of allowlisting.
 
@@ -52,7 +53,7 @@ The following RPC methods take an Ethereum address parameter and are compatible 
 
 #### Example request
 
-To allow a specific Ethereum address, click **ADD** and input it into the **CONTRACT ADDRESSES** allowlist.
+To allow a specific Ethereum address, input it into the **Contract Addresses** field and select **Add**.
 
 <div class="left-align-container">
   <div class="img-medium">
@@ -62,7 +63,7 @@ To allow a specific Ethereum address, click **ADD** and input it into the **CONT
   </div>
 </div>
 
-Test with a method from the list.
+You can test using a method that supports this type of allowlisting.
 
 ```bash
 curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -83,7 +84,7 @@ Result:
 
 ## User agents
 
-To limit access to your application to specific user agents, add them to the **USER AGENTS** allowlist.
+To limit access to your application to specific user agents, add them to the **User agents** allowlist.
 
 :::info
 
@@ -95,15 +96,15 @@ When you add a User-Agent to an allowlist, any API requests originating from oth
 
 :::info
 
-The **USER AGENTS** allowlist uses partial string matching. If the allowlisted string is present in the
-request's full User-Agent, it is registered as a match.
+The **User agents** allowlist uses partial string matching, meaning if the string is present in the
+request's full User-Agent, it's registered as a match.
 
 :::
 
 #### Example request
 
-For example, to allow requests from Android phones alone, select **ADD** and input `Android` into
-the **USER AGENTS** allowlist.
+For example, to allow requests from Android phones alone, input `Android` into
+the **User agent** field, and select **Add**.
 
 <div class="left-align-container">
   <div class="img-medium">
@@ -113,7 +114,7 @@ the **USER AGENTS** allowlist.
   </div>
 </div>
 
-Test with a simple call from a desktop terminal.
+Test with a call from a desktop terminal.
 
 ```bash
 curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -136,7 +137,7 @@ Result:
 
 ## Origins
 
-To limit access to your application to specific URLs, add them to the **ORIGINS** allowlist.
+To limit access to your application to specific URLs, add them to the **Origins** allowlist.
 
 :::info
 
@@ -161,25 +162,14 @@ An entry with _only_ a scheme allows requests coming from that scheme alone.
 
 #### Example request
 
-To limit requests to your hosted web3 application, click **ADD** and input `mydapp.example.com` into the **ORIGINS** allowlist.
-
-Any requests that do not include `Origin: mydapp.example.com` are rejected.
+To limit requests to your hosted Web3 application, input `mydapp.example.com` into the **Origins**
+field, and select **Add**. Any requests that don't include `Origin: mydapp.example.com` are rejected.
 
 ## API request method
 
-To limit the methods allowed, add them to the **API REQUEST METHOD** allowlist.
+To limit the methods allowed, select them from the **API request method** drop down.
 
-If the list is not empty, any method calls not specified in the list are rejected.
-
-Use the dropdown list to select a method.
-
-<div class="left-align-container">
-  <div class="img-medium">
-    <img
-      src={require("../../../images/api-request-method.png").default}
-    />
-  </div>
-</div>
+If the list isn't empty, any method calls not specified in the list are rejected.
 
 ## Override your allowlist settings
 
