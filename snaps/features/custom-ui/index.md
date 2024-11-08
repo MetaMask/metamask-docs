@@ -823,15 +823,14 @@ A Snap can link to the following screens using the `metamask:` scheme:
 - `metamask://snap/[Snap ID]/home/` - Leads to the Snap's 
   [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home 
   page. Valid Snap IDs are npm IDs beginning with `npm:`, such as 
-  `metamask://snap/npm:@consensys/starknet-snap/home`.
+  `metamask://snap/npm:@consensys/starknet-snap/home`, or `local:`, such as 
+  `metamask://snap/local:http://localhost:8080/home`. Consider using 
+  [environment variables](../../how-to/use-environment-variables.md) so you can have different 
+  Snap IDs for local testing and production.
 
 :::caution
 MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
 installed. 
-This can make local testing difficult. 
-One way to mitigate this is to publish your Snap to npm, install it to 
-[MetaMask Flask](../../get-started/install-flask.md), and then use the published Snap ID in your 
-local version.
 :::
 
 #### Example
