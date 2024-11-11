@@ -1,95 +1,13 @@
 ---
 title: "linea_getTransactionExclusionStatusV1"
+hide_title: true
+hide_table_of_contents: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
+import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
 
-Checks if a transaction was rejected for exceeding data line limits, preventing the prover from generating
-a proof to be included in a block.
-
-:::warning
-
-You can only check for rejected transactions within seven days of the transaction attempt. Querying
-transactions older than this returns a `null` response.
-
-:::
-
-The API call provides the rejection reason if the transaction fails. 
-It returns `null` if the transaction succeeds.
-
-## Parameters
-
-`transaction hash`: _\[Required]_ A string representing the hash (32 bytes) of a transaction.
-
-## Returns
-
-- `txHash`: The hash of the transaction. 
-- `from`: The address of the sender. 
-- `nonce`: Number of transactions made by the sender. 
-- `txRejectionStage`: The point at which the transaction was rejected. One of:
-    - `SEQUENCER`: Rejected by the sequencer.
-    - `RPC`: Rejected by an RPC node.
-    - `P2P`: Rejected by a P2P-connected node. 
-- `reasonMessage`: The reason the transaction was rejected. 
-- `blockNumber`: The block that the transaction was rejected from, in hexadecimal format.
-    Only returned for transactions rejected by the sequencer. 
-- `timestamp`: Time of rejection, in ISO 8601 format.
-
-## Example
-
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://infura.io/dashboard). 
-
-### Request
-
-<Tabs>
-  <TabItem value="curl">
-
-  ```bash
-  curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": "1", "method": "linea_getTransactionExclusionStatusV1", "params": ["0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7"]}'
-  ```
-  </TabItem>
-  <TabItem value="WSS">
-
-  ```bash
-  wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "linea_getTransactionExclusionStatusV1", "params": ["0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7"], "id": 1}'
-  ```
-
-  </TabItem>
-</Tabs>
-
-### Response
-
-<Tabs>
-    <TabItem value="JSON">
-        ```json
-        {
-          "jsonrpc": "2.0",
-          "id": "1",
-          "result": {
-            "txHash": "0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7",
-            "from": "0x4d144d7b9c96b26361d6ac74dd1d8267edca4fc2",
-            "nonce": "0x64",
-            "txRejectionStage": "SEQUENCER",
-            "reasonMessage": "Transaction line count for module ADD=402 is above the limit 70",
-            "blockNumber": "0x3039",
-            "timestamp": "2024-08-22T09:18:51Z"
-          }
-        }
-        ```
-    </TabItem>
-</Tabs>
-
-The API returns a `null` result if the transaction does not exceed line limits or is older than seven days. 
-In these cases, the database does not contain the transaction. For example:
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": null
-}
-```
+<ParserOpenRPC
+  network={NETWORK_NAMES.linea}
+  method="linea_getTransactionExclusionStatusV1"
+/>
