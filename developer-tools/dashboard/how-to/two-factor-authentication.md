@@ -11,7 +11,7 @@ identity before you can access your accounts.
 
 ## Enable 2FA on your account
 
-To enable 2FA authentication on your account, on the Infura dashboard go to **Settings** -> **Account**, and
+To enable 2FA authentication on your account, on the dashboard go to **Settings** -> **Account**, and
 select **Enable**.
 
 <div class="left-align-container">
@@ -61,7 +61,7 @@ Next time you log in to Infura, you'll be asked for your 2FA token in addition t
 
 ## Disable 2FA on your account
 
-To disable 2FA on your account, on the Infura dashboard go to **Settings** -> **Account**, and select **Disable 2FA**.
+To disable 2FA on your account, on the dashboard go to **Settings** -> **Account**, and select **Disable 2FA**.
 
 <div class="left-align-container">
   <div class="img-medium">

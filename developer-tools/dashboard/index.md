@@ -1,22 +1,23 @@
 ---
 sidebar_label: Introduction
-description: Documentation for using the Infura dashboard
+description: Documentation for using the MetaMask Developer dashboard
 sidebar_position: 1
 ---
 
 import CardList from '@site/src/components/CardList'
 import Banner from '@site/src/components/Banner'
 
-# Infura dashboard documentation
+# Developer dashboard documentation
 
-The Infura dashboard provides developers with a comprehensive overview and control of their blockchain infrastructure. It serves
-as a central hub for managing API keys and access, monitoring usage, and accessing account and billing information.
+The MetaMask Developer dashboard provides developers with a comprehensive overview and control of their
+Infura service. It serves as a central hub for managing API keys and access, monitoring
+usage, and accessing account and billing information.
 
 <Banner>
-Don't have an API key? Sign up for our free plan and start using the Infura service! 
+Don't have an API key? Sign up for our free plan and start using the Infura service!
 </Banner>
 
-Select one of the cards below to learn more about using the Infura dashboard.
+Select one of the cards below to learn more about using the dashboard.
 
 <CardList
   items={[

@@ -54,6 +54,7 @@ The following RPC methods take an Ethereum address parameter and are compatible 
 #### Example request
 
 To allow a specific Ethereum address, input it into the **Contract Addresses** field and select **Add**.
+In the following example we'll use `0xfe05a3e72235c9f92fd9f2282f41a8154`.
 
 <div class="left-align-container">
   <div class="img-medium">
@@ -149,7 +150,7 @@ When you add an origin to an allowlist, any API requests originating from other 
 
 Origin allowlists support wildcard subdomain patterns.
 
-For example, allowlist entry `https://*.example.com` matches `https://your-app.example.com` ,
+For example, allowlist entry `https://*.example.com` matches `https://your-app.example.com`,
 `https://our-app.example.com`, and `https://their-app.example.com`, etc.
 
 The origin scheme (HTTPS in the example above) is optional. However, if you include it, it must match.

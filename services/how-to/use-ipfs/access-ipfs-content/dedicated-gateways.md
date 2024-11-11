@@ -32,7 +32,7 @@ https://<CUSTOM-SUBDOMAIN>.infura-ipfs.io/ipfs/<Content-Identifier>/<optional pa
 
 For example, `https://meme-nft.infura-ipfs.io/ipfs/QmW5sPVbZDueZwvSuibteAwDFwFXhF8gebfptGBx1DZq1j`.
 
-Enter a **UNIQUE SUBDOMAIN NAME** for your dedicated gateway and click **SAVE SUBDOMAIN**.
+Enter a unique subdomain name for your dedicated gateway and click **Save Subdomain**.
 
 <div className="left-align-container">
   <div className="img-large">

@@ -27,7 +27,7 @@ self-upgrade to the Growth plan or contact a sales representative to upgrade to 
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://infura.io/dashboard).
 
 ### Request
 
