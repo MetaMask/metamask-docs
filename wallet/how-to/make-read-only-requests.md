@@ -60,7 +60,7 @@ To use the Infura API to make read-only requests, specify your Infura API key us
 in your dapp.
 
 ```javascript
-infuraAPIKey: "YOUR-API-KEY"
+infuraAPIKey: "<YOUR-API-KEY>"
 ```
 
 ## Use custom nodes
@@ -87,7 +87,7 @@ SDK in your dapp.
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: "YOUR-API-KEY",
+  infuraAPIKey: "<YOUR-API-KEY>",
   readonlyRPCMap: {
     "0x539": "http://localhost:8545",
   },
@@ -110,12 +110,12 @@ The following is an example of using both the Infura API and custom nodes with t
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: "YOUR-API-KEY",
+  infuraAPIKey: "<YOUR-API-KEY>",
   readonlyRPCMap: {
     // Custom node.
     "0x539": "http://localhost:8545",
     // Override Infura Mainnet.
-    "0x1": "https://mainnet.infura.io/v3/YOUR-API-KEY",
+    "0x1": "https://mainnet.infura.io/v3/<YOUR-API-KEY>",
   },
   defaultReadOnlyChainId: "0x1",
   // Other options.
