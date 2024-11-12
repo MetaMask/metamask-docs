@@ -167,14 +167,14 @@ const ProjectsBox = () => {
             {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
               <>
                 <div>
-                  Select Infura account linked with your current wallet.
+                  Select MetaMask Developer account linked with your current wallet.
                 </div>
                 <Button
                   thin
                   className={styles.connectButton}
                   onClick={() => (window.location.href = walletAuthUrl)}
                 >
-                  Select Infura Account
+                  Select MetaMask Developer Account
                 </Button>
               </>
             )}
