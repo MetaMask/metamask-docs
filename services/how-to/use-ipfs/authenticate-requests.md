@@ -29,7 +29,7 @@ page after you [register your Infura account](https://infura.io/register) and
 For example, to authenticate and upload a file to IPFS using curl, you would use the following command:
 
 ```bash
-curl -X POST -F file=@myfile -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/add"
+curl -X POST -F file=@myfile -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/add"
 ```
 
 curl automatically generates the authorization header and encodes your credentials.

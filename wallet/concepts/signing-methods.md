@@ -12,7 +12,7 @@ Learn how to [use the recommended signing methods](../how-to/sign-data/index.md)
 [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 is:
 
-- Cheap to verify on chain.
+- Cheap to verify onchain.
 - Human-readable.
 - Protected against phishing signatures.
 

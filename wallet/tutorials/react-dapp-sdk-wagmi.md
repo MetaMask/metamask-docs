@@ -12,9 +12,8 @@ You'll configure the SDK using [Wagmi](https://wagmi.sh/), a popular third-party
 
 Wagmi offers React hooks that simplify wallet connections, transactions, and network interactions
 for Ethereum developers.
-With the integrated MetaMask SDK, the setup is streamlined, eliminating extra dependencies.
-The Metamask SDK connector in Wagmi allows developers to quickly build dapps that connect to
-MetaMask in React with minimal friction.
+The MetaMask SDK connector in Wagmi streamlines the setup, eliminating extra dependencies and
+allowing developers to quickly build dapps that connect to MetaMask with minimal friction.
 
 ## Scaffolding tools
 
@@ -179,7 +178,7 @@ You'll replace these with the MetaMask connector for the purpose of this tutoria
 
 ### 2. Update the Wagmi configuration
 
-Modify this configuration to target the Linea testnet and use the Metamask connector, which is
+Modify this configuration to target the Linea testnet and use the MetaMask connector, which is
 Wagmi's built-in support for MetaMask SDK:
 
 ```typescript title="wagmi.ts"
@@ -234,7 +233,7 @@ users are experienced with.
 
 :::note
 By default, MetaMask SDK automatically connects to the MetaMask browser extension if it exists.
-It does not show a QR code for linking to Metamask Mobile unless the MetaMask browser extension is
+It does not show a QR code for linking to MetaMask Mobile unless the MetaMask browser extension is
 disabled or does not exist.
 You can change this behavior by setting
 [`extensionOnly`](../reference/sdk-js-options.md#extensiononly) to `false`.

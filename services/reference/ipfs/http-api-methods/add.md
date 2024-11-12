@@ -15,7 +15,7 @@ Add a file or directory to IPFS.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/add?recursive=false&quiet=<value>&quieter=<value>&silent=<value>&progress=<value>&trickle=<value>&only-hash=<value>&wrap-with-directory=<value>&hidden=<value>&chunker=<value>&pin=true&raw-leaves=<value>&nocopy=<value>&fscache=<value>&cid-version=0&hash=sha2-256" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"<file>"
 ```

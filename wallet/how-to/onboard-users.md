@@ -27,7 +27,7 @@ You don't need to set up the onboarding library if you use the SDK.
 
 ## Steps
 
-1. Install [@metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
+1. Install [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding).
 1. Import the library or include it in your page:
 
    ```javascript
