@@ -1,6 +1,5 @@
 ---
-description: Create a simple dapp using `get-starknet` and React TypeScript.
-sidebar_position: 6
+description: Create a simple dapp using get-starknet and React TypeScript.
 ---
 
 import Tabs from "@theme/Tabs";

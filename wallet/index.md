@@ -1,5 +1,5 @@
 ---
-title: Introduction
+description: Integrate your dapp with the MetaMask wallet.
 ---
 
 # Integrate your dapp with the MetaMask wallet

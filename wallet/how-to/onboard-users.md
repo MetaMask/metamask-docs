@@ -1,7 +1,5 @@
 ---
-sidebar_label: Onboard users
 description: Simplify the MetaMask onboarding experience for your users.
-sidebar_position: 10
 ---
 
 import Tabs from "@theme/Tabs";

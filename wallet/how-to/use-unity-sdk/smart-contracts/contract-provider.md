@@ -1,5 +1,4 @@
 ---
-sidebar_position: 4
 description: Learn about the contract provider in Unity.
 tags:
   - Unity SDK

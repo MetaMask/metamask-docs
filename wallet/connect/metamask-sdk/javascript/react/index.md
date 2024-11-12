@@ -1,6 +1,4 @@
 ---
-sidebar_label: React
-sidebar_position: 1
 description: Set up the SDK in your React dapp.
 tags:
   - JavaScript SDK

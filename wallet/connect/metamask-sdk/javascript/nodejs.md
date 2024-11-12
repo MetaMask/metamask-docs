@@ -1,6 +1,4 @@
 ---
-sidebar_label: Node.js
-sidebar_position: 4
 description: Set up the SDK in your Node.js dapp.
 tags:
   - JavaScript SDK

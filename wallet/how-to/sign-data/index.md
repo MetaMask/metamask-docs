@@ -1,6 +1,5 @@
 ---
 description: Sign data using eth_signTypedData_v4 and personal_sign.
-sidebar_position: 3
 ---
 
 # Sign data

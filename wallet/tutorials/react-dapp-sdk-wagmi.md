@@ -1,6 +1,5 @@
 ---
-description: Get up to speed with MetaMask SDK using Wagmi to connect to MetaMask Extension and MetaMask Mobile.
-sidebar_position: 4
+description: Create a React dapp using Wagmi to connect to the MetaMask extension and MetaMask Mobile.
 ---
 
 import Tabs from "@theme/Tabs";
