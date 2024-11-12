@@ -5,7 +5,7 @@ description: eth_getBlockRange API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# eth_getBlockRange
+# `eth_getBlockRange`
 
 Returns the block information for blocks within a specified range.
 

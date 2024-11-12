@@ -234,7 +234,7 @@ npm start
 
 :::warning
 
-If you are using create-react-app version >=5 you may run into issues building, such as:
+If you are using Create React App version >=5 you may run into issues building, such as:
 
 ```
 Module not found: Error: Can't resolve 'crypto' in 'C:\Users\Username\Projects\testProject\client\node_modules\eth-lib\lib'
@@ -243,7 +243,7 @@ BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules 
 This is no longer the case. Verify if you need this module and configure a polyfill for it.
 ```
 
-This is because NodeJS polyfills are not included in the latest version of create-react-app.
+This is because Node.js polyfills are not included in the latest version of Create React App.
 
 [Follow these instructions to resolve the issue](https://github.com/ChainSafe/web3.js#web3-and-create-react-app).
 

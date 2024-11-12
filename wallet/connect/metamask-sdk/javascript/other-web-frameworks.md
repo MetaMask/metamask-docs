@@ -1,6 +1,4 @@
 ---
-sidebar_label: Other web frameworks
-sidebar_position: 3
 description: Set up the SDK in other web frameworks.
 tags:
   - JavaScript SDK

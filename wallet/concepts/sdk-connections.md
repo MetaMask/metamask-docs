@@ -1,6 +1,4 @@
 ---
-sidebar_position: 3
-sidebar_label: SDK connections
 description: Learn about how a dapp with the SDK installed connects to MetaMask.
 tags:
   - JavaScript SDK
@@ -112,7 +110,7 @@ The flow is as follows:
 
 :::note
 For all platforms except Android, the SDK uses a Socket.io server to help establish the encrypted connection.
-The [Android SDK](android.md) uses direct local communication.
+The [Android SDK](android-sdk.md) uses direct local communication.
 :::
 
 ## Connection status

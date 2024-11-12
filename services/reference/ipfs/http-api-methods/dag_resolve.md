@@ -15,7 +15,7 @@ Resolve IPLD block.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/resolve?arg=<key>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
