@@ -91,9 +91,9 @@ Specific types of values passed to and returned from Ethereum RPC methods requir
 A `Quantity` (integer, number) must:
 
 - Be hex-encoded.
-- Be "0x"-prefixed.
+- Be `0x`-prefixed.
 - Be expressed using the fewest possible hex digits per byte.
-- Express zero as "0x0".
+- Express zero as `0x0`.
 
 Examples `Quantity` values:
 
@@ -132,7 +132,7 @@ Since there is no way to clearly distinguish between a `Data` parameter and a `Q
 A `Data` value (for example, byte arrays, account addresses, hashes, and bytecode arrays) must:
 
 - Be hex-encoded.
-- Be "0x"-prefixed.
+- Be `0x`-prefixed.
 - Be expressed using two hex digits per byte.
 
 Examples `Data` values:

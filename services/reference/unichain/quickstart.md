@@ -10,7 +10,7 @@ import Banner from '@site/src/components/Banner'
 This quickstart guide will help you set up and make calls on the Unichain network using the Infura endpoints.
 
 <Banner>
-Don't have an Infura account? Sign up for our free plan and start using the Unichain network!
+Don't have an Infura account? Sign up for a free plan and start using the Unichain network!
 </Banner>
 
 ## Prerequisites
@@ -40,7 +40,7 @@ In Windows Powershell, quotations in `curl` commands can behave differently than
 
 Call the JSON-RPC methods using [Postman](https://learning.postman.com/docs/getting-started/introduction/).
 
-Click **Run in Postman** to fork the collection and make requests.
+Select **Run in Postman** to fork the collection and make requests.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/8171681-49bfbc10-85ae-466c-8cf0-91eba9298b12?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D8171681-49bfbc10-85ae-466c-8cf0-91eba9298b12%26entityType%3Dcollection%26workspaceId%3Db8156083-f4da-481f-84fa-72dcc26cb146)
 

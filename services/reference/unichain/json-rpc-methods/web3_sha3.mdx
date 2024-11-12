@@ -5,10 +5,7 @@ title: "web3_sha3"
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
-
-### `web3_sha3`
-
-Returns a [SHA3](https://en.wikipedia.org/wiki/SHA-3) hash of the specified data. The result value is a [Keccak-256](https://keccak.team/keccak.html) hash, not the standardized SHA3-256.
+Returns a [SHA-3](https://en.wikipedia.org/wiki/SHA-3) hash of the specified data. The result value is a [Keccak-256](https://keccak.team/keccak.html) hash, not the standardized SHA3-256.
 
 ## Parameters
 
@@ -32,9 +29,9 @@ import Example from "/services/reference/_partials/_web3_clientversion-example.m
 
 ```bash
 curl https://unichain-sepolia.infura.io/v3/YOUR-API-KEY \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "method": "web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
 ```
 
 </TabItem>
