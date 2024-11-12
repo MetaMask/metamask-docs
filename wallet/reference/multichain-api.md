@@ -311,7 +311,7 @@ changes to a session.
 
 ### `wallet_notify`
 
-Notifies the dapp of events or state changes related to a specific, previously-authorized network.
+Notifies the dapp of events or state changes related to a specific, previously authorized network.
 This event is defined in [CAIP-319](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-319.md).
 
 :::note
