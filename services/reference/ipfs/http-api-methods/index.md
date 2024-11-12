@@ -65,7 +65,7 @@ Status code `500` means that the requested RPC function _does_ exist, but IPFS w
 
 Streaming endpoints fail as above, unless they have started streaming. That means they will have sent a `200` status code already. If an error happens during the stream, it will be included in a `Trailer` response header (some endpoints may additionally include an error in the last streamed object).
 
-A `405`error may mean that you are using the wrong HTTP method (i.e. GET instead of POST), or that you aren't allowed to call that method (i.e. due to CORS restrictions when making a request from a browser).
+A `405` error might mean that you are using the wrong HTTP method (for example, GET instead of POST), or that you are not allowed to call that method (for example, due to CORS restrictions when making a request from a browser).
 
 ## NDJSON responses
 

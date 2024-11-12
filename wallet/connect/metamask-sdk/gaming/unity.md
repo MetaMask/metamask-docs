@@ -127,7 +127,7 @@ instance:
 MetaMaskUnity.Instance.Connect();
 ```
 
-There are a variety of sample buttons included inside the package that call this method when clicked.
+The SDK includes a variety of sample buttons that call this method when selected.
 These are provided as a convenience to get started quickly with your project.
 Once the connection request is made, a QR code is generated, and based on the transport you're using
 (`Unity UI` by default), either a new Canvas that contains the QR code is spawned or the
@@ -211,7 +211,7 @@ To update the SDK to the latest version available on the Unity Asset Store:
 Alternatively, you can delete the existing MetaMask folder in your project and re-import it from the
 Package Manager or Asset Store.
 
-## FAQS
+## FAQs
 
 <details>
 
@@ -250,7 +250,7 @@ libraries to facilitate deeplinking and the persistent socket connection.
 
 <details>
 
-<summary>Does the SDK increase my compilation time?</summary>
+<summary>Does the SDK increase compilation time?</summary>
 
 No.
 If you notice an increased compilation time, it might be related to the ILL2CP pipeline, which can

@@ -270,6 +270,11 @@ const sidebar = {
                 },
                 {
                   type: "doc",
+                  label: "Create a simple Starknet dapp",
+                  id: "how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp"
+                },
+                {
+                  type: "doc",
                   label: "Troubleshoot",
                   id: "how-to/use-non-evm-networks/starknet/troubleshoot"
                 },
@@ -422,6 +427,11 @@ const sidebar = {
           type: "doc",
           label: "Create a simple dapp",
           id: "tutorials/javascript-dapp-simple",
+        },
+        {
+          type: "doc",
+          label: "Create a dapp with the SDK and Wagmi",
+          id: "tutorials/react-dapp-sdk-wagmi",
         },
       ],
     },
