@@ -14,7 +14,7 @@ Infura service. It serves as a central hub for managing API keys and access, mon
 usage, and accessing account and billing information.
 
 <Banner>
-Don't have an API key? Sign up for our free plan and start using the Infura service!
+Don't have an API key? Sign up for a free plan and start using the Infura service!
 </Banner>
 
 Select one of the cards below to learn more about using the dashboard.

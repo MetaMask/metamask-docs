@@ -89,7 +89,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
     :::
 
-1. Enter the public key a name.
+1. Give the public key a name.
 
 1. Paste the public key into the **JWT Public Key** input box. It looks something like this:
 
@@ -105,7 +105,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
     -----END PUBLIC KEY-----
     ```
 
-1. Click **Add** to add the key to the settings.
+1. Select **Add** to add the key to the settings.
 
 1. The key has a **Name**, **ID**, **Fingerprint**. These are used for creating and verifying JWTs.
     You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
