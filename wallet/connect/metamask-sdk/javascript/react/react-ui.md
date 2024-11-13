@@ -84,9 +84,9 @@ Important options include:
 - [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
-  [make read-only RPC requests](../../../../how-to/make-read-only-requests.md) from your dapp.
+  [make read-only RPC requests](../../../../how-to/javascript/make-read-only-requests.md) from your dapp.
 - Use [`headless`](../../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
-  the displayed modals](../../../../how-to/display/custom-modals.md).
+  the displayed modals](../../../../how-to/javascript/display/custom-modals.md).
 
 ### 4. Use the SDK
 

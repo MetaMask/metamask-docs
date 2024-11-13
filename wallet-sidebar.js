@@ -143,221 +143,283 @@ const sidebar = {
       link: { type: "generated-index", slug: "/how-to" },
       items: [
         {
-          type: "doc",
-          label: "Access a user's accounts",
-          id: "how-to/access-accounts"
-        },
-        {
           type: "category",
-          label: "Manage networks",
+          label: "JavaScript",
           collapsible: true,
           collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/manage-networks" },
+          link: { type: "generated-index", slug: "/how-to/javascript" },
           items: [
             {
               type: "doc",
-              label: "Detect a user's network",
-              id: "how-to/manage-networks/detect-network"
-            },
-            {
-              type: "doc",
-              label: "Add a network",
-              id: "how-to/manage-networks/add-network"
-            }
-          ]
-        },
-        {
-          type: "category",
-          label: "Sign data",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "doc", id: "how-to/sign-data/index" },
-          items: [
-            {
-              type: "doc",
-              label: "Connect and sign",
-              id: "how-to/sign-data/connect-and-sign"
-            },
-            {
-              type: "doc",
-              label: "Sign in with Ethereum",
-              id: "how-to/sign-data/siwe"
-            }
-          ]
-        },
-        {
-          type: "doc",
-          label: "Send transactions",
-          id: "how-to/send-transactions"
-        },
-        {
-          type: "doc",
-          label: "Make read-only requests",
-          id: "how-to/make-read-only-requests"
-        },
-        {
-          type: "doc",
-          label: "Batch JSON-RPC requests",
-          id: "how-to/batch-json-rpc-requests"
-        },
-        {
-          type: "category",
-          label: "Display in MetaMask",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/display" },
-          items: [
-            {
-              type: "doc",
-              label: "Display tokens",
-              id: "how-to/display/tokens"
-            },
-            {
-              type: "doc",
-              label: "Display a contract's method names",
-              id: "how-to/display/method-names"
-            },
-            {
-              type: "doc",
-              label: "Display a dapp icon",
-              id: "how-to/display/icon"
-            },
-            {
-              type: "doc",
-              label: "Display custom modals",
-              id: "how-to/display/custom-modals"
-            }
-          ]
-        },
-        {
-          type: "doc",
-          label: "Manage permissions",
-          id: "how-to/manage-permissions"
-        },
-        {
-          type: "category",
-          label: "Use non-EVM networks",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "doc", id: "how-to/use-non-evm-networks/index" },
-          items: [
-            {
-              type: "category",
-              label: "Use Starknet",
-              link: { type: "doc", id: "how-to/use-non-evm-networks/starknet/index" },
-              items: [
-                {
-                  type: "doc",
-                  label: "Connect to Starknet",
-                  id: "how-to/use-non-evm-networks/starknet/connect-to-starknet"
-                },
-                {
-                  type: "doc",
-                  label: "Manage Starknet accounts",
-                  id: "how-to/use-non-evm-networks/starknet/manage-starknet-accounts"
-                },
-                {
-                  type: "doc",
-                  label: "Manage Starknet networks",
-                  id: "how-to/use-non-evm-networks/starknet/manage-starknet-networks"
-                },
-                {
-                  type: "doc",
-                  label: "Send Starknet transactions",
-                  id: "how-to/use-non-evm-networks/starknet/send-starknet-transactions"
-                },
-                {
-                  type: "doc",
-                  label: "Sign Starknet transactions",
-                  id: "how-to/use-non-evm-networks/starknet/sign-starknet-data"
-                },
-                {
-                  type: "doc",
-                  label: "Create a simple Starknet dapp",
-                  id: "how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp"
-                },
-                {
-                  type: "doc",
-                  label: "Troubleshoot",
-                  id: "how-to/use-non-evm-networks/starknet/troubleshoot"
-                },
-                {
-                  type: "doc",
-                  label: "About get-starknet",
-                  id: "how-to/use-non-evm-networks/starknet/about-get-starknet"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: "category",
-          label: "Use the Unity SDK",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "doc", id: "how-to/use-unity-sdk/index" },
-          items: [
-            {
-              type: "doc",
-              label: "Connect and sign",
-              id: "how-to/use-unity-sdk/connect-and-sign"
-            },
-            {
-              type: "doc",
-              label: "Set up Infura",
-              id: "how-to/use-unity-sdk/infura"
+              label: "Access a user's accounts",
+              id: "how-to/javascript/access-accounts"
             },
             {
               type: "category",
-              label: "Interact with smart contracts",
+              label: "Manage networks",
               collapsible: true,
               collapsed: true,
-              link: { type: "doc", id: "how-to/use-unity-sdk/smart-contracts/index" },
+              link: { type: "generated-index", slug: "/how-to/javascript/manage-networks" },
               items: [
                 {
                   type: "doc",
-                  label: "Contract interface",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-interface"
+                  label: "Detect a user's network",
+                  id: "how-to/javascript/manage-networks/detect-network"
                 },
                 {
                   type: "doc",
-                  label: "Contract factory",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-factory"
+                  label: "Add a network",
+                  id: "how-to/javascript/manage-networks/add-network"
+                }
+              ]
+            },
+            {
+              type: "category",
+              label: "Sign data",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "doc", id: "how-to/javascript/sign-data/index" },
+              items: [
+                {
+                  type: "doc",
+                  label: "Connect and sign",
+                  id: "how-to/javascript/sign-data/connect-and-sign"
                 },
                 {
                   type: "doc",
-                  label: "Contract proxy class",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-proxy-class"
-                },
-                {
-                  type: "doc",
-                  label: "Contract provider",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-provider"
+                  label: "Sign in with Ethereum",
+                  id: "how-to/javascript/sign-data/siwe"
                 }
               ]
             },
             {
               type: "doc",
-              label: "Enable human-readable addresses",
-              id: "how-to/use-unity-sdk/dweb"
-            }
+              label: "Send transactions",
+              id: "how-to/javascript/send-transactions"
+            },
+            {
+              type: "doc",
+              label: "Make read-only requests",
+              id: "how-to/javascript/make-read-only-requests"
+            },
+            {
+              type: "doc",
+              label: "Batch JSON-RPC requests",
+              id: "how-to/javascript/batch-json-rpc-requests"
+            },
+            {
+              type: "category",
+              label: "Display in MetaMask",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "generated-index", slug: "/how-to/javascript/display" },
+              items: [
+                {
+                  type: "doc",
+                  label: "Display tokens",
+                  id: "how-to/javascript/display/tokens"
+                },
+                {
+                  type: "doc",
+                  label: "Display a contract's method names",
+                  id: "how-to/javascript/display/method-names"
+                },
+                {
+                  type: "doc",
+                  label: "Display a dapp icon",
+                  id: "how-to/javascript/display/icon"
+                },
+                {
+                  type: "doc",
+                  label: "Display custom modals",
+                  id: "how-to/javascript/display/custom-modals"
+                }
+              ]
+            },
+            {
+              type: "doc",
+              label: "Manage permissions",
+              id: "how-to/javascript/manage-permissions"
+            },
+            {
+              type: "category",
+              label: "Use non-EVM networks",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "doc", id: "how-to/javascript/use-non-evm-networks/index" },
+              items: [
+                {
+                  type: "category",
+                  label: "Use Starknet",
+                  collapsible: true,
+                  collapsed: true,
+                  link: { type: "doc", id: "how-to/javascript/use-non-evm-networks/starknet/index" },
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Connect to Starknet",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/connect-to-starknet"
+                    },
+                    {
+                      type: "doc",
+                      label: "Manage Starknet accounts",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/manage-starknet-accounts"
+                    },
+                    {
+                      type: "doc",
+                      label: "Manage Starknet networks",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/manage-starknet-networks"
+                    },
+                    {
+                      type: "doc",
+                      label: "Send Starknet transactions",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/send-starknet-transactions"
+                    },
+                    {
+                      type: "doc",
+                      label: "Sign Starknet transactions",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/sign-starknet-data"
+                    },
+                    {
+                      type: "doc",
+                      label: "Create a simple Starknet dapp",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/create-a-simple-starknet-dapp"
+                    },
+                    {
+                      type: "doc",
+                      label: "Troubleshoot",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/troubleshoot"
+                    },
+                    {
+                      type: "doc",
+                      label: "About get-starknet",
+                      id: "how-to/javascript/use-non-evm-networks/starknet/about-get-starknet"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: "doc",
+              label: "Onboard users",
+              id: "how-to/javascript/onboard-users"
+            },
+            {
+              type: "doc",
+              label: "Run a development network",
+              id: "how-to/javascript/run-devnet"
+            },
+            {
+              type: "doc",
+              label: "Secure your dapp",
+              id: "how-to/javascript/secure-dapp"
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Mobile",
+          collapsible: true,
+          collapsed: true,
+          link: { type: "generated-index", slug: "/how-to/mobile" },
+          items: [
+            {
+              type: "category",
+              label: "iOS",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "generated-index", slug: "/how-to/mobile/ios" },
+              items: [
+                {
+                  type: "doc",
+                  label: "Connect and sign",
+                  id: "how-to/mobile/ios/connect-and-sign"
+                },
+              ]
+            },
+            {
+              type: "category",
+              label: "Android",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "generated-index", slug: "/how-to/mobile/android" },
+              items: [
+                {
+                  type: "doc",
+                  label: "Batch JSON-RPC requests",
+                  id: "how-to/mobile/android/batch-json-rpc-requests"
+                },
+                {
+                  type: "doc",
+                  label: "Connect and sign",
+                  id: "how-to/mobile/android/connect-and-sign"
+                }
+              ]
+            },
           ]
         },
         {
-          type: "doc",
-          label: "Onboard users",
-          id: "how-to/onboard-users"
+          type: "category",
+          label: "Gaming",
+          collapsible: true,
+          collapsed: true,
+          link: { type: "generated-index", slug: "/how-to/gaming" },
+          items: [
+            {
+              type: "category",
+              label: "Unity",
+              collapsible: true,
+              collapsed: true,
+              link: { type: "doc", id: "how-to/gaming/unity/index" },
+              items: [
+                {
+                  type: "doc",
+                  label: "Connect and sign",
+                  id: "how-to/gaming/unity/connect-and-sign"
+                },
+                {
+                  type: "doc",
+                  label: "Set up Infura",
+                  id: "how-to/gaming/unity/infura"
+                },
+                {
+                  type: "category",
+                  label: "Interact with smart contracts",
+                  collapsible: true,
+                  collapsed: true,
+                  link: { type: "doc", id: "how-to/gaming/unity/smart-contracts/index" },
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Contract interface",
+                      id: "how-to/gaming/unity/smart-contracts/contract-interface"
+                    },
+                    {
+                      type: "doc",
+                      label: "Contract factory",
+                      id: "how-to/gaming/unity/smart-contracts/contract-factory"
+                    },
+                    {
+                      type: "doc",
+                      label: "Contract proxy class",
+                      id: "how-to/gaming/unity/smart-contracts/contract-proxy-class"
+                    },
+                    {
+                      type: "doc",
+                      label: "Contract provider",
+                      id: "how-to/gaming/unity/smart-contracts/contract-provider"
+                    }
+                  ]
+                },
+                {
+                  type: "doc",
+                  label: "Enable human-readable addresses",
+                  id: "how-to/gaming/unity/dweb"
+                },
+              ],
+            },
+          ],
         },
-        {
-          type: "doc",
-          label: "Run a development network",
-          id: "how-to/run-devnet"
-        },
-        {
-          type: "doc",
-          label: "Secure your dapp",
-          id: "how-to/secure-dapp"
-        }
       ],
     },
     {
@@ -431,11 +493,6 @@ const sidebar = {
           label: "Create a simple dapp",
           id: "tutorials/javascript-dapp-simple",
         },
-        {
-          type: "doc",
-          label: "Create a dapp with the SDK and Wagmi",
-          id: "tutorials/react-dapp-sdk-wagmi",
-        },
       ],
     },
     {
@@ -458,8 +515,8 @@ const sidebar = {
         {
           type: "category",
           label: "Non-EVM APIs",
-          collapsible: true,
           collapsed: true,
+          collapsible: true,
           link: {
             type: "generated-index",
             slug: "/reference/non-evm-apis",

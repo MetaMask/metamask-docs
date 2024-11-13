@@ -20,7 +20,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## October 2024
 
-- Documented support for [non-EVM networks](/wallet/how-to/use-non-evm-networks), starting with [Starknet](/wallet/how-to/use-non-evm-networks/starknet).
+- Documented support for [non-EVM networks](/wallet/how-to/javascript/use-non-evm-networks),
+  starting with [Starknet](/wallet/how-to/javascript/use-non-evm-networks/starknet).
   ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))

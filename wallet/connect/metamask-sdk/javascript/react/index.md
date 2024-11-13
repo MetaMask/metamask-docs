@@ -82,9 +82,9 @@ Important options include:
 - [`dappMetadata`](../../../../reference/sdk-js-options.md#dappmetadata) - Use this to display information
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
-  [make read-only RPC requests](../../../../how-to/make-read-only-requests.md) from your dapp.
+  [make read-only RPC requests](../../../../how-to/javascript/make-read-only-requests.md) from your dapp.
 - Use [`headless`](../../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
-  the displayed modals](../../../../how-to/display/custom-modals.md).
+  the displayed modals](../../../../how-to/javascript/display/custom-modals.md).
 
 ### 4. Use the SDK
 
@@ -142,7 +142,7 @@ export const App = () => {
 
 The `connect` method initiates a connection to MetaMask and returns an array of connected accounts.
 
-You can also [use the `connectAndSign` method](../../../../how-to/sign-data/connect-and-sign.md) to
+You can also [use the `connectAndSign` method](../../../../how-to/javascript/sign-data/connect-and-sign.md) to
 connect to MetaMask and sign data in a single interaction:
 
 ```js
@@ -158,7 +158,7 @@ const connectAndSign = async () => {
 }
 ```
 
-You can also [batch multiple JSON-RPC requests](../../../../how-to/batch-json-rpc-requests.md) using the
+You can also [batch multiple JSON-RPC requests](../../../../how-to/javascript/batch-json-rpc-requests.md) using the
 `metamask_batch` method.
 
 ## Example

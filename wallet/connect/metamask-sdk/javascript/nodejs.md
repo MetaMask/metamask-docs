@@ -51,7 +51,7 @@ const MMSDK = new MetaMaskSDK({
 - Use [`dappMetadata`](../../../reference/sdk-js-options.md#dappmetadata) to display information
   about your dapp in the MetaMask connection modal.
 - Use [`infuraAPIKey`](../../../reference/sdk-js-options.md#infuraapikey) to
-  [make read-only RPC requests](../../../how-to/make-read-only-requests.md) from your dapp.
+  [make read-only RPC requests](../../../how-to/javascript/make-read-only-requests.md) from your dapp.
 
 ### 4. Use the SDK
 
@@ -69,8 +69,8 @@ const provider = MMSDK.getProvider()
 provider.request({ method: "eth_requestAccounts", params: [] })
 ```
 
-You can also call the SDK's [`connectAndSign`](../../../how-to/sign-data/connect-and-sign.md) method, and
-[batch multiple JSON-RPC requests](../../../how-to/batch-json-rpc-requests.md) using the `metamask_batch` method.
+You can also call the SDK's [`connectAndSign`](../../../how-to/javascript/sign-data/connect-and-sign.md) method, and
+[batch multiple JSON-RPC requests](../../../how-to/javascript/batch-json-rpc-requests.md) using the `metamask_batch` method.
 
 ## Example
 

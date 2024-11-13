@@ -142,7 +142,7 @@ defaultReadOnlyChainId: "0x1"
 </TabItem>
 </Tabs>
 
-Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) to
+Enables sending [read-only RPC requests](../how-to/javascript/make-read-only-requests.md) to
 this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
@@ -211,7 +211,7 @@ infuraAPIKey: process.env.INFURA_API_KEY
 
 The [Infura API key](/developer-tools/dashboard/get-started/create-api) to
 use for RPC requests.
-Configure this option to [make read-only RPC requests from your dapp](../how-to/make-read-only-requests.md).
+Configure this option to [make read-only RPC requests from your dapp](../how-to/javascript/make-read-only-requests.md).
 
 :::caution important
 Use [Infura allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
@@ -240,7 +240,7 @@ headless: true
 </Tabs>
 
 Enables or disables headless mode.
-Setting this to `true` allows you to [display custom modals](../how-to/display/custom-modals.md).
+Setting this to `true` allows you to [display custom modals](../how-to/javascript/display/custom-modals.md).
 The default is `false`.
 
 ### `openDeeplink`
@@ -289,7 +289,7 @@ readonlyRPCMap: {
 </TabItem>
 </Tabs>
 
-A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
+A map of RPC URLs to use for [read-only RPC requests](../how-to/javascript/make-read-only-requests.md).
 
 ### `shouldShimWeb3`
 
