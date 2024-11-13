@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 description: Use Infura and custom nodes to make direct, read-only requests in your JavaScript dapp.
 tags:
   - JavaScript SDK

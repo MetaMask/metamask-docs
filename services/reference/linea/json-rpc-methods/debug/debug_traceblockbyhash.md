@@ -5,7 +5,7 @@ description: debug_traceBlockByHash API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlockByHash
+# `debug_traceBlockByHash`
 
 Returns tracing results by executing all transactions in the block specified by the block hash.
 
