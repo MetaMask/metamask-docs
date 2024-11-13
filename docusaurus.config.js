@@ -35,9 +35,10 @@ const config = {
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     VERCEL_ENV: process.env.VERCEL_ENV,
-    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
+    DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
+    LINEA_ENS_URL: process.env.LINEA_ENS_URL,
   },
 
   trailingSlash: true,
@@ -194,7 +195,7 @@ const config = {
             label: "Developer tools",
             items: [
               {
-                label: "Infura dashboard",
+                label: "Developer dashboard",
                 to: "developer-tools/dashboard",
               },
               {

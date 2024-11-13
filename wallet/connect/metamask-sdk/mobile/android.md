@@ -1,6 +1,4 @@
 ---
-sidebar_label: Android
-sidebar_position: 2
 toc_max_heading_level: 4
 description: Set up the SDK in your Android dapp.
 tags:

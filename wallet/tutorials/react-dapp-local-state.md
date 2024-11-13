@@ -1,6 +1,5 @@
 ---
 description: Create a single component React dapp with local state using EIP-6963.
-sidebar_position: 1
 ---
 
 # Create a React dapp with local state

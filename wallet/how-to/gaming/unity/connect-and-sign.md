@@ -1,6 +1,4 @@
 ---
-sidebar_position: 1
-sidebar_label: Connect and sign
 tags:
   - Unity SDK
 ---
@@ -33,10 +31,10 @@ You can [connect and sign](../../javascript/sign-data/connect-and-sign.md) in a 
    Replace the test message with any string message you want to sign.
 
    :::caution important
-   Make sure you initialize [`MetaMaskUnity.Instance`](../../../../reference/sdk-unity-api.md#instance)
+   Make sure you initialize [`MetaMaskUnity.Instance`](../../reference/sdk-unity-api.md#instance)
    before using this function.
    To do so, enable **Initialize On Awake** in the **MetaMask Unity** script inspector, or run
-   [`MetaMask.Instance.Initialize()`](../../../../reference/sdk-unity-api.md#initialize).
+   [`MetaMask.Instance.Initialize()`](../../reference/sdk-unity-api.md#initialize).
    :::
 
 3. Call the `ConnectAndSign` function whenever you want to establish a connection and sign a message.

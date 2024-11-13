@@ -1,6 +1,4 @@
 ---
-sidebar_position: 4
-sidebar_label: Enable human-readable addresses
 description: Integrate Decentraweb into your Unity game to enable human-readable addresses.
 tags:
   - Unity SDK

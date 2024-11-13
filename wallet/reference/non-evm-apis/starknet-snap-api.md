@@ -1,6 +1,5 @@
 ---
 description: See the Starknet Snap API reference.
-sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
@@ -283,7 +282,7 @@ Gets the estimated gas fee for calling a method on any contract.
   to estimate the fee for.
   Each invocation represents a contract call.
 - `chainId`: `string` - The chain ID of the target Starknet network.
-  If not provided, the default is the Starknet Goerli testnet.
+  If not provided, the default is the Starknet Sepolia testnet.
 - `details`: `object` - (Optional) The [universal details](https://starknetjs.com/docs/API/interfaces/types.EstimateFeeDetails)
   associated with the invocations, such as nonce and version.
 

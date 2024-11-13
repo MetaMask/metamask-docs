@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Enable API request forwarding
 
 For JSON-RPC methods, you can request failover protection by adding the failover header to
-your API request using `cURL`, `Web3.js`, `Ethers.js`, or any other language of your choice.
+your API request using curl, Web3.js, Ethers.js, or any other language of your choice.
 
 For more information about this feature, including our partner and their privacy information,
 see [Failover protection](../concepts/failover-protection.md).
@@ -25,7 +25,7 @@ Failover support is available on Mainnet only.
 In the code tabs, the `eth_blockNumber` method is used as an example.
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://<network>.infura.io/v3/<YOUR-API-KEY> \

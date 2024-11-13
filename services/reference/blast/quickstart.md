@@ -19,7 +19,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 
 ## Make calls
 
-### cURL
+### curl
 
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
@@ -32,7 +32,7 @@ curl https://blast-mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 ### Node (JavaScript)
 
-In these examples, you'll use [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
 
 #### Node Fetch
 
@@ -194,7 +194,7 @@ Now that you have successfully made a call to the Blast network, you can explore
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Keep an eye on your usage on the [Infura dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to
+- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to
   ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the

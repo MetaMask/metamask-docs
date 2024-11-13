@@ -4,7 +4,7 @@ description: debug_traceBlockByNumber API method
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# debug_traceBlockByNumber
+# `debug_traceBlockByNumber`
 
 Returns tracing results by executing all transactions in the specified block number.
 
@@ -34,7 +34,7 @@ Depending on the specified tracer type, returns a [`callTracer`](../debug/index.
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \

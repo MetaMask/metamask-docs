@@ -21,7 +21,7 @@ env:
 
 jobs:
   lint:
-    name: Lint Code Base, Spelling, Link Check
+    name: Lint Code Base
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,8 +30,19 @@ jobs:
 
       - name: Lint
         uses: ConsenSys/docs-gha/lint@cc8b9d9065f5f20b105954f8e806f55c1e235ecd
+
+  spelling:
+    name: Spelling
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file-extensions: [".md", ".mdx"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vale
+        uses: Consensys/docs-gha/spelling@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILEPATHS: "snaps,services,wallet,developer-tools,docs"
 
   linkCheck:
     name: Link Checking

@@ -1,6 +1,4 @@
 ---
-sidebar_label: React
-sidebar_position: 1
 description: Set up the SDK in your React dapp.
 tags:
   - JavaScript SDK
@@ -15,10 +13,9 @@ Import MetaMask SDK into your React dapp to enable your users to
 easily connect to the MetaMask browser extension and MetaMask Mobile.
 The SDK for React has the [same prerequisites](../index.md#prerequisites) as for standard JavaScript.
 
-:::info React UI
+:::info MetaMask SDK + Wagmi
 This page provides instructions for using the standard `@metamask/sdk-react` package.
-Alternatively, you can use the [`@metamask/sdk-react-ui`](react-ui.md) package to easily use
-[wagmi](https://wagmi.sh/) hooks and a pre-styled UI button component for connecting to MetaMask.
+Alternatively, you can use [wagmi](https://wagmi.sh/) hooks and follow our tutorial on setting up MetaMask SDK using Create Wagmi or our Consensys Create Web3 CLI to scaffold a project that comes configured with Viem, Wagmi and MetaMask SDK.
 :::
 
 ## Steps
@@ -63,7 +60,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MetaMaskProvider
-      debug={false}
       sdkOptions={{
         dappMetadata: {
           name: "Example React Dapp",
@@ -79,7 +75,6 @@ root.render(
 );
 ```
 
-When initializing `MetaMaskProvider`, set `debug` to `true` to activate debug mode.
 For the full list of options you can set for `sdkOptions`, see the
 [JavaScript SDK options reference](../../../../reference/sdk-js-options.md).
 Important options include:
@@ -88,7 +83,7 @@ Important options include:
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
   [make read-only RPC requests](../../../../how-to/javascript/make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
+- Use [`headless`](../../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
   the displayed modals](../../../../how-to/javascript/display/custom-modals.md).
 
 ### 4. Use the SDK

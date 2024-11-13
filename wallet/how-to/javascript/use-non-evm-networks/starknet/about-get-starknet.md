@@ -1,6 +1,5 @@
 ---
-description: Learn about how `get-starknet` interacts with MetaMask.
-sidebar_position: 8
+description: Learn about how get-starknet interacts with MetaMask.
 ---
 
 # About `get-starknet`

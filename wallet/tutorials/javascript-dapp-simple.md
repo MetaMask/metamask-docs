@@ -1,6 +1,5 @@
 ---
 description: Create a simple dapp to integrate with MetaMask.
-sidebar_position: 3
 ---
 
 # Create a simple dapp
@@ -10,7 +9,7 @@ It demonstrates the basics of connecting to MetaMask: detecting the MetaMask pro
 
 :::caution Learning tutorial
 This tutorial is for educational purposes and connects to MetaMask using the legacy provider object, `window.ethereum`, for the sake of simplicity.
-For deployment in a production environment, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md) instead.
+For deployment in a production environment, we recommend [connecting to MetaMask using EIP-6963](../connect/index.md) instead.
 
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection mechanism to the `window.ethereum` provider, and enables dapps to support [wallet interoperability](../concepts/wallet-interoperability.md).
 
@@ -87,7 +86,7 @@ Update `index.html` to include the script:
 
 :::caution
 The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes.
-In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect/index.md).
+In production environments, we recommend [connecting to MetaMask using EIP-6963](../connect/index.md).
 :::
 
 Install the `@metamask/detect-provider` module in your project directory:
@@ -150,7 +149,7 @@ function handleChainChanged(chainId) {
 ### 5. Access a user's accounts
 
 To interact with Ethereum on the user's behalf, such as sending transactions or requesting balances,
-your dapp needs to [access the user's accounts](../how-to/connect/access-accounts.md) by calling
+your dapp needs to [access the user's accounts](../how-to/access-accounts.md) by calling
 [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 
 Add the following code to `src/detect.js`, which creates a button to allow users to connect to

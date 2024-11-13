@@ -1,6 +1,5 @@
 ---
 description: Configure and connect to a Ganache development network.
-sidebar_position: 11
 ---
 
 # Run a development network
@@ -14,7 +13,7 @@ When using a local development blockchain such as Hardhat Network or
 transactions on MetaMask.
 :::
 
-## Connect to Hardhat Network
+## Connect to Hardhat
 
 Follow these steps to connect MetaMask to Hardhat Network.
 

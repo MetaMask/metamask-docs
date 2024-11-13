@@ -5,7 +5,7 @@ description: debug_traceBlock API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlock
+# `debug_traceBlock`
 
 Returns full trace of all invoked opcodes of all transactions included in the block.
 
@@ -26,12 +26,12 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \

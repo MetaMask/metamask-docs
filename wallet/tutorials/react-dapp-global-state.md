@@ -1,7 +1,6 @@
 ---
 description: Create a multi-component React dapp with global state using EIP-6963.
 toc_max_heading_level: 4
-sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
@@ -512,7 +511,7 @@ By memoizing it with `useCallback`, React keeps the function instance consistent
 long as its dependencies (wallets and `selectedWalletRdns`) haven't changed, preventing unnecessary
 re-renders of child components.
 
-Although `useCallback` is not strictly necessary, it demonstrates best practices.
+Although `useCallback` is not necessary, it demonstrates best practices.
 Predicting how a context provider will be used or how the dapp might change or scale is difficult.
 Using `useCallback` can improve performance in some cases by reducing unnecessary re-renders.
 
@@ -807,7 +806,7 @@ You can conduct user tests to evaluate the functionality and features demonstrat
    reverting to **No Wallet Selected**.
 3. Select a wallet, disable it, refresh the page, then re-enable the wallet and refresh the page again.
    Observe the behavior of the dapp.
-4. When connecting to a wallet, deliberately cancel the connection or close the wallet prompt.
+4. When connecting to a wallet, cancel the connection or close the wallet prompt.
    This action should trigger the `WalletError` component, which you can dismiss by selecting it.
 
 ## Conclusion

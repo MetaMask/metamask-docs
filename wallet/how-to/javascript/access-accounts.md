@@ -1,6 +1,5 @@
 ---
 description: Access a user's accounts and handle changed accounts.
-sidebar_position: 1
 ---
 
 # Access a user's accounts
@@ -32,7 +31,7 @@ You can also access users' accounts on some [non-EVM networks](/wallet/how-to/ja
 
 :::caution Important
 This section describes how to create a single connect button.
-When connecting to multiple wallets, use the [Connect to MetaMask](../get-started/wallet-api.md) guide to create
+When connecting to multiple wallets, use the [Connect to MetaMask](../connect/wallet-api.md) guide to create
 multiple connect buttons.
 :::
 

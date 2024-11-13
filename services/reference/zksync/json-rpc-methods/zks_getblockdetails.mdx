@@ -38,12 +38,12 @@ Object containing the details of the L2 block:
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
   ```bash
   curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -61,10 +61,11 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
   </TabItem>
 </Tabs>
 
-## Response
+### Response
 
 <Tabs>
   <TabItem value="JSON">
+
   ```json
   {
     "jsonrpc": "2.0",
@@ -93,5 +94,6 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
     "id": 1
   }
   ```
+
   </TabItem>
 </Tabs>

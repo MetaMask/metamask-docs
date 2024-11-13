@@ -14,7 +14,6 @@ of their authenticity. This allows you to verify that the values have not been t
 - `keys`: [_Required_] Vector of storage keys in the account.
 - `l1BatchNumber`: [_Required_] Number of the L1 batch specifying the point in time at which the requested values are returned.
 
-
 ## Response
 
 - `address`: The account address.
@@ -22,17 +21,17 @@ of their authenticity. This allows you to verify that the values have not been t
     - `key`	- The requested storage key.
     - `value` - The storage value.
     - `index` -	Index of the tree entry.
-    - `proof`	-	Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
+    - `proof` -	Sequence of zero or more 32-byte hashes that form a Merkle path for the key in the Merkle tree.
         Hashes are listed using the root-to-leaf ordering. The root hash is excluded; it is published on L1 as a part of L1 batch commit data. 
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
   ```bash
   curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -40,6 +39,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
     -H "Content-Type: application/json" \
     -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getProof", "params": ["0x0000000000000000000000000000000000008003", ["0x8b65c0cf1012ea9f393197eb24619fd814379b298b238285649e14f936a5eb12"], 354895]}'
   ```
+
   </TabItem>
   <TabItem value="WSS">
 
@@ -54,6 +54,7 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
 
 <Tabs>
   <TabItem value="JSON">
+
   ```json
   {
     "jsonrpc": "2.0",
@@ -76,7 +77,7 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
     },
     "id": 1
   }
-
   ```
+
   </TabItem>
 </Tabs>

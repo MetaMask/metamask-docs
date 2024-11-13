@@ -1,6 +1,4 @@
 ---
-sidebar_label: React UI
-sidebar_position: 1
 description: Set up the SDK in your React dapp using the React UI package.
 tags:
   - JavaScript SDK
@@ -68,7 +66,6 @@ root.render(
       sdkOptions={{
         dappMetadata: {
           name: "Example React UI Dapp",
-          url: window.location.href,
         },
         infuraAPIKey: process.env.INFURA_API_KEY,
         // Other options.
@@ -88,7 +85,7 @@ Important options include:
   about your dapp in the MetaMask connection modal.
 - [`infuraAPIKey`](../../../../reference/sdk-js-options.md#infuraapikey) - Use this to
   [make read-only RPC requests](../../../../how-to/javascript/make-read-only-requests.md) from your dapp.
-- [`modals`](../../../../reference/sdk-js-options.md#modals) - Use this to [customize the logic and UI of
+- Use [`headless`](../../../../reference/sdk-js-options.md#headless) to [customize the logic and UI of
   the displayed modals](../../../../how-to/javascript/display/custom-modals.md).
 
 ### 4. Use the SDK

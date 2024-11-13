@@ -76,7 +76,7 @@ Important details to include when introducing your Snap:
 - Descriptions of the features that make your Snap appealing to the intended users.
 
 Use conversational language when describing your Snap.
-If you need to use a technical term, briefly define it first.
+If you need to use a technical term, define it first.
 For example:
 
 | Don't do this                                                                                                                                                               | Do this instead                                                                   |
@@ -107,7 +107,7 @@ These are also a key part of your Snap's identity, so it's worth spending time o
 
 Your Snap's icon should fit in a **32px circular frame in SVG format**.
 Avoid using images with small details, as they won't be impactful in the allotted space.
-Use something bold, simple, and easily understood.
+Use something bold, simple, and easy to understand.
 
 The icon must be a valid SVG.
 It should be clearly visible on both light and dark backgrounds.

@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# pin_add
+# `pin_add`
 
-## /api/v0/pin/add
+## `/api/v0/pin/add`
 
 Pin objects to local storage.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -15,30 +15,32 @@ Pin objects to local storage.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=<ipfs-path>&recursive=true&progress=<value>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
   <TabItem value="Example" label="Example" >
+
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/add?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
   -X POST \
   -u "PROJECT_ID:PROJECT_SECRET"
 ```
+
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
-- `arg` _\[Required]_ - Path to object(s) to be pinned.
-- `recursive` _\[Optional]_ - Recursively pin the object linked to by the specified object(s). The default is `true`.
+- `arg` _\[Required]_ - Path to objects to be pinned.
+- `recursive` _\[Optional]_ - Recursively pin the object linked to by the specified objects. The default is `true`.
 - `progress` _\[Optional]_ - Show progress.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint returns with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```json
 {
@@ -46,6 +48,6 @@ On success, the call to this endpoint returns with 200 and the following body:
 }
 ```
 
-#### RESULT FIELDS
+#### Result fields
 
 - `Pins` - An array of Pin hashes.
