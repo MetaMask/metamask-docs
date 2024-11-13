@@ -81,7 +81,7 @@ SIGNER_PRIVATE_KEY = "<Private-Key>"
 
 Ensure you replace the following values in the `.env` file:
 
-- `<YOUR-API-KEY>` with the API key from your [MetaMask Developer dashboard](https://infura.io/dashboard).
+- `<YOUR-API-KEY>` with the API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 - `<Private-Key>` with the [private key of your account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
 :::danger
