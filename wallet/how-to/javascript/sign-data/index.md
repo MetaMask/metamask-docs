@@ -190,7 +190,7 @@ It's often used for signature challenges that are authenticated on a web server,
 
 <p align="center">
 
-![personal_sign](../../../assets/personal_sign.png)
+![Personal sign](../../../assets/personal_sign.png)
 
 </p>
 

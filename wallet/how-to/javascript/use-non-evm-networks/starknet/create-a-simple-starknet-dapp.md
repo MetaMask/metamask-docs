@@ -268,7 +268,7 @@ Follow the on-screen prompts to connect your MetaMask wallet to Starknet.
 
 <div class="row">
   <div class="column">
-    <img src={require("../../../../assets/starknet-tutorial-modal").default} alt="Starknet dapp wallet modal" width="750" style={{border: "1px solid #DCDCDC"}} />
+    <img src={require("../../../../assets/starknet-tutorial-modal.png").default} alt="Starknet dapp wallet modal" width="750" style={{border: "1px solid #DCDCDC"}} />
   </div>
 </div>
 
