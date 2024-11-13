@@ -34,7 +34,7 @@ In the API key's **Settings** tab, select **Require API Key secret for all reque
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../../../images/security-page.png").default}
+      src={require("../../../images/settings-tab.png").default}
     />
   </div>
 </div>

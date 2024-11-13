@@ -17,5 +17,17 @@ For more information, see to the [Infura pricing page](https://www.infura.io/pri
 
 :::
 
-<iframe width="100%" height="484" src="https://www.youtube.com/embed/6perzKckjRA" title="Video overview on upgrading your plan
-" frameborder="0" allowfullscreen />
+To upgrade your plan select **Settings** -> **Billing**. In the **Manage Plan** tab, select the
+appropriate plan, and select **Update plan**.
+
+<div class="left-align-container">
+  <div class="img-large">
+    <img
+      src={require("../../images/update-plan.png").default}
+    />
+  </div>
+</div>
+
+:::note
+If upgrading from the Core (free) plan, you'll need to add your payment details.
+:::
