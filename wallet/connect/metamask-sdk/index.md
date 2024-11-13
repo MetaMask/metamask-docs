@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 description: Use the SDK in your dapp.
 tags:
   - JavaScript SDK

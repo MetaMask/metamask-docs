@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 description: Learn about the contract interface in Unity.
 tags:
   - Unity SDK

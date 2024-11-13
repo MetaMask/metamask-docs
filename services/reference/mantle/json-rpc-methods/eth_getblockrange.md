@@ -5,7 +5,7 @@ description: eth_getBlockRange API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# eth_getBlockRange
+# `eth_getBlockRange`
 
 Returns the block information for blocks within a specified range.
 
@@ -46,7 +46,7 @@ Array of block objects:
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 

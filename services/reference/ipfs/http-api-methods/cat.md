@@ -15,7 +15,7 @@ Show IPFS object data.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/cat?arg=<key>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
