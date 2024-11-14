@@ -636,9 +636,6 @@ export const onUpdate: OnUpdateHandler = async () => {
 
 ## `onUserInput`
 
-:::flaskOnly
-:::
-
 To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, a Snap must export `onUserInput`.
 
 #### Parameters
