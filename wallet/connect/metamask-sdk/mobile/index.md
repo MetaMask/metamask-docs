@@ -1,6 +1,4 @@
 ---
-sidebar_label: Mobile
-sidebar_position: 2
 description: Set up the SDK in your mobile dapp.
 tags:
   - iOS SDK

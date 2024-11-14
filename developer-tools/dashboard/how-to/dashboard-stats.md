@@ -11,7 +11,7 @@ This data is crucial for optimizing your applications and ensuring they run smoo
 
 ## Specify stats to view
 
-1. In the top menu of the [Infura dashboard](https://app.infura.io/), select **Stats**.
+1. In the left menu of the [MetaMask Developer dashboard](https://developer.metamask.io/), select **Stats**.
    The stats page displays the total volume of requests sent to Infura over the specified time period.
    By default, data is shown from the last 24 hours from all Web3 API keys.
 

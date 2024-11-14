@@ -1,7 +1,5 @@
 ---
 description: Integrate MetaMask SDK with Wagmi in your JavaScript dapp.
-sidebar_position: 1
-sidebar_label: Wagmi
 tags:
   - JavaScript SDK
 ---

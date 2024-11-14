@@ -16,7 +16,7 @@ All Infura IPFS methods require including your [API key](../../../../../develope
 Arguments are added through the special query string key `arg`:
 
 ```bash
-curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
+curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
 Note that `arg` can be used multiple times to signify multiple arguments.
@@ -26,7 +26,7 @@ Note that `arg` can be used multiple times to signify multiple arguments.
 Flags commonly used with the IPFS CLI are added through the query string. For example, the `--encoding=json` flag is the `&encoding=json` query parameter below:
 
 ```bash
-> curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/object/get?arg=QmaaqrHyAQm7gALkRW8DcfGX3u8q9rWKnxEMmf7m9z515w&encoding=json"
+> curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/object/get?arg=QmaaqrHyAQm7gALkRW8DcfGX3u8q9rWKnxEMmf7m9z515w&encoding=json"
 {
   "Links": [
     {

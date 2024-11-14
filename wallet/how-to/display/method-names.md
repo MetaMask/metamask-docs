@@ -1,6 +1,5 @@
 ---
 description: Register a contract's method names with users.
-sidebar_position: 2
 ---
 
 # Display a contract's method names

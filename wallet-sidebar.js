@@ -11,19 +11,23 @@ const sidebar = {
     {
       type: "category",
       label: "Connect to MetaMask",
+      collapsible: true,
+      collapsed: false,
       link: { type: "doc", id: "connect/index" },
       items: [
         {
           type: "category",
           label: "MetaMask SDK",
+          collapsible: true,
+          collapsed: true,
           link: { type: "doc", id: "connect/metamask-sdk/index" },
           items: [
             {
               type: "category",
               label: "JavaScript",
-              link: { type: "doc", id: "connect/metamask-sdk/javascript/index" },
               collapsible: true,
               collapsed: true,
+              link: { type: "doc", id: "connect/metamask-sdk/javascript/index" },
               items: [
                 {
                   type: "category",
@@ -100,12 +104,17 @@ const sidebar = {
               ],
             },
           ],
-          collapsible: true,
-          collapsed: true,
         },
         {
           type: "category",
           label: "Third-party libraries",
+          collapsible: true,
+          collapsed: true,
+          link: {
+            type: "generated-index",
+            slug: "/connect/3rd-party-libraries",
+            description: "You can connect to MetaMask using third-party libraries that integrate MetaMask SDK."
+          },
           items: [
             {
               type: "doc",
@@ -118,8 +127,6 @@ const sidebar = {
               id: "connect/3rd-party-libraries/web3-onboard"
             },
           ],
-          collapsible: true,
-          collapsed: true,
         },
         {
           type: "doc",
@@ -127,15 +134,13 @@ const sidebar = {
           id: "connect/wallet-api",
         },
       ],
-      collapsible: true,
-      collapsed: false,
     },
     {
       type: "category",
       label: "How to",
-      link: { type: "generated-index", slug: "/how-to" },
       collapsible: true,
       collapsed: true,
+      link: { type: "generated-index", slug: "/how-to" },
       items: [
         {
           type: "doc",
@@ -145,9 +150,9 @@ const sidebar = {
         {
           type: "category",
           label: "Manage networks",
-          link: { type: "generated-index", slug: "/how-to/manage-networks" },
           collapsible: true,
           collapsed: true,
+          link: { type: "generated-index", slug: "/how-to/manage-networks" },
           items: [
             {
               type: "doc",
@@ -164,9 +169,9 @@ const sidebar = {
         {
           type: "category",
           label: "Sign data",
-          link: { type: "doc", id: "how-to/sign-data/index" },
           collapsible: true,
           collapsed: true,
+          link: { type: "doc", id: "how-to/sign-data/index" },
           items: [
             {
               type: "doc",
@@ -198,9 +203,9 @@ const sidebar = {
         {
           type: "category",
           label: "Display in MetaMask",
-          link: { type: "generated-index", slug: "/how-to/display" },
           collapsible: true,
           collapsed: true,
+          link: { type: "generated-index", slug: "/how-to/display" },
           items: [
             {
               type: "doc",
@@ -232,16 +237,14 @@ const sidebar = {
         {
           type: "category",
           label: "Use non-EVM networks",
-          link: { type: "doc", id: "how-to/use-non-evm-networks/index" },
           collapsible: true,
           collapsed: true,
+          link: { type: "doc", id: "how-to/use-non-evm-networks/index" },
           items: [
             {
               type: "category",
               label: "Use Starknet",
               link: { type: "doc", id: "how-to/use-non-evm-networks/starknet/index" },
-              collapsible: true,
-              collapsed: true,
               items: [
                 {
                   type: "doc",
@@ -290,9 +293,9 @@ const sidebar = {
         {
           type: "category",
           label: "Use the Unity SDK",
-          link: { type: "doc", id: "how-to/use-unity-sdk/index" },
           collapsible: true,
           collapsed: true,
+          link: { type: "doc", id: "how-to/use-unity-sdk/index" },
           items: [
             {
               type: "doc",
@@ -307,9 +310,9 @@ const sidebar = {
             {
               type: "category",
               label: "Interact with smart contracts",
-              link: { type: "doc", id: "how-to/use-unity-sdk/smart-contracts/index" },
               collapsible: true,
               collapsed: true,
+              link: { type: "doc", id: "how-to/use-unity-sdk/smart-contracts/index" },
               items: [
                 {
                   type: "doc",
@@ -360,9 +363,9 @@ const sidebar = {
     {
       type: "category",
       label: "Concepts",
-      link: { type: "generated-index", slug: "/concepts" },
       collapsible: true,
       collapsed: true,
+      link: { type: "generated-index", slug: "/concepts" },
       items: [
         {
           type: "doc",
@@ -409,9 +412,9 @@ const sidebar = {
     {
       type: "category",
       label: "Tutorials",
-      link: { type: "generated-index", slug: "/tutorials" },
       collapsible: true,
       collapsed: true,
+      link: { type: "generated-index", slug: "/tutorials" },
       items: [
         {
           type: "doc",
@@ -455,9 +458,13 @@ const sidebar = {
         {
           type: "category",
           label: "Non-EVM APIs",
-          link: { type: "generated-index", slug: "/reference/non-evm-apis" },
-          collapsed: true,
           collapsible: true,
+          collapsed: true,
+          link: {
+            type: "generated-index",
+            slug: "/reference/non-evm-apis",
+            description: "Use the following APIs to interact with users' non-EVM accounts."
+          },
           items: [
             {
               type: "doc",
@@ -474,9 +481,9 @@ const sidebar = {
         {
           type: "category",
           label: "JSON-RPC API",
-          link: { type: "doc",  id: "reference/json-rpc-methods/index" },
           collapsible: true,
           collapsed: true,
+          link: { type: "doc",  id: "reference/json-rpc-methods/index" },
           items: [{ type: "autogenerated", dirName: "reference/json-rpc-methods" }],
         },
       ],

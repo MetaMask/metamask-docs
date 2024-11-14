@@ -4,7 +4,7 @@ description: debug_traceBlockByNumber API method
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# debug_traceBlockByNumber
+# `debug_traceBlockByNumber`
 
 Returns tracing results by executing all transactions in the specified block number.
 

@@ -1,6 +1,5 @@
 ---
 description: Manage Starknet accounts in MetaMask.
-sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";

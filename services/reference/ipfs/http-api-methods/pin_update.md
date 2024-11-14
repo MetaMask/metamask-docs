@@ -15,7 +15,7 @@ Update a recursive pin.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/update?arg=<from-path>&arg=<to-path>&unpin=true" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>

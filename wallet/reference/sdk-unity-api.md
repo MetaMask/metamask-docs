@@ -1,6 +1,5 @@
 ---
 description: See the Unity SDK API reference.
-sidebar_position: 2
 toc_max_heading_level: 4
 tags:
   - Unity SDK

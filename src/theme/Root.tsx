@@ -12,16 +12,16 @@ import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
   REF_ALLOW_LOGIN_PATH,
   REQUEST_PARAMS,
-  AUTH_WALLET_PROJECTS,
-  AUTH_WALLET_ENS,
-  getWalletEns,
-  getUksTier,
 } from "@site/src/lib/constants";
 import {
   clearStorage,
   getUserIdFromJwtToken,
   saveTokenString,
   getTokenString,
+  getUksTier,
+  AUTH_WALLET_PROJECTS,
+  AUTH_WALLET_ENS,
+  getWalletEns
 } from "@site/src/lib/siwsrp/auth";
 import AuthModal, {
   AUTH_LOGIN_STEP,
@@ -56,10 +56,12 @@ interface IMetamaskProviderContext {
   setMetaMaskProvider: (arg: SDKProvider) => void;
   uksTier: string;
   sdk: MetaMaskSDK;
+  setNeedsMfa: (arg: boolean) => void;
+  needsMfa: boolean;
   setWalletLinked: (arg: WALLET_LINK_TYPE) => void;
   walletLinked: WALLET_LINK_TYPE | undefined;
-  setWalletLinkUrl: (arg: string) => void;
-  walletLinkUrl: string;
+  setWalletAuthUrl: (arg: string) => void;
+  walletAuthUrl: string;
   userAPIKey?: string;
   setUserAPIKey?: (key: string) => void;
   fetchLineaEns?: (walletId: string) => Promise<void>;
@@ -79,10 +81,12 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   metaMaskProvider: undefined,
   setMetaMaskProvider: () => {},
   sdk: undefined,
+  setNeedsMfa: () => {},
+  needsMfa: false,
   setWalletLinked: () => {},
   walletLinked: undefined,
-  setWalletLinkUrl: () => {},
-  walletLinkUrl: "",
+  setWalletAuthUrl: () => {},
+  walletAuthUrl: "",
   userAPIKey: "",
   setUserAPIKey: () => {},
   fetchLineaEns: () => new Promise(() => {}),
@@ -115,7 +119,8 @@ export const LoginProvider = ({ children }) => {
   const [walletLinked, setWalletLinked] = useState<
     WALLET_LINK_TYPE | undefined
   >(undefined);
-  const [walletLinkUrl, setWalletLinkUrl] = useState<string>("");
+  const [needsMfa, setNeedsMfa] = useState<boolean>(false);
+  const [walletAuthUrl, setWalletAuthUrl] = useState<string>("");
   const [userAPIKey, setUserAPIKey] = useState("");
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_URL, GF_SURVEY_KEY, LINEA_ENS_URL } = siteConfig?.customFields || {};
@@ -185,6 +190,7 @@ export const LoginProvider = ({ children }) => {
       setUksTier(undefined);
       setProjects({});
       setWalletLinked(undefined);
+      setNeedsMfa(false);
       setUserAPIKey("");
       clearStorage();
     } catch (err) {
@@ -276,8 +282,10 @@ export const LoginProvider = ({ children }) => {
           sdk,
           walletLinked,
           setWalletLinked,
-          walletLinkUrl,
-          setWalletLinkUrl,
+          needsMfa,
+          setNeedsMfa,
+          walletAuthUrl,
+          setWalletAuthUrl,
           userAPIKey,
           setUserAPIKey,
           fetchLineaEns,
