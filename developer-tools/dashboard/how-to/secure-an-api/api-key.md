@@ -13,7 +13,7 @@ A request will fail if it does not have a valid API key appended to the request 
 
 :::
 
-Select the API key in the Infura dashboard to view the key's details. The API key to include in your requests can be
+Select the API key in the dashboard to view the key's details. The API key to include in your requests can be
 copied at the top of the page.
 
 Apply the principle of least privilege. Add only the endpoints that you plan to use, and then use the other

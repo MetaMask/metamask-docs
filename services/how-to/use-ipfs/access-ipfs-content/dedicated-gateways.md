@@ -10,14 +10,13 @@ You can only use dedicated gateways to access IPFS content, not to upload conten
 
 ### Enable dedicated gateway
 
-Go to your IPFS project settings.
-
-Toggle **DEDICATED GATEWAYS** to enable.
+To enable a dedicated gateway, go to your API key's **Settings** tab, and toggle
+**Enable Dedicated Gateways**.
 
 <div class="left-align-container">
   <div class="img-large">
     <img
-      src={require("../../../images/image.png").default}
+      src={require("../../../images/dedicated-gateway-toggle.png").default}
       alt="Dedicated gateways in project settings"
     />
   </div>
@@ -33,7 +32,7 @@ https://<CUSTOM-SUBDOMAIN>.infura-ipfs.io/ipfs/<Content-Identifier>/<optional pa
 
 For example, `https://meme-nft.infura-ipfs.io/ipfs/QmW5sPVbZDueZwvSuibteAwDFwFXhF8gebfptGBx1DZq1j`.
 
-Enter a **UNIQUE SUBDOMAIN NAME** for your dedicated gateway and click **SAVE SUBDOMAIN**.
+Enter a unique subdomain name for your dedicated gateway and select **Save Subdomain**.
 
 <div className="left-align-container">
   <div className="img-large">

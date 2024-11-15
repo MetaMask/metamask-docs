@@ -1,7 +1,6 @@
 ---
 description: Create a multi-component React dapp with global state using EIP-6963.
 toc_max_heading_level: 4
-sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
