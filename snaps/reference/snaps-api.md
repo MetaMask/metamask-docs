@@ -1014,7 +1014,7 @@ An object containing:
 - `id` - The ID of the interface to be updated, usually received in the
   [`onUserInput`](./entry-points.md#onuserinput) entry point.
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
-- `context` (optional) - A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface. Passing this parameter will update the context object for the interface. 
+- `context` - (Optional) A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface. Passing this parameter will update the context object for the interface. 
 
 #### Example
 

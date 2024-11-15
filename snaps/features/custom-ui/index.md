@@ -3,6 +3,9 @@ description: Display custom user interface components using JSX.
 sidebar_position: 4
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Custom UI
 
 You can display custom user interface (UI) JSX components using the
@@ -59,16 +62,20 @@ The following custom UI components are available:
 
 ### `Address`
 
-Outputs a formatted text field for an Ethereum address. 
-The address is automatically displayed with a jazzicon and truncated value. 
-Hovering the address shows the full value in a tooltip.
+Outputs a formatted text field for a blockchain address. 
+The address is automatically displayed with a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon)
+and truncated value. 
+Hovering over the address shows the full value in a tooltip.
 
 #### Props 
 
-- `address`: `string` - A valid Ethereum address, starting with 0x, or a valid 
+- `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid 
   [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
 
-#### Examples
+#### Example
+
+<Tabs>
+<TabItem value="Ethereum address">
 
 ```javascript title="index.jsx"
 import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
@@ -96,6 +103,9 @@ await snap.request({
     </div>
 </div>
 
+</TabItem>
+<TabItem value="CAIP-10 address">
+
 ```javascript title="index.jsx"
 import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
 
@@ -115,12 +125,15 @@ await snap.request({
 });
 ```
 
+</TabItem>
+</Tabs>
+
 ### `Avatar`
 
 Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an address.
 
 :::note
-EVM addresses (eip155:) are automatically checksummed by MetaMask. 
+MetaMask automatically calculates checksums for EVM addresses (`eip155:`). 
 Addresses for other namespaces are not validated; you should validate them in your Snap.
 :::
 
@@ -611,7 +624,7 @@ This is useful for [`Box`](#box) titles.
 #### Props
 
 - `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and 
-  `"lg"`. Defaults to `"sm"`.
+  `"lg"`. The default is `"sm"`.
 
 #### Example
 
@@ -740,12 +753,12 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
 - `label`: `string` - (Optional) The text displayed alongside the input to label it.
 - `value`: `string` - (Optional) The default value of the input.
-- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the type 
-  `"number"` input.
-- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the type 
-  `"number"` input.
-- `step`: `string` - (Optional) The step value of the input field. Only applicable to the type 
-  `"number"` input.
+- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the input
+  type `"number"`.
+- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the input 
+  type `"number"`.
+- `step`: `string` - (Optional) The step value of the input field. Only applicable to the input
+  type `"number"`.
 
 #### Example
 
@@ -819,7 +832,7 @@ Outputs a clickable link.
 
 A Snap can link to the following screens using the `metamask:` scheme: 
 
-- `metamask://client/` - Leads to the main screen of MetaMask 
+- `metamask://client/` - Leads to the main screen of MetaMask.
 - `metamask://snap/[Snap ID]/home/` - Leads to the Snap's 
   [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home 
   page. Valid Snap IDs are npm IDs beginning with `npm:`, such as 
@@ -828,7 +841,7 @@ A Snap can link to the following screens using the `metamask:` scheme:
   [environment variables](../../how-to/use-environment-variables.md) so you can have different 
   Snap IDs for local testing and production.
 
-:::caution
+:::warning
 MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
 installed. 
 :::
