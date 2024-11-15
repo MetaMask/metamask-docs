@@ -7,7 +7,7 @@ sidebar_position: 9
 
 ### Suspicious activity detected during registration
 
-If you receive a "Suspicious activity detected" message during registration, it might be for of one of the following
+If you receive a "Suspicious activity detected" message during registration, it might be for one of the following
 reasons:
 
 - You have another account: Infura does not allow users to create multiple accounts, so if
