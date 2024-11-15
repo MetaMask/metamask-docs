@@ -240,7 +240,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [Infura dashboard](/developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

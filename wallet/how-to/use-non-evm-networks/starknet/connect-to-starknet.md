@@ -1,6 +1,5 @@
 ---
 description: Connect your dapp to Starknet in MetaMask.
-sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";

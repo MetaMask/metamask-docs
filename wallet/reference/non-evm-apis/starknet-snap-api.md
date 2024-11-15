@@ -1,6 +1,5 @@
 ---
 description: See the Starknet Snap API reference.
-sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";

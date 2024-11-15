@@ -72,51 +72,49 @@ openssl ec -in private.pem -pubout -out public.pembash
 
 Upload the contents of the public key file that you [generated earlier](json-web-token-jwt.md#generate-keys):
 
-1. Go to the **SECURITY** section in your project settings.
+1. In the dashboard, select the API key, then select the **Settings** tab.
 
-  ![Security settings](../images/security-page.png)
+    :::info
 
-  :::info
+    You must implement separate security settings for each API key.
 
-  You must implement separate security settings for each project.
+    :::
 
-  :::
+1. Select **Require JWT for all requests** to enforce JWTs on all requests.
 
-2. (Optional) Check the **Require JWT for all requests** box to enforce JWT on all requests.
+    :::info
 
-  :::info
+    You can use [allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to
+    specify a subset of requests that must use JWTs.
 
-  Use allowlists to specify a subset of requests that must use JWTs.
+    :::
 
-  :::
+1. Give the public key a name.
 
-3. Give the public key a name.
+1. Paste the public key into the **JWT Public Key** input box. It looks something like this:
 
-4. Paste the public key into the **JWT PUBLIC KEY** input box. It looks something like this:
+    ```
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
+    L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
+    jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
+    w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
+    PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
+    MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
+    4wIDAQAB
+    -----END PUBLIC KEY-----
+    ```
 
-  ```
-  -----BEGIN PUBLIC KEY-----
-  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr7VlNytvNFt9wVkjJ8vG
-  L4F0+id4kS1CpG7UMh1kghrLg9KMb8gauy7Bxk6PRz5Ckv1FnG4FL+Z3Cdzwd6c8
-  jJlzJxbRTYvNi3elqAyItE3tRl6CatRur49t9nGepgFOrwmPP5We52G5O0BsW6Mx
-  w/neqQH+Y/bXqs0PG/0ZbpTyr044Lh+p9grSuPIogIGIY5JM4AI+fpdH6hVnA7od
-  PkinkWhQqAW+F8jngwZK+JCFS1GAeobTZVbvsiHZQGuP/T7hqE8z5Q8HYO4ymnkI
-  MPH6zSKhSxsQRs/kWU5lXqY67ORC3DIMA+I/AJujLuoqC+YaMP0fO81XjrwXPf2j
-  4wIDAQAB
-  -----END PUBLIC KEY-----
-  ```
+1. Select **Add** to add the key to the settings.
 
-5. Click **ADD** to add the key to the settings. After the key is added, the security settings look like the following:
+1. The key has a **Name**, **ID**, **Fingerprint**. These are used for creating and verifying JWTs.
+    You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
 
-  ![JWT set up](../images/jwt-set-up.png)
+    :::info
 
-6. The key has a **NAME**, **ID**, **FINGERPRINT**. These are used for creating and verifying JWTs. You'll need the **ID** to [generate the JWT](json-web-token-jwt.md#generate-a-jwt).
+    For key rotation, upload up to three keys for each API key.
 
-  :::info
-
-  For key rotation, upload up to three keys for each project.
-
-  :::
+    :::
 
 ## Send requests with JWTs
 

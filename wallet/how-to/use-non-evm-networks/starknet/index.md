@@ -1,6 +1,5 @@
 ---
 description: Interact with users' Starknet accounts in MetaMask.
-sidebar_position: 1
 ---
 
 # Use Starknet

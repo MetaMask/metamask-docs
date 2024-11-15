@@ -30,7 +30,7 @@ curl generates the auth header and encodes your credentials behind the scenes.
 Include the `-u` flag with the authentication information.
 
 ```bash
-curl -X POST -F file=@myfile -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/add"
+curl -X POST -F file=@myfile -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/add"
 ```
 
 ### JavaScript
@@ -38,20 +38,20 @@ curl -X POST -F file=@myfile -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infur
 Wrap JavaScript calls to IPFS with the Infura `Authorization` header.
 
 ```javascript
-xhr.setRequestHeader("Authorization", "Basic " + btoa(<API_KEY> + ":" + <API_KEY_SECRET>));
+xhr.setRequestHeader("Authorization", "Basic " + btoa(<YOUR-API-KEY> + ":" + <YOUR-API-KEY-SECRET>));
 ```
 
-### NodeJS
+### Node.js
 
-Change the `<API_KEY>` and `<API_KEY_SECRET>` in the NodeJS example code below.
+Replace `<YOUR-API-KEY>` and `<YOUR-API-KEY-SECRET>` in the Node.js example code below.
 
 Save the following script to a file, for example, `index.js`.
 
-```javascript
+```javascript title="index.js"
 const https = require("https")
 
-const projectId = "<API_KEY>"
-const projectSecret = "<API_KEY_SECRET>"
+const projectId = "<YOUR-API-KEY>"
+const projectSecret = "<YOUR-API-KEY-SECRET>"
 
 const options = {
   host: "ipfs.infura.io",
@@ -73,9 +73,8 @@ let req = https.request(options, (res) => {
 req.end()
 ```
 
-In a terminal window, run the script with `node index.js`
-
-Output something like:
+In a terminal window, run the script using `node index.js`.
+This outputs something like the following:
 
 ```
 {"Pins":["QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"]}
@@ -83,15 +82,15 @@ Output something like:
 
 ### Python
 
-Change the `projectId` and `projectSecret` in the Python example code below.
+Replace `<YOUR-API-KEY>` and `<YOUR-API-KEY-SECRET>` in the Python example code below.
 
 Save the following script to a file, for example, `index.py`.
 
-```python
+```python title="index.py"
 import requests
 
-projectId = "<API_KEY>"
-projectSecret = "<API_KEY_SECRET>"
+projectId = "<YOUR-API-KEY>"
+projectSecret = "<YOUR-API-KEY-SECRET>"
 endpoint = "https://ipfs.infura.io:5001"
 
 ### CREATE AN ARRAY OF TEST FILES ###
@@ -118,9 +117,8 @@ response3 = requests.post(endpoint + "api/v0/pin/rm", params=params, auth=(proje
 print(response3.json())
 ```
 
-Run the script with `python index.py`.
-
-Output something like:
+Run the script using `python index.py`.
+This outputs something like the following:
 
 ```bash
 <Response [200]>
@@ -138,11 +136,11 @@ Install the library with `npm install --save kubo-rpc-client`.
 
 Save the following script to a file, for example, `index.mjs`.
 
-```javascript
+```javascript title="index.mjs"
 import { create } from "kubo-rpc-client"
 
-const projectId = "<API_KEY>";
-const projectSecret = "<API_KEY_SECRET>";
+const projectId = "<YOUR-API-KEY>";
+const projectSecret = "<YOUR-API-KEY-SECRET>";
 const auth
   "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
@@ -160,9 +158,8 @@ client.pin.add("QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn").then((res) => {
 });
 ```
 
-Run with `node index.mjs`.
-
-Output something like:
+Run the script using `node index.mjs`.
+This outputs something like the following:
 
 ```bash
 CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
@@ -188,8 +185,8 @@ import (
 )
 
 func main() {
-  projectId := "<API_KEY>"
-  projectSecret := "<API_KEY_SECRET>"
+  projectId := "<YOUR-API-KEY>"
+  projectSecret := "<YOUR-API-KEY-SECRET>"
 
   shell := ipfsApi.NewShellWithClient("https://ipfs.infura.io:5001", NewClient(projectId, projectSecret))
   cid, err := shell.Add(strings.NewReader("Infura IPFS - Getting started demo."))
@@ -225,9 +222,8 @@ func (t authTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 }
 ```
 
-Run with `go run index.go`.
-
-Output something like:
+Run the script using `go run index.go`.
+This outputs something like the following:
 
 ```bash
 CID(QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn)
@@ -256,8 +252,8 @@ import (
 )
 
 func main() {
-  projectId := "<API_KEY>"
-  projectSecret := "<API_KEY_SECRET>"
+  projectId := "<YOUR-API-KEY>"
+  projectSecret := "<YOUR-API-KEY-SECRET>"
 
   httpClient := &http.Client{}
   httpApi, err := ipfsApi.NewURLApiWithClient("https://ipfs.infura.io:5001", httpClient)
@@ -283,9 +279,8 @@ func basicAuth(projectId, projectSecret string) string {
 }
 ```
 
-Run with `go run index.go`.
-
-Example output:
+Run the script using `go run index.go`.
+This outputs something like the following:
 
 ```bash
 Data successfully stored in IPFS: QmTHr95iiwSTA2USxx4g5kKnhqsNRixqohhwxjvdXmSrWn
@@ -301,7 +296,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [Infura dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.

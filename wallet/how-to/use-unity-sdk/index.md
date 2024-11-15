@@ -1,6 +1,5 @@
 ---
-sidebar_position: 9
-description: Use the Unity SDK.
+description: Use advanced features of the Unity SDK.
 tags:
   - Unity SDK
 ---

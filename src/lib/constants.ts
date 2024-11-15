@@ -470,14 +470,3 @@ export const REQUEST_PARAMS = (method = "POST", headers = {}) => ({
 export const LINEA_PROD_URL = "https://linea-mainnet.infura.io";
 export const LINEA_DEV_URL = "https://linea-mainnet.dev.infura.org";
 export const LINEA_REQUEST_URL = LINEA_PROD_URL;
-export const AUTH_WALLET_ENS = "auth.wallet.ens";
-export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
-export const AUTH_WALLET_USER_PLAN = "auth.wallet.uksTier";
-
-export const getWalletEns = () => {
-  return sessionStorage.getItem(AUTH_WALLET_ENS);
-};
-
-export const getUksTier = (): string => {
-  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN);
-};

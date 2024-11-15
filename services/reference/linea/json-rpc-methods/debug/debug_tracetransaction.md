@@ -5,7 +5,7 @@ description: debug_traceTransaction API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceTransaction
+# `debug_traceTransaction`
 
 Returns tracing results for the specified transaction.
 

@@ -15,7 +15,7 @@ Lists objects pinned to local storage.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/ls?arg=<ipfs-path>&type=all&quiet=<value>&stream=<value>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
@@ -24,7 +24,7 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/ls?arg=<ipfs-path>&type=all&quiet=<
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/ls?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>

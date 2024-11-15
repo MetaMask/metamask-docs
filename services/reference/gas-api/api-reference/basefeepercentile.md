@@ -46,7 +46,7 @@ instead of using the curl authentication option (`-u`).
 
 ```bash
 curl -X "GET" \
-  -u <API_KEY>:<API_KEY_SECRET> \
+  -u <YOUR-API-KEY>:<YOUR-API-KEY-SECRET> \
   "https://gas.api.infura.io/networks/1/baseFeeHistory"
 ```
 

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 description: See the high-level web3 architecture.
 ---
 

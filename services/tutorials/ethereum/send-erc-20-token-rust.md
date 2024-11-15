@@ -123,7 +123,7 @@ async fn main() -> Result<()> {
 Next, make the following updates to the above code:
 
 - On line 17 replace the `INFURA_API_KEY` with the API key of your API project from the
-  [Infura dashboard](https://app.infura.io/login).
+  [MetaMask Developer dashboard](https://app.infura.io/login).
 - On line 30 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account.
 
 :::tip Secure your keys
