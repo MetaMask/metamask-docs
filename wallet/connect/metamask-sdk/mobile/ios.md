@@ -32,7 +32,7 @@ users to easily connect with their MetaMask Mobile wallet.
 <Tabs>
 <TabItem value="CocoaPods">
 
-To add the SDK as a CocoaPods dependency to your project, add the following entry to our Podfile:
+To add the SDK as a CocoaPods dependency to your project, add the following entry to your Podfile:
 
 ```text
 pod "metamask-ios-sdk"
