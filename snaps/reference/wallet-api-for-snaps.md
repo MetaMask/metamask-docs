@@ -91,7 +91,7 @@ The SemVer version ranges use the same semantics as npm `package.json` ranges.
 An object mapping the IDs of permitted Snaps to their metadata:
 
 - `id`: `string` - The ID of the Snap.
-- `initialPermissions`: `string` - The initial permissions of the Snap, which will be request when
+- `initialPermissions`: `string` - The initial permissions of the Snap, which will be requested when
   the Snap is installed.
 - `version`: `string` - The version of the Snap.
 - `enabled`: `boolean` - Indicates whether the Snap is enabled.
@@ -125,7 +125,7 @@ await window.ethereum.request({
     "enabled": true,
     "blocked": false
   },
-  "npm:fooSnap": {
+  "npm:foo-Snap": {
     "version": "1.0.5",
     "id": "npm:foo-snap",
     "enabled": true,
