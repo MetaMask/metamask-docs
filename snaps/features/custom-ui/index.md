@@ -3,6 +3,9 @@ description: Display custom user interface components using JSX.
 sidebar_position: 4
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Custom UI
 
 You can display custom user interface (UI) JSX components using the
@@ -15,7 +18,9 @@ implementing the following features:
 - [Signature insights](../signature-insights.md)
 
 :::note
-JSX is supported in the MetaMask extension and Flask version 12 and later. New UI components will be added as JSX components. The previous function-based library is deprecated.
+JSX is supported in the MetaMask extension and Flask version 12 and later. 
+New UI components will be added as JSX components. 
+The previous function-based library is deprecated.
 :::
 
 To use custom UI, first install [`@metamask/snaps-sdk`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-sdk)
@@ -27,7 +32,8 @@ yarn add @metamask/snaps-sdk
 
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
-For example, to display a [`Box`](#box) using [`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
+For example, to display a [`Box`](#box) using 
+[`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
 
 ```javascript title="index.jsx"
 import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
@@ -56,11 +62,20 @@ The following custom UI components are available:
 
 ### `Address`
 
-Outputs a formatted text field for an Ethereum address. 
-The address is automatically displayed with a jazzicon and truncated value. 
-Hovering the address shows the full value in a tooltip.
+Outputs a formatted text field for a blockchain address. 
+The address is automatically displayed with a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon)
+and truncated value. 
+Hovering over the address shows the full value in a tooltip.
+
+#### Props 
+
+- `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid 
+  [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
 
 #### Example
+
+<Tabs>
+<TabItem value="Ethereum address">
 
 ```javascript title="index.jsx"
 import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
@@ -87,6 +102,59 @@ await snap.request({
         <img src={require("../../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
     </div>
 </div>
+
+</TabItem>
+<TabItem value="CAIP-10 address">
+
+```javascript title="index.jsx"
+import { Box, Heading, Address } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Heading>The following is an Ethereum address</Heading>
+        <Address address="eip155:1:0x1234567890123456789012345678901234567890" />
+        <Heading>The following is a Bitcoin address</Heading>
+        <Address address="bip122:000000000019d6689c085ae165831e93:128Lkh3S7CkDTBZ8W7BbpsN3YYizJMp8p6" />
+      </Box>
+    ),
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
+### `Avatar`
+
+Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an address.
+
+:::note
+MetaMask automatically calculates checksums for EVM addresses (`eip155:`). 
+Addresses for other namespaces are not validated; you should validate them in your Snap.
+:::
+
+#### Props
+
+- `address`: `string` - A valid [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+
+#### Example
+
+```js
+export const onHomePage: OnHomePageHandler = async () => {
+  return {
+    content: (
+      <Box>
+        <Avatar address="eip155:1:0x1234567890123456789012345678901234567890" />
+        <Avatar address="bip122:000000000019d6689c085ae165831e93:128Lkh3S7CkDTBZ8W7BbpsN3YYizJMp8p6" />
+      </Box>
+    ),
+  };
+};
+```
 
 ### `Bold`
 
@@ -166,8 +234,8 @@ For use in [interactive UI](interactive-ui.md).
 - `type` - (Optional) The type of button.
   Possible values are `"button"` and `"submit"`.
   The default is `"button"`.
-- `name`: `string` - (Optional) The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-  when a user selects the button.
+- `name`: `string` - (Optional) The name that will be sent to 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user selects the button.
 - `variant` - (Optional) Determines the appearance of the button.
   Possible values are `"primary"` and `"destructive"`.
   The default is `"primary"`.
@@ -209,7 +277,8 @@ Outputs a card component which is used to display values in a card structure.
 
 :::info
 Unlike many `Card` components from other UI libraries, the Snaps `Card` does not have any shape.
-It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) component.
+It is only used for layout. To give a shape to a `Card`, wrap it in a [`Section`](#section) 
+component.
 :::
 
 #### Props
@@ -305,7 +374,8 @@ Outputs a read-only text field with a copy-to-clipboard shortcut.
 #### Props
 
 - `value`: `string` - The value to copy when the user clicks on the copyable element.
-- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the value will be hidden when the user is not interacting with the copyable element.
+- `sensitive`: `boolean` - (Optional) Indicates whether the value is sensitive. If `true`, the 
+  value will be hidden when the user is not interacting with the copyable element.
 
 #### Example
 
@@ -412,9 +482,11 @@ Outputs a form field, wrapping an element to give it a label and optional error.
 #### Props
 
 - `label`: `string` - The label for the wrapped element.
-- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style of the wrapped element to show that there is an error.
+- `error`: `string` - (Optional) Any error for the wrapped element. Setting this changes the style 
+  of the wrapped element to show that there is an error.
 - `children` - The element to be wrapped.
-  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or [`RadioGroup`](#radiogroup) component.
+  This can be a [`Dropdown`](#dropdown), [`Input`](#input), [`Selector`](#selector), or 
+  [`RadioGroup`](#radiogroup) component.
 
 #### Example
 
@@ -508,8 +580,8 @@ Outputs a form for use in [interactive UI](interactive-ui.md).
 
 #### Props
 
-- `name`: `string` - The name that will be sent to [`onUserInput`](../../reference/entry-points.md#onuserinput)
-  when a user interacts with the form.
+- `name`: `string` - The name that will be sent to 
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when a user interacts with the form.
 - `children`: `array` - An array of [`Input`](#input) or [`Button`](#button) components.
 
 #### Example
@@ -548,6 +620,11 @@ await snap.request({
 
 Outputs a heading.
 This is useful for [`Box`](#box) titles.
+
+#### Props
+
+- `size`: `string` - (Optional) The size of the heading. Possible values are `"sm"`, `"md"`, and 
+  `"lg"`. The default is `"sm"`.
 
 #### Example
 
@@ -616,7 +693,8 @@ This component takes an inline SVG.
 It does not support remote URLs.
 
 You can import SVG, PNG, and JPEG files using an import statement.
-These files are automatically imported as SVG strings, so you can pass them directly to the `Image` component.
+These files are automatically imported as SVG strings, so you can pass them directly to the 
+`Image` component.
 
 The SVG is rendered within an `<img>` tag, which prevents JavaScript or interaction events from
 being supported.
@@ -667,13 +745,20 @@ Outputs an input component for use in [interactive UI](interactive-ui.md).
 #### Props
 
 - `name`: `string` - The name that will be used as a key to the event sent to
-  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is submitted.
+  [`onUserInput`](../../reference/entry-points.md#onuserinput) when the containing form is 
+  submitted.
 - `type` - (Optional) The type of input.
   Possible values are `"text"`, `"number"`, and `"password"`.
   The default is `"text"`.
 - `placeholder`: `string` - (Optional) The text displayed when the input is empty.
 - `label`: `string` - (Optional) The text displayed alongside the input to label it.
 - `value`: `string` - (Optional) The default value of the input.
+- `min`: `string` - (Optional) The minimum value of the input field. Only applicable to the input
+  type `"number"`.
+- `max`: `string` - (Optional) The maximum value of the input field. Only applicable to the input 
+  type `"number"`.
+- `step`: `string` - (Optional) The step value of the input field. Only applicable to the input
+  type `"number"`.
 
 #### Example
 
@@ -738,8 +823,28 @@ Outputs a clickable link.
 
 #### Props
 
-- `href`: `string` - The URL to point to. Supported schemes are `https:` and `mailto:`. `http:` is not allowed.
-- `children`: `Array<string | Bold | Italic>` - The link text.
+- `href`: `string` - The URL to point to. Supported schemes are `https:`, `mailto:`, and 
+  `metamask:`. `http:` is not allowed.
+- `children`: `Array<string | Bold | Italic | Address>` - The link text, or an 
+  [`Address`](#address).
+
+#### About `metamask:` URLs
+
+A Snap can link to the following screens using the `metamask:` scheme: 
+
+- `metamask://client/` - Leads to the main screen of MetaMask.
+- `metamask://snap/[Snap ID]/home/` - Leads to the Snap's 
+  [home page](../custom-ui/home-pages.md), or the Snap's settings page if it does not have a home 
+  page. Valid Snap IDs are npm IDs beginning with `npm:`, such as 
+  `metamask://snap/npm:@consensys/starknet-snap/home`, or `local:`, such as 
+  `metamask://snap/local:http://localhost:8080/home`. Consider using 
+  [environment variables](../../how-to/use-environment-variables.md) so you can have different 
+  Snap IDs for local testing and production.
+
+:::warning
+MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
+installed. 
+:::
 
 #### Example
 
@@ -813,8 +918,8 @@ Outputs a row with a label and value, which can be used for key-value data.
 - `variant` - (Optional) The variant of the label.
   Possible values are `"default"`, `"error"`, and `"warning"`.
   The default is `"default"`.
-- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), or
-  [`Address`](#address) component.
+- `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), 
+  [`Address`](#address), or [`Link`](#link) component.
 
 #### Example
 
