@@ -6,7 +6,7 @@ sidebar_position: 1
 # Install MetaMask Flask
 
 To get started building your own Snaps, install the MetaMask Flask browser extension on
-[Google Chrome](https://chromewebstore.google.com/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk)
+[Google Chrome](https://chromewebstore.google.com/detail/metamask-flask-development/ljfoeinjpaedjfecbmggjgodbgkmjkjk)
 or
 [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/metamask-flask/).
 
