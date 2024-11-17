@@ -9,7 +9,7 @@ Once you have built your Snap, tested it, and published it to npm, you can make 
 
 If your Snap only uses [open permissions](#open-permissions), anyone can install it on the MetaMask extension.
 However, third-party Snaps that use
-[protected permissions](#open-permissions)
+[protected permissions](#protected-permissions)
 must be put on an allowlist before users can install them.
 This means that at this time, for Snaps that use protected permissions, only those that are reviewed by MetaMask can be installed.
 In the future, this system will be opened up.
