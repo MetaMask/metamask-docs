@@ -105,7 +105,7 @@ const MetaMaskFound = async (providerDetail) => {
 
 ## When to use initial connections
 
-The following scenarios showcase `initialConnection`'s usefulness, in order from most to least useful:
+The following scenarios showcase `initialConnections`'s usefulness, in order from most to least useful:
 
 #### Snap used by multiple dapps
 
