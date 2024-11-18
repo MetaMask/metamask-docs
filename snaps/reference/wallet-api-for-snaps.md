@@ -125,7 +125,7 @@ await window.ethereum.request({
     "enabled": true,
     "blocked": false
   },
-  "npm:foo-Snap": {
+  "npm:foo-snap": {
     "version": "1.0.5",
     "id": "npm:foo-snap",
     "enabled": true,
