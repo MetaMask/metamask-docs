@@ -174,7 +174,7 @@ export default function Faq({
                   data-testid="faq-linea-bridge"
                   onClick={handleClickBridge}
                   target="_blank"
-                  href="https://docs.linea.build/use-linea/bridge-funds"
+                  href="https://bridge.linea.build"
                 >
                   bridge.
                 </a>
