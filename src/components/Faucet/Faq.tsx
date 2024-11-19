@@ -168,7 +168,7 @@ export default function Faq({
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                Linea ETH comes from Goerli ETH that is bridged to Linea
+                Linea ETH comes from Sepolia ETH that is bridged to Linea
                 using the canonical{" "}
                 <a
                   data-testid="faq-linea-bridge"
