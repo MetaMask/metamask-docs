@@ -1,6 +1,5 @@
 ---
 description: Send Starknet transactions in MetaMask.
-sidebar_position: 4
 ---
 
 import Tabs from "@theme/Tabs";

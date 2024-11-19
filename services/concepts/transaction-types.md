@@ -46,4 +46,4 @@ They also contain a `maxPriorityFeePerGas` parameter, which specifies the maximu
 
 An EIP-1559 transaction always pays the base fee of the block it’s included in, and it pays a priority fee as priced by `maxPriorityFeePerGas` or, if the base fee per gas + `maxPriorityFeePerGas` exceeds `maxFeePerGas`, it pays a priority fee as priced by `maxFeePerGas` minus the base fee per gas. The base fee is burned, and the priority fee is paid to the miner that included the transaction. A transaction’s priority fee per gas incentivizes miners to include the transaction over other transactions with lower priority fees per gas.
 
-Read the [ConsenSys EIP-1559 primer](https://consensys.net/blog/quorum/what-is-eip-1559-how-will-it-change-ethereum/) for more information on how EIP-1559 changes Ethereum.
+Read the [Consensys EIP-1559 primer](https://consensys.net/blog/quorum/what-is-eip-1559-how-will-it-change-ethereum/) for more information on how EIP-1559 changes Ethereum.

@@ -22,12 +22,12 @@ from the transaction receipt.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
   ```bash
   curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -35,6 +35,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
     -H "Content-Type: application/json" \
     -d '{"jsonrpc": "2.0", "id": 1, "method": "zks_getL2ToL1LogProof", "params": ["0x2a1c6c74b184965c0cb015aae9ea134fd96215d2e4f4979cfec12563295f610e"]}'
   ```
+
   </TabItem>
   <TabItem value="WSS">
 
@@ -49,6 +50,7 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
 
 <Tabs>
   <TabItem value="JSON">
+
   ```json
   {
     "jsonrpc": "2.0",
@@ -70,5 +72,6 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.
     "id": 1
   }
   ```
+
   </TabItem>
 </Tabs>

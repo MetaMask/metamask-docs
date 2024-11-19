@@ -5,7 +5,7 @@ description: debug_traceCall API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceCall
+# `debug_traceCall`
 
 Returns the number of possible tracing result by executing an `eth_call` within the context of the
 given block execution.
@@ -25,8 +25,8 @@ Infura restricts `debug_traceCall` to a select set of customers. Please
   - `gas`: (string) hexadecimal value of the gas provided for the transaction execution. `eth_call` consumes zero
     gas, but this parameter may be needed by some executions.
   - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
-  - `maxPriorityFeePerGas`: (string) maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
-  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
+  - `maxPriorityFeePerGas`: (string) maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
   - `value`: (string) hexadecimal of the value sent with this transaction.
   - `data`: (string) hash of the method signature and encoded parameters.
     See [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
@@ -52,12 +52,12 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \

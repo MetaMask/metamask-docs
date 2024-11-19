@@ -5,7 +5,7 @@ description: debug_traceBlockByHash API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlockByHash
+# `debug_traceBlockByHash`
 
 Returns tracing results by executing all transactions in the block specified by the block hash.
 
@@ -29,7 +29,7 @@ Depending on the specified tracer type, returns a [`callTracer`](../debug/index.
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \

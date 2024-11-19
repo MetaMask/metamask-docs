@@ -1,7 +1,5 @@
 ---
 description: Integrate MetaMask SDK with Web3-Onboard in your JavaScript dapp.
-sidebar_position: 2
-sidebar_label: Web3-Onboard
 tags:
   - JavaScript SDK
 ---
@@ -47,7 +45,6 @@ example, [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata):
 ```javascript
 const metamaskSDKWallet = metamaskSDK({
   options: {
-    extensionOnly: false,
     dappMetadata: {
       name: "Example Web3-Onboard Dapp",
     },

@@ -130,8 +130,8 @@ An object representing the
 its corresponding key material:
 
 - `depth` - The 0-indexed path depth of the node.
-- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a master node.
-- `index` - The index of the node, or 0 if this is a master node.
+- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a root node.
+- `index` - The index of the node, or 0 if this is a root node.
 - `privateKey` - The private key of the node.
 - `publicKey` - The public key of the node.
 - `chainCode` - The chain code of the node.
@@ -597,7 +597,7 @@ This method is organized into multiple sub-methods which each take their own par
 - [`listAccounts`](#listaccounts)
 - [`submitResponse`](#submitresponse)
 
-### createAccount
+### `createAccount`
 
 Creates a new Snap account.
 
@@ -660,7 +660,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### updateAccount
+### `updateAccount`
 
 Updates an existing Snap account.
 
@@ -699,7 +699,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### deleteAccount
+### `deleteAccount`
 
 Deletes a Snap account.
 
@@ -738,7 +738,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### listAccounts
+### `listAccounts`
 
 Lists the calling Snap's accounts that are known to MetaMask.
 This method does not call back to the Snap.
@@ -773,7 +773,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### submitResponse
+### `submitResponse`
 
 Finalizes a signing request.
 This is usually called as part of the
@@ -914,13 +914,12 @@ The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive interface"),
-      button({
-        value: "Click me",
-        name: "interactive-button",
-      }),
-    ]),
+    ui: ( 
+      <Box>
+        <Heading>Interactive interface</Heading>
+        <Button name="interactive-button">Click me</Button>
+      </Box>
+    )
   },
 })
 
@@ -956,26 +955,16 @@ An object where each top-level property can be one of the following:
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive UI Example Snap"),
-      // A top-level input.
-      input({
-        name: "top-level-input",
-        placeholder: "Enter something",
-      }),
-      // A top-level form...
-      form({
-        name: "example-form",
-        children: [
-          // ...with a nested input.
-          input({
-            name: "nested-input",
-            placeholder: "Enter something",
-          }),
-          button("Submit", ButtonType.Submit, "submit"),
-        ],
-      }),
-    ]),
+    ui: (
+      <Box>
+        <Heading>Interactive UI Example Snap</Heading>
+        <Input name="top-level-input" placeholder="Enter something"/>
+        <Form name="example-form">
+          <Input name="nested-input" placeholder="Enter something"/>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Box>
+    )
   },
 })
 
@@ -1025,6 +1014,7 @@ An object containing:
 - `id` - The ID of the interface to be updated, usually received in the
   [`onUserInput`](./entry-points.md#onuserinput) entry point.
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+- `context` - (Optional) A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface. Passing this parameter will update the context object for the interface. 
 
 #### Example
 
@@ -1036,9 +1026,12 @@ export function onUserInput({ id, event }) {
     method: "snap_updateInterface",
     params: {
       id,
-      ui: panel([
-        heading("New interface"),
-      ]),
+      ui: (
+        <Box>
+          <Heading>New interface</Heading>
+          <Text>This interface has been updated</Text>
+        </Box>
+      )
     },
   });
 };

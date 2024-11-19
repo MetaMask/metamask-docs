@@ -17,7 +17,7 @@ Infura doesn't currently support remote pinning services on IPFS Desktop.
 
 ```bash
 curl -X POST -F file=@myfile \
-  -u "<API_KEY>:<API_KEY_SECRET>" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   "https://ipfs.infura.io:5001/api/v0/add"
 
 > {
@@ -64,7 +64,7 @@ Infura's [ipfs-upload-client](https://github.com/INFURA/ipfs-upload-client) is a
 Upload your files and directories to IPFS using the following syntax:
 
 ```
-./ipfs-upload-client --id <API_KEY> --secret <API_KEY_SECRET> </path/to/data>
+./ipfs-upload-client --id <YOUR-API-KEY> --secret <YOUR-API-KEY-SECRET> </path/to/data>
 ```
 
 By default, the tool also pins your uploaded file. You can override this default by setting `--pin false`. Read more
@@ -85,7 +85,7 @@ IPFS pinning allows you to retain and persist data on IPFS nodes. Pinning assure
 not removed during the [IPFS garbage collection process](https://docs.ipfs.io/concepts/persistence/#garbage-collection).
 
 ```bash
-curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
+curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   "https://ipfs.infura.io:5001/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
@@ -101,14 +101,14 @@ To unpin a file in the Infura UI, select the file in the IPFS dashboard for your
 Alternatively, use the IPFS API to unpin content.
 
 ```bash
-curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
+curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
 ### Read a file
 
 ```bash
-curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" \
+curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 
 > Infura IPFS - Getting started demo.

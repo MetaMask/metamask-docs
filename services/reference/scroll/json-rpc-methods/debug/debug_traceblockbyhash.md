@@ -5,7 +5,7 @@ description: debug_traceBlockByHash API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlockByHash
+# `debug_traceBlockByHash`
 
 Returns tracing results by executing all transactions in the block specified by the block hash.
 
@@ -32,12 +32,12 @@ Depending on the specified tracer type, returns the tracer object.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \

@@ -1,6 +1,5 @@
 ---
 description: Learn about the RPC methods for signing transactions in MetaMask.
-sidebar_position: 6
 ---
 
 # Signing methods
@@ -13,7 +12,7 @@ Learn how to [use the recommended signing methods](../how-to/sign-data/index.md)
 [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 is:
 
-- Cheap to verify on chain.
+- Cheap to verify onchain.
 - Human-readable.
 - Protected against phishing signatures.
 
@@ -28,7 +27,7 @@ If onchain verifiability cost is a high priority,
   (for example, [Sign-In with Ethereum](../how-to/sign-data/siwe.md)).
 - Is protected against phishing signatures.
 
-The text prefix of `personal_sign` makes signatures expensive to verify on-chain.
+The text prefix of `personal_sign` makes signatures expensive to verify onchain.
 If onchain verifiability cost is not a priority, you can
 [use `personal_sign`](../how-to/sign-data/index.md#use-personal_sign).
 
@@ -61,10 +60,10 @@ of `eth_signTypedData`.
 
 The earlier versions are:
 
-- `eth_signTypedData_v1` – The same as `eth_signTypedData`.
+- `eth_signTypedData_v1` - The same as `eth_signTypedData`.
   Read the
   [introductory blog post to this method](https://medium.com/metamask/scaling-web3-with-signtypeddata-91d6efc8b290).
-- `eth_signTypedData_v3` – A highly used version of the EIP-712 specification.
+- `eth_signTypedData_v3` - A highly used version of the EIP-712 specification.
   Read the
   [introductory blog post to this method](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 

@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# eth_getRootHash
+# `eth_getRootHash`
 
 Returns the root hash of a specified block range.
 
@@ -25,7 +25,7 @@ The maximum difference between the specified block range can be 32767.
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \
