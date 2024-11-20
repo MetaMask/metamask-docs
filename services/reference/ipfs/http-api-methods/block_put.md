@@ -15,7 +15,7 @@ Store input as an IPFS block.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/put?format=v0&mhtype=sha2-256&mhlen=-1" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"<file>"
 ```

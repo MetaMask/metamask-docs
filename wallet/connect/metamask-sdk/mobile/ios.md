@@ -1,6 +1,4 @@
 ---
-sidebar_label: iOS
-sidebar_position: 1
 toc_max_heading_level: 4
 description: Set up the SDK in your iOS dapp.
 tags:
@@ -34,7 +32,7 @@ users to easily connect with their MetaMask Mobile wallet.
 <Tabs>
 <TabItem value="CocoaPods">
 
-To add the SDK as a CocoaPods dependency to your project, add the following entry to our Podfile:
+To add the SDK as a CocoaPods dependency to your project, add the following entry to your Podfile:
 
 ```text
 pod "metamask-ios-sdk"

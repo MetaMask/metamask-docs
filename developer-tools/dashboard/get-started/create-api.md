@@ -20,33 +20,24 @@ For more information, see to the [Infura pricing page](https://www.infura.io/pri
 Infura allows you to enable multiple network endpoints and expansion APIs for your API key. If calls are
 made to a disabled network or service, then all requests to that network or service will fail.
 
-To keep your account secure and cost effective, add only the necessary endpoints, as some have usage limits or charges based
-on request volume.
+To keep your account secure and cost effective, add only the necessary endpoints, as some have usage
+limits or charges based on request volume.
 
 To create an API key:
 
-1. Open the [Infura dashboard](https://infura.io/dashboard). Enter your login details, if required.
-1. Select **CREATE NEW API KEY**.
-
-<div class="left-align-container">
-<div class="img-large">
-    <img
-    src={require("../../images/create_key.png").default}
-    />
-</div>
-</div>
-
-1. From the pop-up window, provide a name, then click **CREATE**.
+1. Open the [MetaMask Developer dashboard](https://infura.io/dashboard). Enter your login details, if required.
+1. In the top right corner, select **Create new API key**.
+1. From the pop-up window, provide a name, then click **Create**.
 1. Select the networks that you want your API key to access, and select **Save Changes**.
 
-You can [configure additional security](../how-to/secure-an-api/api-key-secret.md) for your API key by requiring an API key secret or JWTs with
-each API request.
+You can [configure additional security](../how-to/secure-an-api/api-key-secret.md) for your API key by
+requiring an API key secret or JWTs with each API request.
 
 ## Best practices for configuring API key endpoints
 
 We recommend the following best practices when creating your API keys:
 
-- Group API key endpoints by environment. For example, create seperate API keys for production or development environments.
+- Group API key endpoints by environment. For example, create separate API keys for production or development environments.
 - Group API key endpoints by groups or individuals [sharing the API key](../how-to/project-sharing.md).
 - Limit the number of networks or services per API key only to the necessary endpoints.
 - Group the API key endpoints based on shared security considerations such as

@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](../../../developer-tools/dashboard/).
+Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](../../../developer-tools/dashboard/).
 
 ## Arbitrum
 

@@ -195,7 +195,7 @@ const config = {
             label: "Developer tools",
             items: [
               {
-                label: "Infura dashboard",
+                label: "Developer dashboard",
                 to: "developer-tools/dashboard",
               },
               {

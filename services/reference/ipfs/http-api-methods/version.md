@@ -15,7 +15,7 @@ Show IPFS version information.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/version?number=<value>&commit=<value>&repo=<value>&all=<value>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>

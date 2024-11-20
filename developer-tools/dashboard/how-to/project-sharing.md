@@ -11,9 +11,9 @@ You can share access to your Infura API keys by inviting existing Infura account
 
 To share an API key:
 
-1. In the Infura dashboard, select the API that you want to share.
+1. In the dashboard, select the API that you want to share.
 1. Select the **API Key Sharing** tab.
-1. Select **INVITE MEMBERS** in the top right.
+1. Select **Invite Members** in the top right.
 
    <div class="left-align-container">
      <div class="img-large">
@@ -23,8 +23,8 @@ To share an API key:
      </div>
    </div>
 
-1. Input one or more user emails, select the [user role](#user-roles), and select **SUBMIT**.
-1. Confirm your email address and select **CONFIRM**.
+1. Input one or more user emails, select the [user role](#user-roles), and select **Submit**.
+1. Confirm your email address and select **Confirm**.
 
 :::note
 
@@ -72,28 +72,20 @@ You can view all keys that you own, and all keys shared with you, by selecting *
 
 ## Update user role or remove user
 
-1. In the Infura dashboard, select the API key that the user is assigned to.
+1. In the dashboard, select the API key that the user is assigned to.
 1. Select the **API Key Sharing** tab.
 1. Select the vertical ellipsis icon next to the relevant user.
 
    - To remove a user, select **Remove Member**. They are removed immediately.
    - To update a user's role, select **Update Role**.
 
-     <div class="left-align-container">
-       <div class="img-large">
-         <img
-           src={require("../../images/update-role.png").default}
-         />
-       </div>
-     </div>
-
-1. Upgrade or downgrade accordingly and select **UPDATE ROLE**.
+1. Upgrade or downgrade accordingly and select **Update Role**.
 
 ## Revoke or resend an invite
 
 While invitations remain in a pending state, they can be revoked or sent again.
 
-1. In the Infura dashboard, select the API key for the user.
+1. In the dashboard, select the API key for the user.
 
 1. Select the **API Key Sharing** tab.
 

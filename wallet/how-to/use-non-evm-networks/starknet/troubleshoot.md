@@ -1,6 +1,5 @@
 ---
 description: Troubleshoot common Starknet issues.
-sidebar_position: 7
 toc_max_heading_level: 4
 ---
 
