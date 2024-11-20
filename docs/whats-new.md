@@ -11,6 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## November 2024
 
+- Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
 - Added tutorial for
   [creating a simple Starknet dapp](/wallet/how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp).
   ([#1656](https://github.com/MetaMask/metamask-docs/pull/1656))
