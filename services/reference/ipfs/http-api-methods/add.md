@@ -69,4 +69,4 @@ On success, the call to this endpoint will return with 200 and the following bod
 
 - `Name` - Name of the object.
 - `Hash` - Hash of the uploaded object.
-- `Size` - Integer indication size in bytes.
+- `Size` - Integer indicating size in bytes.

@@ -914,13 +914,12 @@ The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive interface"),
-      button({
-        value: "Click me",
-        name: "interactive-button",
-      }),
-    ]),
+    ui: ( 
+      <Box>
+        <Heading>Interactive interface</Heading>
+        <Button name="interactive-button">Click me</Button>
+      </Box>
+    )
   },
 })
 
@@ -956,26 +955,16 @@ An object where each top-level property can be one of the following:
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive UI Example Snap"),
-      // A top-level input.
-      input({
-        name: "top-level-input",
-        placeholder: "Enter something",
-      }),
-      // A top-level form...
-      form({
-        name: "example-form",
-        children: [
-          // ...with a nested input.
-          input({
-            name: "nested-input",
-            placeholder: "Enter something",
-          }),
-          button("Submit", ButtonType.Submit, "submit"),
-        ],
-      }),
-    ]),
+    ui: (
+      <Box>
+        <Heading>Interactive UI Example Snap</Heading>
+        <Input name="top-level-input" placeholder="Enter something"/>
+        <Form name="example-form">
+          <Input name="nested-input" placeholder="Enter something"/>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Box>
+    )
   },
 })
 
@@ -1025,6 +1014,7 @@ An object containing:
 - `id` - The ID of the interface to be updated, usually received in the
   [`onUserInput`](./entry-points.md#onuserinput) entry point.
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+- `context` - (Optional) A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface. Passing this parameter will update the context object for the interface. 
 
 #### Example
 
@@ -1036,9 +1026,12 @@ export function onUserInput({ id, event }) {
     method: "snap_updateInterface",
     params: {
       id,
-      ui: panel([
-        heading("New interface"),
-      ]),
+      ui: (
+        <Box>
+          <Heading>New interface</Heading>
+          <Text>This interface has been updated</Text>
+        </Box>
+      )
     },
   });
 };

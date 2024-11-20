@@ -6,7 +6,7 @@ sidebar_position: 6
 # Gas
 
 Gas is a unit used to measure the computational effort required to perform an action on a blockchain network, such as
-executing a smart contract or sending a transaction. To perform an action, users must pay in units of gas, which is
+executing a smart contract or sending a transaction. To perform an action, users must pay in units of gas, which are
 calculated based on the computational resources required for the action, and to compensate the miners who execute the
 request.
 
