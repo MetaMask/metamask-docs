@@ -31,6 +31,11 @@ The text prefix of `personal_sign` makes signatures expensive to verify onchain.
 If onchain verifiability cost is not a priority, you can
 [use `personal_sign`](../how-to/sign-data/index.md#use-personal_sign).
 
+:::note
+MetaMask implements `personal_sign` similarly to the Go Ethereum client's updated `eth_sign` implementation.
+MetaMask's `personal_sign` doesn't accept a password.
+:::
+
 ## Deprecated signing methods
 
 :::caution important

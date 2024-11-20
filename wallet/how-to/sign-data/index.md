@@ -194,11 +194,6 @@ It's often used for signature challenges that are authenticated on a web server,
 
 </p>
 
-Some other signers implement `personal_sign` as `eth_sign`, because the Go Ethereum client changed
-the behavior of its `eth_sign` method.
-Because MetaMask supports existing applications, MetaMask implements both `personal_sign` and `eth_sign`.
-You might need to check what method your supported signers use for a given implementation.
-
 :::caution important
 
 - Don't use this method to display binary data, because the user wouldn't be able to understand what
