@@ -11,6 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## November 2024
 
+- Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
 - Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
   ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
 - Added tutorial for
