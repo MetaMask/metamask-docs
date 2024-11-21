@@ -155,6 +155,12 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<YOUR-API-KEY>` |
 
+## Unichain
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## ZKsync Era
 
 :::info

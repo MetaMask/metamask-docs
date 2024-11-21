@@ -269,6 +269,7 @@
   line-height: 24px;
   font-weight: 500;
   color: var(--param-item-color);
+  background-color: var(--param-item-bg);
   border-radius: 0;
   border: 2px solid transparent;
   text-overflow: ellipsis;

@@ -121,6 +121,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-starknet.svg`,
   },
   {
+    name: "Unichain",
+    href: "/services/reference/unichain",
+    logo: `${LOGO_PATH}/logo-unichain.svg`,
+  },
+  {
     name: "ZKsync Era",
     href: "/services/reference/zksync",
     logo: `${LOGO_PATH}/logo-zksync.svg`,
