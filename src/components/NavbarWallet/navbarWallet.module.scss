@@ -111,3 +111,40 @@
 .tooltip {
   font-size: 14px !important;
 }
+
+.innerItemWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.extLinkWrap {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.extLink {
+  display: inline-flex;
+  align-items: center;
+  color: #43AEFC;
+}
+
+.extLink img {
+  display: block;
+  margin-left: 5px;
+}
+
+.extTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  min-width: 45px;
+  padding: 4px 4px 6px 4px;
+  margin-left: 10px;
+  background-color: #213949;
+  color: #43AEFC;
+  border-radius: 12px;
+}

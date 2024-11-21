@@ -9,6 +9,7 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
+import Link from "@docusaurus/Link";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
@@ -157,29 +158,44 @@ const NavbarWalletComponent: FC = ({
       {dropdownOpen && (
         <ul ref={dialogRef} className={styles.dropdown}>
           <li className={styles.item}>
-            <img
-              src="/img/icons/jazzicon.png"
-              className={styles.avatar}
-              alt="avatar"
-            />{" "}
-            <span className={styles.walletId}>
-              {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
-            </span>
-            <button
-              data-testid="navbar-account-copy"
-              className={styles.copyButton}
-              onClick={handleCopy}
-            >
-              <Tooltip
-                message={copyMessage}
-                className={styles.tooltip}
-                onHidden={() => {
-                  setCopyMessage(COPY_TEXT);
-                }}
-              >
-                <CopyIcon />
-              </Tooltip>
-            </button>
+            <div>
+              <div className={styles.innerItemWrap}>
+                <img
+                  src="/img/icons/jazzicon.png"
+                  className={styles.avatar}
+                  alt="avatar"
+                />{" "}
+                <span className={styles.walletId}>
+                  {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
+                </span>
+                <button
+                  data-testid="navbar-account-copy"
+                  className={styles.copyButton}
+                  onClick={handleCopy}
+                >
+                  <Tooltip
+                    message={copyMessage}
+                    className={styles.tooltip}
+                    onHidden={() => {
+                      setCopyMessage(COPY_TEXT);
+                    }}
+                  >
+                    <CopyIcon />
+                  </Tooltip>
+                </button>
+              </div>
+              {
+                !metaMaskAccountEns && (
+                  <div className={styles.extLinkWrap}>
+                    <Link to="https://names.linea.build/" className={styles.extLink}>
+                      Claim Linea Name
+                      <img src="/img/icons/end-icon.svg" alt="icon" width={16} height={16} />
+                    </Link>
+                    <span className={styles.extTag}>New</span>
+                  </div>
+                )
+              }
+            </div>
           </li>
           <li className={styles.item}>
             <Button
