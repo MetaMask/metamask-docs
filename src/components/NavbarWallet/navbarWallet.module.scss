@@ -1,9 +1,13 @@
 :root[data-theme="dark"] {
   --navbarWallet-color: #fff;
+  --tag-bg-color: #213949;
+  --tag-border-color: transparent;
 }
 
 :root[data-theme="light"] {
   --navbarWallet-color: #141618;
+  --tag-bg-color: #fff;
+  --tag-border-color: #43AEFC;
 }
 
 :global([class*="navbarSearchContainer"]) {
@@ -144,7 +148,8 @@
   min-width: 45px;
   padding: 4px 4px 6px 4px;
   margin-left: 10px;
-  background-color: #213949;
+  background-color: var(--tag-bg-color);
   color: #43AEFC;
   border-radius: 12px;
+  border: 1px solid var(--tag-border-color);
 }
