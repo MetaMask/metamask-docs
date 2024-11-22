@@ -1,3 +1,13 @@
+:root[data-theme='dark'] {
+  --modal-bg-color-primary: var(--general-gray-dark);
+  --modal-font-color-primary: var(--general-white);
+}
+
+:root[data-theme='light'] {
+  --modal-bg-color-primary: var(--general-white);
+  --modal-font-color-primary: var(--general-black);
+}
+
 .modalOverlay {
   z-index: 300;
   position: fixed;
@@ -12,7 +22,8 @@
   transform: translate(-50%, -50%);
   overflow: auto;
   outline: none;
-  background: var(--background-default, #24272A);
+  /* background: var(--background-default, #24272a); */
+  background: var(--modal-bg-color-primary);
   width: 360px;
   padding: 16px;
   border-radius: 8px;
@@ -21,9 +32,9 @@
 }
 
 .modalContent {
-  color: #FFF;
+  color: #fff;
 
-  --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
+  --font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
 
   position: relative;
 }
@@ -36,12 +47,18 @@
   height: 24px;
   border: 0;
   background: transparent;
+  cursor: pointer;
+  svg {
+    path {
+      fill: var(--modal-font-color-primary);
+    }
+  }
 }
 
 .spinnerContainer {
-  display: flex; 
+  display: flex;
   align-items: center;
-  position: relative; 
+  position: relative;
   width: 60px;
   height: 60px;
   margin: auto;
@@ -89,14 +106,24 @@
   font-weight: 700;
   line-height: 24px;
   margin: 12px 0 0;
+  color: var(--modal-font-color-primary);
 }
 
 .content {
   margin: 12px 0;
+  font-size: 16px;
+  color: var(--modal-font-color-primary);
 }
 
 .flexButton {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   padding: 10px;
+  button {
+    &:hover {
+      --button-color-hover: var(--general-black);
+      --button-text-color-hover: var(--general-white);
+    }
+  }
 }

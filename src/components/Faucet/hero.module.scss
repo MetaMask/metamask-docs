@@ -1,27 +1,35 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --hero-text-color: #fff;
 
   .hero {
     &.sepolia {
-      --hero-image: url("/img/faucet-sepolia-hero-dark.png");
+      --hero-image: url('/img/faucet-sepolia-hero-dark.png');
     }
 
     &.linea {
-      --hero-image: url("/img/faucet-linea-hero-dark.png");
+      --hero-image: url('/img/faucet-linea-hero-dark.png');
     }
   }
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --hero-text-color: #141618;
 
   .hero {
     &.sepolia {
-      --hero-image: url("/img/faucet-sepolia-hero-light.png");
+      --hero-image: url('/img/faucet-sepolia-hero-light.png');
     }
 
     &.linea {
-      --hero-image: url("/img/faucet-linea-hero-light.png");
+      --hero-image: url('/img/faucet-linea-hero-light.png');
+    }
+  }
+}
+
+[role='tabpanel'] {
+  .hero {
+    p {
+      padding: 0;
     }
   }
 }
@@ -31,7 +39,7 @@
   background-image: var(--hero-image);
   background-repeat: no-repeat;
   background-position: 100% 0;
-  background-size: auto 100%;;
+  background-size: auto 100%;
 
   @media screen and (max-width: 996px) {
     background-image: none;
@@ -49,11 +57,36 @@
     }
 
     .inputCont {
-      max-width: 600px;
       width: 100%;
 
       @media screen and (max-width: 996px) {
         max-width: 100%;
+      }
+
+      .input {
+        @media screen and (max-width: 996px) {
+          width: 100%;
+        }
+        width: 600px;
+        margin-bottom: 0;
+        p {
+          padding: 0 0 1rem 0;
+        }
+        input {
+          height: 4.2rem;
+          margin-bottom: 0;
+          cursor: auto;
+        }
+      }
+
+      .inputWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+
+        @media screen and (max-width: 996px) {
+          flex-direction: column;
+        }
       }
 
       .caption {
@@ -66,14 +99,19 @@
     }
 
     .alignedButtons {
-      margin-top: 22px;
-    }
-
-    .button {
-      height: 48px;
-
+      display: flex;
+      align-items: flex-end;
+      margin-left: 8px;
       @media screen and (max-width: 996px) {
         width: 100%;
+        margin-top: 1rem;
+        margin-left: 0;
+      }
+
+      button {
+        @media screen and (max-width: 996px) {
+          width: 100%;
+        }
       }
     }
   }

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import Modal from "react-modal";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { useLocation } from "@docusaurus/router";
-import styles from "./styles.module.css";
-import global from "../ParserOpenRPC/global.module.scss";
-import Icon from "../Icon/Icon";
+import React, { useContext, useEffect } from 'react'
+import Modal from 'react-modal'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { useLocation } from '@docusaurus/router'
+import styles from './styles.module.css'
+import global from '../ParserOpenRPC/global.module.scss'
+import Icon from '../Icon/Icon'
 import {
   authenticateAndAuthorize,
   AUTH_WALLET_PAIRING,
@@ -13,33 +13,34 @@ import {
   saveTokenString,
   getUserIdFromJwtToken,
   AUTH_WALLET_USER_PLAN,
-} from "../../lib/siwsrp/auth";
-import { DASHBOARD_URL, REQUEST_PARAMS } from "@site/src/lib/constants";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
+} from '../../lib/siwsrp/auth'
+import { DASHBOARD_URL, REQUEST_PARAMS } from '@site/src/lib/constants'
+import { MetamaskProviderContext } from '@site/src/theme/Root'
+import Button from '@site/src/components/elements/buttons/button'
 
-Modal.setAppElement("#__docusaurus");
+Modal.setAppElement('#__docusaurus')
 type AuthModalProps = {
-  open: boolean;
-  setOpen: (arg: boolean) => void;
-  setUser: (arg: string) => void;
-  setToken: (arg: string) => void;
-  step: AUTH_LOGIN_STEP;
-  setStep: (arg: AUTH_LOGIN_STEP) => void;
-  setUksTier: (arg: string) => void;
-};
+  open: boolean
+  setOpen: (arg: boolean) => void
+  setUser: (arg: string) => void
+  setToken: (arg: string) => void
+  step: AUTH_LOGIN_STEP
+  setStep: (arg: AUTH_LOGIN_STEP) => void
+  setUksTier: (arg: string) => void
+}
 
 export enum AUTH_LOGIN_STEP {
-  CONNECTING = "connecting",
-  WALLET_LOGIN_MULTI_USER = "wallet-login-multi-user",
-  WALLET_LOGIN_EMAIL_PASSWORD = "wallet-login-email-password",
-  CONNECTION_ERROR = "connection-error",
-  CONNECTION_SUCCESS = "connection-success",
+  CONNECTING = 'connecting',
+  WALLET_LOGIN_MULTI_USER = 'wallet-login-multi-user',
+  WALLET_LOGIN_EMAIL_PASSWORD = 'wallet-login-email-password',
+  CONNECTION_ERROR = 'connection-error',
+  CONNECTION_SUCCESS = 'connection-success',
 }
 
 export enum WALLET_LINK_TYPE {
-  NO = "NO",
-  ONE = "ONE",
-  MULTIPLE = "MULTIPLE",
+  NO = 'NO',
+  ONE = 'ONE',
+  MULTIPLE = 'MULTIPLE',
 }
 
 const ConnectingModal = () => {
@@ -51,26 +52,11 @@ const ConnectingModal = () => {
       </div>
       <div className={styles.heading}>Waiting for MetaMask</div>
       <div className={styles.content}>
-        Don’t close or exit this window. Please continue connecting on your
-        extension.
+        Don’t close or exit this window. Please continue connecting on your extension.
       </div>
-      <button
-        style={{
-          display: "block",
-          width: "100%",
-          textAlign: "center",
-          opacity: "0.5",
-          margin: "22px 0 0 0",
-        }}
-        className={global.primaryBtn}
-        disabled
-        aria-disabled
-      >
-        Connecting...
-      </button>
     </>
-  );
-};
+  )
+}
 
 const ConnectionSuccessModal = () => {
   return (
@@ -86,54 +72,39 @@ const ConnectionSuccessModal = () => {
         You’re all set!
       </div>
     </>
-  );
-};
+  )
+}
 
 const ConnectionErrorModal = ({
   setOpen,
   login,
   metaMaskDisconnect,
 }: {
-  setOpen: (arg: boolean) => void;
-  login: () => void;
-  metaMaskDisconnect: () => void;
+  setOpen: (arg: boolean) => void
+  login: () => void
+  metaMaskDisconnect: () => void
 }) => {
   const handleCancel = () => {
-    metaMaskDisconnect();
-    setOpen(false);
-  };
+    metaMaskDisconnect()
+    setOpen(false)
+  }
   return (
     <>
       <div className={styles.spinnerContainer}>
         <Icon name="spinner-error" classes={styles.spinner} />
         <Icon name="metamask" classes={styles.metamask} />
       </div>
-      <div className={styles.heading}>
-        There was an issue connecting your wallet
-      </div>
+      <div className={styles.heading}>There was an issue connecting your wallet</div>
       <div className={styles.content}>
-        Please try again or{" "}
-        <a href="https://support.metamask.io/">contact us</a>.
+        Please try again or <a href="https://support.metamask.io/">contact us</a>.
       </div>
       <div className={styles.flexButton}>
-        <button
-          style={{ flex: "1", display: "block", margin: "0 5px" }}
-          className={global.secondaryBtn}
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
-        <button
-          style={{ flex: "1", display: "block", margin: "0 5px" }}
-          className={global.primaryBtn}
-          onClick={login}
-        >
-          Retry
-        </button>
+        <Button as="button" onClick={handleCancel} label={'Cancel'} />
+        <Button as="button" onClick={login} label={'Retry'} />
       </div>
     </>
-  );
-};
+  )
+}
 
 const AuthModal = ({
   open,
@@ -144,8 +115,8 @@ const AuthModal = ({
   setToken,
   setUksTier,
 }: AuthModalProps) => {
-  const { siteConfig } = useDocusaurusContext();
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {};
+  const { siteConfig } = useDocusaurusContext()
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
   const {
     sdk,
     setWalletLinked,
@@ -154,52 +125,47 @@ const AuthModal = ({
     setProjects,
     setMetaMaskAccount,
     setMetaMaskProvider,
-  } = useContext(MetamaskProviderContext);
-  const location = useLocation();
-  const { pathname } = location;
+  } = useContext(MetamaskProviderContext)
+  const location = useLocation()
+  const { pathname } = location
 
   const login = async () => {
-    setStep(AUTH_LOGIN_STEP.CONNECTING);
+    setStep(AUTH_LOGIN_STEP.CONNECTING)
     try {
       if (!sdk.isExtensionActive()) {
-        setOpen(false);
+        setOpen(false)
       }
 
       // Try to connect wallet first
-      const accounts = await sdk.connect();
-      setMetaMaskAccount(accounts);
+      const accounts = await sdk.connect()
+      setMetaMaskAccount(accounts)
       if (accounts && accounts.length > 0) {
-        setMetaMaskAccount(accounts[0]);
-        const provider = sdk.getProvider();
-        setMetaMaskProvider(provider);
+        setMetaMaskAccount(accounts[0])
+        const provider = sdk.getProvider()
+        setMetaMaskProvider(provider)
       }
 
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
-      const { accessToken, userProfile } = await authenticateAndAuthorize(
-        VERCEL_ENV as string,
-      );
+      const { accessToken, userProfile } = await authenticateAndAuthorize(VERCEL_ENV as string)
 
       const loginResponse = await (
-        await fetch(
-          `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`,
-          {
-            ...REQUEST_PARAMS("POST", {
-              hydra_token: accessToken,
-              token: "true",
-            }),
-            body: JSON.stringify({
-              profileId: userProfile.profileId,
-              redirect_to: window.location.href,
-            }),
-          },
-        )
-      ).json();
+        await fetch(`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`, {
+          ...REQUEST_PARAMS('POST', {
+            hydra_token: accessToken,
+            token: 'true',
+          }),
+          body: JSON.stringify({
+            profileId: userProfile.profileId,
+            redirect_to: window.location.href,
+          }),
+        })
+      ).json()
 
-      if (!loginResponse) throw new Error("Something went wrong");
+      if (!loginResponse) throw new Error('Something went wrong')
 
-      const { data, session, token } = loginResponse;
-      localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }));
+      const { data, session, token } = loginResponse
+      localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }))
 
       if (data.step) {
         // Handling no wallet pairing or multiple pairing
@@ -209,103 +175,103 @@ const AuthModal = ({
             mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
-          }),
-        ).toString("base64");
+          })
+        ).toString('base64')
 
-        const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
+        const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`
 
-        setWalletLinkUrl(walletLinkUrl);
+        setWalletLinkUrl(walletLinkUrl)
 
         if (data.pairing && !data.pairing.length) {
-          setWalletLinked(WALLET_LINK_TYPE.NO);
+          setWalletLinked(WALLET_LINK_TYPE.NO)
         }
 
         if (data.pairing && data.pairing.length > 1) {
-          setWalletLinked(WALLET_LINK_TYPE.MULTIPLE);
+          setWalletLinked(WALLET_LINK_TYPE.MULTIPLE)
         }
 
-        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
-        setOpen(false);
-        return;
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS)
+        setOpen(false)
+        return
       }
 
-      setWalletLinked(WALLET_LINK_TYPE.ONE);
+      setWalletLinked(WALLET_LINK_TYPE.ONE)
 
       if (!token) {
-        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
-        return;
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
+        return
       }
 
-      saveTokenString(token);
+      saveTokenString(token)
       if (setToken) {
-        setToken(token);
+        setToken(token)
       }
-      setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
-      const userId = getUserIdFromJwtToken();
+      setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS)
+      const userId = getUserIdFromJwtToken()
       if (setUser) {
-        setUser(userId);
+        setUser(userId)
       }
 
       // You can use Infura Access Token to fetch any Infura API endpoint
       const projectsResponse = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
         {
-          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        },
-      );
+          ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
+        }
+      )
       const {
         result: { projects },
-      } = await projectsResponse.json();
-      sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects));
-      setProjects(projects);
+      } = await projectsResponse.json()
+      sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects))
+      setProjects(projects)
 
       const uksUserRawResp = await fetch(
         `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}`,
         {
-          ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        },
-      );
+          ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
+        }
+      )
       const {
         result: {
           servicePlan: { tier },
         },
-      } = await uksUserRawResp.json();
-      sessionStorage.setItem(AUTH_WALLET_USER_PLAN, JSON.stringify(tier));
+      } = await uksUserRawResp.json()
+      sessionStorage.setItem(AUTH_WALLET_USER_PLAN, JSON.stringify(tier))
       if (setUser) {
-        setUksTier(tier);
+        setUksTier(tier)
       }
-      setOpen(false);
+      setOpen(false)
     } catch (e: any) {
-      if (pathname.startsWith("/wallet/reference")) {
-        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS);
-        setOpen(true);
+      if (pathname.startsWith('/wallet/reference')) {
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS)
+        setOpen(true)
       } else {
-        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
-        setOpen(true);
+        setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
+        setOpen(true)
       }
     }
-  };
+  }
 
   useEffect(() => {
     if (open && step == AUTH_LOGIN_STEP.CONNECTING) {
-      (async () => {
+      ;(async () => {
         try {
-          await login();
+          await login()
         } catch (e: any) {
-          setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR);
+          setStep(AUTH_LOGIN_STEP.CONNECTION_ERROR)
         }
-      })();
+      })()
     }
 
-    if (!open) setStep(AUTH_LOGIN_STEP.CONNECTING);
-  }, [open]);
+    if (!open) setStep(AUTH_LOGIN_STEP.CONNECTING)
+  }, [open])
 
   const handleClose = () => {
     if (step === AUTH_LOGIN_STEP.CONNECTION_ERROR) {
-      metaMaskDisconnect();
+      metaMaskDisconnect()
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <Modal
@@ -313,20 +279,13 @@ const AuthModal = ({
       onRequestClose={handleClose}
       contentLabel="Connect Wallet"
       className={styles.modalWrapper}
-      overlayClassName={styles.modalOverlay}
-    >
+      overlayClassName={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <button
-          type="button"
-          className={styles.modalClose}
-          onClick={handleClose}
-        >
+        <button type="button" className={styles.modalClose} onClick={handleClose}>
           <Icon name="close" classes={styles.modalClose} />
         </button>
         {step === AUTH_LOGIN_STEP.CONNECTING ? <ConnectingModal /> : null}
-        {step === AUTH_LOGIN_STEP.CONNECTION_SUCCESS ? (
-          <ConnectionSuccessModal />
-        ) : null}
+        {step === AUTH_LOGIN_STEP.CONNECTION_SUCCESS ? <ConnectionSuccessModal /> : null}
         {step === AUTH_LOGIN_STEP.CONNECTION_ERROR ? (
           <ConnectionErrorModal
             setOpen={setOpen}
@@ -336,7 +295,7 @@ const AuthModal = ({
         ) : null}
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default AuthModal;
+export default AuthModal
