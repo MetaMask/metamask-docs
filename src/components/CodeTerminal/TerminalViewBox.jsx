@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useMemo, useState, useEffect } from 'react'
-import { API_URL } from '../../lib/constants'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { DASHBOARD_URL } from '../../lib/constants'
 import { useColorMode } from '@docusaurus/theme-common'
 import CodeBlock from '@theme/CodeBlock'
 import Button from '@site/src/components/elements/buttons/button'
@@ -23,6 +24,9 @@ const TerminalViewBox = ({
   useEffect(() => {
     setTheme(colorMode)
   }, [colorMode])
+
+  const { siteConfig } = useDocusaurusContext()
+  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
 
   const exampleRequest = useMemo(() => {
     const prepareParams =
@@ -72,7 +76,8 @@ const TerminalViewBox = ({
                 <Button
                   as="link"
                   target="_blank"
-                  href={`${API_URL}/login`}
+                  href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login`}
+                  rel="noreferrer"
                   label={'Sign in'}
                   style={
                     theme === 'dark'
@@ -90,7 +95,8 @@ const TerminalViewBox = ({
                 <Button
                   as="link"
                   target="_blank"
-                  href={`${API_URL}/register`}
+                  rel="noreferrer"
+                  href={`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/register`}
                   label={'Create an account'}
                   style={
                     theme === 'dark'

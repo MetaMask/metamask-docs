@@ -44,7 +44,7 @@ curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS" >
 
 ```bash
-wscat -c wss://linea-goerli.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceTransaction", "params": ["0x5d3faa9b9605a8fb04d989a79bfe6d3b708bdcfc66048d2fe18ed2dda4a8297c", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

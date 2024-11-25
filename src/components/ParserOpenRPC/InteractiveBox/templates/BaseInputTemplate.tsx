@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { BaseInputTemplateProps } from '@rjsf/utils'
 import clsx from 'clsx'
 import styles from '@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss'
-import { Tooltip } from '@site/src/components/ParserOpenRPC/Tooltip'
+import { Tooltip } from '@site/src/components/Tooltip'
 import debounce from 'lodash.debounce'
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
@@ -93,7 +93,7 @@ export const BaseInputTemplate = ({
                     className={clsx(
                       styles.tableColumnIcon,
                       styles.chevronIcon,
-                      styles.formControlNumberUp
+                      styles.formControlNumberUp,
                     )}
                     onClick={() => {
                       onInputNumberChange(Number((+inputValue || 0) + 1))
@@ -104,9 +104,10 @@ export const BaseInputTemplate = ({
                       styles.tableColumnIcon,
                       styles.chevronIcon,
                       styles.chevronIconDown,
-                      styles.formControlNumberDown
+                      styles.formControlNumberDown,
                     )}
                     onClick={() => {
+                      // @ts-ignore
                       inputValue >= 1 && onInputNumberChange(Number((+inputValue || 0) - 1))
                     }}
                   />

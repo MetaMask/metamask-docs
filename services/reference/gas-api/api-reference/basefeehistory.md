@@ -56,7 +56,7 @@ curl -X "GET" \
 const axios = require("axios")
 
 const apiKey = "<YOUR-API-KEY>" // Replace with your API key.
-const apiKeySecret = "<API-KEY-SECRET>" // Replace with your API key secret.
+const apiKeySecret = "<YOUR-API-KEY-SECRET>" // Replace with your API key secret.
 
 const Auth = Buffer.from(apiKey + ":" + apiKeySecret).toString("base64")
 

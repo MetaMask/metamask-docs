@@ -1,0 +1,118 @@
+:root[data-theme='dark'] {
+  --hero-text-color: #fff;
+
+  .hero {
+    &.sepolia {
+      --hero-image: url('/img/faucet-sepolia-hero-dark.png');
+    }
+
+    &.linea {
+      --hero-image: url('/img/faucet-linea-hero-dark.png');
+    }
+  }
+}
+
+:root[data-theme='light'] {
+  --hero-text-color: #141618;
+
+  .hero {
+    &.sepolia {
+      --hero-image: url('/img/faucet-sepolia-hero-light.png');
+    }
+
+    &.linea {
+      --hero-image: url('/img/faucet-linea-hero-light.png');
+    }
+  }
+}
+
+[role='tabpanel'] {
+  .hero {
+    p {
+      padding: 0;
+    }
+  }
+}
+
+.hero {
+  color: var(--hero-text-color);
+  background-image: var(--hero-image);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: auto 100%;
+
+  @media screen and (max-width: 996px) {
+    background-image: none;
+  }
+
+  .actions {
+    display: flex;
+
+    @media screen and (max-width: 996px) {
+      flex-direction: column;
+    }
+
+    > *:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    .inputCont {
+      width: 100%;
+
+      @media screen and (max-width: 996px) {
+        max-width: 100%;
+      }
+
+      .input {
+        @media screen and (max-width: 996px) {
+          width: 100%;
+        }
+        width: 600px;
+        margin-bottom: 0;
+        p {
+          padding: 0 0 1rem 0;
+        }
+        input {
+          height: 4.2rem;
+          margin-bottom: 0;
+          cursor: auto;
+        }
+      }
+
+      .inputWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+
+        @media screen and (max-width: 996px) {
+          flex-direction: column;
+        }
+      }
+
+      .caption {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+      }
+    }
+
+    .alignedButtons {
+      display: flex;
+      align-items: flex-end;
+      margin-left: 8px;
+      @media screen and (max-width: 996px) {
+        width: 100%;
+        margin-top: 1rem;
+        margin-left: 0;
+      }
+
+      button {
+        @media screen and (max-width: 996px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

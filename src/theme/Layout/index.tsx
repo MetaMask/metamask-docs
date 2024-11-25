@@ -25,8 +25,7 @@ export default function LayoutWrapper({ children }) {
     if (currentPath.includes(REF_PATH) && metamaskMethods.length > 0) {
       const methodPath = currentPath.replace(REF_PATH, "").replace("/", "");
       const page = metamaskMethods.find(
-        (name) =>
-          name.toLowerCase() === methodPath
+        (name) => name.toLowerCase() === methodPath
       );
       return page;
     }
@@ -35,8 +34,7 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <>
-      {
-        referencePageName ? (
+      {referencePageName ? (
           <Layout>
             <div className={styles.pageWrapper}>
               {children?.props?.children[0]?.type === "aside" && (
@@ -57,5 +55,5 @@ export default function LayoutWrapper({ children }) {
         )
       }
     </>
-  )
+  );
 }

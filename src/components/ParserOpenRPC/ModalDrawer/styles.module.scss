@@ -1,6 +1,16 @@
+:root {
+  --param-item-bg: #292a36;
+  --modal-header-bg: #24272a;
+}
+
+:root[data-theme="light"] {
+  --param-item-bg: #F2F4F6;
+  --modal-header-bg: #fff;
+}
+
 .modalContainer {
   border: 1px solid var(--general-gray-light);
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 100%;
   left: 0;
@@ -104,9 +114,15 @@
   overflow-y: hidden;
 }
 
+@media (width <= 1760px) {
+  .modalContainer {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
 @media (width <= 1200px) {
   .modalContainer {
-    position: fixed;
     left: 0;
     right: 0;
     max-width: 100%;

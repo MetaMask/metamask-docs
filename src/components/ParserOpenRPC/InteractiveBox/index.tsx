@@ -8,45 +8,48 @@ import {
   MethodExample,
   MethodParam,
   SchemaComponents,
-} from '@site/src/components/ParserOpenRPC/interfaces'
-import styles from './styles.module.scss'
-import global from '../global.module.scss'
-import { BaseInputTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate'
-import { ArrayFieldTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate'
+} from "@site/src/components/ParserOpenRPC/interfaces";
+import styles from "./styles.module.scss";
+import global from "../global.module.scss";
+import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
+import { ArrayFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate";
 import { ObjectFieldTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate";
 import { WrapIfAdditionalTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate";
-import { ConditionalField } from '@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField'
-import { DropdownWidget } from '@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget'
-import { SelectWidget } from '@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget'
-import { Tooltip } from '@site/src/components/ParserOpenRPC/Tooltip'
-import { useColorMode } from '@docusaurus/theme-common'
-import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
-import { MetamaskProviderContext } from '@site/src/theme/Root'
-import * as isObject from 'lodash.isobject'
+import { ConditionalField } from "@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField";
+import { DropdownWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget";
+import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
+import { Tooltip } from "@site/src/components/Tooltip";
+import { useColorMode } from "@docusaurus/theme-common";
+import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
+import * as isPlainObject from "lodash.isplainobject";
 import { RemoveButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/RemoveButton";
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
 import ClearIcon from '@site/static/img/icons/clear-icon.svg'
 import ResetIcon from '@site/static/img/icons/reset-icon.svg'
 
 interface InteractiveBoxProps {
-  params: MethodParam[]
-  components: SchemaComponents
-  examples: MethodExample[]
-  onParamChange: (data) => void
-  drawerLabel?: string | null
-  closeComplexTypeView?: () => void
-  isOpen?: boolean
+  params: MethodParam[];
+  components: SchemaComponents;
+  examples: MethodExample[];
+  onParamChange: (data) => void;
+  drawerLabel?: string | null;
+  closeComplexTypeView?: () => void;
+  isOpen?: boolean;
 }
 
 type ObjectType = { [key: string]: any };
 type KeyOrderType = { name: string };
 
-function sortObjectKeysByArray(obj: ObjectType, orderArray: KeyOrderType[]): ObjectType {
+function sortObjectKeysByArray(
+  obj: ObjectType,
+  orderArray: KeyOrderType[]
+): ObjectType {
   const result: ObjectType = {};
   for (const { name } of orderArray) {
-      if (name in obj) {
-          result[name] = obj[name];
-      }
+    if (name in obj) {
+      result[name] = obj[name];
+    }
   }
   return result;
 }
@@ -54,13 +57,13 @@ function sortObjectKeysByArray(obj: ObjectType, orderArray: KeyOrderType[]): Obj
 function removeEmptyArrays<T extends Record<string, any>>(obj: T): T {
   const newObj = JSON.parse(JSON.stringify(obj));
   for (const key in newObj) {
-      if (newObj.hasOwnProperty(key)) {
-          if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
-              delete newObj[key];
-          } else if (newObj[key] !== null && typeof newObj[key] === "object") {
-              newObj[key] = removeEmptyArrays(newObj[key]);
-          }
+    if (newObj.hasOwnProperty(key)) {
+      if (Array.isArray(newObj[key]) && newObj[key].length === 0) {
+        delete newObj[key];
+      } else if (newObj[key] !== null && typeof newObj[key] === "object") {
+        newObj[key] = removeEmptyArrays(newObj[key]);
       }
+    }
   }
   return newObj;
 }
@@ -111,20 +114,28 @@ export default function InteractiveBox({
 
   useEffect(() => {
     if (examples && examples.length > 0 && examples[0].params) {
-      const defaultValues = Object.fromEntries(examples[0].params.map(({ name, value }) => {
-        if (metaMaskAccount) {
-          if (name === "Address" || name === "From") {
-            return [checkName(name), metaMaskAccount]
+      const defaultValues = Object.fromEntries(
+        examples[0].params.map(({ name, value }) => {
+          if (metaMaskAccount) {
+            if (name === "Address" || name === "From") {
+              return [checkName(name), metaMaskAccount];
+            }
+            if (isPlainObject(value)) {
+              return [checkName(name), getObjectWithAddress(value)];
+            }
           }
-          if (isObject(value)) {
-            return [checkName(name), getObjectWithAddress(value)]
+          if (isPlainObject(value)) {
+            return [
+              checkName(name),
+              Object.fromEntries(Object.entries(value).map(([key, val]) => [key, isPlainObject(val) && val?.description ? val.value : val]))
+            ];
           }
-        }
-        return [checkName(name), value]
-      }));
-      setDefaultFormData({...defaultValues});
-      setCurrentFormData({...defaultValues});
-      onParamChange({...defaultValues});
+          return [checkName(name), value];
+        })
+      );
+      setDefaultFormData({ ...defaultValues });
+      setCurrentFormData({ ...defaultValues });
+      onParamChange({ ...defaultValues });
     }
   }, [examples, metaMaskAccount]);
 
@@ -133,16 +144,17 @@ export default function InteractiveBox({
       schemas: components,
     },
     type: "object",
+    // @ts-ignore
     properties: Object.fromEntries(
       params.map(({ name, schema }) => [name, schema])
     ),
   };
   const uiSchema: UiSchema = {
-    'ui:globalOptions': {
+    "ui:globalOptions": {
       label: false,
     },
-    'ui:widget': 'checkbox',
-  }
+    "ui:widget": "checkbox",
+  };
   const templates = {
     BaseInputTemplate,
     ArrayFieldTemplate,
@@ -150,20 +162,22 @@ export default function InteractiveBox({
     ObjectFieldTemplate,
     FieldErrorTemplate: () => null,
     ErrorListTemplate: () => null,
-    ButtonTemplates: { AddButton, RemoveButton }
+    ButtonTemplates: { AddButton, RemoveButton },
   };
   const widgets: RegistryWidgetsType = {
     CheckboxWidget: DropdownWidget,
     SelectWidget: SelectWidget,
   };
   const fields: RegistryFieldsType = {
+    // @ts-ignore
     AnyOfField: ConditionalField,
+    // @ts-ignore
     OneOfField: ConditionalField,
   };
   const handleResetForm = (e) => {
     e.preventDefault();
-    setCurrentFormData({...defaultFormData});
-    onParamChange({...defaultFormData});
+    setCurrentFormData({ ...defaultFormData });
+    onParamChange({ ...defaultFormData });
     setIsFormReseted(true);
   };
   const handleClearForm = (e) => {
@@ -225,7 +239,10 @@ export default function InteractiveBox({
           if (Object.keys(obj).length === 0) {
             newObj[prop] = {};
           } else if (typeof obj[prop] === "object" && obj[prop] !== null) {
-            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(obj[prop], key);
+            newObj[objectPropertyBeforeEdit] = cloneObjectAndSetNullIfExists(
+              obj[prop],
+              key
+            );
           } else {
             newObj[prop] = obj[prop];
           }
@@ -239,8 +256,11 @@ export default function InteractiveBox({
     if (drawerLabel) {
       const currentKey = Object.keys(currentFormData)[0];
       if (objectPropertyBeforeEdit && currentKey) {
-        const upData = cloneObjectAndSetNullIfExists(currentFormData[currentKey], objectPropertyBeforeEdit);
-        setCurrentFormData({[currentKey]: upData});
+        const upData = cloneObjectAndSetNullIfExists(
+          currentFormData[currentKey],
+          objectPropertyBeforeEdit
+        );
+        setCurrentFormData({ [currentKey]: upData });
         setObjectPropertyBeforeEdit(null);
         setObjectValueBeforeEdit(null);
       } else {
@@ -269,10 +289,10 @@ export default function InteractiveBox({
           setObjectValueBeforeEdit,
           currentFormData,
           setCurrentFormData,
-          onParamChange
+          onParamChange,
         }}
         validator={validator}
-        liveValidate
+        liveValidate={isOpen}
         noHtml5Validate
         onChange={(data) => {
           const orderData = sortObjectKeysByArray(data.formData, params);
