@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import clsx from "clsx";
 import CodeBlock from "@theme/CodeBlock";
 import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import global from "../global.module.css";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
+import Select from "react-dropdown-select";
 
 interface RequestBoxProps {
   isMetamaskInstalled: boolean;
@@ -22,6 +23,17 @@ interface RequestBoxProps {
   isLoading: boolean;
 }
 
+const langOptions = [
+  {
+    value: "curl",
+    label: "CURL"
+  },
+  {
+    value: "wss",
+    label: "WSS"
+  }
+]
+
 export default function RequestBox({
   isMetamaskInstalled,
   method,
@@ -37,6 +49,7 @@ export default function RequestBox({
   isLoading,
 }: RequestBoxProps) {
   const { userAPIKey } = useContext(MetamaskProviderContext);
+  const [currentLang, setCurrentLang] = useState(langOptions[0]);
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2);
     const preparedShellParams = JSON.stringify(paramsData);
@@ -44,8 +57,11 @@ export default function RequestBox({
     if (isMetamaskNetwork) {
       return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
     }
+    if (currentLang.value === "wss") {
+      return `wscat -c ${requestURL.replace("https", "wss")}${API_KEY} -x '{"jsonrpc":"2.0","method":"${method}","params": ${preparedShellParams},"id":1}'`
+    }
     return `curl ${requestURL}${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
-  }, [userAPIKey, method, paramsData]);
+  }, [userAPIKey, method, paramsData, currentLang]);
 
   const exampleResponse = useMemo(() => {
     if (defExampleResponse && response === undefined) {
@@ -80,8 +96,20 @@ export default function RequestBox({
   return (
     <>
       <div className={styles.cardWrapper}>
-        <div className={styles.cardHeader}>
+        <div className={clsx(styles.cardHeader, !isMetamaskNetwork && styles.addIndent)}>
           <strong className={styles.cardHeading}>Request</strong>
+          {!isMetamaskNetwork && (
+            <Select
+              className={"select-lang"}
+              options={langOptions}
+              values={[currentLang]}
+              multi={false}
+              searchable={false}
+              onChange={(value) => {
+                setCurrentLang(value[0]);
+              }}
+            />
+          )}
         </div>
         <div className={styles.codeWrapper}>
           <CodeBlock

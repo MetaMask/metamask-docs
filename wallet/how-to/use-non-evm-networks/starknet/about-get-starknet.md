@@ -16,21 +16,17 @@ This allows users to send Starknet transactions, sign Starknet messages, and man
 accounts within MetaMask, and this functionality can be extended to multiple wallets in the Starknet
 ecosystem.
 
-The following diagram displays how a dapp interacts with Starknet, emphasizing the distinct roles of `wallet_invokeSnap` and `get-starknet`:
-
 <p align="center">
 
 ```mermaid
-graph
-    dapp[Dapp] -- wallet_invokeSnap --> snap[Starknet Snap]
-    dapp[Dapp] -- get-starknet --> swo[Starknet Window Object]
-    swo -- wallet_invokeSnap --> snap
-    swo --> acc[Account object]
-    acc --> signer[Signer object] -- wallet_invokeSnap --> snap
-    acc -- wallet_invokeSnap --> snap
-    acc --> sp[Starknet network]
-    snap --> sp
-```
+flowchart TD
+    A(Dapp) -->|get-starknet| B(Starknet Window Object)
+    A -->|wallet_invokeSnap| C(MetaMask / Starknet Snap)
+    B --> C
+    B --> D(Other Starknet wallets)
+    C --> E(Starknet network)
+    D --> E
+````
 
 </p>
 

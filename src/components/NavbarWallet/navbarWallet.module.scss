@@ -1,9 +1,15 @@
 :root[data-theme="dark"] {
   --navbarWallet-color: #fff;
+  --tag-bg-color: #213949;
+  --tag-border-color: transparent;
+  --tag-color: #43AEFC;
 }
 
 :root[data-theme="light"] {
   --navbarWallet-color: #141618;
+  --tag-bg-color: #fff;
+  --tag-border-color: #0376c9;
+  --tag-color: #0376c9;
 }
 
 :global([class*="navbarSearchContainer"]) {
@@ -110,4 +116,42 @@
 
 .tooltip {
   font-size: 14px !important;
+}
+
+.innerItemWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.extLinkWrap {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.extLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--tag-color);
+}
+
+.extLink svg {
+  display: block;
+  margin-left: 5px;
+}
+
+.extTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  min-width: 45px;
+  padding: 4px 4px 6px 4px;
+  margin-left: 10px;
+  background-color: var(--tag-bg-color);
+  color: var(--tag-color);
+  border-radius: 12px;
+  border: 1px solid var(--tag-border-color);
 }

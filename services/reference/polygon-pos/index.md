@@ -50,8 +50,6 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
-For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
-
 <!-- markdown-link-check-disable -->
 
 Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy)) is Infura's failover-protection partner. While Rivet.cloud supports most Infura methods,

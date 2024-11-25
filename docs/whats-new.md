@@ -14,12 +14,14 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
   [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
   ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
+- Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
+- Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
+  ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
 - Added tutorial for
   [creating a simple Starknet dapp](/wallet/how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp).
   ([#1656](https://github.com/MetaMask/metamask-docs/pull/1656))
 - Documented Snaps [`Card`](/snaps/features/custom-ui/#card) and [`Section`](/snaps/features/custom-ui/#section) UI components.
-  ([#1707](https://github.com/MetaMask/metamask-docs/pull/1707) and
-  [#1700](https://github.com/MetaMask/metamask-docs/pull/1700))
+  ([#1707](https://github.com/MetaMask/metamask-docs/pull/1707)) ([#1700](https://github.com/MetaMask/metamask-docs/pull/1700))
 
 ## October 2024
 
