@@ -32,7 +32,7 @@ Establish a connection to MetaMask Flask and set up basic message handling using
 
 ```javascript
 // Initialize the connection to Flask.
-const EXTENSION_ID = "ljfoeinjpaedjfecbmggjgodbgkmjkjk"; // Replace this with ID of your Flask extension.
+const EXTENSION_ID = "ljfoeinjpaedjfecbmggjgodbgkmjkjk"; // Flask extension ID
 const extensionPort = chrome.runtime.connect(EXTENSION_ID)
 
 // Set up message listener for events.
@@ -51,8 +51,6 @@ extensionPort.onMessage.addListener((msg) => {
 })
 ```
 
-Make sure to replace the `EXTENSION_ID` value with the ID of your Flask extension.
-You can find this in your browser's extension manager.
 
 ### 2. Manage sessions
 
@@ -114,7 +112,7 @@ extensionPort.postMessage({
         },
         "eip155:59141": { // Linea Sepolia
           methods: [
-				    "personal_sign",
+            "personal_sign",
             "eth_blockNumber",
             "eth_gasPrice",
             "eth_getBalance",
@@ -218,7 +216,7 @@ extensionPort.postMessage({
 
 #### 3.3. Send transactions
 
-You can send transactions on a network where the user has sufficient gas, by invoking
+You can send transactions on a specific network, by invoking
 [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction).
 For example:
 
