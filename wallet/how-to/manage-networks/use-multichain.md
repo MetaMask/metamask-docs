@@ -51,16 +51,15 @@ extensionPort.onMessage.addListener((msg) => {
 })
 ```
 
-
-### 2. Manage sessions
+### 2. Manage multichain connections
 
 To interact with multiple networks simultaneously, you'll create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain sessions
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain connections
 with MetaMask.
 
-#### 2.1. Check existing sessions
+#### 2.1. Check existing connections
 
-Before creating a new session, check if one already exists using the
+Before creating a new connection, check if one already exists using the
 [`wallet_getSession`](../../reference/multichain-api.md#wallet_getsession) method.
 For example:
 
@@ -75,12 +74,12 @@ extensionPort.postMessage({
 });
 ```
 
-If the result returns an empty `sessionScopes` parameter, then a multichain session is not active
-and you must create a new session.
+If the result returns an empty `sessionScopes` parameter, then a multichain connection is not active
+and you must create a new connection.
 
-#### 2.2. Create a new session
+#### 2.2. Create a new connection
 
-Create a new session using the [`wallet_createSession`](../../reference/multichain-api.md#wallet_createsession) method.
+Create a new connection using the [`wallet_createSession`](../../reference/multichain-api.md#wallet_createsession) method.
 Specify which chains and methods your dapp needs access to, using the `optionalScopes` parameter.
 For example:
 
@@ -137,12 +136,12 @@ In `optionalScopes`:
 - For each network, request access to [Wallet API methods](../../reference/json-rpc-methods/index.md)
   that your dapp expects to call at any time.
   The methods listed in the `sessionScope` of each Multichain API response indicate which wallet
-  capabilities your dapp can use during the session.
+  capabilities your dapp can use during the connection.
 
-#### 2.3. Check for session changes
+#### 2.3. Check for connection changes
 
-To ensure your dapp responds appropriately to changes in the wallet session, such as network or
-account updates, check for session changes using the
+To ensure your dapp responds appropriately to changes in the multichain connection, such as network or
+account updates, check for connection changes using the
 [`wallet_sessionChanged`](../../reference/multichain-api.md#wallet_sessionchanged) event.
 Based on the event data, you can determine whether your dapp needs to request additional permissions
 using [`wallet_createSession`](../../reference/multichain-api.md#wallet_createsession).

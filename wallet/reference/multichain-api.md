@@ -13,9 +13,8 @@ import TabItem from "@theme/TabItem";
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) sessions with MetaMask.
-The API also provides [events](#events) that wallets can send to dapps to notify them of changes to
-a session.
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) connections with MetaMask.
+The API also provides [events](#events) that wallets can send to dapps to notify them of onchain or connection changes.
 
 :::note See also
 - [About the Multichain API](../concepts/multichain-api.md)
@@ -26,21 +25,21 @@ a session.
 
 ### `wallet_createSession`
 
-Creates a multichain session with a wallet, authorizing that wallet with the specified set of scopes
+Creates a multichain connection with a wallet, authorizing that wallet with the specified set of scopes
 and properties.
 This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 
 #### Parameters
 
 - `optionalScopes`: `object` - Scopes that the wallet can support in order to be used with this dapp.
-- `sessionProperties`: `object` - Properties that the wallet can use to determine if the session is valid.
+- `sessionProperties`: `object` - Properties that the wallet can use to determine if the connection is valid.
 - `requiredScopes`: `object` - (Optional) Scopes that the wallet must support in order to be used
   with this dapp.
   We don't recommend using `requiredScopes` with MetaMask.
 
 #### Returns
 
-The scopes and properties of the created session.
+The scopes and properties of the created connection.
 
 #### Example
 
@@ -126,7 +125,7 @@ The scopes and properties of the created session.
 
 ### `wallet_getSession`
 
-Gets the scopes and properties within the active session.
+Gets the scopes and properties within the active connection.
 This method is defined in [CAIP-312](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-312.md).
 
 :::note
@@ -139,7 +138,7 @@ None.
 
 #### Returns
 
-The scopes and properties of the session.
+The scopes and properties of the connection.
 
 #### Example
 
@@ -190,7 +189,7 @@ The scopes and properties of the session.
 ### `wallet_invokeMethod`
 
 Invokes the specified [JSON-RPC API](json-rpc-methods/index.md) method on the specified network
-previously authorized to the dapp within a session.
+previously authorized to the dapp within a connection.
 This method is defined in [CAIP-27](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-27.md).
 
 :::note
@@ -200,10 +199,10 @@ MetaMask doesn't support session IDs.
 #### Parameters
 
 - `scope`: `string` - A [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID previously authorized to the dapp within a session.
+  chain ID previously authorized to the dapp within a connection.
 - `request`: `object` - A request object containing:
   - `method`: `string` - The [JSON-RPC API](json-rpc-methods/index.md) method to invoke,
-    previously authorized to the dapp within a session.
+    previously authorized to the dapp within a connection.
   - `params`: `object` - The RPC method parameters (can be empty).
 
 #### Returns
@@ -261,7 +260,7 @@ The response from the JSON-RPC method call.
 
 ### `wallet_revokeSession`
 
-Revokes the active session.
+Revokes the active connection.
 This method is defined in [CAIP-285](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-285.md).
 
 :::note
@@ -321,10 +320,10 @@ MetaMask doesn't support session IDs.
 #### Parameters
 
 - `scope`: `string` - A [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
-  chain ID previously authorized to the dapp within a session.
+  chain ID previously authorized to the dapp within a connection.
 - `notification`: `object` - A notification object containing:
   - `method`: `string` - A [JSON-RPC API](json-rpc-methods/index.md) notification method name
-    previously authorized to the dapp within a session.
+    previously authorized to the dapp within a connection.
   - `params`: `object` - The RPC notification method parameters.
 
 #### Example
@@ -352,7 +351,7 @@ MetaMask doesn't support session IDs.
 
 ### `wallet_sessionChanged`
 
-Notifies the dapp of updates to the active session's authorization scopes.
+Notifies the dapp of updates to the active connection's authorization scopes.
 This method is defined in [CAIP-311](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-311.md).
 
 :::note
@@ -361,7 +360,7 @@ MetaMask doesn't support session IDs.
 
 #### Parameters
 
-`sessionScopes`: `object` - An object containing the full updated session scopes, each formatted
+`sessionScopes`: `object` - An object containing the full updated authorization scopes, each formatted
 according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-217.md).
 
 #### Example

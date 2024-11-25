@@ -34,25 +34,26 @@ Key benefits include:
 The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
 standard for dapps to interface with multichain wallets.
 The API includes a method [`wallet_createSession`](../reference/multichain-api.md#wallet_createsession)
-that dapps can call to create a multichain session with a wallet, with specified properties and
+that dapps can call to create a multichain connection with a wallet, with specified properties and
 authorization scopes.
-Dapps can update the session using the same method `wallet_createSession`.
+Dapps can update the connection using the same method `wallet_createSession`.
 
 Dapps can use [`wallet_invokeMethod`](../reference/multichain-api.md#wallet_invokemethod) to
 call a subset of the [Wallet JSON-RPC API methods](../reference/json-rpc-methods/index.md) on
 a specified chain.
 Dapps can use [`wallet_getSession`](../reference/multichain-api.md#wallet_getsession) to get
-the scopes and properties of the active session, and use
-[`wallet_revokeSession`](../reference/multichain-api.md#wallet_revokesession) to revoke the session.
-The API also supports the [`wallet_notify`](../reference/multichain-api.md#wallet_notify) and
-[`wallet_sessionChanged`](../reference/multichain-api.md#wallet_sessionchanged) events,
-allowing wallets to notify dapps of changes to the session.
+the scopes and properties of the active connection, and use
+[`wallet_revokeSession`](../reference/multichain-api.md#wallet_revokesession) to revoke the connection.
+The API also supports the following events:
+
+- [`wallet_notify`](../reference/multichain-api.md#wallet_notify) notifies dapps of onchain events or state changes they previously subscribed to.
+- [`wallet_sessionChanged`](../reference/multichain-api.md#wallet_sessionchanged) notifies dapps of changes to the multichain connection.
 
 See the [Multichain API reference](../reference/multichain-api.md) for full details.
 
 ### Lifecycle diagram
 
-The following sequence diagram illustrates the multichain session lifecycle.
+The following sequence diagram illustrates the multichain connection lifecycle.
 
 ```mermaid
 %%{
@@ -69,33 +70,33 @@ sequenceDiagram
   participant Wallet
   participant WalletDataStore as Wallet data store
   
-  opt Create session
+  opt Create connection
   Dapp->>Wallet: wallet_createSession
-  Wallet->>WalletDataStore: Persist session data
+  Wallet->>WalletDataStore: Persist connection data
   Wallet-->>Dapp: {"sessionScopes": {...}}
   end
   
-  opt Update session
+  opt Update connection
   Dapp->>Wallet: wallet_createSession (update auth)
-  Wallet->>WalletDataStore: Update session data
+  Wallet->>WalletDataStore: Update connection data
   Wallet-->>Dapp: {"sessionScopes": {updatedScopes...}}
   end
   
-  opt Connection interrupted with wallet-side session modification
+  opt Connection interrupted with wallet-side modification
   Dapp-->>Wallet: Connection interrupted
-  Wallet->>WalletDataStore: User initiated session change
+  Wallet->>WalletDataStore: User initiated connection change
   Wallet-->>Dapp: wallet_sessionChanged (attempt fails)
   Dapp-->>Wallet: Connection re-established
   end
   
-  opt Get session
+  opt Get connection
   Dapp->>Wallet: wallet_getSession
   Wallet-->>Dapp: {"sessionScopes": {...}}
   end
 
-  opt Revoke session
+  opt Revoke connection
   Dapp->>Wallet: wallet_revokeSession
-  Wallet->>WalletDataStore: Update session data
+  Wallet->>WalletDataStore: Update connection data
   Wallet-->>Dapp: {"result": "true"}
   end
 ```
