@@ -6,27 +6,29 @@ sidebar_position: 1
 # Avoid rate limiting
 
 Infura applies rate limiting account-wide after exceeding the [daily credit limit](../get-started/pricing/index.md)
-or the number of credits per second (throughput).
+or the number of credits per second (throughput). The rate limiting also applies to
+[user-defined limits that you can configure in the dashboard](/developer-tools/dashboard/how-to/secure-an-api/set-rate-limits).
 
-For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
-- Source IP address.
-- JSON-RPC method.
-- API key.
+When you exceed your daily credit limit, Infura stops accepting further traffic and removes
+access for the rest of the day, halting further usage. You'll need to upgrade your plan, or purchase
+additional credit packs for more capacity.
 
-The throughput of an account will be throttled once the daily credit limit is reached. Credit
-quota limits will be reset everyday at 00:00 UTC for all customers.
+If you've exceeded your allowed throughput limit, consider reducing the amount of requests per
+second, or upgrade for more capacity.
+
+Credit quota limits are reset everyday at 00:00 UTC for all customers.
 
 ## Rate limit implications
 
 Daily credit quota limits apply after reaching your daily credit allowance:
 
-- Once you reach your daily request limit, you can still make further requests, but throughput
-    will be throttled.
+- Once you reach your daily request limit, your service will be halted for the rest of the day.
 - The WebSocket service will sever connections.
 
 ### Notice rate limiting behavior?
 
-You'll receive a JSON response with an HTTP status code `429` if you reach your credits per second limits:
+You'll receive a JSON response with an HTTP status code `429` if you reach your credits per second limits
+or daily credit limits. For example:
 
 ```json
 {
