@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 Base is an optimistic layer 2 rollup chain built by Coinbase on the MIT-licensed [OP Stack](https://docs.optimism.io/stack/getting-started#the-op-stack-today), in collaboration with [Optimism](../optimism/index.md).
 
-The Base network provides seamless Coinbase integrations, easy fiat onramps, and access to more than 
+The Base network provides seamless Coinbase integrations, easy fiat on-ramps, and access to more than 
 100 million users and $100 billion in assets in the Coinbase ecosystem.
 
 :::info See also

@@ -5,17 +5,32 @@ sidebar_position: 4
 
 # Set up two-factor authentication
 
-Two-factor authentication (2FA) is a security measure that adds an extra layer of protection to your online accounts. It requires you to provide two types of identification factors to verify your identity before you can access your accounts.
+Two-factor authentication (2FA) is a security measure that adds an extra layer of protection to
+your online accounts. It requires you to provide two types of identification factors to verify your
+identity before you can access your accounts.
 
 ## Enable 2FA on your account
 
-To enable 2FA authentication on your account, on the Infura dashboard go to **Settings** -> **Account**, and select **Enable**.
+To enable 2FA authentication on your account, on the dashboard go to **Settings** -> **Account**, and
+select **Enable**.
 
-![](../../images/enable2fa.png)
+<div class="left-align-container">
+  <div class="img-large">
+    <img
+      src={require("../../images/enable2fa.png").default}
+    />
+  </div>
+</div>
 
 Scan the QR code with your authenticator, and enter the initial six-digit token. Select **Verify** to proceed.
 
-![](../../images/enter_token.png)
+<div class="left-align-container">
+  <div class="img-medium">
+    <img
+      src={require("../../images/enter_token.png").default}
+    />
+  </div>
+</div>
 
 :::warning
 
@@ -27,11 +42,18 @@ If you ever lose access to your device, you can use this code to verify your ide
 
 Select **Continue** to finish the process.
 
-![](../../images/backup_code.png)
+<div class="left-align-container">
+  <div class="img-medium">
+    <img
+      src={require("../../images/backup_code.png").default}
+    />
+  </div>
+</div>
 
 :::info
 
-Most password managers allow you to add secure notes to an entry; you can add the backup code to the Infura login entry. Alternatively, write it down and store it somewhere safe.
+Most password managers allow you to add secure notes to an entry; you can add the backup code to the
+Infura login entry. Alternatively, write it down and store it somewhere safe.
 
 :::
 
@@ -39,9 +61,15 @@ Next time you log in to Infura, you'll be asked for your 2FA token in addition t
 
 ## Disable 2FA on your account
 
-To disable 2FA on your account, on the Infura dashboard go to **Settings** -> **Account**, and select **Disable 2FA**.
+To disable 2FA on your account, on the dashboard go to **Settings** -> **Account**, and select **Disable 2FA**.
 
-![](../../images/disable2fa.png)
+<div class="left-align-container">
+  <div class="img-medium">
+    <img
+      src={require("../../images/disable2fa.png").default}
+    />
+  </div>
+</div>
 
 ## Lost your 2FA device?
 

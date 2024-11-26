@@ -16,7 +16,7 @@ All Infura IPFS methods require including your [API key](../../../../../develope
 Arguments are added through the special query string key `arg`:
 
 ```bash
-curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
+curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/cat?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn"
 ```
 
 Note that `arg` can be used multiple times to signify multiple arguments.
@@ -26,7 +26,7 @@ Note that `arg` can be used multiple times to signify multiple arguments.
 Flags commonly used with the IPFS CLI are added through the query string. For example, the `--encoding=json` flag is the `&encoding=json` query parameter below:
 
 ```bash
-> curl -X POST -u "<API_KEY>:<API_KEY_SECRET>" "https://ipfs.infura.io:5001/api/v0/object/get?arg=QmaaqrHyAQm7gALkRW8DcfGX3u8q9rWKnxEMmf7m9z515w&encoding=json"
+> curl -X POST -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" "https://ipfs.infura.io:5001/api/v0/object/get?arg=QmaaqrHyAQm7gALkRW8DcfGX3u8q9rWKnxEMmf7m9z515w&encoding=json"
 {
   "Links": [
     {
@@ -65,7 +65,7 @@ Status code `500` means that the requested RPC function _does_ exist, but IPFS w
 
 Streaming endpoints fail as above, unless they have started streaming. That means they will have sent a `200` status code already. If an error happens during the stream, it will be included in a `Trailer` response header (some endpoints may additionally include an error in the last streamed object).
 
-A `405`error may mean that you are using the wrong HTTP method (i.e. GET instead of POST), or that you are not allowed to call that method (i.e. due to CORS restrictions when making a request from a browser).
+A `405` error may mean that you are using the wrong HTTP method (for example, GET instead of POST), or that you are not allowed to call that method (for example, due to CORS restrictions when making a request from a browser).
 
 ## NDJSON responses
 

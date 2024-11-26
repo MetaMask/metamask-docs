@@ -369,3 +369,30 @@ button:hover {
     font-size: 14px;
   }
 }
+
+.react-dropdown-select.select-lang {
+  min-width: 100px;
+  background: #292a36;
+  border: 1px solid #848C96;
+  padding-left: 10px;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.react-dropdown-select.select-lang .react-dropdown-select-item {
+  background: #292a36;
+  color: #fff;
+  border: 0;
+}
+
+.react-dropdown-select.select-lang .react-dropdown-select-item:hover {
+  background: #141618;
+}
+
+.react-dropdown-select.select-lang .react-dropdown-select-item:not(:first-child) {
+  border-top: 1px solid #848c96;
+}
+
+.react-dropdown-select.select-lang .react-dropdown-select-dropdown-handle{
+  color: #fff;
+}

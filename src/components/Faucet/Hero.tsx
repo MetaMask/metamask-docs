@@ -34,7 +34,7 @@ export default function Hero({
     metaMaskWalletIdConnectHandler,
     walletLinked,
     projects,
-    walletLinkUrl,
+    walletAuthUrl,
   } = useContext(MetamaskProviderContext);
   const isExtensionActive = sdk.isExtensionActive();
   const [isWalletLinking, setIsWalletLinking] = useState(false);
@@ -65,7 +65,7 @@ export default function Hero({
       responseMsg: null,
       timestamp: Date.now(),
     });
-    window.location.href = walletLinkUrl;
+    window.location.href = walletAuthUrl;
   };
 
   const handleRequestEth = () => {
@@ -121,7 +121,7 @@ export default function Hero({
               label="Wallet address"
               disabled={isLoading}
               value={inputValue}
-              placeholder="ex. 0x"
+              placeholder="ex. 0x or ENS"
               onChange={handleOnInputChange}
             />
             {isLimitedUserPlan && (

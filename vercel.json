@@ -111,6 +111,10 @@
       "destination": "/wallet/connect/metamask-sdk/"
     },
     {
+      "source": "/wallet/how-to/connect/set-up-sdk/javascript/react-native/",
+      "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
+    },
+    {
       "source": "/wallet/how-to/use-sdk/javascript/react-native/",
       "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
     },
@@ -135,7 +139,7 @@
       "destination": "/wallet/how-to/access-accounts/"
     },
     {
-      "source": "/wallet/how-to/access-accounts/",
+      "source": "/wallet/how-to/connect/access-accounts/",
       "destination": "/wallet/how-to/access-accounts/"
     },
     {

@@ -19,12 +19,12 @@ The estimate of the gas required for a L1 to L2 transaction.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
   ```bash
   curl https://zksync-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -32,6 +32,7 @@ Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://in
     -H "Content-Type: application/json" \
     -d '{"jsonrpc":"2.0", "id":2, "method": "zks_estimateGasL1ToL2", "params": [ { "from": "0x1111111111111111111111111111111111111111", "to":"0x2222222222222222222222222222222222222222", "data": "0xffffffff" } ] }'
   ```
+
   </TabItem>
   <TabItem value="WSS">
 
@@ -46,6 +47,7 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0
 
 <Tabs>
   <TabItem value="JSON">
+
   ```json
   {
     "jsonrpc": "2.0",
@@ -53,5 +55,6 @@ wscat -c wss://zksync-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0
     "id": 2
   }
   ```
+
   </TabItem>
 </Tabs>

@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# version
+# `version`
 
-## /api/v0/pin/version
+## `/api/v0/pin/version`
 
 Show IPFS version information.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -15,7 +15,7 @@ Show IPFS version information.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/version?number=<value>&commit=<value>&repo=<value>&all=<value>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
@@ -30,18 +30,18 @@ curl "https://ipfs.infura.io:5001/api/v0/version" \
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `number` _[Optional]_ - Only show the version number.
 - `commit` _[Optional]_ - Show the commit hash.
 - `repo` _[Optional]_ - Show repo version.
 - `all` _[Optional]_ - Show all version information.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint returns with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```
 {

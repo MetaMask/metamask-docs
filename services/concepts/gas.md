@@ -6,11 +6,11 @@ sidebar_position: 6
 # Gas
 
 Gas is a unit used to measure the computational effort required to perform an action on a blockchain network, such as
-executing a smart contract or sending a transaction. To perform an action, users must pay in units of gas, which is
+executing a smart contract or sending a transaction. To perform an action, users must pay in units of gas, which are
 calculated based on the computational resources required for the action, and to compensate the miners who execute the
 request.
 
-The amount paid is the units of gas consumed multiplied by the gas price. So for a network such as Ethereum, this is the
+The amount paid is the units of gas consumed multiplied by the gas price. For Ethereum, this is the
 amount of Ether a user is willing to pay for each unit of gas. The gas price is set by the user and is a key factor in
 determining the priority of their transaction relative to other transactions on the network.
 
@@ -23,7 +23,8 @@ The Ethereum London hard fork update changed the blockchain’s transaction fee 
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559). This update changed the way users pay gas fees on the Ethereum
 network and other EVM chains.
 
-Before EIP-1559, users specified a gas price, which was the amount they were willing to pay for a transaction to be mined. The auction-style system meant gas prices often fluctuated wildly. After EIP-1559, this has been replaced by two new values:
+Before EIP-1559, users specified a gas price, which was the amount they were willing to pay for a transaction to be mined.
+The auction-style system meant gas prices fluctuated often. After EIP-1559, this has been replaced by two new values:
 
 - **Base fee**: The minimum transaction fee for every transaction to be included in a block. This is calculated by the network
   and is affected by the number of transactions included in the previous block. The base fee gets burned, meaning

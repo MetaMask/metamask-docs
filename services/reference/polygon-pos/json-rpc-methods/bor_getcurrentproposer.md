@@ -1,9 +1,9 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# bor_getCurrentProposer
+# `bor_getCurrentProposer`
 
-Returns the the current proposer's address.
+Returns the current proposer's address.
 
 :::info For Growth and Custom service plans
 
@@ -27,12 +27,12 @@ None
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \

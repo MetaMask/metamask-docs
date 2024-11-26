@@ -1,6 +1,5 @@
 ---
 description: Secure your dapp using HTTPS and CSP.
-sidebar_position: 12
 ---
 
 # Secure your dapp
@@ -15,7 +14,7 @@ The following security advice isn't exhaustive.
 
 ## Use HTTPS
 
-HTTPS can protect your dapp against attackers who might try to eavesdrop or tamper the communication
+HTTPS can protect your dapp against attackers who might try to eavesdrop or tamper with the communication
 channel between your dapp and your users.
 HTTPS encrypts data transmitted between the web server and the user's browser, making it
 difficult for attackers to intercept or modify the data.

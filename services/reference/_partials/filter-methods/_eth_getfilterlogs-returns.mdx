@@ -5,6 +5,6 @@
   - `data`: DATA. Contains the non-indexed arguments of the log.
   - `logIndex`: A hexadecimal of the log index position in the block. `Null` when it is a pending log.
   - `removed`: `true` when the log was removed, due to a chain reorganization. `false` if it is a valid log.
-  - `topics`: Array of DATA. An array of 0 to 4 32-bytes DATA of indexed log arguments. In Solidity the first `topic` is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), except when you declared the event with the anonymous specifier.
+  - `topics`: Array of DATA. An array of 0 to 4 32-bytes DATA of indexed log arguments. In Solidity the first `topic` is the hash of the signature of the event (for example, `Deposit(address,bytes32,uint256)`), except when you declared the event with the anonymous specifier.
   - `transactionHash`: 32 bytes. A hash of the transactions from which this log was created. `Null` when it is a pending log.
   - `transactionIndex`: A hexadecimal of the transactions index position from which this log was created. `Null` when it is a pending log.
