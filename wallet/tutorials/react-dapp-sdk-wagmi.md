@@ -42,6 +42,8 @@ custom connect button.
 
 ### 1. Set up the project
 
+Set up your project using Wagmi's `create wagmi` command with the `vite-react` template:
+
 <Tabs>
   <TabItem value="pnpm" label="pnpm" default>
 
@@ -59,9 +61,9 @@ npm create wagmi@latest  --template vite-react
   </TabItem>
 </Tabs>
 
-This command prompts you for a project name.
+This prompts you for a project name.
 For example, use `mmsdk-wagmi-tutorial`.
-Once the CLI is complete, change directories into that project and install the node module dependencies:
+Once your project is created, navigate into it and install the node module dependencies:
 
 <Tabs>
   <TabItem value="pnpm" label="pnpm" default>
@@ -260,14 +262,9 @@ In `wagmi.ts`, create a variable named `metaMaskSDKOptions`:
 
 ```typescript title="wagmi.ts"
 const metaMaskSDKOptions = {
-  infuraAPIKey: "<YOUR-API-KEY>",
+  // SDK options.
 };
 ```
-
-:::note
-You can use the [`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey) option to
-[make direct, read-only JSON-RPC requests](../how-to/make-read-only-requests.md).
-:::
 
 Pass `metaMaskSDKOptions` into the `metaMask()` function in `connectors` and spread its values using
 the `...` operator:
@@ -324,22 +321,6 @@ const metaMaskSDKOptions = {
 Disable the MetaMask extension and re-load your dapp.
 Make a read-only RPC request without the `InfuraAPIKey`.
 You'll see a similar modal as in the previous test, but it will notify the user upon making the RPC request.
-
-#### Send anonymous analytics to MetaMask
-
-Use [`enableDebug`](../reference/sdk-js-options.md#enabledebug) to enable or disable sending
-anonymous analytics to MetaMask to help improve the SDK.
-The default value is `true`.
-
-```typescript
-const metaMaskSDKOptions = {
-  enableDebug: true
-};
-```
-
-This setting does not transmit any sensitive data.
-It only sends information that allows MetaMask to analyze and improve the behavior and core
-functionality of the SDK.
 
 #### Map RPC URLs for read-only requests
 
