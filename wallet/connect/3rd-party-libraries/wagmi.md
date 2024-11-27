@@ -43,8 +43,8 @@ cd mmsdk-wagmi && npm install
 
 ### 2. Configure the MetaMask connector
 
-In `wagmi.ts`, configure the MetaMask connector with any [SDK options](../../reference/sdk-js-options.md).
-Specify [`dappMetadata`](../../reference/sdk-js-options.md#dappmetadata), including the `name`, `url`, and `iconUrl`,
+In `wagmi.ts`, configure the MetaMask connector with any [parameters](https://wagmi.sh/core/api/connectors/metaMask#parameters).
+Specify [`dappMetadata`](https://wagmi.sh/core/api/connectors/metaMask#dappmetadata), including the `name`, `url`, and `iconUrl`,
 to help identify your dapp within the MetaMask ecosystem.
 
 ```typescript title="wagmi.ts"
@@ -77,6 +77,9 @@ npm run dev
 ```
 
 Navigate to the displayed localhost URL to view and test your dapp.
+
+## Advanced
+By default, this connector will replace the EIP_6963 MetaMask injected connector if it is detected (See the option [`rdns`](https://wagmi.sh/dev/creating-connectors#properties))
 
 ## Next steps
 

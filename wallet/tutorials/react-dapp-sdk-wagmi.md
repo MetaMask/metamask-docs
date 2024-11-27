@@ -102,7 +102,7 @@ This displays a localhost URL in your terminal for easy access to launch in your
   ➜  press h + enter to show help
 ```
 
-#### 1.1. Review the Viem, Wagmi, and MetaMask SDK configuration
+#### 1.1. Review the Wagmi, and MetaMask SDK configuration
 
 In `src/main.tsx`, you can find the following `WagmiProvider` which takes a `config` and `QueryClientProvider`.
 
@@ -189,7 +189,6 @@ import { lineaSepolia } from "wagmi/chains";
 import { metaMask } from "wagmi/connectors";
 
 export const config = createConfig({
-  multiInjectedProviderDiscovery: false,
   chains: [lineaSepolia],
   connectors: [
     metaMask({
@@ -210,8 +209,6 @@ export const config = createConfig({
 
 This configures Wagmi with the following options:
 
-- `multiInjectedProviderDiscovery` disables automatic discovery of multiple injected wallets,
-  streamlining the wallet selection process.
 - `chains` specifies that the dapp will connect to the Linea Sepolia network.
 - `connectors` uses MetaMask as the primary wallet, and includes some dapp metadata (name, URL, and
   icon) for a branded user experience.
@@ -253,100 +250,9 @@ MetaMask Mobile.
   </video>
 </p>
 
-### 3. Configure the SDK
-
-You can configure any [MetaMask JavaScript SDK options](../reference/sdk-js-options.md) within the
-Wagmi configuration.
-
-In `wagmi.ts`, create a variable named `metaMaskSDKOptions`:
-
-```typescript title="wagmi.ts"
-const metaMaskSDKOptions = {
-  // SDK options.
-};
-```
-
-Pass `metaMaskSDKOptions` into the `metaMask()` function in `connectors` and spread its values using
-the `...` operator:
-
-```typescript title="wagmi.ts"
-connectors: [
-  metaMask({
-    dappMetadata: {
-      name: "MetaMask SDK + Wagmi Tutorial",
-      url: "https://wagmi.io",
-      iconUrl: "https://wagmi.io/favicon.ico",
-    },
-    ...metaMaskSDKOptions,
-  }),
-],
-```
-
-### 4. Use additional SDK options
-
-You can configure any number of [SDK options](../reference/sdk-js-options.md) in the
-`metaMaskSDKOptions` object to customize the behavior of the SDK.
-In this section, you'll plug in options one by one to see how it affects the SDK.
-
-#### Immediately check if MetaMask is installed
-
-Use [`checkInstallationImmediately`](../reference/sdk-js-options.md#checkinstallationimmediately) to
-enable or disable immediately checking if MetaMask is installed in the user's browser.
-The default value is `false`.
-Set this to `true`:
-
-```typescript title="wagmi.ts"
-const metaMaskSDKOptions = {
-  checkInstallationImmediately: true,
-};
-```
-
-Disable the MetaMask extension and re-load your dapp.
-When this option is enabled, the SDK immediately checks and notifies the user with a modal that they
-can either install the MetaMask extension or connect to MetaMask Mobile using a QR code.
-
-#### Check if MetaMask is installed before RPC requests
-
-Use [`checkInstallationOnAllCalls`](../reference/sdk-js-options.md#checkinstallationonallcalls) to
-enable or disable checking if MetaMask is installed before each JSON-RPC request.
-The default value is `false`.
-Set this to `true`:
-
-```typescript title="wagmi.ts"
-const metaMaskSDKOptions = {
-  checkInstallationOnAllCalls: true
-};
-```
-
-Disable the MetaMask extension and re-load your dapp.
-Make a read-only RPC request without the `InfuraAPIKey`.
-You'll see a similar modal as in the previous test, but it will notify the user upon making the RPC request.
-
-#### Map RPC URLs for read-only requests
-
-Use [`readonlyRPCMap`](../reference/sdk-js-options.md#readonlyrpcmap) to map RPC URLS for
-[read-only RPC requests](../how-to/make-read-only-requests.md).
-You can use this option in conjunction with [`infuraAPIKey`](../reference/sdk-js-options.md#infuraapikey)
-and [`defaultReadOnlyChainId`](../reference/sdk-js-options.md#defaultreadonlychainid).
-
-For example, you want to make read-only requests to Mainnet (chain ID `0x1`) using the Infura API,
-and read-only requests to the local testnet (chain ID `0x539`) use a custom node.
-
-`infuraAPIKey` provides access to various networks supported by Infura.
-`readonlyRPCMap` allows access to custom nodes and overrides Infura networks in case of a conflict.
-You can use both the Infura API and custom nodes to make read-only requests by specifying both options:
-
-```typescript
-const metaMaskSDKOptions = {
-  infuraAPIKey: "<YOUR-API-KEY>",
-  readonlyRPCMap: {
-    "0x539": "http://localhost:8545",
-  }
-};
-```
 
 ### Conclusion
 
 This tutorial walked you through generating a dapp using Create Wagmi, and configuring MetaMask SDK.
-You explored how the SDK works within a React application with Viem and Wagmi, how it behaves out of
-the box, and how to use a few key options to customize its behavior.
+You explored how the SDK works within a React application with Wagmi, how it behaves out of
+the box.
