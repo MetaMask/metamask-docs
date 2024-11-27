@@ -42,7 +42,7 @@ custom connect button.
 
 ### 1. Set up the project
 
-Set up your project using Wagmi's `create wagmi` command with the `vite-react` template:
+Create a new project directory using Wagmi's `create wagmi` command with the `vite-react` template:
 
 <Tabs>
   <TabItem value="pnpm" label="pnpm" default>

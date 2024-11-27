@@ -26,8 +26,8 @@ the MetaMask browser extension and MetaMask Mobile.
 
 ### 1. Set up the project
 
-If you don't have an existing Wagmi project, set up a new project using Wagmi's `create wagmi` command
-with the `vite-react` template:
+If you don't have an existing Wagmi project, create a new project directory using Wagmi's `create wagmi`
+command with the `vite-react` template:
 
 ```bash
 npm create wagmi@latest  --template vite-react
@@ -69,7 +69,8 @@ export const config = createConfig({
 ```
 
 :::note
-By default, if the EIP-6963 MetaMask injected provider is detected, this connector will replace it.
+By default, if the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) MetaMask injected provider is detected,
+this connector will replace it.
 See Wagmi's [`rdns`](https://wagmi.sh/dev/creating-connectors#properties) property for more information.
 :::
 
