@@ -102,7 +102,7 @@ This displays a localhost URL in your terminal for easy access to launch in your
   ➜  press h + enter to show help
 ```
 
-#### 1.1. Review the Wagmi, and MetaMask SDK configuration
+### 2. Review the Wagmi configuration
 
 In `src/main.tsx`, you can find the following `WagmiProvider` which takes a `config` and `QueryClientProvider`.
 
@@ -178,7 +178,7 @@ Out of the box, they have also set up the `injected` wallet provider, `coinbaseW
 
 You'll replace these with the MetaMask connector for the purpose of this tutorial and testing MetaMask SDK.
 
-### 2. Update the Wagmi configuration
+### 3. Update the Wagmi configuration
 
 Modify this configuration to target the Linea testnet and use the MetaMask connector, which is
 Wagmi's built-in support for MetaMask SDK:
@@ -218,7 +218,7 @@ This configures Wagmi with the following options:
 
 This setup simplifies wallet integration and provides a smooth user experience while working with Linea Sepolia.
 
-### 3. Connect to MetaMask extension or Mobile
+### 4. Connect to MetaMask extension or Mobile
 
 At this point, your dapp displays, and you can connect to and disconnect from MetaMask.
 Your connection experience will be similar to that of using the injected provider, as most web3
@@ -250,9 +250,7 @@ MetaMask Mobile.
   </video>
 </p>
 
-
-### Conclusion
+## Conclusion
 
 This tutorial walked you through generating a dapp using Create Wagmi, and configuring MetaMask SDK.
-You explored how the SDK works within a React application with Wagmi, how it behaves out of
-the box.
+You explored how the SDK works within a React application with Wagmi, and how it behaves out of the box.

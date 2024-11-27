@@ -68,6 +68,11 @@ export const config = createConfig({
 })
 ```
 
+:::note
+By default, if the EIP-6963 MetaMask injected provider is detected, this connector will replace it.
+See Wagmi's [`rdns`](https://wagmi.sh/dev/creating-connectors#properties) property for more information.
+:::
+
 ### 3. Run the dapp
 
 Start the development server:
@@ -78,10 +83,7 @@ npm run dev
 
 Navigate to the displayed localhost URL to view and test your dapp.
 
-## Advanced
-By default, this connector will replace the EIP_6963 MetaMask injected connector if it is detected (See the option [`rdns`](https://wagmi.sh/dev/creating-connectors#properties))
-
 ## Next steps
 
 See the [Create a React dapp with the SDK and Wagmi](../../tutorials/react-dapp-sdk-wagmi.md) tutorial
-for more information about creating a Wagmi dapp with various SDK configurations.
+for more information about configuring the SDK with Wagmi, and how the dapp behaves out of the box.
