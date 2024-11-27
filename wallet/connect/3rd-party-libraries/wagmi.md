@@ -15,61 +15,76 @@ the MetaMask browser extension and MetaMask Mobile.
 
 ## Prerequisites
 
-- Ensure you have a basic understanding of Ethereum smart contracts and React Hooks.
-- Set up a project with [Wagmi](https://wagmi.sh/react/getting-started).
-- Create an Infura API key and allowlist to [make read-only requests](../../how-to/make-read-only-requests.md).
+- [Node.js](https://nodejs.org/en/) version 20+
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/) version 9+
+- A text editor (for example, [VS Code](https://code.visualstudio.com/))
+- The [MetaMask extension](https://metamask.io/) or
+  [MetaMask Flask](/developer-tools/dashboard/get-started/create-api) installed
+- Basic knowledge of [React](https://react.dev/)
 
-## Configure the MetaMask connector
+## Steps
 
-In your Wagmi project, configure the MetaMask connector:
+### 1. Set up the project
 
-```javascript
+If you don't have an existing Wagmi project, create a new project directory using Wagmi's `create wagmi`
+command with the `vite-react` template:
+
+```bash
+npm create wagmi@latest  --template vite-react
+```
+
+This prompts you for a project name.
+For example, use `mmsdk-wagmi`.
+Once your project is created, navigate into it and install the node module dependencies:
+
+```bash
+cd mmsdk-wagmi && npm install
+```
+
+### 2. Configure the MetaMask connector
+
+In `wagmi.ts`, configure the MetaMask connector with any [parameters](https://wagmi.sh/core/api/connectors/metaMask#parameters).
+Specify [`dappMetadata`](https://wagmi.sh/core/api/connectors/metaMask#dappmetadata), including the `name`, `url`, and `iconUrl`,
+to help identify your dapp within the MetaMask ecosystem.
+
+```typescript title="wagmi.ts"
 import { metaMask } from "wagmi/connectors"
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
   connectors: [
     metaMask({
-      infuraAPIKey: import.meta.env.VITE_INFURA_API_KEY,
+      dappMetadata: {
+        name: "Example Wagmi dapp",
+        url: "https://wagmi.io",
+        iconUrl: "https://wagmi.io/favicon.ico",
+      },
     }),
   ],
   transports: {
     [mainnet.id]: http(),
-    // You can also configure the transcripts to use INFURA_API_KEY directly into the Wagmi config
-    // to share with other providers.
-    // [mainnet.id]: http("https://mainnet.infura.io/v3/...")
     [sepolia.id]: http(),
   },
 })
 ```
 
-Make sure to configure the MetaMask connector with the proper [SDK options](../../reference/sdk-js-options.md).
+:::note
+By default, if the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) MetaMask injected provider is detected,
+this connector will replace it.
+See Wagmi's [`rdns`](https://wagmi.sh/dev/creating-connectors#properties) property for more information.
+:::
 
-To provide a better mobile user experience, specify the [`infuraAPIKey`](../../reference/sdk-js-options.md#infuraapikey)
-option to [make read-only requests](../../how-to/make-read-only-requests.md) using the Infura API.
-You can set your Infura API key in environment variables:
+### 3. Run the dapp
 
-```env
-VITE_INFURA_API_KEY=<YOUR-API-KEY>
+Start the development server:
+
+```bash
+npm run dev
 ```
 
-## Benefits of using the Infura API with Wagmi
+Navigate to the displayed localhost URL to view and test your dapp.
 
-Read-only requests are blockchain requests that do not require user wallet interaction.
-Mobile dapps can lose their continuous connection with MetaMask, causing read-only requests to fail. 
-When the mobile wallet is disconnected, the dapp must deeplink into the wallet to "wake up" the connection.
+## Next steps
 
-Without setting the `infuraAPIKey`, the dapp might experience issues in mobile environments:
-
-![Wagmi errors](../../assets/wagmi-errors.png)
-
-To overcome this limitation in mobile dapps that rely on a continuous connection with MetaMask,
-use the Infura API to make read-only requests.
-This approach offloads the read operations to Infura's nodes, reducing the load on your own
-infrastructure and ensuring high availability and reliability, independent of the user's wallet connection.
-
-By using the Infura API, you can ensure:
-
-- **Uninterrupted access** - Continuous network access for read-only requests, regardless of MetaMask's state.
-- **Enhanced stability** - Stabilized dapp functionality by relying on Infura's robust infrastructure
-  rather than the mobile environment's variable connectivity and background processing constraints.
+See the [Create a React dapp with the SDK and Wagmi](../../tutorials/react-dapp-sdk-wagmi.md) tutorial
+for more information about configuring the SDK with Wagmi, and how the dapp behaves out of the box.
