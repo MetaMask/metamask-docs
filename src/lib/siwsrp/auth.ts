@@ -14,17 +14,6 @@ export const AUTH_WALLET_PAIRING = 'auth.wallet.pairing'
 export const AUTH_WALLET_SESSION_NAME = 'auth.wallet.session'
 export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
 export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
-export const AUTH_WALLET_USER_PLAN = "auth.wallet.uksTier";
-export const AUTH_WALLET_ENS = "auth.wallet.ens";
-
-export const getWalletEns = () => {
-  return sessionStorage.getItem(AUTH_WALLET_ENS);
-};
-
-export const getUksTier = (): string => {
-  return sessionStorage.getItem(AUTH_WALLET_USER_PLAN);
-};
-
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
@@ -46,11 +35,11 @@ const getHydraEnv = (env: string): HydraEnv => {
 
 const storage: SDK.AuthStorageOptions = {
   getLoginResponse: async () => {
-    const storedResponse = sessionStorage.getItem(AUTH_WALLET_SESSION_NAME);
+    const storedResponse = localStorage.getItem(AUTH_WALLET_SESSION_NAME);
     return storedResponse ? JSON.parse(storedResponse) : null;
   },
   setLoginResponse: async (val: SDK.LoginResponse) => {
-    sessionStorage.setItem(AUTH_WALLET_SESSION_NAME, JSON.stringify(val));
+    localStorage.setItem(AUTH_WALLET_SESSION_NAME, JSON.stringify(val));
   },
 };
 
@@ -99,4 +88,6 @@ export const getUserIdFromJwtToken = () => {
 
 export const clearStorage = () => {
   sessionStorage.clear();
+  localStorage.removeItem(AUTH_WALLET_SESSION_NAME);
+  localStorage.removeItem(AUTH_WALLET_PAIRING);
 };

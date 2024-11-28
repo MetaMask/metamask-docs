@@ -13,9 +13,8 @@ const ProjectsBox = () => {
     projects,
     metaMaskAccount,
     walletLinked,
-    needsMfa,
     metaMaskWalletIdConnectHandler,
-    walletAuthUrl,
+    walletLinkUrl,
     setUserAPIKey,
   } = useContext(MetamaskProviderContext);
   const options = Object.keys(projects).map((v) => ({
@@ -115,7 +114,7 @@ const ProjectsBox = () => {
           />
         ) : (
           <div className={styles.selectProjects}>
-            {!needsMfa && walletLinked === undefined && (
+            {walletLinked === undefined && (
               <>
                 <div>
                   {isWalletLinking ?
@@ -133,21 +132,6 @@ const ProjectsBox = () => {
                 </Button>
               </>
             )}
-            {needsMfa && (
-              <>
-                <div>
-                  Your Infura account needs two factor auth token
-                </div>
-                <Button
-                  thin
-                  variant="secondary"
-                  wrapText={false}
-                  onClick={() => (window.location.href = walletAuthUrl)}
-                >
-                  Enter your MFA
-                </Button>
-              </>
-            )}
             {walletLinked === WALLET_LINK_TYPE.NO && (
               <>
                 <div>
@@ -158,7 +142,7 @@ const ProjectsBox = () => {
                   thin
                   variant="secondary"
                   wrapText={false}
-                  onClick={() => (window.location.href = walletAuthUrl)}
+                  onClick={() => (window.location.href = walletLinkUrl)}
                 >
                   Link Infura Account
                 </Button>
@@ -167,14 +151,14 @@ const ProjectsBox = () => {
             {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
               <>
                 <div>
-                  Select MetaMask Developer account linked with your current wallet.
+                  Select Infura account linked with your current wallet.
                 </div>
                 <Button
                   thin
                   className={styles.connectButton}
-                  onClick={() => (window.location.href = walletAuthUrl)}
+                  onClick={() => (window.location.href = walletLinkUrl)}
                 >
-                  Select MetaMask Developer Account
+                  Select Infura Account
                 </Button>
               </>
             )}
