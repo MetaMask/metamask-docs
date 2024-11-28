@@ -18,23 +18,27 @@ const DebugAuth = () => {
       VERCEL_ENV as string,
     );
     setUserData(prev => ({...prev, accessToken, userProfile}));
-    const loginResponse = await (
-      await fetch(
-        `${DASHBOARD_URL}/api/wallet/login`,
-        {
-          ...REQUEST_PARAMS("POST", {
-            hydra_token: accessToken,
-            token: "true",
-          }),
-          body: JSON.stringify({
-            profileId: userProfile.profileId,
-            redirect_to: window.location.href,
-          }),
-        },
-      )
-    ).json();
-    const { data, session, token } = loginResponse;
-    setUserData(prev => ({...prev, data, session, token}));
+    try {
+      const loginResponse = await (
+        await fetch(
+          `${DASHBOARD_URL}/api/wallet/login`,
+          {
+            ...REQUEST_PARAMS("POST", {
+              hydra_token: accessToken,
+              token: "true",
+            }),
+            body: JSON.stringify({
+              profileId: userProfile.profileId,
+              redirect_to: window.location.href,
+            }),
+          },
+        )
+      ).json();
+      const { data, session, token } = loginResponse;
+      setUserData(prev => ({...prev, data, session, token}));
+    } catch {
+      setUserData(prev => ({...prev, data: "login api error"}));
+    }
   };
 
   return (
