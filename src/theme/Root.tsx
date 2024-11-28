@@ -97,7 +97,8 @@ const sdk = new MetaMaskSDK({
     name: "Reference pages",
     url: "https://docs.metamask.io/",
   },
-  preferDesktop: true,
+  // preferDesktop: true,
+  useDeeplink: true,
   extensionOnly: true,
   checkInstallationImmediately: false,
   logging: {
