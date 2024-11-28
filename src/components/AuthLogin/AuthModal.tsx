@@ -150,6 +150,7 @@ const AuthModal = ({
     sdk,
     metaMaskAccount,
     metaMaskAccountEns,
+    metaMaskProvider,
     setNeedsMfa,
     setWalletLinked,
     setWalletAuthUrl,
@@ -185,6 +186,8 @@ const AuthModal = ({
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
       }
+
+      console.log('metaMaskProvider', metaMaskProvider);
 
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
