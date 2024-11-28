@@ -98,6 +98,7 @@ const sdk = new MetaMaskSDK({
     url: "https://docs.metamask.io/",
   },
   preferDesktop: true,
+  useDeeplink: true,
   extensionOnly: true,
   checkInstallationImmediately: false,
   logging: {
