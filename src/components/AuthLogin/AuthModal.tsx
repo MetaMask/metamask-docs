@@ -148,6 +148,8 @@ const AuthModal = ({
   const { DASHBOARD_URL, VERCEL_ENV } = siteConfig?.customFields || {};
   const {
     sdk,
+    metaMaskAccount,
+    metaMaskAccountEns,
     setNeedsMfa,
     setWalletLinked,
     setWalletAuthUrl,
@@ -162,6 +164,11 @@ const AuthModal = ({
 
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING);
+
+
+    console.log('metaMaskAccount', metaMaskAccount);
+    console.log('metaMaskAccountEns', metaMaskAccountEns);
+
     try {
       if (!sdk.isExtensionActive()) {
         setOpen(false);
@@ -169,6 +176,8 @@ const AuthModal = ({
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
+
+      console.log('accounts', accounts);
 
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0]);
@@ -182,6 +191,9 @@ const AuthModal = ({
       const { accessToken, userProfile } = await authenticateAndAuthorize(
         VERCEL_ENV as string,
       );
+
+      console.log('accessToken', accessToken);
+      console.log('userProfile', userProfile);
 
       const loginResponse = await (
         await fetch(
