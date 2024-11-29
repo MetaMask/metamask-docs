@@ -1,5 +1,6 @@
 import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 import * as path from "path";
+import MULTI_JSON from "./multi-api.json"
 
 export interface ResponseItem {
   name: string;
@@ -8,6 +9,9 @@ export interface ResponseItem {
 }
 
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
+  if (name === NETWORK_NAMES.metamask) {
+    return { name, data: MULTI_JSON, error: false };
+  }
   try {
     const response = await fetch(url, { method: "GET" });
     const data = await response.json();
