@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, FC, useContext } from "react";
+import { isBrowser } from "react-device-detect";
 import ldClient from "launchdarkly";
 import clsx from "clsx";
 import Button from "@site/src/components/Button";
@@ -248,6 +249,7 @@ const NavbarWallet = (props) => {
 
   return (
     ldReady &&
+    isBrowser &&
     loginEnabled && (
       <BrowserOnly>{() => <NavbarWalletComponent {...props} />}</BrowserOnly>
     )
