@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { authenticateAndAuthorize } from "@site/src/lib/siwsrp/auth";
 import { REQUEST_PARAMS } from "@site/src/lib/constants";
+import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 const DebugAuth = () => {
+  const { sdk } = useContext(MetamaskProviderContext);
   const [ userData, setUserData ] = useState({
     accessToken: null,
     userProfile: null,
@@ -44,6 +46,7 @@ const DebugAuth = () => {
   return (
     <div>
       <button onClick={fetchLoginData}>user</button>
+      <div>isExtensionActive - {`${sdk.isExtensionActive()}`}</div>
       <div>
         {JSON.stringify(userData, null, 2)}
       </div>
