@@ -240,5 +240,5 @@ openssl ec -in private.pem -pubout -outform DER | openssl sha256 -binary | opens
 ### Learn more
 
 - Learn more about [keeping your Infura secrets safe](https://www.infura.io/blog/post/best-practises-for-infura-api-key-management).
-- Follow a [tutorial](../tutorials/ethereum/authenticate-with-jwt.md)  to create and apply a JWT to authenticate an 
+- Follow a [tutorial](../tutorials/ethereum/authenticate-with-jwt.md) to create and apply a JWT to authenticate an 
 `eth_blockNumber` API request.
