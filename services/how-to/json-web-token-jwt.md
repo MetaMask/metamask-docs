@@ -24,7 +24,7 @@ Only authenticated users can access Infura projects by including JWTs in request
 
 #### Workflow
 
-1. Setup your project's Infura security settings to enforce authorized access with JWTs.
+1. Set up your project's Infura security settings to enforce authorized access with JWTs.
 2. A user logs into the project application and receives a JWT.
 3. Each request the user makes to Infura with the application's API key includes the JWT in the header.
 4. The JWT is verified and the request is successful, or the request is rejected if the JWT is invalid.
