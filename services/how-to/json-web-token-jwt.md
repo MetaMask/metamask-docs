@@ -10,9 +10,9 @@ import TabItem from "@theme/TabItem";
 
 JSON Web Token (JWT) is an internet standard ([RFC 7519](https://tools.ietf.org/html/rfc7519)) that defines a process for secure data exchange between two parties.
 
-Infura projects can use [JSON Web Tokens](https://jwt.io) to authorize users and external parties.
+Infura projects can use [JSON Web Tokens](https://jwt.io) to authorize users and external parties. This allows developers to enhance the security profile of their dapps by configuring the expiry time and scope of JWTs.
 
-:::warning
+:::info
 
 Infura supports using JWTs for Web3 networks.
 
@@ -24,7 +24,7 @@ Only authenticated users can access Infura projects by including JWTs in request
 
 #### Workflow
 
-1. Infura security settings enforce authorized access with JWTs.
+1. Set up your project's Infura security settings to enforce authorized access with JWTs.
 2. A user logs into the project application and receives a JWT.
 3. Each request the user makes to Infura with the application's API key includes the JWT in the header.
 4. The JWT is verified and the request is successful, or the request is rejected if the JWT is invalid.
@@ -39,34 +39,13 @@ JWTs may also include allowlists that enforce further restrictions.
 
 ### Generate keys
 
-You can generate your private and public key pair using a tool such as [OpenSSL](https://www.openssl.org). Infura supports the [RS256](https://datatracker.ietf.org/doc/html/rfc7518#section-3.3) and [ES256](https://datatracker.ietf.org/doc/html/rfc7518#section-3.4) cryptographic algorithms.
+Generate your private and public key pair. Infura supports the [RS256](https://datatracker.ietf.org/doc/html/rfc7518#section-3.3) and [ES256](https://datatracker.ietf.org/doc/html/rfc7518#section-3.4) cryptographic algorithms. If you are unfamiliar with generating keys, follow the [Authenticate with JWT](../tutorials/ethereum/authenticate-with-jwt.md#21-generate-your-private-key) tutorial.
 
 :::warning
 
-Ensure your private key stays private!
+Ensure your [private key stays private](https://www.infura.io/blog/post/best-practises-for-infura-api-key-management)!
 
 :::
-
-The following example creates the key pairs using `openssl`:
-
-<Tabs>
-  <TabItem value="RSA key pair" label="RSA key pair" default>
-
-```bash
-openssl genrsa -out private.pem 2048
-openssl rsa -in private.pem -outform PEM -pubout -out public.pembas
-```
-
-  </TabItem>
-  <TabItem value="EC (256) key pair" label="EC (256) key pair" >
-
-```bash
-openssl ecparam -name prime256v1 -genkey -noout -out private.pem
-openssl ec -in private.pem -pubout -out public.pembash
-```
-
-  </TabItem>
-</Tabs>
 
 ### Upload the public key
 
@@ -89,7 +68,7 @@ Upload the contents of the public key file that you [generated earlier](json-web
 
     :::
 
-1. Give the public key a name.
+1. Provide a unique name for your JWT public key, which can help you manage multiple keys.
 
 1. Paste the public key into the **JWT Public Key** input box. It looks something like this:
 
@@ -131,12 +110,22 @@ To get the request to pass, generate a JWT, and add it to the request.
 
 ### Generate a JWT
 
+Generate a JWT with an online tool, or programmatically:
+
+
+<Tabs>
+  <TabItem value="Online tool" default>
+
 The following example uses the [jwt.io](https://jwt.io) site to generate the JWT:
 
 - Use a supported algorithm (`RS256` or `ES256`) and declare it in the `alg` header field.
 - Specify `JWT` in the `typ` header field.
 - Include the JWT `ID` in the `kid` header field.
 - Have an unexpired `exp` timestamp in the payload data.
+- Specify `infura.io` in the `aud` field.
+- Add the public key and private key created earlier into the **Verify Signature** section.
+
+![Generate a JWT online](../images/jwt.png)
 
 :::info
 
@@ -144,14 +133,17 @@ To generate a timestamp for testing, use an [online timestamp converter tool](ht
 
 :::
 
-- Specify `infura.io` in the `aud` field.
-- Add the public key and private key created earlier into the **Verify Signature** section.
+  </TabItem>
+  <TabItem value="Programatically">
 
-To see how this works, go to a site like [jwt.io](https://jwt.io) and enter the data.
+Developers typically create the JWT token from their keys programmatically. To learn more, follow the tutorial demonstrating how to [create and apply a JWT with Node.js](../tutorials/ethereum/authenticate-with-jwt.md). 
 
-![Generate a JWT online](../images/jwt.png)
+  </TabItem>
+</Tabs>
 
-Copy the encoded token as part of the `-H "Authorization: Bearer` entry:
+### Apply the JWT
+
+Pass the encoded token as part of the `-H "Authorization: Bearer` entry:
 
 ```bash
 curl -X POST \
@@ -164,6 +156,9 @@ curl -X POST \
 ```bash
 {"jsonrpc": "2.0", "id": 1, "result": "0x1cc23d4"}
 ```
+
+
+## Next steps
 
 ### Set up allowlists
 
@@ -216,10 +211,10 @@ curl -X POST \
 ```
 
 ```bash
-{"jsonrpc": "2.0", "id": 1, "result": "0x1a66d865b7f200"}%
+{"jsonrpc": "2.0", "id": 1, "result": "0x1a66d865b7f200"}
 ```
 
-## Verify JWTs
+### Verify JWTs
 
 To identify the public key you have used to create a JWT, verify it with the `FINGERPRINT`.
 
@@ -241,3 +236,9 @@ openssl ec -in private.pem -pubout -outform DER | openssl sha256 -binary | opens
 
   </TabItem>
 </Tabs>
+
+### Learn more
+
+- Learn more about [keeping your Infura secrets safe](https://www.infura.io/blog/post/best-practises-for-infura-api-key-management).
+- Follow a [tutorial](../tutorials/ethereum/authenticate-with-jwt.md) to create and apply a JWT to authenticate an 
+`eth_blockNumber` API request.
