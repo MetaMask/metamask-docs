@@ -211,7 +211,7 @@ curl -X POST \
 ```
 
 ```bash
-{"jsonrpc": "2.0", "id": 1, "result": "0x1a66d865b7f200"}%
+{"jsonrpc": "2.0", "id": 1, "result": "0x1a66d865b7f200"}
 ```
 
 ### Verify JWTs
