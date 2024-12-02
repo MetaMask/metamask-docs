@@ -197,9 +197,25 @@ export default function Hero({
           </div>
         </>
       ) : (
-        <Text as="p">
-          Please open the application on desktop to get started and request ETH
-        </Text>
+        <>
+          <div className={styles.heroDesktopContent}>
+            <Text as="p">
+              Install MetaMask for your browser to get started and request ETH.
+            </Text>
+            <Button
+              testId="hero-cta-install-metamask"
+              className={styles.button}
+              onClick={handleConnectWallet}
+            >
+              Install MetaMask
+            </Button>
+          </div>
+          <div className={styles.heroMobileContent}>
+            <Text as="p">
+              Please open the application on desktop to get started and request ETH
+            </Text>
+          </div>
+        </>
       )}
     </div>
   );
