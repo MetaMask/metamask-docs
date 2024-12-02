@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, FC, useContext } from "react";
-import { isBrowser } from "react-device-detect";
 import ldClient from "launchdarkly";
 import clsx from "clsx";
 import Button from "@site/src/components/Button";
@@ -232,6 +231,7 @@ const NavbarWalletComponent: FC = ({
 const NavbarWallet = (props) => {
   const [ldReady, setLdReady] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(false);
+  const { sdk } = useContext(MetamaskProviderContext);
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
@@ -249,7 +249,7 @@ const NavbarWallet = (props) => {
 
   return (
     ldReady &&
-    isBrowser &&
+    sdk.isExtensionActive() &&
     loginEnabled && (
       <BrowserOnly>{() => <NavbarWalletComponent {...props} />}</BrowserOnly>
     )
