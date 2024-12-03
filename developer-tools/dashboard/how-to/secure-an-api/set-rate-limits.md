@@ -27,8 +27,8 @@ Set rate limiting in the API key's **Settings** tab **Key Credit Limits** sectio
 
     When the number of used credits reach this limit, all requests will be rejected until the next day (00:00 UTC).
 
-If you exceed the specified limits then you'll receive a JSON response with an
-[HTTP status code `429`](/services/reference/ethereum/json-rpc-methods#http-errors). For example:
+If you exceed the specified limits, you'll receive a JSON response with an
+[HTTP error status code `429`](/services/reference/ethereum/json-rpc-methods#http-errors). For example:
 
 ```json
 {
