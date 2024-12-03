@@ -7,6 +7,8 @@ description: Welcome
 
 Welcome to the MetaMask Wallet SDK developer documentation!
 
+### Overview
+
 MetaMask SDK is a toolkit that allows you to:
 
 - Connect your dApps to users' wallets

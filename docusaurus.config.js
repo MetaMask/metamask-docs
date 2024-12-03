@@ -160,6 +160,17 @@ const config = {
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
         sidebarPath: require.resolve("./sdk-sidebar.js"),
         breadcrumbs: false,
+        lastVersion: '0.31.0',
+        versions: {
+          current: {
+            label: 'Next',
+            banner: 'unreleased'
+          },
+          '0.31.0': {
+            label: '0.31.0',
+            banner: 'none'
+          }
+        },
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args);
           const dymanicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -204,6 +215,12 @@ const config = {
           {
             to: "wallet",
             label: "Wallet",
+          },
+          {
+            type: 'docsVersionDropdown',
+            docsPluginId: 'sdk',
+            position: 'right',
+            className: 'navbar__sdk-version-dropdown',
           },
           {
             to: "sdk",
