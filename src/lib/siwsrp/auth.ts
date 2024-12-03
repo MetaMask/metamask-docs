@@ -72,7 +72,9 @@ export const authenticateAndAuthorize = async (env: string) => {
     await auth(env).connectSnap();
     accessToken = await auth(env).getAccessToken();
     userProfile = await auth(env).getUserProfile();
+    console.log("data__", accessToken)
   } catch (e: any) {
+    console.log("error__", e)
     throw new Error(e.message);
   }
 
