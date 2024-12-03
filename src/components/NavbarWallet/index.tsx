@@ -231,6 +231,7 @@ const NavbarWalletComponent: FC = ({
 const NavbarWallet = (props) => {
   const [ldReady, setLdReady] = useState(false);
   const [loginEnabled, setLoginEnabled] = useState(false);
+  const { sdk } = useContext(MetamaskProviderContext);
 
   useEffect(() => {
     ldClient.waitUntilReady().then(() => {
@@ -248,6 +249,7 @@ const NavbarWallet = (props) => {
 
   return (
     ldReady &&
+    sdk.isExtensionActive() &&
     loginEnabled && (
       <BrowserOnly>{() => <NavbarWalletComponent {...props} />}</BrowserOnly>
     )
