@@ -4,11 +4,19 @@ description: User Authentication
 
 # User Authentication
 
-Connecting users' wallets is the first step in any web3 application. This guide covers how to authenticate users with MetaMask using both Wagmi (recommended) and vanilla JavaScript.
+Connect and manage user wallet sessions in your dApp. This guide covers both **Wagmi** (recommended) and **vanilla JavaScript** approaches.
+
+With MetaMask SDK, you can:
+- **Connect users' wallets** to your dApp
+- **Access user accounts** (addresses)
+- **Handle connection states** (connected/disconnected)
+- **Listen for account changes** in real-time
+- **Manage wallet sessions** (connect/disconnect)
+- **Support multiple wallet types** (extension, mobile app)
 
 ### Using Wagmi
 
-Wagmi provides a simple, hook-based approach for handling wallet connections. Here's how to implement user authentication:
+Wagmi provides a simple, hook-based approach for handling wallet connections:
 
 ```tsx
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
@@ -62,7 +70,7 @@ function WatchAccount() {
 
 ### Using Vanilla JavaScript
 
-If you're not using React, here's how to implement user authentication using the MetaMask SDK directly:
+If you're not using React, here's how to implement authentication directly:
 
 ```javascript
 import { MetaMaskSDK } from '@metamask/sdk';
@@ -99,23 +107,6 @@ async function connectWallet() {
   }
 }
 
-// Disconnect wallet
-async function disconnectWallet() {
-  try {
-    await provider.request({
-      method: 'wallet_revokePermissions',
-      params: [{ eth_accounts: {} }]
-    });
-    
-    // Update UI
-    document.getElementById('status').textContent = 'Not connected';
-    document.getElementById('connectBtn').style.display = 'block';
-    document.getElementById('disconnectBtn').style.display = 'none';
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 // Handle account changes
 provider.on('accountsChanged', (accounts) => {
   if (accounts.length === 0) {
@@ -127,12 +118,6 @@ provider.on('accountsChanged', (accounts) => {
     // Account changed
     document.getElementById('status').textContent = `Connected: ${accounts[0]}`;
   }
-});
-
-// Handle chain changes
-provider.on('chainChanged', (chainId) => {
-  // Handle chain change (usually by reloading the page)
-  window.location.reload();
 });
 ```
 
@@ -175,9 +160,9 @@ provider.on('chainChanged', (chainId) => {
 
 | Error Code | Description | Solution |
 |------------|-------------|----------|
-| 4001 | User rejected request | Show a message asking user to approve the connection |
-| -32002 | Request already pending | Disable connect button while request is pending |
-| -32603 | Internal JSON-RPC error | Check if MetaMask is properly installed |
+| **4001** | User rejected request | Show a message asking user to approve the connection |
+| **-32002** | Request already pending | Disable connect button while request is pending |
+| **-32603** | Internal JSON-RPC error | Check if MetaMask is properly installed |
 
 ### Next Steps
 

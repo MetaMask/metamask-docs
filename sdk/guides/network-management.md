@@ -4,11 +4,17 @@ description: Network Management
 
 # Network Management
 
-Managing networks is essential for dApps that support multiple chains. This guide covers how to detect, switch, and add networks using both Wagmi (recommended) and vanilla JavaScript.
+This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. You'll learn how to:
+- **Detect the current network** and monitor network changes
+- **Switch between networks** programmatically
+- **Add new networks** to MetaMask
+- Handle common network-related errors
+
+We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.
 
 ### Using Wagmi
 
-Wagmi provides hooks for all network-related operations, making it easy to handle chain management in React applications.
+Wagmi provides intuitive hooks for all network-related operations, making chain management straightforward in React applications.
 
 #### Detect Current Network
 
@@ -78,18 +84,24 @@ function NetworkWatcher() {
 
 ### Using Vanilla JavaScript
 
-If you're not using React, here's how to implement network management using vanilla JavaScript:
+For non-React applications, here's how to implement network management using vanilla JavaScript:
+
+#### Initialize MetaMask SDK
+
+```javascript
+import MetaMaskSDK from '@metamask/sdk';
+
+const MMSDK = new MetaMaskSDK();
+const ethereum = MMSDK.getProvider();
+```
 
 #### Detect Current Network
 
 ```javascript
-// Initialize provider
-const provider = window.ethereum;
-
 // Get current chain ID
 async function getCurrentChain() {
   try {
-    const chainId = await provider.request({ 
+    const chainId = await ethereum.request({ 
       method: 'eth_chainId' 
     });
     console.log('Current chain ID:', chainId);
@@ -100,7 +112,7 @@ async function getCurrentChain() {
 }
 
 // Listen for network changes
-provider.on('chainChanged', (chainId) => {
+ethereum.on('chainChanged', (chainId) => {
   console.log('Network changed to:', chainId);
   // We recommend reloading the page
   window.location.reload();
@@ -134,7 +146,7 @@ async function switchNetwork(networkKey) {
   
   try {
     // Try to switch to the network
-    await provider.request({
+    await ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: network.chainId }]
     });
@@ -142,7 +154,7 @@ async function switchNetwork(networkKey) {
     // If the error code is 4902, the network needs to be added
     if (err.code === 4902) {
       try {
-        await provider.request({
+        await ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
             chainId: network.chainId,
@@ -162,7 +174,7 @@ async function switchNetwork(networkKey) {
 }
 ```
 
-#### Example HTML
+#### Example HTML Implementation
 
 ```html
 <div>
@@ -172,63 +184,31 @@ async function switchNetwork(networkKey) {
 </div>
 ```
 
-### Common Networks
 
-Here are some commonly used network configurations:
-
-```javascript
-const networks = {
-  mainnet: {
-    chainId: '0x1',
-    name: 'Ethereum Mainnet'
-  },
-  optimism: {
-    chainId: '0xA',
-    name: 'Optimism',
-    rpcUrls: ['https://mainnet.optimism.io'],
-    nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
-    blockExplorerUrls: ['https://optimistic.etherscan.io']
-  },
-  base: {
-    chainId: '0x2105',
-    name: 'Base',
-    rpcUrls: ['https://mainnet.base.org'],
-    nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
-    blockExplorerUrls: ['https://basescan.org']
-  },
-  arbitrum: {
-    chainId: '0xA4B1',
-    name: 'Arbitrum One',
-    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-    nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
-    blockExplorerUrls: ['https://arbiscan.io']
-  }
-}
-```
 
 ### Best Practices
 
 1. **Error Handling**
-   - Always handle network switching errors gracefully
-   - Provide clear feedback to users when network operations fail
-   - Handle cases where networks need to be added first
+   - Implement error handling for network switching operations
+   - Provide **clear feedback messages** to users when network operations fail
+   - Handle cases where networks need to be **added before switching**
 
 2. **User Experience**
-   - Show loading states during network switches
-   - Provide clear network status information
-   - Consider warning users before switching networks
-   - Consider using an RPC provider that supports the networks you want to support
+   - Display **loading states** during network switches
+   - Show **clear network status information** at all times
+   - Consider **warning users** before initiating network switches
+   - Use an **RPC provider** that supports your target networks
 
 ### Common Errors
 
 | Error Code | Description | Solution |
 |------------|-------------|----------|
-| 4902 | Network not added | Use `wallet_addEthereumChain` to add the network first |
-| 4001 | User rejected request | Show a message asking user to approve the network switch |
-| -32002 | Request already pending | Disable network switch button while request is pending |
+| **4902** | Network not added | Use `wallet_addEthereumChain` to add the network first |
+| **4001** | User rejected request | Show a message asking user to approve the network switch |
+| **-32002** | Request already pending | Disable network switch button while request is pending |
 
 ### Next Steps
 
+- [User Authentication](/sdk/guides/user-authentication)
 - [Transaction Handling](/sdk/guides/transaction-handling)
 - [Interact with Contracts](/sdk/guides/interact-with-contracts)
-- [Production Readiness](/sdk/guides/production-readiness)
