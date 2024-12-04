@@ -1,7 +1,0 @@
----
-description: JavaScript
----
-
-# JavaScript
-
-asd
