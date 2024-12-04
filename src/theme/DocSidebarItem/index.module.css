@@ -1,10 +1,8 @@
-.flaskOnly > a.menu__link::after,
-.flaskOnly > .menu__list-item-collapsible > a.menu__link::after {
+.flaskOnly :global(a.menu__link::after),
+.flaskOnly :global(.menu__list-item-collapsible a.menu__link::after) {
   content: 'Flask';
-  font-size: 1.2rem;
-  line-height: 1;
-  font-weight: 500;
-  text-transform: uppercase;
+  margin-left: 0.5em;
+  background-color: var(--mm-flask-background-color);
   color: var(--mm-flask-color);
   border-radius: 0;
   margin-left: 1rem;

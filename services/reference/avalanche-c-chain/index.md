@@ -60,6 +60,4 @@ Select one of the following options to get started with the Avalanche C-Chain ne
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
-For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
-
-Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura's failover-protection partner and currently offer failover support for all Infura's Avalanche (C-Chain) methods.
+Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura's failover-protection partner and currently offers failover support for all Infura's Avalanche (C-Chain) methods.

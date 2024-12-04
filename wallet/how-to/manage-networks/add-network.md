@@ -1,6 +1,5 @@
 ---
 description: Prompt a user to add or switch to an Ethereum network.
-sidebar_position: 2
 ---
 
 # Add a network
@@ -9,8 +8,8 @@ In some cases, such as when [interacting with smart contracts](../../concepts/sm
 your dapp must connect a user to a new network in MetaMask.
 Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
 which requires them to configure RPC URLs and chain IDs, your dapp can use the
-[`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain) and
-[`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain) RPC methods to prompt
+[`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain) and
+[`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain) RPC methods to prompt
 the user to add a specific, pre-configured network to their MetaMask wallet.
 
 These methods are specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-3085) and
@@ -30,10 +29,10 @@ The confirmations look like the following:
     </div>
 </div>
 
-:::note
-
-To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
-
+:::info Development and non-EVM networks
+- To add a local development network such as [Hardhat](https://hardhat.org) to MetaMask, see [Run a development network](../run-devnet.md).
+- To add a non-EVM network such as [Starknet](../use-non-evm-networks/starknet/index.md) to MetaMask,
+  see [Use non-EVM networks](/wallet/how-to/use-non-evm-networks).
 :::
 
 ## Example

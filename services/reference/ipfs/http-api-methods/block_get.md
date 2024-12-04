@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# block_get
+# `block_get`
 
-## /api/v0/block/get
+## `/api/v0/block/get`
 
 Get a raw IPFS block.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -15,7 +15,7 @@ Get a raw IPFS block.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=<key>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
@@ -30,15 +30,15 @@ curl "https://ipfs.infura.io:5001/api/v0/block/get?arg=QmaYL7E4gDTPNfLxrCEEEcNJg
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
 - `arg` _\[Required]_ - The base58 multihash of an existing block to get.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint will return with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```
 This endpoint returns a `text/plain` response body.

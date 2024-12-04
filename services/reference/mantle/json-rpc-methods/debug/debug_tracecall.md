@@ -5,7 +5,7 @@ description: debug_traceCall API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceCall
+# `debug_traceCall`
 
 Returns the number of possible tracing result by executing an `eth_call` within the context of the
 given block execution.
@@ -18,9 +18,9 @@ given block execution.
   - `gas`: (string) hexadecimal value of the gas provided for the transaction execution. `eth_call` consumes zero
     gas, but this parameter may be needed by some executions.
   - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
-  - `maxPriorityFeePerGas`: (string) maximum fee, in Wei, the sender is willing to pay per gas above the base fee.
+  - `maxPriorityFeePerGas`: (string) maximum fee, in wei, the sender is willing to pay per gas above the base fee.
     See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
-  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay per gas.
+  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
     See [EIP-1559 transactions](../../../../concepts/transaction-types.md#eip-1559-transactions).
   - `value`: (string) hexadecimal of the value sent with this transaction.
   - `data`: (string) hash of the method signature and encoded parameters.
@@ -42,12 +42,12 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -60,7 +60,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS" default>
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

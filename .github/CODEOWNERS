@@ -14,6 +14,9 @@ docusaurus.config.js @MetaMask/activation @MetaMask/tech-writers
 
 /.github/ @MetaMask/activation @MetaMask/tech-writers
 
+# Static image and video files
+/static/ @MetaMask/activation @MetaMask/tech-writers
+
 # Vercel configuration
 
 vercel.json @MetaMask/activation @MetaMask/tech-writers

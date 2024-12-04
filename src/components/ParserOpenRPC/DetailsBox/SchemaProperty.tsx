@@ -10,13 +10,22 @@ interface SchemaPropertyProps {
   type?: string
   required?: boolean
   description?: string
+  pattern?: string
+  defaultVal?: string
 }
 
 interface TagProps {
   name: string
 }
 
-export const SchemaProperty = ({ title, type, required, description }: SchemaPropertyProps) => {
+export const SchemaProperty = ({
+  title,
+  type,
+  required,
+  description,
+  pattern,
+  defaultVal,
+}: SchemaPropertyProps) => {
   return (
     <div className={styles.schemaWrapper}>
       <div className={styles.schemaHeader} style={{ justifyContent: 'space-between' }}>
@@ -32,6 +41,18 @@ export const SchemaProperty = ({ title, type, required, description }: SchemaPro
       </div>
       <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
         <MDContent content={description} />
+        {pattern && (
+          <div className={styles.propItemWrapper}>
+            <span className={styles.propItemLabel}>Pattern: </span>
+            <span className={styles.propItemValue}>{pattern}</span>
+          </div>
+        )}
+        {defaultVal && (
+          <div className={styles.propItemWrapper}>
+            <span className={styles.propItemLabel}>Default: </span>
+            <span className={styles.propItemValue}>{defaultVal}</span>
+          </div>
+        )}
       </p>
     </div>
   )
@@ -45,7 +66,7 @@ export const Tag = ({ name }: TagProps) => {
   }
   return (
     <div className={styles['tag-holder']}>
-      <CutOffCorners size={'xxs'}>
+      <CutOffCorners size={'xs'}>
         <span
           className={clsx(styles['tag'], 'type-label-caption uppercase font-weight-medium')}
           style={

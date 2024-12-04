@@ -35,7 +35,7 @@ export default function Hero({
     metaMaskWalletIdConnectHandler,
     walletLinked,
     projects,
-    walletLinkUrl,
+    walletAuthUrl,
   } = useContext(MetamaskProviderContext)
   const isExtensionActive = sdk.isExtensionActive()
   const [isWalletLinking, setIsWalletLinking] = useState(false)
@@ -65,7 +65,7 @@ export default function Hero({
       responseMsg: null,
       timestamp: Date.now(),
     })
-    window.location.href = walletLinkUrl
+    window.location.href = walletAuthUrl
   }
 
   const handleRequestEth = () => {
@@ -115,36 +115,13 @@ export default function Hero({
       <div className={styles.actions}>
         {!!Object.keys(projects).length && isExtensionActive && (
           <div className={styles.inputCont}>
-            <div className={styles.inputWrapper}>
-              <Input
-                label="Wallet address"
-                disabled={isLoading}
-                value={inputValue}
-                className={styles.input}
-                placeholder="ex. 0x"
-                onChange={handleOnInputChange}
-              />
-              {/* isExtensionActive && Object.keys(projects).length */}
-              <div className={clsx(!!Object.keys(projects).length && styles.alignedButtons)}>
-                <Button
-                  as="button"
-                  data-test-id="hero-cta-request-eth"
-                  disabled={!inputValue || isLoading}
-                  type={'primary'}
-                  onClick={handleRequestEth}
-                  icon={'arrow-right'}
-                  label={'Request ETH'}
-                  style={
-                    colorMode !== 'dark'
-                      ? {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
-                      : {}
-                  }
-                />
-              </div>
-            </div>
+            <Input
+              label="Wallet address"
+              disabled={isLoading}
+              value={inputValue}
+              placeholder="ex. 0x or ENS"
+              onChange={handleOnInputChange}
+            />
             {isLimitedUserPlan && (
               <p className={styles.caption}>
                 The amount of {network === 'linea' && 'Linea Sepolia'}

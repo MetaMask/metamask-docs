@@ -14,7 +14,7 @@ Dapps can install and communicate with Snaps using a subset of the
 This page is a reference for those Snaps-specific methods.
 
 :::note
-See the [Wallet JSON-RPC API interactive reference](/wallet/reference/json-rpc-api) for the other
+See the [Wallet JSON-RPC API interactive reference](/wallet/reference/json-rpc-methods) for the other
 methods dapps can call.
 :::
 
@@ -91,7 +91,7 @@ The SemVer version ranges use the same semantics as npm `package.json` ranges.
 An object mapping the IDs of permitted Snaps to their metadata:
 
 - `id`: `string` - The ID of the Snap.
-- `initialPermissions`: `string` - The initial permissions of the Snap, which will be request when
+- `initialPermissions`: `string` - The initial permissions of the Snap, which will be requested when
   the Snap is installed.
 - `version`: `string` - The version of the Snap.
 - `enabled`: `boolean` - Indicates whether the Snap is enabled.
@@ -125,7 +125,7 @@ await window.ethereum.request({
     "enabled": true,
     "blocked": false
   },
-  "npm:fooSnap": {
+  "npm:foo-snap": {
     "version": "1.0.5",
     "id": "npm:foo-snap",
     "enabled": true,

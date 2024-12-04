@@ -1,6 +1,4 @@
 ---
-sidebar_label: Electron
-sidebar_position: 5
 description: Set up the SDK in your Electron dapp.
 tags:
   - JavaScript SDK

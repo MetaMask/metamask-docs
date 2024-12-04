@@ -1,13 +1,13 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# pin_rm
+# `pin_rm`
 
-## /api/v0/pin/rm
+## `/api/v0/pin/rm`
 
 Remove pinned objects from local storage.
 
-### REQUEST
+### Request
 
 <Tabs>
   <TabItem value="Syntax" label="Syntax" default>
@@ -15,7 +15,7 @@ Remove pinned objects from local storage.
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=<ipfs-path>" \
   -X POST \
-  -u "<API_KEY>:<API_KEY_SECRET>"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>
@@ -30,15 +30,15 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8k
   </TabItem>
 </Tabs>
 
-#### REQUEST PARAMS
+#### Request parameters
 
-- `arg` _\[Required]_ - Path to object(s) to be unpinned.
+- `arg` _\[Required]_ - Path to objects to be unpinned.
 
-### RESPONSE
+### Response
 
 On success, the call to this endpoint returns with 200 and the following body:
 
-#### BODY
+#### Body
 
 ```
 {

@@ -1,6 +1,5 @@
 ---
 description: See the MetaMask Ethereum provider API reference.
-sidebar_position: 3
 ---
 
 # Ethereum provider API
@@ -67,7 +66,7 @@ provider.isConnected() // Or window.ethereum.isConnected() if you don't support 
 
 ### `request()`
 
-This method is used to submit [JSON-RPC API requests](/wallet/reference/json-rpc-api) to Ethereum using MetaMask.
+This method is used to submit [JSON-RPC API requests](/wallet/reference/json-rpc-methods) to Ethereum using MetaMask.
 
 #### Parameters
 
@@ -85,7 +84,7 @@ If the request fails, the promise rejects with an [error](#errors).
 #### Example
 
 The following is an example of using `request()` to call
-[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction):
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction):
 
 ```javascript
 provider // Or window.ethereum if you don't support EIP-6963.
@@ -167,7 +166,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the return value of the
-[`eth_accounts`](/wallet/reference/eth_accounts) RPC
+[`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) RPC
 method changes.
 `eth_accounts` returns either an empty array, or an array that contains the addresses of the accounts
 the caller is permitted to access with the most recently used account first.
@@ -246,7 +245,7 @@ The `type` property identifies the kind of message.
 
 RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
-[`eth_subscribe`](/wallet/reference/eth_subscribe), each
+[`eth_subscribe`](/wallet/reference/json-rpc-methods/eth_subscribe), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
 ### Remove event listeners

@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](../../../developer-tools/dashboard/).
+Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](../../../developer-tools/dashboard/).
 
 ## Arbitrum
 
@@ -141,12 +141,25 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Testnet (Amoy) | JSON-RPC over HTTPS     | `https://polygon-amoy.infura.io/v3/<YOUR-API-KEY>`     |
 | Testnet (Amoy) | JSON-RPC over WebSocket | `wss://polygon-amoy.infura.io/ws/v3/<YOUR-API-KEY>`    |
 
+## Scroll
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Sepolia | JSON-RPC over HTTPS     | `https://scroll-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## Starknet
 
 | Network           | Description         | URL                                                    |
 |-------------------|---------------------|--------------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<YOUR-API-KEY>` |
+
+## Unichain
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## ZKsync Era
 

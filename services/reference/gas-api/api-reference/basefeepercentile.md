@@ -38,14 +38,15 @@ to authorize your account to use the APIs.
 
 :::tip
 You can call the API with only an API key, and [include it as a path parameter](../api-reference/index.md#supported-api-request-formats)
-instead of using the cURL authentication option (`-u`).
+instead of using the curl authentication option (`-u`).
 :::
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default >
+  <TabItem value="curl" label="curl" default >
+
 ```bash
 curl -X "GET" \
-  -u <API_KEY>:<API_KEY_SECRET> \
+  -u <YOUR-API-KEY>:<YOUR-API-KEY-SECRET> \
   "https://gas.api.infura.io/networks/1/baseFeeHistory"
 ```
 

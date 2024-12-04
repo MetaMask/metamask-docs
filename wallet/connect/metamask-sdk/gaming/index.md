@@ -1,6 +1,4 @@
 ---
-sidebar_label: Gaming
-sidebar_position: 3
 description: Set up the SDK in your gaming dapp.
 tags:
   - Unity SDK

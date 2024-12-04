@@ -1,7 +1,5 @@
 ---
-sidebar_label: Onboard users
 description: Simplify the MetaMask onboarding experience for your users.
-sidebar_position: 10
 ---
 
 import Tabs from "@theme/Tabs";
@@ -29,7 +27,7 @@ You don't need to set up the onboarding library if you use the SDK.
 
 ## Steps
 
-1. Install [@metamask/onboarding](https://github.com/MetaMask/metamask-onboarding).
+1. Install [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding).
 1. Import the library or include it in your page:
 
    ```javascript
@@ -142,7 +140,7 @@ Modify the React example as follows to get type safety:
 +const onboarding = React.useRef<MetaMaskOnboarding>();
 ```
 
-This gives you editor auto-completion for the methods exposed by the library, and
+This gives you editor autocomplete for the methods exposed by the library, and
 helpful documentation:
 
 ![Editor Highlighting](https://user-images.githubusercontent.com/4448075/85584481-ccc7ec00-b604-11ea-9b74-49c76ee0bf22.png)

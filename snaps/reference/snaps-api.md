@@ -25,7 +25,7 @@ Displays a [dialog](../features/custom-ui/dialogs.md) in the MetaMask UI.
 
 An object containing the contents of the dialog:
 
-- `type` - The type of dialog.
+- `type` - (Optional) The type of dialog. Not providing a type will create a fully [custom dialog](../features/custom-ui/dialogs.md#display-a-custom-dialog).
   Possible values are:
   - `"alert"` - An alert that can only be acknowledged.
   - `"confirmation"` - A confirmation that can be accepted or rejected.
@@ -130,8 +130,8 @@ An object representing the
 its corresponding key material:
 
 - `depth` - The 0-indexed path depth of the node.
-- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a master node.
-- `index` - The index of the node, or 0 if this is a master node.
+- `parentFingerprint` - The fingerprint of the parent key, or 0 if this is a root node.
+- `index` - The index of the node, or 0 if this is a root node.
 - `privateKey` - The private key of the node.
 - `publicKey` - The public key of the node.
 - `chainCode` - The chain code of the node.
@@ -272,7 +272,7 @@ An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 If you wish to connect to MetaMask accounts in a Snap, use
 [`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
-[`eth_requestAccounts`](/wallet/reference/eth_requestAccounts).
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts).
 :::
 
 #### Returns
@@ -484,9 +484,14 @@ console.log(contents)
 </TabItem>
 </Tabs>
 
-## `snap_getLocale`
+## `snap_getLocale` (deprecated)
 
 Gets the user's locale setting. You can use this method to localize text in your snap.
+
+:::warning
+This method is deprecated.
+Use [`snap_getPreferences`](#snap_getpreferences) instead.
+:::
 
 #### Returns
 
@@ -545,6 +550,42 @@ await snap.request({
 </TabItem>
 </Tabs>
 
+## `snap_getPreferences`
+
+Gets the user's preferences.
+
+#### Returns
+
+An object containing the user's preferences:
+
+- `locale` - The user's locale setting as a language code.
+- `currency` - The user's preferred fiat currency code.
+
+#### Example
+
+```tsx title="index.tsx"
+import { Box, Text } from "@metamask/snaps-sdk/jsx";
+
+const { locale } = await snap.request({ method: "snap_getPreferences" });
+
+let greeting = "Hello";
+if(locale === "es") {
+  greeting = "Hola";
+}
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Text>{greeting}</Text>
+      </Box>
+    ),
+  },
+});
+```
+
 ## `snap_manageAccounts`
 
 Manages [account management Snap](../features/custom-evm-accounts/index.md) accounts.
@@ -556,7 +597,7 @@ This method is organized into multiple sub-methods which each take their own par
 - [`listAccounts`](#listaccounts)
 - [`submitResponse`](#submitresponse)
 
-### createAccount
+### `createAccount`
 
 Creates a new Snap account.
 
@@ -619,7 +660,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### updateAccount
+### `updateAccount`
 
 Updates an existing Snap account.
 
@@ -658,7 +699,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### deleteAccount
+### `deleteAccount`
 
 Deletes a Snap account.
 
@@ -697,7 +738,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### listAccounts
+### `listAccounts`
 
 Lists the calling Snap's accounts that are known to MetaMask.
 This method does not call back to the Snap.
@@ -732,7 +773,7 @@ class MyKeyring implements Keyring {
 }
 ```
 
-### submitResponse
+### `submitResponse`
 
 Finalizes a signing request.
 This is usually called as part of the
@@ -873,13 +914,12 @@ The interface's ID to be used in [`snap_dialog`](#snap_dialog), returned from
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive interface"),
-      button({
-        value: "Click me",
-        name: "interactive-button",
-      }),
-    ]),
+    ui: ( 
+      <Box>
+        <Heading>Interactive interface</Heading>
+        <Button name="interactive-button">Click me</Button>
+      </Box>
+    )
   },
 })
 
@@ -915,26 +955,16 @@ An object where each top-level property can be one of the following:
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
-    ui: panel([
-      heading("Interactive UI Example Snap"),
-      // A top-level input.
-      input({
-        name: "top-level-input",
-        placeholder: "Enter something",
-      }),
-      // A top-level form...
-      form({
-        name: "example-form",
-        children: [
-          // ...with a nested input.
-          input({
-            name: "nested-input",
-            placeholder: "Enter something",
-          }),
-          button("Submit", ButtonType.Submit, "submit"),
-        ],
-      }),
-    ]),
+    ui: (
+      <Box>
+        <Heading>Interactive UI Example Snap</Heading>
+        <Input name="top-level-input" placeholder="Enter something"/>
+        <Form name="example-form">
+          <Input name="nested-input" placeholder="Enter something"/>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Box>
+    )
   },
 })
 
@@ -956,6 +986,22 @@ console.log(state)
 */
 ```
 
+### `snap_resolveInterface`
+
+Resolves an interactive interface.
+For use in [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog).
+
+#### Parameters
+
+An object containing:
+
+- `id` - The ID of the interface to be resolved.
+- `result` - The result to return to the interface's caller.
+
+#### Example
+
+For a full example of how to use `snap_resolveInterface`, see the [custom dialogs](../features/custom-ui/dialogs.md#display-a-custom-dialog) documentation.
+
 ### `snap_updateInterface`
 
 Updates an interactive interface.
@@ -968,6 +1014,7 @@ An object containing:
 - `id` - The ID of the interface to be updated, usually received in the
   [`onUserInput`](./entry-points.md#onuserinput) entry point.
 - `ui` - The [custom UI](../features/custom-ui/index.md) to create.
+- `context` - (Optional) A custom context object that will be passed to [`onUserInput`](./entry-points.md#onuserinput) when the user interacts with the interface. Passing this parameter will update the context object for the interface. 
 
 #### Example
 
@@ -979,9 +1026,12 @@ export function onUserInput({ id, event }) {
     method: "snap_updateInterface",
     params: {
       id,
-      ui: panel([
-        heading("New interface"),
-      ]),
+      ui: (
+        <Box>
+          <Heading>New interface</Heading>
+          <Text>This interface has been updated</Text>
+        </Box>
+      )
     },
   });
 };

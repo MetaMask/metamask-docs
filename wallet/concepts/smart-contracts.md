@@ -1,6 +1,5 @@
 ---
 description: Learn about interacting with smart contracts.
-sidebar_position: 8
 ---
 
 # Smart contracts
@@ -24,8 +23,8 @@ Many dapp developers deploy their contract to a testnet first, in order to avoid
 disastrous fees if something goes wrong during development and testing on Mainnet.
 
 Regardless of which network you deploy your final dapp on, your users must be able to access it.
-Use the [`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain) and
-[`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain) RPC methods to prompt
+Use the [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain) and
+[`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain) RPC methods to prompt
 the user to add a chain that you suggest, and switch to it using a confirmation dialogue.
 
 ## Contract address
