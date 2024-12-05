@@ -38,6 +38,7 @@
     "@intercom/messenger-js-sdk": "^0.0.14",
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
+    "@metamask/eth-sig-util": "^7.0.3",
     "@metamask/profile-sync-controller": "^0.9.6",
     "@metamask/sdk": "^0.31.1",
     "@rjsf/core": "^5.22.1",
