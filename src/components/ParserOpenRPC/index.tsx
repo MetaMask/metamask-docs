@@ -1,130 +1,106 @@
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  useEffect,
-} from "react";
-import { usePluginData } from "@docusaurus/useGlobalData";
-import { ResponseItem, NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc";
-import DetailsBox from "@site/src/components/ParserOpenRPC/DetailsBox";
-import InteractiveBox from "@site/src/components/ParserOpenRPC/InteractiveBox";
-import RequestBox from "@site/src/components/ParserOpenRPC/RequestBox";
-import ErrorsBox from "@site/src/components/ParserOpenRPC/ErrorsBox";
-import { ModalDrawer } from "@site/src/components/ParserOpenRPC/ModalDrawer";
-import global from "./global.module.scss";
-import modalDrawerStyles from "./ModalDrawer/styles.module.scss";
-import clsx from "clsx";
-import { useColorMode } from "@docusaurus/theme-common";
-import {
-  trackClickForSegment,
-  trackInputChangeForSegment,
-} from "@site/src/lib/segmentAnalytics";
-import { AuthBox } from "@site/src/components/ParserOpenRPC/AuthBox";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
-import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
-import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
-import useIsBrowser from '@docusaurus/useIsBrowser';
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
+import { usePluginData } from '@docusaurus/useGlobalData'
+import { ResponseItem, NETWORK_NAMES } from '@site/src/plugins/plugin-json-rpc'
+import DetailsBox from '@site/src/components/ParserOpenRPC/DetailsBox'
+import InteractiveBox from '@site/src/components/ParserOpenRPC/InteractiveBox'
+import RequestBox from '@site/src/components/ParserOpenRPC/RequestBox'
+import ErrorsBox from '@site/src/components/ParserOpenRPC/ErrorsBox'
+import { ModalDrawer } from '@site/src/components/ParserOpenRPC/ModalDrawer'
+import global from './global.module.scss'
+import modalDrawerStyles from './ModalDrawer/styles.module.scss'
+import clsx from 'clsx'
+import { useColorMode } from '@docusaurus/theme-common'
+import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/segmentAnalytics'
+import { AuthBox } from '@site/src/components/ParserOpenRPC/AuthBox'
+import { MetamaskProviderContext } from '@site/src/theme/Root'
+import ProjectsBox from '@site/src/components/ParserOpenRPC/ProjectsBox'
+import { LINEA_REQUEST_URL } from '@site/src/lib/constants'
+import useIsBrowser from '@docusaurus/useIsBrowser'
 
 interface ParserProps {
-  network: NETWORK_NAMES;
-  method?: string;
-  extraContent?: JSX.Element;
+  network: NETWORK_NAMES
+  method?: string
+  extraContent?: JSX.Element
 }
 
 interface ParserOpenRPCContextProps {
-  drawerLabel?: string;
-  setIsDrawerContentFixed?: (isFixed: boolean) => void;
-  setDrawerLabel?: (label: string) => void;
-  isComplexTypeView: boolean;
-  setIsComplexTypeView: (isComplexTypeView: boolean) => void;
+  drawerLabel?: string
+  setIsDrawerContentFixed?: (isFixed: boolean) => void
+  setDrawerLabel?: (label: string) => void
+  isComplexTypeView: boolean
+  setIsComplexTypeView: (isComplexTypeView: boolean) => void
 }
 
-export const ParserOpenRPCContext =
-  createContext<ParserOpenRPCContextProps | null>(null);
+export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
 
-export default function ParserOpenRPC({
-  network,
-  method,
-  extraContent,
-}: ParserProps) {
-  const isBrowser = useIsBrowser();
+export default function ParserOpenRPC({ network, method, extraContent }: ParserProps) {
+  const isBrowser = useIsBrowser()
   if (!isBrowser) {
-    return null;
+    return null
   }
-  if (!method || !network) return null;
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [reqResult, setReqResult] = useState(undefined);
-  const [paramsData, setParamsData] = useState([]);
-  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
-  const [drawerLabel, setDrawerLabel] = useState(null);
-  const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext);
-  const [defExampleResponse, setDefExampleResponse] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const { colorMode } = useColorMode();
-  const trackAnalyticsForRequest = (response) => {
+  if (!method || !network) return null
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [reqResult, setReqResult] = useState(undefined)
+  const [paramsData, setParamsData] = useState([])
+  const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false)
+  const [drawerLabel, setDrawerLabel] = useState(null)
+  const [isComplexTypeView, setIsComplexTypeView] = useState(false)
+  const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext)
+  const [defExampleResponse, setDefExampleResponse] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(false)
+  const { colorMode } = useColorMode()
+  const trackAnalyticsForRequest = response => {
     trackClickForSegment({
-      eventName: "Request Sent",
-      clickType: "Request Sent",
-      userExperience: "B",
+      eventName: 'Request Sent',
+      clickType: 'Request Sent',
+      userExperience: 'B',
       // @ts-ignore
       ...(response?.code && { responseStatus: response.code }),
       responseMsg: null,
       timestamp: Date.now(),
-    });
+    })
   }
   const openModal = () => {
-    setModalOpen(true);
+    setModalOpen(true)
     trackClickForSegment({
-      eventName: "Customize Request",
-      clickType: "Customize Request",
-      userExperience: "B",
+      eventName: 'Customize Request',
+      clickType: 'Customize Request',
+      userExperience: 'B',
       responseStatus: null,
       responseMsg: null,
       timestamp: Date.now(),
-    });
-  };
-  const closeModal = () => setModalOpen(false);
+    })
+  }
+  const closeModal = () => setModalOpen(false)
 
-  const { netData } = usePluginData("plugin-json-rpc") as {
-    netData?: ResponseItem[];
-  };
-  const currentNetwork = netData?.find((net) => net.name === network);
+  const { netData } = usePluginData('plugin-json-rpc') as {
+    netData?: ResponseItem[]
+  }
+  const currentNetwork = netData?.find(net => net.name === network)
 
-  if (!currentNetwork && currentNetwork.error) return null;
+  if (!currentNetwork && currentNetwork.error) return null
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
       return (
         items
-          ?.map((item) => {
-            if (item?.name || (item?.code && item?.message)) return item;
+          ?.map(item => {
+            if (item?.name || (item?.code && item?.message)) return item
             if (item?.$ref) {
-              const ref = item.$ref.replace(refPath, "");
-              return currentNetwork.data.components[componentType][ref];
+              const ref = item.$ref.replace(refPath, '')
+              return currentNetwork.data.components[componentType][ref]
             }
-            return null;
+            return null
           })
           .filter(Boolean) || []
-      );
-    };
+      )
+    }
 
-    const currentMethod = currentNetwork.data.methods?.find(
-      (met) => met.name === method,
-    );
-    if (!currentMethod) return null;
+    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method)
+    if (!currentMethod) return null
 
-    const errors = findReferencedItem(
-      currentMethod.errors,
-      "#/components/errors/",
-      "errors",
-    );
-    const tags = findReferencedItem(
-      currentMethod.tags,
-      "#/components/tags/",
-      "tags",
-    );
+    const errors = findReferencedItem(currentMethod.errors, '#/components/errors/', 'errors')
+    const tags = findReferencedItem(currentMethod.tags, '#/components/tags/', 'tags')
 
     return {
       description: currentMethod.description || null,
@@ -136,132 +112,126 @@ export default function ParserOpenRPC({
       paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
-      servers: currentNetwork.data?.servers?.[0]?.url || null
-    };
-  }, [currentNetwork, method]);
+      servers: currentNetwork.data?.servers?.[0]?.url || null,
+    }
+  }, [currentNetwork, method])
 
-  if (currentMethodData === null) return null;
+  if (currentMethodData === null) return null
 
-  const isMetamaskNetwork = network === NETWORK_NAMES.metamask;
+  const isMetamaskNetwork = network === NETWORK_NAMES.metamask
 
   useEffect(() => {
-    const example = currentMethodData?.examples?.[0];
+    const example = currentMethodData?.examples?.[0]
     if (example?.result) {
       if (example.id && example.jsonrpc) {
         setDefExampleResponse({
           id: example.id,
           jsonrpc: example.jsonrpc,
           result: example.result.value,
-        });
+        })
       } else {
-        setDefExampleResponse(example.result.value);
+        setDefExampleResponse(example.result.value)
       }
     } else {
-      setDefExampleResponse(undefined);
+      setDefExampleResponse(undefined)
     }
-  }, [currentMethodData]);
+  }, [currentMethodData])
 
   const resetResponseHandle = () => {
-    setReqResult(undefined);
-  };
+    setReqResult(undefined)
+  }
 
-  const onParamsChangeHandle = (data) => {
+  const onParamsChangeHandle = data => {
     trackInputChangeForSegment({
-      eventName: "Request Configuration Started",
-      userExperience: "B",
+      eventName: 'Request Configuration Started',
+      userExperience: 'B',
       timestamp: Date.now(),
-    });
+    })
 
-    if (
-      typeof data !== "object" ||
-      data === null ||
-      Object.keys(data).length === 0
-    ) {
-      setParamsData([]);
-      return;
+    if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
+      setParamsData([])
+      return
     }
 
-    if (
-      typeof data === "object" &&
-      currentMethodData.paramStructure === "by-name"
-    ) {
-      setParamsData({ ...data });
-      return;
+    if (typeof data === 'object' && currentMethodData.paramStructure === 'by-name') {
+      setParamsData({ ...data })
+      return
     }
 
-    setParamsData(Object.values(data));
-  };
+    setParamsData(Object.values(data))
+  }
 
   const handleMetaMaskRequest = async () => {
-    if (!metaMaskProvider) return;
-    setIsLoading(true);
+    if (!metaMaskProvider) return
+    setIsLoading(true)
     try {
       const response = await metaMaskProvider.request({
         method,
         params: paramsData,
-      });
-      setReqResult(response);
-      trackAnalyticsForRequest(response);
+      })
+      setReqResult(response)
+      trackAnalyticsForRequest(response)
     } catch (e) {
-      setReqResult(e);
+      setReqResult(e)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
-  const INIT_URL = currentMethodData.servers !== null ? currentMethodData.servers : `${LINEA_REQUEST_URL}/v3/`;
+  const INIT_URL =
+    currentMethodData.servers !== null ? currentMethodData.servers : `${LINEA_REQUEST_URL}/v3/`
 
   const handleServiceRequest = async () => {
-    const URL = `${INIT_URL}${userAPIKey}`;
+    const URL = `${INIT_URL}${userAPIKey}`
     const params = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        jsonrpc: "2.0",
+        jsonrpc: '2.0',
         method,
         params: paramsData,
         id: 1,
       }),
-    };
-    setIsLoading(true);
+    }
+    setIsLoading(true)
     try {
-      const res = await fetch(URL, params);
+      const res = await fetch(URL, params)
       if (res.ok) {
-        const response = await res.json();
-        setReqResult(response);
-        trackAnalyticsForRequest(response);
+        const response = await res.json()
+        setReqResult(response)
+        trackAnalyticsForRequest(response)
       } else {
-        const errorText = await res.text();
-        const errorState = JSON.parse(errorText);
-        setReqResult(`Request failed. Status: ${res.status}. ${errorState}`);
+        const errorText = await res.text()
+        const errorState = JSON.parse(errorText)
+        setReqResult(`Request failed. Status: ${res.status}. ${errorState}`)
       }
     } catch (e) {
-      setReqResult(`${e}`);
+      setReqResult(`${e}`)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const onSubmitRequestHandle = async () => {
     if (isMetamaskNetwork) {
-      await handleMetaMaskRequest();
+      await handleMetaMaskRequest()
     } else {
-      await handleServiceRequest();
+      await handleServiceRequest()
     }
   }
 
   const closeComplexTypeView = () => {
-    setIsComplexTypeView(false);
-    setIsDrawerContentFixed(false);
-    setDrawerLabel(null);
-  };
+    setIsComplexTypeView(false)
+    setIsDrawerContentFixed(false)
+    setDrawerLabel(null)
+  }
 
   const onModalClose = () => {
-    closeModal();
-    closeComplexTypeView();
-  };
+    closeModal()
+    closeComplexTypeView()
+  }
 
   return (
     <ParserOpenRPCContext.Provider
@@ -271,53 +241,50 @@ export default function ParserOpenRPC({
         setDrawerLabel,
         isComplexTypeView,
         setIsComplexTypeView,
-      }}
-    >
+      }}>
       <div className={global.rowWrap}>
         <div className={global.colLeft}>
-            <div className={clsx(global.colContentWrap, 'padding-bottom--lg')}>
-                <DetailsBox
-                    method={method}
-                    description={currentMethodData.description}
-                    summary={currentMethodData.summary}
-                    params={currentMethodData.params}
-                    components={currentMethodData.components.schemas}
-                    result={currentMethodData.result}
-                    tags={currentMethodData.tags}
-                    extraContent={extraContent}
-                />
-                <ErrorsBox errors={currentMethodData.errors}/>
-            </div>
-            <ModalDrawer
-                title={
-                    isComplexTypeView && colorMode ? (
+          <div className={clsx(global.colContentWrap, 'padding-bottom--lg')} id="centerContent">
+            <DetailsBox
+              method={method}
+              description={currentMethodData.description}
+              summary={currentMethodData.summary}
+              params={currentMethodData.params}
+              components={currentMethodData.components.schemas}
+              result={currentMethodData.result}
+              tags={currentMethodData.tags}
+              extraContent={extraContent}
+            />
+            <ErrorsBox errors={currentMethodData.errors} />
+          </div>
+          <ModalDrawer
+            title={
+              isComplexTypeView && colorMode ? (
                 <span className={modalDrawerStyles.modalTitleContainer}>
                   <button
                     className={clsx(
                       modalDrawerStyles.modalHeaderIcon,
-                      modalDrawerStyles.modalHeaderIconBack,
+                      modalDrawerStyles.modalHeaderIconBack
                     )}
-                    onClick={closeComplexTypeView}
-                  >
+                    onClick={closeComplexTypeView}>
                     <img
                       src={
-                        colorMode === "light"
-                          ? "/img/icons/chevron-left-dark-icon.svg"
-                          : "/img/icons/chevron-left-light-icon.svg"
+                        colorMode === 'light'
+                          ? '/img/icons/chevron-left-dark-icon.svg'
+                          : '/img/icons/chevron-left-light-icon.svg'
                       }
                     />
                   </button>
                   Editing Param
                 </span>
               ) : (
-                "Customize request"
+                'Customize request'
               )
             }
             isOpen={isModalOpen}
             onClose={onModalClose}
             isContentFixed={isDrawerContentFixed}
-            headerLabel={drawerLabel ? drawerLabel : null}
-          >
+            headerLabel={drawerLabel ? drawerLabel : null}>
             <InteractiveBox
               params={currentMethodData.params}
               components={currentMethodData.components.schemas}
@@ -332,9 +299,7 @@ export default function ParserOpenRPC({
         <div className={global.colRight}>
           <div className={global.stickyCol}>
             {!isMetamaskNetwork && <ProjectsBox />}
-            {isMetamaskNetwork && !metaMaskAccount && (
-              <AuthBox isMetamaskNetwork={isMetamaskNetwork} theme={colorMode} />
-            )}
+            {isMetamaskNetwork && !metaMaskAccount && <AuthBox theme={colorMode} />}
             <RequestBox
               isMetamaskInstalled={!!metaMaskAccount}
               method={method}
@@ -354,5 +319,5 @@ export default function ParserOpenRPC({
         </div>
       </div>
     </ParserOpenRPCContext.Provider>
-  );
+  )
 }
