@@ -216,7 +216,24 @@ export default function Hero({
                 />
               )}
             </>
-          ) : null}
+          ) : (
+            <Button
+              as="button"
+              data-test-id="hero-cta-request-eth"
+              isLoading={isLoading}
+              disabled={!inputValue}
+              onClick={handleRequestEth}
+              label={'Request ETH'}
+              style={
+                colorMode !== 'dark'
+                  ? {
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
+                  : {}
+              }
+            />
+          )}
         </div>
       </div>
     </div>
