@@ -47,17 +47,24 @@
 
   .actions {
     display: flex;
+    align-items: center;
 
     @media screen and (max-width: 996px) {
       flex-direction: column;
+      align-items: start;
     }
 
     > *:not(:last-child) {
       margin-right: 8px;
     }
 
+    .button {
+      margin-top: 33px;
+    }
+
     .inputCont {
       width: 100%;
+      max-width: 600px;
 
       @media screen and (max-width: 996px) {
         max-width: 100%;
