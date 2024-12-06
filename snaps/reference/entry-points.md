@@ -504,7 +504,7 @@ An object containing:
   [`allowTransactionOrigin`](permissions.md#endowmenttransaction-insight) is set to `true`.
 
 :::note
-When interacting with EVM chain IDs, note that the chain ID provided uses the format `namespace:reference`, where the `reference` is a base 10 integer.
+When interacting with EVM chain IDs, the provided chain ID uses the format `namespace:reference`, where the `reference` is a base 10 integer.
 :::
 
 #### Returns
