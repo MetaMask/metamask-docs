@@ -217,22 +217,31 @@ export default function Hero({
               )}
             </>
           ) : (
-            <Button
-              as="button"
-              data-test-id="hero-cta-request-eth"
-              isLoading={isLoading}
-              disabled={!inputValue}
-              onClick={handleRequestEth}
-              label={'Request ETH'}
-              style={
-                colorMode !== 'dark'
-                  ? {
-                      '--button-color-hover': 'var(--general-black)',
-                      '--button-text-color-hover': 'var(--general-white)',
-                    }
-                  : {}
-              }
-            />
+            <div className={styles.button}>
+              <Button
+                as="button"
+                data-test-id="hero-cta-request-eth"
+                isLoading={isLoading}
+                disabled={!inputValue}
+                onClick={handleRequestEth}
+                label={'Request ETH'}
+                style={
+                  colorMode === 'dark'
+                    ? {
+                        '--button-color': 'var(--consumer-orange)',
+                        '--button-text-color': 'var(--general-black)',
+                        '--button-color-hover': 'var(--general-white)',
+                        '--button-text-color-hover': 'var(--general-black)',
+                      }
+                    : {
+                        '--button-color': 'var(--consumer-orange)',
+                        '--button-text-color': 'var(--general-black)',
+                        '--button-color-hover': 'var(--general-black)',
+                        '--button-text-color-hover': 'var(--general-white)',
+                      }
+                }
+              />
+            </div>
           )}
         </div>
       </div>
