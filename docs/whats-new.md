@@ -11,6 +11,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## November 2024
 
+- Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
+  [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
+  ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
 - Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
 - Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
   ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
