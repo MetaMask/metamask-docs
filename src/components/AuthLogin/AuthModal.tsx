@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Modal from 'react-modal'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { useLocation } from '@docusaurus/router'
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 import Icon from '../Icon/Icon'
 import {
   authenticateAndAuthorize,
