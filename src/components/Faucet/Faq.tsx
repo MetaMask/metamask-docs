@@ -152,7 +152,8 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                Linea ETH comes from Sepolia ETH that is bridged to Linea using the canonical{' '}
+                Linea ETH comes from Sepolia ETH that is bridged to Linea using the canonical Linea
+                ETH comes from Sepolia ETH that is bridged to Linea using the canonical{' '}
                 <a
                   data-testid="faq-linea-bridge"
                   onClick={handleClickBridge}

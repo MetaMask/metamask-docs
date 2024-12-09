@@ -1,6 +1,5 @@
 ---
 description: Register a token with users using wallet_watchAsset.
-sidebar_position: 1
 ---
 
 # Display tokens
@@ -15,7 +14,7 @@ Manually adding tokens involves the user interacting with contract addresses, an
 
 You can improve the security and experience of displaying your
 [ERC-20 token](#display-an-erc-20-token) or users' [NFTs](#display-nfts) in MetaMask by using the
-[`wallet_watchAsset`](/wallet/reference/wallet_watchasset) RPC method.
+[`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchasset) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
 
@@ -77,7 +76,7 @@ try {
 :::note
 If the chain ID of your token doesn't match the user's network, they can get unexpected results.
 We recommend [detecting the user's network chain ID](../manage-networks/detect-network.md) and
-[prompting them to switch chains](/wallet/reference/wallet_switchethereumchain), if necessary.
+[prompting them to switch chains](/wallet/reference/json-rpc-methods/wallet_switchethereumchain), if necessary.
 :::
 
 For more examples, the following are live web dapps that let you enter your token details and share

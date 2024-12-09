@@ -118,7 +118,7 @@ async fn main() -> Result<()> {
 Next, make the following updates to the above code:
 
 - On line 16 replace the `INFURA_API_KEY` with you API key from the
-  [Infura dashboard](../../../../../developer-tools/dashboard/get-started/create-api/).
+  [MetaMask Developer dashboard](../../../../../developer-tools/dashboard/get-started/create-api/).
 - On line 26 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account.
 - On line 29, use a test address, such as [`0xAED01C776d98303eE080D25A21f0a42D94a86D9c`](https://sepolia.etherscan.io/address/0xaed01c776d98303ee080d25a21f0a42d94a86d9c).
 
@@ -192,7 +192,7 @@ In the above transaction receipt, the transaction type shows `"type":"0x0"` indi
 
 ### 1. Modify the main code
 
-To send an EIP-1559 transaction, i.e., of the `"type":"0x2"` you must use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the following code.
+To send an EIP-1559 transaction, use `Eip1559TransactionRequest` instead of `TransactionRequest` in the `main.rs` code. Replace the code in `main.rs` with the following code.
 
 ```rust showLineNumbers
 use ethers::{

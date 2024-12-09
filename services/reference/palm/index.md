@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 The [Palm Network](https://palm.io/) is an Ethereum Virtual Machine-compatible Polygon Supernet. The Palm Network is for
 creators, fans, and leaders in various industries such as art, technology, sports, and entertainment. The network
-provides support to developers in their quest to build new and user-friendly tools that contributes to the growth of
+provides support to developers in their quest to build new and user-friendly tools that contribute to the growth of
 the Web3 ecosystem.
 
 :::info See also

@@ -14,6 +14,26 @@
   border-bottom: 1px solid var(--general-gray-dark);
   padding: 1.2rem 2rem;
   color: var(--general-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 57px;
+}
+
+.addIndent {
+  padding: 10px 70px 10px 16px;
+}
+
+.codeWrapper pre {
+  max-height: 328px;
+  overflow-y: auto;
+}
+
+.codeWrapper button {
+  opacity: 1 !important;
+  position: relative;
+  top: -47px;
+  right: 5px;
 }
 
 .cardFooter {

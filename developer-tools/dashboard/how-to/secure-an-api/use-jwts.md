@@ -4,9 +4,9 @@ description: Use JSON Web Tokens to authorize users and external parties.
 
 # JWTs
 
-Enable JSON Web Tokens (JWTs) for all requests in the **REQUIREMENTS** section of your API key's security settings.
+Enable JSON Web Tokens (JWTs) for all requests in the API key's **Settings** tab.
 
-Input the **JWT PUBLIC KEY NAME** and the key and select **ADD**.
+Input the **JWT Public key name** and the key and select **Add**.
 
 <div class="left-align-container">
   <div class="img-medium">

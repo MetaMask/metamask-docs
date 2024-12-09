@@ -1,6 +1,5 @@
 ---
 description: Sign data using eth_signTypedData_v4 and personal_sign.
-sidebar_position: 3
 ---
 
 # Sign data
@@ -8,10 +7,10 @@ sidebar_position: 3
 You can use the following RPC methods to request cryptographic signatures from users:
 
 - [`eth_signTypedData_v4`](#use-eth_signtypeddata_v4) - Use this method to request the most human-readable
-  signatures that are efficient to process on-chain.
+  signatures that are efficient to process onchain.
   We recommend this for most use cases.
 - [`personal_sign`](#use-personal_sign) - Use this method for the easiest way to request human-readable
-  signatures that don't need to be efficiently processed on-chain.
+  signatures that don't need to be efficiently processed onchain.
 
 :::caution
 [`eth_sign`](../../concepts/signing-methods.md#eth_sign) is deprecated.
@@ -26,11 +25,11 @@ sign data using an unsupported method, in which case we recommend using your sta
 
 ## Use `eth_signTypedData_v4`
 
-[`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4)
-provides the most human-readable signatures that are efficient to process on-chain.
+[`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
+provides the most human-readable signatures that are efficient to process onchain.
 It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification to allow users to sign
-typed structured data that can be verified on-chain.
-It renders the structured data as usefully as possible to the user (for example, displaying known
+typed structured data that can be verified onchain.
+It renders the structured data in a useful way (for example, displaying known
 account names in place of addresses).
 
 <p align="center">
@@ -46,7 +45,7 @@ contract to provide replay protection of these signatures between different cont
 We recommend using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util) to generate and
 validate signatures.
 You can use [`eip712-codegen`](https://github.com/danfinlay/eip712-codegen#readme) to generate most
-of the Solidity required to verify these signatures on-chain.
+of the Solidity required to verify these signatures onchain.
 It currently doesn't generate the top-level struct verification code, so you must write that part manually.
 See
 [this example implementation](https://github.com/delegatable/delegatable-sol/blob/fb34bb259890417285f7185bc6500fb0ab8bf86f/contracts/Delegatable.sol#L80).
@@ -184,21 +183,16 @@ See the [live example](https://metamask.github.io/test-dapp/#signTypedDataV4) an
 
 ## Use `personal_sign`
 
-[`personal_sign`](/wallet/reference/personal_sign) is the
-easiest way to request human-readable signatures that don't need to be efficiently processed on-chain.
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) is the
+easiest way to request human-readable signatures that don't need to be efficiently processed onchain.
 It's often used for signature challenges that are authenticated on a web server, such as
 [Sign-In with Ethereum](siwe.md).
 
 <p align="center">
 
-![personal_sign](../../assets/personal_sign.png)
+![Personal sign](../../assets/personal_sign.png)
 
 </p>
-
-Some other signers implement `personal_sign` as `eth_sign`, because the Go Ethereum client changed
-the behavior of their `eth_sign` method.
-Because MetaMask supports existing applications, MetaMask implements both `personal_sign` and `eth_sign`.
-You might need to check what method your supported signers use for a given implementation.
 
 :::caution important
 

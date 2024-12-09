@@ -282,10 +282,14 @@
 
   html[data-theme='dark'] & {
     color: var(--general-white);
+    background-color: var(--general-gray-dark);
   }
 }
 .formControl:focus {
   outline: none;
+}
+.formControl[type='number'] {
+  border-color: transparent;
 }
 .formControl[type='number']::-webkit-inner-spin-button,
 .formControl[type='number']::-webkit-outer-spin-button {

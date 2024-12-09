@@ -71,7 +71,7 @@ The form requests information about your Snap, including the following:
   **long description**, but this URL should be an official website designed to interact with your Snap.
 
 - **Snap short description** - A one or two sentence description of your Snap.
-  Try not to say "is a MetaMask Snap" – users already know this!
+  Try not to say "is a MetaMask Snap"—users already know this!
 
 - **Snap long description** - A description of your Snap's features and how to use them.
   You can use line breaks, lists, and URLs.
@@ -148,7 +148,7 @@ Users will not be able to install a new version until it is allowlisted.
 You can also update any information about your Snap using the form.
 For fields that you don't need to update, you can leave them blank or enter "N/A."
 When providing the new version to be allowlisted, you should also note whether previous versions of
-your Snap should be removed from the allowlist (effectively, replaced with the new version).
+your Snap should be removed from the allowlist (that is, replaced with the new version).
 
 ## Open permissions
 
@@ -162,6 +162,7 @@ The following is a list of permissions that do not require allowlisting:
 - [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
 - [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
 - [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale)
+- [`snap_getPreferences`](../reference/snaps-api.md#snap_getpreferences)
 - [`snap_manageState`](../reference/snaps-api.md#snap_managestate)
 - [`snap_notify`](../reference/snaps-api.md#snap_notify)
 

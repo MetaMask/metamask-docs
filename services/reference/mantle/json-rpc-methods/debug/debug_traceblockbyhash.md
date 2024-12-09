@@ -5,7 +5,7 @@ description: debug_traceBlockByHash API method
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# debug_traceBlockByHash
+# `debug_traceBlockByHash`
 
 Returns tracing results by executing all transactions in the block specified by the block hash.
 
@@ -26,12 +26,12 @@ Depending on the specified tracer type, returns a [`callTracer`](index.md##callt
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL" label="cURL" default>
+  <TabItem value="curl" label="curl" default>
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -44,7 +44,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS" default>
 
 ```bash
-wscat -c wss://mantlemainnet.infura.io/ws/v3/YOUR-API-KEY -x'{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xec8cb29209d9170b31008738ec9e80acc22257249cfd0f4bce19590cd09834c8", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x'{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xec8cb29209d9170b31008738ec9e80acc22257249cfd0f4bce19590cd09834c8", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>

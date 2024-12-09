@@ -1,6 +1,4 @@
 ---
-sidebar_label: Android
-sidebar_position: 2
 toc_max_heading_level: 4
 description: Set up the SDK in your Android dapp.
 tags:
@@ -238,7 +236,7 @@ files for more information.
 
 ### 4. Call methods
 
-You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-api) using
+You can now call any [JSON-RPC API method](/wallet/reference/json-rpc-methods) using
 `ethereum.sendRequest()`.
 The SDK also provides [convenience methods](#5-optional-call-convenience-methods) for common RPC
 requests so you don't have to manually construct requests.
@@ -248,7 +246,7 @@ The following examples use coroutines.
 #### Example: Get account balance
 
 The following example gets the user's account balance by calling
-[`eth_getBalance`](/wallet/reference/eth_getBalance).
+[`eth_getBalance`](/wallet/reference/json-rpc-methods/eth_getBalance).
 This is a [read-only request](../../../how-to/make-read-only-requests.md), which uses the Infura API
 if an `infuraAPIKey` is provided in the `SDKOptions`.
 We recommend using the Infura API to provide a seamless user experience.
@@ -270,7 +268,7 @@ when (balance) {
 #### Example: Sign message
 
 The following example requests the user sign a message by calling
-[`eth_signTypedData_v4`](/wallet/reference/eth_signTypedData_v4).
+[`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4).
 
 ```kotlin
 val message = "{\"domain\":{\"chainId\":\"${ethereum.chainId}\",\"name\":\"Ether Mail\",\"verifyingContract\":\"0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC\",\"version\":\"1\"},\"message\":{\"contents\":\"Hello, Busa!\",\"from\":{\"name\":\"Kinno\",\"wallets\":[\"0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826\",\"0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF\"]},\"to\":[{\"name\":\"Busa\",\"wallets\":[\"0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB\",\"0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57\",\"0xB0B0b0b0b0b0B000000000000000000000000000\"]}]},\"primaryType\":\"Mail\",\"types\":{\"EIP712Domain\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"chainId\",\"type\":\"uint256\"},{\"name\":\"verifyingContract\",\"type\":\"address\"}],\"Group\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"members\",\"type\":\"Person[]\"}],\"Mail\":[{\"name\":\"from\",\"type\":\"Person\"},{\"name\":\"to\",\"type\":\"Person[]\"},{\"name\":\"contents\",\"type\":\"string\"}],\"Person\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"wallets\",\"type\":\"address[]\"}]}}"
@@ -290,7 +288,7 @@ when (val result = ethereum.ethSignTypedDataV4(message, address)) {
 
 The following example requests the user to sign multiple messages at once by
 [batching multiple requests](../../../how-to/batch-json-rpc-requests.md) that call
-[`personal_sign`](/wallet/reference/personal_sign).
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign).
 
 ```kotlin
 val ethereumRequest1 = EthereumRequest(
@@ -316,7 +314,7 @@ when (val result = ethereum.sendRequestBatch(listOf(ethereumRequest1, ethereumRe
 #### Example: Send transaction
 
 The following example sends a transaction by calling
-[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction).
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction).
 
 ```kotlin
 val from = ethereum.selectedAddress
@@ -337,7 +335,7 @@ when (val result = ethereum.sendTransaction(from, to, value)) {
 #### Example: Switch chain
 
 The following example switches to a new Ethereum chain by calling
-[`wallet_switchEthereumChain`](/wallet/reference/wallet_switchethereumchain).
+[`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain).
 
 ```kotlin
 when(val result = ethereum.switchEthereumChain(chainId)) {
@@ -359,7 +357,7 @@ These examples use coroutines.
 #### Example: Connect and request
 
 The following example uses the `connectWith` convenience method to connect to MetaMask and call
-[`eth_sendTransaction`](/wallet/reference/eth_sendTransaction) in one RPC request.
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction) in one RPC request.
 
 ```kotlin
 val params: Map<String, Any> = mutableMapOf(
@@ -386,7 +384,7 @@ when (val result = ethereum.connectWith(sendTransactionRequest)) {
 #### Example: Connect and sign
 
 The following example uses the `connectSign` convenience method to connect to MetaMask and call
-[`personal_sign`](/wallet/reference/personal_sign) in one RPC request.
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) in one RPC request.
 You do not need to construct the `personal_sign` request, you only need to provide the message to sign.
 
 ```kotlin

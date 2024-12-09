@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 description: Use Infura and custom nodes to make direct, read-only requests in your JavaScript dapp.
 tags:
   - JavaScript SDK
@@ -11,7 +10,7 @@ You can use the [Infura API](/services) from your dapp with
 [MetaMask SDK](../connect/metamask-sdk/index.md) installed to make direct, read-only JSON-RPC requests.
 
 Direct, read-only JSON-RPC requests are blockchain requests that do not require user wallet interaction.
-Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-rpc-api), bypassing
+Your dapp can directly call most [JSON-RPC API methods](/wallet/reference/json-rpc-methods), bypassing
 user wallet authentication for read-only operations.
 
 :::note
@@ -60,7 +59,7 @@ To use the Infura API to make read-only requests, specify your Infura API key us
 in your dapp.
 
 ```javascript
-infuraAPIKey: "YOUR-API-KEY"
+infuraAPIKey: "<YOUR-API-KEY>"
 ```
 
 ## Use custom nodes
@@ -87,7 +86,7 @@ SDK in your dapp.
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: "YOUR-API-KEY",
+  infuraAPIKey: "<YOUR-API-KEY>",
   readonlyRPCMap: {
     "0x539": "http://localhost:8545",
   },
@@ -110,12 +109,12 @@ The following is an example of using both the Infura API and custom nodes with t
 
 ```javascript
 sdkOptions={{
-  infuraAPIKey: "YOUR-API-KEY",
+  infuraAPIKey: "<YOUR-API-KEY>",
   readonlyRPCMap: {
     // Custom node.
     "0x539": "http://localhost:8545",
     // Override Infura Mainnet.
-    "0x1": "https://mainnet.infura.io/v3/YOUR-API-KEY",
+    "0x1": "https://mainnet.infura.io/v3/<YOUR-API-KEY>",
   },
   defaultReadOnlyChainId: "0x1",
   // Other options.

@@ -1,6 +1,4 @@
 ---
-sidebar_label: React Native
-sidebar_position: 3
 description: Set up the SDK in your React Native dapp.
 tags:
   - JavaScript SDK

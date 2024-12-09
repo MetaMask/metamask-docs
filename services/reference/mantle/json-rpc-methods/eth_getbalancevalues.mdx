@@ -31,12 +31,12 @@ Object with the following fields:
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -49,7 +49,7 @@ curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://mantle-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBalanceValues", "params": ["0xd071acb641553a2e205181a42aa3a8ace97dae6d", "latest"], "id": 1}'
 ```
 
   </TabItem>

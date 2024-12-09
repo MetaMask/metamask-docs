@@ -71,6 +71,10 @@
       "destination": "/wallet/connect/"
     },
     {
+      "source": "/wallet/how-to/connect/",
+      "destination": "/wallet/connect/"
+    },
+    {
       "source": "/wallet/how-to/connect/set-up-sdk/:path*/",
       "destination": "/wallet/connect/metamask-sdk/:path*/"
     },
@@ -107,6 +111,10 @@
       "destination": "/wallet/connect/metamask-sdk/"
     },
     {
+      "source": "/wallet/how-to/connect/set-up-sdk/javascript/react-native/",
+      "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
+    },
+    {
       "source": "/wallet/how-to/use-sdk/javascript/react-native/",
       "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
     },
@@ -131,7 +139,7 @@
       "destination": "/wallet/how-to/access-accounts/"
     },
     {
-      "source": "/wallet/how-to/access-accounts/",
+      "source": "/wallet/how-to/connect/access-accounts/",
       "destination": "/wallet/how-to/access-accounts/"
     },
     {
@@ -343,12 +351,32 @@
       "destination": "/wallet/reference/provider-api/"
     },
     {
+      "source": "/wallet/reference/json-rpc-api/",
+      "destination": "/wallet/reference/json-rpc-methods/"
+    },
+    {
       "source": "/guide/rpc-api/",
-      "destination": "/wallet/reference/json-rpc-api/"
+      "destination": "/wallet/reference/json-rpc-methods/"
     },
     {
       "source": "/wallet/reference/rpc-api/",
-      "destination": "/wallet/reference/json-rpc-api/"
+      "destination": "/wallet/reference/json-rpc-methods/"
+    },
+    {
+      "source": "/wallet/reference/(eth_.*)",
+      "destination": "/wallet/reference/json-rpc-methods/$1"
+    },
+    {
+      "source": "/wallet/reference/(wallet_.*)",
+      "destination": "/wallet/reference/json-rpc-methods/$1"
+    },
+    {
+      "source": "/wallet/reference/(personal_.*)",
+      "destination": "/wallet/reference/json-rpc-methods/$1"
+    },
+    {
+      "source": "/wallet/reference/(web3_.*)",
+      "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
       "source": "/guide/snaps/",

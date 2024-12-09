@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# bor_getAuthor
+# `bor_getAuthor`
 
 Returns the author of the specified block.
 
@@ -27,12 +27,12 @@ self-upgrade to the Growth plan or contact a sales representative to upgrade to 
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://infura.io/dashboard).
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
 
 ### Request
 
 <Tabs>
-  <TabItem value="cURL">
+  <TabItem value="curl">
 
 ```bash
 curl https://polygon-mainnet.infura.io/v3/<YOUR-API-KEY> \

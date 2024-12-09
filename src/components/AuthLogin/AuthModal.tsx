@@ -2,19 +2,18 @@ import React, { useContext, useEffect } from 'react'
 import Modal from 'react-modal'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { useLocation } from '@docusaurus/router'
-import styles from './styles.module.css'
-import global from '../ParserOpenRPC/global.module.scss'
+import styles from './styles.module.scss'
 import Icon from '../Icon/Icon'
 import {
   authenticateAndAuthorize,
-  AUTH_WALLET_PAIRING,
-  AUTH_WALLET_SESSION_NAME,
-  AUTH_WALLET_PROJECTS,
   saveTokenString,
   getUserIdFromJwtToken,
+  AUTH_WALLET_PAIRING,
+  AUTH_WALLET_PROJECTS,
+  AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_USER_PLAN,
-} from '../../lib/siwsrp/auth'
-import { DASHBOARD_URL, REQUEST_PARAMS } from '@site/src/lib/constants'
+} from '@site/src/lib/siwsrp/auth'
+import { REQUEST_PARAMS } from '@site/src/lib/constants'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import Button from '@site/src/components/elements/buttons/button'
 
@@ -31,8 +30,6 @@ type AuthModalProps = {
 
 export enum AUTH_LOGIN_STEP {
   CONNECTING = 'connecting',
-  WALLET_LOGIN_MULTI_USER = 'wallet-login-multi-user',
-  WALLET_LOGIN_EMAIL_PASSWORD = 'wallet-login-email-password',
   CONNECTION_ERROR = 'connection-error',
   CONNECTION_SUCCESS = 'connection-success',
 }
@@ -116,15 +113,17 @@ const AuthModal = ({
   setUksTier,
 }: AuthModalProps) => {
   const { siteConfig } = useDocusaurusContext()
-  const { DASHBOARD_PREVIEW_URL, VERCEL_ENV } = siteConfig?.customFields || {}
+  const { DASHBOARD_URL, VERCEL_ENV } = siteConfig?.customFields || {}
   const {
     sdk,
+    setNeedsMfa,
     setWalletLinked,
-    setWalletLinkUrl,
+    setWalletAuthUrl,
     metaMaskDisconnect,
     setProjects,
     setMetaMaskAccount,
     setMetaMaskProvider,
+    fetchLineaEns,
   } = useContext(MetamaskProviderContext)
   const location = useLocation()
   const { pathname } = location
@@ -138,9 +137,10 @@ const AuthModal = ({
 
       // Try to connect wallet first
       const accounts = await sdk.connect()
-      setMetaMaskAccount(accounts)
+
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0])
+        fetchLineaEns(accounts[0])
         const provider = sdk.getProvider()
         setMetaMaskProvider(provider)
       }
@@ -150,7 +150,7 @@ const AuthModal = ({
       const { accessToken, userProfile } = await authenticateAndAuthorize(VERCEL_ENV as string)
 
       const loginResponse = await (
-        await fetch(`${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/wallet/login`, {
+        await fetch(`${DASHBOARD_URL}/api/wallet/login`, {
           ...REQUEST_PARAMS('POST', {
             hydra_token: accessToken,
             token: 'true',
@@ -165,22 +165,22 @@ const AuthModal = ({
       if (!loginResponse) throw new Error('Something went wrong')
 
       const { data, session, token } = loginResponse
-      localStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }))
+      sessionStorage.setItem(AUTH_WALLET_PAIRING, JSON.stringify({ data }))
 
       if (data.step) {
         // Handling no wallet pairing or multiple pairing
         const mm_auth = Buffer.from(
           JSON.stringify({
             step: data.step,
-            mmAuthSession: localStorage.getItem(AUTH_WALLET_SESSION_NAME),
+            mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
           })
         ).toString('base64')
 
-        const walletLinkUrl = `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`
+        const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`
 
-        setWalletLinkUrl(walletLinkUrl)
+        setWalletAuthUrl(walletAuthUrl)
 
         if (data.pairing && !data.pairing.length) {
           setWalletLinked(WALLET_LINK_TYPE.NO)
@@ -190,6 +190,25 @@ const AuthModal = ({
           setWalletLinked(WALLET_LINK_TYPE.MULTIPLE)
         }
 
+        setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS)
+        setOpen(false)
+        return
+      }
+
+      if (data.mfa?.enabled) {
+        const mm_auth = Buffer.from(
+          JSON.stringify({
+            step: 'verify',
+            mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
+            dashboardSessionToken: token,
+          })
+        ).toString('base64')
+
+        const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`
+
+        setWalletAuthUrl(walletAuthUrl)
+
+        setNeedsMfa(true)
         setStep(AUTH_LOGIN_STEP.CONNECTION_SUCCESS)
         setOpen(false)
         return
@@ -213,24 +232,18 @@ const AuthModal = ({
       }
 
       // You can use Infura Access Token to fetch any Infura API endpoint
-      const projectsResponse = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}/projects`,
-        {
-          ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
-        }
-      )
+      const projectsResponse = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}/projects`, {
+        ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
+      })
       const {
         result: { projects },
       } = await projectsResponse.json()
       sessionStorage.setItem(AUTH_WALLET_PROJECTS, JSON.stringify(projects))
       setProjects(projects)
 
-      const uksUserRawResp = await fetch(
-        `${DASHBOARD_URL(DASHBOARD_PREVIEW_URL, VERCEL_ENV)}/api/v1/users/${userId}`,
-        {
-          ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
-        }
-      )
+      const uksUserRawResp = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}`, {
+        ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
+      })
       const {
         result: {
           servicePlan: { tier },

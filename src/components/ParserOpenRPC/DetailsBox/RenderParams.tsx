@@ -1,8 +1,6 @@
 import React from 'react'
-import clsx from 'clsx'
 import { SchemaProperty } from './SchemaProperty'
 import { CollapseBox } from '../CollapseBox/CollapseBox'
-import { MDContent } from './MDContent'
 import styles from './styles.module.scss'
 
 const getRefSchemaFromComponents = (initRef, components) => {
@@ -26,8 +24,10 @@ const renderSchema = (schemaItem, schemas, name) => {
       <SchemaProperty
         title={itemName || item.title}
         type="object"
-        required={!!item.required}
+        required={schemaItem.required || !!item.required}
         description={item.description || item.title || ''}
+        pattern={item.pattern}
+        defaultVal={item.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -56,8 +56,10 @@ const renderSchema = (schemaItem, schemas, name) => {
       <SchemaProperty
         title={itemName || item.title}
         type="array"
-        required={!!item.required}
-        description={item.description || item.title || ''}
+        required={schemaItem.required || !!item.required}
+        description={schemaItem.description || item.description || item.title || ''}
+        pattern={schemaItem.pattern}
+        defaultVal={schemaItem.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -80,8 +82,10 @@ const renderSchema = (schemaItem, schemas, name) => {
       <SchemaProperty
         title={itemName || item.title}
         type={type}
-        required={!!item.required}
+        required={schemaItem.required || !!item.required}
         description={item.description || item.title || ''}
+        pattern={item.pattern}
+        defaultVal={item.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
@@ -95,38 +99,21 @@ const renderSchema = (schemaItem, schemas, name) => {
     </div>
   )
 
-  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, "oneOf");
-  if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, "allOf");
-  if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, "anyOf");
+  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, 'oneOf')
+  if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, 'allOf')
+  if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, 'anyOf')
 
   if (schemaItem.oneOf) return renderCombinations(schemaItem, name, 'oneOf')
   if (schemaItem.allOf) return renderCombinations(schemaItem, name, 'allOf')
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
-  const renderEnum = (enumValues, title, description) => {
-    const getDescription = (item, title) => {
-      let regex = new RegExp(`\`${item}\`: ([^;]+)(;|$)`)
-      if (title === 'subscriptionType') {
-        regex = new RegExp(`\`${item}\` - ([^.;]+)[.;]?`)
-      }
-      const match = description.match(regex)
-      return match ? match[1] : ''
-    }
-    const blockEnum =
-      title && description && (title === 'Block tag' || title === 'subscriptionType')
+  const renderEnum = enumValues => {
     return (
       <div className={styles.enumWrapper}>
-        <div className={clsx(styles.enumHeader, 'type-paragraph-m font-weight-medium')}>
-          Possible enum values
-        </div>
+        <span className={styles.propItemLabel}>Enum:</span>
         {enumValues.map((value, index) => (
-          <div key={index} className={styles.enumItem}>
-            <div className={styles.enumTitle}>{value}</div>
-            {blockEnum && (
-              <div className="type-paragraph-m">
-                <MDContent content={getDescription(value, title)} />
-              </div>
-            )}
+          <div key={index} className={styles.propItemValue}>
+            {`"${value}"`}
           </div>
         ))}
       </div>
@@ -140,14 +127,13 @@ const renderSchema = (schemaItem, schemas, name) => {
           title={name || schemaItem.schema.title}
           type={schemaItem.schema.enum ? 'enum' : schemaItem.schema.type}
           required={!!schemaItem.required}
-          description={schemaItem.schema.description || schemaItem.schema.title || ''}
+          description={
+            schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ''
+          }
+          pattern={schemaItem.schema.pattern || schemaItem.pattern}
+          defaultVal={schemaItem.schema.default || schemaItem.default}
         />
-        {schemaItem.schema.enum &&
-          renderEnum(
-            schemaItem.schema.enum,
-            schemaItem.schema.title,
-            schemaItem.schema.description,
-          )}
+        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
     )
   }
@@ -158,13 +144,11 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={name || schemaItem.title}
         type={schemaItem.enum ? 'enum' : schemaItem.type}
         required={!!schemaItem.required}
-        description={
-          schemaItem.enum && schemaItem.title === 'Block tag'
-            ? ''
-            : schemaItem.description || schemaItem.title
-        }
+        description={schemaItem.description || schemaItem.title}
+        pattern={schemaItem.pattern}
+        defaultVal={schemaItem.default}
       />
-      {schemaItem.enum && renderEnum(schemaItem.enum, schemaItem.title, schemaItem.description)}
+      {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
   )
 }
@@ -174,8 +158,9 @@ export const renderParamSchemas = (inputSchema, schemas) => {
     <>
       {inputSchema.map((item, i) => {
         return (
-          <div key={`${i}`} className={styles.borderTopLine}>
+          <div key={`${i}`}>
             {renderSchema(item, schemas, item.name)}
+            {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         )
       })}
@@ -184,7 +169,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 }
 
 export const renderResultSchemas = (inputSchema, schemas) => {
-  const customResult = inputSchema?.schema?.maxPriorityFeePerGas;
+  const customResult = inputSchema?.schema?.maxPriorityFeePerGas
   if (customResult) {
     return <>{renderSchema(customResult, schemas, inputSchema.name)}</>
   }

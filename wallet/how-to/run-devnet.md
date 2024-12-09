@@ -1,6 +1,5 @@
 ---
 description: Configure and connect to a Ganache development network.
-sidebar_position: 11
 ---
 
 # Run a development network
@@ -14,14 +13,14 @@ When using a local development blockchain such as Hardhat Network or
 transactions on MetaMask.
 :::
 
-## Connect to Hardhat Network
+## Connect to Hardhat
 
 Follow these steps to connect MetaMask to Hardhat Network.
 
 1. [Set up a Hardhat project.](https://hardhat.org/hardhat-runner/docs/guides/project-setup)
 
 2. Create a new
-   [MetaMask seed phrase](<https://support.metamask.io/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure#:~:text=Your%20Secret%20Recovery%20Phrase%20(SRP,are%20connected%20to%20that%20phrase.)>)
+   [MetaMask seed phrase](https://support.metamask.io/privacy-and-security/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/)
    specifically for development.
 
    :::caution important
@@ -84,7 +83,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
    :::tip
    Alternatively, you can add Hardhat Network to MetaMask using
-   [`wallet_addEthereumChain`](/wallet/reference/wallet_addethereumchain/?AddEthereumChainParameter[rpcUrls][0]=http://127.0.0.1:8545&AddEthereumChainParameter[chainId]=0x539&AddEthereumChainParameter[chainName]=Hardhat&AddEthereumChainParameter[nativeCurrency][name]=testEth&AddEthereumChainParameter[nativeCurrency][symbol]=testEth&AddEthereumChainParameter[nativeCurrency][decimals]=18)
+   [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain/?AddEthereumChainParameter[rpcUrls][0]=http://127.0.0.1:8545&AddEthereumChainParameter[chainId]=0x539&AddEthereumChainParameter[chainName]=Hardhat&AddEthereumChainParameter[nativeCurrency][name]=testEth&AddEthereumChainParameter[nativeCurrency][symbol]=testEth&AddEthereumChainParameter[nativeCurrency][decimals]=18)
    in the interactive API playground.
    :::
 

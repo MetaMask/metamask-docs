@@ -53,6 +53,6 @@ Select one of the following options to get started with the Mantle network:
 
 ## Partners and privacy policies
 
-The following partner provides access to Mantle network:
+The following partner provides access to the Mantle network:
 
 - 0xFury ([Privacy policy](https://0xfury.com/privacy.php))

@@ -4,7 +4,6 @@ import Pill from '@site/src/components/Pill'
 import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
 import SectionAPIs from '@site/src/components/Sections/SectionAPIs'
 import SectionNetworks from '@site/src/components/Sections/SectionNetworks'
-import CodeTerminal from '@site/src/components/CodeTerminal/CodeTerminal'
 
 export default function Test() {
   return (
@@ -49,8 +48,6 @@ export default function Test() {
 
         <SectionAPIs />
         <SectionNetworks />
-
-        <CodeTerminal />
       </div>
     </Layout>
   )

@@ -1,6 +1,5 @@
 ---
 description: Access a user's accounts and handle changed accounts.
-sidebar_position: 1
 ---
 
 # Access a user's accounts
@@ -9,12 +8,12 @@ User accounts are used in a variety of contexts in Ethereum, including as identi
 [signing transactions](sign-data/index.md).
 To request a signature from a user or have a user approve a transaction, your dapp can
 access the user's accounts using the
-[`eth_requestAccounts`](/wallet/reference/eth_requestaccounts) RPC method.
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method.
 
 :::info note
-`eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/wallet_requestPermissions)
+`eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestPermissions)
 to [request permission](manage-permissions.md) to call the restricted
-[`eth_accounts`](/wallet/reference/eth_accounts) method.
+[`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) method.
 :::
 
 When accessing a user's accounts:
@@ -24,11 +23,15 @@ When accessing a user's accounts:
 - **Always** disable the connect button while the connection request is pending.
 - **Never** initiate a connection request on page load.
 
+:::note
+You can also access users' accounts on some [non-EVM networks](/wallet/how-to/use-non-evm-networks).
+:::
+
 ## Create a connect button
 
 :::caution Important
 This section describes how to create a single connect button.
-When connecting to multiple wallets, use the [Connect to MetaMask](../get-started/wallet-api.md) guide to create
+When connecting to multiple wallets, use the [Connect to MetaMask](../connect/wallet-api.md) guide to create
 multiple connect buttons.
 :::
 
@@ -79,7 +82,7 @@ The following HTML code displays the button and the current account:
 
 ## Handle accounts
 
-Use the [`eth_accounts`](/wallet/reference/eth_accounts)
+Use the [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts)
 RPC method to handle user accounts.
 Listen to the [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event to
 be notified when the user changes accounts.
@@ -126,11 +129,11 @@ The first account in the array will always be considered the user's "selected" a
 ## Disconnect a user's accounts
 
 Since `eth_requestAccounts` internally calls `wallet_requestPermissions` for permission to call
-`eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/wallet_revokePermissions)
+`eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions)
 to revoke this permission, revoking your dapp's access to the user's accounts.
 
 This is useful as a method for users to log out (or disconnect) from your dapp.
-You can then use [`wallet_getPermissions`](/wallet/reference/wallet_getPermissions) to determine
+You can then use [`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getPermissions) to determine
 whether the user is connected or disconnected to your dapp.
 
 See [how to revoke permissions](manage-permissions.md#revoke-permissions-example) for an example.

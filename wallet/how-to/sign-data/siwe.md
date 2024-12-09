@@ -1,6 +1,5 @@
 ---
 description: Enable your users to sign in with Ethereum.
-sidebar_position: 2
 ---
 
 # Sign in with Ethereum
@@ -42,7 +41,7 @@ This is to not break existing dapps that may have use cases for mismatched domai
 ## Example
 
 The following is an example of setting up SIWE with MetaMask using
-[`personal_sign`](/wallet/reference/personal_sign):
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign):
 
 ```javascript title="index.js"
 const siweSign = async (siweMessage) => {

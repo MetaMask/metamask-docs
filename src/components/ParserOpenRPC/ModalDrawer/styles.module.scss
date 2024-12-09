@@ -1,11 +1,13 @@
 :root {
   --param-item-bg: #292a36;
   --modal-header-bg: #24272a;
+  --param-item-border-color: rgb(132 140 150 / 100%);
 }
 
-:root[data-theme="light"] {
-  --param-item-bg: #F2F4F6;
+:root[data-theme='light'] {
+  --param-item-bg: #f2f4f6;
   --modal-header-bg: #fff;
+  --param-item-border-color: #bbc0c5;
 }
 
 .modalContainer {

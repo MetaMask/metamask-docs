@@ -4,6 +4,7 @@
 require("dotenv").config();
 const { themes } = require("prism-react-renderer");
 const { REF_ALLOW_LOGIN_PATH } = require("./src/lib/constants");
+const { fetchAndGenerateDynamicSidebarItems, NETWORK_NAMES, MM_REF_PATH, MM_RPC_URL } = require("./src/plugins/plugin-json-rpc");
 const codeTheme = themes.dracula;
 const remarkCodesandbox = require("remark-codesandbox");
 const isProd = process.env.NODE_ENV === "production";
@@ -34,9 +35,10 @@ const config = {
   customFields: {
     LD_CLIENT_ID: process.env.LD_CLIENT_ID,
     VERCEL_ENV: process.env.VERCEL_ENV,
-    DASHBOARD_PREVIEW_URL: process.env.DASHBOARD_PREVIEW_URL,
+    DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
+    LINEA_ENS_URL: process.env.LINEA_ENS_URL,
   },
 
   trailingSlash: true,
@@ -61,35 +63,20 @@ const config = {
 
   presets: [
     [
-      "@metamask/docusaurus-openrpc/dist/preset",
-      /** @type {import('@metamask/docusaurus-openrpc/dist/preset').Options} */
-      ({
+      "classic",
+      {
         docs: {
-          path: "wallet",
-          routeBasePath: "wallet",
-          sidebarPath: require.resolve("./wallet-sidebar.js"),
-          breadcrumbs: false,
+          id: "docs",
+          path: "docs",
+          routeBasePath: "/",
           editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-          remarkPlugins: [
-            [
-              remarkCodesandbox,
-              {
-                mode: "iframe",
-                autoDeploy: process.env.NODE_ENV === "production",
-              },
-            ],
-          ],
-          openrpc: {
-            openrpcDocument:
-              "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-            path: "reference",
-            sidebarLabel: "JSON-RPC API",
-          },
+          sidebarPath: false,
+          breadcrumbs: false,
         },
         theme: {
           customCss: require.resolve("./src/scss/custom.scss"),
         },
-      }),
+      }
     ],
   ],
   plugins: [
@@ -145,12 +132,24 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "docs",
-        path: "docs",
-        routeBasePath: "/",
+        id: "wallet",
+        path: "wallet",
+        routeBasePath: "wallet",
         editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
-        sidebarPath: false,
+        sidebarPath: require.resolve("./wallet-sidebar.js"),
         breadcrumbs: false,
+        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
+          const sidebarItems = await defaultSidebarItemsGenerator(args);
+          const dymanicItems = await fetchAndGenerateDynamicSidebarItems(
+            MM_RPC_URL,
+            MM_REF_PATH,
+            NETWORK_NAMES.metamask
+          )
+          if (args.item.dirName === "reference/json-rpc-methods") {
+            return [...sidebarItems, ...dymanicItems]
+          }
+          return sidebarItems;
+        }
       },
     ],
     "./src/plugins/plugin-json-rpc.ts",
@@ -198,7 +197,7 @@ const config = {
             label: "Developer tools",
             items: [
               {
-                label: "Infura dashboard",
+                label: "Developer dashboard",
                 to: "developer-tools/dashboard",
               },
               {

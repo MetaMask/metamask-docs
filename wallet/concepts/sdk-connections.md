@@ -1,6 +1,4 @@
 ---
-sidebar_position: 3
-sidebar_label: SDK connections
 description: Learn about how a dapp with the SDK installed connects to MetaMask.
 tags:
   - JavaScript SDK
@@ -112,7 +110,7 @@ The flow is as follows:
 
 :::note
 For all platforms except Android, the SDK uses a Socket.io server to help establish the encrypted connection.
-The [Android SDK](android.md) uses direct local communication.
+The [Android SDK](android-sdk.md) uses direct local communication.
 :::
 
 ## Connection status
@@ -135,7 +133,7 @@ paused and resumes when the user opens it again.
 Because of this, polling data from MetaMask Mobile may not work for long periods of time.
 
 :::info known issue
-When MetaMask Mobile is running in the background, the connection may pause and fail to resume properly when the user reopens MetaMask.
+When MetaMask Mobile is running in the background, the connection may pause and fail to resume when the user reopens MetaMask.
 The user must return to your dapp so the request is re-sent.
 The SDK team is working on this issue, and is researching decentralized communication solutions that
 hold state such as [Waku](https://waku.org/).

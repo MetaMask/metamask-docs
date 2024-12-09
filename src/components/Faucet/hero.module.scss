@@ -9,6 +9,13 @@
     &.linea {
       --hero-image: url('/img/faucet-linea-hero-dark.png');
     }
+    .inputWrapper {
+      input {
+        &::placeholder {
+          color: #fff;
+        }
+      }
+    }
   }
 }
 
@@ -58,25 +65,10 @@
 
     .inputCont {
       width: 100%;
+      max-width: 600px;
 
       @media screen and (max-width: 996px) {
         max-width: 100%;
-      }
-
-      .input {
-        @media screen and (max-width: 996px) {
-          width: 100%;
-        }
-        width: 600px;
-        margin-bottom: 0;
-        p {
-          padding: 0 0 1rem 0;
-        }
-        input {
-          height: 4.2rem;
-          margin-bottom: 0;
-          cursor: auto;
-        }
       }
 
       .inputWrapper {
@@ -84,8 +76,22 @@
         flex-direction: row;
         align-items: flex-end;
 
+        label {
+          margin-bottom: 0;
+        }
+
         @media screen and (max-width: 996px) {
           flex-direction: column;
+          width: 100%;
+        }
+
+        p {
+          padding: 0 0 1rem 0;
+        }
+        input {
+          height: 4.2rem;
+          margin-bottom: 0;
+          cursor: auto;
         }
       }
 

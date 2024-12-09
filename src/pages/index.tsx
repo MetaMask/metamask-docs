@@ -32,18 +32,21 @@ export default function Home(): JSX.Element {
                 description:
                   'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
                 href: '/wallet',
+                theme: '',
               },
               {
                 title: 'Wallet tutorials',
                 description:
                   'Follow the step-by-step tutorials to create a simple React dapp and integrate it with MetaMask.',
                 href: '/wallet',
+                theme: '',
               },
               {
                 title: 'Wallet API',
                 description:
                   "Use the JSON-RPC methods of MetaMask's Wallet API to interact with your users' Ethereum accounts.",
                 href: '/wallet',
+                theme: '',
               },
             ],
           },
@@ -58,18 +61,21 @@ export default function Home(): JSX.Element {
                 description:
                   'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
                 href: '/snaps',
+                theme: '',
               },
               {
                 title: 'Snaps tutorials',
                 description:
                   'Follow the step-by-step tutorials to create Snaps that estimate gas fees, provide transaction insights with custom UI, and more.',
                 href: '/snaps',
+                theme: '',
               },
               {
                 title: 'Snaps API',
                 description:
                   'Use the Snaps API to modify the functionality of MetaMask and communicate between dapps and Snaps.',
                 href: '/snaps',
+                theme: '',
               },
             ],
           },

@@ -50,8 +50,6 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
-For any parameters required in an RPC request, these could be the type that describe the method, addresses, gas, and session.
-
 Bware Labs ([Terms of Service](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy)) is Infura's failover-protection partner. While Bware Labs supports most Infura methods, it does not yet support the following methods:
 
 - `eth_accounts`

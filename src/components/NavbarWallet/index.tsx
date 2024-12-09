@@ -9,12 +9,27 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 import styles from "./navbarWallet.module.scss";
 import { Tooltip } from "@site/src/components/Tooltip";
 import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
+import Link from "@docusaurus/Link";
 
 interface INavbarWalletComponent {
   includeUrl: string[];
 }
 
 const LOGIN_FF = "mm-unified-login";
+
+const EndIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M4.2915 3.33332C4.2915 2.96514 4.58998 2.66666 4.95817 2.66666H11.9998C12.368 2.66666 12.6665 2.96514 12.6665 3.33332V10.375C12.6665 10.7432 12.368 11.0417 11.9998 11.0417C11.6316 11.0417 11.3332 10.7432 11.3332 10.375V4.9428L3.80458 12.4714C3.54422 12.7317 3.12212 12.7317 2.86176 12.4714C2.60142 12.2111 2.60142 11.7889 2.86176 11.5286L10.3904 3.99999H4.95817C4.58998 3.99999 4.2915 3.70151 4.2915 3.33332Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+const reformatMetamaskAccount = (account) =>
+  account ? `${account.slice(0, 7)}...${account.slice(-5)}` : null;
 
 const NavbarWalletComponent: FC = ({
   includeUrl = [],
@@ -27,6 +42,7 @@ const NavbarWalletComponent: FC = ({
   const COPIED_TEXT = "Copied!";
   const {
     metaMaskAccount,
+    metaMaskAccountEns,
     sdk,
     metaMaskWalletIdConnectHandler,
     metaMaskDisconnect,
@@ -36,6 +52,9 @@ const NavbarWalletComponent: FC = ({
   const isExtensionActive = sdk.isExtensionActive();
   const dialogRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [userAccount, setUserAccount] = useState(
+    metaMaskAccountEns || metaMaskAccount,
+  );
 
   const toggleDropdown = () => {
     setDropdownOpen((value) => !value);
@@ -50,7 +69,7 @@ const NavbarWalletComponent: FC = ({
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(metaMaskAccount);
+    navigator.clipboard.writeText(userAccount);
     setCopyMessage(COPIED_TEXT);
     trackClickForSegment({
       eventName: "Copy wallet address",
@@ -110,7 +129,17 @@ const NavbarWalletComponent: FC = ({
     metaMaskWalletIdConnectHandler();
   };
 
-  return !metaMaskAccount ? (
+  useEffect(() => {
+    if (metaMaskAccountEns) {
+      setUserAccount(metaMaskAccountEns);
+    } else if (metaMaskAccount) {
+      setUserAccount(metaMaskAccount);
+    } else {
+      setUserAccount(null);
+    }
+  }, [metaMaskAccount, metaMaskAccountEns]);
+
+  return !userAccount ? (
     <Button
       testId={
         !isExtensionActive
@@ -140,29 +169,44 @@ const NavbarWalletComponent: FC = ({
       {dropdownOpen && (
         <ul ref={dialogRef} className={styles.dropdown}>
           <li className={styles.item}>
-            <img
-              src="/img/icons/jazzicon.png"
-              className={styles.avatar}
-              alt="avatar"
-            />{" "}
-            <span
-              className={styles.walletId}
-            >{`${metaMaskAccount.slice(0, 7)}...${metaMaskAccount.slice(-5)}`}</span>
-            <button
-              data-testid="navbar-account-copy"
-              className={styles.copyButton}
-              onClick={handleCopy}
-            >
-              <Tooltip
-                message={copyMessage}
-                className={styles.tooltip}
-                onHidden={() => {
-                  setCopyMessage(COPY_TEXT);
-                }}
-              >
-                <CopyIcon />
-              </Tooltip>
-            </button>
+            <div>
+              <div className={styles.innerItemWrap}>
+                <img
+                  src="/img/icons/jazzicon.png"
+                  className={styles.avatar}
+                  alt="avatar"
+                />{" "}
+                <span className={styles.walletId}>
+                  {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
+                </span>
+                <button
+                  data-testid="navbar-account-copy"
+                  className={styles.copyButton}
+                  onClick={handleCopy}
+                >
+                  <Tooltip
+                    message={copyMessage}
+                    className={styles.tooltip}
+                    onHidden={() => {
+                      setCopyMessage(COPY_TEXT);
+                    }}
+                  >
+                    <CopyIcon />
+                  </Tooltip>
+                </button>
+              </div>
+              {
+                !metaMaskAccountEns && (
+                  <div className={styles.extLinkWrap}>
+                    <Link to="https://names.linea.build/" className={styles.extLink}>
+                      Claim Linea Name
+                      <EndIcon />
+                    </Link>
+                    <span className={styles.extTag}>New</span>
+                  </div>
+                )
+              }
+            </div>
           </li>
           <li className={styles.item}>
             <Button
