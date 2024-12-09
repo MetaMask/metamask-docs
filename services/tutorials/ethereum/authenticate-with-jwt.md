@@ -255,7 +255,7 @@ Block number: 0x61fc48
 :::tip
 
 This script:
-1. Generates a JWT with a 1 hour expiry that is only valid on `infura.io`.
+1. Generates a JWT with a 1-hour expiry that is only valid on `infura.io`.
 2. Applies this JWT to form the header of a `getBlockNumber` call.
 3. Submits the API call.
 
