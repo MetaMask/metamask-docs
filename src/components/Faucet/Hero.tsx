@@ -115,13 +115,34 @@ export default function Hero({
       <div className={styles.actions}>
         {!!Object.keys(projects).length && isExtensionActive && (
           <div className={styles.inputCont}>
-            <Input
-              label="Wallet address"
-              disabled={isLoading}
-              value={inputValue}
-              placeholder="ex. 0x or ENS"
-              onChange={handleOnInputChange}
-            />
+            <div className={styles.inputWrapper}>
+              <Input
+                label="Wallet address"
+                disabled={isLoading}
+                value={inputValue}
+                placeholder="ex. 0x or ENS"
+                onChange={handleOnInputChange}
+              />
+              <div className={clsx(!!Object.keys(projects).length && styles.alignedButtons)}>
+                <Button
+                  as="button"
+                  data-test-id="hero-cta-request-eth"
+                  disabled={!inputValue || isLoading}
+                  type={'primary'}
+                  onClick={handleRequestEth}
+                  icon={'arrow-right'}
+                  label={'Request ETH'}
+                  style={
+                    colorMode !== 'dark'
+                      ? {
+                          '--button-color-hover': 'var(--general-black)',
+                          '--button-text-color-hover': 'var(--general-white)',
+                        }
+                      : {}
+                  }
+                />
+              </div>
+            </div>
             {isLimitedUserPlan && (
               <p className={styles.caption}>
                 The amount of {network === 'linea' && 'Linea Sepolia'}
@@ -216,33 +237,7 @@ export default function Hero({
                 />
               )}
             </>
-          ) : (
-            <div className={styles.button}>
-              <Button
-                as="button"
-                data-test-id="hero-cta-request-eth"
-                isLoading={isLoading}
-                disabled={!inputValue}
-                onClick={handleRequestEth}
-                label={'Request ETH'}
-                style={
-                  colorMode === 'dark'
-                    ? {
-                        '--button-color': 'var(--consumer-orange)',
-                        '--button-text-color': 'var(--general-black)',
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
-                    : {
-                        '--button-color': 'var(--consumer-orange)',
-                        '--button-text-color': 'var(--general-black)',
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
-                }
-              />
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
