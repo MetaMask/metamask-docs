@@ -73,6 +73,7 @@ export const authenticateAndAuthorize = async (env: string) => {
     accessToken = await auth(env).getAccessToken();
     userProfile = await auth(env).getUserProfile();
   } catch (e: any) {
+    console.log('e', e);
     throw new Error(e.message);
   }
 
