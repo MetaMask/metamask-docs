@@ -1,8 +1,8 @@
 ---
-description: Quick start 
+description: JavaScript + Wagmi (recommended)
 ---
 
-# Quick start
+# JavaScript + Wagmi (recommended)
 
 Get started with MetaMask SDK in your web application.
 
@@ -38,7 +38,9 @@ npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
 
 #### Import required dependencies
 
-```jsx
+Go to the root of your project and import the required dependencies:
+
+```jsx title="src/pages/_app.tsx"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { http, WagmiProvider, createConfig } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
@@ -49,7 +51,7 @@ import { metaMask } from 'wagmi/connectors';
 
 Set up your configuration with desired chains and connectors.
 
-```jsx
+```jsx title="src/pages/_app.tsx"
 const config = createConfig({
   ssr: true, // make sure to enable this for server-side rendering (SSR) applications
   chains: [mainnet, sepolia],
@@ -65,7 +67,7 @@ const config = createConfig({
 
 Wrap your application with the necessary providers:
 
-```jsx
+```jsx title="src/pages/_app.tsx"
 const client = new QueryClient();
 
 const App = () => {
@@ -83,7 +85,7 @@ const App = () => {
 
 Add the wallet connect and disconnect buttons to your application:
 
-```jsx
+```jsx title="src/components/ConnectButton.tsx"
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 export const ConnectButton = () => {
@@ -112,7 +114,9 @@ It should work with the [extension](https://metamask.io/download/) installed or 
 
 ### Production readiness
 
-For production deployments, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance. 
+:::tip
+For production deployments, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance.
+:::
 
 This is how you can configure your RPC endpoints via the Wagmi config:
 

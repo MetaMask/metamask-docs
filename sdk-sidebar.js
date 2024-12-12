@@ -22,19 +22,11 @@ const sidebar = {
     },
     {
       type: 'category',
-      label: 'Install SDK via Wagmi',
-      collapsible: false,  
-      collapsed: false,
-      items: [
-        'install-sdk-via-wagmi/quick-start',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Install SDK',
       collapsible: false,  
       collapsed: false,
       items: [
+        'install-sdk/javascript-+-wagmi',
         'install-sdk/javascript',
         'install-sdk/react-native',
       ],
@@ -49,20 +41,6 @@ const sidebar = {
         'guides/network-management',
         'guides/transaction-handling',
         'guides/interact-with-contracts',
-        {
-          type: 'category',
-          label: 'Advanced Patterns',
-          collapsible: true,  
-          collapsed: true,
-          items: [
-            'guides/advanced-patterns/read-from-contracts',
-            'guides/advanced-patterns/write-to-contracts',
-            'guides/advanced-patterns/batch-requests',
-            'guides/advanced-patterns/gas-estimation',
-            'guides/advanced-patterns/using-custom-networks',
-            'guides/advanced-patterns/testing',
-          ],
-        }
       ],
     },
     {
@@ -72,9 +50,16 @@ const sidebar = {
       collapsed: false,
       items: [
         'api-reference/sdk-api',
-        'api-reference/json-rpc-methods',
-        'api-reference/provider-api',
-        'api-reference/wallet-api',
+        {
+          type: 'link',
+          label: 'Provider API',
+          href: '/wallet/reference/provider-api',
+        },
+        {
+          type: 'link',
+          label: 'JSON-RPC API',
+          href: '/wallet/reference/json-rpc-methods',
+        },
       ],
     }
   ],

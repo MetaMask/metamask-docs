@@ -18,7 +18,9 @@ MetaMask SDK works with all EVM-compatible L1/L2 networks:
 - BNB Chain
 - and [many more](https://chainlist.org/)
 
+:::tip
 For production deployments, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance.
+:::
 
 ## Non-EVM networks
 
