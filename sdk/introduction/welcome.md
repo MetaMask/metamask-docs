@@ -7,11 +7,12 @@ description: Welcome
 
 Welcome to the **MetaMask SDK** developer documentation!
 
-MetaMask SDK is a toolkit that allows you to:
+MetaMask SDK is a **toolkit that allows you build onchain apps** by:
 
-- Connect your dApps to users' wallets
-- Manage wallet states and track assets
-- Handle blockchain transactions and smart contract interactions
+- Authenticating users
+- Managing wallet states
+- Handling transactions
+- Interacting with contracts
 - and many more!
 
 ### Why use the SDK?
