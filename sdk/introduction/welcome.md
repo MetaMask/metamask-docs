@@ -5,7 +5,7 @@ description: Welcome
 
 # Welcome
 
-Welcome to the MetaMask Wallet SDK developer documentation!
+Welcome to the **MetaMask SDK** developer documentation!
 
 MetaMask SDK is a toolkit that allows you to:
 
