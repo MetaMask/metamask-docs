@@ -6,7 +6,7 @@ import styles from "./card.module.css";
 
 export type CardItem = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   link: string;
   description: JSX.Element;
 };
@@ -18,7 +18,7 @@ export default function Card({ title, subtitle, link, description }: CardItem) {
         <div className="card__header">
           <span>
             <Heading as="h3">{title}</Heading>
-            <Heading as="h4">{subtitle}</Heading>
+            {subtitle && <Heading as="h4">{subtitle}</Heading>}
           </span>
         </div>
         <div className={clsx(styles.cardBody)}>{description}</div>

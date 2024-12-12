@@ -6,11 +6,11 @@ import styles from "./cardsection.module.css";
 const CardList: CardItem[] = [
   {
     title: "Wallet",
-    subtitle: "Integrate with the MetaMask wallet",
+    subtitle: "Integrate with MetaMask Wallet",
     link: "/wallet",
     description: (
       <>
-        Interact with your users&apos; via the MetaMask wallet.
+        Interact with your users&apos; via the MetaMask Wallet API.
       </>
     ),
   },
@@ -30,7 +30,7 @@ const CardList: CardItem[] = [
     link: "/snaps",
     description: (
       <>
-        Extend the functionality of MetaMask with custom networks, account types, APIs, and more.
+        Extend the functionality with custom networks, account types, APIs, and more.
       </>
     ),
   },
