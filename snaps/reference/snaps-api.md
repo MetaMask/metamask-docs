@@ -986,6 +986,52 @@ console.log(state)
 */
 ```
 
+### `snap_getInterfaceContext`
+
+Gets the context of an interactive interface by its ID.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+- `id` - The ID of the interface.
+
+#### Returns
+
+An object of type `InterfaceContext` if a custom context object was passed when creating or updating the interface, or `null`.
+
+#### Example
+
+```js title="index.js"
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Box>
+        <Heading>Hello, world!</Heading>
+        <Text>Welcome to my Snap homepage!</Text>
+      </Box>
+    ),
+    context: { 
+      key: "value"
+    }
+  },
+})
+
+const context = await snap.request({
+  method: "snap_getInterfaceContext",
+  params: {
+    id: interfaceId,
+  },
+})
+
+console.log(context)
+/*
+{
+  "key": "value"
+}
+*/
+```
+
 ### `snap_resolveInterface`
 
 Resolves an interactive interface.
