@@ -864,7 +864,9 @@ await snap.request({
 ## `snap_notify`
 
 Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
-Snaps can trigger a short notification text for actionable or time sensitive information.
+Snaps can trigger a short notification text for actionable or time sensitive information. 
+`inApp` notifications can also include an optional title, content, and footer shown in an 
+expanded view when a user expands the notification.
 
 #### Parameters
 
@@ -874,6 +876,10 @@ An object containing the contents of the notification:
   We recommend using `type: "inApp"` because there's no guarantee that native notifications are
   displayed to the user.
 - `message` - A message to show in the notification.
+- `title` (optional) - The title of the expanded view, shown when a user expands the notification.
+- `content` (optional) - A custom Snap UI shown in the expanded view
+- `footer` (optiona) - A custom footer object with `text` and `href`, displayed as an action button 
+  in the footer of the expanded view.
 
 #### Example
 
@@ -883,6 +889,17 @@ await snap.request({
   params: {
     type: "inApp",
     message: "Hello, world!",
+    title: "Hello from a Snap",
+    content: (
+      <Box>
+        <Heading>Hello, world!</Heading>
+        <Text>This is a notification sent from a Snap.</Text>
+      </Box>
+    ),
+    footerLink: { 
+      href: "https://snaps.metamask.io",
+      text: "Find more Snaps"
+    }
   },
 })
 ```
