@@ -1,20 +1,22 @@
 import React from "react";
+import clsx from "clsx";
 import Card, { type CardItem } from "@site/src/components/Card";
 import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
-    title: "Integrate with the MetaMask wallet",
+    title: "Wallet",
+    subtitle: "Integrate with the MetaMask wallet",
     link: "/wallet",
     description: (
       <>
-        Integrate your dapp with MetaMask using the Wallet API.
-        You can interact with your users&apos; EVM accounts from multiple dapp platforms.
+        Interact with your users&apos; via the MetaMask wallet.
       </>
     ),
   },
   {
-    title: "Build on chain apps with the SDK",
+    title: "SDK",
+    subtitle: "Build on chain apps",
     link: "/sdk",
     description: (
       <>
@@ -23,12 +25,12 @@ const CardList: CardItem[] = [
     ),
   },
   {
-    title: "Extend the functionality of MetaMask using Snaps",
+    title: "Snaps",
+    subtitle: "Extend the functionality of MetaMask",
     link: "/snaps",
     description: (
       <>
-        Extend the functionality of MetaMask using Snaps. You can create a Snap
-        to add support for custom networks, account types, APIs, and more.
+        Extend the functionality of MetaMask with custom networks, account types, APIs, and more.
       </>
     ),
   },
@@ -36,11 +38,13 @@ const CardList: CardItem[] = [
 
 export default function CardSection(): JSX.Element {
   return (
-    <section className="container margin-top--sm margin-bottom--lg">
-      <div className={styles.row}>
-        {CardList.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
+    <section >
+      <div className={clsx(styles.cardSection)}>
+        <div className={clsx(styles.row, "container padding-top--sm padding-bottom--lg")}>
+          {CardList.map((props, idx) => (
+            <Card key={idx} {...props} />
+          ))}
+        </div>
       </div>
     </section>
   );
