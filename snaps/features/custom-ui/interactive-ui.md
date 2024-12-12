@@ -64,6 +64,12 @@ At any point you can retrieve an interactive interface's state.
 To do this, call the [`snap_getInterfaceState`](../../reference/snaps-api.md#snap_getinterfacestate)
 method with the ID of the interface.
 
+### Get an interactive interface's context
+
+At any point you can retrieve an interactive interface's context.
+To do this, call the [`snap_getInterfaceContext`](../../reference/snaps-api.md#snap_getinterfacecontext)
+method with the ID of the interface.
+
 ## Example
 
 See the [`@metamask/interactive-ui-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/interactive-ui)
