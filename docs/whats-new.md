@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## December 2024
+
+- Documented [`snap_getInterfaceContext`](/snaps/reference/snaps-api/#snap_getinterfacecontext).
+  ([#1772](https://github.com/MetaMask/metamask-docs/pull/1772))
+
 ## November 2024
 
 - Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
