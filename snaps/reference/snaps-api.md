@@ -864,7 +864,7 @@ await snap.request({
 ## `snap_notify`
 
 Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
-Snaps can trigger a short notification text for actionable or time sensitive information. 
+Snaps can trigger a short (up to 80 characters) notification message for actionable or time sensitive information. 
 `inApp` notifications can also include an optional [expanded view](../features/notifications.md#expanded-view). 
 The expanded view has a title, content, and optional footer link shown when a user clicks on the notification.
 
@@ -887,7 +887,23 @@ Expanded view can only be used with notifications of type `inApp`.
 Expanded view must have at least a `title` and `content`. 
 :::
 
-#### Example
+#### Examples
+
+<Tabs>
+<TabItem value="In-app">
+
+```javascript title="index.js"
+await snap.request({
+  method: "snap_notify",
+  params: {
+    type: "inApp",
+    message: "Hello, world!",
+  },
+})
+```
+
+</TabItem>
+<TabItem value="In-app with Expanded View">
 
 ```javascript title="index.js"
 await snap.request({
@@ -904,11 +920,27 @@ await snap.request({
     ),
     footerLink: { 
       href: "https://snaps.metamask.io",
-      text: "Find more Snaps"
-    }
+      text: "Find more Snaps",
+    },
   },
 })
 ```
+
+</TabItem>
+<TabItem value="Native">
+
+```javascript title="index.js"
+await snap.request({
+  method: "snap_notify",
+  params: {
+    type: "native",
+    message: "Hello, world!",
+  },
+})
+```
+
+</TabItem>
+</Tabs>
 
 ## Interactive UI methods
 
