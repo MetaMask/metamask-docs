@@ -136,26 +136,6 @@ const batchResults = await provider.request({
 })
 ```
 
-### Framework-Specific Guides
-
-For framework-specific implementations, see:
-- [React Setup Guide](react)
-- [React Native Setup Guide](react-native) 
-- [Wagmi Integration Guide](javascript-wagmi)
-
 ### Example Projects
 
-Visit our [GitHub repository](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples) for complete example implementations:
-- JavaScript dapp
-- Pure JavaScript dapp
-- Node.js dapp
-- React dapp
-- React Native dapp
-
-### Best Practices
-
-1. Always call `connect()` or `eth_requestAccounts` before making other requests
-2. Use `infuraAPIKey` for production deployments to ensure reliable RPC access
-3. Handle connection errors gracefully
-4. Listen for account and network changes
-5. Provide clear feedback during connection and transaction states
+Visit our [GitHub repository](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples) for complete example implementations.
