@@ -865,8 +865,8 @@ await snap.request({
 
 Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
 Snaps can trigger a short notification text for actionable or time sensitive information. 
-`inApp` notifications can also include an optional title, content, and footer shown in an 
-expanded view when a user expands the notification.
+`inApp` notifications can also include an optional [expanded view](../features/notifications.md#expanded-view). 
+The expanded view has a title, content, and optional footer link shown when a user clicks on the notification.
 
 #### Parameters
 
@@ -876,10 +876,16 @@ An object containing the contents of the notification:
   We recommend using `type: "inApp"` because there's no guarantee that native notifications are
   displayed to the user.
 - `message` - A message to show in the notification.
-- `title` (optional) - The title of the expanded view, shown when a user expands the notification.
-- `content` (optional) - A custom Snap UI shown in the expanded view
-- `footer` (optiona) - A custom footer object with `text` and `href`, displayed as an action button 
+- Optional expanded view parameters
+  - `title` - The title of the expanded view, shown when a user expands the notification.
+  - `content` - A custom Snap UI shown in the expanded view
+  - `footerLink` (optional) - A custom footer object with `text` and `href`, displayed as an action button 
   in the footer of the expanded view.
+
+:::caution
+Expanded view can only be used with notifications of type `inApp`. 
+Expanded view must have at least a `title` and `content`. 
+:::
 
 #### Example
 
