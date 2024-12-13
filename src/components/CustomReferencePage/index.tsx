@@ -6,6 +6,7 @@ import { useLocation } from "@docusaurus/router";
 import { prepareLinkItems, MM_REF_PATH } from '@site/src/plugins/plugin-json-rpc';
 import styles from "./styles.module.css";
 const sidebar = require("../../../wallet-sidebar.js");
+import AdmonitionWrapper from '@site/src/theme/Admonition';
 
 function transformItems(items, dynamicItems) {
   return items.map(item => {
@@ -41,6 +42,12 @@ function transformItems(items, dynamicItems) {
   });
 }
 
+const NoteMsg = () => (
+  <AdmonitionWrapper type="note" title="note">
+    <p>MetaMask doesn't support session IDs.</p>
+  </AdmonitionWrapper>
+);
+
 const CustomReferencePage = (props) => {
   const customData = props.route.customData;
   const { pathname } = useLocation();
@@ -61,6 +68,7 @@ const CustomReferencePage = (props) => {
             <ParserOpenRPC
               network={customData.networkName}
               method={customData.name}
+              extraContent={<NoteMsg />}
             />
           </div>
         </div>
