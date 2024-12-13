@@ -878,7 +878,7 @@ An object containing the contents of the notification:
 - `message` - A message to show in the notification.
 - `title` (optional) - The title of the expanded view, shown when a user expands the notification.
 - `content` (optional) - A custom Snap UI shown in the expanded view
-- `footer` (optiona) - A custom footer object with `text` and `href`, displayed as an action button 
+- `footer` (optional) - A custom footer object with `text` and `href`, displayed as an action button 
   in the footer of the expanded view.
 
 #### Example
