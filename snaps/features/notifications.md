@@ -63,7 +63,7 @@ Each Snap can trigger up to:
 - Two native notifications per five minutes.
   :::
 
-### Expanded View
+### Expanded view
 
 In-app notifications can include an optional expanded view that will be displayed when the user clicks on the notification. The expanded view includes a title, content, and an optional footer link. 
 
