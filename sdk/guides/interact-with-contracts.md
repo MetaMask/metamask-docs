@@ -4,7 +4,6 @@ description: Contract Interactions
 
 # Contract Interactions 
 
-## Overview
 This guide covers everything you need to know about interacting with smart contracts using the MetaMask SDK. You'll learn how to:
 - **Read data** from smart contracts
 - **Write data** to smart contracts
