@@ -283,7 +283,8 @@ component.
 
 #### Props
 
-- `title`: `string` - The title of the card.
+- `title`: `Array<string | Address>` - The title of the card, can be a string or an 
+  [`Address`](#address).
 - `value`: `string` - The value, shown on the right side. 
 - `image`: `string` - (Optional) An image shown on the left side. Accepts inline SVG.
 - `description`: `string` - (Optional) A description, shown below the title.
