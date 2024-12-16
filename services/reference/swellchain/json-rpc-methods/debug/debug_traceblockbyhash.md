@@ -41,13 +41,6 @@ curl https://swellchain-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
-  <TabItem value="WSS" label="WSS" default>
-
-```bash
-wscat -c wss://swellchain-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x'{"jsonrpc": "2.0", "method": "debug_traceBlockByHash", "params": ["0xec8cb29209d9170b31008738ec9e80acc22257249cfd0f4bce19590cd09834c8", {"tracer": "callTracer"}], "id": 1}'
-```
-
-  </TabItem>
 </Tabs>
 
 ### Result
