@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## December 2024
 
-- Documented [Swellchain](/services/reference/swellchain) support.
+- Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
 - Documented [`snap_getInterfaceContext`](/snaps/reference/snaps-api/#snap_getinterfacecontext).
   ([#1772](https://github.com/MetaMask/metamask-docs/pull/1772))
 
