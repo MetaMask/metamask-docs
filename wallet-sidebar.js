@@ -53,11 +53,6 @@ const sidebar = {
           items: [
             {
               type: "doc",
-              label: "Connect and sign",
-              id: "how-to/sign-data/connect-and-sign"
-            },
-            {
-              type: "doc",
               label: "Sign in with Ethereum",
               id: "how-to/sign-data/siwe"
             }
@@ -67,16 +62,6 @@ const sidebar = {
           type: "doc",
           label: "Send transactions",
           id: "how-to/send-transactions"
-        },
-        {
-          type: "doc",
-          label: "Make read-only requests",
-          id: "how-to/make-read-only-requests"
-        },
-        {
-          type: "doc",
-          label: "Batch JSON-RPC requests",
-          id: "how-to/batch-json-rpc-requests"
         },
         {
           type: "category",
@@ -99,11 +84,6 @@ const sidebar = {
               type: "doc",
               label: "Display a dapp icon",
               id: "how-to/display/icon"
-            },
-            {
-              type: "doc",
-              label: "Display custom modals",
-              id: "how-to/display/custom-modals"
             }
           ]
         },

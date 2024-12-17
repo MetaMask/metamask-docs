@@ -22,13 +22,13 @@ const sidebar = {
     },
     {
       type: 'category',
-      label: 'Install SDK',
+      label: 'Quick Start',
       collapsible: false,  
       collapsed: false,
       items: [
-        'install-sdk/javascript-+-wagmi',
-        'install-sdk/javascript',
-        'install-sdk/react-native',
+        'quick-start/javascript-+-wagmi',
+        'quick-start/javascript',
+        'quick-start/react-native',
       ],
     },
     {
@@ -41,6 +41,16 @@ const sidebar = {
         'guides/network-management',
         'guides/transaction-handling',
         'guides/interact-with-contracts',
+        {
+          type: 'category',
+          label: 'Advanced',
+          collapsible: true,  
+          collapsed: true,
+          items: [
+            'guides/advanced/connect-and-sign',
+            'guides/advanced/batch-requests',
+          ],
+        },
       ],
     },
     {

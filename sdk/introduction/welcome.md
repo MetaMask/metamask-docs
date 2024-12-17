@@ -7,7 +7,7 @@ description: Welcome
 
 Welcome to the **MetaMask SDK** developer documentation!
 
-MetaMask SDK is a **toolkit that allows you build onchain apps** by:
+MetaMask SDK is a **toolkit that allows you to build onchain apps** by:
 
 - Authenticating users
 - Managing wallet states
@@ -21,8 +21,8 @@ MetaMask SDK is a **toolkit that allows you build onchain apps** by:
   - Web - via browser extensions or QR codes for the mobile app
   - Mobile - via deep links to the mobile app
 - Works with all EVM-compatible L1/L2 networks
+- Handles onboarding of users
 - Battle tested with millions of users on MetaMask
-- Supports wallet standards like [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) and more
 
 ### Where do I start?
 

@@ -32,103 +32,99 @@
     },
     {
       "source": "/guide/metamask-extension-provider/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/quickstart/javascript/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/quickstart/react/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/quickstart/other-platforms/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/discover-multiple-wallets/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/detect-wallet/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/detect-wallet/multiple-wallets/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/access-provider/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/use-sdk/3rd-party-libraries/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/connect/",
-      "destination": "/wallet/connect/"
+      "destination": "/wallet/"
     },
     {
       "source": "/wallet/how-to/connect/set-up-sdk/:path*/",
-      "destination": "/wallet/connect/metamask-sdk/:path*/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/use-sdk/:path*/",
-      "destination": "/wallet/connect/metamask-sdk/:path*/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/concepts/sdk/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/guide/mobile-getting-started/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/guide/site-compatibility-checklist/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/guide/mobile-best-practices/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/use-mobile/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/integrate-with-mobile/",
-      "destination": "/wallet/connect/metamask-sdk/"
-    },
-    {
-      "source": "/sdk/",
-      "destination": "/wallet/connect/metamask-sdk/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/connect/set-up-sdk/javascript/react-native/",
-      "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
+      "destination": "/sdk/quick-start/react-native/"
     },
     {
       "source": "/wallet/how-to/use-sdk/javascript/react-native/",
-      "destination": "/wallet/connect/metamask-sdk/mobile/react-native/"
+      "destination": "/sdk/quick-start/react-native/"
     },
     {
       "source": "/wallet/how-to/use-sdk/3rd-party-libraries/wagmi/",
-      "destination": "/wallet/connect/3rd-party-libraries/wagmi/"
+      "destination": "/sdk/quick-start/javascript-+-wagmi/"
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/web3-onboard/",
-      "destination": "/wallet/connect/3rd-party-libraries/web3-onboard/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/use-sdk/3rd-party-libraries/web3-onboard/",
-      "destination": "/wallet/connect/3rd-party-libraries/web3-onboard/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/category/how-to/",
@@ -168,7 +164,7 @@
     },
     {
       "source": "/wallet/how-to/use-sdk/javascript/connect-and-sign/",
-      "destination": "/wallet/how-to/sign-data/connect-and-sign/"
+      "destination": "/sdk/guides/advanced/connect-and-sign/"
     },
     {
       "source": "/wallet/how-to/use-siwe/",
@@ -180,15 +176,15 @@
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/js-infura-api/",
-      "destination": "/wallet/how-to/make-read-only-requests/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/use-sdk/javascript/make-read-only-requests/",
-      "destination": "/wallet/how-to/make-read-only-requests/"
+      "destination": "/sdk/guides/advanced/batch-requests/"
     },
     {
       "source": "/wallet/how-to/use-sdk/javascript/batch-json-rpc-requests/",
-      "destination": "/wallet/how-to/batch-json-rpc-requests/"
+      "destination": "/sdk/guides/advanced/batch-requests/"
     },
     {
       "source": "/guide/registering-your-token/",
@@ -292,7 +288,7 @@
     },
     {
       "source": "/wallet/concepts/sdk/connections/",
-      "destination": "/wallet/concepts/sdk-connections/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/concepts/sdk/android/",
