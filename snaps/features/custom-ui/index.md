@@ -16,6 +16,7 @@ implementing the following features:
 - [Home pages](home-pages.md)
 - [Transaction insights](../transaction-insights.md)
 - [Signature insights](../signature-insights.md)
+- [Notifications (Expanded View)](../notifications.md#expanded-view)
 
 :::note
 JSX is supported in the MetaMask extension and Flask version 12 and later. 
@@ -283,7 +284,8 @@ component.
 
 #### Props
 
-- `title`: `string` - The title of the card.
+- `title`: `Array<string | Address>` - The title of the card, can be a string or an 
+  [`Address`](#address).
 - `value`: `string` - The value, shown on the right side. 
 - `image`: `string` - (Optional) An image shown on the left side. Accepts inline SVG.
 - `description`: `string` - (Optional) A description, shown below the title.

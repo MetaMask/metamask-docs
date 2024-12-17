@@ -25,6 +25,8 @@ import { MetamaskProviderContext } from "@site/src/theme/Root";
 import ProjectsBox from "@site/src/components/ParserOpenRPC/ProjectsBox";
 import { LINEA_REQUEST_URL } from "@site/src/lib/constants";
 import useIsBrowser from '@docusaurus/useIsBrowser';
+import { encrypt } from '@metamask/eth-sig-util';
+import { hexlify } from 'ethers';
 
 interface ParserProps {
   network: NETWORK_NAMES;
@@ -59,7 +61,7 @@ export default function ParserOpenRPC({
   const [isDrawerContentFixed, setIsDrawerContentFixed] = useState(false);
   const [drawerLabel, setDrawerLabel] = useState(null);
   const [isComplexTypeView, setIsComplexTypeView] = useState(false);
-  const { metaMaskAccount, metaMaskProvider, userAPIKey } = useContext(MetamaskProviderContext);
+  const { metaMaskAccount, metaMaskProvider, userAPIKey, userEncPublicKey, setUserEncPublicKey } = useContext(MetamaskProviderContext);
   const [defExampleResponse, setDefExampleResponse] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const { colorMode } = useColorMode();
@@ -125,6 +127,21 @@ export default function ParserOpenRPC({
       "#/components/tags/",
       "tags",
     );
+
+    if (!!userEncPublicKey && method === "eth_decrypt") {
+      const encDefValue = hexlify(Buffer.from(JSON.stringify(
+        encrypt({
+          publicKey: userEncPublicKey,
+          data: "Test message",
+          version: 'x25519-xsalsa20-poly1305',
+        }),
+      )))
+      currentMethod?.examples[0]?.params?.forEach(item => {
+        if (item.name === "EncryptedMessage" && !!encDefValue) {
+          item.value = encDefValue;
+        };
+      })
+    }
 
     return {
       description: currentMethod.description || null,
@@ -202,6 +219,9 @@ export default function ParserOpenRPC({
       });
       setReqResult(response);
       trackAnalyticsForRequest(response);
+      if (method === "eth_getEncryptionPublicKey" && response) {
+        setUserEncPublicKey(response as string)
+      }
     } catch (e) {
       setReqResult(e);
     } finally {

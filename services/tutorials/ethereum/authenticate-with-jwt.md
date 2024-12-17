@@ -13,8 +13,6 @@ This tutorial demonstrates how to create and apply a JSON Web Token (JWT) to aut
 [`eth_blockNumber`](../../api/networks/ethereum/json-rpc-methods/eth_blocknumber.mdx) API request 
 with Node.js. 
 
-Developers can configure the expiry time and scope of JWTs to enhance the security profile of their dapps.
-
 ## Prerequisites
 
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20+
@@ -257,7 +255,7 @@ Block number: 0x61fc48
 :::tip
 
 This script:
-1. Generates a JWT with a 1 hour expiry that is only valid on `infura.io`.
+1. Generates a JWT with a 1-hour expiry that is only valid on `infura.io`.
 2. Applies this JWT to form the header of a `getBlockNumber` call.
 3. Submits the API call.
 
@@ -364,7 +362,7 @@ You can run this request yourself to make the call. Your console outputs the res
 Consider following these next steps:
 
 - [Configure your JWT](../../how-to/json-web-token-jwt.md) to control its scope.
-<!-- - Read this blog post about [keeping your Infura secrets safe]({when blog is up}) -->
+- Learn more about [keeping your Infura secrets safe](https://www.infura.io/blog/post/best-practises-for-infura-api-key-management).
 - Decode your JWT: Copy the JWT provided in the console by the [optional curl equivalent step](#optional-examine-the-curl-equivalent), and paste it into the **Encoded** field in [jwt.io](https://jwt.io/).
 - Add a layer of verification to your call by applying the JWT's **FINGERPRINT** provided in the MetaMask Developer dashboard. 
 

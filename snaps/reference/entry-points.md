@@ -503,6 +503,10 @@ An object containing:
 - `transactionOrigin` - The transaction origin if
   [`allowTransactionOrigin`](permissions.md#endowmenttransaction-insight) is set to `true`.
 
+:::note
+When interacting with EVM chain IDs, the provided chain ID uses the format `namespace:reference`, where the `reference` is a base 10 integer.
+:::
+
 #### Returns
 
 - An optional `severity` property that, if present, must be set to `"critical"`.
