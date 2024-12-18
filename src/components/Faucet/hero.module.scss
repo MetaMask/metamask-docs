@@ -78,3 +78,20 @@
     }
   }
 }
+
+
+.heroDesktopContent {
+  display: block;
+
+  @media screen and (max-width: 996px) {
+    display: none;
+  }
+}
+
+.heroMobileContent {
+  display: none;
+
+  @media screen and (max-width: 996px) {
+    display: block;
+  }
+}
