@@ -52,4 +52,4 @@ Select an option below to get started with the Swellchain network.
 
 The following partners provide access to Swellchain:
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
-- NorthWest Nodes ([Privacy Policy](https://northwestnodes.com/terms-of-use/), [Terms of use](https://northwestnodes.com/terms-of-use/))
+- NorthWest Nodes
