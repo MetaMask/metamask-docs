@@ -26,28 +26,6 @@ MetaMask SDK is a **toolkit that allows you to build onchain apps** by:
 
 ### Where do I start?
 
-<div class="cards">
-  <div class="card">
-    <div class="card__header">
-      <h4>Web</h4>
-    </div>
-    <div class="card__body">
-      <ul>
-        <li><a href="/sdk/install-sdk-via-wagmi/quick-start">via Wagmi (Recommended)</a></li>
-        <li><a href="/sdk/install/javascript">JavaScript</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card__header">
-      <h4>Mobile</h4>
-    </div>
-    <div class="card__body">
-      <ul>
-        <li><a href="/sdk/install/ios">iOS</a></li>
-        <li><a href="/sdk/install/android">Android</a></li>
-        <li><a href="/sdk/install/react-native">React Native</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+- [Install SDK - JavaScript + Wagmi](/sdk/quick-start/javascript-+-wagmi)
+- [Install SDK - JavaScript](/sdk/quick-start/javascript)
+- [Install SDK - React Native](/sdk/quick-start/react-native)

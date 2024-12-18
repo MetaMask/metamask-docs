@@ -396,13 +396,3 @@ button:hover {
 .react-dropdown-select.select-lang .react-dropdown-select-dropdown-handle{
   color: #fff;
 }
-
-/* Hide SDK version dropdown by default */
-.navbar__sdk-version-dropdown {
-  display: none;
-}
-
-/* Show SDK version dropdown only on SDK pages */
-.plugin-id-sdk .navbar__sdk-version-dropdown {
-  display: block;
-}

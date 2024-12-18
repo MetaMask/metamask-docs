@@ -6,44 +6,69 @@ description: JavaScript + Wagmi (recommended)
 
 Get started with MetaMask SDK in your web application.
 
+This quickstart app demonstrates how to integrate the MetaMask SDK with a [Next.js](https://nextjs.org/) application using [wagmi](https://wagmi.sh/).
+
+<br/>
+
+<div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+    <div style={{ flex: '2' }}>
+        <a href="https://example.com" target="_blank">
+            <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" style={{border: '1px solid #DCDCDC', width: '100%'}} />
+        </a>
+    </div>
+    <div style={{ flex: '3' }}>
+        <h3>Features</h3>
+        <ul>
+            <li><strong>Wallet Connection</strong>: Connect to MetaMask wallet seamlessly.</li>
+            <li><strong>Network Switching</strong>: Switch between Ethereum networks like Linea Sepolia, Linea, and Mainnet.</li>
+            <li><strong>Interactive UI</strong>: Responsive design with interactive cards guiding users.</li>
+            <li><strong>Modular Components</strong>: Easy-to-understand and customizable components.</li>
+        </ul>
+    </div>
+</div>
+
 ### Setup via template
 
-Quickly bootstrap a new MetaMask SDK + [wagmi](https://wagmi.sh/) + [Next.js](https://nextjs.org/) project using one of these methods:
-
-Download directly from our examples repository:
+Download directly from our <a href="https://github.com/metamask/metamask-sdk-examples" target="_blank">examples repository</a>:
 ```bash
-git clone https://github.com/metamask/sdk-examples.git
+git clone https://github.com/metamask/metamask-sdk-examples.git
 ```
 
-Or bootstrap using our creation tool:
+Change directory to the quickstart example:
 ```bash
-npx create-mm-sdk-app
-# or
-pnpm create mm-sdk-app --example https://github.com/metamask/sdk-examples/tree/main/demo-app
-# or
-yarn create mm-sdk-app --example https://github.com/metamask/sdk-examples/tree/main/demo-app
+cd metamask-sdk-examples/examples/quickstart/
 ```
 
-This will guide you through creating a new project directory with all necessary dependencies installed.
+Install dependencies:
+```bash
+pnpm install
+```
+
+Run the project:
+```bash
+pnpm dev
+```
+
+Congratulations! You've successfully set up the MetaMask SDK with wagmi. Now it's time to add your own functionality.
 
 ### Manual setup
 
 #### Installation
 
-Install MetaMask SDK along with its peer dependencies:
+Install MetaMask SDK along with its peer dependencies to an existing React project:
 
 ```bash
-npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
+pnpm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
 ```
 
 #### Import required dependencies
 
 Go to the root of your project and import the required dependencies:
 
-```jsx title="src/pages/_app.tsx"
+```jsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { http, WagmiProvider, createConfig } from 'wagmi';
-import { mainnet, sepolia } from 'wagmi/chains';
+import { mainnet, linea, lineaSepolia } from "wagmi/chains";
 import { metaMask } from 'wagmi/connectors';
 ```
 
@@ -51,14 +76,15 @@ import { metaMask } from 'wagmi/connectors';
 
 Set up your configuration with desired chains and connectors.
 
-```jsx title="src/pages/_app.tsx"
+```jsx
 const config = createConfig({
   ssr: true, // make sure to enable this for server-side rendering (SSR) applications
-  chains: [mainnet, sepolia],
+  chains: [mainnet, linea, lineaSepolia],
   connectors: [metaMask()],
   transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [linea.id]: http(),
+    [lineaSepolia.id]: http(),
   },
 });
 ```
@@ -67,7 +93,7 @@ const config = createConfig({
 
 Wrap your application with the necessary providers:
 
-```jsx title="src/pages/_app.tsx"
+```jsx
 const client = new QueryClient();
 
 const App = () => {
@@ -81,11 +107,11 @@ const App = () => {
 }
 ```
 
-#### Add connect button
+#### Add the connect button
 
 Add the wallet connect and disconnect buttons to your application:
 
-```jsx title="src/components/ConnectButton.tsx"
+```jsx
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 export const ConnectButton = () => {
@@ -137,16 +163,10 @@ Sign up [here](https://infura.io/) to Infura for a free account and get your API
 Now that you have the basic setup complete, check out these guides to add your own functionality:
 
 - [User authentication](/sdk/guides/user-authentication)
-- [Network management](/sdk/guides/manage-networks)
-- [Transaction handling](/sdk/guides/handle-transactions)
+- [Network management](/sdk/guides/network-management)
+- [Transaction handling](/sdk/guides/transaction-handling)
 - [Smart contract interactions](/sdk/guides/interact-with-contracts)
-- [Production ready checklist](/sdk/guides/production-ready)
 
 ### More examples
 
-Check out our example implementations for various frameworks:
-
-- [Next.js + Wagmi starter](/sdk/examples/nextjs)
-- [Remix + Wagmi starter](/sdk/examples/remix)
-- [Vite + Wagmi starter](/sdk/examples/vite)
-- [Create React App + Wagmi starter](/sdk/examples/create-react-app)
+Check out our example repository for more [metamask-sdk-examples](https://github.com/metamask/metamask-sdk-examples)

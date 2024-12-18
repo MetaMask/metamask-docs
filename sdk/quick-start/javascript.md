@@ -101,8 +101,6 @@ const MMSDK = new MetaMaskSDK({
   
   // Optional - customize modal display
   headless: false,
-  
-  // See documentation for additional options
 })
 ```
 
@@ -135,7 +133,3 @@ const batchResults = await provider.request({
   ]
 })
 ```
-
-### Example Projects
-
-Visit our [GitHub repository](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples) for complete example implementations.

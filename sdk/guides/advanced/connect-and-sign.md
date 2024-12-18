@@ -28,7 +28,7 @@ This is useful for various purposes such as authentication and transaction verif
 
 ## Prerequisites
 
-- [MetaMask SDK set up](../../connect/metamask-sdk/javascript/index.md) in your JavaScript dapp.
+- MetaMask SDK set up in your JavaScript dapp.
 
 - MetaMask Mobile version 7.10 or later.
   Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
@@ -89,9 +89,7 @@ function MyComponent() {
 }
 ```
 
-For a comprehensive React example, see the
-[`App.tsx`](https://github.com/MetaMask/metamask-sdk/blob/main/packages/examples/create-react-app/src/App.tsx)
-file of the example React dapp.
+For a comprehensive React example, see the `App.tsx` file of the example React dapp.
 
 For examples of using the `connectAndSign` function in Next.js and Vue.js, see the
 [example Next.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nextjs-demo)

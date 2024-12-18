@@ -283,6 +283,6 @@ async function handleMint() {
 
 ### Next Steps
 
-- [Advanced Contract Patterns](/sdk/guides/advanced-patterns)
-- [Production Readiness](/sdk/guides/production-checklist)
-- [Security Best Practices](/sdk/guides/security)
+- [User Authentication](/sdk/guides/user-authentication)
+- [Network Management](/sdk/guides/network-management)
+- [Transaction Handling](/sdk/guides/transaction-handling)

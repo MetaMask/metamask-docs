@@ -17,10 +17,10 @@ MetaMask SDK lets you connect your apps to MetaMask Wallet in the following ways
 | Mobile Browser | Wallet Mobile App | Deep link directly to mobile wallet app | Supported | Limited |
 | Mobile App | Wallet Mobile App | Deep link directly to mobile wallet app | Supported | Limited |
 
-### Next steps
+<br />
 
-- [Install SDK via Wagmi](/sdk/install-sdk-via-wagmi/quick-start)
-- [Install SDK - JavaScript](/sdk/install-sdk/javascript)
-- [Install SDK - React Native](/sdk/install-sdk/react-native)
-- [Install SDK - iOS](/sdk/install-sdk/ios)
-- [Install SDK - Android](/sdk/install-sdk/android)
+:::tip 
+
+For better user experience on **mobile**, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance.
+
+:::

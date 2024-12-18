@@ -4,7 +4,40 @@ description: Network Management
 
 # Network Management
 
-This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. You'll learn how to:
+This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. 
+
+<div style={{ 
+    display: 'flex', 
+    flexDirection: 'row', 
+    gap: '12px', 
+    marginBottom: '24px', 
+    overflow: 'hidden', 
+    overflowX: 'scroll', 
+    WebkitOverflowScrolling: 'touch',
+}}>
+    <img 
+        src={require("../_assets/quickstart-step-5.jpg").default} 
+        alt="Network Management - Step 5" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-6.jpg").default} 
+        alt="Network Management - Step 6" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-7.jpg").default} 
+        alt="Network Management - Step 7" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-8.jpg").default} 
+        alt="Network Management - Step 8" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+</div>
+
+You'll learn how to:
 - **Detect the current network** and monitor network changes
 - **Switch between networks** programmatically
 - **Add new networks** to MetaMask
@@ -19,19 +52,22 @@ Wagmi provides intuitive hooks for all network-related operations, making chain 
 #### Detect Current Network
 
 ```tsx
-import { useNetwork } from 'wagmi'
+import { useChainId, useChains } from 'wagmi'
 
 function NetworkStatus() {
-  const { chain, chains } = useNetwork()
+  const chainId = useChainId()
+  const chains = useChains()
   
-  if (!chain) {
+  const currentChain = chains.find(c => c.id === chainId)
+  
+  if (!currentChain) {
     return <div>Not connected to any network</div>
   }
 
   return (
     <div>
-      <div>Connected to {chain.name}</div>
-      <div>Chain ID: {chain.id}</div>
+      <div>Connected to {currentChain.name}</div>
+      <div>Chain ID: {chainId}</div>
       <div>Supported chains: {chains.map(c => c.name).join(', ')}</div>
     </div>
   )
@@ -41,19 +77,17 @@ function NetworkStatus() {
 #### Switch Networks
 
 ```tsx
-import { useSwitchNetwork } from 'wagmi'
-import { mainnet, optimism, base } from 'wagmi/chains'
+import { useSwitchChain } from 'wagmi'
 
 function NetworkSwitcher() {
-  const { chains, switchNetwork, isLoading } = useSwitchNetwork()
+  const { chains, switchChain } = useSwitchChain()
   
   return (
     <div>
       {chains.map((chain) => (
         <button
           key={chain.id}
-          onClick={() => switchNetwork?.(chain.id)}
-          disabled={isLoading}
+          onClick={() => switchChain({ chainId: chain.id })}
         >
           Switch to {chain.name}
         </button>
@@ -66,17 +100,15 @@ function NetworkSwitcher() {
 #### Handle Network Changes
 
 ```tsx
-import { useNetwork } from 'wagmi'
+import { useChainId } from 'wagmi'
+import { useEffect } from 'react'
 
 function NetworkWatcher() {
-  const { chain } = useNetwork({
-    onConnect: ({ chain }) => {
-      console.log('Connected to', chain?.name)
-    },
-    onDisconnect: () => {
-      console.log('Disconnected from network')
-    }
-  })
+  const chainId = useChainId()
+  
+  useEffect(() => {
+    console.log('Chain ID changed:', chainId)
+  }, [chainId])
   
   return null
 }

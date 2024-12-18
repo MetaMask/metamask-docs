@@ -6,6 +6,42 @@ description: User Authentication
 
 Connect and manage user wallet sessions in your dApp. This guide covers both **Wagmi** (recommended) and **vanilla JavaScript** approaches.
 
+<div style={{ 
+    display: 'flex', 
+    flexDirection: 'row', 
+    gap: '12px', 
+    marginBottom: '24px', 
+    overflow: 'hidden', 
+    overflowX: 'scroll', 
+    WebkitOverflowScrolling: 'touch',
+}}>
+    <img 
+        src={require("../_assets/quickstart-step-1.jpg").default} 
+        alt="Connect to MetaMask - Step 1" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-2.jpg").default} 
+        alt="Connect to MetaMask - Step 2" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-3.jpg").default} 
+        alt="Connect to MetaMask - Step 3" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-4.jpg").default} 
+        alt="Connect to MetaMask - Step 4" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+    <img 
+        src={require("../_assets/quickstart-step-9.jpg").default} 
+        alt="Connect to MetaMask - Step 9" 
+        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
+    />
+</div>
+
 With MetaMask SDK, you can:
 - **Connect users' wallets** to your dApp
 - **Access user accounts** (addresses)
@@ -13,6 +49,7 @@ With MetaMask SDK, you can:
 - **Listen for account changes** in real-time
 - **Manage wallet sessions** (connect/disconnect)
 - **Support multiple wallet types** (extension, mobile app)
+
 
 ### Using Wagmi
 
@@ -22,7 +59,7 @@ Wagmi provides a simple, hook-based approach for handling wallet connections:
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 function ConnectWallet() {
-  const { address, isConnected } = useAccount()
+  const { address, isConnected, status } = useAccount()
   const { connectors, connect, isPending } = useConnect()
   const { disconnect } = useDisconnect()
 
@@ -53,18 +90,26 @@ function ConnectWallet() {
 
 #### Handle Account Changes
 
-Wagmi automatically handles account changes, but you can also listen for them:
+Wagmi provides a dedicated hook for handling account lifecycle events:
 
 ```tsx
-import { useAccount } from 'wagmi'
+import { useAccountEffect } from 'wagmi'
 
 function WatchAccount() {
-  const { address } = useAccount({
-    onConnect: ({ address }) => console.log('Connected', address),
-    onDisconnect: () => console.log('Disconnected')
+  useAccountEffect({
+    onConnect(data) {
+      console.log('Connected!', {
+        address: data.address,
+        chainId: data.chainId,
+        isReconnected: data.isReconnected
+      })
+    },
+    onDisconnect() {
+      console.log('Disconnected!')
+    }
   })
   
-  return <div>Current account: {address}</div>
+  return <div>Watching for account changes...</div>
 }
 ```
 

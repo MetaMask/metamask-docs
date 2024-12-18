@@ -39,10 +39,3 @@
 .ctaButton:hover {
   background-color: #43aefc;
 }
-
-/* <Link
-className={clsx(styles.ctaButton, "button button--lg")}
-to="/wallet"
->
-Get started
-</Link> */
