@@ -6,49 +6,23 @@ description: User Authentication
 
 Connect and manage user wallet sessions in your dApp. This guide covers both **Wagmi** (recommended) and **vanilla JavaScript** approaches.
 
-<div style={{ 
-    display: 'flex', 
-    flexDirection: 'row', 
-    gap: '12px', 
-    marginBottom: '24px', 
-    overflow: 'hidden', 
-    overflowX: 'scroll', 
-    WebkitOverflowScrolling: 'touch',
-}}>
-    <img 
-        src={require("../_assets/quickstart-step-1.jpg").default} 
-        alt="Connect to MetaMask - Step 1" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-2.jpg").default} 
-        alt="Connect to MetaMask - Step 2" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-3.jpg").default} 
-        alt="Connect to MetaMask - Step 3" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-4.jpg").default} 
-        alt="Connect to MetaMask - Step 4" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-9.jpg").default} 
-        alt="Connect to MetaMask - Step 9" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
+<div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+    <div style={{ flex: '3' }}>
+        <a href="https://example.com" target="_blank">
+            <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" style={{border: '1px solid #DCDCDC', width: '100%'}} />
+        </a>
+    </div>
+    <div style={{ flex: '3' }}>
+        <ul>
+            <li><strong>Connect users' wallets</strong> to your dApp</li>
+            <li><strong>Access user accounts</strong> (addresses)</li>
+            <li><strong>Handle connection states</strong> (connected/disconnected)</li>
+            <li><strong>Listen for account changes</strong> in real-time</li>
+            <li><strong>Manage wallet sessions</strong> (connect/disconnect)</li>
+            <li><strong>Support multiple wallet types</strong> (extension, mobile app)</li>
+        </ul>
+    </div>
 </div>
-
-With MetaMask SDK, you can:
-- **Connect users' wallets** to your dApp
-- **Access user accounts** (addresses)
-- **Handle connection states** (connected/disconnected)
-- **Listen for account changes** in real-time
-- **Manage wallet sessions** (connect/disconnect)
-- **Support multiple wallet types** (extension, mobile app)
 
 
 ### Using Wagmi
@@ -59,7 +33,7 @@ Wagmi provides a simple, hook-based approach for handling wallet connections:
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 function ConnectWallet() {
-  const { address, isConnected, status } = useAccount()
+  const { address, isConnected } = useAccount()
   const { connectors, connect, isPending } = useConnect()
   const { disconnect } = useDisconnect()
 
@@ -165,6 +139,12 @@ provider.on('accountsChanged', (accounts) => {
   }
 });
 ```
+
+:::info
+
+Check out the [Provider API](/wallet/reference/provider-api) reference for more information.
+
+:::
 
 #### HTML
 

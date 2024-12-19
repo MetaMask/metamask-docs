@@ -59,17 +59,7 @@ const sidebar = {
       collapsible: false,  
       collapsed: false,
       items: [
-        'api-reference/sdk-api',
-        {
-          type: 'link',
-          label: 'Provider API',
-          href: '/wallet/reference/provider-api',
-        },
-        {
-          type: 'link',
-          label: 'JSON-RPC API',
-          href: '/wallet/reference/json-rpc-methods',
-        },
+        'api-reference/sdk-api'
       ],
     }
   ],

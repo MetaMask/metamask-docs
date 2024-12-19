@@ -5,45 +5,23 @@ description: Network Management
 # Network Management
 
 This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. 
-
-<div style={{ 
-    display: 'flex', 
-    flexDirection: 'row', 
-    gap: '12px', 
-    marginBottom: '24px', 
-    overflow: 'hidden', 
-    overflowX: 'scroll', 
-    WebkitOverflowScrolling: 'touch',
-}}>
-    <img 
-        src={require("../_assets/quickstart-step-5.jpg").default} 
-        alt="Network Management - Step 5" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-6.jpg").default} 
-        alt="Network Management - Step 6" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-7.jpg").default} 
-        alt="Network Management - Step 7" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-    <img 
-        src={require("../_assets/quickstart-step-8.jpg").default} 
-        alt="Network Management - Step 8" 
-        style={{ flex: '1', maxWidth: '35%', border: '1px solid #DCDCDC' }} 
-    />
-</div>
-
-You'll learn how to:
-- **Detect the current network** and monitor network changes
-- **Switch between networks** programmatically
-- **Add new networks** to MetaMask
-- Handle common network-related errors
-
 We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.
+
+<div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+    <div style={{ flex: '3' }}>
+        <a href="https://example.com" target="_blank">
+            <img src={require("../_assets/network.gif").default} alt="Switch Networks" style={{border: '1px solid #DCDCDC', width: '100%'}} />
+        </a>
+    </div>
+    <div style={{ flex: '3' }}>
+        <ul>
+            <li><strong>Detect the current network</strong> and monitor network changes</li>
+            <li><strong>Switch between networks</strong> programmatically</li>
+            <li><strong>Add new networks</strong> to MetaMask</li>
+            <li><strong>Handle common network-related errors</strong></li>
+        </ul>
+    </div>
+</div>
 
 ### Using Wagmi
 
@@ -117,6 +95,12 @@ function NetworkWatcher() {
 ### Using Vanilla JavaScript
 
 For non-React applications, here's how to implement network management using vanilla JavaScript:
+
+:::info
+
+Check out the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+
+:::
 
 #### Initialize MetaMask SDK
 

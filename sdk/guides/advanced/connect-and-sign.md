@@ -15,6 +15,12 @@ This method combines the [`eth_requestAccounts`] and [`personal_sign`] RPC metho
 `connectAndSign` takes one parameter, the message string to be signed, and passes the message and
 the output of [`eth_requestAccounts`] directly to [`personal_sign`].
 
+:::info
+
+Check out the [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+
+:::
+
 This method enhances dapp user experience, especially on mobile platforms, by allowing users to
 connect to MetaMask and sign a message in a single interaction, requiring only one switch between
 the mobile dapp and MetaMask Mobile.

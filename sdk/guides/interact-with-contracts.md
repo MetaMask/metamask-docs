@@ -113,6 +113,12 @@ function MintNFT() {
 
 For non-React applications, here's how to implement contract interactions using vanilla JavaScript:
 
+:::info
+
+Check out the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+
+:::
+
 #### Initialize MetaMask SDK
 
 ```javascript
