@@ -151,6 +151,17 @@ const config = {
         }
       },
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "sdk",
+        path: "sdk",
+        routeBasePath: "sdk",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./sdk-sidebar.js"),
+        breadcrumbs: false,
+      },
+    ],
     "./src/plugins/plugin-json-rpc.ts",
     isProd
       ? [
@@ -181,6 +192,10 @@ const config = {
           {
             to: "wallet",
             label: "Wallet",
+          },
+          {
+            to: "sdk",
+            label: "SDK",
           },
           {
             to: "snaps",
@@ -247,6 +262,10 @@ const config = {
               {
                 label: "Wallet",
                 to: "/wallet",
+              },
+              {
+                label: "SDK",
+                to: "/sdk",
               },
               {
                 label: "Snaps",

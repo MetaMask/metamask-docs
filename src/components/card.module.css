@@ -21,3 +21,21 @@
   display: flex;
   flex-direction: column;
 }
+
+.cardBody {
+  flex: 1;
+  padding-left: var(--ifm-card-horizontal-spacing);
+  padding-right: var(--ifm-card-horizontal-spacing);
+}
+
+.ctaButton {
+  background-color: #1098fc;
+  border-radius: 0.3rem;
+  max-width: 12rem;
+  align-self: self-end;
+  margin: 1rem;
+}
+
+.ctaButton:hover {
+  background-color: #43aefc;
+}

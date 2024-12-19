@@ -1,36 +1,36 @@
 import React from "react";
+import clsx from "clsx";
 import Card, { type CardItem } from "@site/src/components/Card";
 import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
-    title: "📱 Integrate your dapp with the MetaMask wallet",
+    title: "Wallet",
+    subtitle: "Integrate with MetaMask Wallet",
     link: "/wallet",
     description: (
       <>
-        Integrate your dapp with MetaMask using MetaMask SDK and the Wallet API.
-        You can interact with your users&apos; EVM accounts from multiple dapp platforms.
+        Interact with your users&apos; via the MetaMask Wallet API.
       </>
     ),
   },
   {
-    title: "🛠️ Extend the functionality of MetaMask using Snaps",
+    title: "SDK",
+    subtitle: "Build on chain apps",
+    link: "/sdk",
+    description: (
+      <>
+        Authenticate users, handle transactions, interact with contracts, and more.
+      </>
+    ),
+  },
+  {
+    title: "Snaps",
+    subtitle: "Extend the functionality of MetaMask",
     link: "/snaps",
     description: (
       <>
-        Extend the functionality of MetaMask using Snaps. You can create a Snap
-        to add support for custom networks, account types, APIs, and more.
-      </>
-    ),
-  },
-  {
-    title: "📐 Build and scale your dapp using services",
-    link: "/services",
-    description: (
-      <>
-        Build and scale your dapp or Snap using services provided by MetaMask
-        and Infura. This includes APIs that optimize essential development
-        tasks.
+        Extend the functionality with custom networks, account types, APIs, and more.
       </>
     ),
   },
@@ -38,11 +38,13 @@ const CardList: CardItem[] = [
 
 export default function CardSection(): JSX.Element {
   return (
-    <section className="container margin-top--sm margin-bottom--lg">
-      <div className={styles.row}>
-        {CardList.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
+    <section >
+      <div className={clsx(styles.cardSection)}>
+        <div className={clsx(styles.row, "container padding-top--sm padding-bottom--lg")}>
+          {CardList.map((props, idx) => (
+            <Card key={idx} {...props} />
+          ))}
+        </div>
       </div>
     </section>
   );
