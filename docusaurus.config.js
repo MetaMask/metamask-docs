@@ -190,12 +190,12 @@ const config = {
         },
         items: [
           {
-            to: "wallet",
-            label: "Wallet",
-          },
-          {
             to: "sdk",
             label: "SDK",
+          },
+          {
+            to: "wallet",
+            label: "Wallet API",
           },
           {
             to: "snaps",
