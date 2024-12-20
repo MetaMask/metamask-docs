@@ -10,7 +10,7 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx(styles.introductionBlock, "margin-bottom--lg")}>
+    <header className={clsx(styles.introductionBlock)}>
       <div className="container">
         <Heading
           as="h1"
@@ -21,15 +21,8 @@ function HomepageHeader() {
         <p
           className={clsx("hero__subtitle", styles.subtitle, styles.forceColor)}
         >
-          Integrate with and extend upon the world&apos;s leading self-custodial
-          crypto wallet.
+          Build with the world&apos;s leading self-custodial crypto wallet.
         </p>
-        <Link
-          className={clsx(styles.homepageButton, "button button--lg")}
-          to="/wallet"
-        >
-          Get started
-        </Link>
       </div>
     </header>
   );
