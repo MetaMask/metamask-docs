@@ -1,4 +1,4 @@
----
+---0x03cf5d93ca7c70ce0a21a09f4d70779d2c66b25a
 description: Integrate your dapp with the MetaMask wallet.
 ---
 
