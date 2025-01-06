@@ -40,16 +40,21 @@ export default function Hero({
   const [isWalletLinking, setIsWalletLinking] = useState(false);
 
   const handleConnectWallet = () => {
-    setIsWalletLinking(true);
-    trackClickForSegment({
-      eventName: !isExtensionActive ? "Install MetaMask" : "Connect MetaMask",
-      clickType: "Hero",
-      userExperience: "B",
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    });
-    metaMaskWalletIdConnectHandler();
+    try {
+      setIsWalletLinking(true);
+      trackClickForSegment({
+        eventName: !isExtensionActive ? "Install MetaMask" : "Connect MetaMask",
+        clickType: "Hero",
+        userExperience: "B",
+        responseStatus: null,
+        responseMsg: null,
+        timestamp: Date.now(),
+      });
+      metaMaskWalletIdConnectHandler();
+    } catch (error) {
+      console.error("Wallet connection error:", error);
+      throw error;
+    }
   };
 
   const handleLinkWallet = () => {
@@ -92,7 +97,7 @@ export default function Hero({
         styles.hero,
         network === "linea" && styles.linea,
         network === "sepolia" && styles.sepolia,
-        className,
+        className
       )}
     >
       {!(isExtensionActive && metaMaskAccount) && <EthIcon />}
@@ -136,7 +141,7 @@ export default function Hero({
         )}
         <div
           className={clsx(
-            !!Object.keys(projects).length && styles.alignedButtons,
+            !!Object.keys(projects).length && styles.alignedButtons
           )}
         >
           {!isExtensionActive ? (
