@@ -9,8 +9,17 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## December 2024
+
+- Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
+- Documented [Snap Notifications Expanded View](/snaps/features/notifications/#expanded-view). 
+  ([#1774](https://github.com/MetaMask/metamask-docs/pull/1774))
+- Documented [`snap_getInterfaceContext`](/snaps/reference/snaps-api/#snap_getinterfacecontext).
+  ([#1772](https://github.com/MetaMask/metamask-docs/pull/1772))
+
 ## November 2024
 
+- Documented [updated error responses](/services/reference/ethereum/json-rpc-methods) when rate-limiting Infura JSON-RPC API calls. ([#1749](https://github.com/MetaMask/metamask-docs/pull/1749))
 - Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
 - Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
   ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))

@@ -20,7 +20,7 @@ For more information, see to the [Infura pricing page](https://www.infura.io/pri
 Infura allows you to enable multiple network endpoints and expansion APIs for your API key. If calls are
 made to a disabled network or service, then all requests to that network or service will fail.
 
-To keep your account secure and cost effective, add only the necessary endpoints, as some have usage
+To keep your account secure and cost-effective, add only the necessary endpoints, as some have usage
 limits or charges based on request volume.
 
 To create an API key:

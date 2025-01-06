@@ -90,7 +90,7 @@ class SomeModel(context: Context) {
 
   // To use your own node (for example, with Hardhat) to make read-only requests, specify your
   // node's chain ID and RPC URL using the readonlyRPCMap option in SDKOptions.
-  val readonlyRPCMap = mapOf("0x1" to "hptts://www.testrpc.com")
+  val readonlyRPCMap = mapOf("0x1" to "https://www.testrpc.com")
 
   // Use callbacks.
   val ethereum = Ethereum(context, dappMetadata, SDKOptions(infuraAPIKey, readonlyRPCMap))
@@ -124,7 +124,7 @@ class SomeModel(context: Context) {
 
   // To use your own node (for example, with Hardhat) to make read-only requests, specify your
   // node's chain ID and RPC URL using the readonlyRPCMap option in SDKOptions.
-  val readonlyRPCMap = mapOf("0x1" to "hptts://www.testrpc.com")
+  val readonlyRPCMap = mapOf("0x1" to "https://www.testrpc.com")
 
   // Use coroutines.
   val coroutineScope = rememberCoroutineScope()
@@ -197,8 +197,8 @@ class EthereumFlowViewModel @Inject constructor(
 ): ViewModel() {
 
   val ethereumFlow: Flow<EthereumState> get() = ethereum.ethereumState
-    
-  // Wrapper function to connect the dapp.  
+
+  // Wrapper function to connect the dapp.
   suspend fun connect(): Result {
     return ethereum.connect()
   }
