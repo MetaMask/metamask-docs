@@ -37,7 +37,10 @@ export default function Hero({
     walletAuthUrl,
   } = useContext(MetamaskProviderContext);
 
-  const isMobile = sdk.platformManager.isMobile()
+
+  // const isMobile = sdk.platformManager.isMobile;
+  const isMobile = true
+  console.log(sdk.platformManager)
   const isExtensionActive = sdk.isExtensionActive();
 
   const showInstallButton = !isExtensionActive && !isMobile;
@@ -54,6 +57,7 @@ export default function Hero({
       responseMsg: null,
       timestamp: Date.now(),
     });
+    console.log("gon trigg");
     metaMaskWalletIdConnectHandler();
   };
 
@@ -97,7 +101,7 @@ export default function Hero({
         styles.hero,
         network === "linea" && styles.linea,
         network === "sepolia" && styles.sepolia,
-        className,
+        className
       )}
     >
       {!(!showInstallButton && metaMaskAccount) && <EthIcon />}
@@ -141,7 +145,7 @@ export default function Hero({
         )}
         <div
           className={clsx(
-            !!Object.keys(projects).length && styles.alignedButtons,
+            !!Object.keys(projects).length && styles.alignedButtons
           )}
         >
           {showInstallButton ? (
