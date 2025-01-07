@@ -72,28 +72,28 @@ interface IMetamaskProviderContext {
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   token: undefined,
   projects: {},
-  setProjects: () => {},
-  metaMaskDisconnect: () => new Promise(() => {}),
-  metaMaskWalletIdConnectHandler: () => new Promise(() => {}),
+  setProjects: () => { },
+  metaMaskDisconnect: () => new Promise(() => { }),
+  metaMaskWalletIdConnectHandler: () => new Promise(() => { }),
   userId: undefined,
   metaMaskAccount: undefined,
   metaMaskAccountEns: undefined,
-  setMetaMaskAccount: () => {},
+  setMetaMaskAccount: () => { },
   uksTier: undefined,
   metaMaskProvider: undefined,
-  setMetaMaskProvider: () => {},
+  setMetaMaskProvider: () => { },
   sdk: undefined,
-  setNeedsMfa: () => {},
+  setNeedsMfa: () => { },
   needsMfa: false,
-  setWalletLinked: () => {},
+  setWalletLinked: () => { },
   walletLinked: undefined,
-  setWalletAuthUrl: () => {},
+  setWalletAuthUrl: () => { },
   walletAuthUrl: "",
   userAPIKey: "",
-  setUserAPIKey: () => {},
-  fetchLineaEns: () => new Promise(() => {}),
+  setUserAPIKey: () => { },
+  fetchLineaEns: () => new Promise(() => { }),
   userEncPublicKey: undefined,
-  setUserEncPublicKey: () => {},
+  setUserEncPublicKey: () => { },
 });
 
 const sdk = new MetaMaskSDK({
@@ -173,10 +173,11 @@ export const LoginProvider = ({ children }) => {
         const provider = sdk.getProvider();
         setMetaMaskProvider(provider);
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const metaMaskWalletIdConnectHandler = useCallback(async () => {
+    console.log("in metaMaskWalletIdConnectHandler");
     try {
       setOpenAuthModal(true);
     } catch (err) {

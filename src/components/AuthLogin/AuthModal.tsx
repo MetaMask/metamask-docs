@@ -161,15 +161,19 @@ const AuthModal = ({
   const { pathname } = location;
 
   const login = async () => {
+    console.log('in login')
     setStep(AUTH_LOGIN_STEP.CONNECTING);
     try {
-      if (!sdk.isExtensionActive()) {
-        setOpen(false);
-      }
+      // This will cause problems on mobile
+      // if (!sdk.isExtensionActive()) {
+      //   setOpen(false);
+      // }
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
+      console.log({ accounts })
 
+      console.log('before accounts if')
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0]);
         fetchLineaEns(accounts[0]);
@@ -177,13 +181,20 @@ const AuthModal = ({
         setMetaMaskProvider(provider);
       }
 
+      console.log('before get customProvider')
       const customProvider = sdk.getProvider()
+      console.log('customProvider', customProvider)
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
+      console.log('before authenticateAndAuthorize')
       const { accessToken, userProfile } = await authenticateAndAuthorize(
         VERCEL_ENV as string,
         customProvider,
       );
+      console.log('accessToken', accessToken)
+      console.log('userProfile', userProfile)
+
+      console.log("before loginResponse")
 
       const loginResponse = await (
         await fetch(
@@ -200,6 +211,8 @@ const AuthModal = ({
           },
         )
       ).json();
+
+      console.log('loginResponse', loginResponse)
 
       if (!loginResponse) throw new Error("Something went wrong");
 
@@ -310,7 +323,12 @@ const AuthModal = ({
     }
   };
 
+  console.log('just before use effect')
+
   useEffect(() => {
+    console.log('in use effect')
+    console.log('open', open)
+    console.log('step', step)
     if (open && step == AUTH_LOGIN_STEP.CONNECTING) {
       (async () => {
         try {
