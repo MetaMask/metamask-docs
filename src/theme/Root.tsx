@@ -105,7 +105,7 @@ const sdk = new MetaMaskSDK({
   extensionOnly: true,
   checkInstallationImmediately: false,
   logging: {
-    sdk: false,
+    sdk: true,
   },
 });
 
