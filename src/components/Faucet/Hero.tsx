@@ -36,13 +36,18 @@ export default function Hero({
     projects,
     walletAuthUrl,
   } = useContext(MetamaskProviderContext);
+
+  const isMobile = sdk.platformManager.isMobile()
   const isExtensionActive = sdk.isExtensionActive();
+
+  const showInstallButton = !isExtensionActive && !isMobile;
+
   const [isWalletLinking, setIsWalletLinking] = useState(false);
 
   const handleConnectWallet = () => {
     setIsWalletLinking(true);
     trackClickForSegment({
-      eventName: !isExtensionActive ? "Install MetaMask" : "Connect MetaMask",
+      eventName: showInstallButton ? "Install MetaMask" : "Connect MetaMask",
       clickType: "Hero",
       userExperience: "B",
       responseStatus: null,
@@ -95,7 +100,7 @@ export default function Hero({
         className,
       )}
     >
-      {!(isExtensionActive && metaMaskAccount) && <EthIcon />}
+      {!(!showInstallButton && metaMaskAccount) && <EthIcon />}
       <Text as="h1">
         <span>
           {network === "linea" && "Linea Sepolia"}
@@ -104,7 +109,7 @@ export default function Hero({
         </span>
       </Text>
       <Text as="p">
-        {!isExtensionActive
+        {showInstallButton
           ? "Install MetaMask for your browser to get started and request ETH."
           : !Object.keys(projects).length
             ? walletLinked === undefined
@@ -139,7 +144,7 @@ export default function Hero({
             !!Object.keys(projects).length && styles.alignedButtons,
           )}
         >
-          {!isExtensionActive ? (
+          {showInstallButton ? (
             <Button
               testId="hero-cta-install-metamask"
               className={styles.button}
