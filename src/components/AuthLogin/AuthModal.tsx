@@ -189,7 +189,8 @@ const AuthModal = ({
       console.log('before authenticateAndAuthorize')
       const { accessToken, userProfile } = await authenticateAndAuthorize(
         VERCEL_ENV as string,
-        customProvider,
+        // @ts-ignore
+        window.ethereum,
       );
       console.log('accessToken', accessToken)
       console.log('userProfile', userProfile)
