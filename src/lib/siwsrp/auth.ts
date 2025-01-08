@@ -1,4 +1,5 @@
 import { SDK } from "@metamask/profile-sync-controller";
+import { SDKProvider } from "@metamask/sdk";
 import jwt from "jsonwebtoken";
 
 type HydraEnv = {
@@ -9,11 +10,11 @@ type HydraEnv = {
   platform: SDK.Platform;
 };
 
-const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK
-export const AUTH_WALLET_PAIRING = 'auth.wallet.pairing'
-export const AUTH_WALLET_SESSION_NAME = 'auth.wallet.session'
-export const AUTH_WALLET_TOKEN = 'auth.wallet.token'
-export const AUTH_WALLET_PROJECTS = 'auth.wallet.projects'
+const { AuthType, Env, getEnvUrls, JwtBearerAuth, Platform } = SDK;
+export const AUTH_WALLET_PAIRING = "auth.wallet.pairing";
+export const AUTH_WALLET_SESSION_NAME = "auth.wallet.session";
+export const AUTH_WALLET_TOKEN = "auth.wallet.token";
+export const AUTH_WALLET_PROJECTS = "auth.wallet.projects";
 export const AUTH_WALLET_USER_PLAN = "auth.wallet.uksTier";
 export const AUTH_WALLET_ENS = "auth.wallet.ens";
 
@@ -24,7 +25,6 @@ export const getWalletEns = () => {
 export const getUksTier = (): string => {
   return sessionStorage.getItem(AUTH_WALLET_USER_PLAN);
 };
-
 
 const getHydraEnv = (env: string): HydraEnv => {
   const platform = Platform.INFURA;
@@ -66,12 +66,38 @@ const auth = (env: string) =>
     }
   );
 
-export const authenticateAndAuthorize = async (env: string) => {
+export const authenticateAndAuthorize = async (
+  env: string,
+  customProvider: SDKProvider
+) => {
   let accessToken: string, userProfile: SDK.UserProfile;
   try {
-    await auth(env).connectSnap();
-    accessToken = await auth(env).getAccessToken();
-    userProfile = await auth(env).getUserProfile();
+    const authInstance = auth(env);
+
+    console.log("about to set customProvider");
+    authInstance.setCustomProvider(customProvider);
+    console.log("after setting customProvider");
+
+    console.log('about to get eth_accounts')
+    const ethAccounts = await customProvider.request({
+      method: "eth_accounts",
+      params: [],
+    });
+    console.log('after get eth_accounts')
+    console.log(ethAccounts)
+
+    console.log('about to get snaps')
+    // @ts-ignore
+    const walletsnaps = await window.ethereum.request({
+      method: "wallet_getSnaps",
+    });
+    console.log(walletsnaps);
+
+    console.log("about to connectSnap");
+    await authInstance.connectSnap();
+    console.log("after connectSnap");
+    accessToken = await authInstance.getAccessToken();
+    userProfile = await authInstance.getUserProfile();
   } catch (e: any) {
     throw new Error(e.message);
   }
@@ -87,8 +113,8 @@ export const saveTokenString = (token: string) => {
 };
 
 export const getTokenString = (): string => {
-  return sessionStorage.getItem(AUTH_WALLET_TOKEN)
-}
+  return sessionStorage.getItem(AUTH_WALLET_TOKEN);
+};
 
 export const getUserIdFromJwtToken = () => {
   const token = sessionStorage.getItem(AUTH_WALLET_TOKEN);

@@ -5,7 +5,7 @@
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start -p 3003",
+    "start": "docusaurus start -p 3003 --host 0.0.0.0",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -39,7 +39,7 @@
     "@mdx-js/react": "^3.0.0",
     "@metamask/design-tokens": "^1.11.1",
     "@metamask/eth-sig-util": "^7.0.3",
-    "@metamask/profile-sync-controller": "^0.9.6",
+    "@metamask/profile-sync-controller": "npm:@metamask-previews/profile-sync-controller@3.1.1-preview-cdca062",
     "@metamask/sdk": "^0.31.1",
     "@rjsf/core": "^5.22.1",
     "@rjsf/utils": "^5.18.4",
