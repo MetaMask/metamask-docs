@@ -1,0 +1,260 @@
+---
+title: "eth_simulateV1"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Simulate transactions across multiple blocks. Allows you to test transactions with custom state and
+block parameters without submitting them to the network.
+
+:::info important
+This method is only supported on Mainnet and Sepolia.
+
+A maximum of 16 block state calls can be simulated in a single request. This is determined by
+assessing the `blockStateCalls` array of objects.
+:::
+
+## Parameters
+
+- `BLOCK STATE CALL OBJECT`:
+    - `blockStateCalls`: _\[required]_ Array of block, state, and call objects:
+        - `blockOverrides`:  _\[optional]_ Object to override block parameters:
+            - `baseFeePerGas`:  (string) Hexadecimal value for the base fee per gas for the block.
+            - `blobBaseFee`: (string) Hexadecimal value for the base fee per unit of blob gas.
+            - `feeRecipient`: (string) Address of the fee recipient for the block proposal.
+            - `gasLimit`: (string) Hexadecimal value that represents the maximum amount of gas that transactions
+                 are allowed to consume.
+            - `number`: (string) Hexadecimal block number.
+            - `prevRandao` (string) The previous value of randomness, which is
+                 used as a source of randomness for various protocol operations.
+            - `time`: (string) Hexadecimal value representing the Unix epoch time in seconds.
+        - `stateOverrides`: _\[optional]_ Object to override account states:
+            - `balance`: (string) Hexadecimal value representing the account balance.
+            - `nonce`: (string) Hexadecimal temporary nonce value for the call execution.
+            - `code`: (string) Bytecode to inject into the account.
+            - `state`: Object of key-value mappings to override all slots in the account storage
+                before executing the call.
+            - `stateDiff`: Object of key-value mappings to override individual slots in the account
+                storage before executing the call.
+            - `movePrecompileToAddress` (string) Moves the precompile to the supplied address.
+        - `calls`: _\[required]_ Array of transaction call objects:
+            - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
+            - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
+            - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution.
+            - `gasPrice`: _\[optional]_ Hexadecimal value of the gas price used for each paid gas.
+            - `maxPriorityFeePerGas`: _\[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+            - `maxFeePerGas`: _\[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
+            - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
+            - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
+                [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+        - `returnFullTransactionObjects`: _\[optional]_ Boolean value which when `true`, returns full transaction
+            objects, otherwise, just hashes are returned. The default is `false`.
+        - `traceTransfers`:  _\[optional]_ Boolean value which when `true`, adds ETH transfers as ERC20 transfer
+            events to the logs, allowing you to trace value transfers. The default is `false`.
+        - `validation`: _\[optional]_ Boolean value which when `true`, does all the validation that a
+            normal EVM would do, except contract sender and signature checks. When false, `eth_simulateV1` behaves like `eth_call`.
+            The default is `false`.
+    - `blockParameter`: (string) [_optional_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+
+## Returns
+
+An array of simulation result objects:
+
+- `baseFeePerGas`: Hexadecimal value for the base fee per gas for the block.
+- `blobGasUsed`: Hexadecimal value for the amount of blob gas used.
+- `calls`: Array of call results:
+    - `returnData`: Data returned for the call.
+    - `logs`: Array of logs generated during the call.
+        - `address`: Address of the contract that generated the log.
+        - `blockHash`: Hash of the block.
+        - `blockNumber`: Hexadecimal block number.
+        - `data`: Non-indexed log parameters.
+        - `logIndex`: Index of the log in the block.
+        - `removed`: Whether the log was removed due to chain reorganization.
+        - `topics`: Array of indexed log parameters.
+        - `transactionHash`: Hash of the transaction.
+        - `transactionIndex`: Index of the transaction in the block.
+    - `error`: Object containing error information:
+        - `message`: The error message.
+        - `code`: The error status code.
+        - `data`: Error-related information.
+    - `gasUsed`: Hexadecimal value representing the amount of gas used.
+    - `status`: Status indicating whether the transaction succeeded (`0x1`). `0x0` indicates that a transaction has failed.
+- `difficulty`: A hexadecimal of the difficulty for this block.
+- `excessBlobGas`: A hexadecimal of the excess blob gas.
+- `extraData`: The "extra data" field of this block.
+- `gasLimit`: Maximum gas allowed in this block.
+- `gasUsed`: Total used gas by all transactions in this block.
+- `hash`: Hash of the block. `Null` when the returned block is the pending block.
+- `logsBloom`: The bloom filter for the logs of the block. `Null` when the returned block is the pending block.
+- `miner`: Address of the beneficiary to whom the mining rewards were given.
+- `mixHash`: Hexadecimal mix hash.
+- `nonce`: Hash of the generated proof-of-work. `Null` when the returned block is the pending block.
+- `number`: Block number. `Null` when the returned block is the pending block.
+- `parentBeaconBlockRoot`: Parent beacon block root.
+- `parentHash`: Hash of the parent block.
+- `receiptsRoot`: The root of the receipts trie of the block. Also see [Tries in Ethereum](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/#tries-in-ethereum).
+- `sha3Uncles`: The SHA3 of the uncles data in the block.
+- `size`: A hexadecimal of the size of this block in bytes.
+- `stateRoot`: The root of the final state trie of the block.
+- `timestamp`: The unix timestamp for when the block was collated.
+- `totalDifficulty`: A hexadecimal of the total difficulty of the chain until this block.
+- `transactions`: [Array] An array of transaction objects, or 32 bytes transaction hashes depending on the last given parameter.
+- `transactionsRoot`: The root of the transaction trie of the block.
+- `uncles`: [Array] An array of uncle hashes.
+- `withdrawals`: [Array] Withdrawal objects.
+- `withdrawalsRoot`: Withdrawals trie root.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "eth_simulateV1",
+      "params": [
+          {
+              "blockStateCalls": [
+                  {
+                      "blockOverrides": {
+                          "baseFeePerGas": "0x9"
+                      },
+                      "stateOverrides": {
+                          "0xc000000000000000000000000000000000000000": {
+                              "balance": "0x4a817c800"
+                          }
+                      },
+                      "calls": [
+                          {
+                              "from": "0xc000000000000000000000000000000000000000",
+                              "to": "0xc000000000000000000000000000000000000001",
+                              "maxFeePerGas": "0xf",
+                              "value": "0x1"
+                          },
+                          {
+                              "from": "0xc000000000000000000000000000000000000000",
+                              "to": "0xc000000000000000000000000000000000000002",
+                              "maxFeePerGas": "0xf",
+                              "value": "0x1"
+                          }
+                      ]
+                  }
+              ],
+              "validation": true,
+              "traceTransfers": true
+          },
+          "latest"
+      ]
+  }'
+  ```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+  ```bash
+  wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","id":1,"method":"eth_simulateV1","params":[{"blockStateCalls":[{"blockOverrides":{"baseFeePerGas":"0x9"},"stateOverrides":{"0xc000000000000000000000000000000000000000":{"balance":"0x4a817c800"}},"calls":[{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000001","maxFeePerGas":"0xf","value":"0x1"},{"from":"0xc000000000000000000000000000000000000000","to":"0xc000000000000000000000000000000000000002","maxFeePerGas":"0xf","value":"0x1"}]}],"validation":true,"traceTransfers":true},"latest"]}'
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+```JSON
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "baseFeePerGas": "0x9",
+      "blobGasUsed": "0x0",
+      "calls": [
+        {
+          "gasUsed": "0x5208",
+          "logs": [
+            {
+              "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "blockHash": "0xc98388385b0dbfc15ad5c6a0f4b19f7abd94efb4618ced05e3eb320ee30b1e7f",
+              "blockNumber": "0x1496e50",
+              "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+              "logIndex": "0x0",
+              "removed": false,
+              "topics": [
+                "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "0x000000000000000000000000c000000000000000000000000000000000000000",
+                "0x000000000000000000000000c000000000000000000000000000000000000001"
+              ],
+              "transactionHash": "0xe7217784e0c3f7b35d39303b1165046e9b7e8af9b9cf80d5d5f96c3163de8f51",
+              "transactionIndex": "0x0"
+            }
+          ],
+          "returnData": "0x",
+          "status": "0x1"
+        },
+        {
+          "gasUsed": "0x5208",
+          "logs": [
+            {
+              "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "blockHash": "0xc98388385b0dbfc15ad5c6a0f4b19f7abd94efb4618ced05e3eb320ee30b1e7f",
+              "blockNumber": "0x1496e50",
+              "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+              "logIndex": "0x1",
+              "removed": false,
+              "topics": [
+                "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+                "0x000000000000000000000000c000000000000000000000000000000000000000",
+                "0x000000000000000000000000c000000000000000000000000000000000000002"
+              ],
+              "transactionHash": "0xf0182201606ec03701ba3a07d965fabdb4b7d06b424f226ea7ec3581802fc6fa",
+              "transactionIndex": "0x1"
+            }
+          ],
+          "returnData": "0x",
+          "status": "0x1"
+        }
+      ],
+      "difficulty": "0x0",
+      "excessBlobGas": "0x4920000",
+      "extraData": "0x",
+      "gasLimit": "0x1c9c380",
+      "gasUsed": "0xa410",
+      "hash": "0xc98388385b0dbfc15ad5c6a0f4b19f7abd94efb4618ced05e3eb320ee30b1e7f",
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "miner": "0x7e2a2fa2a064f693f0a55c5639476d913ff12d05",
+      "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "nonce": "0x0000000000000000",
+      "number": "0x1496e50",
+      "parentBeaconBlockRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "parentHash": "0xddd47e7383c8ced495e85e053f898d7a333feb0432fa9098306f6f563cde4984",
+      "receiptsRoot": "0x75308898d571eafb5cd8cde8278bf5b3d13c5f6ec074926de3bb895b519264e1",
+      "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+      "size": "0x29c",
+      "stateRoot": "0xd6da11fae4ab94ddba2c4c71206962f7c6eaec6e5fabf00f3f7540c4ed7ad8f1",
+      "timestamp": "0x67803e64",
+      "transactions": [
+        "0xe7217784e0c3f7b35d39303b1165046e9b7e8af9b9cf80d5d5f96c3163de8f51",
+        "0xf0182201606ec03701ba3a07d965fabdb4b7d06b424f226ea7ec3581802fc6fa"
+      ],
+      "transactionsRoot": "0x9bdb74f3ce41f5893a02a631e904ae0d21ae8c4e416786d8dbd9cb5c54f1dc0f",
+      "uncles": [],
+      "withdrawals": [],
+      "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+    }
+```
+  </TabItem>
+</Tabs>

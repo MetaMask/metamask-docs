@@ -78,6 +78,7 @@ a specific network, then use the default Ethereum method's credit cost.
 | `eth_protocolVersion`                     | 5           |
 | `eth_sendRawTransaction`                  | 80          |
 | `eth_sign`                                | 80          |
+| `eth_simulateV1                           | 300         |
 | `eth_submitWork`                          | 80          |
 | `eth_subscribe`                           | 5           |
 | `eth_syncing`                             | 5           |
