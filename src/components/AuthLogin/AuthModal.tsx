@@ -14,9 +14,7 @@ import {
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_USER_PLAN,
 } from "@site/src/lib/siwsrp/auth";
-import {
-  REQUEST_PARAMS,
-} from "@site/src/lib/constants";
+import { REQUEST_PARAMS } from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -39,7 +37,7 @@ export enum AUTH_LOGIN_STEP {
 export enum WALLET_LINK_TYPE {
   NO = "NO",
   ONE = "ONE",
-  MULTIPLE = "MULTIPLE"
+  MULTIPLE = "MULTIPLE",
 }
 
 const ConnectingModal = () => {
@@ -161,7 +159,7 @@ const AuthModal = ({
   const { pathname } = location;
 
   const login = async () => {
-    console.log('in login')
+    console.log("in login");
     setStep(AUTH_LOGIN_STEP.CONNECTING);
     try {
       // This will cause problems on mobile
@@ -171,9 +169,9 @@ const AuthModal = ({
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
-      console.log({ accounts })
+      console.log({ accounts });
 
-      console.log('before accounts if')
+      console.log("before accounts if");
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0]);
         fetchLineaEns(accounts[0]);
@@ -181,39 +179,57 @@ const AuthModal = ({
         setMetaMaskProvider(provider);
       }
 
-      console.log('before get customProvider')
-      const customProvider = sdk.getProvider()
-      console.log('customProvider', customProvider)
+      console.log("before get customProvider");
+      const customProvider = sdk.getProvider();
+      console.log("customProvider", customProvider);
+
+      console.log("CUSTOM TEST -----------");
+
+      // console.log("GETTING WALLET ACCOUNTS");
+      // console.log(
+      //   await customProvider.request({ method: "eth_accounts", params: [] })
+      // );
+      // console.log("GETTING WALLET ACCOUNTS DONE");
+
+      // console.log("GETTING SNAPS");
+      // try {
+      //   const res = await customProvider.request({
+      //     method: "wallet_getSnaps",
+      //   });
+      // } catch (e) {
+      //   console.error("GETTING SNAPS FAILED", e, e.message);
+      // }
+      // console.log("GETTING SNAPS DONE");
+
+      console.log("CUSTOM TEST END -----------");
+
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
-      console.log('before authenticateAndAuthorize')
+      console.log("before authenticateAndAuthorize");
       const { accessToken, userProfile } = await authenticateAndAuthorize(
         VERCEL_ENV as string,
         // @ts-ignore
-        window.ethereum,
+        window.ethereum
       );
-      console.log('accessToken', accessToken)
-      console.log('userProfile', userProfile)
+      console.log("accessToken", accessToken);
+      console.log("userProfile", userProfile);
 
-      console.log("before loginResponse")
+      console.log("before loginResponse");
 
       const loginResponse = await (
-        await fetch(
-          `${DASHBOARD_URL}/api/wallet/login`,
-          {
-            ...REQUEST_PARAMS("POST", {
-              hydra_token: accessToken,
-              token: "true",
-            }),
-            body: JSON.stringify({
-              profileId: userProfile.profileId,
-              redirect_to: window.location.href,
-            }),
-          },
-        )
+        await fetch(`${DASHBOARD_URL}/api/wallet/login`, {
+          ...REQUEST_PARAMS("POST", {
+            hydra_token: accessToken,
+            token: "true",
+          }),
+          body: JSON.stringify({
+            profileId: userProfile.profileId,
+            redirect_to: window.location.href,
+          }),
+        })
       ).json();
 
-      console.log('loginResponse', loginResponse)
+      console.log("loginResponse", loginResponse);
 
       if (!loginResponse) throw new Error("Something went wrong");
 
@@ -228,7 +244,7 @@ const AuthModal = ({
             mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
-          }),
+          })
         ).toString("base64");
 
         const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -251,10 +267,10 @@ const AuthModal = ({
       if (data.mfa?.enabled) {
         const mm_auth = Buffer.from(
           JSON.stringify({
-            step: 'verify',
+            step: "verify",
             mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
-            dashboardSessionToken: token
-          }),
+            dashboardSessionToken: token,
+          })
         ).toString("base64");
 
         const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -289,7 +305,7 @@ const AuthModal = ({
         `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        },
+        }
       );
       const {
         result: { projects },
@@ -301,7 +317,7 @@ const AuthModal = ({
         `${DASHBOARD_URL}/api/v1/users/${userId}`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        },
+        }
       );
       const {
         result: {
@@ -324,12 +340,12 @@ const AuthModal = ({
     }
   };
 
-  console.log('just before use effect')
+  console.log("just before use effect");
 
   useEffect(() => {
-    console.log('in use effect')
-    console.log('open', open)
-    console.log('step', step)
+    console.log("in use effect");
+    console.log("open", open);
+    console.log("step", step);
     if (open && step == AUTH_LOGIN_STEP.CONNECTING) {
       (async () => {
         try {
