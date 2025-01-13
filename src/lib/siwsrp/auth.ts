@@ -1,4 +1,5 @@
 import { SDK } from "@metamask/profile-sync-controller";
+import { SDKProvider } from "@metamask/sdk";
 import jwt from "jsonwebtoken";
 
 type HydraEnv = {
@@ -66,12 +67,18 @@ const auth = (env: string) =>
     }
   );
 
-export const authenticateAndAuthorize = async (env: string) => {
+export const authenticateAndAuthorize = async (env: string, customProvider: SDKProvider) => {
   let accessToken: string, userProfile: SDK.UserProfile;
   try {
-    await auth(env).connectSnap();
-    accessToken = await auth(env).getAccessToken();
-    userProfile = await auth(env).getUserProfile();
+    const authInstance = auth(env);
+    console.log("authInstance", authInstance);
+    console.log("customProvider", customProvider);
+    authInstance.setCustomProvider(customProvider);
+    console.log('about to connectSnap')
+    await authInstance.connectSnap();
+    console.log('after connectSnap')
+    accessToken = await authInstance.getAccessToken();
+    userProfile = await authInstance.getUserProfile();
   } catch (e: any) {
     throw new Error(e.message);
   }
