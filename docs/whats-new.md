@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## January 2025
+
+- Documented Infura support for the [`eth_simulateV1`] method. ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
+
 ## December 2024
 
 - Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
