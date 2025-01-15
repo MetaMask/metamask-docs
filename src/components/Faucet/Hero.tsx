@@ -9,6 +9,7 @@ import { MetamaskProviderContext } from '@site/src/theme/Root'
 import EthIcon from './eth.svg'
 import styles from './hero.module.scss'
 import { useColorMode } from '@docusaurus/theme-common'
+import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 
 interface IHero {
   className: string
@@ -87,102 +88,79 @@ export default function Hero({
   }, [walletLinked])
 
   return (
-    <div
-      className={clsx(
-        styles.hero,
-        network === 'linea' && styles.linea,
-        network === 'sepolia' && styles.sepolia,
-        className
-      )}>
-      {!(isExtensionActive && metaMaskAccount) && <EthIcon />}
-      <Text as="h1">
-        <span>
-          {network === 'linea' && 'Linea Sepolia'}
-          {network === 'sepolia' && 'Sepolia'} ETH delivered straight to your wallet.
-        </span>
-      </Text>
-      <Text as="p" className="description">
-        {!isExtensionActive
-          ? 'Install MetaMask for your browser to get started and request ETH.'
-          : !Object.keys(projects).length
-            ? walletLinked === undefined
-              ? 'Connect your MetaMask wallet to get started and request ETH.'
-              : walletLinked === WALLET_LINK_TYPE.NO
-                ? 'Link your Infura account to get started and request ETH.'
-                : 'Select your Infura account to get started and request ETH.'
-            : 'Enter your MetaMask wallet address and request ETH.'}
-      </Text>
-      <div className={styles.actions}>
-        {!!Object.keys(projects).length && isExtensionActive && (
-          <div className={styles.inputCont}>
-            <div className={styles.inputWrapper}>
-              <Input
-                label="Wallet address"
-                disabled={isLoading}
-                value={inputValue}
-                placeholder="ex. 0x or ENS"
-                onChange={handleOnInputChange}
-              />
-              <div className={clsx(!!Object.keys(projects).length && styles.alignedButtons)}>
-                <Button
-                  as="button"
-                  data-test-id="hero-cta-request-eth"
-                  disabled={!inputValue || isLoading}
-                  type={'primary'}
-                  onClick={handleRequestEth}
-                  icon={'arrow-right'}
-                  label={'Request ETH'}
-                  style={
-                    colorMode !== 'dark'
-                      ? {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
-                      : {}
-                  }
-                />
+    <div className={styles.heroWrapper}>
+      <CutOffCorners size={'l'}>
+        <div
+          className={clsx(
+            styles.hero,
+            network === 'linea' && styles.linea,
+            network === 'sepolia' && styles.sepolia,
+            className
+          )}>
+          {/* {!(isExtensionActive && metaMaskAccount) && <EthIcon className={styles.ethIcon} />} */}
+          <Text as="h1">
+            <span>
+              {network === 'linea' && 'Linea Sepolia'}
+              {network === 'sepolia' && 'Sepolia'} ETH delivered straight to your wallet
+            </span>
+          </Text>
+          <Text as="p" className="description">
+            {!isExtensionActive
+              ? 'Install MetaMask for your browser to get started and request ETH.'
+              : !Object.keys(projects).length
+                ? walletLinked === undefined
+                  ? 'Connect your MetaMask wallet to get started and request ETH.'
+                  : walletLinked === WALLET_LINK_TYPE.NO
+                    ? 'Link your Infura account to get started and request ETH.'
+                    : 'Select your Infura account to get started and request ETH.'
+                : 'Enter your MetaMask wallet address and request ETH.'}
+          </Text>
+          <div className={styles.actions}>
+            {!!Object.keys(projects).length && isExtensionActive && (
+              <div className={styles.inputCont}>
+                <div className={styles.inputWrapper}>
+                  <Input
+                    label="Wallet address"
+                    disabled={isLoading}
+                    value={inputValue}
+                    placeholder="ex. 0x or ENS"
+                    onChange={handleOnInputChange}
+                  />
+                  <div className={clsx(!!Object.keys(projects).length && styles.alignedButtons)}>
+                    <Button
+                      as="button"
+                      data-test-id="hero-cta-request-eth"
+                      disabled={!inputValue || isLoading}
+                      type={'primary'}
+                      onClick={handleRequestEth}
+                      icon={'arrow-right'}
+                      label={'Request ETH'}
+                      style={
+                        colorMode !== 'dark'
+                          ? {
+                              '--button-color-hover': 'var(--general-black)',
+                              '--button-text-color-hover': 'var(--general-white)',
+                            }
+                          : {}
+                      }
+                    />
+                  </div>
+                </div>
+                {isLimitedUserPlan && (
+                  <p className={styles.caption}>
+                    The amount of {network === 'linea' && 'Linea Sepolia'}
+                    {network === 'sepolia' && 'Sepolia'} ETH you'll get is determined by your
+                    address's Ethereum Mainnet activity to ensure fair and bot-free distribution.
+                  </p>
+                )}
               </div>
-            </div>
-            {isLimitedUserPlan && (
-              <p className={styles.caption}>
-                The amount of {network === 'linea' && 'Linea Sepolia'}
-                {network === 'sepolia' && 'Sepolia'} ETH you'll get is determined by your address's
-                Ethereum Mainnet activity to ensure fair and bot-free distribution.
-              </p>
             )}
-          </div>
-        )}
-        <div>
-          {!isExtensionActive ? (
-            <Button
-              as="button"
-              data-test-id="hero-cta-install-metamask"
-              label={'Install MetaMask'}
-              style={
-                colorMode === 'dark'
-                  ? {
-                      '--button-color': 'var(--consumer-orange)',
-                      '--button-text-color': 'var(--general-black)',
-                      '--button-color-hover': 'var(--general-white)',
-                      '--button-text-color-hover': 'var(--general-black)',
-                    }
-                  : {
-                      '--button-color': 'var(--consumer-orange)',
-                      '--button-text-color': 'var(--general-black)',
-                      '--button-color-hover': 'var(--general-black)',
-                      '--button-text-color-hover': 'var(--general-white)',
-                    }
-              }
-              onClick={handleConnectWallet}
-            />
-          ) : !Object.keys(projects).length ? (
-            <>
-              {walletLinked === undefined && (
+            <div className={styles.btnWrapper}>
+              {!isExtensionActive ? (
                 <Button
                   as="button"
-                  data-test-id="hero-cta-connect-metamask"
-                  onClick={handleConnectWallet}
-                  label={'Connect MetaMask'}
+                  data-test-id="hero-cta-install-metamask"
+                  label={'Install MetaMask'}
                   style={
                     colorMode === 'dark'
                       ? {
@@ -198,48 +176,75 @@ export default function Hero({
                           '--button-text-color-hover': 'var(--general-white)',
                         }
                   }
+                  onClick={handleConnectWallet}
                 />
-              )}
-              {walletLinked === WALLET_LINK_TYPE.NO && (
-                <Button
-                  as="button"
-                  data-test-id="hero-cta-link-infura-account"
-                  onClick={handleLinkWallet}
-                  isLoading={isWalletLinking}
-                  icon={'arrow-right'}
-                  label={'Link Infura Account'}
-                  style={
-                    colorMode !== 'dark'
-                      ? {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
-                      : {}
-                  }
-                />
-              )}
-              {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
-                <Button
-                  as="button"
-                  data-test-id="hero-cta-select-infura-account"
-                  onClick={handleLinkWallet}
-                  isLoading={isWalletLinking}
-                  icon={'arrow-right'}
-                  label={'Select Infura Account'}
-                  style={
-                    colorMode !== 'dark'
-                      ? {
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
-                      : {}
-                  }
-                />
-              )}
-            </>
-          ) : null}
+              ) : !Object.keys(projects).length ? (
+                <>
+                  {walletLinked === undefined && (
+                    <Button
+                      as="button"
+                      data-test-id="hero-cta-connect-metamask"
+                      onClick={handleConnectWallet}
+                      label={'Connect MetaMask'}
+                      style={
+                        colorMode === 'dark'
+                          ? {
+                              '--button-color': 'var(--consumer-orange)',
+                              '--button-text-color': 'var(--general-black)',
+                              '--button-color-hover': 'var(--general-white)',
+                              '--button-text-color-hover': 'var(--general-black)',
+                            }
+                          : {
+                              '--button-color': 'var(--consumer-orange)',
+                              '--button-text-color': 'var(--general-black)',
+                              '--button-color-hover': 'var(--general-black)',
+                              '--button-text-color-hover': 'var(--general-white)',
+                            }
+                      }
+                    />
+                  )}
+                  {walletLinked === WALLET_LINK_TYPE.NO && (
+                    <Button
+                      as="button"
+                      data-test-id="hero-cta-link-infura-account"
+                      onClick={handleLinkWallet}
+                      isLoading={isWalletLinking}
+                      icon={'arrow-right'}
+                      label={'Link Infura Account'}
+                      style={
+                        colorMode !== 'dark'
+                          ? {
+                              '--button-color-hover': 'var(--general-black)',
+                              '--button-text-color-hover': 'var(--general-white)',
+                            }
+                          : {}
+                      }
+                    />
+                  )}
+                  {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
+                    <Button
+                      as="button"
+                      data-test-id="hero-cta-select-infura-account"
+                      onClick={handleLinkWallet}
+                      isLoading={isWalletLinking}
+                      icon={'arrow-right'}
+                      label={'Select Infura Account'}
+                      style={
+                        colorMode !== 'dark'
+                          ? {
+                              '--button-color-hover': 'var(--general-black)',
+                              '--button-text-color-hover': 'var(--general-white)',
+                            }
+                          : {}
+                      }
+                    />
+                  )}
+                </>
+              ) : null}
+            </div>
+          </div>
         </div>
-      </div>
+      </CutOffCorners>
     </div>
   )
 }
