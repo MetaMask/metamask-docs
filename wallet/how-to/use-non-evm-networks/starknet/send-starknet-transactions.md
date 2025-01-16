@@ -162,7 +162,8 @@ The following is a full, simplified example of connecting to a Starknet account 
       if (maxFee) {
         requestParams.details = {
           maxFee
-        }; // Include maxFee only if it's provided.
+        }; 
+      } 
       const response = await provider.request({ // Or window.ethereum if you don't support EIP-6963.
         method: "wallet_invokeSnap",
         params: {
@@ -183,11 +184,13 @@ The following is a full, simplified example of connecting to a Starknet account 
   };
 
   // Example usage.
-  const calls = [
-    "entrypoint": "transfer",
-    "calldata": ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"],
-    "contractAddress": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
-  ]
+const calls = [
+    { 
+      "entrypoint": "transfer",
+      "calldata": ["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "1000"],
+      "contractAddress": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"
+    }
+];
   const address = "0xb60e8dd61c5d32be8058bb8eb970870f07233155";
   const maxFee = "1000000000000000"; // Optional.
 
