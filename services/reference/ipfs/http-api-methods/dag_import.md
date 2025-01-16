@@ -43,9 +43,9 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=true&silent=<value
 #### Request parameters
 
 - `file` : _string_ - path to the `.car` file.
-- `pin-roots:` _boolean_ - pin the root listed in the .car headers after importing. The default is `true`. Only one DAG root can be pinned per request.
-- `silent` : _boolean -_ no output.
-- `stats`: _boolean -_ output statistics.
+- `pin-roots` : _boolean_ - pin the root listed in the .car headers after importing. The default is `true`. Only one DAG root can be pinned per request.
+- `silent` : _boolean_ - no output.
+- `stats`: _boolean_ - output statistics.
 - `allow-big-block`: _boolean_ - disable the block size check and allow the creation of blocks bigger than 1 MiB. The default is `false`. Bigger blocks won't be transferable over the standard bitswap.
 
 ### Response
