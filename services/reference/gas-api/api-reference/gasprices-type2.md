@@ -23,11 +23,11 @@ blockchain network.
 Recommended gas price details based of the level of urgency:
 
 - `low`, `medium`, `high` - Object containing recommended values for transactions by level of urgency:
-  - `suggestedMaxPriorityFeePerGas`: `string` - The maximum suggested priority fee per gas (in gwei) to pay to have transactions included in a block.
-  - `suggestedMaxFeePerGas`: `string` - The maximum suggested total fee per gas (in gwei) to pay, including both the base fee and the priority fee.
+  - `maxPriorityFeePerGas`: `string` - The maximum suggested priority fee per gas (in gwei) to pay to have transactions included in a block.
+  - `maxFeePerGas`: `string` - The maximum suggested total fee per gas (in gwei) to pay, including both the base fee and the priority fee.
   - `minWaitTimeEstimate`: `number` - The minimum estimated wait time (in milliseconds) for a transaction to be included in a block at the suggested gas price.
   - `maxWaitTimeEstimate`: `number` - The maximum estimated wait time (in milliseconds) for a transaction to be included in a block at the suggested gas price.
-- `estimatedBaseFee`: `string` - The current estimated base fee per gas on the network.
+- `baseFeePerGas`: `string` - The current estimated base fee per gas on the network.
 - `networkCongestion`: `number` - The current congestion on the network, represented as a number between `0` and `1`.
   A lower network congestion score (for example `0.1`), indicates that fewer transactions are being submitted, so it's cheaper to validate transactions.
 - `latestPriorityFeeRange`: `array` - The range of priority fees per gas for recent transactions on the network.
@@ -97,24 +97,24 @@ const chainId = 1;
 ```json
 {
   "low": {
-    "suggestedMaxPriorityFeePerGas": "0.05",
-    "suggestedMaxFeePerGas": "16.334026964",
+    "maxPriorityFeePerGas": "0.05",
+    "maxFeePerGas": "16.334026964",
     "minWaitTimeEstimate": 15000,
     "maxWaitTimeEstimate": 30000
   },
   "medium": {
-    "suggestedMaxPriorityFeePerGas": "0.1",
-    "suggestedMaxFeePerGas": "22.083436402",
+    "maxPriorityFeePerGas": "0.1",
+    "maxFeePerGas": "22.083436402",
     "minWaitTimeEstimate": 15000,
     "maxWaitTimeEstimate": 45000
   },
   "high": {
-    "suggestedMaxPriorityFeePerGas": "0.3",
-    "suggestedMaxFeePerGas": "27.982845839",
+    "maxPriorityFeePerGas": "0.3",
+    "maxFeePerGas": "27.982845839",
     "minWaitTimeEstimate": 15000,
     "maxWaitTimeEstimate": 60000
   },
-  "estimatedBaseFee": "16.284026964",
+  "baseFeePerGas": "16.284026964",
   "networkCongestion": 0.5125,
   "latestPriorityFeeRange": ["0", "3"],
   "historicalPriorityFeeRange": ["0.000000001", "89"],
