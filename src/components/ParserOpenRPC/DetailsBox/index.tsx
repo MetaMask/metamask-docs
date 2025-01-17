@@ -90,10 +90,6 @@ export default function DetailsBox({
         Returns
       </Heading>
       <div className={styles.paramContainer}>
-        {result?.description && (
-          <div>
-          </div>
-        )}
         {result && renderResultSchemas(result, components)}
       </div>
     </>
