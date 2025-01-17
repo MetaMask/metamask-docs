@@ -37,7 +37,7 @@ credits toward your daily credit quota:
 
 The following credit plans are available for new customers:
 
-- **Free tier**: 6,000,000 daily credits, and 2,000 credits per second rate limit.
+- **Free tier**: 3,000,000 daily credits, and 500 credits per second rate limit.
 - **Developer**: 15,000,000 daily credits, and 4,000 credits per second rate limit.
 - **Team**: 75,000,000 daily credits, and 40,000 credits per second rate limit.
 - **Custom**: [Contact us](https://www.infura.io/contact) to determine the custom plan for your requirements.

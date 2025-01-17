@@ -225,7 +225,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 1        |
-| Holeksy | 17000    |
+| Holesky | 17000    |
 | Sepolia | 11155111 |
 
 #### Fantom
