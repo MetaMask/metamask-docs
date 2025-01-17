@@ -29,4 +29,3 @@ MetaMask SDK is a **toolkit that allows you to build onchain apps** by:
 - [Install SDK - JavaScript + Wagmi](/sdk/quick-start/javascript-+-wagmi)
 - [Install SDK - JavaScript](/sdk/quick-start/javascript)
 - [Install SDK - React Native](/sdk/quick-start/react-native)
-
