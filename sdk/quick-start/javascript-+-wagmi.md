@@ -12,7 +12,7 @@ This quickstart app demonstrates how to integrate the MetaMask SDK with a [Next.
 
 <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
     <div style={{ flex: '2' }}>
-        <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
+        <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
             <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" style={{border: '1px solid #DCDCDC', width: '100%'}} />
         </a>
     </div>

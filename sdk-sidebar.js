@@ -16,7 +16,7 @@ const sidebar = {
         {
           type: 'link',
           label: 'Try Demo App',
-          href: 'https://metamask-sdk-examples.vercel.app/',
+          href: 'https://metamask-sdk-examples-relink.vercel.app/',
         },
       ],
     },
