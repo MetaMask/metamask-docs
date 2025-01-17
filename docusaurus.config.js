@@ -336,7 +336,7 @@ const config = {
         appId: "AWX4QVM59R",
 
         // Public API key: it is safe to commit it
-        apiKey: "6095a25a6824bfa909fa0692e6847ec4",
+        apiKey: "861f327c200a8eab62a28ee1396f90de",
 
         indexName: "mm--v2-staging",
 

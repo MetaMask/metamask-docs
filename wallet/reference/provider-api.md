@@ -186,17 +186,6 @@ provider // Or window.ethereum if you don't support EIP-6963.
 The provider emits this event when the currently connected chain changes.
 Listen to this event to [detect a user's network](../how-to/manage-networks/detect-network.md).
 
-:::caution Important
-
-We strongly recommend reloading the page upon chain changes, unless you have a good reason not to:
-
-```typescript
-provider // Or window.ethereum if you don't support EIP-6963.
-  .on("chainChanged", (chainId) => window.location.reload())
-```
-
-:::
-
 ### `connect`
 
 ```typescript
