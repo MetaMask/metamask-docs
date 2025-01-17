@@ -16,7 +16,7 @@ additional credit packs for more capacity.
 If you've exceeded your allowed throughput limit, consider reducing the amount of requests per
 second, or upgrade for more capacity.
 
-Credit quota limits are reset everyday at 00:00 UTC for all customers.
+Credit quota limits are reset every day at 00:00 UTC for all customers.
 
 ## Rate limit implications
 
