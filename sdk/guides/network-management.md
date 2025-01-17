@@ -9,7 +9,7 @@ We provide implementations using both **Wagmi** (recommended) and **vanilla Java
 
 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
     <div style={{ flex: '3' }}>
-        <a href="https://example.com" target="_blank">
+        <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
             <img src={require("../_assets/network.gif").default} alt="Switch Networks" style={{border: '1px solid #DCDCDC', width: '100%'}} />
         </a>
     </div>
