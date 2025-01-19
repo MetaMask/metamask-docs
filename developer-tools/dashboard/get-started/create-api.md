@@ -13,7 +13,7 @@ Based on your plan, Infura allows for the following amount of API keys:
 - Developer plan - Allows up to five API keys.
 - Team plans and higher - No limit on the number of API keys.
 
-For more information, see to the [Infura pricing page](https://www.infura.io/pricing).
+For more information, see the [Infura pricing page](https://www.infura.io/pricing).
 
 :::
 
