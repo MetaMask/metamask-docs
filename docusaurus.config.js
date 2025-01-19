@@ -139,13 +139,13 @@ const config = {
         breadcrumbs: false,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args);
-          const dymanicItems = await fetchAndGenerateDynamicSidebarItems(
+          const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
             MM_RPC_URL,
             MM_REF_PATH,
             NETWORK_NAMES.metamask
           )
           if (args.item.dirName === "reference/json-rpc-methods") {
-            return [...sidebarItems, ...dymanicItems]
+            return [...sidebarItems, ...dynamicItems]
           }
           return sidebarItems;
         }
