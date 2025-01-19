@@ -275,7 +275,7 @@ if (transaction.from == "<SENDER_ADDRESS>") {
 You can also track a specific recipient address receiving any tokens by tracking the `transaction.to` value:
 
 ```javascript
-if (transaction.to == "<RECIEVING_ADDRESS>") {
+if (transaction.to == "<RECEIVING_ADDRESS>") {
   console.log("Specified address received an ERC-20 token!")
 }
 ```
