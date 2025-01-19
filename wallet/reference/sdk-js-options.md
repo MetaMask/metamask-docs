@@ -117,7 +117,7 @@ The metadata options are:
 - `iconUrl` - URL of the dapp's icon
 
 :::tip important
-Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
+Setting `dappMetadata` creates a clear and trustworthy user experience when connecting your dapp to
 MetaMask Mobile.
 MetaMask Mobile displays this metadata in the connection modal to help users identify and verify the
 connection request.
