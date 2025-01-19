@@ -120,7 +120,7 @@ export const AlertCooldown = () => (
 
 export const AlertSuccess = ({ url }: { url: string }) => (
   <div>
-    <AlertTitle>Transaction successfull!</AlertTitle>
+    <AlertTitle>Transaction successful!</AlertTitle>
     <AlertText>
       <span>
         Your transaction has been sent to the Ethereum/Sepolia network. You
