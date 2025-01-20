@@ -41,7 +41,7 @@ We recommend using `linea_estimateGas` for more accurate results.
   - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
   - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
       [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
-- `stateOverride`: _\[optional]_  Object that contains the address-to-state mapping to [override state values](#override-state-values)
+- `stateOverride`: _\[optional]_  Object that contains the address-to-state mapping to [override state values](#override-state-values).
     Each entry specifies a state that will be temporarily overridden before executing the call:
   - `balance`: _\[optional]_ Hexadecimal of the temporary account balance for the call execution.
   - `nonce`: _\[optional]_ Hexadecimal of the temporary nonce value for the call execution.
@@ -99,32 +99,39 @@ Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard
 
 ## Override state values
 
-You can to override an account with temporary state values before
-making the call. This allows you to make temporary state changes without affecting the actual
-blockchain state.
+You can override an account with temporary state values before making the call. This allows you to
+make temporary state changes without affecting the actual blockchain state.
 
-For example, here we'll override the balance of account `0xfe3b557e8fb62b89f4916b721be55ceb828dbd73`
-to ensure it has sufficient funds to estimate transferring ETH to the specified account:
+The following example estimates the cost for transferring an ERC-20 token for an account which does not
+have the required assets onchain.
+
+The example sets a custom ETH balance for the sender (to cover gas costs) and modifies the account's
+balance within the ERC-20 contract's storage for the duration of the call.
 
 ```json
 curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc":"2.0",
-    "method":"linea_estimateGas",
-    "params":[
-        {
-            "from":"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
-            "to":"0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
-            "value":"0xDE0B6B3A7640000"
-        },
-        {
-            "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
-                "balance": "0x4563918244F40000"
-            }
-        }
-    ],
-    "id":53
+-X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "jsonrpc":"2.0",
+  "method":"linea_estimateGas",
+  "params":[
+      {
+          "from":"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
+          "to":"0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f",
+          "data":"0xa9059cbb000000000000000000000000627306090abaB3A6e1400e9345bC60c78a8BEf570000000000000000000000000000000000000000000000001bc16d674ec80000"
+      },
+      {
+          "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
+              "balance": "0x16345785d8a0000"
+          },
+          "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f": {
+              "stateDiff":{
+                  "0x2d206e5210c119b1cbed144f517f1f1dfd586eed26793a233e6afc261f4cf97f":"0x0000000000000000000000000000000000000000000000001bc16d674ec80000"
+              }
+          }
+      }
+  ],
+  "id":53
 }'
 ```
