@@ -28,6 +28,6 @@ Use [testnet endpoints](../get-started/endpoints.md) during development and init
 | [Mantle Sepolia](https://docs.mantle.xyz/network/for-devs/developing-on-mantle#connecting-to-mantle-testnet)| [Mantle Sepolia faucet](https://faucet.sepolia.mantle.xyz) |[Mantle bridge](https://bridge.sepolia.mantle.xyz)| 
 | [Optimism Sepolia](https://docs.optimism.io/builders/tools/build/faucets)| [Optimism Sepolia faucet](https://faucet.quicknode.com/optimism/sepolia)| [Optimism bridge](https://app.optimism.io/bridge)| 
 | [Palm](https://docs.palm.io/get-started/connect/testnet)| [PALM token](https://docs.palm.io/get-started/tokens)| [Token bridge](https://app.palm.io/bridge)|
-| [Polygon Amoy](https://docs.polygon.technology/tools/wallets/metamask/add-polygon-network/)| [Polygon Amoy faucet](https://faucet.polygon.technology)| [Polygon bridge](https://portal.polygon.technology/bridge)| 
+| [Polygon Mumbai](https://docs.polygon.technology/tools/wallets/metamask/add-polygon-network/)| [Polygon Mumbai faucet](https://faucet.polygon.technology)| [Polygon bridge](https://portal.polygon.technology/bridge)| 
 | [Starknet Sepolia](https://www.starknet.io/blog/getting-started-using-starknet-setting-up-a-starknet-wallet/)| [Starknet Sepolia faucet](https://starknet-faucet.vercel.app)| [Starknet bridge (StarkGate)](https://starkgate.starknet.io)|
 | [ZKsync Era Sepolia](https://docs.zksync.io/build/connect-to-zksync)| [ZKsync Sepolia faucet](https://docs.zksync.io/ecosystem/network-faucets)| [ZKsync bridge](https://portal.zksync.io/bridge)| 
