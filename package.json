@@ -41,7 +41,7 @@
     "@metamask/eth-sig-util": "^7.0.3",
     "@metamask/profile-sync-controller": "^0.9.6",
     "@metamask/sdk": "^0.31.1",
-    "@rjsf/core": "^5.22.1",
+    "@rjsf/core": "^5.24.1",
     "@rjsf/utils": "^5.18.4",
     "@rjsf/validator-ajv8": "^5.18.4",
     "@sentry/browser": "^8.35.0",
