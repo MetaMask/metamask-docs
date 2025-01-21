@@ -1,4 +1,4 @@
----
+tab---
 description: See the JavaScript SDK options reference.
 tags:
   - JavaScript SDK
@@ -173,7 +173,7 @@ The default is `true`.
 <Tabs>
 <TabItem value="Syntax">
 
-```javascript
+esc```javascript
 extensionOnly: <boolean>
 ```
 
@@ -232,7 +232,7 @@ headless: <boolean>
 </TabItem>
 <TabItem value="Example">
 
-```javascript
+tab```javascript
 headless: true
 ```
 
