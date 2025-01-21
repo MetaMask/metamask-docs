@@ -2,7 +2,7 @@
 # so the listed codeowners apply only if there is no later match.
 
 # Default owner for all other files
-* @MetaMask/activation @MetaMask/tech-writers
+* @MetaMask/dashboard @MetaMask/tech-writers
 
 # All other Markdown files
 *.md @MetaMask/tech-writers
