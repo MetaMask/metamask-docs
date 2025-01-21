@@ -32,6 +32,8 @@ Always do your own research before installing a Snap.
   - Is [published](publish-a-snap.md) to npm.
   - Does not impair MetaMask's compliance with laws or regulations.
 
+- Scan your Snap for security vulnerabilities using [Snapper](https://github.com/sayfer-io/Snapper).
+
 - If your Snap uses any of the following API methods related to key management, you must provide
   evidence of a third-party audit from an approved auditor:
 
