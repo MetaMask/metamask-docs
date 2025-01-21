@@ -116,21 +116,21 @@ curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
   "jsonrpc":"2.0",
   "method":"linea_estimateGas",
   "params":[
-      {
-          "from":"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
-          "to":"0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f",
-          "data":"0xa9059cbb000000000000000000000000627306090abaB3A6e1400e9345bC60c78a8BEf570000000000000000000000000000000000000000000000001bc16d674ec80000"
+    {
+      "from":"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
+      "to":"0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f",
+      "data":"0xa9059cbb000000000000000000000000627306090abaB3A6e1400e9345bC60c78a8BEf570000000000000000000000000000000000000000000000001bc16d674ec80000"
+    },
+    {
+      "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
+        "balance": "0x16345785d8a0000"
       },
-      {
-          "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
-              "balance": "0x16345785d8a0000"
-          },
-          "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f": {
-              "stateDiff":{
-                  "0x2d206e5210c119b1cbed144f517f1f1dfd586eed26793a233e6afc261f4cf97f":"0x0000000000000000000000000000000000000000000000001bc16d674ec80000"
-              }
-          }
+      "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f": {
+        "stateDiff": {
+          "0x2d206e5210c119b1cbed144f517f1f1dfd586eed26793a233e6afc261f4cf97f":"0x0000000000000000000000000000000000000000000000001bc16d674ec80000"
+        }
       }
+    }
   ],
   "id":53
 }'
