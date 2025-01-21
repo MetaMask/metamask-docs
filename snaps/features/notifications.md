@@ -65,9 +65,11 @@ Each Snap can trigger up to:
 
 ## Expanded view
 
-In-app notifications can include an optional expanded view that will be displayed when the user clicks on the notification. The expanded view includes a title, content, and an optional footer link. 
+In-app notifications can include an optional expanded view that will be displayed when the user selects the notification.
+The expanded view includes a title, content, and an optional footer link. 
 
-The following example displays a notification in MetaMask, with the message "Hello, world!" When the user clicks on the notification, the expanded view displays a page with a title, a paragraph, and a link to the MetaMask Snaps directory:
+The following example displays a notification in MetaMask, with the message "Hello, world!"
+When the user selects the notification, the expanded view displays a page with a title, a paragraph, and a link to the MetaMask Snaps directory:
 
 ```javascript title="index.js"
 await snap.request({
