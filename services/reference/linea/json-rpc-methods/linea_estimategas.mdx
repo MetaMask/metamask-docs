@@ -43,8 +43,8 @@ We recommend using `linea_estimateGas` for more accurate results.
       [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
 - `stateOverride`: _\[optional]_  Object that contains the address-to-state mapping to [override state values](#override-state-values).
     Each entry specifies a state that will be temporarily overridden before executing the call:
-  - `balance`: _\[optional]_ Hexadecimal of the temporary account balance for the call execution.
-  - `nonce`: _\[optional]_ Hexadecimal of the temporary nonce value for the call execution.
+  - `balance`: _\[optional]_ Hexadecimal value of the temporary account balance for the call execution.
+  - `nonce`: _\[optional]_ Hexadecimal value of the temporary nonce for the call execution.
   - `code` : _\[optional]_ Bytecode to inject into the account.
   - `stateDiff`: `key:value` pairs to override individual slots in the account storage.
 
