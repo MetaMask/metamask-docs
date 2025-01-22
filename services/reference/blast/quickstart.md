@@ -1,5 +1,5 @@
 ---
-description: Celo quickstart guide.
+description: Blast quickstart guide.
 sidebar_position: 2
 ---
 
