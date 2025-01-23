@@ -65,7 +65,7 @@ Each Snap can trigger up to:
 
 ## Expanded view
 
-In-app notifications can include an optional expanded view that will be displayed when the user selects the notification.
+In-app notifications can include an optional expanded view that displays when selected.
 The expanded view includes a title, content, and an optional footer link. 
 
 The following example displays a notification in MetaMask, with the message "Hello, world!"
