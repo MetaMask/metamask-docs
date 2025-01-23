@@ -177,7 +177,6 @@ export const LoginProvider = ({ children }) => {
   };
 
   const metaMaskWalletIdConnectHandler = useCallback(async () => {
-    console.log("in metaMaskWalletIdConnectHandler");
     try {
       setOpenAuthModal(true);
     } catch (err) {

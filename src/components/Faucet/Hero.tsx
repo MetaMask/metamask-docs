@@ -38,9 +38,7 @@ export default function Hero({
   } = useContext(MetamaskProviderContext);
 
 
-  // const isMobile = sdk.platformManager.isMobile;
-  const isMobile = true
-  console.log(sdk.platformManager)
+  const isMobile = sdk.platformManager?.isMobile ?? false;
   const isExtensionActive = sdk.isExtensionActive();
 
   const showInstallButton = !isExtensionActive && !isMobile;
@@ -57,7 +55,6 @@ export default function Hero({
       responseMsg: null,
       timestamp: Date.now(),
     });
-    console.log("gon trigg");
     metaMaskWalletIdConnectHandler();
   };
 
