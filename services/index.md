@@ -28,7 +28,7 @@ include:
   - **Failover support for APIs** - Currently available on select networks for customers on Growth or Custom plans; if an Infura API
       endpoint becomes unavailable for any reason, requests can be forwarded to a DIN partner to fulfill the request.
       This ensures that your application remains running, providing uninterrupted service to your users.
-  - **Expanded network access** - Infura can extend its network offerings by leveraging DIN to access networks that it does not
+  - **Expanded network access** - Infura can extend its network offerings by leveraging DIN to access networks that it doesn't
       natively support.
   - **Expanded method support** - This includes access to debug or trace methods not natively
       supported by Infura. For these particular types of calls, Infura utilizes DIN to provide user access.
