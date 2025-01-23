@@ -343,7 +343,7 @@ ol {
   --ifm-navbar-padding-horizontal: 3rem;
   box-shadow: none;
   border-bottom: 1px solid var(--ifm-toc-border-color);
-  padding: var(--ifm-navbar-padding-vertical) var(--page-padding-x);
+  padding: 0 var(--page-padding-x);
 
   &__brand {
     margin-right: 7.2rem;
@@ -375,7 +375,7 @@ ol {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 124%;
-    padding: 2rem 2.2rem;
+    padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 2.2rem;
 
     &:hover {
       text-decoration: none !important;
@@ -401,19 +401,22 @@ ol {
     margin: 0 1rem;
   }
   .dropdown__menu {
+    top: 1.8rem;
     left: 2rem;
-    left: 2rem;
-    padding: 1.6rem 1.2rem;
+    padding: 2rem 1.2rem;
+    border-radius: 0;
     box-shadow: none;
+    li:not(:last-child) {
+      padding-bottom: 2rem;
+    }
   }
 
   .dropdown--hoverable:hover .dropdown__menu,
   .dropdown--show .dropdown__menu {
     transform: translateY(1rem) !important;
-    background-color: var(--ifm-hover-overlay) !important;
 
     [data-theme='dark'] & {
-      border: 1px solid var(--general-gray-dark);
+      background: var(--general-gray-dark);
     }
   }
 
@@ -421,9 +424,11 @@ ol {
     &__link {
       font-size: 1.4rem;
 
-      &:hover {
+      &:hover,
+      &--active {
         background-color: transparent;
         text-decoration: none !important;
+        color: var(--ifm-navbar-link-hover-color);
       }
     }
   }
@@ -433,7 +438,6 @@ ol {
     opacity: 1;
     pointer-events: all;
     visibility: visible;
-    background: var(--docsearch-searchbox-background);
   }
 }
 
