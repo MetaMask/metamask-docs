@@ -16,7 +16,7 @@ implementing the following features:
 - [Home pages](home-pages.md)
 - [Transaction insights](../transaction-insights.md)
 - [Signature insights](../signature-insights.md)
-- [Notifications (Expanded View)](../notifications.md#expanded-view)
+- [Notifications (expanded view)](../notifications.md#expanded-view)
 
 :::note
 JSX is supported in the MetaMask extension and Flask version 12 and later. 

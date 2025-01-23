@@ -55,6 +55,8 @@ View the following Snaps resources in addition to this documentation site.
 - [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A tool for simulating
   Snaps in the browser, streamlining the development process. It doesn't support all Snaps features 
   but can be useful for testing certain features.
+- [Snapper](https://github.com/sayfer-io/Snapper) - A tool for detecting security vulnerabilities,
+  identifying potential issues, and ensuring best coding practices in your Snap.
 - [MetaMask Testing Tools](https://hugomrdias.github.io/metamask/) - A collection of tools for 
   testing MetaMask, MetaMask Flask, and MetaMask Snaps with [Playwright](https://playwright.dev/), 
   delivered as an npm package that provides a `createFixture` function that returns a `test` and 
