@@ -184,7 +184,7 @@ await snap.request({
 
 ### `Banner`
 
-Outputs a banner alert component that can be used to display important messages with different severity levels.
+Outputs a banner that can be used to display important messages with different severity levels.
 
 #### Props
 
