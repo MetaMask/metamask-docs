@@ -424,10 +424,11 @@ Outputs a container component that can hold a box of content and an optional foo
 
 #### Props
 
-- `backgroundColor`: `"default" | "alternative"` - (optional) The background color of the container. Defaults to `"default"`.
-- `children`: Can be either:
-  - A single Box element, or
-  - An array containing a Box element and a Footer element
+- `backgroundColor` - (Optional) The background color of the container.
+  Possible values are `"default"` and `"alternative"`.
+  The default is `"default"`.
+- `children`: The contents of the container.
+  This can be a single [`Box`](#box) component, or an array containing a [`Box`](#box) component and a [`Footer`](#footer) component.
 
 #### Example
 
