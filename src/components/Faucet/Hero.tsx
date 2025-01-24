@@ -100,7 +100,7 @@ export default function Hero({
         className,
       )}
     >
-      {!(!showInstallButton && metaMaskAccount) && <EthIcon />}
+      {(showInstallButton || !(metaMaskAccount)) && <EthIcon />}
       <Text as="h1">
         <span>
           {network === "linea" && "Linea Sepolia"}
