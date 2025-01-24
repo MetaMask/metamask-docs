@@ -182,6 +182,55 @@ await snap.request({
 });
 ```
 
+### `Banner`
+
+Outputs a banner alert component that can be used to display important messages with different severity levels.
+
+#### Props
+
+- `title`: `string` - Title of the banner.
+- `severity`: `"danger" | "info" | "success" | "warning"` - Severity level of the banner.
+- `children`: The content to display in the banner. Can include:
+  - Text components
+  - Formatting components
+  - Links
+  - Icons
+  - Buttons
+  - Skeleton loaders
+
+#### Example
+
+```javascript title="index.jsx"
+import { Box, Banner, Text, Link } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Banner title="Important Update" severity="info">
+          <Text>A new version is available!</Text>
+          <Link href="https://docs.metamask.io">Learn more</Link>
+        </Banner>
+
+        <Banner title="Warning" severity="warning">
+          <Text>Please review transaction details carefully.</Text>
+        </Banner>
+
+        <Banner title="Success" severity="success">
+          <Text>Transaction completed successfully.</Text>
+        </Banner>
+
+        <Banner title="Error" severity="danger">
+          <Text>Unable to process transaction.</Text>
+        </Banner>
+      </Box>
+    ),
+  },
+});
+```
+
 ### `Box`
 
 Outputs a box, which can be used as a container for other components.
@@ -368,6 +417,55 @@ const interfaceId = await snap.request({
 <p align="center">
 <img src={require("../../assets/custom-ui-checkbox.png").default} alt="Checkbox UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
+
+### `Container`
+
+Outputs a container component that can hold a box of content and an optional footer. This is useful for creating structured layouts with action buttons at the bottom in [custom dialogs](dialogs.md#display-a-custom-dialog).
+
+#### Props
+
+- `backgroundColor`: `"default" | "alternative"` - (optional) The background color of the container. Defaults to `"default"`.
+- `children`: Can be either:
+  - A single Box element, or
+  - An array containing a Box element and a Footer element
+
+#### Example
+
+```javascript title="index.jsx"
+import { Container, Box, Footer, Text, Button } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    content: (
+      <Container backgroundColor="default">
+        <Box>
+          <Text>Are you sure you want to proceed with this transaction?</Text>
+          <Text>Gas fees: 0.005 ETH</Text>
+        </Box>
+        <Footer>
+          <Button name="cancel" variant="destructive">Cancel</Button>
+          <Button name="confirm">Confirm</Button>
+        </Footer>
+      </Container>
+    ),
+  },
+});
+
+// Example without footer
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    content: (
+      <Container backgroundColor="alternative">
+        <Box>
+          <Text>Simple container without footer</Text>
+        </Box>
+      </Container>
+    ),
+  },
+});
+```
 
 ### `Copyable`
 
@@ -575,6 +673,55 @@ export const onUserInput = async ({ id, event }) => {
 <p align="center">
 <img src={require("../../assets/custom-ui-file-input.png").default} alt="File input UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
+
+### `Footer`
+
+Outputs a footer component that can contain one or two buttons. This component is typically used within a [`Container`](#container) to create action buttons at the bottom of a dialog or panel.
+
+#### Props
+
+- `children`: Can be either one or two [`Button`](#button) components.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Container, Box, Footer, Text, Button } from "@metamask/snaps-sdk/jsx";
+
+// Example with two buttons
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    content: (
+      <Container>
+        <Box>
+          <Text>Delete this item?</Text>
+        </Box>
+        <Footer>
+          <Button name="cancel">Cancel</Button>
+          <Button name="delete" variant="destructive">Delete</Button>
+        </Footer>
+      </Container>
+    ),
+  },
+});
+
+// Example with single button
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    content: (
+      <Container>
+        <Box>
+          <Text>Operation completed successfully.</Text>
+        </Box>
+        <Footer>
+          <Button name="close">Close</Button>
+        </Footer>
+      </Container>
+    ),
+  },
+});
+```
 
 ### `Form`
 
@@ -1125,6 +1272,51 @@ await snap.request({
 <p align="center">
 <img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
 </p>
+
+### `Value`
+
+Outputs a component that displays two text values side by side. This component can only be used as a child of the [`Row`](#row) component.
+
+#### Props
+
+- `value`: `string | TextElement` - The value shown on the right side.
+- `extra`: `string | TextElement` - The extra text shown on the left side.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Box, Row, Text, Value } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Row label="Transaction Amount">
+          <Value value="0.05 ETH" extra="$200" />
+        </Row>
+        
+        {/* Example with styled text */}
+        <Row label="Gas Fee">
+          <Value 
+            value={<Text color="error">0.003 ETH</Text>} 
+            extra={<Text color="error">$12</Text>} 
+          />
+        </Row>
+        
+        {/* Example with different text colors */}
+        <Row label="Balance After">
+          <Value 
+            value={<Text color="success">1.25 ETH</Text>} 
+            extra={<Text color="muted">$2,500</Text>} 
+          />
+        </Row>
+      </Box>
+    ),
+  },
+});
+```
 
 ## Emojis
 
