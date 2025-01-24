@@ -26,6 +26,5 @@ For production deployments, it's important to use reliable RPC providers instead
 
 Some non-EVM networks can work as well via [MetaMask Snaps](https://metamask.io/snaps/).
 
-- Solana ([learn more here](https://solflare.com/metamask))
-- StarkNet ([learn more here](https://docs.metamask.io/wallet/how-to/use-non-evm-networks/starknet/))
+- Starknet ([learn more here](https://docs.metamask.io/wallet/how-to/use-non-evm-networks/starknet/))
 
