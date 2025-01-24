@@ -1281,8 +1281,10 @@ Outputs a component that displays two text values side by side. This component c
 
 #### Props
 
-- `value`: `string | TextElement` - The value shown on the right side.
-- `extra`: `string | TextElement` - The extra text shown on the left side.
+- `value` - The value shown on the right side.
+  This can be a string or a [`Text`](#text) component.
+- `extra` - The extra text shown on the left side.
+  This can be a string or a [`Text`](#text) component.
 
 #### Example
 
