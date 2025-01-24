@@ -121,6 +121,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-starknet.svg`,
   },
   {
+    name: "Swellchain",
+    href: "/services/reference/swellchain",
+    logo: `${LOGO_PATH}/logo-swellchain.png`,
+  },
+  {
     name: "Unichain",
     href: "/services/reference/unichain",
     logo: `${LOGO_PATH}/logo-unichain.svg`,

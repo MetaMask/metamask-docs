@@ -16,7 +16,7 @@ implementing the following features:
 - [Home pages](home-pages.md)
 - [Transaction insights](../transaction-insights.md)
 - [Signature insights](../signature-insights.md)
-- [Notifications (Expanded View)](../notifications.md#expanded-view)
+- [Notifications (expanded view)](../notifications.md#expanded-view)
 
 :::note
 JSX is supported in the MetaMask extension and Flask version 12 and later. 
@@ -589,18 +589,22 @@ Outputs a form for use in [interactive UI](interactive-ui.md).
 #### Example
 
 ```js
-import { Form, Input, Button } from "@metamask/snaps-sdk/jsx";
+import { Box, Section, Form, Input, Button } from "@metamask/snaps-sdk/jsx";
 
 const interfaceId = await snap.request({
   method: "snap_createInterface",
   params: {
     ui: (
-      <Form name="form-to-fill">
-        <Field label="First Name">
-          <Input name="firstName" placeholder="Enter your first name" />
-        </Field>
-        <Button type="submit">Submit</Button>
-      </Form>
+      <Box>
+        <Section>
+          <Form name="form-to-fill">
+            <Field label="First Name">
+              <Input name="firstName" placeholder="Enter your first name" />
+            </Field>
+            <Button type="submit">Submit</Button>
+          </Form>
+        </Section>
+      </Box>
     ),
   },
 });
