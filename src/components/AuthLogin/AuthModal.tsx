@@ -14,7 +14,9 @@ import {
   AUTH_WALLET_SESSION_NAME,
   AUTH_WALLET_USER_PLAN,
 } from "@site/src/lib/siwsrp/auth";
-import { REQUEST_PARAMS } from "@site/src/lib/constants";
+import {
+  REQUEST_PARAMS,
+} from "@site/src/lib/constants";
 import { MetamaskProviderContext } from "@site/src/theme/Root";
 
 Modal.setAppElement("#__docusaurus");
@@ -37,7 +39,7 @@ export enum AUTH_LOGIN_STEP {
 export enum WALLET_LINK_TYPE {
   NO = "NO",
   ONE = "ONE",
-  MULTIPLE = "MULTIPLE",
+  MULTIPLE = "MULTIPLE"
 }
 
 const ConnectingModal = () => {
@@ -161,12 +163,9 @@ const AuthModal = ({
   const login = async () => {
     setStep(AUTH_LOGIN_STEP.CONNECTING);
     try {
-
-      // This will cause problems on mobile
-      // check what this value is on mobile. Do we need to do something different?
-      // if (!sdk.isExtensionActive()) {
-      //   setOpen(false);
-      // }
+      if (!sdk.isExtensionActive()) {
+        setOpen(false);
+      }
 
       // Try to connect wallet first
       const accounts = await sdk.connect();
@@ -187,16 +186,19 @@ const AuthModal = ({
       );
 
       const loginResponse = await (
-        await fetch(`${DASHBOARD_URL}/api/wallet/login`, {
-          ...REQUEST_PARAMS("POST", {
-            hydra_token: accessToken,
-            token: "true",
-          }),
-          body: JSON.stringify({
-            profileId: userProfile.profileId,
-            redirect_to: window.location.href,
-          }),
-        })
+        await fetch(
+          `${DASHBOARD_URL}/api/wallet/login`,
+          {
+            ...REQUEST_PARAMS("POST", {
+              hydra_token: accessToken,
+              token: "true",
+            }),
+            body: JSON.stringify({
+              profileId: userProfile.profileId,
+              redirect_to: window.location.href,
+            }),
+          },
+        )
       ).json();
 
       if (!loginResponse) throw new Error("Something went wrong");
@@ -212,7 +214,7 @@ const AuthModal = ({
             mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
             walletPairing: data.pairing,
             token: true,
-          })
+          }),
         ).toString("base64");
 
         const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -235,10 +237,10 @@ const AuthModal = ({
       if (data.mfa?.enabled) {
         const mm_auth = Buffer.from(
           JSON.stringify({
-            step: "verify",
+            step: 'verify',
             mmAuthSession: sessionStorage.getItem(AUTH_WALLET_SESSION_NAME),
-            dashboardSessionToken: token,
-          })
+            dashboardSessionToken: token
+          }),
         ).toString("base64");
 
         const walletAuthUrl = `${DASHBOARD_URL}/login?mm_auth=${mm_auth}&redirect_to=${session.redirect_to}`;
@@ -273,7 +275,7 @@ const AuthModal = ({
         `${DASHBOARD_URL}/api/v1/users/${userId}/projects`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        }
+        },
       );
       const {
         result: { projects },
@@ -285,7 +287,7 @@ const AuthModal = ({
         `${DASHBOARD_URL}/api/v1/users/${userId}`,
         {
           ...REQUEST_PARAMS("GET", { Authorization: `Bearer ${token}` }),
-        }
+        },
       );
       const {
         result: {

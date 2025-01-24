@@ -71,12 +71,8 @@ export const authenticateAndAuthorize = async (env: string, customProvider: SDKP
   let accessToken: string, userProfile: SDK.UserProfile;
   try {
     const authInstance = auth(env);
-    console.log("authInstance", authInstance);
-    console.log("customProvider", customProvider);
     authInstance.setCustomProvider(customProvider);
-    console.log('about to connectSnap')
     await authInstance.connectSnap();
-    console.log('after connectSnap')
     accessToken = await authInstance.getAccessToken();
     userProfile = await authInstance.getUserProfile();
   } catch (e: any) {

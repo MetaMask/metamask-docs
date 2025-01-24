@@ -37,7 +37,6 @@ export default function Hero({
     walletAuthUrl,
   } = useContext(MetamaskProviderContext);
 
-
   const isMobile = sdk.platformManager?.isMobile ?? false;
   const isExtensionActive = sdk.isExtensionActive();
 
@@ -98,7 +97,7 @@ export default function Hero({
         styles.hero,
         network === "linea" && styles.linea,
         network === "sepolia" && styles.sepolia,
-        className
+        className,
       )}
     >
       {!(!showInstallButton && metaMaskAccount) && <EthIcon />}
@@ -142,7 +141,7 @@ export default function Hero({
         )}
         <div
           className={clsx(
-            !!Object.keys(projects).length && styles.alignedButtons
+            !!Object.keys(projects).length && styles.alignedButtons,
           )}
         >
           {showInstallButton ? (
