@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## January 2025
+
+- Documented Snaps `Banner`, `Container`, `Footer`, and `Value` components in [Snaps Custom UI](/snaps/features/custom-ui/).
+  ([#1835](https://github.com/MetaMask/metamask-docs/pull/1835))
+
 ## December 2024
 
 - Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
