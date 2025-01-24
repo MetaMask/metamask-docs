@@ -681,7 +681,8 @@ Outputs a footer that can contain one or two buttons. This component is typicall
 
 #### Props
 
-- `children`: Can be either one or two [`Button`](#button) components.
+- `children` - The contents of the footer.
+  This can be one or two [`Button`](#button) components.
 
 #### Example
 
