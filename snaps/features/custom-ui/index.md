@@ -677,7 +677,7 @@ export const onUserInput = async ({ id, event }) => {
 
 ### `Footer`
 
-Outputs a footer component that can contain one or two buttons. This component is typically used within a [`Container`](#container) to create action buttons at the bottom of a dialog or panel.
+Outputs a footer that can contain one or two buttons. This component is typically used within a [`Container`](#container) to create action buttons at the bottom of a dialog or panel.
 
 #### Props
 
