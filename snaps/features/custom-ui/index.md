@@ -1070,7 +1070,7 @@ Outputs a row with a label and value, which can be used for key-value data.
   Possible values are `"default"`, `"error"`, and `"warning"`.
   The default is `"default"`.
 - `children` - The value of the row, which can be a [`Text`](#text), [`Image`](#image), 
-  [`Address`](#address), or [`Link`](#link) component.
+  [`Address`](#address), [`Link`](#link), or [`Value`](#value) component.
 
 #### Example
 
