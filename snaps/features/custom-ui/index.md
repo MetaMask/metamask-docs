@@ -163,15 +163,11 @@ Outputs a banner that can be used to display important messages with different s
 
 #### Props
 
-- `title`: `string` - Title of the banner.
-- `severity`: `"danger" | "info" | "success" | "warning"` - Severity level of the banner.
-- `children`: The content to display in the banner. Can include:
-  - Text components
-  - Formatting components
-  - Links
-  - Icons
-  - Buttons
-  - Skeleton loaders
+- `title`: `string` - The title of the banner.
+- `severity` - The severity level of the banner.
+  Possible values are `"danger"`, `"info"`, `"success"`, and `"warning"`.
+- `children` - The content to display in the banner.
+  This can include [`Text`](#text), [`Link`](#link) [`Icon`](#icon), [`Button`](#button), and [`Skeleton`](#skeleton) components.
 
 #### Example
 
@@ -1174,9 +1170,38 @@ const interfaceId = await snap.request({
 <img src={require("../../assets/custom-ui-selector.png").default} alt="Selector UI example" width="450px" />
 </p>
 
+### `Skeleton`
+
+Outputs an animated loading container.
+
+#### Props
+
+- `width`: `Array<number | string>` - (Optional) width of the skeleton.
+- `height`: `Array<number | string>` - (Optional) height of the skeleton.
+- `borderRadius`: `string` - (Optional) radius of the corners, can be `none`, `medium` or `full`.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Box, Heading, Skeleton } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Heading>Please wait...</Heading>
+        <Skeleton height={32} width="50%" borderRadius="full" />
+      </Box>
+    ),
+  },
+});
+```
+
 ### `Spinner`
 
-Outputs a loading indicator.
+Outputs an animated loading indicator.
 
 #### Example
 
