@@ -137,14 +137,15 @@ await snap.request({
 
 Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an address.
 
+#### Props
+
+- `address`: `string` - A valid [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+- `size`: `string` - (Optional) The size of the avatar. Can be `sm`, `md`, or `lg`. Defaults to `md`.
+
 :::note
 MetaMask automatically calculates checksums for EVM addresses (`eip155:`). 
 Addresses for other namespaces are not validated; you should validate them in your Snap.
 :::
-
-#### Props
-
-- `address`: `string` - A valid [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
 
 #### Example
 
@@ -153,7 +154,7 @@ export const onHomePage: OnHomePageHandler = async () => {
   return {
     content: (
       <Box>
-        <Avatar address="eip155:1:0x1234567890123456789012345678901234567890" />
+        <Avatar address="eip155:1:0x1234567890123456789012345678901234567890" size="lg" />
         <Avatar address="bip122:000000000019d6689c085ae165831e93:128Lkh3S7CkDTBZ8W7BbpsN3YYizJMp8p6" />
       </Box>
     ),
