@@ -244,6 +244,8 @@ Outputs a box, which can be used as a container for other components.
 - `alignment` - (Optional) The alignment of the elements inside the box.
   Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
   The default is `"start"`.
+- `center`: `boolean` - (Optional) whether to center the children within the box.
+  Defaults to `false`.
 
 #### Example
 
@@ -258,6 +260,7 @@ module.exports.onHomePage = async () => {
         <Box
           direction="horizontal"
           alignment="space-around"
+          center="true"
         >
           <Text>Feature 1</Text>
           <Text>Feature 2</Text>
