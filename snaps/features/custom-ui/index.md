@@ -66,12 +66,16 @@ The following custom UI components are available:
 Outputs a formatted text field for a blockchain address. 
 The address is automatically displayed with a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon)
 and truncated value. 
-Hovering over the address shows the full value in a tooltip.
+When the address is truncated, hovering over the address shows the full value in a tooltip.
 
 #### Props 
 
 - `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid 
   [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
+- `truncate`: `boolean` - (Optional) whether to truncate the address. Defaults to `true`.
+- `displayName`: `boolean` - (Optional) whether to display the internally saved account label in place of the address.
+  Defaults to `true`.
+- `avatar`: `boolean` - (Optional) whether to show the address Jazzicon. Defaults to `true`.
 
 #### Example
 
@@ -1238,6 +1242,8 @@ Outputs text.
 - `alignment` - (Optional) The alignment of the text.
   Possible values are `"start"`, `"center"`, and `"end"`.
   The default is `"start"`.
+- `children` - The content to display.
+  This can include strings, [`Bold`](#bold), [`Italic`](#italic), [`Icon`](#icon), [`Link`](#link), and [`Skeleton`](#skeleton) components.
 
 
 #### Example
