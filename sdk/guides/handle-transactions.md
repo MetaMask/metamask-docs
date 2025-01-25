@@ -1,8 +1,8 @@
 ---
-description: Transaction Handling
+description: Handle transactions
 ---
 
-# Transaction Handling
+# Handle transactions
 
 This guide covers everything you need to know about handling Ethereum (and EVM) transactions with the MetaMask SDK. You'll learn how to:
 - **Send transactions**

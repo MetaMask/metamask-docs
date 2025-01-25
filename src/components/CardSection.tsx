@@ -5,32 +5,42 @@ import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
-    title: "Wallet",
-    subtitle: "Integrate with MetaMask Wallet",
-    link: "/wallet",
+    title: "SDK",
+    subtitle: "📱 Build onchain dapps",
+    link: "/sdk",
     description: (
       <>
-        Interact with your users&apos; via the MetaMask Wallet API.
+        Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile using the SDK.
       </>
     ),
   },
   {
-    title: "SDK",
-    subtitle: "Build on chain apps",
-    link: "/sdk",
+    title: "Wallet API",
+    subtitle: "🌐 Integrate with the MetaMask wallet",
+    link: "/wallet",
     description: (
       <>
-        Authenticate users, handle transactions, interact with contracts, and more.
+        Connect to the MetaMask browser extension and interact with your users&apos; accounts using the Wallet API.
       </>
     ),
   },
   {
     title: "Snaps",
-    subtitle: "Extend the functionality of MetaMask",
+    subtitle: "🛠️ Extend the functionality of MetaMask",
     link: "/snaps",
     description: (
       <>
-        Extend the functionality with custom networks, account types, APIs, and more.
+        Add support in MetaMask for custom networks, account types, and APIs by creating a custom Snap.
+      </>
+    ),
+  },
+  {
+    title: "Services",
+    subtitle: "📐 Build and scale your dapp",
+    link: "/services",
+    description: (
+      <>
+        Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.
       </>
     ),
   },

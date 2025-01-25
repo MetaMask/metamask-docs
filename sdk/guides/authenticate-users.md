@@ -1,8 +1,8 @@
 ---
-description: User Authentication
+description: Authenticate users
 ---
 
-# User Authentication
+# Authenticate users
 
 Connect and manage user wallet sessions in your dApp. This guide covers both **Wagmi** (recommended) and **vanilla JavaScript** approaches.
 

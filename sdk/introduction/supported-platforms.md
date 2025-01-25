@@ -4,23 +4,24 @@ description: Supported platforms
 
 # Supported platforms
 
-MetaMask SDK lets you connect your apps to MetaMask Wallet in the following ways:
+With MetaMask SDK, you can connect your dapp to MetaMask in the following ways:
 
-- **Desktop web**: Automatically connects to Wallet extension or Wallet mobile app via QR code.
+- **Desktop web dapps** - Automatically connect to the MetaMask wallet extension, or connect to MetaMask Mobile using a QR code.
 
-- **Mobile**: Wallet SDK generates a deep link that takes users straight to the Wallet mobile app.
+- **Mobile dapps** - The SDK generates a deeplink that takes users directly to MetaMask Mobile.
 
-| Dapp Location | User Device | Connection Method | Metamask SDK | Other SDKs |
+The following table expands on the SDK's connection methods:
+
+| Dapp location | User wallet location | Connection method | Metamask SDK | Other SDKs |
 |---------------|-------------|------------------|--------------------------|--------------------------|
-| Desktop Web | Wallet Extension | Automatic connection via browser extension | Supported | Supported |
-| Desktop Web | Wallet Mobile App | QR code scan with mobile wallet | Supported | Limited |
-| Mobile Browser | Wallet Mobile App | Deep link directly to mobile wallet app | Supported | Limited |
-| Mobile App | Wallet Mobile App | Deep link directly to mobile wallet app | Supported | Limited |
+| Desktop web | Wallet browser extension | Automatic connection via browser extension | Supported | Supported |
+| Desktop web | Wallet mobile app | QR code scan with wallet mobile app | Supported | Limited |
+| Mobile browser | Wallet mobile app | Deeplink directly to wallet mobile app | Supported | Limited |
+| Mobile dapp | Wallet mobile app | Deeplink directly to wallet mobile app | Supported | Limited |
 
 <br />
 
 :::tip 
-
-For better user experience on **mobile**, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance.
-
+For a better user experience on mobile, it's important to use reliable RPC providers instead of public nodes.
+We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 :::

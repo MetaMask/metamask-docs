@@ -1,10 +1,8 @@
 ---
-description: Batch multiple JSON-RPC requests using MetaMask SDK.
-tags:
-  - JavaScript SDK
+description: Batch multiple JSON-RPC requests.
 ---
 
-# Batch Requests
+# Batch requests
 
 You can batch multiple JSON-RPC requests using MetaMask SDK.
 

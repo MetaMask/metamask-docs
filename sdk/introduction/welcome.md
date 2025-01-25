@@ -1,31 +1,35 @@
 ---
 slug: /
-description: Welcome
+title: Welcome
 ---
 
-# Welcome
+# Build onchain dapps with MetaMask SDK
 
-Welcome to the **MetaMask SDK** developer documentation!
+MetaMask SDK is a toolkit that allows you to build onchain dapps.
+With the SDK, you can:
 
-MetaMask SDK is a **toolkit that allows you to build onchain apps** by:
+- Authenticate users.
+- Manage wallet states.
+- Handle transactions.
+- Interact with contracts.
 
-- Authenticating users
-- Managing wallet states
-- Handling transactions
-- Interacting with contracts
-- and many more!
+[Get started with JavaScript and Wagmi.](quickstart/javascript-wagmi.md)
 
 ### Why use the SDK?
 
-- Works on multiple platforms
-  - Web - via browser extensions or QR codes for the mobile app
-  - Mobile - via deep links to the mobile app
-- Works with all EVM-compatible L1/L2 networks
-- Handles onboarding of users
-- Battle tested with millions of users on MetaMask
+The benefits of using MetaMask SDK include the following:
+
+- It works on multiple dapp platforms:
+  - Web dapps - Connect to the MetaMask browser extension or use QR codes to connect to MetaMask Mobile.
+  - Mobile dapps - Use deeplinks to connect to MetaMask Mobile.
+- It works with all EVM-compatible L1/L2 networks.
+- It handles onboarding of users.
+- It is battle tested with millions of users on MetaMask.
 
 ### Where do I start?
 
-- [Install SDK - JavaScript + Wagmi](/sdk/quick-start/javascript-+-wagmi)
-- [Install SDK - JavaScript](/sdk/quick-start/javascript)
-- [Install SDK - React Native](/sdk/quick-start/react-native)
+You can get started quickly with the following dapp platforms:
+
+- [JavaScript + Wagmi (recommended)](quickstart/javascript-wagmi.md)
+- [JavaScript](quickstart/javascript.md)
+- [React Native](quickstart/react-native.md)

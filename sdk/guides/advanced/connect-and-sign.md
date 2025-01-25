@@ -1,11 +1,8 @@
 ---
-description: Use MetaMask SDK to connect and sign in a single interaction.
-tags:
-  - JavaScript SDK
-  - iOS SDK
+description: Connect and sign in a single interaction.
 ---
 
-# Connect and Sign
+# Connect and sign
 
 You can connect to MetaMask and sign data in a single interaction from your JavaScript, iOS,
 Android.

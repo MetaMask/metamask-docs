@@ -1,8 +1,8 @@
 ---
-description: Network Management
+description: Manage networks
 ---
 
-# Network Management
+# Manage networks
 
 This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. 
 We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.

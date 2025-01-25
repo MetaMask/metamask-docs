@@ -3,7 +3,7 @@ slug: /
 description: Welcome to the MetaMask Wallet API documentation
 ---
 
-# Welcome
+# Integrate your dapp with the MetaMask wallet
 
 Welcome to the **MetaMask Wallet API** documentation!
 

@@ -15,20 +15,20 @@ const sidebar = {
         'introduction/llm-prompt',
         {
           type: 'link',
-          label: 'Try Demo App',
+          label: 'Try demo dapp',
           href: 'https://metamask-sdk-examples-relink.vercel.app/',
         },
       ],
     },
     {
       type: 'category',
-      label: 'Quick Start',
+      label: 'Quickstart',
       collapsible: false,  
       collapsed: false,
       items: [
-        'quick-start/javascript-+-wagmi',
-        'quick-start/javascript',
-        'quick-start/react-native',
+        'quickstart/javascript-wagmi',
+        'quickstart/javascript',
+        'quickstart/react-native',
       ],
     },
     {
@@ -37,9 +37,9 @@ const sidebar = {
       collapsible: false,  
       collapsed: false,
       items: [
-        'guides/user-authentication',
-        'guides/network-management',
-        'guides/transaction-handling',
+        'guides/authenticate-users',
+        'guides/manage-networks',
+        'guides/handle-transactions',
         'guides/interact-with-contracts',
         {
           type: 'category',
@@ -55,11 +55,11 @@ const sidebar = {
     },
     {
       type: 'category',
-      label: 'API Reference',
+      label: 'Reference',
       collapsible: false,  
       collapsed: false,
       items: [
-        'api-reference/sdk-api'
+        'reference/sdk-options'
       ],
     }
   ],

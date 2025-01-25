@@ -4,9 +4,7 @@ description: Supported networks
 
 # Supported networks
 
-## EVM networks
-
-MetaMask SDK works with all EVM-compatible L1/L2 networks:
+MetaMask SDK works with all EVM-compatible L1/L2 networks, including:
 
 - Ethereum
 - Linea
@@ -16,15 +14,14 @@ MetaMask SDK works with all EVM-compatible L1/L2 networks:
 - Arbitrum
 - Avalanche
 - BNB Chain
-- and [many more](https://chainlist.org/)
+
+See [Chainlist](https://chainlist.org/) for the full list of supported networks.
 
 :::tip
-For production deployments, it's important to use reliable RPC providers instead of public nodes. We recommend using services like [Infura](https://infura.io/) to ensure better reliability and performance.
+For production deployments, it's important to use reliable RPC providers instead of public nodes.
+We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 :::
 
-## Non-EVM networks
-
-Some non-EVM networks can work as well via [MetaMask Snaps](https://metamask.io/snaps/).
-
-- Starknet ([learn more here](https://docs.metamask.io/wallet/how-to/use-non-evm-networks/starknet/))
-
+:::note
+You can also connect to some non-EVM networks, including [Starknet](/wallet/how-to/use-non-evm-networks/starknet/), using MetaMask Snaps.
+:::
