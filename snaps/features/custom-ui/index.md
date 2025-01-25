@@ -157,31 +157,6 @@ export const onHomePage: OnHomePageHandler = async () => {
 };
 ```
 
-### `Bold`
-
-Outputs bold text.
-
-#### Example
-
-```javascript title="index.jsx"
-import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
-
-await snap.request({
-  method: "snap_dialog",
-  params: {
-    type: "alert",
-    content: (
-      <Box>
-        <Heading>Hello world!</Heading>
-        <Text>
-          This is <Bold>bold</Bold>.
-        </Text>
-      </Box>
-    ),
-  },
-});
-```
-
 ### `Banner`
 
 Outputs a banner that can be used to display important messages with different severity levels.
@@ -225,6 +200,31 @@ await snap.request({
         <Banner title="Error" severity="danger">
           <Text>Unable to process transaction.</Text>
         </Banner>
+      </Box>
+    ),
+  },
+});
+```
+
+### `Bold`
+
+Outputs bold text.
+
+#### Example
+
+```javascript title="index.jsx"
+import { Box, Heading, Text, Bold } from "@metamask/snaps-sdk/jsx";
+
+await snap.request({
+  method: "snap_dialog",
+  params: {
+    type: "alert",
+    content: (
+      <Box>
+        <Heading>Hello world!</Heading>
+        <Text>
+          This is <Bold>bold</Bold>.
+        </Text>
       </Box>
     ),
   },
