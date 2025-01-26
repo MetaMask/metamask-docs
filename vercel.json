@@ -7,19 +7,7 @@
       "destination": "/wallet/"
     },
     {
-      "source": "/guide/common-terms/",
-      "destination": "/wallet/"
-    },
-    {
-      "source": "/guide/contributors/",
-      "destination": "/wallet/"
-    },
-    {
-      "source": "/guide/create-dapp/",
-      "destination": "/wallet/"
-    },
-    {
-      "source": "/guide/getting-started/",
+      "source": "/guide/:path*/",
       "destination": "/wallet/"
     },
     {
@@ -35,15 +23,7 @@
       "destination": "/wallet/"
     },
     {
-      "source": "/wallet/quickstart/javascript/",
-      "destination": "/wallet/"
-    },
-    {
-      "source": "/wallet/quickstart/react/",
-      "destination": "/wallet/"
-    },
-    {
-      "source": "/wallet/quickstart/other-platforms/",
+      "source": "/wallet/quickstart/:path*/",
       "destination": "/wallet/"
     },
     {
@@ -64,15 +44,31 @@
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/",
-      "destination": "/wallet/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/use-sdk/3rd-party-libraries/",
-      "destination": "/wallet/"
+      "destination": "/sdk/"
     },
     {
-      "source": "/wallet/how-to/connect/",
-      "destination": "/wallet/"
+      "source": "/wallet/connect/metamask-sdk/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/connect/metamask-sdk/:path*/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/connect/3rd-party-libraries/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/connect/3rd-party-libraries/wagmi/",
+      "destination": "/sdk/quickstart/javascript-wagmi"
+    },
+    {
+      "source": "/wallet/connect/3rd-party-libraries/web3-onboard/",
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/connect/set-up-sdk/:path*/",
@@ -107,28 +103,16 @@
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/how-to/connect/set-up-sdk/javascript/react-native/",
-      "destination": "/sdk/quick-start/react-native/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/javascript/react-native/",
-      "destination": "/sdk/quick-start/react-native/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/3rd-party-libraries/wagmi/",
-      "destination": "/sdk/quick-start/javascript-+-wagmi/"
-    },
-    {
-      "source": "/wallet/how-to/use-3rd-party-integrations/web3-onboard/",
-      "destination": "/sdk/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/3rd-party-libraries/web3-onboard/",
-      "destination": "/sdk/"
-    },
-    {
       "source": "/wallet/category/how-to/",
       "destination": "/wallet/how-to/"
+    },
+    {
+      "source": "/wallet/connect/",
+      "destination": "/wallet/how-to/connect/"
+    },
+    {
+      "source": "/wallet/connect/wallet-api/",
+      "destination": "/wallet/how-to/connect/"
     },
     {
       "source": "/guide/accessing-accounts/",
@@ -163,7 +147,7 @@
       "destination": "/wallet/how-to/sign-data/"
     },
     {
-      "source": "/wallet/how-to/use-sdk/javascript/connect-and-sign/",
+      "source": "/wallet/how-to/sign-data/connect-and-sign/",
       "destination": "/sdk/guides/advanced/connect-and-sign/"
     },
     {
@@ -175,15 +159,15 @@
       "destination": "/wallet/how-to/send-transactions/"
     },
     {
-      "source": "/wallet/how-to/use-3rd-party-integrations/js-infura-api/",
+      "source": "/wallet/how-to/use-3rd-party-integrations/:path*/",
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/how-to/use-sdk/javascript/make-read-only-requests/",
-      "destination": "/sdk/guides/advanced/batch-requests/"
+      "source": "/wallet/how-to/make-read-only-requests/",
+      "destination": "/sdk/"
     },
     {
-      "source": "/wallet/how-to/use-sdk/javascript/batch-json-rpc-requests/",
+      "source": "/wallet/how-to/batch-json-rpc-requests/",
       "destination": "/sdk/guides/advanced/batch-requests/"
     },
     {
@@ -211,36 +195,16 @@
       "destination": "/wallet/how-to/display/icon/"
     },
     {
-      "source": "/wallet/how-to/use-sdk/javascript/display-custom-modals/",
-      "destination": "/wallet/how-to/display/custom-modals/"
+      "source": "/wallet/how-to/display/custom-modals/",
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/request-permissions/",
       "destination": "/wallet/how-to/manage-permissions/"
     },
     {
-      "source": "/wallet/how-to/use-3rd-party-integrations/unity-infura/",
-      "destination": "/wallet/how-to/use-unity-sdk/infura/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/gaming/unity/infura/",
-      "destination": "/wallet/how-to/use-unity-sdk/infura/"
-    },
-    {
-      "source": "/wallet/how-to/interact-with-smart-contracts/unity/:path*/",
-      "destination": "/wallet/how-to/use-unity-sdk/smart-contracts/:path*/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/gaming/unity/smart-contracts/:path*/",
-      "destination": "/wallet/how-to/use-unity-sdk/smart-contracts/:path*/"
-    },
-    {
-      "source": "/wallet/how-to/use-3rd-party-integrations/unity-dweb/",
-      "destination": "/wallet/how-to/use-unity-sdk/dweb/"
-    },
-    {
-      "source": "/wallet/how-to/use-sdk/gaming/unity/dweb/",
-      "destination": "/wallet/how-to/use-unity-sdk/dweb/"
+      "source": "/wallet/how-to/interact-with-smart-contracts/:path*/",
+      "destination": "/sdk/guides/interact-with-contracts/"
     },
     {
       "source": "/guide/onboarding-library/",
@@ -287,12 +251,20 @@
       "destination": "/wallet/concepts/wallet-api/"
     },
     {
-      "source": "/wallet/concepts/sdk/connections/",
+      "source": "/wallet/concepts/sdk/:path*/",
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/concepts/sdk/android/",
-      "destination": "/wallet/concepts/android-sdk/"
+      "source": "/wallet/concepts/architecture/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/concepts/sdk-connections",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/concepts/android-sdk",
+      "destination": "/sdk/"
     },
     {
       "source": "/guide/initializing-dapps/",

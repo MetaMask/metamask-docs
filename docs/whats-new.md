@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## January 2025
+
+- Added new [MetaMask SDK documentation section](/sdk).
+  ([#1766](https://github.com/MetaMask/metamask-docs/pull/1766))
+
 ## December 2024
 
 - Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
@@ -21,7 +26,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [updated error responses](/services/reference/ethereum/json-rpc-methods) when rate-limiting Infura JSON-RPC API calls. ([#1749](https://github.com/MetaMask/metamask-docs/pull/1749))
 - Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
-- Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
+- Updated Snaps [custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
   ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
 - Added tutorial for
   [creating a simple Starknet dapp](/wallet/how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp).
