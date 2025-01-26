@@ -72,10 +72,10 @@ When the address is truncated, hovering over the address shows the full value in
 
 - `address`: `string` - A valid Ethereum address, starting with `0x`, or a valid 
   [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
-- `truncate`: `boolean` - (Optional) whether to truncate the address. Defaults to `true`.
-- `displayName`: `boolean` - (Optional) whether to display the internally saved account label in place of the address.
-  Defaults to `true`.
-- `avatar`: `boolean` - (Optional) whether to show the address Jazzicon. Defaults to `true`.
+- `truncate`: `boolean` - (Optional) Whether to truncate the address. The default is `true`.
+- `displayName`: `boolean` - (Optional) Whether to display the internally saved account label in place of the address.
+  The default is `true`.
+- `avatar`: `boolean` - (Optional) Whether to show the address Jazzicon. The default is `true`.
 
 #### Example
 
@@ -140,7 +140,7 @@ Outputs a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon) for an ad
 #### Props
 
 - `address`: `string` - A valid [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) address.
-- `size`: `string` - (Optional) The size of the avatar. Can be `sm`, `md`, or `lg`. Defaults to `md`.
+- `size`: `string` - (Optional) The size of the avatar. Possible values are `"sm"`, `"md"`, and `"lg"`. The default is `"md"`.
 
 :::note
 MetaMask automatically calculates checksums for EVM addresses (`eip155:`). 
@@ -244,8 +244,8 @@ Outputs a box, which can be used as a container for other components.
 - `alignment` - (Optional) The alignment of the elements inside the box.
   Possible values are `"start"`, `"center"`, `"end"`, `"space-between"`, and `"space-around"`.
   The default is `"start"`.
-- `center`: `boolean` - (Optional) whether to center the children within the box.
-  Defaults to `false`.
+- `center`: `boolean` - (Optional) Whether to center the children within the box.
+  The default is `false`.
 
 #### Example
 
@@ -1184,9 +1184,9 @@ Outputs an animated loading container.
 
 #### Props
 
-- `width`: `Array<number | string>` - (Optional) width of the skeleton.
-- `height`: `Array<number | string>` - (Optional) height of the skeleton.
-- `borderRadius`: `string` - (Optional) radius of the corners, can be `none`, `medium` or `full`.
+- `width`: `Array<number | string>` - (Optional) The width of the skeleton.
+- `height`: `Array<number | string>` - (Optional) The height of the skeleton.
+- `borderRadius`: `string` - (Optional) The radius of the corners. Possible values are `"none"`, `"medium"` or `"full"`.
 
 #### Example
 
@@ -1247,7 +1247,7 @@ Outputs text.
   Possible values are `"start"`, `"center"`, and `"end"`.
   The default is `"start"`.
 - `children` - The content to display.
-  This can include strings, [`Bold`](#bold), [`Italic`](#italic), [`Icon`](#icon), [`Link`](#link), and [`Skeleton`](#skeleton) components.
+  This can include strings, and [`Bold`](#bold), [`Italic`](#italic), [`Icon`](#icon), [`Link`](#link), and [`Skeleton`](#skeleton) components.
 
 
 #### Example
