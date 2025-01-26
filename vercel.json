@@ -311,6 +311,10 @@
       "destination": "/wallet/tutorials/react-dapp-local-state/"
     },
     {
+      "source": "/wallet/tutorials/react-dapp-sdk-wagmi/",
+      "destination": "/sdk/"
+    },
+    {
       "source": "/wallet/category/reference/",
       "destination": "/wallet/reference/"
     },
