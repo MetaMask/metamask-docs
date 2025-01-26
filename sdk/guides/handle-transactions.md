@@ -1,27 +1,30 @@
 ---
 description: Handle transactions
+toc_max_heading_level: 2
 ---
 
 # Handle transactions
 
-This guide covers everything you need to know about handling Ethereum (and EVM) transactions with the MetaMask SDK. You'll learn how to:
-- **Send transactions**
-- **Track transaction status** in real-time
-- **Estimate gas costs** accurately
-- **Handle transaction errors** gracefully
-- **Manage complex transaction patterns**
+Handle EVM transactions in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+With the SDK, you can:
 
-We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.
+- **Send transactions**.
+- **Track transaction status** in real time.
+- **Estimate gas costs** accurately.
+- **Handle transaction errors** gracefully.
+- **Manage complex transaction patterns**.
 
-### Using Wagmi
+## Use Wagmi
 
-Wagmi provides hooks for sending transactions and tracking their status:
+Wagmi provides hooks for sending transactions and tracking their status.
+The following are examples of sending a [basic transaction](#basic-transaction) and an
+[advanced transaction with gas estimation](#advanced-transaction-with-gas-estimation).
 
-#### Basic Transaction
+### Basic transaction
 
 ```tsx
-import { parseEther } from 'viem'
-import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi'
+import { parseEther } from "viem"
+import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi"
 
 function SendTransaction() {
   const { 
@@ -40,8 +43,8 @@ function SendTransaction() {
 
   async function handleSend() {
     sendTransaction({
-      to: '0x...', 
-      value: parseEther('0.1')  // 0.1 ETH
+      to: "0x...", 
+      value: parseEther("0.1")  // 0.1 ETH
     })
   }
 
@@ -51,7 +54,7 @@ function SendTransaction() {
         onClick={handleSend}
         disabled={isPending}
       >
-        {isPending ? 'Confirming...' : 'Send 0.1 ETH'}
+        {isPending ? "Confirming..." : "Send 0.1 ETH"}
       </button>
 
       {hash && (
@@ -68,21 +71,21 @@ function SendTransaction() {
 }
 ```
 
-#### Advanced Transaction with Gas Estimation
+### Advanced transaction with gas estimation
 
 ```tsx
-import { parseEther } from 'viem'
+import { parseEther } from "viem"
 import { 
   useSendTransaction, 
   useWaitForTransactionReceipt,
   useEstimateGas
-} from 'wagmi'
+} from "wagmi"
 
 function AdvancedTransaction() {
   const transaction = {
-    to: '0x...',
-    value: parseEther('0.1'),
-    data: '0x...' // Optional contract interaction data
+    to: "0x...",
+    value: parseEther("0.1"),
+    data: "0x..." // Optional contract interaction data
   }
 
   // Estimate gas
@@ -92,7 +95,7 @@ function AdvancedTransaction() {
     ...transaction,
     gas: gasEstimate,
     onSuccess: (hash) => {
-      console.log('Transaction sent:', hash)
+      console.log("Transaction sent:", hash)
     }
   })
 
@@ -100,37 +103,24 @@ function AdvancedTransaction() {
 }
 ```
 
-### Using Vanilla JavaScript
+## Use Vanilla JavaScript
 
-For non-React applications, here's how to implement transaction handling using vanilla JavaScript:
+You can implement transaction handling directly in Vanilla JavaScript.
+The following are examples of sending a [basic transaction](#basic-transaction-1) and an
+[advanced transaction with gas estimation](#advanced-transaction-with-gas-estimation-1).
 
-:::info
-
-Check out the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-
-:::
-
-#### Initialize MetaMask SDK
-
-```javascript
-import MetaMaskSDK from '@metamask/sdk';
-
-const MMSDK = new MetaMaskSDK();
-const ethereum = MMSDK.getProvider();
-```
-
-#### Basic Transaction
+### Basic transaction
 
 ```javascript
 async function sendTransaction(recipientAddress, amount) {
   try {
     // Get current account
     const accounts = await ethereum.request({ 
-      method: 'eth_requestAccounts' 
+      method: "eth_requestAccounts" 
     });
     const from = accounts[0];
 
-    // Convert ETH amount to Wei (hex)
+    // Convert ETH amount to wei (hex)
     const value = `0x${(amount * 1e18).toString(16)}`;
 
     // Prepare transaction
@@ -143,14 +133,14 @@ async function sendTransaction(recipientAddress, amount) {
 
     // Send transaction
     const txHash = await ethereum.request({
-      method: 'eth_sendTransaction',
+      method: "eth_sendTransaction",
       params: [transaction],
     });
 
     return txHash;
   } catch (error) {
     if (error.code === 4001) {
-      throw new Error('Transaction rejected by user');
+      throw new Error("Transaction rejected by user");
     }
     throw error;
   }
@@ -162,15 +152,15 @@ function watchTransaction(txHash) {
     const checkTransaction = async () => {
       try {
         const tx = await ethereum.request({
-          method: 'eth_getTransactionReceipt',
+          method: "eth_getTransactionReceipt",
           params: [txHash],
         });
 
         if (tx) {
-          if (tx.status === '0x1') {
+          if (tx.status === "0x1") {
             resolve(tx);
           } else {
-            reject(new Error('Transaction failed'));
+            reject(new Error("Transaction failed"));
           }
         } else {
           setTimeout(checkTransaction, 2000); // Check every 2 seconds
@@ -185,7 +175,7 @@ function watchTransaction(txHash) {
 }
 ```
 
-#### Example Implementation
+The following is an example implementation of the basic transaction:
 
 ```html
 <div class="transaction-form">
@@ -197,19 +187,19 @@ function watchTransaction(txHash) {
 
 <script>
 async function handleSend() {
-  const recipient = document.getElementById('recipient').value;
-  const amount = document.getElementById('amount').value;
-  const status = document.getElementById('status');
+  const recipient = document.getElementById("recipient").value;
+  const amount = document.getElementById("amount").value;
+  const status = document.getElementById("status");
   
   try {
-    status.textContent = 'Sending transaction...';
+    status.textContent = "Sending transaction...";
     const txHash = await sendTransaction(recipient, amount);
     status.textContent = `Transaction sent: ${txHash}`;
 
     // Watch for confirmation
-    status.textContent = 'Waiting for confirmation...';
+    status.textContent = "Waiting for confirmation...";
     await watchTransaction(txHash);
-    status.textContent = 'Transaction confirmed!';
+    status.textContent = "Transaction confirmed!";
   } catch (error) {
     status.textContent = `Error: ${error.message}`;
   }
@@ -217,54 +207,64 @@ async function handleSend() {
 </script>
 ```
 
-#### Gas Estimation
+### Advanced transaction with gas estimation
 
 ```javascript
 async function estimateGas(transaction) {
   try {
     const gasEstimate = await ethereum.request({
-      method: 'eth_estimateGas',
+      method: "eth_estimateGas",
       params: [transaction]
     });
     
     // Add 20% buffer for safety
     return BigInt(gasEstimate) * 120n / 100n;
   } catch (error) {
-    console.error('Gas estimation failed:', error);
+    console.error("Gas estimation failed:", error);
     throw error;
   }
 }
 ```
 
-### Best Practices
+:::info
+See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+:::
 
-1. **Transaction Security**
-    - Always **validate inputs** before sending transactions
-    - Check wallet balances to **ensure sufficient** funds
-    - **Verify addresses** are valid
+## Best practices
 
-2. **Error Handling**
-    - Handle common errors like **user rejection** and **insufficient funds**
-    - Provide **clear error messages** to users
-    - Implement proper **error recovery** flows
-    - Consider **network congestion** in gas estimates
+Follow these best practices when handling transactions.
 
-3. **User Experience**
-    - Display **clear loading states** during transactions
-    - Show **transaction progress** in real-time
-    - Provide **detailed transaction information**
+#### Transaction security
 
-### Common Errors
+- Always **validate inputs** before sending transactions.
+- Check wallet balances to **ensure sufficient** funds.
+- **Verify addresses** are valid.
 
-| Error Code | Description | Solution |
+#### Error handling
+
+- Handle [common errors](#common-errors) like **user rejection** and **insufficient funds**.
+- Provide **clear error messages** to users.
+- Implement proper **error recovery** flows.
+- Consider **network congestion** in gas estimates.
+
+#### User experience
+
+- Display **clear loading states** during transactions.
+- Show **transaction progress** in real time.
+- Provide **detailed transaction information**.
+## Common errors
+
+| Error code | Description | Solution |
 |------------|-------------|----------|
-| **4001** | User rejected transaction | Show retry option and clear error message |
-| **-32603** | Insufficient funds | Check balance before sending transaction |
-| **-32000** | Gas too low | Increase gas limit or add buffer to estimation |
-| **-32002** | Request already pending | Prevent multiple concurrent transactions |
+| `4001`   | User rejected transaction | Show a retry option and a clear error message.  |
+| `-32603` | Insufficient funds        | Check the balance before sending a transaction. |
+| `-32000` | Gas too low               | Increase the gas limit or add a buffer to the estimation. |
+| `-32002` | Request already pending   | Prevent multiple concurrent transactions.       |
 
-### Next Steps
+## Next steps
 
-- [User Authentication](/sdk/guides/user-authentication)
-- [Network Management](/sdk/guides/network-management)
-- [Interact with Contracts](/sdk/guides/interact-with-contracts)
+See the following guides to add more functionality to your dapp:
+
+- [Authenticate users](authenticate-users.md)
+- [Manage networks](manage-networks.md)
+- [Interact with smart contracts](interact-with-contracts.md)

@@ -7,8 +7,7 @@ import TabItem from "@theme/TabItem";
 
 # SDK options
 
-The [JavaScript version of MetaMask SDK](../connect/metamask-sdk/javascript/index.md) takes the
-following options.
+MetaMask SDK takes the following configuration options.
 
 ### `checkInstallationImmediately`
 
@@ -140,8 +139,7 @@ defaultReadOnlyChainId: "0x1"
 </TabItem>
 </Tabs>
 
-Enables sending [read-only RPC requests](../how-to/make-read-only-requests.md) to
-this chain ID before the user connects to MetaMask.
+Enables sending read-only RPC requests to this chain ID before the user connects to MetaMask.
 The value is automatically updated to the chain ID used in MetaMask once connected.
 
 ### `enableAnalytics`
@@ -209,10 +207,10 @@ infuraAPIKey: process.env.INFURA_API_KEY
 
 The [Infura API key](/developer-tools/dashboard/get-started/create-api) to
 use for RPC requests.
-Configure this option to [make read-only RPC requests from your dapp](../how-to/make-read-only-requests.md).
+Configure this option to make read-only RPC requests from your dapp.
 
 :::caution important
-Use [Infura allowlists](https://docs.infura.io/networks/ethereum/how-to/secure-a-project/use-an-allowlist)
+Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
 to protect against other people submitting requests to your API key.
 You can restrict interactions to specific addresses, origins, user agents, and request methods.
 We recommend using all allowlist options to maximize the security of your API key and dapp.
@@ -238,7 +236,7 @@ headless: true
 </Tabs>
 
 Enables or disables headless mode.
-Setting this to `true` allows you to [display custom modals](../how-to/display/custom-modals.md).
+Setting this to `true` allows you to display custom modals.
 The default is `false`.
 
 ### `openDeeplink`
@@ -287,7 +285,7 @@ readonlyRPCMap: {
 </TabItem>
 </Tabs>
 
-A map of RPC URLs to use for [read-only RPC requests](../how-to/make-read-only-requests.md).
+A map of RPC URLs to use for read-only RPC requests.
 
 ### `shouldShimWeb3`
 

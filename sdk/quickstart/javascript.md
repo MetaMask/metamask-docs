@@ -2,26 +2,35 @@
 description: JavaScript
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # JavaScript
 
-This guide covers setting up MetaMask SDK in JavaScript applications. The SDK enables your users to easily connect to MetaMask extension and mobile app across different JavaScript environments.
+Get started with MetaMask SDK in your JavaScript dapp.
 
-### Prerequisites
+## Steps
 
-- MetaMask Mobile v5.8.1+
-- npm or yarn installed
+### 1. Install the SDK
 
-### Installation
+Install the SDK in an existing JavaScript project using npm or Yarn:
 
 ```bash
 npm install @metamask/sdk
-# or
+```
+
+or
+
+```
 yarn add @metamask/sdk
 ```
 
-### Basic Usage
+### 2.  Use the SDK
 
-#### Web Applications
+The following are examples of using the SDK in various JavaScript environments:
+
+<Tabs>
+<TabItem value="Web dapps">
 
 ```javascript
 import { MetaMaskSDK } from "@metamask/sdk"
@@ -46,7 +55,8 @@ const result = await ethereum.request({
 })
 ```
 
-#### Pure JavaScript (CDN)
+</TabItem>
+<TabItem value="Pure JavaScript (CDN)">
 
 ```html
 <head>
@@ -64,7 +74,8 @@ const result = await ethereum.request({
 </head>
 ```
 
-#### Node.js
+</TabItem>
+<TabItem value="Node.js">
 
 ```javascript
 import { MetaMaskSDK } from "@metamask/sdk"
@@ -84,13 +95,17 @@ console.log("Connected accounts:", accounts)
 const provider = MMSDK.getProvider()
 ```
 
-### Configuration Options
+</TabItem>
+</Tabs>
 
-The SDK accepts several options when initializing:
+### 3. Configure the SDK
+
+The SDK accepts several [configuration options](../reference/sdk-options.md) when initializing.
+For example:
 
 ```javascript
 const MMSDK = new MetaMaskSDK({
-  // Required - your dapp's info
+  // Required - Your dapp's info
   dappMetadata: {
     name: "Your Dapp Name",
     url: window.location.href,
@@ -99,12 +114,14 @@ const MMSDK = new MetaMaskSDK({
   // Optional - Infura API key for read-only RPC calls
   infuraAPIKey: process.env.INFURA_API_KEY,
   
-  // Optional - customize modal display
+  // Optional - Customize modal display
   headless: false,
 })
 ```
 
-### Common SDK Methods
+### 4. Call common methods
+
+The following are common methods you can call with the SDK:
 
 ```javascript
 // Connect and get accounts

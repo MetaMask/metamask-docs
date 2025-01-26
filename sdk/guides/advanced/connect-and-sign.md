@@ -4,19 +4,13 @@ description: Connect and sign in a single interaction.
 
 # Connect and sign
 
-You can connect to MetaMask and sign data in a single interaction from your JavaScript, iOS,
-Android.
+You can connect to MetaMask and sign data in a single interaction from your JavaScript dapp.
 
 The SDK's `connectAndSign` method provides a streamlined approach for dapps to interact with MetaMask.
-This method combines the [`eth_requestAccounts`] and [`personal_sign`] RPC methods, executing them sequentially.
+This method combines the [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts)
+and [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) RPC methods, executing them sequentially.
 `connectAndSign` takes one parameter, the message string to be signed, and passes the message and
-the output of [`eth_requestAccounts`] directly to [`personal_sign`].
-
-:::info
-
-Check out the [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-
-:::
+the output of `eth_requestAccounts` directly to `personal_sign`.
 
 This method enhances dapp user experience, especially on mobile platforms, by allowing users to
 connect to MetaMask and sign a message in a single interaction, requiring only one switch between
@@ -92,14 +86,7 @@ function MyComponent() {
 }
 ```
 
-For a comprehensive React example, see the `App.tsx` file of the example React dapp.
-
 For examples of using the `connectAndSign` function in Next.js and Vue.js, see the
 [example Next.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nextjs-demo)
 and [example Vue.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/vuejs)
-in the JavaScript SDK GitHub repository.
-
-<!--links-->
-
-[`eth_requestAccounts`]: /wallet/reference/json-rpc-methods/eth_requestAccounts
-[`personal_sign`]: /wallet/reference/json-rpc-methods/personal_sign
+on GitHub.

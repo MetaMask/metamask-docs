@@ -1,26 +1,29 @@
 ---
 description: Interact with contracts
+sidebar_label: Interact with contracts
+toc_max_heading_level: 2
 ---
 
-# Interact with contracts 
+# Interact with smart contracts 
 
-This guide covers everything you need to know about interacting with smart contracts using the MetaMask SDK. You'll learn how to:
-- **Read data** from smart contracts
-- **Write data** to smart contracts
-- **Handle contract events**
-- **Manage transaction states**
-- **Handle contract errors**
+Interact with smart contracts in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+With the SDK, you can:
 
-We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.
+- **Read data** from smart contracts.
+- **Write data** to smart contracts.
+- **Handle contract events**.
+- **Manage transaction states**.
+- **Handle contract errors**.
 
-### Using Wagmi
+## Use Wagmi
 
-Wagmi provides dedicated hooks for contract interactions, making it simple to read and write contract data:
+Wagmi provides dedicated hooks for smart contract interactions.
+The following are examples of using these hooks.
 
-#### Reading Contract Data
+Read contract data:
 
 ```tsx
-import { useReadContract } from 'wagmi'
+import { useReadContract } from "wagmi"
 
 function TokenBalance() {
   const { 
@@ -28,18 +31,18 @@ function TokenBalance() {
     isError,
     isLoading 
   } = useReadContract({
-    address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+    address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
     abi: [
       {
-        name: 'balanceOf',
-        type: 'function',
-        stateMutability: 'view',
-        inputs: [{ name: 'owner', type: 'address' }],
-        outputs: [{ name: 'balance', type: 'uint256' }],
+        name: "balanceOf",
+        type: "function",
+        stateMutability: "view",
+        inputs: [{ name: "owner", type: "address" }],
+        outputs: [{ name: "balance", type: "uint256" }],
       },
     ],
-    functionName: 'balanceOf',
-    args: ['0x03A71968491d55603FFe1b11A9e23eF013f75bCF'],
+    functionName: "balanceOf",
+    args: ["0x03A71968491d55603FFe1b11A9e23eF013f75bCF"],
   })
 
   if (isLoading) return <div>Loading balance...</div>
@@ -49,10 +52,10 @@ function TokenBalance() {
 }
 ```
 
-#### Writing to Contracts
+Write to contracts:
 
 ```tsx
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
 
 function MintNFT() {
   const { 
@@ -71,17 +74,17 @@ function MintNFT() {
   
   function mint() {
     writeContract({
-      address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+      address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
       abi: [
         {
-          name: 'mint',
-          type: 'function',
-          stateMutability: 'nonpayable',
-          inputs: [{ name: 'tokenId', type: 'uint256' }],
+          name: "mint",
+          type: "function",
+          stateMutability: "nonpayable",
+          inputs: [{ name: "tokenId", type: "uint256" }],
           outputs: [],
         },
       ],
-      functionName: 'mint',
+      functionName: "mint",
       args: [123n], // Token ID
     })
   }
@@ -92,7 +95,7 @@ function MintNFT() {
         onClick={mint}
         disabled={isPending || isConfirming}
       >
-        {isPending ? 'Confirming...' : 'Mint NFT'}
+        {isPending ? "Confirming..." : "Mint NFT"}
       </button>
 
       {hash && (
@@ -109,37 +112,22 @@ function MintNFT() {
 }
 ```
 
-### Using Vanilla JavaScript
+## Use Vanilla JavaScript
 
-For non-React applications, here's how to implement contract interactions using vanilla JavaScript:
+You can implement smart contract interactions directly in Vanilla JavaScript.
 
-:::info
-
-Check out the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-
-:::
-
-#### Initialize MetaMask SDK
-
-```javascript
-import MetaMaskSDK from '@metamask/sdk';
-
-const MMSDK = new MetaMaskSDK();
-const ethereum = MMSDK.getProvider();
-```
-
-#### Reading Contract Data
+For example, read contract data:
 
 ```javascript
 async function getBalance(contractAddress, userAddress) {
   try {
     // Create function signature for balanceOf(address)
-    const functionSignature = '0x70a08231';
+    const functionSignature = "0x70a08231";
     // Pad address to 32 bytes
-    const encodedAddress = userAddress.slice(2).padStart(64, '0');
+    const encodedAddress = userAddress.slice(2).padStart(64, "0");
     
     const result = await ethereum.request({
-      method: 'eth_call',
+      method: "eth_call",
       params: [{
         to: contractAddress,
         data: functionSignature + encodedAddress,
@@ -148,18 +136,18 @@ async function getBalance(contractAddress, userAddress) {
     
     return BigInt(result);
   } catch (error) {
-    console.error('Error reading balance:', error);
+    console.error("Error reading balance:", error);
     throw error;
   }
 }
 
 // Example usage
 async function displayBalance() {
-  const status = document.getElementById('status');
+  const status = document.getElementById("status");
   try {
     const balance = await getBalance(
-      '0xContractAddress',
-      '0xUserAddress'
+      "0xContractAddress",
+      "0xUserAddress"
     );
     status.textContent = `Balance: ${balance.toString()}`;
   } catch (error) {
@@ -168,24 +156,24 @@ async function displayBalance() {
 }
 ```
 
-#### Writing to Contracts
+Write to contracts:
 
 ```javascript
 async function mintNFT(contractAddress, tokenId) {
   try {
-    // Get user's account
+    // Get user"s account
     const accounts = await ethereum.request({ 
-      method: 'eth_requestAccounts' 
+      method: "eth_requestAccounts" 
     });
     
     // Create function signature for mint(uint256)
-    const functionSignature = '0x6a627842';
+    const functionSignature = "0x6a627842";
     // Pad tokenId to 32 bytes
-    const encodedTokenId = tokenId.toString(16).padStart(64, '0');
+    const encodedTokenId = tokenId.toString(16).padStart(64, "0");
     
     // Send transaction
     const txHash = await ethereum.request({
-      method: 'eth_sendTransaction',
+      method: "eth_sendTransaction",
       params: [{
         from: accounts[0],
         to: contractAddress,
@@ -196,7 +184,7 @@ async function mintNFT(contractAddress, tokenId) {
     return txHash;
   } catch (error) {
     if (error.code === 4001) {
-      throw new Error('Transaction rejected by user');
+      throw new Error("Transaction rejected by user");
     }
     throw error;
   }
@@ -208,15 +196,15 @@ async function watchTransaction(txHash) {
     const checkTransaction = async () => {
       try {
         const tx = await ethereum.request({
-          method: 'eth_getTransactionReceipt',
+          method: "eth_getTransactionReceipt",
           params: [txHash],
         });
 
         if (tx) {
-          if (tx.status === '0x1') {
+          if (tx.status === "0x1") {
             resolve(tx);
           } else {
-            reject(new Error('Transaction failed'));
+            reject(new Error("Transaction failed"));
           }
         } else {
           setTimeout(checkTransaction, 2000);
@@ -231,7 +219,7 @@ async function watchTransaction(txHash) {
 }
 ```
 
-#### Example Implementation
+The following is an example implementation of contract interaction:
 
 ```html
 <div class="contract-interaction">
@@ -241,16 +229,16 @@ async function watchTransaction(txHash) {
 
 <script>
 async function handleMint() {
-  const status = document.getElementById('status');
+  const status = document.getElementById("status");
   
   try {
-    status.textContent = 'Sending transaction...';
-    const txHash = await mintNFT('0xContractAddress', 123);
+    status.textContent = "Sending transaction...";
+    const txHash = await mintNFT("0xContractAddress", 123);
     status.textContent = `Transaction sent: ${txHash}`;
 
-    status.textContent = 'Waiting for confirmation...';
+    status.textContent = "Waiting for confirmation...";
     await watchTransaction(txHash);
-    status.textContent = 'NFT Minted Successfully!';
+    status.textContent = "NFT Minted Successfully!";
   } catch (error) {
     status.textContent = `Error: ${error.message}`;
   }
@@ -258,37 +246,48 @@ async function handleMint() {
 </script>
 ```
 
-### Best Practices
+:::info
+See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+:::
 
-1. **Contract Validation**
-   - Always **verify contract addresses**
-   - Double-check **ABI correctness**
-   - **Validate input data** before sending
-   - Use **typed data** when possible (for example by using [viem](https://viem.sh/))
+## Best practices
 
-2. **Error Handling**
-   - Handle common errors like **user rejection** and **contract reverts**
-   - Provide **clear error messages** to users
-   - Implement proper **error recovery** flows
-   - Consider **gas estimation failures**
+Follow these best practices when interacting with smart contracts.
 
-3. **User Experience**
-   - Show **clear loading states**
-   - Display **transaction progress**
-   - Provide **confirmation feedback**
-   - Enable proper **error recovery**
+#### Contract validation
 
-### Common Errors
+- Always **verify contract addresses**.
+- Double check **ABI correctness**.
+- **Validate input data** before sending.
+- Use **typed data** when possible (for example, using [Viem](https://viem.sh/)).
 
-| Error Code | Description | Solution |
+#### Error handling
+
+- Handle [common errors](#common-errors) like **user rejection** and **contract reverts**.
+- Provide **clear error messages** to users.
+- Implement proper **error recovery** flows.
+- Consider **gas estimation failures**.
+
+#### User experience
+
+- Show **clear loading states**.
+- Display **transaction progress**.
+- Provide **confirmation feedback**.
+- Enable proper **error recovery**.
+
+## Common errors
+
+| Error code | Description | Solution |
 |------------|-------------|----------|
-| **4001** | User rejected transaction | Show clear message and retry option |
-| **-32000** | Invalid input | Validate input data before sending |
-| **-32603** | Contract execution reverted | Check contract conditions and handle gracefully |
-| **-32002** | Request already pending | Prevent multiple concurrent transactions |
+| `4001`   | User rejected transaction   | Show a retry option and a clear error message. |
+| `-32000` | Invalid input               | Validate the input data before sending.        |
+| `-32603` | Contract execution reverted | Check the contract conditions and handle the error gracefully. |
+| `-32002` | Request already pending     | Prevent multiple concurrent transactions.      |
 
-### Next Steps
+## Next steps
 
-- [User Authentication](/sdk/guides/user-authentication)
-- [Network Management](/sdk/guides/network-management)
-- [Transaction Handling](/sdk/guides/transaction-handling)
+See the following guides to add more functionality to your dapp:
+
+- [Authenticate users](authenticate-users.md)
+- [Manage networks](manage-networks.md)
+- [Handle transactions](handle-transactions.md)

@@ -4,22 +4,22 @@
 const sidebar = {
   walletSidebar: [
     {
-      type: 'category',
-      label: 'Introduction',
-      collapsible: false,  
-      collapsed: false,
-      items: [
-        'introduction/welcome',
-        'introduction/wallet-api',
-      ],
+      type: "doc",
+      label: "Introduction",
+      id: "index",
     },
     {
       type: "category",
       label: "How to",
       collapsible: true,
-      collapsed: true,
+      collapsed: false,
       link: { type: "generated-index", slug: "/how-to" },
       items: [
+        {
+          type: "doc",
+          label: "Connect to MetaMask",
+          id: "how-to/connect"
+        },
         {
           type: "doc",
           label: "Access a user's accounts",

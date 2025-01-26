@@ -1,10 +1,13 @@
 ---
 description: Authenticate users
+toc_max_heading_level: 2
 ---
 
 # Authenticate users
 
-Connect and manage user wallet sessions in your dApp. This guide covers both **Wagmi** (recommended) and **vanilla JavaScript** approaches.
+Connect and manage user wallet sessions in your [Wagmi](#use-wagmi) or
+[Vanilla JavaScript](#use-vanilla-javascript) dapp.
+With the SDK, you can:
 
 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
     <div style={{ flex: '3' }}>
@@ -14,23 +17,24 @@ Connect and manage user wallet sessions in your dApp. This guide covers both **W
     </div>
     <div style={{ flex: '3' }}>
         <ul>
-            <li><strong>Connect users' wallets</strong> to your dApp</li>
-            <li><strong>Access user accounts</strong> (addresses)</li>
-            <li><strong>Handle connection states</strong> (connected/disconnected)</li>
-            <li><strong>Listen for account changes</strong> in real-time</li>
-            <li><strong>Manage wallet sessions</strong> (connect/disconnect)</li>
-            <li><strong>Support multiple wallet types</strong> (extension, mobile app)</li>
+            <li><strong>Connect users' wallets</strong> to your dapp.</li>
+            <li><strong>Access user accounts</strong> (addresses).</li>
+            <li><strong>Handle connection states</strong> (connected/disconnected).</li>
+            <li><strong>Listen for account changes</strong> in real time.</li>
+            <li><strong>Manage wallet sessions</strong> (connect/disconnect).</li>
+            <li><strong>Support multiple wallet types</strong> (extension, mobile app).</li>
         </ul>
     </div>
 </div>
 
 
-### Using Wagmi
+## Use Wagmi
 
-Wagmi provides a simple, hook-based approach for handling wallet connections:
+Wagmi provides a simple, hook-based approach for handling wallet connections.
+For example:
 
-```tsx
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+```tsx title="Handle wallet connections"
+import { useAccount, useConnect, useDisconnect } from "wagmi"
 
 function ConnectWallet() {
   const { address, isConnected } = useAccount()
@@ -54,7 +58,7 @@ function ConnectWallet() {
           onClick={() => connect({ connector })}
           disabled={isPending}
         >
-          {isPending ? 'Connecting...' : `Connect ${connector.name}`}
+          {isPending ? "Connecting..." : `Connect ${connector.name}`}
         </button>
       ))}
     </div>
@@ -62,24 +66,22 @@ function ConnectWallet() {
 }
 ```
 
-#### Handle Account Changes
-
 Wagmi provides a dedicated hook for handling account lifecycle events:
 
 ```tsx
-import { useAccountEffect } from 'wagmi'
+import { useAccountEffect } from "wagmi"
 
 function WatchAccount() {
   useAccountEffect({
     onConnect(data) {
-      console.log('Connected!', {
+      console.log("Connected!", {
         address: data.address,
         chainId: data.chainId,
         isReconnected: data.isReconnected
       })
     },
     onDisconnect() {
-      console.log('Disconnected!')
+      console.log("Disconnected!")
     }
   })
   
@@ -87,12 +89,13 @@ function WatchAccount() {
 }
 ```
 
-### Using Vanilla JavaScript
+## Use Vanilla JavaScript
 
-If you're not using React, here's how to implement authentication directly:
+You can implement user authentication directly in Vanilla JavaScript.
+For example:
 
 ```javascript
-import { MetaMaskSDK } from '@metamask/sdk';
+import { MetaMaskSDK } from "@metamask/sdk";
 
 // Initialize SDK
 const MMSDK = new MetaMaskSDK();
@@ -102,51 +105,45 @@ const provider = MMSDK.getProvider();
 async function connectWallet() {
   try {
     // Disable button while request is pending
-    document.getElementById('connectBtn').disabled = true;
+    document.getElementById("connectBtn").disabled = true;
     
     const accounts = await provider.request({ 
-      method: 'eth_requestAccounts' 
+      method: "eth_requestAccounts" 
     });
     
     const account = accounts[0];
-    console.log('Connected:', account);
+    console.log("Connected:", account);
     
     // Update UI
-    document.getElementById('status').textContent = `Connected: ${account}`;
-    document.getElementById('connectBtn').style.display = 'none';
-    document.getElementById('disconnectBtn').style.display = 'block';
+    document.getElementById("status").textContent = `Connected: ${account}`;
+    document.getElementById("connectBtn").style.display = "none";
+    document.getElementById("disconnectBtn").style.display = "block";
   } catch (err) {
     if (err.code === 4001) {
-      console.log('User rejected connection');
+      console.log("User rejected connection");
     } else {
       console.error(err);
     }
   } finally {
-    document.getElementById('connectBtn').disabled = false;
+    document.getElementById("connectBtn").disabled = false;
   }
 }
 
 // Handle account changes
-provider.on('accountsChanged', (accounts) => {
+provider.on("accountsChanged", (accounts) => {
   if (accounts.length === 0) {
     // User disconnected
-    document.getElementById('status').textContent = 'Not connected';
-    document.getElementById('connectBtn').style.display = 'block';
-    document.getElementById('disconnectBtn').style.display = 'none';
+    document.getElementById("status").textContent = "Not connected";
+    document.getElementById("connectBtn").style.display = "block";
+    document.getElementById("disconnectBtn").style.display = "none";
   } else {
     // Account changed
-    document.getElementById('status').textContent = `Connected: ${accounts[0]}`;
+    document.getElementById("status").textContent = `Connected: ${accounts[0]}`;
   }
 });
 ```
 
-:::info
-
-Check out the [Provider API](/wallet/reference/provider-api) reference for more information.
-
-:::
-
-#### HTML
+Display connect and disconnect buttons in HTML:
 
 ```html
 <div>
@@ -158,39 +155,54 @@ Check out the [Provider API](/wallet/reference/provider-api) reference for more 
 </div>
 ```
 
-### Best Practices
+:::info
+See the [Provider API](/wallet/reference/provider-api) reference for more information.
+:::
 
-1. **User Interaction**
-   - Only trigger connection requests in response to user actions (like button clicks)
-   - Never auto-connect on page load
-   - Provide clear feedback during connection states
+## Best practices
 
-2. **Error Handling**
-   - Handle common errors like user rejection (code 4001)
-   - Provide clear error messages to users
-   - Fallback gracefully when MetaMask is not installed
+Follow these best practices when authenticating users.
 
-3. **Account Changes**
-   - Always listen for account changes
-   - Update your UI when accounts change
-   - Handle disconnection events
+#### User interaction
 
-4. **Chain Support**
-   - Listen for network/chain changes
-   - Verify the current chain meets your requirements
-   - Provide clear messaging when users need to switch networks
-   - Learn more here: [Network Management](/sdk/guides/network-management)
+- Only trigger connection requests in response to user actions (like selecting a button).
+- Never auto-connect on page load.
+- Provide clear feedback during connection states.
 
-### Common Errors
+#### Error handling
 
-| Error Code | Description | Solution |
+- Handle [common errors](#common-errors) like user rejection (code `4001`).
+- Provide clear error messages to users.
+- Fall back gracefully when MetaMask is not installed.
+
+#### Account changes
+
+- Always listen for account changes.
+- Update your UI when accounts change.
+- Handle disconnection events.
+
+#### Chain support
+
+- Listen for network/chain changes.
+- Verify the current chain meets your requirements.
+- Provide clear messaging when users need to switch networks.
+
+Learn how to [manage networks](manage-networks.md).
+
+## Common errors
+
+The following table lists common authentication errors and their codes:
+
+| Error code | Description | Solution |
 |------------|-------------|----------|
-| **4001** | User rejected request | Show a message asking user to approve the connection |
-| **-32002** | Request already pending | Disable connect button while request is pending |
-| **-32603** | Internal JSON-RPC error | Check if MetaMask is properly installed |
+| `4001`   | User rejected request   | Show a message asking the user to approve the connection. |
+| `-32002` | Request already pending | Disable the connect button while the request is pending. |
+| `-32603` | Internal JSON-RPC error | Check if MetaMask is properly installed. |
 
-### Next Steps
+## Next steps
 
-- [Network Management](/sdk/guides/network-management)
-- [Transaction Handling](/sdk/guides/transaction-handling)
-- [Interact with Contracts](/sdk/guides/interact-with-contracts)
+See the following guides to add more functionality to your dapp:
+
+- [Manage networks](manage-networks.md)
+- [Handle transactions](handle-transactions.md)
+- [Interact with smart contracts](interact-with-contracts.md)

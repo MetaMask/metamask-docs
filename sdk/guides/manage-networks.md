@@ -1,11 +1,12 @@
 ---
 description: Manage networks
+toc_max_heading_level: 2
 ---
 
 # Manage networks
 
-This guide covers everything you need to know about managing networks in your dApp using the MetaMask SDK. 
-We provide implementations using both **Wagmi** (recommended) and **vanilla JavaScript**.
+Manage networks in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+With the SDK, you can:
 
 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
     <div style={{ flex: '3' }}>
@@ -15,22 +16,23 @@ We provide implementations using both **Wagmi** (recommended) and **vanilla Java
     </div>
     <div style={{ flex: '3' }}>
         <ul>
-            <li><strong>Detect the current network</strong> and monitor network changes</li>
-            <li><strong>Switch between networks</strong> programmatically</li>
-            <li><strong>Add new networks</strong> to MetaMask</li>
-            <li><strong>Handle common network-related errors</strong></li>
+            <li><strong>Detect the current network</strong> and monitor network changes.</li>
+            <li><strong>Switch between networks</strong> programmatically.</li>
+            <li><strong>Add new networks</strong> to MetaMask.</li>
+            <li><strong>Handle common network-related errors</strong>.</li>
         </ul>
     </div>
 </div>
 
-### Using Wagmi
+## Use Wagmi
 
-Wagmi provides intuitive hooks for all network-related operations, making chain management straightforward in React applications.
+Wagmi provides intuitive hooks for several network-related operations.
+The following are examples of using these hooks.
 
-#### Detect Current Network
+Detect the current network:
 
 ```tsx
-import { useChainId, useChains } from 'wagmi'
+import { useChainId, useChains } from "wagmi"
 
 function NetworkStatus() {
   const chainId = useChainId()
@@ -46,16 +48,16 @@ function NetworkStatus() {
     <div>
       <div>Connected to {currentChain.name}</div>
       <div>Chain ID: {chainId}</div>
-      <div>Supported chains: {chains.map(c => c.name).join(', ')}</div>
+      <div>Supported chains: {chains.map(c => c.name).join(", ")}</div>
     </div>
   )
 }
 ```
 
-#### Switch Networks
+Switch networks:
 
 ```tsx
-import { useSwitchChain } from 'wagmi'
+import { useSwitchChain } from "wagmi"
 
 function NetworkSwitcher() {
   const { chains, switchChain } = useSwitchChain()
@@ -75,85 +77,70 @@ function NetworkSwitcher() {
 }
 ```
 
-#### Handle Network Changes
+Handle network changes:
 
 ```tsx
-import { useChainId } from 'wagmi'
-import { useEffect } from 'react'
+import { useChainId } from "wagmi"
+import { useEffect } from "react"
 
 function NetworkWatcher() {
   const chainId = useChainId()
   
   useEffect(() => {
-    console.log('Chain ID changed:', chainId)
+    console.log("Chain ID changed:", chainId)
   }, [chainId])
   
   return null
 }
 ```
 
-### Using Vanilla JavaScript
+## Use Vanilla JavaScript
 
-For non-React applications, here's how to implement network management using vanilla JavaScript:
+You can implement network management directly in Vanilla JavaScript.
 
-:::info
-
-Check out the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-
-:::
-
-#### Initialize MetaMask SDK
-
-```javascript
-import MetaMaskSDK from '@metamask/sdk';
-
-const MMSDK = new MetaMaskSDK();
-const ethereum = MMSDK.getProvider();
-```
-
-#### Detect Current Network
+For example, detect the current network:
 
 ```javascript
 // Get current chain ID
 async function getCurrentChain() {
   try {
     const chainId = await ethereum.request({ 
-      method: 'eth_chainId' 
+      method: "eth_chainId" 
     });
-    console.log('Current chain ID:', chainId);
+    console.log("Current chain ID:", chainId);
     return chainId;
   } catch (err) {
-    console.error('Error getting chain:', err);
+    console.error("Error getting chain:", err);
   }
 }
 
 // Listen for network changes
-ethereum.on('chainChanged', (chainId) => {
-  console.log('Network changed to:', chainId);
+ethereum.on("chainChanged", (chainId) => {
+  console.log("Network changed to:", chainId);
   // We recommend reloading the page
   window.location.reload();
 });
 ```
 
-#### Switch Networks
+Switch networks:
 
 ```javascript
 // Network configurations
 const networks = {
   mainnet: {
-    chainId: '0x1',
-    name: 'Ethereum Mainnet'
+    chainId: "0x1",
+    name: "Ethereum Mainnet"
   },
   optimism: {
-    chainId: '0xA',
-    name: 'Optimism',
-    rpcUrls: ['https://mainnet.optimism.io'],
+    chainId: "0xA",
+    name: "Optimism",
+    rpcUrls: ["https://mainnet.optimism.io"],
     nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: "Ethereum",
+      symbol: "ETH",
       decimals: 18
     },
-    blockExplorerUrls: ['https://optimistic.etherscan.io']
+    blockExplorerUrls: ["https://optimistic.etherscan.io"]
   }
 };
 
@@ -163,7 +150,7 @@ async function switchNetwork(networkKey) {
   try {
     // Try to switch to the network
     await ethereum.request({
-      method: 'wallet_switchEthereumChain',
+      method: "wallet_switchEthereumChain",
       params: [{ chainId: network.chainId }]
     });
   } catch (err) {
@@ -171,7 +158,7 @@ async function switchNetwork(networkKey) {
     if (err.code === 4902) {
       try {
         await ethereum.request({
-          method: 'wallet_addEthereumChain',
+          method: "wallet_addEthereumChain",
           params: [{
             chainId: network.chainId,
             chainName: network.name,
@@ -181,50 +168,60 @@ async function switchNetwork(networkKey) {
           }]
         });
       } catch (addError) {
-        console.error('Error adding network:', addError);
+        console.error("Error adding network:", addError);
       }
     } else {
-      console.error('Error switching network:', err);
+      console.error("Error switching network:", err);
     }
   }
 }
 ```
 
-#### Example HTML Implementation
+Display the current network and a switch network button in HTML:
 
 ```html
 <div>
   <div id="networkStatus">Current Network: Loading...</div>
-  <button onclick="switchNetwork('mainnet')">Switch to Mainnet</button>
-  <button onclick="switchNetwork('optimism')">Switch to Optimism</button>
+  <button onclick="switchNetwork("mainnet")">Switch to Mainnet</button>
+  <button onclick="switchNetwork("optimism")">Switch to Optimism</button>
 </div>
 ```
 
+:::info
+See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
+:::
 
+## Best practices
 
-### Best Practices
+Follow these best practices when managing networks.
 
-1. **Error Handling**
-   - Implement error handling for network switching operations
-   - Provide **clear feedback messages** to users when network operations fail
-   - Handle cases where networks need to be **added before switching**
+#### Error handling
 
-2. **User Experience**
-   - Display **loading states** during network switches
-   - Show **clear network status information** at all times
-   - Consider **warning users** before initiating network switches
-   - Use an **RPC provider** that supports your target networks
+- Implement error handling for network switching operations.
+- Provide **clear feedback messages** to users when network operations fail.
+- Handle cases where networks need to be **added before switching**.
 
-### Common Errors
+#### User experience
 
-| Error Code | Description | Solution |
+- Display **loading states** during network switches.
+- Show **clear network status information** at all times.
+- Consider **warning users** before initiating network switches.
+- Use an **RPC provider** that supports your target networks.
+
+## Common errors
+
+The following table lists common network management errors and their codes:
+
+| Error code | Description | Solution |
 |------------|-------------|----------|
-| **4902** | Network not added | Use `wallet_addEthereumChain` to add the network first |
-| **4001** | User rejected request | Show a message asking user to approve the network switch |
-| **-32002** | Request already pending | Disable network switch button while request is pending |
+| `4902`   | Network not added       | Use [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain) to add the network first. |
+| `4001`   | User rejected request   | Show a message asking the user to approve the network switch. |
+| `-32002` | Request already pending | Disable the switch network button while the request is pending. |
 
-### Next Steps
+## Next steps
 
-- [User Authentication](/sdk/guides/user-authentication)
-- [Transaction Handling](/sdk/guides/transaction-handling)
-- [Interact with Contracts](/sdk/guides/interact-with-contracts)
+See the following guides to add more functionality to your dapp:
+
+- [Authenticate users](authenticate-users.md)
+- [Handle transactions](handle-transactions.md)
+- [Interact with smart contracts](interact-with-contracts.md)

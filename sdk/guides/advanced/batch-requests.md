@@ -4,13 +4,7 @@ description: Batch multiple JSON-RPC requests.
 
 # Batch requests
 
-You can batch multiple JSON-RPC requests using MetaMask SDK.
-
-:::info
-
-Check out the [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-
-:::
+You can batch multiple JSON-RPC requests in your JavaScript dapp.
 
 The SDK's `metamask_batch` method enables you to batch multiple JSON-RPC requests in a single call,
 providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
@@ -120,7 +114,7 @@ export default {
 
 ### Best practices
 
-Follow these guidelines when using `metamask_batch`:
+Follow these best practices when using `metamask_batch`:
 
 - **Ensure each request in the batch is properly formatted** according to the JSON-RPC specifications.
 

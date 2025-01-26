@@ -7,14 +7,13 @@ import TabItem from "@theme/TabItem";
 
 # React Native
 
-This guide covers setting up MetaMask SDK in your React Native or Expo application. With MetaMask SDK, you can enable your users to easily connect to the MetaMask browser extension and MetaMask Mobile.
+Get started with MetaMask SDK in your React Native or Expo dapp.
 
-### Prerequisites
+## Steps
 
-- MetaMask Mobile v5.8.1+
-- npm installed
+### 1. Create a new project
 
-### Create Project
+Create a new React Native or Expo project using the following commands:
 
 <Tabs>
   <TabItem value="React Native">
@@ -33,7 +32,9 @@ npx create-expo-app devexpo --template
   </TabItem>
 </Tabs>
 
-### Install Dependencies
+### 2. Install dependencies
+
+Install the SDK and its dependencies using the following commands:
 
 <Tabs>
   <TabItem value="React Native">
@@ -52,19 +53,20 @@ npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-asyn
   </TabItem>
 </Tabs>
 
-### Configure Metro
+### 3. Configure Metro
 
-For Expo, first generate the config:
+If you're using Expo, run the following command to create a default Metro configuration file:
+
 ```bash
 npx expo customize metro.config.js
 ```
 
-Update your Metro configuration:
+In React Native or Expo, update the default Metro configuration file to the following:
 
 <Tabs>
   <TabItem value="React Native">
 
-```javascript
+```javascript title="metro.config.js"
 const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
 
 const defaultConfig = getDefaultConfig(__dirname)
@@ -91,7 +93,7 @@ module.exports = mergeConfig(defaultConfig, config)
   </TabItem>
   <TabItem value="Expo">
 
-```javascript
+```javascript title="metro.config.js"
 const config = getDefaultConfig(__dirname)
 
 config.resolver.extraNodeModules = {
@@ -111,13 +113,14 @@ module.exports = config
   </TabItem>
 </Tabs>
 
-### Add Required Imports
+### 4. Add required imports
+
+Add the following import statements to the React Native or Expo entry file:
 
 <Tabs>
   <TabItem value="React Native">
 
-```javascript
-// index.js or App.tsx
+```javascript title="index.js or App.tsx"
 import "node-libs-react-native/globals"
 import "react-native-url-polyfill/auto"
 import "react-native-get-random-values"
@@ -126,8 +129,7 @@ import "react-native-get-random-values"
   </TabItem>
   <TabItem value="Expo">
 
-```javascript
-// App.tsx
+```javascript title="App.tsx"
 import "node-libs-expo/globals"
 import "react-native-url-polyfill/auto"
 import "react-native-get-random-values"
@@ -136,7 +138,9 @@ import "react-native-get-random-values"
   </TabItem>
 </Tabs>
 
-### Build & Run
+### 5. Build and run
+
+Run the React Native or Expo project on Android or iOS using the following commands:
 
 <Tabs>
   <TabItem value="React Native">
@@ -161,9 +165,10 @@ npx expo run:ios
   </TabItem>
 </Tabs>
 
-### Using the SDK
+### 6. Use the SDK
 
-Here's how to integrate MetaMask SDK in your app:
+Initialize and use the SDK in your React Native or Expo project using the `useSDK` hook.
+For example:
 
 ```javascript
 import { useSDK } from "@metamask/sdk-react"
@@ -198,7 +203,9 @@ function App() {
 }
 ```
 
-### Example Projects
+## Examples
 
-- [React Native Demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
-- [Expo Demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)
+See the following examples on GitHub for more information:
+
+- [React Native demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
+- [Expo demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)

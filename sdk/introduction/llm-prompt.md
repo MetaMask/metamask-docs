@@ -40,7 +40,7 @@ Common patterns:
   Using Wagmi (Recommended):
 
   ```js
-  import { useConnect } from 'wagmi'
+  import { useConnect } from "wagmi"
 
   function Connect() {
     const { connect, connectors } = useConnect()
@@ -57,7 +57,7 @@ Common patterns:
   ```js
   const provider = window.ethereum;
   const accounts = await provider.request({ 
-    method: 'eth_requestAccounts' 
+    method: "eth_requestAccounts" 
   });
   ```
 
@@ -69,7 +69,7 @@ Common patterns:
   const { data } = useReadContract({
     address: contractAddress,
     abi: contractABI,
-    functionName: 'balanceOf',
+    functionName: "balanceOf",
     args: [address],
   })
   ```
@@ -78,7 +78,7 @@ Common patterns:
 
   ```js
   const result = await provider.request({
-    method: 'eth_call',
+    method: "eth_call",
     params: [{
       to: contractAddress,
       data: encodedFunctionData,
@@ -95,7 +95,7 @@ Common patterns:
   await writeContract({
     address: contractAddress,
     abi: contractABI,
-    functionName: 'mint',
+    functionName: "mint",
     args: [tokenId],
   })
   ```
@@ -104,7 +104,7 @@ Common patterns:
 
   ```js
   await provider.request({
-    method: 'eth_sendTransaction',
+    method: "eth_sendTransaction",
     params: [{
       to: contractAddress,
       data: encodedFunctionData,
