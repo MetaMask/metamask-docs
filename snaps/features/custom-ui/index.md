@@ -1184,9 +1184,10 @@ Outputs an animated loading container.
 
 #### Props
 
-- `width`: `Array<number | string>` - (Optional) The width of the skeleton.
-- `height`: `Array<number | string>` - (Optional) The height of the skeleton.
+- `width`: `Array<number | string>` - (Optional) The width of the skeleton. Defaults to `"100%"`.
+- `height`: `Array<number | string>` - (Optional) The height of the skeleton. Defaults to `22`.
 - `borderRadius`: `string` - (Optional) The radius of the corners. Possible values are `"none"`, `"medium"` or `"full"`.
+  Defaults to `"medium"`.
 
 #### Example
 
