@@ -65,8 +65,7 @@ The following custom UI components are available:
 
 Outputs a formatted text field for a blockchain address. 
 The address is automatically displayed with a [Jazzicon](https://www.npmjs.com/package/@metamask/jazzicon)
-and truncated value. 
-When the address is truncated, hovering over the address shows the full value in a tooltip.
+and truncated value.
 
 #### Props 
 
@@ -396,8 +395,7 @@ Outputs a checkbox for use in [interactive UI](interactive-ui.md).
 - `name`: `string` - The name sent to [`onUserInput`](../../reference/entry-points.md#onuserinput).
 - `checked`: `boolean` - (Optional) Whether the checkbox is checked.
 - `label`: `string` - (Optional) The label for the checkbox.
-- `variant` - (Optional) The variant of the checkbox.
-  Possible values are `"default"` and `"toggle"`.
+- `variant` - (Optional) The variant of the checkbox. Possible values are `"default"` and `"toggle"`.
   The default is `"default"`.
 
 #### Example
@@ -1184,10 +1182,10 @@ Outputs an animated loading container.
 
 #### Props
 
-- `width`: `Array<number | string>` - (Optional) The width of the skeleton. Defaults to `"100%"`.
-- `height`: `Array<number | string>` - (Optional) The height of the skeleton. Defaults to `22`.
+- `width`: `Array<number | string>` - (Optional) The width of the skeleton. The default is `"100%"`.
+- `height`: `Array<number | string>` - (Optional) The height of the skeleton. The default is `22`.
 - `borderRadius`: `string` - (Optional) The radius of the corners. Possible values are `"none"`, `"medium"` or `"full"`.
-  Defaults to `"medium"`.
+  The default is `"medium"`.
 
 #### Example
 
