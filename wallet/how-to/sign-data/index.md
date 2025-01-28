@@ -25,7 +25,7 @@ sign data using an unsupported method, in which case we recommend using your sta
 
 ## Use `eth_signTypedData_v4`
 
-[`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
+[`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 provides the most human-readable signatures that are efficient to process onchain.
 It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification to allow users to sign
 typed structured data that can be verified onchain.

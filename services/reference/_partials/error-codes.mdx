@@ -124,12 +124,11 @@ The RPC methods below take a default block identifier as a parameter.
 
 Since there is no way to clearly distinguish between a `Data` parameter and a `Quantity` parameter, [EIP-1898](https://eips.ethereum.org/EIPS/eip-1898) provides a format to specify a block either using the block hash or block number. The block identifier is a JSON `object` with the following fields:
 
-| Property           | Type                                  | Description                                                                                                                                                                           |
-|--------------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `[blockNumber]`    | \{[`Quantity`](eth_blocknumber.mdx)\} | The block in the canonical chain with this number                                                                                                                                     |
-| OR `[blockHash]`   | \{[`Data`](eth_getblockbyhash.mdx)\}  | The block uniquely identified by this hash. The `blockNumber` and `blockHash` properties are mutually exclusive; exactly one of them must be set.                                     |
-| `requireCanonical` | \{`boolean`}\                         | (optional) Whether or not to throw an error if the block is not in the canonical chain as described below. Only allowed in conjunction with the `blockHash` tag. Defaults to `false`. |
-
+| Property           | Type       | Description                                                                                                                                                           |
+|--------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `blockNumber`      | `Quantity` | The block in the canonical chain with this number.                                                                                                                    |
+| OR `blockHash`     | `Data`     | The block uniquely identified by this hash. The `blockNumber` and `blockHash` properties are mutually exclusive; exactly one of them must be set.                     |
+| `requireCanonical` | `boolean`  | (Optional) Whether or not to throw an error if the block is not in the canonical chain. Only allowed in conjunction with the `blockHash` tag. The default is `false`. |
 
 ### Data
 

@@ -89,7 +89,7 @@ Open the project in a text editor.
 You can customize your Snap by editing `index.ts` in the `packages/snap/src` folder.
 
 `index.ts` contains an example request that uses the
-[`snap_dialog`](../reference/snaps-api.md#snapdialog) method to display a custom confirmation screen:
+[`snap_dialog`](../reference/snaps-api.md#snap_dialog) method to display a custom confirmation screen:
 
 <Tabs>
 <TabItem value="JSX">

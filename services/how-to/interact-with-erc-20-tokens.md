@@ -12,8 +12,8 @@ import TabItem from "@theme/TabItem"
 
 You can:
 
-- [Send ERC-20 transactions](interact-with-erc-20-tokens.md#sending-transactions) using `eth_sendRawTransaction`.
-- [Observe event logs of mined ERC-20 transactions](interact-with-erc-20-tokens.md#mined-transactions) using `eth_getLogs`.
+- [Send ERC-20 transactions](#send-transactions) using `eth_sendRawTransaction`.
+- [Observe event logs of mined ERC-20 transactions](#observe-logs-of-mined-transactions) using `eth_getLogs`.
 - Follow [this tutorial](../tutorials/ethereum/retrieve-the-balance-of-an-erc-20-token.md) to retrieve the balance of ERC-20 tokens.
 - Follow [this tutorial](../tutorials/ethereum/track-erc-20-token-transfers.md) to track ERC-20 token transfers.
 
@@ -35,7 +35,7 @@ At certain times, an ERC-20 token also must emit the following events:
 
 View [EIP-20](https://eips.ethereum.org/EIPS/eip-20) for more details about how these functions work and when to emit these events.
 
-## **Send transactions** <a href="#sending-transactions" id="sending-transactions"></a>
+## Send transactions
 
 Use [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx) to send ERC-20 token transactions.
 
@@ -84,7 +84,7 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   </TabItem>
 </Tabs>
 
-## **Observe logs of mined transactions** <a href="#mined-transactions" id="mined-transactions"></a>
+## Observe logs of mined transactions
 
 When a transaction is mined, event logs are published for public viewing.
 
@@ -145,7 +145,7 @@ This request tells the blockchain to retrieve event logs related to address `0x6
 
 The response returned for this request is an array of events. In this example, only one event for one address matches the specified topics.
 
-### **Topics**
+### Topics
 
 Topics are events emitted by smart contracts. Looking at the source code of the original contract [`0x6B175474E89094C44Da98b954EedeAC495271d0F`](https://etherscan.io/address/0x6b175474e89094c44da98b954eedeac495271d0f#code) used in this example, there are two event signatures that could be associated with it on lines 94 and 95:
 
@@ -194,6 +194,6 @@ web3.sha3("Transfer(address,address,uint256)")
 
 The resulting hash matches the hash provided in the initial request response. Now you know that `0xddf25` is the transfer event in this example.
 
-### **Data** <a href="#more-event-logs" id="more-event-logs"></a>
+### Data
 
 The `data` field in the request response refers to all the "non-indexed stuff" captured in the events. In this example, for the transfer topic, `data` represents the number of tokens that were transferred. That is, `0x41f900d25d6693623a6` or 19471.6949921 DAI tokens were transferred from `ee25e1ba53c225d250861c8e5a9a3e0fe19c790e` to `dfbaf3e4c7496dad574a1b842bc85b402bdc298d`.

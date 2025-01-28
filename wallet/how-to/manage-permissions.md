@@ -5,10 +5,10 @@ description: Request and revoke permissions to call restricted methods.
 # Manage permissions
 
 To call a restricted RPC method, your dapp must request permission from the user using
-the [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestPermissions) RPC method.
-You can get the user's current permissions using [`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getPermissions),
+the [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions) RPC method.
+You can get the user's current permissions using [`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getpermissions),
 and revoke permissions previously granted to your dapp using
-[`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions).
+[`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokepermissions).
 These methods are specified by [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255) and
 [MIP-2](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-2.md).
 
@@ -28,11 +28,11 @@ the restricted method [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_ac
 </div>
 
 :::info note
-To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts),
+To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts),
 which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions`
 internally.
 See [how to access a user's accounts](access-accounts.md) for more information.
-Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction), [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4).
+Granting permission for `eth_accounts` also grants access to [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction), [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign), and [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4).
 :::
 
 ## Request permissions example

@@ -22,7 +22,7 @@ async function detectMetamaskSupport(windowObject: Window & typeof globalThis): 
 }
 ```
 
-This function uses the [`waitForMetaMaskProvider`](#waitformetamaskprovider) helper function, which
+This function uses the `waitForMetaMaskProvider` helper function, which
 attempts to detect the MetaMask provider three times.
 
 In the event MetaMask is not installed, for example `isMetaMaskInstallRequired=true`, you can prompt
