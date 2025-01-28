@@ -124,7 +124,7 @@ Next, make the following updates to the above code:
 
 :::tip Secure your keys
 
-To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
+To better secure your keys, follow the recommended approach described in the section [Create the .env file](use-web3.js.md#4-create-a-env-file).
 
 :::
 

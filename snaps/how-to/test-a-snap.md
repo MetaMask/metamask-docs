@@ -47,7 +47,7 @@ You can then run the `jest` command as usual.
 :::note
 `@metamask/snaps-jest` assumes the Snap is built in the directory you run Jest from.
 If you use a different directory, you can specify the path using the
-[`root`](../reference/cli/options.md#r-root) option, or by running your own HTTP server.
+[`server.root`](../reference/cli/options.md#serverroot) option, or by running your own HTTP server.
 It's currently not possible to use `@metamask/snaps-jest` with a Snap that is not built.
 :::
 
@@ -79,14 +79,12 @@ All options are optional.
 ### 3. Use `@metamask/snaps-jest`
 
 Use the package by calling any of the [API methods](../reference/jest.md#api-methods).
-You can:
+For example, you can:
 
 - [Install a Snap.](../reference/jest.md#installsnap)
-- [Send a transaction to the Snap.](../reference/jest.md#sendtransaction)
-- [Run a cron job in the Snap.](../reference/jest.md#runcronjob)
+- [Send a transaction to the Snap.](../reference/jest.md#ontransaction)
+- [Run a cron job in the Snap.](../reference/jest.md#oncronjob)
 - [Interact with user interfaces.](../reference/jest.md#getinterface)
-- [Mock the response of a network request.](../reference/jest.md#mock)
-- [Close the testing page.](../reference/jest.md#close)
 
 You can also use [Jest matchers](../reference/jest.md#jest-matchers) to assert that a response from
 a Snap matches an expected value.

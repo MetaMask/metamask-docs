@@ -42,7 +42,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
-- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
+- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
 - Documented [`snap_getPreferences`](/snaps/reference/snaps-api/#snap_getpreferences).
@@ -65,7 +65,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1540](https://github.com/MetaMask/metamask-docs/pull/1540))
 - Documented [Snaps user-defined components](/snaps/features/custom-ui/user-defined-components).
   ([#1557](https://github.com/MetaMask/metamask-docs/pull/1557))
-- Updated [Android SDK documentation](/wallet/connect/metamask-sdk/mobile/android) with convenience
+- Updated [Android SDK documentation](/sdk) with convenience
   methods and examples using coroutines.
   ([#1546](https://github.com/MetaMask/metamask-docs/pull/1546))
 - Documented [Infura's credit pricing model](/services/get-started/pricing).
@@ -90,12 +90,12 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## June 2024
 
-- Documented [Snaps custom UI with JSX](/snaps/features/custom-ui/with-jsx).
+- Documented [Snaps custom UI with JSX](/snaps/features/custom-ui).
   ([#1348](https://github.com/MetaMask/metamask-docs/pull/1348))
 - Updated [React dapp with global state tutorial](/wallet/tutorials/react-dapp-global-state) with
   instructions for EIP-6963.
   ([#1330](https://github.com/MetaMask/metamask-docs/pull/1330))
-- Documented that the Gas API can be [called without an API key secret](/services/gas-api/api-reference). ([#1346](https://github.com/MetaMask/metamask-docs/pull/1346))
+- Documented that the Gas API can be [called without an API key secret](/services/reference/gas-api). ([#1346](https://github.com/MetaMask/metamask-docs/pull/1346))
 - Updated [Snaps resources](/snaps/learn/resources) and added a new section "Snaps for developers." ([#1329](https://github.com/MetaMask/metamask-docs/pull/1329))
 - Documented [how to allow automatic connections to a Snap](/snaps/how-to/allow-automatic-connections).
   ([#1322](https://github.com/MetaMask/metamask-docs/pull/1322))
@@ -129,7 +129,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snaps notifications](/snaps/features/notifications).
   ([#1292](https://github.com/MetaMask/metamask-docs/pull/1292))
 - Moved Snaps-specific Wallet API methods from the
-  [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-api) to the
+  [Wallet JSON-RPC API reference](/wallet/reference/json-rpc-methods) to the
   [Snaps reference](/snaps/reference/wallet-api-for-snaps).
   ([#1286](https://github.com/MetaMask/metamask-docs/pull/1286))
 - Documented [Snaps `onKeyringRequest` entry point](/snaps/reference/entry-points/#onkeyringrequest).
@@ -142,7 +142,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1274](https://github.com/MetaMask/metamask-docs/pull/1274))
 - Documented [Snaps cron jobs](/snaps/features/cron-jobs).
   ([#1271](https://github.com/MetaMask/metamask-docs/pull/1271))
-- Updated [how to connect to MetaMask](/wallet/connect/wallet-api) with vanilla TypeScript and React
+- Updated [how to connect to MetaMask](/wallet/how-to/connect) with vanilla TypeScript and React
   TypeScript instructions.
   ([#1247](https://github.com/MetaMask/metamask-docs/pull/1247))
 
@@ -161,7 +161,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snap-defined timeouts](/snaps/reference/permissions/#snap-defined-timeouts).
   ([#1224](https://github.com/MetaMask/metamask-docs/pull/1224) and
   [#1227](https://github.com/MetaMask/metamask-docs/pull/1227))
-- Restructured Wallet documentation to emphasize [connecting using EIP-6963](/wallet/connect/wallet-api).
+- Restructured Wallet documentation to emphasize [connecting using EIP-6963](/wallet/how-to/connect).
   ([#1214](https://github.com/MetaMask/metamask-docs/pull/1214))
 - Documented [Snaps custom name resolution](/snaps/features/custom-name-resolution).
   ([#924](https://github.com/MetaMask/metamask-docs/pull/924))
@@ -173,9 +173,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1209](https://github.com/MetaMask/metamask-docs/pull/1209) and
   [#1225](https://github.com/MetaMask/metamask-docs/pull/1225))
 - Removed "Flask" label from [Snaps home pages](/snaps/reference/entry-points/#onhomepage) and
-  [`snap_getLocale`](/snaps/reference/snaps-api/#snap_getlocale).
+  [`snap_getLocale`](/snaps/reference/snaps-api/#snap_getlocale-deprecated).
   ([#1204](https://github.com/MetaMask/metamask-docs/pull/1204))
-- Restructured [SDK documentation](/wallet/how-to/use-sdk) to de-emphasize it as a recommended method.
+- Restructured [SDK documentation](/sdk) to de-emphasize it as a recommended method.
   ([#1200](https://github.com/MetaMask/metamask-docs/pull/1200) and
   [#1230](https://github.com/MetaMask/metamask-docs/pull/1230))
 - Deprecated the following [provider API](/wallet/reference/provider-api) elements:
@@ -190,7 +190,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1178](https://github.com/MetaMask/metamask-docs/pull/1178))
 - Improved and restructured the [Snaps Keyring API reference](/snaps/reference/keyring-api).
   ([#1170](https://github.com/MetaMask/metamask-docs/pull/1170))
-- Documented [how to connect and sign using the Unity SDK](/wallet/how-to/use-sdk/gaming/unity/connect-and-sign).
+- Documented [how to connect and sign using the Unity SDK](/sdk).
   ([#1023](https://github.com/MetaMask/metamask-docs/pull/1023))
 
 ## February 2024
@@ -212,7 +212,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Restructured and improved [Wallet documentation](/wallet) and introduced "Wallet API" terminology.
   ([#1114](https://github.com/MetaMask/metamask-docs/pull/1114) and
   [#1125](https://github.com/MetaMask/metamask-docs/pull/1125))
-- Documented [how to detect multiple wallets using EIP-6963](/wallet/connect/wallet-api).
+- Documented [how to detect multiple wallets using EIP-6963](/wallet/how-to/connect).
   ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
 - Documented [how to communicate errors in Snaps](/snaps/how-to/communicate-errors).
   ([#1117](https://github.com/MetaMask/metamask-docs/pull/1117))

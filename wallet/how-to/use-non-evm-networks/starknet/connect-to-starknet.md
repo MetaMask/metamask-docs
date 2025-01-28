@@ -15,7 +15,7 @@ Connect your dapp to Starknet in MetaMask by using the
 
 We recommend using the `get-starknet` library for most use cases due to its ease of configuration
 and multi-wallet support.
-See [a comparison of the connection options](index.md#connection-options).
+See [a comparison of the connection options](index.md).
 
 :::
 
