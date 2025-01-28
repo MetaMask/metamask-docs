@@ -207,6 +207,14 @@
       "destination": "/sdk/guides/interact-with-contracts/"
     },
     {
+      "source": "/wallet/how-to/use-unity-sdk/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/how-to/use-unity-sdk/:path*/",
+      "destination": "/sdk/"
+    },
+    {
       "source": "/guide/onboarding-library/",
       "destination": "/wallet/how-to/onboard-users/"
     },
@@ -312,6 +320,14 @@
     },
     {
       "source": "/wallet/tutorials/react-dapp-sdk-wagmi/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/wallet/reference/sdk-js-options/",
+      "destination": "/sdk/reference/sdk-options/"
+    },
+    {
+      "source": "/wallet/reference/sdk-unity-api/",
       "destination": "/sdk/"
     },
     {

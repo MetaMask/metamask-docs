@@ -271,8 +271,8 @@ An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 :::caution
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 If you wish to connect to MetaMask accounts in a Snap, use
-[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
-[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts).
+[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) and
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 :::
 
 #### Returns
@@ -345,7 +345,7 @@ Gets the locked status of the Snaps client.
 It is useful to check if MetaMask is locked in the following situations:
 
 - When running background operations that require MetaMask to be unlocked, for example,
-  [accessing encrypted state](../features/data-storage.md#2-use-encrypted-storage).
+  [accessing encrypted state](../features/data-storage.md#use-encrypted-storage).
   If MetaMask is locked, the user gets an unexpected password request.
 - When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 

@@ -34,7 +34,7 @@ the manifest file:
 
 - [`snap_createInterface`](../reference/snaps-api.md#snap_createinterface)
 - [`snap_getInterfaceState`](../reference/snaps-api.md#snap_getinterfacestate)
-- [`snap_updateInterface`](../reference/snaps-api.md#snap_updateInterface)
+- [`snap_updateInterface`](../reference/snaps-api.md#snap_updateinterface)
 
 :::
 

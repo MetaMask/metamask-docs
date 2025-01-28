@@ -7,7 +7,7 @@ sidebar_label: Snaps APIs
 # About the Snaps APIs
 
 Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API](#snaps-api),
-[MetaMask JSON-RPC API](#metamask-json-rpc-api), and [custom JSON-RPC APIs](#custom-json-rpc-apis).
+[Wallet API](#wallet-api), and [custom JSON-RPC APIs](#custom-json-rpc-apis).
 
 ## Snaps API
 
@@ -109,18 +109,18 @@ Snaps can only use it to make read requests, not to write to the blockchain or i
 Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
 - [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps)
-- [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestPermissions)
-- [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions)
-- [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addEthereumChain)
-- [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchEthereumChain)
-- [`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchAsset)
-- [`wallet_registerOnboarding`](/wallet/reference/json-rpc-methods/wallet_registerOnboarding)
-- [`wallet_scanQRCode`](/wallet/reference/json-rpc-methods/wallet_scanQRCode)
-- [`eth_sendRawTransaction`](/wallet/reference/json-rpc-methods/eth_sendRawTransaction)
-- [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction)
-- [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
+- [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions)
+- [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokepermissions)
+- [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)
+- [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
+- [`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchasset)
+- [`wallet_registerOnboarding`](/wallet/reference/json-rpc-methods/wallet_registeronboarding)
+- [`wallet_scanQRCode`](/wallet/reference/json-rpc-methods/wallet_scanqrcode)
+- [`eth_sendRawTransaction`](/wallet/reference/json-rpc-methods/eth_sendrawtransaction)
+- [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction)
+- [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 - [`eth_decrypt`](/wallet/reference/json-rpc-methods/eth_decrypt)
-- [`eth_getEncryptionPublicKey`](/wallet/reference/json-rpc-methods/eth_getEncryptionPublicKey)
+- [`eth_getEncryptionPublicKey`](/wallet/reference/json-rpc-methods/eth_getencryptionpublickey)
 
 ## Custom JSON-RPC APIs
 
