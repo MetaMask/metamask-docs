@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## January 2025
 
-- Documented Infura support for the [`eth_simulateV1`] method. ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
+- Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
 
 ## December 2024
 

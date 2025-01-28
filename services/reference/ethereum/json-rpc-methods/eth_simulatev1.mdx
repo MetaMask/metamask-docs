@@ -5,7 +5,7 @@ title: "eth_simulateV1"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Simulate transactions across multiple blocks. Allows you to test transactions with custom state and
+Simulates transactions across multiple blocks. Allows you to test transactions with custom state and
 block parameters without submitting them to the network.
 
 :::info important
@@ -26,7 +26,7 @@ assessing the `blockStateCalls` array of objects.
             - `gasLimit`: (string) Hexadecimal value that represents the maximum amount of gas that transactions
                  are allowed to consume.
             - `number`: (string) Hexadecimal block number.
-            - `prevRandao` (string) The previous value of randomness, which is
+            - `prevRandao`: (string) The previous value of randomness, which is
                  used as a source of randomness for various protocol operations.
             - `time`: (string) Hexadecimal value representing the Unix epoch time in seconds.
         - `stateOverrides`: _\[optional]_ Object to override account states:
@@ -37,7 +37,7 @@ assessing the `blockStateCalls` array of objects.
                 before executing the call.
             - `stateDiff`: Object of key-value mappings to override individual slots in the account
                 storage before executing the call.
-            - `movePrecompileToAddress` (string) Moves the precompile to the supplied address.
+            - `movePrecompileToAddress`: (string) Moves the precompile to the supplied address.
         - `calls`: _\[required]_ Array of transaction call objects:
             - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
             - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
@@ -53,7 +53,7 @@ assessing the `blockStateCalls` array of objects.
         - `traceTransfers`:  _\[optional]_ Boolean value which when `true`, adds ETH transfers as ERC20 transfer
             events to the logs, allowing you to trace value transfers. The default is `false`.
         - `validation`: _\[optional]_ Boolean value which when `true`, does all the validation that a
-            normal EVM would do, except contract sender and signature checks. When false, `eth_simulateV1` behaves like `eth_call`.
+            normal EVM would do, except contract sender and signature checks. When `false`, `eth_simulateV1` behaves like `eth_call`.
             The default is `false`.
     - `blockParameter`: (string) [_optional_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 
@@ -100,10 +100,10 @@ An array of simulation result objects:
 - `stateRoot`: The root of the final state trie of the block.
 - `timestamp`: The unix timestamp for when the block was collated.
 - `totalDifficulty`: A hexadecimal of the total difficulty of the chain until this block.
-- `transactions`: [Array] An array of transaction objects, or 32 bytes transaction hashes depending on the last given parameter.
+- `transactions`: (Array) An array of transaction objects, or 32 bytes transaction hashes depending on the last given parameter.
 - `transactionsRoot`: The root of the transaction trie of the block.
-- `uncles`: [Array] An array of uncle hashes.
-- `withdrawals`: [Array] Withdrawal objects.
+- `uncles`: (Array) An array of uncle hashes.
+- `withdrawals`: (Array) Withdrawal objects.
 - `withdrawalsRoot`: Withdrawals trie root.
 
 ## Example
@@ -124,39 +124,39 @@ Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard
       "id": 1,
       "method": "eth_simulateV1",
       "params": [
-          {
-              "blockStateCalls": [
-                  {
-                      "blockOverrides": {
-                          "baseFeePerGas": "0x9"
-                      },
-                      "stateOverrides": {
-                          "0xc000000000000000000000000000000000000000": {
-                              "balance": "0x4a817c800"
-                          }
-                      },
-                      "calls": [
-                          {
-                              "from": "0xc000000000000000000000000000000000000000",
-                              "to": "0xc000000000000000000000000000000000000001",
-                              "maxFeePerGas": "0xf",
-                              "value": "0x1"
-                          },
-                          {
-                              "from": "0xc000000000000000000000000000000000000000",
-                              "to": "0xc000000000000000000000000000000000000002",
-                              "maxFeePerGas": "0xf",
-                              "value": "0x1"
-                          }
-                      ]
-                  }
-              ],
-              "validation": true,
-              "traceTransfers": true
-          },
-          "latest"
+        {
+          "blockStateCalls": [
+            {
+              "blockOverrides": {
+                "baseFeePerGas": "0x9"
+              },
+              "stateOverrides": {
+                "0xc000000000000000000000000000000000000000": {
+                  "balance": "0x4a817c800"
+                }
+              },
+              "calls": [
+                {
+                  "from": "0xc000000000000000000000000000000000000000",
+                  "to": "0xc000000000000000000000000000000000000001",
+                  "maxFeePerGas": "0xf",
+                  "value": "0x1"
+                },
+                {
+                  "from": "0xc000000000000000000000000000000000000000",
+                  "to": "0xc000000000000000000000000000000000000002",
+                  "maxFeePerGas": "0xf",
+                  "value": "0x1"
+                }
+              ]
+            }
+          ],
+          "validation": true,
+          "traceTransfers": true
+        },
+        "latest"
       ]
-  }'
+    }'
   ```
 
   </TabItem>
@@ -256,5 +256,6 @@ Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard
       "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
     }
 ```
+
   </TabItem>
 </Tabs>
