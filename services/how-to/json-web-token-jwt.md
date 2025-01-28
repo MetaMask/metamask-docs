@@ -134,7 +134,7 @@ To generate a timestamp for testing, use an [online timestamp converter tool](ht
 :::
 
   </TabItem>
-  <TabItem value="Programatically">
+  <TabItem value="Programmatically">
 
 Developers typically create the JWT token from their keys programmatically. To learn more, follow the tutorial demonstrating how to [create and apply a JWT with Node.js](../tutorials/ethereum/authenticate-with-jwt.md). 
 

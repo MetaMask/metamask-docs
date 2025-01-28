@@ -7,7 +7,10 @@
 
 .introductionBlock {
   background-color: #2b3137;
-  padding: 6rem;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
   text-align: center;
   width: 100%;
 }

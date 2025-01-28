@@ -90,11 +90,6 @@ export default function DetailsBox({
         Returns
       </Heading>
       <div className={styles.paramContainer}>
-        {result?.description && (
-          <div className="padding-vert--md">
-            <MDContent content={result.description} />
-          </div>
-        )}
         {result && renderResultSchemas(result, components)}
       </div>
     </>

@@ -139,16 +139,27 @@ const config = {
         breadcrumbs: false,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args);
-          const dymanicItems = await fetchAndGenerateDynamicSidebarItems(
+          const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
             MM_RPC_URL,
             MM_REF_PATH,
             NETWORK_NAMES.metamask
           )
           if (args.item.dirName === "reference/json-rpc-methods") {
-            return [...sidebarItems, ...dymanicItems]
+            return [...sidebarItems, ...dynamicItems]
           }
           return sidebarItems;
         }
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "sdk",
+        path: "sdk",
+        routeBasePath: "sdk",
+        editUrl: "https://github.com/MetaMask/metamask-docs/edit/main/",
+        sidebarPath: require.resolve("./sdk-sidebar.js"),
+        breadcrumbs: false,
       },
     ],
     "./src/plugins/plugin-json-rpc.ts",
@@ -179,8 +190,12 @@ const config = {
         },
         items: [
           {
+            to: "sdk",
+            label: "SDK",
+          },
+          {
             to: "wallet",
-            label: "Wallet",
+            label: "Wallet API",
           },
           {
             to: "snaps",
@@ -247,6 +262,10 @@ const config = {
               {
                 label: "Wallet",
                 to: "/wallet",
+              },
+              {
+                label: "SDK",
+                to: "/sdk",
               },
               {
                 label: "Snaps",
@@ -336,7 +355,7 @@ const config = {
         appId: "AWX4QVM59R",
 
         // Public API key: it is safe to commit it
-        apiKey: "6095a25a6824bfa909fa0692e6847ec4",
+        apiKey: "861f327c200a8eab62a28ee1396f90de",
 
         indexName: "mm--v2-staging",
 

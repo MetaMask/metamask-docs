@@ -1,3 +1,7 @@
+.cardSection {
+  background-color: #2b3137;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;

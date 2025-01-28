@@ -102,7 +102,7 @@ files = {
 response1 = requests.post(endpoint + "/api/v0/add", files=files, auth=(projectId, projectSecret))
 print(response1)
 hash = response1.text.split(",")[1].split(":")[1].replace('"','')
-print(hash
+print(hash)
 
 ### READ FILE WITH HASH ###
 params = {
@@ -141,7 +141,7 @@ import { create } from "kubo-rpc-client"
 
 const projectId = "<YOUR-API-KEY>";
 const projectSecret = "<YOUR-API-KEY-SECRET>";
-const auth
+const auth = 
   "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
 const client = create({

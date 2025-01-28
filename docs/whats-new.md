@@ -12,11 +12,15 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 ## January 2025
 
 - Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
+- Added new [MetaMask SDK documentation section](/sdk).
+  ([#1766](https://github.com/MetaMask/metamask-docs/pull/1766))
+- Documented Snaps [`Banner`](/snaps/features/custom-ui/#banner), [`Container`](/snaps/features/custom-ui/#container), [`Footer`](/snaps/features/custom-ui/#footer), [`Skeleton`](/snaps/features/custom-ui/#skeleton), and [`Value`](/snaps/features/custom-ui/#value) UI components.
+  ([#1835](https://github.com/MetaMask/metamask-docs/pull/1835))
 
 ## December 2024
 
 - Documented [Swellchain](/services/reference/swellchain) support. ([#1776](https://github.com/MetaMask/metamask-docs/pull/1776))
-- Documented [Snap Notifications Expanded View](/snaps/features/notifications/#expanded-view). 
+- Documented [Snaps notifications expanded view](/snaps/features/notifications/#expanded-view). 
   ([#1774](https://github.com/MetaMask/metamask-docs/pull/1774))
 - Documented [`snap_getInterfaceContext`](/snaps/reference/snaps-api/#snap_getinterfacecontext).
   ([#1772](https://github.com/MetaMask/metamask-docs/pull/1772))
@@ -25,7 +29,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [updated error responses](/services/reference/ethereum/json-rpc-methods) when rate-limiting Infura JSON-RPC API calls. ([#1749](https://github.com/MetaMask/metamask-docs/pull/1749))
 - Documented [Unichain Sepolia](/services/reference/unichain) support. ([#1725](https://github.com/MetaMask/metamask-docs/pull/1725))
-- Updated Snaps [Custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
+- Updated Snaps [custom UI documentation](/snaps/features/custom-ui/) for MetaMask Extension version 12.6.
   ([#1715](https://github.com/MetaMask/metamask-docs/pull/1715))
 - Added tutorial for
   [creating a simple Starknet dapp](/wallet/how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp).
