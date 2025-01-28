@@ -3,7 +3,7 @@ description: Connect to MetaMask using the Wallet API and EIP-6963.
 toc_max_heading_level: 4
 ---
 
-# Connect to MetaMask using the Wallet API
+# Connect to MetaMask
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.

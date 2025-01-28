@@ -1,36 +1,46 @@
 import React from "react";
+import clsx from "clsx";
 import Card, { type CardItem } from "@site/src/components/Card";
 import styles from "./cardsection.module.css";
 
 const CardList: CardItem[] = [
   {
-    title: "📱 Integrate your dapp with the MetaMask wallet",
+    title: "SDK",
+    subtitle: "📱 Build onchain dapps",
+    link: "/sdk",
+    description: (
+      <>
+        Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile using the SDK.
+      </>
+    ),
+  },
+  {
+    title: "Wallet API",
+    subtitle: "🌐 Integrate with the MetaMask wallet",
     link: "/wallet",
     description: (
       <>
-        Integrate your dapp with MetaMask using MetaMask SDK and the Wallet API.
-        You can interact with your users&apos; EVM accounts from multiple dapp platforms.
+        Connect to the MetaMask browser extension and interact with your users&apos; accounts using the Wallet API.
       </>
     ),
   },
   {
-    title: "🛠️ Extend the functionality of MetaMask using Snaps",
+    title: "Snaps",
+    subtitle: "🛠️ Extend the functionality of MetaMask",
     link: "/snaps",
     description: (
       <>
-        Extend the functionality of MetaMask using Snaps. You can create a Snap
-        to add support for custom networks, account types, APIs, and more.
+        Add support in MetaMask for custom networks, account types, and APIs by creating a custom Snap.
       </>
     ),
   },
   {
-    title: "📐 Build and scale your dapp using services",
+    title: "Services",
+    subtitle: "📐 Build and scale your dapp",
     link: "/services",
     description: (
       <>
-        Build and scale your dapp or Snap using services provided by MetaMask
-        and Infura. This includes APIs that optimize essential development
-        tasks.
+        Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.
       </>
     ),
   },
@@ -38,11 +48,13 @@ const CardList: CardItem[] = [
 
 export default function CardSection(): JSX.Element {
   return (
-    <section className="container margin-top--sm margin-bottom--lg">
-      <div className={styles.row}>
-        {CardList.map((props, idx) => (
-          <Card key={idx} {...props} />
-        ))}
+    <section >
+      <div className={clsx(styles.cardSection)}>
+        <div className={clsx(styles.row, "container padding-top--sm padding-bottom--lg")}>
+          {CardList.map((props, idx) => (
+            <Card key={idx} {...props} />
+          ))}
+        </div>
       </div>
     </section>
   );
