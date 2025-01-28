@@ -490,7 +490,7 @@ const disconnectWallet = useCallback(async () => {
 ```
 
 :::caution important
-[`wallet_revokePermission`](/wallet/reference/json-rpc-methods/wallet_revokePermissions) is an experimental RPC
+[`wallet_revokePermission`](/wallet/reference/json-rpc-methods/wallet_revokepermissions) is an experimental RPC
 method that might only work with MetaMask.
 Configuring the revocation in a try/catch block and separating it from the rest of the cleanup
 ensures that if a wallet does not support this feature, the rest of the disconnect functionality

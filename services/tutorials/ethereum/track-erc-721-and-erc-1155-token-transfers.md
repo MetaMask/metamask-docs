@@ -173,7 +173,7 @@ console.log(
 
 ### 6. Read ERC-1155 transfers
 
-You can set the listener for the `subscription1155` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4.-subscribe-to-contract-events) by adding the following lines to the script:
+You can set the listener for the `subscription1155` created in [step 4](#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
 subscription1155.on("data", event => {

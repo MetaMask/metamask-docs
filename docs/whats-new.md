@@ -42,7 +42,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
-- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/connect) section
+- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
 - Documented [`snap_getPreferences`](/snaps/reference/snaps-api/#snap_getpreferences).
@@ -212,7 +212,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Restructured and improved [Wallet documentation](/wallet) and introduced "Wallet API" terminology.
   ([#1114](https://github.com/MetaMask/metamask-docs/pull/1114) and
   [#1125](https://github.com/MetaMask/metamask-docs/pull/1125))
-- Documented [how to detect multiple wallets using EIP-6963](/wallet/connect/wallet-api).
+- Documented [how to detect multiple wallets using EIP-6963](/wallet/how-to/connect).
   ([#1094](https://github.com/MetaMask/metamask-docs/pull/1094))
 - Documented [how to communicate errors in Snaps](/snaps/how-to/communicate-errors).
   ([#1117](https://github.com/MetaMask/metamask-docs/pull/1117))
