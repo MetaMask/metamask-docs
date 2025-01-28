@@ -260,12 +260,12 @@ const config = {
             title: "Documentation",
             items: [
               {
-                label: "Wallet",
-                to: "/wallet",
-              },
-              {
                 label: "SDK",
                 to: "/sdk",
+              },
+              {
+                label: "Wallet",
+                to: "/wallet",
               },
               {
                 label: "Snaps",

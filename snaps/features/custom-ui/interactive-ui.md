@@ -28,7 +28,7 @@ You can pass this ID to [`snap_dialog`](../../reference/snaps-api.md#snap_dialog
 [`onHomePage`](../../reference/entry-points.md#onhomepage).
 
 If you need to [update the interface](#update-an-interactive-interface) or
-[get its state](#get-an-interactive-interfaces-state) at a future time, you should store its ID in
+[get its state](#get-an-interactive-interfaces-state-and-context) at a future time, you should store its ID in
 the Snap's storage.
 
 ### Add context to an interface

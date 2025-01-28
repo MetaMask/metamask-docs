@@ -16,7 +16,7 @@ Infura restricts its IPFS service to a select set of qualified customers. Please
 
 Content is accessible from peer nodes located anywhere in the world. These nodes relay information, store it, or both.
 
-To integrate your IPFS project with Infura, create an [Infura API key](../../get-started/infura.md#2-create-an-api-key).
+To integrate your IPFS project with Infura, create an [Infura API key](../../get-started/infura.md#2-view-your-api-key).
 
 :::info See also
 

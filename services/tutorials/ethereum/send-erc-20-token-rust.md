@@ -127,7 +127,7 @@ Next, make the following updates to the above code:
 - On line 30 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account.
 
 :::tip Secure your keys
-To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
+To better secure your keys, follow the recommended approach described in the section [Create the .env file](send-a-transaction/use-web3.js.md#4-create-a-env-file).
 :::
 
 ### 4. Run the code
