@@ -97,7 +97,6 @@ export default function Hero({
             network === 'sepolia' && styles.sepolia,
             className
           )}>
-          {/* {!(isExtensionActive && metaMaskAccount) && <EthIcon className={styles.ethIcon} />} */}
           <Text as="h1">
             <span>
               {network === 'linea' && 'Linea Sepolia'}
