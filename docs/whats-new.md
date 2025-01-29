@@ -11,6 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## January 2025
 
+- Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
 - Added new [MetaMask SDK documentation section](/sdk).
   ([#1766](https://github.com/MetaMask/metamask-docs/pull/1766))
 - Documented Snaps [`Banner`](/snaps/features/custom-ui/#banner), [`Container`](/snaps/features/custom-ui/#container), [`Footer`](/snaps/features/custom-ui/#footer), [`Skeleton`](/snaps/features/custom-ui/#skeleton), and [`Value`](/snaps/features/custom-ui/#value) UI components.
