@@ -21,7 +21,7 @@ results when specified in the supported debug methods.
 
 The `callTracer` tracing type tracks all the call frames executed during a transaction, including the
 initial call. It returns a nested list of call frames, resembling how the EVM works. They form a tree
-with the top-level call at root and sub-calls as children of the higher levels.
+with the top-level call at the root and sub-calls as children of the higher levels.
 
 The `callTracer` type returns an object with the following results:
 
