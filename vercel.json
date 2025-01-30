@@ -11,6 +11,10 @@
       "destination": "/wallet/"
     },
     {
+      "source": "/wallet/index/",
+      "destination": "/wallet/"
+    },
+    {
       "source": "/wallet/category/get-started/",
       "destination": "/wallet/"
     },
