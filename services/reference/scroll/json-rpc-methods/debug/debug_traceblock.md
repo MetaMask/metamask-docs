@@ -7,7 +7,7 @@ import TabItem from "@theme/TabItem";
 
 # `debug_traceBlock`
 
-Returns full trace of all invoked opcodes of all transactions included in the block.
+Returns a full trace of all invoked opcodes of all transactions included in the block.
 
 ## Parameters
 
