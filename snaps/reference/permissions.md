@@ -74,7 +74,7 @@ Specify this permission in the manifest file as follows:
 
 To communicate with a node using MetaMask, a Snap must request the `endowment:ethereum-provider` permission.
 This permission exposes the `ethereum` global to the Snap execution environment, allowing Snaps to
-call some [MetaMask JSON-RPC API](/wallet/reference/json-rpc-api) methods.
+call some [MetaMask JSON-RPC API](/wallet/reference/json-rpc-methods) methods.
 This global is an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider.
 
 Specify this permission in the manifest file as follows:
@@ -87,7 +87,7 @@ Specify this permission in the manifest file as follows:
 
 :::note
 The `ethereum` global available to Snaps has fewer capabilities than `window.ethereum` for dapps.
-See the [list of methods](../learn/about-snaps/apis.md#metamask-json-rpc-api) not available to Snaps.
+See the [list of methods](../learn/about-snaps/apis.md#snap-requests) not available to Snaps.
 :::
 
 ### `endowment:page-home`
@@ -348,8 +348,8 @@ The following endowments accept this caveat:
 
 ### `eth_accounts`
 
-A Snap can request permission to call the [`eth_accounts`](/wallet/reference/eth_accounts) MetaMask
-JSON-RPC API method by calling [`eth_requestAccounts`](/wallet/reference/eth_requestaccounts).
+A Snap can request permission to call the [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) MetaMask
+JSON-RPC API method by calling [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 Calling `eth_requestAccounts` requires the
 [`endowment:ethereum-provider`](#endowmentethereum-provider) permission:
 
@@ -373,7 +373,7 @@ await ethereum.request({ method: "eth_requestAccounts" })
 </Tabs>
 
 You can check the presence of the permission by calling
-[`wallet_getPermissions`](/wallet/reference/wallet_getpermissions).
+[`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getpermissions).
 If the permission is present, the result contains a permission with a `parentCapability` of `eth_accounts`.
 The permission contains a `restrictReturnedAccounts` caveat, an array of all the accounts the user
 allows for this Snap.

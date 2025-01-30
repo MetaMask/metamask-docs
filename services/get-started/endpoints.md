@@ -155,6 +155,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet           | JSON-RPC over HTTPS | `https://starknet-mainnet.infura.io/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS | `https://starknet-sepolia.infura.io/v3/<YOUR-API-KEY>` |
 
+## Swellchain
+
+| Network | Description         | URL                                                      |
+|---------|---------------------|----------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS | `https://swellchain-mainnet.infura.io/v3/<YOUR-API-KEY>` |
+| Testnet | JSON-RPC over HTTPS | `https://swellchain-testnet.infura.io/v3/<YOUR-API-KEY>` |
+
 ## Unichain
 
 | Network | Description             | URL                                                   |
@@ -218,7 +225,7 @@ Specify the chain ID in your request to interact with the relevant network.
 | Network | Chain ID |
 |---------|----------|
 | Mainnet | 1        |
-| Holeksy | 17000    |
+| Holesky | 17000    |
 | Sepolia | 11155111 |
 
 #### Fantom

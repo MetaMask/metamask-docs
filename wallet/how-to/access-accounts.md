@@ -11,7 +11,7 @@ access the user's accounts using the
 [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method.
 
 :::info note
-`eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestPermissions)
+`eth_requestAccounts` internally calls [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions)
 to [request permission](manage-permissions.md) to call the restricted
 [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) method.
 :::
@@ -31,7 +31,7 @@ You can also access users' accounts on some [non-EVM networks](/wallet/how-to/us
 
 :::caution Important
 This section describes how to create a single connect button.
-When connecting to multiple wallets, use the [Connect to MetaMask](../connect/wallet-api.md) guide to create
+When connecting to multiple wallets, use the [Connect to MetaMask](connect.md) guide to create
 multiple connect buttons.
 :::
 
@@ -129,11 +129,11 @@ The first account in the array will always be considered the user's "selected" a
 ## Disconnect a user's accounts
 
 Since `eth_requestAccounts` internally calls `wallet_requestPermissions` for permission to call
-`eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokePermissions)
+`eth_accounts`, you can use [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokepermissions)
 to revoke this permission, revoking your dapp's access to the user's accounts.
 
 This is useful as a method for users to log out (or disconnect) from your dapp.
-You can then use [`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getPermissions) to determine
+You can then use [`wallet_getPermissions`](/wallet/reference/json-rpc-methods/wallet_getpermissions) to determine
 whether the user is connected or disconnected to your dapp.
 
 See [how to revoke permissions](manage-permissions.md#revoke-permissions-example) for an example.

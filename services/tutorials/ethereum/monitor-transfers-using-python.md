@@ -65,7 +65,7 @@ Replace `<YOUR-API-KEY>` with your Infura API key and `<YOUR-PUBLIC-ADDRESS>` wi
 
 ### 5. Set the function
 
-Create a function to check new transactions for the account defined in [step 3](monitor-transfers-using-python.md#3.-create-a-script-file) and retrieves the details for the transaction:
+Create a function to check new transactions for the account defined in [step 3](#3-create-a-script-file) and retrieves the details for the transaction:
 
 ```python
 def watch():

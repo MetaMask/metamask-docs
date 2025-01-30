@@ -1,5 +1,5 @@
 ---
-description: Celo quickstart guide.
+description: Mantle quickstart guide.
 sidebar_position: 2
 ---
 

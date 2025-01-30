@@ -27,7 +27,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperability.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../connect/index.md).
+We recommend [using this mechanism to connect to MetaMask](../how-to/connect.md).
 
 You can access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
@@ -81,11 +81,11 @@ The following methods are restricted:
 - [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) - Gaining permission requires calling `wallet_requestPermissions`.
   Granting permission for `eth_accounts` also grants permissions for the following methods:
 
-  - [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction)
+  - [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction)
   - [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign)
-  - [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signTypedData_v4)
+  - [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
   :::caution important
-  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts),
+  To access accounts, we recommend using [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts),
   which automatically asks for permission to use `eth_accounts` by calling `wallet_requestPermissions` internally.
   See [how to access a user's accounts](../how-to/access-accounts.md) for more information.
   :::
