@@ -175,6 +175,17 @@ const config = {
       : null,
     "./src/plugins/launchdarkly",
     "./src/plugins/sentry",
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            to: "/wallet",
+            from: "/wallet/index",
+          },
+        ],
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
