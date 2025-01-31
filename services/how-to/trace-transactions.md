@@ -59,7 +59,7 @@ only use the [`trace`](../reference/ethereum/json-rpc-methods/trace-methods/inde
 
 ## Trace a transaction example
 
-In the following example,you'll trace a transaction using a transaction hash on Ethereum mainnet. The result displays two traces, meaning two separate calls were made within the transaction, and includes the gas used for each call.
+In the following example, you'll trace a transaction using a transaction hash on Ethereum mainnet. The result displays two traces, meaning two separate calls were made within the transaction, and includes the gas used for each call.
 
 This example represents a call to the `transfer` function of an ERC-20 token contract (indicated in the `input` field), transferring tokens to the address, `0x7154980e9be95eab4eef2269650d4c7e17f156b8`.
 

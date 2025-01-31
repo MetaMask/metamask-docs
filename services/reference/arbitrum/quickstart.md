@@ -131,7 +131,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
    provider.getBlockNumber()
    .then(blockNumber => {
-     console.log(blockNumber)"
+     console.log(blockNumber);
    })
    .catch(error => {
      console.error(error);
