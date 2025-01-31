@@ -2,13 +2,6 @@
   --hero-text-color: #fff;
 
   .hero {
-    &.sepolia {
-      --hero-image: url('/img/faucet-sepolia-hero-dark.png');
-    }
-
-    &.linea {
-      --hero-image: url('/img/faucet-linea-hero-dark.png');
-    }
     .inputWrapper {
       input {
         &::placeholder {
@@ -21,16 +14,6 @@
 
 :root[data-theme='light'] {
   --hero-text-color: #141618;
-
-  .hero {
-    &.sepolia {
-      --hero-image: url('/img/faucet-sepolia-hero-light.png');
-    }
-
-    &.linea {
-      --hero-image: url('/img/faucet-linea-hero-light.png');
-    }
-  }
 }
 
 [role='tabpanel'] {
@@ -39,6 +22,12 @@
       padding: 0;
     }
   }
+}
+
+.heroWrapper {
+  max-width: 1420px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .hero {
@@ -61,6 +50,10 @@
 
     > *:not(:last-child) {
       margin-right: 8px;
+    }
+
+    .btnWrapper {
+      margin-top: 1.4rem;
     }
 
     .inputCont {
@@ -100,7 +93,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 20px;
-        letter-spacing: 0.25px;
+        margin-bottom: 0;
       }
     }
 
