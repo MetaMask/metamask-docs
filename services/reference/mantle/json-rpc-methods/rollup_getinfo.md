@@ -24,7 +24,7 @@ Node information object:
   - `queueIndex`: Index in the canonical transaction chain of the last L1 to L2 message ingested.
   - `index`: Index of the last L2 transaction processed.
   - `verifiedIndex`: Index of the last transaction that was ingested from a batch that was posted
-    the to L1.
+     to L1.
 
 ## Example
 
