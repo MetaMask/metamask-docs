@@ -1,40 +1,52 @@
 ---
-title: 'linea_estimateGas'
+title: "linea_estimateGas"
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # `linea_estimateGas`
 
-Generates and returns the estimated amount of gas required to allow the transaction to complete and be published on Ethereum. The method does not submit the transaction to the blockchain.
+Generates and returns the estimated amount of gas required to allow the transaction to complete and be
+published on Ethereum. The method does not submit the transaction to the blockchain.
 
-The `priorityFeePerGas` returned by this method includes the cost of submitting the transaction to Ethereum, which can vary based on the size of the `calldata`.
+The `priorityFeePerGas` returned by this method includes the cost of submitting the transaction to Ethereum, which
+can vary based on the size of the `calldata`.
 
 :::info
 
-For more information about estimating gas, and how this API formulates the transaction costs, see the [Linea gas fees documentation](https://docs.linea.build/build-on-linea/gas-fees).
+For more information about estimating gas, and how this API formulates the transaction costs, see the
+[Linea gas fees documentation](https://docs.linea.build/build-on-linea/gas-fees).
 
 :::
 
 :::note
 
-`linea_estimateGas` uses the same inputs as the standard [`eth_estimateGas`](https://docs.infura.io/api/networks/linea/json-rpc-methods/eth_estimategas), but returns the recommended gas limit, the base fee per gas, and the priority fee per gas. We recommend using `linea_estimateGas` for more accurate results.
+`linea_estimateGas` uses the same inputs as the standard [`eth_estimateGas`](https://docs.infura.io/api/networks/linea/json-rpc-methods/eth_estimategas),
+but returns the recommended gas limit, the base fee per gas, and the priority fee per gas.
+We recommend using `linea_estimateGas` for more accurate results.
 
 :::
 
 ## Parameters
 
-- `TRANSACTION CALL OBJECT` _\[required]_
+- `call`: _\[required]_ Transaction call object:
   - `from`: _\[optional]_ 20 bytes - The address the transaction is sent from.
   - `to`: _\[optional]_ 20 bytes - The address the transaction is directed to.
-  - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution. `linea_estimateGas` consumes zero gas, but this parameter may be needed by some executions.
+  - `gas`: _\[optional]_ Hexadecimal value of the gas provided for the transaction execution. `linea_estimateGas` consumes
+      zero gas, but this parameter may be needed by some executions.
   - `gasPrice`: _\[optional]_ Hexadecimal value of the gas price used for each paid gas.
   - `maxPriorityFeePerGas`: _\[optional]_ Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
   - `maxFeePerGas`: _\[optional]_ Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
   - `value`: _\[optional]_ Hexadecimal value of the value sent with this transaction.
-  - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
-- `blockParameter`: (string) [_optional_] A hexadecimal block number, or one of the tags `latest`, `earliest`, `pending` or `finalized`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block). :::warning `safe` isn't supported. Use `finalized` instead. Learn more about [Linea's layer 2 finalization](https://docs.linea.build/developers/guides/finalized-block). :::
+  - `data`: _\[optional]_ Hash of the method signature and encoded parameters. See the
+      [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+- `stateOverride`: _\[optional]_  Object that contains the address-to-state mapping to [override state values](#override-state-values).
+    Each entry specifies a state that will be temporarily overridden before executing the call:
+  - `balance`: _\[optional]_ Hexadecimal value of the temporary account balance for the call execution.
+  - `nonce`: _\[optional]_ Hexadecimal value of the temporary nonce for the call execution.
+  - `code` : _\[optional]_ Bytecode to inject into the account.
+  - `stateDiff`: `key:value` pairs to override individual slots in the account storage.
 
 ## Returns
 
@@ -49,19 +61,19 @@ Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard
 <Tabs>
   <TabItem value="curl">
 
-```bash
-curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
-```
+  ```bash
+  curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
+  ```
 
   </TabItem>
   <TabItem value="WSS">
 
-```bash
-wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
-```
+  ```bash
+  wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","method":"linea_estimateGas","params":[{"from":"0x42c27251C710864Cf76f1b9918Ace3E585e6E21b","value":"0x1","gasPrice":"0x100000000","gas":"0x21000"}],"id":53}'
+  ```
 
   </TabItem>
 </Tabs>
@@ -82,6 +94,44 @@ wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0"
   }
 }
 ```
-
   </TabItem>
 </Tabs>
+
+## Override state values
+
+You can override an account with temporary state values before making the call. This allows you to
+make temporary state changes without affecting the actual blockchain state.
+
+The following example estimates the cost for transferring an ERC-20 token for an account which does not
+have the required assets onchain.
+
+The example sets a custom ETH balance for the sender (to cover gas costs) and modifies the account's
+balance within the ERC-20 contract's storage for the duration of the call.
+
+```json
+curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "jsonrpc":"2.0",
+  "method":"linea_estimateGas",
+  "params":[
+    {
+      "from":"0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
+      "to":"0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f",
+      "data":"0xa9059cbb000000000000000000000000627306090abaB3A6e1400e9345bC60c78a8BEf570000000000000000000000000000000000000000000000001bc16d674ec80000"
+    },
+    {
+      "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73": {
+        "balance": "0x16345785d8a0000"
+      },
+      "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f": {
+        "stateDiff": {
+          "0x2d206e5210c119b1cbed144f517f1f1dfd586eed26793a233e6afc261f4cf97f":"0x0000000000000000000000000000000000000000000000001bc16d674ec80000"
+        }
+      }
+    }
+  ],
+  "id":53
+}'
+```

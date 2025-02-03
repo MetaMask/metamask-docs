@@ -49,7 +49,9 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
   } = useContext(MetamaskProviderContext)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [copyMessage, setCopyMessage] = useState(COPY_TEXT)
+  const isMobile = sdk.platformManager?.isMobile ?? false
   const isExtensionActive = sdk.isExtensionActive()
+  const showInstallButton = !isExtensionActive && !isMobile
   const dialogRef = useRef<HTMLUListElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const [userAccount, setUserAccount] = useState(metaMaskAccountEns || metaMaskAccount)
@@ -118,7 +120,7 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
 
   const handleConnectWallet = () => {
     trackClickForSegment({
-      eventName: !isExtensionActive ? 'Install MetaMask' : 'Connect Wallet',
+      eventName: showInstallButton ? 'Install MetaMask' : 'Connect Wallet',
       clickType: 'Navbar',
       userExperience: 'B',
       responseStatus: null,
@@ -142,11 +144,11 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
     <Button
       as="button"
       data-test-id="header-cta-connect-metamask"
-      testId={!isExtensionActive ? 'navbar-cta-install-metamask' : 'navbar-cta-connect-wallet'}
+      testId={showInstallButton ? 'navbar-cta-install-metamask' : 'navbar-cta-connect-wallet'}
       thin
       onClick={handleConnectWallet}
       className={styles.navbarButton}
-      label={!isExtensionActive ? 'Install MetaMask' : 'Connect MetaMask'}
+      label={showInstallButton ? 'Install MetaMask' : 'Connect MetaMask'}
       style={
         colorMode === 'dark'
           ? {

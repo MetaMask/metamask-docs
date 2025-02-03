@@ -21,7 +21,7 @@ Returns tracing results by executing all transactions in the block specified by 
 
 ## Returns
 
-Depending on the specified tracer type, returns a [`callTracer`](../debug/index.md##calltracer) object or
+Depending on the specified tracer type, returns a [`callTracer`](../debug/index.md#calltracer) object or
 [`prestateTracer`](../debug/index.md#prestatetracer) object.
 
 ## Example

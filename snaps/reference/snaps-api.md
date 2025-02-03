@@ -271,8 +271,8 @@ An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 :::caution
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 If you wish to connect to MetaMask accounts in a Snap, use
-[`endowment:ethereum-provider`](../reference/permissions.md/#endowmentethereum-provider) and
-[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestAccounts).
+[`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) and
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 :::
 
 #### Returns
@@ -345,7 +345,7 @@ Gets the locked status of the Snaps client.
 It is useful to check if MetaMask is locked in the following situations:
 
 - When running background operations that require MetaMask to be unlocked, for example,
-  [accessing encrypted state](../features/data-storage.md#2-use-encrypted-storage).
+  [accessing encrypted state](../features/data-storage.md#use-encrypted-storage).
   If MetaMask is locked, the user gets an unexpected password request.
 - When [displaying a dialog](#snap_dialog). Dialogs do not work when MetaMask is locked.
 
@@ -864,7 +864,9 @@ await snap.request({
 ## `snap_notify`
 
 Displays a [notification](../features/notifications.md) in MetaMask or natively in the OS.
-Snaps can trigger a short notification text for actionable or time sensitive information.
+Snaps can trigger a short (up to 80 characters) notification message for actionable or time sensitive information. 
+`inApp` notifications can also include an optional [expanded view](../features/notifications.md#expanded-view). 
+The expanded view has a title, content, and optional footer link shown when a user clicks on the notification.
 
 #### Parameters
 
@@ -874,8 +876,21 @@ An object containing the contents of the notification:
   We recommend using `type: "inApp"` because there's no guarantee that native notifications are
   displayed to the user.
 - `message` - A message to show in the notification.
+- Optional expanded view parameters
+  - `title` - The title of the expanded view, shown when a user expands the notification.
+  - `content` - A custom Snap UI shown in the expanded view
+  - `footerLink` (optional) - A custom footer object with `text` and `href`, displayed as an action button 
+  in the footer of the expanded view.
 
-#### Example
+:::caution
+Expanded view can only be used with notifications of type `inApp`. 
+Expanded view must have at least a `title` and `content`. 
+:::
+
+#### Examples
+
+<Tabs>
+<TabItem value="In-app">
 
 ```javascript title="index.js"
 await snap.request({
@@ -886,6 +901,46 @@ await snap.request({
   },
 })
 ```
+
+</TabItem>
+<TabItem value="In-app with Expanded View">
+
+```javascript title="index.js"
+await snap.request({
+  method: "snap_notify",
+  params: {
+    type: "inApp",
+    message: "Hello, world!",
+    title: "Hello from a Snap",
+    content: (
+      <Box>
+        <Heading>Hello, world!</Heading>
+        <Text>This is a notification sent from a Snap.</Text>
+      </Box>
+    ),
+    footerLink: { 
+      href: "https://snaps.metamask.io",
+      text: "Find more Snaps",
+    },
+  },
+})
+```
+
+</TabItem>
+<TabItem value="Native">
+
+```javascript title="index.js"
+await snap.request({
+  method: "snap_notify",
+  params: {
+    type: "native",
+    message: "Hello, world!",
+  },
+})
+```
+
+</TabItem>
+</Tabs>
 
 ## Interactive UI methods
 
@@ -982,6 +1037,52 @@ console.log(state)
   "example-form": {
     "nested-input": "What the user typed in that field"
   }
+}
+*/
+```
+
+### `snap_getInterfaceContext`
+
+Gets the context of an interactive interface by its ID.
+For use in [interactive UI](../features/custom-ui/interactive-ui.md).
+
+#### Parameters
+
+- `id` - The ID of the interface.
+
+#### Returns
+
+An object of type `InterfaceContext` if a custom context object was passed when creating or updating the interface, or `null`.
+
+#### Example
+
+```js title="index.js"
+const interfaceId = await snap.request({
+  method: "snap_createInterface",
+  params: {
+    ui: (
+      <Box>
+        <Heading>Hello, world!</Heading>
+        <Text>Welcome to my Snap homepage!</Text>
+      </Box>
+    ),
+    context: { 
+      key: "value"
+    }
+  },
+})
+
+const context = await snap.request({
+  method: "snap_getInterfaceContext",
+  params: {
+    id: interfaceId,
+  },
+})
+
+console.log(context)
+/*
+{
+  "key": "value"
 }
 */
 ```

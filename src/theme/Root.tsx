@@ -65,6 +65,8 @@ interface IMetamaskProviderContext {
   userAPIKey?: string;
   setUserAPIKey?: (key: string) => void;
   fetchLineaEns?: (walletId: string) => Promise<void>;
+  userEncPublicKey?: string;
+  setUserEncPublicKey?: (key: string) => void;
 }
 
 export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
@@ -90,6 +92,8 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   userAPIKey: "",
   setUserAPIKey: () => {},
   fetchLineaEns: () => new Promise(() => {}),
+  userEncPublicKey: undefined,
+  setUserEncPublicKey: () => {},
 });
 
 const sdk = new MetaMaskSDK({
@@ -122,6 +126,7 @@ export const LoginProvider = ({ children }) => {
   const [needsMfa, setNeedsMfa] = useState<boolean>(false);
   const [walletAuthUrl, setWalletAuthUrl] = useState<string>("");
   const [userAPIKey, setUserAPIKey] = useState("");
+  const [userEncPublicKey, setUserEncPublicKey] = useState(undefined);
   const { siteConfig } = useDocusaurusContext();
   const { DASHBOARD_URL, GF_SURVEY_KEY, LINEA_ENS_URL } = siteConfig?.customFields || {};
 
@@ -289,6 +294,8 @@ export const LoginProvider = ({ children }) => {
           userAPIKey,
           setUserAPIKey,
           fetchLineaEns,
+          userEncPublicKey,
+          setUserEncPublicKey,
         } as IMetamaskProviderContext
       }
     >

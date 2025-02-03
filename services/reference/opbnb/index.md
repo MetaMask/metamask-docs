@@ -11,7 +11,7 @@ import CardList from "@site/src/components/CardList"
 opBNB is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Infura provides open beta access to the layer 2 opBNB and its layer 1 [BNB Smart Chain (BSC)](../bnb-smart-chain/index.md). During this period, there might be [feature limitations](json-rpc-methods/index.md#partner-supported-methods).
+Infura provides open beta access to the layer 2 opBNB and its layer 1 [BNB Smart Chain (BSC)](../bnb-smart-chain/index.md). During this period, there might be feature limitations.
 Performance issues are not expected, but they are possible as we optimize and stabilize the service.
 
 Archive requests are not currently supported for opBNB: only near head requests (the last 128 blocks) are supported. Be aware of this limitation when making calls

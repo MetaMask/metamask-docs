@@ -13,7 +13,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperability.md)
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../connect/index.md).
+We recommend [using this mechanism to connect to MetaMask](../how-to/connect.md).
 
 You can access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
@@ -84,7 +84,7 @@ If the request fails, the promise rejects with an [error](#errors).
 #### Example
 
 The following is an example of using `request()` to call
-[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendTransaction):
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction):
 
 ```javascript
 provider // Or window.ethereum if you don't support EIP-6963.
@@ -185,17 +185,6 @@ provider // Or window.ethereum if you don't support EIP-6963.
 
 The provider emits this event when the currently connected chain changes.
 Listen to this event to [detect a user's network](../how-to/manage-networks/detect-network.md).
-
-:::caution Important
-
-We strongly recommend reloading the page upon chain changes, unless you have a good reason not to:
-
-```typescript
-provider // Or window.ethereum if you don't support EIP-6963.
-  .on("chainChanged", (chainId) => window.location.reload())
-```
-
-:::
 
 ### `connect`
 

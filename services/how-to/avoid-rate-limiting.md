@@ -6,35 +6,38 @@ sidebar_position: 1
 # Avoid rate limiting
 
 Infura applies rate limiting account-wide after exceeding the [daily credit limit](../get-started/pricing/index.md)
-or the number of credits per second (throughput).
+or the number of credits per second (throughput). The rate limiting also applies to
+[user-defined limits that you can configure in the dashboard](/developer-tools/dashboard/how-to/secure-an-api/set-rate-limits).
 
-For rate limiting designed to protect our service in the event of an attack, Infura uses a combination of:
-- Source IP address.
-- JSON-RPC method.
-- API key.
+When you exceed your daily credit limit, Infura stops accepting further traffic and removes
+access for the rest of the day, halting further usage. You'll need to upgrade your plan, or purchase
+additional credit packs for more capacity.
 
-The throughput of an account will be throttled once the daily credit limit is reached. Credit
-quota limits will be reset everyday at 00:00 UTC for all customers.
+If you've exceeded your allowed throughput limit, consider reducing the amount of requests per
+second, or upgrade for more capacity.
+
+Credit quota limits are reset every day at 00:00 UTC for all customers.
 
 ## Rate limit implications
 
 Daily credit quota limits apply after reaching your daily credit allowance:
 
-- Once you reach your daily request limit, you can still make further requests, but throughput
-    will be throttled.
+- Once you reach your daily request limit, your service will be halted for the rest of the day.
 - The WebSocket service will sever connections.
 
 ### Notice rate limiting behavior?
 
-You'll receive a JSON response with an HTTP status code `429` if you reach your credits per second limits:
+You'll receive a JSON response with an HTTP status code `402` if you reach your daily credit limit. For example:
 
 ```json
 {
   "jsonrpc": "2.0",
   "id": 1,
   "error": {
-    "code": -32005,
-    "message": "daily request count exceeded, request rate limited"
+    "code": 402,
+    "event": -33000,
+    "message": "Payment Required",
+    "details": "You have reached your daily credit limit. To continue making requests, upgrade your plan or purchase additional credits"
   }
 }
 ```
@@ -47,34 +50,17 @@ allowed limit:
   "jsonrpc": "2.0",
   "id": 1,
   "error": {
-    "code": -32005,
-    "message": "project ID request rate exceeded",
-    "data": {
-      "see": "https://infura.io/docs/ethereum/jsonrpc/ratelimits",
-      "current_rps": 13.333,
-      "allowed_rps": 10.0,
-      "backoff_seconds": 30.0
-    }
+    "code": 429,
+    "event": -33200,
+    "message": "Too Many Requests",
+    "details": "You have surpassed your allowed throughput limit. Reduce the amount of requests per second or upgrade for more capacity."
   }
 }
 ```
 
-The `data` array contains three fields related to rate limits:
-
-- `current_rps` - The current rate per second determined by Infura.
-- `allowed_rps` - The current _allowed_ rate which you should stay under.
-- `backoff_seconds` - The suggested amount of time to wait before sending more requests.
-
-:::info
-
-The value for `allowed_rps` changes depending on overall network conditions; therefore consider the value
-for `current_rps` valid and up-to-date.
-
-:::
-
 ### Tips to avoid rate limiting
 
-We recommend pausing JSON-RPC activity for the time value in `backoff_seconds`.
+We recommend pausing JSON-RPC activity if you surpass your request per second capacity.
 
 If you're consistently rate limited, consider these workarounds:
 

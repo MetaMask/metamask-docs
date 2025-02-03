@@ -71,9 +71,9 @@ To contribute changes:
 
    > **Notes:**
    >
-   > - All documentation content is located in the `wallet`, `snaps`, `services`, and
+   > - All documentation content is located in the `wallet`, `sdk`, `snaps`, `services`, and
    >   `developer-tools` directories.
-   > - If you add a new documentation page, edit `wallet-sidebar.js`, `snaps-sidebar.js`,
+   > - If you add a new documentation page, edit `wallet-sidebar.js`, `sdk-sidebar.js`, `snaps-sidebar.js`,
    >   `services-sidebar.js`, or `dashboard-sidebar.js` to add the page to the
    >   [sidebar](https://docs-template.consensys.io/create/configure-docusaurus#sidebar).
    > - If you delete, rename, or move a documentation file, add a
@@ -120,7 +120,7 @@ Refer to the [Consensys documentation style guide](https://docs-template.consens
 
 ## Add images
 
-All images are located in the `wallet/assets`, `snaps/assets`, `services/images`, and
+All images are located in the `wallet/assets`, `sdk/_assets`, `snaps/assets`, `services/images`, and
 `developer-tools/images` directories.
 When adding a new image, such as a screenshot or diagram, make sure the image has a white or
 `#1b1b1d` color background in order for it to be compatible with the site's light and dark modes.

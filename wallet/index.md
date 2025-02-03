@@ -1,45 +1,33 @@
 ---
-description: Integrate your dapp with the MetaMask wallet.
+slug: /
+description: Welcome to the MetaMask Wallet API documentation
 ---
 
 # Integrate your dapp with the MetaMask wallet
 
-Integrate your dapp with MetaMask using **MetaMask SDK** and the **Wallet API**.
-Use MetaMask SDK to create a seamless connection between your dapp and MetaMask across desktop and
-mobile platforms.
-Use the Wallet API to interact with users' EVM accounts in MetaMask.
-
-Get started by [connecting to MetaMask](connect/index.md).
-
-## Why use MetaMask SDK?
-
-**MetaMask SDK** enables a reliable, secure, and seamless connection between your dapp and the
-MetaMask browser extension or MetaMask Mobile, providing cross-platform compatibility with a
-consistent user experience.
-Key benefits include:
-
-- **Multi-platform support** - Connect from web, desktop, mobile, and gaming platforms.
-- **Seamless connections** - Minimize reconnections and improve user experience, especially on mobile.
-- **Mobile-first optimization** - Enable faster wallet interactions with instant deeplinks and advanced features.
-- **Enhanced functionality** - Use [RPC request batching](how-to/batch-json-rpc-requests.md),
-  [EIP-6963](/wallet/concepts/wallet-interoperability.md) for wallet discovery, and wallet security enhancements.
-- **Third-party library integration** - Use libraries like [Wagmi](connect/3rd-party-libraries/wagmi.md)
-  or [Web3-Onboard](connect/3rd-party-libraries/web3-onboard.md) that integrate SDK support.
-
-The **Wallet API** allows you to interact with users' EVM accounts using standardized JSON-RPC calls.
-While you can connect to the MetaMask extension directly using just the Wallet API, we recommend
-using the SDK or third-party libraries in conjunction with the Wallet API, to take advantage of the
-SDK's benefits.
-
-## Where do I start?
-
-See [**Connect to MetaMask**](connect/index.md) to learn about the different connection options,
-and get started quickly.
-
-## Questions?
-
-For more support, connect with the MetaMask team and community on [Consensys Discord](https://discord.gg/consensys).
-
-:::note MetaMask user support
-For MetaMask user support, visit the [MetaMask Help Center](https://support.metamask.io/).
+:::tip Building a cross-platform or mobile dapp?
+For cross-platform development, mobile integration, or advanced features like QR codes and 
+deeplinking, see the [**MetaMask SDK** documentation](/sdk).
 :::
+
+The Wallet API is MetaMask's core interface for web dapps to interact with the MetaMask browser extension.
+With the Wallet API, you can:
+
+- Interact with users' Ethereum accounts.
+- Send transactions and sign messages.
+- Listen to account and network changes.
+
+The Wallet API uses standardized [JSON-RPC calls](reference/json-rpc-methods/index.md) to 
+interact with users' EVM accounts, and implements standard interfaces like
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) for Ethereum provider methods and
+[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for wallet detection.
+
+[Get started by connecting to MetaMask.](how-to/connect.md)
+
+## Wallet API vs. SDK
+
+The **Wallet API** is designed for web dapps that connect to the MetaMask browser extension.
+If you're building a desktop web-only dapp, the Wallet API provides everything you need.
+
+[**MetaMask SDK**](/sdk) builds on top of the Wallet API, adding cross-platform support and features like mobile deeplinking and QR code connections.
+We recommend the SDK if you want to build a cross-platform onchain dapp.

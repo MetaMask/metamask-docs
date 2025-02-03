@@ -10,74 +10,38 @@ export default function Home(): JSX.Element {
     <Layout title={'Home'}>
       <Hero
         title={siteConfig.title}
-        description={
-          "Integrate with and extend upon the world's leading self-custodial crypto wallet."
-        }
-        button={{
-          label: 'Get Started',
-          href: '/wallet',
-          icon: 'arrow-right',
-        }}
+        description={"Build with the world's leading self-custodial crypto wallet."}
       />
       <CardSection
-        items={[
+        colorPalette="purple"
+        cards={[
           {
-            colorPalette: 'purple',
-            title: 'Integrate your dapp with the MetaMask wallet',
+            title: 'SDK',
             description:
-              "Your dapp can use the Wallet API and MetaMask SDK to request users' Ethereum accounts, read data from connected blockchains, suggest that the user sign messages and transactions, and perform other functions on MetaMask from multiple dapp platforms.",
-            cards: [
-              {
-                title: 'Wallet quickstart',
-                description:
-                  'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
-                href: '/wallet',
-                theme: '',
-              },
-              {
-                title: 'Wallet tutorials',
-                description:
-                  'Follow the step-by-step tutorials to create a simple React dapp and integrate it with MetaMask.',
-                href: '/wallet',
-                theme: '',
-              },
-              {
-                title: 'Wallet API',
-                description:
-                  "Use the JSON-RPC methods of MetaMask's Wallet API to interact with your users' Ethereum accounts.",
-                href: '/wallet',
-                theme: '',
-              },
-            ],
+              'Use MetaMask SDK to build onchain dapps. Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile.',
+            href: '/sdk',
+            theme: '',
           },
           {
-            colorPalette: 'green',
-            title: 'Extend the functionality of MetaMask using Snaps',
+            title: 'Wallet API',
             description:
-              'A Snap is a JavaScript program run in an isolated environment that customizes the MetaMask wallet experience. You can create a Snap that adds new API methods, adds support for different blockchain protocols, or modifies existing functionalities.',
-            cards: [
-              {
-                title: 'Snaps quickstart',
-                description:
-                  'Get started quickly by integrating your existing JavaScript or React dapp with the MetaMask wallet.',
-                href: '/snaps',
-                theme: '',
-              },
-              {
-                title: 'Snaps tutorials',
-                description:
-                  'Follow the step-by-step tutorials to create Snaps that estimate gas fees, provide transaction insights with custom UI, and more.',
-                href: '/snaps',
-                theme: '',
-              },
-              {
-                title: 'Snaps API',
-                description:
-                  'Use the Snaps API to modify the functionality of MetaMask and communicate between dapps and Snaps.',
-                href: '/snaps',
-                theme: '',
-              },
-            ],
+              "Use the Wallet API to integrate your dapp with MetaMask. Connect to the MetaMask browser extension and interact with your users' accounts.",
+            href: '/wallet',
+            theme: '',
+          },
+          {
+            title: 'Snaps',
+            description:
+              'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
+            href: '/snaps',
+            theme: '',
+          },
+          {
+            title: 'Services',
+            description:
+              'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+            href: '/services',
+            theme: '',
           },
         ]}
       />

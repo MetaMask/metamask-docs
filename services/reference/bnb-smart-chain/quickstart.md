@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the BNB 
 
 ## Prerequisites
 
-- Ensure you have an [API key](../../../developer-tools/dashboard/get-started/create-api) with the BNB Smart Chain networked enabled.
+- Ensure you have an [API key](../../../developer-tools/dashboard/get-started/create-api.md) with the BNB Smart Chain network enabled.
 
 ## Make calls
 

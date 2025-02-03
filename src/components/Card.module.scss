@@ -128,10 +128,10 @@
 
 .item-description {
   @include bp(tablet) {
-    max-width: 33.6rem;
+    max-width: 40rem;
   }
   @include bp(desktop) {
-    max-width: 29.4rem;
+    max-width: 50rem;
   }
 }
 

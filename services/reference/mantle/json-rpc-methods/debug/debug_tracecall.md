@@ -29,16 +29,16 @@ given block execution.
   `latest`, `earliest`, `pending`, `safe`, or `finalized`.
   See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - Optional tracing options object with the following fields:
-  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](index.md#calltracer) or
-    [`prestateTracer`](index.md##prestatetracer).
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
+    [`prestateTracer`](../debug/index.md#prestatetracer).
   - `tracerConfig`: (object) _[optional]_ tracer configuration options:
     - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
       sub-calls. It eliminates the additional processing for each call frame.
 
 ## Returns
 
-Depending on the specified tracer type, returns a [`callTracer`](index.md##calltracer) object or
-[`prestateTracer`](index.md#prestatetracer) object.
+Depending on the specified tracer type, returns a [`callTracer`](../debug/index.md#calltracer) object or
+[`prestateTracer`](../debug/index.md#prestatetracer) object.
 
 ## Example
 

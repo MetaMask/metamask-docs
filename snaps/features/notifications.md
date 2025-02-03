@@ -63,6 +63,34 @@ Each Snap can trigger up to:
 - Two native notifications per five minutes.
   :::
 
+## Expanded view
+
+In-app notifications can include an optional expanded view that displays when selected.
+The expanded view includes a title, content, and an optional footer link. 
+
+The following example displays a notification in MetaMask, with the message "Hello, world!"
+When the user selects the notification, the expanded view displays a page with a title, a paragraph, and a link to the MetaMask Snaps directory:
+
+```javascript title="index.js"
+await snap.request({
+  method: "snap_notify",
+  params: {
+    type: "inApp",
+    message: "Hello, world!",
+    title: "Hello",
+    content: ( 
+      <Box>
+        <Text>Did you know you can find more Snaps in the MetaMask Snaps Directory?</Text>
+      </Box>
+    ),
+    footerLink: {
+      text: "Visit the directory",
+      href: "https://snaps.metamask.io"
+    }
+  },
+})
+```
+
 ## Example
 
 See the

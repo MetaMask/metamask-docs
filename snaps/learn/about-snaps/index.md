@@ -69,13 +69,15 @@ For each Snap, the user can:
 A Snap can also display a [home page](../../features/custom-ui/home-pages.md) within MetaMask that
 the user can access using the Snaps menu.
 
-Other than the settings page and home page, a Snap can
-[modify the MetaMask UI](../../features/custom-ui/index.md) only
-by displaying [dialogs](../../features/custom-ui/dialogs.md),
-[transaction insights](../../reference/entry-points.md#ontransaction), or
-[signature insights](../../features/signature-insights.md).
+Other than the settings page and home page, a Snap can modify the MetaMask UI by displaying
+[custom UI](../../features/custom-ui/index.md) in
+[dialogs](../../features/custom-ui/dialogs.md),
+[transaction insights](../../features/transaction-insights.md),
+[signature insights](../../features/signature-insights.md), and
+[notifications (expanded view)](../../features/notifications.md#expanded-view).
+An [account management Snap](../../features/custom-evm-accounts/index.md) can also modify the MetaMask UI by leveraging native account UX.
 
-This means that many Snaps must use companion dapps and custom JSON-RPC API methods to
+Many Snaps must use companion dapps and custom JSON-RPC API methods to
 present data to the user.
 
 :::note

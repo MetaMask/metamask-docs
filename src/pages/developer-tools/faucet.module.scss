@@ -110,6 +110,10 @@
         background-color: var(--faucet-hero-background);
         padding: 6rem;
         margin-bottom: 60px;
+        @media screen and (max-width: 996px) {
+          margin-bottom: 40px;
+          padding: 3rem;
+        }
       }
     }
 

@@ -5,7 +5,7 @@ description: View your Infura credit usage stats.
 # View credit usage
 
 You can view your daily credit usage in relation to your daily credit quota limit. Daily credit usage
-counts are reset everyday at 00:00 UTC for all customers.
+counts are reset every day at 00:00 UTC for all customers.
 
 Select **View Usage** from the **Daily Credit Usage** section on the dashboard, or select
 the **Usage** tab from the **Settings** > **Billing** dropdown.

@@ -32,6 +32,11 @@ Always do your own research before installing a Snap.
   - Is [published](publish-a-snap.md) to npm.
   - Does not impair MetaMask's compliance with laws or regulations.
 
+- Remove any `console` logs, "to-do" comments, and unused permissions or methods.
+
+- Scan your Snap for security vulnerabilities using [Snapper](https://github.com/sayfer-io/Snapper) and 
+  resolve any reported issues.
+
 - If your Snap uses any of the following API methods related to key management, you must provide
   evidence of a third-party audit from an approved auditor:
 
@@ -161,7 +166,7 @@ The following is a list of permissions that do not require allowlisting:
 - [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
 - [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
 - [`snap_dialog`](../reference/snaps-api.md#snap_dialog)
-- [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale)
+- [`snap_getLocale`](../reference/snaps-api.md#snap_getlocale-deprecated)
 - [`snap_getPreferences`](../reference/snaps-api.md#snap_getpreferences)
 - [`snap_manageState`](../reference/snaps-api.md#snap_managestate)
 - [`snap_notify`](../reference/snaps-api.md#snap_notify)
