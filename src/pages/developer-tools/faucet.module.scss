@@ -105,15 +105,15 @@
     .topContent {
       margin-bottom: 60px;
       padding: 0 var(--ifm-navbar-padding-horizontal);
-      @media screen and (max-width: 996px) {
-        margin-bottom: 40px;
-        padding: 3rem;
-      }
 
       .hero {
         background-color: var(--faucet-hero-background);
         padding: 6rem;
         margin-bottom: 60px;
+        @media screen and (max-width: 996px) {
+          margin-bottom: 40px;
+          padding: 3rem;
+        }
       }
     }
 
