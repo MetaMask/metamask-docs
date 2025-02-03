@@ -116,7 +116,7 @@ export default function Hero({
                 : 'Enter your MetaMask wallet address and request ETH.'}
           </Text>
           <div className={styles.actions}>
-            {!!Object.keys(projects).length && isExtensionActive && (
+            {!!Object.keys(projects).length && !showInstallButton && (
               <div className={styles.inputCont}>
                 <div className={styles.inputWrapper}>
                   <Input
