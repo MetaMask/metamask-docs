@@ -10,18 +10,16 @@ export default function Home(): JSX.Element {
     <Layout title={'Home'}>
       <Hero
         title={siteConfig.title}
-        description={
-          "Build with the world's leading self-custodial crypto wallet."
-        }
+        description={"Build with the world's leading self-custodial crypto wallet."}
       />
       <CardSection
-        colorPalette='purple'
+        colorPalette="purple"
         cards={[
           {
             title: 'SDK',
             description:
               'Use MetaMask SDK to build onchain dapps. Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile.',
-            href: '/wallet',
+            href: '/sdk',
             theme: '',
           },
           {
@@ -34,17 +32,17 @@ export default function Home(): JSX.Element {
           {
             title: 'Snaps',
             description:
-              "Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.",
-            href: '/wallet',
+              'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
+            href: '/snaps',
             theme: '',
           },
           {
             title: 'Services',
             description:
-              "Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.",
-            href: '/wallet',
+              'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+            href: '/services',
             theme: '',
-          }
+          },
         ]}
       />
       <CallToAction

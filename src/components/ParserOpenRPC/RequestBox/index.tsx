@@ -51,7 +51,7 @@ export default function RequestBox({
   requestURL = '',
   isLoading,
 }: RequestBoxProps) {
-  const { userAPIKey } = useContext(MetamaskProviderContext)
+  const { userAPIKey, userEncPublicKey } = useContext(MetamaskProviderContext)
   const [currentLang, setCurrentLang] = useState(langOptions[0])
   const exampleRequest = useMemo(() => {
     const preparedParams = JSON.stringify(paramsData, null, 2)
@@ -81,7 +81,12 @@ export default function RequestBox({
     'eth_sendTransaction',
     'personal_sign',
     'eth_signTypedData_v4',
+    'eth_getEncryptionPublicKey',
   ]
+
+  const isMetamaskDecryptDisabled =
+    isMetamaskNetwork && !userEncPublicKey && method === 'eth_decrypt'
+
   const isRunAndCustomizeRequestDisabled =
     isMetamaskNetwork && methodsWithRequiredWalletConnection.includes(method)
       ? !isMetamaskInstalled
@@ -93,7 +98,7 @@ export default function RequestBox({
       type={'primary'}
       icon={'arrow-right'}
       label={'Run request'}
-      disabled={isRunAndCustomizeRequestDisabled || isLoading}
+      disabled={isRunAndCustomizeRequestDisabled || isLoading || isMetamaskDecryptDisabled}
       onClick={submitRequest}
       data-test-id="run-request"
       style={
@@ -143,7 +148,7 @@ export default function RequestBox({
               as="button"
               type={'tertiary'}
               label={'Customize request'}
-              disabled={isRunAndCustomizeRequestDisabled}
+              disabled={isRunAndCustomizeRequestDisabled || isMetamaskDecryptDisabled}
               onClick={openModal}
               data-test-id="customize-request"
               style={
@@ -161,8 +166,13 @@ export default function RequestBox({
               }
             />
           )}
-          {isRunAndCustomizeRequestDisabled ? (
-            <Tooltip message="Before you can run or customize this request, please connect your MetaMask wallet first.">
+          {isRunAndCustomizeRequestDisabled || isMetamaskDecryptDisabled ? (
+            <Tooltip
+              message={
+                isMetamaskDecryptDisabled
+                  ? 'Please connect your MetaMask wallet first and run eth_getEncryptionPublicKey'
+                  : 'Before you can run or customize this request, please connect your MetaMask wallet first.'
+              }>
               {runRequestButton}
             </Tooltip>
           ) : (

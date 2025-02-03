@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
 import { WALLET_LINK_TYPE } from '@site/src/components/AuthLogin/AuthModal'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
-import EthIcon from './eth.svg'
 import styles from './hero.module.scss'
 import { useColorMode } from '@docusaurus/theme-common'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
@@ -38,14 +37,16 @@ export default function Hero({
     projects,
     walletAuthUrl,
   } = useContext(MetamaskProviderContext)
+  const isMobile = sdk.platformManager?.isMobile ?? false
   const isExtensionActive = sdk.isExtensionActive()
+  const showInstallButton = !isExtensionActive && !isMobile
   const [isWalletLinking, setIsWalletLinking] = useState(false)
   const { colorMode } = useColorMode()
 
   const handleConnectWallet = () => {
     setIsWalletLinking(true)
     trackClickForSegment({
-      eventName: !isExtensionActive ? 'Install MetaMask' : 'Connect MetaMask',
+      eventName: !showInstallButton ? 'Install MetaMask' : 'Connect MetaMask',
       clickType: 'Hero',
       userExperience: 'B',
       responseStatus: null,
@@ -104,7 +105,7 @@ export default function Hero({
             </span>
           </Text>
           <Text as="p" className="description">
-            {!isExtensionActive
+            {showInstallButton
               ? 'Install MetaMask for your browser to get started and request ETH.'
               : !Object.keys(projects).length
                 ? walletLinked === undefined
@@ -155,7 +156,7 @@ export default function Hero({
               </div>
             )}
             <div className={styles.btnWrapper}>
-              {!isExtensionActive ? (
+              {showInstallButton ? (
                 <Button
                   as="button"
                   data-test-id="hero-cta-install-metamask"
