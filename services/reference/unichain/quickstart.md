@@ -56,7 +56,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Node Fetch
 
-1. In your project folder, install the `node-fetch` package using npm::
+1. In your project folder, install the `node-fetch` package using npm:
 
    ```bash
    npm i node-fetch

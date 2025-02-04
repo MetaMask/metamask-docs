@@ -40,7 +40,7 @@ To use an alternative network, ensure that your account has testnet ETH for that
 When using an alternative network, you'll:
 
 - Update your `.env` file in [Step 4](#4-create-a-env-file) with the alternative network name.
-- Update the `chaindId` in [Step 5](#5-create-a-sendjs-file) with the alternative network chain ID.
+- Update the `chainId` in [Step 5](#5-create-a-sendjs-file) with the alternative network chain ID.
 :::
 
 </TabItem>
