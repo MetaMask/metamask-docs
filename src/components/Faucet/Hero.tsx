@@ -60,7 +60,9 @@ export default function Hero({
     setIsWalletLinking(true)
     trackClickForSegment({
       eventName:
-        walletLinked === WALLET_LINK_TYPE.NO ? 'Link Infura Account' : 'Select Infura Account',
+        walletLinked === WALLET_LINK_TYPE.NO
+          ? 'Link Developer Dashboard Account'
+          : 'Select Developer Dashboard Account',
       clickType: 'Hero',
       userExperience: 'B',
       responseStatus: null,
@@ -111,8 +113,8 @@ export default function Hero({
                 ? walletLinked === undefined
                   ? 'Connect your MetaMask wallet to get started and request ETH.'
                   : walletLinked === WALLET_LINK_TYPE.NO
-                    ? 'Link your Infura account to get started and request ETH.'
-                    : 'Select your Infura account to get started and request ETH.'
+                    ? 'Link your Developer Dashboard account to get started and request ETH.'
+                    : 'Select your Developer Dashboard account to get started and request ETH.'
                 : 'Enter your MetaMask wallet address and request ETH.'}
           </Text>
           <div className={styles.actions}>
@@ -206,11 +208,11 @@ export default function Hero({
                   {walletLinked === WALLET_LINK_TYPE.NO && (
                     <Button
                       as="button"
-                      data-test-id="hero-cta-link-infura-account"
+                      data-test-id="hero-cta-link-dashboard-account"
                       onClick={handleLinkWallet}
                       isLoading={isWalletLinking}
                       icon={'arrow-right'}
-                      label={'Link Infura Account'}
+                      label={'Link Developer Dashboard Account'}
                       style={
                         colorMode !== 'dark'
                           ? {
@@ -224,11 +226,11 @@ export default function Hero({
                   {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
                     <Button
                       as="button"
-                      data-test-id="hero-cta-select-infura-account"
+                      data-test-id="hero-cta-select-dashboard-account"
                       onClick={handleLinkWallet}
                       isLoading={isWalletLinking}
                       icon={'arrow-right'}
-                      label={'Select Infura Account'}
+                      label={'Select Developer Dashboard Account'}
                       style={
                         colorMode !== 'dark'
                           ? {
