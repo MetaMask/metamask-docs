@@ -47,7 +47,7 @@ This example has been written for web3js v4.x. It may not work for earlier versi
 
 ### 3. Set up the script
 
-Create a file called `trackERC20.js`. At the top of file, add the following lines to import the web3.js library and connect to the Infura WebSocket endpoint:
+Create a file called `trackERC20.js`. At the top of the file, add the following lines to import the web3.js library and connect to the Infura WebSocket endpoint:
 
 ```javascript
 const { Web3 } = require("web3");
