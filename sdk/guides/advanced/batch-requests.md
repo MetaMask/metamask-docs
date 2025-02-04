@@ -1,132 +1,159 @@
 ---
-description: Batch multiple JSON-RPC requests.
+description: Batch multiple JSON-RPC requests using MetaMask SDK or Wagmi.
 ---
 
-# Batch requests
+# Batch Requests
 
-You can batch multiple JSON-RPC requests in your JavaScript dapp.
+MetaMask SDK provides mechanisms to send multiple JSON-RPC requests in a single call. However, it's important to note that the term "batching" is used in two different contexts here:
 
-The SDK's `metamask_batch` method enables you to batch multiple JSON-RPC requests in a single call,
-providing a streamlined approach for dapps to interact with EVM networks, and enabling complex
-sequences of actions.
-This method enhances performance, usability, and efficiency by reducing the number of network calls
-made to MetaMask.
+1. **Wagmi Batching for Contract Reads:**  
+   Wagmi does not support MetaMask’s generic batching mechanism. Instead, it provides the [`useReadContracts`](https://wagmi.sh/react/api/hooks/useReadContracts) hook to perform multiple contract read operations in a single hook call. This is specialized for retrieving data from smart contracts and returns an array of results corresponding to each read call.
+
+2. **Vanilla JavaScript Batching with `metamask_batch`:**  
+   This approach uses MetaMask SDK’s `metamask_batch` method to group any JSON-RPC requests together, whether they are contract calls or other JSON-RPC methods (e.g., signing messages, sending transactions). Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
+
+## Wagmi (Read Operations with `useReadContracts`)
+
+When using Wagmi, you can perform multiple contract read operations in a single hook call using `useReadContracts`. This method is designed specifically for contract calls and batches them together internally, returning the results as an array. It is not a generic JSON-RPC batching tool but rather a specialized solution for reading from smart contracts.
+
+For more information, see the [Wagmi documentation](https://wagmi.sh/react/api/hooks/useReadContracts).
+
+Below is an example:
+
+```js
+import { useReadContracts } from 'wagmi';
+
+// Example contract definitions with their address and ABI
+const contractA = {
+  address: '0xContractAddress1',
+  abi: contractABI1,
+} as const;
+
+const contractB = {
+  address: '0xContractAddress2',
+  abi: contractABI2,
+} as const;
+
+function MyBatchReadComponent() {
+  const { data, isError, isLoading } = useReadContracts({
+    contracts: [
+      {
+        ...contractA,
+        functionName: 'getValueA',
+      },
+      {
+        ...contractA,
+        functionName: 'getValueB',
+      },
+      {
+        ...contractB,
+        functionName: 'getValueX',
+        args: [42],
+      },
+      {
+        ...contractB,
+        functionName: 'getValueY',
+        args: [42],
+      },
+    ],
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data.</div>;
+
+  return (
+    <div>
+      <p>getValueA: {data?.[0]?.toString()}</p>
+      <p>getValueB: {data?.[1]?.toString()}</p>
+      <p>getValueX: {data?.[2]?.toString()}</p>
+      <p>getValueY: {data?.[3]?.toString()}</p>
+    </div>
+  );
+}
+```
+
+In this example, four contract read calls are batched together. The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
+
+:::tip 
+For a better user experience, it's important to use reliable RPC providers instead of public nodes.
+We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
+:::
+
+
+## Vanilla JavaScript (Using `metamask_batch`)
+
+If you’re **not** using Wagmi, you can directly utilize MetaMask SDK’s `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
 
 Use cases include:
 
 - **Batching multiple signatures** - Send multiple signing requests in one batch.
-
-- **Switching networks** - Switch the EVM network, perform an action such as sending a transaction,
-  and switch back, all in one batch.
-
+- **Switching networks** - Switch the EVM network, perform an action such as sending a transaction, and switch back, all in one batch.
 - **Mixed transactions and signatures** - Combine transaction sending and signing requests in one batch.
 
-`metamask_batch` opens up additional possibilities for sophisticated transaction flows in dapps,
-enhancing the user experience and operational efficiency.
+However, keep in mind:
 
-## Prerequisites
+- **Individual Approvals:** Even though the requests are batched, each individual request still requires user approval.
+- **Batch Failure:** If any request in the batch is rejected, the entire batch will fail.
 
-Set up MetaMask SDK in your JavaScript dapp.
+```js
+import { MetaMaskSDK } from "@metamask/sdk";
 
-## Use the `metamask_batch` method
+const MMSDK = new MetaMaskSDK();
+const provider = MMSDK.getProvider();
 
-`metamask_batch` takes an array of JSON-RPC requests (`ChainRPC[]`) as its parameter.
-
-Each request in the batch is independent.
-The user receives a prompt for each action within the batch, allowing them to approve or reject
-individual requests.
-If any request is rejected, the entire batch fails and an error is returned, ensuring integrity in
-transactional operations.
-
-The method returns an array of results corresponding to each request.
-
-### React / Next.js / React Native example
-
-The following is an example of using `metamask_batch` to batch
-[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) and
-[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction) in React, Next.js, or React Native/Expo:
-
-```javascript title="index.js"
-import { metamask_batch } from "metamask-sdk"
-
-function MyComponent() {
-  const handleBatchRequest = async () => {
-    const batchRequests = [
-      { method: "personal_sign", params: ["message", "address"] },
-      {
-        method: "eth_sendTransaction",
-        params: [
-          {
-            /* Transaction parameters */
-          },
-        ],
-      },
-    ]
-
-    try {
-      const results = await metamask_batch(batchRequests)
-      console.log(results) // Process results.
-    } catch (error) {
-      console.error("Batch request failed", error)
-    }
-  }
-
-  return <button onClick={handleBatchRequest}>Send Batch Request</button>
-}
-```
-
-### Vue.js example
-
-The following is an example of using `metamask_batch` to batch
-[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) and
-[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction) in Vue.js:
-
-```javascript title="App.vue"
-<script>
-import { metamask_batch } from "metamask-sdk";
-
-export default {
-  methods: {
-    async sendBatchRequest() {
-      const batchRequests = [
-        { method: "personal_sign", params: ["message", "address"] },
+async function handleBatchRequests() {
+  // Example batch: one personal_sign call and one eth_sendTransaction call.
+  const requests = [
+    { method: "personal_sign", params: ["Hello from batch!", "0x1234..."] },
+    {
+      method: "eth_sendTransaction",
+      params: [
         {
-          method: "eth_sendTransaction",
-          params: [
-            {
-              /* Transaction parameters */
-            },
-          ],
+          from: "0x1234...",
+          to: "0xABCD...",
+          // additional transaction parameters
         },
-      ];
+      ],
+    },
+  ];
 
-      try {
-        const results = await metamask_batch(batchRequests);
-        console.log(results);
-      } catch (error) {
-        console.error("Error in batch request", error);
-      }
-    }
+  try {
+    const results = await provider.request({
+      method: "metamask_batch",
+      params: [requests],
+    });
+    console.log("Batch Results:", results);
+  } catch (err) {
+    console.error("Batch request failed:", err);
   }
 }
-</script>
+
+document.getElementById("batchBtn").addEventListener("click", handleBatchRequests);
 ```
 
-### Best practices
+Include the following HTML in your document:
 
-Follow these best practices when using `metamask_batch`:
+```html
+<button id="batchBtn">Send Batch</button>
+```
 
-- **Ensure each request in the batch is properly formatted** according to the JSON-RPC specifications.
+---
 
-- **Handle errors appropriately**, especially when a batch request is partially approved.
+### Important Distinctions and Notes
 
-- **Test batch operations** to ensure consistent behavior across different networks and accounts.
+- **Different Batching Purposes:**  
+  - **Wagmi's `useReadContracts`:**  
+    - Specifically designed for reading data from smart contracts.
+    - Batches multiple contract read operations and returns results in a structured array.
+    - Does not support general JSON-RPC methods (e.g., signing messages or sending transactions).
+  
+  - **Vanilla JavaScript's `metamask_batch`:**  
+    - A generic JSON-RPC batching method provided by MetaMask SDK.
+    - Can batch any type of JSON-RPC requests (reads, writes, signing, etc.).
+    - Each batched request still requires individual user approval.
 
-- **Be aware of the dependencies between chained requests.**
-  Avoid creating a dependency where the outcome of one request directly influences the context or
-  validity of a subsequent request within the same batch.
-  For example, avoid chaining a [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
-  request with [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4), because
-  `eth_signTypedData_v4` relies on the current chain ID, which would be altered by `wallet_switchEthereumChain`.
-  This approach ensures that each request in the batch operates independently and maintains its
-  integrity, regardless of changes introduced by preceding requests in the batch.
+- **User Experience:**  
+  For a better user experience, especially when making multiple contract read calls, it is recommended to use reliable RPC providers rather than public nodes. We suggest using services like [MetaMask Developer](https://developer.metamask.io/) to ensure enhanced reliability and performance.
+
+- **Chain Context:**  
+  Ensure that requests in a batch do not depend on one another’s chain context, as mid-batch state changes can affect outcomes.
