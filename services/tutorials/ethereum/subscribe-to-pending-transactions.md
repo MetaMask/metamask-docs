@@ -38,7 +38,7 @@ Install `web3.py` and the `websockets` library:
 pip install web3 websockets
 ```
 
-### 2. Import project libraries
+### 3. Import project libraries
 
 Create your file (for example `subscribe.py`) and import the libraries needed for the project:
 
@@ -50,7 +50,7 @@ from web3 import Web3
 from websockets import connect
 ```
 
-### 3. Connect to Infura
+### 4. Connect to Infura
 
 Connect to Infura’s WebSockets endpoint to subscribe to new pending transactions, and Infura’s HTTP Ethereum endpoint so we can make JSON-RPC calls such as `eth_get_transaction` to get more information about a specific transaction.
 
@@ -68,7 +68,7 @@ Replace `<YOUR-API-KEY>` with your Infura API key, you can use the same for both
 
 :::
 
-### 4. Subscribe to pending transactions
+### 5. Subscribe to pending transactions
 
 Create an `async` method that connects to Infura’s WebSocket endpoint:
 
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     loop.run_until_complete(get_event())
 ```
 
-### 5. Execute the program
+### 6. Execute the program
 
 Execute the program using the following:
 
@@ -159,7 +159,7 @@ You should now see the terminal fill up with Ethereum transfers:
 ...
 ```
 
-### 6. Monitor a specific address for transactions
+### 7. Monitor a specific address for transactions
 
 You can update the program to monitor incoming transactions to a specific Ethereum address. Let’s define an account we’d like to monitor first, outside of the `get_event()` function:
 
