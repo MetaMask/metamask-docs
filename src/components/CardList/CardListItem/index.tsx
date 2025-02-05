@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 
@@ -42,7 +42,7 @@ export default function CardListItem({ item }: CardListItemProps) {
           <Link to={href} className={clsx(styles['inner'], 'link-styles-none')}>
             {flaskOnly && (
               <div className={styles['tag-holder']}>
-                <CutOffCorners size={'xxs'}>
+                <CutOffCorners size={'xs'}>
                   <span
                     className={clsx(
                       styles['tag'],
@@ -63,20 +63,20 @@ export default function CardListItem({ item }: CardListItemProps) {
             </div>
             {href && (
               <Button
-                as="div"
+                as="button"
                 label={false}
                 type={theme === 'dark' ? 'secondary' : 'primary'}
                 icon="arrow-right"
                 style={
                   theme === 'dark'
-                    ? {
-                      '--button-color-hover': 'var(--general-white)',
-                      '--button-text-color-hover': 'var(--general-black)',
-                    }
-                    : {
-                      '--button-color-hover': 'var(--general-black)',
-                      '--button-text-color-hover': 'var(--general-white)',
-                    }
+                    ? ({
+                        '--button-color-hover': 'var(--general-white)',
+                        '--button-text-color-hover': 'var(--general-black)',
+                      } as unknown as CSSProperties)
+                    : ({
+                        '--button-color-hover': 'var(--general-black)',
+                        '--button-text-color-hover': 'var(--general-white)',
+                      } as unknown as CSSProperties)
                 }
               />
             )}

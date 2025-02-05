@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { CSSProperties, ReactNode, useState } from 'react'
 import Link from '@docusaurus/Link'
 import Heading from '@theme/Heading'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
@@ -13,8 +13,8 @@ import styles from './Card.module.scss'
 export type CardItem = {
   title: string
   href: string
-  description: string
-  theme: string
+  description?: string | ReactNode
+  theme?: string
 }
 
 export default function Card({ title, href, description, theme }: CardItem) {
@@ -23,7 +23,6 @@ export default function Card({ title, href, description, theme }: CardItem) {
   return (
     <li className={clsx(styles['item'], isHovered && styles['active'])}>
       <CutOffCorners size="s">
-        <CutOffCorners size="s" />
         <div
           className={styles['holder']}
           onMouseEnter={() => setIsHovered(true)}
@@ -47,21 +46,21 @@ export default function Card({ title, href, description, theme }: CardItem) {
 
               {href && (
                 <Button
-                  as="div"
+                  as="button"
                   label={false}
                   type={theme === 'dark' ? 'secondary' : 'primary'}
                   icon="arrow-right"
                   className={styles['button']}
                   style={
                     theme === 'dark'
-                      ? {
-                        '--button-color-hover': 'var(--general-white)',
-                        '--button-text-color-hover': 'var(--general-black)',
-                      }
-                      : {
-                        '--button-color-hover': 'var(--general-black)',
-                        '--button-text-color-hover': 'var(--general-white)',
-                      }
+                      ? ({
+                          '--button-color-hover': 'var(--general-white)',
+                          '--button-text-color-hover': 'var(--general-black)',
+                        } as unknown as CSSProperties)
+                      : ({
+                          '--button-color-hover': 'var(--general-black)',
+                          '--button-text-color-hover': 'var(--general-white)',
+                        } as unknown as CSSProperties)
                   }
                 />
               )}

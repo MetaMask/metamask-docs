@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { CSSProperties, useContext, useMemo, useState } from 'react'
 import clsx from 'clsx'
 import CodeBlock from '@theme/CodeBlock'
 import { MethodParam } from '@site/src/components/ParserOpenRPC/interfaces'
@@ -103,10 +103,10 @@ export default function RequestBox({
       data-test-id="run-request"
       style={
         colorMode !== 'dark'
-          ? {
+          ? ({
               '--button-color-hover': 'var(--general-black)',
               '--button-text-color-hover': 'var(--general-white)',
-            }
+            } as unknown as CSSProperties)
           : {}
       }
     />
@@ -153,16 +153,16 @@ export default function RequestBox({
               data-test-id="customize-request"
               style={
                 colorMode === 'dark'
-                  ? {
+                  ? ({
                       '--button-color': 'var(--general-white)',
                       '--button-text-color': 'var(--general-white)',
                       '--button-color-hover': 'var(--general-white)',
                       '--button-text-color-hover': 'var(--general-black)',
-                    }
-                  : {
+                    } as unknown as CSSProperties)
+                  : ({
                       '--button-color-hover': 'var(--general-black)',
                       '--button-text-color-hover': 'var(--general-white)',
-                    }
+                    } as unknown as CSSProperties)
               }
             />
           )}

@@ -30,6 +30,8 @@ interface ButtonProps {
   labelBig?: boolean
   logoFillColor?: string
   hasSpinner?: boolean
+  style?: React.CSSProperties
+  target?: string
   children?: ReactNode
 }
 
@@ -58,6 +60,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
       logoFillColor,
       hasSpinner = false,
       children,
+      style,
       ...rest
     },
     ref
