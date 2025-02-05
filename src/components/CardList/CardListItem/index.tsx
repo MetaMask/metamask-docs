@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 
@@ -69,14 +69,14 @@ export default function CardListItem({ item }: CardListItemProps) {
                 icon="arrow-right"
                 style={
                   theme === 'dark'
-                    ? ({
+                    ? {
                         '--button-color-hover': 'var(--general-white)',
                         '--button-text-color-hover': 'var(--general-black)',
-                      } as unknown as CSSProperties)
-                    : ({
+                      }
+                    : {
                         '--button-color-hover': 'var(--general-black)',
                         '--button-text-color-hover': 'var(--general-white)',
-                      } as unknown as CSSProperties)
+                      }
                 }
               />
             )}

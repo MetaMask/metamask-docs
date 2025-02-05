@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, FC, useContext, CSSProperties } from 'react'
+import React, { useEffect, useState, useRef, FC, useContext } from 'react'
 import ldClient from 'launchdarkly'
 import clsx from 'clsx'
 import DisconnectButton from '@site/src/components/Button'
@@ -149,18 +149,18 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
       label={showInstallButton ? 'Install MetaMask' : 'Connect MetaMask'}
       style={
         colorMode === 'dark'
-          ? ({
+          ? {
               '--button-color': 'var(--consumer-orange)',
               '--button-text-color': 'var(--general-black)',
               '--button-color-hover': 'var(--general-white)',
               '--button-text-color-hover': 'var(--general-black)',
-            } as unknown as CSSProperties)
-          : ({
+            }
+          : {
               '--button-color': 'var(--consumer-orange)',
               '--button-text-color': 'var(--general-black)',
               '--button-color-hover': 'var(--general-black)',
               '--button-text-color-hover': 'var(--general-white)',
-            } as unknown as CSSProperties)
+            }
       }
     />
   ) : (

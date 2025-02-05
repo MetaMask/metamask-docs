@@ -1,4 +1,4 @@
-import React, { useContext, CSSProperties } from 'react'
+import React, { useContext } from 'react'
 import clsx from 'clsx'
 import Button from '@site/src/components/elements/buttons/button'
 import styles from './styles.module.scss'
@@ -34,18 +34,18 @@ export const AuthBox = ({ theme }: AuthBoxProps) => {
         data-test-id="connect-wallet"
         style={
           theme === 'dark'
-            ? ({
+            ? {
                 '--button-color': 'var(--consumer-orange)',
                 '--button-text-color': 'var(--general-black)',
                 '--button-color-hover': 'var(--general-white)',
                 '--button-text-color-hover': 'var(--general-black)',
-              } as unknown as CSSProperties)
-            : ({
+              }
+            : {
                 '--button-color': 'var(--consumer-orange)',
                 '--button-text-color': 'var(--general-black)',
                 '--button-color-hover': 'var(--general-black)',
                 '--button-text-color-hover': 'var(--general-white)',
-              } as unknown as CSSProperties)
+              }
         }
       />
     </div>

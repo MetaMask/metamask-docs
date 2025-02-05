@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { CSSProperties, ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Link from '@docusaurus/Link'
 import Heading from '@theme/Heading'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
@@ -53,14 +53,14 @@ export default function Card({ title, href, description, theme }: CardItem) {
                   className={styles['button']}
                   style={
                     theme === 'dark'
-                      ? ({
+                      ? {
                           '--button-color-hover': 'var(--general-white)',
                           '--button-text-color-hover': 'var(--general-black)',
-                        } as unknown as CSSProperties)
-                      : ({
+                        }
+                      : {
                           '--button-color-hover': 'var(--general-black)',
                           '--button-text-color-hover': 'var(--general-white)',
-                        } as unknown as CSSProperties)
+                        }
                   }
                 />
               )}

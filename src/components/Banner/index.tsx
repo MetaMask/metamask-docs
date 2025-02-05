@@ -1,4 +1,4 @@
-import { ReactNode, FC, useState, useEffect, CSSProperties } from 'react'
+import { ReactNode, FC, useState, useEffect } from 'react'
 import { useColorMode } from '@docusaurus/theme-common'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import Button from '@site/src/components/elements/buttons/button'
@@ -33,14 +33,14 @@ const Banner: FC<BannerProps> = ({ children }) => {
             icon="external-arrow"
             style={
               theme === 'dark'
-                ? ({
+                ? {
                     '--button-color-hover': 'var(--general-white)',
                     '--button-text-color-hover': 'var(--general-black)',
-                  } as unknown as CSSProperties)
-                : ({
+                  }
+                : {
                     '--button-color-hover': 'var(--general-black)',
                     '--button-text-color-hover': 'var(--general-white)',
-                  } as unknown as CSSProperties)
+                  }
             }
           />
         </div>

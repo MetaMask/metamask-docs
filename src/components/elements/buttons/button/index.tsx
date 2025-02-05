@@ -30,7 +30,7 @@ interface ButtonProps {
   labelBig?: boolean
   logoFillColor?: string
   hasSpinner?: boolean
-  style?: React.CSSProperties
+  style?: React.CSSProperties | unknown
   target?: string
   children?: ReactNode
 }
@@ -126,6 +126,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
         className={buttonClassNames}
         disabled={disabled}
         download={as !== 'button' && download ? download : null}
+        style={style}
         {...(asValue === 'button' && { type: buttonType })}
         {...rest}>
         <span className={clsx(styles['button-holder'], labelBig && styles['label-big'])}>

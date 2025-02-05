@@ -1,4 +1,4 @@
-import React, { CSSProperties, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Text from '@site/src/components/Text'
 import Button from '@site/src/components/elements/buttons/button'
 import Input from '@site/src/components/Input'
@@ -139,10 +139,10 @@ export default function Hero({
                       label={'Request ETH'}
                       style={
                         colorMode !== 'dark'
-                          ? ({
+                          ? {
                               '--button-color-hover': 'var(--general-black)',
                               '--button-text-color-hover': 'var(--general-white)',
-                            } as unknown as CSSProperties)
+                            }
                           : {}
                       }
                     />
@@ -160,22 +160,23 @@ export default function Hero({
             <div className={styles.btnWrapper}>
               {showInstallButton ? (
                 <Button
+                  as="button"
                   data-test-id="hero-cta-install-metamask"
                   label={'Install MetaMask'}
                   style={
                     colorMode === 'dark'
-                      ? ({
+                      ? {
                           '--button-color': 'var(--consumer-orange)',
                           '--button-text-color': 'var(--general-black)',
                           '--button-color-hover': 'var(--general-white)',
                           '--button-text-color-hover': 'var(--general-black)',
-                        } as unknown as CSSProperties)
-                      : ({
+                        }
+                      : {
                           '--button-color': 'var(--consumer-orange)',
                           '--button-text-color': 'var(--general-black)',
                           '--button-color-hover': 'var(--general-black)',
                           '--button-text-color-hover': 'var(--general-white)',
-                        } as unknown as CSSProperties)
+                        }
                   }
                   onClick={handleConnectWallet}
                 />
@@ -189,18 +190,18 @@ export default function Hero({
                       label={'Connect MetaMask'}
                       style={
                         colorMode === 'dark'
-                          ? ({
+                          ? {
                               '--button-color': 'var(--consumer-orange)',
                               '--button-text-color': 'var(--general-black)',
                               '--button-color-hover': 'var(--general-white)',
                               '--button-text-color-hover': 'var(--general-black)',
-                            } as unknown as CSSProperties)
-                          : ({
+                            }
+                          : {
                               '--button-color': 'var(--consumer-orange)',
                               '--button-text-color': 'var(--general-black)',
                               '--button-color-hover': 'var(--general-black)',
                               '--button-text-color-hover': 'var(--general-white)',
-                            } as unknown as CSSProperties)
+                            }
                       }
                     />
                   )}
@@ -209,15 +210,15 @@ export default function Hero({
                       as="button"
                       data-test-id="hero-cta-link-dashboard-account"
                       onClick={handleLinkWallet}
-                      hasSpinner={isWalletLinking}
+                      disabled={isWalletLinking}
                       icon={'arrow-right'}
                       label={'Link Developer Dashboard Account'}
                       style={
                         colorMode !== 'dark'
-                          ? ({
+                          ? {
                               '--button-color-hover': 'var(--general-black)',
                               '--button-text-color-hover': 'var(--general-white)',
-                            } as unknown as CSSProperties)
+                            }
                           : {}
                       }
                     />
@@ -227,15 +228,15 @@ export default function Hero({
                       as="button"
                       data-test-id="hero-cta-select-dashboard-account"
                       onClick={handleLinkWallet}
-                      hasSpinner={isWalletLinking}
+                      disabled={isWalletLinking}
                       icon={'arrow-right'}
                       label={'Select Developer Dashboard Account'}
                       style={
                         colorMode !== 'dark'
-                          ? ({
+                          ? {
                               '--button-color-hover': 'var(--general-black)',
                               '--button-text-color-hover': 'var(--general-white)',
-                            } as unknown as CSSProperties)
+                            }
                           : {}
                       }
                     />
