@@ -159,7 +159,7 @@ In order to directly call `from`, `to`, and `tokenId` on `transaction`, add the 
 ```javascript
 console.log(
   `\n` +
-    `New ERC-712 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
+    `New ERC-721 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
     `From: ${
       transaction.from === "0x0000000000000000000000000000000000000000"
         ? "New mint!"
