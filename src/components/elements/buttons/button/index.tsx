@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { forwardRef } from 'react'
+import { forwardRef, ReactNode } from 'react'
 
 import Spinner from '@site/src/components/elements/spinner'
 import { linkComponentMap } from '@site/src/utils/component-map'
@@ -8,32 +8,32 @@ import { logoMap } from '@site/src/utils/logo-map'
 
 import styles from './button.module.scss'
 
-/**
- * A versatile Button component with various style and functionality options.
- * @param {Object} props - The component props.
- * @param {string} [props.buttonType=''] - The HTML button type.
- * @param {'primary'|'secondary'|'tertiary'} [props.type='primary'] - The visual style of the button.
- * @param {string|boolean} [props.label=false] - The button label.
- * @param {string|boolean} [props.labelTwo] - The secondary label for hover state.
- * @param {boolean} [props.isLarge] - Flag for large button size.
- * @param {string} [props.ariaLabel] - Aria label for accessibility.
- * @param {string} [props.icon] - Icon identifier.
- * @param {string|Object} [props.logo] - Logo identifier or component.
- * @param {string} [props.href='/'] - URL for link buttons.
- * @param {Function} [props.onClick] - Click event handler.
- * @param {boolean} [props.disabled=false] - Disabled state of the button.
- * @param {'link'|'a'|'button'} [props.as='button'] - Render as different element.
- * @param {boolean} [props.external=false] - Flag for external links.
- * @param {string|boolean} [props.rel=false] - Rel attribute for links.
- * @param {boolean|string} [props.download=false] - Download attribute for links.
- * @param {string} [props.className=''] - Additional CSS classes.
- * @param {string} [props.textTransform='uppercase'] - Text transform style.
- * @param {boolean} [props.labelBig=false] - Flag for big label style.
- * @param {string} [props.logoFillColor] - Fill color for the logo.
- * @param {boolean} [props.hasSpinner] - If we should show a spinner icon.
- * @param {React.ReactNode} [props.children] - The children of the component.
- */
-const Button = forwardRef(
+interface ButtonProps {
+  buttonType?: string
+  type?: 'primary' | 'secondary' | 'tertiary'
+  label?: string | boolean
+  labelTwo?: string | boolean
+  isLarge?: boolean
+  isExtraLarge?: boolean
+  ariaLabel?: string
+  icon?: string
+  logo?: string | React.ComponentType
+  href?: string
+  onClick?: () => void
+  disabled?: boolean
+  as?: 'link' | 'a' | 'button'
+  external?: boolean
+  rel?: string | boolean
+  download?: boolean | string
+  className?: string
+  textTransform?: string
+  labelBig?: boolean
+  logoFillColor?: string
+  hasSpinner?: boolean
+  children?: ReactNode
+}
+
+const Button = forwardRef<HTMLElement, ButtonProps>(
   (
     {
       buttonType = '',
@@ -42,7 +42,7 @@ const Button = forwardRef(
       labelTwo = label,
       isLarge,
       isExtraLarge,
-      ariaLabel = label,
+      ariaLabel = label as string,
       icon,
       logo,
       href = '/',
@@ -68,7 +68,7 @@ const Button = forwardRef(
     const iconDirection = buttonIconMap[icon]?.direction
     const LogoComponent = typeof logo === 'string' ? logoMap[logo] : logo
 
-    const renderIcon = extraClass => (
+    const renderIcon = (extraClass?: string) => (
       <span
         className={clsx(
           styles['icon'],
@@ -114,7 +114,7 @@ const Button = forwardRef(
 
     return (
       <Component
-        ref={ref}
+        ref={ref as any}
         href={asValue !== 'button' ? href : null}
         target={asValue !== 'button' && external ? '_blank' : null}
         rel={rel ? rel : external && asValue !== 'button' ? 'noreferrer noopener' : null}
