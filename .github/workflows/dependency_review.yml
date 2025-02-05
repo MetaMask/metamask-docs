@@ -8,7 +8,7 @@ on:
 
 jobs:
   case:
-    name: Check for licences not being allowed
+    name: Check for licenses not being allowed
     runs-on: ubuntu-latest
     strategy:
       matrix:
