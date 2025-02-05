@@ -117,7 +117,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
 
     return (
       <Component
-        ref={ref as any}
+        ref={ref as React.Ref<any>}
         href={asValue !== 'button' ? href : null}
         target={asValue !== 'button' && external ? '_blank' : null}
         rel={rel ? rel : external && asValue !== 'button' ? 'noreferrer noopener' : null}
