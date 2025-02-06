@@ -104,8 +104,8 @@ sequenceDiagram
 ## Backwards compatibility
 
 When using the Multichain API, your dapp can still interact with the existing
-[Wallet Provider API](wallet-api.md#ethereum-provider-api).
-However, the Provider API is not optimized for multichain, and we recommend
+[Ethereum Provider API](wallet-api.md#ethereum-provider-api).
+However, the Ethereum Provider API is not optimized for multichain usage, and we recommend
 [starting directly with the Multichain API](../how-to/manage-networks/use-multichain.md) if possible.
 The Multichain API is backwards compatible mainly to support dapps that use third-party libraries
 with dependencies on the legacy provider.
