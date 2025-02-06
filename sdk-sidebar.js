@@ -49,7 +49,7 @@ const sidebar = {
           items: [
             'guides/advanced/connect-and-sign',
             'guides/advanced/batch-requests',
-            'guides/advanced/production-readiness-checklist',
+            'guides/advanced/production-readiness',
           ],
         },
       ],
