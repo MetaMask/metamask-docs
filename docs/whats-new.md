@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## January 2025
 
-- Document SDK [batching contract read operations](/sdk/guides/advanced/batch-requests) and [production readiness guide](/sdk/guides/advanced/production-readiness).
+- Documented SDK [batching contract read operations](/sdk/guides/advanced/batch-requests) and [production readiness guide](/sdk/guides/advanced/production-readiness).
   ([#1865](https://github.com/MetaMask/metamask-docs/pull/1865))
 - Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
 - Added new [MetaMask SDK documentation section](/sdk).
