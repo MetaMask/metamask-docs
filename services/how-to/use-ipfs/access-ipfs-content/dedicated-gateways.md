@@ -110,7 +110,7 @@ Traffic is billed at the same price as access to IPFS via the Infura API:
 - 5GB data transfer up free.
 - 5GB data transfer down free.
 
-Anything above those limits are charged at:
+Anything above those limits is charged at:
 
 - Unlimited storage at **$0.08/GB/month.**
 - Unlimited data transfer at **$0.12/GB/month.**

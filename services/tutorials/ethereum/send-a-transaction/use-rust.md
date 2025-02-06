@@ -82,7 +82,7 @@ async fn main() -> Result<()> {
   // Define the signer.
   // Replace the SIGNER_PRIVATE_KEY with
   // the private key of your Ethereum account (without the 0x prefix).
-  // However, we recommended that you load it from
+  // However, we recommend that you load it from
   // an .env file or external vault.
   let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
     .parse::<LocalWallet>()?
@@ -124,7 +124,7 @@ Next, make the following updates to the above code:
 
 :::tip Secure your keys
 
-To better secure your keys, follow the recommended approach described in the section [Create the .env file](../../../tutorials/ethereum/send-a-transaction/use-web3.js.md#4-create-the-env-file).
+To better secure your keys, follow the recommended approach described in the section [Create the .env file](use-web3.js.md#4-create-a-env-file).
 
 :::
 
@@ -217,7 +217,7 @@ async fn main() -> Result<()> {
   // Define the signer.
   // Replace the SIGNER_PRIVATE_KEY with
   // the private key of your Ethereum account (without the 0x prefix).
-  // However, we recommended that you load it from
+  // However, we recommend that you load it from
   // an .env file or external vault.
   let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
     .parse::<LocalWallet>()?

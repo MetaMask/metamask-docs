@@ -28,7 +28,7 @@ You can pass this ID to [`snap_dialog`](../../reference/snaps-api.md#snap_dialog
 [`onHomePage`](../../reference/entry-points.md#onhomepage).
 
 If you need to [update the interface](#update-an-interactive-interface) or
-[get its state](#get-an-interactive-interfaces-state) at a future time, you should store its ID in
+[get its state](#get-an-interactive-interfaces-state-and-context) at a future time, you should store its ID in
 the Snap's storage.
 
 ### Add context to an interface
@@ -58,11 +58,13 @@ The following is an example flow:
 5. Custom logic sends the funds.
 6. `snap_updateInterface` is called again, replacing the whole UI with a success message.
 
-## Get an interactive interface's state
+## Get an interactive interface's state and context
 
-At any point you can retrieve an interactive interface's state.
-To do this, call the [`snap_getInterfaceState`](../../reference/snaps-api.md#snap_getinterfacestate)
-method with the ID of the interface.
+At any point, you can retrieve an interactive interface's state and context.
+To retrieve its state, call the [`snap_getInterfaceState`](../../reference/snaps-api.md#snap_getinterfacestate)
+method with the interface ID.
+To retrieve its context, call [`snap_getInterfaceContext`](../../reference/snaps-api.md#snap_getinterfacecontext)
+with the interface ID.
 
 ## Example
 

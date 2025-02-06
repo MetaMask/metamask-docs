@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the ZKsy
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the ZKsync Era networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the ZKsync Era network enabled.
 
 ## Make calls
 

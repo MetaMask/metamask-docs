@@ -13,14 +13,14 @@ Based on your plan, Infura allows for the following amount of API keys:
 - Developer plan - Allows up to five API keys.
 - Team plans and higher - No limit on the number of API keys.
 
-For more information, see to the [Infura pricing page](https://www.infura.io/pricing).
+For more information, see the [Infura pricing page](https://www.infura.io/pricing).
 
 :::
 
 Infura allows you to enable multiple network endpoints and expansion APIs for your API key. If calls are
 made to a disabled network or service, then all requests to that network or service will fail.
 
-To keep your account secure and cost effective, add only the necessary endpoints, as some have usage
+To keep your account secure and cost-effective, add only the necessary endpoints, as some have usage
 limits or charges based on request volume.
 
 To create an API key:

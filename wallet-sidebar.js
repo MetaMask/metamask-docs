@@ -10,138 +10,16 @@ const sidebar = {
     },
     {
       type: "category",
-      label: "Connect to MetaMask",
-      collapsible: true,
-      collapsed: false,
-      link: { type: "doc", id: "connect/index" },
-      items: [
-        {
-          type: "category",
-          label: "MetaMask SDK",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "doc", id: "connect/metamask-sdk/index" },
-          items: [
-            {
-              type: "category",
-              label: "JavaScript",
-              collapsible: true,
-              collapsed: true,
-              link: { type: "doc", id: "connect/metamask-sdk/javascript/index" },
-              items: [
-                {
-                  type: "category",
-                  label: "React",
-                  collapsible: true,
-                  collapsed: true,
-                  link: { type: "doc", id: "connect/metamask-sdk/javascript/react/index" },
-                  items: [
-                    {
-                      type: "doc",
-                      label: "React UI",
-                      id: "connect/metamask-sdk/javascript/react/react-ui"
-                    },
-                  ],
-                },
-                {
-                  type: "doc",
-                  label: "Pure JavaScript",
-                  id: "connect/metamask-sdk/javascript/pure-js"
-                },
-                {
-                  type: "doc",
-                  label: "Other web frameworks",
-                  id: "connect/metamask-sdk/javascript/other-web-frameworks"
-                },
-                {
-                  type: "doc",
-                  label: "Node.js",
-                  id: "connect/metamask-sdk/javascript/nodejs"
-                },
-                {
-                  type: "doc",
-                  label: "Electron",
-                  id: "connect/metamask-sdk/javascript/electron"
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "Mobile",
-              collapsible: true,
-              collapsed: true,
-              link: { type: "doc", id: "connect/metamask-sdk/mobile/index" },
-              items: [
-                {
-                  type: "doc",
-                  label: "iOS",
-                  id: "connect/metamask-sdk/mobile/ios"
-                },
-                {
-                  type: "doc",
-                  label: "Android",
-                  id: "connect/metamask-sdk/mobile/android"
-                },
-                {
-                  type: "doc",
-                  label: "React Native",
-                  id: "connect/metamask-sdk/mobile/react-native"
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "Gaming",
-              collapsible: true,
-              collapsed: true,
-              link: { type: "doc", id: "connect/metamask-sdk/gaming/index" },
-              items: [
-                {
-                  type: "doc",
-                  label: "Unity",
-                  id: "connect/metamask-sdk/gaming/unity"
-                }
-              ],
-            },
-          ],
-        },
-        {
-          type: "category",
-          label: "Third-party libraries",
-          collapsible: true,
-          collapsed: true,
-          link: {
-            type: "generated-index",
-            slug: "/connect/3rd-party-libraries",
-            description: "You can connect to MetaMask using third-party libraries that integrate MetaMask SDK."
-          },
-          items: [
-            {
-              type: "doc",
-              label: "Wagmi",
-              id: "connect/3rd-party-libraries/wagmi"
-            },
-            {
-              type: "doc",
-              label: "Web3-Onboard",
-              id: "connect/3rd-party-libraries/web3-onboard"
-            },
-          ],
-        },
-        {
-          type: "doc",
-          label: "Wallet API",
-          id: "connect/wallet-api",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "How to",
       collapsible: true,
-      collapsed: true,
+      collapsed: false,
       link: { type: "generated-index", slug: "/how-to" },
       items: [
+        {
+          type: "doc",
+          label: "Connect to MetaMask",
+          id: "how-to/connect"
+        },
         {
           type: "doc",
           label: "Access a user's accounts",
@@ -180,11 +58,6 @@ const sidebar = {
           items: [
             {
               type: "doc",
-              label: "Connect and sign",
-              id: "how-to/sign-data/connect-and-sign"
-            },
-            {
-              type: "doc",
               label: "Sign in with Ethereum",
               id: "how-to/sign-data/siwe"
             }
@@ -194,16 +67,6 @@ const sidebar = {
           type: "doc",
           label: "Send transactions",
           id: "how-to/send-transactions"
-        },
-        {
-          type: "doc",
-          label: "Make read-only requests",
-          id: "how-to/make-read-only-requests"
-        },
-        {
-          type: "doc",
-          label: "Batch JSON-RPC requests",
-          id: "how-to/batch-json-rpc-requests"
         },
         {
           type: "category",
@@ -226,11 +89,6 @@ const sidebar = {
               type: "doc",
               label: "Display a dapp icon",
               id: "how-to/display/icon"
-            },
-            {
-              type: "doc",
-              label: "Display custom modals",
-              id: "how-to/display/custom-modals"
             }
           ]
         },
@@ -296,59 +154,6 @@ const sidebar = {
           ]
         },
         {
-          type: "category",
-          label: "Use the Unity SDK",
-          collapsible: true,
-          collapsed: true,
-          link: { type: "doc", id: "how-to/use-unity-sdk/index" },
-          items: [
-            {
-              type: "doc",
-              label: "Connect and sign",
-              id: "how-to/use-unity-sdk/connect-and-sign"
-            },
-            {
-              type: "doc",
-              label: "Set up Infura",
-              id: "how-to/use-unity-sdk/infura"
-            },
-            {
-              type: "category",
-              label: "Interact with smart contracts",
-              collapsible: true,
-              collapsed: true,
-              link: { type: "doc", id: "how-to/use-unity-sdk/smart-contracts/index" },
-              items: [
-                {
-                  type: "doc",
-                  label: "Contract interface",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-interface"
-                },
-                {
-                  type: "doc",
-                  label: "Contract factory",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-factory"
-                },
-                {
-                  type: "doc",
-                  label: "Contract proxy class",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-proxy-class"
-                },
-                {
-                  type: "doc",
-                  label: "Contract provider",
-                  id: "how-to/use-unity-sdk/smart-contracts/contract-provider"
-                }
-              ]
-            },
-            {
-              type: "doc",
-              label: "Enable human-readable addresses",
-              id: "how-to/use-unity-sdk/dweb"
-            }
-          ]
-        },
-        {
           type: "doc",
           label: "Onboard users",
           id: "how-to/onboard-users"
@@ -374,11 +179,6 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          label: "Architecture",
-          id: "concepts/architecture"
-        },
-        {
-          type: "doc",
           label: "About the Wallet API",
           id: "concepts/wallet-api"
         },
@@ -386,16 +186,6 @@ const sidebar = {
           type: "doc",
           label: "About the Multichain API",
           id: "concepts/multichain-api"
-        },
-        {
-          type: "doc",
-          label: "SDK connections",
-          id: "concepts/sdk-connections"
-        },
-        {
-          type: "doc",
-          label: "Android SDK architecture",
-          id: "concepts/android-sdk"
         },
         {
           type: "doc",
@@ -441,11 +231,6 @@ const sidebar = {
           label: "Create a simple dapp",
           id: "tutorials/javascript-dapp-simple",
         },
-        {
-          type: "doc",
-          label: "Create a dapp with the SDK and Wagmi",
-          id: "tutorials/react-dapp-sdk-wagmi",
-        },
       ],
     },
     {
@@ -455,16 +240,6 @@ const sidebar = {
       collapsed: false,
       link: { type: "generated-index", slug: "/reference" },
       items: [
-        {
-          type: "doc",
-          label: "JavaScript SDK options",
-          id: "reference/sdk-js-options",
-        },
-        {
-          type: "doc",
-          label: "Unity SDK API",
-          id: "reference/sdk-unity-api",
-        },
         {
           type: "category",
           label: "Non-EVM APIs",

@@ -97,7 +97,7 @@ export const NETWORK_LINKS = [
   },
   {
     name: "opBNB",
-    href: "/api/networks/opbnb",
+    href: "/services/reference/opbnb",
     logo: `${LOGO_PATH}/logo-bnb.svg`,
   },
   {
@@ -119,6 +119,11 @@ export const NETWORK_LINKS = [
     name: "Starknet",
     href: "/services/reference/starknet",
     logo: `${LOGO_PATH}/logo-starknet.svg`,
+  },
+  {
+    name: "Swellchain",
+    href: "/services/reference/swellchain",
+    logo: `${LOGO_PATH}/logo-swellchain.png`,
   },
   {
     name: "Unichain",

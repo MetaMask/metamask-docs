@@ -112,7 +112,7 @@ subscription1155.on("connected", (nr) =>
 
 ### 5. Read ERC-721 transfers
 
-Set the listener for the `subscription721` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4-subscribe-to-contract-events) by adding the following lines to the script:
+Set the listener for the `subscription721` created in [step 4](#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
 subscription721.on("data", (event) => {
@@ -159,7 +159,7 @@ In order to directly call `from`, `to`, and `tokenId` on `transaction`, add the 
 ```javascript
 console.log(
   `\n` +
-    `New ERC-712 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
+    `New ERC-721 transaction found in block ${event.blockNumber} with hash ${event.transactionHash}\n` +
     `From: ${
       transaction.from === "0x0000000000000000000000000000000000000000"
         ? "New mint!"
@@ -173,7 +173,7 @@ console.log(
 
 ### 6. Read ERC-1155 transfers
 
-You can set the listener for the `subscription1155` created in [step 4](track-erc-721-and-erc-1155-token-transfers.md#4.-subscribe-to-contract-events) by adding the following lines to the script:
+You can set the listener for the `subscription1155` created in [step 4](#4-subscribe-to-contract-events) by adding the following lines to the script:
 
 ```javascript
 subscription1155.on("data", event => {
@@ -181,7 +181,7 @@ subscription1155.on("data", event => {
 })
 ```
 
-As with ERC-721 in [Step 5](track-erc-721-and-erc-1155-token-transfers.md#5.-read-erc-721-transfers), add the ERC-1155 ABI to the listener:
+As with ERC-721 in [Step 5](#5-read-erc-721-transfers), add the ERC-1155 ABI to the listener:
 
 ```javascript
 let transaction = web3.eth.abi.decodeLog(

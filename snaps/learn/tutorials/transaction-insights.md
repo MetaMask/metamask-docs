@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would 
 pay for their transaction.
 
-It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/json-rpc-methods/eth_gasPrice) RPC
+It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/json-rpc-methods/eth_gasprice) RPC
 method using the global Ethereum provider made available to Snaps, and displays this as a percentage 
 of gas fees in a tab in MetaMask's transaction confirmation window.
 
@@ -83,7 +83,7 @@ mkdir packages/snap/images
 
 Download
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into that `ìmages` folder.  
+into that `images` folder.  
 
 <details>
   <summary>Icon attribution</summary>

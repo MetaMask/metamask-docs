@@ -29,13 +29,9 @@ The process used to determine the credit cost for each request is as follows:
 
 When making requests that return status code errors, some errors count towards your credit usage.
 
-- **`429` errors**: These are not charged and can occur for the following reasons:
-    - **Key settings credit limit caps**: These are limits set per API key.
-    - **Credit quota limit caps**: These are overall credit usage limits.
-    - **Credit throughput limit caps**: These are limits on the rate or throughput of requests.
-
+- **`429` errors**: These are not charged and can occur if you've exceeded your allowed throughput limit (requests per second).
+- **`402` errors**: These are not charged and can occur if you've exceeded your allowed daily credit usage.
 - **`4xx` errors**: These are errors caused by human input, and consume 5 credits.
-
 - **`5xx` errors**: These are server errors, and do not consume any credit charges.
 
 ## Ethereum
@@ -82,6 +78,7 @@ a specific network, then use the default Ethereum method's credit cost.
 | `eth_protocolVersion`                     | 5           |
 | `eth_sendRawTransaction`                  | 80          |
 | `eth_sign`                                | 80          |
+| `eth_simulateV1`                          | 300         |
 | `eth_submitWork`                          | 80          |
 | `eth_subscribe`                           | 5           |
 | `eth_syncing`                             | 5           |

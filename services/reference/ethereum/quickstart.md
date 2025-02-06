@@ -56,7 +56,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Node Fetch
 
-1. In your project folder, install the `node-fetch` package using npm::
+1. In your project folder, install the `node-fetch` package using npm:
 
    ```bash
    npm i node-fetch
@@ -69,7 +69,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    ```javascript title="index.js"
    import fetch from "node-fetch"
 
-   fetch("https://mainnet.infura.io.infura.io/v3/<YOUR-API-KEY>", {
+   fetch("https://mainnet.infura.io/v3/<YOUR-API-KEY>", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
@@ -112,7 +112,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const axios = require("axios")
 
    axios
-     .post("https://mainnet.infura.io.infura.io/v3/<YOUR-API-KEY>", {
+     .post("https://mainnet.infura.io/v3/<YOUR-API-KEY>", {
        jsonrpc: "2.0",
        method: "eth_blockNumber",
        params: [],
@@ -148,7 +148,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const ethers = require("ethers")
 
    const provider = new ethers.providers.JsonRpcProvider(
-     "https://mainnet.infura.io.infura.io/v3/<YOUR-API-KEY>"
+     "https://mainnet.infura.io/v3/<YOUR-API-KEY>"
    )
 
    provider
