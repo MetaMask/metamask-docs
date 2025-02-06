@@ -11,6 +11,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## January 2025
 
+- Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
+  [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
+  ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
 - Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
 - Added new [MetaMask SDK documentation section](/sdk).
   ([#1766](https://github.com/MetaMask/metamask-docs/pull/1766))
