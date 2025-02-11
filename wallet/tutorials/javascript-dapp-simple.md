@@ -84,10 +84,12 @@ Update `index.html` to include the script:
 
 ### 3. Detect MetaMask
 
-:::caution
+:::caution Legacy approach
 The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes.
 In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect.md).
 :::
+
+#### Legacy Method (Educational Purpose)
 
 Install the `@metamask/detect-provider` module in your project directory:
 
@@ -103,7 +105,7 @@ mkdir src && touch src/detect.js
 
 In a text editor, add the following code to `src/detect.js` to detect the MetaMask provider using `@metamask/detect-provider`:
 
-```js title="detect.js"
+```javascript
 import detectEthereumProvider from "@metamask/detect-provider"
 
 async function setup() {
@@ -125,6 +127,52 @@ function startApp(provider) {
 
 window.addEventListener("load", setup)
 ```
+
+#### Recommended Production Method (EIP-6963)
+
+For production use, create a new file `detect-eip6963.js`:
+
+```javascript
+// Initialize a variable to store the MetaMask provider
+let metamaskProvider = null;
+
+// Listen for provider announcements
+window.addEventListener('eip6963:announceProvider', ({ detail: { info, provider } }) => {
+  // Check if the announced provider is MetaMask
+  if (info.rdns.includes('metamask')) {
+    metamaskProvider = provider;
+    console.log('MetaMask detected:', info.name, info.icon);
+  }
+});
+
+// Request providers to announce themselves
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+
+// Function to connect to MetaMask
+async function connectMetaMask() {
+  if (!metamaskProvider) {
+    console.error('MetaMask not found!');
+    return;
+  }
+
+  try {
+    // Request account access
+    const accounts = await metamaskProvider.request({ 
+      method: 'eth_requestAccounts' 
+    });
+    console.log('Connected accounts:', accounts);
+    return accounts;
+  } catch (error) {
+    console.error('Error connecting to MetaMask:', error);
+  }
+}
+
+export { connectMetaMask };
+```
+
+:::tip Production Use
+For production applications, we recommend using the EIP-6963 method above or a third-party library that supports it. See [Connect to MetaMask](../how-to/connect.md) for more options.
+:::
 
 ### 4. Detect a user's network
 

@@ -43,6 +43,60 @@ MetaMask's `personal_sign` doesn't accept a password.
 Use `eth_signTypedData_v4` or `personal_sign`.
 :::
 
+### Migration Guide
+
+To help you migrate from deprecated methods to recommended ones, use this guide:
+
+| Deprecated Method | Recommended Method | Use Case | Benefits |
+|------------------|-------------------|-----------|----------|
+| `eth_sign` | `personal_sign` | Simple text signing, login messages | <ul><li>Phishing protection</li><li>Popular for SIWE</li></ul> |
+| `eth_signTypedData_v1/v3` | `eth_signTypedData_v4` | Structured data signing | <ul><li>Lower chain verification cost</li><li>Better type safety</li></ul> |
+
+#### Example Migration
+
+```javascript
+// OLD: eth_sign
+const msg = 'Hello World';
+const signedMessage = await ethereum.request({
+    method: 'eth_sign',
+    params: [address, msg]
+});
+
+// NEW: personal_sign
+const msg = 'Hello World';
+const signedMessage = await ethereum.request({
+    method: 'personal_sign',
+    params: [msg, address]
+});
+```
+
+```javascript
+// OLD: eth_signTypedData_v3
+const msgParams = {
+    types: {
+        EIP712Domain: [/*...*/],
+        Person: [/*...*/]
+    },
+    // ...
+};
+
+// NEW: eth_signTypedData_v4
+const msgParams = {
+    types: {
+        EIP712Domain: [/*...*/],
+        Person: [/*...*/]
+    },
+    // Additional type safety and features
+    // ...
+};
+```
+
+:::tip Best Practices
+- Always use `personal_sign` for simple text signing
+- Use `eth_signTypedData_v4` for structured data
+- Include clear messages for users about what they're signing
+:::
+
 ### `eth_sign`
 
 `eth_sign` allows signing an arbitrary hash, which means an attacker can use it to request users to
