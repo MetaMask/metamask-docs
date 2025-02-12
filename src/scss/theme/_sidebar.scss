@@ -18,7 +18,7 @@
 
     @include bp('tablet') {
       padding-top: 0.5rem;
-      padding-bottom: 4rem;
+      padding-bottom: 1rem;
     }
 
     .theme-doc-sidebar-item-category-level-1 & {
@@ -97,12 +97,12 @@
     line-height: 124%;
     text-decoration: none;
     font-weight: 500;
-    padding: 1.2rem 1.6rem;
+    padding: 0.6rem 1.6rem;
     border-radius: 0;
     text-decoration: none !important;
 
     @include bp('tablet') {
-      padding: 1.2rem 2.4rem;
+      padding: 0.6rem 2.4rem;
     }
 
     &--active {
