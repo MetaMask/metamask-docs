@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## February
+
+- Documented [Unichain Mainnet](/services/reference/unichain) support.([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
+
 ## January 2025
 
 - Documented SDK [batching contract read operations](/sdk/guides/advanced/batch-requests) and [production readiness guide](/sdk/guides/advanced/production-readiness).
