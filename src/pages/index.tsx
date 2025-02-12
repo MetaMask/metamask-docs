@@ -52,7 +52,7 @@ export default function Home(): JSX.Element {
         }
         button={{
           label: 'Contribute',
-          href: 'https://github.com',
+          href: 'https://github.com/metamask',
           icon: 'github',
           external: true,
         }}
