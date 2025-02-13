@@ -10,11 +10,12 @@
   }
   p {
     margin-top: 0.5rem;
+    margin-bottom: 1.0rem;  // For instances where we have multiple paragraphs in an admonition
   }
 }
 
 .alert {
-  padding: 2rem;
+  padding: 2.0rem;
   border-radius: 0;
   color: var(--general-black);
   box-shadow: none;
@@ -95,7 +96,7 @@
 
   &--warning,
   &--danger {
-    --ifm-alert-background-color-highlight: #87351c1a;
+    --ifm-alert-background-color-highlight: #6618001a;
 
     a {
       &:hover {
