@@ -1,6 +1,6 @@
 .menu {
   &.thin-scrollbar {
-    padding: 1.5rem 0 0;
+    padding: 1rem 0 0;
   }
 
   .navbar-sidebar__back {
@@ -44,8 +44,16 @@
     }
     .menu__list {
       flex: 0 0 100%;
-      margin-top: 0rem;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+      margin-bottom: 0.25rem;
       padding-left: var(--ifm-menu-link-padding-horizontal);
+    }
+    .theme-doc-sidebar-item-link-level-1 {
+      padding-bottom: 0.4rem;
+    }
+    .theme-doc-sidebar-item-category-level-1 {
+      padding-bottom: 0.4rem;
     }
   }
 
@@ -67,6 +75,7 @@
       a {
         color: var(--ifm-menu-color);
         font-weight: 400;
+        font-size: 1.5rem;
       }
 
       &:not(:first-child) {
@@ -98,7 +107,7 @@
 
   &__link {
     color: var(--ifm-menu-color-active);
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     line-height: 124%;
     text-decoration: none;
     font-weight: 500;
