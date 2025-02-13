@@ -8,6 +8,9 @@
     list-style-type: disc;
     margin: 1rem 0;
   }
+  p {
+    margin-top: 0.5rem;
+  }
 }
 
 .alert {
@@ -34,7 +37,7 @@
 
   [class*='admonitionContent'] {
     @extend .type-paragraph-m;
-    margin-top: 1.7rem;
+    margin-top: 0rem;
   }
 
   a {
@@ -92,7 +95,7 @@
 
   &--warning,
   &--danger {
-    --ifm-alert-background-color-highlight: #6618001a;
+    --ifm-alert-background-color-highlight: #87351c1a;
 
     a {
       &:hover {
