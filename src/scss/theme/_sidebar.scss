@@ -1,6 +1,6 @@
 .menu {
   &.thin-scrollbar {
-    padding: 1.5rem 0 0;
+    padding: 1rem 0 0;
   }
 
   .navbar-sidebar__back {
@@ -18,7 +18,7 @@
 
     @include bp('tablet') {
       padding-top: 0.5rem;
-      padding-bottom: 4rem;
+      padding-bottom: 1rem;
     }
 
     .theme-doc-sidebar-item-category-level-1 & {
@@ -42,6 +42,19 @@
         padding-bottom: 0;
       }
     }
+    .menu__list {
+      flex: 0 0 100%;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+      margin-bottom: 0.25rem;
+      padding-left: var(--ifm-menu-link-padding-horizontal);
+    }
+    .theme-doc-sidebar-item-link-level-1 {
+      padding-bottom: 0.4rem;
+    }
+    .theme-doc-sidebar-item-category-level-1 {
+      padding-bottom: 0.4rem;
+    }
   }
 
   &__list-item {
@@ -62,6 +75,7 @@
       a {
         color: var(--ifm-menu-color);
         font-weight: 400;
+        font-size: 1.5rem;
       }
 
       &:not(:first-child) {
@@ -77,7 +91,7 @@
         .theme-doc-sidebar-item-link-level-5,
         .theme-doc-sidebar-item-link-level-6
       ) {
-      margin-top: 0.8rem;
+      margin-top: 0rem;
     }
   }
 
@@ -93,16 +107,16 @@
 
   &__link {
     color: var(--ifm-menu-color-active);
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     line-height: 124%;
     text-decoration: none;
     font-weight: 500;
-    padding: 1.2rem 1.6rem;
+    padding: 0.6rem 1.6rem;
     border-radius: 0;
     text-decoration: none !important;
 
     @include bp('tablet') {
-      padding: 1.2rem 2.4rem;
+      padding: 0.6rem 2.4rem;
     }
 
     &--active {
