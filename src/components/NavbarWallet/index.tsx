@@ -143,9 +143,7 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
   return !userAccount ? (
     <Button
       as="button"
-      data-test-id="header-cta-connect-metamask"
-      testId={showInstallButton ? 'navbar-cta-install-metamask' : 'navbar-cta-connect-wallet'}
-      thin
+      data-test-id={showInstallButton ? 'navbar-cta-install-metamask' : 'navbar-cta-connect-wallet'}
       onClick={handleConnectWallet}
       className={styles.navbarButton}
       label={showInstallButton ? 'Install MetaMask' : 'Connect MetaMask'}

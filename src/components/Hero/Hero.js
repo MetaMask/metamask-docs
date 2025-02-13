@@ -6,7 +6,7 @@ import Shape from '@site/static/img/shapes/hero/shape.svg'
 
 import styles from './Hero.module.scss'
 
-export default function Hero({ title, description, button }) {
+export default function Hero({ title, description, button = null }) {
   return (
     <section className={styles['wrapper']}>
       <div className="container">

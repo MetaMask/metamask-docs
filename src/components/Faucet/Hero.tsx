@@ -36,6 +36,7 @@ export default function Hero({
     walletLinked,
     projects,
     walletAuthUrl,
+    needsMfa,
   } = useContext(MetamaskProviderContext)
   const isMobile = sdk.platformManager?.isMobile ?? false
   const isExtensionActive = sdk.isExtensionActive()
@@ -110,11 +111,13 @@ export default function Hero({
             {showInstallButton
               ? 'Install MetaMask for your browser to get started and request ETH.'
               : !Object.keys(projects).length
-                ? walletLinked === undefined
-                  ? 'Connect your MetaMask wallet to get started and request ETH.'
-                  : walletLinked === WALLET_LINK_TYPE.NO
-                    ? 'Link your Developer Dashboard account to get started and request ETH.'
-                    : 'Select your Developer Dashboard account to get started and request ETH.'
+                ? needsMfa
+                  ? 'Your Infura Account requires 2-Factor Authentication'
+                  : walletLinked === undefined
+                    ? 'Connect your MetaMask wallet to get started and request ETH.'
+                    : walletLinked === WALLET_LINK_TYPE.NO
+                      ? 'Link your Developer Dashboard account to get started and request ETH.'
+                      : 'Select your Developer Dashboard account to get started and request ETH.'
                 : 'Enter your MetaMask wallet address and request ETH.'}
           </Text>
           <div className={styles.actions}>
@@ -182,37 +185,14 @@ export default function Hero({
                 />
               ) : !Object.keys(projects).length ? (
                 <>
-                  {walletLinked === undefined && (
+                  {needsMfa ? (
                     <Button
                       as="button"
-                      data-test-id="hero-cta-connect-metamask"
-                      onClick={handleConnectWallet}
-                      label={'Connect MetaMask'}
-                      style={
-                        colorMode === 'dark'
-                          ? {
-                              '--button-color': 'var(--consumer-orange)',
-                              '--button-text-color': 'var(--general-black)',
-                              '--button-color-hover': 'var(--general-white)',
-                              '--button-text-color-hover': 'var(--general-black)',
-                            }
-                          : {
-                              '--button-color': 'var(--consumer-orange)',
-                              '--button-text-color': 'var(--general-black)',
-                              '--button-color-hover': 'var(--general-black)',
-                              '--button-text-color-hover': 'var(--general-white)',
-                            }
-                      }
-                    />
-                  )}
-                  {walletLinked === WALLET_LINK_TYPE.NO && (
-                    <Button
-                      as="button"
-                      data-test-id="hero-cta-link-dashboard-account"
-                      onClick={handleLinkWallet}
-                      isLoading={isWalletLinking}
+                      data-test-id="hero-cta-enter-mfa"
+                      className={styles.button}
+                      onClick={() => (window.location.href = walletAuthUrl)}
                       icon={'arrow-right'}
-                      label={'Link Developer Dashboard Account'}
+                      label={'Authenticate'}
                       style={
                         colorMode !== 'dark'
                           ? {
@@ -222,24 +202,68 @@ export default function Hero({
                           : {}
                       }
                     />
-                  )}
-                  {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
-                    <Button
-                      as="button"
-                      data-test-id="hero-cta-select-dashboard-account"
-                      onClick={handleLinkWallet}
-                      isLoading={isWalletLinking}
-                      icon={'arrow-right'}
-                      label={'Select Developer Dashboard Account'}
-                      style={
-                        colorMode !== 'dark'
-                          ? {
-                              '--button-color-hover': 'var(--general-black)',
-                              '--button-text-color-hover': 'var(--general-white)',
-                            }
-                          : {}
-                      }
-                    />
+                  ) : (
+                    <>
+                      {walletLinked === undefined && (
+                        <Button
+                          as="button"
+                          data-test-id="hero-cta-connect-metamask"
+                          onClick={handleConnectWallet}
+                          label={'Connect MetaMask'}
+                          style={
+                            colorMode === 'dark'
+                              ? {
+                                  '--button-color': 'var(--consumer-orange)',
+                                  '--button-text-color': 'var(--general-black)',
+                                  '--button-color-hover': 'var(--general-white)',
+                                  '--button-text-color-hover': 'var(--general-black)',
+                                }
+                              : {
+                                  '--button-color': 'var(--consumer-orange)',
+                                  '--button-text-color': 'var(--general-black)',
+                                  '--button-color-hover': 'var(--general-black)',
+                                  '--button-text-color-hover': 'var(--general-white)',
+                                }
+                          }
+                        />
+                      )}
+                      {walletLinked === WALLET_LINK_TYPE.NO && (
+                        <Button
+                          as="button"
+                          data-test-id="hero-cta-link-dashboard-account"
+                          onClick={handleLinkWallet}
+                          disabled={isWalletLinking}
+                          icon={'arrow-right'}
+                          label={'Link Developer Dashboard Account'}
+                          style={
+                            colorMode !== 'dark'
+                              ? {
+                                  '--button-color-hover': 'var(--general-black)',
+                                  '--button-text-color-hover': 'var(--general-white)',
+                                }
+                              : {}
+                          }
+                        />
+                      )}
+                      {walletLinked === WALLET_LINK_TYPE.MULTIPLE && (
+                        <Button
+                          as="button"
+                          data-test-id="hero-cta-select-dashboard-account"
+                          onClick={handleLinkWallet}
+                          disabled={isWalletLinking}
+                          icon={'arrow-right'}
+                          label={'Select Developer Dashboard Account'}
+                          style={
+                            colorMode !== 'dark'
+                              ? {
+                                  '--button-color-hover': 'var(--general-black)',
+                                  '--button-text-color-hover': 'var(--general-white)',
+                                }
+                              : {}
+                          }
+                        />
+                      )}
+                    </>
                   )}
                 </>
               ) : null}
