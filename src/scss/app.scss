@@ -157,11 +157,11 @@ html {
   }
 
   @include bp('desktop') {
-    font-size: math.div(1000vw, $desktop-mockup-width);
+    font-size: math.div(925vw, $desktop-mockup-width);
   }
 
   @media screen and (min-width: $site-container-max-width) {
-    font-size: 10px;
+    font-size: math.div(850vw, $desktop-mockup-width);
   }
 }
 
