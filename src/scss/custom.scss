@@ -252,10 +252,7 @@ body {
   }
 }
 
-h1 {
-  font-family: var(--ifm-heading-font-family);
-}
-
+h1,
 h2,
 h3,
 h4,
@@ -266,7 +263,7 @@ h6 {
 }
 
 h1 {
-  @extend .type-heading-sm;
+  @extend .type-heading-m;
 }
 
 h2 {
@@ -306,10 +303,10 @@ ol {
 
 [class*='docMainContainer'],
 [class*='mainContainer'] {
-  padding: 3rem 0 0;
+  padding: 2rem 0 0;
 
   @include bp('desktop') {
-    padding: 5.5rem 0 0 3.5rem;
+    padding: 2.8rem 0 0 8rem;
   }
 }
 
