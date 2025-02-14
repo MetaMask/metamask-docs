@@ -1,16 +1,14 @@
 .banner {
-  padding-top: 2.8rem;
-  padding-bottom: 4rem;
 
   @include bp(desktop) {
-    padding-top: 4.8rem;
-    padding-bottom: 6rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0rem;
   }
 }
 
 .inner {
   background-color: var(--general-gray-light);
-  padding: 4rem;
+  padding: 1.8rem;
   text-align: center;
 }
 
