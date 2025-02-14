@@ -15,17 +15,15 @@ When integrated with [MetaMask Snaps](/snaps), it enables developers to interact
 and emerging networks.
 Key benefits include:
 
-- **Seamless network interactions** - The Multichain API allows dapps to interact directly with
-  multiple networks, without having to switch between single active networks.
-  This enables smooth, integrated multichain user experience flows.
+- **Elimination of chain switching** - The Multichain API allows dapps to interact with multiple EVM networks without having to request chain switches.
+  This feature significantly reduces development overhead involved with error handling.
 
-- **Scaling usage of non-EVM networks** - The Multichain API integrates with
-  [interoperability Snaps](https://snaps.metamask.io/explore/), providing a standardized interface
-  to encourage broader adoption of non-EVM networks.
+- **Extensibility** - The Multichain API can be integrated with
+  [interoperability Snaps](https://snaps.metamask.io/explore/), providing a standards-based interface
+  to non-EVM networks that can be broadly adopted across ecosystems.
 
-- **Simplified integrations** - The Multichain API reduces the complexity associated with navigating
-  different wallet APIs and SDKs, making it easier for dapps to integrate with wallets, discover
-  capabilities, and negotiate interfaces.
+- **Seamless multichain UX** - The Multichain API offers improvements over EIP-1193 and [wallet-standard](https://github.com/wallet-standard/wallet-standard) interfaces.
+  It allows dapps to create unified multichain wallet connection flows, trigger transactions across disparate networks, and clearly interpret chain-specific addresses.
 
 [**Get started using the Multichain API.**](../how-to/manage-networks/use-multichain.md)
 
