@@ -209,13 +209,13 @@ a.text-decoration-underline {
   }
 
   @include bp('desktop') {
-    font-size: 4rem;
+    font-size: 3.8rem;
     line-height: 120%;
   }
 }
 
 .type-heading-sm {
-  font-size: 2rem;
+  font-size: 2.2rem;
   line-height: 140%;
 
   &.uppercase {
@@ -223,13 +223,13 @@ a.text-decoration-underline {
   }
 
   @include bp('desktop') {
-    font-size: 3.2rem;
+    font-size: 3rem;
     line-height: 125%;
   }
 }
 
 .type-heading-s {
-  font-size: 1.8rem;
+  font-size: 2rem;
   line-height: 150%;
 
   &.uppercase {
@@ -237,13 +237,13 @@ a.text-decoration-underline {
   }
 
   @include bp('desktop') {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     line-height: 133.333%;
   }
 }
 
 .type-heading-xs {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 166.667%;
 
   &.uppercase {
@@ -251,13 +251,13 @@ a.text-decoration-underline {
   }
 
   @include bp('desktop') {
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 140%;
   }
 }
 
 .type-heading-xxs {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   line-height: 157%;
 
   &.uppercase {

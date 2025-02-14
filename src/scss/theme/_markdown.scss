@@ -1,6 +1,6 @@
 .markdown {
   --ifm-h1-vertical-rhythm-top: 3;
-  --ifm-h2-vertical-rhythm-top: 4;
+  --ifm-h2-vertical-rhythm-top: 3;
   --ifm-h3-vertical-rhythm-top: 2.5;
   --ifm-heading-vertical-rhythm-top: 2.75;
 
@@ -105,6 +105,11 @@
     margin-top: 1rem;
   }
 
+  h1 > code,
+  h2 > code,
+  h3 > code,
+  h4 > code,
+  h5 > code,
   p > code,
   ul li > code,
   ol li > code,
