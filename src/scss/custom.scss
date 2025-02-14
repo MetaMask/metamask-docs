@@ -122,7 +122,7 @@
 
   /* Header */
   --ifm-navbar-height: var(--header-height);
-  --ifm-navbar-link-hover-color: var(--developer-purple-dark);
+  --ifm-navbar-link-hover-color: var(--developer-purple);
 
   /* Footer */
   --ifm-footer-background-color: var(--general-white);
@@ -401,11 +401,11 @@ ol {
     margin: 0 1rem;
   }
   .dropdown__menu {
-    top: 1.8rem;
+    top: 0.2rem;
     left: 2rem;
     padding: 2rem 1.2rem;
     border-radius: 0;
-    box-shadow: none;
+    box-shadow: --ifm-link-color;
     li:not(:last-child) {
       padding-bottom: 2rem;
     }
