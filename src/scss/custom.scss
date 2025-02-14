@@ -57,7 +57,7 @@
 
   /* TOC */
   --ifm-toc-border-color: var(--general-gray-light);
-  --ifm-toc-padding-vertical: 1.6em;
+  --ifm-toc-padding-vertical: 1em;
   --ifm-code-background: #e6e6e6;
   --ifm-toc-link-color: var(--general-gray-dark);
 
@@ -493,7 +493,7 @@ ol {
   }
 
   &__link-item {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 500;
     line-height: 124%;
     color: var(--general-black);
@@ -525,7 +525,7 @@ ol {
   }
 
   #manage-cookie-btn {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     line-height: 138%;
 
