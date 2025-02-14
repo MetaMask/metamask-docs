@@ -9,11 +9,17 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
-## January 2025
+## February 2025
 
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
   [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
   ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
+- Documented [Unichain Mainnet](/services/reference/unichain) support.([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
+
+## January 2025
+
+- Documented SDK [batching contract read operations](/sdk/guides/advanced/batch-requests) and [production readiness guide](/sdk/guides/advanced/production-readiness).
+  ([#1865](https://github.com/MetaMask/metamask-docs/pull/1865))
 - Documented [`eth_simulateV1`](/services/reference/ethereum/json-rpc-methods/eth_simulatev1). ([#1798](https://github.com/MetaMask/metamask-docs/pull/1798))
 - Added new [MetaMask SDK documentation section](/sdk).
   ([#1766](https://github.com/MetaMask/metamask-docs/pull/1766))

@@ -166,7 +166,8 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 
 | Network | Description             | URL                                                   |
 |---------|-------------------------|-------------------------------------------------------|
-| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over HTTPS     | `https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>`|
+| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`|
 
 ## ZKsync Era
 

@@ -1,92 +1,97 @@
 ---
-description: Connect and sign in a single interaction.
+description: Connect and sign using MetaMask SDK, either with Wagmi or Vanilla JavaScript.
 ---
 
 # Connect and sign
 
-You can connect to MetaMask and sign data in a single interaction from your JavaScript dapp.
+With MetaMask SDK, you can combine **connecting** to MetaMask and **signing** data in two ways:
 
-The SDK's `connectAndSign` method provides a streamlined approach for dapps to interact with MetaMask.
-This method combines the [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts)
-and [`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) RPC methods, executing them sequentially.
-`connectAndSign` takes one parameter, the message string to be signed, and passes the message and
-the output of `eth_requestAccounts` directly to `personal_sign`.
+1. [**Using Wagmi (two-step approach)**](#use-wagmi-two-step) - You'll need to connect to the wallet first, then sign in a separate step.
 
-This method enhances dapp user experience, especially on mobile platforms, by allowing users to
-connect to MetaMask and sign a message in a single interaction, requiring only one switch between
-the mobile dapp and MetaMask Mobile.
-This is useful for various purposes such as authentication and transaction verification.
+2. [**Using Vanilla JavaScript (one-step approach)**](#use-vanilla-javascript-one-step) - Use the SDK's `connectAndSign` method to connect and sign in a single user interaction.
 
-<p align="center">
-  <video width="350" controls>
-    <source src="/connect-and-sign.mp4" type="video/mp4" />
-  </video>
-</p>
+## Use Wagmi (two-step)
 
-## Prerequisites
+Wagmi doesn't provide a one-step "connect and sign" method, so you'll:
 
-- MetaMask SDK set up in your JavaScript dapp.
+1. **Connect** to the user's wallet.  
+2. **Sign** your message after connecting.
 
-- MetaMask Mobile version 7.10 or later.
-  Your users must have an updated version of MetaMask Mobile for this feature to work correctly.
-  For older versions of MetaMask, this function may not work as expected.
+The following is an example of connecting and signing using React, Wagmi, and MetaMask SDK:
 
-## Use the `connectAndSign` method
+```js
+import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { useSignMessage } from "wagmi"
 
-Use the `connectAndSign` method as follows:
+function ConnectAndSignWagmi() {
+  const { address, isConnected } = useAccount()
+  const { connect, connectors } = useConnect()
+  const { disconnect } = useDisconnect()
 
-```javascript
-const connectAndSign = async () => {
-  try {
-    const signResult = await sdk?.connectAndSign({
-      msg: "Connect + Sign message",
-    })
-    setResponse(signResult)
-  } catch (err) {
-    console.warn("failed to connect..", err)
-  }
-}
-```
+  const { signMessage } = useSignMessage({
+    message: "Hello from Wagmi!",
+    onSuccess(data) {
+      console.log("Signature:", data)
+    },
+  })
 
-To invoke `connectAndSign`:
-
-1. Ensure the `MetaMaskSDK` instance (`sdk` in this context) is properly initialized and available.
-2. Call `connectAndSign` with the message to be signed.
-3. Handle the promise to process the response or catch any errors.
-
-## Examples
-
-The following is an example of using the `connectAndSign` method in a React dapp, integrating it
-into a functional component:
-
-```javascript
-import React, { useState } from "react"
-import { useSDK } from "@metamask/sdk-react"
-
-function MyComponent() {
-  const { sdk } = useSDK()
-  const [signedMessage, setSignedMessage] = useState("")
-
-  const handleConnectAndSign = async () => {
-    try {
-      const message = "Your message here"
-      const signature = await sdk.connectAndSign({ msg: message })
-      setSignedMessage(signature)
-    } catch (error) {
-      console.error("Error in signing:", error)
-    }
+  if (!isConnected) {
+    return (
+      <div>
+        {connectors.map((connector) => (
+          <button key={connector.uid} onClick={() => connect({ connector })}>
+            Connect with {connector.name}
+          </button>
+        ))}
+      </div>
+    )
   }
 
   return (
     <div>
-      <button onClick={handleConnectAndSign}>Connect and Sign</button>
-      {signedMessage && <p>Signed Message: {signedMessage}</p>}
+      <p>Connected: {address}</p>
+      <button onClick={() => signMessage()}>Sign Message</button>
+      <button onClick={() => disconnect()}>Disconnect</button>
     </div>
   )
 }
+
+export default ConnectAndSignWagmi
 ```
 
-For examples of using the `connectAndSign` function in Next.js and Vue.js, see the
-[example Next.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/nextjs-demo)
-and [example Vue.js dapp](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/vuejs)
-on GitHub.
+## Use Vanilla JavaScript (one-step)
+
+If you're not using Wagmi, you can access MetaMask SDK's `connectAndSign` method,
+which requests wallet access and signs the message in a single prompt.
+For example:
+
+```js
+import { MetaMaskSDK } from "@metamask/sdk"
+
+const MMSDK = new MetaMaskSDK()
+const provider = MMSDK.getProvider()
+
+async function handleConnectAndSign() {
+  try {
+    const signature = await MMSDK.connectAndSign({ msg: "Hello in one go!" })
+    console.log("Signature:", signature)
+  } catch (err) {
+    console.error("Error with connectAndSign:", err)
+  }
+}
+
+document
+  .getElementById("connectSignBtn")
+  .addEventListener("click", handleConnectAndSign)
+```
+
+The following HTML displays a **Connect & Sign** button:
+
+```html
+<button id="connectSignBtn">Connect & Sign</button>
+```
+
+:::tip
+This one-step flow is unique to MetaMask SDK's `connectAndSign` method.
+It's not part of Wagmi or other wallet libraries.
+:::

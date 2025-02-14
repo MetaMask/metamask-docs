@@ -35,6 +35,7 @@ export default function Hero({
     walletLinked,
     projects,
     walletAuthUrl,
+    needsMfa,
   } = useContext(MetamaskProviderContext);
 
   const isMobile = sdk.platformManager?.isMobile ?? false;
@@ -100,7 +101,7 @@ export default function Hero({
         className,
       )}
     >
-      {(showInstallButton || !(metaMaskAccount)) && <EthIcon />}
+      <EthIcon />
       <Text as="h1">
         <span>
           {network === "linea" && "Linea Sepolia"}
@@ -112,7 +113,7 @@ export default function Hero({
         {showInstallButton
           ? "Install MetaMask for your browser to get started and request ETH."
           : !Object.keys(projects).length
-            ? walletLinked === undefined
+            ? needsMfa ? "Your Infura Account requires 2-Factor Authentication" : walletLinked === undefined
               ? "Connect your MetaMask wallet to get started and request ETH."
               : walletLinked === WALLET_LINK_TYPE.NO
                 ? "Link your Infura account to get started and request ETH."
@@ -154,6 +155,15 @@ export default function Hero({
             </Button>
           ) : !Object.keys(projects).length ? (
             <>
+              {needsMfa ? 
+                <Button
+                  testId="hero-cta-enter-mfa"
+                  className={styles.button}
+                  onClick={() => (window.location.href = walletAuthUrl)}
+                >
+                  Authenticate
+                </Button>
+                : <>
               {walletLinked === undefined && (
                 <Button
                   testId="hero-cta-connect-metamask"
@@ -184,6 +194,8 @@ export default function Hero({
                   Select Infura Account
                 </Button>
               )}
+              </>
+            }
             </>
           ) : (
             <Button

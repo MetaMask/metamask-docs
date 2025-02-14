@@ -24,7 +24,7 @@ Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api/)
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
 ```bash
-curl https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY> \
+curl https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -69,7 +69,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    ```javascript title="index.js"
    import fetch from "node-fetch"
 
-   fetch("https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+   fetch("https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
@@ -112,7 +112,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const axios = require("axios")
 
    axios
-     .post("https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+     .post("https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>", {
        jsonrpc: "2.0",
        method: "eth_blockNumber",
        params: [],
@@ -148,7 +148,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const ethers = require("ethers")
 
    const provider = new ethers.providers.JsonRpcProvider(
-     "https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>"
+     "https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>"
    )
 
    provider
@@ -177,7 +177,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
    ```javascript title="index.js"
    var { Web3 } = require("web3")
-   var provider = "https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>"
+   var provider = "https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>"
    var web3Provider = new Web3.providers.HttpProvider(provider)
    var web3 = new Web3(web3Provider)
 
@@ -208,7 +208,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    import requests
    import json
 
-   url = "https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>"
+   url = "https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>"
 
    payload = {
      "jsonrpc": "2.0",
