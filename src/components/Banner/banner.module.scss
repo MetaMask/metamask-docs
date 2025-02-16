@@ -4,6 +4,9 @@
     padding-top: 0.8rem;
     padding-bottom: 0rem;
   }
+  p {
+    margin: 0;
+  }
 }
 
 .inner {
@@ -13,7 +16,7 @@
 }
 
 .button {
-  margin-top: 2.4rem;
+  margin-top: 0.8rem;
 }
 
 html[data-theme='dark'] {
