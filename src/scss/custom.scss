@@ -524,12 +524,17 @@ ol {
   #manage-cookie-btn {
     font-size: 1.5rem;
     font-weight: 500;
-    line-height: 138%;
+    line-height: 124%;
 
     color: var(--general-black);
 
     [data-theme='dark'] & {
       color: var(--general-gray);
+    }
+
+    &:hover {
+      text-decoration: none !important;
+      color: var(--ifm-navbar-link-hover-color);
     }
   }
 

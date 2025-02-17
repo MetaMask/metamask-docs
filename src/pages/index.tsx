@@ -46,7 +46,7 @@ export default function Home(): JSX.Element {
         ]}
       />
       <CallToAction
-        title={'Contribute to MetaMask on Github'}
+        title={'Contribute to MetaMask on GitHub'}
         description={
           'Join the MetaMask developer community and learn how to contribute to the MetaMask project itself.'
         }
