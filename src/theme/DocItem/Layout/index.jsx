@@ -43,7 +43,7 @@ export default function DocItemLayout({ children }) {
             <DocItemTags />
             {docTOC.mobile}
             <DocItemContent>{children}</DocItemContent>
-            <GetFeedback />
+            {/* <GetFeedback /> */}
             <DocItemFooter />
           </article>
           <DocItemPaginator />
