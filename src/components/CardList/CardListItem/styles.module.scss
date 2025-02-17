@@ -2,12 +2,10 @@
   --color-palette: var(--developer-purple);
   margin-bottom: 1.6rem;
   transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
-  min-height: 22.2rem;
   width: 100%;
   margin-top: 0;
 
   @include bp('tablet') {
-    min-height: 22.3rem;
   }
 
   @include bp(tablet) {
@@ -40,7 +38,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 1.6rem;
-  padding: 3.2rem;
+  padding: 2.4rem;
   position: relative;
   height: 100%;
   text-decoration: none;
@@ -83,12 +81,7 @@
 
 .description {
   margin: 0;
-  @include bp(tablet) {
-    max-width: 33.6rem;
-  }
-  @include bp(desktop) {
-    max-width: 29.4rem;
-  }
+  font-size: 1.5rem;
 }
 
 .tag-holder {

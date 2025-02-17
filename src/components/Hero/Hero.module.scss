@@ -85,6 +85,7 @@
 
 .title {
   color: var(--developer-purple-light);
+  margin-top: 1.4rem;
 }
 
 .description {
@@ -94,10 +95,6 @@
   @include bp('tablet') {
     margin-top: 2.2rem;
     padding-right: 0;
-  }
-
-  @include bp('desktop') {
-    max-width: 42.4rem;
   }
 }
 

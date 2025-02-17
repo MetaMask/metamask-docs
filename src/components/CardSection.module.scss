@@ -1,14 +1,14 @@
 .wrapper {
   position: relative;
-  padding: 4.8rem 0 0;
+  padding: 2rem 0 0;
   overflow: hidden;
 
   @include bp(tablet) {
-    padding-top: 6.4rem;
+    padding-top: 3rem;
   }
 
   @include bp(desktop) {
-    padding: 8rem 0 0;
+    padding: 4rem 0 0;
   }
 }
 

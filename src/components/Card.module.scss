@@ -41,8 +41,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 2.4rem;
-  gap: 1.6rem;
-  min-height: 34.7rem;
+  gap: 0.5rem;
+  min-height: 20rem;
   padding: 3.2rem;
   position: relative;
   height: 100%;
@@ -50,12 +50,10 @@
 
   @include bp('tablet') {
     padding-bottom: 3rem;
-    min-height: 25.6rem;
   }
 
   @include bp('desktop') {
     padding-right: 3.8rem;
-    min-height: 29.2rem;
   }
 
   &::before {
@@ -127,6 +125,7 @@
 }
 
 .item-description {
+  font-size: 1.7rem;
   @include bp(tablet) {
     max-width: 40rem;
   }
