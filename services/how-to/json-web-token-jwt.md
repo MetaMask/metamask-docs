@@ -112,9 +112,7 @@ To get the request to pass, generate a JWT, and add it to the request.
 
 Generate a JWT with an online tool, or programmatically:
 
-
-<Tabs>
-  <TabItem value="Online tool" default>
+#### Online tool
 
 The following example uses the [jwt.io](https://jwt.io) site to generate the JWT:
 
@@ -133,13 +131,10 @@ To generate a timestamp for testing, use an [online timestamp converter tool](ht
 
 :::
 
-  </TabItem>
-  <TabItem value="Programmatically">
+#### Programmatically
 
-Developers typically create the JWT token from their keys programmatically. To learn more, follow the tutorial demonstrating how to [create and apply a JWT with Node.js](../tutorials/ethereum/authenticate-with-jwt.md). 
-
-  </TabItem>
-</Tabs>
+Developers typically create the JWT token from their keys programmatically.
+To learn more, follow the tutorial demonstrating how to [create and apply a JWT with Node.js](../tutorials/ethereum/authenticate-with-jwt.md).
 
 ### Apply the JWT
 

@@ -251,11 +251,15 @@ This is because Node.js polyfills are not included in the latest version of Crea
 
 In the app, notice that when you try and send a transaction using Web3Provider, the app opens a MetaMask instance to transfer your funds.
 
-![](../../../images/metamask.png)
+<p align="center">
+  <img src={require("../../../images/metamask.png").default} />
+</p>
 
 If you transfer funds using the InfuraProvider, then the funds are transferred directly from your app.
 
-![](../../../images/app.png)
+<p align="center">
+  <img src={require("../../../images/app.png").default} />
+</p>
 
 ## Complete code sample
 

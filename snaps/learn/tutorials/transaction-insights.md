@@ -349,7 +349,7 @@ Switching to the tab activates the [`onTransaction`](../../reference/entry-point
 entry point of your Snap and displays the percentage of gas fees in the transaction insights UI:
 
 <p align="center">
-<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/transaction-insights.png').default} alt="Transaction insights UI" width="400px" class="appScreen" />
 </p>
 
 :::warning

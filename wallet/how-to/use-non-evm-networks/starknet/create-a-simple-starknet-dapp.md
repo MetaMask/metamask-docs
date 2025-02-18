@@ -256,29 +256,23 @@ yarn start
 
 You are directed to the default dapp display. 
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-start-dapp.png").default} alt="Starknet dapp start" width="750" style={{border: "1px solid #DCDCDC"}} />
-  </div>
-</div>
+<p align="center">
+  <img src={require("../../../assets/starknet-tutorial-start-dapp.png").default} alt="Starknet dapp start" width="750" class="appScreen" />
+</p>
 
 When you select **Connect**, `get-starknet` displays a modal that detects MetaMask and allows you to
 choose which Starknet wallet to connect to.
 Follow the on-screen prompts to connect your MetaMask wallet to Starknet.
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-modal.png").default} alt="Starknet dapp select wallet" width="750" style={{border: "1px solid #DCDCDC"}} />
-  </div>
-</div>
+<p align="center">
+  <img src={require("../../../assets/starknet-tutorial-modal.png").default} alt="Starknet dapp select wallet" width="750" class="appScreen" />
+</p>
 
 After you accept the terms in the prompts, your wallet is connected and its information is displayed.
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp connected" width="750" style={{border: "1px solid #DCDCDC"}} />
-  </div>
-</div>
+<p align="center">
+  <img src={require("../../../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp connected" width="750" class="appScreen" />
+</p>
 
 ## 4. Display the balance of and transfer an ERC-20 token
 
@@ -1618,11 +1612,9 @@ yarn start
 
 After connecting to MetaMask, the dapp should display your STRK token balance:
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" style={{border: "1px solid #DCDCDC"}} />
-  </div>
-</div>
+<p align="center">
+  <img src={require("../../../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" class="appScreen" />
+</p>
 
 You can select **Transfer 1 STRK** to make a transfer to the recipient address specified in [Step 4.5](#45-transfer-tokens).
 
