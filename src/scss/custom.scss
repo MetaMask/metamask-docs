@@ -334,6 +334,43 @@ ol {
   padding: 1rem 2rem !important;
 }
 
+/* NavBar */
+
+.colorModeToggle_DEke {
+  margin: 0 1.4rem 0 0.8rem !important;
+}
+
+.DocSearch-Button-Placeholder {
+  font-size: 1.4rem !important;
+}
+
+/* Details */
+
+.details_lb9f > summary {
+  padding-left: 2rem !important;
+
+  &::before {
+    border-width: 0.8rem !important;
+  }
+}
+
+/* Images */
+
+.imgRow {
+  display: flex;
+}
+
+.imgCol {
+  flex: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+.appScreen {
+  border: 1px solid #DCDCDC;
+  border-radius: 0.5rem;
+}
+
 /**
  * Temporary style - to be deleted
  */

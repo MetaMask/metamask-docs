@@ -6,29 +6,22 @@ toc_max_heading_level: 2
 # JavaScript + Wagmi (recommended)
 
 Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
-
 You can [use the quickstart template](#set-up-using-a-template), which automatically sets up
 the SDK with a [Next.js](https://nextjs.org/) and [Wagmi](https://wagmi.sh/) dapp.
 You can also [manually set up the SDK](#set-up-manually) in an existing dapp.
 
-<br/>
+Features include:
 
-<div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-    <div style={{ flex: '2' }}>
-        <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
-            <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" style={{border: '1px solid #DCDCDC', width: '100%'}} />
-        </a>
-    </div>
-    <div style={{ flex: '3' }}>
-        <h3>Features</h3>
-        <ul>
-            <li><strong>Wallet connection</strong> - Connect to the MetaMask wallet seamlessly.</li>
-            <li><strong>Network switching</strong> - Switch between Ethereum networks like Linea Sepolia, Linea, and Mainnet.</li>
-            <li><strong>Interactive UI</strong> - Responsive design with interactive cards guiding users.</li>
-            <li><strong>Modular components</strong> - Easy-to-understand and customizable components.</li>
-        </ul>
-    </div>
-</div>
+- **Wallet connection** - Connect to the MetaMask wallet seamlessly.
+- **Network switching** - Switch between Ethereum networks like Linea Sepolia, Linea, and Mainnet.
+- **Interactive UI** - Responsive design with interactive cards guiding users.
+- **Modular components** - Easy-to-understand and customizable components.
+
+<p align="center">
+  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
+    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="450px" />
+  </a>
+</p>
 
 ## Set up using a template
 

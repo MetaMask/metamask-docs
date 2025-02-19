@@ -26,7 +26,9 @@
     font-family: var(--ifm-font-family-base);
     display: flex;
     align-items: center;
-    text-transform: capitalize;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
     color: var(--ifm-alert-foreground-color);
     margin-bottom: 0.6rem;
     [class*='admonitionIcon'] {
@@ -66,10 +68,15 @@
     --ifm-alert-background-color-highlight: #0a0a0a1a;
 
     a {
-      color: var(--consumer-orange-dark) !important;
-
+      color: black !important;
+      html[data-theme='dark'] & {
+        color: white !important;
+      }
       &:hover {
-        color: var(--consumer-orange) !important;
+        color: var(--developer-purple) !important;
+        html[data-theme='dark'] & {
+          color: var(--developer-green) !important;
+        }
       }
     }
   }

@@ -103,7 +103,7 @@ export const onTransaction: OnTransactionHandler = async ({
 The Snap tab in the transaction confirmation window displays the transaction insights:
 
 <p align="center">
-<img src={require("../assets/transaction-insights-window.png").default} alt="Transaction insights" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../assets/transaction-insights-window.png").default} alt="Transaction insights" width="360px" class="appScreen" />
 </p>
 
 #### Transaction severity level

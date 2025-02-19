@@ -1,7 +1,5 @@
 .wrapper {
-  padding-top: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
-  padding-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
-  border-bottom: 1px solid var(--general-gray-light);
+  padding-top: 0.1rem;
   margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
 }
 

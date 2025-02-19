@@ -253,7 +253,7 @@ You can now view site in the browser.
 Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
 A page like the following displays:
 
-<img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" class="appScreen" />
 
 This is a template test dapp for installing and testing your Snap.
 
@@ -271,7 +271,7 @@ Next, select **Confirm** > **OK**.
 Select the **Send message** button (or **Estimate gas** button, if you followed Step 2). A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" class="appScreen" />
 </p>
 
 Congratulations, you have integrated a public API into MetaMask and displayed real-time gas fee estimates.
