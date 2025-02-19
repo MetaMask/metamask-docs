@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## February
 
-- Documented [Unichain Mainnet](/services/reference/unichain) support.([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
+- Documented [Unichain Mainnet](/services/reference/unichain) support. ([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
 
 ## January 2025
 
