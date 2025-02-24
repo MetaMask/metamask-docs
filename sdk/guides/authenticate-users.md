@@ -1,9 +1,9 @@
 ---
-description: Authenticate users
+description: Authenticate Users
 toc_max_heading_level: 2
 ---
 
-# Authenticate users
+# Authenticate Users
 
 Connect and manage user wallet sessions in your [Wagmi](#use-wagmi) or
 [Vanilla JavaScript](#use-vanilla-javascript) dapp.
