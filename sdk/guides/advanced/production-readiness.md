@@ -19,7 +19,7 @@ When using MetaMask SDK, ensure your dapp is production ready by focusing on the
 
 ## Reliable RPC endpoints
 
-- **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [MetaMask Developer](https://developer.metamask.io/).
+- **Custom RPC setup** - Use a production-grade RPC endpoints and custom API keys by signing up on [MetaMask Developer](https://developer.metamask.io/).
   This improves reliability over public nodes.
 
 - **Configuration** - Configure your Wagmi (or MetaMask SDK) setup with your custom RPC URL using environment variables.
