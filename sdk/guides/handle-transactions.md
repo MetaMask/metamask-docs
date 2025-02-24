@@ -1,16 +1,16 @@
 ---
-description: Handle transactions
+description: Handle Transactions
 toc_max_heading_level: 2
 ---
 
-# Handle transactions
+# Handle Transactions
 
 Handle EVM transactions in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
 With the SDK, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
-- **Estimate gas costs** accurately.
+- **Estimate the gas costs** accurately.
 - **Handle transaction errors** gracefully.
 - **Manage complex transaction patterns**.
 
