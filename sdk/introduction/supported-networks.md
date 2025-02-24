@@ -1,8 +1,8 @@
 ---
-description: Supported networks
+description: Supported Networks
 ---
 
-# Supported networks
+# Supported Networks
 
 MetaMask SDK works with all EVM-compatible L1/L2 networks, including:
 
