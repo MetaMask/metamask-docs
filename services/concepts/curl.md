@@ -36,7 +36,7 @@ It requests the latest block number using the method `eth_blockNumber`.
 
 ### curl analysis
 
-Let's step through each line of the code snippet to understand what's happening.
+Let's step through each line of the code snippet to understand what is happening.
 
 The first line uses the `curl` command to send a request to the URL `https://mainnet.infura.io/v3/<YOUR-API-KEY>`.
 
@@ -90,7 +90,7 @@ Enter curl code in a terminal window, or a command line tool from your computer'
 
 #### Output
 
-curl returns a response object if the request is successful.
+Curl returns a response object if the request is successful.
 
 ```bash
 {"jsonrpc": "2.0", "id": 3, "result": "0xe0a763"}
