@@ -186,7 +186,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'og:image', content: '/img/metamaskog.jpeg' }],
+      metadata: [{ name: 'og:image', content: '/img/metamask-logo.svg' }],
       navbar: {
         title: ' │ ‎ Documentation',
         logo: {
