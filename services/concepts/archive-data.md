@@ -20,7 +20,7 @@ Access to archive data is automatically enabled on the following supported netwo
  |--------|-------|
  |Ethereum|Sepolia|
  |Optimism|Sepolia|
- |Polygon |Amoy   |
+ |Polygon |Amo    |
  |Arbitrum|       |
  |Celo    |       |
 
@@ -43,7 +43,7 @@ Only an archive node can serve API requests for certain RPC methods older than 1
 
 ## Methods requiring archive data
 
-Requests for data older than the most recent 128 blocks require access to archive data.
+Requests for data older than the most recent 128 blocks require access to archive nodes.
 
 The following methods include a parameter for specifying a block number for the request.
 
