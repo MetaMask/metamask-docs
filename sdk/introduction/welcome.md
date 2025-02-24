@@ -3,7 +3,7 @@ slug: /
 title: Welcome
 ---
 
-# Build onchain dapps with MetaMask SDK
+# Build on-chain dapps with MetaMask SDK
 
 MetaMask SDK is a toolkit that allows you to build onchain dapps.
 With the SDK, you can:
@@ -26,7 +26,7 @@ The benefits of using MetaMask SDK include the following:
 - It handles onboarding of users.
 - It is battle tested with millions of users on MetaMask.
 
-### Where do I start?
+### Where do I start?:
 
 You can get started quickly with the following dapp platforms:
 
