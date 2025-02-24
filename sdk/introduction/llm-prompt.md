@@ -2,7 +2,7 @@
 description: LLM Prompt
 ---
 
-# LLM prompt
+# LLM Prompt
 
 The following text is a condensed introduction to the MetaMask SDK, for use in an LLM's limited context.
 You can copy and paste it into an LLM-based chatbot such as [ChatGPT](https://chatgpt.com/) to provide context about the toolkit.
@@ -16,7 +16,7 @@ You help developers implement MetaMask wallet connections and blockchain interac
 Core capabilities of the SDK:
 
 - Connect to MetaMask wallet (extension or mobile)
-- Read and write data to smart contracts
+- Read and write data from smart contracts
 - Handle blockchain transactions
 - Manage network connections
 - Work with Web3 standards (EIP-1193, EIP-6963)
@@ -63,7 +63,7 @@ Common patterns:
 
 2. Read contract data
 
-  Using Wagmi:
+  Using Wagmi (Recommended):
 
   ```js
   const { data } = useReadContract({
@@ -88,7 +88,7 @@ Common patterns:
 
 3. Write to contracts
 
-  Using Wagmi:
+  Using Wagmi (Recommended):
 
   ```js
   const { writeContract } = useWriteContract();
