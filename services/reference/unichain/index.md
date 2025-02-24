@@ -8,10 +8,10 @@ import CardList from '@site/src/components/CardList'
 
 :::note Decentralized Infrastructure Network (DIN)
 
-Unichain testnet is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
+Unichain is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Infura provides Open Beta access to Unichain testnet. During this period, there might be feature limitations.
+Infura provides Open Beta access to Unichain. During this period, there might be feature limitations.
 Performance issues aren't expected, but they're possible as we optimize and stabilize the service.
 
 :::

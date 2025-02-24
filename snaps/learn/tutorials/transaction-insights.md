@@ -83,7 +83,7 @@ mkdir packages/snap/images
 
 Download
 [this `gas.svg` icon file](https://raw.githubusercontent.com/Montoya/gas-fee-snap/main/packages/snap/images/gas.svg)
-into that `ìmages` folder.  
+into that `images` folder.  
 
 <details>
   <summary>Icon attribution</summary>

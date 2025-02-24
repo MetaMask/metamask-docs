@@ -15,7 +15,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network           | Description             | URL                                                     |
 |-------------------|-------------------------|---------------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://arbitrum-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
-| Mainnet           | JSON-RPC over Websocket | `wss://arbitrum-mainnet.io/ws/v3/<YOUR-API-KEY>`        |
+| Mainnet           | JSON-RPC over WebSocket | `wss://arbitrum-mainnet.io/ws/v3/<YOUR-API-KEY>`        |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://arbitrum-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://arbitrum-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
@@ -24,7 +24,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network        | Description             | URL                                                     |
 |----------------|-------------------------|---------------------------------------------------------|
 | Mainnet        | JSON-RPC over HTTPS     | `https://avalanche-mainnet.infura.io/v3/<YOUR-API-KEY>` |
-| Mainnet        | JSON-RPC over Websocket | `wss://avalanche-mainnet.io/ws/v3/<YOUR-API-KEY>`       |
+| Mainnet        | JSON-RPC over WebSocket | `wss://avalanche-mainnet.io/ws/v3/<YOUR-API-KEY>`       |
 | Testnet (Fuji) | JSON-RPC over HTTPS     | `https://avalanche-fuji.infura.io/v3/<YOUR-API-KEY>`    |
 | Testnet (Fuji) | JSON-RPC over WebSocket | `wss://avalanche-fuji.infura.io/ws/v3/<YOUR-API-KEY>`   |
 
@@ -166,7 +166,8 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 
 | Network | Description             | URL                                                   |
 |---------|-------------------------|-------------------------------------------------------|
-| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over HTTPS     | `https://unichain-mainnet.infura.io/v3/<YOUR-API-KEY>`|
+| Sepolia | JSON-RPC over HTTPS     | `https://unichain-sepolia.infura.io/v3/<YOUR-API-KEY>`|
 
 ## ZKsync Era
 

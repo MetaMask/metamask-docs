@@ -15,7 +15,7 @@ This tutorial uses the Sepolia testnet.
 ## Prerequisites
 
 - Install [MetaMask](https://metamask.io) and create an Ethereum account for testing purposes.
-- Load Sepolia ETH into your wallet from the [Infura faucet](https://www.infura.io/faucet).
+- Load Sepolia ETH into your wallet from the [MetaMask faucet](/developer-tools/faucet).
 - [Node.js and npm installed](https://nodejs.org/en/download/).
 
 You can run the following to confirm that Node and npm are installed:

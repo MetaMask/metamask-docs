@@ -113,7 +113,7 @@ print(response2)
 print(response2.text)
 
 ### REMOVE OBJECT WITH PIN/RM ###
-response3 = requests.post(endpoint + "api/v0/pin/rm", params=params, auth=(projectId, projectSecret))
+response3 = requests.post(endpoint + "/api/v0/pin/rm", params=params, auth=(projectId, projectSecret))
 print(response3.json())
 ```
 

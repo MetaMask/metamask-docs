@@ -391,7 +391,7 @@ export const store = {
     // Dispatch the event, which triggers the event listener in the MetaMask wallet.
     window.dispatchEvent(new Event("eip6963:requestProvider"))
 
-    // Return a function that removes the event listern.
+    // Return a function that removes the event listener.
     return () =>
       window.removeEventListener("eip6963:announceProvider", onAnnouncement)
   },

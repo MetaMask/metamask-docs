@@ -25,7 +25,7 @@ Use [MetaMask](https://metamask.io) or similar to create an Ethereum account for
 ### 1. Select your network and verify funds
 
 - **Sepolia** -  To use the Sepolia testnet, ensure that your account has Sepolia ETH.
-  You can use the [Infura faucet](https://www.infura.io/faucet) to add more funds.
+  You can use the [MetaMask faucet](/developer-tools/faucet) to add more funds.
 - **Alternative network** - To use an alternative network, ensure that your account has testnet ETH for that network.
   :::info note
   When using an alternative network, you'll update your `.env` file in

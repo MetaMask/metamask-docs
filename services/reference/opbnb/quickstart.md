@@ -89,7 +89,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
-    const axios = require("axios);
+    const axios = require("axios");
     
     axios.post("https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY>", {
       jsonrpc: "2.0",

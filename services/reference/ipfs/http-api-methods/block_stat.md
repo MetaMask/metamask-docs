@@ -42,8 +42,8 @@ On success, the call to this endpoint will return with 200 and the following bod
 
 ```js
 {
-  Key: "QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM",
-  Size: 18
+  "Key": "QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM",
+  "Size": 18
 }
 ```
 

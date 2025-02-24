@@ -23,7 +23,7 @@ You can use [MetaMask](https://metamask.io) or similar to create an Ethereum acc
 
 ### 1. Fund your Ethereum account
 
-[Use the Infura faucet to load testnet ETH](https://www.infura.io/faucet) on your Ethereum account for the Sepolia network.
+[Use the MetaMask faucet to load testnet ETH](/developer-tools/faucet) on your Ethereum account for the Sepolia network.
 
 If using a network other than Sepolia, ensure you [update your environment file](deploy-a-contract-using-web3.js.md#10-update-the-env-file) with the network name.
 
@@ -212,7 +212,7 @@ async function main() {
   // The contract is now deployed on chain!
   console.log(`Contract deployed at ${deployedContract.options.address}`)
   console.log(
-    `Add DEMO_CONTRACT to the.env file to store the contract address: ${deployedContract.options.address}`
+    `Add DEMO_CONTRACT to the .env file to store the contract address: ${deployedContract.options.address}`
   )
 }
 
