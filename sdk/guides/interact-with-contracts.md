@@ -4,16 +4,16 @@ sidebar_label: Interact with contracts
 toc_max_heading_level: 2
 ---
 
-# Interact with smart contracts 
+# Interact with Smart Contracts
 
-Interact with smart contracts in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+Interact with Smart Contracts in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
 With the SDK, you can:
 
 - **Read data** from smart contracts.
 - **Write data** to smart contracts.
 - **Handle contract events**.
 - **Manage transaction states**.
-- **Handle contract errors**.
+- **Handle the contract errors**.
 
 ## Use Wagmi
 
