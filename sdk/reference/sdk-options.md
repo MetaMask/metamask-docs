@@ -116,7 +116,7 @@ The metadata options are:
 :::tip important
 Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
 MetaMask Mobile.
-MetaMask Mobile displays this metadata in the connection modal to help users identify and verify the
+MetaMask Mobile displays this metadata in the connection modal to help users identify and verify connection requests
 connection request.
 :::
 
