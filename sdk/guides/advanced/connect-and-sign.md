@@ -61,7 +61,7 @@ export default ConnectAndSignWagmi
 
 ## Use Vanilla JavaScript (one-step)
 
-If you're not using Wagmi, you can access MetaMask SDK's `connectAndSign` method,
+If you're not using Wagmi, you can access MetaMask SDK: connectAndSign method,
 which requests wallet access and signs the message in a single prompt.
 For example:
 
