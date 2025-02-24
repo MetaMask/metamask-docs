@@ -1,18 +1,18 @@
 ---
-description: Connect and sign using MetaMask SDK, either with Wagmi or Vanilla JavaScript.
+description: Connect and Sign using MetaMask SDK, either with Wagmi or Vanilla JavaScript.
 ---
 
-# Connect and sign
+# Connect and Sign
 
 With MetaMask SDK, you can combine **connecting** to MetaMask and **signing** data in two ways:
 
 1. [**Using Wagmi (two-step approach)**](#use-wagmi-two-step) - You'll need to connect to the wallet first, then sign in a separate step.
 
-2. [**Using Vanilla JavaScript (one-step approach)**](#use-vanilla-javascript-one-step) - Use the SDK's `connectAndSign` method to connect and sign in a single user interaction.
+2. [**Using Vanilla JavaScript (one-step approach)**](#use-vanilla-javascript-one-step) - Use the SDK's `connectAndSign` method to connect and Sign in a single user interaction.
 
 ## Use Wagmi (two-step)
 
-Wagmi doesn't provide a one-step "connect and sign" method, so you'll:
+Wagmi doesn't provide a one-step "connect and Sign" method, so you'll:
 
 1. **Connect** to the user's wallet.  
 2. **Sign** your message after connecting.
