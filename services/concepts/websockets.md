@@ -45,7 +45,7 @@ JSON-RPC method for the relevant network. You can also see the following tutoria
 
 ## Supported networks
 
-Infura support subscriptions over WebSockets for the following networks:
+Infura supports subscriptions over WebSockets for the following networks:
 
 - [Arbitrum](../reference/arbitrum/index.md)
 - [Avalanche (C-Chain)](../reference/avalanche-c-chain/index.md)
