@@ -15,7 +15,7 @@ Don't have an Infura account? Sign up for our free plan and start using the ZKsy
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the ZKsync Era networked enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the ZKsync Era network enabled.
 
 ## Make calls
 
@@ -36,7 +36,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 #### Node Fetch
 
-1. In your project folder, install the `node-fetch` package using npm::
+1. In your project folder, install the `node-fetch` package using npm:
 
    ```bash
    npm i node-fetch

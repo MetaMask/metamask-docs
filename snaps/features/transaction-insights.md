@@ -31,7 +31,7 @@ permission object, and set it to `true`:
 
 ```json title="snap.manifest.json"
 "initialPermissions": {
-  "endowment:signature-insight": {
+  "endowment:transaction-insight": {
     "allowTransactionOrigin": true
   }
 }

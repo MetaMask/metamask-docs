@@ -82,7 +82,7 @@ async fn main() -> Result<()> {
   // Define the signer.
   // Replace the SIGNER_PRIVATE_KEY with
   // the private key of your Ethereum account (without the 0x prefix).
-  // However, we recommended that you load it from
+  // However, we recommend that you load it from
   // an .env file or external vault.
   let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
     .parse::<LocalWallet>()?
@@ -217,7 +217,7 @@ async fn main() -> Result<()> {
   // Define the signer.
   // Replace the SIGNER_PRIVATE_KEY with
   // the private key of your Ethereum account (without the 0x prefix).
-  // However, we recommended that you load it from
+  // However, we recommend that you load it from
   // an .env file or external vault.
   let wallet: LocalWallet = "SIGNER_PRIVATE_KEY"
     .parse::<LocalWallet>()?

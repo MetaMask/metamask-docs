@@ -99,7 +99,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    })
    .then(response => {
      console.log(response.data);
-   }
+   })
    .catch(error => {
      console.error(error);
    });
