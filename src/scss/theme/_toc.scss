@@ -1,0 +1,100 @@
+.tableOfContents_node_modules-\@docusaurus-theme-classic-lib-theme-TOC-styles-module {
+  margin-top: -3rem;
+  top: calc(var(--ifm-navbar-height) + 2rem) !important;
+}
+
+.table-of-contents {
+  &__left-border {
+    border-left: 0.2rem solid var(--ifm-color-primary);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+
+    &.interactive-right-sidebar {
+      border-left: none;
+      padding: 3rem 0.8rem 4.6rem;
+
+      @include bp('tablet') {
+        border-left: 1px solid var(--ifm-toc-border-color);
+        padding: 0 2.4rem;
+      }
+    }
+  }
+
+  &__link {
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 124%;
+    text-decoration: none !important;
+    color: var(--ifm-toc-link-color);
+    opacity: 0.9;
+
+    &:hover,
+    &--active {
+      color: var(--ifm-menu-color-active);
+      opacity: 1;
+
+      code {
+        color: var(--ifm-menu-color-active);
+      }
+    }
+
+    code {
+      font-family: var(--font-mm-sans-mono);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1rem;
+      border-radius: 0.4rem;
+      background: var(--ifm-code-background);
+      padding: 0.2rem 0.5rem;
+    }
+  }
+  li {
+    margin: 1.3rem 0.2rem;
+  }
+  ul > li {
+    margin: 1.3rem 0.8rem;
+  }
+}
+
+.theme-doc-toc-mobile {
+  background-color: transparent !important;
+  border: 1px solid var(--general-gray);
+  margin: 0rem 0 1rem 0 !important;
+
+  [data-theme='dark'] & {
+    border: 1px solid var(--ifm-toc-border-color) !important;
+  }
+
+  button {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 124%;
+    padding: 1rem 1.6rem;
+
+    &:after {
+      background: var(--ifm-menu-link-sublist-icon) 50% 50% / 1rem 1rem no-repeat;
+      height: 1rem;
+      width: 1rem;
+    }
+
+    & + div {
+      border-top: 1px solid var(--general-gray);
+      padding: 0 0.8rem 0;
+
+      [data-theme='dark'] & {
+        border-top: 1px solid var(--ifm-toc-border-color) !important;
+      }
+    }
+  }
+
+  ul {
+    border-top: 1px solid transparent !important;
+    padding-left: 0.2rem;
+
+    & > li {
+      margin: 1.5rem 0.8rem !important;
+    }
+  }
+}

@@ -56,7 +56,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/alert-dialog.png").default} alt="Alert dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/alert-dialog.png").default} alt="Alert dialog example" width="360px" class="appScreen" />
 </p>
 
 ## Display a confirmation dialog
@@ -88,7 +88,7 @@ if (result === true) {
 ```
 
 <p align="center">
-<img src={require("../../assets/confirmation-dialog.png").default} alt="Confirmation dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/confirmation-dialog.png").default} alt="Confirmation dialog example" width="360px" class="appScreen" />
 </p>
 
 ## Display a prompt dialog
@@ -120,7 +120,7 @@ const walletAddress = await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/prompt-dialog.png").default} alt="Prompt dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/prompt-dialog.png").default} alt="Prompt dialog example" width="360px" class="appScreen" />
 </p>
 
 ## Display a custom dialog
@@ -217,7 +217,7 @@ This code outputs a custom dialog with two buttons: **Yes** and **No**.
 When the user selects one of the buttons, `onUserInput` is called with the button's name. From there, `snap_resolveInterface` is called. This resolves the dialog, and returns the value passed to `snap_resolveInterface` as the result of the dialog.
 
 <p align="center">
-<img src={require("../../assets/custom-dialog.png").default} alt="Custom dialog example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-dialog.png").default} alt="Custom dialog example" width="360px" class="appScreen" />
 </p>
 
 ## Example

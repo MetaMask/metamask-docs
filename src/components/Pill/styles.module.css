@@ -1,24 +1,29 @@
 .pill {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.4rem;
 }
 
 .pill--green {
-  color: var(--brand-colors-green-green800);
-  background: var(--brand-colors-green-green400);
+  color: var(--ifm-color-success-contrast-foreground);
+  background: var(--ifm-color-success-contrast-background);
 }
 
 .pill--red {
-  color: var(--brand-colors-red-red500);
-  background: var(--brand-colors-red-red100);
+  color: var(--ifm-color-warning-contrast-foreground);
+  background: var(--ifm-color-warning-contrast-background);
 }
 
 .pill--blue {
-  color: var(--brand-colors-blue-blue800);
-  background: var(--brand-colors-blue-blue100);
+  color: var(--ifm-color-info-contrast-foreground);
+  background: var(--ifm-color-info-contrast-background);
 }
 
-.pill--yellow {
-  color: var(--brand-colors-yellow-yellow700);
-  background: var(--brand-colors-yellow-yellow300);
+.pill--orange {
+  color: var(--ifm-color-danger-contrast-foreground);
+  background: var(--ifm-color-danger-contrast-background);
+}
+
+.pill--grey {
+  color: var(--ifm-color-secondary-contrast-foreground);
+  background: var(--ifm-color-secondary-contrast-background);
 }

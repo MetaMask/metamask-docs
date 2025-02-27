@@ -1,75 +1,79 @@
-import React, { useEffect, useState } from "react";
-import Icon from "@site/src/components/Icon/Icon";
-import { NETWORK_LINKS } from "@site/src/lib/data";
-import Link from "@docusaurus/Link";
+import clsx from 'clsx'
+import { useEffect, useState } from 'react'
+import { useColorMode } from '@docusaurus/theme-common'
+import { NETWORK_LINKS } from '@site/src/lib/data'
+import Link from '@docusaurus/Link'
+import Button from '@site/src/components/elements/buttons/button'
+
+import styles from './SectionNetworks.module.scss'
 
 const SectionNetworks = () => {
-  const [isNetworksListCollapsed, setIsNetworksListToggledCollapsed] =
-    useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const handleShowMoreLessClick = () => {
-    setIsNetworksListToggledCollapsed(!isNetworksListCollapsed);
-  };
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
+  const [isNetworksListCollapsed, setIsNetworksListCollapsed] = useState(true)
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768)
+  const { colorMode } = useColorMode()
+  const [theme, setTheme] = useState('')
 
   useEffect(() => {
-    if (window) {
-      setIsMobile(window.innerWidth < 768);
-      window.addEventListener("resize", handleResize, false);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
+    setTheme(colorMode)
+  }, [colorMode])
+
+  const toggleNetworksList = () => {
+    setIsNetworksListCollapsed(prevState => !prevState)
+  }
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768)
+  }
+
+  useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
     }
-  }, []);
+  }, [])
 
   const renderNetworkCard = ({ name, href, logo }, index) => (
-    <Link
-      className={`api-card transition-300 ${
-        isNetworksListCollapsed && isMobile
-          ? index === 4
-            ? "opacity-30"
-            : index === 3
-              ? "opacity-60"
-              : ""
-          : ""
-      }`}
-      key={name}
-      to={href}
-    >
-      <div className="logo-wrap">
-        <img src={logo} alt={`${name} logo`} />
-      </div>
-      {name}
-      <span className="icon-wrap">
-        <Icon name="angle-right" classes="static-icon" />
-        <Icon name="angle-line-right" classes="hover-icon" />
-      </span>
-    </Link>
-  );
+    <li key={index} className={styles['item']}>
+      <Link to={href} className={clsx(styles['inner'], 'text-decoration-none', 'link-styles-none')}>
+        <div className={styles['logo-wrap']}>
+          <img src={logo} alt={`${name} logo`} />
+        </div>
+        {name}
+      </Link>
+    </li>
+  )
 
   return (
-    <section className="networks-section">
-      <div className="grid-row-wrap">
+    <section className={styles['wrapper']}>
+      <ul className={styles['list']}>
         {NETWORK_LINKS.map((item, index) =>
-          isMobile
-            ? index <= 4 || !isNetworksListCollapsed
-              ? renderNetworkCard(item, index)
-              : null
-            : renderNetworkCard(item, index),
+          isMobile && isNetworksListCollapsed && index > 4 ? null : renderNetworkCard(item, index)
         )}
-      </div>
+      </ul>
       {isMobile && (
-        <div className="show-more-less" onClick={handleShowMoreLessClick}>
-          <span className="show-more-less-icon">
-            {isNetworksListCollapsed ? "+" : "–"}
-          </span>
-          show {isNetworksListCollapsed ? "more" : "less"} networks
-        </div>
+        <Button
+          as="div"
+          label={`show ${isNetworksListCollapsed ? 'more' : 'less'} networks`}
+          type={theme === 'dark' ? 'secondary' : 'primary'}
+          icon={isNetworksListCollapsed ? 'plus' : 'minus'}
+          className={styles['button']}
+          onClick={toggleNetworksList}
+          style={
+            theme === 'dark'
+              ? {
+                  '--button-color-hover': 'var(--general-white)',
+                  '--button-text-color-hover': 'var(--general-black)',
+                }
+              : {
+                  '--button-color-hover': 'var(--general-black)',
+                  '--button-text-color-hover': 'var(--general-white)',
+                }
+          }
+        />
       )}
     </section>
-  );
-};
+  )
+}
 
-export default SectionNetworks;
+export default SectionNetworks

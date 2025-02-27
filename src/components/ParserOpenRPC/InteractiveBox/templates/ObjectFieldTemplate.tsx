@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { canExpand } from '@rjsf/utils';
 import { AddButton } from "@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 import clsx from "clsx";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";

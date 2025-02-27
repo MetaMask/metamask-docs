@@ -15,7 +15,7 @@ With the SDK, you can:
 
 [Get started with JavaScript and Wagmi.](quickstart/javascript-wagmi.md)
 
-### Why use the SDK?
+## Why use the SDK?
 
 The benefits of using MetaMask SDK include the following:
 
@@ -26,7 +26,7 @@ The benefits of using MetaMask SDK include the following:
 - It handles onboarding of users.
 - It is battle tested with millions of users on MetaMask.
 
-### Where do I start?
+## Where do I start?
 
 You can get started quickly with the following dapp platforms:
 

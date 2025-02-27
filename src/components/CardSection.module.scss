@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  padding: 2rem 0 0;
+  overflow: hidden;
+
+  @include bp(tablet) {
+    padding-top: 3rem;
+  }
+
+  @include bp(desktop) {
+    padding: 4rem 0 0;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+  }
+}
+
+.grid-col-center {
+  position: relative;
+
+  @include bp('tablet') {
+    @include grid-column-span(8);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(14);
+    @include grid-column-start(2);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @include bp('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid > li {
+  &:last-child {
+    margin-bottom: 1.6rem;
+  }
+}

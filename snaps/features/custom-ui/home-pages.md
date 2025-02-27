@@ -49,7 +49,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/home-page.png").default} alt="Home page example" width="360px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/home-page.png").default} alt="Home page example" width="360px" class="appScreen" />
 </p>
 
 ## Example

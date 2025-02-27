@@ -10,10 +10,6 @@ scheduled maintenance notices. You can also subscribe to status updates via emai
 
 You can also select the **Status** link on the left of the MetaMask Developer dashboard to view the status page.
 
-<div class="left-align-container">
-  <div class="img-medium">
-    <img
-      src={require("../../images/status-page.png").default}
-    />
-  </div>
-</div>
+<p align="center">
+  <img src={require("../../images/status-page.png").default} />
+</p>

@@ -8,21 +8,16 @@ toc_max_heading_level: 2
 Manage networks in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
 With the SDK, you can:
 
-<div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-    <div style={{ flex: '3' }}>
-        <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
-            <img src={require("../_assets/network.gif").default} alt="Switch Networks" style={{border: '1px solid #DCDCDC', width: '100%'}} />
-        </a>
-    </div>
-    <div style={{ flex: '3' }}>
-        <ul>
-            <li><strong>Detect the current network</strong> and monitor network changes.</li>
-            <li><strong>Switch between networks</strong> programmatically.</li>
-            <li><strong>Add new networks</strong> to MetaMask.</li>
-            <li><strong>Handle common network-related errors</strong>.</li>
-        </ul>
-    </div>
-</div>
+- **Detect the current network** and monitor network changes.
+- **Switch between networks** programmatically.
+- **Add new networks** to MetaMask.
+- **Handle common network-related errors**.
+
+<p align="center">
+  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
+    <img src={require("../_assets/network.gif").default} alt="Switch Networks" width="450px" />
+  </a>
+</p>
 
 ## Use Wagmi
 

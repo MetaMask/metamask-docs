@@ -1,0 +1,44 @@
+.wrapper {
+  margin-top: 2.8rem;
+  margin-bottom: 4rem;
+
+  @include bp(desktop) {
+    margin-top: 4.8rem;
+    margin-bottom: 6rem;
+  }
+}
+
+.holder {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include bp('tablet') {
+    margin-left: -0.8rem;
+    margin-right: -0.8rem;
+  }
+}
+
+.col {
+  width: 100%;
+  @include bp-max(tablet) {
+    margin-bottom: 3.2rem;
+  }
+
+  @include bp('tablet') {
+    width: 50%;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  margin-bottom: 1.8rem;
+
+  @include bp('tablet') {
+    margin-bottom: 2.4rem;
+  }
+}

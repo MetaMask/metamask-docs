@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FieldTemplateProps } from "@rjsf/utils";
 import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
 import { SelectWidget } from "@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
 import clsx from "clsx";
 

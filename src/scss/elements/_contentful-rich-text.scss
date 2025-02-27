@@ -1,0 +1,109 @@
+.contentful-rich-text-styles {
+  font-size: 1.6rem;
+  line-height: 150%;
+  color: var(--general-gray-dark);
+
+  .richtext-h2,
+  .richtext-h3 {
+    margin-top: 6rem;
+    margin-bottom: 2.4rem;
+    font-family: var(--font-mm-sans);
+    color: var(--general-black);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &.uppercase {
+      line-height: 100%;
+    }
+  }
+
+  .richtext-h2 {
+    font-size: 2rem;
+    line-height: 1.4;
+
+    @include bp('tablet') {
+      font-size: 3.4rem;
+      line-height: 116.667%;
+    }
+  }
+
+  .richtext-h3 {
+    font-size: 1.6rem;
+    line-height: 1.5;
+
+    @include bp('tablet') {
+      font-size: 2rem;
+      line-height: 140%;
+    }
+  }
+
+  .richtext-hr {
+    height: 1px;
+    margin: 4rem 0;
+    background: var(--general-gray-light);
+    border: 0;
+
+    @include bp('desktop') {
+      margin: 6rem 0 5.5rem;
+    }
+  }
+
+  .richtext-ul {
+    margin-left: 2.5rem;
+    list-style: outside;
+
+    li {
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      line-height: 150%;
+      color: var(--general-gray-dark);
+
+      ol,
+      ul {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .richtext-a {
+    font-weight: 500;
+    color: var(--consumer-orange-dark);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.2rem;
+
+    @include bp('desktop') {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .richtext-b {
+    font-weight: 500;
+    color: var(--general-gray-dark);
+  }
+
+  .richtext-i {
+    font-style: italic;
+  }
+
+  .richtext-p {
+    margin-bottom: 2.2rem;
+
+    font-size: 1.6rem;
+    line-height: 150%;
+    color: var(--general-gray-dark);
+    white-space: normal;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .richtext-u {
+    text-decoration: underline;
+  }
+}

@@ -1,23 +1,23 @@
-import React from "react";
-import { SchemaProperty } from "./SchemaProperty";
-import { CollapseBox } from "../CollapseBox/CollapseBox";
-import styles from "./styles.module.css";
+import React from 'react'
+import { SchemaProperty } from './SchemaProperty'
+import { CollapseBox } from '../CollapseBox/CollapseBox'
+import styles from './styles.module.scss'
 
 const getRefSchemaFromComponents = (initRef, components) => {
-  const ref = initRef.replace("#/components/schemas/", "");
-  return components[ref];
-};
+  const ref = initRef.replace('#/components/schemas/', '')
+  return components[ref]
+}
 
 const renderSchema = (schemaItem, schemas, name) => {
-  if (!schemaItem) return <div>Invalid schema</div>;
+  if (!schemaItem) return <div>Invalid schema</div>
 
-  const resolveRef = (ref) => {
-    const newSchema = getRefSchemaFromComponents(ref, schemas);
-    return renderSchema(newSchema, schemas, name);
-  };
+  const resolveRef = ref => {
+    const newSchema = getRefSchemaFromComponents(ref, schemas)
+    return renderSchema(newSchema, schemas, name)
+  }
 
-  if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref);
-  if (schemaItem?.$ref) return resolveRef(schemaItem.$ref);
+  if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref)
+  if (schemaItem?.$ref) return resolveRef(schemaItem.$ref)
 
   const renderObject = (item, itemName) => (
     <div>
@@ -25,7 +25,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={itemName || item.title}
         type="object"
         required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ""}
+        description={item.description || item.title || ''}
         pattern={item.pattern}
         defaultVal={item.default}
       />
@@ -41,14 +41,14 @@ const renderSchema = (schemaItem, schemas, name) => {
         </CollapseBox>
       </div>
     </div>
-  );
+  )
 
-  if (schemaItem?.schema?.type === "object" && schemaItem?.schema?.properties) {
-    return renderObject(schemaItem.schema, name || schemaItem?.schema?.title);
+  if (schemaItem?.schema?.type === 'object' && schemaItem?.schema?.properties) {
+    return renderObject(schemaItem.schema, name || schemaItem?.schema?.title)
   }
 
-  if (schemaItem.type === "object" && schemaItem.properties) {
-    return renderObject(schemaItem, name || schemaItem.title);
+  if (schemaItem.type === 'object' && schemaItem.properties) {
+    return renderObject(schemaItem, name || schemaItem.title)
   }
 
   const renderArray = (item, itemName) => (
@@ -57,26 +57,24 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={itemName || item.title}
         type="array"
         required={schemaItem.required || !!item.required}
-        description={schemaItem.description || item.description || item.title || ""}
+        description={schemaItem.description || item.description || item.title || ''}
         pattern={schemaItem.pattern}
         defaultVal={schemaItem.default}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
-          <div className={styles.paramItemWrapper}>
-            {renderSchema(item.items, schemas, "")}
-          </div>
+          <div className={styles.paramItemWrapper}>{renderSchema(item.items, schemas, '')}</div>
         </CollapseBox>
       </div>
     </div>
-  );
+  )
 
-  if (schemaItem.type === "array" && schemaItem.items) {
-    return renderArray(schemaItem, name || schemaItem.title);
+  if (schemaItem.type === 'array' && schemaItem.items) {
+    return renderArray(schemaItem, name || schemaItem.title)
   }
 
-  if (schemaItem?.schema?.type === "array" && schemaItem?.schema?.items) {
-    return renderArray(schemaItem.schema, name || schemaItem.schema.title);
+  if (schemaItem?.schema?.type === 'array' && schemaItem?.schema?.items) {
+    return renderArray(schemaItem.schema, name || schemaItem.schema.title)
   }
 
   const renderCombinations = (item, itemName, type) => (
@@ -85,7 +83,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         title={itemName || item.title}
         type={type}
         required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ""}
+        description={item.description || item.title || ''}
         pattern={item.pattern}
         defaultVal={item.default}
       />
@@ -99,17 +97,17 @@ const renderSchema = (schemaItem, schemas, name) => {
         </CollapseBox>
       </div>
     </div>
-  );
+  )
 
-  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, "oneOf");
-  if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, "allOf");
-  if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, "anyOf");
+  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, 'oneOf')
+  if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, 'allOf')
+  if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, 'anyOf')
 
-  if (schemaItem.oneOf) return renderCombinations(schemaItem, name, "oneOf");
-  if (schemaItem.allOf) return renderCombinations(schemaItem, name, "allOf");
-  if (schemaItem.anyOf) return renderCombinations(schemaItem, name, "anyOf");
+  if (schemaItem.oneOf) return renderCombinations(schemaItem, name, 'oneOf')
+  if (schemaItem.allOf) return renderCombinations(schemaItem, name, 'allOf')
+  if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
-  const renderEnum = (enumValues) => {
+  const renderEnum = enumValues => {
     return (
       <div className={styles.enumWrapper}>
         <span className={styles.propItemLabel}>Enum:</span>
@@ -119,32 +117,32 @@ const renderSchema = (schemaItem, schemas, name) => {
           </div>
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   if (schemaItem?.schema) {
     return (
-      <div>
+      <div className={styles.borderTopLine}>
         <SchemaProperty
           title={name || schemaItem.schema.title}
-          type={schemaItem.schema.enum ? "enum" : schemaItem.schema.type}
+          type={schemaItem.schema.enum ? 'enum' : schemaItem.schema.type}
           required={!!schemaItem.required}
           description={
-            schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ""
+            schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ''
           }
           pattern={schemaItem.schema.pattern || schemaItem.pattern}
           defaultVal={schemaItem.schema.default || schemaItem.default}
         />
         {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
-    );
+    )
   }
 
   return (
-    <div>
+    <div className={styles.borderTopLine}>
       <SchemaProperty
         title={name || schemaItem.title}
-        type={schemaItem.enum ? "enum" : schemaItem.type}
+        type={schemaItem.enum ? 'enum' : schemaItem.type}
         required={!!schemaItem.required}
         description={schemaItem.description || schemaItem.title}
         pattern={schemaItem.pattern}
@@ -152,8 +150,8 @@ const renderSchema = (schemaItem, schemas, name) => {
       />
       {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
-  );
-};
+  )
+}
 
 export const renderParamSchemas = (inputSchema, schemas) => {
   return (
@@ -164,16 +162,16 @@ export const renderParamSchemas = (inputSchema, schemas) => {
             {renderSchema(item, schemas, item.name)}
             {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 export const renderResultSchemas = (inputSchema, schemas) => {
-  const customResult = inputSchema?.schema?.maxPriorityFeePerGas;
+  const customResult = inputSchema?.schema?.maxPriorityFeePerGas
   if (customResult) {
     return <>{renderSchema(customResult, schemas, inputSchema.name)}</>
   }
-  return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>;
-};
+  return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>
+}

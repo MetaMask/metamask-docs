@@ -1,12 +1,11 @@
-import React from "react";
-import EditThisPage from "@theme-original/EditThisPage";
+import React from 'react'
+import EditThisPage from '@theme-original/EditThisPage'
+import styles from './styles.module.scss'
 
 export default function EditThisPageWrapper(props) {
-  const wrapperStyle = { fontSize: "0.85rem" };
-
   return (
-    <div style={wrapperStyle}>
+    <div className={styles.themeEditThisPage}>
       <EditThisPage {...props} />
     </div>
-  );
+  )
 }

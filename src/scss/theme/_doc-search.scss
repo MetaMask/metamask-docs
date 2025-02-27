@@ -1,0 +1,249 @@
+[data-theme='light'] .DocSearch {
+  /* --docsearch-primary-color: var(--ifm-color-primary); */
+  /* --docsearch-text-color: var(--ifm-font-color-base); */
+  --docsearch-muted-color: var(--ifm-color-secondary-darkest);
+  --docsearch-container-background: rgba(10, 10, 10, 0.9);
+  /* Modal */
+  --docsearch-modal-background: var(--ifm-color-secondary-lighter);
+  /* Search box */
+  --docsearch-searchbox-background: var(--ifm-color-secondary);
+  --docsearch-searchbox-focus-background: var(--ifm-color-white);
+  --docsearch-primary-color: var(--general-black);
+  --docsearch-searchbox-shadow: 0 0 0 0.2rem var(--docsearch-primary-color);
+  --docsearch-highlight-color: var(--general-black);
+  /* Hit */
+  --docsearch-hit-color: var(--ifm-font-color-base);
+  --docsearch-hit-active-color: var(--ifm-color-white);
+  --docsearch-hit-background: var(--ifm-color-white);
+  /* Footer */
+  --docsearch-footer-background: var(--ifm-color-white);
+}
+
+[data-theme='dark'] .DocSearch {
+  --docsearch-text-color: var(--ifm-font-color-base);
+  --docsearch-muted-color: var(--ifm-color-secondary-darkest);
+  --docsearch-container-background: rgba(10, 10, 10, 0.9);
+  /* Modal */
+  --docsearch-modal-background: var(--general-gray-dark);
+  /* Search box */
+  --docsearch-searchbox-background: var(--general-gray-dark);
+  --docsearch-searchbox-focus-background: var(--general-black-mid);
+  --docsearch-searchbox-shadow: 0 0 0 0.2rem var(--general-black-light);
+  --docsearch-highlight-color: var(--general-white);
+
+  /* Hit */
+  --docsearch-hit-color: var(--ifm-font-color-base);
+  --docsearch-hit-active-color: var(--ifm-color-white);
+  --docsearch-hit-background: var(--general-black-light);
+  /* Footer */
+  --docsearch-footer-background: var(--ifm-background-surface-color);
+  --docsearch-key-gradient: linear-gradient(
+    -26.5deg,
+    var(--ifm-color-emphasis-200) 0%,
+    var(--ifm-color-emphasis-100) 100%
+  );
+}
+
+.DocSearch {
+  --docsearch-spacing: 1.2rem;
+  --docsearch-modal-width: 56rem;
+  --docsearch-modal-height: 60rem;
+  --docsearch-searchbox-height: 5.6rem;
+  --docsearch-footer-height: 4.4rem;
+
+  .DocSearch-Modal {
+    border-radius: 0;
+    margin: 0;
+
+    @include bp('tablet') {
+      margin: 6rem auto auto;
+      border-radius: 0.8rem;
+    }
+  }
+
+  .DocSearch-Dropdown-Container {
+    width: calc(var(--docsearch-modal-width) - var(--docsearch-spacing) * 2);
+    overflow: hidden;
+
+    @include bp-max('tablet') {
+      max-width: 100%;
+    }
+  }
+
+  .DocSearch-Form {
+    border-radius: 0.4rem;
+  }
+
+  .DocSearch-Input {
+    font-size: 2rem;
+  }
+
+  .DocSearch-Help {
+    font-size: 1.4rem;
+  }
+
+  .DocSearch-Hit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .DocSearch-Label {
+    font-size: 1.2rem;
+  }
+
+  .DocSearch-ErrorScreen,
+  .DocSearch-NoResults,
+  .DocSearch-StartScreen {
+    padding: 3.6rem 0;
+  }
+
+  .DocSearch-Dropdown {
+    margin-top: 0.2rem;
+  }
+
+  .DocSearch-Hit-source {
+    font-weight: 500;
+  }
+
+  .DocSearch-Hit[aria-selected='true'],
+  .DocSearch-Hit[aria-selected='false'] {
+    a {
+      text-decoration: none;
+
+      @include bp('tablet') {
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+      }
+
+      &:hover {
+        text-decoration: none;
+        background-color: var(--general-black);
+
+        .DocSearch-Hit-title,
+        .DocSearch-Hit-path {
+          color: var(--docsearch-hit-active-color);
+        }
+      }
+    }
+
+    mark {
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  .DocSearch-Hit[aria-selected='true'] a {
+    background-color: var(--general-black);
+  }
+
+  .DocSearch-HitsFooter a {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+
+    &:hover {
+      color: var(--docsearch-highlight-color);
+    }
+  }
+}
+
+.main-wrapper {
+  .search-page-wrapper & {
+    margin: auto;
+
+    .container {
+      width: calc(100% - var(--page-padding-x) * 2);
+
+      @include bp('tablet') {
+        margin: 0 !important;
+        width: 100%;
+      }
+    }
+
+    @include bp('tablet') {
+      max-width: 92.5rem;
+      min-width: 91.5rem;
+    }
+
+    .col--8 {
+      font-size: 1.4rem;
+      font-weight: 400;
+
+      @include bp('tablet') {
+        font-size: 1.6rem;
+      }
+    }
+
+    .margin-vert--lg {
+      h1 {
+        padding: 3rem 0 2rem;
+
+        @include bp('tablet') {
+          padding: 6.5rem 0 3rem;
+        }
+      }
+    }
+
+    form input {
+      font-size: 1.6rem;
+      border: 1px solid var(--ifm-toc-border-color);
+      background: transparent;
+
+      html[data-theme='dark'] & {
+        background-color: var(--general-gray-dark);
+      }
+
+      &::placeholder {
+        font-size: 1.6rem;
+      }
+
+      &:focus {
+        border: 1px solid var(--search-input-focus);
+      }
+    }
+
+    main {
+      margin-top: 4rem;
+    }
+
+    article {
+      padding: 2rem 0;
+    }
+
+    h2 {
+      a {
+        color: var(--search-item-link);
+        @extend h3;
+
+        &:hover {
+          color: var(--search-item-link-hover);
+          text-decoration: none;
+        }
+      }
+    }
+
+    .breadcrumbs {
+      &__item:not(:last-child):after {
+        opacity: 1;
+        height: 1rem;
+        width: 0.7rem;
+        background-repeat: no-repeat;
+        background-size: 100%;
+      }
+    }
+
+    .breadcrumbs,
+    p {
+      font-size: 1.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .search-result-match {
+      background-color: var(--ifm-code-background);
+    }
+  }
+}

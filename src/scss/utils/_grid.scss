@@ -1,0 +1,122 @@
+@use 'sass:math';
+
+// LOCAL HELPERS
+@function calculate-column-span(
+  $total-column-count,
+  $gutter-width,
+  $page-padding,
+  $column-count,
+  $offset: 0
+) {
+  @return calc(
+    ((100vw - #{$page-padding * 2}) / #{$total-column-count}) * #{$column-count} - #{(
+        $total-column-count - $column-count
+      ) * math.div($gutter-width, $total-column-count)} + #{$offset}
+  );
+}
+
+@function calculate-column-offset-left(
+  $total-column-count,
+  $gutter-width,
+  $page-padding,
+  $column-count,
+  $offset: 0
+) {
+  @return calc(
+    (
+        (100vw - #{$page-padding * 2}) / #{$total-column-count} + #{math.div(
+            $gutter-width,
+            $total-column-count
+          )}
+      ) * #{$column-count} + #{$offset}
+  );
+}
+
+// FUNCTIONS
+@function get-grid-column-span($column-count, $offset: 0) {
+  @return calculate-column-span(
+    $grid-column-count,
+    $grid-gutter-width,
+    $page-padding-x-mobile,
+    $column-count,
+    $offset
+  );
+}
+
+@function get-grid-column-span-desktop($column-count, $offset: 0) {
+  @return calculate-column-span(
+    $grid-column-count-desktop,
+    $grid-gutter-width-desktop,
+    $page-padding-x-desktop,
+    $column-count,
+    $offset
+  );
+}
+
+@function get-grid-position-start($column-count-start, $offset: 0) {
+  @return calculate-column-offset-left(
+    $grid-column-count,
+    $grid-gutter-width,
+    $page-padding-x-mobile,
+    $column-count-start,
+    $offset
+  );
+}
+
+@function get-grid-position-start-desktop($column-count-start, $offset: 0) {
+  @return calculate-column-offset-left(
+    $grid-column-count-desktop,
+    $grid-gutter-width-desktop,
+    $page-padding-x-desktop,
+    $column-count-start,
+    $offset
+  );
+}
+
+// MIXINS
+
+// PARENT MIXINS
+@mixin grid {
+  display: grid;
+  grid-gap: $grid-gutter-width;
+  grid-template-columns: repeat(#{$grid-column-count}, 1fr);
+  padding: 0;
+
+  @include bp('tablet') {
+    grid-gap: $grid-gutter-width-tablet;
+    grid-template-columns: repeat(#{$grid-column-count-tablet}, 1fr);
+  }
+
+  @include bp('desktop') {
+    grid-gap: $grid-gutter-width-desktop;
+    grid-template-columns: repeat(#{$grid-column-count-desktop}, 1fr);
+  }
+
+  // This enables default grid width, but we might not need it.
+  // > * {
+  //   @include grid-column-span($grid-column-count);
+
+  //   @include bp('tablet') {
+  //     @include grid-column-span($grid-column-count-tablet);
+  //   }
+
+  //   @include bp('desktop') {
+  //     @include grid-column-span($grid-column-count-desktop);
+  //   }
+  // }
+}
+
+@mixin subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+// CHILD MIXINS
+
+@mixin grid-column-span($column-count) {
+  grid-column: span $column-count / span $column-count;
+}
+
+@mixin grid-column-start($column-count-start) {
+  grid-column-start: $column-count-start;
+}

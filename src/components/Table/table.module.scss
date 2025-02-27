@@ -1,10 +1,10 @@
 :root {
   --table-border-color: rgba(132, 140, 150, 0.16);
   --table-bg-color: #fff;
-  --table-bg-thead-color: #f2f4f6;
+  --table-bg-thead-color: #e9edf6;
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --table-border-color: rgba(132, 140, 150, 0.16);
   --table-bg-color: #24272a;
   --table-bg-thead-color: #24272a;

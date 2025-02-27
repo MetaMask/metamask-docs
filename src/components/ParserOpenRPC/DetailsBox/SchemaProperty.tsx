@@ -1,18 +1,21 @@
-import React from "react";
-import { MDContent } from "./MDContent";
-import styles from "./styles.module.css";
+import clsx from 'clsx'
+import { CSSProperties } from 'react'
+import { MDContent } from './MDContent'
+import Heading from '@theme/Heading'
+import CutOffCorners from '@site/src/components/elements/cut-off-corners'
+import styles from './styles.module.scss'
 
 interface SchemaPropertyProps {
-  title: string;
-  type?: string;
-  required?: boolean;
-  description?: string;
-  pattern?: string;
-  defaultVal?: string;
+  title: string
+  type?: string
+  required?: boolean
+  description?: string
+  pattern?: string
+  defaultVal?: string
 }
 
 interface TagProps {
-  name: string;
+  name: string
 }
 
 export const SchemaProperty = ({
@@ -21,21 +24,22 @@ export const SchemaProperty = ({
   required,
   description,
   pattern,
-  defaultVal
+  defaultVal,
 }: SchemaPropertyProps) => {
   return (
-    <div className="padding-vert--md">
-      <div
-        className="row row--align-center row--no-gutters padding-bottom--sm"
-        style={{ justifyContent: "space-between" }}
-      >
-        <div>
-          <strong>{title}</strong>
-          <span className={styles.textAltColor}> {type} </span>
+    <div className={styles.schemaWrapper}>
+      <div className={styles.schemaHeader} style={{ justifyContent: 'space-between' }}>
+        <div className={styles.schemaHeader}>
+          <Heading as="h5" className={'type-paragraph-m font-primary font-weight-medium'}>
+            {title}
+          </Heading>
+          <span className={clsx(styles.textAltColor, 'type-paragraph-m')}>{type}</span>
         </div>
-        {required && <span className={styles.textErrorColor}>required</span>}
+        {required && (
+          <span className={clsx(styles.textErrorColor, 'type-paragraph-m')}>required</span>
+        )}
       </div>
-      <p className="margin--none">
+      <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
         <MDContent content={description} />
         {pattern && (
           <div className={styles.propItemWrapper}>
@@ -51,23 +55,28 @@ export const SchemaProperty = ({
         )}
       </p>
     </div>
-  );
-};
+  )
+}
 
 export const Tag = ({ name }: TagProps) => {
   const bgStyle = {
-    MetaMask: "#4DB6AC",
-    Restricted: "#FFECB3",
-    Deprecated: "#7E57C2",
-  };
+    MetaMask: 'var(--consumer-green)',
+    Restricted: 'var(--consumer-orange)',
+    Deprecated: 'var(--consumer-purple)',
+  }
   return (
-    <div
-      className={styles.tagItem}
-      style={{
-        backgroundColor: `${bgStyle[name] ? bgStyle[name] : "#FFCDD2"}`,
-      }}
-    >
-      {name}
+    <div className={styles['tag-holder']}>
+      <CutOffCorners size={'xs'}>
+        <span
+          className={clsx(styles['tag'], 'type-label-caption uppercase font-weight-medium')}
+          style={
+            {
+              '--color-palette': bgStyle[name] ? bgStyle[name] : 'var(--consumer-blue)',
+            } as CSSProperties
+          }>
+          {name}
+        </span>
+      </CutOffCorners>
     </div>
-  );
-};
+  )
+}

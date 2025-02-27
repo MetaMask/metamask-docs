@@ -1,9 +1,9 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --maintenance-modal-shadow: rgba(0, 0, 0, 0.4);
   --maintenance-modal-background: #24272a;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --maintenance-modal-shadow: rgba(44, 59, 88, 0.1);
   --maintenance-modal-background: #fff;
 }
@@ -11,7 +11,7 @@
 .maintenance {
   background: rgba(0, 0, 0, 0.4);
   position: absolute;
-  top: -55px;
+  top: -74px;
   bottom: 0;
   left: 0;
   right: 0;

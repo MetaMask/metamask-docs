@@ -14,12 +14,12 @@ Install Flask in a new browser profile, or disable any existing installed versio
 before installing Flask.
 Running multiple instances of MetaMask in the same browser profile can break dapp interactions.
 
-:::caution Developers only
+:::note Developers only
 MetaMask Flask is an experimental tool only for developers.
 If you are not a developer, you should not install MetaMask Flask.
 :::
 
-:::danger Do not import accounts with funds to Flask
+:::warning Do not import accounts with funds to Flask
 We do not recommend importing your Secret Recovery Phrase from MetaMask stable to MetaMask Flask.
 If you import accounts with funds into Flask, you do so at your own risk.
 :::

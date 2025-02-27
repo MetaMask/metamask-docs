@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'MM Poly Variable';
+  src: url('/fonts/MM-Poly/MM_Poly-Variable.woff2') format('woff2-variations');
+  font-style: normal;
+  font-display: swap;
+  font-variation-settings: 'wdth' 25;
+}
+
+@font-face {
+  font-family: 'MM Sans Variable';
+  src: url('/fonts/MM-Sans/MM_Sans-Variable.woff2') format('woff2-variations');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MM Sans';
+  src: url('/fonts/MM-Sans/MM_Sans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MM Sans Mono';
+  src: url('/fonts/MM-Sans/MM_Sans_Mono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MM Centra No1';
+  src: url('/fonts/CentraNo1/CentraNo1-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MM Centra No1';
+  src: url('/fonts/CentraNo1/CentraNo1-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

@@ -21,7 +21,7 @@ You can't pin multiple DAG roots using this endpoint. For example, if supplying 
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=false&#x26;allow-big-block=false" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"<file>"
 ```
@@ -32,7 +32,7 @@ curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=false&#x26;allow-b
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/dag/import?pin-roots=true&silent=<value>&stats=<value>&allow-big-block=false" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"/sample.car"
 ```

@@ -1,0 +1,13 @@
+.spinner {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+}
+
+@keyframes rotate {
+  to {
+    rotate: 360deg;
+  }
+}

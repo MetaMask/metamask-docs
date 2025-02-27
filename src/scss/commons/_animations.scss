@@ -1,0 +1,197 @@
+@keyframes translate-arrow {
+  0% {
+    transform: translate3d(0%, 0%, 0);
+  }
+
+  20% {
+    transform: translate3d(100%, -100%, 0);
+  }
+
+  20.001% {
+    transform: translate3d(0%, 0%, 0);
+  }
+}
+
+@keyframes mm-poly-variable-font-reveal {
+  0% {
+    --variable-font-reso: 0;
+  }
+
+  20% {
+    --variable-font-reso: 1;
+  }
+
+  40% {
+    --variable-font-reso: 2;
+  }
+
+  60% {
+    --variable-font-reso: 3;
+  }
+
+  80% {
+    --variable-font-reso: 4;
+  }
+
+  100% {
+    --variable-font-reso: 5;
+  }
+}
+
+.mm-poly-variable-font-reveal {
+  animation-name: mm-poly-variable-font-reveal;
+  animation-duration: calc(var(--motion) * 0.75s);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  @media (prefers-reduced-motion: no-preference) {
+    --variable-font-reso: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    --variable-font-reso: 5;
+  }
+}
+
+@keyframes mm-kf-reveal-animation-headline-mask-line-1 {
+  0% {
+    clip-path: polygon(0 76%, 2% 98%, 7% 99%, 0 100%);
+  }
+
+  50% {
+    clip-path: polygon(0 70%, 19% 33%, 49% 100%, 0% 100%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes mm-kf-reveal-animation-headline-mask-line-2 {
+  0% {
+    clip-path: polygon(32% 0, 100% 0, 100% 1%, 69% 1%);
+  }
+
+  25% {
+    clip-path: polygon(32% 0, 100% 0, 100% 2%, 70% 45%);
+  }
+
+  50% {
+    clip-path: polygon(29% 0, 100% 0, 100% 11%, 70% 75%);
+  }
+
+  75% {
+    clip-path: polygon(13% 0, 100% 0, 100% 68%, 31% 81%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes mm-kf-reveal-animation-headline-mask-line-3 {
+  0% {
+    clip-path: polygon(0 0, 2% 0, 2% 6%, 1% 7%);
+  }
+
+  25% {
+    clip-path: polygon(0 0, 32% 21%, 10% 31%, 1% 35%);
+  }
+
+  50% {
+    clip-path: polygon(0 0, 62% 49%, 22% 87%, 0 91%);
+  }
+
+  75% {
+    clip-path: polygon(0 0, 83% 15%, 68% 100%, 0 98%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes mm-kf-reveal-animation-headline-mask-line-4 {
+  0% {
+    clip-path: polygon(90% 0, 100% 0, 100% 3%, 96% 4%);
+  }
+
+  25% {
+    clip-path: polygon(63% 0, 100% 0%, 100% 36%, 85% 41%);
+  }
+
+  50% {
+    clip-path: polygon(45% 0, 100% 0%, 100% 53%, 70% 63%);
+  }
+
+  75% {
+    clip-path: polygon(16% 0, 100% 0%, 100% 85%, 46% 100%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes mm-kf-reveal-animation-from-bottom {
+  0% {
+    transform: translateY(2.5rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mm-reveal-animation-headline {
+  width: fit-content;
+  margin-left: -2rem;
+  padding: 0 2rem;
+
+  @include bp('tablet') {
+    .mm-reveal-animation-headline-start & {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+      &:nth-child(4n + 1) {
+        animation: mm-kf-reveal-animation-headline-mask-line-1 0.65s linear 0s 1 alternate forwards;
+      }
+
+      &:nth-child(4n + 2) {
+        animation: mm-kf-reveal-animation-headline-mask-line-2 0.65s linear 0s 1 alternate forwards;
+      }
+
+      &:nth-child(4n + 3) {
+        animation: mm-kf-reveal-animation-headline-mask-line-3 0.65s linear 0s 1 alternate forwards;
+      }
+
+      &:nth-child(4n + 4) {
+        animation: mm-kf-reveal-animation-headline-mask-line-4 0.65s linear 0s 1 alternate forwards;
+      }
+    }
+  }
+}
+
+.mm-reveal-animation-description {
+  .mm-reveal-animation-headline-start & {
+    transform: translateY(2rem);
+    opacity: 0;
+    animation: mm-kf-reveal-animation-from-bottom calc(var(--motion) * var(--motion-speed) / 0.5)
+      $gentle-ease 0.6s 1 normal forwards;
+  }
+}
+
+.mm-reveal-animation-button {
+  @include bp('tablet') {
+    transform: translateY(2.5rem);
+    opacity: 0;
+
+    .mm-reveal-animation-headline-start & {
+      transform: translateY(2rem);
+      opacity: 0;
+      animation: mm-kf-reveal-animation-from-bottom calc(var(--motion) * var(--motion-speed) / 0.5)
+        $gentle-ease 0.8s 1 normal forwards;
+    }
+  }
+}

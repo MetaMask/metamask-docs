@@ -24,7 +24,7 @@ curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=<ipfs-path>" \
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/pin/rm?arg=QmfQ5QAjvg4GtA3wg3adpnDJug8ktA1BxurVqBD8rtgVjM" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>

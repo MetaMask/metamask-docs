@@ -1,0 +1,33 @@
+.react-dropdown-select-dropdown {
+  > .react-dropdown-select-item {
+    color: var(--general-black);
+
+    &.react-dropdown-select-item-selected {
+      background-color: var(--consumer-purple);
+    }
+
+    &:not(.react-dropdown-select-item-selected):hover,
+    &:not(.react-dropdown-select-item-selected):focus {
+      background-color: var(--consumer-purple-light);
+    }
+
+    [data-theme='dark'] & {
+      &.react-dropdown-select-item-selected {
+        background-color: var(--consumer-green);
+      }
+
+      &:not(.react-dropdown-select-item-selected):hover,
+      &:not(.react-dropdown-select-item-selected):focus {
+        background-color: var(--consumer-green-light);
+      }
+    }
+  }
+}
+
+.react-dropdown-select.select-lang {
+  min-width: 100px;
+
+  input {
+    height: auto;
+  }
+}

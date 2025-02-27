@@ -98,12 +98,12 @@ for more information.
 You can prompt users to add a single NFT or multiple NFTs using `wallet_watchAsset`.
 The add NFT interfaces look like the following:
 
-<div class="row">
-    <div class="column">
-        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" style={{border: '1px solid #DCDCDC'}} />
+<div class="imgRow">
+    <div class="imgCol">
+        <img src={require("../../assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
     </div>
-    <div class="column">
-        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" style={{border: '1px solid #DCDCDC'}} />
+    <div class="imgCol">
+        <img src={require("../../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
     </div>
 </div>
 

@@ -206,19 +206,19 @@ When a user selects it, `get-starknet` displays a modal that detects MetaMask an
 choose which Starknet wallet to connect to.
 When a user connects to MetaMask, `get-starknet` requests the user to connect to the Starknet Snap in MetaMask.
 
-<div class="row">
-  <div class="column">
-    <img src={require("../../../assets/starknet-wallet-modal.png").default} alt="Starknet wallet modal" width="360" style={{border: "1px solid #DCDCDC"}} />
+<div class="imgRow">
+  <div class="imgCol">
+    <img src={require("../../../assets/starknet-wallet-modal.png").default} alt="Starknet wallet modal" width="360" class="appScreen" />
   </div>
-  <div class="column">
-    <img src={require("../../../assets/starknet-metamask-connection.png").default} alt="Starknet MetaMask connection request" width="360" style={{border: "1px solid #DCDCDC"}} />
+  <div class="imgCol">
+    <img src={require("../../../assets/starknet-metamask-connection.png").default} alt="Starknet MetaMask connection request" width="360" class="appScreen" />
   </div>
 </div>
 
 After the user connects to Starknet, the dapp displays the user's connected wallet and wallet address:
 
 <p align="center">
-  <img src={require("../../../assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" style={{border: "1px solid #DCDCDC"}} />
+  <img src={require("../../../assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" class="appScreen" />
 </p>
 
 :::note

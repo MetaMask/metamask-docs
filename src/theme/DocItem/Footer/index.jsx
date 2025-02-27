@@ -1,22 +1,17 @@
-import React from "react";
-import clsx from "clsx";
-import { ThemeClassNames } from "@docusaurus/theme-common";
-import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import LastUpdated from "@theme/LastUpdated";
-import EditThisPage from "@theme/EditThisPage";
-import styles from "./styles.module.css";
+import React from 'react'
+import clsx from 'clsx'
+import { ThemeClassNames } from '@docusaurus/theme-common'
+import { useDoc } from '@docusaurus/plugin-content-docs/client'
+import LastUpdated from '@theme/LastUpdated'
+import EditThisPage from '@theme/EditThisPage'
+import styles from './styles.module.css'
 
-function EditMetaRow({
-  editUrl,
-  lastUpdatedAt,
-  lastUpdatedBy,
-  formattedLastUpdatedAt,
-}) {
+function EditMetaRow({ editUrl, lastUpdatedAt, lastUpdatedBy, formattedLastUpdatedAt }) {
   return (
-    <div className={clsx(ThemeClassNames.docs.docFooterEditMetaRow, "row")}>
+    <div className={clsx(ThemeClassNames.docs.docFooterEditMetaRow, 'row')}>
       <div className="col">{editUrl && <EditThisPage editUrl={editUrl} />}</div>
 
-      <div className={clsx("col", styles.lastUpdated)}>
+      <div className={clsx('col type-paragraph-m', styles.lastUpdated)}>
         {(lastUpdatedAt || lastUpdatedBy) && (
           <LastUpdated
             lastUpdatedAt={lastUpdatedAt}
@@ -26,20 +21,17 @@ function EditMetaRow({
         )}
       </div>
     </div>
-  );
+  )
 }
 export default function DocItemFooter() {
-  const { metadata } = useDoc();
-  const { editUrl, lastUpdatedAt, formattedLastUpdatedAt, lastUpdatedBy } =
-    metadata;
-  const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy);
+  const { metadata } = useDoc()
+  const { editUrl, lastUpdatedAt, formattedLastUpdatedAt, lastUpdatedBy } = metadata
+  const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy)
   if (!canDisplayEditMetaRow) {
-    return null;
+    return null
   }
   return (
-    <footer
-      className={clsx(ThemeClassNames.docs.docFooter, "docusaurus-mt-lg")}
-    >
+    <footer className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg docusaurus-mb-lg')}>
       {canDisplayEditMetaRow && (
         <EditMetaRow
           editUrl={editUrl}
@@ -49,5 +41,5 @@ export default function DocItemFooter() {
         />
       )}
     </footer>
-  );
+  )
 }

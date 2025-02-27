@@ -149,13 +149,13 @@ The following are guidelines for validating RPC parameters and handling values:
   mislead the user.
   For example:
 
-  <img src={require("../../assets/copyable-example-1.png").default} alt="Example not using copyable with Markdown rendering" style={{border: "1px solid #DCDCDC"}} />
+  <img src={require("../../assets/copyable-example-1.png").default} alt="Example not using copyable with Markdown rendering" class="appScreen" />
 
   The special characters `*` and `_` render Markdown formatting, so what the user sees does not
   match the content.
   To avoid this, use `copyable` instead:
 
-  <img src={require("../../assets/copyable-example-2.png").default} alt="Example using copyable with clean rendering" style={{border: "1px solid #DCDCDC"}} />
+  <img src={require("../../assets/copyable-example-2.png").default} alt="Example using copyable with clean rendering" class="appScreen" />
 
   `copyable` does not render Markdown and has the added benefit that the user can select to copy the content.
   Also, the formatting provides a visual delineator to separate arbitrary input or fields from user

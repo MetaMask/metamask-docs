@@ -91,6 +91,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-mantle.svg`,
   },
   {
+    name: "opBNB",
+    href: "/api/networks/opbnb",
+    logo: `${LOGO_PATH}/logo-bnb.svg`,
+  },
+  {
     name: "Optimism",
     href: "/services/reference/optimism",
     logo: `${LOGO_PATH}/logo-opt.svg`,

@@ -1,0 +1,175 @@
+[class*='admonition'].alert {
+  margin: 0;
+}
+
+[class*='admonition'] {
+  ul {
+    list-style-position: inside;
+    list-style-type: disc;
+    margin: 1rem 0;
+  }
+  p {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;  // For instances where we have multiple paragraphs in an admonition
+  }
+}
+
+.alert {
+  padding: 2.4rem;
+  border-radius: 0;
+  color: var(--general-black);
+  box-shadow: none;
+
+  [class*='admonitionHeading'] {
+    @extend .type-heading-xxs;
+    @extend .font-weight-medium;
+    font-family: var(--ifm-font-family-base);
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+    color: var(--ifm-alert-foreground-color);
+    margin-bottom: 0.6rem;
+    [class*='admonitionIcon'] {
+      display: flex;
+      font-size: 1rem;
+      margin-right: 0.8rem;
+    }
+  }
+
+  [class*='admonitionContent'] {
+    @extend .type-paragraph-m;
+    margin-top: 0rem;
+  }
+
+  a {
+    font-weight: 500;
+    color: var(--ifm-alert-foreground-color);
+    text-decoration-color: var(--ifm-alert-foreground-color);
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+  }
+
+  p,
+  ul {
+    code {
+      @extend .type-heading-xxs;
+      font-family: var(--ifm-heading-font-family);
+      color: var(--ifm-alert-foreground-color);
+      padding: 0.2rem 0.7rem;
+      border-radius: 0.4rem;
+      font-size: 80% !important;
+    }
+  }
+
+  &--secondary {
+    --ifm-alert-background-color-highlight: #0a0a0a1a;
+
+    a {
+      color: black !important;
+      html[data-theme='dark'] & {
+        color: white !important;
+      }
+      &:hover {
+        color: var(--developer-purple) !important;
+        html[data-theme='dark'] & {
+          color: var(--developer-green) !important;
+        }
+      }
+    }
+  }
+
+  &--info {
+    --ifm-alert-background-color-highlight: #1900661a;
+
+    a {
+      &:hover {
+        color: var(--consumer-blue) !important;
+      }
+    }
+  }
+
+  &--success {
+    --ifm-alert-background-color-highlight: #0133301a;
+
+    a {
+      &:hover {
+        color: var(--consumer-green) !important;
+      }
+    }
+  }
+
+  &--warning,
+  &--danger {
+    --ifm-alert-background-color-highlight: #6618001a;
+
+    a {
+      &:hover {
+        color: var(--consumer-orange) !important;
+      }
+    }
+  }
+
+  &.theme-admonition-flaskOnly {
+    a {
+      &:hover {
+        color: var(--consumer-purple-dark) !important;
+      }
+    }
+  }
+
+  [data-theme='dark'] & {
+    color: var(--general-white);
+
+    code {
+      color: inherit;
+    }
+
+    &--secondary {
+      --ifm-alert-background-color-highlight: #ffffff1a;
+
+      a {
+        color: var(--consumer-green) !important;
+
+        &:hover {
+          color: var(--consumer-green-light) !important;
+        }
+      }
+    }
+
+    &--info {
+      --ifm-alert-background-color-highlight: #cce7ff1a;
+      color: var(--consumer-blue-light);
+    }
+
+    &--success {
+      --ifm-alert-background-color-highlight: #e5ffc31a;
+      color: var(--consumer-green-light);
+    }
+
+    &--warning,
+    &--danger {
+      --ifm-alert-background-color-highlight: #ffa6801a;
+      color: var(--consumer-orange-light);
+    }
+
+    &.theme-admonition-flaskOnly {
+      --ifm-alert-background-color: var(--developer-purple-dark);
+      color: var(--developer-purple-light);
+
+      [class*='admonitionHeading'] {
+        color: var(--developer-purple-light);
+      }
+
+      a {
+        color: var(--developer-purple-light);
+
+        &:hover {
+          color: var(--consumer-green-light) !important;
+        }
+      }
+    }
+  }
+}

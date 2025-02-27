@@ -9,24 +9,18 @@ Connect and manage user wallet sessions in your [Wagmi](#use-wagmi) or
 [Vanilla JavaScript](#use-vanilla-javascript) dapp.
 With the SDK, you can:
 
-<div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-    <div style={{ flex: '3' }}>
-        <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
-            <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" style={{border: '1px solid #DCDCDC', width: '100%'}} />
-        </a>
-    </div>
-    <div style={{ flex: '3' }}>
-        <ul>
-            <li><strong>Connect users' wallets</strong> to your dapp.</li>
-            <li><strong>Access user accounts</strong> (addresses).</li>
-            <li><strong>Handle connection states</strong> (connected/disconnected).</li>
-            <li><strong>Listen for account changes</strong> in real time.</li>
-            <li><strong>Manage wallet sessions</strong> (connect/disconnect).</li>
-            <li><strong>Support multiple wallet types</strong> (extension, mobile app).</li>
-        </ul>
-    </div>
-</div>
+- **Connect users' wallets** to your dapp.
+- **Access user accounts** (addresses).
+- **Handle connection states** (connected/disconnected).
+- **Listen for account changes** in real time.
+- **Manage wallet sessions** (connect/disconnect).
+- **Support multiple wallet types** (extension, mobile app).
 
+<p align="center">
+  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
+    <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
+  </a>
+</p>
 
 ## Use Wagmi
 

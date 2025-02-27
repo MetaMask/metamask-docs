@@ -1,61 +1,53 @@
-import React from "react";
-import clsx from "clsx";
-import Card, { type CardItem } from "@site/src/components/Card";
-import styles from "./cardsection.module.css";
+import clsx from 'clsx'
+import { CSSProperties, JSX, useState, useEffect } from 'react'
+import { useColorMode } from '@docusaurus/theme-common'
+import Heading from '@theme/Heading'
+import Card, { CardItem } from '@site/src/components/Card'
 
-const CardList: CardItem[] = [
-  {
-    title: "SDK",
-    subtitle: "📱 Build onchain dapps",
-    link: "/sdk",
-    description: (
-      <>
-        Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile using the SDK.
-      </>
-    ),
-  },
-  {
-    title: "Wallet API",
-    subtitle: "🌐 Integrate with the MetaMask wallet",
-    link: "/wallet",
-    description: (
-      <>
-        Connect to the MetaMask browser extension and interact with your users&apos; accounts using the Wallet API.
-      </>
-    ),
-  },
-  {
-    title: "Snaps",
-    subtitle: "🛠️ Extend the functionality of MetaMask",
-    link: "/snaps",
-    description: (
-      <>
-        Add support in MetaMask for custom networks, account types, and APIs by creating a custom Snap.
-      </>
-    ),
-  },
-  {
-    title: "Services",
-    subtitle: "📐 Build and scale your dapp",
-    link: "/services",
-    description: (
-      <>
-        Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.
-      </>
-    ),
-  },
-];
+import styles from './CardSection.module.scss'
 
-export default function CardSection(): JSX.Element {
+type CardSectionProps = {
+  cards: CardItem[]
+  colorPalette: string
+}
+
+export default function CardSection({ cards, colorPalette }: CardSectionProps): JSX.Element {
+  const { colorMode } = useColorMode()
+  const [theme, setTheme] = useState('')
+
+  useEffect(() => {
+    setTheme(colorMode)
+  }, [colorMode])
+
   return (
-    <section >
-      <div className={clsx(styles.cardSection)}>
-        <div className={clsx(styles.row, "container padding-top--sm padding-bottom--lg")}>
-          {CardList.map((props, idx) => (
-            <Card key={idx} {...props} />
-          ))}
+    <section className={styles['wrapper']}>
+      <div className="container">
+        <div className={styles['grid-wrapper']}>
+          <div className={styles['grid-col-center']}>
+            <ul
+              className={styles['grid']}
+              style={
+                colorPalette
+                  ? ({
+                      '--color-palette': `var(--developer-${colorPalette})`,
+                    } as CSSProperties)
+                  : {}
+              }
+            >
+              {cards?.length > 0 &&
+                cards.map(({ title, description, href }: CardItem, cardIndex: number) => (
+                  <Card
+                    key={cardIndex}
+                    title={title}
+                    description={description}
+                    href={href}
+                    theme={theme}
+                  />
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

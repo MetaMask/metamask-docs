@@ -18,12 +18,12 @@ The confirmation screen describes the functions and data the requested method ca
 For example, something like the following confirmation displays when you request permission to call
 the restricted method [`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts):
 
-<div class="row margin-bottom--md">
-    <div class="column">
-        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" style={{border: '1px solid #DCDCDC'}} />
+<div class="imgRow margin-bottom--md">
+    <div class="imgCol">
+        <img src={require("../assets/request-permissions.png").default} alt="Request permissions confirmation 1" class="appScreen" />
     </div>
-    <div class="column">
-        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" style={{border: '1px solid #DCDCDC'}} />
+    <div class="imgCol">
+        <img src={require("../assets/request-permissions-2.png").default} alt="Request permissions confirmation 2" class="appScreen" />
     </div>
 </div>
 
