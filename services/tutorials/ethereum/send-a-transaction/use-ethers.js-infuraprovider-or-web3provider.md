@@ -15,7 +15,7 @@ This tutorial uses the Sepolia testnet.
 ## Prerequisites
 
 - Install [MetaMask](https://metamask.io) and create an Ethereum account for testing purposes.
-- Load Sepolia ETH into your wallet from the [Infura faucet](https://www.infura.io/faucet).
+- Load Sepolia ETH into your wallet from the [MetaMask faucet](/developer-tools/faucet).
 - [Node.js and npm installed](https://nodejs.org/en/download/).
 
 You can run the following to confirm that Node and npm are installed:
@@ -251,11 +251,15 @@ This is because Node.js polyfills are not included in the latest version of Crea
 
 In the app, notice that when you try and send a transaction using Web3Provider, the app opens a MetaMask instance to transfer your funds.
 
-![](../../../images/metamask.png)
+<p align="center">
+  <img src={require("../../../images/metamask.png").default} />
+</p>
 
 If you transfer funds using the InfuraProvider, then the funds are transferred directly from your app.
 
-![](../../../images/app.png)
+<p align="center">
+  <img src={require("../../../images/app.png").default} />
+</p>
 
 ## Complete code sample
 

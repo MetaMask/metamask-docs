@@ -1,0 +1,48 @@
+label {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+input[type='email'],
+input[type='number'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+textarea,
+select {
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+
+  color: var(--general-black);
+
+  background-color: var(--general-white);
+  border: 1px solid var(--general-gray);
+  border-radius: 0.4rem;
+
+  transition:
+    color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease,
+    border-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+
+  &:focus {
+    border-color: var(--general-dark);
+  }
+}
+
+input:not([type='search']) {
+  height: 4.2rem;
+
+  &::placeholder {
+    color: var(--general-gray-dark);
+    opacity: 1;
+  }
+
+  &::-ms-placeholder {
+    color: var(--general-gray-dark);
+  }
+}
+
+textarea {
+  resize: vertical;
+  height: 8rem;
+}

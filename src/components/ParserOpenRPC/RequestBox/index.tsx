@@ -1,37 +1,39 @@
-import React, { useContext, useMemo, useState } from "react";
-import clsx from "clsx";
-import CodeBlock from "@theme/CodeBlock";
-import { MethodParam } from "@site/src/components/ParserOpenRPC/interfaces";
-import styles from "./styles.module.css";
-import global from "../global.module.css";
-import { Tooltip } from "@site/src/components/Tooltip";
-import { MetamaskProviderContext } from "@site/src/theme/Root";
-import Select from "react-dropdown-select";
+import React, { useContext, useMemo, useState } from 'react'
+import clsx from 'clsx'
+import CodeBlock from '@theme/CodeBlock'
+import { MethodParam } from '@site/src/components/ParserOpenRPC/interfaces'
+import styles from './styles.module.scss'
+import Heading from '@theme/Heading'
+import Button from '@site/src/components/elements/buttons/button'
+import { Tooltip } from '@site/src/components/Tooltip'
+import { MetamaskProviderContext } from '@site/src/theme/Root'
+import Select from 'react-dropdown-select'
 
 interface RequestBoxProps {
-  isMetamaskInstalled: boolean;
-  method: string;
-  params: MethodParam[];
-  response?: any;
-  paramsData: any;
-  openModal: () => void;
-  submitRequest: () => void;
-  isMetamaskNetwork?: boolean;
-  defExampleResponse?: any;
-  resetResponseHandle: () => void;
-  requestURL: string;
-  isLoading: boolean;
+  isMetamaskInstalled: boolean
+  method: string
+  params: MethodParam[]
+  response?: any
+  paramsData: any
+  openModal: () => void
+  submitRequest: () => void
+  colorMode: string
+  isMetamaskNetwork?: boolean
+  defExampleResponse?: any
+  resetResponseHandle: () => void
+  requestURL: string
+  isLoading: boolean
 }
 
 const langOptions = [
   {
-    value: "curl",
-    label: "CURL"
+    value: 'curl',
+    label: 'CURL',
   },
   {
-    value: "wss",
-    label: "WSS"
-  }
+    value: 'wss',
+    label: 'WSS',
+  },
 ]
 
 export default function RequestBox({
@@ -42,133 +44,165 @@ export default function RequestBox({
   paramsData,
   openModal,
   submitRequest,
+  colorMode,
   isMetamaskNetwork = false,
   defExampleResponse,
   resetResponseHandle,
-  requestURL = "",
+  requestURL = '',
   isLoading,
 }: RequestBoxProps) {
-  const { userAPIKey, userEncPublicKey } = useContext(MetamaskProviderContext);
-  const [currentLang, setCurrentLang] = useState(langOptions[0]);
+  const { userAPIKey, userEncPublicKey } = useContext(MetamaskProviderContext)
+  const [currentLang, setCurrentLang] = useState(langOptions[0])
   const exampleRequest = useMemo(() => {
-    const preparedParams = JSON.stringify(paramsData, null, 2);
-    const preparedShellParams = JSON.stringify(paramsData);
-    const API_KEY = userAPIKey ? userAPIKey : "<YOUR-API-KEY>";
+    const preparedParams = JSON.stringify(paramsData, null, 2)
+    const preparedShellParams = JSON.stringify(paramsData)
+    const API_KEY = userAPIKey ? userAPIKey : '<YOUR-API-KEY>'
     if (isMetamaskNetwork) {
-      return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`;
+      return `await window.ethereum.request({\n "method": "${method}",\n "params": ${preparedParams.replace(/"([^"]+)":/g, '$1:')},\n});`
     }
-    if (currentLang.value === "wss") {
-      return `wscat -c ${requestURL.replace("https", "wss")}${API_KEY} -x '{"jsonrpc":"2.0","method":"${method}","params": ${preparedShellParams},"id":1}'`
+    if (currentLang.value === 'wss') {
+      return `wscat -c ${requestURL.replace('https', 'wss')}${API_KEY} -x '{"jsonrpc":"2.0","method":"${method}","params": ${preparedShellParams},"id":1}'`
     }
-    return `curl ${requestURL}${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`;
-  }, [userAPIKey, method, paramsData, currentLang]);
+    return `curl ${requestURL}${API_KEY} \\\n  -X POST \\\n  -H "Content-Type: application/json" \\\n  -d '{\n    "jsonrpc": "2.0",\n    "method": "${method}",\n    "params": ${preparedShellParams},\n    "id": 1\n  }'`
+  }, [userAPIKey, method, paramsData, currentLang])
 
   const exampleResponse = useMemo(() => {
     if (defExampleResponse && response === undefined) {
-      return JSON.stringify(
-        defExampleResponse === "null" ? null : defExampleResponse,
-        null,
-        2
-      );
+      return JSON.stringify(defExampleResponse === 'null' ? null : defExampleResponse, null, 2)
     }
     if (response !== undefined) {
-      return JSON.stringify(response, null, 2);
+      return JSON.stringify(response, null, 2)
     }
     return false
-  }, [response, defExampleResponse]);
+  }, [response, defExampleResponse])
 
-  const methodsWithRequiredWalletConnection = ["eth_accounts", "eth_sendTransaction", "personal_sign", "eth_signTypedData_v4", "eth_getEncryptionPublicKey"];
-  const isRunAndCustomizeRequestDisabled = isMetamaskNetwork && methodsWithRequiredWalletConnection.includes(method) ?
-    !isMetamaskInstalled :
-    false;
+  const methodsWithRequiredWalletConnection = [
+    'eth_accounts',
+    'eth_sendTransaction',
+    'personal_sign',
+    'eth_signTypedData_v4',
+    'eth_getEncryptionPublicKey',
+  ]
 
-  const isMetamaskDecryptDisabled = isMetamaskNetwork && !userEncPublicKey && method === "eth_decrypt";
+  const isMetamaskDecryptDisabled =
+    isMetamaskNetwork && !userEncPublicKey && method === 'eth_decrypt'
+
+  const isRunAndCustomizeRequestDisabled =
+    isMetamaskNetwork && methodsWithRequiredWalletConnection.includes(method)
+      ? !isMetamaskInstalled
+      : false
 
   const runRequestButton = (
-    <button
-      className={clsx(global.primaryBtn, styles.runBtnWrap)}
+    <Button
+      as="button"
+      type={'primary'}
+      icon={'arrow-right'}
+      label={'Run request'}
       disabled={isRunAndCustomizeRequestDisabled || isLoading || isMetamaskDecryptDisabled}
       onClick={submitRequest}
       data-test-id="run-request"
-    >
-      {isLoading ? <span className={styles.loader}></span> : "Run request"}
-    </button>
-  );
+      style={
+        colorMode !== 'dark'
+          ? {
+              '--button-color-hover': 'var(--general-black)',
+              '--button-text-color-hover': 'var(--general-white)',
+            }
+          : {}
+      }
+    />
+  )
 
   return (
     <>
       <div className={styles.cardWrapper}>
-        <div className={clsx(styles.cardHeader, !isMetamaskNetwork && styles.addIndent)}>
-          <strong className={styles.cardHeading}>Request</strong>
+        <Heading
+          as="h3"
+          className={clsx(
+            clsx(styles.cardHeader, !isMetamaskNetwork && styles.addIndent),
+            'type-paragraph-m font-primary font-weight-medium'
+          )}>
+          Request
           {!isMetamaskNetwork && (
             <Select
-              className={"select-lang"}
+              className={'select-lang'}
               options={langOptions}
               values={[currentLang]}
               multi={false}
               searchable={false}
-              onChange={(value) => {
-                setCurrentLang(value[0]);
+              onChange={value => {
+                setCurrentLang(value[0])
               }}
             />
           )}
-        </div>
+        </Heading>
         <div className={styles.codeWrapper}>
           <CodeBlock
-            language={isMetamaskNetwork ? "javascript" : "shell"}
-            className="margin-bottom--none"
-          >
+            language={isMetamaskNetwork ? 'javascript' : 'shell'}
+            className="margin-bottom--none">
             {exampleRequest}
           </CodeBlock>
         </div>
-        <div className={styles.cardFooter}>
+        <div className={clsx(styles.cardFooter, params.length > 0 && styles['cardFooter-btns'])}>
           {params.length > 0 && (
-            <button
-              className={clsx(global.linkBtn, "margin-right--md")}
+            <Button
+              as="button"
+              type={'tertiary'}
+              label={'Customize request'}
               disabled={isRunAndCustomizeRequestDisabled || isMetamaskDecryptDisabled}
               onClick={openModal}
               data-test-id="customize-request"
-            >
-              Customize request
-            </button>
+              style={
+                colorMode === 'dark'
+                  ? {
+                      '--button-color': 'var(--general-white)',
+                      '--button-text-color': 'var(--general-white)',
+                      '--button-color-hover': 'var(--general-white)',
+                      '--button-text-color-hover': 'var(--general-black)',
+                    }
+                  : {
+                      '--button-color-hover': 'var(--general-black)',
+                      '--button-text-color-hover': 'var(--general-white)',
+                    }
+              }
+            />
           )}
-          {
-            isRunAndCustomizeRequestDisabled || isMetamaskDecryptDisabled ?
-              (<Tooltip message={
+          {isRunAndCustomizeRequestDisabled || isMetamaskDecryptDisabled ? (
+            <Tooltip
+              message={
                 isMetamaskDecryptDisabled
-                ? "Please connect your MetaMask wallet first and run eth_getEncryptionPublicKey"
-                : "Before you can run or customize this request, please connect your MetaMask wallet first."
+                  ? 'Please connect your MetaMask wallet first and run eth_getEncryptionPublicKey'
+                  : 'Before you can run or customize this request, please connect your MetaMask wallet first.'
               }>
-                {runRequestButton}
-              </Tooltip>) :
-              runRequestButton
-          }
+              {runRequestButton}
+            </Tooltip>
+          ) : (
+            runRequestButton
+          )}
         </div>
       </div>
       {exampleResponse && (
         <div className={styles.cardWrapper}>
-          <div className={styles.cardHeader}>
-            <strong className={styles.cardHeading}>
-              {defExampleResponse && response === undefined ? "Example response" : "Response"}
-            </strong>
+          <Heading
+            as="h3"
+            className={clsx(styles.cardHeader, 'type-paragraph-m font-primary font-weight-medium')}>
+            {defExampleResponse && response === undefined ? 'Example response' : 'Response'}
             {defExampleResponse && response !== undefined && (
               <Tooltip message="Reset response">
-                <button
-                  className={styles.resetResponseBtn}
-                  onClick={resetResponseHandle}
-                >
+                <button className={styles.resetResponseBtn} onClick={resetResponseHandle}>
                   <img src="/img/icons/reset-icon.svg" />
                 </button>
               </Tooltip>
             )}
-          </div>
+          </Heading>
           <div>
-            <CodeBlock language="javascript" className={clsx(styles.responseBlock, "margin-bottom--none")}>
+            <CodeBlock
+              language="javascript"
+              className={clsx(styles.responseBlock, 'margin-bottom--none')}>
               {exampleResponse}
             </CodeBlock>
           </div>
         </div>
       )}
     </>
-  );
+  )
 }

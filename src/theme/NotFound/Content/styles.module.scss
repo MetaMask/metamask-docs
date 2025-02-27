@@ -1,0 +1,17 @@
+.notFound {
+  --ifm-h1-vertical-rhythm-bottom: 2.35;
+  padding: 6rem 0 8rem;
+}
+
+.title {
+  margin-bottom: calc(var(--ifm-h1-vertical-rhythm-bottom) * var(--ifm-leading));
+}
+
+.description {
+  color: var(--general-gray-dark);
+  margin-bottom: var(--ifm-leading);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}

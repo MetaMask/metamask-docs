@@ -3,7 +3,6 @@ sidebar_label: Introduction
 sidebar_position: 1
 ---
 
-import CodeTerminal from "@site/src/components/CodeTerminal/CodeTerminal.jsx";
 import SectionAPIs from "@site/src/components/Sections/SectionAPIs.jsx";
 import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 

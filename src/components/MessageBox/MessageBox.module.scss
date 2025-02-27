@@ -1,0 +1,24 @@
+.box {
+  margin-bottom: 2.4rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  > span {
+    display: flex;
+    width: 2rem;
+    margin-right: 1.2rem;
+  }
+}
+
+.desc {
+  margin-top: 0.8rem;
+
+  a {
+    font-weight: 500;
+    text-decoration: underline currentColor 0.1rem !important;
+    text-underline-offset: 0.4rem;
+  }
+}

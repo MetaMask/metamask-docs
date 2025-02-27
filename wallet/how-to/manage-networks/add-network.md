@@ -20,12 +20,12 @@ These methods are specified by [EIP-3085](https://eips.ethereum.org/EIPS/eip-308
 
 The confirmations look like the following:
 
-<div class="row">
-    <div class="column">
-        <img src={require("../../assets/add-network.png").default} alt="Add network confirmation" style={{border: '1px solid #DCDCDC'}} />
+<div class="imgRow">
+    <div class="imgCol">
+        <img src={require("../../assets/add-network.png").default} alt="Add network confirmation" class="appScreen" />
     </div>
-    <div class="column">
-        <img src={require("../../assets/switch-network.png").default} alt="Switch network confirmation" style={{border: '1px solid #DCDCDC'}} />
+    <div class="imgCol">
+        <img src={require("../../assets/switch-network.png").default} alt="Switch network confirmation" class="appScreen" />
     </div>
 </div>
 

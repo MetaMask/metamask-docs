@@ -1,0 +1,153 @@
+.paramWrapper {
+  border-bottom: 1px solid var(--general-gray-light);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.borderWrapper {
+  border-bottom: 1px solid var(--general-gray-light);
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.schemaWrapper {
+  padding: 1.6rem 0;
+}
+
+.schemaHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.textAltColor {
+  color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.textErrorColor {
+  font-size: 1.2rem;
+  color: var(--error);
+}
+
+.description {
+  color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.paramItemWrapper {
+  padding: 0 1.6rem;
+
+  .borderTopLine {
+    border-top: 1px solid transparent;
+  }
+}
+
+.paramItemWrapper:not(:first-child) {
+  border-top: 1px solid var(--general-gray-light);
+}
+
+.borderTopLine {
+  border-top: 1px solid var(--general-gray-light);
+}
+
+.borderTopLine:first-child {
+  border-top: 1px solid transparent;
+
+  html[data-theme='dark'] & {
+    border-top: 1px solid transparent !important;
+  }
+}
+
+.borderBottomLine {
+  border-bottom: 1px solid var(--general-gray-light);
+}
+
+.enumWrapper {
+  border: 1px solid var(--general-gray-light);
+  margin-bottom: 2rem;
+}
+
+.enumItem {
+  border-top: 1px solid var(--general-gray-light);
+  padding: 1.6rem;
+}
+
+.enumHeader {
+  padding: 1.6rem;
+}
+
+.enumTitle {
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0.4rem;
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.4rem;
+}
+
+.heading1 {
+  font-size: 2.4rem;
+  line-height: 133.333%;
+}
+
+.heading2 {
+  font-size: 2rem;
+  line-height: 140%;
+}
+
+.headingSmall {
+  font-size: 1.8rem;
+}
+
+.tagList {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  height: 2.6rem;
+  font-weight: 500;
+  line-height: 1.1;
+  padding: 0.7rem 0.9rem;
+
+  line-height: 0.8;
+  color: var(--general-black);
+
+  background: var(--color-palette);
+
+  @include bp('tablet') {
+    height: 2.6rem;
+    line-height: 1.15;
+  }
+
+  @include bp('desktop') {
+    height: 2.3rem;
+    line-height: 0.85;
+  }
+}
+
+html[data-theme='dark'] {
+  .paramWrapper,
+  .borderWrapper,
+  .enumWrapper,
+  .enumItem,
+  .enumTitle,
+  .borderTopLine,
+  .borderBottomLine,
+  .paramItemWrapper:not(:first-child) {
+    border-color: var(--general-black-light);
+  }
+}

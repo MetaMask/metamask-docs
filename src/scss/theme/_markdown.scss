@@ -1,0 +1,211 @@
+.markdown {
+  --ifm-h1-vertical-rhythm-top: 3;
+  --ifm-h2-vertical-rhythm-top: 3;
+  --ifm-h3-vertical-rhythm-top: 2.5;
+  --ifm-heading-vertical-rhythm-top: 2.75;
+
+  --ifm-h1-vertical-rhythm-bottom: 2.35;
+  --ifm-heading-vertical-rhythm-bottom: 1;
+
+  padding: 2.4rem 0 0 0;
+
+  @include bp('desktop') {
+    padding: 0;
+  }
+
+  strong,
+  b {
+    font-weight: 500;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  /* Links */
+  > p,
+  > span,
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
+  > ul,
+  > ol,
+  .cards {
+    a {
+      color: var(--ifm-link-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+      transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--ifm-link-hover-color);
+        text-decoration: underline;
+        text-decoration-color: var(--ifm-link-hover-color);
+        text-decoration-thickness: 0.1rem;
+        text-underline-offset: 0.4rem;
+      }
+    }
+  }
+
+  > ol {
+    list-style: decimal;
+    margin-left: 2rem;
+
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+
+  > ol ol {
+    margin-top: 1rem;
+
+    li {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  > ul {
+    margin-left: 2rem;
+    list-style-type: disc;
+    list-style-position: outside;
+
+    li {
+      margin-bottom: 1rem;
+      ol,
+      ul {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  ul ul {
+    list-style-type: circle;
+    margin-left: 1.6rem;
+  }
+
+  ul ul ul {
+    list-style-type: square;
+  }
+
+  code {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  p
+    + .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module {
+    margin-top: 1rem;
+  }
+
+  h1 > code,
+  h2 > code,
+  h3 > code,
+  h4 > code,
+  h5 > code,
+  p > code,
+  ul li > code,
+  ol li > code,
+  a > code,
+  table > code,
+  span > code {
+    @extend .font-mm-sans-mono;
+    font-size: 80%;
+  }
+
+  table {
+    font-size: 1.6rem;
+    line-height: 150%;
+    border-collapse: collapse;
+    margin-top: calc(var(--ifm-heading-vertical-rhythm-top) * var(--ifm-leading));
+
+    thead tr {
+      border-bottom: 1px solid;
+    }
+
+    th {
+      font-weight: 500;
+    }
+
+    th,
+    td {
+      vertical-align: middle;
+      text-align: left;
+      padding: 1.2rem;
+    }
+  }
+
+  details {
+    @extend .type-paragraph-m;
+    box-shadow: none;
+    padding: 2rem;
+    background-color: var(--ifm-color-secondary-contrast-background);
+    border: none;
+    color: var(--ifm-heading-color) !important;
+    margin: calc(var(--ifm-leading) * 2) 0;
+    font-weight: 500;
+
+    ul {
+      margin-left: 0;
+      list-style-type: none;
+
+      li {
+        margin-bottom: 1rem;
+
+        &::before {
+          content: '\2022';
+          font-size: 3rem;
+          padding-right: 0.6rem;
+          position: relative;
+          top: 0.1rem;
+          line-height: 0;
+        }
+
+        ol,
+        ul {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+      border-top: 1px solid var(--ifm-code-background);
+      margin-top: 2rem;
+      padding-top: 2rem;
+      font-weight: 400 !important;
+    }
+
+    code {
+      @extend .type-paragraph-s;
+      color: var(--ifm-heading-color) !important;
+      background: var(--ifm-code-background);
+
+      [data-theme='dark'] & {
+        background-color: var(--general-gray-dark);
+      }
+    }
+
+    table tr:nth-child(2n) {
+      background-color: var(--ifm-table-stripe-background);
+    }
+  }
+
+  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary {
+    padding-left: 1.6rem;
+    font-family: var(--ifm-heading-font-family);
+    &::before {
+      left: 0;
+      top: 0.7rem;
+      border-width: 0.5rem;
+      border-style: solid;
+      border-color: transparent transparent transparent var(--ifm-heading-color);
+    }
+  }
+}
