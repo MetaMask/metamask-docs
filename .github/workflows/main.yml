@@ -46,6 +46,12 @@ jobs:
       SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
       GF_SURVEY_KEY: ${{ secrets.GF_SURVEY_KEY }}
 
+  sonarcloud:
+    name: Sonarcloud
+    uses: ./.github/workflows/sonarcloud.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   all-jobs-completed:
     name: All jobs completed
     runs-on: ubuntu-latest
@@ -54,6 +60,7 @@ jobs:
       - build
       - lint
       - case
+      - sonarcloud
     outputs:
       PASSED: ${{ steps.set-output.outputs.PASSED }}
     steps:
