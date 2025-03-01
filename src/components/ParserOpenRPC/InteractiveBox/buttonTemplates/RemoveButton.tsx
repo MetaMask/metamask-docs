@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.css";
+import styles from "@site/src/components/ParserOpenRPC/InteractiveBox/styles.module.scss";
 
 export const RemoveButton = (props) => (
   <button

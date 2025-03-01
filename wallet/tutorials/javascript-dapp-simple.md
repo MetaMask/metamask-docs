@@ -219,7 +219,7 @@ Navigate to the local server URL to view the live dapp.
 Something like the following displays:
 
 <p align="center">
-<img src={require("../assets/tutorials/beginner-tutorial/enable-button.png").default} alt="Enable button" width="500px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../assets/tutorials/beginner-tutorial/enable-button.png").default} alt="Enable button" width="500px" class="appScreen" />
 </p>
 
 When you select the **Enable Ethereum** button, you are prompted to connect to MetaMask.

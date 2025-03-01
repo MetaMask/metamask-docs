@@ -1,16 +1,15 @@
-:root[data-theme="dark"] {
-  --accordion-background: #24272a;
+:root[data-theme='dark'] {
+  --accordion-background: #393d46;
   --accordion-border: rgba(132, 140, 150, 0.16);
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --accordion-background: #ffffff;
   --accordion-border: rgba(187, 192, 197, 0.4);
 }
 
 .accordion {
   background: var(--accordion-background);
-  border: 1px solid var(--accordion-border);
   border-radius: 8px;
   margin-bottom: 24px;
 

@@ -24,7 +24,7 @@ curl "https://ipfs.infura.io:5001/api/v0/version?number=<value>&commit=<value>&r
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/version" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET"
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>"
 ```
 
   </TabItem>

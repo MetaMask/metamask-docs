@@ -1,0 +1,12 @@
+.subtitle {
+  display: none;
+
+  @include bp('desktop') {
+    display: block;
+    margin-bottom: 1.3rem;
+  }
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}

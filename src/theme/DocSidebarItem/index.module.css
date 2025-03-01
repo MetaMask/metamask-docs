@@ -1,10 +1,19 @@
 .flaskOnly :global(a.menu__link::after),
 .flaskOnly :global(.menu__list-item-collapsible a.menu__link::after) {
-  content: "Flask";
+  content: 'Flask';
   margin-left: 0.5em;
   background-color: var(--mm-flask-background-color);
   color: var(--mm-flask-color);
-  border-radius: 4px;
-  padding: 2px 4px;
+  border-radius: 0;
+  margin-left: 1rem;
+  padding: 0.6rem 0.9rem;
+  background-color: var(--ifm-color-primary-light);
+  clip-path: polygon(0% 30%, 15% 0%, 100% 0, 100% 70%, 85% 100%, 0 100%);
   transform: none;
+}
+
+[data-theme='dark'] .flaskOnly > a.menu__link::after,
+[data-theme='dark'] .flaskOnly > .menu__list-item-collapsible > a.menu__link::after {
+  background: var(--developer-purple-dark);
+  color: var(--developer-purple-light);
 }

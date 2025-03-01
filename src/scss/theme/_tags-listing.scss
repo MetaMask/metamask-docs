@@ -1,0 +1,108 @@
+.main-wrapper {
+  .docs-tags-doc-list-page & {
+    h1 {
+      padding: 3rem 0 2rem;
+
+      @include bp('tablet') {
+        padding: 4.5rem 0 3rem;
+      }
+    }
+
+    header {
+      a {
+        color: var(--search-item-link);
+        text-decoration: underline;
+        text-decoration-thickness: 0.1rem;
+        text-underline-offset: 0.4rem;
+        text-decoration-color: currentColor;
+
+        &:hover {
+          color: var(--search-item-link-hover);
+        }
+      }
+    }
+
+    article {
+      padding: 2rem 0;
+      margin: 0 !important;
+      border-bottom: 1px solid var(--ifm-toc-border-color);
+
+      h2 {
+        color: inherit;
+        @extend h3;
+      }
+
+      a {
+        &:hover {
+          text-decoration: none !important;
+
+          color: var(--search-item-link-hover);
+        }
+      }
+
+      p {
+        font-size: 1.6rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .docs-tags-list-page & {
+    h1 {
+      padding: 3rem 0 2rem;
+
+      @include bp('tablet') {
+        padding: 4.5rem 0 3rem;
+      }
+    }
+
+    h2 {
+      color: inherit;
+      @extend h3;
+    }
+
+    ul {
+      li {
+        margin: 0;
+      }
+
+      a {
+        font-size: 1.2rem;
+        line-height: 0;
+        font-weight: 500;
+        color: var(--tag-text-color);
+        padding: 0.5rem 0.9rem;
+        margin: 0;
+        border: 1px solid var(--tag-border-color);
+        background-color: var(--tag-background-color);
+        transition:
+          border var(--ifm-transition-fast),
+          color var(--ifm-transition-fast),
+          background var(--ifm-transition-fast);
+        border-radius: var(--ifm-global-radius);
+
+        &::before,
+        &::after {
+          content: none !important;
+        }
+
+        &:hover {
+          text-decoration: none !important;
+          text-decoration: none;
+          color: var(--tag-text-color-hover);
+          background-color: var(--tag-background-color-hover);
+          border: 1px solid var(--tag-background-color-hover);
+        }
+
+        span {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    hr {
+      background-color: var(--ifm-toc-border-color);
+      margin: 2.6rem 0;
+    }
+  }
+}

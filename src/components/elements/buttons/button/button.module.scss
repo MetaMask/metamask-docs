@@ -1,0 +1,571 @@
+.icon {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1rem;
+  height: 1rem;
+
+  transition: transform var(--spring-duration) var(--spring-ease);
+
+  .label-big & {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &--adjust {
+    margin-bottom: 0.1rem;
+  }
+
+  svg {
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+  }
+
+  .secondary & {
+    color: var(--button-text-color);
+  }
+
+  .secondary .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .primary & {
+    color: var(--button-text-color);
+  }
+
+  .primary .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary & {
+    color: var(--button-text-color);
+  }
+
+  .tertiary .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary:focus & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary:focus .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+}
+
+.icon-hover {
+  position: absolute;
+  transform: translate(0, 290%);
+
+  &.icon-hover-oblique {
+    transform: translate(-290%, 290%);
+  }
+
+  &.icon-hover-right {
+    transform: translate(-290%, 0);
+
+    .is-extra-large & {
+      transform: translate(-390%, 0);
+    }
+  }
+
+  &.icon-hover-left {
+    transform: translate(290%, 0);
+  }
+
+  &.icon-hover-down {
+    transform: translate(0, -290%);
+  }
+
+  .secondary & {
+    color: var(--button-text-color-hover);
+  }
+
+  .primary & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary:focus & {
+    color: var(--button-text-color);
+  }
+
+  .primary:hover:not(:focus, button) & {
+    color: var(--button-text-color-hover);
+  }
+}
+
+.button {
+  --spring-duration: calc(var(--motion) * var(--motion-speed));
+  --bg-duration: calc(var(--motion) * var(--motion-speed));
+
+  cursor: pointer;
+
+  position: relative;
+
+  display: inline-flex;
+  flex-shrink: 0;
+
+  width: auto;
+
+  text-decoration: none;
+
+  border-radius: 10rem;
+
+  mask-image: radial-gradient(white, black);
+
+  &:before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    transform: scale(0);
+
+    opacity: 0;
+    background: var(--button-color-hover);
+    border-radius: 10rem;
+    box-shadow: inset 0 0 0 1px var(--button-color-hover);
+  }
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10rem;
+  }
+
+  &:not(button):hover {
+    text-decoration: none;
+
+    &:before {
+      transform: scale(1.03);
+      opacity: 1;
+      transition:
+        transform var(--bg-duration) $gentle-ease,
+        opacity calc(var(--bg-duration) * 0.5) $gentle-ease;
+    }
+
+    &.no-label {
+      .icon {
+        transform: translate(0, -290%);
+
+        &.icon-oblique {
+          transform: translate(290%, -290%);
+        }
+
+        &.icon-right {
+          transform: translate(290%, 0);
+        }
+
+        &.icon-left {
+          transform: translate(-290%, 0);
+        }
+
+        &.icon-down {
+          transform: translate(0, 290%);
+        }
+      }
+
+      .icon-hover {
+        transform: translate(0, 0);
+      }
+
+      &:before {
+        transform: scale(1.01);
+        opacity: 1;
+      }
+
+      &.is-extra-large {
+        .icon-right {
+          transform: translate(390%, 0);
+        }
+      }
+    }
+  }
+
+  &.no-label {
+    &:before {
+      opacity: 1;
+    }
+  }
+
+  &.primary {
+    --button-color: var(--general-black);
+    --button-color-hover: var(--general-white);
+    --button-text-color: var(--general-white);
+    --button-text-color-hover: var(--general-black);
+  }
+
+  &.secondary {
+    --button-color: var(--general-white);
+    --button-color-hover: var(--general-black);
+    --button-text-color: var(--general-black);
+    --button-text-color-hover: var(--general-white);
+  }
+
+  &.tertiary {
+    --button-color: var(--general-black);
+    --button-color-hover: var(--general-black);
+    --button-text-color: var(--general-black);
+    --button-text-color-hover: var(--general-white);
+  }
+}
+
+button.button {
+  @include hover {
+    text-decoration: none;
+
+    &:before {
+      transform: scale(1.03);
+      opacity: 1;
+      transition:
+        transform var(--bg-duration) $gentle-ease,
+        opacity calc(var(--bg-duration) * 0.5) $gentle-ease;
+    }
+
+    &.no-label {
+      .icon {
+        transform: translate(0, -290%);
+
+        &.icon-oblique {
+          transform: translate(290%, -290%);
+        }
+
+        &.icon-right {
+          transform: translate(290%, 0);
+        }
+
+        &.icon-left {
+          transform: translate(-290%, 0);
+        }
+
+        &.icon-down {
+          transform: translate(0, 290%);
+        }
+      }
+
+      .icon-hover {
+        transform: translate(0, 0);
+      }
+
+      &:before {
+        transform: scale(1.01);
+        opacity: 1;
+      }
+    }
+
+    &:not(.no-label, .is-large) .button-main {
+      transform: translateY(-290%);
+    }
+
+    &.is-large .button-main {
+      transform: translateY(-250%);
+    }
+
+    &.primary:not(:focus) .icon-hover {
+      color: var(--button-text-color-hover);
+    }
+
+    .button-hover {
+      transform: translateY(0);
+      opacity: 1;
+      transition:
+        transform var(--spring-duration) var(--spring-ease),
+        opacity calc(var(--spring-duration) * 0.5) var(--spring-ease)
+          calc(var(--spring-duration) * 0.15);
+    }
+  }
+}
+
+.button-holder {
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 4.2rem;
+  padding: 1.6rem 2.4rem 1.5rem;
+
+  font-size: 1.4rem;
+
+  border-radius: 10rem;
+
+  &.label-big {
+    gap: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .is-large & {
+    height: 5.6rem;
+    padding: 2.3rem 3rem;
+  }
+
+  .is-extra-large & {
+    width: 4.2rem;
+    height: 4.2rem;
+
+    @include bp('desktop') {
+      width: 5.2rem;
+      height: 5.2rem;
+    }
+  }
+
+  .no-label & {
+    padding: 1.6rem;
+  }
+
+  .has-logo & {
+    padding: 1.6rem 3rem 1.5rem 1.4rem;
+  }
+
+  .has-logo.has-icon & {
+    padding-right: 2.4rem;
+  }
+}
+
+.button-main {
+  z-index: 2;
+
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  transition: transform var(--spring-duration) var(--spring-ease);
+
+  .label-big & {
+    gap: 1rem;
+  }
+
+  .button:not(.no-label, .is-large, button):hover & {
+    transform: translateY(-290%);
+  }
+
+  .button:not(button).is-large:hover & {
+    transform: translateY(-250%);
+  }
+}
+
+.button-hover {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  transform: translateY(290%);
+
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: inherit;
+
+  transition:
+    transform var(--spring-duration) var(--spring-ease),
+    opacity calc(var(--spring-duration) * 0.5) var(--spring-ease);
+
+  .label-big & {
+    gap: 1rem;
+  }
+
+  .button.is-large & {
+    transform: translateY(290%);
+    opacity: 0;
+  }
+
+  .button.is-extra-large & {
+    transform: translateY(390%);
+    opacity: 0;
+  }
+
+  .button:not(button):hover & {
+    transform: translateY(0);
+    opacity: 1;
+    transition:
+      transform var(--spring-duration) var(--spring-ease),
+      opacity calc(var(--spring-duration) * 0.5) var(--spring-ease)
+        calc(var(--spring-duration) * 0.15);
+  }
+}
+
+.label {
+  position: relative;
+
+  font-size: inherit;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+
+  .has-logo & {
+    flex-grow: 1;
+  }
+
+  .primary &,
+  .secondary &,
+  .tertiary & {
+    color: var(--button-text-color);
+  }
+
+  .primary .button-hover &,
+  .secondary .button-hover &,
+  .tertiary .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .primary:active & {
+    color: var(--button-text-color);
+  }
+
+  .primary:active .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary:active .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  .tertiary:focus .button-hover & {
+    color: var(--button-text-color-hover);
+  }
+}
+
+.label-small {
+  min-width: 12.2rem;
+  font-size: 1.2rem;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-right: 0.6rem;
+
+  svg {
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo-fill-color & {
+    color: var(--button-text-color);
+  }
+
+  .button:not(button).logo-fill-color:hover & {
+    color: var(--button-text-color-hover);
+  }
+
+  button.button {
+    @include hover {
+      &.logo-fill-color {
+        color: var(--button-text-color-hover);
+      }
+    }
+  }
+}
+
+.primary {
+  background: var(--button-color);
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+    cursor: unset;
+    opacity: 0.3;
+  }
+
+  &:focus {
+    &:after {
+      outline: 0.1rem solid var(--button-color);
+      outline-offset: 0.2rem;
+    }
+  }
+
+  &:active {
+    background: var(--button-color);
+
+    &:after {
+      outline: none;
+    }
+  }
+}
+
+.secondary {
+  background: var(--button-color);
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+    cursor: unset;
+    opacity: 0.3;
+  }
+
+  &:focus {
+    &:after {
+      outline: 0.1rem solid var(--button-color);
+      outline-offset: 0.2rem;
+    }
+  }
+
+  &:active {
+    color: var(--button-text-color-hover);
+
+    &:after {
+      outline: none;
+    }
+  }
+}
+
+.tertiary {
+  &:after {
+    outline: 0.15rem solid var(--button-color);
+    outline-offset: -0.15rem;
+  }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+    cursor: unset;
+    opacity: 0.3;
+  }
+
+  &:focus {
+    background: var(--button-color-hover);
+
+    .label {
+      color: var(--button-text-color-hover);
+    }
+
+    &:after {
+      outline-color: var(--button-text-color-hover);
+    }
+  }
+}

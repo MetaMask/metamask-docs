@@ -192,7 +192,7 @@ To get a gas fee estimate, use the public API endpoint provided by
 [Open Source Ethereum Explorer](https://beaconcha.in/).
 Add the following `getFees()` function to the beginning of the `/packages/snap/src/index.tsx` file:
 
-```typescript title="index.ts"
+```typescript title="index.tsx"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
 import { Box, Text } from "@metamask/snaps-sdk/jsx"
 
@@ -204,7 +204,7 @@ async function getFees() {
 
 Next, add the `Copyable` component to the second import of the file:
 
-```typescript title="index.ts"
+```typescript title="index.tsx"
 import type { OnRpcRequestHandler } from "@metamask/snaps-sdk"
 import { Box, Text, Copyable } from "@metamask/snaps-sdk/jsx"
 ```
@@ -235,7 +235,7 @@ case "hello":
   });
 ```
 
-### 5. Build and test the Snap
+### 5. Build and test your Snap
 
 Complete the following steps to build and test your Snap:
 
@@ -253,7 +253,7 @@ You can now view site in the browser.
 Open [`localhost:8000`](http://localhost:8000/) in your browser (with MetaMask Flask installed).
 A page like the following displays:
 
-<img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/template-snap.png').default} alt="Test dapp with template Snap" class="appScreen" />
 
 This is a template test dapp for installing and testing your Snap.
 
@@ -271,7 +271,7 @@ Next, select **Confirm** > **OK**.
 Select the **Send message** button (or **Estimate gas** button, if you followed Step 2). A dialog prompt displays with the response from the gas fee API:
 
 <p align="center">
-<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" style={{border: '1px solid #DCDCDC'}} />
+<img src={require('../../assets/gas-estimation.png').default} alt="Gas estimation dialog" width="400px" class="appScreen" />
 </p>
 
 Congratulations, you have integrated a public API into MetaMask and displayed real-time gas fee estimates.

@@ -1,0 +1,59 @@
+.tabList {
+  margin-bottom: var(--ifm-leading);
+  padding: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-500);
+  background-color: var(--prism-background-color);
+  overflow-x: auto;
+  margin-bottom: 0;
+}
+
+.tabItem {
+  margin-top: 0 !important;
+  border: none;
+  border-radius: 0.4rem;
+  color: var(--general-white);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1;
+
+  &[aria-selected='true'] {
+    background: var(--general-gray-dark);
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: var(--general-gray-dark);
+  }
+}
+
+[role='tabpanel'] {
+  p {
+    padding: 1.6rem;
+  }
+}
+
+.flaskOnly::after {
+  content: 'Flask';
+  margin-left: 0.5em;
+  background-color: var(--ifm-color-primary-light);
+  color: var(--mm-flask-color);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.8em;
+}
+
+.deprecated::after {
+  content: 'deprecated';
+  margin-left: 0.5em;
+  background-color: var(--general-gray);
+  color: var(--general-gray-dark);
+  padding: 2px 4px;
+  font-size: 0.8em;
+  border-radius: 0.2rem;
+}

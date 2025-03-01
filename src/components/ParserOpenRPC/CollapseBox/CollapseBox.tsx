@@ -1,56 +1,46 @@
-import clsx from "clsx";
-import {
-  useCollapsible,
-  Collapsible,
-  useColorMode,
-} from "@docusaurus/theme-common";
-import styles from "./styles.module.css";
-import React, { useEffect } from "react";
+import clsx from 'clsx'
+import { useEffect } from 'react'
+import { useCollapsible, Collapsible, useColorMode } from '@docusaurus/theme-common'
+
+import ChevronDown from '@site/static/img/icons/chevron-down.svg'
+
+import styles from './styles.module.scss'
 
 interface CollapseBoxProps {
-  children: JSX.Element;
-  isInitCollapsed?: boolean;
+  children: JSX.Element
+  isInitCollapsed?: boolean
 }
 
-export const CollapseBox = ({
-  children,
-  isInitCollapsed = true,
-}: CollapseBoxProps) => {
-  const { collapsed, setCollapsed } = useCollapsible({ initialState: isInitCollapsed });
-  const { colorMode } = useColorMode();
+export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxProps) => {
+  const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true })
   useEffect(() => {
-    setCollapsed(isInitCollapsed);
-  }, [isInitCollapsed]);
+    if (isInitCollapsed) {
+      toggleCollapsed()
+    }
+  }, [isInitCollapsed])
   return (
-    <div
-      className={clsx(
-        styles.collapseWrapper,
-        !collapsed && styles.collapsedWrapperView,
-      )}
-    >
+    <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <button
-        className={clsx(
-          styles.collapseBtn,
-          !collapsed && styles.collapsedBtnView,
-          colorMode === "light" && styles.collapsedBtnLightHover,
+        onClick={() => toggleCollapsed()}
+        className={clsx(styles.buttonToggle, 'type-paragraph-m font-primary font-weight-medium-')}>
+        {collapsed ? 'Show child attributes' : 'Hide child attributes'}
+
+        {collapsed ? (
+          <span className={styles.arrowDown}>
+            <ChevronDown />
+          </span>
+        ) : (
+          <span className={styles.arrowUp}>
+            <ChevronDown />
+          </span>
         )}
-        onClick={() => setCollapsed((expanded) => !expanded)}
-      >
-        {collapsed ? "Show child attributes" : "Hide child attributes"}
-        <div
-          className={clsx(
-            styles.collapseIcon,
-            !collapsed && styles.collapsedIconView,
-          )}
-        ></div>
       </button>
       <Collapsible
-        animation={{ duration: 100, easing: "ease-in" }}
+        animation={{ duration: 100, easing: 'ease-in' }}
         lazy={false}
-        collapsed={collapsed}
-      >
+        collapsed={collapsed}>
         {children}
       </Collapsible>
     </div>
-  );
-};
+  )
+}

@@ -26,7 +26,7 @@ curl "https://ipfs.infura.io:5001/api/v0/block/put?format=v0&mhtype=sha2-256&mhl
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/block/put" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"/purpink.jpeg"
 ```

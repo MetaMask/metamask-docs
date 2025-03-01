@@ -1,6 +1,6 @@
 # JSON-RPC methods
 
-Linea supports the standard [Ethereum JSON-RPC-APIs](../../ethereum/json-rpc-methods/index.md) and additional
+Linea supports the standard [Ethereum JSON-RPC APIs](../../ethereum/json-rpc-methods/index.md) and additional
 [debug methods](debug/index.md) not supported on Ethereum by Infura.
 
 :::info
