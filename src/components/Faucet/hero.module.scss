@@ -25,8 +25,7 @@
 }
 
 .heroWrapper {
-  max-width: 1420px;
-  width: 100%;
+  width: calc(100% - var(--page-padding-x) * 2);
   margin: 0 auto;
 }
 
