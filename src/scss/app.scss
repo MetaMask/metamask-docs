@@ -210,10 +210,6 @@ body {
   @include bp('tablet') {
     max-width: none;
   }
-
-  @include bp('desktop') {
-    max-width: var(--site-container-max-width);
-  }
 }
 
 // Page Padding (Header Height)
