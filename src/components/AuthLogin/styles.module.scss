@@ -124,8 +124,8 @@
 .flexButton {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px;
+  gap: 1rem;
+  padding: 1rem;
   button {
     &:hover {
       --button-color-hover: var(--general-black);
