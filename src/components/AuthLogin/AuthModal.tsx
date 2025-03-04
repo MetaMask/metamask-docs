@@ -16,6 +16,7 @@ import {
 import { REQUEST_PARAMS } from '@site/src/lib/constants'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import Button from '@site/src/components/elements/buttons/button'
+import Text from '@site/src/components/Text'
 
 Modal.setAppElement('#__docusaurus')
 type AuthModalProps = {
@@ -47,10 +48,12 @@ const ConnectingModal = () => {
         <img src="/img/spinner.png" className={styles.spinner} />
         <Icon name="metamask" classes={styles.metamask} />
       </div>
-      <div className={styles.heading}>Waiting for MetaMask</div>
-      <div className={styles.content}>
+      <Text as="p" className={styles.heading}>
+        Waiting for MetaMask
+      </Text>
+      <Text as="p" className={styles.content}>
         Don’t close or exit this window. Please continue connecting on your extension.
-      </div>
+      </Text>
     </>
   )
 }
@@ -62,12 +65,16 @@ const ConnectionSuccessModal = () => {
         <Icon name="spinner-success" classes={styles.spinner} />
         <Icon name="metamask" classes={styles.metamask} />
       </div>
-      <div className={styles.heading}>Wallet Connected!</div>
-      <div className={styles.content}>
-        Your wallet is successfully connected.
-        <br />
-        You’re all set!
-      </div>
+      <Text as="p" className={styles.heading}>
+        Wallet Connected!
+      </Text>
+      <Text as="p" className={styles.content}>
+        <span>
+          Your wallet is successfully connected.
+          <br />
+          You’re all set!
+        </span>
+      </Text>
     </>
   )
 }
@@ -91,10 +98,14 @@ const ConnectionErrorModal = ({
         <Icon name="spinner-error" classes={styles.spinner} />
         <Icon name="metamask" classes={styles.metamask} />
       </div>
-      <div className={styles.heading}>There was an issue connecting your wallet</div>
-      <div className={styles.content}>
-        Please try again or <a href="https://support.metamask.io/">contact us</a>.
-      </div>
+      <Text as="p" className={styles.heading}>
+        There was an issue connecting your wallet
+      </Text>
+      <Text as="p" className={styles.content}>
+        <span>
+          Please try again or <a href="https://support.metamask.io/">contact us</a>.
+        </span>
+      </Text>
       <div className={styles.flexButton}>
         <Button as="button" onClick={handleCancel} label={'Cancel'} />
         <Button as="button" onClick={login} label={'Retry'} />

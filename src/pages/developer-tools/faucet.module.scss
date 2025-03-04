@@ -98,7 +98,7 @@
       text-align: center;
       margin: 0 auto;
       width: 100%;
-      margin-bottom: 48px;
+      margin-bottom: 4rem;
     }
 
     .topContent {
@@ -118,12 +118,12 @@
 
     .bottomContent {
       background: var(--faucet-faq-bg);
-      padding: 60px var(--ifm-navbar-padding-horizontal);
+      padding: 5rem var(--ifm-navbar-padding-horizontal);
 
       .faq {
         margin: 0 auto;
         width: 100%;
-        max-width: 1440px;
+        max-width: 60%;
 
         > *:last-child {
           margin-bottom: 0;
