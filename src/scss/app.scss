@@ -202,17 +202,15 @@ body {
 }
 
 // Main Container
-.container {
-  width: calc(100% - var(--page-padding-x) * 2);
-  max-width: none;
-  margin: 0 auto;
-
-  @include bp('tablet') {
+.main-wrapper {
+  .container {
+    width: calc(100% - var(--page-padding-x) * 2);
     max-width: none;
-  }
+    margin: 0 auto;
 
-  @include bp('desktop') {
-    max-width: var(--site-container-max-width);
+    @include bp('tablet') {
+      max-width: none;
+    }
   }
 }
 

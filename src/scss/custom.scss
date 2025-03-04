@@ -338,6 +338,14 @@ ol {
 
 .colorModeToggle_DEke {
   margin: 0 1.4rem 0 0.8rem !important;
+  button {
+    height: 2rem;
+    width: 2rem;
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
 }
 
 .DocSearch-Button-Placeholder {
@@ -367,7 +375,7 @@ ol {
 }
 
 .appScreen {
-  border: 1px solid #DCDCDC;
+  border: 1px solid #dcdcdc;
   border-radius: 0.5rem;
 }
 
@@ -490,6 +498,9 @@ ol {
 
   @include bp('tablet') {
     padding: 8rem 0.6rem 8rem;
+    .container {
+      max-width: none;
+    }
   }
 
   [data-theme='dark'] & {

@@ -22,20 +22,19 @@
   transform: translate(-50%, -50%);
   overflow: auto;
   outline: none;
-  /* background: var(--background-default, #24272a); */
   background: var(--modal-bg-color-primary);
-  width: 360px;
-  padding: 16px;
-  border-radius: 8px;
+  width: 60%;
+  padding: 1.4rem;
+  border-radius: 1rem;
   margin: auto;
   text-align: center;
+  @include bp(desktop) {
+    width: 20%;
+  }
 }
 
 .modalContent {
   color: #fff;
-
-  --font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
-
   position: relative;
 }
 
@@ -43,12 +42,14 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 24px;
-  height: 24px;
+  width: 2rem;
+  height: 2rem;
   border: 0;
   background: transparent;
   cursor: pointer;
   svg {
+    width: 2rem;
+    height: 2rem;
     path {
       fill: var(--modal-font-color-primary);
     }
@@ -59,8 +60,8 @@
   display: flex;
   align-items: center;
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 5rem;
+  height: 5rem;
   margin: auto;
 }
 
@@ -69,9 +70,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 60px;
-  height: 60px;
+  width: 5rem;
+  height: 5rem;
   animation: rotating 3s linear infinite;
+  svg {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 @keyframes spinner /* Safari and Chrome */ {
@@ -97,29 +102,30 @@
 .metamask {
   display: block;
   margin: auto;
-  width: 30px;
-  height: 28px;
+  width: 2rem;
+  height: 2.4rem;
+  svg {
+    width: 2rem;
+    height: 2.4rem;
+  }
 }
 
 .heading {
-  font-size: 18px;
   font-weight: 500;
-  line-height: 24px;
-  margin: 12px 0 0;
+  margin: 1rem 0 0;
   color: var(--modal-font-color-primary);
 }
 
 .content {
   margin: 12px 0;
-  font-size: 16px;
   color: var(--modal-font-color-primary);
 }
 
 .flexButton {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px;
+  gap: 1rem;
+  padding: 1rem;
   button {
     &:hover {
       --button-color-hover: var(--general-black);

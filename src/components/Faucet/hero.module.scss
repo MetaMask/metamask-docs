@@ -25,9 +25,11 @@
 }
 
 .heroWrapper {
-  max-width: 1420px;
-  width: 100%;
+  width: calc(100% - var(--page-padding-x) * 2);
   margin: 0 auto;
+  @include bp(desktop) {
+    max-width: 70%;
+  }
 }
 
 .hero {
@@ -58,7 +60,7 @@
 
     .inputCont {
       width: 100%;
-      max-width: 600px;
+      max-width: 40%;
 
       @media screen and (max-width: 996px) {
         max-width: 100%;
@@ -83,16 +85,13 @@
         }
         input {
           height: 4.2rem;
+          font-size: inherit;
           margin-bottom: 0;
           cursor: auto;
         }
       }
 
       .caption {
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px;
         margin-bottom: 0;
       }
     }
@@ -100,7 +99,7 @@
     .alignedButtons {
       display: flex;
       align-items: flex-end;
-      margin-left: 8px;
+      margin-left: 1rem;
       @media screen and (max-width: 996px) {
         width: 100%;
         margin-top: 1rem;
