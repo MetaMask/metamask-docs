@@ -140,6 +140,10 @@ html {
   -ms-font-smoothing: antialiased;
   font-smoothing: antialiased;
 
+  @media screen and (min-width: 1900px) {
+    font-size: 12px;
+  }
+
   &.no-scroll {
     overflow: hidden;
   }

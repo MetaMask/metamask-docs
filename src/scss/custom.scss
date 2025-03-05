@@ -396,7 +396,10 @@ ol {
   padding: 0 var(--page-padding-x);
 
   &__brand {
-    margin-right: 7.2rem;
+    margin-right: 4rem;
+    @media screen and (min-width: 1200px) {
+      margin-right: 7.2rem;
+    }
   }
 
   &__toggle {
@@ -425,7 +428,16 @@ ol {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 124%;
-    padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 2.2rem;
+    padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 0.6rem;
+    @media screen and (min-width: 1050px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 1rem;
+    }
+    @media screen and (min-width: 1200px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 1.8rem;
+    }
+    @media screen and (min-width: 1900px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 2.2rem;
+    }
 
     &:hover {
       text-decoration: none !important;
@@ -493,11 +505,11 @@ ol {
 
 /* Footer */
 .footer {
-  padding: 4.6rem 0 3rem;
+  padding: 4.6rem var(--page-padding-x) 3rem;
   border-top: 1px solid var(--general-gray-light);
 
   @include bp('tablet') {
-    padding: 8rem 0.6rem 8rem;
+    padding: 8rem var(--page-padding-x);
     .container {
       max-width: none;
     }
@@ -521,7 +533,6 @@ ol {
 
   &__links {
     padding-bottom: 2.6rem;
-    max-width: 122rem;
     margin: auto;
 
     @include bp('tablet') {
