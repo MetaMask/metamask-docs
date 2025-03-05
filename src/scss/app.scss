@@ -151,18 +151,6 @@ html {
       cursor: progress;
     }
   }
-
-  @include bp('tablet') {
-    font-size: math.div(1000vw, $tablet-mockup-width);
-  }
-
-  @include bp('desktop') {
-    font-size: math.div(925vw, $desktop-mockup-width);
-  }
-
-  @media screen and (min-width: $site-container-max-width) {
-    font-size: math.div(850vw, $desktop-mockup-width);
-  }
 }
 
 html,
