@@ -338,6 +338,14 @@ ol {
 
 .colorModeToggle_DEke {
   margin: 0 1.4rem 0 0.8rem !important;
+  button {
+    height: 2rem;
+    width: 2rem;
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
 }
 
 .DocSearch-Button-Placeholder {
@@ -367,7 +375,7 @@ ol {
 }
 
 .appScreen {
-  border: 1px solid #DCDCDC;
+  border: 1px solid #dcdcdc;
   border-radius: 0.5rem;
 }
 
@@ -388,7 +396,10 @@ ol {
   padding: 0 var(--page-padding-x);
 
   &__brand {
-    margin-right: 7.2rem;
+    margin-right: 4rem;
+    @media screen and (min-width: 1200px) {
+      margin-right: 7.2rem;
+    }
   }
 
   &__toggle {
@@ -417,7 +428,16 @@ ol {
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 124%;
-    padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 2.2rem;
+    padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 0.6rem;
+    @media screen and (min-width: 1050px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 1rem;
+    }
+    @media screen and (min-width: 1200px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 1.8rem;
+    }
+    @media screen and (min-width: 1900px) {
+      padding: calc(2rem + var(--ifm-navbar-padding-vertical)) 2.2rem;
+    }
 
     &:hover {
       text-decoration: none !important;
@@ -485,11 +505,14 @@ ol {
 
 /* Footer */
 .footer {
-  padding: 4.6rem 0 3rem;
+  padding: 4.6rem var(--page-padding-x) 3rem;
   border-top: 1px solid var(--general-gray-light);
 
   @include bp('tablet') {
-    padding: 8rem 0.6rem 8rem;
+    padding: 8rem var(--page-padding-x);
+    .container {
+      max-width: none;
+    }
   }
 
   [data-theme='dark'] & {

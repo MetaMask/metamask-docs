@@ -62,7 +62,9 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
         <div className={className}>
           <div className={classNameHeading}>
             <Text as="h2">Frequently Asked Questions</Text>
-            <Text as="p">Answers to commonly asked questions about the MetaMask faucet.</Text>
+            <Text as="p" className={styles.faqDescription}>
+              Answers to commonly asked questions about the MetaMask faucet.
+            </Text>
           </div>
           {isLimitedUserPlan && (
             <Accordion>
@@ -171,7 +173,9 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
         <div className={className}>
           <div className={classNameHeading}>
             <Text as="h2">Frequently Asked Questions</Text>
-            <Text as="p">Answers to commonly asked questions about the MetaMask faucet.</Text>
+            <Text as="p" className={styles.faqDescription}>
+              Answers to commonly asked questions about the MetaMask faucet.
+            </Text>
           </div>
           {isLimitedUserPlan && (
             <Accordion>

@@ -85,8 +85,11 @@
 
 .title {
   color: var(--developer-purple-light);
-  margin-top: 1.4rem;
+  margin-top: 4rem;
   font-family: var(--ifm-heading-font-family);
+  @include bp('tablet') {
+    margin-top: 1.4rem;
+  }
 }
 
 .description {

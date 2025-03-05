@@ -140,6 +140,10 @@ html {
   -ms-font-smoothing: antialiased;
   font-smoothing: antialiased;
 
+  @media screen and (min-width: 1900px) {
+    font-size: 12px;
+  }
+
   &.no-scroll {
     overflow: hidden;
   }
@@ -150,18 +154,6 @@ html {
     * {
       cursor: progress;
     }
-  }
-
-  @include bp('tablet') {
-    font-size: math.div(1000vw, $tablet-mockup-width);
-  }
-
-  @include bp('desktop') {
-    font-size: math.div(925vw, $desktop-mockup-width);
-  }
-
-  @media screen and (min-width: $site-container-max-width) {
-    font-size: math.div(850vw, $desktop-mockup-width);
   }
 }
 
@@ -202,17 +194,15 @@ body {
 }
 
 // Main Container
-.container {
-  width: calc(100% - var(--page-padding-x) * 2);
-  max-width: none;
-  margin: 0 auto;
-
-  @include bp('tablet') {
+.main-wrapper {
+  .container {
+    width: calc(100% - var(--page-padding-x) * 2);
     max-width: none;
-  }
+    margin: 0 auto;
 
-  @include bp('desktop') {
-    max-width: var(--site-container-max-width);
+    @include bp('tablet') {
+      max-width: none;
+    }
   }
 }
 
