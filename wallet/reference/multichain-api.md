@@ -33,7 +33,7 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
 
 - `optionalScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
   If scopes are specified, only the following properties are supported:
-  - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace ID of this scope.
+  - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
     This property is mainly used when there would otherwise be duplicate scopes.
   - `methods`: `array` - A list of JSON-RPC methods the wallet must support in order to be used with this dapp.
   - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support in order to be used with this dapp.
