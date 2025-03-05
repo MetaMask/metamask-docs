@@ -22,7 +22,7 @@ difficult for attackers to intercept or modify the data.
 To secure your dapp using HTTPS, obtain an SSL/TLS certificate from a trusted certificate authority (CA).
 For example, [Let's Encrypt](https://letsencrypt.org/) offers free SSL/TLS certificates.
 
-Install the certificate it on your web server.
+Install the certificate on your web server.
 If you're using a static website hosting service, it might have a default way to enable HTTPS on
 your dapp.
 
@@ -38,7 +38,7 @@ See the full list of CSP directives that you can enable for your dapp in the
 
 ### Use CSP with a server setup
 
-If you dapp uses a server setup, enable CSP by setting the `Content-Security-Policy` header in all
+If your dapp uses a server setup, enable CSP by setting the `Content-Security-Policy` header in all
 responses from your server.
 For example, in Express.js, add the following middleware at the top of your server:
 
@@ -63,7 +63,7 @@ and languages.
 
 ### Use CSP with a static site
 
-If your dapp uses a third party hosting provider, and you can't set a custom
+If your dapp uses a third-party hosting provider, and you can't set a custom
 `Content-Security-Policy` header in the server responses, you can enable CSP by using the
 [`<meta>` HTML tag](https://content-security-policy.com/examples/meta/).
 
