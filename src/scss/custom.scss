@@ -533,6 +533,7 @@ ol {
 
   &__links {
     padding-bottom: 2.6rem;
+    max-width: 122rem;
     margin: auto;
 
     @include bp('tablet') {
