@@ -31,19 +31,19 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
 
 #### Parameters
 
-- `optionalScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes that the wallet can support in order to be used with this dapp.
+- `optionalScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
   If scopes are specified, only the following properties are supported:
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace ID of this scope.
     This property is mainly used when there would otherwise be duplicate scopes.
-  - `methods`: `array` - A list of JSON-RPC methods the dapp or wallet can call.
-  - `notifications`: `array` - A list of JSON-RPC notifications the dapp or wallet can send.
+  - `methods`: `array` - A list of JSON-RPC methods the wallet must support in order to be used with this dapp.
+  - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support in order to be used with this dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
     account IDs valid within this scope.
     Dapps should only supply this property when they know the set of accounts they would like the user to permit.
     When supplied, these accounts are preselected by default in the account selection process.
     Dapps typically omit this property for the user to select their own accounts.
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the connection is valid.
-- `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes that the wallet must support in order to be used
+- `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support in order to be used
   with this dapp.
   We don't recommend using `requiredScopes` with MetaMask.
 
