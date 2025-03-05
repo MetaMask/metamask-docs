@@ -7,7 +7,7 @@ sidebar_position: 8
 
 [`dotenv`](https://www.npmjs.com/package/dotenv) is an [npm](https://www.npmjs.com/) JavaScript package that loads environment variables from a `.env` file into the `process.env` global variable, storing configuration in the environment separate from the code.
 
-When you create a dapp using Infura, store your environment variables on your local machine using `dotenv` to protect sensitive information, such as Infura API URLs and MetaMask mnemonics, from pushing to GitHub and becoming publicly accessible.
+When you create a dapp using Infura, store your environment variables on your local machine using `dotenv` to protect sensitive information, such as Infura API URLs and MetaMask mnemonics, from being pushed to GitHub and becoming publicly accessible.
 
 ### Install `dotenv`
 

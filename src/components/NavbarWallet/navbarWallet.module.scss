@@ -1,18 +1,18 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --navbarWallet-color: #fff;
   --tag-bg-color: #213949;
   --tag-border-color: transparent;
-  --tag-color: #43AEFC;
+  --tag-color: #43aefc;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --navbarWallet-color: #141618;
   --tag-bg-color: #fff;
   --tag-border-color: #0376c9;
   --tag-color: #0376c9;
 }
 
-:global([class*="navbarSearchContainer"]) {
+:global([class*='navbarSearchContainer']) {
   @media (max-width: 996px) {
     position: relative !important;
     right: 0 !important;
@@ -21,22 +21,21 @@
 
 .navbarButton {
   order: 100;
-  margin-left: 12px;
+  margin-left: 1rem;
   position: relative;
 }
 
 .navbarWallet {
   color: var(--navbarWallet-color);
   order: 100;
-  height: 28px;
-  margin-left: 12px;
-  position: relative;
+  height: 2.6rem;
+  margin-left: 1rem;
 
   .avatar {
     border-radius: 50%;
     box-sizing: content-box;
-    width: 24px;
-    height: 24px;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 
   .cta {
@@ -44,8 +43,8 @@
     border: none;
     padding: 0;
     margin: 0;
-    height: 24px;
-    width: 24px;
+    height: 2.2rem;
+    width: 2.2rem;
     display: block;
     border-radius: 50%;
     cursor: pointer;
@@ -66,19 +65,16 @@
     list-style: none;
     position: absolute;
     width: max-content;
-    top: 50px;
-    right: -8px;
+    top: calc(100% + 1px);
+    right: 1.6rem;
     background-color: var(--ifm-navbar-background-color);
-    border-radius: 6px;
-    box-shadow: 0 3px 8px 0 rgba(44, 59, 88, 0.35);
 
     .item {
-      padding: 12px;
+      padding: 1.4rem;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: center;
-      font-size: 14px;
       border-bottom: 1px solid rgba(133, 139, 154, 0.2);
 
       &:last-child {
@@ -86,27 +82,39 @@
       }
 
       .walletId {
-        margin: 0 8px;
+        margin: 0 1rem;
       }
 
       .copyButton {
+        cursor: pointer;
         background: none;
         border: none;
         padding: 0;
         margin: 0;
-        width: 13px;
-        height: 15px;
+        width: 1.4rem;
+        height: 1.4rem;
+        svg {
+          width: 1.4rem;
+          height: 1.4rem;
+        }
       }
 
       .disconnect {
         width: 100%;
+        height: 4.2rem;
+        box-shadow: none;
+        cursor: pointer;
+        font-size: inherit;
+        border-radius: 2rem;
 
         .content {
           display: flex;
           align-items: center;
 
           .icon {
-            margin-right: 8px;
+            margin-right: 1rem;
+            height: 1.6rem;
+            width: 1.6rem;
           }
         }
       }
@@ -134,7 +142,7 @@
 .extLink {
   display: inline-flex;
   align-items: center;
-  color: var(--tag-color);
+  color: var(--navbarWallet-color);
 }
 
 .extLink svg {
@@ -150,8 +158,7 @@
   min-width: 45px;
   padding: 4px 4px 6px 4px;
   margin-left: 10px;
-  background-color: var(--tag-bg-color);
-  color: var(--tag-color);
+  color: var(--navbarWallet-color);
   border-radius: 12px;
-  border: 1px solid var(--tag-border-color);
+  border: 1px solid var(--navbarWallet-color);
 }

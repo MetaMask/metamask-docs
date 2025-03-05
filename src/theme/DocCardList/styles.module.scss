@@ -1,0 +1,133 @@
+.row {
+  > article.item {
+    @include bp(desktop) {
+      &:nth-last-child(-n + 2) {
+        margin-bottom: 1.6rem !important;
+      }
+    }
+  }
+}
+
+.item {
+  --color-palette: var(--developer-purple);
+  margin-bottom: 1.6rem;
+  transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+  width: 100%;
+  max-height: 19.5rem;
+  margin-top: 0;
+  position: relative;
+  aspect-ratio: 1 / 0.5;
+
+  @include bp('tablet') {
+    width: 50%;
+    padding: 0 0.8rem;
+
+    &:nth-last-child(-n + 2) {
+      margin-bottom: 1.6rem !important;
+    }
+  }
+
+  &.active {
+    filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
+
+    > div {
+      background-color: var(--general-white);
+    }
+  }
+
+  > div {
+    background-color: var(--general-gray-light);
+    position: relative;
+    transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
+
+    a:not(.button) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 2.4rem !important;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+      color: var(--general-black);
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+
+      &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 1rem;
+        height: 100%;
+        opacity: 0;
+        transition: opacity calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+        background-color: var(--color-palette);
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 166.667%;
+      white-space: wrap;
+      overflow: visible;
+
+      @include bp('desktop') {
+        line-height: 140%;
+      }
+    }
+
+    p {
+      font-size: 1.5rem;
+      line-height: 166.667%;
+      white-space: wrap;
+      margin: 0;
+
+      @include bp('desktop') {
+        line-height: 150%;
+      }
+    }
+  }
+}
+
+.holder {
+  height: 100%;
+
+  &:hover {
+    a:not(.button) {
+      color: currentColor;
+      text-decoration: none !important;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.button {
+  position: absolute;
+  bottom: 3.2rem;
+  left: 3.2rem;
+}
+
+html[data-theme='dark'] {
+  .item {
+    --color-palette: var(--developer-green);
+    > div {
+      background-color: var(--general-black-light);
+    }
+
+    &.active {
+      > div {
+        background-color: var(--general-black);
+      }
+    }
+
+    a:not(.button) {
+      color: var(--general-white);
+    }
+  }
+}

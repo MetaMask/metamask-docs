@@ -1,9 +1,9 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --maintenance-modal-shadow: rgba(0, 0, 0, 0.4);
   --maintenance-modal-background: #24272a;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --maintenance-modal-shadow: rgba(44, 59, 88, 0.1);
   --maintenance-modal-background: #fff;
 }
@@ -11,7 +11,7 @@
 .maintenance {
   background: rgba(0, 0, 0, 0.4);
   position: absolute;
-  top: -55px;
+  top: -100%;
   bottom: 0;
   left: 0;
   right: 0;
@@ -20,13 +20,13 @@
 
   .modal {
     position: sticky;
-    top: 80px;
+    top: 30%;
     width: 100%;
-    max-width: 480px;
+    max-width: 80%;
     margin: 0 auto;
-    padding: 16px;
+    padding: 1.4rem;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 1rem;
     background: var(--maintenance-modal-background);
     box-shadow:
       0px 0px 16px 0px var(--maintenance-modal-shadow),
@@ -35,6 +35,10 @@
       0px 8px 8px 0px var(--maintenance-modal-shadow),
       0px 4px 4px 0px var(--maintenance-modal-shadow),
       0px 2px 2px 0px var(--maintenance-modal-shadow);
+
+    @include bp(desktop) {
+      max-width: 25%;
+    }
 
     .button {
       padding: 0 36px;

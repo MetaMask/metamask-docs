@@ -26,7 +26,7 @@ curl "https://ipfs.infura.io:5001/api/v0/add?recursive=false&quiet=<value>&quiet
 ```bash
 curl "https://ipfs.infura.io:5001/api/v0/add?pin=false" \
   -X POST \
-  -u "PROJECT_ID:PROJECT_SECRET" \
+  -u "<YOUR-API-KEY>:<YOUR-API-KEY-SECRET>" \
   -H "Content-Type: multipart/form-data" \
   -F file=@"/sample-result.json"
 ```

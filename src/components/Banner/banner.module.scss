@@ -1,0 +1,26 @@
+.banner {
+
+  @include bp(desktop) {
+    padding-top: 0.8rem;
+    padding-bottom: 0rem;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.inner {
+  background-color: var(--general-gray-light);
+  padding: 2.4rem;
+  text-align: center;
+}
+
+.button {
+  margin-top: 1.4rem;
+}
+
+html[data-theme='dark'] {
+  .inner {
+    background-color: var(--general-black-light);
+  }
+}

@@ -1,91 +1,62 @@
-import React from "react";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Layout from "@theme/Layout";
-import CardSection from "@site/src/components/CardSection";
-import Heading from "@theme/Heading";
-import styles from "./index.module.css";
-
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx(styles.introductionBlock)}>
-      <div className="container">
-        <Heading
-          as="h1"
-          className={clsx("hero__title", styles.title, styles.forceColor)}
-        >
-          {siteConfig.title}
-        </Heading>
-        <p
-          className={clsx("hero__subtitle", styles.subtitle, styles.forceColor)}
-        >
-          Build with the world&apos;s leading self-custodial crypto wallet.
-        </p>
-      </div>
-    </header>
-  );
-}
-
-function DevBanner() {
-  return (
-    <header className={clsx(styles.devBannerBlock)}>
-      <div className="container">
-        <Heading
-          as="h1"
-          className={clsx(
-            "hero__title",
-            styles.devBannerTitle,
-            styles.devBannerForceColor,
-          )}
-        >
-          {"Contribute to MetaMask"}
-        </Heading>
-        <p
-          className={clsx(
-            "hero__subtitle",
-            styles.devBannerSubtitle,
-            styles.devBannerForceColor,
-          )}
-        >
-          Join the MetaMask developer community and learn how to contribute to
-          the MetaMask project itself.
-        </p>
-        <Link
-          className={clsx(
-            styles.devBannerButton,
-            "button button--outline button--secondary button--md",
-          )}
-          href="https://github.com/MetaMask/metamask-extension/blob/develop/docs/README.md"
-        >
-          Contribute&nbsp;
-          <svg
-            width="13.5"
-            height="13.5"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="iconExternalLink_node_modules-@docusaurus-theme-classic-lib-theme-Icon-ExternalLink-styles-module"
-          >
-            <path
-              fill="currentColor"
-              d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"
-            ></path>
-          </svg>
-        </Link>
-      </div>
-    </header>
-  );
-}
+import Layout from '@theme/Layout'
+import Hero from '@site/src/components/Hero/Hero'
+import CardSection from '@site/src/components/CardSection'
+import CallToAction from '@site/src/components/CallToAction/CallToAction'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
+  const { siteConfig } = useDocusaurusContext()
   return (
-    <Layout title={"Home"}>
-      <HomepageHeader />
-      <main>
-        <CardSection />
-        <DevBanner />
-      </main>
+    <Layout title={'Home'}>
+      <Hero
+        title={siteConfig.title}
+        description={"Build with the world's leading self-custodial crypto wallet."}
+      />
+      <CardSection
+        colorPalette="purple"
+        cards={[
+          {
+            title: 'SDK',
+            description:
+              'Use MetaMask SDK to build onchain dapps. Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile.',
+            href: '/sdk',
+            theme: '',
+          },
+          {
+            title: 'Wallet API',
+            description:
+              "Use the Wallet API to integrate your dapp with MetaMask. Connect to the MetaMask browser extension and interact with your users' accounts.",
+            href: '/wallet',
+            theme: '',
+          },
+          {
+            title: 'Snaps',
+            description:
+              'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
+            href: '/snaps',
+            theme: '',
+          },
+          {
+            title: 'Services',
+            description:
+              'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+            href: '/services',
+            theme: '',
+          },
+        ]}
+      />
+      <CallToAction
+        title={'Contribute to MetaMask on GitHub'}
+        description={
+          'Join the MetaMask developer community and learn how to contribute to the MetaMask project itself.'
+        }
+        button={{
+          label: 'Contribute',
+          href: 'https://github.com/metamask',
+          icon: 'github',
+          external: true,
+        }}
+      />
     </Layout>
-  );
+  )
 }

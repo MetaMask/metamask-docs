@@ -98,12 +98,12 @@ await snap.request({
 });
 ```
 
-<div class="row">
-    <div class="column">
-        <img src={require("../../assets/custom-ui-address.png").default} alt="Address UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+<div class="imgRow">
+    <div class="imgCol">
+        <img src={require("../../assets/custom-ui-address.png").default} alt="Address UI example" width="450px" class="appScreen" />
     </div>
-    <div class="column">
-        <img src={require("../../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+    <div class="imgCol">
+        <img src={require("../../assets/custom-ui-address-tooltip.png").default} alt="Address tooltip UI example" width="450px" class="appScreen" />
     </div>
 </div>
 
@@ -272,7 +272,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-box.png").default} alt="Box UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-box.png").default} alt="Box UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Button`
@@ -321,7 +321,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-button.png").default} alt="Button UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Card`
@@ -383,7 +383,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-card.png").default} alt="Card UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-card.png").default} alt="Card UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Checkbox`
@@ -417,7 +417,7 @@ const interfaceId = await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-checkbox.png").default} alt="Checkbox UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-checkbox.png").default} alt="Checkbox UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Container`
@@ -500,7 +500,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-copyable.png").default} alt="Copyable UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-copyable.png").default} alt="Copyable UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Divider`
@@ -526,7 +526,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-divider.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-divider.png").default} alt="Divider UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Dropdown`
@@ -569,12 +569,12 @@ await snap.request({
 });
 ```
 
-<div class="row">
-    <div class="column">
-        <img src={require("../../assets/custom-ui-dropdown.png").default} alt="Dropdown UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+<div class="imgRow">
+    <div class="imgCol">
+        <img src={require("../../assets/custom-ui-dropdown.png").default} alt="Dropdown UI example" width="450px" class="appScreen" />
     </div>
-    <div class="column">
-        <img src={require("../../assets/custom-ui-dropdown-active.png").default} alt="Active dropdown UI example" width="450px" style={{border: '1px solid #DCDCDC'}} />
+    <div class="imgCol">
+        <img src={require("../../assets/custom-ui-dropdown-active.png").default} alt="Active dropdown UI example" width="450px" class="appScreen" />
     </div>
 </div>
 
@@ -620,7 +620,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-field.png").default} alt="Field example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-field.png").default} alt="Field example" width="450px" class="appScreen" />
 </p>
 
 ### `FileInput`
@@ -674,7 +674,7 @@ export const onUserInput = async ({ id, event }) => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-file-input.png").default} alt="File input UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-file-input.png").default} alt="File input UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Footer`
@@ -770,7 +770,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Heading`
@@ -801,7 +801,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-heading.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Divider UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Icon`
@@ -840,7 +840,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-icon.png").default} alt="Icon UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-icon.png").default} alt="Icon UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Image`
@@ -887,7 +887,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-image.png").default} alt="Divider UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-image.png").default} alt="Divider UI example" width="450px" class="appScreen" />
 </p>
 
 :::note
@@ -946,7 +946,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-form.png").default} alt="Form UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Italic`
@@ -1026,7 +1026,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-links.png").default} alt="Links UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-links.png").default} alt="Links UI example" width="450px" class="appScreen" />
 </p>
 
 ### `RadioGroup`
@@ -1062,7 +1062,7 @@ const interfaceId = await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-radio-group.png").default} alt="RadioGroup UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-radio-group.png").default} alt="RadioGroup UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Row`
@@ -1102,7 +1102,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-row.png").default} alt="Row UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Section` 
@@ -1136,7 +1136,7 @@ export const onHomePage: OnHomePageHandler = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-section.png").default} alt="Section UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-section.png").default} alt="Section UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Selector`
@@ -1230,7 +1230,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-spinner.gif").default} alt="Spinner UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-spinner.gif").default} alt="Spinner UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Text`
@@ -1267,7 +1267,7 @@ module.exports.onHomePage = async () => {
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-heading.png").default} alt="Text UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Tooltip`
@@ -1306,7 +1306,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-tooltip.png").default} alt="Tooltip UI example" width="450px" class="appScreen" />
 </p>
 
 ### `Value`
@@ -1380,7 +1380,7 @@ await snap.request({
 ```
 
 <p align="center">
-<img src={require("../../assets/custom-ui-emojis.png").default} alt="Emojis UI example" width="450px" style={{border: "1px solid #DCDCDC"}} />
+<img src={require("../../assets/custom-ui-emojis.png").default} alt="Emojis UI example" width="450px" class="appScreen" />
 </p>
 
 ## User-defined components

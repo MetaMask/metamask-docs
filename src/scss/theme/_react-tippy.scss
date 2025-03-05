@@ -1,0 +1,90 @@
+.tippy-popper[x-placement^='top'] [x-arrow] {
+  border-top: 0.7rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='top'] [x-arrow].arrow-small {
+  border-top: 0.5rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='top'] [x-arrow].arrow-big {
+  border-top: 1rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='bottom'] [x-arrow] {
+  border-bottom: 0.7rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='bottom'] [x-arrow].arrow-small {
+  border-bottom: 0.5rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='bottom'] [x-arrow].arrow-big {
+  border-bottom: 1rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='left'] [x-arrow] {
+  border-left: 0.7rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='left'] [x-arrow].arrow-small {
+  border-left: 0.5rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='left'] [x-arrow].arrow-big {
+  border-left: 1rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='right'] [x-arrow] {
+  border-right: 0.7rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='right'] [x-arrow].arrow-small {
+  border-right: 0.5rem solid var(--general-black) !important;
+}
+.tippy-popper[x-placement^='right'] [x-arrow].arrow-big {
+  border-right: 1rem solid var(--general-black) !important;
+}
+.tippy-tooltip {
+  background-color: var(--general-black) !important;
+}
+.tippy-tooltip [x-circle] {
+  background-color: var(--general-black) !important;
+}
+
+[data-theme='dark'] {
+  .tippy-popper[x-placement^='top'] [x-arrow] {
+    border-top: 0.7rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='top'] [x-arrow].arrow-small {
+    border-top: 0.5rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='top'] [x-arrow].arrow-big {
+    border-top: 1rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='bottom'] [x-arrow] {
+    border-bottom: 0.7rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='bottom'] [x-arrow].arrow-small {
+    border-bottom: 0.5rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='bottom'] [x-arrow].arrow-big {
+    border-bottom: 1rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='left'] [x-arrow] {
+    border-left: 0.7rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='left'] [x-arrow].arrow-small {
+    border-left: 0.5rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='left'] [x-arrow].arrow-big {
+    border-left: 1rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='right'] [x-arrow] {
+    border-right: 0.7rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='right'] [x-arrow].arrow-small {
+    border-right: 0.5rem solid var(--general-white) !important;
+  }
+  .tippy-popper[x-placement^='right'] [x-arrow].arrow-big {
+    border-right: 1rem solid var(--general-white) !important;
+  }
+  .tippy-tooltip {
+    background-color: var(--general-white) !important;
+  }
+  .tippy-tooltip [x-circle] {
+    background-color: var(--general-white) !important;
+  }
+  .tippy-tooltip-content {
+    color: var(--general-black);
+  }
+}

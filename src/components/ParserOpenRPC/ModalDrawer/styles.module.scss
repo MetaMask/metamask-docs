@@ -1,0 +1,133 @@
+:root {
+  --param-item-bg: #292a36;
+  --modal-header-bg: #24272a;
+  --param-item-border-color: rgb(132 140 150 / 100%);
+}
+
+:root[data-theme='light'] {
+  --param-item-bg: #f2f4f6;
+  --modal-header-bg: #fff;
+  --param-item-border-color: #bbc0c5;
+}
+
+.modalContainer {
+  border: 1px solid var(--general-gray-light);
+  position: fixed;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 1.5rem;
+  width: 100%;
+  min-height: 51.2rem;
+  transform: translate(0, 100%);
+  overflow: hidden;
+  background-color: var(--general-white);
+  transition: transform 0.4s ease;
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-gray-dark);
+    border-color: var(--general-black-light);
+  }
+}
+
+.modalContainerOpen {
+  transition: transform 0.4s ease;
+  transform: translate(0, -100%);
+}
+
+.modalHeader {
+  padding: 1.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 5.6rem;
+  background-color: var(--general-white-off);
+
+  html[data-theme='dark'] & {
+    background-color: var(--general-black-light);
+  }
+}
+
+.modalHeaderLight {
+  background-color: var(--general-gray-light);
+}
+
+.modalTitle {
+  font-size: 1.8rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.modalTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.modalHeaderIcon {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 0.8rem;
+}
+
+.modalHeaderIconBack {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.modalHeaderLabels {
+  display: flex;
+  align-items: center;
+  font-family: var(--ifm-heading-font-family);
+}
+
+.modalHeaderLabel {
+  display: flex;
+  justify-content: center;
+  margin-left: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--general-gray);
+  border-radius: 999px;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+}
+
+.modalCloseBtn {
+  display: block;
+  padding: 0;
+  background: none;
+  font-size: 2.4rem;
+  line-height: 1;
+  border: 0;
+  cursor: pointer;
+}
+
+.modalContent {
+  height: 39.4rem;
+}
+
+.modalContentScrolled {
+  overflow-y: auto;
+  transition: none;
+}
+
+.modalContentFixed {
+  overflow-y: hidden;
+}
+
+@media (width <= 1760px) {
+  .modalContainer {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (width <= 1200px) {
+  .modalContainer {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}

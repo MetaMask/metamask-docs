@@ -54,7 +54,7 @@ The following RPC methods take an Ethereum address parameter and are compatible 
 #### Example request
 
 To allow a specific Ethereum address, input it into the **Contract Addresses** field and select **Add**.
-In the following example we'll use `0xfe05a3e72235c9f92fd9f2282f41a8154`.
+In the following example we'll use `0xfe05a3e72235c9f92fd9f2282f41a8154d6d342b`.
 
 <div class="left-align-container">
   <div class="img-medium">

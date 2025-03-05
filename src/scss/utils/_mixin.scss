@@ -1,0 +1,46 @@
+// Grid
+@function span($col, $shrink: false) {
+  $shrink: if($shrink, 1, 0);
+
+  @return $col * $column + ($col - $shrink) * $gutter;
+}
+
+// hover media query
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// css line-clamp
+// https://css-tricks.com/almanac/properties/l/line-clamp/
+@mixin line-clamp($value: 2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: var(--line-clamp, $value);
+}
+
+// parameters with quotes are optional
+@mixin animate(
+  $animation,
+  $duration,
+  $timing-function,
+  $delay: '',
+  $iteration-count: '',
+  $direction: '',
+  $fill-mode: '',
+  $play-state: ''
+) {
+  animation: $animation $duration $timing-function #{$delay} #{$iteration-count} #{$direction} #{$fill-mode}
+    #{$play-state};
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
-import styles from "./styles.module.css";
+import { useColorMode } from '@docusaurus/theme-common'
+import styles from "./styles.module.scss";
 import * as debounce from "lodash.debounce";
 
 interface ModalDrawerProps {
@@ -23,6 +24,7 @@ export const ModalDrawer = ({
   const [showModal, setShowModal] = useState(isOpen);
   const [leftOffset, setLeftOffset] = useState(360);
   const [width, setWidth] = useState(972);
+  const { colorMode } = useColorMode()
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -67,23 +69,20 @@ export const ModalDrawer = ({
       )}
       style={{ left: leftOffset, width }}
     >
-      <div className={styles.modalHeader}>
-        <div className={styles.modalHeaderLabels}>
-          <span className={styles.modalTitle}>{title}</span>
-          {headerLabel ? (
-            <span className={styles.modalHeaderLabel}>{headerLabel}</span>
-          ) : null}
+        <div className={clsx(styles.modalHeader, colorMode === 'light' && styles.modalHeaderLight)}>
+            <div className={styles.modalHeaderLabels}>
+                <span className={styles.modalTitle}>{title}</span>
+                {headerLabel ? <span className={styles.modalHeaderLabel}>{headerLabel}</span> : null}
+            </div>
+            <button className={styles.modalCloseBtn} onClick={onClose}>
+                &times;
+            </button>
         </div>
-        <button className={styles.modalCloseBtn} onClick={onClose}>
-          &times;
-        </button>
-      </div>
-      <div
-        className={clsx(
-          styles.modalContent,
-          isContentFixed
-            ? styles.modalContentFixed
-            : styles.modalContentScrolled
+        <div
+            className={clsx(
+                styles.modalContent,
+                isContentFixed ? styles.modalContentFixed : styles.modalContentScrolled,
+          'type-paragraph-m'
         )}
         ref={contentRef}
       >

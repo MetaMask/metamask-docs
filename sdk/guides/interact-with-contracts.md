@@ -161,7 +161,7 @@ Write to contracts:
 ```javascript
 async function mintNFT(contractAddress, tokenId) {
   try {
-    // Get user"s account
+    // Get user's account
     const accounts = await ethereum.request({ 
       method: "eth_requestAccounts" 
     });

@@ -1,17 +1,19 @@
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --faucet-bg-color-primary: #252526;
   --faucet-box-shadow: none;
-  --faucet-faq-bg: rgb(20, 22, 24);
+  --faucet-faq-bg: #242628;
   --faucet-hero-border: rgba(132, 140, 150, 0.16);
   --faucet-hero-background: #24272a;
+  --faucet-tab-background: #242628;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --faucet-bg-color-primary: #ffffff;
   --faucet-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  --faucet-faq-bg: rgb(242, 244, 246);
+  --faucet-faq-bg: #e9edf6;
   --faucet-hero-border: rgba(187, 192, 197, 0.4);
-  --faucet-hero-background: #f2f4f6;
+  --faucet-hero-background: #e9edf6;
+  --faucet-tab-background: #e9edf6;
 }
 
 :global(.navbar) {
@@ -19,8 +21,7 @@
 }
 
 .authCont {
-  padding: var(--ifm-navbar-padding-vertical)
-    var(--ifm-navbar-padding-horizontal);
+  padding: var(--ifm-navbar-padding-vertical) var(--ifm-navbar-padding-horizontal);
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -51,6 +52,25 @@
       width: 100%;
       position: relative;
     }
+
+    ul {
+      background: none;
+      border: 0;
+
+      li {
+        color: var(--text-color);
+      }
+
+      [aria-selected='true'] {
+        background: var(--faucet-tab-background);
+      }
+
+      [aria-selected='false'] {
+        &:hover {
+          background: var(--badge-default-bg-color);
+        }
+      }
+    }
   }
 
   .header {
@@ -78,8 +98,7 @@
       text-align: center;
       margin: 0 auto;
       width: 100%;
-      max-width: 600px;
-      margin-bottom: 48px;
+      margin-bottom: 4rem;
     }
 
     .topContent {
@@ -87,25 +106,24 @@
       padding: 0 var(--ifm-navbar-padding-horizontal);
 
       .hero {
-        max-width: 1420px;
-        width: 100%;
-        margin: 0 auto;
-        border-radius: 8px;
-        border: 1px solid var(--faucet-hero-border);
         background-color: var(--faucet-hero-background);
-        padding: 32px;
+        padding: 6rem;
         margin-bottom: 60px;
+        @media screen and (max-width: 996px) {
+          margin-bottom: 40px;
+          padding: 3rem;
+        }
       }
     }
 
     .bottomContent {
       background: var(--faucet-faq-bg);
-      padding: 60px var(--ifm-navbar-padding-horizontal);
+      padding: 5rem var(--ifm-navbar-padding-horizontal);
 
       .faq {
         margin: 0 auto;
         width: 100%;
-        max-width: 1014px;
+        max-width: 60%;
 
         > *:last-child {
           margin-bottom: 0;

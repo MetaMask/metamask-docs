@@ -1,0 +1,135 @@
+:root[data-theme='dark'] {
+  --modal-bg-color-primary: var(--general-gray-dark);
+  --modal-font-color-primary: var(--general-white);
+}
+
+:root[data-theme='light'] {
+  --modal-bg-color-primary: var(--general-white);
+  --modal-font-color-primary: var(--general-black);
+}
+
+.modalOverlay {
+  z-index: 300;
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 75%);
+}
+
+.modalWrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  outline: none;
+  background: var(--modal-bg-color-primary);
+  width: 60%;
+  padding: 1.4rem;
+  border-radius: 1rem;
+  margin: auto;
+  text-align: center;
+  @include bp(desktop) {
+    width: 20%;
+  }
+}
+
+.modalContent {
+  color: #fff;
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  svg {
+    width: 2rem;
+    height: 2rem;
+    path {
+      fill: var(--modal-font-color-primary);
+    }
+  }
+}
+
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  margin: auto;
+}
+
+.spinner {
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5rem;
+  height: 5rem;
+  animation: rotating 3s linear infinite;
+  svg {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@keyframes spinner /* Safari and Chrome */ {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.metamask {
+  display: block;
+  margin: auto;
+  width: 2rem;
+  height: 2.4rem;
+  svg {
+    width: 2rem;
+    height: 2.4rem;
+  }
+}
+
+.heading {
+  font-weight: 500;
+  margin: 1rem 0 0;
+  color: var(--modal-font-color-primary);
+}
+
+.content {
+  margin: 12px 0;
+  color: var(--modal-font-color-primary);
+}
+
+.flexButton {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  button {
+    &:hover {
+      --button-color-hover: var(--general-black);
+      --button-text-color-hover: var(--general-white);
+    }
+  }
+}

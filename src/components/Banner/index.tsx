@@ -1,38 +1,52 @@
-import React from "react";
-import Link from "@docusaurus/Link";
-import styles from "./banner.module.css";
+import { ReactNode, FC, useState, useEffect } from 'react'
+import { useColorMode } from '@docusaurus/theme-common'
+import CutOffCorners from '@site/src/components/elements/cut-off-corners'
+import Button from '@site/src/components/elements/buttons/button'
+
+import styles from './banner.module.scss'
 
 interface BannerProps {
-  children: React.ReactNode;
+  children: ReactNode
 }
 
-const Banner: React.FC<BannerProps> = ({ children }) => {
+const Banner: FC<BannerProps> = ({ children }) => {
+  const { colorMode } = useColorMode()
+  const [theme, setTheme] = useState('')
+
+  useEffect(() => {
+    setTheme(colorMode)
+  }, [colorMode])
+
   return (
     <div className={styles.banner}>
-      {children}
-      <Link
-        to="https://app.infura.io/register"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div className={`${styles.button} margin-top--xs`}>
-          Sign up&nbsp;
-          <svg
-            width="13.5"
-            height="13.5"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="iconExternalLink_node_modules-@docusaurus-theme-classic-lib-theme-Icon-ExternalLink-styles-module"
-          >
-            <path
-              fill="currentColor"
-              d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"
-            />
-          </svg>
+      <CutOffCorners size="m">
+        <div className={styles.inner}>
+          {children}
+          <Button
+            className={styles['button']}
+            as="a"
+            type={theme === 'dark' ? 'secondary' : 'primary'}
+            href="https://app.infura.io/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            label="Sign up"
+            icon="external-arrow"
+            style={
+              theme === 'dark'
+                ? {
+                    '--button-color-hover': 'var(--general-white)',
+                    '--button-text-color-hover': 'var(--general-black)',
+                  }
+                : {
+                    '--button-color-hover': 'var(--general-black)',
+                    '--button-text-color-hover': 'var(--general-white)',
+                  }
+            }
+          />
         </div>
-      </Link>
+      </CutOffCorners>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

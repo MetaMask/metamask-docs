@@ -12,7 +12,7 @@ With MetaMask SDK, you can connect your dapp to MetaMask in the following ways:
 
 The following table expands on the SDK's connection methods:
 
-| Dapp location | User wallet location | Connection method | Metamask SDK | Other SDKs |
+| Dapp location | User wallet location | Connection method | MetaMask SDK | Other SDKs |
 |---------------|-------------|------------------|--------------------------|--------------------------|
 | Desktop web | Wallet browser extension | Automatic connection via browser extension | Supported | Supported |
 | Desktop web | Wallet mobile app | QR code scan with wallet mobile app | Supported | Limited |

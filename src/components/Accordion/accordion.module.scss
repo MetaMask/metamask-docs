@@ -1,18 +1,17 @@
-:root[data-theme="dark"] {
-  --accordion-background: #24272a;
+:root[data-theme='dark'] {
+  --accordion-background: #393d46;
   --accordion-border: rgba(132, 140, 150, 0.16);
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --accordion-background: #ffffff;
   --accordion-border: rgba(187, 192, 197, 0.4);
 }
 
 .accordion {
   background: var(--accordion-background);
-  border: 1px solid var(--accordion-border);
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 2rem;
 
   .header {
     display: flex;
@@ -22,17 +21,17 @@
 
     .closeButton {
       cursor: pointer;
-      margin-left: 24px;
-      margin-right: 24px;
-      display: block;
-      height: 16px;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      display: flex;
+      height: 1rem;
       line-height: 1;
 
       .image {
-        min-width: 16px;
-        width: 16px;
-        min-height: 16px;
-        height: 16px;
+        min-width: 1rem;
+        width: 1rem;
+        min-height: 1rem;
+        height: 1rem;
         transition: all 0.5s;
         transform: rotate(45deg);
 

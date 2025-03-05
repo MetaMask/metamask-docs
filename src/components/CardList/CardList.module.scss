@@ -1,0 +1,22 @@
+.wrapper {
+  padding-top: 0.1rem;
+  margin-bottom: calc(var(--ifm-h2-vertical-rhythm-top) * var(--ifm-leading) * 0.5);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+
+  @include bp('tablet') {
+    margin-left: -0.8rem;
+    margin-right: -0.8rem;
+  }
+}
+
+html[data-theme='dark'] {
+  .wrapper {
+    border-color: var(--general-black-light);
+  }
+}
