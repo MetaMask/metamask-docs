@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 interface IText {
   as?: 'p' | 'h1' | 'h2' | 'h3'
-  children: string | React.ReactElement | Element
+  children: string | React.ReactElement
   className?: string
 }
 
