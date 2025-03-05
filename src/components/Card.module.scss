@@ -127,10 +127,7 @@
 .item-description {
   font-size: 1.7rem;
   @include bp(tablet) {
-    max-width: 40rem;
-  }
-  @include bp(desktop) {
-    max-width: 50rem;
+    max-width: 82%;
   }
 }
 

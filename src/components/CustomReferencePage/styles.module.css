@@ -10,7 +10,6 @@
 }
 
 .contentWrapper {
-  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -23,7 +22,6 @@
     display: block;
   }
 }
-
 
 @media (width >= 997px) {
   .sidebarViewport {
@@ -42,7 +40,7 @@
     border-right: 1px solid var(--ifm-toc-border-color);
   }
 
-  .sidebar>div {
+  .sidebar > div {
     padding-top: 0 !important;
   }
 }

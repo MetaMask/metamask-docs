@@ -12,6 +12,7 @@ import { Tooltip } from '@site/src/components/Tooltip'
 import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
 import Link from '@docusaurus/Link'
 import { useColorMode } from '@docusaurus/theme-common'
+import Text from '@site/src/components/Text'
 
 interface INavbarWalletComponent {
   includeUrl: string[]
@@ -182,9 +183,9 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
             <div>
               <div className={styles.innerItemWrap}>
                 <img src="/img/icons/jazzicon.png" className={styles.avatar} alt="avatar" />{' '}
-                <span className={styles.walletId}>
+                <Text as="p" className={styles.walletId}>
                   {metaMaskAccountEns || reformatMetamaskAccount(userAccount)}
-                </span>
+                </Text>
                 <button
                   data-testid="navbar-account-copy"
                   className={styles.copyButton}
@@ -212,7 +213,6 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
           </li>
           <li className={styles.item}>
             <DisconnectButton
-              thin
               type="danger"
               testId="navbar-account-disconnect"
               onClick={handleDisconnect}
