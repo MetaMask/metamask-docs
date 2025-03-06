@@ -77,7 +77,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 
 :::caution Restricted access
 
-New IPFS key creation is disabled for all users, only IPFS keys that were active in late 2024 continue
+New IPFS key creation is disabled for all users. Only IPFS keys that were active in late 2024 continue
 to have access to the IPFS network.
 
 :::

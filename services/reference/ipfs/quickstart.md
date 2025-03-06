@@ -11,7 +11,7 @@ This quickstart guide will help you set up and make calls on the IPFS network us
 
 :::caution Restricted access
 
-New IPFS key creation is disabled for all users, only IPFS keys that were active in late 2024 continue
+New IPFS key creation is disabled for all users. Only IPFS keys that were active in late 2024 continue
 to have access to the IPFS network.
 
 :::
