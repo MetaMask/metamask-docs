@@ -256,10 +256,16 @@ Specify the chain ID in your request to interact with the relevant network.
 
 #### Polygon
 
-| Network | Network ID |
-|---------|------------|
-| Mainnet | 137        |
-| Amoy    | 80002      |
+| Network | Chain ID |
+|---------|----------|
+| Mainnet | 137      |
+| Amoy    | 80002    |
+
+#### Sonic
+
+| Network | Chain ID |
+|---------|----------|
+| Mainnet | 146      |
 
 #### ZKsync Era
 
