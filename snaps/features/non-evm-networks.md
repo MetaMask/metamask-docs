@@ -94,7 +94,7 @@ For example, to derive Dogecoin keys:
 
    /**
     * Create a function that takes an index and returns an extended private key for m/44'/3'/0'/0/address_index.
-    * The second parameter to getBIP44AddressKeyDeriver isn't passed. This sets account and changes to 0.
+    * The second parameter to getBIP44AddressKeyDeriver isn't passed. This sets account and change to 0.
     */
    const deriveDogecoinAddress = await getBIP44AddressKeyDeriver(dogecoinNode)
 
