@@ -69,7 +69,7 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
           {isLimitedUserPlan && (
             <Accordion>
               <Text as="h3" className={styles.accordionHeader}>
-                Why must my address have Ethereum Mainnet activity to claim Linea ETH?x
+                Why must my address have Ethereum Mainnet activity to claim Linea ETH?
               </Text>
               <Text as="p" className={styles.accordionContainer}>
                 MetaMask requires an address with Ethereum Mainnet activity to safeguard the faucet
