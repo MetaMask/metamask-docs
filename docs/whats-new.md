@@ -9,7 +9,12 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
-## February
+## March 2025
+
+- Added full table for [Gas API supported networks](/services/get-started/endpoints/#gas-api).
+  ([#1914](https://github.com/MetaMask/metamask-docs/pull/1914))
+
+## February 2025
 
 - Documented [Unichain Mainnet](/services/reference/unichain) support. ([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
 
