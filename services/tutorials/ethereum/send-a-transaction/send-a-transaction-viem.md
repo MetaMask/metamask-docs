@@ -170,7 +170,7 @@ Tx mined https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5e
 
 You can search for the transaction on a block explorer such as [Sepolia Etherscan](https://sepolia.etherscan.io/).
 
-### 7. (Optional) Fine tune the transaction details
+### 8. (Optional) Fine tune the transaction details
 
 Viem automatically determines the gas limit and fees. If you want to change the default values, update
 the `sendTransaction` method to include an `estimateGas` result (`gasLimit`) and the `maxFeePerGas` and
