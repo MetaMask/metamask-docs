@@ -77,9 +77,10 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 
 ## IPFS
 
-:::caution Limited access
+:::caution Restricted access
 
-Infura restricts its IPFS service to a select set of qualified customers. Please [contact the Infura support team](https://support.infura.io/ipfs) for next steps. New IPFS key creation is disabled for all users, but existing IPFS customers can continue to use the IPFS service with their existing keys.
+New IPFS key creation is disabled for all users. Only IPFS keys that were active in late 2024 continue
+to have access to the IPFS network.
 
 :::
 
