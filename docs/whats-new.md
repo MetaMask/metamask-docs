@@ -11,11 +11,15 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2025
 
+- Documented [Base subscription methods](/services/reference/base/json-rpc-methods/subscription-methods).
+  ([#1916](https://github.com/MetaMask/metamask-docs/pull/1916))
 - Added full table for [Gas API supported networks](/services/get-started/endpoints/#gas-api).
   ([#1914](https://github.com/MetaMask/metamask-docs/pull/1914))
 
 ## February 2025
 
+- Relaunched MetaMask documentation site with new branding.
+  ([#1898](https://github.com/MetaMask/metamask-docs/pull/1898))
 - Documented [Unichain Mainnet](/services/reference/unichain) support. ([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
 
 ## January 2025
