@@ -51,7 +51,7 @@ cd infura
 
 ### 3. Initialize the project
 
-Creates a `package.json` file with default values:
+Create a `package.json` file with default values:
 
 ```bash
 npm init -y
