@@ -4,6 +4,8 @@ sidebar_position: 2
 toc_max_heading_level: 3
 ---
 
+import GasApiNetworks from "@site/src/components/GasApiNetworks.tsx";
+
 # All endpoints
 
 The following lists all the network endpoints supported by Infura.
@@ -190,80 +192,4 @@ The Gas REST API supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 
-#### Arbitrum
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 42161    |
-| Nova    | 42170    |
-
-#### Avalanche (C-Chain)
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 43114    |
-
-#### Base
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 8453     |
-
-#### BNB Chain
-
-| Network         | Chain ID |
-|-----------------|----------|
-| Mainnet         | 56       |
-| opBNB (layer 2) | 204      |
-
-#### Cronos
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 25       |
-
-#### Ethereum
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 1        |
-| Holesky | 17000    |
-| Sepolia | 11155111 |
-
-#### Fantom
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 250      |
-
-#### Filecoin
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 314      |
-
-#### Linea
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 59144    |
-| Sepolia | 59141    |
-
-#### Optimism
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 10       |
-
-#### Polygon
-
-| Network | Network ID |
-|---------|------------|
-| Mainnet | 137        |
-| Amoy    | 80002      |
-
-#### ZKsync Era
-
-| Network | Chain ID |
-|---------|----------|
-| Mainnet | 324      |
+<GasApiNetworks />
