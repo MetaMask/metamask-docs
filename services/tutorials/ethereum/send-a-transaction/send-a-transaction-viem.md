@@ -49,15 +49,33 @@ Change into the new directory:
 cd infura
 ```
 
-### 3. Install required packages
+### 3. Initialize the project
 
-Install the `viem` package in the project directory.
+Creates a `package.json` file with default values:
+
+```bash
+npm init -y
+```
+
+Generate a `tsconfig.json` file, which is used to configure TypeScript compiler options:
+
+```bash
+tsc --init --resolveJsonModule true
+```
+
+### 4. Install the required packages
+
+Install the required packages in the project directory.
 
 ```bash
 npm i viem
 ```
 
-### 4. Create a `config.ts` file
+```bash
+npm install -D tslib @types/node
+```
+
+### 5. Create a `config.ts` file
 
 Create a `config.ts` file in your project directory to store the private key of the sending account:
 
@@ -87,7 +105,7 @@ value with `0x`. The private key you export from MetaMask isn't prefixed with 
 Never disclose your private key. Anyone with your private keys can steal the assets controlled by those keys.
 :::
 
-### 5. Create a `sendTransaction.ts` file
+### 6. Create a `sendTransaction.ts` file
 
 In the project directory, create a `sendTransaction.ts` file, which configures and sends the transaction. For example:
 
@@ -122,7 +140,7 @@ In the `sendTransaction.ts` file:
 - Replace `API-KEY` with your Infura API key.
 - Update the `to` account in the code if you wish to send test ETH to an account of your choice.
 
-### 6. Execute the transaction
+### 7. Execute the transaction
 
 To execute the transaction, run:
 
@@ -203,5 +221,4 @@ const httpClient = createPublicClient({
   }
 
 sendTx()
-
 ```
