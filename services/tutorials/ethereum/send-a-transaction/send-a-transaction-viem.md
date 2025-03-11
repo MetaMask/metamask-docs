@@ -80,7 +80,7 @@ export const account = privateKeyToAccount('0x561...x...61df')
 </Tabs>
 
 In the `config.ts` file, replace `<PRIVATE-KEY>` with the [private key of your Ethereum account](https://support.metamask.io/configure/accounts/how-to-export-an-accounts-private-key/).
-A transaction must be signed with the sender's private key. Make sure that you prefix the `SIGNER_PRIVATE_KEY`
+A transaction must be signed with the sender's private key. Make sure that you prefix the private key
 value with `0x`. The private key you export from MetaMask isn't prefixed with `0x`.
 
 :::danger
@@ -99,7 +99,7 @@ import { account } from './config'
 //create a wallet client to interact with Ethereum accounts
 const walletClient = createWalletClient({
     chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API_KEY")
+    transport: http("https://sepolia.infura.io/v3/API-KEY")
   })
 
  async function sendTx () {
@@ -107,7 +107,7 @@ const walletClient = createWalletClient({
     const hash = await walletClient.sendTransaction({
         account,
         to: '0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7',
-        value : parseEther ('0.001') 
+        value : parseEther ('0.001')
         })
 
     console.log("Mining transcation... ")
@@ -119,7 +119,7 @@ sendTx()
 
 In the `sendTransaction.ts` file:
 
-- Replace `API_KEY` with your Infura API key.
+- Replace `API-KEY` with your Infura API key.
 - Update the `to` account in the code if you wish to send test ETH to an account of your choice.
 
 ### 6. Execute the transaction
@@ -148,7 +148,7 @@ Visual Studio Code, works equally well, without the need to use `ts-node` or pre
 Example output:
 
 `Mining transcation...
-Tx mined [https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6](https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6)`
+Tx mined https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6`
 
 You can search for the transaction on a block explorer such as [Sepolia Etherscan](https://sepolia.etherscan.io/).
 
@@ -170,13 +170,13 @@ import { account } from './config'
 //create a wallet client to interact with Ethereum accounts
 const walletClient = createWalletClient({
     chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API_KEY")
+    transport: http("https://sepolia.infura.io/v3/API-KEY")
   })
 
 //create a public client to interact with JSON-RPC API methods
 const httpClient = createPublicClient({
     chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API_KEY"),
+    transport: http("https://sepolia.infura.io/v3/API-KEY"),
   })
 
  async function sendTx () {
