@@ -13,6 +13,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [Base subscription methods](/services/reference/base/json-rpc-methods/subscription-methods).
   ([#1916](https://github.com/MetaMask/metamask-docs/pull/1916))
+- Added full table for [Gas API supported networks](/services/get-started/endpoints/#gas-api).
+  ([#1914](https://github.com/MetaMask/metamask-docs/pull/1914))
 
 ## February 2025
 
