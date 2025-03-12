@@ -51,7 +51,7 @@ Create a `.env` file in your project directory to store the private key of your 
 PRIVATE_KEY = <PRIVATE-KEY>
 ```
 
-Find out how to access the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key). Make sure that you prefix the `<PRIVATE_KEY>` value with `0x`. The
+Find out how to access the [private key of your Ethereum account](https://support.metamask.io/configure/accounts/how-to-export-an-accounts-private-key/). Make sure that you prefix the `<PRIVATE_KEY>` value with `0x`. The
 private key you export from MetaMask will not be prefixed with `0x`.
 
 :::danger
