@@ -67,8 +67,8 @@ Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura
 The following partners provide access to archive data for the various Arbitrum networks:
 
 - **Mainnet**:
-    - Nodefleet
+    - [Nodefleet](https://nodefleet.org/)
     - BlockPi ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://blockpi.io/privacy-policy))
     - Chainstack ([Terms of Service](https://blockpi.io/terms-of-use), [Privacy Policy](https://chainstack.com/privacy/))
 - **Sepolia**:
-    - Nodefleet
+    - [Nodefleet](https://nodefleet.org/)
