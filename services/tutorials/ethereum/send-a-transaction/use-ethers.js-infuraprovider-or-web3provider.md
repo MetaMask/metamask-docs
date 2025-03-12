@@ -60,7 +60,7 @@ Create a `.env` file in your project directory to store the project and Ethereum
 
 ```
 REACT_APP_API_KEY="<YOUR-API-KEY>"
-REACT_APP_PRIVATE_KEY="<Private-Key>"
+REACT_APP_PRIVATE_KEY="<PRIVATE-KEY>"
 ```
 
 Ensure you replace the following values in the `.env` file:
