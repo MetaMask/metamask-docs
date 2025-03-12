@@ -7,11 +7,15 @@ import CardList from '@site/src/components/CardList'
 # Arbitrum
 
 :::note Failover protection
-
 Arbitrum [failover support](../../concepts/failover-protection.md) is available for customers on the Growth or Custom plans.
 Arbitrum failover support is available on Mainnet only.
 Calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+:::
 
+:::note Archive data support
+All calls that require access to archive data (greater than 128 blocks old), are supported by the
+[DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service, meaning archive calls
+to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 :::
 
 Arbitrum is an Ethereum scaling solution that provides high throughput and low-cost smart contract execution. Arbitrum's design
@@ -54,4 +58,17 @@ Select one of the following options to get started with the Arbitrum network:
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
+### Failover support partner
+
 Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura's failover-protection partner and currently offers failover support for all Infura's Arbitrum methods.
+
+### Archive data partners
+
+The following partners provide access to archive data for the various Arbitrum networks:
+
+- **Mainnet**:
+    - Nodefleet
+    - BlockPi ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://blockpi.io/privacy-policy))
+    - Chainstack ([Terms of Service](https://blockpi.io/terms-of-use), [Privacy Policy](https://chainstack.com/privacy/))
+- **Sepolia**:
+    - Nodefleet
