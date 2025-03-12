@@ -13,9 +13,9 @@ Calls to the network are routed to [partner infrastructure providers](#partners-
 :::
 
 :::note Archive data support
-All calls that require access to archive data (greater than 128 blocks old), are supported by the
-[DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service, meaning archive calls
-to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+All calls that require access to archive data (older than 128 blocks) are handled by the
+[DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service. These archive calls
+are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 :::
 
 Arbitrum is an Ethereum scaling solution that provides high throughput and low-cost smart contract execution. Arbitrum's design
