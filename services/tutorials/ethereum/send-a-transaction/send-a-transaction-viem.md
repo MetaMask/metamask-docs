@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 In this tutorial, you'll send a transaction of 0.001 ETH from one account to another using the [Viem](https://viem.sh/)
 TypeScript library.
 
-Prerequisites
+## Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/)
 - [Install TypeScript](https://www.typescriptlang.org/download/)
@@ -31,7 +31,7 @@ Use [MetaMask](https://metamask.io/) or similar to create an Ethereum account 
     for that network.
 
     :::note
-    When using an alternative network, update the chain name in the script (in Step 5) with the
+    When using an alternative network, update the chain name in the script (in Step 6) with the
     alternative network name from the [Viem supported chains list](https://github.com/wevm/viem/blob/main/src/chains/index.ts).
     :::
 
@@ -83,15 +83,15 @@ Create a `config.ts` file in your project directory to store the private key o
   <TabItem value="Syntax" label="Syntax" default>
 
 ```tsx title="config.ts"
-import { privateKeyToAccount } from 'viem/accounts'
-export const account = privateKeyToAccount('<PRIVATE-KEY>')
+import { privateKeyToAccount } from "viem/accounts"
+export const account = privateKeyToAccount("<PRIVATE-KEY>")
 ```
   </TabItem>
   <TabItem value="Example" label="Example" default>
 
 ```tsx title="config.ts"
-import { privateKeyToAccount } from 'viem/accounts'
-export const account = privateKeyToAccount('0x561...x...61df')
+import { privateKeyToAccount } from "viem/accounts"
+export const account = privateKeyToAccount("0x561...x...61df")
 ```
 
   </TabItem>
@@ -110,34 +110,35 @@ Never disclose your private key. Anyone with your private keys can steal the ass
 In the project directory, create a `sendTransaction.ts` file, which configures and sends the transaction. For example:
 
 ```tsx
-import { http, createWalletClient, parseEther } from 'viem'
-import { sepolia } from 'viem/chains'
-import { account } from './config'
+import { http, createWalletClient, parseEther } from "viem"
+import { sepolia } from "viem/chains"
+import { account } from "./config"
 
-//create a wallet client to interact with Ethereum accounts
+// Create a wallet client to interact with Ethereum accounts.
 const walletClient = createWalletClient({
-    chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API-KEY")
+  chain: sepolia,
+  transport: http("https://sepolia.infura.io/v3/<YOUR-API-KEY>")
+})
+
+async function sendTx() {
+// Create and send the transaction object.
+  const hash = await walletClient.sendTransaction({
+    account,
+    to: "0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7",
+    value : parseEther ("0.001")
   })
 
- async function sendTx () {
-//create and send the transaction object
-    const hash = await walletClient.sendTransaction({
-        account,
-        to: '0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7',
-        value : parseEther ('0.001')
-        })
-
-    console.log("Mining transcation... ")
-    console.log(`Tx mined in https://sepolia.etherscan.io/tx/${hash}`)
-  }
+  console.log("Mining transaction... ")
+  console.log(`Tx mined in https://sepolia.etherscan.io/tx/${hash}`)
+}
 
 sendTx()
 ```
 
 In the `sendTransaction.ts` file:
 
-- Replace `API-KEY` with your Infura API key.
+- Update the `chain` name if you're using an alternative network.
+- Replace `<YOUR-API-KEY>` with your Infura API key.
 - Update the `to` account in the code if you wish to send test ETH to an account of your choice.
 
 ### 7. Execute the transaction
@@ -150,10 +151,10 @@ ts-node sendTransaction.ts
 
 :::note
 `ts-node` is a TypeScript execution engine for Node.js. It allows you to run TypeScript files without
-needing to manually compile them into JavaScript first.
+manually compiling them into JavaScript first.
 :::
 
-An alternative way to execute your transaction using node.js is to compile your `sendTransaction.ts`  file to JavaScript
+An alternative way to execute your transaction using Node.js is to compile your `sendTransaction.ts` file to JavaScript
 first, and then run the compiled JavaScript file:
 
 ```jsx
@@ -161,12 +162,14 @@ tsc sendTransaction.ts
 node sendTransaction.js
 ```
 
-Running the typescript file, `sendTransaction.ts`, directly from your code development environment, like
-Visual Studio Code, works equally well, without the need to use `ts-node` or pre-compiling first to JavaScript.
-Example output:
+You can also run the TypeScript file, `sendTransaction.ts`, directly from your code development environment (such as
+VS Code) without using `ts-node` or pre-compiling to JavaScript.
+The following is an example output:
 
-`Mining transcation...
-Tx mined https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6`
+```bash
+Mining transcation...
+Tx mined https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6
+```
 
 You can search for the transaction on a block explorer such as [Sepolia Etherscan](https://sepolia.etherscan.io/).
 
@@ -178,47 +181,47 @@ the `sendTransaction` method to include an `estimateGas` result (`gasLimit`)
 
 To do this you will also need to declare an `httpClient` to interface with JSON-RPC methods like `eth_estimateGas`.
 
-Full code overview below:
+The following is a full code overview:
 
 ```tsx
-import { http, createWalletClient, createPublicClient, parseEther, parseGwei } from 'viem'
-import { sepolia } from 'viem/chains'
-import { account } from './config'
+import { http, createWalletClient, createPublicClient, parseEther, parseGwei } from "viem"
+import { sepolia } from "viem/chains"
+import { account } from "./config"
 
-//create a wallet client to interact with Ethereum accounts
+// Create a wallet client to interact with Ethereum accounts.
 const walletClient = createWalletClient({
-    chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API-KEY")
-  })
+  chain: sepolia,
+  transport: http("https://sepolia.infura.io/v3/<YOUR-API-KEY>")
+})
 
-//create a public client to interact with JSON-RPC API methods
+// Create a public client to interact with JSON-RPC API methods.
 const httpClient = createPublicClient({
-    chain: sepolia,
-    transport: http("https://sepolia.infura.io/v3/API-KEY"),
+  chain: sepolia,
+  transport: http("https://sepolia.infura.io/v3/<YOUR-API-KEY>"),
+})
+
+async function sendTx() {
+// Estimate gas limit.
+  const limit = await httpClient.estimateGas({
+    account,
+    to: "0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7",
+    value: parseEther("0.001")
   })
 
- async function sendTx () {
-//estimate gas limit
-    const limit = await httpClient.estimateGas({
-      account,
-      to: '0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7',
-      value: parseEther('0.001')
-    })
+// Create and send the transaction object.
+  const hash = await walletClient.sendTransaction({
+    account,
+    to: "0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7",
+    value : parseEther ("0.001"),
+    maxFeePerGas: parseGwei("20"),
+    maxPriorityFeePerGas: parseGwei ("2"),
+    gas: limit,
+  })
 
-//create and send the transaction object
-    const hash = await walletClient.sendTransaction({
-        account,
-        to: '0xc2CB3fb3924b8DE3A63C1da570a8dBaf2a533eA7',
-        value : parseEther ('0.001'),
-        maxFeePerGas: parseGwei('20'),
-        maxPriorityFeePerGas: parseGwei ('2'),
-        gas: limit,
-        })
+  console.log("Mining transaction... ")
+  console.log(`Tx: https://sepolia.etherscan.io/tx/${hash}`)
 
-    console.log("Mining transcation... ")
-    console.log(`Tx: https://sepolia.etherscan.io/tx/${hash}`)
-
-  }
+}
 
 sendTx()
 ```

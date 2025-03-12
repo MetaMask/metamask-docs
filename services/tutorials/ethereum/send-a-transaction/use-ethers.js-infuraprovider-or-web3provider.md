@@ -66,7 +66,7 @@ REACT_APP_PRIVATE_KEY="<Private-Key>"
 Ensure you replace the following values in the `.env` file:
 
 - `<YOUR-API-KEY>` with the API key of the Ethereum project.
-- `<Private-Key>` with the [private key of your Ethereum account](https://support.metamask.io/configure/accounts/how-to-export-an-accounts-private-key/).
+- `<PRIVATE-KEY>` with the [private key of your Ethereum account](https://support.metamask.io/configure/accounts/how-to-export-an-accounts-private-key/).
 
 :::danger
 
