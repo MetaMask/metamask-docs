@@ -301,11 +301,15 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 </TabItem>
 </Tabs>
 
-:::tip
-If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
+:::note Notes
+
+- Learn more about the [parameters of a submitted transaction](/wallet/how-to/send-transactions#transaction-parameters).
+
+- If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
 using `window.ethereum`. In a Snap, the `window` object is not available. Instead, when you request 
 the `endowment:ethereum-provider` permission, your Snap is granted access to the 
 [`ethereum` global object](../about-snaps/apis.md#snap-requests).
+
 :::
 
 ### 5. Build and test your Snap
