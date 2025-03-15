@@ -41,6 +41,7 @@ const sidebar = {
         'guides/manage-networks',
         'guides/handle-transactions',
         'guides/interact-with-contracts',
+        'guides/use-deeplinks',
         {
           type: 'category',
           label: 'Advanced',
