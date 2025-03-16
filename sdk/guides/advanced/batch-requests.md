@@ -150,7 +150,7 @@ The following HTML displays a **Send Batch** button:
 <button id="batchBtn">Send Batch</button>
 ```
 
-:::tip Tips
+:::tip
 - For a better user experience, it's important to use reliable RPC providers instead of public nodes.
   We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 - Ensure that requests in a batch do not depend on one another's chain context, as mid-batch state changes can affect outcomes.
