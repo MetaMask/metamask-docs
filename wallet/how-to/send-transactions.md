@@ -2,6 +2,9 @@
 description: Send transactions using eth_sendTransaction.
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Send transactions
 
 You can send a transaction in MetaMask using the
@@ -17,26 +20,18 @@ const sendEthButton = document.querySelector(".sendEthButton");
 
 let accounts = [];
 
-// Send Ethereum to an address.
 sendEthButton.addEventListener("click", () => {
   provider // Or window.ethereum if you don't support EIP-6963.
     .request({
       method: "eth_sendTransaction",
-      // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
       params: [
         {
-          // The user's active address.
-          from: accounts[0],
-          // Required except during contract publications.
-          to: <recipient address>,
-          // Only required to send ether to the recipient from the initiating external account.
-          value: <value in wei to send>,
-          // Customizable by the user during MetaMask confirmation.
-          gasLimit: '0x5028',
-          // Customizable by the user during MetaMask confirmation.
-          maxPriorityFeePerGas: '0x3b9aca00',
-          // Customizable by the user during MetaMask confirmation.
-          maxFeePerGas: '0x2540be400',
+          from: accounts[0], // The user's active address.
+          to: "0x0000000000000000000000000000000000000000", // Address of the recipient. Not used in contract creation transactions.
+          value: "0x0", // Value transferred, in wei. Only required to send ether to the recipient from the initiating external account.
+          gasLimit: "0x5028", // Customizable by the user during MetaMask confirmation.
+          maxPriorityFeePerGas: "0x3b9aca00", // Customizable by the user during MetaMask confirmation.
+          maxFeePerGas: "0x2540be400", // Customizable by the user during MetaMask confirmation.
         },
       ],
     })
@@ -63,6 +58,75 @@ The following HTML displays the buttons:
 
 ## Transaction parameters
 
+The transaction parameters depend on the [transaction type](/services/concepts/transaction-types).
+The following are examples of transaction objects for each type:
+
+<Tabs>
+<TabItem value="Legacy transaction">
+
+```js
+{
+  nonce: "0x0", // Number of transactions made by the sender before this one.
+  gasPrice: "0x09184e72a000", // Gas price, in wei, provided by the sender.
+  gasLimit: "0x2710", // Maximum gas provided by the sender.
+  to: "0x0000000000000000000000000000000000000000", // Address of the recipient. Not used in contract creation transactions.
+  value: "0x0", // Value transferred, in wei.
+  data: "0x7f7465737432000000000000000000000000000000000000000000000000000000600057", // Used for defining contract creation and interaction.
+  v: "0x1", // ECDSA recovery ID.
+  r: "0xa07fd6c16e169f0e54b394235b3a8201101bb9d0eba9c8ae52dbdf556a363388", // ECDSA signature r.
+  s: "0x36f5da9310b87fefbe9260c3c05ec6cbefc426f1ff3b3a41ea21b5533a787dfc", // ECDSA signature s.
+}
+```
+
+</TabItem>
+<TabItem value="Access list transaction">
+
+```js
+{
+  nonce: "0x0", // Number of transactions made by the sender before this one.
+  gasPrice: "0x09184e72a000", // Gas price, in wei, provided by the sender.
+  gasLimit: "0x2710", // Maximum gas provided by the sender.
+  to: "0x0000000000000000000000000000000000000000", // Address of the recipient. Not used in contract creation transactions.
+  value: "0x0", // Value transferred, in wei.
+  data: "0x7f7465737432000000000000000000000000000000000000000000000000000000600057", // Used for defining contract creation and interaction.
+  v: "0x1", // ECDSA recovery ID.
+  r: "0xa07fd6c16e169f0e54b394235b3a8201101bb9d0eba9c8ae52dbdf556a363388", // ECDSA signature r.
+  s: "0x36f5da9310b87fefbe9260c3c05ec6cbefc426f1ff3b3a41ea21b5533a787dfc", // ECDSA signature s.
+  chainId: "0x1", // Chain ID of the transaction.
+  accessList: [ // List of addresses and storage keys the transaction plans to access.
+    {
+      "address": "0xa02457e5dfd32bda5fc7e1f1b008aa5979568150",
+      "storageKeys": ["0x0000000000000000000000000000000000000000000000000000000000000081"]
+    }
+  ],
+  yParity: "0x1" // Parity of the y-value of a secp256k1 signature.
+}
+```
+
+</TabItem>
+<TabItem value="EIP-1559 transaction">
+
+```js
+{
+  nonce: "0x0", // Number of transactions made by the sender before this one.
+  gasLimit: "0x2710", // Maximum gas provided by the sender.
+  maxPriorityFeePerGas: "0x0", // Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+  maxFeePerGas: "0x6f4d3132b", // Maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
+  to: "0x0000000000000000000000000000000000000000", // Address of the recipient. Not used in contract creation transactions.
+  value: "0x0", // Value transferred, in wei.
+  data: "0x7f7465737432000000000000000000000000000000000000000000000000000000600057", // Used for defining contract creation and interaction.
+  v: "0x1", // ECDSA recovery ID.
+  r: "0xa07fd6c16e169f0e54b394235b3a8201101bb9d0eba9c8ae52dbdf556a363388", // ECDSA signature r.
+  s: "0x36f5da9310b87fefbe9260c3c05ec6cbefc426f1ff3b3a41ea21b5533a787dfc", // ECDSA signature s.
+  chainId: "0x1", // Chain ID of the transaction.
+  accessList: [], // List of addresses and storage keys the transaction plans to access.
+  yParity: "0x1" // Parity of the y-value of a secp256k1 signature.
+}
+```
+
+</TabItem>
+</Tabs>
+
 ### Nonce
 
 :::note
@@ -82,29 +146,31 @@ Nonces are easy to mess up, especially when a user is interacting with multiple 
 pending transactions using the same account, potentially across multiple devices.
 Because of this, MetaMask doesn't allow dapp developers to customize nonces.
 Instead, MetaMask
-[assists the user in managing their transaction queue themselves](https://metamask.zendesk.com/hc/en-us/articles/360015489251).
+[assists the user in managing their transaction queue themselves](https://support.metamask.io/manage-crypto/transactions/how-to-speed-up-or-cancel-a-pending-transaction/).
 
 ### Gas price
 
-Gas price is an optional parameter, and best used on private blockchains.
-
-In Ethereum, every transaction specifies a price for the gas it consumes.
-To maximize their profit, block producers pick pending transactions with higher gas prices first
-when creating the next block.
-This means that a high gas price usually causes your transaction to be processed faster, at the cost
-of greater transaction fees.
-
-Some networks, such as Layer 2 networks, might have a constant gas price or no gas price.
-So while you can ignore this parameter on MetaMask's default networks, you might include it when
-your dapp knows more about the target network than MetaMask does.
-On the default networks, MetaMask allows users to choose between slow, medium, and fast options for
-their gas price.
-
-Read about [how to use advanced gas controls](https://metamask.zendesk.com/hc/en-us/articles/360022895972).
+`gasPrice` is an optional parameter.
+It is used in [legacy transactions](/services/concepts/transaction-types/#legacy-transactions) and specifies the gas price the sender is willing to pay for the transaction.
+MetaMask automatically configures gas settings, but [users can also customize these settings](https://support.metamask.io/configure/transactions/how-to-customize-gas-settings/).
 
 ### Gas limit
 
-Gas limit is an optional parameter, since MetaMask automatically calculates a reasonable gas price.
+`gasLimit` is an optional parameter.
+It specifies the maximum amount of gas units the sender is willing to pay for the transaction.
+MetaMask automatically sets this parameter, but [users can also customize their gas settings](https://support.metamask.io/configure/transactions/how-to-customize-gas-settings/).
+
+### Max priority fee per gas
+
+`maxPriorityFeePerGas` is an optional parameter.
+It is used in [EIP-1559 transactions](/services/concepts/transaction-types/#eip-1559-transactions) and specifies the maximum fee the sender is willing to pay per gas above the base fee, in order to get their transaction prioritized.
+MetaMask automatically sets this parameter, but [users can also customize their gas settings](https://support.metamask.io/configure/transactions/how-to-customize-gas-settings/).
+
+### Max fee per gas
+
+`maxFeePerGas` is an optional parameter.
+It is used in [EIP-1559 transactions](/services/concepts/transaction-types/#eip-1559-transactions) and specifies the maximum total fee (base fee + priority fee) the sender is willing to pay per gas.
+MetaMask automatically sets this parameter, but [users can also customize their gas settings](https://support.metamask.io/configure/transactions/how-to-customize-gas-settings/).
 
 ### To
 
