@@ -74,7 +74,7 @@ The example specifies the `Content-Type` to be `application/json` which means th
 
 The `-d` or `--data` flag specifies more information sent along with the curl request.
 
-In the example, the data object is a list of key value pairs in JSON format. This follows the [JSON RPC 2.0 specification ](https://www.jsonrpc.org/specification)which requires the four specific keys seen here.
+In the example, the data object is a list of key value pairs in JSON format. This follows the [JSON RPC 2.0 specification](https://www.jsonrpc.org/specification)which requires the four specific keys seen here.
 
 The `method`, `params`, and `id` values are modifiable.
 
