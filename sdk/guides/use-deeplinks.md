@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Use deeplinks
 
 You can use deeplinks to route your users to specific locations and pre-configured functions in the MetaMask Mobile app.
-For example, you can create a deeplink that enables users to make payments in one click—with the token, recipient, and amount already set.
+For example, you can create a deeplink that lets users make one-click payments with a preset token, recipient, and amount.
 
 If a user doesn't have MetaMask Mobile installed, deeplinks route the user to a landing page where they can download the app.
 
@@ -108,7 +108,7 @@ The example displays the confirmation screen to send 1 USDC (`1e6` units, contra
 ### Query string parameters
 
 - `address` - Address of the recipient.
-- `uint256` - Amount to be transferred, in the token's smallest units.
+- `uint256` - Amount to be transferred, in the token's smallest unit.
 
 ## Start the on-ramp process
 
