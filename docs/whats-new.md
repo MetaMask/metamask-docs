@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2025
 
+- Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
+  ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
 - Added a tutorial for [sending a transaction using Viem](/services/tutorials/ethereum/send-a-transaction/send-a-transaction-viem). ([#1920](https://github.com/MetaMask/metamask-docs/pull/1920))
 - Documented [Base subscription methods](/services/reference/base/json-rpc-methods/subscription-methods).
   ([#1916](https://github.com/MetaMask/metamask-docs/pull/1916))
