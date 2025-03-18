@@ -54,7 +54,7 @@ curl --user :<YOUR-API-KEY-SECRET> \
   <TabItem value="WebSocket" label="WebSocket" >
 
 ```bash
-wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> --auth ":<YOUR-API-KEY-SECRET>"
+wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> --auth ":<7c247621f8eb4792ad30729e62dd2aae>"
 > {"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}
 ```
 
