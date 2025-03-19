@@ -5,6 +5,8 @@ The documentation site is hosted at [`docs.metamask.io`](https://docs.metamask.i
 built using [Docusaurus](https://docusaurus.io/), a static site generator purpose-built for
 technical documentation.
 
+## Just triggerind a deploy..
+
 ## Build locally
 
 Build the documentation site locally using the following steps.
