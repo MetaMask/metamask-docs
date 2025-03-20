@@ -47,8 +47,8 @@ Requests for data older than the most recent 128 blocks require access to archiv
 
 The following methods include a parameter for specifying a block number for the request.
 
-- `eth_getBalance`
-- `eth_getCode`
-- `eth_getTransactionCount`
-- `eth_getStorageAt`
-- `eth_call`
+- `eth_getBalance`0x26087efF214dD16cc0548DAf3bDd27233336528B
+- `eth_getCode`0x26087efF214dD16cc0548DAf3bDd27233336528B
+- `eth_getTransactionCount`0x26087efF214dD16cc0548DAf3bDd27233336528B
+- `eth_getStorageAt`0x26087efF214dD16cc0548DAf3bDd27233336528B
+- `eth_call`0x26087efF214dD16cc0548DAf3bDd27233336528B
