@@ -49,7 +49,7 @@
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.5",
     "docusaurus-plugin-segment": "^1.0.4",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "ethers": "^6.13.5",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
