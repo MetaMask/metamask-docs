@@ -103,8 +103,14 @@ You're managing the user's keys and assets on their behalf.
 Their safety is your responsibility.
 :::
 
-Gets the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) key for the `path`
-and `curve` specified by the method name.
+Enables you to [manage users' non-EVM accounts](../features/non-evm-networks.md) by deriving
+the [SLIP-10](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) keys
+specified by the `path` and `curve` parameters.
+The keys are derived using the entropy from the user's Secret Recovery Phrase.
+
+If the keys you want to derive conform to the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) structure,
+use [`snap_getBip44Entropy`](#snap_getbip44entropy) instead.
+Otherwise, use this method.
 
 This method is designed to be used with the
 [`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree) module.
@@ -252,10 +258,19 @@ You're managing the user's keys and assets on their behalf.
 Their safety is your responsibility.
 :::
 
-Gets the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` key
-for the `coin_type` number specified by the method name.
+Enables you to [manage users' non-EVM accounts](../features/non-evm-networks.md) by deriving 
+the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) keys
+specified by the `coinType` parameter.
+The keys are derived using the entropy from the user's Secret Recovery Phrase.
+
+If the keys you want to derive conform to the BIP-44 structure, use this method.
+Otherwise, use [`snap_getBip32Entropy`](#snap_getbip32entropy).
+
+:::note
 See [SLIP-44](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) for the list of
-available protocols and their `coin_type` values.
+available protocols and their coin types.
+To register a new coin type, create a pull request on SLIP-44.
+:::
 
 This method is designed to be used with the
 [`@metamask/key-tree`](https://npmjs.com/package/@metamask/key-tree) module.
@@ -268,9 +283,9 @@ derive an address for the relevant protocol or sign a transaction for the user.
 
 An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 
-:::caution
+:::note
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
-If you wish to connect to MetaMask accounts in a Snap, use
+To connect to MetaMask accounts in a Snap, use
 [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) and
 [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
 :::
@@ -281,8 +296,7 @@ An object representing the
 [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD tree node
 and containing its corresponding key material:
 
-- `coin_type` - The BIP-44 [coin type](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
-  value of the node.
+- `coin_type` - The BIP-44 coin type value of the node.
 - `depth` - The 0-indexed BIP-44 path depth of the node.
   Since this is a `coin_type` node, the depth is `2`.
 - `privateKey` - The hexadecimal-encoded string representation of the private key for the node.
