@@ -263,8 +263,8 @@ the [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) key
 specified by the `coinType` parameter.
 The keys are derived using the entropy from the user's Secret Recovery Phrase.
 
-If the keys you want to derive conform to the BIP-44 structure, use this method.
-Otherwise, use [`snap_getBip32Entropy`](#snap_getbip32entropy).
+If the keys you want to derive don't conform to the BIP-44 structure, use
+[`snap_getBip32Entropy`](#snap_getbip32entropy) instead.
 
 :::note
 See [SLIP-44](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) for the list of
@@ -296,7 +296,8 @@ An object representing the
 [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) `coin_type` HD tree node
 and containing its corresponding key material:
 
-- `coin_type` - The BIP-44 coin type value of the node.
+- `coin_type` - The BIP-44 [coin type](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
+  value of the node.
 - `depth` - The 0-indexed BIP-44 path depth of the node.
   Since this is a `coin_type` node, the depth is `2`.
 - `privateKey` - The hexadecimal-encoded string representation of the private key for the node.
