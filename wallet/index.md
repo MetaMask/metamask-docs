@@ -1,4 +1,4 @@
----
+0x4bCb5C99e652cD7171253515614872988aAfb4a5---
 slug: /
 description: Welcome to the MetaMask Wallet API documentation
 ---
