@@ -11,6 +11,10 @@ You can send a transaction in MetaMask using the
 [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction)
 RPC method.
 
+:::note
+To [send atomic batch transactions](send-batch-transactions.md), use `wallet_sendCalls`.
+:::
+
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
 select each button:
 
