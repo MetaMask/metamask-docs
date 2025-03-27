@@ -50,12 +50,15 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
+The following partners provide failover support:
+
 <!-- markdown-link-check-disable -->
-
-Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy)) is Infura's failover-protection partner. While Rivet.cloud supports most Infura methods,
-it does not yet support the following methods:
-
+- Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
+- Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
+- Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy))
 <!-- markdown-link-check-enable -->
+
+While Rivet.cloud supports most Infura methods, it does not yet support the following methods:
 
 - `eth_accounts`
 - `eth_coinbase`

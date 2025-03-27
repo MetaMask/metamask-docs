@@ -60,4 +60,5 @@ The following partners provide access to the BSC network:
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
 - Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- Validation Cloud ([Terms of Use](https://www.validationcloud.io/terms), [Privacy Policy](https://www.validationcloud.io/privacy))
 <!-- markdown-link-check-enable -->

@@ -52,5 +52,6 @@ The following partners provide access to the ZKsync Era network:
 <!-- markdown-link-check-disable -->
 
 - Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
-- Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
+- Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- NorthWest Nodes
 <!-- markdown-link-check-enable -->

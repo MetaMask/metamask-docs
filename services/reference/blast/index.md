@@ -55,3 +55,4 @@ The following partners provide access to the Blast network:
 
 - Nodies DLB ([Terms of Use](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
 - Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
+- Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))

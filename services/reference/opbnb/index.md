@@ -56,5 +56,5 @@ Select an option below to get started with the opBNB network.
 The following partners provide access to the opBNB network:
 <!-- markdown-link-check-disable -->
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
-- NodeReal ([Privacy Policy](https://nodereal.io/privacy-policy))
+- Validation Cloud ([Terms of Use](https://www.validationcloud.io/terms), [Privacy Policy](https://www.validationcloud.io/privacy))
 <!-- markdown-link-check-enable -->

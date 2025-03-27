@@ -56,3 +56,4 @@ Select one of the following options to get started with the Mantle network:
 The following partner provides access to the Mantle network:
 
 - 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
+- Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
