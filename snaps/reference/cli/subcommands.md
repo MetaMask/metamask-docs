@@ -39,13 +39,6 @@ yarn mm-snap build --analyze
 ```
 
 </TabItem>
-<TabItem value="Example">
-
-```bash
-yarn mm-snap build --analyze false
-```
-
-</TabItem>
 </Tabs>
 
 Enables analyzing the Snap bundle.
@@ -105,21 +98,13 @@ Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-fil
 <TabItem value="Syntax">
 
 ```bash
-yarn mm-snap manifest --fix <BOOLEAN>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
-yarn mm-snap manifest --fix false
+yarn mm-snap manifest --fix
 ```
 
 </TabItem>
 </Tabs>
 
-Enables or disables making any changes to fix the manifest file.
-The default is `true`.
+Enables making any changes to fix the manifest file.
 
 ### `s`, `serve`
 
