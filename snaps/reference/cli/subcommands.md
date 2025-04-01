@@ -35,7 +35,7 @@ Builds a Snap from source.
 <TabItem value="Syntax">
 
 ```bash
-yarn mm-snap build --analyze <BOOLEAN>
+yarn mm-snap build --analyze
 ```
 
 </TabItem>
@@ -48,11 +48,11 @@ yarn mm-snap build --analyze false
 </TabItem>
 </Tabs>
 
-Enables or disables analyzing the Snap bundle.
+Enables analyzing the Snap bundle.
 This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood.
 
 :::info
-This option requires [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) version 4.0.4 or later.
+This option requires [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) version 6.7.0 or later.
 :::
 
 #### `c`, `config`
