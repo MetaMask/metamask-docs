@@ -29,6 +29,32 @@ Builds a Snap from source.
 
 `b` is an alias for `build`.
 
+#### `analyze`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```bash
+yarn mm-snap build --analyze <BOOLEAN>
+```
+
+</TabItem>
+<TabItem value="Example">
+
+```bash
+yarn mm-snap build --analyze false
+```
+
+</TabItem>
+</Tabs>
+
+Enables or disables analyzing the Snap bundle.
+This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood.
+
+:::info
+This option requires [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) version 4.0.4 or later.
+:::
+
 #### `c`, `config`
 
 <Tabs>
