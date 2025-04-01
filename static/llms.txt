@@ -1,3 +1,7 @@
+# This file is intended for use by large language models (LLMs).
+# It provides information about the content and structure of this website to facilitate
+# better indexing, summarization, and understanding by LLMs.
+
 # Home | MetaMask developer documentation
 
 ## Developer-tools
@@ -22,10 +26,6 @@
 - [Troubleshoot account issues | MetaMask developer documentation](https://docs.metamask.io/developer-tools/dashboard/how-to/troubleshoot/): Troubleshoot account issues
 - [Set up two-factor authentication | MetaMask developer documentation](https://docs.metamask.io/developer-tools/dashboard/how-to/two-factor-authentication/): Set up two-factor authentication
 - [Upgrade your plan | MetaMask developer documentation](https://docs.metamask.io/developer-tools/dashboard/how-to/upgrade-your-plan/): Upgrade your Infura plan.
-
-## Search
-
-- [Search the documentation | MetaMask developer documentation](https://docs.metamask.io/search/): undefined
 
 ## Wallet API
 
