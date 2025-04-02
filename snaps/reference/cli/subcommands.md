@@ -44,7 +44,7 @@ yarn mm-snap build --analyze
 Enables analyzing the Snap [bundle](../../learn/about-snaps/files.md#bundle-file).
 This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood,
 which creates an interactive visualization of the contents of your bundle.
-The visualization is located at the port displayed in the command line output.
+The visualization is located at the URL displayed in the command line output (for example, `http://localhost:8888`).
 
 :::info
 This option requires [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) version 6.7.0 or later.
