@@ -73,6 +73,7 @@
 .enumWrapper {
   border: 1px solid var(--general-gray-light);
   margin-bottom: 2rem;
+  font-size: 1.4rem;
 }
 
 .enumItem {
@@ -137,6 +138,14 @@
     height: 2.3rem;
     line-height: 0.85;
   }
+}
+
+.methodSummary {
+  font-style: italic;
+}
+
+.methodDescription, .noParamsDescription {
+  font-size: 1.6rem;
 }
 
 html[data-theme='dark'] {
