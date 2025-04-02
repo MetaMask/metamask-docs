@@ -48,7 +48,7 @@ export default function DetailsBox({
       {summary !== null && (
         <p
           style={{ marginBottom: '0.5rem' }}
-          className={clsx('padding-bottom--md', styles.borderBottomLine)}>
+          className={clsx('padding-bottom--md', styles.borderBottomLine, styles.methodSummary)}>
           <strong>Summary: </strong>
           <span className={styles.summaryText}>
             <MDContent content={summary} />
@@ -56,7 +56,7 @@ export default function DetailsBox({
         </p>
       )}
       {description !== null && (
-        <div className="padding-top--md">
+        <div className={clsx("padding-top--md", styles.methodDescription)}>
           <MDContent content={description} />
         </div>
       )}
@@ -68,7 +68,7 @@ export default function DetailsBox({
       </Heading>
       <div className={styles.paramContainer}>
         {params.length === 0 ? (
-          <div className="padding-vert--md">This method doesn't accept any parameters.</div>
+          <div className={clsx("padding-vert--md", styles.noParamsDescription)}>This method doesn't accept any parameters.</div>
         ) : (
           params && renderParamSchemas(params, components)
         )}
