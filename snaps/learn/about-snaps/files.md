@@ -164,6 +164,6 @@ built-ins must be bundled along with the Snap.
 Running `yarn start` bundles your Snap for you.
 
 You can also run [`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) to bundle your
-Snap using [webpack](https://webpack.js.org/) or [Browserify](https://browserify.org).
+Snap using [webpack](https://webpack.js.org/).
 This command finds all dependencies using your specified main entry point and outputs a bundle
 file to your specified output path.

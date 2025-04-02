@@ -41,8 +41,10 @@ yarn mm-snap build --analyze
 </TabItem>
 </Tabs>
 
-Enables analyzing the Snap bundle.
-This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood.
+Enables analyzing the Snap [bundle](../../learn/about-snaps/files.md#bundle-file).
+This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood,
+which creates an interactive visualization of the contents of your bundle.
+The visualization is located at the port displayed in the command line output.
 
 :::info
 This option requires [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) version 6.7.0 or later.
@@ -67,7 +69,8 @@ yarn mm-snap build --config ./snap.config.build.ts
 </TabItem>
 </Tabs>
 
-Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file).
+Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file),
+which specifies [options](options.md) with which to the build the Snap.
 
 `-c` is an alias for `--config`.
 
