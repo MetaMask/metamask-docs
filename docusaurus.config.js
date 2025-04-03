@@ -42,7 +42,6 @@ const config = {
     VERCEL_ENV: process.env.VERCEL_ENV,
     DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
-    GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
   },
 
@@ -60,8 +59,6 @@ const config = {
       defer: true,
       'data-domain': 'docs.metamask.io',
     },
-    { src: '/js/feedback-script.js', defer: true, async: true },
-    { src: '/js/getfeedback.js', defer: true, async: true },
   ],
 
   markdown: {
