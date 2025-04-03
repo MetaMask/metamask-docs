@@ -29,6 +29,27 @@ Builds a Snap from source.
 
 `b` is an alias for `build`.
 
+#### `analyze`
+
+<Tabs>
+<TabItem value="Syntax">
+
+```bash
+yarn mm-snap build --analyze
+```
+
+</TabItem>
+</Tabs>
+
+Enables analyzing the Snap [bundle](../../learn/about-snaps/files.md#bundle-file).
+This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood,
+which creates an interactive visualization of the contents of your bundle.
+The visualization is located at the URL displayed in the command line output (for example, `http://localhost:8888`).
+
+:::info
+This option requires [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) version 6.7.0 or later.
+:::
+
 #### `c`, `config`
 
 <Tabs>
@@ -48,7 +69,8 @@ yarn mm-snap build --config ./snap.config.build.ts
 </TabItem>
 </Tabs>
 
-Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file).
+Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file),
+which specifies [options](options.md) with which to the build the Snap.
 
 `-c` is an alias for `--config`.
 
@@ -79,21 +101,13 @@ Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-fil
 <TabItem value="Syntax">
 
 ```bash
-yarn mm-snap manifest --fix <BOOLEAN>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```bash
-yarn mm-snap manifest --fix false
+yarn mm-snap manifest --fix
 ```
 
 </TabItem>
 </Tabs>
 
-Enables or disables making any changes to fix the manifest file.
-The default is `true`.
+Enables making any changes to fix the manifest file.
 
 ### `s`, `serve`
 
