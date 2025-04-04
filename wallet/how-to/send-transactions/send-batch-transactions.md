@@ -2,25 +2,57 @@
 description: Send atomic batch transactions using wallet_sendCalls.
 ---
 
-# Send atomic batch transactions
+# Send batch transactions
 
-You can send and manage atomic batch transactions in MetaMask, using the methods specified by
+You can send and manage batch transactions in MetaMask, using the methods specified by
 [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792):
 
 - `wallet_getCapabilities` - Query whether support for atomic batch transactions is available.
-- `wallet_sendCalls` - Submit multiple transactions to be processed atomically as one by the wallet.
+- `wallet_sendCalls` - Submit multiple transactions to be processed atomically or sequentially by the wallet.
 - `wallet_getCallsStatus` - Track the status of your transaction batch.
 
-The key benefits of atomic batch transactions include:
+The key benefits of batch transactions include:
 
 - **Fewer clicks and less friction** - Users only need to review and approve a single wallet confirmation, instead of multiple confirmations.
-- **Faster completion times** - Only a single atomic batch transaction must be confirmed onchain, instead of multiple individual transactions.
+- **Faster completion times** - With [EIP-7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md),
+  only a single atomic transaction is confirmed onchain, instead of multiple individual transactions.
 
 ## Steps
 
 ### 1. Query whether the wallet supports atomic batch
 
-:::warning Important
+Use `wallet_getCapabilities` to query whether the wallet supports atomic batch transactions.
+For example:
+
+```js title="index.js"
+const result = await provider // Or window.ethereum if you don't support EIP-6963.
+  .request({
+    "method": "wallet_getCapabilities",
+    "params": [
+      "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The user's wallet address.
+      ["0x2105", "0x14A34"] // (Optional) A list of chain IDs to query for.
+    ],
+  });
+```
+
+This method returns whether the `atomic` capability is supported for each chain ID:
+
+```json
+{
+  "0x2105": {
+    "atomic": {
+      "supported": true
+    }
+  },
+  "0x14A34": {
+    "atomic": {
+      "supported": false
+    }
+  }
+}
+```
+
+:::note
 If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of `wallet_sendCalls`,
 and [`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
 instead of `wallet_getCallsStatus`.
@@ -28,4 +60,105 @@ instead of `wallet_getCallsStatus`.
 
 ### 2. Submit a batch of transactions
 
+Use `wallet_sendCalls` to submit a batch of transactions.
+Set `atomicRequired` to:
+
+- `true` if you require MetaMask to execute the calls atomically.
+  Make sure atomic batch is supported first, via
+  [`wallet_getCapabilities`](#1-query-whether-the-wallet-supports-atomic-batch).
+- `false` if the calls can be executed either sequentially or atomically.
+
+For example:
+
+```js title="index.js"
+const result = await provider.
+  request({
+    "method": "wallet_sendCalls", // Or window.ethereum if you don't support EIP-6963.
+    "params": [
+      {
+        version: "1.0",
+        from: "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The sender's address.
+        chainId: "0x2105", // The chain ID, which must match the currently selected network.
+        atomicRequired: true, // Whether or not atomicity is required.
+        calls: [ // The list of calls to send as a batch.
+          {
+            to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+            value: "0x9184e72a",
+            data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+          },
+          {
+            to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+            value: "0x182183",
+            data: "0xfbadbaf01"
+          }
+        ]
+      }
+    ],
+  });
+```
+
+This method returns a batch ID that you can use to track the status of the batch:
+
+```json
+{
+  "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
+}
+```
+
 ### 3. Track the status of the batch of transactions
+
+Use `wallet_getCallsStatus` to track the status of the submitted batch of transactions,
+using the batch ID returned by `wallet_sendCalls`.
+For example:
+
+```js title="index.js"
+const result = await provider // Or window.ethereum if you don't support EIP-6963.
+  .request({
+    "method": "wallet_getCallsStatus",
+    "params": [
+      "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331" // Batch ID.
+    ],
+  });
+```
+
+This method returns status information about the batch of transactions, including:
+
+- The status code of the batch.
+- Whether the batch was executed atomically.
+- A list of transaction receipts.
+
+```json
+{
+  "version": "1.0",
+  "chainId": "0x2105",
+  "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+  "status": 200, // Status code. 200 means confirmed.
+  "atomic": true, // Whether the calls were executed atomically.
+  "receipts": [ // List of transaction receipts.
+    {
+      "logs": [
+        {
+          "address": "0xa922b54716264130634d6ff183747a8ead91a40b",
+          "topics": [
+            "0x5a2a90727cc9d000dd060b1132a5c977c9702bb3a52afe360c9c22f0e9451a68"
+          ],
+          "data": "0xabcd"
+        }
+      ],
+      "status": "0x1",
+      "blockHash": "0xf19bbafd9fd0124ec110b848e8de4ab4f62bf60c189524e54213285e7f540d4a",
+      "blockNumber": "0xabcd",
+      "gasUsed": "0xdef",
+      "transactionHash": "0x9b7bb827c2e5e3c1a0a44dc53e573aa0b3af3bd1f9f5ed03071b100bb039eaff"
+    }
+  ]
+}
+```
+
+:::note
+If the calls were executed atomically in a single transaction, a single receipt is returned.
+
+In some cases, calls can be executed atomically but in multiple transactions (for example, using
+`eth_bundle` on an L2 network resistant to reorgs).
+In these cases, `atomic` is `true` but multiple receipts are returned.
+:::

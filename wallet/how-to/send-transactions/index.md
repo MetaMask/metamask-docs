@@ -12,7 +12,7 @@ You can send a transaction in MetaMask using the
 RPC method.
 
 :::note
-To [send atomic batch transactions](send-batch-transactions.md), use `wallet_sendCalls`.
+To [send batch transactions](send-batch-transactions.md), use `wallet_sendCalls`.
 :::
 
 For example, the following JavaScript gets the user's accounts and sends a transaction when they
