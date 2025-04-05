@@ -83,7 +83,6 @@ For more examples, the following are live web dapps that let you enter your toke
 them using a simple web link:
 
 - [WatchToken](https://vittominacori.github.io/watch-token/create/)
-- [Add Token dapp](https://metamask.github.io/Add-Token/#edit)
 
 ## Display NFTs
 
