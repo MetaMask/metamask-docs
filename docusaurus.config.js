@@ -52,9 +52,6 @@ const config = {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
     },
     {
-      src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
-    },
-    {
       src: 'https://plausible.io/js/script.js',
       defer: true,
       'data-domain': 'docs.metamask.io',
