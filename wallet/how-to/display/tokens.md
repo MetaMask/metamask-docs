@@ -79,10 +79,8 @@ We recommend [detecting the user's network chain ID](../manage-networks/detect-n
 [prompting them to switch chains](/wallet/reference/json-rpc-methods/wallet_switchethereumchain), if necessary.
 :::
 
-For more examples, the following are live web dapps that let you enter your token details and share
-them using a simple web link:
-
-- [WatchToken](https://vittominacori.github.io/watch-token/create/)
+For another example, [WatchToken](https://vittominacori.github.io/watch-token/create/) is a 
+live web dapp that lets you enter your token details and share them using a web link.
 
 ## Display NFTs
 
