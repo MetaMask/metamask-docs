@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build
-        uses: ConsenSys/docs-gha/build@main
+        uses: ConsenSys/github-actions/docs-build@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

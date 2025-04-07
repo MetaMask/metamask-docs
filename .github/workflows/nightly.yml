@@ -19,7 +19,7 @@
       steps:
         - uses: actions/checkout@v4
         - name: LinkCheck mdx files
-          uses: ConsenSys/docs-gha/linkcheck@main
+          uses: ConsenSys/github-actions/docs-link-check@main
           with:
               FILE_EXTENSION: mdx
               MODIFIED_FILES_ONLY: no
@@ -33,7 +33,7 @@
       steps:
         - uses: actions/checkout@v4
         - name: LinkCheck md files
-          uses: ConsenSys/docs-gha/linkcheck@main
+          uses: ConsenSys/github-actions/docs-link-check@main
           with:
               FILE_EXTENSION: md
               MODIFIED_FILES_ONLY: no
