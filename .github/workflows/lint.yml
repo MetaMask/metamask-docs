@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint
-        uses: ConsenSys/docs-gha/lint@cc8b9d9065f5f20b105954f8e806f55c1e235ecd
+        uses: ConsenSys/github-actions/docs-lint-all@main
 
   spelling:
     name: Spelling
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Vale
-        uses: Consensys/docs-gha/spelling@main
+        uses: Consensys/github-actions/docs-spelling-check@main
         with:
           FILEPATHS: 'snaps,services,wallet,developer-tools,docs'
 
@@ -50,6 +50,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: LinkCheck
-        uses: ConsenSys/docs-gha/linkcheck@main
+        uses: ConsenSys/github-actions/docs-link-check@main
         with:
           FILE_EXTENSION: ${{ matrix.file-extensions }}
