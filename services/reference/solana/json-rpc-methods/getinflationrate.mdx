@@ -1,0 +1,59 @@
+---
+title: "getInflationRate"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getInflationRate`
+
+Returns the specific inflation values for the current epoch.
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `epoch` - The epoch during which these values remain valid.
+- `foundation` - The proportion of total inflation allocated to the foundation.
+- `total` - The total inflation.
+- `validator` - The portion of inflation designated for validators.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getInflationRate"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+      "epoch":862,
+      "foundation":0.0,
+      "total":0.0385971617307845,
+      "validator":0.0385971617307845
+    },
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,74 @@
+---
+title: "getLargestAccounts"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getLargestAccounts`
+
+Returns the 20 largest accounts, by lamport balance. Results may be cached up to two hours.
+
+## Parameters
+
+- `config`: _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `filter`: (string) _[optional]_ - Filters results by account type. Supported options are `circulating` and `nonCirculating`.
+
+## Returns
+
+`result` - `null` when the account doesn't exist, or an object with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - An object containing the following keys:
+    - `address` - The `base58` encoded account address.
+    - `lamports` - The number of lamports in the account.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method": "getLargestAccounts", "params": []}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+        "context": { "slot": 54 },
+        "value": [
+        {
+            "address": "99P8ZgtJYe1buSK8JXkvpLh8xPsCFuLYhz9hQFNw93WJ",
+            "lamports": 999974
+        },
+        {
+            "address": "uPwWLo16MVehpyWqsLkK3Ka8nLowWvAHbBChqv2FZeL",
+            "lamports": 42
+        }
+        ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

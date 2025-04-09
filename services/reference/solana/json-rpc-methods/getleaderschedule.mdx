@@ -1,0 +1,68 @@
+---
+title: "getLeaderSchedule"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getLeaderSchedule`
+
+Returns the leader schedule for an epoch.
+
+## Parameters
+
+- `slot`: (integer) _[optional]_ - The slot number to query. The method returns the leader schedule
+    for the epoch that corresponds to the provided slot. If unspecified, returns the leader schedule for
+    the current epoch.
+- `config`: _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `identity`: (string) _[optional]_ - Only return results for this `base58` encoded validator identity.
+
+## Returns
+
+`result` - `null` if the requested epoch is not found; otherwise, an object of `base58` encoded validator
+identities, and their corresponding leader slot indices as values (indices are relative to the first slot in the requested epoch).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":1, "method":"getLeaderSchedule", "params":[{"identity":"3zvXem8vqvDYos6BKu66FV84tmDdQwgLxYSempy8tSrs"}]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+        "3zvXem8vqvDYos6BKu66FV84tmDdQwgLxYSempy8tSrs": [
+          2816,
+          2817,
+          2818,
+          ...
+          430998,
+          430999
+        ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

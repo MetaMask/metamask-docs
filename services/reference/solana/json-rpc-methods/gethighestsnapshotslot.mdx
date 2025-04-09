@@ -1,0 +1,58 @@
+---
+title: "getHighestSnapshotSlot"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getHighestSnapshotSlot`
+
+Returns information for the highest slot that the node has a snapshot for.
+
+This will find the highest full snapshot slot, and the highest incremental snapshot slot based on the
+full snapshot slot, if there is one.
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `full`: - The highest full snapshot slot encoded as a `u64` integer.
+- `incremental`: The highest incremental snapshot slot derived from the full snapshot.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getHighestSnapshotSlot"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+        "full":372722782,
+        "incremental":372732282
+    },
+    "id":1
+}
+  ```
+
+  </TabItem>
+</Tabs>
