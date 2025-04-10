@@ -11,13 +11,13 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2025
 
+- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) Wallet Standard support.
+  ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 - Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 
 ## March 2025
 
-- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) Wallet Standard support.
-  ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 - Added a tutorial for [sending a transaction using Viem](/services/tutorials/ethereum/send-a-transaction/send-a-transaction-viem). ([#1920](https://github.com/MetaMask/metamask-docs/pull/1920))
 - Documented [Base subscription methods](/services/reference/base/json-rpc-methods/subscription-methods).
   ([#1916](https://github.com/MetaMask/metamask-docs/pull/1916))
