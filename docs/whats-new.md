@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2025
 
+- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) Wallet Standard support.
+  ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 - Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 
