@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MetaMask Security Code Scanner
-        uses: ConsenSys/docs-gha/mm-security-scanner@main
+        uses: ConsenSys/github-actions/mm-security-scanner@main
         with:
           repo: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

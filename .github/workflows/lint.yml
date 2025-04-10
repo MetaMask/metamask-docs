@@ -10,14 +10,11 @@ on:
         required: true
       SENTRY_KEY:
         required: true
-      GF_SURVEY_KEY:
-        required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
   SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
-  GF_SURVEY_KEY: ${{ secrets.GF_SURVEY_KEY }}
 
 jobs:
   lint:
@@ -29,30 +26,30 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint
-        uses: ConsenSys/docs-gha/lint@cc8b9d9065f5f20b105954f8e806f55c1e235ecd
+        uses: ConsenSys/github-actions/docs-lint-all@main
 
   spelling:
     name: Spelling
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        file-extensions: [".md", ".mdx"]
+        file-extensions: ['.md', '.mdx']
     steps:
       - uses: actions/checkout@v4
       - name: Vale
-        uses: Consensys/docs-gha/spelling@main
+        uses: Consensys/github-actions/docs-spelling-check@main
         with:
-          FILEPATHS: "snaps,services,wallet,developer-tools,docs"
+          FILEPATHS: 'snaps,services,wallet,developer-tools,docs'
 
   linkCheck:
     name: Link Checking
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        file-extensions: [".md", ".mdx"]
+        file-extensions: ['.md', '.mdx']
     steps:
       - uses: actions/checkout@v4
       - name: LinkCheck
-        uses: ConsenSys/docs-gha/linkcheck@main
+        uses: ConsenSys/github-actions/docs-link-check@main
         with:
           FILE_EXTENSION: ${{ matrix.file-extensions }}

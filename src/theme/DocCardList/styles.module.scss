@@ -1,32 +1,23 @@
 .row {
-  > article.item {
-    @include bp(desktop) {
-      &:nth-last-child(-n + 2) {
-        margin-bottom: 1.6rem !important;
-      }
-    }
-  }
-}
-
-.item {
-  --color-palette: var(--developer-purple);
-  margin-bottom: 1.6rem;
-  transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
-  width: 100%;
-  max-height: 19.5rem;
-  margin-top: 0;
-  position: relative;
-  aspect-ratio: 1 / 0.5;
-
-  @include bp('tablet') {
-    width: 50%;
-    padding: 0 0.8rem;
+  .item {
+    --color-palette: var(--developer-purple);
+    margin-bottom: 1.6rem;
+    transition: filter calc(var(--motion) * var(--motion-speed)) $gentle-ease;
+    width: 100%;
+    margin-top: 0;
+    position: relative;
 
     &:nth-last-child(-n + 2) {
       margin-bottom: 1.6rem !important;
     }
-  }
 
+    @include bp('tablet') {
+      width: 50%;
+      padding: 0 0.8rem;
+    }
+  }
+}
+.item {
   &.active {
     filter: drop-shadow(0 0.8rem 2rem rgba(0, 0, 0, 0.1));
 
@@ -45,7 +36,7 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0.6rem;
-      padding: 2.4rem !important;
+      padding: 2.4rem 2.4rem 9.6rem 2.4rem !important;
       position: relative;
       height: 100%;
       width: 100%;
