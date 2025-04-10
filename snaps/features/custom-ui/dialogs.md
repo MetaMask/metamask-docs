@@ -13,10 +13,11 @@ There are four types of dialogs: [alerts](#display-an-alert-dialog),
 [confirmations](#display-a-confirmation-dialog), [prompts](#display-a-prompt-dialog), and
 [custom dialogs](#display-a-custom-dialog).
 
-:::caution
-Dialogs do not work when MetaMask is locked.
-To check if MetaMask is locked, use
-[`snap_getClientStatus`](../../reference/snaps-api.md#snap_getclientstatus).
+:::warning
+- Dialogs do not work when MetaMask is locked.
+  To check if MetaMask is locked, use
+  [`snap_getClientStatus`](../../reference/snaps-api.md#snap_getclientstatus).
+- [`metamask:` URLs](index.md#about-metamask-urls) are not supported in dialogs.
 :::
 
 ## Request permission to display dialogs

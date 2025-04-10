@@ -107,8 +107,8 @@ Your Snap should use `signatureMethod` as the source of truth to identify the si
 providing insights for.
 
 Once you've identified the signature object, your Snap can run any logic, including calling APIs.
-Then, your Snap must either return `null` if it has no insights to provide, or an object with a
-`content` property and an optional `severity` property as specified in the
+Then, your Snap must either return `null` if it has no insights to provide, or an object with
+[custom UI](custom-ui/index.md) content and an optional `severity` property as specified in the
 [`onSignature`](../reference/entry-points.md#onsignature) entry point.
 
 The following is an example implementation of `onSignature`:
