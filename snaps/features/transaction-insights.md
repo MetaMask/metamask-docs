@@ -40,7 +40,8 @@ permission object, and set it to `true`:
 ### 2. Implement the `onTransaction` entry point
 
 Expose an [`onTransaction`](../reference/entry-points.md#ontransaction) entry point, which receives
-a raw unsigned transaction payload, the chain ID, and the optional transaction origin.
+a raw unsigned transaction payload, the chain ID, and the optional transaction origin,
+and returns [custom UI](custom-ui/index.md) content.
 When a user submits a transaction using the MetaMask extension, MetaMask calls the `onTransaction`
 handler method.
 
