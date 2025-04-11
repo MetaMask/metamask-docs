@@ -58,20 +58,34 @@ Set up your providers in `app/providers.tsx`:
 ```typescript
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type ReactNode, useState } from "react";
-import { WagmiProvider } from "wagmi";
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
-import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
+import { EthereumWalletConnectors, IEthereum } from "@dynamic-labs/ethereum";
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+import { MetaMaskSDK } from "@metamask/sdk";
+import { WagmiProvider } from "wagmi";
 import { config } from "@/wagmi.config";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 
-type Props = {
-  children: ReactNode;
-};
+export function Providers({ children }: { children: React.ReactNode }) {
 
-export function Providers({ children }: Props) {
-  const [queryClient] = useState(() => new QueryClient());
+  const queryClient = new QueryClient();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const MMSDK = new MetaMaskSDK({
+      dappMetadata: {
+        name: "MetaMask Dynamic Integration",
+        url: window.location.href,
+      },
+    });
+
+    const ethereum = MMSDK.getProvider();
+    if (ethereum) {
+      window.ethereum = ethereum as unknown as IEthereum;
+    }
+  }, []);
 
   return (
     <DynamicContextProvider
