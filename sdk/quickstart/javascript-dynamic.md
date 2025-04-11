@@ -5,9 +5,7 @@ toc_max_heading_level: 2
 
 # MetaMask + Dynamic SDK Integration
 
-Get started with MetaMask SDK and Dynamic SDK integration in a Next.js dapp.
-This project demonstrates how to combine both SDKs to create a seamless wallet connection experience
-for both desktop and mobile users.
+Get started with MetaMask SDK and Dynamic SDK integration in a Next.js dapp. This project demonstrates how to combine both SDKs to create a seamless wallet connection experience for both desktop and mobile users.
 
 Features include:
 
@@ -50,7 +48,7 @@ pnpm install
 Install the required dependencies:
 
 ```bash
-pnpm i @metamask/sdk @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
+pnpm i @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
 ```
 
 ### 2. Configure providers
@@ -58,35 +56,22 @@ pnpm i @metamask/sdk @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynami
 Set up your providers in `app/providers.tsx`:
 
 ```typescript
-import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { type ReactNode, useState } from "react";
+import { WagmiProvider } from "wagmi";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
-import { MetaMaskSDK } from "@metamask/sdk";
+import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
+import { config } from "@/wagmi.config";
 
-export function Providers({ children }) {
-  const [mounted, setMounted] = useState(false);
-  const [sdkInitialized, setSdkInitialized] = useState(false);
+type Props = {
+  children: ReactNode;
+};
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const MMSDK = new MetaMaskSDK({
-      dappMetadata: {
-        name: "MetaMask Dynamic Integration",
-        url: window.location.host,
-      },
-      injectProvider: true,
-      communicationServerUrl: "https://metamask-sdk-socket.metamask.io",
-    });
-
-    const ethereum = MMSDK.getProvider();
-    if (ethereum) {
-      window.ethereum = ethereum;
-      setSdkInitialized(true);
-    }
-
-    setMounted(true);
-  }, []);
+export function Providers({ children }: Props) {
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <DynamicContextProvider
@@ -107,22 +92,7 @@ export function Providers({ children }) {
 }
 ```
 
-### 3. Configure Next.js
-
-Update your `next.config.ts`:
-
-```typescript
-const nextConfig = {
-  allowedDevOrigins: [
-    "http://localhost:3000",
-    "http://192.168.1.152:3000/",
-    "192.168.1.152:3000",
-    "192.168.1.152",
-  ],
-};
-```
-
-### 4. Set up environment variables
+### 3. Set up environment variables
 
 Create a `.env.local` file:
 
@@ -188,11 +158,13 @@ For production deployments:
 Common issues and solutions:
 
 1. **SDK Initialization Error**
+
    - Ensure MetaMask is installed
    - Check environment variables
    - Verify network connectivity
 
 2. **TypeScript Errors**
+
    - Update type definitions
    - Check SDK versions compatibility
 
@@ -218,4 +190,4 @@ Common issues and solutions:
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
