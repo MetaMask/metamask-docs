@@ -10,14 +10,11 @@ on:
         required: true
       SENTRY_KEY:
         required: true
-      GF_SURVEY_KEY:
-        required: true
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
   SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
-  GF_SURVEY_KEY: ${{ secrets.GF_SURVEY_KEY }}
 
 jobs:
   build:
@@ -29,6 +26,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build
-        uses: ConsenSys/docs-gha/build@main
+        uses: ConsenSys/github-actions/docs-build@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

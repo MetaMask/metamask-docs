@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## April 2025
+
+- Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
+  ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
+
 ## March 2025
 
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).

@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
+interface NetworkData {
+  [chainId: string]: string;
+}
+
 const GasApiNetworks = () => {
-  const [networks, setNetworks] = useState({});
+  const [networks, setNetworks] = useState<NetworkData>({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('https://gas.api.cx.metamask.io/v1/supportedChainNames');
-        const data = await response.json();
+        const data: NetworkData = await response.json();
         setNetworks(data);
       } catch (error) {
         console.error('Error fetching data:', error);
