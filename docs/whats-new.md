@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2025
 
+- Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
+  ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
 - Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 
