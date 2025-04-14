@@ -1,5 +1,5 @@
 ---
-description: Send transactions using eth_sendTransaction.
+description: Send transactions using `eth_sendTransaction`.
 ---
 
 import Tabs from "@theme/Tabs";
