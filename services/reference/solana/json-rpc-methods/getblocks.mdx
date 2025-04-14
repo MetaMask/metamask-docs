@@ -14,7 +14,7 @@ Returns a list of confirmed blocks between two given slots.
 - `startSlot`: (integer) _[required]_ - The starting slot number for the range of blocks to query.
 - `endSlot`: (integer) _[optional]_ - The ending slot number for the range of blocks to query.
     Must be no more than 500,000 blocks higher than `startSlot`.
-- `config`: _[optional]_  - Configuration object with the following options:
+- `config`: (object) _[optional]_  - Configuration object with the following options:
     - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
         - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
             reached maximum lockout, meaning the cluster has recognized this block as finalized.

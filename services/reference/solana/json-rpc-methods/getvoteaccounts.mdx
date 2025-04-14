@@ -1,0 +1,109 @@
+---
+title: "getVoteAccounts"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getVoteAccounts`
+
+Returns the account info and associated stake for all the voting accounts in the current bank.
+
+## Parameters
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `votePubkey`: (string) _[optional]_ - The `base58` encoded public key of the validator vote account to return results for.
+    - `keepUnstakedDelinquents`: (boolean) _[optional]_ - If `true`, the response includes all delinquent
+        accounts, even if they are not staked.
+    - `delinquentSlotDistance`: (integer) _[optional]_ - The number of slots that a validator must be behind to be considered delinquent.
+        It's not recommended to specify this parameter.
+
+## Returns
+
+`result` - An object of current and delinquent voting accounts with the following fields:
+- `current` - An array of objects with the following fields:
+    - `activatedStake` - The amount of stake in lamports delegated to this vote account.
+    - `commission` - The commission rate for the validator as a percentage (0 - 100).
+    - `epochCredits` - An array of arrays containing the epoch, credits earned, and previous credits earned.
+    - `epochVoteAccount` - A boolean indicating if the account is staked for the current epoch.
+    - `lastVote` - The most recent slot voted on by this vote account.
+    - `nodePubkey` - The public key of the validator.
+    - `rootSlot` - The root slot number.
+    - `votePubkey` - The public key of the vote account.
+- `delinquent` - An array of objects with the same fields as `current`, but for delinquent accounts.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getVoteAccounts"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "current": [
+        {
+          "activatedStake": 21728348612276,
+          "commission": 0,
+          "epochCredits": [
+            [
+              767,
+              552326409,
+              545429728
+            ],
+            [
+              768,
+              559219285,
+              552326409
+            ],
+            [
+              769,
+              566108108,
+              559219285
+            ],
+            [
+              770,
+              573001980,
+              566108108
+            ],
+            [
+              771,
+              577049781,
+              573001980
+            ]
+          ],
+          "epochVoteAccount": true,
+          "lastVote": 333325355,
+          "nodePubkey": "W1FAbXyQJ5iPghy12TqPktwobU5kTD73ZjA6QZCvsRp",
+          "rootSlot": 333325324,
+          "votePubkey": "DXjujkbMhAvkaygmjLbi7UGdovAs2AU6y45UMEqxhEnw"
+        },
+        ...
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

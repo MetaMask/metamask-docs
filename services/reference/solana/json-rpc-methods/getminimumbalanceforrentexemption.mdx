@@ -12,7 +12,7 @@ Returns the minimum balance (in lamports) required to make an account exempt fro
 ## Parameters
 
 - `usize`: (integer) _[required]_ - The account's data length.
-- `config`: _[optional]_  - Configuration object with the following options:
+- `config`: (object) _[optional]_  - Configuration object with the following options:
     - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
         - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
             reached maximum lockout, meaning the cluster has recognized this block as finalized.

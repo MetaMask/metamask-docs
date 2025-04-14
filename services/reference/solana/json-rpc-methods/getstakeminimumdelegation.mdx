@@ -1,13 +1,13 @@
 ---
-title: "getBlockHeight"
+title: "getStakeMinimumDelegation"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# `getBlockHeight`
+# `getStakeMinimumDelegation`
 
-Returns the current block height.
+Returns the minimum number of lamports required to delegate a stake account.
 
 ## Parameters
 
@@ -17,11 +17,15 @@ Returns the current block height.
             reached maximum lockout, meaning the cluster has recognized this block as finalized.
         - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
         - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
-    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
 
 ## Returns
 
-`result`: (integer) - The current block height in `u64` format.
+`result` - An object with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - The minimum number of lamports required to delegate a stake account.
 
 ### Request
 
@@ -32,7 +36,7 @@ Returns the current block height.
   curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "getBlockHeight", "params": []}'
+    -d '{"jsonrpc": "2.0","id":1,"method":"getStakeMinimumDelegation","params":[]}'
    ```
 
   </TabItem>
@@ -45,9 +49,15 @@ Returns the current block height.
 
   ```bash
   {
-    "jsonrpc": "2.0",
-    "result": 359660979,
-    "id": 1
+     "jsonrpc": "2.0",
+     "result": {
+       "context": {
+         "apiVersion": "2.2.3",
+         "slot": 373193193
+       },
+       "value": 1
+     },
+     "id": 1
   }
   ```
 

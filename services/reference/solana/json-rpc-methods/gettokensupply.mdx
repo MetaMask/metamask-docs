@@ -1,37 +1,35 @@
 ---
-title: "getBalance"
+title: "getTokenSupply"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# `getBalance`
+# `getTokenSupply`
 
-Returns the balance of the specified address in lamports.
+Returns the total supply of an SPL token.
 
 ## Parameters
 
-- `address`: (string) _[required]_ - The `base-58` encoded public key of the account to query.
+- `transaction`: (string) _[required]_ - The `base58` encoded transaction signature.
 - `config`: (object) _[optional]_  - Configuration object with the following options:
     - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
         - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
             reached maximum lockout, meaning the cluster has recognized this block as finalized.
         - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
         - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
-    - `minContextSlot`: (integer) _[optional]_ - The minimum slot to use for the query.
 
 ## Returns
 
-`result` - `null` when the account doesn't exist, or an object with the following fields:
-
+`result`- An object with the following fields:
 - `context` - An object containing the following keys:
     - `slot` - The slot number of the block that was queried.
     - `apiVersion` - The API version used for the query.
-- `value` - The balance of the account in lamports.
-
-## Example
-
-Replace `<YOUR-API-KEY>` with your API key.
+- `value` - An object with the following fields:
+    - `amount` - The raw total token supply without decimals, a string representation of a `u64` integer.
+    - `decimals` - An integer value representing the number of decimal places used by the token.
+    - `uiAmount` - Deprecated. The total token supply using mint-prescribed decimals.
+    - `uiAmountString` - The total token supply as a string using mint-prescribed decimals.
 
 ### Request
 
@@ -42,10 +40,10 @@ Replace `<YOUR-API-KEY>` with your API key.
   curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "getBalance", "params": ["83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri"]}'
-    ```
+    -d '{"jsonrpc":"2.0", "id":1, "method":"getTokenSupply", "params": ["7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"]}'
+   ```
 
-    </TabItem>
+  </TabItem>
 </Tabs>
 
 ### Response
@@ -57,8 +55,16 @@ Replace `<YOUR-API-KEY>` with your API key.
   {
     "jsonrpc": "2.0",
     "result": {
-        "context": { "slot": 1 },
-        "value": 0
+      "context": {
+        "apiVersion": "2.1.16",
+        "slot": 332678924
+      },
+      "value": {
+        "amount": "5736490108605186363",
+        "decimals": 9,
+        "uiAmount": 5736490108.605186,
+        "uiAmountString": "5736490108.605186363"
+      }
     },
     "id": 1
   }

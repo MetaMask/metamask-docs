@@ -12,7 +12,7 @@ Returns information associated with a list of accounts.
 ## Parameters
 
 - `array`: (string) _[required]_ - An array of `base58` encoded account public keys to query.
-- `config`: _[optional]_  - Configuration object with the following options:
+- `config`: (object) _[optional]_  - Configuration object with the following options:
     - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
         - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
             reached maximum lockout, meaning the cluster has recognized this block as finalized.

@@ -13,7 +13,7 @@ Solana operates as a single global state machine and is open and interoperable.
 - The [official Solana documentation](https://solana.com/docs) for more information.
 :::
 
-Select an option below to get started with the Base network.
+Select an option below to get started with the Solana network.
 
 <CardList
   items={[

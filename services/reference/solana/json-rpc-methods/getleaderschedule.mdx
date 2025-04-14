@@ -14,7 +14,7 @@ Returns the leader schedule for an epoch.
 - `slot`: (integer) _[optional]_ - The slot number to query. The method returns the leader schedule
     for the epoch that corresponds to the provided slot. If unspecified, returns the leader schedule for
     the current epoch.
-- `config`: _[optional]_  - Configuration object with the following options:
+- `config`: (object) _[optional]_  - Configuration object with the following options:
     - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
         - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
             reached maximum lockout, meaning the cluster has recognized this block as finalized.

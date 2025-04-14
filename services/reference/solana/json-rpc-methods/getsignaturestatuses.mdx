@@ -14,7 +14,7 @@ all active slots plus `MAX_RECENT_BLOCKHASHES` rooted slots.
 ## Parameters
 
 - `txSignatures`: (array of strings) _[required]_ - An array of `base58` encoded transaction signatures to confirm.
-- `config`: _[optional]_  - Configuration object with the following options:
+- `config`: (object) _[optional]_  - Configuration object with the following options:
     - `searchTransactionHistory`: boolean - If `true`, the search includes the entire transaction
         history. If `false`, the search only includes recent transactions in the latest confirmed block.
         The default is `false`.
