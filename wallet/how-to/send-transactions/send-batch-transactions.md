@@ -1,5 +1,5 @@
 ---
-description: Send atomic batch transactions using wallet_sendCalls.
+description: Send atomic batch transactions using `wallet_sendCalls`.
 ---
 
 # Send batch transactions
