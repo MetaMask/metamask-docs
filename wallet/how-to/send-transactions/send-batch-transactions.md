@@ -41,16 +41,24 @@ This method returns whether the `atomic` capability is supported for each chain 
 {
   "0x2105": {
     "atomic": {
-      "supported": true
+      "status": "supported"
     }
   },
   "0x14A34": {
     "atomic": {
-      "supported": false
+      "status": "unsupported"
     }
   }
 }
 ```
+
+The `atomic` capability can have a `status` of `supported`, `ready`, or `unsupported`:
+
+- `supported` means the wallet supports atomic batch transactions.
+- `ready` means the wallet can upgrade to `supported` pending user approval (for example, via
+  [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)).
+- `unsupported` means the wallet does not support atomic batch transactions, and will not
+  suggest an upgrade to the user.
 
 :::note
 If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of `wallet_sendCalls`,
