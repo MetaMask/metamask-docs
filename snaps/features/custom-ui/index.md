@@ -999,8 +999,9 @@ A Snap can link to the following screens using the `metamask:` scheme:
   Snap IDs for local testing and production.
 
 :::warning
-MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
-installed. 
+- MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
+installed.
+- `metamask:` URLs are not supported in [dialogs](dialogs.md).
 :::
 
 #### Example
