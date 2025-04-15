@@ -169,7 +169,7 @@ The following is a full, simplified example of connecting to a Starknet account 
         params: {
           snapId: "npm:@consensys/starknet-snap",
           request: {
-            method: "starkNet_executeTxn"
+            method: "starkNet_executeTxn",
             params: requestParams
           }
         }

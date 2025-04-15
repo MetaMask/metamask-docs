@@ -9,14 +9,30 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
-## March 2025
+## April 2025
 
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
   [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
   ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
+- Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
+  ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
+- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
+  ([#1972](https://github.com/MetaMask/metamask-docs/pull/1972))
+- Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
+  ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
+
+## March 2025
+
+- Added a tutorial for [sending a transaction using Viem](/services/tutorials/ethereum/send-a-transaction/send-a-transaction-viem). ([#1920](https://github.com/MetaMask/metamask-docs/pull/1920))
+- Documented [Base subscription methods](/services/reference/base/json-rpc-methods/subscription-methods).
+  ([#1916](https://github.com/MetaMask/metamask-docs/pull/1916))
+- Added full table for [Gas API supported networks](/services/get-started/endpoints/#gas-api).
+  ([#1914](https://github.com/MetaMask/metamask-docs/pull/1914))
 
 ## February 2025
 
+- Relaunched MetaMask documentation site with new branding.
+  ([#1898](https://github.com/MetaMask/metamask-docs/pull/1898))
 - Documented [Unichain Mainnet](/services/reference/unichain) support. ([#1878](https://github.com/MetaMask/metamask-docs/pull/1878))
 
 ## January 2025

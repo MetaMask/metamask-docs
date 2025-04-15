@@ -9,10 +9,10 @@ import Banner from '@site/src/components/Banner'
 
 This quickstart guide will help you set up and make calls on the IPFS network using the Infura endpoints.
 
-:::info
+:::caution Restricted access
 
-To access the IPFS network through Infura, you'll need to add a billing card to your account, even if you're using a free account. Refer
-to the [billing details](../../how-to/use-ipfs/access-ipfs-content/dedicated-gateways.md#stats-and-billing) for more information.
+New IPFS key creation is disabled for all users. Only IPFS keys that were active in late 2024 continue
+to have access to the IPFS network.
 
 :::
 

@@ -27,8 +27,8 @@
 .heroWrapper {
   width: calc(100% - var(--page-padding-x) * 2);
   margin: 0 auto;
-  @include bp(desktop) {
-    max-width: 70%;
+  @media screen and (min-width: 1900px) {
+    max-width: 60%;
   }
 }
 
@@ -60,7 +60,7 @@
 
     .inputCont {
       width: 100%;
-      max-width: 40%;
+      max-width: 640px;
 
       @media screen and (max-width: 996px) {
         max-width: 100%;
@@ -85,7 +85,7 @@
         }
         input {
           height: 4.2rem;
-          font-size: inherit;
+          font-size: 16px;
           margin-bottom: 0;
           cursor: auto;
         }

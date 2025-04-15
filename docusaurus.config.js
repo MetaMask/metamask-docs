@@ -42,7 +42,6 @@ const config = {
     VERCEL_ENV: process.env.VERCEL_ENV,
     DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
-    GF_SURVEY_KEY: process.env.GF_SURVEY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
   },
 
@@ -50,15 +49,13 @@ const config = {
 
   scripts: [
     {
-      src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/a2e89f0e-f467-4542-bfea-30ea2c1a6648/osano.js',
+      src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
     },
     {
       src: 'https://plausible.io/js/script.js',
       defer: true,
       'data-domain': 'docs.metamask.io',
     },
-    { src: '/js/feedback-script.js', defer: true, async: true },
-    { src: '/js/getfeedback.js', defer: true, async: true },
   ],
 
   markdown: {
@@ -310,16 +307,16 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-docs',
               },
               {
-                label: "MetaMask wallet GitHub",
-                href: "https://github.com/MetaMask/metamask-extension/",
+                label: 'MetaMask wallet GitHub',
+                href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
                 label: 'MetaMask SDK GitHub',
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: "MetaMask Mobile GitHub",
-                href: "https://github.com/MetaMask/metamask-mobile",
+                label: 'MetaMask Mobile GitHub',
+                href: 'https://github.com/MetaMask/metamask-mobile',
               },
               {
                 label: 'Snaps GitHub',

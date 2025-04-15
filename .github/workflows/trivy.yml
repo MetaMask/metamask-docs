@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Trivy
-        uses: ConsenSys/docs-gha/trivy@main
+        uses: ConsenSys/github-actions/trivy@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

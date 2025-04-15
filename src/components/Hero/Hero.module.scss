@@ -87,6 +87,7 @@
   color: var(--developer-purple-light);
   margin-top: 4rem;
   font-family: var(--ifm-heading-font-family);
+  word-wrap: normal;
   @include bp('tablet') {
     margin-top: 1.4rem;
   }
