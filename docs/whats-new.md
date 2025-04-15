@@ -11,6 +11,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2025
 
+- Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
+  [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
+  ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
 - Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
