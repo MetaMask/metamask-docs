@@ -24,166 +24,89 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
 ```bash
-curl https://base-sepolia.infura.io/v3/<YOUR-API-KEY> \
+curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
+  -d '{"jsonrpc": "2.0", "method": "getSlot", "params": [], "id": 1}'
 ```
 
-### Node (JavaScript)
+### JavaScript
 
-In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) as your package manager.
+1. Create a project directory, and inside the directory initialize the project:
 
-#### Node Fetch
+    ```bash
+    npm init -y
+    ```
 
-1. In your project folder, install the `node-fetch` package using npm:
+1. In your project directory, [install the latest version of the JavaScript SDK](https://www.npmjs.com/package/@solana/kit).
 
-   ```bash
-   npm i node-fetch
-   ```
+1. Create your JavaScript file (`index.js` in this example) and copy the following code:
 
-1. Create your JavaScript file and copy the following code:
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
-   Replace `<YOUR-API-KEY>` with your actual Infura API key.
+    ```javascript title="index.js"
+    import { createSolanaRpc } from '@solana/kit';
 
-   ```javascript title="index.js"
-   import fetch from "node-fetch"
+    const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>');
 
-   fetch("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-     },
-     body: JSON.stringify({
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
-       params: [],
-       id: 1,
-     }),
-   })
-     .then((response) => response.json())
-     .then((data) => {
-       console.log(data)
-     })
-     .catch((error) => {
-       console.error(error)
-     })
-   ```
+    async function fetchCurrentSlot() {
+      try {
+        const slot = await rpc.getSlot().send();
+        console.log('Current slot:', slot);
+      } catch (error) {
+        console.error('Error fetching slot:', error);
+      }
+    }
+
+    fetchCurrentSlot();
+    ```
 
 1. Run the code using the following command:
 
-   ```bash
-   node index.js
-   ```
+    ```bash
+    node index.js
+    ```
 
-#### Axios
+### Rust
 
-1. In your project folder, install the `axios` package using npm:
+1. Create a project directory, and inside the directory initialize the project:
 
-   ```bash
-   npm i axios
-   ```
+    ```bash
+    cargo init
+    ```
 
-1. Create your JavaScript file and copy the following code:
+1. In your project directory, [install the Rust dependencies](https://www.npmjs.com/package/@solana/kit).
 
-   Replace `<YOUR-API-KEY>` with your actual Infura API key.
+    ```bash
+    cargo add solana-sdk solana-client
+    ```
 
-   ```javascript title="index.js"
-   const axios = require("axios")
+1. Create your Rust file (`index.rs` in this example) and copy the following code:
 
-   axios
-     .post("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
-       params: [],
-       id: 1,
-     })
-     .then((response) => {
-       console.log(response.data)
-     })
-     .catch((error) => {
-       console.error(error)
-     })
-   ```
+    Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
-1. Run the code using the following command:
+    ```javascript title="index.rs"
+    import { createSolanaRpc } from '@solana/kit';
 
-   ```bash
-   node index.js
-   ```
+    const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>');
 
-#### Ethers
+    async function fetchCurrentSlot() {
+      try {
+        const slot = await rpc.getSlot().send();
+        console.log('Current slot:', slot);
+      } catch (error) {
+        console.error('Error fetching slot:', error);
+      }
+    }
 
-1. In your project folder, install the `ethers` package using npm:
-
-   ```bash
-   npm install ethers
-   ```
-
-1. Create your JavaScript file and copy the following code:
-
-   Replace `<YOUR-API-KEY>` with your actual Infura API key.
-
-   ```javascript title="index.js"
-   const ethers = require("ethers")
-
-   const provider = new ethers.providers.JsonRpcProvider(
-     "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
-   )
-
-   provider
-     .getBlockNumber()
-     .then((blockNumber) => {
-       console.log(blockNumber)
-     })
-     .catch((error) => {
-       console.error(error)
-     })
-   ```
+    fetchCurrentSlot();
+    ```
 
 1. Run the code using the following command:
 
-   ```bash
-   node index.js
-   ```
-
-### Python
-
-1. In your project folder, install the `requests` library:
-
-   ```bash
-   pip install requests
-   ```
-
-1. Create your Python file and copy the following code:
-
-   Replace `<YOUR-API-KEY>` with your actual Infura API key.
-
-   ```python title="index.py"
-   import requests
-   import json
-
-   url = "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
-
-   payload = {
-     "jsonrpc": "2.0",
-     "method": "eth_blockNumber",
-     "params": [],
-     "id": 1
-   }
-
-   headers = {"content-type": "application/json"}
-
-   response = requests.post(url, data=json.dumps(payload), headers=headers).json()
-
-   print(response)
-   ```
-
-1. Run the code using the following command:
-
-   ```bash
-   python index.py
-   ```
+    ```bash
+    cargo run
+    ```
 
 ## Next steps
 
