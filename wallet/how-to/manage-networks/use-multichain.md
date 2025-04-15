@@ -65,7 +65,7 @@ For example:
 
 ```javascript
 extensionPort.postMessage({
-  type: "caip-x",
+  type: "caip-348",
   data: {
     jsonrpc: "2.0",
       method: "wallet_getSession",
@@ -85,7 +85,7 @@ For example:
 
 ```javascript
 extensionPort.postMessage({
-  type: "caip-x",
+  type: "caip-348",
   data: {
     jsonrpc: "2.0",
     method: "wallet_createSession",
@@ -175,7 +175,7 @@ const message = `Sign-in request for ${address} at ${new Date().toLocaleString()
 
 // Invoke the personal_sign Wallet API method.
 const sign = await extensionPort.postMessage({
-  type: "caip-x",
+  type: "caip-348",
   data: {
     "jsonrpc": "2.0",
     method: "wallet_invokeMethod",
@@ -198,7 +198,7 @@ For example:
 
 ```javascript
 extensionPort.postMessage({
-  type: "caip-x",
+  type: "caip-348",
   data: {
     jsonrpc: "2.0",
     method: "wallet_invokeMethod",
@@ -221,7 +221,7 @@ For example:
 
 ```javascript
 return extensionPort.postMessage({
-  type: "caip-x",
+  type: "caip-348",
   data: {
     jsonrpc: "2.0",
     method: "wallet_invokeMethod",
