@@ -13,6 +13,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [how to send batch transactions via EIP-5792](/wallet/how-to/send-transactions/send-batch-transactions).
   ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
+- Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
+  ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
 - Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
   ([#1972](https://github.com/MetaMask/metamask-docs/pull/1972))
 - Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).

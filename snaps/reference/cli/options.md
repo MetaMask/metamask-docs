@@ -14,37 +14,6 @@ This reference describes the syntax of the Snaps command line interface (CLI) co
 You can specify these options in the
 [configuration file](../../learn/about-snaps/files.md#configuration-file).
 
-### `bundler`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-bundler: <BUNDLER>,
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-bundler: "webpack",
-```
-
-</TabItem>
-</Tabs>
-
-The bundler to use.
-The options are `"webpack"` and `"browserify"`.
-The default is `"webpack"`.
-
-:::caution important
-We recommend using the Webpack bundler.
-The Browserify-based configuration is deprecated and will be removed in the future.
-This reference describes the configuration options for Webpack.
-For Browserify, see the
-[legacy options](https://github.com/MetaMask/snaps/tree/455366f19281801ed4220431100e45237dd5cf1e/packages/snaps-cli#legacy-options).
-:::
-
 ### `customizeWebpackConfig`
 
 <Tabs>
