@@ -14,8 +14,10 @@ You can send and manage batch transactions in MetaMask, using the methods specif
 The key benefits of batch transactions include:
 
 - **Fewer clicks and less friction** - Users only need to review and approve a single wallet confirmation, instead of multiple confirmations.
+  For example, users can confirm a spending cap and swap in one step instead of two.
 - **Faster completion times** - With [EIP-7702](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7702.md),
   only a single atomic transaction is confirmed onchain, instead of multiple individual transactions.
+- **Reduced gas fees** - When multiple transactions are executed atomically, users only need to pay a single gas fee.
 
 ## Steps
 
