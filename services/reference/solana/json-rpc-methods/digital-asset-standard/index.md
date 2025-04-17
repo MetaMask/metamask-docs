@@ -7,11 +7,6 @@ NFTs, and compressed NFTs.
 
 Use the pagination and sort options available to some API methods that return a large amount on data.
 
-:::info
-Infura does not currently support `params` as a JSON object.
-Instead, parameters must be passed as a positional array, following the exact order defined in the method's specification. This may differ from some other providers, where parameters are typically wrapped in an object containing key/value pairs.
-:::
-
 ## Supported DAS methods
 
 Infura supports the following DAS API methods:

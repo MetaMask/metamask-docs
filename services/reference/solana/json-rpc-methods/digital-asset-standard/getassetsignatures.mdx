@@ -13,6 +13,13 @@ Returns transaction signatures for a given asset, supporting only compressed ass
 [Metaplex Bubblegum program](https://developers.metaplex.com/bubblegum).
 This is the easiest way to look up historical transactions for these assets.
 
+:::info
+Infura does not currently support `params` as a JSON object.
+Instead, parameters must be passed as a positional array, following the exact order defined in the method's
+specification. This may differ from some other providers, where parameters are typically wrapped in an
+object containing key/value pairs.
+:::
+
 ## Parameters
 
 - `id`: (string) _[required]_ - The `base58` encoded public key of the asset.
