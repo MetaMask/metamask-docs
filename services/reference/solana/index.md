@@ -6,6 +6,16 @@ import CardList from '@site/src/components/CardList'
 
 # Solana
 
+:::note Decentralized Infrastructure Network (DIN)
+
+Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
+meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+
+Solana access is currently limited to paid accounts.
+To get expedited access, upgrade to a paid tier. Solana support will be available to all account tiers in the future.
+
+:::
+
 Solana provides a high-performance network that is utilized for a range of use cases, including finance, NFTs, payments, and gaming.
 Solana operates as a single global state machine and is open and interoperable.
 
@@ -34,3 +44,11 @@ Select an option below to get started with the Solana network.
     }
   ]}
 />
+
+## Partners and privacy policies
+
+The following partners provide access to the Scroll network:
+<!-- markdown-link-check-disable -->
+- Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
+- Triton One ([Terms of Service and Privacy Policy](https://triton.one/legal))
+<!-- markdown-link-check-enable -->

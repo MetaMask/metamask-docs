@@ -1,0 +1,95 @@
+---
+title: "getNftEditions"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getNftEditions`
+
+Retrieves all printable editions for a master edition NFT mint.
+
+## Parameters
+
+- `mint`: (string) _[required]_ - The mint address of the master edition.
+- `page`: (number) _[optional]_ - The current pagination page.
+- `limit`: (number) _[optional]_ - The number of results per page.
+- `cursor`: (string) _[optional]_ - Optional pagination cursor.
+- `before`: (string) _[optional]_ - Return results before the cursor.
+- `after`: (string) _[optional]_ - Return results after the cursor.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `total` - The total number of printable editions.
+- `limit` - The maximum number of editions returned in this response.
+- `page` - The current pagination page.
+- `master_edition_address` - The address of the master edition.
+- `supply` - The current supply of editions.
+- `max_supply` - The maximum supply of editions.
+- `editions` - An array of edition objects. Each edition object contains:
+  - `mint` - The mint address of the edition.
+  - `edition_address` - The address of the edition.
+  - `edition` - The edition number.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/11e49e3e9f754d9fa9ba5ddeb75fb0dc \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getNftEditions",
+      "params": [
+        "Ey2Qb8kLctbchQsMnhZs5DjY32To2QtPuXNwWvk4NosL",
+        1,
+        null,
+        null,
+        null,
+        null
+      ]
+    }'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "total": 66,
+      "limit": 100,
+      "page": 1,
+      "master_edition_address": "8SHfqzJYABeGfiG1apwiEYt6TvfGQiL1pdwEjvTKsyiZ",
+      "supply": 57,
+      "max_supply": 69,
+      "editions": [
+        {
+          "mint": "GJvFDcBWf6aDncd1TBzx2ou1rgLFYaMBdbYLBa9oTAEw",
+          "edition_address": "AoxgzXKEsJmUyF5pBb3djn9cJFA26zh2SQHvd9EYijZV",
+          "edition": 1
+        },
+        ...
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
