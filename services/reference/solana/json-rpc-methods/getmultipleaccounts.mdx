@@ -1,0 +1,107 @@
+---
+title: "getMultipleAccounts"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getMultipleAccounts`
+
+Returns information associated with a list of accounts.
+
+## Parameters
+
+- `array`: (string) _[required]_ - An array of `base58` encoded account public keys to query.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `encoding`: (string) _[optional]_ - The encoding format to use. Can be one of `base58`, `base64`, `base64+zstd`,
+        or `jsonParsed`
+    - `dataSlice`: (object) _[optional]_ - A slice of the account data to return. Only available for `base58`, `base64`,
+        or `base64+zstd` encoding. This is an object with two properties:
+        - `offset` - The starting byte offset of the slice.
+        - `length` - The length of the slice in bytes.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - List of account objects. Returns `null` if the account doesn't exist, or an object containing
+    the following keys for the requested account:
+    - `data` - The account data, encoded in the specified format.
+    - `executable` - A boolean indicating whether the account is executable.
+    - `lamports` - The number of lamports in the account.
+    - `owner` - The public key of the program that owns the account.
+    - `rentEpoch` - The epoch in which the account will next be due for rent.
+    - `space` - The size of the account data in bytes.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getMultipleAccounts", "params": [["7cVfgArCheMR6Cs4t6vz5rfnqd56vZq4ndaBrY5xkxXy", "ANVUJaJoVaJZELtV2AvRp7V5qPV1B84o29zAwDhPj1c2"], {"encoding": "base58"}]}'
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": {
+        "apiVersion": "2.2.3",
+        "slot": 372957980
+      },
+      "value": [
+        {
+          "data": [
+            "",
+            "base58"
+          ],
+          "executable": false,
+          "lamports": 6000000000,
+          "owner": "11111111111111111111111111111111",
+          "rentEpoch": 18446744073709552000,
+          "space": 0
+        },
+        {
+          "data": [
+            "",
+            "base58"
+          ],
+          "executable": false,
+          "lamports": 3248020787,
+          "owner": "11111111111111111111111111111111",
+          "rentEpoch": 18446744073709552000,
+          "space": 0
+        }
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

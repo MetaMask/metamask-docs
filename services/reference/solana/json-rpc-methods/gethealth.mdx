@@ -1,0 +1,49 @@
+---
+title: "getHealth"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getHealth`
+
+Returns the health of the node.
+
+## Parameters
+
+None
+
+## Returns
+
+`result`: (string) - `Ok` if the node is healthy, or a JSON-RPC error response if the node is unhealthy.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getHealth"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": "ok",
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

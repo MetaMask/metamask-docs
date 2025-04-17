@@ -1,0 +1,236 @@
+---
+title: "searchAssets"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `searchAssets`
+
+Returns the list of assets based on the specified search criteria.
+
+## Parameters
+
+- `negate`: (boolean) _[optional]_ - Indicates whether the search criteria should be inverted.
+- `conditionType`: (string) _[optional]_ - Indicates whether to retrieve all or any asset that matches the search criteria.
+    Valid options are: `all`, `any`.
+- `interface`: (string) _[optional]_ - The interface of the asset.
+    Valid options are: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`, `V2_NFT`, `FungibleAsset`, `Custom`, `Identity`, `Executable`.
+- `ownerAddress`: (string) _[optional]_ - The `base58` encoded public key of the owner.
+- `ownerType`: (string) _[optional]_ - The type of ownership. Valid options are: `single`, `token`.
+- `creatorAddress`: (string) _[optional]_ - The `base58` encoded public key of the creator.
+- `creatorVerified`: (boolean) _[optional]_ - Indicates whether the creator must be verified.
+- `authorityAddress`: (string) _[optional]_ - The `base58` encoded public key of the authority.
+- `grouping`: (array) _[optional]_ - A group (key, value) pair.
+- `delegateAddress`: (string) _[optional]_ - The `base58` encoded public key of the delegate.
+- `frozen`: (boolean) _[optional]_ - Indicates whether the asset is frozen.
+- `supply`: (number) _[optional]_ - The supply of the asset.
+- `supplyMint`: (string) _[optional]_ - The `base58` encoded public key of the supply mint.
+- `compressed`: (boolean) _[optional]_ - Indicates whether the asset is compressed.
+- `compressible`: (boolean) _[optional]_ - Indicates whether the asset is compressible.
+- `royaltyTargetType`: (string) _[optional]_ - The type of royalty. Valid options are: `creators`, `fanout`, `single`.
+- `royaltyTarget`: (string) _[optional]_ - The target address for royalties.
+- `royaltyAmount`: (number) _[optional]_ - The royalties amount.
+- `burnt`: (boolean) _[optional]_ - Indicates whether the asset is burnt.
+- `sortBy`: (object) _[optional]_ - Sorting criteria for the results:
+  - `sortBy` - The field to sort by. Valid options are: `created`, `updated`, `recent_action`, `id`, `none`.
+  - `sortDirection` - The sort direction. Valid options are: `asc`, `desc`.
+- `limit`: (number) _[optional]_ - The maximum number of assets to retrieve.
+- `page`: (number) _[optional]_ - The index of the page to retrieve.
+- `before`: (string) _[optional]_ - Retrieve assets before the specified ID.
+- `after`: (string) _[optional]_ - Retrieve assets after the specified ID.
+- `jsonUri`: (string) _[optional]_ - The value for the JSON URI.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `total` - The total number of assets matching the query.
+- `limit` - The maximum number of assets returned in this response.
+- `items` - An array of asset objects. Each asset object contains:
+  - `interface` - The interface type of the asset. Valid options are: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`, `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
+  - `id` - The ID of the asset.
+  - `content` - An object containing the metadata and content information:
+    - `$schema` - The schema URI.
+    - `json_uri` - The URI pointing to the asset's JSON metadata.
+    - `files` - List of associated files with `uri`, `mime`, and optional `contexts`.
+    - `metadata` - An object containing the metadata information:
+      - `name` - The name of the asset.
+      - `symbol` - The symbol of the asset.
+      - `description` - A description of the asset.
+      - `attributes` - List of attributes with `trait_type` and `value`.
+      - `token_standard` - The token standard of the asset.
+  - `ownership` - An object containing the ownership details:
+    - `owner` - The owner's public key.
+    - `frozen` - Whether the asset is frozen.
+    - `delegated` - Whether the asset is delegated.
+    - `delegate` - The delegate's public key.
+    - `ownership_model` - The ownership model, for example `single` or `token`.
+  - `compression` - An object containing the asset compression details:
+    - `eligible` - Whether the asset is eligible for compression.
+    - `compressed` - Whether the asset is compressed.
+    - `data_hash` - The data hash of the asset.
+    - `creator_hash` - The creator hash of the asset.
+    - `asset_hash` - The asset hash.
+    - `tree` - The Merkle tree ID.
+    - `seq` - The sequence number.
+    - `leaf_id` - The leaf ID.
+  - `royalty` - An object containing the royalty details:
+    - `royalty_model` - The royalty model (`creators`, `fanout`, or `single`).
+    - `target` - The target address for royalties.
+    - `percent` - The royalty percentage.
+    - `basis_points` - The royalty in basis points.
+    - `primary_sale_happened` - Whether the primary sale has occurred.
+    - `locked` - Whether the royalty is locked.
+  - `creators` - List of creators:
+    - `address` - The creator's public key.
+    - `share` - The creator's share percentage.
+    - `verified` - Whether the creator is verified.
+  - `grouping` - Grouping details:
+    - `group_key` - The group key (for example, `collection`).
+    - `group_value` - The group value.
+  - `uses` - An object containing the usage details:
+    - `use_method` - The usage method (`burn`, `multiple`, or `single`).
+    - `remaining` - The remaining uses.
+    - `total` - The total uses.
+  - `mutable` - Whether the asset is mutable.
+  - `burnt` - Whether the asset is burnt.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/11e49e3e9f754d9fa9ba5ddeb75fb0dc \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "searchAssets",
+    "params": [
+      false,
+      "all",
+      "V1_NFT",
+      "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW",
+      "single",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      { "sortBy": "created", "sortDirection": "desc" },
+      50,
+      1,
+      null,
+      null,
+      null
+    ]
+  }'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "total": 50,
+      "limit": 50,
+      "page": 1,
+      "items": [
+        {
+          "interface": "V1_NFT",
+          "id": "2SiYEckvp5MHz63ybheoehgk7YYPGZksKcxyT7MsJvDS",
+          "content": {
+            "$schema": "https://schema.metaplex.com/nft1.0.json",
+            "json_uri": "https://ipfs.io/ipfs/QmUWytohB2ecUqbor12sm7ozDrVzgbwnCtqF66m9abMLWG",
+            "files": [],
+            "metadata": {
+              "name": "5000 TO 50000 #54",
+              "symbol": "",
+              "token_standard": "NonFungible"
+            },
+            "links": {}
+          },
+          "authorities": [
+            {
+              "address": "7GaUkgafjv7uxni4GuvBFp8b1qFVRyZAmwNHzjeFbmTt",
+              "scopes": [
+                "full"
+              ]
+            }
+          ],
+          "compression": {
+            "eligible": false,
+            "compressed": true,
+            "data_hash": "8uwkK3ydNdnGUbSGTfHjmw8uQ8HheerdEB1RmiL7xyvD",
+            "creator_hash": "9FiGqDmyw6peu9uZk3XekNC3S7KjaTV6oxC476gPCHLz",
+            "asset_hash": "9g5DrQ3ndkzLo2mfN74hqhzHG8suKyAetrgJZ4KG4xb8",
+            "tree": "2xZ7XN9wkUuMRj9RiCbBLXYMofAyHsrEKpWbA3xwxPfG",
+            "seq": 1038593,
+            "leaf_id": 1037754
+          },
+          "grouping": [
+            {
+              "group_key": "collection",
+              "group_value": "71zrEGzfv4oX3uhc96trWayxdF3xm2kD9WWWoiMZkHAR"
+            }
+          ],
+          "royalty": {
+            "royalty_model": "creators",
+            "target": null,
+            "percent": 0.055,
+            "basis_points": 550,
+            "primary_sale_happened": false,
+            "locked": false
+          },
+          "creators": [
+            {
+              "address": "4AuVuuzh7NA8b8jCcJzARdUALum4MxG9tPYA7QxTPHqo",
+              "share": 100,
+              "verified": false
+            }
+          ],
+          "ownership": {
+            "frozen": false,
+            "delegated": false,
+            "delegate": null,
+            "ownership_model": "single",
+            "owner": "2RtGg6fsFiiF1EQzHqbd66AhW7R5bWeQGpTbv2UMkCdW"
+          },
+          "supply": {
+            "print_max_supply": 0,
+            "print_current_supply": 0,
+            "edition_nonce": null
+          },
+          "mutable": true,
+          "burnt": false
+        },
+        ...
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

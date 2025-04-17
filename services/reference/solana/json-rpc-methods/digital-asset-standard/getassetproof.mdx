@@ -1,0 +1,80 @@
+---
+title: "getAssetProof"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getAssetProof`
+
+Returns the Merkle tree proof information for a compressed asset.
+
+## Parameters
+
+- `id`: (string) _[required]_ - The `base58` encoded public key of the asset to query.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `root` - The root hash of the Merkle tree.
+- `proof` - An array of hashes representing the Merkle proof.
+- `node_index` - The index of the node in the Merkle tree.
+- `leaf` - The hash of the leaf node.
+- `tree_id` - The ID of the Merkle tree.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetProof", "params": ["Bu1DEKeawy7txbnCEJE4BU3BKLXaNAKCYcHR4XhndGss"]}'
+  ```
+
+    </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "root": "2o6Y6EiY3WXhoaEpei2pHmHLYnHDcEQVhgD89GrGHDBH",
+      "proof": [
+        "EmJXiXEAhEN3FfNQtBa5hwR8LC5kHvdLsaGCoERosZjK",
+        "7NEfhcNPAwbw3L87fjsPqTz2fQdd1CjoLE138SD58FDQ",
+        "6dM3VyeQoYkRFZ74G53EwvUPbQC6LsMZge6c7S1Ds4ks",
+        "A9AACJ5m7UtaVz4HxzhDxGjYaY88rc2XPoFvnoTvgYBj",
+        "2VG5cKeBZdqozwhHGGzs13b9tzy9TXt9kPfN8MzSJ1Sm",
+        "3E1uFze4pi6BnTZXMsQbeh3jQCeDi966Zax9aMbYgg2D",
+        "Bx9PdctdWCeC1WfU6dwP49idsXCYhqyxbRLyLwwGhr61",
+        "HSbJ8quT4vuXFgf5FnjzeUuFfAtLKsq6W1Frj8y1qrif",
+        "GJMLzL4F4hY9yFHY1EY6XRmW4wpuNGeBZTiv7vM2mYra",
+        "FYPtEiqmRx6JprHQvWeEWEuVp3WA7DPRCE4VbhFRVuAj",
+        "6MJKrpnK1GbYsnEzwMRWStNGkTjAZF23NhzTQSQVXsD3",
+        "HjnrJn5vBUUzpCxzjjM9ZnCPuXei2cXKJjX468B9yWD7",
+        "4YCF1CSyTXm1Yi9W9JeYevawupkomdgy2dLxEBHL9euq",
+        "E3oMtCuPEauftdZLX8EZ8YX7BbFzpBCVRYEiLxwPJLY2"
+      ],
+      "node_index": 16384,
+      "leaf": "6YdZXw49M97mfFTwgQb6kxM2c6eqZkHSaW9XhhoZXtzv",
+      "tree_id": "2kuTFCcjbV22wvUmtmgsFR7cas7eZUzAu96jzJUvUcb7"
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

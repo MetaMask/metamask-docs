@@ -1,0 +1,63 @@
+---
+title: "getEpochSchedule"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getEpochSchedule`
+
+Returns epoch schedule information from the cluster's genesis configuration.
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `firstNormalEpoch` - The first normal length epoch. Calculated as `log2(slotsPerEpoch) - log2(MINIMUM_SLOTS_PER_EPOCH)`.
+- `firstNormalSlot` - The slot number of the first normal slot. Calculated as `MINIMUM_SLOTS_PER_EPOCH * (2.pow(firstNormalEpoch) - 1)`.
+- `leaderScheduleSlotOffset` - The number of slots before starting an epoch to calculate a leader schedule for that epoch.
+- `slotsPerEpoch` - The maximum number of slots in each epoch.
+- `warmup` - Whether epochs start shorter and grow in length. During warmup (`true`) the epoch schedule starts small and
+    gradually increases to ease the network into normal operation, whereas without warmup (`false`), epochs have a
+    consistent length from the start.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getEpochSchedule"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+        "firstNormalEpoch": 0,
+        "firstNormalSlot": 0,
+        "leaderScheduleSlotOffset": 432000,
+        "slotsPerEpoch": 432000,
+        "warmup": false
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
