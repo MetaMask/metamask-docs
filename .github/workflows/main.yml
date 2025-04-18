@@ -23,7 +23,7 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
     secrets:
-      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
       SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
@@ -31,7 +31,7 @@ jobs:
     name: Lint
     uses: ./.github/workflows/lint.yml
     secrets:
-      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
       SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
@@ -39,7 +39,7 @@ jobs:
     name: Case
     uses: ./.github/workflows/case.yml
     secrets:
-      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_DEV_KEY }}
+      SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
       LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
       SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
