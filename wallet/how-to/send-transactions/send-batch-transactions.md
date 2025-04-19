@@ -29,6 +29,17 @@ The key benefits of atomic batch transactions include:
 - **Faster completion times** - Only a single atomic transaction is confirmed onchain, instead of multiple individual transactions.
 - **Reduced gas fees** - When multiple transactions are executed atomically, users only need to pay a single gas fee.
 
+You can send batch transactions using [third-party libraries](#use-third-party-libraries)
+or [directly in your dapp](#send-batch-transactions-1).
+
+## Use third-party libraries
+
+You can send batch transactions using the following third-party libraries that support EIP-5792:
+
+- [Wagmi](https://wagmi.sh/react/api/hooks/useCapabilities)
+- [Viem](https://viem.sh/experimental/eip5792/client)
+- [thirdweb](https://portal.thirdweb.com/references/typescript/v5/hooks#eip5792)
+
 ## Send batch transactions
 
 ### 1. Query whether atomic batch is supported
