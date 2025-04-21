@@ -129,8 +129,8 @@ Additionally, follow the [Consensys guidelines on adding images](https://docs-te
 
 ## Update the interactive API reference
 
-The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/json-rpc-api/) uses the
-[`docusaurus-openrpc`](https://github.com/MetaMask/docusaurus-openrpc) plugin to import OpenRPC
+The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/json-rpc-api/) uses 
+an internal plugin to import and parse OpenRPC
 specifications from [`MetaMask/api-specs`](https://github.com/MetaMask/api-specs) (MetaMask-specific
 methods) and [`ethereum/execution-apis`](https://github.com/ethereum/execution-apis) (standard
 Ethereum methods).
@@ -152,17 +152,33 @@ To update documentation for MetaMask-specific JSON-RPC API methods:
 2. Follow the repository's [`README.md`](https://github.com/MetaMask/api-specs/blob/main/README.md)
    instructions to edit the OpenRPC specification and generate the output file, `openrpc.json`.
 
-3. To test the API updates in the MetaMask doc site's interactive reference, make the following
-   temporary changes on a local branch of the doc site, `metamask-docs`:
+3. To test the API updates in the MetaMask doc site's interactive reference:
 
-   1. Copy and paste the output file `openrpc.json` into the root directory of `metamask-docs`.
-   2. In `docusaurus.config.js`, update the following line to point to your local output file:
-      ```diff
-      openrpcDocument:
-      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-      +  "./openrpc.json",
+   1. Create and switch to a temporary local branch of the doc site, [`MetaMask/metamask-docs`](https://github.com/MetaMask/metamask-docs).
+      For example, to create and switch to a branch named `test-api-updates`:
+      ```bash
+      cd metamask-docs
+      git checkout -b test-api-updates
       ```
-   3. Preview the doc site locally, navigate to the API reference, and view your updates.
+   2. Copy and paste the output file `openrpc.json` into the root directory of `metamask-docs`.
+   3. Use [`http-server`](https://www.npmjs.com/package/http-server) to serve `openrpc.json` locally.
+      Install `http-server` if you haven't yet, and start the server:
+      ```bash
+      npm install --global http-server
+      http-server
+      ```
+      The `openrpc.json` file is now served at [`http://127.0.0.1:8080/openrpc.json`](http://127.0.0.1:8080/openrpc.json).
+   4. In `src/plugins/plugin-json-rpc.ts`, update the following line to point to the locally served `openrpc.json` file:
+      ```diff
+      -  export const MM_RPC_URL = "https://metamask.github.io/api-specs/latest/openrpc.json";
+      +  export const MM_RPC_URL = "http://127.0.0.1:8080/openrpc.json";
+      ```
+   5. In a new terminal window, preview the doc site locally:
+      ```bash
+      cd metamask-docs
+      npm start
+      ```
+   6. Navigate to the API reference, and view your updates.
 
 4. Add and commit your changes to `api-specs`, and create a PR.
 
@@ -180,14 +196,6 @@ To update documentation for MetaMask-specific JSON-RPC API methods:
       For example:
       > @metamask-npm-publishers `@metamask/api-specs@0.10.6` is awaiting deployment :rocketship:
       https://github.com/MetaMask/api-specs/actions/runs/10615788573
-   3. Once the release is published on npm, `docusaurus.config.js` in `metamask-docs` must be
-      updated with the new `api-specs` version to publish.
-      For example:
-      ```diff
-      openrpcDocument:
-      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-      +  "https://metamask.github.io/api-specs/0.10.6/openrpc.json",
-      ```
 
 ### Update `ethereum/execution-apis`
 
@@ -204,17 +212,8 @@ To update documentation for standard Ethereum JSON-RPC API methods:
 2. Follow the repository's [`README.md`](https://github.com/ethereum/execution-apis/blob/main/README.md)
    instructions to edit the OpenRPC specification and generate the output file, `openrpc.json`.
 
-3. To test the API updates in the MetaMask doc site's interactive reference, make the following
-   temporary changes on a local branch of the doc site, `metamask-docs`:
-
-   1. Copy and paste the output file `openrpc.json` into the root directory of `metamask-docs`.
-   2. In `docusaurus.config.js`, update the following line to point to your local output file:
-      ```diff
-      openrpcDocument:
-      -  "https://metamask.github.io/api-specs/0.10.5/openrpc.json",
-      +  "./openrpc.json",
-      ```
-   3. Preview the doc site locally, navigate to the API reference, and view your updates.
+3. To test the API updates in the MetaMask doc site's interactive reference, complete Step 3 in
+   [Update `MetaMask/api-specs`](#update-metamaskapi-specs).
 
 4. Add and commit your changes to `execution-apis`, and create a PR.
 
