@@ -20,7 +20,7 @@ Solana provides a high-performance network that is utilized for a range of use c
 Solana operates as a single global state machine and is open and interoperable.
 
 :::info See also
-- The [official Solana documentation](https://solana.com/docs) for more information.
+- See the [official Solana documentation](https://solana.com/docs) for more information.
 :::
 
 Select an option below to get started with the Solana network.

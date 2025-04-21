@@ -45,16 +45,16 @@ curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
     Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
     ```javascript title="index.js"
-    import { createSolanaRpc } from '@solana/kit';
+    import { createSolanaRpc } from "@solana/kit";
 
-    const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>');
+    const rpc = createSolanaRpc("https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>");
 
     async function fetchCurrentSlot() {
       try {
         const slot = await rpc.getSlot().send();
-        console.log('Current slot:', slot);
+        console.log("Current slot:", slot);
       } catch (error) {
-        console.error('Error fetching slot:', error);
+        console.error("Error fetching slot:", error);
       }
     }
 
@@ -81,25 +81,22 @@ curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
     cargo add solana-sdk solana-client
     ```
 
-1. Create your Rust file (`index.rs` in this example) and copy the following code:
+1. In the `src/main.rs` paste the following code:
 
     Replace `<YOUR-API-KEY>` with your actual Infura API key.
 
-    ```javascript title="index.rs"
-    import { createSolanaRpc } from '@solana/kit';
+    ```rust title="main.rs"
+    use solana_client::rpc_client::RpcClient;
 
-    const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>');
+    fn main() {
+      let url = "https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>";
+      let client = RpcClient::new(url.to_string());
 
-    async function fetchCurrentSlot() {
-      try {
-        const slot = await rpc.getSlot().send();
-        console.log('Current slot:', slot);
-      } catch (error) {
-        console.error('Error fetching slot:', error);
+      match client.get_slot() {
+        Ok(slot) => println!("Current slot: {}", slot),
+        Err(err) => eprintln!("Error fetching slot: {}", err),
       }
     }
-
-    fetchCurrentSlot();
     ```
 
 1. Run the code using the following command:

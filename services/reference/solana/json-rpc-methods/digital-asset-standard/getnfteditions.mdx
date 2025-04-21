@@ -7,18 +7,11 @@ import TabItem from '@theme/TabItem';
 
 # `getNftEditions`
 
-Retrieves all printable editions for a master edition NFT mint.
-
-:::info
-Infura does not currently support `params` as a JSON object.
-Instead, parameters must be passed as a positional array, following the exact order defined in the method's
-specification. This may differ from some other providers, where parameters are typically wrapped in an
-object containing key/value pairs.
-:::
+Retrieves all printable editions for a parent edition NFT mint.
 
 ## Parameters
 
-- `mint`: (string) _[required]_ - The mint address of the master edition.
+- `mint`: (string) _[required]_ - The mint address of the parent edition.
 - `page`: (number) _[optional]_ - The current pagination page.
 - `limit`: (number) _[optional]_ - The number of results per page.
 - `cursor`: (string) _[optional]_ - Optional pagination cursor.
@@ -32,7 +25,7 @@ object containing key/value pairs.
 - `total` - The total number of printable editions.
 - `limit` - The maximum number of editions returned in this response.
 - `page` - The current pagination page.
-- `master_edition_address` - The address of the master edition.
+- `master_edition_address` - The address of the parent edition.
 - `supply` - The current supply of editions.
 - `max_supply` - The maximum supply of editions.
 - `editions` - An array of edition objects. Each edition object contains:
