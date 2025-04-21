@@ -129,8 +129,8 @@ Additionally, follow the [Consensys guidelines on adding images](https://docs-te
 
 ## Update the interactive API reference
 
-The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/json-rpc-api/) uses the
-[`docusaurus-openrpc`](https://github.com/MetaMask/docusaurus-openrpc) plugin to import OpenRPC
+The [Wallet JSON-RPC API reference](https://docs.metamask.io/wallet/reference/json-rpc-api/) uses 
+an internal plugin to import and parse OpenRPC
 specifications from [`MetaMask/api-specs`](https://github.com/MetaMask/api-specs) (MetaMask-specific
 methods) and [`ethereum/execution-apis`](https://github.com/ethereum/execution-apis) (standard
 Ethereum methods).
