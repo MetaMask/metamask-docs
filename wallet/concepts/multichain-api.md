@@ -31,6 +31,10 @@ Key benefits include:
 
 The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
 standard for dapps to interface with multichain wallets.
+See [MIP-5](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md) and
+[MIP-6](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-6.md) for
+detailed information about MetaMask's Multichain API implementation.
+
 The API includes a method [`wallet_createSession`](../reference/multichain-api.md#wallet_createsession)
 that dapps can call to create a multichain connection with a wallet, with specified properties and
 authorization scopes.
