@@ -34,7 +34,10 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
 - `optionalScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
   If scopes are specified, only the following properties are supported:
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
-    This property is mainly used when there would otherwise be duplicate scopes.
+    This property can only be used if the scope namespace does not already specify the blockchain.
+    For example, you can use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
+    
+    References are mainly used when there would otherwise be duplicate scopes.
   - `methods`: `array` - A list of JSON-RPC methods the wallet must support in order to be used with this dapp.
   - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support in order to be used with this dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
@@ -46,6 +49,7 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
 - `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support in order to be used
   with this dapp.
   We don't recommend using `requiredScopes` with MetaMask.
+  MetaMask treats all `requiredScopes` as `optionalScopes`.
 
 #### Returns
 
@@ -66,11 +70,11 @@ The scopes and properties of the created connection.
       "eip155": {
         "references": ["1", "137"],
         "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "get_balance", "personal_sign"],
-        "notifications": ["accountsChanged", "chainChanged"]
+        "notifications": ["eth_subscription"]
       },
       "eip155:10": {
         "methods": ["get_balance"],
-        "notifications": ["accountsChanged", "chainChanged"]
+        "notifications": []
       },
       "eip155:0": {
         "methods": ["wallet_getPermissions", "wallet_creds_store", "wallet_creds_verify", "wallet_creds_issue", "wallet_creds_present"],
@@ -78,7 +82,7 @@ The scopes and properties of the created connection.
       },
       "eip155:42161": {
         "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "personal_sign"],
-        "notifications": ["accountsChanged", "chainChanged"]
+        "notifications": []
       }
     },
     "sessionProperties": {
@@ -101,17 +105,17 @@ The scopes and properties of the created connection.
       "eip155": {
         "references": ["1", "137"],
         "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "eth_sign", "personal_sign"],
-        "notifications": ["accountsChanged", "chainChanged"],
+        "notifications": ["eth_subscription"],
         "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
       },
       "eip155:10": {
         "methods": ["get_balance"],
-        "notifications": ["accountsChanged", "chainChanged"],
+        "notifications": [],
         "accounts": []
       },
       "eip155:42161": {
         "methods": ["personal_sign"],
-        "notifications": ["accountsChanged", "chainChanged"],
+        "notifications": [],
         "accounts": ["eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"]
       },
       "eip155:0": {
@@ -174,12 +178,12 @@ The scopes and properties of the connection.
     "sessionScopes": {
       "eip155:1": {
         "methods": ["eth_signTransaction"],
-        "notifications": ["accountsChanged"],
+        "notifications": [],
         "accounts": ["eip155:1:0xabc123"]
       },
       "eip155:137": {
         "methods": ["eth_sendTransaction"],
-        "notifications": ["chainChanged"],
+        "notifications": [],
         "accounts": ["eip155:137:0xdef456"]
       },
       "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ": {
@@ -382,7 +386,7 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
     "sessionScopes": {
       "eip155:1": {
         "methods": ["eth_signTransaction", "eth_sendTransaction"],
-        "notifications": ["message"],
+        "notifications": [],
         "accounts": ["eip155:1:0xabc123"]
       },
       "eip155:137": {

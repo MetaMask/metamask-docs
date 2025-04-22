@@ -10,7 +10,7 @@ sidebar_custom_props:
 :::
 
 The Multichain API is a scalable, generalized web3 wallet API that supports simultaneous
-interactions across multiple blockchain networks.
+interactions across multiple blockchain networks and ecosystems.
 When integrated with [MetaMask Snaps](/snaps), it enables developers to interact with both popular
 and emerging networks.
 Key benefits include:

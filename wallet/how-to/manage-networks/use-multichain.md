@@ -91,11 +91,6 @@ extensionPort.postMessage({
     method: "wallet_createSession",
     params: {
       optionalScopes: {
-        "wallet:eip155": { // General Ethereum wallet functions
-          methods: ["wallet_addEthereumChain"],
-          notifications: [],
-          accounts: []
-        },
         "eip155:1": { // Ethereum Mainnet
           methods: [
             "personal_sign",
@@ -227,7 +222,7 @@ return extensionPort.postMessage({
     method: "wallet_invokeMethod",
     params: {
       // Specify a chain ID where the user has sufficient gas.
-      scope: "eip155:1",
+      scope: "eip155:1", // Ethereum Mainnet
       request: {
         method: "eth_sendTransaction",
         params: [{
