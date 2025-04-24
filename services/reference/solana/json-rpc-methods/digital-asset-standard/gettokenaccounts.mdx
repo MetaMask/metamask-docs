@@ -1,0 +1,106 @@
+---
+title: "getTokenAccounts"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getTokenAccounts`
+
+Retrieves information about all token accounts for a specific mint or an owner.
+
+## Parameters
+
+- `mint`: (string) _[optional]_ - The address of the associated mint.
+- `owner`: (string) _[optional]_ - The owner address of the tokens.
+- `page`: (integer) _[optional]_ - The index of the page to retrieve. The page parameter starts at `1`
+- `limit`: (integer) _[optional]_ - The number of results per page.
+- `cursor`: (string) _[optional]_ - Optional pagination cursor.
+- `before`: (string) _[optional]_ - Return results before the cursor.
+- `after`: (string) _[optional]_ - Return results after the cursor.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `total` - The total number of token accounts matching the query.
+- `limit` - The maximum number of token accounts returned in this response.
+- `page` - The current pagination page.
+- `token_accounts` - An array of token account objects. Each token account object contains:
+  - `address` - The address of the token account.
+  - `mint` - The mint address associated with the token account.
+  - `owner` - The owner address of the token account.
+  - `frozen` - Whether the token account is frozen.
+  - `amount` - The amount of tokens held in the account.
+  - `delegate` - The delegate address, if any.
+  - `close_authority` - The address that can close the token account, if any.
+  - `extensions` - Additional information about the token account, if any.
+  - `delegated_amount` - The amount of tokens delegated, if any.
+- `errors` - An array of error objects, if any errors occurred during the request.
+- `cursor` - The pagination cursor for the next page of results.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getTokenAccounts",
+      "params": [
+        "So11111111111111111111111111111111111111112",
+        null,
+        1,
+        50,
+        null,
+        null,
+        null
+      ]
+    }'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "total": 1,
+      "limit": 1,
+      "page": 50,
+      "token_accounts": [
+        {
+          "address": "DgeCdQBqsoAWhJtewsSN4Pcz9okEGBTebEZcrcGhPXDE",
+          "mint": "5fgwRW94H1KavvaGEanNZc2AnEGKkFaJWkZzAuvaxRNH",
+          "amount": 100000000,
+          "owner": "So11111111111111111111111111111111111111112",
+          "frozen": false,
+          "delegate": null,
+          "delegated_amount": 0,
+          "close_authority": null,
+          "extensions": null
+        }
+      ],
+      "cursor": null,
+      "errors": []
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

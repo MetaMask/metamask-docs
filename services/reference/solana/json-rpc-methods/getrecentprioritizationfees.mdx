@@ -1,0 +1,63 @@
+---
+title: "getRecentPrioritizationFees"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getRecentPrioritizationFees`
+
+Returns a list of prioritization fees from recent blocks.
+
+## Parameters
+
+- `address`: (array) _[optional]_ - Array of account addresses (up to a maximum of 128 addresses), as `base58` encoded strings.
+
+## Returns
+
+`result` - An array of objects with the following fields:
+
+- `prioritizationFee` - The prioritization fee value.
+- `slot` - The slot number associated with the prioritization fee.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":1, "method":"getRecentPrioritizationFees", "params": [["CxELquR1gPP8wHe33gZ4QxqGB3sZ9RSwsJ2KshVewkFY"]]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "prioritizationFee": 0,
+        "slot": 372976610
+      },
+      ...
+      {
+        "prioritizationFee": 0,
+        "slot": 372976759
+      }
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
