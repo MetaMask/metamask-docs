@@ -1,30 +1,47 @@
 ---
-name: Check for lint, spelling and link errors
+name: ci
 
 on:
   workflow_call:
-    secrets:
-      SEGMENT_ANALYTICS_KEY:
-        required: true
-      LD_CLIENT_ID:
-        required: true
-      SENTRY_KEY:
-        required: true
+  pull_request:
+    branches: 
+      - main
+
+permissions:
+  contents: read
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
   LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
-  SENTRY_KEY: ${{ secrets.SENTRY_KEY }}
 
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        uses: ConsenSys/github-actions/docs-build@main
+
+  case:
+    name: Check for case being inconsistent
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ['docs']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Case check action
+        uses: ConsenSys/github-actions/docs-case-check@main
+        with:
+          DOC_DIR: ${{ matrix.folder }}
+          SKIP_TEST: true
+
   lint:
     name: Lint Code Base
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
-
       - name: Lint
         uses: ConsenSys/github-actions/docs-lint-all@main
 
