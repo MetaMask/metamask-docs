@@ -9,6 +9,14 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## May 2025
+
+- Documented Infura's filter API method support for [Arbitrum](/services/reference/arbitrum/json-rpc-methods/filter-methods/),
+    [Avalanche](/services/reference/avalanche-c-chain/json-rpc-methods/filter-methods/), [Base](/services/reference/base/json-rpc-methods/filter-methods/),
+    [Celo](/services/reference/celo/json-rpc-methods/filter-methods/), [Linea](/services/reference/linea/json-rpc-methods/filter-methods/),
+    [Optimism](/services/reference/optimism/json-rpc-methods/filter-methods/), and
+    [Polygon POS](/services/reference/polygon-pos/json-rpc-methods/filter-methods/) networks. ([#1994](https://github.com/MetaMask/metamask-docs/pull/1994))
+
 ## April 2025
 
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
