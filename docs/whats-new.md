@@ -11,7 +11,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
-- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) Wallet Standard support.
+- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) dapp support via the Wallet Standard and third-party libraries.
   ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 
 ## April 2025
