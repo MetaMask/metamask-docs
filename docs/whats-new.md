@@ -9,10 +9,18 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
-## April 2025
+## May 2025
 
 - Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) Wallet Standard support.
   ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
+
+## April 2025
+
+- Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
+- Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
+  ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
+- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
+  ([#1972](https://github.com/MetaMask/metamask-docs/pull/1972))
 - Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 

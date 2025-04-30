@@ -6,7 +6,7 @@ const sidebar = {
     {
       type: 'category',
       label: 'Introduction',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
       items: [
         'introduction/welcome',
@@ -23,28 +23,30 @@ const sidebar = {
     {
       type: 'category',
       label: 'Quickstart',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
       items: [
         'quickstart/javascript-wagmi',
         'quickstart/javascript',
+        'quickstart/javascript-dynamic',
         'quickstart/react-native',
       ],
     },
     {
       type: 'category',
       label: 'Guides',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
       items: [
         'guides/authenticate-users',
         'guides/manage-networks',
         'guides/handle-transactions',
         'guides/interact-with-contracts',
+        'guides/use-deeplinks',
         {
           type: 'category',
           label: 'Advanced',
-          collapsible: true,  
+          collapsible: true,
           collapsed: true,
           items: [
             'guides/advanced/connect-and-sign',
@@ -57,13 +59,11 @@ const sidebar = {
     {
       type: 'category',
       label: 'Reference',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
-      items: [
-        'reference/sdk-options'
-      ],
-    }
+      items: ['reference/sdk-options'],
+    },
   ],
-};
+}
 
-module.exports = sidebar;
+module.exports = sidebar
