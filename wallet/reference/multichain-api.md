@@ -1,7 +1,5 @@
 ---
 description: See the Multichain API reference.
-sidebar_custom_props:
-  flask_only: true
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,7 +7,8 @@ import TabItem from "@theme/TabItem";
 
 # Multichain API
 
-:::flaskOnly
+:::tip Experimental
+The Multichain API is an experimental feature.
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
@@ -84,10 +83,6 @@ The scopes and properties of the created connection.
         "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "personal_sign"],
         "notifications": []
       }
-    },
-    "sessionProperties": {
-      "expiry": "2022-12-24T17:07:31+00:00",
-      "caip154-mandatory": "true"
     }
   }
 }

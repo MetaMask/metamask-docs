@@ -1,12 +1,11 @@
 ---
 description: Learn about the Multichain API.
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # About the Multichain API
 
-:::flaskOnly
+:::tip Experimental
+The Multichain API is an experimental feature.
 :::
 
 The Multichain API is a scalable, generalized web3 wallet API that supports simultaneous

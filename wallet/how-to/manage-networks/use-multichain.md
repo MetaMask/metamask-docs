@@ -1,13 +1,12 @@
 ---
-description: Use the Multichain API.
+description: Interact with multiple networks using the Multichain API.
 toc_max_heading_level: 4
-sidebar_custom_props:
-  flask_only: true
 ---
 
 # Interact with multiple networks
 
-:::flaskOnly
+:::tip Experimental
+The Multichain API is an experimental feature.
 :::
 
 You can use the Multichain API to interact with multiple blockchain networks in MetaMask simultaneously.
@@ -35,16 +34,10 @@ Establish a connection to MetaMask Flask and set up basic message handling using
 const EXTENSION_ID = "ljfoeinjpaedjfecbmggjgodbgkmjkjk"; // Flask extension ID
 const extensionPort = chrome.runtime.connect(EXTENSION_ID)
 
-// Set up message listener for events.
+// Set up a message listener for events.
 extensionPort.onMessage.addListener((msg) => {
-  // Format wallet_notify events to be able to read them later.
   if (msg.data.method === "wallet_notify") {
-    console.log("wallet_notify:", {
-      scope: msg.data.params.scope,
-      method: msg.data.params.notification.method,
-      subscription: msg.data.params.notification.params.subscription,
-      number: msg.data.params.notification.params.result.number
-    })
+    console.log("wallet_notify:", msg.data.params)
     return;
   }
   console.log(msg.data)

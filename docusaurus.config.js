@@ -140,20 +140,6 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
         breadcrumbs: false,
-        admonitions: {
-          keywords: [
-            "info",
-            "success",
-            "danger",
-            "note",
-            "tip",
-            "warning",
-            "important",
-            "caution",
-            "security",
-            "flaskOnly",
-          ],
-        },
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
