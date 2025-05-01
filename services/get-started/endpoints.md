@@ -66,18 +66,10 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 
 ## Ethereum
 
-:::warning Holesky deprecation
-The Holesky testnet will be deprecated from the Infura service on May 1, 2025.
-Switch to the Hoodi testnet, now available on Infura via
-[Decentralized Infrastructure Network (DIN)](https://www.infura.io/solutions/decentralized-infrastructure-service).
-:::
-
 | Network           | Description             | URL                                            |
 |-------------------|-------------------------|------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
-| Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Holesky) | JSON-RPC over WebSocket | `wss://holesky.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Hoodi)   | JSON-RPC over HTTPS     | `https://hoodi.infura.io/v3/<YOUR-API-KEY>`    |
 | Testnet (Hoodi)   | JSON-RPC over WebSocket | `wss://hoodi.infura.io/ws/v3/<YOUR-API-KEY>`   |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<YOUR-API-KEY>`  |
