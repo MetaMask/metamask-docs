@@ -11,11 +11,13 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
+- Documented [Solana](/services/reference/solana) support. ([#1978](https://github.com/MetaMask/metamask-docs/pull/1978))
 - Discontinue Infura support for the Ethereum Holesky testnet. ([#1996](https://github.com/MetaMask/metamask-docs/pull/1996))
 
 ## April 2025
 
-- Documented [Solana](/services/reference/solana) support. ([#1978](https://github.com/MetaMask/metamask-docs/pull/1978))
+- Added a tutorial for [creating a wallet AI agent with the SDK](/sdk/tutorials/create-wallet-ai-agent).
+  ([#1993](https://github.com/MetaMask/metamask-docs/pull/1993))
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
