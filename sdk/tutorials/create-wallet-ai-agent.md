@@ -7,13 +7,13 @@ import TabItem from "@theme/TabItem";
 
 # Create a wallet AI agent
 
-This tutorial walks you through creating an AI agent dapp that can display your wallet balance and initiate transactions from your wallet.
+This tutorial walks you through creating an AI agent dapp that can display your wallet balance and initiate transactions from your wallet, on the Linea Sepolia network.
 You will use a provided template, which sets up MetaMask SDK and [Vercel's AI SDK](https://sdk.vercel.ai/) with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) version 18 or later
-- An [OpenAI](https://platform.openai.com/docs/overview) API key
+- [Node.js](https://nodejs.org/) version 18 or later and [pnpm](https://pnpm.io/installation) installed
+- An [OpenAI](https://platform.openai.com/docs/overview) API key, with some credit balance available
 - [MetaMask](https://metamask.io/) installed, with an account that has Linea Sepolia ETH
   :::note
   You can use the [MetaMask faucet](/developer-tools/faucet) to get Linea Sepolia ETH.
@@ -23,27 +23,36 @@ You will use a provided template, which sets up MetaMask SDK and [Vercel's AI SD
 
 ### 1. Set up the project
 
-Clone the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent/tree/main) repository, switch to the `initial-setup` branch, and install dependencies:
+1. Clone the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent/tree/main) repository:
 
-```bash
-git clone git@github.com:Consensys/wallet-agent.git
-cd wallet-agent
-git switch initial-setup
-npm install
-```
+    ```bash
+    git clone git@github.com:Consensys/wallet-agent.git
+    ```
 
-In the root of your project, create a `.env.local` file:
+2. Switch to the `initial-setup` branch:
 
-```bash
-touch .env.local
-```
+    ```bash
+    cd wallet-agent && git switch initial-setup
+    ```
 
-In `.env.local`, add an `OPENAI_API_KEY` environment variable, replacing `<YOUR-API-KEY>` with your [OpenAI](https://platform.openai.com/docs/overview) API key.
+3. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4. Create a `.env.local` file:
+
+    ```bash
+    touch .env.local
+    ```
+
+5. In `.env.local`, add an `OPENAI_API_KEY` environment variable, replacing `<YOUR-API-KEY>` with your [OpenAI](https://platform.openai.com/docs/overview) API key.
 Vercel's AI SDK will use this environment variable to authenticate your dapp with the OpenAI service.
 
-```text title=".env.local"
-OPENAI_API_KEY=<YOUR-API-KEY>
-```
+    ```text title=".env.local"
+    OPENAI_API_KEY=<YOUR-API-KEY>
+    ```
 
 ### 2. Create the dapp interface
 
@@ -192,10 +201,11 @@ In the development server, test that this tool works to get your current Linea S
 ### 5. Create a tool to send transactions
 
 In `ai/tools.ts`, create another tool to send transactions.
-In this example, the tool and the `Chat` component are configured to initiate a transaction and provide a button for you to send the transaction:
+In this example, the tool and the `Chat.tsx` component are configured to initiate a transaction and provide a button for you to send the transaction.
+You only need to make the following changes to the `tools.ts` file:
 
 <Tabs>
-<TabItem value="tools.ts">
+<TabItem value="ai/tools.ts">
 
 ```ts
 import { publicClient } from "@/wagmi.config";
@@ -228,7 +238,7 @@ export const tools = {
 ```
 
 </TabItem>
-<TabItem value="Chat.tsx">
+<TabItem value="components/Chat.tsx">
 
 ```tsx
 // ...
