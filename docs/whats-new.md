@@ -20,6 +20,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## April 2025
 
+- Added a tutorial for [creating a wallet AI agent with the SDK](/sdk/tutorials/create-wallet-ai-agent).
+  ([#1993](https://github.com/MetaMask/metamask-docs/pull/1993))
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
