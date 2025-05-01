@@ -16,6 +16,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
     [Celo](/services/reference/celo/json-rpc-methods/filter-methods/), [Linea](/services/reference/linea/json-rpc-methods/filter-methods/),
     [Optimism](/services/reference/optimism/json-rpc-methods/filter-methods/), and
     [Polygon POS](/services/reference/polygon-pos/json-rpc-methods/filter-methods/) networks. ([#1994](https://github.com/MetaMask/metamask-docs/pull/1994))
+- Discontinue Infura support for the Ethereum Holesky testnet. ([#1996](https://github.com/MetaMask/metamask-docs/pull/1996))
 
 ## April 2025
 

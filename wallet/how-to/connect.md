@@ -268,7 +268,7 @@ Update `src/App.tsx` with the following code:
 
 ```ts title="App.tsx"
 import "./App.css"
-import { DiscoverWalletProviders } from "./components/DiscoverWalletProviders"
+import { DiscoverWalletProviders } from "./components/WalletProviders"
 
 function App() {
   return (
@@ -279,18 +279,17 @@ function App() {
 export default App
 ```
 
-This code renders the `DiscoverWalletProviders` component that you'll create in the next step, which
+This code renders the `WalletProviders` component that you'll create in the next step, which
 contains the logic for detecting and connecting to wallet providers.
 
 #### 4. Detect and connect to wallets
 
-In the `src/components` directory, create a component `DiscoverWalletProviders.tsx` with the
-following code:
+Create a `src/components` directory and add a file `WalletProviders.tsx` with the following code:
 
-```ts title="DiscoverWalletProviders.tsx"
+```ts title="WalletProviders.tsx"
 import { useState } from "react"
 import { useSyncProviders } from "../hooks/useSyncProviders"
-import { formatAddress } from "~/utils"
+import { formatAddress } from "../utils"
 
 export const DiscoverWalletProviders = () => {
   const [selectedWallet, setSelectedWallet] = useState<EIP6963ProviderDetail>()
@@ -299,15 +298,16 @@ export const DiscoverWalletProviders = () => {
 
   // Connect to the selected provider using eth_requestAccounts.
   const handleConnect = async (providerWithInfo: EIP6963ProviderDetail) => {
-    try {
-      const accounts = await providerWithInfo.provider.request({
-        method: "eth_requestAccounts"
-      })
+    const accounts: string[] | undefined =
+      await (
+        providerWithInfo.provider
+          .request({ method: "eth_requestAccounts" })
+          .catch(console.error)
+      ) as string[] | undefined;
 
+    if (accounts?.[0]) {
       setSelectedWallet(providerWithInfo)
       setUserAccount(accounts?.[0])
-    } catch (error) {
-      console.error(error)
     }
   }
 
@@ -363,7 +363,7 @@ address are displayed.
 
 #### 5. Add React hooks
 
-Create a `src/hooks` directory and add a `store.ts` file with the following code:
+Create a `src/hooks` directory and add a file `store.ts` with the following code:
 
 ```ts title="hooks/store.ts"
 declare global {
