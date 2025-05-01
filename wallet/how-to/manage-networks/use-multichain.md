@@ -1,9 +1,9 @@
 ---
-description: Interact with multiple networks using the Multichain API.
+description: Interact with multiple networks simultaneously using the Multichain API.
 toc_max_heading_level: 4
 ---
 
-# Interact with multiple networks
+# Interact with multiple networks simultaneously
 
 :::tip Experimental
 The Multichain API is an experimental feature.

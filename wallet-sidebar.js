@@ -44,7 +44,7 @@ const sidebar = {
             },
             {
               type: "doc",
-              label: "Interact with multiple networks",
+              label: "Interact with multiple networks simultaneously",
               id: "how-to/manage-networks/use-multichain"
             }
           ]

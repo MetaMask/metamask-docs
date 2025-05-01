@@ -12,7 +12,7 @@ The Multichain API is an experimental feature.
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) connections with MetaMask.
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain connections with MetaMask.
 The API also provides [events](#events) that wallets can send to dapps to notify them of onchain or connection changes.
 
 :::note See also
