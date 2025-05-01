@@ -6,12 +6,6 @@ import CardList from '@site/src/components/CardList'
 
 # Ethereum
 
-:::warning Holesky deprecation
-The Holesky testnet will be deprecated from the Infura service on May 1, 2025.
-Switch to the Hoodi testnet, now available on Infura via
-[Decentralized Infrastructure Network (DIN)](https://www.infura.io/solutions/decentralized-infrastructure-service).
-:::
-
 Ethereum is a decentralized, open-source blockchain network with [Turing-complete](https://en.wikipedia.org/wiki/Turing_completeness)
 smart contract functionality. Ether (ETH) is the native cryptocurrency.
 

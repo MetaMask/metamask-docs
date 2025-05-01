@@ -9,6 +9,10 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## May 2025
+
+- Discontinue Infura support for the Ethereum Holesky testnet. ([#1996](https://github.com/MetaMask/metamask-docs/pull/1996))
+
 ## April 2025
 
 - Added a tutorial for [creating a wallet AI agent with the SDK](/sdk/tutorials/create-wallet-ai-agent).
