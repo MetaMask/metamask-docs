@@ -108,7 +108,6 @@ The `ethereum` global available to Snaps has fewer capabilities than `window.eth
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
 Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
-- [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps)
 - [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions)
 - [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokepermissions)
 - [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)
@@ -116,9 +115,7 @@ Snaps can call all Wallet JSON-RPC API methods **except** the following:
 - [`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchasset)
 - [`wallet_registerOnboarding`](/wallet/reference/json-rpc-methods/wallet_registeronboarding)
 - [`wallet_scanQRCode`](/wallet/reference/json-rpc-methods/wallet_scanqrcode)
-- [`eth_sendRawTransaction`](/wallet/reference/json-rpc-methods/eth_sendrawtransaction)
 - [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction)
-- [`eth_signTypedData_v4`](/wallet/reference/json-rpc-methods/eth_signtypeddata_v4)
 - [`eth_decrypt`](/wallet/reference/json-rpc-methods/eth_decrypt)
 - [`eth_getEncryptionPublicKey`](/wallet/reference/json-rpc-methods/eth_getencryptionpublickey)
 
