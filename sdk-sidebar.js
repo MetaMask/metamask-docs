@@ -57,6 +57,13 @@ const sidebar = {
       ],
     },
     {
+      type:'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: ['tutorials/create-wallet-ai-agent'],
+    },
+    {
       type: 'category',
       label: 'Reference',
       collapsible: false,

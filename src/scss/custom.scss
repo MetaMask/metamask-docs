@@ -624,3 +624,19 @@ ol {
     max-width: 80rem;
   }
 }
+
+.git-diff-remove {
+  background-color: #ff000020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #ff000080;
+}
+
+.git-diff-add {
+  background-color: #1aff0020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #1aff0080;
+}
