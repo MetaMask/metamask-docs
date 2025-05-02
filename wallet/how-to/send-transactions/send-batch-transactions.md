@@ -48,7 +48,7 @@ Use `wallet_getCapabilities` to query whether MetaMask supports atomic batch tra
 For example:
 
 ```js title="index.js"
-const result = await provider // Or window.ethereum if you don't support EIP-6963.
+const capabilities = await provider // Or window.ethereum if you don't support EIP-6963.
   .request({
     "method": "wallet_getCapabilities",
     "params": [
@@ -98,12 +98,12 @@ Set `atomicRequired` to `true` to require MetaMask to execute the calls atomical
 For example:
 
 ```js title="index.js"
-const result = await provider.
+const result = await provider. // Or window.ethereum if you don't support EIP-6963.
   request({
-    "method": "wallet_sendCalls", // Or window.ethereum if you don't support EIP-6963.
+    "method": "wallet_sendCalls",
     "params": [
       {
-        version: "1.0",
+        version: "2.0.0",
         from: "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The sender's address.
         chainId: "0x2105", // The chain ID, which must match the currently selected network.
         atomicRequired: true, // Whether or not atomicity is required.
@@ -139,7 +139,7 @@ using the batch ID returned by `wallet_sendCalls`.
 For example:
 
 ```js title="index.js"
-const result = await provider // Or window.ethereum if you don't support EIP-6963.
+const status = await provider // Or window.ethereum if you don't support EIP-6963.
   .request({
     "method": "wallet_getCallsStatus",
     "params": [
@@ -156,7 +156,7 @@ This method returns status information about the batch of transactions, includin
 
 ```json
 {
-  "version": "1.0",
+  "version": "2.0.0",
   "chainId": "0x2105",
   "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
   "status": 200, // Status code. 200 means confirmed.
