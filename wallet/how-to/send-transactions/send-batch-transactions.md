@@ -53,37 +53,44 @@ const capabilities = await provider // Or window.ethereum if you don't support E
     "method": "wallet_getCapabilities",
     "params": [
       "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The user's wallet address.
-      ["0x2105", "0x14A34"] // (Optional) A list of chain IDs to query for.
+      ["0x1", "0xaa36a7"] // (Optional) A list of chain IDs to query for.
     ],
   });
 ```
 
-This method returns whether the `atomic` capability is supported for each chain ID:
+This method returns the status of the `atomic` capability for each chain ID.
+For example:
 
 ```json
 {
-  "0x2105": {
+  "0x1": {
     "atomic": {
-      "status": "supported"
+      "status": "ready"
     }
   },
-  "0x14A34": {
+  "0xaa36a7": {
     "atomic": {
-      "status": "unsupported"
+      "status": "supported"
     }
   }
 }
 ```
 
-The `atomic` capability can have a `status` of `supported`, `ready`, or `unsupported`:
+The `atomic` capability can have a `status` of `supported` or `ready`:
 
 - `supported` means MetaMask supports atomic batch transactions for the account and chain ID.
 - `ready` means MetaMask will prompt the user to upgrade their account to a MetaMask delegator account.
   If the user approves, the `status` will upgrade to `supported`.
-- `unsupported` means MetaMask does not support atomic batch transactions for the account and chain ID, and will not
-  suggest an upgrade to the user.
 
-:::note
+If the `atomic` capability is not `supported` or `ready` for a specified chain ID, MetaMask will not return anything for that chain ID.
+If you don't specify any chain IDs in `wallet_getCapabilities`, MetaMask will return all chains in the wallet where the `atomic` capability is `supported` or `ready`.
+
+:::info Supported networks
+MetaMask currently supports atomic batch transactions on Ethereum Mainnet, Ethereum Sepolia, and Gnosis Mainnet.
+MetaMask will support this feature on more networks as they adopt EIP-7702.
+:::
+
+:::note Atomic batch unsupported
 - If the user has already upgraded their account to a third-party smart contract account, MetaMask does not currently support atomic batch transactions for that account.
 - If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of `wallet_sendCalls`,
 and [`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
@@ -93,8 +100,6 @@ instead of `wallet_getCallsStatus`.
 ### 2. Submit a batch of transactions
 
 Use `wallet_sendCalls` to submit a batch of transactions.
-Set `atomicRequired` to `true` to require MetaMask to execute the calls atomically.
-
 For example:
 
 ```js title="index.js"
@@ -103,20 +108,18 @@ const result = await provider. // Or window.ethereum if you don't support EIP-69
     "method": "wallet_sendCalls",
     "params": [
       {
-        version: "2.0.0",
+        version: "2.0.0", // The version of the API format. This must be 2.0.0.
         from: "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The sender's address.
-        chainId: "0x2105", // The chain ID, which must match the currently selected network.
+        chainId: "0xaa36a7", // The chain ID, which must match the currently selected network.
         atomicRequired: true, // Whether or not atomicity is required.
         calls: [ // The list of calls to send as a batch.
           {
             to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-            value: "0x9184e72a",
-            data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+            value: "0x0"
           },
           {
             to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-            value: "0x182183",
-            data: "0xfbadbaf01"
+            value: "0x0"
           }
         ]
       }
@@ -124,7 +127,14 @@ const result = await provider. // Or window.ethereum if you don't support EIP-69
   });
 ```
 
-This method returns a batch ID that you can use to track the status of the batch:
+:::note Atomic required parameter
+MetaMask only supports using `wallet_sendCalls` to send atomic batch transactions (not sequential batch transactions),
+so `atomicRequired` can be set to either `true` or `false`.
+If the `atomic` capability is not supported, `wallet_sendCalls` will return an error.
+:::
+
+This method returns a batch ID that you can use to track the status of the batch.
+For example:
 
 ```json
 {
@@ -152,12 +162,15 @@ This method returns status information about the batch of transactions, includin
 
 - The status code of the batch.
 - Whether the batch was executed atomically.
+  Currently, this will always be `true` if the execution was successful.
 - A list of transaction receipts.
+
+For example:
 
 ```json
 {
   "version": "2.0.0",
-  "chainId": "0x2105",
+  "chainId": "0xaa36a7",
   "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
   "status": 200, // Status code. 200 means confirmed.
   "atomic": true, // Whether the calls were executed atomically.
