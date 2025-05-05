@@ -37,7 +37,7 @@
     "@docusaurus/theme-mermaid": "^3.7.0",
     "@intercom/messenger-js-sdk": "^0.0.14",
     "@mdx-js/react": "^3.1.0",
-    "@metamask/design-tokens": "^5.0.0",
+    "@metamask/design-tokens": "^7.1.0",
     "@metamask/eth-sig-util": "^7.0.3",
     "@metamask/profile-sync-controller": "^11.0.1",
     "@metamask/sdk": "^0.32.0",
