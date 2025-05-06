@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
+- Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
+  ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
 - Documented Infura's filter API method support for [Arbitrum](/services/reference/arbitrum/json-rpc-methods/filter-methods/),
     [Avalanche](/services/reference/avalanche-c-chain/json-rpc-methods/filter-methods/), [Base](/services/reference/base/json-rpc-methods/filter-methods/),
     [Celo](/services/reference/celo/json-rpc-methods/filter-methods/), [Linea](/services/reference/linea/json-rpc-methods/filter-methods/),
