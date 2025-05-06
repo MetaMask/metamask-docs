@@ -1,6 +1,6 @@
----
+git clone https://github.com/metamask/metamask-sdk-examples.github
 description: Authenticate all requests to Infura with an API key secret.
----
+cd metamask-sdk-examples/examples/quickstart/
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
