@@ -76,11 +76,6 @@ Switch to the Hoodi testnet, now available on Infura via
 |-------------------|-------------------------|------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
-<<<<<<< HEAD
-=======
-| Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Holesky) | JSON-RPC over WebSocket | `wss://holesky.infura.io/ws/v3/<YOUR-API-KEY>` |
->>>>>>> a71cf7a46af (Add hoodi support. (#1977))
 | Testnet (Hoodi)   | JSON-RPC over HTTPS     | `https://hoodi.infura.io/v3/<YOUR-API-KEY>`    |
 | Testnet (Hoodi)   | JSON-RPC over WebSocket | `wss://hoodi.infura.io/ws/v3/<YOUR-API-KEY>`   |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<YOUR-API-KEY>`  |

@@ -13,7 +13,7 @@ Infura supports the following DAS API methods:
 
 - [`getAsset`](./getasset.mdx)
 - [`getAssetProof`](./getassetproof.mdx)
-- [`getAssetProofBatch`](./getassetproofbatch.mdx)
+- [`getAssetProofs`](getassetproofs.mdx)
 - [`getAssets`](./getassets.mdx)
 - [`getAssetsByAuthority`](./getassetsbyauthority.mdx)
 - [`getAssetsByCreator`](./getassetsbycreator.mdx)

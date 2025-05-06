@@ -1,11 +1,11 @@
 ---
-title: "getAssetProofBatch"
+title: "getAssetProofs"
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# `getAssetProofBatch`
+# `getAssetProofs`
 
 Returns the Merkle tree proof information for multiple compressed assets.
 
@@ -36,7 +36,7 @@ Replace `<YOUR-API-KEY>` with your API key.
   curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
     -X POST \
     -H "Content-Type: application/json" \
-    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetProofBatch", "params": [["D85MZkvir9yQZFDHt8U2ZmS7D3LXKdiSjvw2MBdscJJa", "ELDjRRs5Wb478K4h3B5bMPEhqFD8FvoET5ctHku5uiYi"]]}'
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetProofs", "params": [["D85MZkvir9yQZFDHt8U2ZmS7D3LXKdiSjvw2MBdscJJa", "ELDjRRs5Wb478K4h3B5bMPEhqFD8FvoET5ctHku5uiYi"]]}'
   ```
 
     </TabItem>
