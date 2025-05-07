@@ -53,6 +53,8 @@ Select an option below to get started with the opBNB network.
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the opBNB network:
 <!-- markdown-link-check-disable -->
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))

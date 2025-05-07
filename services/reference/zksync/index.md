@@ -47,11 +47,12 @@ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for mo
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the ZKsync Era network:
 
 <!-- markdown-link-check-disable -->
-
 - Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 - Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
-- NorthWest Nodes
+- [NorthWest Nodes](https://northwestnodes.com/)
 <!-- markdown-link-check-enable -->

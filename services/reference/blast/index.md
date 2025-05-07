@@ -51,8 +51,9 @@ Select one of the following options to get started with the Blast network:
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the Blast network:
 
 - Nodies DLB ([Terms of Use](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
-- Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
 - Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))

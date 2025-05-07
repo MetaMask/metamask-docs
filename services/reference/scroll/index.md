@@ -51,6 +51,8 @@ See the [official Scroll documentation](https://docs.scroll.io/en/home/) for mor
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the Scroll network:
 <!-- markdown-link-check-disable -->
 - Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
