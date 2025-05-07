@@ -347,7 +347,7 @@ An array containing:
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+     execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.
@@ -365,7 +365,7 @@ A partial user operation object containing:
 - `callGasLimit`: `string` - (Optional) Amount of gas to allocate to the main execution call.
 - `verificationGasLimit`: `string` - (Optional) Amount of gas to allocate to the verification step.
 - `preVerificationGas`: `string` - (Optional) Amount of gas to compensate the bundler for
-  pre-verification execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+  pre-verification execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
 
 #### Example
 
@@ -425,7 +425,7 @@ An array containing:
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+     execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.

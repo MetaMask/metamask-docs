@@ -1,5 +1,5 @@
 ---
-description: debug_traceCall API method
+description: Returns the number of possible tracing results in the context of the given block execution.
 ---
 
 import Tabs from "@theme/Tabs";

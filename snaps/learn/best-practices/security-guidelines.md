@@ -66,7 +66,7 @@ The following are guidelines for user notifications, dialogs, and authorizations
 
 - **Limit access to sensitive methods** - When building a Snap with sensitive RPC methods,
   use a companion dapp as an "admin interface" to interact with your Snap's sensitive methods.
-  There are two ways to do this:
+  You can do this in two ways:
 
   1. Restrict the [`endowment:rpc`](../../reference/permissions.md#endowmentrpc) permission to specific
      URLs using the `allowedOrigins` caveat.

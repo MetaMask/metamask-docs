@@ -1,5 +1,5 @@
 ---
-description: Register a token with users using wallet_watchAsset.
+description: Register a token with users using "wallet_watchAsset".
 ---
 
 # Display tokens
