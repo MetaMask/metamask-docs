@@ -6,9 +6,17 @@ toc_max_heading_level: 2
 # JavaScript + Wagmi (recommended)
 
 Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
-You can [use the quickstart template](#set-up-using-a-template), which automatically sets up
-the SDK with a [Next.js](https://nextjs.org/) and [Wagmi](https://wagmi.sh/) dapp.
-You can also [manually set up the SDK](#set-up-manually) in an existing dapp.
+You can set up the SDK in the following ways:
+
+- [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Wagmi dapp.
+- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Wagmi dapp.
+- [Manual setup](#set-up-manually) - Set up the SDK in an existing dapp.
+
+<p align="center">
+  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
+    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="450px" />
+  </a>
+</p>
 
 Features include:
 
@@ -17,11 +25,69 @@ Features include:
 - **Interactive UI** - Responsive design with interactive cards guiding users.
 - **Modular components** - Easy-to-understand and customizable components.
 
-<p align="center">
-  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="450px" />
-  </a>
-</p>
+:::note Project structure
+The project you will set up has the following structure:
+
+```text
+├── app/
+│   ├── providers.tsx # Main providers configuration
+│   └── layout.tsx    # Root layout with providers
+├── components/
+│   ├── Navbar.tsx    # Navigation with wallet connection
+│   └── Hero.tsx      # Hero section with wallet status
+├── wagmi.config.ts   # Wagmi configuration
+├── next.config.ts    # Next.js configuration
+└── package.json      # Project dependencies
+```
+:::
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) version 19 or later
+- [pnpm](https://pnpm.io/installation)
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile
+
+## Set up using the CLI
+
+1. Run the CLI command, replacing `<project-name>` with your project name:
+
+    ```bash
+    npx @consensys/create-web3-app <project-name>
+    ```
+
+2. Select the Next.js Quickstart template:
+
+    ```bash
+    ? Please select the template you want to use:
+    ❯ Next.js Quickstart (MetaMask SDK Example) (Recommended) 
+      MetaMask <-> Dynamic Quickstart
+    ```
+
+3. Select your preferred blockchain tooling if your project requires it:
+
+    ```bash
+    ? Would you like to include blockchain tooling? (Use arrow keys)
+    ❯ HardHat 
+      Foundry 
+      None 
+    ```
+
+4. Select your preferred package manager.
+    We recommend pnpm for speed and efficiency:
+
+    ```bash
+    ? Please select the package manager you want to use: 
+      Yarn 
+      NPM 
+    ❯ pnpm 
+    ```
+
+5. The CLI will take a few minutes to set up your project.
+    Once complete, you can run the project using the following command in `<project-name>/packages/site`:
+
+    ```bash
+    pnpm run dev
+    ```
 
 ## Set up using a template
 
@@ -49,9 +115,6 @@ Features include:
     ```bash
     pnpm dev
     ```
-
-You've successfully set up MetaMask SDK with Wagmi.
-You can now [add your own functionality](#add-your-own-functionality).
 
 ## Set up manually
 
@@ -138,9 +201,7 @@ export const ConnectButton = () => {
 }
 ```
 
-Once you've added the connect button, you can test your dapp by running `npm run dev` or `pnpm run dev` or `yarn dev`.
-It should work with the [MetaMask browser extension](https://metamask.io/download/) installed 
-or [MetaMask Mobile](https://metamask.io/download/).
+Once you've added the connect button, you can test your dapp by running `pnpm run dev`.
 
 ## Production readiness
 
@@ -163,7 +224,7 @@ const config = createConfig({
 
 Sign up to [MetaMask Developer](https://developer.metamask.io/) for a free account and get your API key.
 
-## Add your own functionality
+## Next steps
 
 After completing the basic setup, you can follow these guides to add your own functionality:
 
@@ -171,8 +232,3 @@ After completing the basic setup, you can follow these guides to add your own fu
 - [Manage networks](../guides/manage-networks.md)
 - [Handle transactions](../guides/handle-transactions.md)
 - [Interact with smart contracts](../guides/interact-with-contracts.md)
-
-## More examples
-
-See the [`metamask-sdk-examples`](https://github.com/metamask/metamask-sdk-examples) GitHub
-repository for more examples.
