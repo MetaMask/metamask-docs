@@ -1,5 +1,5 @@
 ---
-description: debug_traceBlock API method
+description: Returns a full trace of all invoked opcodes of all transactions included in the block.
 ---
 
 import Tabs from "@theme/Tabs";
