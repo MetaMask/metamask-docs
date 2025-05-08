@@ -14,7 +14,7 @@ You can send and manage batch transactions in MetaMask, using the methods specif
 ## About atomic batch transactions
 
 An atomic batch transaction is a group of transactions that are executed together as a single unit.
-When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask delegator account](https://docs.gator.metamask.io/concepts/delegator-accounts).
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask delegator account](https://docs.gator.metamask.io/concepts/delegator-accounts) (or "smart account").
 If the user accepts, MetaMask proceeds to upgrade the account and process the request as a single atomic transaction as specified by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note Delegator accounts
@@ -81,7 +81,7 @@ For example:
 The `atomic` capability can have a `status` of `supported` or `ready`:
 
 - `supported` means MetaMask supports atomic batch transactions for the account and chain ID.
-- `ready` means MetaMask will prompt the user to upgrade their account to a MetaMask delegator account.
+- `ready` means MetaMask will prompt the user to upgrade their account to a MetaMask smart account.
   If the user approves, the `status` will upgrade to `supported`.
 
 If the `atomic` capability is not `supported` or `ready` for a specified chain ID, MetaMask will not return anything for that chain ID.
@@ -212,3 +212,11 @@ In some cases, calls can be executed atomically but in multiple transactions (fo
 `eth_bundle` on an L2 network resistant to reorgs).
 In these cases, `atomic` is `true` but multiple receipts are returned.
 :::
+
+## Resources
+
+- See the [MetaMask 7702/5792 Readiness dapp](https://7702playground.metamask.io/) to quickly test sending batch transactions.
+- See the [MetaMask Delegation Toolkit documentation](https://docs.gator.metamask.io/) for more information about delegator accounts and their capabilities.
+- See the following topics in the MetaMask end user documentation:
+  - [What is a smart account?](https://support.metamask.io/configure/accounts/what-is-a-smart-account/)
+  - [How to switch to or revert from a smart account](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/)
