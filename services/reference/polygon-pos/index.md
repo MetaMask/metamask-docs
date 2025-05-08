@@ -17,7 +17,7 @@ The Polygon PoS network is a hybrid Plasma Proof of Stake side-chain to Ethereum
 virtual machine (EVM) which allows developers to leverage Infura, MetaMask, and other tools they use for Ethereum when
 developing and deploying smart contracts to the Polygon network.
 
-The Polygon Bor node API is based on geth's JSON-RPC implementation, you can also use WebSockets to call JSON-RPCs
+The Polygon Bor node API is based on Geth's JSON-RPC implementation, you can also use WebSockets to call JSON-RPCs
 and [create subscriptions](../../how-to/subscribe-to-events.md).
 
 :::info see also
