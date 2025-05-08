@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
+- Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.
+  ([#2009](https://github.com/MetaMask/metamask-docs/pull/2009))
 - Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
   ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
 - Documented Infura's filter API method support for [Arbitrum](/services/reference/arbitrum/json-rpc-methods/filter-methods/),
