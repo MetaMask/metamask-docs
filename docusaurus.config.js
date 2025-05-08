@@ -85,6 +85,17 @@ const config = {
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
+      "docusaurus2-dotenv",
+      {
+        path: "./.env", // The path to your environment variables.
+        safe: false, // If false ignore safe-mode, if true load './.env.example', if a string load that file as the sample
+        systemvars: false, // Set to true if you would rather load all system variables as well (useful for CI purposes)
+        silent: false, //  If true, all warnings will be suppressed
+        expand: false, // Allows your variables to be "expanded" for reusability within your .env file
+        defaults: false, //  Adds support for dotenv-defaults. If set to true, uses ./.env.defaults
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'snaps',
@@ -168,13 +179,13 @@ const config = {
     './src/plugins/plugin-json-rpc.ts',
     isProd
       ? [
-          'docusaurus-plugin-segment',
-          {
-            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-            load: { cookie: { sameSite: 'None', secure: true } },
-            page: true,
-          },
-        ]
+        'docusaurus-plugin-segment',
+        {
+          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+          load: { cookie: { sameSite: 'None', secure: true } },
+          page: true,
+        },
+      ]
       : null,
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
