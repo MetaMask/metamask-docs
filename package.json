@@ -47,7 +47,7 @@
     "@sentry/browser": "^8.51.0",
     "@types/react": "^18.3.3",
     "clsx": "^2.1.1",
-    "docusaurus-openai-search": "^1.2.4-alpha.13",
+    "docusaurus-openai-search": "^1.5.0",
     "docusaurus-plugin-sass": "^0.2.5",
     "docusaurus-plugin-segment": "^1.0.4",
     "docusaurus2-dotenv": "^1.4.0",
