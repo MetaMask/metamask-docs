@@ -54,4 +54,9 @@ Select one of the following options to get started with the Arbitrum network:
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
-Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf)) is Infura's failover-protection partner and currently offers failover support for all Infura's Arbitrum methods.
+The following partners provide access to the Arbitrum network:
+
+- BlockPI ([Terms of Use](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
+- Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
+- Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- Nodefleet ([Privacy Policy](https://nodefleet.org/#/privacy-policy))
