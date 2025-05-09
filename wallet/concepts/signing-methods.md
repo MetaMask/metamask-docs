@@ -1,11 +1,11 @@
 ---
-description: Learn about the RPC methods for signing transactions in MetaMask.
+Description: Learn about the JSON-RPC methods used for securely signing transactions and data in MetaMask.
 ---
 
 # Signing methods
 
 This page describes the signing RPC methods in MetaMask.
-Learn how to [use the recommended signing methods](../how-to/sign-data/index.md).
+Learn how to [Use the recommended signing methods](../how-to/sign-data/index.md).
 
 ### `eth_signTypedData_v4`
 
@@ -17,11 +17,11 @@ is:
 - Protected against phishing signatures.
 
 If onchain verifiability cost is a high priority,
-[use `eth_signTypedData_v4`](../how-to/sign-data/index.md#use-eth_signtypeddata_v4).
+[Use `eth_signTypedData_v4`](../how-to/sign-data/index.md#use-eth_signtypeddata_v4).
 
 ### `personal_sign`
 
-[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign):
+[`personal_sign`](/wallet/reference/json-rpc-methods/personal_sign) is:
 
 - Displays human-readable text when UTF-8 encoded, making it a popular choice for site logins
   (for example, [Sign-In with Ethereum](../how-to/sign-data/siwe.md)).
@@ -29,7 +29,7 @@ If onchain verifiability cost is a high priority,
 
 The text prefix of `personal_sign` makes signatures expensive to verify onchain.
 If onchain verifiability cost is not a priority, you can
-[use `personal_sign`](../how-to/sign-data/index.md#use-personal_sign).
+[Use `personal_sign`](../how-to/sign-data/index.md#use-personal_sign).
 
 :::note
 MetaMask implements `personal_sign` similarly to the Go Ethereum client's updated `eth_sign` implementation.
@@ -63,13 +63,13 @@ more information about the discontinuation of `eth_sign`.
 The EIP-712 specification changed several times resulting in multiple versions
 of `eth_signTypedData`.
 
-The earlier versions are:
+### The earlier versions are:
 
 - `eth_signTypedData_v1` - The same as `eth_signTypedData`.
-  Read the
+  ***Read the :***
   [introductory blog post to this method](https://medium.com/metamask/scaling-web3-with-signtypeddata-91d6efc8b290).
 - `eth_signTypedData_v3` - A highly used version of the EIP-712 specification.
-  Read the
+  ***Read the :***
   [introductory blog post to this method](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
 
 The missing `v2` represents an intermediary design that the Cipher browser implemented.
