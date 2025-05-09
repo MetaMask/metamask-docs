@@ -89,7 +89,7 @@ If you don't specify any chain IDs in `wallet_getCapabilities`, MetaMask will re
 
 <details>
 <summary>Supported networks</summary>
-<p>
+<div>
 MetaMask currently supports atomic batch transactions on the following networks:
 
 - Ethereum Mainnet
@@ -101,7 +101,7 @@ MetaMask currently supports atomic batch transactions on the following networks:
 - Base
 
 MetaMask will support this feature on more networks as they adopt EIP-7702.
-</p>
+</div>
 </details>
 
 :::note Atomic batch unsupported

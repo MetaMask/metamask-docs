@@ -498,8 +498,8 @@ will still execute.
 :::
 
 <details>
-<summary><b>Use of `useCallback`</b></summary>
-<p>
+<summary>Use of `useCallback`</summary>
+<div>
 Both of the previous functions use `useCallback`.
 It is used to memoize the `connectWallet` function, optimize performance, and prevent unnecessary re-renders.
 It ensures the function instance remains consistent between renders if its dependencies are changed.
@@ -514,8 +514,7 @@ re-renders of child components.
 Although `useCallback` is not necessary, it demonstrates best practices.
 Predicting how a context provider will be used or how the dapp might change or scale is difficult.
 Using `useCallback` can improve performance in some cases by reducing unnecessary re-renders.
-
-</p>
+</div>
 </details>
 
 Add the following code to `src/hooks/WalletProvider.tsx` to bundle the state and functions using `contextValue`:
