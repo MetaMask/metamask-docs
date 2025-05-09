@@ -1,4 +1,4 @@
----
+tab---
 slug: /
 title: Welcome
 ---
@@ -17,7 +17,7 @@ With the SDK, you can:
 
 ## Why use the SDK?
 
-The benefits of using MetaMask SDK include the following:
+escThe benefits of using MetaMask SDK include the following:
 
 - It works on multiple dapp platforms:
   - Web dapps - Connect to the MetaMask browser extension or use QR codes to connect to MetaMask Mobile.
@@ -28,7 +28,7 @@ The benefits of using MetaMask SDK include the following:
 
 ## Where do I start?
 
-You can get started quickly with the following dapp platforms:
+tabYou can get started quickly with the following dapp platforms:
 
 - [JavaScript + Wagmi (recommended)](quickstart/javascript-wagmi.md)
 - [JavaScript](quickstart/javascript.md)
