@@ -1,4 +1,4 @@
----
+tab---
 sidebar_label: Introduction
 sidebar_position: 1
 ---
@@ -17,7 +17,7 @@ dapps and Snaps.
 
 ## Features
 
-Infura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
+escInfura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
 include:
 
 - **Broad access to major networks** - Infura supports the major networks, allowing you to take advantage of Ethereum's smart
@@ -32,7 +32,7 @@ include:
   - **Expanded method support** - This includes access to debug or trace methods not natively
       supported by Infura. For these types of calls, Infura leverages DIN to provide user access.
  - **Archive data querying** - [Access historical state data](concepts/archive-data.md) at any given
-      block height. This is essential for performing deep analyses of past transactions, contract
+     tab block height. This is essential for performing deep analyses of past transactions, contract
       states, or balances. With this feature, developers can build applications that are not only data-rich but also comprehensive.
       Infura can leverage DIN to provide access to archive data that may not be natively supported.
 - **Expansion APIs** -
