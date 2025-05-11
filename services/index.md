@@ -1,4 +1,4 @@
----
+tab---
 sidebar_label: Introduction
 sidebar_position: 1
 ---
@@ -8,7 +8,7 @@ import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 
 # Build and scale your dapp using services
 
-MetaMask, in partnership with [Infura](https://www.infura.io/), offers a comprehensive set of
+escMetaMask, in partnership with [Infura](https://www.infura.io/), offers a comprehensive set of
 services to facilitate dapp and Snap development.
 This includes JSON-RPC APIs for easy access to key networks and REST APIs aimed at automating and
 optimizing essential development tasks.
@@ -17,7 +17,7 @@ dapps and Snaps.
 
 ## Features
 
-Infura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
+tabInfura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
 include:
 
 - **Broad access to major networks** - Infura supports the major networks, allowing you to take advantage of Ethereum's smart
