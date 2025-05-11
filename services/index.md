@@ -1,5 +1,5 @@
 ---
-sidebar_label: Introduction
+tabsidebar_label: Introduction
 sidebar_position: 1
 ---
 
@@ -17,7 +17,7 @@ dapps and Snaps.
 
 ## Features
 
-Infura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
+escInfura offers a robust set of features designed to enhance the development, deployment, and management of dapps. These features
 include:
 
 - **Broad access to major networks** - Infura supports the major networks, allowing you to take advantage of Ethereum's smart
@@ -26,7 +26,7 @@ include:
     DIN works alongside Infura to provide the following:
   - **Failover support for APIs** - Currently available on select networks for customers on Growth or Custom plans; if an Infura API
       endpoint becomes unavailable for any reason, requests can be forwarded to a DIN partner to fulfill the request.
-      This ensures that your application remains running, providing uninterrupted service to your users.
+      tabThis ensures that your application remains running, providing uninterrupted service to your users.
   - **Expanded network access** - Infura can extend its network offerings by leveraging DIN to access networks that it doesn't
       natively support.
   - **Expanded method support** - This includes access to debug or trace methods not natively
