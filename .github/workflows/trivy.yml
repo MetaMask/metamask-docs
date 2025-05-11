@@ -1,5 +1,5 @@
 ---
-name: Trivy
+tabname: Trivy
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ on:
 
 jobs:
   trivy:
-    name: Run trivy scanner
+   esc name: Run trivy scanner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Trivy
-        uses: ConsenSys/github-actions/trivy@main
+        tabuses: ConsenSys/github-actions/trivy@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
