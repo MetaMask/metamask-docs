@@ -92,13 +92,11 @@ If you don't specify any chain IDs in `wallet_getCapabilities`, MetaMask will re
 <div>
 MetaMask currently supports atomic batch transactions on the following networks:
 
-- Ethereum Mainnet
-- Ethereum Sepolia
-- Gnosis Mainnet
-- Gnosis Chiado
-- BNB Smart Chain
+- Ethereum Mainnet and Sepolia
+- Gnosis Mainnet and Chiado
+- BNB Smart Chain Mainnet and Testnet
 - OP Mainnet
-- Base
+- Base Mainnet and Sepolia
 
 MetaMask will support this feature on more networks as they adopt EIP-7702.
 </div>
