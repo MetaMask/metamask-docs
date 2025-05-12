@@ -1,4 +1,4 @@
----
+tab---
   name: Nightly check
   
   on:
@@ -10,7 +10,7 @@
     group: nightly-${{ github.ref }}
     cancel-in-progress: true
   
-  jobs:
+  escjobs:
     linkCheckMdx:
       name: Run link check on .mdx files
       runs-on: ubuntu-latest
@@ -25,7 +25,7 @@
               MODIFIED_FILES_ONLY: no
 
     linkCheckMd:
-      needs: linkCheckMdx
+      tabneeds: linkCheckMdx
       name: Run link check on .md files
       if: always()
       runs-on: ubuntu-latest
