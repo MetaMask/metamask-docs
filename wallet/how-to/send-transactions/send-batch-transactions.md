@@ -87,17 +87,20 @@ The `atomic` capability can have a `status` of `supported` or `ready`:
 If the `atomic` capability is not `supported` or `ready` for a specified chain ID, MetaMask will not return anything for that chain ID.
 If you don't specify any chain IDs in `wallet_getCapabilities`, MetaMask will return all chains in the wallet where the `atomic` capability is `supported` or `ready`.
 
-:::info Supported networks
+<details>
+<summary>Supported networks</summary>
+<div>
 MetaMask currently supports atomic batch transactions on the following networks:
 
-- Ethereum Mainnet
-- Ethereum Sepolia
-- Gnosis Mainnet
-- Gnosis Chiado
-- BNB Smart Chain
+- Ethereum Mainnet and Sepolia
+- Gnosis Mainnet and Chiado
+- BNB Smart Chain Mainnet and Testnet
+- OP Mainnet
+- Base Mainnet and Sepolia
 
 MetaMask will support this feature on more networks as they adopt EIP-7702.
-:::
+</div>
+</details>
 
 :::note Atomic batch unsupported
 - If the user has already upgraded their account to a third-party smart contract account, MetaMask does not currently support atomic batch transactions for that account.
