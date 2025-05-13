@@ -84,6 +84,7 @@ const config = {
   plugins: [
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
+    './src/plugins/env-variables-plugin',
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -168,13 +169,13 @@ const config = {
     './src/plugins/plugin-json-rpc.ts',
     isProd
       ? [
-          'docusaurus-plugin-segment',
-          {
-            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-            load: { cookie: { sameSite: 'None', secure: true } },
-            page: true,
-          },
-        ]
+        'docusaurus-plugin-segment',
+        {
+          apiKey: process.env.SEGMENT_ANALYTICS_KEY,
+          load: { cookie: { sameSite: 'None', secure: true } },
+          page: true,
+        },
+      ]
       : null,
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
