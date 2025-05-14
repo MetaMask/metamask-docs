@@ -31,7 +31,7 @@ Snaps CLI:
    PUBLIC_KEY=abc123 SNAP_ENV=dev
    ```
 
-2. Build your Snap using the [Snaps CLI](../reference/cli/subcommands.md):
+2. Build your Snap using the [Snaps CLI](../reference/cli.md):
 
    ```bash
    yarn mm-snap build
