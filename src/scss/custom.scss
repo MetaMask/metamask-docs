@@ -355,10 +355,23 @@ ol {
 /* Details */
 
 .details_lb9f > summary {
-  padding-left: 2rem !important;
+  padding-left: 2.7rem !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
 
   &::before {
     border-width: 0.8rem !important;
+    margin-left: 0.5rem !important;
+  }
+}
+
+.collapsibleContent_i85q {
+  padding-top: 0 !important;
+
+  > div {
+    font-weight: normal;
   }
 }
 
@@ -623,4 +636,20 @@ ol {
     @extend .markdown;
     max-width: 80rem;
   }
+}
+
+.git-diff-remove {
+  background-color: #ff000020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #ff000080;
+}
+
+.git-diff-add {
+  background-color: #1aff0020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #1aff0080;
 }

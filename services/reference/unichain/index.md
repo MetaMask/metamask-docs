@@ -54,10 +54,11 @@ See the [official Unichain documentation](https://docs.unichain.org/docs) for mo
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the Unichain network:
 
 <!-- markdown-link-check-disable -->
-
 - InfStones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
 - 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
 <!-- markdown-link-check-enable -->

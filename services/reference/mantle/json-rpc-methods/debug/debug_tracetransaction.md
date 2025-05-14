@@ -1,5 +1,5 @@
 ---
-description: debug_traceTransaction API method
+description: Returns tracing results for the specified transaction.
 ---
 
 import Tabs from "@theme/Tabs";

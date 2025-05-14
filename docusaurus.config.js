@@ -357,6 +357,18 @@ const config = {
       prism: {
         theme: codeTheme,
         additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
+        magicComments: [
+          {
+            className: "git-diff-remove",
+            line: "remove-next-line",
+            block: { start: "remove-start", end: "remove-end" },
+          },
+          {
+            className: "git-diff-add",
+            line: "add-next-line",
+            block: { start: "add-start", end: "add-end" },
+          },
+        ],
       },
       algolia: {
         // The application ID provided by Algolia

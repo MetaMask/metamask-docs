@@ -9,7 +9,7 @@ You can display a dialog in the MetaMask UI using the
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) API method.
 Dialogs can contain [custom UI](index.md) and [interactive UI](interactive-ui.md) components.
 
-There are four types of dialogs: [alerts](#display-an-alert-dialog),
+The four types of dialogs include [alerts](#display-an-alert-dialog),
 [confirmations](#display-a-confirmation-dialog), [prompts](#display-a-prompt-dialog), and
 [custom dialogs](#display-a-custom-dialog).
 

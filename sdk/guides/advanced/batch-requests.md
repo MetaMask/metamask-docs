@@ -5,19 +5,21 @@ description: Batch multiple JSON-RPC requests using MetaMask SDK or Wagmi.
 # Batch requests
 
 MetaMask SDK provides mechanisms to send multiple JSON-RPC requests in a single call.
-However, "batching" can be used in two different contexts:
+However, "batching" can be used in a few different contexts:
 
-1. [**Wagmi batching for contract reads**](#use-wagmi-usereadcontracts) - Wagmi does not support MetaMask's generic batching mechanism.
+- [**Wagmi batching for contract reads**](#use-wagmi-usereadcontracts) - Wagmi does not support MetaMask's generic batching mechanism.
    Instead, it provides the [`useReadContracts`](https://wagmi.sh/react/api/hooks/useReadContracts) hook to perform multiple contract read operations in a single hook call.
    This is specialized for retrieving data from smart contracts and returns an array of results corresponding to each read call.
-
-   :::note
    `useReadContracts` does not support batching JSON-RPC methods.
-   :::
 
-2. [**Vanilla JavaScript batching with `metamask_batch`**](#use-vanilla-javascript-metamask_batch) -
+- [**Vanilla JavaScript batching with `metamask_batch`**](#use-vanilla-javascript-metamask_batch) -
    This approach uses MetaMask SDK's `metamask_batch` method to group any JSON-RPC requests together, whether they are contract calls or other JSON-RPC methods (for example, signing messages or sending transactions).
    Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
+
+:::info
+"Batching" can also refer to [sending atomic batch transactions](/wallet/how-to/send-transactions/send-batch-transactions) in MetaMask.
+Use the methods introduced by EIP-5792 to send atomic batches.
+:::
 
 ## Use Wagmi (`useReadContracts`)
 
