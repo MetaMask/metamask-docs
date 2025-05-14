@@ -7,9 +7,10 @@ description: Interact with users' Solana accounts in MetaMask.
 [Solana](https://solana.com/) is a high-performance, non-EVM network that provides fast transaction speeds and low fees.
 You can interact with users' Solana accounts in MetaMask using the [Wallet Standard](#wallet-standard) or [third-party libraries](#third-party-libraries) for Solana dapps.
 
-:::note
-MetaMask supports both Solana Mainnet and Devnet.
-After adding Solana to MetaMask, [show test networks](https://support.metamask.io/configure/networks/how-to-view-testnets-in-metamask/) to view Solana Devnet.
+:::note Supported Solana networks
+MetaMask supports Solana Mainnet.
+Solana Devnet is only supported on [MetaMask Flask](/snaps/get-started/install-flask).
+After adding Solana to MetaMask Flask, [show test networks](https://support.metamask.io/configure/networks/how-to-view-testnets-in-metamask/) to view Solana Devnet.
 :::
 
 ## Wallet Standard
