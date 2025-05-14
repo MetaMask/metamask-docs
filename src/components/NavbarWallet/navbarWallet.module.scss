@@ -154,11 +154,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 25px;
-  min-width: 45px;
-  padding: 4px 4px 6px 4px;
+  height: 22px;
+  min-width: 38px;
+  padding: 4px 6px;
   margin-left: 10px;
   color: var(--navbarWallet-color);
   border-radius: 12px;
+  font-size: 1.2rem;
   border: 1px solid var(--navbarWallet-color);
 }
