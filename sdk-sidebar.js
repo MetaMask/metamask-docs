@@ -29,6 +29,7 @@ const sidebar = {
         'quickstart/javascript-wagmi',
         'quickstart/javascript',
         'quickstart/javascript-dynamic',
+        'quickstart/javascript-web3auth',
         'quickstart/react-native',
       ],
     },
