@@ -46,6 +46,8 @@ See the [Starknet documentation](https://docs.starknet.io/documentation/) to fin
 
 ## Partner and privacy policy
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to Starknet:
 
 <!-- markdown-link-check-disable -->

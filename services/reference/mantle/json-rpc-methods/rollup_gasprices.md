@@ -1,5 +1,5 @@
 ---
-description: rollup_gasPrices API method
+description: Returns the current layer 1 (L1) and layer 2 (L2) gas prices.
 ---
 
 import Tabs from "@theme/Tabs";

@@ -55,9 +55,12 @@ Select an option below to get started with the BSC network.
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the BSC network:
 <!-- markdown-link-check-disable -->
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
 - Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- Validation Cloud ([Terms of Use](https://www.validationcloud.io/terms), [Privacy Policy](https://www.validationcloud.io/privacy))
 <!-- markdown-link-check-enable -->

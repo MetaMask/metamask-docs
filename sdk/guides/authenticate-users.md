@@ -17,7 +17,7 @@ With the SDK, you can:
 - **Support multiple wallet types** (extension, mobile app).
 
 <p align="center">
-  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
+  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
     <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
   </a>
 </p>

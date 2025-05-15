@@ -1,5 +1,5 @@
 ---
-description: debug_traceBlockByNumber API method
+description: Returns tracing results by executing all transactions in the specified block number.
 ---
 
 import Tabs from "@theme/Tabs";

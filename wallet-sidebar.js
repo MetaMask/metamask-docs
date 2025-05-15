@@ -64,9 +64,18 @@ const sidebar = {
           ]
         },
         {
-          type: "doc",
+          type: "category",
           label: "Send transactions",
-          id: "how-to/send-transactions"
+          collapsible: true,
+          collapsed: true,
+          link: {type: "doc", id: "how-to/send-transactions/index" },
+          items: [
+            {
+              type: "doc",
+              label: "Send batch transactions",
+              id: "how-to/send-transactions/send-batch-transactions"
+            }
+          ]
         },
         {
           type: "category",

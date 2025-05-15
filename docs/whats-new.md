@@ -14,9 +14,21 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
   [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
   ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
+- Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.
+  ([#2010](https://github.com/MetaMask/metamask-docs/pull/2010))
+- Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
+  ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
+- Documented Infura's filter API method support for [Arbitrum](/services/reference/arbitrum/json-rpc-methods/filter-methods/),
+    [Avalanche](/services/reference/avalanche-c-chain/json-rpc-methods/filter-methods/), [Base](/services/reference/base/json-rpc-methods/filter-methods/),
+    [Celo](/services/reference/celo/json-rpc-methods/filter-methods/), [Linea](/services/reference/linea/json-rpc-methods/filter-methods/),
+    [Optimism](/services/reference/optimism/json-rpc-methods/filter-methods/), and
+    [Polygon POS](/services/reference/polygon-pos/json-rpc-methods/filter-methods/) networks. ([#1994](https://github.com/MetaMask/metamask-docs/pull/1994))
+- Discontinue Infura support for the Ethereum Holesky testnet. ([#1996](https://github.com/MetaMask/metamask-docs/pull/1996))
 
 ## April 2025
 
+- Added a tutorial for [creating a wallet AI agent with the SDK](/sdk/tutorials/create-wallet-ai-agent).
+  ([#1993](https://github.com/MetaMask/metamask-docs/pull/1993))
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))

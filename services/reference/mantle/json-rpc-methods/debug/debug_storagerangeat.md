@@ -1,5 +1,5 @@
 ---
-description: debug_storageRangeAt API method
+description: Return the contract storage for the specified range.
 ---
 
 import Tabs from "@theme/Tabs";
