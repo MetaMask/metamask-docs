@@ -92,18 +92,13 @@ export const NETWORK_LINKS = [
   },
   {
     name: "opBNB",
-    href: "/api/networks/opbnb",
+    href: "/services/reference/opbnb",
     logo: `${LOGO_PATH}/logo-bnb.svg`,
   },
   {
     name: "Optimism",
     href: "/services/reference/optimism",
     logo: `${LOGO_PATH}/logo-opt.svg`,
-  },
-  {
-    name: "opBNB",
-    href: "/services/reference/opbnb",
-    logo: `${LOGO_PATH}/logo-bnb.svg`,
   },
   {
     name: "Palm",
