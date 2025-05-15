@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 # Multichain API
 
 :::tip Experimental
-The Multichain API is an experimental feature.
+The Multichain API is an experimental feature and currently only available on the extension (not on mobile).
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage

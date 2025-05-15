@@ -6,7 +6,7 @@ toc_max_heading_level: 4
 # Interact with multiple networks simultaneously
 
 :::tip Experimental
-The Multichain API is an experimental feature.
+The Multichain API is an experimental feature and currently only available on the extension (not on mobile).
 :::
 
 You can use the Multichain API to interact with multiple blockchain networks in MetaMask simultaneously.
