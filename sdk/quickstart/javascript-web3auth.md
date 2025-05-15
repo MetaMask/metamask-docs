@@ -23,10 +23,11 @@ Features include:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) version 19 or later
-- [pnpm](https://pnpm.io/installation)
-- [MetaMask](https://metamask.io/) installed in your browser or on mobile
-- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard-setup/projects-and-analytics#client-id)
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed.
+  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard-setup/projects-and-analytics#client-id).
 
 ## Set up using a template
 
@@ -77,7 +78,7 @@ See how to [use the combined SDKs](#usage).
 Install the SDK and the required dependencies to an existing project:
 
 ```bash
-pnpm i viem wagmi @tanstack/react-query @web3auth/modal@10.0.0-beta.6
+pnpm i viem wagmi @tanstack/react-query @web3auth/modal@10
 ```
 
 ### 2. Configure providers
