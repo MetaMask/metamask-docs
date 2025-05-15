@@ -1,8 +1,8 @@
 ---
-sidebar_label: Options
-sidebar_position: 1
+sidebar_label: Configuration options
+sidebar_position: 4
 toc_max_heading_level: 4
-description: See the Snaps CLI options reference.
+description: See the Snaps configuration options reference.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 
 This reference describes the syntax of the Snaps command line interface (CLI) configuration options.
 You can specify these options in the
-[configuration file](../../learn/about-snaps/files.md#configuration-file).
+[configuration file](../learn/about-snaps/files.md#configuration-file).
 
 ### `customizeWebpackConfig`
 
@@ -74,7 +74,7 @@ environment: {
 </Tabs>
 
 The environment configuration.
-You can use this to [set environment variables for the Snap](../../how-to/use-environment-variables.md),
+You can use this to [set environment variables for the Snap](../how-to/use-environment-variables.md),
 which can be accessed using `process.env`.
 
 ### `evaluate`
@@ -167,7 +167,7 @@ features: {
 </TabItem>
 </Tabs>
 
-Enables or disables [image support](../../features/custom-ui/index.md#image).
+Enables or disables [image support](../features/custom-ui/index.md#image).
 The default is `true`.
 
 ### `input`
@@ -195,7 +195,7 @@ The default is `"src/index.js"`.
 
 ### `manifest`
 
-The Snap [manifest file](../../learn/about-snaps/files.md#manifest-file) configuration.
+The Snap [manifest file](../learn/about-snaps/files.md#manifest-file) configuration.
 
 #### `manifest.path`
 
@@ -393,7 +393,7 @@ See [the list of available polyfills](https://github.com/MetaMask/snaps/blob/51a
 
 The development server configuration.
 The development server is used to test the Snap during development, using the
-[`watch`](subcommands.md#w-watch) and [`serve`](subcommands.md#s-serve) subcommands.
+[`watch`](cli.md#w-watch) and [`serve`](cli.md#s-serve) subcommands.
 
 #### `server.enabled`
 

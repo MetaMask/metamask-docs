@@ -543,6 +543,14 @@
       "destination": "/snaps/reference/entry-points/"
     },
     {
+      "source": "/snaps/reference/cli/subcommands/",
+      "destination": "/snaps/reference/cli/"
+    },
+    {
+      "source": "/snaps/reference/cli/options/",
+      "destination": "/snaps/reference/config-options/"
+    },
+    {
       "source": "/services/gas-api/",
       "destination": "/services/reference/gas-api/"
     },

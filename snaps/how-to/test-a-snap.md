@@ -5,18 +5,43 @@ sidebar_position: 6
 
 # Test a Snap
 
-You can test your Snap by hosting it locally using `yarn start`, installing it in Flask, and calling
-its API methods from a dapp.
+You can test your Snap [locally](#test-locally), in the [Snaps sandbox](#test-in-a-sandbox), and [end-to-end using Jest](#test-end-to-end).
 
-For end-to-end Snap testing in a Jest environment, use the
-[`@metamask/snaps-jest`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-jest) package
-as follows.
+## Test locally
 
-## Steps
+1. Host your Snap locally:
+
+   ```bash
+   yarn start
+   ```
+   
+2. Install your Snap in Flask.
+
+3. Test your Snap by calling its API methods from a dapp.
+
+## Test in the sandbox
+
+Use the Snaps sandbox to easily test and debug your Snap.
+
+1. Run the [`sandbox`](../reference/cli.md#sandbox) subcommand to start the sandbox server:
+
+   ```bash
+   yarn mm-snap sandbox
+   ```
+
+   Navigate to the `localhost` URL displayed in the terminal.
+
+2. Install your Snap in Flask.
+
+3. Test your Snap by calling its API methods from the sandbox interface.
+
+## Test end-to-end
+
+Follow these steps to test your Snap end-to-end in a Jest environment.
 
 ### 1. Install `@metamask/snaps-jest`
 
-Install the `@metamask/snaps-jest` package into your Snap project using [Yarn](https://yarnpkg.com/)
+Install the [`@metamask/snaps-jest`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-jest) package into your Snap project using [Yarn](https://yarnpkg.com/)
 or [npm](https://www.npmjs.com/):
 
 ```bash
