@@ -1,11 +1,11 @@
----
+tab---
 slug: /
 title: Welcome
 ---
 
 # Build onchain dapps with MetaMask SDK
 
-MetaMask SDK is a toolkit that allows you to build onchain dapps.
+escMetaMask SDK is a toolkit that allows you to build onchain dapps.
 With the SDK, you can:
 
 - Authenticate users.
@@ -20,7 +20,7 @@ With the SDK, you can:
 The benefits of using MetaMask SDK include the following:
 
 - It works on multiple dapp platforms:
-  - Web dapps - Connect to the MetaMask browser extension or use QR codes to connect to MetaMask Mobile.
+  - Web dapps - Connect to the MetaMask browser extension or use QR codes to connect to tabMetaMask Mobile.
   - Mobile dapps - Use deeplinks to connect to MetaMask Mobile.
 - It works with all EVM-compatible L1/L2 networks.
 - It handles onboarding of users.
