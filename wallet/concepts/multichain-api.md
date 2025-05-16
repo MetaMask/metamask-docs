@@ -111,6 +111,10 @@ However, the provider API is not optimized for multichain usage, and we recommen
 The Multichain API is backwards compatible mainly to support dapps that use third-party libraries
 with dependencies on the legacy provider.
 
+:::note
+A multichain connection will overwrite a connection with the legacy EIP-1193 provider, and vice versa.
+:::
+
 ## Get started
 
 Get started with the Multichain API:

@@ -75,10 +75,6 @@ The scopes and properties of the created connection.
         "methods": ["get_balance"],
         "notifications": []
       },
-      "eip155:0": {
-        "methods": ["wallet_getPermissions", "wallet_creds_store", "wallet_creds_verify", "wallet_creds_issue", "wallet_creds_present"],
-        "notifications": []
-      },
       "eip155:42161": {
         "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "personal_sign"],
         "notifications": []
@@ -112,10 +108,6 @@ The scopes and properties of the created connection.
         "methods": ["personal_sign"],
         "notifications": [],
         "accounts": ["eip155:42161:0x0910e12C68d02B561a34569E1367c9AAb42bd810"]
-      },
-      "eip155:0": {
-        "methods": ["wallet_getPermissions", "wallet_creds_store", "wallet_creds_verify", "wallet_creds_issue", "wallet_creds_present"],
-        "notifications": []
       }
     },
     "sessionProperties": {
