@@ -13,6 +13,11 @@ Solana Devnet is only supported on [MetaMask Flask](/snaps/get-started/install-f
 After adding Solana to MetaMask Flask, [show test networks](https://support.metamask.io/configure/networks/how-to-view-testnets-in-metamask/) to view Solana Devnet.
 :::
 
+:::info Extension only
+Connecting your dapp to Solana in MetaMask is currently only available on the extension.
+Mobile support is coming soon.
+:::
+
 ## Wallet Standard
 
 MetaMask implements the [Wallet Standard](https://github.com/wallet-standard/wallet-standard), so MetaMask is supported out-of-the-box for Solana dapps that use the Wallet Standard or that integrate Solana's [Wallet Adapter](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md).
