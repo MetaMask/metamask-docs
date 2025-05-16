@@ -1,5 +1,5 @@
 ---
-description: Solve common issues.
+description: Solve common issues encountered by Snap developers.
 sidebar_position: 1
 ---
 

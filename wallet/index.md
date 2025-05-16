@@ -1,6 +1,6 @@
 ---
 slug: /
-description: Welcome to the MetaMask Wallet API documentation
+description: Introduction page for the Wallet API documentation.
 ---
 
 # Integrate your dapp with the MetaMask wallet

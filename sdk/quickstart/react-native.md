@@ -1,5 +1,5 @@
 ---
-description: React Native
+description: Quickstart guide for using the SDK with a React Native dapp.
 ---
 
 import Tabs from "@theme/Tabs";
