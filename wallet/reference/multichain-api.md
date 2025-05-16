@@ -68,7 +68,7 @@ The scopes and properties of the created connection.
     "optionalScopes": {
       "eip155": {
         "references": ["1", "137"],
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "get_balance", "personal_sign"],
+        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "eth_subscribe", "get_balance", "personal_sign"],
         "notifications": ["eth_subscription"]
       },
       "eip155:10": {
@@ -99,7 +99,7 @@ The scopes and properties of the created connection.
     "sessionScopes": {
       "eip155": {
         "references": ["1", "137"],
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "get_balance", "eth_sign", "personal_sign"],
+        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_subscribe", "get_balance", "eth_sign", "personal_sign"],
         "notifications": ["eth_subscription"],
         "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
       },
