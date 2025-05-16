@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Set environment variables on the command line or in a `.env` file.
 ---
 
 import Tabs from "@theme/Tabs";

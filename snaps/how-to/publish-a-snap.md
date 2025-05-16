@@ -1,5 +1,5 @@
 ---
-description: Develop, test, and publish a Snap.
+description: Publish a Snap to npm.
 sidebar_position: 8
 ---
 

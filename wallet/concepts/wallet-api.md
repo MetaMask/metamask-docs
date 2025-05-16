@@ -1,5 +1,5 @@
 ---
-description: Learn about the MetaMask Ethereum provider API.
+description: Learn about the MetaMask Ethereum provider API and JSON-RPC API.
 ---
 
 # About the Wallet API

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7
+description: Debug a Snap by inspecting the background process.
 ---
 
 # Debug a Snap

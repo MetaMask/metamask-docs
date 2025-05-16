@@ -1,5 +1,5 @@
 ---
-description: Configure and connect to a Ganache development network.
+description: Configure and connect to a Hardhat development network.
 ---
 
 # Run a development network

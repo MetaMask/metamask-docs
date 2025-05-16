@@ -1,5 +1,5 @@
 ---
-description: SDK options
+description: Configuration options reference for MetaMask SDK.
 ---
 
 import Tabs from "@theme/Tabs";

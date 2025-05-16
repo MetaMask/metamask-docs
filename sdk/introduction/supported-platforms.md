@@ -1,5 +1,5 @@
 ---
-description: Supported platforms
+description: Supported dapp platforms for MetaMask SDK.
 ---
 
 # Supported platforms

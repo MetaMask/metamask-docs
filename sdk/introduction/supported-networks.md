@@ -1,5 +1,5 @@
 ---
-description: Supported networks
+description: Supported EVM networks for MetaMask SDK.
 ---
 
 # Supported networks

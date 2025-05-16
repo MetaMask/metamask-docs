@@ -1,5 +1,5 @@
 ---
-description: JavaScript
+description: Quickstart guide for using the SDK with a JavaScript dapp.
 ---
 
 import Tabs from "@theme/Tabs";

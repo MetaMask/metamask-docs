@@ -1,5 +1,5 @@
 ---
-description: Handle transactions
+description: Handle transactions with the SDK in your Wagmi or Vanilla JavaScript dapp.
 toc_max_heading_level: 2
 ---
 

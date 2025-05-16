@@ -1,5 +1,5 @@
 ---
-description: Learn about wallet interoperability.
+description: Learn about wallet interoperability via EIP-6963.
 ---
 
 # Wallet interoperability

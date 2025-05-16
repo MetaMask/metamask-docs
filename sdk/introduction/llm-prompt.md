@@ -1,5 +1,5 @@
 ---
-description: LLM Prompt
+description: Context about MetaMask SDK that can be provided to an LLM.
 ---
 
 # LLM prompt

@@ -1,5 +1,5 @@
 ---
-description: Authenticate users
+description: Authenticate users with the SDK in your Wagmi or Vanilla JavaScript dapp.
 toc_max_heading_level: 2
 ---
 

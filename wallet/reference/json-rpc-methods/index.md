@@ -1,5 +1,6 @@
 ---
 sidebar_class_name: "hidden"
+description: See the MetaMask JSON-RPC API reference.
 ---
 
 # JSON-RPC API
