@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
+- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) dapp support via the Wallet Standard and third-party libraries.
+  ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 - Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.
   ([#2010](https://github.com/MetaMask/metamask-docs/pull/2010))
 - Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
