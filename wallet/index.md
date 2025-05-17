@@ -13,7 +13,7 @@ deeplinking, see the [**MetaMask SDK** documentation](/sdk).
 The Wallet API is MetaMask's core interface for web dapps to interact with the MetaMask browser extension.
 With the Wallet API, you can:
 
-- Interact with users' Ethereum accounts.
+- Interact with users' EVM and non-EVM accounts.
 - Send transactions and sign messages.
 - Listen to account and network changes.
 
@@ -21,6 +21,8 @@ The Wallet API uses standardized [JSON-RPC calls](reference/json-rpc-methods/ind
 interact with users' EVM accounts, and implements standard interfaces like
 [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) for Ethereum provider methods and
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for wallet detection.
+
+MetaMask also supports non-EVM networks, including native support for [Solana](how-to/use-non-evm-networks/solana.md).
 
 [Get started by connecting to MetaMask.](how-to/connect.md)
 
