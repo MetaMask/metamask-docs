@@ -22,7 +22,7 @@ This API is specified by [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193), an
 request users' EVM accounts, read data from blockchains the user is connected to, suggest
 that the user sign messages and transactions, and more.
 
-:::info Note
+:::info EIP-6963: Wallet interoperability
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support [wallet interoperability](wallet-interoperability.md)
@@ -45,6 +45,13 @@ The MetaMask Ethereum provider API contains the following:
 
 View the [provider API reference](../reference/provider-api.md) for all the provider properties,
 methods, and events.
+
+:::note Multichain API
+MetaMask supports the [Multichain API](multichain-api.md) for interacting with multiple blockchain networks and ecosystems simultaneously.
+While the Multichain API is backwards compatible with the provider API, the provider API is not optimized for multichain usage.
+If you intend to support multichain interactions, we recommend
+[starting directly with the Multichain API](../how-to/manage-networks/use-multichain.md).
+:::
 
 ## JSON-RPC API
 
