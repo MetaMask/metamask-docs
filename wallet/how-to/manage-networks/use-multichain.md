@@ -31,7 +31,7 @@ Establish a connection to MetaMask Flask and set up basic message handling using
 
 ```javascript
 // Initialize the connection to Flask.
-const EXTENSION_ID = "ljfoeinjpaedjfecbmggjgodbgkmjkjk"; // Flask extension ID
+const EXTENSION_ID = "ljfoeinjpaedjfecbmggjgodbgkmjkjk"; // Flask extension ID (Chrome)
 const extensionPort = chrome.runtime.connect(EXTENSION_ID)
 
 // Set up a message listener for events.
