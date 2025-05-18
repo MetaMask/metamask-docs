@@ -1,6 +1,6 @@
 ---
 sidebar_label: Dynamic SDK integration
-description: MetaMask + Dynamic SDK Integration
+description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 2
 ---
 
