@@ -37,16 +37,15 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
     For example, you can use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
     
     References are mainly used when there would otherwise be duplicate scopes.
-  - `methods`: `array` - A list of JSON-RPC methods the wallet must support in order to be used with this dapp.
-  - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support in order to be used with this dapp.
+  - `methods`: `array` - A list of JSON-RPC methods the wallet must support to be compatible with the dapp.
+  - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support to be compatible with the dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
     account IDs valid within this scope.
-    Dapps should only supply this property when they know the set of accounts they would like the user to permit.
+    Dapps should include this only if they know which accounts they want the user to permit.
     When supplied, these accounts are preselected by default in the account selection process.
     Dapps typically omit this property for the user to select their own accounts.
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the connection is valid.
-- `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support in order to be used
-  with this dapp.
+- `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.
   We don't recommend using `requiredScopes` with MetaMask.
   MetaMask treats all `requiredScopes` as `optionalScopes`.
 
