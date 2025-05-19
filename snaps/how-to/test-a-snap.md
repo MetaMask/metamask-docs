@@ -21,7 +21,7 @@ You can test your Snap [locally](#test-locally), in the [Snaps sandbox](#test-in
 
 ## Test in the sandbox
 
-Use the Snaps sandbox to easily test and debug your Snap.
+Use the Snaps sandbox to test and debug your Snap in an easy-to-use interface.
 
 1. Run the [`sandbox`](../reference/cli.md#sandbox) subcommand to start the sandbox server:
 
