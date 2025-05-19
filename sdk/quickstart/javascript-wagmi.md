@@ -1,5 +1,5 @@
 ---
-description: JavaScript + Wagmi (recommended)
+description: Quickstart guide for using the SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 2
 ---
 
