@@ -12,7 +12,7 @@ You can also see the [common issues](common-issues.md) encountered by Snap devel
 :::
 
 You can add your log statements in your source code and build your Snap, or add them directly
-to your Snap bundle and use [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest)
+to your Snap bundle and use [`yarn mm-snap manifest --fix`](../../reference/cli.md#m-manifest)
 to update the `shasum` in your Snap manifest file.
 The manifest `shasum` must match the contents of your bundle at the time MetaMask fetches your Snap.
 
