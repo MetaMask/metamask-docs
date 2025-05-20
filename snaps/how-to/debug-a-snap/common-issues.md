@@ -60,9 +60,9 @@ plugins for several other build systems:
 For examples on how to set up these build systems yourself, see the
 [examples](https://github.com/MetaMask/snaps/tree/main/packages/examples).
 
-We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest)
+We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli.md#m-manifest)
 after creating your bundle to make sure your manifest `shasum` value is correct.
-You might also benefit from running [`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval)
+You might also benefit from running [`yarn mm-snap eval`](../../reference/cli.md#e-eval)
 to detect any SES issues up front.
 
 ## Patch dependencies
