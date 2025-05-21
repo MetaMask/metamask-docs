@@ -1,4 +1,8 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+---
+
+# Scroll JSON-RPC API
 
 Here you can find the JSON-RPC API endpoints. You [can call these APIs using a variety of tools](../quickstart.md).
 

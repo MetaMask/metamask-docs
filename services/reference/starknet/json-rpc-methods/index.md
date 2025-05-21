@@ -1,9 +1,10 @@
 ---
-title: "JSON-RPC methods"
-description: Starknet JSON RPC API methods.
+title: Starknet JSON-RPC API
+description: Starknet JSON-RPC API methods.
+sidebar_label: JSON-RPC API
 ---
 
-# JSON-RPC methods
+# Starknet JSON-RPC API
 
 Infura supports a subset of the [Starknet API methods](https://github.com/starkware-libs/starknet-specs/).
 

@@ -1,5 +1,7 @@
 ---
 description: Returns the number of possible tracing results in the context of the given block execution.
+title: Scroll Scroll debug_traceCall
+sidebar_label: debug_traceCall
 ---
 
 import Tabs from "@theme/Tabs";

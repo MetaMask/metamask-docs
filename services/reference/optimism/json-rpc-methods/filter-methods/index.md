@@ -1,8 +1,10 @@
 ---
-title: "Filter methods"
+title: Optimism filter methods
+sidebar_label: Filter methods
+description: Optimism filter methods
 ---
 
-# Filter methods
+# Optimism filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs
 can be shared by any connection using the same API key.

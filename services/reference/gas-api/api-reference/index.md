@@ -1,11 +1,12 @@
 ---
 description: Reference content for the Gas API.
+sidebar_label: API reference
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# API reference
+# Gas API reference
 
 This section provides reference information for the various Gas REST APIs.
 Use the APIs to:

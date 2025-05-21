@@ -1,4 +1,8 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+---
+
+# Celo JSON-RPC API
 
 Celo supports a subset [Ethereum JSON-RPC methods](../../ethereum/json-rpc-methods/index.md). WebSocket calls are not supported when using the Celo endpoints.
 
