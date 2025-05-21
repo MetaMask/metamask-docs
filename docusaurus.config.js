@@ -1,6 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+import fs from "fs";
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
@@ -13,7 +14,7 @@ const {
 const codeTheme = themes.dracula
 const remarkCodesandbox = require('remark-codesandbox')
 const isProd = process.env.NODE_ENV === 'production'
-
+const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -212,14 +213,11 @@ const config = {
           {
             type: 'dropdown',
             label: 'Developer tools',
+            to: 'developer-tools/dashboard',
             items: [
               {
-                label: 'Developer dashboard',
-                to: 'developer-tools/dashboard',
-              },
-              {
-                label: 'Faucet',
-                to: 'developer-tools/faucet',
+                type: "html",
+                value: helpDropdown,
               },
             ],
           },
