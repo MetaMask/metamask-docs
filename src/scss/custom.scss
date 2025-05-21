@@ -759,3 +759,13 @@ ol {
 .resources-dropdown-menu a:hover h2 {
   color: inherit !important;
 }
+
+@include bp-max('tablet') {
+  .resources-dropdown-menu ul {
+    gap: 16px; // More spacing between items on mobile
+  }
+
+  .resources-dropdown-menu a {
+    width: 100%; // Makes each box take full width of dropdown
+  }
+}
