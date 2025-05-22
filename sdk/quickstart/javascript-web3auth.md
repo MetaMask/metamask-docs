@@ -9,7 +9,7 @@ toc_max_heading_level: 2
 Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/).
 You can set up the SDKs in the following ways:
 
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Wagmi dapp with both SDKs.
+- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp with both SDKs.
 - [Manual setup](#set-up-manually) - Set up both SDKs in an existing dapp.
 
 Features include:
@@ -89,7 +89,7 @@ Set up your providers in `app/providers.tsx`:
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useState, useEffect } from "react";
 import { Web3AuthProvider } from "@web3auth/modal/react";
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 import { MetaMaskSDK } from "@metamask/sdk";
@@ -122,8 +122,7 @@ export function Providers({ children }: Props) {
       config={{
         web3AuthOptions: {
           clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!,
-          web3AuthNetwork: "sapphire_devnet",
-          authBuildEnv: "testing", // Optional: Only for alpha/testing
+          web3AuthNetwork: "sapphire_devnet"
         },
       }}
     >
