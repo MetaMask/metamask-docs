@@ -1,5 +1,7 @@
 ---
 description: Return tracing results by executing all transactions in the specified block number.
+title: Mantle debug_traceBlockByNumber
+sidebar_label: debug_traceBlockByNumber
 ---
 
 import Tabs from "@theme/Tabs";

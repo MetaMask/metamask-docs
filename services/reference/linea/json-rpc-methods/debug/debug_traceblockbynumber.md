@@ -1,5 +1,7 @@
 ---
 description: Return tracing results by executing all transactions in a specified block number.
+title: Linea debug_traceBlockByNumber
+sidebar_label: debug_traceBlockByNumber
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

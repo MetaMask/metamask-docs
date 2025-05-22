@@ -1,8 +1,9 @@
 ---
 description: Mantle debug methods.
+sidebar_label: Debug methods
 ---
 
-# Debug methods
+# Mantle debug methods
 
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug
 methods on the Mantle network:

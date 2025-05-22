@@ -1,8 +1,10 @@
 ---
-title: "Filter methods"
+title: Polygon PoS filter methods
+sidebar_label: Filter methods
+description: Polygon PoS filter methods
 ---
 
-# Filter methods
+# Polygon PoS filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs
 can be shared by any connection using the same API key.
