@@ -12,6 +12,7 @@ import {
   TransactionTable,
   Hero,
   AlertPastActivity,
+  AlertFailedPoh,
 } from '@site/src/components/Faucet'
 import { useAlert } from 'react-alert'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
@@ -85,7 +86,9 @@ export default function Faucet() {
       const error = faucetResponse.error
 
       if (error) {
-        if (error.code === 'balance_too_low') {
+        if (error.code === 'failed_poh') {
+          alert.error(<AlertFailedPoh />)
+        } else if (error.code === 'balance_too_low') {
           alert.error(<AlertBalanceTooLow />)
         } else if (error.code === 'transaction_count_too_low') {
           alert.error(<AlertPastActivity />)
