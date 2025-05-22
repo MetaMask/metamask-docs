@@ -1,8 +1,9 @@
 ---
-title: "Filter methods"
+title: Linea filter methods
+sidebar_label: Filter methods
 ---
 
-# Filter methods
+# Linea filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs
 can be shared by any connection using the same API key.

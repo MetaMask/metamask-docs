@@ -1,5 +1,7 @@
 ---
 description: Returns a full trace of all invoked opcodes of all transactions included in the block.
+title: Scroll Scroll debug_traceBlock
+sidebar_label: debug_traceBlock
 ---
 
 import Tabs from "@theme/Tabs";
