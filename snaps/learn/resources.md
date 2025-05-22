@@ -52,9 +52,6 @@ View the following Snaps resources in addition to this documentation site.
 - [`snaps-jest`](https://www.npmjs.com/package/@metamask/snaps-jest) - A Jest preset for end-to-end 
   testing MetaMask Snaps, including a Jest environment, and a set of Jest matchers.
   See [how to test a Snap](../how-to/test-a-snap.md) using `snaps-jest`.
-- [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/latest) - A tool for simulating
-  Snaps in the browser, streamlining the development process. It doesn't support all Snaps features 
-  but can be useful for testing certain features.
 - [Snapper](https://github.com/sayfer-io/Snapper) - A tool for detecting security vulnerabilities,
   identifying potential issues, and ensuring best coding practices in your Snap.
 - [MetaMask Testing Tools](https://hugomrdias.github.io/metamask/) - A collection of tools for 

@@ -1,5 +1,5 @@
 ---
-description: Display a users token assets.
+description: Display a user's ERC-20 tokens or NFTs.
 ---
 
 # Display tokens

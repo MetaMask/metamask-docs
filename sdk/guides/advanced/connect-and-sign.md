@@ -1,5 +1,5 @@
 ---
-description: Connect and sign using MetaMask SDK, either with Wagmi or Vanilla JavaScript.
+description: Connect and sign with the SDK in your Wagmi or Vanilla JavaScript dapp.
 ---
 
 # Connect and sign

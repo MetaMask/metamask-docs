@@ -1,6 +1,6 @@
 ---
-sidebar_label: Subcommands
-sidebar_position: 2
+sidebar_label: Snaps CLI
+sidebar_position: 3
 toc_max_heading_level: 4
 description: See the Snaps CLI subcommands reference.
 ---
@@ -8,7 +8,7 @@ description: See the Snaps CLI subcommands reference.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Snaps subcommands
+# Snaps CLI
 
 This reference describes the syntax of the Snaps command line interface (CLI) subcommands and
 subcommand options.
@@ -18,6 +18,11 @@ You can specify subcommands and their options using the `yarn mm-snap` command:
 ```bash
 yarn mm-snap [SUBCOMMAND] [SUBCOMMAND OPTIONS]
 ```
+
+:::note
+This documentation assumes you created your Snap using the [`@metamask/create-snap`](https://github.com/MetaMask/snaps/tree/main/packages/create-snap) starter kit, which includes the Snaps CLI.
+You can also install the CLI directly using the [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) package.
+:::
 
 ### `b`, `build`
 
@@ -41,7 +46,7 @@ yarn mm-snap build --analyze
 </TabItem>
 </Tabs>
 
-Enables analyzing the Snap [bundle](../../learn/about-snaps/files.md#bundle-file).
+Enables analyzing the Snap [bundle](../learn/about-snaps/files.md#bundle-file).
 This uses [`webpack-bundle-analyzer`](https://github.com/webpack-contrib/webpack-bundle-analyzer) under the hood,
 which creates an interactive visualization of the contents of your bundle.
 The visualization is located at the URL displayed in the command line output (for example, `http://localhost:8888`).
@@ -69,8 +74,8 @@ yarn mm-snap build --config ./snap.config.build.ts
 </TabItem>
 </Tabs>
 
-Path to the [configuration file](../../learn/about-snaps/files.md#configuration-file),
-which specifies [options](options.md) with which to the build the Snap.
+Path to the [configuration file](../learn/about-snaps/files.md#configuration-file),
+which specifies [options](config-options.md) with which to the build the Snap.
 
 `-c` is an alias for `--config`.
 
@@ -81,7 +86,7 @@ yarn mm-snap eval
 ```
 
 Attempts to evaluate the Snap bundle in
-[Secure ECMAScript (SES)](../../learn/about-snaps/execution-environment.md#secure-ecmascript-ses).
+[Secure ECMAScript (SES)](../learn/about-snaps/execution-environment.md#secure-ecmascript-ses).
 
 `e` is an alias for `eval`.
 
@@ -91,7 +96,7 @@ Attempts to evaluate the Snap bundle in
 yarn mm-snap manifest
 ```
 
-Validates the Snap [manifest file](../../learn/about-snaps/files.md#manifest-file).
+Validates the Snap [manifest file](../learn/about-snaps/files.md#manifest-file).
 
 `m` is an alias for `manifest`.
 
@@ -108,6 +113,18 @@ yarn mm-snap manifest --fix
 </Tabs>
 
 Enables making any changes to fix the manifest file.
+
+### `sandbox`
+
+```bash
+yarn mm-snap sandbox
+```
+
+Starts a [Snaps sandbox](../how-to/test-a-snap.md#test-in-the-sandbox) server, where you can interact with and test a Snap.
+
+:::info
+This option requires [`@metamask/snaps-cli`](https://github.com/MetaMask/snaps/tree/main/packages/snaps-cli) version 7.1.0 or later.
+:::
 
 ### `s`, `serve`
 

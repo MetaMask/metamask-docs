@@ -1,5 +1,5 @@
 ---
-description: Configure and connect to a Ganache development network.
+description: Configure and connect to a Hardhat development network.
 ---
 
 # Run a development network
@@ -90,7 +90,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 ## Reset your local nonce calculation
 
 If you restart your development network, you can accidentally confuse MetaMask
-because it calculates the next [nonce](send-transactions.md#nonce) based on both the
+because it calculates the next [nonce](./send-transactions/index.md#nonce) based on both the
 network state _and_ the known sent transactions.
 
 To clear MetaMask's transaction queue and reset its nonce calculation, go to **Settings > Advanced**
