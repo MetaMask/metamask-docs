@@ -13,6 +13,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 - Documented [MetaMask SDK + Web3Auth SDK integration](/sdk/quickstart/javascript-web3auth).
   ([#2029](https://github.com/MetaMask/metamask-docs/pull/2029))
+- Documented [how to use the Snaps sandbox](/snaps/how-to/test-a-snap/#test-in-the-sandbox).
+  ([#2030](https://github.com/MetaMask/metamask-docs/pull/2030))
 - Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.
   ([#2010](https://github.com/MetaMask/metamask-docs/pull/2010))
 - Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
