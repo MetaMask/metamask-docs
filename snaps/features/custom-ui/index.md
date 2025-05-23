@@ -857,7 +857,7 @@ The SVG is rendered within an `<img>` tag, which prevents JavaScript or interact
 being supported.
 
 :::note
-To disable image support, set the [`features.images`](../../reference/cli/options.md#featuresimages)
+To disable image support, set the [`features.images`](../../reference/config-options/#featuresimages)
 configuration option to `false`.
 The default is `true`.
 :::
