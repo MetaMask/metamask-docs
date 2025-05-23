@@ -18,10 +18,10 @@ If you encounter any issues that you can't solve on your own, please
 Because [Secure ECMAScript (SES)](../../learn/about-snaps/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
-[`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) by default attempts to execute a
+[`yarn mm-snap build`](../../reference/cli.md#b-build) by default attempts to execute a
 Snap in a stubbed SES environment.
 You can also disable this behavior and run the evaluation step separately using
-[`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval).
+[`yarn mm-snap eval`](../../reference/cli.md#e-eval).
 If an error is thrown during this step, it's likely due to a SES incompatibility, and you must fix
 the issues manually.
 These incompatibilities tend to occur in dependencies.
