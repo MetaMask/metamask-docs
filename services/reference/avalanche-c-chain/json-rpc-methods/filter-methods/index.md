@@ -1,8 +1,10 @@
 ---
-title: "Filter methods"
+title: Avalanche (C-Chain) filter methods
+sidebar_label: Filter methods
+description: Avalanche (C-Chain) filter methods
 ---
 
-# Filter methods
+# Avalanche (C-Chain) filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs
 can be shared by any connection using the same API key.

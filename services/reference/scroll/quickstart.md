@@ -1,11 +1,12 @@
 ---
 description: Scroll quickstart guide
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Scroll quickstart
 
 This quickstart guide will help you set up and make calls on the Scroll network using the Infura endpoints.
 

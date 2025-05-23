@@ -1,12 +1,13 @@
 ---
 description: Get started with the Gas APIs.
+sidebar_label: Quickstart
 sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Quickstart
+# Gas API quickstart
 
 This quickstart shows you how to call the Gas API using JavaScript.
 You can also use a tool such as [curl](https://curl.se/) or [Postman](https://www.postman.com/) to
