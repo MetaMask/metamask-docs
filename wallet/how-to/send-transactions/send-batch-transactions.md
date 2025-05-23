@@ -14,7 +14,7 @@ You can send and manage batch transactions in MetaMask, using the methods specif
 ## About atomic batch transactions
 
 An atomic batch transaction is a group of transactions that are executed together as a single unit.
-When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/gator/concepts/smart-accounts).
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/gator/development/concepts/smart-accounts).
 If the user accepts, MetaMask proceeds to upgrade the account and process the request as a single atomic transaction as specified by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note Smart accounts

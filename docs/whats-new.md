@@ -11,6 +11,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## May 2025
 
+- Added [Delegation Toolkit](/gator) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
 - Documented [how to use the Snaps sandbox](/snaps/how-to/test-a-snap/#test-in-the-sandbox).
   ([#2030](https://github.com/MetaMask/metamask-docs/pull/2030))
 - Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.

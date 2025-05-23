@@ -91,7 +91,7 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
       className={clsx(
         className,
         ThemeClassNames.docs.docVersionBanner,
-        "alert alert--warning margin-bottom--md",
+        "alert alert--warning margin-bottom--lg",
       )}
       role="alert">
       <div>
