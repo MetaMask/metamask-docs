@@ -258,12 +258,6 @@ const config = {
             position: 'right',
           },
           {
-            type: "docsVersionDropdown",
-            position: "right",
-            docsPluginId: "gator",
-            dropdownActiveClassDisabled: true,
-          },
-          {
             type: 'custom-navbarWallet',
             position: 'right',
             includeUrl: REF_ALLOW_LOGIN_PATH,
