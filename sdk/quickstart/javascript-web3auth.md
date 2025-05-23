@@ -27,21 +27,20 @@ Features include:
 - A package manager installed.
   The examples in this quickstart use [pnpm](https://pnpm.io/installation).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard-setup/projects-and-analytics#client-id).
+- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard/create-new-project#get-the-client-id).
 
 ## Set up using a template
 
-1. Download the template from the
-    <a href="https://github.com/metamask/metamask-sdk-examples" target="_blank">SDK examples repository</a>:
+1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-web3auth):
 
     ```bash
-    git clone https://github.com/metamask/metamask-sdk-examples.git
+    git clone https://github.com/MetaMask/metamask-web3auth
     ```
 
-2. Navigate into the Web3Auth example:
+2. Navigate into the repository:
 
     ```bash
-    cd metamask-sdk-examples/examples/metamask-web3auth
+    cd metamask-web3auth
     ```
 
 3. Install dependencies:
