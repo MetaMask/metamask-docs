@@ -1,72 +1,20 @@
----
-name: ci
-
-on:
-  workflow_call:
-  pull_request:
-    branches: 
-      - main
-
-permissions:
-  contents: read
-
-env:
-  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
-  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
-
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build
-        uses: ConsenSys/github-actions/docs-build@main
-
-  case:
-    name: Check for case being inconsistent
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        folder: ['docs']
-    steps:
-      - uses: actions/checkout@v4
-      - name: Case check action
-        uses: ConsenSys/github-actions/docs-case-check@main
-        with:
-          DOC_DIR: ${{ matrix.folder }}
-          SKIP_TEST: true
-
-  lint:
-    name: Lint Code Base
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Lint
-        uses: ConsenSys/github-actions/docs-lint-all@main
-
-  spelling:
-    name: Spelling
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        file-extensions: ['.md', '.mdx']
-    steps:
-      - uses: actions/checkout@v4
-      - name: Vale
-        uses: Consensys/github-actions/docs-spelling-check@main
-        with:
-          FILEPATHS: 'snaps,services,wallet,developer-tools,docs'
-
-  linkCheck:
-    name: Link Checking
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        file-extensions: ['.md', '.mdx']
-    steps:
-      - uses: actions/checkout@v4
-      - name: LinkCheck
-        uses: ConsenSys/github-actions/docs-link-check@main
-        with:
-          FILE_EXTENSION: ${{ matrix.file-extensions }}
+            - name: Nix Shell
+  # You may pin to the exact commit or the version.
+  # uses: workflow/nix-shell-action@5fdff26c1325df635247f72cba79ffc370303fdb
+  uses: workflow/nix-shell-action@v3.4.0
+  with:
+    # Interpreter to use in the nix shell shebang
+    interpreter: # optional, default is bash
+    # Comma-separated list of packages to pre-install in your shell. Defaults to simply "bash". Cannot be used together with the flakes option
+    packages: # optional, default is bash
+    # Comma-separated list of fully qualified flakes to pre-install in your shell. Use either packages or flakes. Cannot be used together with the packages option
+    flakes: # optional, default is 
+    # If set to true, uses devShell instead.
+    flakes-from-devshell: # optional
+    # If set, uses a customly named devShell from the current flake
+    custom-devshell: # optional, default is 
+    # The actual script to execute in the shell
+    script: 
+    # Execute the script inside the specified working directory instead of the repository root. Example: path/to/dir
+    working-directory: # optional
+          
