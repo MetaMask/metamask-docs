@@ -1,8 +1,3 @@
----
-sidebar_label: Introduction
-description: Documentation for using the MetaMask Developer dashboard
-sidebar_position: 1
----
 
 import CardList from '@site/src/components/CardList'
 import Banner from '@site/src/components/Banner'
