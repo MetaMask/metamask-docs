@@ -8,7 +8,7 @@ import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 
 # Build and scale your dapp using services
 
-MetaMask, in partnership with [Infura](https://www.infura.io/), offers a comprehensive set of
+MetaMask, in partnership with [Infura](https://mainnet.infura.io/v3/429c528a2c524a0ba1fa538343d025b2), offers a comprehensive set of
 services to facilitate dapp and Snap development.
 This includes JSON-RPC APIs for easy access to key networks and REST APIs aimed at automating and
 optimizing essential development tasks.
