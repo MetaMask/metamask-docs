@@ -165,3 +165,24 @@ html[data-theme='dark'] {
     transition: color calc(var(--motion) * var(--motion-speed)) $gentle-ease;
   }
 }
+
+.header {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-heading);
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.5rem 0 0;
+    max-width: 640px;
+    color: var(--color-text-paragraph);
+  }
+}
+
+
