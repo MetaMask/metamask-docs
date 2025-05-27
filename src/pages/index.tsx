@@ -40,6 +40,12 @@ export default function Home(): JSX.Element {
             description:
               'Use the Embedded Wallets SDK (Web3Auth) to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
             href: 'https://web3auth.io/docs',
+          },
+          {
+            title: 'Delegation Toolkit',
+            description:
+              'Integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
+            href: '/gator',
             theme: '',
           },
           {
