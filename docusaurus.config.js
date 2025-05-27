@@ -113,6 +113,33 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'gator',
+        path: 'gator',
+        routeBasePath: 'gator',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./gator-sidebar.js'),
+        breadcrumbs: false,
+        sidebarCollapsed: false,
+        includeCurrentVersion: true,
+        // Set to the latest release.
+        lastVersion: "0.11.0",
+        versions: {
+          // Defaults to the ./docs folder.
+          // Using "development" instead of "next" as path.
+          current: {
+            label: "development",
+            path: "development",
+          },
+          // The latest release.
+          "0.11.0": {
+            label: "latest (0.11.0)",
+          },
+        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'services',
         path: 'services',
         routeBasePath: 'services',
@@ -203,6 +230,10 @@ const config = {
             label: 'Wallet API',
           },
           {
+            to: 'gator',
+            label: 'Delegation Toolkit',
+          },
+          {
             to: 'snaps',
             label: 'Snaps',
           },
@@ -224,11 +255,6 @@ const config = {
           {
             to: 'whats-new',
             label: "What's new?",
-            position: 'right',
-          },
-          {
-            href: 'https://support.metamask.io/',
-            label: 'User support',
             position: 'right',
           },
           {
@@ -266,8 +292,12 @@ const config = {
                 to: '/sdk',
               },
               {
-                label: 'Wallet',
+                label: 'Wallet API',
                 to: '/wallet',
+              },
+              {
+                label: 'Delegation Toolkit',
+                to: '/gator',
               },
               {
                 label: 'Snaps',
@@ -311,6 +341,14 @@ const config = {
           {
             title: 'Community',
             items: [
+              {
+                label: 'Faucet',
+                to: '/developer-tools/faucet',
+              },
+              {
+                label: 'MetaMask Developer',
+                href: 'https://developer.metamask.io/login',
+              },
               {
                 label: 'Consensys Discord',
                 href: 'https://discord.gg/consensys',
