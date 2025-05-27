@@ -2,6 +2,7 @@ import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
 import CardSection from '@site/src/components/CardSection'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
+import SectionIntro from '@site/src/components/SectionIntro/SectionIntro'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
@@ -13,6 +14,7 @@ export default function Home(): JSX.Element {
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
       />
+      <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart wallets, or scaling with powerful infrastructure—choose a path below to get started." />
 
       <CardSection
         title="External wallet integration"
