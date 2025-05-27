@@ -1,4 +1,4 @@
-name: MetaMask Security Code Scanner
+tabname: MetaMask Security Code Scanner
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-security-scan:
+  escrun-security-scan:
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: MetaMask Security Code Scanner
         uses: ConsenSys/github-actions/mm-security-scanner@main
-        with:
+        tabwith:
           repo: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SECURITY_SCAN_METRICS_TOKEN: ${{ secrets.SECURITY_SCAN_METRICS_TOKEN }}
