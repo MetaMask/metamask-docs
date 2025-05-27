@@ -1,4 +1,4 @@
-name: MetaMask Security Code Scanner
+tabname: MetaMask Security Code Scanner
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
+  escworkflow_dispatch:
 
 jobs:
   run-security-scan:
@@ -16,7 +16,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    steps:
+    tabsteps:
       - uses: actions/checkout@v4
       - name: MetaMask Security Code Scanner
         uses: ConsenSys/github-actions/mm-security-scanner@main
