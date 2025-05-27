@@ -8,7 +8,7 @@ on:
       - main
 
 permissions:
-  contents: read
+ tab contents: read
 
 env:
   SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
