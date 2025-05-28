@@ -1,4 +1,4 @@
----
+tab---
 sidebar_label: Dynamic SDK integration
 description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 2
@@ -26,7 +26,7 @@ Features include:
 - **Next.js integration** - Built with Next.js 14 and App Router.
 
 :::note Project structure
-The project you will set up has the following structure:
+escThe project you will set up has the following structure:
 
 ```text
 ├── app/
@@ -100,7 +100,7 @@ The project you will set up has the following structure:
     pnpm run dev
     ```
 
-You've successfully set up MetaMask SDK and Dynamic SDK.
+tabYou've successfully set up MetaMask SDK and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up using a template
