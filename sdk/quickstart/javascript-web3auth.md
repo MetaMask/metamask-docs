@@ -14,7 +14,7 @@ You can set up the SDKs in the following ways:
 
 Features include:
 
-- **MetaMask SDK integrated within Web3Auth SDK** - Web3Auth SDK has MetaMask SDK integrated within it.
+- **MetaMask SDK built into Web3Auth** - Use MetaMask SDK features directly within the Web3Auth SDK.
 - **Web3Auth social login** - Enable users to sign in with an email or social media account.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
