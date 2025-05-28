@@ -10,11 +10,11 @@ Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/).
 You can set up the SDKs in the following ways:
 
 - [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp with both SDKs.
-- [Manual setup](#set-up-manually) - Set up both SDKs in an existing dapp.
+- [Manual setup](#set-up-manually) - Set up Web3Auth SDK in an existing dapp.
 
 Features include:
 
-- **Dual SDK integration** - Seamlessly combine MetaMask and Web3Auth SDKs.
+- **MetaMask SDK built into Web3Auth** - Use MetaMask SDK features directly within the Web3Auth SDK.
 - **Web3Auth social login** - Enable users to sign in with an email or social media account.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
@@ -88,10 +88,9 @@ Set up your providers in `app/providers.tsx`:
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type ReactNode, useState, useEffect } from "react";
+import { type ReactNode, useState } from "react";
 import { Web3AuthProvider } from "@web3auth/modal/react";
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
-import { MetaMaskSDK } from "@metamask/sdk";
 
 type Props = {
   children: ReactNode;
@@ -99,22 +98,6 @@ type Props = {
 
 export function Providers({ children }: Props) {
   const [queryClient] = useState(() => new QueryClient());
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const MMSDK = new MetaMaskSDK({
-      dappMetadata: {
-        name: "MetaMask Web3Auth Integration",
-        url: window.location.href,
-      },
-    });
-
-    const ethereum = MMSDK.getProvider();
-    if (ethereum) {
-      window.ethereum = ethereum as unknown as IEthereum;
-    }
-  }, []);
 
   return (
     <Web3AuthProvider
