@@ -41,6 +41,11 @@ const sidebar = {
               type: "doc",
               label: "Add a network",
               id: "how-to/manage-networks/add-network"
+            },
+            {
+              type: "doc",
+              label: "Interact with multiple networks simultaneously",
+              id: "how-to/manage-networks/use-multichain"
             }
           ]
         },
@@ -193,6 +198,11 @@ const sidebar = {
         },
         {
           type: "doc",
+          label: "About the Multichain API",
+          id: "concepts/multichain-api"
+        },
+        {
+          type: "doc",
           label: "Convenience libraries",
           id: "concepts/convenience-libraries"
         },
@@ -266,6 +276,11 @@ const sidebar = {
           type: "doc",
           label: "Ethereum provider API",
           id: "reference/provider-api",
+        },
+        {
+          type: "doc",
+          label: "Multichain API",
+          id: "reference/multichain-api",
         },
         {
           type: "category",
