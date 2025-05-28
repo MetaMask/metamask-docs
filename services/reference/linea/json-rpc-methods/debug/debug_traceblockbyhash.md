@@ -1,5 +1,7 @@
 ---
 description: Return tracing results by executing all transactions in the block
+title: Linea debug_traceBlockByHash
+sidebar_label: debug_traceBlockByHash
 ---
 
 import Tabs from "@theme/Tabs";

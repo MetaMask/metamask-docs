@@ -114,8 +114,13 @@ const sidebar = {
           link: { type: "doc", id: "how-to/use-non-evm-networks/index" },
           items: [
             {
+              type: "doc",
+              label: "Solana",
+              id: "how-to/use-non-evm-networks/solana"
+            },
+            {
               type: "category",
-              label: "Use Starknet",
+              label: "Starknet",
               link: { type: "doc", id: "how-to/use-non-evm-networks/starknet/index" },
               items: [
                 {

@@ -1,11 +1,12 @@
 ---
 description: Swellchain quickstart guide
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Swellchain quickstart
 
 This quickstart guide will help you set up and make calls on Swellchain using the Infura endpoints.
 

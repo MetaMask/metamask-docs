@@ -1,11 +1,12 @@
 ---
-title: "Subscription methods"
+title: Polygon PoS subscription methods
+sidebar_label: Subscription methods
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Subscription methods
+# Polygon PoS subscription methods
 
 Subscription methods are available for [WebSocket](../../../../concepts/websockets.md) connections only, and allow you to wait for events instead of polling for them. For example, dapps can subscribe to logs and receive notifications when a specific event occurs.
 

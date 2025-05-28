@@ -1,8 +1,10 @@
 ---
-title: "Trace methods"
+title: Ethereum trace methods
+sidebar_label: Trace methods
+description: Ethereum trace methods
 ---
 
-# Trace methods
+# Ethereum trace methods
 
 Infura provides access to the following trace API methods to allow users to gain insights into the execution of smart contracts and transactions:
 

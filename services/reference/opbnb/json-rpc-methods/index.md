@@ -1,5 +1,8 @@
+---
+sidebar_label: JSON-RPC API
+---
 
-# JSON-RPC methods
+# opBNB JSON-RPC API
 
 The standard Ethereum methods documented here are supported by Infura on the opBNB layer 2 network.
 

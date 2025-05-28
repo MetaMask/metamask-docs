@@ -9,9 +9,10 @@ import Banner from '@site/src/components/Banner'
 
 # Developer dashboard documentation
 
-The MetaMask Developer dashboard provides developers with a comprehensive overview and control of their
-Infura service. It serves as a central hub for managing API keys and access, monitoring
-usage, and accessing account and billing information.
+The [MetaMask Developer dashboard](https://developer.metamask.io/) provides developers with a
+comprehensive overview and control of their Infura service.
+It serves as a central hub for managing API keys and access, monitoring usage, and accessing
+account and billing information.
 
 <Banner>
 Don't have an API key? Sign up for a free plan and start using the Infura service!
