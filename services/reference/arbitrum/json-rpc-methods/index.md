@@ -1,9 +1,9 @@
 ---
-title: "JSON-RPC APIs"
+sidebar_label: JSON-RPC API
 description: Supported standard Ethereum methods on Arbitrum network.
 ---
 
-# JSON-RPC APIs
+# Arbitrum JSON-RPC API
 
 The standard Ethereum methods documented in this section are supported by Infura on the Arbitrum network.
 

@@ -1,5 +1,6 @@
 ---
-title: JSON-RPC methods
+title: Avalanche (C-Chain) JSON-RPC API
+sidebar_label: JSON-RPC API
 ---
 
 Avalanche C-Chain uses the Go Ethereum (Geth) API and supports the standard [Ethereum JSON-RPC APIs](../../ethereum/json-rpc-methods/index.md) for the following services:

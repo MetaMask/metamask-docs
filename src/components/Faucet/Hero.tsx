@@ -18,6 +18,7 @@ interface IHero {
   inputValue?: string
   isLoading?: boolean
   isLimitedUserPlan?: boolean
+  isMaintenance?: boolean
 }
 
 export default function Hero({
@@ -28,6 +29,7 @@ export default function Hero({
   handleOnInputChange,
   isLoading,
   isLimitedUserPlan,
+  isMaintenance,
 }: IHero) {
   const {
     metaMaskAccount,
@@ -118,10 +120,12 @@ export default function Hero({
                     : walletLinked === WALLET_LINK_TYPE.NO
                       ? 'Link your Developer Dashboard account to get started and request ETH.'
                       : 'Select your Developer Dashboard account to get started and request ETH.'
-                : 'Enter your MetaMask wallet address and request ETH.'}
+                : !isMaintenance
+                  ? 'Enter your MetaMask wallet address and request ETH.'
+                  : 'The faucet is at full capacity due to high demand. Try checking back later.'}
           </Text>
           <div className={styles.actions}>
-            {!!Object.keys(projects).length && !showInstallButton && (
+            {!!Object.keys(projects).length && !showInstallButton && !isMaintenance && (
               <div className={styles.inputCont}>
                 <div className={styles.inputWrapper}>
                   <Input

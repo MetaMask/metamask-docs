@@ -1,8 +1,8 @@
 ---
-title: "Filter methods"
+sidebar_label: "Filter methods"
 ---
 
-# Filter methods
+# Arbitrum filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs
 can be shared by any connection using the same API key.

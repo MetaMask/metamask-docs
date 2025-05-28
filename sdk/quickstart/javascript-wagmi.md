@@ -1,5 +1,5 @@
 ---
-description: JavaScript + Wagmi (recommended)
+description: Quickstart guide for using the SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 2
 ---
 
@@ -43,9 +43,10 @@ The project you will set up has the following structure:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) version 19 or later
-- [pnpm](https://pnpm.io/installation)
-- [MetaMask](https://metamask.io/) installed in your browser or on mobile
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed.
+  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 
 ## Set up using the CLI
 

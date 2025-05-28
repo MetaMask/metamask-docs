@@ -1,11 +1,12 @@
 ---
 description: Arbitrum quickstart guide
+sidebar_label: Quickstart
 sidebar_position: 2
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Arbitrum quickstart
 
 This quickstart guide will help you set up and make calls on the Arbitrum network using the Infura endpoints.
 

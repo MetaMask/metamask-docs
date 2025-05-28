@@ -1,6 +1,6 @@
 ---
 sidebar_label: Dynamic SDK integration
-description: MetaMask + Dynamic SDK Integration
+description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 2
 ---
 
@@ -43,10 +43,11 @@ The project you will set up has the following structure:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) version 19 or later
-- [pnpm](https://pnpm.io/installation)
-- [MetaMask](https://metamask.io/) installed in your browser or on mobile
-- A [Dynamic Environment ID](https://app.dynamic.xyz/)
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed.
+  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+- A [Dynamic Environment ID](https://app.dynamic.xyz/).
 
 ## Set up using the CLI
 

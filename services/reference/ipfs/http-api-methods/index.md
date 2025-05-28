@@ -1,4 +1,8 @@
-# HTTP API methods
+---
+sidebar_label: HTTP API
+---
+
+# IPFS HTTP API
 
 The IPFS documentation lists the [IPFS HTTP API methods](https://docs.ipfs.io/reference/http/api/).
 

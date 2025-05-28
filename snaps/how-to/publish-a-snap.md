@@ -1,5 +1,5 @@
 ---
-description: Develop, test, and publish a Snap.
+description: Publish a Snap to npm.
 sidebar_position: 8
 ---
 
@@ -25,9 +25,8 @@ After publishing the Snap, any dapp can connect to the Snap by using the Snap ID
 :::caution
 If you are using the Snap monorepo project generated in the [quickstart](../get-started/quickstart.md),
 make sure to only publish the Snap package in `/packages/snap`.
-You can use the [Snaps Simulator](https://metamask.github.io/snaps/snaps-simulator/staging/#/manifest) to verify
-that your Snap was published correctly &mdash; just select **localhost** in the top right corner and change the
-Snap location to **npm** and the ID of your Snap.
+You can use the [Snaps sandbox](test-a-snap.md#test-in-the-sandbox) to verify
+that your Snap was published correctly: in the sandbox settings, disable **Use current Snap ID** and specify the npm ID of your Snap.
 
 Also, make sure to update the manifest file, icon file, and README to differentiate your Snap from the template.
 :::

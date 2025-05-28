@@ -11,7 +11,6 @@ import {
   AlertSuccess,
   TransactionTable,
   Hero,
-  Maintenance,
   AlertPastActivity,
 } from '@site/src/components/Faucet'
 import { useAlert } from 'react-alert'
@@ -168,7 +167,7 @@ export default function Faucet() {
     }
   }, [metaMaskAccount, metaMaskAccountEns])
 
-  const tabItemContent = (network: 'linea' | 'sepolia') => {
+  const tabItemContent = (network: 'linea' | 'sepolia', isMaintenance: boolean) => {
     return (
       <>
         <div className={styles.topContent}>
@@ -180,6 +179,7 @@ export default function Faucet() {
             inputValue={walletAddress}
             isLoading={isLoading}
             isLimitedUserPlan={isLimitedUserPlan}
+            isMaintenance={isMaintenance}
           />
           {transactions && (
             <TransactionTable
@@ -205,12 +205,10 @@ export default function Faucet() {
       <div className={styles.tabs}>
         <Tabs className={styles.header}>
           <TabItem className={styles.content} value="sepolia" label="Ethereum Sepolia" default>
-            {isSepoliaMaintenance && <Maintenance network="sepolia" />}
-            {ldReady ? tabItemContent('sepolia') : null}
+            {ldReady ? tabItemContent('sepolia', isSepoliaMaintenance) : null}
           </TabItem>
           <TabItem className={styles.content} value="linea" label="Linea Sepolia">
-            {isLineaMaintenance && <Maintenance network="linea" />}
-            {ldReady ? tabItemContent('linea') : null}
+            {ldReady ? tabItemContent('linea', isLineaMaintenance) : null}
           </TabItem>
         </Tabs>
       </div>
