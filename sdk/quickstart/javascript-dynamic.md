@@ -19,7 +19,7 @@ You can set up the SDKs in the following ways:
 
 Features include:
 
-- **Dual SDK integration** - Seamlessly combine MetaMask and Dynamic SDKs.
+- **MetaMask SDK built into Dynamic** - Use MetaMask SDK features directly within the Dynamic SDK.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
 - **TypeScript support** - Full type safety and modern development experience.
