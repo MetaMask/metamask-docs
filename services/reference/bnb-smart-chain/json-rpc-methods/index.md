@@ -1,4 +1,8 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+---
+
+# BNB Smart Chain JSON-RPC API
 
 The standard Ethereum methods documented here are supported by Infura on the BNB Smart Chain (BSC) network.
 

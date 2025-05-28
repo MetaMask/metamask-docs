@@ -1,11 +1,12 @@
 ---
 description: Avalanche C-Chain quickstart guide
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Avalanche (C-Chain) quickstart
 
 This quickstart guide will help you set up and make calls on Avalanche C-Chain using the Infura endpoints.
 

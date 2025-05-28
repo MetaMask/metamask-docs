@@ -1,8 +1,9 @@
 ---
-title: "Trace methods"
+title: Linea trace methods
+sidebar_label: Trace methods
 ---
 
-# Trace methods
+# Linea trace methods
 
 Infura provides access to the following trace API methods to allow users to gain insights into the execution of smart contracts and transactions:
 

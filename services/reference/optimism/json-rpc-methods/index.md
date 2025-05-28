@@ -1,9 +1,10 @@
 ---
-title: "JSON-RPC methods"
+title: Optimism JSON-RPC API
 description: Supported standard Ethereum methods on Optimism network.
+sidebar_label: JSON-RPC API
 ---
 
-# JSON-RPC methods
+# Optimism JSON-RPC API
 
 The standard Ethereum methods documented here are supported by Infura on the Optimism network. For custom Optimism
 methods, see [Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc) (Bedrock release).
