@@ -19,7 +19,7 @@ You can set up the SDKs in the following ways:
 
 Features include:
 
-- **Dual SDK integration** - Seamlessly combine MetaMask and Dynamic SDKs.
+- **MetaMask SDK built into Dynamic** - Use MetaMask SDK features directly within the Dynamic SDK.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
 - **TypeScript support** - Full type safety and modern development experience.
@@ -162,33 +162,15 @@ Set up your providers in `app/providers.tsx`:
 "use client";
 
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
-import { EthereumWalletConnectors, IEthereum } from "@dynamic-labs/ethereum";
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
-import { MetaMaskSDK } from "@metamask/sdk";
 import { WagmiProvider } from "wagmi";
 import { config } from "@/wagmi.config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
 
   const queryClient = new QueryClient();
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const MMSDK = new MetaMaskSDK({
-      dappMetadata: {
-        name: "MetaMask Dynamic Integration",
-        url: window.location.href,
-      },
-    });
-
-    const ethereum = MMSDK.getProvider();
-    if (ethereum) {
-      window.ethereum = ethereum as unknown as IEthereum;
-    }
-  }, []);
 
   return (
     <DynamicContextProvider
