@@ -140,6 +140,11 @@
       text-align: left;
       padding: 1.2rem;
     }
+
+    code {
+      font-family: var(--font-mm-sans-mono);
+      font-size: 80%;
+    }
   }
 
   details {
