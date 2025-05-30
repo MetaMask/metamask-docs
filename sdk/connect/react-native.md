@@ -1,11 +1,12 @@
 ---
 description: Quickstart guide for using the SDK with a React Native dapp.
+sidebar_label: React Native
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# React Native
+# Connect to MetaMask using React Native
 
 Get started with MetaMask SDK in your React Native or Expo dapp.
 

@@ -1,10 +1,10 @@
 ---
-sidebar_label: Dynamic SDK integration
+sidebar_label: Dynamic SDK
 description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 2
 ---
 
-# MetaMask SDK + Dynamic SDK integration
+# Connect to MetaMask using Dynamic SDK
 
 Get started with MetaMask SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
 You can set up the SDKs in the following ways:
