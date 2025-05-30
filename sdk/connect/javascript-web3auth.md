@@ -1,10 +1,10 @@
 ---
-sidebar_label: Web3Auth SDK integration
+sidebar_label: Web3Auth SDK
 description: Quickstart guide for using MetaMask SDK and Web3Auth SDK.
 toc_max_heading_level: 2
 ---
 
-# MetaMask SDK + Web3Auth SDK integration
+# Connect to MetaMask using Web3Auth SDK
 
 Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/).
 You can set up the SDKs in the following ways:

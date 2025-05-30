@@ -1,6 +1,5 @@
 ---
 slug: /
-sidebar_label: Welcome
 description: Introduction page for MetaMask SDK documentation.
 ---
 
@@ -14,7 +13,7 @@ With the SDK, you can:
 - Handle transactions.
 - Interact with contracts.
 
-[Get started with JavaScript and Wagmi.](quickstart/javascript-wagmi.md)
+[Get started by connecting to MetaMask.](connect/javascript-wagmi.md)
 
 ## Why use the SDK?
 
@@ -29,10 +28,10 @@ The benefits of using MetaMask SDK include the following:
 
 ## Where do I start?
 
-You can get started quickly with the following dapp platforms:
+You can get started by connecting to MetaMask with the following dapp platforms:
 
-- [JavaScript + Wagmi (recommended)](quickstart/javascript-wagmi.md)
-- [JavaScript](quickstart/javascript.md)
-- [Dynamic SDK integration](quickstart/javascript-dynamic.md)
-- [Web3Auth SDK integration](quickstart/javascript-web3auth.md)
-- [React Native](quickstart/react-native.md)
+- [JavaScript + Wagmi (recommended)](connect/javascript-wagmi.md)
+- [JavaScript](connect/javascript.md)
+- [Dynamic SDK](connect/javascript-dynamic.md)
+- [Web3Auth SDK](connect/javascript-web3auth.md)
+- [React Native](connect/react-native.md)

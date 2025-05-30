@@ -8,29 +8,27 @@ const sidebar = {
       label: 'Introduction',
       collapsible: false,
       collapsed: false,
+      link: {
+        type: "doc",
+        id: "index"
+      },
       items: [
-        'introduction/welcome',
         'introduction/supported-platforms',
         'introduction/supported-networks',
         'introduction/llm-prompt',
-        {
-          type: 'link',
-          label: 'Try demo dapp',
-          href: 'https://metamask-sdk-examples.vercel.app/',
-        },
       ],
     },
     {
       type: 'category',
-      label: 'Quickstart',
+      label: 'Connect to MetaMask',
       collapsible: false,
       collapsed: false,
       items: [
-        'quickstart/javascript-wagmi',
-        'quickstart/javascript',
-        'quickstart/javascript-dynamic',
-        'quickstart/javascript-web3auth',
-        'quickstart/react-native',
+        'connect/javascript-wagmi',
+        'connect/javascript',
+        'connect/javascript-dynamic',
+        'connect/javascript-web3auth',
+        'connect/react-native',
       ],
     },
     {

@@ -1,9 +1,14 @@
 ---
-description: Connect to MetaMask using the Wallet API and EIP-6963.
+description: Connect to the MetaMask extension using the Wallet API and EIP-6963.
 toc_max_heading_level: 4
 ---
 
 # Connect to MetaMask
+
+:::tip Building a cross-platform or mobile dapp?
+For cross-platform development, mobile integration, or advanced features like QR codes and 
+deeplinking, connect to MetaMask using [**MetaMask SDK**](/sdk/connect/javascript-wagmi).
+:::
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.
@@ -15,11 +20,7 @@ This approach allows you to detect multiple installed wallets and connect to the
 Learn more about EIP-6963 in [Wallet interoperability](../concepts/wallet-interoperability.md).
 :::
 
-:::tip
-To connect to MetaMask without using EIP-6963, see the [Create a simple dapp](../tutorials/javascript-dapp-simple.md) tutorial.
-:::
-
-You can connect to MetaMask [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
+You can connect to the MetaMask browser extension [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
 or [directly using Vite](#connect-to-metamask-directly-using-vite).
 
 ## Connect to MetaMask using third-party libraries
