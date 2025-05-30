@@ -34,4 +34,5 @@ You can get started quickly with the following dapp platforms:
 - [JavaScript + Wagmi (recommended)](quickstart/javascript-wagmi.md)
 - [JavaScript](quickstart/javascript.md)
 - [Dynamic SDK integration](quickstart/javascript-dynamic.md)
+- [Web3Auth SDK integration](quickstart/javascript-web3auth.md)
 - [React Native](quickstart/react-native.md)
