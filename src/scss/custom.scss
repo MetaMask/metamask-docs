@@ -769,3 +769,34 @@ ol {
     width: 100%; // Makes each box take full width of dropdown
   }
 }
+
+div[class^='announcementBar_'] {
+  font-family: var(--font-mm-centra);
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--general-gray-light);
+  background-color: var(--developer-purple-light);
+  color: var(--color-text);
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+    }
+  }
+
+  [data-theme='dark'] & {
+    background-color: var(--developer-purple-light);
+    color: var(--general-black);
+    a {
+      color: var(--general-black);
+      &:hover {
+        color: var(--ifm-link-hover-color);
+      }
+    }
+  }
+}
