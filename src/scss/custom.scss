@@ -792,10 +792,12 @@ div[class^='announcementBar_'] {
   [data-theme='dark'] & {
     background-color: var(--developer-purple-light);
     color: var(--general-black);
+
     a {
       color: var(--general-black);
+
       &:hover {
-        color: var(--ifm-link-hover-color);
+        color: var(--developer-purple);
       }
     }
   }
