@@ -206,4 +206,3 @@ function App() {
 ## Examples
 
 See the [React Native demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo) on GitHub for more information.
-- Expo Demo is currently unavailable. 
