@@ -1,6 +1,6 @@
 ---
 sidebar_label: Web3Auth SDK integration
-description: MetaMask + Web3Auth SDK Integration
+description: Quickstart guide for using MetaMask SDK and Web3Auth SDK.
 toc_max_heading_level: 2
 ---
 
@@ -9,8 +9,12 @@ toc_max_heading_level: 2
 Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/).
 You can set up the SDKs in the following ways:
 
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp with both SDKs.
+- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp that uses MetaMask SDK.
 - [Manual setup](#set-up-manually) - Set up Web3Auth SDK in an existing dapp.
+
+<p align="center">
+  <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="450px" />
+</p>
 
 Features include:
 
