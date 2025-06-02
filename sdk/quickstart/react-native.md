@@ -203,6 +203,6 @@ function App() {
 }
 ```
 
-## Examples
+## Example
 
 See the [React Native demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo) on GitHub for more information.
