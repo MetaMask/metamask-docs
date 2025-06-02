@@ -208,4 +208,4 @@ function App() {
 See the following examples on GitHub for more information:
 
 - [React Native demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo)
-- [Expo demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/expo-demo)
+- Expo Demo is currently unavailable. 
