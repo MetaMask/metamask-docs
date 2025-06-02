@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
                     {
             title: 'Embedded Wallets',
             description:
-              'Use the Embedded Wallets SDK to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
+              'Use the Embedded Wallets SDK (Web3Auth) to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
             href: 'https://web3auth.io/docs',
             theme: '',
           },
