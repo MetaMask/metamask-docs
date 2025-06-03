@@ -9,6 +9,7 @@ export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginI
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const [hoveredVersion, setHoveredVersion] = useState<string | null>(null); // State to track hovered item
 
   const latestVersion = versions[0];
   const allVersions = [latestVersion, 'current', ...versions.filter(v => v !== latestVersion)];
@@ -74,9 +75,13 @@ export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginI
           {allVersions.map((version) => (
             <li
               key={version}
-              className={styles.menuItem}
+              className={clsx(styles.menuItem, {
+                [styles.hovered]: hoveredVersion === version, // Apply dynamic hover class
+              })}
               onClick={() => handleSelect(version)}
               role="menuitem"
+              onMouseEnter={() => setHoveredVersion(version)} // Set hovered version
+              onMouseLeave={() => setHoveredVersion(null)} // Reset hover on mouse leave
             >
               {getVersionLabel(version)}
             </li>
