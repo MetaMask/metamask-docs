@@ -13,8 +13,6 @@ const sidebar = {
         id: "index"
       },
       items: [
-        'introduction/supported-platforms',
-        'introduction/supported-networks',
         'introduction/llm-prompt',
       ],
     },
@@ -67,7 +65,10 @@ const sidebar = {
       label: 'Reference',
       collapsible: false,
       collapsed: false,
-      items: ['reference/sdk-options'],
+      items: [
+        'reference/supported-platforms',
+        'reference/sdk-options',
+      ],
     },
   ],
 }

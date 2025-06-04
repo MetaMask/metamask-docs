@@ -1,6 +1,7 @@
 ---
 description: Quickstart guide for using the SDK with a React Native dapp.
 sidebar_label: React Native
+keywords: [connect, MetaMask, React, Native, SDK, dapp]
 ---
 
 import Tabs from "@theme/Tabs";

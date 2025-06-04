@@ -2,6 +2,7 @@
 description: Quickstart guide for using the SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 2
 sidebar_label: JavaScript + Wagmi (recommended)
+keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp]
 ---
 
 # Connect to MetaMask using JavaScript + Wagmi

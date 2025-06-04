@@ -1,9 +1,10 @@
 ---
 slug: /
 description: Introduction page for the Wallet API documentation.
+keywords: [extension, api]
 ---
 
-# Integrate your dapp with the MetaMask wallet
+# Integrate your dapp with MetaMask using the Wallet API
 
 :::tip Building a cross-platform or mobile dapp?
 For cross-platform development, mobile integration, or advanced features like QR codes and 

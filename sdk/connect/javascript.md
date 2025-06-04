@@ -1,6 +1,7 @@
 ---
 description: Quickstart guide for using the SDK with a JavaScript dapp.
 sidebar_label: JavaScript
+keywords: [connect, MetaMask, JavaScript, SDK, dapp]
 ---
 
 import Tabs from "@theme/Tabs";

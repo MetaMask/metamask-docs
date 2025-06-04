@@ -2,6 +2,7 @@
 sidebar_label: Web3Auth SDK
 description: Quickstart guide for using MetaMask SDK and Web3Auth SDK.
 toc_max_heading_level: 2
+keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
 ---
 
 # Connect to MetaMask using Web3Auth SDK
@@ -18,7 +19,7 @@ You can set up the SDKs in the following ways:
 
 Features include:
 
-- **MetaMask SDK built into Web3Auth** - Use MetaMask SDK features directly within the Web3Auth SDK.
+- **MetaMask SDK built into Web3Auth** - Use MetaMask SDK features directly within Web3Auth SDK.
 - **Web3Auth social login** - Enable users to sign in with an email or social media account.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
