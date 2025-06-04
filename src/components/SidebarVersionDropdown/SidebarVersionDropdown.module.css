@@ -1,4 +1,3 @@
-/* Dropdown container */
 .dropdown {
   position: relative;
   padding-left: var(--ifm-menu-link-padding-horizontal);
@@ -9,7 +8,6 @@
   margin-bottom: 1rem;
 }
 
-/* Version item (label and chevron) */
 .versionItem {
   display: flex;
   align-items: center;
@@ -27,21 +25,19 @@
   color: var(--ifm-color-primary);
 }
 
-/* Chevron */
 .chevron {
   font-size: 2.2rem;
   line-height: 1;
   display: inline-block;
-  margin-left: 0.5rem;
+  margin-left: 0rem;
+  padding-right: 20px;
 }
 
-/* Version label */
 .label {
   flex: 1;
   line-height: 1.5;
 }
 
-/* Menu */
 .menu {
   position: absolute;
   top: 100%;
@@ -56,7 +52,6 @@
   min-width: 180px;
 }
 
-/* Menu item */
 .menuItem {
   padding: 0.75rem 1rem;
   font-size: 1.4rem;
@@ -69,22 +64,34 @@
   background: var(--ifm-hover-overlay);
 }
 
-/* Dark mode support */
+.menuItem.hovered {
+  background: var(--ifm-hover-overlay);
+}
+
+.menuItem.selected {
+  color: var(--ifm-color-primary) !important; 
+  background: var(--general-gray-light);
+}
+
 [data-theme='dark'] .menu {
-  background: var(--general-black-light) !important; /* Dark background for menu */
-  border-color: var(--general-white) !important; /* Light border */
+  background: var(--general-black-light) !important;
+  border-color: var(--general-white) !important;
 }
 
 [data-theme='dark'] .menuItem {
-  color: var(--general-white) !important; /* Text color in dark mode */
-  background: var(--general-black-light) !important; /* Dark background for menu items */
+  color: var(--general-white) !important;
+  background: var(--general-black-light) !important;
 }
 
 [data-theme='dark'] .menuItem:hover {
-  background: var(--general-black-mid) !important; /* Slightly lighter background for hover */
+  background: var(--general-black-mid) !important;
 }
 
-/* Dark mode styling for dropdown */
+[data-theme='dark'] .menuItem.selected {
+  color: var(--ifm-color-primary) !important;
+  background: var(--general-black-mid) !important;
+}
+
 [data-theme='dark'] .dropdown {
-  border-bottom: 1px solid var(--general-white); /* Light border for dropdown in dark mode */
+  border-bottom: 1px solid var(--general-white);
 }

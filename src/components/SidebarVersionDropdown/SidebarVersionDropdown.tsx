@@ -68,7 +68,7 @@ export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginI
         onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
       >
         <span className={styles.label}>Version: {getVersionLabel(currentVersion)}</span>
-        <span className={clsx('menu__caret', styles.chevron)} aria-hidden>▾</span>
+        <span className={clsx(styles.chevron)} aria-hidden>▾</span> {/* Custom class applied here */}
       </div>
       {open && (
         <ul className={styles.menu} role="menu">
@@ -76,6 +76,7 @@ export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginI
             <li
               key={version}
               className={clsx(styles.menuItem, {
+                [styles.selected]: version === currentVersion, // Apply selected class for current version
                 [styles.hovered]: hoveredVersion === version, // Apply dynamic hover class
               })}
               onClick={() => handleSelect(version)}
