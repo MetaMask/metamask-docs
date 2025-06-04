@@ -306,7 +306,7 @@ ol {
   padding: 2rem 0 0;
 
   @include bp('desktop') {
-    padding: 2.8rem 0 0 8rem;
+    padding: 2.8rem 0 0 5rem;
   }
 }
 
@@ -348,8 +348,23 @@ ol {
   }
 }
 
+.navbar__brand {
+  margin-right: 2rem !important;
+}
+
 .DocSearch-Button-Placeholder {
   font-size: 1.4rem !important;
+}
+
+/* Breadcrumbs */
+
+.breadcrumbs {
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.breadcrumbs__link {
+  font-size: 1.3rem !important;
 }
 
 /* Details */
@@ -652,7 +667,7 @@ ol {
   border-left: 3px solid #1aff0080;
 }
 
-.resources-dropdown-menu {
+.nav-dropdown-menu {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -676,7 +691,7 @@ ol {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 240px;
+    width: 350px;
     padding-left: 0;
     margin: 0;
     color: var(--ifm-navbar-link-color);
@@ -738,14 +753,15 @@ ol {
 
     h2 {
       @extend .dropdown__link;
+      font-size: 1.6rem !important;
       text-decoration: none !important;
       margin: 0 0 4px 0;
       color: inherit;
     }
 
     p {
-      font-size: 14px;
-      line-height: 18px;
+      font-size: 1.4rem;
+      line-height: 1.8rem;
       font-weight: 400 !important;
       color: var(--w3a-color-icon-gray);
       text-decoration: none !important;
@@ -754,16 +770,16 @@ ol {
   }
 }
 
-.resources-dropdown-menu a:hover h2 {
+.nav-dropdown-menu a:hover h2 {
   color: inherit !important;
 }
 
 @include bp-max('tablet') {
-  .resources-dropdown-menu ul {
+  .nav-dropdown-menu ul {
     gap: 16px; // More spacing between items on mobile
   }
 
-  .resources-dropdown-menu a {
+  .nav-dropdown-menu a {
     width: 100%; // Makes each box take full width of dropdown
   }
 }

@@ -5,24 +5,19 @@ const sidebar = {
   sdkSidebar: [
     {
       type: 'category',
-      label: 'Introduction',
+      label: 'MetaMask SDK introduction',
       collapsible: false,
       collapsed: false,
+      link: { type: "doc", id: "introduction/welcome" },
       items: [
-        'introduction/welcome',
         'introduction/supported-platforms',
         'introduction/supported-networks',
         'introduction/llm-prompt',
-        {
-          type: 'link',
-          label: 'Try demo dapp',
-          href: 'https://metamask-sdk-examples.vercel.app/',
-        },
       ],
     },
     {
       type: 'category',
-      label: 'Quickstart',
+      label: 'Connect to MetaMask',
       collapsible: false,
       collapsed: false,
       items: [

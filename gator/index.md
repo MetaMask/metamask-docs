@@ -1,6 +1,6 @@
 ---
 title: Introduction to the MetaMask Delegation Toolkit
-sidebar_label: Introduction
+sidebar_label: Delegation Toolkit introduction
 description: High-level overview of the Delegation Toolkit, its benefits, and where to start in the documentation.
 sidebar_position: 1
 ---

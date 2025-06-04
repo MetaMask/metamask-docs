@@ -5,7 +5,7 @@ const sidebar = {
   walletSidebar: [
     {
       type: "doc",
-      label: "Introduction",
+      label: "Wallet API introduction",
       id: "index",
     },
     {

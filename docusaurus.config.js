@@ -15,6 +15,9 @@ const codeTheme = themes.dracula
 const remarkCodesandbox = require('remark-codesandbox')
 const isProd = process.env.NODE_ENV === 'production'
 const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
+const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
+const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
+const extendDropdown = fs.readFileSync("./src/components/NavDropdown/ExtendScale.html", "utf-8");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -93,7 +96,7 @@ const config = {
         routeBasePath: 'snaps',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
         admonitions: {
           keywords: [
             'info',
@@ -118,7 +121,7 @@ const config = {
         routeBasePath: 'gator',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
@@ -145,7 +148,7 @@ const config = {
         routeBasePath: 'services',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
       },
     ],
     [
@@ -156,7 +159,7 @@ const config = {
         routeBasePath: 'developer-tools/dashboard',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
       },
     ],
     [
@@ -167,7 +170,7 @@ const config = {
         routeBasePath: 'wallet',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -190,7 +193,7 @@ const config = {
         routeBasePath: 'sdk',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
-        breadcrumbs: false,
+        breadcrumbs: true,
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
@@ -222,24 +225,34 @@ const config = {
         },
         items: [
           {
-            to: 'sdk',
-            label: 'SDK',
+            type: 'dropdown',
+            label: 'Connect to MetaMask',
+            items: [
+              {
+                type: "html",
+                value: connectDropdown,
+              },
+            ],
           },
           {
-            to: 'wallet',
-            label: 'Wallet API',
+            type: 'dropdown',
+            label: 'Embed MetaMask',
+            items: [
+              {
+                type: "html",
+                value: embedDropdown,
+              },
+            ],
           },
           {
-            to: 'gator',
-            label: 'Delegation Toolkit',
-          },
-          {
-            to: 'snaps',
-            label: 'Snaps',
-          },
-          {
-            to: 'services',
-            label: 'Services',
+            type: 'dropdown',
+            label: 'Extend and scale',
+            items: [
+              {
+                type: "html",
+                value: extendDropdown,
+              },
+            ],
           },
           {
             type: 'dropdown',

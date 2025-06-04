@@ -1,5 +1,5 @@
 ---
-sidebar_label: Introduction
+sidebar_label: Services introduction
 sidebar_position: 1
 ---
 

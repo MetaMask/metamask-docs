@@ -1,5 +1,5 @@
 ---
-sidebar_label: Introduction
+sidebar_label: Developer dashboard introduction
 description: Documentation for using the MetaMask Developer dashboard
 sidebar_position: 1
 ---
