@@ -475,7 +475,7 @@ caveatBuilder.addCaveat("exactCalldataBatch",
 ### `exactExecution`
 
 Verifies that the provided execution matches the expected execution. For batch transactions,
-see [`exactExecutionBatch`](#exactExecutionBatch).
+see [`exactExecutionBatch`](#exactexecutionbatch).
 
 **Caveat enforcer contract:** [`ExactExecutionEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionEnforcer.sol)
 

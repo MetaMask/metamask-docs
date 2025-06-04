@@ -87,7 +87,7 @@ Redeem a delegation using one of two methods. Choose the method based on your ac
 
 ### Redeem with an SCA
 
-To redeem a delegation with a smart contract account, create a [`MetaMaskSmartAccount`](/how-to/create-delegator-account/#create-a-metamasksmartaccount)
+To redeem a delegation with a smart contract account, create a [`MetaMaskSmartAccount`](../how-to/create-delegator-account.md#create-a-metamasksmartaccount)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use `sendUserOperationWithDelegation` to redeem the permission.

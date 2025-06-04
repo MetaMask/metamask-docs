@@ -62,7 +62,7 @@ It consists of the following components:
 - **Delegator Core** - Delegator Core contains the logic for the ERC-4337 compliant delegator accounts.
   It defines the interface needed for the Delegation Manager to invoke executions on behalf of the accounts.
 
-- **Delegator account implementations** - There are [multiple delegator account implementations](delegator-accounts.md#account-types),
+- **Delegator account implementations** - There are [multiple delegator account implementations](delegator-accounts.md#delegator-account-types),
   with the main difference being the signature scheme used to manage the underlying account.
 
 - **Delegation Manager** - The Delegation Manager validates delegations and triggers executions

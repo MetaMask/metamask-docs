@@ -1,120 +1,14 @@
 ---
-description: Learn how to restrict a delegation using caveat enforcers, and the available caveat types.
+description: Caveat enforcers reference.
 sidebar_position: 1
-toc_max_heading_level: 3
+toc_max_heading_level: 2
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+# Caveats
 
-# Restrict a delegation
+When [restricting a delegation](../how-to/create-delegation/restrict-delegation.md), you can specify the following caveat types in the `CaveatBuilder`.
 
-Use [caveat enforcers](../../concepts/caveat-enforcers.md) to apply specific rules and restrictions
-to a delegation, ensuring that delegated executions are only performed under predefined circumstances.
-
-A delegation has a `caveats` property, which is an array of `Caveat` objects.
-Each caveat is specified as follows:
-
-```typescript
-export type Caveat = {
-  enforcer: Hex; // The address of the caveat enforcer contract.
-  terms: Hex;    // Data passed to the caveat enforcer, describing how the redemption should be validated.
-  args: Hex;     // Data that may be specified by the redeemer when redeeming the delegation (only used in limited cases).
-};
-```
-
-The MetaMask Delegation Toolkit provides a `CaveatBuilder` interface, which offers an intuitive way to define the `caveats` array.
-Use the `CaveatBuilder` to easily ensure that your delegations grant only the necessary authority.
-
-## Create the caveat builder
-
-To create the caveat builder, call the `createCaveatBuilder()` function, passing an instance of `DeleGatorEnvironment`.
-The environment can be accessed from the `MetaMaskSmartAccount`, as in this example:
-
-```typescript
-const environment = delegatorSmartAccount.environment;
-
-const caveatBuilder = createCaveatBuilder(environment);
-```
-
-:::note
-By default, the `CaveatBuilder` does not allow empty caveats. To allow the `CaveatBuilder` to build an empty caveats array, provide the following configuration:
-
-```typescript
-const caveatBuilder = createCaveatBuilder(environment, { allowEmptyCaveats: true });
-```
-:::
-
-## Add caveats to the builder
-
-Add caveats to the builder using the `addCaveat` method, specifying the [caveat type](#caveat-types) and its parameters. You can chain multiple calls to `addCaveat` as in the following example:
-
-```typescript
-const caveats = caveatBuilder
-  // allowedTargets accepts an array of addresses.
-  // This caveat restricts the caller to only use the delegation to interact with the specified address.
-  .addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"]) 
-  // allowedMethods accepts an array of methods.
-  // This caveat restricts the caller to only use the delegation to invoke the specified methods.
-  .addCaveat("allowedMethods", [
-    "approve(address,uint256)",
-    "transfer(address,uint256)"
-  ])
-  // limitedCalls accepts a number.
-  // This caveat restricts the caller to only use the delegation one time.
-  .addCaveat("limitedCalls", 1)
-  .build();
-```
-
-<details>
-<summary><b>Important considerations when using caveat enforcers</b></summary>
-<p>
-
-- Delegations without caveats are entirely permissive.
-  It is crucial to add appropriate caveats to restrict the delegated authority sufficiently.
-  Failing to do so could result in unintended access or actions.
-- Caveat enforcers safeguard the execution process but do not guarantee a final state post-redemption.
-  Always combine caveat enforcers thoughtfully to create comprehensive protection.
-- When using multiple caveat enforcers that modify external contract states, the order matters.
-  For example, if you include both [`NativeBalanceChangeEnforcer`](#nativebalancechange) to ensure a balance has increased and
-  [`NativeTokenPaymentEnforcer`](#nativetokenpayment) to deduct from that balance,
-  executing `NativeTokenPaymentEnforcer` first might cause `NativeBalanceChangeEnforcer` to fail validation.
-  Consider the sequence of enforcers carefully when creating delegations with interdependent caveats.
-
-</p>
-</details>
-
-For convenience, you can also pass the `CaveatBuilder` directly to the various helper methods for creating a delegation. For example:
-
-```typescript
-const caveats = caveatBuilder
-  // allowedTargets accepts an array of addresses.
-  .addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"]) 
-  // allowedMethods accepts an array of methods.
-  .addCaveat("allowedMethods", [
-    "approve(address,uint256)",
-    "transfer(address,uint256)"
-  ])
-  // limitedCalls accepts a number.
-  .addCaveat("limitedCalls", 1);
-
-const delegation = createDelegation({
-  to: delegate,
-  from: delegator,
-  caveats
-});
-```
-
-## Caveat types
-
-The `CaveatBuilder` supports various caveat types, each serving a specific purpose.
-These caveat types correspond to the out-of-the-box caveat enforcers
-that the MetaMask Delegation Toolkit provides.
-
-For more granular or custom control, you can also [create custom caveat enforcers](create-custom-caveat-enforcer.md)
-and add them to the caveat builder.
-
-### `allowedCalldata`
+## `allowedCalldata`
 
 Limits the calldata that is executed.
 
@@ -122,14 +16,14 @@ You can use this caveat to enforce function parameters.
 We strongly recommend using this caveat to validate static types and not dynamic types.
 You can validate dynamic types through a series of `allowedCalldata` terms, but this is tedious and error-prone.
 
-**Caveat enforcer contract:** [`AllowedCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedCalldataEnforcer.sol)
+Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedCalldataEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. Index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts
 2. Expected calldata as a hex string
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("allowedCalldata",
@@ -148,17 +42,17 @@ caveatBuilder.addCaveat("allowedCalldata",
 This example uses Viem's [`encodeAbiParameters`](https://viem.sh/docs/abi/encodeAbiParameters) utility to encode the parameters as ABI-encoded hex strings.
 :::
 
-### `allowedMethods`
+## `allowedMethods`
 
 Limits what methods the delegate can call.
 
-**Caveat enforcer contract:** [`AllowedMethodsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedMethodsEnforcer.sol)
+Caveat enforcer contract: [`AllowedMethodsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedMethodsEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An array of methods as 4-byte hex strings, ABI function signatures, or `ABIFunction` objects
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("allowedMethods", [
@@ -181,17 +75,17 @@ caveatBuilder.addCaveat("allowedMethods", [
 This example adds the `transfer` function to the allowed methods in three different ways - as the 4-byte function selector, the ABI function signature, and the `ABIFunction` object.
 :::
 
-### `allowedTargets`
+## `allowedTargets`
 
 Limits what addresses the delegate can call.
 
-**Caveat enforcer contract:** [`AllowedTargetsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedTargetsEnforcer.sol)
+Caveat enforcer contract: [`AllowedTargetsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedTargetsEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An array of addresses as hex strings
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("allowedTargets", [
@@ -200,17 +94,17 @@ caveatBuilder.addCaveat("allowedTargets", [
 ]);
 ```
 
-### `argsEqualityCheck`
+## `argsEqualityCheck`
 
 Ensures that the `args` provided when redeeming the delegation are equal to the terms specified on the caveat.
 
-**Caveat enforcer contract:** [`ArgsEqualityCheckEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ArgsEqualityCheckEnforcer.sol)
+Caveat enforcer contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ArgsEqualityCheckEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The expected `args` as a hex string
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("argsEqualityCheck",
@@ -218,20 +112,20 @@ caveatBuilder.addCaveat("argsEqualityCheck",
 );
 ```
 
-### `blockNumber`
+## `blockNumber`
 
 Specifies a range of blocks through which the delegation will be valid.
 
-**Caveat enforcer contract:** [`BlockNumberEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/BlockNumberEnforcer.sol)
+Caveat enforcer contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/BlockNumberEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. After threshold block number as a `bigint`
 2. Before threshold block number as a `bigint`
 
 You can specify `0n` to indicate that there is no limitation on a threshold.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("blocknumber",
@@ -240,19 +134,19 @@ caveatBuilder.addCaveat("blocknumber",
 );
 ```
 
-### `deployed`
+## `deployed`
 
 Ensures a contract is deployed, and if not, deploys the contract.
 
-**Caveat enforcer contract:** [`DeployedEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/DeployedEnforcer.sol)
+Caveat enforcer contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/DeployedEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. A contract address as a hex string
 2. The salt to use with the contract, as a hex string
 3. The bytecode of the contract as a hex string
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("deployed",
@@ -262,23 +156,23 @@ caveatBuilder.addCaveat("deployed",
 );
 ```
 
-### `erc1155BalanceChange`
+## `erc1155BalanceChange`
 
 Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
-**Caveat enforcer contract:** [`ERC1155BalanceBalanceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceBalanceEnforcer.sol)
+Caveat enforcer contract: [`ERC1155BalanceBalanceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceBalanceEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ERC-1155 contract address as a hex string
 2. The recipient's address as a hex string
 3. The ID of the ERC-1155 token as a bigint
 4. The amount by which the balance must have changed as a `bigint`
-5. The balance change type for the ERC-1155 token. Specifies whether the 
-balance should have increased or decreased. Valid parameters are 
-`BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+5. The balance change type for the ERC-1155 token. Specifies whether the
+   balance should have increased or decreased. Valid parameters are
+   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc1155BalanceChange",
@@ -290,22 +184,22 @@ caveatBuilder.addCaveat("erc1155BalanceChange",
 );
 ```
 
-### `erc20BalanceChange`
+## `erc20BalanceChange`
 
 Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
-**Caveat enforcer contract:** [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
+Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ERC-20 contract address as a hex string
 2. The recipient's address as a hex string
 3. The amount by which the balance must have changed as a `bigint`
-4. The balance change type for the ERC-20 token. Specifies whether the 
-balance should have increased or decreased. Valid parameters are 
-`BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+4. The balance change type for the ERC-20 token. Specifies whether the
+   balance should have increased or decreased. Valid parameters are
+   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc20BalanceChange",
@@ -316,23 +210,23 @@ caveatBuilder.addCaveat("erc20BalanceChange",
 );
 ```
 
-### `erc20PeriodTransfer`
+## `erc20PeriodTransfer`
 
-Ensures that ERC-20 token transfers remain within a predefined limit during a 
+Ensures that ERC-20 token transfers remain within a predefined limit during a
 specified time window. At the start of each new period, the allowed transfer
 amount resets. Any unused transfer allowance from the previous period does not
 carry over and is forfeited.
 
-**Caveat enforcer contract:** [`ERC20PeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20PeriodTransferEnforcer.sol)
+Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20PeriodTransferEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The address of the ERC-20 token contract.
 2. The maximum amount of tokens that can be transferred per period, in wei.
 3. The duration of each period in seconds.
 4. The timestamp when the first period begins.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc20PeriodTransfer",
@@ -343,13 +237,13 @@ caveatBuilder.addCaveat("erc20PeriodTransfer",
 );
 ```
 
-### `erc20Streaming`
+## `erc20Streaming`
 
 Enforces a linear streaming transfer limit for ERC-20 tokens. Block token access until the specified start timestamp. At the start timestamp, immediately release the specified initial amount. Afterward, accrue tokens linearly at the specified rate, up to the specified maximum.
 
-**Caveat enforcer contract:** [`ERC20StreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20StreamingEnforcer.sol)
+Caveat enforcer contract: [`ERC20StreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20StreamingEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ERC-20 contract address as a hex string
 2. Initial amount available at start time as a `bigint`
@@ -357,7 +251,7 @@ Enforces a linear streaming transfer limit for ERC-20 tokens. Block token access
 4. Rate at which tokens accrue per second as a `bigint`
 5. Start timestamp as a number
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc20Streaming",
@@ -369,18 +263,18 @@ caveatBuilder.addCaveat("erc20Streaming",
 );
 ```
 
-### `erc20TransferAmount`
+## `erc20TransferAmount`
 
 Limits the transfer of ERC-20 tokens.
 
-**Caveat enforcer contract:** [`ERC20TransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20TransferAmountEnforcer.sol)
+Caveat enforcer contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20TransferAmountEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ERC-20 contract address as a hex string
 2. Amount as a `bigint`
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc20TransferAmount",
@@ -389,22 +283,22 @@ caveatBuilder.addCaveat("erc20TransferAmount",
 );
 ```
 
-### `erc721BalanceChange`
+## `erc721BalanceChange`
 
 Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
-**Caveat enforcer contract:** [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
+Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ERC-721 contract address as a hex string
 2. The recipient's address as a hex string
 3. The amount by which the balance must have changed as a `bigint`
-4. The balance change type for the ERC-721 token. Specifies whether the 
-balance should have increased or decreased. Valid parameters are 
-`BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+4. The balance change type for the ERC-721 token. Specifies whether the
+   balance should have increased or decreased. Valid parameters are
+   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc721BalanceChange",
@@ -415,18 +309,18 @@ caveatBuilder.addCaveat("erc721BalanceChange",
 );
 ```
 
-### `erc721Transfer`
+## `erc721Transfer`
 
 Restricts the execution to only allow ERC-721 token transfers, specifically the `transferFrom(from, to, tokenId)` function, for a specified token ID and contract.
 
-**Caveat enforcer contract:** [`ERC721TransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721TransferEnforcer.sol)
+Caveat enforcer contract: [`ERC721TransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721TransferEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The permitted ERC-721 contract address as a hex string
 2. The permitted ID of the ERC-721 token as a `bigint`
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("erc721Transfer",
@@ -435,18 +329,18 @@ caveatBuilder.addCaveat("erc721Transfer",
 );
 ```
 
-### `exactCalldata`
+## `exactCalldata`
 
 Verifies that the transaction calldata matches the expected calldata. For batch transactions,
 see [`exactCalldataBatch`](#exactcalldatabatch).
 
-**Caveat enforcer contract:** [`ExactCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataEnforcer.sol)
+Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataEnforcer.sol)
 
-#### Parameters
+### Parameters
 
-1. A hex value for calldata. 
+1. A hex value for calldata.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("exactCalldata", 
@@ -454,18 +348,18 @@ caveatBuilder.addCaveat("exactCalldata",
 );
 ```
 
-### `exactCalldataBatch`
+## `exactCalldataBatch`
 
 Verifies that the provided batch execution calldata matches
 the expected calldata for each individual execution in the batch.
 
-**Caveat enforcer contract:** [`ExactCalldataBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataBatchEnforcer.sol)
+Caveat enforcer contract: [`ExactCalldataBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataBatchEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. Array of expected `ExecutionStruct`, each containing target address, value, and calldata.
 
-#### Example
+### Example
 
 ```typescript
 const executions = [
@@ -486,18 +380,18 @@ caveatBuilder.addCaveat("exactCalldataBatch",
 );
 ```
 
-### `exactExecution`
+## `exactExecution`
 
 Verifies that the provided execution matches the expected execution. For batch transactions,
 see [`exactExecutionBatch`](#exactexecutionbatch).
 
-**Caveat enforcer contract:** [`ExactExecutionEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionEnforcer.sol)
+Caveat enforcer contract: [`ExactExecutionEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. `ExecutionStruct` to be expected.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("exactExecution", {
@@ -507,18 +401,18 @@ caveatBuilder.addCaveat("exactExecution", {
 })
 ```
 
-### `exactExecutionBatch`
+## `exactExecutionBatch`
 
 Verifies that each execution in the batch matches the expected
 execution parameters - including target, value, and calldata.
 
-**Caveat enforcer contract:** [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
+Caveat enforcer contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. Array of expected `ExecutionStruct`, each containing target address, value, and calldata.
 
-#### Example
+### Example
 
 ```typescript
 const executions = [
@@ -539,17 +433,17 @@ caveatBuilder.addCaveat("exactExecutionBatch",
 );
 ```
 
-### `id`
+## `id`
 
 Specifies an ID for multiple delegations. Once one of them is redeemed, the other delegations with the same ID are revoked.
 
-**Caveat enforcer contract:** [`IdEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/IdEnforcer.sol)
+Caveat enforcer contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/IdEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An ID as a number
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("id",
@@ -557,17 +451,17 @@ caveatBuilder.addCaveat("id",
 );
 ```
 
-### `limitedCalls`
+## `limitedCalls`
 
 Limits the number of times the delegate can perform executions on the delegator's behalf.
 
-**Caveat enforcer contract:** [`LimitedCallsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/LimitedCallsEnforcer.sol)
+Caveat enforcer contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/LimitedCallsEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. A count as a number
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("limitedCalls",
@@ -575,7 +469,7 @@ caveatBuilder.addCaveat("limitedCalls",
 );
 ```
 
-### `multiTokenPeriod`
+## `multiTokenPeriod`
 
 Ensures that token transfers for multiple tokens stay within the specified limits for the defined periods.
 At the start of each new period, the allowed transfer amount for each token resets. Any unused transfer allowance from the previous period expires and does not carry over.
@@ -583,17 +477,17 @@ At the start of each new period, the allowed transfer amount for each token rese
 When redeeming the delegation, the index of the relevant token configuration must be specified
 as the `args` of this caveat (encoded as `uint256` hex value).
 
-**Caveat enforcer contract:** [`MultiTokenPeriodEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/MultiTokenPeriodEnforcer.sol)
+Caveat enforcer contract: [`MultiTokenPeriodEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/MultiTokenPeriodEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 An array of token period configuration objects, where each object contains:
-   - `token`: The address of the token contract as a hex string.
-   - `periodAmount`: The maximum amount of tokens that can be transferred per period, in wei.
-   - `periodDuration`: The duration of each period in seconds.
-   - `startDate`: A Unix epoch timestamp (in seconds) representing when the first period begins.
+- `token`: The address of the token contract as a hex string.
+- `periodAmount`: The maximum amount of tokens that can be transferred per period, in wei.
+- `periodDuration`: The duration of each period in seconds.
+- `startDate`: A Unix epoch timestamp (in seconds) representing when the first period begins.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("multiTokenPeriod", [
@@ -612,21 +506,21 @@ caveatBuilder.addCaveat("multiTokenPeriod", [
 ]);
 ```
 
-### `nativeBalanceChange`
+## `nativeBalanceChange`
 
 Ensures that the recipient's native token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
-**Caveat enforcer contract:** [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
+Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The recipient's address as a hex string
 2. The amount by which the balance must have changed as a `bigint`
-3. The balance change type for the native token. Specifies whether the 
-balance should have increased or decreased. Valid parameters are 
-`BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+3. The balance change type for the native token. Specifies whether the
+   balance should have increased or decreased. Valid parameters are
+   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nativeBalanceChange",
@@ -636,20 +530,20 @@ caveatBuilder.addCaveat("nativeBalanceChange",
 );
 ```
 
-### `nativeTokenPayment`
+## `nativeTokenPayment`
 
 Enforces payment in native token (for example, ETH) for the right to use the delegation.
 A permissions context allowing payment must be provided as the `args` when
 redeeming the delegation.
 
-**Caveat enforcer contract:** [`NativeTokenPaymentEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPaymentEnforcer.sol)
+Caveat enforcer contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPaymentEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The recipient's address as a hex string
 2. The amount that must be paid as a `bigint`
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nativeTokenPayment",
@@ -658,22 +552,22 @@ caveatBuilder.addCaveat("nativeTokenPayment",
 );
 ```
 
-### `nativeTokenPeriodTransfer`
+## `nativeTokenPeriodTransfer`
 
-Ensures that native token transfers remain within a predefined limit during a 
+Ensures that native token transfers remain within a predefined limit during a
 specified time window. At the start of each new period, the allowed transfer
 amount resets. Any unused transfer allowance from the previous period does not
 carry over and is forfeited.
 
-**Caveat enforcer contract:** [`NativeTokenPeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPeriodTransferEnforcer.sol)
+Caveat enforcer contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPeriodTransferEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The maximum amount of tokens that can be transferred per period, in wei.
 2. The duration of each period in seconds.
 3. The timestamp when the first period begins.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nativeTokenPeriodTransfer",
@@ -683,20 +577,20 @@ caveatBuilder.addCaveat("nativeTokenPeriodTransfer",
 )
 ```
 
-### `nativeTokenStreaming`
+## `nativeTokenStreaming`
 
 Enforces a linear streaming limit for native tokens (for example, ETH). Nothing is available before the specified start timestamp. At the start timestamp, the specified initial amount becomes immediately available. After that, tokens accrue linearly at the specified rate, capped by the specified maximum.
 
-**Caveat enforcer contract:** [`NativeTokenStreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenStreamingEnforcer.sol)
+Caveat enforcer contract: [`NativeTokenStreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenStreamingEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. Initial amount available at start time as a `bigint`
 2. Maximum total amount that can be unlocked as a `bigint`
 3. Rate at which tokens accrue per second as a `bigint`
 4. Start timestamp as a number
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nativeTokenStreaming",
@@ -707,17 +601,17 @@ caveatBuilder.addCaveat("nativeTokenStreaming",
 );
 ```
 
-### `nativeTokenTransferAmount`
+## `nativeTokenTransferAmount`
 
 Enforces an allowance of native currency (for example, ETH).
 
-**Caveat enforcer contract:** [`NativeTokenTransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenTransferAmountEnforcer.sol)
+Caveat enforcer contract: [`NativeTokenTransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenTransferAmountEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The allowance as a `bigint`
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nativeTokenTransferAmount",
@@ -725,17 +619,17 @@ caveatBuilder.addCaveat("nativeTokenTransferAmount",
 );
 ```
 
-### `nonce`
+## `nonce`
 
 Adds a nonce to a delegation, and revokes previous delegations by incrementing the current nonce by calling `incrementNonce(address _delegationManager)`.
 
-**Caveat enforcer contract:** [`NonceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NonceEnforcer.sol)
+Caveat enforcer contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NonceEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. A nonce as a hex string
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("nonce",
@@ -743,17 +637,17 @@ caveatBuilder.addCaveat("nonce",
 );
 ```
 
-### `ownershipTransfer`
+## `ownershipTransfer`
 
 Restricts the execution to only allow ownership transfers, specifically the `transferOwnership(address _newOwner)` function, for a specified contract.
 
-**Caveat enforcer contract:** [`OwnershipTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/OwnershipTransferEnforcer.sol)
+Caveat enforcer contract: [`OwnershipTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/OwnershipTransferEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The target contract address as a hex string
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("ownershipTransfer",
@@ -761,7 +655,7 @@ caveatBuilder.addCaveat("ownershipTransfer",
 );
 ```
 
-### `redeemer`
+## `redeemer`
 
 Limits the addresses that can redeem the delegation.
 This caveat is designed for restricting smart contracts or EOAs lacking delegation support,
@@ -775,13 +669,13 @@ This condition is enforced, but if Bob is a delegator he can create a separate d
 that allows her to redeem Alice's delegation through Bob.
 :::
 
-**Caveat enforcer contract:** [`RedeemerEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/RedeemerEnforcer.sol)
+Caveat enforcer contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/RedeemerEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. An array of addresses as hex strings
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("redeemer",
@@ -792,16 +686,16 @@ caveatBuilder.addCaveat("redeemer",
 );
 ```
 
-### `specificActionERC20TransferBatch`
+## `specificActionERC20TransferBatch`
 
 Ensures validation of a batch consisting of exactly two transactions:
 1. The first transaction must call a specific target contract with predefined calldata.
 2. The second transaction must be an ERC-20 token transfer that matches specified
-parameters—including the ERC-20 token contract address, amount, and recipient.
+   parameters—including the ERC-20 token contract address, amount, and recipient.
 
-**Caveat enforcer contract:** [`SpecificActionERC20TransferBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/SpecificActionERC20TransferBatchEnforcer.sol)
+Caveat enforcer contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/SpecificActionERC20TransferBatchEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. The address of the ERC-20 token contract.
 2. The address that will receive the tokens.
@@ -809,7 +703,7 @@ parameters—including the ERC-20 token contract address, amount, and recipient.
 4. The target address for the first transaction.
 5. The calldata for the first transaction.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("specificActionERC20TransferBatch",
@@ -821,20 +715,20 @@ caveatBuilder.addCaveat("specificActionERC20TransferBatch",
 )
 ```
 
-### `timestamp`
+## `timestamp`
 
 Specifies a range of timestamps through which the delegation will be valid.
 
-**Caveat enforcer contract:** [`TimestampEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/TimestampEnforcer.sol)
+Caveat enforcer contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/TimestampEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. After threshold timestamp as a number
 2. Before threshold timestamp as a number
 
 You can specify `0` to indicate that there is no limitation on a threshold.
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("timestamp",
@@ -843,17 +737,17 @@ caveatBuilder.addCaveat("timestamp",
 );
 ```
 
-### `valueLte`
+## `valueLte`
 
 Limits the value of native tokens that the delegate can spend.
 
-**Caveat enforcer contract:** [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
+Caveat enforcer contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
 
-#### Parameters
+### Parameters
 
 1. A value as a `bigint`
 
-#### Example
+### Example
 
 ```typescript
 caveatBuilder.addCaveat("valueLte",
