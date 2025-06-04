@@ -42,13 +42,6 @@ export default function Home(): JSX.Element {
             href: 'https://web3auth.io/docs',
           },
           {
-            title: 'Delegation Toolkit',
-            description:
-              'Integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
-            href: '/gator',
-            theme: '',
-          },
-          {
             title: 'Snaps',
             description:
               'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
