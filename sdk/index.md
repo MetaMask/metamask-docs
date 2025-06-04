@@ -15,6 +15,11 @@ With the SDK, you can:
 
 [Get started by connecting to MetaMask.](connect/javascript-wagmi.md)
 
+:::tip Build embedded wallet experiences that work seamlessly with MetaMask
+Introducing our latest [Embedded Wallets SDK](https://web3auth.io/docs) (previously Web3Auth), you can now onboard users
+instantly and design seamless onchain experiences with social logins, passkeys and more.
+:::
+
 ## Why use the SDK?
 
 The benefits of using MetaMask SDK include the following:
