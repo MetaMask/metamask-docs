@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Configure delegator accounts and signers
 
-The MetaMask Delegation Toolkit supports different [delegator account types](../concepts/delegator-accounts.md#account-types),
+The MetaMask Delegation Toolkit supports different [delegator account types](../concepts/delegator-accounts.md#delegator-account-types),
 each with its own configuration and support for different signing mechanisms.
 You can create flexible and secure delegator accounts tailored to your specific needs.
 

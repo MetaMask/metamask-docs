@@ -10,17 +10,17 @@ import CardList from "@site/src/components/CardList"
 # MetaMask Delegation Toolkit
 
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for integrating
-embedded smart contract wallets, known as [MetaMask smart accounts](./concepts/smart-accounts.md),
+embedded smart contract wallets, known as [MetaMask smart accounts](concepts/smart-accounts.md),
 into dapps. Developers can create and manage MetaMask smart accounts that delegate specific
 permissions, such as spending limits or time-based access, to other accounts.
 
 At the core of the toolkit is the [Delegation Framework](concepts/delegation.md#delegation-framework), a
 set of open-source, audited smart contracts that manage the delegation lifecycle.
 
-Permissions are enforced through [caveats](./concepts/caveat-enforcers.md), which are rule-based
+Permissions are enforced through [caveats](concepts/caveat-enforcers.md), which are rule-based
 constraints that define the conditions of a delegation. The toolkit includes
-[built-in caveat enforcers](./how-to/create-delegation/restrict-delegation#caveat-types) for common
-use cases. It also supports [custom caveat enforcers](./how-to/create-delegation/create-custom-caveat-enforcer)
+[built-in caveat enforcers](reference/caveats.md) for common
+use cases. It also supports [custom caveat enforcers](how-to/create-delegation/create-custom-caveat-enforcer.md)
 for advanced scenarios.
 
 ## Why use the toolkit?

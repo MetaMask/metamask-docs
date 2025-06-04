@@ -210,7 +210,7 @@ const hash = walletClient.sendTransactionWithDelegation({
 <TabItem value="config.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
+import { http, createPublicClient, createWalletClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
 import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";
