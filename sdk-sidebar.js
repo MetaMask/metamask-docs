@@ -4,17 +4,9 @@
 const sidebar = {
   sdkSidebar: [
     {
-      type: 'category',
+      type: 'doc',
       label: 'Introduction',
-      collapsible: false,
-      collapsed: false,
-      link: {
-        type: "doc",
-        id: "index"
-      },
-      items: [
-        'introduction/llm-prompt',
-      ],
+      id: "index",
     },
     {
       type: 'category',
@@ -66,6 +58,7 @@ const sidebar = {
       collapsible: false,
       collapsed: false,
       items: [
+        'reference/llm-prompt',
         'reference/supported-platforms',
         'reference/sdk-options',
       ],

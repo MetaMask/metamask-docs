@@ -59,6 +59,10 @@
       "destination": "/sdk/reference/supported-platforms/"
     },
     {
+      "source": "/sdk/introduction/llm-prompt/",
+      "destination": "/sdk/reference/llm-prompt/"
+    },
+    {
       "source": "/sdk/introduction/supported-networks/",
       "destination": "/sdk/"
     },

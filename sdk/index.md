@@ -39,7 +39,8 @@ MetaMask SDK gives your dapp a powerful upgrade:
 
 ## Supported platforms and libraries
 
-You can get started with the SDK on the following dapp platforms or third-party libraries:
+MetaMask SDK is available in a variety of ways to make integration as easy as possible.
+You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries.
 
 <CardList
   items={[
