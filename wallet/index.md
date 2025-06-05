@@ -25,7 +25,7 @@ interact with users' EVM accounts, and implements standard interfaces like
 
 MetaMask also supports non-EVM networks, including native support for [Solana](how-to/use-non-evm-networks/solana.md).
 
-[Get started by connecting to MetaMask.](how-to/connect.md)
+[Get started with the Wallet API.](how-to/connect-extension.md)
 
 ## Wallet API vs. SDK
 

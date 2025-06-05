@@ -9,8 +9,8 @@ import CardList from '@site/src/components/CardList'
 
 # Seamlessly connect to MetaMask using the SDK
 
-MetaMask SDK is a toolkit that enables a fast, reliable, and seamless connection from your dapp to the MetaMask extension and MetaMask Mobile.
-With the SDK, you can easily onboard users and interact with their accounts on desktop or mobile, across all EVM L1/L2 networks.
+MetaMask SDK enables a fast, reliable, and seamless connection from your dapp to the MetaMask extension and MetaMask Mobile.
+With the SDK, you can easily onboard users and interact with their accounts on desktop or mobile, across all EVM networks.
 
 <p align="center">
   <Button
@@ -24,6 +24,18 @@ With the SDK, you can easily onboard users and interact with their accounts on d
           }}
   />
 </p>
+
+## Why use the SDK?
+
+MetaMask SDK gives your dapp a powerful upgrade:
+
+- **Cross-platform, cross-browser support** - One integration covers both desktop and mobile, all major browsers, and the MetaMask Mobile app—streamlining your user onboarding and eliminating edge cases.
+- **Mobile connection that just works** - Say goodbye to clunky "open in in-app browser" flows.
+  The SDK enables a native connection from any mobile browser (Safari, Chrome, etc.) directly to MetaMask Mobile, using secure deeplinking and session management.
+- **Production-ready, battle-tested** - MetaMask SDK is used in high-volume dapps across DeFi, NFTs, gaming, and more—ensuring stability, speed, and a smooth developer experience.
+- **Multichain-ready by design** - Today, the SDK supports all EVM networks.
+  Coming soon: Seamless connection to non-EVM chains like Solana and Bitcoin.
+  Futureproof your dapp with a single integration.
 
 ## Supported platforms and libraries
 
@@ -57,29 +69,11 @@ You can get started with the SDK on the following dapp platforms or third-party 
       description: 'Set up the SDK in a React Native or Expo dapp.',
     },
     {
-      href: 'https://docs.reown.com/appkit/overview',
-      title: 'Reown AppKit',
-      description: 'Use SDK features with Reown AppKit.',
-      buttonIcon: 'external-arrow',
-    },
-    {
-      href: 'https://www.rainbowkit.com',
-      title: 'RainbowKit',
-      description: 'Use SDK features with RainbowKit.',
-      buttonIcon: 'external-arrow',
-    },
-    {
       href: 'https://onboard.blocknative.com',
       title: 'Web3-Onboard',
       description: 'Use SDK features with Web3-Onboard.',
       buttonIcon: 'external-arrow',
-    },
-    {
-      href: 'https://docs.family.co/connectkit',
-      title: 'ConnectKit',
-      description: 'Use SDK features with ConnectKit.',
-      buttonIcon: 'external-arrow',
-    },
+    }
   ]}
 />
 
