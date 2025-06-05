@@ -92,8 +92,8 @@ export const walletClient = createWalletClient({
 </Tabs>
 
 <details>
-  <summary> ERC-7715 request permission sample </summary>
-  
+  <summary>ERC-7715 request permission sample</summary>
+  <div>
   Here's what your ERC-7715 native token streaming allowance request looks like:
 
   ```ts
@@ -120,6 +120,7 @@ export const walletClient = createWalletClient({
   ```
 
   Learn more about the [ERC-7715 permission schema](https://eip.tools/eip/7715).
+  </div>
 </details>
 
 

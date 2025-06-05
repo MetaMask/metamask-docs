@@ -67,21 +67,21 @@ const caveats = caveatBuilder
 ```
 
 <details>
-<summary><b>Important considerations when using caveat enforcers</b></summary>
-<p>
+  <summary>Important considerations when using caveat enforcers</summary>
+  <div>
 
-- Delegations without caveats are entirely permissive.
-  It is crucial to add appropriate caveats to restrict the delegated authority sufficiently.
-  Failing to do so could result in unintended access or actions.
-- Caveat enforcers safeguard the execution process but do not guarantee a final state post-redemption.
-  Always combine caveat enforcers thoughtfully to create comprehensive protection.
-- When using multiple caveat enforcers that modify external contract states, the order matters.
-  For example, if you include both [`NativeBalanceChangeEnforcer`](../../reference/caveats.md#nativebalancechange) to ensure a balance has increased and
-  [`NativeTokenPaymentEnforcer`](../../reference/caveats.md#nativetokenpayment) to deduct from that balance,
-  executing `NativeTokenPaymentEnforcer` first might cause `NativeBalanceChangeEnforcer` to fail validation.
-  Consider the sequence of enforcers carefully when creating delegations with interdependent caveats.
+  - Delegations without caveats are entirely permissive.
+    It is crucial to add appropriate caveats to restrict the delegated authority sufficiently.
+    Failing to do so could result in unintended access or actions.
+  - Caveat enforcers safeguard the execution process but do not guarantee a final state post-redemption.
+    Always combine caveat enforcers thoughtfully to create comprehensive protection.
+  - When using multiple caveat enforcers that modify external contract states, the order matters.
+    For example, if you include both [`NativeBalanceChangeEnforcer`](../../reference/caveats.md#nativebalancechange) to ensure a balance has increased and
+    [`NativeTokenPaymentEnforcer`](../../reference/caveats.md#nativetokenpayment) to deduct from that balance,
+    executing `NativeTokenPaymentEnforcer` first might cause `NativeBalanceChangeEnforcer` to fail validation.
+    Consider the sequence of enforcers carefully when creating delegations with interdependent caveats.
 
-</p>
+  </div>
 </details>
 
 For convenience, you can also pass the `CaveatBuilder` directly to the various helper methods for creating a delegation. For example:
