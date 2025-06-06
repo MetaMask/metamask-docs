@@ -14,8 +14,8 @@ For more granular or custom control, you can follow the instructions on this pag
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install-delegation-toolkit.md)
-- [Configure the Delegation Toolkit.](../configure-delegation-toolkit.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 
 ## Steps
 

@@ -25,7 +25,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
   } = useThemeConfig();
 
   const location = useLocation();
-  const isGatorDocs = location.pathname.startsWith('/gator');
+  const isGatorDocs = location.pathname.startsWith('/delegation-toolkit');
 
   let versionDropdown = null;
   try {

@@ -17,8 +17,8 @@ into a single aggregated signature.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install-delegation-toolkit.md)
-- [Configure the Delegation Toolkit.](configure-delegation-toolkit.md)
+- [Install and set up the Delegation Toolkit.](../get-started/install.md)
+- [Configure the Delegation Toolkit.](configure.md)
 - [Create a Multisig Delegator account.](configure-delegator-accounts-signers#configure-a-multisig-delegator)
 
 ## Generate a multisig signature

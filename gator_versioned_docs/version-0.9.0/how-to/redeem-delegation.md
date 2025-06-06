@@ -16,8 +16,8 @@ The redeem transaction is sent to the `DelegationManager` contract, which valida
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install-delegation-toolkit.md)
-- [Configure the Delegation Toolkit.](configure-delegation-toolkit.md)
+- [Install and set up the Delegation Toolkit.](../get-started/install.md)
+- [Configure the Delegation Toolkit.](configure.md)
 - [Create a delegator account.](create-delegator-account.md)
 - [Create a delegation.](create-delegation/index.md)
 

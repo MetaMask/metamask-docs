@@ -26,8 +26,8 @@ Learn how to [restrict a delegation](./restrict-delegation.md) using caveat enfo
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install-delegation-toolkit.md)
-- [Configure the Delegation Toolkit.](../configure-delegation-toolkit.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a delegator account.](../create-delegator-account.md)
 
 ## Create a root delegation

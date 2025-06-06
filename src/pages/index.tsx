@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
             title: 'Delegation Toolkit',
             description:
               'Integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
-            href: '/gator',
+            href: '/delegation-toolkit',
           },
           {
             title: 'Embedded Wallets',

@@ -4,7 +4,7 @@ import versions from '@site/gator_versions.json';
 import clsx from 'clsx';
 import styles from './SidebarVersionDropdown.module.css';
 
-export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginId?: string }) {
+export default function SidebarVersionDropdown({ path = 'delegation-toolkit' }: { path?: string }) {
   const history = useHistory();
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -35,11 +35,11 @@ export default function SidebarVersionDropdown({ pluginId = 'gator' }: { pluginI
   const handleSelect = (version: string) => {
     let versionPath = '';
     if (version === 'current') {
-      versionPath = `/${pluginId}/development/`;
+      versionPath = `/${path}/development/`;
     } else if (version === latestVersion) {
-      versionPath = `/${pluginId}/`;
+      versionPath = `/${path}/`;
     } else {
-      versionPath = `/${pluginId}/${version}/`;
+      versionPath = `/${path}/${version}/`;
     }
 
     history.push(versionPath);
