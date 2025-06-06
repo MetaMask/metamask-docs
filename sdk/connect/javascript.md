@@ -1,11 +1,13 @@
 ---
 description: Quickstart guide for using the SDK with a JavaScript dapp.
+sidebar_label: JavaScript
+keywords: [connect, MetaMask, JavaScript, SDK, dapp]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# JavaScript
+# Connect to MetaMask using JavaScript
 
 Get started with MetaMask SDK in your JavaScript dapp.
 

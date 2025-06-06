@@ -11,6 +11,11 @@ export default function Home(): JSX.Element {
       <Hero
         title={siteConfig.title}
         description={"Build with the world's leading self-custodial crypto wallet."}
+        button={{
+          label: 'Get Started',
+          href: '/sdk',
+          icon: 'arrow-right',
+        }}
       />
       <CardSection
         colorPalette="purple"
