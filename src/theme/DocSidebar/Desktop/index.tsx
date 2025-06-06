@@ -32,7 +32,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     if (isGatorDocs) {
       versionDropdown = (
         <div className={styles.versionDropdownContainer}>
-          <SidebarVersionDropdown pluginId="gator" />
+          <SidebarVersionDropdown path="delegation-toolkit" />
         </div>
       );
     }

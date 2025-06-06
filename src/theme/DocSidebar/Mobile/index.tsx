@@ -25,7 +25,7 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
       {isGatorDocs && (
         <li className={styles.versionDropdownContainer}>
-          <SidebarVersionDropdown pluginId="gator" />
+          <SidebarVersionDropdown path="delegation-toolkit" />
         </li>
       )}
       <DocSidebarItems
