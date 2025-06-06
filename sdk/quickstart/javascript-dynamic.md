@@ -61,7 +61,8 @@ The project you will set up has the following structure:
 
     ```bash
     ? Please select the template you want to use: 
-      Next.js Quickstart (MetaMask SDK Example) (Recommended) 
+      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
+      MetaMask <-> Web3Auth Quickstart
     ❯ MetaMask <-> Dynamic Quickstart
     ```
 
