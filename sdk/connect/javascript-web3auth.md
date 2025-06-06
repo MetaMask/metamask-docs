@@ -34,6 +34,60 @@ Features include:
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 - A [Web3Auth Client ID](https://web3auth.io/docs/dashboard/create-new-project#get-the-client-id).
 
+## Set up using the CLI
+
+1. Run the CLI command, replacing `<project-name>` with your project name:
+
+    ```bash
+    npx @consensys/create-web3-app <project-name>
+    ```
+
+1. Select the Web3Auth Quickstart template:
+
+    ```bash
+    ? Please select the template you want to use: 
+      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
+    ❯ MetaMask <-> Web3Auth Quickstart
+      MetaMask <-> Dynamic Quickstart
+    ```
+
+1. Select your preferred blockchain tooling if your project requires it:
+
+    ```bash
+    ? Would you like to include blockchain tooling? (Use arrow keys)
+      HardHat 
+      Foundry 
+    ❯ None 
+    ```
+
+1. Select your preferred package manager.
+    We recommend pnpm for speed and efficiency:
+
+    ```bash
+    ? Please select the package manager you want to use: 
+      Yarn 
+      NPM 
+    ❯ pnpm 
+    ```
+
+1. Select to enter your Web3Auth Client ID in the command prompt:
+
+    ```bash
+    Note: The selected template requires a Web3Auth client ID. 
+    You can obtain one from https://dashboard.web3auth.io and later 
+    add NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<your_client_id> to a .env file in your site's directory. 
+    ```
+
+1. The CLI will take a few minutes to set up your project.
+    Once complete, you can run the project using the following command in `cd <project-name>`:
+
+    ```bash
+    pnpm run dev
+    ```
+
+You've successfully set up MetaMask SDK and Web3Auth SDK.
+See how to [use the Web3Auth SDK](#usage).
+
 ## Set up using a template
 
 1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-web3auth):
@@ -73,7 +127,7 @@ Features include:
     ```
 
 You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the combined SDKs](#usage).
+See how to [use the Web3Auth SDK](#usage).
 
 ## Set up manually
 
