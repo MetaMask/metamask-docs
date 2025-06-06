@@ -18,7 +18,7 @@
 /snaps/ @MetaMask/tech-writers @MetaMask/snaps
 
 # Delegation Toolkit documentation
-/gator/ @MetaMask/tech-writers @MetaMask/delegation @MetaMask/delegation-devrel
+/delegation-toolkit/ @MetaMask/tech-writers @MetaMask/delegation @MetaMask/delegation-devrel
 
 # SDK documentation
 /sdk/ @MetaMask/tech-writers @MetaMask/sdk-devs @MetaMask/sdk-devrel

@@ -19,13 +19,13 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({
 }) => {
   const mobileSidebar = useNavbarMobileSidebar();
   const location = useLocation();
-  const isGatorDocs = location.pathname.startsWith('/gator');
+  const isGatorDocs = location.pathname.startsWith('/delegation-toolkit');
 
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
       {isGatorDocs && (
         <li className={styles.versionDropdownContainer}>
-          <SidebarVersionDropdown pluginId="gator" />
+          <SidebarVersionDropdown path="delegation-toolkit" />
         </li>
       )}
       <DocSidebarItems

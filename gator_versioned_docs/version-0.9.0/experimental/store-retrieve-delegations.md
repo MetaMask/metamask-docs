@@ -14,12 +14,12 @@ This is an experimental feature and may change in future releases.
 :::
 
 You can use methods provided by the `DelegationStorageClient` of the MetaMask Delegation Toolkit to store and retrieve
-[delegations](/concepts/delegation).
+[delegations](../concepts/delegation.md).
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](/development/get-started/install-delegation-toolkit)
-- [Configure the Delegation Toolkit.](/development/how-to/configure-delegation-toolkit)
+- [Install and set up the Delegation Toolkit.](../get-started/install.md)
+- [Configure the Delegation Toolkit.](../how-to/configure.md)
 - Ensure you have an API key and API key ID to interact with the `DelegationStorageClient`.
   If you need to gain access, email hellogators@consensys.net.
 

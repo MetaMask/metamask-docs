@@ -12,8 +12,8 @@ The MetaMask Delegation Toolkit is embedded, meaning that the end user can insta
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install-delegation-toolkit.md)
-- [Configure the Delegation Toolkit.](configure-delegation-toolkit.md)
+- [Install and set up the Delegation Toolkit.](../get-started/install.md)
+- [Configure the Delegation Toolkit.](configure.md)
 
 ## Create a `MetaMaskSmartAccount`
 
@@ -70,7 +70,7 @@ export const owner = privateKeyToAccount(privateKey);
 
 This example creates the `MetaMaskSmartAccount`, which can perform several functions:
 
-- In conjunction with [Viem Account Abstraction clients](configure-delegation-toolkit.md), deploy the smart contract account,
+- In conjunction with [Viem Account Abstraction clients](configure.md), deploy the smart contract account,
   and [send user operations](send-user-operation.md).
 - [Sign delegations](create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
 

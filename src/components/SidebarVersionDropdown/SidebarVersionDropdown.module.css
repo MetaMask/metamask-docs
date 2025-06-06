@@ -1,24 +1,20 @@
 .dropdown {
   position: relative;
-  padding-left: var(--ifm-menu-link-padding-horizontal);
-  margin-top: 0.5rem;
-  font-family: var(--font-mm-sans);
+  font-family: var(--ifm-font-family-base);
   border-bottom: 1px solid var(--ifm-toc-border-color);
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  padding: 0.4rem 0;
 }
 
 .versionItem {
   display: flex;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-weight: 500;
   cursor: pointer;
   color: var(--color-text);
   user-select: none;
   width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0.6rem 2.4rem;
 }
 
 .versionItem:hover {
@@ -28,9 +24,7 @@
 .chevron {
   font-size: 2.2rem;
   line-height: 1;
-  display: inline-block;
-  margin-left: 0rem;
-  padding-right: 20px;
+  padding: 1rem;
 }
 
 .label {
@@ -47,14 +41,16 @@
   border-radius: 4px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   margin-top: 0.3rem;
+  padding-bottom: 1rem;
   z-index: 100;
   width: 100%;
   min-width: 180px;
 }
 
 .menuItem {
-  padding: 0.75rem 1rem;
-  font-size: 1.4rem;
+  padding: 0.6rem 2.4rem;
+  font-size: 1.5rem;
+  font-weight: 400;
   cursor: pointer;
   color: var(--color-text);
   background: var(--general-white);

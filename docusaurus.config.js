@@ -117,8 +117,8 @@ const config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'gator',
-        path: 'gator',
-        routeBasePath: 'gator',
+        path: 'delegation-toolkit',
+        routeBasePath: 'delegation-toolkit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: true,
@@ -310,7 +310,7 @@ const config = {
               },
               {
                 label: 'Delegation Toolkit',
-                to: '/gator',
+                to: '/delegation-toolkit',
               },
               {
                 label: 'Snaps',
