@@ -96,7 +96,7 @@ const config = {
         routeBasePath: 'snaps',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
         admonitions: {
           keywords: [
             'info',
@@ -121,7 +121,7 @@ const config = {
         routeBasePath: 'delegation-toolkit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
@@ -148,7 +148,7 @@ const config = {
         routeBasePath: 'services',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
       },
     ],
     [
@@ -159,7 +159,7 @@ const config = {
         routeBasePath: 'developer-tools/dashboard',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
       },
     ],
     [
@@ -170,7 +170,7 @@ const config = {
         routeBasePath: 'wallet',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -193,7 +193,7 @@ const config = {
         routeBasePath: 'sdk',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
-        breadcrumbs: true,
+        breadcrumbs: false,
       },
     ],
     './src/plugins/plugin-json-rpc.ts',

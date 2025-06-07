@@ -1,0 +1,34 @@
+.productBanner {
+  background-color: var(--ifm-navbar-background-color);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 9;
+}
+
+.productBannerContent {
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-navbar-color);
+  padding: 0.6rem 2.4rem;
+  position: relative;
+  text-align: left;
+}
+
+.productName {
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.productDescription {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+/* Hide in mobile view */
+@media (max-width: 768px) {
+  .productBanner {
+    display: none;
+  }
+}

@@ -5,7 +5,7 @@ const sidebar = {
   sdkSidebar: [
     {
       type: 'doc',
-      label: 'MetaMask SDK introduction',
+      label: 'Introduction',
       id: "index",
     },
     {

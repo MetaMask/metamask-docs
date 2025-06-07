@@ -1,5 +1,6 @@
 ---
 slug: /
+title: SDK introduction
 description: Introduction page for MetaMask SDK documentation.
 keywords: [connect, MetaMask, SDK, integrate, dapp]
 ---

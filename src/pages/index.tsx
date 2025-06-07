@@ -21,8 +21,8 @@ export default function Home(): JSX.Element {
       />
       <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart wallets, or scaling with powerful infrastructure—choose a path below to get started." />
       <CardSection
-        title="Connect to MetaMask Extension or Mobile"
-        description="Integrate your dapp with the MetaMask browser extension or MetaMask Mobile. Ideal for users who want full control over their keys and transactions."
+        title="Connect to MetaMask Extension and Mobile"
+        description="Connect your dapp to the MetaMask browser extension and MetaMask Mobile. Ideal for users who want full control over their keys and transactions."
         colorPalette="purple"
         cards={[
           {
@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
           {
             title: 'Wallet API',
             description:
-              "Use the Wallet API to directly connect your dapp to the MetaMask browser extension, and interact with your users' accounts.",
+              "Use the Wallet API to directly integrate your dapp with the MetaMask browser extension, and interact with your users' accounts.",
             href: '/wallet',
           },
         ]}

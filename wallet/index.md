@@ -1,5 +1,6 @@
 ---
 slug: /
+title: Wallet API introduction
 description: Introduction page for the Wallet API documentation.
 keywords: [extension, api]
 ---
