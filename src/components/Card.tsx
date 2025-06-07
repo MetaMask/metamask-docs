@@ -21,7 +21,7 @@ export default function Card({ title, href, description, theme }: CardItem) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <li className={clsx(styles['item'], isHovered && styles['active'])}>
+    <div className={clsx(styles['item'], isHovered && styles['active'])}>
       <CutOffCorners size="s">
         <div
           className={styles['holder']}
@@ -68,6 +68,6 @@ export default function Card({ title, href, description, theme }: CardItem) {
           </Link>
         </div>
       </CutOffCorners>
-    </li>
+    </div>
   )
 }

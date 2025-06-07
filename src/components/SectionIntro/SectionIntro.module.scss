@@ -1,0 +1,50 @@
+.wrapper {
+  position: relative;
+  padding: 2rem 0 0;
+  overflow: hidden;
+
+  @include bp(tablet) {
+    padding-top: 3rem;
+  }
+
+  @include bp(desktop) {
+    padding: 4rem 0 0;
+  }
+}
+
+.grid-wrapper {
+  @include bp('tablet') {
+    @include grid;
+  }
+}
+
+.grid-col-center {
+  position: relative;
+
+  @include bp('tablet') {
+    @include grid-column-span(8);
+  }
+
+  @include bp('desktop') {
+    @include grid-column-span(14);
+    @include grid-column-start(2);
+  }
+}
+
+.header {
+  margin-bottom: 1rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-heading);
+  }
+
+  p {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0.5rem 0 0;
+    color: var(--color-text-paragraph);
+  }
+}

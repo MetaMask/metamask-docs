@@ -9,7 +9,7 @@ It demonstrates the basics of connecting to MetaMask: detecting the MetaMask pro
 
 :::caution Learning tutorial
 This tutorial is for educational purposes and connects to MetaMask using the legacy provider object, `window.ethereum`, for the sake of simplicity.
-For deployment in a production environment, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect.md) instead.
+For deployment in a production environment, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect-extension.md) instead.
 
 [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) introduces an alternative wallet detection mechanism to the `window.ethereum` provider, and enables dapps to support [wallet interoperability](../concepts/wallet-interoperability.md).
 
@@ -86,7 +86,7 @@ Update `index.html` to include the script:
 
 :::caution
 The `@metamask/detect-provider` module is deprecated, and is only used here for educational purposes.
-In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect.md).
+In production environments, we recommend [connecting to MetaMask using EIP-6963](../how-to/connect-extension.md).
 :::
 
 Install the `@metamask/detect-provider` module in your project directory:

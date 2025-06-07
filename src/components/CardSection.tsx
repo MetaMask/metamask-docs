@@ -1,17 +1,23 @@
 import clsx from 'clsx'
 import { CSSProperties, JSX, useState, useEffect } from 'react'
 import { useColorMode } from '@docusaurus/theme-common'
-import Heading from '@theme/Heading'
 import Card, { CardItem } from '@site/src/components/Card'
 
 import styles from './CardSection.module.scss'
 
 type CardSectionProps = {
+  title?: string
+  description?: string
   cards: CardItem[]
-  colorPalette: string
+  colorPalette?: string
 }
 
-export default function CardSection({ cards, colorPalette }: CardSectionProps): JSX.Element {
+export default function CardSection({
+  title,
+  description,
+  cards,
+  colorPalette,
+}: CardSectionProps): JSX.Element {
   const { colorMode } = useColorMode()
   const [theme, setTheme] = useState('')
 
@@ -20,12 +26,12 @@ export default function CardSection({ cards, colorPalette }: CardSectionProps): 
   }, [colorMode])
 
   return (
-    <section className={styles['wrapper']}>
+    <section className={styles.wrapper}>
       <div className="container">
         <div className={styles['grid-wrapper']}>
           <div className={styles['grid-col-center']}>
-            <ul
-              className={styles['grid']}
+            <div 
+              className={styles['section-grid']}
               style={
                 colorPalette
                   ? ({
@@ -34,17 +40,30 @@ export default function CardSection({ cards, colorPalette }: CardSectionProps): 
                   : {}
               }
             >
-              {cards?.length > 0 &&
-                cards.map(({ title, description, href }: CardItem, cardIndex: number) => (
-                  <Card
-                    key={cardIndex}
-                    title={title}
-                    description={description}
-                    href={href}
-                    theme={theme}
-                  />
+              {/* Title and Description Column */}
+              {(title || description) && (
+                <div className={styles['content-column']}>
+                  <div className={styles.header}>
+                    {title && <h2>{title}</h2>}
+                    {description && <p>{description}</p>}
+                  </div>
+                </div>
+              )}
+
+              {/* Cards Columns */}
+              <div className={styles['cards-wrapper']}>
+                {cards.map(({ title, description, href }, index) => (
+                  <div key={index} className={styles['card-column']}>
+                    <Card
+                      title={title}
+                      description={description}
+                      href={href}
+                      theme={theme}
+                    />
+                  </div>
                 ))}
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

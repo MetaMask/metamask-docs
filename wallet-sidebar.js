@@ -17,8 +17,8 @@ const sidebar = {
       items: [
         {
           type: "doc",
-          label: "Connect to MetaMask",
-          id: "how-to/connect"
+          label: "Connect to the extension",
+          id: "how-to/connect-extension"
         },
         {
           type: "doc",

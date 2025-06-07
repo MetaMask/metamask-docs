@@ -15,6 +15,9 @@ const codeTheme = themes.dracula
 const remarkCodesandbox = require('remark-codesandbox')
 const isProd = process.env.NODE_ENV === 'production'
 const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
+const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
+const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
+const extendDropdown = fs.readFileSync("./src/components/NavDropdown/ExtendScale.html", "utf-8");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -113,6 +116,33 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'gator',
+        path: 'delegation-toolkit',
+        routeBasePath: 'delegation-toolkit',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./gator-sidebar.js'),
+        breadcrumbs: false,
+        sidebarCollapsed: false,
+        includeCurrentVersion: true,
+        // Set to the latest release.
+        lastVersion: "0.11.0",
+        versions: {
+          // Defaults to the ./docs folder.
+          // Using "development" instead of "next" as path.
+          current: {
+            label: "development",
+            path: "development",
+          },
+          // The latest release.
+          "0.11.0": {
+            label: "latest (0.11.0)",
+          },
+        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'services',
         path: 'services',
         routeBasePath: 'services',
@@ -195,20 +225,34 @@ const config = {
         },
         items: [
           {
-            to: 'sdk',
-            label: 'SDK',
+            type: 'dropdown',
+            label: 'Connect to MetaMask',
+            items: [
+              {
+                type: "html",
+                value: connectDropdown,
+              },
+            ],
           },
           {
-            to: 'wallet',
-            label: 'Wallet API',
+            type: 'dropdown',
+            label: 'Embed MetaMask',
+            items: [
+              {
+                type: "html",
+                value: embedDropdown,
+              },
+            ],
           },
           {
-            to: 'snaps',
-            label: 'Snaps',
-          },
-          {
-            to: 'services',
-            label: 'Services',
+            type: 'dropdown',
+            label: 'Extend and scale',
+            items: [
+              {
+                type: "html",
+                value: extendDropdown,
+              },
+            ],
           },
           {
             type: 'dropdown',
@@ -224,11 +268,6 @@ const config = {
           {
             to: 'whats-new',
             label: "What's new?",
-            position: 'right',
-          },
-          {
-            href: 'https://support.metamask.io/',
-            label: 'User support',
             position: 'right',
           },
           {
@@ -266,8 +305,12 @@ const config = {
                 to: '/sdk',
               },
               {
-                label: 'Wallet',
+                label: 'Wallet API',
                 to: '/wallet',
+              },
+              {
+                label: 'Delegation Toolkit',
+                to: '/delegation-toolkit',
               },
               {
                 label: 'Snaps',
@@ -311,6 +354,14 @@ const config = {
           {
             title: 'Community',
             items: [
+              {
+                label: 'Faucet',
+                to: '/developer-tools/faucet',
+              },
+              {
+                label: 'MetaMask Developer',
+                href: 'https://developer.metamask.io/login',
+              },
               {
                 label: 'Consensys Discord',
                 href: 'https://discord.gg/consensys',

@@ -43,7 +43,7 @@ simply prepending `var variableName;` to your Snap bundle may solve the problem.
 `yarn mm-snap build` automatically handles that one.)
 
 :::caution
-Run [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) if you modified
+Run [`yarn mm-snap manifest --fix`](../../reference/cli.md#m-manifest) if you modified
 your Snap bundle after building.
 Otherwise, your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::

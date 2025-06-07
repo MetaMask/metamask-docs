@@ -15,6 +15,7 @@ export interface CardItem {
   description?: ReactNode
   href?: string
   flaskOnly?: boolean
+  buttonIcon?: 'arrow-right' | 'external-arrow'
 }
 
 interface CardListItemProps {
@@ -22,7 +23,7 @@ interface CardListItemProps {
 }
 
 export default function CardListItem({ item }: CardListItemProps) {
-  const { title, description, href, flaskOnly } = item
+  const { title, description, href, flaskOnly, buttonIcon = 'arrow-right' } = item
   const [isHovered, setIsHovered] = useState(false)
   const { colorMode } = useColorMode()
   const [theme, setTheme] = useState('')
@@ -66,7 +67,7 @@ export default function CardListItem({ item }: CardListItemProps) {
                 as="button"
                 label={false}
                 type={theme === 'dark' ? 'secondary' : 'primary'}
-                icon="arrow-right"
+                icon={buttonIcon}
                 style={
                   theme === 'dark'
                     ? {

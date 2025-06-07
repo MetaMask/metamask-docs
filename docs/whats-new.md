@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## June 2025
+
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+
 ## May 2025
 
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
@@ -18,6 +23,8 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
 - Documented [MetaMask SDK + Web3Auth SDK integration](/sdk/quickstart/javascript-web3auth).
   ([#2029](https://github.com/MetaMask/metamask-docs/pull/2029))
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
 - Documented [how to use the Snaps sandbox](/snaps/how-to/test-a-snap/#test-in-the-sandbox).
   ([#2030](https://github.com/MetaMask/metamask-docs/pull/2030))
 - Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.

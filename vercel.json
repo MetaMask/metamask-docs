@@ -47,6 +47,26 @@
       "destination": "/wallet/"
     },
     {
+      "source": "/wallet/how-to/connect/",
+      "destination": "/sdk/"
+    },
+    {
+      "source": "/sdk/quickstart/:path*",
+      "destination": "/sdk/connect/:path*"
+    },
+    {
+      "source": "/sdk/introduction/supported-platforms/",
+      "destination": "/sdk/reference/supported-platforms/"
+    },
+    {
+      "source": "/sdk/introduction/llm-prompt/",
+      "destination": "/sdk/reference/llm-prompt/"
+    },
+    {
+      "source": "/sdk/introduction/supported-networks/",
+      "destination": "/sdk/"
+    },
+    {
       "source": "/wallet/how-to/use-3rd-party-integrations/",
       "destination": "/sdk/"
     },
