@@ -5,7 +5,7 @@ description: Set rate limits to control access to the API key.
 # Rate limits
 
 Set credit rate limits to control access to the API key and to limit costs in case of a leaked API key.
-Set rate limiting in the API key's **Settings** tab **Key Credit Limits** section.
+Set rate limiting in the API key's **Settings** tab, under the **Key Credit Limits** section.
 
 <div class="left-align-container">
   <div class="img-large">
@@ -22,7 +22,7 @@ Set rate limiting in the API key's **Settings** tab **Key Credit Limits** sectio
 
     The value `0` means default limits are applied.
 
-- **Per day total credits** restricts total daily credit usage for the API key. Set a limit on number of
+- **Per day total credits** restricts the total daily credit usage for the API key. Set a limit on number of
     credits per day in integers, for example, 20000. The value `0` means default limits are applied.
 
     When the number of used credits reaches this limit, all requests will be rejected until the next day (00:00 UTC).
