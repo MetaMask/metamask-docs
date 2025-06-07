@@ -2,7 +2,7 @@
 description: Interact with users' Starknet accounts in MetaMask.
 ---
 
-# Use Starknet
+# Starknet
 
 [Starknet](https://www.starknet.io/) is a non-EVM Layer 2 network.
 You can interact with users' Starknet accounts in MetaMask by connecting to the

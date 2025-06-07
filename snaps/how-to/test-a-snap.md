@@ -72,7 +72,7 @@ You can then run the `jest` command as usual.
 :::note
 `@metamask/snaps-jest` assumes the Snap is built in the directory you run Jest from.
 If you use a different directory, you can specify the path using the
-[`server.root`](../reference/cli/options.md#serverroot) option, or by running your own HTTP server.
+[`server.root`](../reference/config-options.md#serverroot) option, or by running your own HTTP server.
 It's currently not possible to use `@metamask/snaps-jest` with a Snap that is not built.
 :::
 

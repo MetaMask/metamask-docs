@@ -16,6 +16,11 @@ With the SDK, you can:
 
 [Get started with JavaScript and Wagmi.](quickstart/javascript-wagmi.md)
 
+:::tip Build embedded wallet experiences that work seamlessly with MetaMask
+Introducing our latest [Embedded Wallets SDK](https://web3auth.io/docs) (previously Web3Auth), you can now onboard users
+instantly and design seamless onchain experiences with social logins, passkeys and more.
+:::
+
 ## Why use the SDK?
 
 The benefits of using MetaMask SDK include the following:
@@ -34,4 +39,5 @@ You can get started quickly with the following dapp platforms:
 - [JavaScript + Wagmi (recommended)](quickstart/javascript-wagmi.md)
 - [JavaScript](quickstart/javascript.md)
 - [Dynamic SDK integration](quickstart/javascript-dynamic.md)
+- [Web3Auth SDK integration](quickstart/javascript-web3auth.md)
 - [React Native](quickstart/react-native.md)

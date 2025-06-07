@@ -19,7 +19,7 @@ You can set up the SDKs in the following ways:
 
 Features include:
 
-- **Dual SDK integration** - Seamlessly combine MetaMask and Dynamic SDKs.
+- **MetaMask SDK built into Dynamic** - Use MetaMask SDK features directly within the Dynamic SDK.
 - **Wallet connection** - Connect to MetaMask wallet with enhanced features.
 - **Mobile experience** - Optimized for both desktop and mobile users.
 - **TypeScript support** - Full type safety and modern development experience.
@@ -43,10 +43,11 @@ The project you will set up has the following structure:
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) version 19 or later
-- [pnpm](https://pnpm.io/installation)
-- [MetaMask](https://metamask.io/) installed in your browser or on mobile
-- A [Dynamic Environment ID](https://app.dynamic.xyz/)
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed.
+  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+- A [Dynamic Environment ID](https://app.dynamic.xyz/).
 
 ## Set up using the CLI
 
@@ -60,7 +61,8 @@ The project you will set up has the following structure:
 
     ```bash
     ? Please select the template you want to use: 
-      Next.js Quickstart (MetaMask SDK Example) (Recommended) 
+      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
+      MetaMask <-> Web3Auth Quickstart
     ❯ MetaMask <-> Dynamic Quickstart
     ```
 
@@ -161,33 +163,15 @@ Set up your providers in `app/providers.tsx`:
 "use client";
 
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
-import { EthereumWalletConnectors, IEthereum } from "@dynamic-labs/ethereum";
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
-import { MetaMaskSDK } from "@metamask/sdk";
 import { WagmiProvider } from "wagmi";
 import { config } from "@/wagmi.config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
 
   const queryClient = new QueryClient();
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const MMSDK = new MetaMaskSDK({
-      dappMetadata: {
-        name: "MetaMask Dynamic Integration",
-        url: window.location.href,
-      },
-    });
-
-    const ethereum = MMSDK.getProvider();
-    if (ethereum) {
-      window.ethereum = ethereum as unknown as IEthereum;
-    }
-  }, []);
 
   return (
     <DynamicContextProvider
