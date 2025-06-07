@@ -16,4 +16,4 @@ Input the **JWT Public key name** and the key and select **Add**.
   </div>
 </div>
 
-For detailed instructions on how to secure Infura requests with JWTs, see the [JWT learning page](../../../../../services/how-to/json-web-token-jwt).
+For detailed instructions on how to secure Infura requests with JWTs, see the [JWT learning page](../../../developer-tools/dashboard/how-to/secure-an-api/use-jwts.md).
