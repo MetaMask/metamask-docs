@@ -776,11 +776,11 @@ ol {
 
 @include bp-max('tablet') {
   .nav-dropdown-menu ul {
-    gap: 16px; // More spacing between items on mobile
+    gap: 15px;
   }
 
   .nav-dropdown-menu a {
-    width: 100%; // Makes each box take full width of dropdown
+    width: 80%;
   }
 }
 
