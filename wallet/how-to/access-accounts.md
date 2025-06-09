@@ -31,7 +31,7 @@ You can also access users' accounts on some [non-EVM networks](/wallet/how-to/us
 
 :::caution Important
 This section describes how to create a single connect button.
-When connecting to multiple wallets, use the [Connect to MetaMask](connect.md) guide to create
+When connecting to multiple wallets, use the [Connect to the MetaMask extension](connect-extension.md) guide to create
 multiple connect buttons.
 :::
 
