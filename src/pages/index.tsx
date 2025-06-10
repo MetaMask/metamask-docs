@@ -11,26 +11,31 @@ export default function Home(): JSX.Element {
       <Hero
         title={siteConfig.title}
         description={"Build with the world's leading self-custodial crypto wallet."}
+        button={{
+          label: 'Get Started',
+          href: '/sdk',
+          icon: 'arrow-right',
+        }}
       />
       <CardSection
         colorPalette="purple"
         cards={[
           {
-            title: 'SDK',
+            title: 'MetaMask SDK',
             description:
-              'Use MetaMask SDK to build onchain dapps. Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile.',
+              'Use MetaMask SDK to provide your users a fast, reliable, and seamless connection to the MetaMask extension and MetaMask Mobile.',
             href: '/sdk',
             theme: '',
           },
           {
             title: 'Wallet API',
             description:
-              "Use the Wallet API to integrate your dapp with MetaMask. Connect to the MetaMask browser extension and interact with your users' accounts.",
+              "Use the Wallet API to directly integrate your dapp with the MetaMask browser extension, and interact with your users' accounts.",
             href: '/wallet',
             theme: '',
           },
                     {
-            title: 'Embedded Wallets',
+            title: 'Embedded Wallets SDK',
             description:
               'Use the Embedded Wallets SDK (Web3Auth) to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
             href: 'https://web3auth.io/docs',
