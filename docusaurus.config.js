@@ -113,6 +113,33 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'gator',
+        path: 'delegation-toolkit',
+        routeBasePath: 'delegation-toolkit',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./gator-sidebar.js'),
+        breadcrumbs: false,
+        sidebarCollapsed: false,
+        includeCurrentVersion: true,
+        // Set to the latest release.
+        lastVersion: "0.11.0",
+        versions: {
+          // Defaults to the ./docs folder.
+          // Using "development" instead of "next" as path.
+          current: {
+            label: "development",
+            path: "development",
+          },
+          // The latest release.
+          "0.11.0": {
+            label: "latest (0.11.0)",
+          },
+        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'services',
         path: 'services',
         routeBasePath: 'services',
@@ -184,7 +211,19 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'og:image', content: '/img/metamaskog.jpeg' }],
+      metadata: [
+        { 
+          name: 'og:image', 
+          content: '/img/metamaskog.jpeg' 
+        },
+        {
+          name: "keywords",
+          content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
+        },
+      ],
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         title: ' │ ‎ Documentation',
         logo: {
@@ -201,6 +240,10 @@ const config = {
           {
             to: 'wallet',
             label: 'Wallet API',
+          },
+          {
+            to: 'delegation-toolkit',
+            label: 'Delegation Toolkit',
           },
           {
             to: 'snaps',
@@ -224,11 +267,6 @@ const config = {
           {
             to: 'whats-new',
             label: "What's new?",
-            position: 'right',
-          },
-          {
-            href: 'https://support.metamask.io/',
-            label: 'User support',
             position: 'right',
           },
           {
@@ -266,8 +304,12 @@ const config = {
                 to: '/sdk',
               },
               {
-                label: 'Wallet',
+                label: 'Wallet API',
                 to: '/wallet',
+              },
+              {
+                label: 'Delegation Toolkit',
+                to: '/delegation-toolkit',
               },
               {
                 label: 'Snaps',
@@ -311,6 +353,14 @@ const config = {
           {
             title: 'Community',
             items: [
+              {
+                label: 'Faucet',
+                to: '/developer-tools/faucet',
+              },
+              {
+                label: 'MetaMask Developer',
+                href: 'https://developer.metamask.io/login',
+              },
               {
                 label: 'Consensys Discord',
                 href: 'https://discord.gg/consensys',
