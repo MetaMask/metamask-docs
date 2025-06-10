@@ -211,7 +211,19 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'og:image', content: '/img/metamaskog.jpeg' }],
+      metadata: [
+        { 
+          name: 'og:image', 
+          content: '/img/metamaskog.jpeg' 
+        },
+        {
+          name: "keywords",
+          content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
+        },
+      ],
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         title: ' │ ‎ Documentation',
         logo: {

@@ -12,7 +12,7 @@ export default function SidebarVersionDropdown({ path = 'delegation-toolkit' }: 
   const [hoveredVersion, setHoveredVersion] = useState<string | null>(null); // State to track hovered item
 
   const latestVersion = versions[0];
-  const allVersions = [latestVersion, 'current', ...versions.filter(v => v !== latestVersion)];
+  const allVersions = ['current', latestVersion, ...versions.filter(v => v !== latestVersion)];
 
   const getVersionLabel = (version: string) => {
     if (version === 'current') return 'development';

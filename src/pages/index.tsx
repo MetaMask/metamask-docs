@@ -34,13 +34,6 @@ export default function Home(): JSX.Element {
             href: '/wallet',
             theme: '',
           },
-                    {
-            title: 'Embedded Wallets SDK',
-            description:
-              'Use the Embedded Wallets SDK (Web3Auth) to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
-            href: 'https://web3auth.io/docs',
-            theme: '',
-          },
           {
             title: 'Delegation Toolkit',
             description:
@@ -48,7 +41,7 @@ export default function Home(): JSX.Element {
             href: '/delegation-toolkit',
           },
           {
-            title: 'Embedded Wallets',
+            title: 'Embedded Wallets SDK',
             description:
               'Use the Embedded Wallets SDK (Web3Auth) to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
             href: 'https://web3auth.io/docs',
