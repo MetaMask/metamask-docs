@@ -817,11 +817,6 @@ div[class^='announcementBar_'] {
   }
 }
 
-/* Fixes bug: Removes sidebar logo appearing on Wallet RPC reference pages */
-.sidebar_mhZE .sidebarLogo_F_0z {
-  display: none !important;
-}
-
 /* Removes "What's new?" on small viewports to make room for left navbar labels */
 @media (max-width: 1196px) {
   .navbar__items--right .navbar__item {
@@ -832,4 +827,17 @@ div[class^='announcementBar_'] {
   [class*='mainContainer'] {
     padding: 2rem 0 0 2rem;
   }
+}
+
+/* Fixes bug: Removes sidebar logo appearing on Wallet RPC reference pages */
+.sidebar_mhZE .sidebarLogo_F_0z {
+  display: none !important;
+}
+
+.sidebar_mhZE {
+  padding-top: var(--ifm-navbar-height) !important;
+}
+
+.pageWrapper .sidebar_mhZE {
+  padding-top: 0 !important;
 }
