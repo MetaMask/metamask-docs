@@ -204,6 +204,13 @@ export const API_COSTS = {
     'newHeads': 50,
     'newPendingTransaction': 200,
   },
+  evm_filter: {
+    'eth_getFilterChanges': 140,
+    'eth_getFilterLogs': 255,
+    'eth_newBlockFilter': 80,
+    'eth_newFilter': 80,
+    'eth_uninstallFilter': 80,
+  },
   linea: {
     'linea_estimateGas': 100,
   },

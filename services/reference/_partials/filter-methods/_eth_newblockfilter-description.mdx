@@ -1,7 +1,7 @@
 import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 
 Creates a filter in the node, to notify when a new block arrives. To check if the state has
-changed, call [`eth_getFilterChanges`](../eth_getfilterchanges). <CreditCost network="evm" method="eth_newBlockFilter" />
+changed, call [`eth_getFilterChanges`](../eth_getfilterchanges). <CreditCost network="evm_filter" method="eth_newBlockFilter" />
 
 :::warning Expires after 15 minutes of inactivity
 Filters that are not polled using [`eth_getFilterChanges`](../eth_getfilterchanges) automatically
