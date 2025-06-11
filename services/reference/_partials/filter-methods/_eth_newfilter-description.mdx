@@ -1,4 +1,7 @@
-Creates a filter object based on the given filter options, to notify when the state changes (logs). To check if the state has changed, call [`eth_getFilterChanges`](../eth_getfilterchanges).
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+Creates a filter object based on the given filter options, to notify when the state changes (logs).
+To check if the state has changed, call [`eth_getFilterChanges`](../eth_getfilterchanges). <CreditCost network="evm" method="eth_newFilter" />
 
 :::warning Expires after 15 minutes of inactivity
 Filters that are not polled using [`eth_getFilterChanges`](../eth_getfilterchanges) automatically
