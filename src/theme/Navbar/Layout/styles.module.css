@@ -1,0 +1,15 @@
+.navbarContainer {
+  min-height: var(--ifm-navbar-height);
+  position: relative;
+}
+
+.navbar {
+  position: relative;
+  z-index: var(--ifm-z-index-fixed);
+  width: 100%;
+}
+
+.navbarHidden {
+  visibility: hidden;
+  pointer-events: none;
+}

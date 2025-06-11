@@ -228,13 +228,13 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: ' │ ‎ Documentation',
         logo: {
           alt: 'MetaMask logo',
           src: 'img/metamask-logo.svg',
           srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
+        hideOnScroll: true,
         items: [
           {
             type: 'dropdown',

@@ -1,4 +1,4 @@
-import React, {type ReactNode} from 'react';
+import React, {type ReactNode, useEffect, useState} from 'react';
 import {useLocation} from '@docusaurus/router';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import clsx from 'clsx';
@@ -49,13 +49,34 @@ export default function ProductBanner(): ReactNode | null {
   const location = useLocation();
   const productConfig = getProductConfig(location.pathname);
   const {navbar} = useThemeConfig();
+  const [isNavbarPresent, setIsNavbarPresent] = useState(true);
+
+  useEffect(() => {
+    if (!navbar.hideOnScroll) return;
+
+    const checkNavbarPresence = () => {
+      const navbarElement = document.querySelector('.navbar');
+      setIsNavbarPresent(!!navbarElement);
+    };
+
+    checkNavbarPresence();
+    const intervalId = setInterval(checkNavbarPresence, 100);
+
+    return () => clearInterval(intervalId);
+  }, [navbar.hideOnScroll]);
+
 
   if (!productConfig) {
     return null;
   }
 
   return (
-    <div className={clsx(styles.productBanner)}>
+    <div 
+      className={clsx(
+        styles.productBanner,
+        !isNavbarPresent && styles.productBannerNoNavbar
+      )}
+    >
       <div className={styles.productBannerContent}>
         <h2 className={styles.productName}>{productConfig.name}</h2>
         <p className={styles.productDescription}>{productConfig.description}</p>

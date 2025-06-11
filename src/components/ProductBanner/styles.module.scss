@@ -3,8 +3,13 @@
   padding: 1rem 0;
   border-bottom: 1px solid var(--ifm-toc-border-color);
   position: sticky;
-  top: var(--ifm-navbar-height);
+  top: 0;
   z-index: 9;
+}
+
+.productBannerNoNavbar {
+  box-shadow: var(--ifm-navbar-shadow);
+  z-index: 10;
 }
 
 .productBannerContent {
