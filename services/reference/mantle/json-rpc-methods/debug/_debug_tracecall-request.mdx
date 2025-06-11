@@ -5,7 +5,7 @@ import TabItem from "@theme/TabItem";
   <TabItem value="curl" label="curl" default>
 
 ```bash
-curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+curl https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
@@ -15,7 +15,7 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
   <TabItem value="WSS" label="WSS" default>
 
 ```bash
-wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
+wscat -c wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "debug_traceCall", "params": [{"to": "0x6b175474e89094c44da98b954eedeac495271d0f", "data": "0x70a082310000000000000000000000006E0d01A76C3Cf4288372a29124A26D4353EE51BE"}, "latest", {"tracer": "callTracer"}], "id": 1}'
 ```
 
   </TabItem>
