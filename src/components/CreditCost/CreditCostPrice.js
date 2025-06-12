@@ -12,7 +12,7 @@ const CreditCost = ({ network, method }) => {
   return (
     <span>
       This method consumes{' '}
-      <a href="/services/get-started/pricing/" target="_blank" rel="noopener noreferrer">
+      <a href="/services/get-started/pricing/" rel="noopener noreferrer">
         {cost} credits
       </a>{' '}
       from your daily balance.
