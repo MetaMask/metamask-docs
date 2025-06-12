@@ -5,8 +5,8 @@ sidebar_position: 1
 
 # About Snaps
 
-MetaMask Snaps is an open source system that allows anyone to safely extend the functionality of
-MetaMask, creating new web3 end user experiences.
+MetaMask Snaps is an open source system that allows anyone to safely create a mini app that runs inside the MetaMask extension,
+enabling new web3 end user experiences.
 For example, a Snap can add support for different blockchain networks, add custom account types, or
 provide additional functionality using its own APIs.
 This allows MetaMask to be used with a far more diverse set of protocols, dapps, and services.

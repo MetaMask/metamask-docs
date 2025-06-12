@@ -7,7 +7,7 @@ sidebar_position: 1
 
 import CardList from "@site/src/components/CardList"
 
-# Embed new web3 experiences using the Delegation Toolkit
+# Embed smart accounts using the Delegation Toolkit
 
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for integrating
 embedded smart contract wallets, known as [MetaMask smart accounts](concepts/smart-accounts.md),

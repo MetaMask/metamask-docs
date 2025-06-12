@@ -21,21 +21,21 @@ export default function Home(): JSX.Element {
       />
       <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart wallets, or scaling with powerful infrastructure—choose a path below to get started." />
       <CardSection
-        title="Connect to MetaMask Extension and Mobile"
-        description="Connect your dapp to the MetaMask browser extension and MetaMask Mobile. Ideal for users who want full control over their keys and transactions."
+        title="Connect to MetaMask extension and mobile"
+        description="Connect your dapp to the MetaMask browser extension and MetaMask mobile app. Ideal for users who want full control over their keys and transactions."
         colorPalette="purple"
         cards={[
           {
             title: 'MetaMask SDK',
             description:
-              'Use MetaMask SDK to provide your users a fast, reliable, and seamless connection to the MetaMask extension and MetaMask Mobile.',
+              'Provide your users a fast, reliable, and seamless connection to MetaMask extension and mobile.',
             href: '/sdk',
             buttonIcon: "arrow-right",
           },
           {
             title: 'Wallet API',
             description:
-              "Use the Wallet API to directly integrate your dapp with the MetaMask browser extension, and interact with your users' accounts.",
+              "Directly integrate your dapp with the MetaMask extension, and interact with your users' accounts.",
             href: '/wallet',
             buttonIcon: "arrow-right",
           },
@@ -50,14 +50,14 @@ export default function Home(): JSX.Element {
           {
             title: 'Delegation Toolkit',
             description:
-              'Use the Delegation Toolkit to integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
+              'Integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
             href: '/delegation-toolkit',
             buttonIcon: "arrow-right",
           },
           {
             title: 'Embedded Wallets SDK',
             description:
-              'Use the Embedded Wallets SDK to onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
+              'Onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
             href: 'https://web3auth.io/docs/',
             buttonIcon: "external-arrow",
           },
@@ -72,14 +72,14 @@ export default function Home(): JSX.Element {
           {
             title: 'Snaps',
             description:
-              'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
+              'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
             href: '/snaps',
             buttonIcon: "arrow-right",
           },
           {
             title: 'Services',
             description:
-              'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+              'Use high performance APIs provided by MetaMask and Infura to build and scale your dapp or Snap.',
             href: '/services',
             buttonIcon: "arrow-right",
           },

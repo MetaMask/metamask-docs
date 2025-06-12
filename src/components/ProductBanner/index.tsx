@@ -12,27 +12,27 @@ interface ProductConfig {
 const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
   '/sdk/': {
     name: 'MetaMask SDK documentation',
-    description: 'Seamlessly connect to the MetaMask extension and MetaMask Mobile using the SDK.',
+    description: 'Seamlessly connect to the MetaMask extension and mobile app.',
   },
   '/wallet/': {
     name: 'Wallet API documentation',
-    description: 'Directly integrate your dapp with the MetaMask extension using the Wallet API.',
+    description: 'Directly integrate your dapp with the MetaMask extension.',
   },
   '/delegation-toolkit/': {
-    name: 'MetaMask Delegation Toolkit documentation',
-    description: 'Embed MetaMask smart accounts with new web3 experiences into your dapp.',
+    name: 'Delegation Toolkit documentation',
+    description: 'Embed MetaMask smart accounts with new capabilities into your dapp.',
   },
   '/snaps/': {
     name: 'Snaps documentation',
-    description: 'Create a custom Snap to extend the functionality of MetaMask.',
+    description: 'Create a custom mini app that runs inside the MetaMask extension.',
   },
   '/services/': {
     name: 'Services documentation',
-    description: 'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+    description: 'Use high performance APIs provided by Infura to scale your dapp or Snap.',
   },
   '/developer-tools/dashboard/': {
     name: 'Developer dashboard documentation',
-    description: 'Manage Infura API keys, monitor usage, and access account details in the developer dashboard.',
+    description: 'Manage Infura API keys, monitor usage, and access account details.',
   },
 };
 

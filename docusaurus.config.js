@@ -346,7 +346,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-docs',
               },
               {
-                label: 'MetaMask wallet GitHub',
+                label: 'MetaMask extension GitHub',
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
@@ -354,7 +354,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'MetaMask Mobile GitHub',
+                label: 'MetaMask mobile GitHub',
                 href: 'https://github.com/MetaMask/metamask-mobile',
               },
               {
