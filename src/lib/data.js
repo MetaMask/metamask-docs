@@ -213,6 +213,7 @@ export const API_COSTS = {
   },
   linea: {
     'linea_estimateGas': 100,
+    'linea_getTransactionExclusionStatusV1': 160,
   },
   polygon: {
     'bor_getAuthor': 80,
