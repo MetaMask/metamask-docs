@@ -11,7 +11,7 @@ const CreditCost = ({ network, method }) => {
 
   return (
     <span>
-      This method consumes{' '}
+      This method uses{' '}
       <a href="/services/get-started/pricing/" rel="noopener noreferrer">
         {cost} credits
       </a>{' '}
