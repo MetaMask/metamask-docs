@@ -6,9 +6,9 @@ description: Supported dapp platforms for MetaMask SDK.
 
 With MetaMask SDK, you can connect your dapp to MetaMask in the following ways:
 
-- **Desktop web dapps** - Automatically connect to the MetaMask wallet extension, or connect to MetaMask Mobile using a QR code.
+- **Desktop web dapps** - Automatically connect to the MetaMask extension, or connect to the MetaMask mobile app using a QR code.
 
-- **Mobile dapps** - The SDK generates a deeplink that takes users directly to MetaMask Mobile.
+- **Mobile dapps** - The SDK generates a deeplink that takes users directly to the MetaMask mobile app.
 
 The following table expands on the SDK's connection methods:
 
