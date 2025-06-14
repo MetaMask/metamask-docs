@@ -83,6 +83,11 @@ export const BaseInputTemplate = ({
               type={isNumber ? 'number' : (schema.type as string)}
               pattern={schema.pattern}
               onChange={onInputChange}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                }
+              }}
               onFocus={() => {
                 setIsFocused(true)
               }}
