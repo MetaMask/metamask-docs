@@ -2,12 +2,13 @@
 description: Get the base fee percentile for a chain.
 ---
 
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Get the base fee percentile
 
-Returns the base fee percentile (50th percentile) of the specified blockchain network.
+Returns the base fee percentile (50th percentile) of the specified blockchain network. <CreditCost network="gasApi" method="baseFeePercentile" />
 
 For example, if the API returns a value of `20` Gwei, it means that 50% of the historical base fees
 are less than or equal to `20` Gwei.

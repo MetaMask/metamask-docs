@@ -8,9 +8,9 @@ sidebar_label: Debug methods
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug methods on the
 Linea network:
 
-- [`debug_traceBlockByHash`](debug_traceblockbyhash.md)
-- [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
-- [`debug_traceTransaction`](debug_tracetransaction.md)
+- [`debug_traceBlockByHash`](debug_traceblockbyhash.mdx)
+- [`debug_traceBlockByNumber`](debug_traceblockbynumber.mdx)
+- [`debug_traceTransaction`](debug_tracetransaction.mdx)
 
 ## Debug tracing types
 

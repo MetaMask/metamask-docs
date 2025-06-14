@@ -1,6 +1,11 @@
-Creates an [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) access list that you can include in a [transaction](../../concepts/transaction-types.md).
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 
-Use this method to optimize your smart contract interactions. Access lists are a part of Ethereum's EIP-2930, which aims to improve the network's scalability and reduce gas costs by specifying an explicit list of addresses and storage keys that a transaction intends to access.
+Creates an [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) access list that you can include in a
+[transaction](../../concepts/transaction-types.md). <CreditCost network="evm" method="eth_createAccessList" />
+
+Use this method to optimize your smart contract interactions. Access lists are a part of Ethereum's
+EIP-2930, which aims to improve the network's scalability and reduce gas costs by specifying an explicit
+list of addresses and storage keys that a transaction intends to access.
 
 :::tip Optimizing Ethereum Transactions
 
