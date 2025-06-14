@@ -308,21 +308,31 @@
   display: flex;
 }
 .footerButtonsLeft {
-  width: 4.8rem;
+  display: flex;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 0;
 }
 .footerButtonLeft {
   display: flex;
-  width: 1.6rem;
-  height: 2.2rem;
-  padding: 0;
   align-items: center;
-  background: none;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 0.4rem;
+  background: var(--general-gray-light);
+  transition: background-color var(--ifm-transition-fast) ease;
+
+  &:hover {
+    background: var(--general-gray);
+  }
+
+  [data-theme='dark'] & {
+    background: var(--general-gray-dark);
+
+    &:hover {
+      background: var(--general-gray);
+    }
+  }
 }
 .footerButtonRight {
   padding: 0.5rem 1.6rem !important;
