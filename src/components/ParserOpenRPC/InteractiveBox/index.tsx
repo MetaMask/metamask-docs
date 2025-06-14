@@ -28,6 +28,7 @@ import { RemoveButton } from '@site/src/components/ParserOpenRPC/InteractiveBox/
 import { AddButton } from '@site/src/components/ParserOpenRPC/InteractiveBox/buttonTemplates/AddButton'
 import ClearIcon from '@site/static/img/icons/clear-icon.svg'
 import ResetIcon from '@site/static/img/icons/reset-icon.svg'
+import SubmitIcon from '@site/static/img/icons/submit-icon.svg'
 
 interface InteractiveBoxProps {
   params: MethodParam[]
@@ -37,6 +38,7 @@ interface InteractiveBoxProps {
   drawerLabel?: string | null
   closeComplexTypeView?: () => void
   isOpen?: boolean
+  onModalClose?: () => void
 }
 
 type ObjectType = { [key: string]: any }
@@ -90,6 +92,7 @@ export default function InteractiveBox({
   drawerLabel,
   closeComplexTypeView,
   isOpen = false,
+  onModalClose,
 }: InteractiveBoxProps) {
   const [parsedSchema, setParsedSchema] = useState<RJSFSchema>(null)
   const [defaultFormData, setDefaultFormData] = useState<any>({})
@@ -201,6 +204,15 @@ export default function InteractiveBox({
     e.preventDefault()
     if (formRef) {
       formRef?.current?.reset()
+    }
+  }
+  const handleSubmitAndClose = e => {
+    e.preventDefault()
+    onParamChange(currentFormData)
+    if (isComplexTypeView) {
+      closeComplexTypeView()
+    } else {
+      onModalClose()
     }
   }
   const isLightTheme = colorMode === 'light'
@@ -331,6 +343,11 @@ export default function InteractiveBox({
             <Tooltip message="Clear fields">
               <button className={styles.footerButtonLeft} onClick={handleClearForm}>
                 <ClearIcon className={styles.footerButtonIcon} />
+              </button>
+            </Tooltip>
+            <Tooltip message="Submit and close">
+              <button className={styles.footerButtonLeft} onClick={handleSubmitAndClose}>
+                <SubmitIcon className={styles.footerButtonIcon} />
               </button>
             </Tooltip>
           </div>
