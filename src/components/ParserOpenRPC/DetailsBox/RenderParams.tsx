@@ -9,6 +9,28 @@ const getRefSchemaFromComponents = (initRef, components) => {
   return components[ref]
 }
 
+const isPropertyRequired = (propertyName, schema, paramRequired) => {
+  // Check parameter level required
+  if (paramRequired) return true
+
+  // Check schema level required
+  if (Array.isArray(schema.required) && schema.required.includes(propertyName)) return true
+
+  // Check nested object schemas
+  if (schema.properties?.[propertyName]?.type === 'object') {
+    const nestedSchema = schema.properties[propertyName]
+    return Array.isArray(nestedSchema.required) && nestedSchema.required.includes(propertyName)
+  }
+
+  // Check array item schemas
+  if (schema.properties?.[propertyName]?.type === 'array') {
+    const itemSchema = schema.properties[propertyName].items
+    return Array.isArray(itemSchema?.required) && itemSchema.required.includes(propertyName)
+  }
+
+  return false
+}
+
 const renderSchema = (schemaItem, schemas, name) => {
   if (!schemaItem) return <div>Invalid schema</div>
 
@@ -27,7 +49,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         <SchemaProperty
           title={itemName || item.title}
           type="object"
-          required={schemaItem.required || !!item.required}
+          required={isPropertyRequired(itemName, item, schemaItem.required)}
           description={item.description || item.title || ''}
           pattern={item.pattern}
           defaultVal={item.default}
@@ -40,7 +62,7 @@ const renderSchema = (schemaItem, schemas, name) => {
                   {renderSchema(
                     {
                       ...value,
-                      required: requiredFields.includes(key),
+                      required: isPropertyRequired(key, item, requiredFields.includes(key)),
                     },
                     schemas,
                     key
