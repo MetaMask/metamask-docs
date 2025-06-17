@@ -206,13 +206,13 @@ export default function InteractiveBox({
       formRef?.current?.reset()
     }
   }
-  const handleSubmitAndClose = e => {
+  const handleSubmitAndClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     onParamChange(currentFormData)
     if (isComplexTypeView) {
       closeComplexTypeView()
     } else {
-      onModalClose()
+      onModalClose?.()
     }
   }
   const isLightTheme = colorMode === 'light'
