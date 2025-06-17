@@ -18,7 +18,7 @@ The delegator environment serves several key purposes:
 
 ## Resolve the delegator environment
 
-When you create a [`MetaMaskSmartAccount`](../how-to/create-delegator-account.md) instance, the Delegation Toolkit automatically
+When you create a [MetaMask smart account](smart-accounts.md), the Delegation Toolkit automatically
 resolves the environment based on the version it requires and the chain configured.
 If no environment is found for the specified chain, it throws an error.
 
@@ -66,11 +66,11 @@ export delegatorSmartAccount;
 </Tabs>
 
 :::note
-See the [changelog](../changelog/0.11.0.md) of the toolkit version you are using for supported chains.
+See the changelog of the toolkit version you are using (in the left sidebar) for supported chains.
 :::
 
 Alternatively, you can use the `getDelegatorEnvironment` function to resolve the environment.
-This function is especially useful if your delegator is not a smart contract account when
+This function is especially useful if your delegator is not a smart account when
 [creating a redelegation](../how-to/create-delegation/index.md#create-a-redelegation).
 
 ```typescript
@@ -224,5 +224,5 @@ overrideDeployedEnvironment(
 
 :::note
 Make sure to specify the Delegation Framework version required by the toolkit.
-See the [changelog](../changelog/0.11.0.md) of the toolkit version you are using for its required Framework version.
+See the changelog of the toolkit version you are using (in the left sidebar) for its required Framework version.
 :::

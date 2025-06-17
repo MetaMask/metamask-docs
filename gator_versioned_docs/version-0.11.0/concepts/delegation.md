@@ -5,8 +5,10 @@ sidebar_position: 2
 
 # Delegation
 
-*Delegation* is the ability for a [delegator account](delegator-accounts.md) to grant permission to another smart contract account (SCA)
-or externally owned account (EOA) to perform specific executions on the delegator's behalf, under defined rules and restrictions.
+*Delegation* is the ability for a [smart account](smart-accounts.md) to grant permission to another smart account
+or externally owned account (EOA) to perform specific executions on their behalf, under defined rules and restrictions.
+The account that grants the permission is called the *delegator account*, while the account that receives the permission
+is called the *delegate account*.
 
 The MetaMask Delegation Toolkit includes the following delegation features:
 
@@ -45,7 +47,7 @@ The delegation lifecycle is as follows:
     :::
 
 4. **Delegation redemption** - The delegate (the account being granted the permission) redeems the
-   delegation through an [ERC-4337 user operation](delegator-accounts.md#account-abstraction-erc-4337),
+   delegation through an [ERC-4337 user operation](smart-accounts.md#account-abstraction-erc-4337),
    which verifies that the delegated authority is valid in order to perform the execution.
 
 See [how to create a delegation](../how-to/create-delegation/index.md) to get started with the
@@ -62,7 +64,7 @@ It consists of the following components:
 - **Delegator Core** - Delegator Core contains the logic for the ERC-4337 compliant delegator accounts.
   It defines the interface needed for the Delegation Manager to invoke executions on behalf of the accounts.
 
-- **Delegator account implementations** - There are [multiple delegator account implementations](delegator-accounts.md#delegator-account-types),
+- **Delegator account implementations** - There are [multiple delegator account implementations](smart-accounts.md#smart-account-implementation-types),
   with the main difference being the signature scheme used to manage the underlying account.
 
 - **Delegation Manager** - The Delegation Manager validates delegations and triggers executions

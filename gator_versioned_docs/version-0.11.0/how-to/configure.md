@@ -6,7 +6,8 @@ sidebar_label: Configure the toolkit
 
 # Configure the Delegation Toolkit
 
-The MetaMask Delegation Toolkit enables you to easily integrate delegator accounts into your dapp, enabling a more flexible, secure, and frictionless experience for your users.
+The MetaMask Delegation Toolkit enables you to easily integrate [smart accounts](../concepts/smart-accounts.md) into your dapp,
+enabling a more flexible, secure, and frictionless experience for your users.
 
 The toolkit is highly configurable, allowing you to tailor it to your project's specific needs. It includes support for custom signers, multiple signatory schemes, custom paymasters and bundlers, and more.
 
