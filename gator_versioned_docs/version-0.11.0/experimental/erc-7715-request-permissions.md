@@ -21,8 +21,8 @@ The MetaMask Delegation Toolkit provides the experimental actions for ERC-7715 t
 ## Request permissions
 
 To request permissions, extend your [Viem Wallet Client](https://viem.sh/docs/clients/wallet) with `erc7715ProviderActions` actions.
-You'll need a session account to request the permission, which can be either an externally owned account (EOA) or a smart contract account (SCA).
-This example uses an SCA:
+You'll need a session account to request the permission, which can be either a smart account or an externally owned account (EOA).
+This example uses a smart account:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -92,8 +92,8 @@ export const walletClient = createWalletClient({
 </Tabs>
 
 <details>
-  <summary> ERC-7715 request permission sample </summary>
-  
+  <summary>ERC-7715 request permission sample</summary>
+  <div>
   Here's what your ERC-7715 native token streaming allowance request looks like:
 
   ```ts
@@ -120,6 +120,7 @@ export const walletClient = createWalletClient({
   ```
 
   Learn more about the [ERC-7715 permission schema](https://eip.tools/eip/7715).
+  </div>
 </details>
 
 

@@ -1,43 +1,43 @@
 ---
 sidebar_label: Configure accounts and signers
 description: Learn how to configure different types of delegator accounts and signers using Viem.
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure delegator accounts and signers
+# Configure smart accounts and signers
 
-The MetaMask Delegation Toolkit supports different [delegator account types](../concepts/delegator-accounts.md#delegator-account-types),
+The MetaMask Delegation Toolkit supports different [smart account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
 each with its own configuration and support for different signing mechanisms.
 You can create flexible and secure delegator accounts tailored to your specific needs.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
-- [Create a delegator account.](create-delegator-account.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
+- [Create a smart account.](index.md)
 
-## Configure a Hybrid Delegator
+## Configure a Hybrid smart account
 
-The [Hybrid Delegator](../concepts/delegator-accounts.md#hybrid-delegator) supports both an EOA "owner" and any number of P256 (passkey) signers.
+The [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an EOA "owner" and any number of P256 (passkey) signers.
 
-To configure a Hybrid Delegator, provide the following parameters:
+To configure a Hybrid smart account, provide the following parameters:
 
 - `owner`: The owner's account address as a hex string.
   The owner can be the zero address, indicating that there is no owner configured.
 - `p256KeyIds`: An array of key identifiers for P256 signers as hex strings.
 - `p256XValues`: An array of public key x-values for P256 signers as `bigint`s.
 - `p256YValues`: An array of public key y-values for P256 signers as `bigint`s.
-- `signatory`: A signer that will sign on behalf of the delegator account.
+- `signatory`: A signer that will sign on behalf of the smart account.
 
 :::note
 You can set all `p256` parameters to empty arrays to configure no WebAuthn signer.
 However, we recommend configuring at least one signer for account recoverability.
 :::
 
-For a Hybrid Delegator, you can configure the following types of signatories:
+For a Hybrid smart account, you can configure the following types of signatories:
 
 ### Configure an account signatory
 
@@ -218,19 +218,19 @@ const signatory = { webAuthnAccount, keyId };
 </Tabs>
 
 
-## Configure a Multisig Delegator
+## Configure a Multisig smart account
 
-The [Multisig Delegator](../concepts/delegator-accounts.md#multisig-delegator) supports multiple EOA signers with a configurable threshold for execution.
+The [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
 
-To configure a Multisig Delegator, provide the following parameters:
+To configure a Multisig smart account, provide the following parameters:
 
 - `signers`: An array of EOA signer addresses as hex strings.
 - `threshold`: The number of signers required to execute a transaction, as a `bigint`.
-- `signatory`: An array of signatories that will sign on behalf of the delegator account.
+- `signatory`: An array of signatories that will sign on behalf of the smart account.
 
 ### Configure signatories
 
-For a Multisig Delegator, you can use a combination of account signatories and Wallet Client signatories.
+For a Multisig smart account, you can use a combination of account signatories and Wallet Client signatories.
 For example:
 
 <Tabs>

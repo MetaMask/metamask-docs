@@ -10,25 +10,27 @@ import TabItem from "@theme/TabItem";
 # Redeem a delegation
 
 A delegate can redeem a delegation by submitting either a user operation or a regular transaction,
-depending on whether the delegate is a smart contract account (SCA) or externally owned account (EOA).
+depending on whether the delegate is a smart account or externally owned account (EOA).
 
-The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the delegator's behalf. To prepare the call data for the redeem transaction, use the `redeemDelegation` utility function. The function supports batch redemption, allowing multiple delegations to be processed within a single transaction.
+The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the delegator's behalf.
+To prepare the calldata for the redeem transaction, use the `redeemDelegation` utility function.
+The function supports batch redemption, allowing multiple delegations to be processed within a single transaction.
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../get-started/install.md)
 - [Configure the Delegation Toolkit.](configure.md)
-- [Create a delegator account.](create-delegator-account.md)
+- [Create a delegator smart account.](create-smart-account/index.md)
 - [Create a delegation.](create-delegation/index.md)
 
 ## Redeem a delegation
 
-Redeem a delegation with a [smart contract account (SCA)](#redeem-with-an-sca) or an [externally owned account (EOA)](#redeem-with-an-eoa).
+Redeem a delegation with a [smart account](#redeem-with-a-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
 
-### Redeem with an SCA
+### Redeem with a smart account
 
 The following example demonstrates how to submit a user operation to redeem a delegation.
-It assumes you have a delegation signed by the delegator, and that the delegate is an SCA.
+It assumes you have a delegation signed by the delegator, and that the delegate is a smart account.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -196,8 +198,8 @@ export const delegateWalletClient = createWalletClient({
 You can redeem multiple delegations in a single user operation, each delegation independent of the others.
 Each element in the `delegationsArray` must have a corresponding element in the `executionsArray` and `modes`.
 
-The following example assumes you already have multiple signed delegations and that the delegate is an SCA.
-The preparation of the call data is the same when [using an EOA as the delegate](#redeem-with-an-eoa);
+The following example assumes you already have multiple signed delegations and that the delegate is a smart account.
+The preparation of the calldata is the same when [using an EOA as the delegate](#redeem-with-an-eoa);
 the primary difference is that an EOA submits a regular transaction instead of a user operation.
 
 <Tabs>

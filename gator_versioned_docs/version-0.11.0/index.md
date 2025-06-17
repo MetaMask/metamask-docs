@@ -1,5 +1,5 @@
 ---
-title: Introduction to the MetaMask Delegation Toolkit
+title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of the Delegation Toolkit, its benefits, and where to start in the documentation.
 sidebar_position: 1
@@ -7,14 +7,28 @@ sidebar_position: 1
 
 import CardList from "@site/src/components/CardList"
 
-# MetaMask Delegation Toolkit documentation
+# Embed smart accounts using the Delegation Toolkit
+
+The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for integrating
+embedded smart contract wallets, known as [MetaMask smart accounts](concepts/smart-accounts.md),
+into dapps. Developers can create and manage MetaMask smart accounts that delegate specific
+permissions, such as spending limits or time-based access, to other accounts.
+
+At the core of the toolkit is the [Delegation Framework](concepts/delegation.md#delegation-framework), a
+set of open-source, audited smart contracts that manage the delegation lifecycle.
+
+Permissions are enforced through [caveats](concepts/caveat-enforcers.md), which are rule-based
+constraints that define the conditions of a delegation. The toolkit includes
+[built-in caveat enforcers](reference/caveats.md) for common
+use cases. It also supports [custom caveat enforcers](how-to/create-delegation/create-custom-caveat-enforcer.md)
+for advanced scenarios.
 
 ## Why use the toolkit?
 
-The MetaMask Delegation Toolkit enables developers to create frictionless new experiences based
-on granular permission sharing and trust.
-The toolkit offers a suite of contracts, libraries, and services designed for maximum composability,
-allowing developers to build and extend their dapps with ease.
+The toolkit enables developers to create frictionless new experiences based on granular permission
+sharing and trust. The toolkit offers a suite of contracts, libraries, and services designed for
+maximum composability, allowing developers to build and extend their dapps with ease.
+
 The toolkit enables:
 
 - **Instant user onboarding.** Provide frictionless onboarding with no browser extension, mobile
@@ -26,13 +40,6 @@ The toolkit enables:
 
 - **Uninterrupted user experiences.** Keep users immersed in the dapp by embedding the wallet
   experience and reassigning gas costs to where they make sense.
-
-The toolkit includes the [Delegation Framework](concepts/delegation.md#delegation-framework) – a
-pioneering set of open-source, customizable smart contracts, allowing dapps and protocols to
-implement custom permission control.
-Developers can use the Delegation Framework to prepare their dapps for
-[delegations](concepts/delegation.md) created from
-[delegator accounts](concepts/delegator-accounts.md).
 
 ## Where do I start?
 
