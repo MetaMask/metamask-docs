@@ -10,7 +10,6 @@ export function onRouteDidUpdate({ location, previousLocation }) {
       bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     if (!isVisible) {
       item.scrollIntoView({ block: 'start', inline: 'nearest' })
-      window.scrollTo(0, 0)
     }
   }
 
