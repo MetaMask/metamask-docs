@@ -48,7 +48,7 @@ This example creates a signatory from a private key using Viem's [`privateKeyToA
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { account } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
@@ -57,9 +57,9 @@ import {
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory,
+  signatory: { account },
 });
 ```
 
@@ -86,9 +86,7 @@ export const publicClient = createPublicClient({
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 
 const privateKey = generatePrivateKey(); 
-const account = privateKeyToAccount(privateKey);
-
-export const signatory = { account };
+export const account = privateKeyToAccount(privateKey);
 ```
 
 </TabItem>
@@ -104,18 +102,20 @@ using Viem's `createWalletClient` function.
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { walletClient } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
 
+const owner = walletClient.account.address;
+
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [owner, [], [], []],
   deploySalt: "0x",
-  signatory,
+  signatory: { walletClient },
 });
 ```
 
@@ -146,13 +146,11 @@ import { http, createWalletClient } from "viem";
 const privateKey = generatePrivateKey(); 
 const account = privateKeyToAccount(privateKey);
 
-const walletClient = createWalletClient({
+export const walletClient = createWalletClient({
   account,
   chain,
   transport: http()
 })
-
-export const signatory = { walletClient };
 ```
 
 </TabItem>
