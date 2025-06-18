@@ -7,6 +7,55 @@ export interface ResponseItem {
   error: Error | null | boolean;
 }
 
+// Method sorting configuration
+const METHOD_SORT_PRIORITIES = {
+  wallet_: 1, // Highest priority - appears first
+  eth_: 2, // Second priority
+  personal_: 3, // Third priority
+  web3_: 4, // Fourth priority
+  // Default priority for any other prefixes
+  default: 999,
+};
+
+const METHOD_SORT_CONFIG = {
+  priorities: METHOD_SORT_PRIORITIES,
+  // Optional: Custom sort function for special cases
+  customSort: null,
+  // Optional: Group labels for future use
+  groupLabels: {
+    wallet_: "Wallet Methods",
+    eth_: "Ethereum Methods",
+    personal_: "Personal Methods",
+    web3_: "Web3 Methods",
+    default: "Other Methods",
+  },
+};
+
+// Helper function to extract method prefix
+const getMethodPrefix = (methodName: string): string => {
+  const prefix = methodName.split("_")[0] + "_";
+  return prefix;
+};
+
+// Sort methods by priority group, then alphabetically within each group
+const sortMethods = (items: any[], sortConfig = METHOD_SORT_CONFIG) => {
+  return [...items].sort((a, b) => {
+    const aPrefix = getMethodPrefix(a.name);
+    const bPrefix = getMethodPrefix(b.name);
+
+    const aPriority = sortConfig.priorities[aPrefix] || sortConfig.priorities.default;
+    const bPriority = sortConfig.priorities[bPrefix] || sortConfig.priorities.default;
+
+    // First sort by priority group
+    if (aPriority !== bPriority) {
+      return aPriority - bPriority;
+    }
+
+    // Then sort alphabetically within the same group
+    return a.name.localeCompare(b.name);
+  });
+};
+
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
   try {
     const response = await fetch(url, { method: "GET" });
@@ -18,7 +67,7 @@ async function fetchData(url: string, name: string): Promise<ResponseItem> {
 }
 
 async function fetchMultipleData(
-  requests: { url: string; name: string }[],
+  requests: { url: string; name: string }[]
 ): Promise<ResponseItem[]> {
   const promises = requests.map(({ url, name }) => fetchData(url, name));
   const responses = await Promise.all(promises);
@@ -45,28 +94,34 @@ const requests = [
   },
 ];
 
-export const prepareLinkItems = (items, refPath) => {
-  return items.map((method) => ({
+export const prepareLinkItems = (items, refPath, sortConfig = METHOD_SORT_CONFIG) => {
+  const sortedItems = sortMethods(items, sortConfig);
+
+  return sortedItems.map(method => ({
     type: "link",
     label: method.name,
     href: `/${refPath}/${method.name.toLowerCase()}`,
-  }))
-}
+  }));
+};
 
-export const fetchAndGenerateDynamicSidebarItems = async (url: string, refPath: string, network: string) => {
+export const fetchAndGenerateDynamicSidebarItems = async (
+  url: string,
+  refPath: string,
+  network: string
+) => {
   const dynamicRefItems = await fetchData(url, network);
   if (dynamicRefItems.data && !dynamicRefItems.error) {
     return prepareLinkItems(dynamicRefItems.data.methods, refPath);
   }
-  return []
-}
+  return [];
+};
 
 export default function useNetworksMethodPlugin() {
   return {
     name: "plugin-json-rpc",
     async loadContent() {
       return await fetchMultipleData(requests)
-        .then((responseArray) => {
+        .then(responseArray => {
           return responseArray;
         })
         .catch(() => {
@@ -79,10 +134,10 @@ export default function useNetworksMethodPlugin() {
       const dynamicRoutes = content.find(item => item.name === NETWORK_NAMES.metamask);
       if (dynamicRoutes) {
         const methodsData = await createData(
-          'methodsData.json',
+          "methodsData.json",
           JSON.stringify(dynamicRoutes.data.methods)
         );
-        dynamicRoutes.data.methods.forEach(async (method) => {
+        dynamicRoutes.data.methods.forEach(async method => {
           return addRoute({
             path: `/${MM_REF_PATH}/${method.name.toLowerCase()}`,
             component: require.resolve("../components/CustomReferencePage/index.tsx"),
@@ -90,29 +145,27 @@ export default function useNetworksMethodPlugin() {
               methodsData: methodsData,
             },
             exact: true,
-            customData: { ...method, networkName: NETWORK_NAMES.metamask }
+            customData: { ...method, networkName: NETWORK_NAMES.metamask },
           });
         });
       }
     },
     configureWebpack() {
       return {
-        plugins: [
-          new NodePolyfillPlugin()
-        ],
+        plugins: [new NodePolyfillPlugin()],
         resolve: {
           alias: {
-            "@site-global": path.resolve(__dirname, '../methodsData.json'),
+            "@site-global": path.resolve(__dirname, "../methodsData.json"),
             fs: false,
             module: false,
-            "child_process": false,
-            "worker_threads": false,
+            child_process: false,
+            worker_threads: false,
             "uglify-js": false,
             "@swc/core": false,
-            "esbuild": false,
+            esbuild: false,
           },
         },
-      }
+      };
     },
   };
 }
