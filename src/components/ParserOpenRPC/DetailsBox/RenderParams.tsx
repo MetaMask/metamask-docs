@@ -2,6 +2,7 @@ import React from 'react'
 import { SchemaProperty } from './SchemaProperty'
 import { CollapseBox } from '../CollapseBox/CollapseBox'
 import styles from './styles.module.scss'
+import { SchemaPropertyType } from '@site/src/components/ParserOpenRPC/interfaces'
 
 const getRefSchemaFromComponents = (initRef, components) => {
   const ref = initRef.replace('#/components/schemas/', '')
@@ -19,29 +20,39 @@ const renderSchema = (schemaItem, schemas, name) => {
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref)
   if (schemaItem?.$ref) return resolveRef(schemaItem.$ref)
 
-  const renderObject = (item, itemName) => (
-    <div>
-      <SchemaProperty
-        title={itemName || item.title}
-        type="object"
-        required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ''}
-        pattern={item.pattern}
-        defaultVal={item.default}
-      />
-      <div className="padding-bottom--md">
-        <CollapseBox>
-          <>
-            {Object.entries(item.properties).map(([key, value]) => (
-              <div key={key} className={styles.paramItemWrapper}>
-                {renderSchema(value, schemas, key)}
-              </div>
-            ))}
-          </>
-        </CollapseBox>
+  const renderObject = (item, itemName) => {
+    const requiredFields = Array.isArray(item.required) ? item.required : []
+    return (
+      <div>
+        <SchemaProperty
+          title={itemName || item.title}
+          type="object"
+          required={schemaItem.required || !!item.required}
+          description={item.description || item.title || ''}
+          pattern={item.pattern}
+          defaultVal={item.default}
+        />
+        <div className="padding-bottom--md">
+          <CollapseBox>
+            <>
+              {Object.entries(item.properties).map(([key, value]: [string, SchemaPropertyType]) => (
+                <div key={key} className={styles.paramItemWrapper}>
+                  {renderSchema(
+                    {
+                      ...value,
+                      required: requiredFields.includes(key),
+                    },
+                    schemas,
+                    key
+                  )}
+                </div>
+              ))}
+            </>
+          </CollapseBox>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   if (schemaItem?.schema?.type === 'object' && schemaItem?.schema?.properties) {
     return renderObject(schemaItem.schema, name || schemaItem?.schema?.title)
