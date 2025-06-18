@@ -5,11 +5,9 @@ description: Supported networks for Delegation Toolkit.
 sidebar_position: 2
 ---
 
-:::info Request support
+The following tables display the networks supported by each version of the MetaMask Delegation Toolkit.
 
-If you don't see the chain you're looking for, feel free to reach out to us at hellogators@consensys.net
-
-:::
+If you don't see the network you're looking for, you can request support by emailing hellogators@consensys.net.
 
 ## Mainnet networks
 
