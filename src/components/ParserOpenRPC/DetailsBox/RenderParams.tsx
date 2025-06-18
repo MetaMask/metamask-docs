@@ -12,13 +12,18 @@ const getRefSchemaFromComponents = (initRef, components) => {
 const renderSchema = (schemaItem, schemas, name) => {
   if (!schemaItem) return <div>Invalid schema</div>
 
-  const resolveRef = ref => {
+  const resolveRef = (ref, originalItem) => {
     const newSchema = getRefSchemaFromComponents(ref, schemas)
-    return renderSchema(newSchema, schemas, name)
+    // Preserve the original parameter's description when resolving references
+    const resolvedSchema = {
+      ...newSchema,
+      description: originalItem?.description || newSchema.description || newSchema.title || '',
+    }
+    return renderSchema(resolvedSchema, schemas, name)
   }
 
-  if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref)
-  if (schemaItem?.$ref) return resolveRef(schemaItem.$ref)
+  if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref, schemaItem)
+  if (schemaItem?.$ref) return resolveRef(schemaItem.$ref, schemaItem)
 
   const renderObject = (item, itemName) => {
     const requiredFields = Array.isArray(item.required) ? item.required : []

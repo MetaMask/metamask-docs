@@ -25,6 +25,7 @@
   --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
   --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-euclid: 'Euclid Circular B', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark-2);
@@ -74,7 +75,7 @@
 
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
-  --ifm-font-family-base: var(--font-mm-centra);
+  --ifm-font-family-base: var(--font-mm-euclid);
   --font-family-sans: var(--font-mm-sans);
 
   --ifm-color-success: var(--developer-green-light);
@@ -700,7 +701,7 @@ ol {
     gap: 10px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: -6px;
       top: 0;
@@ -785,7 +786,7 @@ ol {
 }
 
 div[class^='announcementBar_'] {
-  font-family: var(--font-mm-centra);
+  font-family: var(--font-mm-euclid);
   font-size: 1.4rem;
   padding: 1rem 2rem;
   text-align: center;
