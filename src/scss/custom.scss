@@ -842,3 +842,8 @@ div[class^='theme-announcement-bar'] {
 .pageWrapper .sidebar_mhZE {
   padding-top: 0 !important;
 }
+
+/* Add scroll padding to account for sticky product banner */
+html {
+  scroll-padding-top: 10rem;
+}
