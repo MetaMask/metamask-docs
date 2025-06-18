@@ -167,7 +167,7 @@ VS Code) without using `ts-node` or pre-compiling to JavaScript.
 The following is an example output:
 
 ```bash
-Mining transcation...
+Mining transaction...
 Tx mined https://sepolia.etherscan.io/tx/0x310588719e733118f50c0a1608e13b4e8bd5eb5891d546d89795c2041833abb6
 ```
 
