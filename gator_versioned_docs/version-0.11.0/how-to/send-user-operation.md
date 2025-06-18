@@ -27,7 +27,7 @@ If a user operation is sent from a smart contract account that has not been depl
 
 - [Install and set up the Delegation Toolkit.](../get-started/install.md)
 - [Configure the Delegation Toolkit.](configure.md)
-- [Create a delegator account.](create-delegator-account.md)
+- [Create a smart account.](create-smart-account/index.md)
 
 ## Send a user operation
 

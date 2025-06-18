@@ -6,23 +6,24 @@ sidebar_position: 2
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Create a delegator account
+# Create a smart account
 
-The MetaMask Delegation Toolkit is embedded, meaning that the end user can instantly interact with a dapp without wallet authorization, confirmations, or corporate logos. Enable users to create a [delegator account](../concepts/delegator-accounts.md) directly in your dapp.
+The MetaMask Delegation Toolkit is embedded, meaning that the end user can instantly interact with a dapp without wallet authorization, confirmations, or corporate logos.
+Enable users to create a [smart account](../concepts/smart-accounts) directly in your dapp.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 
 ## Create a `MetaMaskSmartAccount`
 
-The following is an example of creating a delegator account using Viem Core SDK.
-Viem Core SDK provides low-level interfaces to offer flexibility and control over the delegator
+The following is an example of creating a smart account using Viem Core SDK.
+Viem Core SDK provides low-level interfaces to offer flexibility and control over the smart
 account creation lifecycle.
 
 In the example, the Viem [`privateKeyToAccount`](https://viem.sh/docs/accounts/privateKey.html)
-function creates an externally owned account as the owner of the delegator account.
+function creates an externally owned account as the owner of the smart account.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -70,11 +71,12 @@ export const owner = privateKeyToAccount(privateKey);
 
 This example creates the `MetaMaskSmartAccount`, which can perform several functions:
 
-- In conjunction with [Viem Account Abstraction clients](configure.md), deploy the smart contract account,
-  and [send user operations](send-user-operation.md).
-- [Sign delegations](create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+- In conjunction with [Viem Account Abstraction clients](../configure.md), deploy the smart account
+  and [send user operations](../send-user-operation.md).
+- [Sign delegations](../create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+  Smart accounts that sign delegations are called *delegator accounts*.
 
 :::note 
-The example above uses the Hybrid Delegator smart contract account, which is configurable to have an EOA "owner" and any number of P256 (passkey) signers.
-You can also [configure other delegator account types](configure-delegator-accounts-signers.md).
+The example above uses a Hybrid smart account, which is configurable to have an EOA "owner" and any number of P256 (passkey) signers.
+You can also [configure other smart account types](configure-accounts-signers.md).
 :::
