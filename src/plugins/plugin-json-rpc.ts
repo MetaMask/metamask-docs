@@ -7,6 +7,10 @@ export interface ResponseItem {
   error: Error | null | boolean;
 }
 
+interface MethodItem {
+  name: string;
+}
+
 // Method sorting configuration
 const METHOD_SORT_PRIORITIES = {
   wallet_: 1, // Highest priority - appears first
@@ -19,16 +23,6 @@ const METHOD_SORT_PRIORITIES = {
 
 const METHOD_SORT_CONFIG = {
   priorities: METHOD_SORT_PRIORITIES,
-  // Optional: Custom sort function for special cases
-  customSort: null,
-  // Optional: Group labels for future use
-  groupLabels: {
-    wallet_: "Wallet Methods",
-    eth_: "Ethereum Methods",
-    personal_: "Personal Methods",
-    web3_: "Web3 Methods",
-    default: "Other Methods",
-  },
 };
 
 // Helper function to extract method prefix
@@ -38,7 +32,7 @@ const getMethodPrefix = (methodName: string): string => {
 };
 
 // Sort methods by priority group, then alphabetically within each group
-const sortMethods = (items: any[], sortConfig = METHOD_SORT_CONFIG) => {
+const sortMethods = (items: MethodItem[], sortConfig = METHOD_SORT_CONFIG) => {
   return [...items].sort((a, b) => {
     const aPrefix = getMethodPrefix(a.name);
     const bPrefix = getMethodPrefix(b.name);
@@ -94,7 +88,11 @@ const requests = [
   },
 ];
 
-export const prepareLinkItems = (items, refPath, sortConfig = METHOD_SORT_CONFIG) => {
+export const prepareLinkItems = (
+  items: MethodItem[],
+  refPath: string,
+  sortConfig = METHOD_SORT_CONFIG
+): { type: string; label: string; href: string }[] => {
   const sortedItems = sortMethods(items, sortConfig);
 
   return sortedItems.map(method => ({
@@ -137,8 +135,8 @@ export default function useNetworksMethodPlugin() {
           "methodsData.json",
           JSON.stringify(dynamicRoutes.data.methods)
         );
-        dynamicRoutes.data.methods.forEach(async method => {
-          return addRoute({
+        for (const method of dynamicRoutes.data.methods) {
+          await addRoute({
             path: `/${MM_REF_PATH}/${method.name.toLowerCase()}`,
             component: require.resolve("../components/CustomReferencePage/index.tsx"),
             modules: {
@@ -147,7 +145,7 @@ export default function useNetworksMethodPlugin() {
             exact: true,
             customData: { ...method, networkName: NETWORK_NAMES.metamask },
           });
-        });
+        }
       }
     },
     configureWebpack() {
