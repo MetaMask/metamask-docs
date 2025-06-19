@@ -82,7 +82,7 @@ export const AlertFailedPoh = () => (
     <AlertTitle>Please complete Linea Proof of Humanity</AlertTitle>
     <AlertText>
       <span>
-        Free users must complete Linea Proof of Humanity to use the faucet. Learn more{' '}
+        Free users are required to complete Proof of Humanity to access the faucet. Learn more{' '}
         <a
           data-testid="alert-poh"
           onClick={handleClickPoh}
