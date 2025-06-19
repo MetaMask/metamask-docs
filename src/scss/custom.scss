@@ -785,7 +785,7 @@ ol {
   }
 }
 
-div[class^='announcementBar_'] {
+div[class^='theme-announcement-bar'] {
   font-family: var(--font-mm-euclid);
   font-size: 1.4rem;
   padding: 1rem 2rem;
@@ -841,4 +841,9 @@ div[class^='announcementBar_'] {
 
 .pageWrapper .sidebar_mhZE {
   padding-top: 0 !important;
+}
+
+/* Add scroll padding to account for sticky product banner */
+html {
+  scroll-padding-top: 10rem;
 }

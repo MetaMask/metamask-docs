@@ -20,7 +20,7 @@ const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
   },
   '/delegation-toolkit/': {
     name: 'Delegation Toolkit documentation',
-    description: 'Embed MetaMask smart accounts with new capabilities into your dapp.',
+    description: 'Embed MetaMask smart accounts into your dapp, enabling new user experiences.',
   },
   '/snaps/': {
     name: 'Snaps documentation',

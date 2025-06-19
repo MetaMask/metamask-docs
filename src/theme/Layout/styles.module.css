@@ -14,6 +14,7 @@ body {
   margin-top: 3rem;
 }
 
+/* stylelint-disable-next-line selector-id-pattern */
 :global(#__docusaurus) {
   min-height: 100%;
   display: flex;
