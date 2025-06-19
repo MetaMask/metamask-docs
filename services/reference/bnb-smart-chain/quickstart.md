@@ -1,11 +1,12 @@
 ---
 description: BNB Smart Chain quickstart guide
+sidebar_label: Quickstart
 sidebar_position: 2
 ---
 
 import Banner from "@site/src/components/Banner"
 
-# Quickstart
+# BNB Smart Chain quickstart
 
 This quickstart guide will help you set up and make calls on the BNB Smart Chain network using the Infura endpoints.
 

@@ -1,8 +1,9 @@
 ---
 description: Linea debug methods.
+sidebar_label: Debug methods
 ---
 
-# Debug methods
+# Linea debug methods
 
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug methods on the
 Linea network:

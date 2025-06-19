@@ -318,6 +318,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
               drawerLabel={drawerLabel}
               closeComplexTypeView={closeComplexTypeView}
               isOpen={isModalOpen}
+              onModalClose={onModalClose}
             />
           </ModalDrawer>
         </div>

@@ -1,11 +1,12 @@
 ---
 description: Base quickstart guide
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Base quickstart
 
 This quickstart guide will help you set up and make calls on the Base network using the Infura endpoints.
 
