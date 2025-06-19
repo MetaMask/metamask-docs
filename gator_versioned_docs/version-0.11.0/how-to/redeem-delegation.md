@@ -86,7 +86,7 @@ import {
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
 import { privateKeyToAccount } from "viem/accounts";
-improt { publicClient } from "./client.ts"
+import { publicClient } from "./client.ts"
 
 const delegateAccount = privateKeyToAccount("0x...");
 
