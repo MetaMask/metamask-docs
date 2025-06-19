@@ -79,16 +79,16 @@ export const AlertCommonIssue = () => (
 
 export const AlertFailedPoh = () => (
   <div>
-    <AlertTitle>You haven't completed Linea Proof of Humanity</AlertTitle>
+    <AlertTitle>Please complete Linea Proof of Humanity</AlertTitle>
     <AlertText>
       <span>
-        The address provided has not completed Linea Proof of Humanity. Please visit{' '}
+        Free users must complete Linea Proof of Humanity to use the faucet. Learn more{' '}
         <a
           data-testid="alert-poh"
           onClick={handleClickPoh}
           target="_blank"
           href="https://poh.linea.build/">
-          poh.linea.build
+          here
         </a>
         .
       </span>
