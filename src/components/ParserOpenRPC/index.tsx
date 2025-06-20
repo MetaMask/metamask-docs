@@ -41,6 +41,27 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
     return null
   }
   if (!method || !network) return null
+
+  // Retrieve spec data for all networks from plugin-json-rpc
+  const { netData } = usePluginData('plugin-json-rpc') as { netData?: ResponseItem[] }
+
+  // Locate the current network and method – wrapped in useMemo to avoid
+  // recomputation on minor state changes.
+  const currentNetwork = useMemo(
+    () => netData?.find(net => net.name === network),
+    [netData, network]
+  )
+  const currentMethod = useMemo(
+    () => currentNetwork?.data?.methods?.find(met => met.name === method),
+    [currentNetwork, method]
+  )
+
+  // Bail early if we failed to find the requested network or method.
+  if (!currentNetwork || !currentMethod) {
+    console.error('ParserOpenRPC: network or method not found', { network, method })
+    return null
+  }
+
   const [isModalOpen, setModalOpen] = useState(false)
   const [reqResult, setReqResult] = useState(undefined)
   const [paramsData, setParamsData] = useState([])
@@ -76,13 +97,6 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   }
   const closeModal = () => setModalOpen(false)
 
-  const { netData } = usePluginData('plugin-json-rpc') as {
-    netData?: ResponseItem[]
-  }
-  const currentNetwork = netData?.find(net => net.name === network)
-
-  if (!currentNetwork && currentNetwork.error) return null
-
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
       return (
@@ -98,9 +112,6 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
           .filter(Boolean) || []
       )
     }
-
-    const currentMethod = currentNetwork.data.methods?.find(met => met.name === method)
-    if (!currentMethod) return null
 
     const errors = findReferencedItem(currentMethod.errors, '#/components/errors/', 'errors')
     const tags = findReferencedItem(currentMethod.tags, '#/components/tags/', 'tags')
@@ -136,7 +147,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       tags,
       servers: currentNetwork.data?.servers?.[0]?.url || null,
     }
-  }, [currentNetwork, method])
+  }, [currentNetwork, method, currentMethod, userEncPublicKey])
 
   if (currentMethodData === null) return null
 

@@ -38,10 +38,16 @@ export const BaseInputTemplate = ({
   )
   const onInputChange = e => {
     const value = isNumber ? Number(+e?.target?.value || 0) : e?.target?.value
+    /* eslint-disable no-console */
+    console.debug('[TYPE] input change', { id, name, value })
+    /* eslint-enable no-console */
     setInputValue(value)
     isNumber ? debouncedOnChange(value, true) : debouncedOnChange(e)
   }
   const onInputNumberChange = value => {
+    /* eslint-disable no-console */
+    console.debug('[TYPE] number change', { id, name, value })
+    /* eslint-enable no-console */
     setInputValue(value)
     debouncedOnChange(value, true)
   }

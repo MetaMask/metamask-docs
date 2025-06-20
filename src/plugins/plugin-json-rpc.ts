@@ -1,10 +1,10 @@
-import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
-import * as path from "path";
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
+import * as path from 'path'
 
 export interface ResponseItem {
-  name: string;
-  data: any | null;
-  error: Error | null | boolean;
+  name: string
+  data: any | null
+  error: Error | null | boolean
 }
 
 interface MethodItem {
@@ -52,29 +52,29 @@ const sortMethods = (items: MethodItem[], sortConfig = METHOD_SORT_CONFIG) => {
 
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
   try {
-    const response = await fetch(url, { method: "GET" });
-    const data = await response.json();
-    return { name, data, error: false };
+    const response = await fetch(url, { method: 'GET' })
+    const data = await response.json()
+    return { name, data, error: false }
   } catch (error) {
-    return { name, data: null, error: true };
+    return { name, data: null, error: true }
   }
 }
 
 async function fetchMultipleData(
   requests: { url: string; name: string }[]
 ): Promise<ResponseItem[]> {
-  const promises = requests.map(({ url, name }) => fetchData(url, name));
-  const responses = await Promise.all(promises);
-  return responses;
+  const promises = requests.map(({ url, name }) => fetchData(url, name))
+  const responses = await Promise.all(promises)
+  return responses
 }
 
-export const RPC_NETWORK_URL = "https://sot-network-methods.vercel.app/specs";
-export const MM_RPC_URL = "https://metamask.github.io/api-specs/latest/openrpc.json";
-export const MM_REF_PATH = "wallet/reference/json-rpc-methods";
+export const RPC_NETWORK_URL = 'https://sot-network-methods.vercel.app/specs'
+export const MM_RPC_URL = 'http://127.0.0.1:8080/openrpc.json'
+export const MM_REF_PATH = 'wallet/reference/json-rpc-methods'
 
 export enum NETWORK_NAMES {
-  linea = "linea",
-  metamask = "metamask",
+  linea = 'linea',
+  metamask = 'metamask',
 }
 
 const requests = [
@@ -86,7 +86,7 @@ const requests = [
     url: MM_RPC_URL,
     name: NETWORK_NAMES.metamask,
   },
-];
+]
 
 export const prepareLinkItems = (
   items: MethodItem[],
@@ -109,27 +109,27 @@ export const fetchAndGenerateDynamicSidebarItems = async (
 ) => {
   const dynamicRefItems = await fetchData(url, network);
   if (dynamicRefItems.data && !dynamicRefItems.error) {
-    return prepareLinkItems(dynamicRefItems.data.methods, refPath);
+    return prepareLinkItems(dynamicRefItems.data.methods, refPath)
   }
   return [];
 };
 
 export default function useNetworksMethodPlugin() {
   return {
-    name: "plugin-json-rpc",
+    name: 'plugin-json-rpc',
     async loadContent() {
       return await fetchMultipleData(requests)
         .then(responseArray => {
           return responseArray;
         })
         .catch(() => {
-          return [];
-        });
+          return []
+        })
     },
     async contentLoaded({ content, actions }) {
-      const { addRoute, createData, setGlobalData } = actions;
-      setGlobalData({ netData: content });
-      const dynamicRoutes = content.find(item => item.name === NETWORK_NAMES.metamask);
+      const { addRoute, createData, setGlobalData } = actions
+      setGlobalData({ netData: content })
+      const dynamicRoutes = content.find(item => item.name === NETWORK_NAMES.metamask)
       if (dynamicRoutes) {
         const methodsData = await createData(
           "methodsData.json",
@@ -138,7 +138,7 @@ export default function useNetworksMethodPlugin() {
         for (const method of dynamicRoutes.data.methods) {
           await addRoute({
             path: `/${MM_REF_PATH}/${method.name.toLowerCase()}`,
-            component: require.resolve("../components/CustomReferencePage/index.tsx"),
+            component: require.resolve('../components/CustomReferencePage/index.tsx'),
             modules: {
               methodsData: methodsData,
             },
@@ -165,5 +165,5 @@ export default function useNetworksMethodPlugin() {
         },
       };
     },
-  };
+  }
 }

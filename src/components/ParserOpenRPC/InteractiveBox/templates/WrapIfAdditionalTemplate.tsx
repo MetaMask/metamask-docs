@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import { ADDITIONAL_PROPERTY_FLAG } from "@rjsf/utils";
-import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
-import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import  * as isPlainObject  from "lodash.isplainobject"
+import { useContext, useEffect, useState } from 'react'
+import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils'
+import { BaseInputTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate'
+import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
+import * as isPlainObject from 'lodash.isplainobject'
 
-export const WrapIfAdditionalTemplate = (props) => {
+export const WrapIfAdditionalTemplate = props => {
   const {
     id,
     classNames,
@@ -19,43 +19,51 @@ export const WrapIfAdditionalTemplate = (props) => {
     registry,
     formContext,
     formData,
-  } = props;
-  const { templates } = registry;
-  const { RemoveButton } = templates.ButtonTemplates;
-  const additional = ADDITIONAL_PROPERTY_FLAG in schema;
-  const {
-    drawerLabel,
-    isComplexTypeView,
-    setIsComplexTypeView,
-    setDrawerLabel,
-  } = useContext(ParserOpenRPCContext);
-  const { currentSchemaId, setCurrentSchemaId } = formContext;
+  } = props
+  const { templates } = registry
+  const { RemoveButton } = templates.ButtonTemplates
+  const additional = ADDITIONAL_PROPERTY_FLAG in schema
+  const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } =
+    useContext(ParserOpenRPCContext)
+
+  // Local copy of the key being edited; prevents RJSF from renaming the
+  // property on every keystroke (which causes remounts).
+  const [pendingKey, setPendingKey] = useState(label)
+
   const onRemoveButtonClick = () => {
     if (isPlainObject(formData) && Object.keys(formData).length === 0) {
-      setIsComplexTypeView(false);
-      setDrawerLabel(null);
+      setIsComplexTypeView(false)
+      setDrawerLabel(null)
     }
-  };
+  }
 
   if (!additional) {
     return (
       <div className={classNames} style={style}>
         {children}
       </div>
-    );
+    )
   }
 
-  useEffect(() => {
-    if (!id.includes("_newKey")) {
-      setCurrentSchemaId(id);
-    }
-  }, []);
+  // No-op useEffect now; kept to satisfy linter but does nothing.
+  useEffect(() => {}, [])
 
-  if (!id.includes(currentSchemaId)) {
-    return null;
+  // In non-complex view we still want to show the additional rows so users can
+  // edit the newly-added key/value immediately. Editing the *key* itself should
+  // remain within the complex view flow.
+
+  if (!isComplexTypeView) {
+    /* eslint-disable no-console */
+    console.debug('[Checkpoint Ⓓ] Rendering additional property row', label)
+    /* eslint-enable no-console */
+    return (
+      <div className={classNames} style={style}>
+        {children}
+      </div>
+    )
   }
 
-  return isComplexTypeView ? (
+  return (
     <div className={classNames} style={style}>
       {drawerLabel === label && (
         <div>
@@ -69,17 +77,24 @@ export const WrapIfAdditionalTemplate = (props) => {
           {/* @ts-ignore */}
           <BaseInputTemplate
             name="key"
-            onChange={(target) => {
-              onKeyChange(target);
-              setDrawerLabel(target);
+            value={pendingKey}
+            onChange={(val: string) => {
+              setPendingKey(val)
             }}
-            schema={{ ...schema, ...{ type: "string" } }}
+            onBlur={() => {
+              if (pendingKey !== label) {
+                // Delegate renaming to RJSF, which will update formData and invoke onChange.
+                onKeyChange(pendingKey)
+                // Keep the drawer open but update its label to the new key.
+                setDrawerLabel(pendingKey)
+              }
+            }}
+            schema={{ ...schema, type: 'string' }}
             formContext={formContext}
-            value={label}
           />
         </div>
       )}
       <div>{children}</div>
     </div>
-  ) : null;
-};
+  )
+}
