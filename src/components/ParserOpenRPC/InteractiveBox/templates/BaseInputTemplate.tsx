@@ -6,8 +6,9 @@ import { Tooltip } from '@site/src/components/Tooltip'
 import debounce from 'lodash.debounce'
 import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
 
-interface ExtendedInputProps extends BaseInputTemplateProps {
+interface ExtendedInputProps extends Omit<BaseInputTemplateProps, 'onBlur'> {
   isArray?: boolean
+  onBlur?: (id: string, value: any) => void
   [key: string]: any
 }
 
@@ -18,7 +19,7 @@ export const BaseInputTemplate = ({
   value = '',
   disabled,
   onChange,
-  onBlur: handleBlur,
+  onBlur,
   rawErrors,
   hideError,
   required,
@@ -96,8 +97,7 @@ export const BaseInputTemplate = ({
               }}
               onBlur={_e => {
                 setIsFocused(false)
-                // @ts-ignore – RJSF passes (id, value) but our local types differ from React handler
-                handleBlur?.(id, inputValue)
+                onBlur?.(id, inputValue)
               }}
               {...rest}
             />
