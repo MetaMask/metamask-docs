@@ -174,13 +174,6 @@ export const ObjectFieldTemplate = props => {
         const inScope = isComplexTypeView ? idSchema?.$id === currentSchemaId : true // root view – always allow
         const shouldShow = canAdd && inScope && (isDynamicObject || schema?.type === 'object')
 
-        // Dev checkpoint
-        /* eslint-disable no-console */
-        if (shouldShow) {
-          console.debug('[Checkpoint Ⓒ] Rendering AddButton for', idSchema?.$id)
-        }
-        /* eslint-enable no-console */
-
         return shouldShow ? <AddButton onClick={onAddClick(schema)} /> : null
       })()}
     </>

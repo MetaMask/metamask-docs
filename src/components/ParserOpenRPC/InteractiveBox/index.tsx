@@ -190,11 +190,6 @@ export default function InteractiveBox({
     ),
   }
 
-  // Dev-time visibility: print the schema before dereferencing so we can track
-  // whether `additionalProperties` was injected as expected.
-  /* eslint-disable no-console */
-  console.debug('[Checkpoint Ⓐ] Initial schema passed to $RefParser', schema)
-  /* eslint-enable no-console */
   const uiSchema: UiSchema = {
     'ui:globalOptions': {
       label: false,
@@ -248,9 +243,6 @@ export default function InteractiveBox({
       try {
         if (schema) {
           const deref = (await $RefParser.dereference(schema)) as RJSFSchema
-          /* eslint-disable no-console */
-          console.debug('[Checkpoint Ⓑ] Dereferenced schema ready for RJSF', deref)
-          /* eslint-enable no-console */
           setParsedSchema(deref)
         }
       } catch (error) {
@@ -261,19 +253,10 @@ export default function InteractiveBox({
   }, [])
 
   const onChangeHandler = data => {
-    /* eslint-disable no-console */
-    console.debug('[EVENT] onChange', { time: Date.now(), incoming: data.formData })
-    /* eslint-enable no-console */
-
-    // Keep raw form data during typing to preserve focus
     setCurrentFormData(data.formData)
   }
 
   const handleBlur = () => {
-    /* eslint-disable no-console */
-    console.debug('[EVENT] onBlur – cleaning & propagating', { time: Date.now() })
-    /* eslint-enable no-console */
-
     const cleaned = removeEmptyArrays(currentFormData, params)
     setCurrentFormData(cleaned)
     onParamChange(cleaned)
@@ -337,15 +320,6 @@ export default function InteractiveBox({
     }
     closeComplexTypeView()
   }
-
-  // DEV: trace each render of InteractiveBox to diagnose unintentional remounts
-  /* eslint-disable no-console */
-  console.debug('[RENDER] InteractiveBox', {
-    time: Date.now(),
-    isComplexTypeView,
-    drawerLabel,
-  })
-  /* eslint-enable no-console */
 
   return parsedSchema ? (
     <>

@@ -53,9 +53,6 @@ export const WrapIfAdditionalTemplate = props => {
   // remain within the complex view flow.
 
   if (!isComplexTypeView) {
-    /* eslint-disable no-console */
-    console.debug('[Checkpoint Ⓓ] Rendering additional property row', label)
-    /* eslint-enable no-console */
     return (
       <div className={classNames} style={style}>
         {children}

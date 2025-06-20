@@ -8,6 +8,7 @@ import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
 
 interface ExtendedInputProps extends BaseInputTemplateProps {
   isArray?: boolean
+  [key: string]: any
 }
 
 export const BaseInputTemplate = ({
@@ -17,11 +18,13 @@ export const BaseInputTemplate = ({
   value = '',
   disabled,
   onChange,
+  onBlur: handleBlur,
   rawErrors,
   hideError,
   required,
   formContext,
   isArray,
+  ...rest
 }: ExtendedInputProps) => {
   const isNumber = schema.type === 'number' || schema.type === 'integer'
   const [isFocused, setIsFocused] = useState(false)
@@ -38,16 +41,10 @@ export const BaseInputTemplate = ({
   )
   const onInputChange = e => {
     const value = isNumber ? Number(+e?.target?.value || 0) : e?.target?.value
-    /* eslint-disable no-console */
-    console.debug('[TYPE] input change', { id, name, value })
-    /* eslint-enable no-console */
     setInputValue(value)
     isNumber ? debouncedOnChange(value, true) : debouncedOnChange(e)
   }
   const onInputNumberChange = value => {
-    /* eslint-disable no-console */
-    console.debug('[TYPE] number change', { id, name, value })
-    /* eslint-enable no-console */
     setInputValue(value)
     debouncedOnChange(value, true)
   }
@@ -97,9 +94,12 @@ export const BaseInputTemplate = ({
               onFocus={() => {
                 setIsFocused(true)
               }}
-              onBlur={() => {
+              onBlur={_e => {
                 setIsFocused(false)
+                // @ts-ignore – RJSF passes (id, value) but our local types differ from React handler
+                handleBlur?.(id, inputValue)
               }}
+              {...rest}
             />
             <span className={styles.tableColumnType}>
               {schema.type}
