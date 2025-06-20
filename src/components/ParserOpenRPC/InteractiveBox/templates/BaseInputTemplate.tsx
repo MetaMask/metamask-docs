@@ -58,6 +58,11 @@ export const BaseInputTemplate = ({
     }
   }, [value, isFormReseted, currentFormData])
 
+  // RJSF uses lowercase "autofocus"; React expects camelCase "autoFocus".
+  // Extract it so we can map correctly and avoid passing an invalid DOM prop.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { autofocus, ...inputRest } = rest
+
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
       {!isArray && (
@@ -99,7 +104,8 @@ export const BaseInputTemplate = ({
                 setIsFocused(false)
                 onBlur?.(id, inputValue)
               }}
-              {...rest}
+              autoFocus={autofocus}
+              {...inputRest}
             />
             <span className={styles.tableColumnType}>
               {schema.type}

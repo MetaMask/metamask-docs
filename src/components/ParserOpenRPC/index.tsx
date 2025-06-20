@@ -56,11 +56,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
     [currentNetwork, method]
   )
 
-  // Bail early if we failed to find the requested network or method.
-  if (!currentNetwork || !currentMethod) {
-    console.error('ParserOpenRPC: network or method not found', { network, method })
-    return null
-  }
+  const dataReady = currentNetwork && currentMethod
 
   const [isModalOpen, setModalOpen] = useState(false)
   const [reqResult, setReqResult] = useState(undefined)
@@ -149,7 +145,9 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
     }
   }, [currentNetwork, method, currentMethod, userEncPublicKey])
 
-  if (currentMethodData === null) return null
+  if (!dataReady || currentMethodData === null) {
+    return null
+  }
 
   const isMetamaskNetwork = network === NETWORK_NAMES.metamask
 
