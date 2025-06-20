@@ -215,15 +215,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        { 
-          name: 'og:image', 
-          content: '/img/metamaskog.jpeg' 
-        },
         {
           name: "keywords",
           content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
         },
       ],
+      image: '/img/metamaskog.jpeg',
       colorMode: {
         respectPrefersColorScheme: true,
       },
