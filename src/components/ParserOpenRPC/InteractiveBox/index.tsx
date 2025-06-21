@@ -14,7 +14,6 @@ import global from '../global.module.scss'
 import { BaseInputTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate'
 import { ArrayFieldTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/ArrayFieldTemplate'
 import { ObjectFieldTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/ObjectFieldTemplate'
-import { WrapIfAdditionalTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate'
 import { ConditionalField } from '@site/src/components/ParserOpenRPC/InteractiveBox/fields/ConditionalField'
 import { DropdownWidget } from '@site/src/components/ParserOpenRPC/InteractiveBox/widgets/DropdownWidget'
 import { SelectWidget } from '@site/src/components/ParserOpenRPC/InteractiveBox/widgets/SelectWidget'
@@ -29,6 +28,7 @@ import { AddButton } from '@site/src/components/ParserOpenRPC/InteractiveBox/but
 import ClearIcon from '@site/static/img/icons/clear-icon.svg'
 import ResetIcon from '@site/static/img/icons/reset-icon.svg'
 import SubmitIcon from '@site/static/img/icons/submit-icon.svg'
+import { WrapIfAdditionalTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/WrapIfAdditionalTemplate'
 
 interface InteractiveBoxProps {
   params: MethodParam[]
@@ -161,14 +161,35 @@ export default function InteractiveBox({
     }
   }, [examples, metaMaskAccount])
 
+  // ---------------- CHECKPOINT 1 ----------------
+  // Build the schema that will be supplied to RJSF.
+  // If a parameter schema contains `patternProperties` but does not explicitly
+  // allow additional properties, we inject `additionalProperties: true` so that
+  // RJSF`s `canExpand` helper recognises it as dynamic and enables the "Add" UI.
   const schema: RJSFSchema = {
     components: {
       schemas: components,
     },
     type: 'object',
-    // @ts-ignore
-    properties: Object.fromEntries(params.map(({ name, schema }) => [name, schema])),
+    // @ts-ignore – the OpenRPC param list isn't strictly typed for RJSF here.
+    properties: Object.fromEntries(
+      params.map(({ name, schema }) => {
+        let patchedSchema: any = { ...schema }
+        if (patchedSchema.patternProperties && patchedSchema.additionalProperties === undefined) {
+          // Attempt to infer a sensible schema for additional properties. If the
+          // sole patternProperty specifies an object, default to object {}; otherwise fallback to string.
+          let inferredAdditional: any = { type: 'string', default: 'New Value' }
+          const singlePattern: any = Object.values(patchedSchema.patternProperties)[0]
+          if (singlePattern && singlePattern.type === 'object') {
+            inferredAdditional = { type: 'object', default: {} }
+          }
+          patchedSchema = { ...patchedSchema, additionalProperties: inferredAdditional }
+        }
+        return [name, patchedSchema]
+      })
+    ),
   }
+
   const uiSchema: UiSchema = {
     'ui:globalOptions': {
       label: false,
@@ -221,7 +242,8 @@ export default function InteractiveBox({
     const dereferenceSchema = async () => {
       try {
         if (schema) {
-          setParsedSchema((await $RefParser.dereference(schema)) as RJSFSchema)
+          const deref = (await $RefParser.dereference(schema)) as RJSFSchema
+          setParsedSchema(deref)
         }
       } catch (error) {
         console.error('Error of parsing schema:', error)
@@ -231,11 +253,13 @@ export default function InteractiveBox({
   }, [])
 
   const onChangeHandler = data => {
-    const validData = removeEmptyArrays(data, params)
-    if (isOpen) {
-      setCurrentFormData(validData)
-      onParamChange(validData)
-    }
+    setCurrentFormData(data.formData)
+  }
+
+  const handleBlur = () => {
+    const cleaned = removeEmptyArrays(currentFormData, params)
+    setCurrentFormData(cleaned)
+    onParamChange(cleaned)
   }
 
   const cloneAndSetNullIfExists = (obj, key) => {
@@ -320,10 +344,8 @@ export default function InteractiveBox({
         validator={validator}
         liveValidate={isOpen}
         noHtml5Validate
-        onChange={data => {
-          const orderData = sortObjectKeysByArray(data.formData, params)
-          onChangeHandler(orderData)
-        }}
+        onChange={onChangeHandler}
+        onBlur={handleBlur}
         templates={templates}
         uiSchema={uiSchema}
         widgets={widgets}
@@ -364,7 +386,7 @@ export default function InteractiveBox({
               </button>
               <button
                 className={clsx(global.primaryBtn, styles.footerButtonRight)}
-                onClick={closeComplexTypeView}>
+                onClick={handleSubmitAndClose}>
                 Save
               </button>
             </div>

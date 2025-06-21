@@ -6,8 +6,10 @@ import { Tooltip } from '@site/src/components/Tooltip'
 import debounce from 'lodash.debounce'
 import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
 
-interface ExtendedInputProps extends BaseInputTemplateProps {
+interface ExtendedInputProps extends Omit<BaseInputTemplateProps, 'onBlur'> {
   isArray?: boolean
+  onBlur?: (id: string, value: any) => void
+  [key: string]: any
 }
 
 export const BaseInputTemplate = ({
@@ -17,11 +19,13 @@ export const BaseInputTemplate = ({
   value = '',
   disabled,
   onChange,
+  onBlur,
   rawErrors,
   hideError,
   required,
   formContext,
   isArray,
+  ...rest
 }: ExtendedInputProps) => {
   const isNumber = schema.type === 'number' || schema.type === 'integer'
   const [isFocused, setIsFocused] = useState(false)
@@ -53,6 +57,11 @@ export const BaseInputTemplate = ({
       setInputValue(value)
     }
   }, [value, isFormReseted, currentFormData])
+
+  // RJSF uses lowercase "autofocus"; React expects camelCase "autoFocus".
+  // Extract it so we can map correctly and avoid passing an invalid DOM prop.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { autofocus, ...inputRest } = rest
 
   return (
     <div className={isArray ? styles.arrayItemRow : styles.tableRow}>
@@ -91,9 +100,12 @@ export const BaseInputTemplate = ({
               onFocus={() => {
                 setIsFocused(true)
               }}
-              onBlur={() => {
+              onBlur={_e => {
                 setIsFocused(false)
+                onBlur?.(id, inputValue)
               }}
+              autoFocus={autofocus}
+              {...inputRest}
             />
             <span className={styles.tableColumnType}>
               {schema.type}
