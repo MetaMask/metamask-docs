@@ -108,7 +108,8 @@ import {
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
 
-const owner = walletClient.account.address;
+const addresses = await walletClient.getAddresses();
+const owner = addresses[0];
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
@@ -161,23 +162,37 @@ export const walletClient = createWalletClient({
 This example creates a [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) as the signatory,
 using Viem's `toWebAuthnAccount` function.
 
+:::info Installation required
+
+To work with WebAuthn, we’ll be using the [Ox](https://oxlib.sh/) SDK. Please ensure that the SDK is installed.
+
+:::
+
 <Tabs>
 <TabItem value="example.ts">
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { webAuthnAccount, credential } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
+import { Address, PublicKey } from "ox";
+import { toHex } from "viem";
+
+// Deserialize compressed public key
+const publicKey = PublicKey.fromHex(credential.publicKey);
+
+// Convert public key to address
+const owner = Address.fromPublicKey(publicKey);
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
   deploySalt: "0x",
-  signatory,
+  signatory: { webAuthnAccount, keyId: toHex(credential.id) },
 });
 ```
 
@@ -201,15 +216,16 @@ export const publicClient = createPublicClient({
 <TabItem value="signatory.ts">
 
 ```typescript
-import { createCredential, parsePublicKey } from "webauthn-p256";
-import { toWebAuthnAccount } from "viem/account-abstraction";
-import { toHex } from "viem";
+import { 
+  createWebAuthnCredential, 
+  toWebAuthnAccount, 
+} from "viem/account-abstraction";
   
-const credential = await createCredential({ name: "Your Delegator Passkey" });
-const webAuthnAccount = toWebAuthnAccount({ credential });
-const keyId = toHex("my-key-id");
-  
-const signatory = { webAuthnAccount, keyId };
+export const credential = await createWebAuthnCredential({
+  name: "MetaMask Smart Account",
+});
+
+export const webAuthnAccount = toWebAuthnAccount({ credential });
 ```
 
 </TabItem>
