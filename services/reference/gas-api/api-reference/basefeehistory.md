@@ -31,7 +31,7 @@ Array of historical base fees.
 
 ### Request
 
-Include your [API key](../../../../../developer-tools/dashboard/get-started/create-api.md)
+Include your [API key](/developer-tools/dashboard/get-started/create-api)
 and optional [API key secret](../../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret.md)
 to authorize your account to use the APIs.
 
