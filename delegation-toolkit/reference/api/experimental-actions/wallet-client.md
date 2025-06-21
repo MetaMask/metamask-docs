@@ -123,8 +123,8 @@ if (accountMetadata?.length !== 0) {
 
   // This transaction will deploy the delegator account.
   const hash = walletClient.sendTransaction({
-    to: accountMetadata.factory,
-    data: accountMetadata.factoryData,
+    to: accountMetadata[0].factory,
+    data: accountMetadata[0].factoryData,
   });
   
   // You should wait for transaction to be successfully executed.
