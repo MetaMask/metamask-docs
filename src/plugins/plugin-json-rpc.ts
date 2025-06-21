@@ -69,7 +69,7 @@ async function fetchMultipleData(
 }
 
 export const RPC_NETWORK_URL = 'https://sot-network-methods.vercel.app/specs'
-export const MM_RPC_URL = 'http://127.0.0.1:8080/openrpc.json'
+export const MM_RPC_URL = 'https://metamask.github.io/api-specs/latest/openrpc.json'
 export const MM_REF_PATH = 'wallet/reference/json-rpc-methods'
 
 export enum NETWORK_NAMES {
