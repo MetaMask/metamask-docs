@@ -164,7 +164,7 @@ using Viem's `toWebAuthnAccount` function.
 
 :::info Installation required
 
-To work with WebAuthn, we’ll be using the [Ox](https://oxlib.sh/) SDK. Please ensure that the SDK is installed.
+To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
 
 :::
 
