@@ -109,6 +109,12 @@ The following example updates the previous example to estimate the fees.
 This example uses constant values, but the [Hello Gator example](https://github.com/MetaMask/hello-gator) uses Pimlico's Alto bundler,
 which fetches user operation gas price using the RPC method [`pimlico_getUserOperationPrice`](https://docs.pimlico.io/infra/bundler/endpoints/pimlico_getUserOperationGasPrice).
 
+:::info Installation required
+
+To estimate the gas fee using Pimlico's bundler, install the [permissionless.js SDK](https://docs.pimlico.io/references/permissionless/).
+
+:::
+
 ```typescript title="example.ts"
 // add-next-line
 + import { createPimlicoClient } from "permissionless/clients/pimlico";

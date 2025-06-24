@@ -48,7 +48,7 @@ This example creates a signatory from a private key using Viem's [`privateKeyToA
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { account } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
@@ -57,9 +57,9 @@ import {
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory,
+  signatory: { account },
 });
 ```
 
@@ -86,9 +86,7 @@ export const publicClient = createPublicClient({
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 
 const privateKey = generatePrivateKey(); 
-const account = privateKeyToAccount(privateKey);
-
-export const signatory = { account };
+export const account = privateKeyToAccount(privateKey);
 ```
 
 </TabItem>
@@ -104,18 +102,21 @@ using Viem's `createWalletClient` function.
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { walletClient } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
 
+const addresses = await walletClient.getAddresses();
+const owner = addresses[0];
+
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [owner, [], [], []],
   deploySalt: "0x",
-  signatory,
+  signatory: { walletClient },
 });
 ```
 
@@ -146,13 +147,11 @@ import { http, createWalletClient } from "viem";
 const privateKey = generatePrivateKey(); 
 const account = privateKeyToAccount(privateKey);
 
-const walletClient = createWalletClient({
+export const walletClient = createWalletClient({
   account,
   chain,
   transport: http()
 })
-
-export const signatory = { walletClient };
 ```
 
 </TabItem>
@@ -163,23 +162,37 @@ export const signatory = { walletClient };
 This example creates a [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) as the signatory,
 using Viem's `toWebAuthnAccount` function.
 
+:::info Installation required
+
+To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
+
+:::
+
 <Tabs>
 <TabItem value="example.ts">
 
 ```typescript
 import { publicClient } from "./client.ts"
-import { signatory } from "./signatory.ts";
+import { webAuthnAccount, credential } from "./signatory.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
 } from "@metamask/delegation-toolkit";
+import { Address, PublicKey } from "ox";
+import { toHex } from "viem";
+
+// Deserialize compressed public key
+const publicKey = PublicKey.fromHex(credential.publicKey);
+
+// Convert public key to address
+const owner = Address.fromPublicKey(publicKey);
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, p256KeyIds, p256XValues, p256YValues],
+  deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
   deploySalt: "0x",
-  signatory,
+  signatory: { webAuthnAccount, keyId: toHex(credential.id) },
 });
 ```
 
@@ -203,15 +216,16 @@ export const publicClient = createPublicClient({
 <TabItem value="signatory.ts">
 
 ```typescript
-import { createCredential, parsePublicKey } from "webauthn-p256";
-import { toWebAuthnAccount } from "viem/account-abstraction";
-import { toHex } from "viem";
+import { 
+  createWebAuthnCredential, 
+  toWebAuthnAccount, 
+} from "viem/account-abstraction";
   
-const credential = await createCredential({ name: "Your Delegator Passkey" });
-const webAuthnAccount = toWebAuthnAccount({ credential });
-const keyId = toHex("my-key-id");
-  
-const signatory = { webAuthnAccount, keyId };
+export const credential = await createWebAuthnCredential({
+  name: "MetaMask Smart Account",
+});
+
+export const webAuthnAccount = toWebAuthnAccount({ credential });
 ```
 
 </TabItem>
