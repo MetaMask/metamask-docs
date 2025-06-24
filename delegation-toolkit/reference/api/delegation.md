@@ -157,7 +157,7 @@ import { createExecution } from "@metamask/delegation-toolkit";
 // Creates an ExecutionStruct to transfer 0.01 ETH to
 // 0xe3C818389583fDD5cAC32f548140fE26BcEaE907 address.
 const caveats = createExecution({
-  target: 0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
+  target: "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
   // 0.01 ETH in wei
   value: 10000000000000000n,
   callData: "0x",
@@ -384,7 +384,7 @@ const signature = signDelegation({
 
 ```ts
 import { 
-  getDeleGatorEnvironment, 
+  getDeleGatorEnvironment,
   createDelegation,
 } from "@metamask/delegation-toolkit";
 import { createWalletClient } from "viem";

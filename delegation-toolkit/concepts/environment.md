@@ -170,7 +170,7 @@ import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
   overrideDeployedEnvironment,
   deployDeleGatorEnvironment 
-} from '@metamask/delegation-toolkit/utils';
+} from "@metamask/delegation-toolkit/utils";
 
 const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
   walletClient, 
