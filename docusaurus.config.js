@@ -15,6 +15,9 @@ const codeTheme = themes.dracula
 const remarkCodesandbox = require('remark-codesandbox')
 const isProd = process.env.NODE_ENV === 'production'
 const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
+const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
+const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
+const extendDropdown = fs.readFileSync("./src/components/NavDropdown/ExtendScale.html", "utf-8");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -212,46 +215,53 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        { 
-          name: 'og:image', 
-          content: '/img/metamaskog.jpeg' 
-        },
         {
           name: "keywords",
           content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
         },
       ],
+      image: '/img/metamaskog.jpeg',
       colorMode: {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: ' │ ‎ Documentation',
         logo: {
           alt: 'MetaMask logo',
           src: 'img/metamask-logo.svg',
           srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
+        hideOnScroll: true,
         items: [
           {
-            to: 'sdk',
-            label: 'SDK',
+            type: 'dropdown',
+            label: 'Connect to MetaMask',
+            items: [
+              {
+                type: "html",
+                value: connectDropdown,
+              },
+            ],
           },
           {
-            to: 'wallet',
-            label: 'Wallet API',
+            type: 'dropdown',
+            label: 'Embed MetaMask',
+            items: [
+              {
+                type: "html",
+                value: embedDropdown,
+              },
+            ],
           },
           {
-            to: 'delegation-toolkit',
-            label: 'Delegation Toolkit',
-          },
-          {
-            to: 'snaps',
-            label: 'Snaps',
-          },
-          {
-            to: 'services',
-            label: 'Services',
+            type: 'dropdown',
+            label: 'Extend and scale',
+            items: [
+              {
+                type: "html",
+                value: extendDropdown,
+              },
+            ],
           },
           {
             type: 'dropdown',
@@ -333,7 +343,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-docs',
               },
               {
-                label: 'MetaMask wallet GitHub',
+                label: 'MetaMask extension GitHub',
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
@@ -341,7 +351,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'MetaMask Mobile GitHub',
+                label: 'MetaMask mobile GitHub',
                 href: 'https://github.com/MetaMask/metamask-mobile',
               },
               {

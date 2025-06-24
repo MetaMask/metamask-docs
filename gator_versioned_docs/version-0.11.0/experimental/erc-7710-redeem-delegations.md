@@ -12,8 +12,8 @@ import TabItem from "@theme/TabItem";
 This is an experimental feature and may change in future releases.
 :::
 
-[ERC-7710](https://eip.tools/eip/7710) introduces a standard way for smart contract accounts (SCAs) to delegate capabilities to other
-SCAs or externally owned accounts (EOAs).
+[ERC-7710](https://eip.tools/eip/7710) introduces a standard way for smart accounts to delegate capabilities to other
+smart accounts or externally owned accounts (EOAs).
 
 The MetaMask Delegation Toolkit provides two experimental functions, `erc7710BundlerActions()` and `erc7710WalletActions()`, that let
 a caller redeem delegations granted by MetaMask's permissions system.
@@ -57,7 +57,7 @@ const permissionsResponse = [{
 
 const permissionsContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
-// accountMeta is only present when the smart contract account is not deployed.
+// accountMeta is only present when the smart account is not deployed.
 const accountMetadata = permissionsResponse[0].accountMeta;
 ```
 
@@ -80,14 +80,11 @@ If you redeem delegations in any other way, it is your responsibility to validat
 
 ## Redeem the permission
 
-Redeem a delegation using one of two methods. Choose the method based on your account type:
+Redeem a delegation with a [smart account](#redeem-with-a-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
 
-- If redeeming with an SCA, call `sendUserOperationWithDelegation`.
-- If redeeming with an EOA, call `sendTransactionWithDelegation`.
+### Redeem with a smart account
 
-### Redeem with an SCA
-
-To redeem a delegation with a smart contract account, create a [`MetaMaskSmartAccount`](../how-to/create-delegator-account.md#create-a-metamasksmartaccount)
+To redeem a delegation with a smart account, create a [`MetaMaskSmartAccount`](../how-to/create-smart-account/index.md#create-a-metamasksmartaccount)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use `sendUserOperationWithDelegation` to redeem the permission.
@@ -191,8 +188,8 @@ if (accountMetadata?.length !== 0) {
 
   // This transaction will deploy the delegator account.
   const hash = walletClient.sendTransaction({
-    to: accountMetadata.factory,
-    data: accountMetadata.factoryData,
+    to: accountMetadata[0].factory,
+    data: accountMetadata[0].factoryData,
   });
   
   // You should wait for transaction to be successfully executed.
@@ -213,7 +210,7 @@ const hash = walletClient.sendTransactionWithDelegation({
 <TabItem value="config.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
+import { http, createPublicClient, createWalletClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
 import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";

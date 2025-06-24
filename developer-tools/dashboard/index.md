@@ -1,5 +1,6 @@
 ---
 sidebar_label: Introduction
+title: Developer dashboard introduction
 description: Documentation for using the MetaMask Developer dashboard
 sidebar_position: 1
 ---
@@ -7,7 +8,7 @@ sidebar_position: 1
 import CardList from '@site/src/components/CardList'
 import Banner from '@site/src/components/Banner'
 
-# Developer dashboard documentation
+# Introduction
 
 The [MetaMask Developer dashboard](https://developer.metamask.io/) provides developers with a
 comprehensive overview and control of their Infura service.

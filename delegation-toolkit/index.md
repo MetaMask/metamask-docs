@@ -1,5 +1,5 @@
 ---
-title: Introduction to the MetaMask Delegation Toolkit
+title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of the Delegation Toolkit, its benefits, and where to start in the documentation.
 sidebar_position: 1
@@ -7,7 +7,7 @@ sidebar_position: 1
 
 import CardList from "@site/src/components/CardList"
 
-# MetaMask Delegation Toolkit
+# Embed smart accounts using the Delegation Toolkit
 
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for integrating
 embedded smart contract wallets, known as [MetaMask smart accounts](concepts/smart-accounts.md),

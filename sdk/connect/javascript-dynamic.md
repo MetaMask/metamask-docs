@@ -271,4 +271,4 @@ Common issues and solutions include:
 - **Mobile experience issues:**
   - Test on actual mobile devices.
   - Verify redirect URLs.
-  - Check MetaMask Mobile installation.
+  - Check MetaMask mobile app installation.

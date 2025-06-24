@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Create a custom caveat enforcer
 
-When [restricting a delegation](restrict-delegation.md), the MetaMask Delegation Toolkit provides some [out-of-the-box caveat enforcers](restrict-delegation.md#caveat-types)
+When [restricting a delegation](restrict-delegation.md), the MetaMask Delegation Toolkit provides some [out-of-the-box caveat enforcers](../../reference/caveats.md)
 that cover common use cases.
 For more granular or custom control, you can follow the instructions on this page to create custom caveat enforcers from scratch.
 
@@ -92,7 +92,7 @@ import {
 import { toHex } from "viem";
 import { delegatorSmartAccount } from "./config.ts";
 
-const environment = delegatorSmartAccount.enviroment;
+const environment = delegatorSmartAccount.environment;
 
 // Replace this with the address where the AfterTimestampEnforcer.sol contract is deployed.
 const afterTimestampEnforcer = "0x22Ae4c4919C3aB4B5FC309713Bf707569B74876F";

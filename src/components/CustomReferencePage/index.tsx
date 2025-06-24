@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import Layout from "@theme/Layout";
 import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
-import DocSidebar from '@theme/DocSidebar';
+import DocSidebar from "@theme/DocSidebar";
 import { useLocation } from "@docusaurus/router";
-import { prepareLinkItems, MM_REF_PATH } from '@site/src/plugins/plugin-json-rpc';
+import { prepareLinkItems, MM_REF_PATH } from "@site/src/plugins/plugin-json-rpc";
 import styles from "./styles.module.css";
 const sidebar = require("../../../wallet-sidebar.js");
 
@@ -29,22 +29,29 @@ function transformItems(items, dynamicItems) {
       }
     }
     if (newItem.href) {
-      if (newItem.href.endsWith("/index")) {
-        newItem.href = newItem.href.slice(0, -5);
-      }
       if (!newItem.href.startsWith("/")) {
         newItem.href = `/${newItem.href}`;
       }
-      newItem.href = `/wallet${newItem.href}`;
+      if (newItem.href.endsWith("/index")) {
+        newItem.href = newItem.href.slice(0, -5);
+      }
+      if (newItem.href === "/") {
+        newItem.href = "/wallet/";
+      } else {
+        newItem.href = `/wallet${newItem.href}`;
+      }
     }
     return newItem;
   });
 }
 
-const CustomReferencePage = (props) => {
+const CustomReferencePage = props => {
   const customData = props.route.customData;
   const { pathname } = useLocation();
-  const refItems = prepareLinkItems(props.methodsData, MM_REF_PATH).map(item => ({...item, href: item.href.replace("/wallet", "")}))
+  const refItems = prepareLinkItems(props.methodsData, MM_REF_PATH).map(item => ({
+    ...item,
+    href: item.href.replace("/wallet", ""),
+  }));
   const updatedSidebar = transformItems(sidebar.walletSidebar, refItems);
   return (
     <Layout>
@@ -52,16 +59,18 @@ const CustomReferencePage = (props) => {
         <aside>
           <div className={styles.sidebarViewport}>
             <div className={styles.sidebar}>
-              <DocSidebar sidebar={updatedSidebar} path={pathname} onCollapse={() => {}} isHidden={false} />
+              <DocSidebar
+                sidebar={updatedSidebar}
+                path={pathname}
+                onCollapse={() => {}}
+                isHidden={false}
+              />
             </div>
           </div>
         </aside>
         <div className={styles.mainContainer}>
           <div className={styles.contentWrapper}>
-            <ParserOpenRPC
-              network={customData.networkName}
-              method={customData.name}
-            />
+            <ParserOpenRPC network={customData.networkName} method={customData.name} />
           </div>
         </div>
       </div>

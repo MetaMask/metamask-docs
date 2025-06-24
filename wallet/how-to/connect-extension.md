@@ -14,15 +14,16 @@ deeplinking, connect to MetaMask using [**MetaMask SDK**](/sdk) instead.
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.
 This page provides instructions for connecting to MetaMask using the wallet detection mechanism
-introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
+introduced by [EIP-6963](../concepts/wallet-interoperability.md).
 This approach allows you to detect multiple installed wallets and connect to them without conflicts.
-
-:::info
-Learn more about EIP-6963 in [Wallet interoperability](../concepts/wallet-interoperability.md).
-:::
 
 You can connect to the MetaMask browser extension [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
 or [directly using Vite](#connect-to-metamask-directly-using-vite).
+
+:::note
+Using the Wallet API enables your dapp to work both with the MetaMask extension and in the in-app browser of the MetaMask mobile app.
+However, we recommend using the [SDK](/sdk) for a more consistent mobile connection.
+:::
 
 ## Connect to MetaMask using third-party libraries
 

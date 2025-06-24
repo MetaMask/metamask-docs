@@ -46,10 +46,9 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a delegator account
 
-[Create a delegator account](../how-to/create-delegator-account.md) to set up a delegation.
-The delegator must be a smart account.
+[Create a delegator smart account](../how-to/create-smart-account/index.md) to set up a delegation.
 
-This example configures a [Hybrid Delegator](../how-to/configure-delegator-accounts-signers.md#configure-a-hybrid-delegator):
+This example configures a [Hybrid](../how-to/create-smart-account/configure-accounts-signers.md#configure-a-hybrid-smart-account) delegator account:
 
 ```typescript
 import {
@@ -72,9 +71,9 @@ const delegatorSmartAccount = await toMetaMaskSmartAccount({
 ### 4. Create a delegate account
 
 Create a delegate account to receive the delegation.
-The delegate can be either a smart contract account (SCA) or an externally owned account (EOA).
+The delegate can be either a smart account or an externally owned account (EOA).
 
-This example uses an SCA:
+This example uses a smart account:
 
 ```typescript
 import {
@@ -135,7 +134,7 @@ The delegate account can now [redeem the delegation](../how-to/redeem-delegation
 The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and
 executes actions on the delegator's behalf.
 
-To prepare the call data for the redeem transaction, use the `redeemDelegation` utility function from the Delegation Toolkit.
+To prepare the calldata for the redeem transaction, use the `redeemDelegation` utility function from the Delegation Toolkit.
 
 ```typescript
 import {
