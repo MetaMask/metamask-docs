@@ -18,7 +18,6 @@ If you don't see the network you're looking for, you can request support by emai
 | Binance Smart Chain | ✅      | ✅      | ✅      |
 | Optimism            | ✅      | ✅      | ✅      |
 | Arbitrum            | ✅      | ✅      | ✅      |
-| Linea               | ✅      | ✅      | ✅      |
 | Base                | ✅      | ✅      | ✅      |
 | Gnosis Chain        | ✅      | ✅      | ✅      |
 
@@ -27,7 +26,6 @@ If you don't see the network you're looking for, you can request support by emai
 | Network Name     | v0.10.1 | v0.10.2 | v0.11.0 |
 | ---------------- | ------- | ------- | ------- |
 | Ethereum Sepolia | ✅      | ✅      | ✅      |
-| Linea Sepolia    | ✅      | ✅      | ✅      |
 | Base Sepolia     | ✅      | ✅      | ✅      |
 | MegaEth          | ✅      | ✅      | ✅      |
 | Gnosis Chiado    | ❌      | ❌      | ✅      |

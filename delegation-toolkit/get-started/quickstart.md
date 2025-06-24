@@ -146,11 +146,7 @@ import { zeroAddress } from "viem";
 
 const delegations = [ signedDelegation ];
 
-const executions = [{
-  target: zeroAddress,  
-  value: 0n, 
-  callData: "0x"
-}];
+const executions = createExecution(zeroAddress);
 
 const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
   delegations: [ delegations ],
