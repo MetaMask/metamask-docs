@@ -2,12 +2,13 @@
 description: Get the busy threshold.
 ---
 
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Get the busy threshold
 
-Returns the busy threshold for the specified blockchain network.
+Returns the busy threshold for the specified blockchain network. <CreditCost network="gasApi" method="busyThreshold" />
 
 For example, a `busyThreshold` value of `30` Gwei indicates that 90% of the historical base fees on
 the network have been below `30` Gwei.

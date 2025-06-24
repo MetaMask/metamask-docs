@@ -1,0 +1,25 @@
+- Transaction object with the following fields:
+  - `from`: (string) address (20 bytes) the transaction is sent from.
+  - `to`: (string) _[required]_ address (20 bytes) the transaction is directed to.
+  - `gas`: (string) hexadecimal value of the gas provided for the transaction execution. `eth_call` consumes zero
+    gas, but this parameter may be needed by some executions.
+  - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
+  - `maxPriorityFeePerGas`: (string) maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
+  - `value`: (string) hexadecimal of the value sent with this transaction.
+  - `data`: (string) hash of the method signature and encoded parameters.
+    See [Ethereum contract ABI specification](https://docs.soliditylang.org/en/latest/abi-spec.html).
+- `block parameter`: [_Required_] hexadecimal block number, or one of the string tags
+  `latest`, `earliest`, `pending`, or `finalized`.
+  See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
+
+    :::warning
+    `safe` isn't supported. Use `finalized` instead. 
+    :::
+
+- Optional tracing options object with the following fields:
+  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
+    [`prestateTracer`](../debug/index.md#prestatetracer).
+  - `tracerConfig`: (object) _[optional]_ tracer configuration options:
+    - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
+      sub-calls. It eliminates the additional processing for each call frame.

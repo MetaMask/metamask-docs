@@ -8,12 +8,12 @@ sidebar_label: Debug methods
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug
 methods on the Mantle network:
 
-- [`debug_storageRangeAt`](debug_storagerangeat.md)
-- [`debug_traceBlock`](debug_traceblock.md)
-- [`debug_traceBlockByHash`](debug_traceblockbyhash.md)
-- [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
-- [`debug_traceTransaction`](debug_tracetransaction.md)
-- [`debug_traceCall`](debug_tracecall.md)
+- [`debug_storageRangeAt`](debug_storagerangeat.mdx)
+- [`debug_traceBlock`](debug_traceblock.mdx)
+- [`debug_traceBlockByHash`](debug_traceblockbyhash.mdx)
+- [`debug_traceBlockByNumber`](debug_traceblockbynumber.mdx)
+- [`debug_traceTransaction`](debug_tracetransaction.mdx)
+- [`debug_traceCall`](debug_tracecall.mdx)
 
 ## Debug tracing types
 
