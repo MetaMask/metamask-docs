@@ -101,6 +101,13 @@ delegator account to the delegate account.
 This example passes an empty `caveats` array, which means the delegate can perform any action on the delegator's behalf.
 We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
 
+:::warning Important
+
+Before creating a delegation, ensure that the delegator account has 
+been deployed. If the account is not deployed, redeeming the delegation will fail.
+
+:::
+
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
 
