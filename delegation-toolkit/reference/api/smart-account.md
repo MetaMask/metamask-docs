@@ -372,12 +372,12 @@ Creates a `MetaMaskSmartAccount` instance.
 | Name | Type                                                | Required                                                     | Description                                                                                                                                                                       |
 | ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
-| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid or Multisig.                                                                                                             |
+| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
 | `signatory` | `SignatoryConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
 | `environment` | `DeleGatorEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
-| `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
+| `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
 
 ### Hybrid implementation example
 
@@ -464,6 +464,44 @@ export const aliceAccount = privateKeyToAccount(alicePrivateKey);
 
 const bobPrivateKey = generatePrivateKey();
 export const bobAccount = privateKeyToAccount(bobPrivateKey);
+```
+
+</TabItem>
+</Tabs>
+
+### Stateless7702 implementation example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import {
+  Implementation,
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+import { publicClient, account } from "./config.ts";
+
+const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Stateless7702,
+  address: account.address,
+  signatory: { account: account },
+});
+```
+
+</TabItem>
+<TabItem value ="config.ts">
+
+```ts
+import { createPublicClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { lineaSepolia as chain } from "viem/chains";
+ 
+export const account = privateKeyToAccount("0x...");
+export const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+});
 ```
 
 </TabItem>

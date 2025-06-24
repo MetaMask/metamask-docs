@@ -36,11 +36,9 @@ It assumes you have a delegation signed by the delegator, and that the delegate 
 <TabItem value="example.ts">
 
 ```typescript
-import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
-} from "@metamask/delegation-toolkit";
+import { ExecutionStruct } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { bundlerClient, pimlicoClient } from "./client.ts";
 import { delegateSmartAccount } from "./account.ts";
 
@@ -56,7 +54,7 @@ const executions: ExecutionStruct[] = [{
   callData: "0x"
 }];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]
@@ -139,10 +137,13 @@ The following example demonstrates how to submit a transaction to redeem a deleg
 
 ```typescript
 import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
+  ExecutionStruct,
+  ExecutionMode
+  Delegation,
+  getDeleGatorEnvironment,
 } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { lineaSepolia as chain } from "viem/chains";
 import { delegateWalletClient } from "./account.ts";
 
@@ -159,7 +160,7 @@ const executions: ExecutionStruct[] = [{
   callData: "0x"
 }];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]
@@ -207,10 +208,12 @@ the primary difference is that an EOA submits a regular transaction instead of a
 
 ```typescript
 import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
+  ExecutionStruct,
+  Delegation,
+  ExecutionMode,
 } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { bundlerClient, pimlicoClient } from "./client.ts";
 import { delegateSmartAccount } from "./account.ts";
 
@@ -241,7 +244,7 @@ const executionsArray: ExecutionStruct:[][] = [
  execution
 ];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]

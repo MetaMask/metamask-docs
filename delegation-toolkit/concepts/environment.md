@@ -98,6 +98,7 @@ Your wallet must have sufficient native token balance to deploy the contracts.
 ```typescript
 import { walletClient, publicClient } from "./config.ts";
 import { lineaSepolia as chain } from "viem/chains";
+import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -140,6 +141,7 @@ For example, if you've already deployed the `EntryPoint` contract on the target 
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
 import { lineaSepolia as chain } from "viem/chains";
+import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -164,11 +166,11 @@ To override the delegator environment, the toolkit provides a `overrideDeployedE
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
 import { lineaSepolia as chain } from "viem/chains";
+import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
-  DeleGatorEnvironment, 
   overrideDeployedEnvironment,
-  deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit";
+  deployDeleGatorEnvironment 
+} from '@metamask/delegation-toolkit/utils';
 
 const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -190,12 +192,12 @@ If you've already deployed the contracts using a different method, you can creat
 - import { walletClient, publicClient } from "./config.ts";
 - import { lineaSepolia as chain } from "viem/chains";
 // remove-end
+import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
-  DeleGatorEnvironment, 
   overrideDeployedEnvironment,
   // remove-next-line
 - deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit";
+} from "@metamask/delegation-toolkit/utils";
 
 // remove-start
 - const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(

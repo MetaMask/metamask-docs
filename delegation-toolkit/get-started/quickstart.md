@@ -137,18 +137,16 @@ executes actions on the delegator's behalf.
 To prepare the calldata for the redeem transaction, use the `redeemDelegation` utility function from the Delegation Toolkit.
 
 ```typescript
-import {
-  createExecution,
-  DelegationFramework,
-  SINGLE_DEFAULT_MODE,
-} from "@metamask/delegation-toolkit";
+import { createExecution } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { zeroAddress } from "viem";
 
 const delegations = [ signedDelegation ];
 
-const executions = createExecution(zeroAddress);
+const executions = createExecution({ target: zeroAddress });
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ SINGLE_DEFAULT_MODE ],
   executions: [ executions ]
