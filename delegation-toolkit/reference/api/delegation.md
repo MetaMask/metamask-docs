@@ -156,7 +156,7 @@ import { createExecution } from "@metamask/delegation-toolkit";
 
 // Creates an ExecutionStruct to transfer 0.01 ETH to
 // 0xe3C818389583fDD5cAC32f548140fE26BcEaE907 address.
-const caveats = createExecution({
+const execution = createExecution({
   target: "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
   // 0.01 ETH in wei
   value: 10000000000000000n,
