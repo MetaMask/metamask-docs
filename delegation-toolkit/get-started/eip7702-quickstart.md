@@ -131,7 +131,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ### 7. Send a user operation
 
-To send a user operation through the upgraded smart account, use the Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
+To send a user operation through the upgraded EOA, use the Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 
 ```ts
 import { parseEther } from "viem";
