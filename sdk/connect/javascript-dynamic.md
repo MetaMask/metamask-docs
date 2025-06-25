@@ -8,26 +8,17 @@ keywords: [connect, MetaMask, Dynamic, SDK, dapp]
 # Connect to MetaMask using Dynamic SDK
 
 Get started with MetaMask SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-You can set up the SDKs in the following ways:
+You can use MetaMask SDK features directly within Dynamic SDK.
+Set up the SDKs in one of the following ways:
 
-- [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Wagmi dapp with both SDKs.
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Wagmi dapp with both SDKs.
-- [Manual setup](#set-up-manually) - Set up both SDKs in an existing dapp.
+- [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Dynamic dapp.
+- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Dynamic dapp.
+- [Manual setup](#set-up-manually) - Set up Dynamic SDK in an existing dapp.
 
-<p align="center">
-  <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="450px" />
-</p>
-
-Features include:
-
-- **MetaMask SDK built into Dynamic** - Use MetaMask SDK features directly within Dynamic SDK.
-- **Wallet connection** - Connect to MetaMask wallet with enhanced features.
-- **Mobile experience** - Optimized for both desktop and mobile users.
-- **TypeScript support** - Full type safety and modern development experience.
-- **Next.js integration** - Built with Next.js 14 and App Router.
-
-:::note Project structure
-The project you will set up has the following structure:
+<details>
+<summary>Project structure</summary>
+<div>
+The project you set up using the CLI or template has the following structure:
 
 ```text
 ├── app/
@@ -40,7 +31,12 @@ The project you will set up has the following structure:
 ├── next.config.ts    # Next.js configuration
 └── package.json      # Project dependencies
 ```
-:::
+</div>
+</details>
+
+<p align="center">
+  <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" />
+</p>
 
 ## Prerequisites
 
