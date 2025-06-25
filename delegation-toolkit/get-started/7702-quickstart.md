@@ -6,7 +6,9 @@ sidebar_label: EIP-7702 Quickstart
 
 # EIP-7702 Quickstart
 
-This page demonstrates how to upgrade your Externally Owned Account (EOA) to support smart account functionality using an EIP-7702 transaction. This enables your EOA to leverage the benefits of account abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegation capabilities](./../concepts/delegation.md).
+This page demonstrates how to upgrade your Externally Owned Account (EOA) to support MetaMask smart account 
+functionality using an EIP-7702 transaction. This enables your EOA to leverage the benefits of account 
+abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegation capabilities](./../concepts/delegation.md).
 
 ## Prerequisites
 
@@ -16,8 +18,8 @@ This page demonstrates how to upgrade your Externally Owned Account (EOA) to sup
 
 ### 1. Set up a Public Client
 
-Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-This client will let the delegator account query the signer's account state and interact with smart contracts.
+Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
+This client will let the EOA query the account state and interact with blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -46,7 +48,7 @@ const bundlerClient = createBundlerClient({
 ### 3. Set up a Wallet Client
 
 Set up [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. 
-This lets you sign and submit authorization.
+This lets you sign and submit EIP-7702 authorization.
 
 ```typescript
 import { createWalletClient, http } from "viem"
