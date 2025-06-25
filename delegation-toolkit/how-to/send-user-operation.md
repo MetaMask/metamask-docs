@@ -111,7 +111,7 @@ which fetches user operation gas price using the RPC method [`pimlico_getUserOpe
 
 :::info Installation required
 
-To estimate the gas fee using Pimlico's bundler, install the [permissionless.js SDK](https://docs.pimlico.io/references/permissionless/).
+To estimate the gas fee for Pimlico's bundler, install the [permissionless.js SDK](https://docs.pimlico.io/references/permissionless/).
 
 :::
 
