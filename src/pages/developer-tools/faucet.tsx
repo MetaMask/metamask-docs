@@ -19,7 +19,6 @@ import { MetamaskProviderContext } from '@site/src/theme/Root'
 import styles from './faucet.module.scss'
 import { REQUEST_PARAMS } from '@site/src/lib/constants'
 import { AlertBalanceTooLow } from '@site/src/components/Faucet/Alerts'
-import { trackInputChangeForSegment, trackPageViewForSegment } from '@site/src/lib/segmentAnalytics'
 
 const lineaMaintenanceFlag = 'linea-maintenance-mode'
 const sepoliaMaintenanceFlag = 'sepolia-maintenance-mode'
@@ -114,11 +113,6 @@ export default function Faucet() {
 
   const handleOnInputChange = value => {
     setWalletAddress(value)
-    trackInputChangeForSegment({
-      eventName: 'Wallet address',
-      userExperience: 'B',
-      timestamp: Date.now(),
-    })
   }
 
   useEffect(() => {
@@ -140,12 +134,6 @@ export default function Faucet() {
     ldClient.on(`change:${lineaMaintenanceFlag}`, handleChangeLinea)
     ldClient.on(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia)
     ldClient.on(`change:${faucetBypassDomainFlag}`, handleFaucetBypassDomain)
-
-    trackPageViewForSegment({
-      name: 'Faucet Page',
-      path: 'developer-tools/faucet',
-      userExperience: 'B',
-    })
 
     return () => {
       ldClient.off(`change:${lineaMaintenanceFlag}`, handleChangeLinea)

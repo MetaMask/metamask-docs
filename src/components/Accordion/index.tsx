@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import styles from "./accordion.module.scss";
 import CloseImg from "./close.svg";
-import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 interface IAccordion {
   children: [React.ReactElement, React.ReactElement];
@@ -16,14 +15,6 @@ export default function Accordion({
   const [isOpened, setIsOpened] = useState(opened);
 
   const handleToggle = () => {
-    trackClickForSegment({
-      eventName: `${isOpened ? "Expanded" : "Collapsed"} - ${title}`,
-      clickType: "Accordion",
-      userExperience: "B",
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    });
     setIsOpened((value) => !value);
   };
 

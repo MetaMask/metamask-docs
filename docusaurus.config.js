@@ -12,8 +12,6 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const remarkCodesandbox = require('remark-codesandbox')
-const isProd = process.env.NODE_ENV === 'production'
 const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
 const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
 const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
@@ -47,6 +45,7 @@ const config = {
     DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
+    SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
   },
 
   trailingSlash: true,
@@ -54,11 +53,6 @@ const config = {
   scripts: [
     {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
-    },
-    {
-      src: 'https://plausible.io/js/script.js',
-      defer: true,
-      'data-domain': 'docs.metamask.io',
     },
   ],
 
@@ -197,16 +191,8 @@ const config = {
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
-    isProd
-      ? [
-          'docusaurus-plugin-segment',
-          {
-            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-            load: { cookie: { sameSite: 'None', secure: true } },
-            page: true,
-          },
-        ]
-      : null,
+    // Custom Segment plugin for controlled analytics
+    './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
   ],
