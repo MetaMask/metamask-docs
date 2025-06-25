@@ -85,7 +85,9 @@ function WatchAccount() {
 
 ## Use Vanilla JavaScript
 
-You can implement user authentication directly in Vanilla JavaScript.
+You can implement user authentication directly in Vanilla JavaScript, using the
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method
+and [`accountsChanged`](/wallet/reference/provider-api/#accountschanged) provider event.
 For example:
 
 ```javascript
@@ -148,10 +150,6 @@ Display connect and disconnect buttons in HTML:
   </button>
 </div>
 ```
-
-:::info
-See the [Provider API](/wallet/reference/provider-api) reference for more information.
-:::
 
 ## Best practices
 

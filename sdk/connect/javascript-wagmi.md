@@ -14,21 +14,10 @@ You can set up the SDK in the following ways:
 - [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Wagmi dapp.
 - [Manual setup](#set-up-manually) - Set up the SDK in an existing dapp.
 
-<p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="450px" />
-  </a>
-</p>
-
-Features include:
-
-- **Wallet connection** - Connect to the MetaMask wallet seamlessly.
-- **Network switching** - Switch between Ethereum networks like Linea Sepolia, Linea, and Mainnet.
-- **Interactive UI** - Responsive design with interactive cards guiding users.
-- **Modular components** - Easy-to-understand and customizable components.
-
-:::note Project structure
-The project you will set up has the following structure:
+<details>
+<summary>Project structure</summary>
+<div>
+The project you set up using the CLI or template has the following structure:
 
 ```text
 ├── app/
@@ -41,7 +30,15 @@ The project you will set up has the following structure:
 ├── next.config.ts    # Next.js configuration
 └── package.json      # Project dependencies
 ```
-:::
+</div>
+</details>
+
+<p align="center">
+  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
+    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" />
+  </a>
+</p>
+
 
 ## Prerequisites
 

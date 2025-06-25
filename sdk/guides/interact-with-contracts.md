@@ -116,7 +116,7 @@ function MintNFT() {
 
 You can implement smart contract interactions directly in Vanilla JavaScript.
 
-For example, read contract data:
+The following example reads contract data using the [`eth_call`](/wallet/reference/json-rpc-methods/eth_call) RPC method:
 
 ```javascript
 async function getBalance(contractAddress, userAddress) {
@@ -156,7 +156,10 @@ async function displayBalance() {
 }
 ```
 
-Write to contracts:
+The following example writes to contracts using the [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts),
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction), and
+[`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
+RPC methods:
 
 ```javascript
 async function mintNFT(contractAddress, tokenId) {
@@ -245,10 +248,6 @@ async function handleMint() {
 }
 </script>
 ```
-
-:::info
-See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-:::
 
 ## Best practices
 
