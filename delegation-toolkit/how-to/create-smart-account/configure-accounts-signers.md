@@ -240,7 +240,7 @@ To configure a Multisig smart account, provide the following parameters:
 
 - `signers`: An array of EOA signer addresses as hex strings.
 - `threshold`: The number of signers required to execute a transaction, as a `bigint`.
-- `signatory`: An array of signatories that will sign on behalf of the smart account.
+- `signatory`: A signer that will sign on behalf of the smart account.
 
 ### Configure signatories
 
@@ -315,3 +315,132 @@ export const walletClient = createWalletClient({
 :::note
 The number of signers in the signatories must be at least equal to the threshold for valid signature generation.
 :::
+
+## Configure a Stateless 7702 smart account
+
+The Stateless 7702 smart account represents an EOA that has been upgraded to support smart account 
+functionality as defined by the [EIP-7702 standard](https://eips.ethereum.org/EIPS/eip-7715). This implementation does not handle the upgrade process 
+itself, see [7702 Quickstart](./../../get-started/7702-quickstart.md) to learn how to ugrade.
+
+To configure a Stateless 7702 smart account, provide the following parameters:
+
+- `address`: The address of the EOA that has been upgraded to a smart account.
+- `signatory`: A signer that will sign on behalf of the smart account.
+
+For a Statless 7702 smart account, you can configure the following types of signatories:
+
+### Configure an account signatory
+
+This example creates a signatory from a private key using Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) function.
+
+<Tabs>
+<TabItem value="example.ts">
+
+```typescript
+import { publicClient } from "./client.ts"
+import { account } from "./signatory.ts";
+import { 
+  Implementation, 
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+
+const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Statless7702,
+  address: account.address
+  signatory: { account },
+});
+```
+
+</TabItem>
+
+<TabItem value="client.ts">
+
+```typescript
+import { http, createPublicClient } from "viem";
+import { sepolia as chain } from "viem/chains";
+
+const transport = http(); 
+export const publicClient = createPublicClient({ 
+  transport, 
+  chain, 
+});
+```
+
+</TabItem>
+
+<TabItem value="signatory.ts">
+
+```typescript
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+
+const privateKey = generatePrivateKey(); 
+export const account = privateKeyToAccount(privateKey);
+```
+
+</TabItem>
+</Tabs>
+
+### Configure a Wallet Client signatory
+
+This example creates a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) as the signatory,
+using Viem's `createWalletClient` function.
+
+<Tabs>
+<TabItem value="example.ts">
+
+```typescript
+import { publicClient } from "./client.ts"
+import { walletClient } from "./signatory.ts";
+import { 
+  Implementation, 
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+
+const addresses = await walletClient.getAddresses();
+const address = addresses[0];
+
+const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Stateless7702,
+  address, 
+  signatory: { walletClient },
+});
+```
+
+</TabItem>
+
+<TabItem value="client.ts">
+
+```typescript
+import { http, createPublicClient } from "viem";
+import { sepolia as chain } from "viem/chains";
+
+const transport = http(); 
+export const publicClient = createPublicClient({ 
+  transport, 
+  chain, 
+});
+```
+
+</TabItem>
+
+<TabItem value="signatory.ts">
+
+```typescript
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+import { sepolia as chain } from "viem/chains";
+import { http, createWalletClient } from "viem";
+
+const privateKey = generatePrivateKey(); 
+const account = privateKeyToAccount(privateKey);
+
+export const walletClient = createWalletClient({
+  account,
+  chain,
+  transport: http(),
+})
+```
+
+</TabItem>
+</Tabs>

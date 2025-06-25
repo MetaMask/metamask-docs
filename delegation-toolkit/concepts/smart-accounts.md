@@ -38,7 +38,8 @@ ERC-4337 introduces the following concepts:
 
 ## Smart account implementation types
 
-The MetaMask Delegation Toolkit supports two types of smart accounts, each offering unique features and use cases.
+The MetaMask Delegation Toolkit supports three types of smart accounts, each offering unique features and use cases.
+
 See [Configure accounts and signers](../how-to/create-smart-account/configure-accounts-signers.md) to learn how to use these different account types.
 
 ### Hybrid smart account
@@ -54,6 +55,13 @@ The Multisig smart account is an implementation that supports multiple signers w
 The signatory must have at least as many signers include as the threshold is configured for the account.
 
 This type is referenced in the toolkit as `Implementation.Multisig`.
+
+### Statless 7702 smart account
+
+The Stateless 7702 smart account implementation represents an Externally Owned Account (EOA) upgraded to
+support smart account functionality as defined by the [EIP-7702 standard](https://eips.ethereum.org/EIPS/eip-7715). This implementation enables EOAs to perform smart account operations, including the creation and management of delegations.
+
+This type is reference in the toolkit as `Implementation.Stateless7702`.
 
 ## Smart account flow
 
