@@ -7,7 +7,6 @@ import SuccessImg from "./success.svg";
 import ErrorImg from "./error.svg";
 import Text from "@site/src/components/Text";
 import styles from "./alert.module.scss";
-import { trackClickForSegment } from "@site/src/lib/segmentAnalytics";
 
 export const options = {
   position: positions.TOP_CENTER,
@@ -21,14 +20,6 @@ export const options = {
 
 export const AlertTemplate = ({ style, options, message, close }) => {
   const handleCloseAlert = () => {
-    trackClickForSegment({
-      eventName: "Close",
-      clickType: "Alert",
-      userExperience: "B",
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    });
     close();
   };
 
