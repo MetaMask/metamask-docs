@@ -1,7 +1,7 @@
-- `transactionHash`: (string) _[required]_ hash of the block to trace.
+- `transactionHash`: (string) _[required]_ hash of the transaction.
 - Optional tracing options object with the following fields:
-  - `tracer`: (string) _[optional]_ type of tracer. Supports [`callTracer`](../debug/index.md#calltracer) or
-    [`prestateTracer`](../debug/index.md#prestatetracer).
+  - `tracer`: (string) _[optional]_ type of tracer. Supports `callTracer` or
+    `prestateTracer`.
   - `tracerConfig`: (object) _[optional]_ tracer configuration options:
     - `onlyTopCall`: (boolean) _[optional]_ when `true`, will only trace the primary (top-level) call and not any
       sub-calls. It eliminates the additional processing for each call frame.

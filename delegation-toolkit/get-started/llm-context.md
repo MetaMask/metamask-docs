@@ -7,9 +7,9 @@ sidebar_class_name: hidden
 
 # Delegation Toolkit LLM context
 
-This website contains [`LLMs.txt`](/llms.txt) and [`LLMs-full.txt`](/llms-full.txt) files that are intended for use by large language models (LLMs).
-They provide information about the content and structure of the MetaMask Delegation Toolkit documentation,
+This website contains an [`LLMs.txt`](/llms.txt) file that is intended for use by large language models (LLMs).
+It provides information about the structure of the MetaMask developer documentation,
 to facilitate better indexing, summarization, and understanding by LLMs.
 
-You can add these files to an LLM-based tool like [ChatGPT](https://chatgpt.com/) or [Cursor](https://docs.cursor.com/context/@-symbols/@-docs),
-to provide detailed context about the Delegation Toolkit.
+You can add this files to an LLM-based tool like [ChatGPT](https://chatgpt.com/) or [Cursor](https://docs.cursor.com/context/@-symbols/@-docs),
+to provide detailed context about the MetaMask developer documentation.
