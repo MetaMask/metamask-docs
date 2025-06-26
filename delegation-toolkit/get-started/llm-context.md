@@ -11,5 +11,5 @@ This website contains an [`LLMs.txt`](/llms.txt) file that is intended for use b
 It provides information about the structure of the MetaMask developer documentation,
 to facilitate better indexing, summarization, and understanding by LLMs.
 
-You can add this files to an LLM-based tool like [ChatGPT](https://chatgpt.com/) or [Cursor](https://docs.cursor.com/context/@-symbols/@-docs),
+You can add this file to an LLM-based tool like [ChatGPT](https://chatgpt.com/) or [Cursor](https://docs.cursor.com/context/@-symbols/@-docs),
 to provide detailed context about the MetaMask developer documentation.
