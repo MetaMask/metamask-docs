@@ -92,7 +92,7 @@ Creates a delegation with specific delegate.
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `to` | `Hex` | Yes | The address to which the delegation is being granted. |
 | `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or it's corresponding hex to create a delegation chain. |
+| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
 ### Example
@@ -120,7 +120,7 @@ Creates an open delegation that can be redeemed by any delegate.
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or it's corresponding hex to create a delegation chain. |
+| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
 

@@ -1,13 +1,13 @@
 ---
-description: Upgrade an externally owned account(EOA) to smart account
+description: Upgrade an externally owned account (EOA) to a smart account
 sidebar_position: 3
-sidebar_label: EIP-7702 Quickstart
+sidebar_label: EIP-7702 quickstart
 ---
 
-# EIP-7702 Quickstart
+# EIP-7702 quickstart
 
-This page demonstrates how to upgrade your Externally Owned Account (EOA) to support MetaMask smart account 
-functionality using an EIP-7702 transaction. This enables your EOA to leverage the benefits of account 
+This page demonstrates how to upgrade your externally owned account (EOA) to support MetaMask smart account 
+functionality using an [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) transaction. This enables your EOA to leverage the benefits of account 
 abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegation capabilities](./../concepts/delegation.md).
 
 ## Prerequisites
@@ -64,13 +64,13 @@ export const walletClient = createWalletClient({
 })
 ```
 
-### 4. Authorize 7702 delegation
+### 4. Authorize a 7702 delegation
 
-Create an authorization to map the contract code to EOA, and sign it 
-using `signAuthorization` action. Please note, the `signAuthorization` action 
+Create an authorization to map the contract code to an EOA, and sign it 
+using Viem's [`signAuthorization`](https://viem.sh/docs/eip7702/signAuthorization) action. The `signAuthorization` action 
 does not support JSON-RPC accounts.
 
-In this quickstart, we use [`EIP7702StatelessDeleGator`](https://github.com/MetaMask/delegation-framework/blob/main/src/EIP7702/EIP7702StatelessDeleGator.sol) as the EIP-7702 delegator contract. 
+This example uses [`EIP7702StatelessDeleGator`](https://github.com/MetaMask/delegation-framework/blob/main/src/EIP7702/EIP7702StatelessDeleGator.sol) as the EIP-7702 delegator contract. 
 It follows a stateless design, as it does not store signer data in the contract's state. This approach
 provides a lightweight and secure way to upgrade an EOA to a smart account.
 
@@ -94,8 +94,8 @@ const authorization = await walletClient.signAuthorization({
 
 ### 5. Submit the authorization
 
-Once you have signed an authroization, you can send an EIP-7702 transaction to set the EOA code.
-Since the authorization cannot be sent as standlone, you can include it alongside a dummy transaction.
+Once you have signed an authorization, you can send an EIP-7702 transaction to set the EOA code.
+Since the authorization cannot be sent by itself, you can include it alongside a dummy transaction.
 
 ```ts
 import { zeroAddress } from "viem";
@@ -107,9 +107,9 @@ const hash = await walletClient.sendTransaction({
 });
 ```
 
-### 6. Create MetaMask smart account
+### 6. Create a MetaMask smart account
 
-After successfully setting the EOA code, you can create a smart account instance for the EOA and start 
+Create a smart account instance for the EOA and start 
 leveraging the benefits of account abstraction.
 
 ```ts
@@ -131,7 +131,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ### 7. Send a user operation
 
-To send a user operation through the upgraded EOA, use the Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
+Send a user operation through the upgraded EOA, using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 
 ```ts
 import { parseEther } from "viem";

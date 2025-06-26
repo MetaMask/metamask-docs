@@ -318,16 +318,15 @@ The number of signers in the signatories must be at least equal to the threshold
 
 ## Configure a Stateless 7702 smart account
 
-The Stateless 7702 smart account represents an EOA that has been upgraded to support smart account 
-functionality as defined by the [EIP-7702 standard](https://eips.ethereum.org/EIPS/eip-7715). This implementation does not handle the upgrade process 
-itself, see [7702 Quickstart](./../../get-started/7702-quickstart.md) to learn how to ugrade.
+The [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support smart account 
+functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](./../../get-started/7702-quickstart.md) to learn how to upgrade.
 
 To configure a Stateless 7702 smart account, provide the following parameters:
 
 - `address`: The address of the EOA that has been upgraded to a smart account.
 - `signatory`: A signer that will sign on behalf of the smart account.
 
-For a Statless 7702 smart account, you can configure the following types of signatories:
+For a Stateless 7702 smart account, you can configure the following types of signatories:
 
 ### Configure an account signatory
 
@@ -346,7 +345,7 @@ import {
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
-  implementation: Implementation.Statless7702,
+  implementation: Implementation.Stateless7702,
   address: account.address
   signatory: { account },
 });

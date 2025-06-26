@@ -56,12 +56,12 @@ The signatory must have at least as many signers include as the threshold is con
 
 This type is referenced in the toolkit as `Implementation.Multisig`.
 
-### Statless 7702 smart account
+### Stateless 7702 smart account
 
-The Stateless 7702 smart account implementation represents an Externally Owned Account (EOA) upgraded to
-support smart account functionality as defined by the [EIP-7702 standard](https://eips.ethereum.org/EIPS/eip-7715). This implementation enables EOAs to perform smart account operations, including the creation and management of delegations.
+The Stateless 7702 smart account implementation represents an externally owned account (EOA) upgraded to
+support smart account functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation enables EOAs to perform smart account operations, including the creation and management of delegations.
 
-This type is reference in the toolkit as `Implementation.Stateless7702`.
+This type is referenced in the toolkit as `Implementation.Stateless7702`.
 
 ## Smart account flow
 
