@@ -1,61 +1,5 @@
 import React from 'react'
 import { AlertTitle, AlertText } from '@site/src/components/Alert'
-import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
-
-const handleClickCommonIssue = () => {
-  trackClickForSegment({
-    eventName: 'Contact us',
-    clickType: `Common Issue Alert`,
-    userExperience: 'B',
-    responseStatus: null,
-    responseMsg: null,
-    timestamp: Date.now(),
-  })
-}
-
-const handleClickBalanceLow = () => {
-  trackClickForSegment({
-    eventName: 'Add funds using MetaMask',
-    clickType: `Low Balance Alert`,
-    userExperience: 'B',
-    responseStatus: null,
-    responseMsg: null,
-    timestamp: Date.now(),
-  })
-}
-
-const handleClickCooldown = () => {
-  trackClickForSegment({
-    eventName: 'Contact us',
-    clickType: `Cooldown Alert`,
-    userExperience: 'B',
-    responseStatus: null,
-    responseMsg: null,
-    timestamp: Date.now(),
-  })
-}
-
-const handleClickPoh = () => {
-  trackClickForSegment({
-    eventName: 'PoH',
-    clickType: `PoH Alert`,
-    userExperience: 'B',
-    responseStatus: null,
-    responseMsg: null,
-    timestamp: Date.now(),
-  })
-}
-
-const handleClickViewTransaction = () => {
-  trackClickForSegment({
-    eventName: 'View on Etherscan',
-    clickType: `Success Alert`,
-    userExperience: 'B',
-    responseStatus: null,
-    responseMsg: null,
-    timestamp: Date.now(),
-  })
-}
 
 export const AlertCommonIssue = () => (
   <div>
@@ -66,7 +10,6 @@ export const AlertCommonIssue = () => (
         persists please{' '}
         <a
           data-testid="alert-common-contact-us"
-          onClick={handleClickCommonIssue}
           target="_blank"
           href="https://support.metamask.io/">
           contact support
@@ -85,7 +28,6 @@ export const AlertFailedPoh = () => (
         Free users are required to complete Proof of Humanity to access the faucet. Learn more{' '}
         <a
           data-testid="alert-poh"
-          onClick={handleClickPoh}
           target="_blank"
           href="https://poh.linea.build/">
           here
@@ -115,7 +57,6 @@ export const AlertBalanceTooLow = () => (
         funds to your address using{' '}
         <a
           data-testid="alert-balance-add-funds"
-          onClick={handleClickBalanceLow}
           className="underline"
           href="https://metamask.io/buy-crypto/">
           MetaMask
@@ -134,7 +75,6 @@ export const AlertCooldown = () => (
         You already got ETH from the faucet today. Try again in 24 hours.{' '}
         <a
           data-testid="alert-cooldown-contact-us"
-          onClick={handleClickCooldown}
           target="_blank"
           href="https://support.metamask.io/">
           Contact us
@@ -154,7 +94,6 @@ export const AlertSuccess = ({ url }: { url: string }) => (
         shortly.{' '}
         <a
           data-testid="alert-success-etherscan"
-          onClick={handleClickViewTransaction}
           target="_blank"
           href={url}>
           View on Etherscan
