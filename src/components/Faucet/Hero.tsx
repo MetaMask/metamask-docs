@@ -3,7 +3,6 @@ import Text from '@site/src/components/Text'
 import Button from '@site/src/components/elements/buttons/button'
 import Input from '@site/src/components/Input'
 import clsx from 'clsx'
-import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
 import { WALLET_LINK_TYPE } from '@site/src/components/AuthLogin/AuthModal'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import styles from './hero.module.scss'
@@ -48,42 +47,15 @@ export default function Hero({
 
   const handleConnectWallet = () => {
     setIsWalletLinking(true)
-    trackClickForSegment({
-      eventName: !showInstallButton ? 'Install MetaMask' : 'Connect MetaMask',
-      clickType: 'Hero',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
     metaMaskWalletIdConnectHandler()
   }
 
   const handleLinkWallet = () => {
     setIsWalletLinking(true)
-    trackClickForSegment({
-      eventName:
-        walletLinked === WALLET_LINK_TYPE.NO
-          ? 'Link Developer Dashboard Account'
-          : 'Select Developer Dashboard Account',
-      clickType: 'Hero',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
     window.location.href = walletAuthUrl
   }
 
   const handleRequestEth = () => {
-    trackClickForSegment({
-      eventName: 'Request ETH',
-      clickType: 'Hero',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
     handleRequest()
   }
 
