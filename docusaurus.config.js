@@ -337,6 +337,10 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
+                label: 'Delegation Toolkit GitHub',
+                href: 'https://github.com/MetaMask/delegation-toolkit',
+              },
+              {
                 label: 'MetaMask mobile GitHub',
                 href: 'https://github.com/MetaMask/metamask-mobile',
               },
