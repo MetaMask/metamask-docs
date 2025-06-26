@@ -2,7 +2,6 @@ import React from 'react'
 import Accordion from '@site/src/components/Accordion'
 import Text from '@site/src/components/Text'
 import styles from './faq.module.scss'
-import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
 
 interface IFaq {
   network: 'linea' | 'sepolia'
@@ -12,49 +11,6 @@ interface IFaq {
 }
 
 export default function Faq({ network, className, classNameHeading, isLimitedUserPlan }: IFaq) {
-  const handleClickContactUs = () => {
-    trackClickForSegment({
-      eventName: 'Contact us',
-      clickType: `Link in ${network} FAQ`,
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
-  }
-
-  const handleClickLinea = () => {
-    trackClickForSegment({
-      eventName: 'What is Linea',
-      clickType: `Link in ${network} FAQ`,
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
-  }
-
-  const handleClickDiscord = () => {
-    trackClickForSegment({
-      eventName: 'Consensys Discord',
-      clickType: `Link in ${network} FAQ`,
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
-  }
-
-  const handleClickBridge = () => {
-    trackClickForSegment({
-      eventName: 'Bridge',
-      clickType: `Link in ${network} FAQ`,
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
-  }
 
   switch (network) {
     case 'linea':
@@ -100,7 +56,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
               <span>
                 <a
                   data-testid="faq-linea-what-is-linea"
-                  onClick={handleClickLinea}
                   target="_blank"
                   href="https://linea.build">
                   Linea
@@ -122,7 +77,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
               <span>
                 <a
                   data-testid="faq-linea-contact-us"
-                  onClick={handleClickContactUs}
                   target="_blank"
                   href="https://support.metamask.io/">
                   Contact support
@@ -140,7 +94,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
                 If you have ideas on how to improve the faucet, feel free to submit them on{' '}
                 <a
                   data-testid="faq-linea-discord"
-                  onClick={handleClickDiscord}
                   target="_blank"
                   href="https://discord.com/invite/consensys">
                   Discord.
@@ -158,7 +111,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
                 ETH comes from Sepolia ETH that is bridged to Linea using the canonical{' '}
                 <a
                   data-testid="faq-linea-bridge"
-                  onClick={handleClickBridge}
                   target="_blank"
                   href="https://bridge.linea.build">
                   bridge.
@@ -211,7 +163,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
               <span>
                 <a
                   data-testid="faq-sepolia-contact-us"
-                  onClick={handleClickContactUs}
                   target="_blank"
                   href="https://support.metamask.io/">
                   Contact support
@@ -229,7 +180,6 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
                 If you have ideas on how to improve the faucet, feel free to submit them on{' '}
                 <a
                   data-testid="faq-sepolia-discord"
-                  onClick={handleClickDiscord}
                   target="_blank"
                   href="https://discord.com/invite/consensys">
                   Discord.

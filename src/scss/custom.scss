@@ -25,6 +25,7 @@
   --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
   --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-euclid: 'Euclid Circular B', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark-2);
@@ -74,7 +75,7 @@
 
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
-  --ifm-font-family-base: var(--font-mm-centra);
+  --ifm-font-family-base: var(--font-mm-euclid);
   --font-family-sans: var(--font-mm-sans);
 
   --ifm-color-success: var(--developer-green-light);
@@ -306,7 +307,7 @@ ol {
   padding: 2rem 0 0;
 
   @include bp('desktop') {
-    padding: 2.8rem 0 0 8rem;
+    padding: 2.8rem 0 0 5rem;
   }
 }
 
@@ -348,8 +349,23 @@ ol {
   }
 }
 
+.navbar__brand {
+  margin-right: 2rem !important;
+}
+
 .DocSearch-Button-Placeholder {
   font-size: 1.4rem !important;
+}
+
+/* Breadcrumbs */
+
+.breadcrumbs {
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.breadcrumbs__link {
+  font-size: 1.3rem !important;
 }
 
 /* Details */
@@ -392,12 +408,10 @@ ol {
   border-radius: 0.5rem;
 }
 
-/**
- * Temporary style - to be deleted
- */
+/* Doc version banner */
 
-.getfeedback-container {
-  margin-top: 5rem;
+.theme-doc-version-banner {
+  font-size: 1.6rem;
 }
 
 /* Header */
@@ -654,7 +668,7 @@ ol {
   border-left: 3px solid #1aff0080;
 }
 
-.resources-dropdown-menu {
+.nav-dropdown-menu {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -678,7 +692,7 @@ ol {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 240px;
+    width: 350px;
     padding-left: 0;
     margin: 0;
     color: var(--ifm-navbar-link-color);
@@ -687,7 +701,7 @@ ol {
     gap: 10px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: -6px;
       top: 0;
@@ -723,7 +737,7 @@ ol {
       svg {
         display: inline-block;
         vertical-align: top;
-        width: 24px;
+        width: 26px;
         height: 24px;
         color: var(--w3a-color-icon-gray);
         transition: color 0.2s ease;
@@ -740,14 +754,15 @@ ol {
 
     h2 {
       @extend .dropdown__link;
+      font-size: 1.6rem !important;
       text-decoration: none !important;
       margin: 0 0 4px 0;
       color: inherit;
     }
 
     p {
-      font-size: 14px;
-      line-height: 18px;
+      font-size: 1.4rem;
+      line-height: 1.8rem;
       font-weight: 400 !important;
       color: var(--w3a-color-icon-gray);
       text-decoration: none !important;
@@ -756,16 +771,79 @@ ol {
   }
 }
 
-.resources-dropdown-menu a:hover h2 {
+.nav-dropdown-menu a:hover h2 {
   color: inherit !important;
 }
 
 @include bp-max('tablet') {
-  .resources-dropdown-menu ul {
-    gap: 16px; // More spacing between items on mobile
+  .nav-dropdown-menu ul {
+    gap: 15px;
   }
 
-  .resources-dropdown-menu a {
-    width: 100%; // Makes each box take full width of dropdown
+  .nav-dropdown-menu a {
+    width: 80%;
   }
+}
+
+div[class^='theme-announcement-bar'] {
+  font-family: var(--font-mm-euclid);
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--general-gray-light);
+  background-color: var(--developer-purple-light);
+  color: var(--color-text);
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+    }
+  }
+
+  [data-theme='dark'] & {
+    background-color: var(--developer-purple-light);
+    color: var(--general-black);
+
+    a {
+      color: var(--general-black);
+
+      &:hover {
+        color: var(--developer-purple);
+      }
+    }
+  }
+}
+
+/* Removes "What's new?" on small viewports to make room for left navbar labels */
+@media (max-width: 1196px) {
+  .navbar__items--right .navbar__item {
+    display: none;
+  }
+
+  [class*='docMainContainer'],
+  [class*='mainContainer'] {
+    padding: 2rem 0 0 2rem;
+  }
+}
+
+/* Fixes bug: Removes sidebar logo appearing on Wallet RPC reference pages */
+.sidebar_mhZE .sidebarLogo_F_0z {
+  display: none !important;
+}
+
+.sidebar_mhZE {
+  padding-top: var(--ifm-navbar-height) !important;
+}
+
+.pageWrapper .sidebar_mhZE {
+  padding-top: 0 !important;
+}
+
+/* Add scroll padding to account for sticky product banner */
+html {
+  scroll-padding-top: 10rem;
 }

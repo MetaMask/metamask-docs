@@ -68,7 +68,7 @@ Signs a transaction that can be submitted to the network later using
 An array containing:
 
 1. Transaction object to sign, which contains:
-   - `type`: `string` - [Transaction type.](https://docs.infura.io/api/networks/ethereum/concepts/transaction-types)
+   - `type`: `string` - [Transaction type.](/services/concepts/transaction-types/)
    - `nonce`: `string` - Anti-replay parameter.
    - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
    - `from`: `string` - Sender address.

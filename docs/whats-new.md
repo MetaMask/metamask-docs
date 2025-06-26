@@ -9,6 +9,11 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## June 2025
+
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+
 ## May 2025
 
 - Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
@@ -16,11 +21,13 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
 - Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) dapp support via the Wallet Standard and third-party libraries.
   ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
-- Documented [MetaMask SDK + Web3Auth SDK integration](/sdk/quickstart/javascript-web3auth).
+- Documented [MetaMask SDK + Web3Auth SDK integration](/sdk/connect/javascript-web3auth).
   ([#2029](https://github.com/MetaMask/metamask-docs/pull/2029))
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
 - Documented [how to use the Snaps sandbox](/snaps/how-to/test-a-snap/#test-in-the-sandbox).
   ([#2030](https://github.com/MetaMask/metamask-docs/pull/2030))
-- Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/quickstart/javascript-wagmi) or [Dynamic SDK](/sdk/quickstart/javascript-dynamic) project.
+- Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/connect/javascript-wagmi) or [Dynamic SDK](/sdk/connect/javascript-dynamic) project.
   ([#2010](https://github.com/MetaMask/metamask-docs/pull/2010))
 - Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
   ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
@@ -38,9 +45,9 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
-- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
+- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/connect/javascript-dynamic).
   ([#1972](https://github.com/MetaMask/metamask-docs/pull/1972))
-- Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
+- Documented [Snaps bundle analyzer option](/snaps/reference/cli/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 
 ## March 2025
@@ -93,7 +100,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
-- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect) section
+- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect-extension) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
 - Documented [`snap_getPreferences`](/snaps/reference/snaps-api/#snap_getpreferences).
@@ -199,7 +206,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2024
 
-- Documented [Snaps `polyfills` configuration option](/snaps/reference/cli/options/#polyfills).
+- Documented [Snaps `polyfills` configuration option](/snaps/reference/config-options/#polyfills).
   ([#1238](https://github.com/MetaMask/metamask-docs/pull/1238))
 - Documented [Snaps interactive UI](/snaps/features/custom-ui/interactive-ui).
   ([#1166](https://github.com/MetaMask/metamask-docs/pull/1166))

@@ -12,13 +12,13 @@ import {
   TransactionTable,
   Hero,
   AlertPastActivity,
+  AlertFailedPoh,
 } from '@site/src/components/Faucet'
 import { useAlert } from 'react-alert'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import styles from './faucet.module.scss'
 import { REQUEST_PARAMS } from '@site/src/lib/constants'
 import { AlertBalanceTooLow } from '@site/src/components/Faucet/Alerts'
-import { trackInputChangeForSegment, trackPageViewForSegment } from '@site/src/lib/segmentAnalytics'
 
 const lineaMaintenanceFlag = 'linea-maintenance-mode'
 const sepoliaMaintenanceFlag = 'sepolia-maintenance-mode'
@@ -85,7 +85,9 @@ export default function Faucet() {
       const error = faucetResponse.error
 
       if (error) {
-        if (error.code === 'balance_too_low') {
+        if (error.code === 'failed_poh') {
+          alert.error(<AlertFailedPoh />)
+        } else if (error.code === 'balance_too_low') {
           alert.error(<AlertBalanceTooLow />)
         } else if (error.code === 'transaction_count_too_low') {
           alert.error(<AlertPastActivity />)
@@ -111,11 +113,6 @@ export default function Faucet() {
 
   const handleOnInputChange = value => {
     setWalletAddress(value)
-    trackInputChangeForSegment({
-      eventName: 'Wallet address',
-      userExperience: 'B',
-      timestamp: Date.now(),
-    })
   }
 
   useEffect(() => {
@@ -137,12 +134,6 @@ export default function Faucet() {
     ldClient.on(`change:${lineaMaintenanceFlag}`, handleChangeLinea)
     ldClient.on(`change:${sepoliaMaintenanceFlag}`, handleChangeSepolia)
     ldClient.on(`change:${faucetBypassDomainFlag}`, handleFaucetBypassDomain)
-
-    trackPageViewForSegment({
-      name: 'Faucet Page',
-      path: 'developer-tools/faucet',
-      userExperience: 'B',
-    })
 
     return () => {
       ldClient.off(`change:${lineaMaintenanceFlag}`, handleChangeLinea)

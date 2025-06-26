@@ -13,7 +13,7 @@ This shift not only provides greater flexibility but also encourages efficient u
 
 :::tip
 
-View the [credit cost table](./credit-cost.md) for a breakdown of the cost for each method.
+View the [credit cost table](credit-cost.mdx) for a breakdown of the cost for each method.
 
 :::
 
@@ -24,7 +24,7 @@ credits toward your daily credit quota:
 
 - [**WebSocket streaming**](../../concepts/websockets.md#pricing): Subscribing and unsubscribing to events consume credits from your
     daily quota. Each event received through a WebSocket connection also
-    [consumes credits based on the event type](./credit-cost.md#subscription-events).
+    [consumes credits based on the event type](credit-cost.mdx#subscription-events).
     WebSocket connections are severed once you reach your daily credit limit.
 
 - [**Batch requests**](../../how-to/make-batch-requests.md): Each individual RPC call

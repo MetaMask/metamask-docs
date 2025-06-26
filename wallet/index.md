@@ -1,9 +1,11 @@
 ---
 slug: /
+title: Wallet API introduction
 description: Introduction page for the Wallet API documentation.
+keywords: [extension, api]
 ---
 
-# Integrate your dapp with the MetaMask wallet
+# Integrate your dapp with MetaMask using the Wallet API
 
 :::tip Building a cross-platform or mobile dapp?
 For cross-platform development, mobile integration, or advanced features like QR codes and 
@@ -24,7 +26,7 @@ interact with users' EVM accounts, and implements standard interfaces like
 
 MetaMask also supports non-EVM networks, including native support for [Solana](how-to/use-non-evm-networks/solana.md).
 
-[Get started by connecting to MetaMask.](how-to/connect.md)
+[Get started with the Wallet API.](how-to/connect-extension.md)
 
 ## Wallet API vs. SDK
 
@@ -33,3 +35,8 @@ If you're building a desktop web-only dapp, the Wallet API provides everything y
 
 [**MetaMask SDK**](/sdk) builds on top of the Wallet API, adding cross-platform support and features like mobile deeplinking and QR code connections.
 We recommend the SDK if you want to build a cross-platform onchain dapp.
+
+:::note
+Directly using the Wallet API also enables your dapp to work in the in-app browser of the MetaMask mobile app.
+However, the [SDK](/sdk) offers a more consistent mobile connection.
+:::

@@ -93,7 +93,9 @@ function NetworkWatcher() {
 
 You can implement network management directly in Vanilla JavaScript.
 
-For example, detect the current network:
+The following example detects the current network using the
+[`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainid) RPC method and
+[`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event:
 
 ```javascript
 // Get current chain ID
@@ -117,7 +119,10 @@ ethereum.on("chainChanged", (chainId) => {
 });
 ```
 
-Switch networks:
+The following example switches networks using the
+[`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
+and [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)
+RPC methods:
 
 ```javascript
 // Network configurations
@@ -181,10 +186,6 @@ Display the current network and a switch network button in HTML:
   <button onclick="switchNetwork("optimism")">Switch to Optimism</button>
 </div>
 ```
-
-:::info
-See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-:::
 
 ## Best practices
 
