@@ -26,9 +26,22 @@ This page provides instructions to install and set up the MetaMask Delegation To
 
 Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit) dependencies:
 
-```bash npm2yarn
-npm install @metamask/delegation-toolkit
-```
+<Tabs>
+  <TabItem value="npm">
+
+  ```bash
+  npm install @metamask/delegation-toolkit
+  ```
+
+  </TabItem>
+  <TabItem value="yarn">
+
+  ```bash
+  yarn add @metamask/delegation-toolkit
+  ```
+
+  </TabItem>
+</Tabs>
 
 ### 2. (Optional) Install the contracts
 
